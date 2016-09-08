@@ -1,0 +1,132 @@
+.input-group{
+
+	&.vert{
+		.input-group-btn{
+			display: block;
+			width: 100%;
+
+			.btn{
+				width: 100%;
+				margin: 0;
+			}
+		}
+
+		//.form-control:not(:last-child),
+		.input-group-addon:not(:last-child),
+		.input-group-btn:not(:last-child) > .btn,
+		.input-group-btn:not(:last-child) > .btn-group > .btn,
+		.input-group-btn:not(:last-child) > .dropdown-toggle,
+		.input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle),
+		.input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
+		  	@include border-bottom-radius(0);
+		  	@include border-top-radius($border-radius);
+		  	border-bottom: none;
+		}
+		.input-group-addon:not(:last-child) {
+		  	border-bottom: 0;
+		}
+		.input-group .form-control:not(:first-child),
+		.input-group-addon:not(:first-child),
+		.input-group-btn:not(:first-child) > .btn,
+		.input-group-btn:not(:first-child) > .btn-group > .btn,
+		.input-group-btn:not(:first-child) > .dropdown-toggle,
+		.input-group-btn:not(:last-child) > .btn:not(:first-child),
+		.input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {
+		  	@include border-bottom-radius($border-radius);
+		  	@include border-top-radius(0);
+		  	border-top: none;
+		}
+		.form-control + .input-group-addon:not(:first-child) {
+		  	border-top: 0;
+		}
+
+		.form-control{
+			display: block;
+			float: none;
+			border-radius: 0!important;
+		}
+	}
+}
+
+
+
+
+
+
+
+// button combinations 
+.btn-group.extended,
+.input-group.extended{
+    display: flex;
+
+    .extended{
+        flex: 1;
+
+        .btn{
+            width: 100%;
+        }
+    }
+
+    .input-group-btn{
+        width: auto;
+    }
+}
+
+.btn.btn-nohover{
+
+}
+
+// create gray outline button 
+.btn-outline-default{
+	@include button-outline-variant($btn-default-color);
+}
+
+
+// <button type="button" class="btn btn-labeled btn-success">
+//     <span class="btn-label">
+//         <i class="glyphicon glyphicon-ok"></i>
+//     </span>
+//     Success
+// </button>
+
+
+.btn-remove{
+
+}
+
+.btn-labeled {
+	padding-top: 0;
+    padding-bottom: 0;
+	
+	@extend .small;
+
+	transition: all 200ms;
+
+	.btn-label {
+		position: relative;
+		right: -#{$btn-padding-x-sm};
+		display: inline-block;
+		padding: $btn-padding-y-sm $btn-padding-x-sm;
+		background-color: rgba(0,0,0,0.15);
+		border-top-right-radius: $border-radius-sm;
+		border-bottom-right-radius: $border-radius-sm;
+	}
+
+	&.label-right{
+		.btn-label {
+			right: auto;
+			left: -#{$btn-padding-x-sm};
+		}
+	}
+
+
+	&.btn-link{
+		padding-left: 0;
+		padding-right: 0;
+
+		.btn-label{
+			background-color: rgba(0,0,0,0);
+			padding: $btn-padding-y-sm 0;
+		}
+	}
+}

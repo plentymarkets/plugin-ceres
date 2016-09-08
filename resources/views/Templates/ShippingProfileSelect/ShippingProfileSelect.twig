@@ -1,0 +1,29 @@
+<script type="x/template" id="vue-shipping-profile-select">
+    <div class="cmp cmp-method-list m-b-3">
+        <ul class="method-list">
+            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" data-id="${ shippingProfile.id }">
+                <input
+                        type="radio"
+                        id="ShippingProfileID${ _uid }${ shippingProfile.id }"
+                        name="ShippingProfileID"
+                        value="${ shippingProfile.id }"
+                        v-model="selectedShippingProfile"
+                        @change="onShippingProfileChange()"
+                >
+                <label for="ShippingProfileID${ _uid }${ shippingProfile.id }">
+                    <div class="icon">
+                        <img src="https://placekitten.com/g/60/60">
+                    </div><!--
+                    --><div class="content">
+                        ${ shippingProfile.name }
+                        <div>
+                            <small>
+                                (<monetary-format :price="shippingProfile.price" currency="{{ "EUR"}}"></monetary-format>)
+                            </small>
+                        </div>
+                    </div>
+                </label>
+            </li><!-- -->
+        </ul>
+    </div>
+</script>

@@ -1,0 +1,74 @@
+{% set basketData = config("PluginCallisto.basket.data")|split(', ') %}
+
+<script type="x/template" id="vue-basket-total-sum">
+    <div class="cmp cmp-totals">
+        <h3>Summe</h3>
+        <div>
+            <dl>
+                {% if 'basket.value_of_items_gross' in basketData or 'all' in basketData %}
+                    <dt><strong>Warenwert</strong>
+                        (Brutto)
+                    </dt><!--
+                    --><dd>
+                        ${ formatPrice(basket.itemSum, "EUR") }
+                    </dd>
+                {% endif %}
+                {% if 'basket.value_of_items_net' in basketData or 'all' in basketData %}
+                    <dt><strong>Warenwert</strong>
+                        (Netto)
+                    </dt><!--
+                 --><dd>
+                        ${ formatPrice(basket.itemSumNet, "EUR") }
+                    </dd>
+                {% endif %}
+                {% if 'basket.shipping_costs_gross' in basketData or 'all' in basketData %}
+                  <dt><strong>Versandkosten</strong>
+                      (Brutto)
+                  </dt><!--
+                  --><dd>
+                      ${ formatPrice(basket.shippingAmount, "EUR") }
+                  </dd>
+                {% endif %}
+                {% if 'basket.shipping_costs_net' in basketData or 'all' in basketData %}
+                    <dt><strong>Versandkosten</strong>
+                        (Netto)
+                    </dt><!--
+		            --><dd>
+                        ${ formatPrice(basket.shippingAmountNet, "EUR") }
+                    </dd>
+                {% endif %}
+                {% if 'basket.vat' in basketData or 'all' in basketData %}
+                    <dt><strong>MwSt. 19%</strong>
+                    </dt><!--
+		            --><dd>
+                        ${ formatPrice(basket.itemSum - basket.itemSumNet, "EUR") }
+                    </dd>
+                {% endif %}
+
+                <hr>
+                {% if 'basket.order_total_gross' in basketData or 'all' in basketData %}
+                    <dt>
+                        <strong>Gesamtsumme</strong>
+                        (Brutto)
+                    </dt><!--
+		            --><dd>
+                        <strong>
+                            ${ formatPrice(basket.basketAmount, "EUR") }
+                        </strong>
+                    </dd>
+                {% endif %}
+                {% if 'basket.order_total_net' in basketData or 'all' in basketData %}
+                    <dt>
+                        <strong>Gesamtsumme</strong>
+                        (Netto)
+                    </dt><!--
+		            --><dd>
+                        <strong>
+                            ${ formatPrice(basket.basketAmountNet, "EUR") }
+                        </strong>
+                    </dd>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+</script>

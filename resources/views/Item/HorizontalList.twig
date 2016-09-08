@@ -1,0 +1,28 @@
+{% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
+<h2>{{ (crossSellingList|first).relationship }}</h2>
+<div class="col-xs-12 card-deck-wrapper" style="overflow: auto">
+    <ul class="list-unstyled card-deck" style="height: 380px;">
+        {% for crossSellingItem in crossSellingList %}
+            {% set singleItem = services.item.getItem(crossSellingItem.crossItemId) %}
+            {% set image = singleItem.variationImageList | first %}
+            <li class="card" style="min-height: 100%;">
+                <!-- image -->
+                <div class="" style="min-height: 120px;">
+                    <img style="max-height: 140px;" class="img-fluid m-x-auto"
+                         src="{{ app.request.baseUrl }}/{{ image.path }}"
+                         alt="{{ singleItem.itemDescription.name1 }}"/>
+                </div>
+                <!-- info -->
+                <div class="p-b-1 p-t-1">
+                    <h4 class="h4" style="height: 106px; overflow: hidden;">
+                        <a href="{{ singleItem.itemBase.id | buildItemURL(singleItem.variationBase.id, true) }}">{{ singleItem.itemDescription.name1 }}</a>
+                    </h4>
+                    <p class="card-text"><span class="text-lg-right">{{ singleItem.variationRetailPrice.price }} {{ singleItem.variationRetailPrice.currency }}</span></p>
+                    <p class="card-text"><span class="text-muted">inkl. {{ singleItem.variationRetailPrice.vatValue }}% MwSt. zzgl. Versand</span></p>
+                </div>
+                <!-- basket buttons -->
+                <add-to-basket class="p-b-1" :basket-item="{{ singleItem | json_encode }}" base-url="{{ app.request.baseUrl }}"></add-to-basket>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

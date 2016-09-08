@@ -1,0 +1,30 @@
+.toggle-list-view{
+	
+	.fa{
+		display: block;
+		transition: color 200ms;
+	}
+
+	.fa:nth-of-type(1){
+		color: $brand-primary;
+		font-size: 1.5rem;
+	}
+
+	.fa:nth-of-type(2){
+		color: $gray-light;
+		font-size: 1.5rem;
+	}
+	
+
+	&.grid{
+
+		.fa:nth-of-type(1){
+			color: $gray-light;
+		}
+		
+		.fa:nth-of-type(2){
+			color: $brand-primary;
+		}
+	}
+	
+}

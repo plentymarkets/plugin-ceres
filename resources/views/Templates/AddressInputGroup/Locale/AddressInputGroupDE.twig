@@ -1,0 +1,69 @@
+<div class="col-xs-12">
+    <div class="input-unit">
+        <input type="text" name="firma" id="txt_firma${_uid}" v-model="addressData.name1">
+        <label for="txt_firma${_uid}">Firma</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="vorname" id="txt_vorname${_uid}" v-model="addressData.name2">
+        <label for="txt_vorname${_uid}">Vorname*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="nachname" id="txt_nachname${_uid}" v-model="addressData.name3" >
+        <label for="txt_nachname${_uid}">Nachname*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit">
+        <input type="text" name="decorateName" id="txt_nachname${_uid}" v-model="addressData.name4">
+        <label for="decorateName${_uid}">Namenszusatz</label>
+    </div>
+</div>
+
+<div class="col-sm-8">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="strasse" id="txt_strasse${_uid}" v-model="addressData.address1" >
+        <label for="txt_strasse${_uid}">Straße*</label>
+    </div>
+</div>
+
+<div class="col-xs-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="housenumber" id="txt_nummer${_uid}" v-model="addressData.address2" >
+        <label for="txt_nummer${_uid}">Nr.*</label>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="input-unit">
+        <input type="text" name="decorateAddress" id="decorateAddress0${_uid}" v-model="addressData.address3">
+        <label for="decorateAddress0${_uid}">Adresszusatz 1</label>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="input-unit">
+        <input type="text" name="decorateAddress" id="decorateAddress1${_uid}" v-model="addressData.address4">
+        <label for="decorateAddress1${_uid}">Adresszusatz 2</label>
+    </div>
+</div>
+
+<div class="col-xs-6 col-sm-3">
+    <div class="input-unit" data-validate="number">
+        <input type="text" name="plz" id="txt_plz${_uid}" v-model="addressData.postalCode">
+        <label for="txt_plz${_uid}">PLZ*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="ort" id="txt_ort${_uid}" v-model="addressData.town">
+        <label for="txt_ort${_uid}">Ort*</label>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.rating-form {
+	.row {
+	}
+	.input-unit {
+		#ratingText {
+			width: 100%;
+			padding: 0 1rem 1.25rem;
+			margin-top: 1.3rem;
+			border:0;
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}

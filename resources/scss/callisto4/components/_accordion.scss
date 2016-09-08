@@ -1,0 +1,101 @@
+
+
+@mixin accordion(){
+	
+	.cmp-accordion{
+		
+		//default states
+		.accordion-control{
+			display: none;
+		}
+
+		.accordion-header{
+			position: relative;
+			display: block;
+			cursor: normal;
+
+			&::after{
+				content: none;
+			    display: inline-block;
+			    width: 0;
+			    height: 0;
+			    margin-left: .3em;
+			    vertical-align: middle;
+			    border-top: .3em solid;
+			    border-right: .3em solid transparent;
+			    border-left: .3em solid transparent;
+
+			    position: absolute;
+			    top: 50%;
+			    right: 1rem;
+
+			    transform: translateY(-50%);
+			}
+		}
+
+		.accordion-content{
+			height: auto;
+			max-height: none;
+			overflow: hidden;
+		}
+
+		//active states for each breakpoint
+	    @each $bp in map-keys($grid-breakpoints) {
+		  	&.active-#{$bp}-up {
+		    	@include media-breakpoint-up($bp) {
+		    		.accordion-header{
+			    		cursor: pointer;
+			    		&::after{
+							content: "";
+		    			}
+		    		}
+
+
+		    		.accordion-content{
+		      			max-height: 0;
+		    		}
+
+		    		.accordion-control:checked{
+		    			& + .accordion-header::after{
+							border-top: 0;
+    						border-bottom: .3em solid;
+		    			}
+
+						& + .accordion-header + .accordion-content{
+							max-height: 100em!important;
+						}
+					}
+		    	}
+		  	}
+
+		  	&.active-#{$bp}-down {
+		    	@include media-breakpoint-down($bp) {
+		      		.accordion-header{
+			    		cursor: pointer;
+			    		&::after{
+							content: "";
+		    			}
+		    		}
+
+		      		.accordion-content{
+		      			max-height: 0;
+		    		}
+
+		    		.accordion-control:checked{
+		    			& + .accordion-header::after{
+							border-top: 0;
+    						border-bottom: .3em solid;
+		    			}
+
+						& + .accordion-header + .accordion-content{
+							max-height: 100em!important;
+						}
+					}
+		    	}
+		  	}
+		}// end @each
+	}
+}
+
+@include accordion();
+

@@ -1,0 +1,12 @@
+.cmp-paginator{
+	line-height: 1;
+}
+
+@include media-breakpoint-only(xs) { 
+.history {
+	.xs-center{
+		float:none!important;
+		text-align: center;
+	}
+ }
+}
