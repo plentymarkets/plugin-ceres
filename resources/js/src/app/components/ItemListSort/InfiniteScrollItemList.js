@@ -2,6 +2,7 @@ var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
 Vue.component("infinite-scroll-item-list", {
+
     props: {
         infiniteConfig: {
             limit     : 20,           // count of items to load.
@@ -26,9 +27,9 @@ Vue.component("infinite-scroll-item-list", {
         {
             var self    = this;
             var data    = {
-                limit: self.infiniteConfig.limit,
+                limit : self.infiniteConfig.limit,
                 offset: self.infiniteConfig.offset,
-                page: self.infiniteConfig.offset / self.infiniteConfig.limit
+                page  : self.infiniteConfig.offset / self.infiniteConfig.limit
             };
             self.isBusy = true;
 

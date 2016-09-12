@@ -1,12 +1,12 @@
-var BasketService         = require( 'services/BasketService' );
-var MonetaryFormatService = require( 'services/MonetaryFormatService' );
-var ModalService          = require( 'services/ModalService' );
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var ModalService          = require('services/ModalService');
 
-Vue.component( 'basket-item-list', {
+Vue.component('basket-item-list', {
 
     template: '#vue-basket-item-list',
 
-    props   : [
+    props: [
         "baseUrl"
     ],
 
@@ -19,66 +19,68 @@ Vue.component( 'basket-item-list', {
         };
     },
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch( function( data )
+        BasketService.watch(function(data)
         {
-            self.$set( 'basket', data.basket );
-            self.$set( 'basketItems', data.basketItems );
-            self.$set( 'items', data.items );
-        } );
-        BasketService.init().done( function()
+            self.$set('basket', data.basket);
+            self.$set('basketItems', data.basketItems);
+            self.$set('items', data.items);
+        });
+        BasketService.init().done(function()
         {
             done();
-        } );
+        });
     },
 
-    methods:
-    {
-        deleteItem: function( basketItem )
+    methods: {
+        deleteItem       : function(basketItem)
         {
             $(".art-" + basketItem.variationId).toggleClass('wait');
 
             BasketService.deleteBasketItem(basketItem);
         },
-        calcPrice : function( basketItem )
+
+        calcPrice        : function(basketItem)
+        {
+            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
+            var priceSum = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+
+            return MonetaryFormatService.formatMonetary(priceSum, currency);
+        },
+
+        formatRetailPrice: function(basketItem)
         {
             var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var priceSum    = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
 
-            return MonetaryFormatService.formatMonetary( priceSum, currency );
-        },
-        formatRetailPrice: function (basketItem)
-        {
-          var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-          var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
-
-          return MonetaryFormatService.formatMonetary( retailPrice, currency );
-        },
-        checkName: function (basketItem, name)
-        {
-          if(name !== '' )
-          {
-            return name + " " + this.items[basketItem.variationId].variationBase.variationName;
-          }
-          else
-          {
-            return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
-          }
+            return MonetaryFormatService.formatMonetary(retailPrice, currency);
         },
 
-        setLinkToItem: function (basketItem)
+        checkName        : function(basketItem, name)
         {
-          var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
-          var i = urlContent.length - 1;
-
-          return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
+            if (name !== '')
+            {
+                return name + " " + this.items[basketItem.variationId].variationBase.variationName;
+            }
+            else
+            {
+                return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
+            }
         },
 
-        getImage: function (image)
+        setLinkToItem: function(basketItem)
         {
-          return this.baseUrl + "/" + image;
+            var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
+            var i          = urlContent.length - 1;
+
+            return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
+        },
+
+        getImage: function(image)
+        {
+            return this.baseUrl + "/" + image;
         }
     }
-})
+});

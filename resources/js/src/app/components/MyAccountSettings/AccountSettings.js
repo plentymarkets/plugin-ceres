@@ -1,5 +1,5 @@
-var ModalService = require('services/ModalService');
-var APIService = require('services/APIService');
+var ModalService        = require('services/ModalService');
+var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
 
 Vue.component('account-settings', {
@@ -7,78 +7,79 @@ Vue.component('account-settings', {
     template: '#vue-account-settings',
 
     props: [
-      "userData"
+        "userData"
     ],
 
-    data: function() {
+    data: function()
+    {
         return {
-          newPassword: '',
-          confirmPassword: '',
-          accountSettingsClass: ''
+            newPassword         : '',
+            confirmPassword     : '',
+            accountSettingsClass: ''
         };
     },
 
-    ready: function ()
+    ready: function()
     {
-      this.accountSettingsClass = "accountSettingsModal" + this._uid;
+        this.accountSettingsClass = "accountSettingsModal" + this._uid;
     },
 
     computed: {
-      matchPassword: function ()
-      {
-        if(this.confirmPassword != '')
+        matchPassword: function()
         {
-          return this.newPassword === this.confirmPassword;
+            if (this.confirmPassword != '')
+            {
+                return this.newPassword === this.confirmPassword;
+            }
+            return true;
         }
-        return true;
-      }
     },
 
     methods: {
 
-      showChangeAccountSettings: function ()
-      {
-        var accountModal = ModalService.findModal( $('.' + this.accountSettingsClass) );
-
-        $(".wrapper-bottom").append($('.' + this.accountSettingsClass));
-
-        accountModal.show();
-      },
-
-      saveAccountSettings: function ()
-      {
-        var self = this;
-        if( this.newPassword != '' && (this.newPassword === this.confirmPassword))
+        showChangeAccountSettings: function()
         {
-          APIService.post('/rest/customer/password', { password: this.newPassword } )
-            .done( function ( response )
+            var accountModal = ModalService.findModal($('.' + this.accountSettingsClass));
+
+            $(".wrapper-bottom").append($('.' + this.accountSettingsClass));
+
+            accountModal.show();
+        },
+
+        saveAccountSettings: function()
+        {
+            var self = this;
+            if (this.newPassword != '' && (this.newPassword === this.confirmPassword))
             {
-              self.clearFieldsAndClose();
-              NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
-            }).fail( function ( response )
-            {
-              self.clearFieldsAndClose();
-              NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
-            });
+                APIService.post('/rest/customer/password', {password: this.newPassword})
+                    .done(function(response)
+                    {
+                        self.clearFieldsAndClose();
+                        NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
+                    }).fail(function(response)
+                {
+                    self.clearFieldsAndClose();
+                    NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
+                });
+            }
+        },
+
+        clearFields: function()
+        {
+            this.newPassword     = '';
+            this.confirmPassword = '';
+        },
+
+        clearFieldsAndClose: function()
+        {
+            ModalService.findModal($('.' + this.accountSettingsClass)).hide();
+            this.clearFields();
+        },
+
+        getEmail: function()
+        {
+            return this.userData.options[0].value;
         }
-      },
-
-      clearFields: function ()
-      {
-        this.newPassword = '';
-        this.confirmPassword = '';
-      },
-
-      clearFieldsAndClose: function ()
-      {
-        ModalService.findModal( $('.' + this.accountSettingsClass) ).hide();
-        this.clearFields();
-      },
-
-      getEmail: function ()
-      {
-        return this.userData.options[0].value;
-      }
     }
 
 });

@@ -1,11 +1,10 @@
-var ModalService = require( 'services/ModalService' );
+var ModalService = require('services/ModalService');
 
-Vue.component( 'address-select',
-{
+Vue.component('address-select', {
+
     template: '#vue-address-select',
 
-    props:
-    [
+    props: [
         'addressList',
         'addressType',
         'selectedAddressId'
@@ -14,22 +13,22 @@ Vue.component( 'address-select',
     data: function()
     {
         return {
-            selectedAddress  : {},
-            addressModal: {},
-            modalType : "",
-            headline : "",
-            addressToEdit : {},
-            addressModalId: ""
-        }
+            selectedAddress: {},
+            addressModal   : {},
+            modalType      : "",
+            headline       : "",
+            addressToEdit  : {},
+            addressModalId : ""
+        };
     },
 
     created: function()
     {
-        if ( !this.isAddressListEmpty() )
+        if (!this.isAddressListEmpty())
         {
-            for(var index in this.addressList)
+            for (var index in this.addressList)
             {
-                if(this.addressList[index].id == this.selectedAddressId)
+                if (this.addressList[index].id == this.selectedAddressId)
                 {
                     this.selectedAddress = this.addressList[index];
                 }
@@ -48,13 +47,12 @@ Vue.component( 'address-select',
         this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
     },
 
-    methods:
-    {
+    methods: {
         onAddressChanged: function(index)
         {
             this.selectedAddress = this.addressList[index];
-            
-            this.$dispatch( 'address-changed', this.selectedAddress );
+
+            this.$dispatch('address-changed', this.selectedAddress);
         },
 
         isAddressListEmpty: function()
@@ -62,14 +60,14 @@ Vue.component( 'address-select',
             return !(this.addressList && this.addressList.length > 0);
         },
 
-        showNameStrong: function ()
+        showNameStrong: function()
         {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length == 0;
         },
 
-        showAdd : function()
+        showAdd: function()
         {
-            this.modalType = "create";
+            this.modalType     = "create";
             this.addressToEdit = {};
             this.updateHeadline();
 
@@ -77,9 +75,9 @@ Vue.component( 'address-select',
             this.addressModal.show();
         },
 
-        showEdit : function(address)
+        showEdit: function(address)
         {
-            this.modalType = "update";
+            this.modalType     = "update";
             this.addressToEdit = address;
             this.updateHeadline();
 
@@ -94,10 +92,10 @@ Vue.component( 'address-select',
 
         updateHeadline: function()
         {
-            var headline     = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
-            headline    += (this.modalType == "update") ? " bearbeiten" : " anlegen";
+            var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
+            headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
             this.headline = headline;
         }
 
     }
-} );
+});

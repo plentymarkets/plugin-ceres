@@ -1,52 +1,52 @@
-var BasketService = require( 'services/BasketService' );
-var ApiService = require('services/ApiService');
+var BasketService       = require('services/BasketService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-Vue.component( 'add-to-basket', {
+Vue.component('add-to-basket', {
 
     template: '#vue-add-to-basket',
 
     props: [
-      "basketItem",
-      "baseUrl"
+        "basketItem",
+        "baseUrl"
     ],
 
     data: function()
     {
         return {
             quantity: 1
-        }
+        };
     },
 
     methods: {
 
-        addToBasket: function( quantity )
+        addToBasket: function(quantity)
         {
-          var addItemModal = ModalService.findModal($(this.$el.parentElement));
-          addItemModal.setTimeout(10000);
+            var addItemModal = ModalService.findModal($(this.$el.parentElement));
+            addItemModal.setTimeout(10000);
 
-          $(".wrapper-bottom").append(addItemModal.getModalContainer());
+            $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
             BasketService.addBasketItem({
-              variationId: this.basketItem.variationBase.id,
-              quantity: this.quantity
-            }).done( function ()
-              {
+                variationId: this.basketItem.variationBase.id,
+                quantity   : this.quantity
+            }).done(function()
+            {
                 addItemModal.show();
-              })
-              .fail( function ()
-              {
-                NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
-              });
+            })
+                .fail(function()
+                {
+                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                });
         },
 
-        quantityPlus: function ()
+        quantityPlus: function()
         {
             this.quantity++;
         },
 
-        quantityMinus: function ()
+        quantityMinus: function()
         {
             if (this.quantity > 1)
             {

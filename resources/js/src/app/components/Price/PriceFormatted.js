@@ -1,4 +1,4 @@
-Vue.component( 'price-formatted', {
+Vue.component('price-formatted', {
 
     template: '<span class="price-formatted">${ priceFormatted }</span>',
 
@@ -7,9 +7,10 @@ Vue.component( 'price-formatted', {
     ],
 
     computed: {
-      priceFormatted: function () {
-        return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
-      }
+        priceFormatted: function()
+        {
+            return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
+        }
     }
 
 });

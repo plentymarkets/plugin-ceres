@@ -1,20 +1,19 @@
-Vue.component( 'address-input-group',
-{
-	template: '#vue-address-input-group',
+Vue.component('address-input-group', {
 
-	props:
-	[
-		'addressData',
-		'locale'
-	],
+    template: '#vue-address-input-group',
 
-	created: function()
-	{
-		if(!this.addressData)
-		{
-			this.addressData = {};
-		}
+    props: [
+        'addressData',
+        'locale'
+    ],
 
-		this.locale = "DE";
-	}
-} );
+    created: function()
+    {
+        if (!this.addressData)
+        {
+            this.addressData = {};
+        }
+
+        this.locale = "DE";
+    }
+});

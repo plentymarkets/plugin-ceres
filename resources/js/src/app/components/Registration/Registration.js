@@ -1,130 +1,123 @@
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-var ValidationService = require( 'services/ValidationService' );
+var ValidationService = require('services/ValidationService');
 
-Vue.component('registration',
-{
-	template: '#vue-registration',
+Vue.component('registration', {
 
-	props:
-	[
-		"modalElement",
-		"guestMode",
-		"isSimpleRegistration"
-	],
+    template: '#vue-registration',
 
-	data: function ()
-	{
-		return {
-			password: "",
-			passwordRepeat: "",
-			username: "",
-			billingAddress: {}
-		};
-	},
+    props: [
+        "modalElement",
+        "guestMode",
+        "isSimpleRegistration"
+    ],
 
-	created: function ()
-	{
-		if(this.guestMode == null || this.guestMode == "")
-		{
-			this.guestMode = false;
-		}
-		else
-		{
-			this.guestMode = true;
-		}
-	},
+    data: function()
+    {
+        return {
+            password      : "",
+            passwordRepeat: "",
+            username      : "",
+            billingAddress: {}
+        };
+    },
 
-	methods:
-	{
-		validateRegistration: function ()
-		{
-			var self = this;
-			ValidationService.validate( $( '#registration' + this._uid ) )
-				.done( function()
-				{
-					self.sendRegistration()
-				})
-				.fail( function( invalidFields )
-				{
-					ValidationService.markInvalidFields( invalidFields, "error" );
-				});
-		},
+    created: function()
+    {
+        if (this.guestMode == null || this.guestMode == "")
+        {
+            this.guestMode = false;
+        }
+        else
+        {
+            this.guestMode = true;
+        }
+    },
 
-		sendRegistration: function ()
-		{
-			var userObject = this.getUserObject();
-			var component = this;
+    methods: {
+        validateRegistration: function()
+        {
+            var self = this;
+            ValidationService.validate($('#registration' + this._uid))
+                .done(function()
+                {
+                    self.sendRegistration()
+                })
+                .fail(function(invalidFields)
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
+        },
 
-			ApiService.post("/rest/customer", userObject)
-				.done(function (response)
-				{
-					ApiService.setToken(response);
+        sendRegistration: function()
+        {
+            var userObject = this.getUserObject();
+            var component  = this;
 
-					if(document.getElementById(component.modalElement) != null)
-					{
-						ModalService.findModal( document.getElementById(component.modalElement) ).hide();
-					}
+            ApiService.post("/rest/customer", userObject)
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
 
-					NotificationService.success("Erfolgreich registriert").closeAfter(3000);
-				});
+                    if (document.getElementById(component.modalElement) != null)
+                    {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
 
-		},
+                    NotificationService.success("Erfolgreich registriert").closeAfter(3000);
+                });
 
-		getUserObject: function()
-		{
-			if(this.guestMode)
-			{
-				var userObject =
-				{
-					contact:
-					{
-						referrerId: 1,
-						typeId: 1,
-						options:
-						{
-							typeId:
-							{
-								typeId: 2,
-								subTypeId: 4,
-								value: this.username,
-								priority: 0
-							}
-						}
-					}
-				};
-			}
-			else
-			{
-				var userObject =
-				{
-					contact:
-					{
-						referrerId: 1,
-						typeId: 1,
-						password: this.password,
-						options:
-						{
-							typeId:
-							{
-								typeId: 2,
-								subTypeId: 4,
-								value: this.username,
-								priority: 0
-							}
-						}
-					}
-				};
-			}
+        },
 
-			if(!this.isSimpleRegistration)
-			{
-				userObject.billingAddress = this.billingAddress;
-			}
+        getUserObject: function()
+        {
+            // FIXME copy&paste-action? serious?
+            if (this.guestMode)
+            {
+                var userObject =
+                    {
+                        contact: {
+                            referrerId: 1,
+                            typeId    : 1,
+                            options   : {
+                                typeId: {
+                                    typeId   : 2,
+                                    subTypeId: 4,
+                                    value    : this.username,
+                                    priority : 0
+                                }
+                            }
+                        }
+                    };
+            }
+            else
+            {
+                var userObject =
+                    {
+                        contact: {
+                            referrerId: 1,
+                            typeId    : 1,
+                            password  : this.password,
+                            options   : {
+                                typeId: {
+                                    typeId   : 2,
+                                    subTypeId: 4,
+                                    value    : this.username,
+                                    priority : 0
+                                }
+                            }
+                        }
+                    };
+            }
 
-			return userObject;
-		}
-	}
+            if (!this.isSimpleRegistration)
+            {
+                userObject.billingAddress = this.billingAddress;
+            }
+
+            return userObject;
+        }
+    }
 });

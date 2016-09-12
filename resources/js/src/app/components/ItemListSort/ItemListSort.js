@@ -1,11 +1,10 @@
 var PaginationService = require('services/PaginationService');
 
-Vue.component('item-list-sort',
-{
+Vue.component('item-list-sort', {
+
     template: '#vue-item-list-sort',
 
-    props: 
-    {
+    props: {
         sortedDataList    : String,
         defaultSorting    : String,
         topCell           : String,
@@ -32,30 +31,29 @@ Vue.component('item-list-sort',
             sortingList         : [],
             itemPerPageList     : [],
             itemsPerPageSelected: 0
-        }
+        };
     },
 
-    methods: 
-    {
+    methods: {
         initPropsValues: function()
         {
             this.sortedDataList = JSON.parse(this.sortedDataList);
 
             if (this.sortedDataList)
             {
-                this.topCell            = this.sortedDataList.indexOf("top_cell") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.itemAsc            = this.sortedDataList.indexOf("item_asc") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.itemDesc           = this.sortedDataList.indexOf("item_desc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.nameAsc            = this.sortedDataList.indexOf("name_asc") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.nameDesc           = this.sortedDataList.indexOf("name_desc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.priceAsc           = this.sortedDataList.indexOf("price_asc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.priceDesc          = this.sortedDataList.indexOf("price_desc") > -1            || this.sortedDataList.indexOf("all") > -1;
-                this.releaseAsc         = this.sortedDataList.indexOf("release_asc") > -1           || this.sortedDataList.indexOf("all") > -1;
-                this.releaseDesc        = this.sortedDataList.indexOf("release_desc") > -1          || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialAsc    = this.sortedDataList.indexOf("store_special_asc") > -1     || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialDesc   = this.sortedDataList.indexOf("store_special_desc") > -1    || this.sortedDataList.indexOf("all") > -1;
-                this.idDesc             = this.sortedDataList.indexOf("id_desc") > -1               || this.sortedDataList.indexOf("all") > -1;
-                this.random             = this.sortedDataList.indexOf("random") > -1                || this.sortedDataList.indexOf("all") > -1;
+                this.topCell          = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemAsc          = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemDesc         = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameAsc          = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameDesc         = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceAsc         = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceDesc        = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseAsc       = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseDesc      = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialAsc  = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialDesc = this.sortedDataList.indexOf("store_special_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.idDesc           = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.random           = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
             }
         },
 

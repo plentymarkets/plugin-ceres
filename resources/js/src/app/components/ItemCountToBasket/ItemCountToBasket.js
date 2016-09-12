@@ -5,26 +5,29 @@ Vue.component('item-count-to-basket', {
     template: '#vue-item-count-to-basket',
 
     props: [
-      'basketItem',
-      'quantity'
+        'basketItem',
+        'quantity'
     ],
 
     methods: {
 
-      quantityPlus: function () {
-        this.quantity++;
+        quantityPlus: function()
+        {
+            this.quantity++;
 
-        this.basketItem.quantity = this.quantity;
-        BasketService.updateBasketItem(this.basketItem);
-      },
+            this.basketItem.quantity = this.quantity;
+            BasketService.updateBasketItem(this.basketItem);
+        },
 
-      quantityMinus: function () {
-        if (this.quantity > 1) {
-          this.quantity--;
+        quantityMinus: function()
+        {
+            if (this.quantity > 1)
+            {
+                this.quantity--;
 
-          this.basketItem.quantity = this.quantity;
-          BasketService.updateBasketItem(this.basketItem);
+                this.basketItem.quantity = this.quantity;
+                BasketService.updateBasketItem(this.basketItem);
+            }
         }
-      }
     }
 });

@@ -1,38 +1,38 @@
 var MonetaryFormatService = require('services/MonetaryFormatService');
-var APIService = require('services/APIService');
+var APIService            = require('services/APIService');
 
-Vue.component('payment-provider-select',
-{
-    template: '#vue-payment-provider-select',
+Vue.component('payment-provider-select', {
 
-    props: ['paymentProviderList'],
+        template: '#vue-payment-provider-select',
 
-    data: function () {
-        return {
-            selectedPaymentProvider: {}
-        }
-    },
+        props: ['paymentProviderList'],
 
-    created: function ()
-    {
-        this.addEventListener();
-    },
-
-    methods:
-    {
-        onPaymentProviderChange: function()
+        data: function()
         {
-            APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
+            return {
+                selectedPaymentProvider: {}
+            };
         },
 
-        formatPrice: function (price, currency)
+        created: function()
         {
-            return MonetaryFormatService.formatMonetary(price, currency);
+            this.addEventListener();
         },
 
-        addEventListener: function ()
-        {
-            //listen on APIService events and handle new data
+        methods: {
+            onPaymentProviderChange: function()
+            {
+                APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
+            },
+
+            formatPrice: function(price, currency)
+            {
+                return MonetaryFormatService.formatMonetary(price, currency);
+            },
+
+            addEventListener: function()
+            {
+                //listen on APIService events and handle new data
+            }
         }
-    }
-});
+    });

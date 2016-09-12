@@ -1,7 +1,7 @@
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var HTMLCache = require('services/VariationsHTMLCacheService');
-var BasketService = require('services/BasketService');
+var HTMLCache           = require('services/VariationsHTMLCacheService');
+var BasketService       = require('services/BasketService');
 
 /**
  * possible preselection values:
@@ -10,128 +10,160 @@ var BasketService = require('services/BasketService');
  * variantID
  */
 Vue.component('item-variation-select', {
-    activate: function( done ) {
-        var self = this;
-        BasketService.watch(function( data ) {
-            self.$set( 'basketItems', data.basketItems );
-        });
-        BasketService.init().done(function() {
-            done();
-        });
-    },
+
     template: '#vue-item-variation-select',
-    props: [
+
+    props   : [
         "itemId",
         "preselection",
         "itemIsInBasket"
     ],
-    data: function () {
+
+    data    : function()
+    {
         return {
-            variationAttributes: {},
+            variationAttributes     : {},
             variantionSelectionModel: [],
-            oldAttributeValueList: [],
-            basketItems: [],
-            attributeNames: []
+            oldAttributeValueList   : [],
+            basketItems             : [],
+            attributeNames          : []
         };
     },
-    created: function () {
+
+    created : function()
+    {
         this.oldVariationId = this.preselection;
         this.loadVariationAttributes();
         this.variations = {};
         this.initWindowEventHandling();
     },
-    methods: {
-        loadVariationAttributes: function () {
+
+    activate: function(done)
+    {
+        var self = this;
+        BasketService.watch(function(data)
+        {
+            self.$set('basketItems', data.basketItems);
+        });
+        BasketService.init().done(function()
+        {
+            done();
+        });
+    },
+
+    methods : {
+        loadVariationAttributes: function()
+        {
             var self = this;
             // request item variations
             ApiService.get("/rest/item_variation_select/" + this.itemId)
-                .done(function (response) {
+                .done(function(response)
+                {
                     // catch possible empty response
                     if (!response
                         || (response && response.data === null)
-                        || (response && response["selectionValues"].length === 0)) {
+                        || (response && response["selectionValues"].length === 0))
+                    {
                         return;
                     }
                     self.variationAttributes = response["selectionValues"];
-                    self.variations = response["variations"];
-                    self.attributeNames = response["attributeNames"];
+                    self.variations          = response["variations"];
+                    self.attributeNames      = response["attributeNames"];
 
-                    var attributes = Object.keys(self.variationAttributes);
+                    var attributes          = Object.keys(self.variationAttributes);
                     var setOnInitialization = {};
 
                     // where the magic begins
-                    if (!self.preselection) {
+                    if (!self.preselection)
+                    {
                         return;
-                    } else {
+                    }
+                    else
+                    {
                         // if preselection is true, select first entries for all attributes
-                        if (typeof self.preselection === 'boolean') {
-                            for(var attribute in self.variationAttributes) {
+                        if (typeof self.preselection === 'boolean')
+                        {
+                            for (var attribute in self.variationAttributes)
+                            {
                                 self.variantionSelectionModel.push({
-                                    attributeId: attribute,
+                                    attributeId     : attribute,
                                     attributeValueId: Object.keys(self.variationAttributes[attribute])[0]
                                 });
                             }
-                        } else {
-                            // if preselection not found or there are no variations, initialize select element with "please take a choice" option
-                            if (!self.variations[self.preselection] || self.variations[self.preselection].length <= 0) {
+                        }
+                        else
+                        {
+                            // if preselection not found or there are no variations, initialize select element with
+                            // "please take a choice" option
+                            if (!self.variations[self.preselection] || self.variations[self.preselection].length <= 0)
+                            {
                                 self.preselection = false;
                                 return;
                             }
 
                             var variationPreselected = self.variations[self.preselection];
                             // individual selection via variation ID. Searching for values.
-                            for (var i = 0, leng = variationPreselected.length; i < leng; i++) {
-                                while (self.variantionSelectionModel.length !== leng) {
+                            for (var i = 0, leng = variationPreselected.length; i < leng; i++)
+                            {
+                                while (self.variantionSelectionModel.length !== leng)
+                                {
                                     self.variantionSelectionModel.push({attributeId: null, attributeValueId: null});
                                 }
                                 // toString() is needed to initialize select element model. Doesn't work with integer.
-                                self.variantionSelectionModel[i].attributeId = variationPreselected[i].attributeId.toString();
-                                self.variantionSelectionModel[i].attributeValueId= variationPreselected[i].attributeValueId.toString();
+                                self.variantionSelectionModel[i].attributeId      = variationPreselected[i].attributeId.toString();
+                                self.variantionSelectionModel[i].attributeValueId = variationPreselected[i].attributeValueId.toString();
                             }
                         }
 
                     }
 
-                }).fail(function (error) {
-                    console.warn(error);
-                    return false;
+                }).fail(function(error)
+            {
+                console.warn(error);
+                return false;
             });
         },
-        matchVariation: function(currentSelection)
+        matchVariation         : function(currentSelection)
         {
             var hits = 0;
             var currentVariation;
-            for (var variationID in this.variations) { // iterate all variations
+            for (var variationID in this.variations)
+            { // iterate all variations
                 currentVariation = this.variations[variationID];
-                for (var i = 0, leng = currentVariation.length; i < leng; i++) {
+                for (var i = 0, leng = currentVariation.length; i < leng; i++)
+                {
                     /*
-                        Increase "hit" with "variationID", if fitting attribute was found.
-                        The amount of this addition divided by length of current variation acn match a variation ID.
-                      */
+                     Increase "hit" with "variationID", if fitting attribute was found.
+                     The amount of this addition divided by length of current variation acn match a variation ID.
+                     */
                     if (currentVariation[i].attributeId === currentSelection[i].attributeId
-                    && currentVariation[i].attributeValueId === currentSelection[i].attributeValueId) {
-                            hits += parseInt(variationID);
-                        }
+                        && currentVariation[i].attributeValueId === currentSelection[i].attributeValueId)
+                    {
+                        hits += parseInt(variationID);
+                    }
                 }
                 hits = (hits / leng);
                 /*
-                    if "hit", divided by length of attributes of one variation, matches the current variation ID,
-                    we found our variation
+                 if "hit", divided by length of attributes of one variation, matches the current variation ID,
+                 we found our variation
                  */
-                if (hits === parseInt(variationID)) {
+                if (hits === parseInt(variationID))
+                {
                     break;
-                } else {
+                }
+                else
+                {
                     hits = 0;
                 }
             }
             return hits;
         },
-        onSelectChange: function()
+        onSelectChange         : function()
         {
-            var self = this;
+            var self                = this;
             var convertedAttributes = [];
             // convert attribute values to integer
-            for (var attr in this.variantionSelectionModel )
+            for (var attr in this.variantionSelectionModel)
             {
                 if (self.variantionSelectionModel[attr] === "-1")
                 {
@@ -139,7 +171,7 @@ Vue.component('item-variation-select', {
                 }
 
                 convertedAttributes.push({
-                    attributeId: parseInt(this.variantionSelectionModel[attr].attributeId),
+                    attributeId     : parseInt(this.variantionSelectionModel[attr].attributeId),
                     attributeValueId: parseInt(this.variantionSelectionModel[attr].attributeValueId)
                 });
             }
@@ -151,7 +183,8 @@ Vue.component('item-variation-select', {
                 {
                     var currentBasketItem;
 
-                    for (var i = 0, len = this.basketItems.length; i < len; i++){
+                    for (var i = 0, len = this.basketItems.length; i < len; i++)
+                    {
                         if (this.oldVariationId === this.basketItems[i].variationId)
                         {
                             currentBasketItem = this.basketItems[i];
@@ -162,9 +195,9 @@ Vue.component('item-variation-select', {
                     {
                         BasketService.updateBasketItem(
                             {
-                                id: currentBasketItem.id,
+                                id         : currentBasketItem.id,
                                 variationId: matchingVariationId,
-                                quantity: currentBasketItem.quantity
+                                quantity   : currentBasketItem.quantity
                             });
                     }
                 }
@@ -178,14 +211,14 @@ Vue.component('item-variation-select', {
             }
         },
 
-        loadVariation: function (itemId, variationId)
+        loadVariation: function(itemId, variationId)
         {
             // var cachedHTML = HTMLCache.getFromCache(itemId, variationId);
             //
             // if(cachedHTML === undefined)
             // {
-                var success =
-                    function (response)
+            var success =
+                    function(response)
                     {
                         var found = $(response).find("#page-body");
                         $("#page-body").html(found);
@@ -194,7 +227,7 @@ Vue.component('item-variation-select', {
                         HTMLCache.addToCache(itemId, variationId, found);
                     };
 
-                jQuery.get("/test/" + itemId + "/" + variationId, "", success, "html");
+            jQuery.get("/test/" + itemId + "/" + variationId, "", success, "html");
             // }
             // else
             // {

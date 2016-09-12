@@ -1,12 +1,11 @@
-var AddressService = require('services/AddressService');
-var ValidationService = require( 'services/ValidationService' );
+var AddressService    = require('services/AddressService');
+var ValidationService = require('services/ValidationService');
 
-Vue.component( 'create-update-address',
-{
+Vue.component('create-update-address', {
+
     template: '#vue-create-update-address',
 
-    props:
-    [
+    props: [
         "addressData",
         "addressModal",
         "addressList",
@@ -14,30 +13,29 @@ Vue.component( 'create-update-address',
         "addressType"
     ],
 
-    methods:
-    {
+    methods: {
         validate: function()
         {
             var self = this;
-            ValidationService.validate( $( '#my-form' ) )
-                .done( function()
+            ValidationService.validate($('#my-form'))
+                .done(function()
                 {
                     self.saveAddress();
-                } )
-                .fail( function( invalidFields )
+                })
+                .fail(function(invalidFields)
                 {
-                    ValidationService.markInvalidFields( invalidFields, "error" );
-                } );
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
 
         },
 
         saveAddress: function()
         {
-            if(this.modalType === "create")
+            if (this.modalType === "create")
             {
                 this.createAddress()
             }
-            else if(this.modalType === "update")
+            else if (this.modalType === "update")
             {
                 this.updateAddress()
             }
@@ -47,13 +45,13 @@ Vue.component( 'create-update-address',
         {
             AddressService
                 .updateAddress(this.addressData, this.addressType)
-                .done(function ()
+                .done(function()
                 {
                     this.addressModal.hide();
-                    for ( var key in this.addressList)
+                    for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
-                        if(address.id == this.addressData.id)
+                        if (address.id == this.addressData.id)
                         {
                             address = this.addressData;
                             break;
@@ -66,12 +64,12 @@ Vue.component( 'create-update-address',
         {
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
-                .done(function ()
+                .done(function()
                 {
                     this.addressModal.hide();
-                    this.addressList.push( this.addressData );
+                    this.addressList.push(this.addressData);
                 }.bind(this));
         }
     }
 
-} );
+});

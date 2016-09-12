@@ -1,11 +1,10 @@
 var ApiService = require('services/ApiService');
 
-Vue.component('order-history',
-{
+Vue.component('order-history', {
+
     template: '#vue-order-history',
 
-    props:
-    [
+    props: [
         "contactId",
         "orderMaxCountPagination"
     ],
@@ -14,13 +13,13 @@ Vue.component('order-history',
     {
         return {
             //needed for pagination
-            currentPaginationEntry  : 1,
-            numberOfEntries         : 1,
-            showItemsOf             : "1-6",
-            itemsPerPage            : 6,
+            currentPaginationEntry: 1,
+            numberOfEntries       : 1,
+            showItemsOf           : "1-6",
+            itemsPerPage          : 6,
             //orderObjectToRender
-            orderList               :[]
-        }
+            orderList             : []
+        };
     },
 
     ready: function()
@@ -30,8 +29,7 @@ Vue.component('order-history',
         this.numberOfEntries = this.calculateMaxPages();
     },
 
-    methods:
-    {
+    methods: {
         //extend this method params for filter handling
         updateOrderList: function(page)
         {
@@ -40,16 +38,16 @@ Vue.component('order-history',
             var self = this;
 
             ApiService.get("/rest/order?page=" + page + "&items=" + this.itemsPerPage)
-                .done(function (response)
+                .done(function(response)
                 {
                     ApiService.setToken(response);
 
                     self.orderList = response["entries"];
 
                     //calculate the show X - X items
-                    this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) +  1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) +  this.itemsPerPage);
+                    this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) + 1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) + this.itemsPerPage);
                 })
-                .fail(function (response)
+                .fail(function(response)
                 {
                     //todo
                 });
@@ -57,8 +55,8 @@ Vue.component('order-history',
 
         calculateMaxPages: function()
         {
-            var pages           = this.orderMaxCountPagination / this.itemsPerPage;
-            var roundedPages    = Math.floor(pages);
+            var pages        = this.orderMaxCountPagination / this.itemsPerPage;
+            var roundedPages = Math.floor(pages);
 
             return roundedPages;
         },
@@ -67,7 +65,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 2 )
+            if (this.currentPaginationEntry <= 2)
             {
                 show = false;
             }
@@ -84,7 +82,7 @@ Vue.component('order-history',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry < this.numberOfEntries - 1 )
+            if (this.currentPaginationEntry < this.numberOfEntries - 1)
             {
                 show = true;
             }
@@ -96,7 +94,7 @@ Vue.component('order-history',
         {
             var previousPage = this.currentPaginationEntry - 1;
 
-            if ( previousPage <= 1 )
+            if (previousPage <= 1)
             {
                 previousPage = 1;
             }
@@ -108,7 +106,7 @@ Vue.component('order-history',
         {
             var nextPage = this.currentPaginationEntry + 1;
 
-            if ( nextPage >= this.numberOfEntries )
+            if (nextPage >= this.numberOfEntries)
             {
                 nextPage = this.numberOfEntries;
             }
@@ -120,7 +118,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 3 )
+            if (this.currentPaginationEntry <= 3)
             {
                 show = false;
             }
@@ -130,9 +128,9 @@ Vue.component('order-history',
 
         showDotsRight: function()
         {
-            var show     = true;
+            var show = true;
 
-            if ( this.currentPaginationEntry >= this.numberOfEntries - 2 )
+            if (this.currentPaginationEntry >= this.numberOfEntries - 2)
             {
                 show = false;
             }
@@ -144,7 +142,7 @@ Vue.component('order-history',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry  > 1 )
+            if (this.currentPaginationEntry > 1)
             {
                 show = true;
             }
@@ -156,7 +154,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry  == this.numberOfEntries )
+            if (this.currentPaginationEntry == this.numberOfEntries)
             {
                 show = false;
             }

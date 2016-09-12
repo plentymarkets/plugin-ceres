@@ -1,18 +1,25 @@
 var NotificationService = require('services/NotificationService');
-var WaitScreenService = require('services/WaitScreenService');
+var WaitScreenService   = require('services/WaitScreenService');
 
 Vue.component('notifications', {
+
     template: '#vue-notifications',
-    data: function() {
+
+    data    : function()
+    {
         return {
             notifications: NotificationService.getNotifications().all()
-        }
+        };
     },
-    methods: {
-        dismiss: function( notification ) {
-            NotificationService.getNotifications().remove( notification );
+
+    methods : {
+        dismiss: function(notification)
+        {
+            NotificationService.getNotifications().remove(notification);
         },
-        test: function() {
+
+        test   : function()
+        {
             NotificationService.error('Test').closeAfter(3000);
             WaitScreenService.showWaitScreen();
         }

@@ -1,19 +1,20 @@
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
-Vue.component('shipping-profile-select',
-{
+Vue.component('shipping-profile-select', {
+
     template: '#vue-shipping-profile-select',
 
     props: ['shippingProfileData'],
 
-    data: function () {
+    data: function()
+    {
         return {
-            shippingProfileList: [],
+            shippingProfileList    : [],
             selectedShippingProfile: {}
-        }
+        };
     },
 
-    created: function ()
+    created: function()
     {
         // use when real data is implemented
         // if(this.shippingProfileData)
@@ -31,20 +32,20 @@ Vue.component('shipping-profile-select',
         this.addEventListener();
     },
 
-    methods:
-    {
+    methods: {
         onShippingProfileChange: function()
         {
+            // TODO remove log
             console.log(this.shippingProfileList);
             console.log(this.selectedShippingProfile);
         },
 
-        formatPrice: function (price, currency)
+        formatPrice: function(price, currency)
         {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        addEventListener: function ()
+        addEventListener: function()
         {
             //listen on APIService events and handle new data
         }

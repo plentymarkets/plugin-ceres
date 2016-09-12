@@ -3,18 +3,18 @@ var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-button', {
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch(function( data )
+        BasketService.watch(function(data)
         {
-            self.$set( 'basket', data.basket );
+            self.$set('basket', data.basket);
         });
-        BasketService.init( jQuery.parseJSON( this.basketData ) )
-        .done(function()
-        {
-            done();
-        });
+        BasketService.init(jQuery.parseJSON(this.basketData))
+            .done(function()
+            {
+                done();
+            });
     },
 
     template: '#vue-basket-button',
@@ -30,11 +30,10 @@ Vue.component('basket-button', {
         };
     },
 
-    computed:
-    {
+    computed: {
         basketItemSum: function()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
         }
     }
 

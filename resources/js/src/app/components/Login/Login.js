@@ -1,56 +1,54 @@
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-Vue.component('login', 
-{
-	template: '#vue-login',
+Vue.component('login', {
 
-	props:
-	[
-		"modalElement"
-	],
+        template: '#vue-login',
 
-	data: function () 
-	{
-		return {
-			password: "",
-			username: ""
-		};
-	},
+    props: [
+        "modalElement"
+    ],
 
-	methods: 
-	{
-		showLogin: function() 
-		{
-			ModalService.findModal( document.getElementById(this.modalElement) ).show();
-		},
+    data: function()
+    {
+        return {
+            password: "",
+            username: ""
+        };
+    },
 
-		sendLogin: function ()
-		{
-			var component = this;
+    methods: {
+        showLogin: function()
+        {
+            ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
 
-			ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
-				.done(function (response)
-				{
-					ApiService.setToken(response);
+        sendLogin: function()
+        {
+            var component = this;
 
-					if(document.getElementById(component.modalElement) != null)
-					{
-						ModalService.findModal( document.getElementById(component.modalElement) ).hide();
-					}
+            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
 
-					NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
-				})
-				.fail(function (response)
-				{
-					switch(response.code)
-					{
-						case 401:
-							NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
-							break;
-					}
-				});
-		}
-	}
+                    if (document.getElementById(component.modalElement) != null)
+                    {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
+
+                    NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
+                })
+                .fail(function(response)
+                {
+                    switch (response.code)
+                    {
+                        case 401:
+                            NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
+                            break;
+                    }
+                });
+        }
+    }
 });

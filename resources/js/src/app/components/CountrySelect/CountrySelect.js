@@ -1,47 +1,44 @@
-var CountryService    = require( 'services/CountryService' );
+var CountryService = require('services/CountryService');
 
-Vue.component( 'country-select',
-{
-	template: '#vue-country-select',
+Vue.component('country-select', {
 
-	props: 
-	[
-		'countryData',
-		'countryNameMap',
-		'selectedCountryId',
-		'selectedStateId'
-	],
+    template: '#vue-country-select',
 
-	data: function()
-	{
-		return {
-			countryList: [],
-			stateList: []
-		}
-	},
+    props: [
+        'countryData',
+        'countryNameMap',
+        'selectedCountryId',
+        'selectedStateId'
+    ],
 
-	created: function()
-	{
-		this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
+    data: function()
+    {
+        return {
+            countryList: [],
+            stateList  : []
+        };
+    },
 
-		CountryService.translateCountryNames( this.countryNameMap, this.countryList );
-		CountryService.sortCountries( this.countryList );
-	},
+    created: function()
+    {
+        this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
 
-	methods:
-	{
-		countryChanged: function () 
-		{
-			this.selectedStateId = null;
-		}
-	},
+        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
+        CountryService.sortCountries(this.countryList);
+    },
 
-	watch:
-	{
-		'selectedCountryId': function ()
-		{
-			this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
-			this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
-		}
-	}
+    methods: {
+        countryChanged: function()
+        {
+            this.selectedStateId = null;
+        }
+    },
+
+    watch: {
+        'selectedCountryId': function()
+        {
+            this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
+            this.stateList   = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+        }
+    }
 });
