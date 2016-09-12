@@ -1,33 +1,35 @@
 var ApiService = require('services/ApiService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var checkout = {};
     var initPromise;
 
     return {
-        init: init,
-        setCheckout: setCheckout,
+        init                : init,
+        setCheckout         : setCheckout,
         setDeliveryAddressId: setDeliveryAddressId,
-        setBillingAddressId: setBillingAddressId,
+        setBillingAddressId : setBillingAddressId,
         setMethodOfPaymentId: setMethodOfPaymentId,
         setShippingCountryId: setShippingCountryId,
         setShippingProfileId: setShippingProfileId
     };
 
-    function init( checkoutData )
+    function init(checkoutData)
     {
-        if( !initPromise )
+        if (!initPromise)
         {
-            if( !!checkoutData )
+            if (!!checkoutData)
             {
                 initPromise = $.Deferred();
-                checkout = checkoutData;
+                checkout    = checkoutData;
                 initPromise.resolve();
             }
             else
             {
-                initPromise = ApiService.get("rest/checkout").done(function( response ) {
+                initPromise = ApiService.get("rest/checkout").done(function(response)
+                {
                     checkout = response;
                 });
             }
@@ -35,50 +37,52 @@ module.exports = (function($) {
         return initPromise;
     }
 
-    function _set( property, value )
+    function _set(property, value)
     {
         checkout[property] = value;
-        return ApiService.post( "rest/checkout/", checkout ).done(function( response ) {
+        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        {
             checkout = response;
         });
     }
 
-    function setCheckout( checkoutData )
+    function setCheckout(checkoutData)
     {
-        var properties = Object.keys( checkoutData );
-        for( var i = 0; i < properties.length; i++ )
+        var properties = Object.keys(checkoutData);
+        for (var i = 0; i < properties.length; i++)
         {
             checkout[properties[i]] = checkoutData[properties[i]];
         }
 
-        return ApiService.post( "rest/checkout/", checkout ).done(function( response ) {
+        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        {
             checkout = response;
         });
     }
 
-    function setDeliveryAddressId( deliveryAddressId )
+    function setDeliveryAddressId(deliveryAddressId)
     {
-        return _set( "deliveryAddressId", deliveryAddressId );
+        return _set("deliveryAddressId", deliveryAddressId);
     }
 
-    function setBillingAddressId( billingAddressId )
+    function setBillingAddressId(billingAddressId)
     {
-        return _set( "billingAddressId", billingAddressId );
+        return _set("billingAddressId", billingAddressId);
     }
 
-    function setMethodOfPaymentId( methodOfPaymentId )
+    function setMethodOfPaymentId(methodOfPaymentId)
     {
-        return _set( "methodOfPaymentId", methodOfPaymentId );
+        return _set("methodOfPaymentId", methodOfPaymentId);
     }
 
-    function setShippingCountryId( shippingCountryId )
+    function setShippingCountryId(shippingCountryId)
     {
-        return _set( "shippingCountryId", shippingCountryId );
+        return _set("shippingCountryId", shippingCountryId);
     }
 
-    function setShippingProfileId( shippingProfileId )
+    function setShippingProfileId(shippingProfileId)
     {
-        return _set( "shippingProfileId", shippingProfileId );
+        return _set("shippingProfileId", shippingProfileId);
     }
 
 })(jQuery);

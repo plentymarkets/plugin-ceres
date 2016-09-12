@@ -1,26 +1,27 @@
-module.exports = (function($) {
-    
+module.exports = (function($)
+{
+
     return {
         parseShippingCountries: parseShippingCountries,
-        parseShippingStates: parseShippingStates,
-        translateCountryNames: translateCountryNames,
-        sortCountries: sortCountries
+        parseShippingStates   : parseShippingStates,
+        translateCountryNames : translateCountryNames,
+        sortCountries         : sortCountries
     };
 
-    function parseShippingCountries (countryData, id)
+    function parseShippingCountries(countryData, id)
     {
         var countryList       = JSON.parse(countryData);
-        var deliveryCountries =  [];
+        var deliveryCountries = [];
 
-        if(countryList == null)
+        if (countryList == null)
         {
             return deliveryCountries;
         }
 
         for (var key in countryList)
         {
-            var country = countryList[key];
-            var option = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
+            var country     = countryList[key];
+            var option      = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
             option.selected = (id === country.id);
             deliveryCountries.push(option);
         }
@@ -32,7 +33,8 @@ module.exports = (function($) {
     {
         var countryNames = JSON.parse(countryNameData);
 
-        if(countryNames == null){
+        if (countryNames == null)
+        {
             return;
         }
         for (var id in countryNames)
@@ -41,7 +43,7 @@ module.exports = (function($) {
             for (var i = 0, len = countries.length; i < len; i++)
             {
                 var country = countries[i];
-                if(country.id == id)
+                if (country.id == id)
                 {
                     country.name = name;
                     break;
@@ -49,18 +51,24 @@ module.exports = (function($) {
             }
         }
     }
-    
+
     function sortCountries(countries)
     {
         countries.sort(function(a, b)
         {
-            if(a.name < b.name) return -1;
-            if(a.name > b.name) return 1;
+            if (a.name < b.name)
+            {
+                return -1;
+            }
+            if (a.name > b.name)
+            {
+                return 1;
+            }
             return 0;
         });
     }
 
-    function parseShippingStates (countryData, countryID)
+    function parseShippingStates(countryData, countryID)
     {
 
         var states      = [];
@@ -68,7 +76,7 @@ module.exports = (function($) {
         for (var key in countryList)
         {
             var country = countryList[key];
-            if(country.id == countryID)
+            if (country.id == countryID)
             {
                 states = country.states;
                 break;
@@ -77,7 +85,5 @@ module.exports = (function($) {
 
         return states;
     }
-
-
 
 })(jQuery);

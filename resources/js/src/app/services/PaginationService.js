@@ -1,21 +1,22 @@
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var itemsPerPagePrivate = 0;
-    var sortModePrivate = "";
+    var sortModePrivate     = "";
 
     return {
-        itemsPerPage: itemsPerPagePrivate,
-        sortMode: sortModePrivate,
+        itemsPerPage   : itemsPerPagePrivate,
+        sortMode       : sortModePrivate,
         setItemsPerPage: setItemsPerPage,
-        setSortMode: setSortMode
+        setSortMode    : setSortMode
     };
 
-    function setItemsPerPage(itemsPerPage) 
+    function setItemsPerPage(itemsPerPage)
     {
         this.itemsPerPagePrivate = itemsPerPage;
     }
 
-    function setSortMode(sortMode) 
+    function setSortMode(sortMode)
     {
         this.sortModePrivate = sortMode;
     }

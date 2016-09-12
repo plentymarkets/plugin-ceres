@@ -1,30 +1,31 @@
 var ApiService = require('services/ApiService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var basket;
     var readyDeferred;
-    var loading = false;
-    var watchers = [];
+    var loading            = false;
+    var watchers           = [];
     var basketItemToDelete = {};
 
     return {
-        init: init,
-        watch: watch,
-        getBasket: getBasket,
-        addBasketItem: addBasketItem,
-        updateBasketItem: updateBasketItem,
-        deleteBasketItem: deleteBasketItem,
+        init                 : init,
+        watch                : watch,
+        getBasket            : getBasket,
+        addBasketItem        : addBasketItem,
+        updateBasketItem     : updateBasketItem,
+        deleteBasketItem     : deleteBasketItem,
         updateShippingCountry: updateShippingCountry,
-        basketItemToDelete: basketItemToDelete
+        basketItemToDelete   : basketItemToDelete
     };
 
-    function init( basketData )
+    function init(basketData)
     {
-        if( !readyDeferred )
+        if (!readyDeferred)
         {
             readyDeferred = $.Deferred();
-            if( !!basketData )
+            if (!!basketData)
             {
                 basket = basketData;
                 notify();
@@ -32,7 +33,8 @@ module.exports = (function($) {
             }
             else
             {
-                ApiService.get('/rest/basket').done(function( response ) {
+                ApiService.get('/rest/basket').done(function(response)
+                {
                     basket = response;
                     notify();
                     readyDeferred.resolve();
@@ -44,20 +46,20 @@ module.exports = (function($) {
         return readyDeferred;
     }
 
-    function watch( callback )
+    function watch(callback)
     {
-        watchers.push( callback );
-        if( !!basket )
+        watchers.push(callback);
+        if (!!basket)
         {
-            callback( basket );
+            callback(basket);
         }
     }
 
     function notify()
     {
-        for( var i = 0; i < watchers.length; i++ )
+        for (var i = 0; i < watchers.length; i++)
         {
-            watchers[i]( basket );
+            watchers[i](basket);
         }
     }
 
@@ -66,42 +68,45 @@ module.exports = (function($) {
         return basket;
     }
 
-    function addBasketItem( basketItem )
+    function addBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.post( '/rest/basket/items/', basketItem )
-            .done(function( response ) {
+        return ApiService.post('/rest/basket/items/', basketItem)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function updateBasketItem( basketItem )
+    function updateBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.put( '/rest/basket/items/' + basketItem.id, basketItem )
-            .done(function( response ) {
+        return ApiService.put('/rest/basket/items/' + basketItem.id, basketItem)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function updateShippingCountry( basket )
+    function updateShippingCountry(basket)
     {
-        var id = basket.shippingCountryId;
+        var id   = basket.shippingCountryId;
         var self = this;
-        return ApiService.put( '/rest/deliverycountry/'+id, basket)
-            .done(function( response ) {
+        return ApiService.put('/rest/deliverycountry/' + id, basket)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function deleteBasketItem( basketItem )
+    function deleteBasketItem(basketItem)
     {
         var self = this;
         var basketItemId;
-        if( typeof basketItem === "number" )
+        if (typeof basketItem === "number")
         {
             basketItemId = basketItem;
         }
@@ -110,8 +115,9 @@ module.exports = (function($) {
             basketItemId = basketItem.id;
         }
 
-        return ApiService.delete( '/rest/basket/items/' + basketItemId )
-            .done(function( response ) {
+        return ApiService.delete('/rest/basket/items/' + basketItemId)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });

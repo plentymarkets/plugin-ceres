@@ -1,9 +1,10 @@
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var cache = {};
 
     return {
-        addToCache: _addToCache,
+        addToCache  : _addToCache,
         getFromCache: _getFromCache
     };
 
@@ -11,7 +12,7 @@ module.exports = (function($) {
     {
         var variationHTML = {'html': html};
 
-        if(cache[itemId] === undefined)
+        if (cache[itemId] === undefined)
         {
             cache[itemId] = {};
         }
@@ -21,13 +22,13 @@ module.exports = (function($) {
 
     function _getFromCache(itemId, variationId)
     {
-        for(var cachedItemId in cache)
+        for (var cachedItemId in cache)
         {
-            if(cachedItemId == itemId)
+            if (cachedItemId == itemId)
             {
-                for(var cachedVariationId in cache[itemId])
+                for (var cachedVariationId in cache[itemId])
                 {
-                    if(cachedVariationId == variationId)
+                    if (cachedVariationId == variationId)
                     {
                         return cache[itemId][variationId].html;
                     }
@@ -37,6 +38,5 @@ module.exports = (function($) {
 
         return undefined;
     }
-
 
 })(jQuery);

@@ -1,77 +1,78 @@
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var notificationCount = 0;
-    var notifications = new NotificationList();
+    var notifications     = new NotificationList();
 
     return {
-        log:        _log,
-        info:       _info,
-        warn:       _warn,
-        error:      _error,
-        success:    _success,
+        log             : _log,
+        info            : _info,
+        warn            : _warn,
+        error           : _error,
+        success         : _success,
         getNotifications: getNotifications
-    }
+    };
 
-    function _log( message, prefix )
+    function _log(message, prefix)
     {
-        var notification = new Notification( message );
+        var notification = new Notification(message);
 
-        if( !!App.config.logMessages )
+        if (!!App.config.logMessages)
         {
-            console.log( (prefix || '') + '[' + notification.code + '] ' + notification.message );
+            console.log((prefix || '') + '[' + notification.code + '] ' + notification.message);
 
-            for( var i = 0; i < notification.stackTrace.length; i++ )
+            for (var i = 0; i < notification.stackTrace.length; i++)
             {
-                _log( notification.stackTrace[i], " + " );
+                _log(notification.stackTrace[i], " + ");
             }
         }
 
-    return notification;
+        return notification;
     }
 
-    function _info( message )
+    function _info(message)
     {
-        var notification = new Notification( message, 'info' );
+        var notification = new Notification(message, 'info');
 
-        if( !!App.config.printInfos )
+        if (!!App.config.printInfos)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _warn( message )
+    function _warn(message)
     {
-        var notification = new Notification( message, 'warning' );
+        var notification = new Notification(message, 'warning');
 
-        if( !!App.config.printWarnings )
+        if (!!App.config.printWarnings)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _error( message )
+    function _error(message)
     {
-        var notification = new Notification( message, 'danger' );
+        var notification = new Notification(message, 'danger');
 
-        if( !!App.config.printErrors )
+        if (!!App.config.printErrors)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _success( message )
+    function _success(message)
     {
-        var notification = new Notification( message, 'success' );
+        var notification = new Notification(message, 'success');
 
-        if( !!App.config.printSuccess )
+        if (!!App.config.printSuccess)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
@@ -82,52 +83,53 @@ module.exports = (function($) {
         return notifications;
     }
 
-    function _printNotification( notification )
+    function _printNotification(notification)
     {
-        notifications.add( notification );
-        _log( notification );
+        notifications.add(notification);
+        _log(notification);
 
         return notification;
     }
 
-    function Notification( data, context )
+    function Notification(data, context)
     {
-        if( !App.config.printStackTrace )
+        if (!App.config.printStackTrace)
         {
             data.stackTrace = [];
         }
-        var id = notificationCount++;
+        var id   = notificationCount++;
         var self = {
-            id          : id,
-            code        : data.code || 0,
-            message     : data.message || data || "",
-            context     : context || "info",
-            stackTrace  : data.stackTrace || [],
-            close       : close,
-            closeAfter  : closeAfter,
-            trace       : trace
+            id        : id,
+            code      : data.code || 0,
+            message   : data.message || data || "",
+            context   : context || "info",
+            stackTrace: data.stackTrace || [],
+            close     : close,
+            closeAfter: closeAfter,
+            trace     : trace
         };
 
         return self;
 
         function close()
         {
-            notifications.remove( self );
+            notifications.remove(self);
         }
 
-        function closeAfter( timeout )
+        function closeAfter(timeout)
         {
-            setTimeout(function() {
-                notifications.remove( self );
+            setTimeout(function()
+            {
+                notifications.remove(self);
             }, timeout);
         }
 
-        function trace( message, code )
+        function trace(message, code)
         {
-            if( !!App.config.printStackTrace )
+            if (!!App.config.printStackTrace)
             {
                 self.stackTrace.push({
-                    code: code || 0,
+                    code   : code || 0,
                     message: message
                 });
             }
@@ -138,8 +140,8 @@ module.exports = (function($) {
     {
         var elements = [];
         return {
-            all: all,
-            add: add,
+            all   : all,
+            add   : add,
             remove: remove
         };
 
@@ -148,18 +150,18 @@ module.exports = (function($) {
             return elements;
         }
 
-        function add( notification )
+        function add(notification)
         {
-            elements.push( notification )
+            elements.push(notification)
         }
 
-        function remove( notification )
+        function remove(notification)
         {
-            for( var i = 0; i < elements.length; i++ )
+            for (var i = 0; i < elements.length; i++)
             {
-                if( elements[i].id === notification.id )
+                if (elements[i].id === notification.id)
                 {
-                    elements.splice( i, 1 );
+                    elements.splice(i, 1);
                     break;
                 }
             }

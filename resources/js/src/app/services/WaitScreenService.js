@@ -1,12 +1,13 @@
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var overlay = {
-        count: 0,
+        count    : 0,
         isVisible: false
     };
 
     return {
-        getOverlay: getOverlay,
+        getOverlay    : getOverlay,
         showWaitScreen: showWaitScreen,
         hideWaitScreen: hideWaitScreen
     };
@@ -23,22 +24,22 @@ module.exports = (function($) {
         overlay.isVisible = true;
     }
 
-    function hideWaitScreen( force )
+    function hideWaitScreen(force)
     {
         overlay.count = overlay.count || 0;
-        if( overlay.count > 0 )
+        if (overlay.count > 0)
         {
             overlay.count--;
         }
 
-        if( !!force )
+        if (!!force)
         {
             overlay.count = 0;
         }
 
-        if( overlay.count <= 0 )
+        if (overlay.count <= 0)
         {
-            overlay.count = 0;
+            overlay.count   = 0;
             overlay.visible = false;
         }
 
