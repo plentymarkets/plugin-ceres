@@ -1,53 +1,53 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var BasketService = require( 'services/BasketService' );
-var ApiService = require('services/ApiService');
+var BasketService       = require('services/BasketService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-Vue.component( 'add-to-basket', {
+Vue.component('add-to-basket', {
 
     template: '#vue-add-to-basket',
 
     props: [
-      "basketItem",
-      "baseUrl"
+        "basketItem",
+        "baseUrl"
     ],
 
     data: function()
     {
         return {
             quantity: 1
-        }
+        };
     },
 
     methods: {
 
-        addToBasket: function( quantity )
+        addToBasket: function(quantity)
         {
-          var addItemModal = ModalService.findModal($(this.$el.parentElement));
-          addItemModal.setTimeout(10000);
+            var addItemModal = ModalService.findModal($(this.$el.parentElement));
+            addItemModal.setTimeout(10000);
 
-          $(".wrapper-bottom").append(addItemModal.getModalContainer());
+            $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
             BasketService.addBasketItem({
-              variationId: this.basketItem.variationBase.id,
-              quantity: this.quantity
-            }).done( function ()
-              {
+                variationId: this.basketItem.variationBase.id,
+                quantity   : this.quantity
+            }).done(function()
+            {
                 addItemModal.show();
-              })
-              .fail( function ()
-              {
-                NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
-              });
+            })
+                .fail(function()
+                {
+                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                });
         },
 
-        quantityPlus: function ()
+        quantityPlus: function()
         {
             this.quantity++;
         },
 
-        quantityMinus: function ()
+        quantityMinus: function()
         {
             if (this.quantity > 1)
             {
@@ -58,36 +58,34 @@ Vue.component( 'add-to-basket', {
 });
 
 },{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],2:[function(require,module,exports){
-Vue.component( 'address-input-group',
-{
-	template: '#vue-address-input-group',
+Vue.component('address-input-group', {
 
-	props:
-	[
-		'addressData',
-		'locale'
-	],
+    template: '#vue-address-input-group',
 
-	created: function()
-	{
-		if(!this.addressData)
-		{
-			this.addressData = {};
-		}
+    props: [
+        'addressData',
+        'locale'
+    ],
 
-		this.locale = "DE";
-	}
-} );
+    created: function()
+    {
+        if (!this.addressData)
+        {
+            this.addressData = {};
+        }
+
+        this.locale = "DE";
+    }
+});
 
 },{}],3:[function(require,module,exports){
-var ModalService = require( 'services/ModalService' );
+var ModalService = require('services/ModalService');
 
-Vue.component( 'address-select',
-{
+Vue.component('address-select', {
+
     template: '#vue-address-select',
 
-    props:
-    [
+    props: [
         'addressList',
         'addressType',
         'selectedAddressId'
@@ -96,22 +94,22 @@ Vue.component( 'address-select',
     data: function()
     {
         return {
-            selectedAddress  : {},
-            addressModal: {},
-            modalType : "",
-            headline : "",
-            addressToEdit : {},
-            addressModalId: ""
-        }
+            selectedAddress: {},
+            addressModal   : {},
+            modalType      : "",
+            headline       : "",
+            addressToEdit  : {},
+            addressModalId : ""
+        };
     },
 
     created: function()
     {
-        if ( !this.isAddressListEmpty() )
+        if (!this.isAddressListEmpty())
         {
-            for(var index in this.addressList)
+            for (var index in this.addressList)
             {
-                if(this.addressList[index].id == this.selectedAddressId)
+                if (this.addressList[index].id == this.selectedAddressId)
                 {
                     this.selectedAddress = this.addressList[index];
                 }
@@ -130,13 +128,12 @@ Vue.component( 'address-select',
         this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
     },
 
-    methods:
-    {
+    methods: {
         onAddressChanged: function(index)
         {
             this.selectedAddress = this.addressList[index];
-            
-            this.$dispatch( 'address-changed', this.selectedAddress );
+
+            this.$dispatch('address-changed', this.selectedAddress);
         },
 
         isAddressListEmpty: function()
@@ -144,14 +141,14 @@ Vue.component( 'address-select',
             return !(this.addressList && this.addressList.length > 0);
         },
 
-        showNameStrong: function ()
+        showNameStrong: function()
         {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length == 0;
         },
 
-        showAdd : function()
+        showAdd: function()
         {
-            this.modalType = "create";
+            this.modalType     = "create";
             this.addressToEdit = {};
             this.updateHeadline();
 
@@ -159,9 +156,9 @@ Vue.component( 'address-select',
             this.addressModal.show();
         },
 
-        showEdit : function(address)
+        showEdit: function(address)
         {
-            this.modalType = "update";
+            this.modalType     = "update";
             this.addressToEdit = address;
             this.updateHeadline();
 
@@ -176,24 +173,23 @@ Vue.component( 'address-select',
 
         updateHeadline: function()
         {
-            var headline     = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
-            headline    += (this.modalType == "update") ? " bearbeiten" : " anlegen";
+            var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
+            headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
             this.headline = headline;
         }
 
     }
-} );
+});
 
 },{"services/ModalService":46}],4:[function(require,module,exports){
-var AddressService = require('services/AddressService');
-var ValidationService = require( 'services/ValidationService' );
+var AddressService    = require('services/AddressService');
+var ValidationService = require('services/ValidationService');
 
-Vue.component( 'create-update-address',
-{
+Vue.component('create-update-address', {
+
     template: '#vue-create-update-address',
 
-    props:
-    [
+    props: [
         "addressData",
         "addressModal",
         "addressList",
@@ -201,30 +197,29 @@ Vue.component( 'create-update-address',
         "addressType"
     ],
 
-    methods:
-    {
+    methods: {
         validate: function()
         {
             var self = this;
-            ValidationService.validate( $( '#my-form' ) )
-                .done( function()
+            ValidationService.validate($('#my-form'))
+                .done(function()
                 {
                     self.saveAddress();
-                } )
-                .fail( function( invalidFields )
+                })
+                .fail(function(invalidFields)
                 {
-                    ValidationService.markInvalidFields( invalidFields, "error" );
-                } );
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
 
         },
 
         saveAddress: function()
         {
-            if(this.modalType === "create")
+            if (this.modalType === "create")
             {
                 this.createAddress()
             }
-            else if(this.modalType === "update")
+            else if (this.modalType === "update")
             {
                 this.updateAddress()
             }
@@ -234,13 +229,13 @@ Vue.component( 'create-update-address',
         {
             AddressService
                 .updateAddress(this.addressData, this.addressType)
-                .done(function ()
+                .done(function()
                 {
                     this.addressModal.hide();
-                    for ( var key in this.addressList)
+                    for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
-                        if(address.id == this.addressData.id)
+                        if (address.id == this.addressData.id)
                         {
                             address = this.addressData;
                             break;
@@ -253,21 +248,20 @@ Vue.component( 'create-update-address',
         {
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
-                .done(function ()
+                .done(function()
                 {
                     this.addressModal.hide();
-                    this.addressList.push( this.addressData );
+                    this.addressList.push(this.addressData);
                 }.bind(this));
         }
     }
 
-} );
+});
 
 },{"services/AddressService":40,"services/ValidationService":50}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
-Vue.component( 'invoice-address-select',
-{
+Vue.component('invoice-address-select', {
 
     template: '<address-select v-on:address-changed="addressChanged" address-type="1" :address-list="addressList" :selected-address-id="selectedAddressId"></address-select>',
 
@@ -279,48 +273,45 @@ Vue.component( 'invoice-address-select',
         CheckoutService.init();
     },
 
-    methods:
-    {
+    methods: {
         addEventListener: function()
         {
             //listen on APIService events and handle new data
         },
 
-        addressChanged: function( selectedAddress )
+        addressChanged: function(selectedAddress)
         {
             CheckoutService.setBillingAddressId(selectedAddress.id);
         }
     }
-} );
+});
 
 },{"services/CheckoutService":43}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
-Vue.component( 'shipping-address-select',
-{
+Vue.component('shipping-address-select', {
 
     template: '<address-select v-on:address-changed="addressChanged" address-type="2" :address-list="addressList" :selected-address-id="selectedAddressId"></address-select>',
 
-    props: ['addressList' , 'selectedAddressId'],
+    props: ['addressList', 'selectedAddressId'],
 
     created: function()
     {
         this.addEventListener();
     },
 
-    methods:
-    {
+    methods: {
         addEventListener: function()
         {
             //listen on APIService events and handle new data
         },
 
-        addressChanged: function( selectedAddress )
+        addressChanged: function(selectedAddress)
         {
             CheckoutService.setDeliveryAddressId(selectedAddress.id);
         }
     }
-} );
+});
 
 },{"services/CheckoutService":43}],7:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
@@ -328,18 +319,18 @@ var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-button', {
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch(function( data )
+        BasketService.watch(function(data)
         {
-            self.$set( 'basket', data.basket );
+            self.$set('basket', data.basket);
         });
-        BasketService.init( jQuery.parseJSON( this.basketData ) )
-        .done(function()
-        {
-            done();
-        });
+        BasketService.init(jQuery.parseJSON(this.basketData))
+            .done(function()
+            {
+                done();
+            });
     },
 
     template: '#vue-basket-button',
@@ -355,26 +346,25 @@ Vue.component('basket-button', {
         };
     },
 
-    computed:
-    {
+    computed: {
         basketItemSum: function()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
         }
     }
 
 });
 
 },{"services/BasketService":42,"services/MonetaryFormatService":47}],8:[function(require,module,exports){
-var BasketService         = require( 'services/BasketService' );
-var MonetaryFormatService = require( 'services/MonetaryFormatService' );
-var ModalService          = require( 'services/ModalService' );
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var ModalService          = require('services/ModalService');
 
-Vue.component( 'basket-item-list', {
+Vue.component('basket-item-list', {
 
     template: '#vue-basket-item-list',
 
-    props   : [
+    props: [
         "baseUrl"
     ],
 
@@ -387,69 +377,71 @@ Vue.component( 'basket-item-list', {
         };
     },
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch( function( data )
+        BasketService.watch(function(data)
         {
-            self.$set( 'basket', data.basket );
-            self.$set( 'basketItems', data.basketItems );
-            self.$set( 'items', data.items );
-        } );
-        BasketService.init().done( function()
+            self.$set('basket', data.basket);
+            self.$set('basketItems', data.basketItems);
+            self.$set('items', data.items);
+        });
+        BasketService.init().done(function()
         {
             done();
-        } );
+        });
     },
 
-    methods:
-    {
-        deleteItem: function( basketItem )
+    methods: {
+        deleteItem       : function(basketItem)
         {
             $(".art-" + basketItem.variationId).toggleClass('wait');
 
             BasketService.deleteBasketItem(basketItem);
         },
-        calcPrice : function( basketItem )
+
+        calcPrice        : function(basketItem)
+        {
+            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
+            var priceSum = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+
+            return MonetaryFormatService.formatMonetary(priceSum, currency);
+        },
+
+        formatRetailPrice: function(basketItem)
         {
             var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var priceSum    = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
 
-            return MonetaryFormatService.formatMonetary( priceSum, currency );
-        },
-        formatRetailPrice: function (basketItem)
-        {
-          var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-          var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
-
-          return MonetaryFormatService.formatMonetary( retailPrice, currency );
-        },
-        checkName: function (basketItem, name)
-        {
-          if(name !== '' )
-          {
-            return name + " " + this.items[basketItem.variationId].variationBase.variationName;
-          }
-          else
-          {
-            return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
-          }
+            return MonetaryFormatService.formatMonetary(retailPrice, currency);
         },
 
-        setLinkToItem: function (basketItem)
+        checkName        : function(basketItem, name)
         {
-          var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
-          var i = urlContent.length - 1;
-
-          return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
+            if (name !== '')
+            {
+                return name + " " + this.items[basketItem.variationId].variationBase.variationName;
+            }
+            else
+            {
+                return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
+            }
         },
 
-        getImage: function (image)
+        setLinkToItem: function(basketItem)
         {
-          return this.baseUrl + "/" + image;
+            var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
+            var i          = urlContent.length - 1;
+
+            return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
+        },
+
+        getImage: function(image)
+        {
+            return this.baseUrl + "/" + image;
         }
     }
-})
+});
 
 },{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],9:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
@@ -546,218 +538,221 @@ Vue.component('basket-preview-item', {
     data: function()
     {
         return {
-            basket: {},
+            basket     : {},
             basketItems: [],
-            items: {}
+            items      : {}
         };
     },
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch( function( data )
+        BasketService.watch(function(data)
         {
-            self.$set( 'basket', data.basket );
-            self.$set( 'basketItems', data.basketItems );
-            self.$set( 'items', data.items );
-        } );
-        BasketService.init().done( function()
+            self.$set('basket', data.basket);
+            self.$set('basketItems', data.basketItems);
+            self.$set('items', data.items);
+        });
+        BasketService.init().done(function()
         {
             done();
-        } );
+        });
     },
 
-    methods:
-    {
-        calcPrice: function (basketItem)
+    methods: {
+        calcPrice: function(basketItem)
         {
-          var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-          var price = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
+            var price    = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
 
-          return MonetaryFormatService.formatMonetary(price, currency);
+            return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        getBasePrice: function (basketItem)
+        getBasePrice: function(basketItem)
         {
-          var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-          var price = this.items[basketItem.variationId].variationRetailPrice.basePrice;
+            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
+            var price    = this.items[basketItem.variationId].variationRetailPrice.basePrice;
 
-          return MonetaryFormatService.formatMonetary(price, currency);
+            return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        deleteItem: function (basketItem, event)
+        deleteItem: function(basketItem, event)
         {
-          var _self = this;
+            var _self = this;
 
-          if($(event.currentTarget).hasClass('btn-link'))
-          {
-            this.toggleDeleteBtnClass(event.currentTarget);
-            $(event.currentTarget).find('.message').text('Jetzt löschen');
-          }
-          else
-          {
-            $(this.$el.nextElementSibling).toggleClass('wait');
-
-            BasketService.deleteBasketItem(basketItem)
-            .done( function ()
+            if ($(event.currentTarget).hasClass('btn-link'))
             {
-              $(_self.$el.nextElementSibling).toggleClass('wait');
-            });
-          }
-        },
-
-        toggleDeleteBtnClass: function (element)
-        {
-          $(element).toggleClass('btn-link');
-          $(element).toggleClass('btn-danger');
-        },
-
-        getImage: function (variationId)
-        {
-          var path = '';
-
-          for(var i = 0; i < this.items[variationId].variationImageList.length; i++)
-          {
-            if(this.items[variationId].variationImageList[i].path !== '')
-            {
-              path = this.items[variationId].variationImageList[i].path;
+                this.toggleDeleteBtnClass(event.currentTarget);
+                $(event.currentTarget).find('.message').text('Jetzt löschen');
             }
-          }
-          return this.baseUrl + "/" + path;
-        },
-
-        updateBasketItemQuantity: function (basketItem, value)
-        {
-          var _self = this;
-
-          if(basketItem.quantity > 1 || value == 1)
-          {
-            basketItem.quantity = basketItem.quantity + value;
-            $(this.$el.nextElementSibling).toggleClass('wait');
-
-            BasketService.updateBasketItem(basketItem)
-            .done( function ()
+            else
             {
-              $(_self.$el.nextElementSibling).toggleClass('wait');
-            });
-          }
+                $(this.$el.nextElementSibling).toggleClass('wait');
+
+                BasketService.deleteBasketItem(basketItem)
+                    .done(function()
+                    {
+                        $(_self.$el.nextElementSibling).toggleClass('wait');
+                    });
+            }
         },
 
-        checkName: function (variationId, name)
+        toggleDeleteBtnClass: function(element)
         {
-          if(name !== '')
-          {
-            return name + " " + this.items[variationId].variationBase.variationName;
-          }
-          return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+            $(element).toggleClass('btn-link');
+            $(element).toggleClass('btn-danger');
         },
 
-        setLinkToItem: function (variationId)
+        getImage: function(variationId)
         {
-          var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
-          var i = urlContent.length - 1;
+            var path = '';
 
-          return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
+            for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
+            {
+                if (this.items[variationId].variationImageList[i].path !== '')
+                {
+                    path = this.items[variationId].variationImageList[i].path;
+                }
+            }
+            return this.baseUrl + "/" + path;
+        },
+
+        updateBasketItemQuantity: function(basketItem, value)
+        {
+            var _self = this;
+
+            if (basketItem.quantity > 1 || value == 1)
+            {
+                basketItem.quantity = basketItem.quantity + value;
+                $(this.$el.nextElementSibling).toggleClass('wait');
+
+                BasketService.updateBasketItem(basketItem)
+                    .done(function()
+                    {
+                        $(_self.$el.nextElementSibling).toggleClass('wait');
+                    });
+            }
+        },
+
+        checkName: function(variationId, name)
+        {
+            if (name !== '')
+            {
+                return name + " " + this.items[variationId].variationBase.variationName;
+            }
+            return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+        },
+
+        setLinkToItem: function(variationId)
+        {
+            var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
+            var i          = urlContent.length - 1;
+
+            return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
         }
     }
 });
 
 },{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],11:[function(require,module,exports){
-var BasketService  = require( 'services/BasketService' );
-var CountryService = require( 'services/CountryService' );
+var BasketService  = require('services/BasketService');
+var CountryService = require('services/CountryService');
 
-Vue.component( 'basket-shipping-country',
+Vue.component('basket-shipping-country', {
+
+    template: '#vue-basket-shipping-country',
+
+    props: [
+        "countryData",
+        "countryNameData"
+    ],
+
+    data: function()
+    {
+        return {
+            shippingCountries: [],
+            select           : {}
+        }
+    },
+
+    methods: {
+        updateShippingCountry: function()
+        {
+            var basket               = BasketService.getBasket().basket;
+            basket.shippingCountryId = this.select.id;
+            console.log("updateShippingCountry", JSON.stringify(this.select));
+            BasketService.updateShippingCountry(basket);
+        },
+
+        initSelected: function()
+        {
+            var nothingSelected = true;
+            for (var key in this.countryList)
+            {
+                var country = countryList[key];
+                if (country.selected)
+                {
+                    this.select     = country;
+                    nothingSelected = false;
+                    break;
+                }
+            }
+            if (nothingSelected)
+            {
+                this.shippingCountries[0].selected = true;
+                this.select                        = this.shippingCountries[0];
+            }
+        }
+    },
+    ready  : function()
     {
 
-        template: '#vue-basket-shipping-country',
+        var shippingId         = BasketService.getBasket().basket.shippingCountryId;
+        this.shippingCountries = CountryService.parseShippingCountries(this.countryData, shippingId);
+        this.initSelected();
+        CountryService.translateCountryNames(this.countryNameData, this.shippingCountries);
+        CountryService.sortCountries(this.shippingCountries);
+    }
 
-        props: [
-            "countryData",
-            "countryNameData"
-        ],
-
-        data: function()
-        {
-            return {
-                shippingCountries: [],
-                select           : {}
-            }
-        },
-
-        methods:
-        {
-            updateShippingCountry: function()
-            {
-                var basket               = BasketService.getBasket().basket;
-                basket.shippingCountryId = this.select.id;
-                console.log("updateShippingCountry", JSON.stringify(this.select));
-                BasketService.updateShippingCountry( basket );
-            },
-
-            initSelected: function()
-            {
-                var nothingSelected = true;
-                for ( var key in this.countryList )
-                {
-                    var country = countryList[key];
-                    if ( country.selected )
-                    {
-                        this.select = country;
-                        nothingSelected = false;
-                        break;
-                    }
-                }
-                if ( nothingSelected )
-                {
-                    this.shippingCountries[0].selected = true;
-                    this.select                        = this.shippingCountries[0];
-                }
-            }
-        },
-        ready  : function()
-        {
-
-            var shippingId         = BasketService.getBasket().basket.shippingCountryId;
-            this.shippingCountries = CountryService.parseShippingCountries( this.countryData, shippingId );
-            this.initSelected();
-            CountryService.translateCountryNames( this.countryNameData, this.shippingCountries );
-            CountryService.sortCountries( this.shippingCountries );
-        }
-
-    } )
+});
 
 },{"services/BasketService":42,"services/CountryService":44}],12:[function(require,module,exports){
-var BasketService = require('services/BasketService');
+var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-total-sum', {
+
     props: [
         "basketData",
         "showFull"
     ],
 
-    activate: function( done ) {
+    activate: function(done)
+    {
         var self = this;
-        BasketService.watch(function( data ) {
-            self.$set( 'basket', data.basket );
+        BasketService.watch(function(data)
+        {
+            self.$set('basket', data.basket);
         });
-        BasketService.init( jQuery.parseJSON(this.basketData) ).done(function() {
+        BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
+        {
             done();
         });
     },
 
     template: '#vue-basket-total-sum',
 
-    data: function() {
+    data: function()
+    {
         return {
-            basket: {},
+            basket: {}
         };
     },
 
     methods: {
-       formatPrice: function (price, currency) {
-         return MonetaryFormatService.formatMonetary(price, currency);
-       }
+        formatPrice: function(price, currency)
+        {
+            return MonetaryFormatService.formatMonetary(price, currency);
+        }
     }
 
 });
@@ -767,170 +762,166 @@ var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
 
-Vue.component( 'category-list-item',
-{
+Vue.component('category-list-item', {
 
     template: '#vue-category-list-item',
 
     props: [
-      "item",
-      "baseUrl"
+        "item",
+        "baseUrl"
     ],
 
-    methods:
-    {
+    methods: {
 
-      addToBasket: function ()
-      {
-        var addItemModal = ModalService.findModal(this.$el);
-        addItemModal.setTimeout(10000);
-
-        $(".wrapper-bottom").append(addItemModal.getModalContainer());
-
-        BasketService.addBasketItem({
-          variationId: this.item.variationBase.id,
-          quantity: 1
-        })
-        .done( function ()
+        addToBasket: function()
         {
-          addItemModal.show();
-          NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
-        })
-        .fail( function ()
-        {
-          NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
-        });
-      },
+            var addItemModal = ModalService.findModal(this.$el);
+            addItemModal.setTimeout(10000);
 
-      getImage: function ()
-      {
-        for(var i = 0; i < this.item.variationImageList.length; i++)
+            $(".wrapper-bottom").append(addItemModal.getModalContainer());
+
+            BasketService.addBasketItem({
+                variationId: this.item.variationBase.id,
+                quantity   : 1
+            })
+                .done(function()
+                {
+                    addItemModal.show();
+                    NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
+                })
+                .fail(function()
+                {
+                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
+                });
+        },
+
+        getImage: function()
         {
-          if(this.item.variationImageList[i].path !== '')
-          {
-             return this.baseUrl +  "/" + this.item.variationImageList[i].path;
-          }
+            for (var i = 0; i < this.item.variationImageList.length; i++)
+            {
+                if (this.item.variationImageList[i].path !== '')
+                {
+                    return this.baseUrl + "/" + this.item.variationImageList[i].path;
+                }
+            }
+            return null;
+        },
+
+        checkName: function(name)
+        {
+            if (name !== '')
+            {
+                return name + " " + this.item.variationBase.variationName;
+            }
+            else
+            {
+                return this.item.itemDescription.name1 + " " + this.item.variationBase.variationName;
+            }
+        },
+
+        setLinkToItem: function()
+        {
+            var urlContent = this.item.itemDescription.urlContent.split("/");
+            var i          = urlContent.length - 1;
+
+            return "/" + urlContent[i] + "/" + this.item.itemBase.id + "/" + this.item.variationBase.id;
         }
-        return null;
-      },
-
-      checkName: function (name)
-      {
-        if(name != '' )
-        {
-          return name + " " + this.item.variationBase.variationName;
-        }
-        else
-        {
-          return this.item.itemDescription.name1 + " " + this.item.variationBase.variationName;
-        }
-      },
-
-      setLinkToItem: function ()
-      {
-        var urlContent = this.item.itemDescription.urlContent.split("/");
-        var i = urlContent.length - 1;
-
-        return "/" + urlContent[i] + "/" + this.item.itemBase.id + "/" + this.item.variationBase.id;
-      }
     }
 });
 
 },{"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],14:[function(require,module,exports){
-var BasketService = require( 'services/BasketService' );
-var ApiService = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var BasketService         = require('services/BasketService');
+var ApiService            = require('services/ApiService');
+var NotificationService   = require('services/NotificationService');
+var ModalService          = require('services/ModalService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
-Vue.component( 'add-item-confirm', {
+Vue.component('add-item-confirm', {
 
     props: [
-      "basketItem",
-      "baseUrl",
-      "quantity"
+        "basketItem",
+        "baseUrl",
+        "quantity"
     ],
 
     template: '#vue-add-item-confirm',
 
     methods: {
 
-      getImage: function ()
-      {
-        var path = '';
-
-        for(var i = 0; i < this.basketItem.variationImageList.length; i++)
+        getImage: function()
         {
-          if(this.basketItem.variationImageList[i].path !== '')
-          {
-            path = this.basketItem.variationImageList[i].path;
-          }
+            var path = '';
+
+            for (var i = 0; i < this.basketItem.variationImageList.length; i++)
+            {
+                if (this.basketItem.variationImageList[i].path !== '')
+                {
+                    path = this.basketItem.variationImageList[i].path;
+                }
+            }
+            return this.baseUrl + "/" + path;
         }
-        return this.baseUrl + "/" + path;
-      }
 
     }
 });
 
 },{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/NotificationService":48}],15:[function(require,module,exports){
-var CountryService    = require( 'services/CountryService' );
+var CountryService = require('services/CountryService');
 
-Vue.component( 'country-select',
-{
-	template: '#vue-country-select',
+Vue.component('country-select', {
 
-	props: 
-	[
-		'countryData',
-		'countryNameMap',
-		'selectedCountryId',
-		'selectedStateId'
-	],
+    template: '#vue-country-select',
 
-	data: function()
-	{
-		return {
-			countryList: [],
-			stateList: []
-		}
-	},
+    props: [
+        'countryData',
+        'countryNameMap',
+        'selectedCountryId',
+        'selectedStateId'
+    ],
 
-	created: function()
-	{
-		this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
+    data: function()
+    {
+        return {
+            countryList: [],
+            stateList  : []
+        };
+    },
 
-		CountryService.translateCountryNames( this.countryNameMap, this.countryList );
-		CountryService.sortCountries( this.countryList );
-	},
+    created: function()
+    {
+        this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
 
-	methods:
-	{
-		countryChanged: function () 
-		{
-			this.selectedStateId = null;
-		}
-	},
+        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
+        CountryService.sortCountries(this.countryList);
+    },
 
-	watch:
-	{
-		'selectedCountryId': function ()
-		{
-			this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
-			this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
-		}
-	}
+    methods: {
+        countryChanged: function()
+        {
+            this.selectedStateId = null;
+        }
+    },
+
+    watch: {
+        'selectedCountryId': function()
+        {
+            this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
+            this.stateList   = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+        }
+    }
 });
 
 },{"services/CountryService":44}],16:[function(require,module,exports){
-Vue.component( 'coupon',
-    {
-        template: '#vue-coupon'
-    } );
+Vue.component('coupon', {
+
+    template: '#vue-coupon'
+
+});
 
 },{}],17:[function(require,module,exports){
-var BasketService = require( 'services/BasketService' );
+var BasketService = require('services/BasketService');
 
-Vue.component( 'delete-from-basket', {
+Vue.component('delete-from-basket', {
 
     template: '#vue-delete-from-basket',
 
@@ -940,16 +931,17 @@ Vue.component( 'delete-from-basket', {
 
     methods: {
 
-      deleteItem: function () {
-        BasketService.deleteBasketItem(this.basketItem);
-      }
+        deleteItem: function()
+        {
+            BasketService.deleteBasketItem(this.basketItem);
+        }
 
     }
 
-} );
+});
 
 },{"services/BasketService":42}],18:[function(require,module,exports){
-Vue.component( 'item-availability-text', {
+Vue.component('item-availability-text', {
 
     template: '<span class="availability-text">${ availabilityText }</span>',
 
@@ -958,27 +950,30 @@ Vue.component( 'item-availability-text', {
     ],
 
     computed: {
-      availabilityText: function () {
-        switch(this.availability) {
-          case '1': return 'Auf Lager';
-                  break;
-          case '2':
-          case '3':
-          case '4':
-          case '5':
-          case '6':
-          case '7':
-          case '8':
-          case '9': return 'In Kürze verfügbar';
-                  break;
-          case '10': return 'Liefertermin auf Anfrage';
-                  break;
-          default: return 0;
+        availabilityText: function()
+        {
+            switch (this.availability)
+            {
+                case '1':
+                    return 'Auf Lager';
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    return 'In Kürze verfügbar';
+                case '10':
+                    return 'Liefertermin auf Anfrage';
+                default:
+                    return 0;
+            }
         }
-      }
     }
 
-} );
+});
 
 },{}],19:[function(require,module,exports){
 var BasketService = require('services/BasketService');
@@ -988,27 +983,30 @@ Vue.component('item-count-to-basket', {
     template: '#vue-item-count-to-basket',
 
     props: [
-      'basketItem',
-      'quantity'
+        'basketItem',
+        'quantity'
     ],
 
     methods: {
 
-      quantityPlus: function () {
-        this.quantity++;
+        quantityPlus: function()
+        {
+            this.quantity++;
 
-        this.basketItem.quantity = this.quantity;
-        BasketService.updateBasketItem(this.basketItem);
-      },
+            this.basketItem.quantity = this.quantity;
+            BasketService.updateBasketItem(this.basketItem);
+        },
 
-      quantityMinus: function () {
-        if (this.quantity > 1) {
-          this.quantity--;
+        quantityMinus: function()
+        {
+            if (this.quantity > 1)
+            {
+                this.quantity--;
 
-          this.basketItem.quantity = this.quantity;
-          BasketService.updateBasketItem(this.basketItem);
+                this.basketItem.quantity = this.quantity;
+                BasketService.updateBasketItem(this.basketItem);
+            }
         }
-      }
     }
 });
 
@@ -1017,6 +1015,7 @@ var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
 Vue.component("infinite-scroll-item-list", {
+
     props: {
         infiniteConfig: {
             limit     : 20,           // count of items to load.
@@ -1041,9 +1040,9 @@ Vue.component("infinite-scroll-item-list", {
         {
             var self    = this;
             var data    = {
-                limit: self.infiniteConfig.limit,
+                limit : self.infiniteConfig.limit,
                 offset: self.infiniteConfig.offset,
-                page: self.infiniteConfig.offset / self.infiniteConfig.limit
+                page  : self.infiniteConfig.offset / self.infiniteConfig.limit
             };
             self.isBusy = true;
 
@@ -1125,12 +1124,11 @@ Vue.component("infinite-scroll-item-list", {
 },{"services/LoadItemsService":45,"services/PaginationService":49,"vue-infinite-scroll":55}],21:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
-Vue.component('item-list-sort',
-{
+Vue.component('item-list-sort', {
+
     template: '#vue-item-list-sort',
 
-    props: 
-    {
+    props: {
         sortedDataList    : String,
         defaultSorting    : String,
         topCell           : String,
@@ -1157,30 +1155,29 @@ Vue.component('item-list-sort',
             sortingList         : [],
             itemPerPageList     : [],
             itemsPerPageSelected: 0
-        }
+        };
     },
 
-    methods: 
-    {
+    methods: {
         initPropsValues: function()
         {
             this.sortedDataList = JSON.parse(this.sortedDataList);
 
             if (this.sortedDataList)
             {
-                this.topCell            = this.sortedDataList.indexOf("top_cell") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.itemAsc            = this.sortedDataList.indexOf("item_asc") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.itemDesc           = this.sortedDataList.indexOf("item_desc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.nameAsc            = this.sortedDataList.indexOf("name_asc") > -1              || this.sortedDataList.indexOf("all") > -1;
-                this.nameDesc           = this.sortedDataList.indexOf("name_desc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.priceAsc           = this.sortedDataList.indexOf("price_asc") > -1             || this.sortedDataList.indexOf("all") > -1;
-                this.priceDesc          = this.sortedDataList.indexOf("price_desc") > -1            || this.sortedDataList.indexOf("all") > -1;
-                this.releaseAsc         = this.sortedDataList.indexOf("release_asc") > -1           || this.sortedDataList.indexOf("all") > -1;
-                this.releaseDesc        = this.sortedDataList.indexOf("release_desc") > -1          || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialAsc    = this.sortedDataList.indexOf("store_special_asc") > -1     || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialDesc   = this.sortedDataList.indexOf("store_special_desc") > -1    || this.sortedDataList.indexOf("all") > -1;
-                this.idDesc             = this.sortedDataList.indexOf("id_desc") > -1               || this.sortedDataList.indexOf("all") > -1;
-                this.random             = this.sortedDataList.indexOf("random") > -1                || this.sortedDataList.indexOf("all") > -1;
+                this.topCell          = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemAsc          = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemDesc         = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameAsc          = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameDesc         = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceAsc         = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceDesc        = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseAsc       = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseDesc      = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialAsc  = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialDesc = this.sortedDataList.indexOf("store_special_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.idDesc           = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.random           = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
             }
         },
 
@@ -1307,15 +1304,14 @@ Vue.component('item-list-sort',
 });
 
 },{"services/PaginationService":49}],22:[function(require,module,exports){
-var ApiService = require( 'services/ApiService' );
-var PaginationService = require( 'services/PaginationService' );
+var ApiService        = require('services/ApiService');
+var PaginationService = require('services/PaginationService');
 
-Vue.component( 'item-list-pagination', 
-{
+Vue.component('item-list-pagination', {
+
     template: '#vue-item-list-pagination',
 
-    props: 
-    [
+    props: [
         'paginationPosition',
         'position',
         'itemList',
@@ -1325,46 +1321,45 @@ Vue.component( 'item-list-pagination',
     data: function()
     {
         return {
-            currentPaginationEntry  : 1,
-            currentURL              : "",
-            numberOfEntries         : 1
-        }
+            currentPaginationEntry: 1,
+            currentURL            : "",
+            numberOfEntries       : 1
+        };
     },
 
     ready: function()
     {
-        this.currentPaginationEntry         = this.getQueryStringValue( "page" );
-        var url                             = window.location.href;
-        this.currentURL                     = url.replace( "&page=" + this.currentPaginationEntry, "" );
-        this.currentPaginationEntry         = parseInt( this.currentPaginationEntry ) || 1;
+        this.currentPaginationEntry = this.getQueryStringValue("page");
+        var url                     = window.location.href;
+        this.currentURL             = url.replace("&page=" + this.currentPaginationEntry, "");
+        this.currentPaginationEntry = parseInt(this.currentPaginationEntry) || 1;
 
         this.numberOfEntries = this.calculateMaxPages();
 
-        if ( this.currentPaginationEntry < 0 )
+        if (this.currentPaginationEntry < 0)
         {
             this.currentPaginationEntry = 1;
         }
-        else if ( this.currentPaginationEntry > this.numberOfEntries )
+        else if (this.currentPaginationEntry > this.numberOfEntries)
         {
             this.currentPaginationEntry = this.numberOfEntries;
         }
     },
 
-    methods: 
-    {
-        getQueryStringValue: function( key )
+    methods: {
+        getQueryStringValue: function(key)
         {
-            return decodeURI( window.location.search.replace( new RegExp( "^(?:.*[&\\?]" + encodeURI( key ).replace( /[\.\+\*]/g, "\\$&" ) + "(?:\\=([^&]*))?)?.*$", "i" ), "$1" ) );
+            return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         },
-        
+
         calculateMaxPages: function()
         {
-            var pages           = ( this.maxCount / PaginationService.itemsPerPage );
-            var roundedPages    = pages.toString().split( '.' );
+            var pages        = ( this.maxCount / PaginationService.itemsPerPage );
+            var roundedPages = pages.toString().split('.');
 
-            if( roundedPages[1] > 0 )
+            if (roundedPages[1] > 0)
             {
-                roundedPages[0] = parseInt( roundedPages[0] ) + 1;
+                roundedPages[0] = parseInt(roundedPages[0]) + 1;
             }
 
             return roundedPages[0];
@@ -1372,26 +1367,26 @@ Vue.component( 'item-list-pagination',
 
         updateItemCategoryList: function(page)
         {
-            if(this.currentURL.split( '?' ).length > 0)
+            if (this.currentURL.split('?').length > 0)
             {
-                this.currentURL = this.currentURL.split( '?' )[0];
+                this.currentURL = this.currentURL.split('?')[0];
             }
 
-            var url  = this.currentURL + "?page=" + page + "&items_per_page=" + PaginationService.itemsPerPage;
+            var url = this.currentURL + "?page=" + page + "&items_per_page=" + PaginationService.itemsPerPage;
 
-            window.open( url, "_self" );
+            window.open(url, "_self");
         },
 
         showPagination: function()
         {
-            return this.paginationPosition.includes( this.position );
+            return this.paginationPosition.includes(this.position);
         },
 
         showFirstPaginationEntry: function()
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 2 )
+            if (this.currentPaginationEntry <= 2)
             {
                 show = false;
             }
@@ -1408,7 +1403,7 @@ Vue.component( 'item-list-pagination',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry < this.numberOfEntries - 1 )
+            if (this.currentPaginationEntry < this.numberOfEntries - 1)
             {
                 show = true;
             }
@@ -1420,7 +1415,7 @@ Vue.component( 'item-list-pagination',
         {
             var previousPage = this.currentPaginationEntry - 1;
 
-            if ( previousPage <= 1 )
+            if (previousPage <= 1)
             {
                 previousPage = 1;
             }
@@ -1432,7 +1427,7 @@ Vue.component( 'item-list-pagination',
         {
             var nextPage = this.currentPaginationEntry + 1;
 
-            if ( nextPage >= this.numberOfEntries )
+            if (nextPage >= this.numberOfEntries)
             {
                 nextPage = this.numberOfEntries;
             }
@@ -1444,7 +1439,7 @@ Vue.component( 'item-list-pagination',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 3 )
+            if (this.currentPaginationEntry <= 3)
             {
                 show = false;
             }
@@ -1454,9 +1449,9 @@ Vue.component( 'item-list-pagination',
 
         showDotsRight: function()
         {
-            var show     = true;
+            var show = true;
 
-            if ( this.currentPaginationEntry >= this.numberOfEntries - 2 )
+            if (this.currentPaginationEntry >= this.numberOfEntries - 2)
             {
                 show = false;
             }
@@ -1468,7 +1463,7 @@ Vue.component( 'item-list-pagination',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry  > 1 )
+            if (this.currentPaginationEntry > 1)
             {
                 show = true;
             }
@@ -1480,7 +1475,7 @@ Vue.component( 'item-list-pagination',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry  == this.numberOfEntries )
+            if (this.currentPaginationEntry == this.numberOfEntries)
             {
                 show = false;
             }
@@ -1488,13 +1483,13 @@ Vue.component( 'item-list-pagination',
             return show;
         }
     }
-} );
+});
 
 },{"services/ApiService":41,"services/PaginationService":49}],23:[function(require,module,exports){
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var HTMLCache = require('services/VariationsHTMLCacheService');
-var BasketService = require('services/BasketService');
+var HTMLCache           = require('services/VariationsHTMLCacheService');
+var BasketService       = require('services/BasketService');
 
 /**
  * possible preselection values:
@@ -1503,128 +1498,160 @@ var BasketService = require('services/BasketService');
  * variantID
  */
 Vue.component('item-variation-select', {
-    activate: function( done ) {
-        var self = this;
-        BasketService.watch(function( data ) {
-            self.$set( 'basketItems', data.basketItems );
-        });
-        BasketService.init().done(function() {
-            done();
-        });
-    },
+
     template: '#vue-item-variation-select',
-    props: [
+
+    props   : [
         "itemId",
         "preselection",
         "itemIsInBasket"
     ],
-    data: function () {
+
+    data    : function()
+    {
         return {
-            variationAttributes: {},
+            variationAttributes     : {},
             variantionSelectionModel: [],
-            oldAttributeValueList: [],
-            basketItems: [],
-            attributeNames: []
+            oldAttributeValueList   : [],
+            basketItems             : [],
+            attributeNames          : []
         };
     },
-    created: function () {
+
+    created : function()
+    {
         this.oldVariationId = this.preselection;
         this.loadVariationAttributes();
         this.variations = {};
         this.initWindowEventHandling();
     },
-    methods: {
-        loadVariationAttributes: function () {
+
+    activate: function(done)
+    {
+        var self = this;
+        BasketService.watch(function(data)
+        {
+            self.$set('basketItems', data.basketItems);
+        });
+        BasketService.init().done(function()
+        {
+            done();
+        });
+    },
+
+    methods : {
+        loadVariationAttributes: function()
+        {
             var self = this;
             // request item variations
             ApiService.get("/rest/item_variation_select/" + this.itemId)
-                .done(function (response) {
+                .done(function(response)
+                {
                     // catch possible empty response
                     if (!response
                         || (response && response.data === null)
-                        || (response && response["selectionValues"].length === 0)) {
+                        || (response && response["selectionValues"].length === 0))
+                    {
                         return;
                     }
                     self.variationAttributes = response["selectionValues"];
-                    self.variations = response["variations"];
-                    self.attributeNames = response["attributeNames"];
+                    self.variations          = response["variations"];
+                    self.attributeNames      = response["attributeNames"];
 
-                    var attributes = Object.keys(self.variationAttributes);
+                    var attributes          = Object.keys(self.variationAttributes);
                     var setOnInitialization = {};
 
                     // where the magic begins
-                    if (!self.preselection) {
+                    if (!self.preselection)
+                    {
                         return;
-                    } else {
+                    }
+                    else
+                    {
                         // if preselection is true, select first entries for all attributes
-                        if (typeof self.preselection === 'boolean') {
-                            for(var attribute in self.variationAttributes) {
+                        if (typeof self.preselection === 'boolean')
+                        {
+                            for (var attribute in self.variationAttributes)
+                            {
                                 self.variantionSelectionModel.push({
-                                    attributeId: attribute,
+                                    attributeId     : attribute,
                                     attributeValueId: Object.keys(self.variationAttributes[attribute])[0]
                                 });
                             }
-                        } else {
-                            // if preselection not found or there are no variations, initialize select element with "please take a choice" option
-                            if (!self.variations[self.preselection] || self.variations[self.preselection].length <= 0) {
+                        }
+                        else
+                        {
+                            // if preselection not found or there are no variations, initialize select element with
+                            // "please take a choice" option
+                            if (!self.variations[self.preselection] || self.variations[self.preselection].length <= 0)
+                            {
                                 self.preselection = false;
                                 return;
                             }
 
                             var variationPreselected = self.variations[self.preselection];
                             // individual selection via variation ID. Searching for values.
-                            for (var i = 0, leng = variationPreselected.length; i < leng; i++) {
-                                while (self.variantionSelectionModel.length !== leng) {
+                            for (var i = 0, leng = variationPreselected.length; i < leng; i++)
+                            {
+                                while (self.variantionSelectionModel.length !== leng)
+                                {
                                     self.variantionSelectionModel.push({attributeId: null, attributeValueId: null});
                                 }
                                 // toString() is needed to initialize select element model. Doesn't work with integer.
-                                self.variantionSelectionModel[i].attributeId = variationPreselected[i].attributeId.toString();
-                                self.variantionSelectionModel[i].attributeValueId= variationPreselected[i].attributeValueId.toString();
+                                self.variantionSelectionModel[i].attributeId      = variationPreselected[i].attributeId.toString();
+                                self.variantionSelectionModel[i].attributeValueId = variationPreselected[i].attributeValueId.toString();
                             }
                         }
 
                     }
 
-                }).fail(function (error) {
-                    console.warn(error);
-                    return false;
+                }).fail(function(error)
+            {
+                console.warn(error);
+                return false;
             });
         },
-        matchVariation: function(currentSelection)
+        matchVariation         : function(currentSelection)
         {
             var hits = 0;
             var currentVariation;
-            for (var variationID in this.variations) { // iterate all variations
+            for (var variationID in this.variations)
+            { // iterate all variations
                 currentVariation = this.variations[variationID];
-                for (var i = 0, leng = currentVariation.length; i < leng; i++) {
+                for (var i = 0, leng = currentVariation.length; i < leng; i++)
+                {
                     /*
-                        Increase "hit" with "variationID", if fitting attribute was found.
-                        The amount of this addition divided by length of current variation acn match a variation ID.
-                      */
+                     Increase "hit" with "variationID", if fitting attribute was found.
+                     The amount of this addition divided by length of current variation acn match a variation ID.
+                     */
                     if (currentVariation[i].attributeId === currentSelection[i].attributeId
-                    && currentVariation[i].attributeValueId === currentSelection[i].attributeValueId) {
-                            hits += parseInt(variationID);
-                        }
+                        && currentVariation[i].attributeValueId === currentSelection[i].attributeValueId)
+                    {
+                        hits += parseInt(variationID);
+                    }
                 }
                 hits = (hits / leng);
                 /*
-                    if "hit", divided by length of attributes of one variation, matches the current variation ID,
-                    we found our variation
+                 if "hit", divided by length of attributes of one variation, matches the current variation ID,
+                 we found our variation
                  */
-                if (hits === parseInt(variationID)) {
+                if (hits === parseInt(variationID))
+                {
                     break;
-                } else {
+                }
+                else
+                {
                     hits = 0;
                 }
             }
             return hits;
         },
-        onSelectChange: function()
+        onSelectChange         : function()
         {
-            var self = this;
+            var self                = this;
             var convertedAttributes = [];
             // convert attribute values to integer
-            for (var attr in this.variantionSelectionModel )
+            for (var attr in this.variantionSelectionModel)
             {
                 if (self.variantionSelectionModel[attr] === "-1")
                 {
@@ -1632,7 +1659,7 @@ Vue.component('item-variation-select', {
                 }
 
                 convertedAttributes.push({
-                    attributeId: parseInt(this.variantionSelectionModel[attr].attributeId),
+                    attributeId     : parseInt(this.variantionSelectionModel[attr].attributeId),
                     attributeValueId: parseInt(this.variantionSelectionModel[attr].attributeValueId)
                 });
             }
@@ -1644,7 +1671,8 @@ Vue.component('item-variation-select', {
                 {
                     var currentBasketItem;
 
-                    for (var i = 0, len = this.basketItems.length; i < len; i++){
+                    for (var i = 0, len = this.basketItems.length; i < len; i++)
+                    {
                         if (this.oldVariationId === this.basketItems[i].variationId)
                         {
                             currentBasketItem = this.basketItems[i];
@@ -1655,9 +1683,9 @@ Vue.component('item-variation-select', {
                     {
                         BasketService.updateBasketItem(
                             {
-                                id: currentBasketItem.id,
+                                id         : currentBasketItem.id,
                                 variationId: matchingVariationId,
-                                quantity: currentBasketItem.quantity
+                                quantity   : currentBasketItem.quantity
                             });
                     }
                 }
@@ -1671,14 +1699,14 @@ Vue.component('item-variation-select', {
             }
         },
 
-        loadVariation: function (itemId, variationId)
+        loadVariation: function(itemId, variationId)
         {
             // var cachedHTML = HTMLCache.getFromCache(itemId, variationId);
             //
             // if(cachedHTML === undefined)
             // {
-                var success =
-                    function (response)
+            var success =
+                    function(response)
                     {
                         var found = $(response).find("#page-body");
                         $("#page-body").html(found);
@@ -1687,7 +1715,7 @@ Vue.component('item-variation-select', {
                         HTMLCache.addToCache(itemId, variationId, found);
                     };
 
-                jQuery.get("/test/" + itemId + "/" + variationId, "", success, "html");
+            jQuery.get("/test/" + itemId + "/" + variationId, "", success, "html");
             // }
             // else
             // {
@@ -1699,68 +1727,66 @@ Vue.component('item-variation-select', {
 });
 
 },{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":48,"services/VariationsHTMLCacheService":51}],24:[function(require,module,exports){
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-Vue.component('login', 
-{
-	template: '#vue-login',
+Vue.component('login', {
 
-	props:
-	[
-		"modalElement"
-	],
+        template: '#vue-login',
 
-	data: function () 
-	{
-		return {
-			password: "",
-			username: ""
-		};
-	},
+    props: [
+        "modalElement"
+    ],
 
-	methods: 
-	{
-		showLogin: function() 
-		{
-			ModalService.findModal( document.getElementById(this.modalElement) ).show();
-		},
+    data: function()
+    {
+        return {
+            password: "",
+            username: ""
+        };
+    },
 
-		sendLogin: function ()
-		{
-			var component = this;
+    methods: {
+        showLogin: function()
+        {
+            ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
 
-			ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
-				.done(function (response)
-				{
-					ApiService.setToken(response);
+        sendLogin: function()
+        {
+            var component = this;
 
-					if(document.getElementById(component.modalElement) != null)
-					{
-						ModalService.findModal( document.getElementById(component.modalElement) ).hide();
-					}
+            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
 
-					NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
-				})
-				.fail(function (response)
-				{
-					switch(response.code)
-					{
-						case 401:
-							NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
-							break;
-					}
-				});
-		}
-	}
+                    if (document.getElementById(component.modalElement) != null)
+                    {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
+
+                    NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
+                })
+                .fail(function(response)
+                {
+                    switch (response.code)
+                    {
+                        case 401:
+                            NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
+                            break;
+                    }
+                });
+        }
+    }
 });
 
 },{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48}],25:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
-Vue.component('user-login-handler',
-{
+Vue.component('user-login-handler', {
+
     template: '#vue-user-login-handler',
 
     ready: function()
@@ -1768,7 +1794,7 @@ Vue.component('user-login-handler',
         var self = this;
 
         ApiService.listen("AfterAccountAuthentication",
-            function( userData )
+            function(userData)
             {
                 self.setUserLoggedIn(userData);
             });
@@ -1780,11 +1806,10 @@ Vue.component('user-login-handler',
             });
     },
 
-    methods:
-    {
+    methods: {
         setUserLoggedIn: function(userData)
         {
-            if(userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
+            if (userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
             {
                 this.$el.innerHTML = this.getUserHTML(userData.accountContact.firstName + " " + userData.accountContact.lastName);
             }
@@ -1798,22 +1823,22 @@ Vue.component('user-login-handler',
 
         setUserLoggedOut: function()
         {
-            this.$el.innerHTML =    "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
-                                    "<small>oder</small>" +
-                                    "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
+            this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
+                "<small>oder</small>" +
+                "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
         },
 
         getUserHTML: function(username)
         {
-            return  "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                        "Hallo, " + username +
-                    "</a>" +
-                    "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
-                        "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                            "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> MyAccount</a>" +
-                            "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> Logout</a>" +
-                        "</div>" +
-                    "</div>";
+            return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
+                "Hallo, " + username +
+                "</a>" +
+                "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
+                "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
+                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> MyAccount</a>" +
+                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> Logout</a>" +
+                "</div>" +
+                "</div>";
         }
     }
 });
@@ -1875,8 +1900,8 @@ Vue.component('monetary-format',
     });
 
 },{"services/MonetaryFormatService":47}],28:[function(require,module,exports){
-var ModalService = require('services/ModalService');
-var APIService = require('services/APIService');
+var ModalService        = require('services/ModalService');
+var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
 
 Vue.component('account-settings', {
@@ -1884,98 +1909,106 @@ Vue.component('account-settings', {
     template: '#vue-account-settings',
 
     props: [
-      "userData"
+        "userData"
     ],
 
-    data: function() {
+    data: function()
+    {
         return {
-          newPassword: '',
-          confirmPassword: '',
-          accountSettingsClass: ''
+            newPassword         : '',
+            confirmPassword     : '',
+            accountSettingsClass: ''
         };
     },
 
-    ready: function ()
+    ready: function()
     {
-      this.accountSettingsClass = "accountSettingsModal" + this._uid;
+        this.accountSettingsClass = "accountSettingsModal" + this._uid;
     },
 
     computed: {
-      matchPassword: function ()
-      {
-        if(this.confirmPassword != '')
+        matchPassword: function()
         {
-          return this.newPassword === this.confirmPassword;
+            if (this.confirmPassword != '')
+            {
+                return this.newPassword === this.confirmPassword;
+            }
+            return true;
         }
-        return true;
-      }
     },
 
     methods: {
 
-      showChangeAccountSettings: function ()
-      {
-        var accountModal = ModalService.findModal( $('.' + this.accountSettingsClass) );
-
-        $(".wrapper-bottom").append($('.' + this.accountSettingsClass));
-
-        accountModal.show();
-      },
-
-      saveAccountSettings: function ()
-      {
-        var self = this;
-        if( this.newPassword != '' && (this.newPassword === this.confirmPassword))
+        showChangeAccountSettings: function()
         {
-          APIService.post('/rest/customer/password', { password: this.newPassword } )
-            .done( function ( response )
+            var accountModal = ModalService.findModal($('.' + this.accountSettingsClass));
+
+            $(".wrapper-bottom").append($('.' + this.accountSettingsClass));
+
+            accountModal.show();
+        },
+
+        saveAccountSettings: function()
+        {
+            var self = this;
+            if (this.newPassword != '' && (this.newPassword === this.confirmPassword))
             {
-              self.clearFieldsAndClose();
-              NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
-            }).fail( function ( response )
-            {
-              self.clearFieldsAndClose();
-              NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
-            });
+                APIService.post('/rest/customer/password', {password: this.newPassword})
+                    .done(function(response)
+                    {
+                        self.clearFieldsAndClose();
+                        NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
+                    }).fail(function(response)
+                {
+                    self.clearFieldsAndClose();
+                    NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
+                });
+            }
+        },
+
+        clearFields: function()
+        {
+            this.newPassword     = '';
+            this.confirmPassword = '';
+        },
+
+        clearFieldsAndClose: function()
+        {
+            ModalService.findModal($('.' + this.accountSettingsClass)).hide();
+            this.clearFields();
+        },
+
+        getEmail: function()
+        {
+            return this.userData.options[0].value;
         }
-      },
-
-      clearFields: function ()
-      {
-        this.newPassword = '';
-        this.confirmPassword = '';
-      },
-
-      clearFieldsAndClose: function ()
-      {
-        ModalService.findModal( $('.' + this.accountSettingsClass) ).hide();
-        this.clearFields();
-      },
-
-      getEmail: function ()
-      {
-        return this.userData.options[0].value;
-      }
     }
 
 });
 
 },{"services/APIService":39,"services/ModalService":46,"services/NotificationService":48}],29:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
-var WaitScreenService = require('services/WaitScreenService');
+var WaitScreenService   = require('services/WaitScreenService');
 
 Vue.component('notifications', {
+
     template: '#vue-notifications',
-    data: function() {
+
+    data    : function()
+    {
         return {
             notifications: NotificationService.getNotifications().all()
-        }
+        };
     },
-    methods: {
-        dismiss: function( notification ) {
-            NotificationService.getNotifications().remove( notification );
+
+    methods : {
+        dismiss: function(notification)
+        {
+            NotificationService.getNotifications().remove(notification);
         },
-        test: function() {
+
+        test   : function()
+        {
             NotificationService.error('Test').closeAfter(3000);
             WaitScreenService.showWaitScreen();
         }
@@ -1985,12 +2018,11 @@ Vue.component('notifications', {
 },{"services/NotificationService":48,"services/WaitScreenService":52}],30:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
-Vue.component('order-history',
-{
+Vue.component('order-history', {
+
     template: '#vue-order-history',
 
-    props:
-    [
+    props: [
         "contactId",
         "orderMaxCountPagination"
     ],
@@ -1999,13 +2031,13 @@ Vue.component('order-history',
     {
         return {
             //needed for pagination
-            currentPaginationEntry  : 1,
-            numberOfEntries         : 1,
-            showItemsOf             : "1-6",
-            itemsPerPage            : 6,
+            currentPaginationEntry: 1,
+            numberOfEntries       : 1,
+            showItemsOf           : "1-6",
+            itemsPerPage          : 6,
             //orderObjectToRender
-            orderList               :[]
-        }
+            orderList             : []
+        };
     },
 
     ready: function()
@@ -2015,8 +2047,7 @@ Vue.component('order-history',
         this.numberOfEntries = this.calculateMaxPages();
     },
 
-    methods:
-    {
+    methods: {
         //extend this method params for filter handling
         updateOrderList: function(page)
         {
@@ -2025,16 +2056,16 @@ Vue.component('order-history',
             var self = this;
 
             ApiService.get("/rest/order?page=" + page + "&items=" + this.itemsPerPage)
-                .done(function (response)
+                .done(function(response)
                 {
                     ApiService.setToken(response);
 
                     self.orderList = response["entries"];
 
                     //calculate the show X - X items
-                    this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) +  1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) +  this.itemsPerPage);
+                    this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) + 1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) + this.itemsPerPage);
                 })
-                .fail(function (response)
+                .fail(function(response)
                 {
                     //todo
                 });
@@ -2042,8 +2073,8 @@ Vue.component('order-history',
 
         calculateMaxPages: function()
         {
-            var pages           = this.orderMaxCountPagination / this.itemsPerPage;
-            var roundedPages    = Math.floor(pages);
+            var pages        = this.orderMaxCountPagination / this.itemsPerPage;
+            var roundedPages = Math.floor(pages);
 
             return roundedPages;
         },
@@ -2052,7 +2083,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 2 )
+            if (this.currentPaginationEntry <= 2)
             {
                 show = false;
             }
@@ -2069,7 +2100,7 @@ Vue.component('order-history',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry < this.numberOfEntries - 1 )
+            if (this.currentPaginationEntry < this.numberOfEntries - 1)
             {
                 show = true;
             }
@@ -2081,7 +2112,7 @@ Vue.component('order-history',
         {
             var previousPage = this.currentPaginationEntry - 1;
 
-            if ( previousPage <= 1 )
+            if (previousPage <= 1)
             {
                 previousPage = 1;
             }
@@ -2093,7 +2124,7 @@ Vue.component('order-history',
         {
             var nextPage = this.currentPaginationEntry + 1;
 
-            if ( nextPage >= this.numberOfEntries )
+            if (nextPage >= this.numberOfEntries)
             {
                 nextPage = this.numberOfEntries;
             }
@@ -2105,7 +2136,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry <= 3 )
+            if (this.currentPaginationEntry <= 3)
             {
                 show = false;
             }
@@ -2115,9 +2146,9 @@ Vue.component('order-history',
 
         showDotsRight: function()
         {
-            var show     = true;
+            var show = true;
 
-            if ( this.currentPaginationEntry >= this.numberOfEntries - 2 )
+            if (this.currentPaginationEntry >= this.numberOfEntries - 2)
             {
                 show = false;
             }
@@ -2129,7 +2160,7 @@ Vue.component('order-history',
         {
             var show = false;
 
-            if ( this.currentPaginationEntry  > 1 )
+            if (this.currentPaginationEntry > 1)
             {
                 show = true;
             }
@@ -2141,7 +2172,7 @@ Vue.component('order-history',
         {
             var show = true;
 
-            if ( this.currentPaginationEntry  == this.numberOfEntries )
+            if (this.currentPaginationEntry == this.numberOfEntries)
             {
                 show = false;
             }
@@ -2153,46 +2184,46 @@ Vue.component('order-history',
 
 },{"services/ApiService":41}],31:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
-var APIService = require('services/APIService');
+var APIService            = require('services/APIService');
 
-Vue.component('payment-provider-select',
-{
-    template: '#vue-payment-provider-select',
+Vue.component('payment-provider-select', {
 
-    props: ['paymentProviderList'],
+        template: '#vue-payment-provider-select',
 
-    data: function () {
-        return {
-            selectedPaymentProvider: {}
-        }
-    },
+        props: ['paymentProviderList'],
 
-    created: function ()
-    {
-        this.addEventListener();
-    },
-
-    methods:
-    {
-        onPaymentProviderChange: function()
+        data: function()
         {
-            APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
+            return {
+                selectedPaymentProvider: {}
+            };
         },
 
-        formatPrice: function (price, currency)
+        created: function()
         {
-            return MonetaryFormatService.formatMonetary(price, currency);
+            this.addEventListener();
         },
 
-        addEventListener: function ()
-        {
-            //listen on APIService events and handle new data
+        methods: {
+            onPaymentProviderChange: function()
+            {
+                APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
+            },
+
+            formatPrice: function(price, currency)
+            {
+                return MonetaryFormatService.formatMonetary(price, currency);
+            },
+
+            addEventListener: function()
+            {
+                //listen on APIService events and handle new data
+            }
         }
-    }
-});
+    });
 
 },{"services/APIService":39,"services/MonetaryFormatService":47}],32:[function(require,module,exports){
-Vue.component( 'price-formatted', {
+Vue.component('price-formatted', {
 
     template: '<span class="price-formatted">${ priceFormatted }</span>',
 
@@ -2201,162 +2232,157 @@ Vue.component( 'price-formatted', {
     ],
 
     computed: {
-      priceFormatted: function () {
-        return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
-      }
+        priceFormatted: function()
+        {
+            return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
+        }
     }
 
 });
 
 },{}],33:[function(require,module,exports){
-var ApiService = require('services/ApiService');
+var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
-var ModalService = require('services/ModalService');
+var ModalService        = require('services/ModalService');
 
-var ValidationService = require( 'services/ValidationService' );
+var ValidationService = require('services/ValidationService');
 
-Vue.component('registration',
-{
-	template: '#vue-registration',
+Vue.component('registration', {
 
-	props:
-	[
-		"modalElement",
-		"guestMode",
-		"isSimpleRegistration"
-	],
+    template: '#vue-registration',
 
-	data: function ()
-	{
-		return {
-			password: "",
-			passwordRepeat: "",
-			username: "",
-			billingAddress: {}
-		};
-	},
+    props: [
+        "modalElement",
+        "guestMode",
+        "isSimpleRegistration"
+    ],
 
-	created: function ()
-	{
-		if(this.guestMode == null || this.guestMode == "")
-		{
-			this.guestMode = false;
-		}
-		else
-		{
-			this.guestMode = true;
-		}
-	},
+    data: function()
+    {
+        return {
+            password      : "",
+            passwordRepeat: "",
+            username      : "",
+            billingAddress: {}
+        };
+    },
 
-	methods:
-	{
-		validateRegistration: function ()
-		{
-			var self = this;
-			ValidationService.validate( $( '#registration' + this._uid ) )
-				.done( function()
-				{
-					self.sendRegistration()
-				})
-				.fail( function( invalidFields )
-				{
-					ValidationService.markInvalidFields( invalidFields, "error" );
-				});
-		},
+    created: function()
+    {
+        if (this.guestMode == null || this.guestMode == "")
+        {
+            this.guestMode = false;
+        }
+        else
+        {
+            this.guestMode = true;
+        }
+    },
 
-		sendRegistration: function ()
-		{
-			var userObject = this.getUserObject();
-			var component = this;
+    methods: {
+        validateRegistration: function()
+        {
+            var self = this;
+            ValidationService.validate($('#registration' + this._uid))
+                .done(function()
+                {
+                    self.sendRegistration()
+                })
+                .fail(function(invalidFields)
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
+        },
 
-			ApiService.post("/rest/customer", userObject)
-				.done(function (response)
-				{
-					ApiService.setToken(response);
+        sendRegistration: function()
+        {
+            var userObject = this.getUserObject();
+            var component  = this;
 
-					if(document.getElementById(component.modalElement) != null)
-					{
-						ModalService.findModal( document.getElementById(component.modalElement) ).hide();
-					}
+            ApiService.post("/rest/customer", userObject)
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
 
-					NotificationService.success("Erfolgreich registriert").closeAfter(3000);
-				});
+                    if (document.getElementById(component.modalElement) != null)
+                    {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
 
-		},
+                    NotificationService.success("Erfolgreich registriert").closeAfter(3000);
+                });
 
-		getUserObject: function()
-		{
-			if(this.guestMode)
-			{
-				var userObject =
-				{
-					contact:
-					{
-						referrerId: 1,
-						typeId: 1,
-						options:
-						{
-							typeId:
-							{
-								typeId: 2,
-								subTypeId: 4,
-								value: this.username,
-								priority: 0
-							}
-						}
-					}
-				};
-			}
-			else
-			{
-				var userObject =
-				{
-					contact:
-					{
-						referrerId: 1,
-						typeId: 1,
-						password: this.password,
-						options:
-						{
-							typeId:
-							{
-								typeId: 2,
-								subTypeId: 4,
-								value: this.username,
-								priority: 0
-							}
-						}
-					}
-				};
-			}
+        },
 
-			if(!this.isSimpleRegistration)
-			{
-				userObject.billingAddress = this.billingAddress;
-			}
+        getUserObject: function()
+        {
+            // FIXME copy&paste-action? serious?
+            if (this.guestMode)
+            {
+                var userObject =
+                    {
+                        contact: {
+                            referrerId: 1,
+                            typeId    : 1,
+                            options   : {
+                                typeId: {
+                                    typeId   : 2,
+                                    subTypeId: 4,
+                                    value    : this.username,
+                                    priority : 0
+                                }
+                            }
+                        }
+                    };
+            }
+            else
+            {
+                var userObject =
+                    {
+                        contact: {
+                            referrerId: 1,
+                            typeId    : 1,
+                            password  : this.password,
+                            options   : {
+                                typeId: {
+                                    typeId   : 2,
+                                    subTypeId: 4,
+                                    value    : this.username,
+                                    priority : 0
+                                }
+                            }
+                        }
+                    };
+            }
 
-			return userObject;
-		}
-	}
+            if (!this.isSimpleRegistration)
+            {
+                userObject.billingAddress = this.billingAddress;
+            }
+
+            return userObject;
+        }
+    }
 });
 
 },{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48,"services/ValidationService":50}],34:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
-Vue.component('shipping-profile-select',
-{
+Vue.component('shipping-profile-select', {
+
     template: '#vue-shipping-profile-select',
 
     props: ['shippingProfileData'],
 
-    data: function () {
+    data: function()
+    {
         return {
-            shippingProfileList: [],
+            shippingProfileList    : [],
             selectedShippingProfile: {}
-        }
+        };
     },
 
-    created: function ()
+    created: function()
     {
         // use when real data is implemented
         // if(this.shippingProfileData)
@@ -2374,20 +2400,20 @@ Vue.component('shipping-profile-select',
         this.addEventListener();
     },
 
-    methods:
-    {
+    methods: {
         onShippingProfileChange: function()
         {
+            // TODO remove log
             console.log(this.shippingProfileList);
             console.log(this.selectedShippingProfile);
         },
 
-        formatPrice: function (price, currency)
+        formatPrice: function(price, currency)
         {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        addEventListener: function ()
+        addEventListener: function()
         {
             //listen on APIService events and handle new data
         }
@@ -2397,48 +2423,52 @@ Vue.component('shipping-profile-select',
 },{"services/MonetaryFormatService":47}],35:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
-Vue.component('user-login-watcher',
-{
-    props:
-    [
-        "userLoggedIn",
-        "route",
-        "isUserLoggedIn"
-    ],
+Vue.component('user-login-watcher', {
 
-    ready: function()
-    {
-        if(this.route.length > 0)
+        props: [
+            "userLoggedIn",
+            "route",
+            "isUserLoggedIn"
+        ],
+
+        ready: function()
         {
-            if(this.userLoggedIn == this.isUserLoggedIn)
+            if (this.route.length > 0)
             {
-                if(this.userLoggedIn == "false")
+                if (this.userLoggedIn == this.isUserLoggedIn)
                 {
-                    NotificationService.error("Bitte einloggen").closeAfter(3000);
-                }
-                else
-                {
-                    NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
-                }
+                    if (this.userLoggedIn == "false")
+                    {
+                        NotificationService.error("Bitte einloggen").closeAfter(3000);
+                    }
+                    else
+                    {
+                        NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
+                    }
 
-                window.location.pathname = this.route;
+                    window.location.pathname = this.route;
+                }
             }
         }
-    },
-});
+    });
 
 },{"services/NotificationService":48}],36:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 Vue.component('wait-screen', {
+
     template: '#vue-wait-screen',
-    data: function() {
+
+    data    : function()
+    {
         return {
             overlay: WaitScreenService.getOverlay()
         };
     },
+
     computed: {
-        visible: function() {
+        visible: function()
+        {
             return this.overlay.count > 0;
         }
     }
@@ -2476,20 +2506,21 @@ Vue.directive('logout', function()
 });
 
 },{"services/ApiService":41,"services/NotificationService":48}],38:[function(require,module,exports){
-var ApiService = require( 'services/ApiService' );
+var ApiService = require('services/ApiService');
 
-Vue.directive( 'place-order', function()
-{
-    var $elem = $( this.el );
-    $elem.click( function( e )
+Vue.directive('place-order', function() {
+
+    var $elem = $(this.el);
+
+    $elem.click(function(e)
     {
         e.preventDefault();
 
-        ApiService.post( "/rest/order" )
-            .done(function( response )
+        ApiService.post("/rest/order")
+            .done(function(response)
             {
-                var target = $elem.attr( 'href' ) || $elem.parents( 'form' ).attr( 'action' );
-                window.location.assign( target );
+                var target = $elem.attr('href') || $elem.parents('form').attr('action');
+                window.location.assign(target);
             });
 
     });
@@ -2498,106 +2529,115 @@ Vue.directive( 'place-order', function()
 
 },{"services/ApiService":41}],39:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
-var WaitScreenService = require('services/WaitScreenService');
+var WaitScreenService   = require('services/WaitScreenService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var _token;
     var _eventListeners = {};
 
     return {
-        get:    _get,
-        put:    _put,
-        post:   _post,
-        delete: _delete,
-        send:   _send,
+        get     : _get,
+        put     : _put,
+        post    : _post,
+        delete  : _delete,
+        send    : _send,
         setToken: _setToken,
         getToken: _getToken,
-        listen: _listen
+        listen  : _listen
     };
 
-    function _listen( event, handler )
+    function _listen(event, handler)
     {
         _eventListeners[event] = _eventListeners[event] || [];
-        _eventListeners[event].push( handler );
+        _eventListeners[event].push(handler);
     }
 
-    function _triggerEvent( event, payload )
+    function _triggerEvent(event, payload)
     {
-        if( !!_eventListeners[event] )
+        if (!!_eventListeners[event])
         {
-            for( var i = 0; i < _eventListeners[event].length; i++ )
+            for (var i = 0; i < _eventListeners[event].length; i++)
             {
                 var listener = _eventListeners[event][i];
-                if( typeof listener != "function" ) continue;
-                listener.call( null, payload );
+                if (typeof listener != "function")
+                {
+                    continue;
+                }
+                listener.call(null, payload);
             }
         }
     }
 
-    function _get( url, data, config )
+    function _get(url, data, config)
     {
-        config = config || {};
+        config        = config || {};
         config.method = 'GET';
-        return _send( url, data, config );
+        return _send(url, data, config);
     }
 
-    function _put( url, data, config )
+    function _put(url, data, config)
     {
-        config = config || {};
+        config        = config || {};
         config.method = 'PUT';
-        return _send( url, data, config );
+        return _send(url, data, config);
     }
 
-    function _post( url, data, config )
+    function _post(url, data, config)
     {
-        config = config || {};
+        config        = config || {};
         config.method = 'POST';
-        return _send( url, data, config );
+        return _send(url, data, config);
     }
 
-    function _delete( url, data, config )
+    function _delete(url, data, config)
     {
-        config = config || {};
+        config        = config || {};
         config.method = 'DELETE';
-        return _send( url, data, config );
+        return _send(url, data, config);
     }
 
-    function _send( url, data, config )
+    function _send(url, data, config)
     {
         var deferred = $.Deferred();
 
-        config = config || {};
-        config.data = !!data ? JSON.stringify( data ) : null;
-        config.dataType = config.dataType || 'json';
-        config.contentType = config.contentType || 'application/json';
-        config.doInBackground = !!config.doInBackground;
+        config                      = config || {};
+        config.data                 = !!data ? JSON.stringify(data) : null;
+        config.dataType             = config.dataType || 'json';
+        config.contentType          = config.contentType || 'application/json';
+        config.doInBackground       = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
 
-        if( !config.doInBackground )
+        if (!config.doInBackground)
         {
             WaitScreenService.showWaitScreen();
         }
-        $.ajax( url, config )
-            .done( function( response ) {
-                if( !config.supressNotifications ) {
-                    printMessages( response );
-                }
-                for( event in response.events )
+        $.ajax(url, config)
+            .done(function(response)
+            {
+                if (!config.supressNotifications)
                 {
-                    _triggerEvent( event, response.events[event] );
+                    printMessages(response);
                 }
-                deferred.resolve( response.data || response );
-            })
-            .fail( function( jqXHR ) {
-                var response = !!jqXHR.responseText ? $.parseJSON( jqXHR.responseText ) : {};
-                if( !config.supressNotifications ) {
-                    printMessages( response );
+                for (event in response.events)
+                {
+                    _triggerEvent(event, response.events[event]);
                 }
-                deferred.reject( response.error );
+                deferred.resolve(response.data || response);
             })
-            .always( function() {
-                if( !config.doInBackground )
+            .fail(function(jqXHR)
+            {
+                var response = !!jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
+                if (!config.supressNotifications)
+                {
+                    printMessages(response);
+                }
+                deferred.reject(response.error);
+            })
+            .always(function()
+            {
+                if (!config.doInBackground)
                 {
                     WaitScreenService.hideWaitScreen();
                 }
@@ -2606,88 +2646,90 @@ module.exports = (function($) {
         return deferred;
     }
 
-    function printMessages( response )
+    function printMessages(response)
     {
         var notification;
-        if( !!response.error && response.error.message.length > 0 )
+        if (!!response.error && response.error.message.length > 0)
         {
-            notification = NotificationService.error( response.error );
+            notification = NotificationService.error(response.error);
         }
 
-        if( !!response.success && response.success.message.length > 0 )
+        if (!!response.success && response.success.message.length > 0)
         {
-            notification = NotificationService.success( response.success );
+            notification = NotificationService.success(response.success);
         }
 
-        if( !!response.warning && response.warning.message.length > 0 )
+        if (!!response.warning && response.warning.message.length > 0)
         {
-            notification = NotificationService.warning( response.warning );
+            notification = NotificationService.warning(response.warning);
         }
 
-        if( !!response.info && response.info.message.length > 0 )
+        if (!!response.info && response.info.message.length > 0)
         {
-            notification = NotificationService.info( response.info );
+            notification = NotificationService.info(response.info);
         }
 
-        if( !!response.debug && response.debug.class.length > 0 )
+        if (!!response.debug && response.debug.class.length > 0)
         {
-            notification.trace( response.debug.file + '(' + response.debug.line + '): ' + response.debug.class );
-            for( var i = 0; i < response.debug.trace.length; i++ )
+            notification.trace(response.debug.file + '(' + response.debug.line + '): ' + response.debug.class);
+            for (var i = 0; i < response.debug.trace.length; i++)
             {
-                notification.trace( response.debug.trace[i] );
+                notification.trace(response.debug.trace[i]);
             }
         }
     }
 
-    function _setToken( token )
+    function _setToken(token)
     {
-      this._token = token;
+        this._token = token;
     }
 
-    function _getToken ()
+    function _getToken()
     {
-      return this._token;
+        return this._token;
     }
 
 })(jQuery);
 
 },{"services/NotificationService":48,"services/WaitScreenService":52}],40:[function(require,module,exports){
-var ApiService = require('services/ApiService');
+var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     return {
         createAddress: createAddress,
         updateAddress: updateAddress
     };
 
-    function createAddress( address, addressType, setActive )
+    function createAddress(address, addressType, setActive)
     {
-        return ApiService.post( "rest/customer/address?typeId=" + addressType, address ).done(function(response) {
-            if( !!setActive )
+        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (!!setActive)
             {
-                if( addressType === 1 )
+                if (addressType === 1)
                 {
-                    CheckoutService.setBillingAddressId( response.id );
+                    CheckoutService.setBillingAddressId(response.id);
                 }
-                else if( addressType === 2 )
+                else if (addressType === 2)
                 {
-                    CheckoutService.setDeliveryAddressId( response.id );
+                    CheckoutService.setDeliveryAddressId(response.id);
                 }
             }
         });
     }
 
-    function updateAddress( newData, addressType )
+    function updateAddress(newData, addressType)
     {
         addressType = addressType || newData.pivot.typeId;
-        return ApiService.put( "rest/customer/address/"+ newData.id + "?typeId=" + addressType, newData );
+        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
     }
 
-    function deleteAddress( addressId, addressType )
+    function deleteAddress(addressId, addressType)
     {
-        return ApiService.delete( "rest/customer/address/"+ addressId + "?typeId=" + addressType );
+        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
     }
 })(jQuery);
 
@@ -2696,31 +2738,32 @@ arguments[4][39][0].apply(exports,arguments)
 },{"dup":39,"services/NotificationService":48,"services/WaitScreenService":52}],42:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var basket;
     var readyDeferred;
-    var loading = false;
-    var watchers = [];
+    var loading            = false;
+    var watchers           = [];
     var basketItemToDelete = {};
 
     return {
-        init: init,
-        watch: watch,
-        getBasket: getBasket,
-        addBasketItem: addBasketItem,
-        updateBasketItem: updateBasketItem,
-        deleteBasketItem: deleteBasketItem,
+        init                 : init,
+        watch                : watch,
+        getBasket            : getBasket,
+        addBasketItem        : addBasketItem,
+        updateBasketItem     : updateBasketItem,
+        deleteBasketItem     : deleteBasketItem,
         updateShippingCountry: updateShippingCountry,
-        basketItemToDelete: basketItemToDelete
+        basketItemToDelete   : basketItemToDelete
     };
 
-    function init( basketData )
+    function init(basketData)
     {
-        if( !readyDeferred )
+        if (!readyDeferred)
         {
             readyDeferred = $.Deferred();
-            if( !!basketData )
+            if (!!basketData)
             {
                 basket = basketData;
                 notify();
@@ -2728,7 +2771,8 @@ module.exports = (function($) {
             }
             else
             {
-                ApiService.get('/rest/basket').done(function( response ) {
+                ApiService.get('/rest/basket').done(function(response)
+                {
                     basket = response;
                     notify();
                     readyDeferred.resolve();
@@ -2740,20 +2784,20 @@ module.exports = (function($) {
         return readyDeferred;
     }
 
-    function watch( callback )
+    function watch(callback)
     {
-        watchers.push( callback );
-        if( !!basket )
+        watchers.push(callback);
+        if (!!basket)
         {
-            callback( basket );
+            callback(basket);
         }
     }
 
     function notify()
     {
-        for( var i = 0; i < watchers.length; i++ )
+        for (var i = 0; i < watchers.length; i++)
         {
-            watchers[i]( basket );
+            watchers[i](basket);
         }
     }
 
@@ -2762,42 +2806,45 @@ module.exports = (function($) {
         return basket;
     }
 
-    function addBasketItem( basketItem )
+    function addBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.post( '/rest/basket/items/', basketItem )
-            .done(function( response ) {
+        return ApiService.post('/rest/basket/items/', basketItem)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function updateBasketItem( basketItem )
+    function updateBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.put( '/rest/basket/items/' + basketItem.id, basketItem )
-            .done(function( response ) {
+        return ApiService.put('/rest/basket/items/' + basketItem.id, basketItem)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function updateShippingCountry( basket )
+    function updateShippingCountry(basket)
     {
-        var id = basket.shippingCountryId;
+        var id   = basket.shippingCountryId;
         var self = this;
-        return ApiService.put( '/rest/deliverycountry/'+id, basket)
-            .done(function( response ) {
+        return ApiService.put('/rest/deliverycountry/' + id, basket)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
     }
 
-    function deleteBasketItem( basketItem )
+    function deleteBasketItem(basketItem)
     {
         var self = this;
         var basketItemId;
-        if( typeof basketItem === "number" )
+        if (typeof basketItem === "number")
         {
             basketItemId = basketItem;
         }
@@ -2806,8 +2853,9 @@ module.exports = (function($) {
             basketItemId = basketItem.id;
         }
 
-        return ApiService.delete( '/rest/basket/items/' + basketItemId )
-            .done(function( response ) {
+        return ApiService.delete('/rest/basket/items/' + basketItemId)
+            .done(function(response)
+            {
                 basket = response;
                 notify();
             });
@@ -2818,34 +2866,36 @@ module.exports = (function($) {
 },{"services/ApiService":41}],43:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var checkout = {};
     var initPromise;
 
     return {
-        init: init,
-        setCheckout: setCheckout,
+        init                : init,
+        setCheckout         : setCheckout,
         setDeliveryAddressId: setDeliveryAddressId,
-        setBillingAddressId: setBillingAddressId,
+        setBillingAddressId : setBillingAddressId,
         setMethodOfPaymentId: setMethodOfPaymentId,
         setShippingCountryId: setShippingCountryId,
         setShippingProfileId: setShippingProfileId
     };
 
-    function init( checkoutData )
+    function init(checkoutData)
     {
-        if( !initPromise )
+        if (!initPromise)
         {
-            if( !!checkoutData )
+            if (!!checkoutData)
             {
                 initPromise = $.Deferred();
-                checkout = checkoutData;
+                checkout    = checkoutData;
                 initPromise.resolve();
             }
             else
             {
-                initPromise = ApiService.get("rest/checkout").done(function( response ) {
+                initPromise = ApiService.get("rest/checkout").done(function(response)
+                {
                     checkout = response;
                 });
             }
@@ -2853,78 +2903,81 @@ module.exports = (function($) {
         return initPromise;
     }
 
-    function _set( property, value )
+    function _set(property, value)
     {
         checkout[property] = value;
-        return ApiService.post( "rest/checkout/", checkout ).done(function( response ) {
+        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        {
             checkout = response;
         });
     }
 
-    function setCheckout( checkoutData )
+    function setCheckout(checkoutData)
     {
-        var properties = Object.keys( checkoutData );
-        for( var i = 0; i < properties.length; i++ )
+        var properties = Object.keys(checkoutData);
+        for (var i = 0; i < properties.length; i++)
         {
             checkout[properties[i]] = checkoutData[properties[i]];
         }
 
-        return ApiService.post( "rest/checkout/", checkout ).done(function( response ) {
+        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        {
             checkout = response;
         });
     }
 
-    function setDeliveryAddressId( deliveryAddressId )
+    function setDeliveryAddressId(deliveryAddressId)
     {
-        return _set( "deliveryAddressId", deliveryAddressId );
+        return _set("deliveryAddressId", deliveryAddressId);
     }
 
-    function setBillingAddressId( billingAddressId )
+    function setBillingAddressId(billingAddressId)
     {
-        return _set( "billingAddressId", billingAddressId );
+        return _set("billingAddressId", billingAddressId);
     }
 
-    function setMethodOfPaymentId( methodOfPaymentId )
+    function setMethodOfPaymentId(methodOfPaymentId)
     {
-        return _set( "methodOfPaymentId", methodOfPaymentId );
+        return _set("methodOfPaymentId", methodOfPaymentId);
     }
 
-    function setShippingCountryId( shippingCountryId )
+    function setShippingCountryId(shippingCountryId)
     {
-        return _set( "shippingCountryId", shippingCountryId );
+        return _set("shippingCountryId", shippingCountryId);
     }
 
-    function setShippingProfileId( shippingProfileId )
+    function setShippingProfileId(shippingProfileId)
     {
-        return _set( "shippingProfileId", shippingProfileId );
+        return _set("shippingProfileId", shippingProfileId);
     }
 
 })(jQuery);
 
 },{"services/ApiService":41}],44:[function(require,module,exports){
-module.exports = (function($) {
-    
+module.exports = (function($)
+{
+
     return {
         parseShippingCountries: parseShippingCountries,
-        parseShippingStates: parseShippingStates,
-        translateCountryNames: translateCountryNames,
-        sortCountries: sortCountries
+        parseShippingStates   : parseShippingStates,
+        translateCountryNames : translateCountryNames,
+        sortCountries         : sortCountries
     };
 
-    function parseShippingCountries (countryData, id)
+    function parseShippingCountries(countryData, id)
     {
         var countryList       = JSON.parse(countryData);
-        var deliveryCountries =  [];
+        var deliveryCountries = [];
 
-        if(countryList == null)
+        if (countryList == null)
         {
             return deliveryCountries;
         }
 
         for (var key in countryList)
         {
-            var country = countryList[key];
-            var option = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
+            var country     = countryList[key];
+            var option      = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
             option.selected = (id === country.id);
             deliveryCountries.push(option);
         }
@@ -2936,7 +2989,8 @@ module.exports = (function($) {
     {
         var countryNames = JSON.parse(countryNameData);
 
-        if(countryNames == null){
+        if (countryNames == null)
+        {
             return;
         }
         for (var id in countryNames)
@@ -2945,7 +2999,7 @@ module.exports = (function($) {
             for (var i = 0, len = countries.length; i < len; i++)
             {
                 var country = countries[i];
-                if(country.id == id)
+                if (country.id == id)
                 {
                     country.name = name;
                     break;
@@ -2953,18 +3007,24 @@ module.exports = (function($) {
             }
         }
     }
-    
+
     function sortCountries(countries)
     {
         countries.sort(function(a, b)
         {
-            if(a.name < b.name) return -1;
-            if(a.name > b.name) return 1;
+            if (a.name < b.name)
+            {
+                return -1;
+            }
+            if (a.name > b.name)
+            {
+                return 1;
+            }
             return 0;
         });
     }
 
-    function parseShippingStates (countryData, countryID)
+    function parseShippingStates(countryData, countryID)
     {
 
         var states      = [];
@@ -2972,7 +3032,7 @@ module.exports = (function($) {
         for (var key in countryList)
         {
             var country = countryList[key];
-            if(country.id == countryID)
+            if (country.id == countryID)
             {
                 states = country.states;
                 break;
@@ -2981,8 +3041,6 @@ module.exports = (function($) {
 
         return states;
     }
-
-
 
 })(jQuery);
 
@@ -3011,9 +3069,10 @@ module.exports = (function($)
     }
 });
 },{"services/ApiService":41}],46:[function(require,module,exports){
-module.exports = (function($) {
+module.exports = (function($)
+{
 
-    var paused = false;
+    var paused  = false;
     var timeout = -1;
     var interval;
     var timeRemaining, timeStart;
@@ -3022,33 +3081,33 @@ module.exports = (function($) {
         findModal: findModal
     };
 
-    function findModal( element )
+    function findModal(element)
     {
-        return new Modal( element );
+        return new Modal(element);
     }
 
-    function Modal( element )
+    function Modal(element)
     {
-        var self     = this;
+        var self = this;
         var $bsModal;
 
-        if( $(element).is('.modal') )
+        if ($(element).is('.modal'))
         {
-          $bsModal = $(element);
+            $bsModal = $(element);
         }
         else
         {
-          $bsModal = $(element).find('.modal').first();
+            $bsModal = $(element).find('.modal').first();
         }
 
         return {
-            show: show,
-            hide: hide,
-            setTimeout: setTimeout,
-            startTimeout: startTimeout,
-            pauseTimeout: pauseTimeout,
-            continueTimeout: continueTimeout,
-            stopTimeout: stopTimeout,
+            show             : show,
+            hide             : hide,
+            setTimeout       : setTimeout,
+            startTimeout     : startTimeout,
+            pauseTimeout     : pauseTimeout,
+            continueTimeout  : continueTimeout,
+            stopTimeout      : stopTimeout,
             getModalContainer: getModalContainer
         };
 
@@ -3056,9 +3115,9 @@ module.exports = (function($) {
         {
             $bsModal.modal('show');
 
-            if ( $bsModal.timeout > 0 )
+            if ($bsModal.timeout > 0)
             {
-              startTimeout();
+                startTimeout();
             }
 
             return self;
@@ -3072,77 +3131,77 @@ module.exports = (function($) {
 
         function getModalContainer()
         {
-          return $bsModal;
+            return $bsModal;
         }
 
-        function setTimeout( timeout )
+        function setTimeout(timeout)
         {
-          $bsModal.timeout = timeout;
+            $bsModal.timeout = timeout;
 
-          $bsModal.find( '.modal-content' ).mouseover( function()
-          {
-            pauseTimeout();
-          });
+            $bsModal.find('.modal-content').mouseover(function()
+            {
+                pauseTimeout();
+            });
 
-          $bsModal.find( '.modal-content' ).mouseout( function()
-          {
-            continueTimeout();
-          });
+            $bsModal.find('.modal-content').mouseout(function()
+            {
+                continueTimeout();
+            });
 
-          return this;
+            return this;
         }
 
         function startTimeout()
         {
-          timeRemaining = $bsModal.timeout;
-          timeStart     = (new Date()).getTime();
+            timeRemaining = $bsModal.timeout;
+            timeStart     = (new Date()).getTime();
 
-          timeout = window.setTimeout( function()
-          {
-            window.clearInterval( interval );
-            hide();
-          }, $bsModal.timeout );
-
-          $bsModal.find( '.timer' ).text( timeRemaining / 1000 );
-          interval = window.setInterval( function()
-          {
-            if ( !paused )
+            timeout = window.setTimeout(function()
             {
-              var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
-              secondsRemaining     = Math.round( secondsRemaining / 1000 );
-              $bsModal.find( '.timer' ).text( secondsRemaining );
-            }
-          }, 1000 )
+                window.clearInterval(interval);
+                hide();
+            }, $bsModal.timeout);
+
+            $bsModal.find('.timer').text(timeRemaining / 1000);
+            interval = window.setInterval(function()
+            {
+                if (!paused)
+                {
+                    var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
+                    secondsRemaining     = Math.round(secondsRemaining / 1000);
+                    $bsModal.find('.timer').text(secondsRemaining);
+                }
+            }, 1000);
         }
 
         function pauseTimeout()
         {
-          paused = true;
-          timeRemaining -= (new Date()).getTime() - timeStart;
-          window.clearTimeout( timeout );
+            paused = true;
+            timeRemaining -= (new Date()).getTime() - timeStart;
+            window.clearTimeout(timeout);
         }
 
         function continueTimeout()
         {
-         paused    = false;
-         timeStart = (new Date()).getTime();
-         timeout   = window.setTimeout( function()
-         {
-           hide();
-           window.clearInterval( interval );
-         }, timeRemaining );
+            paused    = false;
+            timeStart = (new Date()).getTime();
+            timeout   = window.setTimeout(function()
+            {
+                hide();
+                window.clearInterval(interval);
+            }, timeRemaining);
         }
 
-       function stopTimeout()
-       {
-         window.clearTimeout( timeout );
-         window.clearInterval( interval );
-       }
+        function stopTimeout()
+        {
+            window.clearTimeout(timeout);
+            window.clearInterval(interval);
+        }
     }
 })(jQuery);
 
 },{}],47:[function(require,module,exports){
-module.exports = (function( $ )
+module.exports = (function($)
 {
     var options = {
         symbol   : "EUR",
@@ -3155,14 +3214,14 @@ module.exports = (function( $ )
     return {
         formatMonetary: formatMonetary,
         initOptions   : initOptions
-    }
+    };
 
-    function initOptions( number_decimals, separator_decimal, separator_thousands, right, currency )
+    function initOptions(number_decimals, separator_decimal, separator_thousands, right, currency)
     {
-        var getSymbolFromCurrency = require( 'currency-symbol-map' ).getSymbolFromCurrency;
-        var symbol                = getSymbolFromCurrency( currency );
+        var getSymbolFromCurrency = require('currency-symbol-map').getSymbolFromCurrency;
+        var symbol                = getSymbolFromCurrency(currency);
 
-        if ( right == "true" )
+        if (right == "true")
         {
             right  = true;
             symbol = " " + symbol;
@@ -3176,25 +3235,25 @@ module.exports = (function( $ )
             symbol   : symbol,
             decimal  : separator_decimal,
             thousand : separator_thousands,
-            precision: parseFloat( number_decimals ),
+            precision: parseFloat(number_decimals),
             right    : right
         };
     }
 
-    function formatMonetary( price, currency )
+    function formatMonetary(price, currency)
     {
-        if ( isNaN( price ) )
+        if (isNaN(price))
         {
             return price + " " + currency;
         }
         else
         {
-            price = parseFloat( price );
+            price = parseFloat(price);
         }
-       
-        var result = formatNumber( price, this.options.precision, this.options.decimal, this.options.thousand );
 
-        if ( this.options.right )
+        var result = formatNumber(price, this.options.precision, this.options.decimal, this.options.thousand);
+
+        if (this.options.right)
         {
             result += this.options.symbol;
         }
@@ -3205,96 +3264,97 @@ module.exports = (function( $ )
         return result;
     }
 
-    function formatNumber( price, p, d, t )
+    function formatNumber(price, p, d, t)
     {
 
-        p = isNaN( p = Math.abs( p ) ) ? 2 : p,
+        p = isNaN(p = Math.abs(p)) ? 2 : p,
             d = d == undefined ? "." : d,
             t = t == undefined ? "," : t,
             s = price < 0 ? "-" : "",
-            i = parseInt( price = Math.abs( +price || 0 ).toFixed( p ) ) + "",
+            i = parseInt(price = Math.abs(+price || 0).toFixed(p)) + "",
             j = (j = i.length) > 3 ? j % 3 : 0;
 
-        return s + (j ? i.substr( 0, j ) + t : "") + i.substr( j ).replace( /(\d{3})(?=\d)/g, "$1" + t ) + (p ? d + Math.abs( price - i ).toFixed( p ).slice( 2 ) : "");
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (p ? d + Math.abs(price - i).toFixed(p).slice(2) : "");
     }
 
-})( jQuery );
+})(jQuery);
 
 },{"currency-symbol-map":53}],48:[function(require,module,exports){
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var notificationCount = 0;
-    var notifications = new NotificationList();
+    var notifications     = new NotificationList();
 
     return {
-        log:        _log,
-        info:       _info,
-        warn:       _warn,
-        error:      _error,
-        success:    _success,
+        log             : _log,
+        info            : _info,
+        warn            : _warn,
+        error           : _error,
+        success         : _success,
         getNotifications: getNotifications
-    }
+    };
 
-    function _log( message, prefix )
+    function _log(message, prefix)
     {
-        var notification = new Notification( message );
+        var notification = new Notification(message);
 
-        if( !!App.config.logMessages )
+        if (!!App.config.logMessages)
         {
-            console.log( (prefix || '') + '[' + notification.code + '] ' + notification.message );
+            console.log((prefix || '') + '[' + notification.code + '] ' + notification.message);
 
-            for( var i = 0; i < notification.stackTrace.length; i++ )
+            for (var i = 0; i < notification.stackTrace.length; i++)
             {
-                _log( notification.stackTrace[i], " + " );
+                _log(notification.stackTrace[i], " + ");
             }
         }
 
-    return notification;
+        return notification;
     }
 
-    function _info( message )
+    function _info(message)
     {
-        var notification = new Notification( message, 'info' );
+        var notification = new Notification(message, 'info');
 
-        if( !!App.config.printInfos )
+        if (!!App.config.printInfos)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _warn( message )
+    function _warn(message)
     {
-        var notification = new Notification( message, 'warning' );
+        var notification = new Notification(message, 'warning');
 
-        if( !!App.config.printWarnings )
+        if (!!App.config.printWarnings)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _error( message )
+    function _error(message)
     {
-        var notification = new Notification( message, 'danger' );
+        var notification = new Notification(message, 'danger');
 
-        if( !!App.config.printErrors )
+        if (!!App.config.printErrors)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
     }
 
-    function _success( message )
+    function _success(message)
     {
-        var notification = new Notification( message, 'success' );
+        var notification = new Notification(message, 'success');
 
-        if( !!App.config.printSuccess )
+        if (!!App.config.printSuccess)
         {
-            _printNotification( notification );
+            _printNotification(notification);
         }
 
         return notification;
@@ -3305,52 +3365,53 @@ module.exports = (function($) {
         return notifications;
     }
 
-    function _printNotification( notification )
+    function _printNotification(notification)
     {
-        notifications.add( notification );
-        _log( notification );
+        notifications.add(notification);
+        _log(notification);
 
         return notification;
     }
 
-    function Notification( data, context )
+    function Notification(data, context)
     {
-        if( !App.config.printStackTrace )
+        if (!App.config.printStackTrace)
         {
             data.stackTrace = [];
         }
-        var id = notificationCount++;
+        var id   = notificationCount++;
         var self = {
-            id          : id,
-            code        : data.code || 0,
-            message     : data.message || data || "",
-            context     : context || "info",
-            stackTrace  : data.stackTrace || [],
-            close       : close,
-            closeAfter  : closeAfter,
-            trace       : trace
+            id        : id,
+            code      : data.code || 0,
+            message   : data.message || data || "",
+            context   : context || "info",
+            stackTrace: data.stackTrace || [],
+            close     : close,
+            closeAfter: closeAfter,
+            trace     : trace
         };
 
         return self;
 
         function close()
         {
-            notifications.remove( self );
+            notifications.remove(self);
         }
 
-        function closeAfter( timeout )
+        function closeAfter(timeout)
         {
-            setTimeout(function() {
-                notifications.remove( self );
+            setTimeout(function()
+            {
+                notifications.remove(self);
             }, timeout);
         }
 
-        function trace( message, code )
+        function trace(message, code)
         {
-            if( !!App.config.printStackTrace )
+            if (!!App.config.printStackTrace)
             {
                 self.stackTrace.push({
-                    code: code || 0,
+                    code   : code || 0,
                     message: message
                 });
             }
@@ -3361,8 +3422,8 @@ module.exports = (function($) {
     {
         var elements = [];
         return {
-            all: all,
-            add: add,
+            all   : all,
+            add   : add,
             remove: remove
         };
 
@@ -3371,18 +3432,18 @@ module.exports = (function($) {
             return elements;
         }
 
-        function add( notification )
+        function add(notification)
         {
-            elements.push( notification )
+            elements.push(notification)
         }
 
-        function remove( notification )
+        function remove(notification)
         {
-            for( var i = 0; i < elements.length; i++ )
+            for (var i = 0; i < elements.length; i++)
             {
-                if( elements[i].id === notification.id )
+                if (elements[i].id === notification.id)
                 {
-                    elements.splice( i, 1 );
+                    elements.splice(i, 1);
                     break;
                 }
             }
@@ -3392,24 +3453,25 @@ module.exports = (function($) {
 })(jQuery);
 
 },{}],49:[function(require,module,exports){
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var itemsPerPagePrivate = 0;
-    var sortModePrivate = "";
+    var sortModePrivate     = "";
 
     return {
-        itemsPerPage: itemsPerPagePrivate,
-        sortMode: sortModePrivate,
+        itemsPerPage   : itemsPerPagePrivate,
+        sortMode       : sortModePrivate,
         setItemsPerPage: setItemsPerPage,
-        setSortMode: setSortMode
+        setSortMode    : setSortMode
     };
 
-    function setItemsPerPage(itemsPerPage) 
+    function setItemsPerPage(itemsPerPage)
     {
         this.itemsPerPagePrivate = itemsPerPage;
     }
 
-    function setSortMode(sortMode) 
+    function setSortMode(sortMode)
     {
         this.sortModePrivate = sortMode;
     }
@@ -3417,106 +3479,114 @@ module.exports = (function($) {
 })(jQuery);
 
 },{}],50:[function(require,module,exports){
-module.exports = (function( $ ) {
+module.exports = (function($)
+{
 
     var $form;
 
     return {
-        validate: _validate,
-        getInvalidFields: _getInvalidFields,
+        validate         : _validate,
+        getInvalidFields : _getInvalidFields,
         markInvalidFields: _markInvalidFields
     };
 
-    function _validate( form )
+    function _validate(form)
     {
-        var deferred = $.Deferred();
-        var invalidFields = _getInvalidFields( form );
-        if( invalidFields.length > 0 )
+        var deferred      = $.Deferred();
+        var invalidFields = _getInvalidFields(form);
+        if (invalidFields.length > 0)
         {
-            deferred.rejectWith( form, [invalidFields] );
+            deferred.rejectWith(form, [invalidFields]);
         }
         else
         {
-            deferred.resolveWith( form );
+            deferred.resolveWith(form);
         }
 
         return deferred;
     }
 
-    function _getInvalidFields( form )
+    function _getInvalidFields(form)
     {
-        $form = $(form);
+        $form                   = $(form);
         var invalidFormControls = [];
 
-        $form.find('[data-validate]').each( function( i, elem ) {
+        $form.find('[data-validate]').each(function(i, elem)
+        {
 
-            if( !_validateElement( $(elem) ) )
+            if (!_validateElement($(elem)))
             {
-                invalidFormControls.push( elem );
+                invalidFormControls.push(elem);
             }
         });
 
         return invalidFormControls;
     }
 
-    function _markInvalidFields( fields, errorClass )
+    function _markInvalidFields(fields, errorClass)
     {
-        errorClass = errorClass || 'has-error';
+        errorClass = errorClass || 'has-error';
 
-        $( fields ).each( function(i, elem ) {
-            var $elem = $( elem );
-            $elem.addClass( errorClass );
-            _findFormControls( $elem ).on('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass', function() {
-                if( _validateElement( $elem ) )
+        $(fields).each(function(i, elem)
+        {
+            var $elem = $(elem);
+            $elem.addClass(errorClass);
+            _findFormControls($elem).on('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass', function()
+            {
+                if (_validateElement($elem))
                 {
-                    $elem.removeClass( errorClass );
-                    if( $elem.is('[type="radio"], [type="checkbox"]') )
+                    $elem.removeClass(errorClass);
+                    if ($elem.is('[type="radio"], [type="checkbox"]'))
                     {
                         var groupName = $elem.attr('name');
-                        $( '.'+errorClass + '[name="'+ groupName + '"]').removeClass( errorClass );
+                        $('.' + errorClass + '[name="' + groupName + '"]').removeClass(errorClass);
                     }
-                    _findFormControls( $elem ).off('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass');
+                    _findFormControls($elem).off('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass');
                 }
-            })
+            });
         });
     }
 
-    function _validateElement( elem )
+    function _validateElement(elem)
     {
-        var $elem = $(elem);
-        var validationKeys = $elem.attr('data-validate').split('|').map(function(i){ return i.trim(); }) || ["text"];
-        var hasError = false;
+        var $elem          = $(elem);
+        var validationKeys = $elem.attr('data-validate').split('|').map(function(i)
+            {
+                return i.trim();
+            }) || ["text"];
+        var hasError       = false;
 
-        _findFormControls( $elem ).each( function( i, formControl ) {
-            var $formControl = $( formControl );
-            var validationKey = validationKeys[i] || validationKeys[0];
+        _findFormControls($elem).each(function(i, formControl)
+        {
+            var $formControl  = $(formControl);
+            var validationKey = validationKeys[i] || validationKeys[0];
 
-            if( !_isActive( $formControl ) )
+            if (!_isActive($formControl))
             {
                 // continue loop
                 return true;
             }
 
-            if( $formControl.is('[type="checkbox"], [type="radio"]') )
+            if ($formControl.is('[type="checkbox"], [type="radio"]'))
             {
 
-                if( !_validateGroup( $formControl, validationKey ) )
+                if (!_validateGroup($formControl, validationKey))
                 {
                     hasError = true;
                 }
                 return true;
             }
 
-            if( $formControl.is('select') )
+            if ($formControl.is('select'))
             {
-                if( !_validateSelect( $formControl, validationKey ) )
+                if (!_validateSelect($formControl, validationKey))
                 {
                     hasError = true;
                 }
                 return true;
             }
 
-            if( !_validateInput( $formControl, validationKey ) )
+            if (!_validateInput($formControl, validationKey))
             {
                 hasError = true;
             }
@@ -3526,63 +3596,63 @@ module.exports = (function( $ ) {
         return !hasError;
     }
 
-    function _validateGroup( $formControl, validationKey )
+    function _validateGroup($formControl, validationKey)
     {
         var groupName = $formControl.attr('name');
-        var $group = $form.find('[name="' + groupName + '"]');
-        var range = _eval( validationKey ) || { min: 1, max: 1 };
-        var checked = $group.filter(':checked').length;
+        var $group    = $form.find('[name="' + groupName + '"]');
+        var range     = _eval(validationKey) || {min: 1, max: 1};
+        var checked   = $group.filter(':checked').length;
 
         return checked >= range.min && checked <= range.max;
 
     }
 
-    function _validateSelect( $formControl, validationKey )
+    function _validateSelect($formControl, validationKey)
     {
-        return $.trim( $formControl.val() ) !== validationKey;
+        return $.trim($formControl.val()) !== validationKey;
     }
 
-    function _validateInput( $formControl, validationKey )
+    function _validateInput($formControl, validationKey)
     {
-        switch( validationKey )
+        switch (validationKey)
         {
             case 'text':
-                return _hasValue( $formControl );
+                return _hasValue($formControl);
             case 'mail':
                 var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
-                return _hasValue( $formControl ) && mailRegExp.test( $formControl.val() );
+                return _hasValue($formControl) && mailRegExp.test($formControl.val());
             case 'number':
-                return _hasValue( $formControl ) && $.isNumeric( $.trim( $formControl.val() ) );
+                return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
             case 'ref':
-                return _compareRef( $.trim( $formControl.val() ), $.trim( $formControl.attr('data-validate-ref') ) );
+                return _compareRef($.trim($formControl.val()), $.trim($formControl.attr('data-validate-ref')));
             case 'regex':
-                var ref = $formControl.attr('data-validate-ref');
-                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp( ref );
-                return _hasValue( $formControl ) && regex.test( $.trim( $formControl.val() ) );
+                var ref   = $formControl.attr('data-validate-ref');
+                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+                return _hasValue($formControl) && regex.test($.trim($formControl.val()));
             default:
-                console.error( 'Form validation error: unknown validation property: "' + validationKey + '"' );
+                console.error('Form validation error: unknown validation property: "' + validationKey + '"');
                 return true;
         }
     }
 
-    function _hasValue( $formControl )
+    function _hasValue($formControl)
     {
-        return $.trim( $formControl.val() ).length > 0;
+        return $.trim($formControl.val()).length > 0;
     }
 
-    function _compareRef( value, ref )
+    function _compareRef(value, ref)
     {
-        if( $( ref ).length > 0 )
+        if ($(ref).length > 0)
         {
-            ref = $.trim( $( ref ).val() );
+            ref = $.trim($(ref).val());
         }
 
         return value === ref;
     }
 
-    function _findFormControls( $elem )
+    function _findFormControls($elem)
     {
-        if( $elem.is('input, select, textarea') )
+        if ($elem.is('input, select, textarea'))
         {
             return $elem;
         }
@@ -3590,25 +3660,26 @@ module.exports = (function( $ ) {
         return $elem.find('input, select, textarea');
     }
 
-    function _isActive( $elem )
+    function _isActive($elem)
     {
         return $elem.is(':visible') && $elem.is(':enabled');
     }
 
-    function _eval( input )
+    function _eval(input)
     {
         return (new Function("return " + input))();
     }
 
-})( jQuery );
+})(jQuery);
 
 },{}],51:[function(require,module,exports){
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var cache = {};
 
     return {
-        addToCache: _addToCache,
+        addToCache  : _addToCache,
         getFromCache: _getFromCache
     };
 
@@ -3616,7 +3687,7 @@ module.exports = (function($) {
     {
         var variationHTML = {'html': html};
 
-        if(cache[itemId] === undefined)
+        if (cache[itemId] === undefined)
         {
             cache[itemId] = {};
         }
@@ -3626,13 +3697,13 @@ module.exports = (function($) {
 
     function _getFromCache(itemId, variationId)
     {
-        for(var cachedItemId in cache)
+        for (var cachedItemId in cache)
         {
-            if(cachedItemId == itemId)
+            if (cachedItemId == itemId)
             {
-                for(var cachedVariationId in cache[itemId])
+                for (var cachedVariationId in cache[itemId])
                 {
-                    if(cachedVariationId == variationId)
+                    if (cachedVariationId == variationId)
                     {
                         return cache[itemId][variationId].html;
                     }
@@ -3643,19 +3714,19 @@ module.exports = (function($) {
         return undefined;
     }
 
-
 })(jQuery);
 
 },{}],52:[function(require,module,exports){
-module.exports = (function($) {
+module.exports = (function($)
+{
 
     var overlay = {
-        count: 0,
+        count    : 0,
         isVisible: false
     };
 
     return {
-        getOverlay: getOverlay,
+        getOverlay    : getOverlay,
         showWaitScreen: showWaitScreen,
         hideWaitScreen: hideWaitScreen
     };
@@ -3672,22 +3743,22 @@ module.exports = (function($) {
         overlay.isVisible = true;
     }
 
-    function hideWaitScreen( force )
+    function hideWaitScreen(force)
     {
         overlay.count = overlay.count || 0;
-        if( overlay.count > 0 )
+        if (overlay.count > 0)
         {
             overlay.count--;
         }
 
-        if( !!force )
+        if (!!force)
         {
             overlay.count = 0;
         }
 
-        if( overlay.count <= 0 )
+        if (overlay.count <= 0)
         {
-            overlay.count = 0;
+            overlay.count   = 0;
             overlay.visible = false;
         }
 
@@ -4070,7 +4141,7 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
 
 
 new Vue({
