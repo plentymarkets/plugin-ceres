@@ -41,28 +41,27 @@
             padding: .3rem;
         }
     }
+    .nav-tabs {
+        .nav-item {
+            float: none;
+            .nav-link {
+                border:1px solid $nav-tabs-border-color;
+                &.active,
+                &:hover {
+                    border:1px solid $nav-tabs-border-color;
+                    color: $gray-darker;
+                    background:$gray-lighter2;
+                }
+            }
+            &+.nav-item {
+                margin-left: 0;
+            }
+        }
+    }
 }
 
 
 #single-big-image {
-    border: 1px solid $gray-lighter;
-    
-    &.owl-carousel{
-        width: 100%!important;
-
-        .owl-stage-outer{
-          width: 100%!important;
-        }
-
-        .owl-stage {
-            width: 100%!important;
-        }
-
-        .owl-item {
-            width: 100%!important;
-        }
-    }
-
     .owl-controls {
         position: absolute;
         top: 50%;
@@ -85,13 +84,9 @@
     }
 
     .owl_item{
-        width: 100%;
-
+        margin: 5px;
         a {
-            display: block;
             width: 100%;
-
-            @include img-contain();
         }
     }
 }
@@ -135,6 +130,7 @@
 .availability_3,
 .availability_4 {background-color: $availability_3;}
 .availability_5 {background-color: $availability_5;}
+
 
 .rating{
     .tag{
@@ -188,5 +184,30 @@
          .price {
                 float: right;
             }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .single {
+        .nav-tabs {
+            .nav-item {
+                float: left;
+                .nav-link {
+                    border:1px solid $nav-tabs-border-color;
+                    &.active,
+                    &:hover {
+                        border:1px solid $nav-tabs-border-color;
+                        color: $gray;
+                        background:white;
+                    }
+                    &.active {
+                        border-bottom: 1px solid transparent;
+                    }
+                }
+                &+.nav-item {
+                    margin-left: .2rem;
+                }
+            }
+        }
     }
 }
