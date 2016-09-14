@@ -62,13 +62,9 @@ Vue.component('basket-preview-item', {
             }
             else
             {
-                $(this.$el.nextElementSibling).toggleClass('wait');
+                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
 
-                BasketService.deleteBasketItem(basketItem)
-                    .done(function()
-                    {
-                        $(_self.$el.nextElementSibling).toggleClass('wait');
-                    });
+                BasketService.deleteBasketItem(basketItem);
             }
         },
 

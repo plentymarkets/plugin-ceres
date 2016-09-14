@@ -8,14 +8,10 @@
         </header>
 
         <div class="p-a-1 list">
-          <div class="cmp cmp-basket-preview-list">
-            <template v-if="checkBasket">
-                  <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
-            </template>
-            <template v-else>
-              <h5>Sie haben keine Artikel im Warenkorb</h5>
-            </template>
+          <div class="cmp cmp-basket-preview-list" v-if="checkBasket">
+            <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
           </div>
+          <h5 v-else>Sie haben keine Artikel im Warenkorb</h5>
         </div>
         <div class="p-a-1 bg-faded totals">
 

@@ -1,56 +1,54 @@
 {% set itemName = config("PluginCallisto.item.name") %}
 
 <script type="x/template" id="vue-basket-preview-item">
-    <template v-for="basketItem in basketItems">
-        <article class="cmp cmp-basket-preview-item" id="previewItem-${ basketItem.variationId }">
-            <div class="basket-item-quantity">
-                <div class="input-group vert">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, 1)">+</button>
-                    </span>
-                    <input type="text" class="form-control" :placeholder="basketItem.quantity" size="3" maxlength="3">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, -1)">-</button>
-                    </span>
-                </div>
-            </div>
+  <article v-for="basketItem in basketItems" class="cmp cmp-basket-preview-item previewItem-${ basketItem.variationId }">
+      <div class="basket-item-quantity">
+          <div class="input-group vert">
+              <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, 1)">+</button>
+              </span>
+              <input type="text" class="form-control" :placeholder="basketItem.quantity" size="3" maxlength="3">
+              <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, -1)">-</button>
+              </span>
+          </div>
+      </div>
 
-            <div class="basket-item-image">
-                <div class="square-container">
-                    <div class="square-inner center-xy main-image">
-                        <img class="img-fluid" :src="getImage(basketItem.variationId)" alt="${ items[basketItem.variationId].itemDescription.name1 }">
-                    </div>
-                </div>
-            </div>
+      <div class="basket-item-image">
+          <div class="square-container">
+              <div class="square-inner center-xy main-image">
+                  <img class="img-fluid" :src="getImage(basketItem.variationId)" alt="${ items[basketItem.variationId].itemDescription.name1 }">
+              </div>
+          </div>
+      </div>
 
-            <div class="basket-item-infos small">
-                <a class="clearfix" :href="setLinkToItem(basketItem.variationId)">
-                    <div class="item-name">
-                        {% if itemName == '0' %}
-                            ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name1) }
-                        {% elseif itemName == '1' %}
-                            ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name2) }
-                        {% elseif itemName == '2' %}
-                            ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name3) }
-                        {% endif %}
-                    </div>
-                </a>
-                <div class="item-unit-price">
-                    ${ getBasePrice(basketItem) } / Stück
-                </div>
-                <div class="item-total-price">
-                    ${ calcPrice(basketItem) }
-                </div>
+      <div class="basket-item-infos small">
+          <a class="clearfix" :href="setLinkToItem(basketItem.variationId)">
+              <div class="item-name">
+                  {% if itemName == '0' %}
+                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name1) }
+                  {% elseif itemName == '1' %}
+                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name2) }
+                  {% elseif itemName == '2' %}
+                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name3) }
+                  {% endif %}
+              </div>
+          </a>
+          <div class="item-unit-price">
+              ${ getBasePrice(basketItem) } / Stück
+          </div>
+          <div class="item-total-price">
+              ${ calcPrice(basketItem) }
+          </div>
 
-                <button type="button" id="deleteBtn-${ basketItem.variationId }" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem, $event)">
-                    <span class="message">
-                        Löschen
-                    </span>
-                    <span class="btn-label">
-                        <i class="fa fa-times"></i>
-                    </span>
-                </button>
-            </div>
-        </article>
-    </template>
+          <button type="button" id="deleteBtn-${ basketItem.variationId }" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem, $event)">
+              <span class="message">
+                  Löschen
+              </span>
+              <span class="btn-label">
+                  <i class="fa fa-times"></i>
+              </span>
+          </button>
+      </div>
+  </article>
 </script>
