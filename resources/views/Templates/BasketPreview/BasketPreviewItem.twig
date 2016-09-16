@@ -36,7 +36,7 @@
                     </div>
                 </a>
                 <div class="item-unit-price">
-                    ${ getBasePrice(basketItem) } / Stück
+                    ${ getBasePrice(basketItem) } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
                 </div>
                 <div class="item-total-price">
                     ${ calcPrice(basketItem) }
@@ -44,7 +44,7 @@
 
                 <button type="button" id="deleteBtn-${ basketItem.variationId }" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem, $event)">
                     <span class="message">
-                        Löschen
+                        {{ trans("PluginCallisto::Callisto.generalDelete") }}
                     </span>
                     <span class="btn-label">
                         <i class="fa fa-times"></i>

@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
         <header class="basket-header p-a-1">
-            <h3 class="d-inline-block m-a-0">Warenkorb Vorschau</h3>
+            <h3 class="d-inline-block m-a-0">{{ trans("PluginCallisto::Callisto.basketPreview") }}</h3>
             <button type="button" id="closeBasketPreview" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -13,7 +13,7 @@
                   <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
             </template>
             <template v-else>
-              <h5>Sie haben keine Artikel im Warenkorb</h5>
+              <h5>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
             </template>
           </div>
         </div>
@@ -24,18 +24,18 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
                     <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="Warenkorb">
-                      Zum Warenkorb <i class="fa fa-shopping-cart"></i>
+                        {{ trans("PluginCallisto::Callisto.basketToBasket") }} <i class="fa fa-shopping-cart"></i>
                     </a>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
                   {% if frontend.Account.getIsAccountLoggedIn %}
                       <a href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="Kasse">
-                        Zur Kasse <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                          {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                       </a>
                   {% else %}
                     <a href="/login" class="btn btn-primary btn-block checkOutBtn" title="Kasse">
-                      Zur Kasse <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                   {% endif %}
                 </div>

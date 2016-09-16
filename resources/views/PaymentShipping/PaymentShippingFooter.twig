@@ -1,7 +1,7 @@
 <div class="footertop p-y-3 clearfix">
     <div class="container">
         <div class="row">
-            <h3 class="text-xs-center">Zahlen Sie bequem per</h3>
+            <h3 class="text-xs-center">{{ trans("PluginCallisto::Callisto.orderPayEasy") }}</h3>
             <div class="col-xs-12 text-xs-center">
                 {#TODO: Wait for Payment-ShippingService from core #}
                 <img src="{{ plugin_path("PluginCallisto") }}/images/de-pp-logo-100px.png" alt="PayPal"
@@ -16,7 +16,7 @@
         </div>
         <hr>
         <div class="row">
-            <h3 class="text-xs-center">Wir versenden mit</h3>
+            <h3 class="text-xs-center">{{ trans("PluginCallisto::Callisto.orderWeShip") }}</h3>
             <div class="col-xs-12 text-xs-center">
                 <img src="{{ plugin_path("PluginCallisto") }}/images/dhl-logo.png" alt="DHL"
                      title="DHL" class="m-l-1">

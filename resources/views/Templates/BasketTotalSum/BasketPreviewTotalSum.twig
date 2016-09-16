@@ -1,24 +1,24 @@
 <div class="cmp cmp-totals">
-	<h3>Summe</h3>
+	<h3>{{ trans("PluginCallisto::Callisto.basketSum") }}</h3>
 	<div>
 		<dl>
-			<dt> <strong>Warenwert</strong>
-				(Brutto)
+			<dt> <strong>{{ trans("PluginCallisto::Callisto.basketValue") }}</strong>
+				({{ trans("PluginCallisto::Callisto.basketGross") }})
 			</dt><!--
 		 --><dd>
 				  ${ itemTotalSum }
 			</dd>
 			<dt>
-				<strong>Versandkosten</strong>
-				(Brutto)
+				<strong>{{ trans("PluginCallisto::Callisto.itemShippingPrice") }}</strong>
+				({{ trans("PluginCallisto::Callisto.basketGross") }})
 			</dt><!--
 		 --><dd>
 				${ shippingTotalSum }
 			</dd>
 			<hr>
 			<dt>
-				<strong>Gesamtsumme</strong>
-				(Brutto)
+				<strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }}</strong>
+				({{ trans("PluginCallisto::Callisto.basketGross") }})
 			</dt><!--
 		 --><dd>
 				<strong>${ basketTotalSum }</strong>

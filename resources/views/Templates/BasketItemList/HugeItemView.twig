@@ -11,7 +11,7 @@
     </item-count-to-basket>
 
 		<div class="item-unit-price">
-			${ formatRetailPrice(basketItem) } / Stück
+			${ formatRetailPrice(basketItem) } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
 		</div>
 
 		<div class="item-total-price">
@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="item-remove del-${basketItem.variationId}" @click="deleteItem(basketItem)">
-			Löschen <i class="fa fa-times"></i>
+			{{ trans("PluginCallisto::Callisto.generalDelete") }} <i class="fa fa-times"></i>
 		</div>
 	</div>
 
@@ -38,7 +38,7 @@
 		</a>
 
 		<p class="id">
-			<strong>Art. ID</strong> ${ items[basketItem.variationId].itemBase.id }
+			<strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ items[basketItem.variationId].itemBase.id }
 		</p>
 
 		<!-- {% if showItemVariation == "true" %}
@@ -150,15 +150,15 @@
 
 		<div class="item-description">
 			<div class="row">
-        <strong class="col-xs-6 col-sm-5">Artikelnummer:</strong>
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
         <span class="col-xs-6 col-sm-7">${ items[basketItem.variationId].variationBase.customNumber}</span>
       </div>
       <div class="row">
-        <strong class="col-xs-6 col-sm-5">Zustand:</strong>
-        <span class="col-xs-6 col-sm-7">Neu</span>
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
+        <span class="col-xs-6 col-sm-7">TODO</span>
       </div>
       <div class="row">
-        <strong class="col-xs-6 col-sm-5">Verfugbarkeit:</strong>
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
         <span class="col-xs-6 col-sm-7">
           {% set availabilityData = services.availability.getAvailabilityById(1) %}
         </span>

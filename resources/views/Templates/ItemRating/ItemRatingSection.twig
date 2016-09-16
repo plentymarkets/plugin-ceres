@@ -7,19 +7,19 @@
                     <div class="col-sm-6">
                         <div class="input-unit">
                             <input type="text" id="ratingUserName" name="">
-                            <label for="ratingUserName">Benutzer Name</label>
+                            <label for="ratingUserName">{{ trans("PluginCallisto::Callisto.accUsername") }}</label>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="input-unit">
                             <input type="email" id="ratingUserEmail" name="">
-                            <label for="ratingUserEmail">Benutzer E-Mail</label>
+                            <label for="ratingUserEmail">{{ trans("PluginCallisto::Callisto.generalYourEmail") }}</label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 m-b-1">
-                        Bewerten
+                        {{ trans("PluginCallisto::Callisto.generalEvaluate") }}
                     </div>
                     <div class="col-sm-6 m-b-1">
                         <!-- rating start -->
@@ -51,11 +51,11 @@
                 <div class="input-unit">
 
                     <textarea id="ratingText" name=""></textarea>
-                    <label for="ratingText">Bewertung Eintragen</label>
+                    <label for="ratingText">{{ trans("PluginCallisto::Callisto.generalEnterEvaluate") }}</label>
                 </div>
 
                 <div class="m-y-1 clearfix">
-                    <button type="submit" class="btn btn-primary pull-xs-right">Senden</button>
+                    <button type="submit" class="btn btn-primary pull-xs-right">{{ trans("PluginCallisto::Callisto.generalSend") }}</button>
                 </div>
             </form>
 

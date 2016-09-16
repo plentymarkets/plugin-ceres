@@ -51,7 +51,7 @@
 
               <div class="thumb-controls">
                   <button class="btn btn-sm btn-outline-primary btn-block" @click="addToBasket">
-                      Warenkorb
+                      {{ trans("PluginCallisto::Callisto.basket") }}
                       <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                       <add-item-confirm :basket-item="item" base-url="{{ app.request.baseUrl }}" quantity="1"></add-item-confirm>
                   </button>
