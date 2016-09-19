@@ -76,7 +76,7 @@
                 </div>
 
                 <span class="articlenumber small text-muted">
-                    <b>Artikelnummer:</b>
+                    <b>{{ trans("PluginCallisto::Callisto.itemNumber") }}</b>
                     {{ item.variationBase.customNumber }}
                 </span>
             </div>
@@ -94,7 +94,7 @@
                 <sup>*</sup>
             </span>
             <div class="base-price text-muted m-y-1">
-                Grundpreis:
+                {{ trans("PluginCallisto::Callisto.itemGroundPrice") }}
                 <span class="base-price-value">
                   {{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                 </span>/<span class="base-price-amount">
@@ -115,7 +115,7 @@
 
                 <div class="col-xs-6 offset-xs-6 m-t-1">
                     <a class="pull-xs-right text-muted small" href="#">
-                        Wishlist
+                        {{ trans("PluginCallisto::Callisto.itemWishList") }}
                         <i class="fa fa-heart"></i>
                     </a>
                 </div>
@@ -126,8 +126,8 @@
             <hr>
 
             <span class="vat small text-muted">
-                * inkl. ges. Mwst. zzgl.
-                <a href="#" title="Versandkosten">Versandkosten</a>
+                {{ trans("PluginCallisto::Callisto.itemInclVAT") }}
+                <a href="#" title="Versandkosten">{{ trans("PluginCallisto::Callisto.itemShippingPrice") }}</a>
             </span>
 
           </div>
@@ -137,18 +137,18 @@
             <ul class="nav nav-tabs" role="tablist">
               {% if not item.itemDescription.description == '' and('item.description' in itemData or 'all' in itemData) %}
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#details-{{ item.variationBase.id }}" role="tab">Beschreibung</a>
+                  <a class="nav-link active" data-toggle="tab" href="#details-{{ item.variationBase.id }}" role="tab">{{ trans("PluginCallisto::Callisto.itemDescription") }}</a>
                 </li>
               {% endif %}
 
               {% if not item.itemDescription.technicalData == '' and('item.technical_data' in itemData or 'all' in itemData) %}
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#data-{{ item.variationBase.id }}" role="tab">Technische Daten</a>
+                  <a class="nav-link" data-toggle="tab" href="#data-{{ item.variationBase.id }}" role="tab">{{ trans("PluginCallisto::Callisto.itemTechnicalData") }}</a>
                 </li>
               {% endif %}
 
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">Weitere Details</a>
+                <a class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ trans("PluginCallisto::Callisto.itemMoreDetails") }}</a>
               </li>
             </ul>
 
@@ -170,42 +170,42 @@
                     <tbody>
                       {% if 'item.id' in itemData or 'all' in itemData %}
                         <tr>
-                          <td>Artikel-ID</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemId") }}</td>
                           <td>{{ item.itemBase.id }}</td>
                         </tr>
                       {% endif %}
 
                       {% if 'item.condition' in itemData or 'all' in itemData %}
                         <tr>
-                          <td>Zustand</td>
-                          <td>Neu</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemState") }}</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemNew") }}</td>
                         </tr>
                       {% endif %}
 
                       {% if 'item.age_rating' in itemData or 'all' in itemData %}
                         <tr>
-                          <td>Altersfreigabe</td>
-                          <td>FSK ab {{ item.itemBase.ageRestriction }} freigegeben</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemAge") }}</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemFSK") }} {{ item.itemBase.ageRestriction }} {{ trans("PluginCallisto::Callisto.itemOpen") }}</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.external_id' in itemData or 'all' in itemData) and item.variationBase.externalId != '' %}
                         <tr>
-                          <td>Externe Varianten-ID</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemExternalVariationId") }}</td>
                           <td>{{ item.variationBase.externalId }}</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.variation_model' in itemData or 'all' in itemData) and item.variationBase.model != '' %}
                         <tr>
-                          <td>Model</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemModel") }}</td>
                           <td>{{ item.variationBase.model }}</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.manufacturer' in itemData or 'all' in itemData) and item.itemBase.producer != '' %}
                         <tr>
-                          <td>Hersteller</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemManufacturer") }}</td>
                           <td>{{ item.itemBase.producer }}</td>
                         </tr>
                       {% endif %}
@@ -213,7 +213,7 @@
                       {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.itemBase.producingCountryId != '' %}
                         {% set country = services.country.getCountryName(item.itemBase.producingCountryId) %}
                         <tr>
-                          <td>Herstellerland</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemManufacturerCountry") }}</td>
                           <td>{{ country }}</td>
                         </tr>
                       {% endif %}
@@ -221,35 +221,35 @@
                       {% if 'item.variationBase_content' in itemData or 'all' in itemData %}
                         {% set unit = services.unit.getUnitById(item.variationBase.unitId) %}
                         <tr>
-                          <td>Inhalt</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemContent") }}</td>
                           <td>{{ item.variationBase.content|formatDecimal(0) }} {{ unit.name }}</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.weightG' in itemData or 'all' in itemData) and item.variationBase.weightG != '' %}
                         <tr>
-                          <td>Gewicht</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemWeight") }}</td>
                           <td>{{item.variationBase.weightG }}g</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.weightNetG' in itemData or 'all' in itemData) and item.variationBase.weightNetG != '' %}
                         <tr>
-                          <td>Netto-Gewicht</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemNetWeight") }}</td>
                           <td>{{ item.variationBase.weightNetG }}g</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.variation_dimensions' in itemData or 'all' in itemData) %}
                         <tr>
-                          <td>Maße</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemDimensions") }}</td>
                           <td>{{ item.variationBase.lengthMm }}/{{ item.variationBase.widthMm }}/{{ item.variationBase.heightMm }}mm</td>
                         </tr>
                       {% endif %}
 
                       {% if ('item.customs_tariff_number' in itemData or 'all' in itemData) and item.itemBase.customsTariffNumber != '' %}
                         <tr>
-                          <td>Zolltarifnummer</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemCustomsTariffNumber") }}</td>
                           <td>{{ item.itemBase.customsTariffNumber }}</td>
                         </tr>
                       {% endif %}
@@ -282,7 +282,7 @@
 
         <hr>
 
-        <h3 class="m-t-3 m-b-1">Kundenrezessionen</h3>
+        <h3 class="m-t-3 m-b-1">{{ trans("PluginCallisto::Callisto.itemCustomerFeedback") }}</h3>
         <div class="row m-b-3">
             {% include "PluginCallisto::Templates.ItemRating.ItemRatingSection" %}
         </div>

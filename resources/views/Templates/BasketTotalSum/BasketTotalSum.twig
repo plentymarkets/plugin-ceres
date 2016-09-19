@@ -2,43 +2,43 @@
 
 <script type="x/template" id="vue-basket-total-sum">
     <div class="cmp cmp-totals">
-        <h3>Summe</h3>
+        <h3>{{ trans("PluginCallisto::Callisto.basketSum") }}</h3>
         <div>
             <dl>
                 {% if 'basket.value_of_items_gross' in basketData or 'all' in basketData %}
-                    <dt><strong>Warenwert</strong>
-                        (Brutto)
+                    <dt><strong>{{ trans("PluginCallisto::Callisto.basketValue") }}</strong>
+                        ({{ trans("PluginCallisto::Callisto.basketGross") }})
                     </dt><!--
                     --><dd>
                         ${ formatPrice(basket.itemSum, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.value_of_items_net' in basketData or 'all' in basketData %}
-                    <dt><strong>Warenwert</strong>
-                        (Netto)
+                    <dt><strong>{{ trans("PluginCallisto::Callisto.basketValue") }}</strong>
+                        ({{ trans("PluginCallisto::Callisto.basketNet") }})
                     </dt><!--
                  --><dd>
                         ${ formatPrice(basket.itemSumNet, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.shipping_costs_gross' in basketData or 'all' in basketData %}
-                  <dt><strong>Versandkosten</strong>
-                      (Brutto)
+                  <dt><strong>{{ trans("PluginCallisto::Callisto.itemShippingPrice") }}</strong>
+                      ({{ trans("PluginCallisto::Callisto.basketGross") }})
                   </dt><!--
                   --><dd>
                       ${ formatPrice(basket.shippingAmount, "EUR") }
                   </dd>
                 {% endif %}
                 {% if 'basket.shipping_costs_net' in basketData or 'all' in basketData %}
-                    <dt><strong>Versandkosten</strong>
-                        (Netto)
+                    <dt><strong>{{ trans("PluginCallisto::Callisto.itemShippingPrice") }}</strong>
+                        ({{ trans("PluginCallisto::Callisto.basketNet") }})
                     </dt><!--
 		            --><dd>
                         ${ formatPrice(basket.shippingAmountNet, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.vat' in basketData or 'all' in basketData %}
-                    <dt><strong>MwSt. 19%</strong>
+                    <dt><strong>{{ trans("PluginCallisto::Callisto.basketVAT") }}</strong>
                     </dt><!--
 		            --><dd>
                         ${ formatPrice(basket.itemSum - basket.itemSumNet, "EUR") }
@@ -48,8 +48,8 @@
                 <hr>
                 {% if 'basket.order_total_gross' in basketData or 'all' in basketData %}
                     <dt>
-                        <strong>Gesamtsumme</strong>
-                        (Brutto)
+                        <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }}</strong>
+                        ({{ trans("PluginCallisto::Callisto.basketGross") }})
                     </dt><!--
 		            --><dd>
                         <strong>
@@ -59,8 +59,8 @@
                 {% endif %}
                 {% if 'basket.order_total_net' in basketData or 'all' in basketData %}
                     <dt>
-                        <strong>Gesamtsumme</strong>
-                        (Netto)
+                        <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }}</strong>
+                        ({{ trans("PluginCallisto::Callisto.basketNet") }})
                     </dt><!--
 		            --><dd>
                         <strong>

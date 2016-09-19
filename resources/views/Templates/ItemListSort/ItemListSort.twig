@@ -8,7 +8,7 @@
                     ${ element.name }
                 </option>
             </select>
-            <label for="itemSorting">Sortieren</label>
+            <label for="itemSorting">{{ trans("PluginCallisto::Callisto.itemCategorySort") }}</label>
           </div>
         </div>
 
@@ -19,7 +19,7 @@
 
       <div class="col-xs-6">
         <div class="input-unit">
-          <label for="listItemsPerPage">Artikel pro Seite</label>
+          <label for="listItemsPerPage">{{ trans("PluginCallisto::Callisto.itemCategoryItemsPerSite") }}</label>
           <select class="custom-select" v-on:change="updateSelectedItemsPerPage" name="items_per_page" onchange="this.form.submit();" id="listItemsPerPage" v-model="itemsPerPageSelected">
             <option v-bind:value="element.value" value="${ element.value }" selected="${ element.selected }" v-for="element in itemPerPageList">
                 ${ element.value }

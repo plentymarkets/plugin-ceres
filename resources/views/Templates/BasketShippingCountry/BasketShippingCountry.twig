@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-basket-shipping-country">
     <div>
-        Lieferland:
+        {{ trans("PluginCallisto::Callisto.generalCountrySelect") }}:
         <select name="shippingCountry" v-model="select" v-on:change="updateShippingCountry">
             <option v-bind:value="element" selected="${ element.selected }" v-for="element in shippingCountries">
                 ${ element.name }

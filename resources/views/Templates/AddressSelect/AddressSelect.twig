@@ -20,15 +20,15 @@
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                         </template>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- Bitte wählen -</p>
-                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- Noch Keine Adresse hinterlegt -</p>
+                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseChoose") }} -</p>
+                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }} -</p>
                     </span>
 
                 </div>
             </div>
 
             <div class="add-item">
-                <a href="#" class="" @click.prevent="showAdd" data-toggle="tooltip" data-placement="right" title="Neue Adresse hinzufügen">
+                <a href="#" class="" @click.prevent="showAdd" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressAddAddress") }}">
                     <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                 </a>
             </div>
@@ -55,7 +55,7 @@
                                 <span>${address.postalCode} ${address.town}</span>
                             </span><!--
                             --><span class="item-edit">
-                                    <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip" data-placement="right" title="Adresse ändern">
+                                    <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                             </span>
