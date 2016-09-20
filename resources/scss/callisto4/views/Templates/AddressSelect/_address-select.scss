@@ -70,7 +70,8 @@
 
 
 	.item-inner{
-		display: block;
+		display: flex;
+		flex-direction: row;
     	cursor: pointer;
 		padding: 1em;
 		margin-bottom: 0;
@@ -81,6 +82,7 @@
 		vertical-align:top;
 		font-size: 1.5em;
 		float: right;
+		flex: 0 1 auto;
 
 		.fa{
     		width: 1em;
@@ -111,6 +113,7 @@
 		display: inline-block;
 	    // width: calc( 100% - 4em );
 	    width: 100%;
+	    flex: 1 1 auto;
 
 		strong, span{
 			display: block;

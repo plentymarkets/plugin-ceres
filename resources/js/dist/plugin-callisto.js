@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 
 /*!
- * Vue.js v1.0.25
+ * Vue.js v1.0.26
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -13228,7 +13228,7 @@ var expression = Object.freeze({
     }
     var isA = isArray(val);
     var isO = isObject(val);
-    if (isA || isO) {
+    if ((isA || isO) && Object.isExtensible(val)) {
       if (val.__ob__) {
         var depId = val.__ob__.dep.id;
         if (seen.has(depId)) {
@@ -14714,13 +14714,13 @@ var template = Object.freeze({
       this.vm.$on('hook:attached', function () {
         nextTick(_this.forceUpdate);
       });
+      if (!inDoc(el)) {
+        nextTick(this.forceUpdate);
+      }
     },
 
     update: function update(value) {
       var el = this.el;
-      if (!inDoc(el)) {
-        return nextTick(this.forceUpdate);
-      }
       el.selectedIndex = -1;
       var multi = this.multiple && isArray(value);
       var options = el.options;
@@ -19661,7 +19661,13 @@ var template = Object.freeze({
 
     pluralize: function pluralize(value) {
       var args = toArray(arguments, 1);
-      return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
+      var length = args.length;
+      if (length > 1) {
+        var index = value % 10 - 1;
+        return index in args ? args[index] : args[length - 1];
+      } else {
+        return args[0] + (value === 1 ? '' : 's');
+      }
     },
 
     /**
@@ -19863,7 +19869,7 @@ var template = Object.freeze({
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.25';
+  Vue.version = '1.0.26';
 
   // devtools global hook
   /* istanbul ignore next */
@@ -19880,7 +19886,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.1 */
+/*! tether 1.3.7 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -19904,6 +19910,32 @@ if (typeof TetherBase === 'undefined') {
 }
 
 var zeroElement = null;
+
+// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
+// if the element lies within a nested document (<frame> or <iframe>-like).
+function getActualBoundingClientRect(node) {
+  var boundingRect = node.getBoundingClientRect();
+
+  // The original object returned by getBoundingClientRect is immutable, so we clone it
+  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
+  var rect = {};
+  for (var k in boundingRect) {
+    rect[k] = boundingRect[k];
+  }
+
+  if (node.ownerDocument !== document) {
+    var _frameElement = node.ownerDocument.defaultView.frameElement;
+    if (_frameElement) {
+      var frameRect = getActualBoundingClientRect(_frameElement);
+      rect.top += frameRect.top;
+      rect.bottom += frameRect.top;
+      rect.left += frameRect.left;
+      rect.right += frameRect.left;
+    }
+  }
+
+  return rect;
+}
 
 function getScrollParents(el) {
   // In firefox if the el is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -19940,7 +19972,13 @@ function getScrollParents(el) {
     }
   }
 
-  parents.push(document.body);
+  parents.push(el.ownerDocument.body);
+
+  // If the node is within a frame, account for the parent window scroll
+  if (el.ownerDocument !== document) {
+    parents.push(el.ownerDocument.defaultView);
+  }
+
   return parents;
 }
 
@@ -19974,13 +20012,7 @@ var getOrigin = function getOrigin() {
 
   var id = node.getAttribute('data-tether-id');
   if (typeof zeroPosCache[id] === 'undefined') {
-    zeroPosCache[id] = {};
-
-    var rect = node.getBoundingClientRect();
-    for (var k in rect) {
-      // Can't use extend, as on IE9, elements don't resolve to be hasOwnProperty
-      zeroPosCache[id][k] = rect[k];
-    }
+    zeroPosCache[id] = getActualBoundingClientRect(node);
 
     // Clear the cache when this position call is done
     defer(function () {
@@ -20009,13 +20041,7 @@ function getBounds(el) {
 
   var docEl = doc.documentElement;
 
-  var box = {};
-  // The original object returned by getBoundingClientRect is immutable, so we clone it
-  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
-  var rect = el.getBoundingClientRect();
-  for (var k in rect) {
-    box[k] = rect[k];
-  }
+  var box = getActualBoundingClientRect(el);
 
   var origin = getOrigin();
 
@@ -20041,7 +20067,11 @@ function getOffsetParent(el) {
   return el.offsetParent || document.documentElement;
 }
 
+var _scrollBarSize = null;
 function getScrollBarSize() {
+  if (_scrollBarSize) {
+    return _scrollBarSize;
+  }
   var inner = document.createElement('div');
   inner.style.width = '100%';
   inner.style.height = '200px';
@@ -20074,7 +20104,8 @@ function getScrollBarSize() {
 
   var width = widthContained - widthScroll;
 
-  return { width: width, height: width };
+  _scrollBarSize = { width: width, height: width };
+  return _scrollBarSize;
 }
 
 function extend() {
@@ -20134,7 +20165,9 @@ function hasClass(el, name) {
 }
 
 function getClassName(el) {
-  if (el.className instanceof SVGAnimatedString) {
+  // Can't use just SVGAnimatedString here since nodes within a Frame in IE have
+  // completely separately SVGAnimatedString base classes
+  if (el.className instanceof el.ownerDocument.defaultView.SVGAnimatedString) {
     return el.className.baseVal;
   }
   return el.className;
@@ -20199,7 +20232,7 @@ var Evented = (function () {
   }, {
     key: 'off',
     value: function off(event, handler) {
-      if (typeof this.bindings !== 'undefined' && typeof this.bindings[event] !== 'undefined') {
+      if (typeof this.bindings === 'undefined' || typeof this.bindings[event] === 'undefined') {
         return;
       }
 
@@ -20253,6 +20286,7 @@ var Evented = (function () {
 })();
 
 TetherBase.Utils = {
+  getActualBoundingClientRect: getActualBoundingClientRect,
   getScrollParents: getScrollParents,
   getBounds: getBounds,
   getOffsetParent: getOffsetParent,
@@ -20311,7 +20345,7 @@ var transformKey = (function () {
   }
   var el = document.createElement('div');
 
-  var transforms = ['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
+  var transforms = ['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
   for (var i = 0; i < transforms.length; ++i) {
     var key = transforms[i];
     if (el.style[key] !== undefined) {
@@ -20710,7 +20744,7 @@ var TetherClass = (function (_Evented) {
       this.enabled = true;
 
       this.scrollParents.forEach(function (parent) {
-        if (parent !== document) {
+        if (parent !== _this3.target.ownerDocument) {
           parent.addEventListener('scroll', _this3.position);
         }
       });
@@ -20910,21 +20944,24 @@ var TetherClass = (function (_Evented) {
         }
       };
 
+      var doc = this.target.ownerDocument;
+      var win = doc.defaultView;
+
       var scrollbarSize = undefined;
-      if (document.body.scrollWidth > window.innerWidth) {
+      if (win.innerHeight > doc.documentElement.clientHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (document.body.scrollHeight > window.innerHeight) {
+      if (win.innerWidth > doc.documentElement.clientWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
 
-      if (['', 'static'].indexOf(document.body.style.position) === -1 || ['', 'static'].indexOf(document.body.parentElement.style.position) === -1) {
+      if (['', 'static'].indexOf(doc.body.style.position) === -1 || ['', 'static'].indexOf(doc.body.parentElement.style.position) === -1) {
         // Absolute positioning in the body will be relative to the page, not the 'initial containing block'
-        next.page.bottom = document.body.scrollHeight - top - height;
-        next.page.right = document.body.scrollWidth - left - width;
+        next.page.bottom = doc.body.scrollHeight - top - height;
+        next.page.right = doc.body.scrollWidth - left - width;
       }
 
       if (typeof this.options.optimizations !== 'undefined' && this.options.optimizations.moveElement !== false && !(typeof this.targetModifier !== 'undefined')) {
@@ -20943,8 +20980,8 @@ var TetherClass = (function (_Evented) {
             offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle['border' + side + 'Width']);
           });
 
-          offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
-          offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
+          offsetPosition.right = doc.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
+          offsetPosition.bottom = doc.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
 
           if (next.page.top >= offsetPosition.top + offsetBorder.top && next.page.bottom >= offsetPosition.bottom) {
             if (next.page.left >= offsetPosition.left + offsetBorder.left && next.page.right >= offsetPosition.right) {
@@ -21037,7 +21074,16 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
+          if (window.matchMedia) {
+            // HubSpot/tether#207
+            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
+            if (!retina) {
+              xPos = Math.round(xPos);
+              yPos = Math.round(yPos);
+            }
+          }
+
+          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21102,7 +21148,7 @@ var TetherClass = (function (_Evented) {
 
         if (!offsetParentIsBody) {
           this.element.parentNode.removeChild(this.element);
-          document.body.appendChild(this.element);
+          this.element.ownerDocument.body.appendChild(this.element);
         }
       }
 
@@ -21122,6 +21168,7 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
+          _this8.trigger('repositioned');
         });
       }
     }
@@ -21162,11 +21209,21 @@ function getBoundingRect(tether, to) {
 
   if (typeof to.nodeType !== 'undefined') {
     (function () {
+      var node = to;
       var size = getBounds(to);
       var pos = size;
       var style = getComputedStyle(to);
 
       to = [pos.left, pos.top, size.width + pos.left, size.height + pos.top];
+
+      // Account any parent Frames scroll offset
+      if (node.ownerDocument !== document) {
+        var win = node.ownerDocument.defaultView;
+        to[0] += win.pageXOffset;
+        to[1] += win.pageYOffset;
+        to[2] += win.pageXOffset;
+        to[3] += win.pageYOffset;
+      }
 
       BOUNDS_FORMAT.forEach(function (side, i) {
         side = side[0].toUpperCase() + side.substr(1);
@@ -22044,7 +22101,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Descriptions of all options available on the demo site:
   // http://lokeshdhakar.com/projects/lightbox2/index.html#options
   Lightbox.defaults = {
-    albumLabel: 'Bild %1 of %2',
+    albumLabel: 'Image %1 of %2',
     alwaysShowNavOnTouchDevices: false,
     fadeDuration: 500,
     fitImagesInViewport: true,
@@ -27546,6 +27603,381 @@ Vue.config.delimiters = ['${', '}'];
 Vue.config.unsafeDelimiters = ['{!!', '!!}'];
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var currencySymbolMap = require('./map');
+
+var symbolCurrencyMap = {};
+for (var key in currencySymbolMap) {
+  if (currencySymbolMap.hasOwnProperty(key)) {
+    var currency = key;
+    var symbol = currencySymbolMap[currency];
+    symbolCurrencyMap[symbol] = currency;
+  }
+}
+
+function getSymbolFromCurrency(currencyCode) {
+  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
+    return currencySymbolMap[currencyCode];
+  } else {
+    return undefined;
+  }
+}
+
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+},{"./map":2}],2:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}],3:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.infiniteScroll = global.infiniteScroll || {})));
+}(this, function (exports) { 'use strict';
+
+  var throttle = function throttle(fn, delay) {
+    var now, lastExec, timer, context, args; //eslint-disable-line
+
+    var execute = function execute() {
+      fn.apply(context, args);
+      lastExec = now;
+    };
+
+    return function () {
+      context = this;
+      args = arguments;
+
+      now = Date.now();
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      if (lastExec) {
+        var diff = delay - (now - lastExec);
+        if (diff < 0) {
+          execute();
+        } else {
+          timer = setTimeout(function () {
+            execute();
+          }, diff);
+        }
+      } else {
+        execute();
+      }
+    };
+  };
+
+  var getScrollTop = function getScrollTop(element) {
+    if (element === window) {
+      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
+    }
+
+    return element.scrollTop;
+  };
+
+  var getComputedStyle = document.defaultView.getComputedStyle;
+
+  var getScrollEventTarget = function getScrollEventTarget(element) {
+    var currentNode = element;
+    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
+    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
+      var overflowY = getComputedStyle(currentNode).overflowY;
+      if (overflowY === 'scroll' || overflowY === 'auto') {
+        return currentNode;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return window;
+  };
+
+  var getVisibleHeight = function getVisibleHeight(element) {
+    if (element === window) {
+      return document.documentElement.clientHeight;
+    }
+
+    return element.clientHeight;
+  };
+
+  var getElementTop = function getElementTop(element) {
+    if (element === window) {
+      return getScrollTop(window);
+    }
+    return element.getBoundingClientRect().top + getScrollTop(window);
+  };
+
+  var isAttached = function isAttached(element) {
+    var currentNode = element.parentNode;
+    while (currentNode) {
+      if (currentNode.tagName === 'HTML') {
+        return true;
+      }
+      if (currentNode.nodeType === 11) {
+        return false;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return false;
+  };
+
+  var infiniteScroll = {
+    doBind: function doBind() {
+      if (this.binded) return; // eslint-disable-line
+      this.binded = true;
+
+      var directive = this;
+      var element = directive.el;
+
+      directive.scrollEventTarget = getScrollEventTarget(element);
+      directive.scrollListener = throttle(directive.doCheck.bind(directive), 200);
+      directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
+
+      var disabledExpr = element.getAttribute('infinite-scroll-disabled');
+      var disabled = false;
+
+      if (disabledExpr) {
+        this.vm.$watch(disabledExpr, function (value) {
+          directive.disabled = value;
+          if (!value && directive.immediateCheck) {
+            directive.doCheck();
+          }
+        });
+        disabled = Boolean(directive.vm.$get(disabledExpr));
+      }
+      directive.disabled = disabled;
+
+      var distanceExpr = element.getAttribute('infinite-scroll-distance');
+      var distance = 0;
+      if (distanceExpr) {
+        distance = Number(directive.vm.$get(distanceExpr));
+        if (isNaN(distance)) {
+          distance = 0;
+        }
+      }
+      directive.distance = distance;
+
+      var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
+      var immediateCheck = true;
+      if (immediateCheckExpr) {
+        immediateCheck = Boolean(directive.vm.$get(immediateCheckExpr));
+      }
+      directive.immediateCheck = immediateCheck;
+
+      if (immediateCheck) {
+        directive.doCheck();
+      }
+
+      var eventName = element.getAttribute('infinite-scroll-listen-for-event');
+      if (eventName) {
+        directive.vm.$on(eventName, function () {
+          directive.doCheck();
+        });
+      }
+    },
+
+    doCheck: function doCheck(force) {
+      var scrollEventTarget = this.scrollEventTarget;
+      var element = this.el;
+      var distance = this.distance;
+
+      if (force !== true && this.disabled) return; //eslint-disable-line
+      var viewportScrollTop = getScrollTop(scrollEventTarget);
+      var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
+
+      var shouldTrigger = false;
+
+      if (scrollEventTarget === element) {
+        shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
+      } else {
+        var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
+
+        shouldTrigger = viewportBottom + distance >= elementBottom;
+      }
+
+      if (shouldTrigger && this.expression) {
+        this.vm.$get(this.expression);
+      }
+    },
+
+    bind: function bind() {
+      var directive = this;
+      var element = this.el;
+
+      directive.vm.$on('hook:ready', function () {
+        if (isAttached(element)) {
+          directive.doBind();
+        }
+      });
+
+      this.bindTryCount = 0;
+
+      var tryBind = function tryBind() {
+        if (directive.bindTryCount > 10) return; //eslint-disable-line
+        directive.bindTryCount++;
+        if (isAttached(element)) {
+          directive.doBind();
+        } else {
+          setTimeout(tryBind, 50);
+        }
+      };
+
+      tryBind();
+    },
+
+    unbind: function unbind() {
+      this.scrollEventTarget.removeEventListener('scroll', this.scrollListener);
+    }
+  };
+
+  if (window.Vue) {
+    window.infiniteScroll = infiniteScroll;
+    Vue.use(install);
+  }
+
+  function install(Vue) {
+    Vue.directive('infiniteScroll', infiniteScroll);
+  }
+
+  exports.install = install;
+  exports.infiniteScroll = infiniteScroll;
+
+}));
+},{}],4:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
@@ -27604,7 +28036,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],2:[function(require,module,exports){
+},{"services/ApiService":44,"services/BasketService":45,"services/ModalService":49,"services/NotificationService":51}],5:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -27625,7 +28057,7 @@ Vue.component('address-input-group', {
     }
 });
 
-},{}],3:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var ModalService = require('services/ModalService');
 
 Vue.component('address-select', {
@@ -27728,7 +28160,7 @@ Vue.component('address-select', {
     }
 });
 
-},{"services/ModalService":46}],4:[function(require,module,exports){
+},{"services/ModalService":49}],7:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -27805,7 +28237,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":40,"services/ValidationService":50}],5:[function(require,module,exports){
+},{"services/AddressService":43,"services/ValidationService":53}],8:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -27833,7 +28265,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],6:[function(require,module,exports){
+},{"services/CheckoutService":46}],9:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -27860,7 +28292,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],7:[function(require,module,exports){
+},{"services/CheckoutService":46}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -27902,7 +28334,7 @@ Vue.component('basket-button', {
 
 });
 
-},{"services/BasketService":42,"services/MonetaryFormatService":47}],8:[function(require,module,exports){
+},{"services/BasketService":45,"services/MonetaryFormatService":50}],11:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -27990,7 +28422,7 @@ Vue.component('basket-item-list', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],9:[function(require,module,exports){
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],12:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -28069,7 +28501,7 @@ Vue.component('basket-preview', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],10:[function(require,module,exports){
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],13:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -28196,7 +28628,7 @@ Vue.component('basket-preview-item', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],11:[function(require,module,exports){
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],14:[function(require,module,exports){
 var BasketService  = require('services/BasketService');
 var CountryService = require('services/CountryService');
 
@@ -28258,7 +28690,7 @@ Vue.component('basket-shipping-country', {
 
 });
 
-},{"services/BasketService":42,"services/CountryService":44}],12:[function(require,module,exports){
+},{"services/BasketService":45,"services/CountryService":47}],15:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -28300,7 +28732,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":42,"services/MonetaryFormatService":47}],13:[function(require,module,exports){
+},{"services/BasketService":45,"services/MonetaryFormatService":50}],16:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -28372,7 +28804,7 @@ Vue.component('category-list-item', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],14:[function(require,module,exports){
+},{"services/BasketService":45,"services/ModalService":49,"services/NotificationService":51}],17:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ApiService            = require('services/ApiService');
 var NotificationService   = require('services/NotificationService');
@@ -28408,7 +28840,7 @@ Vue.component('add-item-confirm', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/NotificationService":48}],15:[function(require,module,exports){
+},{"services/ApiService":44,"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50,"services/NotificationService":51}],18:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -28454,14 +28886,14 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":44}],16:[function(require,module,exports){
+},{"services/CountryService":47}],19:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
 
 });
 
-},{}],17:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('delete-from-basket', {
@@ -28483,7 +28915,7 @@ Vue.component('delete-from-basket', {
 
 });
 
-},{"services/BasketService":42}],18:[function(require,module,exports){
+},{"services/BasketService":45}],21:[function(require,module,exports){
 Vue.component('item-availability-text', {
 
     template: '<span class="availability-text">${ availabilityText }</span>',
@@ -28518,7 +28950,7 @@ Vue.component('item-availability-text', {
 
 });
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('item-count-to-basket', {
@@ -28553,7 +28985,7 @@ Vue.component('item-count-to-basket', {
     }
 });
 
-},{"services/BasketService":42}],20:[function(require,module,exports){
+},{"services/BasketService":45}],23:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -28664,7 +29096,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":45,"services/PaginationService":49,"vue-infinite-scroll":55}],21:[function(require,module,exports){
+},{"services/LoadItemsService":48,"services/PaginationService":52,"vue-infinite-scroll":3}],24:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -28846,7 +29278,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":49}],22:[function(require,module,exports){
+},{"services/PaginationService":52}],25:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -29028,7 +29460,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":41,"services/PaginationService":49}],23:[function(require,module,exports){
+},{"services/ApiService":44,"services/PaginationService":52}],26:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -29269,7 +29701,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":48,"services/VariationsHTMLCacheService":51}],24:[function(require,module,exports){
+},{"services/ApiService":44,"services/BasketService":45,"services/NotificationService":51,"services/VariationsHTMLCacheService":54}],27:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29325,7 +29757,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48}],25:[function(require,module,exports){
+},{"services/ApiService":44,"services/ModalService":49,"services/NotificationService":51}],28:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -29386,7 +29818,7 @@ Vue.component('user-login-handler', {
     }
 });
 
-},{"services/ApiService":41}],26:[function(require,module,exports){
+},{"services/ApiService":44}],29:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-config',
@@ -29405,7 +29837,7 @@ Vue.component('monetary-config',
         }
     });
 
-},{"services/MonetaryFormatService":47}],27:[function(require,module,exports){
+},{"services/MonetaryFormatService":50}],30:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -29442,7 +29874,7 @@ Vue.component('monetary-format',
         }
     });
 
-},{"services/MonetaryFormatService":47}],28:[function(require,module,exports){
+},{"services/MonetaryFormatService":50}],31:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -29529,7 +29961,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":48}],29:[function(require,module,exports){
+},{"services/APIService":42,"services/ModalService":49,"services/NotificationService":51}],32:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -29558,7 +29990,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":48,"services/WaitScreenService":52}],30:[function(require,module,exports){
+},{"services/NotificationService":51,"services/WaitScreenService":55}],33:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -29725,7 +30157,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":41}],31:[function(require,module,exports){
+},{"services/ApiService":44}],34:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -29765,7 +30197,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":39,"services/MonetaryFormatService":47}],32:[function(require,module,exports){
+},{"services/APIService":42,"services/MonetaryFormatService":50}],35:[function(require,module,exports){
 Vue.component('price-formatted', {
 
     template: '<span class="price-formatted">${ priceFormatted }</span>',
@@ -29783,7 +30215,7 @@ Vue.component('price-formatted', {
 
 });
 
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29908,7 +30340,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48,"services/ValidationService":50}],34:[function(require,module,exports){
+},{"services/ApiService":44,"services/ModalService":49,"services/NotificationService":51,"services/ValidationService":53}],37:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -29963,7 +30395,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":47}],35:[function(require,module,exports){
+},{"services/MonetaryFormatService":50}],38:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -29995,7 +30427,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":48}],36:[function(require,module,exports){
+},{"services/NotificationService":51}],39:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 Vue.component('wait-screen', {
@@ -30017,7 +30449,7 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":52}],37:[function(require,module,exports){
+},{"services/WaitScreenService":55}],40:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -30048,7 +30480,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":41,"services/NotificationService":48}],38:[function(require,module,exports){
+},{"services/ApiService":44,"services/NotificationService":51}],41:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -30070,7 +30502,7 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":41}],39:[function(require,module,exports){
+},{"services/ApiService":44}],42:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -30234,7 +30666,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":48,"services/WaitScreenService":52}],40:[function(require,module,exports){
+},{"services/NotificationService":51,"services/WaitScreenService":55}],43:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -30276,9 +30708,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
-arguments[4][39][0].apply(exports,arguments)
-},{"dup":39,"services/NotificationService":48,"services/WaitScreenService":52}],42:[function(require,module,exports){
+},{"services/ApiService":44,"services/CheckoutService":46}],44:[function(require,module,exports){
+arguments[4][42][0].apply(exports,arguments)
+},{"dup":42,"services/NotificationService":51,"services/WaitScreenService":55}],45:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30406,7 +30838,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],43:[function(require,module,exports){
+},{"services/ApiService":44}],46:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30496,7 +30928,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],44:[function(require,module,exports){
+},{"services/ApiService":44}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30587,7 +31019,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],45:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30611,7 +31043,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":41}],46:[function(require,module,exports){
+},{"services/ApiService":44}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30743,7 +31175,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports = (function($)
 {
     var options = {
@@ -30822,7 +31254,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"currency-symbol-map":53}],48:[function(require,module,exports){
+},{"currency-symbol-map":1}],51:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30995,7 +31427,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31021,7 +31453,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],50:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31215,7 +31647,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31259,7 +31691,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31309,382 +31741,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
-var currencySymbolMap = require('./map');
-
-var symbolCurrencyMap = {};
-for (var key in currencySymbolMap) {
-  if (currencySymbolMap.hasOwnProperty(key)) {
-    var currency = key;
-    var symbol = currencySymbolMap[currency];
-    symbolCurrencyMap[symbol] = currency;
-  }
-}
-
-function getSymbolFromCurrency(currencyCode) {
-  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
-    return currencySymbolMap[currencyCode];
-  } else {
-    return undefined;
-  }
-}
-
-function getCurrencyFromSymbol(symbol) {
-  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
-    return symbolCurrencyMap[symbol];
-  } else {
-    return undefined;
-  }
-}
-
-function getSymbol(currencyCode) {
-  //Deprecated
-  var symbol = getSymbolFromCurrency(currencyCode);
-  return symbol !== undefined ? symbol : '?';
-}
-
-module.exports = getSymbol; //Backward compatibility
-module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
-module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
-module.exports.symbolCurrencyMap = symbolCurrencyMap;
-module.exports.currencySymbolMap = currencySymbolMap;
-
-},{"./map":54}],54:[function(require,module,exports){
-module.exports =
-{ "ALL": "L"
-, "AFN": "؋"
-, "ARS": "$"
-, "AWG": "ƒ"
-, "AUD": "$"
-, "AZN": "₼"
-, "BSD": "$"
-, "BBD": "$"
-, "BYR": "p."
-, "BZD": "BZ$"
-, "BMD": "$"
-, "BOB": "Bs."
-, "BAM": "KM"
-, "BWP": "P"
-, "BGN": "лв"
-, "BRL": "R$"
-, "BND": "$"
-, "KHR": "៛"
-, "CAD": "$"
-, "KYD": "$"
-, "CLP": "$"
-, "CNY": "¥"
-, "COP": "$"
-, "CRC": "₡"
-, "HRK": "kn"
-, "CUP": "₱"
-, "CZK": "Kč"
-, "DKK": "kr"
-, "DOP": "RD$"
-, "XCD": "$"
-, "EGP": "£"
-, "SVC": "$"
-, "EEK": "kr"
-, "EUR": "€"
-, "FKP": "£"
-, "FJD": "$"
-, "GHC": "₵"
-, "GIP": "£"
-, "GTQ": "Q"
-, "GGP": "£"
-, "GYD": "$"
-, "HNL": "L"
-, "HKD": "$"
-, "HUF": "Ft"
-, "ISK": "kr"
-, "INR": "₹"
-, "IDR": "Rp"
-, "IRR": "﷼"
-, "IMP": "£"
-, "ILS": "₪"
-, "JMD": "J$"
-, "JPY": "¥"
-, "JEP": "£"
-, "KES": "KSh"
-, "KZT": "лв"
-, "KPW": "₩"
-, "KRW": "₩"
-, "KGS": "лв"
-, "LAK": "₭"
-, "LVL": "Ls"
-, "LBP": "£"
-, "LRD": "$"
-, "LTL": "Lt"
-, "MKD": "ден"
-, "MYR": "RM"
-, "MUR": "₨"
-, "MXN": "$"
-, "MNT": "₮"
-, "MZN": "MT"
-, "NAD": "$"
-, "NPR": "₨"
-, "ANG": "ƒ"
-, "NZD": "$"
-, "NIO": "C$"
-, "NGN": "₦"
-, "NOK": "kr"
-, "OMR": "﷼"
-, "PKR": "₨"
-, "PAB": "B/."
-, "PYG": "Gs"
-, "PEN": "S/."
-, "PHP": "₱"
-, "PLN": "zł"
-, "QAR": "﷼"
-, "RON": "lei"
-, "RUB": "₽"
-, "SHP": "£"
-, "SAR": "﷼"
-, "RSD": "Дин."
-, "SCR": "₨"
-, "SGD": "$"
-, "SBD": "$"
-, "SOS": "S"
-, "ZAR": "R"
-, "LKR": "₨"
-, "SEK": "kr"
-, "CHF": "CHF"
-, "SRD": "$"
-, "SYP": "£"
-, "TZS": "TSh"
-, "TWD": "NT$"
-, "THB": "฿"
-, "TTD": "TT$"
-, "TRY": ""
-, "TRL": "₤"
-, "TVD": "$"
-, "UGX": "USh"
-, "UAH": "₴"
-, "GBP": "£"
-, "USD": "$"
-, "UYU": "$U"
-, "UZS": "лв"
-, "VEF": "Bs"
-, "VND": "₫"
-, "YER": "﷼"
-, "ZWD": "Z$"
-}
-
-},{}],55:[function(require,module,exports){
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.infiniteScroll = global.infiniteScroll || {})));
-}(this, function (exports) { 'use strict';
-
-  var throttle = function throttle(fn, delay) {
-    var now, lastExec, timer, context, args; //eslint-disable-line
-
-    var execute = function execute() {
-      fn.apply(context, args);
-      lastExec = now;
-    };
-
-    return function () {
-      context = this;
-      args = arguments;
-
-      now = Date.now();
-
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
-      }
-
-      if (lastExec) {
-        var diff = delay - (now - lastExec);
-        if (diff < 0) {
-          execute();
-        } else {
-          timer = setTimeout(function () {
-            execute();
-          }, diff);
-        }
-      } else {
-        execute();
-      }
-    };
-  };
-
-  var getScrollTop = function getScrollTop(element) {
-    if (element === window) {
-      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
-    }
-
-    return element.scrollTop;
-  };
-
-  var getComputedStyle = document.defaultView.getComputedStyle;
-
-  var getScrollEventTarget = function getScrollEventTarget(element) {
-    var currentNode = element;
-    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
-    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
-      var overflowY = getComputedStyle(currentNode).overflowY;
-      if (overflowY === 'scroll' || overflowY === 'auto') {
-        return currentNode;
-      }
-      currentNode = currentNode.parentNode;
-    }
-    return window;
-  };
-
-  var getVisibleHeight = function getVisibleHeight(element) {
-    if (element === window) {
-      return document.documentElement.clientHeight;
-    }
-
-    return element.clientHeight;
-  };
-
-  var getElementTop = function getElementTop(element) {
-    if (element === window) {
-      return getScrollTop(window);
-    }
-    return element.getBoundingClientRect().top + getScrollTop(window);
-  };
-
-  var isAttached = function isAttached(element) {
-    var currentNode = element.parentNode;
-    while (currentNode) {
-      if (currentNode.tagName === 'HTML') {
-        return true;
-      }
-      if (currentNode.nodeType === 11) {
-        return false;
-      }
-      currentNode = currentNode.parentNode;
-    }
-    return false;
-  };
-
-  var infiniteScroll = {
-    doBind: function doBind() {
-      if (this.binded) return; // eslint-disable-line
-      this.binded = true;
-
-      var directive = this;
-      var element = directive.el;
-
-      directive.scrollEventTarget = getScrollEventTarget(element);
-      directive.scrollListener = throttle(directive.doCheck.bind(directive), 200);
-      directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
-
-      var disabledExpr = element.getAttribute('infinite-scroll-disabled');
-      var disabled = false;
-
-      if (disabledExpr) {
-        this.vm.$watch(disabledExpr, function (value) {
-          directive.disabled = value;
-          if (!value && directive.immediateCheck) {
-            directive.doCheck();
-          }
-        });
-        disabled = Boolean(directive.vm.$get(disabledExpr));
-      }
-      directive.disabled = disabled;
-
-      var distanceExpr = element.getAttribute('infinite-scroll-distance');
-      var distance = 0;
-      if (distanceExpr) {
-        distance = Number(directive.vm.$get(distanceExpr));
-        if (isNaN(distance)) {
-          distance = 0;
-        }
-      }
-      directive.distance = distance;
-
-      var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
-      var immediateCheck = true;
-      if (immediateCheckExpr) {
-        immediateCheck = Boolean(directive.vm.$get(immediateCheckExpr));
-      }
-      directive.immediateCheck = immediateCheck;
-
-      if (immediateCheck) {
-        directive.doCheck();
-      }
-
-      var eventName = element.getAttribute('infinite-scroll-listen-for-event');
-      if (eventName) {
-        directive.vm.$on(eventName, function () {
-          directive.doCheck();
-        });
-      }
-    },
-
-    doCheck: function doCheck(force) {
-      var scrollEventTarget = this.scrollEventTarget;
-      var element = this.el;
-      var distance = this.distance;
-
-      if (force !== true && this.disabled) return; //eslint-disable-line
-      var viewportScrollTop = getScrollTop(scrollEventTarget);
-      var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
-
-      var shouldTrigger = false;
-
-      if (scrollEventTarget === element) {
-        shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
-      } else {
-        var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
-
-        shouldTrigger = viewportBottom + distance >= elementBottom;
-      }
-
-      if (shouldTrigger && this.expression) {
-        this.vm.$get(this.expression);
-      }
-    },
-
-    bind: function bind() {
-      var directive = this;
-      var element = this.el;
-
-      directive.vm.$on('hook:ready', function () {
-        if (isAttached(element)) {
-          directive.doBind();
-        }
-      });
-
-      this.bindTryCount = 0;
-
-      var tryBind = function tryBind() {
-        if (directive.bindTryCount > 10) return; //eslint-disable-line
-        directive.bindTryCount++;
-        if (isAttached(element)) {
-          directive.doBind();
-        } else {
-          setTimeout(tryBind, 50);
-        }
-      };
-
-      tryBind();
-    },
-
-    unbind: function unbind() {
-      this.scrollEventTarget.removeEventListener('scroll', this.scrollListener);
-    }
-  };
-
-  if (window.Vue) {
-    window.infiniteScroll = infiniteScroll;
-    Vue.use(install);
-  }
-
-  function install(Vue) {
-    Vue.directive('infiniteScroll', infiniteScroll);
-  }
-
-  exports.install = install;
-  exports.infiniteScroll = infiniteScroll;
-
-}));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
+},{}]},{},[5,6,7,8,9,4,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41])
 
 
 new Vue({
