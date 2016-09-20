@@ -1,11 +1,11 @@
 {% extends "PluginCallisto::PageDesign" %}
 {% set defaultItemPerPage = config("PluginCallisto.sort.defaultItemPerPage") %}
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
-{% set sortedData = config("PluginCallisto.sort.data")|split(', ')|json_encode() %}
 {% set paginatedResult = services.category.getItems(category, defaultItemPerPage, variationShowType) %}
+{% set sortedData = config("PluginCallisto.sort.data")|split(', ')|json_encode() %}
 {% set itemList = paginatedResult.getResult() %}
 {% set currentPage = paginatedResult.getPage() %}
-{% set isLastPage = paginatedResult.isLastPage() %}
+{% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
 {% set maxCount = paginatedResult.getTotalCount() %}
 {% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
 {% set isInfiniteScrolling = paginationType == "infiniteScroll" %}

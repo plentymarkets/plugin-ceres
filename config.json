@@ -1,9 +1,13 @@
 [
     {
-        "tab"       : "Categories",
-        "key"       : "global.category.home",
-        "label"     : "Home page",
-        "type"      : "category_select"
+        "tab"               : "Categories",
+        "key"               : "global.category.home",
+        "label"             : "Home page",
+        "type"              : "category_select",
+        "possibleValues"    :
+        [
+            "content"
+        ]
     },
     {
         "tab"       : "Categories",
@@ -35,13 +39,6 @@
             "3"     : "Only Child Variations"
         },
         "default"                       : "1"
-    },
-    {
-        "tab"       : "Header",
-        "key"       : "header.use_big_menu",
-        "label"     : "Use big menu for all listed categories",
-        "type"      : "text",
-        "default"   : ""
     },
     {
         "tab"       : "Header",
@@ -142,7 +139,6 @@
             "item.shortDescription"     : "Preview text",
             "item.recommendedPrice"     : "Strikethrough price",
             "item.variation_name"       : "Variation name",
-            "item.variation_number"     : "Variation number",
             "item.external_id"          : "External variation ID",
             "item.variation_model"      : "Model",
             "item.variation_dimensions" : "Dimensions",
@@ -174,13 +170,10 @@
         "possibleValues"                :
         {
           "basket.item.item_id"         : "Item ID",
-          "basket.item.variation_number": "Variation number",
-          "basket.item.condition"       : "Condition",
-          "basket.item.producer"        : "Producer",
-          "basket.item.technical_data"  : "Technical data",
           "basket.item.description"     : "Description",
-          "basket.item.shortdescription": "Preview text",
-          "basket.item.availability"    : "Availability"
+          "basket.item.availability"    : "Availability",
+          "basket.item.customNumber"    : "Custom Number",
+          "basket.item.state"           : "Item State"
         },
         "default"                       : "all"
     },

@@ -1,15 +1,13 @@
-{% set color = "gray" %}
 {% set showStoreSpecial = true %}
 {% if  item.itemBase.storeSpecial == 1 %}
-        {% set color = "red" %}
-        {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
-        {% if percent<0 %}
-            {% set dezimalcount = config('PluginCallisto.item.storeSpecial') %}
-            {% set percent = percent | number_format(dezimalcount, ',', '.') %}
-            {% set storeSpecial = percent ~"%" %}
-        {% else %}
-            {% set storeSpecial = "SALE" %}
-        {% endif %}
+    {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
+    {% if percent<0 %}
+        {% set dezimalcount = config('PluginCallisto.item.storeSpecial') %}
+        {% set percent = percent | number_format(dezimalcount, ',', '.') %}
+        {% set storeSpecial = percent ~"%" %}
+    {% else %}
+        {% set storeSpecial = "SALE" %}
+    {% endif %}
     {% elseif  item.itemBase.storeSpecial == 2 %}
         {% set storeSpecial = "NEW" %}
     {% elseif  item.itemBase.storeSpecial == 3 %}
@@ -17,7 +15,7 @@
     {% else %}
         {% set showStoreSpecial = false %}
     {% endif %}
-{% if showStoreSpecial %}
+    {% if showStoreSpecial == 'true' %}
         <span class="special-tag bg-success">Top
             {{ storeSpecial }}
         </span>
