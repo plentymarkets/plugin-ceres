@@ -1,0 +1,26 @@
+<script type="x/template" id="vue-account-settings">
+<div class="card-block">
+    <div class="row  m-b-1">
+        <div class="col-sm-4">
+            <strong>{{ trans("PluginCallisto::Callisto.accEmail") }}</strong>
+        </div>
+        <div class="col-sm-8">
+            <span>${ getEmail() }</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <strong>{{ trans("PluginCallisto::Callisto.accPassword") }}</strong>
+        </div>
+        <div class="col-sm-8">
+            <span>***********</span>
+        </div>
+    </div>
+    <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.accChangeSettings") }}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </span>
+</div>
+
+{% include "PluginCallisto::Templates.MyAccountSettings.ChangeAccountSettings" %}
+</script>

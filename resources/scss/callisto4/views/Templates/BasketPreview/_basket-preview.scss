@@ -1,0 +1,30 @@
+.basket-preview{
+
+	display: flex;
+    flex-flow: column nowrap;
+
+    .basket-header{
+        flex: 0 0 auto;
+        border-bottom: 1px solid $gray-lighter;
+    } 
+
+    .list{
+	    display: flex;
+	    flex-flow: column nowrap;
+    	flex: 0 1 auto;
+	    overflow: auto;
+    }
+
+    .totals{
+    	flex: 1 0 auto;
+	    display: flex;
+	    flex-flow: column nowrap;
+        border-top: 1px solid $gray-lighter;
+        @extend .small;
+
+        dd, dt{
+            margin-bottom: 0;
+        }
+        
+    }
+}

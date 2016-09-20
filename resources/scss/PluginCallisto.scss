@@ -1,0 +1,68 @@
+@import "variables";
+// ==========================================================================
+// External Libs
+// ==========================================================================
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/font-awesome/scss/font-awesome";
+@import "../../node_modules/shariff/build/shariff.complete.css";
+@import "../../node_modules/flag-icon-css/sass/flag-icon";
+@import "../../node_modules/owlcarousel/owl-carousel/owl.carousel.css";
+
+// ==========================================================================
+// Custom styles
+// ==========================================================================
+
+// global
+@import "callisto4/common/common";
+@import "callisto4/common/structure";
+
+// custom shariff theme for the social icons in the header
+@import "callisto4/common/shariff-theme-minimal";
+
+//TODO's
+@import "callisto4/common/buttons";
+@import "callisto4/common/card";
+
+// External plugins overrides
+@import "callisto4/plugins/lightbox";
+@import "callisto4/plugins/owl-carousel";
+
+// Components
+@import "callisto4/components/component-base";
+@import "callisto4/components/accordion";
+@import "callisto4/components/alerts";
+
+// Forms
+@import "callisto4/forms/input-groups";
+@import "callisto4/forms/inputs";
+@import "callisto4/forms/select";
+
+// Page Design / Global components
+@import "callisto4/views/PageDesign/header";
+@import "callisto4/views/PageDesign/navigation";
+@import "callisto4/views/PageDesign/breadcrumb";
+@import "callisto4/views/PageDesign/footer";
+
+// Templates
+@import "callisto4/views/Confirmation/confirmation-order-item";
+@import "callisto4/views/Templates/AddressSelect/address-select";
+@import "callisto4/views/Templates/BasketItemList/basket-item";
+@import "callisto4/views/Templates/BasketPreview/basket-preview-item";
+@import "callisto4/views/Templates/BasketPreview/basket-preview";
+@import "callisto4/views/Templates/BasketTotalSum/basket-total-sum";
+@import "callisto4/views/Templates/CategoryListItem/category-list-item";
+@import "callisto4/views/Templates/CategoryViewFilter/category-view-filter";
+@import "callisto4/views/Templates/Hero/component-hero";
+@import "callisto4/views/Templates/ItemListSort/pagination";
+@import "callisto4/views/Templates/ItemRating/item-rating-roll";
+@import "callisto4/views/Templates/ItemRating/item-rating-section";
+@import "callisto4/views/Templates/OrderItem/order-item";
+@import "callisto4/views/Templates/PaymentShippingSelect/payment-shipping-select";
+@import "callisto4/views/Templates/ToggleCategoryListView/toggle-list-view";
+
+
+// Pages
+@import "callisto4/views/Home/home";
+@import "callisto4/views/Checkout/checkout";
+@import "callisto4/views/Item/single-item";
+@import "callisto4/views/Category/category-list";

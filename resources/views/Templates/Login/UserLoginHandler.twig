@@ -1,0 +1,24 @@
+<script type="x/template" id="vue-user-login-handler">
+    <span id="login-change">
+        {% if frontend.Account.getIsAccountLoggedIn %}
+            {% set userObject = services.customer.getContact() %}
+            <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+                {{ trans("PluginCallisto::Callisto.generalHello") }}, {{userObject.firstName}} {{userObject.lastName}}</a>
+            {% else %}
+                {{ trans("PluginCallisto::Callisto.generalHello") }}, {{userObject.email}}</a>
+            {% endif %}
+            </a>
+            <div class="country-settings account-menu dropdown-menu dropdown-menu-right small">
+              <div class="list-group" aria-labelledby="accountMenuList" >
+                <a href="/my-account" class="list-group-item small"><i class="fa fa-user"></i> {{ trans("PluginCallisto::Callisto.accMyAccount") }}</a>
+                <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Callisto.accLogout") }}</a>
+              </div>
+            </div>
+        {% else %}
+            <a data-toggle="modal" href="#login">{{ trans("PluginCallisto::Callisto.accLogin") }}</a>
+            <small>oder</small>
+            <a data-toggle="modal" href="#registration">{{ trans("PluginCallisto::Callisto.accRegister") }}</a>
+        {% endif %}
+    </span>
+</script>

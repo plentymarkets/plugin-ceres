@@ -1,0 +1,12 @@
+<nav class="small hidden-sm-down">
+  <ul class="breadcrumb bg-faded">
+    <li class="breadcrumb-item" ><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+      {% for name,url in categoryTree %}
+          {% if loop.last %}
+              <li class="breadcrumb-item active"><span>{{ name }}</span></li>
+          {% else %}
+              <li class="breadcrumb-item"><a href="/{{ url }}">{{ name }}</a></li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+</nav>

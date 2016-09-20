@@ -1,0 +1,15 @@
+{% extends "PluginCallisto::PageDesign" %}
+
+{% block PageBody %}
+<div class="gast container">
+    <div class="row m-b-3">
+        <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+            <div class="row m-b-3">
+                <h1 class="col-xs-12">{{ trans("PluginCallisto::Callisto.accOrderAsGuest") }}</h1>
+            </div>
+
+            <registration guest-mode="true"></registration>
+        </div>
+    </div>
+</div>
+{% endblock %}

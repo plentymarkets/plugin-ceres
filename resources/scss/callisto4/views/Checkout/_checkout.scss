@@ -1,0 +1,26 @@
+.checkout{
+
+	.basket-items-list .item{
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.login-register-title {
+		font-size: 1em;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	@include media-breakpoint-up(sm){
+		
+	}
+
+	@include media-breakpoint-up(md){
+		
+	}
+
+	@include media-breakpoint-up(lg){
+		
+	}
+
+}
