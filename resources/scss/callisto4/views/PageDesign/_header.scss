@@ -23,9 +23,8 @@
 		margin-right: .6rem;
 	}
 
-	.top-bar-list{
+	.list-inline{
 		margin-bottom: 0;
-		width: 100%;
 
 		.list-inline-item{
 			color: $gray-lighter;
@@ -42,6 +41,9 @@
 				margin-right: .4rem;
 			}
 		}
+	}
+
+	ul.pull-xs-right{
 
 		li:last-child{
 			a{
@@ -57,9 +59,18 @@
 		}
 	}
 
+	.searchBox,
 	.search-box{
 		a.dropdown-toggle {
-			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		.dropdown-menu{
+			width: 320px;
+		    padding: 0;
+		    border: none;
+			position: absolute;
 		}
 	}
 
@@ -98,41 +109,90 @@
 	background-color: darken($brand-primary, 20%);
 }
 
+//navigation scss
 .navbar {
+
 	border-radius: 0;
 	padding:0;
 	z-index: $zindex-navbar;
 	border-bottom: 1px solid $gray-lighter;
 
-	.navbar-toggler {
-		position: absolute;
-		top: .8rem;
-		right: 1em;
+	.dropdown:hover .dropdown-menu {
+		display: block !important;
 	}
 }
 
 .navbar-brand {
+
 	float: none;
 	padding: .5rem 1rem;
-  	display: inline-block;
+  display: inline-block;
 
-  	img {
-    	max-height: 2.5rem;
-  	}
+  img {
+    max-height: 3.5rem;
+  }
 }
+
+.navbar-nav {
+
+	.nav-item{
+		margin: 0!important;
+
+		&.open {
+			position: relative;
+		}
+
+		a {
+			padding:.5rem;
+		}
+
+		&.active,
+		&:hover {
+			.nav-link {
+				background-color: $brand-primary;
+				color:white;
+			}
+		}
+
+		.nav-link {
+			padding: 1rem;
+		}
+	}
+
+}
+
+.navbar-toggler {
+	position: absolute;
+	top: 1.5rem;
+	right: 1em;
+}
+
+// Mobile only
+@include media-breakpoint-between(xs, md) {
+	.navbar {
+
+		.navbar-nav{
+
+			.dropdown-menu{
+				position:relative;
+				float: none;
+
+				background-color: $gray-lighter;
+				border: none;
+			}
+
+		}
+	}
+}
+
 
 @include media-breakpoint-up(sm){
 	.top-bar {
-		.top-bar-list{
-			width: auto;
-		}
-
 		.list-inline-item{
 			&:nth-child(2), &:nth-child(3) {
 				position:relative;
 			}
 		}
-		
 		.shariff {
 			width:100%;
 			margin:0;
@@ -146,19 +206,6 @@
 			}
 		}
 	}
-
-	.navbar-brand {
-	  	img {
-	    	max-height: 3.5rem;
-	  	}
-	}
-
-	.navbar {
-		.navbar-toggler {
-			top: 1.5rem;
-		}
-	}
-
 }
 
 @include media-breakpoint-up(md){
@@ -167,9 +214,19 @@
 
 
 @include media-breakpoint-up(lg){
-	.navbar {
-		.navbar-toggler {
-			top: 1.5rem;
+	.navbar-brand {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.navbar-nav{
+		&>.nav-item{
+			&>.nav-link{
+				padding-top: 2em;
+				padding-bottom: 2em;
+			}
 		}
 	}
+
 }

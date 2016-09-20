@@ -10,7 +10,7 @@
                         ({{ trans("PluginCallisto::Callisto.basketGross") }})
                     </dt><!--
                     --><dd>
-                        19,99 &euro;
+                        ${ formatPrice(basket.itemSum, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.value_of_items_net' in basketData or 'all' in basketData %}
@@ -18,7 +18,7 @@
                         ({{ trans("PluginCallisto::Callisto.basketNet") }})
                     </dt><!--
                  --><dd>
-                        29,99 &euro;
+                        ${ formatPrice(basket.itemSumNet, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.shipping_costs_gross' in basketData or 'all' in basketData %}
@@ -26,7 +26,7 @@
                       ({{ trans("PluginCallisto::Callisto.basketGross") }})
                   </dt><!--
                   --><dd>
-                      4,99 &euro;
+                      ${ formatPrice(basket.shippingAmount, "EUR") }
                   </dd>
                 {% endif %}
                 {% if 'basket.shipping_costs_net' in basketData or 'all' in basketData %}
@@ -34,14 +34,14 @@
                         ({{ trans("PluginCallisto::Callisto.basketNet") }})
                     </dt><!--
 		            --><dd>
-                        4,99 &euro;
+                        ${ formatPrice(basket.shippingAmountNet, "EUR") }
                     </dd>
                 {% endif %}
                 {% if 'basket.vat' in basketData or 'all' in basketData %}
                     <dt><strong>{{ trans("PluginCallisto::Callisto.basketVAT") }}</strong>
                     </dt><!--
 		            --><dd>
-                        3,78 &euro;
+                        ${ formatPrice(basket.itemSum - basket.itemSumNet, "EUR") }
                     </dd>
                 {% endif %}
 
@@ -53,7 +53,7 @@
                     </dt><!--
 		            --><dd>
                         <strong>
-                            79,99 &euro;
+                            ${ formatPrice(basket.basketAmount, "EUR") }
                         </strong>
                     </dd>
                 {% endif %}
@@ -64,7 +64,7 @@
                     </dt><!--
 		            --><dd>
                         <strong>
-                            56,99 &euro;
+                            ${ formatPrice(basket.basketAmountNet, "EUR") }
                         </strong>
                     </dd>
                 {% endif %}

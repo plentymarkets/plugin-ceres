@@ -20,8 +20,6 @@
 
 	li{
        margin-bottom: 2px;
-       width: 100%;
-       background-color: $gray-lighter3;
 	}
 }
 
@@ -50,7 +48,6 @@
             @include make-col-ready(12);
             @include make-col(12);
             margin-bottom: $grid-gutter-width;
-            background-color: transparent;
 
             display: flex;
         }

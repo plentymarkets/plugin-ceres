@@ -169,6 +169,17 @@
     }
 }
 
+hr {
+    box-sizing: content-box;
+    height: 0;
+    border: 0;
+    border-top: 1px solid $gray-dark;
+}
+
+.border-left {
+    border-left: 1px solid $gray-dark;
+}
+
 @include media-breakpoint-only(xs) {
     .border-left {
         border:none;
@@ -230,6 +241,7 @@
         width: auto;
         height: auto;
     }
+
 }
 
 .img-contain-container{
