@@ -19886,7 +19886,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.6 */
+/*! tether 1.3.7 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20067,7 +20067,11 @@ function getOffsetParent(el) {
   return el.offsetParent || document.documentElement;
 }
 
+var _scrollBarSize = null;
 function getScrollBarSize() {
+  if (_scrollBarSize) {
+    return _scrollBarSize;
+  }
   var inner = document.createElement('div');
   inner.style.width = '100%';
   inner.style.height = '200px';
@@ -20100,7 +20104,8 @@ function getScrollBarSize() {
 
   var width = widthContained - widthScroll;
 
-  return { width: width, height: width };
+  _scrollBarSize = { width: width, height: width };
+  return _scrollBarSize;
 }
 
 function extend() {
@@ -29347,15 +29352,49 @@ Vue.config.delimiters = ['${', '}'];
 Vue.config.unsafeDelimiters = ['{!!', '!!}'];
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+<<<<<<< HEAD
+var currencySymbolMap = require('./map');
+
+var symbolCurrencyMap = {};
+for (var key in currencySymbolMap) {
+  if (currencySymbolMap.hasOwnProperty(key)) {
+    var currency = key;
+    var symbol = currencySymbolMap[currency];
+    symbolCurrencyMap[symbol] = currency;
+  }
+}
+=======
 var BasketService       = require('services/BasketService');
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
 
 Vue.component('add-to-basket', {
+>>>>>>> plentymarkets/master
 
-    template: '#vue-add-to-basket',
+function getSymbolFromCurrency(currencyCode) {
+  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
+    return currencySymbolMap[currencyCode];
+  } else {
+    return undefined;
+  }
+}
 
+<<<<<<< HEAD
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+=======
     props: [
         "basketItem",
         "baseUrl"
@@ -29367,9 +29406,434 @@ Vue.component('add-to-basket', {
             quantity: 1
         };
     },
+>>>>>>> plentymarkets/master
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+<<<<<<< HEAD
+},{"./map":2}],2:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}],3:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.infiniteScroll = global.infiniteScroll || {})));
+}(this, function (exports) { 'use strict';
+
+  var throttle = function throttle(fn, delay) {
+    var now, lastExec, timer, context, args; //eslint-disable-line
+
+    var execute = function execute() {
+      fn.apply(context, args);
+      lastExec = now;
+    };
+
+    return function () {
+      context = this;
+      args = arguments;
+
+      now = Date.now();
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      if (lastExec) {
+        var diff = delay - (now - lastExec);
+        if (diff < 0) {
+          execute();
+        } else {
+          timer = setTimeout(function () {
+            execute();
+          }, diff);
+        }
+      } else {
+        execute();
+      }
+    };
+  };
+
+  var getScrollTop = function getScrollTop(element) {
+    if (element === window) {
+      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
+    }
+
+    return element.scrollTop;
+  };
+
+  var getComputedStyle = document.defaultView.getComputedStyle;
+
+  var getScrollEventTarget = function getScrollEventTarget(element) {
+    var currentNode = element;
+    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
+    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
+      var overflowY = getComputedStyle(currentNode).overflowY;
+      if (overflowY === 'scroll' || overflowY === 'auto') {
+        return currentNode;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return window;
+  };
+
+  var getVisibleHeight = function getVisibleHeight(element) {
+    if (element === window) {
+      return document.documentElement.clientHeight;
+    }
+
+    return element.clientHeight;
+  };
+
+  var getElementTop = function getElementTop(element) {
+    if (element === window) {
+      return getScrollTop(window);
+    }
+    return element.getBoundingClientRect().top + getScrollTop(window);
+  };
+
+  var isAttached = function isAttached(element) {
+    var currentNode = element.parentNode;
+    while (currentNode) {
+      if (currentNode.tagName === 'HTML') {
+        return true;
+      }
+      if (currentNode.nodeType === 11) {
+        return false;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return false;
+  };
+
+  var infiniteScroll = {
+    doBind: function doBind() {
+      if (this.binded) return; // eslint-disable-line
+      this.binded = true;
+
+      var directive = this;
+      var element = directive.el;
+
+      directive.scrollEventTarget = getScrollEventTarget(element);
+      directive.scrollListener = throttle(directive.doCheck.bind(directive), 200);
+      directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
+
+      var disabledExpr = element.getAttribute('infinite-scroll-disabled');
+      var disabled = false;
+
+      if (disabledExpr) {
+        this.vm.$watch(disabledExpr, function (value) {
+          directive.disabled = value;
+          if (!value && directive.immediateCheck) {
+            directive.doCheck();
+          }
+        });
+        disabled = Boolean(directive.vm.$get(disabledExpr));
+      }
+      directive.disabled = disabled;
+
+      var distanceExpr = element.getAttribute('infinite-scroll-distance');
+      var distance = 0;
+      if (distanceExpr) {
+        distance = Number(directive.vm.$get(distanceExpr));
+        if (isNaN(distance)) {
+          distance = 0;
+        }
+      }
+      directive.distance = distance;
+
+      var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
+      var immediateCheck = true;
+      if (immediateCheckExpr) {
+        immediateCheck = Boolean(directive.vm.$get(immediateCheckExpr));
+      }
+      directive.immediateCheck = immediateCheck;
+
+      if (immediateCheck) {
+        directive.doCheck();
+      }
+
+      var eventName = element.getAttribute('infinite-scroll-listen-for-event');
+      if (eventName) {
+        directive.vm.$on(eventName, function () {
+          directive.doCheck();
+        });
+      }
+    },
+
+    doCheck: function doCheck(force) {
+      var scrollEventTarget = this.scrollEventTarget;
+      var element = this.el;
+      var distance = this.distance;
+
+      if (force !== true && this.disabled) return; //eslint-disable-line
+      var viewportScrollTop = getScrollTop(scrollEventTarget);
+      var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
+
+      var shouldTrigger = false;
+
+      if (scrollEventTarget === element) {
+        shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
+      } else {
+        var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
+
+        shouldTrigger = viewportBottom + distance >= elementBottom;
+      }
+
+      if (shouldTrigger && this.expression) {
+        this.vm.$get(this.expression);
+      }
+    },
+
+    bind: function bind() {
+      var directive = this;
+      var element = this.el;
+
+      directive.vm.$on('hook:ready', function () {
+        if (isAttached(element)) {
+          directive.doBind();
+        }
+      });
+
+      this.bindTryCount = 0;
+
+      var tryBind = function tryBind() {
+        if (directive.bindTryCount > 10) return; //eslint-disable-line
+        directive.bindTryCount++;
+        if (isAttached(element)) {
+          directive.doBind();
+        } else {
+          setTimeout(tryBind, 50);
+        }
+      };
+
+      tryBind();
+    },
+
+    unbind: function unbind() {
+      this.scrollEventTarget.removeEventListener('scroll', this.scrollListener);
+    }
+  };
+
+  if (window.Vue) {
+    window.infiniteScroll = infiniteScroll;
+    Vue.use(install);
+  }
+
+  function install(Vue) {
+    Vue.directive('infiniteScroll', infiniteScroll);
+  }
+
+  exports.install = install;
+  exports.infiniteScroll = infiniteScroll;
+
+}));
+},{}],4:[function(require,module,exports){
+var BasketService = require( 'services/BasketService' );
+var ApiService = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService = require('services/ModalService');
+
+Vue.component( 'add-to-basket', {
+
+    template: '#vue-add-to-basket',
+
+    props: [
+      "basketItem",
+      "baseUrl"
+    ],
+
+    data: function()
+    {
+        return {
+            quantity: 1
+        }
+    },
 
     methods: {
 
+        addToBasket: function( quantity )
+        {
+          var addItemModal = ModalService.findModal($(this.$el.parentElement));
+          addItemModal.setTimeout(10000);
+
+          $(".wrapper-bottom").append(addItemModal.getModalContainer());
+
+            BasketService.addBasketItem({
+              variationId: this.basketItem.variationBase.id,
+              quantity: this.quantity
+            }).done( function ()
+              {
+                addItemModal.show();
+              })
+              .fail( function ()
+              {
+                NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+              });
+        },
+
+        quantityPlus: function ()
+        {
+            this.quantity++;
+        },
+
+        quantityMinus: function ()
+        {
+            if (this.quantity > 1)
+            {
+                this.quantity--;
+            }
+        }
+    }
+});
+
+},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],5:[function(require,module,exports){
+Vue.component( 'address-input-group',
+{
+	template: '#vue-address-input-group',
+
+	props:
+	[
+		'addressData',
+		'locale'
+	],
+
+	created: function()
+	{
+		if(!this.addressData)
+		{
+			this.addressData = {};
+		}
+
+		this.locale = "DE";
+	}
+} );
+
+},{}],6:[function(require,module,exports){
+var ModalService = require( 'services/ModalService' );
+=======
         addToBasket: function(quantity)
         {
             var addItemModal = ModalService.findModal($(this.$el.parentElement));
@@ -29430,6 +29894,7 @@ Vue.component('address-input-group', {
 var ModalService = require('services/ModalService');
 
 Vue.component('address-select', {
+>>>>>>> plentymarkets/master
 
     template: '#vue-address-select',
 
@@ -29529,11 +29994,17 @@ Vue.component('address-select', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/ModalService":48}],7:[function(require,module,exports){
+var AddressService = require('services/AddressService');
+var ValidationService = require( 'services/ValidationService' );
+=======
 },{"services/ModalService":46}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
 Vue.component('create-update-address', {
+>>>>>>> plentymarkets/master
 
     template: '#vue-create-update-address',
 
@@ -29606,7 +30077,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":40,"services/ValidationService":50}],5:[function(require,module,exports){
+},{"services/AddressService":42,"services/ValidationService":52}],8:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -29634,7 +30105,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],6:[function(require,module,exports){
+},{"services/CheckoutService":45}],9:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -29661,7 +30132,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],7:[function(require,module,exports){
+},{"services/CheckoutService":45}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -29703,10 +30174,17 @@ Vue.component('basket-button', {
 
 });
 
+<<<<<<< HEAD
+},{"services/BasketService":44,"services/MonetaryFormatService":49}],11:[function(require,module,exports){
+var BasketService         = require( 'services/BasketService' );
+var MonetaryFormatService = require( 'services/MonetaryFormatService' );
+var ModalService          = require( 'services/ModalService' );
+=======
 },{"services/BasketService":42,"services/MonetaryFormatService":47}],8:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
+>>>>>>> plentymarkets/master
 
 Vue.component('basket-item-list', {
 
@@ -29791,7 +30269,7 @@ Vue.component('basket-item-list', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],9:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],12:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -29870,7 +30348,7 @@ Vue.component('basket-preview', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],10:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],13:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -30001,9 +30479,15 @@ Vue.component('basket-preview-item', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],14:[function(require,module,exports){
+var BasketService  = require( 'services/BasketService' );
+var CountryService = require( 'services/CountryService' );
+=======
 },{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],11:[function(require,module,exports){
 var BasketService  = require('services/BasketService');
 var CountryService = require('services/CountryService');
+>>>>>>> plentymarkets/master
 
 Vue.component('basket-shipping-country', {
 
@@ -30063,8 +30547,13 @@ Vue.component('basket-shipping-country', {
 
 });
 
+<<<<<<< HEAD
+},{"services/BasketService":44,"services/CountryService":46}],15:[function(require,module,exports){
+var BasketService = require('services/BasketService');
+=======
 },{"services/BasketService":42,"services/CountryService":44}],12:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
+>>>>>>> plentymarkets/master
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-total-sum', {
@@ -30105,7 +30594,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":42,"services/MonetaryFormatService":47}],13:[function(require,module,exports){
+},{"services/BasketService":44,"services/MonetaryFormatService":49}],16:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -30177,11 +30666,19 @@ Vue.component('category-list-item', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],17:[function(require,module,exports){
+var BasketService = require( 'services/BasketService' );
+var ApiService = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService = require('services/ModalService');
+=======
 },{"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],14:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ApiService            = require('services/ApiService');
 var NotificationService   = require('services/NotificationService');
 var ModalService          = require('services/ModalService');
+>>>>>>> plentymarkets/master
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('add-item-confirm', {
@@ -30213,8 +30710,13 @@ Vue.component('add-item-confirm', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/NotificationService":50}],18:[function(require,module,exports){
+var CountryService    = require( 'services/CountryService' );
+=======
 },{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/NotificationService":48}],15:[function(require,module,exports){
 var CountryService = require('services/CountryService');
+>>>>>>> plentymarkets/master
 
 Vue.component('country-select', {
 
@@ -30259,6 +30761,16 @@ Vue.component('country-select', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/CountryService":46}],19:[function(require,module,exports){
+Vue.component( 'coupon',
+    {
+        template: '#vue-coupon'
+    } );
+
+},{}],20:[function(require,module,exports){
+var BasketService = require( 'services/BasketService' );
+=======
 },{"services/CountryService":44}],16:[function(require,module,exports){
 Vue.component('coupon', {
 
@@ -30268,6 +30780,7 @@ Vue.component('coupon', {
 
 },{}],17:[function(require,module,exports){
 var BasketService = require('services/BasketService');
+>>>>>>> plentymarkets/master
 
 Vue.component('delete-from-basket', {
 
@@ -30288,8 +30801,13 @@ Vue.component('delete-from-basket', {
 
 });
 
+<<<<<<< HEAD
+},{"services/BasketService":44}],21:[function(require,module,exports){
+Vue.component( 'item-availability-text', {
+=======
 },{"services/BasketService":42}],18:[function(require,module,exports){
 Vue.component('item-availability-text', {
+>>>>>>> plentymarkets/master
 
     template: '<span class="availability-text">${ availabilityText }</span>',
 
@@ -30323,7 +30841,7 @@ Vue.component('item-availability-text', {
 
 });
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('item-count-to-basket', {
@@ -30358,7 +30876,7 @@ Vue.component('item-count-to-basket', {
     }
 });
 
-},{"services/BasketService":42}],20:[function(require,module,exports){
+},{"services/BasketService":44}],23:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -30469,7 +30987,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":45,"services/PaginationService":49,"vue-infinite-scroll":55}],21:[function(require,module,exports){
+},{"services/LoadItemsService":47,"services/PaginationService":51,"vue-infinite-scroll":3}],24:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -30651,11 +31169,17 @@ Vue.component('item-list-sort', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/PaginationService":51}],25:[function(require,module,exports){
+var ApiService = require( 'services/ApiService' );
+var PaginationService = require( 'services/PaginationService' );
+=======
 },{"services/PaginationService":49}],22:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-pagination', {
+>>>>>>> plentymarkets/master
 
     template: '#vue-item-list-pagination',
 
@@ -30833,8 +31357,13 @@ Vue.component('item-list-pagination', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/ApiService":43,"services/PaginationService":51}],26:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+=======
 },{"services/ApiService":41,"services/PaginationService":49}],23:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
+>>>>>>> plentymarkets/master
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
 var BasketService       = require('services/BasketService');
@@ -31074,8 +31603,13 @@ Vue.component('item-variation-select', {
     }
 });
 
+<<<<<<< HEAD
+},{"services/ApiService":43,"services/BasketService":44,"services/NotificationService":50,"services/VariationsHTMLCacheService":53}],27:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+=======
 },{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":48,"services/VariationsHTMLCacheService":51}],24:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
+>>>>>>> plentymarkets/master
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
 
@@ -31130,7 +31664,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48}],25:[function(require,module,exports){
+},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50}],28:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -31191,7 +31725,7 @@ Vue.component('user-login-handler', {
     }
 });
 
-},{"services/ApiService":41}],26:[function(require,module,exports){
+},{"services/ApiService":43}],29:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-config',
@@ -31210,7 +31744,7 @@ Vue.component('monetary-config',
         }
     });
 
-},{"services/MonetaryFormatService":47}],27:[function(require,module,exports){
+},{"services/MonetaryFormatService":49}],30:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -31247,9 +31781,15 @@ Vue.component('monetary-format',
         }
     });
 
+<<<<<<< HEAD
+},{"services/MonetaryFormatService":49}],31:[function(require,module,exports){
+var ModalService = require('services/ModalService');
+var APIService = require('services/APIService');
+=======
 },{"services/MonetaryFormatService":47}],28:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
+>>>>>>> plentymarkets/master
 var NotificationService = require('services/NotificationService');
 
 Vue.component('account-settings', {
@@ -31334,7 +31874,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":48}],29:[function(require,module,exports){
+},{"services/APIService":43,"services/ModalService":48,"services/NotificationService":50}],32:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -31363,7 +31903,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":48,"services/WaitScreenService":52}],30:[function(require,module,exports){
+},{"services/NotificationService":50,"services/WaitScreenService":54}],33:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -31530,7 +32070,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":41}],31:[function(require,module,exports){
+},{"services/ApiService":43}],34:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -31570,8 +32110,13 @@ Vue.component('payment-provider-select', {
         }
     });
 
+<<<<<<< HEAD
+},{"services/APIService":43,"services/MonetaryFormatService":49}],35:[function(require,module,exports){
+Vue.component( 'price-formatted', {
+=======
 },{"services/APIService":39,"services/MonetaryFormatService":47}],32:[function(require,module,exports){
 Vue.component('price-formatted', {
+>>>>>>> plentymarkets/master
 
     template: '<span class="price-formatted">${ priceFormatted }</span>',
 
@@ -31588,8 +32133,13 @@ Vue.component('price-formatted', {
 
 });
 
+<<<<<<< HEAD
+},{}],36:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+=======
 },{}],33:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
+>>>>>>> plentymarkets/master
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
 
@@ -31713,7 +32263,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48,"services/ValidationService":50}],34:[function(require,module,exports){
+},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50,"services/ValidationService":52}],37:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -31768,7 +32318,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":47}],35:[function(require,module,exports){
+},{"services/MonetaryFormatService":49}],38:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -31800,7 +32350,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":48}],36:[function(require,module,exports){
+},{"services/NotificationService":50}],39:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 Vue.component('wait-screen', {
@@ -31822,7 +32372,7 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":52}],37:[function(require,module,exports){
+},{"services/WaitScreenService":54}],40:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -31853,8 +32403,13 @@ Vue.directive('logout', function()
 
 });
 
+<<<<<<< HEAD
+},{"services/ApiService":43,"services/NotificationService":50}],41:[function(require,module,exports){
+var ApiService = require( 'services/ApiService' );
+=======
 },{"services/ApiService":41,"services/NotificationService":48}],38:[function(require,module,exports){
 var ApiService = require('services/ApiService');
+>>>>>>> plentymarkets/master
 
 Vue.directive('place-order', function() {
 
@@ -31875,9 +32430,55 @@ Vue.directive('place-order', function() {
 
 });
 
+<<<<<<< HEAD
+},{"services/ApiService":43}],42:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+var CheckoutService = require('services/CheckoutService');
+
+module.exports = (function($) {
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress
+    };
+
+    function createAddress( address, addressType, setActive )
+    {
+        return ApiService.post( "rest/customer/address?typeId=" + addressType, address ).done(function(response) {
+            if( !!setActive )
+            {
+                if( addressType === 1 )
+                {
+                    CheckoutService.setBillingAddressId( response.id );
+                }
+                else if( addressType === 2 )
+                {
+                    CheckoutService.setDeliveryAddressId( response.id );
+                }
+            }
+        });
+    }
+
+    function updateAddress( newData, addressType )
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put( "rest/customer/address/"+ newData.id + "?typeId=" + addressType, newData );
+    }
+
+    function deleteAddress( addressId, addressType )
+    {
+        return ApiService.delete( "rest/customer/address/"+ addressId + "?typeId=" + addressType );
+    }
+})(jQuery);
+
+},{"services/ApiService":43,"services/CheckoutService":45}],43:[function(require,module,exports){
+var NotificationService = require('services/NotificationService');
+var WaitScreenService = require('services/WaitScreenService');
+=======
 },{"services/ApiService":41}],39:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
+>>>>>>> plentymarkets/master
 
 module.exports = (function($)
 {
@@ -32039,6 +32640,9 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{"services/NotificationService":50,"services/WaitScreenService":54}],44:[function(require,module,exports){
+=======
 },{"services/NotificationService":48,"services/WaitScreenService":52}],40:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
@@ -32084,6 +32688,7 @@ module.exports = (function($)
 },{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
 arguments[4][39][0].apply(exports,arguments)
 },{"dup":39,"services/NotificationService":48,"services/WaitScreenService":52}],42:[function(require,module,exports){
+>>>>>>> plentymarkets/master
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -32211,7 +32816,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],43:[function(require,module,exports){
+},{"services/ApiService":43}],45:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -32301,10 +32906,16 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{"services/ApiService":43}],46:[function(require,module,exports){
+module.exports = (function($) {
+    
+=======
 },{"services/ApiService":41}],44:[function(require,module,exports){
 module.exports = (function($)
 {
 
+>>>>>>> plentymarkets/master
     return {
         parseShippingCountries: parseShippingCountries,
         parseShippingStates   : parseShippingStates,
@@ -32392,7 +33003,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],45:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -32416,9 +33027,14 @@ module.exports = (function($)
         );
     }
 });
+<<<<<<< HEAD
+},{"services/ApiService":43}],48:[function(require,module,exports){
+module.exports = (function($) {
+=======
 },{"services/ApiService":41}],46:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var paused  = false;
     var timeout = -1;
@@ -32548,8 +33164,13 @@ module.exports = (function($)
     }
 })(jQuery);
 
+<<<<<<< HEAD
+},{}],49:[function(require,module,exports){
+module.exports = (function( $ )
+=======
 },{}],47:[function(require,module,exports){
 module.exports = (function($)
+>>>>>>> plentymarkets/master
 {
     var options = {
         symbol   : "EUR",
@@ -32627,9 +33248,14 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{"currency-symbol-map":1}],50:[function(require,module,exports){
+module.exports = (function($) {
+=======
 },{"currency-symbol-map":53}],48:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var notificationCount = 0;
     var notifications     = new NotificationList();
@@ -32800,9 +33426,14 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{}],51:[function(require,module,exports){
+module.exports = (function($) {
+=======
 },{}],49:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var itemsPerPagePrivate = 0;
     var sortModePrivate     = "";
@@ -32826,9 +33457,14 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{}],52:[function(require,module,exports){
+module.exports = (function( $ ) {
+=======
 },{}],50:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var $form;
 
@@ -33020,9 +33656,14 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{}],53:[function(require,module,exports){
+module.exports = (function($) {
+=======
 },{}],51:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var cache = {};
 
@@ -33064,9 +33705,14 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{}],54:[function(require,module,exports){
+module.exports = (function($) {
+=======
 },{}],52:[function(require,module,exports){
 module.exports = (function($)
 {
+>>>>>>> plentymarkets/master
 
     var overlay = {
         count    : 0,
@@ -33114,6 +33760,9 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
+},{}]},{},[5,6,7,8,9,4,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41])
+=======
 },{}],53:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
@@ -33490,6 +34139,7 @@ module.exports =
 
 }));
 },{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
+>>>>>>> plentymarkets/master
 
 
 new Vue({

@@ -1,0 +1,89 @@
+//navigation scss
+.navbar-nav {
+
+	.dropdown-menu {
+		margin-top: 0!important;
+		padding: 0;
+
+		.dropdown-item{
+			margin: 0;
+			padding: 0;
+
+			a{
+				display: inline-block;
+			    width: 100%;
+			    padding:.5rem 1rem;
+			    border-bottom: 1px solid $gray-lighter3;
+
+			    text-decoration: none;
+
+			    transition: all 300ms;
+
+			    &:hover{
+			    	background-color: $gray-lighter;
+			    }
+			}
+		}
+	}
+
+	.dropdown:hover .dropdown-menu {
+		// force dropdown to display on hover
+		display: block !important;
+	}
+
+	.nav-item{
+		margin: 0!important;
+
+		&.active,
+		&:hover {
+			.nav-link {
+				background-color: $brand-primary;
+				color:white;
+			}
+		}
+
+		.nav-link {
+			padding: 1rem;
+		}
+	}
+
+}
+
+// Mobile only
+@include media-breakpoint-between(xs, md) {
+	.navbar {
+
+		.navbar-nav{
+
+			.dropdown-menu{
+				position:static;
+				float: none;
+
+				background-color: $gray-lighter2;
+				border: none;
+			}
+
+		}
+	}
+}
+
+@include media-breakpoint-up(lg){
+	
+	.navbar-brand {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	//styles for top level menu items
+	.navbar-nav{
+		&>.nav-item{
+			&>.nav-link{
+				padding-top: 2em;
+				padding-bottom: 2em;
+			}
+		}
+	}
+
+}
+

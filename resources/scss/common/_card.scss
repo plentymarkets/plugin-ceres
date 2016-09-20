@@ -1,0 +1,23 @@
+
+// TODO create component based on card to show these modifications
+.card{
+	
+	.item-edit{
+		position: absolute;
+		top: 1.25rem;
+		right: 1.25rem;
+		font-size: 1.5em;
+		
+		.fa{
+    		width: 1em;
+		    height: 1em;
+		    color: $gray-light;
+		    transition: all .2s ease-in-out;
+
+		    &:hover{
+				color: $brand-primary;
+				border-color: $brand-primary;
+	    	}
+    	}
+	}
+}
