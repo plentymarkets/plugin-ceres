@@ -92,7 +92,7 @@ Vue.component('address-select', {
 
         updateHeadline: function()
         {
-            var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
+            var headline  = (this.addressType == "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
             headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
             this.headline = headline;
         }
