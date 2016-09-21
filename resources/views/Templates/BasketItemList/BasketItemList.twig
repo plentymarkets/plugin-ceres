@@ -1,3 +1,5 @@
+{% set itemsData = config("PluginCallisto.basket.item_data")|split(', ') %}
+{% set showItemVariation = config("PluginCallisto.basket.variations") %}
 {% set itemName = config("PluginCallisto.item.name") %}
 
 <script type="x/template" id="vue-basket-item-list">
