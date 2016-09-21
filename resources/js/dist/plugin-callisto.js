@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 
 /*!
- * Vue.js v1.0.26
+ * Vue.js v1.0.25
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -13228,7 +13228,7 @@ var expression = Object.freeze({
     }
     var isA = isArray(val);
     var isO = isObject(val);
-    if ((isA || isO) && Object.isExtensible(val)) {
+    if (isA || isO) {
       if (val.__ob__) {
         var depId = val.__ob__.dep.id;
         if (seen.has(depId)) {
@@ -14714,13 +14714,13 @@ var template = Object.freeze({
       this.vm.$on('hook:attached', function () {
         nextTick(_this.forceUpdate);
       });
-      if (!inDoc(el)) {
-        nextTick(this.forceUpdate);
-      }
     },
 
     update: function update(value) {
       var el = this.el;
+      if (!inDoc(el)) {
+        return nextTick(this.forceUpdate);
+      }
       el.selectedIndex = -1;
       var multi = this.multiple && isArray(value);
       var options = el.options;
@@ -19661,13 +19661,7 @@ var template = Object.freeze({
 
     pluralize: function pluralize(value) {
       var args = toArray(arguments, 1);
-      var length = args.length;
-      if (length > 1) {
-        var index = value % 10 - 1;
-        return index in args ? args[index] : args[length - 1];
-      } else {
-        return args[0] + (value === 1 ? '' : 's');
-      }
+      return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
     },
 
     /**
@@ -19869,7 +19863,7 @@ var template = Object.freeze({
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.26';
+  Vue.version = '1.0.25';
 
   // devtools global hook
   /* istanbul ignore next */
@@ -19886,7 +19880,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.6 */
+/*! tether 1.3.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -19910,32 +19904,6 @@ if (typeof TetherBase === 'undefined') {
 }
 
 var zeroElement = null;
-
-// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
-// if the element lies within a nested document (<frame> or <iframe>-like).
-function getActualBoundingClientRect(node) {
-  var boundingRect = node.getBoundingClientRect();
-
-  // The original object returned by getBoundingClientRect is immutable, so we clone it
-  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
-  var rect = {};
-  for (var k in boundingRect) {
-    rect[k] = boundingRect[k];
-  }
-
-  if (node.ownerDocument !== document) {
-    var _frameElement = node.ownerDocument.defaultView.frameElement;
-    if (_frameElement) {
-      var frameRect = getActualBoundingClientRect(_frameElement);
-      rect.top += frameRect.top;
-      rect.bottom += frameRect.top;
-      rect.left += frameRect.left;
-      rect.right += frameRect.left;
-    }
-  }
-
-  return rect;
-}
 
 function getScrollParents(el) {
   // In firefox if the el is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -19972,13 +19940,7 @@ function getScrollParents(el) {
     }
   }
 
-  parents.push(el.ownerDocument.body);
-
-  // If the node is within a frame, account for the parent window scroll
-  if (el.ownerDocument !== document) {
-    parents.push(el.ownerDocument.defaultView);
-  }
-
+  parents.push(document.body);
   return parents;
 }
 
@@ -20012,7 +19974,13 @@ var getOrigin = function getOrigin() {
 
   var id = node.getAttribute('data-tether-id');
   if (typeof zeroPosCache[id] === 'undefined') {
-    zeroPosCache[id] = getActualBoundingClientRect(node);
+    zeroPosCache[id] = {};
+
+    var rect = node.getBoundingClientRect();
+    for (var k in rect) {
+      // Can't use extend, as on IE9, elements don't resolve to be hasOwnProperty
+      zeroPosCache[id][k] = rect[k];
+    }
 
     // Clear the cache when this position call is done
     defer(function () {
@@ -20041,7 +20009,13 @@ function getBounds(el) {
 
   var docEl = doc.documentElement;
 
-  var box = getActualBoundingClientRect(el);
+  var box = {};
+  // The original object returned by getBoundingClientRect is immutable, so we clone it
+  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
+  var rect = el.getBoundingClientRect();
+  for (var k in rect) {
+    box[k] = rect[k];
+  }
 
   var origin = getOrigin();
 
@@ -20160,9 +20134,7 @@ function hasClass(el, name) {
 }
 
 function getClassName(el) {
-  // Can't use just SVGAnimatedString here since nodes within a Frame in IE have
-  // completely separately SVGAnimatedString base classes
-  if (el.className instanceof el.ownerDocument.defaultView.SVGAnimatedString) {
+  if (el.className instanceof SVGAnimatedString) {
     return el.className.baseVal;
   }
   return el.className;
@@ -20227,7 +20199,7 @@ var Evented = (function () {
   }, {
     key: 'off',
     value: function off(event, handler) {
-      if (typeof this.bindings === 'undefined' || typeof this.bindings[event] === 'undefined') {
+      if (typeof this.bindings !== 'undefined' && typeof this.bindings[event] !== 'undefined') {
         return;
       }
 
@@ -20281,7 +20253,6 @@ var Evented = (function () {
 })();
 
 TetherBase.Utils = {
-  getActualBoundingClientRect: getActualBoundingClientRect,
   getScrollParents: getScrollParents,
   getBounds: getBounds,
   getOffsetParent: getOffsetParent,
@@ -20340,7 +20311,7 @@ var transformKey = (function () {
   }
   var el = document.createElement('div');
 
-  var transforms = ['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
+  var transforms = ['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
   for (var i = 0; i < transforms.length; ++i) {
     var key = transforms[i];
     if (el.style[key] !== undefined) {
@@ -20739,7 +20710,7 @@ var TetherClass = (function (_Evented) {
       this.enabled = true;
 
       this.scrollParents.forEach(function (parent) {
-        if (parent !== _this3.target.ownerDocument) {
+        if (parent !== document) {
           parent.addEventListener('scroll', _this3.position);
         }
       });
@@ -20939,24 +20910,21 @@ var TetherClass = (function (_Evented) {
         }
       };
 
-      var doc = this.target.ownerDocument;
-      var win = doc.defaultView;
-
       var scrollbarSize = undefined;
-      if (win.innerHeight > doc.documentElement.clientHeight) {
+      if (document.body.scrollWidth > window.innerWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (win.innerWidth > doc.documentElement.clientWidth) {
+      if (document.body.scrollHeight > window.innerHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
 
-      if (['', 'static'].indexOf(doc.body.style.position) === -1 || ['', 'static'].indexOf(doc.body.parentElement.style.position) === -1) {
+      if (['', 'static'].indexOf(document.body.style.position) === -1 || ['', 'static'].indexOf(document.body.parentElement.style.position) === -1) {
         // Absolute positioning in the body will be relative to the page, not the 'initial containing block'
-        next.page.bottom = doc.body.scrollHeight - top - height;
-        next.page.right = doc.body.scrollWidth - left - width;
+        next.page.bottom = document.body.scrollHeight - top - height;
+        next.page.right = document.body.scrollWidth - left - width;
       }
 
       if (typeof this.options.optimizations !== 'undefined' && this.options.optimizations.moveElement !== false && !(typeof this.targetModifier !== 'undefined')) {
@@ -20975,8 +20943,8 @@ var TetherClass = (function (_Evented) {
             offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle['border' + side + 'Width']);
           });
 
-          offsetPosition.right = doc.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
-          offsetPosition.bottom = doc.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
+          offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
+          offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
 
           if (next.page.top >= offsetPosition.top + offsetBorder.top && next.page.bottom >= offsetPosition.bottom) {
             if (next.page.left >= offsetPosition.left + offsetBorder.left && next.page.right >= offsetPosition.right) {
@@ -21069,16 +21037,7 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          if (window.matchMedia) {
-            // HubSpot/tether#207
-            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
-            if (!retina) {
-              xPos = Math.round(xPos);
-              yPos = Math.round(yPos);
-            }
-          }
-
-          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
+          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21143,7 +21102,7 @@ var TetherClass = (function (_Evented) {
 
         if (!offsetParentIsBody) {
           this.element.parentNode.removeChild(this.element);
-          this.element.ownerDocument.body.appendChild(this.element);
+          document.body.appendChild(this.element);
         }
       }
 
@@ -21163,7 +21122,6 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
-          _this8.trigger('repositioned');
         });
       }
     }
@@ -21204,21 +21162,11 @@ function getBoundingRect(tether, to) {
 
   if (typeof to.nodeType !== 'undefined') {
     (function () {
-      var node = to;
       var size = getBounds(to);
       var pos = size;
       var style = getComputedStyle(to);
 
       to = [pos.left, pos.top, size.width + pos.left, size.height + pos.top];
-
-      // Account any parent Frames scroll offset
-      if (node.ownerDocument !== document) {
-        var win = node.ownerDocument.defaultView;
-        to[0] += win.pageXOffset;
-        to[1] += win.pageYOffset;
-        to[2] += win.pageXOffset;
-        to[3] += win.pageYOffset;
-      }
 
       BOUNDS_FORMAT.forEach(function (side, i) {
         side = side[0].toUpperCase() + side.substr(1);
@@ -22096,7 +22044,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Descriptions of all options available on the demo site:
   // http://lokeshdhakar.com/projects/lightbox2/index.html#options
   Lightbox.defaults = {
-    albumLabel: 'Image %1 of %2',
+    albumLabel: 'Bild %1 of %2',
     alwaysShowNavOnTouchDevices: false,
     fadeDuration: 500,
     fitImagesInViewport: true,
@@ -27637,7 +27585,7 @@ Vue.component('add-to-basket', {
             })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
                 });
         },
 
@@ -27656,7 +27604,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],2:[function(require,module,exports){
+},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],2:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -27772,15 +27720,15 @@ Vue.component('address-select', {
 
         updateHeadline: function()
         {
-            var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
-            headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
+            var headline  = (this.addressType == "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
+            headline += (this.modalType == "update") ? Translations.Callisto.generalEdit : Translations.Callisto.generalAdd;
             this.headline = headline;
         }
 
     }
 });
 
-},{"services/ModalService":47}],4:[function(require,module,exports){
+},{"services/ModalService":46}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -27857,7 +27805,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":41,"services/ValidationService":52}],5:[function(require,module,exports){
+},{"services/AddressService":40,"services/ValidationService":51}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -27885,7 +27833,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":44}],6:[function(require,module,exports){
+},{"services/CheckoutService":43}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -27912,7 +27860,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":44}],7:[function(require,module,exports){
+},{"services/CheckoutService":43}],7:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -27946,7 +27894,7 @@ Vue.component('basket-button', {
 
 });
 
-},{"services/BasketService":43,"services/MonetaryFormatService":48,"services/ResourceService":51}],8:[function(require,module,exports){
+},{"services/BasketService":42,"services/MonetaryFormatService":47,"services/ResourceService":50}],8:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -28034,7 +27982,7 @@ Vue.component('basket-item-list', {
     }
 });
 
-},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48}],9:[function(require,module,exports){
+},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],9:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -28085,7 +28033,7 @@ Vue.component('basket-preview', {
     }
 });
 
-},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],10:[function(require,module,exports){
+},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/ResourceService":50}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -28103,25 +28051,12 @@ Vue.component('basket-preview-item', {
     {
         return {
             basket     : {},
-            basketItems: [],
-            items      : {}
+            basketItems: []
         };
     },
 
     ready: function()
     {
-        var self = this;
-        //BasketService.watch(function(data)
-        //{
-        //    self.$set('basket', data.basket);
-        //    self.$set('basketItems', data.basketItems);
-        //    self.$set('items', data.items);
-        //});
-        //BasketService.init().done(function()
-        //{
-        //    done();
-        //});
-
         ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
     },
@@ -28150,7 +28085,7 @@ Vue.component('basket-preview-item', {
             if ($(event.currentTarget).hasClass('btn-link'))
             {
                 this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text('Jetzt löschen');
+                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
             }
             else
             {
@@ -28220,69 +28155,7 @@ Vue.component('basket-preview-item', {
     }
 });
 
-},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],11:[function(require,module,exports){
-var BasketService  = require('services/BasketService');
-var CountryService = require('services/CountryService');
-
-Vue.component('basket-shipping-country', {
-
-    template: '#vue-basket-shipping-country',
-
-    props: [
-        "countryData",
-        "countryNameData"
-    ],
-
-    data: function()
-    {
-        return {
-            shippingCountries: [],
-            select           : {}
-        }
-    },
-
-    methods: {
-        updateShippingCountry: function()
-        {
-            var basket               = BasketService.getBasket().basket;
-            basket.shippingCountryId = this.select.id;
-            console.log("updateShippingCountry", JSON.stringify(this.select));
-            BasketService.updateShippingCountry(basket);
-        },
-
-        initSelected: function()
-        {
-            var nothingSelected = true;
-            for (var key in this.countryList)
-            {
-                var country = countryList[key];
-                if (country.selected)
-                {
-                    this.select     = country;
-                    nothingSelected = false;
-                    break;
-                }
-            }
-            if (nothingSelected)
-            {
-                this.shippingCountries[0].selected = true;
-                this.select                        = this.shippingCountries[0];
-            }
-        }
-    },
-    ready  : function()
-    {
-
-        var shippingId         = BasketService.getBasket().basket.shippingCountryId;
-        this.shippingCountries = CountryService.parseShippingCountries(this.countryData, shippingId);
-        this.initSelected();
-        CountryService.translateCountryNames(this.countryNameData, this.shippingCountries);
-        CountryService.sortCountries(this.shippingCountries);
-    }
-
-});
-
-},{"services/BasketService":43,"services/CountryService":45}],12:[function(require,module,exports){
+},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/ResourceService":50}],11:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -28300,7 +28173,7 @@ Vue.component('basket-total-sum', {
         {
             self.$set('basket', data.basket);
         });
-        BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
+        BasketService.init(this.basketData).done(function()
         {
             done();
         });
@@ -28324,7 +28197,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":43,"services/MonetaryFormatService":48}],13:[function(require,module,exports){
+},{"services/BasketService":42,"services/MonetaryFormatService":47}],12:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -28354,11 +28227,11 @@ Vue.component('category-list-item', {
                 .done(function()
                 {
                     addItemModal.show();
-                    NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
+                    NotificationService.success(Translations.Callisto.basketItemAdded).closeAfter(7000);
                 })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(7000);
                 });
         },
 
@@ -28396,7 +28269,7 @@ Vue.component('category-list-item', {
     }
 });
 
-},{"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],14:[function(require,module,exports){
+},{"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],13:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ApiService            = require('services/ApiService');
 var NotificationService   = require('services/NotificationService');
@@ -28432,7 +28305,7 @@ Vue.component('add-item-confirm', {
     }
 });
 
-},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/NotificationService":49}],15:[function(require,module,exports){
+},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/NotificationService":48}],14:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -28478,14 +28351,14 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":45}],16:[function(require,module,exports){
+},{"services/CountryService":44}],15:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
 
 });
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('delete-from-basket', {
@@ -28507,42 +28380,7 @@ Vue.component('delete-from-basket', {
 
 });
 
-},{"services/BasketService":43}],18:[function(require,module,exports){
-Vue.component('item-availability-text', {
-
-    template: '<span class="availability-text">${ availabilityText }</span>',
-
-    props: [
-        'availability'
-    ],
-
-    computed: {
-        availabilityText: function()
-        {
-            switch (this.availability)
-            {
-                case '1':
-                    return 'Auf Lager';
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    return 'In Kürze verfügbar';
-                case '10':
-                    return 'Liefertermin auf Anfrage';
-                default:
-                    return 0;
-            }
-        }
-    }
-
-});
-
-},{}],19:[function(require,module,exports){
+},{"services/BasketService":42}],17:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('item-count-to-basket', {
@@ -28577,7 +28415,7 @@ Vue.component('item-count-to-basket', {
     }
 });
 
-},{"services/BasketService":43}],20:[function(require,module,exports){
+},{"services/BasketService":42}],18:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -28626,8 +28464,6 @@ Vue.component("infinite-scroll-item-list", {
                     {
                         self.isBusy     = true;
                         self.isLastPage = response.isLastPage;
-                        // TODO remove log and add "All elements loaded" event
-                        console.log("All items loaded. No more items to get.");
 
                         // update pagination indicator
                         var currentItemAmount = (self.infiniteConfig.offset - parseInt(PaginationService.itemsPerPage) + response.entries.length);
@@ -28688,7 +28524,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":46,"services/PaginationService":50,"vue-infinite-scroll":57}],21:[function(require,module,exports){
+},{"services/LoadItemsService":45,"services/PaginationService":49,"vue-infinite-scroll":57}],19:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -28776,55 +28612,55 @@ Vue.component('item-list-sort', {
 
             if (this.topCell == true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: "Top Seller"});
+                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopSeller});
             }
             if (this.itemAsc == true)
             {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: "Positionsnummer aufsteigend"});
+                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemAsc});
             }
             if (this.itemDesc == true)
             {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: "Positionsnummer absteigend"});
+                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemDesc});
             }
             if (this.nameAsc == true)
             {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: "Name aufsteigend"});
+                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameAsc});
             }
             if (this.nameDesc == true)
             {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: "Name absteigend"});
+                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameDesc});
             }
             if (this.priceAsc == true)
             {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: "Preis aufsteigend"});
+                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceAsc});
             }
             if (this.priceDesc == true)
             {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: "Preis absteigend"});
+                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceDesc});
             }
             if (this.releaseAsc == true)
             {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: "Erscheinungsdatum aufsteigend"});
+                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseAsc});
             }
             if (this.releaseDesc == true)
             {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: "Erscheinungsdatum absteigend"});
+                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseDesc});
             }
             if (this.storeSpecialAsc == true)
             {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: "Shopaktion aufsteigend"});
+                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialAsc});
             }
             if (this.storeSpecialDesc == true)
             {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: "Shopaktion absteigend"});
+                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialDesc});
             }
             if (this.idDesc == true)
             {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: "Artikel ID aufsteigend"});
+                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryIdDesc});
             }
             if (this.random == true)
             {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: "Zufällige Sortierung"});
+                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: Translations.Callisto.itemCategoryRandom});
             }
 
             return defaultSortingOptions;
@@ -28870,7 +28706,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":50}],22:[function(require,module,exports){
+},{"services/PaginationService":49}],20:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -29052,7 +28888,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":42,"services/PaginationService":50}],23:[function(require,module,exports){
+},{"services/ApiService":41,"services/PaginationService":49}],21:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -29064,6 +28900,16 @@ var BasketService       = require('services/BasketService');
  * true
  * variantID
  */
+
+
+/**
+*
+*   CURRENTLY NOT IN USE!!!
+*   NEEDS RECOGNITION OF UNIT-COMBINATION-ID
+*
+*/
+
+
 Vue.component('item-variation-select', {
 
     template: '#vue-item-variation-select',
@@ -29293,7 +29139,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":42,"services/BasketService":43,"services/NotificationService":49,"services/VariationsHTMLCacheService":53}],24:[function(require,module,exports){
+},{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":48,"services/VariationsHTMLCacheService":52}],22:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29334,14 +29180,14 @@ Vue.component('login', {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accLoginSuccess).closeAfter(3000);
                 })
                 .fail(function(response)
                 {
                     switch (response.code)
                     {
                         case 401:
-                            NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
+                            NotificationService.error(Translations.Callisto.accLoginFail).closeAfter(3000);
                             break;
                     }
                 });
@@ -29349,7 +29195,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49}],25:[function(require,module,exports){
+},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48}],23:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -29398,38 +29244,19 @@ Vue.component('user-login-handler', {
         getUserHTML: function(username)
         {
             return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                "Hallo, " + username +
+                Translations.Callisto.generalHello + username +
                 "</a>" +
                 "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
                 "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> MyAccount</a>" +
-                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> Logout</a>" +
+                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i>" + Translations.Callisto.accMyAccount + "</a>" +
+                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i>" + Translations.Callisto.accLogout + "</a>" +
                 "</div>" +
                 "</div>";
         }
     }
 });
 
-},{"services/ApiService":42}],26:[function(require,module,exports){
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
-Vue.component('monetary-config',
-    {
-        props: [
-            "numberDecimals",
-            "separatorDecimal",
-            "separatorThousands",
-            "right",
-            "currency"
-        ],
-
-        created: function()
-        {
-            MonetaryFormatService.initOptions(this.numberDecimals, this.separatorDecimal, this.separatorThousands, this.right, this.currency);
-        }
-    });
-
-},{"services/MonetaryFormatService":48}],27:[function(require,module,exports){
+},{"services/ApiService":41}],24:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -29466,7 +29293,7 @@ Vue.component('monetary-format',
         }
     });
 
-},{"services/MonetaryFormatService":48}],28:[function(require,module,exports){
+},{"services/MonetaryFormatService":47}],25:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -29524,11 +29351,11 @@ Vue.component('account-settings', {
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
-                        NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
+                        NotificationService.success(Translations.Callisto.accPasswordSuccessfullyChanged).closeAfter(3000);
                     }).fail(function(response)
                 {
                     self.clearFieldsAndClose();
-                    NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
+                    NotificationService.error(Translations.Callisto.accPasswordCouldNotBeChanged).closeAfter(5000);
                 });
             }
         },
@@ -29553,7 +29380,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":40,"services/ModalService":47,"services/NotificationService":49}],29:[function(require,module,exports){
+},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":48}],26:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -29582,7 +29409,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":49,"services/WaitScreenService":54}],30:[function(require,module,exports){
+},{"services/NotificationService":48,"services/WaitScreenService":53}],27:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -29749,7 +29576,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":42}],31:[function(require,module,exports){
+},{"services/ApiService":41}],28:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -29789,25 +29616,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":40,"services/MonetaryFormatService":48}],32:[function(require,module,exports){
-Vue.component('price-formatted', {
-
-    template: '<span class="price-formatted">${ priceFormatted }</span>',
-
-    props: [
-        'price'
-    ],
-
-    computed: {
-        priceFormatted: function()
-        {
-            return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
-        }
-    }
-
-});
-
-},{}],33:[function(require,module,exports){
+},{"services/APIService":39,"services/MonetaryFormatService":47}],29:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29876,7 +29685,7 @@ Vue.component('registration', {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success("Erfolgreich registriert").closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accSuccessfullyRegistered).closeAfter(3000);
                 });
 
         },
@@ -29932,7 +29741,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49,"services/ValidationService":52}],34:[function(require,module,exports){
+},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48,"services/ValidationService":51}],30:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -29987,7 +29796,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":48}],35:[function(require,module,exports){
+},{"services/MonetaryFormatService":47}],31:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -30006,11 +29815,11 @@ Vue.component('user-login-watcher', {
                 {
                     if (this.userLoggedIn == "false")
                     {
-                        NotificationService.error("Bitte einloggen").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accPleaseLogin).closeAfter(3000);
                     }
                     else
                     {
-                        NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accAlreadyLoggedIn).closeAfter(3000);
                     }
 
                     window.location.pathname = this.route;
@@ -30019,8 +29828,15 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":49}],36:[function(require,module,exports){
+},{"services/NotificationService":48}],32:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
+
+/**
+*
+* CURRENTLY NOT IN USE
+* MAY BE USEFUL LATER
+*
+*/
 
 Vue.component('wait-screen', {
 
@@ -30041,7 +29857,30 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":54}],37:[function(require,module,exports){
+},{"services/WaitScreenService":53}],33:[function(require,module,exports){
+var BasketService       = require('services/BasketService');
+var NotificationService = require('services/NotificationService');
+
+Vue.directive('add-to-basket', function(value)
+{
+
+    $(this.el).click(
+        function(e)
+        {
+          BasketService.addBasketItem({
+              variationId: value.id,
+              quantity   : value.quantity
+          });
+
+          e.preventDefault();
+
+        }.bind(this));
+
+        //TODO let AddItemConfirm open 
+
+});
+
+},{"services/BasketService":42,"services/NotificationService":48}],34:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -30055,7 +29894,7 @@ Vue.directive('logout', function()
                 .done(
                     function(response)
                     {
-                        NotificationService.success('Sie wurden erfolgreich ausgeloggt').closeAfter(3000);
+                        NotificationService.success(Translations.Callisto.accSuccessfullyLoggedOut).closeAfter(3000);
 
                         // remove address ids from session after logout
                         ApiService.post('/rest/customer/address_selection/0/?typeId=-1')
@@ -30072,7 +29911,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":42,"services/NotificationService":49}],38:[function(require,module,exports){
+},{"services/ApiService":41,"services/NotificationService":48}],35:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -30094,7 +29933,7 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":42}],39:[function(require,module,exports){
+},{"services/ApiService":41}],36:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
@@ -30131,7 +29970,31 @@ Vue.elementDirective('resource-list', {
     }
 });
 
-},{"services/ResourceService":51}],40:[function(require,module,exports){
+},{"services/ResourceService":50}],37:[function(require,module,exports){
+Vue.filter( 'itemImage', function( imageList ) {
+
+    for(var image in imageList)
+    {
+      if(image.path != '')
+      {
+        return image.path;
+      }
+    }
+
+    return '';
+
+});
+
+},{}],38:[function(require,module,exports){
+Vue.filter( 'itemURL', function( item ) {
+
+    var urlContent = item.itemDescription.urlContent.split("/");
+    var i          = urlContent.length - 1;
+
+    return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+
+});
+},{}],39:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -30295,7 +30158,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":49,"services/WaitScreenService":54}],41:[function(require,module,exports){
+},{"services/NotificationService":48,"services/WaitScreenService":53}],40:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -30337,9 +30200,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":42,"services/CheckoutService":44}],42:[function(require,module,exports){
-arguments[4][40][0].apply(exports,arguments)
-},{"dup":40,"services/NotificationService":49,"services/WaitScreenService":54}],43:[function(require,module,exports){
+},{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
+arguments[4][39][0].apply(exports,arguments)
+},{"dup":39,"services/NotificationService":48,"services/WaitScreenService":53}],42:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30467,7 +30330,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":42}],44:[function(require,module,exports){
+},{"services/ApiService":41}],43:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30557,7 +30420,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":42}],45:[function(require,module,exports){
+},{"services/ApiService":41}],44:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30648,7 +30511,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],46:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30672,7 +30535,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":42}],47:[function(require,module,exports){
+},{"services/ApiService":41}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30804,86 +30667,38 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
+var currencySymbolMap = require('currency-symbol-map');
+var accounting = require('accounting');
+
 module.exports = (function($)
 {
-    var options = {
-        symbol   : "EUR",
-        decimal  : ",",
-        thousand : ".",
-        precision: 2,
-        right    : true
-    };
-
     return {
-        formatMonetary: formatMonetary,
-        initOptions   : initOptions
+        formatMonetary: formatMonetary
     };
-
-    function initOptions(number_decimals, separator_decimal, separator_thousands, right, currency)
-    {
-        var getSymbolFromCurrency = require('currency-symbol-map').getSymbolFromCurrency;
-        var symbol                = getSymbolFromCurrency(currency);
-
-        if (right == "true")
-        {
-            right  = true;
-            symbol = " " + symbol;
-        }
-        else
-        {
-            right = false;
-        }
-
-        this.options = {
-            symbol   : symbol,
-            decimal  : separator_decimal,
-            thousand : separator_thousands,
-            precision: parseFloat(number_decimals),
-            right    : right
-        };
-    }
 
     function formatMonetary(price, currency)
     {
-        if (isNaN(price))
+        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+        if (currencySymbol)
         {
-            return price + " " + currency;
-        }
-        else
-        {
-            price = parseFloat(price);
+            currency = currencySymbol;
         }
 
-        var result = formatNumber(price, this.options.precision, this.options.decimal, this.options.thousand);
+        // (%v = value, %s = symbol)
+        var options = {
+        	symbol : currency,
+        	decimal : ",",
+        	thousand: ".",
+        	precision : 2,
+        	format: "%v %s"
+        };
 
-        if (this.options.right)
-        {
-            result += this.options.symbol;
-        }
-        else
-        {
-            result = this.options.symbol + result;
-        }
-        return result;
+        return accounting.formatMoney(price, options);
     }
-
-    function formatNumber(price, p, d, t)
-    {
-
-        p = isNaN(p = Math.abs(p)) ? 2 : p,
-            d = d == undefined ? "." : d,
-            t = t == undefined ? "," : t,
-            s = price < 0 ? "-" : "",
-            i = parseInt(price = Math.abs(+price || 0).toFixed(p)) + "",
-            j = (j = i.length) > 3 ? j % 3 : 0;
-
-        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (p ? d + Math.abs(price - i).toFixed(p).slice(2) : "");
-    }
-
 })(jQuery);
 
-},{"currency-symbol-map":55}],49:[function(require,module,exports){
+},{"accounting":54,"currency-symbol-map":55}],48:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31056,7 +30871,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31082,7 +30897,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function( $, global ) {
@@ -31384,7 +31199,7 @@ module.exports = (function( $, global ) {
     }
 
 })( jQuery, window );
-},{"services/ApiService":42}],52:[function(require,module,exports){
+},{"services/ApiService":41}],51:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31578,7 +31393,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31622,7 +31437,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31671,6 +31486,421 @@ module.exports = (function($)
     }
 
 })(jQuery);
+
+},{}],54:[function(require,module,exports){
+/*!
+ * accounting.js v0.4.1
+ * Copyright 2014 Open Exchange Rates
+ *
+ * Freely distributable under the MIT license.
+ * Portions of accounting.js are inspired or borrowed from underscore.js
+ *
+ * Full details and documentation:
+ * http://openexchangerates.github.io/accounting.js/
+ */
+
+(function(root, undefined) {
+
+	/* --- Setup --- */
+
+	// Create the local library object, to be exported or referenced globally later
+	var lib = {};
+
+	// Current version
+	lib.version = '0.4.1';
+
+
+	/* --- Exposed settings --- */
+
+	// The library's settings configuration object. Contains default parameters for
+	// currency and number formatting
+	lib.settings = {
+		currency: {
+			symbol : "$",		// default currency symbol is '$'
+			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
+			decimal : ".",		// decimal point separator
+			thousand : ",",		// thousands separator
+			precision : 2,		// decimal places
+			grouping : 3		// digit grouping (not implemented yet)
+		},
+		number: {
+			precision : 0,		// default precision on numbers is 0
+			grouping : 3,		// digit grouping (not implemented yet)
+			thousand : ",",
+			decimal : "."
+		}
+	};
+
+
+	/* --- Internal Helper Methods --- */
+
+	// Store reference to possibly-available ECMAScript 5 methods for later
+	var nativeMap = Array.prototype.map,
+		nativeIsArray = Array.isArray,
+		toString = Object.prototype.toString;
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js
+	 */
+	function isString(obj) {
+		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
+	}
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js, delegates to ECMA5's native Array.isArray
+	 */
+	function isArray(obj) {
+		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
+	}
+
+	/**
+	 * Tests whether supplied parameter is a true object
+	 */
+	function isObject(obj) {
+		return obj && toString.call(obj) === '[object Object]';
+	}
+
+	/**
+	 * Extends an object with a defaults object, similar to underscore's _.defaults
+	 *
+	 * Used for abstracting parameter handling from API methods
+	 */
+	function defaults(object, defs) {
+		var key;
+		object = object || {};
+		defs = defs || {};
+		// Iterate over object non-prototype properties:
+		for (key in defs) {
+			if (defs.hasOwnProperty(key)) {
+				// Replace values with defaults only if undefined (allow empty/zero values):
+				if (object[key] == null) object[key] = defs[key];
+			}
+		}
+		return object;
+	}
+
+	/**
+	 * Implementation of `Array.map()` for iteration loops
+	 *
+	 * Returns a new Array as a result of calling `iterator` on each array value.
+	 * Defers to native Array.map if available
+	 */
+	function map(obj, iterator, context) {
+		var results = [], i, j;
+
+		if (!obj) return results;
+
+		// Use native .map method if it exists:
+		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
+
+		// Fallback for native .map:
+		for (i = 0, j = obj.length; i < j; i++ ) {
+			results[i] = iterator.call(context, obj[i], i, obj);
+		}
+		return results;
+	}
+
+	/**
+	 * Check and normalise the value of precision (must be positive integer)
+	 */
+	function checkPrecision(val, base) {
+		val = Math.round(Math.abs(val));
+		return isNaN(val)? base : val;
+	}
+
+
+	/**
+	 * Parses a format string or object and returns format obj for use in rendering
+	 *
+	 * `format` is either a string with the default (positive) format, or object
+	 * containing `pos` (required), `neg` and `zero` values (or a function returning
+	 * either a string or object)
+	 *
+	 * Either string or format.pos must contain "%v" (value) to be valid
+	 */
+	function checkCurrencyFormat(format) {
+		var defaults = lib.settings.currency.format;
+
+		// Allow function as format parameter (should return string or object):
+		if ( typeof format === "function" ) format = format();
+
+		// Format can be a string, in which case `value` ("%v") must be present:
+		if ( isString( format ) && format.match("%v") ) {
+
+			// Create and return positive, negative and zero formats:
+			return {
+				pos : format,
+				neg : format.replace("-", "").replace("%v", "-%v"),
+				zero : format
+			};
+
+		// If no format, or object is missing valid positive value, use defaults:
+		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
+
+			// If defaults is a string, casts it to an object for faster checking next time:
+			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
+				pos : defaults,
+				neg : defaults.replace("%v", "-%v"),
+				zero : defaults
+			};
+
+		}
+		// Otherwise, assume format was fine:
+		return format;
+	}
+
+
+	/* --- API Methods --- */
+
+	/**
+	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
+	 * Alias: `accounting.parse(string)`
+	 *
+	 * Decimal must be included in the regular expression to match floats (defaults to
+	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
+	 * separator, provide it as the second argument.
+	 *
+	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
+	 *
+	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
+	 */
+	var unformat = lib.unformat = lib.parse = function(value, decimal) {
+		// Recursively unformat arrays:
+		if (isArray(value)) {
+			return map(value, function(val) {
+				return unformat(val, decimal);
+			});
+		}
+
+		// Fails silently (need decent errors):
+		value = value || 0;
+
+		// Return the value as-is if it's already a number:
+		if (typeof value === "number") return value;
+
+		// Default decimal point comes from settings, but could be set to eg. "," in opts:
+		decimal = decimal || lib.settings.number.decimal;
+
+		 // Build regex to strip out everything except digits, decimal point and minus sign:
+		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
+			unformatted = parseFloat(
+				("" + value)
+				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
+				.replace(regex, '')         // strip out any cruft
+				.replace(decimal, '.')      // make sure decimal point is standard
+			);
+
+		// This will fail silently which may cause trouble, let's wait and see:
+		return !isNaN(unformatted) ? unformatted : 0;
+	};
+
+
+	/**
+	 * Implementation of toFixed() that treats floats more like decimals
+	 *
+	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
+	 * problems for accounting- and finance-related software.
+	 */
+	var toFixed = lib.toFixed = function(value, precision) {
+		precision = checkPrecision(precision, lib.settings.number.precision);
+		var power = Math.pow(10, precision);
+
+		// Multiply up by precision, round accurately, then divide and use native toFixed():
+		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
+	};
+
+
+	/**
+	 * Format a number, with comma-separated thousands and custom precision/decimal places
+	 * Alias: `accounting.format()`
+	 *
+	 * Localise by overriding the precision and thousand / decimal separators
+	 * 2nd parameter `precision` can be an object matching `settings.number`
+	 */
+	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val) {
+				return formatNumber(val, precision, thousand, decimal);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(precision) ? precision : {
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal
+				}),
+				lib.settings.number
+			),
+
+			// Clean up precision
+			usePrecision = checkPrecision(opts.precision),
+
+			// Do some calc:
+			negative = number < 0 ? "-" : "",
+			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
+			mod = base.length > 3 ? base.length % 3 : 0;
+
+		// Format the number:
+		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
+	};
+
+
+	/**
+	 * Format a number into currency
+	 *
+	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
+	 * defaults: (0, "$", 2, ",", ".", "%s%v")
+	 *
+	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
+	 * Second param can be an object matching `settings.currency` which is the easiest way.
+	 *
+	 * To do: tidy up the parameters
+	 */
+	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val){
+				return formatMoney(val, symbol, precision, thousand, decimal, format);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero):
+			formats = checkCurrencyFormat(opts.format),
+
+			// Choose which format to use for this value:
+			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
+
+		// Return with currency symbol added:
+		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+	};
+
+
+	/**
+	 * Format a list of numbers into an accounting column, padding with whitespace
+	 * to line up currency symbols, thousand separators and decimals places
+	 *
+	 * List should be an array of numbers
+	 * Second parameter can be an object containing keys that match the params
+	 *
+	 * Returns array of accouting-formatted number strings of same length
+	 *
+	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
+	 * browsers from collapsing the whitespace in the output strings.
+	 */
+	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
+		if (!list) return [];
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero), only need pos for now:
+			formats = checkCurrencyFormat(opts.format),
+
+			// Whether to pad at start of string or after currency symbol:
+			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
+
+			// Store value for the length of the longest string in the column:
+			maxLength = 0,
+
+			// Format the list according to options, store the length of the longest string:
+			formatted = map(list, function(val, i) {
+				if (isArray(val)) {
+					// Recursively format columns if list is a multi-dimensional array:
+					return lib.formatColumn(val, opts);
+				} else {
+					// Clean up the value
+					val = unformat(val);
+
+					// Choose which format to use for this value (pos, neg or zero):
+					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
+
+						// Format this value, push into formatted list and save the length:
+						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+
+					if (fVal.length > maxLength) maxLength = fVal.length;
+					return fVal;
+				}
+			});
+
+		// Pad each number in the list and send back the column of numbers:
+		return map(formatted, function(val, i) {
+			// Only if this is a string (not a nested array, which would have already been padded):
+			if (isString(val) && val.length < maxLength) {
+				// Depending on symbol position, pad after symbol or at index 0:
+				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
+			}
+			return val;
+		});
+	};
+
+
+	/* --- Module Definition --- */
+
+	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
+	// Otherwise, just add `accounting` to the global object
+	if (typeof exports !== 'undefined') {
+		if (typeof module !== 'undefined' && module.exports) {
+			exports = module.exports = lib;
+		}
+		exports.accounting = lib;
+	} else if (typeof define === 'function' && define.amd) {
+		// Return the library as an AMD module:
+		define([], function() {
+			return lib;
+		});
+	} else {
+		// Use accounting.noConflict to restore `accounting` back to its original value.
+		// Returns a reference to the library's `accounting` object;
+		// e.g. `var numbers = accounting.noConflict();`
+		lib.noConflict = (function(oldAccounting) {
+			return function() {
+				// Reset the value of the root's `accounting` variable:
+				root.accounting = oldAccounting;
+				// Delete the noConflict method:
+				lib.noConflict = undefined;
+				// Return reference to the library to re-assign it:
+				return lib;
+			};
+		})(root.accounting);
+
+		// Declare `fx` on the root (global/window) object:
+		root['accounting'] = lib;
+	}
+
+	// Root will be `window` in browser or `global` on the server:
+}(this));
 
 },{}],55:[function(require,module,exports){
 var currencySymbolMap = require('./map');
@@ -32047,7 +32277,7 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39])
+},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
 
 
 new Vue({

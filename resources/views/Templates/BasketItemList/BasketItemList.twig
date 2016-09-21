@@ -1,13 +1,13 @@
 {% set itemsData = config("PluginCallisto.basket.item_data")|split(', ') %}
 {% set showItemVariation = config("PluginCallisto.basket.variations") %}
-{% set itemName = config("PluginCallisto.item.name") %}
+{% set configItemName = config("PluginCallisto.item.name") %}
 
 <script type="x/template" id="vue-basket-item-list">
 
   <article v-for="basketItem in basketItems" class="cmp cmp-basket-item m-b-3 p-b-1 art-${basketItem.variationId}">
 
-  	<a class="item-image" :href="setLinkToItem(basketItem)">
-  		<img :src="getImage(items[basketItem.variationId].variationImageList[0].path)">
+  	<a class="item-image" href="$ { items[basketItem.variationId]|itemURL }">
+  		<img src="${ items[basketItem.variationId].variationImageList|itemImage }">
   	</a>
 
   	<div class="item-quantity">
@@ -31,15 +31,9 @@
 
   	<div class="item-details small">
   		<input type="checkbox" class="toggle-description" id="itemid-${ items[basketItem.variationId].variationBase.id }" value="">
-  		<a class="clearfix" :href="setLinkToItem(basketItem)">
+  		<a class="clearfix" href="$ { items[basketItem.variationId]|itemURL }">
   			<div class="item-name">
-  				{% if itemName == '0' %}
-  					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name1) }
-  				{% elseif itemName == '1' %}
-  					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name2) }
-  				{% elseif itemName == '2' %}
-  					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name3) }
-  				{% endif %}
+          ${ items[basketItem.variationId].itemDescription | itemName( {{configItemName}} ) }
   			</div>
   		</a>
 
