@@ -8,6 +8,7 @@
     },
     "devDependencies": {
         "browserify": "^13.0.1",
+        "currency-symbol-map": "3.0.0",
         "del": "^2.2.0",
         "glob": "^7.0.3",
         "gulp": "^3.9.1",
@@ -16,17 +17,20 @@
         "gulp-browserify": "^0.5.1",
         "gulp-concat": "^2.6.0",
         "gulp-ignore": "^2.0.1",
+        "gulp-minify-css": "^1.2.4",
+        "gulp-props": "^1.2.0",
         "gulp-rename": "^1.2.2",
         "gulp-sass": "^2.3.1",
         "gulp-sourcemaps": "^1.6.0",
+        "gulp-tap": "^0.1.3",
         "gulp-uglify": "^1.5.3",
         "gulp-util": "^3.0.7",
-        "gulp-minify-css": "^1.2.4",
+        "q": "^1.4.1",
+        "sassdoc": "^2.1.20",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",
-        "currency-symbol-map": "3.0.0",
-        "vue-infinite-scroll": "^0.2.3",
-        "sassdoc": "^2.1.20"
+        "vue-infinite-scroll": "^0.2.3"
+
     },
     "dependencies": {
         "bootstrap": "v4.0.0-alpha.3",
