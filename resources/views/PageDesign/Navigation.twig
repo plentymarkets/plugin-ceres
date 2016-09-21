@@ -1,3 +1,4 @@
+{% set companyLogo = config("PluginCallisto.header.company_logo") %}
 <!-- Navigation -->
 <nav class="navbar bg-faded">
     <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">
@@ -17,7 +18,6 @@
             <!--li class="nav-item{#
                 #}{% if services.category.isActive( category ) %} active{% endif %}{#
                 #}{% if category.children is not empty %} dropdown{% endif %}{#
-                #}{% if category.id in useBigMenu %} bigMenu{% endif %}{#
                 #}">
                 </li-->
             {% for category in services.navigation.getNavigationTree("item") %}
