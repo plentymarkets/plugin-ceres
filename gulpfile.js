@@ -5,6 +5,9 @@ const SCSS_DIST = './resources/css/';
 const OUTPUT_PREFIX = 'plugin-callisto';
 
 // import gulp
+var fs = require('fs');
+var Q = require('q');
+var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util')
 var sourcemaps = require('gulp-sourcemaps');
@@ -19,6 +22,8 @@ var buffer = require('vinyl-buffer');
 var addSrc = require('gulp-add-src');
 var ignore = require('gulp-ignore');
 var minifyCSS = require('gulp-minify-css');
+var props = require('gulp-props');
+var tap = require('gulp-tap');
 
 // import sass tools
 var sass = require('gulp-sass');
@@ -68,7 +73,40 @@ gulp.task('build:app', function() {
         .pipe( concat( OUTPUT_PREFIX + '-app.js') )
         .pipe( sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}) )
         .pipe( gulp.dest( JS_DIST ) );
-})
+});
+
+gulp.task('build:lang', function() {
+    var defered = Q.defer();
+    var translations = {};
+
+    try {
+        fs.accessSync( './resources/js/lang' );
+    }
+    catch(e)
+    {
+        fs.mkdir( './resources/js/lang' );
+    }
+    glob.sync('./resources/lang/*').forEach( function( filePath ) {
+        if( fs.statSync( filePath ).isDirectory() )
+        {
+            var lang = path.basename( filePath );
+            translations[lang] = {};
+            gulp.src( filePath + '/*.properties')
+                .pipe( props({ namespace: '' }) )
+                .pipe(
+                    tap(function(file, t) {
+                        var group = path.basename( file.path, '.json' );
+                        translations[lang][group] = JSON.parse( String(file.contents) );
+                    }).on('end', function() {
+                        defered.resolve();
+                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', "var Translations = " + JSON.stringify( translations[lang] ) + ";" );
+                    })
+                );
+        }
+    });
+
+    return defered.promise;
+});
 
 gulp.task('build:vendor', function() {
     var libraries = require(JS_SRC + 'vendor.json');

@@ -27,11 +27,11 @@ Vue.component('category-list-item', {
                 .done(function()
                 {
                     addItemModal.show();
-                    NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
+                    NotificationService.success(Translations.Callisto.basketItemAdded).closeAfter(7000);
                 })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(7000);
                 });
         },
 

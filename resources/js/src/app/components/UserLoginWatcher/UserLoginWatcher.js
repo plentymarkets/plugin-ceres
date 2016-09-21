@@ -16,11 +16,11 @@ Vue.component('user-login-watcher', {
                 {
                     if (this.userLoggedIn == "false")
                     {
-                        NotificationService.error("Bitte einloggen").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accPleaseLogin).closeAfter(3000);
                     }
                     else
                     {
-                        NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accAlreadyLoggedIn).closeAfter(3000);
                     }
 
                     window.location.pathname = this.route;
