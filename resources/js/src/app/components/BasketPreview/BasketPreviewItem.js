@@ -58,7 +58,7 @@ Vue.component('basket-preview-item', {
             if ($(event.currentTarget).hasClass('btn-link'))
             {
                 this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text('Jetzt löschen');
+                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
             }
             else
             {
