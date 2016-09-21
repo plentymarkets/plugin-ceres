@@ -38,7 +38,7 @@ Vue.component('add-to-basket', {
             })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
                 });
         },
 
@@ -57,7 +57,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":45,"services/BasketService":46,"services/ModalService":50,"services/NotificationService":52}],2:[function(require,module,exports){
+},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],2:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -173,15 +173,15 @@ Vue.component('address-select', {
 
         updateHeadline: function()
         {
-            var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
-            headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
+            var headline  = (this.addressType == "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
+            headline += (this.modalType == "update") ? Translations.Callisto.generalEdit : Translations.Callisto.generalAdd;
             this.headline = headline;
         }
 
     }
 });
 
-},{"services/ModalService":50}],4:[function(require,module,exports){
+},{"services/ModalService":48}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -258,7 +258,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":44,"services/ValidationService":55}],5:[function(require,module,exports){
+},{"services/AddressService":42,"services/ValidationService":53}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -286,7 +286,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":47}],6:[function(require,module,exports){
+},{"services/CheckoutService":45}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -313,7 +313,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":47}],7:[function(require,module,exports){
+},{"services/CheckoutService":45}],7:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -347,7 +347,7 @@ Vue.component('basket-button', {
 
 });
 
-},{"services/BasketService":46,"services/MonetaryFormatService":51,"services/ResourceService":54}],8:[function(require,module,exports){
+},{"services/BasketService":44,"services/MonetaryFormatService":49,"services/ResourceService":52}],8:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -435,7 +435,7 @@ Vue.component('basket-item-list', {
     }
 });
 
-},{"services/BasketService":46,"services/ModalService":50,"services/MonetaryFormatService":51}],9:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],9:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -486,7 +486,7 @@ Vue.component('basket-preview', {
     }
 });
 
-},{"services/BasketService":46,"services/ModalService":50,"services/MonetaryFormatService":51,"services/ResourceService":54}],10:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -532,7 +532,7 @@ Vue.component('basket-preview-item', {
             if ($(event.currentTarget).hasClass('btn-link'))
             {
                 this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text('Jetzt löschen');
+                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
             }
             else
             {
@@ -553,92 +553,18 @@ Vue.component('basket-preview-item', {
             this.basketItem.quantity = quantity;
             this.waiting = true;
             var self = this;
+
             ResourceService
                 .getResource( 'basketItems' )
                 .set( this.basketItem.id, this.basketItem )
                 .done( function() {
                     self.waiting = false;
                 });
-
-
-            //if (basketItem.quantity > 1 || value == 1)
-            //{
-            //    basketItem.quantity = basketItem.quantity + value;
-            //    $(this.$el.nextElementSibling).toggleClass('wait');
-            //
-            //    BasketService.updateBasketItem(basketItem)
-            //        .done(function()
-            //        {
-            //            $(_self.$el.nextElementSibling).toggleClass('wait');
-            //        });
-            //}
         }
     }
 });
 
-},{"services/BasketService":46,"services/ModalService":50,"services/MonetaryFormatService":51,"services/ResourceService":54}],11:[function(require,module,exports){
-var BasketService  = require('services/BasketService');
-var CountryService = require('services/CountryService');
-
-Vue.component('basket-shipping-country', {
-
-    template: '#vue-basket-shipping-country',
-
-    props: [
-        "countryData",
-        "countryNameData"
-    ],
-
-    data: function()
-    {
-        return {
-            shippingCountries: [],
-            select           : {}
-        }
-    },
-
-    methods: {
-        updateShippingCountry: function()
-        {
-            var basket               = BasketService.getBasket().basket;
-            basket.shippingCountryId = this.select.id;
-            console.log("updateShippingCountry", JSON.stringify(this.select));
-            BasketService.updateShippingCountry(basket);
-        },
-
-        initSelected: function()
-        {
-            var nothingSelected = true;
-            for (var key in this.countryList)
-            {
-                var country = countryList[key];
-                if (country.selected)
-                {
-                    this.select     = country;
-                    nothingSelected = false;
-                    break;
-                }
-            }
-            if (nothingSelected)
-            {
-                this.shippingCountries[0].selected = true;
-                this.select                        = this.shippingCountries[0];
-            }
-        }
-    },
-    ready  : function()
-    {
-
-        var shippingId         = BasketService.getBasket().basket.shippingCountryId;
-        this.shippingCountries = CountryService.parseShippingCountries(this.countryData, shippingId);
-        this.initSelected();
-        CountryService.translateCountryNames(this.countryNameData, this.shippingCountries);
-        CountryService.sortCountries(this.shippingCountries);
-    }
-
-});
-
-},{"services/BasketService":46,"services/CountryService":48}],12:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],11:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -656,7 +582,7 @@ Vue.component('basket-total-sum', {
         {
             self.$set('basket', data.basket);
         });
-        BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
+        BasketService.init(this.basketData).done(function()
         {
             done();
         });
@@ -680,7 +606,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":46,"services/MonetaryFormatService":51}],13:[function(require,module,exports){
+},{"services/BasketService":44,"services/MonetaryFormatService":49}],12:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -710,11 +636,11 @@ Vue.component('category-list-item', {
                 .done(function()
                 {
                     addItemModal.show();
-                    NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
+                    NotificationService.success(Translations.Callisto.basketItemAdded).closeAfter(7000);
                 })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(7000);
                 });
         },
 
@@ -752,7 +678,7 @@ Vue.component('category-list-item', {
     }
 });
 
-},{"services/BasketService":46,"services/ModalService":50,"services/NotificationService":52}],14:[function(require,module,exports){
+},{"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],13:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ApiService            = require('services/ApiService');
 var NotificationService   = require('services/NotificationService');
@@ -788,7 +714,7 @@ Vue.component('add-item-confirm', {
     }
 });
 
-},{"services/ApiService":45,"services/BasketService":46,"services/ModalService":50,"services/MonetaryFormatService":51,"services/NotificationService":52}],15:[function(require,module,exports){
+},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/NotificationService":50}],14:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -834,14 +760,14 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":48}],16:[function(require,module,exports){
+},{"services/CountryService":46}],15:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
 
 });
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('delete-from-basket', {
@@ -863,42 +789,7 @@ Vue.component('delete-from-basket', {
 
 });
 
-},{"services/BasketService":46}],18:[function(require,module,exports){
-Vue.component('item-availability-text', {
-
-    template: '<span class="availability-text">${ availabilityText }</span>',
-
-    props: [
-        'availability'
-    ],
-
-    computed: {
-        availabilityText: function()
-        {
-            switch (this.availability)
-            {
-                case '1':
-                    return 'Auf Lager';
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    return 'In Kürze verfügbar';
-                case '10':
-                    return 'Liefertermin auf Anfrage';
-                default:
-                    return 0;
-            }
-        }
-    }
-
-});
-
-},{}],19:[function(require,module,exports){
+},{"services/BasketService":44}],17:[function(require,module,exports){
 var BasketService = require('services/BasketService');
 
 Vue.component('item-count-to-basket', {
@@ -933,7 +824,7 @@ Vue.component('item-count-to-basket', {
     }
 });
 
-},{"services/BasketService":46}],20:[function(require,module,exports){
+},{"services/BasketService":44}],18:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -982,8 +873,6 @@ Vue.component("infinite-scroll-item-list", {
                     {
                         self.isBusy     = true;
                         self.isLastPage = response.isLastPage;
-                        // TODO remove log and add "All elements loaded" event
-                        console.log("All items loaded. No more items to get.");
 
                         // update pagination indicator
                         var currentItemAmount = (self.infiniteConfig.offset - parseInt(PaginationService.itemsPerPage) + response.entries.length);
@@ -1044,7 +933,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":49,"services/PaginationService":53,"vue-infinite-scroll":60}],21:[function(require,module,exports){
+},{"services/LoadItemsService":47,"services/PaginationService":51,"vue-infinite-scroll":59}],19:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -1132,55 +1021,55 @@ Vue.component('item-list-sort', {
 
             if (this.topCell == true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: "Top Seller"});
+                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopSeller});
             }
             if (this.itemAsc == true)
             {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: "Positionsnummer aufsteigend"});
+                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemAsc});
             }
             if (this.itemDesc == true)
             {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: "Positionsnummer absteigend"});
+                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemDesc});
             }
             if (this.nameAsc == true)
             {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: "Name aufsteigend"});
+                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameAsc});
             }
             if (this.nameDesc == true)
             {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: "Name absteigend"});
+                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameDesc});
             }
             if (this.priceAsc == true)
             {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: "Preis aufsteigend"});
+                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceAsc});
             }
             if (this.priceDesc == true)
             {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: "Preis absteigend"});
+                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceDesc});
             }
             if (this.releaseAsc == true)
             {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: "Erscheinungsdatum aufsteigend"});
+                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseAsc});
             }
             if (this.releaseDesc == true)
             {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: "Erscheinungsdatum absteigend"});
+                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseDesc});
             }
             if (this.storeSpecialAsc == true)
             {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: "Shopaktion aufsteigend"});
+                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialAsc});
             }
             if (this.storeSpecialDesc == true)
             {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: "Shopaktion absteigend"});
+                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialDesc});
             }
             if (this.idDesc == true)
             {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: "Artikel ID aufsteigend"});
+                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryIdDesc});
             }
             if (this.random == true)
             {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: "Zufällige Sortierung"});
+                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: Translations.Callisto.itemCategoryRandom});
             }
 
             return defaultSortingOptions;
@@ -1226,7 +1115,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":53}],22:[function(require,module,exports){
+},{"services/PaginationService":51}],20:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -1408,7 +1297,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":45,"services/PaginationService":53}],23:[function(require,module,exports){
+},{"services/ApiService":43,"services/PaginationService":51}],21:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -1420,6 +1309,16 @@ var BasketService       = require('services/BasketService');
  * true
  * variantID
  */
+
+
+/**
+*
+*   CURRENTLY NOT IN USE!!!
+*   NEEDS RECOGNITION OF UNIT-COMBINATION-ID
+*
+*/
+
+
 Vue.component('item-variation-select', {
 
     template: '#vue-item-variation-select',
@@ -1649,7 +1548,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":45,"services/BasketService":46,"services/NotificationService":52,"services/VariationsHTMLCacheService":56}],24:[function(require,module,exports){
+},{"services/ApiService":43,"services/BasketService":44,"services/NotificationService":50,"services/VariationsHTMLCacheService":54}],22:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -1690,14 +1589,14 @@ Vue.component('login', {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success("Erfolgreich eingeloggt").closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accLoginSuccess).closeAfter(3000);
                 })
                 .fail(function(response)
                 {
                     switch (response.code)
                     {
                         case 401:
-                            NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
+                            NotificationService.error(Translations.Callisto.accLoginFail).closeAfter(3000);
                             break;
                     }
                 });
@@ -1705,7 +1604,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":45,"services/ModalService":50,"services/NotificationService":52}],25:[function(require,module,exports){
+},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50}],23:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -1754,38 +1653,19 @@ Vue.component('user-login-handler', {
         getUserHTML: function(username)
         {
             return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                "Hallo, " + username +
+                Translations.Callisto.generalHello + username +
                 "</a>" +
                 "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
                 "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> MyAccount</a>" +
-                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> Logout</a>" +
+                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i>" + Translations.Callisto.accMyAccount + "</a>" +
+                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i>" + Translations.Callisto.accLogout + "</a>" +
                 "</div>" +
                 "</div>";
         }
     }
 });
 
-},{"services/ApiService":45}],26:[function(require,module,exports){
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
-Vue.component('monetary-config',
-    {
-        props: [
-            "numberDecimals",
-            "separatorDecimal",
-            "separatorThousands",
-            "right",
-            "currency"
-        ],
-
-        created: function()
-        {
-            MonetaryFormatService.initOptions(this.numberDecimals, this.separatorDecimal, this.separatorThousands, this.right, this.currency);
-        }
-    });
-
-},{"services/MonetaryFormatService":51}],27:[function(require,module,exports){
+},{"services/ApiService":43}],24:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -1822,7 +1702,7 @@ Vue.component('monetary-format',
         }
     });
 
-},{"services/MonetaryFormatService":51}],28:[function(require,module,exports){
+},{"services/MonetaryFormatService":49}],25:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -1880,11 +1760,11 @@ Vue.component('account-settings', {
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
-                        NotificationService.success('Passwort erfolgreich geändert').closeAfter(3000);
+                        NotificationService.success(Translations.Callisto.accPasswordSuccessfullyChanged).closeAfter(3000);
                     }).fail(function(response)
                 {
                     self.clearFieldsAndClose();
-                    NotificationService.eroor('Passwort konnte nicht geändert werden').closeAfter(5000);
+                    NotificationService.error(Translations.Callisto.accPasswordCouldNotBeChanged).closeAfter(5000);
                 });
             }
         },
@@ -1909,7 +1789,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":43,"services/ModalService":50,"services/NotificationService":52}],29:[function(require,module,exports){
+},{"services/APIService":41,"services/ModalService":48,"services/NotificationService":50}],26:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -1938,7 +1818,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":52,"services/WaitScreenService":57}],30:[function(require,module,exports){
+},{"services/NotificationService":50,"services/WaitScreenService":55}],27:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -2105,7 +1985,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":45}],31:[function(require,module,exports){
+},{"services/ApiService":43}],28:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -2145,25 +2025,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":43,"services/MonetaryFormatService":51}],32:[function(require,module,exports){
-Vue.component('price-formatted', {
-
-    template: '<span class="price-formatted">${ priceFormatted }</span>',
-
-    props: [
-        'price'
-    ],
-
-    computed: {
-        priceFormatted: function()
-        {
-            return (Math.round(parseFloat(this.price) * 100) / 100).toFixed(2);
-        }
-    }
-
-});
-
-},{}],33:[function(require,module,exports){
+},{"services/APIService":41,"services/MonetaryFormatService":49}],29:[function(require,module,exports){
 Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
@@ -2212,7 +2074,7 @@ Vue.component( 'quantity-input', {
     },
 
 });
-},{}],34:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -2281,7 +2143,7 @@ Vue.component('registration', {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success("Erfolgreich registriert").closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accSuccessfullyRegistered).closeAfter(3000);
                 });
 
         },
@@ -2337,7 +2199,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":45,"services/ModalService":50,"services/NotificationService":52,"services/ValidationService":55}],35:[function(require,module,exports){
+},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50,"services/ValidationService":53}],31:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -2392,7 +2254,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":51}],36:[function(require,module,exports){
+},{"services/MonetaryFormatService":49}],32:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -2411,11 +2273,11 @@ Vue.component('user-login-watcher', {
                 {
                     if (this.userLoggedIn == "false")
                     {
-                        NotificationService.error("Bitte einloggen").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accPleaseLogin).closeAfter(3000);
                     }
                     else
                     {
-                        NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accAlreadyLoggedIn).closeAfter(3000);
                     }
 
                     window.location.pathname = this.route;
@@ -2424,8 +2286,15 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":52}],37:[function(require,module,exports){
+},{"services/NotificationService":50}],33:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
+
+/**
+*
+* CURRENTLY NOT IN USE
+* MAY BE USEFUL LATER
+*
+*/
 
 Vue.component('wait-screen', {
 
@@ -2446,7 +2315,30 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":57}],38:[function(require,module,exports){
+},{"services/WaitScreenService":55}],34:[function(require,module,exports){
+var BasketService       = require('services/BasketService');
+var NotificationService = require('services/NotificationService');
+
+Vue.directive('add-to-basket', function(value)
+{
+
+    $(this.el).click(
+        function(e)
+        {
+          BasketService.addBasketItem({
+              variationId: value.id,
+              quantity   : value.quantity
+          });
+
+          e.preventDefault();
+
+        }.bind(this));
+
+        //TODO let AddItemConfirm open 
+
+});
+
+},{"services/BasketService":44,"services/NotificationService":50}],35:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -2460,7 +2352,7 @@ Vue.directive('logout', function()
                 .done(
                     function(response)
                     {
-                        NotificationService.success('Sie wurden erfolgreich ausgeloggt').closeAfter(3000);
+                        NotificationService.success(Translations.Callisto.accSuccessfullyLoggedOut).closeAfter(3000);
 
                         // remove address ids from session after logout
                         ApiService.post('/rest/customer/address_selection/0/?typeId=-1')
@@ -2477,7 +2369,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":45,"services/NotificationService":52}],39:[function(require,module,exports){
+},{"services/ApiService":43,"services/NotificationService":50}],36:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -2499,7 +2391,7 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":45}],40:[function(require,module,exports){
+},{"services/ApiService":43}],37:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
@@ -2536,7 +2428,7 @@ Vue.elementDirective('resource-list', {
     }
 });
 
-},{"services/ResourceService":54}],41:[function(require,module,exports){
+},{"services/ResourceService":52}],38:[function(require,module,exports){
 Vue.filter( 'itemImage', function( item, baseUrl ) {
 
     var imageList = item.variationImageList;
@@ -2561,7 +2453,29 @@ Vue.filter( 'itemImage', function( item, baseUrl ) {
     return "";
 
 });
-},{}],42:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
+Vue.filter( 'itemName', function( item, selectedName ) {
+
+    if(selectedName == '0' && item.name1 !== '')
+    {
+      return item.name1;
+    }
+    else if (selectedName == '1' && item.name2 !== '')
+    {
+      return item.name2;
+    }
+    else if (selectedName == '2' && item.name3 !== '')
+    {
+      return item.name3;
+    }
+    else
+    {
+      return item.name1;
+    }
+
+});
+
+},{}],40:[function(require,module,exports){
 Vue.filter( 'itemURL', function( item ) {
 
     var urlContent = item.itemDescription.urlContent.split("/");
@@ -2570,7 +2484,7 @@ Vue.filter( 'itemURL', function( item ) {
     return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
 
 });
-},{}],43:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -2734,7 +2648,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":52,"services/WaitScreenService":57}],44:[function(require,module,exports){
+},{"services/NotificationService":50,"services/WaitScreenService":55}],42:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -2776,9 +2690,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":45,"services/CheckoutService":47}],45:[function(require,module,exports){
-arguments[4][43][0].apply(exports,arguments)
-},{"dup":43,"services/NotificationService":52,"services/WaitScreenService":57}],46:[function(require,module,exports){
+},{"services/ApiService":43,"services/CheckoutService":45}],43:[function(require,module,exports){
+arguments[4][41][0].apply(exports,arguments)
+},{"dup":41,"services/NotificationService":50,"services/WaitScreenService":55}],44:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2906,7 +2820,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":45}],47:[function(require,module,exports){
+},{"services/ApiService":43}],45:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2996,7 +2910,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":45}],48:[function(require,module,exports){
+},{"services/ApiService":43}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3087,7 +3001,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -3111,7 +3025,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":45}],50:[function(require,module,exports){
+},{"services/ApiService":43}],48:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3243,86 +3157,38 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
+var currencySymbolMap = require('currency-symbol-map');
+var accounting = require('accounting');
+
 module.exports = (function($)
 {
-    var options = {
-        symbol   : "EUR",
-        decimal  : ",",
-        thousand : ".",
-        precision: 2,
-        right    : true
-    };
-
     return {
-        formatMonetary: formatMonetary,
-        initOptions   : initOptions
+        formatMonetary: formatMonetary
     };
-
-    function initOptions(number_decimals, separator_decimal, separator_thousands, right, currency)
-    {
-        var getSymbolFromCurrency = require('currency-symbol-map').getSymbolFromCurrency;
-        var symbol                = getSymbolFromCurrency(currency);
-
-        if (right == "true")
-        {
-            right  = true;
-            symbol = " " + symbol;
-        }
-        else
-        {
-            right = false;
-        }
-
-        this.options = {
-            symbol   : symbol,
-            decimal  : separator_decimal,
-            thousand : separator_thousands,
-            precision: parseFloat(number_decimals),
-            right    : right
-        };
-    }
 
     function formatMonetary(price, currency)
     {
-        if (isNaN(price))
+        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+        if (currencySymbol)
         {
-            return price + " " + currency;
-        }
-        else
-        {
-            price = parseFloat(price);
+            currency = currencySymbol;
         }
 
-        var result = formatNumber(price, this.options.precision, this.options.decimal, this.options.thousand);
+        // (%v = value, %s = symbol)
+        var options = {
+        	symbol : currency,
+        	decimal : ",",
+        	thousand: ".",
+        	precision : 2,
+        	format: "%v %s"
+        };
 
-        if (this.options.right)
-        {
-            result += this.options.symbol;
-        }
-        else
-        {
-            result = this.options.symbol + result;
-        }
-        return result;
+        return accounting.formatMoney(price, options);
     }
-
-    function formatNumber(price, p, d, t)
-    {
-
-        p = isNaN(p = Math.abs(p)) ? 2 : p,
-            d = d == undefined ? "." : d,
-            t = t == undefined ? "," : t,
-            s = price < 0 ? "-" : "",
-            i = parseInt(price = Math.abs(+price || 0).toFixed(p)) + "",
-            j = (j = i.length) > 3 ? j % 3 : 0;
-
-        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (p ? d + Math.abs(price - i).toFixed(p).slice(2) : "");
-    }
-
 })(jQuery);
 
-},{"currency-symbol-map":58}],52:[function(require,module,exports){
+},{"accounting":56,"currency-symbol-map":57}],50:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3495,7 +3361,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3521,7 +3387,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],54:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function( $, global ) {
@@ -3825,7 +3691,7 @@ module.exports = (function( $, global ) {
     }
 
 })( jQuery, window );
-},{"services/ApiService":45}],55:[function(require,module,exports){
+},{"services/ApiService":43}],53:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4019,7 +3885,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],56:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4063,7 +3929,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],57:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4113,7 +3979,422 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],58:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
+/*!
+ * accounting.js v0.4.1
+ * Copyright 2014 Open Exchange Rates
+ *
+ * Freely distributable under the MIT license.
+ * Portions of accounting.js are inspired or borrowed from underscore.js
+ *
+ * Full details and documentation:
+ * http://openexchangerates.github.io/accounting.js/
+ */
+
+(function(root, undefined) {
+
+	/* --- Setup --- */
+
+	// Create the local library object, to be exported or referenced globally later
+	var lib = {};
+
+	// Current version
+	lib.version = '0.4.1';
+
+
+	/* --- Exposed settings --- */
+
+	// The library's settings configuration object. Contains default parameters for
+	// currency and number formatting
+	lib.settings = {
+		currency: {
+			symbol : "$",		// default currency symbol is '$'
+			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
+			decimal : ".",		// decimal point separator
+			thousand : ",",		// thousands separator
+			precision : 2,		// decimal places
+			grouping : 3		// digit grouping (not implemented yet)
+		},
+		number: {
+			precision : 0,		// default precision on numbers is 0
+			grouping : 3,		// digit grouping (not implemented yet)
+			thousand : ",",
+			decimal : "."
+		}
+	};
+
+
+	/* --- Internal Helper Methods --- */
+
+	// Store reference to possibly-available ECMAScript 5 methods for later
+	var nativeMap = Array.prototype.map,
+		nativeIsArray = Array.isArray,
+		toString = Object.prototype.toString;
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js
+	 */
+	function isString(obj) {
+		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
+	}
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js, delegates to ECMA5's native Array.isArray
+	 */
+	function isArray(obj) {
+		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
+	}
+
+	/**
+	 * Tests whether supplied parameter is a true object
+	 */
+	function isObject(obj) {
+		return obj && toString.call(obj) === '[object Object]';
+	}
+
+	/**
+	 * Extends an object with a defaults object, similar to underscore's _.defaults
+	 *
+	 * Used for abstracting parameter handling from API methods
+	 */
+	function defaults(object, defs) {
+		var key;
+		object = object || {};
+		defs = defs || {};
+		// Iterate over object non-prototype properties:
+		for (key in defs) {
+			if (defs.hasOwnProperty(key)) {
+				// Replace values with defaults only if undefined (allow empty/zero values):
+				if (object[key] == null) object[key] = defs[key];
+			}
+		}
+		return object;
+	}
+
+	/**
+	 * Implementation of `Array.map()` for iteration loops
+	 *
+	 * Returns a new Array as a result of calling `iterator` on each array value.
+	 * Defers to native Array.map if available
+	 */
+	function map(obj, iterator, context) {
+		var results = [], i, j;
+
+		if (!obj) return results;
+
+		// Use native .map method if it exists:
+		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
+
+		// Fallback for native .map:
+		for (i = 0, j = obj.length; i < j; i++ ) {
+			results[i] = iterator.call(context, obj[i], i, obj);
+		}
+		return results;
+	}
+
+	/**
+	 * Check and normalise the value of precision (must be positive integer)
+	 */
+	function checkPrecision(val, base) {
+		val = Math.round(Math.abs(val));
+		return isNaN(val)? base : val;
+	}
+
+
+	/**
+	 * Parses a format string or object and returns format obj for use in rendering
+	 *
+	 * `format` is either a string with the default (positive) format, or object
+	 * containing `pos` (required), `neg` and `zero` values (or a function returning
+	 * either a string or object)
+	 *
+	 * Either string or format.pos must contain "%v" (value) to be valid
+	 */
+	function checkCurrencyFormat(format) {
+		var defaults = lib.settings.currency.format;
+
+		// Allow function as format parameter (should return string or object):
+		if ( typeof format === "function" ) format = format();
+
+		// Format can be a string, in which case `value` ("%v") must be present:
+		if ( isString( format ) && format.match("%v") ) {
+
+			// Create and return positive, negative and zero formats:
+			return {
+				pos : format,
+				neg : format.replace("-", "").replace("%v", "-%v"),
+				zero : format
+			};
+
+		// If no format, or object is missing valid positive value, use defaults:
+		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
+
+			// If defaults is a string, casts it to an object for faster checking next time:
+			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
+				pos : defaults,
+				neg : defaults.replace("%v", "-%v"),
+				zero : defaults
+			};
+
+		}
+		// Otherwise, assume format was fine:
+		return format;
+	}
+
+
+	/* --- API Methods --- */
+
+	/**
+	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
+	 * Alias: `accounting.parse(string)`
+	 *
+	 * Decimal must be included in the regular expression to match floats (defaults to
+	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
+	 * separator, provide it as the second argument.
+	 *
+	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
+	 *
+	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
+	 */
+	var unformat = lib.unformat = lib.parse = function(value, decimal) {
+		// Recursively unformat arrays:
+		if (isArray(value)) {
+			return map(value, function(val) {
+				return unformat(val, decimal);
+			});
+		}
+
+		// Fails silently (need decent errors):
+		value = value || 0;
+
+		// Return the value as-is if it's already a number:
+		if (typeof value === "number") return value;
+
+		// Default decimal point comes from settings, but could be set to eg. "," in opts:
+		decimal = decimal || lib.settings.number.decimal;
+
+		 // Build regex to strip out everything except digits, decimal point and minus sign:
+		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
+			unformatted = parseFloat(
+				("" + value)
+				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
+				.replace(regex, '')         // strip out any cruft
+				.replace(decimal, '.')      // make sure decimal point is standard
+			);
+
+		// This will fail silently which may cause trouble, let's wait and see:
+		return !isNaN(unformatted) ? unformatted : 0;
+	};
+
+
+	/**
+	 * Implementation of toFixed() that treats floats more like decimals
+	 *
+	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
+	 * problems for accounting- and finance-related software.
+	 */
+	var toFixed = lib.toFixed = function(value, precision) {
+		precision = checkPrecision(precision, lib.settings.number.precision);
+		var power = Math.pow(10, precision);
+
+		// Multiply up by precision, round accurately, then divide and use native toFixed():
+		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
+	};
+
+
+	/**
+	 * Format a number, with comma-separated thousands and custom precision/decimal places
+	 * Alias: `accounting.format()`
+	 *
+	 * Localise by overriding the precision and thousand / decimal separators
+	 * 2nd parameter `precision` can be an object matching `settings.number`
+	 */
+	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val) {
+				return formatNumber(val, precision, thousand, decimal);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(precision) ? precision : {
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal
+				}),
+				lib.settings.number
+			),
+
+			// Clean up precision
+			usePrecision = checkPrecision(opts.precision),
+
+			// Do some calc:
+			negative = number < 0 ? "-" : "",
+			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
+			mod = base.length > 3 ? base.length % 3 : 0;
+
+		// Format the number:
+		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
+	};
+
+
+	/**
+	 * Format a number into currency
+	 *
+	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
+	 * defaults: (0, "$", 2, ",", ".", "%s%v")
+	 *
+	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
+	 * Second param can be an object matching `settings.currency` which is the easiest way.
+	 *
+	 * To do: tidy up the parameters
+	 */
+	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val){
+				return formatMoney(val, symbol, precision, thousand, decimal, format);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero):
+			formats = checkCurrencyFormat(opts.format),
+
+			// Choose which format to use for this value:
+			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
+
+		// Return with currency symbol added:
+		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+	};
+
+
+	/**
+	 * Format a list of numbers into an accounting column, padding with whitespace
+	 * to line up currency symbols, thousand separators and decimals places
+	 *
+	 * List should be an array of numbers
+	 * Second parameter can be an object containing keys that match the params
+	 *
+	 * Returns array of accouting-formatted number strings of same length
+	 *
+	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
+	 * browsers from collapsing the whitespace in the output strings.
+	 */
+	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
+		if (!list) return [];
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero), only need pos for now:
+			formats = checkCurrencyFormat(opts.format),
+
+			// Whether to pad at start of string or after currency symbol:
+			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
+
+			// Store value for the length of the longest string in the column:
+			maxLength = 0,
+
+			// Format the list according to options, store the length of the longest string:
+			formatted = map(list, function(val, i) {
+				if (isArray(val)) {
+					// Recursively format columns if list is a multi-dimensional array:
+					return lib.formatColumn(val, opts);
+				} else {
+					// Clean up the value
+					val = unformat(val);
+
+					// Choose which format to use for this value (pos, neg or zero):
+					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
+
+						// Format this value, push into formatted list and save the length:
+						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+
+					if (fVal.length > maxLength) maxLength = fVal.length;
+					return fVal;
+				}
+			});
+
+		// Pad each number in the list and send back the column of numbers:
+		return map(formatted, function(val, i) {
+			// Only if this is a string (not a nested array, which would have already been padded):
+			if (isString(val) && val.length < maxLength) {
+				// Depending on symbol position, pad after symbol or at index 0:
+				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
+			}
+			return val;
+		});
+	};
+
+
+	/* --- Module Definition --- */
+
+	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
+	// Otherwise, just add `accounting` to the global object
+	if (typeof exports !== 'undefined') {
+		if (typeof module !== 'undefined' && module.exports) {
+			exports = module.exports = lib;
+		}
+		exports.accounting = lib;
+	} else if (typeof define === 'function' && define.amd) {
+		// Return the library as an AMD module:
+		define([], function() {
+			return lib;
+		});
+	} else {
+		// Use accounting.noConflict to restore `accounting` back to its original value.
+		// Returns a reference to the library's `accounting` object;
+		// e.g. `var numbers = accounting.noConflict();`
+		lib.noConflict = (function(oldAccounting) {
+			return function() {
+				// Reset the value of the root's `accounting` variable:
+				root.accounting = oldAccounting;
+				// Delete the noConflict method:
+				lib.noConflict = undefined;
+				// Return reference to the library to re-assign it:
+				return lib;
+			};
+		})(root.accounting);
+
+		// Declare `fx` on the root (global/window) object:
+		root['accounting'] = lib;
+	}
+
+	// Root will be `window` in browser or `global` on the server:
+}(this));
+
+},{}],57:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -4153,7 +4434,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":59}],59:[function(require,module,exports){
+},{"./map":58}],58:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -4273,7 +4554,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -4488,7 +4769,7 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42])
+},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40])
 
 
 new Vue({

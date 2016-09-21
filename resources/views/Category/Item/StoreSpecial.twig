@@ -1,24 +1,28 @@
-{% set color = "gray" %}
-{% set showStoreSpecial = true %}
 {% if  item.itemBase.storeSpecial == 1 %}
-        {% set color = "red" %}
-        {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
-        {% if percent<0 %}
-            {% set dezimalcount = config('PluginCallisto.item.storeSpecial') %}
-            {% set percent = percent | number_format(dezimalcount, ',', '.') %}
-            {% set storeSpecial = percent ~"%" %}
-        {% else %}
-            {% set storeSpecial = "SALE" %}
-        {% endif %}
-    {% elseif  item.itemBase.storeSpecial == 2 %}
-        {% set storeSpecial = "NEW" %}
-    {% elseif  item.itemBase.storeSpecial == 3 %}
-        {% set storeSpecial = "Top" %}
-    {% else %}
-        {% set showStoreSpecial = false %}
-    {% endif %}
-{% if showStoreSpecial %}
-        <span class="special-tag bg-success">Top
-            {{ storeSpecial }}
-        </span>
-    {% endif %}
+
+      {% set storeSpecialColor = 'danger' %}
+      {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
+
+      {% if percent <= 0 %}
+          {% set dezimalcount = config('PluginCallisto.item.storeSpecial') %}
+          {% set percent = percent | number_format(dezimalcount, ',', '.') %}
+          {% set storeSpecial = percent ~"%" %}
+      {% else %}
+          {% set storeSpecial = "SALE" %}
+      {% endif %}
+
+{% elseif  item.itemBase.storeSpecial == 2 %}
+
+      {% set storeSpecial = "NEW" %}
+      {% set storeSpecialColor = 'primary' %}
+
+{% elseif  item.itemBase.storeSpecial == 3 %}
+
+      {% set storeSpecial = "Top" %}
+      {% set storeSpecialColor = 'success' %}
+
+{% endif %}
+
+<span class="special-tag bg-{{storeSpecialColor}}">
+    {{ storeSpecial }}
+</span>

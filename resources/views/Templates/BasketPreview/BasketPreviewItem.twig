@@ -1,4 +1,4 @@
-{% set itemName = config("PluginCallisto.item.name") %}
+{% set configItemName = config("PluginCallisto.item.name") %}
 
 <script type="x/template" id="vue-basket-preview-item">
   <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
@@ -17,13 +17,7 @@
       <div class="basket-item-infos small">
           <a class="clearfix" :href="basketItem.variation | itemURL">
               <div class="item-name">
-                  {% if itemName == '0' %}
-                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name1) }
-                  {% elseif itemName == '1' %}
-                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name2) }
-                  {% elseif itemName == '2' %}
-                      ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name3) }
-                  {% endif %}
+                ${ items[basketItem.variationId].itemDescription | itemName( {{configItemName}} ) } ${ items[basketItem.variationId].variationBase.variationName }
               </div>
           </a>
           <div class="item-unit-price">
