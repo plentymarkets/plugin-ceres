@@ -15,25 +15,12 @@ Vue.component('basket-preview-item', {
     {
         return {
             basket     : {},
-            basketItems: [],
-            items      : {}
+            basketItems: []
         };
     },
 
     ready: function()
     {
-        var self = this;
-        //BasketService.watch(function(data)
-        //{
-        //    self.$set('basket', data.basket);
-        //    self.$set('basketItems', data.basketItems);
-        //    self.$set('items', data.items);
-        //});
-        //BasketService.init().done(function()
-        //{
-        //    done();
-        //});
-
         ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
     },

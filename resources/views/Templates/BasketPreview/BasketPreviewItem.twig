@@ -23,7 +23,7 @@
       </div>
 
       <div class="basket-item-infos small">
-          <a class="clearfix" :href="setLinkToItem(basketItem.variationId)">
+          <a class="clearfix" href="${ basketItem.variation | itemURL }">
               <div class="item-name">
                   {% if itemName == '0' %}
                       ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name1) }
