@@ -24,7 +24,7 @@
             <coupon></coupon>
         </div>
         <div class="col-xs-12 col-md-5">
-          <basket-total-sum basket-data="{{ services.basket.getBasket()|json_encode() }}" :show-full="true"></basket-total-sum>
+          <basket-total-sum :basket-data="{{ services.basket.getBasket() }}" :show-full="true"></basket-total-sum>
         </div>
     </div>
 
