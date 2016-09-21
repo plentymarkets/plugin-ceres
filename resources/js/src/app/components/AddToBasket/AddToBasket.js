@@ -37,7 +37,7 @@ Vue.component('add-to-basket', {
             })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
                 });
         },
 

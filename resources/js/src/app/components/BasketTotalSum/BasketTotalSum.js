@@ -15,7 +15,7 @@ Vue.component('basket-total-sum', {
         {
             self.$set('basket', data.basket);
         });
-        BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
+        BasketService.init(this.basketData).done(function()
         {
             done();
         });
