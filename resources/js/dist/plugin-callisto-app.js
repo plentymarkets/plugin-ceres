@@ -348,7 +348,7 @@ Vue.component('basket-button', {
 });
 
 },{"services/BasketService":44,"services/MonetaryFormatService":49,"services/ResourceService":52}],8:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
 
@@ -364,79 +364,47 @@ Vue.component('basket-item-list', {
     {
         return {
             basket     : {},
-            basketItems: [],
-            items      : {}
+            basketItems: []
         };
     },
 
-    activate: function(done)
+    ready: function()
     {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
-        });
-        BasketService.init().done(function()
-        {
-            done();
-        });
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
     },
 
     methods: {
+
         deleteItem       : function(basketItem)
         {
-            $(".art-" + basketItem.variationId).toggleClass('wait');
+            this.waiting = true;
+            var self = this;
 
-            BasketService.deleteBasketItem(basketItem);
+            ResourceService
+                .getResource( 'basketItems' )
+                .remove(basketItem );
         },
 
         calcPrice        : function(basketItem)
         {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var priceSum = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var currency = basketItem.variation.variationRetailPrice.currency;
+            var priceSum = basketItem.quantity * basketItem.variation.variationRetailPrice.price;
 
             return MonetaryFormatService.formatMonetary(priceSum, currency);
         },
 
         formatRetailPrice: function(basketItem)
         {
-            var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
+            var currency    = basketItem.variation.variationRetailPrice.currency;
+            var retailPrice = basketItem.variation.variationRetailPrice.price;
 
             return MonetaryFormatService.formatMonetary(retailPrice, currency);
-        },
-
-        checkName        : function(basketItem, name)
-        {
-            if (name !== '')
-            {
-                return name + " " + this.items[basketItem.variationId].variationBase.variationName;
-            }
-            else
-            {
-                return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
-            }
-        },
-
-        setLinkToItem: function(basketItem)
-        {
-            var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
-            var i          = urlContent.length - 1;
-
-            return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
-        },
-
-        getImage: function(image)
-        {
-            return this.baseUrl + "/" + image;
         }
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],9:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+},{"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],9:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -450,18 +418,18 @@ Vue.component('basket-preview', {
         "baseUrl"
     ],
 
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
-    },
-
     data: function()
     {
         return {
             basket: {},
             basketItems: []
         };
+    },
+    
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
     },
 
     computed:
@@ -486,7 +454,7 @@ Vue.component('basket-preview', {
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],10:[function(require,module,exports){
+},{"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
@@ -525,21 +493,14 @@ Vue.component('basket-preview-item', {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        deleteItem: function(basketItem, event)
+        deleteItem: function(basketItem)
         {
-            var _self = this;
+          this.waiting = true;
+          var self = this;
 
-            if ($(event.currentTarget).hasClass('btn-link'))
-            {
-                this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
-            }
-            else
-            {
-                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
-
-                BasketService.deleteBasketItem(basketItem);
-            }
+          ResourceService
+              .getResource( 'basketItems' )
+              .remove(basketItem );
         },
 
         toggleDeleteBtnClass: function(element)
@@ -565,7 +526,7 @@ Vue.component('basket-preview-item', {
 });
 
 },{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],11:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-total-sum', {
@@ -575,19 +536,6 @@ Vue.component('basket-total-sum', {
         "showFull"
     ],
 
-    activate: function(done)
-    {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-        });
-        BasketService.init(this.basketData).done(function()
-        {
-            done();
-        });
-    },
-
     template: '#vue-basket-total-sum',
 
     data: function()
@@ -595,6 +543,11 @@ Vue.component('basket-total-sum', {
         return {
             basket: {}
         };
+    },
+
+    ready: function()
+    {
+      ResourceService.bind( "basket", this );
     },
 
     methods: {
@@ -606,7 +559,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":44,"services/MonetaryFormatService":49}],12:[function(require,module,exports){
+},{"services/MonetaryFormatService":49,"services/ResourceService":52}],12:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');

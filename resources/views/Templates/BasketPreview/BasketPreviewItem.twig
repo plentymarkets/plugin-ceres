@@ -17,7 +17,7 @@
       <div class="basket-item-infos small">
           <a class="clearfix" :href="basketItem.variation | itemURL">
               <div class="item-name">
-                ${ items[basketItem.variationId].itemDescription | itemName( {{configItemName}} ) } ${ items[basketItem.variationId].variationBase.variationName }
+                ${ basketItem.variation.itemDescription | itemName {{ configItemName }} } ${ basketItem.variation.variationBase.variationName }
               </div>
           </a>
           <div class="item-unit-price">
@@ -27,7 +27,7 @@
               ${ calcPrice(basketItem) }
           </div>
 
-          <button type="button" id="deleteBtn-${ basketItem.variationId }" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem, $event)">
+          <button type="button" id="deleteBtn-id" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem.id)">
               <span class="message">
                    {{ trans("PluginCallisto::Callisto.generalDelete") }}
               </span>

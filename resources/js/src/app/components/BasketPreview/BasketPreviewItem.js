@@ -36,21 +36,14 @@ Vue.component('basket-preview-item', {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        deleteItem: function(basketItem, event)
+        deleteItem: function(basketItem)
         {
-            var _self = this;
+          this.waiting = true;
+          var self = this;
 
-            if ($(event.currentTarget).hasClass('btn-link'))
-            {
-                this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
-            }
-            else
-            {
-                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
-
-                BasketService.deleteBasketItem(basketItem);
-            }
+          ResourceService
+              .getResource( 'basketItems' )
+              .remove(basketItem );
         },
 
         toggleDeleteBtnClass: function(element)

@@ -1,4 +1,3 @@
-var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -12,18 +11,18 @@ Vue.component('basket-preview', {
         "baseUrl"
     ],
 
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
-    },
-
     data: function()
     {
         return {
             basket: {},
             basketItems: []
         };
+    },
+    
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
     },
 
     computed:

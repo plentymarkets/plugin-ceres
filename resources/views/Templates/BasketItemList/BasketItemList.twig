@@ -4,10 +4,10 @@
 
 <script type="x/template" id="vue-basket-item-list">
 
-  <article v-for="basketItem in basketItems" class="cmp cmp-basket-item m-b-3 p-b-1 art-${basketItem.variationId}">
+  <article v-for="basketItem in basketItems" class="cmp cmp-basket-item m-b-3 p-b-1">
 
-  	<a class="item-image" href="$ { items[basketItem.variationId]|itemURL }">
-  		<img src="${ items[basketItem.variationId].variationImageList|itemImage }">
+  	<a class="item-image" :href="basketItem.variation | itemURL">
+  		<img :src="basketItem.variation | itemImage">
   	</a>
 
   	<div class="item-quantity">
@@ -24,21 +24,21 @@
   			${ calcPrice(basketItem) }
   		</div>
 
-  		<div class="item-remove del-${basketItem.variationId}" @click="deleteItem(basketItem)">
+  		<div class="item-remove del-${basketItem.variationId}" @click="deleteItem(basketItem.id)">
   			{{ trans("PluginCallisto::Callisto.generalDelete") }} <i class="fa fa-times"></i>
   		</div>
   	</div>
 
   	<div class="item-details small">
-  		<input type="checkbox" class="toggle-description" id="itemid-${ items[basketItem.variationId].variationBase.id }" value="">
-  		<a class="clearfix" href="$ { items[basketItem.variationId]|itemURL }">
+  		<input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
+  		<a class="clearfix" :href="basketItem.variation | itemURL">
   			<div class="item-name">
-          ${ items[basketItem.variationId].itemDescription | itemName( {{configItemName}} ) }
+          ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
   			</div>
   		</a>
 
   		<p class="id">
-  			<strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ items[basketItem.variationId].itemBase.id }
+  			<strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
   		</p>
 
   		<!-- {% if showItemVariation == "true" %}
@@ -48,7 +48,7 @@
   						<strong>
   							<span>Grün</span>, <span>XL</span>, <span>Hulk</span>
   						</strong>
-  						<input type="checkbox" id="toggleVariations-UNIQUE_ID-${ items[basketItem.variationId].variationBase.id }" class="item-toggle toggle-variations" name="" value="">
+  						<input type="checkbox" id="toggleVariations-UNIQUE_ID-${ basketItem.variation.variationBase.id }" class="item-toggle toggle-variations" name="" value="">
   						<div class="row varianten-content">
   							<div class="col-md-6">
   									<div class="input-unit">
@@ -141,7 +141,7 @@
   							</div>
   					</div>
   					</div>
-  					<label class="item-edit" for="toggleVariations-UNIQUE_ID-${ items[basketItem.variationId].variationBase.id }">
+  					<label class="item-edit" for="toggleVariations-UNIQUE_ID-${ basketItem.variation.variationBase.id }">
   									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
   							</label>
   				</div>
@@ -151,7 +151,7 @@
   		<div class="item-description">
   			<div class="row">
           <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
-          <span class="col-xs-6 col-sm-7">${ items[basketItem.variationId].variationBase.customNumber}</span>
+          <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
         </div>
         <div class="row">
           <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
@@ -164,10 +164,10 @@
           </span>
         </div>
   			<p class="m-y-1">
-  				{!! items[basketItem.variationId].itemDescription.description !!}
+  				{!! basketItem.variation.itemDescription.description !!}
   			</p>
   		</div>
-  		<label class="expand-btn" for="itemid-${ items[basketItem.variationId].variationBase.id }"></label>
+  		<label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }"></label>
   	</div>
   </article>
   <div v-if="!basketItems.length > 0">

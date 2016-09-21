@@ -1,4 +1,4 @@
-var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-total-sum', {
@@ -8,19 +8,6 @@ Vue.component('basket-total-sum', {
         "showFull"
     ],
 
-    activate: function(done)
-    {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-        });
-        BasketService.init(this.basketData).done(function()
-        {
-            done();
-        });
-    },
-
     template: '#vue-basket-total-sum',
 
     data: function()
@@ -28,6 +15,11 @@ Vue.component('basket-total-sum', {
         return {
             basket: {}
         };
+    },
+
+    ready: function()
+    {
+      ResourceService.bind( "basket", this );
     },
 
     methods: {
