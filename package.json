@@ -2,9 +2,9 @@
     "name": "PluginCallisto",
     "license": "AGPL-3.0",
     "version": "0.0.1",
-    "repository" : {
-        "type"  : "git",
-        "url"   : "https://github.com/plentymarkets/layout-core-4.git"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/plentymarkets/layout-core-4.git"
     },
     "devDependencies": {
         "browserify": "^13.0.1",
@@ -30,9 +30,9 @@
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",
         "vue-infinite-scroll": "^0.2.3"
-
     },
     "dependencies": {
+        "accounting": "^0.4.1",
         "bootstrap": "v4.0.0-alpha.3",
         "flag-icon-css": "^2.4.0",
         "font-awesome": "^4.6.3",

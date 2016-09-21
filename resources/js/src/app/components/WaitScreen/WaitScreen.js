@@ -1,5 +1,12 @@
 var WaitScreenService = require('services/WaitScreenService');
 
+/**
+*
+* CURRENTLY NOT IN USE
+* MAY BE USEFUL LATER
+*
+*/
+
 Vue.component('wait-screen', {
 
     template: '#vue-wait-screen',
