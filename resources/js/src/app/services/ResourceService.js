@@ -231,7 +231,9 @@ module.exports = (function( $, global ) {
             watch: watch,
             bind: bind,
             val: val,
-            set: set
+            set: set,
+            push: push,
+            remove: remove
         };
 
         function watch( cb )

@@ -8,24 +8,18 @@ Vue.component('basket-preview-item', {
     template: '#vue-basket-preview-item',
 
     props: [
-        "baseUrl"
+        "basketItem"
     ],
 
     data: function()
     {
         return {
-            basket     : {},
-            basketItems: []
+            waiting: false
         };
     },
 
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
-    },
-
     methods: {
+        // TODO replace by monetary-filter
         calcPrice: function(basketItem)
         {
             var currency = basketItem.variation.variationRetailPrice.currency;
@@ -65,56 +59,18 @@ Vue.component('basket-preview-item', {
             $(element).toggleClass('btn-danger');
         },
 
-        getImage: function(variationId)
+        updateQuantity: function( quantity )
         {
-            var path = '';
+            this.basketItem.quantity = quantity;
+            this.waiting = true;
+            var self = this;
 
-            // TODO: check for occurences
-            //for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
-            //{
-            //    if (this.items[variationId].variationImageList[i].path !== '')
-            //    {
-            //        path = this.items[variationId].variationImageList[i].path;
-            //    }
-            //}
-            return this.baseUrl + "/" + path;
-        },
-
-        updateBasketItemQuantity: function(basketItem, value)
-        {
-            var _self = this;
-
-            if (basketItem.quantity > 1 || value == 1)
-            {
-                basketItem.quantity = basketItem.quantity + value;
-                $(this.$el.nextElementSibling).toggleClass('wait');
-
-                BasketService.updateBasketItem(basketItem)
-                    .done(function()
-                    {
-                        $(_self.$el.nextElementSibling).toggleClass('wait');
-                    });
-            }
-        },
-
-        checkName: function(variationId, name)
-        {
-            // TODO: check for occurences
-            //if (name !== '')
-            //{
-            //    return name + " " + this.items[variationId].variationBase.variationName;
-            //}
-            //return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
-            return "";
-        },
-
-        setLinkToItem: function(variationId)
-        {
-            // TODO: check for occurences
-            //var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
-            //var i          = urlContent.length - 1;
-            //
-            //return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
+            ResourceService
+                .getResource( 'basketItems' )
+                .set( this.basketItem.id, this.basketItem )
+                .done( function() {
+                    self.waiting = false;
+                });
         }
     }
 });

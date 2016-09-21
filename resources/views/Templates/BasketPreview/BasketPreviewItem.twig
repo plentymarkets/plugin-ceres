@@ -1,29 +1,21 @@
 {% set itemName = config("PluginCallisto.item.name") %}
 
 <script type="x/template" id="vue-basket-preview-item">
-  <article v-for="basketItem in basketItems" class="cmp cmp-basket-preview-item previewItem-${ basketItem.variationId }">
+  <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
       <div class="basket-item-quantity">
-          <div class="input-group vert">
-              <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, 1)">+</button>
-              </span>
-              <input type="text" class="form-control" :placeholder="basketItem.quantity" size="3" maxlength="3">
-              <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button" @click="updateBasketItemQuantity(basketItem, -1)">-</button>
-              </span>
-          </div>
+          <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity"></quantity-input>
       </div>
 
       <div class="basket-item-image">
           <div class="square-container">
               <div class="square-inner center-xy main-image">
-                  <img class="img-fluid" :src="getImage(basketItem.variationId)" alt="${ items[basketItem.variationId].itemDescription.name1 }">
+                  <img class="img-fluid" :src="basketItem.variation | itemImage" alt="${ basketItem.variation.itemDescription.name1 }">
               </div>
           </div>
       </div>
 
       <div class="basket-item-infos small">
-          <a class="clearfix" href="${ basketItem.variation | itemURL }">
+          <a class="clearfix" :href="basketItem.variation | itemURL">
               <div class="item-name">
                   {% if itemName == '0' %}
                       ${ checkName(basketItem.variationId, items[basketItem.variationId].itemDescription.name1) }
