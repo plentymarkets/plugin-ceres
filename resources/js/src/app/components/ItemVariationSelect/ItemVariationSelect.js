@@ -9,6 +9,16 @@ var BasketService       = require('services/BasketService');
  * true
  * variantID
  */
+
+
+/**
+*
+*   CURRENTLY NOT IN USE!!!
+*   NEEDS RECOGNITION OF UNIT-COMBINATION-ID
+*
+*/
+
+
 Vue.component('item-variation-select', {
 
     template: '#vue-item-variation-select',
