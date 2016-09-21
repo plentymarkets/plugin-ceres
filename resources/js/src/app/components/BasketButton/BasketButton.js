@@ -1,20 +1,12 @@
 var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-button', {
 
-    activate: function(done)
+    ready: function()
     {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-        });
-        BasketService.init(jQuery.parseJSON(this.basketData))
-            .done(function()
-            {
-                done();
-            });
+        ResourceService.bind( "basket", this );
     },
 
     template: '#vue-basket-button',

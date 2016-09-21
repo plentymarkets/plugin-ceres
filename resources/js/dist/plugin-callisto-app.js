@@ -57,7 +57,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],2:[function(require,module,exports){
+},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],2:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -181,7 +181,7 @@ Vue.component('address-select', {
     }
 });
 
-},{"services/ModalService":46}],4:[function(require,module,exports){
+},{"services/ModalService":47}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -258,7 +258,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":40,"services/ValidationService":50}],5:[function(require,module,exports){
+},{"services/AddressService":41,"services/ValidationService":52}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -286,7 +286,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],6:[function(require,module,exports){
+},{"services/CheckoutService":44}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -313,24 +313,16 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],7:[function(require,module,exports){
+},{"services/CheckoutService":44}],7:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-button', {
 
-    activate: function(done)
+    ready: function()
     {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-        });
-        BasketService.init(jQuery.parseJSON(this.basketData))
-            .done(function()
-            {
-                done();
-            });
+        ResourceService.bind( "basket", this );
     },
 
     template: '#vue-basket-button',
@@ -355,7 +347,7 @@ Vue.component('basket-button', {
 
 });
 
-},{"services/BasketService":42,"services/MonetaryFormatService":47}],8:[function(require,module,exports){
+},{"services/BasketService":43,"services/MonetaryFormatService":48,"services/ResourceService":51}],8:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -443,26 +435,13 @@ Vue.component('basket-item-list', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],9:[function(require,module,exports){
+},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48}],9:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
 
 Vue.component('basket-preview', {
-
-    activate: function( done )
-    {
-        var self = this;
-        BasketService.watch(function( data ) {
-            self.$set( 'basket', data.basket );
-            self.$set( 'basketItems', data.basketItems );
-            self.$set( 'items', data.items );
-        });
-        BasketService.init( jQuery.parseJSON(this.basketData) ).done(function()
-        {
-            done();
-        });
-    },
 
     template: '#vue-basket-preview',
 
@@ -471,12 +450,17 @@ Vue.component('basket-preview', {
         "baseUrl"
     ],
 
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
+    },
+
     data: function()
     {
         return {
             basket: {},
-            basketItems: [],
-            items: {}
+            basketItems: []
         };
     },
 
@@ -484,46 +468,27 @@ Vue.component('basket-preview', {
     {
         itemTotalSum: function ()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
         },
         basketTotalSum: function ()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
         },
         shippingTotalSum: function ()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
-        },
-        checkBasket: function ()
-        {
-          if(this.basketItems.length > 0)
-          {
-            if($('.basketBtn').hasClass('disabled'))
-            {
-              this.toggleBtnClasses();
-            }
-            return true;
-          }
-          else
-          {
-            this.toggleBtnClasses();
-            return false;
-          }
+            return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
         }
     },
 
     methods:
     {
-        toggleBtnClasses: function ()
-        {
-          $('.basketBtn').toggleClass('disabled');
-          $('.checkOutBtn').toggleClass('disabled');
-        }
+
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],10:[function(require,module,exports){
+},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],10:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
 
@@ -544,34 +509,37 @@ Vue.component('basket-preview-item', {
         };
     },
 
-    activate: function(done)
+    ready: function()
     {
         var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
-        });
-        BasketService.init().done(function()
-        {
-            done();
-        });
+        //BasketService.watch(function(data)
+        //{
+        //    self.$set('basket', data.basket);
+        //    self.$set('basketItems', data.basketItems);
+        //    self.$set('items', data.items);
+        //});
+        //BasketService.init().done(function()
+        //{
+        //    done();
+        //});
+
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
     },
 
     methods: {
         calcPrice: function(basketItem)
         {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var price    = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var currency = basketItem.variation.variationRetailPrice.currency;
+            var price    = basketItem.quantity * basketItem.variation.variationRetailPrice.price;
 
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
         getBasePrice: function(basketItem)
         {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var price    = this.items[basketItem.variationId].variationRetailPrice.basePrice;
+            var currency = basketItem.variation.variationRetailPrice.currency;
+            var price    = basketItem.variation.variationRetailPrice.basePrice;
 
             return MonetaryFormatService.formatMonetary(price, currency);
         },
@@ -587,13 +555,9 @@ Vue.component('basket-preview-item', {
             }
             else
             {
-                $(this.$el.nextElementSibling).toggleClass('wait');
+                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
 
-                BasketService.deleteBasketItem(basketItem)
-                    .done(function()
-                    {
-                        $(_self.$el.nextElementSibling).toggleClass('wait');
-                    });
+                BasketService.deleteBasketItem(basketItem);
             }
         },
 
@@ -607,13 +571,14 @@ Vue.component('basket-preview-item', {
         {
             var path = '';
 
-            for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
-            {
-                if (this.items[variationId].variationImageList[i].path !== '')
-                {
-                    path = this.items[variationId].variationImageList[i].path;
-                }
-            }
+            // TODO: check for occurences
+            //for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
+            //{
+            //    if (this.items[variationId].variationImageList[i].path !== '')
+            //    {
+            //        path = this.items[variationId].variationImageList[i].path;
+            //    }
+            //}
             return this.baseUrl + "/" + path;
         },
 
@@ -636,24 +601,27 @@ Vue.component('basket-preview-item', {
 
         checkName: function(variationId, name)
         {
-            if (name !== '')
-            {
-                return name + " " + this.items[variationId].variationBase.variationName;
-            }
-            return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+            // TODO: check for occurences
+            //if (name !== '')
+            //{
+            //    return name + " " + this.items[variationId].variationBase.variationName;
+            //}
+            //return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+            return "";
         },
 
         setLinkToItem: function(variationId)
         {
-            var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
-            var i          = urlContent.length - 1;
-
-            return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
+            // TODO: check for occurences
+            //var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
+            //var i          = urlContent.length - 1;
+            //
+            //return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
         }
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47}],11:[function(require,module,exports){
+},{"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],11:[function(require,module,exports){
 var BasketService  = require('services/BasketService');
 var CountryService = require('services/CountryService');
 
@@ -715,7 +683,7 @@ Vue.component('basket-shipping-country', {
 
 });
 
-},{"services/BasketService":42,"services/CountryService":44}],12:[function(require,module,exports){
+},{"services/BasketService":43,"services/CountryService":45}],12:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
@@ -757,7 +725,7 @@ Vue.component('basket-total-sum', {
 
 });
 
-},{"services/BasketService":42,"services/MonetaryFormatService":47}],13:[function(require,module,exports){
+},{"services/BasketService":43,"services/MonetaryFormatService":48}],13:[function(require,module,exports){
 var BasketService       = require('services/BasketService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -829,7 +797,7 @@ Vue.component('category-list-item', {
     }
 });
 
-},{"services/BasketService":42,"services/ModalService":46,"services/NotificationService":48}],14:[function(require,module,exports){
+},{"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],14:[function(require,module,exports){
 var BasketService         = require('services/BasketService');
 var ApiService            = require('services/ApiService');
 var NotificationService   = require('services/NotificationService');
@@ -865,7 +833,7 @@ Vue.component('add-item-confirm', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/MonetaryFormatService":47,"services/NotificationService":48}],15:[function(require,module,exports){
+},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/MonetaryFormatService":48,"services/NotificationService":49}],15:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -911,7 +879,7 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":44}],16:[function(require,module,exports){
+},{"services/CountryService":45}],16:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
@@ -940,7 +908,7 @@ Vue.component('delete-from-basket', {
 
 });
 
-},{"services/BasketService":42}],18:[function(require,module,exports){
+},{"services/BasketService":43}],18:[function(require,module,exports){
 Vue.component('item-availability-text', {
 
     template: '<span class="availability-text">${ availabilityText }</span>',
@@ -1010,7 +978,7 @@ Vue.component('item-count-to-basket', {
     }
 });
 
-},{"services/BasketService":42}],20:[function(require,module,exports){
+},{"services/BasketService":43}],20:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -1121,7 +1089,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":45,"services/PaginationService":49,"vue-infinite-scroll":55}],21:[function(require,module,exports){
+},{"services/LoadItemsService":46,"services/PaginationService":50,"vue-infinite-scroll":57}],21:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -1303,7 +1271,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":49}],22:[function(require,module,exports){
+},{"services/PaginationService":50}],22:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -1485,7 +1453,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":41,"services/PaginationService":49}],23:[function(require,module,exports){
+},{"services/ApiService":42,"services/PaginationService":50}],23:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -1726,7 +1694,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":48,"services/VariationsHTMLCacheService":51}],24:[function(require,module,exports){
+},{"services/ApiService":42,"services/BasketService":43,"services/NotificationService":49,"services/VariationsHTMLCacheService":53}],24:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -1782,7 +1750,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48}],25:[function(require,module,exports){
+},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49}],25:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -1843,7 +1811,7 @@ Vue.component('user-login-handler', {
     }
 });
 
-},{"services/ApiService":41}],26:[function(require,module,exports){
+},{"services/ApiService":42}],26:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-config',
@@ -1862,7 +1830,7 @@ Vue.component('monetary-config',
         }
     });
 
-},{"services/MonetaryFormatService":47}],27:[function(require,module,exports){
+},{"services/MonetaryFormatService":48}],27:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -1899,7 +1867,7 @@ Vue.component('monetary-format',
         }
     });
 
-},{"services/MonetaryFormatService":47}],28:[function(require,module,exports){
+},{"services/MonetaryFormatService":48}],28:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -1986,7 +1954,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":48}],29:[function(require,module,exports){
+},{"services/APIService":40,"services/ModalService":47,"services/NotificationService":49}],29:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -2015,7 +1983,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":48,"services/WaitScreenService":52}],30:[function(require,module,exports){
+},{"services/NotificationService":49,"services/WaitScreenService":54}],30:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -2182,7 +2150,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":41}],31:[function(require,module,exports){
+},{"services/ApiService":42}],31:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -2222,7 +2190,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":39,"services/MonetaryFormatService":47}],32:[function(require,module,exports){
+},{"services/APIService":40,"services/MonetaryFormatService":48}],32:[function(require,module,exports){
 Vue.component('price-formatted', {
 
     template: '<span class="price-formatted">${ priceFormatted }</span>',
@@ -2365,7 +2333,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":48,"services/ValidationService":50}],34:[function(require,module,exports){
+},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49,"services/ValidationService":52}],34:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -2420,7 +2388,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":47}],35:[function(require,module,exports){
+},{"services/MonetaryFormatService":48}],35:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -2452,7 +2420,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":48}],36:[function(require,module,exports){
+},{"services/NotificationService":49}],36:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 Vue.component('wait-screen', {
@@ -2474,7 +2442,7 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":52}],37:[function(require,module,exports){
+},{"services/WaitScreenService":54}],37:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -2505,7 +2473,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":41,"services/NotificationService":48}],38:[function(require,module,exports){
+},{"services/ApiService":42,"services/NotificationService":49}],38:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -2527,7 +2495,44 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":41}],39:[function(require,module,exports){
+},{"services/ApiService":42}],39:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
+
+Vue.elementDirective('resource', {
+    priority: 10000,
+    params: [
+        'name',
+        'route',
+        'data'
+    ],
+    bind: function()
+    {
+        ResourceService.registerResource(
+            this.params.name,
+            this.params.route,
+            this.params.data
+        );
+    }
+});
+
+Vue.elementDirective('resource-list', {
+    priority: 10000,
+    params: [
+        'name',
+        'route',
+        'data'
+    ],
+    bind: function()
+    {
+        ResourceService.registerResourceList(
+            this.params.name,
+            this.params.route,
+            this.params.data
+        );
+    }
+});
+
+},{"services/ResourceService":51}],40:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -2691,7 +2696,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":48,"services/WaitScreenService":52}],40:[function(require,module,exports){
+},{"services/NotificationService":49,"services/WaitScreenService":54}],41:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -2733,9 +2738,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
-arguments[4][39][0].apply(exports,arguments)
-},{"dup":39,"services/NotificationService":48,"services/WaitScreenService":52}],42:[function(require,module,exports){
+},{"services/ApiService":42,"services/CheckoutService":44}],42:[function(require,module,exports){
+arguments[4][40][0].apply(exports,arguments)
+},{"dup":40,"services/NotificationService":49,"services/WaitScreenService":54}],43:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2863,7 +2868,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],43:[function(require,module,exports){
+},{"services/ApiService":42}],44:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2953,7 +2958,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],44:[function(require,module,exports){
+},{"services/ApiService":42}],45:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3044,7 +3049,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -3068,7 +3073,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":41}],46:[function(require,module,exports){
+},{"services/ApiService":42}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3200,7 +3205,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 module.exports = (function($)
 {
     var options = {
@@ -3279,7 +3284,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"currency-symbol-map":53}],48:[function(require,module,exports){
+},{"currency-symbol-map":55}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3452,7 +3457,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3478,7 +3483,309 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+
+module.exports = (function( $, global ) {
+
+    var resources = {};
+    var queues = {};
+
+    if( !global.registerResource )
+    {
+        global.registerResource = registerResource;
+    }
+
+    if( !global.registerResourceList )
+    {
+        global.registerResourceList = registerResourceList;
+    }
+
+    return {
+        registerResource: registerResource,
+        registerResourceList: registerResourceList,
+        getResource: getResource,
+        watch: watch,
+        bind: bind
+    };
+
+    function registerResource( name, route, initialValue )
+    {
+        if( !name )
+        {
+            throw new Error("Cannot register resource. Name is required.");
+        }
+
+        if( !route )
+        {
+            throw new Error("Cannot register resource. Route is required.");
+        }
+
+        if( resources.hasOwnProperty( name ) )
+        {
+            throw new Error("Resource '" + name + "' already exists." );
+        }
+
+        var data;
+        try
+        {
+            data = $.parseJSON( initialValue );
+        }
+        catch( e )
+        {
+            data = initialValue;
+        }
+
+        resources[name] = new Resource( route, data );
+    }
+
+    function registerResourceList( name, route, initialValue )
+    {
+        if( !name )
+        {
+            throw new Error("Cannot register resource. Name is required.");
+        }
+
+        if( !route )
+        {
+            throw new Error("Cannot register resource. Route is required.");
+        }
+
+        if( resources.hasOwnProperty( name ) )
+        {
+            throw new Error("Resource '" + name + "' already exists." );
+        }
+
+        var data;
+        try
+        {
+            data = $.parseJSON( initialValue );
+        }
+        catch( e )
+        {
+            data = initialValue;
+        }
+
+        resources[name] = new ResourceList( route, data );
+    }
+
+    function getResource( name )
+    {
+        if( !resources[name] )
+        {
+            throw new Error("Unkown resource: " + name );
+        }
+
+        return resources[name];
+    }
+
+    function watch( name, callback )
+    {
+        getResource( name ).watch( callback );
+    }
+
+    function bind( name, vue, property )
+    {
+        property = property || name;
+        getResource( name ).bind( vue, property );
+    }
+
+    function Observable()
+    {
+        var _value;
+        var _watchers = [];
+
+        return {
+            get value()
+            {
+                return _value;
+            },
+            set value( newValue )
+            {
+                for( var i = 0; i < _watchers.length; i++ )
+                {
+                    var watcher = _watchers[i];
+                    watcher.apply( null, [newValue, _value] );
+                }
+                _value = newValue;
+            },
+            watch: function( cb )
+            {
+                _watchers.push( cb );
+            }
+        }
+    }
+
+    function Resource( url, initialValue )
+    {
+        var data = new Observable();
+        var ready = false;
+
+        if( !!initialValue )
+        {
+            data.value = initialValue;
+            ready = true;
+        }
+        else
+        {
+            ApiService
+                .get( url )
+                .done( function( response ) {
+                    data.value = response;
+                    ready = true;
+                } );
+        }
+
+        return {
+            watch: watch,
+            bind: bind,
+            val: val,
+            set: set
+        };
+
+        function watch( cb )
+        {
+            if( typeof cb !== "function" )
+            {
+                throw new Error( "Callback expected but got '" + (typeof cb) + "'.");
+            }
+            data.watch( cb );
+            if( ready )
+            {
+                cb.apply( null, [data.value, null] );
+            }
+        }
+
+        function bind( vue, property )
+        {
+            if( !vue )
+            {
+                throw new Error( "Vue instance not set." );
+            }
+
+            if( !property )
+            {
+                throw new Error( "Cannot bind undefined property." );
+            }
+
+            watch( function( newValue ) {
+                vue.$set( property, newValue );
+            } );
+        }
+
+        function val()
+        {
+            return data.value;
+        }
+
+        function set( value )
+        {
+            return ApiService
+                .put( url, value )
+                .done( function( response ) {
+                    data.value = response;
+                } );
+        }
+    }
+
+    function ResourceList( url, initialValue )
+    {
+        var data = new Observable();
+        var ready = false;
+
+        if( url.charAt( url.length - 1 ) !== "/" )
+        {
+            url += "/";
+        }
+
+        if( !!initialValue )
+        {
+            data.value = initialValue;
+            ready = true;
+        }
+        else
+        {
+            ApiService
+                .get( url )
+                .done( function( response ) {
+                    data.value = response;
+                    ready = true;
+                } );
+        }
+
+        return {
+            watch: watch,
+            bind: bind,
+            val: val,
+            set: set
+        };
+
+        function watch( cb )
+        {
+            if( typeof cb !== "function" )
+            {
+                throw new Error( "Callback expected but got '" + (typeof cb) + "'.");
+            }
+            data.watch( cb );
+
+            if( ready )
+            {
+                cb.apply( null, [data.value, null] );
+            }
+        }
+
+        function bind( vue, property )
+        {
+            if( !vue )
+            {
+                throw new Error( "Vue instance not set." );
+            }
+
+            if( !property )
+            {
+                throw new Error( "Cannot bind undefined property." );
+            }
+
+            watch( function( newValue ) {
+                vue.$set( property, newValue );
+            } );
+        }
+
+        function val()
+        {
+            return data.value;
+        }
+
+        function set( key, value )
+        {
+            return ApiService
+                .put( url + key , value )
+                .done( function( response ) {
+                    data.value = response;
+                } );
+        }
+
+        function push( value )
+        {
+            return ApiService
+                .post( url, value )
+                .done( function( response ) {
+                    data.value = response;
+                } );
+        }
+
+        function remove( key )
+        {
+            return ApiService
+                .delete( url + key )
+                .done( function( response ) {
+                    data.value = response;
+                } );
+        }
+    }
+
+})( jQuery, window );
+},{"services/ApiService":42}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3672,7 +3979,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3716,7 +4023,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3766,7 +4073,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -3806,7 +4113,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":54}],54:[function(require,module,exports){
+},{"./map":56}],56:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -3926,7 +4233,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -4141,169 +4448,152 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
+},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39])
 
 
 new Vue({
-  el: 'body'
+    el: 'body'
 });
-
-
 
 // Frontend end scripts
 
-(function($, window, document, undefined){
+(function($, window, document, undefined) {
 
-	function CallistoMain(){
+    function CallistoMain() {
 
-		// Sticky sidebar single item
-		if(window.matchMedia('(min-width: 768px)').matches) {
-        $(".single-rightside").stick_in_parent({
+        // Sticky sidebar single item
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            $(".single-rightside").stick_in_parent({
 
-			});
-			$('.single-rightside')
-			.on('sticky_kit:bottom', function(e) {
-			    $(this).parent().css('position', 'static');
-			})
-			.on('sticky_kit:unbottom', function(e) {
-			    $(this).parent().css('position', 'relative');
-			});
+            });
+
+            $('.single-rightside')
+                .on('sticky_kit:bottom', function(e) {
+                    $(this).parent().css('position', 'static');
+                })
+                .on('sticky_kit:unbottom', function(e) {
+                    $(this).parent().css('position', 'relative');
+                });
         }
 
+        var sync1 = $("#single-big-image");
+        var sync2 = $("#single-carousel");
 
+        sync1.owlCarousel({
+            singleItem: true,
+            slideSpeed: 1000,
+            navigation: true,
+            navigationText: [
+                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+            ],
+            pagination: false,
+            afterAction: syncPosition,
+            responsiveRefreshRate: 200,
+        });
 
-		var sync1 = $("#single-big-image");
-		var sync2 = $("#single-carousel");
+        sync2.owlCarousel({
+            items: 8,
+            itemsDesktop: [1199, 8],
+            itemsDesktopSmall: [979, 8],
+            itemsTablet: [768, 6],
+            itemsMobile: [479, 4],
+            navigation: true,
+            navigationText: [
+                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+            ],
+            pagination: false,
+            responsiveRefreshRate: 100,
+            afterInit: function(el) {
+                el.find(".owl-item").eq(0).addClass("synced");
+            }
+        });
 
-		  sync1.owlCarousel({
-		    singleItem : true,
-		    slideSpeed : 1000,
-		    navigation: true,
-        autoWidth: true,
-		    navigationText: [
-		      "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-		      "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-		    ],
-		    pagination:false,
-		    afterAction : syncPosition,
-		    responsiveRefreshRate : 200,
-		  });
+        function syncPosition(el) {
+            var current = this.currentItem;
+            $("#single-carousel")
+                .find(".owl-item")
+                .removeClass("synced")
+                .eq(current)
+                .addClass("synced")
+            if ($("#single-carousel").data("owlCarousel") !== undefined) {
+                center(current)
+            }
+        }
 
-		  sync2.owlCarousel({
-		    items : 8,
-		    itemsDesktop      : [1199,8],
-		    itemsDesktopSmall     : [979,8],
-		    itemsTablet       : [768,6],
-		    itemsMobile       : [479,4],
-		    navigation: true,
-		    navigationText: [
-		      "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-		      "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-		    ],
-		    pagination:false,
-		    responsiveRefreshRate : 100,
-		    afterInit : function(el){
-		      el.find(".owl-item").eq(0).addClass("synced");
-		    }
-		  });
+        $("#single-carousel").on("click", ".owl-item", function(e) {
+            e.preventDefault();
+            var number = $(this).data("owlItem");
+            sync1.trigger("owl.goTo", number);
+        });
 
-		  function syncPosition(el){
-		    var current = this.currentItem;
-		    $("#single-carousel")
-		      .find(".owl-item")
-		      .removeClass("synced")
-		      .eq(current)
-		      .addClass("synced")
-		    if($("#single-carousel").data("owlCarousel") !== undefined){
-		      center(current)
-		    }
-		  }
+        function center(number) {
+            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+            var num = number;
+            var found = false;
+            for (var i in sync2visible) {
+                if (num === sync2visible[i]) {
+                    var found = true;
+                }
+            }
 
-		  $("#single-carousel").on("click", ".owl-item", function(e){
-		    e.preventDefault();
-		    var number = $(this).data("owlItem");
-		    sync1.trigger("owl.goTo",number);
-		  });
+            if (found === false) {
+                if (num > sync2visible[sync2visible.length - 1]) {
+                    sync2.trigger("owl.goTo", num - sync2visible.length + 2)
+                } else {
+                    if (num - 1 === -1) {
+                        num = 0;
+                    }
+                    sync2.trigger("owl.goTo", num);
+                }
+            } else if (num === sync2visible[sync2visible.length - 1]) {
+                sync2.trigger("owl.goTo", sync2visible[1])
+            } else if (num === sync2visible[0]) {
+                sync2.trigger("owl.goTo", num - 1)
+            }
 
-		  function center(number){
-		    var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-		    var num = number;
-		    var found = false;
-		    for(var i in sync2visible){
-		      if(num === sync2visible[i]){
-		        var found = true;
-		      }
-		    }
+        }
 
-		    if(found===false){
-		      if(num>sync2visible[sync2visible.length-1]){
-		        sync2.trigger("owl.goTo", num - sync2visible.length+2)
-		      }else{
-		        if(num - 1 === -1){
-		          num = 0;
-		        }
-		        sync2.trigger("owl.goTo", num);
-		      }
-		    } else if(num === sync2visible[sync2visible.length-1]){
-		      sync2.trigger("owl.goTo", sync2visible[1])
-		    } else if(num === sync2visible[0]){
-		      sync2.trigger("owl.goTo", num-1)
-		    }
+        var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
-		  }
+        $toggleBasketPreview.on('click', function(evt) {
+            evt.preventDefault();
+            $('body').toggleClass('open-right');
+        });
 
+        var $toggleListView = $('.toggle-list-view');
 
+        $toggleListView.on('click', function(evt) {
+            evt.preventDefault();
 
+            //toggle it's own state
+            $toggleListView.toggleClass('grid');
 
-		$('#toggleBasketPreview').on('click', function( evt ){
-			evt.preventDefault();
-			$('body').addClass('open-right');
-      $('.wrapper-main').one('click', closeNav);
-		});
+            //toggle internal style of thumbs
+            $('.product-list, .cmp-product-thumb').toggleClass('grid');
+        });
 
-    $('#closeBasketPreview').on('click', function( evt ){
-			evt.preventDefault();
-			closeBasketPreview();
-		});
+        $('#mainNavbarCollapse').collapse('hide');
 
-    function closeBasketPreview(){
-			$('body').removeClass('open-right');
-      $('.wrapper-main').off('click', closeNav);
-		}
+        //Add click listener outside the navigation to close it
+        $('#mainNavbarCollapse').on('show.bs.collapse', function() {
+            $('.main').one('click', closeNav);
+        })
 
-		var $toggleListView = $('.toggle-list-view');
+        $('#mainNavbarCollapse').on('hide.bs.collapse', function() {
+            $('.main').off('click', closeNav)
+        })
 
-		$toggleListView.on('click', function( evt ){
-			console.log('toggle-list-view click');
-			evt.preventDefault();
+        function closeNav() {
+            $('#mainNavbarCollapse').collapse('hide');
+        }
 
-			//toggle it's own state
-			$toggleListView.toggleClass('grid');
+    }
 
-			//toggle internal style of thumbs
-			$('.product-list, .cmp-product-thumb').toggleClass('grid');
-		});
+    window.CallistoMain = CallistoMain;
 
-		$('#mainNavbarCollapse').collapse('hide');
-
-		//Add click listener outside the navigation to close it
-		$('#mainNavbarCollapse').on('show.bs.collapse', function () {
-			$('.main').one('click', closeNav);
-		})
-
-		$('#mainNavbarCollapse').on('hide.bs.collapse', function () {
-			$('.main').off('click', closeNav)
-		})
-
-		function closeNav(){
-			$('#mainNavbarCollapse').collapse('hide');
-		}
-
-	}
-
-	window.CallistoMain = CallistoMain;
-
-	new CallistoMain();
+    new CallistoMain();
 
 })(jQuery, window, document);
 

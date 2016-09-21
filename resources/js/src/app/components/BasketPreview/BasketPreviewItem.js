@@ -1,4 +1,5 @@
 var BasketService         = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
 
@@ -19,34 +20,37 @@ Vue.component('basket-preview-item', {
         };
     },
 
-    activate: function(done)
+    ready: function()
     {
         var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
-        });
-        BasketService.init().done(function()
-        {
-            done();
-        });
+        //BasketService.watch(function(data)
+        //{
+        //    self.$set('basket', data.basket);
+        //    self.$set('basketItems', data.basketItems);
+        //    self.$set('items', data.items);
+        //});
+        //BasketService.init().done(function()
+        //{
+        //    done();
+        //});
+
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
     },
 
     methods: {
         calcPrice: function(basketItem)
         {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var price    = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
+            var currency = basketItem.variation.variationRetailPrice.currency;
+            var price    = basketItem.quantity * basketItem.variation.variationRetailPrice.price;
 
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
         getBasePrice: function(basketItem)
         {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var price    = this.items[basketItem.variationId].variationRetailPrice.basePrice;
+            var currency = basketItem.variation.variationRetailPrice.currency;
+            var price    = basketItem.variation.variationRetailPrice.basePrice;
 
             return MonetaryFormatService.formatMonetary(price, currency);
         },
@@ -78,13 +82,14 @@ Vue.component('basket-preview-item', {
         {
             var path = '';
 
-            for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
-            {
-                if (this.items[variationId].variationImageList[i].path !== '')
-                {
-                    path = this.items[variationId].variationImageList[i].path;
-                }
-            }
+            // TODO: check for occurences
+            //for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
+            //{
+            //    if (this.items[variationId].variationImageList[i].path !== '')
+            //    {
+            //        path = this.items[variationId].variationImageList[i].path;
+            //    }
+            //}
             return this.baseUrl + "/" + path;
         },
 
@@ -107,19 +112,22 @@ Vue.component('basket-preview-item', {
 
         checkName: function(variationId, name)
         {
-            if (name !== '')
-            {
-                return name + " " + this.items[variationId].variationBase.variationName;
-            }
-            return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+            // TODO: check for occurences
+            //if (name !== '')
+            //{
+            //    return name + " " + this.items[variationId].variationBase.variationName;
+            //}
+            //return this.items[variationId].itemDescription.name1 + " " + this.items[variationId].variationBase.variationName;
+            return "";
         },
 
         setLinkToItem: function(variationId)
         {
-            var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
-            var i          = urlContent.length - 1;
-
-            return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
+            // TODO: check for occurences
+            //var urlContent = this.items[variationId].itemDescription.urlContent.split("/");
+            //var i          = urlContent.length - 1;
+            //
+            //return "/" + urlContent[i] + "/" + this.items[variationId].itemBase.id + "/" + this.items[variationId].variationBase.id;
         }
     }
 });
