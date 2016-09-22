@@ -31854,6 +31854,12 @@ new Vue({
             evt.preventDefault();
             $('body').toggleClass('open-right');
         });
+        $(".wrapper-main").on('click', function(evt) {
+            if ($('body').hasClass('open-right')) {
+                evt.preventDefault();
+                $('body').toggleClass('open-right');    
+            }
+        });
 
         var $toggleListView = $('.toggle-list-view');
 
