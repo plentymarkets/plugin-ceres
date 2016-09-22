@@ -43,6 +43,6 @@ Vue.component( 'quantity-input', {
                 this.timeout
             )
         });
-    },
+    }
 
 });

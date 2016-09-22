@@ -6,27 +6,23 @@ Vue.component('basket-preview', {
 
     template: '#vue-basket-preview',
 
-    props: [
-        "basketData",
-        "baseUrl"
-    ],
-
     data: function()
     {
         return {
-            basketData: {},
+            basket: {},
             basketItems: []
         };
     },
     
     ready: function()
     {
-        ResourceService.bind( "basket", this, "basketData" );
+        ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
     },
 
     computed:
     {
+        // TODO: replace by monetary filter
         itemTotalSum: function ()
         {
             return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
@@ -39,10 +35,5 @@ Vue.component('basket-preview', {
         {
             return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
         }
-    },
-
-    methods:
-    {
-
     }
 });

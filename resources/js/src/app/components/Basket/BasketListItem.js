@@ -1,11 +1,9 @@
-var BasketService         = require('services/BasketService');
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
 
-Vue.component('basket-preview-item', {
+Vue.component('basket-list-item', {
 
-    template: '#vue-basket-preview-item',
+    template: '#vue-basket-list-item',
 
     props: [
         "basketItem"

@@ -23,7 +23,7 @@
 
         <div class="wrapper wrapper-main">
 
-            {% include "PluginCallisto::PageDesign.Header" %}
+            {% include "PluginCallisto::PageDesign.Header.Header" %}
 
             <div class="main" id="page-body">
                 {% block PageBody %}
@@ -35,7 +35,7 @@
         </div>
 
         <div class="wrapper wrapper-right">
-          <basket-preview base-url="{{ app.request.baseUrl }}" basket-data="{{ services.basket.getBasket()|json_encode() }}"></basket-preview>
+          <basket-preview></basket-preview>
         </div>
 
         <div class="wrapper wrapper-bottom">
@@ -49,6 +49,7 @@
         </div>
 
         {% include "PluginCallisto::Templates.Main" %}
+        {% include "PluginCallisto::PageDesign.Components.PageDesignComponents" %}
 
         <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
         <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>

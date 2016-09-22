@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-          <basket-item-list base-url="{{ app.request.baseUrl }}"></basket-item-list>
+          <basket-list></basket-list>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
             <coupon></coupon>
         </div>
         <div class="col-xs-12 col-md-5">
-          <basket-total-sum :basket-data="{{ services.basket.getBasket() }}" :show-full="true"></basket-total-sum>
+          <basket-totals :config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}"></basket-totals>
         </div>
     </div>
 
@@ -40,4 +40,7 @@
         </div>
     </div>
 </div>
+
+{% include "PluginCallisto::Basket.Components.BasketList" %}
+{% include "PluginCallisto::Basket.Components.BasketListItem" %}
 {% endblock %}
