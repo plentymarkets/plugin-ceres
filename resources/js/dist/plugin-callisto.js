@@ -31851,14 +31851,17 @@ new Vue({
         var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
         $toggleBasketPreview.on('click', function(evt) {
+            
             evt.preventDefault();
+            evt.stopPropagation();
             $('body').toggleClass('open-right');
-            console.log("opened");
         });
-        $("body.open-right").on('click', '.wrapper-main', function(evt) {
-            evt.preventDefault();
-            if(evt.Target != $('.basket-preview')) {
-                $('body').toggleClass('open-right');        
+        $(document).on('click', 'body.open-right', function(evt) {
+            if($("body").hasClass("open-right")) {
+              if ((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0)) {
+                  evt.preventDefault();
+                  $('body').toggleClass('open-right');
+              }
             }
         });
 
