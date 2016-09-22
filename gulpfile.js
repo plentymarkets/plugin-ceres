@@ -41,7 +41,7 @@ gulp.task('watch:sass', function() {
 
 gulp.task('build', ['build:bundle', 'build:sass-min']);
 
-gulp.task('build:bundle', ['build:app', 'build:vendor'], function() {
+gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function() {
     return gulp.src( [
             JS_DIST + OUTPUT_PREFIX + '-vendor.js',
             JS_SRC + 'app.config.js',
