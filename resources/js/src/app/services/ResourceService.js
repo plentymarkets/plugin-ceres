@@ -1,19 +1,8 @@
 var ApiService = require('services/ApiService');
 
-module.exports = (function( $, global ) {
+module.exports = (function( $ ) {
 
     var resources = {};
-    var queues = {};
-
-    if( !global.registerResource )
-    {
-        global.registerResource = registerResource;
-    }
-
-    if( !global.registerResourceList )
-    {
-        global.registerResourceList = registerResourceList;
-    }
 
     return {
         registerResource: registerResource,
@@ -23,6 +12,14 @@ module.exports = (function( $, global ) {
         bind: bind
     };
 
+    /**
+     * Register a new resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource} The created resource.
+     */
     function registerResource( name, route, initialValue )
     {
         if( !name )
@@ -55,6 +52,14 @@ module.exports = (function( $, global ) {
         return resources[name];
     }
 
+    /**
+     * Register a new list resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource}            The created resource.
+     */
     function registerResourceList( name, route, initialValue )
     {
         if( !name )
@@ -87,6 +92,12 @@ module.exports = (function( $, global ) {
         return resources[name];
     }
 
+    /**
+     * Receive a registered resource by its name
+     * @param {string}  name    The name of the resource to receive
+     *
+     * @returns {Resource}      The resource
+     */
     function getResource( name )
     {
         if( !resources[name] )
@@ -97,17 +108,32 @@ module.exports = (function( $, global ) {
         return resources[name];
     }
 
+    /**
+     * Track changes of a given resource.
+     * @param {string}      name        The name of the resource to watch
+     * @param {function}    callback    The handler to call on each change
+     */
     function watch( name, callback )
     {
         getResource( name ).watch( callback );
     }
 
+    /**
+     * Bind a resource to a property of a vue instance.
+     * @param {string}  name        The name of the resource to bind
+     * @param {Vue}     vue         The vue instance
+     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
+     */
     function bind( name, vue, property )
     {
         property = property || name;
         getResource( name ).bind( vue, property );
     }
 
+    /**
+     * @class Observable
+     * Automatically notifies all attached listeners on any changes.
+     */
     function Observable()
     {
         var _value;
@@ -134,18 +160,27 @@ module.exports = (function( $, global ) {
         }
     }
 
+    /**
+     * @class Resource
+     * @param {string}  url             The url to bind the resource to
+     * @param {string}  initialValue    The initial value to assign to the resource
+     */
     function Resource( url, initialValue )
     {
         var data = new Observable();
         var ready = false;
 
+        // initialize resource
         if( !!initialValue )
         {
+            // initial value was given by constructor
             data.value = initialValue;
             ready = true;
         }
         else
         {
+            // no initial value given
+            // => get value from url
             ApiService
                 .get( url )
                 .done( function( response ) {
@@ -163,6 +198,12 @@ module.exports = (function( $, global ) {
             listen: listen
         };
 
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
         function listen( event, usePayload )
         {
             ApiService.listen( event, function( payload ) {
@@ -177,6 +218,10 @@ module.exports = (function( $, global ) {
             });
         }
 
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
         function watch( cb )
         {
             if( typeof cb !== "function" )
@@ -190,6 +235,11 @@ module.exports = (function( $, global ) {
             }
         }
 
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {sting}   property    The property of the vue instance
+         */
         function bind( vue, property )
         {
             if( !vue )
@@ -207,11 +257,20 @@ module.exports = (function( $, global ) {
             } );
         }
 
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
         function val()
         {
             return data.value;
         }
 
+        /**
+         * Set the value of the resource.
+         * @param {*}   value   The value to set.
+         * @returns {Deferred}  The PUT request to the url of the resource
+         */
         function set( value )
         {
             return ApiService
@@ -221,6 +280,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
         function update( value )
         {
             if( !!value )
@@ -241,6 +305,11 @@ module.exports = (function( $, global ) {
         }
     }
 
+    /**
+     * @class ResourceList
+     * @param {string}  url             The url to bind the resource to
+     * @param {string}  initialValue    The initial value to assign to the resource
+     */
     function ResourceList( url, initialValue )
     {
         var data = new Observable();
@@ -277,6 +346,12 @@ module.exports = (function( $, global ) {
             listen: listen
         };
 
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
         function listen( event, usePayload )
         {
             ApiService.listen( event, function( payload ) {
@@ -291,6 +366,10 @@ module.exports = (function( $, global ) {
             });
         }
 
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
         function watch( cb )
         {
             if( typeof cb !== "function" )
@@ -305,6 +384,11 @@ module.exports = (function( $, global ) {
             }
         }
 
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {sting}   property    The property of the vue instance
+         */
         function bind( vue, property )
         {
             if( !vue )
@@ -322,11 +406,21 @@ module.exports = (function( $, global ) {
             } );
         }
 
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
         function val()
         {
             return data.value;
         }
 
+        /**
+         * Set the value of a single element of this resource.
+         * @param {string|number}   key     The key of the element
+         * @param {*}               value   The value to set.
+         * @returns {Deferred}      The PUT request to the url of the resource
+         */
         function set( key, value )
         {
             return ApiService
@@ -336,6 +430,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Add a new element to this resource
+         * @param {*}   value   The element to add
+         * @returns {Deferred}  The POST request to the url of the resource
+         */
         function push( value )
         {
             return ApiService
@@ -345,6 +444,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Remove an element from this resource
+         * @param {string|number}   key     The key of the element
+         * @returns {Deferred}              The DELETE request to the url of the resource
+         */
         function remove( key )
         {
             return ApiService
@@ -354,6 +458,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
         function update( value )
         {
             if( !!value )
@@ -374,4 +483,4 @@ module.exports = (function( $, global ) {
         }
     }
 
-})( jQuery, window );
+})( jQuery );
