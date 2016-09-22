@@ -1,4 +1,4 @@
-var ResourceService       = require('services/ResourceService');
+var ResourceService = require('services/ResourceService');
 
 Vue.directive('resource-bind', {
 
@@ -9,20 +9,21 @@ Vue.directive('resource-bind', {
     bind: function()
     {
         var self = this;
+
         ResourceService.watch( this.arg, function( value ) {
 
-            var paths = self.expression.split('.');
+            var paths  = self.expression.split('.');
             for( var i = 0; i < paths.length; i++ )
             {
                 var path = paths[i];
                 value = value[path];
             }
 
-            var filters = self.filters || [];
+            var filters = self.params.filters || [];
             for( var i = 0; i < filters.length; i++ )
             {
-                var filter = Vue.filter( self.filters[i] );
-                value = filter.apply( null, [value] );
+                var filter = Vue.filter( self.params.filters[i] );
+                value = filter.apply( null, [value, "EUR"] );
             }
 
             self.el.innerHTML = value;

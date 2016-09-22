@@ -21,10 +21,10 @@
               </div>
           </a>
           <div class="item-unit-price">
-              ${ getBasePrice(basketItem) } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
+              ${ basketItem.variation.variationRetailPrice.basePrice | formatMonetary basketItem.variation.variationRetailPrice.currency } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
           </div>
           <div class="item-total-price">
-              ${ calcPrice(basketItem) }
+              ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | formatMonetary basketItem.variation.variationRetailPrice.currency }
           </div>
 
           <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">

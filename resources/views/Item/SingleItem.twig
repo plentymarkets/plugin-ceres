@@ -74,13 +74,13 @@
             {% if ('item.recommendedPrice' in itemData or 'all' in itemData) and item.variationRecommendedRetailPrice.price > 0 %}
               <div class="crossprice">
                   <del class="text-muted small">
-                      <monetary-format price="{{ item.variationRecommendedRetailPrice.price }}" currency="{{ item.variationRetailPrice.currency }}"></monetary-format>
+                    {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                   </del>
               </div>
             {% endif %}
 
             <span class="price h1">
-                <monetary-format price="{{ item.variationRetailPrice.price }}" currency="{{ item.variationRetailPrice.currency}}"></monetary-format>
+                {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                 <sup>*</sup>
             </span>
             <div class="base-price text-muted m-y-1">

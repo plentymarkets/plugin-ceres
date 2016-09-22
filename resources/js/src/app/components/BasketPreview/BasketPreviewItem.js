@@ -19,22 +19,6 @@ Vue.component('basket-preview-item', {
     },
 
     methods: {
-        // TODO replace by monetary-filter
-        calcPrice: function(basketItem)
-        {
-            var currency = basketItem.variation.variationRetailPrice.currency;
-            var price    = basketItem.quantity * basketItem.variation.variationRetailPrice.price;
-
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
-
-        getBasePrice: function(basketItem)
-        {
-            var currency = basketItem.variation.variationRetailPrice.currency;
-            var price    = basketItem.variation.variationRetailPrice.basePrice;
-
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
 
         deleteItem: function()
         {
