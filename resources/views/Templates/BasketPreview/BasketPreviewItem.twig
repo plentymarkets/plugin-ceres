@@ -27,11 +27,14 @@
               ${ calcPrice(basketItem) }
           </div>
 
-          <button type="button" id="deleteBtn-id" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem(basketItem.id)">
-              <span class="message">
+          <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+              <span class="message" v-if="!deleteConfirmed">
                    {{ trans("PluginCallisto::Callisto.generalDelete") }}
               </span>
-              <span class="btn-label">
+              <span class="message" v-else>
+                   {{ trans("PluginCallisto::Callisto.generalDeleteNow") }}
+              </span>
+              <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>
               </span>
           </button>

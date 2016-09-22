@@ -14,14 +14,14 @@ Vue.component('basket-preview', {
     data: function()
     {
         return {
-            basket: {},
+            basketData: {},
             basketItems: []
         };
     },
     
     ready: function()
     {
-        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basket", this, "basketData" );
         ResourceService.bind( "basketItems", this );
     },
 
