@@ -4247,13 +4247,17 @@ new Vue({
         var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
         $toggleBasketPreview.on('click', function(evt) {
+            
             evt.preventDefault();
+            evt.stopPropagation();
             $('body').toggleClass('open-right');
         });
-        $(".wrapper-main").on('click', function(evt) {
-            if ($('body').hasClass('open-right')) {
-                evt.preventDefault();
-                $('body').toggleClass('open-right');    
+        $(document).on('click', 'body.open-right', function(evt) {
+            if($("body").hasClass("open-right")) {
+              if ((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0)) {
+                  evt.preventDefault();
+                  $('body').toggleClass('open-right');
+              }
             }
         });
 

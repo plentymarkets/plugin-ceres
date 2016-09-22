@@ -229,10 +229,18 @@
 	}
 
 	@include media-breakpoint-up(md){
-		
+		.item-quantity{
+			.input-group.vert{
+				left:5%;
+			}
+		}
 	}
 
 	@include media-breakpoint-up(lg){
-		
+		.item-quantity{
+			.input-group.vert{
+				left:20%;
+			}
+		}
 	}
 }

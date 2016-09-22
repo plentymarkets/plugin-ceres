@@ -31853,11 +31853,12 @@ new Vue({
         $toggleBasketPreview.on('click', function(evt) {
             evt.preventDefault();
             $('body').toggleClass('open-right');
+            console.log("opened");
         });
-        $(".wrapper-main").on('click', function(evt) {
-            if ($('body').hasClass('open-right')) {
-                evt.preventDefault();
-                $('body').toggleClass('open-right');    
+        $("body.open-right").on('click', '.wrapper-main', function(evt) {
+            evt.preventDefault();
+            if(evt.Target != $('.basket-preview')) {
+                $('body').toggleClass('open-right');        
             }
         });
 
