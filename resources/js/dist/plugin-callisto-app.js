@@ -2341,7 +2341,7 @@ Vue.component('wait-screen', {
 });
 
 },{"services/WaitScreenService":56}],35:[function(require,module,exports){
-var BasketService       = require('services/BasketService');
+var ResourceService     = require('services/ResourceService');
 var NotificationService = require('services/NotificationService');
 
 Vue.directive('add-to-basket', function(value)
@@ -2350,20 +2350,19 @@ Vue.directive('add-to-basket', function(value)
     $(this.el).click(
         function(e)
         {
-          BasketService.addBasketItem({
-              variationId: value.id,
-              quantity   : value.quantity
-          });
+          ResourceService
+              .getResource( 'basketItems' )
+              .push(value);
 
           e.preventDefault();
 
         }.bind(this));
 
-        //TODO let AddItemConfirm open 
+        //TODO let AddItemConfirm open
 
 });
 
-},{"services/BasketService":45,"services/NotificationService":51}],36:[function(require,module,exports){
+},{"services/NotificationService":51,"services/ResourceService":53}],36:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -2424,16 +2423,31 @@ Vue.elementDirective('resource', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResource(
+        var resource = ResourceService.registerResource(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
+
 });
 
 Vue.elementDirective('resource-list', {
@@ -2441,15 +2455,29 @@ Vue.elementDirective('resource-list', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResourceList(
+        var resource = ResourceService.registerResourceList(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
 });
 
@@ -3466,6 +3494,8 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new Resource( route, data );
+
+        return resources[name];
     }
 
     function registerResourceList( name, route, initialValue )
@@ -3496,6 +3526,8 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new ResourceList( route, data );
+
+        return resources[name];
     }
 
     function getResource( name )
@@ -3569,8 +3601,24 @@ module.exports = (function( $, global ) {
             watch: watch,
             bind: bind,
             val: val,
-            set: set
+            set: set,
+            update: update,
+            listen: listen
         };
+
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
 
         function watch( cb )
         {
@@ -3615,6 +3663,25 @@ module.exports = (function( $, global ) {
                     data.value = response;
                 } );
         }
+
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
+        }
     }
 
     function ResourceList( url, initialValue )
@@ -3648,8 +3715,24 @@ module.exports = (function( $, global ) {
             val: val,
             set: set,
             push: push,
-            remove: remove
+            remove: remove,
+            update: update,
+            listen: listen
         };
+
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
 
         function watch( cb )
         {
@@ -3712,6 +3795,25 @@ module.exports = (function( $, global ) {
                 .done( function( response ) {
                     data.value = response;
                 } );
+        }
+
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
         }
     }
 

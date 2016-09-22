@@ -51,6 +51,8 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new Resource( route, data );
+
+        return resources[name];
     }
 
     function registerResourceList( name, route, initialValue )
@@ -81,6 +83,8 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new ResourceList( route, data );
+
+        return resources[name];
     }
 
     function getResource( name )
@@ -154,8 +158,24 @@ module.exports = (function( $, global ) {
             watch: watch,
             bind: bind,
             val: val,
-            set: set
+            set: set,
+            update: update,
+            listen: listen
         };
+
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
 
         function watch( cb )
         {
@@ -200,6 +220,25 @@ module.exports = (function( $, global ) {
                     data.value = response;
                 } );
         }
+
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
+        }
     }
 
     function ResourceList( url, initialValue )
@@ -233,8 +272,24 @@ module.exports = (function( $, global ) {
             val: val,
             set: set,
             push: push,
-            remove: remove
+            remove: remove,
+            update: update,
+            listen: listen
         };
+
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
 
         function watch( cb )
         {
@@ -297,6 +352,25 @@ module.exports = (function( $, global ) {
                 .done( function( response ) {
                     data.value = response;
                 } );
+        }
+
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
         }
     }
 

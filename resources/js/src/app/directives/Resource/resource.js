@@ -5,16 +5,31 @@ Vue.elementDirective('resource', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResource(
+        var resource = ResourceService.registerResource(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
+
 });
 
 Vue.elementDirective('resource-list', {
@@ -22,14 +37,28 @@ Vue.elementDirective('resource-list', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResourceList(
+        var resource = ResourceService.registerResourceList(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
 });
