@@ -14,7 +14,9 @@ Vue.component('basket-preview-item', {
     data: function()
     {
         return {
-            waiting: false
+            waiting: false,
+            deleteConfirmed: false,
+            deleteConfirmedTimeout: null
         };
     },
 
@@ -36,20 +38,30 @@ Vue.component('basket-preview-item', {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
-        deleteItem: function(basketItem)
+        deleteItem: function()
         {
-          this.waiting = true;
-          var self = this;
-
-          ResourceService
-              .getResource( 'basketItems' )
-              .remove(basketItem );
-        },
-
-        toggleDeleteBtnClass: function(element)
-        {
-            $(element).toggleClass('btn-link');
-            $(element).toggleClass('btn-danger');
+            var self = this;
+            if( !this.deleteConfirmed )
+            {
+                this.deleteConfirmed = true;
+                this.deleteConfirmedTimeout = window.setTimeout(
+                    function()
+                    {
+                        self.resetDelete();
+                    },
+                    5000
+                );
+            }
+            else
+            {
+                this.waiting = true;
+                ResourceService
+                    .getResource( "basketItems" )
+                    .remove( this.basketItem.id )
+                    .done( function() {
+                        self.resetDelete();
+                    });
+            }
         },
 
         updateQuantity: function( quantity )
@@ -64,6 +76,15 @@ Vue.component('basket-preview-item', {
                 .done( function() {
                     self.waiting = false;
                 });
+        },
+
+        resetDelete: function()
+        {
+            this.deleteConfirmed = false;
+            if( !!this.deleteConfirmedTimeout )
+            {
+                window.clearTimeout( this.deleteConfirmedTimeout );
+            }
         }
     }
 });
