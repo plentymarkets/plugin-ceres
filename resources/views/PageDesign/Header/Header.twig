@@ -81,7 +81,10 @@
                         </ul>
                     </li>
                     <li class="list-inline-item">
-                        <basket-button basket-data="{{ services.basket.getBasket() | json_encode() }}"></basket-button>
+                        <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="badge" v-resource-bind:basket="itemSum"></span>
+                        </a>
                     </li>
                 </ul>
             </div>
