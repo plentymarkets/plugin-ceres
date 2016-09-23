@@ -59,12 +59,12 @@
                     <aside class="sidebar">
                       <div class="cmp cmp-checkout-sidebar">
                         <div class="cmp cmp-basket-preview-list">
-                          <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
+                          <basket-list size="small"></basket-list>
                         </div>
                         <hr>
                         <coupon></coupon>
                         <hr>
-                        <basket-total-sum basket-data="{{ services.basket.getBasket()|json_encode() }}" :show-full="false"></basket-total-sum>
+                        <basket-totals :config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}"></basket-totals>
                       </div>
                     </aside>
                 </div>

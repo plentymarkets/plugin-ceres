@@ -25,7 +25,7 @@
 						<p class="small">
 							<strong>
 								<span class="text-muted">${ quantity } x</span>
-								<monetary-format :price="basketItem.variationRetailPrice.price" :currency="basketItem.variationRetailPrice.currency"></monetary-format>
+								<span v-text="basketItem.variationRetailPrice.price | currency"></span>
 							</strong>
 						</p>
 					</div>

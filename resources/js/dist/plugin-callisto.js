@@ -19886,7 +19886,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.6 */
+/*! tether 1.3.3 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20943,12 +20943,12 @@ var TetherClass = (function (_Evented) {
       var win = doc.defaultView;
 
       var scrollbarSize = undefined;
-      if (win.innerHeight > doc.documentElement.clientHeight) {
+      if (doc.body.scrollWidth > win.innerWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (win.innerWidth > doc.documentElement.clientWidth) {
+      if (doc.body.scrollHeight > win.innerHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
@@ -21069,16 +21069,7 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          if (window.matchMedia) {
-            // HubSpot/tether#207
-            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
-            if (!retina) {
-              xPos = Math.round(xPos);
-              yPos = Math.round(yPos);
-            }
-          }
-
-          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
+          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21163,7 +21154,6 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
-          _this8.trigger('repositioned');
         });
       }
     }
@@ -27656,7 +27646,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],2:[function(require,module,exports){
+},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":47}],2:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -27780,7 +27770,7 @@ Vue.component('address-select', {
     }
 });
 
-},{"services/ModalService":47}],4:[function(require,module,exports){
+},{"services/ModalService":46}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -27857,7 +27847,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":41,"services/ValidationService":52}],5:[function(require,module,exports){
+},{"services/AddressService":40,"services/ValidationService":50}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -27885,7 +27875,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":44}],6:[function(require,module,exports){
+},{"services/CheckoutService":43}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -27912,7 +27902,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":44}],7:[function(require,module,exports){
+},{"services/CheckoutService":43}],7:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 
 Vue.component('basket-list', {
@@ -27932,9 +27922,8 @@ Vue.component('basket-list', {
     }
 });
 
-},{"services/ResourceService":51}],8:[function(require,module,exports){
+},{"services/ResourceService":49}],8:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-list-item', {
 
@@ -28011,9 +28000,8 @@ Vue.component('basket-list-item', {
     }
 });
 
-},{"services/MonetaryFormatService":48,"services/ResourceService":51}],9:[function(require,module,exports){
+},{"services/ResourceService":49}],9:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
 
 Vue.component('basket-preview', {
@@ -28032,29 +28020,11 @@ Vue.component('basket-preview', {
     {
         ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
-    },
-
-    computed:
-    {
-        // TODO: replace by monetary filter
-        itemTotalSum: function ()
-        {
-            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
-        },
-        basketTotalSum: function ()
-        {
-            return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
-        },
-        shippingTotalSum: function ()
-        {
-            return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
-        }
     }
 });
 
-},{"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],10:[function(require,module,exports){
+},{"services/ModalService":46,"services/ResourceService":49}],10:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-preview-item', {
 
@@ -28131,7 +28101,7 @@ Vue.component('basket-preview-item', {
     }
 });
 
-},{"services/MonetaryFormatService":48,"services/ResourceService":51}],11:[function(require,module,exports){
+},{"services/ResourceService":49}],11:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.component('basket-totals', {
@@ -28163,7 +28133,7 @@ Vue.component('basket-totals', {
     }
 });
 
-},{"services/ResourceService":51}],12:[function(require,module,exports){
+},{"services/ResourceService":49}],12:[function(require,module,exports){
 Vue.component('add-item-confirm', {
 
     props: [
@@ -28239,7 +28209,7 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":45}],14:[function(require,module,exports){
+},{"services/CountryService":44}],14:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
@@ -28355,7 +28325,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":46,"services/PaginationService":50,"vue-infinite-scroll":58}],16:[function(require,module,exports){
+},{"services/LoadItemsService":45,"services/PaginationService":48,"vue-infinite-scroll":56}],16:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -28537,7 +28507,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":50}],17:[function(require,module,exports){
+},{"services/PaginationService":48}],17:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -28719,7 +28689,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":42,"services/PaginationService":50}],18:[function(require,module,exports){
+},{"services/ApiService":41,"services/PaginationService":48}],18:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -28970,7 +28940,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":42,"services/BasketService":43,"services/NotificationService":49,"services/VariationsHTMLCacheService":53}],19:[function(require,module,exports){
+},{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":47,"services/VariationsHTMLCacheService":51}],19:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29026,7 +28996,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49}],20:[function(require,module,exports){
+},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":47}],20:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -29087,44 +29057,7 @@ Vue.component('user-login-handler', {
     }
 });
 
-},{"services/ApiService":42}],21:[function(require,module,exports){
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
-Vue.component('monetary-format',
-    {
-        template: '${ monetary }',
-
-        props: [
-            "price",
-            "currency"
-        ],
-
-        methods: {
-            start: function(done)
-            {
-                var self = this;
-                setTimeout(function()
-                {
-                    self.monetary = MonetaryFormatService.formatMonetary(this.price, this.currency);
-                    done();
-                }.bind(this), 100);
-            }
-        },
-
-        activate: function(done)
-        {
-            this.start(done);
-        },
-
-        data: function()
-        {
-            return {
-                monetary: ""
-            };
-        }
-    });
-
-},{"services/MonetaryFormatService":48}],22:[function(require,module,exports){
+},{"services/ApiService":41}],21:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -29211,7 +29144,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":40,"services/ModalService":47,"services/NotificationService":49}],23:[function(require,module,exports){
+},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":47}],22:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -29240,7 +29173,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":49,"services/WaitScreenService":54}],24:[function(require,module,exports){
+},{"services/NotificationService":47,"services/WaitScreenService":52}],23:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -29407,8 +29340,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":42}],25:[function(require,module,exports){
-var MonetaryFormatService = require('services/MonetaryFormatService');
+},{"services/ApiService":41}],24:[function(require,module,exports){
 var APIService            = require('services/APIService');
 
 Vue.component('payment-provider-select', {
@@ -29447,7 +29379,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":40,"services/MonetaryFormatService":48}],26:[function(require,module,exports){
+},{"services/APIService":39}],25:[function(require,module,exports){
 Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
@@ -29496,7 +29428,7 @@ Vue.component( 'quantity-input', {
     }
 
 });
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29621,9 +29553,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49,"services/ValidationService":52}],28:[function(require,module,exports){
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
+},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":47,"services/ValidationService":50}],27:[function(require,module,exports){
 Vue.component('shipping-profile-select', {
 
     template: '#vue-shipping-profile-select',
@@ -29676,7 +29606,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":48}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -29708,7 +29638,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":49}],30:[function(require,module,exports){
+},{"services/NotificationService":47}],29:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 /**
@@ -29737,7 +29667,7 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":54}],31:[function(require,module,exports){
+},{"services/WaitScreenService":52}],30:[function(require,module,exports){
 var ResourceService     = require('services/ResourceService');
 var NotificationService = require('services/NotificationService');
 
@@ -29759,7 +29689,7 @@ Vue.directive('add-to-basket', function(value)
 
 });
 
-},{"services/NotificationService":49,"services/ResourceService":51}],32:[function(require,module,exports){
+},{"services/NotificationService":47,"services/ResourceService":49}],31:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -29790,7 +29720,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":42,"services/NotificationService":49}],33:[function(require,module,exports){
+},{"services/ApiService":41,"services/NotificationService":47}],32:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -29812,7 +29742,7 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":42}],34:[function(require,module,exports){
+},{"services/ApiService":41}],33:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
@@ -29878,7 +29808,7 @@ Vue.elementDirective('resource-list', {
     }
 });
 
-},{"services/ResourceService":51}],35:[function(require,module,exports){
+},{"services/ResourceService":49}],34:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.directive('resource-bind', {
@@ -29904,7 +29834,7 @@ Vue.directive('resource-bind', {
             for( var i = 0; i < filters.length; i++ )
             {
                 var filter = Vue.filter( self.params.filters[i] );
-                value = filter.apply( null, [value, "EUR"] );
+                value = filter.apply( null, [value] );
             }
 
             self.el.innerHTML = value;
@@ -29913,32 +29843,37 @@ Vue.directive('resource-bind', {
 
 });
 
-},{"services/ResourceService":51}],36:[function(require,module,exports){
+},{"services/ResourceService":49}],35:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
 var currencySymbolMap = require('currency-symbol-map');
-var accounting        = require('accounting');
+var accounting = require('accounting');
 
-Vue.filter( 'formatMonetary', function( price, currency ) {
+Vue.filter('currency', function (price, customCurrency)
+{
+    var basket = ResourceService.getResource("basket").val();
 
-  var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-  if (currencySymbol)
-  {
-      currency = currencySymbol;
-  }
+    var currency = customCurrency || basket.currency;
 
-  // (%v = value, %s = symbol)
-  var options = {
-    symbol : currency,
-    decimal : ",",
-    thousand: ".",
-    precision : 2,
-    format: "%v %s"
-  };
+    if (currency) {
+        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+        if (currencySymbol) {
+            currency = currencySymbol;
+        }
+    }
 
-  return accounting.formatMoney(price, options);
+    // (%v = value, %s = symbol)
+    var options = {
+        symbol : currency,
+        decimal : ",",
+        thousand: ".",
+        precision : 2,
+        format: "%v %s"
+    };
 
+    return accounting.formatMoney(price, options);
 });
 
-},{"accounting":55,"currency-symbol-map":56}],37:[function(require,module,exports){
+},{"accounting":53,"currency-symbol-map":54,"services/ResourceService":49}],36:[function(require,module,exports){
 Vue.filter( 'itemImage', function( item, baseUrl ) {
 
     var imageList = item.variationImageList;
@@ -29963,7 +29898,7 @@ Vue.filter( 'itemImage', function( item, baseUrl ) {
     return "";
 
 });
-},{}],38:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 Vue.filter( 'itemName', function( item, selectedName ) {
 
     if(selectedName == '0' && item.name1 !== '')
@@ -29985,7 +29920,7 @@ Vue.filter( 'itemName', function( item, selectedName ) {
 
 });
 
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 Vue.filter( 'itemURL', function( item ) {
 
     var urlContent = item.itemDescription.urlContent.split("/");
@@ -29994,7 +29929,7 @@ Vue.filter( 'itemURL', function( item ) {
     return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
 
 });
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -30158,7 +30093,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":49,"services/WaitScreenService":54}],41:[function(require,module,exports){
+},{"services/NotificationService":47,"services/WaitScreenService":52}],40:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -30200,9 +30135,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":42,"services/CheckoutService":44}],42:[function(require,module,exports){
-arguments[4][40][0].apply(exports,arguments)
-},{"dup":40,"services/NotificationService":49,"services/WaitScreenService":54}],43:[function(require,module,exports){
+},{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
+arguments[4][39][0].apply(exports,arguments)
+},{"dup":39,"services/NotificationService":47,"services/WaitScreenService":52}],42:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30330,7 +30265,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":42}],44:[function(require,module,exports){
+},{"services/ApiService":41}],43:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30420,7 +30355,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":42}],45:[function(require,module,exports){
+},{"services/ApiService":41}],44:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30511,7 +30446,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],46:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30535,7 +30470,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":42}],47:[function(require,module,exports){
+},{"services/ApiService":41}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30667,38 +30602,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],48:[function(require,module,exports){
-var currencySymbolMap = require('currency-symbol-map');
-var accounting = require('accounting');
-
-module.exports = (function($)
-{
-    return {
-        formatMonetary: formatMonetary
-    };
-
-    function formatMonetary(price, currency)
-    {
-        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-        if (currencySymbol)
-        {
-            currency = currencySymbol;
-        }
-
-        // (%v = value, %s = symbol)
-        var options = {
-        	symbol : currency,
-        	decimal : ",",
-        	thousand: ".",
-        	precision : 2,
-        	format: "%v %s"
-        };
-
-        return accounting.formatMoney(price, options);
-    }
-})(jQuery);
-
-},{"accounting":55,"currency-symbol-map":56}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30871,7 +30775,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],50:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30897,7 +30801,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function( $ ) {
@@ -30927,9 +30831,9 @@ module.exports = (function( $ ) {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route )
+        if( !route && !initialValue )
         {
-            throw new Error("Cannot register resource. Route is required.");
+            throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
         if( resources.hasOwnProperty( name ) )
@@ -30967,9 +30871,9 @@ module.exports = (function( $ ) {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route )
+        if( !route && !initialValue )
         {
-            throw new Error("Cannot register resource. Route is required.");
+            throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
         if( resources.hasOwnProperty( name ) )
@@ -31077,7 +30981,7 @@ module.exports = (function( $ ) {
             data.value = initialValue;
             ready = true;
         }
-        else
+        else if( !!url )
         {
             // no initial value given
             // => get value from url
@@ -31087,6 +30991,10 @@ module.exports = (function( $ ) {
                     data.value = response;
                     ready = true;
                 } );
+        }
+        else
+        {
+            throw new Error( "Cannot initialize resource." );
         }
 
         return {
@@ -31173,11 +31081,21 @@ module.exports = (function( $ ) {
          */
         function set( value )
         {
-            return ApiService
-                .put( url, value )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .put(url, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -31194,13 +31112,17 @@ module.exports = (function( $ ) {
                 deferred.resolve();
                 return deferred;
             }
-            else
+            else if( !!url )
             {
                 return ApiService
                     .get( url )
                     .done( function( response ) {
                         data.value = response;
                     });
+            }
+            else
+            {
+                throw new Error( "Cannot update resource. Neither an URL nor a value is prodivded." );
             }
         }
     }
@@ -31225,7 +31147,7 @@ module.exports = (function( $ ) {
             data.value = initialValue;
             ready = true;
         }
-        else
+        else if( !!url )
         {
             ApiService
                 .get( url )
@@ -31233,6 +31155,10 @@ module.exports = (function( $ ) {
                     data.value = response;
                     ready = true;
                 } );
+        }
+        else
+        {
+            throw new Error( "Cannot initialize resource." );
         }
 
         return {
@@ -31323,11 +31249,21 @@ module.exports = (function( $ ) {
          */
         function set( key, value )
         {
-            return ApiService
-                .put( url + key , value )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .put(url + key, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -31342,6 +31278,26 @@ module.exports = (function( $ ) {
                 .done( function( response ) {
                     data.value = response;
                 } );
+
+            if( !!url )
+            {
+                return ApiService
+                    .post(url, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+
+                var list = data.value;
+                list.push( value );
+                data.value = list;
+
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -31351,11 +31307,25 @@ module.exports = (function( $ ) {
          */
         function remove( key )
         {
-            return ApiService
-                .delete( url + key )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .delete(url + key)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+
+                var list = data.value;
+                list.splice( key, 1 );
+                data.value = list;
+
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -31384,7 +31354,7 @@ module.exports = (function( $ ) {
     }
 
 })( jQuery );
-},{"services/ApiService":42}],52:[function(require,module,exports){
+},{"services/ApiService":41}],50:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31578,7 +31548,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31622,7 +31592,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],54:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31672,7 +31642,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],55:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -32087,7 +32057,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],56:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -32127,7 +32097,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":57}],57:[function(require,module,exports){
+},{"./map":55}],55:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -32247,7 +32217,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],58:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -32462,7 +32432,7 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39])
+},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
 
 
 new Vue({

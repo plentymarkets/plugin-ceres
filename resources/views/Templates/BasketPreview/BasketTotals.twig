@@ -1,4 +1,3 @@
-{# TODO: Add monetary filter #}
 <script type="x/template" id="vue-basket-totals">
     <div class="cmp cmp-totals">
         <h3>{{ trans("PluginCallisto::Callisto.basketSum") }}</h3>
@@ -8,35 +7,35 @@
                     {{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
-                    ${ basket.itemSum | formatMonetary basket.currency  }
+                    ${ basket.itemSum | currency  }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.value_of_items_net' )">
                     {{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.value_of_items_net' )">
-                    ${ basket.itemSumNet | formatMonetary basket.currency }
+                    ${ basket.itemSumNet | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
                     {{ trans("PluginCallisto::Callisto.itemShippingPrice") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    ${ basket.shippingAmount | formatMonetary basket.currency }
+                    ${ basket.shippingAmount | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
                     {{ trans("PluginCallisto::Callisto.itemShippingPrice") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
-                    ${ basket.shippingAmountNet | formatMonetary basket.currency }
+                    ${ basket.shippingAmountNet | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.vat' )">
                     {{ trans("PluginCallisto::Callisto.basketVAT") }}
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.vat' )">
-                    ${ basket.itemSum - basket.itemSumNet | formatMonetary basket.currency }
+                    ${ basket.itemSum - basket.itemSumNet | currency }
                 </dd>
 
                 <hr>
@@ -45,14 +44,14 @@
                     {{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.order_total_gross' )">
-                    ${ basket.basketAmount | formatMonetary basket.currency }
+                    ${ basket.basketAmount | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.order_total_net' )">
                     {{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.order_total_net' )">
-                    ${ basket.basketAmountNet | formatMonetary basket.currency }
+                    ${ basket.basketAmountNet | currency }
                 </dd>
             </dl>
         </div>

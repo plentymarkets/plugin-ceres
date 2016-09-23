@@ -23,7 +23,7 @@ Vue.directive('resource-bind', {
             for( var i = 0; i < filters.length; i++ )
             {
                 var filter = Vue.filter( self.params.filters[i] );
-                value = filter.apply( null, [value, "EUR"] );
+                value = filter.apply( null, [value] );
             }
 
             self.el.innerHTML = value;

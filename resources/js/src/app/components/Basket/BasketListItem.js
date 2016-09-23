@@ -1,12 +1,12 @@
 var ResourceService       = require('services/ResourceService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('basket-list-item', {
 
     template: '#vue-basket-list-item',
 
     props: [
-        "basketItem"
+        "basketItem",
+        "size"
     ],
 
     data: function()
