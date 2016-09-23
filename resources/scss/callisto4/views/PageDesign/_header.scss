@@ -76,6 +76,9 @@
 				font-size: .8rem;
 				display: inline-block;
 				color: $gray-lighter;
+				span {
+					display: none;
+				}
 			}
 
 			.flag-icon{
@@ -251,7 +254,21 @@
 }
 
 @include media-breakpoint-up(md){
+	.top-bar{
 
+		.list-inline{
+
+			.list-inline-item{
+
+				&>span>a,
+				&>a{
+					span {
+						display: inline-block;
+					}
+				}
+			}
+		}
+	}
 }
 
 
