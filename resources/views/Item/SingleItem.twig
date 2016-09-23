@@ -94,7 +94,7 @@
                 <sup>*</sup>
             </span>
             <div class="base-price text-muted m-y-1">
-                {{ trans("PluginCallisto::Callisto.itemGroundPrice") }}
+                {{ trans("PluginCallisto::Callisto.itemUnitPrice") }}
                 <span class="base-price-value">
                   {{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                 </span>/<span class="base-price-amount">
@@ -126,8 +126,8 @@
             <hr>
 
             <span class="vat small text-muted">
-                {{ trans("PluginCallisto::Callisto.itemInclVAT") }}
-                <a href="#" title="Versandkosten">{{ trans("PluginCallisto::Callisto.itemShippingPrice") }}</a>
+                {{ trans("PluginCallisto::Callisto.itemInclVAT") }} {{ trans("PluginCallisto::Callisto.itemExclusive") }}
+                <a href="#" title="Versandkosten">{{ trans("PluginCallisto::Callisto.itemShippingCosts") }}</a>
             </span>
 
           </div>
@@ -177,7 +177,7 @@
 
                       {% if 'item.condition' in itemData or 'all' in itemData %}
                         <tr>
-                          <td>{{ trans("PluginCallisto::Callisto.itemState") }}</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemCondition") }}</td>
                           <td>{{ trans("PluginCallisto::Callisto.itemNew") }}</td>
                         </tr>
                       {% endif %}
@@ -213,7 +213,7 @@
                       {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.itemBase.producingCountryId != '' %}
                         {% set country = services.country.getCountryName(item.itemBase.producingCountryId) %}
                         <tr>
-                          <td>{{ trans("PluginCallisto::Callisto.itemManufacturerCountry") }}</td>
+                          <td>{{ trans("PluginCallisto::Callisto.itemManufacturingCountry") }}</td>
                           <td>{{ country }}</td>
                         </tr>
                       {% endif %}
@@ -272,7 +272,7 @@
               <ul class="crosssellers list-unstyled row">
                 {% for crossSellingItem in crossSellingList %}
                   <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                      <category-list-item :item="{{ services.item.getItem(crossSellingItem.crossItemId) | json_encode }}" base-url="{{ app.request.baseUrl }}"></category-list-item>
+                    {% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}
                   </li>
                 {% endfor %}
               </ul>

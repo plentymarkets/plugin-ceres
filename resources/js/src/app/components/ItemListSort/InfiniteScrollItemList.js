@@ -46,8 +46,6 @@ Vue.component("infinite-scroll-item-list", {
                     {
                         self.isBusy     = true;
                         self.isLastPage = response.isLastPage;
-                        // TODO remove log and add "All elements loaded" event
-                        console.log("All items loaded. No more items to get.");
 
                         // update pagination indicator
                         var currentItemAmount = (self.infiniteConfig.offset - parseInt(PaginationService.itemsPerPage) + response.entries.length);

@@ -1,3 +1,6 @@
+{% set basketItemData = config("PluginCallisto.basket.item_data") | split(', ') %}
+{% set showItemVariation = config("PluginCallisto.basket.variations") %}
+
 <article class="cmp cmp-basket-item m-b-3 p-b-1 art-${basketItem.variationId}">
 
 	<a class="item-image" :href="setLinkToItem(basketItem)">
@@ -5,10 +8,9 @@
 	</a>
 
 	<div class="item-quantity">
-
-    <item-count-to-basket :basket-item='basketItem'
-                          :quantity='basketItem.quantity'>
-    </item-count-to-basket>
+	    <item-count-to-basket :basket-item='basketItem'
+	                          :quantity='basketItem.quantity'>
+	    </item-count-to-basket>
 
 		<div class="item-unit-price">
 			${ formatRetailPrice(basketItem) } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
@@ -37,9 +39,11 @@
 			</div>
 		</a>
 
+		{% if 'basket.item.item_id' in basketItemData or 'all' in basketItemData %}
 		<p class="id">
 			<strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ items[basketItem.variationId].itemBase.id }
 		</p>
+		{% endif %}
 
 		<!-- {% if showItemVariation == "true" %}
 		<div class="varianten">
@@ -149,23 +153,32 @@
 			{% endif %} -->
 
 		<div class="item-description">
-			<div class="row">
-        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
-        <span class="col-xs-6 col-sm-7">${ items[basketItem.variationId].variationBase.customNumber}</span>
-      </div>
-      <div class="row">
-        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
-        <span class="col-xs-6 col-sm-7">TODO</span>
-      </div>
-      <div class="row">
-        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
-        <span class="col-xs-6 col-sm-7">
-          {% set availabilityData = services.availability.getAvailabilityById(1) %}
-        </span>
-      </div>
-			<p class="m-y-1">
-				{!! items[basketItem.variationId].itemDescription.description !!}
-			</p>
+			{% if 'basket.item.customNumber' in basketItemData or 'all' in basketItemData %}
+				<div class="row">
+	        		<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
+	        		<span class="col-xs-6 col-sm-7">${ items[basketItem.variationId].variationBase.customNumber}</span>
+	      		</div>
+			{% endif %}
+			{% if 'basket.item.state' in basketItemData or 'all' in basketItemData %}
+		      	<div class="row">
+			        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
+			        <span class="col-xs-6 col-sm-7">TODO</span>
+		      	</div>
+			{% endif %}
+			{% if 'basket.item.availability' in basketItemData or 'all' in basketItemData %}
+	      		<div class="row">
+			        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
+			        <span class="col-xs-6 col-sm-7">
+	          			{% set availabilityData = services.availability.getAvailabilityById(1) %}
+						TODO
+	        		</span>
+	      		</div>
+			{% endif %}
+			{% if 'basket.item.description' in basketItemData or 'all' in basketItemData %}
+				<p class="m-y-1">
+					{!! items[basketItem.variationId].itemDescription.description !!}
+				</p>
+			{% endif %}
 		</div>
 		<label class="expand-btn" for="itemid-${ items[basketItem.variationId].variationBase.id }"></label>
 	</div>

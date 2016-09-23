@@ -1,15 +1,18 @@
 {% extends "PluginCallisto::PageDesign" %}
 {% set defaultItemPerPage = config("PluginCallisto.sort.defaultItemPerPage") %}
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
-{% set sortedData = config("PluginCallisto.sort.data")|split(', ')|json_encode() %}
 {% set paginatedResult = services.category.getItems(category, defaultItemPerPage, variationShowType) %}
+{% set sortedData = config("PluginCallisto.sort.data")|split(', ')|json_encode() %}
 {% set itemList = paginatedResult.getResult() %}
 {% set currentPage = paginatedResult.getPage() %}
-{% set isLastPage = paginatedResult.isLastPage() %}
+{% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
 {% set maxCount = paginatedResult.getTotalCount() %}
 {% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
 {% set isInfiniteScrolling = paginationType == "infiniteScroll" %}
 {% set pageIndicator = "1 - " ~ maxCount %}
+
+{% set itemName = config("PluginCallisto.item.name") %}
+{% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
 {% if defaultItemPerPage < maxCount and not isInfiniteScrolling %}
     {% set pageIndicator = ((currentPage * defaultItemPerPage) - defaultItemPerPage + 1) ~ " - " ~ ((currentPage * defaultItemPerPage) > maxCount ? maxCount : (currentPage * defaultItemPerPage)) %}
@@ -45,7 +48,7 @@
                             <i class="fa fa-th-list" aria-hidden="true"></i>
                         </div>
                         <div class="product-count pull-xs-right">
-                            <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShow") }}:</span> <span>{{ pageIndicator }}</span> <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShowOf", "XX") }}
+                            <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShow") }}:</span> <span>{{ pageIndicator }}</span> <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShowOf") }} {{ maxCount }} {{ trans("PluginCallisto::Callisto.itemItems") }}
                                 </span>
                         </div>
                     </div>
@@ -75,8 +78,7 @@
                             {% endif %}>
                         {% for item in itemList %}
                             <li>
-                                <category-list-item :item="{{ item | json_encode }}"
-                                                    base-url="{{ app.request.baseUrl }}"></category-list-item>
+                              {% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': item } %}
                             </li>
                         {% endfor %}
                     </ul>

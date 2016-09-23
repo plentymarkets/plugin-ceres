@@ -4,9 +4,9 @@
             {% set userObject = services.customer.getContact() %}
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-                {{ trans("PluginCallisto::Callisto.generalHello") }}, {{userObject.firstName}} {{userObject.lastName}}</a>
+                {{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</a>
             {% else %}
-                {{ trans("PluginCallisto::Callisto.generalHello") }}, {{userObject.email}}</a>
+                {{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</a>
             {% endif %}
             </a>
             <div class="country-settings account-menu dropdown-menu dropdown-menu-right small">
@@ -17,7 +17,7 @@
             </div>
         {% else %}
             <a data-toggle="modal" href="#login">{{ trans("PluginCallisto::Callisto.accLogin") }}</a>
-            <small>oder</small>
+            <small>{{ trans("PluginCallisto::Callisto.generalOr") }}</small>
             <a data-toggle="modal" href="#registration">{{ trans("PluginCallisto::Callisto.accRegister") }}</a>
         {% endif %}
     </span>

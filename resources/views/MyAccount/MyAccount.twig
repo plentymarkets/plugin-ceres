@@ -11,9 +11,9 @@
 	            <h1>{{ trans("PluginCallisto::Callisto.accMyAccount") }}</h1>
 							{% if frontend.Account.getIsAccountLoggedIn %}
 									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">>{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
 									{% else %}
-										<span class="text-muted">>{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</span>
 									{% endif %}
 							{% endif %}
 	        </div>
@@ -60,14 +60,15 @@
 
 			<div class="col-md-6">
 				<h4>
-					{{ trans("PluginCallisto::Callisto.accBankInformations") }}
+					{{ trans("PluginCallisto::Callisto.accBankDetails") }}
 				</h4>
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentData") }}</p>
+				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentInformation") }}</p>
 				{#{% include _component-address-list/component-address-list.html id="bankinfos" %}#}
 			</div>
 		</div>
 	</div>
 
+{{ services.customer.getOrders() }}
 
 	<!-- Auftragshistorie -->
 

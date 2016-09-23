@@ -25,6 +25,10 @@
         line-height: 1;
     }
 
+    .input-number {
+      text-align: center;
+    }
+
     .vat {
         line-height: 1.4;
         margin-top: 0;
@@ -205,7 +209,7 @@
                     }
                 }
                 &+.nav-item {
-                    margin-left: .2rem;
+                    margin-left: -1px;
                 }
             }
         }
