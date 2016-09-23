@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 
 /*!
- * Vue.js v1.0.25
+ * Vue.js v1.0.26
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -13228,7 +13228,7 @@ var expression = Object.freeze({
     }
     var isA = isArray(val);
     var isO = isObject(val);
-    if (isA || isO) {
+    if ((isA || isO) && Object.isExtensible(val)) {
       if (val.__ob__) {
         var depId = val.__ob__.dep.id;
         if (seen.has(depId)) {
@@ -14714,13 +14714,13 @@ var template = Object.freeze({
       this.vm.$on('hook:attached', function () {
         nextTick(_this.forceUpdate);
       });
+      if (!inDoc(el)) {
+        nextTick(this.forceUpdate);
+      }
     },
 
     update: function update(value) {
       var el = this.el;
-      if (!inDoc(el)) {
-        return nextTick(this.forceUpdate);
-      }
       el.selectedIndex = -1;
       var multi = this.multiple && isArray(value);
       var options = el.options;
@@ -19661,7 +19661,13 @@ var template = Object.freeze({
 
     pluralize: function pluralize(value) {
       var args = toArray(arguments, 1);
-      return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
+      var length = args.length;
+      if (length > 1) {
+        var index = value % 10 - 1;
+        return index in args ? args[index] : args[length - 1];
+      } else {
+        return args[0] + (value === 1 ? '' : 's');
+      }
     },
 
     /**
@@ -19863,7 +19869,7 @@ var template = Object.freeze({
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.25';
+  Vue.version = '1.0.26';
 
   // devtools global hook
   /* istanbul ignore next */
@@ -19880,7 +19886,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.1 */
+/*! tether 1.3.6 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -19904,6 +19910,32 @@ if (typeof TetherBase === 'undefined') {
 }
 
 var zeroElement = null;
+
+// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
+// if the element lies within a nested document (<frame> or <iframe>-like).
+function getActualBoundingClientRect(node) {
+  var boundingRect = node.getBoundingClientRect();
+
+  // The original object returned by getBoundingClientRect is immutable, so we clone it
+  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
+  var rect = {};
+  for (var k in boundingRect) {
+    rect[k] = boundingRect[k];
+  }
+
+  if (node.ownerDocument !== document) {
+    var _frameElement = node.ownerDocument.defaultView.frameElement;
+    if (_frameElement) {
+      var frameRect = getActualBoundingClientRect(_frameElement);
+      rect.top += frameRect.top;
+      rect.bottom += frameRect.top;
+      rect.left += frameRect.left;
+      rect.right += frameRect.left;
+    }
+  }
+
+  return rect;
+}
 
 function getScrollParents(el) {
   // In firefox if the el is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -19940,7 +19972,13 @@ function getScrollParents(el) {
     }
   }
 
-  parents.push(document.body);
+  parents.push(el.ownerDocument.body);
+
+  // If the node is within a frame, account for the parent window scroll
+  if (el.ownerDocument !== document) {
+    parents.push(el.ownerDocument.defaultView);
+  }
+
   return parents;
 }
 
@@ -19974,13 +20012,7 @@ var getOrigin = function getOrigin() {
 
   var id = node.getAttribute('data-tether-id');
   if (typeof zeroPosCache[id] === 'undefined') {
-    zeroPosCache[id] = {};
-
-    var rect = node.getBoundingClientRect();
-    for (var k in rect) {
-      // Can't use extend, as on IE9, elements don't resolve to be hasOwnProperty
-      zeroPosCache[id][k] = rect[k];
-    }
+    zeroPosCache[id] = getActualBoundingClientRect(node);
 
     // Clear the cache when this position call is done
     defer(function () {
@@ -20009,13 +20041,7 @@ function getBounds(el) {
 
   var docEl = doc.documentElement;
 
-  var box = {};
-  // The original object returned by getBoundingClientRect is immutable, so we clone it
-  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
-  var rect = el.getBoundingClientRect();
-  for (var k in rect) {
-    box[k] = rect[k];
-  }
+  var box = getActualBoundingClientRect(el);
 
   var origin = getOrigin();
 
@@ -20134,7 +20160,9 @@ function hasClass(el, name) {
 }
 
 function getClassName(el) {
-  if (el.className instanceof SVGAnimatedString) {
+  // Can't use just SVGAnimatedString here since nodes within a Frame in IE have
+  // completely separately SVGAnimatedString base classes
+  if (el.className instanceof el.ownerDocument.defaultView.SVGAnimatedString) {
     return el.className.baseVal;
   }
   return el.className;
@@ -20199,7 +20227,7 @@ var Evented = (function () {
   }, {
     key: 'off',
     value: function off(event, handler) {
-      if (typeof this.bindings !== 'undefined' && typeof this.bindings[event] !== 'undefined') {
+      if (typeof this.bindings === 'undefined' || typeof this.bindings[event] === 'undefined') {
         return;
       }
 
@@ -20253,6 +20281,7 @@ var Evented = (function () {
 })();
 
 TetherBase.Utils = {
+  getActualBoundingClientRect: getActualBoundingClientRect,
   getScrollParents: getScrollParents,
   getBounds: getBounds,
   getOffsetParent: getOffsetParent,
@@ -20311,7 +20340,7 @@ var transformKey = (function () {
   }
   var el = document.createElement('div');
 
-  var transforms = ['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
+  var transforms = ['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
   for (var i = 0; i < transforms.length; ++i) {
     var key = transforms[i];
     if (el.style[key] !== undefined) {
@@ -20710,7 +20739,7 @@ var TetherClass = (function (_Evented) {
       this.enabled = true;
 
       this.scrollParents.forEach(function (parent) {
-        if (parent !== document) {
+        if (parent !== _this3.target.ownerDocument) {
           parent.addEventListener('scroll', _this3.position);
         }
       });
@@ -20910,21 +20939,24 @@ var TetherClass = (function (_Evented) {
         }
       };
 
+      var doc = this.target.ownerDocument;
+      var win = doc.defaultView;
+
       var scrollbarSize = undefined;
-      if (document.body.scrollWidth > window.innerWidth) {
+      if (win.innerHeight > doc.documentElement.clientHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (document.body.scrollHeight > window.innerHeight) {
+      if (win.innerWidth > doc.documentElement.clientWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
 
-      if (['', 'static'].indexOf(document.body.style.position) === -1 || ['', 'static'].indexOf(document.body.parentElement.style.position) === -1) {
+      if (['', 'static'].indexOf(doc.body.style.position) === -1 || ['', 'static'].indexOf(doc.body.parentElement.style.position) === -1) {
         // Absolute positioning in the body will be relative to the page, not the 'initial containing block'
-        next.page.bottom = document.body.scrollHeight - top - height;
-        next.page.right = document.body.scrollWidth - left - width;
+        next.page.bottom = doc.body.scrollHeight - top - height;
+        next.page.right = doc.body.scrollWidth - left - width;
       }
 
       if (typeof this.options.optimizations !== 'undefined' && this.options.optimizations.moveElement !== false && !(typeof this.targetModifier !== 'undefined')) {
@@ -20943,8 +20975,8 @@ var TetherClass = (function (_Evented) {
             offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle['border' + side + 'Width']);
           });
 
-          offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
-          offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
+          offsetPosition.right = doc.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
+          offsetPosition.bottom = doc.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
 
           if (next.page.top >= offsetPosition.top + offsetBorder.top && next.page.bottom >= offsetPosition.bottom) {
             if (next.page.left >= offsetPosition.left + offsetBorder.left && next.page.right >= offsetPosition.right) {
@@ -21037,7 +21069,16 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
+          if (window.matchMedia) {
+            // HubSpot/tether#207
+            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
+            if (!retina) {
+              xPos = Math.round(xPos);
+              yPos = Math.round(yPos);
+            }
+          }
+
+          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21102,7 +21143,7 @@ var TetherClass = (function (_Evented) {
 
         if (!offsetParentIsBody) {
           this.element.parentNode.removeChild(this.element);
-          document.body.appendChild(this.element);
+          this.element.ownerDocument.body.appendChild(this.element);
         }
       }
 
@@ -21122,6 +21163,7 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
+          _this8.trigger('repositioned');
         });
       }
     }
@@ -21162,11 +21204,21 @@ function getBoundingRect(tether, to) {
 
   if (typeof to.nodeType !== 'undefined') {
     (function () {
+      var node = to;
       var size = getBounds(to);
       var pos = size;
       var style = getComputedStyle(to);
 
       to = [pos.left, pos.top, size.width + pos.left, size.height + pos.top];
+
+      // Account any parent Frames scroll offset
+      if (node.ownerDocument !== document) {
+        var win = node.ownerDocument.defaultView;
+        to[0] += win.pageXOffset;
+        to[1] += win.pageYOffset;
+        to[2] += win.pageXOffset;
+        to[3] += win.pageYOffset;
+      }
 
       BOUNDS_FORMAT.forEach(function (side, i) {
         side = side[0].toUpperCase() + side.substr(1);
@@ -22044,7 +22096,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Descriptions of all options available on the demo site:
   // http://lokeshdhakar.com/projects/lightbox2/index.html#options
   Lightbox.defaults = {
-    albumLabel: 'Bild %1 of %2',
+    albumLabel: 'Image %1 of %2',
     alwaysShowNavOnTouchDevices: false,
     fadeDuration: 500,
     fitImagesInViewport: true,
@@ -27604,7 +27656,7 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],2:[function(require,module,exports){
+},{"services/ApiService":42,"services/BasketService":43,"services/ModalService":47,"services/NotificationService":49}],2:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -27728,7 +27780,7 @@ Vue.component('address-select', {
     }
 });
 
-},{"services/ModalService":48}],4:[function(require,module,exports){
+},{"services/ModalService":47}],4:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -27805,7 +27857,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":42,"services/ValidationService":53}],5:[function(require,module,exports){
+},{"services/AddressService":41,"services/ValidationService":52}],5:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -27833,7 +27885,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":45}],6:[function(require,module,exports){
+},{"services/CheckoutService":44}],6:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -27860,130 +27912,106 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":45}],7:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+},{"services/CheckoutService":44}],7:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
 
-Vue.component('basket-button', {
+Vue.component('basket-list', {
+
+    template: '#vue-basket-list',
+
+    data: function()
+    {
+        return {
+            basketItems: []
+        };
+    },
 
     ready: function()
     {
-        ResourceService.bind( "basket", this );
-    },
-
-    template: '#vue-basket-button',
-
-    props: [
-        "basketData"
-    ],
-
-    data: function()
-    {
-        return {
-            basket: {}
-        };
-    },
-
-    computed: {
-        basketItemSum: function()
-        {
-            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
-        }
+        ResourceService.bind( "basketItems", this );
     }
-
 });
 
-},{"services/BasketService":44,"services/MonetaryFormatService":49,"services/ResourceService":52}],8:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+},{"services/ResourceService":51}],8:[function(require,module,exports){
+var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
 
-Vue.component('basket-item-list', {
+Vue.component('basket-list-item', {
 
-    template: '#vue-basket-item-list',
+    template: '#vue-basket-list-item',
 
     props: [
-        "baseUrl"
+        "basketItem"
     ],
 
     data: function()
     {
         return {
-            basket     : {},
-            basketItems: [],
-            items      : {}
+            waiting: false,
+            deleteConfirmed: false,
+            deleteConfirmedTimeout: null
         };
-    },
-
-    activate: function(done)
-    {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
-        });
-        BasketService.init().done(function()
-        {
-            done();
-        });
     },
 
     methods: {
-        deleteItem       : function(basketItem)
+
+        deleteItem: function()
         {
-            $(".art-" + basketItem.variationId).toggleClass('wait');
-
-            BasketService.deleteBasketItem(basketItem);
-        },
-
-        calcPrice        : function(basketItem)
-        {
-            var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var priceSum = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
-
-            return MonetaryFormatService.formatMonetary(priceSum, currency);
-        },
-
-        formatRetailPrice: function(basketItem)
-        {
-            var currency    = this.items[basketItem.variationId].variationRetailPrice.currency;
-            var retailPrice = this.items[basketItem.variationId].variationRetailPrice.price;
-
-            return MonetaryFormatService.formatMonetary(retailPrice, currency);
-        },
-
-        checkName        : function(basketItem, name)
-        {
-            if (name !== '')
+            var self = this;
+            if( !this.deleteConfirmed )
             {
-                return name + " " + this.items[basketItem.variationId].variationBase.variationName;
+                this.deleteConfirmed = true;
+                this.deleteConfirmedTimeout = window.setTimeout(
+                    function()
+                    {
+                        self.resetDelete();
+                    },
+                    5000
+                );
             }
             else
             {
-                return this.items[basketItem.variationId].itemDescription.name1 + " " + this.items[basketItem.variationId].variationBase.variationName;
+                this.waiting = true;
+                ResourceService
+                    .getResource( "basketItems" )
+                    .remove( this.basketItem.id )
+                    .done( function() {
+                        self.resetDelete();
+                    });
             }
         },
 
-        setLinkToItem: function(basketItem)
+        updateQuantity: function( quantity )
         {
-            var urlContent = this.items[basketItem.variationId].itemDescription.urlContent.split("/");
-            var i          = urlContent.length - 1;
+            if( this.basketItem.quantity === quantity )
+            {
+                return;
+            }
 
-            return "/" + urlContent[i] + "/" + this.items[basketItem.variationId].itemBase.id + "/" + this.items[basketItem.variationId].variationBase.id;
+            this.basketItem.quantity = quantity;
+            this.waiting = true;
+            var self = this;
+
+            ResourceService
+                .getResource( 'basketItems' )
+                .set( this.basketItem.id, this.basketItem )
+                .done( function() {
+                    self.waiting = false;
+                });
         },
 
-        getImage: function(image)
+        resetDelete: function()
         {
-            return this.baseUrl + "/" + image;
+            this.deleteConfirmed = false;
+            if( !!this.deleteConfirmedTimeout )
+            {
+                window.clearTimeout( this.deleteConfirmedTimeout );
+            }
         }
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49}],9:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+},{"services/MonetaryFormatService":48,"services/ResourceService":51}],9:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var ModalService          = require('services/ModalService');
@@ -27992,17 +28020,6 @@ Vue.component('basket-preview', {
 
     template: '#vue-basket-preview',
 
-    props: [
-        "basketData",
-        "baseUrl"
-    ],
-
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
-    },
-
     data: function()
     {
         return {
@@ -28010,9 +28027,16 @@ Vue.component('basket-preview', {
             basketItems: []
         };
     },
+    
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
+    },
 
     computed:
     {
+        // TODO: replace by monetary filter
         itemTotalSum: function ()
         {
             return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
@@ -28025,19 +28049,12 @@ Vue.component('basket-preview', {
         {
             return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
         }
-    },
-
-    methods:
-    {
-
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],10:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
+},{"services/ModalService":47,"services/MonetaryFormatService":48,"services/ResourceService":51}],10:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
 
 Vue.component('basket-preview-item', {
 
@@ -28050,53 +28067,47 @@ Vue.component('basket-preview-item', {
     data: function()
     {
         return {
-            waiting: false
+            waiting: false,
+            deleteConfirmed: false,
+            deleteConfirmedTimeout: null
         };
     },
 
     methods: {
-        // TODO replace by monetary-filter
-        calcPrice: function(basketItem)
+
+        deleteItem: function()
         {
-            var currency = basketItem.variation.variationRetailPrice.currency;
-            var price    = basketItem.quantity * basketItem.variation.variationRetailPrice.price;
-
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
-
-        getBasePrice: function(basketItem)
-        {
-            var currency = basketItem.variation.variationRetailPrice.currency;
-            var price    = basketItem.variation.variationRetailPrice.basePrice;
-
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
-
-        deleteItem: function(basketItem, event)
-        {
-            var _self = this;
-
-            if ($(event.currentTarget).hasClass('btn-link'))
+            var self = this;
+            if( !this.deleteConfirmed )
             {
-                this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text(Translations.Callisto.generalDeleteNow);
+                this.deleteConfirmed = true;
+                this.deleteConfirmedTimeout = window.setTimeout(
+                    function()
+                    {
+                        self.resetDelete();
+                    },
+                    5000
+                );
             }
             else
             {
-                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
-
-                BasketService.deleteBasketItem(basketItem);
+                this.waiting = true;
+                ResourceService
+                    .getResource( "basketItems" )
+                    .remove( this.basketItem.id )
+                    .done( function() {
+                        self.resetDelete();
+                    });
             }
-        },
-
-        toggleDeleteBtnClass: function(element)
-        {
-            $(element).toggleClass('btn-link');
-            $(element).toggleClass('btn-danger');
         },
 
         updateQuantity: function( quantity )
         {
+            if( this.basketItem.quantity === quantity )
+            {
+                return;
+            }
+
             this.basketItem.quantity = quantity;
             this.waiting = true;
             var self = this;
@@ -28107,35 +28118,29 @@ Vue.component('basket-preview-item', {
                 .done( function() {
                     self.waiting = false;
                 });
+        },
+
+        resetDelete: function()
+        {
+            this.deleteConfirmed = false;
+            if( !!this.deleteConfirmedTimeout )
+            {
+                window.clearTimeout( this.deleteConfirmedTimeout );
+            }
         }
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/ResourceService":52}],11:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
+},{"services/MonetaryFormatService":48,"services/ResourceService":51}],11:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
 
-Vue.component('basket-total-sum', {
+Vue.component('basket-totals', {
+
+    template: '#vue-basket-totals',
 
     props: [
-        "basketData",
-        "showFull"
+        'config'
     ],
-
-    activate: function(done)
-    {
-        var self = this;
-        BasketService.watch(function(data)
-        {
-            self.$set('basket', data.basket);
-        });
-        BasketService.init(this.basketData).done(function()
-        {
-            done();
-        });
-    },
-
-    template: '#vue-basket-total-sum',
 
     data: function()
     {
@@ -28144,94 +28149,21 @@ Vue.component('basket-total-sum', {
         };
     },
 
-    methods: {
-        formatPrice: function(price, currency)
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+    },
+
+    methods:
+    {
+        showProperty: function( name )
         {
-            return MonetaryFormatService.formatMonetary(price, currency);
-        }
-    }
-
-});
-
-},{"services/BasketService":44,"services/MonetaryFormatService":49}],12:[function(require,module,exports){
-var BasketService       = require('services/BasketService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
-
-Vue.component('category-list-item', {
-
-    template: '#vue-category-list-item',
-
-    props: [
-        "item",
-        "baseUrl"
-    ],
-
-    methods: {
-
-        addToBasket: function()
-        {
-            var addItemModal = ModalService.findModal(this.$el);
-            addItemModal.setTimeout(10000);
-
-            $(".wrapper-bottom").append(addItemModal.getModalContainer());
-
-            BasketService.addBasketItem({
-                variationId: this.item.variationBase.id,
-                quantity   : 1
-            })
-                .done(function()
-                {
-                    addItemModal.show();
-                    NotificationService.success(Translations.Callisto.basketItemAdded).closeAfter(7000);
-                })
-                .fail(function()
-                {
-                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(7000);
-                });
-        },
-
-        getImage: function()
-        {
-            for (var i = 0; i < this.item.variationImageList.length; i++)
-            {
-                if (this.item.variationImageList[i].path !== '')
-                {
-                    return this.baseUrl + "/" + this.item.variationImageList[i].path;
-                }
-            }
-            return null;
-        },
-
-        checkName: function(name)
-        {
-            if (name !== '')
-            {
-                return name + " " + this.item.variationBase.variationName;
-            }
-            else
-            {
-                return this.item.itemDescription.name1 + " " + this.item.variationBase.variationName;
-            }
-        },
-
-        setLinkToItem: function()
-        {
-            var urlContent = this.item.itemDescription.urlContent.split("/");
-            var i          = urlContent.length - 1;
-
-            return "/" + urlContent[i] + "/" + this.item.itemBase.id + "/" + this.item.variationBase.id;
+            return this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
         }
     }
 });
 
-},{"services/BasketService":44,"services/ModalService":48,"services/NotificationService":50}],13:[function(require,module,exports){
-var BasketService         = require('services/BasketService');
-var ApiService            = require('services/ApiService');
-var NotificationService   = require('services/NotificationService');
-var ModalService          = require('services/ModalService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
+},{"services/ResourceService":51}],12:[function(require,module,exports){
 Vue.component('add-item-confirm', {
 
     props: [
@@ -28261,7 +28193,7 @@ Vue.component('add-item-confirm', {
     }
 });
 
-},{"services/ApiService":43,"services/BasketService":44,"services/ModalService":48,"services/MonetaryFormatService":49,"services/NotificationService":50}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -28307,71 +28239,14 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":46}],15:[function(require,module,exports){
+},{"services/CountryService":45}],14:[function(require,module,exports){
 Vue.component('coupon', {
 
     template: '#vue-coupon'
 
 });
 
-},{}],16:[function(require,module,exports){
-var BasketService = require('services/BasketService');
-
-Vue.component('delete-from-basket', {
-
-    template: '#vue-delete-from-basket',
-
-    props: [
-        'basketItem'
-    ],
-
-    methods: {
-
-        deleteItem: function()
-        {
-            BasketService.deleteBasketItem(this.basketItem);
-        }
-
-    }
-
-});
-
-},{"services/BasketService":44}],17:[function(require,module,exports){
-var BasketService = require('services/BasketService');
-
-Vue.component('item-count-to-basket', {
-
-    template: '#vue-item-count-to-basket',
-
-    props: [
-        'basketItem',
-        'quantity'
-    ],
-
-    methods: {
-
-        quantityPlus: function()
-        {
-            this.quantity++;
-
-            this.basketItem.quantity = this.quantity;
-            BasketService.updateBasketItem(this.basketItem);
-        },
-
-        quantityMinus: function()
-        {
-            if (this.quantity > 1)
-            {
-                this.quantity--;
-
-                this.basketItem.quantity = this.quantity;
-                BasketService.updateBasketItem(this.basketItem);
-            }
-        }
-    }
-});
-
-},{"services/BasketService":44}],18:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 var LoadItemsService  = require('services/LoadItemsService');
 
@@ -28480,7 +28355,7 @@ Vue.component("infinite-scroll-item-list", {
         }
     }
 });
-},{"services/LoadItemsService":47,"services/PaginationService":51,"vue-infinite-scroll":59}],19:[function(require,module,exports){
+},{"services/LoadItemsService":46,"services/PaginationService":50,"vue-infinite-scroll":58}],16:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -28662,7 +28537,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":51}],20:[function(require,module,exports){
+},{"services/PaginationService":50}],17:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -28844,7 +28719,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":43,"services/PaginationService":51}],21:[function(require,module,exports){
+},{"services/ApiService":42,"services/PaginationService":50}],18:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -29095,7 +28970,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":43,"services/BasketService":44,"services/NotificationService":50,"services/VariationsHTMLCacheService":54}],22:[function(require,module,exports){
+},{"services/ApiService":42,"services/BasketService":43,"services/NotificationService":49,"services/VariationsHTMLCacheService":53}],19:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29151,7 +29026,7 @@ Vue.component('login', {
     }
 });
 
-},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50}],23:[function(require,module,exports){
+},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49}],20:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -29200,19 +29075,19 @@ Vue.component('user-login-handler', {
         getUserHTML: function(username)
         {
             return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                Translations.Callisto.generalHello + username +
+                Translations.Callisto.generalHello + " " + username +
                 "</a>" +
                 "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
                 "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i>" + Translations.Callisto.accMyAccount + "</a>" +
-                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i>" + Translations.Callisto.accLogout + "</a>" +
+                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> " + Translations.Callisto.accMyAccount + "</a>" +
+                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> " + Translations.Callisto.accLogout + "</a>" +
                 "</div>" +
                 "</div>";
         }
     }
 });
 
-},{"services/ApiService":43}],24:[function(require,module,exports){
+},{"services/ApiService":42}],21:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('monetary-format',
@@ -29249,7 +29124,7 @@ Vue.component('monetary-format',
         }
     });
 
-},{"services/MonetaryFormatService":49}],25:[function(require,module,exports){
+},{"services/MonetaryFormatService":48}],22:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -29336,7 +29211,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":41,"services/ModalService":48,"services/NotificationService":50}],26:[function(require,module,exports){
+},{"services/APIService":40,"services/ModalService":47,"services/NotificationService":49}],23:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -29365,7 +29240,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":50,"services/WaitScreenService":55}],27:[function(require,module,exports){
+},{"services/NotificationService":49,"services/WaitScreenService":54}],24:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -29532,7 +29407,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":43}],28:[function(require,module,exports){
+},{"services/ApiService":42}],25:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
@@ -29572,7 +29447,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":41,"services/MonetaryFormatService":49}],29:[function(require,module,exports){
+},{"services/APIService":40,"services/MonetaryFormatService":48}],26:[function(require,module,exports){
 Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
@@ -29589,7 +29464,7 @@ Vue.component( 'quantity-input', {
     ready: function()
     {
         this.timeout = this.timeout || 300;
-        this.min = this.min || 0;
+        this.min = this.min || 1;
         this.max = this.max || 999;
 
         this.$watch( 'value', function( newValue ) {
@@ -29618,10 +29493,10 @@ Vue.component( 'quantity-input', {
                 this.timeout
             )
         });
-    },
+    }
 
 });
-},{}],30:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -29746,7 +29621,7 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":43,"services/ModalService":48,"services/NotificationService":50,"services/ValidationService":53}],31:[function(require,module,exports){
+},{"services/ApiService":42,"services/ModalService":47,"services/NotificationService":49,"services/ValidationService":52}],28:[function(require,module,exports){
 var MonetaryFormatService = require('services/MonetaryFormatService');
 
 Vue.component('shipping-profile-select', {
@@ -29801,7 +29676,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{"services/MonetaryFormatService":49}],32:[function(require,module,exports){
+},{"services/MonetaryFormatService":48}],29:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -29833,7 +29708,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":50}],33:[function(require,module,exports){
+},{"services/NotificationService":49}],30:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 /**
@@ -29862,8 +29737,8 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":55}],34:[function(require,module,exports){
-var BasketService       = require('services/BasketService');
+},{"services/WaitScreenService":54}],31:[function(require,module,exports){
+var ResourceService     = require('services/ResourceService');
 var NotificationService = require('services/NotificationService');
 
 Vue.directive('add-to-basket', function(value)
@@ -29872,20 +29747,19 @@ Vue.directive('add-to-basket', function(value)
     $(this.el).click(
         function(e)
         {
-          BasketService.addBasketItem({
-              variationId: value.id,
-              quantity   : value.quantity
-          });
+          ResourceService
+              .getResource( 'basketItems' )
+              .push(value);
 
           e.preventDefault();
 
         }.bind(this));
 
-        //TODO let AddItemConfirm open 
+        //TODO let AddItemConfirm open
 
 });
 
-},{"services/BasketService":44,"services/NotificationService":50}],35:[function(require,module,exports){
+},{"services/NotificationService":49,"services/ResourceService":51}],32:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 
@@ -29916,7 +29790,7 @@ Vue.directive('logout', function()
 
 });
 
-},{"services/ApiService":43,"services/NotificationService":50}],36:[function(require,module,exports){
+},{"services/ApiService":42,"services/NotificationService":49}],33:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.directive('place-order', function() {
@@ -29938,7 +29812,7 @@ Vue.directive('place-order', function() {
 
 });
 
-},{"services/ApiService":43}],37:[function(require,module,exports){
+},{"services/ApiService":42}],34:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
@@ -29946,16 +29820,31 @@ Vue.elementDirective('resource', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResource(
+        var resource = ResourceService.registerResource(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
+
 });
 
 Vue.elementDirective('resource-list', {
@@ -29963,19 +29852,93 @@ Vue.elementDirective('resource-list', {
     params: [
         'name',
         'route',
-        'data'
+        'data',
+        'events'
     ],
     bind: function()
     {
-        ResourceService.registerResourceList(
+        var resource = ResourceService.registerResourceList(
             this.params.name,
             this.params.route,
             this.params.data
         );
+
+        var events = this.params.events || [];
+        for( var i = 0; i < events.length; i++ )
+        {
+            var event = events[i].split('!');
+            var usePayload;
+            if( event.length > 1 )
+            {
+                usePayload = event[1];
+            }
+
+            resource.listen( event[0], usePayload );
+        }
     }
 });
 
-},{"services/ResourceService":52}],38:[function(require,module,exports){
+},{"services/ResourceService":51}],35:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
+
+Vue.directive('resource-bind', {
+
+    params: [
+        'filters'
+    ],
+
+    bind: function()
+    {
+        var self = this;
+
+        ResourceService.watch( this.arg, function( value ) {
+
+            var paths  = self.expression.split('.');
+            for( var i = 0; i < paths.length; i++ )
+            {
+                var path = paths[i];
+                value = value[path];
+            }
+
+            var filters = self.params.filters || [];
+            for( var i = 0; i < filters.length; i++ )
+            {
+                var filter = Vue.filter( self.params.filters[i] );
+                value = filter.apply( null, [value, "EUR"] );
+            }
+
+            self.el.innerHTML = value;
+        });
+    }
+
+});
+
+},{"services/ResourceService":51}],36:[function(require,module,exports){
+var currencySymbolMap = require('currency-symbol-map');
+var accounting        = require('accounting');
+
+Vue.filter( 'formatMonetary', function( price, currency ) {
+
+  var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+  if (currencySymbol)
+  {
+      currency = currencySymbol;
+  }
+
+  // (%v = value, %s = symbol)
+  var options = {
+    symbol : currency,
+    decimal : ",",
+    thousand: ".",
+    precision : 2,
+    format: "%v %s"
+  };
+
+  return accounting.formatMoney(price, options);
+
+});
+
+},{"accounting":55,"currency-symbol-map":56}],37:[function(require,module,exports){
 Vue.filter( 'itemImage', function( item, baseUrl ) {
 
     var imageList = item.variationImageList;
@@ -30000,7 +29963,7 @@ Vue.filter( 'itemImage', function( item, baseUrl ) {
     return "";
 
 });
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 Vue.filter( 'itemName', function( item, selectedName ) {
 
     if(selectedName == '0' && item.name1 !== '')
@@ -30022,7 +29985,7 @@ Vue.filter( 'itemName', function( item, selectedName ) {
 
 });
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 Vue.filter( 'itemURL', function( item ) {
 
     var urlContent = item.itemDescription.urlContent.split("/");
@@ -30031,7 +29994,7 @@ Vue.filter( 'itemURL', function( item ) {
     return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
 
 });
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -30195,7 +30158,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":50,"services/WaitScreenService":55}],42:[function(require,module,exports){
+},{"services/NotificationService":49,"services/WaitScreenService":54}],41:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -30237,9 +30200,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":43,"services/CheckoutService":45}],43:[function(require,module,exports){
-arguments[4][41][0].apply(exports,arguments)
-},{"dup":41,"services/NotificationService":50,"services/WaitScreenService":55}],44:[function(require,module,exports){
+},{"services/ApiService":42,"services/CheckoutService":44}],42:[function(require,module,exports){
+arguments[4][40][0].apply(exports,arguments)
+},{"dup":40,"services/NotificationService":49,"services/WaitScreenService":54}],43:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30367,7 +30330,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":43}],45:[function(require,module,exports){
+},{"services/ApiService":42}],44:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30457,7 +30420,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":43}],46:[function(require,module,exports){
+},{"services/ApiService":42}],45:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30548,7 +30511,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -30572,7 +30535,7 @@ module.exports = (function($)
         );
     }
 });
-},{"services/ApiService":43}],48:[function(require,module,exports){
+},{"services/ApiService":42}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30704,7 +30667,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 var currencySymbolMap = require('currency-symbol-map');
 var accounting = require('accounting');
 
@@ -30735,7 +30698,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"accounting":56,"currency-symbol-map":57}],50:[function(require,module,exports){
+},{"accounting":55,"currency-symbol-map":56}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30908,7 +30871,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30934,23 +30897,12 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
-module.exports = (function( $, global ) {
+module.exports = (function( $ ) {
 
     var resources = {};
-    var queues = {};
-
-    if( !global.registerResource )
-    {
-        global.registerResource = registerResource;
-    }
-
-    if( !global.registerResourceList )
-    {
-        global.registerResourceList = registerResourceList;
-    }
 
     return {
         registerResource: registerResource,
@@ -30960,6 +30912,14 @@ module.exports = (function( $, global ) {
         bind: bind
     };
 
+    /**
+     * Register a new resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource} The created resource.
+     */
     function registerResource( name, route, initialValue )
     {
         if( !name )
@@ -30988,8 +30948,18 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new Resource( route, data );
+
+        return resources[name];
     }
 
+    /**
+     * Register a new list resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource}            The created resource.
+     */
     function registerResourceList( name, route, initialValue )
     {
         if( !name )
@@ -31018,8 +30988,16 @@ module.exports = (function( $, global ) {
         }
 
         resources[name] = new ResourceList( route, data );
+
+        return resources[name];
     }
 
+    /**
+     * Receive a registered resource by its name
+     * @param {string}  name    The name of the resource to receive
+     *
+     * @returns {Resource}      The resource
+     */
     function getResource( name )
     {
         if( !resources[name] )
@@ -31030,17 +31008,32 @@ module.exports = (function( $, global ) {
         return resources[name];
     }
 
+    /**
+     * Track changes of a given resource.
+     * @param {string}      name        The name of the resource to watch
+     * @param {function}    callback    The handler to call on each change
+     */
     function watch( name, callback )
     {
         getResource( name ).watch( callback );
     }
 
+    /**
+     * Bind a resource to a property of a vue instance.
+     * @param {string}  name        The name of the resource to bind
+     * @param {Vue}     vue         The vue instance
+     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
+     */
     function bind( name, vue, property )
     {
         property = property || name;
         getResource( name ).bind( vue, property );
     }
 
+    /**
+     * @class Observable
+     * Automatically notifies all attached listeners on any changes.
+     */
     function Observable()
     {
         var _value;
@@ -31067,18 +31060,27 @@ module.exports = (function( $, global ) {
         }
     }
 
+    /**
+     * @class Resource
+     * @param {string}  url             The url to bind the resource to
+     * @param {string}  initialValue    The initial value to assign to the resource
+     */
     function Resource( url, initialValue )
     {
         var data = new Observable();
         var ready = false;
 
+        // initialize resource
         if( !!initialValue )
         {
+            // initial value was given by constructor
             data.value = initialValue;
             ready = true;
         }
         else
         {
+            // no initial value given
+            // => get value from url
             ApiService
                 .get( url )
                 .done( function( response ) {
@@ -31091,9 +31093,35 @@ module.exports = (function( $, global ) {
             watch: watch,
             bind: bind,
             val: val,
-            set: set
+            set: set,
+            update: update,
+            listen: listen
         };
 
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
+
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
         function watch( cb )
         {
             if( typeof cb !== "function" )
@@ -31107,6 +31135,11 @@ module.exports = (function( $, global ) {
             }
         }
 
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {sting}   property    The property of the vue instance
+         */
         function bind( vue, property )
         {
             if( !vue )
@@ -31124,11 +31157,20 @@ module.exports = (function( $, global ) {
             } );
         }
 
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
         function val()
         {
             return data.value;
         }
 
+        /**
+         * Set the value of the resource.
+         * @param {*}   value   The value to set.
+         * @returns {Deferred}  The PUT request to the url of the resource
+         */
         function set( value )
         {
             return ApiService
@@ -31137,8 +31179,37 @@ module.exports = (function( $, global ) {
                     data.value = response;
                 } );
         }
+
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
+        }
     }
 
+    /**
+     * @class ResourceList
+     * @param {string}  url             The url to bind the resource to
+     * @param {string}  initialValue    The initial value to assign to the resource
+     */
     function ResourceList( url, initialValue )
     {
         var data = new Observable();
@@ -31170,9 +31241,35 @@ module.exports = (function( $, global ) {
             val: val,
             set: set,
             push: push,
-            remove: remove
+            remove: remove,
+            update: update,
+            listen: listen
         };
 
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
+        function listen( event, usePayload )
+        {
+            ApiService.listen( event, function( payload ) {
+                if( !!usePayload )
+                {
+                    update( payload[usePayload] );
+                }
+                else
+                {
+                    update();
+                }
+            });
+        }
+
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
         function watch( cb )
         {
             if( typeof cb !== "function" )
@@ -31187,6 +31284,11 @@ module.exports = (function( $, global ) {
             }
         }
 
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {sting}   property    The property of the vue instance
+         */
         function bind( vue, property )
         {
             if( !vue )
@@ -31204,11 +31306,21 @@ module.exports = (function( $, global ) {
             } );
         }
 
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
         function val()
         {
             return data.value;
         }
 
+        /**
+         * Set the value of a single element of this resource.
+         * @param {string|number}   key     The key of the element
+         * @param {*}               value   The value to set.
+         * @returns {Deferred}      The PUT request to the url of the resource
+         */
         function set( key, value )
         {
             return ApiService
@@ -31218,6 +31330,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Add a new element to this resource
+         * @param {*}   value   The element to add
+         * @returns {Deferred}  The POST request to the url of the resource
+         */
         function push( value )
         {
             return ApiService
@@ -31227,6 +31344,11 @@ module.exports = (function( $, global ) {
                 } );
         }
 
+        /**
+         * Remove an element from this resource
+         * @param {string|number}   key     The key of the element
+         * @returns {Deferred}              The DELETE request to the url of the resource
+         */
         function remove( key )
         {
             return ApiService
@@ -31235,10 +31357,34 @@ module.exports = (function( $, global ) {
                     data.value = response;
                 } );
         }
+
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
+        function update( value )
+        {
+            if( !!value )
+            {
+                data.value = value;
+                var deferred = $.Deferred();
+                deferred.resolve();
+                return deferred;
+            }
+            else
+            {
+                return ApiService
+                    .get( url )
+                    .done( function( response ) {
+                        data.value = response;
+                    });
+            }
+        }
     }
 
-})( jQuery, window );
-},{"services/ApiService":43}],53:[function(require,module,exports){
+})( jQuery );
+},{"services/ApiService":42}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31432,7 +31578,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31476,7 +31622,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],55:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31526,7 +31672,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -31941,7 +32087,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],57:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -31981,7 +32127,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":58}],58:[function(require,module,exports){
+},{"./map":57}],57:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -32101,7 +32247,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],59:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -32316,7 +32462,7 @@ module.exports =
   exports.infiniteScroll = infiniteScroll;
 
 }));
-},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40])
+},{}]},{},[2,3,4,5,6,1,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39])
 
 
 new Vue({
@@ -32427,7 +32573,21 @@ new Vue({
 
         $toggleBasketPreview.on('click', function(evt) {
             evt.preventDefault();
+            evt.stopPropagation();
             $('body').toggleClass('open-right');
+        });
+
+        $(document).on('click', 'body.open-right', function (evt)
+        {
+          if($("body").hasClass("open-right"))
+          {
+            if((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0))
+            {
+              evt.preventDefault();
+              $('body').toggleClass('open-right');
+            }
+          }
+
         });
 
         var $toggleListView = $('.toggle-list-view');

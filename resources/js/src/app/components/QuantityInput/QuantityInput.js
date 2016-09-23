@@ -14,7 +14,7 @@ Vue.component( 'quantity-input', {
     ready: function()
     {
         this.timeout = this.timeout || 300;
-        this.min = this.min || 0;
+        this.min = this.min || 1;
         this.max = this.max || 999;
 
         this.$watch( 'value', function( newValue ) {
