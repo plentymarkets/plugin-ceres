@@ -16,6 +16,9 @@
 		    z-index: 1020;
 		    background:$gray-lighter2;
 		    transition: all 0.4s ease;
+		    .navbar-toggler {
+		    	top:.75rem;
+		    }
 		    .navbar-brand {
 		    	img {
 		    		max-width: 70%;
