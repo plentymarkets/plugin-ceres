@@ -4150,6 +4150,16 @@ new Vue({
 
     function CallistoMain() {
 
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 1){  
+                $('.wrapper-main').addClass("sticky");
+              }
+              else{
+                $('.wrapper-main').removeClass("sticky");
+              }
+        });
+
         // Sticky sidebar single item
         if (window.matchMedia('(min-width: 768px)').matches) {
             $(".single-rightside").stick_in_parent({
