@@ -429,11 +429,10 @@ Vue.component('basket-preview', {
         };
     },
     
-    activate: function( done )
+    ready: function()
     {
         ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
-        done();
     },
 
     computed:
@@ -3329,9 +3328,9 @@ module.exports = (function( $ ) {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route )
+        if( !route && !initialValue )
         {
-            throw new Error("Cannot register resource. Route is required.");
+            throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
         if( resources.hasOwnProperty( name ) )
@@ -3369,9 +3368,9 @@ module.exports = (function( $ ) {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route )
+        if( !route && !initialValue )
         {
-            throw new Error("Cannot register resource. Route is required.");
+            throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
         if( resources.hasOwnProperty( name ) )
@@ -3479,7 +3478,7 @@ module.exports = (function( $ ) {
             data.value = initialValue;
             ready = true;
         }
-        else
+        else if( !!url )
         {
             // no initial value given
             // => get value from url
@@ -3489,6 +3488,10 @@ module.exports = (function( $ ) {
                     data.value = response;
                     ready = true;
                 } );
+        }
+        else
+        {
+            throw new Error( "Cannot initialize resource." );
         }
 
         return {
@@ -3575,11 +3578,21 @@ module.exports = (function( $ ) {
          */
         function set( value )
         {
-            return ApiService
-                .put( url, value )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .put(url, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -3596,13 +3609,17 @@ module.exports = (function( $ ) {
                 deferred.resolve();
                 return deferred;
             }
-            else
+            else if( !!url )
             {
                 return ApiService
                     .get( url )
                     .done( function( response ) {
                         data.value = response;
                     });
+            }
+            else
+            {
+                throw new Error( "Cannot update resource. Neither an URL nor a value is prodivded." );
             }
         }
     }
@@ -3627,7 +3644,7 @@ module.exports = (function( $ ) {
             data.value = initialValue;
             ready = true;
         }
-        else
+        else if( !!url )
         {
             ApiService
                 .get( url )
@@ -3635,6 +3652,10 @@ module.exports = (function( $ ) {
                     data.value = response;
                     ready = true;
                 } );
+        }
+        else
+        {
+            throw new Error( "Cannot initialize resource." );
         }
 
         return {
@@ -3725,11 +3746,21 @@ module.exports = (function( $ ) {
          */
         function set( key, value )
         {
-            return ApiService
-                .put( url + key , value )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .put(url + key, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -3744,6 +3775,26 @@ module.exports = (function( $ ) {
                 .done( function( response ) {
                     data.value = response;
                 } );
+
+            if( !!url )
+            {
+                return ApiService
+                    .post(url, value)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+
+                var list = data.value;
+                list.push( value );
+                data.value = list;
+
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
@@ -3753,11 +3804,25 @@ module.exports = (function( $ ) {
          */
         function remove( key )
         {
-            return ApiService
-                .delete( url + key )
-                .done( function( response ) {
-                    data.value = response;
-                } );
+            if( !!url )
+            {
+                return ApiService
+                    .delete(url + key)
+                    .done(function (response) {
+                        data.value = response;
+                    });
+            }
+            else
+            {
+                var deferred = $.Deferred();
+
+                var list = data.value;
+                list.splice( key, 1 );
+                data.value = list;
+
+                deferred.resolve();
+                return deferred;
+            }
         }
 
         /**
