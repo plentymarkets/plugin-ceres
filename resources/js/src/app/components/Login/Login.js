@@ -38,14 +38,14 @@ Vue.component('login', {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Callisto.accLoginSuccess).closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(3000);
                 })
                 .fail(function(response)
                 {
                     switch (response.code)
                     {
                         case 401:
-                            NotificationService.error(Translations.Callisto.accLoginFail).closeAfter(3000);
+                            NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
                             break;
                     }
                 });

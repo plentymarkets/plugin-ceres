@@ -4,7 +4,7 @@
             <span>${ attributeNames[$index+1] }</span>
             <select v-model="variantionSelectionModel[$index]" @change="onSelectChange()">
                 <option value="-1"
-                        v-if="!preselection" selected>{{ trans("PluginCallisto::Callisto.itemPleaseChoose") }}</option>
+                        v-if="!preselection" selected>{{ trans("PluginCallisto::Callisto.itemPleaseSelect") }}</option>
                 <option v-for="(attributeValueId, attributeValueName) in attribtuteValues"
                         value="${attributeValueId}"
                         :value="{'attributeId': attributeId, 'attributeValueId': attributeValueId}">
