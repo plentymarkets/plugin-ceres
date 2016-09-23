@@ -22,7 +22,7 @@
                     ${ paymentProvider.name }
                         <div>
                             <small>
-                                (<monetary-format :price="paymentProvider.fee" currency="{{ "EUR"}}"></monetary-format>)
+                                (${ paymentProvider.fee | currency })
                             </small>
                         </div>
                     </div>

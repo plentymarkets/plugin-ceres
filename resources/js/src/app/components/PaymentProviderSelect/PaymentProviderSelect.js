@@ -1,4 +1,3 @@
-var MonetaryFormatService = require('services/MonetaryFormatService');
 var APIService            = require('services/APIService');
 
 Vue.component('payment-provider-select', {

@@ -195,6 +195,23 @@
         "default"                           : "all"
     },
     {
+        "tab"                               : "Basket",
+        "key"                               : "basket.preview_data",
+        "label"                             : "Show basket preview information",
+        "type"                              : "multi_select",
+        "possibleValues"                    :
+        {
+            "basket.value_of_items_gross"   : "Gross value of items",
+            "basket.value_of_items_net"     : "Net value of items",
+            "basket.shipping_costs_gross"   : "Gross shipping costs",
+            "basket.shipping_costs_net"     : "Net shipping costs",
+            "basket.vat"                    : "VAT",
+            "basket.order_total_gross"      : "Total (gross)",
+            "basket.order_total_net"        : "Total (net)"
+        },
+        "default"                           : "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross"
+    },
+    {
         "tab"       : "Basket",
         "key"       : "basket.variations",
         "label"     : "Show Change variation button",

@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "repository": {
         "type": "git",
-        "url": "https://github.com/plentymarkets/layout-core-4.git"
+        "url": "https://github.com/plentymarkets/callisto-4.git"
     },
     "devDependencies": {
         "browserify": "^13.0.1",

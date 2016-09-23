@@ -11,7 +11,7 @@
 {% set isInfiniteScrolling = paginationType == "infiniteScroll" %}
 {% set pageIndicator = "1 - " ~ maxCount %}
 
-{% set itemName = config("PluginCallisto.item.name") %}
+{% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
 {% if defaultItemPerPage < maxCount and not isInfiniteScrolling %}

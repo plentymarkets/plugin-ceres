@@ -1,21 +1,23 @@
 var ResourceService       = require('services/ResourceService');
-var ModalService          = require('services/ModalService');
 
-Vue.component('basket-preview', {
+Vue.component('basket-list', {
 
-    template: '#vue-basket-preview',
+    template: '#vue-basket-list',
+
+    props: [
+        "size"
+    ],
 
     data: function()
     {
         return {
-            basket: {},
             basketItems: []
         };
     },
-    
+
     ready: function()
     {
-        ResourceService.bind( "basket", this );
         ResourceService.bind( "basketItems", this );
+        this.size = this.size || "large";
     }
 });
