@@ -39,7 +39,7 @@
                         </div>
 
                         <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderPayment") }}</h3>
+                            <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
                         </header>
                         <div class="payment-method-select">
                             <payment-provider-select :payment-provider-list="{{ services.checkout.getMethodOfPaymentList() | json_encode() }}"></payment-provider-select>

@@ -85,7 +85,7 @@ Vue.component('item-list-sort', {
 
             if (this.topCell == true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopSeller});
+                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopItems});
             }
             if (this.itemAsc == true)
             {
