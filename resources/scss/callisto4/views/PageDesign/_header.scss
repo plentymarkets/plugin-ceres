@@ -76,8 +76,12 @@
 				font-size: .8rem;
 				display: inline-block;
 				color: $gray-lighter;
-				span {
-					display: none;
+			}
+			#login-change {
+				a {
+					span {
+						display: inline-block;
+					}
 				}
 			}
 
@@ -259,13 +263,15 @@
 		.list-inline{
 
 			.list-inline-item{
-
-				&>span>a,
-				&>a{
-					span {
-						display: inline-block;
+				
+				#login-change {
+					a {
+						span {
+							display: inline-block;
+						}
 					}
 				}
+				
 			}
 		}
 	}
