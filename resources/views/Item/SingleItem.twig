@@ -1,4 +1,5 @@
 {% extends "PluginCallisto::PageDesign" %}
+{{ component( "PluginCallisto::Basket.Components.AddToBasket" ) }}
 
 {% set itemData = config("PluginCallisto.item.data") | split(', ') %}
 {% set configItemName = config("PluginCallisto.item.name") %}
@@ -262,7 +263,7 @@
               <ul class="crosssellers list-unstyled row">
                 {% for crossSellingItem in crossSellingList %}
                   <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                    {% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}
+                    {% include "PluginCallisto::Category.Item.Partials.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}
                   </li>
                 {% endfor %}
               </ul>
@@ -274,7 +275,7 @@
 
         <h3 class="m-t-3 m-b-1">{{ trans("PluginCallisto::Callisto.itemCustomerFeedback") }}</h3>
         <div class="row m-b-3">
-            {% include "PluginCallisto::Templates.ItemRating.ItemRatingSection" %}
+            {% include "PluginCallisto::Item.Partials.ItemRating" %}
         </div>
 
     </div>

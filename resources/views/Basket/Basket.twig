@@ -1,4 +1,7 @@
 {% extends "PluginCallisto::PageDesign" %}
+{{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
+{{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
+{{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
 {% block PageBody %}
 <div class="basket container">

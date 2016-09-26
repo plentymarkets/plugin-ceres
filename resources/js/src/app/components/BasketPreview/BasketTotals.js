@@ -24,7 +24,7 @@ Vue.component('basket-totals', {
     {
         showProperty: function( name )
         {
-            return this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
+            return !this.config || this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
         }
     }
 });

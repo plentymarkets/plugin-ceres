@@ -1,4 +1,10 @@
 {% extends "PluginCallisto::PageDesign" %}
+{{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+{{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
+{{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
+{{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
+{{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
+{{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
 {% block PageBody %}
 

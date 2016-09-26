@@ -1,5 +1,9 @@
 {% extends "PluginCallisto::PageDesign" %}
 
+{{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+{{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
+{{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
+
 {% block PageBody %}
 
 {% set userObject = services.customer.getContact() %}
@@ -70,7 +74,6 @@
 
 {{ services.customer.getOrders() }}
 
-	<!-- Auftragshistorie -->
 
 <order-history order-max-count-pagination="{{ services.customer.getOrders()|length }}" contact-id="{{ frontend.Account.AccountContactId }}"></order-history>
 

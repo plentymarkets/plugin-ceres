@@ -1,0 +1,71 @@
+{{ component( "PluginCallisto::Item.Components.QuantityInput" ) }}
+
+<article class="cmp cmp-basket-item m-b-3 p-b-1">
+
+    <a class="item-image" :href="basketItem.variation | itemURL">
+        <img :src="basketItem.variation | itemImage">
+    </a>
+
+    <div class="item-quantity">
+
+        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity"></quantity-input>
+
+        <div class="item-unit-price">
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
+        </div>
+
+        <div class="item-total-price">
+            ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
+        </div>
+
+        {#<div class="item-remove" @click="deleteItem">#}
+        {#{{ trans("PluginCallisto::Callisto.generalDelete") }} <i class="fa fa-times"></i>#}
+        {#</div>#}
+
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+              <span class="message" v-if="!deleteConfirmed">
+                   {{ trans("PluginCallisto::Callisto.generalDelete") }}
+              </span>
+            <span class="message" v-else>
+                   {{ trans("PluginCallisto::Callisto.generalDeleteNow") }}
+              </span>
+            <span class="btn-label" @click.stop="resetDelete">
+                  <i class="fa fa-times"></i>
+              </span>
+        </button>
+    </div>
+
+    <div class="item-details small">
+        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
+        <a class="clearfix" :href="basketItem.variation | itemURL">
+            <div class="item-name">
+                ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
+            </div>
+        </a>
+
+        <p class="id">
+            <strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
+        </p>
+
+        <div class="item-description">
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
+                <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
+            </div>
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
+                <span class="col-xs-6 col-sm-7">TODO</span>
+            </div>
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
+                <span class="col-xs-6 col-sm-7">
+            {% set availabilityData = services.availability.getAvailabilityById(1) %}
+          </span>
+            </div>
+            <p class="m-y-1">
+                {!! basketItem.variation.itemDescription.description !!}
+            </p>
+        </div>
+        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }"></label>
+    </div>
+</article>
