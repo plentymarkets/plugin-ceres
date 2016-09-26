@@ -1,6 +1,4 @@
 {% extends "PluginCallisto::PageDesign" %}
-{{ component( "PluginCallisto::Category.Item.Components.ItemListSort" ) }}
-{{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
 
 {% set defaultItemPerPage = config("PluginCallisto.sort.defaultItemPerPage") %}
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
@@ -24,6 +22,10 @@
 {% endif %}
 
 {% block PageBody %}
+
+    {{ component( "PluginCallisto::Category.Item.Components.ItemListSort" ) }}
+    {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
+
     <div class="categoriegrid container">
         <div class="row m-t-3 m-b-2">
             <div class="col-xs-12">

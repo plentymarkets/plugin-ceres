@@ -1,12 +1,13 @@
 {% extends "PluginCallisto::PageDesign" %}
-{{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
-{{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
-{{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
-{{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
-{{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
-{{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
 {% block PageBody %}
+
+    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
+    {{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
+    {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
+    {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
     <user-login-watcher user-logged-in="false" route="/login" is-user-logged-in="{{ frontend.Account.getIsAccountLoggedIn | json_encode() }}"></user-login-watcher>
 
