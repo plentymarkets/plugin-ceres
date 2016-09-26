@@ -8,16 +8,13 @@
 {% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
 {% set maxCount = paginatedResult.getTotalCount() %}
 {% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
-{% set isInfiniteScrolling = paginationType == "infiniteScroll" %}
 {% set pageIndicator = "1 - " ~ maxCount %}
 
-{% set itemName = config("PluginCallisto.item.name") %}
+{% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
-{% if defaultItemPerPage < maxCount and not isInfiniteScrolling %}
+{% if defaultItemPerPage < maxCount  %}
     {% set pageIndicator = ((currentPage * defaultItemPerPage) - defaultItemPerPage + 1) ~ " - " ~ ((currentPage * defaultItemPerPage) > maxCount ? maxCount : (currentPage * defaultItemPerPage)) %}
-{% elseif isInfiniteScrolling and not (defaultItemPerPage > maxCount) %}
-    {% set pageIndicator = "1 - " ~ (currentPage * defaultItemPerPage) %}
 {% endif %}
 
 {% block PageBody %}
@@ -53,42 +50,23 @@
                         </div>
                     </div>
 
-                    {% if not isInfiniteScrolling
-                        and paginationType == "top"
-                        or paginationType == "top_bottom" %}
                         <div class="col-xs-12 col-sm-6 m-b-1">
                             <item-list-pagination pagination-position="{{ paginationType }}"
                                                   position="top" max-count="{{ maxCount }}">
                             </item-list-pagination>
                         </div>
-                    {% endif %}
                 </div>
 
                 <hr class="m-b-1 hidden-sm-down">
-
-                {% if isInfiniteScrolling %}
-                <infinite-scroll-item-list inline-template
-                                           :infinite-config="{'limit': {{ defaultItemPerPage }}, 'offset': {{ defaultItemPerPage }}}">
-                    {% endif %}
-                    <ul class="product-list row grid"
-                            {% if isInfiniteScrolling %}
-                        v-infinite-scroll="loadMoreItems('{{ category.id }}')"
-                        infinite-scroll-disabled="isBusy"
-                        infinite-scroll-distance="100"
-                            {% endif %}>
+                    <ul class="product-list row grid">
                         {% for item in itemList %}
                             <li>
                               {% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': item } %}
                             </li>
                         {% endfor %}
                     </ul>
-                    {% if isInfiniteScrolling %}</infinite-scroll-item-list>{% endif %}
-
                 <hr class="m-y-2">
 
-                {% if not isInfiniteScrolling
-                    and paginationType == "bottom"
-                    or paginationType == "top_bottom" %}
                     <div class="list-controls m-b-3 row">
                         <div class="col-xs-12">
                             <item-list-pagination
@@ -98,7 +76,6 @@
                         </div>
 
                     </div>
-                {% endif %}
             </div>
         </div>
     </div>

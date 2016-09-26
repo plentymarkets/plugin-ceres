@@ -1,5 +1,3 @@
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
 Vue.component('shipping-profile-select', {
 
     template: '#vue-shipping-profile-select',

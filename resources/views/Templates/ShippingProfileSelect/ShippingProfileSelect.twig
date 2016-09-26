@@ -18,7 +18,7 @@
                         ${ shippingProfile.name }
                         <div>
                             <small>
-                                (<monetary-format :price="shippingProfile.price" currency="{{ "EUR"}}"></monetary-format>)
+                                (${ shippingProfile.price | currency })
                             </small>
                         </div>
                     </div>

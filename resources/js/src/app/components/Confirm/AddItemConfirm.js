@@ -1,9 +1,3 @@
-var BasketService         = require('services/BasketService');
-var ApiService            = require('services/ApiService');
-var NotificationService   = require('services/NotificationService');
-var ModalService          = require('services/ModalService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
-
 Vue.component('add-item-confirm', {
 
     props: [

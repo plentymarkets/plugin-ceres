@@ -1,7 +1,7 @@
 {% extends "PluginCallisto::PageDesign" %}
 
 {% set itemData = config("PluginCallisto.item.data") | split(', ') %}
-{% set itemName = config("PluginCallisto.item.name") %}
+{% set configItemName = config("PluginCallisto.item.name") %}
 {% set basePrice = getBasePrice( item.variationBase.id ) %}
 
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
@@ -47,17 +47,7 @@
             </h6>
 
             <h1 class="h3 title">
-                {% if itemName == '0' and item.itemDescription.name1 != '' %}
-                    {{ item.itemDescription.name1 }}
-                {% elseif itemName == '1' and item.itemDescription.name2 != '' %}
-                    {{ item.itemDescription.name2 }}
-                {% elseif itemName == '2' and item.itemDescription.name3 != '' %}
-                    {{ item.itemDescription.name3 }}
-                {% else %}
-                    {{ item.itemDescription.name1 }}
-                {% endif %}
-
-                {{ item.variationBase.variationName }}
+                {{ item.itemDescription | itemName(configItemName) }} {{ item.variationBase.variationName }}
             </h1>
 
             {% if ('item.shortDescription' in itemData or 'all' in itemData) and item.itemDescription.shortDescription != '' %}
@@ -84,13 +74,13 @@
             {% if ('item.recommendedPrice' in itemData or 'all' in itemData) and item.variationRecommendedRetailPrice.price > 0 %}
               <div class="crossprice">
                   <del class="text-muted small">
-                      <monetary-format price="{{ item.variationRecommendedRetailPrice.price }}" currency="{{ item.variationRetailPrice.currency }}"></monetary-format>
+                    {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                   </del>
               </div>
             {% endif %}
 
             <span class="price h1">
-                <monetary-format price="{{ item.variationRetailPrice.price }}" currency="{{ item.variationRetailPrice.currency}}"></monetary-format>
+                {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                 <sup>*</sup>
             </span>
             <div class="base-price text-muted m-y-1">

@@ -8,18 +8,19 @@
         </header>
 
         <div class="p-a-1 list">
-          <div class="cmp cmp-basket-preview-list" v-if="checkBasket">
-            <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
+          <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
+              <basket-list size="small"></basket-list>
           </div>
           <h5 v-else>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
         </div>
+
         <div class="p-a-1 bg-faded totals">
 
-        {% include "PluginCallisto::Templates.BasketTotalSum.BasketPreviewTotalSum" %}
+            <basket-totals :config="{{ config("PluginCallisto.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="Warenkorb">
+                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="Warenkorb">
                         {{ trans("PluginCallisto::Callisto.basketToBasket") }} <i class="fa fa-shopping-cart"></i>
                     </a>
                 </div>
