@@ -1,3 +1,4 @@
+{% import "PluginCallisto::PageDesign.Macros.IncludeComponents" as Loader %}
 {{ component( "PluginCallisto::PageDesign.Components.Notifications" ) }}
 {{ component( "PluginCallisto::Basket.Components.BasketPreview" ) }}
 {{ component( "PluginCallisto::Customer.Components.Login" ) }}
@@ -83,9 +84,7 @@
             <!-- ./REGISTRATION MODAL -->
         </div>
 
-        {% for component in get_components() %}
-            {% include component %}
-        {% endfor %}
+        {{ Loader.include_components() }}
 
         <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
         <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
