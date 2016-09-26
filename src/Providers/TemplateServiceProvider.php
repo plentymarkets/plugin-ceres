@@ -16,12 +16,12 @@ use LayoutCore\Helper\CategoryKey;
 
 class TemplateServiceProvider extends ServiceProvider
 {
-    public function register():void
+    public function register()
     {
         
     }
     
-    public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config):void
+    public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
@@ -88,11 +88,22 @@ class TemplateServiceProvider extends ServiceProvider
 
         // provide mapped category IDs
         $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap, $config) {
-            $categoryMap->setCategoryMap(array (
-                CategoryKey::HOME           => $config->get("PluginCallisto.global.category.home"),
-                CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCallisto.global.category.page_not_found"),
-                CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCallisto.global.category.item_not_found")
-            ));
+            if(!is_null($config))
+            {
+                $categoryMap->setCategoryMap(array (
+                                                 CategoryKey::HOME           => $config->get("PluginCallisto.global.category.home"),
+                                                 CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCallisto.global.category.page_not_found"),
+                                                 CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCallisto.global.category.item_not_found")
+                                             ));
+            }
+            else
+            {
+                $categoryMap->setCategoryMap(array (
+                                                 CategoryKey::HOME           => "",
+                                                 CategoryKey::PAGE_NOT_FOUND => "",
+                                                 CategoryKey::ITEM_NOT_FOUND => ""
+                                             ));
+            }
         }, 0);
 	}
 }
