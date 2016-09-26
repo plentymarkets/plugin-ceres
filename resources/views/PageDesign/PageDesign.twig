@@ -1,3 +1,4 @@
+{% import "PluginCallisto::PageDesign.Macros.IncludeComponents" as Loader %}
 {{ component( "PluginCallisto::PageDesign.Components.Notifications" ) }}
 {{ component( "PluginCallisto::Basket.Components.BasketPreview" ) }}
 {{ component( "PluginCallisto::Customer.Components.Login" ) }}
@@ -10,7 +11,7 @@
 <html lang="{{ lang }}" data-framework="vue">
 
     <head>
-        {% include "PluginCallisto::PageDesign.Head" %}
+        {% include "PluginCallisto::PageDesign.Partials.Head" %}
     </head>
 
     <body>
@@ -28,7 +29,7 @@
 
         <div class="wrapper wrapper-main">
 
-            {% include "PluginCallisto::PageDesign.Header.Header" %}
+            {% include "PluginCallisto::PageDesign.Partials.Header.Header" %}
 
             <div class="main" id="page-body">
                 {% block PageBody %}
@@ -36,7 +37,7 @@
                 {% endblock %}
             </div>
 
-            {% include "PluginCallisto::PageDesign.Footer" %}
+            {% include "PluginCallisto::PageDesign.Partials.Footer" %}
         </div>
 
         <div class="wrapper wrapper-right">
@@ -83,9 +84,7 @@
             <!-- ./REGISTRATION MODAL -->
         </div>
 
-        {% for component in get_components() %}
-            {% include component %}
-        {% endfor %}
+        {{ Loader.include_components() }}
 
         <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
         <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>

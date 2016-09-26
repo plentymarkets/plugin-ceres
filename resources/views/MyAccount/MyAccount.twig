@@ -1,12 +1,12 @@
-{% extends "PluginCallisto::PageDesign" %}
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
 
-{{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
-{{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
-{{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
 
 {% block PageBody %}
 
-{% set userObject = services.customer.getContact() %}
+    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
+    {% set userObject = services.customer.getContact() %}
 
 	<div class="myaccount container m-y-3">
 

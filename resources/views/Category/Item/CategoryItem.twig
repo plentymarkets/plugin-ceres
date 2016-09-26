@@ -1,6 +1,4 @@
-{% extends "PluginCallisto::PageDesign" %}
-{{ component( "PluginCallisto::Category.Item.Components.ItemListSort" ) }}
-{{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
 
 {% set defaultItemPerPage = config("PluginCallisto.sort.defaultItemPerPage") %}
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
@@ -24,6 +22,10 @@
 {% endif %}
 
 {% block PageBody %}
+
+    {{ component( "PluginCallisto::Category.Item.Components.ItemListSort" ) }}
+    {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
+
     <div class="categoriegrid container">
         <div class="row m-t-3 m-b-2">
             <div class="col-xs-12">
@@ -70,22 +72,22 @@
                 <hr class="m-b-1 hidden-sm-down">
 
                 {# TODO: remove inifinite scroll #}
-                {#{% if isInfiniteScrolling %}#}
-                {#<infinite-scroll-item-list inline-template :infinite-config="{'limit': {{ defaultItemPerPage }}, 'offset': {{ defaultItemPerPage }}}">#}
-                    {#{% endif %}#}
-                    {#<ul class="product-list row grid"#}
-                            {#{% if isInfiniteScrolling %}#}
-                        {#v-infinite-scroll="loadMoreItems('{{ category.id }}')"#}
-                        {#infinite-scroll-disabled="isBusy"#}
-                        {#infinite-scroll-distance="100"#}
-                            {#{% endif %}>#}
-                        {#{% for item in itemList %}#}
-                            {#<li>#}
-                              {#{% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': item } %}#}
-                            {#</li>#}
-                        {#{% endfor %}#}
-                    {#</ul>#}
-                    {#{% if isInfiniteScrolling %}</infinite-scroll-item-list>{% endif %}#}
+                {% if isInfiniteScrolling %}
+                <infinite-scroll-item-list inline-template :infinite-config="{'limit': {{ defaultItemPerPage }}, 'offset': {{ defaultItemPerPage }}}">
+                    {% endif %}
+                    <ul class="product-list row grid"
+                            {% if isInfiniteScrolling %}
+                        v-infinite-scroll="loadMoreItems('{{ category.id }}')"
+                        infinite-scroll-disabled="isBusy"
+                        infinite-scroll-distance="100"
+                            {% endif %}>
+                        {% for item in itemList %}
+                            <li>
+                              {% include "PluginCallisto::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if isInfiniteScrolling %}</infinite-scroll-item-list>{% endif %}
 
                 <hr class="m-y-2">
 

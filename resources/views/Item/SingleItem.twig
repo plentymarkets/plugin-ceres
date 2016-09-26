@@ -1,5 +1,4 @@
-{% extends "PluginCallisto::PageDesign" %}
-{{ component( "PluginCallisto::Basket.Components.AddToBasket" ) }}
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
 
 {% set itemData = config("PluginCallisto.item.data") | split(', ') %}
 {% set configItemName = config("PluginCallisto.item.name") %}
@@ -8,6 +7,8 @@
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
 
 {% block PageBody %}
+    {{ component( "PluginCallisto::Basket.Components.AddToBasket" ) }}
+    {{ component( "PluginCallisto::Basket.Components.AddItemConfirm" ) }}
     <div class="single container">
         <div class="row m-t-3">
 
