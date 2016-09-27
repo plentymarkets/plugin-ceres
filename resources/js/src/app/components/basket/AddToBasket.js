@@ -1,4 +1,4 @@
-var BasketService       = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -28,17 +28,17 @@ Vue.component('add-to-basket', {
 
             $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
-            BasketService.addBasketItem({
-                variationId: this.basketItem.variationBase.id,
-                quantity   : this.quantity
-            }).done(function()
+            ResourceService
+              .getResource( 'basketItems' )
+              .push({'variationId': this.basketItem.variationBase.id, 'quantity': this.quantity})
+              .done(function()
             {
-                addItemModal.show();
+              addItemModal.show();
             })
-                .fail(function()
-                {
-                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
-                });
+              .fail(function()
+              {
+                  NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
+              });
         },
 
         quantityPlus: function()
