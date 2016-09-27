@@ -49,10 +49,10 @@
 </header>
 
 <div class="container">
-    {% include "PluginCallisto::PageDesign.Header.Navigation" %}
+    {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
 
     <!-- breadcrumb -->
     {% if not services.category.isHome() %}
-        {% include "PluginCallisto::PageDesign.Header.Breadcrumb" with {'categoryTree': services.category.getCategoryTreeAsList()} %}
+        {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" with {'categoryTree': services.category.getCategoryTreeAsList()} %}
     {% endif %}
 </div>

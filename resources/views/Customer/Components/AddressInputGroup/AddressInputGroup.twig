@@ -14,7 +14,7 @@
                 :selected-state-id.sync="addressData.stateId"
                 country-data="{{ services.country.getActiveCountriesList() | json_encode() }}"
                 country-name-map="{{ services.country.getActiveCountryNameMap("DE")| json_encode() }}"
-            />
+            ></country-select>
         </div>
     </div>
 

@@ -11,7 +11,7 @@
 <html lang="{{ lang }}" data-framework="vue">
 
     <head>
-        {% include "PluginCallisto::PageDesign.Head" %}
+        {% include "PluginCallisto::PageDesign.Partials.Head" %}
     </head>
 
     <body>
@@ -29,7 +29,7 @@
 
         <div class="wrapper wrapper-main">
 
-            {% include "PluginCallisto::PageDesign.Header.Header" %}
+            {% include "PluginCallisto::PageDesign.Partials.Header.Header" %}
 
             <div class="main" id="page-body">
                 {% block PageBody %}
@@ -37,7 +37,7 @@
                 {% endblock %}
             </div>
 
-            {% include "PluginCallisto::PageDesign.Footer" %}
+            {% include "PluginCallisto::PageDesign.Partials.Footer" %}
         </div>
 
         <div class="wrapper wrapper-right">
