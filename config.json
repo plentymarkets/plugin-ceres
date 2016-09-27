@@ -234,8 +234,7 @@
         {
           "top"             : "Top",
           "bottom"          : "Bottom",
-          "top_bottom"      : "Top and bottom",
-          "infiniteScroll"  : "Infinite scrolling"
+          "top_bottom"      : "Top and bottom"
         },
         "default"           : "top"
     },

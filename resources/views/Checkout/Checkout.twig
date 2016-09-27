@@ -1,6 +1,13 @@
-{% extends "PluginCallisto::PageDesign" %}
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
 
 {% block PageBody %}
+
+    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
+    {{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
+    {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
+    {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
     <user-login-watcher user-logged-in="false" route="/login" is-user-logged-in="{{ frontend.Account.getIsAccountLoggedIn | json_encode() }}"></user-login-watcher>
 
@@ -44,14 +51,6 @@
                         <div class="payment-method-select">
                             <payment-provider-select :payment-provider-list="{{ services.checkout.getMethodOfPaymentList() | json_encode() }}"></payment-provider-select>
                         </div>
-                        <!-- <form id="legalForm" class="" method="get" action="">
-                            <div>
-                                <input id="newsletterCheck" type="checkbox" value="1" name="NewsletterCheck">
-                                <label>
-                                    Bitte senden Sie mir regelmäßig Informationen zu Ihrem Produktsortiment per E-Mail zu. Ihren Newsletter kann ich jederzeit wieder abbestellen.
-                                </label>
-                            </div>
-                        </form> -->
                     </div>
                 </div>
 
