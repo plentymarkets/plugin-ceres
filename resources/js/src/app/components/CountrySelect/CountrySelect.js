@@ -19,6 +19,9 @@ Vue.component('country-select', {
         };
     },
 
+    /**
+     * get shipping countries
+     */
     created: function()
     {
         this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);

@@ -15,6 +15,9 @@ Vue.component('basket-totals', {
         };
     },
 
+    /**
+     * bind to basket
+     */
     ready: function()
     {
         ResourceService.bind( "basket", this );
@@ -22,6 +25,11 @@ Vue.component('basket-totals', {
 
     methods:
     {
+        /**
+         * 
+         * @param name
+         * @returns {boolean}
+         */
         showProperty: function( name )
         {
             return this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;

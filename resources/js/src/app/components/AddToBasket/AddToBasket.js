@@ -21,6 +21,10 @@ Vue.component('add-to-basket', {
 
     methods: {
 
+        /**
+         * add an item to the basket
+         * @param quantity
+         */
         addToBasket: function(quantity)
         {
             var addItemModal = ModalService.findModal($(this.$el.parentElement));
@@ -41,11 +45,17 @@ Vue.component('add-to-basket', {
                 });
         },
 
+        /**
+         * item quantity + 1
+         */
         quantityPlus: function()
         {
             this.quantity++;
         },
 
+        /**
+         * item quantity - 1
+         */
         quantityMinus: function()
         {
             if (this.quantity > 1)

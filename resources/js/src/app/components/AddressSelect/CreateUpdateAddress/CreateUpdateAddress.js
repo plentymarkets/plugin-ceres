@@ -14,6 +14,9 @@ Vue.component('create-update-address', {
     ],
 
     methods: {
+        /**
+         * validate the address fields
+         */
         validate: function()
         {
             var self = this;
@@ -29,6 +32,9 @@ Vue.component('create-update-address', {
 
         },
 
+        /**
+         * save the new address or update an existing one
+         */
         saveAddress: function()
         {
             if (this.modalType === "create")
@@ -41,6 +47,9 @@ Vue.component('create-update-address', {
             }
         },
 
+        /**
+         * update an address
+         */
         updateAddress: function()
         {
             AddressService
@@ -60,6 +69,9 @@ Vue.component('create-update-address', {
                 }.bind(this));
         },
 
+        /**
+         * create a new address
+         */
         createAddress: function()
         {
             AddressService
