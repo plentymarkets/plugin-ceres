@@ -18,10 +18,6 @@
             ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
         </div>
 
-        {#<div class="item-remove" @click="deleteItem">#}
-        {#{{ trans("PluginCallisto::Callisto.generalDelete") }} <i class="fa fa-times"></i>#}
-        {#</div>#}
-
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
                    {{ trans("PluginCallisto::Callisto.generalDelete") }}
