@@ -28,22 +28,22 @@ class TemplateServiceProvider extends ServiceProvider
         
         // provide template to use for content categories
         $eventDispatcher->listen('tpl.category.content', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Category.CategoryContent");
+            $container->setTemplate("PluginCallisto::Category.Content.CategoryContent");
         }, 0);
 
         // provide template to use for item categories
         $eventDispatcher->listen('tpl.category.item', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Category.Item.ItemCategoryView");
+            $container->setTemplate("PluginCallisto::Category.Item.CategoryItem");
         }, 0);
 
         // provide template to use for blog categories
         $eventDispatcher->listen('tpl.category.blog', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::PageDesign");
+            $container->setTemplate("PluginCallisto::PageDesign.PageDesign");
         }, 0);
 
         // provide template to use for container categories
         $eventDispatcher->listen('tpl.category.container', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::PageDesign");
+            $container->setTemplate("PluginCallisto::PageDesign.PageDesign");
         }, 0);
 
         // provide template to use for single items
@@ -68,22 +68,22 @@ class TemplateServiceProvider extends ServiceProvider
 
         // provide template to use for confirmation
         $eventDispatcher->listen('tpl.confirmation', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Confirmation.Confirmation");
+            $container->setTemplate("PluginCallisto::Checkout.OrderConfirmation");
         }, 0);
 
         // provide template to use for login
         $eventDispatcher->listen('tpl.login', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::LoginPage.LoginPage");
+            $container->setTemplate("PluginCallisto::Customer.Login");
         }, 0);
 
         // provide template to use for register
         $eventDispatcher->listen('tpl.register', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::RegisterPage.RegisterPage");
+            $container->setTemplate("PluginCallisto::Customer.Register");
         }, 0);
 
         // provide template to use for guest
         $eventDispatcher->listen('tpl.guest', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Guest.Guest");
+            $container->setTemplate("PluginCallisto::Customer.Guest");
         }, 0);
 
         // provide mapped category IDs

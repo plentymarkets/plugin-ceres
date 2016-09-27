@@ -1,0 +1,31 @@
+{{ component( "PluginCallisto::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
+<script type="x/template" id="vue-registration">
+	<div class="row" id="registration${_uid}">
+        <div class="col-sm-12">
+            <div class="input-unit" data-validate="mail">
+                <input type="text" name="email" id="txt_email" v-model="username">
+                <label for="txt_email">{{ trans("PluginCallisto::Callisto.accEmail") }}*</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6" v-if="!guestMode">
+            <div class="input-unit" id="passwordBox" data-validate="text">
+                <input type="password" name="password" id="registrationPasswordInput" v-model="password">
+                <label for="txt_pw">{{ trans("PluginCallisto::Callisto.accPassword") }}*</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6" v-if="!guestMode">
+            <div class="input-unit" id="passwordRepeatBox" data-validate="text|ref">
+                <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registrationPasswordInput">
+                <label for="txt_pwrepeat">{{ trans("PluginCallisto::Callisto.accRepeatPassword") }}*</label>
+            </div>
+        </div>
+
+        <address-input-group v-if="!isSimpleRegistration" :address-data.sync="billingAddress"></address-input-group>
+
+        <div class="col-sm-5 offset-sm-7">
+            <button @click="validateRegistration" class="btn btn-primary btn-block">{{ trans("PluginCallisto::Callisto.accRegister") }}</button>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,76 @@
+{% set image = item.variationImageList | first %}
+
+<article class="cmp cmp-product-thumb grid">
+    <div class="thumb-inner">
+        <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
+            <div class="square-container">
+                <div class="square-inner center-xy main-image">
+                    <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+                </div>
+            </div>
+        </a>
+
+        {% if item.itemBase.storeSpecial > 0 %}
+            <div class="special-tags tl v">
+                {% if  item.itemBase.storeSpecial == 1 %}
+
+                    {% set storeSpecialColor = 'danger' %}
+                    {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
+
+                    {% if percent <= 0 %}
+                        {% set dezimalcount = config('PluginCallisto.item.storeSpecial') %}
+                        {% set percent = percent | number_format(dezimalcount, ',', '.') %}
+                        {% set storeSpecial = percent ~"%" %}
+                    {% else %}
+                        {% set storeSpecial = "SALE" %}
+                    {% endif %}
+
+                {% elseif  item.itemBase.storeSpecial == 2 %}
+
+                    {% set storeSpecial = "NEW" %}
+                    {% set storeSpecialColor = 'primary' %}
+
+                {% elseif  item.itemBase.storeSpecial == 3 %}
+
+                    {% set storeSpecial = "Top" %}
+                    {% set storeSpecialColor = 'success' %}
+
+                {% endif %}
+
+                <span class="special-tag bg-{{storeSpecialColor}}">
+                    {{ storeSpecial }}
+                </span>
+
+            </div>
+        {% endif %}
+
+        <div class="thumb-content">
+            <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-title small">
+                {{ item.itemDescription | itemName(configItemName) }}
+                {{ item.variationBase.variationName }}
+            </a>
+            <div class="thumb-meta">
+                <div class="prices">
+                    {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
+                        and item.variationRecommendedRetailPrice.price != '' %}
+                        <del class="crossprice">
+                            {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                        </del>
+                    {% endif %}
+
+                    <div class="price">
+                        {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="thumb-controls">
+                <button class="btn btn-sm btn-outline-primary btn-block" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">
+                    {{ trans("PluginCallisto::Callisto.basket") }}
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
