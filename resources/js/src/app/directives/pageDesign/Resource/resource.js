@@ -1,7 +1,7 @@
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
-    priority: 10000,
+    priority: 3000,
     params: [
         'name',
         'route',
@@ -33,7 +33,7 @@ Vue.elementDirective('resource', {
 });
 
 Vue.elementDirective('resource-list', {
-    priority: 10000,
+    priority: 3000,
     params: [
         'name',
         'route',

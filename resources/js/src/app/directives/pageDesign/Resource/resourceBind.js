@@ -2,6 +2,7 @@ var ResourceService = require('services/ResourceService');
 
 Vue.directive('resource-bind', {
 
+    priority: -1000,
     params: [
         'filters'
     ],
@@ -9,7 +10,6 @@ Vue.directive('resource-bind', {
     bind: function()
     {
         var self = this;
-
         ResourceService.watch( this.arg, function( value ) {
 
             var paths  = self.expression.split('.');
@@ -23,7 +23,10 @@ Vue.directive('resource-bind', {
             for( var i = 0; i < filters.length; i++ )
             {
                 var filter = Vue.filter( self.params.filters[i] );
-                value = filter.apply( null, [value] );
+                if( !!filter )
+                {
+                    value = filter.apply( null, [value] );
+                }
             }
 
             self.el.innerHTML = value;
