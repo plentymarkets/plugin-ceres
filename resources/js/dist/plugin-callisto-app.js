@@ -29,7 +29,7 @@ Vue.component('add-item-confirm', {
 });
 
 },{}],2:[function(require,module,exports){
-var BasketService       = require('services/BasketService');
+var ResourceService       = require('services/ResourceService');
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -59,17 +59,17 @@ Vue.component('add-to-basket', {
 
             $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
-            BasketService.addBasketItem({
-                variationId: this.basketItem.variationBase.id,
-                quantity   : this.quantity
-            }).done(function()
+            ResourceService
+              .getResource( 'basketItems' )
+              .push({'variationId': this.basketItem.variationBase.id, 'quantity': this.quantity})
+              .done(function()
             {
-                addItemModal.show();
+              addItemModal.show();
             })
-                .fail(function()
-                {
-                    NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
-                });
+              .fail(function()
+              {
+                  NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
+              });
         },
 
         quantityPlus: function()
@@ -87,7 +87,68 @@ Vue.component('add-to-basket', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/ModalService":46,"services/NotificationService":47}],3:[function(require,module,exports){
+},{"services/ApiService":40,"services/ModalService":44,"services/NotificationService":45,"services/ResourceService":47}],3:[function(require,module,exports){
+var ResourceService       = require('services/ResourceService');
+var ModalService          = require('services/ModalService');
+
+Vue.component('basket-preview', {
+
+    template: '#vue-basket-preview',
+
+    data: function()
+    {
+        return {
+            basket: {},
+            basketItems: []
+        };
+    },
+    
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+        ResourceService.bind( "basketItems", this );
+    }
+});
+},{"services/ModalService":44,"services/ResourceService":47}],4:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
+
+Vue.component('basket-totals', {
+
+    template: '#vue-basket-totals',
+
+    props: [
+        'config'
+    ],
+
+    data: function()
+    {
+        return {
+            basket: {}
+        };
+    },
+
+    ready: function()
+    {
+        ResourceService.bind( "basket", this );
+    },
+
+    methods:
+    {
+        showProperty: function( name )
+        {
+            return !this.config || this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
+        }
+    }
+});
+
+},{"services/ResourceService":47}],5:[function(require,module,exports){
+Vue.component('coupon', {
+
+    template: '#vue-coupon'
+
+});
+
+},{}],6:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 
 Vue.component('basket-list', {
@@ -112,7 +173,7 @@ Vue.component('basket-list', {
     }
 });
 
-},{"services/ResourceService":49}],4:[function(require,module,exports){
+},{"services/ResourceService":47}],7:[function(require,module,exports){
 var ResourceService       = require('services/ResourceService');
 
 Vue.component('basket-list-item', {
@@ -191,90 +252,7 @@ Vue.component('basket-list-item', {
     }
 });
 
-},{"services/ResourceService":49}],5:[function(require,module,exports){
-var ResourceService       = require('services/ResourceService');
-var ModalService          = require('services/ModalService');
-
-Vue.component('basket-preview', {
-
-    template: '#vue-basket-preview',
-
-    data: function()
-    {
-        return {
-            basket: {},
-            basketItems: []
-        };
-    },
-    
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
-    }
-});
-},{"services/ModalService":46,"services/ResourceService":49}],6:[function(require,module,exports){
-var ResourceService = require('services/ResourceService');
-
-Vue.component('basket-totals', {
-
-    template: '#vue-basket-totals',
-
-    props: [
-        'config'
-    ],
-
-    data: function()
-    {
-        return {
-            basket: {}
-        };
-    },
-
-    ready: function()
-    {
-        ResourceService.bind( "basket", this );
-    },
-
-    methods:
-    {
-        showProperty: function( name )
-        {
-            return !this.config || this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
-        }
-    }
-});
-
-},{"services/ResourceService":49}],7:[function(require,module,exports){
-Vue.component('coupon', {
-
-    template: '#vue-coupon'
-
-});
-
-},{}],8:[function(require,module,exports){
-var ResourceService     = require('services/ResourceService');
-var NotificationService = require('services/NotificationService');
-
-Vue.directive('add-to-basket', function(value)
-{
-
-    $(this.el).click(
-        function(e)
-        {
-          ResourceService
-              .getResource( 'basketItems' )
-              .push(value);
-
-          e.preventDefault();
-
-        }.bind(this));
-
-        //TODO let AddItemConfirm open
-
-});
-
-},{"services/NotificationService":47,"services/ResourceService":49}],9:[function(require,module,exports){
+},{"services/ResourceService":47}],8:[function(require,module,exports){
 var APIService            = require('services/APIService');
 
 Vue.component('payment-provider-select', {
@@ -313,7 +291,7 @@ Vue.component('payment-provider-select', {
         }
     });
 
-},{"services/APIService":39}],10:[function(require,module,exports){
+},{"services/APIService":38}],9:[function(require,module,exports){
 Vue.component('shipping-profile-select', {
 
     template: '#vue-shipping-profile-select',
@@ -366,29 +344,7 @@ Vue.component('shipping-profile-select', {
     }
 });
 
-},{}],11:[function(require,module,exports){
-var ApiService = require('services/ApiService');
-
-Vue.directive('place-order', function() {
-
-    var $elem = $(this.el);
-
-    $elem.click(function(e)
-    {
-        e.preventDefault();
-
-        ApiService.post("/rest/order")
-            .done(function(response)
-            {
-                var target = $elem.attr('href') || $elem.parents('form').attr('action');
-                window.location.assign(target);
-            });
-
-    });
-
-});
-
-},{"services/ApiService":41}],12:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 Vue.component('address-input-group', {
 
     template: '#vue-address-input-group',
@@ -409,7 +365,7 @@ Vue.component('address-input-group', {
     }
 });
 
-},{}],13:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var ModalService = require('services/ModalService');
 
 Vue.component('address-select', {
@@ -512,7 +468,7 @@ Vue.component('address-select', {
     }
 });
 
-},{"services/ModalService":46}],14:[function(require,module,exports){
+},{"services/ModalService":44}],12:[function(require,module,exports){
 var AddressService    = require('services/AddressService');
 var ValidationService = require('services/ValidationService');
 
@@ -589,7 +545,7 @@ Vue.component('create-update-address', {
 
 });
 
-},{"services/AddressService":40,"services/ValidationService":50}],15:[function(require,module,exports){
+},{"services/AddressService":39,"services/ValidationService":48}],13:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('invoice-address-select', {
@@ -617,7 +573,7 @@ Vue.component('invoice-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],16:[function(require,module,exports){
+},{"services/CheckoutService":42}],14:[function(require,module,exports){
 var CheckoutService = require('services/CheckoutService');
 
 Vue.component('shipping-address-select', {
@@ -644,7 +600,7 @@ Vue.component('shipping-address-select', {
     }
 });
 
-},{"services/CheckoutService":43}],17:[function(require,module,exports){
+},{"services/CheckoutService":42}],15:[function(require,module,exports){
 var CountryService = require('services/CountryService');
 
 Vue.component('country-select', {
@@ -690,63 +646,7 @@ Vue.component('country-select', {
     }
 });
 
-},{"services/CountryService":44}],18:[function(require,module,exports){
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
-
-Vue.component('login', {
-
-        template: '#vue-login',
-
-    props: [
-        "modalElement"
-    ],
-
-    data: function()
-    {
-        return {
-            password: "",
-            username: ""
-        };
-    },
-
-    methods: {
-        showLogin: function()
-        {
-            ModalService.findModal(document.getElementById(this.modalElement)).show();
-        },
-
-        sendLogin: function()
-        {
-            var component = this;
-
-            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
-                .done(function(response)
-                {
-                    ApiService.setToken(response);
-
-                    if (document.getElementById(component.modalElement) != null)
-                    {
-                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
-                    }
-
-                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(3000);
-                })
-                .fail(function(response)
-                {
-                    switch (response.code)
-                    {
-                        case 401:
-                            NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
-                            break;
-                    }
-                });
-        }
-    }
-});
-
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":47}],19:[function(require,module,exports){
+},{"services/CountryService":43}],16:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var ModalService        = require('services/ModalService');
@@ -871,7 +771,63 @@ Vue.component('registration', {
     }
 });
 
-},{"services/ApiService":41,"services/ModalService":46,"services/NotificationService":47,"services/ValidationService":50}],20:[function(require,module,exports){
+},{"services/ApiService":40,"services/ModalService":44,"services/NotificationService":45,"services/ValidationService":48}],17:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService        = require('services/ModalService');
+
+Vue.component('login', {
+
+        template: '#vue-login',
+
+    props: [
+        "modalElement"
+    ],
+
+    data: function()
+    {
+        return {
+            password: "",
+            username: ""
+        };
+    },
+
+    methods: {
+        showLogin: function()
+        {
+            ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
+
+        sendLogin: function()
+        {
+            var component = this;
+
+            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
+
+                    if (document.getElementById(component.modalElement) != null)
+                    {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
+
+                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(3000);
+                })
+                .fail(function(response)
+                {
+                    switch (response.code)
+                    {
+                        case 401:
+                            NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
+                            break;
+                    }
+                });
+        }
+    }
+});
+
+},{"services/ApiService":40,"services/ModalService":44,"services/NotificationService":45}],18:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('user-login-handler', {
@@ -932,7 +888,7 @@ Vue.component('user-login-handler', {
     }
 });
 
-},{"services/ApiService":41}],21:[function(require,module,exports){
+},{"services/ApiService":40}],19:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 
 Vue.component('user-login-watcher', {
@@ -964,233 +920,7 @@ Vue.component('user-login-watcher', {
         }
     });
 
-},{"services/NotificationService":47}],22:[function(require,module,exports){
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-
-Vue.directive('logout', function()
-{
-
-    $(this.el).click(
-        function(e)
-        {
-            ApiService.get("/rest/customer/logout")
-                .done(
-                    function(response)
-                    {
-                        NotificationService.success(Translations.Callisto.accLogoutSuccessful).closeAfter(3000);
-
-                        // remove address ids from session after logout
-                        ApiService.post('/rest/customer/address_selection/0/?typeId=-1')
-                            .fail(function(e)
-                            {
-                                console.warn(e);
-                            });
-                    }
-                );
-
-            e.preventDefault();
-
-        }.bind(this));
-
-});
-
-},{"services/ApiService":41,"services/NotificationService":47}],23:[function(require,module,exports){
-var PaginationService = require('services/PaginationService');
-var LoadItemsService  = require('services/LoadItemsService');
-
-Vue.component("infinite-scroll-item-list", {
-
-    props: {
-        infiniteConfig: {
-            limit     : 20,           // count of items to load.
-            offset    : 0,           // amount of items we want to skip on following call.
-            isLastPage: false
-        }
-    },
-
-    directives: {
-        'infinite-scroll': require('vue-infinite-scroll').infiniteScroll
-    },
-
-    data: function()
-    {
-        return {
-            isBusy: false      // if infinite scroll is busy, load event is disabled.
-        };
-    },
-
-    methods: {
-        loadMoreItems: function(categoryID)
-        {
-            var self    = this;
-            var data    = {
-                limit : self.infiniteConfig.limit,
-                offset: self.infiniteConfig.offset,
-                page  : self.infiniteConfig.offset / self.infiniteConfig.limit
-            };
-            self.isBusy = true;
-
-            if (!self.isLastPage)
-            {
-                LoadItemsService().loadItems(categoryID, data, this.$el, function(response)
-                {
-                    if (response.data)
-                    {
-                        response = response.data;
-                    }
-
-                    if (response.isLastPage || response.entries.length <= 0)
-                    {
-                        self.isBusy     = true;
-                        self.isLastPage = response.isLastPage;
-
-                        // update pagination indicator
-                        var currentItemAmount = (self.infiniteConfig.offset - parseInt(PaginationService.itemsPerPage) + response.entries.length);
-
-                        if ($(".product-count").find("span:not('.text-muted')"))
-                        {
-                            $(".product-count").find("span:not('.text-muted')").html("1 - " + currentItemAmount);
-                        }
-                        return;
-                    }
-                    self.appendItems(self.$el, response.entries);
-                    self.infiniteConfig.offset += parseInt(PaginationService.itemsPerPage);
-                    self.isBusy = false;
-
-                    // update pagination indicator
-                    if ($(".product-count").find("span:not('.text-muted')"))
-                    {
-                        $(".product-count").find("span:not('.text-muted')").html("1 - " + self.infiniteConfig.offset);
-                    }
-                });
-            }
-        },
-
-        appendItems: function(el, itemList)
-        {
-            /**
-             * Append more items to item list.
-             *
-             * @type {any}
-             */
-            var isGridView = $(this.$el).hasClass("grid");
-            var newNode;
-            var item;
-            var att;
-
-            for (var i = 0, length = itemList.length; i < length; i++)
-            {
-                item              = itemList[i];
-                newNode           = document.createElement('li');
-                newNode.innerHTML = '<category-list-item :item=\'' + JSON.stringify(item) + '\' base-url=""></category-list-item>';
-                newNode           = el.appendChild(newNode);
-
-                // compile new added (directive) element
-                this.$compile(newNode);
-
-                // setting up new elements for grid or list view.
-                if (isGridView)
-                {
-                    $(newNode).find("article").addClass("grid");
-                }
-                else
-                {
-                    $(newNode).find("article").removeClass("grid");
-                }
-
-                newNode = null;
-            }
-        }
-    }
-});
-},{"services/LoadItemsService":45,"services/PaginationService":48,"vue-infinite-scroll":56}],24:[function(require,module,exports){
-var ResourceService = require('services/ResourceService');
-var currencySymbolMap = require('currency-symbol-map');
-var accounting = require('accounting');
-
-Vue.filter('currency', function (price, customCurrency)
-{
-    var basket = ResourceService.getResource("basket").val();
-
-    var currency = customCurrency || basket.currency;
-
-    if (currency) {
-        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-        if (currencySymbol) {
-            currency = currencySymbol;
-        }
-    }
-
-    // (%v = value, %s = symbol)
-    var options = {
-        symbol : currency,
-        decimal : ",",
-        thousand: ".",
-        precision : 2,
-        format: "%v %s"
-    };
-
-    return accounting.formatMoney(price, options);
-});
-
-},{"accounting":53,"currency-symbol-map":54,"services/ResourceService":49}],25:[function(require,module,exports){
-Vue.filter( 'itemImage', function( item, baseUrl ) {
-
-    var imageList = item.variationImageList;
-    baseUrl = baseUrl || "/";
-    if( baseUrl.charAt( baseUrl.length - 1 ) !== "/" )
-    {
-        baseUrl += "/";
-    }
-
-    if( !!imageList && imageList.length > 0 )
-    {
-        for( var i = 0; i < imageList.length; i++ )
-        {
-            var image = imageList[i];
-            if( !!image.path && image.path.length > 0 )
-            {
-                return baseUrl + image.path;
-            }
-        }
-    }
-
-    return "";
-
-});
-},{}],26:[function(require,module,exports){
-Vue.filter( 'itemName', function( item, selectedName ) {
-
-    if(selectedName == '0' && item.name1 !== '')
-    {
-      return item.name1;
-    }
-    else if (selectedName == '1' && item.name2 !== '')
-    {
-      return item.name2;
-    }
-    else if (selectedName == '2' && item.name3 !== '')
-    {
-      return item.name3;
-    }
-    else
-    {
-      return item.name1;
-    }
-
-});
-
-},{}],27:[function(require,module,exports){
-Vue.filter( 'itemURL', function( item ) {
-
-    var urlContent = item.itemDescription.urlContent.split("/");
-    var i          = urlContent.length - 1;
-
-    return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
-
-});
-},{}],28:[function(require,module,exports){
+},{"services/NotificationService":45}],20:[function(require,module,exports){
 var PaginationService = require('services/PaginationService');
 
 Vue.component('item-list-sort', {
@@ -1372,7 +1102,7 @@ Vue.component('item-list-sort', {
     }
 });
 
-},{"services/PaginationService":48}],29:[function(require,module,exports){
+},{"services/PaginationService":46}],21:[function(require,module,exports){
 var ApiService          = require('services/ApiService');
 var NotificationService = require('services/NotificationService');
 var HTMLCache           = require('services/VariationsHTMLCacheService');
@@ -1623,7 +1353,7 @@ Vue.component('item-variation-select', {
     }
 });
 
-},{"services/ApiService":41,"services/BasketService":42,"services/NotificationService":47,"services/VariationsHTMLCacheService":51}],30:[function(require,module,exports){
+},{"services/ApiService":40,"services/BasketService":41,"services/NotificationService":45,"services/VariationsHTMLCacheService":49}],22:[function(require,module,exports){
 var ApiService        = require('services/ApiService');
 var PaginationService = require('services/PaginationService');
 
@@ -1805,7 +1535,7 @@ Vue.component('item-list-pagination', {
     }
 });
 
-},{"services/ApiService":41,"services/PaginationService":48}],31:[function(require,module,exports){
+},{"services/ApiService":40,"services/PaginationService":46}],23:[function(require,module,exports){
 Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
@@ -1854,7 +1584,7 @@ Vue.component( 'quantity-input', {
     }
 
 });
-},{}],32:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var ModalService        = require('services/ModalService');
 var APIService          = require('services/APIService');
 var NotificationService = require('services/NotificationService');
@@ -1941,7 +1671,7 @@ Vue.component('account-settings', {
 
 });
 
-},{"services/APIService":39,"services/ModalService":46,"services/NotificationService":47}],33:[function(require,module,exports){
+},{"services/APIService":38,"services/ModalService":44,"services/NotificationService":45}],25:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 Vue.component('order-history', {
@@ -2108,7 +1838,7 @@ Vue.component('order-history', {
     }
 });
 
-},{"services/ApiService":41}],34:[function(require,module,exports){
+},{"services/ApiService":40}],26:[function(require,module,exports){
 Vue.component('language-select', {
 
     template: '#vue-language-select',
@@ -2145,7 +1875,7 @@ Vue.component('language-select', {
 
 });
 
-},{}],35:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -2174,7 +1904,7 @@ Vue.component('notifications', {
     }
 });
 
-},{"services/NotificationService":47,"services/WaitScreenService":52}],36:[function(require,module,exports){
+},{"services/NotificationService":45,"services/WaitScreenService":50}],28:[function(require,module,exports){
 var WaitScreenService = require('services/WaitScreenService');
 
 /**
@@ -2203,7 +1933,82 @@ Vue.component('wait-screen', {
     }
 });
 
-},{"services/WaitScreenService":52}],37:[function(require,module,exports){
+},{"services/WaitScreenService":50}],29:[function(require,module,exports){
+var ResourceService     = require('services/ResourceService');
+var NotificationService = require('services/NotificationService');
+
+Vue.directive('add-to-basket', function(value)
+{
+
+    $(this.el).click(
+        function(e)
+        {
+          ResourceService
+              .getResource( 'basketItems' )
+              .push(value);
+
+          e.preventDefault();
+
+        }.bind(this));
+
+        //TODO let AddItemConfirm open
+
+});
+
+},{"services/NotificationService":45,"services/ResourceService":47}],30:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+
+Vue.directive('place-order', function() {
+
+    var $elem = $(this.el);
+
+    $elem.click(function(e)
+    {
+        e.preventDefault();
+
+        ApiService.post("/rest/order")
+            .done(function(response)
+            {
+                var target = $elem.attr('href') || $elem.parents('form').attr('action');
+                window.location.assign(target);
+            });
+
+    });
+
+});
+
+},{"services/ApiService":40}],31:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+
+Vue.directive('logout', function()
+{
+
+    $(this.el).click(
+        function(e)
+        {
+            ApiService.get("/rest/customer/logout")
+                .done(
+                    function(response)
+                    {
+                        NotificationService.success(Translations.Callisto.accLogoutSuccessful).closeAfter(3000);
+
+                        // remove address ids from session after logout
+                        ApiService.post('/rest/customer/address_selection/0/?typeId=-1')
+                            .fail(function(e)
+                            {
+                                console.warn(e);
+                            });
+                    }
+                );
+
+            e.preventDefault();
+
+        }.bind(this));
+
+});
+
+},{"services/ApiService":40,"services/NotificationService":45}],32:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.elementDirective('resource', {
@@ -2269,7 +2074,7 @@ Vue.elementDirective('resource-list', {
     }
 });
 
-},{"services/ResourceService":49}],38:[function(require,module,exports){
+},{"services/ResourceService":47}],33:[function(require,module,exports){
 var ResourceService = require('services/ResourceService');
 
 Vue.directive('resource-bind', {
@@ -2304,7 +2109,93 @@ Vue.directive('resource-bind', {
 
 });
 
-},{"services/ResourceService":49}],39:[function(require,module,exports){
+},{"services/ResourceService":47}],34:[function(require,module,exports){
+var ResourceService = require('services/ResourceService');
+var currencySymbolMap = require('currency-symbol-map');
+var accounting = require('accounting');
+
+Vue.filter('currency', function (price, customCurrency)
+{
+    var basket = ResourceService.getResource("basket").val();
+
+    var currency = customCurrency || basket.currency;
+
+    if (currency) {
+        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+        if (currencySymbol) {
+            currency = currencySymbol;
+        }
+    }
+
+    // (%v = value, %s = symbol)
+    var options = {
+        symbol : currency,
+        decimal : ",",
+        thousand: ".",
+        precision : 2,
+        format: "%v %s"
+    };
+
+    return accounting.formatMoney(price, options);
+});
+
+},{"accounting":51,"currency-symbol-map":52,"services/ResourceService":47}],35:[function(require,module,exports){
+Vue.filter( 'itemImage', function( item, baseUrl ) {
+
+    var imageList = item.variationImageList;
+    baseUrl = baseUrl || "/";
+    if( baseUrl.charAt( baseUrl.length - 1 ) !== "/" )
+    {
+        baseUrl += "/";
+    }
+
+    if( !!imageList && imageList.length > 0 )
+    {
+        for( var i = 0; i < imageList.length; i++ )
+        {
+            var image = imageList[i];
+            if( !!image.path && image.path.length > 0 )
+            {
+                return baseUrl + image.path;
+            }
+        }
+    }
+
+    return "";
+
+});
+},{}],36:[function(require,module,exports){
+Vue.filter( 'itemName', function( item, selectedName ) {
+
+    if(selectedName == '0' && item.name1 !== '')
+    {
+      return item.name1;
+    }
+    else if (selectedName == '1' && item.name2 !== '')
+    {
+      return item.name2;
+    }
+    else if (selectedName == '2' && item.name3 !== '')
+    {
+      return item.name3;
+    }
+    else
+    {
+      return item.name1;
+    }
+
+});
+
+},{}],37:[function(require,module,exports){
+Vue.filter( 'itemURL', function( item ) {
+
+    var urlContent = item.itemDescription.urlContent.split("/");
+    var i          = urlContent.length - 1;
+
+    return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+
+});
+},{}],38:[function(require,module,exports){
 var NotificationService = require('services/NotificationService');
 var WaitScreenService   = require('services/WaitScreenService');
 
@@ -2468,7 +2359,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":47,"services/WaitScreenService":52}],40:[function(require,module,exports){
+},{"services/NotificationService":45,"services/WaitScreenService":50}],39:[function(require,module,exports){
 var ApiService      = require('services/ApiService');
 var CheckoutService = require('services/CheckoutService');
 
@@ -2510,9 +2401,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":41,"services/CheckoutService":43}],41:[function(require,module,exports){
-arguments[4][39][0].apply(exports,arguments)
-},{"dup":39,"services/NotificationService":47,"services/WaitScreenService":52}],42:[function(require,module,exports){
+},{"services/ApiService":40,"services/CheckoutService":42}],40:[function(require,module,exports){
+arguments[4][38][0].apply(exports,arguments)
+},{"dup":38,"services/NotificationService":45,"services/WaitScreenService":50}],41:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2640,7 +2531,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],43:[function(require,module,exports){
+},{"services/ApiService":40}],42:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function($)
@@ -2730,7 +2621,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":41}],44:[function(require,module,exports){
+},{"services/ApiService":40}],43:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -2821,31 +2712,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],45:[function(require,module,exports){
-var ApiService = require('services/ApiService');
-
-module.exports = (function($)
-{
-    return {
-        loadItems: _loadItems
-    };
-
-    function _loadItems(categoryID, data, el, callback)
-    {
-        var url = "/rest/category_items_list/" + categoryID + "/";
-
-        ApiService.get(url, data)
-            .done(function(response)
-            {
-                callback(response);
-            }).fail(function(error)
-            {
-                console.log("error by: ", url, error);
-            }
-        );
-    }
-});
-},{"services/ApiService":41}],46:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -2977,7 +2844,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3150,7 +3017,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],48:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3176,7 +3043,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var ApiService = require('services/ApiService');
 
 module.exports = (function( $ ) {
@@ -3729,7 +3596,7 @@ module.exports = (function( $ ) {
     }
 
 })( jQuery );
-},{"services/ApiService":41}],50:[function(require,module,exports){
+},{"services/ApiService":40}],48:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3923,7 +3790,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3967,7 +3834,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4017,7 +3884,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],53:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -4432,7 +4299,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],54:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -4472,7 +4339,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":55}],55:[function(require,module,exports){
+},{"./map":53}],53:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -4592,222 +4459,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],56:[function(require,module,exports){
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.infiniteScroll = global.infiniteScroll || {})));
-}(this, function (exports) { 'use strict';
-
-  var throttle = function throttle(fn, delay) {
-    var now, lastExec, timer, context, args; //eslint-disable-line
-
-    var execute = function execute() {
-      fn.apply(context, args);
-      lastExec = now;
-    };
-
-    return function () {
-      context = this;
-      args = arguments;
-
-      now = Date.now();
-
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
-      }
-
-      if (lastExec) {
-        var diff = delay - (now - lastExec);
-        if (diff < 0) {
-          execute();
-        } else {
-          timer = setTimeout(function () {
-            execute();
-          }, diff);
-        }
-      } else {
-        execute();
-      }
-    };
-  };
-
-  var getScrollTop = function getScrollTop(element) {
-    if (element === window) {
-      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
-    }
-
-    return element.scrollTop;
-  };
-
-  var getComputedStyle = document.defaultView.getComputedStyle;
-
-  var getScrollEventTarget = function getScrollEventTarget(element) {
-    var currentNode = element;
-    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
-    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
-      var overflowY = getComputedStyle(currentNode).overflowY;
-      if (overflowY === 'scroll' || overflowY === 'auto') {
-        return currentNode;
-      }
-      currentNode = currentNode.parentNode;
-    }
-    return window;
-  };
-
-  var getVisibleHeight = function getVisibleHeight(element) {
-    if (element === window) {
-      return document.documentElement.clientHeight;
-    }
-
-    return element.clientHeight;
-  };
-
-  var getElementTop = function getElementTop(element) {
-    if (element === window) {
-      return getScrollTop(window);
-    }
-    return element.getBoundingClientRect().top + getScrollTop(window);
-  };
-
-  var isAttached = function isAttached(element) {
-    var currentNode = element.parentNode;
-    while (currentNode) {
-      if (currentNode.tagName === 'HTML') {
-        return true;
-      }
-      if (currentNode.nodeType === 11) {
-        return false;
-      }
-      currentNode = currentNode.parentNode;
-    }
-    return false;
-  };
-
-  var infiniteScroll = {
-    doBind: function doBind() {
-      if (this.binded) return; // eslint-disable-line
-      this.binded = true;
-
-      var directive = this;
-      var element = directive.el;
-
-      directive.scrollEventTarget = getScrollEventTarget(element);
-      directive.scrollListener = throttle(directive.doCheck.bind(directive), 200);
-      directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
-
-      var disabledExpr = element.getAttribute('infinite-scroll-disabled');
-      var disabled = false;
-
-      if (disabledExpr) {
-        this.vm.$watch(disabledExpr, function (value) {
-          directive.disabled = value;
-          if (!value && directive.immediateCheck) {
-            directive.doCheck();
-          }
-        });
-        disabled = Boolean(directive.vm.$get(disabledExpr));
-      }
-      directive.disabled = disabled;
-
-      var distanceExpr = element.getAttribute('infinite-scroll-distance');
-      var distance = 0;
-      if (distanceExpr) {
-        distance = Number(directive.vm.$get(distanceExpr));
-        if (isNaN(distance)) {
-          distance = 0;
-        }
-      }
-      directive.distance = distance;
-
-      var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
-      var immediateCheck = true;
-      if (immediateCheckExpr) {
-        immediateCheck = Boolean(directive.vm.$get(immediateCheckExpr));
-      }
-      directive.immediateCheck = immediateCheck;
-
-      if (immediateCheck) {
-        directive.doCheck();
-      }
-
-      var eventName = element.getAttribute('infinite-scroll-listen-for-event');
-      if (eventName) {
-        directive.vm.$on(eventName, function () {
-          directive.doCheck();
-        });
-      }
-    },
-
-    doCheck: function doCheck(force) {
-      var scrollEventTarget = this.scrollEventTarget;
-      var element = this.el;
-      var distance = this.distance;
-
-      if (force !== true && this.disabled) return; //eslint-disable-line
-      var viewportScrollTop = getScrollTop(scrollEventTarget);
-      var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
-
-      var shouldTrigger = false;
-
-      if (scrollEventTarget === element) {
-        shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
-      } else {
-        var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
-
-        shouldTrigger = viewportBottom + distance >= elementBottom;
-      }
-
-      if (shouldTrigger && this.expression) {
-        this.vm.$get(this.expression);
-      }
-    },
-
-    bind: function bind() {
-      var directive = this;
-      var element = this.el;
-
-      directive.vm.$on('hook:ready', function () {
-        if (isAttached(element)) {
-          directive.doBind();
-        }
-      });
-
-      this.bindTryCount = 0;
-
-      var tryBind = function tryBind() {
-        if (directive.bindTryCount > 10) return; //eslint-disable-line
-        directive.bindTryCount++;
-        if (isAttached(element)) {
-          directive.doBind();
-        } else {
-          setTimeout(tryBind, 50);
-        }
-      };
-
-      tryBind();
-    },
-
-    unbind: function unbind() {
-      this.scrollEventTarget.removeEventListener('scroll', this.scrollListener);
-    }
-  };
-
-  if (window.Vue) {
-    window.infiniteScroll = infiniteScroll;
-    Vue.use(install);
-  }
-
-  function install(Vue) {
-    Vue.directive('infiniteScroll', infiniteScroll);
-  }
-
-  exports.install = install;
-  exports.infiniteScroll = infiniteScroll;
-
-}));
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38])
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,16,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37])
 
 
 new Vue({
