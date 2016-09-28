@@ -19,11 +19,17 @@ Vue.component('login', {
     },
 
     methods: {
+        /**
+         * open login modal
+         */
         showLogin: function()
         {
             ModalService.findModal(document.getElementById(this.modalElement)).show();
         },
 
+        /**
+         * send login data
+         */
         sendLogin: function()
         {
             var component = this;

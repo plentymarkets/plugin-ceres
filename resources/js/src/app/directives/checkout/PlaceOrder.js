@@ -4,6 +4,9 @@ Vue.directive('place-order', function() {
 
     var $elem = $(this.el);
 
+    /**
+     * TODO
+     */
     $elem.click(function(e)
     {
         e.preventDefault();

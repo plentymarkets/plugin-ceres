@@ -26,7 +26,7 @@ Vue.component('basket-totals', {
     methods:
     {
         /**
-         * 
+         * TODO
          * @param name
          * @returns {boolean}
          */

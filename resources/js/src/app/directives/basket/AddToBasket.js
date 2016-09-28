@@ -3,7 +3,9 @@ var NotificationService = require('services/NotificationService');
 
 Vue.directive('add-to-basket', function(value)
 {
-
+    /**
+     * add the item to the basket
+     */
     $(this.el).click(
         function(e)
         {

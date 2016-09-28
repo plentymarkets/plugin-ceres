@@ -3,7 +3,9 @@ var NotificationService = require('services/NotificationService');
 
 Vue.directive('logout', function()
 {
-
+    /**
+     * logout the current user
+     */
     $(this.el).click(
         function(e)
         {
