@@ -1,11 +1,54 @@
 //header scss
+.sticky {
+ 	.top-bar {
+ 		position: fixed;
+ 		width:100%;
+ 		transition: all 0.4s ease;
+ 		background:$gray;
+ 	}
+ 	.header {
+ 		position:relative;
+ 		.navbar {
+ 			position: fixed;
+ 		    max-width: 1170px;
+ 		    width: 100%;
+ 		    top: 2rem;
+ 		    z-index: 1020;
+ 		    background:$gray-lighter2;
+ 		    transition: all 0.4s ease;
+ 		    .navbar-brand {
+ 		    	img {
+ 		    		max-width: 70%;
+ 		    		transition: all 0.4s ease;
+ 		    	}
+ 		    }
+ 		    #mainNavbarCollapse {
+ 		    	.navbar-nav {
+ 		    		.nav-item {
+ 		    			.nav-link {
+ 		    				padding:.75rem 1rem;
+ 		    				transition: all 0.4s ease;
+ 		    			}
+ 		    		}
+ 		    	}
+ 		    }
+ 		}
+ 		.breadcrump {
+ 			display: none;
+ 		}
+ 	}
+	.main {
+		padding-top: 5rem;
+	}
+ }
+
 .top-bar{
 
 	$topbar-height : 2rem;
 
 	color:$gray-lighter;
 	position: relative;
-	z-index: $zIndex-6;
+	z-index: 2000;
 	height: $topbar-height;
 	background-color: $gray-dark;
 
@@ -35,6 +78,13 @@
 				font-size: .8rem;
 				display: inline-block;
 				color: $gray-lighter;
+			}
+			#login-change {
+				a {
+					span {
+						display: none;
+					}
+				}
 			}
 
 			.flag-icon{
@@ -110,16 +160,22 @@
 }
 
 //navigation scss
-.navbar {
+.header {
 
-	border-radius: 0;
-	padding:0;
-	z-index: $zindex-navbar;
-	border-bottom: 1px solid $gray-lighter;
+	padding-left: 0;
+	padding-right: 0;
 
-	.dropdown:hover .dropdown-menu {
-		display: block !important;
-		margin-top: 0;
+	.navbar {
+
+		border-radius: 0;
+		padding:0;
+		z-index: $zindex-navbar;
+		border-bottom: 1px solid $gray-lighter;
+
+		.dropdown:hover .dropdown-menu {
+			display: block !important;
+			margin-top: 0;
+		}
 	}
 }
 
@@ -127,10 +183,10 @@
 
 	float: none;
 	padding: .5rem 1rem;
-  display: inline-block;
+  	display: inline-block;
 
   img {
-    max-height: 3.5rem;
+    max-height: 70%;
   }
 }
 
@@ -161,11 +217,12 @@
 	}
 
 }
-
-.navbar-toggler {
-	position: absolute;
-	top: 1.5rem;
-	right: 1em;
+header {
+	.navbar-toggler {
+		position: absolute;
+		top: .75rem;
+		right: 1em;
+	}
 }
 
 // Mobile only
@@ -188,6 +245,15 @@
 
 
 @include media-breakpoint-up(sm){
+
+	.sticky {
+		.header {
+			.navbar {
+				max-width: 576px;
+			}
+		}
+	}
+
 	.top-bar {
 		.list-inline-item{
 			&:nth-child(2), &:nth-child(3) {
@@ -210,24 +276,85 @@
 }
 
 @include media-breakpoint-up(md){
+	.sticky {
+		.header {
+			.navbar {
+				max-width: 690px;
+				.navbar-brand {
+					img {
+						max-width: 70%;
+					}
+				}
+				.navbar-toggler {
+					top: .75rem;
+				}
+			}
+		}
+	}
 
+	.top-bar {
+		.list-inline {
+			.list-inline-item {
+				#login-change {
+					a {
+						span {
+							display: inline-block;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.header {
+		padding-left: 15px;
+		padding-right: 15px;
+
+		.navbar {
+			.navbar-brand {
+				img {
+					max-width: 100%;
+				}
+			}
+			.navbar-toggler {
+				top: 1.5rem;
+			}
+		}
+	}
 }
 
 
 @include media-breakpoint-up(lg){
+	.sticky {
+ 		.header {
+ 			.navbar {
+ 				max-width: 910px;
+ 			}
+ 		}
+ 	}
+
 	.navbar-brand {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
 	}
 
-	.navbar-nav{
-		&>.nav-item{
-			&>.nav-link{
+	.navbar-nav {
+		&>.nav-item {
+			&>.nav-link {
 				padding-top: 2em;
 				padding-bottom: 2em;
 			}
 		}
 	}
-
 }
+
+@include media-breakpoint-up(xl){
+ 	.sticky {
+ 		.header {
+ 			.navbar {
+ 				max-width: 1110px;
+ 			}
+ 		}
+ 	}
+ }
