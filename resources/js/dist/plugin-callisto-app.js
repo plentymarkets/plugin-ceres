@@ -4152,7 +4152,7 @@ new Vue({
 
 
         $(window).scroll(function() {
-            if($( ".wrapper-main" ).hasClass( "IsSticky" )) {
+            if($( ".wrapper-main" ).hasClass( "isSticky" )) {
                 if ($(this).scrollTop() > 1){ 
                     $('.wrapper-main').addClass("sticky");
                 }
