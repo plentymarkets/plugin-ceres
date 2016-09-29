@@ -7,11 +7,6 @@ Vue.component('add-to-basket', {
 
     template: '#vue-add-to-basket',
 
-    props: [
-        "basketItem",
-        "baseUrl"
-    ],
-
     data: function()
     {
         return {
@@ -28,9 +23,10 @@ Vue.component('add-to-basket', {
 
             $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
+            var variationId = ResourceService.getResource("currentVariation").val().variationBase.id;
             ResourceService
               .getResource( 'basketItems' )
-              .push({'variationId': this.basketItem.variationBase.id, 'quantity': this.quantity})
+              .push({'variationId': variationId, 'quantity': quantity})
               .done(function()
             {
               addItemModal.show();

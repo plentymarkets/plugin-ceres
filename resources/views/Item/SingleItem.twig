@@ -2,8 +2,8 @@
 
 {% set itemData = config("PluginCallisto.item.data") | split(', ') %}
 {% set configItemName = config("PluginCallisto.item.name") %}
-{% set basePrice = getBasePrice( item.variationBase.id ) %}
-
+{% set variations = services.item.getVariationAttributeMap( item.itemBase.id ) %}
+{% set basePriceList = getBasePriceList( services.item.getVariationList( item.itemBase.id ) ) %}
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
 
 {% block PageBody %}
@@ -78,48 +78,40 @@
                 </div>
 
                 <div class="row m-b-1">
-                    {#{% for attributeId, attribute in services.item.getAttributeNameMap( item.itemBase.id ) %}#}
-                    {#<div class="col-xs-12 col-md-6 col-lg-4">#}
-                        {#<div class="input-unit">#}
-                            {#<select name="attribute[{{ attributeId }}]" class="custom-select">#}
-                                {#{% for attributeValueId, attributeValue in attribute.values %}#}
-                                    {#<option value="{{ attributeValueId }}">{{ attributeValue }}</option>#}
-                                {#{% endfor %}#}
-                            {#</select>#}
-                            {#<label>{{ attribute.name }}</label>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#{% endfor %}#}
-                    <variation-select :attributes="{{ services.item.getAttributeNameMap( item.itemBase.id ) | json_encode() }}" :variations="{{ services.item.getVariationAttributeMap( item.itemBase.id ) | json_encode() }}" preselect="{{ item.variationBase.id }}"></variation-select>
+                    <variation-select :attributes="{{ services.item.getAttributeNameMap( item.itemBase.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.variationBase.id }}"></variation-select>
                 </div>
 
-                {% if ('item.recommendedPrice' in itemData or 'all' in itemData) and item.variationRecommendedRetailPrice.price > 0 %}
-                    <div class="crossprice">
-                        <del class="text-muted small">
+                {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
+                    <div class="crossprice" v-resource-if:currentVariation="variationRecommendedRetailPrice.price > 0">
+                        <del class="text-muted small" v-resource-bind:currentVariation="variationRecommendedRetailPrice.price" :filters="['currency']">
                             {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                         </del>
                     </div>
                 {% endif %}
 
                 <span class="price h1">
-                    {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                    <span v-resource-bind:currentVariation="variationRetailPrice.price" :filters="['currency']">{{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span>
                     <sup>*</sup>
                 </span>
-                <div class="base-price text-muted m-y-1">
+
+                {% for variationId, basePrice in basePriceList %}
+                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="variationBase.id == {{ variationId }}">
                     {{ trans("PluginCallisto::Callisto.itemUnitPrice") }}
                     <span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span>/
                     <span class="base-price-amount">
                     {% if basePrice.lot > 1 %}
                         {{ basePrice.lot }}
                     {% endif %}
-                    {{ services.unit.getUnitById( item.variationBase.unitId ).name }}
+                    {{ services.unit.getUnitById( basePrice.unit ).name }}
                     </span>
                 </div>
+                {% endfor %}
 
-                {% set availabilityData = services.availability.getAvailabilityById(item.variationBase.availability) %}
-                <span class="availability tag availability_{{ item.variationBase.availability }}">
-                    {{ availabilityData.languages[0].name }}
+                {% for availability in services.availability.getAvailabilities() %}
+                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="variationBase.availability == {{ availability.id }}">
+                    {{ availability.languages[0].name }}
                 </span>
+                {% endfor %}
 
                 <div class="row m-y-1">
                     <add-to-basket :basket-item="{{ item | json_encode }}"
@@ -138,10 +130,10 @@
 
                 <hr>
 
-            <span class="vat small text-muted">
-                {{ trans("PluginCallisto::Callisto.itemInclVAT") }} {{ trans("PluginCallisto::Callisto.itemExclusive") }}
-                <a href="#" title="Versandkosten">{{ trans("PluginCallisto::Callisto.itemShippingCosts") }}</a>
-            </span>
+                <span class="vat small text-muted">
+                    {{ trans("PluginCallisto::Callisto.itemInclVAT") }} {{ trans("PluginCallisto::Callisto.itemExclusive") }}
+                    <a href="#" title="{{ trans("PluginCallisto::Callisto.itemShippingCosts") }}">{{ trans("PluginCallisto::Callisto.itemShippingCosts") }}</a>
+                </span>
 
             </div>
 
@@ -205,17 +197,17 @@
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.external_id' in itemData or 'all' in itemData) and item.variationBase.externalId != '' %}
-                                    <tr>
+                                {% if ('item.external_id' in itemData or 'all' in itemData) %}
+                                    <tr v-resource-if:currentVariation="variationBase.externalId != ''">
                                         <td>{{ trans("PluginCallisto::Callisto.itemExternalVariationId") }}</td>
-                                        <td>{{ item.variationBase.externalId }}</td>
+                                        <td v-resource-bind:currentVariation="variationBase.externalId">{{ item.variationBase.externalId }}</td>
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.variation_model' in itemData or 'all' in itemData) and item.variationBase.model != '' %}
-                                    <tr>
+                                {% if ('item.variation_model' in itemData or 'all' in itemData) %}
+                                    <tr v-resource-if:currentVariation="variationBase.model != ''">
                                         <td>{{ trans("PluginCallisto::Callisto.itemModel") }}</td>
-                                        <td>{{ item.variationBase.model }}</td>
+                                        <td v-resource-bind:currentVariation="variationBase.model">{{ item.variationBase.model }}</td>
                                     </tr>
                                 {% endif %}
 
@@ -243,24 +235,26 @@
                                 {% endif %}
 
                                 {% if ('item.weightG' in itemData or 'all' in itemData) and item.variationBase.weightG != '' %}
-                                    <tr>
+                                    <tr v-resource-if:currentVariation="variationBase.weightG != ''">
                                         <td>{{ trans("PluginCallisto::Callisto.itemWeight") }}</td>
-                                        <td>{{ item.variationBase.weightG }}g</td>
+                                        <td v-resource-bind:currentVariation="variationBase.weightG">{{ item.variationBase.weightG }}g</td>
                                     </tr>
                                 {% endif %}
 
                                 {% if ('item.weightNetG' in itemData or 'all' in itemData) and item.variationBase.weightNetG != '' %}
-                                    <tr>
+                                    <tr v-resource-if:currentVariation="variationBase.weightNetG != ''">
                                         <td>{{ trans("PluginCallisto::Callisto.itemNetWeight") }}</td>
-                                        <td>{{ item.variationBase.weightNetG }}g</td>
+                                        <td v-resource-bind:currentVariation="variationBase.weightNetG">{{ item.variationBase.weightNetG }}g</td>
                                     </tr>
                                 {% endif %}
 
                                 {% if ('item.variation_dimensions' in itemData or 'all' in itemData) %}
                                     <tr>
                                         <td>{{ trans("PluginCallisto::Callisto.itemDimensions") }}</td>
-                                        <td>{{ item.variationBase.lengthMm }}/{{ item.variationBase.widthMm }}
-                                            /{{ item.variationBase.heightMm }}mm
+                                        <td>
+                                            <span v-resource-bind:currentVariation="variationBase.lengthMm">{{ item.variationBase.lengthMm }}</span>&times;<!--
+                                            --><span v-resource-bind:currentVariation="variationBase.widthMm">{{ item.variationBase.widthMm }}</span>&times;<!--
+                                            --><span v-resource-bind:currentVariation="variationBase.heightMm">{{ item.variationBase.heightMm }}</span> mm
                                         </td>
                                     </tr>
                                 {% endif %}
