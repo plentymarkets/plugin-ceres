@@ -1,4 +1,4 @@
-<script type="x/template" id="vue-item-list-sort">
+<script type="x/template" id="vue-item-list-sort" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <form name="sorting-form" action="${ currentURL() }" method="GET">
 
         <div class="col-xs-6">
@@ -13,20 +13,17 @@
         </div>
 
         <input type="hidden" name="page" value="1">
-        <template v-if="showPagination() == false">
-            <input type="hidden" name="items_per_page" value="${ defaultPagination }">
-        </template>
 
-      <div class="col-xs-6">
-        <div class="input-unit">
-          <label for="listItemsPerPage">{{ trans("PluginCallisto::Callisto.itemCategoryItemsPerPage") }}</label>
-          <select class="custom-select" v-on:change="updateSelectedItemsPerPage" name="items_per_page" onchange="this.form.submit();" id="listItemsPerPage" v-model="itemsPerPageSelected">
-            <option v-bind:value="element.value" value="${ element.value }" selected="${ element.selected }" v-for="element in itemPerPageList">
-                ${ element.value }
-            </option>
-          </select>
+        <div class="col-xs-6">
+            <div class="input-unit">
+              <label for="listItemsPerPage">{{ trans("PluginCallisto::Callisto.itemCategoryItemsPerPage") }}</label>
+              <select class="custom-select" v-on:change="updateSelectedItemsPerPage" name="items_per_page" onchange="this.form.submit();" id="listItemsPerPage" v-model="itemsPerPageSelected">
+                <option v-bind:value="element.value" value="${ element.value }" selected="${ element.selected }" v-for="element in itemPerPageList">
+                    ${ element.value }
+                </option>
+              </select>
+            </div>
         </div>
-      </div>
 
 </form>
 </script>

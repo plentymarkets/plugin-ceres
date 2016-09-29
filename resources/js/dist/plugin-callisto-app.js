@@ -930,22 +930,8 @@ Vue.component('item-list-sort', {
     props: {
         sortedDataList    : String,
         defaultSorting    : String,
-        topCell           : String,
-        itemAsc           : String,
-        itemDesc          : String,
-        nameAsc           : String,
-        nameDesc          : String,
-        priceAsc          : String,
-        priceDesc         : String,
-        releaseAsc        : String,
-        releaseDesc       : String,
-        storeSpecialAsc   : String,
-        storeSpecialDesc  : String,
-        idDesc            : String,
-        random            : String,
         paginationPosition: String,
-        defaultItemPerPage: String,
-        position          : String
+        defaultItemPerPage: String
     },
 
     data: function()
@@ -953,31 +939,109 @@ Vue.component('item-list-sort', {
         return {
             sortingList         : [],
             itemPerPageList     : [],
-            itemsPerPageSelected: 0
+            itemsPerPageSelected: 0,
+            sortPossibilityLang: {
+                "itemId_asc"                        : "Item ID (ascending)",
+                "itemId_desc"                       : "Item ID (descending)",
+                "itemName_asc"                      : "Item name (ascending)",
+                "itemName_desc"                     : "Item name (descending)",
+                "itemPosition_asc"                  : "Item position (ascending)",
+                "itemPosition_desc"                 : "Item position (descending)",
+                "itemPrice_asc"                     : "Item price (ascending)",
+                "itemPrice_desc"                    : "Item price (descending)",
+                "itemRating_asc"                    : "Item rating (ascending)",
+                "itemRating_desc"                   : "Item rating (descending)",
+                "variationCreateTimestamp_asc"      : "Variation creation time (ascending)",
+                "variationCreateTimestamp_desc"     : "Variation creation time (descending)",
+                "variationId_asc"                   : "Variation ID (ascending)",
+                "variationId_desc"                  : "Variation ID (descending)",
+                "variationCustomNumber_asc"         : "Variation custom number (ascending)",
+                "variationCustomNumber_desc"        : "Variation custom number (descending)",
+                "variationLastUpdateTimestamp_asc"  : "Variation last update timestamp (ascending)",
+                "variationLastUpdateTimestamp_desc" : "Variation last update timestamp (descending)",
+                "variationName_asc"                 : "Variation name (ascending)",
+                "variationName_desc"                : "Variation name (descending)",
+                "variationPosition_asc"             : "Variation position (ascending)",
+                "variationPosition_desc"            : "Variation position (descending)",
+                "variationActive_asc"               : "Variation active (ascending)",
+                "variationActive_desc"              : "Variation active (descending)",
+                "variationPrimary_asc"              : "Variation primary (ascending)",
+                "variationPrimary_desc"             : "Variation primary (descending)",
+                "itemRand"                          : "Item random",
+                "itemProducerName_asc"              : "Variation custom number (ascending)",
+                "itemProducerName_desc"             : "Variation custom number (descending)",
+
+
+
+
+
+
+
+
+                "top_sell": Translations.Callisto.itemCategoryTopItems,
+                "item_asc": Translations.Callisto.itemCategoryItemAsc,
+                "item_desc": Translations.Callisto.itemCategoryItemDesc,
+                "name_asc": Translations.Callisto.itemCategoryNameAsc,
+                "name_desc": Translations.Callisto.itemCategoryNameDesc,
+                "price_asc": Translations.Callisto.itemCategoryPriceAsc,
+                "price_desc": Translations.Callisto.itemCategoryPriceDesc,
+                "release_asc": Translations.Callisto.itemCategoryReleaseAsc,
+                "release_desc": Translations.Callisto.itemCategoryReleaseDesc,
+                "store_special_asc": Translations.Callisto.itemCategoryStoreSpecialAsc,
+                "store_special_desc": Translations.Callisto.itemCategoryStoreSpecialDesc,
+                "id_desc": Translations.Callisto.itemCategoryIdDesc,
+                "random": Translations.Callisto.itemCategoryRandom
+            }
         };
     },
 
-    methods: {
-        initPropsValues: function()
-        {
-            this.sortedDataList = JSON.parse(this.sortedDataList);
+    ready: function()
+    {
+        this.initSorting();
+        this.initItemsPerPageList();
 
-            if (this.sortedDataList)
+        console.log(this);
+    },
+
+    methods: {
+        initSorting: function()
+        {
+            var sortBy = this.getQueryStringValue("itemSorting") || this.defaultSorting;
+
+            var sortList = JSON.parse(this.sortedDataList);
+            for (var entry in sortList)
             {
-                this.topCell          = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemAsc          = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemDesc         = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameAsc          = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameDesc         = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceAsc         = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceDesc        = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseAsc       = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseDesc      = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialAsc  = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialDesc = this.sortedDataList.indexOf("store_special_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.idDesc           = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.random           = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
+                var sortKey = sortList[entry];
+                if (sortKey) {
+                    this.sortingList.push({
+                        value: sortKey,
+                        selected: (sortKey == sortBy),
+                        name: (this.sortPossibilityLang[sortKey] || sortKey)
+                    });
+                }
             }
+        },
+
+        initItemsPerPageList: function ()
+        {
+            var listItemsPerPage = this.getQueryStringValue("items_per_page");
+            if (listItemsPerPage.length > 0)
+            {
+                this.defaultItemPerPage   = listItemsPerPage;
+                this.itemsPerPageSelected = this.defaultItemPerPage;
+            }
+            else
+            {
+                this.itemsPerPageSelected = this.defaultItemPerPage;
+            }
+            PaginationService.itemsPerPage = this.itemsPerPageSelected;
+
+            var defaultItemPerPageOptions = [];
+            defaultItemPerPageOptions.push({value: 20, selected: 20 == this.defaultItemPerPage});
+            defaultItemPerPageOptions.push({value: 50, selected: 50 == this.defaultItemPerPage});
+            defaultItemPerPageOptions.push({value: 100, selected: 100 == this.defaultItemPerPage});
+
+            this.itemPerPageList = defaultItemPerPageOptions;
         },
 
         getQueryStringValue: function(key)
@@ -987,118 +1051,13 @@ Vue.component('item-list-sort', {
 
         currentURL: function()
         {
-            var url = window.location.href.split('?')[0];
-            return url;
-        },
-
-        showPagination: function()
-        {
-            var show = this.paginationPosition != "infinityScroll";
-            return show;
+            return window.location.href.split('?')[0];
         },
 
         updateSelectedItemsPerPage: function()
         {
             PaginationService.itemsPerPage = this.itemsPerPageSelected;
-        },
-
-        initSortingList: function()
-        {
-            var defaultSortingOptions = [];
-
-            if (this.topCell == true)
-            {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopItems});
-            }
-            if (this.itemAsc == true)
-            {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemAsc});
-            }
-            if (this.itemDesc == true)
-            {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemDesc});
-            }
-            if (this.nameAsc == true)
-            {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameAsc});
-            }
-            if (this.nameDesc == true)
-            {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameDesc});
-            }
-            if (this.priceAsc == true)
-            {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceAsc});
-            }
-            if (this.priceDesc == true)
-            {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceDesc});
-            }
-            if (this.releaseAsc == true)
-            {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseAsc});
-            }
-            if (this.releaseDesc == true)
-            {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseDesc});
-            }
-            if (this.storeSpecialAsc == true)
-            {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialAsc});
-            }
-            if (this.storeSpecialDesc == true)
-            {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialDesc});
-            }
-            if (this.idDesc == true)
-            {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryIdDesc});
-            }
-            if (this.random == true)
-            {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: Translations.Callisto.itemCategoryRandom});
-            }
-
-            return defaultSortingOptions;
-        },
-
-        initItemPerPageList: function()
-        {
-            var defaultItemPerPageOptions = [];
-
-            defaultItemPerPageOptions.push({value: 20, selected: 20 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 50, selected: 50 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 100, selected: 100 == this.defaultItemPerPage});
-
-            return defaultItemPerPageOptions;
         }
-    },
-
-    ready: function()
-    {
-        this.initPropsValues();
-
-        var itemSorting      = this.getQueryStringValue("itemSorting");
-        var listItemsPerPage = this.getQueryStringValue("items_per_page");
-
-        if (itemSorting.length > 0)
-        {
-            this.defaultSorting = itemSorting;
-        }
-        if (listItemsPerPage.length > 0)
-        {
-            this.defaultItemPerPage   = listItemsPerPage;
-            this.itemsPerPageSelected = this.defaultItemPerPage;
-        }
-        else
-        {
-            this.itemsPerPageSelected = this.defaultItemPerPage;
-        }
-
-        PaginationService.itemsPerPage = this.itemsPerPageSelected;
-
-        this.sortingList     = this.initSortingList();
-        this.itemPerPageList = this.initItemPerPageList();
     }
 });
 
