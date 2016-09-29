@@ -16,9 +16,9 @@
               </div>
             </div>
         {% else %}
-            <a data-toggle="modal" href="#login">{{ trans("PluginCallisto::Callisto.accLogin") }}</a>
-            <small>{{ trans("PluginCallisto::Callisto.generalOr") }}</small>
-            <a data-toggle="modal" href="#registration">{{ trans("PluginCallisto::Callisto.accRegister") }}</a>
+            <a data-toggle="modal" href="#login"><i class="fa fa-user" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.accLogin") }}</a>
+            <small>|</small>
+            <a data-toggle="modal" href="#registration"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.accRegister") }}</a>
         {% endif %}
     </span>
 </script>

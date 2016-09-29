@@ -48,6 +48,13 @@
         "default"   : "/layout/plugins/production/PluginCallisto/images/logo_long.svg"
     },
     {
+        "tab"       : "Header",
+        "key"       : "header.fixed_navbar",
+        "label"     : "Nav bar fixed at top",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.number_of_cols",
         "label"         : "Number of columns",
