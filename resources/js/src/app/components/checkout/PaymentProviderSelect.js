@@ -1,4 +1,5 @@
 var APIService            = require('services/APIService');
+var CheckoutService = require('services/CheckoutService')
 
 Vue.component('payment-provider-select', {
 
@@ -21,12 +22,7 @@ Vue.component('payment-provider-select', {
         methods: {
             onPaymentProviderChange: function()
             {
-                APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
-            },
-
-            formatPrice: function(price, currency)
-            {
-                return MonetaryFormatService.formatMonetary(price, currency);
+                CheckoutService.setMethodOfPaymentId(this.selectedPaymentProvider);
             },
 
             addEventListener: function()
