@@ -1,26 +1,20 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 
-{% set defaultItemPerPage = config("PluginCallisto.sort.defaultItemPerPage") %}
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
-{% set paginatedResult = services.category.getItems(category, defaultItemPerPage, variationShowType) %}
-{% set sortedData = config("PluginCallisto.sort.data")|split(', ')|json_encode() %}
+{% set paginatedResult = services.category.getItems(category, variationShowType) %}
 {% set itemList = paginatedResult.getResult() %}
 {% set currentPage = paginatedResult.getPage() %}
 {% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
-{% set maxCount = paginatedResult.getTotalCount() %}
+{% set totalCount = paginatedResult.getTotalCount() %}
 {% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
-{% set pageIndicator = "1 - " ~ maxCount %}
+{% set pageIndicator = "1 - " ~ totalCount %}
 
 {% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
-{% if defaultItemPerPage < maxCount  %}
-    {% set pageIndicator = ((currentPage * defaultItemPerPage) - defaultItemPerPage + 1) ~ " - " ~ ((currentPage * defaultItemPerPage) > maxCount ? maxCount : (currentPage * defaultItemPerPage)) %}
-{% endif %}
-
 {% block PageBody %}
 
-    {{ component( "PluginCallisto::Category.Item.Components.ItemListSort" ) }}
+    {{ component( "PluginCallisto::Category.Item.Components.ListControls" ) }}
     {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
 
     <div class="categoriegrid container">
@@ -37,28 +31,17 @@
 
             <div class="col-lg-9">
                 <div class="list-controls row">
-                    <item-list-sort sorted-data-list="{{ sortedData }}"
-                                    default-sorting="{{ config("LayoutCore.sort.defaultSorting") }}"
-                                    pagination-position="{{ paginationType }}"
-                                    default-item-per-page="{{ defaultItemPerPage }}">
-                    </item-list-sort>
+                    <list-controls default-sorting="{{ config("PluginLayoutCore.sort.defaultSorting") }}"
+                                    default-items-per-page="{{ config("PluginLayoutCore.sort.defaultItemsPerPage") }}"
+                                    total-count="{{ totalCount }}">
+                    </list-controls>
 
-                    <div class="col-xs-12 col-sm-6 page-infos m-b-1">
-                        <div class="toggle-list-view pull-xs-left m-r-1">
-                            <i class="fa fa-th" aria-hidden="true"></i>
-                            <i class="fa fa-th-list" aria-hidden="true"></i>
-                        </div>
-                        <div class="product-count pull-xs-right">
-                            <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShow") }}:</span> <span>{{ pageIndicator }}</span> <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShowOf") }} {{ maxCount }} {{ trans("PluginCallisto::Callisto.itemItems") }}
-                                </span>
-                        </div>
+                    <div class="col-xs-12 col-sm-6 m-b-1">
+                        <item-list-pagination pagination-position="{{ paginationType }}"
+                                              position="top"
+                                              max-count="{{ totalCount }}">
+                        </item-list-pagination>
                     </div>
-
-                        <div class="col-xs-12 col-sm-6 m-b-1">
-                            <item-list-pagination pagination-position="{{ paginationType }}"
-                                                  position="top" max-count="{{ maxCount }}">
-                            </item-list-pagination>
-                        </div>
                 </div>
 
                 <hr class="m-b-1 hidden-sm-down">
@@ -71,15 +54,16 @@
                     </ul>
                 <hr class="m-y-2">
 
-                    <div class="list-controls m-b-3 row">
-                        <div class="col-xs-12">
-                            <item-list-pagination
-                                    pagination-position="{{ paginationType }}"
-                                    position="top" max-count="{{ maxCount }}">
-                            </item-list-pagination>
-                        </div>
-
+                <div class="list-controls m-b-3 row">
+                    <div class="col-xs-12">
+                        <item-list-pagination
+                                pagination-position="{{ paginationType }}"
+                                position="top"
+                                max-count="{{ totalCount }}">
+                        </item-list-pagination>
                     </div>
+
+                </div>
             </div>
         </div>
     </div>
