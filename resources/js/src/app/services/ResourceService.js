@@ -47,6 +47,7 @@ module.exports = (function( $ ) {
             data = initialValue;
         }
 
+        name = name.toLowerCase();
         resources[name] = new Resource( route, data );
 
         return resources[name];
@@ -87,6 +88,7 @@ module.exports = (function( $ ) {
             data = initialValue;
         }
 
+        name = name.toLowerCase();
         resources[name] = new ResourceList( route, data );
 
         return resources[name];
@@ -100,6 +102,8 @@ module.exports = (function( $ ) {
      */
     function getResource( name )
     {
+        name = name.toLowerCase();
+
         if( !resources[name] )
         {
             throw new Error("Unkown resource: " + name );
