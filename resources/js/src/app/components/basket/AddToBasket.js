@@ -14,40 +14,24 @@ Vue.component('add-to-basket', {
         };
     },
 
-    methods: {
-
-        addToBasket: function(quantity)
+    methods:
+    {
+        updateQuantity: function( value )
         {
-            var addItemModal = ModalService.findModal($(this.$el.parentElement));
-            addItemModal.setTimeout(10000);
+            this.quantity = value;
+        },
 
-            $(".wrapper-bottom").append(addItemModal.getModalContainer());
-
-            var variationId = ResourceService.getResource("currentVariation").val().variationBase.id;
+        addToBasket: function()
+        {
+            var self = this;
             ResourceService
-              .getResource( 'basketItems' )
-              .push({'variationId': variationId, 'quantity': quantity})
-              .done(function()
-            {
-              addItemModal.show();
-            })
-              .fail(function()
-              {
-                  NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
-              });
-        },
-
-        quantityPlus: function()
-        {
-            this.quantity++;
-        },
-
-        quantityMinus: function()
-        {
-            if (this.quantity > 1)
-            {
-                this.quantity--;
-            }
+                .getResource( "basketItems" )
+                .push({
+                    variationId: ResourceService.getResource("currentVariation").val().variationBase.id,
+                    quantity: this.quantity
+                }).done( function() {
+                    self.quantity = 1;
+                });
         }
     }
 });

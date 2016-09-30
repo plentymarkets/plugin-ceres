@@ -114,8 +114,7 @@
                 {% endfor %}
 
                 <div class="row m-y-1">
-                    <add-to-basket :basket-item="{{ item | json_encode }}"
-                                   base-url="{{ app.request.baseUrl }}"></add-to-basket>
+                    <add-to-basket></add-to-basket>
 
                     <div class="col-xs-6 offset-xs-6 m-t-1">
                         <a class="pull-xs-right text-muted small" href="#">
@@ -124,6 +123,7 @@
                         </a>
                     </div>
                 </div>
+
 
                 <div class="shariff" data-theme="white" data-services='["twitter","facebook","googleplus","pinterest"]'
                      data-url="" style="max-width:100%;overflow:auto;" data-media-url=""></div>

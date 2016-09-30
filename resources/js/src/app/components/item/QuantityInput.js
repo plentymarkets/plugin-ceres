@@ -2,7 +2,7 @@ Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
 
-    props: [ 'value', 'timeout', 'min', 'max' ],
+    props: [ 'value', 'timeout', 'min', 'max', 'vertical' ],
 
     data: function()
     {
@@ -16,6 +16,7 @@ Vue.component( 'quantity-input', {
         this.timeout = this.timeout || 300;
         this.min = this.min || 1;
         this.max = this.max || 999;
+        this.vertical = this.vertical || false;
 
         this.$watch( 'value', function( newValue ) {
 

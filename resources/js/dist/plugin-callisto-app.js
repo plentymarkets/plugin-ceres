@@ -38,11 +38,6 @@ Vue.component('add-to-basket', {
 
     template: '#vue-add-to-basket',
 
-    props: [
-        "basketItem",
-        "baseUrl"
-    ],
-
     data: function()
     {
         return {
@@ -50,39 +45,24 @@ Vue.component('add-to-basket', {
         };
     },
 
-    methods: {
-
-        addToBasket: function(quantity)
+    methods:
+    {
+        updateQuantity: function( value )
         {
-            var addItemModal = ModalService.findModal($(this.$el.parentElement));
-            addItemModal.setTimeout(10000);
+            this.quantity = value;
+        },
 
-            $(".wrapper-bottom").append(addItemModal.getModalContainer());
-
+        addToBasket: function()
+        {
+            var self = this;
             ResourceService
-              .getResource( 'basketItems' )
-              .push({'variationId': this.basketItem.variationBase.id, 'quantity': this.quantity})
-              .done(function()
-            {
-              addItemModal.show();
-            })
-              .fail(function()
-              {
-                  NotificationService.error(Translations.Callisto.basketItemNotAdded).closeAfter(10000);
-              });
-        },
-
-        quantityPlus: function()
-        {
-            this.quantity++;
-        },
-
-        quantityMinus: function()
-        {
-            if (this.quantity > 1)
-            {
-                this.quantity--;
-            }
+                .getResource( "basketItems" )
+                .push({
+                    variationId: ResourceService.getResource("currentVariation").val().variationBase.id,
+                    quantity: this.quantity
+                }).done( function() {
+                    self.quantity = 1;
+                });
         }
     }
 });
@@ -1540,7 +1520,7 @@ Vue.component( 'quantity-input', {
 
     template: "#vue-quantity-input",
 
-    props: [ 'value', 'timeout', 'min', 'max' ],
+    props: [ 'value', 'timeout', 'min', 'max', 'vertical' ],
 
     data: function()
     {
@@ -1554,6 +1534,7 @@ Vue.component( 'quantity-input', {
         this.timeout = this.timeout || 300;
         this.min = this.min || 1;
         this.max = this.max || 999;
+        this.vertical = this.vertical || false;
 
         this.$watch( 'value', function( newValue ) {
 
@@ -2086,24 +2067,22 @@ Vue.component('wait-screen', {
 });
 
 },{"services/WaitScreenService":52}],30:[function(require,module,exports){
-var ResourceService     = require('services/ResourceService');
+var ResourceService = require('services/ResourceService');
 var NotificationService = require('services/NotificationService');
 
-Vue.directive('add-to-basket', function(value)
-{
+Vue.directive('add-to-basket', function (value) {
 
     $(this.el).click(
-        function(e)
-        {
-          ResourceService
-              .getResource( 'basketItems' )
-              .push(value);
+        function (e) {
+            ResourceService
+                .getResource('basketItems')
+                .push(value);
 
-          e.preventDefault();
+            e.preventDefault();
 
         }.bind(this));
 
-        //TODO let AddItemConfirm open
+    //TODO let AddItemConfirm open
 
 });
 

@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-quantity-input">
-    <div class="input-group vert">
+    <div class="input-group" :class="{'vert':vertical}">
         <span class="input-group-btn">
             <button class="btn btn-secondary" type="button" @click="value++" :class="{ 'disabled' : value >= max }">+</button>
         </span>
