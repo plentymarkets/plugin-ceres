@@ -1,7 +1,4 @@
-var ResourceService       = require('services/ResourceService');
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var ResourceService      = require('services/ResourceService');
 
 Vue.component('add-to-basket', {
 
