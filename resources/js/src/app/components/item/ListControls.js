@@ -1,4 +1,5 @@
 var PaginationService = require('services/PaginationService');
+var URI = require('urijs');
 
 Vue.component('list-controls', {
 
@@ -49,7 +50,18 @@ Vue.component('list-controls', {
 
         getQueryStringValue: function(key)
         {
-            return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+            var location = window.location.href;
+            var index = location.indexOf("?");
+            if (index >= 0)
+            {
+                var queryString = location.substring(index + 1);
+                var query = URI.parseQuery(queryString);
+                return query[key];
+            }
+            else
+            {
+                return null;
+            }
         },
 
         updateSelectedItemsPerPage: function()
