@@ -87,43 +87,25 @@ Vue.component("registration", {
          */
         getUserObject: function()
         {
-            // FIXME copy&paste-action? serious?
-            if (this.guestMode)
-            {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
+            var userObject =
+                {
+                    contact: {
+                        referrerId: 1,
+                        typeId    : 1,
+                        options   : {
+                            typeId: {
+                                typeId   : 2,
+                                subTypeId: 4,
+                                value    : this.username,
+                                priority : 0
                             }
                         }
-                    };
-            }
-            else
+                    }
+                };
+
+            if (!this.guestMode)
             {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            password  : this.password,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
-                            }
-                        }
-                    };
+                userObject.contact.password = this.password;
             }
 
             if (!this.isSimpleRegistration)
