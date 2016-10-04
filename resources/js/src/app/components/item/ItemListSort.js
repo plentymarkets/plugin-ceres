@@ -35,6 +35,9 @@ Vue.component('item-list-sort', {
     },
 
     methods: {
+        /**
+         * init possible sorting options
+         */
         initPropsValues: function()
         {
             this.sortedDataList = JSON.parse(this.sortedDataList);
@@ -57,28 +60,48 @@ Vue.component('item-list-sort', {
             }
         },
 
+        /**
+         * get params from the url
+         * @param key
+         * @returns {string}
+         */
         getQueryStringValue: function(key)
         {
             return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         },
 
+        /**
+         * get the actual url without any params
+         * @returns {*}
+         */
         currentURL: function()
         {
             var url = window.location.href.split('?')[0];
             return url;
         },
 
+        /**
+         * show the pagination at the position which is set in the config
+         * @returns {boolean}
+         */
         showPagination: function()
         {
-            var show = this.paginationPosition != "infinityScroll";
+            var show = this.paginationPosition;
             return show;
         },
 
+        /**
+         * set the items per page box value to the value of the service
+         */
         updateSelectedItemsPerPage: function()
         {
             PaginationService.itemsPerPage = this.itemsPerPageSelected;
         },
 
+        /**
+         * init default sorting option
+         * @returns {Array}
+         */
         initSortingList: function()
         {
             var defaultSortingOptions = [];
@@ -139,6 +162,10 @@ Vue.component('item-list-sort', {
             return defaultSortingOptions;
         },
 
+        /**
+         * init items per page box default values
+         * @returns {Array}
+         */
         initItemPerPageList: function()
         {
             var defaultItemPerPageOptions = [];
@@ -151,6 +178,9 @@ Vue.component('item-list-sort', {
         }
     },
 
+    /**
+     * initialize sort and pagination
+     */
     ready: function()
     {
         this.initPropsValues();

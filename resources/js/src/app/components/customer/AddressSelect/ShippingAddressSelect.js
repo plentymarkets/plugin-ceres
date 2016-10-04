@@ -6,17 +6,27 @@ Vue.component('shipping-address-select', {
 
     props: ['addressList', 'selectedAddressId'],
 
+    /**
+     * init event listener
+     */
     created: function()
     {
         this.addEventListener();
     },
 
     methods: {
+        /**
+         * add event listener
+         */
         addEventListener: function()
         {
             //listen on APIService events and handle new data
         },
 
+        /**
+         * update delivery address
+         * @param selectedAddress
+         */
         addressChanged: function(selectedAddress)
         {
             CheckoutService.setDeliveryAddressId(selectedAddress.id);

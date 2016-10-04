@@ -24,6 +24,9 @@ Vue.component('registration', {
         };
     },
 
+    /**
+     * check if the component should be a normal registration or the guest registration
+     */
     created: function()
     {
         if (this.guestMode == null || this.guestMode == "")
@@ -37,6 +40,9 @@ Vue.component('registration', {
     },
 
     methods: {
+        /**
+         * validate the registration form
+         */
         validateRegistration: function()
         {
             var self = this;
@@ -51,6 +57,9 @@ Vue.component('registration', {
                 });
         },
 
+        /**
+         * send the registration
+         */
         sendRegistration: function()
         {
             var userObject = this.getUserObject();
@@ -71,6 +80,10 @@ Vue.component('registration', {
 
         },
 
+        /**
+         * handle the userobject which is send to the server
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         */
         getUserObject: function()
         {
             // FIXME copy&paste-action? serious?

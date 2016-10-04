@@ -20,6 +20,9 @@ Vue.component('basket-list-item', {
 
     methods: {
 
+        /**
+         * remove item from basket
+         */
         deleteItem: function()
         {
             var self = this;
@@ -46,6 +49,10 @@ Vue.component('basket-list-item', {
             }
         },
 
+        /**
+         * update item quantity in basket
+         * @param quantity
+         */
         updateQuantity: function( quantity )
         {
             if( this.basketItem.quantity === quantity )
@@ -65,6 +72,9 @@ Vue.component('basket-list-item', {
                 });
         },
 
+        /**
+         * cancel delete
+         */
         resetDelete: function()
         {
             this.deleteConfirmed = false;

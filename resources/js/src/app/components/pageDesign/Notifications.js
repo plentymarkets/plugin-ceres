@@ -13,15 +13,13 @@ Vue.component('notifications', {
     },
 
     methods : {
+        /**
+         * dissmiss the notification
+         * @param notification
+         */
         dismiss: function(notification)
         {
             NotificationService.getNotifications().remove(notification);
-        },
-
-        test   : function()
-        {
-            NotificationService.error('Test').closeAfter(3000);
-            WaitScreenService.showWaitScreen();
         }
     }
 });

@@ -11,6 +11,9 @@ Vue.component( 'quantity-input', {
         };
     },
 
+    /**
+     * TODO
+     */
     ready: function()
     {
         this.timeout = this.timeout || 300;

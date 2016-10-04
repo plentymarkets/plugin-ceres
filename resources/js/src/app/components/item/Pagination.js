@@ -21,6 +21,9 @@ Vue.component('item-list-pagination', {
         };
     },
 
+    /**
+     * initialize pagination necessary variables
+     */
     ready: function()
     {
         this.currentPaginationEntry = this.getQueryStringValue("page");
@@ -41,11 +44,20 @@ Vue.component('item-list-pagination', {
     },
 
     methods: {
+        /**
+         * get param from the url
+         * @param key
+         * @returns {string}
+         */
         getQueryStringValue: function(key)
         {
             return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         },
 
+        /**
+         * calculate how much pages exist
+         * @returns {*}
+         */
         calculateMaxPages: function()
         {
             var pages        = ( this.maxCount / PaginationService.itemsPerPage );
@@ -59,6 +71,10 @@ Vue.component('item-list-pagination', {
             return roundedPages[0];
         },
 
+        /**
+         * get the new items and update the category list 
+         * @param page
+         */
         updateItemCategoryList: function(page)
         {
             if (this.currentURL.split('?').length > 0)
@@ -71,11 +87,19 @@ Vue.component('item-list-pagination', {
             window.open(url, "_self");
         },
 
+        /**
+         * show pagination top, bottom or top-bottom
+         * @returns {*}
+         */
         showPagination: function()
         {
             return this.paginationPosition.includes(this.position);
         },
 
+        /**
+         * show the first pagination entry
+         * @returns {boolean}
+         */
         showFirstPaginationEntry: function()
         {
             var show = true;
@@ -88,11 +112,19 @@ Vue.component('item-list-pagination', {
             return show;
         },
 
+        /**
+         * get the last entry in the pagination
+         * @returns {*}
+         */
         getLastPaginationEntry: function()
         {
             return this.numberOfEntries;
         },
 
+        /**
+         * show the last pagination entry
+         * @returns {boolean}
+         */
         showLastPaginationEntry: function()
         {
             var show = false;
@@ -105,6 +137,10 @@ Vue.component('item-list-pagination', {
             return show;
         },
 
+        /**
+         * get the previous pagination entry
+         * @returns {number}
+         */
         previousPaginationEntry: function()
         {
             var previousPage = this.currentPaginationEntry - 1;
@@ -117,6 +153,10 @@ Vue.component('item-list-pagination', {
             return previousPage;
         },
 
+        /**
+         * get the next pagination entry
+         * @returns {*}
+         */
         nextPaginationEntry: function()
         {
             var nextPage = this.currentPaginationEntry + 1;
@@ -129,6 +169,10 @@ Vue.component('item-list-pagination', {
             return nextPage;
         },
 
+        /**
+         * show the dots on the left side
+         * @returns {boolean}
+         */
         showDotsLeft: function()
         {
             var show = true;
@@ -141,6 +185,10 @@ Vue.component('item-list-pagination', {
             return show;
         },
 
+        /**
+         * show the dots on the right side
+         * @returns {boolean}
+         */
         showDotsRight: function()
         {
             var show = true;
@@ -153,6 +201,10 @@ Vue.component('item-list-pagination', {
             return show;
         },
 
+        /**
+         * show the arrows on the left side
+         * @returns {boolean}
+         */
         showArrowsLeft: function()
         {
             var show = false;
@@ -165,6 +217,10 @@ Vue.component('item-list-pagination', {
             return show;
         },
 
+        /**
+         * show the arrows on the right side
+         * @returns {boolean}
+         */
         showArrowsRight: function()
         {
             var show = true;

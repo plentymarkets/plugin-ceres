@@ -19,6 +19,10 @@ Vue.component('wait-screen', {
     },
 
     computed: {
+        /**
+         * show an overlay over the page
+         * @returns {boolean}
+         */
         visible: function()
         {
             return this.overlay.count > 0;
