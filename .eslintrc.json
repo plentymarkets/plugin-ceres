@@ -57,7 +57,7 @@
       "warn",
       5
     ],
-    "radix": "off",
+    "radix"                   : "off",
     "consistent-return"       : "error",
     "default-case"            : "warn",
     "eqeqeq"                  : "warn",
@@ -71,12 +71,13 @@
       {
         "min"       : 2,
         "max"       : 30,
+        // ignore jQuerys $ and expected loop indices
         "exceptions": [
           "$",
           "i",
-          "j"
+          "j",
+          "k"
         ]
-        // ignore jQuerys $ and loop indices
       }
     ],
     "indent"                  : [
