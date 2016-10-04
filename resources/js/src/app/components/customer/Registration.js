@@ -46,6 +46,7 @@ Vue.component("registration", {
         validateRegistration: function()
         {
             var self = this;
+
             ValidationService.validate($("#registration" + this._uid))
                 .done(function()
                 {

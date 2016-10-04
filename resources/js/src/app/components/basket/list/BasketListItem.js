@@ -26,6 +26,7 @@ Vue.component("basket-list-item", {
         deleteItem: function()
         {
             var self = this;
+
             if (!this.deleteConfirmed)
             {
                 this.deleteConfirmed = true;
@@ -43,9 +44,11 @@ Vue.component("basket-list-item", {
                 ResourceService
                     .getResource("basketItems")
                     .remove(this.basketItem.id)
-                    .done(function() {
-                        self.resetDelete();
-                    });
+                    .done(
+                        function()
+                        {
+                            self.resetDelete();
+                        });
             }
         },
 
@@ -67,9 +70,11 @@ Vue.component("basket-list-item", {
             ResourceService
                 .getResource("basketItems")
                 .set(this.basketItem.id, this.basketItem)
-                .done(function() {
-                    self.waiting = false;
-                });
+                .done(
+                    function()
+                    {
+                        self.waiting = false;
+                    });
         },
 
         /**

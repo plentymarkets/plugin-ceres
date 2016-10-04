@@ -62,6 +62,7 @@ Vue.component("account-settings", {
         saveAccountSettings: function()
         {
             var self = this;
+
             if (this.newPassword != "" && (this.newPassword === this.confirmPassword))
             {
                 APIService.post("/rest/customer/password", {password: this.newPassword})

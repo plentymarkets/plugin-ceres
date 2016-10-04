@@ -20,6 +20,7 @@ Vue.component("create-update-address", {
         validate: function()
         {
             var self = this;
+
             ValidationService.validate($("#my-form"))
                 .done(function()
                 {
@@ -60,6 +61,7 @@ Vue.component("create-update-address", {
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
+
                         if (address.id == this.addressData.id)
                         {
                             address = this.addressData;

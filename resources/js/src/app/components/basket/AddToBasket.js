@@ -1,5 +1,4 @@
 var ResourceService       = require("services/ResourceService");
-var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
 
@@ -28,8 +27,8 @@ Vue.component("add-to-basket", {
         addToBasket: function(quantity)
         {
             var addItemModal = ModalService.findModal($(this.$el.parentElement));
-            addItemModal.setTimeout(10000);
 
+            addItemModal.setTimeout(10000);
             $(".wrapper-bottom").append(addItemModal.getModalContainer());
 
             ResourceService

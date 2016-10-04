@@ -77,6 +77,7 @@ Vue.component("item-list-sort", {
         currentURL: function()
         {
             var url = window.location.href.split("?")[0];
+
             return url;
         },
 
@@ -87,6 +88,7 @@ Vue.component("item-list-sort", {
         showPagination: function()
         {
             var show = this.paginationPosition;
+
             return show;
         },
 
@@ -170,9 +172,9 @@ Vue.component("item-list-sort", {
         {
             var defaultItemPerPageOptions = [];
 
-            defaultItemPerPageOptions.push({value: 20, selected: this.defaultItemPerPage == 20});
-            defaultItemPerPageOptions.push({value: 50, selected: this.defaultItemPerPage == 50});
-            defaultItemPerPageOptions.push({value: 100, selected: this.defaultItemPerPage == 100});
+            defaultItemPerPageOptions.push({value: 20, selected: this.defaultItemPerPage === 20});
+            defaultItemPerPageOptions.push({value: 50, selected: this.defaultItemPerPage === 50});
+            defaultItemPerPageOptions.push({value: 100, selected: this.defaultItemPerPage === 100});
 
             return defaultItemPerPageOptions;
         }
