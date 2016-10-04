@@ -1,6 +1,6 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-module.exports = (function( $ ) {
+module.exports = (function($) {
 
     var resources = {};
 
@@ -20,34 +20,34 @@ module.exports = (function( $ ) {
      *
      * @returns {Resource} The created resource.
      */
-    function registerResource( name, route, initialValue )
+    function registerResource(name, route, initialValue)
     {
-        if( !name )
+        if (!name)
         {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route && !initialValue )
+        if (!route && !initialValue)
         {
             throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
-        if( resources.hasOwnProperty( name ) )
+        if (resources.hasOwnProperty(name))
         {
-            throw new Error("Resource '" + name + "' already exists." );
+            throw new Error("Resource '" + name + "' already exists.");
         }
 
         var data;
         try
         {
-            data = $.parseJSON( initialValue );
+            data = $.parseJSON(initialValue);
         }
-        catch( e )
+        catch (e)
         {
             data = initialValue;
         }
 
-        resources[name] = new Resource( route, data );
+        resources[name] = new Resource(route, data);
 
         return resources[name];
     }
@@ -60,34 +60,34 @@ module.exports = (function( $ ) {
      *
      * @returns {Resource}            The created resource.
      */
-    function registerResourceList( name, route, initialValue )
+    function registerResourceList(name, route, initialValue)
     {
-        if( !name )
+        if (!name)
         {
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if( !route && !initialValue )
+        if (!route && !initialValue)
         {
             throw new Error("Cannot register resource. Route or initial value is required.");
         }
 
-        if( resources.hasOwnProperty( name ) )
+        if (resources.hasOwnProperty(name))
         {
-            throw new Error("Resource '" + name + "' already exists." );
+            throw new Error("Resource '" + name + "' already exists.");
         }
 
         var data;
         try
         {
-            data = $.parseJSON( initialValue );
+            data = $.parseJSON(initialValue);
         }
-        catch( e )
+        catch (e)
         {
             data = initialValue;
         }
 
-        resources[name] = new ResourceList( route, data );
+        resources[name] = new ResourceList(route, data);
 
         return resources[name];
     }
@@ -98,11 +98,11 @@ module.exports = (function( $ ) {
      *
      * @returns {Resource}      The resource
      */
-    function getResource( name )
+    function getResource(name)
     {
-        if( !resources[name] )
+        if (!resources[name])
         {
-            throw new Error("Unkown resource: " + name );
+            throw new Error("Unkown resource: " + name);
         }
 
         return resources[name];
@@ -113,9 +113,9 @@ module.exports = (function( $ ) {
      * @param {string}      name        The name of the resource to watch
      * @param {function}    callback    The handler to call on each change
      */
-    function watch( name, callback )
+    function watch(name, callback)
     {
-        getResource( name ).watch( callback );
+        getResource(name).watch(callback);
     }
 
     /**
@@ -124,10 +124,10 @@ module.exports = (function( $ ) {
      * @param {Vue}     vue         The vue instance
      * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
      */
-    function bind( name, vue, property )
+    function bind(name, vue, property)
     {
         property = property || name;
-        getResource( name ).bind( vue, property );
+        getResource(name).bind(vue, property);
     }
 
     /**
@@ -144,20 +144,20 @@ module.exports = (function( $ ) {
             {
                 return _value;
             },
-            set value( newValue )
+            set value(newValue)
             {
-                for( var i = 0; i < _watchers.length; i++ )
+                for (var i = 0; i < _watchers.length; i++)
                 {
                     var watcher = _watchers[i];
-                    watcher.apply( null, [newValue, _value] );
+                    watcher.apply(null, [newValue, _value]);
                 }
                 _value = newValue;
             },
-            watch: function( cb )
+            watch: function(cb)
             {
-                _watchers.push( cb );
+                _watchers.push(cb);
             }
-        }
+        };
     }
 
     /**
@@ -165,32 +165,32 @@ module.exports = (function( $ ) {
      * @param {string}  url             The url to bind the resource to
      * @param {string}  initialValue    The initial value to assign to the resource
      */
-    function Resource( url, initialValue )
+    function Resource(url, initialValue)
     {
         var data = new Observable();
         var ready = false;
 
         // initialize resource
-        if( !!initialValue )
+        if (!!initialValue)
         {
             // initial value was given by constructor
             data.value = initialValue;
             ready = true;
         }
-        else if( !!url )
+        else if (!!url)
         {
             // no initial value given
             // => get value from url
             ApiService
-                .get( url )
-                .done( function( response ) {
+                .get(url)
+                .done(function(response) {
                     data.value = response;
                     ready = true;
-                } );
+                });
         }
         else
         {
-            throw new Error( "Cannot initialize resource." );
+            throw new Error("Cannot initialize resource.");
         }
 
         return {
@@ -208,12 +208,12 @@ module.exports = (function( $ ) {
          * @param {string} usePayload   A property of the payload to assign to this resource.
          *                              The resource will be updated by GET request if not set.
          */
-        function listen( event, usePayload )
+        function listen(event, usePayload)
         {
-            ApiService.listen( event, function( payload ) {
-                if( !!usePayload )
+            ApiService.listen(event, function(payload) {
+                if (!!usePayload)
                 {
-                    update( payload[usePayload] );
+                    update(payload[usePayload]);
                 }
                 else
                 {
@@ -226,16 +226,16 @@ module.exports = (function( $ ) {
          * Add handler to track changes on this resource
          * @param {function} cb     The callback to call on each change
          */
-        function watch( cb )
+        function watch(cb)
         {
-            if( typeof cb !== "function" )
+            if (typeof cb !== "function")
             {
-                throw new Error( "Callback expected but got '" + (typeof cb) + "'.");
+                throw new Error("Callback expected but got '" + (typeof cb) + "'.");
             }
-            data.watch( cb );
-            if( ready )
+            data.watch(cb);
+            if (ready)
             {
-                cb.apply( null, [data.value, null] );
+                cb.apply(null, [data.value, null]);
             }
         }
 
@@ -244,21 +244,21 @@ module.exports = (function( $ ) {
          * @param {Vue}     vue         The vue instance
          * @param {sting}   property    The property of the vue instance
          */
-        function bind( vue, property )
+        function bind(vue, property)
         {
-            if( !vue )
+            if (!vue)
             {
-                throw new Error( "Vue instance not set." );
+                throw new Error("Vue instance not set.");
             }
 
-            if( !property )
+            if (!property)
             {
-                throw new Error( "Cannot bind undefined property." );
+                throw new Error("Cannot bind undefined property.");
             }
 
-            watch( function( newValue ) {
-                vue.$set( property, newValue );
-            } );
+            watch(function(newValue) {
+                vue.$set(property, newValue);
+            });
         }
 
         /**
@@ -275,13 +275,13 @@ module.exports = (function( $ ) {
          * @param {*}   value   The value to set.
          * @returns {Deferred}  The PUT request to the url of the resource
          */
-        function set( value )
+        function set(value)
         {
-            if( !!url )
+            if (!!url)
             {
                 return ApiService
                     .put(url, value)
-                    .done(function (response) {
+                    .done(function(response) {
                         data.value = response;
                     });
             }
@@ -299,26 +299,26 @@ module.exports = (function( $ ) {
          * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
          * @returns {Deferred}          The GET request to the url of the resource
          */
-        function update( value )
+        function update(value)
         {
-            if( !!value )
+            if (!!value)
             {
                 data.value = value;
                 var deferred = $.Deferred();
                 deferred.resolve();
                 return deferred;
             }
-            else if( !!url )
+            else if (!!url)
             {
                 return ApiService
-                    .get( url )
-                    .done( function( response ) {
+                    .get(url)
+                    .done(function(response) {
                         data.value = response;
                     });
             }
             else
             {
-                throw new Error( "Cannot update resource. Neither an URL nor a value is prodivded." );
+                throw new Error("Cannot update resource. Neither an URL nor a value is prodivded.");
             }
         }
     }
@@ -328,33 +328,33 @@ module.exports = (function( $ ) {
      * @param {string}  url             The url to bind the resource to
      * @param {string}  initialValue    The initial value to assign to the resource
      */
-    function ResourceList( url, initialValue )
+    function ResourceList(url, initialValue)
     {
         var data = new Observable();
         var ready = false;
 
-        if( url.charAt( url.length - 1 ) !== "/" )
+        if (url.charAt(url.length - 1) !== "/")
         {
             url += "/";
         }
 
-        if( !!initialValue )
+        if (!!initialValue)
         {
             data.value = initialValue;
             ready = true;
         }
-        else if( !!url )
+        else if (!!url)
         {
             ApiService
-                .get( url )
-                .done( function( response ) {
+                .get(url)
+                .done(function(response) {
                     data.value = response;
                     ready = true;
-                } );
+                });
         }
         else
         {
-            throw new Error( "Cannot initialize resource." );
+            throw new Error("Cannot initialize resource.");
         }
 
         return {
@@ -374,12 +374,12 @@ module.exports = (function( $ ) {
          * @param {string} usePayload   A property of the payload to assign to this resource.
          *                              The resource will be updated by GET request if not set.
          */
-        function listen( event, usePayload )
+        function listen(event, usePayload)
         {
-            ApiService.listen( event, function( payload ) {
-                if( !!usePayload )
+            ApiService.listen(event, function(payload) {
+                if (!!usePayload)
                 {
-                    update( payload[usePayload] );
+                    update(payload[usePayload]);
                 }
                 else
                 {
@@ -392,17 +392,17 @@ module.exports = (function( $ ) {
          * Add handler to track changes on this resource
          * @param {function} cb     The callback to call on each change
          */
-        function watch( cb )
+        function watch(cb)
         {
-            if( typeof cb !== "function" )
+            if (typeof cb !== "function")
             {
-                throw new Error( "Callback expected but got '" + (typeof cb) + "'.");
+                throw new Error("Callback expected but got '" + (typeof cb) + "'.");
             }
-            data.watch( cb );
+            data.watch(cb);
 
-            if( ready )
+            if (ready)
             {
-                cb.apply( null, [data.value, null] );
+                cb.apply(null, [data.value, null]);
             }
         }
 
@@ -411,21 +411,21 @@ module.exports = (function( $ ) {
          * @param {Vue}     vue         The vue instance
          * @param {sting}   property    The property of the vue instance
          */
-        function bind( vue, property )
+        function bind(vue, property)
         {
-            if( !vue )
+            if (!vue)
             {
-                throw new Error( "Vue instance not set." );
+                throw new Error("Vue instance not set.");
             }
 
-            if( !property )
+            if (!property)
             {
-                throw new Error( "Cannot bind undefined property." );
+                throw new Error("Cannot bind undefined property.");
             }
 
-            watch( function( newValue ) {
-                vue.$set( property, newValue );
-            } );
+            watch(function(newValue) {
+                vue.$set(property, newValue);
+            });
         }
 
         /**
@@ -443,13 +443,13 @@ module.exports = (function( $ ) {
          * @param {*}               value   The value to set.
          * @returns {Deferred}      The PUT request to the url of the resource
          */
-        function set( key, value )
+        function set(key, value)
         {
-            if( !!url )
+            if (!!url)
             {
                 return ApiService
                     .put(url + key, value)
-                    .done(function (response) {
+                    .done(function(response) {
                         data.value = response;
                     });
             }
@@ -467,19 +467,19 @@ module.exports = (function( $ ) {
          * @param {*}   value   The element to add
          * @returns {Deferred}  The POST request to the url of the resource
          */
-        function push( value )
+        function push(value)
         {
             return ApiService
-                .post( url, value )
-                .done( function( response ) {
+                .post(url, value)
+                .done(function(response) {
                     data.value = response;
-                } );
+                });
 
-            if( !!url )
+            if (!!url)
             {
                 return ApiService
                     .post(url, value)
-                    .done(function (response) {
+                    .done(function(response) {
                         data.value = response;
                     });
             }
@@ -488,7 +488,7 @@ module.exports = (function( $ ) {
                 var deferred = $.Deferred();
 
                 var list = data.value;
-                list.push( value );
+                list.push(value);
                 data.value = list;
 
                 deferred.resolve();
@@ -501,13 +501,13 @@ module.exports = (function( $ ) {
          * @param {string|number}   key     The key of the element
          * @returns {Deferred}              The DELETE request to the url of the resource
          */
-        function remove( key )
+        function remove(key)
         {
-            if( !!url )
+            if (!!url)
             {
                 return ApiService
                     .delete(url + key)
-                    .done(function (response) {
+                    .done(function(response) {
                         data.value = response;
                     });
             }
@@ -516,7 +516,7 @@ module.exports = (function( $ ) {
                 var deferred = $.Deferred();
 
                 var list = data.value;
-                list.splice( key, 1 );
+                list.splice(key, 1);
                 data.value = list;
 
                 deferred.resolve();
@@ -529,9 +529,9 @@ module.exports = (function( $ ) {
          * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
          * @returns {Deferred}          The GET request to the url of the resource
          */
-        function update( value )
+        function update(value)
         {
-            if( !!value )
+            if (!!value)
             {
                 data.value = value;
                 var deferred = $.Deferred();
@@ -541,12 +541,12 @@ module.exports = (function( $ ) {
             else
             {
                 return ApiService
-                    .get( url )
-                    .done( function( response ) {
+                    .get(url)
+                    .done(function(response) {
                         data.value = response;
                     });
             }
         }
     }
 
-})( jQuery );
+})(jQuery);

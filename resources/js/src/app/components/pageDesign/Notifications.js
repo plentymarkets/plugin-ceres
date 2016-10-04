@@ -1,9 +1,9 @@
-var NotificationService = require('services/NotificationService');
-var WaitScreenService   = require('services/WaitScreenService');
+var NotificationService = require("services/NotificationService");
+var WaitScreenService   = require("services/WaitScreenService");
 
-Vue.component('notifications', {
+Vue.component("notifications", {
 
-    template: '#vue-notifications',
+    template: "#vue-notifications",
 
     data    : function()
     {

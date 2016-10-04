@@ -1,8 +1,8 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-Vue.component('user-login-handler', {
+Vue.component("user-login-handler", {
 
-    template: '#vue-user-login-handler',
+    template: "#vue-user-login-handler",
 
     /**
      * add global event listener for login and logout

@@ -1,4 +1,4 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
 module.exports = (function($)
 {
@@ -38,7 +38,7 @@ module.exports = (function($)
             }
             else
             {
-                ApiService.get('/rest/basket').done(function(response)
+                ApiService.get("/rest/basket").done(function(response)
                 {
                     basket = response;
                     notify();
@@ -65,7 +65,7 @@ module.exports = (function($)
     }
 
     /**
-     * 
+     *
      */
     function notify()
     {
@@ -83,7 +83,7 @@ module.exports = (function($)
     function addBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.post('/rest/basket/items/', basketItem)
+        return ApiService.post("/rest/basket/items/", basketItem)
             .done(function(response)
             {
                 basket = response;
@@ -94,7 +94,7 @@ module.exports = (function($)
     function updateBasketItem(basketItem)
     {
         var self = this;
-        return ApiService.put('/rest/basket/items/' + basketItem.id, basketItem)
+        return ApiService.put("/rest/basket/items/" + basketItem.id, basketItem)
             .done(function(response)
             {
                 basket = response;
@@ -106,7 +106,7 @@ module.exports = (function($)
     {
         var id   = basket.shippingCountryId;
         var self = this;
-        return ApiService.put('/rest/deliverycountry/' + id, basket)
+        return ApiService.put("/rest/deliverycountry/" + id, basket)
             .done(function(response)
             {
                 basket = response;
@@ -127,7 +127,7 @@ module.exports = (function($)
             basketItemId = basketItem.id;
         }
 
-        return ApiService.delete('/rest/basket/items/' + basketItemId)
+        return ApiService.delete("/rest/basket/items/" + basketItemId)
             .done(function(response)
             {
                 basket = response;

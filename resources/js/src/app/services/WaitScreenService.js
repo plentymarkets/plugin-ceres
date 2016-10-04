@@ -39,7 +39,7 @@ module.exports = (function($)
 
         if (overlay.count <= 0)
         {
-            overlay.count   = 0;
+            overlay.count = 0;
             overlay.visible = false;
         }
 

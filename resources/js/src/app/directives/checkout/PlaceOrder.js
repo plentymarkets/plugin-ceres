@@ -1,6 +1,6 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-Vue.directive('place-order', function() {
+Vue.directive("place-order", function() {
 
     var $elem = $(this.el);
 
@@ -14,7 +14,7 @@ Vue.directive('place-order', function() {
         ApiService.post("/rest/order")
             .done(function(response)
             {
-                var target = $elem.attr('href') || $elem.parents('form').attr('action');
+                var target = $elem.attr("href") || $elem.parents("form").attr("action");
                 window.location.assign(target);
             });
 

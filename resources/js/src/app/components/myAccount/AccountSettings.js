@@ -1,10 +1,10 @@
-var ModalService        = require('services/ModalService');
-var APIService          = require('services/APIService');
-var NotificationService = require('services/NotificationService');
+var ModalService        = require("services/ModalService");
+var APIService          = require("services/APIService");
+var NotificationService = require("services/NotificationService");
 
-Vue.component('account-settings', {
+Vue.component("account-settings", {
 
-    template: '#vue-account-settings',
+    template: "#vue-account-settings",
 
     props: [
         "userData"
@@ -13,9 +13,9 @@ Vue.component('account-settings', {
     data: function()
     {
         return {
-            newPassword         : '',
-            confirmPassword     : '',
-            accountSettingsClass: ''
+            newPassword         : "",
+            confirmPassword     : "",
+            accountSettingsClass: ""
         };
     },
 
@@ -34,7 +34,7 @@ Vue.component('account-settings', {
          */
         matchPassword: function()
         {
-            if (this.confirmPassword != '')
+            if (this.confirmPassword != "")
             {
                 return this.newPassword === this.confirmPassword;
             }
@@ -49,9 +49,9 @@ Vue.component('account-settings', {
          */
         showChangeAccountSettings: function()
         {
-            var accountModal = ModalService.findModal($('.' + this.accountSettingsClass));
+            var accountModal = ModalService.findModal($("." + this.accountSettingsClass));
 
-            $(".wrapper-bottom").append($('.' + this.accountSettingsClass));
+            $(".wrapper-bottom").append($("." + this.accountSettingsClass));
 
             accountModal.show();
         },
@@ -62,18 +62,18 @@ Vue.component('account-settings', {
         saveAccountSettings: function()
         {
             var self = this;
-            if (this.newPassword != '' && (this.newPassword === this.confirmPassword))
+            if (this.newPassword != "" && (this.newPassword === this.confirmPassword))
             {
-                APIService.post('/rest/customer/password', {password: this.newPassword})
+                APIService.post("/rest/customer/password", {password: this.newPassword})
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
                         NotificationService.success(Translations.Callisto.accChangePasswordSuccessful).closeAfter(3000);
                     }).fail(function(response)
                 {
-                    self.clearFieldsAndClose();
-                    NotificationService.error(Translations.Callisto.accChangePasswordFailed).closeAfter(5000);
-                });
+                        self.clearFieldsAndClose();
+                        NotificationService.error(Translations.Callisto.accChangePasswordFailed).closeAfter(5000);
+                    });
             }
         },
 
@@ -82,8 +82,8 @@ Vue.component('account-settings', {
          */
         clearFields: function()
         {
-            this.newPassword     = '';
-            this.confirmPassword = '';
+            this.newPassword = "";
+            this.confirmPassword = "";
         },
 
         /**
@@ -91,7 +91,7 @@ Vue.component('account-settings', {
          */
         clearFieldsAndClose: function()
         {
-            ModalService.findModal($('.' + this.accountSettingsClass)).hide();
+            ModalService.findModal($("." + this.accountSettingsClass)).hide();
             this.clearFields();
         },
 

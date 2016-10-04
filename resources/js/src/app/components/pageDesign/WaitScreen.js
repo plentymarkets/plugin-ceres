@@ -1,4 +1,4 @@
-var WaitScreenService = require('services/WaitScreenService');
+var WaitScreenService = require("services/WaitScreenService");
 
 /**
 *
@@ -7,9 +7,9 @@ var WaitScreenService = require('services/WaitScreenService');
 *
 */
 
-Vue.component('wait-screen', {
+Vue.component("wait-screen", {
 
-    template: '#vue-wait-screen',
+    template: "#vue-wait-screen",
 
     data    : function()
     {

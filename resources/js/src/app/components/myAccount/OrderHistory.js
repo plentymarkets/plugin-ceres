@@ -1,8 +1,8 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-Vue.component('order-history', {
+Vue.component("order-history", {
 
-    template: '#vue-order-history',
+    template: "#vue-order-history",
 
     props: [
         "contactId",
@@ -12,12 +12,12 @@ Vue.component('order-history', {
     data: function()
     {
         return {
-            //needed for pagination
+            // needed for pagination
             currentPaginationEntry: 1,
             numberOfEntries       : 1,
             showItemsOf           : "1-6",
             itemsPerPage          : 6,
-            //orderObjectToRender
+            // orderObjectToRender
             orderList             : []
         };
     },
@@ -50,14 +50,14 @@ Vue.component('order-history', {
                 {
                     ApiService.setToken(response);
 
-                    self.orderList = response["entries"];
+                    self.orderList = response.entries;
 
-                    //calculate the show X - X items
+                    // calculate the show X - X items
                     this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) + 1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) + this.itemsPerPage);
                 })
                 .fail(function(response)
                 {
-                    //todo
+                    // todo
                 });
         },
 

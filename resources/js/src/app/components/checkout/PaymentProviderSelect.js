@@ -1,10 +1,10 @@
-var APIService = require( 'services/APIService' );
+var APIService = require("services/APIService");
 
-Vue.component( 'payment-provider-select', {
+Vue.component("payment-provider-select", {
 
-    template: '#vue-payment-provider-select',
+    template: "#vue-payment-provider-select",
 
-    props: ['paymentProviderList'],
+    props: ["paymentProviderList"],
 
     data: function()
     {
@@ -28,7 +28,7 @@ Vue.component( 'payment-provider-select', {
          */
         onPaymentProviderChange: function()
         {
-            APIService.put( "/rest/payment_method/" + this.selectedPaymentProvider );
+            APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
         },
 
         /**
@@ -37,9 +37,9 @@ Vue.component( 'payment-provider-select', {
          * @param currency
          * @returns {*}
          */
-        formatPrice: function( price, currency )
+        formatPrice: function(price, currency)
         {
-            return MonetaryFormatService.formatMonetary( price, currency );
+            return MonetaryFormatService.formatMonetary(price, currency);
         },
 
         /**
@@ -47,7 +47,7 @@ Vue.component( 'payment-provider-select', {
          */
         addEventListener: function()
         {
-            //listen on APIService events and handle new data
+            // listen on APIService events and handle new data
         }
     }
-} );
+});

@@ -1,4 +1,4 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
 module.exports = (function($)
 {

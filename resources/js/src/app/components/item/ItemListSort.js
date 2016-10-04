@@ -1,8 +1,8 @@
-var PaginationService = require('services/PaginationService');
+var PaginationService = require("services/PaginationService");
 
-Vue.component('item-list-sort', {
+Vue.component("item-list-sort", {
 
-    template: '#vue-item-list-sort',
+    template: "#vue-item-list-sort",
 
     props: {
         sortedDataList    : String,
@@ -44,19 +44,19 @@ Vue.component('item-list-sort', {
 
             if (this.sortedDataList)
             {
-                this.topCell          = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemAsc          = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemDesc         = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameAsc          = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameDesc         = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceAsc         = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceDesc        = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseAsc       = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseDesc      = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialAsc  = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.topCell = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemAsc = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemDesc = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameAsc = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameDesc = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceAsc = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceDesc = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseAsc = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseDesc = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialAsc = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
                 this.storeSpecialDesc = this.sortedDataList.indexOf("store_special_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.idDesc           = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.random           = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.idDesc = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.random = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
             }
         },
 
@@ -76,7 +76,7 @@ Vue.component('item-list-sort', {
          */
         currentURL: function()
         {
-            var url = window.location.href.split('?')[0];
+            var url = window.location.href.split("?")[0];
             return url;
         },
 
@@ -194,7 +194,7 @@ Vue.component('item-list-sort', {
         }
         if (listItemsPerPage.length > 0)
         {
-            this.defaultItemPerPage   = listItemsPerPage;
+            this.defaultItemPerPage = listItemsPerPage;
             this.itemsPerPageSelected = this.defaultItemPerPage;
         }
         else
@@ -204,7 +204,7 @@ Vue.component('item-list-sort', {
 
         PaginationService.itemsPerPage = this.itemsPerPageSelected;
 
-        this.sortingList     = this.initSortingList();
+        this.sortingList = this.initSortingList();
         this.itemPerPageList = this.initItemPerPageList();
     }
 });

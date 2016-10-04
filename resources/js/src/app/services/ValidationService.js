@@ -27,10 +27,10 @@ module.exports = (function($)
 
     function _getInvalidFields(form)
     {
-        $form                   = $(form);
+        $form = $(form);
         var invalidFormControls = [];
 
-        $form.find('[data-validate]').each(function(i, elem)
+        $form.find("[data-validate]").each(function(i, elem)
         {
 
             if (!_validateElement($(elem)))
@@ -44,23 +44,23 @@ module.exports = (function($)
 
     function _markInvalidFields(fields, errorClass)
     {
-        errorClass = errorClass || 'has-error';
+        errorClass = errorClass || "has-error";
 
         $(fields).each(function(i, elem)
         {
             var $elem = $(elem);
             $elem.addClass(errorClass);
-            _findFormControls($elem).on('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass', function()
+            _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function()
             {
                 if (_validateElement($elem))
                 {
                     $elem.removeClass(errorClass);
-                    if ($elem.is('[type="radio"], [type="checkbox"]'))
+                    if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]"))
                     {
-                        var groupName = $elem.attr('name');
-                        $('.' + errorClass + '[name="' + groupName + '"]').removeClass(errorClass);
+                        var groupName = $elem.attr("name");
+                        $("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
                     }
-                    _findFormControls($elem).off('click.removeErrorClass keyup.removeErrorClass change.removeErrorClass');
+                    _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
                 }
             });
         });
@@ -69,10 +69,10 @@ module.exports = (function($)
     function _validateElement(elem)
     {
         var $elem          = $(elem);
-        var validationKeys = $elem.attr('data-validate').split('|').map(function(i)
+        var validationKeys = $elem.attr("data-validate").split("|").map(function(i)
             {
-                return i.trim();
-            }) || ["text"];
+            return i.trim();
+        }) || ["text"];
         var hasError       = false;
 
         _findFormControls($elem).each(function(i, formControl)
@@ -86,7 +86,7 @@ module.exports = (function($)
                 return true;
             }
 
-            if ($formControl.is('[type="checkbox"], [type="radio"]'))
+            if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]"))
             {
 
                 if (!_validateGroup($formControl, validationKey))
@@ -96,7 +96,7 @@ module.exports = (function($)
                 return true;
             }
 
-            if ($formControl.is('select'))
+            if ($formControl.is("select"))
             {
                 if (!_validateSelect($formControl, validationKey))
                 {
@@ -117,10 +117,10 @@ module.exports = (function($)
 
     function _validateGroup($formControl, validationKey)
     {
-        var groupName = $formControl.attr('name');
-        var $group    = $form.find('[name="' + groupName + '"]');
+        var groupName = $formControl.attr("name");
+        var $group    = $form.find("[name=\"" + groupName + "\"]");
         var range     = _eval(validationKey) || {min: 1, max: 1};
-        var checked   = $group.filter(':checked').length;
+        var checked   = $group.filter(":checked").length;
 
         return checked >= range.min && checked <= range.max;
 
@@ -135,22 +135,22 @@ module.exports = (function($)
     {
         switch (validationKey)
         {
-            case 'text':
-                return _hasValue($formControl);
-            case 'mail':
-                var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
-                return _hasValue($formControl) && mailRegExp.test($formControl.val());
-            case 'number':
-                return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
-            case 'ref':
-                return _compareRef($.trim($formControl.val()), $.trim($formControl.attr('data-validate-ref')));
-            case 'regex':
-                var ref   = $formControl.attr('data-validate-ref');
-                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
-                return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-            default:
-                console.error('Form validation error: unknown validation property: "' + validationKey + '"');
-                return true;
+        case "text":
+            return _hasValue($formControl);
+        case "mail":
+            var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
+            return _hasValue($formControl) && mailRegExp.test($formControl.val());
+        case "number":
+            return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
+        case "ref":
+            return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
+        case "regex":
+            var ref   = $formControl.attr("data-validate-ref");
+            var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+            return _hasValue($formControl) && regex.test($.trim($formControl.val()));
+        default:
+            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
+            return true;
         }
     }
 
@@ -171,17 +171,17 @@ module.exports = (function($)
 
     function _findFormControls($elem)
     {
-        if ($elem.is('input, select, textarea'))
+        if ($elem.is("input, select, textarea"))
         {
             return $elem;
         }
 
-        return $elem.find('input, select, textarea');
+        return $elem.find("input, select, textarea");
     }
 
     function _isActive($elem)
     {
-        return $elem.is(':visible') && $elem.is(':enabled');
+        return $elem.is(":visible") && $elem.is(":enabled");
     }
 
     function _eval(input)

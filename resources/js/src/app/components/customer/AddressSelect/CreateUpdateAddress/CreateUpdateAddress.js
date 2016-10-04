@@ -1,9 +1,9 @@
-var AddressService    = require('services/AddressService');
-var ValidationService = require('services/ValidationService');
+var AddressService    = require("services/AddressService");
+var ValidationService = require("services/ValidationService");
 
-Vue.component('create-update-address', {
+Vue.component("create-update-address", {
 
-    template: '#vue-create-update-address',
+    template: "#vue-create-update-address",
 
     props: [
         "addressData",
@@ -20,7 +20,7 @@ Vue.component('create-update-address', {
         validate: function()
         {
             var self = this;
-            ValidationService.validate($('#my-form'))
+            ValidationService.validate($("#my-form"))
                 .done(function()
                 {
                     self.saveAddress();
@@ -39,11 +39,11 @@ Vue.component('create-update-address', {
         {
             if (this.modalType === "create")
             {
-                this.createAddress()
+                this.createAddress();
             }
             else if (this.modalType === "update")
             {
-                this.updateAddress()
+                this.updateAddress();
             }
         },
 

@@ -1,14 +1,14 @@
-var CountryService = require('services/CountryService');
+var CountryService = require("services/CountryService");
 
-Vue.component('country-select', {
+Vue.component("country-select", {
 
-    template: '#vue-country-select',
+    template: "#vue-country-select",
 
     props: [
-        'countryData',
-        'countryNameMap',
-        'selectedCountryId',
-        'selectedStateId'
+        "countryData",
+        "countryNameMap",
+        "selectedCountryId",
+        "selectedStateId"
     ],
 
     data: function()
@@ -44,10 +44,10 @@ Vue.component('country-select', {
         /**
          * add watcher to handle country changed
          */
-        'selectedCountryId': function()
+        selectedCountryId: function()
         {
             this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
-            this.stateList   = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+            this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
         }
     }
 });

@@ -1,12 +1,12 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
 
-var ValidationService = require('services/ValidationService');
+var ValidationService = require("services/ValidationService");
 
-Vue.component('registration', {
+Vue.component("registration", {
 
-    template: '#vue-registration',
+    template: "#vue-registration",
 
     props: [
         "modalElement",
@@ -46,10 +46,10 @@ Vue.component('registration', {
         validateRegistration: function()
         {
             var self = this;
-            ValidationService.validate($('#registration' + this._uid))
+            ValidationService.validate($("#registration" + this._uid))
                 .done(function()
                 {
-                    self.sendRegistration()
+                    self.sendRegistration();
                 })
                 .fail(function(invalidFields)
                 {

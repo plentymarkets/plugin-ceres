@@ -1,10 +1,10 @@
-Vue.component('address-input-group', {
+Vue.component("address-input-group", {
 
-    template: '#vue-address-input-group',
+    template: "#vue-address-input-group",
 
     props: [
-        'addressData',
-        'locale'
+        "addressData",
+        "locale"
     ],
 
     /**

@@ -1,5 +1,5 @@
-var ApiService      = require('services/ApiService');
-var CheckoutService = require('services/CheckoutService');
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
 
 module.exports = (function($)
 {

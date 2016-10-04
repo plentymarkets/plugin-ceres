@@ -1,15 +1,15 @@
-var ApiService        = require('services/ApiService');
-var PaginationService = require('services/PaginationService');
+var ApiService        = require("services/ApiService");
+var PaginationService = require("services/PaginationService");
 
-Vue.component('item-list-pagination', {
+Vue.component("item-list-pagination", {
 
-    template: '#vue-item-list-pagination',
+    template: "#vue-item-list-pagination",
 
     props: [
-        'paginationPosition',
-        'position',
-        'itemList',
-        'maxCount'
+        "paginationPosition",
+        "position",
+        "itemList",
+        "maxCount"
     ],
 
     data: function()
@@ -28,7 +28,7 @@ Vue.component('item-list-pagination', {
     {
         this.currentPaginationEntry = this.getQueryStringValue("page");
         var url                     = window.location.href;
-        this.currentURL             = url.replace("&page=" + this.currentPaginationEntry, "");
+        this.currentURL = url.replace("&page=" + this.currentPaginationEntry, "");
         this.currentPaginationEntry = parseInt(this.currentPaginationEntry) || 1;
 
         this.numberOfEntries = this.calculateMaxPages();
@@ -60,8 +60,8 @@ Vue.component('item-list-pagination', {
          */
         calculateMaxPages: function()
         {
-            var pages        = ( this.maxCount / PaginationService.itemsPerPage );
-            var roundedPages = pages.toString().split('.');
+            var pages        = (this.maxCount / PaginationService.itemsPerPage);
+            var roundedPages = pages.toString().split(".");
 
             if (roundedPages[1] > 0)
             {
@@ -72,14 +72,14 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * get the new items and update the category list 
+         * get the new items and update the category list
          * @param page
          */
         updateItemCategoryList: function(page)
         {
-            if (this.currentURL.split('?').length > 0)
+            if (this.currentURL.split("?").length > 0)
             {
-                this.currentURL = this.currentURL.split('?')[0];
+                this.currentURL = this.currentURL.split("?")[0];
             }
 
             var url = this.currentURL + "?page=" + page + "&items_per_page=" + PaginationService.itemsPerPage;
