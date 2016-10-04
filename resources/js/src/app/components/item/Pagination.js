@@ -1,4 +1,3 @@
-var ApiService        = require("services/ApiService");
 var PaginationService = require("services/PaginationService");
 
 Vue.component("item-list-pagination", {

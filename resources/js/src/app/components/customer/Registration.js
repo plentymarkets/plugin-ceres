@@ -29,7 +29,7 @@ Vue.component("registration", {
      */
     created: function()
     {
-        if (this.guestMode == null || this.guestMode == "")
+        if (this.guestMode === null || this.guestMode == "")
         {
             this.guestMode = false;
         }
@@ -71,7 +71,7 @@ Vue.component("registration", {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) != null)
+                    if (document.getElementById(component.modalElement) !== null)
                     {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }

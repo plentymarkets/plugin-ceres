@@ -83,7 +83,7 @@ Vue.component("basket-list-item", {
         resetDelete: function()
         {
             this.deleteConfirmed = false;
-            if (!!this.deleteConfirmedTimeout)
+            if (this.deleteConfirmedTimeout)
             {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
