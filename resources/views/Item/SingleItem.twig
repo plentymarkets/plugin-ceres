@@ -8,6 +8,7 @@
 
 {% block PageBody %}
     {{ component( "PluginCallisto::Item.Components.VariationSelect" ) }}
+    {{ component( "PluginCallisto::Item.Components.VariationImageList" ) }}
     {{ component( "PluginCallisto::Basket.Components.AddToBasket" ) }}
     {{ component( "PluginCallisto::Basket.Components.AddItemConfirm" ) }}
     <resource name="currentVariation" data="{{ item | json_encode() }}"></resource>
@@ -17,31 +18,7 @@
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
-
-                        <div id="single-big-image" class="owl-carousel">
-                            {% for image in item.variationImageList %}
-                                <div class="owl_item">
-                                    <div class="square-container">
-                                        <div class="square-inner center-xy main-image">
-                                            <a href="{{ app.request.baseUrl }}/{{ image.path }}"
-                                               data-lightbox="single-big-image-gallery">
-                                                <img src="{{ app.request.baseUrl }}/{{ image.path }}?h=600&w=600"
-                                                     class="img-fluid">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-
-                        <div id="single-carousel" class="owl-carousel">
-                            {% for image in item.variationImageList %}
-                                <div class="owl_item">
-                                    <img src="{{ app.request.baseUrl }}/{{ image.path }}" class="img-fluid">
-                                </div>
-                            {% endfor %}
-                        </div>
-
+                        <variation-image-list></variation-image-list>
                     </div>
                 </div>
             </div>
