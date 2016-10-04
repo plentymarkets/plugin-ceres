@@ -1,5 +1,4 @@
 var ResourceService     = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
 
 Vue.directive("add-to-basket", function(value)
 {
@@ -7,15 +6,15 @@ Vue.directive("add-to-basket", function(value)
      * add the item to the basket
      */
     $(this.el).click(
-        function(e)
+        function(event)
         {
             ResourceService
               .getResource("basketItems")
               .push(value);
 
-            e.preventDefault();
+            event.preventDefault();
 
-        }.bind(this));
+        });
 
         // TODO let AddItemConfirm open
 
