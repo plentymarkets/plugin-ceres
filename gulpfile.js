@@ -126,9 +126,9 @@ gulp.task('build:lint', function() {
     return gulp.src(['resources/js/src/**/*.js', '!node_modules/**'])
         .pipe(eslint({
             "configFile": "./.eslintrc.json",
-            "fix": false
+            "fix": true
         }))
-        //.pipe(gulp.dest("resources/js/src/"))
+        .pipe(gulp.dest("resources/js/src/"))
         // eslint.format() outputs the lint results to the console.
         // Alternatively use eslint.formatEach() (see Docs).
         .pipe(eslint.format("table"))
