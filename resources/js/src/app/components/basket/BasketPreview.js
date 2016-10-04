@@ -1,5 +1,4 @@
 var ResourceService       = require("services/ResourceService");
-var ModalService          = require("services/ModalService");
 
 Vue.component("basket-preview", {
 

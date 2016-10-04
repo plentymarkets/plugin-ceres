@@ -28,6 +28,7 @@ Vue.component("item-list-pagination", {
     {
         this.currentPaginationEntry = this.getQueryStringValue("page");
         var url                     = window.location.href;
+
         this.currentURL = url.replace("&page=" + this.currentPaginationEntry, "");
         this.currentPaginationEntry = parseInt(this.currentPaginationEntry) || 1;
 

@@ -20,7 +20,8 @@ Vue.component("quantity-input", {
         this.min = this.min || 1;
         this.max = this.max || 999;
 
-        this.$watch("value", function(newValue) {
+        this.$watch("value", function(newValue)
+        {
 
             if (newValue < this.min)
             {
@@ -38,6 +39,7 @@ Vue.component("quantity-input", {
             }
 
             var self = this;
+
             this.timeoutHandle = window.setTimeout(
                 function()
                 {

@@ -77,6 +77,7 @@ Vue.component("item-list-sort", {
         currentURL: function()
         {
             var url = window.location.href.split("?")[0];
+
             return url;
         },
 
@@ -87,6 +88,7 @@ Vue.component("item-list-sort", {
         showPagination: function()
         {
             var show = this.paginationPosition;
+
             return show;
         },
 
@@ -108,55 +110,55 @@ Vue.component("item-list-sort", {
 
             if (this.topCell == true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopItems});
+                defaultSortingOptions.push({value: "top_cell", selected: this.defaultSorting == "top_cell", name: Translations.Callisto.itemCategoryTopItems});
             }
             if (this.itemAsc == true)
             {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemAsc});
+                defaultSortingOptions.push({value: "item_asc", selected: this.defaultSorting == "item_asc", name: Translations.Callisto.itemCategoryItemAsc});
             }
             if (this.itemDesc == true)
             {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemDesc});
+                defaultSortingOptions.push({value: "item_desc", selected: this.defaultSorting == "item_desc", name: Translations.Callisto.itemCategoryItemDesc});
             }
             if (this.nameAsc == true)
             {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameAsc});
+                defaultSortingOptions.push({value: "name_asc", selected: this.defaultSorting == "name_asc", name: Translations.Callisto.itemCategoryNameAsc});
             }
             if (this.nameDesc == true)
             {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameDesc});
+                defaultSortingOptions.push({value: "name_desc", selected: this.defaultSorting == "name_desc", name: Translations.Callisto.itemCategoryNameDesc});
             }
             if (this.priceAsc == true)
             {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceAsc});
+                defaultSortingOptions.push({value: "price_asc", selected: this.defaultSorting == "price_asc", name: Translations.Callisto.itemCategoryPriceAsc});
             }
             if (this.priceDesc == true)
             {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceDesc});
+                defaultSortingOptions.push({value: "price_desc", selected: this.defaultSorting == "price_desc", name: Translations.Callisto.itemCategoryPriceDesc});
             }
             if (this.releaseAsc == true)
             {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseAsc});
+                defaultSortingOptions.push({value: "release_asc", selected: this.defaultSorting == "release_asc", name: Translations.Callisto.itemCategoryReleaseAsc});
             }
             if (this.releaseDesc == true)
             {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseDesc});
+                defaultSortingOptions.push({value: "release_desc", selected: this.defaultSorting == "release_desc", name: Translations.Callisto.itemCategoryReleaseDesc});
             }
             if (this.storeSpecialAsc == true)
             {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialAsc});
+                defaultSortingOptions.push({value: "store_special_asc", selected: this.defaultSorting == "store_special_asc", name: Translations.Callisto.itemCategoryStoreSpecialAsc});
             }
             if (this.storeSpecialDesc == true)
             {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialDesc});
+                defaultSortingOptions.push({value: "store_special_desc", selected: this.defaultSorting == "store_special_desc", name: Translations.Callisto.itemCategoryStoreSpecialDesc});
             }
             if (this.idDesc == true)
             {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryIdDesc});
+                defaultSortingOptions.push({value: "id_desc", selected: this.defaultSorting == "id_desc", name: Translations.Callisto.itemCategoryIdDesc});
             }
             if (this.random == true)
             {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: Translations.Callisto.itemCategoryRandom});
+                defaultSortingOptions.push({value: "random", selected: this.defaultSorting == "random", name: Translations.Callisto.itemCategoryRandom});
             }
 
             return defaultSortingOptions;
@@ -170,9 +172,9 @@ Vue.component("item-list-sort", {
         {
             var defaultItemPerPageOptions = [];
 
-            defaultItemPerPageOptions.push({value: 20, selected: 20 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 50, selected: 50 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 100, selected: 100 == this.defaultItemPerPage});
+            defaultItemPerPageOptions.push({value: 20, selected: this.defaultItemPerPage === 20});
+            defaultItemPerPageOptions.push({value: 50, selected: this.defaultItemPerPage === 50});
+            defaultItemPerPageOptions.push({value: 100, selected: this.defaultItemPerPage === 100});
 
             return defaultItemPerPageOptions;
         }
