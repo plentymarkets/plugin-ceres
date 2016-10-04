@@ -12,7 +12,10 @@ Vue.component('basket-preview', {
             basketItems: []
         };
     },
-    
+
+    /**
+     * bind to basket and bind the basket items
+     */
     ready: function()
     {
         ResourceService.bind( "basket", this );

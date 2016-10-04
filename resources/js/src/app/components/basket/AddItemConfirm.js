@@ -10,6 +10,10 @@ Vue.component('add-item-confirm', {
 
     methods: {
 
+        /**
+         * TODO
+         * @returns {string}
+         */
         getImage: function()
         {
             var path = '';

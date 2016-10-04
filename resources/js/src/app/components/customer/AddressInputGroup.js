@@ -7,6 +7,9 @@ Vue.component('address-input-group', {
         'locale'
     ],
 
+    /**
+     * check if address data exist and create an empty one if not
+     */
     created: function()
     {
         if (!this.addressData)

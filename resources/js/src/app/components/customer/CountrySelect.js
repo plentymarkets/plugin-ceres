@@ -19,6 +19,9 @@ Vue.component('country-select', {
         };
     },
 
+    /**
+     * get shipping countries
+     */
     created: function()
     {
         this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
@@ -28,6 +31,9 @@ Vue.component('country-select', {
     },
 
     methods: {
+        /**
+         * method to fire when the country has changed
+         */
         countryChanged: function()
         {
             this.selectedStateId = null;
@@ -35,6 +41,9 @@ Vue.component('country-select', {
     },
 
     watch: {
+        /**
+         * add watcher to handle country changed
+         */
         'selectedCountryId': function()
         {
             this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);

@@ -19,12 +19,19 @@ Vue.component('account-settings', {
         };
     },
 
+    /**
+     * initialize the account settings modal
+     */
     ready: function()
     {
         this.accountSettingsClass = "accountSettingsModal" + this._uid;
     },
 
     computed: {
+        /**
+         * check if the passwords equal
+         * @returns {boolean}
+         */
         matchPassword: function()
         {
             if (this.confirmPassword != '')
@@ -37,6 +44,9 @@ Vue.component('account-settings', {
 
     methods: {
 
+        /**
+         * open the account settingsmodal
+         */
         showChangeAccountSettings: function()
         {
             var accountModal = ModalService.findModal($('.' + this.accountSettingsClass));
@@ -46,6 +56,9 @@ Vue.component('account-settings', {
             accountModal.show();
         },
 
+        /**
+         * save the new password
+         */
         saveAccountSettings: function()
         {
             var self = this;
@@ -64,18 +77,28 @@ Vue.component('account-settings', {
             }
         },
 
+        /**
+         * clear the password fields in the modal
+         */
         clearFields: function()
         {
             this.newPassword     = '';
             this.confirmPassword = '';
         },
 
+        /**
+         * clear the fields and close the modal
+         */
         clearFieldsAndClose: function()
         {
             ModalService.findModal($('.' + this.accountSettingsClass)).hide();
             this.clearFields();
         },
 
+        /**
+         * get the current mail of the user
+         * @returns {*}
+         */
         getEmail: function()
         {
             return this.userData.options[0].value;

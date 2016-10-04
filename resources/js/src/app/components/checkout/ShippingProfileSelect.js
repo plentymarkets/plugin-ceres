@@ -12,6 +12,10 @@ Vue.component('shipping-profile-select', {
         };
     },
 
+    /**
+     * add shipping provider
+     * init event listener
+     */
     created: function()
     {
         // use when real data is implemented
@@ -31,6 +35,9 @@ Vue.component('shipping-profile-select', {
     },
 
     methods: {
+        /**
+         * method on shipping profile changed
+         */
         onShippingProfileChange: function()
         {
             // TODO remove log
@@ -38,11 +45,20 @@ Vue.component('shipping-profile-select', {
             console.log(this.selectedShippingProfile);
         },
 
+        /**
+         * format price
+         * @param price
+         * @param currency
+         * @returns {*}
+         */
         formatPrice: function(price, currency)
         {
             return MonetaryFormatService.formatMonetary(price, currency);
         },
 
+        /**
+         * add event listener
+         */
         addEventListener: function()
         {
             //listen on APIService events and handle new data

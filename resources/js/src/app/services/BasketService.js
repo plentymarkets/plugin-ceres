@@ -20,6 +20,11 @@ module.exports = (function($)
         basketItemToDelete   : basketItemToDelete
     };
 
+    /**
+     * initialize the basket
+     * @param basketData
+     * @returns {*}
+     */
     function init(basketData)
     {
         if (!readyDeferred)
@@ -46,6 +51,10 @@ module.exports = (function($)
         return readyDeferred;
     }
 
+    /**
+     * add a watcher to the basket
+     * @param callback
+     */
     function watch(callback)
     {
         watchers.push(callback);
@@ -55,6 +64,9 @@ module.exports = (function($)
         }
     }
 
+    /**
+     * 
+     */
     function notify()
     {
         for (var i = 0; i < watchers.length; i++)
