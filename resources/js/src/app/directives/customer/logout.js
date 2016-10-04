@@ -7,7 +7,7 @@ Vue.directive("logout", function()
      * logout the current user
      */
     $(this.el).click(
-        function(e)
+        function(event)
         {
             ApiService.get("/rest/customer/logout")
                 .done(
@@ -17,15 +17,15 @@ Vue.directive("logout", function()
 
                         // remove address ids from session after logout
                         ApiService.post("/rest/customer/address_selection/0/?typeId=-1")
-                            .fail(function(e)
+                            .fail(function(error)
                             {
-                                console.warn(e);
+                                console.warn(error);
                             });
                     }
                 );
 
-            e.preventDefault();
+            event.preventDefault();
 
-        }.bind(this));
+        });
 
 });
