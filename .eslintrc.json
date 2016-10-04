@@ -97,7 +97,11 @@
       "error",
       {
         "before": false,
-        "after" : true
+        "after" : true,
+        "overrides":
+        {
+          "this": { "before": true }
+        }
       }
     ],
     "line-comment-position"   : [
