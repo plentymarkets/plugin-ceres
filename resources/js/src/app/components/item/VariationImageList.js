@@ -45,16 +45,25 @@
 
         ready: function()
         {
+            // (Re-)initialize carousels on each variation change
             ResourceService.watch( "currentVariation", function( newValue ) {
                 this.currentVariation = newValue;
 
+                // (re-)init big image carousel
                 this.initCarousel( this.$els.single, OWL_CONFIG.SINGLE );
+
+                // (re-)init preview image carousel
                 this.initCarousel( this.$els.preview, OWL_CONFIG.PREVIEW );
             }.bind(this) );
         },
 
         methods:
         {
+            /**
+             * Initialize jquery carousel plugin
+             * @param {HTMLElement} el      The root element to initialize carousel on
+             * @param {*}           config  The carousel configuration (@see http://owlgraphic.com/owlcarousel/index.html#how-to)
+             */
             initCarousel: function( el, config )
             {
                 var self = this;
@@ -70,11 +79,16 @@
                     owl.destroy();
                 }
 
+                // wait until markup is re-rendered with new data.
                 Vue.nextTick( function() {
                     $( el ).owlCarousel( config );
                 }.bind( this ) );
             },
 
+            /**
+             * Navigate to carousel element
+             * @param {number} index    The index of the element to go to.
+             */
             goTo: function( index )
             {
                 var owl = $( this.$els.single ).data( 'owlCarousel' );

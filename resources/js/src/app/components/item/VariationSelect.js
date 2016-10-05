@@ -1,6 +1,8 @@
 var ApiService = require('services/ApiService');
 var ResourceService = require('services/ResourceService');
-var VariationData = [];
+
+// cache loaded variation data for reuse
+var VariationData = {};
 
 Vue.component( 'variation-select', {
 
@@ -11,8 +13,8 @@ Vue.component( 'variation-select', {
     data: function()
     {
         return {
-            selectedAttributes: {},
-            availableAttributes: {}
+            // Collection of currently selected variation attributes.
+            selectedAttributes: {}
         };
     },
 
@@ -54,13 +56,28 @@ Vue.component( 'variation-select', {
                 {
                     // all attributes are set => load variation data
                     var variationId = possibleVariations[0].variationId;
-                    ApiService
-                        .get( '/rest/variations/' + variationId )
-                        .done( function( response ) {
-                            ResourceService
-                                .getResource("currentVariation")
-                                .set( response );
-                        } );
+
+                    if( VariationData.hasOwnProperty( variationId ) )
+                    {
+                        // reuse cached variation data
+                        ResourceService
+                            .getResource("currentVariation")
+                            .set( VariationData[variationId] );
+                    }
+                    else
+                    {
+                        // get variation data from remote
+                        ApiService
+                            .get( '/rest/variations/' + variationId )
+                            .done( function( response ) {
+                                // store received variation data for later reuse
+                                VariationData[variationId] = response;
+                                ResourceService
+                                    .getResource("currentVariation")
+                                    .set( response );
+                            } );
+                    }
+
                 }
 
             }
@@ -69,8 +86,10 @@ Vue.component( 'variation-select', {
         // watch for changes on selected variation to adjust url
         ResourceService.watch( "currentVariation", function( newVariation, oldVariation ) {
 
+            // replace variation id in url
             var url = window.location.pathname;
             var title = document.getElementsByTagName('title')[0].innerHTML;
+            // ItemURLs should match: "/<ITEM_NAME>/<ITEM_ID>/<VARIATION_ID>/"
             var match = url.match( /\/([^\/]*)\/([\d]+)\/?([\d]*)/ );
 
             if( !!match )
@@ -118,6 +137,7 @@ Vue.component( 'variation-select', {
          */
         isEnabled: function( attributeId, attributeValueId )
         {
+            // clone selectedAttributes to avoid touching objects bound to UI
             var attributes = JSON.parse( JSON.stringify(this.selectedAttributes) );
             attributes[attributeId] = attributeValueId;
             return this.filterVariations( attributes ).length > 0;
