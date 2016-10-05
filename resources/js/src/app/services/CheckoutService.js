@@ -1,4 +1,4 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
 module.exports = (function($)
 {
@@ -23,7 +23,7 @@ module.exports = (function($)
             if (!!checkoutData)
             {
                 initPromise = $.Deferred();
-                checkout    = checkoutData;
+                checkout = checkoutData;
                 initPromise.resolve();
             }
             else

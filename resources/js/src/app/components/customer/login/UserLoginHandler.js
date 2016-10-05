@@ -1,9 +1,12 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-Vue.component('user-login-handler', {
+Vue.component("user-login-handler", {
 
-    template: '#vue-user-login-handler',
+    template: "#vue-user-login-handler",
 
+    /**
+     * add global event listener for login and logout
+     */
     ready: function()
     {
         var self = this;
@@ -22,6 +25,10 @@ Vue.component('user-login-handler', {
     },
 
     methods: {
+        /**
+         * set the actual user logged in
+         * @param userData
+         */
         setUserLoggedIn: function(userData)
         {
             if (userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
@@ -36,6 +43,9 @@ Vue.component('user-login-handler', {
             this.$compile(this.$el);
         },
 
+        /**
+         * set the actual user logged out
+         */
         setUserLoggedOut: function()
         {
             this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
@@ -43,6 +53,11 @@ Vue.component('user-login-handler', {
                 "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
         },
 
+        /**
+         * build the new user html for the head dynamic (no page reload required)
+         * @param username
+         * @returns {string}
+         */
         getUserHTML: function(username)
         {
             return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +

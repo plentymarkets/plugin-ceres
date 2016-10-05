@@ -1,8 +1,8 @@
-var ResourceService = require('services/ResourceService');
-var currencySymbolMap = require('currency-symbol-map');
-var accounting = require('accounting');
+var ResourceService = require("services/ResourceService");
+var currencySymbolMap = require("currency-symbol-map");
+var accounting = require("accounting");
 
-Vue.filter('currency', function (price, customCurrency)
+Vue.filter("currency", function(price, customCurrency)
 {
     var basket = ResourceService.getResource("basket").val();
 

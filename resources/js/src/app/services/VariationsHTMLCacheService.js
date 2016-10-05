@@ -10,7 +10,7 @@ module.exports = (function($)
 
     function _addToCache(itemId, variationId, html)
     {
-        var variationHTML = {'html': html};
+        var variationHTML = {html: html};
 
         if (cache[itemId] === undefined)
         {

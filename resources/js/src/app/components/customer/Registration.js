@@ -1,12 +1,12 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
 
-var ValidationService = require('services/ValidationService');
+var ValidationService = require("services/ValidationService");
 
-Vue.component('registration', {
+Vue.component("registration", {
 
-    template: '#vue-registration',
+    template: "#vue-registration",
 
     props: [
         "modalElement",
@@ -24,9 +24,12 @@ Vue.component('registration', {
         };
     },
 
+    /**
+     * check if the component should be a normal registration or the guest registration
+     */
     created: function()
     {
-        if (this.guestMode == null || this.guestMode == "")
+        if (this.guestMode === null || this.guestMode == "")
         {
             this.guestMode = false;
         }
@@ -37,13 +40,17 @@ Vue.component('registration', {
     },
 
     methods: {
+        /**
+         * validate the registration form
+         */
         validateRegistration: function()
         {
             var self = this;
-            ValidationService.validate($('#registration' + this._uid))
+
+            ValidationService.validate($("#registration" + this._uid))
                 .done(function()
                 {
-                    self.sendRegistration()
+                    self.sendRegistration();
                 })
                 .fail(function(invalidFields)
                 {
@@ -51,6 +58,9 @@ Vue.component('registration', {
                 });
         },
 
+        /**
+         * send the registration
+         */
         sendRegistration: function()
         {
             var userObject = this.getUserObject();
@@ -61,7 +71,7 @@ Vue.component('registration', {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) != null)
+                    if (document.getElementById(component.modalElement) !== null)
                     {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
@@ -71,45 +81,31 @@ Vue.component('registration', {
 
         },
 
+        /**
+         * handle the userobject which is send to the server
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         */
         getUserObject: function()
         {
-            // FIXME copy&paste-action? serious?
-            if (this.guestMode)
-            {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
+            var userObject =
+                {
+                    contact: {
+                        referrerId: 1,
+                        typeId    : 1,
+                        options   : {
+                            typeId: {
+                                typeId   : 2,
+                                subTypeId: 4,
+                                value    : this.username,
+                                priority : 0
                             }
                         }
-                    };
-            }
-            else
+                    }
+                };
+
+            if (!this.guestMode)
             {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            password  : this.password,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
-                            }
-                        }
-                    };
+                userObject.contact.password = this.password;
             }
 
             if (!this.isSimpleRegistration)
