@@ -5,7 +5,7 @@ Vue.component("user-login-handler", {
     template: "#vue-user-login-handler",
 
     /**
-     * add global event listener for login and logout
+     * Add the global event listener for login and logout
      */
     ready: function()
     {
@@ -26,7 +26,7 @@ Vue.component("user-login-handler", {
 
     methods: {
         /**
-         * set the actual user logged in
+         * Set the current user logged in
          * @param userData
          */
         setUserLoggedIn: function(userData)
@@ -44,7 +44,7 @@ Vue.component("user-login-handler", {
         },
 
         /**
-         * set the actual user logged out
+         * Set the current user logged out
          */
         setUserLoggedOut: function()
         {
@@ -54,7 +54,7 @@ Vue.component("user-login-handler", {
         },
 
         /**
-         * build the new user html for the head dynamic (no page reload required)
+         * Build the new user HTML for the head dynamically (no page reload required)
          * @param username
          * @returns {string}
          */

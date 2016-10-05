@@ -21,7 +21,7 @@ Vue.component("add-to-basket", {
     methods: {
 
         /**
-         * add an item to the basket
+         * Add an item to the basket
          * @param quantity
          */
         addToBasket: function(quantity)
@@ -45,7 +45,7 @@ Vue.component("add-to-basket", {
         },
 
         /**
-         * item quantity + 1
+         * Increase the item quantity by 1
          */
         quantityPlus: function()
         {
@@ -53,7 +53,7 @@ Vue.component("add-to-basket", {
         },
 
         /**
-         * item quantity - 1
+         * Decrease the item quantity by 1
          */
         quantityMinus: function()
         {

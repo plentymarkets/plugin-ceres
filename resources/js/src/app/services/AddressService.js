@@ -10,7 +10,7 @@ module.exports = (function($)
     };
 
     /**
-     * create a new address
+     * Create a new address
      * @param address
      * @param addressType
      * @param setActive
@@ -35,7 +35,7 @@ module.exports = (function($)
     }
 
     /**
-     * update an existing address
+     * Update an existing address
      * @param newData
      * @param addressType
      * @returns {*|Entry|undefined}
@@ -47,7 +47,7 @@ module.exports = (function($)
     }
 
     /**
-     * delete an existing address
+     * Delete an existing address
      * @param addressId
      * @param addressType
      * @returns {*}

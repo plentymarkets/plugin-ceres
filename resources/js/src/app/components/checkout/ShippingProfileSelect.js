@@ -13,12 +13,12 @@ Vue.component("shipping-profile-select", {
     },
 
     /**
-     * add shipping provider
-     * init event listener
+     * Add a shipping provider
+     * Initialise the event listener
      */
     created: function()
     {
-        // use when real data is implemented
+        // Use when real data is implemented
         // if(this.shippingProfileData)
         // {
         //     this.shippingProfileList = jQuery.parseJSON(this.shippingProfileData);
@@ -36,7 +36,7 @@ Vue.component("shipping-profile-select", {
 
     methods: {
         /**
-         * method on shipping profile changed
+         * Method on shipping profile changed
          */
         onShippingProfileChange: function()
         {
@@ -46,7 +46,7 @@ Vue.component("shipping-profile-select", {
         },
 
         /**
-         * format price
+         * Format the price
          * @param price
          * @param currency
          * @returns {*}
@@ -57,11 +57,11 @@ Vue.component("shipping-profile-select", {
         },
 
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         }
     }
 });

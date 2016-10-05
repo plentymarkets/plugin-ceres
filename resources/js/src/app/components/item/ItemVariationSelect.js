@@ -63,11 +63,11 @@ Vue.component("item-variation-select", {
         loadVariationAttributes: function()
         {
             var self = this;
-            // request item variations
+            // Request item variations
             ApiService.get("/rest/item_variation_select/" + this.itemId)
                 .done(function(response)
                 {
-                    // catch possible empty response
+                    // Catch possible empty response
                     if (!response
                         || (response && response.data === null)
                         || (response && response.selectionValues.length === 0))
@@ -81,14 +81,14 @@ Vue.component("item-variation-select", {
                     var attributes          = Object.keys(self.variationAttributes);
                     var setOnInitialization = {};
 
-                    // where the magic begins
+                    // Where the magic begins
                     if (!self.preselection)
                     {
                         return;
                     }
                     else
                     {
-                        // if preselection is true, select first entries for all attributes
+                        // If preselection is true, select first entries for all attributes
                         if (typeof self.preselection === "boolean")
                         {
                             for (var attribute in self.variationAttributes)
@@ -101,8 +101,8 @@ Vue.component("item-variation-select", {
                         }
                         else
                         {
-                            // if preselection not found or there are no variations, initialize select element with
-                            // "please take a choice" option
+                            // If preselection not found or there are no variations, initialise select element with
+                            // "Please select" option
                             if (!self.variations[self.preselection] || self.variations[self.preselection].length <= 0)
                             {
                                 self.preselection = false;
@@ -110,14 +110,14 @@ Vue.component("item-variation-select", {
                             }
 
                             var variationPreselected = self.variations[self.preselection];
-                            // individual selection via variation ID. Searching for values.
+                            // Individual selection via variation ID. Searching for values.
                             for (var i = 0, leng = variationPreselected.length; i < leng; i++)
                             {
                                 while (self.variantionSelectionModel.length !== leng)
                                 {
                                     self.variantionSelectionModel.push({attributeId: null, attributeValueId: null});
                                 }
-                                // toString() is needed to initialize select element model. Doesn't work with integer.
+                                // toString() is needed to initialise select element model. Doesn't work with integer.
                                 self.variantionSelectionModel[i].attributeId = variationPreselected[i].attributeId.toString();
                                 self.variantionSelectionModel[i].attributeValueId = variationPreselected[i].attributeValueId.toString();
                             }
@@ -136,13 +136,13 @@ Vue.component("item-variation-select", {
             var hits = 0;
             var currentVariation;
             for (var variationID in this.variations)
-            { // iterate all variations
+            { // Iterate all variations
                 currentVariation = this.variations[variationID];
                 for (var i = 0, leng = currentVariation.length; i < leng; i++)
                 {
                     /*
                      Increase "hit" with "variationID", if fitting attribute was found.
-                     The amount of this addition divided by length of current variation acn match a variation ID.
+                     The amount of this addition divided by length of current variation acn matches a variation ID.
                      */
                     if (currentVariation[i].attributeId === currentSelection[i].attributeId
                         && currentVariation[i].attributeValueId === currentSelection[i].attributeValueId)
@@ -152,8 +152,8 @@ Vue.component("item-variation-select", {
                 }
                 hits = (hits / leng);
                 /*
-                 if "hit", divided by length of attributes of one variation, matches the current variation ID,
-                 we found our variation
+                 If "hit", divided by length of attributes of one variation, matches the current variation ID,
+                 the variation is found.
                  */
                 if (hits === parseInt(variationID))
                 {
@@ -170,7 +170,7 @@ Vue.component("item-variation-select", {
         {
             var self                = this;
             var convertedAttributes = [];
-            // convert attribute values to integer
+            // Convert attribute values to integer
             for (var attr in this.variantionSelectionModel)
             {
                 if (self.variantionSelectionModel[attr] === "-1")

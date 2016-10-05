@@ -7,7 +7,7 @@ Vue.component("invoice-address-select", {
     props: ["addressList", "selectedAddressId"],
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -17,15 +17,15 @@ Vue.component("invoice-address-select", {
 
     methods: {
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         },
 
         /**
-         * update the billing address
+         * Update the invoice address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)

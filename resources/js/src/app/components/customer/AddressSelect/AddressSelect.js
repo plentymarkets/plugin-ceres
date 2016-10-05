@@ -23,7 +23,7 @@ Vue.component("address-select", {
     },
 
     /**
-     *  check if the address list is not empty and select the address with the matching id
+     *  Check whether the address list is not empty and select the address with the matching ID
      */
     created: function()
     {
@@ -46,7 +46,7 @@ Vue.component("address-select", {
     },
 
     /**
-     * select the address modal
+     * Select the address modal
      */
     ready: function()
     {
@@ -55,7 +55,7 @@ Vue.component("address-select", {
 
     methods: {
         /**
-         * update the selected address
+         * Update the selected address
          * @param index
          */
         onAddressChanged: function(index)
@@ -66,7 +66,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * check if the address list is empty
+         * Check whether the address list is empty
          * @returns {boolean}
          */
         isAddressListEmpty: function()
@@ -75,7 +75,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * check if a company name exists and show it bold
+         * Check whether a company name exists and show it in bold
          * @returns {boolean}
          */
         showNameStrong: function()
@@ -84,7 +84,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * show the add icon
+         * Show the add icon
          */
         showAdd: function()
         {
@@ -97,7 +97,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * show the edit icon
+         * Show the edit icon
          * @param address
          */
         showEdit: function(address)
@@ -111,7 +111,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * close the actual modal
+         * Close the current modal
          */
         close: function()
         {
@@ -119,7 +119,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * dynamic create the header line in the modal
+         * Dynamically create the header line in the modal
          */
         updateHeadline: function()
         {

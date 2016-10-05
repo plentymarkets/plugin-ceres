@@ -7,7 +7,7 @@ Vue.component("language-select", {
     ],
 
     /**
-     * check the current language and update the flag in the header
+     * Check the current language and update the country flag in the header
      */
     ready: function()
     {
@@ -23,7 +23,7 @@ Vue.component("language-select", {
 
     methods: {
         /**
-         * change language if the the flag has changed in the header
+         * Change language if the flag has changed in the header
          * @param lang
          */
         languageChanged: function(lang)

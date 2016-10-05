@@ -9,8 +9,8 @@ Vue.component("user-login-watcher", {
     ],
 
     /**
-     * check if user is logged in or if user is logged out
-     * route to the new route
+     * Check whether the user is logged in or logged out
+     * Route to the new route
      */
     ready: function()
         {

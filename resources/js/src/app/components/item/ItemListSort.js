@@ -36,7 +36,7 @@ Vue.component("item-list-sort", {
 
     methods: {
         /**
-         * init possible sorting options
+         * Initialise the available sorting options
          */
         initPropsValues: function()
         {
@@ -61,7 +61,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * get params from the url
+         * Get the parameters from the URL
          * @param key
          * @returns {string}
          */
@@ -71,7 +71,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * get the actual url without any params
+         * Get the current URL without any parameters
          * @returns {*}
          */
         currentURL: function()
@@ -82,7 +82,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * show the pagination at the position which is set in the config
+         * Show the pagination at the position which is set in the config
          * @returns {boolean}
          */
         showPagination: function()
@@ -93,7 +93,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * set the items per page box value to the value of the service
+         * Set the items per page box value to the value of the service
          */
         updateSelectedItemsPerPage: function()
         {
@@ -101,7 +101,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * init default sorting option
+         * Initialise the default sorting option
          * @returns {Array}
          */
         initSortingList: function()
@@ -165,7 +165,7 @@ Vue.component("item-list-sort", {
         },
 
         /**
-         * init items per page box default values
+         * Initialise the default values for the items per page box
          * @returns {Array}
          */
         initItemPerPageList: function()
@@ -181,7 +181,7 @@ Vue.component("item-list-sort", {
     },
 
     /**
-     * initialize sort and pagination
+     * Initialise sorting and pagination
      */
     ready: function()
     {

@@ -16,7 +16,7 @@ Vue.component("basket-list", {
     },
 
     /**
-     * bind to basket and show the items in a small or large list
+     * Bind to basket and show the items in a small or large list
      */
     ready: function()
     {

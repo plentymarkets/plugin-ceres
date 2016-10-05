@@ -20,7 +20,7 @@ Vue.component("login", {
 
     methods: {
         /**
-         * open login modal
+         * Open the login modal
          */
         showLogin: function()
         {
@@ -28,7 +28,7 @@ Vue.component("login", {
         },
 
         /**
-         * send login data
+         * Send the login data
          */
         sendLogin: function()
         {

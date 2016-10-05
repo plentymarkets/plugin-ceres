@@ -11,7 +11,7 @@ module.exports = (function($)
     };
 
     /**
-     * add an item to the basket
+     * Add an item to the basket
      * @param basketItem
      */
     function addBasketItem(basketItem)
@@ -20,7 +20,7 @@ module.exports = (function($)
     }
 
     /**
-     * set the basket items to a list of items
+     * Set the basket items to a list of items
      * @param items
      */
     function setBasketItems(items)
@@ -29,7 +29,7 @@ module.exports = (function($)
     }
 
     /**
-     * get the items in the basket
+     * Get the items in the basket
      * @returns {number}
      */
     function getItemCount()

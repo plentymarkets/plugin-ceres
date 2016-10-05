@@ -21,7 +21,7 @@ module.exports = (function($)
     };
 
     /**
-     * initialize the basket
+     * Initialise the basket
      * @param basketData
      * @returns {*}
      */
@@ -52,7 +52,7 @@ module.exports = (function($)
     }
 
     /**
-     * add a watcher to the basket
+     * Add a watcher to the basket
      * @param callback
      */
     function watch(callback)

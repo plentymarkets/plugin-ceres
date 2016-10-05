@@ -14,7 +14,7 @@ Vue.component("payment-provider-select", {
     },
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -23,7 +23,7 @@ Vue.component("payment-provider-select", {
 
     methods: {
         /**
-         * event on payment provider change
+         * Event when changing the payment provider
          * TODO
          */
         onPaymentProviderChange: function()
@@ -32,7 +32,7 @@ Vue.component("payment-provider-select", {
         },
 
         /**
-         * format the price
+         * Format the price
          * @param price
          * @param currency
          * @returns {*}
@@ -43,11 +43,11 @@ Vue.component("payment-provider-select", {
         },
 
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         }
     }
 });
