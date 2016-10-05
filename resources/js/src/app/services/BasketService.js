@@ -5,7 +5,6 @@ module.exports = (function($)
 
     var basket;
     var readyDeferred;
-    var loading            = false;
     var watchers           = [];
     var basketItemToDelete = {};
 
@@ -30,7 +29,7 @@ module.exports = (function($)
         if (!readyDeferred)
         {
             readyDeferred = $.Deferred();
-            if (!!basketData)
+            if (!basketData)
             {
                 basket = basketData;
                 notify();
@@ -58,7 +57,7 @@ module.exports = (function($)
     function watch(callback)
     {
         watchers.push(callback);
-        if (!!basket)
+        if (!basket)
         {
             callback(basket);
         }
@@ -82,7 +81,6 @@ module.exports = (function($)
 
     function addBasketItem(basketItem)
     {
-        var self = this;
         return ApiService.post("/rest/basket/items/", basketItem)
             .done(function(response)
             {
@@ -93,7 +91,6 @@ module.exports = (function($)
 
     function updateBasketItem(basketItem)
     {
-        var self = this;
         return ApiService.put("/rest/basket/items/" + basketItem.id, basketItem)
             .done(function(response)
             {
@@ -105,7 +102,7 @@ module.exports = (function($)
     function updateShippingCountry(basket)
     {
         var id   = basket.shippingCountryId;
-        var self = this;
+
         return ApiService.put("/rest/deliverycountry/" + id, basket)
             .done(function(response)
             {
@@ -116,8 +113,8 @@ module.exports = (function($)
 
     function deleteBasketItem(basketItem)
     {
-        var self = this;
         var basketItemId;
+
         if (typeof basketItem === "number")
         {
             basketItemId = basketItem;

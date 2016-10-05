@@ -460,6 +460,7 @@ module.exports = (function($)
                     data.value = response;
                 });
 
+            /*
             if (!url)
             {
                 return ApiService
@@ -478,6 +479,7 @@ module.exports = (function($)
 
             deferred.resolve();
             return deferred;
+            */
         }
 
         /**

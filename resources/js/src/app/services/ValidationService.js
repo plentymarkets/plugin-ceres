@@ -13,6 +13,7 @@ module.exports = (function($)
     {
         var deferred      = $.Deferred();
         var invalidFields = _getInvalidFields(form);
+
         if (invalidFields.length > 0)
         {
             deferred.rejectWith(form, [invalidFields]);
@@ -49,6 +50,7 @@ module.exports = (function($)
         $(fields).each(function(i, elem)
         {
             var $elem = $(elem);
+
             $elem.addClass(errorClass);
             _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function()
             {
@@ -58,6 +60,7 @@ module.exports = (function($)
                     if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]"))
                     {
                         var groupName = $elem.attr("name");
+
                         $("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
                     }
                     _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
@@ -110,6 +113,7 @@ module.exports = (function($)
                 hasError = true;
             }
 
+            return false;
         });
 
         return !hasError;
@@ -139,6 +143,7 @@ module.exports = (function($)
             return _hasValue($formControl);
         case "mail":
             var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
+
             return _hasValue($formControl) && mailRegExp.test($formControl.val());
         case "number":
             return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
@@ -147,6 +152,7 @@ module.exports = (function($)
         case "regex":
             var ref   = $formControl.attr("data-validate-ref");
             var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+
             return _hasValue($formControl) && regex.test($.trim($formControl.val()));
         default:
             console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");

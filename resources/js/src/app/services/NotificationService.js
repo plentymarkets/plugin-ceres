@@ -17,7 +17,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message);
 
-        if (!!App.config.logMessages)
+        if (!App.config.logMessages)
         {
             console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
 
@@ -34,7 +34,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "info");
 
-        if (!!App.config.printInfos)
+        if (!App.config.printInfos)
         {
             _printNotification(notification);
         }
@@ -46,7 +46,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "warning");
 
-        if (!!App.config.printWarnings)
+        if (!App.config.printWarnings)
         {
             _printNotification(notification);
         }
@@ -58,7 +58,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "danger");
 
-        if (!!App.config.printErrors)
+        if (!App.config.printErrors)
         {
             _printNotification(notification);
         }
@@ -70,7 +70,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "success");
 
-        if (!!App.config.printSuccess)
+        if (!App.config.printSuccess)
         {
             _printNotification(notification);
         }
@@ -126,7 +126,7 @@ module.exports = (function($)
 
         function trace(message, code)
         {
-            if (!!App.config.printStackTrace)
+            if (!App.config.printStackTrace)
             {
                 self.stackTrace.push({
                     code   : code || 0,
@@ -139,6 +139,7 @@ module.exports = (function($)
     function NotificationList()
     {
         var elements = [];
+
         return {
             all   : all,
             add   : add,

@@ -32,7 +32,7 @@ module.exports = (function($)
             overlay.count--;
         }
 
-        if (!!force)
+        if (!force)
         {
             overlay.count = 0;
         }

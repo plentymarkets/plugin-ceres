@@ -12,7 +12,7 @@ module.exports = (function($)
     {
         var variationHTML = {html: html};
 
-        if (cache[itemId] === undefined)
+        if (!cache[itemId])
         {
             cache[itemId] = {};
         }
@@ -24,11 +24,11 @@ module.exports = (function($)
     {
         for (var cachedItemId in cache)
         {
-            if (cachedItemId == itemId)
+            if (cachedItemId === itemId)
             {
                 for (var cachedVariationId in cache[itemId])
                 {
-                    if (cachedVariationId == variationId)
+                    if (cachedVariationId === variationId)
                     {
                         return cache[itemId][variationId].html;
                     }
@@ -36,7 +36,7 @@ module.exports = (function($)
             }
         }
 
-        return undefined;
+        return null;
     }
 
 })(jQuery);
