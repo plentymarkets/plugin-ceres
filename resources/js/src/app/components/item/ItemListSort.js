@@ -1,8 +1,8 @@
-var PaginationService = require('services/PaginationService');
+var PaginationService = require("services/PaginationService");
 
-Vue.component('item-list-sort', {
+Vue.component("item-list-sort", {
 
-    template: '#vue-item-list-sort',
+    template: "#vue-item-list-sort",
 
     props: {
         sortedDataList    : String,
@@ -35,122 +35,154 @@ Vue.component('item-list-sort', {
     },
 
     methods: {
+        /**
+         * init possible sorting options
+         */
         initPropsValues: function()
         {
             this.sortedDataList = JSON.parse(this.sortedDataList);
 
             if (this.sortedDataList)
             {
-                this.topCell          = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemAsc          = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.itemDesc         = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameAsc          = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.nameDesc         = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceAsc         = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.priceDesc        = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseAsc       = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.releaseDesc      = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.storeSpecialAsc  = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.topCell = this.sortedDataList.indexOf("top_cell") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemAsc = this.sortedDataList.indexOf("item_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.itemDesc = this.sortedDataList.indexOf("item_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameAsc = this.sortedDataList.indexOf("name_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.nameDesc = this.sortedDataList.indexOf("name_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceAsc = this.sortedDataList.indexOf("price_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.priceDesc = this.sortedDataList.indexOf("price_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseAsc = this.sortedDataList.indexOf("release_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.releaseDesc = this.sortedDataList.indexOf("release_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.storeSpecialAsc = this.sortedDataList.indexOf("store_special_asc") > -1 || this.sortedDataList.indexOf("all") > -1;
                 this.storeSpecialDesc = this.sortedDataList.indexOf("store_special_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.idDesc           = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
-                this.random           = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.idDesc = this.sortedDataList.indexOf("id_desc") > -1 || this.sortedDataList.indexOf("all") > -1;
+                this.random = this.sortedDataList.indexOf("random") > -1 || this.sortedDataList.indexOf("all") > -1;
             }
         },
 
+        /**
+         * get params from the url
+         * @param key
+         * @returns {string}
+         */
         getQueryStringValue: function(key)
         {
             return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         },
 
+        /**
+         * get the actual url without any params
+         * @returns {*}
+         */
         currentURL: function()
         {
-            var url = window.location.href.split('?')[0];
+            var url = window.location.href.split("?")[0];
+
             return url;
         },
 
+        /**
+         * show the pagination at the position which is set in the config
+         * @returns {boolean}
+         */
         showPagination: function()
         {
-            var show = this.paginationPosition != "infinityScroll";
+            var show = this.paginationPosition;
+
             return show;
         },
 
+        /**
+         * set the items per page box value to the value of the service
+         */
         updateSelectedItemsPerPage: function()
         {
             PaginationService.itemsPerPage = this.itemsPerPageSelected;
         },
 
+        /**
+         * init default sorting option
+         * @returns {Array}
+         */
         initSortingList: function()
         {
             var defaultSortingOptions = [];
 
-            if (this.topCell == true)
+            if (this.topCell === true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: Translations.Callisto.itemCategoryTopItems});
+                defaultSortingOptions.push({value: "top_cell", selected: this.defaultSorting === "top_cell", name: Translations.Callisto.itemCategoryTopItems});
             }
-            if (this.itemAsc == true)
+            if (this.itemAsc === true)
             {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemAsc});
+                defaultSortingOptions.push({value: "item_asc", selected: this.defaultSorting === "item_asc", name: Translations.Callisto.itemCategoryItemAsc});
             }
-            if (this.itemDesc == true)
+            if (this.itemDesc === true)
             {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryItemDesc});
+                defaultSortingOptions.push({value: "item_desc", selected: this.defaultSorting === "item_desc", name: Translations.Callisto.itemCategoryItemDesc});
             }
-            if (this.nameAsc == true)
+            if (this.nameAsc === true)
             {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameAsc});
+                defaultSortingOptions.push({value: "name_asc", selected: this.defaultSorting === "name_asc", name: Translations.Callisto.itemCategoryNameAsc});
             }
-            if (this.nameDesc == true)
+            if (this.nameDesc === true)
             {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryNameDesc});
+                defaultSortingOptions.push({value: "name_desc", selected: this.defaultSorting === "name_desc", name: Translations.Callisto.itemCategoryNameDesc});
             }
-            if (this.priceAsc == true)
+            if (this.priceAsc === true)
             {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceAsc});
+                defaultSortingOptions.push({value: "price_asc", selected: this.defaultSorting === "price_asc", name: Translations.Callisto.itemCategoryPriceAsc});
             }
-            if (this.priceDesc == true)
+            if (this.priceDesc === true)
             {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryPriceDesc});
+                defaultSortingOptions.push({value: "price_desc", selected: this.defaultSorting === "price_desc", name: Translations.Callisto.itemCategoryPriceDesc});
             }
-            if (this.releaseAsc == true)
+            if (this.releaseAsc === true)
             {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseAsc});
+                defaultSortingOptions.push({value: "release_asc", selected: this.defaultSorting === "release_asc", name: Translations.Callisto.itemCategoryReleaseAsc});
             }
-            if (this.releaseDesc == true)
+            if (this.releaseDesc === true)
             {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryReleaseDesc});
+                defaultSortingOptions.push({value: "release_desc", selected: this.defaultSorting === "release_desc", name: Translations.Callisto.itemCategoryReleaseDesc});
             }
-            if (this.storeSpecialAsc == true)
+            if (this.storeSpecialAsc === true)
             {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialAsc});
+                defaultSortingOptions.push({value: "store_special_asc", selected: this.defaultSorting === "store_special_asc", name: Translations.Callisto.itemCategoryStoreSpecialAsc});
             }
-            if (this.storeSpecialDesc == true)
+            if (this.storeSpecialDesc === true)
             {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryStoreSpecialDesc});
+                defaultSortingOptions.push({value: "store_special_desc", selected: this.defaultSorting === "store_special_desc", name: Translations.Callisto.itemCategoryStoreSpecialDesc});
             }
-            if (this.idDesc == true)
+            if (this.idDesc === true)
             {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: Translations.Callisto.itemCategoryIdDesc});
+                defaultSortingOptions.push({value: "id_desc", selected: this.defaultSorting === "id_desc", name: Translations.Callisto.itemCategoryIdDesc});
             }
-            if (this.random == true)
+            if (this.random === true)
             {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: Translations.Callisto.itemCategoryRandom});
+                defaultSortingOptions.push({value: "random", selected: this.defaultSorting === "random", name: Translations.Callisto.itemCategoryRandom});
             }
 
             return defaultSortingOptions;
         },
 
+        /**
+         * init items per page box default values
+         * @returns {Array}
+         */
         initItemPerPageList: function()
         {
             var defaultItemPerPageOptions = [];
 
-            defaultItemPerPageOptions.push({value: 20, selected: 20 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 50, selected: 50 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 100, selected: 100 == this.defaultItemPerPage});
+            defaultItemPerPageOptions.push({value: 20, selected: this.defaultItemPerPage === 20});
+            defaultItemPerPageOptions.push({value: 50, selected: this.defaultItemPerPage === 50});
+            defaultItemPerPageOptions.push({value: 100, selected: this.defaultItemPerPage === 100});
 
             return defaultItemPerPageOptions;
         }
     },
 
+    /**
+     * initialize sort and pagination
+     */
     ready: function()
     {
         this.initPropsValues();
@@ -164,7 +196,7 @@ Vue.component('item-list-sort', {
         }
         if (listItemsPerPage.length > 0)
         {
-            this.defaultItemPerPage   = listItemsPerPage;
+            this.defaultItemPerPage = listItemsPerPage;
             this.itemsPerPageSelected = this.defaultItemPerPage;
         }
         else
@@ -174,7 +206,7 @@ Vue.component('item-list-sort', {
 
         PaginationService.itemsPerPage = this.itemsPerPageSelected;
 
-        this.sortingList     = this.initSortingList();
+        this.sortingList = this.initSortingList();
         this.itemPerPageList = this.initItemPerPageList();
     }
 });

@@ -1,4 +1,4 @@
-Vue.component( 'quantity-input', {
+Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
 
@@ -11,6 +11,9 @@ Vue.component( 'quantity-input', {
         };
     },
 
+    /**
+     * TODO
+     */
     ready: function()
     {
         this.timeout = this.timeout || 300;
@@ -18,31 +21,33 @@ Vue.component( 'quantity-input', {
         this.max = this.max || 999;
         this.vertical = this.vertical || false;
 
-        this.$watch( 'value', function( newValue ) {
+        this.$watch("value", function(newValue)
+        {
 
-            if( newValue < this.min )
+            if (newValue < this.min)
             {
                 this.value = this.min;
             }
 
-            if( newValue > this.max )
+            if (newValue > this.max)
             {
                 this.value = this.max;
             }
 
-            if( !!this.timeoutHandle )
+            if (!!this.timeoutHandle)
             {
-                window.clearTimeout( this.timeoutHandle );
+                window.clearTimeout(this.timeoutHandle);
             }
 
             var self = this;
+
             this.timeoutHandle = window.setTimeout(
                 function()
                 {
-                    self.$dispatch('quantity-change', newValue );
+                    self.$dispatch("quantity-change", newValue);
                 },
                 this.timeout
-            )
+            );
         });
     }
 

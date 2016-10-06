@@ -5,11 +5,11 @@ module.exports = (function( $ ) {
     var resources = {};
 
     return {
-        registerResource: registerResource,
+        registerResource    : registerResource,
         registerResourceList: registerResourceList,
-        getResource: getResource,
-        watch: watch,
-        bind: bind
+        getResource         : getResource,
+        watch               : watch,
+        bind                : bind
     };
 
     /**

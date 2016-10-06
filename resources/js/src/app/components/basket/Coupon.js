@@ -1,5 +1,5 @@
-Vue.component('coupon', {
+Vue.component("coupon", {
 
-    template: '#vue-coupon'
+    template: "#vue-coupon"
 
 });
