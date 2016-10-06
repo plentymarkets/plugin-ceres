@@ -30,7 +30,6 @@ vueApp = new Vue({
         var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
         var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-
         $toggleBasketPreview.on("click", function(evt)
         {
             evt.preventDefault();

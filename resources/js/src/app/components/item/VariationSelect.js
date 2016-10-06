@@ -1,14 +1,14 @@
-var ApiService = require('services/ApiService');
-var ResourceService = require('services/ResourceService');
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
 
 // cache loaded variation data for reuse
 var VariationData = {};
 
-Vue.component( 'variation-select', {
+Vue.component("variation-select", {
 
     template: "#vue-variation-select",
 
-    props: [ 'attributes', 'variations', 'preselect' ],
+    props: ["attributes", "variations", "preselect"],
 
     data: function()
     {
@@ -22,82 +22,90 @@ Vue.component( 'variation-select', {
     {
         // initialize selected attributes to be tracked by change detection
         var attributes = {};
-        for( var attributeId in this.attributes )
+
+        for (var attributeId in this.attributes)
         {
             attributes[attributeId] = null;
         }
         this.selectedAttributes = attributes;
 
         // set attributes of preselected variation if exists
-        if( !!this.preselect )
+        if (this.preselect)
         {
             // find variation by id
-            var preselectedVariation = this.variations.filter(function( variation ) {
-                return variation.variationId == this.preselect;
-            }.bind(this) );
+            var preselectedVariation = this.variations.filter(function(variation)
+            {
+                return variation.variationId === this.preselect;
+            }.bind(this));
 
-            if( !!preselectedVariation && preselectedVariation.length == 1 )
+            if (!!preselectedVariation && preselectedVariation.length === 1)
             {
                 // set attributes of preselected variation
-                this.setAttributes( preselectedVariation[0] );
+                this.setAttributes(preselectedVariation[0]);
             }
         }
 
         // search for matching variation on each change of attribute selection
-        this.$watch('selectedAttributes', function() {
+        this.$watch("selectedAttributes", function()
+        {
 
             // search variations matching current selection
             var possibleVariations = this.filterVariations();
-            if( possibleVariations.length === 1 )
+
+            if (possibleVariations.length === 1)
             {
                 // only 1 matching variation remaining:
                 // set remaining attributes if not set already. Will trigger this watcher again.
-                if( !this.setAttributes( possibleVariations[0] ) )
+                if (!this.setAttributes(possibleVariations[0]))
                 {
                     // all attributes are set => load variation data
                     var variationId = possibleVariations[0].variationId;
 
-                    if( VariationData.hasOwnProperty( variationId ) )
+                    if (VariationData[variationId])
                     {
                         // reuse cached variation data
                         ResourceService
                             .getResource("currentVariation")
-                            .set( VariationData[variationId] );
+                            .set(VariationData[variationId]);
                     }
                     else
                     {
                         // get variation data from remote
                         ApiService
-                            .get( '/rest/variations/' + variationId )
-                            .done( function( response ) {
+                            .get("/rest/variations/" + variationId)
+                            .done(function(response)
+                            {
                                 // store received variation data for later reuse
                                 VariationData[variationId] = response;
                                 ResourceService
                                     .getResource("currentVariation")
-                                    .set( response );
-                            } );
+                                    .set(response);
+                            });
                     }
 
                 }
 
             }
-        }, { deep: true });
+        }, {
+            deep: true
+        });
 
         // watch for changes on selected variation to adjust url
-        ResourceService.watch( "currentVariation", function( newVariation, oldVariation ) {
+        ResourceService.watch("currentVariation", function(newVariation, oldVariation)
+        {
 
             // replace variation id in url
             var url = window.location.pathname;
-            var title = document.getElementsByTagName('title')[0].innerHTML;
+            var title = document.getElementsByTagName("title")[0].innerHTML;
             // ItemURLs should match: "/<ITEM_NAME>/<ITEM_ID>/<VARIATION_ID>/"
-            var match = url.match( /\/([^\/]*)\/([\d]+)\/?([\d]*)/ );
+            var match = url.match(/\/([^\/]*)\/([\d]+)\/?([\d]*)/);
 
-            if( !!match )
+            if (match)
             {
                 url = "/" + match[1] + "/" + match[2] + "/" + newVariation.variationBase.id;
             }
 
-            window.history.replaceState( {}, title, url );
+            window.history.replaceState({}, title, url);
 
         });
     },
@@ -109,24 +117,25 @@ Vue.component( 'variation-select', {
          * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
          * @returns {array}                    A list of matching variations.
          */
-        filterVariations: function( attributes )
+        filterVariations: function(attributes)
         {
             attributes = attributes || this.selectedAttributes;
-            return this.variations.filter( function( variation ) {
+            return this.variations.filter(function(variation)
+            {
 
-                for( var i = 0; i < variation.attributes.length; i++ )
+                for (var i = 0; i < variation.attributes.length; i++)
                 {
                     var id = variation.attributes[i].attributeId;
                     var val = variation.attributes[i].attributeValueId;
 
-                    if( !!attributes[id] && attributes[id] != val )
+                    if (!!attributes[id] && attributes[id] !== val)
                     {
                         return false;
                     }
                 }
                 return true;
 
-            }.bind( this ));
+            });
         },
 
         /**
@@ -135,12 +144,13 @@ Vue.component( 'variation-select', {
          * @param {int}     attributeValueId    The valueId of the attribute
          * @returns {boolean}                   True if the value can be combined with the current selection.
          */
-        isEnabled: function( attributeId, attributeValueId )
+        isEnabled: function(attributeId, attributeValueId)
         {
             // clone selectedAttributes to avoid touching objects bound to UI
-            var attributes = JSON.parse( JSON.stringify(this.selectedAttributes) );
+            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
             attributes[attributeId] = attributeValueId;
-            return this.filterVariations( attributes ).length > 0;
+            return this.filterVariations(attributes).length > 0;
         },
 
         /**
@@ -148,15 +158,16 @@ Vue.component( 'variation-select', {
          * @param {*}           variation   The variation to set as selected
          * @returns {boolean}               true if at least one attribute has been changed
          */
-        setAttributes: function( variation )
+        setAttributes: function(variation)
         {
             var hasChanges = false;
-            for( var i = 0; i < variation.attributes.length; i++ )
+
+            for (var i = 0; i < variation.attributes.length; i++)
             {
                 var id = variation.attributes[i].attributeId;
                 var val = variation.attributes[i].attributeValueId;
 
-                if( this.selectedAttributes[id] != val )
+                if (this.selectedAttributes[id] !== val)
                 {
                     this.selectedAttributes[id] = val;
                     hasChanges = true;

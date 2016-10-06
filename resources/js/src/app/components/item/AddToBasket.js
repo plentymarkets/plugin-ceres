@@ -1,8 +1,8 @@
-var ResourceService      = require('services/ResourceService');
+var ResourceService      = require("services/ResourceService");
 
-Vue.component('add-to-basket', {
+Vue.component("add-to-basket", {
 
-    template: '#vue-add-to-basket',
+    template: "#vue-add-to-basket",
 
     data: function()
     {
@@ -13,7 +13,7 @@ Vue.component('add-to-basket', {
 
     methods:
     {
-        updateQuantity: function( value )
+        updateQuantity: function(value)
         {
             this.quantity = value;
         },
@@ -21,12 +21,14 @@ Vue.component('add-to-basket', {
         addToBasket: function()
         {
             var self = this;
+
             ResourceService
-                .getResource( "basketItems" )
+                .getResource("basketItems")
                 .push({
                     variationId: ResourceService.getResource("currentVariation").val().variationBase.id,
                     quantity: this.quantity
-                }).done( function() {
+                }).done(function()
+                {
                     self.quantity = 1;
                 });
         }
