@@ -39,7 +39,7 @@ Vue.component("login", {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) != null)
+                    if (document.getElementById(component.modalElement) !== null)
                     {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
@@ -53,6 +53,8 @@ Vue.component("login", {
                     case 401:
                         NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
                         break;
+                    default:
+                        return;
                     }
                 });
         }

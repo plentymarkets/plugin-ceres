@@ -62,7 +62,7 @@ Vue.component("create-update-address", {
                     {
                         var address = this.addressList[key];
 
-                        if (address.id == this.addressData.id)
+                        if (address.id === this.addressData.id)
                         {
                             address = this.addressData;
                             break;

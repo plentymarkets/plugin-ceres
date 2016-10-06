@@ -225,7 +225,7 @@ Vue.component("item-list-pagination", {
         {
             var show = true;
 
-            if (this.currentPaginationEntry == this.numberOfEntries)
+            if (this.currentPaginationEntry === this.numberOfEntries)
             {
                 show = false;
             }

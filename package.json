@@ -10,6 +10,7 @@
     "browserify": "^13.0.1",
     "currency-symbol-map": "3.0.0",
     "del": "^2.2.0",
+    "eslint": "^3.7.1",
     "eslint-config-google": "^0.6.0",
     "glob": "^7.0.3",
     "gulp": "^3.9.1",

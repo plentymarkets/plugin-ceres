@@ -202,7 +202,7 @@ Vue.component("order-history", {
         {
             var show = true;
 
-            if (this.currentPaginationEntry == this.numberOfEntries)
+            if (this.currentPaginationEntry === this.numberOfEntries)
             {
                 show = false;
             }

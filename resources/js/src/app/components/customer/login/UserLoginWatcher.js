@@ -16,9 +16,9 @@ Vue.component("user-login-watcher", {
         {
         if (this.route.length > 0)
             {
-            if (this.userLoggedIn == this.isUserLoggedIn)
+            if (this.userLoggedIn === this.isUserLoggedIn)
                 {
-                if (this.userLoggedIn == "false")
+                if (this.userLoggedIn === "false")
                     {
                     NotificationService.error(Translations.Callisto.accPleaseLogin).closeAfter(3000);
                 }

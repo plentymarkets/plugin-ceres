@@ -2,8 +2,7 @@ var ApiService = require("services/ApiService");
 
 Vue.directive("place-order", function()
 {
-
-    var $elem = $(this.el);
+    params: ['trigger'],
 
     /**
      * TODO
@@ -19,7 +18,5 @@ Vue.directive("place-order", function()
 
                 window.location.assign(target);
             });
-
     });
-
 });

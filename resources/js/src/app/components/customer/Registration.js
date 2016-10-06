@@ -29,7 +29,7 @@ Vue.component("registration", {
      */
     created: function()
     {
-        if (this.guestMode === null || this.guestMode == "")
+        if (this.guestMode === null || this.guestMode === "")
         {
             this.guestMode = false;
         }

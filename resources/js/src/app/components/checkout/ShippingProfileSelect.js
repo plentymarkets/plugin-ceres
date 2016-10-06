@@ -41,8 +41,8 @@ Vue.component("shipping-profile-select", {
         onShippingProfileChange: function()
         {
             // TODO remove log
-            console.log(this.shippingProfileList);
-            console.log(this.selectedShippingProfile);
+            // console.log(this.shippingProfileList);
+            // console.log(this.selectedShippingProfile);
         },
 
         /**

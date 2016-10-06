@@ -1,6 +1,6 @@
-var ResourceService = require("services/ResourceService");
+var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
-var accounting = require("accounting");
+var accounting        = require("accounting");
 
 Vue.filter("currency", function(price, customCurrency)
 {
@@ -8,20 +8,23 @@ Vue.filter("currency", function(price, customCurrency)
 
     var currency = customCurrency || basket.currency;
 
-    if (currency) {
+    if (currency)
+    {
         var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-        if (currencySymbol) {
+
+        if (currencySymbol)
+        {
             currency = currencySymbol;
         }
     }
 
     // (%v = value, %s = symbol)
     var options = {
-        symbol : currency,
-        decimal : ",",
-        thousand: ".",
-        precision : 2,
-        format: "%v %s"
+        symbol   : currency,
+        decimal  : ",",
+        thousand : ".",
+        precision: 2,
+        format   : "%v %s"
     };
 
     return accounting.formatMoney(price, options);

@@ -28,18 +28,7 @@ Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange: function()
         {
-            APIService.put("/rest/payment_method/" + this.selectedPaymentProvider);
-        },
-
-        /**
-         * Format the price
-         * @param price
-         * @param currency
-         * @returns {*}
-         */
-        formatPrice: function(price, currency)
-        {
-            return MonetaryFormatService.formatMonetary(price, currency);
+            CheckoutService.setMethodOfPaymentId(this.selectedPaymentProvider);
         },
 
         /**

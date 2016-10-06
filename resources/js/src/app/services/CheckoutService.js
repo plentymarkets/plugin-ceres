@@ -20,7 +20,7 @@ module.exports = (function($)
     {
         if (!initPromise)
         {
-            if (!!checkoutData)
+            if (checkoutData)
             {
                 initPromise = $.Deferred();
                 checkout = checkoutData;
@@ -49,6 +49,7 @@ module.exports = (function($)
     function setCheckout(checkoutData)
     {
         var properties = Object.keys(checkoutData);
+
         for (var i = 0; i < properties.length; i++)
         {
             checkout[properties[i]] = checkoutData[properties[i]];
