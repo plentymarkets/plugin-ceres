@@ -21,7 +21,7 @@ module.exports = (function($)
     {
         return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
         {
-            if (!setActive)
+            if (setActive)
             {
                 if (addressType === 1)
                 {

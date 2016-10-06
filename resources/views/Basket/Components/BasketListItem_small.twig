@@ -3,7 +3,7 @@
 
 <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
     <div class="basket-item-quantity">
-        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity"></quantity-input>
+        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
     </div>
 
     <div class="basket-item-image">

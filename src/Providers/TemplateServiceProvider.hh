@@ -68,7 +68,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         // provide template to use for confirmation
         $eventDispatcher->listen('tpl.confirmation', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Checkout.Confirmation");
+            $container->setTemplate("PluginCallisto::Checkout.OrderConfirmation");
         });
 
         // provide template to use for login

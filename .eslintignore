@@ -3,4 +3,3 @@ package.json
 config.json
 plugin.json
 resources/js/dist/
-resources/js/src/app/components/item/ItemVariationSelect.js
