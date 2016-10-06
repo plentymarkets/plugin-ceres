@@ -1,9 +1,9 @@
-var AddressService    = require('services/AddressService');
-var ValidationService = require('services/ValidationService');
+var AddressService    = require("services/AddressService");
+var ValidationService = require("services/ValidationService");
 
-Vue.component('create-update-address', {
+Vue.component("create-update-address", {
 
-    template: '#vue-create-update-address',
+    template: "#vue-create-update-address",
 
     props: [
         "addressData",
@@ -14,10 +14,14 @@ Vue.component('create-update-address', {
     ],
 
     methods: {
+        /**
+         * validate the address fields
+         */
         validate: function()
         {
             var self = this;
-            ValidationService.validate($('#my-form'))
+
+            ValidationService.validate($("#my-form"))
                 .done(function()
                 {
                     self.saveAddress();
@@ -29,18 +33,24 @@ Vue.component('create-update-address', {
 
         },
 
+        /**
+         * save the new address or update an existing one
+         */
         saveAddress: function()
         {
             if (this.modalType === "create")
             {
-                this.createAddress()
+                this.createAddress();
             }
             else if (this.modalType === "update")
             {
-                this.updateAddress()
+                this.updateAddress();
             }
         },
 
+        /**
+         * update an address
+         */
         updateAddress: function()
         {
             AddressService
@@ -51,7 +61,8 @@ Vue.component('create-update-address', {
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
-                        if (address.id == this.addressData.id)
+
+                        if (address.id === this.addressData.id)
                         {
                             address = this.addressData;
                             break;
@@ -60,6 +71,9 @@ Vue.component('create-update-address', {
                 }.bind(this));
         },
 
+        /**
+         * create a new address
+         */
         createAddress: function()
         {
             AddressService

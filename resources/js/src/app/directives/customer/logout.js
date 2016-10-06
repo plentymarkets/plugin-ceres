@@ -1,11 +1,13 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
 
-Vue.directive('logout', function()
+Vue.directive("logout", function()
 {
-
+    /**
+     * logout the current user
+     */
     $(this.el).click(
-        function(e)
+        function(event)
         {
             ApiService.get("/rest/customer/logout")
                 .done(
@@ -14,16 +16,16 @@ Vue.directive('logout', function()
                         NotificationService.success(Translations.Callisto.accLogoutSuccessful).closeAfter(3000);
 
                         // remove address ids from session after logout
-                        ApiService.post('/rest/customer/address_selection/0/?typeId=-1')
-                            .fail(function(e)
+                        ApiService.post("/rest/customer/address_selection/0/?typeId=-1")
+                            .fail(function(error)
                             {
-                                console.warn(e);
+                                //console.warn(error);
                             });
                     }
                 );
 
-            e.preventDefault();
+            event.preventDefault();
 
-        }.bind(this));
+        });
 
 });

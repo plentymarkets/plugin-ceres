@@ -1,4 +1,5 @@
-Vue.filter( 'itemURL', function( item ) {
+Vue.filter("itemURL", function(item)
+{
 
     var urlContent = item.itemDescription.urlContent.split("/");
     var i          = urlContent.length - 1;

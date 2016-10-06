@@ -18,14 +18,14 @@
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    {{ trans("PluginCallisto::Callisto.itemShippingPrice") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
+                    {{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
                     ${ basket.shippingAmount | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
-                    {{ trans("PluginCallisto::Callisto.itemShippingPrice") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
+                    {{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                     ${ basket.shippingAmountNet | currency }

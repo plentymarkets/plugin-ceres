@@ -1,8 +1,8 @@
-var ResourceService       = require('services/ResourceService');
+var ResourceService       = require("services/ResourceService");
 
-Vue.component('basket-list', {
+Vue.component("basket-list", {
 
-    template: '#vue-basket-list',
+    template: "#vue-basket-list",
 
     props: [
         "size"
@@ -15,9 +15,12 @@ Vue.component('basket-list', {
         };
     },
 
+    /**
+     * bind to basket and show the items in a small or large list
+     */
     ready: function()
     {
-        ResourceService.bind( "basketItems", this );
+        ResourceService.bind("basketItems", this);
         this.size = this.size || "large";
     }
 });

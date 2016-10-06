@@ -1,14 +1,17 @@
-Vue.component('language-select', {
+Vue.component("language-select", {
 
-    template: '#vue-language-select',
+    template: "#vue-language-select",
 
     props: [
-        'currentLang'
+        "currentLang"
     ],
 
+    /**
+     * check the current language and update the flag in the header
+     */
     ready: function()
     {
-        if(this.currentLang == "de")
+        if (this.currentLang === "de")
         {
             document.getElementById("currentFlagIcon").classList.add("flag-icon-de");
         }
@@ -19,9 +22,13 @@ Vue.component('language-select', {
     },
 
     methods: {
+        /**
+         * change language if the the flag has changed in the header
+         * @param lang
+         */
         languageChanged: function(lang)
         {
-            if(lang == "de")
+            if (lang === "de")
             {
                 window.open(window.location.origin + "/de" + window.location.pathname, "_self");
             }
@@ -30,6 +37,6 @@ Vue.component('language-select', {
                 window.open(window.location.origin + "/en" + window.location.pathname, "_self");
             }
         }
-    },
+    }
 
 });

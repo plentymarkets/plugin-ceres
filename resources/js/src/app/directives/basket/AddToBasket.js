@@ -1,20 +1,21 @@
-var ResourceService     = require('services/ResourceService');
-var NotificationService = require('services/NotificationService');
+var ResourceService     = require("services/ResourceService");
 
-Vue.directive('add-to-basket', function(value)
+Vue.directive("add-to-basket", function(value)
 {
-
+    /**
+     * add the item to the basket
+     */
     $(this.el).click(
-        function(e)
+        function(event)
         {
-          ResourceService
-              .getResource( 'basketItems' )
+            ResourceService
+              .getResource("basketItems")
               .push(value);
 
-          e.preventDefault();
+            event.preventDefault();
 
-        }.bind(this));
+        });
 
-        //TODO let AddItemConfirm open
+        // TODO let AddItemConfirm open
 
 });

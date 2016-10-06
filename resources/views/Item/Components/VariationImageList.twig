@@ -1,0 +1,21 @@
+<script type="x/template" id="vue-variation-image-list">
+    <div>
+        <div class="owl-carousel owl-carousel-single" v-el:single>
+            <div class="owl_item" v-for="image in currentVariation.variationImageList">
+                <div class="square-container">
+                    <div class="square-inner center-xy main-image">
+                        <a :href="'/' + image.path" data-lightbox="single-big-image-gallery">
+                            <img :src="'/' + image.path" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="owl-carousel owl-carousel-preview" v-el:preview>
+            <div class="owl_item" v-for="image in currentVariation.variationImageList" :class="{ 'synced': $index == currentItem }" @click="goTo( $index )">
+                <img :src="'/' + image.path" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</script>

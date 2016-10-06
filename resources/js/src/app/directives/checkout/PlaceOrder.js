@@ -1,17 +1,22 @@
-var ApiService = require( 'services/ApiService' );
+var ApiService = require("services/ApiService");
 
-Vue.directive( 'place-order', {
-
+Vue.directive("place-order", function()
+{
     params: ['trigger'],
 
-    bind: function() {
-        var trigger = this.params['trigger'] || 'ready';
-        var $elem   = trigger === 'ready' ? $( document ) : $( this.elem );
+    /**
+     * TODO
+     */
+    $elem.click(function(event)
+    {
+        event.preventDefault();
 
-        $elem.on( trigger, function( e )
-        {
-            e.preventDefault();
-            ApiService.post( "/rest/order" );
-        });
-    }
+        ApiService.post("/rest/order")
+            .done(function(response)
+            {
+                var target = $elem.attr("href") || $elem.parents("form").attr("action");
+
+                window.location.assign(target);
+            });
+    });
 });
