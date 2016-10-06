@@ -4,7 +4,7 @@ var NotificationService = require("services/NotificationService");
 Vue.directive("logout", function()
 {
     /**
-     * logout the current user
+     * Logout the current user
      */
     $(this.el).click(
         function(event)
@@ -15,7 +15,7 @@ Vue.directive("logout", function()
                     {
                         NotificationService.success(Translations.Callisto.accLogoutSuccessful).closeAfter(3000);
 
-                        // remove address ids from session after logout
+                        // Remove the address IDs from the session after logout
                         ApiService.post("/rest/customer/address_selection/0/?typeId=-1")
                             .fail(function(error)
                             {

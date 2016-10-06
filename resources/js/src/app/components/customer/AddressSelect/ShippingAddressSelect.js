@@ -7,7 +7,7 @@ Vue.component("shipping-address-select", {
     props: ["addressList", "selectedAddressId"],
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -16,15 +16,15 @@ Vue.component("shipping-address-select", {
 
     methods: {
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen on ApiService events and handle new data
         },
 
         /**
-         * update delivery address
+         * Update the delivery address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
