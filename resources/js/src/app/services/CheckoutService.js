@@ -20,7 +20,7 @@ module.exports = (function($)
     {
         if (!initPromise)
         {
-            if (!checkoutData)
+            if (checkoutData)
             {
                 initPromise = $.Deferred();
                 checkout = checkoutData;
