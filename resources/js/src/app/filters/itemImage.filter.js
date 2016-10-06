@@ -1,6 +1,5 @@
 Vue.filter("itemImage", function(item, baseUrl)
 {
-
     var imageList = item.variationImageList;
 
     baseUrl = baseUrl || "/";

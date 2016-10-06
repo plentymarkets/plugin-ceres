@@ -192,6 +192,7 @@ module.exports = (function($)
 
     function _eval(input)
     {
+        // eslint-disable-next-line
         return (new Function("return " + input))();
     }
 
