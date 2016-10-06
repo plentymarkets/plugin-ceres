@@ -13,7 +13,7 @@ Vue.component("notifications", {
 
     methods : {
         /**
-         * dissmiss the notification
+         * Dissmiss the notification
          * @param notification
          */
         dismiss: function(notification)

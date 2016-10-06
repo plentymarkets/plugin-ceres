@@ -21,7 +21,7 @@ Vue.component("basket-list-item", {
     methods: {
 
         /**
-         * remove item from basket
+         * Delete item from basket
          */
         deleteItem: function()
         {
@@ -53,7 +53,7 @@ Vue.component("basket-list-item", {
         },
 
         /**
-         * update item quantity in basket
+         * Update item quantity in basket
          * @param quantity
          */
         updateQuantity: function(quantity)
@@ -78,7 +78,7 @@ Vue.component("basket-list-item", {
         },
 
         /**
-         * cancel delete
+         * Cancel delete
          */
         resetDelete: function()
         {

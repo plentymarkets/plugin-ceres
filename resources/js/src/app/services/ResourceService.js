@@ -139,7 +139,7 @@ module.exports = (function($)
 
     /**
      * @class Observable
-     * Automatically notifies all attached listeners on any changes.
+     * Automatically notify all attached listeners on any changes.
      */
     function Observable()
     {
@@ -181,14 +181,13 @@ module.exports = (function($)
         // initialize resource
         if (initialValue)
         {
-            // initial value was given by constructor
+            // Initial value that was given by constructor
             data.value = initialValue;
             ready = true;
         }
         else if (url)
         {
-            // no initial value given
-            // => get value from url
+            // If no initial value was given, get the value from the URL
             ApiService
                 .get(url)
                 .done(function(response)

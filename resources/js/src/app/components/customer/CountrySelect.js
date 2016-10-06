@@ -20,7 +20,7 @@ Vue.component("country-select", {
     },
 
     /**
-     * get shipping countries
+     * Get the shipping countries
      */
     created: function()
     {
@@ -32,7 +32,7 @@ Vue.component("country-select", {
 
     methods: {
         /**
-         * method to fire when the country has changed
+         * Method to fire when the country has changed
          */
         countryChanged: function()
         {
@@ -42,7 +42,7 @@ Vue.component("country-select", {
 
     watch: {
         /**
-         * add watcher to handle country changed
+         * Add watcher to handle the country changed
          */
         selectedCountryId: function()
         {

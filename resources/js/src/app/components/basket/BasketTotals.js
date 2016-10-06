@@ -16,7 +16,7 @@ Vue.component("basket-totals", {
     },
 
     /**
-     * bind to basket
+     * Bind to basket
      */
     ready: function()
     {

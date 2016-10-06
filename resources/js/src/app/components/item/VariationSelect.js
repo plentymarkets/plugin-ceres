@@ -35,7 +35,8 @@ Vue.component("variation-select", {
             // find variation by id
             var preselectedVariation = this.variations.filter(function(variation)
             {
-                return variation.variationId === this.preselect;
+                // eslint-disable-next-line eqeqeq
+                return variation.variationId == this.preselect;
             }.bind(this));
 
             if (!!preselectedVariation && preselectedVariation.length === 1)
