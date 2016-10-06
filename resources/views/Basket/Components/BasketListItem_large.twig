@@ -2,10 +2,13 @@
 
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
+    <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation | itemURL">
         <img :src="basketItem.variation | itemImage">
     </a>
+    <!-- ./ITEM IMAGE -->
 
+    <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
         <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity"></quantity-input>
@@ -30,7 +33,9 @@
               </span>
         </button>
     </div>
+    <!-- ./ITEM QUANTITY HANDLING -->
 
+    <!-- ITEM DETAILS -->
     <div class="item-details small">
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
         <a class="clearfix" :href="basketItem.variation | itemURL">
@@ -64,4 +69,5 @@
         </div>
         <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }"></label>
     </div>
+    <!-- ./ITEM DETAILS -->
 </article>

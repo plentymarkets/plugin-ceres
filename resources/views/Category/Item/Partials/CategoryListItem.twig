@@ -10,6 +10,7 @@
             </div>
         </a>
 
+        <!-- STORE SPECIALS -->
         {% if item.itemBase.storeSpecial > 0 %}
             <div class="special-tags tl v">
                 {% if  item.itemBase.storeSpecial == 1 %}
@@ -43,6 +44,7 @@
 
             </div>
         {% endif %}
+        <!-- ./STORE SPECIALS -->
 
         <div class="thumb-content">
             <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-title small">

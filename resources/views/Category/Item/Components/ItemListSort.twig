@@ -1,6 +1,7 @@
 <script type="x/template" id="vue-item-list-sort">
 <form name="sorting-form" action="${ currentURL() }" method="GET">
 
+        <!-- SORT BOX VALUES -->
         <div class="col-xs-6">
           <div class="input-unit">
             <select name="itemSorting" id="itemSorting" onchange="this.form.submit();" class="custom-select">
@@ -11,12 +12,16 @@
             <label for="itemSorting">{{ trans("PluginCallisto::Callisto.itemCategorySort") }}</label>
           </div>
         </div>
+        <!-- ./SORT BOX VALUES -->
 
+        <!-- SHOW THE BOX -->
         <input type="hidden" name="page" value="1">
         <template v-if="showPagination() == false">
             <input type="hidden" name="items_per_page" value="${ defaultPagination }">
         </template>
+        <!-- ./SHOW THE BOX -->
 
+      <!-- SORT BOX -->
       <div class="col-xs-6">
         <div class="input-unit">
           <label for="listItemsPerPage">{{ trans("PluginCallisto::Callisto.itemCategoryItemsPerPage") }}</label>
@@ -27,6 +32,7 @@
           </select>
         </div>
       </div>
+    <!-- SORT BOX -->
 
 </form>
 </script>
