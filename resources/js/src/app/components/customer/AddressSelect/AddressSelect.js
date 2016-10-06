@@ -31,7 +31,7 @@ Vue.component("address-select", {
         {
             for (var index in this.addressList)
             {
-                if (this.addressList[index].id == this.selectedAddressId)
+                if (this.addressList[index].id === this.selectedAddressId)
                 {
                     this.selectedAddress = this.addressList[index];
                 }
@@ -80,7 +80,7 @@ Vue.component("address-select", {
          */
         showNameStrong: function()
         {
-            return !this.selectedAddress.name1 || this.selectedAddress.name1.length == 0;
+            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
 
         /**
@@ -123,9 +123,9 @@ Vue.component("address-select", {
          */
         updateHeadline: function()
         {
-            var headline  = (this.addressType == "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
+            var headline  = (this.addressType === "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
 
-            headline += (this.modalType == "update") ? Translations.Callisto.generalEdit : Translations.Callisto.generalAdd;
+            headline += (this.modalType === "update") ? Translations.Callisto.generalEdit : Translations.Callisto.generalAdd;
             this.headline = headline;
         }
 

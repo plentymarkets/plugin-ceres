@@ -34,7 +34,7 @@ Vue.component("account-settings", {
          */
         matchPassword: function()
         {
-            if (this.confirmPassword != "")
+            if (this.confirmPassword !== "")
             {
                 return this.newPassword === this.confirmPassword;
             }
@@ -63,7 +63,7 @@ Vue.component("account-settings", {
         {
             var self = this;
 
-            if (this.newPassword != "" && (this.newPassword === this.confirmPassword))
+            if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
             {
                 APIService.post("/rest/customer/password", {password: this.newPassword})
                     .done(function(response)

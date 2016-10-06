@@ -11,7 +11,7 @@ Vue.component("language-select", {
      */
     ready: function()
     {
-        if (this.currentLang == "de")
+        if (this.currentLang === "de")
         {
             document.getElementById("currentFlagIcon").classList.add("flag-icon-de");
         }
@@ -28,7 +28,7 @@ Vue.component("language-select", {
          */
         languageChanged: function(lang)
         {
-            if (lang == "de")
+            if (lang === "de")
             {
                 window.open(window.location.origin + "/de" + window.location.pathname, "_self");
             }

@@ -6,7 +6,8 @@ module.exports = (function($)
 
     return {
         createAddress: createAddress,
-        updateAddress: updateAddress
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
     };
 
     /**
@@ -20,7 +21,7 @@ module.exports = (function($)
     {
         return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
         {
-            if (!!setActive)
+            if (!setActive)
             {
                 if (addressType === 1)
                 {

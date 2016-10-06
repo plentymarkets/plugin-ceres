@@ -33,7 +33,7 @@ Vue.component("quantity-input", {
                 this.value = this.max;
             }
 
-            if (!!this.timeoutHandle)
+            if (!this.timeoutHandle)
             {
                 window.clearTimeout(this.timeoutHandle);
             }

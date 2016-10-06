@@ -96,11 +96,12 @@
     "keyword-spacing"         : [
       "error",
       {
-        "before": false,
-        "after" : true,
-        "overrides":
-        {
-          "this": { "before": true }
+        "before"   : false,
+        "after"    : true,
+        "overrides": {
+          "this": {
+            "before": true
+          }
         }
       }
     ],
@@ -139,10 +140,15 @@
     "no-new-wrappers"         : "warn",
     "no-undefined"            : "error",
     "prefer-const"            : "warn",
-    "valid-jsdoc"             : "warn",
+    "valid-jsdoc"             : "off",
+    "require-jsdoc"           : "off",
     "guard-for-in"            : "off",
     "padded-blocks"           : "off",
     "no-warning-comments"     : "off",
-    "no-negated-condition"    : "off"
+    "no-negated-condition"    : "off",
+    "new-cap": ["error", {
+      "newIsCap": false,
+      "capIsNew": false
+    }]
   }
 }

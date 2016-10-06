@@ -4,7 +4,8 @@ module.exports = (function($)
     var paused  = false;
     var timeout = -1;
     var interval;
-    var timeRemaining, timeStart;
+    var timeRemaining;
+    var timeStart;
 
     return {
         findModal: findModal
@@ -97,6 +98,7 @@ module.exports = (function($)
                 if (!paused)
                 {
                     var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
+
                     secondsRemaining = Math.round(secondsRemaining / 1000);
                     $bsModal.find(".timer").text(secondsRemaining);
                 }
