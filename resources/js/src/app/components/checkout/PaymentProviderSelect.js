@@ -1,5 +1,3 @@
-var APIService = require("services/APIService");
-
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",

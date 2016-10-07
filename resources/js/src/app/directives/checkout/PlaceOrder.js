@@ -2,7 +2,7 @@ var ApiService = require("services/ApiService");
 
 Vue.directive("place-order", function()
 {
-    params: ['trigger'],
+    params: ["trigger"],
 
     /**
      * TODO
