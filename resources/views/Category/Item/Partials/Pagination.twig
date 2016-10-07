@@ -1,32 +1,74 @@
+{% set itemsPerPage     = request.get("items_per_page") %}
+{% set itemSorting      = request.get("itemSorting") %}
+{% set query            = request.all() %}
+
+{% set page             = paginatedResult.getPage() %}
+{% set pageMax          = paginatedResult.getTotalCount() // itemsPerPage %}
+{% if paginatedResult.getTotalCount() % itemsPerPage > 0 %}
+    {% set pageMax = pageMax + 1 %}
+{% endif %}
+
 <nav class="cmp cmp-paginator pull-sm-right text-xs-center">
     <ul class="pagination m-y-0">
 
-        <li v-if="showArrowsLeft()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(previousPaginationEntry())" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryPrevious") }}</span>
-            </a>
+        <!-- PREV LINK -->
+        <li class="page-item{% if page == 1 %} disabled{% endif %}">
+            <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">&laquo;</a>
         </li>
-        <li v-if="showFirstPaginationEntry()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(1)" href="#">1</a>
+        <!-- ./PREV LINK -->
+
+        <!-- FIRST PAGE LINK -->
+        {% if page > 2 and config('PluginCallisto.pagination.showFirstPage') == "true" %}
+            <li class="page-item">
+                <a class="page-link" href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
+            </li>
+            <li class="page-item page-link">...</li>
+        {% endif %}
+        <!-- ./FIRST PAGE LINK -->
+
+        <!-- PAGINATION -->
+        {% if page == pageMax and page > 2 %}
+        <li class="page-item">
+            <a class="page-link" href="?{{ query | merge({'page' : page-2 }) | url_encode }}">{{ page - 2 }}</a>
         </li>
-        <li v-if="showDotsLeft()" class="page-item page-link">...</li>
-        <li v-if="showArrowsLeft()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(previousPaginationEntry())" href="#">${ previousPaginationEntry() }</a>
+        {% endif %}
+
+        {% if page > 1 %}
+        <li class="page-item">
+            <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">{{ page - 1 }}</a>
         </li>
-        <li class="page-item page-link"><b>${ currentPaginationEntry }</b></li>
-        <li v-if="showArrowsRight()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(nextPaginationEntry())" href="#">${ nextPaginationEntry() }</a>
+        {% endif %}
+
+        <li class="page-item active">
+            <a class="page-link" href="">{{ page }}</a>
         </li>
-        <li v-if="showDotsRight()" class="page-item page-link">...</li>
-        <li v-if="showLastPaginationEntry()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(getLastPaginationEntry())" href="#">${ getLastPaginationEntry() }</a>
+
+        {% if page+1 <= pageMax %}
+        <li class="page-item">
+            <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">{{ page + 1 }}</a>
         </li>
-        <li v-if="showArrowsRight()" class="page-item">
-            <a class="page-link" @click="updateItemCategoryList(nextPaginationEntry())" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryNext") }}</span>
-            </a>
+        {% endif %}
+
+        {% if page == 1 and page+2 <= pageMax %}
+            <li class="page-item">
+                <a class="page-link" href="?{{ query | merge({'page' : page+2 }) | url_encode }}">{{ page + 2 }}</a>
+            </li>
+        {% endif %}
+        <!-- ./PAGINATION -->
+
+        <!-- LAST PAGE LINK -->
+        {% if pageMax > 3 and page < pageMax-1 and config('PluginCallisto.pagination.showLastPage') == "true" %}
+            <li class="page-item page-link">...</li>
+            <li class="page-item">
+                <a class="page-link" href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>
+            </li>
+        {% endif %}
+        <!-- ./LAST PAGE LINK -->
+
+        <!-- NEXT LINK -->
+        <li class="page-item{% if page == pageMax %} disabled{% endif %}">
+            <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">&raquo;</a>
         </li>
+        <!-- ./NEXT LINK -->
     </ul>
 </nav>

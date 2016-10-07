@@ -3,18 +3,9 @@
 {% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
 {% set paginatedResult = services.category.getItems(category, variationShowType) %}
 {% set itemList = paginatedResult.getResult() %}
-{% set currentPage = paginatedResult.getPage() %}
-{% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
-{% set totalCount = paginatedResult.getTotalCount() %}
 {% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
-{% set pageIndicator = "1 - " ~ totalCount %}
-
-{% set configItemName = config("PluginCallisto.item.name") %}
-{% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
 {% block PageBody %}
-
-    {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
 
     <div class="categoriegrid container">
         <div class="row m-t-3 m-b-2">
@@ -33,10 +24,8 @@
                     {% include "PluginCallisto::Category.Item.Partials.ListControls" with { 'paginatedResult': paginatedResult } %}
 
                     <div class="col-xs-12 col-sm-6 m-b-1">
-                        <item-list-pagination pagination-position="{{ paginationType }}"
-                                              position="top"
-                                              max-count="{{ totalCount }}">
-                        </item-list-pagination>
+
+                        {% include "PluginCallisto::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
                     </div>
                 </div>
 
@@ -52,11 +41,7 @@
 
                 <div class="list-controls m-b-3 row">
                     <div class="col-xs-12">
-                        <item-list-pagination
-                                pagination-position="{{ paginationType }}"
-                                position="top"
-                                max-count="{{ totalCount }}">
-                        </item-list-pagination>
+                        {% include "PluginCallisto::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
                     </div>
 
                 </div>

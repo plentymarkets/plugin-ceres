@@ -43,7 +43,7 @@
 {% endif %}
 
 {% set currentSort = request.get("itemSorting") %}
-{% set currentItemsPerPage = request.get("items_per_page") %}
+{% set currentItemsPerPage = request.get("items_per_page") | default( 20 ) %}
 
 {% set page             = paginatedResult.getPage() %}
 {% set itemCountTotal   = paginatedResult.getTotalCount() %}

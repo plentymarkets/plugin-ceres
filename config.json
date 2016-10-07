@@ -239,11 +239,25 @@
         "type"              : "dropdown",
         "possibleValues"    :
         {
-          "top"             : "Top",
-          "bottom"          : "Bottom",
-          "top_bottom"      : "Top and bottom"
+            "top"             : "Top",
+            "bottom"          : "Bottom",
+            "top_bottom"      : "Top and bottom"
         },
         "default"           : "top"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "pagination.showFirstPage",
+        "label"             : "Show first page permanently",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "pagination.showLastPage",
+        "label"             : "Show last page permanently",
+        "type"              : "checkbox",
+        "default"           : "false"
     },
     {
         "tab"           : "Pagination and sorting",
