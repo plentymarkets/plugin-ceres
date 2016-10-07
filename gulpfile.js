@@ -57,7 +57,7 @@ gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function(
         .pipe( gulp.dest( JS_DIST ) );
 });
 
-gulp.task('build:app', /*['build:lint'],*/ function() {
+gulp.task('build:app', ['build:lint'], function() {
 
     var builder = browserify({
         entries: glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
