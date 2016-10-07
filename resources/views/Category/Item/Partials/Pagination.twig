@@ -1,0 +1,32 @@
+<nav class="cmp cmp-paginator pull-sm-right text-xs-center">
+    <ul class="pagination m-y-0">
+
+        <li v-if="showArrowsLeft()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(previousPaginationEntry())" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryPrevious") }}</span>
+            </a>
+        </li>
+        <li v-if="showFirstPaginationEntry()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(1)" href="#">1</a>
+        </li>
+        <li v-if="showDotsLeft()" class="page-item page-link">...</li>
+        <li v-if="showArrowsLeft()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(previousPaginationEntry())" href="#">${ previousPaginationEntry() }</a>
+        </li>
+        <li class="page-item page-link"><b>${ currentPaginationEntry }</b></li>
+        <li v-if="showArrowsRight()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(nextPaginationEntry())" href="#">${ nextPaginationEntry() }</a>
+        </li>
+        <li v-if="showDotsRight()" class="page-item page-link">...</li>
+        <li v-if="showLastPaginationEntry()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(getLastPaginationEntry())" href="#">${ getLastPaginationEntry() }</a>
+        </li>
+        <li v-if="showArrowsRight()" class="page-item">
+            <a class="page-link" @click="updateItemCategoryList(nextPaginationEntry())" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryNext") }}</span>
+            </a>
+        </li>
+    </ul>
+</nav>

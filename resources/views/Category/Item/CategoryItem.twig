@@ -14,7 +14,6 @@
 
 {% block PageBody %}
 
-    {{ component( "PluginCallisto::Category.Item.Components.ListControls" ) }}
     {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
 
     <div class="categoriegrid container">
@@ -31,10 +30,7 @@
 
             <div class="col-lg-9">
                 <div class="list-controls row">
-                    <list-controls default-sorting="{{ config("PluginLayoutCore.sort.defaultSorting") }}"
-                                    default-items-per-page="{{ config("PluginLayoutCore.sort.defaultItemsPerPage") }}"
-                                    total-count="{{ totalCount }}">
-                    </list-controls>
+                    {% include "PluginCallisto::Category.Item.Partials.ListControls" with { 'paginatedResult': paginatedResult } %}
 
                     <div class="col-xs-12 col-sm-6 m-b-1">
                         <item-list-pagination pagination-position="{{ paginationType }}"
