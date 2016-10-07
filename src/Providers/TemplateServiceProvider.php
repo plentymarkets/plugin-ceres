@@ -87,23 +87,13 @@ class TemplateServiceProvider extends ServiceProvider
         }, 0);
 
         // provide mapped category IDs
-        $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap, $config) {
-            if(!is_null($config))
-            {
-                $categoryMap->setCategoryMap(array (
-                                                 CategoryKey::HOME           => $config->get("PluginCallisto.global.category.home"),
-                                                 CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCallisto.global.category.page_not_found"),
-                                                 CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCallisto.global.category.item_not_found")
-                                             ));
-            }
-            else
-            {
-                $categoryMap->setCategoryMap(array (
-                                                 CategoryKey::HOME           => "",
-                                                 CategoryKey::PAGE_NOT_FOUND => "",
-                                                 CategoryKey::ITEM_NOT_FOUND => ""
-                                             ));
-            }
+        $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap) use(&$config) {
+            $categoryMap->setCategoryMap(array (
+                                             CategoryKey::HOME           => $config->get("PluginCallisto.global.category.home"),
+                                             CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCallisto.global.category.page_not_found"),
+                                             CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCallisto.global.category.item_not_found")
+                                         ));
+            
         }, 0);
 	}
 }
