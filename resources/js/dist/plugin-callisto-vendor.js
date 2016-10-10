@@ -19886,7 +19886,11 @@ var template = Object.freeze({
   return Vue;
 
 }));
+<<<<<<< HEAD
 /*! tether 1.3.7 */
+=======
+/*! tether 1.3.3 */
+>>>>>>> plentymarkets/beta
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20948,12 +20952,20 @@ var TetherClass = (function (_Evented) {
       var win = doc.defaultView;
 
       var scrollbarSize = undefined;
+<<<<<<< HEAD
       if (win.innerHeight > doc.documentElement.clientHeight) {
+=======
+      if (doc.body.scrollWidth > win.innerWidth) {
+>>>>>>> plentymarkets/beta
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
+<<<<<<< HEAD
       if (win.innerWidth > doc.documentElement.clientWidth) {
+=======
+      if (doc.body.scrollHeight > win.innerHeight) {
+>>>>>>> plentymarkets/beta
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }

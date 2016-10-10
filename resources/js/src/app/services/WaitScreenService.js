@@ -32,14 +32,14 @@ module.exports = (function($)
             overlay.count--;
         }
 
-        if (!!force)
+        if (force)
         {
             overlay.count = 0;
         }
 
         if (overlay.count <= 0)
         {
-            overlay.count   = 0;
+            overlay.count = 0;
             overlay.visible = false;
         }
 

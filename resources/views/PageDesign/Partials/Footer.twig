@@ -1,0 +1,117 @@
+{% set numberOfCols = config('PluginCallisto.footer.number_of_cols') %}
+{% set showNewsletter = config('PluginCallisto.footer.newsletter') %}
+{% set colSize = (12 / (numberOfCols + 1)) %}
+{% set displayedCategories = [] %}
+{% set paymentColunmSize = 7 %}
+
+{% if showNewsletter == "false" %}
+    {% set paymentColunmSize = 12 %}
+{% endif %}
+
+<div class="footer p-t-2 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-xs-center">
+                <img src="{{ plugin_path("PluginCallisto") }}/images/logo-white.png" alt="BrandLogo">
+            </div>
+        </div>
+        <hr class="m-y-2">
+        <div class="row">
+
+            {% for i in 1..numberOfCols %}
+                <div class="col-sm-6 col-md-4 col-lg-{{ colSize }}">
+                    <div class="footerLink">
+                        <h5>{{ config('PluginCallisto.footer.col_' ~ i ~ '_title') }}</h5>
+                        <ul class="list-unstyled">
+
+                            {% set footerCategories = config('PluginCallisto.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
+                            {% for catID in footerCategories %}
+
+                                {% set cat = services.category.get(catID) %}
+
+                                {% if cat is not null %}
+                                    {% set displayedCategories = displayedCategories | merge([catID]) %}
+                                    <li>
+                                        <a href="{{ services.category.getURL( cat ) }}">
+                                            {{ cat.details.first.name }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if i == numberOfCols and config('PluginCallisto.global.category.legal_disclosure') not in displayedCategories %}
+                                    <li>
+                                        {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
+                                        <a href="{{ services.category.getURL( cat ) }}">{{ cat.details.first.name }}</a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-sm-6 col-md-12 col-lg-{{ colSize }}">
+                <div class="footerLink text-md-center text-lg-left">
+                    <h5>Social media</h5>
+                    <ul class="list-unstyled m-b-0">
+                        <div class="shariff socialbar m-t-0" data-services='["twitter","facebook","googleplus","pinterest"]' data-url="" style="" data-media-url=""></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr class="m-y-1">
+        <div class="row">
+            <div class="col-xs-12 col-sm-{{ paymentColunmSize }}">
+                <div class="row payment_line text-xs-center m-y-1">
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/paypal.svg" class="img-fluid"></a>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/mastercard.svg" class="img-fluid"></a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/sofort-ueberweisung.svg" class="img-fluid"></a>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/dhl.svg" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+
+            {% if showNewsletter == "true" %}
+                <div class="col-xs-12 col-sm-5 border-left">
+                    <div class="newsletter clearfix">
+                        <hr class="hidden-sm-up">
+                        <h4>{{ trans("PluginCallisto::Callisto.generalNewsletter") }}</h4>
+                        <p>{{ trans("PluginCallisto::Callisto.generalEnterEmail") }}</p>
+                        <form id="" action="" method="post">
+                            <div class="input-group">
+                                <input name="" id="" class="form-control" type="email" placeholder="{{ trans("PluginCallisto::Callisto.generalYourEmail") }}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn_mail" type="submit">
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <hr class="m-t-1 m-b-0">
+
+    </div>
+
+    {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
+
+    <div class="col-xs-12 copyright clearfix m-y-1">
+        <p class="text-xs-center">&copy; Copyright 2016 | {{ trans("PluginCallisto::Callisto.generalAllRightsReserved") }} |
+            <a href="{{ services.category.getURL( cat ) }}">
+                {{ trans("PluginCallisto::Callisto.generalLegalDisclosure") }}
+            </a>
+        </p>
+    </div>
+</div>

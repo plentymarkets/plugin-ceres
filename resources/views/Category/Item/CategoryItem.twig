@@ -1,0 +1,70 @@
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
+
+{% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
+{% set paginatedResult = services.category.getItems(category, variationShowType) %}
+{% set itemList = paginatedResult.getResult() %}
+{% set currentPage = paginatedResult.getPage() %}
+{% set isLastPage = paginatedResult.isLastPage() %}{# not in use #}
+{% set totalCount = paginatedResult.getTotalCount() %}
+{% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
+{% set pageIndicator = "1 - " ~ totalCount %}
+
+{% set configItemName = config("PluginCallisto.item.name") %}
+{% set itemData = config("PluginCallisto.item.data")|split(', ') %}
+
+{% block PageBody %}
+
+    {{ component( "PluginCallisto::Category.Item.Components.ListControls" ) }}
+    {{ component( "PluginCallisto::Category.Item.Components.Pagination" ) }}
+
+    <div class="categoriegrid container">
+        <div class="row m-t-3 m-b-2">
+            <div class="col-xs-12">
+                <h1>{{ category.details.first.name }}</h1>
+                <hr class="hidden-sm-down">
+            </div>
+        </div>
+        <div class="row m-b-3">
+            <div class="col-lg-3">
+                {% include "PluginCallisto::Category.Item.Partials.CategoryViewFilter" %}
+            </div>
+
+            <div class="col-lg-9">
+                <div class="list-controls row">
+                    <list-controls default-sorting="{{ config("PluginLayoutCore.sort.defaultSorting") }}"
+                                    default-items-per-page="{{ config("PluginLayoutCore.sort.defaultItemsPerPage") }}"
+                                    total-count="{{ totalCount }}">
+                    </list-controls>
+
+                    <div class="col-xs-12 col-sm-6 m-b-1">
+                        <item-list-pagination pagination-position="{{ paginationType }}"
+                                              position="top"
+                                              max-count="{{ totalCount }}">
+                        </item-list-pagination>
+                    </div>
+                </div>
+
+                <hr class="m-b-1 hidden-sm-down">
+                    <ul class="product-list row grid">
+                        {% for item in itemList %}
+                            <li>
+                              {% include "PluginCallisto::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                <hr class="m-y-2">
+
+                <div class="list-controls m-b-3 row">
+                    <div class="col-xs-12">
+                        <item-list-pagination
+                                pagination-position="{{ paginationType }}"
+                                position="top"
+                                max-count="{{ totalCount }}">
+                        </item-list-pagination>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
