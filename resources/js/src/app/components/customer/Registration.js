@@ -8,11 +8,11 @@ Vue.component("registration", {
 
     template: "#vue-registration",
 
-    props: [
-        "modalElement",
-        "guestMode",
-        "isSimpleRegistration"
-    ],
+    props: {
+        modalElement: String,
+        guestMode: {type: Boolean, default: false},
+        isSimpleRegistration: {type: Boolean, default: false}
+    },
 
     data: function()
     {
@@ -22,21 +22,6 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {}
         };
-    },
-
-    /**
-     * Check whether the component should be a normal registration or the guest registration
-     */
-    created: function()
-    {
-        if (this.guestMode === null || this.guestMode === "")
-        {
-            this.guestMode = false;
-        }
-        else
-        {
-            this.guestMode = true;
-        }
     },
 
     methods: {

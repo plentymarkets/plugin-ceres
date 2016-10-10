@@ -19,7 +19,7 @@ Vue.directive("logout", function()
                         ApiService.post("/rest/customer/address_selection/0/?typeId=-1")
                             .fail(function(error)
                             {
-                                //console.warn(error);
+                                // console.warn(error);
                             });
                     }
                 );
