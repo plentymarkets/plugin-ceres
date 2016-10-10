@@ -27647,7 +27647,7 @@ Vue.component("basket-preview", {
     },
 
     /**
-     * bind to basket and bind the basket items
+     * Bind to basket and bind the basket items
      */
     ready: function()
     {
@@ -27675,7 +27675,7 @@ Vue.component("basket-totals", {
     },
 
     /**
-     * bind to basket
+     * Bind to basket
      */
     ready: function()
     {
@@ -27722,7 +27722,7 @@ Vue.component("basket-list", {
     },
 
     /**
-     * bind to basket and show the items in a small or large list
+     * Bind to basket and show the items in a small or large list
      */
     ready: function()
     {
@@ -27755,7 +27755,7 @@ Vue.component("basket-list-item", {
     methods: {
 
         /**
-         * remove item from basket
+         * Delete item from basket
          */
         deleteItem: function()
         {
@@ -27787,7 +27787,7 @@ Vue.component("basket-list-item", {
         },
 
         /**
-         * update item quantity in basket
+         * Update item quantity in basket
          * @param quantity
          */
         updateQuantity: function(quantity)
@@ -27812,7 +27812,7 @@ Vue.component("basket-list-item", {
         },
 
         /**
-         * cancel delete
+         * Cancel delete
          */
         resetDelete: function()
         {
@@ -27842,7 +27842,7 @@ Vue.component("payment-provider-select", {
     },
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -27851,7 +27851,7 @@ Vue.component("payment-provider-select", {
 
     methods: {
         /**
-         * event on payment provider change
+         * Event when changing the payment provider
          * TODO
          */
         onPaymentProviderChange: function()
@@ -27860,11 +27860,11 @@ Vue.component("payment-provider-select", {
         },
 
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         }
     }
 });
@@ -27885,12 +27885,12 @@ Vue.component("shipping-profile-select", {
     },
 
     /**
-     * add shipping provider
-     * init event listener
+     * Add a shipping provider
+     * Initialise the event listener
      */
     created: function()
     {
-        // use when real data is implemented
+        // Use when real data is implemented
         // if(this.shippingProfileData)
         // {
         //     this.shippingProfileList = jQuery.parseJSON(this.shippingProfileData);
@@ -27908,7 +27908,7 @@ Vue.component("shipping-profile-select", {
 
     methods: {
         /**
-         * method on shipping profile changed
+         * Method on shipping profile changed
          */
         onShippingProfileChange: function()
         {
@@ -27918,7 +27918,7 @@ Vue.component("shipping-profile-select", {
         },
 
         /**
-         * format price
+         * Format the price
          * @param price
          * @param currency
          * @returns {*}
@@ -27929,11 +27929,11 @@ Vue.component("shipping-profile-select", {
         },
 
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         }
     }
 });
@@ -27949,7 +27949,7 @@ Vue.component("address-input-group", {
     ],
 
     /**
-     * check if address data exist and create an empty one if not
+     * Check whether the address data exists. Else, create an empty one
      */
     created: function()
     {
@@ -27988,7 +27988,7 @@ Vue.component("address-select", {
     },
 
     /**
-     *  check if the address list is not empty and select the address with the matching id
+     *  Check whether the address list is not empty and select the address with the matching ID
      */
     created: function()
     {
@@ -28011,7 +28011,7 @@ Vue.component("address-select", {
     },
 
     /**
-     * select the address modal
+     * Select the address modal
      */
     ready: function()
     {
@@ -28020,7 +28020,7 @@ Vue.component("address-select", {
 
     methods: {
         /**
-         * update the selected address
+         * Update the selected address
          * @param index
          */
         onAddressChanged: function(index)
@@ -28031,7 +28031,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * check if the address list is empty
+         * Check whether the address list is empty
          * @returns {boolean}
          */
         isAddressListEmpty: function()
@@ -28040,7 +28040,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * check if a company name exists and show it bold
+         * Check whether a company name exists and show it in bold
          * @returns {boolean}
          */
         showNameStrong: function()
@@ -28049,7 +28049,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * show the add icon
+         * Show the add icon
          */
         showAdd: function()
         {
@@ -28062,7 +28062,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * show the edit icon
+         * Show the edit icon
          * @param address
          */
         showEdit: function(address)
@@ -28076,7 +28076,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * close the actual modal
+         * Close the current modal
          */
         close: function()
         {
@@ -28084,7 +28084,7 @@ Vue.component("address-select", {
         },
 
         /**
-         * dynamic create the header line in the modal
+         * Dynamically create the header line in the modal
          */
         updateHeadline: function()
         {
@@ -28115,7 +28115,7 @@ Vue.component("create-update-address", {
 
     methods: {
         /**
-         * validate the address fields
+         * Validate the address fields
          */
         validate: function()
         {
@@ -28134,7 +28134,7 @@ Vue.component("create-update-address", {
         },
 
         /**
-         * save the new address or update an existing one
+         * Save the new address or update an existing one
          */
         saveAddress: function()
         {
@@ -28149,7 +28149,7 @@ Vue.component("create-update-address", {
         },
 
         /**
-         * update an address
+         * Update an address
          */
         updateAddress: function()
         {
@@ -28172,7 +28172,7 @@ Vue.component("create-update-address", {
         },
 
         /**
-         * create a new address
+         * Create a new address
          */
         createAddress: function()
         {
@@ -28198,7 +28198,7 @@ Vue.component("invoice-address-select", {
     props: ["addressList", "selectedAddressId"],
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -28208,15 +28208,15 @@ Vue.component("invoice-address-select", {
 
     methods: {
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen for ApiService events and handle new data
         },
 
         /**
-         * update the billing address
+         * Update the invoice address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
@@ -28236,7 +28236,7 @@ Vue.component("shipping-address-select", {
     props: ["addressList", "selectedAddressId"],
 
     /**
-     * init event listener
+     * Initialise the event listener
      */
     created: function()
     {
@@ -28245,15 +28245,15 @@ Vue.component("shipping-address-select", {
 
     methods: {
         /**
-         * add event listener
+         * Add the event listener
          */
         addEventListener: function()
         {
-            // listen on APIService events and handle new data
+            // Listen on ApiService events and handle new data
         },
 
         /**
-         * update delivery address
+         * Update the delivery address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
@@ -28286,7 +28286,7 @@ Vue.component("country-select", {
     },
 
     /**
-     * get shipping countries
+     * Get the shipping countries
      */
     created: function()
     {
@@ -28298,7 +28298,7 @@ Vue.component("country-select", {
 
     methods: {
         /**
-         * method to fire when the country has changed
+         * Method to fire when the country has changed
          */
         countryChanged: function()
         {
@@ -28308,7 +28308,7 @@ Vue.component("country-select", {
 
     watch: {
         /**
-         * add watcher to handle country changed
+         * Add watcher to handle the country changed
          */
         selectedCountryId: function()
         {
@@ -28346,7 +28346,7 @@ Vue.component("registration", {
     },
 
     /**
-     * check if the component should be a normal registration or the guest registration
+     * Check whether the component should be a normal registration or the guest registration
      */
     created: function()
     {
@@ -28362,7 +28362,7 @@ Vue.component("registration", {
 
     methods: {
         /**
-         * validate the registration form
+         * Validate the registration form
          */
         validateRegistration: function()
         {
@@ -28380,7 +28380,7 @@ Vue.component("registration", {
         },
 
         /**
-         * send the registration
+         * Send the registration
          */
         sendRegistration: function()
         {
@@ -28403,7 +28403,7 @@ Vue.component("registration", {
         },
 
         /**
-         * handle the userobject which is send to the server
+         * Handle the user object which is send to the server
          * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
          */
         getUserObject: function()
@@ -28462,7 +28462,7 @@ Vue.component("login", {
 
     methods: {
         /**
-         * open login modal
+         * Open the login modal
          */
         showLogin: function()
         {
@@ -28470,7 +28470,7 @@ Vue.component("login", {
         },
 
         /**
-         * send login data
+         * Send the login data
          */
         sendLogin: function()
         {
@@ -28511,7 +28511,7 @@ Vue.component("user-login-handler", {
     template: "#vue-user-login-handler",
 
     /**
-     * add global event listener for login and logout
+     * Add the global event listener for login and logout
      */
     ready: function()
     {
@@ -28532,7 +28532,7 @@ Vue.component("user-login-handler", {
 
     methods: {
         /**
-         * set the actual user logged in
+         * Set the current user logged in
          * @param userData
          */
         setUserLoggedIn: function(userData)
@@ -28550,7 +28550,7 @@ Vue.component("user-login-handler", {
         },
 
         /**
-         * set the actual user logged out
+         * Set the current user logged out
          */
         setUserLoggedOut: function()
         {
@@ -28560,7 +28560,7 @@ Vue.component("user-login-handler", {
         },
 
         /**
-         * build the new user html for the head dynamic (no page reload required)
+         * Build the new user HTML for the head dynamically (no page reload required)
          * @param username
          * @returns {string}
          */
@@ -28591,8 +28591,8 @@ Vue.component("user-login-watcher", {
     ],
 
     /**
-     * check if user is logged in or if user is logged out
-     * route to the new route
+     * Check whether the user is logged in or logged out
+     * Route to the new route
      */
     ready: function()
         {
@@ -28856,7 +28856,8 @@ Vue.component("variation-select", {
             // find variation by id
             var preselectedVariation = this.variations.filter(function(variation)
             {
-                return variation.variationId === this.preselect;
+                // eslint-disable-next-line eqeqeq
+                return variation.variationId == this.preselect;
             }.bind(this));
 
             if (!!preselectedVariation && preselectedVariation.length === 1)
@@ -29025,7 +29026,7 @@ Vue.component("account-settings", {
     },
 
     /**
-     * initialize the account settings modal
+     * Initialise the account settings modal
      */
     ready: function()
     {
@@ -29034,7 +29035,7 @@ Vue.component("account-settings", {
 
     computed: {
         /**
-         * check if the passwords equal
+         * Check whether the passwords match
          * @returns {boolean}
          */
         matchPassword: function()
@@ -29050,7 +29051,7 @@ Vue.component("account-settings", {
     methods: {
 
         /**
-         * open the account settingsmodal
+         * Open the account settings modal
          */
         showChangeAccountSettings: function()
         {
@@ -29062,7 +29063,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * save the new password
+         * Save the new password
          */
         saveAccountSettings: function()
         {
@@ -29084,7 +29085,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * clear the password fields in the modal
+         * Clear the password fields in the modal
          */
         clearFields: function()
         {
@@ -29093,7 +29094,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * clear the fields and close the modal
+         * Clear the fields and close the modal
          */
         clearFieldsAndClose: function()
         {
@@ -29102,7 +29103,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * get the current mail of the user
+         * Get the current email address of the user
          * @returns {*}
          */
         getEmail: function()
@@ -29128,7 +29129,7 @@ Vue.component("order-history", {
     data: function()
     {
         return {
-            // needed for pagination
+            // Needed for pagination
             currentPaginationEntry: 1,
             numberOfEntries       : 1,
             showItemsOf           : "1-6",
@@ -29139,8 +29140,8 @@ Vue.component("order-history", {
     },
 
     /**
-     * get the item of page 1
-     * get the max pages for the pagination
+     * Get the items of page 1
+     * Get the maximum pages for the pagination
      */
     ready: function()
     {
@@ -29151,8 +29152,8 @@ Vue.component("order-history", {
 
     methods: {
         /**
-         * get a new page of items
-         * extend this method params for filter handling
+         * Get a new page of items
+         * Extend these method parameters for filter handling
          * @param page
          */
         updateOrderList: function(page)
@@ -29168,7 +29169,7 @@ Vue.component("order-history", {
 
                     self.orderList = response.entries;
 
-                    // calculate the show X - X items
+                    // Calculate the show X - X items
                     this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) + 1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) + this.itemsPerPage);
                 })
                 .fail(function(response)
@@ -29178,7 +29179,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * calculate how much pages exist
+         * Calculate the number of existing pages
          * @returns {number}
          */
         calculateMaxPages: function()
@@ -29190,7 +29191,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the first pagination entry
+         * Show the first pagination entry
          * @returns {boolean}
          */
         showFirstPaginationEntry: function()
@@ -29206,7 +29207,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * get the last entry in the pagination
+         * Get the last entry in the pagination
          * @returns {*}
          */
         getLastPaginationEntry: function()
@@ -29215,7 +29216,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the last pagination entry
+         * Show the last pagination entry
          * @returns {boolean}
          */
         showLastPaginationEntry: function()
@@ -29231,7 +29232,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * get the previous pagination entry
+         * Get the previous pagination entry
          * @returns {number}
          */
         previousPaginationEntry: function()
@@ -29247,7 +29248,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * get the next pagination entry
+         * Get the next pagination entry
          * @returns {*}
          */
         nextPaginationEntry: function()
@@ -29263,7 +29264,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the dots on the left side
+         * Show the dots on the left side
          * @returns {boolean}
          */
         showDotsLeft: function()
@@ -29279,7 +29280,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the dots on the right side
+         * Show the dots on the right side
          * @returns {boolean}
          */
         showDotsRight: function()
@@ -29295,7 +29296,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the arrows on the left side
+         * Show the arrows on the left side
          * @returns {boolean}
          */
         showArrowsLeft: function()
@@ -29311,7 +29312,7 @@ Vue.component("order-history", {
         },
 
         /**
-         * show the arrows on the right side
+         * Show the arrows on the right side
          * @returns {boolean}
          */
         showArrowsRight: function()
@@ -29338,7 +29339,7 @@ Vue.component("language-select", {
     ],
 
     /**
-     * check the current language and update the flag in the header
+     * Check the current language and update the country flag in the header
      */
     ready: function()
     {
@@ -29354,7 +29355,7 @@ Vue.component("language-select", {
 
     methods: {
         /**
-         * change language if the the flag has changed in the header
+         * Change language if the flag has changed in the header
          * @param lang
          */
         languageChanged: function(lang)
@@ -29388,7 +29389,7 @@ Vue.component("notifications", {
 
     methods : {
         /**
-         * dissmiss the notification
+         * Dissmiss the notification
          * @param notification
          */
         dismiss: function(notification)
@@ -29421,7 +29422,7 @@ Vue.component("wait-screen", {
 
     computed: {
         /**
-         * show an overlay over the page
+         * Show an overlay over the page
          * @returns {boolean}
          */
         visible: function()
@@ -29437,7 +29438,7 @@ var ResourceService     = require("services/ResourceService");
 Vue.directive("add-to-basket", function(value)
 {
     /**
-     * add the item to the basket
+     * Add the item to the basket
      */
     $(this.el).click(
         function(event)
@@ -29557,7 +29558,7 @@ var NotificationService = require("services/NotificationService");
 Vue.directive("logout", function()
 {
     /**
-     * logout the current user
+     * Logout the current user
      */
     $(this.el).click(
         function(event)
@@ -29568,7 +29569,7 @@ Vue.directive("logout", function()
                     {
                         NotificationService.success(Translations.Callisto.accLogoutSuccessful).closeAfter(3000);
 
-                        // remove address ids from session after logout
+                        // Remove the address IDs from the session after logout
                         ApiService.post("/rest/customer/address_selection/0/?typeId=-1")
                             .fail(function(error)
                             {
@@ -29999,7 +30000,7 @@ module.exports = (function($)
     };
 
     /**
-     * create a new address
+     * Create a new address
      * @param address
      * @param addressType
      * @param setActive
@@ -30024,7 +30025,7 @@ module.exports = (function($)
     }
 
     /**
-     * update an existing address
+     * Update an existing address
      * @param newData
      * @param addressType
      * @returns {*|Entry|undefined}
@@ -30036,7 +30037,7 @@ module.exports = (function($)
     }
 
     /**
-     * delete an existing address
+     * Delete an existing address
      * @param addressId
      * @param addressType
      * @returns {*}
@@ -30686,7 +30687,7 @@ module.exports = (function($)
 
     /**
      * @class Observable
-     * Automatically notifies all attached listeners on any changes.
+     * Automatically notify all attached listeners on any changes.
      */
     function Observable()
     {
@@ -30728,14 +30729,13 @@ module.exports = (function($)
         // initialize resource
         if (initialValue)
         {
-            // initial value was given by constructor
+            // Initial value that was given by constructor
             data.value = initialValue;
             ready = true;
         }
         else if (url)
         {
-            // no initial value given
-            // => get value from url
+            // If no initial value was given, get the value from the URL
             ApiService
                 .get(url)
                 .done(function(response)
@@ -31975,10 +31975,10 @@ vueApp = new Vue({
         {
             evt.preventDefault();
 
-            // toggle it's own state
+            // Toggle its own state
             $toggleListView.toggleClass("grid");
 
-            // toggle internal style of thumbs
+            // Toggle internal style of thumbs
             $(".product-list, .cmp-product-thumb").toggleClass("grid");
         });
 

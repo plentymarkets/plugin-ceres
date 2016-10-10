@@ -13,7 +13,7 @@ Vue.component("basket-preview", {
     },
 
     /**
-     * bind to basket and bind the basket items
+     * Bind to basket and bind the basket items
      */
     ready: function()
     {

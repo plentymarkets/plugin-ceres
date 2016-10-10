@@ -20,7 +20,7 @@ Vue.component("account-settings", {
     },
 
     /**
-     * initialize the account settings modal
+     * Initialise the account settings modal
      */
     ready: function()
     {
@@ -29,7 +29,7 @@ Vue.component("account-settings", {
 
     computed: {
         /**
-         * check if the passwords equal
+         * Check whether the passwords match
          * @returns {boolean}
          */
         matchPassword: function()
@@ -45,7 +45,7 @@ Vue.component("account-settings", {
     methods: {
 
         /**
-         * open the account settingsmodal
+         * Open the account settings modal
          */
         showChangeAccountSettings: function()
         {
@@ -57,7 +57,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * save the new password
+         * Save the new password
          */
         saveAccountSettings: function()
         {
@@ -79,7 +79,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * clear the password fields in the modal
+         * Clear the password fields in the modal
          */
         clearFields: function()
         {
@@ -88,7 +88,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * clear the fields and close the modal
+         * Clear the fields and close the modal
          */
         clearFieldsAndClose: function()
         {
@@ -97,7 +97,7 @@ Vue.component("account-settings", {
         },
 
         /**
-         * get the current mail of the user
+         * Get the current email address of the user
          * @returns {*}
          */
         getEmail: function()

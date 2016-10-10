@@ -40,10 +40,10 @@ vueApp = new Vue({
         {
             evt.preventDefault();
 
-            // toggle it's own state
+            // Toggle its own state
             $toggleListView.toggleClass("grid");
 
-            // toggle internal style of thumbs
+            // Toggle internal style of thumbs
             $(".product-list, .cmp-product-thumb").toggleClass("grid");
         });
 

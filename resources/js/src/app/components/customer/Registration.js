@@ -25,7 +25,7 @@ Vue.component("registration", {
     },
 
     /**
-     * check if the component should be a normal registration or the guest registration
+     * Check whether the component should be a normal registration or the guest registration
      */
     created: function()
     {
@@ -41,7 +41,7 @@ Vue.component("registration", {
 
     methods: {
         /**
-         * validate the registration form
+         * Validate the registration form
          */
         validateRegistration: function()
         {
@@ -59,7 +59,7 @@ Vue.component("registration", {
         },
 
         /**
-         * send the registration
+         * Send the registration
          */
         sendRegistration: function()
         {
@@ -82,7 +82,7 @@ Vue.component("registration", {
         },
 
         /**
-         * handle the userobject which is send to the server
+         * Handle the user object which is send to the server
          * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
          */
         getUserObject: function()
