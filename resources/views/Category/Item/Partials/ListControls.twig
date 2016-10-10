@@ -32,18 +32,18 @@
         "itemProducerName_desc"
     ] %}
 {% else %}
-    {% set sortData = sortData|split(',') %}
+    {% set sortData = sortData|split(', ') %}
 {% endif %}
 
 {% set paginationValues = config("PluginCallisto.pagination.values") %}
 {% if paginationValues == "all" %}
     {% set paginationValues = [20, 50, 100] %}
 {% else %}
-    {% set paginationValues = paginationValues|split(',') %}
+    {% set paginationValues = paginationValues|split(', ') %}
 {% endif %}
 
-{% set currentSort = request.get("itemSorting") %}
-{% set currentItemsPerPage = request.get("items_per_page") | default( 20 ) %}
+{% set currentItemsPerPage     = request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ) %}
+{% set currentSort      = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) %}
 
 {% set page             = paginatedResult.getPage() %}
 {% set itemCountTotal   = paginatedResult.getTotalCount() %}

@@ -1,6 +1,6 @@
-{% set itemsPerPage     = request.get("items_per_page") %}
-{% set itemSorting      = request.get("itemSorting") %}
-{% set query            = request.all() %}
+{% set itemsPerPage     = request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ) %}
+{% set itemSorting      = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) %}
+{% set query            = { 'items_per_page' : itemsPerPage, 'itemSorting' : itemSorting } %}
 
 {% set page             = paginatedResult.getPage() %}
 {% set pageMax          = paginatedResult.getTotalCount() // itemsPerPage %}

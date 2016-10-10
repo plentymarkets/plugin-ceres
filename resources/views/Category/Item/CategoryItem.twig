@@ -1,12 +1,23 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 
-{% set variationShowType = config("PluginCallisto.global.category.variation_show_type") %}
-{% set paginatedResult = services.category.getItems(category, variationShowType) %}
-{% set itemList = paginatedResult.getResult() %}
-{% set paginationType = config("PluginCallisto.sort.paginationPosition") %}
+{% set itemSort             = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) | split('_') %}
+{% set orderBy              = itemSort[0] %}
+{% set orderByKey           = itemSort[1] | default('ASC') %}
+{% set variationShowType    = config("PluginCallisto.global.category.variation_show_type") %}
+{% set categoryParams = {
+    'variationShowType' : config("PluginCallisto.global.category.variation_show_type"),
+    'itemsPerPage'      : request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ),
+    'orderBy'           : itemSort[0],
+    'orderByKey'        : itemSort[1] | default('ASC')
+} %}
+
+{% set page                 = request.get("page") | default(1) %}
+{% set paginatedResult      = services.category.getItems(category, categoryParams, page ) %}
+
+{% set itemList             = paginatedResult.getResult() %}
+{% set paginationType       = config("PluginCallisto.sort.paginationPosition") %}
 
 {% block PageBody %}
-
     <div class="categoriegrid container">
         <div class="row m-t-3 m-b-2">
             <div class="col-xs-12">
