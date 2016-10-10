@@ -67,18 +67,11 @@
 		}
 	}
 
-<<<<<<< HEAD
 
 	.item-inner{
 		display: flex;
 		flex-direction: row;
     	cursor: pointer;
-=======
-	.item-inner {
-		display: flex;
-		flex-direction: row;
-		cursor: pointer;
->>>>>>> plentymarkets/beta
 		padding: 1em;
 		margin-bottom: 0;
 	}
@@ -107,18 +100,16 @@
 		position: absolute;
 		right: 1.35rem;
 		top: 3rem;
+	}
 
-<<<<<<< HEAD
 	.item-content{
 		display: inline-block;
 	    // width: calc( 100% - 4em );
 	    width: 100%;
 	    flex: 1 1 auto;
-=======
 		.fa {
 			color: $gray-light;
 			transition: all 0.2s ease-in-out;
->>>>>>> plentymarkets/beta
 
 			&:hover {
 				color: $brand-danger;
@@ -176,3 +167,4 @@
 		}
 	}
 }
+
