@@ -1,6 +1,7 @@
 <script type="x/template" id="vue-item-list-pagination">
 
 <nav class="cmp cmp-paginator pull-sm-right text-xs-center" aria-label="Page navigation">
+    <!-- PAGINATION LOGIC -->
     <ul class="pagination m-y-0">
         <li v-if="showArrowsLeft()" class="page-item">
             <a class="page-link" @click="updateItemCategoryList(previousPaginationEntry())" href="#" aria-label="Previous">
@@ -30,6 +31,7 @@
             </a>
         </li>
     </ul>
+    <!-- ./PAGINATION LOGIC -->
 </nav>
 
 </script>

@@ -14,7 +14,6 @@
     <resource name="currentVariation" data="{{ item | json_encode() }}"></resource>
     <div class="single container">
         <div class="row m-t-3">
-
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
@@ -22,7 +21,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
 
                 <h6 class="producertag">
@@ -100,7 +99,7 @@
                         </a>
                     </div>
                 </div>
-
+            <!-- ./ITEM DETAIL -->
 
                 <div class="shariff" data-theme="white" data-services='["twitter","facebook","googleplus","pinterest"]'
                      data-url="" style="max-width:100%;overflow:auto;" data-media-url=""></div>
@@ -114,6 +113,7 @@
 
             </div>
 
+            <!-- ITEM DESCRIPTION -->
             <div class="col-md-7 m-y-3">
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -249,7 +249,9 @@
                 </div>
             </div>
         </div>
+        <!-- ./ITEM DESCRIPTION -->
 
+        <!-- CROSSSELLING -->
         {% if crossSellingList | length > 0 %}
             <hr>
 
@@ -268,6 +270,7 @@
                 </div>
             </div>
         {% endif %}
+        <!-- ./CROSSSELLING -->
 
         <hr>
 

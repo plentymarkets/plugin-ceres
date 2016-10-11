@@ -10,6 +10,7 @@
 
 	<div class="myaccount container m-y-3">
 
+		<!-- HEADER -->
 	    <div class="row m-b-3">
 	        <div class="col-sm-9">
 	            <h1>{{ trans("PluginCallisto::Callisto.accMyAccount") }}</h1>
@@ -28,7 +29,9 @@
 	            <hr class="">
 	        </div>
 	    </div>
+		<!-- ./HEADER -->
 
+		<!-- ADDRESS AREA -->
 	    <div class="row">
 	        <div class="col-md-6">
 	            <h4>
@@ -49,7 +52,9 @@
 	            </div>
 	        </div>
 	    </div>
+		<!-- ./ADDRESS AREA -->
 
+		<!-- ACCOUNT SETTINGS AREA -->
 		<div class="row">
 			<div class="col-md-6">
 				<h4>
@@ -70,11 +75,14 @@
 				{#{% include _component-address-list/component-address-list.html id="bankinfos" %}#}
 			</div>
 		</div>
+		<!-- ./ACCOUNT SETTINGS AREA -->
+
 	</div>
 
 {{ services.customer.getOrders() }}
 
-
+<!-- ORDER HISTORY -->
 <order-history order-max-count-pagination="{{ services.customer.getOrders()|length }}" contact-id="{{ frontend.Account.AccountContactId }}"></order-history>
+<!-- ./ORDER HISTORY -->
 
 {% endblock %}
