@@ -1,0 +1,172 @@
+<article class="cmp cmp-basket-item m-b-3 p-b-1 art-${basketItem.variationId}">
+
+	<a class="item-image" :href="setLinkToItem(basketItem)">
+		<img :src="getImage(items[basketItem.variationId].variationImageList[0].path)">
+	</a>
+
+	<div class="item-quantity">
+
+    <item-count-to-basket :basket-item='basketItem'
+                          :quantity='basketItem.quantity'>
+    </item-count-to-basket>
+
+		<div class="item-unit-price">
+			${ formatRetailPrice(basketItem) } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
+		</div>
+
+		<div class="item-total-price">
+			${ calcPrice(basketItem) }
+		</div>
+
+		<div class="item-remove del-${basketItem.variationId}" @click="deleteItem(basketItem)">
+			{{ trans("PluginCallisto::Callisto.generalDelete") }} <i class="fa fa-times"></i>
+		</div>
+	</div>
+
+	<div class="item-details small">
+		<input type="checkbox" class="toggle-description" id="itemid-${ items[basketItem.variationId].variationBase.id }" value="">
+		<a class="clearfix" :href="setLinkToItem(basketItem)">
+			<div class="item-name">
+				{% if itemName == '0' %}
+					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name1) }
+				{% elseif itemName == '1' %}
+					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name2) }
+				{% elseif itemName == '2' %}
+					${ checkName(basketItem, items[basketItem.variationId].itemDescription.name3) }
+				{% endif %}
+			</div>
+		</a>
+
+		<p class="id">
+			<strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ items[basketItem.variationId].itemBase.id }
+		</p>
+
+		<!-- {% if showItemVariation == "true" %}
+		<div class="varianten">
+				<div class="card">
+					<div class="card-block">
+						<strong>
+							<span>Grün</span>, <span>XL</span>, <span>Hulk</span>
+						</strong>
+						<input type="checkbox" id="toggleVariations-UNIQUE_ID-${ items[basketItem.variationId].variationBase.id }" class="item-toggle toggle-variations" name="" value="">
+						<div class="row varianten-content">
+							<div class="col-md-6">
+									<div class="input-unit">
+											<select id="select" class="custom-select">
+													<optgroup label="Option Group 1">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+													<optgroup label="Option Group 2">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+											</select>
+											<label>Farbe</label>
+									</div>
+							</div>
+
+							<div class="col-md-6">
+									<div class="input-unit">
+											<select id="select" class="custom-select">
+													<optgroup label="Option Group 1">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+													<optgroup label="Option Group 2">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+											</select>
+											<label>Größe</label>
+									</div>
+							</div>
+
+							<div class="col-md-6">
+									<div class="input-unit">
+											<select id="select" class="custom-select">
+													<optgroup label="Option Group 1">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+													<optgroup label="Option Group 2">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+											</select>
+											<label>Material</label>
+									</div>
+							</div>
+
+							<div class="col-md-6">
+									<div class="input-unit">
+											<select id="select" class="custom-select">
+													<optgroup label="Option Group 1">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+													<optgroup label="Option Group 2">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+											</select>
+											<label>Oberfläche</label>
+									</div>
+							</div>
+
+							<div class="col-md-6">
+									<div class="input-unit">
+											<select id="select" class="custom-select">
+													<optgroup label="Option Group 1">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+													<optgroup label="Option Group 2">
+															<option>Option One</option>
+															<option>Option Two</option>
+															<option>Option Three</option>
+													</optgroup>
+											</select>
+											<label>Bla bla</label>
+									</div>
+							</div>
+					</div>
+					</div>
+					<label class="item-edit" for="toggleVariations-UNIQUE_ID-${ items[basketItem.variationId].variationBase.id }">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+							</label>
+				</div>
+			</div>
+			{% endif %} -->
+
+		<div class="item-description">
+			<div class="row">
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
+        <span class="col-xs-6 col-sm-7">${ items[basketItem.variationId].variationBase.customNumber}</span>
+      </div>
+      <div class="row">
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
+        <span class="col-xs-6 col-sm-7">TODO</span>
+      </div>
+      <div class="row">
+        <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
+        <span class="col-xs-6 col-sm-7">
+          {% set availabilityData = services.availability.getAvailabilityById(1) %}
+        </span>
+      </div>
+			<p class="m-y-1">
+				{!! items[basketItem.variationId].itemDescription.description !!}
+			</p>
+		</div>
+		<label class="expand-btn" for="itemid-${ items[basketItem.variationId].variationBase.id }"></label>
+	</div>
+</article>

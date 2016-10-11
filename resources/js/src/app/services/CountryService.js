@@ -13,7 +13,7 @@ module.exports = (function($)
         var countryList       = JSON.parse(countryData);
         var deliveryCountries = [];
 
-        if (countryList === null)
+        if (countryList == null)
         {
             return deliveryCountries;
         }
@@ -22,7 +22,6 @@ module.exports = (function($)
         {
             var country     = countryList[key];
             var option      = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
-
             option.selected = (id === country.id);
             deliveryCountries.push(option);
         }
@@ -34,19 +33,17 @@ module.exports = (function($)
     {
         var countryNames = JSON.parse(countryNameData);
 
-        if (countryNames === null)
+        if (countryNames == null)
         {
             return;
         }
         for (var id in countryNames)
         {
             var name = countryNames[id];
-
             for (var i = 0, len = countries.length; i < len; i++)
             {
                 var country = countries[i];
-
-                if (country.id === id)
+                if (country.id == id)
                 {
                     country.name = name;
                     break;
@@ -57,13 +54,13 @@ module.exports = (function($)
 
     function sortCountries(countries)
     {
-        countries.sort(function(first, second)
+        countries.sort(function(a, b)
         {
-            if (first.name < second.name)
+            if (a.name < b.name)
             {
                 return -1;
             }
-            if (first.name > second.name)
+            if (a.name > b.name)
             {
                 return 1;
             }
@@ -76,12 +73,10 @@ module.exports = (function($)
 
         var states      = [];
         var countryList = JSON.parse(countryData);
-
         for (var key in countryList)
         {
             var country = countryList[key];
-
-            if (country.id === countryID)
+            if (country.id == countryID)
             {
                 states = country.states;
                 break;

@@ -5,11 +5,8 @@ const SCSS_DIST = './resources/css/';
 const OUTPUT_PREFIX = 'plugin-callisto';
 
 // import gulp
-var fs = require('fs');
-var Q = require('q');
-var path = require('path');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('gulp-util')
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -22,9 +19,6 @@ var buffer = require('vinyl-buffer');
 var addSrc = require('gulp-add-src');
 var ignore = require('gulp-ignore');
 var minifyCSS = require('gulp-minify-css');
-var eslint = require('gulp-eslint');
-var props = require('gulp-props');
-var tap = require('gulp-tap');
 
 // import sass tools
 var sass = require('gulp-sass');
@@ -42,7 +36,7 @@ gulp.task('watch:sass', function() {
 
 gulp.task('build', ['build:bundle', 'build:sass-min']);
 
-gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function() {
+gulp.task('build:bundle', ['build:app', 'build:vendor'], function() {
     return gulp.src( [
             JS_DIST + OUTPUT_PREFIX + '-vendor.js',
             JS_SRC + 'app.config.js',
@@ -57,7 +51,7 @@ gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function(
         .pipe( gulp.dest( JS_DIST ) );
 });
 
-gulp.task('build:app', ['build:lint'], function() {
+gulp.task('build:app', function() {
 
     var builder = browserify({
         entries: glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
@@ -74,40 +68,7 @@ gulp.task('build:app', ['build:lint'], function() {
         .pipe( concat( OUTPUT_PREFIX + '-app.js') )
         .pipe( sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}) )
         .pipe( gulp.dest( JS_DIST ) );
-});
-
-gulp.task('build:lang', function() {
-    var defered = Q.defer();
-    var translations = {};
-
-    try {
-        fs.accessSync( './resources/js/lang' );
-    }
-    catch(e)
-    {
-        fs.mkdir( './resources/js/lang' );
-    }
-    glob.sync('./resources/lang/*').forEach( function( filePath ) {
-        if( fs.statSync( filePath ).isDirectory() )
-        {
-            var lang = path.basename( filePath );
-            translations[lang] = {};
-            gulp.src( filePath + '/*.properties')
-                .pipe( props({ namespace: '' }) )
-                .pipe(
-                    tap(function(file, t) {
-                        var group = path.basename( file.path, '.json' );
-                        translations[lang][group] = JSON.parse( String(file.contents) );
-                    }).on('end', function() {
-                        defered.resolve();
-                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', "var Translations = " + JSON.stringify( translations[lang] ) + ";" );
-                    })
-                );
-        }
-    });
-
-    return defered.promise;
-});
+})
 
 gulp.task('build:vendor', function() {
     var libraries = require(JS_SRC + 'vendor.json');
@@ -116,23 +77,6 @@ gulp.task('build:vendor', function() {
         .pipe( concat( OUTPUT_PREFIX + '-vendor.js' ) )
         .pipe( sourcemaps.write('.', {sourceRoot: '../src/libraries'}) )
         .pipe( gulp.dest( JS_DIST ) );
-});
-
-gulp.task('build:lint', function() {
-    // ESLint ignores files with "node_modules" paths.
-    // So, it's best to have gulp ignore the directory as well.
-    // Also, Be sure to return the stream from the task;
-    // Otherwise, the task may end before the stream has finished.
-    return gulp.src(['resources/js/src/**/*.js', '!node_modules/**'])
-        .pipe(eslint({
-            "configFile": "./.eslintrc.json",
-            "fix": true
-        }))
-        .pipe(gulp.dest("resources/js/src/"))
-        // eslint.format() outputs the lint results to the console.
-        // Alternatively use eslint.formatEach() (see Docs).
-        .pipe(eslint.format("table"))
-        .pipe(eslint.failAfterError());
 });
 
 gulp.task('build:sass-min', ['build:sass'], function() {

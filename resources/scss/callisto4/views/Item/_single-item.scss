@@ -28,10 +28,6 @@
         text-align:center;
     }
 
-    .input-number {
-      text-align: center;
-    }
-
     .vat {
         line-height: 1.4;
         margin-top: 0;
@@ -68,7 +64,7 @@
 }
 
 
-.owl-carousel-single {
+#single-big-image {
     .owl-controls {
         position: absolute;
         top: 50%;
@@ -97,14 +93,15 @@
         }
     }
 }
-.owl-carousel-preview {
+#single-carousel {
     .owl-item {
         .owl_item{
             padding: 5px;
             margin:5px 0;
             cursor: pointer;
-
-            &.synced {
+        }
+        &.synced {
+            .owl_item {
                 background:$brand-primary;
             }
         }

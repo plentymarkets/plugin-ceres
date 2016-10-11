@@ -1,0 +1,16 @@
+<script type="x/template" id="vue-item-variation-select">
+    <div>
+        <div v-for="(attributeId, attribtuteValues) in variationAttributes">
+            <span>${ attributeNames[$index+1] }</span>
+            <select v-model="variantionSelectionModel[$index]" @change="onSelectChange()">
+                <option value="-1"
+                        v-if="!preselection" selected>{{ trans("PluginCallisto::Callisto.itemPleaseChoose") }}</option>
+                <option v-for="(attributeValueId, attributeValueName) in attribtuteValues"
+                        value="${attributeValueId}"
+                        :value="{'attributeId': attributeId, 'attributeValueId': attributeValueId}">
+                    ${ attributeValueName }
+                </option>
+            </select>
+        </div>
+    </div>
+</script>

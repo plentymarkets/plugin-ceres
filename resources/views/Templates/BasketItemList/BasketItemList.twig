@@ -1,0 +1,14 @@
+{% set itemsData = config("PluginCallisto.basket.item_data")|split(', ') %}
+{% set showItemVariation = config("PluginCallisto.basket.variations") %}
+{% set itemName = config("PluginCallisto.item.name") %}
+
+<script type="x/template" id="vue-basket-item-list">
+    <div v-if="basketItems.length > 0">
+        <div v-for="basketItem in basketItems">
+            {% include "PluginCallisto::Templates.BasketItemList.HugeItemView" %}
+        </div>
+    </div>
+    <div v-else>
+      <h5>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
+    </div>
+</script>

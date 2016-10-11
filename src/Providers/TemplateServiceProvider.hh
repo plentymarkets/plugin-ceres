@@ -28,12 +28,12 @@ class TemplateServiceProvider extends ServiceProvider
 
         // provide template to use for content categories
         $eventDispatcher->listen('tpl.category.content', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Category.Content.CategoryContent");
+            $container->setTemplate("PluginCallisto::Category.CategoryContent");
         });
 
         // provide template to use for item categories
         $eventDispatcher->listen('tpl.category.item', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Category.Item.CategoryItem");
+            $container->setTemplate("PluginCallisto::Category.Item.ItemCategoryView");
         });
 
         // provide template to use for blog categories
@@ -68,22 +68,22 @@ class TemplateServiceProvider extends ServiceProvider
 
         // provide template to use for confirmation
         $eventDispatcher->listen('tpl.confirmation', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Checkout.OrderConfirmation");
+            $container->setTemplate("PluginCallisto::Confirmation.Confirmation");
         });
 
         // provide template to use for login
         $eventDispatcher->listen('tpl.login', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Customer.Login");
+            $container->setTemplate("PluginCallisto::LoginPage.LoginPage");
         });
 
         // provide template to use for register
         $eventDispatcher->listen('tpl.register', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Customer.Register");
+            $container->setTemplate("PluginCallisto::RegisterPage.RegisterPage");
         });
 
         // provide template to use for guest
         $eventDispatcher->listen('tpl.guest', (TemplateContainer $container, array<string, mixed> $templateData) ==> {
-            $container->setTemplate("PluginCallisto::Customer.Guest");
+            $container->setTemplate("PluginCallisto::Guest.Guest");
         });
 
         // provide mapped category IDs

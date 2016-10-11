@@ -1,0 +1,11 @@
+<script type="x/template" id="vue-item-count-to-basket">
+    <div class="input-group vert">
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" @click="quantityPlus">+</button>
+        </span>
+        <input type="text" v-model="quantity" class="form-control" placeholder="${ quantity }" size="3" maxlength="3">
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" @click="quantityMinus">-</button>
+        </span>
+    </div>
+</script>

@@ -1,4 +1,4 @@
-var ApiService = require("services/ApiService");
+var ApiService = require('services/ApiService');
 
 module.exports = (function($)
 {
@@ -20,10 +20,10 @@ module.exports = (function($)
     {
         if (!initPromise)
         {
-            if (checkoutData)
+            if (!!checkoutData)
             {
                 initPromise = $.Deferred();
-                checkout = checkoutData;
+                checkout    = checkoutData;
                 initPromise.resolve();
             }
             else
@@ -49,7 +49,6 @@ module.exports = (function($)
     function setCheckout(checkoutData)
     {
         var properties = Object.keys(checkoutData);
-
         for (var i = 0; i < properties.length; i++)
         {
             checkout[properties[i]] = checkoutData[properties[i]];

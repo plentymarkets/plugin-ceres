@@ -1,14 +1,12 @@
-vueApp = new Vue({
-    el: "body"
+new Vue({
+    el: 'body'
 });
 
 // Frontend end scripts
 
-(function($, window, document)
-{
+(function($, window, document, undefined) {
 
-    function CallistoMain()
-    {
+    function CallistoMain() {
 
 
         $(window).scroll(function() {
@@ -23,26 +21,20 @@ vueApp = new Vue({
         });
 
         // Sticky sidebar single item
-        if (window.matchMedia("(min-width: 768px)").matches)
-        {
-            var $singleRightside = $(".single-rightside");
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            $(".single-rightside").stick_in_parent({
 
-            $singleRightside.stick_in_parent({});
+            });
 
-            $singleRightside.on("sticky_kit:bottom", function()
-            {
-                $(this).parent().css("position", "static");
-            })
-                .on("sticky_kit:unbottom", function()
-                {
-                    $(this).parent().css("position", "relative");
+            $('.single-rightside')
+                .on('sticky_kit:bottom', function(e) {
+                    $(this).parent().css('position', 'static');
+                })
+                .on('sticky_kit:unbottom', function(e) {
+                    $(this).parent().css('position', 'relative');
                 });
         }
-        var $toggleListView      = $(".toggle-list-view");
-        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-        var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-<<<<<<< HEAD
         var sync1 = $("#single-big-image");
         var sync2 = $("#single-carousel");
 
@@ -129,12 +121,6 @@ vueApp = new Vue({
             evt.preventDefault();
             evt.stopPropagation();
             $('body').toggleClass('open-right');
-=======
-        $toggleBasketPreview.on("click", function(evt)
-        {
-            evt.preventDefault();
-            $("body").toggleClass("open-right");
->>>>>>> plentymarkets/beta
         });
         $(document).on('click', 'body.open-right', function(evt) {
             if($("body").hasClass("open-right")) {
@@ -145,37 +131,37 @@ vueApp = new Vue({
             }
         });
 
-        $toggleListView.on("click", function(evt)
-        {
+        var $toggleListView = $('.toggle-list-view');
+
+        $toggleListView.on('click', function(evt) {
             evt.preventDefault();
 
-            // Toggle its own state
-            $toggleListView.toggleClass("grid");
+            //toggle it's own state
+            $toggleListView.toggleClass('grid');
 
-            // Toggle internal style of thumbs
-            $(".product-list, .cmp-product-thumb").toggleClass("grid");
+            //toggle internal style of thumbs
+            $('.product-list, .cmp-product-thumb').toggleClass('grid');
         });
 
-        $mainNavbarCollapse.collapse("hide");
+        $('#mainNavbarCollapse').collapse('hide');
 
-        // Add click listener outside the navigation to close it
-        $mainNavbarCollapse.on("show.bs.collapse", function()
-        {
-            $(".main").one("click", closeNav);
-        });
+        //Add click listener outside the navigation to close it
+        $('#mainNavbarCollapse').on('show.bs.collapse', function() {
+            $('.main').one('click', closeNav);
+        })
 
-        $mainNavbarCollapse.on("hide.bs.collapse", function()
-        {
-            $(".main").off("click", closeNav);
-        });
+        $('#mainNavbarCollapse').on('hide.bs.collapse', function() {
+            $('.main').off('click', closeNav)
+        })
 
-        function closeNav()
-        {
-            $("#mainNavbarCollapse").collapse("hide");
+        function closeNav() {
+            $('#mainNavbarCollapse').collapse('hide');
         }
 
     }
 
-    window.CallistoMain = new CallistoMain();
+    window.CallistoMain = CallistoMain;
+
+    new CallistoMain();
 
 })(jQuery, window, document);

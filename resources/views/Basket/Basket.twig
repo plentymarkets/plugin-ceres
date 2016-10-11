@@ -1,49 +1,43 @@
-{% extends "PluginCallisto::PageDesign.PageDesign" %}
+{% extends "PluginCallisto::PageDesign" %}
 
 {% block PageBody %}
+<div class="basket container">
 
-    {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
-    {{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
-    {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
-
-    <div class="basket container">
-
-        <div class="row m-t-3">
-            <div class="col-xs-12">
-                <h1>{{ trans("PluginCallisto::Callisto.basket") }}</h1>
-            </div>
-        </div>
-
-        <hr class="m-b-3">
-
-        <div class="row">
-            <div class="col-xs-12">
-              <basket-list></basket-list>
-            </div>
-        </div>
-
-        <hr class="m-y-2">
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-7 m-b-1">
-                <coupon></coupon>
-            </div>
-            <div class="col-xs-12 col-md-5">
-              <basket-totals :config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}"></basket-totals>
-            </div>
-        </div>
-
-        <hr class="m-y-2">
-
-        <div class="row m-b-3">
-            <div class="col-xs-12 col-sm-4 offset-sm-8">
-                {% if frontend.Account.getIsAccountLoggedIn %}
-                    <a class="btn btn-primary btn-block" href="/checkout">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
-                {% else %}
-                    <a class="btn btn-primary btn-block" href="/login">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
-                {% endif %}
-            </div>
+    <div class="row m-t-3">
+        <div class="col-xs-12">
+            <h1>{{ trans("PluginCallisto::Callisto.basket") }}</h1>
         </div>
     </div>
 
+    <hr class="m-b-3">
+
+    <div class="row">
+        <div class="col-xs-12">
+          <basket-item-list base-url="{{ app.request.baseUrl }}"></basket-item-list>
+        </div>
+    </div>
+
+    <hr class="m-y-2">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 m-b-1">
+            <coupon></coupon>
+        </div>
+        <div class="col-xs-12 col-md-5">
+          <basket-total-sum basket-data="{{ services.basket.getBasket()|json_encode() }}" :show-full="true"></basket-total-sum>
+        </div>
+    </div>
+
+    <hr class="m-y-2">
+
+    <div class="row m-b-3">
+        <div class="col-xs-12 col-sm-4 offset-sm-8">
+            {% if frontend.Account.getIsAccountLoggedIn %}
+                <a class="btn btn-primary btn-block" href="/checkout">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
+            {% else %}
+                <a class="btn btn-primary btn-block" href="/login">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

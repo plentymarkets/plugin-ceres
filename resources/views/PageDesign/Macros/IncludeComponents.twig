@@ -1,7 +1,0 @@
-{% macro include_components() %}
-    {% include get_component_template() %}
-
-    {% if has_component_template() %}
-        {{ _self.include_components() }}
-    {% endif %}
-{% endmacro %}

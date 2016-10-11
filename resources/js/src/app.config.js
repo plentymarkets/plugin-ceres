@@ -1,2 +1,2 @@
-Vue.config.delimiters = ["${", "}"];
-Vue.config.unsafeDelimiters = ["{!!", "!!}"];
+Vue.config.delimiters = ['${', '}'];
+Vue.config.unsafeDelimiters = ['{!!', '!!}'];

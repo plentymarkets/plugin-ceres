@@ -1,13 +1,6 @@
-{% extends "PluginCallisto::PageDesign.PageDesign" %}
+{% extends "PluginCallisto::PageDesign" %}
 
 {% block PageBody %}
-
-    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
-    {{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
-    {{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
-    {{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
-    {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
-    {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
     <user-login-watcher user-logged-in="false" route="/login" is-user-logged-in="{{ frontend.Account.getIsAccountLoggedIn | json_encode() }}"></user-login-watcher>
 
@@ -46,11 +39,19 @@
                         </div>
 
                         <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
+                            <h3>{{ trans("PluginCallisto::Callisto.orderPayment") }}</h3>
                         </header>
                         <div class="payment-method-select">
-                            <payment-provider-select :payment-provider-list="{{ services.checkout.getCheckoutPaymentDataList() | json_encode() }}"></payment-provider-select>
+                            <payment-provider-select :payment-provider-list="{{ services.checkout.getMethodOfPaymentList() | json_encode() }}"></payment-provider-select>
                         </div>
+                        <!-- <form id="legalForm" class="" method="get" action="">
+                            <div>
+                                <input id="newsletterCheck" type="checkbox" value="1" name="NewsletterCheck">
+                                <label>
+                                    Bitte senden Sie mir regelmäßig Informationen zu Ihrem Produktsortiment per E-Mail zu. Ihren Newsletter kann ich jederzeit wieder abbestellen.
+                                </label>
+                            </div>
+                        </form> -->
                     </div>
                 </div>
 
@@ -58,21 +59,16 @@
                     <aside class="sidebar">
                       <div class="cmp cmp-checkout-sidebar">
                         <div class="cmp cmp-basket-preview-list">
-                          <basket-list size="small"></basket-list>
+                          <basket-preview-item base-url="{{ app.request.baseUrl }}"></basket-preview-item>
                         </div>
                         <hr>
                         <coupon></coupon>
                         <hr>
-                        <basket-totals :config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+                        <basket-total-sum basket-data="{{ services.basket.getBasket()|json_encode() }}" :show-full="false"></basket-total-sum>
                       </div>
                     </aside>
                 </div>
             </div>
-
-            <div id="container-test"> <!-- TODO remove test data -->
-                Test-div
-            </div>
-            <iframe id="iframe-test"></iframe> <!-- TODO remove test data -->
 
             <div class="row">
                 <div class="col-xs-12 m-b-3">
@@ -89,7 +85,7 @@
                                     <a href="/widerrufsrecht/" target="_blank">
                                         <strong>{{ trans("PluginCallisto::Callisto.generalCancellationRight") }}</strong>
                                     </a>
-                                    {{ trans("PluginCallisto::Callisto.generalAnd") }}
+                                    {{ trans("PluginCallisto.Callisto.generalAnd") }}
                                     <a href="/datenschutz/" target="_blank">
                                         <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
                                     </a>
@@ -98,12 +94,8 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-5">
-                            <button id="placeOrder" class="btn btn-primary btn-block" type="submit"
-                                    v-prepare-payment
-                                    selector-iframe="#iframe-test"
-                                    selector-container="#container-test"
-                                    target-continue="/confirmation"> <!-- TODO remove test data -->
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Jetzt Kaufen
+                            <button id="placeOrder" class="btn btn-primary btn-block" type="submit">{{ trans("PluginCallisto::Callisto.orderBuyNow") }}
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
