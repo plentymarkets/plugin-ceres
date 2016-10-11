@@ -1,14 +1,14 @@
-Vue.component('address-input-group', {
+Vue.component("address-input-group", {
 
-    template: '#vue-address-input-group',
+    template: "#vue-address-input-group",
 
     props: [
-        'addressData',
-        'locale'
+        "addressData",
+        "locale"
     ],
 
     /**
-     * check if address data exist and create an empty one if not
+     * Check whether the address data exists. Else, create an empty one
      */
     created: function()
     {

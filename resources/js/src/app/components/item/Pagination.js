@@ -1,15 +1,14 @@
-var ApiService        = require('services/ApiService');
-var PaginationService = require('services/PaginationService');
+var PaginationService = require("services/PaginationService");
 
-Vue.component('item-list-pagination', {
+Vue.component("item-list-pagination", {
 
-    template: '#vue-item-list-pagination',
+    template: "#vue-item-list-pagination",
 
     props: [
-        'paginationPosition',
-        'position',
-        'itemList',
-        'maxCount'
+        "paginationPosition",
+        "position",
+        "itemList",
+        "maxCount"
     ],
 
     data: function()
@@ -22,13 +21,14 @@ Vue.component('item-list-pagination', {
     },
 
     /**
-     * initialize pagination necessary variables
+     * Initialise the necessary variables for the pagination
      */
     ready: function()
     {
         this.currentPaginationEntry = this.getQueryStringValue("page");
         var url                     = window.location.href;
-        this.currentURL             = url.replace("&page=" + this.currentPaginationEntry, "");
+
+        this.currentURL = url.replace("&page=" + this.currentPaginationEntry, "");
         this.currentPaginationEntry = parseInt(this.currentPaginationEntry) || 1;
 
         this.numberOfEntries = this.calculateMaxPages();
@@ -45,7 +45,7 @@ Vue.component('item-list-pagination', {
 
     methods: {
         /**
-         * get param from the url
+         * Get the parameter from the URL
          * @param key
          * @returns {string}
          */
@@ -55,13 +55,13 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * calculate how much pages exist
+         * Calculate the existing pages
          * @returns {*}
          */
         calculateMaxPages: function()
         {
-            var pages        = ( this.maxCount / PaginationService.itemsPerPage );
-            var roundedPages = pages.toString().split('.');
+            var pages        = (this.maxCount / PaginationService.itemsPerPage);
+            var roundedPages = pages.toString().split(".");
 
             if (roundedPages[1] > 0)
             {
@@ -72,14 +72,14 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * get the new items and update the category list 
+         * Get the new items and update the category list
          * @param page
          */
         updateItemCategoryList: function(page)
         {
-            if (this.currentURL.split('?').length > 0)
+            if (this.currentURL.split("?").length > 0)
             {
-                this.currentURL = this.currentURL.split('?')[0];
+                this.currentURL = this.currentURL.split("?")[0];
             }
 
             var url = this.currentURL + "?page=" + page + "&items_per_page=" + PaginationService.itemsPerPage;
@@ -88,7 +88,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show pagination top, bottom or top-bottom
+         * Show pagination top, bottom, or top and bottom
          * @returns {*}
          */
         showPagination: function()
@@ -97,7 +97,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the first pagination entry
+         * Show the first pagination entry
          * @returns {boolean}
          */
         showFirstPaginationEntry: function()
@@ -113,7 +113,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * get the last entry in the pagination
+         * Get the last entry of the pagination
          * @returns {*}
          */
         getLastPaginationEntry: function()
@@ -122,7 +122,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the last pagination entry
+         * Show the last pagination entry
          * @returns {boolean}
          */
         showLastPaginationEntry: function()
@@ -138,7 +138,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * get the previous pagination entry
+         * Get the previous pagination entry
          * @returns {number}
          */
         previousPaginationEntry: function()
@@ -154,7 +154,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * get the next pagination entry
+         * Get the next pagination entry
          * @returns {*}
          */
         nextPaginationEntry: function()
@@ -170,7 +170,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the dots on the left side
+         * Show the dots on the left side
          * @returns {boolean}
          */
         showDotsLeft: function()
@@ -186,7 +186,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the dots on the right side
+         * Show the dots on the right side
          * @returns {boolean}
          */
         showDotsRight: function()
@@ -202,7 +202,7 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the arrows on the left side
+         * Show the arrows on the left side
          * @returns {boolean}
          */
         showArrowsLeft: function()
@@ -218,14 +218,14 @@ Vue.component('item-list-pagination', {
         },
 
         /**
-         * show the arrows on the right side
+         * Show the arrows on the right side
          * @returns {boolean}
          */
         showArrowsRight: function()
         {
             var show = true;
 
-            if (this.currentPaginationEntry == this.numberOfEntries)
+            if (this.currentPaginationEntry === this.numberOfEntries)
             {
                 show = false;
             }

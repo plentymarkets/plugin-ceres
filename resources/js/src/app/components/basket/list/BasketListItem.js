@@ -1,8 +1,8 @@
-var ResourceService       = require('services/ResourceService');
+var ResourceService       = require("services/ResourceService");
 
-Vue.component('basket-list-item', {
+Vue.component("basket-list-item", {
 
-    template: '#vue-basket-list-item',
+    template: "#vue-basket-list-item",
 
     props: [
         "basketItem",
@@ -21,12 +21,13 @@ Vue.component('basket-list-item', {
     methods: {
 
         /**
-         * remove item from basket
+         * Delete item from basket
          */
         deleteItem: function()
         {
             var self = this;
-            if( !this.deleteConfirmed )
+
+            if (!this.deleteConfirmed)
             {
                 this.deleteConfirmed = true;
                 this.deleteConfirmedTimeout = window.setTimeout(
@@ -41,21 +42,23 @@ Vue.component('basket-list-item', {
             {
                 this.waiting = true;
                 ResourceService
-                    .getResource( "basketItems" )
-                    .remove( this.basketItem.id )
-                    .done( function() {
-                        self.resetDelete();
-                    });
+                    .getResource("basketItems")
+                    .remove(this.basketItem.id)
+                    .done(
+                        function()
+                        {
+                            self.resetDelete();
+                        });
             }
         },
 
         /**
-         * update item quantity in basket
+         * Update item quantity in basket
          * @param quantity
          */
-        updateQuantity: function( quantity )
+        updateQuantity: function(quantity)
         {
-            if( this.basketItem.quantity === quantity )
+            if (this.basketItem.quantity === quantity)
             {
                 return;
             }
@@ -65,22 +68,24 @@ Vue.component('basket-list-item', {
             var self = this;
 
             ResourceService
-                .getResource( 'basketItems' )
-                .set( this.basketItem.id, this.basketItem )
-                .done( function() {
-                    self.waiting = false;
-                });
+                .getResource("basketItems")
+                .set(this.basketItem.id, this.basketItem)
+                .done(
+                    function()
+                    {
+                        self.waiting = false;
+                    });
         },
 
         /**
-         * cancel delete
+         * Cancel delete
          */
         resetDelete: function()
         {
             this.deleteConfirmed = false;
-            if( !!this.deleteConfirmedTimeout )
+            if (this.deleteConfirmedTimeout)
             {
-                window.clearTimeout( this.deleteConfirmedTimeout );
+                window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
     }

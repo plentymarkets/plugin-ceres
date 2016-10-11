@@ -1,8 +1,8 @@
-var ApiService = require('services/ApiService');
+var ApiService = require("services/ApiService");
 
-Vue.component('order-history', {
+Vue.component("order-history", {
 
-    template: '#vue-order-history',
+    template: "#vue-order-history",
 
     props: [
         "contactId",
@@ -12,19 +12,19 @@ Vue.component('order-history', {
     data: function()
     {
         return {
-            //needed for pagination
+            // Needed for pagination
             currentPaginationEntry: 1,
             numberOfEntries       : 1,
             showItemsOf           : "1-6",
             itemsPerPage          : 6,
-            //orderObjectToRender
+            // orderObjectToRender
             orderList             : []
         };
     },
 
     /**
-     * get the item of page 1
-     * get the max pages for the pagination
+     * Get the items of page 1
+     * Get the maximum pages for the pagination
      */
     ready: function()
     {
@@ -35,8 +35,8 @@ Vue.component('order-history', {
 
     methods: {
         /**
-         * get a new page of items
-         * extend this method params for filter handling
+         * Get a new page of items
+         * Extend these method parameters for filter handling
          * @param page
          */
         updateOrderList: function(page)
@@ -50,19 +50,19 @@ Vue.component('order-history', {
                 {
                     ApiService.setToken(response);
 
-                    self.orderList = response["entries"];
+                    self.orderList = response.entries;
 
-                    //calculate the show X - X items
+                    // Calculate the show X - X items
                     this.showItemsOf = (((this.currentPaginationEntry - 1) * this.itemsPerPage) + 1) + " - " + (((this.currentPaginationEntry - 1) * this.itemsPerPage) + this.itemsPerPage);
                 })
                 .fail(function(response)
                 {
-                    //todo
+                    // todo
                 });
         },
 
         /**
-         * calculate how much pages exist
+         * Calculate the number of existing pages
          * @returns {number}
          */
         calculateMaxPages: function()
@@ -74,7 +74,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the first pagination entry
+         * Show the first pagination entry
          * @returns {boolean}
          */
         showFirstPaginationEntry: function()
@@ -90,7 +90,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * get the last entry in the pagination
+         * Get the last entry in the pagination
          * @returns {*}
          */
         getLastPaginationEntry: function()
@@ -99,7 +99,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the last pagination entry
+         * Show the last pagination entry
          * @returns {boolean}
          */
         showLastPaginationEntry: function()
@@ -115,7 +115,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * get the previous pagination entry
+         * Get the previous pagination entry
          * @returns {number}
          */
         previousPaginationEntry: function()
@@ -131,7 +131,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * get the next pagination entry
+         * Get the next pagination entry
          * @returns {*}
          */
         nextPaginationEntry: function()
@@ -147,7 +147,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the dots on the left side
+         * Show the dots on the left side
          * @returns {boolean}
          */
         showDotsLeft: function()
@@ -163,7 +163,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the dots on the right side
+         * Show the dots on the right side
          * @returns {boolean}
          */
         showDotsRight: function()
@@ -179,7 +179,7 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the arrows on the left side
+         * Show the arrows on the left side
          * @returns {boolean}
          */
         showArrowsLeft: function()
@@ -195,14 +195,14 @@ Vue.component('order-history', {
         },
 
         /**
-         * show the arrows on the right side
+         * Show the arrows on the right side
          * @returns {boolean}
          */
         showArrowsRight: function()
         {
             var show = true;
 
-            if (this.currentPaginationEntry == this.numberOfEntries)
+            if (this.currentPaginationEntry === this.numberOfEntries)
             {
                 show = false;
             }

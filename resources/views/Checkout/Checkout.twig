@@ -50,7 +50,7 @@
                             <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
                         </header>
                         <div class="payment-method-select">
-                            <payment-provider-select :payment-provider-list="{{ services.checkout.getMethodOfPaymentList() | json_encode() }}"></payment-provider-select>
+                            <payment-provider-select :payment-provider-list="{{ services.checkout.getCheckoutPaymentDataList() | json_encode() }}"></payment-provider-select>
                         </div>
                     </div>
                 </div>
@@ -72,6 +72,10 @@
             </div>
 
             <!-- OPT IN -->
+            <div id="container-test"> <!-- TODO remove test data -->
+                Test-div
+            </div>
+            <iframe id="iframe-test"></iframe> <!-- TODO remove test data -->
             <div class="row">
                 <div class="col-xs-12 m-b-3">
                     <hr>
@@ -96,8 +100,12 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-5">
-                            <button id="placeOrder" class="btn btn-primary btn-block" type="submit">{{ trans("PluginCallisto::Callisto.orderBuyNow") }}
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            <button id="placeOrder" class="btn btn-primary btn-block" type="submit"
+                                    v-prepare-payment
+                                    selector-iframe="#iframe-test"
+                                    selector-container="#container-test"
+                                    target-continue="/confirmation"> <!-- TODO remove test data -->
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Jetzt Kaufen
                             </button>
                         </div>
                     </div>
