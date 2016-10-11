@@ -8,7 +8,7 @@
         <div class="form-group">
 
             <div class="row m-b-1">
-
+                <!-- ORDER FILTER -->
                 <div class="col-xs-12 col-md-3 col-lg-4">
                     <div class="input-unit">
                         <input id="auftragId" type="text">
@@ -47,7 +47,9 @@
                     </div>
 
                 </div>
+                <!-- ./ORDER FILTER -->
 
+                <!-- ORDER PAGINATION -->
                 <div class="col-xs-12 col-md-9 col-lg-8">
                     <div class="clearfix">
                         <div class="pull-xs-left">
@@ -85,9 +87,11 @@
                             </ul>
                         </nav>
                     </div>
+                    <!-- ./ORDER PAGINATION -->
 
                     <hr>
 
+                    <!-- ORDER HISTORY -->
                     <div class="order-list">
                         {% if frontend.Account.getIsAccountLoggedIn %}
                             <article class="cmp cmp-order-item" v-for="order in orderList">
@@ -138,6 +142,7 @@
                             </article>
                         {% endif %}
                     </div>
+                    <!-- ./ORDER HISTORY -->
                 </div>
             </div>
 
