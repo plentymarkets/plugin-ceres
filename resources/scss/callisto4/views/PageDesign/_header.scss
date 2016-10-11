@@ -1,5 +1,45 @@
 //header scss
 .sticky {
+<<<<<<< HEAD
+	.top-bar {
+		position: fixed;
+		width:100%;
+		transition: all 0.4s ease;
+		background:$gray;	
+	}
+	.header {
+		.navbar {
+			top:2rem;
+			position: fixed;
+			width: 100%;
+		    z-index: 1020;
+		    transition: all 0.4s ease;
+		    .navbar-brand {
+		    	img {
+		    		transition: all 0.4s ease;
+		    	}
+		    }
+		    #mainNavbarCollapse {
+		    	.navbar-nav {
+		    		.nav-item {
+		    			.nav-link {
+		    				padding:.75rem 1rem;
+		    				transition: all 0.4s ease;
+		    			}
+		    		}
+		    	}
+		    }
+		}
+		.breadcrump {
+			display: none;
+		}
+	}
+	.main {
+		padding-top:5rem;
+	}
+}
+
+=======
  	.top-bar {
  		position: fixed;
  		width:100%;
@@ -41,6 +81,7 @@
 		padding-top: 5rem;
 	}
  }
+>>>>>>> plentymarkets/beta
 
 .top-bar{
 
@@ -161,6 +202,7 @@
 
 //navigation scss
 .header {
+<<<<<<< HEAD
 	padding-left:0;
 	padding-right:0;
 
@@ -174,6 +216,22 @@
 		.dropdown:hover .dropdown-menu {
 			display: block !important;
 			margin-top:0;
+=======
+
+	padding-left: 0;
+	padding-right: 0;
+
+	.navbar {
+
+		border-radius: 0;
+		padding:0;
+		z-index: $zindex-navbar;
+		border-bottom: 1px solid $gray-lighter;
+
+		.dropdown:hover .dropdown-menu {
+			display: block !important;
+			margin-top: 0;
+>>>>>>> plentymarkets/beta
 		}
 	}
 }
@@ -185,8 +243,13 @@
   	display: inline-block;
 
   img {
+<<<<<<< HEAD
     max-height: 3.5rem;
     max-width: 70%;
+
+=======
+    max-height: 70%;
+>>>>>>> plentymarkets/beta
   }
 }
 
@@ -217,11 +280,17 @@
 	}
 
 }
-
+<<<<<<< HEAD
 .header {
 	.navbar-toggler {
 		position: absolute;
 		top:.75rem;
+=======
+header {
+	.navbar-toggler {
+		position: absolute;
+		top: .75rem;
+>>>>>>> plentymarkets/beta
 		right: 1em;
 	}
 }
@@ -246,6 +315,10 @@
 
 
 @include media-breakpoint-up(sm){
+<<<<<<< HEAD
+=======
+
+>>>>>>> plentymarkets/beta
 	.sticky {
 		.header {
 			.navbar {
@@ -275,6 +348,7 @@
 	}
 }
 
+<<<<<<< HEAD
 
 @include media-breakpoint-up(md){
 	.sticky {
@@ -322,6 +396,52 @@
 		    .navbar-toggler {
 		    	top: 1.5rem;
 		    }
+=======
+@include media-breakpoint-up(md){
+	.sticky {
+		.header {
+			.navbar {
+				max-width: 690px;
+				.navbar-brand {
+					img {
+						max-width: 70%;
+					}
+				}
+				.navbar-toggler {
+					top: .75rem;
+				}
+			}
+		}
+	}
+
+	.top-bar {
+		.list-inline {
+			.list-inline-item {
+				#login-change {
+					a {
+						span {
+							display: inline-block;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.header {
+		padding-left: 15px;
+		padding-right: 15px;
+
+		.navbar {
+			.navbar-brand {
+				img {
+					max-width: 100%;
+				}
+			}
+			.navbar-toggler {
+				top: 1.5rem;
+			}
+>>>>>>> plentymarkets/beta
 		}
 	}
 }
@@ -329,12 +449,22 @@
 
 @include media-breakpoint-up(lg){
 	.sticky {
+<<<<<<< HEAD
 		.header {
 			.navbar {
 				max-width: 910px;
 			}
 		}
 	}
+=======
+ 		.header {
+ 			.navbar {
+ 				max-width: 910px;
+ 			}
+ 		}
+ 	}
+
+>>>>>>> plentymarkets/beta
 	.navbar-brand {
 		position: absolute;
 		top: 50%;
@@ -350,6 +480,7 @@
 		}
 	}
 }
+<<<<<<< HEAD
 @include media-breakpoint-up(xl){
 	.sticky {
 		.header {
@@ -359,3 +490,15 @@
 		}
 	}
 }
+=======
+
+@include media-breakpoint-up(xl){
+ 	.sticky {
+ 		.header {
+ 			.navbar {
+ 				max-width: 1110px;
+ 			}
+ 		}
+ 	}
+ }
+>>>>>>> plentymarkets/beta

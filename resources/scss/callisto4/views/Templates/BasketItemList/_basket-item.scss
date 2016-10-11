@@ -228,8 +228,12 @@
 
 	}
 
-
+<<<<<<< HEAD
 	@include media-breakpoint-up(md){
+=======
+	@include media-breakpoint-up(md)
+	{
+>>>>>>> plentymarkets/beta
 		.item-quantity{
 			.input-group.vert{
 				left:5%;
@@ -237,11 +241,21 @@
 		}
 	}
 
+<<<<<<< HEAD
 	@include media-breakpoint-up(lg){
 		.item-quantity{
 			.input-group.vert{
 				left:20%;
 			}
 		}
+=======
+	@include media-breakpoint-up(lg)
+	{
+		.item-quantity{
+				.input-group.vert{
+					left:20%;
+				}
+			}
+>>>>>>> plentymarkets/beta
 	}
 }

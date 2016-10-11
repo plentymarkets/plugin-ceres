@@ -10,13 +10,14 @@ vueApp = new Vue({
     function CallistoMain()
     {
 
+
         $(window).scroll(function() {
-            if ($(".wrapper-main").hasClass("isSticky")) {
-                if ($(this).scrollTop() > 1) {
-                    $(".wrapper-main").addClass("sticky");
+            if($( ".wrapper-main" ).hasClass( "isSticky" )) {
+                if ($(this).scrollTop() > 1){ 
+                    $('.wrapper-main').addClass("sticky");
                 }
-                else {
-                    $(".wrapper-main").removeClass("sticky");
+                else{
+                    $('.wrapper-main').removeClass("sticky");
                 }
             }
         });
@@ -41,6 +42,7 @@ vueApp = new Vue({
         var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
         var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
+<<<<<<< HEAD
         var sync1 = $("#single-big-image");
         var sync2 = $("#single-carousel");
 
@@ -54,7 +56,7 @@ vueApp = new Vue({
             ],
             pagination: false,
             afterAction: syncPosition,
-            responsiveRefreshRate: 200
+            responsiveRefreshRate: 200,
         });
 
         sync2.owlCarousel({
@@ -81,9 +83,9 @@ vueApp = new Vue({
                 .find(".owl-item")
                 .removeClass("synced")
                 .eq(current)
-                .addClass("synced");
+                .addClass("synced")
             if ($("#single-carousel").data("owlCarousel") !== undefined) {
-                center(current);
+                center(current)
             }
         }
 
@@ -105,35 +107,41 @@ vueApp = new Vue({
 
             if (found === false) {
                 if (num > sync2visible[sync2visible.length - 1]) {
-                    sync2.trigger("owl.goTo", num - sync2visible.length + 2);
-                }else {
+                    sync2.trigger("owl.goTo", num - sync2visible.length + 2)
+                } else {
                     if (num - 1 === -1) {
                         num = 0;
                     }
                     sync2.trigger("owl.goTo", num);
                 }
-            }else if (num === sync2visible[sync2visible.length - 1]) {
-                sync2.trigger("owl.goTo", sync2visible[1]);
-            }else if (num === sync2visible[0]) {
-                sync2.trigger("owl.goTo", num - 1);
+            } else if (num === sync2visible[sync2visible.length - 1]) {
+                sync2.trigger("owl.goTo", sync2visible[1])
+            } else if (num === sync2visible[0]) {
+                sync2.trigger("owl.goTo", num - 1)
             }
 
         }
 
-        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
+        var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
-        $toggleBasketPreview.on("click", function(evt) {
-
+        $toggleBasketPreview.on('click', function(evt) {
+            
             evt.preventDefault();
             evt.stopPropagation();
+            $('body').toggleClass('open-right');
+=======
+        $toggleBasketPreview.on("click", function(evt)
+        {
+            evt.preventDefault();
             $("body").toggleClass("open-right");
+>>>>>>> plentymarkets/beta
         });
-        $(document).on("click", "body.open-right", function(evt) {
-            if ($("body").hasClass("open-right")) {
-                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0)) {
-                    evt.preventDefault();
-                    $("body").toggleClass("open-right");
-                }
+        $(document).on('click', 'body.open-right', function(evt) {
+            if($("body").hasClass("open-right")) {
+              if ((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0)) {
+                  evt.preventDefault();
+                  $('body').toggleClass('open-right');
+              }
             }
         });
 
