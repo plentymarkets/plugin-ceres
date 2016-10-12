@@ -84,6 +84,7 @@
                             <div class="form-check">
                                 <label class="form-check-label" for="agb-accept">
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
+                                    {% autoescape false %}
                                     {{ trans("PluginCallisto::Callisto.generalChooseOur") }}
                                     <a href="/agb/" target="_blank">
                                         <strong>{{ trans("PluginCallisto::Callisto.generalGtc") }}</strong>
@@ -96,6 +97,7 @@
                                         <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
                                     </a>
                                     {{ trans("PluginCallisto::Callisto.generalToNotice") }}
+                                    {% endautoescape %}
                                 </label>
                             </div>
                         </div>
