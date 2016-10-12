@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 
 /*!
- * Vue.js v1.0.24
+ * Vue.js v1.0.26
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -10217,10 +10217,15 @@ return jQuery;
 
   // UA sniffing for working around browser-specific quirks
   var UA = inBrowser && window.navigator.userAgent.toLowerCase();
+  var isIE = UA && UA.indexOf('trident') > 0;
   var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
   var isAndroid = UA && UA.indexOf('android') > 0;
   var isIos = UA && /(iphone|ipad|ipod|ios)/i.test(UA);
-  var isWechat = UA && UA.indexOf('micromessenger') > 0;
+  var iosVersionMatch = isIos && UA.match(/os ([\d_]+)/);
+  var iosVersion = iosVersionMatch && iosVersionMatch[1].split('_');
+
+  // detecting iOS UIWebView by indexedDB
+  var hasMutationObserverBug = iosVersion && Number(iosVersion[0]) >= 9 && Number(iosVersion[1]) >= 3 && !window.indexedDB;
 
   var transitionProp = undefined;
   var transitionEndEvent = undefined;
@@ -10261,7 +10266,7 @@ return jQuery;
     }
 
     /* istanbul ignore if */
-    if (typeof MutationObserver !== 'undefined' && !(isWechat && isIos)) {
+    if (typeof MutationObserver !== 'undefined' && !hasMutationObserverBug) {
       var counter = 1;
       var observer = new MutationObserver(nextTickHandler);
       var textNode = document.createTextNode(counter);
@@ -10333,12 +10338,12 @@ return jQuery;
 
   p.put = function (key, value) {
     var removed;
-    if (this.size === this.limit) {
-      removed = this.shift();
-    }
 
     var entry = this.get(key, true);
     if (!entry) {
+      if (this.size === this.limit) {
+        removed = this.shift();
+      }
       entry = {
         key: key
       };
@@ -10583,7 +10588,7 @@ var directive = Object.freeze({
     var unsafeOpen = escapeRegex(config.unsafeDelimiters[0]);
     var unsafeClose = escapeRegex(config.unsafeDelimiters[1]);
     tagRE = new RegExp(unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '|' + open + '((?:.|\\n)+?)' + close, 'g');
-    htmlRE = new RegExp('^' + unsafeOpen + '.*' + unsafeClose + '$');
+    htmlRE = new RegExp('^' + unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '$');
     // reset cache
     cache = new Cache(1000);
   }
@@ -11370,7 +11375,8 @@ var transition = Object.freeze({
         return (/HTMLUnknownElement/.test(el.toString()) &&
           // Chrome returns unknown for several HTML5 elements.
           // https://code.google.com/p/chromium/issues/detail?id=540526
-          !/^(data|time|rtc|rb)$/.test(tag)
+          // Firefox returns unknown for some "Interactive elements."
+          !/^(data|time|rtc|rb|details|dialog|summary)$/.test(tag)
         );
       }
     };
@@ -11706,7 +11712,9 @@ var transition = Object.freeze({
     }
     if (child.mixins) {
       for (var i = 0, l = child.mixins.length; i < l; i++) {
-        parent = mergeOptions(parent, child.mixins[i], vm);
+        var mixin = child.mixins[i];
+        var mixinOptions = mixin.prototype instanceof Vue ? mixin.options : mixin;
+        parent = mergeOptions(parent, mixinOptions, vm);
       }
     }
     for (key in parent) {
@@ -12134,10 +12142,13 @@ var transition = Object.freeze({
   	hasProto: hasProto,
   	inBrowser: inBrowser,
   	devtools: devtools,
+  	isIE: isIE,
   	isIE9: isIE9,
   	isAndroid: isAndroid,
   	isIos: isIos,
-  	isWechat: isWechat,
+  	iosVersionMatch: iosVersionMatch,
+  	iosVersion: iosVersion,
+  	hasMutationObserverBug: hasMutationObserverBug,
   	get transitionProp () { return transitionProp; },
   	get transitionEndEvent () { return transitionEndEvent; },
   	get animationProp () { return animationProp; },
@@ -12625,7 +12636,9 @@ var path = Object.freeze({
   var restoreRE = /"(\d+)"/g;
   var pathTestRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
   var identRE = /[^\w$\.](?:[A-Za-z_$][\w$]*)/g;
-  var booleanLiteralRE = /^(?:true|false)$/;
+  var literalValueRE$1 = /^(?:true|false|null|undefined|Infinity|NaN)$/;
+
+  function noop() {}
 
   /**
    * Save / Rewrite / Restore
@@ -12707,7 +12720,7 @@ var path = Object.freeze({
     // save strings and object literal keys
     var body = exp.replace(saveRE, save).replace(wsRE, '');
     // rewrite all paths
-    // pad 1 space here becaue the regex matches 1 extra char
+    // pad 1 space here because the regex matches 1 extra char
     body = (' ' + body).replace(identRE, rewrite).replace(restoreRE, restore);
     return makeGetterFn(body);
   }
@@ -12728,7 +12741,15 @@ var path = Object.freeze({
       return new Function('scope', 'return ' + body + ';');
       /* eslint-enable no-new-func */
     } catch (e) {
-      'development' !== 'production' && warn('Invalid expression. ' + 'Generated function body: ' + body);
+      if ('development' !== 'production') {
+        /* istanbul ignore if */
+        if (e.toString().match(/unsafe-eval|CSP/)) {
+          warn('It seems you are using the default build of Vue.js in an environment ' + 'with Content Security Policy that prohibits unsafe-eval. ' + 'Use the CSP-compliant build instead: ' + 'http://vuejs.org/guide/installation.html#CSP-compliant-build');
+        } else {
+          warn('Invalid expression. ' + 'Generated function body: ' + body);
+        }
+      }
+      return noop;
     }
   }
 
@@ -12790,8 +12811,8 @@ var path = Object.freeze({
 
   function isSimplePath(exp) {
     return pathTestRE.test(exp) &&
-    // don't treat true/false as paths
-    !booleanLiteralRE.test(exp) &&
+    // don't treat literal values as paths
+    !literalValueRE$1.test(exp) &&
     // Math constants e.g. Math.PI, Math.E etc.
     exp.slice(0, 5) !== 'Math.';
   }
@@ -13207,7 +13228,7 @@ var expression = Object.freeze({
     }
     var isA = isArray(val);
     var isO = isObject(val);
-    if (isA || isO) {
+    if ((isA || isO) && Object.isExtensible(val)) {
       if (val.__ob__) {
         var depId = val.__ob__.dep.id;
         if (seen.has(depId)) {
@@ -13270,6 +13291,7 @@ var expression = Object.freeze({
 
   var tagRE$1 = /<([\w:-]+)/;
   var entityRE = /&#?\w+?;/;
+  var commentRE = /<!--/;
 
   /**
    * Convert a string template to a DocumentFragment.
@@ -13292,8 +13314,9 @@ var expression = Object.freeze({
     var frag = document.createDocumentFragment();
     var tagMatch = templateString.match(tagRE$1);
     var entityMatch = entityRE.test(templateString);
+    var commentMatch = commentRE.test(templateString);
 
-    if (!tagMatch && !entityMatch) {
+    if (!tagMatch && !entityMatch && !commentMatch) {
       // text only, return a single text node.
       frag.appendChild(document.createTextNode(templateString));
     } else {
@@ -14260,7 +14283,7 @@ var template = Object.freeze({
      * the filters. This is passed to and called by the watcher.
      *
      * It is necessary for this to be called during the
-     * wathcer's dependency collection phase because we want
+     * watcher's dependency collection phase because we want
      * the v-for to update when the source Object is mutated.
      */
 
@@ -14603,7 +14626,10 @@ var template = Object.freeze({
     },
 
     update: function update(value) {
-      this.el.value = _toString(value);
+      // #3029 only update when the value changes. This prevent
+      // browsers from overwriting values like selectionStart
+      value = _toString(value);
+      if (value !== this.el.value) this.el.value = value;
     },
 
     unbind: function unbind() {
@@ -14652,6 +14678,8 @@ var template = Object.freeze({
   var select = {
 
     bind: function bind() {
+      var _this = this;
+
       var self = this;
       var el = this.el;
 
@@ -14683,7 +14711,12 @@ var template = Object.freeze({
       // selectedIndex with value -1 to 0 when the element
       // is appended to a new parent, therefore we have to
       // force a DOM update whenever that happens...
-      this.vm.$on('hook:attached', this.forceUpdate);
+      this.vm.$on('hook:attached', function () {
+        nextTick(_this.forceUpdate);
+      });
+      if (!inDoc(el)) {
+        nextTick(this.forceUpdate);
+      }
     },
 
     update: function update(value) {
@@ -15953,7 +15986,7 @@ var template = Object.freeze({
     if (value === undefined) {
       value = getPropDefaultValue(vm, prop);
     }
-    value = coerceProp(prop, value);
+    value = coerceProp(prop, value, vm);
     var coerced = value !== rawValue;
     if (!assertProp(prop, value, vm)) {
       value = undefined;
@@ -16072,13 +16105,17 @@ var template = Object.freeze({
    * @return {*}
    */
 
-  function coerceProp(prop, value) {
+  function coerceProp(prop, value, vm) {
     var coerce = prop.options.coerce;
     if (!coerce) {
       return value;
     }
-    // coerce is a function
-    return coerce(value);
+    if (typeof coerce === 'function') {
+      return coerce(value);
+    } else {
+      'development' !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
+      return value;
+    }
   }
 
   /**
@@ -16610,10 +16647,9 @@ var template = Object.freeze({
       // resolve on owner vm
       var hooks = resolveAsset(this.vm.$options, 'transitions', id);
       id = id || 'v';
+      oldId = oldId || 'v';
       el.__v_trans = new Transition(el, id, hooks, this.vm);
-      if (oldId) {
-        removeClass(el, oldId + '-transition');
-      }
+      removeClass(el, oldId + '-transition');
       addClass(el, id + '-transition');
     }
   };
@@ -17031,7 +17067,7 @@ var template = Object.freeze({
             if (token.html) {
               replace(node, parseTemplate(value, true));
             } else {
-              node.data = value;
+              node.data = _toString(value);
             }
           } else {
             vm._bindDir(token.descriptor, node, host, scope);
@@ -18015,7 +18051,7 @@ var template = Object.freeze({
     };
   }
 
-  function noop() {}
+  function noop$1() {}
 
   /**
    * A directive links a DOM element with a piece of data,
@@ -18114,7 +18150,7 @@ var template = Object.freeze({
           }
         };
       } else {
-        this._update = noop;
+        this._update = noop$1;
       }
       var preProcess = this._preProcess ? bind(this._preProcess, this) : null;
       var postProcess = this._postProcess ? bind(this._postProcess, this) : null;
@@ -19552,7 +19588,7 @@ var template = Object.freeze({
 
     json: {
       read: function read(value, indent) {
-        return typeof value === 'string' ? value : JSON.stringify(value, null, Number(indent) || 2);
+        return typeof value === 'string' ? value : JSON.stringify(value, null, arguments.length > 1 ? indent : 2);
       },
       write: function write(value) {
         try {
@@ -19625,7 +19661,13 @@ var template = Object.freeze({
 
     pluralize: function pluralize(value) {
       var args = toArray(arguments, 1);
-      return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
+      var length = args.length;
+      if (length > 1) {
+        var index = value % 10 - 1;
+        return index in args ? args[index] : args[length - 1];
+      } else {
+        return args[0] + (value === 1 ? '' : 's');
+      }
     },
 
     /**
@@ -19810,7 +19852,9 @@ var template = Object.freeze({
             }
           }
           if (type === 'component' && isPlainObject(definition)) {
-            definition.name = id;
+            if (!definition.name) {
+              definition.name = id;
+            }
             definition = Vue.extend(definition);
           }
           this.options[type + 's'][id] = definition;
@@ -19825,7 +19869,7 @@ var template = Object.freeze({
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.24';
+  Vue.version = '1.0.26';
 
   // devtools global hook
   /* istanbul ignore next */
@@ -19842,7 +19886,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.1 */
+/*! tether 1.3.6 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -19866,6 +19910,32 @@ if (typeof TetherBase === 'undefined') {
 }
 
 var zeroElement = null;
+
+// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
+// if the element lies within a nested document (<frame> or <iframe>-like).
+function getActualBoundingClientRect(node) {
+  var boundingRect = node.getBoundingClientRect();
+
+  // The original object returned by getBoundingClientRect is immutable, so we clone it
+  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
+  var rect = {};
+  for (var k in boundingRect) {
+    rect[k] = boundingRect[k];
+  }
+
+  if (node.ownerDocument !== document) {
+    var _frameElement = node.ownerDocument.defaultView.frameElement;
+    if (_frameElement) {
+      var frameRect = getActualBoundingClientRect(_frameElement);
+      rect.top += frameRect.top;
+      rect.bottom += frameRect.top;
+      rect.left += frameRect.left;
+      rect.right += frameRect.left;
+    }
+  }
+
+  return rect;
+}
 
 function getScrollParents(el) {
   // In firefox if the el is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -19902,7 +19972,13 @@ function getScrollParents(el) {
     }
   }
 
-  parents.push(document.body);
+  parents.push(el.ownerDocument.body);
+
+  // If the node is within a frame, account for the parent window scroll
+  if (el.ownerDocument !== document) {
+    parents.push(el.ownerDocument.defaultView);
+  }
+
   return parents;
 }
 
@@ -19936,13 +20012,7 @@ var getOrigin = function getOrigin() {
 
   var id = node.getAttribute('data-tether-id');
   if (typeof zeroPosCache[id] === 'undefined') {
-    zeroPosCache[id] = {};
-
-    var rect = node.getBoundingClientRect();
-    for (var k in rect) {
-      // Can't use extend, as on IE9, elements don't resolve to be hasOwnProperty
-      zeroPosCache[id][k] = rect[k];
-    }
+    zeroPosCache[id] = getActualBoundingClientRect(node);
 
     // Clear the cache when this position call is done
     defer(function () {
@@ -19971,13 +20041,7 @@ function getBounds(el) {
 
   var docEl = doc.documentElement;
 
-  var box = {};
-  // The original object returned by getBoundingClientRect is immutable, so we clone it
-  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
-  var rect = el.getBoundingClientRect();
-  for (var k in rect) {
-    box[k] = rect[k];
-  }
+  var box = getActualBoundingClientRect(el);
 
   var origin = getOrigin();
 
@@ -20096,7 +20160,9 @@ function hasClass(el, name) {
 }
 
 function getClassName(el) {
-  if (el.className instanceof SVGAnimatedString) {
+  // Can't use just SVGAnimatedString here since nodes within a Frame in IE have
+  // completely separately SVGAnimatedString base classes
+  if (el.className instanceof el.ownerDocument.defaultView.SVGAnimatedString) {
     return el.className.baseVal;
   }
   return el.className;
@@ -20161,7 +20227,7 @@ var Evented = (function () {
   }, {
     key: 'off',
     value: function off(event, handler) {
-      if (typeof this.bindings !== 'undefined' && typeof this.bindings[event] !== 'undefined') {
+      if (typeof this.bindings === 'undefined' || typeof this.bindings[event] === 'undefined') {
         return;
       }
 
@@ -20215,6 +20281,7 @@ var Evented = (function () {
 })();
 
 TetherBase.Utils = {
+  getActualBoundingClientRect: getActualBoundingClientRect,
   getScrollParents: getScrollParents,
   getBounds: getBounds,
   getOffsetParent: getOffsetParent,
@@ -20273,7 +20340,7 @@ var transformKey = (function () {
   }
   var el = document.createElement('div');
 
-  var transforms = ['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
+  var transforms = ['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
   for (var i = 0; i < transforms.length; ++i) {
     var key = transforms[i];
     if (el.style[key] !== undefined) {
@@ -20672,7 +20739,7 @@ var TetherClass = (function (_Evented) {
       this.enabled = true;
 
       this.scrollParents.forEach(function (parent) {
-        if (parent !== document) {
+        if (parent !== _this3.target.ownerDocument) {
           parent.addEventListener('scroll', _this3.position);
         }
       });
@@ -20872,21 +20939,24 @@ var TetherClass = (function (_Evented) {
         }
       };
 
+      var doc = this.target.ownerDocument;
+      var win = doc.defaultView;
+
       var scrollbarSize = undefined;
-      if (document.body.scrollWidth > window.innerWidth) {
+      if (win.innerHeight > doc.documentElement.clientHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (document.body.scrollHeight > window.innerHeight) {
+      if (win.innerWidth > doc.documentElement.clientWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
 
-      if (['', 'static'].indexOf(document.body.style.position) === -1 || ['', 'static'].indexOf(document.body.parentElement.style.position) === -1) {
+      if (['', 'static'].indexOf(doc.body.style.position) === -1 || ['', 'static'].indexOf(doc.body.parentElement.style.position) === -1) {
         // Absolute positioning in the body will be relative to the page, not the 'initial containing block'
-        next.page.bottom = document.body.scrollHeight - top - height;
-        next.page.right = document.body.scrollWidth - left - width;
+        next.page.bottom = doc.body.scrollHeight - top - height;
+        next.page.right = doc.body.scrollWidth - left - width;
       }
 
       if (typeof this.options.optimizations !== 'undefined' && this.options.optimizations.moveElement !== false && !(typeof this.targetModifier !== 'undefined')) {
@@ -20905,8 +20975,8 @@ var TetherClass = (function (_Evented) {
             offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle['border' + side + 'Width']);
           });
 
-          offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
-          offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
+          offsetPosition.right = doc.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
+          offsetPosition.bottom = doc.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
 
           if (next.page.top >= offsetPosition.top + offsetBorder.top && next.page.bottom >= offsetPosition.bottom) {
             if (next.page.left >= offsetPosition.left + offsetBorder.left && next.page.right >= offsetPosition.right) {
@@ -20999,7 +21069,16 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
+          if (window.matchMedia) {
+            // HubSpot/tether#207
+            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
+            if (!retina) {
+              xPos = Math.round(xPos);
+              yPos = Math.round(yPos);
+            }
+          }
+
+          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21064,7 +21143,7 @@ var TetherClass = (function (_Evented) {
 
         if (!offsetParentIsBody) {
           this.element.parentNode.removeChild(this.element);
-          document.body.appendChild(this.element);
+          this.element.ownerDocument.body.appendChild(this.element);
         }
       }
 
@@ -21084,6 +21163,7 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
+          _this8.trigger('repositioned');
         });
       }
     }
@@ -21124,11 +21204,21 @@ function getBoundingRect(tether, to) {
 
   if (typeof to.nodeType !== 'undefined') {
     (function () {
+      var node = to;
       var size = getBounds(to);
       var pos = size;
       var style = getComputedStyle(to);
 
       to = [pos.left, pos.top, size.width + pos.left, size.height + pos.top];
+
+      // Account any parent Frames scroll offset
+      if (node.ownerDocument !== document) {
+        var win = node.ownerDocument.defaultView;
+        to[0] += win.pageXOffset;
+        to[1] += win.pageYOffset;
+        to[2] += win.pageXOffset;
+        to[3] += win.pageYOffset;
+      }
 
       BOUNDS_FORMAT.forEach(function (side, i) {
         side = side[0].toUpperCase() + side.substr(1);

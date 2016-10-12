@@ -1,4 +1,6 @@
 {% set image = item.variationImageList | first %}
+{% set configItemName = config("PluginCallisto.item.name") %}
+{% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
 <article class="cmp cmp-product-thumb grid">
     <div class="thumb-inner">
