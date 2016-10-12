@@ -1,7 +1,7 @@
 {% set showAddItemConfirm = config('PluginCallisto.basket.add_item_to_basket_confirm') %}
 
 <script type="x/template" id="vue-add-to-basket">
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
         <div class="input-group">
             <span class="input-group-btn">
                 <button type="button" class="btn btn-secondary" @click="quantityMinus">
@@ -16,7 +16,7 @@
             </span>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
         <button href="#" class="btn btn-block btn-primary" @click="addToBasket(quantity)">
             In den Warenkorb
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
