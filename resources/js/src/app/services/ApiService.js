@@ -76,8 +76,8 @@ module.exports = (function($)
         config.data = data ? JSON.stringify(data) : null;
         config.dataType = config.dataType || "json";
         config.contentType = config.contentType || "application/json";
-        config.doInBackground = config.doInBackground;
-        config.supressNotifications = config.supressNotifications;
+        config.doInBackground = !!config.doInBackground;
+        config.supressNotifications = !!config.supressNotifications;
 
         if (!config.doInBackground)
         {
