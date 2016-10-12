@@ -3,12 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% set logData = config("PluginCallisto.log.data")|split(', ') %}
+{% set lang = services.sessionStorage.getLang() %}
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
 <link rel="stylesheet" href="{{ plugin_path('PluginCallisto') }}/css/plugin-callisto.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-<script src="{{ plugin_path('PluginCallisto') }}/js/lang/de.js"></script>
+<script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
 
 <script>
     App = {
