@@ -14,7 +14,7 @@
         <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemEach") }}
         </div>
 
         <div class="item-total-price">
