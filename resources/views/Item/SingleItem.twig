@@ -73,12 +73,12 @@
                 {% for variationId, basePrice in basePriceList %}
                 <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="variationBase.id == {{ variationId }}">
                     {{ trans("PluginCallisto::Callisto.itemUnitPrice") }}
-                    <span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span>/
+                    <span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> /
                     <span class="base-price-amount">
                     {% if basePrice.lot > 1 %}
                         {{ basePrice.lot }}
                     {% endif %}
-                    {{ services.unit.getUnitById( basePrice.unit ).name }}
+                    {{ services.unit.getUnitById( basePrice.unit, services.sessionStorage.getLang() ).name }}
                     </span>
                 </div>
                 {% endfor %}

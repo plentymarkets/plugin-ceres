@@ -123,9 +123,28 @@ Vue.component("address-select", {
          */
         updateHeadline: function()
         {
-            var headline  = (this.addressType === "2") ? Translations.Callisto.orderShippingAddress : Translations.Callisto.orderInvoiceAddress;
+            var headline;
 
-            headline += (this.modalType === "update") ? Translations.Callisto.generalEdit : Translations.Callisto.generalAdd;
+            if (this.addressType === "2")
+            {
+                if (this.modalType === "update")
+                {
+                    headline = Translations.Callisto.orderShippingAddressEdit;
+                }
+                else
+                {
+                    headline = Translations.Callisto.orderShippingAddressCreate;
+                }
+            }
+            else if (this.modalType === "update")
+            {
+                headline = Translations.Callisto.orderInvoiceAddressEdit;
+            }
+            else
+            {
+                headline = Translations.Callisto.orderInvoiceAddressCreate;
+            }
+
             this.headline = headline;
         }
 

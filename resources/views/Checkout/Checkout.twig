@@ -92,18 +92,20 @@
                         <div class="form-check">
                             <label class="form-check-label" for="agb-accept">
                                 <input class="form-check-input" type="checkbox" value="" id="agb-accept">
-                                {{ trans("PluginCallisto::Callisto.generalChooseOur") }}
-                                <a href="/agb/" target="_blank">
-                                    <strong>{{ trans("PluginCallisto::Callisto.generalGtc") }}</strong>
-                                </a>,
-                                <a href="/widerrufsrecht/" target="_blank">
-                                    <strong>{{ trans("PluginCallisto::Callisto.generalCancellationRight") }}</strong>
-                                </a>
-                                {{ trans("PluginCallisto::Callisto.generalAnd") }}
-                                <a href="/datenschutz/" target="_blank">
-                                    <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
-                                </a>
-                                {{ trans("PluginCallisto::Callisto.generalToNotice") }}
+                                {% autoescape false %}
+                                    {{ trans("PluginCallisto::Callisto.generalChooseOur") }}
+                                    <a href="/agb/" target="_blank">
+                                        <strong>{{ trans("PluginCallisto::Callisto.generalGtc") }}</strong>
+                                    </a>,
+                                    <a href="/widerrufsrecht/" target="_blank">
+                                        <strong>{{ trans("PluginCallisto::Callisto.generalCancellationRight") }}</strong>
+                                    </a>
+                                    {{ trans("PluginCallisto::Callisto.generalAnd") }}
+                                    <a href="/datenschutz/" target="_blank">
+                                        <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
+                                    </a>
+                                    {{ trans("PluginCallisto::Callisto.generalToNotice") }}
+                                {% endautoescape %}
                             </label>
                         </div>
                     </div>
@@ -113,12 +115,13 @@
                                 selector-iframe="#iframe-test"
                                 selector-container="#container-test"
                                 target-continue="/confirmation"> <!-- TODO remove test data -->
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i> Jetzt Kaufen
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.orderBuyNow") }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ./OPT IN -->
+    </div>
+    <!-- ./OPT IN -->
     </div>
 {% endblock %}
