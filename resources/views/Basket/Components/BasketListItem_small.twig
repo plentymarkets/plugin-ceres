@@ -2,10 +2,13 @@
 {% set configItemName = config("PluginCallisto.item.name") %}
 
 <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
+    <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
         <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
     </div>
+    <!-- ./ITEM QUANTITY -->
 
+    <!-- ITEM IMAGE -->
     <div class="basket-item-image">
         <div class="square-container">
             <div class="square-inner center-xy main-image">
@@ -13,7 +16,9 @@
             </div>
         </div>
     </div>
+    <!-- ./ITEM IMAGE -->
 
+    <!-- ITEM DETAILS -->
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation | itemURL">
             <div class="item-name">
@@ -39,4 +44,5 @@
               </span>
         </button>
     </div>
+    <!-- ./ITEM DETAILS -->
 </article>
