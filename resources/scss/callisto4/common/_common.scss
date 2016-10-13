@@ -1,11 +1,11 @@
 
 //TODO!!! This is a temporary fix.
 //change all instances of .container to .container-fluid
-.container{
-    width:100%!important;
-    max-width: 1200px;
-    z-index: auto;
-}
+// .container{
+//     width:100%!important;
+//     max-width: 1200px;
+//     z-index: auto;
+// }
 
 
 /// Element group with fixed aspect ration 1x1
@@ -174,6 +174,10 @@ hr {
     height: 0;
     border: 0;
     border-top: 1px solid $gray-dark;
+}
+
+dt {
+    font-weight: 400;
 }
 
 .border-left {

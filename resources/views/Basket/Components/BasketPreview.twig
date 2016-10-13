@@ -1,0 +1,49 @@
+{{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
+{{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
+
+<script type="x/template" id="vue-basket-preview">
+    <div class="wrapper-inner basket-preview">
+        <header class="basket-header p-a-1">
+            <h3 class="d-inline-block m-a-0">{{ trans("PluginCallisto::Callisto.basketPreview") }}</h3>
+            <button type="button" id="closeBasketPreview" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
+        <!-- BASKET LIST -->
+        <div class="p-a-1 list">
+          <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
+              <basket-list size="small"></basket-list>
+          </div>
+          <h5 v-else>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
+        </div>
+        <!-- ./BASKET LIST -->
+
+        <!-- BASKET PREVIEW BOTTOM -->
+        <div class="p-a-1 bg-faded totals">
+
+            <basket-totals :config="{{ config("PluginCallisto.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 m-b-1">
+                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("PluginCallisto::Callisto.basket") }}">
+                        {{ trans("PluginCallisto::Callisto.basket") }} <i class="fa fa-shopping-cart"></i>
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                  {% if frontend.Account.getIsAccountLoggedIn %}
+                      <a href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
+                          {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                      </a>
+                  {% else %}
+                    <a href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
+                        {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- ./BASKET PREVIEW BOTTOM -->
+    </div>
+</script>

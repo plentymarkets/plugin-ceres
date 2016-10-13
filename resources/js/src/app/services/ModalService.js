@@ -4,7 +4,8 @@ module.exports = (function($)
     var paused  = false;
     var timeout = -1;
     var interval;
-    var timeRemaining, timeStart;
+    var timeRemaining;
+    var timeStart;
 
     return {
         findModal: findModal
@@ -20,13 +21,13 @@ module.exports = (function($)
         var self = this;
         var $bsModal;
 
-        if ($(element).is('.modal'))
+        if ($(element).is(".modal"))
         {
             $bsModal = $(element);
         }
         else
         {
-            $bsModal = $(element).find('.modal').first();
+            $bsModal = $(element).find(".modal").first();
         }
 
         return {
@@ -42,7 +43,7 @@ module.exports = (function($)
 
         function show()
         {
-            $bsModal.modal('show');
+            $bsModal.modal("show");
 
             if ($bsModal.timeout > 0)
             {
@@ -54,7 +55,7 @@ module.exports = (function($)
 
         function hide()
         {
-            $bsModal.modal('hide');
+            $bsModal.modal("hide");
             return self;
         }
 
@@ -67,12 +68,12 @@ module.exports = (function($)
         {
             $bsModal.timeout = timeout;
 
-            $bsModal.find('.modal-content').mouseover(function()
+            $bsModal.find(".modal-content").mouseover(function()
             {
                 pauseTimeout();
             });
 
-            $bsModal.find('.modal-content').mouseout(function()
+            $bsModal.find(".modal-content").mouseout(function()
             {
                 continueTimeout();
             });
@@ -83,7 +84,7 @@ module.exports = (function($)
         function startTimeout()
         {
             timeRemaining = $bsModal.timeout;
-            timeStart     = (new Date()).getTime();
+            timeStart = (new Date()).getTime();
 
             timeout = window.setTimeout(function()
             {
@@ -91,14 +92,15 @@ module.exports = (function($)
                 hide();
             }, $bsModal.timeout);
 
-            $bsModal.find('.timer').text(timeRemaining / 1000);
+            $bsModal.find(".timer").text(timeRemaining / 1000);
             interval = window.setInterval(function()
             {
                 if (!paused)
                 {
                     var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
-                    secondsRemaining     = Math.round(secondsRemaining / 1000);
-                    $bsModal.find('.timer').text(secondsRemaining);
+
+                    secondsRemaining = Math.round(secondsRemaining / 1000);
+                    $bsModal.find(".timer").text(secondsRemaining);
                 }
             }, 1000);
         }
@@ -112,9 +114,9 @@ module.exports = (function($)
 
         function continueTimeout()
         {
-            paused    = false;
+            paused = false;
             timeStart = (new Date()).getTime();
-            timeout   = window.setTimeout(function()
+            timeout = window.setTimeout(function()
             {
                 hide();
                 window.clearInterval(interval);

@@ -1,0 +1,13 @@
+{{ component( "PluginCallisto::Item.Components.QuantityInput" ) }}
+{% set showAddItemConfirm = config('PluginCallisto.basket.add_item_to_basket_confirm') %}
+<script type="x/template" id="vue-add-to-basket">
+    <div class="col-xs-6">
+        <quantity-input :value="1" @quantity-change="updateQuantity"></quantity-input>
+    </div>
+    <div class="col-xs-6">
+        <button href="#" class="btn btn-block btn-primary" @click="addToBasket()">
+            {{ trans("PluginCallisto::Callisto.addToBasket") }}
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </button>
+    </div>
+</script>

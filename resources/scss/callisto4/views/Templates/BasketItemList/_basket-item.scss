@@ -207,11 +207,12 @@
 				flex: 0 1 auto;
 				display: table;
 				order: 2;
+				left:20%;
 			}
 
 			.item-total-price{
 				align-self: flex-start;
-				flex: 0 0 auto;
+				flex: 1 1 auto;
 				order: 3;
 			}
 		}
@@ -228,10 +229,18 @@
 	}
 
 	@include media-breakpoint-up(md){
-		
+		.item-quantity{
+			.input-group.vert{
+				left:5%;
+			}
+		}
 	}
 
 	@include media-breakpoint-up(lg){
-		
+		.item-quantity{
+			.input-group.vert{
+				left:20%;
+			}
+		}
 	}
 }

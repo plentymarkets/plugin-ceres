@@ -1,19 +1,24 @@
-{% extends "PluginCallisto::PageDesign" %}
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
+
 
 {% block PageBody %}
 
-{% set userObject = services.customer.getContact() %}
+    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
+    {% set userObject = services.customer.getContact() %}
 
 	<div class="myaccount container m-y-3">
 
+		<!-- HEADER -->
 	    <div class="row m-b-3">
 	        <div class="col-sm-9">
 	            <h1>{{ trans("PluginCallisto::Callisto.accMyAccount") }}</h1>
 							{% if frontend.Account.getIsAccountLoggedIn %}
 									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">>{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
 									{% else %}
-										<span class="text-muted">>{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</span>
 									{% endif %}
 							{% endif %}
 	        </div>
@@ -24,7 +29,9 @@
 	            <hr class="">
 	        </div>
 	    </div>
+		<!-- ./HEADER -->
 
+		<!-- ADDRESS AREA -->
 	    <div class="row">
 	        <div class="col-md-6">
 	            <h4>
@@ -45,7 +52,9 @@
 	            </div>
 	        </div>
 	    </div>
+		<!-- ./ADDRESS AREA -->
 
+		<!-- ACCOUNT SETTINGS AREA -->
 		<div class="row">
 			<div class="col-md-6">
 				<h4>
@@ -60,17 +69,20 @@
 
 			<div class="col-md-6">
 				<h4>
-					{{ trans("PluginCallisto::Callisto.accBankInformations") }}
+					{{ trans("PluginCallisto::Callisto.accBankDetails") }}
 				</h4>
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentData") }}</p>
+				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentInformation") }}</p>
 				{#{% include _component-address-list/component-address-list.html id="bankinfos" %}#}
 			</div>
 		</div>
+		<!-- ./ACCOUNT SETTINGS AREA -->
+
 	</div>
 
+{{ services.customer.getOrders() }}
 
-	<!-- Auftragshistorie -->
-
+<!-- ORDER HISTORY -->
 <order-history order-max-count-pagination="{{ services.customer.getOrders()|length }}" contact-id="{{ frontend.Account.AccountContactId }}"></order-history>
+<!-- ./ORDER HISTORY -->
 
 {% endblock %}
