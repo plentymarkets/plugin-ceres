@@ -4316,7 +4316,19 @@ vueApp = new Vue({
         $toggleBasketPreview.on("click", function(evt)
         {
             evt.preventDefault();
+            evt.stopPropagation();
             $("body").toggleClass("open-right");
+        });
+        $(document).on("click", "body.open-right", function(evt)
+        {
+            if ($("body").hasClass("open-right"))
+            {
+                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                {
+                    evt.preventDefault();
+                    $("body").toggleClass("open-right");
+                }
+            }
         });
 
         $toggleListView.on("click", function(evt)
