@@ -2,16 +2,19 @@
 
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
+    <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation | itemURL">
         <img :src="basketItem.variation | itemImage">
     </a>
+    <!-- ./ITEM IMAGE -->
 
+    <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity"></quantity-input>
+        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemPerPeace") }}
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemEach") }}
         </div>
 
         <div class="item-total-price">
@@ -30,7 +33,9 @@
               </span>
         </button>
     </div>
+    <!-- ./ITEM QUANTITY HANDLING -->
 
+    <!-- ITEM DETAILS -->
     <div class="item-details small">
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
         <a class="clearfix" :href="basketItem.variation | itemURL">
@@ -64,4 +69,5 @@
         </div>
         <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }"></label>
     </div>
+    <!-- ./ITEM DETAILS -->
 </article>

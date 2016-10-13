@@ -1,10 +1,15 @@
 <script type="x/template" id="vue-add-item-confirm">
 {% set linkedPage = '/checkout'%}
 
+{% if not frontend.Account.getIsAccountLoggedIn %}
+	{% set linkedPage = '/login' %}
+{% endif %}
+
 <div class="modal fade" data-backdrop="static">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 
+			<!-- MODAL HEADER -->
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -12,7 +17,9 @@
 				<span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer"></span>s</span>
 				<h5 class="modal-title">{{ trans("PluginCallisto::Callisto.basketItemAdded") }}</h5>
 			</div>
+			<!-- ./MODAL HEADER -->
 
+			<!-- MODAL BODY -->
 			<div class="modal-body">
 				<div class="row is-table-row">
 					<div class="col-md-4" style="min-height: 80px;">
@@ -31,13 +38,11 @@
 					</div>
 				</div>
 			</div>
+			<!-- ./MODAL BODY -->
 
+			<!-- MODAL FOOTER -->
 			<div class="modal-footer">
 				<div class="row">
-
-					{% if not frontend.Account.getIsAccountLoggedIn %}
-						{% set linkedPage = '/login' %}
-					{% endif %}
 					<div class="col-xs-12 col-sm-7 m-b-1">
 						<a href="{{ linkedPage }}" class="btn btn-primary">
 							{{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -54,6 +59,8 @@
 
 				</div>
 			</div>
+			<!-- ./MODAL FOOTER -->
+
 		</div>
 	</div>
 </div>

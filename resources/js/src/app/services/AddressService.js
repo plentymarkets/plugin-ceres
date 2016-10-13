@@ -1,16 +1,17 @@
-var ApiService      = require('services/ApiService');
-var CheckoutService = require('services/CheckoutService');
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
 
 module.exports = (function($)
 {
 
     return {
         createAddress: createAddress,
-        updateAddress: updateAddress
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
     };
 
     /**
-     * create a new address
+     * Create a new address
      * @param address
      * @param addressType
      * @param setActive
@@ -20,7 +21,7 @@ module.exports = (function($)
     {
         return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
         {
-            if (!!setActive)
+            if (setActive)
             {
                 if (addressType === 1)
                 {
@@ -35,7 +36,7 @@ module.exports = (function($)
     }
 
     /**
-     * update an existing address
+     * Update an existing address
      * @param newData
      * @param addressType
      * @returns {*|Entry|undefined}
@@ -47,7 +48,7 @@ module.exports = (function($)
     }
 
     /**
-     * delete an existing address
+     * Delete an existing address
      * @param addressId
      * @param addressType
      * @returns {*}

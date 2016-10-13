@@ -1,9 +1,8 @@
-var ResourceService       = require('services/ResourceService');
-var ModalService          = require('services/ModalService');
+var ResourceService       = require("services/ResourceService");
 
-Vue.component('basket-preview', {
+Vue.component("basket-preview", {
 
-    template: '#vue-basket-preview',
+    template: "#vue-basket-preview",
 
     data: function()
     {
@@ -14,11 +13,11 @@ Vue.component('basket-preview', {
     },
 
     /**
-     * bind to basket and bind the basket items
+     * Bind to basket and bind the basket items
      */
     ready: function()
     {
-        ResourceService.bind( "basket", this );
-        ResourceService.bind( "basketItems", this );
+        ResourceService.bind("basket", this);
+        ResourceService.bind("basketItems", this);
     }
 });

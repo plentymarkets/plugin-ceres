@@ -1,11 +1,11 @@
-var ResourceService = require('services/ResourceService');
+var ResourceService = require("services/ResourceService");
 
-Vue.component('basket-totals', {
+Vue.component("basket-totals", {
 
-    template: '#vue-basket-totals',
+    template: "#vue-basket-totals",
 
     props: [
-        'config'
+        "config"
     ],
 
     data: function()
@@ -16,11 +16,11 @@ Vue.component('basket-totals', {
     },
 
     /**
-     * bind to basket
+     * Bind to basket
      */
     ready: function()
     {
-        ResourceService.bind( "basket", this );
+        ResourceService.bind("basket", this);
     },
 
     methods:
@@ -30,9 +30,9 @@ Vue.component('basket-totals', {
          * @param name
          * @returns {boolean}
          */
-        showProperty: function( name )
+        showProperty: function(name)
         {
-            return !this.config || this.config.indexOf( name ) >= 0 || this.config.indexOf( 'all' ) >= 0;
+            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
         }
     }
 });
