@@ -1,4 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+<<<<<<< HEAD
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -9,6 +10,387 @@
  * Full details and documentation:
  * http://openexchangerates.github.io/accounting.js/
  */
+=======
+var currencySymbolMap = require('./map');
+
+var symbolCurrencyMap = {};
+for (var key in currencySymbolMap) {
+  if (currencySymbolMap.hasOwnProperty(key)) {
+    var currency = key;
+    var symbol = currencySymbolMap[currency];
+    symbolCurrencyMap[symbol] = currency;
+  }
+}
+
+function getSymbolFromCurrency(currencyCode) {
+  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
+    return currencySymbolMap[currencyCode];
+  } else {
+    return undefined;
+  }
+}
+
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+},{"./map":2}],2:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}],3:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.infiniteScroll = global.infiniteScroll || {})));
+}(this, function (exports) { 'use strict';
+
+  var throttle = function throttle(fn, delay) {
+    var now, lastExec, timer, context, args; //eslint-disable-line
+
+    var execute = function execute() {
+      fn.apply(context, args);
+      lastExec = now;
+    };
+
+    return function () {
+      context = this;
+      args = arguments;
+
+      now = Date.now();
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      if (lastExec) {
+        var diff = delay - (now - lastExec);
+        if (diff < 0) {
+          execute();
+        } else {
+          timer = setTimeout(function () {
+            execute();
+          }, diff);
+        }
+      } else {
+        execute();
+      }
+    };
+  };
+
+  var getScrollTop = function getScrollTop(element) {
+    if (element === window) {
+      return Math.max(window.pageYOffset || 0, document.documentElement.scrollTop);
+    }
+
+    return element.scrollTop;
+  };
+
+  var getComputedStyle = document.defaultView.getComputedStyle;
+
+  var getScrollEventTarget = function getScrollEventTarget(element) {
+    var currentNode = element;
+    // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
+    while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
+      var overflowY = getComputedStyle(currentNode).overflowY;
+      if (overflowY === 'scroll' || overflowY === 'auto') {
+        return currentNode;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return window;
+  };
+
+  var getVisibleHeight = function getVisibleHeight(element) {
+    if (element === window) {
+      return document.documentElement.clientHeight;
+    }
+
+    return element.clientHeight;
+  };
+
+  var getElementTop = function getElementTop(element) {
+    if (element === window) {
+      return getScrollTop(window);
+    }
+    return element.getBoundingClientRect().top + getScrollTop(window);
+  };
+
+  var isAttached = function isAttached(element) {
+    var currentNode = element.parentNode;
+    while (currentNode) {
+      if (currentNode.tagName === 'HTML') {
+        return true;
+      }
+      if (currentNode.nodeType === 11) {
+        return false;
+      }
+      currentNode = currentNode.parentNode;
+    }
+    return false;
+  };
+
+  var infiniteScroll = {
+    doBind: function doBind() {
+      if (this.binded) return; // eslint-disable-line
+      this.binded = true;
+
+      var directive = this;
+      var element = directive.el;
+
+      directive.scrollEventTarget = getScrollEventTarget(element);
+      directive.scrollListener = throttle(directive.doCheck.bind(directive), 200);
+      directive.scrollEventTarget.addEventListener('scroll', directive.scrollListener);
+
+      var disabledExpr = element.getAttribute('infinite-scroll-disabled');
+      var disabled = false;
+
+      if (disabledExpr) {
+        this.vm.$watch(disabledExpr, function (value) {
+          directive.disabled = value;
+          if (!value && directive.immediateCheck) {
+            directive.doCheck();
+          }
+        });
+        disabled = Boolean(directive.vm.$get(disabledExpr));
+      }
+      directive.disabled = disabled;
+
+      var distanceExpr = element.getAttribute('infinite-scroll-distance');
+      var distance = 0;
+      if (distanceExpr) {
+        distance = Number(directive.vm.$get(distanceExpr));
+        if (isNaN(distance)) {
+          distance = 0;
+        }
+      }
+      directive.distance = distance;
+
+      var immediateCheckExpr = element.getAttribute('infinite-scroll-immediate-check');
+      var immediateCheck = true;
+      if (immediateCheckExpr) {
+        immediateCheck = Boolean(directive.vm.$get(immediateCheckExpr));
+      }
+      directive.immediateCheck = immediateCheck;
+
+      if (immediateCheck) {
+        directive.doCheck();
+      }
+
+      var eventName = element.getAttribute('infinite-scroll-listen-for-event');
+      if (eventName) {
+        directive.vm.$on(eventName, function () {
+          directive.doCheck();
+        });
+      }
+    },
+
+    doCheck: function doCheck(force) {
+      var scrollEventTarget = this.scrollEventTarget;
+      var element = this.el;
+      var distance = this.distance;
+
+      if (force !== true && this.disabled) return; //eslint-disable-line
+      var viewportScrollTop = getScrollTop(scrollEventTarget);
+      var viewportBottom = viewportScrollTop + getVisibleHeight(scrollEventTarget);
+
+      var shouldTrigger = false;
+
+      if (scrollEventTarget === element) {
+        shouldTrigger = scrollEventTarget.scrollHeight - viewportBottom <= distance;
+      } else {
+        var elementBottom = getElementTop(element) - getElementTop(scrollEventTarget) + element.offsetHeight + viewportScrollTop;
+
+        shouldTrigger = viewportBottom + distance >= elementBottom;
+      }
+
+      if (shouldTrigger && this.expression) {
+        this.vm.$get(this.expression);
+      }
+    },
+
+    bind: function bind() {
+      var directive = this;
+      var element = this.el;
+
+      directive.vm.$on('hook:ready', function () {
+        if (isAttached(element)) {
+          directive.doBind();
+        }
+      });
+
+      this.bindTryCount = 0;
+
+      var tryBind = function tryBind() {
+        if (directive.bindTryCount > 10) return; //eslint-disable-line
+        directive.bindTryCount++;
+        if (isAttached(element)) {
+          directive.doBind();
+        } else {
+          setTimeout(tryBind, 50);
+        }
+      };
+
+      tryBind();
+    },
+
+    unbind: function unbind() {
+      this.scrollEventTarget.removeEventListener('scroll', this.scrollListener);
+    }
+  };
+
+  if (window.Vue) {
+    window.infiniteScroll = infiniteScroll;
+    Vue.use(install);
+  }
+
+  function install(Vue) {
+    Vue.directive('infiniteScroll', infiniteScroll);
+  }
+
+  exports.install = install;
+  exports.infiniteScroll = infiniteScroll;
+
+}));
+},{}],4:[function(require,module,exports){
+var BasketService       = require('services/BasketService');
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService        = require('services/ModalService');
+>>>>>>> origin/master
 
 (function(root, undefined) {
 
@@ -50,6 +432,7 @@
 		nativeIsArray = Array.isArray,
 		toString = Object.prototype.toString;
 
+<<<<<<< HEAD
 	/**
 	 * Tests whether supplied parameter is a string
 	 * from underscore.js
@@ -57,6 +440,10 @@
 	function isString(obj) {
 		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
 	}
+=======
+},{"services/ApiService":44,"services/BasketService":45,"services/ModalService":49,"services/NotificationService":51}],5:[function(require,module,exports){
+Vue.component('address-input-group', {
+>>>>>>> origin/master
 
 	/**
 	 * Tests whether supplied parameter is a string
@@ -101,7 +488,12 @@
 	function map(obj, iterator, context) {
 		var results = [], i, j;
 
+<<<<<<< HEAD
 		if (!obj) return results;
+=======
+},{}],6:[function(require,module,exports){
+var ModalService = require('services/ModalService');
+>>>>>>> origin/master
 
 		// Use native .map method if it exists:
 		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
@@ -425,6 +817,7 @@ for (var key in currencySymbolMap) {
   }
 }
 
+<<<<<<< HEAD
 function getSymbolFromCurrency(currencyCode) {
   if (currencySymbolMap.hasOwnProperty(currencyCode)) {
     return currencySymbolMap[currencyCode];
@@ -452,6 +845,11 @@ module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
 module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
+=======
+},{"services/ModalService":49}],7:[function(require,module,exports){
+var AddressService    = require('services/AddressService');
+var ValidationService = require('services/ValidationService');
+>>>>>>> origin/master
 
 },{"./map":3}],3:[function(require,module,exports){
 module.exports =
@@ -607,8 +1005,15 @@ Vue.component("add-item-confirm", {
     }
 });
 
+<<<<<<< HEAD
 },{}],5:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
+=======
+},{"services/AddressService":43,"services/ValidationService":53}],8:[function(require,module,exports){
+var CheckoutService = require('services/CheckoutService');
+
+Vue.component('invoice-address-select', {
+>>>>>>> origin/master
 
 Vue.component("basket-preview", {
 
@@ -632,8 +1037,13 @@ Vue.component("basket-preview", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":47}],6:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
+=======
+},{"services/CheckoutService":46}],9:[function(require,module,exports){
+var CheckoutService = require('services/CheckoutService');
+>>>>>>> origin/master
 
 Vue.component("basket-totals", {
 
@@ -672,8 +1082,14 @@ Vue.component("basket-totals", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":47}],7:[function(require,module,exports){
 Vue.component("coupon", {
+=======
+},{"services/CheckoutService":46}],10:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+>>>>>>> origin/master
 
     template: "#vue-coupon"
 
@@ -707,8 +1123,15 @@ Vue.component("basket-list", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":47}],9:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
+=======
+},{"services/BasketService":45,"services/MonetaryFormatService":50}],11:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var ModalService          = require('services/ModalService');
+>>>>>>> origin/master
 
 Vue.component("basket-list-item", {
 
@@ -843,8 +1266,15 @@ Vue.component("payment-provider-select", {
     }
 });
 
+<<<<<<< HEAD
 },{}],11:[function(require,module,exports){
 Vue.component("shipping-profile-select", {
+=======
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],12:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var ModalService          = require('services/ModalService');
+>>>>>>> origin/master
 
     template: "#vue-shipping-profile-select",
 
@@ -936,8 +1366,15 @@ Vue.component("address-input-group", {
     }
 });
 
+<<<<<<< HEAD
 },{}],13:[function(require,module,exports){
 var ModalService = require("services/ModalService");
+=======
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],13:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var ModalService          = require('services/ModalService');
+>>>>>>> origin/master
 
 Vue.component("address-select", {
 
@@ -1031,6 +1468,7 @@ Vue.component("address-select", {
             this.addressToEdit = {};
             this.updateHeadline();
 
+<<<<<<< HEAD
             $(".wrapper-bottom").append($("#" + this.addressModalId));
             this.addressModal.show();
         },
@@ -1047,6 +1485,19 @@ Vue.component("address-select", {
 
             $(".wrapper-bottom").append($("#" + this.addressModalId));
             this.addressModal.show();
+=======
+            if ($(event.currentTarget).hasClass('btn-link'))
+            {
+                this.toggleDeleteBtnClass(event.currentTarget);
+                $(event.currentTarget).find('.message').text('Jetzt löschen');
+            }
+            else
+            {
+                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
+
+                BasketService.deleteBasketItem(basketItem);
+            }
+>>>>>>> origin/master
         },
 
         /**
@@ -1090,9 +1541,15 @@ Vue.component("address-select", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ModalService":45}],14:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
+=======
+},{"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50}],14:[function(require,module,exports){
+var BasketService  = require('services/BasketService');
+var CountryService = require('services/CountryService');
+>>>>>>> origin/master
 
 Vue.component("create-update-address", {
 
@@ -1139,7 +1596,34 @@ Vue.component("create-update-address", {
             {
                 this.updateAddress();
             }
+<<<<<<< HEAD
         },
+=======
+        }
+    },
+    ready  : function()
+    {
+
+        var shippingId         = BasketService.getBasket().basket.shippingCountryId;
+        this.shippingCountries = CountryService.parseShippingCountries(this.countryData, shippingId);
+        this.initSelected();
+        CountryService.translateCountryNames(this.countryNameData, this.shippingCountries);
+        CountryService.sortCountries(this.shippingCountries);
+    }
+
+});
+
+},{"services/BasketService":45,"services/CountryService":47}],15:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+
+Vue.component('basket-total-sum', {
+
+    props: [
+        "basketData",
+        "showFull"
+    ],
+>>>>>>> origin/master
 
         /**
          * Update an address
@@ -1181,8 +1665,26 @@ Vue.component("create-update-address", {
 
 });
 
+<<<<<<< HEAD
 },{"services/AddressService":41,"services/ValidationService":48}],15:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
+=======
+},{"services/BasketService":45,"services/MonetaryFormatService":50}],16:[function(require,module,exports){
+var BasketService       = require('services/BasketService');
+var NotificationService = require('services/NotificationService');
+var ModalService        = require('services/ModalService');
+
+Vue.component('category-list-item', {
+
+    template: '#vue-category-list-item',
+
+    props: [
+        "item",
+        "baseUrl"
+    ],
+
+    methods: {
+>>>>>>> origin/master
 
 Vue.component("invoice-address-select", {
 
@@ -1219,8 +1721,17 @@ Vue.component("invoice-address-select", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/CheckoutService":43}],16:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
+=======
+},{"services/BasketService":45,"services/ModalService":49,"services/NotificationService":51}],17:[function(require,module,exports){
+var BasketService         = require('services/BasketService');
+var ApiService            = require('services/ApiService');
+var NotificationService   = require('services/NotificationService');
+var ModalService          = require('services/ModalService');
+var MonetaryFormatService = require('services/MonetaryFormatService');
+>>>>>>> origin/master
 
 Vue.component("shipping-address-select", {
 
@@ -1256,8 +1767,13 @@ Vue.component("shipping-address-select", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/CheckoutService":43}],17:[function(require,module,exports){
 var CountryService = require("services/CountryService");
+=======
+},{"services/ApiService":44,"services/BasketService":45,"services/ModalService":49,"services/MonetaryFormatService":50,"services/NotificationService":51}],18:[function(require,module,exports){
+var CountryService = require('services/CountryService');
+>>>>>>> origin/master
 
 Vue.component("country-select", {
 
@@ -1306,19 +1822,122 @@ Vue.component("country-select", {
         selectedCountryId: function()
         {
             this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
+<<<<<<< HEAD
             this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+=======
+            this.stateList   = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
         }
     }
 });
 
+},{"services/CountryService":47}],19:[function(require,module,exports){
+Vue.component('coupon', {
+
+    template: '#vue-coupon'
+
+});
+
+},{}],20:[function(require,module,exports){
+var BasketService = require('services/BasketService');
+
+Vue.component('delete-from-basket', {
+
+    template: '#vue-delete-from-basket',
+
+    props: [
+        'basketItem'
+    ],
+
+    methods: {
+
+        deleteItem: function()
+        {
+            BasketService.deleteBasketItem(this.basketItem);
+        }
+
+    }
+
+});
+
+},{"services/BasketService":45}],21:[function(require,module,exports){
+Vue.component('item-availability-text', {
+
+    template: '<span class="availability-text">${ availabilityText }</span>',
+
+    props: [
+        'availability'
+    ],
+
+    computed: {
+        availabilityText: function()
+        {
+            switch (this.availability)
+            {
+                case '1':
+                    return 'Auf Lager';
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    return 'In Kürze verfügbar';
+                case '10':
+                    return 'Liefertermin auf Anfrage';
+                default:
+                    return 0;
+            }
+>>>>>>> origin/master
+        }
+    }
+});
+
+<<<<<<< HEAD
 },{"services/CountryService":44}],18:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
+=======
+},{}],22:[function(require,module,exports){
+var BasketService = require('services/BasketService');
+
+Vue.component('item-count-to-basket', {
+
+    template: '#vue-item-count-to-basket',
+
+    props: [
+        'basketItem',
+        'quantity'
+    ],
+
+    methods: {
+
+        quantityPlus: function()
+        {
+            this.quantity++;
+
+            this.basketItem.quantity = this.quantity;
+            BasketService.updateBasketItem(this.basketItem);
+        },
+
+        quantityMinus: function()
+        {
+            if (this.quantity > 1)
+            {
+                this.quantity--;
+>>>>>>> origin/master
 
 var ValidationService = require("services/ValidationService");
 
+<<<<<<< HEAD
 Vue.component("registration", {
+=======
+},{"services/BasketService":45}],23:[function(require,module,exports){
+var PaginationService = require('services/PaginationService');
+var LoadItemsService  = require('services/LoadItemsService');
+>>>>>>> origin/master
 
     template: "#vue-registration",
 
@@ -1416,6 +2035,11 @@ Vue.component("registration", {
         }
     }
 });
+<<<<<<< HEAD
+=======
+},{"services/LoadItemsService":48,"services/PaginationService":52,"vue-infinite-scroll":3}],24:[function(require,module,exports){
+var PaginationService = require('services/PaginationService');
+>>>>>>> origin/master
 
 },{"services/ApiService":42,"services/ModalService":45,"services/NotificationService":46,"services/ValidationService":48}],19:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
@@ -1481,8 +2105,18 @@ Vue.component("login", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ApiService":42,"services/ModalService":45,"services/NotificationService":46}],20:[function(require,module,exports){
 var ApiService = require("services/ApiService");
+=======
+},{"services/PaginationService":52}],25:[function(require,module,exports){
+var ApiService        = require('services/ApiService');
+var PaginationService = require('services/PaginationService');
+
+Vue.component('item-list-pagination', {
+
+    template: '#vue-item-list-pagination',
+>>>>>>> origin/master
 
 Vue.component("user-login-handler", {
 
@@ -1649,7 +2283,15 @@ Vue.component("quantity-input", {
         });
     }
 
+<<<<<<< HEAD
 });
+=======
+},{"services/ApiService":44,"services/PaginationService":52}],26:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var HTMLCache           = require('services/VariationsHTMLCacheService');
+var BasketService       = require('services/BasketService');
+>>>>>>> origin/master
 
 },{}],23:[function(require,module,exports){
 (function($)
@@ -1756,7 +2398,14 @@ Vue.component("quantity-input", {
             }
         }
 
+<<<<<<< HEAD
     });
+=======
+},{"services/ApiService":44,"services/BasketService":45,"services/NotificationService":51,"services/VariationsHTMLCacheService":54}],27:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService        = require('services/ModalService');
+>>>>>>> origin/master
 
 })(jQuery);
 
@@ -1847,7 +2496,12 @@ Vue.component("variation-select", {
                             });
                     }
 
+<<<<<<< HEAD
                 }
+=======
+},{"services/ApiService":44,"services/ModalService":49,"services/NotificationService":51}],28:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+>>>>>>> origin/master
 
             }
         }, {
@@ -1910,8 +2564,26 @@ Vue.component("variation-select", {
          */
         isEnabled: function(attributeId, attributeValueId)
         {
+<<<<<<< HEAD
             // clone selectedAttributes to avoid touching objects bound to UI
             var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+=======
+            return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
+                "Hallo, " + username +
+                "</a>" +
+                "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
+                "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
+                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> MyAccount</a>" +
+                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> Logout</a>" +
+                "</div>" +
+                "</div>";
+        }
+    }
+});
+
+},{"services/ApiService":44}],29:[function(require,module,exports){
+var MonetaryFormatService = require('services/MonetaryFormatService');
+>>>>>>> origin/master
 
             attributes[attributeId] = attributeValueId;
             return this.filterVariations(attributes).length > 0;
@@ -1924,7 +2596,25 @@ Vue.component("variation-select", {
          */
         setAttributes: function(variation)
         {
+<<<<<<< HEAD
             var hasChanges = false;
+=======
+            MonetaryFormatService.initOptions(this.numberDecimals, this.separatorDecimal, this.separatorThousands, this.right, this.currency);
+        }
+    });
+
+},{"services/MonetaryFormatService":50}],30:[function(require,module,exports){
+var MonetaryFormatService = require('services/MonetaryFormatService');
+
+Vue.component('monetary-format',
+    {
+        template: '${ monetary }',
+
+        props: [
+            "price",
+            "currency"
+        ],
+>>>>>>> origin/master
 
             for (var i = 0; i < variation.attributes.length; i++)
             {
@@ -1941,6 +2631,7 @@ Vue.component("variation-select", {
             return hasChanges;
         }
 
+<<<<<<< HEAD
     }
 
 });
@@ -1949,6 +2640,12 @@ Vue.component("variation-select", {
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
+=======
+},{"services/MonetaryFormatService":50}],31:[function(require,module,exports){
+var ModalService        = require('services/ModalService');
+var APIService          = require('services/APIService');
+var NotificationService = require('services/NotificationService');
+>>>>>>> origin/master
 
 Vue.component("account-settings", {
 
@@ -2056,8 +2753,42 @@ Vue.component("account-settings", {
 
 });
 
+<<<<<<< HEAD
 },{"services/APIService":40,"services/ModalService":45,"services/NotificationService":46}],26:[function(require,module,exports){
 var ApiService = require("services/ApiService");
+=======
+},{"services/APIService":42,"services/ModalService":49,"services/NotificationService":51}],32:[function(require,module,exports){
+var NotificationService = require('services/NotificationService');
+var WaitScreenService   = require('services/WaitScreenService');
+
+Vue.component('notifications', {
+
+    template: '#vue-notifications',
+
+    data    : function()
+    {
+        return {
+            notifications: NotificationService.getNotifications().all()
+        };
+    },
+
+    methods : {
+        dismiss: function(notification)
+        {
+            NotificationService.getNotifications().remove(notification);
+        },
+
+        test   : function()
+        {
+            NotificationService.error('Test').closeAfter(3000);
+            WaitScreenService.showWaitScreen();
+        }
+    }
+});
+
+},{"services/NotificationService":51,"services/WaitScreenService":55}],33:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+>>>>>>> origin/master
 
 Vue.component("order-history", {
 
@@ -2271,8 +3002,16 @@ Vue.component("order-history", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ApiService":42}],27:[function(require,module,exports){
 Vue.component("language-select", {
+=======
+},{"services/ApiService":44}],34:[function(require,module,exports){
+var MonetaryFormatService = require('services/MonetaryFormatService');
+var APIService            = require('services/APIService');
+
+Vue.component('payment-provider-select', {
+>>>>>>> origin/master
 
     template: "#vue-language-select",
 
@@ -2313,7 +3052,12 @@ Vue.component("language-select", {
         }
     }
 
+<<<<<<< HEAD
 });
+=======
+},{"services/APIService":42,"services/MonetaryFormatService":50}],35:[function(require,module,exports){
+Vue.component('price-formatted', {
+>>>>>>> origin/master
 
 },{}],28:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
@@ -2474,6 +3218,7 @@ Vue.directive("prepare-payment", {
 
 });
 
+<<<<<<< HEAD
 },{"services/ApiService":42,"services/NotificationService":46}],32:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
@@ -2502,6 +3247,12 @@ Vue.directive("logout", function()
                 );
 
             event.preventDefault();
+=======
+},{}],36:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+var ModalService        = require('services/ModalService');
+>>>>>>> origin/master
 
         });
 
@@ -2575,8 +3326,13 @@ Vue.elementDirective("resource-list", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":47}],34:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
+=======
+},{"services/ApiService":44,"services/ModalService":49,"services/NotificationService":51,"services/ValidationService":53}],37:[function(require,module,exports){
+var MonetaryFormatService = require('services/MonetaryFormatService');
+>>>>>>> origin/master
 
 Vue.directive("resource-bind", {
 
@@ -2615,8 +3371,13 @@ Vue.directive("resource-bind", {
 
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":47}],35:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
+=======
+},{"services/MonetaryFormatService":50}],38:[function(require,module,exports){
+var NotificationService = require('services/NotificationService');
+>>>>>>> origin/master
 
 Vue.directive("resource-if", {
 
@@ -2648,7 +3409,12 @@ Vue.directive("resource-if", {
         });
     }
 
+<<<<<<< HEAD
 });
+=======
+},{"services/NotificationService":51}],39:[function(require,module,exports){
+var WaitScreenService = require('services/WaitScreenService');
+>>>>>>> origin/master
 
 },{"services/ResourceService":47}],36:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
@@ -2671,6 +3437,7 @@ Vue.filter("currency", function(price, customCurrency)
         }
     }
 
+<<<<<<< HEAD
     // (%v = value, %s = symbol)
     var options = {
         symbol   : currency,
@@ -2682,6 +3449,11 @@ Vue.filter("currency", function(price, customCurrency)
 
     return accounting.formatMoney(price, options);
 });
+=======
+},{"services/WaitScreenService":55}],40:[function(require,module,exports){
+var ApiService          = require('services/ApiService');
+var NotificationService = require('services/NotificationService');
+>>>>>>> origin/master
 
 },{"accounting":1,"currency-symbol-map":2,"services/ResourceService":47}],37:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
@@ -2712,9 +3484,14 @@ Vue.filter("itemImage", function(item, baseUrl)
 
 });
 
+<<<<<<< HEAD
 },{}],38:[function(require,module,exports){
 Vue.filter("itemName", function(item, selectedName)
 {
+=======
+},{"services/ApiService":44,"services/NotificationService":51}],41:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+>>>>>>> origin/master
 
     if (selectedName === "0" && item.name1 !== "")
     {
@@ -2743,9 +3520,15 @@ Vue.filter("itemURL", function(item)
 
 });
 
+<<<<<<< HEAD
 },{}],40:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
+=======
+},{"services/ApiService":44}],42:[function(require,module,exports){
+var NotificationService = require('services/NotificationService');
+var WaitScreenService   = require('services/WaitScreenService');
+>>>>>>> origin/master
 
 module.exports = (function($)
 {
@@ -2909,9 +3692,15 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
 },{"services/NotificationService":46,"services/WaitScreenService":49}],41:[function(require,module,exports){
 var ApiService      = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
+=======
+},{"services/NotificationService":51,"services/WaitScreenService":55}],43:[function(require,module,exports){
+var ApiService      = require('services/ApiService');
+var CheckoutService = require('services/CheckoutService');
+>>>>>>> origin/master
 
 module.exports = (function($)
 {
@@ -2947,6 +3736,7 @@ module.exports = (function($)
         });
     }
 
+<<<<<<< HEAD
     /**
      * Update an existing address
      * @param newData
@@ -2954,6 +3744,128 @@ module.exports = (function($)
      * @returns {*|Entry|undefined}
      */
     function updateAddress(newData, addressType)
+=======
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":44,"services/CheckoutService":46}],44:[function(require,module,exports){
+arguments[4][42][0].apply(exports,arguments)
+},{"dup":42,"services/NotificationService":51,"services/WaitScreenService":55}],45:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+
+module.exports = (function($)
+{
+
+    var basket;
+    var readyDeferred;
+    var loading            = false;
+    var watchers           = [];
+    var basketItemToDelete = {};
+
+    return {
+        init                 : init,
+        watch                : watch,
+        getBasket            : getBasket,
+        addBasketItem        : addBasketItem,
+        updateBasketItem     : updateBasketItem,
+        deleteBasketItem     : deleteBasketItem,
+        updateShippingCountry: updateShippingCountry,
+        basketItemToDelete   : basketItemToDelete
+    };
+
+    function init(basketData)
+    {
+        if (!readyDeferred)
+        {
+            readyDeferred = $.Deferred();
+            if (!!basketData)
+            {
+                basket = basketData;
+                notify();
+                readyDeferred.resolve();
+            }
+            else
+            {
+                ApiService.get('/rest/basket').done(function(response)
+                {
+                    basket = response;
+                    notify();
+                    readyDeferred.resolve();
+                });
+            }
+
+        }
+
+        return readyDeferred;
+    }
+
+    function watch(callback)
+    {
+        watchers.push(callback);
+        if (!!basket)
+        {
+            callback(basket);
+        }
+    }
+
+    function notify()
+    {
+        for (var i = 0; i < watchers.length; i++)
+        {
+            watchers[i](basket);
+        }
+    }
+
+    function getBasket()
+    {
+        return basket;
+    }
+
+    function addBasketItem(basketItem)
+    {
+        var self = this;
+        return ApiService.post('/rest/basket/items/', basketItem)
+            .done(function(response)
+            {
+                basket = response;
+                notify();
+            });
+    }
+
+    function updateBasketItem(basketItem)
+    {
+        var self = this;
+        return ApiService.put('/rest/basket/items/' + basketItem.id, basketItem)
+            .done(function(response)
+            {
+                basket = response;
+                notify();
+            });
+    }
+
+    function updateShippingCountry(basket)
+    {
+        var id   = basket.shippingCountryId;
+        var self = this;
+        return ApiService.put('/rest/deliverycountry/' + id, basket)
+            .done(function(response)
+            {
+                basket = response;
+                notify();
+            });
+    }
+
+    function deleteBasketItem(basketItem)
+>>>>>>> origin/master
     {
         addressType = addressType || newData.pivot.typeId;
         return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
@@ -2971,10 +3883,15 @@ module.exports = (function($)
     }
 })(jQuery);
 
+<<<<<<< HEAD
 },{"services/ApiService":42,"services/CheckoutService":43}],42:[function(require,module,exports){
 arguments[4][40][0].apply(exports,arguments)
 },{"dup":40,"services/NotificationService":46,"services/WaitScreenService":49}],43:[function(require,module,exports){
 var ApiService = require("services/ApiService");
+=======
+},{"services/ApiService":44}],46:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+>>>>>>> origin/master
 
 module.exports = (function($)
 {
@@ -3064,7 +3981,11 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
 },{"services/ApiService":42}],44:[function(require,module,exports){
+=======
+},{"services/ApiService":44}],47:[function(require,module,exports){
+>>>>>>> origin/master
 module.exports = (function($)
 {
 
@@ -3160,7 +4081,35 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
 },{}],45:[function(require,module,exports){
+=======
+},{}],48:[function(require,module,exports){
+var ApiService = require('services/ApiService');
+
+module.exports = (function($)
+{
+    return {
+        loadItems: _loadItems
+    };
+
+    function _loadItems(categoryID, data, el, callback)
+    {
+        var url = "/rest/category_items_list/" + categoryID + "/";
+
+        ApiService.get(url, data)
+            .done(function(response)
+            {
+                callback(response);
+            }).fail(function(error)
+            {
+                console.log("error by: ", url, error);
+            }
+        );
+    }
+});
+},{"services/ApiService":44}],49:[function(require,module,exports){
+>>>>>>> origin/master
 module.exports = (function($)
 {
 
@@ -3294,7 +4243,11 @@ module.exports = (function($)
     }
 })(jQuery);
 
+<<<<<<< HEAD
 },{}],46:[function(require,module,exports){
+=======
+},{}],50:[function(require,module,exports){
+>>>>>>> origin/master
 module.exports = (function($)
 {
 
@@ -3742,6 +4695,7 @@ module.exports = (function($)
             });
         }
 
+<<<<<<< HEAD
         /**
          * Receive the current value of this resource
          * @returns {*}
@@ -3750,6 +4704,11 @@ module.exports = (function($)
         {
             return data.value;
         }
+=======
+},{"currency-symbol-map":1}],51:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> origin/master
 
         /**
          * Set the value of the resource.
@@ -3993,8 +4952,14 @@ module.exports = (function($)
             var deferred = $.Deferred();
             var list = data.value;
 
+<<<<<<< HEAD
             list.splice(key, 1);
             data.value = list;
+=======
+},{}],52:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> origin/master
 
             deferred.resolve();
             return deferred;
@@ -4027,7 +4992,11 @@ module.exports = (function($)
 
 })(jQuery);
 
+<<<<<<< HEAD
 },{"services/ApiService":42}],48:[function(require,module,exports){
+=======
+},{}],53:[function(require,module,exports){
+>>>>>>> origin/master
 module.exports = (function($)
 {
 
@@ -4143,6 +5112,7 @@ module.exports = (function($)
                 hasError = true;
             }
 
+<<<<<<< HEAD
             return false;
         });
 
@@ -4236,46 +5206,80 @@ module.exports = (function($)
         count    : 0,
         isVisible: false
     };
+=======
+        });
+>>>>>>> origin/master
 
-    return {
-        getOverlay    : getOverlay,
-        showWaitScreen: showWaitScreen,
-        hideWaitScreen: hideWaitScreen
-    };
-
-    function getOverlay()
-    {
-        return overlay;
+        return !hasError;
     }
 
-    function showWaitScreen()
+    function _validateGroup($formControl, validationKey)
     {
-        overlay.count = overlay.count || 0;
-        overlay.count++;
-        overlay.isVisible = true;
+        var groupName = $formControl.attr('name');
+        var $group    = $form.find('[name="' + groupName + '"]');
+        var range     = _eval(validationKey) || {min: 1, max: 1};
+        var checked   = $group.filter(':checked').length;
+
+        return checked >= range.min && checked <= range.max;
+
     }
 
-    function hideWaitScreen(force)
+    function _validateSelect($formControl, validationKey)
     {
-        overlay.count = overlay.count || 0;
-        if (overlay.count > 0)
+        return $.trim($formControl.val()) !== validationKey;
+    }
+
+    function _validateInput($formControl, validationKey)
+    {
+        switch (validationKey)
         {
-            overlay.count--;
+            case 'text':
+                return _hasValue($formControl);
+            case 'mail':
+                var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
+                return _hasValue($formControl) && mailRegExp.test($formControl.val());
+            case 'number':
+                return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
+            case 'ref':
+                return _compareRef($.trim($formControl.val()), $.trim($formControl.attr('data-validate-ref')));
+            case 'regex':
+                var ref   = $formControl.attr('data-validate-ref');
+                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+                return _hasValue($formControl) && regex.test($.trim($formControl.val()));
+            default:
+                console.error('Form validation error: unknown validation property: "' + validationKey + '"');
+                return true;
         }
+    }
 
+<<<<<<< HEAD
         if (force)
         {
             overlay.count = 0;
         }
+=======
+    function _hasValue($formControl)
+    {
+        return $.trim($formControl.val()).length > 0;
+    }
+>>>>>>> origin/master
 
-        if (overlay.count <= 0)
+    function _compareRef(value, ref)
+    {
+        if ($(ref).length > 0)
         {
+<<<<<<< HEAD
             overlay.count = 0;
             overlay.visible = false;
+=======
+            ref = $.trim($(ref).val());
+>>>>>>> origin/master
         }
 
+        return value === ref;
     }
 
+<<<<<<< HEAD
 })(jQuery);
 
 },{}]},{},[4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,18,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39])
@@ -4351,6 +5355,292 @@ vueApp = new Vue({
     }
 
     window.CallistoMain = new CallistoMain();
+=======
+    function _findFormControls($elem)
+    {
+        if ($elem.is('input, select, textarea'))
+        {
+            return $elem;
+        }
+
+        return $elem.find('input, select, textarea');
+    }
+
+    function _isActive($elem)
+    {
+        return $elem.is(':visible') && $elem.is(':enabled');
+    }
+
+    function _eval(input)
+    {
+        return (new Function("return " + input))();
+    }
+
+})(jQuery);
+
+},{}],54:[function(require,module,exports){
+module.exports = (function($)
+{
+
+    var cache = {};
+
+    return {
+        addToCache  : _addToCache,
+        getFromCache: _getFromCache
+    };
+
+    function _addToCache(itemId, variationId, html)
+    {
+        var variationHTML = {'html': html};
+
+        if (cache[itemId] === undefined)
+        {
+            cache[itemId] = {};
+        }
+
+        cache[itemId][variationId] = variationHTML;
+    }
+
+    function _getFromCache(itemId, variationId)
+    {
+        for (var cachedItemId in cache)
+        {
+            if (cachedItemId == itemId)
+            {
+                for (var cachedVariationId in cache[itemId])
+                {
+                    if (cachedVariationId == variationId)
+                    {
+                        return cache[itemId][variationId].html;
+                    }
+                }
+            }
+        }
+
+        return undefined;
+    }
+
+})(jQuery);
+
+},{}],55:[function(require,module,exports){
+module.exports = (function($)
+{
+
+    var overlay = {
+        count    : 0,
+        isVisible: false
+    };
+
+    return {
+        getOverlay    : getOverlay,
+        showWaitScreen: showWaitScreen,
+        hideWaitScreen: hideWaitScreen
+    };
+
+    function getOverlay()
+    {
+        return overlay;
+    }
+
+    function showWaitScreen()
+    {
+        overlay.count = overlay.count || 0;
+        overlay.count++;
+        overlay.isVisible = true;
+    }
+
+    function hideWaitScreen(force)
+    {
+        overlay.count = overlay.count || 0;
+        if (overlay.count > 0)
+        {
+            overlay.count--;
+        }
+
+        if (!!force)
+        {
+            overlay.count = 0;
+        }
+
+        if (overlay.count <= 0)
+        {
+            overlay.count   = 0;
+            overlay.visible = false;
+        }
+
+    }
+
+})(jQuery);
+
+},{}]},{},[5,6,7,8,9,4,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41])
+
+
+new Vue({
+    el: 'body'
+});
+
+// Frontend end scripts
+
+(function($, window, document, undefined) {
+
+    function CallistoMain() {
+
+
+        $(window).scroll(function() {
+            if($( ".wrapper-main" ).hasClass( "isSticky" )) {
+                if ($(this).scrollTop() > 1){ 
+                    $('.wrapper-main').addClass("sticky");
+                }
+                else{
+                    $('.wrapper-main').removeClass("sticky");
+                }
+            }
+        });
+
+        // Sticky sidebar single item
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            $(".single-rightside").stick_in_parent({
+
+            });
+
+            $('.single-rightside')
+                .on('sticky_kit:bottom', function(e) {
+                    $(this).parent().css('position', 'static');
+                })
+                .on('sticky_kit:unbottom', function(e) {
+                    $(this).parent().css('position', 'relative');
+                });
+        }
+
+        var sync1 = $("#single-big-image");
+        var sync2 = $("#single-carousel");
+
+        sync1.owlCarousel({
+            singleItem: true,
+            slideSpeed: 1000,
+            navigation: true,
+            navigationText: [
+                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+            ],
+            pagination: false,
+            afterAction: syncPosition,
+            responsiveRefreshRate: 200,
+        });
+
+        sync2.owlCarousel({
+            items: 8,
+            itemsDesktop: [1199, 8],
+            itemsDesktopSmall: [979, 8],
+            itemsTablet: [768, 6],
+            itemsMobile: [479, 4],
+            navigation: true,
+            navigationText: [
+                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+            ],
+            pagination: false,
+            responsiveRefreshRate: 100,
+            afterInit: function(el) {
+                el.find(".owl-item").eq(0).addClass("synced");
+            }
+        });
+
+        function syncPosition(el) {
+            var current = this.currentItem;
+            $("#single-carousel")
+                .find(".owl-item")
+                .removeClass("synced")
+                .eq(current)
+                .addClass("synced")
+            if ($("#single-carousel").data("owlCarousel") !== undefined) {
+                center(current)
+            }
+        }
+
+        $("#single-carousel").on("click", ".owl-item", function(e) {
+            e.preventDefault();
+            var number = $(this).data("owlItem");
+            sync1.trigger("owl.goTo", number);
+        });
+
+        function center(number) {
+            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+            var num = number;
+            var found = false;
+            for (var i in sync2visible) {
+                if (num === sync2visible[i]) {
+                    var found = true;
+                }
+            }
+
+            if (found === false) {
+                if (num > sync2visible[sync2visible.length - 1]) {
+                    sync2.trigger("owl.goTo", num - sync2visible.length + 2)
+                } else {
+                    if (num - 1 === -1) {
+                        num = 0;
+                    }
+                    sync2.trigger("owl.goTo", num);
+                }
+            } else if (num === sync2visible[sync2visible.length - 1]) {
+                sync2.trigger("owl.goTo", sync2visible[1])
+            } else if (num === sync2visible[0]) {
+                sync2.trigger("owl.goTo", num - 1)
+            }
+
+        }
+
+        var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
+
+        $toggleBasketPreview.on('click', function(evt) {
+            
+            evt.preventDefault();
+            evt.stopPropagation();
+            $('body').toggleClass('open-right');
+        });
+        $(document).on('click', 'body.open-right', function(evt) {
+            if($("body").hasClass("open-right")) {
+              if ((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0)) {
+                  evt.preventDefault();
+                  $('body').toggleClass('open-right');
+              }
+            }
+        });
+
+        var $toggleListView = $('.toggle-list-view');
+
+        $toggleListView.on('click', function(evt) {
+            evt.preventDefault();
+
+            //toggle it's own state
+            $toggleListView.toggleClass('grid');
+
+            //toggle internal style of thumbs
+            $('.product-list, .cmp-product-thumb').toggleClass('grid');
+        });
+
+        $('#mainNavbarCollapse').collapse('hide');
+
+        //Add click listener outside the navigation to close it
+        $('#mainNavbarCollapse').on('show.bs.collapse', function() {
+            $('.main').one('click', closeNav);
+        })
+
+        $('#mainNavbarCollapse').on('hide.bs.collapse', function() {
+            $('.main').off('click', closeNav)
+        })
+
+        function closeNav() {
+            $('#mainNavbarCollapse').collapse('hide');
+        }
+
+    }
+
+    window.CallistoMain = CallistoMain;
+
+    new CallistoMain();
+>>>>>>> origin/master
 
 })(jQuery, window, document);
 
