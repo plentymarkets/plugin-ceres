@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-user-login-handler">
-    <span id="login-change">
+    <div id="login-change">
         {% if frontend.Account.getIsAccountLoggedIn %}
             {% set userObject = services.customer.getContact() %}
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,9 +16,16 @@
               </div>
             </div>
         {% else %}
-            <a data-toggle="modal" href="#login"><i class="fa fa-user" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.accLogin") }}</a>
-            <small>|</small>
-            <a data-toggle="modal" href="#registration"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.accRegister") }}</a>
+
+            <a data-toggle="modal" href="#login">
+                <i class="fa fa-user hidden-sm-up" aria-hidden="true"></i>
+                <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accLogin") }}</span>
+            </a>
+            <span class="pipe"></span>
+            <a data-toggle="modal" href="#registration">
+                <i class="fa fa-user-plus hidden-sm-up" aria-hidden="true"></i>
+                <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accRegister") }}</span>
+            </a>
         {% endif %}
-    </span>
+    </div>
 </script>

@@ -8,19 +8,68 @@
     {% set paymentColunmSize = 12 %}
 {% endif %}
 
-<div class="footer p-t-2 clearfix">
-    <div class="container">
+<div class="footer">
+    <a href="#" class="to-top hidden-md-up">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        <!-- <br/>
+        Zum Seitenanfang -->
+    </a>
+    <div class="footer-features p-y-1 container-max">
         <div class="row">
-            <div class="col-xs-12 text-xs-center">
-                <img src="{{ plugin_path("PluginCallisto") }}/images/logo-white.png" alt="BrandLogo">
+            <div class="col-xs-12 col-sm-4 text-xs-center">
+                <i class="fa fa-check text-success" aria-hidden="true"></i>
+                1-3 Werktage Lieferzeit
+            </div>
+            <div class="col-xs-12 col-sm-4 text-xs-center">
+                <i class="fa fa-check text-success" aria-hidden="true"></i>
+                Kostenloser Versand & Rückversand
+            </div>
+            <div class="col-xs-12 col-sm-4 text-xs-center">
+                <i class="fa fa-check text-success" aria-hidden="true"></i>
+                100 Tage Rückgaberecht
+            </div>
+        </div>
+    </div>
+    <div class="container-max">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="footer-services m-t-2">
+                    <div class="services-payment m-b-1">
+                        <strong class="services-title">Zahlungsmethoden</strong>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/paypal.svg" class="img-fluid">
+                        </a>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/mastercard.svg" class="img-fluid">
+                        </a>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/sofort-ueberweisung.svg" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="services-shipping m-b-1">
+                        <strong class="services-title">Wir verschicken mit</strong>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/dhl.svg" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="services-certificate m-b-1">
+                        <strong class="services-title">Geprüfte Leistung</strong>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/ts-trustmark_220.png" class="img-fluid">
+                        </a>
+                        <a href="#">
+                            <img src="{{ plugin_path("PluginCallisto") }}/images/ekomi_standard_seal.png" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <hr class="m-y-2">
         <div class="row">
 
             {% for i in 1..numberOfCols %}
-                <div class="col-sm-6 col-md-4 col-lg-{{ colSize }}">
-                    <div class="footerLink">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <nav class="footer-column m-b-2">
                         <h5>{{ config('PluginCallisto.footer.col_' ~ i ~ '_title') }}</h5>
                         <ul class="list-unstyled">
 
@@ -47,71 +96,78 @@
                             {% endfor %}
 
                         </ul>
-                    </div>
+                    </nav>
                 </div>
             {% endfor %}
-
-            <div class="col-sm-6 col-md-12 col-lg-{{ colSize }}">
-                <div class="footerLink text-md-center text-lg-left">
-                    <h5>Social media</h5>
-                    <ul class="list-unstyled m-b-0">
-                        <div class="shariff socialbar m-t-0" data-services='["twitter","facebook","googleplus","pinterest"]' data-url="" style="" data-media-url=""></div>
-                    </ul>
+            <hr class="hidden-sm-up m-y-2">
+            <div class="col-xs-6 col-sm-3">
+                <div class="footer-column">
+                    <h5>Kontakt</h5>
+                    <p>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        Musterstraße 0, <br>12345 Ort
+                    </p>
+                    <p>
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        0000 123-4567
+                        <br>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        email@domain.de
+                        <br>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        Montag - Freitag, 00:00 - 24:00
+                    </p>
                 </div>
             </div>
-        </div>
-        <hr class="m-y-1">
-        <div class="row">
-            <div class="col-xs-12 col-sm-{{ paymentColunmSize }}">
-                <div class="row payment_line text-xs-center m-y-1">
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/paypal.svg" class="img-fluid"></a>
+            <hr class="col-xs-12 hidden-lg-up m-y-2">
+            <div class="col-sm-12 col-lg-3">
+                <div class="footer-column row">
+                    {% if showNewsletter == "true" %}
+                    <div class="col-xs-12 col-sm-6 col-lg-12">
+                        <div class="newsletter clearfix">
+                            <h5>{{ trans("PluginCallisto::Callisto.generalNewsletter") }}</h5>
+                            <p>{{ trans("PluginCallisto::Callisto.generalEnterEmail") }}</p>
+                            <form id="" action="" method="post">
+                                <div class="input-group">
+                                    <input name="" id="" class="form-control" type="email" placeholder="{{ trans("PluginCallisto::Callisto.generalYourEmail") }}">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-mail" type="submit">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <hr class="hidden-sm-down">
                     </div>
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/mastercard.svg" class="img-fluid"></a>
+                    {% endif %}
+                    
+                    {% if showNewsletter == "true" %}
+                    <div class="col-xs-12 col-sm-6 col-lg-12">
+                    {% else %}
+                    <div class="col-xs-12">
+                    {% endif %}
+                        <h5>Du findest uns auch auf</h5>
+                        <ul class="list-unstyled m-b-0">
+                            <div class="shariff socialbar" 
+                                data-services='["twitter","facebook","googleplus","pinterest", "youtube", "instagram"]' 
+                                data-url="" 
+                                data-media-url=""
+                                data-theme="minimal"></div>
+                        </ul>
                     </div>
 
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/sofort-ueberweisung.svg" class="img-fluid"></a>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#"><img src="{{ plugin_path("PluginCallisto") }}/images/dhl.svg" class="img-fluid"></a>
-                    </div>
                 </div>
+                
             </div>
-
-            {% if showNewsletter == "true" %}
-                <div class="col-xs-12 col-sm-5 border-left">
-                    <div class="newsletter clearfix">
-                        <hr class="hidden-sm-up">
-                        <h4>{{ trans("PluginCallisto::Callisto.generalNewsletter") }}</h4>
-                        <p>{{ trans("PluginCallisto::Callisto.generalEnterEmail") }}</p>
-                        <form id="" action="" method="post">
-                            <div class="input-group">
-                                <input name="" id="" class="form-control" type="email" placeholder="{{ trans("PluginCallisto::Callisto.generalYourEmail") }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn_mail" type="submit">
-                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            {% endif %}
         </div>
 
-        <hr class="m-t-1 m-b-0">
+        <hr class="m-b-0">
 
     </div>
 
     {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
-
-    <div class="col-xs-12 copyright clearfix m-y-1">
-        <p class="text-xs-center">&copy; Copyright 2016 | {{ trans("PluginCallisto::Callisto.generalAllRightsReserved") }} |
-            <a href="{{ services.category.getURL( cat ) }}">
-                {{ trans("PluginCallisto::Callisto.generalLegalDisclosure") }}
-            </a>
-        </p>
+    <div class="copyright text-xs-center m-y-1">
+        <small>&copy; Copyright 2016 | {{ trans("PluginCallisto::Callisto.generalAllRightsReserved") }}</small>
     </div>
 </div>

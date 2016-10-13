@@ -1,82 +1,71 @@
 .cmp-product-thumb{
     padding: .8rem;
-    border-bottom:2px solid $gray-lighter2;
     width: 100%;
-
     overflow: visible;
+    border: 1px solid $gray-lighter;
+    margin-bottom: $grid-gutter-width/2;
+
+    .thumb-background{
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        bottom: -2px;
+        left: -1px;
+        background-color: white;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        border: 1px solid transparent;
+
+        transform-origin: top right;
+        transform: scaleX(1) scaleY(1);
+
+        transition: all 200ms ease-in-out;
+    }
+
+    .thumb-extras{
+        display: none;
+        position: absolute; // remove from flow
+        top: 0;
+        left: 0;
+        width: 33.33%;
+        height: 100%;
+        overflow: hidden;
+
+        transition: height 100ms,
+                    transform 200ms 50ms;
+
+        ul{
+            @include reset-list();
+        }
+    }
+
+    .thumb-controls{
+        position: absolute;
+        width: calc(100% - 120px);
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        overflow: hidden;
+        transition: all 200ms 100ms ease-in-out;
+    }
 
     .thumb-inner{
         position: relative;
-        //border: 1px solid $gray-lighter;
-
-        display: flex;
-        flex-flow: row nowrap;
-
         height: 100%;
-
         transition: all 400ms;
     }
 
     .thumb-image{
         position: relative;
-        flex: 1 0 120px;
-        order: 2;
+        width: 120px;
+        display: inline-block;
+        vertical-align: top;
         cursor: pointer;
+    }
 
+    .main-image{
         @include img-contain();
-
-        &::before{
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            z-index: $zIndex-8;
-            opacity: 0;
-            background-color: rgba(0, 0, 0, .6);
-
-            transition: opacity 300ms,
-                        width 0ms 310ms,
-                        height 0ms 310ms;
-        }
-
-        &::after{
-            content: "DETAILS";
-            color: white;
-            font-weight: 700;
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: $zIndex-9;
-            opacity: 0;
-            visibility: hidden;
-            transform: translate(-50%, -50%);
-
-            transition: opacity 300ms,
-                        visibility 0ms 310ms,;
-        }
-
-        &:hover{
-
-            &::before{
-                width: 100%;
-                height: 100%;
-                opacity: 1;
-
-                transition: width 0ms,
-                            height 0ms,
-                            opacity 300ms 10ms;
-            }
-
-            &::after{
-                opacity: 1;
-                visibility: visible;
-                transition: visibility 0ms,
-                            opacity 300ms 100ms;
-            }
-        }
+        position: absolute;
+        background-color: white;
     }
 
     //TODO create separate mixin
@@ -87,125 +76,47 @@
         bottom: auto;
         left: 0;
 
-        padding: 1rem;
-        display: flex;
-
-        &.tl{
-
+        padding: .5rem;
+        
+        .special-tag,
+        .tag{
+            display: block;
+            padding: .3em .5em .2rem;
+            font-size: .9rem;
+            font-weight: 300;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,.4);
         }
-
-        &.tr{
-            top: 0;
-            right: 0;
-            left: auto;
-        }
-
-        &.bl{
-            top: auto;
-            right: auto;
-            bottom: 0;
-            left: 0;
-        }
-
-        &.br{
-            top: auto;
-            right: 0;
-            bottom: 0;
-            left: auto;
-        }
-
-        &.v{
-            flex-direction: column;
-
-            .special-tag{
-                margin-bottom: .5rem;
-            }
-        }
-
-        &.h{
-            .special-tag{
-                display: inline-block;
-                margin-right: 0;
-            }
-        }
-
-        .special-tag{
-            line-height: 1;
-            width: 3em;
-            height: 3em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
-
-            &:last-child{
-                margin: 0!important;
-            }
-        }
-    }
-
-    .square-container{
-        border-bottom: 1px solid $gray-lighter;
     }
 
     .thumb-content{
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: calc( 100% - 120px );
+        height: auto;
         padding: 0 .8rem;
-        height: 100%;
-        order: 3;
-        display: flex;
-        flex-flow: column nowrap;
+        margin-left: -.3em;
+        background-color: white;
+
+        transition: all 200ms ease-in-out;
     }
 
     .thumb-title{
+        display: block;
         position: relative;
-        display: flex;
-        order: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: 3em;
+        text-align:center;
         font-weight: 700;
-
-        &:after{
-            content: "…";
-            display: inline-block;
-            height: 50%;
-            position:absolute;
-            right: .25em;
-            bottom: 0;
-            background-color: white;
-        }
+        color: $gray;
     }
-
 
     .thumb-meta{
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: flex-end;
-
-        order:2;
-
-        flex: 1 0 auto;
-        flex-direction: column;
-    }
-
-    .prices{
-        width: 100%;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
         margin-top: .5rem;
-    }
-
-    .extras{
+        text-align:center;
 
     }
-
 
     .crossprice{
-        //line-height: 1;
-        font-size: .8em;
+        font-size: .81em;
         font-weight: 700;
         color: $gray-light;
     }
@@ -217,67 +128,95 @@
         font-size: 1.2rem;
     }
 
-    .thumb-controls{
-        margin-top: .5rem;
-        order: 3;
-        align-self: flex-end;
+    .thumb-buy{
+        display: block;
     }
-
 
     @include media-breakpoint-up(sm){
         padding: 0;
-        background-color: transparent;
-        border: 1px solid $gray-lighter2;
+        margin-bottom: $grid-gutter-width;
+        
 
-        .thumb-image{
-            flex: 1 0 200px;
-            max-width: 200px;
+        .thumb-background{
+            border: 1px solid $gray-lighter;
+            display: block;
+        }
+
+        .thumb-extras{
+            display: flex;
+            flex-flow: column nowrap;
+            border-right: 2px solid transparent;
+
+            ul{
+                flex: 1 1 auto;
+                overflow: auto;
+
+                li{
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+
+        .thumb-scroll-cmd {
+            flex: 0 0 auto;
+            text-align: center;
+            padding: .4rem;
+        }
+        
+        .thumb-controls{
+            left: 0;
+            width: 100%;
+            height: 0;
+        }
+
+        .thumb-btn-buy{
+            min-height: 2rem;
         }
 
         .thumb-content{
             padding: .8rem;
             width: 100%;
+            margin: 0;
         }
 
         .thumb-title{
-            max-height: none;
-            margin-bottom: 0;
             font-weight: 400;
 
-            &:after{
-                content: none;
-            }
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        &.grid{
+        .thumb-image{
+            width: 100%;
+        }
 
-            .thumb-meta{
-                flex-direction: row;
+        &:hover{
+            z-index: 3000;
+
+            .thumb-background{
+                transform: scaleX(1.33) scaleY(1.15);
+                box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
             }
 
-            .thumb-title{
-                max-height: 3em;
-                margin-bottom: .5rem;
-                font-weight: 700;
+            .thumb-extras{
+                transform: translate(-100% , 0);
+                height: 115%;
 
-                &:after{
-                    content: "…";
-                }
+                transition: transform 200ms,
+                            height 100ms 100ms;
             }
-
-            .thumb-inner{
-                flex-direction: column;
-            }
-
-            .thumb-image{
-                flex: 1 0 auto;
-                max-width: none;
-                width: 100%;
-            }
-
+            
             .thumb-controls{
-                width: 100%;
+                transform: translate(0 , 100%);
+                height: 15%;
             }
         }
+
+    }
+
+    @include media-breakpoint-up(md){
+
     }
 }
