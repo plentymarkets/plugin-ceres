@@ -10,14 +10,17 @@ vueApp = new Vue({
     function CallistoMain()
     {
 
-
-        $(window).scroll(function() {
-            if($( ".wrapper-main" ).hasClass( "isSticky" )) {
-                if ($(this).scrollTop() > 1){ 
-                    $('.wrapper-main').addClass("sticky");
+        $(window).scroll(function()
+        {
+            if ($(".wrapper-main").hasClass("isSticky"))
+            {
+                if ($(this).scrollTop() > 1)
+                {
+                    $(".wrapper-main").addClass("sticky");
                 }
-                else{
-                    $('.wrapper-main').removeClass("sticky");
+                else
+                {
+                    $(".wrapper-main").removeClass("sticky");
                 }
             }
         });
@@ -42,106 +45,20 @@ vueApp = new Vue({
         var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
         var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-<<<<<<< HEAD
         $toggleBasketPreview.on("click", function(evt)
         {
             evt.preventDefault();
             $("body").toggleClass("open-right");
-=======
-        var sync1 = $("#single-big-image");
-        var sync2 = $("#single-carousel");
-
-        sync1.owlCarousel({
-            singleItem: true,
-            slideSpeed: 1000,
-            navigation: true,
-            navigationText: [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination: false,
-            afterAction: syncPosition,
-            responsiveRefreshRate: 200,
         });
-
-        sync2.owlCarousel({
-            items: 8,
-            itemsDesktop: [1199, 8],
-            itemsDesktopSmall: [979, 8],
-            itemsTablet: [768, 6],
-            itemsMobile: [479, 4],
-            navigation: true,
-            navigationText: [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination: false,
-            responsiveRefreshRate: 100,
-            afterInit: function(el) {
-                el.find(".owl-item").eq(0).addClass("synced");
-            }
-        });
-
-        function syncPosition(el) {
-            var current = this.currentItem;
-            $("#single-carousel")
-                .find(".owl-item")
-                .removeClass("synced")
-                .eq(current)
-                .addClass("synced")
-            if ($("#single-carousel").data("owlCarousel") !== undefined) {
-                center(current)
-            }
-        }
-
-        $("#single-carousel").on("click", ".owl-item", function(e) {
-            e.preventDefault();
-            var number = $(this).data("owlItem");
-            sync1.trigger("owl.goTo", number);
-        });
-
-        function center(number) {
-            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-            var num = number;
-            var found = false;
-            for (var i in sync2visible) {
-                if (num === sync2visible[i]) {
-                    var found = true;
+        $(document).on("click", "body.open-right", function(evt)
+        {
+            if ($("body").hasClass("open-right"))
+            {
+                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                {
+                    evt.preventDefault();
+                    $("body").toggleClass("open-right");
                 }
-            }
-
-            if (found === false) {
-                if (num > sync2visible[sync2visible.length - 1]) {
-                    sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-                } else {
-                    if (num - 1 === -1) {
-                        num = 0;
-                    }
-                    sync2.trigger("owl.goTo", num);
-                }
-            } else if (num === sync2visible[sync2visible.length - 1]) {
-                sync2.trigger("owl.goTo", sync2visible[1])
-            } else if (num === sync2visible[0]) {
-                sync2.trigger("owl.goTo", num - 1)
-            }
-
-        }
-
-        var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
-
-        $toggleBasketPreview.on('click', function(evt) {
-            
-            evt.preventDefault();
-            evt.stopPropagation();
-            $('body').toggleClass('open-right');
->>>>>>> origin/master
-        });
-        $(document).on('click', 'body.open-right', function(evt) {
-            if($("body").hasClass("open-right")) {
-              if ((evt.target != $('.basket-preview')) && ($(evt.target).parents(".basket-preview").length <= 0)) {
-                  evt.preventDefault();
-                  $('body').toggleClass('open-right');
-              }
             }
         });
 
