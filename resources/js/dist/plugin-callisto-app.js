@@ -4293,21 +4293,6 @@ vueApp = new Vue({
     function CallistoMain()
     {
 
-        $(window).scroll(function()
-        {
-            if ($(".wrapper-main").hasClass("isSticky"))
-            {
-                if ($(this).scrollTop() > 1)
-                {
-                    $(".wrapper-main").addClass("sticky");
-                }
-                else
-                {
-                    $(".wrapper-main").removeClass("sticky");
-                }
-            }
-        });
-
         // Sticky sidebar single item
         if (window.matchMedia("(min-width: 768px)").matches)
         {
@@ -4333,26 +4318,15 @@ vueApp = new Vue({
             evt.preventDefault();
             $("body").toggleClass("open-right");
         });
-        $(document).on("click", "body.open-right", function(evt)
-        {
-            if ($("body").hasClass("open-right"))
-            {
-                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
-                {
-                    evt.preventDefault();
-                    $("body").toggleClass("open-right");
-                }
-            }
-        });
 
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();
 
-            // Toggle its own state
+            // toggle it's own state
             $toggleListView.toggleClass("grid");
 
-            // Toggle internal style of thumbs
+            // toggle internal style of thumbs
             $(".product-list, .cmp-product-thumb").toggleClass("grid");
         });
 

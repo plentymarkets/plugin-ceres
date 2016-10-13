@@ -66,7 +66,7 @@
 }
 
 
-#single-big-image {
+.owl-carousel-single {
     .owl-controls {
         position: absolute;
         top: 50%;
@@ -95,18 +95,17 @@
         }
     }
 }
-#single-carousel {
+.owl-carousel-preview {
     .owl-item {
         .owl_item{
             padding: 5px;
             margin:5px 0;
             cursor: pointer;
-        }
-        &.synced {
-            .owl_item {
+            &.synced {
                 background:$brand-primary;
             }
         }
+
     }
     .owl-controls {
             position: absolute;
