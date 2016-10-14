@@ -28,6 +28,10 @@ $spacers: (
     x: 0,
     y: 0
   ),
+  05: (
+    x: ($spacer-x * 0.5),
+    y: ($spacer-y * 0.5)
+  ),
   1: (
     x: $spacer-x,
     y: $spacer-y
@@ -67,7 +71,7 @@ $grid-gutter-width: 30px;
 //## Gray and brand colors for use across Bootstrap.
 
 
-$gray-darker:           #171f24;
+$gray-darker:           #282d2f;
 $gray-dark:             #4D4F4D;
 $gray:                  #7a7f7f;
 $gray-light:            #b2b1a7;
@@ -172,10 +176,11 @@ $blockquote-font-size:    ($font-size-base * 1.25);
 $blockquote-border-color: $gray-lighter;
 $blockquote-border-width: .25rem;
 
-$hr-border-color: rgba(0,0,0,.1);
+$hr-border-color: $gray-lighter;
+$hr-border-dark-color: $gray-dark;
 $hr-border-width: $border-width;
-$hr-margin-top: .5rem;
-$hr-margin-bottom: .5rem;
+$hr-margin-top: 1rem;
+$hr-margin-bottom: 1rem;
 
 $mark-padding: .2em;
 

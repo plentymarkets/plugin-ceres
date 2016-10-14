@@ -1,0 +1,250 @@
+/// Element group with fixed aspect ration 1x1
+///
+/// @author Bruno Fenzl
+///
+/// @example scss - Basic Usage HTML
+///     <div class="square-container">
+///         <div class="square-inner">
+///             Content here
+///         </div>
+///     </div>
+///
+@mixin square-container(){
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
+
+    .square-inner{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.square-container{
+    @include square-container()
+}
+
+/// Class for centering direct single child.
+///
+/// @author Bruno Fenzl
+///
+/// @example scss - Basic Usage HTML
+///     <div class="center-xy">
+///         content to be centered
+///     </div>
+@mixin center-xy(){
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center; // center on the x axys
+
+    img{
+        align-self: center; // center on the y axys
+    }
+}
+
+.center-xy{
+    @include center-xy();
+}
+
+/// Element group for star rating
+///
+/// @author Bruno Fenzl
+///
+/// @param {color} $default-color [$gray-lighter] Normal color of the star. Defaults to the Bootstrap var $gray-lighter.
+/// @param {color} $selected-color [#FFD700] Selected color of the star. Defaults to #FFD700.
+/// @param {color} $hover-color [#FFED85] Hover color of the star. Defaults to #FFED85.
+///
+/// @example css - Basic Usage HTML
+///     <fieldset class="star-rating">
+///         <input type="radio" id="star5" name="rating" value="5" />
+///             <label for="star5" title="5 Stars"></label>
+///         <input type="radio" id="star4-5" name="rating" value="4.5" />
+///             <label for="star4-5" title="4.5 Stars"></label>
+///         <input type="radio" id="star4" name="rating" value="4" />
+///             <label for="star4" title="4 Stars"></label>
+///         <input type="radio" id="star3-5" name="rating" value="3.5" />
+///             <label for="star3-5" title="3.5 Stars"></label>
+///         <input type="radio" id="star3" name="rating" value="3" />
+///             <label for="star3" title="3 Stars"></label>
+///         <input type="radio" id="star2-5" name="rating" value="2.5" />
+///             <label for="star2-5" title="2.5 Stars"></label>
+///         <input type="radio" id="star2" name="rating" value="2" />
+///             <label for="star2" title="2 Stars"></label>
+///         <input type="radio" id="star1-5" name="rating" value="1.5" />
+///             <label for="star1-5" title="1.5 Stars"></label>
+///         <input type="radio" id="star1" name="rating" value="1" />
+///             <label for="star1" title="1 Star"></label>
+///         <input type="radio" id="star0-5" name="rating" value="0.5" />
+///             <label for="star0-5" title="0.5 Star"></label>
+///     </fieldset>
+@mixin star-rating( $default-color: $gray-lighter, $selected-color: #FFD700, $hover-color: #FFED85){
+    border: none;
+    @include clearfix();
+
+    &>input {
+        display: none;
+    }
+
+    &>label{
+        margin: 0;
+        padding: 0;
+        color: $gray-lighter;
+        float: right;
+
+        &:before{
+            content: "\f005";
+            font-family: FontAwesome;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin: 0 .25em;
+        }
+
+        &:nth-of-type(even){
+            &:before{
+                content: "\f089";
+                position: absolute;
+            }
+        }
+    }
+
+    &>input:checked ~ label, /* show gold star when clicked */
+    &:not(:checked) > label:hover, /* hover current star */
+    &:not(:checked) > label:hover ~ label { /* hover previous stars in list */
+        color: #FFD700;
+    }
+
+    & > input:checked + label:hover, /* hover current star when changing rating */
+    & > input:checked ~ label:hover,
+    & > label:hover ~ input:checked ~ label, /* lighten current selection */
+    & > input:checked ~ label:hover ~ label {
+        color: #FFED85;
+    }
+
+    .rate-link{
+        float:right;
+        margin-left: .25em;
+    }
+}
+
+.star-rating{
+    @include star-rating();
+}
+
+
+
+
+/// mimics the image-background: cover; behaviour but with img element
+///
+/// @author Bruno Fenzl
+///
+/// @example scss - Basic Usage HTML
+///     <div class="img-cover-container">
+///         img class="" src="">
+///     </div>
+@mixin img-cover{
+    position: relative;
+    overflow: hidden;
+
+    &>img{
+        position: absolute;
+        top: -9999px;
+        right: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        margin: auto;
+        min-width: 100%;
+        min-height: 100%;
+    }
+}
+
+.img-cover-container{
+    @include img-cover();
+}
+
+
+/// mimics the image-background: contain; behaviour but with img element
+///
+/// @author Bruno Fenzl
+///
+/// @example scss - Basic Usage HTML
+///     <div class="img-contain-container">
+///         img src="">
+///     </div>
+
+@mixin img-contain{
+    position: relative;
+    overflow: hidden;
+
+    &>img{
+        position: absolute;
+        top: -9999px;
+        right: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+
+}
+
+.img-contain-container{
+    @include img-contain();
+}
+
+
+
+@mixin pipe($color:$gray-light){
+    height: 1em;
+    border-left: 1px solid $color;
+    margin: 0 .45em 0 .25em;
+}
+
+.pipe{
+    @include pipe();
+}
+
+
+
+@mixin reset-list(){
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin rainbow-li($r, $g, $b, $steps){
+    $step : $steps;
+    $child : 1;
+    @while $step >= 1 {
+        $amount : $step/$steps;
+
+        li:nth-child(#{$child}) .breadcrumb-item:not(.active),
+        li:nth-child(#{$child}) .breadcrumb-item:not(.active) {
+            background-color: rgba($r, $g, $b, $amount);
+
+            &::after { border-left-color : rgba($r, $g, $b, $amount); }
+
+            &:hover {
+                &::after { border-left-color : black!important; }
+            }
+        }
+        $child : $child + 1;
+        $step  : $step - 1;
+    }
+}
+
+@mixin triangle-right($color, $w, $h){
+    width: 0;
+    height: 0;
+    border-top: $w solid transparent;
+    border-left: $h solid $color;
+    border-bottom: $w solid transparent;
+}

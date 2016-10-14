@@ -1,4 +1,4 @@
-.totop {
+.to-top {
     display: block;
     height: 4rem;
     background-color: $gray-dark;
@@ -17,154 +17,73 @@
 .footertop{
 	display: block;
 	background-color: $gray-lighter;
- }
-
+}
 
 .footer{
 	display: block;
-	background-color: $gray-darker;
+	background-color: $gray-lightest;
+	
+	a{
+		color: $gray-dark;
+	}
 
-	.footerLink{
-		text-align: center;
-		margin-bottom: 1rem;
+	.footer-features{
+		border-top: 1px solid $gray-lighter;
+		background-color: white;
+		color: $gray-dark;
+	}
+
+	.footer-content{
+
+	}
+
+	.footer-services{
+		display: flex;
+		flex-flow: column nowrap;
+		
+		.services-payment,
+		.services-shipping,
+		.services-certificate{
+			display: inline-block;
+			display: inline-flex;
+			flex-flow: row wrap;
+			flex: 0 1 auto;
+		}
+
+		.services-certificate{
+			flex: 1 0 auto;
+		}
+
+		.services-title{
+			width: 100%;
+		}
+
+		a{
+			flex: 1 1 auto;
+			display: inline-block;
+			max-width: 5rem;
+    		margin-right: .5rem;
+		}
+
+		img{
+			max-height: 4rem;
+		}
+	}
+
+	.footer-column{
 
 		h5{
-			color: white;
-			text-transform: uppercase;
-			margin-bottom: 1rem;
-		}
-
-		ul{
-			li{
-				color:$gray-lighter;
-				font-size: $font-size-sm;
-				line-height: 22px;
-				
-				a{
-					color: $gray-lighter;
-					&:hover{
-						color: $gray;
-					}
-				}
-			}
-		}
-
-		p {
-			color:$gray-lighter;
-			font-size: $font-size-sm;
-			line-height: 22px;
-			margin-bottom: 0;
-			
-			a{
-				color: $gray-lighter;
-				
-				&:hover{
-					color: $gray;
-				}
-			}
-			
-			i {
-				width:15px;
-			}
+			font-weight: 700;
 		}
 	}
-
 
 	.newsletter{
-		h4, p{
-			color: white;
-			margin-bottom: .5rem;
-		}
-
-		p{
-			@extend .small;
-		}
-	}
-
-}
-
-.copyright{	
-	p{
-		color: $gray-lighter;
-		margin-bottom: 0;
-		font-size: $font-size-sm;
 		
-		a {
-			color:$gray-lighter;
-			&:hover {
-			color: $gray;
-			}
-		}	
 	}
-}
 
-
-.footerLink {
-	.shariff {
-	.orientation-vertical {
-		text-align: center;
-	}
-		ul {
-			.shariff-button {
-				a {
-					background-color: $gray-lighter;
-					color:$gray-darker;
-					padding:0 .2rem;
-
-					&:hover {					
-						color:white;
-						transition: opacity 0.5s ease;
-					}
-				}
-			}
-			.twitter {
-				a {
-					&:hover {
-						background-color: #55acee;			
-					}
-				}
-			}
-			.facebook {
-				a {
-					&:hover {
-						background-color: #3b5998;
-					}
-				}
-			}
-			.googleplus {
-				a {
-					&:hover {
-						background-color: #d34836;
-					}
-				}
-			}
-			.pinterest {
-				a {
-					&:hover {
-						background-color: #bd081c;
-					}
-				}
-			}
-		}
-	}
-}
-
-.payment_line {
-	div {
-		filter: grayscale(.9);
-		
-		&:hover {
-			transition: opacity 0.5s ease;
-			filter: grayscale(0);
-		}		
-	}
-}
-
-	.btn_mail {
+	.btn-mail {
 	    background-color: $gray;
 	    color: white;
-	    //border: none;
-	    //line-height: 1.3;
 
 		i {
 	    	padding: 0 1rem;
@@ -172,39 +91,12 @@
 
 		&:hover {
 			background-color: $gray-light;
-		    //border:none;
 		}
 	}
 
-	// .newsletter {
-	// 	.form-control {
-	// 		font-size: .8rem;
-	// 		padding: .65rem;
-	// 	}
-	// }
-
-
 	@include media-breakpoint-up(sm){
-		.footerLink{
-			text-align: left;
-			margin-bottom: 0;
-		}
-
-		.shariff {
-			.orientation-horizontal {
-				li {
-					margin-right: 1.8%;
-					margin-bottom: 1.8%;
-				    width: 80px;
-				    flex: none;
-
-					.fa {
-					    width: 25px;
-					    line-height: 30px;
-					    text-align: center;
-					}
-				}
-			}
+		.footer-services{
+			flex-flow: row nowrap;
 		}
 	}
 
@@ -215,35 +107,4 @@
 	@include media-breakpoint-up(lg){
 
 	}
-
-
-	// @include media-breakpoint-down(sm){	
-	// 	.shariff {
-	// 		.orientation-horizontal {
-	// 			li {
-	// 				width: 55px;
-	// 			}
-	// 		}
-	// 	}
-
-	// 	.payment_line .img-fluid {
-	// 	    margin: 0 auto;
-	// 	}	
-	// }
-
-	// @include media-breakpoint-down(md){
-	// 	.shariff {
-	// 		width: 340px;
-	// 	    overflow: auto;
-	// 	    margin-top: 10px;
-	// 	    display: inline-block;
-	// 	}	
-	// }
-	
-	
-	
-// @include media-breakpoint-only(xs) { 
-// 	.shariff {
-// 		width: 245px;
-// 	}
-// }
+}
