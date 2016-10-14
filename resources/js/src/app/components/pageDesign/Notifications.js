@@ -7,8 +7,19 @@ Vue.component("notifications", {
     data: function()
     {
         return {
-            notifications: NotificationService.getNotifications().all()
+            notifications: []
         };
+    },
+
+    ready: function()
+    {
+        var self = this;
+
+        NotificationService.listen(
+            function(notifications)
+            {
+                self.$set("notifications", notifications);
+            });
     },
 
     methods : {
