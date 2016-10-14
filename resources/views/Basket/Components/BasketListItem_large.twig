@@ -67,7 +67,7 @@
                 {!! basketItem.variation.itemDescription.description !!}
             </p>
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }"></label>
+        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCallisto::Callisto.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Callisto.itemShowLess") }}"></label>
     </div>
     <!-- ./ITEM DETAILS -->
 </article>
