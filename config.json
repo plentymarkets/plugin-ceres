@@ -322,7 +322,7 @@
             "itemProducerName_asc"              : "Variation custom number (ascending)",
             "itemProducerName_desc"             : "Variation custom number (descending)"
         },
-        "default"                   : "itemName_asc,itemName_desc,itemPrice_asc,itemPrice_desc,itemRating_desc,itemRand"
+        "default"                   : "itemName_asc, itemName_desc, itemPrice_asc, itemPrice_desc, itemRating_desc, itemRand"
     },
     {
         "tab"                       : "Pagination and sorting",
