@@ -9814,7 +9814,7 @@ return jQuery;
 }));
 
 /*!
- * Vue.js v1.0.26
+ * Vue.js v1.0.24
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -10217,15 +10217,10 @@ return jQuery;
 
   // UA sniffing for working around browser-specific quirks
   var UA = inBrowser && window.navigator.userAgent.toLowerCase();
-  var isIE = UA && UA.indexOf('trident') > 0;
   var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
   var isAndroid = UA && UA.indexOf('android') > 0;
   var isIos = UA && /(iphone|ipad|ipod|ios)/i.test(UA);
-  var iosVersionMatch = isIos && UA.match(/os ([\d_]+)/);
-  var iosVersion = iosVersionMatch && iosVersionMatch[1].split('_');
-
-  // detecting iOS UIWebView by indexedDB
-  var hasMutationObserverBug = iosVersion && Number(iosVersion[0]) >= 9 && Number(iosVersion[1]) >= 3 && !window.indexedDB;
+  var isWechat = UA && UA.indexOf('micromessenger') > 0;
 
   var transitionProp = undefined;
   var transitionEndEvent = undefined;
@@ -10266,7 +10261,7 @@ return jQuery;
     }
 
     /* istanbul ignore if */
-    if (typeof MutationObserver !== 'undefined' && !hasMutationObserverBug) {
+    if (typeof MutationObserver !== 'undefined' && !(isWechat && isIos)) {
       var counter = 1;
       var observer = new MutationObserver(nextTickHandler);
       var textNode = document.createTextNode(counter);
@@ -10338,12 +10333,12 @@ return jQuery;
 
   p.put = function (key, value) {
     var removed;
+    if (this.size === this.limit) {
+      removed = this.shift();
+    }
 
     var entry = this.get(key, true);
     if (!entry) {
-      if (this.size === this.limit) {
-        removed = this.shift();
-      }
       entry = {
         key: key
       };
@@ -10588,7 +10583,7 @@ var directive = Object.freeze({
     var unsafeOpen = escapeRegex(config.unsafeDelimiters[0]);
     var unsafeClose = escapeRegex(config.unsafeDelimiters[1]);
     tagRE = new RegExp(unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '|' + open + '((?:.|\\n)+?)' + close, 'g');
-    htmlRE = new RegExp('^' + unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '$');
+    htmlRE = new RegExp('^' + unsafeOpen + '.*' + unsafeClose + '$');
     // reset cache
     cache = new Cache(1000);
   }
@@ -11375,8 +11370,7 @@ var transition = Object.freeze({
         return (/HTMLUnknownElement/.test(el.toString()) &&
           // Chrome returns unknown for several HTML5 elements.
           // https://code.google.com/p/chromium/issues/detail?id=540526
-          // Firefox returns unknown for some "Interactive elements."
-          !/^(data|time|rtc|rb|details|dialog|summary)$/.test(tag)
+          !/^(data|time|rtc|rb)$/.test(tag)
         );
       }
     };
@@ -11712,9 +11706,7 @@ var transition = Object.freeze({
     }
     if (child.mixins) {
       for (var i = 0, l = child.mixins.length; i < l; i++) {
-        var mixin = child.mixins[i];
-        var mixinOptions = mixin.prototype instanceof Vue ? mixin.options : mixin;
-        parent = mergeOptions(parent, mixinOptions, vm);
+        parent = mergeOptions(parent, child.mixins[i], vm);
       }
     }
     for (key in parent) {
@@ -12142,13 +12134,10 @@ var transition = Object.freeze({
   	hasProto: hasProto,
   	inBrowser: inBrowser,
   	devtools: devtools,
-  	isIE: isIE,
   	isIE9: isIE9,
   	isAndroid: isAndroid,
   	isIos: isIos,
-  	iosVersionMatch: iosVersionMatch,
-  	iosVersion: iosVersion,
-  	hasMutationObserverBug: hasMutationObserverBug,
+  	isWechat: isWechat,
   	get transitionProp () { return transitionProp; },
   	get transitionEndEvent () { return transitionEndEvent; },
   	get animationProp () { return animationProp; },
@@ -12636,9 +12625,7 @@ var path = Object.freeze({
   var restoreRE = /"(\d+)"/g;
   var pathTestRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
   var identRE = /[^\w$\.](?:[A-Za-z_$][\w$]*)/g;
-  var literalValueRE$1 = /^(?:true|false|null|undefined|Infinity|NaN)$/;
-
-  function noop() {}
+  var booleanLiteralRE = /^(?:true|false)$/;
 
   /**
    * Save / Rewrite / Restore
@@ -12720,7 +12707,7 @@ var path = Object.freeze({
     // save strings and object literal keys
     var body = exp.replace(saveRE, save).replace(wsRE, '');
     // rewrite all paths
-    // pad 1 space here because the regex matches 1 extra char
+    // pad 1 space here becaue the regex matches 1 extra char
     body = (' ' + body).replace(identRE, rewrite).replace(restoreRE, restore);
     return makeGetterFn(body);
   }
@@ -12741,15 +12728,7 @@ var path = Object.freeze({
       return new Function('scope', 'return ' + body + ';');
       /* eslint-enable no-new-func */
     } catch (e) {
-      if ('development' !== 'production') {
-        /* istanbul ignore if */
-        if (e.toString().match(/unsafe-eval|CSP/)) {
-          warn('It seems you are using the default build of Vue.js in an environment ' + 'with Content Security Policy that prohibits unsafe-eval. ' + 'Use the CSP-compliant build instead: ' + 'http://vuejs.org/guide/installation.html#CSP-compliant-build');
-        } else {
-          warn('Invalid expression. ' + 'Generated function body: ' + body);
-        }
-      }
-      return noop;
+      'development' !== 'production' && warn('Invalid expression. ' + 'Generated function body: ' + body);
     }
   }
 
@@ -12811,8 +12790,8 @@ var path = Object.freeze({
 
   function isSimplePath(exp) {
     return pathTestRE.test(exp) &&
-    // don't treat literal values as paths
-    !literalValueRE$1.test(exp) &&
+    // don't treat true/false as paths
+    !booleanLiteralRE.test(exp) &&
     // Math constants e.g. Math.PI, Math.E etc.
     exp.slice(0, 5) !== 'Math.';
   }
@@ -13228,7 +13207,7 @@ var expression = Object.freeze({
     }
     var isA = isArray(val);
     var isO = isObject(val);
-    if ((isA || isO) && Object.isExtensible(val)) {
+    if (isA || isO) {
       if (val.__ob__) {
         var depId = val.__ob__.dep.id;
         if (seen.has(depId)) {
@@ -13291,7 +13270,6 @@ var expression = Object.freeze({
 
   var tagRE$1 = /<([\w:-]+)/;
   var entityRE = /&#?\w+?;/;
-  var commentRE = /<!--/;
 
   /**
    * Convert a string template to a DocumentFragment.
@@ -13314,9 +13292,8 @@ var expression = Object.freeze({
     var frag = document.createDocumentFragment();
     var tagMatch = templateString.match(tagRE$1);
     var entityMatch = entityRE.test(templateString);
-    var commentMatch = commentRE.test(templateString);
 
-    if (!tagMatch && !entityMatch && !commentMatch) {
+    if (!tagMatch && !entityMatch) {
       // text only, return a single text node.
       frag.appendChild(document.createTextNode(templateString));
     } else {
@@ -14283,7 +14260,7 @@ var template = Object.freeze({
      * the filters. This is passed to and called by the watcher.
      *
      * It is necessary for this to be called during the
-     * watcher's dependency collection phase because we want
+     * wathcer's dependency collection phase because we want
      * the v-for to update when the source Object is mutated.
      */
 
@@ -14626,10 +14603,7 @@ var template = Object.freeze({
     },
 
     update: function update(value) {
-      // #3029 only update when the value changes. This prevent
-      // browsers from overwriting values like selectionStart
-      value = _toString(value);
-      if (value !== this.el.value) this.el.value = value;
+      this.el.value = _toString(value);
     },
 
     unbind: function unbind() {
@@ -14678,8 +14652,6 @@ var template = Object.freeze({
   var select = {
 
     bind: function bind() {
-      var _this = this;
-
       var self = this;
       var el = this.el;
 
@@ -14711,12 +14683,7 @@ var template = Object.freeze({
       // selectedIndex with value -1 to 0 when the element
       // is appended to a new parent, therefore we have to
       // force a DOM update whenever that happens...
-      this.vm.$on('hook:attached', function () {
-        nextTick(_this.forceUpdate);
-      });
-      if (!inDoc(el)) {
-        nextTick(this.forceUpdate);
-      }
+      this.vm.$on('hook:attached', this.forceUpdate);
     },
 
     update: function update(value) {
@@ -15986,7 +15953,7 @@ var template = Object.freeze({
     if (value === undefined) {
       value = getPropDefaultValue(vm, prop);
     }
-    value = coerceProp(prop, value, vm);
+    value = coerceProp(prop, value);
     var coerced = value !== rawValue;
     if (!assertProp(prop, value, vm)) {
       value = undefined;
@@ -16105,17 +16072,13 @@ var template = Object.freeze({
    * @return {*}
    */
 
-  function coerceProp(prop, value, vm) {
+  function coerceProp(prop, value) {
     var coerce = prop.options.coerce;
     if (!coerce) {
       return value;
     }
-    if (typeof coerce === 'function') {
-      return coerce(value);
-    } else {
-      'development' !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
-      return value;
-    }
+    // coerce is a function
+    return coerce(value);
   }
 
   /**
@@ -16647,9 +16610,10 @@ var template = Object.freeze({
       // resolve on owner vm
       var hooks = resolveAsset(this.vm.$options, 'transitions', id);
       id = id || 'v';
-      oldId = oldId || 'v';
       el.__v_trans = new Transition(el, id, hooks, this.vm);
-      removeClass(el, oldId + '-transition');
+      if (oldId) {
+        removeClass(el, oldId + '-transition');
+      }
       addClass(el, id + '-transition');
     }
   };
@@ -17067,7 +17031,7 @@ var template = Object.freeze({
             if (token.html) {
               replace(node, parseTemplate(value, true));
             } else {
-              node.data = _toString(value);
+              node.data = value;
             }
           } else {
             vm._bindDir(token.descriptor, node, host, scope);
@@ -18051,7 +18015,7 @@ var template = Object.freeze({
     };
   }
 
-  function noop$1() {}
+  function noop() {}
 
   /**
    * A directive links a DOM element with a piece of data,
@@ -18150,7 +18114,7 @@ var template = Object.freeze({
           }
         };
       } else {
-        this._update = noop$1;
+        this._update = noop;
       }
       var preProcess = this._preProcess ? bind(this._preProcess, this) : null;
       var postProcess = this._postProcess ? bind(this._postProcess, this) : null;
@@ -19588,7 +19552,7 @@ var template = Object.freeze({
 
     json: {
       read: function read(value, indent) {
-        return typeof value === 'string' ? value : JSON.stringify(value, null, arguments.length > 1 ? indent : 2);
+        return typeof value === 'string' ? value : JSON.stringify(value, null, Number(indent) || 2);
       },
       write: function write(value) {
         try {
@@ -19661,13 +19625,7 @@ var template = Object.freeze({
 
     pluralize: function pluralize(value) {
       var args = toArray(arguments, 1);
-      var length = args.length;
-      if (length > 1) {
-        var index = value % 10 - 1;
-        return index in args ? args[index] : args[length - 1];
-      } else {
-        return args[0] + (value === 1 ? '' : 's');
-      }
+      return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
     },
 
     /**
@@ -19852,9 +19810,7 @@ var template = Object.freeze({
             }
           }
           if (type === 'component' && isPlainObject(definition)) {
-            if (!definition.name) {
-              definition.name = id;
-            }
+            definition.name = id;
             definition = Vue.extend(definition);
           }
           this.options[type + 's'][id] = definition;
@@ -19869,7 +19825,7 @@ var template = Object.freeze({
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.26';
+  Vue.version = '1.0.24';
 
   // devtools global hook
   /* istanbul ignore next */
@@ -19886,7 +19842,7 @@ var template = Object.freeze({
   return Vue;
 
 }));
-/*! tether 1.3.6 */
+/*! tether 1.3.1 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -19910,32 +19866,6 @@ if (typeof TetherBase === 'undefined') {
 }
 
 var zeroElement = null;
-
-// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
-// if the element lies within a nested document (<frame> or <iframe>-like).
-function getActualBoundingClientRect(node) {
-  var boundingRect = node.getBoundingClientRect();
-
-  // The original object returned by getBoundingClientRect is immutable, so we clone it
-  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
-  var rect = {};
-  for (var k in boundingRect) {
-    rect[k] = boundingRect[k];
-  }
-
-  if (node.ownerDocument !== document) {
-    var _frameElement = node.ownerDocument.defaultView.frameElement;
-    if (_frameElement) {
-      var frameRect = getActualBoundingClientRect(_frameElement);
-      rect.top += frameRect.top;
-      rect.bottom += frameRect.top;
-      rect.left += frameRect.left;
-      rect.right += frameRect.left;
-    }
-  }
-
-  return rect;
-}
 
 function getScrollParents(el) {
   // In firefox if the el is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -19972,13 +19902,7 @@ function getScrollParents(el) {
     }
   }
 
-  parents.push(el.ownerDocument.body);
-
-  // If the node is within a frame, account for the parent window scroll
-  if (el.ownerDocument !== document) {
-    parents.push(el.ownerDocument.defaultView);
-  }
-
+  parents.push(document.body);
   return parents;
 }
 
@@ -20012,7 +19936,13 @@ var getOrigin = function getOrigin() {
 
   var id = node.getAttribute('data-tether-id');
   if (typeof zeroPosCache[id] === 'undefined') {
-    zeroPosCache[id] = getActualBoundingClientRect(node);
+    zeroPosCache[id] = {};
+
+    var rect = node.getBoundingClientRect();
+    for (var k in rect) {
+      // Can't use extend, as on IE9, elements don't resolve to be hasOwnProperty
+      zeroPosCache[id][k] = rect[k];
+    }
 
     // Clear the cache when this position call is done
     defer(function () {
@@ -20041,7 +19971,13 @@ function getBounds(el) {
 
   var docEl = doc.documentElement;
 
-  var box = getActualBoundingClientRect(el);
+  var box = {};
+  // The original object returned by getBoundingClientRect is immutable, so we clone it
+  // We can't use extend because the properties are not considered part of the object by hasOwnProperty in IE9
+  var rect = el.getBoundingClientRect();
+  for (var k in rect) {
+    box[k] = rect[k];
+  }
 
   var origin = getOrigin();
 
@@ -20160,9 +20096,7 @@ function hasClass(el, name) {
 }
 
 function getClassName(el) {
-  // Can't use just SVGAnimatedString here since nodes within a Frame in IE have
-  // completely separately SVGAnimatedString base classes
-  if (el.className instanceof el.ownerDocument.defaultView.SVGAnimatedString) {
+  if (el.className instanceof SVGAnimatedString) {
     return el.className.baseVal;
   }
   return el.className;
@@ -20227,7 +20161,7 @@ var Evented = (function () {
   }, {
     key: 'off',
     value: function off(event, handler) {
-      if (typeof this.bindings === 'undefined' || typeof this.bindings[event] === 'undefined') {
+      if (typeof this.bindings !== 'undefined' && typeof this.bindings[event] !== 'undefined') {
         return;
       }
 
@@ -20281,7 +20215,6 @@ var Evented = (function () {
 })();
 
 TetherBase.Utils = {
-  getActualBoundingClientRect: getActualBoundingClientRect,
   getScrollParents: getScrollParents,
   getBounds: getBounds,
   getOffsetParent: getOffsetParent,
@@ -20340,7 +20273,7 @@ var transformKey = (function () {
   }
   var el = document.createElement('div');
 
-  var transforms = ['transform', 'WebkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
+  var transforms = ['transform', 'webkitTransform', 'OTransform', 'MozTransform', 'msTransform'];
   for (var i = 0; i < transforms.length; ++i) {
     var key = transforms[i];
     if (el.style[key] !== undefined) {
@@ -20739,7 +20672,7 @@ var TetherClass = (function (_Evented) {
       this.enabled = true;
 
       this.scrollParents.forEach(function (parent) {
-        if (parent !== _this3.target.ownerDocument) {
+        if (parent !== document) {
           parent.addEventListener('scroll', _this3.position);
         }
       });
@@ -20939,24 +20872,21 @@ var TetherClass = (function (_Evented) {
         }
       };
 
-      var doc = this.target.ownerDocument;
-      var win = doc.defaultView;
-
       var scrollbarSize = undefined;
-      if (win.innerHeight > doc.documentElement.clientHeight) {
+      if (document.body.scrollWidth > window.innerWidth) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.bottom -= scrollbarSize.height;
       }
 
-      if (win.innerWidth > doc.documentElement.clientWidth) {
+      if (document.body.scrollHeight > window.innerHeight) {
         scrollbarSize = this.cache('scrollbar-size', getScrollBarSize);
         next.viewport.right -= scrollbarSize.width;
       }
 
-      if (['', 'static'].indexOf(doc.body.style.position) === -1 || ['', 'static'].indexOf(doc.body.parentElement.style.position) === -1) {
+      if (['', 'static'].indexOf(document.body.style.position) === -1 || ['', 'static'].indexOf(document.body.parentElement.style.position) === -1) {
         // Absolute positioning in the body will be relative to the page, not the 'initial containing block'
-        next.page.bottom = doc.body.scrollHeight - top - height;
-        next.page.right = doc.body.scrollWidth - left - width;
+        next.page.bottom = document.body.scrollHeight - top - height;
+        next.page.right = document.body.scrollWidth - left - width;
       }
 
       if (typeof this.options.optimizations !== 'undefined' && this.options.optimizations.moveElement !== false && !(typeof this.targetModifier !== 'undefined')) {
@@ -20975,8 +20905,8 @@ var TetherClass = (function (_Evented) {
             offsetBorder[side.toLowerCase()] = parseFloat(offsetParentStyle['border' + side + 'Width']);
           });
 
-          offsetPosition.right = doc.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
-          offsetPosition.bottom = doc.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
+          offsetPosition.right = document.body.scrollWidth - offsetPosition.left - offsetParentSize.width + offsetBorder.right;
+          offsetPosition.bottom = document.body.scrollHeight - offsetPosition.top - offsetParentSize.height + offsetBorder.bottom;
 
           if (next.page.top >= offsetPosition.top + offsetBorder.top && next.page.bottom >= offsetPosition.bottom) {
             if (next.page.left >= offsetPosition.left + offsetBorder.left && next.page.right >= offsetPosition.right) {
@@ -21069,16 +20999,7 @@ var TetherClass = (function (_Evented) {
             xPos = -_pos.right;
           }
 
-          if (window.matchMedia) {
-            // HubSpot/tether#207
-            var retina = window.matchMedia('only screen and (min-resolution: 1.3dppx)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches;
-            if (!retina) {
-              xPos = Math.round(xPos);
-              yPos = Math.round(yPos);
-            }
-          }
-
-          css[transformKey] = 'translateX(' + xPos + 'px) translateY(' + yPos + 'px)';
+          css[transformKey] = 'translateX(' + Math.round(xPos) + 'px) translateY(' + Math.round(yPos) + 'px)';
 
           if (transformKey !== 'msTransform') {
             // The Z transform will keep this in the GPU (faster, and prevents artifacts),
@@ -21143,7 +21064,7 @@ var TetherClass = (function (_Evented) {
 
         if (!offsetParentIsBody) {
           this.element.parentNode.removeChild(this.element);
-          this.element.ownerDocument.body.appendChild(this.element);
+          document.body.appendChild(this.element);
         }
       }
 
@@ -21163,7 +21084,6 @@ var TetherClass = (function (_Evented) {
       if (write) {
         defer(function () {
           extend(_this8.element.style, writeCSS);
-          _this8.trigger('repositioned');
         });
       }
     }
@@ -21204,21 +21124,11 @@ function getBoundingRect(tether, to) {
 
   if (typeof to.nodeType !== 'undefined') {
     (function () {
-      var node = to;
       var size = getBounds(to);
       var pos = size;
       var style = getComputedStyle(to);
 
       to = [pos.left, pos.top, size.width + pos.left, size.height + pos.top];
-
-      // Account any parent Frames scroll offset
-      if (node.ownerDocument !== document) {
-        var win = node.ownerDocument.defaultView;
-        to[0] += win.pageXOffset;
-        to[1] += win.pageYOffset;
-        to[2] += win.pageXOffset;
-        to[3] += win.pageYOffset;
-      }
 
       BOUNDS_FORMAT.forEach(function (side, i) {
         side = side[0].toUpperCase() + side.substr(1);
@@ -27656,7 +27566,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ResourceService":45}],3:[function(require,module,exports){
+},{"services/ResourceService":44}],3:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
@@ -27696,7 +27606,7 @@ Vue.component("basket-totals", {
     }
 });
 
-},{"services/ResourceService":45}],4:[function(require,module,exports){
+},{"services/ResourceService":44}],4:[function(require,module,exports){
 Vue.component("coupon", {
 
     template: "#vue-coupon"
@@ -27731,7 +27641,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{"services/ResourceService":45}],6:[function(require,module,exports){
+},{"services/ResourceService":44}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list-item", {
@@ -27825,7 +27735,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ResourceService":45}],7:[function(require,module,exports){
+},{"services/ResourceService":44}],7:[function(require,module,exports){
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
@@ -28114,7 +28024,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/ModalService":43}],11:[function(require,module,exports){
+},{"services/ModalService":42}],11:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -28205,7 +28115,7 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":39,"services/ValidationService":46}],12:[function(require,module,exports){
+},{"services/AddressService":38,"services/ValidationService":45}],12:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("invoice-address-select", {
@@ -28243,7 +28153,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{"services/CheckoutService":41}],13:[function(require,module,exports){
+},{"services/CheckoutService":40}],13:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-address-select", {
@@ -28280,7 +28190,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{"services/CheckoutService":41}],14:[function(require,module,exports){
+},{"services/CheckoutService":40}],14:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 
 Vue.component("country-select", {
@@ -28335,7 +28245,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":42}],15:[function(require,module,exports){
+},{"services/CountryService":41}],15:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28441,7 +28351,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":40,"services/ModalService":43,"services/NotificationService":44,"services/ValidationService":46}],16:[function(require,module,exports){
+},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43,"services/ValidationService":45}],16:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28505,7 +28415,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":40,"services/ModalService":43,"services/NotificationService":44}],17:[function(require,module,exports){
+},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43}],17:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("user-login-handler", {
@@ -28581,7 +28491,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":40}],18:[function(require,module,exports){
+},{"services/ApiService":39}],18:[function(require,module,exports){
 var ResourceService      = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
@@ -28619,7 +28529,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"services/ResourceService":45}],19:[function(require,module,exports){
+},{"services/ResourceService":44}],19:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
@@ -28784,7 +28694,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":45}],21:[function(require,module,exports){
+},{"services/ResourceService":44}],21:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -28969,7 +28879,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":40,"services/ResourceService":45}],22:[function(require,module,exports){
+},{"services/ApiService":39,"services/ResourceService":44}],22:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -29080,7 +28990,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":38,"services/ModalService":43,"services/NotificationService":44}],23:[function(require,module,exports){
+},{"services/APIService":39,"services/ModalService":42,"services/NotificationService":43}],23:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
@@ -29295,7 +29205,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":40}],24:[function(require,module,exports){
+},{"services/ApiService":39}],24:[function(require,module,exports){
 Vue.component("language-select", {
 
     template: "#vue-language-select",
@@ -29365,7 +29275,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":44}],26:[function(require,module,exports){
+},{"services/NotificationService":43}],26:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -29398,7 +29308,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":47}],27:[function(require,module,exports){
+},{"services/WaitScreenService":46}],27:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 
 Vue.directive("add-to-basket", function(value)
@@ -29421,7 +29331,7 @@ Vue.directive("add-to-basket", function(value)
 
 });
 
-},{"services/ResourceService":45}],28:[function(require,module,exports){
+},{"services/ResourceService":44}],28:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.directive("place-order", {
@@ -29441,7 +29351,7 @@ Vue.directive("place-order", {
     }
 });
 
-},{"services/ApiService":40}],29:[function(require,module,exports){
+},{"services/ApiService":39}],29:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -29518,7 +29428,7 @@ Vue.directive("prepare-payment", {
 
 });
 
-},{"services/ApiService":40,"services/NotificationService":44}],30:[function(require,module,exports){
+},{"services/ApiService":39,"services/NotificationService":43}],30:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -29551,7 +29461,7 @@ Vue.directive("logout", function()
 
 });
 
-},{"services/ApiService":40,"services/NotificationService":44}],31:[function(require,module,exports){
+},{"services/ApiService":39,"services/NotificationService":43}],31:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -29619,7 +29529,7 @@ Vue.elementDirective("resource-list", {
     }
 });
 
-},{"services/ResourceService":45}],32:[function(require,module,exports){
+},{"services/ResourceService":44}],32:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-bind", {
@@ -29659,7 +29569,7 @@ Vue.directive("resource-bind", {
 
 });
 
-},{"services/ResourceService":45}],33:[function(require,module,exports){
+},{"services/ResourceService":44}],33:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
@@ -29694,7 +29604,7 @@ Vue.directive("resource-if", {
 
 });
 
-},{"services/ResourceService":45}],34:[function(require,module,exports){
+},{"services/ResourceService":44}],34:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
 var accounting        = require("accounting");
@@ -29727,7 +29637,7 @@ Vue.filter("currency", function(price, customCurrency)
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":48,"currency-symbol-map":49,"services/ResourceService":45}],35:[function(require,module,exports){
+},{"accounting":47,"currency-symbol-map":48,"services/ResourceService":44}],35:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
     var imageList = item.variationImageList;
@@ -29788,6 +29698,68 @@ Vue.filter("itemURL", function(item)
 });
 
 },{}],38:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":39,"services/CheckoutService":40}],39:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
 
@@ -29953,71 +29925,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":44,"services/WaitScreenService":47}],39:[function(require,module,exports){
-var ApiService      = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
-
-module.exports = (function($)
-{
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive)
-    {
-        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
-        {
-            if (setActive)
-            {
-                if (addressType === 1)
-                {
-                    CheckoutService.setBillingAddressId(response.id);
-                }
-                else if (addressType === 2)
-                {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
-            }
-        });
-    }
-
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType)
-    {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
-
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType)
-    {
-        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-})(jQuery);
-
-},{"services/ApiService":40,"services/CheckoutService":41}],40:[function(require,module,exports){
-arguments[4][38][0].apply(exports,arguments)
-},{"dup":38,"services/NotificationService":44,"services/WaitScreenService":47}],41:[function(require,module,exports){
+},{"services/NotificationService":43,"services/WaitScreenService":46}],40:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -30108,7 +30016,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":40}],42:[function(require,module,exports){
+},{"services/ApiService":39}],41:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30204,7 +30112,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],43:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30338,7 +30246,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],44:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30512,7 +30420,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],45:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -31071,7 +30979,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":40}],46:[function(require,module,exports){
+},{"services/ApiService":39}],45:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31272,7 +31180,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31322,7 +31230,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -31737,7 +31645,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],49:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -31777,7 +31685,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":50}],50:[function(require,module,exports){
+},{"./map":49}],49:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
