@@ -1,126 +1,89 @@
 //header scss
-.sticky {
- 	.top-bar {
- 		position: fixed;
- 		width:100%;
- 		transition: all 0.4s ease;
- 		background:$gray;
- 	}
- 	.header {
- 		position:relative;
- 		.navbar {
- 			position: fixed;
- 		    max-width: 1170px;
- 		    width: 100%;
- 		    top: 2rem;
- 		    z-index: 1020;
- 		    background:$gray-lighter2;
- 		    transition: all 0.4s ease;
- 		    .navbar-brand {
- 		    	img {
- 		    		max-width: 70%;
- 		    		transition: all 0.4s ease;
- 		    	}
- 		    }
- 		    #mainNavbarCollapse {
- 		    	.navbar-nav {
- 		    		.nav-item {
- 		    			.nav-link {
- 		    				padding:.75rem 1rem;
- 		    				transition: all 0.4s ease;
- 		    			}
- 		    		}
- 		    	}
- 		    }
- 		}
- 		.breadcrump {
- 			display: none;
- 		}
- 	}
-	.main {
-		padding-top: 5rem;
-	}
- }
-
 .top-bar{
 
-	$topbar-height : 2rem;
-
-	color:$gray-lighter;
 	position: relative;
-	z-index: 2000;
-	height: $topbar-height;
+	z-index: $zIndex-6;
+	color:$gray-lighter;
 	background-color: $gray-dark;
 
-	.shariff {
-		.theme-minimal {
-			.shariff-button {
-				a {
-					color: $gray-lighter;
-				}
-			}
-		}
+	a{
+		text-decoration: none;
+		transition: all 300ms;
 	}
-
-	.list-inline-item:not(:last-child){
-		margin-right: .6rem;
-	}
-
-	.list-inline{
+	
+	// ul containing all controls in the top bar:
+	// - login/register
+	// - search
+	// - language settings
+	// - basket preview toggle
+	.controls-list{
 		margin-bottom: 0;
+		font-size: 0;
+		width: 100%;
+		display: flex;
 
-		.list-inline-item{
+		&>li{
+			// default font size for all items
+			font-size: 1rem;
 			color: $gray-lighter;
+			margin-right: 0;
 
-			&>span>a,
-			&>a{
-				line-height: 2rem!important;
-				font-size: .8rem;
+			// sets the height of the top-bar
+			a{
+				padding: 0.5rem .8rem;
 				display: inline-block;
 				color: $gray-lighter;
-			}
-			#login-change {
-				a {
-					span {
-						display: none;
-					}
+				
+				&[aria-expanded="true"],
+				&:hover{
+					background-color: $gray-lighter;
+					color: $gray;
 				}
 			}
-
-			.flag-icon{
-				margin-right: .4rem;
+			
+			// icons should be slightly larger
+			.fa{
+				font-size: 1.2rem;
 			}
 		}
-	}
-
-	ul.pull-xs-right{
-
-		li:last-child{
+		
+		.control-user{
+			flex: 1 0 auto;
+			margin-left: 1rem;
+			//login | register
 			a{
+				color: $gray-lighter;
+				text-transform: uppercase;
+			}
+		}
+
+		.control-languages{
+			
+		}
+
+		.control-search{
+			
+			.dropdown-menu{
+				width: 320px;
+			    padding: 0;
+			    border: none;
+				position: absolute;
+			}
+		}
+
+		.control-basket{
+			.toggle-basket-preview{
 				background-color: $brand-primary;
-				padding: 0 .6rem;
 				color:white;
-				i{
-					font-size: $font-size-sm;
-					margin-right: .5rem;
-					color:white;
+
+				.badge{
+					margin-left: .5rem;
+				}
+
+				&:hover{
+					background-color: darken($brand-primary, 20%);
 				}
 			}
-		}
-	}
-
-	.searchBox,
-	.search-box{
-		a.dropdown-toggle {
-			&:hover {
-				text-decoration: none;
-			}
-		}
-		.dropdown-menu{
-			width: 320px;
-		    padding: 0;
-		    border: none;
-			position: absolute;
 		}
 	}
 
@@ -140,30 +103,26 @@
 			}
 		}
 
-		a {
-			&:hover {
-				background-color: darken($brand-primary, 20%);
-				color: $gray-lighter;
-			    border: 1px solid darken($brand-primary, 20%);
-				text-decoration: none;
-			}
+		a:hover {
+			background-color: darken($brand-primary, 20%);
+			color: $gray-lighter;
+		    border: 1px solid darken($brand-primary, 20%);
 		}
 	}
 
 	#shippingCountryList {
-		text-decoration: none;
 	}
-}
 
-#toggleBasketPreview:hover {
-	background-color: darken($brand-primary, 20%);
+	
 }
 
 //navigation scss
-.header {
 
-	padding-left: 0;
-	padding-right: 0;
+.navbar {
+	padding:0;
+	z-index: $zindex-navbar;
+	background-color: $navbar-background-color;
+	border-bottom: 1px solid $gray-lighter;
 
 	.navbar {
 
@@ -179,15 +138,19 @@
 	}
 }
 
+.brand-wrapper{
+	position: relative;
+}
+
 .navbar-brand {
 
 	float: none;
 	padding: .5rem 1rem;
   	display: inline-block;
 
-  img {
-    max-height: 70%;
-  }
+  	img {
+    	max-height: 3rem;
+  	}
 }
 
 .navbar-nav {
@@ -199,15 +162,11 @@
 			position: relative;
 		}
 
-		a {
-			padding:.5rem;
-		}
-
 		&.active,
 		&:hover {
 			.nav-link {
-				background-color: $brand-primary;
-				color:white;
+				background-color: $nav-link-hover-bg;
+				color: $navbar-dark-active-color;
 			}
 		}
 
@@ -215,30 +174,27 @@
 			padding: 1rem;
 		}
 	}
-
 }
-header {
-	.navbar-toggler {
-		position: absolute;
-		top: .75rem;
-		right: 1em;
-	}
+
+.navbar-toggler {
+	position: absolute;
+	top: 50%;
+	right: 1rem;
+	transform: translate(0, -50%);
 }
 
 // Mobile only
 @include media-breakpoint-between(xs, md) {
 	.navbar {
-
 		.navbar-nav{
 
 			.dropdown-menu{
 				position:relative;
 				float: none;
 
-				background-color: $gray-lighter;
+				background-color: $gray-lighter2;
 				border: none;
 			}
-
 		}
 	}
 }
@@ -246,33 +202,24 @@ header {
 
 @include media-breakpoint-up(sm){
 
-	.sticky {
-		.header {
-			.navbar {
-				max-width: 576px;
-			}
-		}
-	}
-
-	.top-bar {
-		.list-inline-item{
-			&:nth-child(2), &:nth-child(3) {
-				position:relative;
-			}
-		}
-		.shariff {
-			width:100%;
-			margin:0;
-			height:2rem;
-
-			.orientation-horizontal {
-				li {
-					width:40px;
-					margin:0;
+	.top-bar{
+		.controls-list{
+			width: auto;
+			float:right;
+			
+			&>li{
+				// default font size for all items
+				font-size: .8rem;
+				
+				.fa{
+					// icons should be slightly larger
+					font-size: 1rem;
+					line-height: .8rem;
 				}
-			}
+			}			
 		}
 	}
+
 }
 
 @include media-breakpoint-up(md){
@@ -323,27 +270,18 @@ header {
 	}
 }
 
-
 @include media-breakpoint-up(lg){
-	.sticky {
- 		.header {
- 			.navbar {
- 				max-width: 910px;
- 			}
- 		}
- 	}
 
-	.navbar-brand {
+	.brand-wrapper{
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
 	}
 
-	.navbar-nav {
-		&>.nav-item {
-			&>.nav-link {
-				padding-top: 2em;
-				padding-bottom: 2em;
+	.navbar-nav{
+		&>.nav-item{
+			&>.nav-link{
+				padding: $nav-link-padding;
 			}
 		}
 	}

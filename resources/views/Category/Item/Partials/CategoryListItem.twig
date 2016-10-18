@@ -2,19 +2,46 @@
 {% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
 
-<article class="cmp cmp-product-thumb grid">
+<article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
+        <div class="thumb-background"></div>
+
+        <div class="thumb-extras">
+            <div class="thumb-scroll-cmd scroll-up">
+                <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+            </ul>
+            <div class="thumb-scroll-cmd scroll-down">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="thumb-controls">
+            <button class="btn btn-primary thumb-btn-buy" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">
+                {{ trans("PluginCallisto::Callisto.basketToBasket") }}
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->
+            </button>
+        </div>
+
         <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
             <div class="square-container">
-                <div class="square-inner center-xy main-image">
+                <div class="square-inner main-image">
                     <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
                 </div>
             </div>
         </a>
 
         <!-- STORE SPECIALS -->
+
         {% if item.itemBase.storeSpecial > 0 %}
-            <div class="special-tags tl v">
+            <div class="special-tags">
                 {% if  item.itemBase.storeSpecial == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
@@ -40,7 +67,7 @@
 
                 {% endif %}
 
-                <span class="special-tag bg-{{storeSpecialColor}}">
+                <span class="tag bg-{{storeSpecialColor}}">
                     {{ storeSpecial }}
                 </span>
 
@@ -69,15 +96,8 @@
                 </div>
             </div>
 
-            <div class="thumb-controls">
-                <button class="btn btn-sm btn-outline-primary btn-block" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">
-                    {{ trans("PluginCallisto::Callisto.basketToBasket") }}
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->
-                </button>
-            </div>
-        </div>
         <!-- ./ITEM DETAILS  -->
+
     </div>
 
 </article>
