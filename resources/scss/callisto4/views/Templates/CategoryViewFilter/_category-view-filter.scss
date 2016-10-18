@@ -28,6 +28,18 @@
 			border-bottom: none;
 		}
 	}
+
+	.filter-group{
+			z-index: 1;
+				.input-unit{
+					margin-bottom: 0;
+				}
+
+				.filter-content{
+					position:absolute;
+					transform: translateY(-1px);
+				}
+		}
 }
 
 .cmp-filters{
