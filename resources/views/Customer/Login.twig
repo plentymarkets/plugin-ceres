@@ -1,12 +1,11 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 
 {% block PageBody %}
-    <h1>REDIRECT TO: {{ request.get("backlink") }}</h1>
     <div class="anmeldung container-max">
         <div class="row m-b-3">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                 <h1 class="m-b-3">{{ trans("PluginCallisto::Callisto.accLogin") }}</h1>
-                <login></login>
+                <login backlink="{{ request.get("backlink") }}"></login>
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">

@@ -7,7 +7,8 @@ Vue.component("login", {
     template: "#vue-login",
 
     props: [
-        "modalElement"
+        "modalElement",
+        "backlink"
     ],
 
     data: function()
@@ -45,6 +46,11 @@ Vue.component("login", {
                     }
 
                     NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
+
+                    if (!(component.backlink === null || component.backlink === ""))
+                    {
+                        window.location = component.backlink;
+                    }
                 })
                 .fail(function(response)
                 {
