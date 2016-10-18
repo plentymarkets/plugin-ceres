@@ -4,14 +4,30 @@ module.exports = (function($)
     var notificationCount = 0;
     var notifications     = new NotificationList();
 
+    var handlerList = [];
+
     return {
         log             : _log,
         info            : _info,
         warn            : _warn,
         error           : _error,
         success         : _success,
-        getNotifications: getNotifications
+        getNotifications: getNotifications,
+        listen          : _listen
     };
+
+    function _listen(handler)
+    {
+        handlerList.push(handler);
+    }
+
+    function trigger()
+    {
+        for (var i = 0; i < handlerList.length; i++)
+        {
+            handlerList[i].call({}, notifications.all());
+        }
+    }
 
     function _log(message, prefix)
     {
@@ -88,6 +104,8 @@ module.exports = (function($)
         notifications.add(notification);
         _log(notification);
 
+        trigger();
+
         return notification;
     }
 
@@ -114,6 +132,7 @@ module.exports = (function($)
         function close()
         {
             notifications.remove(self);
+            trigger();
         }
 
         function closeAfter(timeout)
@@ -121,6 +140,7 @@ module.exports = (function($)
             setTimeout(function()
             {
                 notifications.remove(self);
+                trigger();
             }, timeout);
         }
 

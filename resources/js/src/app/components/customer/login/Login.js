@@ -44,14 +44,14 @@ Vue.component("login", {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
                     switch (response.code)
                     {
                     case 401:
-                        NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(10000);
                         break;
                     default:
                         return;
