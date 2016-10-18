@@ -1,35 +1,35 @@
 <script type="x/template" id="vue-login">
     <div>
-        <div class="modal-body">
-            <form class="m-b-1">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="input-unit">
-                            <input type="email" name="email" id="txt_email" v-model="username">
-                            <label for="txt_email">{{ trans("PluginCallisto::Callisto.accEmail") }}*</label>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="input-unit">
-                            <input type="password" name="password" id="txt_password" v-model="password">
-                            <label for="txt_password">{{ trans("PluginCallisto::Callisto.accPassword") }}*</label>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-8">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value=""> <span>{{ trans("PluginCallisto::Callisto.accRememberPassword") }}</span>
-                        </label>
-                        <div>
-                            <a href="#" class="small">{{ trans("PluginCallisto::Callisto.accForgotPassword") }}</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <button v-on:click.prevent="sendLogin" class="btn btn-primary pull-xs-right">{{ trans("PluginCallisto::Callisto.generalSend") }}</button>
+        <form class="m-b-1">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-unit">
+                        <input type="email" name="email" id="txt_email" v-model="username">
+                        <label for="txt_email">{{ trans("PluginCallisto::Callisto.accEmail") }}*</label>
                     </div>
                 </div>
-            </form>
-        </div>
+
+                <div class="col-xs-12">
+                    <div class="input-unit">
+                        <input type="password" name="password" id="txt_password" v-model="password">
+                        <label for="txt_password">{{ trans("PluginCallisto::Callisto.accPassword") }}*</label>
+                    </div>
+                </div>
+
+                <div class="col-xs-8">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="">
+                        <span>{{ trans("PluginCallisto::Callisto.accRememberPassword") }}</span>
+                    </label>
+                    <div>
+                        <a href="#" class="small">{{ trans("PluginCallisto::Callisto.accForgotPassword") }}</a>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button v-on:click.prevent="sendLogin"
+                            class="btn btn-primary pull-xs-right">{{ trans("PluginCallisto::Callisto.generalSend") }}</button>
+                </div>
+            </div>
+        </form>
     </div>
 </script>
