@@ -892,7 +892,7 @@ Vue.component("login", {
 
                     NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
 
-                    if (!(component.backlink === null || component.backlink === ""))
+                    if (!(component.backlink === null || !component.backlink || component.backlink === ""))
                     {
                         window.location = component.backlink;
                     }
