@@ -13,6 +13,9 @@
 // ==========================================================================
 
 // global
+@import "callisto4/mixins/general-mixins";
+@import "callisto4/mixins/proportional-boxes";
+@import "callisto4/common/typography";
 @import "callisto4/common/common";
 @import "callisto4/common/structure";
 
@@ -31,6 +34,8 @@
 @import "callisto4/components/component-base";
 @import "callisto4/components/accordion";
 @import "callisto4/components/alerts";
+@import "callisto4/components/featured-category";
+@import "callisto4/components/featured-sale";
 
 // Forms
 @import "callisto4/forms/input-groups";
@@ -39,6 +44,8 @@
 
 // Page Design / Global components
 @import "callisto4/views/PageDesign/header";
+@import "callisto4/views/PageDesign/search-box";
+@import "callisto4/views/PageDesign/language-select";
 @import "callisto4/views/PageDesign/navigation";
 @import "callisto4/views/PageDesign/breadcrumb";
 @import "callisto4/views/PageDesign/footer";
@@ -59,7 +66,6 @@
 @import "callisto4/views/Templates/OrderItem/order-item";
 @import "callisto4/views/Templates/PaymentShippingSelect/payment-shipping-select";
 @import "callisto4/views/Templates/ToggleCategoryListView/toggle-list-view";
-
 
 // Pages
 @import "callisto4/views/Home/home";

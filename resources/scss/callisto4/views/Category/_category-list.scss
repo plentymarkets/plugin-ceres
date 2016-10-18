@@ -18,37 +18,15 @@
 	display: flex;
 	flex-flow: row wrap;
 
-	li{
-       margin-bottom: 2px;
-	}
+//	li{
+//        @include make-col-ready(12);
+//        @include make-col(12);
+//	}
 }
-
-.categoriegrid {
-    .special-tags{
-        padding: .3rem; 
-    }
-}
-
-// @include media-breakpoint-only(xs) { 
-
-//     .page-infos {
-//         text-align: center;
-//     }
-
-//     nav.cmp.cmp-paginator.pull-xs-right {
-//         text-align: center;
-//         float: none!important;
-//     }
-// }
-
 
 @include media-breakpoint-up(sm){
     .product-list{
         li{
-            @include make-col-ready(12);
-            @include make-col(12);
-            margin-bottom: $grid-gutter-width;
-
             display: flex;
         }
     }
@@ -56,7 +34,8 @@
     .product-list.grid{
 
     	li{
-            @include make-col(6);
+            box-shadow: none;
+            //@include make-col(6);
             display: flex;
     	}
 
@@ -67,12 +46,19 @@
     .product-list.grid{
 
         li{
-            @include make-col(4);
+            //@include make-col(4);
             display: flex;
         }
     }
 }
 
 @include media-breakpoint-up(lg){
+      .product-list.grid{
+
+            li{
+                //@include make-col(3);
+                display: flex;
+            }
+      }
     
 }

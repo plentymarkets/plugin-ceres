@@ -1,5 +1,6 @@
 body {
-
+	background-color: $gray-lightest;
+	
 	&>.wrapper {
 		position 	: absolute;
 		z-index 	: $zIndex-3;
