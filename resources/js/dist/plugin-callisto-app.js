@@ -889,14 +889,14 @@ Vue.component("login", {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(3000);
+                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
                     switch (response.code)
                     {
                     case 401:
-                        NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(3000);
+                        NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(10000);
                         break;
                     default:
                         return;
@@ -1750,8 +1750,19 @@ Vue.component("notifications", {
     data: function()
     {
         return {
-            notifications: NotificationService.getNotifications().all()
+            notifications: []
         };
+    },
+
+    ready: function()
+    {
+        var self = this;
+
+        NotificationService.listen(
+            function(notifications)
+            {
+                self.$set("notifications", notifications);
+            });
     },
 
     methods : {
@@ -2744,14 +2755,30 @@ module.exports = (function($)
     var notificationCount = 0;
     var notifications     = new NotificationList();
 
+    var handlerList = [];
+
     return {
         log             : _log,
         info            : _info,
         warn            : _warn,
         error           : _error,
         success         : _success,
-        getNotifications: getNotifications
+        getNotifications: getNotifications,
+        listen          : _listen
     };
+
+    function _listen(handler)
+    {
+        handlerList.push(handler);
+    }
+
+    function trigger()
+    {
+        for (var i = 0; i < handlerList.length; i++)
+        {
+            handlerList[i].call({}, notifications.all());
+        }
+    }
 
     function _log(message, prefix)
     {
@@ -2828,6 +2855,8 @@ module.exports = (function($)
         notifications.add(notification);
         _log(notification);
 
+        trigger();
+
         return notification;
     }
 
@@ -2854,6 +2883,7 @@ module.exports = (function($)
         function close()
         {
             notifications.remove(self);
+            trigger();
         }
 
         function closeAfter(timeout)
@@ -2861,6 +2891,7 @@ module.exports = (function($)
             setTimeout(function()
             {
                 notifications.remove(self);
+                trigger();
             }, timeout);
         }
 
