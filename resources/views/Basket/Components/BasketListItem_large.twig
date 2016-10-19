@@ -40,7 +40,8 @@
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
         <a class="clearfix" :href="basketItem.variation | itemURL">
             <div class="item-name">
-                ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
+               <!-- ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName } -->
+               {{ showItemVariation }}
             </div>
         </a>
 
