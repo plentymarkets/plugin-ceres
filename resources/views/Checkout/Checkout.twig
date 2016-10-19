@@ -39,7 +39,7 @@
                         <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
                     </header>
                     <div class="shipping-addresses-select">
-                        {% if frontend.Account.getIsUSerLoggedIn %}
+                        {% if frontend.Account.getIsAccountLoggedIn %}
                             <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
                                                      :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
                         {% else %}
