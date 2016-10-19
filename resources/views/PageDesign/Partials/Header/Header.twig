@@ -13,7 +13,7 @@
                     data-media-url=""
                     data-theme="minimal">
             </div>
-            
+
             <ul id="controlsList" class="controls-list list-inline">
 
                 <li class="list-inline-item control-user">
@@ -56,7 +56,7 @@
 
         <div id="countrySettings" class="cmp cmp-country-settings collapse">
             <div class="country-settings-inner row">
-                
+
                 <div class="language-settings col-xs-12 col-sm-4">
                     <div class="list-title">
                         <strong>{{ trans("PluginCallisto::Callisto.generalSelectLanguage") }}</strong>
@@ -73,9 +73,9 @@
                             <a href="#" class="" v-on:click="languageChanged('en')">
                                 <i class="flag-icon flag-icon-gb"></i>
                                 {{ trans("PluginCallisto::Callisto.generalEnglish") }}
-                            </a>   
+                            </a>
                         </li>
-                        
+
                     </ul>
                 </div>
 
@@ -127,12 +127,12 @@
         </div>
 
         {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
-        
+
         <!-- breadcrumb -->
         {% if not services.category.isHome() %}
             {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" with {'categoryTree': services.category.getCategoryTreeAsList()} %}
         {% endif %}
-           
+
     </div>
-    
+
 </div>
