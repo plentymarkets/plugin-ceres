@@ -18,7 +18,8 @@ $border-width: 1px;
 
     input[type],
 	input:not([type="checkbox"]),
-	input:not([type="radio"]){
+	input:not([type="radio"]),
+	.input-unit-preview{
 
 	    color: $color;
 	    background-color: $background;
@@ -30,6 +31,10 @@ $border-width: 1px;
 	    font-size: 1em;
 	    // text-align: right;
 	    outline: none!important;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
 
 
 	    transition: all .2s;
@@ -75,7 +80,8 @@ $border-width: 1px;
         }
 	}
 
-	label{
+	label,
+	.input-unit-label{
         font-size: .65em;
         line-height: 1em!important;
         text-transform: uppercase;

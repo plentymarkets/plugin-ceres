@@ -18,10 +18,10 @@
 	display: flex;
 	flex-flow: row wrap;
 
-	li{
-        @include make-col-ready(12);
-        @include make-col(12);
-	}
+//	li{
+//        @include make-col-ready(12);
+//        @include make-col(12);
+//	}
 }
 
 @include media-breakpoint-up(sm){
@@ -35,7 +35,7 @@
 
     	li{
             box-shadow: none;
-            @include make-col(6);
+            //@include make-col(6);
             display: flex;
     	}
 
@@ -46,12 +46,19 @@
     .product-list.grid{
 
         li{
-            @include make-col(4);
+            //@include make-col(4);
             display: flex;
         }
     }
 }
 
 @include media-breakpoint-up(lg){
+      .product-list.grid{
+
+            li{
+                //@include make-col(3);
+                display: flex;
+            }
+      }
     
 }

@@ -1,47 +1,4 @@
 //header scss
-.sticky {
- 	.top-bar {
- 		position: fixed;
- 		width:100%;
- 		transition: all 0.4s ease;
- 		background:$gray;
- 	}
- 	.header {
- 		position:relative;
- 		.navbar {
- 			position: fixed;
- 		    max-width: 1170px;
- 		    width: 100%;
- 		    top: 2rem;
- 		    z-index: 1020;
- 		    background:$gray-lighter2;
- 		    transition: all 0.4s ease;
- 		    .navbar-brand {
- 		    	img {
- 		    		max-width: 70%;
- 		    		transition: all 0.4s ease;
- 		    	}
- 		    }
- 		    #mainNavbarCollapse {
- 		    	.navbar-nav {
- 		    		.nav-item {
- 		    			.nav-link {
- 		    				padding:.75rem 1rem;
- 		    				transition: all 0.4s ease;
- 		    			}
- 		    		}
- 		    	}
- 		    }
- 		}
- 		.breadcrump {
- 			display: none;
- 		}
- 	}
-	.main {
-		padding-top: 5rem;
-	}
- }
-
 .top-bar{
 
 	position: relative;
