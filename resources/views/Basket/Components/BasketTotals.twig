@@ -5,10 +5,10 @@
         <div>
             <dl>
                 <dt v-if="showProperty( 'basket.value_of_items_gross' )">
-                    {{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
+                    <strong>{{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
-                    ${ basket.itemSum | currency  }
+                    <strong>${ basket.itemSum | currency  }</strong>
                 </dd>
 
                 <dt v-if="showProperty( 'basket.value_of_items_net' )">
@@ -19,10 +19,10 @@
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    {{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
+                    <strong>{{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    ${ basket.shippingAmount | currency }
+                    <strong>${ basket.shippingAmount | currency }</strong>
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
@@ -42,10 +42,10 @@
                 <hr>
 
                 <dt v-if="showProperty( 'basket.order_total_gross' )">
-                    {{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})
+                    <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.order_total_gross' )">
-                    ${ basket.basketAmount | currency }
+                    <strong>${ basket.basketAmount | currency }</strong>
                 </dd>
 
                 <dt v-if="showProperty( 'basket.order_total_net' )">

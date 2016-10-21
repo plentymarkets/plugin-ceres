@@ -1,55 +1,13 @@
 <script type="x/template" id="vue-order-history">
 
-    <div class="history container-max m-b-3">
+<div class="page-content history container-max m-b-3">
         <div class="row m-b-3">
-            <h1 class="col-xs-12">{{ trans("PluginCallisto::Callisto.orderHistory") }}</h1>
+            <h1 class="h4 col-xs-12">{{ trans("PluginCallisto::Callisto.orderHistory") }}</h1>
         </div>
 
         <div class="form-group">
 
             <div class="row m-b-1">
-                <!-- ORDER FILTER -->
-                <div class="col-xs-12 col-md-3 col-lg-4">
-                    <div class="input-unit">
-                        <input id="auftragId" type="text">
-                        <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderEnterOrderId") }}</label>
-                    </div>
-
-                    <div class="input-unit">
-                        <select class="custom-select" id="TimePeriod">
-                            <option>---</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast30Days") }}</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast3Month") }}</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast6Month") }}</option>
-                        </select>
-                        <label for="TimePeriod">{{ trans("PluginCallisto::Callisto.orderSelectTimePeriod") }}</label>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="input-unit">
-                                <input id="von" type="text">
-                                <label for="von">{{ trans("PluginCallisto::Callisto.orderFrom") }}</label>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="input-unit">
-                                <input id="auftragId" type="text">
-                                <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderTo") }}</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="m-b-3">
-                        <input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCallisto::Callisto.orderApply") }}">
-                    </div>
-
-                </div>
-                <!-- ./ORDER FILTER -->
-
-
                 <div class="col-xs-12 col-md-9 col-lg-8">
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix">
@@ -145,6 +103,46 @@
                     </div>
                     <!-- ./ORDER HISTORY -->
                 </div>
+                <!-- ORDER FILTER -->
+                <div class="col-xs-12 col-md-3 col-lg-4">
+                    <div class="input-unit">
+                        <input id="auftragId" type="text">
+                        <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderEnterOrderId") }}</label>
+                    </div>
+
+                    <div class="input-unit">
+                        <select class="custom-select" id="TimePeriod">
+                            <option>---</option>
+                            <option>{{ trans("PluginCallisto::Callisto.orderLast30Days") }}</option>
+                            <option>{{ trans("PluginCallisto::Callisto.orderLast3Month") }}</option>
+                            <option>{{ trans("PluginCallisto::Callisto.orderLast6Month") }}</option>
+                        </select>
+                        <label for="TimePeriod">{{ trans("PluginCallisto::Callisto.orderSelectTimePeriod") }}</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="input-unit">
+                                <input id="von" type="text">
+                                <label for="von">{{ trans("PluginCallisto::Callisto.orderFrom") }}</label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="input-unit">
+                                <input id="auftragId" type="text">
+                                <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderTo") }}</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="m-b-3">
+                        <input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCallisto::Callisto.orderApply") }}">
+                    </div>
+
+                </div>
+                <!-- ./ORDER FILTER -->
             </div>
 
         </div>

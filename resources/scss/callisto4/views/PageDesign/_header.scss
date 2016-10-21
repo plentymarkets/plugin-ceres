@@ -51,9 +51,22 @@
 			flex: 1 0 auto;
 			margin-left: 1rem;
 			//login | register
+			#login-change {
+				position:relative;
+			}
 			a{
-				color: $gray-lighter;
+				color: $gray-light;
 				text-transform: uppercase;
+				padding:1rem .8rem;
+				border:0;
+				border-top: 1px solid $gray-lighter;
+				&:first-child {
+					border-top:0;
+				}
+			}
+			.account-menu {
+				padding:0;
+				margin:0;
 			}
 		}
 

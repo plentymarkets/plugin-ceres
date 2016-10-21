@@ -18,15 +18,16 @@
         display: inline-block;
         text-decoration: none;
     }
-
+    .single-description {
+        font-size: .85rem;
+    }
     .price {
         display: block;
         font-weight: bold;
         line-height: 1;
     }
-
     .input-number {
-      text-align: center;
+        text-align:center;
     }
 
     .vat {
@@ -69,7 +70,7 @@
     .owl-controls {
         position: absolute;
         top: 50%;
-        z-index: 9999;
+        z-index:1000;
         width: 100%;
         .owl-buttons {
             &>div {
@@ -94,17 +95,18 @@
         }
     }
 }
+
 .owl-carousel-preview {
     .owl-item {
         .owl_item{
             padding: 5px;
             margin:5px 0;
             cursor: pointer;
-
             &.synced {
                 background:$brand-primary;
             }
         }
+
     }
     .owl-controls {
             position: absolute;
