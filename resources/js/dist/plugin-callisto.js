@@ -27902,6 +27902,8 @@ Vue.component("basket-list", {
 
 },{"services/ResourceService":44}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
+var ApiService          = require("services/ApiService");
+// var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
 
@@ -27909,7 +27911,8 @@ Vue.component("basket-list-item", {
 
     props: [
         "basketItem",
-        "size"
+        "size",
+        "language"
     ],
 
     data: function()
@@ -27917,11 +27920,61 @@ Vue.component("basket-list-item", {
         return {
             waiting: false,
             deleteConfirmed: false,
-            deleteConfirmedTimeout: null
+            deleteConfirmedTimeout: null,
+            itemAvailability: "",
+            itemCondition: ""
         };
     },
 
+    ready: function()
+    {
+        this.getAvailability();
+        this.getItemCondition();
+    },
+
     methods: {
+
+        getAvailability: function()
+        {
+            var self = this;
+
+            ApiService.get("/rest/item/availability/" + this.basketItem.variation.variationBase.availability)
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
+
+                    for (var i = 0; i < response.languages.length; i++)
+                    {
+                        if (response.languages[i].language === self.language)
+                        {
+                            self.itemAvailability = response.languages[i].name;
+                        }
+                    }
+
+                })
+                .fail(function(response)
+                {
+                    // TODO
+                });
+        },
+
+        getItemCondition: function()
+        {
+            var self = this;
+
+            ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
+
+                    self.itemCondition = response.data;
+
+                })
+                .fail(function(response)
+                {
+                    // TODO
+                });
+        },
 
         /**
          * Delete item from basket
@@ -27994,7 +28047,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ResourceService":44}],7:[function(require,module,exports){
+},{"services/ApiService":39,"services/ResourceService":44}],7:[function(require,module,exports){
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
@@ -28620,7 +28673,8 @@ Vue.component("login", {
     template: "#vue-login",
 
     props: [
-        "modalElement"
+        "modalElement",
+        "backlink"
     ],
 
     data: function()
@@ -28658,6 +28712,11 @@ Vue.component("login", {
                     }
 
                     NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
+
+                    if (component.backlink !== null && component.backlink)
+                    {
+                        window.location = component.backlink;
+                    }
                 })
                 .fail(function(response)
                 {

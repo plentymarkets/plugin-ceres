@@ -40,8 +40,7 @@
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
         <a class="clearfix" :href="basketItem.variation | itemURL">
             <div class="item-name">
-               <!-- ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName } -->
-               {{ showItemVariation }}
+                ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
             </div>
         </a>
 
@@ -55,14 +54,14 @@
                 <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemState") }}:</strong>
-                <span class="col-xs-6 col-sm-7">TODO</span>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemCondition") }}:</strong>
+                <span class="col-xs-6 col-sm-7">${ itemCondition }</span>
             </div>
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
-            {% set availabilityData = services.availability.getAvailabilityById(1) %}
-          </span>
+                    ${ itemAvailability }
+                </span>
             </div>
             <p class="m-y-1">
                 {!! basketItem.variation.itemDescription.description !!}
