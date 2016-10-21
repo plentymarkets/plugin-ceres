@@ -18,7 +18,8 @@ Vue.component("order-history", {
             showItemsOf           : "1-6",
             itemsPerPage          : 6,
             // orderObjectToRender
-            orderList             : []
+            orderList             : [],
+            statusText            : ""
         };
     },
 
@@ -31,9 +32,31 @@ Vue.component("order-history", {
         this.updateOrderList(1);
 
         this.numberOfEntries = this.calculateMaxPages();
+
+        this.getCurrentOrderStatusText();
     },
 
     methods: {
+
+        getCurrentOrderStatusText: function()
+        {
+            var self = this;
+
+            ApiService.get("/rest/order/status/" + 5)
+                .done(function(response)
+                {
+                    ApiService.setToken(response);
+
+                    self.statusText = "DONT WORK";
+
+                    console.log(response);
+                })
+                .fail(function(response)
+                {
+                    // TODO
+                });
+        },
+
         /**
          * Get a new page of items
          * Extend these method parameters for filter handling
