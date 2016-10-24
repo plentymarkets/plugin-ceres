@@ -33,17 +33,29 @@ vueApp = new Vue({
         $toggleBasketPreview.on("click", function(evt)
         {
             evt.preventDefault();
+            evt.stopPropagation();
             $("body").toggleClass("open-right");
+        });
+        $(document).on("click", "body.open-right", function(evt)
+        {
+            if ($("body").hasClass("open-right"))
+            {
+                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                {
+                    evt.preventDefault();
+                    $("body").toggleClass("open-right");
+                }
+            }
         });
 
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();
 
-            // Toggle its own state
+            // toggle it's own state
             $toggleListView.toggleClass("grid");
 
-            // Toggle internal style of thumbs
+            // toggle internal style of thumbs
             $(".product-list, .cmp-product-thumb").toggleClass("grid");
         });
 
