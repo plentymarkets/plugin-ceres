@@ -28,6 +28,18 @@
         "type"      : "category_select"
     },
     {
+      "tab"       : "Categories",
+      "key"       : "global.category.privacy_policy",
+      "label"     : "Privacy policy",
+      "type"      : "category_select"
+    },
+    {
+      "tab"       : "Categories",
+      "key"       : "global.category.terms_and_conditions",
+      "label"     : "Terms and conditions",
+      "type"      : "category_select"
+    },
+    {
         "tab"                           : "Categories",
         "key"                           : "global.category.variation_show_type",
         "label"                         : "Show variations in overview",
