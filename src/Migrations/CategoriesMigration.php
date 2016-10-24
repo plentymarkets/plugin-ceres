@@ -53,8 +53,9 @@ class CategoriesMigration
     ];
     
     /**
-     * CreateCategoriesMigration constructor.
+     * CategoriesMigration constructor.
      * @param CategoryRepositoryContract $categoryRepo
+     * @param CategoryTemplateRepositoryContract $categoryTemplateRepo
      */
     public function __construct(CategoryRepositoryContract $categoryRepo,
                                 CategoryTemplateRepositoryContract $categoryTemplateRepo)
@@ -113,6 +114,10 @@ class CategoriesMigration
         }
     }
     
+    /**
+     * Create the callisto 4 parent category
+     * @return int
+     */
     private function createParentCategory()
     {
         $details = [
