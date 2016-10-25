@@ -12,7 +12,9 @@ Vue.directive("place-order", {
         $elem.on(trigger, function(event)
         {
             event.preventDefault();
-            ApiService.post("/rest/order");
+            ApiService.post("/rest/order")
+                .done(window.location.replace("/confirmation"))
+                .fail(window.location.replace("/checkout"));
         });
     }
 });
