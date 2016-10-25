@@ -27825,7 +27825,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ResourceService":44}],3:[function(require,module,exports){
+},{"services/ResourceService":45}],3:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
@@ -27865,7 +27865,7 @@ Vue.component("basket-totals", {
     }
 });
 
-},{"services/ResourceService":44}],4:[function(require,module,exports){
+},{"services/ResourceService":45}],4:[function(require,module,exports){
 Vue.component("coupon", {
 
     template: "#vue-coupon"
@@ -27900,7 +27900,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{"services/ResourceService":44}],6:[function(require,module,exports){
+},{"services/ResourceService":45}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list-item", {
@@ -27994,7 +27994,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ResourceService":44}],7:[function(require,module,exports){
+},{"services/ResourceService":45}],7:[function(require,module,exports){
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
@@ -28283,7 +28283,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/ModalService":42}],11:[function(require,module,exports){
+},{"services/ModalService":43}],11:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -28374,7 +28374,7 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":38,"services/ValidationService":45}],12:[function(require,module,exports){
+},{"services/AddressService":39,"services/ValidationService":46}],12:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("invoice-address-select", {
@@ -28412,7 +28412,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{"services/CheckoutService":40}],13:[function(require,module,exports){
+},{"services/CheckoutService":41}],13:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-address-select", {
@@ -28449,7 +28449,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{"services/CheckoutService":40}],14:[function(require,module,exports){
+},{"services/CheckoutService":41}],14:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 
 Vue.component("country-select", {
@@ -28504,7 +28504,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":41}],15:[function(require,module,exports){
+},{"services/CountryService":42}],15:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28610,7 +28610,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43,"services/ValidationService":45}],16:[function(require,module,exports){
+},{"services/ApiService":40,"services/ModalService":43,"services/NotificationService":44,"services/ValidationService":46}],16:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28620,7 +28620,8 @@ Vue.component("login", {
     template: "#vue-login",
 
     props: [
-        "modalElement"
+        "modalElement",
+        "backlink"
     ],
 
     data: function()
@@ -28658,6 +28659,11 @@ Vue.component("login", {
                     }
 
                     NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
+
+                    if (component.backlink !== null && component.backlink)
+                    {
+                        window.location = component.backlink;
+                    }
                 })
                 .fail(function(response)
                 {
@@ -28674,7 +28680,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43}],17:[function(require,module,exports){
+},{"services/ApiService":40,"services/ModalService":43,"services/NotificationService":44}],17:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("user-login-handler", {
@@ -28750,7 +28756,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":39}],18:[function(require,module,exports){
+},{"services/ApiService":40}],18:[function(require,module,exports){
 var ResourceService      = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
@@ -28788,7 +28794,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"services/ResourceService":44}],19:[function(require,module,exports){
+},{"services/ResourceService":45}],19:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
@@ -28953,7 +28959,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":44}],21:[function(require,module,exports){
+},{"services/ResourceService":45}],21:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -29138,7 +29144,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":39,"services/ResourceService":44}],22:[function(require,module,exports){
+},{"services/ApiService":40,"services/ResourceService":45}],22:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -29249,7 +29255,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":39,"services/ModalService":42,"services/NotificationService":43}],23:[function(require,module,exports){
+},{"services/APIService":38,"services/ModalService":43,"services/NotificationService":44}],23:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
@@ -29464,7 +29470,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":39}],24:[function(require,module,exports){
+},{"services/ApiService":40}],24:[function(require,module,exports){
 Vue.component("language-select", {
 
     template: "#vue-language-select",
@@ -29545,7 +29551,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":43}],26:[function(require,module,exports){
+},{"services/NotificationService":44}],26:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -29578,7 +29584,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":46}],27:[function(require,module,exports){
+},{"services/WaitScreenService":47}],27:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 
 Vue.directive("add-to-basket", function(value)
@@ -29601,7 +29607,7 @@ Vue.directive("add-to-basket", function(value)
 
 });
 
-},{"services/ResourceService":44}],28:[function(require,module,exports){
+},{"services/ResourceService":45}],28:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.directive("place-order", {
@@ -29621,7 +29627,7 @@ Vue.directive("place-order", {
     }
 });
 
-},{"services/ApiService":39}],29:[function(require,module,exports){
+},{"services/ApiService":40}],29:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -29698,7 +29704,7 @@ Vue.directive("prepare-payment", {
 
 });
 
-},{"services/ApiService":39,"services/NotificationService":43}],30:[function(require,module,exports){
+},{"services/ApiService":40,"services/NotificationService":44}],30:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -29710,7 +29716,7 @@ Vue.directive("logout", function()
     $(this.el).click(
         function(event)
         {
-            ApiService.get("/rest/customer/logout")
+            ApiService.post("/rest/customer/logout")
                 .done(
                     function(response)
                     {
@@ -29731,7 +29737,7 @@ Vue.directive("logout", function()
 
 });
 
-},{"services/ApiService":39,"services/NotificationService":43}],31:[function(require,module,exports){
+},{"services/ApiService":40,"services/NotificationService":44}],31:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -29799,7 +29805,7 @@ Vue.elementDirective("resource-list", {
     }
 });
 
-},{"services/ResourceService":44}],32:[function(require,module,exports){
+},{"services/ResourceService":45}],32:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-bind", {
@@ -29839,7 +29845,7 @@ Vue.directive("resource-bind", {
 
 });
 
-},{"services/ResourceService":44}],33:[function(require,module,exports){
+},{"services/ResourceService":45}],33:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
@@ -29874,7 +29880,7 @@ Vue.directive("resource-if", {
 
 });
 
-},{"services/ResourceService":44}],34:[function(require,module,exports){
+},{"services/ResourceService":45}],34:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
 var accounting        = require("accounting");
@@ -29907,7 +29913,7 @@ Vue.filter("currency", function(price, customCurrency)
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":47,"currency-symbol-map":48,"services/ResourceService":44}],35:[function(require,module,exports){
+},{"accounting":48,"currency-symbol-map":49,"services/ResourceService":45}],35:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
     var imageList = item.variationImageList;
@@ -29968,68 +29974,6 @@ Vue.filter("itemURL", function(item)
 });
 
 },{}],38:[function(require,module,exports){
-var ApiService      = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
-
-module.exports = (function($)
-{
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive)
-    {
-        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
-        {
-            if (setActive)
-            {
-                if (addressType === 1)
-                {
-                    CheckoutService.setBillingAddressId(response.id);
-                }
-                else if (addressType === 2)
-                {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
-            }
-        });
-    }
-
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType)
-    {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
-
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType)
-    {
-        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-})(jQuery);
-
-},{"services/ApiService":39,"services/CheckoutService":40}],39:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
 
@@ -30195,7 +30139,71 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":43,"services/WaitScreenService":46}],40:[function(require,module,exports){
+},{"services/NotificationService":44,"services/WaitScreenService":47}],39:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":40,"services/CheckoutService":41}],40:[function(require,module,exports){
+arguments[4][38][0].apply(exports,arguments)
+},{"dup":38,"services/NotificationService":44,"services/WaitScreenService":47}],41:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -30286,7 +30294,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":39}],41:[function(require,module,exports){
+},{"services/ApiService":40}],42:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30382,7 +30390,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30516,7 +30524,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -30710,7 +30718,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -31269,7 +31277,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":39}],45:[function(require,module,exports){
+},{"services/ApiService":40}],46:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31470,7 +31478,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -31520,7 +31528,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -31935,7 +31943,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -31975,7 +31983,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":49}],49:[function(require,module,exports){
+},{"./map":50}],50:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -32133,17 +32141,29 @@ vueApp = new Vue({
         $toggleBasketPreview.on("click", function(evt)
         {
             evt.preventDefault();
+            evt.stopPropagation();
             $("body").toggleClass("open-right");
+        });
+        $(document).on("click", "body.open-right", function(evt)
+        {
+            if ($("body").hasClass("open-right"))
+            {
+                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                {
+                    evt.preventDefault();
+                    $("body").toggleClass("open-right");
+                }
+            }
         });
 
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();
 
-            // Toggle its own state
+            // toggle it's own state
             $toggleListView.toggleClass("grid");
 
-            // Toggle internal style of thumbs
+            // toggle internal style of thumbs
             $(".product-list, .cmp-product-thumb").toggleClass("grid");
         });
 
