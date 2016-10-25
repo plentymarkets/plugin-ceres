@@ -3,7 +3,7 @@
 namespace Callisto\Migrations;
 
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
-use Plenty\Modules\Category\Contracts\CategoryTemplateRepositoryContract;
+//use Plenty\Modules\Category\Contracts\CategoryTemplateRepositoryContract;
 
 /**
  * Class CreateCategoriesMigration
@@ -16,10 +16,7 @@ class CategoriesMigration
      */
     private $categoryRepo;
     
-    /**
-     * @var CategoryTemplateRepositoryContract
-     */
-    private $categoryTemplateRepo;
+    //private $categoryTemplateRepo;
     
     /**
      * @var ConfigRepository
@@ -55,13 +52,12 @@ class CategoriesMigration
     /**
      * CategoriesMigration constructor.
      * @param CategoryRepositoryContract $categoryRepo
-     * @param CategoryTemplateRepositoryContract $categoryTemplateRepo
      */
-    public function __construct(CategoryRepositoryContract $categoryRepo,
-                                CategoryTemplateRepositoryContract $categoryTemplateRepo)
+    public function __construct(CategoryRepositoryContract $categoryRepo)
+                                //CategoryTemplateRepositoryContract $categoryTemplateRepo)
     {
         $this->categoryRepo = $categoryRepo;
-        $this->categoryTemplateRepo = $categoryTemplateRepo;
+        //$this->categoryTemplateRepo = $categoryTemplateRepo;
     }
     
     /**
@@ -100,7 +96,7 @@ class CategoriesMigration
             
             $newCategory = $this->categoryRepo->createCategory($base);
     
-            foreach($categories as $lang => $name)
+            /*foreach($categories as $lang => $name)
             {
                 $categoryTemplate = [
                     'content' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -110,7 +106,7 @@ class CategoriesMigration
                 ];
     
                 $this->categoryTemplateRepo->storeCategoryTemplateContent($categoryTemplate['content'], $categoryTemplate['categoryId'], $categoryTemplate['lang'], $categoryTemplate['webstoreId']);
-            }
+            }*/
         }
     }
     

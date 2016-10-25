@@ -13,14 +13,13 @@
 
     <div class="collapse navbar-toggleable-md" id="mainNavbarCollapse">
         <ul class="nav navbar-nav pull-lg-right">
-            <!-- may be code below (li with classes 'active', 'dropdown', 'bigMenu') is useful later.
-                Remove it, if you're sure we don't need it. -->
-            <!--li class="nav-item{#
-                #}{% if services.category.isActive( category ) %} active{% endif %}{#
-                #}{% if category.children is not empty %} dropdown{% endif %}{#
-                #}">
-                </li-->
-            {% for category in services.navigation.getNavigationTree("item") %}
+            {#may be code below (li with classes 'active', 'dropdown', 'bigMenu') is useful later. Remove it, if you're sure we don't need it. #}
+            {#<li class="nav-item#}
+                {#{% if services.category.isActive( category ) %} active{% endif %}#}
+                {#{% if category.children is not empty %} dropdown{% endif %}#}
+                {#">#}
+            {#</li>#}
+            {% for category in services.category.getNavigationTree("item") %}
                 {% if category.children is empty %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ services.category.getURL( category ) }}">{{ category.details.first.name }}</a>
