@@ -20,7 +20,7 @@
                 #}{% if category.children is not empty %} dropdown{% endif %}{#
                 #}">
                 </li-->
-            {% for category in services.navigation.getNavigationTree("item") %}
+            {% for category in services.category.getNavigationTree("item") %}
                 {% if category.children is empty %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ services.category.getURL( category ) }}">{{ category.details.first.name }}</a>
