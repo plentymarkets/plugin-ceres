@@ -8,8 +8,5 @@
     "require"           : [],
     "namespace"         : "Callisto",
     "serviceProvider"   : "Callisto\\Providers\\TemplateServiceProvider",
-    "javaScriptFiles"   :[],
-    "runOnBuild": [
-      "Callisto\\Migrations\\CategoriesMigration"
-    ]
+    "javaScriptFiles"   :[]
 }
