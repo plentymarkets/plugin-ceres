@@ -384,9 +384,7 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            addressModalId : "",
-            deleteModal: "",
-            deleteModalId: ""
+            deleteModal: ""
         };
     },
 
@@ -417,9 +415,6 @@ Vue.component("address-select", {
         {
             this.addressList = [];
         }
-
-        this.addressModalId = "addressModal" + this._uid;
-        this.deleteModalId = "deleteModal" + this._uid;
     },
 
     /**
@@ -427,8 +422,8 @@ Vue.component("address-select", {
      */
     ready: function()
     {
-        this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
-        this.deleteModal = ModalService.findModal(document.getElementById(this.deleteModalId));
+        this.addressModal = ModalService.findModal(this.$els.addressModal);
+        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
 
     methods: {
@@ -470,7 +465,7 @@ Vue.component("address-select", {
             this.addressToEdit = {};
             this.updateHeadline();
 
-            $(".wrapper-bottom").append($("#" + this.addressModalId));
+            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -484,7 +479,7 @@ Vue.component("address-select", {
             this.addressToEdit = address;
             this.updateHeadline();
 
-            $(".wrapper-bottom").append($("#" + this.addressModalId));
+            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -498,7 +493,7 @@ Vue.component("address-select", {
             this.addressToDelete = address;
             this.updateHeadline();
 
-            $(".wrapper-bottom").append($("#" + this.deleteModalId));
+            $(".wrapper-bottom").append(this.$els.deleteModal);
             this.deleteModal.show();
         },
 
