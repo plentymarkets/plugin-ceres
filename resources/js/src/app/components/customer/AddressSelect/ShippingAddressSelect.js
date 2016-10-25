@@ -14,6 +14,21 @@ Vue.component("shipping-address-select", {
         this.addEventListener();
     },
 
+    /**
+     * Adds the dummy entry for "delivery address same as invoice address"
+     */
+    ready: function()
+    {
+        if (!this.addressList)
+        {
+            this.addressList = [];
+        }
+
+        this.addressList.unshift({
+            id: -99
+        });
+    },
+
     methods: {
         /**
          * Add the event listener

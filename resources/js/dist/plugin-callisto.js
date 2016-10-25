@@ -28131,6 +28131,7 @@ Vue.component("address-input-group", {
 
 },{}],10:[function(require,module,exports){
 var ModalService = require("services/ModalService");
+var AddressService = require("services/AddressService");
 
 Vue.component("address-select", {
 
@@ -28150,7 +28151,8 @@ Vue.component("address-select", {
             modalType      : "",
             headline       : "",
             addressToEdit  : {},
-            addressModalId : ""
+            addressToDelete: {},
+            deleteModal: ""
         };
     },
 
@@ -28161,20 +28163,26 @@ Vue.component("address-select", {
     {
         if (!this.isAddressListEmpty())
         {
+            var isSelectedAddressSet = false;
+
             for (var index in this.addressList)
             {
                 if (this.addressList[index].id === this.selectedAddressId)
                 {
                     this.selectedAddress = this.addressList[index];
+                    isSelectedAddressSet = true;
                 }
+            }
+
+            if (!isSelectedAddressSet)
+            {
+                this.selectedAddressId = null;
             }
         }
         else
         {
             this.addressList = [];
         }
-
-        this.addressModalId = "addressModal" + this._uid;
     },
 
     /**
@@ -28182,7 +28190,8 @@ Vue.component("address-select", {
      */
     ready: function()
     {
-        this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
+        this.addressModal = ModalService.findModal(this.$els.addressModal);
+        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
 
     methods: {
@@ -28216,38 +28225,78 @@ Vue.component("address-select", {
         },
 
         /**
-         * Show the add icon
+         * Show the add modal
          */
-        showAdd: function()
+        showAddModal: function()
         {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
 
-            $(".wrapper-bottom").append($("#" + this.addressModalId));
+            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
         /**
-         * Show the edit icon
+         * Show the edit modal
          * @param address
          */
-        showEdit: function(address)
+        showEditModal: function(address)
         {
             this.modalType = "update";
             this.addressToEdit = address;
             this.updateHeadline();
 
-            $(".wrapper-bottom").append($("#" + this.addressModalId));
+            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
         /**
-         * Close the current modal
+         * Show the delete modal
+         * @param address
          */
-        close: function()
+        showDeleteModal: function(address)
+        {
+            this.modalType = "delete";
+            this.addressToDelete = address;
+            this.updateHeadline();
+
+            $(".wrapper-bottom").append(this.$els.deleteModal);
+            this.deleteModal.show();
+        },
+
+        /**
+         * Delete the address selected before
+         */
+        deleteAddress: function()
+        {
+            var self = this;
+            var address = this.addressToDelete;
+            var addressType = address.pivot.typeId.toString();
+
+            AddressService.deleteAddress(address.id, addressType)
+                .done(function()
+                {
+                    self.closeDeleteModal();
+                    self.removeIdFromList(address.id);
+                });
+
+        },
+
+        /**
+         * Close the current create/update address modal
+         */
+        closeAddressModal: function()
         {
             this.addressModal.hide();
+        },
+
+        /**
+         * Close the current delete address modal
+         */
+        closeDeleteModal: function()
+        {
+            this.deleteModal.hide();
         },
 
         /**
@@ -28263,27 +28312,53 @@ Vue.component("address-select", {
                 {
                     headline = Translations.Callisto.orderShippingAddressEdit;
                 }
-                else
+                else if (this.modalType === "create")
                 {
                     headline = Translations.Callisto.orderShippingAddressCreate;
+                }
+                else
+                {
+                    headline = Translations.Callisto.orderShippingAddressDelete;
                 }
             }
             else if (this.modalType === "update")
             {
                 headline = Translations.Callisto.orderInvoiceAddressEdit;
             }
-            else
+            else if (this.modalType === "create")
             {
                 headline = Translations.Callisto.orderInvoiceAddressCreate;
             }
+            else
+            {
+                headline = Translations.Callisto.orderInvoiceAddressDelete;
+            }
 
             this.headline = headline;
-        }
+        },
 
+        removeIdFromList: function(id)
+        {
+            for (var i in this.addressList)
+            {
+                if (this.addressList[i].id === id)
+                {
+                    this.addressList.splice(i, 1);
+
+                    if (this.selectedAddressId.toString() === id.toString())
+                    {
+                        this.selectedAddress = null;
+                        this.selectedAddressId = "";
+
+                        break;
+                    }
+                }
+            }
+        }
     }
 });
 
-},{"services/ModalService":43}],11:[function(require,module,exports){
+},{"services/AddressService":39,"services/ModalService":43}],11:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -28427,6 +28502,21 @@ Vue.component("shipping-address-select", {
     created: function()
     {
         this.addEventListener();
+    },
+
+    /**
+     * Adds the dummy entry for "delivery address same as invoice address"
+     */
+    ready: function()
+    {
+        if (!this.addressList)
+        {
+            this.addressList = [];
+        }
+
+        this.addressList.unshift({
+            id: -99
+        });
     },
 
     methods: {

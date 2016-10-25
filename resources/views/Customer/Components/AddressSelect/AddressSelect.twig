@@ -12,7 +12,10 @@
                     aria-expanded="false"
             >
                 <div class="item-inner">
-                    <span class="item-content">
+                    <span v-if="selectedAddress.id == -99">
+                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressSameAsInvoice") }} -</p>
+                    </span>
+                    <span v-else class="item-content">
                         <template v-if="!isAddressListEmpty()">
                             <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
                             <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress.name2} ${selectedAddress.name3}</strong>
@@ -29,7 +32,7 @@
             </div>
 
             <div class="add-item">
-                <a href="#" class="" @click.prevent="showAdd" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressAddAddress") }}">
+                <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressAddAddress") }}">
                     <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                 </a>
             </div>
@@ -46,21 +49,26 @@
                                 @change="onAddressChanged(index)"
                         >
                         <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
-
-                            <span class="item-content small">
+                            <span v-if="address.id == -99">
+                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressSameAsInvoice") }} -</p>
+                            </span>
+                            <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
                                 <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
                                 <span v-else>${address.name2} ${address.name3}</span>
                                 <span>${address.name4}</span>
                                 <span>${address.address1} ${address.address2}</span>
                                 <span>${address.postalCode} ${address.town}</span>
-                            </span><!--
-                            --><span class="item-edit">
-                                    <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
                             </span>
-
+                            <!---->
+                            <div v-if="address.id != -99">
+                                <span class="item-edit">
+                                    <i class="fa fa-pencil-square-o" @click.prevent="showEditModal(address)" aria-hidden="true"></i>
+                                </span>
+                                <span class="item-remove">
+                                    <i class="fa fa-times" @click.prevent="showDeleteModal(address)" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </label>
                     </li>
                 </ul>
@@ -68,13 +76,12 @@
         </div>
     </div>
 
-
-    <div id="addressModal${_uid}">
+    <div v-el:address-modal>
         <div class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" @click="close" aria-label="Close">
+                        <button type="button" class="close" @click="closeAddressModal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">${headline}</h4>
@@ -89,6 +96,39 @@
                                 :modal-type="modalType"
                                 :address-type="addressType">
                             </create-update-address>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-el:delete-modal>
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" @click="closeDeleteModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">${headline}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>{{ trans("PluginCallisto::Callisto.addressDeleteWarning") }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 offset-sm-6">
+                                    <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("PluginCallisto::Callisto.generalCancel") }}</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary btn-block" @click="deleteAddress">{{ trans("PluginCallisto::Callisto.generalDelete") }}</button>
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
                 </div>
