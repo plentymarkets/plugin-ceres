@@ -128,7 +128,7 @@
         {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
 
         <!-- breadcrumb -->
-        {% if not services.category.isHome() %}
+        {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout()  %}
             {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" %}
         {% endif %}
 
