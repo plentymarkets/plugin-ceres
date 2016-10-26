@@ -5,7 +5,7 @@ Vue.component("country-select", {
     template: "#vue-country-select",
 
     props: [
-        "countryData",
+        "countryList",
         "countryNameMap",
         "selectedCountryId",
         "selectedStateId"
@@ -14,8 +14,8 @@ Vue.component("country-select", {
     data: function()
     {
         return {
-            countryList: [],
-            stateList  : []
+            stateList  : [],
+            selectedCountry: {}
         };
     },
 
@@ -24,7 +24,8 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
+        // TODO change to session/default country
+        this.selectedCountryId = this.selectedCountryId ? this.selectedCountryId : 1;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -37,6 +38,19 @@ Vue.component("country-select", {
         countryChanged: function()
         {
             this.selectedStateId = null;
+        },
+
+        getCountryById: function(countryId)
+        {
+            for (var index in this.countryList)
+            {
+                if (this.countryList[index].id === countryId)
+                {
+                    return this.countryList[index];
+                }
+            }
+
+            return null;
         }
     },
 
@@ -46,8 +60,14 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
-            this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
-            this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+
+            if (this.selectedCountry)
+            {
+                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+
+                this.$dispatch("selected-country-changed", this.selectedCountry.isoCode2);
+            }
         }
     }
 });

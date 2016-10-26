@@ -4,8 +4,17 @@ Vue.component("address-input-group", {
 
     props: [
         "addressData",
-        "locale"
+        "defaultCountry"
     ],
+
+    data: function()
+    {
+        return {
+            stateList  : [],
+            countryLocaleList: ["DE", "UK"],
+            localeToShow: ""
+        };
+    },
 
     /**
      * Check whether the address data exists. Else, create an empty one
@@ -17,6 +26,21 @@ Vue.component("address-input-group", {
             this.addressData = {};
         }
 
-        this.locale = "DE";
+        this.defaultCountry = "DE";
+    },
+
+    methods:
+    {
+        onSelectedCountryChanged: function(value)
+        {
+            if (this.countryLocaleList[this.countryLocaleList.indexOf(value)])
+            {
+                this.localeToShow = value;
+            }
+            else
+            {
+                this.localeToShow = this.defaultCountry;
+            }
+        }
     }
 });

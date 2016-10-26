@@ -8,9 +8,8 @@ module.exports = (function($)
         sortCountries         : sortCountries
     };
 
-    function parseShippingCountries(countryData, id)
+    function parseShippingCountries(countryList, id)
     {
-        var countryList       = JSON.parse(countryData);
         var deliveryCountries = [];
 
         if (countryList === null)
@@ -30,17 +29,15 @@ module.exports = (function($)
         return deliveryCountries;
     }
 
-    function translateCountryNames(countryNameData, countries)
+    function translateCountryNames(countryNameMap, countries)
     {
-        var countryNames = JSON.parse(countryNameData);
-
-        if (countryNames === null)
+        if (countryNameMap === null)
         {
             return;
         }
-        for (var id in countryNames)
+        for (var id in countryNameMap)
         {
-            var name = countryNames[id];
+            var name = countryNameMap[id];
 
             for (var i = 0, len = countries.length; i < len; i++)
             {
@@ -71,11 +68,9 @@ module.exports = (function($)
         });
     }
 
-    function parseShippingStates(countryData, countryID)
+    function parseShippingStates(countryList, countryID)
     {
-
         var states      = [];
-        var countryList = JSON.parse(countryData);
 
         for (var key in countryList)
         {
