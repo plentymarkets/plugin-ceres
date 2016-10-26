@@ -40,6 +40,10 @@ Vue.component("country-select", {
             this.selectedStateId = null;
         },
 
+        /**
+         * @param countryId
+         * @returns {*}
+         */
         getCountryById: function(countryId)
         {
             for (var index in this.countryList)

@@ -31,6 +31,10 @@ Vue.component("address-input-group", {
 
     methods:
     {
+        /**
+         * Update the address input group to show.
+         * @param value
+         */
         onSelectedCountryChanged: function(value)
         {
             if (this.countryLocaleList[this.countryLocaleList.indexOf(value)])
