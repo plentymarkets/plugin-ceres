@@ -29,23 +29,23 @@ module.exports = (function($)
         return deliveryCountries;
     }
 
-    function translateCountryNames(countryNameMap, countries)
+    function translateCountryNames(countryNameMap, countryList)
     {
         if (countryNameMap === null)
         {
             return;
         }
-        for (var id in countryNameMap)
+        for (var countryId in countryNameMap)
         {
-            var name = countryNameMap[id];
+            var countryName = countryNameMap[countryId];
 
-            for (var i = 0, len = countries.length; i < len; i++)
+            for (var index in countryList)
             {
-                var country = countries[i];
+                var country = countryList[index];
 
-                if (country.id === id)
+                if (country.id === parseInt(countryId))
                 {
-                    country.name = name;
+                    country.name = countryName;
                     break;
                 }
             }
