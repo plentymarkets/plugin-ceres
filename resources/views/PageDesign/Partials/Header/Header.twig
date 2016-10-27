@@ -128,8 +128,8 @@
         {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
 
         <!-- breadcrumb -->
-        {% if not services.category.isHome() %}
-            {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" with {'categoryTree': services.category.getCategoryTreeAsList()} %}
+        {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout()  %}
+            {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" %}
         {% endif %}
 
     </div>

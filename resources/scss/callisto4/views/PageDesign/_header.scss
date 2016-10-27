@@ -46,22 +46,26 @@
 				font-size: 1.2rem;
 			}
 		}
-		
+
 		.control-user{
 			flex: 1 0 auto;
 			margin-left: 1rem;
 			//login | register
 			#login-change {
 				position:relative;
-			}
-			a{
-				color: $gray-light;
-				text-transform: uppercase;
-				padding:1rem .8rem;
-				border:0;
-				border-top: 1px solid $gray-lighter;
-				&:first-child {
-					border-top:0;
+				&.open {
+					.dropdown-menu {
+						top:1.5rem;
+						z-index: 2000;
+						a {
+							padding:1rem .8rem;
+							border:0;
+							border-top: 1px solid $gray-lighter;
+							&:first-child {
+								border-top:0;
+							}
+						}
+					}
 				}
 			}
 			.account-menu {

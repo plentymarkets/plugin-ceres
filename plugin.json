@@ -9,7 +9,7 @@
     "namespace"         : "Callisto",
     "serviceProvider"   : "Callisto\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   :[],
-    "runOnBuild": [
+        "runOnBuild": [
       "Callisto\\Migrations\\CategoriesMigration"
     ]
 }
