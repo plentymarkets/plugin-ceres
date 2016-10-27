@@ -11,7 +11,7 @@ Vue.component("address-input-group", {
     {
         return {
             stateList  : [],
-            countryLocaleList: ["DE", "UK"],
+            countryLocaleList: ["DE", "GB"],
             localeToShow: ""
         };
     },
