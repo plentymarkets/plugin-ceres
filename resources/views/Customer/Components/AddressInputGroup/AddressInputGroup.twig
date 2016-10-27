@@ -7,9 +7,9 @@
             {% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
         </div>
 
-        {#<div v-if="localeToShow == 'GB">#}
-            {#{% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupUK" %}#}
-        {#</div>#}
+        <div v-if="localeToShow == 'GB">
+            {% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+        </div>
 
         <div class="col-sm-5">
             <country-select
