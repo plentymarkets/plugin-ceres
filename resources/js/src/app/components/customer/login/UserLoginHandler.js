@@ -41,6 +41,11 @@ Vue.component("user-login-handler", {
             }
 
             this.$compile(this.$el);
+
+            if (location.pathname === "/checkout")
+            {
+                location.reload();
+            }
         },
 
         /**
