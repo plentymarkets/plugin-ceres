@@ -21,7 +21,9 @@
 
         <div class="wrapper wrapper-top">
             <!-- messages -->
-            <notifications></notifications>
+            <notifications
+                :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"
+            ></notifications>
         </div>
 
         <div class="wrapper wrapper-left">
