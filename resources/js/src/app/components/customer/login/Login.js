@@ -8,7 +8,8 @@ Vue.component("login", {
 
     props: [
         "modalElement",
-        "backlink"
+        "backlink",
+        "hasToForward"
     ],
 
     data: function()
@@ -33,25 +34,25 @@ Vue.component("login", {
          */
         sendLogin: function()
         {
-            var component = this;
+            var self = this;
 
             ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) !== null)
+                    if (document.getElementById(self.modalElement) !== null)
                     {
-                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                        ModalService.findModal(document.getElementById(self.modalElement)).hide();
                     }
 
                     NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
 
-                    if (component.backlink !== null && component.backlink)
+                    if (self.backlink !== null && self.backlink)
                     {
-                        window.location = component.backlink;
+                        window.location = self.backlink;
                     }
-                    else
+                    else if (self.hasToForward)
                     {
                         window.location.pathname = "/";
                     }
