@@ -51,6 +51,10 @@ Vue.component("login", {
                     {
                         window.location = component.backlink;
                     }
+                    else
+                    {
+                        window.location.pathname = "/";
+                    }
                 })
                 .fail(function(response)
                 {
