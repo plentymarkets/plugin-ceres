@@ -41,6 +41,12 @@ Vue.component("user-login-handler", {
             }
 
             this.$compile(this.$el);
+
+            // Remove when data reload after login in checkout is implemented
+            if (location.pathname === "/checkout")
+            {
+                location.reload();
+            }
         },
 
         /**
