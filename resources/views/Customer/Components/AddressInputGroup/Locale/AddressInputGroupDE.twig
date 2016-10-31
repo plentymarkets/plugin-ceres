@@ -1,20 +1,20 @@
 <div class="col-xs-12">
     <div class="input-unit">
-        <input type="text" name="firma" id="txtCompany${_uid}" v-model="addressData.name1">
+        <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
         <label for="txtCompany${_uid}">{{ trans("PluginCallisto::Callisto.addressCompany") }}</label>
     </div>
 </div>
 
 <div class="col-sm-4">
     <div class="input-unit" data-validate="text">
-        <input type="text" name="vorname" id="txtFirstName${_uid}" v-model="addressData.name2">
+        <input type="text" name="firstName" id="txtFirstName${_uid}" v-model="addressData.name2">
         <label for="txtFirstName${_uid}">{{ trans("PluginCallisto::Callisto.addressFirstName") }}*</label>
     </div>
 </div>
 
 <div class="col-sm-4">
     <div class="input-unit" data-validate="text">
-        <input type="text" name="nachname" id="txtLastName${_uid}" v-model="addressData.name3" >
+        <input type="text" name="lastName" id="txtLastName${_uid}" v-model="addressData.name3" >
         <label for="txtLastName${_uid}">{{ trans("PluginCallisto::Callisto.addressLastName") }}*</label>
     </div>
 </div>
@@ -28,7 +28,7 @@
 
 <div class="col-sm-8">
     <div class="input-unit" data-validate="text">
-        <input type="text" name="strasse" id="txtStreet${_uid}" v-model="addressData.address1" >
+        <input type="text" name="street" id="txtStreet${_uid}" v-model="addressData.address1" >
         <label for="txtStreet${_uid}">{{ trans("PluginCallisto::Callisto.addressStreet") }}*</label>
     </div>
 </div>
@@ -56,14 +56,14 @@
 
 <div class="col-xs-6 col-sm-3">
     <div class="input-unit" data-validate="number">
-        <input type="text" name="plz" id="txtZip${_uid}" v-model="addressData.postalCode">
+        <input type="text" name="zip" id="txtZip${_uid}" v-model="addressData.postalCode">
         <label for="txtZip${_uid}">{{ trans("PluginCallisto::Callisto.addressZip") }}*</label>
     </div>
 </div>
 
 <div class="col-sm-4">
     <div class="input-unit" data-validate="text">
-        <input type="text" name="ort" id="txtPlace${_uid}" v-model="addressData.town">
+        <input type="text" name="town" id="txtPlace${_uid}" v-model="addressData.town">
         <label for="txtPlace${_uid}">{{ trans("PluginCallisto::Callisto.addressPlace") }}*</label>
     </div>
 </div>
