@@ -38,12 +38,15 @@ Vue.component("notifications", {
             NotificationService.getNotifications().remove(notification);
         },
 
+        /**
+         * show initial notifications from server
+         */
         showInitialNotifications: function()
         {
-            for (var key in self.initialNotifications)
+            for (var key in this.initialNotifications)
             {
-                var type = self.initialNotifications[key].type;
-                var message = self.initialNotifications[key].message;
+                var type = this.initialNotifications[key].type;
+                var message = this.initialNotifications[key].message;
 
                 if (type && message)
                 {
