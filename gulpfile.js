@@ -100,7 +100,7 @@ gulp.task('build:lang', function() {
                         translations[lang][group] = JSON.parse( String(file.contents) );
                     }).on('end', function() {
                         defered.resolve();
-                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', "var Translations = " + JSON.stringify( translations[lang] ) + ";" );
+                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', "var Translations = " + JSON.stringify( translations[lang] ).replace(/\\"/g, '') + ";" );
                     })
                 );
         }
