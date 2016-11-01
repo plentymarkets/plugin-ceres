@@ -112,11 +112,39 @@ Vue.component("address-select", {
         showEditModal: function(address)
         {
             this.modalType = "update";
-            this.addressToEdit = address;
+            this.addressToEdit = {};
+
+            this.addressToEdit = this.createTmpAddress(address);
             this.updateHeadline();
 
             $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
+        },
+
+        /**
+         * Creates a tmp address to prevent vue js two-way data binding bug
+         * @param address
+         */
+        createTmpAddress: function(address)
+        {
+            return {
+                id: address.id,
+                address1: address.address1,
+                address2: address.address2,
+                address3: address.address3,
+                address4: address.address4,
+                name1: address.name1,
+                name2: address.name2,
+                name3: address.name3,
+                name4: address.name4,
+                countryId: address.countryId,
+                stateId: address.stateId,
+                postalCode: address.postalCode,
+                town: address.town,
+                pivot: address.pivot,
+                options: address.options
+
+            };
         },
 
         /**
