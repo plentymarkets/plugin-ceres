@@ -86,11 +86,6 @@ class TemplateServiceProvider extends ServiceProvider
             $container->setTemplate("PluginCallisto::Customer.Guest");
         }, 0);
 
-        // provide template to place order
-        $eventDispatcher->listen('tpl.place_order', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Checkout.PlaceOrder");
-        }, 0);
-
         // provide mapped category IDs
         $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap) use(&$config) {
             $categoryMap->setCategoryMap(array (

@@ -45,26 +45,19 @@ Vue.component("notifications", {
         {
             for (var key in this.initialNotifications)
             {
-                var type = this.initialNotifications[key].type;
+                // set default type top 'log'
+                var type = this.initialNotifications[key].type || 'log';
                 var message = this.initialNotifications[key].message;
 
-                if (type && message)
+                if( message ) // type cannot be undefined
                 {
-                    switch (type)
+                    if( NotificationService[type] && typeof NotificationService[type] === "function" )
                     {
-                    case "info":
-                        NotificationService.info(message);
-                        break;
-                    case "warn":
-                        NotificationService.warn(message);
-                        break;
-                    case "error":
-                        NotificationService.error(message);
-                        break;
-                    case "success":
-                        NotificationService.success(message);
-                        break;
-                    default:
+                        NotificationService[type](message);
+                    }
+                    else
+                    {
+                        // unkown type
                         NotificationService.log(message);
                     }
                 }
