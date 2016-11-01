@@ -79,10 +79,18 @@
 
 	</div>
 
-{{ services.customer.getOrders() }}
-
 <!-- ORDER HISTORY -->
-<order-history order-max-count-pagination="{{ services.customer.getOrders()|length }}" contact-id="{{ frontend.Account.AccountContactId }}"></order-history>
+{% set ordersPerPage = config("PluginCallisto.my_account.orders_per_page") %}
+{% if not (ordersPerPage matches '/^\\d+$/') %}
+	{# config value is not a valid number #}
+	{% set ordersPerPage = 5 %}
+{% endif %}
+<order-history
+		:order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
+		:items-per-page="{{ ordersPerPage }}"
+		:show-first-page="{{ config('PluginCallisto.pagination.showFirstPage') }}"
+		:show-last-page="{{ config('PluginCallisto.pagination.showLastPage') }}">
+</order-history>
 <!-- ./ORDER HISTORY -->
 
 {% endblock %}

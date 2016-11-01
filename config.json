@@ -376,6 +376,13 @@
         "default"                   : "itemName_asc"
     },
     {
+        "tab"               : "MyAccount",
+        "key"               : "my_account.orders_per_page",
+        "label"             : "Number of orders to show per page in order history",
+        "type"              : "text",
+        "default"           : "5"
+    },
+    {
         "tab"               : "Log Settings",
         "key"               : "log.data",
         "label"             : "Enable logging options",
