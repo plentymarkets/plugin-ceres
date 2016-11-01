@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-order-history">
 
-<div class="page-content history container-max m-b-3">
+<div class="page-content history container-max">
         <div class="row m-b-3">
             <h1 class="h4 col-xs-12">{{ trans("PluginCallisto::Callisto.orderHistory") }}</h1>
         </div>
@@ -12,37 +12,59 @@
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix">
                         <div class="pull-xs-left">
-                            {{ trans("PluginCallisto::Callisto.orderShow") }} ${ showItemsOf } {{ trans("PluginCallisto::Callisto.orderOf") }} ${ orderMaxCountPagination } {{ trans("PluginCallisto::Callisto.orderOrders") }}
+                            {{ trans("PluginCallisto::Callisto.orderShow") }} ${ countStart } - ${ countEnd } {{ trans("PluginCallisto::Callisto.orderOf") }} ${ orderList.totalsCount } {{ trans("PluginCallisto::Callisto.orderOrders") }}
                         </div>
-                        <nav class="cmp cmp-paginator pull-xs-right" aria-label="Page navigation">
-                            <ul class="pagination m-y-0">
-                                <li v-if="showArrowsLeft()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(previousPaginationEntry())" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryPrevious") }}</span>
-                                    </button>
+
+                        <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+                            <ul class="pagination col-xs-12 m-y-0">
+
+                                <!-- PREV LINK -->
+                                <li class="page-item" :class="{disabled: page == 1}">
+                                    <button class="page-link" @click="showPage(page-1)">&laquo;</button>
                                 </li>
-                                <li v-if="showFirstPaginationEntry()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(1)">1</button>
+                                <!-- ./PREV LINK -->
+
+                                <!-- FIRST PAGE LINK -->
+                                <li class="page-item" v-if="page > 2 && showFirstPage == true">
+                                    <button class="page-link" @click="showPage(1)">1</button>
                                 </li>
-                                <li v-if="showDotsLeft()" class="page-item page-link">...</li>
-                                <li v-if="showArrowsLeft()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(previousPaginationEntry())">${ previousPaginationEntry() }</button>
+                                <li class="page-item page-link" v-if="page > 2 && showFirstPage == true">...</li>
+                                <!-- ./FIRST PAGE LINK -->
+
+                                <!-- PAGINATION -->
+                                <li class="page-item" v-if="orderList.isLastPage && page > 2">
+                                    <button class="page-link" @click="showPage(page-2)">${ page - 2 }</button>
                                 </li>
-                                <li class="page-item page-link"><b>${ currentPaginationEntry }</b></li>
-                                <li v-if="showArrowsRight()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(nextPaginationEntry())">${ nextPaginationEntry() }</button>
+
+                                <li class="page-item" v-if="page > 1">
+                                    <button class="page-link" @click="showPage(page-1)">${ page - 1 }</button>
                                 </li>
-                                <li v-if="showDotsRight()" class="page-item page-link">...</li>
-                                <li v-if="showLastPaginationEntry()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(getLastPaginationEntry())">${ getLastPaginationEntry() }</button>
+
+                                <li class="page-item active">
+                                    <span class="page-link">${ page }</span>
                                 </li>
-                                <li v-if="showArrowsRight()" class="page-item">
-                                    <button class="page-link" @click="updateOrderList(nextPaginationEntry())" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">{{ trans("PluginCallisto::Callisto.itemCategoryNext") }}</span>
-                                    </button>
+
+                                <li class="page-item" v-if="!orderList.isLastPage">
+                                    <button class="page-link" @click="showPage(page+1)">${ page + 1 }</button>
                                 </li>
+
+                                <li class="page-item" v-if="page == 1 && page+2 <= pageMax">
+                                    <button class="page-link" @click="showPage(page+2)">${ page + 2 }</button>
+                                </li>
+                                <!-- ./PAGINATION -->
+
+                                <!-- LAST PAGE LINK -->
+                                <li class="page-item page-link" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">...</li>
+                                <li class="page-item" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">
+                                    <button class="page-link" @click="showPage(pageMax)">${ pageMax }</button>
+                                </li>
+                                <!-- ./LAST PAGE LINK -->
+
+                                <!-- NEXT LINK -->
+                                <li class="page-item" :class="{disabled: orderList.isLastPage}">
+                                    <button class="page-link" @click="showPage(page+1)">&raquo;</button>
+                                </li>
+                                <!-- ./NEXT LINK -->
                             </ul>
                         </nav>
                     </div>
@@ -52,54 +74,52 @@
 
                     <!-- ORDER HISTORY -->
                     <div class="order-list">
-                        {% if frontend.Account.getIsAccountLoggedIn %}
-                            <article class="cmp cmp-order-item" v-for="order in orderList">
+                        <article class="cmp cmp-order-item" v-for="entry in orderList.entries">
 
-                                <div class="item-details small">
+                            <div class="item-details small">
 
-                                    <div class="item-name">
-                                        <h5>${ order.id }</h5>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
-                                                <span class="col-xs-6 col-sm-7">${ order.createdAt }</span>
-                                            </div>
-                                            <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderRecipient") }}</strong>
-                                                <span class="col-xs-6 col-sm-7">${ order.addresses[1].searchName }</span>
-                                            </div>
-                                            <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
-                                                <span class="col-xs-6 col-sm-7">[${ order.statusId }] TODO</span>
-                                            </div>
-                                            <div class="row">
-                                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>
-                                                <span class="col-xs-6 col-sm-7">TODO</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-md-6">
-
-                                            <input type="checkbox" class="item-toggle toggle-description" id="itemid-${ order.id }" value="">
-                                            <strong>{{ trans("PluginCallisto::Callisto.orderItemsBought") }}</strong>
-                                            <div class="item-description">
-
-                                                <ul class="m-y-1">
-                                                    <li v-for="orderItem in order.orderItems">
-                                                        ${ orderItem.orderItemName }
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <label class="expand-btn" for="itemid-${ order.id }" data-show-more="{{ trans("PluginCallisto::Callisto.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Callisto.itemShowLess") }}"></label>
-                                        </div>
-                                    </div>
+                                <div class="item-name">
+                                    <h5>${ entry.order.id }</h5>
                                 </div>
 
-                            </article>
-                        {% endif %}
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt }</span>
+                                        </div>
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderRecipient") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.addresses[1].searchName }</span>
+                                        </div>
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
+                                        </div>
+                                        {#<div class="row">#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>#}
+                                            {#<span class="col-xs-6 col-sm-7">TODO</span>#}
+                                        {#</div>#}
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+
+                                        <input type="checkbox" class="item-toggle toggle-description" id="itemid-${ entry.order.id }" value="">
+                                        <strong>{{ trans("PluginCallisto::Callisto.orderItemsBought") }}</strong>
+                                        <div class="item-description">
+
+                                            <ul class="m-y-1">
+                                                <li v-for="orderItem in entry.order.orderItems">
+                                                    ${ orderItem.orderItemName }
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <label class="expand-btn" for="itemid-${ entry.order.id }" data-show-more="{{ trans("PluginCallisto::Callisto.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Callisto.itemShowLess") }}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </article>
                     </div>
                     <!-- ./ORDER HISTORY -->
                 </div>
