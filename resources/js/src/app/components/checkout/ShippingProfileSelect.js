@@ -1,3 +1,5 @@
+var ApiService = require("services/ApiService");
+
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
@@ -58,7 +60,12 @@ Vue.component("shipping-profile-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(shippingProfileList)
+                {
+                    this.shippingProfileList = shippingProfileList;
+                }.bind(this));
         },
 
         onShippingProfileClicked: function(id)
