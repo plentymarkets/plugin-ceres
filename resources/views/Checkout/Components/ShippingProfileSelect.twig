@@ -9,6 +9,7 @@
                         value="${ shippingProfile.id }"
                         v-model="selectedShippingProfile"
                         @change="onShippingProfileChange()"
+                        @click="onShippingProfileClicked(shippingProfile.id)"
                 >
                 <label for="ShippingProfileID${ _uid }${ shippingProfile.id }">
                     <div class="icon">

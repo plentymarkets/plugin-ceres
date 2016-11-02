@@ -59,6 +59,14 @@ Vue.component("shipping-profile-select", {
         addEventListener: function()
         {
             // Listen for ApiService events and handle new data
+        },
+
+        onShippingProfileClicked: function(id)
+        {
+            if (id.toString() === this.selectedShippingProfile)
+            {
+                this.selectedShippingProfile = null;
+            }
         }
     }
 });
