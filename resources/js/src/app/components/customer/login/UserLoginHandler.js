@@ -54,9 +54,15 @@ Vue.component("user-login-handler", {
          */
         setUserLoggedOut: function()
         {
-            this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
-                "<small>oder</small>" +
-                "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
+            this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">" +
+                                    "<i class=\"fa fa-user\" aria-hidden=\"true\"></i>" +
+                                    "<span class=\"hidden-xs-down\">" + Translations.Callisto.accLogin + "</span>" +
+                                 "</a>" +
+                                 "<span class=\"pipe\"></span>" +
+                                 "<a data-toggle=\"modal\" href=\"#registration\">" +
+                                    "<i class=\"fa fa-user-plus\" aria-hidden=\"true\"></i>" +
+                                    "<span class=\"hidden-xs-down\">" + Translations.Callisto.accRegister + "</span>" +
+                                 "</a>";
         },
 
         /**
