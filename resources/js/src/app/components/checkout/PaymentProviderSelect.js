@@ -1,4 +1,5 @@
 var ApiService = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
 
 Vue.component("payment-provider-select", {
 
