@@ -1,13 +1,8 @@
 <script type="x/template" id="vue-user-login-handler">
     <div id="login-change">
-        {% if frontend.Account.getIsAccountLoggedIn %}
-            {% set userObject = services.customer.getContact() %}
+        <div v-if="username != ''">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-                {{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</a>
-            {% else %}
-                {{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</a>
-            {% endif %}
+                {{ trans("PluginCallisto::Callisto.generalHello") }} ${username}</a>
             </a>
             <div class="country-settings account-menu dropdown-menu dropdown-menu-right small">
               <div class="list-group" aria-labelledby="accountMenuList" >
@@ -15,8 +10,8 @@
                 <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Callisto.accLogout") }}</a>
               </div>
             </div>
-        {% else %}
-
+        </div>
+        <div v-else>
             <a data-toggle="modal" href="#login">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accLogin") }}</span>
@@ -26,6 +21,6 @@
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accRegister") }}</span>
             </a>
-        {% endif %}
+        </div>
     </div>
 </script>
