@@ -1,3 +1,5 @@
+var CheckoutService = require("services/CheckoutService");
+
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
