@@ -50,7 +50,7 @@
                             <h3>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h3>
                         </header>
                         <div class="shipping-method-select">
-                            <shipping-profile-select></shipping-profile-select>
+                            <shipping-profile-select :shipping-profile-data="{{ services.checkout.getShippingProfileList() | json_encode() }}"></shipping-profile-select>
                         </div>
 
                         <header class="m-b-1">

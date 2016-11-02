@@ -394,7 +394,8 @@
             "print_warnings"    : "Print warnings",
             "print_infos"       : "Print infos",
             "print_stack_trace" : "Print stack trace",
-            "log_messages"      : "Log messages"
+            "log_messages"      : "Log messages",
+            "show_error_code"   : "Show error codes"
         },
         "default"           : ""
     }
