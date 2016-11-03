@@ -1,3 +1,4 @@
+var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
 
@@ -29,6 +30,8 @@ Vue.component("address-select", {
      */
     created: function()
     {
+        this.addEventListener();
+
         if (!this.isAddressListEmpty())
         {
             var isSelectedAddressSet = false;
@@ -63,6 +66,42 @@ Vue.component("address-select", {
     },
 
     methods: {
+        /**
+         * Add the event listener
+         */
+        addEventListener: function()
+        {
+            var self = this;
+
+            ApiService.listen("AfterAccountContactLogout",
+                function()
+                {
+                    self.cleanDetlef();
+                });
+        },
+
+        cleanUserAddressData: function()
+        {
+            this.selectedAddress = {};
+            this.selectedAddressId = "";
+
+            var i = 0;
+
+            while (i < this.addressList.length)
+            {
+                var address = this.addressList[i];
+
+                if (address.id !== -99)
+                {
+                    this.addressList.splice(i, 1);
+                }
+                else
+                {
+                    ++i;
+                }
+            }
+        },
+
         /**
          * Update the selected address
          * @param index

@@ -1,4 +1,3 @@
-var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-address-select", {
@@ -28,28 +27,6 @@ Vue.component("shipping-address-select", {
         this.addressList.unshift({
             id: -99
         });
-
-        var self = this;
-
-        ApiService.listen("AfterAccountContactLogout",
-            function()
-            {
-                var i = 0;
-
-                while (i < self.addressList.length)
-                {
-                    var address = self.addressList[i];
-
-                    if (address.id !== -99)
-                    {
-                        self.addressList.splice(i, 1);
-                    }
-                    else
-                    {
-                        ++i;
-                    }
-                }
-            });
     },
 
     methods: {

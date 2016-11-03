@@ -1,4 +1,3 @@
-var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("invoice-address-select", {
@@ -14,18 +13,6 @@ Vue.component("invoice-address-select", {
     {
         this.addEventListener();
         CheckoutService.init();
-    },
-
-    ready: function()
-    {
-        var self = this;
-
-        ApiService.listen("AfterAccountContactLogout",
-            function()
-            {
-                self.addressList = [];
-                self.selectedAddress = null;
-            });
     },
 
     methods: {
