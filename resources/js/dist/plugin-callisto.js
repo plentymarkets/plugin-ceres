@@ -28048,6 +28048,7 @@ Vue.component("basket-list-item", {
 });
 
 },{"services/ApiService":39,"services/ResourceService":44}],7:[function(require,module,exports){
+var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("payment-provider-select", {
@@ -28086,12 +28087,17 @@ Vue.component("payment-provider-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(paymentProviderList)
+                {
+                    this.paymentProviderList = paymentProviderList;
+                }.bind(this));
         }
     }
 });
 
-},{"services/CheckoutService":40}],8:[function(require,module,exports){
+},{"services/ApiService":39,"services/CheckoutService":40}],8:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -28173,6 +28179,8 @@ var NotificationService = require("services/NotificationService");
 })(jQuery);
 
 },{"services/ApiService":39,"services/NotificationService":43}],9:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
@@ -28193,18 +28201,18 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
-        // Use when real data is implemented
-        // if(this.shippingProfileData)
-        // {
-        //     this.shippingProfileList = jQuery.parseJSON(this.shippingProfileData);
-        // }
+        for (var i in this.shippingProfileData)
+        {
+            var entry = this.shippingProfileData[i]._dataArray;
 
-        this.shippingProfileList =
-        [
-                {id: "1", name: "DHL", price: 3.99},
-                {id: "2", name: "Hermes", price: 2.99},
-                {id: "3", name: "UPS", price: 5}
-        ];
+            this.shippingProfileList.push(
+                {
+                    id: entry.parcelServicePresetId,
+                    name: entry.parcelServiceName,
+                    presetName: entry.parcelServicePresetName,
+                    price: entry.shippingAmount
+                });
+        }
 
         this.addEventListener();
     },
@@ -28215,9 +28223,6 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            // TODO remove log
-            // console.log(this.shippingProfileList);
-            // console.log(this.selectedShippingProfile);
         },
 
         /**
@@ -28236,12 +28241,25 @@ Vue.component("shipping-profile-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(shippingProfileList)
+                {
+                    this.shippingProfileList = shippingProfileList;
+                }.bind(this));
+        },
+
+        onShippingProfileClicked: function(id)
+        {
+            if (id.toString() === this.selectedShippingProfile)
+            {
+                this.selectedShippingProfile = null;
+            }
         }
     }
 });
 
-},{}],10:[function(require,module,exports){
+},{"services/ApiService":39}],10:[function(require,module,exports){
 Vue.component("address-input-group", {
 
     template: "#vue-address-input-group",
@@ -28918,6 +28936,10 @@ Vue.component("user-login-handler", {
 
     template: "#vue-user-login-handler",
 
+    props: [
+        "username"
+    ],
+
     /**
      * Add the global event listener for login and logout
      */
@@ -28928,13 +28950,13 @@ Vue.component("user-login-handler", {
         ApiService.listen("AfterAccountAuthentication",
             function(userData)
             {
-                self.setUserLoggedIn(userData);
+                self.setUsername(userData);
             });
 
         ApiService.listen("AfterAccountContactLogout",
             function()
             {
-                self.setUserLoggedOut();
+                self.username = "";
             });
     },
 
@@ -28943,52 +28965,16 @@ Vue.component("user-login-handler", {
          * Set the current user logged in
          * @param userData
          */
-        setUserLoggedIn: function(userData)
+        setUsername: function(userData)
         {
             if (userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
             {
-                this.$el.innerHTML = this.getUserHTML(userData.accountContact.firstName + " " + userData.accountContact.lastName);
+                this.username = userData.accountContact.firstName + " " + userData.accountContact.lastName;
             }
             else
             {
-                this.$el.innerHTML = this.getUserHTML(userData.accountContact.options[0].value);
+                this.username = userData.accountContact.options[0].value;
             }
-
-            this.$compile(this.$el);
-
-            // Remove when data reload after login in checkout is implemented
-            if (location.pathname === "/checkout")
-            {
-                location.reload();
-            }
-        },
-
-        /**
-         * Set the current user logged out
-         */
-        setUserLoggedOut: function()
-        {
-            this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
-                "<small>oder</small>" +
-                "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
-        },
-
-        /**
-         * Build the new user HTML for the head dynamically (no page reload required)
-         * @param username
-         * @returns {string}
-         */
-        getUserHTML: function(username)
-        {
-            return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                Translations.Callisto.generalHello + " " + username +
-                "</a>" +
-                "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
-                "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> " + Translations.Callisto.accMyAccount + "</a>" +
-                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> " + Translations.Callisto.accLogout + "</a>" +
-                "</div>" +
-                "</div>";
         }
     }
 });
