@@ -15,7 +15,6 @@
     ],
     "containers"        :
     [
-        // SingleItem
         {
             "name"          : "SingleItem.BeforePrice",
             "description"   : "Add content to single item view before item price."
@@ -32,8 +31,6 @@
             "name"          : "SingleItem.AfterAddToBasket",
             "description"   : "Add content to single item view after button 'add to basket'."
         },
-
-        // Basket
         {
             "name"          : "Basket.Totals.BeforeItemSum",
             "description"   : "Add content to totals in basket view before item sum."
@@ -66,8 +63,6 @@
             "name"          : "Basket.AfterCheckoutButton",
             "description"   : "Add content in basket after checkout button"
         },
-
-        // BasketPreview
         {
             "name"          : "BasketPreview.Totals.BeforeItemSum",
             "description"   : "Add content to totals in basket preview before item sum."
@@ -100,16 +95,14 @@
             "name"          : "BasketPreview.AfterCheckoutButton",
             "description"   : "Add content in basket preview after checkout button"
         },
-        
-        // Checkout
-        {
-            "name"          : "Checkout.AddressLists",
-            "description"   : "Overrides billing and delivery address controls in checkout view.",
-            "multiple"      : false
-        },
         {
             "name"          : "Checkout.Checkout",
             "description"   : "Overrides complete checkout view.",
+            "multiple"      : false
+        },
+        {
+            "name"          : "Checkout.AddressLists",
+            "description"   : "Overrides billing and delivery address controls in checkout view.",
             "multiple"      : false
         },
         {
@@ -190,12 +183,11 @@
             "name"          : "Checkout.OptIns",
             "description"   : "Add content to opt-in checkboxes in checkout view."
         },
-        
-        // Order confirmation
         {
             "name"          : "OrderConfirmation.AdditionalPaymentInformation",
             "description"   : "Adds additional payment information on order confirmation page.",
             "multiple"      : false
         }
-    ]
+    ],
+    "dataProviders"     : []
 }
