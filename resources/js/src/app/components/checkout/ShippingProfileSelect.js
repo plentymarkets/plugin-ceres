@@ -22,15 +22,18 @@ Vue.component("shipping-profile-select", {
     {
         for (var i in this.shippingProfileData)
         {
-            var entry = this.shippingProfileData[i]._dataArray;
+            var entry = this.shippingProfileData[i];
 
-            this.shippingProfileList.push(
-                {
-                    id: entry.parcelServicePresetId,
-                    name: entry.parcelServiceName,
-                    presetName: entry.parcelServicePresetName,
-                    price: entry.shippingAmount
-                });
+            if (entry)
+            {
+                this.shippingProfileList.push(
+                    {
+                        id: entry.parcelServicePresetId,
+                        name: entry.parcelServiceName,
+                        presetName: entry.parcelServicePresetName,
+                        price: entry.shippingAmount
+                    });
+            }
         }
 
         this.addEventListener();
