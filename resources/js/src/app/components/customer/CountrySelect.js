@@ -26,7 +26,6 @@ Vue.component("country-select", {
     created: function()
     {
         this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
-
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
     },
@@ -65,6 +64,7 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
+            this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry)
