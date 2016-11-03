@@ -9,13 +9,14 @@
                         value="${ shippingProfile.id }"
                         v-model="selectedShippingProfile"
                         @change="onShippingProfileChange()"
+                        @click="onShippingProfileClicked(shippingProfile.id)"
                 >
                 <label for="ShippingProfileID${ _uid }${ shippingProfile.id }">
                     <div class="icon">
-                        <img src="https://placekitten.com/g/60/60">
+                        <img src="">
                     </div><!--
                     --><div class="content">
-                        ${ shippingProfile.name }
+                        ${ shippingProfile.name } - ${ shippingProfile.presetName }
                         <div>
                             <small>
                                 (${ shippingProfile.price | currency })

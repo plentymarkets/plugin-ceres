@@ -1,13 +1,17 @@
-<script type="x/template" id="vue-notifications">
-  <div>
-    <div v-for="notification in notifications" class="alert alert-dynamic alert-dismissible fade in alert-${ notification.context }" role="alert">
-        <button type="button" class="close" aria-label="Close" @click="notification.close()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+{% set logData = config("PluginCallisto.log.data")|split(', ') %}
 
-        <strong>${ notification.code }</strong>
-        ${ notification.message }
-        <p class="small" v-for="trace in notification.stackTrace">${ trace.message }</p>
+<script type="x/template" id="vue-notifications">
+    <div>
+        <div v-for="notification in notifications" class="alert alert-dynamic alert-dismissible fade in alert-${ notification.context }"
+             role="alert">
+            <button type="button" class="close" aria-label="Close" @click="notification.close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {% if "show_error_code" in logData or "all" in logData %}
+                <strong>${ notification.code }</strong>
+            {% endif %}
+            ${ notification.message }
+            <p class="small" v-for="trace in notification.stackTrace">${ trace.message }</p>
+        </div>
     </div>
-  </div>
 </script>
