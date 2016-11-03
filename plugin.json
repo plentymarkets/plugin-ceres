@@ -32,28 +32,36 @@
             "description"   : "Add content to single item view after button 'add to basket'."
         },
         {
-            "name"          : "Basket.Totals.BeforeItemSum",
-            "description"   : "Add content to totals in basket view before item sum."
+            "name"          : "BasketTotals.BeforeItemSum",
+            "description"   : "Add content to basket totals before item sum."
         },
         {
-            "name"          : "Basket.Totals.AfterItemSum",
-            "description"   : "Add content to totals in basket view after item sum."
+            "name"          : "BasketTotals.AfterItemSum",
+            "description"   : "Add content to basket totals after item sum."
         },
         {
-            "name"          : "Basket.Totals.BeforeShippingCosts",
-            "description"   : "Add content to totals in basket view before shipping costs."
+            "name"          : "BasketTotals.BeforeShippingCosts",
+            "description"   : "Add content to basket totals before shipping costs."
         },
         {
-            "name"          : "Basket.Totals.AfterShippingCosts",
-            "description"   : "Add content to totals in basket view after shipping costs."
+            "name"          : "BasketTotals.AfterShippingCosts",
+            "description"   : "Add content to basket totals after shipping costs."
         },
         {
-            "name"          : "Basket.Totals.BeforeTotalSum",
-            "description"   : "Add content to totals in basket view before total sum."
+            "name"          : "BasketTotals.BeforeVat",
+            "description"   : "Add content to basket totals before VAT."
         },
         {
-            "name"          : "Basket.Totals.AfterTotalSum",
-            "description"   : "Add content to totals in basket view after total sum."
+            "name"          : "BasketTotals.AfterVat",
+            "description"   : "Add content to basket totals after VAT."
+        },
+        {
+            "name"          : "BasketTotals.BeforeTotalSum",
+            "description"   : "Add content to basket totals before total sum."
+        },
+        {
+            "name"          : "BasketTotals.AfterTotalSum",
+            "description"   : "Add content to basket totals after total sum."
         },
         {
             "name"          : "Basket.BeforeCheckoutButton",
@@ -62,30 +70,6 @@
         {
             "name"          : "Basket.AfterCheckoutButton",
             "description"   : "Add content in basket after checkout button"
-        },
-        {
-            "name"          : "BasketPreview.Totals.BeforeItemSum",
-            "description"   : "Add content to totals in basket preview before item sum."
-        },
-        {
-            "name"          : "BasketPreview.Totals.AfterItemSum",
-            "description"   : "Add content to totals in basket preview after item sum."
-        },
-        {
-            "name"          : "BasketPreview.Totals.BeforeShippingCosts",
-            "description"   : "Add content to totals in basket preview before shipping costs."
-        },
-        {
-            "name"          : "BasketPreview.Totals.AfterShippingCosts",
-            "description"   : "Add content to totals in basket preview after shipping costs."
-        },
-        {
-            "name"          : "BasketPreview.Totals.BeforeTotalSum",
-            "description"   : "Add content to totals in basket preview before total sum."
-        },
-        {
-            "name"          : "BasketPreview.Totals.AfterTotalSum",
-            "description"   : "Add content to totals in basket preview after total sum."
         },
         {
             "name"          : "BasketPreview.BeforeCheckoutButton",
