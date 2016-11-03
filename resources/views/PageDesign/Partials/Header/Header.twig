@@ -18,7 +18,16 @@
             <ul id="controlsList" class="controls-list list-inline">
 
                 <li class="list-inline-item control-user">
-                    <user-login-handler></user-login-handler>
+                    {% if frontend.Account.getIsAccountLoggedIn %}
+                        {% set userObject = services.customer.getContact() %}
+                        {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+                            <user-login-handler username="{{ userObject.firstName }} {{ userObject.lastName }}"></user-login-handler>
+                        {% else %}
+                            <user-login-handler username="{{ userObject.email }}"></user-login-handler>
+                        {% endif %}
+                    {% else %}
+                        <user-login-handler username=""></user-login-handler>
+                    {% endif %}
                 </li>
 
                 <li class="list-inline-item dropdown control-languages">

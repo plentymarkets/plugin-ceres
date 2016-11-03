@@ -1,3 +1,4 @@
+var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("payment-provider-select", {
@@ -36,7 +37,12 @@ Vue.component("payment-provider-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(paymentProviderList)
+                {
+                    this.paymentProviderList = paymentProviderList;
+                }.bind(this));
         }
     }
 });
