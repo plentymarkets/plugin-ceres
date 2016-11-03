@@ -8,6 +8,7 @@ Vue.component("country-select", {
         "countryList",
         "countryNameMap",
         "selectedCountryId",
+        "defaultCountryId",
         "selectedStateId"
     ],
 
@@ -24,8 +25,7 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        // TODO change to session/default country
-        this.selectedCountryId = this.selectedCountryId || 1;
+        this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
