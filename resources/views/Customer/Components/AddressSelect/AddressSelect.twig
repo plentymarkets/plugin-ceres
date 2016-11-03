@@ -90,6 +90,7 @@
                     <div class="modal-body">
                         <fieldset>
                             <create-update-address
+                                v-on:new-address-created="onAddressCreated"
                                 :address-data="addressToEdit"
                                 :address-modal="addressModal"
                                 :address-list="addressList"
