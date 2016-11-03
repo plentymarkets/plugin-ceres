@@ -80,6 +80,9 @@ Vue.component("address-select", {
                 });
         },
 
+        /**
+         * Remove all user related addresses from the component
+         */
         cleanUserAddressData: function()
         {
             this.addressList = this.addressList.filter(function(value)
