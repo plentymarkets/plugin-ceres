@@ -76,7 +76,7 @@ Vue.component("address-select", {
             ApiService.listen("AfterAccountContactLogout",
                 function()
                 {
-                    self.cleanDetlef();
+                    self.cleanUserAddressData();
                 });
         },
 
