@@ -37,7 +37,7 @@ Vue.component("address-input-group", {
          */
         onSelectedCountryChanged: function(value)
         {
-            if (this.countryLocaleList[this.countryLocaleList.indexOf(value)])
+            if (this.countryLocaleList.indexOf(value) > 0)
             {
                 this.localeToShow = value;
             }
