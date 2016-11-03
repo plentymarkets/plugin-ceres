@@ -82,23 +82,15 @@ Vue.component("address-select", {
 
         cleanUserAddressData: function()
         {
-            this.selectedAddress = {};
-            this.selectedAddressId = "";
-
-            var i = 0;
-
-            while (i < this.addressList.length)
+            this.addressList = this.addressList.filter(function(value)
             {
-                var address = this.addressList[i];
+                return value.id === -99;
+            });
 
-                if (address.id !== -99)
-                {
-                    this.addressList.splice(i, 1);
-                }
-                else
-                {
-                    ++i;
-                }
+            if (this.selectedAddressId !== -99)
+            {
+                this.selectedAddress = {};
+                this.selectedAddressId = "";
             }
         },
 
