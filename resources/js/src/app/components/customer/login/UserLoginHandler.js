@@ -1,4 +1,5 @@
 var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
 
@@ -15,16 +16,20 @@ Vue.component("user-login-handler", {
     {
         var self = this;
 
+        ResourceService.bind("user", this, "isLoggedIn");
+
         ApiService.listen("AfterAccountAuthentication",
             function(userData)
             {
                 self.setUsername(userData);
+                ResourceService.getResource("user").set({isLoggedIn: true});
             });
 
         ApiService.listen("AfterAccountContactLogout",
             function()
             {
                 self.username = "";
+                ResourceService.getResource("user").set({isLoggedIn: false});
             });
     },
 
