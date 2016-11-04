@@ -26,24 +26,16 @@
                             <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
                         </header>
                         <div class="invoice-addresses-select">
-                            {% if frontend.Account.getIsAccountLoggedIn %}
                                 <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
                                                         :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
-                            {% else %}
-                                <invoice-address-select :address-list="" :selected-address-id=""></invoice-address-select>
-                            {% endif %}
                         </div>
 
                         <header class="m-b-1">
                             <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
                         </header>
                         <div class="shipping-addresses-select">
-                            {% if frontend.Account.getIsAccountLoggedIn %}
                                 <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
                                                          :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
-                            {% else %}
-                                <shipping-address-select :address-list="" :selected-address-id=""></shipping-address-select>
-                            {% endif %}
                         </div>
 
                         <header class="m-b-1">

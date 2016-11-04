@@ -281,8 +281,6 @@ Vue.component("address-select", {
                 this.selectedAddressId = addressData.id;
 
                 this.loadSelectedAddress();
-
-                this.$dispatch("address-changed", this.selectedAddress);
             }
         }
     }
