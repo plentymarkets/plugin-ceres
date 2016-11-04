@@ -1,9 +1,9 @@
 body {
 	background-color: $gray-lightest;
 	
-	&>.wrapper {
+	&>.wrapper-top, &>.wrapper-left, &>.wrapper-right, &>.wrapper-bottom {
 		position 	: absolute;
-		z-index 	: $zIndex-3;
+		z-index 	: $zIndex-8;
 
 		.wrapper-inner{
 			
@@ -12,7 +12,7 @@ body {
 
 	.wrapper-main{
 		position: relative;
-		z-index: $zIndex-1;
+		//z-index: $zIndex-1;
 	}
 	
 	.wrapper-top {
@@ -68,7 +68,7 @@ body {
 			bottom 	: 0;
 			left 	: 0;
 
-			z-index: $zIndex-2;
+			z-index: $zIndex-7;
 
 			background-color: rgba(0, 0, 0, .5);
 		}

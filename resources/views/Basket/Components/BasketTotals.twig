@@ -1,9 +1,12 @@
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <script type="x/template" id="vue-basket-totals">
     <!-- BASKET TOTALS -->
     <div class="cmp cmp-totals">
         <h3>{{ trans("PluginCallisto::Callisto.basketSum") }}</h3>
         <div>
             <dl>
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.BeforeItemSum") }}
                 <dt v-if="showProperty( 'basket.value_of_items_gross' )">
                     <strong>{{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
@@ -17,7 +20,9 @@
                 --><dd v-if="showProperty( 'basket.value_of_items_net' )">
                     ${ basket.itemSumNet | currency }
                 </dd>
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.AfterItemSum") }}
 
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.BeforeShippingCosts") }}
                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
                     <strong>{{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
@@ -31,16 +36,20 @@
                 --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                     ${ basket.shippingAmountNet | currency }
                 </dd>
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.AfterShippingCosts") }}
 
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.BeforeVat") }}
                 <dt v-if="showProperty( 'basket.vat' )">
                     {{ trans("PluginCallisto::Callisto.basketVAT") }}
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.vat' )">
                     ${ basket.itemSum - basket.itemSumNet | currency }
                 </dd>
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.AfterVat") }}
 
                 <hr>
 
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.BeforeTotalSum") }}
                 <dt v-if="showProperty( 'basket.order_total_gross' )">
                     <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                 </dt><!--
@@ -54,6 +63,7 @@
                 --><dd v-if="showProperty( 'basket.order_total_net' )">
                     ${ basket.basketAmountNet | currency }
                 </dd>
+                {{ LayoutContainer.show("PluginCallisto::BasketTotals.AfterTotalSum") }}
             </dl>
         </div>
     </div>

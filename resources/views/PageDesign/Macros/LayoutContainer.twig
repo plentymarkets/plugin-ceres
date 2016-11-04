@@ -1,0 +1,5 @@
+{% macro show( containerName ) %}
+    {% for content in container(containerName) %}
+        {{ content.result|raw }}
+    {% endfor %}
+{% endmacro %}
