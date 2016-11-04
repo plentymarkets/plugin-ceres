@@ -435,15 +435,18 @@ Vue.component("shipping-profile-select", {
     {
         for (var i in this.shippingProfileData)
         {
-            var entry = this.shippingProfileData[i]._dataArray;
+            var entry = this.shippingProfileData[i];
 
-            this.shippingProfileList.push(
-                {
-                    id: entry.parcelServicePresetId,
-                    name: entry.parcelServiceName,
-                    presetName: entry.parcelServicePresetName,
-                    price: entry.shippingAmount
-                });
+            if (entry)
+            {
+                this.shippingProfileList.push(
+                    {
+                        id: entry.parcelServicePresetId,
+                        name: entry.parcelServiceName,
+                        presetName: entry.parcelServicePresetName,
+                        price: entry.shippingAmount
+                    });
+            }
         }
 
         this.addEventListener();
@@ -516,6 +519,7 @@ Vue.component("address-input-group", {
 });
 
 },{}],11:[function(require,module,exports){
+var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
 
@@ -547,6 +551,8 @@ Vue.component("address-select", {
      */
     created: function()
     {
+        this.addEventListener();
+
         if (!this.isAddressListEmpty())
         {
             var isSelectedAddressSet = false;
@@ -581,6 +587,37 @@ Vue.component("address-select", {
     },
 
     methods: {
+        /**
+         * Add the event listener
+         */
+        addEventListener: function()
+        {
+            var self = this;
+
+            ApiService.listen("AfterAccountContactLogout",
+                function()
+                {
+                    self.cleanUserAddressData();
+                });
+        },
+
+        /**
+         * Remove all user related addresses from the component
+         */
+        cleanUserAddressData: function()
+        {
+            this.addressList = this.addressList.filter(function(value)
+            {
+                return value.id === -99;
+            });
+
+            if (this.selectedAddressId !== -99)
+            {
+                this.selectedAddress = {};
+                this.selectedAddressId = "";
+            }
+        },
+
         /**
          * Update the selected address
          * @param index
@@ -744,7 +781,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":38,"services/ModalService":42}],12:[function(require,module,exports){
+},{"services/AddressService":38,"services/ApiService":39,"services/ModalService":42}],12:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
