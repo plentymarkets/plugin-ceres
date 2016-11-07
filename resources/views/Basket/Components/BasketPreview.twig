@@ -1,3 +1,4 @@
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
 {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
@@ -32,12 +33,14 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
+                    {{ LayoutContainer.show("PluginCallisto::BasketPreview.BeforeCheckoutButton") }}
                     <a v-resource-if:user="isLoggedIn" href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
                         {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                     <a v-resource-if:user="!isLoggedIn" href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
                         {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
+                    {{ LayoutContainer.show("PluginCallisto::BasketPreview.AfterCheckoutButton") }}
                 </div>
             </div>
         </div>

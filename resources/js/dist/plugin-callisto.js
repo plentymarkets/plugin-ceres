@@ -28048,6 +28048,9 @@ Vue.component("basket-list-item", {
 });
 
 },{"services/ApiService":39,"services/ResourceService":44}],7:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
@@ -28084,12 +28087,100 @@ Vue.component("payment-provider-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(paymentProviderList)
+                {
+                    this.paymentProviderList = paymentProviderList;
+                }.bind(this));
         }
     }
 });
 
-},{}],8:[function(require,module,exports){
+},{"services/ApiService":39,"services/CheckoutService":40}],8:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+(function($)
+{
+    Vue.component("placeOrder", {
+
+        template: "#vue-place-order",
+
+        props: ["targetContinue"],
+
+        data: function()
+        {
+            return {};
+        },
+
+        methods: {
+
+            preparePayment: function()
+            {
+                var self = this;
+
+                ApiService.post("/rest/checkout/payment").done(function(response)
+                {
+                    var paymentType = response.type || "errorCode";
+                    var paymentValue = response.value || "";
+
+                    switch (paymentType)
+                    {
+                    case "continue":
+                        var target = self.targetContinue;
+
+                        if (target)
+                        {
+                            window.location.assign(target);
+                        }
+                        break;
+                    case "redirectUrl":
+                        // redirect to given payment provider
+                        window.location.assign(paymentValue);
+                        break;
+                    case "externalContentUrl":
+                        // show external content in iframe
+                        self.showModal(paymentValue, true);
+                        break;
+                    case "htmlContent":
+                        self.showModal(paymentValue, false);
+                        break;
+
+                    case "errorCode":
+                        NotificationService.error(paymentValue);
+                        break;
+                    default:
+                        NotificationService.error("Unknown response from payment provider: " + paymentType);
+                        break;
+                    }
+                });
+            },
+
+            showModal: function(content, isExternalContent)
+            {
+                var $modal = $(this.$els.modal);
+                var $modalBody = $(this.$els.modalContent);
+
+                if (isExternalContent)
+                {
+                    $modalBody.html("<iframe src=\"" + content + "\">");
+                }
+                else
+                {
+                    $modalBody.html(content);
+                }
+
+                $modal.modal("show");
+
+            }
+        }
+    });
+})(jQuery);
+
+},{"services/ApiService":39,"services/NotificationService":43}],9:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
@@ -28110,18 +28201,21 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
-        // Use when real data is implemented
-        // if(this.shippingProfileData)
-        // {
-        //     this.shippingProfileList = jQuery.parseJSON(this.shippingProfileData);
-        // }
+        for (var i in this.shippingProfileData)
+        {
+            var entry = this.shippingProfileData[i];
 
-        this.shippingProfileList =
-        [
-                {id: "1", name: "DHL", price: 3.99},
-                {id: "2", name: "Hermes", price: 2.99},
-                {id: "3", name: "UPS", price: 5}
-        ];
+            if (entry)
+            {
+                this.shippingProfileList.push(
+                    {
+                        id: entry.parcelServicePresetId,
+                        name: entry.parcelServiceName,
+                        presetName: entry.parcelServicePresetName,
+                        price: entry.shippingAmount
+                    });
+            }
+        }
 
         this.addEventListener();
     },
@@ -28132,9 +28226,6 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            // TODO remove log
-            // console.log(this.shippingProfileList);
-            // console.log(this.selectedShippingProfile);
         },
 
         /**
@@ -28153,12 +28244,25 @@ Vue.component("shipping-profile-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(shippingProfileList)
+                {
+                    this.shippingProfileList = shippingProfileList;
+                }.bind(this));
+        },
+
+        onShippingProfileClicked: function(id)
+        {
+            if (id.toString() === this.selectedShippingProfile)
+            {
+                this.selectedShippingProfile = null;
+            }
         }
     }
 });
 
-},{}],9:[function(require,module,exports){
+},{"services/ApiService":39}],10:[function(require,module,exports){
 Vue.component("address-input-group", {
 
     template: "#vue-address-input-group",
@@ -28182,7 +28286,8 @@ Vue.component("address-input-group", {
     }
 });
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
 
@@ -28214,6 +28319,8 @@ Vue.component("address-select", {
      */
     created: function()
     {
+        this.addEventListener();
+
         if (!this.isAddressListEmpty())
         {
             var isSelectedAddressSet = false;
@@ -28248,6 +28355,37 @@ Vue.component("address-select", {
     },
 
     methods: {
+        /**
+         * Add the event listener
+         */
+        addEventListener: function()
+        {
+            var self = this;
+
+            ApiService.listen("AfterAccountContactLogout",
+                function()
+                {
+                    self.cleanUserAddressData();
+                });
+        },
+
+        /**
+         * Remove all user related addresses from the component
+         */
+        cleanUserAddressData: function()
+        {
+            this.addressList = this.addressList.filter(function(value)
+            {
+                return value.id === -99;
+            });
+
+            if (this.selectedAddressId !== -99)
+            {
+                this.selectedAddress = {};
+                this.selectedAddressId = "";
+            }
+        },
+
         /**
          * Update the selected address
          * @param index
@@ -28411,7 +28549,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":38,"services/ModalService":42}],11:[function(require,module,exports){
+},{"services/AddressService":38,"services/ApiService":39,"services/ModalService":42}],12:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -28502,7 +28640,7 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":38,"services/ValidationService":45}],12:[function(require,module,exports){
+},{"services/AddressService":38,"services/ValidationService":45}],13:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("invoice-address-select", {
@@ -28540,7 +28678,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{"services/CheckoutService":40}],13:[function(require,module,exports){
+},{"services/CheckoutService":40}],14:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-address-select", {
@@ -28592,7 +28730,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{"services/CheckoutService":40}],14:[function(require,module,exports){
+},{"services/CheckoutService":40}],15:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 
 Vue.component("country-select", {
@@ -28647,7 +28785,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":41}],15:[function(require,module,exports){
+},{"services/CountryService":41}],16:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28753,7 +28891,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43,"services/ValidationService":45}],16:[function(require,module,exports){
+},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43,"services/ValidationService":45}],17:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -28828,12 +28966,16 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43}],17:[function(require,module,exports){
+},{"services/ApiService":39,"services/ModalService":42,"services/NotificationService":43}],18:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("user-login-handler", {
 
     template: "#vue-user-login-handler",
+
+    props: [
+        "username"
+    ],
 
     /**
      * Add the global event listener for login and logout
@@ -28845,13 +28987,13 @@ Vue.component("user-login-handler", {
         ApiService.listen("AfterAccountAuthentication",
             function(userData)
             {
-                self.setUserLoggedIn(userData);
+                self.setUsername(userData);
             });
 
         ApiService.listen("AfterAccountContactLogout",
             function()
             {
-                self.setUserLoggedOut();
+                self.username = "";
             });
     },
 
@@ -28860,57 +29002,21 @@ Vue.component("user-login-handler", {
          * Set the current user logged in
          * @param userData
          */
-        setUserLoggedIn: function(userData)
+        setUsername: function(userData)
         {
             if (userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
             {
-                this.$el.innerHTML = this.getUserHTML(userData.accountContact.firstName + " " + userData.accountContact.lastName);
+                this.username = userData.accountContact.firstName + " " + userData.accountContact.lastName;
             }
             else
             {
-                this.$el.innerHTML = this.getUserHTML(userData.accountContact.options[0].value);
+                this.username = userData.accountContact.options[0].value;
             }
-
-            this.$compile(this.$el);
-
-            // Remove when data reload after login in checkout is implemented
-            if (location.pathname === "/checkout")
-            {
-                location.reload();
-            }
-        },
-
-        /**
-         * Set the current user logged out
-         */
-        setUserLoggedOut: function()
-        {
-            this.$el.innerHTML = "<a data-toggle=\"modal\" href=\"#login\">Einloggen</a>" +
-                "<small>oder</small>" +
-                "<a data-toggle=\"modal\" href=\"#signup\">Registieren</a>";
-        },
-
-        /**
-         * Build the new user HTML for the head dynamically (no page reload required)
-         * @param username
-         * @returns {string}
-         */
-        getUserHTML: function(username)
-        {
-            return "<a href=\"#\" class=\"dropdown-toggle\" id=\"accountMenuList\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                Translations.Callisto.generalHello + " " + username +
-                "</a>" +
-                "<div class=\"country-settings account-menu dropdown-menu dropdown-menu-right small\">" +
-                "<div class=\"list-group\" aria-labelledby=\"accountMenuList\">" +
-                "<a href=\"/my-account\" class=\"list-group-item small\"><i class=\"fa fa-user\"></i> " + Translations.Callisto.accMyAccount + "</a>" +
-                "<a href=\"#\" class=\"list-group-item small\" v-logout><i class=\"fa fa-sign-out\"></i> " + Translations.Callisto.accLogout + "</a>" +
-                "</div>" +
-                "</div>";
         }
     }
 });
 
-},{"services/ApiService":39}],18:[function(require,module,exports){
+},{"services/ApiService":39}],19:[function(require,module,exports){
 var ResourceService      = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
@@ -28948,7 +29054,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"services/ResourceService":44}],19:[function(require,module,exports){
+},{"services/ResourceService":44}],20:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
@@ -29004,7 +29110,7 @@ Vue.component("quantity-input", {
 
 });
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function($)
 {
 
@@ -29113,7 +29219,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":44}],21:[function(require,module,exports){
+},{"services/ResourceService":44}],22:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -29298,7 +29404,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":39,"services/ResourceService":44}],22:[function(require,module,exports){
+},{"services/ApiService":39,"services/ResourceService":44}],23:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -29409,7 +29515,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":37,"services/ModalService":42,"services/NotificationService":43}],23:[function(require,module,exports){
+},{"services/APIService":37,"services/ModalService":42,"services/NotificationService":43}],24:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
@@ -29476,7 +29582,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":39}],24:[function(require,module,exports){
+},{"services/ApiService":39}],25:[function(require,module,exports){
 Vue.component("language-select", {
 
     template: "#vue-language-select",
@@ -29520,7 +29626,7 @@ Vue.component("language-select", {
 
 });
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
@@ -29568,26 +29674,20 @@ Vue.component("notifications", {
         {
             for (var key in this.initialNotifications)
             {
-                var type = this.initialNotifications[key].type;
+                // set default type top 'log'
+                var type = this.initialNotifications[key].type || "log";
                 var message = this.initialNotifications[key].message;
 
-                if (type && message)
+                // type cannot be undefined
+                if (message)
                 {
-                    switch (type)
+                    if (NotificationService[type] && typeof NotificationService[type] === "function")
                     {
-                    case "info":
-                        NotificationService.info(message);
-                        break;
-                    case "warn":
-                        NotificationService.warn(message);
-                        break;
-                    case "error":
-                        NotificationService.error(message);
-                        break;
-                    case "success":
-                        NotificationService.success(message);
-                        break;
-                    default:
+                        NotificationService[type](message);
+                    }
+                    else
+                    {
+                        // unkown type
                         NotificationService.log(message);
                     }
                 }
@@ -29596,7 +29696,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":43}],26:[function(require,module,exports){
+},{"services/NotificationService":43}],27:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -29629,7 +29729,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":46}],27:[function(require,module,exports){
+},{"services/WaitScreenService":46}],28:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 
 Vue.directive("add-to-basket", function(value)
@@ -29652,84 +29752,7 @@ Vue.directive("add-to-basket", function(value)
 
 });
 
-},{"services/ResourceService":44}],28:[function(require,module,exports){
-var ApiService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.directive("prepare-payment", {
-
-    params: ["trigger", "selector-container", "selector-iframe", "target-continue"],
-
-    bind: function()
-    {
-        var self = this;
-        var trigger = this.params.trigger || "click";
-        var $elem   = trigger === "ready" ? $(document) : $(this.el);
-
-        $elem.on(trigger, function(event)
-        {
-            event.preventDefault();
-
-            ApiService.post("/rest/checkout/payment").done(function(response)
-            {
-                var paymentType     = response.type || "continue";
-                var paymentValue    = response.value || "";
-
-                switch (paymentType)
-                {
-                case "redirectUrl":
-                    window.location.assign(paymentValue);
-                    break;
-                case "externalContentUrl":
-                    var iframe = self.getParam("selectorIframe");
-
-                    if (iframe)
-                        {
-                        $(iframe).attr("src", paymentValue);
-                    }
-                    break;
-                case "htmlContent":
-                    var container = self.getParam("selectorContainer");
-
-                    if (container)
-                        {
-                        $(container).html(paymentValue);
-                    }
-                    break;
-                case "continue":
-                    var target = self.getParam("targetContinue");
-
-                    if (target)
-                        {
-                        window.location.assign(target);
-                    }
-                    break;
-                case "errorCode":
-                    NotificationService.error("Bei der Zahlungsabwicklung trat ein Fehler auf: " + paymentValue);
-                    break;
-                default:
-                    NotificationService.error("Unbekannte Antwort des Zahlungsanbieters: " + paymentType);
-                    break;
-                }
-            });
-        });
-    },
-
-    getParam: function(key)
-    {
-        var param = this.params[key];
-
-        if (!param)
-        {
-            console.error("param \"" + key + "\" not set.");
-        }
-
-        return param;
-    }
-
-});
-
-},{"services/ApiService":39,"services/NotificationService":43}],29:[function(require,module,exports){
+},{"services/ResourceService":44}],29:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -32119,7 +32142,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,15,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36])
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36])
 
 
 vueApp = new Vue({
