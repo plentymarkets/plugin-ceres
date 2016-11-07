@@ -182,7 +182,7 @@ Vue.component("address-select", {
         {
             var self = this;
             var address = this.addressToDelete;
-            var addressType = address.pivot.typeId.toString();
+            var addressType = this.addressType;
 
             AddressService.deleteAddress(address.id, addressType)
                 .done(function()
