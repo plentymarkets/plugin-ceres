@@ -16,7 +16,7 @@
         <div class="dropdown-menu" aria-labelledby="bankData" v-show="userBankData.length > 0">
             <ul>
                 <li class="item" v-for="(index,bankData) in userBankData">
-                    <input type="radio" id="${ bankData.id }" name="bankData" :checked="index == 1" :value="bankData" @change="changeSelecting(bankData)">
+                    <input type="radio" id="${ bankData.id }" name="bankData" :checked="index == 0" :value="bankData" @change="changeSelecting(bankData)">
                     <label for="${ bankData.id }" class="item-inner">
                         <span class="item-content small">
                             <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
