@@ -32,15 +32,12 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
-                  {% if frontend.Account.getIsAccountLoggedIn %}
-                      <a href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
-                          {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                      </a>
-                  {% else %}
-                    <a href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
+                    <a v-resource-if:user="isLoggedIn" href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
                         {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
-                  {% endif %}
+                    <a v-resource-if:user="!isLoggedIn" href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
+                        {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
