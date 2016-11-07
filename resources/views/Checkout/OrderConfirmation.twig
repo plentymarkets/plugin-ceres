@@ -1,5 +1,6 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 {% import "PluginCallisto::Checkout.Macros.Address" as address %}
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set data = services.customer.getLatestOrder() %}
 
@@ -64,6 +65,7 @@
                         <div class="paymentmethod">
                             <h6>{{ trans("PluginCallisto::Callisto.orderPayment") }}</h6>
                             <div>{{ trans("PluginCallisto::Callisto.orderPaypalPlus") }}</div>
+                            {{ LayoutContainer.show("PluginCallisto::OrderConfirmation.AdditionalPaymentInformation") }}
                         </div>
 
                         <hr>

@@ -26,6 +26,7 @@
     "no-unexpected-multiline" : "error",
     "no-unreachable"          : "error",
     "no-unsafe-finally"       : "error",
+    "no-useless-escape"       : "off",
     "use-isnan"               : "error",
     "valid-typeof"            : "error",
     "brace-style"             : [

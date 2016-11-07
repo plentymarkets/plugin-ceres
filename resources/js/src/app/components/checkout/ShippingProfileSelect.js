@@ -1,3 +1,5 @@
+var ApiService = require("services/ApiService");
+
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
@@ -18,18 +20,21 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
-        // Use when real data is implemented
-        // if(this.shippingProfileData)
-        // {
-        //     this.shippingProfileList = jQuery.parseJSON(this.shippingProfileData);
-        // }
+        for (var i in this.shippingProfileData)
+        {
+            var entry = this.shippingProfileData[i];
 
-        this.shippingProfileList =
-        [
-                {id: "1", name: "DHL", price: 3.99},
-                {id: "2", name: "Hermes", price: 2.99},
-                {id: "3", name: "UPS", price: 5}
-        ];
+            if (entry)
+            {
+                this.shippingProfileList.push(
+                    {
+                        id: entry.parcelServicePresetId,
+                        name: entry.parcelServiceName,
+                        presetName: entry.parcelServicePresetName,
+                        price: entry.shippingAmount
+                    });
+            }
+        }
 
         this.addEventListener();
     },
@@ -40,9 +45,6 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            // TODO remove log
-            // console.log(this.shippingProfileList);
-            // console.log(this.selectedShippingProfile);
         },
 
         /**
@@ -61,7 +63,20 @@ Vue.component("shipping-profile-select", {
          */
         addEventListener: function()
         {
-            // Listen for ApiService events and handle new data
+            ApiService.listen(
+                "eventName",
+                function(shippingProfileList)
+                {
+                    this.shippingProfileList = shippingProfileList;
+                }.bind(this));
+        },
+
+        onShippingProfileClicked: function(id)
+        {
+            if (id.toString() === this.selectedShippingProfile)
+            {
+                this.selectedShippingProfile = null;
+            }
         }
     }
 });
