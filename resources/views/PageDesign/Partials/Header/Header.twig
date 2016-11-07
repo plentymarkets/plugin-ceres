@@ -1,7 +1,7 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
 
 {% set lang                     = services.sessionStorage.getLang() %}
-{% set activeShippingCountries  = services.country.getActiveCountriesList() %}
+{% set activeShippingCountries  = services.country.getActiveCountriesList(lang) %}
 {% set currentShippingCountryId = services.checkout.getShippingCountryId() %}
 {% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
 
@@ -96,7 +96,7 @@
                         <li class="{% if currentShippingCountryId == shippingCountry.id %}active{% endif %}">
                             <a data-toggle="collapse" href="#countrySettings" class="" v-shipping-country.literal="{{ shippingCountry.id }}">
                                 <i class="flag-icon flag-icon-{{ shippingCountry.isoCode2|lower }}"></i>
-                                {{shippingCountry.name}}
+                                {{shippingCountry.currLangName}}
                             </a>
                         </li>
                         {% endfor %}
