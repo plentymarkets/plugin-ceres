@@ -1,6 +1,5 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 {% import "PluginCallisto::Checkout.Macros.Address" as address %}
-{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set data = services.customer.getLatestOrder() %}
 
@@ -29,61 +28,71 @@
                                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
                                 <span class="col-xs-6 col-sm-7">{{ data.order.createdAt|date("d.m.Y")}}</span>
                             </div>
-                            {#<div class="row">#}
-                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderPaymentEntry") }}</strong>#}
-                                {#<span class="col-xs-6 col-sm-7"> {{ data.order }} </span>#}
-                            {#</div>#}
+
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
                                 <span class="col-xs-6 col-sm-7">{{ data.status.frontendName }}</span>
                             </div>
-                            {#<div class="row">#}
-                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>#}
-                                {#<span class="col-xs-6 col-sm-7">TODO</span>#}
-                            {#</div>#}
                         </div>
 
                         <hr>
 
-                        <div class="invoiceaddress">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h6>
-                            {{ address.print( data.order.billingAddress ) }}
+                        <div>
+                            <div class="row">
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</strong>
+                                <span class="col-xs-6 col-sm-7">{{ address.print( data.order.billingAddress ) }}</span>
+                            </div>
+
+                            <div class="row m-t-1">
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</strong>
+                                <span class="col-xs-6 col-sm-7">
+                                    {% if data.order.billingAddress.id == data.order.deliveryAddress.id %}
+                                        <span>{{ trans("PluginCallisto::Callisto.addressSameAsInvoice") }}</span>
+                                    {% else %}
+                                        {{ address.print( data.order.billingAddress ) }}
+                                    {% endif %}
+                                </span>
+                            </div>
                         </div>
 
                         <hr>
 
-                        <div class="shippingaddress">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h6>
-                            {% if data.order.billingAddress.id == data.order.deliveryAddress.id %}
-                                <p>{{ trans("PluginCallisto::Callisto.addressSameAsInvoice") }}</p>
-                            {% else %}
-                                {{ address.print( data.order.billingAddress ) }}
+                        <div>
+                            <div class="row">
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</strong>
+                                <span class="col-xs-6 col-sm-7">{{ data.paymentMethodName }}</span>
+                            </div>
+                            <div class="row">
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderPaymentStatus") }}</strong>
+                                <span class="col-xs-6 col-sm-7">{{ trans("PluginCallisto::Callisto.paymentStatus_"~data.order.paymentStatus) }}</span>
+                            </div>
+                            <div class="row">
+                                {{ LayoutContainer.show("PluginCallisto::OrderConfirmation.AdditionalPaymentInformation") }}
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <div class="row">
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</strong>
+                                <span class="col-xs-6 col-sm-7">{{ data.order.shippingProvider }} - {{ data.shippingProfileName }}</span>
+                            </div>
+
+                            {% set shippingDate = "" %}
+                            {% for date in data.order.dates %}
+                                {% if date.typeId == 8 %}
+                                    {% set shippingDate = date.date %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if shippingDate is not empty %}
+                                <div class="row">
+                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderEstimatedShippingDate") }}</strong>
+                                    <span class="col-xs-6 col-sm-7">{{ shippingDate|date("d.m.Y") }}</span>
+                                </div>
                             {% endif %}
                         </div>
-                        <hr>
-
-                        <div class="paymentmethod">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderPayment") }}</h6>
-                            <div>{{ trans("PluginCallisto::Callisto.orderPaypalPlus") }}</div>
-                            {{ LayoutContainer.show("PluginCallisto::OrderConfirmation.AdditionalPaymentInformation") }}
-                        </div>
-
-                        <hr>
-
-                        <div class="shippingmethod">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h6>
-                            <div>{{ trans("PluginCallisto::Callisto.orderDhlPackage") }}</div>
-                        </div>
-
-                        <hr>
-
-                        {#<div class="status">#}
-                            {#<h6>{{ trans("PluginCallisto::Callisto.orderStatusHistory") }}</h6>#}
-                            {#<ul>#}
-                                {#<li><span class="text-muted">03.08.2016 13:55</span> [8] TODO</li>#}
-                                {#<li><span class="text-muted">03.08.2016 10:15</span> [3] TODO</li>#}
-                            {#</ul>#}
-                        {#</div>#}
 
                     </div>
                     <!-- ORDER -->
@@ -94,59 +103,133 @@
             <div class="col-md-7">
                 <div class="confirmation-order-list">
 
-                    <!-- component-order-item -->
-                    <article class="cmp cmp-order-item">
-                        <div class="row">
-                            <div class="col-md-7 item-main">
-                                <div class="item-image">
-                                    <img src="http://placehold.it/120x120">
-                                </div>
+                    {% for item in data.order.orderItems %}
+                        {% set itemImage = "http://placehold.it/120x120" %}
+                        {% set itemURL = "http://placehold.it/120x120" %}
+                        <article class="cmp cmp-order-item">
+                            <a href="{{ itemURL }}" class="item-image">
+                                <img src="{{ itemImage }}">
+                            </a>
+                            <div class="item-details small">
+                                <a href="{{ itemURL }}" class="clearfix">
+                                    <div class="item-name">
+                                        {{ item.orderItemName }}
+                                    </div>
+                                </a>
 
-                                <div class="item-details">
-                                    <h5>{{ trans("PluginCallisto::Callisto.orderId") }} TODO</h5>
-                                    <h6 class="item-name small">
-                                       TODO ARTIKELTEXT
-                                    </h6>
-                                    <p class="id small"><strong>{{ trans("PluginCallisto::Callisto.orderItemId") }}</strong> TODO</p>
+                                {% set price = item.amounts[0].priceGross %}
+                                {% set priceTotal = item.quantity * price %}
+                                {% set currency = item.amounts[0].currency %}
+                                <div class="row">
+                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPricePerPiece") }}</strong>
+                                    <span class="col-xs-6 col-sm-9">{{ price | formatMonetary( currency ) }}</span>
+                                </div>
+                                <div class="row">
+                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPeace") }}</strong>
+                                    <span class="col-xs-6 col-sm-9">{{ item.quantity }}</span>
+                                </div>
+                                <div class="row">
+                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderTotal") }}</strong>
+                                    <strong class="col-xs-6 col-sm-9">{{ priceTotal | formatMonetary( currency ) }}</strong>
                                 </div>
                             </div>
-                            <div class="col-md-5 small">
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
-                                    <span class="col-xs-6 col-sm-7">TODO</span>
-                                </div>
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderRecipient") }}</strong>
-                                    <span class="col-xs-6 col-sm-7">TODO</span>
-                                </div>
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
-                                    <span class="col-xs-6 col-sm-7">[8] TODO</span>
-                                </div>
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>
-                                    <span class="col-xs-6 col-sm-7">TODO</span>
-                                </div>
-                            </div>
-                        </div>
+                        </article>
 
-                    </article>
+                    {% endfor %}
 
                 </div>
                 <div class="gesamtsumme">
-                    <basket-totals></basket-totals>
+                    {% set basketConfig = config("PluginCallisto.basket.data") | split(", ") %}
+                    {% set amount = data.order.amounts[0] %}
+                    <!-- BASKET TOTALS -->
+                    <div class="cmp cmp-totals">
+                        <h3>{{ trans("PluginCallisto::Callisto.basketSum") }}</h3>
+                        <div>
+                            <dl>
+                                {% if "basket.value_of_items_gross" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        <strong>{{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
+                                    </dt><!--
+                                 --><dd>
+                                    <strong>{{ amount.grossTotal | formatMonetary( amount.currency ) }}</strong>
+                                </dd>
+                                {% endif %}
+
+                                {% if "basket.value_of_items_net" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        {{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
+                                    </dt><!--
+                                 --><dd>
+                                    {{ amount.netTotal | formatMonetary( amount.currency ) }}
+                                </dd>
+                                {% endif %}
+
+                                {% if "basket.shipping_costs_gross" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        <strong>{{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
+                                    </dt><!--
+                                 --><dd>
+                                    <strong>{# TODO: add shipping costs gross #}</strong>
+                                </dd>
+                                {% endif %}
+
+                                {% if "basket.shipping_costs_net" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        {{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
+                                    </dt><!--
+                                 --><dd>
+                                    {# TODO: add shipping costs net #}
+                                </dd>
+                                {% endif %}
+
+                                {% if "basket.vat" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        {{ trans("PluginCallisto::Callisto.basketVAT") }}
+                                    </dt><!--
+                                 --><dd>
+                                    {{ amount.vatTotal | formatMonetary( amount.currency ) }}
+                                </dd>
+                                {% endif %}
+
+                                <hr>
+
+                                {% if "basket.order_total_gross" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
+                                    </dt><!--
+                                 --><dd>
+                                    <strong></strong>
+                                </dd>
+                                {% endif %}
+
+                                {% if "basket.order_total_net" in basketConfig or "all" in basketConfig %}
+                                    <dt>
+                                        {{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
+                                    </dt><!--
+                                 --><dd>
+
+                                </dd>
+                                {% endif %}
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- ./BASKET TOTALS -->
                 </div>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-xs-6 col-md-4 offset-md-2">
+            {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
+            <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
                 <a href="/" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Callisto.generalHomepage") }}</a>
             </div>
 
-            <div class="col-xs-6 col-md-4">
-                <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Callisto.accMyAccount") }}</a>
-            </div>
+
+            {% if loggedIn %}
+                <div class="col-xs-6 col-md-4">
+                    <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Callisto.accMyAccount") }}</a>
+                </div>
+            {% endif %}
         </div>
 
     </div>
