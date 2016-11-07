@@ -33,7 +33,7 @@ Vue.component("user-login-handler", {
          */
         setUsername: function(userData)
         {
-            if(userData)
+            if (userData)
             {
                 if (userData.firstName.length > 0 && userData.lastName.length > 0)
                 {
