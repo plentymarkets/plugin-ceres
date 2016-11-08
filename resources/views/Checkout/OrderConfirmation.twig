@@ -108,8 +108,8 @@
 
                     {% for item in data.order.orderItems %}
                         {% if item.itemVariationId != 0 %}
-                            {% set itemImage = "http://placehold.it/120x120" %}
-                            {% set itemURL = "http://placehold.it/120x120" %}
+                            {% set itemImage = services.item.getVariationImage( item.itemVariationId ) %}
+                            {% set itemURL = item.itemVariationId | buildVariationURL(true) %}
                             <article class="cmp cmp-order-item">
                                 <a href="{{ itemURL }}" class="item-image">
                                     <img src="{{ itemImage }}">
