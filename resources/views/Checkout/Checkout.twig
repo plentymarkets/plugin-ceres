@@ -24,7 +24,6 @@
                 <!-- ADDRESS SELECT -->
                 <div class="col-md-7">
                     <div id="registry-form-container" class="registry-form-container main-col" data-id="0" data-status="2">
-
                         {% set overrideAddressLists = LayoutContainer.show("PluginCallisto::Checkout.AddressLists") %}
                         {% if overrideAddressLists|trim is empty %}
                             {% set overrideBillingAddress = LayoutContainer.show("PluginCallisto::Checkout.BillingAddress") %}
@@ -35,12 +34,8 @@
 
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeBillingAddress") }}
                                 <div class="invoice-addresses-select">
-                                    {% if frontend.Account.getIsAccountLoggedIn %}
                                         <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
                                                                 :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
-                                    {% else %}
-                                        <invoice-address-select :address-list="" :selected-address-id=""></invoice-address-select>
-                                    {% endif %}
                                 </div>
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.AfterBillingAddress") }}
                             {% else %}
@@ -55,12 +50,8 @@
 
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingAddress") }}
                                 <div class="shipping-addresses-select">
-                                    {% if frontend.Account.getIsAccountLoggedIn %}
                                         <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
                                                                  :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
-                                    {% else %}
-                                        <shipping-address-select :address-list="" :selected-address-id=""></shipping-address-select>
-                                    {% endif %}
                                 </div>
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.AfterShippingAddress") }}
                             {% else %}
@@ -69,7 +60,6 @@
                         {% else %}
                             {{ overrideAddressLists }}
                         {% endif %}
-
                         {% set overrideShippingProfiles = LayoutContainer.show("PluginCallisto::Checkout.ShippingProfileList") %}
                         {% if overrideShippingProfiles|trim is empty %}
                             <header class="m-b-1">
@@ -130,14 +120,17 @@
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
                                     {% autoescape false %}
                                         {{ trans("PluginCallisto::Callisto.generalChooseOur") }}
-                                        <a href="/agb/" target="_blank">
+                                        {% set terms = services.category.get(config('PluginCallisto.global.category.terms_and_conditions')) %}
+                                        <a href="{{ services.category.getURL( terms ) }}" target="_blank">
                                             <strong>{{ trans("PluginCallisto::Callisto.generalGtc") }}</strong>
                                         </a>,
-                                        <a href="/widerrufsrecht/" target="_blank">
+                                        {% set rights = services.category.get(config('PluginCallisto.global.category.cancellation_rights')) %}
+                                        <a href="{{ services.category.getURL( rights ) }}" target="_blank">
                                             <strong>{{ trans("PluginCallisto::Callisto.generalCancellationRight") }}</strong>
                                         </a>
                                         {{ trans("PluginCallisto::Callisto.generalAnd") }}
-                                        <a href="/datenschutz/" target="_blank">
+                                        {% set policy = services.category.get(config('PluginCallisto.global.category.privacy_policy')) %}
+                                        <a href="{{ services.category.getURL( policy ) }}" target="_blank">
                                             <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
                                         </a>
                                         {{ trans("PluginCallisto::Callisto.generalToNotice") }}

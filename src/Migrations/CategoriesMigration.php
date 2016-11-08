@@ -47,6 +47,10 @@ class CategoriesMigration
             'de' => '404',
             'en' => '404'
         ],
+        'global.category.cancellation_rights' => [
+            'de' => 'Widerrufsrecht',
+            'en' => 'Cancellation rights'
+        ],
     ];
     
     /**

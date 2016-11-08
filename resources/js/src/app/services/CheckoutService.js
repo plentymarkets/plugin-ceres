@@ -28,7 +28,7 @@ module.exports = (function($)
             }
             else
             {
-                initPromise = ApiService.get("rest/checkout").done(function(response)
+                initPromise = ApiService.get("/rest/checkout").done(function(response)
                 {
                     checkout = response;
                 });
@@ -40,7 +40,7 @@ module.exports = (function($)
     function _set(property, value)
     {
         checkout[property] = value;
-        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        return ApiService.post("/rest/checkout/", checkout).done(function(response)
         {
             checkout = response;
         });
@@ -55,7 +55,7 @@ module.exports = (function($)
             checkout[properties[i]] = checkoutData[properties[i]];
         }
 
-        return ApiService.post("rest/checkout/", checkout).done(function(response)
+        return ApiService.post("/rest/checkout/", checkout).done(function(response)
         {
             checkout = response;
         });
