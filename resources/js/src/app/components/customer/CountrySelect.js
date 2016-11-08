@@ -5,17 +5,18 @@ Vue.component("country-select", {
     template: "#vue-country-select",
 
     props: [
-        "countryData",
+        "countryList",
         "countryNameMap",
         "selectedCountryId",
+        "defaultCountryId",
         "selectedStateId"
     ],
 
     data: function()
     {
         return {
-            countryList: [],
-            stateList  : []
+            stateList  : [],
+            selectedCountry: {}
         };
     },
 
@@ -24,8 +25,7 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId ? this.selectedCountryId : 1);
-
+        this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
     },
@@ -37,6 +37,24 @@ Vue.component("country-select", {
         countryChanged: function()
         {
             this.selectedStateId = null;
+        },
+
+        /**
+         * @param countryId
+         * @returns {*}
+         */
+        getCountryById: function(countryId)
+        {
+            return this.countryList.find(
+                function(country)
+                {
+                    if (country.id === countryId)
+                    {
+                        return country;
+                    }
+
+                    return null;
+                });
         }
     },
 
@@ -46,8 +64,15 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
-            this.countryList = CountryService.parseShippingCountries(this.countryData, this.selectedCountryId);
-            this.stateList = CountryService.parseShippingStates(this.countryData, this.selectedCountryId);
+            this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
+            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+
+            if (this.selectedCountry)
+            {
+                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+
+                this.$dispatch("selected-country-changed", this.selectedCountry.isoCode2);
+            }
         }
     }
 });

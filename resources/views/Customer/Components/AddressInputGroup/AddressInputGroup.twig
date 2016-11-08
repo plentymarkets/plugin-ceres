@@ -3,18 +3,23 @@
 <script type="x/template" id="vue-address-input-group">
 
     <div>
-        {#<template v-if=" addressData.country.locale == 'DE' ">#}
-        {#</template>#}
+        <div v-if="localeToShow == 'DE'">
+            {% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+        </div>
 
-        {% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+        <div v-if="localeToShow == 'GB'">
+            {% include "PluginCallisto::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+        </div>
 
         <div class="col-sm-5">
             <country-select
                 :selected-country-id.sync="addressData.countryId"
+                :default-country-id="{{ services.checkout.getShippingCountryId() }}"
                 :selected-state-id.sync="addressData.stateId"
-                country-data="{{ services.country.getActiveCountriesList() | json_encode() }}"
-                country-name-map="{{ services.country.getActiveCountryNameMap("DE")| json_encode() }}"
-            ></country-select>
+                @selected-country-changed="onSelectedCountryChanged"
+                :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
+                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}">
+            </country-select>
         </div>
     </div>
 
