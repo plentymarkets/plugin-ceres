@@ -1,7 +1,9 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
-{{ component( "PluginCallisto::PageDesign.Components.LanguageSelect" ) }}
 
-{% set lang = services.sessionStorage.getLang() %}
+{% set lang                     = services.sessionStorage.getLang() %}
+{% set activeShippingCountries  = services.country.getActiveCountriesList(lang) %}
+{% set currentShippingCountryId = services.checkout.getShippingCountryId() %}
+{% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -20,13 +22,15 @@
                 </li>
 
                 <li class="list-inline-item dropdown control-languages">
-                    <language-select current-lang="{{ lang }}"></language-select>
+                    <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false" aria-controls="countrySettings" data-parent="#controlsList">
+                        <i class="flag-icon flag-icon-{{ lang }}"></i>
+                    </a>
                 </li>
 
                 <li class="list-inline-item control-search">
                     <a class="" data-toggle="collapse" href="#searchBox" aria-expanded="false" aria-controls="searchBox" data-parent="#controlsList">
                         <i class="fa fa-search"></i>
-                        <span class="hidden-xs-down">Suchen</span>
+                        <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.generalSearchNoDot") }}</span>
                     </a>
                 </li>
 
@@ -48,7 +52,7 @@
                 <input type="search" class="search-input" name="" value="" placeholder="Begriff eingeben und…">
                 <button class="search-submit" type="submit">
                     <i class="fa fa-search hidden-sm-up"></i>
-                    <span class="hidden-xs-down">Suchen!</span>
+                    <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.generalSearchNoDot") }}</span>
                 </button>
             </div>
         </div>
@@ -56,70 +60,37 @@
         <div id="countrySettings" class="cmp cmp-country-settings collapse">
             <div class="country-settings-inner row">
 
-                <div class="language-settings col-xs-12 col-sm-4">
+                <div class="language-settings col-xs-12 col-sm-6">
                     <div class="list-title">
                         <strong>{{ trans("PluginCallisto::Callisto.generalSelectLanguage") }}</strong>
                         <hr>
                     </div>
                     <ul>
-                        <li>
-                            <a href="#" class="" v-on:click="languageChanged('de')">
-                                <i class="flag-icon flag-icon-de"></i>
-                                {{ trans("PluginCallisto::Callisto.generalGerman") }}
+                        {% for activeShopLang in activeShopLanguageList %}
+                        <li class="{% if activeShopLang == lang %}active{% endif %}">
+                            <a data-toggle="collapse" href="#countrySettings" class="" v-change-lang="{currLang: '{{ lang }}', lang: '{{ activeShopLang }}' }">
+                                <i class="flag-icon flag-icon-{{ activeShopLang }}"></i>
+                                {{ trans("PluginCallisto::Callisto."~activeShopLang) }}
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="#" class="" v-on:click="languageChanged('en')">
-                                <i class="flag-icon flag-icon-gb"></i>
-                                {{ trans("PluginCallisto::Callisto.generalEnglish") }}
-                            </a>
-                        </li>
-
+                        {% endfor %}
                     </ul>
                 </div>
 
-                <div class="shipping-settings col-xs-12 col-sm-8">
+                <div class="shipping-settings col-xs-12 col-sm-6">
                     <div class="list-title">
                         <strong>{{ trans("PluginCallisto::Callisto.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
                     <ul>
-                        <li class="active">
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-de"></i>
-                                {{ trans("PluginCallisto::Callisto.generalGermany") }}
+                        {% for shippingCountry in activeShippingCountries %}
+                        <li class="{% if currentShippingCountryId == shippingCountry.id %}active{% endif %}">
+                            <a data-toggle="collapse" href="#countrySettings" class="" v-shipping-country.literal="{{ shippingCountry.id }}">
+                                <i class="flag-icon flag-icon-{{ shippingCountry.isoCode2|lower }}"></i>
+                                {{shippingCountry.currLangName}}
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-at"></i>
-                                {{ trans("PluginCallisto::Callisto.generalAustria") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-ch"></i>
-                                {{ trans("PluginCallisto::Callisto.generalSwitzerland") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-fr"></i>
-                                {{ trans("PluginCallisto::Callisto.generalFrance") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-gb"></i>
-                                {{ trans("PluginCallisto::Callisto.generalEngland") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="">
-                                <i class="flag-icon flag-icon-it"></i>
-                                {{ trans("PluginCallisto::Callisto.generalItaly") }}
-                            </a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -133,5 +104,4 @@
         {% endif %}
 
     </div>
-
 </div>
