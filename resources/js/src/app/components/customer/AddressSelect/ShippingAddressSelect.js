@@ -22,6 +22,13 @@ Vue.component("shipping-address-select", {
         this.addressList.unshift({
             id: -99
         });
+
+        // if there is no selection for delivery address, the dummy entry will be selected
+        if (this.selectedAddressId === 0)
+        {
+            this.selectedAddressId = -99;
+            CheckoutService.setDeliveryAddressId(-99);
+        }
     },
 
     methods: {
