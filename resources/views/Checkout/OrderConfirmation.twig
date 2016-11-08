@@ -7,7 +7,6 @@
     {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
 
     <div class="page-content myaccount container-max m-b-3 m-t-1 p-b-3">
-
         <div class="row m-b-3">
             <div class="col-xs-12">
                 <h1 class="h4">{{ trans("PluginCallisto::Callisto.generalThanks") }}</h1>
@@ -76,7 +75,7 @@
                         <div>
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</strong>
-                                <span class="col-xs-6 col-sm-7">{{ data.order.shippingProvider }} - {{ data.shippingProfileName }}</span>
+                                <span class="col-xs-6 col-sm-7">{{ data.shippingProvider }} - {{ data.shippingProfileName }}</span>
                             </div>
 
                             {% set shippingDate = "" %}
@@ -102,39 +101,49 @@
 
             <div class="col-md-7">
                 <div class="confirmation-order-list">
+                    {% set shippingCosts = 0 %}
+                    {% set shippingCostsNet = 0 %}
+                    {% set itemTotals = 0 %}
+                    {% set itemTotalsNet = 0 %}
 
                     {% for item in data.order.orderItems %}
-                        {% set itemImage = "http://placehold.it/120x120" %}
-                        {% set itemURL = "http://placehold.it/120x120" %}
-                        <article class="cmp cmp-order-item">
-                            <a href="{{ itemURL }}" class="item-image">
-                                <img src="{{ itemImage }}">
-                            </a>
-                            <div class="item-details small">
-                                <a href="{{ itemURL }}" class="clearfix">
-                                    <div class="item-name">
-                                        {{ item.orderItemName }}
-                                    </div>
+                        {% if item.itemVariationId != 0 %}
+                            {% set itemImage = "http://placehold.it/120x120" %}
+                            {% set itemURL = "http://placehold.it/120x120" %}
+                            <article class="cmp cmp-order-item">
+                                <a href="{{ itemURL }}" class="item-image">
+                                    <img src="{{ itemImage }}">
                                 </a>
+                                <div class="item-details small">
+                                    <a href="{{ itemURL }}" class="clearfix">
+                                        <div class="item-name">
+                                            {{ item.orderItemName }}
+                                        </div>
+                                    </a>
 
-                                {% set price = item.amounts[0].priceGross %}
-                                {% set priceTotal = item.quantity * price %}
-                                {% set currency = item.amounts[0].currency %}
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPricePerPiece") }}</strong>
-                                    <span class="col-xs-6 col-sm-9">{{ price | formatMonetary( currency ) }}</span>
+                                    {% set price = item.amounts[0].priceGross %}
+                                    {% set priceTotal = item.quantity * price %}
+                                    {% set currency = item.amounts[0].currency %}
+                                    {% set itemTotals = itemTotals + price %}
+                                    {% set itemTotalsNet = itemTotalsNet + item.amounts[0].priceNet %}
+                                    <div class="row">
+                                        <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPricePerPiece") }}</strong>
+                                        <span class="col-xs-6 col-sm-9">{{ price | formatMonetary( currency ) }}</span>
+                                    </div>
+                                    <div class="row">
+                                        <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPeace") }}</strong>
+                                        <span class="col-xs-6 col-sm-9">{{ item.quantity }}</span>
+                                    </div>
+                                    <div class="row">
+                                        <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderTotal") }}</strong>
+                                        <strong class="col-xs-6 col-sm-9">{{ priceTotal | formatMonetary( currency ) }}</strong>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderPeace") }}</strong>
-                                    <span class="col-xs-6 col-sm-9">{{ item.quantity }}</span>
-                                </div>
-                                <div class="row">
-                                    <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Callisto.orderTotal") }}</strong>
-                                    <strong class="col-xs-6 col-sm-9">{{ priceTotal | formatMonetary( currency ) }}</strong>
-                                </div>
-                            </div>
-                        </article>
-
+                            </article>
+                        {% else %}
+                            {% set shippingCosts = item.amounts[0].priceOriginalGross %}
+                            {% set shippingCostsNet = item.amounts[0].priceOriginalNet %}
+                        {% endif %}
                     {% endfor %}
 
                 </div>
@@ -151,7 +160,7 @@
                                         <strong>{{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                                     </dt><!--
                                  --><dd>
-                                    <strong>{{ amount.grossTotal | formatMonetary( amount.currency ) }}</strong>
+                                    <strong>{{ itemTotals | formatMonetary( amount.currency ) }}</strong>
                                 </dd>
                                 {% endif %}
 
@@ -160,7 +169,7 @@
                                         {{ trans("PluginCallisto::Callisto.basketValue") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                                     </dt><!--
                                  --><dd>
-                                    {{ amount.netTotal | formatMonetary( amount.currency ) }}
+                                    {{ itemTotalsNet | formatMonetary( amount.currency ) }}
                                 </dd>
                                 {% endif %}
 
@@ -169,7 +178,7 @@
                                         <strong>{{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                                     </dt><!--
                                  --><dd>
-                                    <strong>{# TODO: add shipping costs gross #}</strong>
+                                    <strong>{{ shippingCosts | formatMonetary( amount.currency ) }}</strong>
                                 </dd>
                                 {% endif %}
 
@@ -178,7 +187,7 @@
                                         {{ trans("PluginCallisto::Callisto.itemShippingCosts") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                                     </dt><!--
                                  --><dd>
-                                    {# TODO: add shipping costs net #}
+                                    {{ shippingCostsNet | formatMonetary( amount.currency ) }}
                                 </dd>
                                 {% endif %}
 
@@ -198,7 +207,7 @@
                                         <strong>{{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketGross") }})</strong>
                                     </dt><!--
                                  --><dd>
-                                    <strong></strong>
+                                    <strong>{{ amount.grossTotal | formatMonetary( amount.currency ) }}</strong>
                                 </dd>
                                 {% endif %}
 
@@ -207,7 +216,7 @@
                                         {{ trans("PluginCallisto::Callisto.basketTotalSum") }} ({{ trans("PluginCallisto::Callisto.basketNet") }})
                                     </dt><!--
                                  --><dd>
-
+                                    {{ amount.netTotal | formatMonetary( amount.currency ) }}
                                 </dd>
                                 {% endif %}
                             </dl>
