@@ -5,7 +5,7 @@
     {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
-    {{ component( "PluginCallisto::Templates.BankDataSelect.BankDataSelect" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.BankDataSelect" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}

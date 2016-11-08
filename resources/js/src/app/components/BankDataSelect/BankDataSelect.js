@@ -1,6 +1,7 @@
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
+var ValidationService   = require("services/ValidationService");
 
 Vue.component("bank-data-select", {
 
@@ -19,7 +20,8 @@ Vue.component("bank-data-select", {
             bankInfoModal: {},
             updateBankData: {},
             doUpdate: null,
-            selectedBankData: {}
+            selectedBankData: {},
+            updateBankIndex: 0
         };
     },
 
@@ -37,17 +39,17 @@ Vue.component("bank-data-select", {
     methods: {
 
         changeSelecting: function(bankData)
-      {
+        {
             this.selectedBankData = bankData;
         },
 
         reset: function()
-      {
+        {
             this.updateBankData = {};
         },
 
         openAddBank: function()
-      {
+        {
             this.headline = "anlegen";
 
             $(".wrapper-bottom").append($("#" + this.bankInfoId));
@@ -56,8 +58,9 @@ Vue.component("bank-data-select", {
             this.doUpdate = false;
         },
 
-        openUpdateBank: function(bankData)
-      {
+        openUpdateBank: function(index, bankData)
+        {
+            this.updateBankIndex = index;
             this.updateBankData = bankData;
             this.headline = "ändern";
 
@@ -69,100 +72,85 @@ Vue.component("bank-data-select", {
 
         validateInput: function()
       {
-            var checkLastFirstName = this.updateBankData.accountOwner.split(" ");
-            var checkCharacter = parseInt(this.updateBankData.iban.substring(0, 2));
-            var ibanOK = false;
-            var accountOwnerOK = false;
+            var _self = this;
 
-            if (this.updateBankData.accountOwner.length == 0 || checkLastFirstName[0].length == 0 || checkLastFirstName[1].length == 0)
-        {
-                $(".accountOwner").addClass("error");
-                ibanOK = false;
-                accountOwnerOK = false;
-            }
-            else
-        {
-                $(".accountOwner").removeClass("error");
-                accountOwnerOK = true;
-            }
+            ValidationService.validate($("#my-bankForm"))
+              .done(function()
+              {
+                  if (_self.doUpdate)
+                  {
+                      _self.updateBankInfo(_self.updateBankData);
+                  }
+                  else
+                  {
+                      _self.addBankInfo(_self.updateBankData);
+                  }
+              })
+              .fail(function(invalidFields)
+              {
+                  ValidationService.markInvalidFields(invalidFields, "error");
+              });
 
-            if (this.updateBankData.iban.length != 22 || !isNaN(checkCharacter))
-        {
-                $(".iban").addClass("error");
-                ibanOK = false;
-            }
-            else
-        {
-                $(".iban").removeClass("error");
-                ibanOK = true;
-            }
-
-            if (ibanOK && accountOwnerOK)
-        {
-                if (this.doUpdate)
-          {
-                    this.updateBankInfo(this.updateBankData);
-                }
-                else
-          {
-                    this.addBankInfo(this.updateBankData);
-                }
-            }
         },
 
         updateBankInfo: function()
-      {
+        {
             var _self = this;
 
             this.updateBankData.lastUpdateBy = "customer";
 
             ApiService.put("/rest/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
-        .done(function(response)
-        {
-            _self.updateBankData = response;
-            _self.bankInfoModal.hide();
-            NotificationService.success("Bankdaten wurden aktualisiert").closeAfter(3000);
-        })
-        .fail(function()
-        {
-            _self.bankInfoModal.hide();
-            NotificationService.error("Bankdaten konnten aktualisiert werden").closeAfter(5000);
-        });
+            .done(function(response)
+            {
+                _self.updateBankData[_self.this.updateBankIndex] = response;
+                _self.bankInfoModal.hide();
+                NotificationService.success("Bankdaten wurden aktualisiert").closeAfter(3000);
+            })
+            .fail(function()
+            {
+                _self.bankInfoModal.hide();
+                NotificationService.error("Bankdaten konnten nicht aktualisiert werden").closeAfter(5000);
+            });
         },
 
         addBankInfo: function()
-      {
+        {
             var _self = this;
 
+            this.updateBankData.lastUpdateBy = "customer";
             this.updateBankData.contactId = this.contactId;
+
             ApiService.post("/rest/customer/bank_data", this.updateBankData)
-        .done(function(response)
-        {
-            _self.userBankData.push(response.data);
-            _self.bankInfoModal.hide();
-            NotificationService.success("Bankdaten wurden angelegt").closeAfter(3000);
-        })
-        .fail(function()
-        {
-            _self.bankInfoModal.hide();
-            NotificationService.error("Bankdaten konnten nicht angelegt werden").closeAfter(5000);
-        });
+            .done(function(response)
+            {
+                _self.userBankData.push(response);
+                _self.bankInfoModal.hide();
+
+                NotificationService.success("Bankdaten wurden angelegt").closeAfter(3000);
+            })
+            .fail(function()
+            {
+                _self.bankInfoModal.hide();
+                NotificationService.error("Bankdaten konnten nicht angelegt werden").closeAfter(5000);
+            });
         },
-        removeBankData: function(bankData)
-      {
+
+        removeBankData: function(index, bankData)
+        {
             var _self = this;
 
             ApiService.delete("/rest/customer/bank_data/" + bankData.id)
-        .done(function()
-        {
-            _self.bankInfoModal.hide();
-            NotificationService.success("Bankverbindung wurde gelöscht").closeAfter(3000);
-        })
-        .fail(function()
-        {
-            _self.bankInfoModal.hide();
-            NotificationService.error("Bankverbindung konnte nicht gelöscht werden").closeAfter(5000);
-        });
+            .done(function(response)
+            {
+                _self.userBankData.splice(index, 1);
+                _self.bankInfoModal.hide();
+                NotificationService.success("Bankverbindung wurde gelöscht").closeAfter(3000);
+            })
+            .fail(function()
+            {
+                _self.bankInfoModal.hide();
+                NotificationService.error("Bankverbindung konnte nicht gelöscht werden").closeAfter(5000);
+            });
         }
     }
 });

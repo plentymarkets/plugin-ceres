@@ -24,10 +24,10 @@
                             <span>IBAN:        ${ bankData.iban }</span>
                             <span>BIC:         ${ bankData.bic }</span>
                         </span><!--
-                        --><span class="item-edit" @click="openUpdateBank(bankData)">
+                        --><span class="item-edit" @click="openUpdateBank(index, bankData)">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </span>
-                        <span class="item-remove" @click="removeBankData(bankData)">
+                        <span class="item-remove" @click="removeBankData(index, bankData)">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </span>
                     </label>
@@ -53,11 +53,11 @@
                 </div>
                 <div class="modal-body">
                     <fieldset>
-                      <form id="my-form" >
+                      <form id="my-bankForm">
                           <div class="row">
                             <div class="col-xs-12">
                                 <div class="input-unit accountOwner">
-                                    <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" :value="updateBankData.accountOwner">
+                                    <input type="text" data-validate="text" name="kontoinhaber" v-model="updateBankData.accountOwner" :value="updateBankData.accountOwner">
                                     <label for="txt_firma${_uid}">Kontoinhaber*</label>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="input-unit iban">
-                                    <input type="text" name="iban" maxlength="22" v-model="updateBankData.iban" :value="updateBankData.iban">
+                                    <input type="text" data-validate="regex" data-validate-ref="[a-zA-Z]{2,2}[0-9]{19,30}$" name="iban" maxlength="22" v-model="updateBankData.iban" :value="updateBankData.iban">
                                     <label for="txt_firma${_uid}">IBAN*</label>
                                 </div>
                             </div>
