@@ -39,6 +39,13 @@
       "label"     : "Terms and conditions",
       "type"      : "category_select"
     },
+
+    {
+        "tab"       : "Categories",
+        "key"       : "global.category.cancellation_rights",
+        "label"     : "Cancellation rights",
+        "type"      : "category_select"
+    },
     {
         "tab"                           : "Categories",
         "key"                           : "global.category.variation_show_type",
