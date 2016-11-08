@@ -1,57 +1,95 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PageBody %}
 
     {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
     {{ component( "PluginCallisto::Checkout.Components.PaymentProviderSelect" ) }}
     {{ component( "PluginCallisto::Checkout.Components.ShippingProfileSelect" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.PlaceOrder" ) }}
     {{ component( "PluginCallisto::Basket.Components.Coupon" ) }}
     {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
     {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
-        <div class="page-content checkout container-max">
+    <div class="page-content checkout container-max">
+        {% set overrideCheckout = LayoutContainer.show("PluginCallisto::Checkout") %}
+        {% if overrideCheckout|trim is empty %}
             <div class="row m-t-1">
-
                 <div class="col-xs-12 m-b-3">
                     <h1 class="h4">{{ trans("PluginCallisto::Callisto.orderCheckout") }}</h1>
                     <hr>
                 </div>
             </div>
-        
+
             <div class="row">
                 <!-- ADDRESS SELECT -->
                 <div class="col-md-7">
                     <div id="registry-form-container" class="registry-form-container main-col" data-id="0" data-status="2">
+                        {% set overrideAddressLists = LayoutContainer.show("PluginCallisto::Checkout.AddressLists") %}
+                        {% if overrideAddressLists|trim is empty %}
+                            {% set overrideBillingAddress = LayoutContainer.show("PluginCallisto::Checkout.BillingAddress") %}
+                            {% if overrideBillingAddress|trim is empty %}
+                                <header class="m-b-1">
+                                <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
+                                </header>
 
-                        <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
-                        </header>
-                        <div class="invoice-addresses-select">
-                                <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
-                                                        :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
-                        </div>
+                                {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeBillingAddress") }}
+                                <div class="invoice-addresses-select">
+                                        <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
+                                                                :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
+                                </div>
+                                {{ LayoutContainer.show("PluginCallisto::Checkout.AfterBillingAddress") }}
+                            {% else %}
+                                {{ overrideBillingAddress }}
+                            {% endif %}
 
-                        <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
-                        </header>
-                        <div class="shipping-addresses-select">
-                                <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
-                                                         :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
-                        </div>
+                            {% set overrideShippingAddress = LayoutContainer.show("PluginCallisto::Checkout.ShippingAddress") %}
+                            {% if overrideShippingAddress|trim is empty %}
+                                <header class="m-b-1">
+                                    <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
+                                </header>
 
-                        <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h3>
-                        </header>
-                        <div class="shipping-method-select">
-                            <shipping-profile-select :shipping-profile-data="{{ services.checkout.getShippingProfileList() | json_encode() }}"></shipping-profile-select>
-                        </div>
+                                {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingAddress") }}
+                                <div class="shipping-addresses-select">
+                                        <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
+                                                                 :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
+                                </div>
+                                {{ LayoutContainer.show("PluginCallisto::Checkout.AfterShippingAddress") }}
+                            {% else %}
+                                {{ overrideShippingAddress }}
+                            {% endif %}
+                        {% else %}
+                            {{ overrideAddressLists }}
+                        {% endif %}
+                        {% set overrideShippingProfiles = LayoutContainer.show("PluginCallisto::Checkout.ShippingProfileList") %}
+                        {% if overrideShippingProfiles|trim is empty %}
+                            <header class="m-b-1">
+                                <h3>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h3>
+                            </header>
 
-                        <header class="m-b-1">
-                            <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
-                        </header>
-                        <div class="payment-method-select">
-                            <payment-provider-select
-                                    :payment-provider-list="{{ services.checkout.getCheckoutPaymentDataList() | json_encode() }}"></payment-provider-select>
-                        </div>
+                            {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingProfileList") }}
+                            <div class="shipping-method-select">
+                                <shipping-profile-select :shipping-profile-data="{{ services.checkout.getShippingProfileList() | json_encode() }}"></shipping-profile-select>
+                            </div>
+                            {{ LayoutContainer.show("PluginCallisto::Checkout.AfterShippingProfileList") }}
+                        {% else %}
+                            {{ overrideShippingProfiles }}
+                        {% endif %}
+
+                        {% set overridePaymentList = LayoutContainer.show("PluginCallisto::Checkout.PaymentList") %}
+                        {% if overridePaymentList|trim is empty %}
+                            <header class="m-b-1">
+                                <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
+                            </header>
+
+                            {{ LayoutContainer.show("PluginCallisto::Checkout.BeforePaymentList") }}
+                            <div class="payment-method-select">
+                                <payment-provider-select
+                                        :payment-provider-list="{{ services.checkout.getCheckoutPaymentDataList() | json_encode() }}"></payment-provider-select>
+                            </div>
+                            {{ LayoutContainer.show("PluginCallisto::Checkout.AfterPaymentList") }}
+                        {% else %}
+                            {{ overridePaymentList }}
+                        {% endif %}
                     </div>
                 </div>
                 <!-- ./ADDRESS SELECT -->
@@ -72,10 +110,6 @@
             </div>
 
             <!-- OPT IN -->
-            <div id="container-test"> <!-- TODO remove test data -->
-                Test-div
-            </div>
-            <iframe id="iframe-test"></iframe> <!-- TODO remove test data -->
             <div class="row">
                 <div class="col-xs-12 m-b-3">
                     <hr>
@@ -100,21 +134,17 @@
                                     {% endautoescape %}
                                 </label>
                             </div>
+                            {{ LayoutContainer.show("PluginCallisto::Checkout.OptIns") }}
                         </div>
                         <div class="col-xs-12 col-sm-5">
-                            <button id="placeOrder" class="btn btn-primary btn-block" type="submit"
-                                    v-prepare-payment
-                                    selector-iframe="#iframe-test"
-                                    selector-container="#container-test"
-                                    target-continue="/place_order"> <!-- TODO remove test data -->
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("PluginCallisto::Callisto.orderBuyNow") }}
-                            </button>
+                            <place-order target-continue="/place-order"></place-order>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- ./OPT IN -->
+            <!-- ./OPT IN -->
+        {% else %}
+            {{ overrideCheckout }}
+        {% endif %}
     </div>
 {% endblock %}

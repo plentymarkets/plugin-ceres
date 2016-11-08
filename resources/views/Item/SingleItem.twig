@@ -1,4 +1,5 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set itemData = config("PluginCallisto.item.data") | split(', ') %}
 {% set configItemName = config("PluginCallisto.item.name") %}
@@ -39,13 +40,13 @@
                 <hr>
 
                 <div class="m-b-3">
-                    <div class="rating pull-xs-right">
+                    <!-- <div class="rating pull-xs-right">
                         <span class="tag tag-pill tag-success">
                             <i class="fa fa-star"></i>
                             4.5
                             <span class="amount">357</span>
                         </span>
-                    </div>
+                    </div> -->
 
                     <span class="articlenumber small text-muted">
                         <b>{{ trans("PluginCallisto::Callisto.itemNumber") }}</b>
@@ -59,6 +60,7 @@
                 </div>
                 {% endif %}
 
+                {{ LayoutContainer.show("PluginCallisto::SingleItem.BeforePrice") }}
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="variationRecommendedRetailPrice.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="variationRecommendedRetailPrice.price" :filters="['currency']">
@@ -84,6 +86,7 @@
                     </span>
                 </div>
                 {% endfor %}
+                {{ LayoutContainer.show("PluginCallisto::SingleItem.AfterPrice") }}
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="variationBase.availability == {{ availability.id }}">
@@ -92,14 +95,21 @@
                 {% endfor %}
 
                 <div class="row m-y-1">
+
+                    {{ LayoutContainer.show("PluginCallisto::SingleItem.BeforeAddToBasket") }}
                     <add-to-basket></add-to-basket>
 
+                    {{ LayoutContainer.show("PluginCallisto::SingleItem.AfterAddToBasket") }}
+                </div>
+
+                <div class="row">
+                    <!--
                     <div class="col-xs-6 offset-xs-6 m-t-1">
                         <a class="pull-xs-right text-muted small" href="#">
                             {{ trans("PluginCallisto::Callisto.itemWishList") }}
                             <i class="fa fa-heart"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             <!-- ./ITEM DETAIL -->
 
