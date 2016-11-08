@@ -1,4 +1,5 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PageBody %}
 
@@ -37,11 +38,10 @@
 
         <div class="row m-b-3">
             <div class="col-xs-12 col-sm-4 offset-sm-8">
-                {% if frontend.Account.getIsAccountLoggedIn %}
-                    <a class="btn btn-primary btn-block" href="/checkout">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
-                {% else %}
-                    <a class="btn btn-primary btn-block" href="/login">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
-                {% endif %}
+                {{ LayoutContainer.show("PluginCallisto::Basket.BeforeCheckoutButton") }}
+                <a v-resource-if:user="isLoggedIn" class="btn btn-primary btn-block" href="/checkout">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
+                <a v-resource-if:user="!isLoggedIn" class="btn btn-primary btn-block" href="/login">{{ trans("PluginCallisto::Callisto.basketOrderNow") }}</a>
+                {{ LayoutContainer.show("PluginCallisto::Basket.AfterCheckoutButton") }}
             </div>
         </div>
     </div>

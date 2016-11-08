@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-user-login-handler">
     <div id="login-change">
-        <div v-if="username != ''">
+        <div v-resource-if:user="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ trans("PluginCallisto::Callisto.generalHello") }} ${username}</a>
             </a>
@@ -11,7 +11,7 @@
               </div>
             </div>
         </div>
-        <div v-else>
+        <div v-resource-if:user="!isLoggedIn">
             <a data-toggle="modal" href="#login">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accLogin") }}</span>
