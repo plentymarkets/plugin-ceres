@@ -237,7 +237,7 @@ Vue.component("bank-data-select", {
 
         /**
          * Show error notification
-         * @param error
+         * @param message
          */
         errorNotification: function(message)
         {
