@@ -1,31 +1,29 @@
 var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
 
     template: "#vue-user-login-handler",
 
     props: [
-        "username"
+        "userData"
     ],
+
+    data: function()
+    {
+        return {
+            username: ""
+        };
+    },
 
     /**
      * Add the global event listener for login and logout
      */
     ready: function()
     {
-        var self = this;
-
-        ApiService.listen("AfterAccountAuthentication",
-            function(userData)
-            {
-                self.setUsername(userData);
-            });
-
-        ApiService.listen("AfterAccountContactLogout",
-            function()
-            {
-                self.username = "";
-            });
+        ResourceService.bind("user", this, "isLoggedIn");
+        this.setUsername(this.userData);
+        this.addEventListeners();
     },
 
     methods: {
@@ -35,14 +33,39 @@ Vue.component("user-login-handler", {
          */
         setUsername: function(userData)
         {
-            if (userData.accountContact.firstName.length > 0 && userData.accountContact.lastName.length > 0)
+            if (userData)
             {
-                this.username = userData.accountContact.firstName + " " + userData.accountContact.lastName;
+                if (userData.firstName.length > 0 && userData.lastName.length > 0)
+                {
+                    this.username = userData.firstName + " " + userData.lastName;
+                }
+                else
+                {
+                    this.username = userData.options[0].value;
+                }
             }
-            else
-            {
-                this.username = userData.accountContact.options[0].value;
-            }
+        },
+
+        /**
+         * Adds login/logout event listeners
+         */
+        addEventListeners: function()
+        {
+            var self = this;
+
+            ApiService.listen("AfterAccountAuthentication",
+                function(userData)
+                {
+                    self.setUsername(userData.accountContact);
+                    ResourceService.getResource("user").set({isLoggedIn: true});
+                });
+
+            ApiService.listen("AfterAccountContactLogout",
+                function()
+                {
+                    self.username = "";
+                    ResourceService.getResource("user").set({isLoggedIn: false});
+                });
         }
     }
 });
