@@ -49,11 +49,7 @@ Vue.component("account-settings", {
          */
         showChangeAccountSettings: function()
         {
-            var accountModal = ModalService.findModal($("." + this.accountSettingsClass));
-
-            $(".wrapper-bottom").append($("." + this.accountSettingsClass));
-
-            accountModal.show();
+            ModalService.findModal($("." + this.accountSettingsClass)).show();
         },
 
         /**
