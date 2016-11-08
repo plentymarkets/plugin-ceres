@@ -24,7 +24,7 @@
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                         </template>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseSelect") }} -</p>
+                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.pleaseSelect") }} -</p>
                         <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }} -</p>
                     </span>
 
@@ -36,7 +36,7 @@
                     <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                 </a>
             </div>
-            
+
             <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty()">
                 <ul>
                     <li class="item" v-for="(index, address) in addressList">
