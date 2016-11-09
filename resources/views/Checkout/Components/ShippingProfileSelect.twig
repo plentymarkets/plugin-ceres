@@ -9,7 +9,6 @@
                         value="${ shippingProfile.id }"
                         v-model="selectedShippingProfile"
                         @change="onShippingProfileChange()"
-                        @click="onShippingProfileClicked(shippingProfile.id)"
                 >
                 <label for="ShippingProfileID${ _uid }${ shippingProfile.id }">
                     <div class="icon">
@@ -19,7 +18,7 @@
                         ${ shippingProfile.name } - ${ shippingProfile.presetName }
                         <div>
                             <small>
-                                (${ shippingProfile.price | currency })
+                                ${ shippingProfile.price | currency }
                             </small>
                         </div>
                     </div>

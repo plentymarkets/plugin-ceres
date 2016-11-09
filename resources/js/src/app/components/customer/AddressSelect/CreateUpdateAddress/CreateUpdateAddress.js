@@ -78,10 +78,14 @@ Vue.component("create-update-address", {
         {
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
-                .done(function()
+                .done(function(newAddress)
                 {
+                    this.addressData = newAddress;
+
                     this.addressModal.hide();
                     this.addressList.push(this.addressData);
+
+                    this.$dispatch("new-address-created", this.addressData);
                 }.bind(this));
         }
     }

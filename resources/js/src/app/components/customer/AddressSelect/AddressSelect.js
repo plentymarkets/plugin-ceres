@@ -31,29 +31,6 @@ Vue.component("address-select", {
     created: function()
     {
         this.addEventListener();
-
-        if (!this.isAddressListEmpty())
-        {
-            var isSelectedAddressSet = false;
-
-            for (var index in this.addressList)
-            {
-                if (this.addressList[index].id === this.selectedAddressId)
-                {
-                    this.selectedAddress = this.addressList[index];
-                    isSelectedAddressSet = true;
-                }
-            }
-
-            if (!isSelectedAddressSet)
-            {
-                this.selectedAddressId = null;
-            }
-        }
-        else
-        {
-            this.addressList = [];
-        }
     },
 
     /**
@@ -61,6 +38,15 @@ Vue.component("address-select", {
      */
     ready: function()
     {
+        if (!this.isAddressListEmpty())
+        {
+            this.loadSelectedAddress();
+        }
+        else
+        {
+            this.addressList = [];
+        }
+
         this.addressModal = ModalService.findModal(this.$els.addressModal);
         this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
@@ -78,6 +64,28 @@ Vue.component("address-select", {
                 {
                     self.cleanUserAddressData();
                 });
+        },
+
+        /**
+         * Load the address filtered by selectedId into selectedAddress
+         */
+        loadSelectedAddress: function()
+        {
+            var isSelectedAddressSet = false;
+
+            for (var index in this.addressList)
+            {
+                if (this.addressList[index].id === this.selectedAddressId)
+                {
+                    this.selectedAddress = this.addressList[index];
+                    isSelectedAddressSet = true;
+                }
+            }
+
+            if (!isSelectedAddressSet)
+            {
+                this.selectedAddressId = null;
+            }
         },
 
         /**
@@ -134,8 +142,6 @@ Vue.component("address-select", {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -146,10 +152,9 @@ Vue.component("address-select", {
         showEditModal: function(address)
         {
             this.modalType = "update";
-            this.addressToEdit = address;
+            // Creates a tmp address to prevent unwanted two-way binding
+            this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -162,8 +167,6 @@ Vue.component("address-select", {
             this.modalType = "delete";
             this.addressToDelete = address;
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.deleteModal);
             this.deleteModal.show();
         },
 
@@ -174,7 +177,7 @@ Vue.component("address-select", {
         {
             var self = this;
             var address = this.addressToDelete;
-            var addressType = address.pivot.typeId.toString();
+            var addressType = this.addressType;
 
             AddressService.deleteAddress(address.id, addressType)
                 .done(function()
@@ -239,6 +242,10 @@ Vue.component("address-select", {
             this.headline = headline;
         },
 
+        /**
+         * Remove an address from the addressList by ID
+         * @param id
+         */
         removeIdFromList: function(id)
         {
             for (var i in this.addressList)
@@ -247,14 +254,28 @@ Vue.component("address-select", {
                 {
                     this.addressList.splice(i, 1);
 
-                    if (this.selectedAddressId.toString() === id.toString())
+                    if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString())
                     {
-                        this.selectedAddress = null;
+                        this.selectedAddress = {};
                         this.selectedAddressId = "";
 
                         break;
                     }
                 }
+            }
+        },
+
+        /**
+         * Update the selected address when a new address is created
+         * @param addressData
+         */
+        onAddressCreated: function(addressData)
+        {
+            if (!this.selectedAddressId)
+            {
+                this.selectedAddressId = addressData.id;
+
+                this.loadSelectedAddress();
             }
         }
     }
