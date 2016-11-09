@@ -65,9 +65,9 @@ var ApiService = require("services/ApiService");
             {
                 if (this.currentOrder !== null)
                 {
-                    for (var propertyKey in this.currentOrder.properties)
+                    for (var propertyKey in this.currentOrder.order.properties)
                     {
-                        var property = this.currentOrder.properties[propertyKey];
+                        var property = this.currentOrder.order.properties[propertyKey];
 
                         if (property.typeId === 13 && property.subTypeId === 3)
                         {

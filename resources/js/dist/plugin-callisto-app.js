@@ -482,14 +482,6 @@ Vue.component("shipping-profile-select", {
                 {
                     this.shippingProfileList = shippingProfileList;
                 }.bind(this));
-        },
-
-        onShippingProfileClicked: function(id)
-        {
-            if (id.toString() === this.selectedShippingProfile)
-            {
-                this.selectedShippingProfile = null;
-            }
         }
     }
 });
@@ -691,8 +683,6 @@ Vue.component("address-select", {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -706,8 +696,6 @@ Vue.component("address-select", {
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -720,8 +708,6 @@ Vue.component("address-select", {
             this.modalType = "delete";
             this.addressToDelete = address;
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.deleteModal);
             this.deleteModal.show();
         },
 
@@ -994,6 +980,13 @@ Vue.component("shipping-address-select", {
         this.addressList.unshift({
             id: -99
         });
+
+        // if there is no selection for delivery address, the dummy entry will be selected
+        if (this.selectedAddressId === 0)
+        {
+            this.selectedAddressId = -99;
+            CheckoutService.setDeliveryAddressId(-99);
+        }
     },
 
     methods: {
@@ -1791,11 +1784,7 @@ Vue.component("account-settings", {
          */
         showChangeAccountSettings: function()
         {
-            var accountModal = ModalService.findModal($("." + this.accountSettingsClass));
-
-            $(".wrapper-bottom").append($("." + this.accountSettingsClass));
-
-            accountModal.show();
+            ModalService.findModal($("." + this.accountSettingsClass)).show();
         },
 
         /**
@@ -1918,9 +1907,9 @@ var ApiService = require("services/ApiService");
             {
                 if (this.currentOrder !== null)
                 {
-                    for (var propertyKey in this.currentOrder.properties)
+                    for (var propertyKey in this.currentOrder.order.properties)
                     {
-                        var property = this.currentOrder.properties[propertyKey];
+                        var property = this.currentOrder.order.properties[propertyKey];
 
                         if (property.typeId === 13 && property.subTypeId === 3)
                         {
