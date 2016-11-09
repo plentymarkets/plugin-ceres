@@ -16,137 +16,174 @@
     "containers"        :
     [
         {
-            "name"          : "SingleItem.BeforePrice",
+            "key"           : "SingleItem.BeforePrice",
+            "name"          : "Single item: before price",
             "description"   : "Add content to single item view before item price."
         },
         {
-            "name"          : "SingleItem.AfterPrice",
+            "key"           : "SingleItem.AfterPrice",
+            "name"          : "Single item: after price",
             "description"   : "Add content to single item view after item price."
         },
         {
-            "name"          : "SingleItem.BeforeAddToBasket",
+            "key"           : "SingleItem.BeforeAddToBasket",
+            "name"          : "Single item: before \"add to basket\"",
             "description"   : "Add content to single item view before button 'add to basket'."
         },
         {
-            "name"          : "SingleItem.AfterAddToBasket",
+            "key"           : "SingleItem.AfterAddToBasket",
+            "name"          : "Single item: after \"add to basket\"",
             "description"   : "Add content to single item view after button 'add to basket'."
         },
         {
-            "name"          : "BasketTotals.BeforeItemSum",
+            "key"           : "BasketTotals.BeforeItemSum",
+            "name"          : "Basket totals: before item sum",
             "description"   : "Add content to basket totals before item sum."
         },
         {
-            "name"          : "BasketTotals.AfterItemSum",
+            "key"           : "BasketTotals.AfterItemSum",
+            "name"          : "Basket totals: after item sum",
             "description"   : "Add content to basket totals after item sum."
         },
         {
-            "name"          : "BasketTotals.BeforeShippingCosts",
+            "key"           : "BasketTotals.BeforeShippingCosts",
+            "name"          : "Basket totals: before shipping costs",
             "description"   : "Add content to basket totals before shipping costs."
         },
         {
-            "name"          : "BasketTotals.AfterShippingCosts",
+            "key"           : "BasketTotals.AfterShippingCosts",
+            "name"          : "Basket totals: after shipping costs",
             "description"   : "Add content to basket totals after shipping costs."
         },
         {
-            "name"          : "BasketTotals.BeforeVat",
+            "key"           : "BasketTotals.BeforeVat",
+            "name"          : "Basket totals: before VATs",
             "description"   : "Add content to basket totals before VAT."
         },
         {
-            "name"          : "BasketTotals.AfterVat",
+            "key"           : "BasketTotals.AfterVat",
+            "name"          : "Basket totals: after VATs",
             "description"   : "Add content to basket totals after VAT."
         },
         {
-            "name"          : "BasketTotals.BeforeTotalSum",
+            "key"           : "BasketTotals.BeforeTotalSum",
+            "name"          : "Basket totals: before totals",
             "description"   : "Add content to basket totals before total sum."
         },
         {
-            "name"          : "BasketTotals.AfterTotalSum",
+            "key"           : "BasketTotals.AfterTotalSum",
+            "name"          : "Basket totals: after totals",
             "description"   : "Add content to basket totals after total sum."
         },
         {
-            "name"          : "Basket.BeforeCheckoutButton",
+            "key"           : "Basket.BeforeCheckoutButton",
+            "name"          : "Basket: before button \"to checkout\"",
             "description"   : "Add content in basket before checkout button"
         },
         {
-            "name"          : "Basket.AfterCheckoutButton",
+            "key"           : "Basket.AfterCheckoutButton",
+            "name"          : "Basket: after after button \"to checkout\"",
             "description"   : "Add content in basket after checkout button"
         },
         {
-            "name"          : "BasketPreview.BeforeCheckoutButton",
+            "key"           : "BasketPreview.BeforeCheckoutButton",
+            "name"          : "Basket preview: before button \"to checkout\"",
             "description"   : "Add content in basket preview before checkout button"
         },
         {
-            "name"          : "BasketPreview.AfterCheckoutButton",
+            "key"           : "BasketPreview.AfterCheckoutButton",
+            "name"          : "Basket preview: after button \"to checkout\"",
             "description"   : "Add content in basket preview after checkout button"
         },
         {
-            "name"          : "Checkout",
+            "key"           : "Checkout",
+            "name"          : "Checkout (override)",
             "description"   : "Overrides complete checkout view.",
             "multiple"      : false
         },
         {
-            "name"          : "Checkout.AddressLists",
+            "key"           : "Checkout.AddressLists",
+            "name"          : "Checkout: Address lists (override)",
             "description"   : "Overrides billing and delivery address controls in checkout view.",
             "multiple"      : false
         },
         {
-            "name"          : "Checkout.BillingAddress",
+            "key"           : "Checkout.BillingAddress",
+            "name"          : "Checkout: billing address select (override)",
             "description"   : "Overrides billing address control in checkout view.",
             "multiple"      : false
         },
         {
-            "name"          : "Checkout.BeforeBillingAddress",
+            "key"           : "Checkout.BeforeBillingAddress",
+            "name"          : "Checkout: before billing address select",
             "description"   : "Adds content before billing address control in checkout view."
         },
         {
-            "name"          : "Checkout.AfterBillingAddress",
+            "key"           : "Checkout.AfterBillingAddress",
+            "name"          : "Checkout: after billing address select",
             "description"   : "Adds content after billing address control in checkout view."
         },
         {
-            "name"          : "Checkout.ShippingAddress",
+            "key"           : "Checkout.ShippingAddress",
+            "name"          : "Checkout: shipping address select (override)",
             "description"   : "Overrides shipping address control in checkout view.",
             "multiple"      : false
         },
         {
-            "name"          : "Checkout.BeforeShippingAddress",
+            "key"           : "Checkout.BeforeShippingAddress",
+            "name"          : "Checkout: before shipping address select",
             "description"   : "Adds content before shipping address control in checkout view."
         },
         {
-            "name"          : "Checkout.AfterShippingAddress",
+            "key"           : "Checkout.AfterShippingAddress",
+            "name"          : "Checkout: after shipping address select",
             "description"   : "Adds content after shipping address control in checkout view."
         },
         {
-            "name"          : "Checkout.ShippingProfileList",
+            "key"           : "Checkout.ShippingProfileList",
+            "name"          : "Checkout: shipping profile select (override)",
             "description"   : "Overrides list of shipping profiles in checkout view."
         },
         {
-            "name"          : "Checkout.BeforeShippingProfileList",
+            "key"           : "Checkout.BeforeShippingProfileList",
+            "name"          : "Checkout: before shipping profile select",
             "description"   : "Adds additional content before list of shipping profiles in checkout view."
         },
         {
-            "name"          : "Checkout.AfterShippingProfileList",
+            "key"           : "Checkout.AfterShippingProfileList",
+            "name"          : "Checkout: after shipping profile select",
             "description"   : "Adds additional content after list of shipping profiles in checkout view."
         },
         {
-            "name"          : "Checkout.PaymentList",
+            "key"           : "Checkout.PaymentList",
+            "name"          : "Checkout: payment select (override)",
             "description"   : "Overrides list of payment methods in checkout view."
         },
         {
-            "name"          : "Checkout.BeforePaymentList",
+            "key"           : "Checkout.BeforePaymentList",
+            "name"          : "Checkout: before payment select",
             "description"   : "Adds additional content before list of payment methods in checkout view."
         },
         {
-            "name"          : "Checkout.AfterPaymentList",
+            "key"           : "Checkout.AfterPaymentList",
+            "name"          : "Checkout: after payment select",
             "description"   : "Adds additional content after list of payment methods in checkout view."
         },
         {
-            "name"          : "Checkout.OptIns",
+            "key"           : "Checkout.OptIns",
+            "name"          : "Checkout: opt-ins",
             "description"   : "Add content to opt-in checkboxes in checkout view."
         },
         {
-            "name"          : "OrderConfirmation.AdditionalPaymentInformation",
+            "key"           : "OrderConfirmation.AdditionalPaymentInformation",
+            "name"          : "Order confirmation: additional payment information",
             "description"   : "Adds additional payment information on order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "Footer.ContactCard",
+            "name"          : "ContactCard Footer Container",
+            "description"   : "Add content to the contact card in the footer"
         }
     ],
     "dataProviders"     : []
