@@ -25,7 +25,7 @@
                         <div class="details">
                             <div class="row">
                                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
-                                <span class="col-xs-6 col-sm-7">{{ data.order.createdAt|date("d.m.Y")}}</span>
+                                <span class="col-xs-6 col-sm-7">{{ data.order.createdAt | date(trans("PluginCallisto::Callisto.dateTimeFormat"))}}</span>
                             </div>
 
                             <div class="row">
@@ -88,7 +88,7 @@
                             {% if shippingDate is not empty %}
                                 <div class="row">
                                     <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderEstimatedShippingDate") }}</strong>
-                                    <span class="col-xs-6 col-sm-7">{{ shippingDate|date("d.m.Y") }}</span>
+                                    <span class="col-xs-6 col-sm-7">{{ shippingDate|date(trans("PluginCallisto::Callisto.dateFormat")) }}</span>
                                 </div>
                             {% endif %}
                         </div>
