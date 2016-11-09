@@ -69,14 +69,6 @@ Vue.component("shipping-profile-select", {
                 {
                     this.shippingProfileList = shippingProfileList;
                 }.bind(this));
-        },
-
-        onShippingProfileClicked: function(id)
-        {
-            if (id.toString() === this.selectedShippingProfile)
-            {
-                this.selectedShippingProfile = null;
-            }
         }
     }
 });

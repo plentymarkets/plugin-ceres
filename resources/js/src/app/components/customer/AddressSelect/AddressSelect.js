@@ -142,8 +142,6 @@ Vue.component("address-select", {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -157,8 +155,6 @@ Vue.component("address-select", {
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.addressModal);
             this.addressModal.show();
         },
 
@@ -171,8 +167,6 @@ Vue.component("address-select", {
             this.modalType = "delete";
             this.addressToDelete = address;
             this.updateHeadline();
-
-            $(".wrapper-bottom").append(this.$els.deleteModal);
             this.deleteModal.show();
         },
 
