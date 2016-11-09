@@ -1,12 +1,14 @@
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 
-
 {% block PageBody %}
 
     {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
+    {{ component( "PluginCallisto::MyAccount.Components.BankDataSelect" ) }}
+
     {% set userObject = services.customer.getContact() %}
+    {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
 
 	<div class="page-content myaccount container-max m-b-3 m-t-1">
 
@@ -71,8 +73,10 @@
 				<h4>
 					{{ trans("PluginCallisto::Callisto.accBankDetails") }}
 				</h4>
+
 				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentInformation") }}</p>
-				{#{% include _component-address-list/component-address-list.html id="bankinfos" %}#}
+	            <bank-data-select :user-bank-data="{{ userBankData }}" contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
+
 			</div>
 		</div>
 		<!-- ./ACCOUNT SETTINGS AREA -->
