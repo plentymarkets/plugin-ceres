@@ -147,6 +147,11 @@
             "name"          : "OrderConfirmation.AdditionalPaymentInformation",
             "description"   : "Adds additional payment information on order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "Footer.ContactCard",
+            "name"          : "ContactCard Footer Container",
+            "description"   : "Add content to the contact card in the footer"
         }
     ],
     "dataProviders"     : []
