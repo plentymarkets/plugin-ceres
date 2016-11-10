@@ -91,11 +91,6 @@
 {{ Loader.include_components() }}
 
 <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
-<script>
-    // set moment locales for formatting dates.
-    // use 'en' as fallback if locale is not available
-    moment.locale(['{{ lang }}', 'en'])
-</script>
 <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
 <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
 
