@@ -6,6 +6,7 @@
     {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.BankDataSelect" ) }}
+	{{ component( "PluginCallisto::Checkout.Components.OrderDetails" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
@@ -93,8 +94,7 @@
 		:order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
 		:items-per-page="{{ ordersPerPage }}"
 		:show-first-page="{{ config('PluginCallisto.pagination.showFirstPage') }}"
-		:show-last-page="{{ config('PluginCallisto.pagination.showLastPage') }}"
-		:order-details-config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}">
+		:show-last-page="{{ config('PluginCallisto.pagination.showLastPage') }}">
 </order-history>
 <!-- ./ORDER HISTORY -->
 

@@ -10,8 +10,7 @@ var ApiService = require("services/ApiService");
             "orderList",
             "itemsPerPage",
             "showFirstPage",
-            "showLastPage",
-            "orderDetailsConfig"
+            "showLastPage"
         ],
 
         data: function()
@@ -30,99 +29,6 @@ var ApiService = require("services/ApiService");
             this.itemsPerPage = this.itemsPerPage || 10;
             this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
             this.setOrders(this.orderList);
-        },
-
-        computed: {
-            currentOrderItems: function()
-            {
-                if (this.currentOrder !== null)
-                {
-                    return this.currentOrder.order.orderItems.filter(function(item)
-                    {
-                        return item.itemVariationId > 0;
-                    });
-                }
-
-                return [];
-            },
-
-            shippingDate: function()
-            {
-                if (this.currentOrder !== null)
-                {
-                    for (var date in this.currentOrder.order.dates)
-                    {
-                        if (date.typeId === 8)
-                        {
-                            return date;
-                        }
-                    }
-                }
-                return null;
-            },
-
-            paymentStatus: function()
-            {
-                if (this.currentOrder !== null)
-                {
-                    for (var propertyKey in this.currentOrder.order.properties)
-                    {
-                        var property = this.currentOrder.order.properties[propertyKey];
-
-                        if (property.typeId === 13 && property.subTypeId === 3)
-                        {
-                            return property.value;
-                        }
-                    }
-                }
-                return "";
-            },
-
-            totals: function()
-            {
-                if (this.currentOrder !== null)
-                {
-                    var itemSum = 0;
-                    var itemSumNet = 0;
-                    var shippingCosts = 0;
-                    var shippingCostsNet = 0;
-
-                    this.currentOrder.order.orderItems.forEach(function(orderItem)
-                    {
-                        if (orderItem.itemVariationId > 0)
-                        {
-                            itemSum += orderItem.amounts[0].priceGross;
-                            itemSumNet += orderItem.amounts[0].priceNet;
-                        }
-                        else
-                        {
-                            shippingCosts += orderItem.amounts[0].priceGross;
-                            shippingCostsNet += orderItem.amounts[0].priceNet;
-                        }
-                    });
-                    return {
-                        currency: this.currentOrder.order.amounts[0].currency,
-                        itemSum: itemSum,
-                        itemSumNet: itemSumNet,
-                        shippingAmount: shippingCosts,
-                        shippingAmountNet: shippingCostsNet,
-                        vat: this.currentOrder.order.amounts[0].vatTotal,
-                        totalAmount: this.currentOrder.order.amounts[0].grossTotal,
-                        totalAmountNet: this.currentOrder.order.amounts[0].netTotal
-                    };
-                }
-
-                return {
-                    currency: "EUR",
-                    itemSum: 0,
-                    itemSumNet: 0,
-                    shippingAmount: 0,
-                    shippingAmountNet: 0,
-                    vat: 0,
-                    totalAmount: 0,
-                    totalAmountNet: 0
-                };
-            }
         },
 
         methods: {
@@ -167,13 +73,7 @@ var ApiService = require("services/ApiService");
                     {
                         self.setOrders(response);
                     });
-            },
-
-            showProperty: function(name)
-            {
-                return !this.orderDetailsConfig || this.orderDetailsConfig.indexOf(name) >= 0 || this.orderDetailsConfig.indexOf("all") >= 0;
             }
-
         }
     });
 })(jQuery);
