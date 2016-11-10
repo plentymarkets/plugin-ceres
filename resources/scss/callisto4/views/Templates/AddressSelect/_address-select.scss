@@ -61,6 +61,10 @@
 			& + .item-inner .item-edit .fa:hover{
 				color: white;
 			}
+			& + .item-controls .fa:hover{
+				color: white;
+				cursor: pointer;
+			}
 		}
 
 		&:last-of-type{
@@ -78,11 +82,9 @@
 	}
 
 	.item-edit{
-		display: inline-block;
-		vertical-align:top;
-		font-size: 1.5em;
-		float: right;
-		flex: 0 1 auto;
+		position: absolute;
+		right: 1rem;
+		top: .5rem;
 
 		.fa{
     		width: 1em;

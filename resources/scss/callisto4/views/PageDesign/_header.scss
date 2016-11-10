@@ -1,4 +1,24 @@
 //header scss
+.wrapper-main.isSticky.sticky {
+	.top-bar {
+		position: fixed;
+    	width: 100%;
+	}
+	& > .container-max {
+		position: fixed;
+	    display: block;
+	    width: 100%;
+	    top: 30px;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    background: $gray-lightest;
+	    z-index: 1050;
+	}
+	#page-body {
+		padding-top: 119px;
+	}
+}
+
 .top-bar{
 
 	position: relative;
@@ -10,7 +30,7 @@
 		text-decoration: none;
 		transition: all 300ms;
 	}
-	
+
 	// ul containing all controls in the top bar:
 	// - login/register
 	// - search
@@ -33,14 +53,14 @@
 				padding: 0.5rem .8rem;
 				display: inline-block;
 				color: $gray-lighter;
-				
+
 				&[aria-expanded="true"],
 				&:hover{
-					background-color: $gray-lighter;
-					color: $gray;
+					background-color: $brand-primary;
+					color: #FFF;
 				}
 			}
-			
+
 			// icons should be slightly larger
 			.fa{
 				font-size: 1.2rem;
@@ -53,17 +73,19 @@
 			//login | register
 			#login-change {
 				position:relative;
-				&.open {
-					.dropdown-menu {
-						top:1.5rem;
-						z-index: 2000;
-						a {
-							padding:1rem .8rem;
-							border:0;
-							border-top: 1px solid $gray-lighter;
-							&:first-child {
-								border-top:0;
-							}
+				.dropdown-menu {
+					z-index: 2000;
+					a {
+						padding:1rem .8rem;
+						border:0;
+						border-top: 1px solid $gray-lighter;
+						display: block;
+						color: $brand-primary;
+						&:first-child {
+							border-top:0;
+						}
+						&:hover {
+							color: white;
 						}
 					}
 				}
@@ -75,11 +97,11 @@
 		}
 
 		.control-languages{
-			
+
 		}
 
 		.control-search{
-			
+
 			.dropdown-menu{
 				width: 320px;
 			    padding: 0;
@@ -91,7 +113,7 @@
 		.control-basket{
 			.toggle-basket-preview{
 				background-color: $brand-primary;
-				color:white;
+				color: white;
 
 				.badge{
 					margin-left: .5rem;
@@ -130,7 +152,7 @@
 	#shippingCountryList {
 	}
 
-	
+
 }
 
 //navigation scss
@@ -223,17 +245,17 @@
 		.controls-list{
 			width: auto;
 			float:right;
-			
+
 			&>li{
 				// default font size for all items
 				font-size: .8rem;
-				
+
 				.fa{
 					// icons should be slightly larger
 					font-size: 1rem;
 					line-height: .8rem;
 				}
-			}			
+			}
 		}
 	}
 
