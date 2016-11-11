@@ -15,17 +15,17 @@
 		<!-- HEADER -->
 	    <div class="row m-b-3">
 	        <div class="col-sm-9">
-	            <h1 class="h4">{{ trans("PluginCallisto::Callisto.accMyAccount") }}</h1>
+	            <h1 class="h4">{{ trans("PluginCallisto::Template.accMyAccount") }}</h1>
 							{% if frontend.Account.getIsAccountLoggedIn %}
 									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
 									{% else %}
-										<span class="text-muted">{{ trans("PluginCallisto::Callisto.generalHello") }} {{userObject.email}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.email}}</span>
 									{% endif %}
 							{% endif %}
 	        </div>
 	        <div class="col-sm-3">
-	            <a href="#" class="btn btn-danger pull-xs-right" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Callisto.accLogout") }}</a>
+	            <a href="#" class="btn btn-danger pull-xs-right" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Template.accLogout") }}</a>
 	        </div>
 	        <div class="col-xs-12">
 	            <hr class="">
@@ -37,18 +37,18 @@
 	    <div class="row">
 	        <div class="col-md-6">
 	            <h4>
-					{{ trans("PluginCallisto::Callisto.accInvoiceAddresses") }}
+					{{ trans("PluginCallisto::Template.accInvoiceAddresses") }}
 	            </h4>
-	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.generalAll") }} {{ trans("PluginCallisto::Callisto.accInvoiceAddresses") }}</p>
+	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accInvoiceAddresses") }}</p>
 	            <div class="shipping-addresses-select">
 	                <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}" :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
 	            </div>
 	        </div>
 	        <div class="col-md-6">
 	            <h4>
-					{{ trans("PluginCallisto::Callisto.accShippingAddresses") }}
+					{{ trans("PluginCallisto::Template.accShippingAddresses") }}
 	            </h4>
-	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.generalAll") }} {{ trans("PluginCallisto::Callisto.accShippingAddresses") }}</p>
+	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accShippingAddresses") }}</p>
 	             <div class="shipping-addresses-select">
 	                <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}" :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
 	            </div>
@@ -60,9 +60,9 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h4>
-					{{ trans("PluginCallisto::Callisto.accAccountSettings") }}
+					{{ trans("PluginCallisto::Template.accAccountSettings") }}
 				</h4>
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangeLoginData") }}</p>
+				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangeLoginData") }}</p>
 
 				<div class="card m-b-3">
 					<account-settings :user-data="{{ userObject }}"><account-settings>
@@ -71,10 +71,10 @@
 
 			<div class="col-md-6">
 				<h4>
-					{{ trans("PluginCallisto::Callisto.accBankDetails") }}
+					{{ trans("PluginCallisto::Template.accBankDetails") }}
 				</h4>
 
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Callisto.accChangePaymentInformation") }}</p>
+				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangePaymentInformation") }}</p>
 	            <bank-data-select :user-bank-data="{{ userBankData }}" contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
 
 			</div>

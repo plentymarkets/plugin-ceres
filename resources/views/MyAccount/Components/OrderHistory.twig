@@ -13,7 +13,7 @@
                     <div class="clearfix">
                         <div class="pull-xs-left">
                             {% set orderPageCount = services.customer.getOrders(1, 2) | json_encode() %}
-                            {{ trans_choice("PluginCallisto::Callisto.orderShow", orderPageCount.totalCount, {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                            {{ trans_choice("PluginCallisto::Template.orderShow", orderPageCount.totalCount, {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
                         </div>
 
                         <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
