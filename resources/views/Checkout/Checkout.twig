@@ -15,7 +15,7 @@
         {% if overrideCheckout|trim is empty %}
             <div class="row m-t-1">
                 <div class="col-xs-12 m-b-3">
-                    <h1 class="h4">{{ trans("PluginCallisto::Callisto.orderCheckout") }}</h1>
+                    <h1 class="h4">{{ trans("PluginCallisto::Template.orderCheckout") }}</h1>
                     <hr>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                             {% set overrideBillingAddress = LayoutContainer.show("PluginCallisto::Checkout.BillingAddress") %}
                             {% if overrideBillingAddress|trim is empty %}
                                 <header class="m-b-1">
-                                <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
+                                <h3>{{ trans("PluginCallisto::Template.orderInvoiceAddress") }}</h3>
                                 </header>
 
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeBillingAddress") }}
@@ -45,7 +45,7 @@
                             {% set overrideShippingAddress = LayoutContainer.show("PluginCallisto::Checkout.ShippingAddress") %}
                             {% if overrideShippingAddress|trim is empty %}
                                 <header class="m-b-1">
-                                    <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
+                                    <h3>{{ trans("PluginCallisto::Template.orderShippingAddress") }}</h3>
                                 </header>
 
                                 {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingAddress") }}
@@ -63,7 +63,7 @@
                         {% set overrideShippingProfiles = LayoutContainer.show("PluginCallisto::Checkout.ShippingProfileList") %}
                         {% if overrideShippingProfiles|trim is empty %}
                             <header class="m-b-1">
-                                <h3>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h3>
+                                <h3>{{ trans("PluginCallisto::Template.orderShippingProfile") }}</h3>
                             </header>
 
                             {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingProfileList") }}
@@ -78,7 +78,7 @@
                         {% set overridePaymentList = LayoutContainer.show("PluginCallisto::Checkout.PaymentList") %}
                         {% if overridePaymentList|trim is empty %}
                             <header class="m-b-1">
-                                <h3>{{ trans("PluginCallisto::Callisto.orderPaymentMethod") }}</h3>
+                                <h3>{{ trans("PluginCallisto::Template.orderPaymentMethod") }}</h3>
                             </header>
 
                             {{ LayoutContainer.show("PluginCallisto::Checkout.BeforePaymentList") }}
@@ -119,21 +119,21 @@
                                 <label class="form-check-label" for="agb-accept">
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
                                     {% autoescape false %}
-                                        {{ trans("PluginCallisto::Callisto.generalChooseOur") }}
+                                        {{ trans("PluginCallisto::Template.generalChooseOur") }}
                                         {% set terms = services.category.get(config('PluginCallisto.global.category.terms_and_conditions')) %}
                                         <a href="{{ services.category.getURL( terms ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Callisto.generalGtc") }}</strong>
+                                            <strong>{{ trans("PluginCallisto::Template.generalGtc") }}</strong>
                                         </a>,
                                         {% set rights = services.category.get(config('PluginCallisto.global.category.cancellation_rights')) %}
                                         <a href="{{ services.category.getURL( rights ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Callisto.generalCancellationRight") }}</strong>
+                                            <strong>{{ trans("PluginCallisto::Template.generalCancellationRight") }}</strong>
                                         </a>
-                                        {{ trans("PluginCallisto::Callisto.generalAnd") }}
+                                        {{ trans("PluginCallisto::Template.generalAnd") }}
                                         {% set policy = services.category.get(config('PluginCallisto.global.category.privacy_policy')) %}
                                         <a href="{{ services.category.getURL( policy ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Callisto.generalPrivacyPolicy") }}</strong>
+                                            <strong>{{ trans("PluginCallisto::Template.generalPrivacyPolicy") }}</strong>
                                         </a>
-                                        {{ trans("PluginCallisto::Callisto.generalToNotice") }}
+                                        {{ trans("PluginCallisto::Template.generalToNotice") }}
                                     {% endautoescape %}
                                 </label>
                             </div>

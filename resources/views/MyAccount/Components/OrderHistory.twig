@@ -2,7 +2,7 @@
 
 <div class="page-content history container-max">
         <div class="row m-b-3">
-            <h1 class="h4 col-xs-12">{{ trans("PluginCallisto::Callisto.orderHistory") }}</h1>
+            <h1 class="h4 col-xs-12">{{ trans("PluginCallisto::Template.orderHistory") }}</h1>
         </div>
 
         <div class="form-group">
@@ -12,7 +12,8 @@
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix">
                         <div class="pull-xs-left">
-                            {{ trans("PluginCallisto::Callisto.orderShow") }} ${ countStart } - ${ countEnd } {{ trans("PluginCallisto::Callisto.orderOf") }} ${ orderList.totalsCount } {{ trans("PluginCallisto::Callisto.orderOrders") }}
+                            {% set orderPageCount = services.customer.getOrders(1, 2) | json_encode() %}
+                            {{ trans_choice("PluginCallisto::Callisto.orderShow", orderPageCount.totalCount, {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
                         </div>
 
                         <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
@@ -85,19 +86,19 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderDate") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.order.createdAt }</span>
                                         </div>
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderRecipient") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderRecipient") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.order.addresses[1].searchName }</span>
                                         </div>
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
                                         </div>
                                         {#<div class="row">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShipped") }}</strong>#}
                                             {#<span class="col-xs-6 col-sm-7">TODO</span>#}
                                         {#</div>#}
                                     </div>
@@ -105,7 +106,7 @@
                                     <div class="col-xs-12 col-md-6">
 
                                         <input type="checkbox" class="item-toggle toggle-description" id="itemid-${ entry.order.id }" value="">
-                                        <strong>{{ trans("PluginCallisto::Callisto.orderItemsBought") }}</strong>
+                                        <strong>{{ trans("PluginCallisto::Template.orderItemsBought") }}</strong>
                                         <div class="item-description">
 
                                             <ul class="m-y-1">
@@ -114,7 +115,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <label class="expand-btn" for="itemid-${ entry.order.id }" data-show-more="{{ trans("PluginCallisto::Callisto.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Callisto.itemShowLess") }}"></label>
+                                        <label class="expand-btn" for="itemid-${ entry.order.id }" data-show-more="{{ trans("PluginCallisto::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Template.itemShowLess") }}"></label>
                                     </div>
                                 </div>
                             </div>
@@ -127,38 +128,38 @@
                 <div class="col-xs-12 col-md-3 col-lg-4">
                     <div class="input-unit">
                         <input id="auftragId" type="text">
-                        <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderEnterOrderId") }}</label>
+                        <label for="auftragId">{{ trans("PluginCallisto::Template.orderEnterOrderId") }}</label>
                     </div>
 
                     <div class="input-unit">
                         <select class="custom-select" id="TimePeriod">
                             <option>---</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast30Days") }}</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast3Month") }}</option>
-                            <option>{{ trans("PluginCallisto::Callisto.orderLast6Month") }}</option>
+                            <option>{{ trans("PluginCallisto::Template.orderLast30Days") }}</option>
+                            <option>{{ trans("PluginCallisto::Template.orderLast3Month") }}</option>
+                            <option>{{ trans("PluginCallisto::Template.orderLast6Month") }}</option>
                         </select>
-                        <label for="TimePeriod">{{ trans("PluginCallisto::Callisto.orderSelectTimePeriod") }}</label>
+                        <label for="TimePeriod">{{ trans("PluginCallisto::Template.orderSelectTimePeriod") }}</label>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12 col-lg-6">
                             <div class="input-unit">
                                 <input id="von" type="text">
-                                <label for="von">{{ trans("PluginCallisto::Callisto.orderFrom") }}</label>
+                                <label for="von">{{ trans("PluginCallisto::Template.orderFrom") }}</label>
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-lg-6">
                             <div class="input-unit">
                                 <input id="auftragId" type="text">
-                                <label for="auftragId">{{ trans("PluginCallisto::Callisto.orderTo") }}</label>
+                                <label for="auftragId">{{ trans("PluginCallisto::Template.orderTo") }}</label>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="m-b-3">
-                        <input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCallisto::Callisto.orderApply") }}">
+                        <input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCallisto::Template.orderApply") }}">
                     </div>
 
                 </div>

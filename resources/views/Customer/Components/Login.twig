@@ -5,28 +5,28 @@
                 <div class="col-xs-12">
                     <div class="input-unit">
                         <input type="email" name="email" id="txt_email" v-model="username">
-                        <label for="txt_email">{{ trans("PluginCallisto::Callisto.accEmail") }}*</label>
+                        <label for="txt_email">{{ trans("PluginCallisto::Template.accEmail") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
                     <div class="input-unit">
                         <input type="password" name="password" id="txt_password" v-model="password">
-                        <label for="txt_password">{{ trans("PluginCallisto::Callisto.accPassword") }}*</label>
+                        <label for="txt_password">{{ trans("PluginCallisto::Template.accPassword") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-xs-8">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" value="">
-                        <span>{{ trans("PluginCallisto::Callisto.accRememberPassword") }}</span>
+                        <span>{{ trans("PluginCallisto::Template.accRememberPassword") }}</span>
                     </label>
                     <div>
-                        <a href="#" class="small">{{ trans("PluginCallisto::Callisto.accForgotPassword") }}</a>
+                        <a href="#" class="small">{{ trans("PluginCallisto::Template.accForgotPassword") }}</a>
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <button v-on:click.prevent="sendLogin" class="btn btn-primary pull-xs-right">{{ trans("PluginCallisto::Callisto.accLogin") }}</button>
+                    <button v-on:click.prevent="sendLogin" class="btn btn-primary pull-xs-right">{{ trans("PluginCallisto::Template.accLogin") }}</button>
                 </div>
             </div>
         </form>

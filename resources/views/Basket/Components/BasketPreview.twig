@@ -5,7 +5,7 @@
 <script type="x/template" id="vue-basket-preview">
     <div class="wrapper-inner basket-preview">
         <header class="basket-header p-a-1">
-            <h3 class="d-inline-block m-a-0">{{ trans("PluginCallisto::Callisto.basketPreview") }}</h3>
+            <h3 class="d-inline-block m-a-0">{{ trans("PluginCallisto::Template.basketPreview") }}</h3>
             <button type="button" id="closeBasketPreview" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -16,7 +16,7 @@
           <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
               <basket-list size="small"></basket-list>
           </div>
-          <h5 v-else>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
+          <h5 v-else>{{ trans("PluginCallisto::Template.orderNoItemsInBasket") }}</h5>
         </div>
         <!-- ./BASKET LIST -->
 
@@ -27,18 +27,18 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
-                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("PluginCallisto::Callisto.basketToBasket") }}">
-                        {{ trans("PluginCallisto::Callisto.basketToBasket") }} <i class="fa fa-shopping-cart"></i>
+                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("PluginCallisto::Template.basketToBasket") }}">
+                        {{ trans("PluginCallisto::Template.basketToBasket") }} <i class="fa fa-shopping-cart"></i>
                     </a>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
                     {{ LayoutContainer.show("PluginCallisto::BasketPreview.BeforeCheckoutButton") }}
-                    <a v-resource-if:user="isLoggedIn" href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
-                        {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    <a v-resource-if:user="isLoggedIn" href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Template.basketToCheckout") }}">
+                        {{ trans("PluginCallisto::Template.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
-                    <a v-resource-if:user="!isLoggedIn" href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Callisto.basketToCheckout") }}">
-                        {{ trans("PluginCallisto::Callisto.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    <a v-resource-if:user="!isLoggedIn" href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCallisto::Template.basketToCheckout") }}">
+                        {{ trans("PluginCallisto::Template.basketToCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                     {{ LayoutContainer.show("PluginCallisto::BasketPreview.AfterCheckoutButton") }}
                 </div>

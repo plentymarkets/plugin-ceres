@@ -37,7 +37,7 @@
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
                     <div class="services-payment m-b-1">
-                        <strong class="services-title">{{ trans("PluginCallisto::Callisto.orderPaymentMethods") }}</strong>
+                        <strong class="services-title">{{ trans("PluginCallisto::Template.orderPaymentMethods") }}</strong>
                         <a href="#">
                             <img src="{{ plugin_path("PluginCallisto") }}/images/paypal.svg" class="img-fluid">
                         </a>
@@ -104,7 +104,7 @@
             <hr class="hidden-sm-up m-y-2">
             <div class="col-xs-6 col-sm-3">
                 <div class="footer-column">
-                    <h5>{{ trans("PluginCallisto::Callisto.addressContact") }}</h5>
+                    <h5>{{ trans("PluginCallisto::Template.addressContact") }}</h5>
 
                     <style>
                         .contact-card > p > .fa {
@@ -144,11 +144,11 @@
                     {% if showNewsletter == "true" %}
                     <div class="col-xs-12 col-sm-6 col-lg-12">
                         <div class="newsletter clearfix">
-                            <h5>{{ trans("PluginCallisto::Callisto.generalNewsletter") }}</h5>
-                            <p>{{ trans("PluginCallisto::Callisto.generalEnterEmail") }}</p>
+                            <h5>{{ trans("PluginCallisto::Template.generalNewsletter") }}</h5>
+                            <p>{{ trans("PluginCallisto::Template.generalEnterEmail") }}</p>
                             <form id="" action="" method="post">
                                 <div class="input-group">
-                                    <input name="" id="" class="form-control" type="email" placeholder="{{ trans("PluginCallisto::Callisto.generalYourEmail") }}">
+                                    <input name="" id="" class="form-control" type="email" placeholder="{{ trans("PluginCallisto::Template.generalYourEmail") }}">
                                     <span class="input-group-btn">
                                         <button class="btn btn-mail" type="submit">
                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -187,6 +187,6 @@
 
     {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
     <div class="copyright text-xs-center m-y-1">
-        <small>&copy; Copyright 2016 | {{ trans("PluginCallisto::Callisto.generalAllRightsReserved") }}</small>
+        <small>&copy; Copyright 2016 | {{ trans("PluginCallisto::Template.generalAllRightsReserved") }}</small>
     </div>
 </div>

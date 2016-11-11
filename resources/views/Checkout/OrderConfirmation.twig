@@ -11,8 +11,8 @@
 
         <div class="row m-b-3">
             <div class="col-xs-12">
-                <h1 class="h4">{{ trans("PluginCallisto::Callisto.generalThanks") }}</h1>
-                <p>{{ trans("PluginCallisto::Callisto.orderWillBeProcessed") }}</p>
+                <h1 class="h4">{{ trans("PluginCallisto::Template.generalThanks") }}</h1>
+                <p>{{ trans("PluginCallisto::Template.orderWillBeProcessed") }}</p>
             </div>
         </div>
 
@@ -21,24 +21,24 @@
                 <div class="card small">
                     <!-- ORDER -->
                     <div class="card-header">
-                        <h5>{{ trans("PluginCallisto::Callisto.orderId") }} {{ data.order.id }}</h5>
+                        <h5>{{ trans("PluginCallisto::Template.orderId") }} {{ data.order.id }}</h5>
                     </div>
                     <div class="card-block">
                         <div class="details">
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderDate") }}</strong>
                                 <span class="col-xs-6 col-sm-7">{{ data.order.createdAt|date("d.m.Y")}}</span>
                             </div>
                             {#<div class="row">#}
-                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderPaymentEntry") }}</strong>#}
+                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderPaymentEntry") }}</strong>#}
                                 {#<span class="col-xs-6 col-sm-7"> {{ data.order }} </span>#}
                             {#</div>#}
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderStatus") }}</strong>
                                 <span class="col-xs-6 col-sm-7">{{ data.status.frontendName }}</span>
                             </div>
                             {#<div class="row">#}
-                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>#}
+                                {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShipped") }}</strong>#}
                                 {#<span class="col-xs-6 col-sm-7">TODO</span>#}
                             {#</div>#}
                         </div>
@@ -46,16 +46,16 @@
                         <hr>
 
                         <div class="invoiceaddress">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h6>
+                            <h6>{{ trans("PluginCallisto::Template.orderInvoiceAddress") }}</h6>
                             {{ address.print( data.order.billingAddress ) }}
                         </div>
 
                         <hr>
 
                         <div class="shippingaddress">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h6>
+                            <h6>{{ trans("PluginCallisto::Template.orderShippingAddress") }}</h6>
                             {% if data.order.billingAddress.id == data.order.deliveryAddress.id %}
-                                <p>{{ trans("PluginCallisto::Callisto.addressSameAsInvoice") }}</p>
+                                <p>{{ trans("PluginCallisto::Template.addressSameAsInvoice") }}</p>
                             {% else %}
                                 {{ address.print( data.order.billingAddress ) }}
                             {% endif %}
@@ -63,22 +63,22 @@
                         <hr>
 
                         <div class="paymentmethod">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderPayment") }}</h6>
-                            <div>{{ trans("PluginCallisto::Callisto.orderPaypalPlus") }}</div>
+                            <h6>{{ trans("PluginCallisto::Template.orderPayment") }}</h6>
+                            <div>{{ trans("PluginCallisto::Template.orderPaypalPlus") }}</div>
                             {{ LayoutContainer.show("PluginCallisto::OrderConfirmation.AdditionalPaymentInformation") }}
                         </div>
 
                         <hr>
 
                         <div class="shippingmethod">
-                            <h6>{{ trans("PluginCallisto::Callisto.orderShippingProfile") }}</h6>
-                            <div>{{ trans("PluginCallisto::Callisto.orderDhlPackage") }}</div>
+                            <h6>{{ trans("PluginCallisto::Template.orderShippingProfile") }}</h6>
+                            <div>{{ trans("PluginCallisto::Template.orderDhlPackage") }}</div>
                         </div>
 
                         <hr>
 
                         {#<div class="status">#}
-                            {#<h6>{{ trans("PluginCallisto::Callisto.orderStatusHistory") }}</h6>#}
+                            {#<h6>{{ trans("PluginCallisto::Template.orderStatusHistory") }}</h6>#}
                             {#<ul>#}
                                 {#<li><span class="text-muted">03.08.2016 13:55</span> [8] TODO</li>#}
                                 {#<li><span class="text-muted">03.08.2016 10:15</span> [3] TODO</li>#}
@@ -103,28 +103,28 @@
                                 </div>
 
                                 <div class="item-details">
-                                    <h5>{{ trans("PluginCallisto::Callisto.orderId") }} TODO</h5>
+                                    <h5>{{ trans("PluginCallisto::Template.orderId") }} TODO</h5>
                                     <h6 class="item-name small">
                                        TODO ARTIKELTEXT
                                     </h6>
-                                    <p class="id small"><strong>{{ trans("PluginCallisto::Callisto.orderItemId") }}</strong> TODO</p>
+                                    <p class="id small"><strong>{{ trans("PluginCallisto::Template.orderItemId") }}</strong> TODO</p>
                                 </div>
                             </div>
                             <div class="col-md-5 small">
                                 <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderDate") }}</strong>
+                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderDate") }}</strong>
                                     <span class="col-xs-6 col-sm-7">TODO</span>
                                 </div>
                                 <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderRecipient") }}</strong>
+                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderRecipient") }}</strong>
                                     <span class="col-xs-6 col-sm-7">TODO</span>
                                 </div>
                                 <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderStatus") }}</strong>
+                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderStatus") }}</strong>
                                     <span class="col-xs-6 col-sm-7">[8] TODO</span>
                                 </div>
                                 <div class="row">
-                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.orderShipped") }}</strong>
+                                    <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShipped") }}</strong>
                                     <span class="col-xs-6 col-sm-7">TODO</span>
                                 </div>
                             </div>
@@ -141,11 +141,11 @@
         <hr>
         <div class="row">
             <div class="col-xs-6 col-md-4 offset-md-2">
-                <a href="/" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Callisto.generalHomepage") }}</a>
+                <a href="/" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Template.generalHomepage") }}</a>
             </div>
 
             <div class="col-xs-6 col-md-4">
-                <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Callisto.accMyAccount") }}</a>
+                <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCallisto::Template.accMyAccount") }}</a>
             </div>
         </div>
 
