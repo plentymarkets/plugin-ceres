@@ -57,7 +57,7 @@ Vue.component("bank-data-select", {
          */
         openAddBank: function()
         {
-            this.headline = Translations.Callisto.bankAddDataTitle;
+            this.headline = Translations.Template.bankAddDataTitle;
             this.openModal(false);
         },
 
@@ -68,7 +68,7 @@ Vue.component("bank-data-select", {
          */
         openUpdateBank: function(index, bankData)
         {
-            this.headline = Translations.Callisto.bankUpdateDataTitle;
+            this.headline = Translations.Template.bankUpdateDataTitle;
 
             this.setUpdateData(index, bankData);
             this.openModal(true);
@@ -148,13 +148,13 @@ Vue.component("bank-data-select", {
                     _self.userBankData.splice(_self.updateBankIndex, 1, response);
                     _self.bankInfoModal.hide();
 
-                    NotificationService.success(Translations.Callisto.bankDataUpdated).closeAfter(3000);
+                    NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
                 })
                 .fail(function()
                 {
                     _self.bankInfoModal.hide();
 
-                    NotificationService.error(Translations.Callisto.bankDataNotUpdated).closeAfter(5000);
+                    NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
                 });
         },
 
@@ -174,13 +174,13 @@ Vue.component("bank-data-select", {
                     _self.userBankData.push(response);
                     _self.bankInfoModal.hide();
 
-                    NotificationService.success(Translations.Callisto.bankDataAdded).closeAfter(3000);
+                    NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
                 })
                 .fail(function()
                 {
                     _self.bankInfoModal.hide();
 
-                    NotificationService.error(Translations.Callisto.bankDataNotAdded).closeAfter(5000);
+                    NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
                 });
         },
 
@@ -197,13 +197,13 @@ Vue.component("bank-data-select", {
                     _self.userBankData.splice(_self.updateBankIndex, 1);
                     _self.bankDeleteModal.hide();
 
-                    NotificationService.success(Translations.Callisto.bankDataDeleted).closeAfter(3000);
+                    NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
                 })
                 .fail(function()
                 {
                     _self.bankDeleteModal.hide();
 
-                    NotificationService.error(Translations.Callisto.bankDataNotDeleted).closeAfter(5000);
+                    NotificationService.error(Translations.Template.bankDataNotDeleted).closeAfter(5000);
                 });
         },
 

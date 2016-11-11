@@ -215,28 +215,28 @@ Vue.component("address-select", {
             {
                 if (this.modalType === "update")
                 {
-                    headline = Translations.Callisto.orderShippingAddressEdit;
+                    headline = Translations.Template.orderShippingAddressEdit;
                 }
                 else if (this.modalType === "create")
                 {
-                    headline = Translations.Callisto.orderShippingAddressCreate;
+                    headline = Translations.Template.orderShippingAddressCreate;
                 }
                 else
                 {
-                    headline = Translations.Callisto.orderShippingAddressDelete;
+                    headline = Translations.Template.orderShippingAddressDelete;
                 }
             }
             else if (this.modalType === "update")
             {
-                headline = Translations.Callisto.orderInvoiceAddressEdit;
+                headline = Translations.Template.orderInvoiceAddressEdit;
             }
             else if (this.modalType === "create")
             {
-                headline = Translations.Callisto.orderInvoiceAddressCreate;
+                headline = Translations.Template.orderInvoiceAddressCreate;
             }
             else
             {
-                headline = Translations.Callisto.orderInvoiceAddressDelete;
+                headline = Translations.Template.orderInvoiceAddressDelete;
             }
 
             this.headline = headline;
