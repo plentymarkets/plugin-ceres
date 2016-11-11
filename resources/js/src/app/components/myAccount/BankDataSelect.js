@@ -18,19 +18,11 @@ Vue.component("bank-data-select", {
             bankInfoModal: {},
             bankDeleteModal: {},
             updateBankData: {},
-            selectedBankData: {},
+            selectedBankData: null,
             updateBankIndex: 0,
             doUpdate: null,
             headline : ""
         };
-    },
-
-    /**
-     * Select the first bank-data
-     */
-    created: function()
-    {
-        this.selectedBankData = this.userBankData[0];
     },
 
     /**
@@ -146,13 +138,14 @@ Vue.component("bank-data-select", {
                 .done(function(response)
                 {
                     _self.userBankData.splice(_self.updateBankIndex, 1, response);
-                    _self.bankInfoModal.hide();
+                    _self.checkBankDataSelection();
+                    _self.closeModal();
 
                     NotificationService.success(Translations.Callisto.bankDataUpdated).closeAfter(3000);
                 })
                 .fail(function()
                 {
-                    _self.bankInfoModal.hide();
+                    _self.closeModal();
 
                     NotificationService.error(Translations.Callisto.bankDataNotUpdated).closeAfter(5000);
                 });
@@ -172,13 +165,14 @@ Vue.component("bank-data-select", {
                 .done(function(response)
                 {
                     _self.userBankData.push(response);
-                    _self.bankInfoModal.hide();
+                    _self.checkBankDataSelection(true);
+                    _self.closeModal();
 
                     NotificationService.success(Translations.Callisto.bankDataAdded).closeAfter(3000);
                 })
                 .fail(function()
                 {
-                    _self.bankInfoModal.hide();
+                    _self.closeModal();
 
                     NotificationService.error(Translations.Callisto.bankDataNotAdded).closeAfter(5000);
                 });
@@ -194,17 +188,41 @@ Vue.component("bank-data-select", {
             ApiService.delete("/rest/customer/bank_data/" + this.updateBankData.id)
                 .done(function(response)
                 {
+                    _self.checkBankDataSelection(false);
+                    _self.closeDeleteModal();
                     _self.userBankData.splice(_self.updateBankIndex, 1);
-                    _self.bankDeleteModal.hide();
 
                     NotificationService.success(Translations.Callisto.bankDataDeleted).closeAfter(3000);
                 })
                 .fail(function()
                 {
-                    _self.bankDeleteModal.hide();
+                    _self.closeDeleteModal();
 
                     NotificationService.error(Translations.Callisto.bankDataNotDeleted).closeAfter(5000);
                 });
+        },
+
+        /**
+         * Check selection on delete and on add bank-data
+         */
+        checkBankDataSelection: function(addData)
+        {
+            if (addData && !this.doUpdate && this.userBankData.length < 1)
+            {
+                this.selectedBankData = this.userBankData[0];
+            }
+
+            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id)
+            {
+                if (!this.doUpdate)
+                {
+                    this.selectedBankData = null;
+                }
+                else
+                {
+                    this.selectedBankData = this.userBankData[this.updateBankIndex];
+                }
+            }
         },
 
         /**
@@ -214,6 +232,16 @@ Vue.component("bank-data-select", {
         {
             this.updateBankData = {};
             this.updateBankIndex = 0;
+            this.doUpdate = false;
+        },
+
+        /**
+         * Close the current bank-modal
+         */
+        closeModal: function()
+        {
+            this.bankInfoModal.hide();
+            this.resetData();
         },
 
         /**
