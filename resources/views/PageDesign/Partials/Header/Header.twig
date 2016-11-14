@@ -1,4 +1,5 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
+{{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 
 {% set lang                     = services.sessionStorage.getLang() %}
 {% set activeShippingCountries  = services.country.getActiveCountriesList(lang) %}
@@ -8,11 +9,11 @@
 <header class="top-bar">
     <div class="container-max">
         <div class="row">
-            <div  class="shariff socialbar hidden-sm-down pull-xs-left"
-                    data-services='["facebook","googleplus","pinterest","twitter"]'
-                    data-url=""
-                    data-media-url=""
-                    data-theme="minimal">
+            <div class="shariff socialbar hidden-sm-down pull-xs-left"
+                 data-services='["facebook","googleplus","pinterest","twitter"]'
+                 data-url=""
+                 data-media-url=""
+                 data-theme="minimal">
             </div>
 
             <ul id="controlsList" class="controls-list list-inline">
@@ -22,13 +23,15 @@
                 </li>
 
                 <li class="list-inline-item dropdown control-languages">
-                    <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false" aria-controls="countrySettings" data-parent="#controlsList">
+                    <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false" aria-controls="countrySettings"
+                       data-parent="#controlsList">
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
 
                 <li class="list-inline-item control-search">
-                    <a class="" data-toggle="collapse" href="#searchBox" aria-expanded="false" aria-controls="searchBox" data-parent="#controlsList">
+                    <a class="" data-toggle="collapse" href="#searchBox" aria-expanded="false" aria-controls="searchBox"
+                       data-parent="#controlsList">
                         <i class="fa fa-search"></i>
                         <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.generalSearchNoDot") }}</span>
                     </a>
@@ -67,12 +70,13 @@
                     </div>
                     <ul>
                         {% for activeShopLang in activeShopLanguageList %}
-                        <li class="{% if activeShopLang == lang %}active{% endif %}">
-                            <a data-toggle="collapse" href="#countrySettings" class="" v-change-lang="{currLang: '{{ lang }}', lang: '{{ activeShopLang }}' }">
-                                <i class="flag-icon flag-icon-{{ activeShopLang }}"></i>
-                                {{ trans("PluginCallisto::Callisto."~activeShopLang) }}
-                            </a>
-                        </li>
+                            <li class="{% if activeShopLang == lang %}active{% endif %}">
+                                <a data-toggle="collapse" href="#countrySettings" class=""
+                                   v-change-lang="{currLang: '{{ lang }}', lang: '{{ activeShopLang }}' }">
+                                    <i class="flag-icon flag-icon-{{ activeShopLang }}"></i>
+                                    {{ trans("PluginCallisto::Callisto."~activeShopLang) }}
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -82,16 +86,10 @@
                         <strong>{{ trans("PluginCallisto::Callisto.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
-                    <ul>
-                        {% for shippingCountry in activeShippingCountries %}
-                        <li class="{% if currentShippingCountryId == shippingCountry.id %}active{% endif %}">
-                            <a data-toggle="collapse" href="#countrySettings" class="" v-shipping-country.literal="{{ shippingCountry.id }}">
-                                <i class="flag-icon flag-icon-{{ shippingCountry.isoCode2|lower }}"></i>
-                                {{shippingCountry.currLangName}}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    <shipping-country-select
+                            :shipping-country-list="{{ services.country.getActiveCountriesList(lang) | json_encode() }}"
+                            :current-shipping-country-id="{{ services.checkout.getShippingCountryId() }}"></shipping-country-select>
+
                 </div>
             </div>
         </div>
@@ -99,7 +97,7 @@
         {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
 
         <!-- breadcrumb -->
-        {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout()  %}
+        {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
             {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" %}
         {% endif %}
 
