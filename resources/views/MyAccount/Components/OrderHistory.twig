@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-order-history">
 
-<div class="page-content history container-max">
+    <div class="page-content history container-max">
         <div class="row m-b-3">
             <h1 class="h4 col-xs-12">{{ trans("PluginCallisto::Template.orderHistory") }}</h1>
         </div>
@@ -80,42 +80,23 @@
                             <div class="item-details small">
 
                                 <div class="item-name">
-                                    <h5>${ entry.order.id }</h5>
+                                    <h5>{{ trans("PluginCallisto::Template.orderId") }} ${ entry.order.id }</h5>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt }</span>
-                                        </div>
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderRecipient") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.order.addresses[1].searchName }</span>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("PluginCallisto::Template.dateTimeFormatMoment") }}" }</span>
                                         </div>
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
                                         </div>
-                                        {#<div class="row">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShipped") }}</strong>#}
-                                            {#<span class="col-xs-6 col-sm-7">TODO</span>#}
-                                        {#</div>#}
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
-
-                                        <input type="checkbox" class="item-toggle toggle-description" id="itemid-${ entry.order.id }" value="">
-                                        <strong>{{ trans("PluginCallisto::Template.orderItemsBought") }}</strong>
-                                        <div class="item-description">
-
-                                            <ul class="m-y-1">
-                                                <li v-for="orderItem in entry.order.orderItems">
-                                                    ${ orderItem.orderItemName }
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <label class="expand-btn" for="itemid-${ entry.order.id }" data-show-more="{{ trans("PluginCallisto::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Template.itemShowLess") }}"></label>
+                                        <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("PluginCallisto::Template.orderDetails") }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -124,6 +105,23 @@
                     </div>
                     <!-- ./ORDER HISTORY -->
                 </div>
+
+                <!-- ORDER DETAILS MODAL -->
+                <div class="modal fade" v-el:order-details v-if="currentOrder" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans("PluginCallisto::Template.orderDetails") }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <order-details :order-data="currentOrder" :totals-config="{{ config("PluginCallisto.basket.data")|split(', ')|json_encode() }}"></order-details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./ORDER DETAILS MODAL -->
+
                 <!-- ORDER FILTER -->
                 <div class="col-xs-12 col-md-3 col-lg-4">
                     <div class="input-unit">
