@@ -46,7 +46,7 @@ Vue.component("login", {
                         ModalService.findModal(document.getElementById(self.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Callisto.accLoginSuccessful).closeAfter(10000);
+                    NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
 
                     if (self.backlink !== null && self.backlink)
                     {
@@ -62,7 +62,7 @@ Vue.component("login", {
                     switch (response.code)
                     {
                     case 401:
-                        NotificationService.error(Translations.Callisto.accLoginFailed).closeAfter(10000);
+                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
                         break;
                     default:
                         return;

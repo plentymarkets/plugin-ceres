@@ -65,11 +65,11 @@ Vue.component("account-settings", {
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
-                        NotificationService.success(Translations.Callisto.accChangePasswordSuccessful).closeAfter(3000);
+                        NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
                     }).fail(function(response)
                 {
                         self.clearFieldsAndClose();
-                        NotificationService.error(Translations.Callisto.accChangePasswordFailed).closeAfter(5000);
+                        NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
                     });
             }
         },

@@ -59,11 +59,11 @@
             <select id="itemSorting" onchange="this.form.submit()" name="itemSorting" class="custom-select">
                 {% for element in sortData %}
                     <option value="{{ element }}"{% if currentSort == element %} selected="true"{% endif %}>
-                        {{ trans("PluginCallisto::Callisto." ~ element) }}
+                        {{ trans("PluginCallisto::Template." ~ element) }}
                     </option>
                 {% endfor %}
             </select>
-            <label for="itemSorting">{{ trans("PluginCallisto::Callisto.itemCategorySort") }}</label>
+            <label for="itemSorting">{{ trans("PluginCallisto::Template.itemCategorySort") }}</label>
         </div>
     </div>
 
@@ -78,7 +78,7 @@
                     </option>
                 {% endfor %}
             </select>
-            <label for="listItemsPerPage">{{ trans("PluginCallisto::Callisto.itemCategoryItemsPerPage") }}</label>
+            <label for="listItemsPerPage">{{ trans("PluginCallisto::Template.itemCategoryItemsPerPage") }}</label>
         </div>
     </div>
 </form>
@@ -89,7 +89,7 @@
         <i class="fa fa-th-list" aria-hidden="true"></i>
     </div>
     <div class="product-count pull-xs-right">
-        <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShow") }}:</span> <span>{{ itemCountStart }} - {{ itemCountEnd }}</span>
-        <span class="text-muted">{{ trans("PluginCallisto::Callisto.itemCategoryShowOf") }} {{ itemCountTotal }} {{ trans("PluginCallisto::Callisto.itemItems") }}</span>
+        <span class="text-muted">{{ trans("PluginCallisto::Template.itemCategoryShow") }}:</span> <span>{{ itemCountStart }} - {{ itemCountEnd }}</span>
+        <span class="text-muted">{{ trans("PluginCallisto::Template.itemCategoryShowOf") }} {{ itemCountTotal }} {{ trans("PluginCallisto::Template.itemItems") }}</span>
     </div>
 </div> -->
