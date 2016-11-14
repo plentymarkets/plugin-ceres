@@ -14,7 +14,7 @@
         <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Callisto.itemEach") }}
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
@@ -23,10 +23,10 @@
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCallisto::Callisto.generalDelete") }}
+                   {{ trans("PluginCallisto::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCallisto::Callisto.generalDeleteNow") }}
+                   {{ trans("PluginCallisto::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>
@@ -45,20 +45,20 @@
         </a>
 
         <p class="id">
-            <strong>{{ trans("PluginCallisto::Callisto.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
+            <strong>{{ trans("PluginCallisto::Template.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
         </p>
 
         <div class="item-description">
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemNumber") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemNumber") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemCondition") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemCondition") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ itemCondition }</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Callisto.itemAvailability") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
                     ${ itemAvailability }
                 </span>
@@ -67,7 +67,7 @@
                 {!! basketItem.variation.itemDescription.description !!}
             </p>
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCallisto::Callisto.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Callisto.itemShowLess") }}"></label>
+        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCallisto::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Template.itemShowLess") }}"></label>
     </div>
     <!-- ./ITEM DETAILS -->
 </article>

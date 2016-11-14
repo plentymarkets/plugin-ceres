@@ -61,7 +61,7 @@ Vue.component("registration", {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Callisto.accRegistrationSuccessful).closeAfter(3000);
+                    NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
                 });
 
         },

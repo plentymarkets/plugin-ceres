@@ -31,7 +31,7 @@
                     <a class="" data-toggle="collapse" href="#searchBox" aria-expanded="false" aria-controls="searchBox"
                        data-parent="#controlsList">
                         <i class="fa fa-search"></i>
-                        <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.generalSearchNoDot") }}</span>
+                        <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
                     </a>
                 </li>
 
@@ -53,7 +53,7 @@
                 <input type="search" class="search-input" name="" value="" placeholder="Begriff eingeben und…">
                 <button class="search-submit" type="submit">
                     <i class="fa fa-search hidden-sm-up"></i>
-                    <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.generalSearchNoDot") }}</span>
+                    <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
                 </button>
             </div>
         </div>
@@ -63,7 +63,7 @@
 
                 <div class="language-settings col-xs-12 col-sm-6">
                     <div class="list-title">
-                        <strong>{{ trans("PluginCallisto::Callisto.generalSelectLanguage") }}</strong>
+                        <strong>{{ trans("PluginCallisto::Template.generalSelectLanguage") }}</strong>
                         <hr>
                     </div>
                     <ul>
@@ -72,7 +72,7 @@
                                 <a data-toggle="collapse" href="#countrySettings" class=""
                                    v-change-lang="{currLang: '{{ lang }}', lang: '{{ activeShopLang }}' }">
                                     <i class="flag-icon flag-icon-{{ activeShopLang }}"></i>
-                                    {{ trans("PluginCallisto::Callisto."~activeShopLang) }}
+                                    {{ trans("PluginCallisto::Template."~activeShopLang) }}
                                 </a>
                             </li>
                         {% endfor %}
@@ -81,10 +81,10 @@
 
                 <div class="shipping-settings col-xs-12 col-sm-6">
                     <div class="list-title">
-                        <strong>{{ trans("PluginCallisto::Callisto.generalSelectShippingCountry") }}</strong>
+                        <strong>{{ trans("PluginCallisto::Template.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
-                    <shipping-country-select/>
+                    <shipping-country-select country-flag-prefix="flag-icon-"/>
                 </div>
             </div>
         </div>

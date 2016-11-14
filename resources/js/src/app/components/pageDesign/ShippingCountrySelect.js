@@ -4,6 +4,11 @@ Vue.component("shipping-country-select", {
 
     template: "#vue-shipping-country-select",
 
+    props:
+    [
+        "countryFlagPrefix"
+    ],
+
     data: function()
     {
         return {
@@ -19,7 +24,7 @@ Vue.component("shipping-country-select", {
         {
             var country = this.checkout.activeShippingCountries[i];
 
-            country.countryFlagClass = "flag-icon-" + country.isoCode2.toLowerCase();
+            country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
     }
 });

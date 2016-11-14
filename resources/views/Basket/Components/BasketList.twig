@@ -4,6 +4,6 @@
     <basket-list-item  v-for="basketItem in basketItems" :basket-item="basketItem" :size="size" language="{{ services.sessionStorage.getLang() }}"></basket-list-item>
 
     <div v-if="!basketItems.length > 0">
-        <h5>{{ trans("PluginCallisto::Callisto.orderNoItemsInBasket") }}</h5>
+        <h5>{{ trans("PluginCallisto::Template.orderNoItemsInBasket") }}</h5>
     </div>
 </script>

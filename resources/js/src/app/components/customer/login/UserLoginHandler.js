@@ -12,7 +12,8 @@ Vue.component("user-login-handler", {
     data: function()
     {
         return {
-            username: ""
+            username: "",
+            isLoggedIn: {}
         };
     },
 

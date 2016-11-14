@@ -2,24 +2,24 @@
     <div id="login-change">
         <div v-resource-if:user="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans("PluginCallisto::Callisto.generalHello") }} ${username}</a>
+                {{ trans("PluginCallisto::Template.generalHello") }} ${username}</a>
             </a>
             <div class="account-menu dropdown-menu dropdown-menu-right small">
               <div class="list-group" aria-labelledby="accountMenuList" >
-                <a href="/my-account" class="list-group-item small"><i class="fa fa-user"></i> {{ trans("PluginCallisto::Callisto.accMyAccount") }}</a>
-                <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Callisto.accLogout") }}</a>
+                <a href="/my-account" class="list-group-item small"><i class="fa fa-user"></i> {{ trans("PluginCallisto::Template.accMyAccount") }}</a>
+                <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Template.accLogout") }}</a>
               </div>
             </div>
         </div>
         <div v-resource-if:user="!isLoggedIn">
             <a data-toggle="modal" href="#login">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accLogin") }}</span>
+                <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.accLogin") }}</span>
             </a>
             <span class="pipe"></span>
             <a data-toggle="modal" href="#registration">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
-                <span class="hidden-xs-down">{{ trans("PluginCallisto::Callisto.accRegister") }}</span>
+                <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.accRegister") }}</span>
             </a>
         </div>
     </div>
