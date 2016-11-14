@@ -1,22 +1,34 @@
 <script type="x/template" id="vue-bank-data-select">
 <div class="cmp cmp-address-list m-b-3">
-    <div class="dropdown items">
+
+    <div class="items items-empty" v-show="userBankData.length == 0">
+        <div class="card">
+            <span class="item-inner">
+                <span class="item-content">
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.bankNoBankData") }} -</p>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="dropdown items" v-show="userBankData.length > 0">
         <div id="bankData" class="dropdown-toggle card" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="item-inner">
-                <span class="item-content" v-show="userBankData.length > 0">
+                <span class="item-content" v-if="selectedBankData">
                     <strong>Kontoinh.: ${ selectedBankData.accountOwner }</strong>
                     <span>IBAN:        ${ selectedBankData.iban }</span>
                     <span>BIC:         ${ selectedBankData.bic }</span>
                 </span>
-                <span class="item-content" v-show="!userBankData.length > 0">
-                    <p class="text-muted small font-italic p-t-1">{{ trans("PluginCallisto::Template.pleaseSelect") }}</p>
+
+                <span class="item-content" v-show="!selectedBankData">
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.pleaseSelect") }} -</p>
                 </span>
             </span>
         </div>
-        <div class="dropdown-menu" aria-labelledby="bankData" v-show="userBankData.length > 0">
+        <div class="dropdown-menu" aria-labelledby="bankData">
             <ul>
                 <li class="item" v-for="(index,bankData) in userBankData">
-                    <input type="radio" id="${ bankData.id }" name="bankData" :checked="index == 0" :value="bankData" @change="changeSelecting(bankData)">
+                    <input type="radio" id="${ bankData.id }" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
                     <label for="${ bankData.id }" class="item-inner">
                         <span class="item-content small">
                             <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
@@ -24,12 +36,15 @@
                             <span>IBAN:        ${ bankData.iban }</span>
                             <span>BIC:         ${ bankData.bic }</span>
                         </span><!--
-                        --><span class="item-edit" @click="openUpdateBank(index, bankData)">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </span><!--
-                        --><span class="item-remove" @click="openDeleteBank(index, bankData)">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </span>
+                        -->
+                        <div class="item-controls">
+                            <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </span><!--
+                        --><span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </span>
+                        </div>
                     </label>
                 </li>
             </ul>
@@ -85,7 +100,7 @@
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="resetData">{{ trans("PluginCallisto::Template.generalCancel") }}</button>
+                    <button type="button" class="btn btn-secondary" @click="closeModal">{{ trans("PluginCallisto::Template.generalCancel") }}</button>
                     <button type="button" class="btn btn-primary" @click="validateInput">{{ trans("PluginCallisto::Template.generalSave") }}</button>
                 </div>
             </div>

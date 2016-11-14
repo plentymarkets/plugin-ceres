@@ -61,7 +61,7 @@
                                 <span>${address.postalCode} ${address.town}</span>
                             </span>
                             <!---->
-                            <div v-if="address.id != -99">
+                            <div class="item-controls" v-if="address.id != -99">
                                 <span class="item-edit">
                                     <i class="fa fa-pencil-square-o" @click.prevent="showEditModal(address)" aria-hidden="true"></i>
                                 </span>
