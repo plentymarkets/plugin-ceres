@@ -6,6 +6,7 @@
     {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.BankDataSelect" ) }}
+	{{ component( "PluginCallisto::Checkout.Components.OrderDetails" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
