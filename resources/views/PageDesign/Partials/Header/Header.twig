@@ -2,8 +2,6 @@
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 
 {% set lang                     = services.sessionStorage.getLang() %}
-{% set activeShippingCountries  = services.country.getActiveCountriesList(lang) %}
-{% set currentShippingCountryId = services.checkout.getShippingCountryId() %}
 {% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
 
 <header class="top-bar">
@@ -86,9 +84,7 @@
                         <strong>{{ trans("PluginCallisto::Callisto.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
-                    <shipping-country-select
-                            :shipping-country-list="{{ services.country.getActiveCountriesList(lang) | json_encode() }}"
-                            :current-shipping-country-id="{{ services.checkout.getShippingCountryId() }}"></shipping-country-select>
+                    <shipping-country-select/>
 
                 </div>
             </div>
