@@ -14,7 +14,6 @@
         <div class="col-sm-5">
             <country-select
                 :selected-country-id.sync="addressData.countryId"
-                :default-country-id="{{ services.checkout.getShippingCountryId() }}"
                 :selected-state-id.sync="addressData.stateId"
                 @selected-country-changed="onSelectedCountryChanged"
                 :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"

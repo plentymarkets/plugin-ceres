@@ -7,19 +7,17 @@ Vue.component("shipping-country-select", {
     data: function()
     {
         return {
-            shippingCountryList: [],
-            currentShippingCountryId: ""
+            checkout: {}
         };
     },
 
     created: function()
     {
-        ResourceService.bind("activeShippingCountries", this, "shippingCountryList");
-        ResourceService.bind("currentShippingCountryId", this, "currentShippingCountryId");
+        ResourceService.bind("checkout", this, "checkout");
 
-        for (var i in this.shippingCountryList)
+        for (var i in this.checkout.activeShippingCountries)
         {
-            var country = this.shippingCountryList[i];
+            var country = this.checkout.activeShippingCountries[i];
 
             country.countryFlagClass = "flag-icon-" + country.isoCode2.toLowerCase();
         }

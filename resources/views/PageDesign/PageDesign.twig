@@ -18,6 +18,8 @@
     <body>
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
         <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
+        <resource name="checkout"
+                  :data="{ activeShippingCountries: {{ services.country.getActiveCountriesList(lang) | json_encode() }}, currentShippingCountryId: {{ services.checkout.getShippingCountryId() }} }"></resource>
         <resource name="activeShippingCountries" data="{{ services.country.getActiveCountriesList(lang) | json_encode() }}"></resource>
         <resource name="currentShippingCountryId" data="{{ services.checkout.getShippingCountryId() }}"></resource>
         <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
