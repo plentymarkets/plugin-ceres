@@ -17,13 +17,13 @@
 	    <div class="row m-b-3">
 	        <div class="col-sm-9">
 	            <h1 class="h4">{{ trans("PluginCallisto::Template.accMyAccount") }}</h1>
-							{% if frontend.Account.getIsAccountLoggedIn %}
-									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
-									{% else %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.email}) }}</span>
-									{% endif %}
-							{% endif %}
+		    {% if frontend.Account.getIsAccountLoggedIn %}
+			{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+			    <span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
+		        {% else %}
+		            <span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.email}) }}</span>
+			{% endif %}
+	            {% endif %}
 	        </div>
 	        <div class="col-sm-3">
 	            <a href="#" class="btn btn-danger pull-xs-right" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Template.accLogout") }}</a>
