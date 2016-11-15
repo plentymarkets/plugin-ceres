@@ -5,7 +5,6 @@
                 <li :class="{'active': checkout.currentShippingCountryId == shippingCountry.id}">
                     <a data-toggle="collapse" href="#countrySettings" v-shipping-country="shippingCountry.id"
                        @click="checkout.currentShippingCountryId = shippingCountry.id">
-                        {#<i :class="flag-icon flag-icon-${ shippingCountry.isoCode2 }"></i>#}
                         <i class="flag-icon" v-bind:class="shippingCountry.countryFlagClass"></i>
                         ${shippingCountry.currLangName}
                     </a>
