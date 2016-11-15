@@ -1,4 +1,5 @@
 var CountryService = require("services/CountryService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
@@ -8,7 +9,6 @@ Vue.component("country-select", {
         "countryList",
         "countryNameMap",
         "selectedCountryId",
-        "defaultCountryId",
         "selectedStateId"
     ],
 
@@ -16,7 +16,8 @@ Vue.component("country-select", {
     {
         return {
             stateList  : [],
-            selectedCountry: {}
+            selectedCountry: {},
+            checkout: {}
         };
     },
 
@@ -25,7 +26,9 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
+        ResourceService.bind("checkout", this, "checkout");
+        this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
+
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
     },
@@ -64,7 +67,7 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
-            this.selectedCountryId = this.selectedCountryId || this.defaultCountryId;
+            this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry)

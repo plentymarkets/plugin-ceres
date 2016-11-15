@@ -1,0 +1,15 @@
+<script type="x/template" id="vue-shipping-country-select">
+    <div>
+        <ul>
+            <div v-for="shippingCountry in checkout.activeShippingCountries">
+                <li :class="{'active': checkout.currentShippingCountryId == shippingCountry.id}">
+                    <a data-toggle="collapse" href="#countrySettings" v-shipping-country="shippingCountry.id"
+                       @click="checkout.currentShippingCountryId = shippingCountry.id">
+                        <i class="flag-icon" v-bind:class="shippingCountry.countryFlagClass"></i>
+                        ${shippingCountry.currLangName}
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</script>
