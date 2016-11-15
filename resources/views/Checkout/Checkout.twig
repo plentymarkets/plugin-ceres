@@ -119,21 +119,29 @@
                                 <label class="form-check-label" for="agb-accept">
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
                                     {% autoescape false %}
-                                        {{ trans("PluginCallisto::Template.generalChooseOur") }}
                                         {% set terms = services.category.get(config('PluginCallisto.global.category.terms_and_conditions')) %}
-                                        <a href="{{ services.category.getURL( terms ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Template.generalGtc") }}</strong>
-                                        </a>,
                                         {% set rights = services.category.get(config('PluginCallisto.global.category.cancellation_rights')) %}
-                                        <a href="{{ services.category.getURL( rights ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Template.generalCancellationRight") }}</strong>
-                                        </a>
-                                        {{ trans("PluginCallisto::Template.generalAnd") }}
                                         {% set policy = services.category.get(config('PluginCallisto.global.category.privacy_policy')) %}
-                                        <a href="{{ services.category.getURL( policy ) }}" target="_blank">
-                                            <strong>{{ trans("PluginCallisto::Template.generalPrivacyPolicy") }}</strong>
-                                        </a>
-                                        {{ trans("PluginCallisto::Template.generalToNotice") }}
+
+                                        {% set gtcContent %}
+                                            <a href="{{ services.category.getURL( terms ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCallisto::Template.generalGtc") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {% set cancellationContent %}
+                                            <a href="{{ services.category.getURL( rights ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCallisto::Template.generalCancellationRight") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {% set policyContent %}
+                                            <a href="{{ services.category.getURL( policy ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCallisto::Template.generalPrivacyPolicy") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {{ trans("PluginCallisto::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
                                     {% endautoescape %}
                                 </label>
                             </div>

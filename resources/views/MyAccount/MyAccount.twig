@@ -19,9 +19,9 @@
 	            <h1 class="h4">{{ trans("PluginCallisto::Template.accMyAccount") }}</h1>
 							{% if frontend.Account.getIsAccountLoggedIn %}
 									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
 									{% else %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.email}}</span>
+										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.email}) }}</span>
 									{% endif %}
 							{% endif %}
 	        </div>
