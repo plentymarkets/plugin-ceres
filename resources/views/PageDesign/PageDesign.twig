@@ -93,10 +93,15 @@
 
         {{ Loader.include_components() }}
 
-        <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
-        <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
-        <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
-
+        {% set environment = config("PluginCallisto.log.performance.level") %}
+        {% if environment == 'development' %}
+            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
+        {% endif %}
+        {% if environment == 'live' %}
+            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
+        {% endif %}
 
     </body>
 </html>

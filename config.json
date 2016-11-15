@@ -390,7 +390,7 @@
         "default"           : "5"
     },
     {
-        "tab"               : "Log Settings",
+        "tab"               : "Logging and performance",
         "key"               : "log.data",
         "label"             : "Enable logging options",
         "type"              : "multi_select",
@@ -405,5 +405,17 @@
             "show_error_code"   : "Show error codes"
         },
         "default"           : ""
+    },
+    {
+        "tab"               : "Logging and performance",
+        "key"               : "log.performance.level",
+        "label"             : "Performance level",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "development": "Development",
+            "live": "Live"
+        },
+        "default"           : "live"
     }
 ]
