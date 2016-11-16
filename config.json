@@ -105,7 +105,7 @@
         "key"       : "footer.col_2_title",
         "label"     : "Title of second column",
         "type"      : "text",
-        "default"   : "My Account"
+        "default"   : "My account"
     },
     {
         "tab"       : "Footer",
