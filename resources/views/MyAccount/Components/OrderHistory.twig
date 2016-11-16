@@ -10,10 +10,9 @@
             <div class="row m-b-1">
                 <div class="col-xs-12 col-md-9 col-lg-8">
                     <!-- ORDER PAGINATION -->
-                    <div class="clearfix">
+                    <div class="clearfix" v-if="orderList.totalsCount > itemsPerPage">
                         <div class="pull-xs-left">
-                            {% set orderPageCount = services.customer.getOrders(1, 2) | json_encode() %}
-                            {{ trans_choice("PluginCallisto::Template.orderShow", orderPageCount.totalCount, {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                            {{ trans("PluginCallisto::Template.orderShow", {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
                         </div>
 
                         <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
