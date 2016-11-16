@@ -2,7 +2,7 @@
     <div id="login-change">
         <div v-resource-if:user="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans("PluginCallisto::Template.generalHello") }} ${username}</a>
+                {{ trans("PluginCallisto::Template.generalHello", {"username": "${username}"}) }}</a>
             </a>
             <div class="account-menu dropdown-menu dropdown-menu-right small">
               <div class="list-group" aria-labelledby="accountMenuList" >

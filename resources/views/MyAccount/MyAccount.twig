@@ -6,97 +6,104 @@
     {{ component( "PluginCallisto::MyAccount.Components.AccountSettings" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.OrderHistory" ) }}
     {{ component( "PluginCallisto::MyAccount.Components.BankDataSelect" ) }}
-	{{ component( "PluginCallisto::Checkout.Components.OrderDetails" ) }}
+    {{ component( "PluginCallisto::Checkout.Components.OrderDetails" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
 
-	<div class="page-content myaccount container-max m-b-3 m-t-1">
+    <div class="page-content myaccount container-max m-b-3 m-t-1">
 
-		<!-- HEADER -->
-	    <div class="row m-b-3">
-	        <div class="col-sm-9">
-	            <h1 class="h4">{{ trans("PluginCallisto::Template.accMyAccount") }}</h1>
-							{% if frontend.Account.getIsAccountLoggedIn %}
-									{% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.firstName}} {{userObject.lastName}}</span>
-									{% else %}
-										<span class="text-muted">{{ trans("PluginCallisto::Template.generalHello") }} {{userObject.email}}</span>
-									{% endif %}
-							{% endif %}
-	        </div>
-	        <div class="col-sm-3">
-	            <a href="#" class="btn btn-danger pull-xs-right" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCallisto::Template.accLogout") }}</a>
-	        </div>
-	        <div class="col-xs-12">
-	            <hr class="">
-	        </div>
-	    </div>
-		<!-- ./HEADER -->
+        <!-- HEADER -->
+        <div class="row m-b-3">
+            <div class="col-sm-9">
+                <h1 class="h4">{{ trans("PluginCallisto::Template.accMyAccount") }}</h1>
+                {% if frontend.Account.getIsAccountLoggedIn %}
+                    {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+                        <span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
+                    {% else %}
+                        <span class="text-muted">{{ trans("PluginCallisto::Template.generalHello", {"username": userObject.email}) }}</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-sm-3">
+                <a href="#" class="btn btn-danger pull-xs-right" v-logout>
+                    <i class="fa fa-sign-out"></i>
+                    {{ trans("PluginCallisto::Template.accLogout") }}
+                </a>
+            </div>
+            <div class="col-xs-12">
+                <hr class="">
+            </div>
+        </div>
+        <!-- ./HEADER -->
 
-		<!-- ADDRESS AREA -->
-	    <div class="row">
-	        <div class="col-md-6">
-	            <h4>
-					{{ trans("PluginCallisto::Template.accInvoiceAddresses") }}
-	            </h4>
-	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accInvoiceAddresses") }}</p>
-	            <div class="shipping-addresses-select">
-	                <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}" :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
-	            </div>
-	        </div>
-	        <div class="col-md-6">
-	            <h4>
-					{{ trans("PluginCallisto::Template.accShippingAddresses") }}
-	            </h4>
-	            <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accShippingAddresses") }}</p>
-	             <div class="shipping-addresses-select">
-	                <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}" :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
-	            </div>
-	        </div>
-	    </div>
-		<!-- ./ADDRESS AREA -->
+        <!-- ADDRESS AREA -->
+        <div class="row">
+            <div class="col-md-6">
+                <h4>
+                    {{ trans("PluginCallisto::Template.accInvoiceAddresses") }}
+                </h4>
+                <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accInvoiceAddresses") }}</p>
+                <div class="shipping-addresses-select">
+                    <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
+                                            :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>
+                    {{ trans("PluginCallisto::Template.accShippingAddresses") }}
+                </h4>
+                <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.generalAll") }} {{ trans("PluginCallisto::Template.accShippingAddresses") }}</p>
+                <div class="shipping-addresses-select">
+                    <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
+                                             :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
+                </div>
+            </div>
+        </div>
+        <!-- ./ADDRESS AREA -->
 
-		<!-- ACCOUNT SETTINGS AREA -->
-		<div class="row">
-			<div class="col-md-6">
-				<h4>
-					{{ trans("PluginCallisto::Template.accAccountSettings") }}
-				</h4>
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangeLoginData") }}</p>
+        <!-- ACCOUNT SETTINGS AREA -->
+        <div class="row">
+            <div class="col-md-6">
+                <h4>
+                    {{ trans("PluginCallisto::Template.accAccountSettings") }}
+                </h4>
+                <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangeLoginData") }}</p>
 
-				<div class="card m-b-3">
-					<account-settings :user-data="{{ userObject }}"><account-settings>
-				</div>
-			</div>
+                <div class="card m-b-3">
+                    <account-settings :user-data="{{ userObject }}">
+                        <account-settings>
+                </div>
+            </div>
 
-			<div class="col-md-6">
-				<h4>
-					{{ trans("PluginCallisto::Template.accBankDetails") }}
-				</h4>
+            <div class="col-md-6">
+                <h4>
+                    {{ trans("PluginCallisto::Template.accBankDetails") }}
+                </h4>
 
 
-				<p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangePaymentInformation") }}</p>
-	               <bank-data-select :user-bank-data="{{ userBankData }}" contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
+                <p class="text-muted small font-italic">{{ trans("PluginCallisto::Template.accChangePaymentInformation") }}</p>
+                <bank-data-select :user-bank-data="{{ userBankData }}"
+                                  contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
 
-			</div>
-		</div>
-		<!-- ./ACCOUNT SETTINGS AREA -->
+            </div>
+        </div>
+        <!-- ./ACCOUNT SETTINGS AREA -->
 
-	</div>
+    </div>
 
-<!-- ORDER HISTORY -->
-{% set ordersPerPage = config("PluginCallisto.my_account.orders_per_page") %}
-{% if not (ordersPerPage matches '/^\\d+$/') %}
-	{# config value is not a valid number #}
-	{% set ordersPerPage = 5 %}
-{% endif %}
-<order-history
-		:order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
-		:items-per-page="{{ ordersPerPage }}"
-		:show-first-page="{{ config('PluginCallisto.pagination.showFirstPage') }}"
-		:show-last-page="{{ config('PluginCallisto.pagination.showLastPage') }}">
-</order-history>
-<!-- ./ORDER HISTORY -->
+    <!-- ORDER HISTORY -->
+    {% set ordersPerPage = config("PluginCallisto.my_account.orders_per_page") %}
+    {% if not (ordersPerPage matches '/^\\d+$/') %}
+        {# config value is not a valid number #}
+        {% set ordersPerPage = 5 %}
+    {% endif %}
+    <order-history
+            :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
+            :items-per-page="{{ ordersPerPage }}"
+            :show-first-page="{{ config('PluginCallisto.pagination.showFirstPage') }}"
+            :show-last-page="{{ config('PluginCallisto.pagination.showLastPage') }}">
+    </order-history>
+    <!-- ./ORDER HISTORY -->
 
 {% endblock %}

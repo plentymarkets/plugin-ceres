@@ -16,13 +16,13 @@
                         <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.addressSameAsInvoice") }} -</p>
                     </span>
                     <span v-else class="item-content">
-                        <template v-if="!isAddressListEmpty()">
+                        <div v-if="!isAddressListEmpty()">
                             <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
                             <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress.name2} ${selectedAddress.name3}</strong>
                             <span v-else>${selectedAddress.name2} ${selectedAddress.name3}</span>
                             <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
-                        </template>
+                        </div>
 
                         <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.pleaseSelect") }} -</p>
                         <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.addressNoAddress") }} -</p>

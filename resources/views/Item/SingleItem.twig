@@ -182,7 +182,7 @@
                                 {% if 'item.age_rating' in itemData or 'all' in itemData %}
                                     <tr>
                                         <td>{{ trans("PluginCallisto::Template.itemAge") }}</td>
-                                        <td>{{ trans("PluginCallisto::Template.itemFSK") }} {{ item.itemBase.ageRestriction }} {{ trans("PluginCallisto::Template.itemOpen") }}</td>
+                                        <td>{{ trans("PluginCallisto::Template.itemFSK", {"age": item.itemBase.ageRestriction }) }}</td>
                                     </tr>
                                 {% endif %}
 
