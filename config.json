@@ -91,7 +91,7 @@
         "key"       : "footer.col_1_title",
         "label"     : "Title of first column",
         "type"      : "text",
-        "default"   : "Einkaufen"
+        "default"   : "Shop"
     },
     {
         "tab"       : "Footer",
@@ -105,7 +105,7 @@
         "key"       : "footer.col_2_title",
         "label"     : "Title of second column",
         "type"      : "text",
-        "default"   : "Mein Konto"
+        "default"   : "My Account"
     },
     {
         "tab"       : "Footer",
@@ -119,7 +119,7 @@
         "key"       : "footer.col_3_title",
         "label"     : "Title of third column",
         "type"      : "text",
-        "default"   : "Kontakt"
+        "default"   : "Service"
     },
     {
         "tab"       : "Footer",
