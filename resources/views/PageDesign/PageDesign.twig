@@ -93,13 +93,11 @@
 
         {{ Loader.include_components() }}
 
-        {% set environment = config("PluginCallisto.log.performance.level") %}
-        {% if environment == 'development' %}
+        {% if config("PluginCallisto.log.performance.level") == 'development' %}
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
-        {% endif %}
-        {% if environment == 'live' %}
+        {% else %}
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
         {% endif %}
 
