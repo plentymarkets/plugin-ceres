@@ -12,17 +12,17 @@ Vue.component("shipping-country-select", {
     data: function()
     {
         return {
-            checkout: {}
+            localization: {}
         };
     },
 
     created: function()
     {
-        ResourceService.bind("checkout", this, "checkout");
+        ResourceService.bind("localization", this);
 
-        for (var i in this.checkout.activeShippingCountries)
+        for (var i in this.localization.activeShippingCountries)
         {
-            var country = this.checkout.activeShippingCountries[i];
+            var country = this.localization.activeShippingCountries[i];
 
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
