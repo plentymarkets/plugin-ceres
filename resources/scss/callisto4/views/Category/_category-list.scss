@@ -24,6 +24,10 @@
 //	}
 }
 
+.lazy{
+    display:none;
+}
+
 @include media-breakpoint-up(sm){
     .product-list{
         li{
@@ -60,5 +64,5 @@
                 display: flex;
             }
       }
-    
+
 }
