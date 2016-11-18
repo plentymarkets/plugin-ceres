@@ -29,7 +29,7 @@ Vue.component("shop-language-select", {
                 {
                     key: languageKey,
                     name: languageName,
-                    flagClass: "flag-icon-" + languageKey
+                    flagClass: this.countryFlagPrefix + languageKey
                 };
 
             this.languageList.push(language);
