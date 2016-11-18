@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-payment-provider-select">
     <div class="cmp cmp-method-list m-b-3">
         <ul class="method-list">
-            <li v-for="paymentProvider in paymentProviderList" class="method-list-item" data-id="${paymentProvider.id}">
+            <li v-for="paymentProvider in checkout.methodOfPaymentList" class="method-list-item" data-id="${paymentProvider.id}">
                 <input
                         type="radio"
                         id="paymentMethod${ _uid }${ paymentProvider.id }"

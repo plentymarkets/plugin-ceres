@@ -1,24 +1,24 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list m-b-3">
         <ul class="method-list">
-            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" data-id="${ shippingProfile.id }">
+            <li v-for="shippingProfile in checkout.shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServiceId }">
                 <input
                         type="radio"
-                        id="ShippingProfileID${ _uid }${ shippingProfile.id }"
+                        id="ShippingProfileID${ _uid }${ shippingProfile.parcelServiceId }"
                         name="ShippingProfileID"
-                        value="${ shippingProfile.id }"
+                        value="${ shippingProfile.parcelServiceId }"
                         v-model="selectedShippingProfile"
                         @change="onShippingProfileChange()"
                 >
-                <label for="ShippingProfileID${ _uid }${ shippingProfile.id }">
+                <label for="ShippingProfileID${ _uid }${ shippingProfile.parcelServiceId }">
                     <div class="icon">
                         <img src="">
                     </div><!--
                     --><div class="content">
-                        ${ shippingProfile.name } - ${ shippingProfile.presetName }
+                        ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }
                         <div>
                             <small>
-                                ${ shippingProfile.price | currency }
+                                ${ shippingProfile.shippingAmount | currency }
                             </small>
                         </div>
                     </div>
