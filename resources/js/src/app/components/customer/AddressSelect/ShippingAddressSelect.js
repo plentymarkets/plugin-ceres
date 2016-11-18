@@ -1,4 +1,4 @@
-var CheckoutService = require("services/CheckoutService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
@@ -6,12 +6,19 @@ Vue.component("shipping-address-select", {
 
     props: ["addressList", "selectedAddressId"],
 
+    data: function()
+    {
+        return {
+            checkout: {}
+        };
+    },
+
     /**
      * Initialise the event listener
      */
     created: function()
     {
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
 
         if (!this.addressList)
         {
@@ -27,26 +34,20 @@ Vue.component("shipping-address-select", {
         if (this.selectedAddressId === 0)
         {
             this.selectedAddressId = -99;
-            CheckoutService.setDeliveryAddressId(-99);
+            this.checkout.deliveryAddressId = -99;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     },
 
     methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            // Listen on ApiService events and handle new data
-        },
-
         /**
          * Update the delivery address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
         {
-            CheckoutService.setDeliveryAddressId(selectedAddress.id);
+            this.checkout.deliveryAddressId = selectedAddress.id;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });

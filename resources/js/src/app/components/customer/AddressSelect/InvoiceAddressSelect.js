@@ -1,4 +1,4 @@
-var CheckoutService = require("services/CheckoutService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
@@ -6,31 +6,30 @@ Vue.component("invoice-address-select", {
 
     props: ["addressList", "selectedAddressId"],
 
+    data: function()
+    {
+        return {
+            checkout: {}
+        };
+    },
+
     /**
      * Initialise the event listener
      */
     created: function()
     {
-        this.addEventListener();
-        CheckoutService.init();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            // Listen for ApiService events and handle new data
-        },
-
         /**
          * Update the invoice address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
         {
-            CheckoutService.setBillingAddressId(selectedAddress.id);
+            this.checkout.billingAddressId = selectedAddress.id;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
