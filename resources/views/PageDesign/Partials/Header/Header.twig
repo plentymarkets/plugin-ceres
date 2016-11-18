@@ -1,5 +1,6 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
+{{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
 
 {% set lang                     = services.sessionStorage.getLang() %}
 {% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
@@ -66,17 +67,7 @@
                         <strong>{{ trans("PluginCallisto::Template.generalSelectLanguage") }}</strong>
                         <hr>
                     </div>
-                    <ul>
-                        {% for activeShopLang in activeShopLanguageList %}
-                            <li class="{% if activeShopLang == lang %}active{% endif %}">
-                                <a data-toggle="collapse" href="#countrySettings" class=""
-                                   v-change-lang="{currLang: '{{ lang }}', lang: '{{ activeShopLang }}' }">
-                                    <i class="flag-icon flag-icon-{{ activeShopLang }}"></i>
-                                    {{ trans("PluginCallisto::Template."~activeShopLang) }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    <shop-language-select country-flag-prefix="flag-icon-"/>
                 </div>
 
                 <div class="shipping-settings col-xs-12 col-sm-6">

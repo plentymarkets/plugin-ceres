@@ -1,0 +1,13 @@
+<script type="x/template" id="vue-shop-language-select">
+    <ul>
+        <div v-for="language in languageList">
+            <li :class="{'active': localization.shopLanguage === language.key}">
+                <a data-toggle="collapse" href="#countrySettings" class=""
+                   v-change-lang="{currLang: localization.shopLanguage, lang: language.key }">
+                    <i class="flag-icon" v-bind:class="language.flagClass"></i>
+                    ${ language.name }
+                </a>
+            </li>
+        </div>
+    </ul>
+</script>

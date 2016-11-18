@@ -8,6 +8,7 @@
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set fixNavBarPos = config("PluginCallisto.header.fixed_navbar") %}
+{% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
 
 <html lang="{{ lang }}" data-framework="vue">
 
@@ -19,7 +20,9 @@
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
         <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
         <resource name="localization"
-                  :data="{ activeShippingCountries: {{ services.country.getActiveCountriesList(lang) | json_encode() }},
+                  :data="{ shopLanguage: {{ lang | json_encode() }},
+                  activeShopLanguageList: {{ activeShopLanguageList | json_encode() }},
+                  activeShippingCountries: {{ services.country.getActiveCountriesList(lang) | json_encode() }},
                   currentShippingCountryId: {{ services.checkout.getShippingCountryId() }} }"></resource>
         <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
 
