@@ -3,14 +3,20 @@ module.exports = (function($)
 
     var $form;
 
+    var emailRegEx;
+    var passwordRegEx;
+
     return {
         validate         : _validate,
         getInvalidFields : _getInvalidFields,
         markInvalidFields: _markInvalidFields
     };
 
-    function _validate(form)
+    function _validate(form, regexEmail, regexPassword)
     {
+        emailRegEx = regexEmail;
+        passwordRegEx = regexPassword;
+
         var deferred      = $.Deferred();
         var invalidFields = _getInvalidFields(form);
 
@@ -80,37 +86,47 @@ module.exports = (function($)
 
         _findFormControls($elem).each(function(i, formControl)
         {
-            var $formControl  = $(formControl);
-            var validationKey = validationKeys[i] || validationKeys[0];
-
-            if (!_isActive($formControl))
+            for (var key = 0; key < validationKeys.length; key++)
             {
-                // continue loop
-                return true;
-            }
+                var $formControl  = $(formControl);
+                var validationKey = validationKeys[key];
 
-            if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]"))
-            {
+                if (!_isActive($formControl))
+                {
+                    // continue loop
+                    return true;
+                }
 
-                if (!_validateGroup($formControl, validationKey))
+                if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]"))
+                {
+
+                    if (!_validateGroup($formControl, validationKey))
+                    {
+                        hasError = true;
+                    }
+
+                    return true;
+                }
+
+                if ($formControl.is("select"))
+                {
+                    if (!_validateSelect($formControl, validationKey))
+                    {
+                        hasError = true;
+                    }
+
+                    return true;
+                }
+
+                if (!_validateInput($formControl, validationKey))
                 {
                     hasError = true;
-                }
-                return true;
-            }
 
-            if ($formControl.is("select"))
-            {
-                if (!_validateSelect($formControl, validationKey))
-                {
-                    hasError = true;
+                    if (validationKeys.length > 1)
+                    {
+                        return true;
+                    }
                 }
-                return true;
-            }
-
-            if (!_validateInput($formControl, validationKey))
-            {
-                hasError = true;
             }
 
             return false;
@@ -142,9 +158,9 @@ module.exports = (function($)
         case "text":
             return _hasValue($formControl);
         case "mail":
-            var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
-
-            return _hasValue($formControl) && mailRegExp.test($formControl.val());
+            return _hasValue($formControl) && new RegExp(emailRegEx).test($formControl.val());
+        case "password":
+            return _hasValue($formControl) && new RegExp(passwordRegEx).test($formControl.val());
         case "number":
             return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
         case "ref":

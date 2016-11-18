@@ -1,3 +1,6 @@
+{% set emailRegex = config("PluginCallisto.register.email_regex") %}
+{% set passwordRegex = config("PluginCallisto.register.password_regex") %}
+
 {% extends "PluginCallisto::PageDesign.PageDesign" %}
 
 {% block PageBody %}
@@ -9,7 +12,7 @@
                     <h1 class="col-xs-12">{{ trans("PluginCallisto::Template.accRegisterAccount") }}</h1>
                 </div>
 
-                <registration></registration>
+                <registration email-regex="{{ emailRegex }}" password-regex="{{ passwordRegex }}"></registration>
 
             </div>
         </div>
