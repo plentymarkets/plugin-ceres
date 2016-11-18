@@ -11,11 +11,11 @@
                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
             </div>
             <ul>
-                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" src="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" data-original="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" data-original="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" data-original="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" data-original="http://placehold.it/100x100"></li>
+                <li class="img-contain-container square-container"><img class="img-fluid" data-original="http://placehold.it/100x100"></li>
             </ul>
             <div class="thumb-scroll-cmd scroll-down">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -33,7 +33,12 @@
         <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+                    {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
+                    <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+
+                    <noscript>
+                        <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+                    </noscript>
                 </div>
             </div>
         </a>
