@@ -1,22 +1,25 @@
+{% set emailRegex = config("PluginCallisto.register.email_regex") %}
+{% set passwordRegex = config("PluginCallisto.register.password_regex") %}
+
 {{ component( "PluginCallisto::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
 	<div class="row" id="registration${_uid}">
         <div class="col-sm-12">
-            <div class="input-unit" data-validate="mail">
-                <input type="text" name="email" id="txt_email" v-model="username">
+            <div class="input-unit" data-validate="regex">
+                <input type="text" name="email" id="txt_email" v-model="username" data-validate-ref="{{ emailRegex }}">
                 <label for="txt_email">{{ trans("PluginCallisto::Template.accEmail") }}*</label>
             </div>
         </div>
 
         <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordBox" data-validate="password">
-                <input type="password" name="password" id="registration_password_input" v-model="password">
+            <div class="input-unit" id="passwordBox" data-validate="regex">
+                <input type="password" name="password" id="registration_password_input" v-model="password" data-validate-ref="{{ passwordRegex }}">
                 <label for="txt_pw">{{ trans("PluginCallisto::Template.accPassword") }}*</label>
             </div>
         </div>
 
         <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordRepeatBox" data-validate="text|ref">
+            <div class="input-unit" id="passwordRepeatBox" data-validate="ref">
                 <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
                 <label for="txt_pwrepeat">{{ trans("PluginCallisto::Template.accRepeatPassword") }}*</label>
             </div>

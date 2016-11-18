@@ -11,9 +11,7 @@ Vue.component("registration", {
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false},
-        emailRegex: String,
-        passwordRegex: String
+        isSimpleRegistration: {type: Boolean, default: false}
     },
 
     data: function()
@@ -34,7 +32,7 @@ Vue.component("registration", {
         {
             var self = this;
 
-            ValidationService.validate($("#registration" + this._uid), this.emailRegex, this.passwordRegex)
+            ValidationService.validate($("#registration" + this._uid))
                 .done(function()
                 {
                     self.sendRegistration();
