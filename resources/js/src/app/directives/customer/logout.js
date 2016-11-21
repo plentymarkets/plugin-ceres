@@ -13,7 +13,7 @@ Vue.directive("logout", function()
                 .done(
                     function(response)
                     {
-                        NotificationService.success(Translations.Template.accLogoutSuccessful).closeAfter(3000);
+                        window.location.assign(window.location.origin);
                     }
                 );
 

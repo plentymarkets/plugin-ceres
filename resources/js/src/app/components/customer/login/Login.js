@@ -50,11 +50,11 @@ Vue.component("login", {
 
                     if (self.backlink !== null && self.backlink)
                     {
-                        window.location = self.backlink;
+                        window.location.assign(self.backlink);
                     }
                     else if (self.hasToForward)
                     {
-                        window.location.pathname = "/";
+                        window.location.assign(window.location.origin);
                     }
                 })
                 .fail(function(response)
