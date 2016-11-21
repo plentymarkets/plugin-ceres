@@ -181,19 +181,19 @@
             "multiple"      : false
         },
         {
-            "key"           : "Footer.ContactCard",
-            "name"          : "Footer: Contact card container",
-            "description"   : "Add content to the contact card in the footer"
+            "key"           : "Footer.RowOne",
+            "name"          : "Footer: Row one container",
+            "description"   : "Add content to row one in the footer"
         },
         {
-            "key"           : "Footer.Newsletter",
-            "name"          : "Footer: Newsletter container",
-            "description"   : "Add content to the newsletter in the footer"
+            "key"           : "Footer.RowTwo",
+            "name"          : "Footer: Row two container",
+            "description"   : "Add content to row two in the footer"
         },
         {
-            "key"           : "Footer.SocialMedia",
-            "name"          : "Footer: Social media container",
-            "description"   : "Add content to the social media in the footer"
+            "key"           : "Footer.RowThree",
+            "name"          : "Footer: Row three container",
+            "description"   : "Add content to row three in the footer"
         },
         {
             "key"           : "Startpage.PaymentMethods",
