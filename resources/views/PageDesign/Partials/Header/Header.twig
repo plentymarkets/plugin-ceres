@@ -2,8 +2,7 @@
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
 
-{% set lang                     = services.sessionStorage.getLang() %}
-{% set activeShopLanguageList   = services.webstoreConfig.getActiveLanguageList()|split(', ') %}
+{% set lang = services.sessionStorage.getLang() %}
 
 <header class="top-bar">
     <div class="container-max">
