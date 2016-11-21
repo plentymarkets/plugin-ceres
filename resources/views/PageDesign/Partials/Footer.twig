@@ -13,8 +13,6 @@
 <div class="footer">
     <a href="#" class="to-top hidden-md-up">
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
-        <!-- <br/>
-        Zum Seitenanfang -->
     </a>
     <div class="footer-features p-y-1 container-max">
         <div class="row">
@@ -38,30 +36,15 @@
                 <div class="footer-services m-t-2">
                     <div class="services-payment m-b-1">
                         <strong class="services-title">{{ trans("PluginCallisto::Template.orderPaymentMethods") }}</strong>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/paypal.svg" class="img-fluid">
-                        </a>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/mastercard.svg" class="img-fluid">
-                        </a>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/sofort-ueberweisung.svg" class="img-fluid">
-                        </a>
+                        {% LayoutContainer.show("PluginCallisto::Startpage.PaymentMethods") %}
                     </div>
                     <div class="services-shipping m-b-1">
                         <strong class="services-title">{{ trans("PluginCallisto::Template.generalOrderShippedBy") }}</strong>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/dhl.svg" class="img-fluid">
-                        </a>
+                        {% LayoutContainer.show("PluginCallisto::Startpage.Shipping") %}
                     </div>
                     <div class="services-certificate m-b-1">
                         <strong class="services-title">{{ trans("PluginCallisto::Template.generalCertifiedBy") }}</strong>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/ts-trustmark_220.png" class="img-fluid">
-                        </a>
-                        <a href="#">
-                            <img src="{{ plugin_path("PluginCallisto") }}/images/ekomi_standard_seal.png" class="img-fluid">
-                        </a>
+                        {% LayoutContainer.show("PluginCallisto::Startpage.Certified") %}
                     </div>
                 </div>
             </div>
