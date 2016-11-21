@@ -34,18 +34,27 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
-                    <div class="services-payment m-b-1">
-                        <strong class="services-title">{{ trans("PluginCallisto::Template.orderPaymentMethods") }}</strong>
-                        {% LayoutContainer.show("PluginCallisto::Startpage.PaymentMethods") %}
-                    </div>
-                    <div class="services-shipping m-b-1">
-                        <strong class="services-title">{{ trans("PluginCallisto::Template.generalOrderShippedBy") }}</strong>
-                        {% LayoutContainer.show("PluginCallisto::Startpage.Shipping") %}
-                    </div>
-                    <div class="services-certificate m-b-1">
-                        <strong class="services-title">{{ trans("PluginCallisto::Template.generalCertifiedBy") }}</strong>
-                        {% LayoutContainer.show("PluginCallisto::Startpage.Certified") %}
-                    </div>
+                    {% set paymentMethodContent = LayoutContainer.show("PluginCallisto::Startpage.PaymentMethods") %}
+                    {% if paymentMethodContent|trim is not empty %}
+                        <div class="services-payment m-b-1">
+                            <strong class="services-title">{{ trans("PluginCallisto::Template.orderPaymentMethods") }}</strong>
+                            {{ paymentMethodContent }}
+                        </div>
+                    {% endif %}
+                    {% set shippingContent = LayoutContainer.show("PluginCallisto::Startpage.Shipping") %}
+                    {% if shippingContent|trim is not empty %}
+                        <div class="services-shipping m-b-1">
+                            <strong class="services-title">{{ trans("PluginCallisto::Template.generalOrderShippedBy") }}</strong>
+                            {{ shippingContent }}
+                        </div>
+                    {% endif %}
+                    {% set certifiedContent = LayoutContainer.show("PluginCallisto::Startpage.Certified") %}
+                    {% if certifiedContent|trim is not empty %}
+                        <div class="services-certificate m-b-1">
+                            <strong class="services-title">{{ trans("PluginCallisto::Template.generalCertifiedBy") }}</strong>
+                            {{ certifiedContent }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
