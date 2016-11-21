@@ -1,5 +1,4 @@
-var ApiService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+var ApiService = require("services/ApiService");
 
 Vue.directive("logout", function()
 {
