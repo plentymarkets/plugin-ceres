@@ -1,6 +1,5 @@
 module.exports = (function($)
 {
-
     var $form;
 
     return {
@@ -96,6 +95,7 @@ module.exports = (function($)
                 {
                     hasError = true;
                 }
+
                 return true;
             }
 
@@ -105,6 +105,7 @@ module.exports = (function($)
                 {
                     hasError = true;
                 }
+
                 return true;
             }
 
@@ -141,10 +142,6 @@ module.exports = (function($)
         {
         case "text":
             return _hasValue($formControl);
-        case "mail":
-            var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
-
-            return _hasValue($formControl) && mailRegExp.test($formControl.val());
         case "number":
             return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
         case "ref":
