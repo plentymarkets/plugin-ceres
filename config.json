@@ -164,13 +164,6 @@
         "default"   : ""
     },
     {
-        "tab"       : "Footer",
-        "key"       : "footer.newsletter",
-        "label"     : "Show Newsletter in last column",
-        "type"      : "checkbox",
-        "default"   : "true"
-    },
-    {
         "tab"           : "Item",
         "key"           : "item.name",
         "label"         : "Item name",

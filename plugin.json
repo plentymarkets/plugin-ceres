@@ -181,9 +181,39 @@
             "multiple"      : false
         },
         {
-            "key"           : "Footer.ContactCard",
-            "name"          : "ContactCard footer container",
-            "description"   : "Add content to the contact card in the footer."
+            "key"           : "Footer.RowOne",
+            "name"          : "Footer: Row one container",
+            "description"   : "Add content to row one in the footer"
+        },
+        {
+            "key"           : "Footer.RowTwo",
+            "name"          : "Footer: Row two container",
+            "description"   : "Add content to row two in the footer"
+        },
+        {
+            "key"           : "Footer.RowThree",
+            "name"          : "Footer: Row three container",
+            "description"   : "Add content to row three in the footer"
+        },
+        {
+            "key"           : "Startpage.PaymentMethods",
+            "name"          : "Startpage: Payment method container",
+            "description"   : "Add an icon to the payment methods in the startpage"
+        },
+        {
+            "key"           : "Startpage.Shipping",
+            "name"          : "Startpage: Shipping container",
+            "description"   : "Add an icon to the shipping container in the startpage"
+        },
+        {
+            "key"           : "Startpage.Certified",
+            "name"          : "Startpage: Certified container",
+            "description"   : "Add an icon to the certified by container in the startpage"
+        },
+        {
+            "key"           : "Header.SocialMedia",
+            "name"          : "Header: Social media container",
+            "description"   : "Add content to the social media in the header"
         }
     ],
     "dataProviders"     : []
