@@ -1,14 +1,8 @@
 {% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set numberOfCols = config('PluginCallisto.footer.number_of_cols') %}
-{% set showNewsletter = config('PluginCallisto.footer.newsletter') %}
 {% set colSize = (12 / (numberOfCols + 1)) %}
 {% set displayedCategories = [] %}
-{% set paymentColunmSize = 7 %}
-
-{% if showNewsletter == "false" %}
-    {% set paymentColunmSize = 12 %}
-{% endif %}
 
 <div class="footer">
     <a href="#" class="to-top hidden-md-up">
