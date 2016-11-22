@@ -1,16 +1,16 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list m-b-3">
         <ul class="method-list">
-            <li v-for="shippingProfile in checkout.shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServiceId }">
+            <li v-for="shippingProfile in checkout.shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServicePresetId }">
                 <input
                         type="radio"
-                        id="ShippingProfileID${ _uid }${ shippingProfile.parcelServiceId }"
+                        id="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }"
                         name="ShippingProfileID"
-                        value="${ shippingProfile.parcelServiceId }"
-                        v-model="selectedShippingProfile"
+                        value="${ shippingProfile.parcelServicePresetId }"
+                        v-model="checkout.shippingProfileId"
                         @change="onShippingProfileChange()"
                 >
-                <label for="ShippingProfileID${ _uid }${ shippingProfile.parcelServiceId }">
+                <label for="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }">
                     <div class="icon">
                         <img src="">
                     </div><!--
