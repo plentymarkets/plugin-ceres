@@ -75,6 +75,41 @@
     },
     {
         "tab"           : "Footer",
+        "key"           : "footer.number_of_features",
+        "label"         : "Number of store features",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "0"         : "0",
+            "1"         : "1",
+            "2"         : "2",
+            "3"         : "3"
+        },
+        "default"       : "3"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_1",
+        "label"     : "Text of first store feature",
+        "type"      : "text",
+        "default"   : "Delivery period approx. 1 to 3 business days "
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_2",
+        "label"     : "Text of second store feature",
+        "type"      : "text",
+        "default"   : "Free shipping & return "
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_3",
+        "label"     : "Text of third store feature",
+        "type"      : "text",
+        "default"   : "100-day return policy"
+    },
+    {
+        "tab"           : "Footer",
         "key"           : "footer.number_of_cols",
         "label"         : "Number of columns",
         "type"          : "dropdown",

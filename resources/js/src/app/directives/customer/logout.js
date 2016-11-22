@@ -1,5 +1,4 @@
-var ApiService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+var ApiService = require("services/ApiService");
 
 Vue.directive("logout", function()
 {
@@ -13,7 +12,7 @@ Vue.directive("logout", function()
                 .done(
                     function(response)
                     {
-                        NotificationService.success(Translations.Template.accLogoutSuccessful).closeAfter(3000);
+                        window.location.assign(window.location.origin);
                     }
                 );
 
