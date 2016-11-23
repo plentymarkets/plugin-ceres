@@ -1359,11 +1359,11 @@ Vue.component("login", {
 
                     if (self.backlink !== null && self.backlink)
                     {
-                        window.location = self.backlink;
+                        window.location.assign(self.backlink);
                     }
                     else if (self.hasToForward)
                     {
-                        window.location.pathname = "/";
+                        window.location.assign(window.location.origin);
                     }
                 })
                 .fail(function(response)
@@ -1861,7 +1861,8 @@ Vue.component("account-settings", {
         return {
             newPassword         : "",
             confirmPassword     : "",
-            accountSettingsClass: ""
+            accountSettingsClass: "",
+            accountSettingsModal: {}
         };
     },
 
@@ -1870,7 +1871,7 @@ Vue.component("account-settings", {
      */
     ready: function()
     {
-        this.accountSettingsClass = "accountSettingsModal" + this._uid;
+        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
     },
 
     computed: {
@@ -1895,7 +1896,7 @@ Vue.component("account-settings", {
          */
         showChangeAccountSettings: function()
         {
-            ModalService.findModal($("." + this.accountSettingsClass)).show();
+            this.accountSettingsModal.show();
         },
 
         /**
@@ -1913,7 +1914,7 @@ Vue.component("account-settings", {
                         self.clearFieldsAndClose();
                         NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
                     }).fail(function(response)
-                {
+                    {
                         self.clearFieldsAndClose();
                         NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
                     });
@@ -1934,7 +1935,7 @@ Vue.component("account-settings", {
          */
         clearFieldsAndClose: function()
         {
-            ModalService.findModal($("." + this.accountSettingsClass)).hide();
+            this.accountSettingsModal.hide();
             this.clearFields();
         },
 
@@ -2448,8 +2449,7 @@ Vue.directive("add-to-basket", function(value)
 });
 
 },{"services/ResourceService":49}],31:[function(require,module,exports){
-var ApiService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+var ApiService = require("services/ApiService");
 
 Vue.directive("logout", function()
 {
@@ -2463,7 +2463,7 @@ Vue.directive("logout", function()
                 .done(
                     function(response)
                     {
-                        NotificationService.success(Translations.Template.accLogoutSuccessful).closeAfter(3000);
+                        window.location.assign(window.location.origin);
                     }
                 );
 
@@ -2471,7 +2471,7 @@ Vue.directive("logout", function()
         });
 });
 
-},{"services/ApiService":44,"services/NotificationService":48}],32:[function(require,module,exports){
+},{"services/ApiService":44}],32:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -2872,7 +2872,11 @@ Vue.filter("itemURL", function(item)
     var urlContent = item.itemDescription.urlContent.split("/");
     var i          = urlContent.length - 1;
 
-    return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+    if (urlContent[i].length > 0)
+    {
+        return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+    }
+    return "/" + item.itemBase.id + "/" + item.variationBase.id;
 
 });
 
@@ -4178,7 +4182,6 @@ module.exports = (function($)
 },{"services/ApiService":44}],50:[function(require,module,exports){
 module.exports = (function($)
 {
-
     var $form;
 
     return {
@@ -4274,6 +4277,7 @@ module.exports = (function($)
                 {
                     hasError = true;
                 }
+
                 return true;
             }
 
@@ -4283,6 +4287,7 @@ module.exports = (function($)
                 {
                     hasError = true;
                 }
+
                 return true;
             }
 
@@ -4319,10 +4324,6 @@ module.exports = (function($)
         {
         case "text":
             return _hasValue($formControl);
-        case "mail":
-            var mailRegExp = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/;
-
-            return _hasValue($formControl) && mailRegExp.test($formControl.val());
         case "number":
             return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
         case "ref":
@@ -5098,6 +5099,24 @@ vueApp = new Vue({
             $("#mainNavbarCollapse").collapse("hide");
         }
 
+        // lazyload for articles
+
+        $("img.lazy").show().lazyload({
+            effect : "fadeIn"
+        });
+
+        $(".cmp-product-thumb").on("mouseover", function(event)
+        {
+            $(this).find("img").each(function(i, img)
+            {
+                var $img = $(img);
+
+                if (!$img.attr("src"))
+                {
+                    $(img).lazyload();
+                }
+            });
+        });
     }
 
     window.CallistoMain = new CallistoMain();
