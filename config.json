@@ -64,7 +64,7 @@
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/plugincallisto/images/callisto-logo-min.jpg"
+        "default"   : "/layout/plugins/production/plugincallisto/images/callisto4.png"
     },
     {
         "tab"       : "Header",
