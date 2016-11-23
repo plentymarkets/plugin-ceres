@@ -29,7 +29,7 @@ class CategoriesMigration
     private $categoriesToCreate = [
         'global.category.home' => [
             'de' => 'Startseite',
-            'en' => 'Startpage'
+            'en' => 'Home page'
         ],
         'global.category.privacy_policy' => [
             'de' => 'Datenschutz',
