@@ -1,5 +1,6 @@
 const JS_SRC    = './resources/js/src/';
 const JS_DIST   = './resources/js/dist/';
+const JS_LANG   = './resources/js/lang/';
 const SCSS_SRC  = './resources/scss/';
 const SCSS_DIST = './resources/css/';
 const OUTPUT_PREFIX = 'plugin-callisto';
@@ -46,7 +47,8 @@ gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function(
     return gulp.src( [
             JS_DIST + OUTPUT_PREFIX + '-vendor.js',
             JS_SRC + 'app.config.js',
-            JS_DIST + OUTPUT_PREFIX + '-app.js'
+            JS_DIST + OUTPUT_PREFIX + '-app.js',
+            JS_LANG + '*.js'
             ] )
         .pipe( sourcemaps.init({ loadMaps: true }) )
         .pipe( concat( OUTPUT_PREFIX + '.js' ) )
@@ -100,7 +102,19 @@ gulp.task('build:lang', function() {
                         translations[lang][group] = JSON.parse( String(file.contents) );
                     }).on('end', function() {
                         defered.resolve();
-                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', "var Translations = " + JSON.stringify( translations[lang] ).replace(/\\"/g, '') + ";" );
+                        var text = "var Languages = Languages || {}; Languages['" + lang + "'] = {";
+                        for( var group in translations[lang] )
+                        {
+                            text += group + ": {";
+                            for( var entry in translations[lang][group] )
+                            {
+                                text += entry + ": " + translations[lang][group][entry] + ",";
+                            }
+                            text += "},";
+                        }
+                        text += "};";
+
+                        fs.writeFileSync('./resources/js/lang/' + lang + '.js', text );
                     })
                 );
         }
