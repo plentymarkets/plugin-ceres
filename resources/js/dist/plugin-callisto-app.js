@@ -57,7 +57,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ResourceService":49}],3:[function(require,module,exports){
+},{"services/ResourceService":50}],3:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
@@ -97,7 +97,7 @@ Vue.component("basket-totals", {
     }
 });
 
-},{"services/ResourceService":49}],4:[function(require,module,exports){
+},{"services/ResourceService":50}],4:[function(require,module,exports){
 Vue.component("coupon", {
 
     template: "#vue-coupon"
@@ -132,7 +132,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{"services/ResourceService":49}],6:[function(require,module,exports){
+},{"services/ResourceService":50}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 var ApiService          = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
@@ -279,7 +279,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ApiService":44,"services/ResourceService":49}],7:[function(require,module,exports){
+},{"services/ApiService":45,"services/ResourceService":50}],7:[function(require,module,exports){
 Vue.component("order-details", {
 
     template: "#vue-order-details",
@@ -388,19 +388,16 @@ Vue.component("order-details", {
 });
 
 },{}],8:[function(require,module,exports){
-var ApiService = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
 
-    props: ["paymentProviderList"],
-
     data: function()
     {
         return {
-            selectedPaymentProvider: {}
+            checkout: {}
         };
     },
 
@@ -409,35 +406,21 @@ Vue.component("payment-provider-select", {
      */
     created: function()
     {
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
         /**
          * Event when changing the payment provider
-         * TODO
          */
         onPaymentProviderChange: function()
         {
-            CheckoutService.setMethodOfPaymentId(this.selectedPaymentProvider);
-        },
-
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            ApiService.listen(
-                "eventName",
-                function(paymentProviderList)
-                {
-                    this.paymentProviderList = paymentProviderList;
-                }.bind(this));
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
 
-},{"services/ApiService":44,"services/CheckoutService":45}],9:[function(require,module,exports){
+},{"services/ResourceService":50}],9:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -518,20 +501,17 @@ var NotificationService = require("services/NotificationService");
     });
 })(jQuery);
 
-},{"services/ApiService":44,"services/NotificationService":48}],10:[function(require,module,exports){
-var ApiService = require("services/ApiService");
+},{"services/ApiService":45,"services/NotificationService":49}],10:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
 
-    props: ["shippingProfileData"],
-
     data: function()
     {
         return {
-            shippingProfileList    : [],
-            selectedShippingProfile: {}
+            checkout: {}
         };
     },
 
@@ -541,23 +521,7 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
-        for (var i in this.shippingProfileData)
-        {
-            var entry = this.shippingProfileData[i];
-
-            if (entry)
-            {
-                this.shippingProfileList.push(
-                    {
-                        id: entry.parcelServicePresetId,
-                        name: entry.parcelServiceName,
-                        presetName: entry.parcelServicePresetName,
-                        price: entry.shippingAmount
-                    });
-            }
-        }
-
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
@@ -566,35 +530,12 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-        },
-
-        /**
-         * Format the price
-         * @param price
-         * @param currency
-         * @returns {*}
-         */
-        formatPrice: function(price, currency)
-        {
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
-
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            ApiService.listen(
-                "eventName",
-                function(shippingProfileList)
-                {
-                    this.shippingProfileList = shippingProfileList;
-                }.bind(this));
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
 
-},{"services/ApiService":44}],11:[function(require,module,exports){
+},{"services/ResourceService":50}],11:[function(require,module,exports){
 Vue.component("address-input-group", {
 
     template: "#vue-address-input-group",
@@ -930,7 +871,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":43,"services/ApiService":44,"services/ModalService":47}],13:[function(require,module,exports){
+},{"services/AddressService":44,"services/ApiService":45,"services/ModalService":48}],13:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -1025,8 +966,8 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":43,"services/ValidationService":50}],14:[function(require,module,exports){
-var CheckoutService = require("services/CheckoutService");
+},{"services/AddressService":44,"services/ValidationService":51}],14:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
@@ -1034,37 +975,36 @@ Vue.component("invoice-address-select", {
 
     props: ["addressList", "selectedAddressId"],
 
+    data: function()
+    {
+        return {
+            checkout: {}
+        };
+    },
+
     /**
      * Initialise the event listener
      */
     created: function()
     {
-        this.addEventListener();
-        CheckoutService.init();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            // Listen for ApiService events and handle new data
-        },
-
         /**
          * Update the invoice address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
         {
-            CheckoutService.setBillingAddressId(selectedAddress.id);
+            this.checkout.billingAddressId = selectedAddress.id;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
 
-},{"services/CheckoutService":45}],15:[function(require,module,exports){
-var CheckoutService = require("services/CheckoutService");
+},{"services/ResourceService":50}],15:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
@@ -1072,12 +1012,19 @@ Vue.component("shipping-address-select", {
 
     props: ["addressList", "selectedAddressId"],
 
+    data: function()
+    {
+        return {
+            checkout: {}
+        };
+    },
+
     /**
      * Initialise the event listener
      */
     created: function()
     {
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
 
         if (!this.addressList)
         {
@@ -1093,31 +1040,25 @@ Vue.component("shipping-address-select", {
         if (this.selectedAddressId === 0)
         {
             this.selectedAddressId = -99;
-            CheckoutService.setDeliveryAddressId(-99);
+            this.checkout.deliveryAddressId = -99;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     },
 
     methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            // Listen on ApiService events and handle new data
-        },
-
         /**
          * Update the delivery address
          * @param selectedAddress
          */
         addressChanged: function(selectedAddress)
         {
-            CheckoutService.setDeliveryAddressId(selectedAddress.id);
+            this.checkout.deliveryAddressId = selectedAddress.id;
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
 
-},{"services/CheckoutService":45}],16:[function(require,module,exports){
+},{"services/ResourceService":50}],16:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 var ResourceService = require("services/ResourceService");
 
@@ -1137,7 +1078,7 @@ Vue.component("country-select", {
         return {
             stateList  : [],
             selectedCountry: {},
-            checkout: {}
+            localization: {}
         };
     },
 
@@ -1146,8 +1087,8 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        ResourceService.bind("checkout", this, "checkout");
-        this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
+        ResourceService.bind("localization", this);
+        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -1187,7 +1128,7 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
-            this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
+            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry)
@@ -1200,7 +1141,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":46,"services/ResourceService":49}],17:[function(require,module,exports){
+},{"services/CountryService":47,"services/ResourceService":50}],17:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -1306,7 +1247,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":44,"services/ModalService":47,"services/NotificationService":48,"services/ValidationService":50}],18:[function(require,module,exports){
+},{"services/ApiService":45,"services/ModalService":48,"services/NotificationService":49,"services/ValidationService":51}],18:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -1381,7 +1322,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":44,"services/ModalService":47,"services/NotificationService":48}],19:[function(require,module,exports){
+},{"services/ApiService":45,"services/ModalService":48,"services/NotificationService":49}],19:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -1455,7 +1396,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":44,"services/ResourceService":49}],20:[function(require,module,exports){
+},{"services/ApiService":45,"services/ResourceService":50}],20:[function(require,module,exports){
 var ResourceService      = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
@@ -1493,7 +1434,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"services/ResourceService":49}],21:[function(require,module,exports){
+},{"services/ResourceService":50}],21:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
@@ -1658,7 +1599,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":49}],23:[function(require,module,exports){
+},{"services/ResourceService":50}],23:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -1843,7 +1784,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":44,"services/ResourceService":49}],24:[function(require,module,exports){
+},{"services/ApiService":45,"services/ResourceService":50}],24:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -1950,7 +1891,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":42,"services/ModalService":47,"services/NotificationService":48}],25:[function(require,module,exports){
+},{"services/APIService":43,"services/ModalService":48,"services/NotificationService":49}],25:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -2208,7 +2149,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":44,"services/ModalService":47,"services/NotificationService":48,"services/ValidationService":50}],26:[function(require,module,exports){
+},{"services/ApiService":45,"services/ModalService":48,"services/NotificationService":49,"services/ValidationService":51}],26:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 (function($)
@@ -2289,7 +2230,7 @@ var ApiService = require("services/ApiService");
     });
 })(jQuery);
 
-},{"services/ApiService":44}],27:[function(require,module,exports){
+},{"services/ApiService":45}],27:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
@@ -2359,7 +2300,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":48}],28:[function(require,module,exports){
+},{"services/NotificationService":49}],28:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
@@ -2374,24 +2315,64 @@ Vue.component("shipping-country-select", {
     data: function()
     {
         return {
-            checkout: {}
+            localization: {}
         };
     },
 
     created: function()
     {
-        ResourceService.bind("checkout", this, "checkout");
+        ResourceService.bind("localization", this);
 
-        for (var i in this.checkout.activeShippingCountries)
+        for (var i in this.localization.activeShippingCountries)
         {
-            var country = this.checkout.activeShippingCountries[i];
+            var country = this.localization.activeShippingCountries[i];
 
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
     }
 });
 
-},{"services/ResourceService":49}],29:[function(require,module,exports){
+},{"services/ResourceService":50}],29:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+
+Vue.component("shop-language-select", {
+
+    template: "#vue-shop-language-select",
+
+    props:
+    [
+        "countryFlagPrefix"
+    ],
+
+    data: function()
+    {
+        return {
+            localization: {},
+            languageList: []
+        };
+    },
+
+    created: function()
+    {
+        ResourceService.bind("localization", this);
+
+        for (var i in this.localization.activeShopLanguageList)
+        {
+            var languageKey = this.localization.activeShopLanguageList[i];
+            var languageName = Translations.Template[languageKey];
+            var language =
+                {
+                    key: languageKey,
+                    name: languageName,
+                    flagClass: this.countryFlagPrefix + languageKey
+                };
+
+            this.languageList.push(language);
+        }
+    }
+});
+
+},{"services/ResourceService":50}],30:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -2424,7 +2405,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":51}],30:[function(require,module,exports){
+},{"services/WaitScreenService":52}],31:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 
 Vue.directive("add-to-basket", function(value)
@@ -2447,7 +2428,7 @@ Vue.directive("add-to-basket", function(value)
 
 });
 
-},{"services/ResourceService":49}],31:[function(require,module,exports){
+},{"services/ResourceService":50}],32:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -2471,7 +2452,7 @@ Vue.directive("logout", function()
         });
 });
 
-},{"services/ApiService":44,"services/NotificationService":48}],32:[function(require,module,exports){
+},{"services/ApiService":45,"services/NotificationService":49}],33:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -2539,7 +2520,7 @@ Vue.elementDirective("resource-list", {
     }
 });
 
-},{"services/ResourceService":49}],33:[function(require,module,exports){
+},{"services/ResourceService":50}],34:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-bind", {
@@ -2579,7 +2560,7 @@ Vue.directive("resource-bind", {
 
 });
 
-},{"services/ResourceService":49}],34:[function(require,module,exports){
+},{"services/ResourceService":50}],35:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
@@ -2614,7 +2595,7 @@ Vue.directive("resource-if", {
 
 });
 
-},{"services/ResourceService":49}],35:[function(require,module,exports){
+},{"services/ResourceService":50}],36:[function(require,module,exports){
 Vue.directive("change-lang", function(value)
 {
     $(this.el).click(function(event)
@@ -2627,7 +2608,7 @@ Vue.directive("change-lang", function(value)
     });
 });
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.directive("shipping-country", function(value)
@@ -2639,7 +2620,7 @@ Vue.directive("shipping-country", function(value)
     });
 });
 
-},{"services/CheckoutService":45}],37:[function(require,module,exports){
+},{"services/CheckoutService":46}],38:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
 var accounting        = require("accounting");
@@ -2672,7 +2653,7 @@ Vue.filter("currency", function(price, customCurrency)
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":52,"currency-symbol-map":53,"services/ResourceService":49}],38:[function(require,module,exports){
+},{"accounting":53,"currency-symbol-map":54,"services/ResourceService":50}],39:[function(require,module,exports){
 // for docs see https://github.com/brockpetrie/vue-moment
 
 var dateFilter = function()
@@ -2816,7 +2797,7 @@ var dateFilter = function()
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
     var imageList = item.variationImageList;
@@ -2845,7 +2826,7 @@ Vue.filter("itemImage", function(item, baseUrl)
 
 });
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 Vue.filter("itemName", function(item, selectedName)
 {
 
@@ -2865,18 +2846,22 @@ Vue.filter("itemName", function(item, selectedName)
     return item.name1;
 });
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 Vue.filter("itemURL", function(item)
 {
 
     var urlContent = item.itemDescription.urlContent.split("/");
     var i          = urlContent.length - 1;
 
-    return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+    if (urlContent[i].length > 0)
+    {
+        return "/" + urlContent[i] + "/" + item.itemBase.id + "/" + item.variationBase.id;
+    }
+    return "/" + item.itemBase.id + "/" + item.variationBase.id;
 
 });
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
 
@@ -3042,7 +3027,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":48,"services/WaitScreenService":51}],43:[function(require,module,exports){
+},{"services/NotificationService":49,"services/WaitScreenService":52}],44:[function(require,module,exports){
 var ApiService      = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
@@ -3104,9 +3089,9 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{"services/ApiService":44,"services/CheckoutService":45}],44:[function(require,module,exports){
-arguments[4][42][0].apply(exports,arguments)
-},{"dup":42,"services/NotificationService":48,"services/WaitScreenService":51}],45:[function(require,module,exports){
+},{"services/ApiService":45,"services/CheckoutService":46}],45:[function(require,module,exports){
+arguments[4][43][0].apply(exports,arguments)
+},{"dup":43,"services/NotificationService":49,"services/WaitScreenService":52}],46:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -3197,7 +3182,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":44}],46:[function(require,module,exports){
+},{"services/ApiService":45}],47:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3288,7 +3273,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3422,7 +3407,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3616,7 +3601,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -4175,7 +4160,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":44}],50:[function(require,module,exports){
+},{"services/ApiService":45}],51:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4376,7 +4361,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4426,7 +4411,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -4841,7 +4826,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -4881,7 +4866,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":54}],54:[function(require,module,exports){
+},{"./map":55}],55:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -5001,7 +4986,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,17,20,21,22,23,24,25,26,27,28,29,30,31,35,36,32,33,34,37,38,39,40,41])
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,17,20,21,22,23,24,25,26,27,28,29,30,31,32,36,37,33,34,35,38,39,40,41,42])
 
 
 vueApp = new Vue({
