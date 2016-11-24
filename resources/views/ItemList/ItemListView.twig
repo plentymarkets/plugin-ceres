@@ -1,0 +1,11 @@
+{% extends "PluginCallisto::PageDesign.PageDesign" %}
+
+{% block PageBody %}
+
+    {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect" ) }}
+
+    <pagination></pagination>
+    <item-list></item-list>
+
+
+{% endblock %}
