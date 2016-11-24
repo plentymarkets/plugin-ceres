@@ -99,12 +99,12 @@
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
-            <script async src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
         {% else %}
-            <script async src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
         {% endif %}
         <script>
-            var Translations = Languages[{{ lang }}];
+            var Translations = Languages['{{ lang }}'];
         </script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
     </body>
