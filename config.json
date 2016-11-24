@@ -47,24 +47,11 @@
         "type"      : "category_select"
     },
     {
-        "tab"                           : "Categories",
-        "key"                           : "global.category.variation_show_type",
-        "label"                         : "Show variations in the category item list",
-        "type"                          : "dropdown",
-        "possibleValues"                :
-        {
-            "1"     : "All",
-            "2"     : "Only main variations",
-            "3"     : "Only child variations"
-        },
-        "default"                       : "1"
-    },
-    {
         "tab"       : "Header",
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/plugincallisto/images/callisto4.png"
+        "default"   : "/layout/plugins/production/plugincallisto/images/ceres-logo.png"
     },
     {
         "tab"       : "Header",
@@ -164,7 +151,7 @@
         "default"   : ""
     },
     {
-        "tab"           : "Item",
+        "tab"           : "Item view",
         "key"           : "item.name",
         "label"         : "Item name",
         "type"          : "dropdown",
@@ -177,7 +164,7 @@
         "default"       : "0"
     },
     {
-        "tab"                           : "Item",
+        "tab"                           : "Item view",
         "key"                           : "item.data",
         "label"                         : "Show item information",
         "type"                          : "multi_select",
@@ -204,7 +191,7 @@
         "default"                       : "all"
     },
     {
-        "tab"           : "Item",
+        "tab"           : "Item view",
         "key"           : "item.storeSpecial",
         "label"         : "Store specials: Number of decimal places for discounts",
         "type"          : "dropdown",
@@ -215,6 +202,19 @@
             "2"         : "2"
         },
         "default"       : "0"
+    },
+    {
+        "tab"                           : "Item view",
+        "key"                           : "item.variation_show_type",
+        "label"                         : "Show variations in the category item list",
+        "type"                          : "dropdown",
+        "possibleValues"                :
+        {
+            "1"     : "All",
+            "2"     : "Only main variations",
+            "3"     : "Only child variations"
+        },
+        "default"                       : "1"
     },
     {
         "tab"                           : "Shopping cart",
@@ -281,7 +281,7 @@
     },
     {
         "tab"               : "Pagination and sorting",
-        "key"               : "sort.paginationPosition",
+        "key"               : "pagination.position",
         "label"             : "Pagination position",
         "type"              : "dropdown",
         "possibleValues"    :
@@ -295,14 +295,14 @@
     {
         "tab"               : "Pagination and sorting",
         "key"               : "pagination.showFirstPage",
-        "label"             : "Show first page permanently",
+        "label"             : "Always show first page",
         "type"              : "checkbox",
         "default"           : "false"
     },
     {
         "tab"               : "Pagination and sorting",
         "key"               : "pagination.showLastPage",
-        "label"             : "Show last page permanently",
+        "label"             : "Always show last page",
         "type"              : "checkbox",
         "default"           : "false"
     },

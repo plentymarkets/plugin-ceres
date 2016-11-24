@@ -3,9 +3,9 @@
 {% set itemSort             = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) | split('_') %}
 {% set orderBy              = itemSort[0] %}
 {% set orderByKey           = itemSort[1] | default('ASC') %}
-{% set variationShowType    = config("PluginCallisto.global.category.variation_show_type") %}
+{% set variationShowType    = config("PluginCallisto.item.variation_show_type") %}
 {% set categoryParams = {
-    'variationShowType' : config("PluginCallisto.global.category.variation_show_type"),
+    'variationShowType' : config("PluginCallisto.item.variation_show_type"),
     'itemsPerPage'      : request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ),
     'orderBy'           : itemSort[0],
     'orderByKey'        : itemSort[1] | default('ASC')
@@ -15,7 +15,7 @@
 {% set paginatedResult      = services.category.getItems(category, categoryParams, page ) %}
 
 {% set itemList             = paginatedResult.getResult() %}
-{% set paginationType       = config("PluginCallisto.sort.paginationPosition") %}
+{% set paginationType       = config("PluginCallisto.pagination.position") %}
 
 {% block PageBody %}
 
