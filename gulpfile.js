@@ -45,10 +45,10 @@ gulp.task('build', ['build:bundle', 'build:sass-min']);
 
 gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function() {
     return gulp.src( [
+            JS_LANG + '*.js',
             JS_DIST + OUTPUT_PREFIX + '-vendor.js',
             JS_SRC + 'app.config.js',
-            JS_DIST + OUTPUT_PREFIX + '-app.js',
-            JS_LANG + '*.js'
+            JS_DIST + OUTPUT_PREFIX + '-app.js'
             ] )
         .pipe( sourcemaps.init({ loadMaps: true }) )
         .pipe( concat( OUTPUT_PREFIX + '.js' ) )
