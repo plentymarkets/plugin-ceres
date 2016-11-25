@@ -85,6 +85,11 @@ class TemplateServiceProvider extends ServiceProvider
         $eventDispatcher->listen('tpl.guest', function(TemplateContainer $container,  $templateData) {
             $container->setTemplate("PluginCallisto::Customer.Guest");
         }, 0);
+    
+        // provide template to use for item search
+        $eventDispatcher->listen('tpl.search', function(TemplateContainer $container,  $templateData) {
+            $container->setTemplate("PluginCallisto::ItemList.ItemListView");
+        }, 0);
 
         // provide mapped category IDs
         $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap) use(&$config) {
