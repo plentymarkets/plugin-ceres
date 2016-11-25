@@ -1,29 +1,35 @@
+li.method-list-item {
+	border: 2px solid #008ebd;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-right: 2px;
+}
+
 .cmp-method-list{
 
 	.method-list{
 		list-style-type: none;
-	    margin: 0;
-	    padding: 0;
-	    width: 100%;
+		margin: 0;
+		padding: 0;
+		width: 100%;
 	}
 
 	.method-list-item{
 		width: 100%;
-	    display: inline-block;
-	    vertical-align:top;
-	    margin-top: -1px;
+		display: inline-block;
+		vertical-align:top;
+		margin-top: -1px;
 		margin-left: -1px;
 
 		input{ display: none; }
 
 		input:checked + label{
-			background-color: $brand-primary;
 			color: white;
 		}
 
 		label{
-		    border: 1px solid $gray-lighter;
-	    	cursor: pointer;
+			border: 1px solid $gray-lighter;
+			cursor: pointer;
 			padding: .5em;
 			margin-bottom: 0;
 			width:100%;
@@ -39,7 +45,7 @@
 		.icon{
 			width: 3.5rem;
 			height: 3.5rem;
-			
+
 			img{
 				width: 100%;
 				height: auto;
@@ -62,7 +68,7 @@
 			flex-flow: row wrap;
 		}
 		.method-list-item{
-			width: 50%;
+			width: 49%;
 			display: flex;
 			flex-flow: row nowrap;
 		}
