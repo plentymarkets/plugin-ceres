@@ -39,12 +39,9 @@ Vue.component("item-search", {
             var searchParams =
                 {
                     searchString: this.searchString,
-                    searchParams:
-                    {
-                        itemsPerPage: 20,
-                        orderBy: "itemName",
-                        orderByKey: "ASC"
-                    },
+                    itemsPerPage: 20,
+                    orderBy: "itemName",
+                    orderByKey: "ASC",
                     page: 1
                 };
             var self = this;
