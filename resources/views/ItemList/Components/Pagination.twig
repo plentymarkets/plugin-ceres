@@ -3,14 +3,18 @@
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            <li class="page-item" v-if="page > 2 && showFirstPage">
-                <a class="page-link" @click="setPage(1)">first</a>
+            <li class="page-item" v-if="page > 2">
+                <a class="page-link" @click="setPage(1)">
+                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./FIRST PAGE LINK -->
 
             <!-- PREV LINK -->
             <li class="page-item" :class="{'disabled': page <= 1}">
-                <a class="page-link" @click="setPage(page-1)">&laquo;</a>
+                <a class="page-link" @click="setPage(page-1)">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./PREV LINK -->
 
@@ -38,13 +42,17 @@
 
             <!-- NEXT LINK -->
             <li class="page-item" :class="{'disabled': page >= pageMax}">
-                <a class="page-link" @click="setPage(page + 1)">&raquo;</a>
+                <a class="page-link" @click="setPage(page + 1)">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            <li class="page-item" v-if="pageMax > 3 && page < pageMax - 1 && showLastPage">
-                <a class="page-link" @click="setPage(pageMax)">last</a>
+            <li class="page-item" v-if="pageMax > 3 && page < pageMax - 1">
+                <a class="page-link" @click="setPage(pageMax)">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./LAST PAGE LINK -->
         </ul>
