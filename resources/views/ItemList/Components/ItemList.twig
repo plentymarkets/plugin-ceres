@@ -1,5 +1,9 @@
 <script type="x/template" id="vue-item-list">
     <div class="col-xs-12">
+        <div v-for="item in itemList.entries">
+            <label>${ item.itemDescription.name1 }</label>
+            <br/>
+        </div>
         {#<hr class="m-b-1 hidden-sm-down">#}
         {#<ul class="product-list row grid">#}
 

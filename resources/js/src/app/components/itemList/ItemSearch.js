@@ -1,6 +1,5 @@
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
-var NotificationService = require("services/NotificationService");
 
 Vue.component("item-search", {
 
@@ -26,26 +25,13 @@ Vue.component("item-search", {
     {
         search: function()
         {
+            ItemListService.setSearchString(this.searchString);
             // redirect if wrong url
             // change url
             // fire call
             // update item list
 
             this.getItemList();
-        },
-
-        getItemList: function()
-        {
-            ItemListService.getItemList(this.searchString)
-                .done(function(response)
-                {
-                    ResourceService.getResource("itemList").set(response);
-
-                })
-                .fail(function()
-                {
-                    NotificationService.error("Error while searching").closeAfter(5000);
-                });
         },
 
         getQueryParams: function(searchString)

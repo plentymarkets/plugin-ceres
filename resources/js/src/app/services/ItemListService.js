@@ -1,23 +1,69 @@
 var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
 
 module.exports = (function($)
 {
+    var searchParams =
+        {
+            searchString: "",
+            itemsPerPage: 0,
+            orderBy: "itemName",
+            orderByKey: "ASC",
+            page: 1
+        };
 
     return {
-        getItemList: getItemList
+        setSearchString: setSearchString,
+        setItemsPerPage: setItemsPerPage,
+        setOrderBy: setOrderBy,
+        setOrderByKey: setOrderByKey,
+        setPage: setPage
     };
 
-    function getItemList(searchString)
+    function _getItemList()
     {
-        var searchParams =
+        return ApiService.get("/rest/item/search", searchParams)
+            .done(function(response)
             {
-                searchString: searchString,
-                itemsPerPage: 20,
-                orderBy: "itemName",
-                orderByKey: "ASC",
-                page: 1
-            };
+                ResourceService.getResource("itemList").set(response);
 
-        return ApiService.get("/rest/item/search", searchParams);
+            })
+            .fail(function()
+            {
+                NotificationService.error("Error while searching").closeAfter(5000);
+            });
+    }
+
+    function setSearchString(searchString)
+    {
+        searchParams.searchString = searchString;
+        searchParams.page = 1;
+        
+        _getItemList();
+    }
+
+    function setItemsPerPage(itemsPerPage)
+    {
+        searchParams.itemsPerPage = itemsPerPage;
+        _getItemList();
+    }
+
+    function setOrderBy(orderBy)
+    {
+        searchParams.orderBy = orderBy;
+        _getItemList();
+    }
+
+    function setOrderByKey(orderByKey)
+    {
+        searchParams.orderByKey = orderByKey;
+        _getItemList();
+    }
+
+    function setPage(page)
+    {
+        searchParams.page = page;
+        _getItemList();
     }
 })(jQuery);

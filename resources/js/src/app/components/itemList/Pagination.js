@@ -21,6 +21,7 @@ Vue.component("pagination", {
 
     created: function()
     {
+        ItemListService.setItemsPerPage(this.itemsPerPage);
     },
 
     ready: function()
@@ -32,7 +33,7 @@ Vue.component("pagination", {
     {
         setPage: function(page)
         {
-            this.getItemList(this.searchString /* , page*/);
+            ItemListService.setPage(page);
             // call to get data for page
 
         },
@@ -68,7 +69,7 @@ Vue.component("pagination", {
                 pageMax += 1;
             }
 
-            return parseInt(pageMax);
+            return parseInt(pageMax) || 1;
         }
     }
 });
