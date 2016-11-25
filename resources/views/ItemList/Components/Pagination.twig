@@ -1,0 +1,52 @@
+<script type="x/template" id="vue-pagination">
+    <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+        <ul class="pagination col-xs-12 m-y-0">
+
+            <!-- FIRST PAGE LINK -->
+            <li class="page-item" v-if="page > 2 && showFirstPage">
+                <a class="page-link" @click="setPage(1)">first</a>
+            </li>
+            <!-- ./FIRST PAGE LINK -->
+
+            <!-- PREV LINK -->
+            <li class="page-item" :class="{'disabled': page <= 1}">
+                <a class="page-link" @click="setPage(page-1)">&laquo;</a>
+            </li>
+            <!-- ./PREV LINK -->
+
+            <!-- PAGINATION -->
+            <li class="page-item" v-if="page === pageMax && page > 2">
+                <a class="page-link" @click="setPage(page - 2)">${ page - 2 }</a>
+            </li>
+
+            <li class="page-item" v-if="page > 1">
+                <a class="page-link" @click="setPage(page - 1)">${ page - 1 }</a>
+            </li>
+
+            <li class="page-item active">
+                <a class="page-link">${ page }</a>
+            </li>
+
+            <li class="page-item" v-if="page + 1 <= pageMax">
+                <a class="page-link" @click="setPage(page + 1)">${ page + 1 }</a>
+            </li>
+
+            <li class="page-item" v-if="page === 1 && page + 2 <= pageMax">
+                <a class="page-link" @click="setPage(page + 2)">${ page + 2 }</a>
+            </li>
+            <!-- ./PAGINATION -->
+
+            <!-- NEXT LINK -->
+            <li class="page-item" :class="{'disabled': page >= pageMax}">
+                <a class="page-link" @click="setPage(page + 1)">&raquo;</a>
+            </li>
+            <!-- ./NEXT LINK -->
+
+            <!-- LAST PAGE LINK -->
+            <li class="page-item" v-if="pageMax > 3 && page < pageMax - 1 && showLastPage">
+                <a class="page-link" @click="setPage(pageMax)">last</a>
+            </li>
+            <!-- ./LAST PAGE LINK -->
+        </ul>
+    </nav>
+</script>
