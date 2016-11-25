@@ -10,13 +10,13 @@ module.exports = (function($)
     function getItemList(searchString)
     {
         var searchParams =
-        {
-            searchString: searchString,
-            itemsPerPage: 20,
-            orderBy: "itemName",
-            orderByKey: "ASC",
-            page: 1
-        };
+            {
+                searchString: searchString,
+                itemsPerPage: 20,
+                orderBy: "itemName",
+                orderByKey: "ASC",
+                page: 1
+            };
 
         return ApiService.get("/rest/item/search", searchParams);
     }
