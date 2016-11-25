@@ -1,5 +1,6 @@
 var APIService = require("services/APIService");
 var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("item-search", {
@@ -36,28 +37,16 @@ Vue.component("item-search", {
 
         getItemList: function()
         {
-            var searchParams =
+            ItemListService.getItemList(this.searchString)
+                .done(function(response)
                 {
-                    searchString: this.searchString,
-                    itemsPerPage: 20,
-                    orderBy: "itemName",
-                    orderByKey: "ASC",
-                    page: 1
-                };
-            var self = this;
+                    ResourceService.getResource("itemList").set(response);
 
-            APIService.get("rest/item/search", searchParams)
-                    .done(function(response)
-                    {
-                        ResourceService.getResource("itemList").set(response);
-                        console.log(response);
-                        console.log(self.itemList);
-                    })
-                    .fail(function(response)
-                    {
-                        // TODO
-                        NotificationService.error("Error").closeAfter(5000);
-                    });
+                })
+                .fail(function()
+                {
+                    NotificationService.error("Error while searching").closeAfter(5000);
+                });
         },
 
         getQueryParams: function(searchString)
