@@ -1,4 +1,3 @@
-var APIService = require("services/APIService");
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 var NotificationService = require("services/NotificationService");
