@@ -73,7 +73,7 @@ module.exports = (function($)
         var deferred = $.Deferred();
 
         config = config || {};
-        config.data = data ? JSON.stringify(data) : null;
+        config.data = data || null;
         config.dataType = config.dataType || "json";
         config.contentType = config.contentType || "application/json";
         config.doInBackground = !!config.doInBackground;
