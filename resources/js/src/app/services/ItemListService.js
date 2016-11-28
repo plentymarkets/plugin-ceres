@@ -24,6 +24,8 @@ module.exports = (function($)
 
     function _getItemList()
     {
+        _updateUrl();
+
         return ApiService.get("/rest/item/search", searchParams)
             .done(function(response)
             {
@@ -104,6 +106,14 @@ module.exports = (function($)
         }
 
         return null;
+    }
+
+    function _updateUrl()
+    {
+        var url = window.location.pathname + "?" + $.param(searchParams);
+        var title = document.getElementsByTagName("title")[0].innerHTML;
+
+        window.history.replaceState({}, title, url);
     }
 
 })(jQuery);
