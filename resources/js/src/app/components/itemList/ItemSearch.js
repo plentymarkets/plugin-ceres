@@ -24,7 +24,14 @@ Vue.component("item-search", {
     {
         search: function()
         {
-            ItemListService.setSearchString(this.searchString);
+            if (document.location.pathname == "/search")
+            {
+                ItemListService.setSearchString(this.searchString);
+            }
+            else
+            {
+                window.open("/search?searchString=" + this.searchString, "_self", false);
+            }
         }
     }
 });
