@@ -13,6 +13,10 @@
 
     <div class="page-content myaccount container-max m-b-3 m-t-1">
 
+        <resource
+                name="checkout"
+                route="/rest/checkout/"
+                :data="{{ services.checkout.getCheckout() | json_encode() }}"></resource>
         <!-- HEADER -->
         <div class="row m-b-3">
             <div class="col-sm-9">
