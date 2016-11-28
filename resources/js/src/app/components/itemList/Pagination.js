@@ -21,7 +21,8 @@ Vue.component("pagination", {
 
     created: function()
     {
-        ItemListService.setItemsPerPage(this.itemsPerPage);
+        // TODO
+        // ItemListService.setItemsPerPage(this.itemsPerPage, false);
     },
 
     ready: function()
@@ -34,22 +35,6 @@ Vue.component("pagination", {
         setPage: function(page)
         {
             ItemListService.setPage(page);
-            // call to get data for page
-
-        },
-
-        getItemList: function()
-        {
-            ItemListService.getItemList(this.searchString)
-                .done(function(response)
-                {
-                    ResourceService.getResource("itemList").set(response);
-
-                })
-                .fail(function()
-                {
-                    NotificationService.error("Error while searching").closeAfter(5000);
-                });
         }
     },
 
