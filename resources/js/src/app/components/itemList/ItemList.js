@@ -1,4 +1,5 @@
 var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
@@ -16,6 +17,7 @@ Vue.component("item-list", {
     ready: function()
     {
         ResourceService.bind("itemList", this);
+        ItemListService.setSearchParams(document.location.search);
     },
 
     methods:

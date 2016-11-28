@@ -18,7 +18,8 @@ module.exports = (function($)
         setItemsPerPage: setItemsPerPage,
         setOrderBy: setOrderBy,
         setOrderByKey: setOrderByKey,
-        setPage: setPage
+        setPage: setPage,
+        setSearchParams: setSearchParams
     };
 
     function _getItemList()
@@ -35,11 +36,27 @@ module.exports = (function($)
             });
     }
 
+    /**
+     * ?searchString=searchString&itemsPerPage=itemsPerPage&orderBy=orderBy&orderByKey=orderByKey&page=page
+     * @param urlParams
+     */
+    function setSearchParams(urlParams)
+    {
+        var queryParams = _getQueryParams(urlParams);
+
+        for (var key in queryParams)
+        {
+            searchParams[key] = queryParams[key];
+        }
+
+        _getItemList();
+    }
+
     function setSearchString(searchString)
     {
         searchParams.searchString = searchString;
         searchParams.page = 1;
-        
+
         _getItemList();
     }
 
@@ -66,4 +83,27 @@ module.exports = (function($)
         searchParams.page = page;
         _getItemList();
     }
+
+    function _getQueryParams(searchString)
+    {
+        if (searchString)
+        {
+            var tokens;
+            var params = {};
+            var regex = /[?&]?([^=]+)=([^&]*)/g;
+
+            searchString = searchString.split("+").join(" ");
+
+            // eslint-disable-next-line
+            while (tokens = regex.exec(searchString))
+            {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+
+            return params;
+        }
+
+        return null;
+    }
+
 })(jQuery);
