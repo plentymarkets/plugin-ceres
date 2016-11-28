@@ -51,7 +51,7 @@
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/plugincallisto/images/callisto4.png"
+        "default"   : "/layout/plugins/production/plugincallisto/images/ceres-logo.png"
     },
     {
         "tab"       : "Header",

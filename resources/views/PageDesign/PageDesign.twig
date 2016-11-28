@@ -94,16 +94,19 @@
 
         {{ Loader.include_components() }}
 
+        {% set lang = services.sessionStorage.getLang() %}
+
         {% if config("PluginCallisto.log.performance.level") == 'development' %}
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
         {% else %}
-            <script async src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
+            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
         {% endif %}
-
-        {% set lang = services.sessionStorage.getLang() %}
+        <script>
+            var Translations = Languages['{{ lang }}'];
+        </script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-        <script async src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
     </body>
 </html>
