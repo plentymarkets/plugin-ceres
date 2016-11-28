@@ -6,9 +6,9 @@
                         type="radio"
                         id="paymentMethod${ _uid }${ paymentProvider.id }"
                         name="MethodOfPaymentID"
-                        value="${paymentProvider.id}"
+                        :value="paymentProvider.id"
                         @change="onPaymentProviderChange()"
-                        v-model="selectedPaymentProvider"
+                        v-model="checkout.methodOfPaymentId"
                 >
                 <label for="paymentMethod${ _uid }${ paymentProvider.id }">
                     <div class="icon">
