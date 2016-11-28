@@ -1,3 +1,5 @@
+{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
@@ -7,12 +9,7 @@
 <header class="top-bar">
     <div class="container-max">
         <div class="row">
-            <div class="shariff socialbar hidden-sm-down pull-xs-left"
-                 data-services='["facebook","googleplus","pinterest","twitter"]'
-                 data-url=""
-                 data-media-url=""
-                 data-theme="minimal">
-            </div>
+            {{ LayoutContainer.show("PluginCallisto::Header.SocialMedia") }}
 
             <ul id="controlsList" class="controls-list list-inline">
 

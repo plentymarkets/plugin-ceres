@@ -15,7 +15,8 @@ Vue.component("account-settings", {
         return {
             newPassword         : "",
             confirmPassword     : "",
-            accountSettingsClass: ""
+            accountSettingsClass: "",
+            accountSettingsModal: {}
         };
     },
 
@@ -24,7 +25,7 @@ Vue.component("account-settings", {
      */
     ready: function()
     {
-        this.accountSettingsClass = "accountSettingsModal" + this._uid;
+        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
     },
 
     computed: {
@@ -49,7 +50,7 @@ Vue.component("account-settings", {
          */
         showChangeAccountSettings: function()
         {
-            ModalService.findModal($("." + this.accountSettingsClass)).show();
+            this.accountSettingsModal.show();
         },
 
         /**
@@ -67,7 +68,7 @@ Vue.component("account-settings", {
                         self.clearFieldsAndClose();
                         NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
                     }).fail(function(response)
-                {
+                    {
                         self.clearFieldsAndClose();
                         NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
                     });
@@ -88,7 +89,7 @@ Vue.component("account-settings", {
          */
         clearFieldsAndClose: function()
         {
-            ModalService.findModal($("." + this.accountSettingsClass)).hide();
+            this.accountSettingsModal.hide();
             this.clearFields();
         },
 
