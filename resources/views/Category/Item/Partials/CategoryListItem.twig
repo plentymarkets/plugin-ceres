@@ -1,6 +1,9 @@
+{{ component( "PluginCallisto::Basket.Components.AddItemToBasket" ) }}
+
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
+{% set showItemConfirm = config("PluginCallisto.basket.add_item_to_basket_confirm") %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
@@ -23,11 +26,7 @@
         </div>
 
         <div class="thumb-controls">
-            <button class="btn btn-primary thumb-btn-buy" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">
-                {{ trans("PluginCallisto::Template.addToBasket") }}
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->
-            </button>
+            <add-item-to-basket :item="{{ item | json_encode() }}" :quantity="1" :show-quantity="false" :show-overlay="{{ showItemConfirm }}"></add-item-to-basket>
         </div>
 
         <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">

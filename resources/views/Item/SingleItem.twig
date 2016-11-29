@@ -6,12 +6,12 @@
 {% set variations = services.item.getVariationAttributeMap( item.itemBase.id ) %}
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.itemBase.id ) ) %}
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
+{% set showItemConfirm = config("PluginCallisto.basket.add_item_to_basket_confirm") %}
 
 {% block PageBody %}
     {{ component( "PluginCallisto::Item.Components.VariationSelect" ) }}
     {{ component( "PluginCallisto::Item.Components.VariationImageList" ) }}
-    {{ component( "PluginCallisto::Basket.Components.AddToBasket" ) }}
-    {{ component( "PluginCallisto::Basket.Components.AddItemConfirm" ) }}
+    {{ component( "PluginCallisto::Basket.Components.AddItemToBasket" ) }}
     <resource name="currentVariation" data="{{ item | json_encode() }}"></resource>
     <div class="single container-max page-content">
         <div class="row m-t-3">
@@ -97,7 +97,7 @@
                 <div class="row m-y-1">
 
                     {{ LayoutContainer.show("PluginCallisto::SingleItem.BeforeAddToBasket") }}
-                    <add-to-basket></add-to-basket>
+                    <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="true" :show-overlay="{{ showItemConfirm }}"></add-item-to-basket>
 
                     {{ LayoutContainer.show("PluginCallisto::SingleItem.AfterAddToBasket") }}
                 </div>
