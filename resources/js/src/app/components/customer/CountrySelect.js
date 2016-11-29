@@ -17,7 +17,7 @@ Vue.component("country-select", {
         return {
             stateList  : [],
             selectedCountry: {},
-            checkout: {}
+            localization: {}
         };
     },
 
@@ -26,8 +26,8 @@ Vue.component("country-select", {
      */
     created: function()
     {
-        ResourceService.bind("checkout", this, "checkout");
-        this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
+        ResourceService.bind("localization", this);
+        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -67,7 +67,7 @@ Vue.component("country-select", {
          */
         selectedCountryId: function()
         {
-            this.selectedCountryId = this.selectedCountryId || this.checkout.currentShippingCountryId;
+            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry)

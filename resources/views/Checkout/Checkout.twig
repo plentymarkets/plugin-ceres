@@ -11,6 +11,12 @@
     {{ component( "PluginCallisto::Basket.Components.BasketList" ) }}
     {{ component( "PluginCallisto::Basket.Components.BasketTotals" ) }}
     <div class="page-content checkout container-max">
+        {#:events="['FrontendPaymentMethodChanged!checkout', 'FrontendShippingProfileChanged!checkout']"#}
+        <resource
+            name="checkout"
+            route="/rest/checkout/"
+            :data="{{ services.checkout.getCheckout() | json_encode() }}"></resource>
+
         {% set overrideCheckout = LayoutContainer.show("PluginCallisto::Checkout") %}
         {% if overrideCheckout|trim is empty %}
             <div class="row m-t-1">
@@ -68,7 +74,7 @@
 
                             {{ LayoutContainer.show("PluginCallisto::Checkout.BeforeShippingProfileList") }}
                             <div class="shipping-method-select">
-                                <shipping-profile-select :shipping-profile-data="{{ services.checkout.getShippingProfileList() | json_encode() }}"></shipping-profile-select>
+                                <shipping-profile-select></shipping-profile-select>
                             </div>
                             {{ LayoutContainer.show("PluginCallisto::Checkout.AfterShippingProfileList") }}
                         {% else %}
@@ -83,8 +89,7 @@
 
                             {{ LayoutContainer.show("PluginCallisto::Checkout.BeforePaymentList") }}
                             <div class="payment-method-select">
-                                <payment-provider-select
-                                        :payment-provider-list="{{ services.checkout.getCheckoutPaymentDataList() | json_encode() }}"></payment-provider-select>
+                                <payment-provider-select></payment-provider-select>
                             </div>
                             {{ LayoutContainer.show("PluginCallisto::Checkout.AfterPaymentList") }}
                         {% else %}
