@@ -18,10 +18,6 @@ Vue.component("item-list-sorting", {
     created: function()
     {
         this.buildData();
-    },
-
-    ready: function()
-    {
         this.selectedSorting = this.sortData[0];
     },
 

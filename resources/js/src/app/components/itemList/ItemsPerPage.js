@@ -18,11 +18,6 @@ Vue.component("items-per-page", {
 
     created: function()
     {
-
-    },
-
-    ready: function()
-    {
         this.selectedElement = this.paginationValues[0];
     },
 
