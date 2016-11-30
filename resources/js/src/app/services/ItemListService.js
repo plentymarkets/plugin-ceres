@@ -70,7 +70,8 @@ module.exports = (function($)
 
     function setOrderBy(orderBy)
     {
-        searchParams.orderBy = orderBy;
+        searchParams.orderBy = orderBy.split("_")[0];
+        searchParams.orderByKey = orderBy.split("_")[1];
         _getItemList();
     }
 
