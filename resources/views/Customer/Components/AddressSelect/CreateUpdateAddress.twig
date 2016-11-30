@@ -7,7 +7,7 @@
             <address-input-group :address-data="addressData"></address-input-group>
 
             <div class="col-sm-5 offset-sm-7">
-                <button type="button" class="btn btn-primary btn-block" @click="validate">{{ trans("PluginCallisto::Template.generalSave") }}</button>
+                <button type="button" class="btn btn-primary btn-block" @click="validate" :disabled="waiting">{{ trans("PluginCallisto::Template.generalSave") }}</button>
             </div>
         </div>
     </form>
