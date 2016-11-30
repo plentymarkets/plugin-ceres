@@ -1,17 +1,20 @@
 var ResourceService     = require("services/ResourceService");
-var ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket", {
 
     props: [
         "item",
-        "baseUrl",
-        "quantity",
-        "showQuantity",
-        "showOverlay"
+        "showQuantity"
     ],
 
     template: "#vue-add-item-to-basket",
+
+    data: function()
+    {
+        return {
+            quantity: 1
+        };
+    },
 
     methods: {
 
@@ -23,34 +26,16 @@ Vue.component("add-item-to-basket", {
                 .getResource("basketItems")
                 .push(basketObject);
 
-            if (this.showOverlay)
-            {
-                ModalService.findModal(this.$els.addItemConfirm).show();
-            }
+            var currentBasketObject = {currentBasketItem: this.item, quantity: this.quantity};
+
+            ResourceService
+                .getResource("basketItem")
+                .set(currentBasketObject);
         },
 
         updateQuantity: function(value)
         {
             this.quantity = value;
-        },
-
-        /**
-         * TODO
-         * @returns {string}
-         */
-        getImage: function()
-        {
-            var path = "";
-
-            for (var i = 0; i < this.item.variationImageList.length; i++)
-            {
-                if (this.item.variationImageList[i].path !== "")
-                {
-                    path = this.item.variationImageList[i].path;
-                }
-            }
-            return this.baseUrl + "/" + path;
         }
-
     }
 });
