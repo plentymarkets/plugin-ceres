@@ -7,7 +7,8 @@ Vue.component("shipping-profile-select", {
     data: function()
     {
         return {
-            checkout: {}
+            checkout: {},
+            waiting: false
         };
     },
 
@@ -26,7 +27,15 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            ResourceService.getResource("checkout").set(this.checkout);
+            this.waiting = true;
+
+            ResourceService
+                .getResource("checkout").set(this.checkout)
+                .done(
+                    function()
+                    {
+                        this.waiting = false;
+                    }.bind(this));
         }
     }
 });

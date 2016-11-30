@@ -15,7 +15,8 @@
         <resource
             name="checkout"
             route="/rest/checkout/"
-            :data="{{ services.checkout.getCheckout() | json_encode() }}"></resource>
+            :data="{{ services.checkout.getCheckout() | json_encode() }}"
+            :events="['CheckoutChanged!checkout']"></resource>
 
         {% set overrideCheckout = LayoutContainer.show("PluginCallisto::Checkout") %}
         {% if overrideCheckout|trim is empty %}

@@ -13,6 +13,13 @@ Vue.component("create-update-address", {
         "addressType"
     ],
 
+    data: function()
+    {
+        return {
+            waiting: false
+        };
+    },
+
     methods: {
         /**
          * Validate the address fields
@@ -30,7 +37,6 @@ Vue.component("create-update-address", {
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
-
         },
 
         /**
@@ -53,6 +59,8 @@ Vue.component("create-update-address", {
          */
         updateAddress: function()
         {
+            this.waiting = true;
+
             AddressService
                 .updateAddress(this.addressData, this.addressType)
                 .done(function()
@@ -68,6 +76,8 @@ Vue.component("create-update-address", {
                             break;
                         }
                     }
+
+                    this.waiting = false;
                 }.bind(this));
         },
 
@@ -76,6 +86,8 @@ Vue.component("create-update-address", {
          */
         createAddress: function()
         {
+            this.waiting = true;
+
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
                 .done(function(newAddress)
@@ -86,6 +98,8 @@ Vue.component("create-update-address", {
                     this.addressList.push(this.addressData);
 
                     this.$dispatch("new-address-created", this.addressData);
+
+                    this.waiting = false;
                 }.bind(this));
         }
     }
