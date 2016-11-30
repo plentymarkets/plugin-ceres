@@ -1,16 +1,14 @@
-var ApiService = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
 
-    props: ["paymentProviderList"],
-
     data: function()
     {
         return {
-            selectedPaymentProvider: {}
+            checkout: {},
+            waiting: false
         };
     },
 
@@ -19,30 +17,24 @@ Vue.component("payment-provider-select", {
      */
     created: function()
     {
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
         /**
          * Event when changing the payment provider
-         * TODO
          */
         onPaymentProviderChange: function()
         {
-            CheckoutService.setMethodOfPaymentId(this.selectedPaymentProvider);
-        },
+            this.waiting = true;
 
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            ApiService.listen(
-                "eventName",
-                function(paymentProviderList)
-                {
-                    this.paymentProviderList = paymentProviderList;
-                }.bind(this));
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(
+                    function()
+                    {
+                        this.waiting = false;
+                    }.bind(this));
         }
     }
 });

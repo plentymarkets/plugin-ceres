@@ -19,9 +19,7 @@
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
         <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
         <resource name="itemList" :data="{}"></resource>
-        <resource name="checkout"
-                  :data="{ activeShippingCountries: {{ services.country.getActiveCountriesList(lang) | json_encode() }},
-                  currentShippingCountryId: {{ services.checkout.getShippingCountryId() }} }"></resource>
+        <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
 
         <div class="wrapper wrapper-top">
@@ -97,16 +95,18 @@
         {% set lang = services.sessionStorage.getLang() %}
 
         {% if config("PluginCallisto.log.performance.level") == 'development' %}
+            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
+            <script>var Translations = Languages['{{ lang }}'];</script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
-            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
         {% else %}
+            {# TODO remove douplicate import #}
+            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
+            <script>var Translations = Languages['{{ lang }}'];</script>
+
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
         {% endif %}
-        <script>
-            var Translations = Languages['{{ lang }}'];
-        </script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
     </body>
 </html>

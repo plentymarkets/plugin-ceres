@@ -1,16 +1,14 @@
-var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
 
-    props: ["shippingProfileData"],
-
     data: function()
     {
         return {
-            shippingProfileList    : [],
-            selectedShippingProfile: {}
+            checkout: {},
+            waiting: false
         };
     },
 
@@ -20,23 +18,7 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
-        for (var i in this.shippingProfileData)
-        {
-            var entry = this.shippingProfileData[i];
-
-            if (entry)
-            {
-                this.shippingProfileList.push(
-                    {
-                        id: entry.parcelServicePresetId,
-                        name: entry.parcelServiceName,
-                        presetName: entry.parcelServicePresetName,
-                        price: entry.shippingAmount
-                    });
-            }
-        }
-
-        this.addEventListener();
+        ResourceService.bind("checkout", this);
     },
 
     methods: {
@@ -45,30 +27,15 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-        },
+            this.waiting = true;
 
-        /**
-         * Format the price
-         * @param price
-         * @param currency
-         * @returns {*}
-         */
-        formatPrice: function(price, currency)
-        {
-            return MonetaryFormatService.formatMonetary(price, currency);
-        },
-
-        /**
-         * Add the event listener
-         */
-        addEventListener: function()
-        {
-            ApiService.listen(
-                "eventName",
-                function(shippingProfileList)
-                {
-                    this.shippingProfileList = shippingProfileList;
-                }.bind(this));
+            ResourceService
+                .getResource("checkout").set(this.checkout)
+                .done(
+                    function()
+                    {
+                        this.waiting = false;
+                    }.bind(this));
         }
     }
 });
