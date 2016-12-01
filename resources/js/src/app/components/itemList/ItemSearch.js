@@ -11,26 +11,26 @@ Vue.component("item-search", {
     {
         return {
             searchString: "",
-            itemList: {}
+            itemSearch: {}
         };
     },
 
     ready: function()
     {
-        ResourceService.bind("itemList", this);
+        ResourceService.bind("itemSearch", this);
     },
 
     methods:
     {
         search: function()
         {
-            if (document.location.pathname == "/search")
+            if (document.location.pathname === "/search")
             {
-                ItemListService.setSearchString(this.searchString);
+                ItemListService.setSearchString(this.itemSearch.searchString);
             }
             else
             {
-                window.open("/search?searchString=" + this.searchString, "_self", false);
+                window.open("/search?searchString=" + this.itemSearch.searchString, "_self", false);
             }
         }
     }

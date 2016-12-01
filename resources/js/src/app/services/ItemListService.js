@@ -27,6 +27,8 @@ module.exports = (function($)
         {
             _updateUrl();
 
+            ResourceService.getResource("itemSearch").set(searchParams);
+
             return ApiService.get("/rest/item/search", searchParams)
                 .done(function(response)
                 {

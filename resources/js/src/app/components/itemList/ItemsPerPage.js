@@ -12,26 +12,21 @@ Vue.component("items-per-page", {
     data: function()
     {
         return {
-            selectedElement: "",
-            itemList: {}
+            itemSearch: {}
         };
     },
 
     created: function()
     {
         this.selectedElement = this.paginationValues[0];
-    },
-
-    ready: function()
-    {
-        ResourceService.bind("itemList", this);
+        ResourceService.bind("itemSearch", this);
     },
 
     methods:
     {
         itemsPerPageChanged: function()
         {
-            ItemListService.setItemsPerPage(this.selectedElement);
+            ItemListService.setItemsPerPage(this.itemSearch.itemsPerPage);
         }
     }
 });
