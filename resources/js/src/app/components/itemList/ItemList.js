@@ -5,8 +5,6 @@ Vue.component("item-list", {
 
     template: "#vue-item-list",
 
-    props: [],
-
     data: function()
     {
         return {
@@ -18,9 +16,5 @@ Vue.component("item-list", {
     {
         ResourceService.bind("itemList", this);
         ItemListService.setSearchParams(document.location.search);
-    },
-
-    methods:
-    {
     }
 });
