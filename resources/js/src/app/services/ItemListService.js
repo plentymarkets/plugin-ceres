@@ -17,7 +17,6 @@ module.exports = (function($)
         setSearchString: setSearchString,
         setItemsPerPage: setItemsPerPage,
         setOrderBy: setOrderBy,
-        setOrderByKey: setOrderByKey,
         setPage: setPage,
         setSearchParams: setSearchParams
     };
@@ -40,20 +39,6 @@ module.exports = (function($)
         }
 
         return null;
-
-        // console.log("Len:", searchParams.searchString.length);
-
-        // _updateUrl();
-        //
-        // return ApiService.get("/rest/item/search", searchParams)
-        //     .done(function(response)
-        //     {
-        //         ResourceService.getResource("itemList").set(response);
-        //     })
-        //     .fail(function()
-        //     {
-        //         NotificationService.error("Error while searching").closeAfter(5000);
-        //     });
     }
 
     /**
@@ -90,12 +75,6 @@ module.exports = (function($)
     {
         searchParams.orderBy = orderBy.split("_")[0];
         searchParams.orderByKey = orderBy.split("_")[1];
-        _getItemList();
-    }
-
-    function setOrderByKey(orderByKey)
-    {
-        searchParams.orderByKey = orderByKey;
         _getItemList();
     }
 

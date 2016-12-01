@@ -1,4 +1,4 @@
-// var ResourceService = require("services/ResourceService");
+var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
 Vue.component("items-per-page", {
@@ -12,13 +12,19 @@ Vue.component("items-per-page", {
     data: function()
     {
         return {
-            selectedElement: ""
+            selectedElement: "",
+            itemList: {}
         };
     },
 
     created: function()
     {
         this.selectedElement = this.paginationValues[0];
+    },
+
+    ready: function()
+    {
+        ResourceService.bind("itemList", this);
     },
 
     methods:
