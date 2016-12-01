@@ -5,8 +5,6 @@ Vue.component("item-search", {
 
     template: "#vue-item-search",
 
-    props: [],
-
     data: function()
     {
         return {
