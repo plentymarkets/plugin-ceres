@@ -7,7 +7,7 @@ module.exports = (function($)
     var searchParams =
         {
             searchString: "",
-            itemsPerPage: 0,
+            itemsPerPage: 20,
             orderBy: "itemName",
             orderByKey: "ASC",
             page: 1
