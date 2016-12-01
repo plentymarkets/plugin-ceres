@@ -18,7 +18,7 @@
     <body>
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
         <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
-        <resource name="itemList" :data="{}"></resource>
+        <resource name="itemSearch" :data="{}"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
 
