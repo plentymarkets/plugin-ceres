@@ -1,3 +1,5 @@
+{{ component( "PluginCallisto::Basket.Components.AddItemToBasket" ) }}
+
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCallisto.item.name") %}
 {% set itemData = config("PluginCallisto.item.data")|split(', ') %}
@@ -11,11 +13,21 @@
                 <i class="fa fa-chevron-up" aria-hidden="true"></i>
             </div>
             <ul>
-                <li class="img-contain-container square-container"><img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png"></li>
-                <li class="img-contain-container square-container"><img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png"></li>
+                <li class="img-contain-container square-container">
+                    <img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png">
+                </li>
+                <li class="img-contain-container square-container">
+                    <img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png">
+                </li>
+                <li class="img-contain-container square-container">
+                    <img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png">
+                </li>
+                <li class="img-contain-container square-container">
+                    <img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png">
+                </li>
+                <li class="img-contain-container square-container">
+                    <img class="img-fluid" data-original="{{ plugin_path('PluginCallisto') }}/images/100x100.png">
+                </li>
             </ul>
             <div class="thumb-scroll-cmd scroll-down">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -23,20 +35,18 @@
         </div>
 
         <div class="thumb-controls">
-            <button class="btn btn-primary thumb-btn-buy" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">
-                {{ trans("PluginCallisto::Template.addToBasket") }}
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->
-            </button>
+            <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="false"></add-item-to-basket>
         </div>
 
         <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
                     {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
-                    <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+                    <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}"
+                         alt="{{ item.itemDescription.name1 }}"/>
                     <noscript>
-                        <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>
+                        <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}"
+                             alt="{{ item.itemDescription.name1 }}"/>
                     </noscript>
                 </div>
             </div>
@@ -71,7 +81,7 @@
 
                 {% endif %}
 
-                <span class="tag bg-{{storeSpecialColor}}">
+                <span class="tag bg-{{ storeSpecialColor }}">
                     {{ storeSpecial }}
                 </span>
 
@@ -88,7 +98,7 @@
             <div class="thumb-meta">
                 <div class="prices">
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
-                        and item.variationRecommendedRetailPrice.price != '' %}
+                    and item.variationRecommendedRetailPrice.price != '' %}
                         <del class="crossprice">
                             {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                         </del>

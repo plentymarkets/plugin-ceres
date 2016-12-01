@@ -23,6 +23,7 @@ Vue.component("user-login-handler", {
     ready: function()
     {
         ResourceService.bind("user", this, "isLoggedIn");
+
         this.setUsername(this.userData);
         this.addEventListeners();
     },

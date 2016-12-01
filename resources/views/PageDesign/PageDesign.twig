@@ -3,11 +3,13 @@
 {{ component( "PluginCallisto::Basket.Components.BasketPreview" ) }}
 {{ component( "PluginCallisto::Customer.Components.Login" ) }}
 {{ component( "PluginCallisto::Customer.Components.Registration" ) }}
+{{ component( "PluginCallisto::Basket.Components.AddItemToBasketOverlay" ) }}
 
 <!DOCTYPE html>
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set fixNavBarPos = config("PluginCallisto.header.fixed_navbar") %}
+{% set showItemConfirm = config("PluginCallisto.basket.add_item_to_basket_confirm") %}
 
 <html lang="{{ lang }}" data-framework="vue">
 
@@ -19,6 +21,7 @@
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
         <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
         <resource name="itemSearch" :data="{}"></resource>
+        <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
 
@@ -88,6 +91,11 @@
                 </div>
             </div>
             <!-- ./REGISTRATION MODAL -->
+
+            <!-- BASKET MODAL -->
+            <add-item-to-basket-overlay :show-overlay="{{ showItemConfirm }}"></add-item-to-basket-overlay>
+            <!-- ./BASKET MODAL -->
+
         </div>
 
         {{ Loader.include_components() }}
@@ -107,6 +115,5 @@
 
             <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
         {% endif %}
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
     </body>
 </html>

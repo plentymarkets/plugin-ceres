@@ -129,7 +129,7 @@ Vue.component("variation-select", {
                     var id = variation.attributes[i].attributeId;
                     var val = variation.attributes[i].attributeValueId;
 
-                    if (!!attributes[id] && attributes[id] !== val)
+                    if (!!attributes[id] && attributes[id] != val)
                     {
                         return false;
                     }
