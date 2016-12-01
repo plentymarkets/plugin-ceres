@@ -485,7 +485,7 @@ module.exports = (function($)
             if (url)
             {
                 return ApiService
-                    .post(url, value)
+                    .post(url, JSON.stringify(value))
                     .done(function(response)
                     {
                         data.value = response;

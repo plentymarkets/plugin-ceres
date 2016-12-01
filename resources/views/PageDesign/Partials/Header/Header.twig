@@ -3,6 +3,7 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "PluginCallisto::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 
@@ -14,18 +15,22 @@
             <ul id="controlsList" class="controls-list list-inline">
 
                 <li class="list-inline-item control-user">
-                    <user-login-handler :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
+                    <user-login-handler
+                            :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
 
                 <li class="list-inline-item dropdown control-languages">
-                    <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false" aria-controls="countrySettings"
+                    <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
+                       aria-controls="countrySettings"
                        data-parent="#controlsList">
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
 
                 <li class="list-inline-item control-search">
-                    <a class="" data-toggle="collapse" href="#searchBox" aria-expanded="false" aria-controls="searchBox"
+                    <a class="" data-toggle="collapse" href="#searchBox"
+                       aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                       aria-controls="searchBox"
                        data-parent="#controlsList">
                         <i class="fa fa-search"></i>
                         <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
@@ -45,14 +50,8 @@
 
 <div class="container-max">
     <div class="row">
-        <div id="searchBox" class="cmp cmp-search-box collapse">
-            <div class="search-box-inner">
-                <input type="search" class="search-input" name="" value="" placeholder="Begriff eingeben und…">
-                <button class="search-submit" type="submit">
-                    <i class="fa fa-search hidden-sm-up"></i>
-                    <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
-                </button>
-            </div>
+        <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
+            <item-search></item-search>
         </div>
 
         <div id="countrySettings" class="cmp cmp-country-settings collapse">
