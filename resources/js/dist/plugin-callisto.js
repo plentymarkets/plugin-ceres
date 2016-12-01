@@ -32412,7 +32412,7 @@ Vue.component("add-item-to-basket-overlay", {
                 }
             }
 
-            return window.location.host + "/" + path;
+            return "/" + path;
         }
     }
 });
