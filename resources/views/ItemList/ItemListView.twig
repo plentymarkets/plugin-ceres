@@ -16,14 +16,14 @@
             <div class="col-xs-12 col-lg-5">
                 <item-list-sorting :sort-data="{{ config("PluginCallisto.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
                 <items-per-page :pagination-values="{{ config("PluginCallisto.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
-                <pagination items-per-page="{{ config('PluginCallisto.pagination.defaultItemsPerPage') }}"></pagination>
+                <pagination></pagination>
             </div>
 
             <item-list></item-list>
         </div>
         <div class="list-controls m-b-3 row">
             <div class="col-xs-12">
-                <pagination items-per-page="{{ config('PluginCallisto.pagination.defaultItemsPerPage') }}"></pagination>
+                {#<pagination></pagination>#}
             </div>
         </div>
     </div>

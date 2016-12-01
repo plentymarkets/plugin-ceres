@@ -18,7 +18,6 @@ Vue.component("items-per-page", {
 
     created: function()
     {
-        this.selectedElement = this.paginationValues[0];
         ResourceService.bind("itemSearch", this);
     },
 

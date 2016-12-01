@@ -5,28 +5,17 @@ Vue.component("pagination", {
 
     template: "#vue-pagination",
 
-    props: [
-        "itemsPerPage"
-    ],
-
     data: function()
     {
         return {
-            itemList: {
-                page       : 1,
-                totalsCount: 0
-            }
+            itemSearch: {},
+            itemList: {}
         };
     },
 
     created: function()
     {
-        // TODO
-        // ItemListService.setItemsPerPage(this.itemsPerPage, false);
-    },
-
-    ready: function()
-    {
+        ResourceService.bind("itemSearch", this);
         ResourceService.bind("itemList", this);
     },
 
@@ -47,9 +36,9 @@ Vue.component("pagination", {
 
         pageMax: function()
         {
-            var pageMax = this.itemList.totalsCount / this.itemsPerPage;
+            var pageMax = this.itemList.totalsCount / this.itemSearch.itemsPerPage;
 
-            if (this.itemList.totalsCount % this.itemsPerPage > 0)
+            if (this.itemList.totalsCount % this.itemSearch.itemsPerPage > 0)
             {
                 pageMax += 1;
             }
