@@ -3,6 +3,7 @@
 {{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "PluginCallisto::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 
@@ -46,13 +47,7 @@
 <div class="container-max">
     <div class="row">
         <div id="searchBox" class="cmp cmp-search-box collapse">
-            <div class="search-box-inner">
-                <input type="search" class="search-input" name="" value="" placeholder="Begriff eingeben und…">
-                <button class="search-submit" type="submit">
-                    <i class="fa fa-search hidden-sm-up"></i>
-                    <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
-                </button>
-            </div>
+            <item-search></item-search>
         </div>
 
         <div id="countrySettings" class="cmp cmp-country-settings collapse">

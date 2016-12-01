@@ -24,18 +24,36 @@ module.exports = (function($)
 
     function _getItemList()
     {
-        _updateUrl();
+        if (searchParams.searchString.length >= 3)
+        {
+            _updateUrl();
 
-        return ApiService.get("/rest/item/search", searchParams)
-            .done(function(response)
-            {
-                ResourceService.getResource("itemList").set(response);
+            return ApiService.get("/rest/item/search", searchParams)
+                .done(function(response)
+                {
+                    ResourceService.getResource("itemList").set(response);
+                })
+                .fail(function()
+                {
+                    NotificationService.error("Error while searching").closeAfter(5000);
+                });
+        }
 
-            })
-            .fail(function()
-            {
-                NotificationService.error("Error while searching").closeAfter(5000);
-            });
+        return null;
+
+        // console.log("Len:", searchParams.searchString.length);
+
+        // _updateUrl();
+        //
+        // return ApiService.get("/rest/item/search", searchParams)
+        //     .done(function(response)
+        //     {
+        //         ResourceService.getResource("itemList").set(response);
+        //     })
+        //     .fail(function()
+        //     {
+        //         NotificationService.error("Error while searching").closeAfter(5000);
+        //     });
     }
 
     /**
