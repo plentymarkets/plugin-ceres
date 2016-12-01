@@ -272,7 +272,7 @@ Vue.component("basket-list-item", {
                 {
                     ApiService.setToken(response);
 
-                    self.itemCondition = response.data;
+                    self.itemCondition = response;
 
                 })
                 .fail(function(response)
