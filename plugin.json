@@ -211,9 +211,9 @@
             "description"   : "Add an icon to the certified by container in the startpage"
         },
         {
-            "key"           : "Header.SocialMedia",
-            "name"          : "Header: Social media container",
-            "description"   : "Add content to the social media in the header"
+            "key"           : "Header.LeftSide",
+            "name"          : "Header: Left side container",
+            "description"   : "Add content to the left side in the header"
         }
     ],
     "dataProviders"     : []
