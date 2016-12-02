@@ -4440,11 +4440,10 @@ module.exports = (function($)
          */
         function push(value)
         {
-
             if (url)
             {
                 return ApiService
-                    .post(url, JSON.stringify(value))
+                    .post(url, value)
                     .done(function(response)
                     {
                         data.value = response;
