@@ -1,0 +1,222 @@
+.cmp-product-thumb{
+    padding: .8rem;
+    width: 100%;
+    overflow: visible;
+    border: 1px solid $gray-lighter;
+    margin-bottom: $grid-gutter-width/2;
+
+    .thumb-background{
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        bottom: -2px;
+        left: -1px;
+        background-color: white;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        border: 1px solid transparent;
+
+        transform-origin: top right;
+        transform: scaleX(1) scaleY(1);
+
+        transition: all 200ms ease-in-out;
+    }
+
+    .thumb-extras{
+        display: none;
+        position: absolute; // remove from flow
+        top: 0;
+        left: 0;
+        width: 33.33%;
+        height: 100%;
+        overflow: hidden;
+
+        transition: height 100ms,
+                    transform 200ms 50ms;
+
+        ul{
+            @include reset-list();
+        }
+    }
+
+    .thumb-controls{
+        position: absolute;
+        width: calc(100% - 120px);
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        overflow: hidden;
+        transition: all 200ms 100ms ease-in-out;
+    }
+
+    .thumb-inner{
+        position: relative;
+        height: 100%;
+        transition: all 400ms;
+    }
+
+    .thumb-image{
+        position: relative;
+        width: 120px;
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+    }
+
+    .main-image{
+        @include img-contain();
+        position: absolute;
+        background-color: white;
+    }
+
+    //TODO create separate mixin
+    .special-tags{
+        position: absolute;
+        top: 0;
+        right: auto;
+        bottom: auto;
+        left: 0;
+
+        padding: .5rem;
+
+        .special-tag,
+        .tag{
+            display: block;
+            padding: .3em .5em .2rem;
+            font-size: .9rem;
+            font-weight: 300;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,.4);
+        }
+    }
+
+    .thumb-content{
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: calc( 100% - 120px );
+        height: auto;
+        padding: 0 .8rem;
+        margin-left: -.3em;
+        background-color: white;
+
+        transition: all 200ms ease-in-out;
+    }
+
+    .thumb-title{
+        display: block;
+        position: relative;
+        text-align:center;
+        font-weight: 700;
+        color: $gray;
+    }
+
+    .thumb-meta{
+        margin-top: .5rem;
+        text-align:center;
+
+    }
+
+    .crossprice{
+        font-size: .81em;
+        font-weight: 700;
+        color: $gray-light;
+    }
+
+    .price {
+        color: $gray;
+        line-height: 1.1;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .thumb-buy{
+        display: block;
+    }
+
+    @include media-breakpoint-up(sm){
+        padding: 0;
+        margin-bottom: $grid-gutter-width;
+
+
+        .thumb-background{
+            border: 1px solid $gray-lighter;
+            display: block;
+        }
+
+        .thumb-extras{
+            display: flex;
+            flex-flow: column nowrap;
+            border-right: 2px solid transparent;
+
+            ul{
+                flex: 1 1 auto;
+                overflow: auto;
+
+                li{
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+
+        .thumb-scroll-cmd {
+            flex: 0 0 auto;
+            text-align: center;
+            padding: .4rem;
+        }
+
+        .thumb-controls{
+            left: 0;
+            width: 100%;
+            height: 0;
+        }
+
+        .thumb-btn-buy{
+            min-height: 2rem;
+        }
+
+        .thumb-content{
+            padding: .8rem;
+            width: 100%;
+            margin: 0;
+        }
+
+        .thumb-title{
+            font-weight: 400;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .thumb-image{
+            width: 100%;
+        }
+
+        &:hover{
+            z-index: 1000;
+
+            .thumb-background{
+                transform: scaleX(1.33) scaleY(1.15);
+                box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
+            }
+
+            .thumb-extras{
+                transform: translate(-100% , 0);
+                height: 115%;
+
+                transition: transform 200ms,
+                            height 100ms 100ms;
+            }
+
+            .thumb-controls{
+                transform: translate(0 , 100%);
+                height: 15%;
+            }
+        }
+
+    }
+
+    @include media-breakpoint-up(md){
+
+    }
+}

@@ -1,0 +1,110 @@
+.to-top {
+    display: block;
+    height: 4rem;
+    background-color: $gray-dark;
+    color: white;
+    text-align: center;
+    padding: .5rem .5rem;
+    text-decoration:none!important;
+
+    transition: all 200ms;
+    
+    &:hover {
+        background-color: $gray-light;
+    }
+}
+
+.footertop{
+	display: block;
+	background-color: $gray-lighter;
+}
+
+.footer{
+	display: block;
+	background-color: $gray-lightest;
+	
+	a{
+		color: $gray-dark;
+	}
+
+	.footer-features{
+		border-top: 1px solid $gray-lighter;
+		background-color: white;
+		color: $gray-dark;
+	}
+
+	.footer-content{
+
+	}
+
+	.footer-services{
+		display: flex;
+		flex-flow: column nowrap;
+		
+		.services-payment,
+		.services-shipping,
+		.services-certificate{
+			display: inline-block;
+			display: inline-flex;
+			flex-flow: row wrap;
+			flex: 0 1 auto;
+		}
+
+		.services-certificate{
+			flex: 1 0 auto;
+		}
+
+		.services-title{
+			width: 100%;
+		}
+
+		a{
+			flex: 1 1 auto;
+			display: inline-block;
+			max-width: 5rem;
+    		margin-right: .5rem;
+		}
+
+		img{
+			max-height: 4rem;
+		}
+	}
+
+	.footer-column{
+
+		h5{
+			font-weight: 700;
+		}
+	}
+
+	.newsletter{
+		
+	}
+
+	.btn-mail {
+	    background-color: $gray;
+	    color: white;
+
+		i {
+	    	padding: 0 1rem;
+		}
+
+		&:hover {
+			background-color: $gray-light;
+		}
+	}
+
+	@include media-breakpoint-up(sm){
+		.footer-services{
+			flex-flow: row nowrap;
+		}
+	}
+
+	@include media-breakpoint-up(md){
+
+	}
+
+	@include media-breakpoint-up(lg){
+
+	}
+}

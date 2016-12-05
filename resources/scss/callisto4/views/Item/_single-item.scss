@@ -1,0 +1,218 @@
+
+.single{
+
+    .main-image{
+        img{
+            width: 100%;
+        }
+    }
+
+    .title{
+        //font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .producer{
+        line-height: 1.1;
+        font-weight: 700;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .single-description {
+        font-size: .85rem;
+    }
+    .price {
+        display: block;
+        font-weight: bold;
+        line-height: 1;
+    }
+    .input-number {
+        text-align:center;
+    }
+
+    .vat {
+        line-height: 1.4;
+        margin-top: 0;
+        margin-bottom: .5em;
+        color:#020260;
+    }
+
+    .crosssellers {
+        img {
+            max-width: 100%;
+            width: auto;
+        }
+        .special-tags{
+            padding: .3rem;
+        }
+    }
+    .nav-tabs {
+        .nav-item {
+            float: none;
+            .nav-link {
+                border:1px solid $nav-tabs-border-color;
+                &.active,
+                &:hover {
+                    border:1px solid $nav-tabs-border-color;
+                    color: $gray-darker;
+                    background:$gray-lighter2;
+                }
+            }
+            &+.nav-item {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+.owl-carousel-single {
+    .owl-controls {
+        position: absolute;
+        top: 50%;
+        z-index:950;
+        width: 100%;
+        .owl-buttons {
+            &>div {
+                background: rgba(255,255,255,0.75);
+                padding: 1rem;
+                position: absolute;
+                transform: translateY(-50%);
+                &.owl-next {
+                    right:0;
+                }
+                &:hover {
+                    background: rgba(255,255,255,1);
+                }
+            }
+        }
+    }
+
+    .owl_item{
+        margin: 5px;
+        a {
+            width: 100%;
+        }
+    }
+}
+
+.owl-carousel-preview {
+    .owl-item {
+        .owl_item{
+            padding: 5px;
+            margin:5px 0;
+            cursor: pointer;
+            &.synced {
+                background:$brand-primary;
+            }
+        }
+
+    }
+    .owl-controls {
+            position: absolute;
+            top: 50%;
+            z-index: 9999;
+            width: 100%;
+            .owl-buttons {
+                &>div {
+                    background: rgba(255,255,255,0.75);
+                    padding: .5rem;
+                    position: absolute;
+                    transform: translateY(-50%);
+                    &.owl-next {
+                        right:0;
+                    }
+                    &:hover {
+                        background: rgba(255,255,255,1);
+                    }
+                }
+            }
+        }
+}
+
+.availability_1,
+.availability_2 {background-color: $availability_1;}
+.availability_3,
+.availability_4 {background-color: $availability_3;}
+.availability_5 {background-color: $availability_5;}
+
+
+.rating{
+    .tag{
+        padding-right: 0;
+        overflow: hidden;
+        cursor: pointer;
+
+        .amount{
+            padding: 0.2rem .6rem 0.2rem .4rem;
+            margin-left: .2rem;
+            background-color: #4d5154;
+        }
+    }
+}
+
+
+
+
+.rezension {
+    display: inline-block;
+}
+
+.img-thumbnail {
+    border:none;
+    border-radius:none;
+    padding: .75rem .45rem .25rem 0;
+}
+
+.wishlist {
+    &:hover {
+        color: #d9534f!important;
+        text-decoration: none;
+    }
+}
+
+.single-rightside {
+    .shariff {
+        .orientation-horizontal {
+            li {
+                .fa {
+                    line-height: 30px;
+                    text-align: center;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}
+@include media-breakpoint-only(md) {
+    .single {
+         .price {
+                float: right;
+            }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .single {
+        .nav-tabs {
+            .nav-item {
+                float: left;
+                .nav-link {
+                    border:1px solid $nav-tabs-border-color;
+                    &.active,
+                    &:hover {
+                        border:1px solid $nav-tabs-border-color;
+                        color: $gray;
+                        background:white;
+                    }
+                    &.active {
+                        border-bottom: 1px solid transparent;
+                    }
+                }
+                &+.nav-item {
+                    margin-left: -1px;
+                }
+            }
+        }
+    }
+}

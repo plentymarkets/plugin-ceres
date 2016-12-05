@@ -1,0 +1,69 @@
+.cmp-country-settings{
+	background-color: $gray-lighter2;
+	border-bottom: 1px solid $gray-lighter;
+
+	.country-settings-inner{
+		padding: 1rem;
+		display: flex;
+    	flex-flow: row nowrap;
+	}
+
+	.language-settings{
+
+	}
+
+	.shipping-settings{
+
+	}
+
+	.list-title{
+
+	}
+
+	ul{
+		@include reset-list();
+
+		li{
+			width: 100%;
+			padding: 0;
+			display: inline-block;
+			float: left;
+
+			a{
+				display: inline-block;
+				padding: .8rem;
+			}
+
+			&.active{
+				a{
+					background-color: $gray-lighter;
+				}
+			}
+		}
+	}
+
+	@include media-breakpoint-up(sm){
+
+	} 
+
+	@include media-breakpoint-up(md){
+		ul{
+			li{
+				width: 50%;
+				padding-right: .8rem;
+			}
+		}
+	} 
+
+	@include media-breakpoint-up(lg){
+		ul{
+			li{
+				width: 33.33%;
+			}
+		}
+	} 
+}
+
+.flag-icon-en {
+	background-image: url(../images/flags/4x3/gb.svg);
+}

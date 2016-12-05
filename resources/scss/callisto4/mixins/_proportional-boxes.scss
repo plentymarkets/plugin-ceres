@@ -1,0 +1,72 @@
+$widths: 1, 2, 3, 4, 5, 6;
+$heights: 1, 2, 3, 4, 5, 6;
+
+
+//helper for removing paddings from bootstrap columns
+.prop-row{
+    display: flex;
+    flex-flow: row wrap;
+    
+    [class*="col-"]{
+        padding-right: 0;
+        padding-left: 0;
+    }
+    
+}
+
+.prop-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: $grid-gutter-width/2;
+}
+
+
+@mixin make-props($widths: $widths, $heights: $heights, $breakpoints: $grid-breakpoints) {
+
+    // Common properties for all breakpoints
+    %base-prop {
+        position: relative;
+        width: 100%!important;
+        height: 0!important;
+    }
+
+    $breakpoint-counter: 0;
+    @each $breakpoint in map-keys($breakpoints) {
+
+        $breakpoint-counter: ($breakpoint-counter + 1);
+
+        @each $i in $widths {
+            @each $j in $heights {
+                .prop-#{$breakpoint}-#{$i}-#{$j} {
+                    @extend %base-prop;
+                }
+            }
+        }
+
+        @include media-breakpoint-up($breakpoint, $breakpoints) {
+            
+            .sqr-#{$breakpoint}-reset{
+                height: auto;
+                padding-bottom: 0;
+            }
+
+            @each $i in $widths {
+            	@each $j in $heights {
+                    .prop-#{$breakpoint}-#{$i}-#{$j} {
+                        @include make-prop($i, $j);
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@mixin make-prop($width, $height) {
+    padding-bottom: percentage($height / $width);
+}
+
+@include make-props();

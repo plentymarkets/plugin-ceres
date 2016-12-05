@@ -1,0 +1,31 @@
+.cmp-order-item{
+
+	@extend .cmp-basket-item; 
+	position: relative;
+	margin-bottom: 2em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid $gray-lighter;
+    
+
+	@include media-breakpoint-up(sm){
+
+		.item-name:after{
+			content: none!important;
+		}
+
+		.item-unit-price,
+		.item-total-price{
+			width: auto!important;
+			text-align: right;
+		}
+
+	}
+
+	@include media-breakpoint-up(md){
+		
+	}
+
+	@include media-breakpoint-up(lg){
+		
+	}
+}

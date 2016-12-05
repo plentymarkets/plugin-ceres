@@ -1,0 +1,22 @@
+<script type="x/template" id="vue-quantity-input">
+    <div class="input-group" :class="{'vert':vertical}">
+        <span class="input-group-btn" v-if="vertical">
+            <button class="btn btn-secondary" type="button" @click="value++" :class="{ 'disabled' : value >= max }">+</button>
+        </span>
+
+        <span class="input-group-btn" v-if="!vertical">
+            <button class="btn btn-secondary" type="button" @click="value--" :class="{ 'disabled' : value <= min }">-</button>
+        </span>
+
+        <input type="text" class="form-control text-xs-center" size="3" maxlength="3" v-model="value">
+
+        <span class="input-group-btn" v-if="vertical">
+            <button class="btn btn-secondary" type="button" @click="value--" :class="{ 'disabled' : value <= min }">-</button>
+        </span>
+
+        <span class="input-group-btn" v-if="!vertical">
+            <button class="btn btn-secondary" type="button" @click="value++" :class="{ 'disabled' : value >= max }">+</button>
+        </span>
+
+    </div>
+</script>

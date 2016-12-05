@@ -1,0 +1,13 @@
+<script type="x/template" id="vue-shipping-country-select">
+    <ul>
+        <div v-for="shippingCountry in localization.activeShippingCountries">
+            <li :class="{'active': localization.currentShippingCountryId == shippingCountry.id}">
+                <a data-toggle="collapse" href="#countrySettings" v-shipping-country="shippingCountry.id"
+                   @click="localization.currentShippingCountryId = shippingCountry.id">
+                    <i class="flag-icon" v-bind:class="shippingCountry.countryFlagClass"></i>
+                    ${shippingCountry.currLangName}
+                </a>
+            </li>
+        </div>
+    </ul>
+</script>

@@ -1,0 +1,246 @@
+.cmp-basket-item{
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	border-bottom:1px solid $gray-lighter;
+
+	.toggle-description, //TODO remove this class. deprecated
+	.item-toggle{
+	    display: none;
+	}
+
+	.item-image{
+		flex: 0 1 6em;
+
+		@include img-contain();
+
+		img{
+			width: 100%;
+			height: auto;
+		}
+	}
+	
+	.item-details{
+		margin-top: 1em;
+
+		&>div[class^="item-"]{
+			display: block;
+			margin-bottom: .5rem;
+
+			&:last-of-type{
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.item-name{
+		position: relative;
+	    display: flex;
+        text-overflow: ellipsis;
+        max-height: 3em;
+        overflow: hidden;
+        flex-direction: column;
+        font-weight: 700;
+        margin-bottom: .5rem;
+
+        &:after{
+            content: "…";
+            display: inline-block;
+            height: 50%;
+            position:absolute;
+            right: .25em;
+            bottom: 0; 
+            background-color: white;
+        }
+	}
+
+	.item-quantity{
+		position: relative;
+		display: flex;
+	    flex: 1;
+		flex-flow: column wrap;
+	    height: 6em;
+		
+		.item-unit-price{
+			align-self: flex-end;
+			flex: 0;
+		}
+		
+		.item-total-price{
+			flex: 0;
+			font-size: 1.5em;
+		    font-weight: 700;
+		    text-align: right;
+		}
+
+		.input-group.vert{
+			display: block;
+		    padding: 0 1em;
+		    flex: 1;
+		    width: 5em;
+		}
+
+		.btn{
+			padding-top: .25rem;
+			padding-bottom: .25rem;
+		}
+
+		.form-control{
+			padding-left: .25rem;
+		    padding-right: .25rem;
+		    text-align: center;
+		}
+	}
+
+	.varianten-content{
+		padding-top: 0;
+		transition: all 300ms;
+	}
+	
+	.varianten-content,
+	.item-description{
+		max-height: 0;
+		height: auto;
+		overflow: hidden;
+		margin-bottom: 0;
+
+		transition: max-height 300ms; 
+	}
+
+	.expand-btn{
+		display: block;
+		position: relative;
+		z-index: 999;
+		width: 100%;
+		text-align: center;
+		cursor: pointer;
+
+		&:before{
+			content: "";
+			display: block;
+			width: 100%;
+			height: 1.5em;
+			border-bottom: 1px solid $gray-lighter;
+			background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+			background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+			background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+		}
+
+		&:after{
+			content: 'Mehr';
+			font-weight: 700;
+			color: $gray-light;
+		    display: inline-block;
+		    position: relative;
+		    background-color: white;
+		    padding: 0 .5em;
+		    top: -.8em;
+		}
+	}
+
+	.toggle-description:checked{
+		& ~ .item-description{
+			max-height: 25em;// 10 lines
+		}
+
+		& ~ .expand-btn{
+			&:after{
+				content: 'Weniger';
+			}
+		}
+	}
+
+	.toggle-variations:checked{
+		& ~ .varianten-content{
+			padding-top: 1em;
+			max-height: 25em;// 10 lines
+		}
+	}
+
+	.item-remove{
+		position: absolute;
+	    bottom: 0;
+	    right: 0;
+	    line-height: 1;
+	    color: $gray-lighter;
+	    cursor: pointer;
+		transition: color 250ms;
+			&:hover {
+	    	color: $brand-danger;
+			}
+	}
+
+	@include media-breakpoint-up(sm){
+		flex-flow: row nowrap;
+
+		.item-image{
+			
+		}
+		
+		.item-details{
+			order: 2;
+			flex: 1;
+			margin-top: 0;
+			margin-left: 1em;
+		}
+
+		.varianten{
+			padding-right: 1em;
+		}
+
+		.item-quantity{
+			position: static;
+			order: 3;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+
+			.item-unit-price{
+				align-self: flex-start;
+				text-align: center;
+				order: 1;
+				flex: 0 1 auto;
+			}
+
+			.input-group.vert{
+				align-self: flex-start;
+				flex: 0 1 auto;
+				display: table;
+				order: 2;
+				left:20%;
+			}
+
+			.item-total-price{
+				align-self: flex-start;
+				flex: 1 1 auto;
+				order: 3;
+			}
+		}
+
+		.item-remove{
+		    bottom: 1em;
+		    color: $gray-lighter;
+
+		    &:hover{
+		    	color: $brand-danger;
+		    }
+		}
+
+	}
+
+	@include media-breakpoint-up(md){
+		.item-quantity{
+			.input-group.vert{
+				left:5%;
+			}
+		}
+	}
+
+	@include media-breakpoint-up(lg){
+		.item-quantity{
+			.input-group.vert{
+				left:20%;
+			}
+		}
+	}
+}

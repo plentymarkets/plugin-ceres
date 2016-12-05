@@ -1,0 +1,43 @@
+.cmp-search-box{
+	background-color: $gray-lighter2;
+	border-bottom: 1px solid $gray-lighter;
+	
+	.search-box-inner{
+		display: flex;
+    	flex-flow: row nowrap;
+    	padding: 1rem;
+	}
+
+	.search-input{
+		flex: 1 0 70%;
+		display: inline-block;
+		vertical-align: top;
+		font-size: 1.3rem;
+		line-height: 1;
+		border: none;
+
+		padding: .4rem 1rem;
+	    margin: .6rem 0;
+	    border-bottom: 1px solid $gray-lighter;
+	}
+
+	.search-submit{
+		flex: 1 0 20%;
+	    display: inline-block;
+	    vertical-align: top;
+	    font-size: 1.3rem;
+	    line-height: 1;
+	    background: transparent;
+	    padding: .4rem 1rem;
+	    margin: .6rem 0;
+	    background-color: $gray-lighter;
+	    color: $gray;
+	    border: none;
+	    border-left: 1px solid $gray-lighter;
+
+	    &:hover{
+	    	color: $gray-lighter;
+	    	background-color: $gray;
+	    }
+	}
+}
