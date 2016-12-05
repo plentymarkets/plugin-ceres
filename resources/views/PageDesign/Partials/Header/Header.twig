@@ -1,16 +1,16 @@
-{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ component( "PluginCallisto::Customer.Components.UserLoginHandler" ) }}
-{{ component( "PluginCallisto::PageDesign.Components.ShippingCountrySelect" ) }}
-{{ component( "PluginCallisto::PageDesign.Components.ShopLanguageSelect" ) }}
-{{ component( "PluginCallisto::ItemList.Components.ItemSearch" ) }}
+{{ component( "PluginCeres::Customer.Components.UserLoginHandler" ) }}
+{{ component( "PluginCeres::PageDesign.Components.ShippingCountrySelect" ) }}
+{{ component( "PluginCeres::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "PluginCeres::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 
 <header class="top-bar">
     <div class="container-max">
         <div class="row">
-            {{ LayoutContainer.show("PluginCallisto::Header.LeftSide") }}
+            {{ LayoutContainer.show("PluginCeres::Header.LeftSide") }}
 
             <ul id="controlsList" class="controls-list list-inline">
 
@@ -33,7 +33,7 @@
                        aria-controls="searchBox"
                        data-parent="#controlsList">
                         <i class="fa fa-search"></i>
-                        <span class="hidden-xs-down">{{ trans("PluginCallisto::Template.generalSearchNoDot") }}</span>
+                        <span class="hidden-xs-down">{{ trans("PluginCeres::Template.generalSearchNoDot") }}</span>
                     </a>
                 </li>
 
@@ -59,7 +59,7 @@
 
                 <div class="language-settings col-xs-12 col-sm-6">
                     <div class="list-title">
-                        <strong>{{ trans("PluginCallisto::Template.generalSelectLanguage") }}</strong>
+                        <strong>{{ trans("PluginCeres::Template.generalSelectLanguage") }}</strong>
                         <hr>
                     </div>
                     <shop-language-select country-flag-prefix="flag-icon-"/>
@@ -67,7 +67,7 @@
 
                 <div class="shipping-settings col-xs-12 col-sm-6">
                     <div class="list-title">
-                        <strong>{{ trans("PluginCallisto::Template.generalSelectShippingCountry") }}</strong>
+                        <strong>{{ trans("PluginCeres::Template.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
                     <shipping-country-select country-flag-prefix="flag-icon-"/>
@@ -75,11 +75,11 @@
             </div>
         </div>
 
-        {% include "PluginCallisto::PageDesign.Partials.Header.Navigation" %}
+        {% include "PluginCeres::PageDesign.Partials.Header.Navigation" %}
 
         <!-- breadcrumb -->
         {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
-            {% include "PluginCallisto::PageDesign.Partials.Header.Breadcrumb" %}
+            {% include "PluginCeres::PageDesign.Partials.Header.Breadcrumb" %}
         {% endif %}
 
     </div>

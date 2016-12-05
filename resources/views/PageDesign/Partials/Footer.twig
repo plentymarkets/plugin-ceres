@@ -1,9 +1,9 @@
-{% import "PluginCallisto::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set numberOfCols = config('PluginCallisto.footer.number_of_cols') %}
+{% set numberOfCols = config('PluginCeres.footer.number_of_cols') %}
 {% set colSize = (12 / (numberOfCols + 1)) %}
 {% set displayedCategories = [] %}
-{% set numberOfFeatures = config('PluginCallisto.footer.number_of_features') %}
+{% set numberOfFeatures = config('PluginCeres.footer.number_of_features') %}
 
 <div class="footer">
     <a href="#" class="to-top hidden-md-up">
@@ -16,7 +16,7 @@
                 {% for i in 1..numberOfFeatures %}
                     <div class="col-xs-12 col-sm-4 text-xs-center">
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
-                        {{ config('PluginCallisto.footer.store_feature_' ~ i) }}
+                        {{ config('PluginCeres.footer.store_feature_' ~ i) }}
                     </div>
                 {% endfor %}
             </div>
@@ -27,24 +27,24 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
-                    {% set paymentMethodContent = LayoutContainer.show("PluginCallisto::Homepage.PaymentMethods") %}
+                    {% set paymentMethodContent = LayoutContainer.show("PluginCeres::Homepage.PaymentMethods") %}
                     {% if paymentMethodContent|trim is not empty %}
                         <div class="services-payment m-b-1">
-                            <strong class="services-title">{{ trans("PluginCallisto::Template.orderPaymentMethods") }}</strong>
+                            <strong class="services-title">{{ trans("PluginCeres::Template.orderPaymentMethods") }}</strong>
                             {{ paymentMethodContent }}
                         </div>
                     {% endif %}
-                    {% set shippingContent = LayoutContainer.show("PluginCallisto::Homepage.Shipping") %}
+                    {% set shippingContent = LayoutContainer.show("PluginCeres::Homepage.Shipping") %}
                     {% if shippingContent|trim is not empty %}
                         <div class="services-shipping m-b-1">
-                            <strong class="services-title">{{ trans("PluginCallisto::Template.generalOrderShippedBy") }}</strong>
+                            <strong class="services-title">{{ trans("PluginCeres::Template.generalOrderShippedBy") }}</strong>
                             {{ shippingContent }}
                         </div>
                     {% endif %}
-                    {% set certifiedContent = LayoutContainer.show("PluginCallisto::Homepage.Certified") %}
+                    {% set certifiedContent = LayoutContainer.show("PluginCeres::Homepage.Certified") %}
                     {% if certifiedContent|trim is not empty %}
                         <div class="services-certificate m-b-1">
-                            <strong class="services-title">{{ trans("PluginCallisto::Template.generalCertifiedBy") }}</strong>
+                            <strong class="services-title">{{ trans("PluginCeres::Template.generalCertifiedBy") }}</strong>
                             {{ certifiedContent }}
                         </div>
                     {% endif %}
@@ -57,10 +57,10 @@
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
                     <nav class="footer-column m-b-2">
-                        <h5>{{ config('PluginCallisto.footer.col_' ~ i ~ '_title') }}</h5>
+                        <h5>{{ config('PluginCeres.footer.col_' ~ i ~ '_title') }}</h5>
                         <ul class="list-unstyled">
 
-                            {% set footerCategories = config('PluginCallisto.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
+                            {% set footerCategories = config('PluginCeres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
                             {% for catID in footerCategories %}
 
                                 {% set cat = services.category.get(catID) %}
@@ -73,9 +73,9 @@
                                     </li>
                                 {% endif %}
 
-                                {% if i == numberOfCols and config('PluginCallisto.global.category.legal_disclosure') not in displayedCategories %}
+                                {% if i == numberOfCols and config('PluginCeres.global.category.legal_disclosure') not in displayedCategories %}
                                     <li>
-                                        {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
+                                        {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
                                         <a href="{{ services.category.getURL( cat ) }}">{{ cat.details.first.name }}</a>
                                     </li>
                                 {% endif %}
@@ -89,13 +89,13 @@
             <hr class="hidden-sm-up m-y-2">
             <div class="col-xs-6 col-sm-3">
                 <div class="footer-column">
-                    {{ LayoutContainer.show("PluginCallisto::Footer.RowOne") }}
+                    {{ LayoutContainer.show("PluginCeres::Footer.RowOne") }}
                 </div>
             </div>
             <hr class="col-xs-12 hidden-lg-up m-y-2">
             <div class="col-sm-12 col-lg-3">
                 <div class="footer-column row">
-                    {% set rowTwo = LayoutContainer.show("PluginCallisto::Footer.RowTwo") %}
+                    {% set rowTwo = LayoutContainer.show("PluginCeres::Footer.RowTwo") %}
 
                     {{ rowTwo }}
 
@@ -105,7 +105,7 @@
                         <div class="col-xs-12">
                             {% endif %}
 
-                            {{ LayoutContainer.show("PluginCallisto::Footer.RowThree") }}
+                            {{ LayoutContainer.show("PluginCeres::Footer.RowThree") }}
                         </div>
                     </div>
                 </div>
@@ -114,9 +114,9 @@
 
             </div>
 
-            {% set cat = services.category.get(config('PluginCallisto.global.category.legal_disclosure')) %}
+            {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
             <div class="copyright text-xs-center m-y-1">
-                <small>&copy; Copyright 2016 | {{ trans("PluginCallisto::Template.generalAllRightsReserved") }}</small>
+                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
                 <br>
                 <small>Powered by plentymarkets</small>
             </div>

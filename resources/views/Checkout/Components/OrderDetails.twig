@@ -5,17 +5,17 @@
             <div class="card small">
                 <!-- ORDER -->
                 <div class="card-header">
-                    <h5>{{ trans("PluginCallisto::Template.orderId") }} ${ orderData.order.id }</h5>
+                    <h5>{{ trans("PluginCeres::Template.orderId") }} ${ orderData.order.id }</h5>
                 </div>
                 <div class="card-block">
                     <div class="details">
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderDate") }}</strong>
-                            <span class="col-xs-6 col-sm-7">${ orderData.order.createdAt | date "{{ trans("PluginCallisto::Template.dateTimeFormatMoment") }}" }</span>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderDate") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ orderData.order.createdAt | date "{{ trans("PluginCeres::Template.dateTimeFormatMoment") }}" }</span>
                         </div>
 
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderStatus") }}</strong>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderStatus") }}</strong>
                             <span class="col-xs-6 col-sm-7">${ orderData.status.frontendName }</span>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
 
                     <div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderInvoiceAddress") }}</strong>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderInvoiceAddress") }}</strong>
                             <span class="col-xs-6 col-sm-7">
                                                             <div>${orderData.order.billingAddress.name1}</div>
                                                             <div>${orderData.order.billingAddress.name2} ${orderData.order.billingAddress.name3}</div>
@@ -35,10 +35,10 @@
                         </div>
 
                         <div class="row m-t-1">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShippingAddress") }}</strong>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingAddress") }}</strong>
                             <span class="col-xs-6 col-sm-7">
                                                             <span v-if="orderData.order.billingAddress.id == orderData.order.deliveryAddress.id">
-                                                                {{ trans("PluginCallisto::Template.addressSameAsInvoice") }}
+                                                                {{ trans("PluginCeres::Template.addressSameAsInvoice") }}
                                                             </span>
                                                             <span v-else>
                                                                 <div>${orderData.order.deliveryAddress.name1}</div>
@@ -55,16 +55,16 @@
 
                     <div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderPaymentMethod") }}</strong>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentMethod") }}</strong>
                             <span class="col-xs-6 col-sm-7">${ orderData.paymentMethodName }</span>
                         </div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderPaymentStatus") }}</strong>
-                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'unpaid'">{{ trans("PluginCallisto::Template.paymentStatus_unpaid") }}</span>
-                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'prepaid'">{{ trans("PluginCallisto::Template.paymentStatus_prepaid") }}</span>
-                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'partlyPaid'">{{ trans("PluginCallisto::Template.paymentStatus_partlyPaid") }}</span>
-                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'fullyPaid'">{{ trans("PluginCallisto::Template.paymentStatus_fullyPaid") }}</span>
-                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("PluginCallisto::Template.paymentStatus_overpaid") }}</span>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentStatus") }}</strong>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'unpaid'">{{ trans("PluginCeres::Template.paymentStatus_unpaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'prepaid'">{{ trans("PluginCeres::Template.paymentStatus_prepaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'partlyPaid'">{{ trans("PluginCeres::Template.paymentStatus_partlyPaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'fullyPaid'">{{ trans("PluginCeres::Template.paymentStatus_fullyPaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("PluginCeres::Template.paymentStatus_overpaid") }}</span>
                         </div>
                     </div>
 
@@ -72,13 +72,13 @@
 
                     <div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderShippingProfile") }}</strong>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingProfile") }}</strong>
                             <span class="col-xs-6 col-sm-7">${ orderData.shippingProvider } - ${ orderData.shippingProfileName }</span>
                         </div>
 
                         <div class="row" v-if="shippingDate">
-                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.orderEstimatedShippingDate") }}</strong>
-                            <span class="col-xs-6 col-sm-7">${ shippingDate | moment "{{ trans("PluginCallisto::Template.dateFormatMoment") }}" }</span>
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderEstimatedShippingDate") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ shippingDate | moment "{{ trans("PluginCeres::Template.dateFormatMoment") }}" }</span>
                         </div>
                     </div>
 
@@ -102,15 +102,15 @@
                             </div>
                         </a>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Template.orderPricePerPiece") }}</strong>
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPricePerPiece") }}</strong>
                             <span class="col-xs-6 col-sm-9">${ item.amounts[0].priceGross | currency item.amounts[0].currency  }</span>
                         </div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Template.orderPeace") }}</strong>
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPeace") }}</strong>
                             <span class="col-xs-6 col-sm-9">${ item.quantity }</span>
                         </div>
                         <div class="row">
-                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCallisto::Template.orderTotal") }}</strong>
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderTotal") }}</strong>
                             <strong class="col-xs-6 col-sm-9">${ (item.quantity * item.amounts[0].priceGross) | currency item.amounts[0].currency }</strong>
                         </div>
                     </div>
@@ -120,39 +120,39 @@
             <div class="gesamtsumme">
                 <!-- BASKET TOTALS -->
                 <div class="cmp cmp-totals">
-                    <h3>{{ trans("PluginCallisto::Template.basketSum") }}</h3>
+                    <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
                     <div>
                         <dl>
                             <dt v-if="showProperty( 'basket.value_of_items_gross' )">
-                                <strong>{{ trans("PluginCallisto::Template.basketValue") }} ({{ trans("PluginCallisto::Template.basketGross") }})</strong>
+                                <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
                                 <strong>${ totals.itemSum | currency totals.currency }</strong>
                             </dd>
 
                             <dt v-if="showProperty( 'basket.value_of_items_net' )">
-                                {{ trans("PluginCallisto::Template.basketValue") }} ({{ trans("PluginCallisto::Template.basketNet") }})
+                                {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.value_of_items_net' )">
                                 ${ totals.itemSumNet | currency totals.currency }
                             </dd>
 
                             <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                                <strong>{{ trans("PluginCallisto::Template.itemShippingCosts") }} ({{ trans("PluginCallisto::Template.basketGross") }})</strong>
+                                <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
                                 <strong>${ totals.shippingAmount | currency totals.currency }</strong>
                             </dd>
 
                             <dt v-if="showProperty( 'basket.shipping_costs_net' )">
-                                {{ trans("PluginCallisto::Template.itemShippingCosts") }} ({{ trans("PluginCallisto::Template.basketNet") }})
+                                {{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketNet") }})
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                                 ${ totals.shippingAmountNet | currency totals.currency }
                             </dd>
 
                             <dt v-if="showProperty( 'basket.vat' )">
-                                {{ trans("PluginCallisto::Template.basketVAT") }}
+                                {{ trans("PluginCeres::Template.basketVAT") }}
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.vat' )">
                                 ${ totals.vat | currency totals.currency }
@@ -161,14 +161,14 @@
                             <hr>
 
                             <dt v-if="showProperty( 'basket.order_total_gross' )">
-                                <strong>{{ trans("PluginCallisto::Template.basketTotalSum") }} ({{ trans("PluginCallisto::Template.basketGross") }})</strong>
+                                <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.order_total_gross' )">
                                 <strong>${ totals.totalAmount | currency totals.currency }</strong>
                             </dd>
 
                             <dt v-if="showProperty( 'basket.order_total_net' )">
-                                {{ trans("PluginCallisto::Template.basketTotalSum") }} ({{ trans("PluginCallisto::Template.basketNet") }})
+                                {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
                             </dt><!--
                          --><dd v-if="showProperty( 'basket.order_total_net' )">
                                 ${ totals.totalAmountNet | currency totals.currency }

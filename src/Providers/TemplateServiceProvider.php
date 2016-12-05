@@ -28,75 +28,75 @@ class TemplateServiceProvider extends ServiceProvider
         
         // provide template to use for content categories
         $eventDispatcher->listen('tpl.category.content', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Category.Content.CategoryContent");
+            $container->setTemplate("PluginCeres::Category.Content.CategoryContent");
         }, 0);
 
         // provide template to use for item categories
         $eventDispatcher->listen('tpl.category.item', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Category.Item.CategoryItem");
+            $container->setTemplate("PluginCeres::Category.Item.CategoryItem");
         }, 0);
 
         // provide template to use for blog categories
         $eventDispatcher->listen('tpl.category.blog', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::PageDesign.PageDesign");
+            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
         }, 0);
 
         // provide template to use for container categories
         $eventDispatcher->listen('tpl.category.container', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::PageDesign.PageDesign");
+            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
         }, 0);
 
         // provide template to use for single items
         $eventDispatcher->listen('tpl.item', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Item.SingleItem");
+            $container->setTemplate("PluginCeres::Item.SingleItem");
         }, 0);
 
         // provide template to use for basket
         $eventDispatcher->listen('tpl.basket', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Basket.Basket");
+            $container->setTemplate("PluginCeres::Basket.Basket");
         }, 0);
 
         // provide template to use for checkout
         $eventDispatcher->listen('tpl.checkout', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Checkout.Checkout");
+            $container->setTemplate("PluginCeres::Checkout.Checkout");
         }, 0);
 
         // provide template to use for my-account
         $eventDispatcher->listen('tpl.my-account', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::MyAccount.MyAccount");
+            $container->setTemplate("PluginCeres::MyAccount.MyAccount");
         }, 0);
 
         // provide template to use for confirmation
         $eventDispatcher->listen('tpl.confirmation', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Checkout.OrderConfirmation");
+            $container->setTemplate("PluginCeres::Checkout.OrderConfirmation");
         }, 0);
 
         // provide template to use for login
         $eventDispatcher->listen('tpl.login', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Customer.Login");
+            $container->setTemplate("PluginCeres::Customer.Login");
         }, 0);
 
         // provide template to use for register
         $eventDispatcher->listen('tpl.register', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCallisto::Customer.Register");
+            $container->setTemplate("PluginCeres::Customer.Register");
         }, 0);
 
         // provide template to use for guest
         $eventDispatcher->listen('tpl.guest', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::Customer.Guest");
+            $container->setTemplate("PluginCeres::Customer.Guest");
         }, 0);
     
         // provide template to use for item search
         $eventDispatcher->listen('tpl.search', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCallisto::ItemList.ItemListView");
+            $container->setTemplate("PluginCeres::ItemList.ItemListView");
         }, 0);
 
         // provide mapped category IDs
         $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap) use(&$config) {
             $categoryMap->setCategoryMap(array (
-                                             CategoryKey::HOME           => $config->get("PluginCallisto.global.category.home"),
-                                             CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCallisto.global.category.page_not_found"),
-                                             CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCallisto.global.category.item_not_found")
+                                             CategoryKey::HOME           => $config->get("PluginCeres.global.category.home"),
+                                             CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCeres.global.category.page_not_found"),
+                                             CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCeres.global.category.item_not_found")
                                          ));
             
         }, 0);

@@ -1,4 +1,4 @@
-{% set sortData = config("PluginCallisto.sort.data") %}
+{% set sortData = config("PluginCeres.sort.data") %}
 {% if sortData == "all" %}
     {% set sortData = [
         "itemId_asc",
@@ -35,15 +35,15 @@
     {% set sortData = sortData|split(', ') %}
 {% endif %}
 
-{% set paginationValues = config("PluginCallisto.pagination.values") %}
+{% set paginationValues = config("PluginCeres.pagination.values") %}
 {% if paginationValues == "all" %}
     {% set paginationValues = [20, 50, 100] %}
 {% else %}
     {% set paginationValues = paginationValues|split(', ') %}
 {% endif %}
 
-{% set currentItemsPerPage     = request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ) %}
-{% set currentSort      = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) %}
+{% set currentItemsPerPage     = request.get("items_per_page") | default( config('PluginCeres.pagination.defaultItemsPerPage') ) %}
+{% set currentSort      = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) %}
 
 {% set page             = paginatedResult.getPage() %}
 {% set itemCountTotal   = paginatedResult.getTotalCount() %}
@@ -59,11 +59,11 @@
             <select id="itemSorting" onchange="this.form.submit()" name="itemSorting" class="custom-select">
                 {% for element in sortData %}
                     <option value="{{ element }}"{% if currentSort == element %} selected="true"{% endif %}>
-                        {{ trans("PluginCallisto::Template." ~ element) }}
+                        {{ trans("PluginCeres::Template." ~ element) }}
                     </option>
                 {% endfor %}
             </select>
-            <label for="itemSorting">{{ trans("PluginCallisto::Template.itemCategorySort") }}</label>
+            <label for="itemSorting">{{ trans("PluginCeres::Template.itemCategorySort") }}</label>
         </div>
     </div>
 
@@ -78,7 +78,7 @@
                     </option>
                 {% endfor %}
             </select>
-            <label for="listItemsPerPage">{{ trans("PluginCallisto::Template.itemCategoryItemsPerPage") }}</label>
+            <label for="listItemsPerPage">{{ trans("PluginCeres::Template.itemCategoryItemsPerPage") }}</label>
         </div>
     </div>
 </form>

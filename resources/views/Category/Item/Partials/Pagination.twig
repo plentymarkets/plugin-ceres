@@ -1,5 +1,5 @@
-{% set itemsPerPage     = request.get("items_per_page") | default( config('PluginCallisto.pagination.defaultItemsPerPage') ) %}
-{% set itemSorting      = request.get("itemSorting") | default( config('PluginCallisto.sort.defaultSorting') ) %}
+{% set itemsPerPage     = request.get("items_per_page") | default( config('PluginCeres.pagination.defaultItemsPerPage') ) %}
+{% set itemSorting      = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) %}
 {% set query            = { 'items_per_page' : itemsPerPage, 'itemSorting' : itemSorting } %}
 
 {% set page             = paginatedResult.getPage() %}
@@ -19,7 +19,7 @@
             <!-- ./PREV LINK -->
 
             <!-- FIRST PAGE LINK -->
-            {% if page > 2 and config('PluginCallisto.pagination.showFirstPage') == "true" %}
+            {% if page > 2 and config('PluginCeres.pagination.showFirstPage') == "true" %}
                 <li class="page-item">
                     <a class="page-link" href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
                 </li>
@@ -58,7 +58,7 @@
             <!-- ./PAGINATION -->
 
             <!-- LAST PAGE LINK -->
-            {% if pageMax > 3 and page < pageMax-1 and config('PluginCallisto.pagination.showLastPage') == "true" %}
+            {% if pageMax > 3 and page < pageMax-1 and config('PluginCeres.pagination.showLastPage') == "true" %}
                 <li class="page-item page-link">...</li>
                 <li class="page-item">
                     <a class="page-link" href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>

@@ -2,11 +2,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% set logData = config("PluginCallisto.log.data")|split(', ') %}
+{% set logData = config("PluginCeres.log.data")|split(', ') %}
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
-<link rel="stylesheet" href="{{ plugin_path('PluginCallisto') }}/css/plugin-callisto.css">
+<link rel="stylesheet" href="{{ plugin_path('PluginCeres') }}/css/plugin-callisto.css">
 
 <script>
     App = {

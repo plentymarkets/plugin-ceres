@@ -1,5 +1,5 @@
-{{ component( "PluginCallisto::Item.Components.QuantityInput" ) }}
-{% set configItemName = config("PluginCallisto.item.name") %}
+{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
+{% set configItemName = config("PluginCeres.item.name") %}
 
 <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
     <!-- ITEM QUANTITY -->
@@ -26,7 +26,7 @@
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Template.itemEach") }}
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
             ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
@@ -34,10 +34,10 @@
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCallisto::Template.generalDelete") }}
+                   {{ trans("PluginCeres::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCallisto::Template.generalDeleteNow") }}
+                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>

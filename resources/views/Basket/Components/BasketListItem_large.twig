@@ -1,4 +1,4 @@
-{{ component( "PluginCallisto::Item.Components.QuantityInput" ) }}
+{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
 
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
@@ -14,7 +14,7 @@
         <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCallisto::Template.itemEach") }}
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
@@ -23,10 +23,10 @@
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCallisto::Template.generalDelete") }}
+                   {{ trans("PluginCeres::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCallisto::Template.generalDeleteNow") }}
+                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>
@@ -45,20 +45,20 @@
         </a>
 
         <p class="id">
-            <strong>{{ trans("PluginCallisto::Template.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
+            <strong>{{ trans("PluginCeres::Template.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
         </p>
 
         <div class="item-description">
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemNumber") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemNumber") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemCondition") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemCondition") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ itemCondition }</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCallisto::Template.itemAvailability") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
                     ${ itemAvailability }
                 </span>
@@ -67,7 +67,7 @@
                 {!! basketItem.variation.itemDescription.description !!}
             </p>
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCallisto::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCallisto::Template.itemShowLess") }}"></label>
+        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCeres::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCeres::Template.itemShowLess") }}"></label>
     </div>
     <!-- ./ITEM DETAILS -->
 </article>

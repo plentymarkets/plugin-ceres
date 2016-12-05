@@ -1,4 +1,4 @@
-{{ component( "PluginCallisto::Customer.Components.AddressSelect.CreateUpdateAddress") }}
+{{ component( "PluginCeres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
 <div>
     <div class="cmp cmp-address-list m-b-3">
@@ -13,7 +13,7 @@
             >
                 <div class="item-inner">
                     <span v-if="selectedAddress.id == -99">
-                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.addressSameAsInvoice") }} -</p>
+                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
                     </span>
                     <span v-else class="item-content">
                         <div v-if="!isAddressListEmpty()">
@@ -24,15 +24,15 @@
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                         </div>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.pleaseSelect") }} -</p>
-                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.addressNoAddress") }} -</p>
+                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
+                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressNoAddress") }} -</p>
                     </span>
 
                 </div>
             </div>
 
             <div class="add-item">
-                <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCallisto::Template.addressAddAddress") }}">
+                <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCeres::Template.addressAddAddress") }}">
                     <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                 </a>
             </div>
@@ -50,7 +50,7 @@
                         >
                         <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Template.addressSameAsInvoice") }} -</p>
+                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
                             </span>
                             <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
@@ -119,15 +119,15 @@
                         <fieldset>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label>{{ trans("PluginCallisto::Template.addressDeleteWarning") }}</label>
+                                    <label>{{ trans("PluginCeres::Template.addressDeleteWarning") }}</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3 offset-sm-6">
-                                    <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("PluginCallisto::Template.generalCancel") }}</button>
+                                    <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("PluginCeres::Template.generalCancel") }}</button>
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="button" class="btn btn-primary btn-block" @click="deleteAddress">{{ trans("PluginCallisto::Template.generalDelete") }}</button>
+                                    <button type="button" class="btn btn-primary btn-block" @click="deleteAddress">{{ trans("PluginCeres::Template.generalDelete") }}</button>
                                 </div>
                             </div>
                         </fieldset>
