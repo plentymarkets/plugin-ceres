@@ -75,7 +75,7 @@ module.exports = (function($)
         config = config || {};
         config.data = data || null;
         config.dataType = config.dataType || "json";
-        config.contentType = config.contentType || "application/json";
+        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
 
