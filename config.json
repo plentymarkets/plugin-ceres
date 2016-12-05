@@ -2,7 +2,7 @@
     {
         "tab"               : "Categories",
         "key"               : "global.category.home",
-        "label"             : "Home page",
+        "label"             : "Homepage",
         "type"              : "category_select",
         "possibleValues"    :
         [

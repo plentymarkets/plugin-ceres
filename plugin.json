@@ -16,6 +16,41 @@
     "containers"        :
     [
         {
+            "key"           : "Homepage.PaymentMethods",
+            "name"          : "Homepage: Payment method container",
+            "description"   : "Add a logo of the payment method to the payment methods on the homepage"
+        },
+        {
+            "key"           : "Homepage.Shipping",
+            "name"          : "Homepage: Shipping method container",
+            "description"   : "Add a logo of the shipping method to the shipping methods on the homepage"
+        },
+        {
+            "key"           : "Homepage.Certified",
+            "name"          : "Homepage: Certified container",
+            "description"   : "Add a \"Certified by\" logo to the container on the homepage"
+        },
+        {
+            "key"           : "Header.LeftSide",
+            "name"          : "Header: Left side container",
+            "description"   : "Add content to the left side in the header"
+        },
+        {
+            "key"           : "Footer.RowOne",
+            "name"          : "Footer: Row 1 container",
+            "description"   : "Add content to the first row of the footer"
+        },
+        {
+            "key"           : "Footer.RowTwo",
+            "name"          : "Footer: Row 2 container",
+            "description"   : "Add content to the second row of the footer"
+        },
+        {
+            "key"           : "Footer.RowThree",
+            "name"          : "Footer: Row 3 container",
+            "description"   : "Add content to the third row of the footer"
+        },
+        {
             "key"           : "SingleItem.BeforePrice",
             "name"          : "Single item: Before price",
             "description"   : "Add content before the item price in the single item view."
@@ -179,41 +214,6 @@
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page.",
             "multiple"      : false
-        },
-        {
-            "key"           : "Footer.RowOne",
-            "name"          : "Footer: Row one container",
-            "description"   : "Add content to row one in the footer"
-        },
-        {
-            "key"           : "Footer.RowTwo",
-            "name"          : "Footer: Row two container",
-            "description"   : "Add content to row two in the footer"
-        },
-        {
-            "key"           : "Footer.RowThree",
-            "name"          : "Footer: Row three container",
-            "description"   : "Add content to row three in the footer"
-        },
-        {
-            "key"           : "Startpage.PaymentMethods",
-            "name"          : "Startpage: Payment method container",
-            "description"   : "Add an icon to the payment methods in the startpage"
-        },
-        {
-            "key"           : "Startpage.Shipping",
-            "name"          : "Startpage: Shipping container",
-            "description"   : "Add an icon to the shipping container in the startpage"
-        },
-        {
-            "key"           : "Startpage.Certified",
-            "name"          : "Startpage: Certified container",
-            "description"   : "Add an icon to the certified by container in the startpage"
-        },
-        {
-            "key"           : "Header.LeftSide",
-            "name"          : "Header: Left side container",
-            "description"   : "Add content to the left side in the header"
         }
     ],
     "dataProviders"     : []
