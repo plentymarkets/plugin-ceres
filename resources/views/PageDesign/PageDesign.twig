@@ -103,17 +103,17 @@
         {% set lang = services.sessionStorage.getLang() %}
 
         {% if config("PluginCallisto.log.performance.level") == 'development' %}
-            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
             <script>var Translations = Languages['{{ lang }}'];</script>
-            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-vendor.js"></script>
-            <script src="{{ plugin_path('PluginCallisto') }}/js/src/app.config.js"></script>
-            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto-app.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-vendor.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/src/app.config.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-app.js"></script>
         {% else %}
             {# TODO remove douplicate import #}
-            <script src="{{ plugin_path('PluginCallisto') }}/js/lang/{{ lang }}.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
             <script>var Translations = Languages['{{ lang }}'];</script>
 
-            <script src="{{ plugin_path('PluginCallisto') }}/js/dist/plugin-callisto.min.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres.min.js"></script>
         {% endif %}
     </body>
 </html>

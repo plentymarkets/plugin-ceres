@@ -1,17 +1,17 @@
 {
     "version"           : "0.1.0",
-    "name"              : "PluginCallisto",
+    "name"              : "PluginCeres",
     "description"       : "plentymarkets webshop layout",
     "author"            : "plentymarkets GmbH",
-    "keywords"          : ["plentymarkets", "plugins", "layout", "template"],
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : [],
-    "namespace"         : "Callisto",
-    "serviceProvider"   : "Callisto\\Providers\\TemplateServiceProvider",
+    "namespace"         : "Ceres",
+    "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "runOnBuild"        :
     [
-      "Callisto\\Migrations\\CategoriesMigration"
+      "Ceres\\Migrations\\CategoriesMigration"
     ],
     "containers"        :
     [

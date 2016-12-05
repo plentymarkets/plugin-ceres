@@ -3,7 +3,7 @@ const JS_DIST   = './resources/js/dist/';
 const JS_LANG   = './resources/js/lang/';
 const SCSS_SRC  = './resources/scss/';
 const SCSS_DIST = './resources/css/';
-const OUTPUT_PREFIX = 'plugin-callisto';
+const OUTPUT_PREFIX = 'plugin-ceres';
 
 // import gulp
 var fs = require('fs');
@@ -170,7 +170,7 @@ function buildSass( outputFile, outputStyle )
     };
 
     return gulp
-        .src( SCSS_SRC + 'PluginCallisto.scss' )
+        .src( SCSS_SRC + 'PluginCeres.scss' )
         .pipe( sourcemaps.init() )
         .pipe( sass( config.scssOptions ).on( 'error', sass.logError ) )
         .pipe( rename( outputFile ) )

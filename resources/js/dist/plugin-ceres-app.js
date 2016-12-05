@@ -56,7 +56,8 @@ Vue.component("add-item-to-basket-overlay", {
     data: function()
     {
         return {
-            basketItem: {currentBasketItem: { }}
+            basketItem: {currentBasketItem: { }},
+            timeToClose: 5
         };
     },
 
@@ -82,7 +83,14 @@ Vue.component("add-item-to-basket-overlay", {
          */
         startRendering: function()
         {
-            return Object.keys(this.basketItem.currentBasketItem).length != 0;
+            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+
+            if (render)
+            {
+                this.startCounter();
+            }
+
+            return render;
         },
 
         /**
@@ -101,6 +109,27 @@ Vue.component("add-item-to-basket-overlay", {
             }
 
             return "/" + path;
+        },
+
+        startCounter: function()
+        {
+            this.timeToClose = 5;
+
+            var timerVar = setInterval(countTimer, 1000);
+
+            var self = this;
+
+            function countTimer()
+            {
+                self.timeToClose -= 1;
+
+                if (self.timeToClose === 0)
+                {
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+
+                    clearInterval(timerVar);
+                }
+            }
         }
     }
 });
@@ -3237,7 +3266,7 @@ module.exports = (function($)
         config = config || {};
         config.data = data || null;
         config.dataType = config.dataType || "json";
-        config.contentType = config.contentType || "application/json";
+        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
 
@@ -4440,6 +4469,7 @@ module.exports = (function($)
          */
         function push(value)
         {
+
             if (url)
             {
                 return ApiService
@@ -5458,4 +5488,4 @@ vueApp = new Vue({
 
 })(jQuery, window, document);
 
-//# sourceMappingURL=plugin-callisto-app.js.map
+//# sourceMappingURL=plugin-ceres-app.js.map
