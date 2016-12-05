@@ -13,62 +13,62 @@
 // ==========================================================================
 
 // global
-@import "callisto4/mixins/general-mixins";
-@import "callisto4/mixins/proportional-boxes";
-@import "callisto4/common/typography";
-@import "callisto4/common/common";
-@import "callisto4/common/structure";
+@import "ceres/mixins/general-mixins";
+@import "ceres/mixins/proportional-boxes";
+@import "ceres/common/typography";
+@import "ceres/common/common";
+@import "ceres/common/structure";
 
 // custom shariff theme for the social icons in the header
-@import "callisto4/common/shariff-theme-minimal";
+@import "ceres/common/shariff-theme-minimal";
 
 //TODO's
-@import "callisto4/common/buttons";
-@import "callisto4/common/card";
+@import "ceres/common/buttons";
+@import "ceres/common/card";
 
 // External plugins overrides
-@import "callisto4/plugins/lightbox";
-@import "callisto4/plugins/owl-carousel";
+@import "ceres/plugins/lightbox";
+@import "ceres/plugins/owl-carousel";
 
 // Components
-@import "callisto4/components/component-base";
-@import "callisto4/components/accordion";
-@import "callisto4/components/alerts";
-@import "callisto4/components/featured-category";
-@import "callisto4/components/featured-sale";
+@import "ceres/components/component-base";
+@import "ceres/components/accordion";
+@import "ceres/components/alerts";
+@import "ceres/components/featured-category";
+@import "ceres/components/featured-sale";
 
 // Forms
-@import "callisto4/forms/input-groups";
-@import "callisto4/forms/inputs";
-@import "callisto4/forms/select";
+@import "ceres/forms/input-groups";
+@import "ceres/forms/inputs";
+@import "ceres/forms/select";
 
 // Page Design / Global components
-@import "callisto4/views/PageDesign/header";
-@import "callisto4/views/PageDesign/search-box";
-@import "callisto4/views/PageDesign/language-select";
-@import "callisto4/views/PageDesign/navigation";
-@import "callisto4/views/PageDesign/breadcrumb";
-@import "callisto4/views/PageDesign/footer";
+@import "ceres/views/PageDesign/header";
+@import "ceres/views/PageDesign/search-box";
+@import "ceres/views/PageDesign/language-select";
+@import "ceres/views/PageDesign/navigation";
+@import "ceres/views/PageDesign/breadcrumb";
+@import "ceres/views/PageDesign/footer";
 
 // Templates
-@import "callisto4/views/Confirmation/confirmation-order-item";
-@import "callisto4/views/Templates/AddressSelect/address-select";
-@import "callisto4/views/Templates/BasketItemList/basket-item";
-@import "callisto4/views/Templates/BasketPreview/basket-preview-item";
-@import "callisto4/views/Templates/BasketPreview/basket-preview";
-@import "callisto4/views/Templates/BasketTotalSum/basket-total-sum";
-@import "callisto4/views/Templates/CategoryListItem/category-list-item";
-@import "callisto4/views/Templates/CategoryViewFilter/category-view-filter";
-@import "callisto4/views/Templates/Hero/component-hero";
-@import "callisto4/views/Templates/ItemListSort/pagination";
-@import "callisto4/views/Templates/ItemRating/item-rating-roll";
-@import "callisto4/views/Templates/ItemRating/item-rating-section";
-@import "callisto4/views/Templates/OrderItem/order-item";
-@import "callisto4/views/Templates/PaymentShippingSelect/payment-shipping-select";
-@import "callisto4/views/Templates/ToggleCategoryListView/toggle-list-view";
+@import "ceres/views/Confirmation/confirmation-order-item";
+@import "ceres/views/Templates/AddressSelect/address-select";
+@import "ceres/views/Templates/BasketItemList/basket-item";
+@import "ceres/views/Templates/BasketPreview/basket-preview-item";
+@import "ceres/views/Templates/BasketPreview/basket-preview";
+@import "ceres/views/Templates/BasketTotalSum/basket-total-sum";
+@import "ceres/views/Templates/CategoryListItem/category-list-item";
+@import "ceres/views/Templates/CategoryViewFilter/category-view-filter";
+@import "ceres/views/Templates/Hero/component-hero";
+@import "ceres/views/Templates/ItemListSort/pagination";
+@import "ceres/views/Templates/ItemRating/item-rating-roll";
+@import "ceres/views/Templates/ItemRating/item-rating-section";
+@import "ceres/views/Templates/OrderItem/order-item";
+@import "ceres/views/Templates/PaymentShippingSelect/payment-shipping-select";
+@import "ceres/views/Templates/ToggleCategoryListView/toggle-list-view";
 
 // Pages
-@import "callisto4/views/Home/home";
-@import "callisto4/views/Checkout/checkout";
-@import "callisto4/views/Item/single-item";
-@import "callisto4/views/Category/category-list";
+@import "ceres/views/Home/home";
+@import "ceres/views/Checkout/checkout";
+@import "ceres/views/Item/single-item";
+@import "ceres/views/Category/category-list";
