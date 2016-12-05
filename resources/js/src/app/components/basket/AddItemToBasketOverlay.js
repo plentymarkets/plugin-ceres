@@ -12,7 +12,8 @@ Vue.component("add-item-to-basket-overlay", {
     data: function()
     {
         return {
-            basketItem: {currentBasketItem: { }}
+            basketItem: {currentBasketItem: { }},
+            timeToClose: 5
         };
     },
 
@@ -38,7 +39,14 @@ Vue.component("add-item-to-basket-overlay", {
          */
         startRendering: function()
         {
-            return Object.keys(this.basketItem.currentBasketItem).length != 0;
+            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+
+            if (render)
+            {
+                this.startCounter();
+            }
+
+            return render;
         },
 
         /**
@@ -57,6 +65,27 @@ Vue.component("add-item-to-basket-overlay", {
             }
 
             return "/" + path;
+        },
+
+        startCounter: function()
+        {
+            this.timeToClose = 5;
+
+            var timerVar = setInterval(countTimer, 1000);
+
+            var self = this;
+
+            function countTimer()
+            {
+                self.timeToClose -= 1;
+
+                if (self.timeToClose === 0)
+                {
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+
+                    clearInterval(timerVar);
+                }
+            }
         }
     }
 });
