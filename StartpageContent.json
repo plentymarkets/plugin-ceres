@@ -2,45 +2,82 @@
   "de":
   {
     "pictures":
-    {
-      "first": "URL",
-      "firstText": "Entspanntes Shopping von überall",
-      "second": "URL",
-      "secondText": "Shopping ohne Grenzen",
-      "third": "URL",
-      "thirdText": "Eines für alle: das neue Ceres"
-    },
+    [
+      {
+        "pictureUrl": "URL",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "URL"
+      }
+    ],
     "texts":
     {
       "welcome": "Herzlich Willkommen!",
-      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Deskop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten."
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Deskop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
     },
-    "recommend":
-    {
-      "icon": "URL",
-      "recommendPlugins": "Plugin ContactCard, Plugin SocialMedia, etc.."
-    }
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin ContactCard",
+        "pluginLink": "URL"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin SocialMedia",
+        "pluginLink": "URL"
+      }
+    ]
   },
   "en":
   {
     "pictures":
-    {
-      "first": "URL",
-      "firstText": "English",
-      "second": "URL",
-      "secondText": "English",
-      "third": "URL",
-      "thirdText": "English"
-    },
+    [
+      {
+        "pictureUrl": "URL",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "URL"
+      }
+    ],
     "texts":
     {
-      "welcome": "English!",
-      "shortDescription": "English"
+      "welcome": "DAS IST ENGLISCH",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Deskop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
     },
-    "recommend":
-    {
-      "icon": "URL",
-      "recommendPlugins": "Plugin ContactCard, Plugin SocialMedia, etc.."
-    }
-  }
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin ContactCard",
+        "pluginLink": "URL"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin SocialMedia",
+        "pluginLink": "URL"
+      }
+    ]
 }
