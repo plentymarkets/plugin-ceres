@@ -1,11 +1,12 @@
 .cmp-search-box{
-	background-color: $gray-lighter2;
+	background-color: $gray-lightest;
 	border-bottom: 1px solid $gray-lighter;
-	
+	padding: 0px 15px;
+
 	.search-box-inner{
 		display: flex;
     	flex-flow: row nowrap;
-    	padding: 1rem;
+    	padding: 1rem 0em;
 	}
 
 	.search-input{
@@ -15,29 +16,20 @@
 		font-size: 1.3rem;
 		line-height: 1;
 		border: none;
-
 		padding: .4rem 1rem;
 	    margin: .6rem 0;
-	    border-bottom: 1px solid $gray-lighter;
+	    outline: none;
 	}
 
 	.search-submit{
-		flex: 1 0 20%;
 	    display: inline-block;
 	    vertical-align: top;
 	    font-size: 1.3rem;
 	    line-height: 1;
-	    background: transparent;
+	    background: #ffffff;
 	    padding: .4rem 1rem;
 	    margin: .6rem 0;
-	    background-color: $gray-lighter;
-	    color: $gray;
+	    color: $brand-primary;
 	    border: none;
-	    border-left: 1px solid $gray-lighter;
-
-	    &:hover{
-	    	color: $gray-lighter;
-	    	background-color: $gray;
-	    }
 	}
 }
