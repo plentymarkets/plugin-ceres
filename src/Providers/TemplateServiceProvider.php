@@ -1,6 +1,6 @@
 <?php // strict
 
-namespace Callisto\Providers;
+namespace Ceres\Providers;
 
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
@@ -10,9 +10,9 @@ use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Category\Models\Category;
 use Plenty\Modules\Item\DataLayer\Models\Record;
 
-use LayoutCore\Helper\TemplateContainer;
-use LayoutCore\Helper\CategoryMap;
-use LayoutCore\Helper\CategoryKey;
+use IO\Helper\TemplateContainer;
+use IO\Helper\CategoryMap;
+use IO\Helper\CategoryKey;
 
 class TemplateServiceProvider extends ServiceProvider
 {

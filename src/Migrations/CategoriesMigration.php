@@ -1,6 +1,6 @@
 <?php //strict
 
-namespace Callisto\Migrations;
+namespace Ceres\Migrations;
 
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
 //use Plenty\Modules\Category\Contracts\CategoryTemplateRepositoryContract;
