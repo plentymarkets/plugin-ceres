@@ -1,0 +1,65 @@
+.loading-animation-frame {
+  min-height: 200px;
+  padding-top: 50px;
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+}
+
+.loading-animation {
+  margin: auto;
+  width: 150px;
+  height: 120px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.loading-animation > div {
+  background-color: $brand-primary;
+  height: 100%;
+  width: 18px;
+  display: inline-block;
+
+  -webkit-animation: sk-stretchdelay 0.8s infinite ease-in-out;
+  animation: sk-stretchdelay 0.8s infinite ease-in-out;
+}
+
+.loading-animation .rect2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.loading-animation .rect3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.loading-animation .rect4 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.loading-animation .rect5 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.2)
+  }
+  20% {
+    -webkit-transform: scaleY(0.5)
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.2);
+    -webkit-transform: scaleY(0.2);
+  }
+  20% {
+    transform: scaleY(0.5);
+    -webkit-transform: scaleY(0.5);
+  }
+}

@@ -6,6 +6,7 @@
     {{ component( "PluginCeres::ItemList.Components.ItemsPerPage" ) }}
     {{ component( "PluginCeres::ItemList.Components.ItemListSorting" ) }}
     {{ component( "PluginCeres::ItemList.Components.Pagination" ) }}
+    {{ component( "PluginCeres::ItemList.Components.LoadingAnimation" ) }}
 
     <resource name="itemList" :data="{}"></resource>
 
@@ -18,6 +19,8 @@
                 <items-per-page :pagination-values="{{ config("PluginCeres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
                 <pagination></pagination>
             </div>
+
+            <loading-animation></loading-animation>
 
             <item-list></item-list>
         </div>

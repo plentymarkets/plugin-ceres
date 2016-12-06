@@ -10,7 +10,8 @@ module.exports = (function($)
             itemsPerPage: 20,
             orderBy: "itemName",
             orderByKey: "ASC",
-            page: 1
+            page: 1,
+            isLoading: false
         };
 
     return {
@@ -27,20 +28,29 @@ module.exports = (function($)
         {
             _updateUrl();
 
-            ResourceService.getResource("itemSearch").set(searchParams);
+            ResourceService.getResource("itemList").set({});
+            _setIsLoading(true);
 
             return ApiService.get("/rest/item/search", searchParams)
                 .done(function(response)
                 {
+                    _setIsLoading(false);
                     ResourceService.getResource("itemList").set(response);
                 })
                 .fail(function()
                 {
+                    _setIsLoading(false);
                     NotificationService.error("Error while searching").closeAfter(5000);
                 });
         }
 
         return null;
+    }
+
+    function _setIsLoading(isLoading)
+    {
+        searchParams.isLoading = isLoading;
+        ResourceService.getResource("itemSearch").set(searchParams);
     }
 
     /**
