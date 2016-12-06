@@ -1,3 +1,46 @@
 {
-  
+  "de":
+  {
+    "pictures":
+    {
+      "first": "URL",
+      "firstText": "Entspanntes Shopping von überall",
+      "second": "URL",
+      "secondText": "Shopping ohne Grenzen",
+      "third": "URL",
+      "thirdText": "Eines für alle: das neue Ceres"
+    },
+    "texts":
+    {
+      "welcome": "Herzlich Willkommen!",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Deskop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten."
+    },
+    "recommend":
+    {
+      "icon": "URL",
+      "recommendPlugins": "Plugin ContactCard, Plugin SocialMedia, etc.."
+    }
+  },
+  "en":
+  {
+    "pictures":
+    {
+      "first": "URL",
+      "firstText": "English",
+      "second": "URL",
+      "secondText": "English",
+      "third": "URL",
+      "thirdText": "English"
+    },
+    "texts":
+    {
+      "welcome": "English!",
+      "shortDescription": "English"
+    },
+    "recommend":
+    {
+      "icon": "URL",
+      "recommendPlugins": "Plugin ContactCard, Plugin SocialMedia, etc.."
+    }
+  }
 }
