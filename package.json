@@ -33,11 +33,12 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vue-infinite-scroll": "^0.2.3",
-    "jquery-lazyload":"^1.9.7"
+    "jquery-lazyload": "^1.9.7"
   },
   "dependencies": {
     "accounting": "^0.4.1",
     "bootstrap": "v4.0.0-alpha.3",
+    "devbridge-autocomplete": "^1.2.27",
     "flag-icon-css": "^2.4.0",
     "font-awesome": "^4.6.3",
     "jquery": "^2.2.4",
