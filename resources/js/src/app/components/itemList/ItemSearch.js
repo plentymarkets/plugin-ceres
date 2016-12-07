@@ -31,11 +31,17 @@ Vue.component("item-search", {
 
         $(".search-input").autocomplete({
             lookup: countries,
-            appendTo: $(".search-box-autocomplete"),
+            width: $(".search-box-shadow-frame").width(),
             onSelect: function(suggestion)
             {
                 console.log(suggestion);
             }
+        });
+
+        $(window).resize(function()
+        {
+            $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+            $(".autocomplete-suggestions").top($(".search-input").top() + $(".search-input").height());
         });
     },
 
