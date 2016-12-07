@@ -16,6 +16,27 @@ Vue.component("item-search", {
     ready: function()
     {
         ResourceService.bind("itemSearch", this);
+
+        var countries = [
+            {value: "Andorra", data: "AD"},
+            {value: "tets", data: "t1"},
+            {value: "Test", data: "tt"},
+            {value: "Test", data: "tt"},
+            {value: "Test", data: "tt"},
+            {value: "Test", data: "tt"},
+            {value: "Test", data: "tt"},
+            {value: "Test", data: "tt"},
+            {value: "Zimbabwe", data: "ZZ"}
+        ];
+
+        $(".search-input").autocomplete({
+            lookup: countries,
+            appendTo: $(".search-box-autocomplete"),
+            onSelect: function(suggestion)
+            {
+                console.log(suggestion);
+            }
+        });
     },
 
     methods:
