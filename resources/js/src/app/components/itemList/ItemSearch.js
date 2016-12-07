@@ -41,7 +41,6 @@ Vue.component("item-search", {
         $(window).resize(function()
         {
             $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            $(".autocomplete-suggestions").top($(".search-input").top() + $(".search-input").height());
         });
     },
 
