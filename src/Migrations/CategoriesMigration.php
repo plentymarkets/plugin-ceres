@@ -65,7 +65,7 @@ class CategoriesMigration
     }
     
     /**
-     * Create all standard categories needed for callisto 4
+     * Create all standard categories needed for ceres
      */
     public function run()
     {
@@ -115,7 +115,7 @@ class CategoriesMigration
     }
     
     /**
-     * Create the callisto 4 parent category
+     * Create the ceres parent category
      * @return int
      */
     private function createParentCategory()
@@ -124,12 +124,12 @@ class CategoriesMigration
             [
                 'plentyId' => 0,
                 'lang' => 'de',
-                'name' => 'callisto_4'
+                'name' => 'ceres'
             ],
             [
                 'plentyId' => 0,
                 'lang' => 'en',
-                'name' => 'callisto_4'
+                'name' => 'ceres'
             ]
         ];
         
