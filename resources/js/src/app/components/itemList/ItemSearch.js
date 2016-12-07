@@ -28,13 +28,14 @@ Vue.component("item-search", {
             {value: "Test", data: "tt"},
             {value: "Zimbabwe", data: "ZZ"}
         ];
+        var self = this;
 
         $(".search-input").autocomplete({
             lookup: countries,
             width: $(".search-box-shadow-frame").width(),
             onSelect: function(suggestion)
             {
-                console.log(suggestion);
+                self.itemSearch.searchString = suggestion.value;
             }
         });
 
