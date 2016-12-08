@@ -4,19 +4,19 @@
     "pictures":
     [
       {
-        "pictureUrl": "URL",
+        "pictureUrl": "http://imgur.com/Tm0lSwn",
         "text": "Entspanntes Shopping von überall",
-        "pictureLink": "URL"
+        "pictureLink": "http://imgur.com/"
       },
       {
-        "pictureUrl": "URL",
+        "pictureUrl": "http://imgur.com/YsvZU1m",
         "text": "Shopping ohne Grenzen",
-        "pictureLink": "URL"
+        "pictureLink": "http://imgur.com/"
       },
       {
-        "pictureUrl": "URL",
+        "pictureUrl": "http://imgur.com/2gf24HL",
         "text": "Eines für alle: das neue Ceres",
-        "pictureLink": "URL"
+        "pictureLink": "http://imgur.com/"
       }
     ],
     "texts":
