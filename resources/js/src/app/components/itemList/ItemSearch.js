@@ -36,6 +36,10 @@ Vue.component("item-search", {
             onSelect: function(suggestion)
             {
                 self.itemSearch.searchString = suggestion.value;
+            },
+            beforeRender: function()
+            {
+                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
             }
         });
 
