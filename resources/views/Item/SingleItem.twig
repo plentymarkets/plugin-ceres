@@ -31,7 +31,7 @@
                 </h6>
 
                 <h1 class="h3 title">
-                    {{ item.data.texts.description | itemName(configItemName) }} <span v-resource-bind:currentVariation="variationBase.variationName">{{ item.data.variation.name }}</span>
+                    {{ item.data.texts.description | itemName(configItemName) }} <span v-resource-bind:currentVariation="data.variation.name">{{ item.data.variation.name }}</span>
                 </h1>
 
                 {% if ('item.shortDescription' in itemData or 'all' in itemData) and item.data.texts.shortDescription != '' %}
@@ -51,7 +51,7 @@
 
                     <span class="articlenumber small text-muted">
                         <b>{{ trans("PluginCeres::Template.itemNumber") }}</b>
-                        <span v-resource-bind:currentVariation="variationBase.customNumber">{{ item.data.variation.number }}</span>
+                        <span v-resource-bind:currentVariation="data.variation.number">{{ item.data.variation.number }}</span>
                     </span>
                 </div>
 
@@ -63,22 +63,22 @@
 
                 {{ LayoutContainer.show("PluginCeres::SingleItem.BeforePrice") }}
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
-                    <div class="crossprice" v-resource-if:currentVariation="variationRecommendedRetailPrice.price > 0">
-                        <del class="text-muted small" v-resource-bind:currentVariation="variationRecommendedRetailPrice.price" :filters="['currency']">
-                            {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                    <div class="crossprice" v-resource-if:currentVariation="data.salesPrices[1].price > 0">
+                        <del class="text-muted small" v-resource-bind:currentVariation="data.salesPrices[1].price" :filters="['currency']">
+                            {#{{ item.data.salesPrices[1].price | formatMonetary(item.variationRetailPrice.currency) }} TODO get correct currency#}
                         </del>
                     </div>
                 {% endif %}
 
                 <span class="price h1">
-                    <span v-resource-bind:currentVariation="variationRetailPrice.price" :filters="['currency']">{{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span>
+                    {#<span v-resource-bind:currentVariation="variationRetailPrice.price" :filters="['currency']">{{ item.data.salesPrices[0].price | formatMonetary(item.variationRetailPrice.currency) }}</span> TODO GET CORRECT CURRENCY#}
                     <sup>*</sup>
                 </span>
 
                 {% for variationId, basePrice in basePriceList %}
-                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="variationBase.id == {{ variationId }}">
+                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="data.variation.id == {{ variationId }}">
                     {{ trans("PluginCeres::Template.itemUnitPrice") }}
-                    <span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> /
+                    {#<span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> / TODO GET CORRECT CURRENCY#}
                     <span class="base-price-amount">
                     {% if basePrice.lot > 1 %}
                         {{ basePrice.lot }}
@@ -90,7 +90,7 @@
                 {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice") }}
 
                 {% for availability in services.availability.getAvailabilities() %}
-                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="variationBase.availability == {{ availability.id }}">
+                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="data.variation.availability == {{ availability.id }}">
                     {{ availability.languages[0].name }}
                 </span>
                 {% endfor %}
@@ -130,16 +130,16 @@
             <div class="col-md-7 m-y-3">
 
                 <ul class="nav nav-tabs" role="tablist">
-                    {% if not item.itemDescription.description == '' and('item.description' in itemData or 'all' in itemData) %}
+                    {% if not item.data.texts.description == '' and('item.description' in itemData or 'all' in itemData) %}
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#details-{{ item.variationBase.id }}"
+                            <a class="nav-link active" data-toggle="tab" href="#details-{{ item.data.variation.id }}"
                                role="tab">{{ trans("PluginCeres::Template.itemDescription") }}</a>
                         </li>
                     {% endif %}
 
-                    {% if not item.itemDescription.technicalData == '' and('item.technical_data' in itemData or 'all' in itemData) %}
+                    {% if not item.data.texts.technicalData == '' and('item.technical_data' in itemData or 'all' in itemData) %}
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#data-{{ item.variationBase.id }}"
+                            <a class="nav-link" data-toggle="tab" href="#data-{{ item.data.variation.id }}"
                                role="tab">{{ trans("PluginCeres::Template.itemTechnicalData") }}</a>
                         </li>
                     {% endif %}
@@ -151,14 +151,14 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="details-{{ item.variationBase.id }}" role="tabpanel">
+                    <div class="tab-pane active" id="details-{{ item.data.variation.id }}" role="tabpanel">
                         <div class="m-y-2">
-                            {{ item.itemDescription.description|raw }}
+                            {{ item.data.texts.description|raw }}
                         </div>
                     </div>
-                    <div class="tab-pane" id="data-{{ item.variationBase.id }}" role="tabpanel">
+                    <div class="tab-pane" id="data-{{ item.data.variation.id }}" role="tabpanel">
                         <div class="m-y-2">
-                            {{ item.itemDescription.technicalData|raw }}
+                            {{ item.data.texts.technicalData|raw }}
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@
                                 {% if 'item.id' in itemData or 'all' in itemData %}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemId") }}</td>
-                                        <td>{{ item.itemBase.id }}</td>
+                                        <td>{{ item.data.item.id }}</td>
                                     </tr>
                                 {% endif %}
 
@@ -183,33 +183,33 @@
                                 {% if 'item.age_rating' in itemData or 'all' in itemData %}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemAge") }}</td>
-                                        <td>{{ trans("PluginCeres::Template.itemFSK", {"age": item.itemBase.ageRestriction }) }}</td>
+                                        <td>{{ trans("PluginCeres::Template.itemFSK", {"age": item.data.item.ageRestriction }) }}</td>
                                     </tr>
                                 {% endif %}
 
                                 {% if ('item.external_id' in itemData or 'all' in itemData) %}
-                                    <tr v-resource-if:currentVariation="variationBase.externalId != ''">
+                                    <tr v-resource-if:currentVariation="data.variation.externalId != ''">
                                         <td>{{ trans("PluginCeres::Template.itemExternalVariationId") }}</td>
-                                        <td v-resource-bind:currentVariation="variationBase.externalId">{{ item.variationBase.externalId }}</td>
+                                        <td v-resource-bind:currentVariation="data.variation.externalId">{{ item.data.variation.externalId }}</td>
                                     </tr>
                                 {% endif %}
 
                                 {% if ('item.variation_model' in itemData or 'all' in itemData) %}
-                                    <tr v-resource-if:currentVariation="variationBase.model != ''">
+                                    <tr v-resource-if:currentVariation="data.variation.model != ''">
                                         <td>{{ trans("PluginCeres::Template.itemModel") }}</td>
-                                        <td v-resource-bind:currentVariation="variationBase.model">{{ item.variationBase.model }}</td>
+                                        <td v-resource-bind:currentVariation="data.variation.model">{{ item.data.variation.model }}</td>
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.manufacturer' in itemData or 'all' in itemData) and item.itemBase.producer != '' %}
-                                    <tr>
-                                        <td>{{ trans("PluginCeres::Template.itemManufacturer") }}</td>
-                                        <td>{{ item.itemBase.producer }}</td>
-                                    </tr>
-                                {% endif %}
+                                {#{% if ('item.manufacturer' in itemData or 'all' in itemData) and item.data.item.producer != '' %} TODO GET PRODUCER#}
+                                    {#<tr>#}
+                                        {#<td>{{ trans("PluginCeres::Template.itemManufacturer") }}</td>#}
+                                        {#<td>{{ item.itemBase.producer }}</td>#}
+                                    {#</tr>#}
+                                {#{% endif %}#}
 
-                                {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.itemBase.producingCountryId != '' %}
-                                    {% set country = services.country.getCountryName(item.itemBase.producingCountryId) %}
+                                {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.data.item.producingCountryId != '' %}
+                                    {% set country = services.country.getCountryName(item.data.item.producingCountryId) %}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemManufacturingCountry") }}</td>
                                         <td>{{ country }}</td>
@@ -217,24 +217,24 @@
                                 {% endif %}
 
                                 {% if 'item.variationBase_content' in itemData or 'all' in itemData %}
-                                    {% set unit = services.unit.getUnitById(item.variationBase.unitId) %}
+                                    {#{% set unit = services.unit.getUnitById(item.data.variation.unitId) %} TODO GET UNIT ID#}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemContent") }}</td>
-                                        <td>{{ item.variationBase.content|formatDecimal(0) }} {{ unit.name }}</td>
+                                        {#<td>{{ item.data.variation.content|formatDecimal(0) }} {{ unit.name }}</td> TODO GET CONTENT#}
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.weightG' in itemData or 'all' in itemData) and item.variationBase.weightG != '' %}
-                                    <tr v-resource-if:currentVariation="variationBase.weightG != ''">
+                                {% if ('item.weightG' in itemData or 'all' in itemData) and item.data.variation.weightG != '' %}
+                                    <tr v-resource-if:currentVariation="data.variation.weightG != ''">
                                         <td>{{ trans("PluginCeres::Template.itemWeight") }}</td>
-                                        <td v-resource-bind:currentVariation="variationBase.weightG">{{ item.variationBase.weightG }}g</td>
+                                        <td v-resource-bind:currentVariation="data.variation.weightG">{{ item.data.variation.weightG }}g</td>
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.weightNetG' in itemData or 'all' in itemData) and item.variationBase.weightNetG != '' %}
-                                    <tr v-resource-if:currentVariation="variationBase.weightNetG != ''">
+                                {% if ('item.weightNetG' in itemData or 'all' in itemData) and item.data.variation.weightNetG != '' %}
+                                    <tr v-resource-if:currentVariation="data.variation.weightNetG != ''">
                                         <td>{{ trans("PluginCeres::Template.itemNetWeight") }}</td>
-                                        <td v-resource-bind:currentVariation="variationBase.weightNetG">{{ item.variationBase.weightNetG }}g</td>
+                                        <td v-resource-bind:currentVariation="data.variation.weightNetG">{{ item.data.variation.weightNetG }}g</td>
                                     </tr>
                                 {% endif %}
 
@@ -242,17 +242,17 @@
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemDimensions") }}</td>
                                         <td>
-                                            <span v-resource-bind:currentVariation="variationBase.lengthMm">{{ item.variationBase.lengthMm }}</span>&times;<!--
-                                            --><span v-resource-bind:currentVariation="variationBase.widthMm">{{ item.variationBase.widthMm }}</span>&times;<!--
-                                            --><span v-resource-bind:currentVariation="variationBase.heightMm">{{ item.variationBase.heightMm }}</span> mm
+                                            <span v-resource-bind:currentVariation="data.variation.lengthMM">{{ item.data.variation.lengthMM }}</span>&times;<!--
+                                            --><span v-resource-bind:currentVariation="data.variation.widthMM">{{ item.data.variation.widthMM }}</span>&times;<!--
+                                            --><span v-resource-bind:currentVariation="data.variation.heightMM">{{ item.data.variation.heightMM }}</span> mm
                                         </td>
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.customs_tariff_number' in itemData or 'all' in itemData) and item.itemBase.customsTariffNumber != '' %}
+                                {% if ('item.customs_tariff_number' in itemData or 'all' in itemData) and item.data.item.customsTariffNumber != '' %}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemCustomsTariffNumber") }}</td>
-                                        <td>{{ item.itemBase.customsTariffNumber }}</td>
+                                        <td>{{ item.data.item.customsTariffNumber }}</td>
                                     </tr>
                                 {% endif %}
                                 </tbody>
