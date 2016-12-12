@@ -13,7 +13,8 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             basketItem: {currentBasketItem: { }},
-            timeToClose: 5
+            timeToClose: 5,
+            price: 0
         };
     },
 
@@ -46,7 +47,25 @@ Vue.component("add-item-to-basket-overlay", {
                 this.startCounter();
             }
 
+            this.setPriceFromData();
+
             return render;
+        },
+
+        /**
+         * iterate through the basketItem prices and get the "default" typed price
+         */
+        setPriceFromData: function()
+        {
+            for (var i in this.basketItem.currentBasketItem.salesPrices)
+            {
+                var priceData = this.basketItem.currentBasketItem.salesPrices[i];
+
+                if (priceData.type === "default")
+                {
+                    this.price = priceData.price;
+                }
+            }
         },
 
         /**
