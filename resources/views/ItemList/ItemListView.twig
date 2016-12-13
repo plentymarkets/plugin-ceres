@@ -2,11 +2,17 @@
 
 {% block PageBody %}
 
+    {% set searchResult = getExternalContent("https://rawgit.com/cjohannsen/b57d4cc2c730734a16ad084d88ddf489/raw/c7e883e0643d4a6901fd98f838e0702727656bfa/elastic_search_result.json") %}
+
+    {{ component( "PluginCeres::ItemList.Components.AddToBasket" ) }}
+    {{ component( "PluginCeres::ItemList.Components.CategoryItem" ) }}
     {{ component( "PluginCeres::ItemList.Components.ItemList" ) }}
-    {{ component( "PluginCeres::ItemList.Components.ItemsPerPage" ) }}
     {{ component( "PluginCeres::ItemList.Components.ItemListSorting" ) }}
-    {{ component( "PluginCeres::ItemList.Components.Pagination" ) }}
+    {{ component( "PluginCeres::ItemList.Components.ItemsPerPage" ) }}
+    {{ component( "PluginCeres::ItemList.Components.ItemStoreSpecial" ) }}
     {{ component( "PluginCeres::ItemList.Components.LoadingAnimation" ) }}
+    {{ component( "PluginCeres::ItemList.Components.Pagination" ) }}
+    {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
 
     <resource name="itemList" :data="{}"></resource>
 
@@ -19,11 +25,13 @@
                 <items-per-page :pagination-values="{{ config("PluginCeres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
                 <pagination></pagination>
             </div>
-
-            <loading-animation></loading-animation>
-
-            <item-list></item-list>
         </div>
+
+        <div class="col-xs-12">
+            <loading-animation></loading-animation>
+            <item-list :test-data="{{ searchResult }}"></item-list>
+        </div>
+
         <div class="list-controls m-b-3 row">
             <div class="col-xs-12">
                 {#<pagination></pagination>#}
