@@ -36,6 +36,13 @@ module.exports = (function($)
                 {
                     _setIsLoading(false);
                     ResourceService.getResource("itemList").set(response);
+
+                    $("img.lazy").show().lazyload({
+                        effect : "fadeIn",
+                        event : "loadLazy"
+                    });
+
+                    $("img.lazy").trigger("loadLazy");
                 })
                 .fail(function()
                 {
