@@ -16,37 +16,7 @@ Vue.component("item-search", {
     ready: function()
     {
         ResourceService.bind("itemSearch", this);
-
-        var countries = [
-            {value: "Andorra", data: "AD"},
-            {value: "tets", data: "t1"},
-            {value: "Test", data: "tt"},
-            {value: "Test", data: "tt"},
-            {value: "Test", data: "tt"},
-            {value: "Test", data: "tt"},
-            {value: "Test", data: "tt"},
-            {value: "Test", data: "tt"},
-            {value: "Zimbabwe", data: "ZZ"}
-        ];
-        var self = this;
-
-        $(".search-input").autocomplete({
-            lookup: countries,
-            width: $(".search-box-shadow-frame").width(),
-            onSelect: function(suggestion)
-            {
-                self.itemSearch.searchString = suggestion.value;
-            },
-            beforeRender: function()
-            {
-                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            }
-        });
-
-        $(window).resize(function()
-        {
-            $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-        });
+        this.initAutocomplete();
     },
 
     methods:
@@ -61,6 +31,34 @@ Vue.component("item-search", {
             {
                 window.open("/search?searchString=" + this.itemSearch.searchString, "_self", false);
             }
+        },
+
+        initAutocomplete: function()
+        {
+            var self = this;
+
+            $(".search-input").autocomplete({
+                serviceUrl: "/rest/item/search/autocomplete",
+                paramName: "searchString",
+                width: $(".search-box-shadow-frame").width(),
+                onSelect: function(suggestion)
+                {
+                    self.itemSearch.searchString = suggestion.value;
+                },
+                beforeRender: function()
+                {
+                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+                },
+                transformResult: function(response)
+                {
+                    console.log(response);
+                }
+            });
+
+            $(window).resize(function()
+            {
+                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+            });
         }
     }
 });
