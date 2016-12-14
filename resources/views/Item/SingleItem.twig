@@ -27,7 +27,7 @@
             <div class="col-md-5 single-rightside m-t-1">
 
                 <h6 class="producertag">
-                    {#<a href="#" class="producer text-muted">{{ item.itemBase.producer }}</a> TODO MISSING#}
+                    <a href="#" class="producer text-muted">{{ item.data.item.producer }}</a>
                 </h6>
 
                 <h1 class="h3 title">
@@ -201,12 +201,12 @@
                                     </tr>
                                 {% endif %}
 
-                                {#{% if ('item.manufacturer' in itemData or 'all' in itemData) and item.data.item.producer != '' %} TODO GET PRODUCER#}
-                                    {#<tr>#}
-                                        {#<td>{{ trans("PluginCeres::Template.itemManufacturer") }}</td>#}
-                                        {#<td>{{ item.itemBase.producer }}</td>#}
-                                    {#</tr>#}
-                                {#{% endif %}#}
+                                {% if ('item.manufacturer' in itemData or 'all' in itemData) and item.data.item.producer != '' %}
+                                    <tr>
+                                        <td>{{ trans("PluginCeres::Template.itemManufacturer") }}</td>
+                                        <td>{{ item.data.item.producer }}</td>
+                                    </tr>
+                                {% endif %}
 
                                 {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.data.item.producingCountryId != '' %}
                                     {% set country = services.country.getCountryName(item.data.item.producingCountryId) %}
@@ -217,10 +217,9 @@
                                 {% endif %}
 
                                 {% if 'item.variationBase_content' in itemData or 'all' in itemData %}
-                                    {#{% set unit = services.unit.getUnitById(item.data.variation.unitId) %} TODO GET UNIT ID#}
                                     <tr>
                                         <td>{{ trans("PluginCeres::Template.itemContent") }}</td>
-                                        {#<td>{{ item.data.variation.content|formatDecimal(0) }} {{ unit.name }}</td> TODO GET CONTENT#}
+                                        <td>{{ item.data.unit.content|formatDecimal(0) }} {{ item.data.unit.names.name }}</td>
                                     </tr>
                                 {% endif %}
 
