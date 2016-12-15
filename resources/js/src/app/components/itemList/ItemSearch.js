@@ -41,6 +41,9 @@ Vue.component("item-search", {
                 serviceUrl: "/rest/item/search/autocomplete",
                 paramName: "searchString",
                 width: $(".search-box-shadow-frame").width(),
+                zIndex: 1061,
+                maxHeight: 310,
+                preventBadQueries: false,
                 onSelect: function(suggestion)
                 {
                     self.itemSearch.searchString = suggestion.value;
@@ -51,24 +54,33 @@ Vue.component("item-search", {
                 },
                 transformResult: function(response)
                 {
-                    response = JSON.parse(response);
-
-                    return {
-                        suggestions: $.map(response.data.documents, function(dataItem)
-                        {
-                            var value = dataItem.data.texts[0].name1;
-
-                            return {value: value, data: value};
-                        })
-                    };
-                },
-                preventBadQueries: false
+                    return self.transformSuggestionResult(response);
+                }
             });
 
             $(window).resize(function()
             {
                 $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
             });
+        },
+
+        transformSuggestionResult: function(result)
+        {
+            result = JSON.parse(result);
+            var suggestions =
+                {
+                    suggestions: $.map(result.data.documents, function(dataItem)
+                    {
+                        var value = dataItem.data.texts[0].name1;
+
+                        return {
+                            value: value,
+                            data : value
+                        };
+                    })
+                };
+
+            return suggestions;
         }
     }
 });
