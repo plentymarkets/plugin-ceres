@@ -43,6 +43,7 @@ Vue.component("item-search", {
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1061,
                 maxHeight: 310,
+                minChars: 2,
                 preventBadQueries: false,
                 onSelect: function(suggestion)
                 {
