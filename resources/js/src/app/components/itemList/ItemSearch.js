@@ -48,6 +48,7 @@ Vue.component("item-search", {
                 onSelect: function(suggestion)
                 {
                     self.itemSearch.searchString = suggestion.value;
+                    self.search();
                 },
                 beforeRender: function()
                 {
