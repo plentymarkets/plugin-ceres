@@ -51,8 +51,18 @@ Vue.component("item-search", {
                 },
                 transformResult: function(response)
                 {
-                    console.log(response);
-                }
+                    response = JSON.parse(response);
+
+                    return {
+                        suggestions: $.map(response.data.documents, function(dataItem)
+                        {
+                            var value = dataItem.data.texts[0].name1;
+
+                            return {value: value, data: value};
+                        })
+                    };
+                },
+                preventBadQueries: false
             });
 
             $(window).resize(function()
