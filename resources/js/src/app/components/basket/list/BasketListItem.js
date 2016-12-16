@@ -1,5 +1,5 @@
 var ResourceService       = require("services/ResourceService");
-var ApiService          = require("services/ApiService");
+// var ApiService          = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
@@ -18,59 +18,31 @@ Vue.component("basket-list-item", {
             waiting: false,
             deleteConfirmed: false,
             deleteConfirmedTimeout: null,
-            itemAvailability: "",
             itemCondition: ""
         };
     },
 
     ready: function()
     {
-        this.getAvailability();
         this.getItemCondition();
     },
 
     methods: {
-
-        getAvailability: function()
-        {
-            var self = this;
-
-            ApiService.get("/rest/item/availability/" + this.basketItem.variation.variationBase.availability)
-                .done(function(response)
-                {
-                    ApiService.setToken(response);
-
-                    for (var i = 0; i < response.languages.length; i++)
-                    {
-                        if (response.languages[i].language === self.language)
-                        {
-                            self.itemAvailability = response.languages[i].name;
-                        }
-                    }
-
-                })
-                .fail(function(response)
-                {
-                    // TODO
-                });
-        },
-
         getItemCondition: function()
         {
-            var self = this;
 
-            ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
-                .done(function(response)
-                {
-                    ApiService.setToken(response);
-
-                    self.itemCondition = response;
-
-                })
-                .fail(function(response)
-                {
-                    // TODO
-                });
+            // ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
+            //     .done(function(response)
+            //     {
+            //         ApiService.setToken(response);
+            //
+            //         self.itemCondition = response;
+            //
+            //     })
+            //     .fail(function(response)
+            //     {
+            //         // TODO
+            //     });
         },
 
         /**
