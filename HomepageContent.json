@@ -1,0 +1,146 @@
+{
+  "de":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "https://picload.org/image/raaccrrp/slider-image-1.jpg",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "http://imgur.com/"
+      },
+      {
+        "pictureUrl": "https://picload.org/image/raaccrdg/slider-image-2.jpg",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "http://imgur.com/"
+      },
+      {
+        "pictureUrl": "https://picload.org/image/raaccrdd/slider-image-3.jpg",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "http://imgur.com/"
+      }
+    ],
+    "texts":
+    {
+      "welcome": "Herzlich Willkommen!",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von ContactCard",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin ContactCard"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Das ist der Text von SocialMedia",
+        "pluginLink": "URL",
+        "pluginTitle": "Plugin SocialMedia"
+      }
+    ]
+  },
+  "en":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "URL",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "URL"
+      }
+    ],
+    "texts":
+    {
+      "welcome": "DAS IST ENGLISCH",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin ContactCard",
+        "pluginLink": "URL"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin SocialMedia",
+        "pluginLink": "URL"
+      }
+    ]
+  }
+}
