@@ -1,8 +1,7 @@
-{{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
+{{ component( "PluginCeres::ItemList.Components.AddToBasket" ) }}
 
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCeres.item.name") %}
-{% set itemData = config("PluginCeres.item.data")|split(', ') %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
@@ -35,18 +34,16 @@
         </div>
 
         <div class="thumb-controls">
-            <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="false"></add-item-to-basket>
+            <add-to-basket :item="{{ item.data | json_encode() }}" :show-quantity="false"></add-to-basket>
         </div>
-
-        <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
+        <a href="/{{ item.data.variation.itemId }}/{{ item.data.variation.clientVariationId }}" class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
-                    <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}"
+                    <img class="img-fluid lazy" data-original="{{ item.data.images.all[0].urlMiddle }}"
                          alt="{{ item.itemDescription.name1 }}"/>
                     <noscript>
-                        <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}"
-                             alt="{{ item.itemDescription.name1 }}"/>
+                        <img class="img-fluid" src="{{ item.data.images.all[0].urlMiddle }}"
+                             alt="{{ item.data.texts[0].name1 }}"/>
                     </noscript>
                 </div>
             </div>
@@ -54,12 +51,12 @@
 
         <!-- STORE SPECIALS -->
 
-        {% if item.itemBase.storeSpecial > 0 %}
+        {% if item.data.item.storeSpecial > 0 %}
             <div class="special-tags">
-                {% if  item.itemBase.storeSpecial == 1 %}
+                {% if  item.data.item.storeSpecial == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}
+                    {% set percent = 100-(item.data.salesPrices[1].price/item.data.salesPrices[0].price*100) %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('PluginCeres.item.storeSpecial') %}
@@ -69,14 +66,14 @@
                         {% set storeSpecial = "SALE" %}
                     {% endif %}
 
-                {% elseif  item.itemBase.storeSpecial == 2 %}
+                {% elseif  item.data.item.storeSpecial == 2 %}
 
                     {% set storeSpecial = "NEW" %}
                     {% set storeSpecialColor = 'primary' %}
 
-                {% elseif  item.itemBase.storeSpecial == 3 %}
+                {% elseif  item.data.item.storeSpecial == 3 %}
 
-                    {% set storeSpecial = "Top" %}
+                    {% set storeSpecial = "TOP" %}
                     {% set storeSpecialColor = 'success' %}
 
                 {% endif %}
@@ -91,21 +88,21 @@
 
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
-            <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-title small">
-                {{ item.itemDescription | itemName(configItemName) }}
-                {{ item.variationBase.variationName }}
+            <a href="/{{ item.data.variation.itemId }}/{{ item.data.variation.clientVariationId }}" class="thumb-title small">
+                {{ item.data.texts[0].name1 }}
             </a>
             <div class="thumb-meta">
                 <div class="prices">
-                    {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
-                    and item.variationRecommendedRetailPrice.price != '' %}
+                    {% if item.data.salesPrices[1].price != '0' %}
                         <del class="crossprice">
-                            {{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                            {{ item.data.salesPrices[1].price }} €
+                            {#{{ item.data.salesPrices[1].price != '0' | formatMonetary(item.variationRetailPrice.currency) }}#}
                         </del>
                     {% endif %}
 
                     <div class="price">
-                        {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
+                        {{ item.data.salesPrices[0].price }} €
+                        {#{{ variationRetailPrice | formatMonetary(item.variationRetailPrice.currency) }}#}
                     </div>
                 </div>
             </div>
