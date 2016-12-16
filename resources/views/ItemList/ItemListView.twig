@@ -2,8 +2,6 @@
 
 {% block PageBody %}
 
-    {% set searchResult = getExternalContent("https://rawgit.com/cjohannsen/b57d4cc2c730734a16ad084d88ddf489/raw/c7e883e0643d4a6901fd98f838e0702727656bfa/elastic_search_result.json") %}
-
     {{ component( "PluginCeres::ItemList.Components.AddToBasket" ) }}
     {{ component( "PluginCeres::ItemList.Components.CategoryItem" ) }}
     {{ component( "PluginCeres::ItemList.Components.ItemList" ) }}
@@ -29,7 +27,7 @@
 
         <div class="col-xs-12">
             <loading-animation></loading-animation>
-            <item-list :test-data="{{ searchResult }}"></item-list>
+            <item-list></item-list>
         </div>
 
         <div class="list-controls m-b-3 row">

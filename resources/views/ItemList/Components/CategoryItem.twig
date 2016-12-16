@@ -33,19 +33,14 @@
 
                 <div class="thumb-controls">
                     <add-to-basket :item="itemData" :show-quantity="false"></add-to-basket>
-                    {#<add-item-to-basket :show-quantity="false"></add-item-to-basket>#}
-                    {#<add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="false"></add-item-to-basket>#}
                 </div>
+
 
                 <a href="${ itemPath }" class="thumb-image">
                     <div class="square-container">
                         <div class="square-inner main-image">
-                            <img class="img-fluid lazy" data-original="${ itemData.images.item[0].urlPreview }"
-                                 alt="${ itemData.texts[0].name1 }"/>
-                            <noscript>
-                                <img class="img-fluid" :src="itemData.images.item[0].urlPreview"
-                                     alt="${ itemData.texts[0].name1 }"/>
-                            </noscript>
+                            <img class="img-fluid lazy" v-el:lazy-img data-original="${ imageUrls[0] }"
+                                 alt="${ texts | itemName }"/>
                         </div>
                     </div>
                 </a>
@@ -60,7 +55,7 @@
                 <!-- ITEM DETAILS -->
                 <div class="thumb-content">
                     <a href="${ itemPath }" class="thumb-title small">
-                        ${ itemData.texts[0].name1 }
+                        ${ texts | itemName }
                     </a>
                     <div class="thumb-meta">
                         <div class="prices">

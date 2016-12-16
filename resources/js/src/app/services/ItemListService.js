@@ -8,10 +8,10 @@ module.exports = (function($)
         {
             searchString: "",
             itemsPerPage: 20,
-            orderBy: "itemName",
-            orderByKey: "ASC",
-            page: 1,
-            isLoading: false
+            orderBy     : "itemName",
+            orderByKey  : "ASC",
+            page        : 1,
+            isLoading   : false
         };
 
     return {
@@ -36,13 +36,6 @@ module.exports = (function($)
                 {
                     _setIsLoading(false);
                     ResourceService.getResource("itemList").set(response);
-
-                    $("img.lazy").show().lazyload({
-                        effect : "fadeIn",
-                        event : "loadLazy"
-                    });
-
-                    $("img.lazy").trigger("loadLazy");
                 })
                 .fail(function()
                 {

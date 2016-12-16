@@ -8,8 +8,9 @@ Vue.component("pagination", {
     data: function()
     {
         return {
-            itemSearch: {},
-            itemList: {}
+            itemSearch : {},
+            itemList   : {},
+            lastPageMax: 0
         };
     },
 
@@ -31,18 +32,24 @@ Vue.component("pagination", {
     {
         page: function()
         {
-            return this.itemList.page || 1;
+            return parseInt(this.itemSearch.page) || 1;
         },
 
         pageMax: function()
         {
-            var pageMax = this.itemList.totalsCount / this.itemSearch.itemsPerPage;
+            if (this.itemSearch.isLoading)
+            {
+                return this.lastPageMax;
+            }
 
-            if (this.itemList.totalsCount % this.itemSearch.itemsPerPage > 0)
+            var pageMax = this.itemList.total / this.itemSearch.itemsPerPage;
+
+            if (this.itemList.total % this.itemSearch.itemsPerPage > 0)
             {
                 pageMax += 1;
             }
 
+            this.lastPageMax = parseInt(pageMax) || 1;
             return parseInt(pageMax) || 1;
         }
     }

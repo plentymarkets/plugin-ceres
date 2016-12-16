@@ -21,6 +21,7 @@ Vue.component("item-list", {
     {
         ResourceService.bind("itemList", this);
         ResourceService.bind("itemSearch", this);
+
         ItemListService.setSearchParams(document.location.search);
     }
 });
