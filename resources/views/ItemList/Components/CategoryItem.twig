@@ -36,7 +36,7 @@
                 </div>
 
 
-                <a href="${ itemPath }" class="thumb-image">
+                <a href="${ itemData | itemURL }" class="thumb-image">
                     <div class="square-container">
                         <div class="square-inner main-image">
                             <img class="img-fluid lazy" v-el:lazy-img data-original="${ imageUrls[0] }"
@@ -54,7 +54,7 @@
 
                 <!-- ITEM DETAILS -->
                 <div class="thumb-content">
-                    <a href="${ itemPath }" class="thumb-title small">
+                    <a href="${ itemData | itemURL }" class="thumb-title small">
                         ${ texts | itemName }
                     </a>
                     <div class="thumb-meta">

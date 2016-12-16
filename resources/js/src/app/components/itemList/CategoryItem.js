@@ -86,14 +86,6 @@ Vue.component("category-item", {
             }
 
             return urls;
-        },
-
-        /**
-         * returns path to build URL for SingleItem
-         */
-        itemPath: function()
-        {
-            return "/" + this.itemData.variation.itemId + "/" + this.itemData.variation.clientVariationId;
         }
     }
 });
