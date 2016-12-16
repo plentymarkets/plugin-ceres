@@ -5,16 +5,23 @@ Vue.component("item-list", {
 
     template: "#vue-item-list",
 
+    props: [
+        "testData"
+    ],
+
     data: function()
     {
         return {
-            itemList: {}
+            itemList: {},
+            itemSearch: {}
         };
     },
 
-    ready: function()
+    created: function()
     {
         ResourceService.bind("itemList", this);
+        ResourceService.bind("itemSearch", this);
+
         ItemListService.setSearchParams(document.location.search);
     }
 });

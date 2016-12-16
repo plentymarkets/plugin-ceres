@@ -51,4 +51,6 @@ dt {
     border-left: 1px solid $gray-dark;
 }
 
-
+.pagination > li {
+    cursor: pointer;
+}
