@@ -31,9 +31,9 @@
                 </h6>
 
                 <h1 class="h3 title">
-                    {{ item.documents[0].data.texts[0] | itemName(configItemName) }} {#<span v-resource-bind:currentVariation="data.variation.name">{{ item.data.variation.name }}</span> TODO CHANGE BACK#}
+                    {#{{ item.documents[0].data.texts[0] | itemName(configItemName) }} <span v-resource-bind:currentVariation="data.variation.name">{{ item.data.variation.name }}</span> TODO CHANGE BACK#}
                     {#<span v-resource-bind:currentVariation="data.variation.name">{{ item.documents[0].data.variation.name }}</span>#}
-                    {#<span>{{ item.documents[0].data.texts[0].name1 }}</span>#}
+                    <span>{{ item.documents[0].data.texts[0].name1 }}</span>
                 </h1>
 
                 {% if ('item.shortDescription' in itemData or 'all' in itemData) and item.documents[0].data.texts[0].shortDescription != '' %}
