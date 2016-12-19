@@ -22,8 +22,7 @@
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                {#${ basketItem.variation.itemDescription | itemName {{ configItemName }} } ${ basketItem.variation.variationBase.variationName }#}
-                ${ basketItem.variation.data.texts[0].name1 }
+                ${ basketItem.variation.data.texts[0] | itemName {{ configItemName }} } {# ${ basketItem.variation.variationBase.variationName } #}
             </div>
         </a>
         <div class="item-unit-price">
