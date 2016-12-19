@@ -8,10 +8,10 @@ module.exports = (function($)
         {
             searchString: "",
             itemsPerPage: 20,
-            orderBy: "itemName",
-            orderByKey: "ASC",
-            page: 1,
-            isLoading: false
+            orderBy     : "itemName",
+            orderByKey  : "ASC",
+            page        : 1,
+            isLoading   : false
         };
 
     return {
