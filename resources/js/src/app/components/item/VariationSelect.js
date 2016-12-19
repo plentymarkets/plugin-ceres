@@ -103,7 +103,7 @@ Vue.component("variation-select", {
 
             if (match)
             {
-                url = "/" + match[1] + "/" + match[2] + "/" + newVariation.variationBase.id;
+                url = "/" + match[1] + "/" + match[2] + "/" + newVariation.documents[0].id;
             }
 
             window.history.replaceState({}, title, url);
