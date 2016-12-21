@@ -75,7 +75,7 @@
 
                 <span class="price h1">
                     {#<span v-resource-bind:currentVariation="variationRetailPrice.price" :filters="['currency']">{{ item.data.salesPrices[0].price | formatMonetary(item.variationRetailPrice.currency) }}</span> TODO GET CORRECT CURRENCY#}
-                    <span v-resource-bind:currentVariation="documents[0].data.salesPrices[1].price" :filters="['currency']">{{ item.documents[0].data.salesPrices[0].price | formatMonetary("EUR") }}</span>
+                    <span v-resource-bind:currentVariation="documents[0].data.salesPrices[0].price" :filters="['currency']">{{ item.documents[0].data.salesPrices[0].price | formatMonetary("EUR") }}</span>
                     <sup>*</sup>
                 </span>
 
@@ -83,7 +83,7 @@
                 <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="documents[0].data.variation.id == {{ variationId }}">
                     {{ trans("PluginCeres::Template.itemUnitPrice") }}
                     {#<span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> / TODO GET CORRECT CURRENCY#}
-                    <span class="base-price-value">{{ item.documents[0].data.salesPrices[1].price | formatMonetary("EUR") }}</span> /
+                    <span class="base-price-value">{{ item.documents[0].data.salesPrices[0].price | formatMonetary("EUR") }}</span> /
                     <span class="base-price-amount">
                     {% if basePrice.lot > 1 %}
                         {{ basePrice.lot }}
@@ -94,11 +94,19 @@
                 {% endfor %}
                 {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice") }}
 
-                {% for availability in services.availability.getAvailabilities() %}
-                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability == {{ availability.id }}">
-                    {{ availability.languages[0].name }}
+                {#{% for availability in services.availability.getAvailabilities() %}#}
+                {#<span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability == {{ availability.id }}">#}
+                    {#{{ availability.languages[0].name }}#}
+                {#</span>#}
+                {#{% endfor %}#}
+
+                <span class="availability tag availability_{{ item.documents[0].data.variation.availability.id }}">
+                    {% for availabilityName in item.documents[0].data.variation.availability.names %}
+                        {% if availabilityName.lang == services.sessionStorage.getLang() %}
+                            {{ availabilityName.name }}
+                        {% endif %}
+                    {% endfor %}
                 </span>
-                {% endfor %}
 
                 <div class="row m-y-1">
 

@@ -43,7 +43,7 @@
             };
         },
 
-        ready: function()
+        created: function()
         {
             // (Re-)initialize carousels on each variation change
             ResourceService.watch("currentVariation", function(newValue)
