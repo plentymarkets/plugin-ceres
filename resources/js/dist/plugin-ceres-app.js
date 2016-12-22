@@ -1624,7 +1624,7 @@ Vue.component("quantity-input", {
             };
         },
 
-        ready: function()
+        created: function()
         {
             // (Re-)initialize carousels on each variation change
             ResourceService.watch("currentVariation", function(newValue)
@@ -1793,7 +1793,7 @@ Vue.component("variation-select", {
 
             if (match)
             {
-                url = "/" + match[1] + "/" + match[2] + "/" + newVariation.variationBase.id;
+                url = "/" + match[1] + "/" + match[2] + "/" + newVariation.documents[0].id;
             }
 
             window.history.replaceState({}, title, url);
