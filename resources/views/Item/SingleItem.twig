@@ -10,7 +10,7 @@
 {% block PageBody %}
     {{ component( "PluginCeres::Item.Components.VariationSelect" ) }}
     {{ component( "PluginCeres::Item.Components.VariationImageList" ) }}
-    {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
+    {{ component( "PluginCeres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
 
@@ -101,9 +101,8 @@
                 {% endfor %}
 
                 <div class="row m-y-1">
-
                     {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
-                    <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="true"></add-item-to-basket>
+                    <add-to-basket :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket") }}
                 </div>
