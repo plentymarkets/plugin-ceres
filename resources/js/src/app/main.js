@@ -91,24 +91,6 @@ vueApp = new Vue({
         {
             $("#mainNavbarCollapse").collapse("hide");
         }
-
-        // initialize lazyload for articles
-        $("img.lazy").show().lazyload({
-            effect : "fadeIn"
-        });
-
-        $(".cmp-product-thumb").on("mouseover", function(event)
-        {
-            $(this).find("img").each(function(i, img)
-            {
-                var $img = $(img);
-
-                if (!$img.attr("src"))
-                {
-                    $(img).lazyload();
-                }
-            });
-        });
     }
 
     window.CallistoMain = new CallistoMain();

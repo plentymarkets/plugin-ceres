@@ -5,53 +5,15 @@
             <div class="thumb-inner">
                 <div class="thumb-background"></div>
 
-                <div class="basket-test">
-                    <a href="/test">
-                        <i style="width: 50px; height: 50px;" class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </a>
-                    {#<button href="#" class="btn btn-block btn-primary" @click="addToBasket()">#}
-                        {#<i class="fa fa-shopping-cart" aria-hidden="true"></i>#}
-                    {#</button>#}
-                </div>
-                {#<div class="thumb-extras">#}
-                    {#<div class="thumb-scroll-cmd scroll-up">#}
-                        {#<i class="fa fa-chevron-up" aria-hidden="true"></i>#}
-                    {#</div>#}
-                    {#<ul>#}
-                        {#<li class="img-contain-container square-container">#}
-                            {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
-                        {#</li>#}
-                        {#<li class="img-contain-container square-container">#}
-                            {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
-                        {#</li>#}
-                        {#<li class="img-contain-container square-container">#}
-                            {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
-                        {#</li>#}
-                        {#<li class="img-contain-container square-container">#}
-                            {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
-                        {#</li>#}
-                        {#<li class="img-contain-container square-container">#}
-                            {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
-                        {#</li>#}
-                    {#</ul>#}
-                    {#<div class="thumb-scroll-cmd scroll-down">#}
-                        {#<i class="fa fa-chevron-down" aria-hidden="true"></i>#}
-                    {#</div>#}
-                {#</div>#}
+                <add-to-basket :item="itemData" :show-quantity="false"></add-to-basket>
 
-                {#<div class="thumb-controls">#}
-                    {#<add-to-basket :item="itemData" :show-quantity="false"></add-to-basket>#}
-                {#</div>#}
-
-
-                <a href="${ itemData | itemURL }" class="thumb-image">
-                    <div class="square-container">
-                        <div class="square-inner main-image">
-                            <img class="img-fluid lazy" v-el:lazy-img data-original="${ imageUrls[0] }"
-                                 alt="${ texts | itemName }"/>
-                        </div>
+                <div class="square-container">
+                    <div class="square-inner main-image">
+                        <image-carousel
+                                :image-urls="itemData.images | itemImages imageUrlAccessor"
+                                :item-url="itemData | itemURL"></image-carousel>
                     </div>
-                </a>
+                </div>
 
                 <!-- STORE SPECIALS -->
                 <item-store-special v-if="storeSpecial > 0" :store-special="storeSpecial"
@@ -82,21 +44,3 @@
         </article>
     </li>
 </script>
-
-<style>
-    .basket-test {
-        opacity: 0;
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        display: block;
-        left: 150px;
-        top: 15px;
-        /*margin-top: 10px;*/
-        /*margin-left: 10px;*/
-        background-color: red;
-        border-radius: 100px;
-        z-index: 10;
-        -webkit-transition: opacity .2s cubic-bezier(0,0,.26,1);
-    }
-</style>

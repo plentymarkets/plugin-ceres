@@ -5,8 +5,6 @@
     border: 1px solid $gray-lighter;
     margin-bottom: $grid-gutter-width/2;
 
-
-
     .thumb-background{
         position: absolute;
         top: -1px;
@@ -21,23 +19,6 @@
         transform: scaleX(1) scaleY(1);
 
         transition: all 200ms ease-in-out;
-    }
-
-    .thumb-extras{
-        display: none;
-        position: absolute; // remove from flow
-        top: 0;
-        left: 0;
-        width: 33.33%;
-        height: 100%;
-        overflow: hidden;
-
-        transition: height 100ms,
-                    transform 200ms 50ms;
-
-        ul{
-            @include reset-list();
-        }
     }
 
     .thumb-controls{
@@ -134,10 +115,52 @@
         display: block;
     }
 
+    .thumb-basket-frame {
+        opacity: 0;
+        cursor: pointer;
+        left: 82%;
+        top: 2%;
+        box-sizing: initial;
+        position: absolute;
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 10px;
+        box-shadow: inset 0px 0px 0px 2px #008ebd;
+        border-radius: 100px;
+        z-index: 10;
+        transition: all 300ms;
+
+        &:hover {
+            background-color: #008ebd;
+
+            .thumb-basket-inner {
+                color: #fff;
+            }
+        }
+    }
+
+    .thumb-basket-inner {
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        color: #008ebd;
+        height: 1.5rem;
+        width: 1.5rem;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5rem;
+        font-size: 1.5rem;
+        transition: all 300ms;
+    }
+
     @include media-breakpoint-up(sm){
         padding: 0;
         margin-bottom: $grid-gutter-width;
-
 
         .thumb-background{
             display: block;
@@ -164,7 +187,6 @@
             text-align: center;
             padding: .4rem;
         }
-
         .thumb-controls{
             left: 0;
             width: 100%;
@@ -200,29 +222,16 @@
         &:hover{
             z-index: 1000;
 
-            //.thumb-background{
-            //    transform: scaleX(1.33) scaleY(1.15);
-            //    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
-            //}
-
-            .thumb-extras{
-                transform: translate(-100% , 0);
-                height: 115%;
-
-                transition: transform 200ms,
-                            height 100ms 100ms;
-            }
-
             .thumb-controls{
                 transform: translate(0 , 100%);
                 height: 15%;
             }
 
             .img-fluid {
-                transform: scale(1.05);
+                transform: scale(1.15);
             }
 
-            .basket-test {
+            .thumb-basket-frame {
                 opacity: 1;
             }
         }

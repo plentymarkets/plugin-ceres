@@ -4,7 +4,8 @@ Vue.component("category-item", {
 
     props: [
         "decimalCount",
-        "itemData"
+        "itemData",
+        "imageUrlAccessor"
     ],
 
     data: function()
@@ -18,16 +19,6 @@ Vue.component("category-item", {
     created: function()
     {
         this.setPrices();
-    },
-
-    /**
-     * initialize lazyload when current category-item is ready
-     */
-    ready: function()
-    {
-        $(this.$els.lazyImg).show().lazyload({
-            effect : "fadeIn"
-        });
     },
 
     methods:
