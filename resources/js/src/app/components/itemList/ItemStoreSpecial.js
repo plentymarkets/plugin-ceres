@@ -1,3 +1,4 @@
+var ResourceService = require("services/ResourceService");
 var accounting = require("accounting");
 
 Vue.component("item-store-special", {
@@ -14,73 +15,62 @@ Vue.component("item-store-special", {
     data: function()
     {
         return {
-            tagClass: "bg-",
-            label: ""
+            tagClassPrefix: "bg-",
+            localization  : {}
         };
     },
 
-    ready: function()
+    created: function()
     {
-        this.setStoreSpecial();
+        ResourceService.bind("localization", this);
     },
 
-    methods:
-    {
-        /**
-         * set the store-special based on instances' data
-         */
-        setStoreSpecial : function()
+    methods: {
+        getPercentageSale: function()
         {
-            if (this.storeSpecial === 1)
-            {
-                this.setStoreSpecialSale();
-            }
-            else if (this.storeSpecial === 2)
-            {
-                this.setStoreSpecialNew();
-            }
-            else if (this.storeSpecial === 3)
-            {
-                this.setStoreSpecialTop();
-            }
-        },
-
-        /**
-         * set the store-special to SALE
-         */
-        setStoreSpecialSale: function()
-        {
-            this.tagClass += "danger";
-
             var percent = 100 - (this.recommendedRetailPrice / this.variationRetailPrice * 100);
 
-            if (percent > 0)
+            return accounting.formatNumber(percent, this.decimalCount, "");
+        }
+    },
+
+    computed: {
+        label: function()
+        {
+            if (this.storeSpecial.id === 1)
             {
-                this.label = "SALE";
+                var percent = this.getPercentageSale();
+
+                if (percent <= 0)
+                {
+                    return percent + "%";
+                }
             }
-            else
+
+            for (var i in this.storeSpecial.names)
             {
-                percent = accounting.formatNumber(percent, this.decimalCount, "");
-                this.label = percent + "%";
+                var name = this.storeSpecial.names[i];
+
+                if (name.lang === this.localization.shopLanguage)
+                {
+                    return name.name;
+                }
             }
+
+            return this.storeSpecial.names[0].name;
         },
 
-        /**
-         * set the store-special to NEW
-         */
-        setStoreSpecialNew: function()
+        tagClass: function()
         {
-            this.tagClass += "primary";
-            this.label = "NEW";
-        },
-
-        /**
-         * set the store-special to TOP
-         */
-        setStoreSpecialTop: function()
-        {
-            this.tagClass += "success";
-            this.label = "TOP";
+            if (this.storeSpecial.id === 1)
+            {
+                return this.tagClassPrefix + "danger";
+            }
+            else if (this.storeSpecial.id === 2)
+            {
+                return this.tagClassPrefix + "primary";
+            }
+            return this.tagClassPrefix + "success";
         }
     }
 });
