@@ -16,9 +16,20 @@
         </span>
     </div>
 
-        <div v-else class="thumb-basket-frame" @click="addToBasket()">
+    <div v-else>
+        <div class="thumb-controls">
+            <span>
+                <button class="btn btn-primary thumb-btn-buy" @click="addToBasket()">
+                    {{ trans("PluginCeres::Template.addToBasket") }}
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+            </span>
+        </div>
+
+        <div class="thumb-basket-frame" @click="addToBasket()">
             <div class="thumb-basket-inner fa-cart-plus">
             </div>
         </div>
+    </div>
 
 </script>

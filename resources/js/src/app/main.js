@@ -23,6 +23,27 @@ vueApp = new Vue({
                     $(".wrapper-main").removeClass("sticky");
                 }
             }
+
+            var sticky = $(".top-bar-slider");
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 200)
+            {
+                sticky.slideDown(300);
+            }
+            else if (scroll < 200)
+            {
+                sticky.slideUp(300);
+            }
+        });
+
+        // To top button logic for mobile
+        $(".to-top").click(function()
+        {
+            $("body,html").animate({
+                scrollTop: 0
+            }, 800);
+            return false;
         });
 
         // Sticky sidebar single item

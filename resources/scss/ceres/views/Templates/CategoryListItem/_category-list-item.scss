@@ -1,7 +1,7 @@
 .cmp-product-thumb{
     padding: .8rem;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
     border: 1px solid #fff;
     background-color: #fff;
     margin-bottom: $grid-gutter-width/2;
@@ -229,7 +229,7 @@
             }
 
             .img-fluid {
-                transform: scale(1.15);
+                transform: scale(1.05);
             }
 
             .thumb-basket-frame {
