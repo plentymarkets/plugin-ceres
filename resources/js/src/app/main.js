@@ -12,9 +12,11 @@ vueApp = new Vue({
 
         $(window).scroll(function()
         {
+            var scroll = $(window).scrollTop();
+
             if ($(".wrapper-main").hasClass("isSticky"))
             {
-                if ($(this).scrollTop() > 1)
+                if (scroll > 1)
                 {
                     $(".wrapper-main").addClass("sticky");
                 }
@@ -24,16 +26,15 @@ vueApp = new Vue({
                 }
             }
 
-            var sticky = $(".top-bar-slider");
-            var scroll = $(window).scrollTop();
+            var topBarSlider = $(".top-bar-slider");
 
             if (scroll >= 200)
             {
-                sticky.slideDown(300);
+                topBarSlider.slideDown(300);
             }
             else if (scroll < 200)
             {
-                sticky.slideUp(300);
+                topBarSlider.slideUp(300);
             }
         });
 
