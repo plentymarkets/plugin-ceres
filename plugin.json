@@ -214,6 +214,11 @@
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "Template.Style",
+            "name"          : "Template: Style for Ceres - experimental -",
+            "description"   : "Add style to ceres with a plugin"
         }
     ],
     "dataProviders"     : []
