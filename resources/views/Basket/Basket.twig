@@ -1,0 +1,49 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {{ component( "PluginCeres::Basket.Components.BasketList" ) }}
+    {{ component( "PluginCeres::Basket.Components.Coupon" ) }}
+    {{ component( "PluginCeres::Basket.Components.BasketTotals" ) }}
+
+    <div class="page-content basket container-max">
+
+        <div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h4">{{ trans("PluginCeres::Template.basket") }}</h1>
+            </div>
+        </div>
+
+        <hr class="m-b-3">
+
+        <div class="row">
+            <div class="col-xs-12">
+              <basket-list></basket-list>
+            </div>
+        </div>
+
+        <hr class="m-y-2">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-7 m-b-1">
+                <coupon></coupon>
+            </div>
+            <div class="col-xs-12 col-md-5">
+              <basket-totals :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+            </div>
+        </div>
+
+        <hr class="m-y-2">
+
+        <div class="row m-b-3">
+            <div class="col-xs-12 col-sm-4 offset-sm-8">
+                {{ LayoutContainer.show("PluginCeres::Basket.BeforeCheckoutButton") }}
+                <a v-resource-if:user="isLoggedIn" class="btn btn-primary btn-block" href="/checkout">{{ trans("PluginCeres::Template.basketOrderNow") }}</a>
+                <a v-resource-if:user="!isLoggedIn" class="btn btn-primary btn-block" href="/login">{{ trans("PluginCeres::Template.basketOrderNow") }}</a>
+                {{ LayoutContainer.show("PluginCeres::Basket.AfterCheckoutButton") }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

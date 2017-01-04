@@ -1,0 +1,170 @@
+<script type="x/template" id="vue-order-history">
+
+    <div class="page-content history container-max">
+        <div class="row m-b-3">
+            <h1 class="h4 col-xs-12">{{ trans("PluginCeres::Template.orderHistory") }}</h1>
+        </div>
+
+        <div class="form-group">
+
+            <div class="row m-b-1">
+                <div class="col-xs-12 col-md-9 col-lg-8">
+                    <!-- ORDER PAGINATION -->
+                    <div class="clearfix" v-if="orderList.totalsCount > itemsPerPage">
+                        <div class="pull-xs-left">
+                            {{ trans("PluginCeres::Template.orderShow", {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                        </div>
+
+                        <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+                            <ul class="pagination col-xs-12 m-y-0">
+
+                                <!-- PREV LINK -->
+                                <li class="page-item" :class="{disabled: page == 1}">
+                                    <button class="page-link" @click="showPage(page-1)">&laquo;</button>
+                                </li>
+                                <!-- ./PREV LINK -->
+
+                                <!-- FIRST PAGE LINK -->
+                                <li class="page-item" v-if="page > 2 && showFirstPage == true">
+                                    <button class="page-link" @click="showPage(1)">1</button>
+                                </li>
+                                <li class="page-item page-link" v-if="page > 2 && showFirstPage == true">...</li>
+                                <!-- ./FIRST PAGE LINK -->
+
+                                <!-- PAGINATION -->
+                                <li class="page-item" v-if="orderList.isLastPage && page > 2">
+                                    <button class="page-link" @click="showPage(page-2)">${ page - 2 }</button>
+                                </li>
+
+                                <li class="page-item" v-if="page > 1">
+                                    <button class="page-link" @click="showPage(page-1)">${ page - 1 }</button>
+                                </li>
+
+                                <li class="page-item active">
+                                    <span class="page-link">${ page }</span>
+                                </li>
+
+                                <li class="page-item" v-if="!orderList.isLastPage">
+                                    <button class="page-link" @click="showPage(page+1)">${ page + 1 }</button>
+                                </li>
+
+                                <li class="page-item" v-if="page == 1 && page+2 <= pageMax">
+                                    <button class="page-link" @click="showPage(page+2)">${ page + 2 }</button>
+                                </li>
+                                <!-- ./PAGINATION -->
+
+                                <!-- LAST PAGE LINK -->
+                                <li class="page-item page-link" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">...</li>
+                                <li class="page-item" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">
+                                    <button class="page-link" @click="showPage(pageMax)">${ pageMax }</button>
+                                </li>
+                                <!-- ./LAST PAGE LINK -->
+
+                                <!-- NEXT LINK -->
+                                <li class="page-item" :class="{disabled: orderList.isLastPage}">
+                                    <button class="page-link" @click="showPage(page+1)">&raquo;</button>
+                                </li>
+                                <!-- ./NEXT LINK -->
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- ./ORDER PAGINATION -->
+
+                    <hr>
+
+                    <!-- ORDER HISTORY -->
+                    <div class="order-list">
+                        <article class="cmp cmp-order-item" v-for="entry in orderList.entries">
+
+                            <div class="item-details small">
+
+                                <div class="item-name">
+                                    <h5>{{ trans("PluginCeres::Template.orderId") }} ${ entry.order.id }</h5>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderDate") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("PluginCeres::Template.dateTimeFormatMoment") }}" }</span>
+                                        </div>
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderStatus") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("PluginCeres::Template.orderDetails") }}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </article>
+                    </div>
+                    <!-- ./ORDER HISTORY -->
+                </div>
+
+                <!-- ORDER DETAILS MODAL -->
+                <div class="modal fade" v-el:order-details v-if="currentOrder" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans("PluginCeres::Template.orderDetails") }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <order-details :order-data="currentOrder" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./ORDER DETAILS MODAL -->
+
+                {#<!-- ORDER FILTER -->#}
+                {#<div class="col-xs-12 col-md-3 col-lg-4">#}
+                    {#<div class="input-unit">#}
+                        {#<input id="auftragId" type="text">#}
+                        {#<label for="auftragId">{{ trans("PluginCeres::Template.orderEnterOrderId") }}</label>#}
+                    {#</div>#}
+
+                    {#<div class="input-unit">#}
+                        {#<select class="custom-select" id="TimePeriod">#}
+                            {#<option>---</option>#}
+                            {#<option>{{ trans("PluginCeres::Template.orderLast30Days") }}</option>#}
+                            {#<option>{{ trans("PluginCeres::Template.orderLast3Month") }}</option>#}
+                            {#<option>{{ trans("PluginCeres::Template.orderLast6Month") }}</option>#}
+                        {#</select>#}
+                        {#<label for="TimePeriod">{{ trans("PluginCeres::Template.orderSelectTimePeriod") }}</label>#}
+                    {#</div>#}
+
+                    {#<div class="row">#}
+                        {#<div class="col-xs-12 col-lg-6">#}
+                            {#<div class="input-unit">#}
+                                {#<input id="von" type="text">#}
+                                {#<label for="von">{{ trans("PluginCeres::Template.orderFrom") }}</label>#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        {#<div class="col-xs-12 col-lg-6">#}
+                            {#<div class="input-unit">#}
+                                {#<input id="auftragId" type="text">#}
+                                {#<label for="auftragId">{{ trans("PluginCeres::Template.orderTo") }}</label>#}
+                            {#</div>#}
+                        {#</div>#}
+
+                    {#</div>#}
+
+                    {#<div class="m-b-3">#}
+                        {#<input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCeres::Template.orderApply") }}">#}
+                    {#</div>#}
+
+                {#</div>#}
+                {#<!-- ./ORDER FILTER -->#}
+            </div>
+
+        </div>
+
+    </div>
+    <!-- customerdata end -->
+</script>

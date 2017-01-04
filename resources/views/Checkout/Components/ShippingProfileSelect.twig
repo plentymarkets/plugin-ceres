@@ -1,0 +1,29 @@
+<script type="x/template" id="vue-shipping-profile-select">
+    <div class="cmp cmp-method-list m-b-3" :class="{ 'wait': waiting }">
+        <ul class="method-list">
+            <li v-for="shippingProfile in checkout.shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServicePresetId }">
+                <input
+                        type="radio"
+                        id="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }"
+                        name="ShippingProfileID"
+                        value="${ shippingProfile.parcelServicePresetId }"
+                        v-model="checkout.shippingProfileId"
+                        @change="onShippingProfileChange()"
+                >
+                <label for="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }">
+                    <div class="icon">
+                        {#<img src="">#}
+                    </div><!--
+                    --><div class="content">
+                        ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }
+                        <div>
+                            <small>
+                                ${ shippingProfile.shippingAmount | currency }
+                            </small>
+                        </div>
+                    </div>
+                </label>
+            </li><!-- -->
+        </ul>
+    </div>
+</script>

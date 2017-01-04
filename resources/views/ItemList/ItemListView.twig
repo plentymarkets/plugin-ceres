@@ -1,0 +1,34 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+
+{% block PageBody %}
+
+    {{ component( "PluginCeres::ItemList.Components.ItemList" ) }}
+    {{ component( "PluginCeres::ItemList.Components.ItemsPerPage" ) }}
+    {{ component( "PluginCeres::ItemList.Components.ItemListSorting" ) }}
+    {{ component( "PluginCeres::ItemList.Components.Pagination" ) }}
+    {{ component( "PluginCeres::ItemList.Components.LoadingAnimation" ) }}
+
+    <resource name="itemList" :data="{}"></resource>
+
+    <div class="categoriegrid page-content container-max">
+        <div class="row m-b-3">
+            <div class="col-xs-12 col-lg-7">
+            </div>
+            <div class="col-xs-12 col-lg-5">
+                <item-list-sorting :sort-data="{{ config("PluginCeres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
+                <items-per-page :pagination-values="{{ config("PluginCeres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
+                <pagination></pagination>
+            </div>
+
+            <loading-animation></loading-animation>
+
+            <item-list></item-list>
+        </div>
+        <div class="list-controls m-b-3 row">
+            <div class="col-xs-12">
+                {#<pagination></pagination>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

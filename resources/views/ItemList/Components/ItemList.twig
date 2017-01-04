@@ -1,0 +1,127 @@
+<script type="x/template" id="vue-item-list">
+    <div class="col-xs-12">
+        <div v-for="item in itemList.entries">
+            <label>${ item.itemDescription.name1 }</label>
+            <br/>
+        </div>
+        {#<hr class="m-b-1 hidden-sm-down">#}
+        {#<ul class="product-list row grid">#}
+
+            {#<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-for="">#}
+                {#<article class="cmp cmp-product-thumb cmp-product-thumb--grid">#}
+                    {#<div class="thumb-inner">#}
+                        {#<div class="thumb-background"></div>#}
+
+                        {#<div class="thumb-extras">#}
+                            {#<div class="thumb-scroll-cmd scroll-up">#}
+                                {#<i class="fa fa-chevron-up" aria-hidden="true"></i>#}
+                            {#</div>#}
+                            {#<ul>#}
+                                {#<li class="img-contain-container square-container">#}
+                                    {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
+                                {#</li>#}
+                                {#<li class="img-contain-container square-container">#}
+                                    {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
+                                {#</li>#}
+                                {#<li class="img-contain-container square-container">#}
+                                    {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
+                                {#</li>#}
+                                {#<li class="img-contain-container square-container">#}
+                                    {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
+                                {#</li>#}
+                                {#<li class="img-contain-container square-container">#}
+                                    {#<img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">#}
+                                {#</li>#}
+                            {#</ul>#}
+                            {#<div class="thumb-scroll-cmd scroll-down">#}
+                                {#<i class="fa fa-chevron-down" aria-hidden="true"></i>#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        {#<div class="thumb-controls">#}
+                            {#<button class="btn btn-primary thumb-btn-buy" v-add-to-basket="{ 'variationId': {{item.variationBase.id}}, 'quantity': 1 }">#}
+                                {#{{ trans("PluginCeres::Template.addToBasket") }}#}
+                                {#<i class="fa fa-shopping-cart" aria-hidden="true"></i>#}
+                                {#<!-- <add-item-confirm :basket-item="{{ item }}" quantity="1"></add-item-confirm> -->#}
+                            {#</button>#}
+                        {#</div>#}
+
+                        {#<a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">#}
+                            {#<div class="square-container">#}
+                                {#<div class="square-inner main-image">#}
+                                    {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
+                                    {#<img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
+                                    {#<noscript>#}
+                                        {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
+                                    {#</noscript>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</a>#}
+
+                        {#<!-- STORE SPECIALS -->#}
+
+                        {#{% if item.itemBase.storeSpecial > 0 %}#}
+                            {#<div class="special-tags">#}
+                                {#{% if  item.itemBase.storeSpecial == 1 %}#}
+
+                                    {#{% set storeSpecialColor = 'danger' %}#}
+                                    {#{% set percent = 100-(item.variationRecommendedRetailPrice.retailPrice/item.variationRetailPrice.unitPrice*100) %}#}
+
+                                    {#{% if percent <= 0 %}#}
+                                        {#{% set dezimalcount = config('PluginCeres.item.storeSpecial') %}#}
+                                        {#{% set percent = percent | number_format(dezimalcount, ',', '.') %}#}
+                                        {#{% set storeSpecial = percent ~"%" %}#}
+                                    {#{% else %}#}
+                                        {#{% set storeSpecial = "SALE" %}#}
+                                    {#{% endif %}#}
+
+                                {#{% elseif  item.itemBase.storeSpecial == 2 %}#}
+
+                                    {#{% set storeSpecial = "NEW" %}#}
+                                    {#{% set storeSpecialColor = 'primary' %}#}
+
+                                {#{% elseif  item.itemBase.storeSpecial == 3 %}#}
+
+                                    {#{% set storeSpecial = "Top" %}#}
+                                    {#{% set storeSpecialColor = 'success' %}#}
+
+                                {#{% endif %}#}
+
+                                {#<span class="tag bg-{{storeSpecialColor}}">#}
+                        {#{{ storeSpecial }}#}
+                    {#</span>#}
+
+                            {#</div>#}
+                        {#{% endif %}#}
+                        {#<!-- ./STORE SPECIALS -->#}
+
+                        {#<!-- ITEM DETAILS -->#}
+                        {#<div class="thumb-content">#}
+                            {#<a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-title small">#}
+                                {#{{ item.itemDescription | itemName(configItemName) }}#}
+                                {#{{ item.variationBase.variationName }}#}
+                            {#</a>#}
+                            {#<div class="thumb-meta">#}
+                                {#<div class="prices">#}
+                                    {#{% if ('item.recommendedPrice' in itemData or 'all' in itemData)#}
+                                    {#and item.variationRecommendedRetailPrice.price != '' %}#}
+                                        {#<del class="crossprice">#}
+                                            {#{{ item.variationRecommendedRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}#}
+                                        {#</del>#}
+                                    {#{% endif %}#}
+
+                                    {#<div class="price">#}
+                                        {#{{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<!-- ./ITEM DETAILS  -->#}
+                    {#</div>#}
+                {#</article>#}
+            {#</li>#}
+
+        {#</ul>#}
+        {#<hr class="m-y-2">#}
+    </div>
+</script>

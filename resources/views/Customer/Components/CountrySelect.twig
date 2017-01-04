@@ -1,0 +1,21 @@
+<script type="x/template" id="vue-country-select">
+
+    <div class="input-unit" data-validate="">
+        <select  v-model="selectedCountryId" v-on:change="countryChanged" class="custom-select">
+            <option v-bind:value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
+                ${ country.name }
+            </option>
+        </select>
+        <label>{{ trans("PluginCeres::Template.generalCountry") }}</label>
+    </div>
+
+    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0">
+        <select v-model="selectedStateId" class="custom-select">
+            <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
+                ${ state.name }
+            </option>
+        </select>
+        <label>{{ trans("PluginCeres::Template.generalState") }}</label>
+    </div>
+
+</script>

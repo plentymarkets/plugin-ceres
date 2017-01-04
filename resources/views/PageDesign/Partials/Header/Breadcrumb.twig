@@ -1,0 +1,20 @@
+{% set categoryTree = services.category.getHierarchy() %}
+
+{% if categoryTree is not empty %}
+<nav class="small hidden-sm-down">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item" >
+            <a href="/">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </li>
+        {% for category in categoryTree %}
+            {% if loop.last %}
+                <li class="breadcrumb-item active"><span>{{ category.details.first.name }}</span></li>
+            {% else %}
+                <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}">{{ category.details.first.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+{% endif %}

@@ -1,0 +1,25 @@
+{{ component( "PluginCeres::Customer.Components.CountrySelect" ) }}
+
+<script type="x/template" id="vue-address-input-group">
+
+    <div>
+        <div v-if="localeToShow == 'DE'">
+            {% include "PluginCeres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+        </div>
+
+        <div v-if="localeToShow == 'GB'">
+            {% include "PluginCeres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+        </div>
+
+        <div class="col-sm-5">
+            <country-select
+                :selected-country-id.sync="addressData.countryId"
+                :selected-state-id.sync="addressData.stateId"
+                @selected-country-changed="onSelectedCountryChanged"
+                :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
+                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}">
+            </country-select>
+        </div>
+    </div>
+
+</script>

@@ -1,0 +1,184 @@
+<script type="x/template" id="vue-order-details">
+<div>
+    <div class="row">
+        <div class="col-md-6 m-b-2">
+            <div class="card small">
+                <!-- ORDER -->
+                <div class="card-header">
+                    <h5>{{ trans("PluginCeres::Template.orderId") }} ${ orderData.order.id }</h5>
+                </div>
+                <div class="card-block">
+                    <div class="details">
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderDate") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ orderData.order.createdAt | date "{{ trans("PluginCeres::Template.dateTimeFormatMoment") }}" }</span>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderStatus") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ orderData.status.frontendName }</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderInvoiceAddress") }}</strong>
+                            <span class="col-xs-6 col-sm-7">
+                                                            <div>${orderData.order.billingAddress.name1}</div>
+                                                            <div>${orderData.order.billingAddress.name2} ${orderData.order.billingAddress.name3}</div>
+                                                            <div>${orderData.order.billingAddress.name4}</div>
+                                                            <div>${orderData.order.billingAddress.address1} ${orderData.order.billingAddress.address2}</div>
+                                                            <div>${orderData.order.billingAddress.postalCode} ${orderData.order.billingAddress.town}</div>
+                                                        </span>
+                        </div>
+
+                        <div class="row m-t-1">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingAddress") }}</strong>
+                            <span class="col-xs-6 col-sm-7">
+                                                            <span v-if="orderData.order.billingAddress.id == orderData.order.deliveryAddress.id">
+                                                                {{ trans("PluginCeres::Template.addressSameAsInvoice") }}
+                                                            </span>
+                                                            <span v-else>
+                                                                <div>${orderData.order.deliveryAddress.name1}</div>
+                                                                <div>${orderData.order.deliveryAddress.name2} ${orderData.order.deliveryAddress.name3}</div>
+                                                                <div>${orderData.order.deliveryAddress.name4}</div>
+                                                                <div>${orderData.order.deliveryAddress.address1} ${orderData.order.deliveryAddress.address2}</div>
+                                                                <div>${orderData.order.deliveryAddress.postalCode} ${orderData.order.deliveryAddress.town}</div>
+                                                            </span>
+                                                        </span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentMethod") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ orderData.paymentMethodName }</span>
+                        </div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentStatus") }}</strong>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'unpaid'">{{ trans("PluginCeres::Template.paymentStatus_unpaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'prepaid'">{{ trans("PluginCeres::Template.paymentStatus_prepaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'partlyPaid'">{{ trans("PluginCeres::Template.paymentStatus_partlyPaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'fullyPaid'">{{ trans("PluginCeres::Template.paymentStatus_fullyPaid") }}</span>
+                            <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("PluginCeres::Template.paymentStatus_overpaid") }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingProfile") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ orderData.shippingProvider } - ${ orderData.shippingProfileName }</span>
+                        </div>
+
+                        <div class="row" v-if="shippingDate">
+                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderEstimatedShippingDate") }}</strong>
+                            <span class="col-xs-6 col-sm-7">${ shippingDate | moment "{{ trans("PluginCeres::Template.dateFormatMoment") }}" }</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ORDER -->
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="confirmation-order-list">
+
+                <article class="cmp cmp-order-item" v-for="item in orderItems">
+                    <a :href="orderData.itemURLs[item.itemVariationId]" class="item-image">
+                        <img :src="orderData.itemImages[item.itemVariationId]">
+                    </a>
+                    <div class="item-details small">
+                        <a :href="orderData.itemURLs[item.itemVariationId]" class="clearfix">
+                            <div class="item-name">
+                                ${ item.orderItemName }
+                            </div>
+                        </a>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPricePerPiece") }}</strong>
+                            <span class="col-xs-6 col-sm-9">${ item.amounts[0].priceGross | currency item.amounts[0].currency  }</span>
+                        </div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPeace") }}</strong>
+                            <span class="col-xs-6 col-sm-9">${ item.quantity }</span>
+                        </div>
+                        <div class="row">
+                            <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderTotal") }}</strong>
+                            <strong class="col-xs-6 col-sm-9">${ (item.quantity * item.amounts[0].priceGross) | currency item.amounts[0].currency }</strong>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+            <div class="gesamtsumme">
+                <!-- BASKET TOTALS -->
+                <div class="cmp cmp-totals">
+                    <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
+                    <div>
+                        <dl>
+                            <dt v-if="showProperty( 'basket.value_of_items_gross' )">
+                                <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
+                                <strong>${ totals.itemSum | currency totals.currency }</strong>
+                            </dd>
+
+                            <dt v-if="showProperty( 'basket.value_of_items_net' )">
+                                {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.value_of_items_net' )">
+                                ${ totals.itemSumNet | currency totals.currency }
+                            </dd>
+
+                            <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
+                                <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
+                                <strong>${ totals.shippingAmount | currency totals.currency }</strong>
+                            </dd>
+
+                            <dt v-if="showProperty( 'basket.shipping_costs_net' )">
+                                {{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
+                                ${ totals.shippingAmountNet | currency totals.currency }
+                            </dd>
+
+                            <dt v-if="showProperty( 'basket.vat' )">
+                                {{ trans("PluginCeres::Template.basketVAT") }}
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.vat' )">
+                                ${ totals.vat | currency totals.currency }
+                            </dd>
+
+                            <hr>
+
+                            <dt v-if="showProperty( 'basket.order_total_gross' )">
+                                <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.order_total_gross' )">
+                                <strong>${ totals.totalAmount | currency totals.currency }</strong>
+                            </dd>
+
+                            <dt v-if="showProperty( 'basket.order_total_net' )">
+                                {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                            </dt><!--
+                         --><dd v-if="showProperty( 'basket.order_total_net' )">
+                                ${ totals.totalAmountNet | currency totals.currency }
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- ./BASKET TOTALS -->
+            </div>
+        </div>
+    </div>
+</div>
+</script>

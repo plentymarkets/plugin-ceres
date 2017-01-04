@@ -1,0 +1,48 @@
+{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
+{% set configItemName = config("PluginCeres.item.name") %}
+
+<article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
+    <!-- ITEM QUANTITY -->
+    <div class="basket-item-quantity">
+        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+    </div>
+    <!-- ./ITEM QUANTITY -->
+
+    <!-- ITEM IMAGE -->
+    <div class="basket-item-image">
+        <div class="square-container">
+            <div class="square-inner center-xy main-image">
+                <img class="img-fluid" :src="basketItem.variation | itemImage" alt="${ basketItem.variation.itemDescription.name1 }">
+            </div>
+        </div>
+    </div>
+    <!-- ./ITEM IMAGE -->
+
+    <!-- ITEM DETAILS -->
+    <div class="basket-item-infos small">
+        <a class="clearfix" :href="basketItem.variation | itemURL">
+            <div class="item-name">
+                ${ basketItem.variation.itemDescription | itemName {{ configItemName }} } ${ basketItem.variation.variationBase.variationName }
+            </div>
+        </a>
+        <div class="item-unit-price">
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
+        </div>
+        <div class="item-total-price">
+            ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
+        </div>
+
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+              <span class="message" v-if="!deleteConfirmed">
+                   {{ trans("PluginCeres::Template.generalDelete") }}
+              </span>
+            <span class="message" v-else>
+                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
+              </span>
+            <span class="btn-label" @click.stop="resetDelete">
+                  <i class="fa fa-times"></i>
+              </span>
+        </button>
+    </div>
+    <!-- ./ITEM DETAILS -->
+</article>

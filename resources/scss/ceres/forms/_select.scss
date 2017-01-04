@@ -1,0 +1,20 @@
+.custom-select{
+	border: none;
+	width: 100%;
+	text-align: left;
+	text-align-last: left;
+	line-height: 1.2em;
+
+	padding: 1.2rem 2rem .4rem 1rem;
+	background-position: calc(100% - 1rem) 1.2rem;
+
+	option{
+		width: auto;
+	}
+}
+.login-form {
+	.custom-select{
+		text-align: left;
+		text-align-last: left;
+	}
+}

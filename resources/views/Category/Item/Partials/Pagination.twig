@@ -1,0 +1,76 @@
+{% set itemsPerPage     = request.get("items_per_page") | default( config('PluginCeres.pagination.defaultItemsPerPage') ) %}
+{% set itemSorting      = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) %}
+{% set query            = { 'items_per_page' : itemsPerPage, 'itemSorting' : itemSorting } %}
+
+{% set page             = paginatedResult.getPage() %}
+{% set pageMax          = paginatedResult.getTotalCount() // itemsPerPage %}
+{% if paginatedResult.getTotalCount() % itemsPerPage > 0 %}
+    {% set pageMax = pageMax + 1 %}
+{% endif %}
+
+{% if pageMax > 1 %}
+    <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
+        <ul class="pagination col-xs-12 m-y-0">
+
+            <!-- PREV LINK -->
+            <li class="page-item{% if page == 1 %} disabled{% endif %}">
+                <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">&laquo;</a>
+            </li>
+            <!-- ./PREV LINK -->
+
+            <!-- FIRST PAGE LINK -->
+            {% if page > 2 and config('PluginCeres.pagination.showFirstPage') == "true" %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
+                </li>
+                <li class="page-item page-link">...</li>
+            {% endif %}
+            <!-- ./FIRST PAGE LINK -->
+
+            <!-- PAGINATION -->
+            {% if page == pageMax and page > 2 %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : page-2 }) | url_encode }}">{{ page - 2 }}</a>
+                </li>
+            {% endif %}
+
+            {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">{{ page - 1 }}</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item active">
+                <a class="page-link" href="">{{ page }}</a>
+            </li>
+
+            {% if page+1 <= pageMax %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">{{ page + 1 }}</a>
+                </li>
+            {% endif %}
+
+            {% if page == 1 and page+2 <= pageMax %}
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : page+2 }) | url_encode }}">{{ page + 2 }}</a>
+                </li>
+            {% endif %}
+            <!-- ./PAGINATION -->
+
+            <!-- LAST PAGE LINK -->
+            {% if pageMax > 3 and page < pageMax-1 and config('PluginCeres.pagination.showLastPage') == "true" %}
+                <li class="page-item page-link">...</li>
+                <li class="page-item">
+                    <a class="page-link" href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>
+                </li>
+            {% endif %}
+            <!-- ./LAST PAGE LINK -->
+
+            <!-- NEXT LINK -->
+            <li class="page-item{% if page == pageMax %} disabled{% endif %}">
+                <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">&raquo;</a>
+            </li>
+            <!-- ./NEXT LINK -->
+        </ul>
+    </nav>
+{% endif %}

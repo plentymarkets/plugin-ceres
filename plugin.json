@@ -1,0 +1,220 @@
+{
+    "version"           : "0.1.0",
+    "name"              : "PluginCeres",
+    "description"       : "plentymarkets webshop layout",
+    "author"            : "plentymarkets GmbH",
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
+    "type"              : "template",
+    "require"           : [],
+    "namespace"         : "Ceres",
+    "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
+    "javaScriptFiles"   : [],
+    "runOnBuild"        :
+    [
+      "Ceres\\Migrations\\CategoriesMigration"
+    ],
+    "containers"        :
+    [
+        {
+            "key"           : "Homepage.PaymentMethods",
+            "name"          : "Homepage: Payment method container",
+            "description"   : "Add a logo of the payment method to the payment methods on the homepage"
+        },
+        {
+            "key"           : "Homepage.Shipping",
+            "name"          : "Homepage: Shipping method container",
+            "description"   : "Add a logo of the shipping method to the shipping methods on the homepage"
+        },
+        {
+            "key"           : "Homepage.Certified",
+            "name"          : "Homepage: Certified container",
+            "description"   : "Add a \"Certified by\" logo to the container on the homepage"
+        },
+        {
+            "key"           : "Header.LeftSide",
+            "name"          : "Header: Left side container",
+            "description"   : "Add content to the left side in the header"
+        },
+        {
+            "key"           : "Footer.RowOne",
+            "name"          : "Footer: Row 1 container",
+            "description"   : "Add content to the first row of the footer"
+        },
+        {
+            "key"           : "Footer.RowTwo",
+            "name"          : "Footer: Row 2 container",
+            "description"   : "Add content to the second row of the footer"
+        },
+        {
+            "key"           : "Footer.RowThree",
+            "name"          : "Footer: Row 3 container",
+            "description"   : "Add content to the third row of the footer"
+        },
+        {
+            "key"           : "SingleItem.BeforePrice",
+            "name"          : "Single item: Before price",
+            "description"   : "Add content before the item price in the single item view."
+        },
+        {
+            "key"           : "SingleItem.AfterPrice",
+            "name"          : "Single item: After price",
+            "description"   : "Add content after the item price in the single item view."
+        },
+        {
+            "key"           : "SingleItem.BeforeAddToBasket",
+            "name"          : "Single item: Before \"Add to shopping cart\" button",
+            "description"   : "Add content before the 'Add to shopping cart' button in the single item view."
+        },
+        {
+            "key"           : "SingleItem.AfterAddToBasket",
+            "name"          : "Single item: After \"Add to shopping cart\" button",
+            "description"   : "Add content after the 'Add to shopping cart' button in the single item view."
+        },
+        {
+            "key"           : "BasketTotals.BeforeItemSum",
+            "name"          : "Shopping cart: Before \"Value of items\"",
+            "description"   : "Add content before the value of items in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.AfterItemSum",
+            "name"          : "Shopping cart: After \"Value of items\"",
+            "description"   : "Add content after the value of items in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.BeforeShippingCosts",
+            "name"          : "Shopping cart: Before \"Shipping\"",
+            "description"   : "Add content before the shipping costs in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.AfterShippingCosts",
+            "name"          : "Shopping cart: After \"Shipping\"",
+            "description"   : "Add content after the shipping costs in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.BeforeVat",
+            "name"          : "Shopping cart: Before \"VAT\"",
+            "description"   : "Add content before the VAT in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.AfterVat",
+            "name"          : "Shopping cart: After \"VAT\"",
+            "description"   : "Add content after the VAT in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.BeforeTotalSum",
+            "name"          : "Shopping cart: Before \"Total\"",
+            "description"   : "Add content before the total sum in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "BasketTotals.AfterTotalSum",
+            "name"          : "Shopping cart: After \"Total\"",
+            "description"   : "Add content before the total sum in the Total column of the shopping cart."
+        },
+        {
+            "key"           : "Basket.BeforeCheckoutButton",
+            "name"          : "Shopping cart: Before \"Order now\" button",
+            "description"   : "Add content before the 'Order now' button in the shopping cart."
+        },
+        {
+            "key"           : "Basket.AfterCheckoutButton",
+            "name"          : "Shopping cart: After \"Order now\" button",
+            "description"   : "Add content after the 'Order now' button in the shopping cart."
+        },
+        {
+            "key"           : "BasketPreview.BeforeCheckoutButton",
+            "name"          : "Shopping cart preview: Before \"Checkout\" button",
+            "description"   : "Add content before the 'Checkout' button in the shopping cart preview."
+        },
+        {
+            "key"           : "BasketPreview.AfterCheckoutButton",
+            "name"          : "Shopping cart preview: After \"Checkout\" button",
+            "description"   : "Add content after the 'Checkout' button in the shopping cart preview."
+        },
+        {
+            "key"           : "Checkout",
+            "name"          : "Checkout: Override checkout",
+            "description"   : "Override the complete checkout page.",
+            "multiple"      : false
+        },
+        {
+            "key"           : "Checkout.AddressLists",
+            "name"          : "Checkout: Override address controls",
+            "description"   : "Override the invoice and delivery address controls in the checkout.",
+            "multiple"      : false
+        },
+        {
+            "key"           : "Checkout.BillingAddress",
+            "name"          : "Checkout: Override invoice address control",
+            "description"   : "Override the invoice address control in the checkout.",
+            "multiple"      : false
+        },
+        {
+            "key"           : "Checkout.BeforeBillingAddress",
+            "name"          : "Checkout: Before invoice address",
+            "description"   : "Add content before the invoice address control in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterBillingAddress",
+            "name"          : "Checkout: After invoice address",
+            "description"   : "Add content after the invoice address control in the checkout."
+        },
+        {
+            "key"           : "Checkout.ShippingAddress",
+            "name"          : "Checkout: Override shipping address control",
+            "description"   : "Override the shipping address control in the checkout.",
+            "multiple"      : false
+        },
+        {
+            "key"           : "Checkout.BeforeShippingAddress",
+            "name"          : "Checkout: Before shipping address",
+            "description"   : "Add content before the shipping address control in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterShippingAddress",
+            "name"          : "Checkout: After shipping address",
+            "description"   : "Add content after the shipping address control in the checkout."
+        },
+        {
+            "key"           : "Checkout.ShippingProfileList",
+            "name"          : "Checkout: Override shipping method",
+            "description"   : "Override the list of shipping methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.BeforeShippingProfileList",
+            "name"          : "Checkout: Before shipping method",
+            "description"   : "Add content before the list of shipping methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterShippingProfileList",
+            "name"          : "Checkout: After shipping method",
+            "description"   : "Add content after the list of shipping methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.PaymentList",
+            "name"          : "Checkout: Override payment method",
+            "description"   : "Override the list of payment methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.BeforePaymentList",
+            "name"          : "Checkout: Before payment method",
+            "description"   : "Add content before the list of payment methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterPaymentList",
+            "name"          : "Checkout: After payment method",
+            "description"   : "Add content after the list of payment methods in the checkout."
+        },
+        {
+            "key"           : "Checkout.OptIns",
+            "name"          : "Checkout: Opt-ins",
+            "description"   : "Add content to opt-in checkboxes in the checkout."
+        },
+        {
+            "key"           : "OrderConfirmation.AdditionalPaymentInformation",
+            "name"          : "Order confirmation: Additional payment information",
+            "description"   : "Add additional payment information on the order confirmation page.",
+            "multiple"      : false
+        }
+    ],
+    "dataProviders"     : []
+}

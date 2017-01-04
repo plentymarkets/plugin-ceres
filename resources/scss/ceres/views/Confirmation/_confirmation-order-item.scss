@@ -1,0 +1,84 @@
+.cmp-order-item{
+	position: relative;
+	margin-bottom: 1em;
+	
+	.item-main{
+		display: table;
+	}
+	
+	.item-image{
+		display: table-cell;
+		vertical-align: top;
+
+		@include img-contain();
+	}
+	
+	.item-details{
+		display: table-cell;
+		vertical-align: top;
+		padding-left: .5rem;
+	}
+
+	.item-name{
+	    display: -webkit-box;
+        text-overflow: ellipsis;
+        max-height: 3em;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        font-weight: 700;
+        margin-bottom: .25rem;
+
+	    &:after{
+			content: "…";
+			display: inline-block;
+			height: 50%;
+			position:absolute;
+			right: .25em;
+			bottom: 0; 
+			background-color: white;
+	    }
+	}
+
+	.item-total-price{
+		font-size: 1.5em;
+	    font-weight: 700;
+	    text-align: right;
+	}
+
+	.item-remove{
+		position: absolute;
+	    bottom: 1em;
+	    right: 0;
+	    line-height: 1;
+	    color: $gray-lighter;
+	    cursor: pointer;
+		transition: color 250ms;
+
+	    &:hover{
+	    	color: $brand-danger;
+	    }
+	}
+
+	@include media-breakpoint-up(sm){
+
+		// .item-name:after{
+		// 	content: none!important;
+		// }
+
+		.item-unit-price,
+		.item-total-price{
+			width: auto!important;
+			text-align: right;
+		}
+
+	}
+
+	@include media-breakpoint-up(md){
+		
+	}
+
+	@include media-breakpoint-up(lg){
+		
+	}
+}

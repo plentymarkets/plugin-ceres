@@ -1,0 +1,56 @@
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{{ component( "PluginCeres::Basket.Components.BasketList" ) }}
+{{ component( "PluginCeres::Basket.Components.BasketTotals" ) }}
+
+<script type="x/template" id="vue-basket-preview">
+    <div class="wrapper-inner basket-preview">
+        <header class="basket-header p-a-1">
+            <h3 class="d-inline-block m-a-0">{{ trans("PluginCeres::Template.basketPreview") }}</h3>
+            <button type="button" id="closeBasketPreview" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
+        <!-- BASKET LIST -->
+        <div class="p-a-1 list">
+          <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
+              <basket-list size="small"></basket-list>
+          </div>
+          <h5 v-else>{{ trans("PluginCeres::Template.orderNoItemsInBasket") }}</h5>
+        </div>
+        <!-- ./BASKET LIST -->
+
+        <!-- BASKET PREVIEW BOTTOM -->
+        <div class="p-a-1 bg-faded totals">
+
+            <basket-totals :config="{{ config("PluginCeres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 m-b-1">
+                    <a href="/basket" class="btn btn-outline-primary btn-block basketBtn" :class="{ 'disabled': basketItems.length <= 0 }" title="{{ trans("PluginCeres::Template.basket") }}">
+                        {{ trans("PluginCeres::Template.basket") }} <i class="fa fa-shopping-cart"></i>
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    {{ LayoutContainer.show("PluginCeres::BasketPreview.BeforeCheckoutButton") }}
+
+                    <div v-resource-if:user="isLoggedIn">
+                        <a href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCeres::Template.orderCheckout") }}">
+                            {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <div v-resource-if:user="!isLoggedIn">
+                        <a href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCeres::Template.orderCheckout") }}">
+                            {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    {{ LayoutContainer.show("PluginCeres::BasketPreview.AfterCheckoutButton") }}
+                </div>
+            </div>
+        </div>
+        <!-- ./BASKET PREVIEW BOTTOM -->
+    </div>
+</script>

@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% set logData = config("PluginCeres.log.data")|split(', ') %}
+
+<title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+
+<link rel="stylesheet" href="{{ plugin_path('PluginCeres') }}/css/plugin-ceres.css">
+
+<script>
+    App = {
+        config:
+        {
+            printErrors:        {% if "print_errors" in logData or "all" in logData %}true{% else %}false{% endif %},
+            printSuccess:       {% if "print_success" in logData or "all" in logData %}true{% else %}false{% endif %},
+            printWarnings:      {% if "print_warnings" in logData or "all" in logData %}true{% else %}false{% endif %},
+            printInfos:         {% if "print_infos" in logData or "all" in logData %}true{% else %}false{% endif %},
+            printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
+            logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %}
+        }
+    };
+</script>

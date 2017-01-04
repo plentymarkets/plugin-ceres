@@ -1,0 +1,46 @@
+.cmp-search-box {
+  background-color: $gray-lightest;
+  border-bottom: 1px solid $gray-lighter;
+  padding: 0px 15px;
+
+  .search-box-inner {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 1rem 0em;
+  }
+
+  .search-box-shadow-frame {
+    display: flex;
+    flex: 100;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    margin: .6rem 0;
+  }
+
+  .search-input {
+    flex: 1 0 70%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.3rem;
+    line-height: 1;
+    border: none;
+    padding: .4rem 1rem;
+    outline: none;
+  }
+
+  .search-submit {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.3rem;
+    line-height: 1;
+    background: #ffffff;
+    padding: .4rem 1rem;
+    color: $brand-primary;
+    border: none;
+    transition: all 300ms;
+    outline: none;
+
+    &:hover{
+      color: darken($brand-primary, 20%);
+    }
+  }
+}

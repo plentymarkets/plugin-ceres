@@ -1,0 +1,16 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+
+{% block PageBody %}
+    {{ component( "PluginCeres::Customer.Components.Registration") }}
+    <div class="gast container-max">
+        <div class="row m-b-3">
+            <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+                <div class="row m-b-3">
+                    <h1 class="col-xs-12">{{ trans("PluginCeres::Template.accOrderAsGuest") }}</h1>
+                </div>
+
+                <registration guest-mode="true"></registration>
+            </div>
+        </div>
+    </div>
+{% endblock %}

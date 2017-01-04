@@ -1,0 +1,40 @@
+{% set companyLogo  = config("PluginCeres.header.company_logo") %}
+{% set lang         = services.sessionStorage.getLang() %}
+
+<nav class="navbar">
+    <div class="brand-wrapper">
+        <a class="navbar-brand pull-lg-left" href="/">
+            <img src="{{ companyLogo }}" class="img-fluid"/>
+        </a>
+
+        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">
+            &#9776;
+        </button>
+    </div>
+
+    <div class="collapse navbar-toggleable-md" id="mainNavbarCollapse">
+        <ul class="nav navbar-nav pull-lg-right">
+            {% for category in services.category.getNavigationTree("item", lang) %}
+                {% if category.children is empty %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ services.category.getURL( category, lang ) }}">{{ category.details.first.name }}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" id="{{ category.details.first.name }}_Menu" data-target="#"
+                           href="{{ services.category.getURL( category, lang ) }}"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ category.details.first.name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="{{ category.details.first.name }}_Menu">
+                            {% for subcat in category.children %}
+                                <a class="dropdown-item special-case" href="{{ services.category.getURL( subcat, lang ) }}">
+                                    {{ subcat.details.first.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

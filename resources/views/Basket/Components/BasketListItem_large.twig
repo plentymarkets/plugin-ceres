@@ -1,0 +1,73 @@
+{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
+
+<article class="cmp cmp-basket-item m-b-3 p-b-1">
+
+    <!-- ITEM IMAGE -->
+    <a class="item-image" :href="basketItem.variation | itemURL">
+        <img :src="basketItem.variation | itemImage">
+    </a>
+    <!-- ./ITEM IMAGE -->
+
+    <!-- ITEM QUANTITY HANDLING -->
+    <div class="item-quantity">
+
+        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+
+        <div class="item-unit-price">
+            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
+        </div>
+
+        <div class="item-total-price">
+            ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
+        </div>
+
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+              <span class="message" v-if="!deleteConfirmed">
+                   {{ trans("PluginCeres::Template.generalDelete") }}
+              </span>
+            <span class="message" v-else>
+                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
+              </span>
+            <span class="btn-label" @click.stop="resetDelete">
+                  <i class="fa fa-times"></i>
+              </span>
+        </button>
+    </div>
+    <!-- ./ITEM QUANTITY HANDLING -->
+
+    <!-- ITEM DETAILS -->
+    <div class="item-details small">
+        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
+        <a class="clearfix" :href="basketItem.variation | itemURL">
+            <div class="item-name">
+                ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
+            </div>
+        </a>
+
+        <p class="id">
+            <strong>{{ trans("PluginCeres::Template.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
+        </p>
+
+        <div class="item-description">
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemNumber") }}:</strong>
+                <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
+            </div>
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemCondition") }}:</strong>
+                <span class="col-xs-6 col-sm-7">${ itemCondition }</span>
+            </div>
+            <div class="row">
+                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemAvailability") }}:</strong>
+                <span class="col-xs-6 col-sm-7">
+                    ${ itemAvailability }
+                </span>
+            </div>
+            <p class="m-y-1">
+                {!! basketItem.variation.itemDescription.description !!}
+            </p>
+        </div>
+        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCeres::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCeres::Template.itemShowLess") }}"></label>
+    </div>
+    <!-- ./ITEM DETAILS -->
+</article>

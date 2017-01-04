@@ -1,0 +1,167 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {{ component( "PluginCeres::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCeres::Checkout.Components.PaymentProviderSelect" ) }}
+    {{ component( "PluginCeres::Checkout.Components.ShippingProfileSelect" ) }}
+    {{ component( "PluginCeres::Checkout.Components.PlaceOrder" ) }}
+    {{ component( "PluginCeres::Basket.Components.Coupon" ) }}
+    {{ component( "PluginCeres::Basket.Components.BasketList" ) }}
+    {{ component( "PluginCeres::Basket.Components.BasketTotals" ) }}
+    <div class="page-content checkout container-max">
+        {#:events="['FrontendPaymentMethodChanged!checkout', 'FrontendShippingProfileChanged!checkout']"#}
+        <resource
+            name="checkout"
+            route="/rest/checkout/"
+            :data="{{ services.checkout.getCheckout() | json_encode() }}"
+            :events="['CheckoutChanged!checkout']"></resource>
+
+        {% set overrideCheckout = LayoutContainer.show("PluginCeres::Checkout") %}
+        {% if overrideCheckout|trim is empty %}
+            <div class="row m-t-1">
+                <div class="col-xs-12 m-b-3">
+                    <h1 class="h4">{{ trans("PluginCeres::Template.orderCheckout") }}</h1>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- ADDRESS SELECT -->
+                <div class="col-md-7">
+                    <div id="registry-form-container" class="registry-form-container main-col" data-id="0" data-status="2">
+                        {% set overrideAddressLists = LayoutContainer.show("PluginCeres::Checkout.AddressLists") %}
+                        {% if overrideAddressLists|trim is empty %}
+                            {% set overrideBillingAddress = LayoutContainer.show("PluginCeres::Checkout.BillingAddress") %}
+                            {% if overrideBillingAddress|trim is empty %}
+                                <header class="m-b-1">
+                                <h3>{{ trans("PluginCeres::Template.orderInvoiceAddress") }}</h3>
+                                </header>
+
+                                {{ LayoutContainer.show("PluginCeres::Checkout.BeforeBillingAddress") }}
+                                <div class="invoice-addresses-select">
+                                        <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
+                                                                :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
+                                </div>
+                                {{ LayoutContainer.show("PluginCeres::Checkout.AfterBillingAddress") }}
+                            {% else %}
+                                {{ overrideBillingAddress }}
+                            {% endif %}
+
+                            {% set overrideShippingAddress = LayoutContainer.show("PluginCeres::Checkout.ShippingAddress") %}
+                            {% if overrideShippingAddress|trim is empty %}
+                                <header class="m-b-1">
+                                    <h3>{{ trans("PluginCeres::Template.orderShippingAddress") }}</h3>
+                                </header>
+
+                                {{ LayoutContainer.show("PluginCeres::Checkout.BeforeShippingAddress") }}
+                                <div class="shipping-addresses-select">
+                                        <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
+                                                                 :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
+                                </div>
+                                {{ LayoutContainer.show("PluginCeres::Checkout.AfterShippingAddress") }}
+                            {% else %}
+                                {{ overrideShippingAddress }}
+                            {% endif %}
+                        {% else %}
+                            {{ overrideAddressLists }}
+                        {% endif %}
+                        {% set overrideShippingProfiles = LayoutContainer.show("PluginCeres::Checkout.ShippingProfileList") %}
+                        {% if overrideShippingProfiles|trim is empty %}
+                            <header class="m-b-1">
+                                <h3>{{ trans("PluginCeres::Template.orderShippingProfile") }}</h3>
+                            </header>
+
+                            {{ LayoutContainer.show("PluginCeres::Checkout.BeforeShippingProfileList") }}
+                            <div class="shipping-method-select">
+                                <shipping-profile-select></shipping-profile-select>
+                            </div>
+                            {{ LayoutContainer.show("PluginCeres::Checkout.AfterShippingProfileList") }}
+                        {% else %}
+                            {{ overrideShippingProfiles }}
+                        {% endif %}
+
+                        {% set overridePaymentList = LayoutContainer.show("PluginCeres::Checkout.PaymentList") %}
+                        {% if overridePaymentList|trim is empty %}
+                            <header class="m-b-1">
+                                <h3>{{ trans("PluginCeres::Template.orderPaymentMethod") }}</h3>
+                            </header>
+
+                            {{ LayoutContainer.show("PluginCeres::Checkout.BeforePaymentList") }}
+                            <div class="payment-method-select">
+                                <payment-provider-select></payment-provider-select>
+                            </div>
+                            {{ LayoutContainer.show("PluginCeres::Checkout.AfterPaymentList") }}
+                        {% else %}
+                            {{ overridePaymentList }}
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- ./ADDRESS SELECT -->
+
+                <div class="col-md-5 checkout-rightside">
+                    <aside class="sidebar">
+                        <div class="cmp cmp-checkout-sidebar">
+                            <div class="cmp cmp-basket-preview-list">
+                                <basket-list size="small"></basket-list>
+                            </div>
+                            <hr>
+                            <coupon></coupon>
+                            <hr>
+                            <basket-totals :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- OPT IN -->
+            <div class="row">
+                <div class="col-xs-12 m-b-3">
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-7">
+                            <div class="form-check">
+                                <label class="form-check-label" for="agb-accept">
+                                    <input class="form-check-input" type="checkbox" value="" id="agb-accept">
+                                    {% autoescape false %}
+                                        {% set terms = services.category.get(config('PluginCeres.global.category.terms_and_conditions')) %}
+                                        {% set rights = services.category.get(config('PluginCeres.global.category.cancellation_rights')) %}
+                                        {% set policy = services.category.get(config('PluginCeres.global.category.privacy_policy')) %}
+
+                                        {% set gtcContent %}
+                                            <a href="{{ services.category.getURL( terms ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {% set cancellationContent %}
+                                            <a href="{{ services.category.getURL( rights ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {% set policyContent %}
+                                            <a href="{{ services.category.getURL( policy ) }}" target="_blank">
+                                                <strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>
+                                            </a>
+                                        {% endset %}
+
+                                        {{ trans("PluginCeres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
+                                    {% endautoescape %}
+                                </label>
+                            </div>
+                            {{ LayoutContainer.show("PluginCeres::Checkout.OptIns") }}
+                        </div>
+                        <div class="col-xs-12 col-sm-5">
+                            <place-order target-continue="/place-order"></place-order>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./OPT IN -->
+        {% else %}
+            {{ overrideCheckout }}
+        {% endif %}
+    </div>
+{% endblock %}

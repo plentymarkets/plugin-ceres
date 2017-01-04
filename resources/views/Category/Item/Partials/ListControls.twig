@@ -1,0 +1,84 @@
+{% set sortData = config("PluginCeres.sort.data") %}
+{% if sortData == "all" %}
+    {% set sortData = [
+        "itemId_asc",
+        "itemId_desc",
+        "itemName_asc",
+        "itemName_desc",
+        "itemPosition_asc",
+        "itemPosition_desc",
+        "itemPrice_asc",
+        "itemPrice_desc",
+        "itemRating_asc",
+        "itemRating_desc",
+        "variationCreateTimestamp_asc",
+        "variationCreateTimestamp_desc",
+        "variationId_asc",
+        "variationId_desc",
+        "variationCustomNumber_asc",
+        "variationCustomNumber_desc",
+        "variationLastUpdateTimestamp_asc",
+        "variationLastUpdateTimestamp_desc",
+        "variationName_asc",
+        "variationName_desc",
+        "variationPosition_asc",
+        "variationPosition_desc",
+        "variationActive_asc",
+        "variationActive_desc",
+        "variationPrimary_asc",
+        "variationPrimary_desc",
+        "itemRand",
+        "itemProducerName_asc",
+        "itemProducerName_desc"
+    ] %}
+{% else %}
+    {% set sortData = sortData|split(', ') %}
+{% endif %}
+
+{% set paginationValues = config("PluginCeres.pagination.values") %}
+{% if paginationValues == "all" %}
+    {% set paginationValues = [20, 50, 100] %}
+{% else %}
+    {% set paginationValues = paginationValues|split(', ') %}
+{% endif %}
+
+{% set currentItemsPerPage     = request.get("items_per_page") | default( config('PluginCeres.pagination.defaultItemsPerPage') ) %}
+{% set currentSort      = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) %}
+
+{% set page             = paginatedResult.getPage() %}
+{% set itemCountTotal   = paginatedResult.getTotalCount() %}
+{% set itemCountStart   = ((page - 1) * currentItemsPerPage) + 1 %}
+{% set itemCountEnd     = page * currentItemsPerPage %}
+{% if itemCountEnd > itemCountTotal %}
+    {% set itemCountEnd = itemCountTotal %}
+{% endif %}
+
+<form name="sorting-form row m-b-1" class="row" method="GET">
+    <div class="col-xs-6">
+        <div class="input-unit">
+            <select id="itemSorting" onchange="this.form.submit()" name="itemSorting" class="custom-select">
+                {% for element in sortData %}
+                    <option value="{{ element }}"{% if currentSort == element %} selected="true"{% endif %}>
+                        {{ trans("PluginCeres::Template." ~ element) }}
+                    </option>
+                {% endfor %}
+            </select>
+            <label for="itemSorting">{{ trans("PluginCeres::Template.itemCategorySort") }}</label>
+        </div>
+    </div>
+
+    <input type="hidden" name="page" value="1">
+
+    <div class="col-xs-6">
+        <div class="input-unit">
+            <select class="custom-select" onchange="this.form.submit()" name="items_per_page" id="listItemsPerPage">
+                {% for element in paginationValues %}
+                    <option value="{{ element }}"{% if currentItemsPerPage == element %} selected="true"{% endif %}>
+                        {{ element }}
+                    </option>
+                {% endfor %}
+            </select>
+            <label for="listItemsPerPage">{{ trans("PluginCeres::Template.itemCategoryItemsPerPage") }}</label>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,119 @@
+{% import "PluginCeres::PageDesign.Macros.IncludeComponents" as Loader %}
+{{ component( "PluginCeres::PageDesign.Components.Notifications" ) }}
+{{ component( "PluginCeres::Basket.Components.BasketPreview" ) }}
+{{ component( "PluginCeres::Customer.Components.Login" ) }}
+{{ component( "PluginCeres::Customer.Components.Registration" ) }}
+{{ component( "PluginCeres::Basket.Components.AddItemToBasketOverlay" ) }}
+
+<!DOCTYPE html>
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set fixNavBarPos = config("PluginCeres.header.fixed_navbar") %}
+{% set showItemConfirm = config("PluginCeres.basket.add_item_to_basket_confirm") %}
+
+<html lang="{{ lang }}" data-framework="vue">
+
+    <head>
+        {% include "PluginCeres::PageDesign.Partials.Head" %}
+    </head>
+
+    <body>
+        <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
+        <resource name="basket" route="/rest/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
+        <resource name="itemSearch" :data="{}"></resource>
+        <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
+        <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
+        <resource-list name="basketItems" route="/rest/basket/items/" data="{{ services.basket.getBasketItems() | json_encode() }}"></resource-list>
+
+        <div class="wrapper wrapper-top">
+            <!-- messages -->
+            <notifications
+                :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"
+            ></notifications>
+        </div>
+
+        <div class="wrapper wrapper-left">
+          <!-- filters -->
+        </div>
+
+        <div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
+
+            {% include "PluginCeres::PageDesign.Partials.Header.Header" %}
+
+            <div id="page-body" class="main">
+                {% block PageBody %}
+                    <!-- inject content of inherited templates here -->
+                {% endblock %}
+            </div>
+
+            {% include "PluginCeres::PageDesign.Partials.Footer" %}
+        </div>
+
+        <div class="wrapper wrapper-right">
+          <basket-preview></basket-preview>
+        </div>
+
+        <div class="wrapper wrapper-bottom">
+            <!-- eventually messages -->
+
+            <!-- LOGIN MODAL -->
+            <div id="login-modal-wrapper">
+                <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans("PluginCeres::Template.accLogin") }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <login modal-element="login-modal-wrapper"></login>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./LOGIN MODAL -->
+
+            <!-- REGISTRATION MODAL -->
+            <div id="simple-registration-modal-wrapper">
+                <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans("PluginCeres::Template.accCreateAccount") }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./REGISTRATION MODAL -->
+
+            <!-- BASKET MODAL -->
+            <add-item-to-basket-overlay :show-overlay="{{ showItemConfirm }}"></add-item-to-basket-overlay>
+            <!-- ./BASKET MODAL -->
+
+        </div>
+
+        {{ Loader.include_components() }}
+
+        {% set lang = services.sessionStorage.getLang() %}
+
+        {% if config("PluginCeres.log.performance.level") == 'development' %}
+            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
+            <script>var Translations = Languages['{{ lang }}'];</script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-vendor.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/src/app.config.js"></script>
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-app.js"></script>
+        {% else %}
+            {# TODO remove douplicate import #}
+            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
+            <script>var Translations = Languages['{{ lang }}'];</script>
+
+            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres.min.js"></script>
+        {% endif %}
+    </body>
+</html>

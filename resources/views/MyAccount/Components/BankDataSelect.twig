@@ -1,0 +1,143 @@
+<script type="x/template" id="vue-bank-data-select">
+<div class="cmp cmp-address-list m-b-3">
+
+    <div class="items items-empty" v-show="userBankData.length == 0">
+        <div class="card">
+            <span class="item-inner">
+                <span class="item-content">
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.bankNoBankData") }} -</p>
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="dropdown items" v-show="userBankData.length > 0">
+        <div id="bankData" class="dropdown-toggle card" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="item-inner">
+                <span class="item-content" v-if="selectedBankData">
+                    <strong>Kontoinh.: ${ selectedBankData.accountOwner }</strong>
+                    <span>IBAN:        ${ selectedBankData.iban }</span>
+                    <span>BIC:         ${ selectedBankData.bic }</span>
+                </span>
+
+                <span class="item-content" v-show="!selectedBankData">
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
+                </span>
+            </span>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="bankData">
+            <ul>
+                <li class="item" v-for="(index,bankData) in userBankData">
+                    <input type="radio" id="${ bankData.id }" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
+                    <label for="${ bankData.id }" class="item-inner">
+                        <span class="item-content small">
+                            <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
+                            <span>Bank:        ${ bankData.bankName }</span>
+                            <span>IBAN:        ${ bankData.iban }</span>
+                            <span>BIC:         ${ bankData.bic }</span>
+                        </span><!--
+                        -->
+                        <div class="item-controls">
+                            <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </span><!--
+                        --><span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div><!--
+    --><div class="add-item">
+      <a href="#" class="" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCeres::Template.bankAddDataTitle") }}" @click="openAddBank">
+          <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
+      </a>
+    </div>
+</div>
+
+<div v-el:bank-info-modal>
+    <div class="modal fade" tabindex="-1" role="dialog" data-keybord="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" @click="resetData" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">${headline}</h4>
+                </div>
+                <div class="modal-body">
+                    <fieldset>
+                      <form id="my-bankForm">
+                          <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-unit accountOwner" data-validate="text">
+                                    <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" :value="updateBankData.accountOwner">
+                                    <label for="txt_firma${_uid}">{{ trans("PluginCeres::Template.accHolder") }}*</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="input-unit">
+                                    <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" :value="updateBankData.bankName">
+                                    <label for="txt_firma${_uid}">{{ trans("PluginCeres::Template.bank") }}</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="input-unit iban" data-validate="regex">
+                                    <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" :value="updateBankData.iban">
+                                    <label for="txt_firma${_uid}">IBAN*</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="input-unit" data-validate="regex">
+                                    <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" :value="updateBankData.bic">
+                                    <label for="txt_firma${_uid}">BIC* - {{ trans("PluginCeres::Template.bankBicNotification") }}</label>
+                                </div>
+                            </div>
+                          </div>
+                      </form>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="closeModal">{{ trans("PluginCeres::Template.generalCancel") }}</button>
+                    <button type="button" class="btn btn-primary" @click="validateInput">{{ trans("PluginCeres::Template.generalSave") }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div v-el:bank-delete-modal>
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" @click="closeDeleteModal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">{{ trans("PluginCeres::Template.bankDeleteTitle") }}</h4>
+                </div>
+
+                <div class="modal-body">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>{{ trans("PluginCeres::Template.bankDeleteWarning") }}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 offset-sm-6">
+                                <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("PluginCeres::Template.generalCancel") }}</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-primary btn-block" @click="removeBankInfo">{{ trans("PluginCeres::Template.generalDelete") }}</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

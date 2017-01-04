@@ -1,0 +1,84 @@
+{
+  "de":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "URL",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "URL"
+      }
+    ],
+    "texts":
+    {
+      "welcome": "Herzlich Willkommen!",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin ContactCard",
+        "pluginLink": "URL"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin SocialMedia",
+        "pluginLink": "URL"
+      }
+    ]
+  },
+  "en":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "URL",
+        "text": "Entspanntes Shopping von überall",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Shopping ohne Grenzen",
+        "pictureLink": "URL"
+      },
+      {
+        "pictureUrl": "URL",
+        "text": "Eines für alle: das neue Ceres",
+        "pictureLink": "URL"
+      }
+    ],
+    "texts":
+    {
+      "welcome": "DAS IST ENGLISCH",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets Empfiehlt"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin ContactCard",
+        "pluginLink": "URL"
+      },
+      {
+        "pluginIcon": "URL",
+        "pluginText": "Plugin SocialMedia",
+        "pluginLink": "URL"
+      }
+    ]
+  }
+}

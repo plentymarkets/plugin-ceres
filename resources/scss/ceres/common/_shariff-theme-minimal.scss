@@ -1,0 +1,42 @@
+.shariff{
+	.theme-minimal {
+        .shariff-button {
+            width: auto!important;
+            height: auto!important;
+            min-width: 0!important;
+            max-width: none!important;
+        	border: none;
+            margin-right: .5rem;
+            margin-bottom: 0;
+            flex: 0 0 auto;
+
+            a {
+                color: $gray-lighter;
+                height: auto!important;
+                background-color: transparent!important;
+            }
+
+            .share_text{
+                display: none;
+            }
+
+            .share_count {
+                background-color: transparent;
+                color: #333;
+            }
+        }
+
+        .twitter a:hover{
+			color: #55acee;
+        }
+        .facebook a:hover{
+			color: #3b5998;
+        }
+        .googleplus a:hover{
+			color: #d34836;
+        }
+        .pinterest a:hover{
+	    	color: #bd081c;
+		}
+    }
+}

@@ -1,0 +1,13 @@
+<script type="x/template" id="vue-item-list-sorting">
+    <div class="col-sm-7">
+        <div class="input-unit">
+            <select id="itemSorting" name="itemSorting" class="custom-select" v-model="selectedSorting"
+                    @change="updateSorting()">
+                <option :value="element" v-for="element in sortData">
+                    ${ element.displayName }
+                </option>
+            </select>
+            <label for="itemSorting">{{ trans("PluginCeres::Template.itemCategorySort") }}</label>
+        </div>
+    </div>
+</script>

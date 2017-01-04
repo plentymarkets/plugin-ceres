@@ -1,0 +1,39 @@
+<script type="x/template" id="vue-payment-provider-select">
+    <div class="cmp cmp-method-list m-b-3" :class="{ 'wait': waiting }">
+        <ul class="method-list">
+            <li v-for="paymentProvider in checkout.paymentDataList" class="method-list-item" data-id="${paymentProvider.id}">
+                <input
+                        type="radio"
+                        id="paymentMethod${ _uid }${ paymentProvider.id }"
+                        name="MethodOfPaymentID"
+                        :value="paymentProvider.id"
+                        @change="onPaymentProviderChange()"
+                        v-model="checkout.methodOfPaymentId"
+                >
+                <label for="paymentMethod${ _uid }${ paymentProvider.id }">
+                    <div class="icon">
+                        <div class="square-container">
+                            <div class="square-inner center-xy">
+                              <img :src="paymentProvider.icon">
+                            </div>
+                        </div>
+                    </div><!--
+                    --><div class="content">
+                    ${ paymentProvider.name }
+                        <div>
+                            <small>
+                                ${ paymentProvider.fee | currency }
+                            </small>
+                        </div>
+                        <div>
+                            <small>
+                                ${ paymentProvider.description }
+                            </small>
+                        </div>
+                    </div>
+                </label>
+            </li><!--
+            -->
+        </ul>
+    </div>
+</script>

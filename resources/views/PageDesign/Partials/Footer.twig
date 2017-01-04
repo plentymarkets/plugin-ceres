@@ -1,0 +1,125 @@
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% set numberOfCols = config('PluginCeres.footer.number_of_cols') %}
+{% set colSize = (12 / (numberOfCols + 1)) %}
+{% set displayedCategories = [] %}
+{% set numberOfFeatures = config('PluginCeres.footer.number_of_features') %}
+
+<div class="footer">
+    <a href="#" class="to-top hidden-md-up">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+
+    {% if numberOfFeatures > 0 %}
+        <div class="footer-features p-y-1 container-max">
+            <div class="row">
+                {% for i in 1..numberOfFeatures %}
+                    <div class="col-xs-12 col-sm-4 text-xs-center">
+                        <i class="fa fa-check text-success" aria-hidden="true"></i>
+                        {{ config('PluginCeres.footer.store_feature_' ~ i) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container-max">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="footer-services m-t-2">
+                    {% set paymentMethodContent = LayoutContainer.show("PluginCeres::Homepage.PaymentMethods") %}
+                    {% if paymentMethodContent|trim is not empty %}
+                        <div class="services-payment m-b-1">
+                            <strong class="services-title">{{ trans("PluginCeres::Template.orderPaymentMethods") }}</strong>
+                            {{ paymentMethodContent }}
+                        </div>
+                    {% endif %}
+                    {% set shippingContent = LayoutContainer.show("PluginCeres::Homepage.Shipping") %}
+                    {% if shippingContent|trim is not empty %}
+                        <div class="services-shipping m-b-1">
+                            <strong class="services-title">{{ trans("PluginCeres::Template.generalOrderShippedBy") }}</strong>
+                            {{ shippingContent }}
+                        </div>
+                    {% endif %}
+                    {% set certifiedContent = LayoutContainer.show("PluginCeres::Homepage.Certified") %}
+                    {% if certifiedContent|trim is not empty %}
+                        <div class="services-certificate m-b-1">
+                            <strong class="services-title">{{ trans("PluginCeres::Template.generalCertifiedBy") }}</strong>
+                            {{ certifiedContent }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr class="m-y-2">
+        <div class="row">
+
+            {% for i in 1..numberOfCols %}
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <nav class="footer-column m-b-2">
+                        <h5>{{ config('PluginCeres.footer.col_' ~ i ~ '_title') }}</h5>
+                        <ul class="list-unstyled">
+
+                            {% set footerCategories = config('PluginCeres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
+                            {% for catID in footerCategories %}
+
+                                {% set cat = services.category.get(catID) %}
+
+                                {% if cat is not null %}
+                                    {% set displayedCategories = displayedCategories | merge([catID]) %}
+                                    <li>
+                                        <a href="{{ services.category.getURL( cat ) }}">
+                                            {{ cat.details.first.name }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if i == numberOfCols and config('PluginCeres.global.category.legal_disclosure') not in displayedCategories %}
+                                    <li>
+                                        {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
+                                        <a href="{{ services.category.getURL( cat ) }}">{{ cat.details.first.name }}</a>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </ul>
+                    </nav>
+                </div>
+            {% endfor %}
+            <hr class="hidden-sm-up m-y-2">
+            <div class="col-xs-6 col-sm-3">
+                <div class="footer-column">
+                    {{ LayoutContainer.show("PluginCeres::Footer.RowOne") }}
+                </div>
+            </div>
+            <hr class="col-xs-12 hidden-lg-up m-y-2">
+            <div class="col-sm-12 col-lg-3">
+                <div class="footer-column row">
+                    {% set rowTwo = LayoutContainer.show("PluginCeres::Footer.RowTwo") %}
+
+                    {{ rowTwo }}
+
+                    {% if rowTwo|trim is not empty %}
+                    <div class="col-xs-12 col-sm-6 col-lg-12">
+                        {% else %}
+                        <div class="col-xs-12">
+                            {% endif %}
+
+                            {{ LayoutContainer.show("PluginCeres::Footer.RowThree") }}
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="m-b-0">
+
+            </div>
+
+            {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
+            <div class="copyright text-xs-center m-y-1">
+                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
+                <br>
+                <small>Powered by plentymarkets</small>
+            </div>
+        </div>
+    </div>
+</div>

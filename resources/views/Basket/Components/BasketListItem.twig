@@ -1,0 +1,15 @@
+{% set itemsData = config("PluginCeres.basket.item_data")|split(', ') %}
+{% set showItemVariation = config("PluginCeres.basket.variations") %}
+{% set configItemName = config("PluginCeres.item.name") %}
+
+<script type="x/template" id="vue-basket-list-item">
+
+    <div v-if="size == 'large'">
+        {% include "PluginCeres::Basket.Components.BasketListItem_large" %}
+    </div>
+
+    <div v-if="size == 'small'">
+        {% include "PluginCeres::Basket.Components.BasketListItem_small" %}
+    </div>
+
+</script>

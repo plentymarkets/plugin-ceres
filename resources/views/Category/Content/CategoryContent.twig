@@ -1,0 +1,9 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+
+{% block PageBody %}
+
+    {% set lang = services.sessionStorage.getLang() %}
+
+    {% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
+
+{% endblock %}

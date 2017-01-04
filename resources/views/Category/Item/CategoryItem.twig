@@ -1,0 +1,54 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+
+{% set itemSort             = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) | split('_') %}
+{% set orderBy              = itemSort[0] %}
+{% set orderByKey           = itemSort[1] | default('ASC') %}
+{% set variationShowType    = config("PluginCeres.item.variation_show_type") %}
+{% set categoryParams = {
+'variationShowType' : config("PluginCeres.item.variation_show_type"),
+'itemsPerPage'      : request.get("items_per_page") | default( config('PluginCeres.pagination.defaultItemsPerPage') ),
+'orderBy'           : itemSort[0],
+'orderByKey'        : itemSort[1] | default('ASC')
+} %}
+
+{% set page                 = request.get("page") | default(1) %}
+{% set paginatedResult      = services.category.getItems(category, categoryParams, page ) %}
+
+{% set itemList             = paginatedResult.getResult() %}
+{% set paginationType       = config("PluginCeres.pagination.position") %}
+
+{% block PageBody %}
+
+    <div class="categoriegrid page-content container-max">
+        <div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h4">{{ category.details.first.name }}</h1>
+                <hr class="hidden-sm-down">
+            </div>
+        </div>
+        <div class="row m-b-3">
+            {#<div class="col-xs-12 col-lg-9">#}
+                {#{% include "PluginCeres::Category.Item.Partials.CategoryViewFilter" %}#}
+            {#</div>#}
+            {% include "PluginCeres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
+        </div>
+
+        <div class="col-xs-12">
+            <hr class="m-b-1 hidden-sm-down">
+            <ul class="product-list row grid">
+                {% for item in itemList %}
+                    <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        {% include "PluginCeres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr class="m-y-2">
+        </div>
+    </div>
+    <div class="list-controls m-b-3 row">
+        <div class="col-xs-12">
+            {% include "PluginCeres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
+        </div>
+    </div>
+    </div>
+{% endblock %}

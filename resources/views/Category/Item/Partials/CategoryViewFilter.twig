@@ -1,0 +1,140 @@
+<aside class="cmp cmp-filters row">
+    <div class="col-xs-12 filters-header hidden-lg-up">
+        <strong class="title">Filtern nach</strong>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#filters-content">
+            <i class="fa fa-caret-down text-muted" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="col-xs-12 collapse navbar-toggleable-md" id="filters-content">
+
+        <div class="row">
+
+            <div class="filter-group col-xs-6 col-sm-4 col-md-3 m-b-1">
+                <div class="input-unit" data-toggle="collapse" data-target="#filterPreis" aria-expanded="false" aria-controls="filterPreis">
+                    <span class="input-unit-label">Preis</span>
+                    <div class="input-unit-preview">
+                        0€ – 999€
+                    </div>
+                </div>
+                <div id="filterPreis" class="collapse filter-content">
+                    <div id="priceRangeContent" class="card card-block">
+                        <input class="" type="range" name="price-range" value="" placeholder="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTER -->
+            <div class="filter-group col-xs-6 col-sm-4 col-md-3 m-b-1">
+                <div class="input-unit" data-toggle="collapse" data-target="#filterAmount" aria-expanded="false" aria-controls="filterAmount">
+                    <span class="input-unit-label">Stückzahl</span>
+                    <div class="input-unit-preview">
+                        4 Pkg.
+                    </div>
+                </div>
+                <div id="filterAmount" class="collapse filter-content">
+                    <div class="card card-block">
+                        <input type="range" min="1" max="10" value="4" id="fader" step="1" list="amount">
+                        <datalist id="amount">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </datalist>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="filter-group col-xs-6 col-sm-4 col-md-3 m-b-1">
+                <div class="input-unit" data-toggle="collapse" data-target="#filterColors" aria-expanded="false" aria-controls="filterColors">
+                    <span class="input-unit-label">Farben</span>
+                    <div class="input-unit-preview">
+                        Gelb, Grau.
+                    </div>
+                </div>
+
+                <div id="filterColors" class="collapse filter-content">
+                    <div class="card card-block filters-colors">
+                        <input type="checkbox" id="color1" name="colors" value="color-name">
+                        <label class="color" for="color1" data-color="red">Rot</label>
+
+                        <input type="checkbox" id="color2" name="colors" value="color-name">
+                        <label class="color" for="color2" data-color="green">Grün</label>
+
+                        <input type="checkbox" id="color3" name="colors" value="color-name">
+                        <label class="color" for="color3" data-color="blue">Blau</label>
+
+                        <input type="checkbox" id="color4" name="colors" value="color-name">
+                        <label class="color" for="color4" data-color="black">Schwarz</label>
+
+                        <input type="checkbox" id="color5" name="colors" value="color-name">
+                        <label class="color" for="color5" data-color="yellow">Gelb</label>
+
+                        <input type="checkbox" id="color6" name="colors" value="color-name">
+                        <label class="color" for="color6" data-color="pink">Rosa</label>
+
+                        <input type="checkbox" id="color7" name="colors" value="color-name">
+                        <label class="color" for="color7" data-color="gray">Grau</label>
+
+                        <input type="checkbox" id="color8" name="colors" value="color-name">
+                        <label class="color" for="color8" data-color="purple">Lila</label>
+
+                        <input type="checkbox" id="color9" name="colors" value="color-name">
+                        <label class="color" for="color9" data-color="rainbow">Bunt</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group col-xs-6 col-sm-4 col-md-3 m-b-1">
+                <div class="input-unit" data-toggle="collapse" data-target="#filterBrands" aria-expanded="false" aria-controls="filterBrands">
+                    <span class="input-unit-label">Marken</span>
+                    <div class="input-unit-preview">
+                        Marke A, MArke B
+                    </div>
+                </div>
+
+                <div id="filterBrands" class="collapse filter-content">
+                    <div class="card card-block">
+                        <input type="checkbox" id="marke1" name="" value="">
+                        <label for="marke1">Marke 1</label>
+                        <br>
+                        <input type="checkbox" id="marke2" name="" value="">
+                        <label for="marke1">Marke 2</label>
+                        <br>
+                        <input type="checkbox" id="marke3" name="" value="">
+                        <label for="marke1">Marke 3</label>
+                        <br>
+                        <input type="checkbox" id="marke4" name="" value="">
+                        <label for="marke1">Marke 4</label>
+                        <br>
+                        <input type="checkbox" id="marke5" name="" value="">
+                        <label for="marke1">Marke 5</label>
+                        <br>
+                        <input type="checkbox" id="marke6" name="" value="">
+                        <label for="marke1">Marke 6</label>
+                        <br>
+                        <input type="checkbox" id="marke7" name="" value="">
+                        <label for="marke1">Marke 7</label>
+                        <br>
+                        <input type="checkbox" id="marke8" name="" value="">
+                        <label for="marke1">Marke 8</label>
+                        <br>
+                        <input type="checkbox" id="marke9" name="" value="">
+                        <label for="marke1">Marke 9</label>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- ./FILTER -->
+
+    </div>
+
+</aside>

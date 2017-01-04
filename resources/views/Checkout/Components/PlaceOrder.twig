@@ -1,0 +1,16 @@
+<script type="x/template" id="vue-place-order">
+    <div>
+        <button class="btn btn-primary btn-block" @click="preparePayment()">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("PluginCeres::Template.orderBuyNow") }}
+        </button>
+
+        <div class="modal fade" v-el:modal data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" v-el:modal-content>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+</script>

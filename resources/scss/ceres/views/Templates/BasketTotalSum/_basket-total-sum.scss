@@ -1,0 +1,19 @@
+.cmp-totals{
+	dl{
+
+	}
+
+	dt, dd{
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	dt{
+		width: 70%;
+	}
+
+	dd{
+		text-align: right;
+		width: 30%;
+	}
+}

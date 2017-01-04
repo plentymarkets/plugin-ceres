@@ -1,0 +1,109 @@
+/// Basic stylings for the filters sidebar in the product overview
+/// 
+/// @author Bruno Fenzl
+///
+/// @example scss - Basic Usage HTML
+/// 	<div class="cmp">
+/// 		component markup here 	
+/// 	</div>
+/// 
+
+@mixin cmp-filters(){
+	
+	.filters-header{
+		padding: .5rem 1rem;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+
+	    .title{
+	    	flex: 1;
+	    }
+	}
+
+	.filters-section{
+		border-bottom: 1px solid $gray-lighter;
+
+		&:last-of-type{
+			border-bottom: none;
+		}
+	}
+
+	.filter-group{
+			z-index: 1;
+				.input-unit{
+					margin-bottom: 0;
+				}
+
+				.filter-content{
+					position:absolute;
+					transform: translateY(-1px);
+				}
+		}
+}
+
+.cmp-filters{
+	@include cmp-filters();
+	
+
+
+
+
+	//TODO Make generic color classes
+	//and generic color checkboxes
+	.filters-colors{
+		font-size: 0;
+		line-height: 0;
+
+		input{
+			display: none;
+
+			&:checked + .color{
+				&:before,
+				&:after{
+					content: "";
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					display: block;
+					width: 80%;
+					height: 4px;
+					background-color: white;
+					transform-origin:0 center;
+
+					transform: rotate(45deg) translate(-55%, -55%);
+				}
+
+				&:after{
+					transform: rotate(-45deg) translate(-45%, -45%);
+				}
+			}
+		}
+
+		.color{
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			width: 1.5rem;
+			height: 1.5rem;
+			
+			margin-right: .4rem;
+
+			&[data-color="red"]{ background-color: red; }
+			&[data-color="green"]{ background-color: green; }
+			&[data-color="blue"]{ background-color: blue; }
+			&[data-color="black"]{ background-color: black; }
+			&[data-color="yellow"]{ background-color: yellow; }
+			&[data-color="pink"]{ background-color: pink; }
+			&[data-color="gray"]{ background-color: gray; }
+			&[data-color="purple"]{ background-color: purple; }
+		}
+	}
+}
+
+.navbar-toggler i.fa.fa-caret-down {
+    color: #fff;
+}
+
+
+

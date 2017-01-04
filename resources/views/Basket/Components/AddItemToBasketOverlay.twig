@@ -1,0 +1,70 @@
+<script type="x/template" id="vue-add-item-to-basket-overlay">
+
+{% if not frontend.Account.getIsAccountLoggedIn %}
+    {% set linkedPage = '/login' %}
+{% else %}
+    {% set linkedPage = '/checkout'%}
+{% endif %}
+
+<div id="add-item-to-basket-overlay" v-if="startRendering()">
+    <div class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-special-case">
+
+                <!-- MODAL HEADER -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer">${ timeToClose }</span>s</span>
+                    <h5 class="modal-title">{{ trans("PluginCeres::Template.basketItemAdded") }}</h5>
+                </div>
+                <!-- ./MODAL HEADER -->
+
+                <!-- MODAL BODY -->
+                <div class="modal-body">
+                    <div class="row is-table-row">
+                        <div class="col-md-4" style="min-height: 80px;">
+                            <img style="max-height: 140px;" class="img-fluid m-x-auto" :src="getImage()" alt="${ basketItem.currentBasketItem.itemDescription.name1 }"/>
+                        </div>
+                        <div class="col-md-8">
+                            <p>
+                                <strong>${ basketItem.currentBasketItem.itemDescription.name1 }</strong>
+                            </p>
+                            <p class="small">
+                                <strong>
+                                    <span class="text-muted">${ basketItem.quantity } x</span>
+                                    <span v-text="basketItem.currentBasketItem.variationRetailPrice.price | currency"></span>
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./MODAL BODY -->
+
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-7 m-b-1 item-confirm-special-case-blue">
+                            <a href="{{ linkedPage }}" class="btn btn-primary">
+                                {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a href="/basket" class="btn btn-primary">
+                                {{ trans("PluginCeres::Template.basket") }} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 offset-sm-2 item-confirm-special-case-close">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans("PluginCeres::Template.generalClose") }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./MODAL FOOTER -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>

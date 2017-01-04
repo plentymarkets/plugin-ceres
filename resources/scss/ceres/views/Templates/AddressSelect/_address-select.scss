@@ -1,0 +1,179 @@
+.cmp-address-list{
+
+	.items{
+		position: relative;
+
+		//TODO add class to this div and set this rule by the class
+		&>div:first-child{
+			@extend .card;
+			margin-bottom: 0;
+		}
+	}
+
+	.dropdown-toggle{
+
+		&:after{
+		    position: absolute;
+				top: 80%;
+    		right: 1.5rem;
+		    transform: translateY(-50%);
+		}
+	}
+
+	.items.open{
+		.dropdown-toggle{
+			border-bottom: none;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	.dropdown-menu{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+		border-top: none;
+		border: 1px solid $gray-lighter;
+	}
+
+	ul{
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.item{
+		padding: 0;
+		border-bottom: 1px solid $gray-lighter;
+		position:relative;
+		input{ display: none; }
+
+		input:checked{
+
+			& + .item-inner{
+				background-color: $brand-primary;
+				color: white;
+			}
+
+			& + .item-inner .item-edit .fa:hover{
+				color: white;
+			}
+			& + .item-controls .fa:hover{
+				color: white;
+				cursor: pointer;
+			}
+		}
+
+		&:last-of-type{
+			border-bottom: none;
+		}
+	}
+
+
+	.item-inner{
+		display: flex;
+		flex-direction: row;
+    	cursor: pointer;
+		padding: 1em;
+		margin-bottom: 0;
+	}
+
+	.item-edit{
+		position: absolute;
+		right: 1rem;
+		top: .5rem;
+
+		.fa{
+    		width: 1em;
+		    height: 1em;
+		    color: $gray-light;
+		    transition: all .2s ease-in-out;
+
+		    &:hover{
+				color: $brand-primary;
+				border-color: $brand-primary;
+	    	}
+    	}
+	}
+	.item-remove {
+		position: absolute;
+	    right: 1.35rem;
+	    top: 3rem;
+	    .fa {
+	    	color: $gray-light;
+	    	transition: all .2s ease-in-out;
+	    	&:hover{
+					color: $brand-danger;
+	    	}
+	    }
+	}
+
+	.item-content{
+		display: inline-block;
+	    // width: calc( 100% - 4em );
+	    width: 100%;
+	    flex: 1 1 auto;
+
+		strong, span{
+			display: block;
+		}
+	}
+
+	@include media-breakpoint-up(sm){
+
+	}
+
+	@include media-breakpoint-up(md){
+		.items{
+			display: inline-block;
+			vertical-align: middle;
+			// width: calc( 100% - 5em );
+			width:100%;
+		}
+
+		.add-item{
+			position: absolute;
+	    top: 1em;
+	    right: 1em;
+		}
+
+	}
+
+	@include media-breakpoint-up(lg){
+
+	}
+}
+.checkout {
+	header{
+		h4 {
+    	line-height: 2.5rem;
+		}
+	}
+}
+
+	.add-item{
+		text-align:center;
+		cursor: pointer;
+    float: right;
+
+    	.fa{
+				// width: .7em;
+		    // height: .7em;
+		    // font-size: 1.1em;
+		    // text-align: center;
+		    // padding: .4em;
+		    // border: 3px solid $gray-light;
+		    // border-radius: 50%;
+		    // line-height: .8;
+		    color: $gray-light;
+		    transition: all .2s ease-in-out;
+
+		    &:hover{
+					color: $brand-primary;
+					border-color: $brand-primary;
+	    	}
+    	}
+	}

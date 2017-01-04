@@ -1,0 +1,9 @@
+{{ component( "PluginCeres::Basket.Components.BasketListItem" ) }}
+
+<script type="x/template" id="vue-basket-list">
+    <basket-list-item  v-for="basketItem in basketItems" :basket-item="basketItem" :size="size" language="{{ services.sessionStorage.getLang() }}"></basket-list-item>
+
+    <div v-if="!basketItems.length > 0">
+        <h5>{{ trans("PluginCeres::Template.orderNoItemsInBasket") }}</h5>
+    </div>
+</script>

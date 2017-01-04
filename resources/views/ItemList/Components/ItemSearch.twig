@@ -1,0 +1,11 @@
+<script type="x/template" id="vue-item-search">
+    <div class="search-box-inner">
+        <div class="search-box-shadow-frame">
+            <input type="search" class="search-input" v-model="itemSearch.searchString" @keyup.enter="search()"
+                   autofocus>
+            <button class="search-submit" type="submit" @click="search()">
+                <i class="fa fa-search sm-up"></i>
+            </button>
+        </div>
+    </div>
+</script>

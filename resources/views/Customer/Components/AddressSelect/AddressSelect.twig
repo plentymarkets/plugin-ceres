@@ -1,0 +1,140 @@
+{{ component( "PluginCeres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
+<script type="x/template" id="vue-address-select">
+<div>
+    <div class="cmp cmp-address-list m-b-3">
+        <div class="dropdown items">
+
+            <div
+                    id="addressMultiSelect${ _uid }"
+                    v-bind:class="{'dropdown-toggle card': !isAddressListEmpty(), 'items items-empty': isAddressListEmpty()}"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+            >
+                <div class="item-inner">
+                    <span v-if="selectedAddress.id == -99">
+                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
+                    </span>
+                    <span v-else class="item-content">
+                        <div v-if="!isAddressListEmpty()">
+                            <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
+                            <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress.name2} ${selectedAddress.name3}</strong>
+                            <span v-else>${selectedAddress.name2} ${selectedAddress.name3}</span>
+                            <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
+                            <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
+                        </div>
+
+                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
+                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressNoAddress") }} -</p>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="add-item">
+                <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCeres::Template.addressAddAddress") }}">
+                    <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty()">
+                <ul>
+                    <li class="item" v-for="(index, address) in addressList">
+                        <input
+                                type="radio"
+                                name="shippingAddress${ _uid }"
+                                id="addressSelectItem${ _uid }${ address.id }"
+                                value="${address.id}"
+                                v-model="selectedAddressId"
+                                @change="onAddressChanged(index)"
+                        >
+                        <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
+                            <span v-if="address.id == -99">
+                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
+                            </span>
+                            <span v-else class="item-content small">
+                                <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
+                                <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
+                                <span v-else>${address.name2} ${address.name3}</span>
+                                <span>${address.name4}</span>
+                                <span>${address.address1} ${address.address2}</span>
+                                <span>${address.postalCode} ${address.town}</span>
+                            </span>
+                            <!---->
+                            <div class="item-controls" v-if="address.id != -99">
+                                <span class="item-edit">
+                                    <i class="fa fa-pencil-square-o" @click.prevent="showEditModal(address)" aria-hidden="true"></i>
+                                </span>
+                                <span class="item-remove">
+                                    <i class="fa fa-times" @click.prevent="showDeleteModal(address)" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div v-el:address-modal>
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" @click="closeAddressModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">${headline}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <fieldset>
+                            <create-update-address
+                                v-on:new-address-created="onAddressCreated"
+                                :address-data="addressToEdit"
+                                :address-modal="addressModal"
+                                :address-list="addressList"
+                                :modal-type="modalType"
+                                :address-type="addressType">
+                            </create-update-address>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-el:delete-modal>
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" @click="closeDeleteModal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">${headline}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>{{ trans("PluginCeres::Template.addressDeleteWarning") }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 offset-sm-6">
+                                    <button type="button" class="btn btn-primary btn-block" @click="closeDeleteModal">{{ trans("PluginCeres::Template.generalCancel") }}</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary btn-block" @click="deleteAddress">{{ trans("PluginCeres::Template.generalDelete") }}</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

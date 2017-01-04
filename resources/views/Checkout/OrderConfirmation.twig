@@ -1,0 +1,36 @@
+{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% import "PluginCeres::Checkout.Macros.Address" as address %}
+
+{% set data = services.customer.getLatestOrder() %}
+
+{% block PageBody %}
+    {{ component( "PluginCeres::Checkout.Components.OrderDetails" ) }}
+
+    <div class="page-content myaccount container-max m-b-3 m-t-1 p-b-3">
+        <div class="row m-b-3">
+            <div class="col-xs-12">
+                <h1 class="h4">{{ trans("PluginCeres::Template.generalThanks") }}</h1>
+                <p>{{ trans("PluginCeres::Template.orderWillBeProcessed") }}</p>
+            </div>
+        </div>
+
+        <order-details :order-data="{{ data | json_encode() }}" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
+
+        <hr>
+        <div class="row">
+            {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
+            <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
+                <a href="/" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCeres::Template.generalHomepage") }}</a>
+            </div>
+
+
+            {% if loggedIn %}
+                <div class="col-xs-6 col-md-4">
+                    <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("PluginCeres::Template.accMyAccount") }}</a>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}

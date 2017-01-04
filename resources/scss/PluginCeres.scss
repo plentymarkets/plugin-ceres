@@ -1,0 +1,75 @@
+@import "variables";
+// ==========================================================================
+// External Libs
+// ==========================================================================
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/font-awesome/scss/font-awesome";
+@import "../../node_modules/shariff/build/shariff.complete.css";
+@import "../../node_modules/flag-icon-css/sass/flag-icon";
+@import "../../node_modules/owlcarousel/owl-carousel/owl.carousel.css";
+
+// ==========================================================================
+// Custom styles
+// ==========================================================================
+
+// global
+@import "ceres/mixins/general-mixins";
+@import "ceres/mixins/proportional-boxes";
+@import "ceres/common/typography";
+@import "ceres/common/common";
+@import "ceres/common/structure";
+
+// custom shariff theme for the social icons in the header
+@import "ceres/common/shariff-theme-minimal";
+
+//TODO's
+@import "ceres/common/buttons";
+@import "ceres/common/card";
+
+// External plugins overrides
+@import "ceres/plugins/lightbox";
+@import "ceres/plugins/owl-carousel";
+
+// Components
+@import "ceres/components/component-base";
+@import "ceres/components/accordion";
+@import "ceres/components/alerts";
+@import "ceres/components/featured-category";
+@import "ceres/components/featured-sale";
+
+// Forms
+@import "ceres/forms/input-groups";
+@import "ceres/forms/inputs";
+@import "ceres/forms/select";
+
+// Page Design / Global components
+@import "ceres/views/PageDesign/header";
+@import "ceres/views/PageDesign/search-box";
+@import "ceres/views/PageDesign/language-select";
+@import "ceres/views/PageDesign/navigation";
+@import "ceres/views/PageDesign/breadcrumb";
+@import "ceres/views/PageDesign/footer";
+
+// Templates
+@import "ceres/views/Confirmation/confirmation-order-item";
+@import "ceres/views/Templates/AddressSelect/address-select";
+@import "ceres/views/Templates/BasketItemList/basket-item";
+@import "ceres/views/Templates/BasketPreview/basket-preview-item";
+@import "ceres/views/Templates/BasketPreview/basket-preview";
+@import "ceres/views/Templates/BasketTotalSum/basket-total-sum";
+@import "ceres/views/Templates/CategoryListItem/category-list-item";
+@import "ceres/views/Templates/CategoryViewFilter/category-view-filter";
+@import "ceres/views/Templates/Hero/component-hero";
+@import "ceres/views/Templates/ItemListSort/pagination";
+@import "ceres/views/Templates/ItemRating/item-rating-roll";
+@import "ceres/views/Templates/ItemRating/item-rating-section";
+@import "ceres/views/Templates/OrderItem/order-item";
+@import "ceres/views/Templates/PaymentShippingSelect/payment-shipping-select";
+@import "ceres/views/Templates/ToggleCategoryListView/toggle-list-view";
+
+// Pages
+@import "ceres/views/Home/home";
+@import "ceres/views/Checkout/checkout";
+@import "ceres/views/Item/single-item";
+@import "ceres/views/ItemList/loading-animation";
+@import "ceres/views/Category/category-list";

@@ -1,0 +1,69 @@
+<div class="col-xs-12">
+    <div class="input-unit">
+        <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
+        <label for="txtCompany${_uid}">{{ trans("PluginCeres::Template.addressCompany") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="firstName" id="txtFirstName${_uid}" v-model="addressData.name2">
+        <label for="txtFirstName${_uid}">{{ trans("PluginCeres::Template.addressFirstName") }}*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="lastName" id="txtLastName${_uid}" v-model="addressData.name3" >
+        <label for="txtLastName${_uid}">{{ trans("PluginCeres::Template.addressLastName") }}*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit">
+        <input type="text" name="decorateName" id="txtAdditionalName${_uid}" v-model="addressData.name4">
+        <label for="txtAdditionalName${_uid}">{{ trans("PluginCeres::Template.addressAdditionalName") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-8">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="street" id="txtStreet${_uid}" v-model="addressData.address1" >
+        <label for="txtStreet${_uid}">{{ trans("PluginCeres::Template.addressStreet") }}*</label>
+    </div>
+</div>
+
+<div class="col-xs-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="housenumber" id="txtNumber${_uid}" v-model="addressData.address2" >
+        <label for="txtNumber${_uid}">{{ trans("PluginCeres::Template.addressNumber") }}*</label>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="input-unit">
+        <input type="text" name="decorateAddress" id="decorateAddress0${_uid}" v-model="addressData.address3">
+        <label for="decorateAddress0${_uid}">{{ trans("PluginCeres::Template.addressAdditionalAddress1") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="input-unit">
+        <input type="text" name="decorateAddress" id="decorateAddress1${_uid}" v-model="addressData.address4">
+        <label for="decorateAddress1${_uid}">{{ trans("PluginCeres::Template.addressAdditionalAddress2") }}</label>
+    </div>
+</div>
+
+<div class="col-xs-6 col-sm-3">
+    <div class="input-unit" data-validate="number">
+        <input type="text" name="zip" id="txtZip${_uid}" v-model="addressData.postalCode">
+        <label for="txtZip${_uid}">{{ trans("PluginCeres::Template.addressZip") }}*</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit" data-validate="text">
+        <input type="text" name="town" id="txtPlace${_uid}" v-model="addressData.town">
+        <label for="txtPlace${_uid}">{{ trans("PluginCeres::Template.addressPlace") }}*</label>
+    </div>
+</div>

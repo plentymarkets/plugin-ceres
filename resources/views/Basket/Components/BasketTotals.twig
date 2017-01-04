@@ -1,0 +1,71 @@
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+<script type="x/template" id="vue-basket-totals">
+    <!-- BASKET TOTALS -->
+    <div class="cmp cmp-totals">
+        <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
+        <div>
+            <dl>
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeItemSum") }}
+                <dt v-if="showProperty( 'basket.value_of_items_gross' )">
+                    <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
+                    <strong>${ basket.itemSum | currency  }</strong>
+                </dd>
+
+                <dt v-if="showProperty( 'basket.value_of_items_net' )">
+                    {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.value_of_items_net' )">
+                    ${ basket.itemSumNet | currency }
+                </dd>
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterItemSum") }}
+
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeShippingCosts") }}
+                <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
+                    <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
+                    <strong>${ basket.shippingAmount | currency }</strong>
+                </dd>
+
+                <dt v-if="showProperty( 'basket.shipping_costs_net' )">
+                    {{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
+                    ${ basket.shippingAmountNet | currency }
+                </dd>
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterShippingCosts") }}
+
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeVat") }}
+                <dt v-if="showProperty( 'basket.vat' )">
+                    {{ trans("PluginCeres::Template.basketVAT") }}
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.vat' )">
+                    ${ basket.itemSum - basket.itemSumNet | currency }
+                </dd>
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterVat") }}
+
+                <hr>
+
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeTotalSum") }}
+                <dt v-if="showProperty( 'basket.order_total_gross' )">
+                    <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.order_total_gross' )">
+                    <strong>${ basket.basketAmount | currency }</strong>
+                </dd>
+
+                <dt v-if="showProperty( 'basket.order_total_net' )">
+                    {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.order_total_net' )">
+                    ${ basket.basketAmountNet | currency }
+                </dd>
+                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterTotalSum") }}
+            </dl>
+        </div>
+    </div>
+    <!-- ./BASKET TOTALS -->
+</script>

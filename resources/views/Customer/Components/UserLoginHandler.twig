@@ -1,0 +1,26 @@
+<script type="x/template" id="vue-user-login-handler">
+    <div id="login-change">
+        <div v-resource-if:user="isLoggedIn">
+            <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ trans("PluginCeres::Template.generalHello", {"username": "${username}"}) }}</a>
+            </a>
+            <div class="account-menu dropdown-menu dropdown-menu-right small">
+              <div class="list-group" aria-labelledby="accountMenuList" >
+                <a href="/my-account" class="list-group-item small"><i class="fa fa-user"></i> {{ trans("PluginCeres::Template.accMyAccount") }}</a>
+                <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ trans("PluginCeres::Template.accLogout") }}</a>
+              </div>
+            </div>
+        </div>
+        <div v-resource-if:user="!isLoggedIn">
+            <a data-toggle="modal" href="#login">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="hidden-xs-down">{{ trans("PluginCeres::Template.accLogin") }}</span>
+            </a>
+            <span class="pipe"></span>
+            <a data-toggle="modal" href="#registration">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                <span class="hidden-xs-down">{{ trans("PluginCeres::Template.accRegister") }}</span>
+            </a>
+        </div>
+    </div>
+</script>

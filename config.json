@@ -1,0 +1,463 @@
+[
+    {
+        "tab"               : "Categories",
+        "key"               : "global.category.home",
+        "label"             : "Homepage",
+        "type"              : "category_select",
+        "possibleValues"    :
+        [
+            "content"
+        ]
+    },
+    {
+        "tab"       : "Categories",
+        "key"       : "global.category.page_not_found",
+        "label"     : "Page not found",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Categories",
+        "key"       : "global.category.item_not_found",
+        "label"     : "Item not found",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Categories",
+        "key"       : "global.category.legal_disclosure",
+        "label"     : "Legal disclosure",
+        "type"      : "category_select"
+    },
+    {
+      "tab"       : "Categories",
+      "key"       : "global.category.privacy_policy",
+      "label"     : "Privacy policy",
+      "type"      : "category_select"
+    },
+    {
+      "tab"       : "Categories",
+      "key"       : "global.category.terms_and_conditions",
+      "label"     : "Terms and conditions",
+      "type"      : "category_select"
+    },
+
+    {
+        "tab"       : "Categories",
+        "key"       : "global.category.cancellation_rights",
+        "label"     : "Cancellation rights",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.company_logo",
+        "label"     : "URL to your company logo",
+        "type"      : "text",
+        "default"   : "/layout/plugins/production/pluginceres/images/ceres-logo.png"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.fixed_navbar",
+        "label"     : "Fix the navigation bar at the top of the page",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"           : "Footer",
+        "key"           : "footer.number_of_features",
+        "label"         : "Number of store features",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "0"         : "0",
+            "1"         : "1",
+            "2"         : "2",
+            "3"         : "3"
+        },
+        "default"       : "3"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_1",
+        "label"     : "Text of first store feature",
+        "type"      : "text",
+        "default"   : "Delivery period approx. 1 to 3 business days "
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_2",
+        "label"     : "Text of second store feature",
+        "type"      : "text",
+        "default"   : "Free shipping & return "
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.store_feature_3",
+        "label"     : "Text of third store feature",
+        "type"      : "text",
+        "default"   : "100-day return policy"
+    },
+    {
+        "tab"           : "Footer",
+        "key"           : "footer.number_of_cols",
+        "label"         : "Number of columns",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "1"         : "1",
+            "2"         : "2",
+            "3"         : "3"
+        },
+        "default"       : "3"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_1_title",
+        "label"     : "Title of first column",
+        "type"      : "text",
+        "default"   : "Shop"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_1_categories",
+        "label"     : "List of IDs of categories to display in first column",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_2_title",
+        "label"     : "Title of second column",
+        "type"      : "text",
+        "default"   : "My account"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_2_categories",
+        "label"     : "List of IDs of categories to display in second column",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_3_title",
+        "label"     : "Title of third column",
+        "type"      : "text",
+        "default"   : "Service"
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.col_3_categories",
+        "label"     : "List of IDs of categories to display in third column",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"           : "Item view",
+        "key"           : "item.name",
+        "label"         : "Item name",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "0"         : "Name 1",
+            "1"         : "Name 2",
+            "2"         : "Name 3"
+        },
+        "default"       : "0"
+    },
+    {
+        "tab"                           : "Item view",
+        "key"                           : "item.data",
+        "label"                         : "Show item information",
+        "type"                          : "multi_select",
+        "possibleValues"                :
+        {
+            "item.condition"            : "Condition",
+            "item.manufacturer"         : "Manufacturer",
+            "item.producerCountry"      : "Manufacturing country",
+            "item.age_rating"           : "Age rating",
+            "item.id"                   : "Item ID",
+            "item.technical_data"       : "Technical data",
+            "item.description"          : "Description",
+            "item.shortDescription"     : "Preview text",
+            "item.recommendedPrice"     : "Strikethrough price",
+            "item.variation_name"       : "Variation name",
+            "item.external_id"          : "External variation ID",
+            "item.variation_model"      : "Model",
+            "item.variation_dimensions" : "Dimensions",
+            "item.customs_tariff_number": "Customs tariff number",
+            "item.weightNetG"           : "Net weight",
+            "item.weightG"              : "Gross weight",
+            "item.variationBase_content": "Content"
+        },
+        "default"                       : "all"
+    },
+    {
+        "tab"           : "Item view",
+        "key"           : "item.storeSpecial",
+        "label"         : "Store specials: Number of decimal places for discounts",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "0"         : "0",
+            "1"         : "1",
+            "2"         : "2"
+        },
+        "default"       : "0"
+    },
+    {
+        "tab"                           : "Item view",
+        "key"                           : "item.variation_show_type",
+        "label"                         : "Show variations in the category item list",
+        "type"                          : "dropdown",
+        "possibleValues"                :
+        {
+            "1"     : "All",
+            "2"     : "Only main variations",
+            "3"     : "Only child variations"
+        },
+        "default"                       : "1"
+    },
+    {
+        "tab"                           : "Shopping cart",
+        "key"                           : "basket.item_data",
+        "label"                         : "Show item information",
+        "type"                          : "multi_select",
+        "possibleValues"                :
+        {
+          "basket.item.item_id"         : "Item ID",
+          "basket.item.description"     : "Description",
+          "basket.item.availability"    : "Availability",
+          "basket.item.customNumber"    : "Variation number",
+          "basket.item.state"           : "Condition"
+        },
+        "default"                       : "all"
+    },
+    {
+        "tab"                               : "Shopping cart",
+        "key"                               : "basket.data",
+        "label"                             : "Show price information",
+        "type"                              : "multi_select",
+        "possibleValues"                    :
+        {
+            "basket.value_of_items_gross"   : "Value of items (Gross)",
+            "basket.value_of_items_net"     : "Value of items (Net)",
+            "basket.shipping_costs_gross"   : "Shipping (Gross)",
+            "basket.shipping_costs_net"     : "Shipping (Net)",
+            "basket.vat"                    : "VAT",
+            "basket.order_total_gross"      : "Total (Gross)",
+            "basket.order_total_net"        : "Total (Net)"
+        },
+        "default"                           : "all"
+    },
+    {
+        "tab"                               : "Shopping cart",
+        "key"                               : "basket.preview_data",
+        "label"                             : "Show basket preview information",
+        "type"                              : "multi_select",
+        "possibleValues"                    :
+        {
+            "basket.value_of_items_gross"   : "Value of items (Gross)",
+            "basket.value_of_items_net"     : "Value of items (Net)",
+            "basket.shipping_costs_gross"   : "Shipping (Gross)",
+            "basket.shipping_costs_net"     : "Shipping (Net)",
+            "basket.vat"                    : "VAT",
+            "basket.order_total_gross"      : "Total (Gross)",
+            "basket.order_total_net"        : "Total (Net)"
+        },
+        "default"                           : "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross"
+    },
+    {
+        "tab"       : "Shopping cart",
+        "key"       : "basket.variations",
+        "label"     : "Show Change variation button",
+        "type"      : "checkbox",
+        "default"   : "false"
+    },
+    {
+        "tab"       : "Shopping cart",
+        "key"       : "basket.add_item_to_basket_confirm",
+        "label"     : "Add to shopping cart: Show overlay",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "pagination.position",
+        "label"             : "Pagination position",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "top"             : "Top",
+            "bottom"          : "Bottom",
+            "top_bottom"      : "Top and bottom"
+        },
+        "default"           : "top"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "pagination.showFirstPage",
+        "label"             : "Always show first page",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "pagination.showLastPage",
+        "label"             : "Always show last page",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "pagination.values",
+        "label"         : "Enable number of items per page",
+        "type"          : "multi_select",
+        "possibleValues":
+        {
+            "20"          : "20",
+            "50"          : "50",
+            "100"         : "100"
+        },
+        "default"       : "all"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "pagination.defaultItemsPerPage",
+        "label"         : "Default number of items per page",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "20"          : "20",
+            "50"          : "50",
+            "100"         : "100"
+        },
+        "default"       : "20"
+    },
+    {
+        "tab"                       : "Pagination and sorting",
+        "key"                       : "sort.data",
+        "label"                     : "Enable item sorting by",
+        "type"                      : "multi_select",
+        "possibleValues"            :
+        {
+            "itemId_asc"                        : "Item ID (ascending)",
+            "itemId_desc"                       : "Item ID (descending)",
+            "itemName_asc"                      : "Item name (ascending)",
+            "itemName_desc"                     : "Item name (descending)",
+            "itemPosition_asc"                  : "Item position (ascending)",
+            "itemPosition_desc"                 : "Item position (descending)",
+            "itemPrice_asc"                     : "Price (ascending)",
+            "itemPrice_desc"                    : "Price (descending)",
+            "itemRating_asc"                    : "Customer feedback (ascending)",
+            "itemRating_desc"                   : "Customer feedback (descending)",
+            "variationCreateTimestamp_asc"      : "Newest variation",
+            "variationCreateTimestamp_desc"     : "Oldest variation",
+            "variationId_asc"                   : "Variation ID (ascending)",
+            "variationId_desc"                  : "Variation ID (descending)",
+            "variationCustomNumber_asc"         : "Variation number (ascending)",
+            "variationCustomNumber_desc"        : "Variation number (descending)",
+            "variationLastUpdateTimestamp_asc"  : "Last variation update",
+            "variationLastUpdateTimestamp_desc" : "First variation update",
+            "variationName_asc"                 : "Variation name (ascending)",
+            "variationName_desc"                : "Variation name (descending)",
+            "variationPosition_asc"             : "Variation position (ascending)",
+            "variationPosition_desc"            : "Variation position (descending)",
+            "variationActive_asc"               : "Active variation (ascending)",
+            "variationActive_desc"              : "Active variation (descending)",
+            "variationPrimary_asc"              : "Main variation (ascending)",
+            "variationPrimary_desc"             : "Main variation (descending)",
+            "itemRand"                          : "Random items",
+            "itemProducerName_asc"              : "Manufacturer (ascending)",
+            "itemProducerName_desc"             : "Manufacturer (descending)"
+        },
+        "default"                   : "itemName_asc, itemName_desc, itemPrice_asc, itemPrice_desc, itemRating_desc, itemRand"
+    },
+    {
+        "tab"                       : "Pagination and sorting",
+        "key"                       : "sort.defaultSorting",
+        "label"                     : "Default item sorting by",
+        "type"                      : "dropdown",
+        "possibleValues"            :
+        {
+            "itemId_asc"                        : "Item ID (ascending)",
+            "itemId_desc"                       : "Item ID (descending)",
+            "itemName_asc"                      : "Item name (ascending)",
+            "itemName_desc"                     : "Item name (descending)",
+            "itemPosition_asc"                  : "Item position (ascending)",
+            "itemPosition_desc"                 : "Item position (descending)",
+            "itemPrice_asc"                     : "Price (ascending)",
+            "itemPrice_desc"                    : "Price (descending)",
+            "itemRating_asc"                    : "Customer feedback (ascending)",
+            "itemRating_desc"                   : "Customer feedback (descending)",
+            "variationCreateTimestamp_asc"      : "Newest variation",
+            "variationCreateTimestamp_desc"     : "Oldest variation",
+            "variationId_asc"                   : "Variation ID (ascending)",
+            "variationId_desc"                  : "Variation ID (descending)",
+            "variationCustomNumber_asc"         : "Variation number (ascending)",
+            "variationCustomNumber_desc"        : "Variation number (descending)",
+            "variationLastUpdateTimestamp_asc"  : "Last variation update",
+            "variationLastUpdateTimestamp_desc" : "First variation update",
+            "variationName_asc"                 : "Variation name (ascending)",
+            "variationName_desc"                : "Variation name (descending)",
+            "variationPosition_asc"             : "Variation position (ascending)",
+            "variationPosition_desc"            : "Variation position (descending)",
+            "variationActive_asc"               : "Active variation (ascending)",
+            "variationActive_desc"              : "Active variation (descending)",
+            "variationPrimary_asc"              : "Main variation (ascending)",
+            "variationPrimary_desc"             : "Main variation (descending)",
+            "itemRand"                          : "Random items",
+            "itemProducerName_asc"              : "Manufacturer (ascending)",
+            "itemProducerName_desc"             : "Manufacturer (descending)"
+        },
+        "default"                   : "itemName_asc"
+    },
+    {
+        "tab"               : "My account",
+        "key"               : "my_account.orders_per_page",
+        "label"             : "Number of orders to show per page in order history",
+        "type"              : "text",
+        "default"           : "5"
+    },
+    {
+        "tab"               : "Registration",
+        "key"               : "register.email_regex",
+        "label"             : "The RegEx used for the email",
+        "type"              : "text",
+        "default"           : "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"
+    },
+    {
+        "tab"               : "Registration",
+        "key"               : "register.password_regex",
+        "label"             : "The RegEx used for the password",
+        "type"              : "text",
+        "default"           : "^(?!\\s*$).+"
+    },
+    {
+        "tab"               : "Logging and performance",
+        "key"               : "log.data",
+        "label"             : "Enable logging options",
+        "type"              : "multi_select",
+        "possibleValues"    :
+        {
+            "print_errors"      : "Print errors",
+            "print_success"     : "Print success",
+            "print_warnings"    : "Print warnings",
+            "print_infos"       : "Print information",
+            "print_stack_trace" : "Print stack trace",
+            "log_messages"      : "Log messages",
+            "show_error_code"   : "Show error codes"
+        },
+        "default"           : ""
+    },
+    {
+        "tab"               : "Logging and performance",
+        "key"               : "log.performance.level",
+        "label"             : "Performance level",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "development": "Development",
+            "live": "Live"
+        },
+        "default"           : "live"
+    }
+]
