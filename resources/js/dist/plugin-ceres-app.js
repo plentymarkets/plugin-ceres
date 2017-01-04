@@ -1,4 +1,579 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*!
+ * accounting.js v0.4.1
+ * Copyright 2014 Open Exchange Rates
+ *
+ * Freely distributable under the MIT license.
+ * Portions of accounting.js are inspired or borrowed from underscore.js
+ *
+ * Full details and documentation:
+ * http://openexchangerates.github.io/accounting.js/
+ */
+
+(function(root, undefined) {
+
+	/* --- Setup --- */
+
+	// Create the local library object, to be exported or referenced globally later
+	var lib = {};
+
+	// Current version
+	lib.version = '0.4.1';
+
+
+	/* --- Exposed settings --- */
+
+	// The library's settings configuration object. Contains default parameters for
+	// currency and number formatting
+	lib.settings = {
+		currency: {
+			symbol : "$",		// default currency symbol is '$'
+			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
+			decimal : ".",		// decimal point separator
+			thousand : ",",		// thousands separator
+			precision : 2,		// decimal places
+			grouping : 3		// digit grouping (not implemented yet)
+		},
+		number: {
+			precision : 0,		// default precision on numbers is 0
+			grouping : 3,		// digit grouping (not implemented yet)
+			thousand : ",",
+			decimal : "."
+		}
+	};
+
+
+	/* --- Internal Helper Methods --- */
+
+	// Store reference to possibly-available ECMAScript 5 methods for later
+	var nativeMap = Array.prototype.map,
+		nativeIsArray = Array.isArray,
+		toString = Object.prototype.toString;
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js
+	 */
+	function isString(obj) {
+		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
+	}
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js, delegates to ECMA5's native Array.isArray
+	 */
+	function isArray(obj) {
+		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
+	}
+
+	/**
+	 * Tests whether supplied parameter is a true object
+	 */
+	function isObject(obj) {
+		return obj && toString.call(obj) === '[object Object]';
+	}
+
+	/**
+	 * Extends an object with a defaults object, similar to underscore's _.defaults
+	 *
+	 * Used for abstracting parameter handling from API methods
+	 */
+	function defaults(object, defs) {
+		var key;
+		object = object || {};
+		defs = defs || {};
+		// Iterate over object non-prototype properties:
+		for (key in defs) {
+			if (defs.hasOwnProperty(key)) {
+				// Replace values with defaults only if undefined (allow empty/zero values):
+				if (object[key] == null) object[key] = defs[key];
+			}
+		}
+		return object;
+	}
+
+	/**
+	 * Implementation of `Array.map()` for iteration loops
+	 *
+	 * Returns a new Array as a result of calling `iterator` on each array value.
+	 * Defers to native Array.map if available
+	 */
+	function map(obj, iterator, context) {
+		var results = [], i, j;
+
+		if (!obj) return results;
+
+		// Use native .map method if it exists:
+		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
+
+		// Fallback for native .map:
+		for (i = 0, j = obj.length; i < j; i++ ) {
+			results[i] = iterator.call(context, obj[i], i, obj);
+		}
+		return results;
+	}
+
+	/**
+	 * Check and normalise the value of precision (must be positive integer)
+	 */
+	function checkPrecision(val, base) {
+		val = Math.round(Math.abs(val));
+		return isNaN(val)? base : val;
+	}
+
+
+	/**
+	 * Parses a format string or object and returns format obj for use in rendering
+	 *
+	 * `format` is either a string with the default (positive) format, or object
+	 * containing `pos` (required), `neg` and `zero` values (or a function returning
+	 * either a string or object)
+	 *
+	 * Either string or format.pos must contain "%v" (value) to be valid
+	 */
+	function checkCurrencyFormat(format) {
+		var defaults = lib.settings.currency.format;
+
+		// Allow function as format parameter (should return string or object):
+		if ( typeof format === "function" ) format = format();
+
+		// Format can be a string, in which case `value` ("%v") must be present:
+		if ( isString( format ) && format.match("%v") ) {
+
+			// Create and return positive, negative and zero formats:
+			return {
+				pos : format,
+				neg : format.replace("-", "").replace("%v", "-%v"),
+				zero : format
+			};
+
+		// If no format, or object is missing valid positive value, use defaults:
+		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
+
+			// If defaults is a string, casts it to an object for faster checking next time:
+			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
+				pos : defaults,
+				neg : defaults.replace("%v", "-%v"),
+				zero : defaults
+			};
+
+		}
+		// Otherwise, assume format was fine:
+		return format;
+	}
+
+
+	/* --- API Methods --- */
+
+	/**
+	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
+	 * Alias: `accounting.parse(string)`
+	 *
+	 * Decimal must be included in the regular expression to match floats (defaults to
+	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
+	 * separator, provide it as the second argument.
+	 *
+	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
+	 *
+	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
+	 */
+	var unformat = lib.unformat = lib.parse = function(value, decimal) {
+		// Recursively unformat arrays:
+		if (isArray(value)) {
+			return map(value, function(val) {
+				return unformat(val, decimal);
+			});
+		}
+
+		// Fails silently (need decent errors):
+		value = value || 0;
+
+		// Return the value as-is if it's already a number:
+		if (typeof value === "number") return value;
+
+		// Default decimal point comes from settings, but could be set to eg. "," in opts:
+		decimal = decimal || lib.settings.number.decimal;
+
+		 // Build regex to strip out everything except digits, decimal point and minus sign:
+		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
+			unformatted = parseFloat(
+				("" + value)
+				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
+				.replace(regex, '')         // strip out any cruft
+				.replace(decimal, '.')      // make sure decimal point is standard
+			);
+
+		// This will fail silently which may cause trouble, let's wait and see:
+		return !isNaN(unformatted) ? unformatted : 0;
+	};
+
+
+	/**
+	 * Implementation of toFixed() that treats floats more like decimals
+	 *
+	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
+	 * problems for accounting- and finance-related software.
+	 */
+	var toFixed = lib.toFixed = function(value, precision) {
+		precision = checkPrecision(precision, lib.settings.number.precision);
+		var power = Math.pow(10, precision);
+
+		// Multiply up by precision, round accurately, then divide and use native toFixed():
+		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
+	};
+
+
+	/**
+	 * Format a number, with comma-separated thousands and custom precision/decimal places
+	 * Alias: `accounting.format()`
+	 *
+	 * Localise by overriding the precision and thousand / decimal separators
+	 * 2nd parameter `precision` can be an object matching `settings.number`
+	 */
+	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val) {
+				return formatNumber(val, precision, thousand, decimal);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(precision) ? precision : {
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal
+				}),
+				lib.settings.number
+			),
+
+			// Clean up precision
+			usePrecision = checkPrecision(opts.precision),
+
+			// Do some calc:
+			negative = number < 0 ? "-" : "",
+			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
+			mod = base.length > 3 ? base.length % 3 : 0;
+
+		// Format the number:
+		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
+	};
+
+
+	/**
+	 * Format a number into currency
+	 *
+	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
+	 * defaults: (0, "$", 2, ",", ".", "%s%v")
+	 *
+	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
+	 * Second param can be an object matching `settings.currency` which is the easiest way.
+	 *
+	 * To do: tidy up the parameters
+	 */
+	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
+		// Resursively format arrays:
+		if (isArray(number)) {
+			return map(number, function(val){
+				return formatMoney(val, symbol, precision, thousand, decimal, format);
+			});
+		}
+
+		// Clean up number:
+		number = unformat(number);
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero):
+			formats = checkCurrencyFormat(opts.format),
+
+			// Choose which format to use for this value:
+			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
+
+		// Return with currency symbol added:
+		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+	};
+
+
+	/**
+	 * Format a list of numbers into an accounting column, padding with whitespace
+	 * to line up currency symbols, thousand separators and decimals places
+	 *
+	 * List should be an array of numbers
+	 * Second parameter can be an object containing keys that match the params
+	 *
+	 * Returns array of accouting-formatted number strings of same length
+	 *
+	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
+	 * browsers from collapsing the whitespace in the output strings.
+	 */
+	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
+		if (!list) return [];
+
+		// Build options object from second param (if object) or all params, extending defaults:
+		var opts = defaults(
+				(isObject(symbol) ? symbol : {
+					symbol : symbol,
+					precision : precision,
+					thousand : thousand,
+					decimal : decimal,
+					format : format
+				}),
+				lib.settings.currency
+			),
+
+			// Check format (returns object with pos, neg and zero), only need pos for now:
+			formats = checkCurrencyFormat(opts.format),
+
+			// Whether to pad at start of string or after currency symbol:
+			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
+
+			// Store value for the length of the longest string in the column:
+			maxLength = 0,
+
+			// Format the list according to options, store the length of the longest string:
+			formatted = map(list, function(val, i) {
+				if (isArray(val)) {
+					// Recursively format columns if list is a multi-dimensional array:
+					return lib.formatColumn(val, opts);
+				} else {
+					// Clean up the value
+					val = unformat(val);
+
+					// Choose which format to use for this value (pos, neg or zero):
+					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
+
+						// Format this value, push into formatted list and save the length:
+						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
+
+					if (fVal.length > maxLength) maxLength = fVal.length;
+					return fVal;
+				}
+			});
+
+		// Pad each number in the list and send back the column of numbers:
+		return map(formatted, function(val, i) {
+			// Only if this is a string (not a nested array, which would have already been padded):
+			if (isString(val) && val.length < maxLength) {
+				// Depending on symbol position, pad after symbol or at index 0:
+				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
+			}
+			return val;
+		});
+	};
+
+
+	/* --- Module Definition --- */
+
+	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
+	// Otherwise, just add `accounting` to the global object
+	if (typeof exports !== 'undefined') {
+		if (typeof module !== 'undefined' && module.exports) {
+			exports = module.exports = lib;
+		}
+		exports.accounting = lib;
+	} else if (typeof define === 'function' && define.amd) {
+		// Return the library as an AMD module:
+		define([], function() {
+			return lib;
+		});
+	} else {
+		// Use accounting.noConflict to restore `accounting` back to its original value.
+		// Returns a reference to the library's `accounting` object;
+		// e.g. `var numbers = accounting.noConflict();`
+		lib.noConflict = (function(oldAccounting) {
+			return function() {
+				// Reset the value of the root's `accounting` variable:
+				root.accounting = oldAccounting;
+				// Delete the noConflict method:
+				lib.noConflict = undefined;
+				// Return reference to the library to re-assign it:
+				return lib;
+			};
+		})(root.accounting);
+
+		// Declare `fx` on the root (global/window) object:
+		root['accounting'] = lib;
+	}
+
+	// Root will be `window` in browser or `global` on the server:
+}(this));
+
+},{}],2:[function(require,module,exports){
+var currencySymbolMap = require('./map');
+
+var symbolCurrencyMap = {};
+for (var key in currencySymbolMap) {
+  if (currencySymbolMap.hasOwnProperty(key)) {
+    var currency = key;
+    var symbol = currencySymbolMap[currency];
+    symbolCurrencyMap[symbol] = currency;
+  }
+}
+
+function getSymbolFromCurrency(currencyCode) {
+  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
+    return currencySymbolMap[currencyCode];
+  } else {
+    return undefined;
+  }
+}
+
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+},{"./map":3}],3:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}],4:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 
 Vue.component("add-item-to-basket", {
@@ -41,7 +616,7 @@ Vue.component("add-item-to-basket", {
     }
 });
 
-},{"services/ResourceService":55}],2:[function(require,module,exports){
+},{"services/ResourceService":59}],5:[function(require,module,exports){
 var ResourceService     = require("services/ResourceService");
 var ModalService        = require("services/ModalService");
 
@@ -134,7 +709,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":53,"services/ResourceService":55}],3:[function(require,module,exports){
+},{"services/ModalService":57,"services/ResourceService":59}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
@@ -159,7 +734,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ResourceService":55}],4:[function(require,module,exports){
+},{"services/ResourceService":59}],7:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
@@ -199,14 +774,14 @@ Vue.component("basket-totals", {
     }
 });
 
-},{"services/ResourceService":55}],5:[function(require,module,exports){
+},{"services/ResourceService":59}],8:[function(require,module,exports){
 Vue.component("coupon", {
 
     template: "#vue-coupon"
 
 });
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list", {
@@ -234,7 +809,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{"services/ResourceService":55}],7:[function(require,module,exports){
+},{"services/ResourceService":59}],10:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 var ApiService          = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
@@ -381,7 +956,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ApiService":49,"services/ResourceService":55}],8:[function(require,module,exports){
+},{"services/ApiService":53,"services/ResourceService":59}],11:[function(require,module,exports){
 Vue.component("order-details", {
 
     template: "#vue-order-details",
@@ -489,7 +1064,7 @@ Vue.component("order-details", {
     }
 });
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
@@ -531,7 +1106,7 @@ Vue.component("payment-provider-select", {
     }
 });
 
-},{"services/ResourceService":55}],10:[function(require,module,exports){
+},{"services/ResourceService":59}],13:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
@@ -612,7 +1187,7 @@ var NotificationService = require("services/NotificationService");
     });
 })(jQuery);
 
-},{"services/ApiService":49,"services/NotificationService":54}],11:[function(require,module,exports){
+},{"services/ApiService":53,"services/NotificationService":58}],14:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
@@ -655,7 +1230,7 @@ Vue.component("shipping-profile-select", {
     }
 });
 
-},{"services/ResourceService":55}],12:[function(require,module,exports){
+},{"services/ResourceService":59}],15:[function(require,module,exports){
 Vue.component("address-input-group", {
 
     template: "#vue-address-input-group",
@@ -707,7 +1282,7 @@ Vue.component("address-input-group", {
     }
 });
 
-},{}],13:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
@@ -991,7 +1566,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":48,"services/ApiService":49,"services/ModalService":53}],14:[function(require,module,exports){
+},{"services/AddressService":52,"services/ApiService":53,"services/ModalService":57}],17:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -1100,7 +1675,7 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":48,"services/ValidationService":56}],15:[function(require,module,exports){
+},{"services/AddressService":52,"services/ValidationService":60}],18:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
@@ -1137,7 +1712,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{"services/ResourceService":55}],16:[function(require,module,exports){
+},{"services/ResourceService":59}],19:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
@@ -1192,7 +1767,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{"services/ResourceService":55}],17:[function(require,module,exports){
+},{"services/ResourceService":59}],20:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 var ResourceService = require("services/ResourceService");
 
@@ -1275,7 +1850,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":51,"services/ResourceService":55}],18:[function(require,module,exports){
+},{"services/CountryService":55,"services/ResourceService":59}],21:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -1381,7 +1956,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":49,"services/ModalService":53,"services/NotificationService":54,"services/ValidationService":56}],19:[function(require,module,exports){
+},{"services/ApiService":53,"services/ModalService":57,"services/NotificationService":58,"services/ValidationService":60}],22:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -1456,7 +2031,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":49,"services/ModalService":53,"services/NotificationService":54}],20:[function(require,module,exports){
+},{"services/ApiService":53,"services/ModalService":57,"services/NotificationService":58}],23:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -1531,7 +2106,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":49,"services/ResourceService":55}],21:[function(require,module,exports){
+},{"services/ApiService":53,"services/ResourceService":59}],24:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
@@ -1587,7 +2162,7 @@ Vue.component("quantity-input", {
 
 });
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function($)
 {
 
@@ -1696,7 +2271,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":55}],23:[function(require,module,exports){
+},{"services/ResourceService":59}],26:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -1881,7 +2456,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":49,"services/ResourceService":55}],24:[function(require,module,exports){
+},{"services/ApiService":53,"services/ResourceService":59}],27:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -1903,7 +2478,7 @@ Vue.component("item-list", {
     }
 });
 
-},{"services/ItemListService":52,"services/ResourceService":55}],25:[function(require,module,exports){
+},{"services/ItemListService":56,"services/ResourceService":59}],28:[function(require,module,exports){
 var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list-sorting", {
@@ -1951,7 +2526,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/ItemListService":52}],26:[function(require,module,exports){
+},{"services/ItemListService":56}],29:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -1988,7 +2563,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/ItemListService":52,"services/ResourceService":55}],27:[function(require,module,exports){
+},{"services/ItemListService":56,"services/ResourceService":59}],30:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -2021,7 +2596,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/ItemListService":52,"services/ResourceService":55}],28:[function(require,module,exports){
+},{"services/ItemListService":56,"services/ResourceService":59}],31:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("loading-animation", {
@@ -2041,7 +2616,7 @@ Vue.component("loading-animation", {
     }
 });
 
-},{"services/ResourceService":55}],29:[function(require,module,exports){
+},{"services/ResourceService":59}],32:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -2092,7 +2667,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/ItemListService":52,"services/ResourceService":55}],30:[function(require,module,exports){
+},{"services/ItemListService":56,"services/ResourceService":59}],33:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -2200,7 +2775,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":49,"services/ModalService":53,"services/NotificationService":54}],31:[function(require,module,exports){
+},{"services/APIService":51,"services/ModalService":57,"services/NotificationService":58}],34:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -2458,7 +3033,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":49,"services/ModalService":53,"services/NotificationService":54,"services/ValidationService":56}],32:[function(require,module,exports){
+},{"services/ApiService":53,"services/ModalService":57,"services/NotificationService":58,"services/ValidationService":60}],35:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 (function($)
@@ -2539,7 +3114,7 @@ var ApiService = require("services/ApiService");
     });
 })(jQuery);
 
-},{"services/ApiService":49}],33:[function(require,module,exports){
+},{"services/ApiService":53}],36:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
@@ -2609,7 +3184,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":54}],34:[function(require,module,exports){
+},{"services/NotificationService":58}],37:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
@@ -2641,7 +3216,7 @@ Vue.component("shipping-country-select", {
     }
 });
 
-},{"services/ResourceService":55}],35:[function(require,module,exports){
+},{"services/ResourceService":59}],38:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shop-language-select", {
@@ -2681,7 +3256,7 @@ Vue.component("shop-language-select", {
     }
 });
 
-},{"services/ResourceService":55}],36:[function(require,module,exports){
+},{"services/ResourceService":59}],39:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -2714,7 +3289,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":57}],37:[function(require,module,exports){
+},{"services/WaitScreenService":61}],40:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.directive("logout", function()
@@ -2737,7 +3312,7 @@ Vue.directive("logout", function()
         });
 });
 
-},{"services/ApiService":49}],38:[function(require,module,exports){
+},{"services/ApiService":53}],41:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -2805,7 +3380,7 @@ Vue.elementDirective("resource-list", {
     }
 });
 
-},{"services/ResourceService":55}],39:[function(require,module,exports){
+},{"services/ResourceService":59}],42:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-bind", {
@@ -2845,7 +3420,7 @@ Vue.directive("resource-bind", {
 
 });
 
-},{"services/ResourceService":55}],40:[function(require,module,exports){
+},{"services/ResourceService":59}],43:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
@@ -2880,7 +3455,7 @@ Vue.directive("resource-if", {
 
 });
 
-},{"services/ResourceService":55}],41:[function(require,module,exports){
+},{"services/ResourceService":59}],44:[function(require,module,exports){
 Vue.directive("change-lang", function(value)
 {
     $(this.el).click(function(event)
@@ -2893,7 +3468,7 @@ Vue.directive("change-lang", function(value)
     });
 });
 
-},{}],42:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 var CheckoutService = require("services/CheckoutService");
 
 Vue.directive("shipping-country", function(value)
@@ -2905,7 +3480,7 @@ Vue.directive("shipping-country", function(value)
     });
 });
 
-},{"services/CheckoutService":50}],43:[function(require,module,exports){
+},{"services/CheckoutService":54}],46:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
 var accounting        = require("accounting");
@@ -2938,7 +3513,7 @@ Vue.filter("currency", function(price, customCurrency)
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":58,"currency-symbol-map":59,"services/ResourceService":55}],44:[function(require,module,exports){
+},{"accounting":1,"currency-symbol-map":2,"services/ResourceService":59}],47:[function(require,module,exports){
 // for docs see https://github.com/brockpetrie/vue-moment
 
 var dateFilter = function()
@@ -3082,7 +3657,7 @@ var dateFilter = function()
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],45:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
     var imageList = item.variationImageList;
@@ -3111,7 +3686,7 @@ Vue.filter("itemImage", function(item, baseUrl)
 
 });
 
-},{}],46:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 Vue.filter("itemName", function(item, selectedName)
 {
 
@@ -3131,7 +3706,7 @@ Vue.filter("itemName", function(item, selectedName)
     return item.name1;
 });
 
-},{}],47:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 Vue.filter("itemURL", function(item)
 {
 
@@ -3146,69 +3721,7 @@ Vue.filter("itemURL", function(item)
 
 });
 
-},{}],48:[function(require,module,exports){
-var ApiService      = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
-
-module.exports = (function($)
-{
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive)
-    {
-        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
-        {
-            if (setActive)
-            {
-                if (addressType === 1)
-                {
-                    CheckoutService.setBillingAddressId(response.id);
-                }
-                else if (addressType === 2)
-                {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
-            }
-        });
-    }
-
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType)
-    {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
-
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType)
-    {
-        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-})(jQuery);
-
-},{"services/ApiService":49,"services/CheckoutService":50}],49:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
 
@@ -3374,7 +3887,71 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":54,"services/WaitScreenService":57}],50:[function(require,module,exports){
+},{"services/NotificationService":58,"services/WaitScreenService":61}],52:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":53,"services/CheckoutService":54}],53:[function(require,module,exports){
+arguments[4][51][0].apply(exports,arguments)
+},{"dup":51,"services/NotificationService":58,"services/WaitScreenService":61}],54:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -3465,7 +4042,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":49}],51:[function(require,module,exports){
+},{"services/ApiService":53}],55:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3556,7 +4133,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],52:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
@@ -3687,7 +4264,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":49,"services/NotificationService":54,"services/ResourceService":55}],53:[function(require,module,exports){
+},{"services/ApiService":53,"services/NotificationService":58,"services/ResourceService":59}],57:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -3821,7 +4398,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],54:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4015,7 +4592,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],55:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -4574,7 +5151,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":49}],56:[function(require,module,exports){
+},{"services/ApiService":53}],60:[function(require,module,exports){
 module.exports = (function($)
 {
     var $form;
@@ -4772,7 +5349,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],57:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -4822,582 +5399,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],58:[function(require,module,exports){
-/*!
- * accounting.js v0.4.1
- * Copyright 2014 Open Exchange Rates
- *
- * Freely distributable under the MIT license.
- * Portions of accounting.js are inspired or borrowed from underscore.js
- *
- * Full details and documentation:
- * http://openexchangerates.github.io/accounting.js/
- */
-
-(function(root, undefined) {
-
-	/* --- Setup --- */
-
-	// Create the local library object, to be exported or referenced globally later
-	var lib = {};
-
-	// Current version
-	lib.version = '0.4.1';
-
-
-	/* --- Exposed settings --- */
-
-	// The library's settings configuration object. Contains default parameters for
-	// currency and number formatting
-	lib.settings = {
-		currency: {
-			symbol : "$",		// default currency symbol is '$'
-			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
-			decimal : ".",		// decimal point separator
-			thousand : ",",		// thousands separator
-			precision : 2,		// decimal places
-			grouping : 3		// digit grouping (not implemented yet)
-		},
-		number: {
-			precision : 0,		// default precision on numbers is 0
-			grouping : 3,		// digit grouping (not implemented yet)
-			thousand : ",",
-			decimal : "."
-		}
-	};
-
-
-	/* --- Internal Helper Methods --- */
-
-	// Store reference to possibly-available ECMAScript 5 methods for later
-	var nativeMap = Array.prototype.map,
-		nativeIsArray = Array.isArray,
-		toString = Object.prototype.toString;
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js
-	 */
-	function isString(obj) {
-		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
-	}
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js, delegates to ECMA5's native Array.isArray
-	 */
-	function isArray(obj) {
-		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
-	}
-
-	/**
-	 * Tests whether supplied parameter is a true object
-	 */
-	function isObject(obj) {
-		return obj && toString.call(obj) === '[object Object]';
-	}
-
-	/**
-	 * Extends an object with a defaults object, similar to underscore's _.defaults
-	 *
-	 * Used for abstracting parameter handling from API methods
-	 */
-	function defaults(object, defs) {
-		var key;
-		object = object || {};
-		defs = defs || {};
-		// Iterate over object non-prototype properties:
-		for (key in defs) {
-			if (defs.hasOwnProperty(key)) {
-				// Replace values with defaults only if undefined (allow empty/zero values):
-				if (object[key] == null) object[key] = defs[key];
-			}
-		}
-		return object;
-	}
-
-	/**
-	 * Implementation of `Array.map()` for iteration loops
-	 *
-	 * Returns a new Array as a result of calling `iterator` on each array value.
-	 * Defers to native Array.map if available
-	 */
-	function map(obj, iterator, context) {
-		var results = [], i, j;
-
-		if (!obj) return results;
-
-		// Use native .map method if it exists:
-		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
-
-		// Fallback for native .map:
-		for (i = 0, j = obj.length; i < j; i++ ) {
-			results[i] = iterator.call(context, obj[i], i, obj);
-		}
-		return results;
-	}
-
-	/**
-	 * Check and normalise the value of precision (must be positive integer)
-	 */
-	function checkPrecision(val, base) {
-		val = Math.round(Math.abs(val));
-		return isNaN(val)? base : val;
-	}
-
-
-	/**
-	 * Parses a format string or object and returns format obj for use in rendering
-	 *
-	 * `format` is either a string with the default (positive) format, or object
-	 * containing `pos` (required), `neg` and `zero` values (or a function returning
-	 * either a string or object)
-	 *
-	 * Either string or format.pos must contain "%v" (value) to be valid
-	 */
-	function checkCurrencyFormat(format) {
-		var defaults = lib.settings.currency.format;
-
-		// Allow function as format parameter (should return string or object):
-		if ( typeof format === "function" ) format = format();
-
-		// Format can be a string, in which case `value` ("%v") must be present:
-		if ( isString( format ) && format.match("%v") ) {
-
-			// Create and return positive, negative and zero formats:
-			return {
-				pos : format,
-				neg : format.replace("-", "").replace("%v", "-%v"),
-				zero : format
-			};
-
-		// If no format, or object is missing valid positive value, use defaults:
-		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
-
-			// If defaults is a string, casts it to an object for faster checking next time:
-			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
-				pos : defaults,
-				neg : defaults.replace("%v", "-%v"),
-				zero : defaults
-			};
-
-		}
-		// Otherwise, assume format was fine:
-		return format;
-	}
-
-
-	/* --- API Methods --- */
-
-	/**
-	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
-	 * Alias: `accounting.parse(string)`
-	 *
-	 * Decimal must be included in the regular expression to match floats (defaults to
-	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
-	 * separator, provide it as the second argument.
-	 *
-	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
-	 *
-	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
-	 */
-	var unformat = lib.unformat = lib.parse = function(value, decimal) {
-		// Recursively unformat arrays:
-		if (isArray(value)) {
-			return map(value, function(val) {
-				return unformat(val, decimal);
-			});
-		}
-
-		// Fails silently (need decent errors):
-		value = value || 0;
-
-		// Return the value as-is if it's already a number:
-		if (typeof value === "number") return value;
-
-		// Default decimal point comes from settings, but could be set to eg. "," in opts:
-		decimal = decimal || lib.settings.number.decimal;
-
-		 // Build regex to strip out everything except digits, decimal point and minus sign:
-		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
-			unformatted = parseFloat(
-				("" + value)
-				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
-				.replace(regex, '')         // strip out any cruft
-				.replace(decimal, '.')      // make sure decimal point is standard
-			);
-
-		// This will fail silently which may cause trouble, let's wait and see:
-		return !isNaN(unformatted) ? unformatted : 0;
-	};
-
-
-	/**
-	 * Implementation of toFixed() that treats floats more like decimals
-	 *
-	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
-	 * problems for accounting- and finance-related software.
-	 */
-	var toFixed = lib.toFixed = function(value, precision) {
-		precision = checkPrecision(precision, lib.settings.number.precision);
-		var power = Math.pow(10, precision);
-
-		// Multiply up by precision, round accurately, then divide and use native toFixed():
-		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
-	};
-
-
-	/**
-	 * Format a number, with comma-separated thousands and custom precision/decimal places
-	 * Alias: `accounting.format()`
-	 *
-	 * Localise by overriding the precision and thousand / decimal separators
-	 * 2nd parameter `precision` can be an object matching `settings.number`
-	 */
-	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val) {
-				return formatNumber(val, precision, thousand, decimal);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(precision) ? precision : {
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal
-				}),
-				lib.settings.number
-			),
-
-			// Clean up precision
-			usePrecision = checkPrecision(opts.precision),
-
-			// Do some calc:
-			negative = number < 0 ? "-" : "",
-			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
-			mod = base.length > 3 ? base.length % 3 : 0;
-
-		// Format the number:
-		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
-	};
-
-
-	/**
-	 * Format a number into currency
-	 *
-	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
-	 * defaults: (0, "$", 2, ",", ".", "%s%v")
-	 *
-	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
-	 * Second param can be an object matching `settings.currency` which is the easiest way.
-	 *
-	 * To do: tidy up the parameters
-	 */
-	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val){
-				return formatMoney(val, symbol, precision, thousand, decimal, format);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero):
-			formats = checkCurrencyFormat(opts.format),
-
-			// Choose which format to use for this value:
-			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
-
-		// Return with currency symbol added:
-		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-	};
-
-
-	/**
-	 * Format a list of numbers into an accounting column, padding with whitespace
-	 * to line up currency symbols, thousand separators and decimals places
-	 *
-	 * List should be an array of numbers
-	 * Second parameter can be an object containing keys that match the params
-	 *
-	 * Returns array of accouting-formatted number strings of same length
-	 *
-	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
-	 * browsers from collapsing the whitespace in the output strings.
-	 */
-	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
-		if (!list) return [];
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero), only need pos for now:
-			formats = checkCurrencyFormat(opts.format),
-
-			// Whether to pad at start of string or after currency symbol:
-			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
-
-			// Store value for the length of the longest string in the column:
-			maxLength = 0,
-
-			// Format the list according to options, store the length of the longest string:
-			formatted = map(list, function(val, i) {
-				if (isArray(val)) {
-					// Recursively format columns if list is a multi-dimensional array:
-					return lib.formatColumn(val, opts);
-				} else {
-					// Clean up the value
-					val = unformat(val);
-
-					// Choose which format to use for this value (pos, neg or zero):
-					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
-
-						// Format this value, push into formatted list and save the length:
-						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-
-					if (fVal.length > maxLength) maxLength = fVal.length;
-					return fVal;
-				}
-			});
-
-		// Pad each number in the list and send back the column of numbers:
-		return map(formatted, function(val, i) {
-			// Only if this is a string (not a nested array, which would have already been padded):
-			if (isString(val) && val.length < maxLength) {
-				// Depending on symbol position, pad after symbol or at index 0:
-				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
-			}
-			return val;
-		});
-	};
-
-
-	/* --- Module Definition --- */
-
-	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
-	// Otherwise, just add `accounting` to the global object
-	if (typeof exports !== 'undefined') {
-		if (typeof module !== 'undefined' && module.exports) {
-			exports = module.exports = lib;
-		}
-		exports.accounting = lib;
-	} else if (typeof define === 'function' && define.amd) {
-		// Return the library as an AMD module:
-		define([], function() {
-			return lib;
-		});
-	} else {
-		// Use accounting.noConflict to restore `accounting` back to its original value.
-		// Returns a reference to the library's `accounting` object;
-		// e.g. `var numbers = accounting.noConflict();`
-		lib.noConflict = (function(oldAccounting) {
-			return function() {
-				// Reset the value of the root's `accounting` variable:
-				root.accounting = oldAccounting;
-				// Delete the noConflict method:
-				lib.noConflict = undefined;
-				// Return reference to the library to re-assign it:
-				return lib;
-			};
-		})(root.accounting);
-
-		// Declare `fx` on the root (global/window) object:
-		root['accounting'] = lib;
-	}
-
-	// Root will be `window` in browser or `global` on the server:
-}(this));
-
-},{}],59:[function(require,module,exports){
-var currencySymbolMap = require('./map');
-
-var symbolCurrencyMap = {};
-for (var key in currencySymbolMap) {
-  if (currencySymbolMap.hasOwnProperty(key)) {
-    var currency = key;
-    var symbol = currencySymbolMap[currency];
-    symbolCurrencyMap[symbol] = currency;
-  }
-}
-
-function getSymbolFromCurrency(currencyCode) {
-  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
-    return currencySymbolMap[currencyCode];
-  } else {
-    return undefined;
-  }
-}
-
-function getCurrencyFromSymbol(symbol) {
-  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
-    return symbolCurrencyMap[symbol];
-  } else {
-    return undefined;
-  }
-}
-
-function getSymbol(currencyCode) {
-  //Deprecated
-  var symbol = getSymbolFromCurrency(currencyCode);
-  return symbol !== undefined ? symbol : '?';
-}
-
-module.exports = getSymbol; //Backward compatibility
-module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
-module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
-module.exports.symbolCurrencyMap = symbolCurrencyMap;
-module.exports.currencySymbolMap = currencySymbolMap;
-
-},{"./map":60}],60:[function(require,module,exports){
-module.exports =
-{ "ALL": "L"
-, "AFN": "؋"
-, "ARS": "$"
-, "AWG": "ƒ"
-, "AUD": "$"
-, "AZN": "₼"
-, "BSD": "$"
-, "BBD": "$"
-, "BYR": "p."
-, "BZD": "BZ$"
-, "BMD": "$"
-, "BOB": "Bs."
-, "BAM": "KM"
-, "BWP": "P"
-, "BGN": "лв"
-, "BRL": "R$"
-, "BND": "$"
-, "KHR": "៛"
-, "CAD": "$"
-, "KYD": "$"
-, "CLP": "$"
-, "CNY": "¥"
-, "COP": "$"
-, "CRC": "₡"
-, "HRK": "kn"
-, "CUP": "₱"
-, "CZK": "Kč"
-, "DKK": "kr"
-, "DOP": "RD$"
-, "XCD": "$"
-, "EGP": "£"
-, "SVC": "$"
-, "EEK": "kr"
-, "EUR": "€"
-, "FKP": "£"
-, "FJD": "$"
-, "GHC": "₵"
-, "GIP": "£"
-, "GTQ": "Q"
-, "GGP": "£"
-, "GYD": "$"
-, "HNL": "L"
-, "HKD": "$"
-, "HUF": "Ft"
-, "ISK": "kr"
-, "INR": "₹"
-, "IDR": "Rp"
-, "IRR": "﷼"
-, "IMP": "£"
-, "ILS": "₪"
-, "JMD": "J$"
-, "JPY": "¥"
-, "JEP": "£"
-, "KES": "KSh"
-, "KZT": "лв"
-, "KPW": "₩"
-, "KRW": "₩"
-, "KGS": "лв"
-, "LAK": "₭"
-, "LVL": "Ls"
-, "LBP": "£"
-, "LRD": "$"
-, "LTL": "Lt"
-, "MKD": "ден"
-, "MYR": "RM"
-, "MUR": "₨"
-, "MXN": "$"
-, "MNT": "₮"
-, "MZN": "MT"
-, "NAD": "$"
-, "NPR": "₨"
-, "ANG": "ƒ"
-, "NZD": "$"
-, "NIO": "C$"
-, "NGN": "₦"
-, "NOK": "kr"
-, "OMR": "﷼"
-, "PKR": "₨"
-, "PAB": "B/."
-, "PYG": "Gs"
-, "PEN": "S/."
-, "PHP": "₱"
-, "PLN": "zł"
-, "QAR": "﷼"
-, "RON": "lei"
-, "RUB": "₽"
-, "SHP": "£"
-, "SAR": "﷼"
-, "RSD": "Дин."
-, "SCR": "₨"
-, "SGD": "$"
-, "SBD": "$"
-, "SOS": "S"
-, "ZAR": "R"
-, "LKR": "₨"
-, "SEK": "kr"
-, "CHF": "CHF"
-, "SRD": "$"
-, "SYP": "£"
-, "TZS": "TSh"
-, "TWD": "NT$"
-, "THB": "฿"
-, "TTD": "TT$"
-, "TRY": ""
-, "TRL": "₤"
-, "TVD": "$"
-, "UGX": "USh"
-, "UAH": "₴"
-, "GBP": "£"
-, "USD": "$"
-, "UYU": "$U"
-, "UZS": "лв"
-, "VEF": "Bs"
-, "VND": "₫"
-, "YER": "﷼"
-, "ZWD": "Z$"
-}
-
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,18,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,41,42,38,39,40,43,44,45,46,47])
+},{}]},{},[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,21,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,44,45,41,42,43,46,47,48,49,50])
 
 
 vueApp = new Vue({
