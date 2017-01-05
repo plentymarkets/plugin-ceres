@@ -16,6 +16,7 @@
         </span>
     </div>
 
+{#<<<<<<< HEAD:resources/views/ItemList/Components/AddToBasket.twig#}
     <div v-else>
         <div class="thumb-controls">
             <span>
@@ -30,6 +31,14 @@
             <div class="thumb-basket-inner fa-cart-plus">
             </div>
         </div>
+{#=======#}
+        {#<span v-else>#}
+            {#<button class="btn btn-primary thumb-btn-buy" @click="addToBasket()">#}
+                {#{{ trans("PluginCeres::Template.addToBasket") }}#}
+                {#<i class="fa fa-shopping-cart" aria-hidden="true"></i>#}
+            {#</button>#}
+        {#</span>#}
+{#>>>>>>> release/elastic_search:resources/views/Basket/Components/AddToBasket.twig#}
     </div>
 
 </script>
