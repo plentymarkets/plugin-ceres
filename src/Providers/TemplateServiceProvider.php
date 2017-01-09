@@ -1,104 +1,76 @@
-<?php // strict
-
+<?php
 namespace Ceres\Providers;
 
+use IO\Helper\CategoryKey;
+use IO\Helper\CategoryMap;
+use IO\Helper\TemplateContainer;
+use Plenty\Plugin\ConfigRepository;
+use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
-use Plenty\Plugin\Events\Dispatcher;
-use Plenty\Plugin\ConfigRepository;
 
-use Plenty\Modules\Category\Models\Category;
-use Plenty\Modules\Item\DataLayer\Models\Record;
-
-use IO\Helper\TemplateContainer;
-use IO\Helper\CategoryMap;
-use IO\Helper\CategoryKey;
-
+/**
+ * Class TemplateServiceProvider
+ * @package Ceres\Providers
+ */
 class TemplateServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        
-    }
-    
-    public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
-    {
-        // Register Twig String Loader to use function: template_from_string
-        $twig->addExtension('Twig_Extension_StringLoader');
-        
-        // provide template to use for content categories
-        $eventDispatcher->listen('tpl.category.content', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Category.Content.CategoryContent");
-        }, 0);
+	const EVENT_LISTENER_PRIORITY = 0;
+	
+	private static $templateKeyToViewMap = [
+		'tpl.category.content'   => 'Category.Content.CategoryContent', // provide template to use for content categories
+		'tpl.category.item'      => 'Category.Item.CategoryItem',       // provide template to use for item categories
+		'tpl.category.blog'      => 'PageDesign.PageDesign',            // provide template to use for blog categories
+		'tpl.category.container' => 'PageDesign.PageDesign',            // provide template to use for container categories
+		'tpl.item'               => 'Item.SingleItem',                  // provide template to use for single items
+		'tpl.basket'             => 'Basket.Basket',                    // provide template to use for basket
+		'tpl.checkout'           => 'Checkout.Checkout',                // provide template to use for checkout
+		'tpl.my-account'         => 'MyAccount.MyAccount',              // provide template to use for my-account
+		'tpl.confirmation'       => 'Checkout.OrderConfirmation',       // provide template to use for confirmation
+		'tpl.login'              => 'Customer.Login',                   // provide template to use for login
+		'tpl.register'           => 'Customer.Register',                // provide template to use for register
+		'tpl.guest'              => 'Customer.Guest',                   // provide template to use for guest
+		'tpl.search'             => 'ItemList.ItemListView',            // provide template to use for item search
+	];
+	
+	public function register()
+	{
+	}
+	
+	/**
+	 * @param Twig $twig
+	 * @param Dispatcher $eventDispatcher
+	 * @param ConfigRepository $config
+	 */
+	public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
+	{
+		// Register Twig String Loader to use function: template_from_string
+		$twig->addExtension('Twig_Extension_StringLoader');
+		
+		$eventDispatcher->listen(
+			'IO.tpl.*',
+			function (TemplateContainer $templateContainer)
+			{
+				$templateContainer->setTemplate('PluginCeres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
+			},
+			self::EVENT_LISTENER_PRIORITY
+		);
 
-        // provide template to use for item categories
-        $eventDispatcher->listen('tpl.category.item', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Category.Item.CategoryItem");
-        }, 0);
-
-        // provide template to use for blog categories
-        $eventDispatcher->listen('tpl.category.blog', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
-        }, 0);
-
-        // provide template to use for container categories
-        $eventDispatcher->listen('tpl.category.container', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
-        }, 0);
-
-        // provide template to use for single items
-        $eventDispatcher->listen('tpl.item', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCeres::Item.SingleItem");
-        }, 0);
-
-        // provide template to use for basket
-        $eventDispatcher->listen('tpl.basket', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Basket.Basket");
-        }, 0);
-
-        // provide template to use for checkout
-        $eventDispatcher->listen('tpl.checkout', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Checkout.Checkout");
-        }, 0);
-
-        // provide template to use for my-account
-        $eventDispatcher->listen('tpl.my-account', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::MyAccount.MyAccount");
-        }, 0);
-
-        // provide template to use for confirmation
-        $eventDispatcher->listen('tpl.confirmation', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCeres::Checkout.OrderConfirmation");
-        }, 0);
-
-        // provide template to use for login
-        $eventDispatcher->listen('tpl.login', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Login");
-        }, 0);
-
-        // provide template to use for register
-        $eventDispatcher->listen('tpl.register', function(TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Register");
-        }, 0);
-
-        // provide template to use for guest
-        $eventDispatcher->listen('tpl.guest', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Guest");
-        }, 0);
-    
-        // provide template to use for item search
-        $eventDispatcher->listen('tpl.search', function(TemplateContainer $container,  $templateData) {
-            $container->setTemplate("PluginCeres::ItemList.ItemListView");
-        }, 0);
-
-        // provide mapped category IDs
-        $eventDispatcher->listen('init.categories', function(CategoryMap $categoryMap) use(&$config) {
-            $categoryMap->setCategoryMap(array (
-                                             CategoryKey::HOME           => $config->get("PluginCeres.global.category.home"),
-                                             CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCeres.global.category.page_not_found"),
-                                             CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCeres.global.category.item_not_found")
-                                         ));
-            
-        }, 0);
+		// provide mapped category IDs
+		$eventDispatcher->listen(
+			'IO.init.categories',
+			function (CategoryMap $categoryMap) use ($config)
+			{
+				$categoryMap->setCategoryMap(
+					[
+						CategoryKey::HOME           => $config->get("PluginCeres.global.category.home"),
+						CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCeres.global.category.page_not_found"),
+						CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCeres.global.category.item_not_found")
+					]
+				);
+				
+			},
+			self::EVENT_LISTENER_PRIORITY
+		);
 	}
 }

@@ -12,7 +12,8 @@
 } %}
 
 {% set page                 = request.get("page") | default(1) %}
-{% set paginatedResult      = services.item.getItemForCategory(category.id, categoryParams, page ) %}
+
+{% set paginatedResult      = services.itemLoader.loadForTemplate('PluginCeres::Category.Item.CategoryItem', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':categoryParams.itemsPerPage }) %}
 
 {% set itemList             = paginatedResult.getResult() %}
 {% set paginationType       = config("PluginCeres.pagination.position") %}
