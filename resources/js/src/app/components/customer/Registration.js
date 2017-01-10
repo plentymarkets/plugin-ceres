@@ -51,7 +51,7 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
-            ApiService.post("/rest/customer", userObject)
+            ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
                     ApiService.setToken(response);

@@ -20,7 +20,7 @@ var NotificationService = require("services/NotificationService");
             {
                 var self = this;
 
-                ApiService.post("/rest/checkout/payment").done(function(response)
+                ApiService.post("/rest/io/checkout/payment").done(function(response)
                 {
                     var paymentType = response.type || "errorCode";
                     var paymentValue = response.value || "";
