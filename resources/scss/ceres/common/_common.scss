@@ -5,24 +5,14 @@
 
 .page-content{
     @extend .p-t-1;
-    background-color: white; 
+    background-color: $gray-lightest;
 }
-
 
 .container-max{
     @extend .container-fluid;
     max-width: 1200px;
     z-index: auto;
 }
-
-
-
-
-// .shariff .orientation-horizontal li{
-//     min-width: 0;
-//     max-width: none;
-// }
-
 
 .rating{
     line-height: 1;
@@ -40,9 +30,6 @@
     }
 }
 
-
-
-
 dt {
     font-weight: 400;
 }
@@ -50,5 +37,3 @@ dt {
 .border-left {
     border-left: 1px solid $gray-dark;
 }
-
-
