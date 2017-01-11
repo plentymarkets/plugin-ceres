@@ -115,9 +115,11 @@
 
             {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
             <div class="copyright text-xs-center m-y-1">
-                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
+                <a href="https://www.plentymarkets.eu">
+                    <img class="plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
+                </a>
                 <br>
-                <small>Powered by plentymarkets</small>
+                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
             </div>
         </div>
     </div>
