@@ -1,22 +1,14 @@
 //header scss
 .wrapper-main.isSticky.sticky {
-	.top-bar {
+	.top-bar-slider {
 		position: fixed;
-    	width: 100%;
+		width: 100%;
+		z-index: 1050;
+		height: 90px;
 	}
-	& > .container-max {
-		position: fixed;
-	    display: block;
-	    width: 100%;
-	    top: 30px;
-	    left: 50%;
-	    transform: translateX(-50%);
-	    background: $gray-lightest;
-	    z-index: 1050;
-	}
-	#page-body {
-		padding-top: 119px;
-	}
+	// #page-body {
+	// 	padding-top: 119px;
+	// }
 }
 
 .top-bar{
