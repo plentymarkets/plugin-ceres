@@ -8,6 +8,7 @@
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
 
 {% block PageBody %}
+
     {{ component( "PluginCeres::Item.Components.VariationSelect" ) }}
     {{ component( "PluginCeres::Item.Components.VariationImageList" ) }}
     {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
@@ -22,6 +23,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
 
@@ -97,7 +99,7 @@
                 <div class="row m-y-1">
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
-                    <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="true"></add-item-to-basket>
+                    <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="true" template="#vue-add-item-to-basket"></add-item-to-basket>
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket") }}
                 </div>
@@ -292,4 +294,5 @@
         {#</div>#}
 
     </div>
+
 {% endblock %}

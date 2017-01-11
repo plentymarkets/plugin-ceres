@@ -1,5 +1,12 @@
 [
     {
+        "tab"       : "Homepage",
+        "key"       : "default.homepage",
+        "label"     : "Show default homepage",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
         "tab"               : "Categories",
         "key"               : "global.category.home",
         "label"             : "Homepage",

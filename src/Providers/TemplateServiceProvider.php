@@ -25,6 +25,11 @@ class TemplateServiceProvider extends ServiceProvider
     {
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
+
+        // provide template to use for homepage
+        $eventDispatcher->listen('tpl.home', function(TemplateContainer $container, $templateData) {
+            $container->setTemplate("PluginCeres::Homepage.Homepage");
+        }, 0);
         
         // provide template to use for content categories
         $eventDispatcher->listen('tpl.category.content', function(TemplateContainer $container, $templateData) {
