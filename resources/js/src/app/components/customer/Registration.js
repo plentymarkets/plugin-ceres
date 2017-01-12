@@ -11,7 +11,8 @@ Vue.component("registration", {
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false}
+        isSimpleRegistration: {type: Boolean, default: false},
+        template: String
     },
 
     data: function()
@@ -22,6 +23,11 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {

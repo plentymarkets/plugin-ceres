@@ -2,13 +2,25 @@ Vue.component("quantity-input", {
 
     template: "#vue-quantity-input",
 
-    props: ["value", "timeout", "min", "max", "vertical"],
+    props: [
+        "value",
+        "timeout",
+        "min",
+        "max",
+        "vertical",
+        "template"
+    ],
 
     data: function()
     {
         return {
             timeoutHandle: null
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**

@@ -5,12 +5,21 @@ Vue.component("item-search", {
 
     template: "#vue-item-search",
 
+    props: [
+        "template"
+    ],
+
     data: function()
     {
         return {
             searchString: "",
             itemSearch: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()

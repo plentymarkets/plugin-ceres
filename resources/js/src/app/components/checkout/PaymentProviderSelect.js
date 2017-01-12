@@ -4,6 +4,10 @@ Vue.component("payment-provider-select", {
 
     template: "#vue-payment-provider-select",
 
+    props: [
+        "template"
+    ],
+
     data: function()
     {
         return {
@@ -17,6 +21,8 @@ Vue.component("payment-provider-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
     },
 

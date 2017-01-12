@@ -7,11 +7,19 @@ var NotificationService = require("services/NotificationService");
 
         template: "#vue-place-order",
 
-        props: ["targetContinue"],
+        props: [
+            "targetContinue",
+            "template"
+        ],
 
         data: function()
         {
             return {};
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         methods: {

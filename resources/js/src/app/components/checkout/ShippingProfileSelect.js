@@ -4,6 +4,10 @@ Vue.component("shipping-profile-select", {
 
     template: "#vue-shipping-profile-select",
 
+    props: [
+        "template"
+    ],
+
     data: function()
     {
         return {
@@ -18,6 +22,8 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
     },
 

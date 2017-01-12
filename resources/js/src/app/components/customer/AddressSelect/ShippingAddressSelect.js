@@ -4,7 +4,11 @@ Vue.component("shipping-address-select", {
 
     template: "<address-select v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
-    props: ["addressList", "selectedAddressId"],
+    props: [
+        "addressList",
+        "selectedAddressId",
+        "template"
+    ],
 
     data: function()
     {
@@ -18,6 +22,8 @@ Vue.component("shipping-address-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
 
         if (!this.addressList)

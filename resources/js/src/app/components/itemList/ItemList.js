@@ -5,11 +5,20 @@ Vue.component("item-list", {
 
     template: "#vue-item-list",
 
+    props: [
+        "template"
+    ],
+
     data: function()
     {
         return {
             itemList: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()

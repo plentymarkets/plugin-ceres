@@ -10,7 +10,8 @@ Vue.component("create-update-address", {
         "addressModal",
         "addressList",
         "modalType",
-        "addressType"
+        "addressType",
+        "template"
     ],
 
     data: function()
@@ -18,6 +19,11 @@ Vue.component("create-update-address", {
         return {
             waiting: false
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {

@@ -10,7 +10,8 @@ var ApiService = require("services/ApiService");
             "orderList",
             "itemsPerPage",
             "showFirstPage",
-            "showLastPage"
+            "showLastPage",
+            "template"
         ],
 
         data: function()
@@ -22,6 +23,11 @@ var ApiService = require("services/ApiService");
                 countEnd: 0,
                 currentOrder: null
             };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         ready: function()

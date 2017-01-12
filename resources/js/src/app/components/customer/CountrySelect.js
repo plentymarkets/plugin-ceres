@@ -9,7 +9,8 @@ Vue.component("country-select", {
         "countryList",
         "countryNameMap",
         "selectedCountryId",
-        "selectedStateId"
+        "selectedStateId",
+        "template"
     ],
 
     data: function()
@@ -26,6 +27,8 @@ Vue.component("country-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
         this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
 

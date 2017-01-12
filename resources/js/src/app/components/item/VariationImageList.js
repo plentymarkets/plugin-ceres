@@ -33,6 +33,10 @@
 
     Vue.component("variation-image-list", {
 
+        props: [
+            "template"
+        ],
+
         template: "#vue-variation-image-list",
 
         data: function()
@@ -41,6 +45,11 @@
                 currentVariation: {},
                 currentItem     : 0
             };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         ready: function()

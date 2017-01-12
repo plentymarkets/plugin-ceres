@@ -4,9 +4,9 @@ Vue.component("shop-language-select", {
 
     template: "#vue-shop-language-select",
 
-    props:
-    [
-        "countryFlagPrefix"
+    props: [
+        "countryFlagPrefix",
+        "template"
     ],
 
     data: function()
@@ -19,6 +19,8 @@ Vue.component("shop-language-select", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
 
         for (var i in this.localization.activeShopLanguageList)

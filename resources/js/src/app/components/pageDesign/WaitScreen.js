@@ -11,11 +11,20 @@ Vue.component("wait-screen", {
 
     template: "#vue-wait-screen",
 
-    data    : function()
+    props: [
+        "template"
+    ],
+
+    data: function()
     {
         return {
             overlay: WaitScreenService.getOverlay()
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     computed: {

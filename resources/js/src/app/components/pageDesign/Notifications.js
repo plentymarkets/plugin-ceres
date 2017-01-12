@@ -5,7 +5,8 @@ Vue.component("notifications", {
     template: "#vue-notifications",
 
     props: [
-        "initialNotifications"
+        "initialNotifications",
+        "template"
     ],
 
     data: function()
@@ -13,6 +14,11 @@ Vue.component("notifications", {
         return {
             notifications: []
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()

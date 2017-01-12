@@ -8,7 +8,12 @@ Vue.component("variation-select", {
 
     template: "#vue-variation-select",
 
-    props: ["attributes", "variations", "preselect"],
+    props: [
+        "attributes",
+        "variations",
+        "preselect",
+        "template"
+    ],
 
     data: function()
     {
@@ -16,6 +21,11 @@ Vue.component("variation-select", {
             // Collection of currently selected variation attributes.
             selectedAttributes: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()

@@ -2,7 +2,16 @@ Vue.component("order-details", {
 
     template: "#vue-order-details",
 
-    props: ["orderData", "totalsConfig"],
+    props: [
+        "orderData",
+        "totalsConfig",
+        "template"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
 
     computed: {
         orderItems: function()

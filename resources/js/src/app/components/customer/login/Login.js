@@ -9,7 +9,8 @@ Vue.component("login", {
     props: [
         "modalElement",
         "backlink",
-        "hasToForward"
+        "hasToForward",
+        "template"
     ],
 
     data: function()
@@ -18,6 +19,11 @@ Vue.component("login", {
             password: "",
             username: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {

@@ -6,7 +6,8 @@ Vue.component("items-per-page", {
     template: "#vue-items-per-page",
 
     props: [
-        "paginationValues"
+        "paginationValues",
+        "template"
     ],
 
     data: function()
@@ -18,6 +19,8 @@ Vue.component("items-per-page", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("itemSearch", this);
     },
 

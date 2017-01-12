@@ -9,7 +9,8 @@ Vue.component("bank-data-select", {
 
     props: [
         "userBankData",
-        "contactId"
+        "contactId",
+        "template"
     ],
 
     data: function()
@@ -23,6 +24,11 @@ Vue.component("bank-data-select", {
             doUpdate: null,
             headline : ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**

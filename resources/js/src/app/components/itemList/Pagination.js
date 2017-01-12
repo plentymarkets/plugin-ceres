@@ -5,6 +5,10 @@ Vue.component("pagination", {
 
     template: "#vue-pagination",
 
+    props: [
+        "template"
+    ],
+
     data: function()
     {
         return {
@@ -15,6 +19,8 @@ Vue.component("pagination", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("itemSearch", this);
         ResourceService.bind("itemList", this);
     },

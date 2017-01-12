@@ -5,7 +5,8 @@ Vue.component("basket-totals", {
     template: "#vue-basket-totals",
 
     props: [
-        "config"
+        "config",
+        "template"
     ],
 
     data: function()
@@ -13,6 +14,11 @@ Vue.component("basket-totals", {
         return {
             basket: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**

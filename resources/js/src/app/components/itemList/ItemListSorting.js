@@ -5,7 +5,8 @@ Vue.component("item-list-sorting", {
     template: "#vue-item-list-sorting",
 
     props: [
-        "sortData"
+        "sortData",
+        "template"
     ],
 
     data: function()
@@ -17,6 +18,8 @@ Vue.component("item-list-sorting", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         this.buildData();
         this.selectedSorting = this.sortData[0];
     },
