@@ -9,7 +9,7 @@ var WaitScreenService = require("services/WaitScreenService");
 
 Vue.component("wait-screen", {
 
-    template: "#vue-wait-screen",
+    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
 
     props: [
         "template"

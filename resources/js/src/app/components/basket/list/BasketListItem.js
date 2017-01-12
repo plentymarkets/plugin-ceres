@@ -4,8 +4,6 @@ var ApiService          = require("services/ApiService");
 
 Vue.component("basket-list-item", {
 
-    template: "#vue-basket-list-item",
-
     props: [
         "basketItem",
         "size",

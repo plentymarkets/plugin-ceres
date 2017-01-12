@@ -8,8 +8,6 @@ Vue.component("add-item-to-basket", {
         "template"
     ],
 
-    template: "#vue-add-item-to-basket",
-
     data: function()
     {
         return {

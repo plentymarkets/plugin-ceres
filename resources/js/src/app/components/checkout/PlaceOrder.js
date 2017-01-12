@@ -3,9 +3,7 @@ var NotificationService = require("services/NotificationService");
 
 (function($)
 {
-    Vue.component("placeOrder", {
-
-        template: "#vue-place-order",
+    Vue.component("place-order", {
 
         props: [
             "targetContinue",

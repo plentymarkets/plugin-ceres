@@ -3,8 +3,6 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("items-per-page", {
 
-    template: "#vue-items-per-page",
-
     props: [
         "paginationValues",
         "template"

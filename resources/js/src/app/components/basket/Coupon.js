@@ -1,7 +1,5 @@
 Vue.component("coupon", {
 
-    template: "#vue-coupon",
-
     props: [
         "template"
     ],

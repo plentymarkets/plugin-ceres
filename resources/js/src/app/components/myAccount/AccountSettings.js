@@ -4,8 +4,6 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
 
-    template: "#vue-account-settings",
-
     props: [
         "userData",
         "template"

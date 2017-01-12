@@ -6,8 +6,6 @@ var VariationData = {};
 
 Vue.component("variation-select", {
 
-    template: "#vue-variation-select",
-
     props: [
         "attributes",
         "variations",

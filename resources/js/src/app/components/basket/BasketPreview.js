@@ -2,8 +2,6 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
 
-    template: "#vue-basket-preview",
-
     props: [
         "template"
     ],

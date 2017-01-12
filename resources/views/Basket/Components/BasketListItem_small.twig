@@ -4,7 +4,7 @@
 <article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
-        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
     </div>
     <!-- ./ITEM QUANTITY -->
 

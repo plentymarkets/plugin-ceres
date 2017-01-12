@@ -3,8 +3,6 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
 
-    template: "#vue-create-update-address",
-
     props: [
         "addressData",
         "addressModal",

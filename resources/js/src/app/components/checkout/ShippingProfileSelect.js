@@ -2,8 +2,6 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
-    template: "#vue-shipping-profile-select",
-
     props: [
         "template"
     ],

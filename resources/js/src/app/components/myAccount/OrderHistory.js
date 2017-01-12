@@ -4,8 +4,6 @@ var ApiService = require("services/ApiService");
 {
     Vue.component("order-history", {
 
-        template: "#vue-order-history",
-
         props: [
             "orderList",
             "itemsPerPage",

@@ -2,8 +2,6 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("loading-animation", {
 
-    template: "#vue-loading-animation",
-
     props: [
         "template"
     ],

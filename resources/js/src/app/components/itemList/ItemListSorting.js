@@ -2,8 +2,6 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list-sorting", {
 
-    template: "#vue-item-list-sorting",
-
     props: [
         "sortData",
         "template"

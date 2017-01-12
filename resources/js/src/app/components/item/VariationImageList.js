@@ -37,8 +37,6 @@
             "template"
         ],
 
-        template: "#vue-variation-image-list",
-
         data: function()
         {
             return {

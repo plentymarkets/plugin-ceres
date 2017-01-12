@@ -3,8 +3,6 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
-    template: "#vue-country-select",
-
     props: [
         "countryList",
         "countryNameMap",

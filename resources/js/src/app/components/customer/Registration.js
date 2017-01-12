@@ -6,8 +6,6 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("registration", {
 
-    template: "#vue-registration",
-
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},

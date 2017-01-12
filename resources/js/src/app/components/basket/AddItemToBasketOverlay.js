@@ -3,8 +3,6 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    template: "#vue-add-item-to-basket-overlay",
-
     props: [
         "showOverlay",
         "template"

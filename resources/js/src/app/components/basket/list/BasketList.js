@@ -2,8 +2,6 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list", {
 
-    template: "#vue-basket-list",
-
     props: [
         "size",
         "template"

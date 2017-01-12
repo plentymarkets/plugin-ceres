@@ -3,8 +3,6 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
-    template: "#vue-item-list",
-
     props: [
         "template"
     ],

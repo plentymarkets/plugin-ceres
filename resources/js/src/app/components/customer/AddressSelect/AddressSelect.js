@@ -4,8 +4,6 @@ var AddressService = require("services/AddressService");
 
 Vue.component("address-select", {
 
-    template: "#vue-address-select",
-
     props: [
         "addressList",
         "addressType",

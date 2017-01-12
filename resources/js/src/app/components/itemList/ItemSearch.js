@@ -3,8 +3,6 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-search", {
 
-    template: "#vue-item-search",
-
     props: [
         "template"
     ],

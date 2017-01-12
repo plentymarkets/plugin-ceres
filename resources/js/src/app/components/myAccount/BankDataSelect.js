@@ -5,8 +5,6 @@ var ValidationService   = require("services/ValidationService");
 
 Vue.component("bank-data-select", {
 
-    template: "#vue-bank-data-select",
-
     props: [
         "userBankData",
         "contactId",

@@ -1,7 +1,5 @@
 Vue.component("order-details", {
 
-    template: "#vue-order-details",
-
     props: [
         "orderData",
         "totalsConfig",

@@ -4,8 +4,6 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("login", {
 
-    template: "#vue-login",
-
     props: [
         "modalElement",
         "backlink",
