@@ -5,10 +5,6 @@ Vue.component("item-list", {
 
     template: "#vue-item-list",
 
-    props: [
-        "testData"
-    ],
-
     data: function()
     {
         return {
