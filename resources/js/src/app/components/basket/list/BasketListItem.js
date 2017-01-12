@@ -22,29 +22,7 @@ Vue.component("basket-list-item", {
         };
     },
 
-    ready: function()
-    {
-        this.getItemCondition();
-    },
-
     methods: {
-        getItemCondition: function()
-        {
-
-            // ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
-            //     .done(function(response)
-            //     {
-            //         ApiService.setToken(response);
-            //
-            //         self.itemCondition = response;
-            //
-            //     })
-            //     .fail(function(response)
-            //     {
-            //         // TODO
-            //     });
-        },
-
         /**
          * Delete item from basket
          */
