@@ -21,7 +21,7 @@ module.exports = (function($)
      *
      * @returns {Resource} The created resource.
      */
-    function registerResource(name, route, initialValue)
+    function registerResource(name, route, initialValue, responseTemplate)
     {
         if (!name)
         {
@@ -50,7 +50,7 @@ module.exports = (function($)
         }
 
         name = name.toLowerCase();
-        resources[name] = new Resource(route, data);
+        resources[name] = new Resource(route, data, responseTemplate);
 
         return resources[name];
     }
@@ -63,7 +63,7 @@ module.exports = (function($)
      *
      * @returns {Resource}            The created resource.
      */
-    function registerResourceList(name, route, initialValue)
+    function registerResourceList(name, route, initialValue, responseTemplate)
     {
         if (!name)
         {
@@ -92,7 +92,7 @@ module.exports = (function($)
         }
 
         name = name.toLowerCase();
-        resources[name] = new ResourceList(route, data);
+        resources[name] = new ResourceList(route, data, responseTemplate);
 
         return resources[name];
     }
@@ -170,10 +170,11 @@ module.exports = (function($)
 
     /**
      * @class Resource
-     * @param {string}  url             The url to bind the resource to
-     * @param {string}  initialValue    The initial value to assign to the resource
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
      */
-    function Resource(url, initialValue)
+    function Resource(url, initialValue, responseTemplate)
     {
         var data = new Observable();
         var ready = false;
@@ -189,7 +190,7 @@ module.exports = (function($)
         {
             // If no initial value was given, get the value from the URL
             ApiService
-                .get(url)
+                .get(url, {template: this.responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
@@ -289,6 +290,7 @@ module.exports = (function($)
         {
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .put(url, value)
                     .done(function(response)
@@ -322,7 +324,7 @@ module.exports = (function($)
             else if (url)
             {
                 return ApiService
-                    .get(url)
+                    .get(url, {template: responseTemplate})
                     .done(function(response)
                     {
                         data.value = response;
@@ -335,10 +337,11 @@ module.exports = (function($)
 
     /**
      * @class ResourceList
-     * @param {string}  url             The url to bind the resource to
-     * @param {string}  initialValue    The initial value to assign to the resource
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
      */
-    function ResourceList(url, initialValue)
+    function ResourceList(url, initialValue, responseTemplate)
     {
         var data = new Observable();
         var ready = false;
@@ -356,7 +359,7 @@ module.exports = (function($)
         else if (url)
         {
             ApiService
-                .get(url)
+                .get(url, {template: responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
@@ -460,6 +463,7 @@ module.exports = (function($)
         {
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .put(url + key, value)
                     .done(function(response)
@@ -481,9 +485,9 @@ module.exports = (function($)
          */
         function push(value)
         {
-
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .post(url, value)
                     .done(function(response)
@@ -512,7 +516,7 @@ module.exports = (function($)
             if (url)
             {
                 return ApiService
-                    .delete(url + key)
+                    .delete(url + key, {template: responseTemplate})
                     .done(function(response)
                     {
                         data.value = response;
@@ -546,7 +550,7 @@ module.exports = (function($)
             }
 
             return ApiService
-                .get(url)
+                .get(url, {template: responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
