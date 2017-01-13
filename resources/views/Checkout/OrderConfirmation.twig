@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 {% import "PluginCeres::Checkout.Macros.Address" as address %}
 
 {% set data = services.customer.getLatestOrder() %}

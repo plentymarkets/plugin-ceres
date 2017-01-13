@@ -14,7 +14,7 @@
 <html lang="{{ lang }}" data-framework="vue">
 
     <head>
-        {% include "PluginCeres::PageDesign.Partials.Head" %}
+        {% include getPartial('head') %}
     </head>
 
     <body>
@@ -38,7 +38,7 @@
 
         <div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
 
-            {% include "PluginCeres::PageDesign.Partials.Header.Header" %}
+            {% include getPartial('header') %}
 
             <div id="page-body" class="main">
                 {% block PageBody %}
@@ -46,7 +46,7 @@
                 {% endblock %}
             </div>
 
-            {% include "PluginCeres::PageDesign.Partials.Footer" %}
+            {% include getPartial('footer') %}
 
         </div>
 
