@@ -4,12 +4,11 @@ var AddressService = require("services/AddressService");
 
 Vue.component("address-select", {
 
-    template: "#vue-address-select",
-
     props: [
         "addressList",
         "addressType",
-        "selectedAddressId"
+        "selectedAddressId",
+        "template"
     ],
 
     data: function()
@@ -30,6 +29,8 @@ Vue.component("address-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         this.addEventListener();
     },
 

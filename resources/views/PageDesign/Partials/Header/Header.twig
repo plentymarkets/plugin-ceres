@@ -15,7 +15,7 @@
             <ul id="controlsList" class="controls-list list-inline">
 
                 <li class="list-inline-item control-user">
-                    <user-login-handler
+                    <user-login-handler template="#vue-user-login-handler"
                             :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
 
@@ -51,7 +51,7 @@
 <div class="container-max page-header">
     <div class="row">
         <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
-            <item-search></item-search>
+            <item-search template="#vue-item-search"></item-search>
         </div>
 
         <div id="countrySettings" class="cmp cmp-country-settings collapse">
@@ -62,7 +62,7 @@
                         <strong>{{ trans("PluginCeres::Template.generalSelectLanguage") }}</strong>
                         <hr>
                     </div>
-                    <shop-language-select country-flag-prefix="flag-icon-"/>
+                    <shop-language-select template="#vue-shop-language-select" country-flag-prefix="flag-icon-"/>
                 </div>
 
                 <div class="shipping-settings col-xs-12 col-sm-6">
@@ -70,7 +70,7 @@
                         <strong>{{ trans("PluginCeres::Template.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
-                    <shipping-country-select country-flag-prefix="flag-icon-"/>
+                    <shipping-country-select template="#vue-shipping-country-select" country-flag-prefix="flag-icon-"/>
                 </div>
             </div>
         </div>

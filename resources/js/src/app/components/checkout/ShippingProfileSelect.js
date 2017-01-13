@@ -2,7 +2,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
-    template: "#vue-shipping-profile-select",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -18,6 +20,8 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
     },
 

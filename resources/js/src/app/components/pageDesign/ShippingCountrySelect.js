@@ -2,11 +2,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
 
-    template: "#vue-shipping-country-select",
-
-    props:
-    [
-        "countryFlagPrefix"
+    props: [
+        "countryFlagPrefix",
+        "template"
     ],
 
     data: function()
@@ -18,6 +16,8 @@ Vue.component("shipping-country-select", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
 
         for (var i in this.localization.activeShippingCountries)

@@ -4,12 +4,11 @@ var ApiService          = require("services/ApiService");
 
 Vue.component("basket-list-item", {
 
-    template: "#vue-basket-list-item",
-
     props: [
         "basketItem",
         "size",
-        "language"
+        "language",
+        "template"
     ],
 
     data: function()
@@ -21,6 +20,11 @@ Vue.component("basket-list-item", {
             itemAvailability: "",
             itemCondition: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()

@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-              <basket-list></basket-list>
+              <basket-list template="#vue-basket-list"></basket-list>
             </div>
         </div>
 
@@ -27,10 +27,10 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-7 m-b-1">
-                <coupon></coupon>
+                <coupon template="#vue-coupon"></coupon>
             </div>
             <div class="col-xs-12 col-md-5">
-              <basket-totals :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+              <basket-totals template="#vue-basket-totals" :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
             </div>
         </div>
 

@@ -4,7 +4,7 @@
 
     <span v-if="showQuantity">
         <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
-            <quantity-input :value="1" @quantity-change="updateQuantity"></quantity-input>
+            <quantity-input template="#vue-quantity-input" :value="1" @quantity-change="updateQuantity"></quantity-input>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
             <button href="#" class="btn btn-block btn-primary" @click="addToBasket()">

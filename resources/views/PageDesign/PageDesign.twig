@@ -27,7 +27,7 @@
 
         <div class="wrapper wrapper-top">
             <!-- messages -->
-            <notifications
+            <notifications template="#vue-notifications"
                 :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"
             ></notifications>
         </div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="wrapper wrapper-right">
-          <basket-preview></basket-preview>
+          <basket-preview template="#vue-basket-preview"></basket-preview>
         </div>
 
         <div class="wrapper wrapper-bottom">
@@ -67,7 +67,7 @@
                                 <h3 class="modal-title">{{ trans("PluginCeres::Template.accLogin") }}</h3>
                             </div>
                             <div class="modal-body">
-                                <login modal-element="login-modal-wrapper"></login>
+                                <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                 <h3 class="modal-title">{{ trans("PluginCeres::Template.accCreateAccount") }}</h3>
                             </div>
                             <div class="modal-body">
-                                <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
+                                <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
             <!-- ./REGISTRATION MODAL -->
 
             <!-- BASKET MODAL -->
-            <add-item-to-basket-overlay :show-overlay="{{ showItemConfirm }}"></add-item-to-basket-overlay>
+            <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :show-overlay="{{ showItemConfirm }}"></add-item-to-basket-overlay>
             <!-- ./BASKET MODAL -->
 
         </div>

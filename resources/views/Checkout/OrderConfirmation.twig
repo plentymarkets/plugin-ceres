@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <order-details :order-data="{{ data | json_encode() }}" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
+        <order-details template="#vue-order-details" :order-data="{{ data | json_encode() }}" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
 
         <hr>
         <div class="row">

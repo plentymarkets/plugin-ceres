@@ -3,14 +3,13 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
 
-    template: "#vue-create-update-address",
-
     props: [
         "addressData",
         "addressModal",
         "addressList",
         "modalType",
-        "addressType"
+        "addressType",
+        "template"
     ],
 
     data: function()
@@ -18,6 +17,11 @@ Vue.component("create-update-address", {
         return {
             waiting: false
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
