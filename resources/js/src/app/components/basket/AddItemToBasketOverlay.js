@@ -106,5 +106,16 @@ Vue.component("add-item-to-basket-overlay", {
                 }
             }
         }
+    },
+
+    computed:
+    {
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.basketItem.currentBasketItem.texts[0];
+        }
     }
 });
