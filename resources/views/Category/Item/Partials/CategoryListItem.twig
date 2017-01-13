@@ -51,9 +51,12 @@
 
         <!-- STORE SPECIALS -->
 
-        {% if item.data.item.storeSpecial > 0 %}
+        {% if item.data.item.storeSpecial.id > 0 %}
+
+            {% set storeSpecial = item.data.item.storeSpecial.names[0].name %}
+
             <div class="special-tags">
-                {% if  item.data.item.storeSpecial == 1 %}
+                {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
                     {% set percent = 100-(item.data.salesPrices[1].price/item.data.salesPrices[0].price*100) %}
@@ -62,18 +65,14 @@
                         {% set dezimalcount = config('PluginCeres.item.storeSpecial') %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
-                    {% else %}
-                        {% set storeSpecial = "SALE" %}
                     {% endif %}
 
-                {% elseif  item.data.item.storeSpecial == 2 %}
+                {% elseif  item.data.item.storeSpecial.id == 2 %}
 
-                    {% set storeSpecial = "NEW" %}
                     {% set storeSpecialColor = 'primary' %}
 
-                {% elseif  item.data.item.storeSpecial == 3 %}
+                {% elseif  item.data.item.storeSpecial.id == 3 %}
 
-                    {% set storeSpecial = "TOP" %}
                     {% set storeSpecialColor = 'success' %}
 
                 {% endif %}

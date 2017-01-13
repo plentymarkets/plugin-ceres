@@ -1,4 +1,10 @@
 [
-  "itemId",
-  "texts.name*"
+  "images.all.urlMiddle",
+  "images.all.urlPreview",
+  "item.storeSpecial",
+  "salesPrices.price",
+  "texts.name*",
+  "variation.categoryVariationId",
+  "variation.clientVariationId",
+  "variation.itemId"
 ]
