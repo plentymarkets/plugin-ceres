@@ -40,6 +40,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/item/search/autocomplete",
                 paramName: "searchString",
+                params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1061,
                 maxHeight: 310,
