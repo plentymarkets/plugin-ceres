@@ -2104,6 +2104,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/item/search/autocomplete",
                 paramName: "searchString",
+                params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1061,
                 maxHeight: 310,
@@ -2994,14 +2995,16 @@ Vue.elementDirective("resource", {
         "name",
         "route",
         "data",
-        "events"
+        "events",
+        "responseTemplate"
     ],
     bind    : function()
     {
         var resource = ResourceService.registerResource(
             this.params.name,
             this.params.route,
-            this.params.data
+            this.params.data,
+            this.params.responseTemplate
         );
         var events = this.params.events || [];
 
@@ -3027,14 +3030,17 @@ Vue.elementDirective("resource-list", {
         "name",
         "route",
         "data",
-        "events"
+        "events",
+        "responseTemplate"
+
     ],
     bind    : function()
     {
         var resource = ResourceService.registerResourceList(
             this.params.name,
             this.params.route,
-            this.params.data
+            this.params.data,
+            this.params.responseTemplate
         );
         var events = this.params.events || [];
 
@@ -4289,7 +4295,7 @@ module.exports = (function($)
      *
      * @returns {Resource} The created resource.
      */
-    function registerResource(name, route, initialValue)
+    function registerResource(name, route, initialValue, responseTemplate)
     {
         if (!name)
         {
@@ -4318,7 +4324,7 @@ module.exports = (function($)
         }
 
         name = name.toLowerCase();
-        resources[name] = new Resource(route, data);
+        resources[name] = new Resource(route, data, responseTemplate);
 
         return resources[name];
     }
@@ -4331,7 +4337,7 @@ module.exports = (function($)
      *
      * @returns {Resource}            The created resource.
      */
-    function registerResourceList(name, route, initialValue)
+    function registerResourceList(name, route, initialValue, responseTemplate)
     {
         if (!name)
         {
@@ -4360,7 +4366,7 @@ module.exports = (function($)
         }
 
         name = name.toLowerCase();
-        resources[name] = new ResourceList(route, data);
+        resources[name] = new ResourceList(route, data, responseTemplate);
 
         return resources[name];
     }
@@ -4438,10 +4444,11 @@ module.exports = (function($)
 
     /**
      * @class Resource
-     * @param {string}  url             The url to bind the resource to
-     * @param {string}  initialValue    The initial value to assign to the resource
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
      */
-    function Resource(url, initialValue)
+    function Resource(url, initialValue, responseTemplate)
     {
         var data = new Observable();
         var ready = false;
@@ -4457,7 +4464,7 @@ module.exports = (function($)
         {
             // If no initial value was given, get the value from the URL
             ApiService
-                .get(url)
+                .get(url, {template: this.responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
@@ -4557,6 +4564,7 @@ module.exports = (function($)
         {
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .put(url, value)
                     .done(function(response)
@@ -4590,7 +4598,7 @@ module.exports = (function($)
             else if (url)
             {
                 return ApiService
-                    .get(url)
+                    .get(url, {template: responseTemplate})
                     .done(function(response)
                     {
                         data.value = response;
@@ -4603,10 +4611,11 @@ module.exports = (function($)
 
     /**
      * @class ResourceList
-     * @param {string}  url             The url to bind the resource to
-     * @param {string}  initialValue    The initial value to assign to the resource
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
      */
-    function ResourceList(url, initialValue)
+    function ResourceList(url, initialValue, responseTemplate)
     {
         var data = new Observable();
         var ready = false;
@@ -4624,7 +4633,7 @@ module.exports = (function($)
         else if (url)
         {
             ApiService
-                .get(url)
+                .get(url, {template: responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
@@ -4728,6 +4737,7 @@ module.exports = (function($)
         {
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .put(url + key, value)
                     .done(function(response)
@@ -4749,9 +4759,9 @@ module.exports = (function($)
          */
         function push(value)
         {
-
             if (url)
             {
+                value.template = responseTemplate;
                 return ApiService
                     .post(url, value)
                     .done(function(response)
@@ -4780,7 +4790,7 @@ module.exports = (function($)
             if (url)
             {
                 return ApiService
-                    .delete(url + key)
+                    .delete(url + key, {template: responseTemplate})
                     .done(function(response)
                     {
                         data.value = response;
@@ -4814,7 +4824,7 @@ module.exports = (function($)
             }
 
             return ApiService
-                .get(url)
+                .get(url, {template: responseTemplate})
                 .done(function(response)
                 {
                     data.value = response;
