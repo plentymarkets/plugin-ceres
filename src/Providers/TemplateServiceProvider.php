@@ -136,6 +136,6 @@ class TemplateServiceProvider extends ServiceProvider
             $partial->set('header', 'PluginCeres::PageDesign.Partials.Header.Header');
             $partial->set('footer', 'PluginCeres::PageDesign.Partials.Footer');
             $partial->set('page-design', 'PluginCeres::PageDesign.PageDesign');
-        });
+        }, 100);
 	}
 }
