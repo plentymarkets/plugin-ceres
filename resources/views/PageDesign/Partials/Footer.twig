@@ -73,13 +73,6 @@
                                     </li>
                                 {% endif %}
 
-                                {% if i == numberOfCols and config('PluginCeres.global.category.legal_disclosure') not in displayedCategories %}
-                                    <li>
-                                        {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
-                                        <a href="{{ services.category.getURL( cat ) }}">{{ cat.details.first.name }}</a>
-                                    </li>
-                                {% endif %}
-
                             {% endfor %}
 
                         </ul>
@@ -115,6 +108,14 @@
 
             {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
             <div class="copyright text-xs-center m-y-1">
+                <div class="static-link-list">
+                    {% autoescape false %}
+                        <a href="/cancellation-rights">{{ trans("PluginCeres::Template.generalCancellationRight") }}</a>
+                        <a href="/legal-disclosure">{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</a>
+                        <a href="/privacy-policy">{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</a>
+                        <a href="/terms-conditions">{{ trans("PluginCeres::Template.generalGtc") }}</a>
+                    {% endautoescape %}
+                </div>
                 <a href="https://www.plentymarkets.eu">
                     <img class="plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
                 </a>

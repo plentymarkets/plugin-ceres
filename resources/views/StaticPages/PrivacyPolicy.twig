@@ -2,6 +2,16 @@
 
 {% block PageBody %}
 
-    {# TODO #}
+    {% autoescape false %}
+        <div class="container-max page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</h1>
+                    <hr class="m-y-3">
+                    <p>GET CONTENT --BACKEND</p>
+                </div>
+            </div>
+        </div>
+    {% endautoescape %}
 
 {% endblock %}
