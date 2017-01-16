@@ -17,8 +17,8 @@ module.exports = (function($)
     return {
         setSearchString: setSearchString,
         setItemsPerPage: setItemsPerPage,
-        setOrderBy: setOrderBy,
-        setPage: setPage,
+        setOrderBy     : setOrderBy,
+        setPage        : setPage,
         setSearchParams: setSearchParams
     };
 
@@ -31,7 +31,10 @@ module.exports = (function($)
             ResourceService.getResource("itemList").set({});
             _setIsLoading(true);
 
-            return ApiService.get("/rest/item/search", searchParams)
+            return ApiService.get("/rest/item/search", {
+                searchParams: searchParams,
+                template    : "PluginCeres::ItemList.Components.ItemListView"
+            })
                 .done(function(response)
                 {
                     _setIsLoading(false);
