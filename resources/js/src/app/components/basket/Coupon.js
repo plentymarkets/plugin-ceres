@@ -7,6 +7,6 @@ Vue.component("coupon", {
     created: function()
     {
         this.$options.template = this.template;
-    },
+    }
 
 });
