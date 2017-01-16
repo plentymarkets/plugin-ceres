@@ -125,24 +125,20 @@
                                 <label class="form-check-label" for="agb-accept">
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
                                     {% autoescape false %}
-                                        {% set terms = services.category.get(config('PluginCeres.global.category.terms_and_conditions')) %}
-                                        {% set rights = services.category.get(config('PluginCeres.global.category.cancellation_rights')) %}
-                                        {% set policy = services.category.get(config('PluginCeres.global.category.privacy_policy')) %}
-
                                         {% set gtcContent %}
-                                            <a href="{{ services.category.getURL( terms ) }}" target="_blank">
+                                            <a href="/terms-conditions" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>
                                             </a>
                                         {% endset %}
 
                                         {% set cancellationContent %}
-                                            <a href="{{ services.category.getURL( rights ) }}" target="_blank">
+                                            <a href="/cancellation-rights" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>
                                             </a>
                                         {% endset %}
 
                                         {% set policyContent %}
-                                            <a href="{{ services.category.getURL( policy ) }}" target="_blank">
+                                            <a href="/privacy-policy" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>
                                             </a>
                                         {% endset %}

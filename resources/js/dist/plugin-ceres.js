@@ -32325,16 +32325,20 @@ Vue.component("add-item-to-basket", {
 
     props: [
         "item",
-        "showQuantity"
+        "showQuantity",
+        "template"
     ],
-
-    template: "#vue-add-item-to-basket",
 
     data: function()
     {
         return {
             quantity: 1
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -32367,10 +32371,9 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    template: "#vue-add-item-to-basket-overlay",
-
     props: [
-        "showOverlay"
+        "showOverlay",
+        "template"
     ],
 
     data: function()
@@ -32379,6 +32382,11 @@ Vue.component("add-item-to-basket-overlay", {
             basketItem: {currentBasketItem: { }},
             timeToClose: 5
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -32459,7 +32467,9 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
 
-    template: "#vue-basket-preview",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -32467,6 +32477,11 @@ Vue.component("basket-preview", {
             basket: {},
             basketItems: []
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -32484,10 +32499,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
 
-    template: "#vue-basket-totals",
-
     props: [
-        "config"
+        "config",
+        "template"
     ],
 
     data: function()
@@ -32495,6 +32509,11 @@ Vue.component("basket-totals", {
         return {
             basket: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -32522,7 +32541,14 @@ Vue.component("basket-totals", {
 },{"services/ResourceService":55}],5:[function(require,module,exports){
 Vue.component("coupon", {
 
-    template: "#vue-coupon"
+    props: [
+        "template"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+    }
 
 });
 
@@ -32531,10 +32557,9 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list", {
 
-    template: "#vue-basket-list",
-
     props: [
-        "size"
+        "size",
+        "template"
     ],
 
     data: function()
@@ -32542,6 +32567,11 @@ Vue.component("basket-list", {
         return {
             basketItems: []
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -32561,12 +32591,11 @@ var ApiService          = require("services/ApiService");
 
 Vue.component("basket-list-item", {
 
-    template: "#vue-basket-list-item",
-
     props: [
         "basketItem",
         "size",
-        "language"
+        "language",
+        "template"
     ],
 
     data: function()
@@ -32578,6 +32607,11 @@ Vue.component("basket-list-item", {
             itemAvailability: "",
             itemCondition: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -32704,9 +32738,16 @@ Vue.component("basket-list-item", {
 },{"services/ApiService":49,"services/ResourceService":55}],8:[function(require,module,exports){
 Vue.component("order-details", {
 
-    template: "#vue-order-details",
+    props: [
+        "orderData",
+        "totalsConfig",
+        "template"
+    ],
 
-    props: ["orderData", "totalsConfig"],
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
 
     computed: {
         orderItems: function()
@@ -32814,7 +32855,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
 
-    template: "#vue-payment-provider-select",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -32829,6 +32872,8 @@ Vue.component("payment-provider-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
     },
 
@@ -32857,15 +32902,21 @@ var NotificationService = require("services/NotificationService");
 
 (function($)
 {
-    Vue.component("placeOrder", {
+    Vue.component("place-order", {
 
-        template: "#vue-place-order",
-
-        props: ["targetContinue"],
+        props: [
+            "targetContinue",
+            "template"
+        ],
 
         data: function()
         {
             return {};
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         methods: {
@@ -32937,7 +32988,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
-    template: "#vue-shipping-profile-select",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -32953,6 +33006,8 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
     },
 
@@ -32978,11 +33033,10 @@ Vue.component("shipping-profile-select", {
 },{"services/ResourceService":55}],12:[function(require,module,exports){
 Vue.component("address-input-group", {
 
-    template: "#vue-address-input-group",
-
     props: [
         "addressData",
-        "defaultCountry"
+        "defaultCountry",
+        "template"
     ],
 
     data: function()
@@ -32999,6 +33053,8 @@ Vue.component("address-input-group", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         if (!this.addressData)
         {
             this.addressData = {};
@@ -33034,12 +33090,11 @@ var AddressService = require("services/AddressService");
 
 Vue.component("address-select", {
 
-    template: "#vue-address-select",
-
     props: [
         "addressList",
         "addressType",
-        "selectedAddressId"
+        "selectedAddressId",
+        "template"
     ],
 
     data: function()
@@ -33060,6 +33115,8 @@ Vue.component("address-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         this.addEventListener();
     },
 
@@ -33317,14 +33374,13 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
 
-    template: "#vue-create-update-address",
-
     props: [
         "addressData",
         "addressModal",
         "addressList",
         "modalType",
-        "addressType"
+        "addressType",
+        "template"
     ],
 
     data: function()
@@ -33332,6 +33388,11 @@ Vue.component("create-update-address", {
         return {
             waiting: false
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -33425,9 +33486,12 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
-    props: ["addressList", "selectedAddressId"],
+    props: [
+        "addressList",
+        "selectedAddressId"
+    ],
 
     data: function()
     {
@@ -33462,9 +33526,12 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-    template: "<address-select v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
-    props: ["addressList", "selectedAddressId"],
+    props: [
+        "addressList",
+        "selectedAddressId"
+    ],
 
     data: function()
     {
@@ -33518,13 +33585,12 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
-    template: "#vue-country-select",
-
     props: [
         "countryList",
         "countryNameMap",
         "selectedCountryId",
-        "selectedStateId"
+        "selectedStateId",
+        "template"
     ],
 
     data: function()
@@ -33541,6 +33607,8 @@ Vue.component("country-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
         this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
 
@@ -33604,12 +33672,11 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("registration", {
 
-    template: "#vue-registration",
-
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false}
+        isSimpleRegistration: {type: Boolean, default: false},
+        template: String
     },
 
     data: function()
@@ -33620,6 +33687,11 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -33708,12 +33780,11 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("login", {
 
-    template: "#vue-login",
-
     props: [
         "modalElement",
         "backlink",
-        "hasToForward"
+        "hasToForward",
+        "template"
     ],
 
     data: function()
@@ -33722,6 +33793,11 @@ Vue.component("login", {
             password: "",
             username: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -33782,10 +33858,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
 
-    template: "#vue-user-login-handler",
-
     props: [
-        "userData"
+        "userData",
+        "template"
     ],
 
     data: function()
@@ -33794,6 +33869,11 @@ Vue.component("user-login-handler", {
             username: "",
             isLoggedIn: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -33854,15 +33934,25 @@ Vue.component("user-login-handler", {
 },{"services/ApiService":49,"services/ResourceService":55}],21:[function(require,module,exports){
 Vue.component("quantity-input", {
 
-    template: "#vue-quantity-input",
-
-    props: ["value", "timeout", "min", "max", "vertical"],
+    props: [
+        "value",
+        "timeout",
+        "min",
+        "max",
+        "vertical",
+        "template"
+    ],
 
     data: function()
     {
         return {
             timeoutHandle: null
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -33943,7 +34033,9 @@ Vue.component("quantity-input", {
 
     Vue.component("variation-image-list", {
 
-        template: "#vue-variation-image-list",
+        props: [
+            "template"
+        ],
 
         data: function()
         {
@@ -33951,6 +34043,11 @@ Vue.component("quantity-input", {
                 currentVariation: {},
                 currentItem     : 0
             };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         ready: function()
@@ -34025,9 +34122,12 @@ var VariationData = {};
 
 Vue.component("variation-select", {
 
-    template: "#vue-variation-select",
-
-    props: ["attributes", "variations", "preselect"],
+    props: [
+        "attributes",
+        "variations",
+        "preselect",
+        "template"
+    ],
 
     data: function()
     {
@@ -34035,6 +34135,11 @@ Vue.component("variation-select", {
             // Collection of currently selected variation attributes.
             selectedAttributes: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -34207,13 +34312,20 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
-    template: "#vue-item-list",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             itemList: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -34228,10 +34340,9 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list-sorting", {
 
-    template: "#vue-item-list-sorting",
-
     props: [
-        "sortData"
+        "sortData",
+        "template"
     ],
 
     data: function()
@@ -34243,6 +34354,8 @@ Vue.component("item-list-sorting", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         this.buildData();
         this.selectedSorting = this.sortData[0];
     },
@@ -34277,7 +34390,9 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-search", {
 
-    template: "#vue-item-search",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -34285,6 +34400,11 @@ Vue.component("item-search", {
             searchString: "",
             itemSearch: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -34314,10 +34434,9 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("items-per-page", {
 
-    template: "#vue-items-per-page",
-
     props: [
-        "paginationValues"
+        "paginationValues",
+        "template"
     ],
 
     data: function()
@@ -34329,6 +34448,8 @@ Vue.component("items-per-page", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("itemSearch", this);
     },
 
@@ -34346,13 +34467,20 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("loading-animation", {
 
-    template: "#vue-loading-animation",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             itemSearch: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -34367,7 +34495,9 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("pagination", {
 
-    template: "#vue-pagination",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -34379,6 +34509,8 @@ Vue.component("pagination", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("itemSearch", this);
         ResourceService.bind("itemList", this);
     },
@@ -34419,10 +34551,9 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
 
-    template: "#vue-account-settings",
-
     props: [
-        "userData"
+        "userData",
+        "template"
     ],
 
     data: function()
@@ -34433,6 +34564,11 @@ Vue.component("account-settings", {
             accountSettingsClass: "",
             accountSettingsModal: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -34528,11 +34664,10 @@ var ValidationService   = require("services/ValidationService");
 
 Vue.component("bank-data-select", {
 
-    template: "#vue-bank-data-select",
-
     props: [
         "userBankData",
-        "contactId"
+        "contactId",
+        "template"
     ],
 
     data: function()
@@ -34546,6 +34681,11 @@ Vue.component("bank-data-select", {
             doUpdate: null,
             headline : ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -34785,13 +34925,12 @@ var ApiService = require("services/ApiService");
 {
     Vue.component("order-history", {
 
-        template: "#vue-order-history",
-
         props: [
             "orderList",
             "itemsPerPage",
             "showFirstPage",
-            "showLastPage"
+            "showLastPage",
+            "template"
         ],
 
         data: function()
@@ -34803,6 +34942,11 @@ var ApiService = require("services/ApiService");
                 countEnd: 0,
                 currentOrder: null
             };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         ready: function()
@@ -34864,10 +35008,9 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 
-    template: "#vue-notifications",
-
     props: [
-        "initialNotifications"
+        "initialNotifications",
+        "template"
     ],
 
     data: function()
@@ -34875,6 +35018,11 @@ Vue.component("notifications", {
         return {
             notifications: []
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -34934,11 +35082,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
 
-    template: "#vue-shipping-country-select",
-
-    props:
-    [
-        "countryFlagPrefix"
+    props: [
+        "countryFlagPrefix",
+        "template"
     ],
 
     data: function()
@@ -34950,6 +35096,8 @@ Vue.component("shipping-country-select", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
 
         for (var i in this.localization.activeShippingCountries)
@@ -34966,11 +35114,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shop-language-select", {
 
-    template: "#vue-shop-language-select",
-
-    props:
-    [
-        "countryFlagPrefix"
+    props: [
+        "countryFlagPrefix",
+        "template"
     ],
 
     data: function()
@@ -34983,6 +35129,8 @@ Vue.component("shop-language-select", {
 
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("localization", this);
 
         for (var i in this.localization.activeShopLanguageList)
@@ -35013,13 +35161,22 @@ var WaitScreenService = require("services/WaitScreenService");
 
 Vue.component("wait-screen", {
 
-    template: "#vue-wait-screen",
+    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
 
-    data    : function()
+    props: [
+        "template"
+    ],
+
+    data: function()
     {
         return {
             overlay: WaitScreenService.getOverlay()
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     computed: {
