@@ -1,5 +1,7 @@
 {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
 
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCeres.item.name") %}
 {% set itemData = config("PluginCeres.item.data")|split(', ') %}
@@ -68,6 +70,8 @@
                 {{ item.variationBase.variationName }}
             </a>
             <div class="thumb-meta">
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices") }}
+
                 <div class="prices">
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
                     and item.variationRecommendedRetailPrice.price != '' %}
@@ -80,6 +84,8 @@
                         {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                     </div>
                 </div>
+
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices") }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->

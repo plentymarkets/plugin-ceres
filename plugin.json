@@ -219,6 +219,16 @@
             "key"           : "Template.Style",
             "name"          : "Template: Style for Ceres - experimental -",
             "description"   : "Add style to ceres with a plugin"
+        },
+        {
+            "key"           : "CategoryItem.BeforePrices",
+            "name"          : "Category Item: Before prices container",
+            "description"   : "Add content before the prices in category item"
+        },
+        {
+            "key"           : "CategoryItem.AfterPrices",
+            "name"          : "Category Item: After prices container",
+            "description"   : "Add content after the prices in category item"
         }
     ],
     "dataProviders"     : []
