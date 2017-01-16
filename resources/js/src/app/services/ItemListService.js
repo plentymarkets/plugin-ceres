@@ -33,7 +33,7 @@ module.exports = (function($)
 
             return ApiService.get("/rest/item/search", {
                 searchParams: searchParams,
-                template    : "PluginCeres::ItemList.Components.ItemListView"
+                template    : "PluginCeres::ItemList.ItemListView"
             })
                 .done(function(response)
                 {
