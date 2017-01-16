@@ -80,6 +80,7 @@ Vue.component("address-select", {
                 {
                     this.selectedAddress = this.addressList[index];
                     isSelectedAddressSet = true;
+                    this.$dispatch("address-changed", this.selectedAddress);
                 }
             }
 
