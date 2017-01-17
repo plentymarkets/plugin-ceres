@@ -9,10 +9,6 @@
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
-    "runOnBuild"        :
-    [
-      "Ceres\\Migrations\\CategoriesMigration"
-    ],
     "containers"        :
     [
         {
