@@ -1,11 +1,11 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 
 {% block PageBody %}
     <div class="anmeldung container-max">
         <div class="row m-b-3">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                 <h1 class="m-b-3">{{ trans("PluginCeres::Template.accLogin") }}</h1>
-                <login backlink="{{ request.get("backlink") }}" has-to-forward="true"></login>
+                <login template="#vue-login" backlink="{{ request.get("backlink") }}" has-to-forward="true"></login>
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">

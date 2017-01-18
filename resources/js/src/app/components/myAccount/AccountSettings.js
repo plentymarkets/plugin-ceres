@@ -4,10 +4,9 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
 
-    template: "#vue-account-settings",
-
     props: [
-        "userData"
+        "userData",
+        "template"
     ],
 
     data: function()
@@ -18,6 +17,11 @@ Vue.component("account-settings", {
             accountSettingsClass: "",
             accountSettingsModal: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**

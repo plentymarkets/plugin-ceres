@@ -9,13 +9,22 @@ var WaitScreenService = require("services/WaitScreenService");
 
 Vue.component("wait-screen", {
 
-    template: "#vue-wait-screen",
+    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
 
-    data    : function()
+    props: [
+        "template"
+    ],
+
+    data: function()
     {
         return {
             overlay: WaitScreenService.getOverlay()
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     computed: {

@@ -3,10 +3,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
 
-    template: "#vue-user-login-handler",
-
     props: [
-        "userData"
+        "userData",
+        "template"
     ],
 
     data: function()
@@ -15,6 +14,11 @@ Vue.component("user-login-handler", {
             username: "",
             isLoggedIn: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
