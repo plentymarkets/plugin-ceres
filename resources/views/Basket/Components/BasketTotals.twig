@@ -47,10 +47,10 @@
                 </dd>
                 {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterVat") }}
 
-                <dt>
+                <dt v-show="basket.couponCode">
                     <strong>{{ trans("PluginCeres::Template.basketCoupon") }}</strong>
                 </dt><!--
-                --><dd>
+                --><dd v-show="basket.couponCode">
                     <strong>${ basket.couponDiscount | currency }</strong>
                 </dd>
 

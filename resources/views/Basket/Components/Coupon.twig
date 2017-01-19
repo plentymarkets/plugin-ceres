@@ -1,15 +1,11 @@
 <script type="x/template" id="vue-coupon">
     <div class="cmp cmp-coupon">
 
-        <div v-show="basket.couponCode">
-            <p>${ basket.couponCode }</p>
-            <button class="btn btn-primary" type="button" @click="removeCode()">Remove Code</button>
-        </div>
-
-        <div class="input-group" v-show="!basket.couponCode">
-            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("PluginCeres::Template.generalEnterCoupon") }}">
+        <div class="input-group">
+            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("PluginCeres::Template.generalEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" @click="redeemCode()">{{ trans("PluginCeres::Template.generalRedeem") }}</button>
+                <button class="btn btn-primary" type="button" @click="redeemCode()" :disabled="waiting" v-if="!basket.couponCode">{{ trans("PluginCeres::Template.generalRedeem") }}</button>
+                <button class="btn btn-danger" type="button" @click="removeCode()" :disabled="waiting" v-else>{{ trans("PluginCeres::Template.generalRedeem") }}</button>
             </span>
         </div>
     </div>
