@@ -81,7 +81,7 @@ Vue.component("variation-select", {
                     {
                         // get variation data from remote
                         ApiService
-                            .get("/rest/variations/" + variationId)
+                            .get("/rest/io/variations/" + variationId)
                             .done(function(response)
                             {
                                 // store received variation data for later reuse

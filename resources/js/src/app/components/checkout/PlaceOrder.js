@@ -32,11 +32,11 @@ var ResourceService = require("services/ResourceService");
             {
                 this.waiting = true;
 
-                var self = this;
-
-                ApiService.post("/rest/checkout/payment")
+                ApiService.post("/rest/io/checkout/payment")
                     .done(function(response)
                     {
+                        var self = this;
+
                         var paymentType = response.type || "errorCode";
                         var paymentValue = response.value || "";
 

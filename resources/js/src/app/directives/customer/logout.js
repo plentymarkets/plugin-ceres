@@ -8,7 +8,7 @@ Vue.directive("logout", function()
     $(this.el).click(
         function(event)
         {
-            ApiService.post("/rest/customer/logout")
+            ApiService.post("/rest/io/customer/logout")
                 .done(
                     function(response)
                     {
