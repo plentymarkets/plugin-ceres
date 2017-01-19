@@ -70,7 +70,7 @@
                 {{ item.variationBase.variationName }}
             </a>
             <div class="thumb-meta">
-                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices") }}
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices", item) }}
 
                 <div class="prices">
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices") }}
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices", item) }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->
