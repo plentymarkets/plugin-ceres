@@ -1,60 +1,79 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
 
 (function($)
 {
-    Vue.component("placeOrder", {
+    Vue.component("place-order", {
 
-        template: "#vue-place-order",
-
-        props: ["targetContinue"],
+        props: [
+            "targetContinue",
+            "template"
+        ],
 
         data: function()
         {
-            return {};
+            return {
+                waiting: false,
+                checkout: {}
+            };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
+
+            ResourceService.bind("checkout", this);
         },
 
         methods: {
 
             preparePayment: function()
             {
-                var self = this;
+                this.waiting = true;
 
-                ApiService.post("/rest/io/checkout/payment").done(function(response)
-                {
-                    var paymentType = response.type || "errorCode";
-                    var paymentValue = response.value || "";
-
-                    switch (paymentType)
+                ApiService.post("/rest/io/checkout/payment")
+                    .done(function(response)
                     {
-                    case "continue":
-                        var target = self.targetContinue;
+                        var self = this;
 
-                        if (target)
+                        var paymentType = response.type || "errorCode";
+                        var paymentValue = response.value || "";
+
+                        switch (paymentType)
                         {
-                            window.location.assign(target);
-                        }
-                        break;
-                    case "redirectUrl":
-                        // redirect to given payment provider
-                        window.location.assign(paymentValue);
-                        break;
-                    case "externalContentUrl":
-                        // show external content in iframe
-                        self.showModal(paymentValue, true);
-                        break;
-                    case "htmlContent":
-                        self.showModal(paymentValue, false);
-                        break;
+                        case "continue":
+                            var target = self.targetContinue;
 
-                    case "errorCode":
-                        NotificationService.error(paymentValue);
-                        break;
-                    default:
-                        NotificationService.error("Unknown response from payment provider: " + paymentType);
-                        break;
-                    }
-                });
+                            if (target)
+                            {
+                                window.location.assign(target);
+                            }
+                            break;
+                        case "redirectUrl":
+                            // redirect to given payment provider
+                            window.location.assign(paymentValue);
+                            break;
+                        case "externalContentUrl":
+                            // show external content in iframe
+                            self.showModal(paymentValue, true);
+                            break;
+                        case "htmlContent":
+                            self.showModal(paymentValue, false);
+                            break;
+
+                        case "errorCode":
+                            NotificationService.error(paymentValue);
+                            break;
+                        default:
+                            NotificationService.error("Unknown response from payment provider: " + paymentType);
+                            break;
+                        }
+                    })
+                    .fail(function(response)
+                    {
+                        this.waiting = false;
+                    });
             },
 
             showModal: function(content, isExternalContent)
@@ -73,6 +92,18 @@ var NotificationService = require("services/NotificationService");
 
                 $modal.modal("show");
 
+            }
+        },
+
+        computed:
+        {
+            waitingForInput: function()
+            {
+                var addressIsNotSet = this.checkout.billingAddressId === 0 || this.checkout.billingAddressId === "0";
+                var shippingIsNotSet = this.checkout.shippingProfileId === 0 || this.checkout.shippingProfileId === "0";
+                var paymentIsNotSet = this.checkout.methodOfPaymentId === 0 || this.checkout.methodOfPaymentId === "0";
+
+                return addressIsNotSet || shippingIsNotSet || paymentIsNotSet;
             }
         }
     });

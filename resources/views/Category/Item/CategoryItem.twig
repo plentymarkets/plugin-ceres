@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 
 {% set itemSort             = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) | split('_') %}
 {% set orderBy              = itemSort[0] %}
@@ -23,18 +23,14 @@
         <div class="row m-t-1">
             <div class="col-xs-12">
                 <h1 class="h4">{{ category.details.first.name }}</h1>
-                <hr class="hidden-sm-down">
             </div>
         </div>
-        <div class="row m-b-3">
-            {#<div class="col-xs-12 col-lg-9">#}
-                {#{% include "PluginCeres::Category.Item.Partials.CategoryViewFilter" %}#}
-            {#</div>#}
+        <div class="m-b-3">
             {% include "PluginCeres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
         </div>
 
         <div class="col-xs-12">
-            <hr class="m-b-1 hidden-sm-down">
+
             <ul class="product-list row grid">
                 {% for item in itemList %}
                     <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -42,10 +38,10 @@
                     </li>
                 {% endfor %}
             </ul>
-            <hr class="m-y-2">
+
         </div>
     </div>
-    <div class="list-controls m-b-3 row">
+    <div class="list-controls m-b-3">
         <div class="col-xs-12">
             {% include "PluginCeres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
         </div>

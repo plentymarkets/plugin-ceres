@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 {% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PageBody %}
@@ -75,7 +75,7 @@
 
                             {{ LayoutContainer.show("PluginCeres::Checkout.BeforeShippingProfileList") }}
                             <div class="shipping-method-select">
-                                <shipping-profile-select></shipping-profile-select>
+                                <shipping-profile-select template="#vue-shipping-profile-select"></shipping-profile-select>
                             </div>
                             {{ LayoutContainer.show("PluginCeres::Checkout.AfterShippingProfileList") }}
                         {% else %}
@@ -90,7 +90,7 @@
 
                             {{ LayoutContainer.show("PluginCeres::Checkout.BeforePaymentList") }}
                             <div class="payment-method-select">
-                                <payment-provider-select></payment-provider-select>
+                                <payment-provider-select template="#vue-payment-provider-select"></payment-provider-select>
                             </div>
                             {{ LayoutContainer.show("PluginCeres::Checkout.AfterPaymentList") }}
                         {% else %}
@@ -104,12 +104,12 @@
                     <aside class="sidebar">
                         <div class="cmp cmp-checkout-sidebar">
                             <div class="cmp cmp-basket-preview-list">
-                                <basket-list size="small"></basket-list>
+                                <basket-list template="#vue-basket-list" size="small"></basket-list>
                             </div>
                             <hr>
-                            <coupon></coupon>
+                            <coupon template="#vue-coupon"></coupon>
                             <hr>
-                            <basket-totals :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+                            <basket-totals template="#vue-basket-totals" :config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
                         </div>
                     </aside>
                 </div>
@@ -125,24 +125,20 @@
                                 <label class="form-check-label" for="agb-accept">
                                     <input class="form-check-input" type="checkbox" value="" id="agb-accept">
                                     {% autoescape false %}
-                                        {% set terms = services.category.get(config('PluginCeres.global.category.terms_and_conditions')) %}
-                                        {% set rights = services.category.get(config('PluginCeres.global.category.cancellation_rights')) %}
-                                        {% set policy = services.category.get(config('PluginCeres.global.category.privacy_policy')) %}
-
                                         {% set gtcContent %}
-                                            <a href="{{ services.category.getURL( terms ) }}" target="_blank">
+                                            <a href="/terms-conditions" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>
                                             </a>
                                         {% endset %}
 
                                         {% set cancellationContent %}
-                                            <a href="{{ services.category.getURL( rights ) }}" target="_blank">
+                                            <a href="/cancellation-rights" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>
                                             </a>
                                         {% endset %}
 
                                         {% set policyContent %}
-                                            <a href="{{ services.category.getURL( policy ) }}" target="_blank">
+                                            <a href="/privacy-policy" target="_blank">
                                                 <strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>
                                             </a>
                                         {% endset %}
@@ -154,7 +150,7 @@
                             {{ LayoutContainer.show("PluginCeres::Checkout.OptIns") }}
                         </div>
                         <div class="col-xs-12 col-sm-5">
-                            <place-order target-continue="/place-order"></place-order>
+                            <place-order template="#vue-place-order" target-continue="/place-order"></place-order>
                         </div>
                     </div>
                 </div>

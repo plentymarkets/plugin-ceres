@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-place-order">
     <div>
-        <button class="btn btn-primary btn-block" @click="preparePayment()">
+        <button class="btn btn-primary btn-block" @click="preparePayment()" :disabled="waiting || waitingForInput">
             <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("PluginCeres::Template.orderBuyNow") }}
         </button>
 

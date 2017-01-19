@@ -4,12 +4,11 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("login", {
 
-    template: "#vue-login",
-
     props: [
         "modalElement",
         "backlink",
-        "hasToForward"
+        "hasToForward",
+        "template"
     ],
 
     data: function()
@@ -18,6 +17,11 @@ Vue.component("login", {
             password: "",
             username: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {

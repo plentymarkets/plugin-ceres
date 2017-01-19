@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 
 {% block PageBody %}
 
@@ -75,7 +75,7 @@
                 <p class="text-muted small font-italic">{{ trans("PluginCeres::Template.accChangeLoginData") }}</p>
 
                 <div class="card m-b-3">
-                    <account-settings :user-data="{{ userObject }}">
+                    <account-settings template="#vue-account-settings" :user-data="{{ userObject }}">
                         <account-settings>
                 </div>
             </div>
@@ -87,7 +87,7 @@
 
 
                 <p class="text-muted small font-italic">{{ trans("PluginCeres::Template.accChangePaymentInformation") }}</p>
-                <bank-data-select :user-bank-data="{{ userBankData }}"
+                <bank-data-select template="#vue-bank-data-select" :user-bank-data="{{ userBankData }}"
                                   contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
 
             </div>
@@ -103,6 +103,7 @@
         {% set ordersPerPage = 5 %}
     {% endif %}
     <order-history
+            template="#vue-order-history"
             :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
             :items-per-page="{{ ordersPerPage }}"
             :show-first-page="{{ config('PluginCeres.pagination.showFirstPage') }}"

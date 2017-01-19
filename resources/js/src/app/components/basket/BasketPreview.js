@@ -2,7 +2,9 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
 
-    template: "#vue-basket-preview",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -10,6 +12,11 @@ Vue.component("basket-preview", {
             basket: {},
             basketItems: []
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**

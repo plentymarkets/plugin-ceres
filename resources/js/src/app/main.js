@@ -1,7 +1,3 @@
-vueApp = new Vue({
-    el: "body"
-});
-
 // Frontend end scripts
 
 (function($, window, document)
