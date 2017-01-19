@@ -6,7 +6,7 @@
             <button class="btn btn-primary" type="button" @click="removeCode()">Remove Code</button>
         </div>
 
-        <div class="input-group">
+        <div class="input-group" v-show="!basket.couponCode">
             <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("PluginCeres::Template.generalEnterCoupon") }}">
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="button" @click="redeemCode()">{{ trans("PluginCeres::Template.generalRedeem") }}</button>
