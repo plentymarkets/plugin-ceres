@@ -1,5 +1,6 @@
 {% extends getPartial('page-design') %}
 
+
 {% set itemSort             = request.get("itemSorting") | default( config('PluginCeres.sort.defaultSorting') ) | split('_') %}
 {% set orderBy              = itemSort[0] %}
 {% set orderByKey           = itemSort[1] | default('ASC') %}
