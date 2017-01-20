@@ -5,14 +5,14 @@ var ResourceService = require("services/ResourceService");
 module.exports = (function($)
 {
     var searchParams =
-        {
-            searchString: "",
-            itemsPerPage: 20,
-            orderBy     : "itemName",
-            orderByKey  : "ASC",
-            page        : 1,
-            isLoading   : false
-        };
+    {
+        searchString: "",
+        itemsPerPage: 20,
+        orderBy     : "itemName",
+        orderByKey  : "ASC",
+        page        : 1,
+        isLoading   : false
+    };
 
     return {
         setSearchString: setSearchString,
@@ -31,9 +31,8 @@ module.exports = (function($)
             ResourceService.getResource("itemList").set({});
             _setIsLoading(true);
 
-            return ApiService.get("/rest/item/search", {
-                searchParams: searchParams,
-                template    : "PluginCeres::ItemList.ItemListView"
+            return ApiService.get("/rest/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
+                template: "PluginCeres::ItemList.ItemListView"
             })
                 .done(function(response)
                 {
