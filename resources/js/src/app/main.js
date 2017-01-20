@@ -1,6 +1,6 @@
 // Frontend end scripts
-
-(function($, window, document)
+// eslint-disable-next-line
+var init = (function($, window, document)
 {
 
     function CallistoMain()
@@ -89,7 +89,6 @@
         }
 
         // lazyload for articles
-
         $("img.lazy").show().lazyload({
             effect : "fadeIn"
         });
