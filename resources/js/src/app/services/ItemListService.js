@@ -31,7 +31,7 @@ module.exports = (function($)
             ResourceService.getResource("itemList").set({});
             _setIsLoading(true);
 
-            return ApiService.get("/rest/item/search", searchParams)
+            return ApiService.get("/rest/io/item/search", searchParams)
                 .done(function(response)
                 {
                     _setIsLoading(false);

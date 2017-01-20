@@ -72,7 +72,7 @@ var ApiService = require("services/ApiService");
                 }
 
                 ApiService
-                    .get("rest/order?page=" + page + "&items=" + this.itemsPerPage)
+                    .get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage)
                     .done(function(response)
                     {
                         self.setOrders(response);
