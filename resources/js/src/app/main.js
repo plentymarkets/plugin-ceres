@@ -1,10 +1,6 @@
-vueApp = new Vue({
-    el: "body"
-});
-
 // Frontend end scripts
-
-(function($, window, document)
+// eslint-disable-next-line
+var init = (function($, window, document)
 {
 
     function CallistoMain()
@@ -93,7 +89,6 @@ vueApp = new Vue({
         }
 
         // lazyload for articles
-
         $("img.lazy").show().lazyload({
             effect : "fadeIn"
         });

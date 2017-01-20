@@ -4,12 +4,11 @@ var ApiService          = require("services/ApiService");
 
 Vue.component("basket-list-item", {
 
-    template: "#vue-basket-list-item",
-
     props: [
         "basketItem",
         "size",
-        "language"
+        "language",
+        "template"
     ],
 
     data: function()
@@ -21,6 +20,11 @@ Vue.component("basket-list-item", {
             itemAvailability: "",
             itemCondition: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -35,7 +39,7 @@ Vue.component("basket-list-item", {
         {
             var self = this;
 
-            ApiService.get("/rest/item/availability/" + this.basketItem.variation.variationBase.availability)
+            ApiService.get("/rest/io/item/availability/" + this.basketItem.variation.variationBase.availability)
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -59,7 +63,7 @@ Vue.component("basket-list-item", {
         {
             var self = this;
 
-            ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
+            ApiService.get("/rest/io/item/condition/" + this.basketItem.variation.itemBase.condition)
                 .done(function(response)
                 {
                     ApiService.setToken(response);

@@ -4,13 +4,12 @@ var ApiService = require("services/ApiService");
 {
     Vue.component("order-history", {
 
-        template: "#vue-order-history",
-
         props: [
             "orderList",
             "itemsPerPage",
             "showFirstPage",
-            "showLastPage"
+            "showLastPage",
+            "template"
         ],
 
         data: function()
@@ -22,6 +21,11 @@ var ApiService = require("services/ApiService");
                 countEnd: 0,
                 currentOrder: null
             };
+        },
+
+        created: function()
+        {
+            this.$options.template = this.template;
         },
 
         ready: function()
@@ -68,7 +72,7 @@ var ApiService = require("services/ApiService");
                 }
 
                 ApiService
-                    .get("rest/order?page=" + page + "&items=" + this.itemsPerPage)
+                    .get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage)
                     .done(function(response)
                     {
                         self.setOrders(response);

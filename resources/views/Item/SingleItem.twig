@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 {% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set itemData = config("PluginCeres.item.data") | split(', ') %}
@@ -8,6 +8,7 @@
 {% set crossSellingList = services.item.getItemCrossSellingList(item.itemBase.id) %}
 
 {% block PageBody %}
+
     {{ component( "PluginCeres::Item.Components.VariationSelect" ) }}
     {{ component( "PluginCeres::Item.Components.VariationImageList" ) }}
     {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
@@ -18,10 +19,11 @@
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
-                        <variation-image-list></variation-image-list>
+                        <variation-image-list template="#vue-variation-image-list"></variation-image-list>
                     </div>
                 </div>
             </div>
+
             <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
 
@@ -56,7 +58,7 @@
 
                 {% if variations is not null %}
                 <div class="row m-b-1">
-                    <variation-select :attributes="{{ services.item.getAttributeNameMap( item.itemBase.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.variationBase.id }}"></variation-select>
+                    <variation-select template="#vue-variation-select" :attributes="{{ services.item.getAttributeNameMap( item.itemBase.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.variationBase.id }}"></variation-select>
                 </div>
                 {% endif %}
 
@@ -97,7 +99,7 @@
                 <div class="row m-y-1">
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
-                    <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="true"></add-item-to-basket>
+                    <add-item-to-basket template="#vue-add-item-to-basket" :item="{{ item | json_encode() }}" :show-quantity="true"></add-item-to-basket>
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket") }}
                 </div>
@@ -292,4 +294,5 @@
         {#</div>#}
 
     </div>
+
 {% endblock %}

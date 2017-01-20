@@ -1,5 +1,7 @@
 {{ component( "PluginCeres::Basket.Components.AddItemToBasket" ) }}
 
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCeres.item.name") %}
 {% set itemData = config("PluginCeres.item.data")|split(', ') %}
@@ -8,49 +10,21 @@
     <div class="thumb-inner">
         <div class="thumb-background"></div>
 
-        <div class="thumb-extras">
-            <div class="thumb-scroll-cmd scroll-up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-            </div>
-            <ul>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-            </ul>
-            <div class="thumb-scroll-cmd scroll-down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </div>
-        </div>
+        <add-item-to-basket template="#vue-add-item-to-basket" :item="{{ item | json_encode() }}" :show-quantity="false"></add-item-to-basket>
 
-        <div class="thumb-controls">
-            <add-item-to-basket :item="{{ item | json_encode() }}" :show-quantity="false"></add-item-to-basket>
-        </div>
-
-        <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}" class="thumb-image">
+        <div class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    {#<img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}" alt="{{ item.itemDescription.name1 }}"/>#}
-                    <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}"
-                         alt="{{ item.itemDescription.name1 }}"/>
-                    <noscript>
-                        <img class="img-fluid" src="{{ app.request.baseUrl }}/{{ image.path }}"
-                             alt="{{ item.itemDescription.name1 }}"/>
-                    </noscript>
+                    <div>
+                        <div>
+                            <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}">
+                                <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </a>
+        </div>
 
         <!-- STORE SPECIALS -->
 
@@ -96,6 +70,8 @@
                 {{ item.variationBase.variationName }}
             </a>
             <div class="thumb-meta">
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices", item) }}
+
                 <div class="prices">
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData)
                     and item.variationRecommendedRetailPrice.price != '' %}
@@ -108,6 +84,8 @@
                         {{ item.variationRetailPrice.price | formatMonetary(item.variationRetailPrice.currency) }}
                     </div>
                 </div>
+
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices", item) }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->

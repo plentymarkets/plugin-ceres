@@ -4,16 +4,20 @@ Vue.component("add-item-to-basket", {
 
     props: [
         "item",
-        "showQuantity"
+        "showQuantity",
+        "template"
     ],
-
-    template: "#vue-add-item-to-basket",
 
     data: function()
     {
         return {
             quantity: 1
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {

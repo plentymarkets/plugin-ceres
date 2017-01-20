@@ -114,7 +114,7 @@
                                 <h3 class="modal-title">{{ trans("PluginCeres::Template.orderDetails") }}</h3>
                             </div>
                             <div class="modal-body">
-                                <order-details :order-data="currentOrder" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
+                                <order-details template="#vue-order-details" :order-data="currentOrder" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
                             </div>
                         </div>
                     </div>

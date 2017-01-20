@@ -14,7 +14,7 @@
         <!-- BASKET LIST -->
         <div class="p-a-1 list">
           <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
-              <basket-list size="small"></basket-list>
+              <basket-list template="#vue-basket-list" size="small"></basket-list>
           </div>
           <h5 v-else>{{ trans("PluginCeres::Template.orderNoItemsInBasket") }}</h5>
         </div>
@@ -23,7 +23,7 @@
         <!-- BASKET PREVIEW BOTTOM -->
         <div class="p-a-1 bg-faded totals">
 
-            <basket-totals :config="{{ config("PluginCeres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
+            <basket-totals template="#vue-basket-totals" :config="{{ config("PluginCeres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 m-b-1">
