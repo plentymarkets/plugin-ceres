@@ -33272,7 +33272,7 @@ Vue.component("basket-list-item", {
         {
             var self = this;
 
-            ApiService.get("/rest/item/availability/" + this.basketItem.variation.variationBase.availability)
+            ApiService.get("/rest/io/item/availability/" + this.basketItem.variation.variationBase.availability)
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -33296,7 +33296,7 @@ Vue.component("basket-list-item", {
         {
             var self = this;
 
-            ApiService.get("/rest/item/condition/" + this.basketItem.variation.itemBase.condition)
+            ApiService.get("/rest/io/item/condition/" + this.basketItem.variation.itemBase.condition)
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -33577,11 +33577,11 @@ var ResourceService = require("services/ResourceService");
             {
                 this.waiting = true;
 
-                var self = this;
-
-                ApiService.post("/rest/checkout/payment")
+                ApiService.post("/rest/io/checkout/payment")
                     .done(function(response)
                     {
+                        var self = this;
+
                         var paymentType = response.type || "errorCode";
                         var paymentValue = response.value || "";
 
@@ -34393,7 +34393,7 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
-            ApiService.post("/rest/customer", userObject)
+            ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -34488,7 +34488,7 @@ Vue.component("login", {
         {
             var self = this;
 
-            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+            ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -34869,7 +34869,7 @@ Vue.component("variation-select", {
                     {
                         // get variation data from remote
                         ApiService
-                            .get("/rest/variations/" + variationId)
+                            .get("/rest/io/variations/" + variationId)
                             .done(function(response)
                             {
                                 // store received variation data for later reuse
@@ -35285,7 +35285,7 @@ Vue.component("account-settings", {
 
             if (this.newPassword !== "" && (this.newPassword === this.confirmPassword))
             {
-                APIService.post("/rest/customer/password", {password: this.newPassword})
+                APIService.post("/rest/io/customer/password", {password: this.newPassword})
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
@@ -35469,7 +35469,7 @@ Vue.component("bank-data-select", {
 
             this.updateBankData.lastUpdateBy = "customer";
 
-            ApiService.put("/rest/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
+            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
                 .done(function(response)
                 {
                     _self.userBankData.splice(_self.updateBankIndex, 1, response);
@@ -35496,7 +35496,7 @@ Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
             this.updateBankData.contactId = this.contactId;
 
-            ApiService.post("/rest/customer/bank_data", this.updateBankData)
+            ApiService.post("/rest/io/customer/bank_data", this.updateBankData)
                 .done(function(response)
                 {
                     _self.userBankData.push(response);
@@ -35520,7 +35520,7 @@ Vue.component("bank-data-select", {
         {
             var _self = this;
 
-            ApiService.delete("/rest/customer/bank_data/" + this.updateBankData.id)
+            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id)
                 .done(function(response)
                 {
                     _self.checkBankDataSelection(false);
@@ -35665,7 +35665,7 @@ var ApiService = require("services/ApiService");
                 }
 
                 ApiService
-                    .get("rest/order?page=" + page + "&items=" + this.itemsPerPage)
+                    .get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage)
                     .done(function(response)
                     {
                         self.setOrders(response);
@@ -35874,7 +35874,7 @@ Vue.directive("logout", function()
     $(this.el).click(
         function(event)
         {
-            ApiService.post("/rest/customer/logout")
+            ApiService.post("/rest/io/customer/logout")
                 .done(
                     function(response)
                     {
@@ -36483,7 +36483,7 @@ module.exports = (function($)
      */
     function createAddress(address, addressType, setActive)
     {
-        return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
+        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
         {
             if (setActive)
             {
@@ -36508,7 +36508,7 @@ module.exports = (function($)
     function updateAddress(newData, addressType)
     {
         addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
     }
 
     /**
@@ -36519,7 +36519,7 @@ module.exports = (function($)
      */
     function deleteAddress(addressId, addressType)
     {
-        return ApiService.delete("rest/customer/address/" + addressId + "?typeId=" + addressType);
+        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
     }
 })(jQuery);
 
@@ -36556,7 +36556,7 @@ module.exports = (function($)
             }
             else
             {
-                initPromise = ApiService.get("/rest/checkout").done(function(response)
+                initPromise = ApiService.get("/rest/io/checkout").done(function(response)
                 {
                     checkout = response;
                 });
@@ -36568,7 +36568,7 @@ module.exports = (function($)
     function _set(property, value)
     {
         checkout[property] = value;
-        return ApiService.post("/rest/checkout/", checkout).done(function(response)
+        return ApiService.post("/rest/io/checkout/", checkout).done(function(response)
         {
             checkout = response;
         });
@@ -36583,7 +36583,7 @@ module.exports = (function($)
             checkout[properties[i]] = checkoutData[properties[i]];
         }
 
-        return ApiService.post("/rest/checkout/", checkout).done(function(response)
+        return ApiService.post("/rest/io/checkout/", checkout).done(function(response)
         {
             checkout = response;
         });
@@ -36741,7 +36741,7 @@ module.exports = (function($)
             ResourceService.getResource("itemList").set({});
             _setIsLoading(true);
 
-            return ApiService.get("/rest/item/search", searchParams)
+            return ApiService.get("/rest/io/item/search", searchParams)
                 .done(function(response)
                 {
                     _setIsLoading(false);
@@ -37977,8 +37977,8 @@ module.exports = (function($)
 
 
 // Frontend end scripts
-
-(function($, window, document)
+// eslint-disable-next-line
+var init = (function($, window, document)
 {
 
     function CallistoMain()
@@ -38067,7 +38067,6 @@ module.exports = (function($)
         }
 
         // lazyload for articles
-
         $("img.lazy").show().lazyload({
             effect : "fadeIn"
         });
