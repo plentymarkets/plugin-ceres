@@ -211,6 +211,26 @@
             "description"   : "Add content to opt-in checkboxes in the checkout."
         },
         {
+            "key"           : "Checkout.BeforeBasketTotals",
+            "name"          : "Checkout: Before basket totals",
+            "description"   : "Add content before the basket totals in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterBasketTotals",
+            "name"          : "Checkout: After basket totals",
+            "description"   : "Add content after the basket totals in the checkout."
+        },
+        {
+            "key"           : "Checkout.BeforePlaceOrder",
+            "name"          : "Checkout: Before place order",
+            "description"   : "Add content before the place order in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterPlaceOrder",
+            "name"          : "Checkout: After place order",
+            "description"   : "Add content after the place order in the checkout."
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page.",

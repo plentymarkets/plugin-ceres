@@ -62,7 +62,7 @@
                 </div>
                 {% endif %}
 
-                {{ LayoutContainer.show("PluginCeres::SingleItem.BeforePrice") }}
+                {{ LayoutContainer.show("PluginCeres::SingleItem.BeforePrice", item) }}
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="variationRecommendedRetailPrice.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="variationRecommendedRetailPrice.price" :filters="['currency']">
@@ -88,7 +88,7 @@
                     </span>
                 </div>
                 {% endfor %}
-                {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice") }}
+                {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice", item) }}
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="variationBase.availability == {{ availability.id }}">
@@ -98,10 +98,10 @@
 
                 <div class="row m-y-1">
 
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket", item) }}
                     <add-item-to-basket template="#vue-add-item-to-basket" :item="{{ item | json_encode() }}" :show-quantity="true"></add-item-to-basket>
 
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket") }}
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket", item) }}
                 </div>
 
                 <div class="row">
