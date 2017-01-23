@@ -12,6 +12,11 @@
     "containers"        :
     [
         {
+            "key"           : "Template.Style",
+            "name"          : "Template: Style",
+            "description"   : "Add style to Ceres with a theme plugin"
+        },
+        {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
             "description"   : "Add a logo of the payment method to the payment methods on the homepage"
@@ -210,11 +215,6 @@
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page.",
             "multiple"      : false
-        },
-        {
-            "key"           : "Template.Style",
-            "name"          : "Template: Style for Ceres - experimental -",
-            "description"   : "Add style to ceres with a plugin"
         },
         {
             "key"           : "CategoryItem.BeforePrices",
