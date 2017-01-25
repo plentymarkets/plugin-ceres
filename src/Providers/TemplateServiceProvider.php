@@ -3,6 +3,7 @@ namespace Ceres\Providers;
 
 
 use IO\Extensions\Functions\Partial;
+use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\TemplateContainer;
 use Plenty\Plugin\ServiceProvider;
