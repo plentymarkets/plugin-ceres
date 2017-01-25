@@ -41,9 +41,7 @@ class TemplateServiceProvider extends ServiceProvider
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
 
-        $eventDispatcher->listen(
-            'IO.tpl.*',
-            function (TemplateContainer $templateContainer) {
+        $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer) {
                 $templateContainer->setTemplate('PluginCeres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
             },
             self::EVENT_LISTENER_PRIORITY
