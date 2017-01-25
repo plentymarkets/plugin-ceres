@@ -5,14 +5,14 @@ var ResourceService = require("services/ResourceService");
 module.exports = (function($)
 {
     var searchParams =
-    {
-        searchString: "",
-        itemsPerPage: 20,
-        orderBy     : "itemName",
-        orderByKey  : "ASC",
-        page        : 1,
-        isLoading   : false
-    };
+        {
+            searchString: "",
+            itemsPerPage: 20,
+            orderBy     : "itemName",
+            orderByKey  : "ASC",
+            page        : 1,
+            isLoading   : false
+        };
 
     return {
         setSearchString: setSearchString,

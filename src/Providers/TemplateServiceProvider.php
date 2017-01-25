@@ -17,9 +17,10 @@ use Plenty\Plugin\ConfigRepository;
  */
 class TemplateServiceProvider extends ServiceProvider
 {
-    const EVENT_LISTENER_PRIORITY = 0;
+    const EVENT_LISTENER_PRIORITY = 100;
 
     private static $templateKeyToViewMap = [
+        'tpl.home'               => 'Homepage.Homepage',                // provide template to use for homepage
         'tpl.category.content'   => 'Category.Content.CategoryContent', // provide template to use for content categories
         'tpl.category.item'      => 'Category.Item.CategoryItem',       // provide template to use for item categories
         'tpl.category.blog'      => 'PageDesign.PageDesign',            // provide template to use for blog categories
@@ -33,6 +34,12 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.register'           => 'Customer.Register',                // provide template to use for register
         'tpl.guest'              => 'Customer.Guest',                   // provide template to use for guest
         'tpl.search'             => 'ItemList.ItemListView',            // provide template to use for item search
+        'tpl.cancellation-rights'=> 'StaticPages.CancellationRights',   // provide template to use for cancellation rights
+        'tpl.legal-disclosure'   => 'StaticPages.LegalDisclosure',      // provide template to use for legal disclosure
+        'tpl.privacy-policy'     => 'StaticPages.PrivacyPolicy',        // provide template to use for privacy policy
+        'tpl.terms-conditions'   => 'StaticPages.TermsAndConditions',   // provide template to use for terms and conditions
+        'tpl.item-not-found'     => 'StaticPages.ItemNotFound',         // provide template to use for item not found
+        'tpl.page-not-found'     => 'StaticPages.PageNotFound'          // provide template to use for page not found
     ];
 
     public function register(){}
@@ -44,109 +51,8 @@ class TemplateServiceProvider extends ServiceProvider
 
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer) {
                 $templateContainer->setTemplate('PluginCeres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
-            },
-            self::EVENT_LISTENER_PRIORITY
-        );
 
-        // provide template to use for homepage
-        $eventDispatcher->listen('tpl.home', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Homepage.Homepage");
-        }, 100);
-
-        // provide template to use for content categories
-        $eventDispatcher->listen('tpl.category.content', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Category.Content.CategoryContent");
-        }, 100);
-
-        // provide template to use for item categories
-        $eventDispatcher->listen('tpl.category.item', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Category.Item.CategoryItem");
-        }, 100);
-
-        // provide template to use for blog categories
-        $eventDispatcher->listen('tpl.category.blog', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
-        }, 100);
-
-        // provide template to use for container categories
-        $eventDispatcher->listen('tpl.category.container', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::PageDesign.PageDesign");
-        }, 100);
-
-        // provide template to use for single items
-        $eventDispatcher->listen('tpl.item', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Item.SingleItem");
-        }, 100);
-
-        // provide template to use for basket
-        $eventDispatcher->listen('tpl.basket', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Basket.Basket");
-        }, 100);
-
-        // provide template to use for checkout
-        $eventDispatcher->listen('tpl.checkout', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Checkout.Checkout");
-        }, 100);
-
-        // provide template to use for my-account
-        $eventDispatcher->listen('tpl.my-account', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::MyAccount.MyAccount");
-        }, 100);
-
-        // provide template to use for confirmation
-        $eventDispatcher->listen('tpl.confirmation', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Checkout.OrderConfirmation");
-        }, 100);
-
-        // provide template to use for login
-        $eventDispatcher->listen('tpl.login', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Login");
-        }, 100);
-
-        // provide template to use for register
-        $eventDispatcher->listen('tpl.register', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Register");
-        }, 100);
-
-        // provide template to use for guest
-        $eventDispatcher->listen('tpl.guest', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::Customer.Guest");
-        }, 100);
-
-        // provide template to use for item search
-        $eventDispatcher->listen('tpl.search', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::ItemList.ItemListView");
-        }, 100);
-
-        // provide template to use for cancellation rights
-        $eventDispatcher->listen('tpl.cancellation-rights', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.CancellationRights");
-        }, 100);
-
-        // provide template to use for legal disclosure
-        $eventDispatcher->listen('tpl.legal-disclosure', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.LegalDisclosure");
-        }, 100);
-
-        // provide template to use for privacy policy
-        $eventDispatcher->listen('tpl.privacy-policy', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.PrivacyPolicy");
-        }, 100);
-
-        // provide template to use for terms and conditions
-        $eventDispatcher->listen('tpl.terms-conditions', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.TermsAndConditions");
-        }, 100);
-
-        // provide template to use for item not found
-        $eventDispatcher->listen('tpl.item-not-found', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.ItemNotFound");
-        }, 100);
-
-        // provide template to use for page not found
-        $eventDispatcher->listen('tpl.page-not-found', function (TemplateContainer $container, $templateData) {
-            $container->setTemplate("PluginCeres::StaticPages.PageNotFound");
-        }, 100);
+        }, self::EVENT_LISTENER_PRIORITY);
 
         // provide mapped category IDs - DEPRECATED?
         $eventDispatcher->listen('init.categories', function (CategoryMap $categoryMap) use (&$config) {
@@ -156,13 +62,14 @@ class TemplateServiceProvider extends ServiceProvider
                 CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCeres.global.category.item_not_found")
             ));
 
-        }, 100);
+        }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial) {
             $partial->set('head', 'PluginCeres::PageDesign.Partials.Head');
             $partial->set('header', 'PluginCeres::PageDesign.Partials.Header.Header');
             $partial->set('footer', 'PluginCeres::PageDesign.Partials.Footer');
             $partial->set('page-design', 'PluginCeres::PageDesign.PageDesign');
-        }, 100);
+
+        }, self::EVENT_LISTENER_PRIORITY);
     }
 }
