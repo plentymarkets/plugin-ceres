@@ -1,0 +1,11 @@
+[
+  "itemId",
+  "texts.name*",
+  "texts.description",
+  "texts.urlPath",
+  "variation.number",
+  "variation.availability.names.name",
+  "variation.itemId",
+  "variation.id",
+  "images.all.urlPreview"
+]
