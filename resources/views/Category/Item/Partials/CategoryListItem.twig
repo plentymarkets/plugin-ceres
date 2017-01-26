@@ -63,7 +63,7 @@
 
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
-            <a href="/{{ item.data.variation.itemId }}/{{ item.data.variation.clientVariationId }}" class="thumb-title small">
+            <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}" class="thumb-title small">
                 {{ item.data.texts[0].name1 }}
             </a>
             <div class="thumb-meta">
