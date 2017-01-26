@@ -31,7 +31,8 @@
   "unit.content",
   "unit.names.name",
 
-  "images.all.path"
+  "images.all.path",
+  "images.all.urlPreview"
 ]
 
 
