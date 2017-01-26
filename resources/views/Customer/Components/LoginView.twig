@@ -5,7 +5,7 @@
 
                 <div v-if="loginMode == 'login'">
                     <h1 class="m-b-3">{{ trans("PluginCeres::Template.accLogin") }}</h1>
-                    <login backlink="{{ request.get("backlink") }}" has-to-forward="true"></login>
+                    <login template="#vue-login" backlink="{{ request.get("backlink") }}" has-to-forward="true"></login>
                 </div>
 
                 <div v-if="loginMode == 'guestLogin'">
