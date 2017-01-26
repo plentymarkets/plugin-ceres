@@ -1,6 +1,7 @@
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
+var ValidationService = require("services/ValidationService");
 
 Vue.component("login", {
 
@@ -27,6 +28,21 @@ Vue.component("login", {
         showLogin: function()
         {
             ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
+
+        validateLogin: function()
+        {
+            var self = this;
+
+            ValidationService.validate($("#login-form-" + this._uid))
+                .done(function()
+                {
+                    self.sendLogin();
+                })
+                .fail(function(invalidFields)
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**

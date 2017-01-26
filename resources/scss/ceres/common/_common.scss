@@ -13,6 +13,10 @@
     @extend .container-fluid;
     max-width: 1200px;
     z-index: auto;
+
+    &.login {
+        margin-top: 2rem;
+    }
 }
 
 
