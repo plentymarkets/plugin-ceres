@@ -32518,7 +32518,7 @@ Vue.component("add-to-basket", {
     computed:
     {
         /**
-         * returns item.variation.categoryVariationId
+         * returns item.variation.id
          */
         variationId: function()
         {
