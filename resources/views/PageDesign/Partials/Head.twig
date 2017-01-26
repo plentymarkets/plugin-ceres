@@ -11,10 +11,7 @@
 <link rel="stylesheet" href="{{ plugin_path('PluginCeres') }}/css/plugin-ceres.css">
 
 <!-- Extend the existing style with a template -->
-{% set styleContent = LayoutContainer.show("PluginCeres::Template.Style") %}
-{% if styleContent|trim is not empty %}
-    {{ styleContent }}
-{% endif %}
+{{ LayoutContainer.show("PluginCeres::Template.Style") }}
 
 <script>
     App = {
