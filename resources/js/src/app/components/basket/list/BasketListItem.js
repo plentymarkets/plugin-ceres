@@ -4,12 +4,11 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list-item", {
 
-    template: "#vue-basket-list-item",
-
     props: [
         "basketItem",
         "size",
-        "language"
+        "language",
+        "template"
     ],
 
     data: function()
@@ -22,7 +21,13 @@ Vue.component("basket-list-item", {
         };
     },
 
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
+
     methods: {
+
         /**
          * Delete item from basket
          */

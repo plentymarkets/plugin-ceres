@@ -1,5 +1,7 @@
 {{ component( "PluginCeres::Basket.Components.AddToBasket" ) }}
 
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set image = item.variationImageList | first %}
 {% set configItemName = config("PluginCeres.item.name") %}
 
@@ -7,47 +9,21 @@
     <div class="thumb-inner">
         <div class="thumb-background"></div>
 
-        <div class="thumb-extras">
-            <div class="thumb-scroll-cmd scroll-up">
-                <i class="fa fa-chevron-up" aria-hidden="true"></i>
-            </div>
-            <ul>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-                <li class="img-contain-container square-container">
-                    <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                </li>
-            </ul>
-            <div class="thumb-scroll-cmd scroll-down">
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </div>
-        </div>
+        <add-to-basket template="#vue-add-to-basket" :item="{{ item | json_encode() }}" :show-quantity="false"></add-to-basket>
 
-        <div class="thumb-controls">
-            <add-to-basket :item="{{ item.data | json_encode() }}" :show-quantity="false"></add-to-basket>
-        </div>
-        <a href="/{{ item.data.variation.itemId }}/{{ item.data.variation.clientVariationId }}" class="thumb-image">
+        <div class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    <img class="img-fluid lazy" data-original="{{ item.data.images.all[0].urlMiddle }}"
-                         alt="{{ item.itemDescription.name1 }}"/>
-                    <noscript>
-                        <img class="img-fluid" src="{{ item.data.images.all[0].urlMiddle }}"
-                             alt="{{ item.data.texts[0].name1 }}"/>
-                    </noscript>
+                    <div>
+                        <div>
+                            <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}">
+                                <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </a>
+        </div>
 
         <!-- STORE SPECIALS -->
 
@@ -91,6 +67,8 @@
                 {{ item.data.texts[0].name1 }}
             </a>
             <div class="thumb-meta">
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices", item) }}
+
                 <div class="prices">
                     {% if item.data.salesPrices[1].price != '0' %}
                         <del class="crossprice">
@@ -104,6 +82,8 @@
                         {#{{ variationRetailPrice | formatMonetary(item.variationRetailPrice.currency) }}#}
                     </div>
                 </div>
+
+                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices", item) }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->

@@ -13,6 +13,7 @@
 
         <div class="col-sm-5">
             <country-select
+                template="#vue-country-select"
                 :selected-country-id.sync="addressData.countryId"
                 :selected-state-id.sync="addressData.stateId"
                 @selected-country-changed="onSelectedCountryChanged"

@@ -3,7 +3,9 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
-    template: "#vue-item-list",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
@@ -14,6 +16,11 @@ Vue.component("item-list", {
     },
 
     created: function()
+    {
+        this.$options.template = this.template;
+    },
+
+    ready: function()
     {
         ResourceService.bind("itemList", this);
         ResourceService.bind("itemSearch", this);

@@ -23,7 +23,7 @@
         </div>
     {% endif %}
 
-    <div class="container-max">
+    <div class="container-max footer-content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
@@ -73,13 +73,6 @@
                                     </li>
                                 {% endif %}
 
-                                {% if i == numberOfCols and config('PluginCeres.global.category.legal_disclosure') not in displayedCategories %}
-                                    <li>
-                                        {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
-                                        <a href="{{ services.category.getURL( cat ) }}">{{ cat.details.first.name }}</a>
-                                    </li>
-                                {% endif %}
-
                             {% endfor %}
 
                         </ul>
@@ -92,7 +85,6 @@
                     {{ LayoutContainer.show("PluginCeres::Footer.RowOne") }}
                 </div>
             </div>
-            <hr class="col-xs-12 hidden-lg-up m-y-2">
             <div class="col-sm-12 col-lg-3">
                 <div class="footer-column row">
                     {% set rowTwo = LayoutContainer.show("PluginCeres::Footer.RowTwo") %}
@@ -116,9 +108,19 @@
 
             {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
             <div class="copyright text-xs-center m-y-1">
-                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
+                <div class="static-link-list">
+                    {% autoescape false %}
+                        <a href="/cancellation-rights">{{ trans("PluginCeres::Template.generalCancellationRight") }}</a>
+                        <a href="/legal-disclosure">{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</a>
+                        <a href="/privacy-policy">{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</a>
+                        <a href="/gtc">{{ trans("PluginCeres::Template.generalGtc") }}</a>
+                    {% endautoescape %}
+                </div>
+                <a href="https://www.plentymarkets.eu">
+                    <img class="plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
+                </a>
                 <br>
-                <small>Powered by plentymarkets</small>
+                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
             </div>
         </div>
     </div>

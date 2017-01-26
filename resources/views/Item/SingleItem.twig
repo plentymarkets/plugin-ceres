@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 {% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set itemData = config("PluginCeres.item.data") | split(', ') %}
@@ -8,6 +8,7 @@
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
 {% block PageBody %}
+
     {{ component( "PluginCeres::Item.Components.VariationSelect" ) }}
     {{ component( "PluginCeres::Item.Components.VariationImageList" ) }}
     {{ component( "PluginCeres::Basket.Components.AddToBasket" ) }}
@@ -19,10 +20,11 @@
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
-                        <variation-image-list></variation-image-list>
+                        <variation-image-list template="#vue-variation-image-list"></variation-image-list>
                     </div>
                 </div>
             </div>
+
             <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
 
@@ -59,11 +61,11 @@
 
                 {% if variations is not null %}
                 <div class="row m-b-1">
-                    <variation-select :attributes="{{ services.item.getAttributeNameMap( item.documents[0].data.item.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
+                    <variation-select template="#vue-variation-select" :attributes="{{ services.item.getAttributeNameMap( item.documents[0].data.item.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
                 </div>
                 {% endif %}
 
-                {{ LayoutContainer.show("PluginCeres::SingleItem.BeforePrice") }}
+                {{ LayoutContainer.show("PluginCeres::SingleItem.BeforePrice", item) }}
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.salesPrices[1].price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.salesPrices.1.price" :filters="['currency']">
@@ -92,7 +94,7 @@
                     </span>
                 </div>
                 {% endfor %}
-                {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice") }}
+                {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice", item) }}
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
@@ -101,10 +103,12 @@
                 {% endfor %}
 
                 <div class="row m-y-1">
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
-                    <add-to-basket :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket") }}
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
+
+                    <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
+
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket", item) }}
                 </div>
 
                 <div class="row">
@@ -296,4 +300,5 @@
         {#</div>#}
 
     </div>
+
 {% endblock %}

@@ -5,12 +5,11 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("login", {
 
-    template: "#vue-login",
-
     props: [
         "modalElement",
         "backlink",
-        "hasToForward"
+        "hasToForward",
+        "template"
     ],
 
     data: function()
@@ -19,6 +18,11 @@ Vue.component("login", {
             password: "",
             username: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -52,7 +56,7 @@ Vue.component("login", {
         {
             var self = this;
 
-            ApiService.post("/rest/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
+            ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
                 {
                     ApiService.setToken(response);

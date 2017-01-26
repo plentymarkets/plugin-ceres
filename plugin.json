@@ -9,12 +9,13 @@
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
-    "runOnBuild"        :
-    [
-      "Ceres\\Migrations\\CategoriesMigration"
-    ],
     "containers"        :
     [
+        {
+            "key"           : "Template.Style",
+            "name"          : "Template: Style",
+            "description"   : "Add style to Ceres with a theme plugin"
+        },
         {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
@@ -210,15 +211,40 @@
             "description"   : "Add content to opt-in checkboxes in the checkout."
         },
         {
+            "key"           : "Checkout.BeforeBasketTotals",
+            "name"          : "Checkout: Before basket totals",
+            "description"   : "Add content before the basket totals in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterBasketTotals",
+            "name"          : "Checkout: After basket totals",
+            "description"   : "Add content after the basket totals in the checkout."
+        },
+        {
+            "key"           : "Checkout.BeforePlaceOrder",
+            "name"          : "Checkout: Before place order",
+            "description"   : "Add content before the place order in the checkout."
+        },
+        {
+            "key"           : "Checkout.AfterPlaceOrder",
+            "name"          : "Checkout: After place order",
+            "description"   : "Add content after the place order in the checkout."
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page.",
             "multiple"      : false
         },
         {
-            "key"           : "Template.Style",
-            "name"          : "Template: Style for Ceres - experimental -",
-            "description"   : "Add style to ceres with a plugin"
+            "key"           : "CategoryItem.BeforePrices",
+            "name"          : "Category Item: Before prices container",
+            "description"   : "Add content before the prices in category item"
+        },
+        {
+            "key"           : "CategoryItem.AfterPrices",
+            "name"          : "Category Item: After prices container",
+            "description"   : "Add content after the prices in category item"
         }
     ],
     "dataProviders"     : []

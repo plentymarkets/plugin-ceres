@@ -6,12 +6,11 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("registration", {
 
-    template: "#vue-registration",
-
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false}
+        isSimpleRegistration: {type: Boolean, default: false},
+        template: String
     },
 
     data: function()
@@ -22,6 +21,11 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {}
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -51,7 +55,7 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
-            ApiService.post("/rest/customer", userObject)
+            ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
                     ApiService.setToken(response);

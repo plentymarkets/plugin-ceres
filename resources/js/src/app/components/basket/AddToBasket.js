@@ -2,11 +2,10 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    template: "#vue-add-to-basket",
-
     props: [
         "item",
-        "showQuantity"
+        "showQuantity",
+        "template"
     ],
 
     data: function()
@@ -14,6 +13,22 @@ Vue.component("add-to-basket", {
         return {
             quantity: 1
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
+
+    computed:
+    {
+        /**
+         * returns item.variation.id
+         */
+        variationId: function()
+        {
+            return this.item.variation.id;
+        }
     },
 
     methods:
@@ -59,17 +74,6 @@ Vue.component("add-to-basket", {
         updateQuantity: function(value)
         {
             this.quantity = value;
-        }
-    },
-
-    computed:
-    {
-        /**
-         * returns item.variation.categoryVariationId
-         */
-        variationId: function()
-        {
-            return this.item.variation.categoryVariationId;
         }
     }
 });

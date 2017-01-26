@@ -33,7 +33,9 @@
 
     Vue.component("variation-image-list", {
 
-        template: "#vue-variation-image-list",
+        props: [
+            "template"
+        ],
 
         data: function()
         {
@@ -44,6 +46,11 @@
         },
 
         created: function()
+        {
+            this.$options.template = this.template;
+        },
+
+        ready: function()
         {
             // (Re-)initialize carousels on each variation change
             ResourceService.watch("currentVariation", function(newValue)

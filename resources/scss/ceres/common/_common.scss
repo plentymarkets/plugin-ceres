@@ -5,9 +5,8 @@
 
 .page-content{
     @extend .p-t-1;
-    background-color: white; 
+    background-color: $gray-lightest;
 }
-
 
 .container-max{
     @extend .container-fluid;
@@ -18,15 +17,6 @@
         margin-top: 2rem;
     }
 }
-
-
-
-
-// .shariff .orientation-horizontal li{
-//     min-width: 0;
-//     max-width: none;
-// }
-
 
 .rating{
     line-height: 1;
@@ -43,9 +33,6 @@
         }
     }
 }
-
-
-
 
 dt {
     font-weight: 400;
