@@ -5,15 +5,8 @@ Vue.component("login-view", {
     data: function()
     {
         return {
-            loginMode: "login"
+            isGuestMode: false
         };
-    },
-
-    methods:
-    {
-        toggleLoginMode: function()
-        {
-            this.loginMode = this.loginMode == "login" ? "guestLogin" : "login";
-        }
     }
+
 });
