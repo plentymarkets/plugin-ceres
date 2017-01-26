@@ -106,7 +106,7 @@
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
 
-                    <add-to-basket template="#vue-add-item-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
+                    <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.AfterAddToBasket", item) }}
                 </div>

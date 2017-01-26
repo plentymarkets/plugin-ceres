@@ -2,11 +2,10 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    template: "#vue-add-to-basket",
-
     props: [
         "item",
-        "showQuantity"
+        "showQuantity",
+        "template"
     ],
 
     data: function()
@@ -14,6 +13,11 @@ Vue.component("add-to-basket", {
         return {
             quantity: 1
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods:

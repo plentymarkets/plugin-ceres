@@ -27,7 +27,9 @@
   "salesPrices.price",
 
   "unit.content",
-  "unit.names.name"
+  "unit.names.name",
+
+  "images.all*"
 ]
 
 
