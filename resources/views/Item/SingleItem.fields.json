@@ -26,11 +26,12 @@
   "texts.technicalData",
 
   "salesPrices.price",
+  "salesPrices.type",
 
   "unit.content",
   "unit.names.name",
 
-  "images.all*"
+  "images.all.path"
 ]
 
 
