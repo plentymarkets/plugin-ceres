@@ -16,7 +16,7 @@
                 <div class="square-inner main-image">
                     <div>
                         <div>
-                            <a href="{{ item.itemBase.id | buildItemURL(item.variationBase.id, true) }}">
+                            <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
                                 <img class="img-fluid lazy" data-original="{{ app.request.baseUrl }}/{{ image.path }}">
                             </a>
                         </div>

@@ -1684,17 +1684,10 @@ Vue.component("login-view", {
     data: function()
     {
         return {
-            loginMode: "login"
+            isGuestMode: false
         };
-    },
-
-    methods:
-    {
-        toggleLoginMode: function()
-        {
-            this.loginMode = this.loginMode == "login" ? "guestLogin" : "login";
-        }
     }
+
 });
 
 },{}],23:[function(require,module,exports){
@@ -6008,7 +6001,7 @@ var init = (function($, window, document)
                 });
         }
         var $toggleListView      = $(".toggle-list-view");
-        var $toggleBasketPreview = $("#toggleBasketPreview");
+        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
         var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
         $toggleBasketPreview.on("click", function(evt)

@@ -5,7 +5,6 @@
   "salesPrices.price",
   "salesPrices.type",
   "texts.name*",
-  "variation.categoryVariationId",
-  "variation.clientVariationId",
-  "variation.itemId"
+  "item.id",
+  "variation.id"
 ]
