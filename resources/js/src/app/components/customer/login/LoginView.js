@@ -1,12 +1,18 @@
 Vue.component("login-view", {
 
-    template: "#vue-login-view",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             isGuestMode: false
         };
-    }
+    },
 
+    created: function()
+    {
+        this.$options.template = this.template;
+    }
 });

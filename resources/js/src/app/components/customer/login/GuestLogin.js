@@ -3,13 +3,20 @@ var ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
-    template: "#vue-guest-login",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             email: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
