@@ -36,9 +36,9 @@ Vue.component("guest-login", {
         sendEMail: function()
         {
             ApiService.post("/rest/io/guest", {email: this.email})
-                .done(function(response)
+                .done(function()
                 {
-                    window.location.href("/checkout");
+                    window.location.href = "/checkout";
                 });
         }
     }
