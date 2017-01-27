@@ -2,7 +2,7 @@
 
 {% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set image = item.variationImageList | first %}
+{% set image = item.data.images.all | first %}
 {% set configItemName = config("PluginCeres.item.name") %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">

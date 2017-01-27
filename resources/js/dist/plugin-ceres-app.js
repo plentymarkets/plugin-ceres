@@ -1547,13 +1547,20 @@ var ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
-    template: "#vue-guest-login",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             email: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -1679,15 +1686,21 @@ Vue.component("login", {
 },{"services/ApiService":54,"services/ModalService":58,"services/NotificationService":59,"services/ValidationService":61}],22:[function(require,module,exports){
 Vue.component("login-view", {
 
-    template: "#vue-login-view",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             isGuestMode: false
         };
-    }
+    },
 
+    created: function()
+    {
+        this.$options.template = this.template;
+    }
 });
 
 },{}],23:[function(require,module,exports){
