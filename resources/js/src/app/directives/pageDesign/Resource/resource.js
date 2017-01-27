@@ -6,14 +6,16 @@ Vue.elementDirective("resource", {
         "name",
         "route",
         "data",
-        "events"
+        "events",
+        "responseTemplate"
     ],
     bind    : function()
     {
         var resource = ResourceService.registerResource(
             this.params.name,
             this.params.route,
-            this.params.data
+            this.params.data,
+            this.params.responseTemplate
         );
         var events = this.params.events || [];
 
@@ -39,14 +41,17 @@ Vue.elementDirective("resource-list", {
         "name",
         "route",
         "data",
-        "events"
+        "events",
+        "responseTemplate"
+
     ],
     bind    : function()
     {
         var resource = ResourceService.registerResourceList(
             this.params.name,
             this.params.route,
-            this.params.data
+            this.params.data,
+            this.params.responseTemplate
         );
         var events = this.params.events || [];
 
