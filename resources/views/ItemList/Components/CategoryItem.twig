@@ -7,20 +7,17 @@
             <div class="thumb-inner">
                 <div class="thumb-background"></div>
 
-                {#<div class="thumb-controls">#}
-                    {#<add-to-basket template="vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>#}
-                {#</div>#}
-
                 <add-to-basket template="#vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>
 
-                <a href="${ itemData | itemURL }" class="thumb-image">
+                <div class="thumb-image">
                     <div class="square-container">
                         <div class="square-inner main-image">
-                            <img class="img-fluid lazy" v-el:lazy-img data-original="${ imageUrls[0] }"
-                                 alt="${ texts | itemName }"/>
+                            <image-carousel
+                                    :image-urls="itemData.images | itemImages imageUrlAccessor"
+                                    :item-url="itemData | itemURL"></image-carousel>
                         </div>
                     </div>
-                </a>
+                </div>
 
                 <!-- STORE SPECIALS -->
                 <item-store-special v-if="storeSpecial" :store-special="storeSpecial"
