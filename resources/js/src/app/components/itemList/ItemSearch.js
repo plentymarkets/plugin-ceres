@@ -45,7 +45,7 @@ Vue.component("item-search", {
             var self = this;
 
             $(".search-input").autocomplete({
-                serviceUrl: "/rest/item/search/autocomplete",
+                serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "searchString",
                 params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),

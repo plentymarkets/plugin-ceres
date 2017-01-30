@@ -7,36 +7,11 @@
             <div class="thumb-inner">
                 <div class="thumb-background"></div>
 
-                <div class="thumb-extras">
-                    <div class="thumb-scroll-cmd scroll-up">
-                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    </div>
-                    <ul>
-                        <li class="img-contain-container square-container">
-                            <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                        </li>
-                        <li class="img-contain-container square-container">
-                            <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                        </li>
-                        <li class="img-contain-container square-container">
-                            <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                        </li>
-                        <li class="img-contain-container square-container">
-                            <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                        </li>
-                        <li class="img-contain-container square-container">
-                            <img class="img-fluid" data-original="{{ plugin_path('PluginCeres') }}/images/100x100.png">
-                        </li>
-                    </ul>
-                    <div class="thumb-scroll-cmd scroll-down">
-                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                    </div>
-                </div>
+                {#<div class="thumb-controls">#}
+                    {#<add-to-basket template="vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>#}
+                {#</div>#}
 
-                <div class="thumb-controls">
-                    <add-to-basket template="vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>
-                </div>
-
+                <add-to-basket template="#vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>
 
                 <a href="${ itemData | itemURL }" class="thumb-image">
                     <div class="square-container">
