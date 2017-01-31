@@ -2,7 +2,7 @@
     <div class="owl-carousel owl-carousel-single" v-el:single>
         <div class="owl_item" v-for="imageUrl in imageUrls">
             <a :href="itemUrl">
-                <item-lazy-img :image-url="imageUrl"></item-lazy-img>
+                <item-lazy-img template="#vue-item-lazy-img" :image-url="imageUrl"></item-lazy-img>
             </a>
         </div>
     </div>

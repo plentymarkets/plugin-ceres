@@ -1,10 +1,14 @@
 Vue.component("item-lazy-img", {
 
-    template: "#vue-item-lazy-img",
-
     props: [
-        "imageUrl"
+        "imageUrl",
+        "template"
     ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
 
     ready: function()
     {

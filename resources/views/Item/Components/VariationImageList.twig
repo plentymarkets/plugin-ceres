@@ -13,9 +13,9 @@
         </div>
 
         <div class="owl-carousel owl-carousel-preview" v-el:preview>
-            {#<div class="owl_item" v-for="image in currentVariation.documents[0].data.images.all" :class="{ 'synced': $index == currentItem }" @click="goTo( $index )">#}
-                {#<img :src="'/' + image.path" class="img-fluid">#}
-            {#</div>#}
+            <div class="owl_item" v-for="image in currentVariation.documents[0].data.images.all" :class="{ 'synced': $index == currentItem }" @click="goTo( $index )">
+                <img :src="'/' + image.path" class="img-fluid">
+            </div>
         </div>
     </div>
 </script>
