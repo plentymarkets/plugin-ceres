@@ -3,10 +3,8 @@
 {% set configItemName = config("PluginCeres.item.name") %}
 
 <script type="x/template" id="vue-item-list">
-    <hr class="m-b-1 hidden-sm-down">
     <ul class="product-list row grid" v-show="!itemSearch.isLoading">
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
-                       decimal-count="{{ decimalCount }}"></category-item>
+                       decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
     </ul>
-    <hr class="m-y-2">
 </script>

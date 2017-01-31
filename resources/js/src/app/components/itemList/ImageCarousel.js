@@ -12,28 +12,14 @@
             ],
             pagination           : false,
             responsiveRefreshRate: 200
-        },
-        PREVIEW: {
-            items                : 8,
-            itemsDesktop         : [1199, 8],
-            itemsDesktopSmall    : [979, 8],
-            itemsTablet          : [768, 6],
-            itemsMobile          : [479, 4],
-            navigation           : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            responsiveRefreshRate: 100
         }
     };
 
-    var ResourceService = require("services/ResourceService");
-
-    Vue.component("variation-image-list", {
+    Vue.component("image-carousel", {
 
         props: [
+            "imageUrls",
+            "itemUrl",
             "template"
         ],
 
@@ -48,21 +34,12 @@
         created: function()
         {
             this.$options.template = this.template;
-
-            // (Re-)initialize carousels on each variation change
-            ResourceService.watch("currentVariation", function(newValue)
-            {
-                this.currentVariation = newValue;
-            }.bind(this));
         },
 
         ready: function()
         {
             // (re-)init big image carousel
             this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
-
-            // (re-)init preview image carousel
-            this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
         },
 
         methods: {
@@ -108,7 +85,6 @@
                 }
             }
         }
-
     });
 
 })(jQuery);
