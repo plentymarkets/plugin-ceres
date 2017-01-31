@@ -12,6 +12,10 @@
     @extend .container-fluid;
     max-width: 1200px;
     z-index: auto;
+
+    &.login {
+        margin-top: 2rem;
+    }
 }
 
 .rating{
@@ -44,6 +48,7 @@ a:active {
     border-left: 1px solid $gray-dark;
 }
 
+
 .carousel-control-next, .carousel-control-prev {
     position: absolute;
     top: 0;
@@ -69,3 +74,8 @@ a:active {
     background: transparent no-repeat center center;
     background-size: 100% 100%;
 }
+
+.pagination > li {
+    cursor: pointer;
+}
+

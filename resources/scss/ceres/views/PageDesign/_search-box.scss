@@ -12,7 +12,6 @@
     display: flex;
     flex: 100;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    margin: .6rem 0;
   }
 
   .search-input {
@@ -42,4 +41,21 @@
       color: darken($brand-primary, 20%);
     }
   }
+}
+
+.autocomplete-suggestions {
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2),0 0 0 1px rgba(0,0,0,0.08);
+  background: #ffffff;
+  overflow: auto;
+}
+
+.autocomplete-suggestion {
+  padding: 5px 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.autocomplete-selected {
+  background: $gray-lighter;
 }

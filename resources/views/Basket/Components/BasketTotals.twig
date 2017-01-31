@@ -47,6 +47,13 @@
                 </dd>
                 {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterVat") }}
 
+                <dt v-show="basket.couponCode">
+                    <strong>{{ trans("PluginCeres::Template.basketCoupon") }}</strong>
+                </dt><!--
+                --><dd v-show="basket.couponCode">
+                    <strong>${ basket.couponDiscount | currency }</strong>
+                </dd>
+
                 <hr>
 
                 {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeTotalSum") }}

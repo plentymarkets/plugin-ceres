@@ -114,7 +114,7 @@ var init = (function($, window, document)
             $("#mainNavbarCollapse").collapse("hide");
         }
 
-        // lazyload for articles
+        // initialize lazyload for articles
         $("img.lazy").show().lazyload({
             effect : "fadeIn"
         });
