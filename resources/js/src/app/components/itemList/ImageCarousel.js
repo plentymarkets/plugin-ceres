@@ -17,11 +17,10 @@
 
     Vue.component("image-carousel", {
 
-        template: "#vue-image-carousel",
-
         props: [
             "imageUrls",
-            "itemUrl"
+            "itemUrl",
+            "template"
         ],
 
         data: function()
@@ -32,10 +31,13 @@
             };
         },
 
+        created: function()
+        {
+            this.$options.template = this.template;
+        },
+
         ready: function()
         {
-            // (Re-)initialize carousels on each variation change
-
             // (re-)init big image carousel
             this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
         },
