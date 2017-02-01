@@ -9,8 +9,7 @@ Vue.component("payment-provider-select", {
     data: function()
     {
         return {
-            checkout: {},
-            waiting: false
+            checkout: {}
         };
     },
 
@@ -30,15 +29,7 @@ Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange: function()
         {
-            this.waiting = true;
-
-            ResourceService.getResource("checkout")
-                .set(this.checkout)
-                .done(
-                    function()
-                    {
-                        this.waiting = false;
-                    }.bind(this));
+            ResourceService.getResource("checkout").set(this.checkout);
         }
     }
 });
