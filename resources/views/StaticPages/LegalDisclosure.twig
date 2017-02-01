@@ -2,12 +2,23 @@
 
 {% block PageBody %}
 
+    {% set legalDisclosure = services.legalInformation.getLegalDisclosure() %}
+
     <div class="container-max page-content">
         <div class="row">
             <div class="col-xs-12">
-                <h1>{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</h1>
+                {% autoescape false %}
+                    <h1>{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</h1>
+                {% endautoescape %}
+
                 <hr class="m-y-3">
-                <p>GET CONTENT --BACKEND</p>
+
+                {% if legalDisclosure.htmlText %}
+                    {{ legalDisclosure.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ legalDisclosure.plainText }}</p>
+                {% endif %}
+
             </div>
         </div>
     </div>
