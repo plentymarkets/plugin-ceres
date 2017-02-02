@@ -92,7 +92,6 @@
 		}
 
 		.control-basket{
-			margin-right: 15px;
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
 				color: $top-bar-basket-color;
@@ -340,9 +339,6 @@
 
 	.top-bar {
 		.list-inline {
-			.control-basket{
-				margin-right: 15px;
-			}
 			.list-inline-item {
 				#login-change {
 					a {
