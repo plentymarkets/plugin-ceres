@@ -16,7 +16,8 @@ Vue.component("login", {
     {
         return {
             password: "",
-            username: ""
+            username: "",
+            isDisabled: false
         };
     },
 
@@ -56,6 +57,8 @@ Vue.component("login", {
         {
             var self = this;
 
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
                 {
@@ -76,6 +79,8 @@ Vue.component("login", {
                     {
                         window.location.assign(window.location.origin);
                     }
+
+                    self.isDisabled = false;
                 })
                 .fail(function(response)
                 {
@@ -87,6 +92,8 @@ Vue.component("login", {
                     default:
                         return;
                     }
+
+                    self.isDisabled = false;
                 });
         }
     }

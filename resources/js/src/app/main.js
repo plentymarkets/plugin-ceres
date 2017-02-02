@@ -65,16 +65,22 @@ var init = (function($, window, document)
                     $(this).parent().css("position", "relative");
                 });
         }
-        var $toggleListView      = $(".toggle-list-view");
-        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-        var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-        $toggleBasketPreview.on("click", function(evt)
+        var $toggleListView = $(".toggle-list-view");
+        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+        setTimeout(function()
         {
-            evt.preventDefault();
-            evt.stopPropagation();
-            $("body").toggleClass("open-right");
-        });
+            var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
+
+            $toggleBasketPreview.on("click", function(evt)
+            {
+                evt.preventDefault();
+                evt.stopPropagation();
+                $("body").toggleClass("open-right");
+            });
+        }, 1);
+
         $(document).on("click", "body.open-right", function(evt)
         {
             if ($("body").hasClass("open-right"))
@@ -118,7 +124,7 @@ var init = (function($, window, document)
 
         // initialize lazyload for articles
         $("img.lazy").show().lazyload({
-            effect : "fadeIn"
+            effect: "fadeIn"
         });
         // test, to delete
         $("img.testtest").show().lazyload({

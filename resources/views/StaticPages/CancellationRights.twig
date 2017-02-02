@@ -2,16 +2,26 @@
 
 {% block PageBody %}
 
-    {% autoescape false %}
-        <div class="container-max page-content">
-            <div class="row">
-                <div class="col-xs-12">
+    {% set cancellationRights = services.legalInformation.getCancellationRights() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% autoescape false %}
                     <h1>{{ trans("PluginCeres::Template.generalCancellationRight") }}</h1>
-                    <hr class="m-y-3">
-                    <p>GET CONTENT --BACKEND</p>
-                </div>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if cancellationRights.htmlText %}
+                    {{ cancellationRights.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ cancellationRights.plainText }}</p>
+                {% endif %}
+
             </div>
         </div>
-    {% endautoescape %}
+    </div>
+
 
 {% endblock %}
