@@ -38633,6 +38633,8 @@ var init = (function($, window, document)
             }
         });
 
+        $("#searchBox").height($(".navbar").outerHeight());
+
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
 {
