@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <button @click.prevent="validateLogin" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.accLogin") }}</button>
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.accLogin") }}</button>
                 </div>
             </div>
         </form>

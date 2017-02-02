@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-xs-4 offset-xs-8">
-                    <button @click.prevent="validate" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.generalNext") }}</button>
+                    <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.generalNext") }}</button>
                 </div>
             </div>
         </form>

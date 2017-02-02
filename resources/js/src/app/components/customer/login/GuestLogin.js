@@ -4,13 +4,15 @@ var ApiService = require("services/ApiService");
 Vue.component("guest-login", {
 
     props: [
-        "template"
+        "template",
+        "backlink"
     ],
 
     data: function()
     {
         return {
-            email: ""
+            email: "",
+            isDisabled: false
         };
     },
 
@@ -35,11 +37,18 @@ Vue.component("guest-login", {
 
         sendEMail: function()
         {
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/guest", {email: this.email})
                 .done(function()
                 {
-                    window.location.href = "/checkout";
-                });
+                    if (this.backlink !== null && this.backlink)
+                    {
+                        window.location.assign(this.backlink);
+                    }
+
+                    this.isDisabled = false;
+                }.bind(this));
         }
     }
 });
