@@ -1,26 +1,15 @@
 //header scss
-.wrapper-main.isSticky.sticky {
-	.top-bar-slider {
-		position: fixed;
-		width: 100%;
-		z-index: 1050;
-		height: 90px;
-	}
-	// #page-body {
-	// 	padding-top: 119px;
-	// }
-}
-
 .top-bar{
-
-	position: relative;
+	position: fixed;
+	width: 100%;
+	
 	z-index: $zIndex-6;
-	color:$gray-lighter;
-	background-color: $gray-dark;
-
+	color: $top-bar-color;
+	background-color: $top-bar-bg;
 	a{
 		text-decoration: none;
 		transition: all 300ms;
+		color: $top-bar-color;
 	}
 
 	// ul containing all controls in the top bar:
@@ -104,15 +93,15 @@
 
 		.control-basket{
 			.toggle-basket-preview{
-				background-color: $brand-primary;
-				color: white;
+				background-color: $top-bar-basket-btn;
+				color: $top-bar-basket-color;
 
 				.badge{
 					margin-left: .5rem;
 				}
 
 				&:hover{
-					background-color: darken($brand-primary, 20%);
+					background-color: darken($top-bar-basket-btn, 20%);
 				}
 			}
 		}
@@ -146,6 +135,95 @@
 
 
 }
+
+
+//navigation scss
+.wrapper-main {
+	#page-body {
+		margin-top: 118px;
+	}
+	& > nav.container-max {
+		padding-left:0;
+		padding-right:0;
+		position: absolute;
+	    z-index: 1000;
+	    display: block;
+	    width: 100%;
+	    top:88px;
+	    max-width: 100%;
+	}
+	.navbar{
+		font-family:$font-family-heading;
+		text-transform: uppercase;
+		background:$navbar-background-color;
+		border-bottom:0;
+		a {
+			color: $white;
+			&:hover {
+				color: $brand-primary;
+			}
+		}
+		.navbar-nav {
+			.nav-item {
+				& > .nav-link {
+					min-width: 140px;
+					border-right:1px solid $white;
+					text-align: center;
+				}
+				&:last-child {
+					.nav-link {
+						border-right:0;
+					}
+				}
+				.nav-link.dropdown-toggle::after {
+					display: none;
+				}
+				&:hover {
+					.nav-link {
+						background:darken($brand-primary,20%);
+						color:$white;
+						cursor: pointer;
+						&.dropdown-toggle::after {
+							display: none;
+						}
+					}
+					.dropdown-menu {
+						background:$white;
+						border:0;
+						border-left:1px solid $gray-lighter;
+						border-right:1px solid $gray-lighter;
+						border-bottom:1px solid $gray-lighter;
+						&::before {
+							display: inline-block;
+						    width: 0;
+						    height: 0;
+						    content: "";
+						    border-bottom: .5em solid;
+						    border-right: .5em solid transparent;
+						    border-left: .5em solid transparent;
+						    color: white;
+						    position: absolute;
+						    top: -.5em;
+						    left: 50%;
+						    transform: translateX(-50%);
+						}
+						.dropdown-item {
+							color: $gray-darker;
+							font-size: .9rem;
+							padding: .75rem 1rem !important;
+							&:hover {
+								background:$brand-primary;
+								color: white;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
 
 //navigation scss
 

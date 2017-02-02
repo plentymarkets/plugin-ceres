@@ -87,9 +87,24 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
+$white:                 #fff;
+$black:                 #000;
+
 $custom-colors: (
   "gelb": "#ffff00",
 ) !default;
+
+$top-bar-bg:            $gray-dark;
+$top-bar-color:         #fff;
+$top-bar-basket-btn:    darken($brand-primary, 10%);
+$top-bar-basket-color:  #fff;
+
+$footer-bg:             darken($brand-primary, 10%);
+$footer-color:          #fff;
+
+$footer-features-bg:    darken($brand-primary, 20%);
+$footer-features-color: #fff;
+
 
 $availability_1:        $brand-success !default;
 $availability_2:        $brand-success !default;
@@ -128,6 +143,7 @@ $font-family-serif:     Georgia, "Times New Roman", Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:      $font-family-sans-serif !default;
+$font-family-heading:   $font-family-base;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
 $font-size-root: 14px !default;

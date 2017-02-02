@@ -20,23 +20,26 @@
 
 .footer{
 	display: block;
-	background-color: $gray-lightest;
+	background-color: $footer-bg;
 	
 	a{
-		color: $gray-dark;
+		color: $footer-color;
 	}
 
 	.svg.plenty-brand path {
- 		
- 	}
- 	.svg.plenty-brand {
  		padding:0 .5em;
-  	}
+ 		path {
+ 			fill: $gray-dark;
+ 		}
+ 	}
 
 	.footer-features{
 		border-top: 1px solid transparent;
-		background-color: white;
-		color: $gray-dark;
+		background-color: $footer-features-bg;
+		color: $footer-features-color;
+		i {
+			color:$footer-features-color !important;
+		}
 	}
 
 	.footer-content{
