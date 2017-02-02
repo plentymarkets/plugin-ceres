@@ -1,4 +1,20 @@
-.breadcrumb{
-	margin-bottom: 0;
-	background-color: $breadcrumb-bg;
+//navigation scss
+.wrapper-main {
+	& > nav.container-max {
+		padding-left:0;
+		padding-right:0;
+		position: absolute;
+	    z-index: 1000;
+	    display: block;
+	    width: 100%;
+	    top:88px;
+	    max-width: 100%;
+	    background:$breadcrumb-bg;
+	}
+	.breadcrumb{
+		margin-bottom: 0;
+		max-width: 1200px;
+	    margin: 0 auto;
+	    background: transparent;
+	}
 }

@@ -101,7 +101,7 @@
 				}
 
 				&:hover{
-					background-color: darken($top-bar-basket-btn, 20%);
+					background-color: darken($top-bar-basket-btn, 10%);
 				}
 			}
 		}
@@ -142,23 +142,13 @@
 	#page-body {
 		margin-top: 118px;
 	}
-	& > nav.container-max {
-		padding-left:0;
-		padding-right:0;
-		position: absolute;
-	    z-index: 1000;
-	    display: block;
-	    width: 100%;
-	    top:88px;
-	    max-width: 100%;
-	}
 	.navbar{
 		font-family:$font-family-heading;
 		text-transform: uppercase;
 		background:$navbar-background-color;
-		border-bottom:0;
+		border-bottom:1px solid darken($gray-lighter2, 10%);
 		a {
-			color: $white;
+			color: $gray-dark;
 			&:hover {
 				color: $brand-primary;
 			}
@@ -167,7 +157,7 @@
 			.nav-item {
 				& > .nav-link {
 					min-width: 140px;
-					border-right:1px solid $white;
+					border-right:1px solid $gray-dark;
 					text-align: center;
 				}
 				&:last-child {
@@ -180,7 +170,7 @@
 				}
 				&:hover {
 					.nav-link {
-						background:darken($brand-primary,20%);
+						background:$brand-primary;
 						color:$white;
 						cursor: pointer;
 						&.dropdown-toggle::after {
@@ -198,12 +188,12 @@
 						    width: 0;
 						    height: 0;
 						    content: "";
-						    border-bottom: .5em solid;
+						    border-top: .5em solid;
 						    border-right: .5em solid transparent;
 						    border-left: .5em solid transparent;
-						    color: white;
+						    color: $brand-primary;
 						    position: absolute;
-						    top: -.5em;
+						    top: 0;
 						    left: 50%;
 						    transform: translateX(-50%);
 						}
@@ -254,7 +244,7 @@
 .navbar-brand {
 
 	float: none;
-	padding: .5rem 1rem;
+	padding: .5rem 0;
   	display: inline-block;
 
   	img {

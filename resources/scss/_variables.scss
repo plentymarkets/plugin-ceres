@@ -96,14 +96,14 @@ $custom-colors: (
 
 $top-bar-bg:            $gray-dark;
 $top-bar-color:         #fff;
-$top-bar-basket-btn:    darken($brand-primary, 10%);
+$top-bar-basket-btn:    $brand-primary;
 $top-bar-basket-color:  #fff;
 
-$footer-bg:             darken($brand-primary, 10%);
-$footer-color:          #fff;
+$footer-bg:             $gray-lightest;
+$footer-color:          $gray-dark;
 
-$footer-features-bg:    darken($brand-primary, 20%);
-$footer-features-color: #fff;
+$footer-features-bg:    darken($gray-lightest, 10%);
+$footer-features-color: $gray-dark;
 
 
 $availability_1:        $brand-success !default;
@@ -746,7 +746,7 @@ $breadcrumb-padding-y:          .5rem !default;
 $breadcrumb-padding-x:          1rem !default;
 $breadcrumb-item-padding:       .5rem !default;
 
-$breadcrumb-bg:                 $gray-lighter !default;
+$breadcrumb-bg:                 darken($gray-lighter2, 10%) !default;
 $breadcrumb-divider-color:      $gray-light !default;
 $breadcrumb-active-color:       $gray-light !default;
 $breadcrumb-divider:            "/" !default;

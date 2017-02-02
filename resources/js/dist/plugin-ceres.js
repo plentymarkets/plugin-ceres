@@ -38632,18 +38632,17 @@ var init = (function($, window, document)
                 }
             }
         });
-
         $("#searchBox").height($(".navbar").outerHeight());
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
-{
+        {
             var $img = jQuery(this);
             var imgURL = $img.attr("src");
             var attributes = $img.prop("attributes");
 
             $.get(imgURL, function(data)
-{
+            {
                 // Get the SVG tag, ignore the rest
                 var $svg = jQuery(data).find("svg");
 
@@ -38652,7 +38651,7 @@ var init = (function($, window, document)
 
                 // Loop through IMG attributes and apply on SVG
                 $.each(attributes, function()
-{
+                {
                     $svg.attr(this.name, this.value);
                 });
 
@@ -38665,8 +38664,9 @@ var init = (function($, window, document)
         if (window.matchMedia("(min-width: 768px)").matches)
         {
             var $singleRightside = $(".single-rightside");
+            var $headHeight = $(".top-bar").height();
 
-            $singleRightside.stick_in_parent({});
+            $singleRightside.stick_in_parent({offset_top: $headHeight});
 
             $singleRightside.on("sticky_kit:bottom", function()
             {
