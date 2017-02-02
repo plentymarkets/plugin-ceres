@@ -71,7 +71,7 @@ var ResourceService = require("services/ResourceService");
                     })
                     .fail(function(response)
                     {
-                        this.waiting = false;
+                        self.waiting = false;
                     });
             },
 
