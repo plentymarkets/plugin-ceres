@@ -9,7 +9,7 @@
                     <h1 class="col-xs-12">{{ trans("PluginCeres::Template.accRegisterAccount") }}</h1>
                 </div>
 
-                <registration template="#vue-registration"></registration>
+                <registration template="#vue-registration" backlink="{{ request.get("backlink") }}"></registration>
 
             </div>
         </div>

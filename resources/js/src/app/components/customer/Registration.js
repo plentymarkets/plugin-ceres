@@ -10,7 +10,8 @@ Vue.component("registration", {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
         isSimpleRegistration: {type: Boolean, default: false},
-        template: String
+        template: String,
+        backlink: String
     },
 
     data: function()
@@ -19,7 +20,8 @@ Vue.component("registration", {
             password      : "",
             passwordRepeat: "",
             username      : "",
-            billingAddress: {}
+            billingAddress: {},
+            isDisabled: false
         };
     },
 
@@ -55,6 +57,8 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
@@ -66,8 +70,18 @@ Vue.component("registration", {
                     }
 
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
-                });
 
+                    if (component.backlink !== null && component.backlink)
+                    {
+                        window.location.assign(component.backlink);
+                    }
+
+                    component.isDisabled = false;
+                })
+                .fail(function()
+                {
+                    component.isDisabled = false;
+                });
         },
 
         /**
