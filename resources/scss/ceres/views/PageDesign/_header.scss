@@ -92,6 +92,7 @@
 		}
 
 		.control-basket{
+			margin-right: 15px;
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
 				color: $top-bar-basket-color;
@@ -144,9 +145,8 @@
 	}
 	.navbar{
 		font-family:$font-family-heading;
-		text-transform: uppercase;
 		background:$navbar-background-color;
-		border-bottom:1px solid darken($gray-lighter2, 10%);
+		border-bottom:1px solid darken($gray-lighter2, 5%);
 		a {
 			color: $gray-dark;
 			&:hover {
@@ -157,7 +157,7 @@
 			.nav-item {
 				& > .nav-link {
 					min-width: 140px;
-					border-right:1px solid $gray-dark;
+					border-right:1px solid $gray-lighter;
 					text-align: center;
 				}
 				&:last-child {
@@ -340,6 +340,9 @@
 
 	.top-bar {
 		.list-inline {
+			.control-basket{
+				margin-right: 15px;
+			}
 			.list-inline-item {
 				#login-change {
 					a {
