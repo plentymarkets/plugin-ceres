@@ -2,10 +2,23 @@
   background-color: $gray-lightest;
   padding: 0px 15px;
 
+  z-index: 1070;
+  position: fixed;
+  top: 30px;
+  right: 0;
+  max-width: 1200px;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
   .search-box-inner {
     display: flex;
     flex-flow: row nowrap;
     padding: 1rem 0em;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .search-box-shadow-frame {
