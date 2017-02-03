@@ -22,17 +22,6 @@
         transition: all 200ms ease-in-out;
     }
 
-
-    .thumb-controls{
-        position: absolute;
-        width: calc(100% - 120px);
-        bottom: 0;
-        right: 0;
-        text-align: center;
-        overflow: hidden;
-        transition: all 200ms 100ms ease-in-out;
-    }
-
     .thumb-inner{
         position: relative;
         height: 100%;
@@ -120,21 +109,21 @@
     .thumb-basket-frame {
         opacity: 0;
         cursor: pointer;
-        left: 82%;
-        top: 2%;
+        right: 2%;
+        bottom: 2%;
         box-sizing: initial;
         position: absolute;
         display: block;
         width: 1.5rem;
         height: 1.5rem;
         padding: 10px;
-        box-shadow: inset 0px 0px 0px 2px #008ebd;
-        border-radius: 100px;
+        box-shadow: inset 0px 0px 0px 2px $brand-primary;
+        border-radius: 100%;
         z-index: 10;
         transition: all 300ms;
 
         &:hover {
-            background-color: #008ebd;
+            background-color: $brand-primary;
 
             .thumb-basket-inner {
                 color: #fff;
@@ -145,11 +134,8 @@
     .thumb-basket-inner {
         font: normal normal normal 14px/1 FontAwesome;
         font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
 
-        color: #008ebd;
+        color: $brand-primary;
         height: 1.5rem;
         width: 1.5rem;
         margin: 0 auto;
@@ -158,6 +144,10 @@
         line-height: 1.5rem;
         font-size: 1.5rem;
         transition: all 300ms;
+        &::before {
+            position: relative;
+            left: -1px;
+        }
     }
 
     @include media-breakpoint-up(sm){
@@ -172,11 +162,6 @@
             flex: 0 0 auto;
             text-align: center;
             padding: .4rem;
-        }
-        .thumb-controls{
-            left: 0;
-            width: 100%;
-            height: 0;
         }
 
         .thumb-btn-buy{
@@ -208,10 +193,6 @@
         &:hover {
             z-index: 1000;
 
-            .thumb-controls{
-                transform: translate(0 , 100%);
-                height: 15%;
-            }
 
             .img-fluid {
                 transform: scale(1.05);
