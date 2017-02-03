@@ -28,8 +28,10 @@ var init = (function($, window, document)
             {
                 var navheight = $(".navbar").outerHeight() - 1;
 
-                $("#searchBox").css({height: navheight});
-            }, 1);
+                $(".cmp-search-box.collapse.in").css({height: navheight});
+                console.log(navheight);
+
+            }, 2000);
         });
 
         // Replace all SVG images with inline SVG, class: svg
