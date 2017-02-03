@@ -10,7 +10,9 @@
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
-  height: 58px;
+  &.collapse.in {
+    height: 58px;
+  }
 
   .search-box-inner {
     display: flex;
