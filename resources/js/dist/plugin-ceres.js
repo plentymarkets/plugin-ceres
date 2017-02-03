@@ -38644,7 +38644,13 @@ var init = (function($, window, document)
                 }
             }
         });
-        $("#searchBox").height($(".navbar").outerHeight() - 1);
+
+        setTimeout(function()
+        {
+            $("#searchBox").height($(".navbar").outerHeight() - 1);
+        }, 1);
+
+        // $( "#mydiv" ).css( "color", "green" );
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
