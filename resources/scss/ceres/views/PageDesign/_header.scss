@@ -109,7 +109,7 @@
 		a {
 			color: $gray-dark;
 			&:hover {
-				color: $brand-primary;
+				color: $gray-darker;
 			}
 		}
 		.navbar-nav {
@@ -129,39 +129,39 @@
 				}
 				&:hover {
 					.nav-link {
-						background:$brand-primary;
-						color:$white;
+						background:transparent;
+						color: $gray-darker;
 						cursor: pointer;
 						&.dropdown-toggle::after {
 							display: none;
 						}
 					}
 					.dropdown-menu {
-						background:$white;
+						background:$brand-primary;
 						border:0;
-						border-left:1px solid $gray-lighter;
-						border-right:1px solid $gray-lighter;
-						border-bottom:1px solid $gray-lighter;
+						border-left:0;
+						border-right:0;
+						border-bottom:0;
 						&::before {
 							display: inline-block;
 						    width: 0;
 						    height: 0;
 						    content: "";
-						    border-top: .5em solid;
+						    border-bottom: .5em solid;
 						    border-right: .5em solid transparent;
 						    border-left: .5em solid transparent;
 						    color: $brand-primary;
 						    position: absolute;
-						    top: 0;
+						    top: -.5em;
 						    left: 50%;
 						    transform: translateX(-50%);
 						}
 						.dropdown-item {
-							color: $gray-darker;
+							color: $white;
 							font-size: .9rem;
 							padding: .75rem 1rem !important;
 							&:hover {
-								background:$brand-primary;
+								background: darken($brand-primary, 10%);
 								color: white;
 							}
 						}
