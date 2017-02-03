@@ -2,7 +2,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" class='{error: checkoutValidation.invoiceAddress.showError}'></address-select>",
 
     props: [
         "addressList",
@@ -12,7 +12,8 @@ Vue.component("invoice-address-select", {
     data: function()
     {
         return {
-            checkout: {}
+            checkout: {},
+            checkoutValidation: {}
         };
     },
 
@@ -22,9 +23,11 @@ Vue.component("invoice-address-select", {
     created: function()
     {
         ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
     },
 
-    methods: {
+    methods:
+    {
         /**
          * Update the invoice address
          * @param selectedAddress
@@ -33,6 +36,14 @@ Vue.component("invoice-address-select", {
         {
             this.checkout.billingAddressId = selectedAddress.id;
             ResourceService.getResource("checkout").set(this.checkout);
+        }
+    },
+
+    computed:
+    {
+        isValid: function()
+        {
+            this.checkoutValidation.invoiceAddress.isValid = this.selectedAddress.id > 0;
         }
     }
 });

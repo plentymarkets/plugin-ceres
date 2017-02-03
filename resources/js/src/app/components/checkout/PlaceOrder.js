@@ -15,7 +15,8 @@ var ResourceService = require("services/ResourceService");
         {
             return {
                 waiting: false,
-                checkout: {}
+                checkout: {},
+                checkoutValidation: {}
             };
         },
 
@@ -24,6 +25,7 @@ var ResourceService = require("services/ResourceService");
             this.$options.template = this.template;
 
             ResourceService.bind("checkout", this);
+            ResourceService.bind("checkoutValidation", this);
         },
 
         methods: {
@@ -36,43 +38,67 @@ var ResourceService = require("services/ResourceService");
                 ApiService.post("/rest/io/checkout/payment")
                     .done(function(response)
                     {
-                        var paymentType = response.type || "errorCode";
-                        var paymentValue = response.value || "";
-
-                        switch (paymentType)
+                        if (self.validateCheckout())
                         {
-                        case "continue":
-                            var target = self.targetContinue;
-
-                            if (target)
-                            {
-                                window.location.assign(target);
-                            }
-                            break;
-                        case "redirectUrl":
-                            // redirect to given payment provider
-                            window.location.assign(paymentValue);
-                            break;
-                        case "externalContentUrl":
-                            // show external content in iframe
-                            self.showModal(paymentValue, true);
-                            break;
-                        case "htmlContent":
-                            self.showModal(paymentValue, false);
-                            break;
-
-                        case "errorCode":
-                            NotificationService.error(paymentValue);
-                            break;
-                        default:
-                            NotificationService.error("Unknown response from payment provider: " + paymentType);
-                            break;
+                            self.afterPreparePayment(response);
                         }
                     })
                     .fail(function(response)
                     {
                         self.waiting = false;
                     });
+            },
+
+            validateCheckout: function()
+            {
+                var valid = false;
+
+                for (var i in this.checkoutValidation)
+                {
+                    if (!this.checkoutValidation[i].isValid)
+                    {
+                        this.checkoutValidation[i].showError = true;
+                        valid = true;
+                    }
+                }
+
+                return valid;
+            },
+
+            afterPreparePayment: function(response)
+            {
+                var paymentType = response.type || "errorCode";
+                var paymentValue = response.value || "";
+
+                switch (paymentType)
+                {
+                case "continue":
+                    var target = this.targetContinue;
+
+                    if (target)
+                        {
+                        window.location.assign(target);
+                    }
+                    break;
+                case "redirectUrl":
+                        // redirect to given payment provider
+                    window.location.assign(paymentValue);
+                    break;
+                case "externalContentUrl":
+                        // show external content in iframe
+                    this.showModal(paymentValue, true);
+                    break;
+                case "htmlContent":
+                    this.showModal(paymentValue, false);
+                    break;
+
+                case "errorCode":
+                    NotificationService.error(paymentValue);
+                    break;
+                default:
+                    NotificationService.error("Unknown response from payment provider: " + paymentType);
+                    break;
+                }
             },
 
             showModal: function(content, isExternalContent)
