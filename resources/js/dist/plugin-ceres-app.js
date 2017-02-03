@@ -6254,15 +6254,10 @@ var init = (function($, window, document)
             }
         });
 
-        $(".control-search a").on("click", function(evt)
-        {
-            setTimeout(function()
-            {
-                $("#searchBox").height($(".navbar").outerHeight() - 1);
-            }, 1);
-        });
+        // set searchbox height to navbar height
+        var navheight = $(".navbar").outerHeight() - 1;
 
-        // $( "#mydiv" ).css( "color", "green" );
+        $("#searchBox").css({height: navheight});
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
