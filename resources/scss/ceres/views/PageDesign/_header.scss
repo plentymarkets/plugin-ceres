@@ -340,7 +340,6 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		padding:0;
 	}
 
 	.navbar-nav{
@@ -353,6 +352,9 @@
 }
 
 @include media-breakpoint-up(xl){
+	.brand-wrapper{
+		padding:0;
+	}
  	.sticky {
  		.header {
  			.navbar {
