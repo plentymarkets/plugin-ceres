@@ -11,12 +11,6 @@
 		transition: all 300ms;
 		color: $top-bar-color;
 	}
-
-	// ul containing all controls in the top bar:
-	// - login/register
-	// - search
-	// - language settings
-	// - basket preview toggle
 	.controls-list{
 		margin-bottom: 0;
 		font-size: 0;
@@ -77,18 +71,10 @@
 			}
 		}
 
-		.control-languages{
+		.control-languages a[aria-expanded="true"],
+		.control-search a[aria-expanded="true"] {
+			background:$gray-darker;
 
-		}
-
-		.control-search{
-
-			.dropdown-menu{
-				width: 320px;
-			    padding: 0;
-			    border: none;
-				position: absolute;
-			}
 		}
 
 		.control-basket{
@@ -107,32 +93,6 @@
 		}
 	}
 
-	.country-settings{
-		min-width: 200px;
-		max-width: 320px;
-		padding: 0;
-		border: none;
-		position:absolute;
-
-		.disabled {
-			background-color: $gray-lighter;
-		    cursor: auto;
-
-			strong {
-				color: $gray-dark;
-			}
-		}
-
-		a:hover {
-			background-color: darken($brand-primary, 20%);
-			color: $gray-lighter;
-		    border: 1px solid darken($brand-primary, 20%);
-		}
-	}
-
-	#shippingCountryList {
-	}
-
 
 }
 
@@ -145,7 +105,7 @@
 	.navbar{
 		font-family:$font-family-heading;
 		background:$navbar-background-color;
-		border-bottom:1px solid darken($gray-lighter2, 5%);
+		border-bottom:1px solid darken($gray-lighter2, 2%);
 		a {
 			color: $gray-dark;
 			&:hover {

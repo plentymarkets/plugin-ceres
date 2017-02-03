@@ -38644,7 +38644,7 @@ var init = (function($, window, document)
                 }
             }
         });
-        $("#searchBox").height($(".navbar").outerHeight());
+        $("#searchBox").height($(".navbar").outerHeight() - 1);
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
@@ -38678,7 +38678,7 @@ var init = (function($, window, document)
             var $singleRightside = $(".single-rightside");
             var $headHeight = $(".top-bar").height();
 
-            $singleRightside.stick_in_parent({offset_top: $headHeight});
+            $singleRightside.stick_in_parent({offset_top: $headHeight + 10});
 
             $singleRightside.on("sticky_kit:bottom", function()
             {
