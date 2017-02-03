@@ -817,7 +817,7 @@ var ResourceService = require("services/ResourceService");
                     })
                     .fail(function(response)
                     {
-                        this.waiting = false;
+                        self.waiting = false;
                     });
             },
 
@@ -1539,7 +1539,8 @@ Vue.component("registration", {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
         isSimpleRegistration: {type: Boolean, default: false},
-        template: String
+        template: String,
+        backlink: String
     },
 
     data: function()
@@ -1548,7 +1549,8 @@ Vue.component("registration", {
             password      : "",
             passwordRepeat: "",
             username      : "",
-            billingAddress: {}
+            billingAddress: {},
+            isDisabled: false
         };
     },
 
@@ -1584,6 +1586,8 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
@@ -1595,8 +1599,18 @@ Vue.component("registration", {
                     }
 
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
-                });
 
+                    if (component.backlink !== null && component.backlink)
+                    {
+                        window.location.assign(component.backlink);
+                    }
+
+                    component.isDisabled = false;
+                })
+                .fail(function()
+                {
+                    component.isDisabled = false;
+                });
         },
 
         /**
@@ -1643,13 +1657,15 @@ var ApiService = require("services/ApiService");
 Vue.component("guest-login", {
 
     props: [
-        "template"
+        "template",
+        "backlink"
     ],
 
     data: function()
     {
         return {
-            email: ""
+            email: "",
+            isDisabled: false
         };
     },
 
@@ -1674,11 +1690,18 @@ Vue.component("guest-login", {
 
         sendEMail: function()
         {
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/guest", {email: this.email})
                 .done(function()
                 {
-                    window.location.href = "/checkout";
-                });
+                    if (this.backlink !== null && this.backlink)
+                    {
+                        window.location.assign(this.backlink);
+                    }
+
+                    this.isDisabled = false;
+                }.bind(this));
         }
     }
 });
@@ -1702,7 +1725,8 @@ Vue.component("login", {
     {
         return {
             password: "",
-            username: ""
+            username: "",
+            isDisabled: false
         };
     },
 
@@ -1742,6 +1766,8 @@ Vue.component("login", {
         {
             var self = this;
 
+            this.isDisabled = true;
+
             ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
                 {
@@ -1762,6 +1788,8 @@ Vue.component("login", {
                     {
                         window.location.assign(window.location.origin);
                     }
+
+                    self.isDisabled = false;
                 })
                 .fail(function(response)
                 {
@@ -1773,6 +1801,8 @@ Vue.component("login", {
                     default:
                         return;
                     }
+
+                    self.isDisabled = false;
                 });
         }
     }
@@ -3492,16 +3522,22 @@ Vue.directive("logout", function()
     $(this.el).click(
         function(event)
         {
+            $(this.el).addClass("disabled");
+
             ApiService.post("/rest/io/customer/logout")
                 .done(
-                    function(response)
+                    function()
                     {
                         window.location.assign(window.location.origin);
-                    }
-                );
+                    })
+                .fail(
+                    function()
+                    {
+                        $(this.el).removeClass("disabled");
+                    }.bind(this));
 
             event.preventDefault();
-        });
+        }.bind(this));
 });
 
 },{"services/ApiService":58}],45:[function(require,module,exports){
@@ -6240,16 +6276,22 @@ var init = (function($, window, document)
                     $(this).parent().css("position", "relative");
                 });
         }
-        var $toggleListView      = $(".toggle-list-view");
-        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-        var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-        $toggleBasketPreview.on("click", function(evt)
+        var $toggleListView = $(".toggle-list-view");
+        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+        setTimeout(function()
         {
-            evt.preventDefault();
-            evt.stopPropagation();
-            $("body").toggleClass("open-right");
-        });
+            var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
+
+            $toggleBasketPreview.on("click", function(evt)
+            {
+                evt.preventDefault();
+                evt.stopPropagation();
+                $("body").toggleClass("open-right");
+            });
+        }, 1);
+
         $(document).on("click", "body.open-right", function(evt)
         {
             if ($("body").hasClass("open-right"))
@@ -6293,7 +6335,7 @@ var init = (function($, window, document)
 
         // initialize lazyload for articles
         $("img.lazy").show().lazyload({
-            effect : "fadeIn"
+            effect: "fadeIn"
         });
 
         $(".cmp-product-thumb").on("mouseover", function(event)
