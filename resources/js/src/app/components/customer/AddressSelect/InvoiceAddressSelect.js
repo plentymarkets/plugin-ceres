@@ -24,6 +24,7 @@ Vue.component("invoice-address-select", {
     {
         ResourceService.bind("checkout", this);
         ResourceService.bind("checkoutValidation", this);
+        this.checkoutValidation.invoiceAddress.isValid = this.selectedAddress.id > 0;
     },
 
     methods:
@@ -35,15 +36,8 @@ Vue.component("invoice-address-select", {
         addressChanged: function(selectedAddress)
         {
             this.checkout.billingAddressId = selectedAddress.id;
+            this.checkoutValidation.invoiceAddress.isValid = this.selectedAddress.id > 0
             ResourceService.getResource("checkout").set(this.checkout);
-        }
-    },
-
-    computed:
-    {
-        isValid: function()
-        {
-            this.checkoutValidation.invoiceAddress.isValid = this.selectedAddress.id > 0;
         }
     }
 });
