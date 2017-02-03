@@ -38646,9 +38646,15 @@ var init = (function($, window, document)
         });
 
         // set searchbox height to navbar height
-        var navheight = $(".navbar").outerHeight() - 1;
+        $(".control-search a").on("click", function(evt)
+        {
+            setTimeout(function()
+            {
+                var navheight = $(".navbar").outerHeight() - 1;
 
-        $("#searchBox").css({height: navheight});
+                $("#searchBox").css({height: navheight});
+            }, 1);
+        });
 
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
