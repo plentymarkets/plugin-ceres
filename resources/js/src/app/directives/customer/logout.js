@@ -16,10 +16,11 @@ Vue.directive("logout", function()
                     {
                         window.location.assign(window.location.origin);
                     })
-                .fail(function()
-                {
-                    $(this.el).removeClass("disabled");
-                }.bind(this));
+                .fail(
+                    function()
+                    {
+                        $(this.el).removeClass("disabled");
+                    }.bind(this));
 
             event.preventDefault();
         }.bind(this));
