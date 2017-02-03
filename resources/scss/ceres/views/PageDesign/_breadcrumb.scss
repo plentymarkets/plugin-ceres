@@ -1,21 +1,33 @@
 //navigation scss
-.wrapper-main {
-	& > nav.container-max {
-		padding-left:0;
-		padding-right:0;
-		position: absolute;
-	    z-index: 1000;
-	    display: block;
-	    width: 100%;
-	    top:88px;
-	    max-width: 100%;
-	    background:$breadcrumb-bg;
+@include media-breakpoint-up(sm){
+	.wrapper-main {
+		& > nav.container-max {
+			padding-left:0;
+			padding-right:0;
+			position: absolute;
+		    z-index: 1000;
+		    display: block;
+		    width: 100%;
+		    max-width: 100%;
+		    background:$breadcrumb-bg;
+		    top:96px;
+		}
+		.breadcrumb{
+			margin-bottom: 0;
+			max-width: 1200px;
+		    margin: 0 auto;
+		    background: transparent;
+		    padding: .5rem 15px;
+		}
 	}
-	.breadcrumb{
-		margin-bottom: 0;
-		max-width: 1200px;
-	    margin: 0 auto;
-	    background: transparent;
-	    padding: .5rem 0;
+}
+@include media-breakpoint-up(md){
+	.wrapper-main {
+		& > nav.container-max {
+		    top:88px;
+		}
+		.breadcrumb{
+		    padding: .5rem 0;
+		}
 	}
 }

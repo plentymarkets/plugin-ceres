@@ -6,15 +6,11 @@
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;
-    padding-left: 0;
-    padding-right: 0;
     &.basket,
     &.checkout,
     &.myaccount {
         background-color:$white;
         color: $gray-darker;
-        padding-left: 15px;
-        padding-right: 15px;
         margin-top: 30px;
         padding-bottom: 30px;
     }
@@ -89,5 +85,18 @@ a:active {
 
 .pagination > li {
     cursor: pointer;
+}
+
+@include media-breakpoint-up(md){
+    .page-content{
+        padding-left: 0;
+        padding-right: 0;
+        &.basket,
+        &.checkout,
+        &.myaccount {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
 }
 

@@ -142,6 +142,7 @@
 						border-left:0;
 						border-right:0;
 						border-bottom:0;
+						text-align: center;
 						&::before {
 							display: inline-block;
 						    width: 0;
@@ -198,6 +199,7 @@
 
 .brand-wrapper{
 	position: relative;
+	padding:0 15px;
 }
 
 .navbar-brand {
@@ -281,6 +283,9 @@
 }
 
 @include media-breakpoint-up(md){
+	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
+		text-align: left;
+	}
 	.sticky {
 		.header {
 			.navbar {
