@@ -2,17 +2,12 @@
   background-color: $gray-darker;
   padding: 0px 15px;
 
-  min-height:50px !important;
   z-index: 1070;
   position: fixed;
   top: 30px;
   right: 0;
+  left: 0;
   width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  &.collapse.in {
-    height: 58px;
-  }
 
   .search-box-inner {
     display: flex;
@@ -20,8 +15,6 @@
     padding: 1rem 0em;
 
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     max-width: 1200px;
     margin:0 auto;
   }
