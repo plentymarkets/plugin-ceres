@@ -87,7 +87,7 @@ a:active {
     cursor: pointer;
 }
 
-@include media-breakpoint-up(md){
+@include media-breakpoint-up(lg){
     .page-content{
         padding-left: 0;
         padding-right: 0;

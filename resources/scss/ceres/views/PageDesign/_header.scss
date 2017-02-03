@@ -286,6 +286,7 @@
 	.wrapper-main .navbar .navbar-nav .nav-item:hover .dropdown-menu {
 		text-align: left;
 	}
+	
 	.sticky {
 		.header {
 			.navbar {
@@ -339,6 +340,7 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		padding:0;
 	}
 
 	.navbar-nav{
