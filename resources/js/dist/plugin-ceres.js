@@ -38645,19 +38645,6 @@ var init = (function($, window, document)
             }
         });
 
-        // set searchbox height to navbar height
-        $(".control-search a").on("click", function(evt)
-        {
-            setTimeout(function()
-            {
-                var navheight = $(".navbar").outerHeight() - 1;
-
-                $(".cmp-search-box.collapse.in").css({height: navheight});
-                console.log(navheight);
-
-            }, 2000);
-        });
-
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
         {
