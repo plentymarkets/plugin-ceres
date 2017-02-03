@@ -38645,10 +38645,13 @@ var init = (function($, window, document)
             }
         });
 
-        setTimeout(function()
+        $(".control-search a").on("click", function(evt)
         {
-            $("#searchBox").height($(".navbar").outerHeight() - 1);
-        }, 1);
+            setTimeout(function()
+            {
+                $("#searchBox").height($(".navbar").outerHeight() - 1);
+            }, 1);
+        });
 
         // $( "#mydiv" ).css( "color", "green" );
 
