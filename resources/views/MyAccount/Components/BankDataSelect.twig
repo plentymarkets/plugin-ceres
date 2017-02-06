@@ -1,11 +1,11 @@
 <script type="x/template" id="vue-bank-data-select">
-<div class="cmp cmp-address-list mb-3">
+<div class="cmp cmp-address-list m-b-3">
 
     <div class="items items-empty" v-show="userBankData.length == 0">
         <div class="card">
             <span class="item-inner">
                 <span class="item-content">
-                    <p class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.bankNoBankData") }} -</p>
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.bankNoBankData") }} -</p>
                 </span>
             </span>
         </div>
@@ -21,7 +21,7 @@
                 </span>
 
                 <span class="item-content" v-show="!selectedBankData">
-                    <p class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
+                    <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
                 </span>
             </span>
         </div>

@@ -1,7 +1,7 @@
 {{ component( "PluginCeres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
 <div>
-    <div class="cmp cmp-address-list mb-3">
+    <div class="cmp cmp-address-list m-b-3">
         <div class="dropdown items">
 
             <div
@@ -13,7 +13,7 @@
             >
                 <div class="item-inner">
                     <span v-if="selectedAddress.id == -99">
-                        <p class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
+                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
                     </span>
                     <span v-else class="item-content">
                         <div v-if="!isAddressListEmpty()">
@@ -24,8 +24,8 @@
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                         </div>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
-                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.addressNoAddress") }} -</p>
+                        <p v-if="!isAddressListEmpty() && !selectedAddressId" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }} -</p>
+                        <p v-if="isAddressListEmpty()" class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressNoAddress") }} -</p>
                     </span>
 
                 </div>
@@ -50,7 +50,7 @@
                         >
                         <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic pt-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
+                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }} -</p>
                             </span>
                             <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>

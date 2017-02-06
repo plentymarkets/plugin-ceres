@@ -11,7 +11,7 @@
     </a>
 
     {% if numberOfFeatures > 0 %}
-        <div class="footer-features py-1 container-max">
+        <div class="footer-features p-y-1 container-max">
             <div class="row">
                 {% for i in 1..numberOfFeatures %}
                     <div class="col-xs-12 col-sm-4 text-xs-center">
@@ -27,24 +27,24 @@
     <div class="container-max footer-content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="footer-services mt-2">
+                <div class="footer-services m-t-2">
                     {% set paymentMethodContent = LayoutContainer.show("PluginCeres::Homepage.PaymentMethods") %}
                     {% if paymentMethodContent|trim is not empty %}
-                        <div class="services-payment mb-1">
+                        <div class="services-payment m-b-1">
                             <strong class="services-title">{{ trans("PluginCeres::Template.orderPaymentMethods") }}</strong>
                             {{ paymentMethodContent }}
                         </div>
                     {% endif %}
                     {% set shippingContent = LayoutContainer.show("PluginCeres::Homepage.Shipping") %}
                     {% if shippingContent|trim is not empty %}
-                        <div class="services-shipping mb-1">
+                        <div class="services-shipping m-b-1">
                             <strong class="services-title">{{ trans("PluginCeres::Template.generalOrderShippedBy") }}</strong>
                             {{ shippingContent }}
                         </div>
                     {% endif %}
                     {% set certifiedContent = LayoutContainer.show("PluginCeres::Homepage.Certified") %}
                     {% if certifiedContent|trim is not empty %}
-                        <div class="services-certificate mb-1">
+                        <div class="services-certificate m-b-1">
                             <strong class="services-title">{{ trans("PluginCeres::Template.generalCertifiedBy") }}</strong>
                             {{ certifiedContent }}
                         </div>
@@ -54,10 +54,10 @@
         </div>
         
         <div class="row">
-            <hr class="my-2">
+            <hr class="m-y-2">
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
-                    <nav class="footer-column mb-2">
+                    <nav class="footer-column m-b-2">
                         <h5>{{ config('PluginCeres.footer.col_' ~ i ~ '_title') }}</h5>
                         <ul class="list-unstyled">
 
@@ -80,7 +80,7 @@
                     </nav>
                 </div>
             {% endfor %}
-            <hr class="hidden-sm-up my-2">
+            <hr class="hidden-sm-up m-y-2">
             <div class="col-xs-6 col-sm-3">
                 <div class="footer-column">
                     {{ LayoutContainer.show("PluginCeres::Footer.RowOne") }}
@@ -103,12 +103,12 @@
                     </div>
                 </div>
 
-                <hr class="mb-0">
+                <hr class="m-b-0">
 
             </div>
 
             {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
-            <div class="copyright text-xs-center my-1">
+            <div class="copyright text-xs-center m-y-1">
                 <div class="static-link-list">
                     {% autoescape false %}
                         <a href="/cancellation-rights">{{ trans("PluginCeres::Template.generalCancellationRight") }}</a>

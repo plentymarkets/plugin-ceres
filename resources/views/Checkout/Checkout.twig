@@ -20,8 +20,8 @@
 
         {% set overrideCheckout = LayoutContainer.show("PluginCeres::Checkout") %}
         {% if overrideCheckout|trim is empty %}
-            <div class="row mt-1">
-                <div class="col-xs-12 mb-3">
+            <div class="row m-t-1">
+                <div class="col-xs-12 m-b-3">
                     <h1 class="h4">{{ trans("PluginCeres::Template.orderCheckout") }}</h1>
                     <hr>
                 </div>
@@ -35,7 +35,7 @@
                         {% if overrideAddressLists|trim is empty %}
                             {% set overrideBillingAddress = LayoutContainer.show("PluginCeres::Checkout.BillingAddress") %}
                             {% if overrideBillingAddress|trim is empty %}
-                                <header class="mb-1">
+                                <header class="m-b-1">
                                 <h3>{{ trans("PluginCeres::Template.orderInvoiceAddress") }}</h3>
                                 </header>
 
@@ -51,7 +51,7 @@
 
                             {% set overrideShippingAddress = LayoutContainer.show("PluginCeres::Checkout.ShippingAddress") %}
                             {% if overrideShippingAddress|trim is empty %}
-                                <header class="mb-1">
+                                <header class="m-b-1">
                                     <h3>{{ trans("PluginCeres::Template.orderShippingAddress") }}</h3>
                                 </header>
 
@@ -69,7 +69,7 @@
                         {% endif %}
                         {% set overrideShippingProfiles = LayoutContainer.show("PluginCeres::Checkout.ShippingProfileList") %}
                         {% if overrideShippingProfiles|trim is empty %}
-                            <header class="mb-1">
+                            <header class="m-b-1">
                                 <h3>{{ trans("PluginCeres::Template.orderShippingProfile") }}</h3>
                             </header>
 
@@ -84,7 +84,7 @@
 
                         {% set overridePaymentList = LayoutContainer.show("PluginCeres::Checkout.PaymentList") %}
                         {% if overridePaymentList|trim is empty %}
-                            <header class="mb-1">
+                            <header class="m-b-1">
                                 <h3>{{ trans("PluginCeres::Template.orderPaymentMethod") }}</h3>
                             </header>
 
@@ -119,7 +119,7 @@
 
             <!-- OPT IN -->
             <div class="row">
-                <div class="col-xs-12 mb-3">
+                <div class="col-xs-12 m-b-3">
                     <hr>
                     <div class="row">
                         <div class="col-xs-12 col-sm-7">
