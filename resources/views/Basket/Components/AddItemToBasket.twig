@@ -17,7 +17,7 @@
     <span v-else>
         <div class="btn-group" role="group" aria-label="Thumb Control">
             <button type="button" class="btn btn-outline-primary" @click="addToBasket()">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>
             </button>
             <button href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}" type="button" class="btn btn-primary">
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
