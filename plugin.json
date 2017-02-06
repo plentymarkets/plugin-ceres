@@ -233,8 +233,18 @@
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
-            "description"   : "Add additional payment information on the order confirmation page.",
+            "description"   : "Add additional payment information on the order confirmation page."
+        },
+        {
+            "key"           : "OrderConfirmation.GrossNetReplace",
+            "name"          : "Order confirmation: Replace gross/net prices",
+            "description"   : "Replace the gross/net prices on the order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "OrderConfirmation.AfterTotals",
+            "name"          : "Order confirmation: Add content after totals",
+            "description"   : "Add content after totals on the order confirmation page."
         },
         {
             "key"           : "CategoryItem.BeforePrices",
