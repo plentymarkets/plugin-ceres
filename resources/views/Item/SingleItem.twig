@@ -16,7 +16,7 @@
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
 
     <div class="single container-max page-content">
-        <div class="row m-t-3">
+        <div class="row mt-3">
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
@@ -26,7 +26,7 @@
             </div>
 
             <!-- ITEM DETAIL -->
-            <div class="col-md-5 single-rightside m-t-1">
+            <div class="col-md-5 single-rightside mt-1">
 
                 <h6 class="producertag">
                     <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.name }}</a>
@@ -44,7 +44,7 @@
 
                 <hr>
 
-                <div class="m-b-3">
+                <div class="mb-3">
                     <!-- <div class="rating pull-xs-right">
                         <span class="tag tag-pill tag-success">
                             <i class="fa fa-star"></i>
@@ -60,7 +60,7 @@
                 </div>
 
                 {% if variations is not null %}
-                <div class="row m-b-1">
+                <div class="row mb-1">
                     <variation-select template="#vue-variation-select" :attributes="{{ services.item.getAttributeNameMap( item.documents[0].data.item.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
                 </div>
                 {% endif %}
@@ -82,7 +82,7 @@
                 </span>
 
                 {% for variationId, basePrice in basePriceList %}
-                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="documents[0].data.variation.id == {{ variationId }}">
+                <div class="base-price text-muted my-1" v-resource-if:currentVariation="documents[0].data.variation.id == {{ variationId }}">
                     {{ trans("PluginCeres::Template.itemUnitPrice") }}
                     {#<span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> / TODO GET CORRECT CURRENCY#}
                     <span class="base-price-value">{{ item.documents[0].data.salesPrices[0].price | formatMonetary("EUR") }}</span> /
@@ -102,7 +102,7 @@
                 </span>
                 {% endfor %}
 
-                <div class="row m-y-1">
+                <div class="row my-1">
 
                     {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
 
@@ -113,7 +113,7 @@
 
                 <div class="row">
                     <!--
-                    <div class="col-xs-6 offset-xs-6 m-t-1">
+                    <div class="col-xs-6 offset-xs-6 mt-1">
                         <a class="pull-xs-right text-muted small" href="#">
                             {{ trans("PluginCeres::Template.itemWishList") }}
                             <i class="fa fa-heart"></i>
@@ -135,7 +135,7 @@
             </div>
 
             <!-- ITEM DESCRIPTION -->
-            <div class="col-md-7 m-y-3">
+            <div class="col-md-7 my-3">
 
                 <ul class="nav nav-tabs" role="tablist">
                     {% if not item.documents[0].data.texts[0].description == '' and('item.description' in itemData or 'all' in itemData) %}
@@ -160,18 +160,18 @@
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="details-{{ item.documents[0].data.variation.id }}" role="tabpanel">
-                        <div class="m-y-2">
+                        <div class="my-2">
                             {{ item.documents[0].data.texts[0].description|raw }}
                         </div>
                     </div>
                     <div class="tab-pane" id="data-{{ item.data.variation.id }}" role="tabpanel">
-                        <div class="m-y-2">
+                        <div class="my-2">
                             {{ item.documents[0].data.texts[0].technicalData|raw }}
                         </div>
                     </div>
 
                     <div class="tab-pane" id="assessments-details" role="tabpanel">
-                        <div class="m-y-2">
+                        <div class="my-2">
                             <table class="table table-striped table-hover table-sm">
                                 <tbody>
                                 {% if 'item.id' in itemData or 'all' in itemData %}
@@ -275,9 +275,9 @@
         {% if crossSellingList | length > 0 %}
             <hr>
 
-            <div class="row m-y-3">
+            <div class="row my-3">
                 <div class="col-xs-12">
-                    <h3 class="m-b-1">{{ (crossSellingList|first).relationship }}</h3>
+                    <h3 class="mb-1">{{ (crossSellingList|first).relationship }}</h3>
                 </div>
                 <div class="col-xs-12">
                     <ul class="crosssellers list-unstyled row">
@@ -294,8 +294,8 @@
 
         {#<hr>#}
 
-        {#<h3 class="m-t-3 m-b-1">{{ trans("PluginCeres::Template.itemCustomerFeedback") }}</h3>#}
-        {#<div class="row m-b-3">#}
+        {#<h3 class="mt-3 mb-1">{{ trans("PluginCeres::Template.itemCustomerFeedback") }}</h3>#}
+        {#<div class="row mb-3">#}
             {#{% include "PluginCeres::Item.Partials.ItemRating" %}#}
         {#</div>#}
 

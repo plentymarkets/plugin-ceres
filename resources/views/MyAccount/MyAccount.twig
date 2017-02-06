@@ -11,14 +11,14 @@
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
 
-    <div class="page-content myaccount container-max m-b-3 m-t-1">
+    <div class="page-content myaccount container-max mb-3 mt-1">
 
         <resource
                 name="checkout"
                 route="/rest/io/checkout/"
                 :data="{{ services.checkout.getCheckout() | json_encode() }}"></resource>
         <!-- HEADER -->
-        <div class="row m-b-3">
+        <div class="row mb-3">
             <div class="col-sm-9">
                 <h1 class="h4">{{ trans("PluginCeres::Template.accMyAccount") }}</h1>
                 {% if frontend.Account.getIsAccountLoggedIn %}
@@ -74,7 +74,7 @@
                 </h4>
                 <p class="text-muted small font-italic">{{ trans("PluginCeres::Template.accChangeLoginData") }}</p>
 
-                <div class="card m-b-3">
+                <div class="card mb-3">
                     <account-settings template="#vue-account-settings" :user-data="{{ userObject }}">
                         <account-settings>
                 </div>

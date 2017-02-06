@@ -3,7 +3,7 @@
 <script type="x/template" id="vue-order-details">
     <div>
         <div class="row">
-            <div class="col-md-6 m-b-2">
+            <div class="col-md-6 mb-2">
                 <div class="card small">
                     <!-- ORDER -->
                     <div class="card-header">
@@ -36,7 +36,7 @@
                                                         </span>
                             </div>
 
-                            <div class="row m-t-1">
+                            <div class="row mt-1">
                                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingAddress") }}</strong>
                                 <span class="col-xs-6 col-sm-7">
                                                             <span v-if="orderData.order.billingAddress.id == orderData.order.deliveryAddress.id">
