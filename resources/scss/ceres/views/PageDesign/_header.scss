@@ -6,6 +6,7 @@
 	z-index: $zIndex-6;
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
+	box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
 	a{
 		text-decoration: none;
 		transition: all 300ms;
@@ -304,6 +305,7 @@
 	}
 
 	.top-bar {
+		box-shadow: none;
 		.list-inline {
 			.list-inline-item {
 				#login-change {

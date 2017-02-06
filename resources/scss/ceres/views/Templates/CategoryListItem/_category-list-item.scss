@@ -78,14 +78,15 @@
     .thumb-title{
         display: block;
         position: relative;
-        text-align:center;
+        text-align:left;
         font-weight: 700;
         color: $gray;
+        line-height: 1.1em;
     }
 
     .thumb-meta{
         margin-top: .5rem;
-        text-align:center;
+        text-align:left;
 
     }
 
@@ -106,49 +107,15 @@
         display: block;
     }
 
-    .thumb-basket-frame {
-        opacity: 0;
-        cursor: pointer;
-        right: 2%;
-        bottom: 2%;
-        box-sizing: initial;
+    .btn-group {
         position: absolute;
-        display: block;
-        width: 1.5rem;
-        height: 1.5rem;
-        padding: 10px;
-        box-shadow: inset 0px 0px 0px 2px $brand-primary;
-        border-radius: 100%;
-        z-index: 10;
-        transition: all 300ms;
-
-        &:hover {
-            background-color: $brand-primary;
-
-            .thumb-basket-inner {
-                color: #fff;
-            }
-        }
+        bottom: 0;
+        left: calc(120px + 0.8rem);
+        z-index: 1000;
+        transition:all .3s ease;
+        opacity: 1;
     }
 
-    .thumb-basket-inner {
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-
-        color: $brand-primary;
-        height: 1.5rem;
-        width: 1.5rem;
-        margin: 0 auto;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 1.5rem;
-        font-size: 1.5rem;
-        transition: all 300ms;
-        &::before {
-            position: relative;
-            left: -1px;
-        }
-    }
 
     @include media-breakpoint-up(sm){
         padding: 0;
@@ -174,12 +141,19 @@
             margin: 0;
         }
 
+        .btn-group {
+            bottom: .8rem;
+            left: auto;
+            right: .8rem;
+        }
+
         .thumb-title{
             font-weight: 400;
 
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            line-height: 1.5em;
         }
 
         .thumb-image{
@@ -198,14 +172,23 @@
                 transform: scale(1.05);
             }
 
-            .thumb-basket-frame {
-                opacity: 1;
-            }
         }
 
     }
 
     @include media-breakpoint-up(md){
 
+    }
+    @include media-breakpoint-up(lg){
+        .btn-group {
+            transition:all .3s ease;
+            opacity: 0;
+        }
+        &:hover {
+            .btn-group {
+                transition:all .3s ease;
+                opacity: 1;
+            }
+        }
     }
 }
