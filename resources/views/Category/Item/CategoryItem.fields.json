@@ -7,5 +7,7 @@
   "salesPrices.type",
   "texts.name*",
   "item.id",
-  "variation.id"
+  "texts*",
+  "variation.id",
+  "variation.itemId"
 ]
