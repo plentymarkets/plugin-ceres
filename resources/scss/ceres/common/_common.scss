@@ -4,7 +4,7 @@
 }
 
 .page-content{
-    @extend .pt-1;
+    @extend .p-t-1;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
