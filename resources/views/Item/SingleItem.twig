@@ -45,13 +45,7 @@
                 <hr>
 
                 <div class="mb-3">
-                    <!-- <div class="rating pull-xs-right">
-                        <span class="tag tag-pill tag-success">
-                            <i class="fa fa-star"></i>
-                            4.5
-                            <span class="amount">357</span>
-                        </span>
-                    </div> -->
+
 
                     <span class="articlenumber small text-muted">
                         <b>{{ trans("PluginCeres::Template.itemNumber") }}</b>
@@ -97,7 +91,7 @@
                 {{ LayoutContainer.show("PluginCeres::SingleItem.AfterPrice", item) }}
 
                 {% for availability in services.availability.getAvailabilities() %}
-                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
+                <span class="availability badge availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
                     {{ availability.languages[0].name }}
                 </span>
                 {% endfor %}
@@ -137,7 +131,7 @@
             <!-- ITEM DESCRIPTION -->
             <div class="col-md-7 my-3">
 
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs">
                     {% if not item.documents[0].data.texts[0].description == '' and('item.description' in itemData or 'all' in itemData) %}
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#details-{{ item.documents[0].data.variation.id }}"
