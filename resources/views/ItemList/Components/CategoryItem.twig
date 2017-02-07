@@ -7,7 +7,8 @@
             <div class="thumb-inner">
                 <div class="thumb-background"></div>
 
-                <add-to-basket template="#vue-add-to-basket" :item="itemData" :show-quantity="false"></add-to-basket>
+                <add-to-basket template="#vue-add-to-basket" :item="itemData" :show-quantity="false"
+                               :item-url="itemData | itemURL"></add-to-basket>
 
                 <div class="thumb-image">
                     <div class="square-container">
