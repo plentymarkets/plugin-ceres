@@ -1,36 +1,41 @@
 .to-top {
     display: block;
-    height: 4rem;
     background-color: $gray-dark;
-    color: white;
     text-align: center;
     padding: .5rem .5rem;
     text-decoration:none!important;
-
-    transition: all 200ms;
-    
     &:hover {
-        background-color: $gray-light;
+    	background-color: $gray-darker;
     }
-}
-
-.footertop{
-	display: block;
-	background-color: $gray-lighter;
+    i {
+    	color: white;
+	    font-size: 1.5em;
+	    padding: .5em 0;
+    }
 }
 
 .footer{
 	display: block;
-	background-color: $gray-lightest;
+	background-color: $footer-bg;
 	
 	a{
-		color: #fff;
+		color: $footer-color;
 	}
+
+	.svg.plenty-brand {
+ 		padding:0 .5em;
+ 		path {
+ 			fill: $gray-dark;
+ 		}
+ 	}
 
 	.footer-features{
 		border-top: 1px solid transparent;
-		background-color: white;
-		color: $gray-dark;
+		background-color: $footer-features-bg;
+		color: $footer-features-color;
+		i {
+			color:$footer-features-color !important;
+		}
 	}
 
 	.footer-content{

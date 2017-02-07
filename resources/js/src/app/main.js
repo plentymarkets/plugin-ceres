@@ -21,12 +21,39 @@ var init = (function($, window, document)
             }
         });
 
+        // Replace all SVG images with inline SVG, class: svg
+        $("img[src$=\".svg\"]").each(function()
+        {
+            var $img = jQuery(this);
+            var imgURL = $img.attr("src");
+            var attributes = $img.prop("attributes");
+
+            $.get(imgURL, function(data)
+            {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find("svg");
+
+                // Remove any invalid XML tags
+                $svg = $svg.removeAttr("xmlns:a");
+
+                // Loop through IMG attributes and apply on SVG
+                $.each(attributes, function()
+                {
+                    $svg.attr(this.name, this.value);
+                });
+
+                // Replace IMG with SVG
+                $img.replaceWith($svg);
+            }, "xml");
+        });
+
         // Sticky sidebar single item
         if (window.matchMedia("(min-width: 768px)").matches)
         {
             var $singleRightside = $(".single-rightside");
+            var $headHeight = $(".top-bar").height();
 
-            $singleRightside.stick_in_parent({});
+            $singleRightside.stick_in_parent({offset_top: $headHeight + 10});
 
             $singleRightside.on("sticky_kit:bottom", function()
             {
@@ -97,6 +124,10 @@ var init = (function($, window, document)
         // initialize lazyload for articles
         $("img.lazy").show().lazyload({
             effect: "fadeIn"
+        });
+        // test, to delete
+        $("img.testtest").show().lazyload({
+            effect : "fadeIn"
         });
 
         $(".cmp-product-thumb").on("mouseover", function(event)

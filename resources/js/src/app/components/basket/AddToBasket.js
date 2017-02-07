@@ -5,6 +5,7 @@ Vue.component("add-to-basket", {
     props: [
         "item",
         "showQuantity",
+        "itemUrl",
         "template"
     ],
 
@@ -49,6 +50,11 @@ Vue.component("add-to-basket", {
                 .push(basketObject);
 
             this.openAddToBasketOverlay();
+        },
+
+        directToItem: function()
+        {
+            window.location.assign(this.itemUrl);
         },
 
         /**
