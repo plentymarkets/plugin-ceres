@@ -104,7 +104,7 @@
 
                 <div class="row m-y-1">
 
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket", item) }}
 
                     <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
