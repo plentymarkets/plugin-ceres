@@ -1,8 +1,8 @@
 {
     "version"           : "0.1.0",
-    "name"              : "PluginCeres",
-    "description"       : "plentymarkets webshop layout",
-    "author"            : "plentymarkets GmbH",
+    "name"              : "PluginCeres HDS",
+    "description"       : "Hochdruckspezialist webshop layout Fork",
+    "author"            : "Hochdruckspezialist GbR",
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : [],
