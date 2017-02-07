@@ -58,7 +58,7 @@
                                     <h3>{{ trans("PluginCeres::Template.orderShippingAddress") }}</h3>
                                 </header>
 
-                                {{ LayoutContainer∫.show("PluginCeres::Checkout.BeforeShippingAddress") }}
+                                {{ LayoutContainer.show("PluginCeres::Checkout.BeforeShippingAddress") }}
                                 <div class="shipping-addresses-select">
                                         <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
                                                                  :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
