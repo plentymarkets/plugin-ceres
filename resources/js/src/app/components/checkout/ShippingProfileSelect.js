@@ -9,7 +9,8 @@ Vue.component("shipping-profile-select", {
     data: function()
     {
         return {
-            checkout: {}
+            checkout: {},
+            checkoutValidation: {shippingProfile: {}}
         };
     },
 
@@ -22,6 +23,9 @@ Vue.component("shipping-profile-select", {
         this.$options.template = this.template;
 
         ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.shippingProfile.validate = this.validate;
     },
 
     methods: {
@@ -31,6 +35,13 @@ Vue.component("shipping-profile-select", {
         onShippingProfileChange: function()
         {
             ResourceService.getResource("checkout").set(this.checkout);
+
+            this.validate();
+        },
+
+        validate: function()
+        {
+            this.checkoutValidation.shippingProfile.showError = !(this.checkout.shippingProfileId > 0);
         }
     }
 });

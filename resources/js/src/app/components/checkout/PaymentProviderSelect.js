@@ -9,7 +9,8 @@ Vue.component("payment-provider-select", {
     data: function()
     {
         return {
-            checkout: {}
+            checkout: {},
+            checkoutValidation: {paymentProvider: {}}
         };
     },
 
@@ -21,6 +22,9 @@ Vue.component("payment-provider-select", {
         this.$options.template = this.template;
 
         ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.paymentProvider.validate = this.validate;
     },
 
     methods: {
@@ -30,6 +34,13 @@ Vue.component("payment-provider-select", {
         onPaymentProviderChange: function()
         {
             ResourceService.getResource("checkout").set(this.checkout);
+
+            this.validate();
+        },
+
+        validate: function()
+        {
+            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
         }
     }
 });

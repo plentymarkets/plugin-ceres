@@ -4,6 +4,7 @@
 {% block PageBody %}
 
     {{ component( "PluginCeres::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "PluginCeres::Checkout.Components.AcceptGtcCheck" ) }}
     {{ component( "PluginCeres::Checkout.Components.PaymentProviderSelect" ) }}
     {{ component( "PluginCeres::Checkout.Components.ShippingProfileSelect" ) }}
     {{ component( "PluginCeres::Checkout.Components.PlaceOrder" ) }}
@@ -18,7 +19,7 @@
             :events="['CheckoutChanged!checkout']"></resource>
         <resource
             name="checkoutValidation"
-            :data="{ invoiceAddress: {}, paymentProvider: {}, shippingProfile: {}, gtc: {} }"></resource>
+            :data="{ invoiceAddress: { showError: false }, paymentProvider: { showError: false }, shippingProfile: { showError: false }, gtc: { showError: false } }"></resource>
 
         {% set overrideCheckout = LayoutContainer.show("PluginCeres::Checkout") %}
         {% if overrideCheckout|trim is empty %}
@@ -57,7 +58,7 @@
                                     <h3>{{ trans("PluginCeres::Template.orderShippingAddress") }}</h3>
                                 </header>
 
-                                {{ LayoutContainer.show("PluginCeres::Checkout.BeforeShippingAddress") }}
+                                {{ LayoutContainer∫.show("PluginCeres::Checkout.BeforeShippingAddress") }}
                                 <div class="shipping-addresses-select">
                                         <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
                                                                  :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
@@ -126,30 +127,33 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-7">
                             <div class="form-check">
-                                <label class="form-check-label" for="agb-accept">
-                                    <input class="form-check-input" type="checkbox" value="" id="agb-accept">
-                                    {% autoescape false %}
-                                        {% set gtcContent %}
-                                            <a href="/terms-conditions" target="_blank">
-                                                <strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>
-                                            </a>
-                                        {% endset %}
 
-                                        {% set cancellationContent %}
-                                            <a href="/cancellation-rights" target="_blank">
-                                                <strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>
-                                            </a>
-                                        {% endset %}
+                                <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
 
-                                        {% set policyContent %}
-                                            <a href="/privacy-policy" target="_blank">
-                                                <strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>
-                                            </a>
-                                        {% endset %}
+                                {#<label class="form-check-label" for="agb-accept">#}
+                                    {#<input class="form-check-input" type="checkbox" value="" id="agb-accept">#}
+                                    {#{% autoescape false %}#}
+                                        {#{% set gtcContent %}#}
+                                            {#<a href="/terms-conditions" target="_blank">#}
+                                                {#<strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>#}
+                                            {#</a>#}
+                                        {#{% endset %}#}
 
-                                        {{ trans("PluginCeres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
-                                    {% endautoescape %}
-                                </label>
+                                        {#{% set cancellationContent %}#}
+                                            {#<a href="/cancellation-rights" target="_blank">#}
+                                                {#<strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>#}
+                                            {#</a>#}
+                                        {#{% endset %}#}
+
+                                        {#{% set policyContent %}#}
+                                            {#<a href="/privacy-policy" target="_blank">#}
+                                                {#<strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>#}
+                                            {#</a>#}
+                                        {#{% endset %}#}
+
+                                        {#{{ trans("PluginCeres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}#}
+                                    {#{% endautoescape %}#}
+                                {#</label>#}
                             </div>
                             {{ LayoutContainer.show("PluginCeres::Checkout.OptIns") }}
                         </div>

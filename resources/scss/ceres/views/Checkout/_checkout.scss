@@ -11,6 +11,11 @@
 		text-align: center;
 	}
 
+	.error {
+		border: 1px solid #d9534f !important;
+		border-radius: .1rem;
+	}
+
 	@include media-breakpoint-up(sm){
 		
 	}

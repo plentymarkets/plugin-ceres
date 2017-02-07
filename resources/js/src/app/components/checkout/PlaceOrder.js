@@ -35,34 +35,43 @@ var ResourceService = require("services/ResourceService");
                 this.waiting = true;
                 var self = this;
 
-                ApiService.post("/rest/io/checkout/payment")
-                    .done(function(response)
-                    {
-                        if (self.validateCheckout())
+                if (self.validateCheckout())
+                {
+                    ApiService.post("/rest/io/checkout/payment")
+                        .done(function(response)
                         {
                             self.afterPreparePayment(response);
-                        }
-                    })
-                    .fail(function(response)
-                    {
-                        self.waiting = false;
-                    });
+                        })
+                        .fail(function(response)
+                        {
+                            self.waiting = false;
+                        });
+                }
+                else
+                {
+                    this.waiting = false;
+                }
             },
 
             validateCheckout: function()
             {
-                var valid = false;
-
-                for (var i in this.checkoutValidation)
+                for (var validator in this.checkoutValidation)
                 {
-                    if (!this.checkoutValidation[i].isValid)
+                    if (this.checkoutValidation[validator].validate)
                     {
-                        this.checkoutValidation[i].showError = true;
-                        valid = true;
+                        this.checkoutValidation[validator].validate();
                     }
                 }
 
-                return valid;
+                for (var i in this.checkoutValidation)
+                {
+                    if (this.checkoutValidation[i].showError)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
             },
 
             afterPreparePayment: function(response)
@@ -116,19 +125,6 @@ var ResourceService = require("services/ResourceService");
                 }
 
                 $modal.modal("show");
-
-            }
-        },
-
-        computed:
-        {
-            waitingForInput: function()
-            {
-                var addressIsNotSet = this.checkout.billingAddressId === 0 || this.checkout.billingAddressId === "0";
-                var shippingIsNotSet = this.checkout.shippingProfileId === 0 || this.checkout.shippingProfileId === "0";
-                var paymentIsNotSet = this.checkout.methodOfPaymentId === 0 || this.checkout.methodOfPaymentId === "0";
-
-                return addressIsNotSet || shippingIsNotSet || paymentIsNotSet;
             }
         }
     });
