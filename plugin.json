@@ -72,6 +72,11 @@
             "description"   : "Add content after the 'Add to shopping cart' button in the single item view."
         },
         {
+            "key"           : "SingleItem.AdditionalContentAfterAddToBasket",
+            "name"          : "Single item: Additional copntent after \"Add to shopping cart\" button",
+            "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
+        },
+        {
             "key"           : "BasketTotals.BeforeItemSum",
             "name"          : "Shopping cart: Before \"Value of items\"",
             "description"   : "Add content before the value of items in the Total column of the shopping cart."
@@ -229,6 +234,11 @@
             "key"           : "Checkout.AfterPlaceOrder",
             "name"          : "Checkout: After place order",
             "description"   : "Add content after the place order in the checkout."
+        },
+        {
+            "key"           : "Checkout.PlaceOrder",
+            "name"          : "Checkout: Replace place order button",
+            "description"   : "Replace the place order button in the checkout."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
