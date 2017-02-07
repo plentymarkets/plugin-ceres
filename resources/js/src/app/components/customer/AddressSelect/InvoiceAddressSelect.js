@@ -6,6 +6,7 @@ Vue.component("invoice-address-select", {
 
     props: [
         "addressList",
+        "hasToValidate",
         "selectedAddressId"
     ],
 
@@ -23,9 +24,13 @@ Vue.component("invoice-address-select", {
     created: function()
     {
         ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
 
-        this.checkoutValidation.invoiceAddress.validate = this.validate;
+        if (this.hasToValidate)
+        {
+            ResourceService.bind("checkoutValidation", this);
+
+            this.checkoutValidation.invoiceAddress.validate = this.validate;
+        }
     },
 
     methods:
@@ -38,9 +43,12 @@ Vue.component("invoice-address-select", {
         {
             this.checkout.billingAddressId = selectedAddress.id;
 
-            this.validate();
-
             ResourceService.getResource("checkout").set(this.checkout);
+
+            if (this.hasToValidate)
+            {
+                this.validate();
+            }
         },
 
         validate: function()

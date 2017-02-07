@@ -1,12 +1,12 @@
 {{ component( "PluginCeres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
     <div>
-        <div class="cmp cmp-address-list m-b-3">
+        <div class="cmp cmp-address-list m-b-3" v-bind:class="{'error': showError}">
             <div class="dropdown items">
 
                 <div
                         id="addressMultiSelect${ _uid }"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty(), 'items items-empty': isAddressListEmpty(), 'error': showError}"
+                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty(), 'items items-empty': isAddressListEmpty()}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
