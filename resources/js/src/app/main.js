@@ -92,6 +92,16 @@ var init = (function($, window, document)
             }
         });
 
+        $("#searchBox").on("show.bs.collapse", function()
+        {
+            $("#countrySettings").collapse("hide");
+        });
+
+        $("#countrySettings").on("show.bs.collapse", function()
+        {
+            $("#searchBox").collapse("hide");
+        });
+
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();
