@@ -96,7 +96,7 @@
 
                 <div class="row m-y-1">
 
-                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket") }}
+                    {{ LayoutContainer.show("PluginCeres::SingleItem.BeforeAddToBasket", item) }}
 
                     <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
@@ -114,8 +114,7 @@
                 </div>
             <!-- ./ITEM DETAIL -->
 
-                <div class="shariff" data-theme="white" data-services='["twitter","facebook","googleplus","pinterest"]'
-                     data-url="" style="max-width:100%;overflow:auto;" data-media-url=""></div>
+                {{ LayoutContainer.show("PluginCeres::SingleItem.AdditionalContentAfterAddToBasket", item) }}
 
                 <hr>
 
