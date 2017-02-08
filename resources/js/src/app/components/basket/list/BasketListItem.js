@@ -56,6 +56,7 @@ Vue.component("basket-list-item", {
                         function()
                         {
                             self.resetDelete();
+                            self.waiting = false;
                         });
             }
         },
