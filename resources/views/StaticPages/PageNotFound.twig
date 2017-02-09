@@ -2,6 +2,26 @@
 
 {% block PageBody %}
 
-    {# TODO #}
+    <div class="container-max page-content page-not-found">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="jumbotron default-not-found">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="display-3">{{ trans("PluginCeres::Template.notFoundOops") }}</h1>
+                            <p class="lead">{{ trans("PluginCeres::Template.notFoundPage") }}</p>
+                            <hr class="m-y-2">
+                            <p class="lead">
+                                <a class="btn btn-primary btn-lg" href="/" role="button"><i class="fa fa-home" aria-hidden="true"></i> {{ trans("PluginCeres::Template.generalHomepage") }}</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-right not-found-text">
+                            404
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
