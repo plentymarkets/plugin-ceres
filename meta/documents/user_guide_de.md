@@ -145,7 +145,6 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
 5. **Speichern** Sie die Einstellungen.
 
-
 <table>
 <caption>Warenkorb anpassen</caption>
 <tr>  
@@ -188,7 +187,6 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 5. **Speichern** Sie die Einstellungen.
 
-
 <table>
 <caption>Paginierung und Sortierung anpassen</caption>
 <tr>  
@@ -230,7 +228,6 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 
 Im Tab **My account** nehmen Sie Einstellungen für den **Mein Konto**-Bereich des Webshops vor.
 
-
 ##### Mein Konto anpassen:
 
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
@@ -238,7 +235,6 @@ Im Tab **My account** nehmen Sie Einstellungen für den **Mein Konto**-Bereich d
 3. Wechseln Sie in das Tab **My account**.
 4. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
 5. **Speichern** Sie die Einstellungen.
-
 
 ### Einstellungen für Plugin-Entwickler
 
@@ -251,7 +247,6 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 3. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
 4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
 5. **Speichern** Sie die Einstellungen.
-
 
 <table>
 <caption>Einstellungen für die Plugin-Entwicklung vornehmen</caption>
@@ -293,7 +288,6 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 2. Wählen Sie unter **Sprachen** weitere Sprachen mit gedrückter Umschalt-Taste.
 3. **Speichern** Sie die Einstellungen. <br /> → Die gewählten Sprachen werden in der Sprachauswahl Ihres Webshops angezeigt.
 
-
 ### Rechtliche Angaben speichern
 
 Für rechtliche Angaben stehen Ihnen in Ceres passende Templates zur Verfügung, in denen Sie Rechtstexte in den verschiedenen Sprachen anzeigen können. Unter **Rechtliche Angaben** speichern Sie Ihre **AGB**, die **Widerrufsbelehrung**, die **Datenschutzerklärung** und das **Impressum** für Ihren Webshop. 
@@ -320,6 +314,3 @@ Alternativ speichern Sie Ihre Rechtstexte im HTML-Format. Nutzen Sie hierfür di
 6. **Speichern** Sie die Einstellungen.
 
 Geben Sie die Texte für die **Widerrufsbelehrung**, die **Datenschutzerklärung** und das **Impressum** analog in den gewünschten Sprachen ein. Die Texte werden in **Ceres** auf den zugehörigen Seiten angezeigt.
-
-
-
