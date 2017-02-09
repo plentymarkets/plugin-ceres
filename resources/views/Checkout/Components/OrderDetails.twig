@@ -178,15 +178,15 @@
                                 {% else %}
                                     <dt v-if="showProperty( 'basket.order_total_gross' )">
                                         <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
-                                    </dt>
-                                    <dd v-if="showProperty( 'basket.order_total_gross' )">
+                                    </dt><!--
+                                    --><dd v-if="showProperty( 'basket.order_total_gross' )">
                                         <strong>${ totals.totalAmount | currency totals.currency }</strong>
                                     </dd>
 
                                     <dt v-if="showProperty( 'basket.order_total_net' )">
                                         {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
-                                    </dt>
-                                    <dd v-if="showProperty( 'basket.order_total_net' )">
+                                    </dt><!--
+                                    --><dd v-if="showProperty( 'basket.order_total_net' )">
                                         ${ totals.totalAmountNet | currency totals.currency }
                                     </dd>
                                 {% endif %}
