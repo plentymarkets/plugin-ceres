@@ -3,10 +3,10 @@
 ## v0.7.0 (2017-02-13)
 
 ### Features
-- using of modern web-technologies
+- use of state-of-the-art web technologies
 - modern design
-- extreme fast
-- integration of elasticsearch
-- continual development
-- unlimited extendable with plugins
+- extremely fast
+- integration of elasticSearch
+- ongoing development
+- easily extendable with plugins
 - configurable
