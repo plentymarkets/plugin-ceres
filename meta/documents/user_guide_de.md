@@ -31,11 +31,11 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Header** bzw. **Footer**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 1.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Header und Footer anpassen</caption>
+<caption>Tab. 1: Header und Footer anpassen</caption>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
@@ -105,11 +105,11 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Item view**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Artikelansicht anpassen</caption>
+<caption>Tab. 2: Artikelansicht anpassen</caption>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
@@ -142,11 +142,11 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Shopping cart**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Warenkorb anpassen</caption>
+<caption>Tab. 3: Warenkorb anpassen</caption>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th>
@@ -184,11 +184,11 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Pagination and sorting**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Paginierung und Sortierung anpassen</caption>
+<caption>Tab. 4: Paginierung und Sortierung anpassen</caption>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th>
@@ -245,11 +245,11 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
