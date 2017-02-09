@@ -31,11 +31,11 @@ Customise the header and the footer of your design. Display your own logo and de
 2. Click on **Ceres**.<br /> → The plugin will open in a new tab.
 3. Click on **Configuration** in the directory tree.
 4. Open the **Header** or the **Footer** tab.
-5. Carry out the settings. Pay attention to the information given in table 2.
+5. Carry out the settings. Pay attention to the information given in table 1.
 6. **Save** the settings.
 
 <table>
-<caption>Customising the header and footer</caption>
+<caption>Table 1: Customising the header and footer</caption>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
@@ -105,11 +105,11 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 1. Go to **Start » Plugins**.<br /> → The plugin overview will open.
 2. Click on **Ceres**.<br /> → The plugin will open in a new tab.
 3. Click on the **Item view** tab.
-4. Carry out the settings. Pay attention to the information given in table 3.
+4. Carry out the settings. Pay attention to the information given in table 2.
 5. **Save** the settings.
 
 <table>
-<caption>Customising the item view</caption>
+<caption>Table 2: Customising the item view</caption>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
@@ -142,11 +142,11 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 1. Go to **Start » Plugins**.<br /> → The plugin overview will open.
 2. Click on **Ceres**.<br /> → The plugin will open in a new tab.
 3. Click on the **Shopping cart** tab.
-4. Carry out the settings. Pay attention to the information given in table 4.
+4. Carry out the settings. Pay attention to the information given in table 3.
 5. **Save** the settings.
 
 <table>
-<caption>Customising the shopping cart</caption>
+<caption>Table 3: Customising the shopping cart</caption>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th>
@@ -183,11 +183,11 @@ Customise the pagination of the item overview and the online store's item sortin
 1. Go to **Start » Plugins**.<br /> → The plugin overview will open.
 2. Click on **Ceres**.<br /> → The plugin will open in a new tab.
 3. Open the **Pagination and sorting** tab.
-4. Carry out the settings. Pay attention to the information given in table 5.
+4. Carry out the settings. Pay attention to the information given in table 4.
 5. **Save** the settings.
 
 <table>
-<caption>Customising the pagination and sorting</caption>
+<caption>Table 4: Customising the pagination and sorting</caption>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th>
@@ -244,11 +244,11 @@ Settings specifically aimed at plugin developers are available in the **Registra
 1. Go to **Start » Plugins**.<br /> → The plugin overview will open.
 2. Click on **Ceres**.<br /> → The plugin will open in a new tab.
 3. Click on the **Registration** or **Logging and performance** tab.
-4. Carry out the settings. Pay attention to the information given in table 6.
+4. Carry out the settings. Pay attention to the information given in table 5.
 5. **Save** the settings.
 
 <table>
-<caption>Carrying out settings for plugin development</caption>
+<caption>Table 5: Carrying out settings for plugin development</caption>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
