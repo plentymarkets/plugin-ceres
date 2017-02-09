@@ -285,6 +285,11 @@
             "key"           : "CategoryItem.AfterPrices",
             "name"          : "Category Item: After prices container",
             "description"   : "Add content after the prices in category item"
+        },
+        {
+            "key"           : "NotFound.AdditionalContent",
+            "name"          : "404: After content",
+            "description"   : "Add additional content on the 404 page"
         }
     ],
     "dataProviders"     : []
