@@ -1,7 +1,7 @@
 {{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
 {% set configItemName = config("PluginCeres.item.name") %}
 
-<article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
+<article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
         <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
@@ -32,7 +32,7 @@
             ${ basketItem.quantity * basketItem.price | currency }
         </div>
 
-        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
                    {{ trans("PluginCeres::Template.generalDelete") }}
               </span>
