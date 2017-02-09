@@ -470,6 +470,7 @@ Vue.component("basket-list-item", {
                         function()
                         {
                             self.resetDelete();
+                            self.waiting = false;
                         });
             }
         },
@@ -6286,6 +6287,16 @@ var init = (function($, window, document)
                     $("body").toggleClass("open-right");
                 }
             }
+        });
+
+        $("#searchBox").on("show.bs.collapse", function()
+        {
+            $("#countrySettings").collapse("hide");
+        });
+
+        $("#countrySettings").on("show.bs.collapse", function()
+        {
+            $("#searchBox").collapse("hide");
         });
 
         $toggleListView.on("click", function(evt)
