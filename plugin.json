@@ -98,7 +98,7 @@
         },
         {
             "key"           : "SingleItem.AdditionalContentAfterAddToBasket",
-            "name"          : "Single item: Additional copntent after \"Add to shopping cart\" button",
+            "name"          : "Single item: Additional content after \"Add to shopping cart\" button",
             "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
         {
