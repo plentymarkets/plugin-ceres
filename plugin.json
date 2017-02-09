@@ -12,7 +12,7 @@
     "phone"             : "+49 561 98 681 100",
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
-    "require"           : ["PluginIO"],
+    "require"           : [],
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
