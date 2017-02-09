@@ -1,6 +1,6 @@
 # Release Notes für PluginCeres
 
-## v0.7.0 (2017-02-13)
+## v1.0.0 (2017-02-13)
 
 ### Funktionen
 - Nutzung moderner Web-Technologien
