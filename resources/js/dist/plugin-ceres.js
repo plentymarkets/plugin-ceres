@@ -1,5 +1,5 @@
-var Languages = Languages || {}; Languages['de'] = {Template: {basket: "Warenkorb",basketOrderNow: "Jetzt bestellen",basketPreview: "Warenkorbvorschau",basketGross: "Brutto",basketNet: "Netto",basketSum: "Summe",basketValue: "Warenwert",basketTotalSum: "Gesamtsumme",basketVAT: "MwSt. 19%",basketCoupon: "Gutschein",basketItemAdded: "Der Artikel wurde in den Warenkorb gelegt.",basketItemNotAdded: "Der Artikel konnte nicht hinzugefügt werden.",addToBasket: "In den Warenkorb",accMyAccount: "Mein Konto",accOrderAsGuest: "Als Gast bestellen",accLogin: "Anmelden",accRegister: "Registrieren",accLogout: "Ausloggen",accInvoiceAddresses: "Rechnungsadressen",accShippingAddresses: "Lieferadressen",accAccountSettings: "Kontoeinstellungen",accChangeLoginData: "Ändern Sie Ihre Zugangsdaten",accBankDetails: "Bankdaten",accChangePaymentInformation: "Ändern Sie Ihre Zahlungsinformationen",accRegisterAccount: "Registrieren Sie sich",accUsername: "Benutzername",accEmail: "E-Mail",accPassword: "Passwort",accRememberPassword: "Passwort merken",accForgotPassword: "Passwort vergessen?",accChangePassword: "Passwort ändern",accNewPassword: "Neues Passwort",accRepeatPassword: "Passwort wiederholen",accCorrectPassword: "Bitte korrigieren",accChangeSettings: "Einstellungen ändern",accLoginSuccessful: "Sie wurden erfolgreich eingeloggt.",accLoginFailed: "Die Anmeldedaten sind ungültig.",accChangePasswordSuccessful: "Das Passwort wurde erfolgreich geändert.",accChangePasswordFailed: "Das Passwort konnte nicht geändert werden.",accRegistrationSuccessful: "Sie wurden erfolgreich registriert.",accPleaseLogin: "Bitte einloggen",accAlreadyLoggedIn: "Sie sind bereits eingeloggt.",accLogoutSuccessful: "Sie wurden erfolgreich ausgeloggt.",accCreateAccount: "Jetzt registrieren",accHolder: "Kontoinhaber",bank: "Kreditinstitut",bankDeleteWarning: "Bankdaten wirklich löschen?",bankDeleteTitle: "Bankdaten löschen",bankAddDataTitle: "Bankdaten hinzufügen",bankUpdateDataTitle: "Bankdaten bearbeiten",bankBicNotification: "Bitte BIC bei Auslandsüberweisungen angeben",bankDataAdded: "Bankdaten hinzugefügt",bankDataNotAdded: "Bankdaten nicht hinzugefügt",bankDataDeleted: "Bankdaten gelöscht",bankDataNotDeleted: "Bankdaten nicht gelöscht",bankDataUpdated: "Bankdaten aktualisiert",bankDataNotUpdated: "Bankdaten nicht aktualisiert",bankNoBankData: "Noch keine Bankdaten vorhanden",itemCategorySort: "Sortieren",itemCategoryItemsPerPage: "Artikel pro Seite",itemCategoryPrevious: "Vorherige",itemCategoryNext: "Nächste",itemCategoryTopItems: "Top-Artikel",itemCategoryItemAsc: "Positionsnummer aufsteigend",itemCategoryItemDesc: "Positionsnummer absteigend",itemCategoryNameAsc: "Name aufsteigend",itemCategoryNameDesc: "Name absteigend",itemCategoryPriceAsc: "Preis aufsteigend",itemCategoryPriceDesc: "Preis absteigend",itemCategoryReleaseAsc: "Erscheinungsdatum aufsteigend",itemCategoryReleaseDesc: "Erscheinungsdatum absteigend",itemCategoryStoreSpecialAsc: "Shop-Aktion aufsteigend",itemCategoryStoreSpecialDesc: "Shop-Aktion absteigend",itemCategoryIdDesc: "Art.-ID aufsteigend",itemCategoryRandom: "Zufällige Sortierung",itemShowMore: "Mehr",itemShowLess: "Weniger",itemId_asc: "Artikel-ID (aufsteigend)",itemId_desc: " Artikel-ID (absteigend)",itemName_asc: "Artikelname (aufsteigend)",itemName_desc: "Artikelname (absteigend)",itemPosition_asc: "Artikelposition (aufsteigend)",itemPosition_desc: " Artikelposition (absteigend)",itemPrice_asc: "Preis (aufsteigend)",itemPrice_desc: "Preis (absteigend)",itemRating_asc: "Kundenbewertung (aufsteigend)",itemRating_desc: "Kundenbewertung (absteigend)",variationCreateTimestamp_asc: "Neueste Varianten",variationCreateTimestamp_desc: "Älteste Varianten",variationId_asc: "Varianten-ID (aufsteigend)",variationId_desc: "Varianten-ID (absteigend)",variationCustomNumber_asc: "Variantennummer (aufsteigend)",variationCustomNumber_desc: "Variantennummer (absteigend)",variationLastUpdateTimestamp_asc: "Letzte Variantenaktualisierung",variationLastUpdateTimestamp_desc: "Erste Variantenaktualisierung",variationName_asc: "Variantenname (aufsteigend)",variationName_desc: "Variantenname (absteigend)",variationPosition_asc: "Variantenposition (aufsteigend)",variationPosition_desc: "Variantenposition (absteigend)",variationActive_asc: "Aktive Variante (aufsteigend)",variationActive_desc: "Aktive Variante (absteigend)",variationPrimary_asc: "Hauptvariante (aufsteigend)",variationPrimary_desc: "Hauptvariante (absteigend)",itemRand: "Zufällige Artikel",itemProducerName_asc: "Hersteller (aufsteigend)",itemProducerName_desc: "Hersteller (absteigend)",generalThanks: "Vielen Dank!",generalHomepage: "Startseite",generalFirstName: "Vorname",generalLastName: "Nachname",generalChooseOur: "Bitte nehmen Sie unsere :gtc, :cancellation und :policy zur Kenntnis.",generalGtc: "AGB",generalCancellationRight: "Widerrufs&shy;recht",generalPrivacyPolicy: "Daten&shy;schutz&shy;erklärung",generalHello: "Hallo, :username",generalAll: "alle",generalNewsletter: "Newsletter",generalEnterEmail: "E-Mail-Adresse eingeben",generalYourEmail: "Ihre E-Mail-Adresse",generalSend: "Senden",generalCountrySettings: "Ländereinstellungen",generalSelectShippingCountry: "Lieferland",generalSelectLanguage: "Sprache",generalSearch: "Suchen..",generalSearchNoDot: "Suchen",generalGermany: "Deutschland",generalEngland: "England",generalAustria: "Österreich",generalSwitzerland: "Schweiz",generalFrance: "Frankreich",generalItaly: "Italien",generalGerman: "Deutsch",generalEnglish: "Englisch",generalLegalDisclosure: "Impressum",generalAllRightsReserved: "Alle Rechte vorbehalten.",generalSave: "Speichern",generalDelete: "Löschen",generalClose: "Schließen",generalCancel: "Abbrechen",generalCountry: "Land",generalState: "Bundesland",generalRedeem: "Einlösen",generalRemove: "Entfernen",generalEnterCoupon: "Gutschein-Code eingeben",generalGiveFeedback: "Bewerten",generalEnterFeedback: "Bewertung eingeben",generalEdit: "Bearbeiten",generalAdd: "Anlegen",generalDeleteNow: "Jetzt löschen",generalCertifiedBy: "Geprüfte Leistung",generalOrderShippedBy: "Wir verschicken mit",generalNext: "Weiter",notFoundOops: "Ups, ein Fehler!",notFoundPage: "Die Seite, die du aufgerufen hast, wurde nicht gefunden.",addressCompany: "Firma",addressFirstName: "Vorname",addressLastName: "Nachname",addressAdditionalName: "Namenszusatz",addressStreet: "Straße",addressNumber: "Nr.",addressAdditionalAddress1: "Adresszusatz 1",addressAdditionalAddress2: "Adresszusatz 2",addressZip: "PLZ",addressPlace: "Ort",pleaseSelect: "Bitte wählen",addressNoAddress: "Noch keine Adresse vorhanden",addressAddAddress: "Neue Adresse hinzufügen",addressChangeAddress: "Adresse ändern",addressDeleteAddress: "Adresse löschen",addressSameAsInvoice: "Lieferadresse gleich Rechnungsadresse",addressDeleteWarning: "Adresse wirklich löschen?",addressContact: "Kontakt",addressGBNameAffix: "Namenszusatz",addressGBBuildingName: "Gebäude Name",addressGBAdditionalLocality: "Adresszusatz",orderWillBeProcessed: "Ihre Bestellung wird bearbeitet. Hier finden Sie eine Zusammenfassung:",orderDetails: "Bestelldetails",orderId: "Auftrags-ID",orderDate: "Auftragsdatum",orderPaymentEntry: "Zahlungseingang",orderStatus: "Status",orderShipped: "Versand",orderStatusHistory: "Statushistorie",orderRecipient: "Empfänger",orderItemId: "Art.-ID",orderPricePerPiece: "Einzelpreis",orderPeace: "Stückzahl",orderTotal: "Gesamt",orderInvoiceAddress: "Rechnungsadresse",orderShippingAddress: "Lieferadresse",orderInvoiceAddressCreate: "Rechnungsadresse anlegen",orderShippingAddressCreate: "Lieferadresse anlegen",orderInvoiceAddressEdit: "Rechnungsadresse bearbeiten",orderShippingAddressEdit: "Lieferadresse bearbeiten",orderInvoiceAddressDelete: "Rechnungsadresse löschen",orderShippingAddressDelete: "Lieferadresse löschen",orderCheckout: "Kasse",orderShippingProfile: "Versandart",orderEstimatedShippingDate: "Voraussichtl. Versanddatum",orderPaymentMethod: "Zahlungsart",orderPaymentStatus: "Zahlungsstatus",orderPaymentMethods: "Zahlungsarten",orderBuyNow: "Jetzt kaufen",orderPayEasy: "Zahlen Sie bequem per",orderWeShip: "Wir versenden mit",orderNoItemsInBasket: "Sie haben noch keine Artikel im Warenkorb.",orderHistory: "Auftragshistorie",orderEnterOrderId: "Auftrags-ID eingeben",orderSelectTimePeriod: "Zeitraum wählen",orderLast30Days: "letzte 30 Tage",orderLast6Month: "letzte 3 Monate",orderLast3Month: "letzte 6 Monate",orderFrom: "Von",orderTo: "Bis",orderApply: "Anwenden",orderShow: "Zeige :countStart - :countEnd von :orderMaxCount Aufträgen",orderItemsBought: "Gekaufte Artikel",itemNumber: "Artikelnummer",itemUnitPrice: "Grundpreis",itemWishList: "Wunschliste",itemInclVAT: "* inkl. ges. MwSt.",itemExclusive: "zzgl.",itemShippingCosts: "Versandkosten",itemDescription: "Beschreibung",itemTechnicalData: "Technische Daten",itemMoreDetails: "Weitere Details",itemId: "Art.-ID",itemCondition: "Zustand",itemNew: "Neu",itemAge: "Altersfreigabe",itemFSK: "FSK ab :age freigegeben",itemExternalVariationId: "Externe Varianten-ID",itemModel: "Modell",itemManufacturer: "Hersteller",itemManufacturingCountry: "Herstellungsland",itemContent: "Inhalt",itemWeight: "Gewicht",itemNetWeight: "Netto-Gewicht",itemDimensions: "Maße",itemCustomsTariffNumber: "Zolltarifnummer",itemCustomerFeedback: "Kundenrezensionen",itemEach: "Stück",itemAvailability: "Verfügbarkeit",itemPleaseSelect: "Bitte wählen",itemState: "Status",paymentStatus_unpaid: "Nicht bezahlt",paymentStatus_prepaid: "Im Voraus bezahlt",paymentStatus_partlyPaid: "Teilweise bezahlt",paymentStatus_fullyPaid: "Bezahlt",paymentStatus_overpaid: "Überzahlt",de: "Deutsch",en: "English",fr: "Französisch",it: "Italienisch",es: "Spanisch",tr: "Türkisch",nl: "Niederländisch",pl: "Polnisch",pt: "Portugiesisch",nn: "Norwegisch",da: "Dänisch",se: "Schwedisch",cz: "Tschechisch",ru: "Russisch",sk: "Slowakisch",cn: "Chinesisch",vn: "Vietnamesisch",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",timeFormat: "H:i",timeFormatMoment: "HH:mm",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",},};
-var Languages = Languages || {}; Languages['en'] = {Template: {basket: "Shopping cart",basketOrderNow: "Order now",basketPreview: "Shopping cart preview",basketGross: "Gross",basketNet: "Net",basketSum: "Total",basketValue: "Value of items",basketTotalSum: "Total",basketVAT: "VAT 19%",basketCoupon: "Coupon",basketItemAdded: "The item was placed in the shopping cart.",basketItemNotAdded: "The item could not be added.",addToBasket: "Add to shopping cart",accMyAccount: "My account",accOrderAsGuest: "Order as a guest",accLogin: "Log in",accRegister: "Register",accLogout: "Log out",accInvoiceAddresses: "Invoice addresses",accShippingAddresses: "Delivery addresses",accAccountSettings: "Account settings",accChangeLoginData: "Change your access data",accBankDetails: "Bank details",accChangePaymentInformation: "Change your payment information",accRegisterAccount: "Register first",accUsername: "User name",accEmail: "Email",accPassword: "Password",accRememberPassword: "Remember password",accForgotPassword: "Forgot your password?",accChangePassword: "Change password",accNewPassword: "New password",accRepeatPassword: "Repeat password",accCorrectPassword: "Please correct",accChangeSettings: "Change settings",accLoginSuccessful: "You have been logged in successfully.",accLoginFailed: "Your login data is invalid.",accChangePasswordSuccessful: "The password has been changed successfully.",accChangePasswordFailed: "The password could not be changed.",accRegistrationSuccessful: "You have been registered successfully.",accPleaseLogin: "Please log in",accAlreadyLoggedIn: "You are already logged in.",accLogoutSuccessful: "You have been logged out successfully.",accCreateAccount: "Register now",accHolder: "Account holder",bank: "Bank",bankDeleteWarning: "Really delete bank details?",bankDeleteTitle: "Delete bank details",bankAddDataTitle: "Add bank details",bankUpdateDataTitle: "Edit bank details",bankBicNotification: "Please use the BIC for international bank transfers",bankDataAdded: "Bank details added",bankDataNotAdded: "Bank details not added",bankDataDeleted: "Bank details deleted",bankDataNotDeleted: "Bank details not deleted",bankDataUpdated: "Bank details updated",bankDataNotUpdated: "Bank details not updated",bankNoBankData: "No bank details saved",itemCategorySort: "Sort by",itemCategoryItemsPerPage: "Items per page",itemCategoryPrevious: "Previous",itemCategoryNext: "Next",itemCategoryTopItems: "Top items",itemCategoryItemAsc: "Position ascending",itemCategoryItemDesc: "Position descending",itemCategoryNameAsc: "Name ascending",itemCategoryNameDesc: "Name descending",itemCategoryPriceAsc: "Price ascending",itemCategoryPriceDesc: "Price descending",itemCategoryReleaseAsc: "Release date ascending",itemCategoryReleaseDesc: "Release date descending",itemCategoryStoreSpecialAsc: "Store special ascending",itemCategoryStoreSpecialDesc: "Store special descending",itemCategoryIdDesc: "Item ID ascending",itemCategoryRandom: "Random sorting",itemId_asc: "Item ID (ascending)",itemId_desc: "Item ID (descending)",itemName_asc: "Item name (ascending)",itemName_desc: "Item name (descending)",itemPosition_asc: "Item position (ascending)",itemPosition_desc: "Item position (descending)",itemPrice_asc: "Price (ascending)",itemPrice_desc: "Price (descending)",itemRating_asc: "Customer feedback (ascending)",itemRating_desc: "Customer feedback (descending)",variationCreateTimestamp_asc: "Newest variation",variationCreateTimestamp_desc: "Oldest variation",variationId_asc: "Variation ID (ascending)",variationId_desc: "Variation ID (descending)",variationCustomNumber_asc: "Variation number (ascending)",variationCustomNumber_desc: "Variation number (descending)",variationLastUpdateTimestamp_asc: "Last variation update",variationLastUpdateTimestamp_desc: "First variation update",variationName_asc: "Variation name (ascending)",variationName_desc: "Variation name (descending)",variationPosition_asc: "Variation position (ascending)",variationPosition_desc: "Variation position (descending)",variationActive_asc: "Active variation (ascending)",variationActive_desc: "Active variation (descending)",variationPrimary_asc: "Main variation (ascending)",variationPrimary_desc: "Main variation (descending)",itemRand: "Random items",itemProducerName_asc: "Manufacturer (ascending)",itemProducerName_desc: "Manufacturer (descending)",itemShowMore: "More",itemShowLess: "Less",generalThanks: "Thank you!",generalHomepage: "Homepage",generalFirstName: "First name",generalLastName: "Last name",generalChooseOur: "Please accept our :gtc, :cancellation and :policy.",generalGtc: "Terms and conditions",generalCancellationRight: "Cancellation&shy; rights",generalPrivacyPolicy: "Privacy&shy; policy",generalHello: "Hello, :username",generalAll: "all",generalNewsletter: "Newsletter",generalEnterEmail: "Enter email address",generalYourEmail: "Your email address",generalSend: "Send",generalCountrySettings: "Locale settings",generalSelectShippingCountry: "Country of delivery",generalSelectLanguage: "Language",generalSearch: "Search..",generalSearchNoDot: "Search",generalGermany: "Germany",generalEngland: "England",generalAustria: "Austria",generalSwitzerland: "Switzerland",generalFrance: "France",generalItaly: "Italy",generalGerman: "German",generalEnglish: "English",generalLegalDisclosure: "Legal disclosure",generalAllRightsReserved: "All rights reserved.",generalSave: "Save",generalDelete: "Delete",generalClose: "Close",generalCancel: "Cancel",generalCountry: "Country",generalState: "State/Province",generalRedeem: "Redeem coupon",generalRemove: "Remove",generalEnterCoupon: "Your coupon code",generalGiveFeedback: "Rate item",generalEnterFeedback: "Enter feedback",generalEdit: "Edit",generalAdd: "Create",generalDeleteNow: "Delete now",generalCertifiedBy: "Certified by",generalOrderShippedBy: "Your order is shipped by",generalNext: "Next",notFoundOops: "Oops, something went terribly wrong!",notFoundPage: "The requested page was not found.",addressCompany: "Company",addressFirstName: "First name",addressLastName: "Last name",addressAdditionalName: "Additional name",addressStreet: "Street",addressNumber: "House No.",addressAdditionalAddress1: "Additional address information 1",addressAdditionalAddress2: "Additional address information 2",addressZip: "Postcode",addressPlace: "Town",pleaseSelect: "Please select",addressNoAddress: "No Address saved",addressAddAddress: "Create a new address",addressChangeAddress: "Change address",addressDeleteAddress: "Delete address",addressSameAsInvoice: "Delivery address same as invoice address",addressDeleteWarning: "Really delete address?",addressGBNameAffix: "Name affix",addressGBBuildingName: "Building name",addressGBAdditionalLocality: "Additional locality",addressContact: "Contact",orderWillBeProcessed: "Your order is being processed. Here, you will find an overview:",orderId: "Order ID",orderDate: "Order date:",orderPaymentEntry: "Incoming payment:",orderStatus: "Status:",orderShipped: "Shipping:",orderPaypalPlus: "PayPal PLUS",orderDhlPackage: "DHL Paket",orderStatusHistory: "Status history",orderRecipient: "Recipient:",orderItemId: "Item ID",orderInvoiceAddress: "Invoice address",orderShippingAddress: "Delivery address",orderInvoiceAddressCreate: "Create invoice address",orderShippingAddressCreate: "Create delivery address",orderInvoiceAddressEdit: "Edit invoice address",orderShippingAddressEdit: "Edit delivery address",orderInvoiceAddressDelete: "Delete invoice address",orderShippingAddressDelete: "Delete shipping address",orderCheckout: "Checkout",orderShippingProfile: "Shipping method",orderPaymentMethod: "Payment method",orderPaymentMethods: "Payment methods",orderBuyNow: "Order now",orderPayEasy: "Pay quickly and easily with",orderWeShip: "Your order is shipped by",orderNoItemsInBasket: "Your shopping cart is empty.",orderHistory: "Order history",orderEnterOrderId: "Enter order ID",orderSelectTimePeriod: "Select a time period",orderLast30Days: "the last 30 days",orderLast6Month: "the last 3 months",orderLast3Month: "the last 6 months",orderFrom: "From",orderTo: "To",orderApply: "Apply",orderShow: "Show :countStart - :countEnd of :orderMaxCount orders",orderItemsBought: "Purchased items",itemNumber: "Item number",itemUnitPrice: "Unit price",itemWishList: "Wish list",itemInclVAT: "* Incl. VAT",itemExclusive: "excl.",itemShippingCosts: "Shipping",itemDescription: "Description",itemTechnicalData: "Technical data",itemMoreDetails: "More details",itemId: "Item ID",itemCondition: "Condition",itemNew: "New",itemAge: "Age rating",itemFSK: "Released for age :age and older",itemExternalVariationId: "External variation ID",itemModel: "Model",itemManufacturer: "Manufacturer",itemManufacturingCountry: "Manufacturing country",itemContent: "Content",itemWeight: "Weight",itemNetWeight: "Net weight",itemDimensions: "Dimensions",itemCustomsTariffNumber: "Customs tariff number",itemCustomerFeedback: "Customer reviews",itemEach: "Each",itemAvailability: "Availability",itemPleaseSelect: "Please select",itemState: "State",de: "German",en: "English",fr: "French",it: "Italian",es: "Spanish",tr: "Turkish",nl: "Dutch",pl: "Polish",pt: "Portuguese",nn: "Norwegian",da: "Danish",se: "Swedish",cz: "Czech",ru: "Russian",sk: "Slovak",cn: "Chinese",vn: "Vietnamese",},};
+var Languages = Languages || {}; Languages['de'] = {Template: {basket: "Warenkorb",basketOrderNow: "Jetzt bestellen",basketPreview: "Warenkorbvorschau",basketGross: "Brutto",basketNet: "Netto",basketSum: "Summe",basketValue: "Warenwert",basketTotalSum: "Gesamtsumme",basketVAT: "MwSt. 19%",basketCoupon: "Gutschein",basketItemAdded: "Der Artikel wurde in den Warenkorb gelegt.",basketItemNotAdded: "Der Artikel konnte nicht hinzugefügt werden.",addToBasket: "In den Warenkorb",accMyAccount: "Mein Konto",accOrderAsGuest: "Als Gast bestellen",accLogin: "Anmelden",accRegister: "Registrieren",accLogout: "Ausloggen",accInvoiceAddresses: "Rechnungsadressen",accShippingAddresses: "Lieferadressen",accAccountSettings: "Kontoeinstellungen",accChangeLoginData: "Ändern Sie Ihre Zugangsdaten",accBankDetails: "Bankdaten",accChangePaymentInformation: "Ändern Sie Ihre Zahlungsinformationen",accRegisterAccount: "Registrieren Sie sich",accUsername: "Benutzername",accEmail: "E-Mail",accPassword: "Passwort",accRememberPassword: "Passwort merken",accForgotPassword: "Passwort vergessen?",accChangePassword: "Passwort ändern",accNewPassword: "Neues Passwort",accRepeatPassword: "Passwort wiederholen",accCorrectPassword: "Bitte korrigieren",accChangeSettings: "Einstellungen ändern",accLoginSuccessful: "Sie wurden erfolgreich eingeloggt.",accLoginFailed: "Die Anmeldedaten sind ungültig.",accChangePasswordSuccessful: "Das Passwort wurde erfolgreich geändert.",accChangePasswordFailed: "Das Passwort konnte nicht geändert werden.",accRegistrationSuccessful: "Sie wurden erfolgreich registriert.",accPleaseLogin: "Bitte einloggen",accAlreadyLoggedIn: "Sie sind bereits eingeloggt.",accLogoutSuccessful: "Sie wurden erfolgreich ausgeloggt.",accCreateAccount: "Jetzt registrieren",accHolder: "Kontoinhaber",bank: "Kreditinstitut",bankDeleteWarning: "Bankdaten wirklich löschen?",bankDeleteTitle: "Bankdaten löschen",bankAddDataTitle: "Bankdaten hinzufügen",bankUpdateDataTitle: "Bankdaten bearbeiten",bankBicNotification: "Bitte BIC bei Auslandsüberweisungen angeben",bankDataAdded: "Bankdaten hinzugefügt",bankDataNotAdded: "Bankdaten nicht hinzugefügt",bankDataDeleted: "Bankdaten gelöscht",bankDataNotDeleted: "Bankdaten nicht gelöscht",bankDataUpdated: "Bankdaten aktualisiert",bankDataNotUpdated: "Bankdaten nicht aktualisiert",bankNoBankData: "Noch keine Bankdaten vorhanden",itemCategorySort: "Sortieren",itemCategoryItemsPerPage: "Artikel pro Seite",itemCategoryPrevious: "Vorherige",itemCategoryNext: "Nächste",itemCategoryTopItems: "Top-Artikel",itemCategoryItemAsc: "Positionsnummer aufsteigend",itemCategoryItemDesc: "Positionsnummer absteigend",itemCategoryNameAsc: "Name aufsteigend",itemCategoryNameDesc: "Name absteigend",itemCategoryPriceAsc: "Preis aufsteigend",itemCategoryPriceDesc: "Preis absteigend",itemCategoryReleaseAsc: "Erscheinungsdatum aufsteigend",itemCategoryReleaseDesc: "Erscheinungsdatum absteigend",itemCategoryStoreSpecialAsc: "Shop-Aktion aufsteigend",itemCategoryStoreSpecialDesc: "Shop-Aktion absteigend",itemCategoryIdDesc: "Art.-ID aufsteigend",itemCategoryRandom: "Zufällige Sortierung",itemShowMore: "Mehr",itemShowLess: "Weniger",itemId_asc: "Artikel-ID (aufsteigend)",itemId_desc: " Artikel-ID (absteigend)",itemName_asc: "Artikelname (aufsteigend)",itemName_desc: "Artikelname (absteigend)",itemPosition_asc: "Artikelposition (aufsteigend)",itemPosition_desc: " Artikelposition (absteigend)",itemPrice_asc: "Preis (aufsteigend)",itemPrice_desc: "Preis (absteigend)",itemRating_asc: "Kundenbewertung (aufsteigend)",itemRating_desc: "Kundenbewertung (absteigend)",variationCreateTimestamp_asc: "Neueste Varianten",variationCreateTimestamp_desc: "Älteste Varianten",variationId_asc: "Varianten-ID (aufsteigend)",variationId_desc: "Varianten-ID (absteigend)",variationCustomNumber_asc: "Variantennummer (aufsteigend)",variationCustomNumber_desc: "Variantennummer (absteigend)",variationLastUpdateTimestamp_asc: "Letzte Variantenaktualisierung",variationLastUpdateTimestamp_desc: "Erste Variantenaktualisierung",variationName_asc: "Variantenname (aufsteigend)",variationName_desc: "Variantenname (absteigend)",variationPosition_asc: "Variantenposition (aufsteigend)",variationPosition_desc: "Variantenposition (absteigend)",variationActive_asc: "Aktive Variante (aufsteigend)",variationActive_desc: "Aktive Variante (absteigend)",variationPrimary_asc: "Hauptvariante (aufsteigend)",variationPrimary_desc: "Hauptvariante (absteigend)",itemRand: "Zufällige Artikel",itemProducerName_asc: "Hersteller (aufsteigend)",itemProducerName_desc: "Hersteller (absteigend)",generalThanks: "Vielen Dank!",generalHomepage: "Startseite",generalFirstName: "Vorname",generalLastName: "Nachname",generalChooseOur: "Bitte nehmen Sie unsere :gtc, :cancellation und :policy zur Kenntnis.",generalGtc: "AGB",generalCancellationRight: "Widerrufs&shy;recht",generalPrivacyPolicy: "Daten&shy;schutz&shy;erklärung",generalHello: "Hallo, :username",generalAll: "alle",generalNewsletter: "Newsletter",generalEnterEmail: "E-Mail-Adresse eingeben",generalYourEmail: "Ihre E-Mail-Adresse",generalSend: "Senden",generalCountrySettings: "Ländereinstellungen",generalSelectShippingCountry: "Lieferland",generalSelectLanguage: "Sprache",generalSearch: "Suchen..",generalSearchNoDot: "Suchen",generalGermany: "Deutschland",generalEngland: "England",generalAustria: "Österreich",generalSwitzerland: "Schweiz",generalFrance: "Frankreich",generalItaly: "Italien",generalGerman: "Deutsch",generalEnglish: "Englisch",generalLegalDisclosure: "Impressum",generalAllRightsReserved: "Alle Rechte vorbehalten.",generalSave: "Speichern",generalDelete: "Löschen",generalClose: "Schließen",generalCancel: "Abbrechen",generalCountry: "Land",generalState: "Bundesland",generalRedeem: "Einlösen",generalRemove: "Entfernen",generalEnterCoupon: "Gutschein-Code eingeben",generalGiveFeedback: "Bewerten",generalEnterFeedback: "Bewertung eingeben",generalEdit: "Bearbeiten",generalAdd: "Anlegen",generalDeleteNow: "Jetzt löschen",generalCertifiedBy: "Geprüfte Leistung",generalOrderShippedBy: "Wir verschicken mit",generalNext: "Weiter",notFoundOops: "Ups, ein Fehler!",notFoundPage: "Die Seite, die du aufgerufen hast, wurde nicht gefunden.",couponRedeemSuccess: "Gutschein erfolgreich eingelöst",couponRedeemFailure: "Gutschein nicht eingelöst",couponRemoveSuccess: "Gutschein erfolgreich entfernt",couponRemoveFailure: "Gutschein nicht entfernt",addressCompany: "Firma",addressFirstName: "Vorname",addressLastName: "Nachname",addressAdditionalName: "Namenszusatz",addressStreet: "Straße",addressNumber: "Nr.",addressAdditionalAddress1: "Adresszusatz 1",addressAdditionalAddress2: "Adresszusatz 2",addressZip: "PLZ",addressPlace: "Ort",pleaseSelect: "Bitte wählen",addressNoAddress: "Noch keine Adresse vorhanden",addressAddAddress: "Neue Adresse hinzufügen",addressChangeAddress: "Adresse ändern",addressDeleteAddress: "Adresse löschen",addressSameAsInvoice: "Lieferadresse gleich Rechnungsadresse",addressDeleteWarning: "Adresse wirklich löschen?",addressContact: "Kontakt",addressGBNameAffix: "Namenszusatz",addressGBBuildingName: "Gebäude Name",addressGBAdditionalLocality: "Adresszusatz",orderWillBeProcessed: "Ihre Bestellung wird bearbeitet. Hier finden Sie eine Zusammenfassung:",orderDetails: "Bestelldetails",orderId: "Auftrags-ID",orderDate: "Auftragsdatum",orderPaymentEntry: "Zahlungseingang",orderStatus: "Status",orderShipped: "Versand",orderStatusHistory: "Statushistorie",orderRecipient: "Empfänger",orderItemId: "Art.-ID",orderPricePerPiece: "Einzelpreis",orderPeace: "Stückzahl",orderTotal: "Gesamt",orderInvoiceAddress: "Rechnungsadresse",orderShippingAddress: "Lieferadresse",orderInvoiceAddressCreate: "Rechnungsadresse anlegen",orderShippingAddressCreate: "Lieferadresse anlegen",orderInvoiceAddressEdit: "Rechnungsadresse bearbeiten",orderShippingAddressEdit: "Lieferadresse bearbeiten",orderInvoiceAddressDelete: "Rechnungsadresse löschen",orderShippingAddressDelete: "Lieferadresse löschen",orderCheckout: "Kasse",orderShippingProfile: "Versandart",orderEstimatedShippingDate: "Voraussichtl. Versanddatum",orderPaymentMethod: "Zahlungsart",orderPaymentStatus: "Zahlungsstatus",orderPaymentMethods: "Zahlungsarten",orderBuyNow: "Jetzt kaufen",orderPayEasy: "Zahlen Sie bequem per",orderWeShip: "Wir versenden mit",orderNoItemsInBasket: "Sie haben noch keine Artikel im Warenkorb.",orderHistory: "Auftragshistorie",orderEnterOrderId: "Auftrags-ID eingeben",orderSelectTimePeriod: "Zeitraum wählen",orderLast30Days: "letzte 30 Tage",orderLast6Month: "letzte 3 Monate",orderLast3Month: "letzte 6 Monate",orderFrom: "Von",orderTo: "Bis",orderApply: "Anwenden",orderShow: "Zeige :countStart - :countEnd von :orderMaxCount Aufträgen",orderItemsBought: "Gekaufte Artikel",itemNumber: "Artikelnummer",itemUnitPrice: "Grundpreis",itemWishList: "Wunschliste",itemInclVAT: "* inkl. ges. MwSt.",itemExclusive: "zzgl.",itemShippingCosts: "Versandkosten",itemDescription: "Beschreibung",itemTechnicalData: "Technische Daten",itemMoreDetails: "Weitere Details",itemId: "Art.-ID",itemCondition: "Zustand",itemNew: "Neu",itemAge: "Altersfreigabe",itemFSK: "FSK ab :age freigegeben",itemExternalVariationId: "Externe Varianten-ID",itemModel: "Modell",itemManufacturer: "Hersteller",itemManufacturingCountry: "Herstellungsland",itemContent: "Inhalt",itemWeight: "Gewicht",itemNetWeight: "Netto-Gewicht",itemDimensions: "Maße",itemCustomsTariffNumber: "Zolltarifnummer",itemCustomerFeedback: "Kundenrezensionen",itemEach: "Stück",itemAvailability: "Verfügbarkeit",itemPleaseSelect: "Bitte wählen",itemState: "Status",paymentStatus_unpaid: "Nicht bezahlt",paymentStatus_prepaid: "Im Voraus bezahlt",paymentStatus_partlyPaid: "Teilweise bezahlt",paymentStatus_fullyPaid: "Bezahlt",paymentStatus_overpaid: "Überzahlt",de: "Deutsch",en: "English",fr: "Französisch",it: "Italienisch",es: "Spanisch",tr: "Türkisch",nl: "Niederländisch",pl: "Polnisch",pt: "Portugiesisch",nn: "Norwegisch",da: "Dänisch",se: "Schwedisch",cz: "Tschechisch",ru: "Russisch",sk: "Slowakisch",cn: "Chinesisch",vn: "Vietnamesisch",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",timeFormat: "H:i",timeFormatMoment: "HH:mm",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",},};
+var Languages = Languages || {}; Languages['en'] = {Template: {basket: "Shopping cart",basketOrderNow: "Order now",basketPreview: "Shopping cart preview",basketGross: "Gross",basketNet: "Net",basketSum: "Total",basketValue: "Value of items",basketTotalSum: "Total",basketVAT: "VAT 19%",basketCoupon: "Coupon",basketItemAdded: "The item was placed in the shopping cart.",basketItemNotAdded: "The item could not be added.",addToBasket: "Add to shopping cart",accMyAccount: "My account",accOrderAsGuest: "Order as a guest",accLogin: "Log in",accRegister: "Register",accLogout: "Log out",accInvoiceAddresses: "Invoice addresses",accShippingAddresses: "Delivery addresses",accAccountSettings: "Account settings",accChangeLoginData: "Change your access data",accBankDetails: "Bank details",accChangePaymentInformation: "Change your payment information",accRegisterAccount: "Register first",accUsername: "User name",accEmail: "Email",accPassword: "Password",accRememberPassword: "Remember password",accForgotPassword: "Forgot your password?",accChangePassword: "Change password",accNewPassword: "New password",accRepeatPassword: "Repeat password",accCorrectPassword: "Please correct",accChangeSettings: "Change settings",accLoginSuccessful: "You have been logged in successfully.",accLoginFailed: "Your login data is invalid.",accChangePasswordSuccessful: "The password has been changed successfully.",accChangePasswordFailed: "The password could not be changed.",accRegistrationSuccessful: "You have been registered successfully.",accPleaseLogin: "Please log in",accAlreadyLoggedIn: "You are already logged in.",accLogoutSuccessful: "You have been logged out successfully.",accCreateAccount: "Register now",accHolder: "Account holder",bank: "Bank",bankDeleteWarning: "Really delete bank details?",bankDeleteTitle: "Delete bank details",bankAddDataTitle: "Add bank details",bankUpdateDataTitle: "Edit bank details",bankBicNotification: "Please use the BIC for international bank transfers",bankDataAdded: "Bank details added",bankDataNotAdded: "Bank details not added",bankDataDeleted: "Bank details deleted",bankDataNotDeleted: "Bank details not deleted",bankDataUpdated: "Bank details updated",bankDataNotUpdated: "Bank details not updated",bankNoBankData: "No bank details saved",itemCategorySort: "Sort by",itemCategoryItemsPerPage: "Items per page",itemCategoryPrevious: "Previous",itemCategoryNext: "Next",itemCategoryTopItems: "Top items",itemCategoryItemAsc: "Position ascending",itemCategoryItemDesc: "Position descending",itemCategoryNameAsc: "Name ascending",itemCategoryNameDesc: "Name descending",itemCategoryPriceAsc: "Price ascending",itemCategoryPriceDesc: "Price descending",itemCategoryReleaseAsc: "Release date ascending",itemCategoryReleaseDesc: "Release date descending",itemCategoryStoreSpecialAsc: "Store special ascending",itemCategoryStoreSpecialDesc: "Store special descending",itemCategoryIdDesc: "Item ID ascending",itemCategoryRandom: "Random sorting",itemId_asc: "Item ID (ascending)",itemId_desc: "Item ID (descending)",itemName_asc: "Item name (ascending)",itemName_desc: "Item name (descending)",itemPosition_asc: "Item position (ascending)",itemPosition_desc: "Item position (descending)",itemPrice_asc: "Price (ascending)",itemPrice_desc: "Price (descending)",itemRating_asc: "Customer feedback (ascending)",itemRating_desc: "Customer feedback (descending)",variationCreateTimestamp_asc: "Newest variation",variationCreateTimestamp_desc: "Oldest variation",variationId_asc: "Variation ID (ascending)",variationId_desc: "Variation ID (descending)",variationCustomNumber_asc: "Variation number (ascending)",variationCustomNumber_desc: "Variation number (descending)",variationLastUpdateTimestamp_asc: "Last variation update",variationLastUpdateTimestamp_desc: "First variation update",variationName_asc: "Variation name (ascending)",variationName_desc: "Variation name (descending)",variationPosition_asc: "Variation position (ascending)",variationPosition_desc: "Variation position (descending)",variationActive_asc: "Active variation (ascending)",variationActive_desc: "Active variation (descending)",variationPrimary_asc: "Main variation (ascending)",variationPrimary_desc: "Main variation (descending)",itemRand: "Random items",itemProducerName_asc: "Manufacturer (ascending)",itemProducerName_desc: "Manufacturer (descending)",itemShowMore: "More",itemShowLess: "Less",generalThanks: "Thank you!",generalHomepage: "Homepage",generalFirstName: "First name",generalLastName: "Last name",generalChooseOur: "Please accept our :gtc, :cancellation and :policy.",generalGtc: "Terms and conditions",generalCancellationRight: "Cancellation&shy; rights",generalPrivacyPolicy: "Privacy&shy; policy",generalHello: "Hello, :username",generalAll: "all",generalNewsletter: "Newsletter",generalEnterEmail: "Enter email address",generalYourEmail: "Your email address",generalSend: "Send",generalCountrySettings: "Locale settings",generalSelectShippingCountry: "Country of delivery",generalSelectLanguage: "Language",generalSearch: "Search..",generalSearchNoDot: "Search",generalGermany: "Germany",generalEngland: "England",generalAustria: "Austria",generalSwitzerland: "Switzerland",generalFrance: "France",generalItaly: "Italy",generalGerman: "German",generalEnglish: "English",generalLegalDisclosure: "Legal disclosure",generalAllRightsReserved: "All rights reserved.",generalSave: "Save",generalDelete: "Delete",generalClose: "Close",generalCancel: "Cancel",generalCountry: "Country",generalState: "State/Province",generalRedeem: "Redeem coupon",generalRemove: "Remove",generalEnterCoupon: "Your coupon code",generalGiveFeedback: "Rate item",generalEnterFeedback: "Enter feedback",generalEdit: "Edit",generalAdd: "Create",generalDeleteNow: "Delete now",generalCertifiedBy: "Certified by",generalOrderShippedBy: "Your order is shipped by",generalNext: "Next",notFoundOops: "Oops, something went terribly wrong!",notFoundPage: "The requested page was not found.",couponRedeemSuccess: "Coupon redeemed successfully",couponRedeemFailure: "Coupon not redeemed",couponRemoveSuccess: "Coupon removed successfully",couponRemoveFailure: "Coupon not removed",addressCompany: "Company",addressFirstName: "First name",addressLastName: "Last name",addressAdditionalName: "Additional name",addressStreet: "Street",addressNumber: "House No.",addressAdditionalAddress1: "Additional address information 1",addressAdditionalAddress2: "Additional address information 2",addressZip: "Postcode",addressPlace: "Town",pleaseSelect: "Please select",addressNoAddress: "No Address saved",addressAddAddress: "Create a new address",addressChangeAddress: "Change address",addressDeleteAddress: "Delete address",addressSameAsInvoice: "Delivery address same as invoice address",addressDeleteWarning: "Really delete address?",addressGBNameAffix: "Name affix",addressGBBuildingName: "Building name",addressGBAdditionalLocality: "Additional locality",addressContact: "Contact",orderWillBeProcessed: "Your order is being processed. Here, you will find an overview:",orderId: "Order ID",orderDate: "Order date:",orderPaymentEntry: "Incoming payment:",orderStatus: "Status:",orderShipped: "Shipping:",orderPaypalPlus: "PayPal PLUS",orderDhlPackage: "DHL Paket",orderStatusHistory: "Status history",orderRecipient: "Recipient:",orderItemId: "Item ID",orderInvoiceAddress: "Invoice address",orderShippingAddress: "Delivery address",orderInvoiceAddressCreate: "Create invoice address",orderShippingAddressCreate: "Create delivery address",orderInvoiceAddressEdit: "Edit invoice address",orderShippingAddressEdit: "Edit delivery address",orderInvoiceAddressDelete: "Delete invoice address",orderShippingAddressDelete: "Delete shipping address",orderCheckout: "Checkout",orderShippingProfile: "Shipping method",orderPaymentMethod: "Payment method",orderPaymentMethods: "Payment methods",orderBuyNow: "Order now",orderPayEasy: "Pay quickly and easily with",orderWeShip: "Your order is shipped by",orderNoItemsInBasket: "Your shopping cart is empty.",orderHistory: "Order history",orderEnterOrderId: "Enter order ID",orderSelectTimePeriod: "Select a time period",orderLast30Days: "the last 30 days",orderLast6Month: "the last 3 months",orderLast3Month: "the last 6 months",orderFrom: "From",orderTo: "To",orderApply: "Apply",orderShow: "Show :countStart - :countEnd of :orderMaxCount orders",orderItemsBought: "Purchased items",itemNumber: "Item number",itemUnitPrice: "Unit price",itemWishList: "Wish list",itemInclVAT: "* Incl. VAT",itemExclusive: "excl.",itemShippingCosts: "Shipping",itemDescription: "Description",itemTechnicalData: "Technical data",itemMoreDetails: "More details",itemId: "Item ID",itemCondition: "Condition",itemNew: "New",itemAge: "Age rating",itemFSK: "Released for age :age and older",itemExternalVariationId: "External variation ID",itemModel: "Model",itemManufacturer: "Manufacturer",itemManufacturingCountry: "Manufacturing country",itemContent: "Content",itemWeight: "Weight",itemNetWeight: "Net weight",itemDimensions: "Dimensions",itemCustomsTariffNumber: "Customs tariff number",itemCustomerFeedback: "Customer reviews",itemEach: "Each",itemAvailability: "Availability",itemPleaseSelect: "Please select",itemState: "State",de: "German",en: "English",fr: "French",it: "Italian",es: "Spanish",tr: "Turkish",nl: "Dutch",pl: "Polish",pt: "Portuguese",nn: "Norwegian",da: "Danish",se: "Swedish",cz: "Czech",ru: "Russian",sk: "Slovak",cn: "Chinese",vn: "Vietnamese",},};
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -32445,7 +32445,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":61,"services/ResourceService":63}],2:[function(require,module,exports){
+},{"services/ModalService":60,"services/ResourceService":62}],2:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
@@ -32532,7 +32532,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"services/ResourceService":63}],3:[function(require,module,exports){
+},{"services/ResourceService":62}],3:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
@@ -32564,7 +32564,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ResourceService":63}],4:[function(require,module,exports){
+},{"services/ResourceService":62}],4:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
@@ -32608,9 +32608,10 @@ Vue.component("basket-totals", {
     }
 });
 
-},{"services/ResourceService":63}],5:[function(require,module,exports){
+},{"services/ResourceService":62}],5:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
@@ -32655,11 +32656,11 @@ Vue.component("coupon", {
                 })
                 .done(function(response)
                 {
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
                 });
         },
 
@@ -32676,11 +32677,11 @@ Vue.component("coupon", {
                 .done(function(response)
                 {
                     self.couponCode = "";
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
         }
     },
@@ -32699,7 +32700,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/ApiService":57,"services/ResourceService":63}],6:[function(require,module,exports){
+},{"services/ApiService":56,"services/NotificationService":61,"services/ResourceService":62}],6:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list", {
@@ -32731,7 +32732,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{"services/ResourceService":63}],7:[function(require,module,exports){
+},{"services/ResourceService":62}],7:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 // var ApiService          = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
@@ -32834,7 +32835,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"services/ResourceService":63}],8:[function(require,module,exports){
+},{"services/ResourceService":62}],8:[function(require,module,exports){
 Vue.component("order-details", {
 
     props: [
@@ -33023,7 +33024,7 @@ Vue.component("payment-provider-select", {
     }
 });
 
-},{"services/ResourceService":63}],10:[function(require,module,exports){
+},{"services/ResourceService":62}],10:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
@@ -33134,7 +33135,7 @@ var ResourceService = require("services/ResourceService");
     });
 })(jQuery);
 
-},{"services/ApiService":57,"services/NotificationService":62,"services/ResourceService":63}],11:[function(require,module,exports){
+},{"services/ApiService":56,"services/NotificationService":61,"services/ResourceService":62}],11:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
@@ -33172,7 +33173,7 @@ Vue.component("shipping-profile-select", {
     }
 });
 
-},{"services/ResourceService":63}],12:[function(require,module,exports){
+},{"services/ResourceService":62}],12:[function(require,module,exports){
 Vue.component("address-input-group", {
 
     props: [
@@ -33511,7 +33512,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":56,"services/ApiService":57,"services/ModalService":61}],14:[function(require,module,exports){
+},{"services/AddressService":55,"services/ApiService":56,"services/ModalService":60}],14:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
@@ -33624,7 +33625,7 @@ Vue.component("create-update-address", {
 
 });
 
-},{"services/AddressService":56,"services/ValidationService":64}],15:[function(require,module,exports){
+},{"services/AddressService":55,"services/ValidationService":63}],15:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
@@ -33664,7 +33665,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{"services/ResourceService":63}],16:[function(require,module,exports){
+},{"services/ResourceService":62}],16:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
@@ -33722,7 +33723,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{"services/ResourceService":63}],17:[function(require,module,exports){
+},{"services/ResourceService":62}],17:[function(require,module,exports){
 var CountryService = require("services/CountryService");
 var ResourceService = require("services/ResourceService");
 
@@ -33806,7 +33807,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":59,"services/ResourceService":63}],18:[function(require,module,exports){
+},{"services/CountryService":58,"services/ResourceService":62}],18:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -33930,7 +33931,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":57,"services/ModalService":61,"services/NotificationService":62,"services/ValidationService":64}],19:[function(require,module,exports){
+},{"services/ApiService":56,"services/ModalService":60,"services/NotificationService":61,"services/ValidationService":63}],19:[function(require,module,exports){
 var ValidationService = require("services/ValidationService");
 var ApiService = require("services/ApiService");
 
@@ -33986,7 +33987,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":57,"services/ValidationService":64}],20:[function(require,module,exports){
+},{"services/ApiService":56,"services/ValidationService":63}],20:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -34092,7 +34093,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":57,"services/ModalService":61,"services/NotificationService":62,"services/ValidationService":64}],21:[function(require,module,exports){
+},{"services/ApiService":56,"services/ModalService":60,"services/NotificationService":61,"services/ValidationService":63}],21:[function(require,module,exports){
 Vue.component("login-view", {
 
     props: [
@@ -34191,7 +34192,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":57,"services/ResourceService":63}],23:[function(require,module,exports){
+},{"services/ApiService":56,"services/ResourceService":62}],23:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     props: [
@@ -34373,7 +34374,7 @@ Vue.component("quantity-input", {
 
 })(jQuery);
 
-},{"services/ResourceService":63}],25:[function(require,module,exports){
+},{"services/ResourceService":62}],25:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -34566,7 +34567,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":57,"services/ResourceService":63}],26:[function(require,module,exports){
+},{"services/ApiService":56,"services/ResourceService":62}],26:[function(require,module,exports){
 Vue.component("category-item", {
 
     template: "#vue-category-item",
@@ -34800,7 +34801,7 @@ Vue.component("item-list", {
     }
 });
 
-},{"services/ItemListService":60,"services/ResourceService":63}],30:[function(require,module,exports){
+},{"services/ItemListService":59,"services/ResourceService":62}],30:[function(require,module,exports){
 var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list-sorting", {
@@ -34849,7 +34850,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/ItemListService":60}],31:[function(require,module,exports){
+},{"services/ItemListService":59}],31:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -34947,7 +34948,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/ItemListService":60,"services/ResourceService":63}],32:[function(require,module,exports){
+},{"services/ItemListService":59,"services/ResourceService":62}],32:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var accounting = require("accounting");
 
@@ -35025,7 +35026,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"accounting":66,"services/ResourceService":63}],33:[function(require,module,exports){
+},{"accounting":65,"services/ResourceService":62}],33:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -35059,7 +35060,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/ItemListService":60,"services/ResourceService":63}],34:[function(require,module,exports){
+},{"services/ItemListService":59,"services/ResourceService":62}],34:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("loading-animation", {
@@ -35086,7 +35087,7 @@ Vue.component("loading-animation", {
     }
 });
 
-},{"services/ResourceService":63}],35:[function(require,module,exports){
+},{"services/ResourceService":62}],35:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -35148,7 +35149,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/ItemListService":60,"services/ResourceService":63}],36:[function(require,module,exports){
+},{"services/ItemListService":59,"services/ResourceService":62}],36:[function(require,module,exports){
 var ModalService        = require("services/ModalService");
 var APIService          = require("services/APIService");
 var NotificationService = require("services/NotificationService");
@@ -35260,7 +35261,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":55,"services/ModalService":61,"services/NotificationService":62}],37:[function(require,module,exports){
+},{"services/APIService":56,"services/ModalService":60,"services/NotificationService":61}],37:[function(require,module,exports){
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
@@ -35522,7 +35523,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":57,"services/ModalService":61,"services/NotificationService":62,"services/ValidationService":64}],38:[function(require,module,exports){
+},{"services/ApiService":56,"services/ModalService":60,"services/NotificationService":61,"services/ValidationService":63}],38:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 (function($)
@@ -35607,7 +35608,7 @@ var ApiService = require("services/ApiService");
     });
 })(jQuery);
 
-},{"services/ApiService":57}],39:[function(require,module,exports){
+},{"services/ApiService":56}],39:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
@@ -35681,7 +35682,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"services/NotificationService":62}],40:[function(require,module,exports){
+},{"services/NotificationService":61}],40:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
@@ -35713,7 +35714,7 @@ Vue.component("shipping-country-select", {
     }
 });
 
-},{"services/ResourceService":63}],41:[function(require,module,exports){
+},{"services/ResourceService":62}],41:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shop-language-select", {
@@ -35753,7 +35754,7 @@ Vue.component("shop-language-select", {
     }
 });
 
-},{"services/ResourceService":63}],42:[function(require,module,exports){
+},{"services/ResourceService":62}],42:[function(require,module,exports){
 var WaitScreenService = require("services/WaitScreenService");
 
 /**
@@ -35795,7 +35796,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":65}],43:[function(require,module,exports){
+},{"services/WaitScreenService":64}],43:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 Vue.directive("logout", function()
@@ -35824,7 +35825,7 @@ Vue.directive("logout", function()
         }.bind(this));
 });
 
-},{"services/ApiService":57}],44:[function(require,module,exports){
+},{"services/ApiService":56}],44:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.elementDirective("resource", {
@@ -35897,7 +35898,7 @@ Vue.elementDirective("resource-list", {
     }
 });
 
-},{"services/ResourceService":63}],45:[function(require,module,exports){
+},{"services/ResourceService":62}],45:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-bind", {
@@ -35937,7 +35938,7 @@ Vue.directive("resource-bind", {
 
 });
 
-},{"services/ResourceService":63}],46:[function(require,module,exports){
+},{"services/ResourceService":62}],46:[function(require,module,exports){
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
@@ -35972,7 +35973,7 @@ Vue.directive("resource-if", {
 
 });
 
-},{"services/ResourceService":63}],47:[function(require,module,exports){
+},{"services/ResourceService":62}],47:[function(require,module,exports){
 Vue.directive("change-lang", function(value)
 {
     $(this.el).click(function(event)
@@ -35997,7 +35998,7 @@ Vue.directive("shipping-country", function(value)
     });
 });
 
-},{"services/CheckoutService":58}],49:[function(require,module,exports){
+},{"services/CheckoutService":57}],49:[function(require,module,exports){
 var ResourceService   = require("services/ResourceService");
 var currencySymbolMap = require("currency-symbol-map");
 var accounting        = require("accounting");
@@ -36030,7 +36031,7 @@ Vue.filter("currency", function(price, customCurrency)
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":66,"currency-symbol-map":67,"services/ResourceService":63}],50:[function(require,module,exports){
+},{"accounting":65,"currency-symbol-map":66,"services/ResourceService":62}],50:[function(require,module,exports){
 // for docs see https://github.com/brockpetrie/vue-moment
 
 var dateFilter = function()
@@ -36260,6 +36261,68 @@ Vue.filter("itemURL", function(item)
 });
 
 },{}],55:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":56,"services/CheckoutService":57}],56:[function(require,module,exports){
 var NotificationService = require("services/NotificationService");
 var WaitScreenService   = require("services/WaitScreenService");
 
@@ -36425,71 +36488,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/NotificationService":62,"services/WaitScreenService":65}],56:[function(require,module,exports){
-var ApiService      = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
-
-module.exports = (function($)
-{
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive)
-    {
-        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
-        {
-            if (setActive)
-            {
-                if (addressType === 1)
-                {
-                    CheckoutService.setBillingAddressId(response.id);
-                }
-                else if (addressType === 2)
-                {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
-            }
-        });
-    }
-
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType)
-    {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
-
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType)
-    {
-        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-})(jQuery);
-
-},{"services/ApiService":57,"services/CheckoutService":58}],57:[function(require,module,exports){
-arguments[4][55][0].apply(exports,arguments)
-},{"dup":55,"services/NotificationService":62,"services/WaitScreenService":65}],58:[function(require,module,exports){
+},{"services/NotificationService":61,"services/WaitScreenService":64}],57:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -36580,7 +36579,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":57}],59:[function(require,module,exports){
+},{"services/ApiService":56}],58:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -36671,7 +36670,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],60:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
@@ -36804,7 +36803,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":57,"services/NotificationService":62,"services/ResourceService":63}],61:[function(require,module,exports){
+},{"services/ApiService":56,"services/NotificationService":61,"services/ResourceService":62}],60:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -36938,7 +36937,7 @@ module.exports = (function($)
     }
 })(jQuery);
 
-},{}],62:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -37132,7 +37131,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],63:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -37695,7 +37694,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ApiService":57}],64:[function(require,module,exports){
+},{"services/ApiService":56}],63:[function(require,module,exports){
 module.exports = (function($)
 {
     var $form;
@@ -37893,7 +37892,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],65:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 module.exports = (function($)
 {
 
@@ -37943,7 +37942,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{}],66:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -38358,7 +38357,7 @@ module.exports = (function($)
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],67:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -38398,7 +38397,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":68}],68:[function(require,module,exports){
+},{"./map":67}],67:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
