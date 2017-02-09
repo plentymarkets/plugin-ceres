@@ -1,5 +1,7 @@
 {% extends getPartial('page-design') %}
 
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% block PageBody %}
 
     {% set termsAndConditions = services.legalInformation.getTermsAndConditions() %}
@@ -19,6 +21,7 @@
                     <p class="static-page-plain-text">{{ termsAndConditions.plainText }}</p>
                 {% endif %}
 
+                {{ LayoutContainer.show("PluginCeres::StaticPages.TermsAndConditions") }}
             </div>
         </div>
     </div>

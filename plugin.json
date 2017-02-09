@@ -17,6 +17,26 @@
             "description"   : "Add style to Ceres with a theme plugin"
         },
         {
+            "key"           : "StaticPages.CancellationRights",
+            "name"          : "Static Pages: Cancellation Rights",
+            "description"   : "Add additional content on the cancellation rights page"
+        },
+        {
+            "key"           : "StaticPages.LegalDisclosure",
+            "name"          : "Static Pages: Legal Disclosure",
+            "description"   : "Add additional content on the legal disclosure page"
+        },
+        {
+            "key"           : "StaticPages.PrivacyPolicy",
+            "name"          : "Static Pages: Privacy Policy",
+            "description"   : "Add additional content on the privacy policy page"
+        },
+        {
+            "key"           : "StaticPages.TermsAndConditions",
+            "name"          : "Static Pages: Terms And Conditions",
+            "description"   : "Add additional content on the terms and conditions page"
+        },
+        {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
             "description"   : "Add a logo of the payment method to the payment methods on the homepage"
@@ -265,6 +285,11 @@
             "key"           : "CategoryItem.AfterPrices",
             "name"          : "Category Item: After prices container",
             "description"   : "Add content after the prices in category item"
+        },
+        {
+            "key"           : "NotFound.AdditionalContent",
+            "name"          : "404: After content",
+            "description"   : "Add additional content on the 404 page"
         }
     ],
     "dataProviders"     : []
