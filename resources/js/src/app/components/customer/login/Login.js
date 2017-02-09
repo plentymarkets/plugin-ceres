@@ -73,11 +73,15 @@ Vue.component("login", {
 
                     if (self.backlink !== null && self.backlink)
                     {
-                        window.location.assign(self.backlink);
+                        location.assign(self.backlink);
                     }
                     else if (self.hasToForward)
                     {
-                        window.location.assign(window.location.origin);
+                        location.assign(location.origin);
+                    }
+                    else
+                    {
+                        location.reload();
                     }
 
                     self.isDisabled = false;
