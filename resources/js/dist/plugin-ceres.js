@@ -33027,7 +33027,7 @@ Vue.component("payment-provider-select", {
         initDefaultPaymentProvider: function()
         {
             // todo get entry from config | select first payment provider
-            if (this.checkout.methodOfPaymentId == 0)
+            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
             {
                 this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
 
