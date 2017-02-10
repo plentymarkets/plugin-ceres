@@ -313,3 +313,7 @@ Alternatively, save your legal texts in HTML format. For this purpose, use the f
 7. **Save** the settings.
 
 Enter the texts for the **cancellation rights**, the **privacy policy** and the **legal disclosure** for your online store in the desired languages. These texts will be displayed on the respective pages in **Ceres**.
+
+## License
+
+This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE. – find further information in the [LICENSE.md](https://github.com/plentymarkets/plugin-ceres/blob/stable/LICENSE.md).
