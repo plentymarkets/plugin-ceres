@@ -1,4 +1,4 @@
-# Ceres - Der neue Webshop für plentymarkets 7
+# Ceres – Der neue Webshop für plentymarkets 7
 
 <div class="container-toc"></div>
 

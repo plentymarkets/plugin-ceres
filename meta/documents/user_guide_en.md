@@ -1,4 +1,4 @@
-# Ceres - The new online store for plentymarkets 7
+# Ceres – The new online store for plentymarkets 7
 
 <div class="container-toc"></div>
 
