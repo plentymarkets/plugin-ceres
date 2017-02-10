@@ -691,6 +691,8 @@ Vue.component("payment-provider-select", {
         this.$options.template = this.template;
 
         ResourceService.bind("checkout", this);
+
+        this.initDefaultPaymentProvider();
     },
 
     methods: {
@@ -700,6 +702,17 @@ Vue.component("payment-provider-select", {
         onPaymentProviderChange: function()
         {
             ResourceService.getResource("checkout").set(this.checkout);
+        },
+
+        initDefaultPaymentProvider: function()
+        {
+            // todo get entry from config | select first payment provider
+            if (this.checkout.methodOfPaymentId == 0)
+            {
+                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
+
+                ResourceService.getResource("checkout").set(this.checkout);
+            }
         }
     }
 });
@@ -2582,7 +2595,7 @@ Vue.component("item-search", {
                 paramName: "searchString",
                 params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
-                zIndex: 1061,
+                zIndex: 1070,
                 maxHeight: 310,
                 minChars: 2,
                 preventBadQueries: false,
