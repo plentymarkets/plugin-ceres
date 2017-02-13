@@ -818,6 +818,7 @@ var ResourceService = require("services/ResourceService");
                 }
                 else
                 {
+                    NotificationService.error(Translations.Template.generalCheckEntries);
                     this.waiting = false;
                 }
             },
