@@ -34390,7 +34390,8 @@ Vue.component("quantity-input", {
         "min",
         "max",
         "vertical",
-        "template"
+        "template",
+        "waiting"
     ],
 
     data: function()
