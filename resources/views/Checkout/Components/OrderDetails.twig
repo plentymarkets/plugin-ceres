@@ -128,13 +128,6 @@
                         <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
                         <div>
                             <dl>
-                                <dt v-if="showProperty( 'basket.value_of_items_gross' )">
-                                    <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
-                                </dt><!--
-                         --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
-                                    <strong>${ totals.itemSum | currency totals.currency }</strong>
-                                </dd>
-
                                 <dt v-if="showProperty( 'basket.value_of_items_net' )">
                                     {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
                                 </dt><!--
@@ -142,11 +135,11 @@
                                     ${ totals.itemSumNet | currency totals.currency }
                                 </dd>
 
-                                <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                                    <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                                <dt v-if="showProperty( 'basket.value_of_items_gross' )">
+                                    <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
                                 </dt><!--
-                         --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
-                                    <strong>${ totals.shippingAmount | currency totals.currency }</strong>
+                         --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
+                                    <strong>${ totals.itemSum | currency totals.currency }</strong>
                                 </dd>
 
                                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
@@ -156,18 +149,11 @@
                                     ${ totals.shippingAmountNet | currency totals.currency }
                                 </dd>
 
-                                <dt v-if="showProperty( 'basket.vat' )">
-                                    {{ trans("PluginCeres::Template.basketVAT") }}
+                                <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
+                                    <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
                                 </dt><!--
-                         --><dd v-if="showProperty( 'basket.vat' )">
-                                    ${ totals.vat | currency totals.currency }
-                                </dd>
-
-                                <dt v-if="totals.couponValue !== 0">
-                                    <strong>{{ trans("PluginCeres::Template.basketCoupon") }}</strong>
-                                </dt><!--
-                        --><dd v-if="totals.couponValue !== 0">
-                                    <strong>${ totals.couponValue | currency totals.currency }</strong>
+                         --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
+                                    <strong>${ totals.shippingAmount | currency totals.currency }</strong>
                                 </dd>
 
                                 <hr>
@@ -176,19 +162,36 @@
                                 {% if grossNet|trim is not empty %}
                                     {{ grossNet }}
                                 {% else %}
-                                    <dt v-if="showProperty( 'basket.order_total_gross' )">
-                                        <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
-                                    </dt><!--
-                                    --><dd v-if="showProperty( 'basket.order_total_gross' )">
-                                        <strong>${ totals.totalAmount | currency totals.currency }</strong>
-                                    </dd>
-
                                     <dt v-if="showProperty( 'basket.order_total_net' )">
                                         {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
                                     </dt><!--
                                     --><dd v-if="showProperty( 'basket.order_total_net' )">
-                                        ${ totals.totalAmountNet | currency totals.currency }
+                                    ${ totals.totalAmountNet | currency totals.currency }
                                     </dd>
+
+                                    <dt v-if="totals.couponValue !== 0">
+                                        <strong>{{ trans("PluginCeres::Template.basketCoupon") }}</strong>
+                                    </dt><!--
+                                    --><dd v-if="totals.couponValue !== 0">
+                                        <strong>${ totals.couponValue | currency totals.currency }</strong>
+                                    </dd>
+
+                                    <dt v-if="showProperty( 'basket.vat' )">
+                                        {{ trans("PluginCeres::Template.basketVAT") }}
+                                    </dt><!--
+                                     --><dd v-if="showProperty( 'basket.vat' )">
+                                        ${ totals.vat | currency totals.currency }
+                                    </dd>
+
+                                    <hr>
+
+                                    <dt v-if="showProperty( 'basket.order_total_gross' )">
+                                        <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                                    </dt><!--
+                                    --><dd v-if="showProperty( 'basket.order_total_gross' )">
+                                    <strong>${ totals.totalAmount | currency totals.currency }</strong>
+                                    </dd>
+
                                 {% endif %}
 
                                 {{ LayoutContainer.show("PluginCeres::OrderConfirmation.AfterTotals") }}
