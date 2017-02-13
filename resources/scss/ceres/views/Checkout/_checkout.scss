@@ -11,14 +11,19 @@
 		text-align: center;
 	}
 
+	.cmp-address-list,
+	.form-check-label {
+		transition: all .3s ease;
+	}
 	.error {
-		border: 1px solid $brand-danger;
-		border-radius: .1rem;
+		background: $brand-danger;
+	    padding: .5em;
+	    color: $white;
+	    border-radius: .1rem;
+	    transition: all .3s ease;
+		
 		&.form-check-label {
-			background: $brand-danger;
-		    padding: .5em 1.75rem;
-		    color: $white;
-		    border: 0;
+			 padding: .5em 1.75rem;
 		    a {
 		    	color: $white;
 		    	&:hover {
