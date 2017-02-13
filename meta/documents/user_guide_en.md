@@ -8,6 +8,10 @@
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
+<div class="alert alert-info" role="alert">
+    When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the normal plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
+</div>
+
 ### Deactivating the default homepage
 
 **Ceres** comes with a default homepage. Deactivate this homepage, to display your own content on the homepage of your online store.

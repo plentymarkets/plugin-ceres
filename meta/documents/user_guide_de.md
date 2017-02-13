@@ -8,6 +8,10 @@
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
+<div class="alert alert-info" role="alert">
+    Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
+</div>
+
 ### Standard-Startseite deaktivieren
 
 **Ceres** wird mit einer Standard-Startseite ausgeliefert. Deaktivieren Sie diese Startseite, um eigene Inhalte auf der Startseite anzeigen zu können.
