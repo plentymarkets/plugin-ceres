@@ -12,8 +12,20 @@
 	}
 
 	.error {
-		border: 1px solid #d9534f !important;
+		border: 1px solid $brand-danger;
 		border-radius: .1rem;
+		&.form-check-label {
+			background: $brand-danger;
+		    padding: .5em 1.75rem;
+		    color: $white;
+		    border: 0;
+		    a {
+		    	color: $white;
+		    	&:hover {
+		    		color: $gray-lighter2;
+		    	}
+		    }
+		}
 	}
 
 	@include media-breakpoint-up(sm){
