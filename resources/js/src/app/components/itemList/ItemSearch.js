@@ -49,7 +49,7 @@ Vue.component("item-search", {
                 paramName: "searchString",
                 params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
-                zIndex: 1061,
+                zIndex: 1070,
                 maxHeight: 310,
                 minChars: 2,
                 preventBadQueries: false,

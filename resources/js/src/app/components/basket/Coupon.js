@@ -1,5 +1,6 @@
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
@@ -44,11 +45,11 @@ Vue.component("coupon", {
                 })
                 .done(function(response)
                 {
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
                 });
         },
 
@@ -65,11 +66,11 @@ Vue.component("coupon", {
                 .done(function(response)
                 {
                     self.couponCode = "";
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
         }
     },

@@ -755,10 +755,10 @@ Vue.component("add-to-basket", {
             this.openAddToBasketOverlay();
         },
 
-        directToItem: function()
-        {
-            window.location.assign(this.itemUrl);
-        },
+        // directToItem: function()
+        // {
+        //     window.location.assign(this.itemUrl);
+        // },
 
         /**
          * open the AddItemToBasketOverlay
@@ -866,6 +866,7 @@ Vue.component("basket-totals", {
 },{"services/ResourceService":67}],8:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
@@ -910,11 +911,11 @@ Vue.component("coupon", {
                 })
                 .done(function(response)
                 {
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
                 });
         },
 
@@ -931,11 +932,11 @@ Vue.component("coupon", {
                 .done(function(response)
                 {
                     self.couponCode = "";
-                    console.log("Success response:", response);
+                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
                 })
                 .fail(function(response)
                 {
-                    console.log("Fail response:", response);
+                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
         }
     },
@@ -954,7 +955,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/ApiService":61,"services/ResourceService":67}],9:[function(require,module,exports){
+},{"services/ApiService":61,"services/NotificationService":66,"services/ResourceService":67}],9:[function(require,module,exports){
 var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list", {
@@ -1045,6 +1046,7 @@ Vue.component("basket-list-item", {
                         function()
                         {
                             self.resetDelete();
+                            self.waiting = false;
                         });
             }
         },
@@ -1293,8 +1295,7 @@ Vue.component("payment-provider-select", {
     data: function()
     {
         return {
-            checkout: {},
-            checkoutValidation: {paymentProvider: {}}
+            checkout: {}
         };
     },
 
@@ -1306,9 +1307,8 @@ Vue.component("payment-provider-select", {
         this.$options.template = this.template;
 
         ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
 
-        this.checkoutValidation.paymentProvider.validate = this.validate;
+        this.initDefaultPaymentProvider();
     },
 
     methods: {
@@ -1318,13 +1318,17 @@ Vue.component("payment-provider-select", {
         onPaymentProviderChange: function()
         {
             ResourceService.getResource("checkout").set(this.checkout);
-
-            this.validate();
         },
 
-        validate: function()
+        initDefaultPaymentProvider: function()
         {
-            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
+            // todo get entry from config | select first payment provider
+            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
+            {
+                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
+
+                ResourceService.getResource("checkout").set(this.checkout);
+            }
         }
     }
 });
@@ -2423,11 +2427,15 @@ Vue.component("login", {
 
                     if (self.backlink !== null && self.backlink)
                     {
-                        window.location.assign(self.backlink);
+                        location.assign(self.backlink);
                     }
                     else if (self.hasToForward)
                     {
-                        window.location.assign(window.location.origin);
+                        location.assign(location.origin);
+                    }
+                    else
+                    {
+                        location.reload();
                     }
 
                     self.isDisabled = false;
@@ -3258,7 +3266,7 @@ Vue.component("item-search", {
                 paramName: "searchString",
                 params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
-                zIndex: 1061,
+                zIndex: 1070,
                 maxHeight: 310,
                 minChars: 2,
                 preventBadQueries: false,
@@ -6395,6 +6403,16 @@ var init = (function($, window, document)
                     $("body").toggleClass("open-right");
                 }
             }
+        });
+
+        $("#searchBox").on("show.bs.collapse", function()
+        {
+            $("#countrySettings").collapse("hide");
+        });
+
+        $("#countrySettings").on("show.bs.collapse", function()
+        {
+            $("#searchBox").collapse("hide");
         });
 
         $toggleListView.on("click", function(evt)
