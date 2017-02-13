@@ -8,7 +8,8 @@ Vue.component("address-select", {
         "addressList",
         "addressType",
         "selectedAddressId",
-        "template"
+        "template",
+        "showError"
     ],
 
     data: function()

@@ -21,8 +21,7 @@
 		}
 
 		input:checked + label{
-			box-shadow: inset 0 0 0 1px $brand-primary;
-			border: 1px solid $brand-primary;
+			box-shadow: inset 0 0 0 .1rem $brand-primary;
 		}
 
 		label{
