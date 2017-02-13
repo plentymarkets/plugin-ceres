@@ -25,6 +25,8 @@ Vue.component("payment-provider-select", {
         ResourceService.bind("checkoutValidation", this);
 
         this.checkoutValidation.paymentProvider.validate = this.validate;
+
+        this.initDefaultPaymentProvider();
     },
 
     methods: {
@@ -41,6 +43,17 @@ Vue.component("payment-provider-select", {
         validate: function()
         {
             this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
+        },
+
+        initDefaultPaymentProvider: function()
+        {
+            // todo get entry from config | select first payment provider
+            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
+            {
+                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
+
+                ResourceService.getResource("checkout").set(this.checkout);
+            }
         }
     }
 });

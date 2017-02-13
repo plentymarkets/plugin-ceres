@@ -1,5 +1,7 @@
 {% extends getPartial('page-design') %}
 
+{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% block PageBody %}
 
     {% set privacyPolicy = services.legalInformation.getPrivacyPolicy() %}
@@ -19,6 +21,7 @@
                     <p class="static-page-plain-text">{{ privacyPolicy.plainText }}</p>
                 {% endif %}
 
+                {{ LayoutContainer.show("PluginCeres::StaticPages.PrivacyPolicy") }}
             </div>
         </div>
     </div>

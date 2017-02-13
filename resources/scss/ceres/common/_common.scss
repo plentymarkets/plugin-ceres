@@ -25,6 +25,18 @@
     }
 }
 
+.page-not-found {
+    i.fa-search {
+        font-size: 10em;
+    }
+    .default-not-found {
+        background-color: rgb(247, 247, 249);
+    }
+    .not-found-text {
+        font-size: 115px;
+        text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
+    }
+}
 
 .rating{
     line-height: 1;

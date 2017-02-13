@@ -17,6 +17,31 @@
             "description"   : "Add style to Ceres with a theme plugin"
         },
         {
+            "key"           : "StaticPages.CancellationRights",
+            "name"          : "Static Pages: Cancellation Rights",
+            "description"   : "Add additional content on the cancellation rights page"
+        },
+        {
+            "key"           : "StaticPages.LegalDisclosure",
+            "name"          : "Static Pages: Legal Disclosure",
+            "description"   : "Add additional content on the legal disclosure page"
+        },
+        {
+            "key"           : "StaticPages.PrivacyPolicy",
+            "name"          : "Static Pages: Privacy Policy",
+            "description"   : "Add additional content on the privacy policy page"
+        },
+        {
+            "key"           : "StaticPages.TermsAndConditions",
+            "name"          : "Static Pages: Terms And Conditions",
+            "description"   : "Add additional content on the terms and conditions page"
+        },
+        {
+            "key"           : "StaticPages.PageNotFound",
+            "name"          : "404: After content",
+            "description"   : "Add additional content on the 404 page"
+        },
+        {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
             "description"   : "Add a logo of the payment method to the payment methods on the homepage"
@@ -70,6 +95,11 @@
             "key"           : "SingleItem.AfterAddToBasket",
             "name"          : "Single item: After \"Add to shopping cart\" button",
             "description"   : "Add content after the 'Add to shopping cart' button in the single item view."
+        },
+        {
+            "key"           : "SingleItem.AdditionalContentAfterAddToBasket",
+            "name"          : "Single item: Additional content after \"Add to shopping cart\" button",
+            "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
         {
             "key"           : "BasketTotals.BeforeItemSum",
@@ -229,6 +259,11 @@
             "key"           : "Checkout.AfterPlaceOrder",
             "name"          : "Checkout: After place order",
             "description"   : "Add content after the place order in the checkout."
+        },
+        {
+            "key"           : "Checkout.PlaceOrder",
+            "name"          : "Checkout: Replace place order button",
+            "description"   : "Replace the place order button in the checkout."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
