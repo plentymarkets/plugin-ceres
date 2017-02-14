@@ -14,7 +14,7 @@
         <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.price | currency basketItem.variation.data.calculatedPrices.currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.unitPrice | currency basketItem.variation.data.calculatedPrices.currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
