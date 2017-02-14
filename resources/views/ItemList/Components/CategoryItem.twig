@@ -36,8 +36,8 @@
                     <div class="thumb-meta">
                         <div class="prices">
 
-                            <a href="${ itemData | itemURL }">
-                                <del class="crossprice" v-if="recommendedRetailPrice > 0">
+                            <a href="${ itemData | itemURL }" v-if="recommendedRetailPrice > 0">
+                                <del class="crossprice">
                                     ${ recommendedRetailPrice | currency currency }
                                 </del>
                             </a>
