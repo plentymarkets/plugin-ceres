@@ -26,7 +26,7 @@
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.price | currency basketItem.variation.data.calculatedPrices.currency} / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.price | currency basketItem.variation.data.calculatedPrices.currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
             ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.price | currency basketItem.variation.data.calculatedPrices.currency }
