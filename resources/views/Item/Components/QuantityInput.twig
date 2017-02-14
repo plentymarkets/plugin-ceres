@@ -1,21 +1,21 @@
 <script type="x/template" id="vue-quantity-input">
     <div class="input-group" :class="{'vert':vertical}">
         <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :class="{ 'disabled' : value >= max }">+</button>
+            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :class="{ 'disabled' : value <= min }">-</button>
+            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
         </span>
 
         <input type="text" class="form-control text-xs-center" size="3" maxlength="3" v-model="value">
 
         <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :class="{ 'disabled' : value <= min }">-</button>
+            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :class="{ 'disabled' : value >= max }">+</button>
+            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
         </span>
 
     </div>

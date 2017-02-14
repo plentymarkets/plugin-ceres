@@ -1042,12 +1042,11 @@ Vue.component("basket-list-item", {
                 ResourceService
                     .getResource("basketItems")
                     .remove(this.basketItem.id)
-                    .done(
-                        function()
-                        {
-                            self.resetDelete();
-                            self.waiting = false;
-                        });
+                    .fail(function()
+                    {
+                        self.resetDelete();
+                        self.waiting = false;
+                    });
             }
         },
 
@@ -1064,16 +1063,14 @@ Vue.component("basket-list-item", {
 
             this.basketItem.quantity = quantity;
             this.waiting = true;
-            var self = this;
 
             ResourceService
                 .getResource("basketItems")
                 .set(this.basketItem.id, this.basketItem)
-                .done(
-                    function()
-                    {
-                        self.waiting = false;
-                    });
+                .fail(function()
+                {
+                    this.waiting = false;
+                }.bind(this));
         },
 
         /**
@@ -1295,7 +1292,8 @@ Vue.component("payment-provider-select", {
     data: function()
     {
         return {
-            checkout: {}
+            checkout: {},
+            checkoutValidation: {paymentProvider: {}}
         };
     },
 
@@ -1307,6 +1305,9 @@ Vue.component("payment-provider-select", {
         this.$options.template = this.template;
 
         ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.paymentProvider.validate = this.validate;
 
         this.initDefaultPaymentProvider();
     },
@@ -1318,6 +1319,13 @@ Vue.component("payment-provider-select", {
         onPaymentProviderChange: function()
         {
             ResourceService.getResource("checkout").set(this.checkout);
+
+            this.validate();
+        },
+
+        validate: function()
+        {
+            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
         },
 
         initDefaultPaymentProvider: function()
@@ -1385,6 +1393,7 @@ var ResourceService = require("services/ResourceService");
                 }
                 else
                 {
+                    NotificationService.error(Translations.Template.generalCheckEntries);
                     this.waiting = false;
                 }
             },
@@ -2565,7 +2574,8 @@ Vue.component("quantity-input", {
         "min",
         "max",
         "vertical",
-        "template"
+        "template",
+        "waiting"
     ],
 
     data: function()

@@ -132,30 +132,6 @@
 
                                 <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
 
-                                {#<label class="form-check-label" for="agb-accept">#}
-                                    {#<input class="form-check-input" type="checkbox" value="" id="agb-accept">#}
-                                    {#{% autoescape false %}#}
-                                        {#{% set gtcContent %}#}
-                                            {#<a href="/terms-conditions" target="_blank">#}
-                                                {#<strong>{{ trans("PluginCeres::Template.generalGtc") }}</strong>#}
-                                            {#</a>#}
-                                        {#{% endset %}#}
-
-                                        {#{% set cancellationContent %}#}
-                                            {#<a href="/cancellation-rights" target="_blank">#}
-                                                {#<strong>{{ trans("PluginCeres::Template.generalCancellationRight") }}</strong>#}
-                                            {#</a>#}
-                                        {#{% endset %}#}
-
-                                        {#{% set policyContent %}#}
-                                            {#<a href="/privacy-policy" target="_blank">#}
-                                                {#<strong>{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</strong>#}
-                                            {#</a>#}
-                                        {#{% endset %}#}
-
-                                        {#{{ trans("PluginCeres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}#}
-                                    {#{% endautoescape %}#}
-                                {#</label>#}
                             </div>
                             {{ LayoutContainer.show("PluginCeres::Checkout.OptIns") }}
                         </div>
