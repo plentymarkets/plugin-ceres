@@ -12,7 +12,8 @@ Vue.component("category-item", {
     {
         return {
             recommendedRetailPrice: 0,
-            variationRetailPrice  : 0
+            variationRetailPrice  : 0,
+            currency: ""
         };
     },
 
@@ -36,10 +37,9 @@ Vue.component("category-item", {
                 {
                     this.recommendedRetailPrice = priceData.price;
                 }
-                else if (priceData.type === "default")
-                {
-                    this.variationRetailPrice = priceData.price;
-                }
+
+                this.variationRetailPrice = this.itemData.calculatedPrices.price;
+                this.currency = this.itemData.calculatedPrices.currency;
             }
         }
     },
