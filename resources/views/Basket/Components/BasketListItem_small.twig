@@ -26,10 +26,10 @@
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.unitPrice | currency basketItem.variation.data.calculatedPrices.currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.price | currency basketItem.variation.data.calculatedPrices.currency }
+            ${ basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
