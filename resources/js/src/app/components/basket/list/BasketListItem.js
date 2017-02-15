@@ -1,5 +1,5 @@
 var ResourceService       = require("services/ResourceService");
-var ApiService          = require("services/ApiService");
+// var ApiService          = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
@@ -17,7 +17,6 @@ Vue.component("basket-list-item", {
             waiting: false,
             deleteConfirmed: false,
             deleteConfirmedTimeout: null,
-            itemAvailability: "",
             itemCondition: ""
         };
     },
@@ -27,55 +26,7 @@ Vue.component("basket-list-item", {
         this.$options.template = this.template;
     },
 
-    ready: function()
-    {
-        this.getAvailability();
-        this.getItemCondition();
-    },
-
     methods: {
-
-        getAvailability: function()
-        {
-            var self = this;
-
-            ApiService.get("/rest/io/item/availability/" + this.basketItem.variation.variationBase.availability)
-                .done(function(response)
-                {
-                    ApiService.setToken(response);
-
-                    for (var i = 0; i < response.languages.length; i++)
-                    {
-                        if (response.languages[i].language === self.language)
-                        {
-                            self.itemAvailability = response.languages[i].name;
-                        }
-                    }
-
-                })
-                .fail(function(response)
-                {
-                    // TODO
-                });
-        },
-
-        getItemCondition: function()
-        {
-            var self = this;
-
-            ApiService.get("/rest/io/item/condition/" + this.basketItem.variation.itemBase.condition)
-                .done(function(response)
-                {
-                    ApiService.setToken(response);
-
-                    self.itemCondition = response;
-
-                })
-                .fail(function(response)
-                {
-                    // TODO
-                });
-        },
 
         /**
          * Delete item from basket
@@ -101,11 +52,11 @@ Vue.component("basket-list-item", {
                 ResourceService
                     .getResource("basketItems")
                     .remove(this.basketItem.id)
-                    .done(
-                        function()
-                        {
-                            self.resetDelete();
-                        });
+                    .fail(function()
+                    {
+                        self.resetDelete();
+                        self.waiting = false;
+                    });
             }
         },
 
@@ -122,16 +73,14 @@ Vue.component("basket-list-item", {
 
             this.basketItem.quantity = quantity;
             this.waiting = true;
-            var self = this;
 
             ResourceService
                 .getResource("basketItems")
                 .set(this.basketItem.id, this.basketItem)
-                .done(
-                    function()
-                    {
-                        self.waiting = false;
-                    });
+                .fail(function()
+                {
+                    this.waiting = false;
+                }.bind(this));
         },
 
         /**

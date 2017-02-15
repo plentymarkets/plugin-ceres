@@ -23,6 +23,7 @@
         </div>
     {% endif %}
 
+
     <div class="container-max footer-content">
         <div class="row">
             <div class="col-xs-12">
@@ -51,9 +52,9 @@
                 </div>
             </div>
         </div>
-        <hr class="m-y-2">
+        
         <div class="row">
-
+            <hr class="m-y-2">
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
                     <nav class="footer-column m-b-2">
@@ -117,10 +118,10 @@
                     {% endautoescape %}
                 </div>
                 <a href="https://www.plentymarkets.eu">
-                    <img class="plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
+                    <img class="svg plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
                 </a>
                 <br>
-                <small>&copy; Copyright 2016 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
+                <small>&copy; Copyright 2017 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
             </div>
         </div>
     </div>

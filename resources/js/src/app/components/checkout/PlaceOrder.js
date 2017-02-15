@@ -15,7 +15,8 @@ var ResourceService = require("services/ResourceService");
         {
             return {
                 waiting: false,
-                checkout: {}
+                checkout: {},
+                checkoutValidation: {}
             };
         },
 
@@ -24,6 +25,7 @@ var ResourceService = require("services/ResourceService");
             this.$options.template = this.template;
 
             ResourceService.bind("checkout", this);
+            ResourceService.bind("checkoutValidation", this);
         },
 
         methods: {
@@ -33,46 +35,80 @@ var ResourceService = require("services/ResourceService");
                 this.waiting = true;
                 var self = this;
 
-                ApiService.post("/rest/io/checkout/payment")
-                    .done(function(response)
-                    {
-                        var paymentType = response.type || "errorCode";
-                        var paymentValue = response.value || "";
-
-                        switch (paymentType)
+                if (self.validateCheckout())
+                {
+                    ApiService.post("/rest/io/checkout/payment")
+                        .done(function(response)
                         {
-                        case "continue":
-                            var target = self.targetContinue;
+                            self.afterPreparePayment(response);
+                        })
+                        .fail(function(response)
+                        {
+                            self.waiting = false;
+                        });
+                }
+                else
+                {
+                    NotificationService.error(Translations.Template.generalCheckEntries);
+                    this.waiting = false;
+                }
+            },
 
-                            if (target)
-                            {
-                                window.location.assign(target);
-                            }
-                            break;
-                        case "redirectUrl":
-                            // redirect to given payment provider
-                            window.location.assign(paymentValue);
-                            break;
-                        case "externalContentUrl":
-                            // show external content in iframe
-                            self.showModal(paymentValue, true);
-                            break;
-                        case "htmlContent":
-                            self.showModal(paymentValue, false);
-                            break;
-
-                        case "errorCode":
-                            NotificationService.error(paymentValue);
-                            break;
-                        default:
-                            NotificationService.error("Unknown response from payment provider: " + paymentType);
-                            break;
-                        }
-                    })
-                    .fail(function(response)
+            validateCheckout: function()
+            {
+                for (var validator in this.checkoutValidation)
+                {
+                    if (this.checkoutValidation[validator].validate)
                     {
-                        this.waiting = false;
-                    });
+                        this.checkoutValidation[validator].validate();
+                    }
+                }
+
+                for (var i in this.checkoutValidation)
+                {
+                    if (this.checkoutValidation[i].showError)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+
+            afterPreparePayment: function(response)
+            {
+                var paymentType = response.type || "errorCode";
+                var paymentValue = response.value || "";
+
+                switch (paymentType)
+                {
+                case "continue":
+                    var target = this.targetContinue;
+
+                    if (target)
+                        {
+                        window.location.assign(target);
+                    }
+                    break;
+                case "redirectUrl":
+                        // redirect to given payment provider
+                    window.location.assign(paymentValue);
+                    break;
+                case "externalContentUrl":
+                        // show external content in iframe
+                    this.showModal(paymentValue, true);
+                    break;
+                case "htmlContent":
+                    this.showModal(paymentValue, false);
+                    break;
+
+                case "errorCode":
+                    NotificationService.error(paymentValue);
+                    break;
+                default:
+                    NotificationService.error("Unknown response from payment provider: " + paymentType);
+                    break;
+                }
             },
 
             showModal: function(content, isExternalContent)
@@ -90,19 +126,6 @@ var ResourceService = require("services/ResourceService");
                 }
 
                 $modal.modal("show");
-
-            }
-        },
-
-        computed:
-        {
-            waitingForInput: function()
-            {
-                var addressIsNotSet = this.checkout.billingAddressId === 0 || this.checkout.billingAddressId === "0";
-                var shippingIsNotSet = this.checkout.shippingProfileId === 0 || this.checkout.shippingProfileId === "0";
-                var paymentIsNotSet = this.checkout.methodOfPaymentId === 0 || this.checkout.methodOfPaymentId === "0";
-
-                return addressIsNotSet || shippingIsNotSet || paymentIsNotSet;
             }
         }
     });

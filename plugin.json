@@ -1,11 +1,19 @@
 {
-    "version"           : "0.1.0",
+    "version"           : "1.0.1",
     "name"              : "PluginCeres",
-    "description"       : "plentymarkets webshop layout",
+    "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
     "author"            : "plentymarkets GmbH",
+    "license"           : "AGPL-3.0",
+    "pluginIcon"        : "icon_plugin_xs.png",
+    "price"             : 0.00,
+    "shortDescription"  : {"de": "Ceres – das offizielle, von plentymarkets entwickelte Template-Plugin. Ceres ist das Standard-Template für plentymarkets 7 Webshops. ","en": "Ceres – the official template plugin developed by plentymarkets. Ceres is the default template for plentymarkets 7 online stores."},
+    "authorIcon"        : "icon_author_xs.png",
+    "email"             : "sales@plentymarkets.com",
+    "phone"             : "+49 561 98 681 100",
+    "categories"        : ["3517"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
-    "require"           : [],
+    "require"           : ["PluginIO"],
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
@@ -15,6 +23,31 @@
             "key"           : "Template.Style",
             "name"          : "Template: Style",
             "description"   : "Add style to Ceres with a theme plugin"
+        },
+        {
+            "key"           : "StaticPages.CancellationRights",
+            "name"          : "Static Pages: Cancellation rights",
+            "description"   : "Add additional content on the cancellation rights page"
+        },
+        {
+            "key"           : "StaticPages.LegalDisclosure",
+            "name"          : "Static Pages: Legal disclosure",
+            "description"   : "Add additional content on the legal disclosure page"
+        },
+        {
+            "key"           : "StaticPages.PrivacyPolicy",
+            "name"          : "Static Pages: Privacy policy",
+            "description"   : "Add additional content on the privacy policy page"
+        },
+        {
+            "key"           : "StaticPages.TermsAndConditions",
+            "name"          : "Static Pages: Terms and conditions",
+            "description"   : "Add additional content on the terms and conditions page"
+        },
+        {
+            "key"           : "StaticPages.PageNotFound",
+            "name"          : "Static Pages: Page not found",
+            "description"   : "Add additional content on the 404 page"
         },
         {
             "key"           : "Homepage.PaymentMethods",
@@ -33,8 +66,8 @@
         },
         {
             "key"           : "Header.LeftSide",
-            "name"          : "Header: Left side container",
-            "description"   : "Add content to the left side in the header"
+            "name"          : "Header: Left header container",
+            "description"   : "Add content to the container on the left in the header"
         },
         {
             "key"           : "Footer.RowOne",
@@ -70,6 +103,11 @@
             "key"           : "SingleItem.AfterAddToBasket",
             "name"          : "Single item: After \"Add to shopping cart\" button",
             "description"   : "Add content after the 'Add to shopping cart' button in the single item view."
+        },
+        {
+            "key"           : "SingleItem.AdditionalContentAfterAddToBasket",
+            "name"          : "Single item: Additional content after \"Add to shopping cart\" button",
+            "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
         {
             "key"           : "BasketTotals.BeforeItemSum",
@@ -113,13 +151,13 @@
         },
         {
             "key"           : "Basket.BeforeCheckoutButton",
-            "name"          : "Shopping cart: Before \"Order now\" button",
-            "description"   : "Add content before the 'Order now' button in the shopping cart."
+            "name"          : "Shopping cart: Before \"Checkout\" button",
+            "description"   : "Add content before the 'Checkout' button in the shopping cart."
         },
         {
             "key"           : "Basket.AfterCheckoutButton",
-            "name"          : "Shopping cart: After \"Order now\" button",
-            "description"   : "Add content after the 'Order now' button in the shopping cart."
+            "name"          : "Shopping cart: After \"Checkout\" button",
+            "description"   : "Add content after the 'Checkout' button in the shopping cart."
         },
         {
             "key"           : "BasketPreview.BeforeCheckoutButton",
@@ -221,30 +259,45 @@
             "description"   : "Add content after the basket totals in the checkout."
         },
         {
+            "key"           : "Checkout.PlaceOrder",
+            "name"          : "Checkout: Override \"Order now\" button",
+            "description"   : "Override the 'Order now' button in the checkout."
+        },
+        {
             "key"           : "Checkout.BeforePlaceOrder",
-            "name"          : "Checkout: Before place order",
-            "description"   : "Add content before the place order in the checkout."
+            "name"          : "Checkout: Before \"Order now\" button",
+            "description"   : "Add content before the 'Order now' button in the checkout."
         },
         {
             "key"           : "Checkout.AfterPlaceOrder",
-            "name"          : "Checkout: After place order",
-            "description"   : "Add content after the place order in the checkout."
+            "name"          : "Checkout: After \"Order now\" button",
+            "description"   : "Add content after the 'Order now' button in the checkout."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
-            "description"   : "Add additional payment information on the order confirmation page.",
+            "description"   : "Add additional payment information on the order confirmation page."
+        },
+        {
+            "key"           : "OrderConfirmation.GrossNetReplace",
+            "name"          : "Order confirmation: Override gross/net prices",
+            "description"   : "Override the gross/net prices on the order confirmation page.",
             "multiple"      : false
         },
         {
+            "key"           : "OrderConfirmation.AfterTotals",
+            "name"          : "Order confirmation: Add content after totals",
+            "description"   : "Add content after totals on the order confirmation page."
+        },
+        {
             "key"           : "CategoryItem.BeforePrices",
-            "name"          : "Category Item: Before prices container",
-            "description"   : "Add content before the prices in category item"
+            "name"          : "Category item list: Before prices container",
+            "description"   : "Add content before the prices in the category item view."
         },
         {
             "key"           : "CategoryItem.AfterPrices",
-            "name"          : "Category Item: After prices container",
-            "description"   : "Add content after the prices in category item"
+            "name"          : "Category item list: After prices container",
+            "description"   : "Add content after the prices in the category item view."
         }
     ],
     "dataProviders"     : []

@@ -10,7 +10,8 @@ Vue.component("item-list", {
     data: function()
     {
         return {
-            itemList: {}
+            itemList: {},
+            itemSearch: {}
         };
     },
 
@@ -22,6 +23,8 @@ Vue.component("item-list", {
     ready: function()
     {
         ResourceService.bind("itemList", this);
+        ResourceService.bind("itemSearch", this);
+
         ItemListService.setSearchParams(document.location.search);
     }
 });

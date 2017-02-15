@@ -2,7 +2,7 @@
     <div id="login-change">
         <div v-resource-if:user="isLoggedIn">
             <a href="#" class="dropdown-toggle" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ trans("PluginCeres::Template.generalHello", {"username": "${username}"}) }}</a>
+                <i class="fa fa-user hidden-sm-up" aria-hidden="true"></i> <span class="hidden-xs-down">{{ trans("PluginCeres::Template.generalHello", {"username": "${username}"}) }}</span></a>
             </a>
             <div class="account-menu dropdown-menu dropdown-menu-right small">
               <div class="list-group" aria-labelledby="accountMenuList" >

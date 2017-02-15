@@ -13,6 +13,7 @@
 		vertical-align:top;
 		margin-top: -1px;
 		margin-left: -1px;
+		background-color: $card-bg;
 
 		input{
 			display: none;
@@ -20,11 +21,12 @@
 		}
 
 		input:checked + label{
-			box-shadow: inset 0 0 5px $brand-primary;
+			box-shadow: inset 0 0 0 .1rem $brand-primary;
 		}
 
 		label{
 			border: 1px solid $gray-lighter;
+			border-radius: $border-radius;
 			cursor: pointer;
 			padding: .5em;
 			margin-bottom: 0;

@@ -1,16 +1,18 @@
+{% set emailRegex = config("PluginCeres.register.email_regex") %}
+
 <script type="x/template" id="vue-login">
     <div>
-        <form class="m-b-1">
+        <form id="login-form-${_uid}" class="m-b-1">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="input-unit">
-                        <input type="email" name="email" id="txt_email" v-model="username">
+                    <div class="input-unit" data-validate="regex">
+                        <input type="email" name="email" id="txt_email" v-model="username" data-validate-ref="{{ emailRegex }}">
                         <label for="txt_email">{{ trans("PluginCeres::Template.accEmail") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
-                    <div class="input-unit">
+                    <div class="input-unit" data-validate="text">
                         <input type="password" name="password" id="txt_password" v-model="password">
                         <label for="txt_password">{{ trans("PluginCeres::Template.accPassword") }}*</label>
                     </div>
@@ -26,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <button v-on:click.prevent="sendLogin" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.accLogin") }}</button>
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.accLogin") }}</button>
                 </div>
             </div>
         </form>

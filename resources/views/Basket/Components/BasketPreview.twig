@@ -35,14 +35,8 @@
                 <div class="col-xs-12 col-sm-6">
                     {{ LayoutContainer.show("PluginCeres::BasketPreview.BeforeCheckoutButton") }}
 
-                    <div v-resource-if:user="isLoggedIn">
-                        <a href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCeres::Template.orderCheckout") }}">
-                            {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-
-                    <div v-resource-if:user="!isLoggedIn">
-                        <a href="/login" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCeres::Template.orderCheckout") }}">
+                    <div>
+                        <a href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("PluginCeres::Template.orderCheckout") }}">
                             {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>

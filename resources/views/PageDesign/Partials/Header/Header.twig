@@ -46,7 +46,15 @@
             </ul>
         </div>
     </div>
+    {% include "PluginCeres::PageDesign.Partials.Header.Navigation" %}
+
 </header>
+
+
+<!-- breadcrumb -->
+{% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
+    {% include "PluginCeres::PageDesign.Partials.Header.Breadcrumb" %}
+{% endif %}
 
 <div class="container-max page-header">
     <div class="row">
@@ -74,13 +82,9 @@
                 </div>
             </div>
         </div>
+        
 
-        {% include "PluginCeres::PageDesign.Partials.Header.Navigation" %}
-
-        <!-- breadcrumb -->
-        {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
-            {% include "PluginCeres::PageDesign.Partials.Header.Breadcrumb" %}
-        {% endif %}
+        
 
     </div>
 </div>

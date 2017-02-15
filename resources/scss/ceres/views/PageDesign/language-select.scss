@@ -1,11 +1,23 @@
 .cmp-country-settings{
-	background-color: $gray-lighter2;
-	border-bottom: 1px solid $gray-lighter;
+	background-color: $gray-darker;
+	color: $white;
+	border-bottom: 0;
+
+	z-index: 1070;
+    position: fixed;
+    top: 30px;
+    right: 0;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
 
 	.country-settings-inner{
 		padding: 1rem;
 		display: flex;
     	flex-flow: row nowrap;
+
+    	max-width: 1200px;
+    	margin: 0 auto;
 	}
 
 	.language-settings{
@@ -31,12 +43,17 @@
 
 			a{
 				display: inline-block;
-				padding: .8rem;
+				padding: .4rem;
+				color: $white;
+				&:hover {
+					background:$brand-primary;
+					color: $white;
+				}
 			}
 
 			&.active{
 				a{
-					background-color: $gray-lighter;
+					background-color: $brand-primary;
 				}
 			}
 		}

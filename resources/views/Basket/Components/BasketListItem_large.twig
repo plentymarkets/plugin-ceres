@@ -3,25 +3,25 @@
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
     <!-- ITEM IMAGE -->
-    <a class="item-image" :href="basketItem.variation | itemURL">
-        <img :src="basketItem.variation | itemImage">
+    <a class="item-image" :href="basketItem.variation.data | itemURL">
+        <img :src="basketItem.variation.data.images.all[0].urlPreview">
     </a>
     <!-- ./ITEM IMAGE -->
 
     <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.price | currency } / {{ trans("PluginCeres::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
+            ${ basketItem.quantity * basketItem.price | currency }
         </div>
 
-        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
                    {{ trans("PluginCeres::Template.generalDelete") }}
               </span>
@@ -37,37 +37,37 @@
 
     <!-- ITEM DETAILS -->
     <div class="item-details small">
-        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variation.variationBase.id }" value="">
-        <a class="clearfix" :href="basketItem.variation | itemURL">
+        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variationId }" value="">
+        <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItem.variation.itemDescription | itemName {{configItemName}} } ${ basketItem.variation.variationBase.variationName }
+                ${ basketItem.variation.data.texts[0] | itemName {{configItemName}} } {# ${ basketItem.variation.variationBase.variationName }  TODO #}
             </div>
         </a>
 
         <p class="id">
-            <strong>{{ trans("PluginCeres::Template.itemId") }}</strong> ${ basketItem.variation.itemBase.id }
+            <strong>{{ trans("PluginCeres::Template.itemId") }}</strong> ${ basketItem.itemId }
         </p>
 
         <div class="item-description">
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemNumber") }}:</strong>
-                <span class="col-xs-6 col-sm-7">${ basketItem.variation.variationBase.customNumber}</span>
+                <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.variation.number}</span>
             </div>
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemCondition") }}:</strong>
-                <span class="col-xs-6 col-sm-7">${ itemCondition }</span>
+                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{# TODO #}
             </div>
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
-                    ${ itemAvailability }
+                    ${ basketItem.variation.data.variation.availability.names[0].name }
                 </span>
             </div>
             <p class="m-y-1">
-                {!! basketItem.variation.itemDescription.description !!}
+                {!! basketItem.variation.data.texts[0].description !!}
             </p>
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variation.variationBase.id }" data-show-more="{{ trans("PluginCeres::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCeres::Template.itemShowLess") }}"></label>
+        <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("PluginCeres::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCeres::Template.itemShowLess") }}"></label>
     </div>
     <!-- ./ITEM DETAILS -->
 </article>

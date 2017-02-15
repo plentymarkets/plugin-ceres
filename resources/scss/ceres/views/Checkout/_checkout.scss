@@ -11,16 +11,39 @@
 		text-align: center;
 	}
 
+	.cmp-address-list,
+	.form-check-label {
+		transition: all .3s ease;
+	}
+
+	.error {
+		background: $brand-danger;
+		padding: .5em;
+		color: $white;
+		border-radius: .1rem;
+		transition: all .3s ease;
+
+		&.form-check-label {
+			padding: .5em 1.75rem;
+			a {
+				color: $white;
+				&:hover {
+					color: $gray-lighter2;
+				}
+			}
+		}
+	}
+
 	@include media-breakpoint-up(sm){
-		
+
 	}
 
 	@include media-breakpoint-up(md){
-		
+
 	}
 
 	@include media-breakpoint-up(lg){
-		
+
 	}
 
 }

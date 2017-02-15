@@ -1,6 +1,7 @@
 var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
+var ValidationService = require("services/ValidationService");
 
 Vue.component("login", {
 
@@ -15,7 +16,8 @@ Vue.component("login", {
     {
         return {
             password: "",
-            username: ""
+            username: "",
+            isDisabled: false
         };
     },
 
@@ -33,12 +35,29 @@ Vue.component("login", {
             ModalService.findModal(document.getElementById(this.modalElement)).show();
         },
 
+        validateLogin: function()
+        {
+            var self = this;
+
+            ValidationService.validate($("#login-form-" + this._uid))
+                .done(function()
+                {
+                    self.sendLogin();
+                })
+                .fail(function(invalidFields)
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
+        },
+
         /**
          * Send the login data
          */
         sendLogin: function()
         {
             var self = this;
+
+            this.isDisabled = true;
 
             ApiService.post("/rest/io/customer/login", {email: this.username, password: this.password}, {supressNotifications: true})
                 .done(function(response)
@@ -54,12 +73,18 @@ Vue.component("login", {
 
                     if (self.backlink !== null && self.backlink)
                     {
-                        window.location.assign(self.backlink);
+                        location.assign(self.backlink);
                     }
                     else if (self.hasToForward)
                     {
-                        window.location.assign(window.location.origin);
+                        location.assign(location.origin);
                     }
+                    else
+                    {
+                        location.reload();
+                    }
+
+                    self.isDisabled = false;
                 })
                 .fail(function(response)
                 {
@@ -71,6 +96,8 @@ Vue.component("login", {
                     default:
                         return;
                     }
+
+                    self.isDisabled = false;
                 });
         }
     }
