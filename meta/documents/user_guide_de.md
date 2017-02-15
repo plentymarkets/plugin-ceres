@@ -6,7 +6,7 @@
 
 ## Ceres in plentymarkets einrichten
 
-Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
+Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
 <div class="alert alert-info" role="alert">
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
@@ -76,7 +76,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>
 <tr>
 <td><b>List of category IDs to display in first column</b></td>  
-<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der ersten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis</i></b>: Mehrere IDs kommasepariert eingeben.</td>
+<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der ersten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
 </tr>
 <tr>
 <td><b>Title of second column</b></td>  
@@ -84,7 +84,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>
 <tr>
 <td><b>List of category IDs to display in second column</b></td>  
-<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der zweiten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis</i></b>: Mehrere IDs kommasepariert eingeben.</td>
+<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der zweiten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
 </tr>
 <tr>
 <td><b>Title of third column</b></td>  
@@ -92,7 +92,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>
 <tr>
 <td><b>List of category IDs to display in third column</b></td>  
-<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der dritten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis</i></b>: Mehrere IDs kommasepariert eingeben.</td>
+<td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der dritten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
 </tr>
 <!--tr>
 <td><b>Show newsletter registration column</b></td>  
@@ -138,7 +138,7 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 
 ### Warenkorb anpassen
 
-Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Warenkorbs vor. Wählen Sie Artikel- und Preisinformationen, die im Warenkorb angezeigt werden und passen Sie die Warenkorbvorschau an.
+Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Warenkorbs vor. Wählen Sie Artikel- und Preisinformationen, die im Warenkorb angezeigt werden, und passen Sie die Warenkorbvorschau an.
 
 
 ##### Warenkorb anpassen:
@@ -162,15 +162,15 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
  <tr>
 <td><b>Show price information</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Preisinformationen wählen, um die Informationen im Warenkorb anzuzeigen.<br />
-<strong>Value of items (Gross)</strong> = Aktivieren, um den Bruttowarenwert anzuzeigen.<br /> <strong>Value of items (Net)</strong> = Aktivieren, um den Nettowarenwert anzuzeigen.<br /> <strong>Shipping (Gross)</strong> = Aktivieren, um die Brutto-Versandkosten anzuzeigen.<br /> <strong>Shipping (Net)</strong> = Aktivieren, um den Netto-Versandkosten anzuzeigen.<br /> <strong>VAT</strong> = Aktivieren, um die Mehrwertsteuer anzuzeigen.<br /> <strong>Total (Gross)</strong> = Aktivieren, um die Brutto-Gesamtsumme anzuzeigen.<br /> <strong>Total (Net)</strong> = Aktivieren, um die Netto-Gesamtsumme anzuzeigen.</td>
+<strong>Value of items (Gross)</strong> = Aktivieren, um den Bruttowarenwert anzuzeigen.<br /> <strong>Value of items (Net)</strong> = Aktivieren, um den Nettowarenwert anzuzeigen.<br /> <strong>Shipping (Gross)</strong> = Aktivieren, um die Brutto-Versandkosten anzuzeigen.<br /> <strong>Shipping (Net)</strong> = Aktivieren, um die Netto-Versandkosten anzuzeigen.<br /> <strong>VAT</strong> = Aktivieren, um die Mehrwertsteuer anzuzeigen.<br /> <strong>Total (Gross)</strong> = Aktivieren, um die Brutto-Gesamtsumme anzuzeigen.<br /> <strong>Total (Net)</strong> = Aktivieren, um die Netto-Gesamtsumme anzuzeigen.</td>
 </tr>
 <tr>
 <td><b>Show basket preview information</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Preisinformationen wählen, um die Informationen in der Warenkorbvorschau anzuzeigen.<br /> <strong>Value of items (Gross)</strong> = Aktivieren, um den Bruttowarenwert anzuzeigen.<br /> <strong>Value of items (Net)</strong> = Aktivieren, um den Nettowarenwert anzuzeigen.<br /> <strong>Shipping (Gross)</strong> = Aktivieren, um die Brutto-Versandkosten anzuzeigen.<br /> <strong>Shipping (Net)</strong> = Aktivieren, um den Netto-Versandkosten anzuzeigen.<br /> <strong>VAT</strong> = Aktivieren, um die Mehrwertsteuer anzuzeigen.<br /> <strong>Total (Gross)</strong> = Aktivieren, um die Brutto-Gesamtsumme anzuzeigen.<br /> <strong>Total (Net)</strong> = Aktivieren, um die Netto-Gesamtsumme anzuzeigen.</td>
+<td>Eine, mehrere oder <strong>ALLE</strong> Preisinformationen wählen, um die Informationen in der Warenkorbvorschau anzuzeigen.<br /> <strong>Value of items (Gross)</strong> = Aktivieren, um den Bruttowarenwert anzuzeigen.<br /> <strong>Value of items (Net)</strong> = Aktivieren, um den Nettowarenwert anzuzeigen.<br /> <strong>Shipping (Gross)</strong> = Aktivieren, um die Brutto-Versandkosten anzuzeigen.<br /> <strong>Shipping (Net)</strong> = Aktivieren, um die Netto-Versandkosten anzuzeigen.<br /> <strong>VAT</strong> = Aktivieren, um die Mehrwertsteuer anzuzeigen.<br /> <strong>Total (Gross)</strong> = Aktivieren, um die Brutto-Gesamtsumme anzuzeigen.<br /> <strong>Total (Net)</strong> = Aktivieren, um die Netto-Gesamtsumme anzuzeigen.</td>
 </tr>    
 <tr>
 <td><b>Show Change variation button</b></td>  
-<td>Aktivieren, um den <strong>Variante ändern</strong>-Button in der Artikelübersicht im Warenkorb anzuzeigen. Beim Klick auf <strong>Variante ändern</strong>, können Kunden die Artikelvariante im Warenkorb ändern. Wenn Sie den <strong>Variante ändern</strong>-Button aktivieren, aber keine Varianten des Artikels vorhanden sind, wird der Button nicht angezeigt.</td>
+<td>Aktivieren, um den <strong>Variante ändern</strong>-Button in der Artikelübersicht im Warenkorb anzuzeigen. Beim Klick auf <strong>Variante ändern</strong> können Kunden die Artikelvariante im Warenkorb ändern. Wenn Sie den <strong>Variante ändern</strong>-Button aktivieren, aber keine Varianten des Artikels vorhanden sind, wird der Button nicht angezeigt.</td>
 </tr>    
  <tr>
 <td><b>Add to shopping cart: Show overlay</b></td>  
@@ -180,7 +180,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 
 ### Paginierung und Sortierung anpassen
 
-Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersicht und Sortierung von Artikeln im Webshop an.
+Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersicht und die Sortierung von Artikeln im Webshop an.
 
 
 ##### Paginierung und Sortierung anpassen:
@@ -211,7 +211,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 </tr>  
 <tr>
 <td><b>Enable number of items per page</b></td>  
-<td>Eine, mehrere oder alle Zahlenwerte aktivieren, um die gewählten Werte im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht anzuzeigen.</td>
+<td>Einen, mehrere oder alle Zahlenwerte aktivieren, um die gewählten Werte im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht anzuzeigen.</td>
 </tr>  
 <tr>
 <td><b>Default number of items per page</b></td>  
@@ -219,7 +219,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
-<td>Eine, mehrere oder <strong>ALLE</strong> Sortieroptionen für die Artikelsortierung aktivieren.<br /> <strong>Item ID (ascending)</strong> = Artikel aufsteigend nach Artikel-ID sortieren.<br /> <strong>Item ID (descending)</strong> = Artikel absteigend nach Artikel-ID sortieren.<br /> <strong>Item name (ascending)</strong> = Artikel alphabetisch aufsteigend nach Artikelname sortieren.<br /> <strong>Item name (descending)</strong> = Artikel alphabetisch absteigend nach Artikelname sortieren.<br /> <strong>Item position (ascending)</strong> = Artikel mit der höchsten Positionsnummer zuerst anzeigen.<br /> <strong>Item position (descending)</strong> = Artikel mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<br /> <strong>Price (ascending)</strong> = Artikel mit dem niedrigsten Preis zuerst anzeigen.<br /> <strong>Price (descending)</strong> = Artikel mit dem höchsten Preis zuerst anzeigen.<br /> <strong>Customer feedback (ascending)</strong> = Artikel mit der niedrigsten Kundenbewertung zuerst anzeigen.<br /> <strong>Customer feedback (descending)</strong> = Artikel mit dem höchsten Kundenbewertung zuerst anzeigen.<br /> <strong>Newest variation</strong> = Neueste Artikelvarianten zuerst anzeigen.<br /> <strong>Oldest variation</strong> = Älteste Artikelvarianten zuerst anzeigen.<br /> <strong>Variation ID (ascending)</strong> = Artikelvarianten aufsteigend nach Varianten-ID sortieren.<br /> <strong>Variation ID (descending)</strong> = Artikelvarianten absteigend nach Varianten-ID sortieren.<br /> <strong>Variation number (ascending)</strong> = Artikelvarianten aufsteigend nach Variantennummer sortieren.<br /> <strong>Variation number (descending)</strong> = Artikelvarianten absteigend nach Variantennummer sortieren.<br /> <strong>Last variation update</strong> = Zuletzt aktualisierte Artikelvarianten zuerst anzeigen.<br /> <strong>First variation update</strong> = Zuerst aktualisierte Artikelvarianten zuerst anzeigen.<br /> <strong>Variation name (ascending)</strong> = Artikelvarianten alphabetisch aufsteigend nach Name sortieren.<br /> <strong>Variation name (descending)</strong> = Artikelvarianten alphabetisch absteigend nach Name sortieren.<br /> <strong>Variation position (ascending)</strong> = Artikelvarianten mit der höchsten Positionsnummer zuerst anzeigen.<br /> <strong>Variation position (descending)</strong> = Artikelvarianten mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<br /> <strong>Active variation (ascending)</strong> = Aktive Artikelvarianten aufsteigend sortieren.<br /> <strong>Active variation (descending)</strong> = Aktive Artikelvarianten absteigend sortieren.<br /> <strong>Main variation (ascending)</strong> = Hauptvarianten aufsteigend sortieren.<br /> <strong>Main variation (descending)</strong> = Hauptvarianten absteigend sortieren.<br /> <strong>Manufacturer (ascending)</strong> = Artikel alphabetisch aufsteigend nach Hersteller sortieren.<br /> <strong>Manufacturer (descending)</strong> = Artikel alphabetisch absteigend nach Hersteller sortieren.<br /> <strong>Random items</strong> = Artikel bei jedem Aufruf in einer anderen, zufälligen Sortierung anzeigen.
+<td>Eine, mehrere oder <strong>ALLE</strong> Sortieroptionen für die Artikelsortierung aktivieren.<br /> <strong>Item ID (ascending)</strong> = Artikel aufsteigend nach Artikel-ID sortieren.<br /> <strong>Item ID (descending)</strong> = Artikel absteigend nach Artikel-ID sortieren.<br /> <strong>Item name (ascending)</strong> = Artikel alphabetisch aufsteigend nach Artikelname sortieren.<br /> <strong>Item name (descending)</strong> = Artikel alphabetisch absteigend nach Artikelname sortieren.<br /> <strong>Item position (ascending)</strong> = Artikel mit der höchsten Positionsnummer zuerst anzeigen.<br /> <strong>Item position (descending)</strong> = Artikel mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<br /> <strong>Price (ascending)</strong> = Artikel mit dem niedrigsten Preis zuerst anzeigen.<br /> <strong>Price (descending)</strong> = Artikel mit dem höchsten Preis zuerst anzeigen.<br /> <strong>Customer feedback (ascending)</strong> = Artikel mit der niedrigsten Kundenbewertung zuerst anzeigen.<br /> <strong>Customer feedback (descending)</strong> = Artikel mit der höchsten Kundenbewertung zuerst anzeigen.<br /> <strong>Newest variation</strong> = Neueste Artikelvarianten zuerst anzeigen.<br /> <strong>Oldest variation</strong> = Älteste Artikelvarianten zuerst anzeigen.<br /> <strong>Variation ID (ascending)</strong> = Artikelvarianten aufsteigend nach Varianten-ID sortieren.<br /> <strong>Variation ID (descending)</strong> = Artikelvarianten absteigend nach Varianten-ID sortieren.<br /> <strong>Variation number (ascending)</strong> = Artikelvarianten aufsteigend nach Variantennummer sortieren.<br /> <strong>Variation number (descending)</strong> = Artikelvarianten absteigend nach Variantennummer sortieren.<br /> <strong>Last variation update</strong> = Zuletzt aktualisierte Artikelvariante zuerst anzeigen.<br /> <strong>First variation update</strong> = Zuerst aktualisierte Artikelvariante zuerst anzeigen.<br /> <strong>Variation name (ascending)</strong> = Artikelvarianten alphabetisch aufsteigend nach Name sortieren.<br /> <strong>Variation name (descending)</strong> = Artikelvarianten alphabetisch absteigend nach Name sortieren.<br /> <strong>Variation position (ascending)</strong> = Artikelvariante mit der höchsten Positionsnummer zuerst anzeigen.<br /> <strong>Variation position (descending)</strong> = Artikelvariante mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<br /> <strong>Active variation (ascending)</strong> = Aktive Artikelvarianten aufsteigend sortieren.<br /> <strong>Active variation (descending)</strong> = Aktive Artikelvarianten absteigend sortieren.<br /> <strong>Main variation (ascending)</strong> = Hauptvarianten aufsteigend sortieren.<br /> <strong>Main variation (descending)</strong> = Hauptvarianten absteigend sortieren.<br /> <strong>Manufacturer (ascending)</strong> = Artikel alphabetisch aufsteigend nach Hersteller sortieren.<br /> <strong>Manufacturer (descending)</strong> = Artikel alphabetisch absteigend nach Hersteller sortieren.<br /> <strong>Random items</strong> = Artikel bei jedem Aufruf in einer anderen, zufälligen Sortierung anzeigen.
 </td>
 </tr>
 <tr>
@@ -274,7 +274,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 </tr> 
 <tr>
 <td><b>Enable logging options</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print sucess</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stacktrace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
+<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print sucess</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stack trace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
 </tr>
 <tr>
 <td><b>Performance level</b></td>  
@@ -286,7 +286,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 
 **Ceres** steht standardmäßig in Deutsch und Englisch zur Verfügung. Diese Sprachen wählen Sie im Header-Bereich des Webshops aus. **Ceres** unterstützt zudem alle plentymarkets Systemsprachen. So können Sie Ihren Webshop und Ihre Artikel in weitere Sprachen übersetzen. Spracheinstellungen nehmen Sie im plentymarkets Backend vor.
 
-##### Webshop-Sprachen einstellen
+##### Webshop-Sprachen einstellen:
 
 1. Öffnen Sie das Menü **Einstellungen » Mandant (Shop) » Standard » Webshop » Multilingualismus**.
 2. Wählen Sie unter **Sprachen** weitere Sprachen mit gedrückter Umschalt-Taste.

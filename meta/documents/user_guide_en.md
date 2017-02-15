@@ -14,7 +14,7 @@ You can make changes to your design by carrying out the design settings. No prog
 
 ### Deactivating the default homepage
 
-**Ceres** comes with a default homepage. Deactivate this homepage, to display your own content on the homepage of your online store.
+**Ceres** comes with a default homepage. Deactivate this page to display your own content on the homepage of your online store.
 
 ##### Deactivating the default homepage:
 
@@ -27,7 +27,7 @@ You can make changes to your design by carrying out the design settings. No prog
 
 ### Customising the header and footer
 
-Customise the header and the footer of your design. Display your own logo and design the footer content according to your requirements. The store features, for example, are a great way to highlight the features of your online store, such as free shipping.
+Customise the header and the footer of your design. Display your own logo and design the footer content according to your requirements. The store features, for example, are a great way to highlight the advantages of your online store, such as free shipping.
 
 ##### Customising the header and footer:
 
@@ -76,7 +76,7 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>
 <tr>
 <td><b>List of category IDs to display in first column</b></td>  
-<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the first footer column of the online store.<br /> <b><i>Note</i></b>: Multiple IDs must be separated by commas.</td>
+<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the first footer column of the online store.<br /> <b><i>Note:</i></b> Multiple IDs must be separated by commas.</td>
 </tr>
 <tr>
 <td><b>Title of second column</b></td>  
@@ -84,7 +84,7 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>
 <tr>
 <td><b>List of category IDs to display in second column</b></td>  
-<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the second footer column of the online store.<br /> <b><i>Note</i></b>: Multiple IDs must be separated by commas.</td>
+<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the second footer column of the online store.<br /> <b><i>Note:</i></b> Multiple IDs must be separated by commas.</td>
 </tr>
 <tr>
 <td><b>Title of third column</b></td>  
@@ -92,11 +92,11 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>
 <tr>
 <td><b>List of category IDs to display in third column</b></td>  
-<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the third footer column of the online store.<br /> <b><i>Note</i></b>: Multiple IDs must be separated by commas.</td>
+<td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the third footer column of the online store.<br /> <b><i>Note:</i></b> Multiple IDs must be separated by commas.</td>
 </tr>
 <!--tr>
 <td><b>Show newsletter registration column</b></td>  
-<td>Aktivieren, um eine zusätzliche Spalte für die Newsletteranmeldung einzublenden.</td>
+<td>Aktivieren, um eine zusätzliche Spalte für die Newsletteranmeldung einzublenden.?alt oder für zukünftige Funktion?</td>
 </tr-->   
 </table>
 
@@ -218,7 +218,7 @@ Customise the pagination of the item overview and the online store's item sortin
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
-<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item ID (ascending)</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID (descending)</strong> = Sort items by item ID in descending order.<br /> <strong>Item name (ascending)</strong>  = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name (descending)</strong>  = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position (ascending)</strong> = Display items with the highest position number first.<br /> <strong>Item position (descending)</strong> = Display items with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price (ascending)</strong> = Display items with the lowest price first.<br /> <strong>Price (descending)</strong> = Display items with the highest price first.<br /> <strong>Customer feedback (ascending)</strong> = Display items with the lowest customer feedback first.<br /> <strong>Customer feedback (descending)</strong> = Display items with the highest customer feedback first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID (ascending)</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID (descending)</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number (ascending)</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number (descending)</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last variation update</strong> = Display the last updated item variations first.<br /> <strong>First variation update</strong> = Display the first updated item variations first.<br /> <strong>Variation name (ascending)</strong> = Sort item variations in alphabetical order by variation name (A-Z).<br /> <strong>Variation name (descending)</strong> = Sort item variations in alphabetical order by variation name (Z-A).<br /> <strong>Variation position (ascending)</strong> = Display item variations with the highest position number first.<br /> <strong>Variation position (descending)</strong> = Display item variations with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Active variation (ascending)</strong> = Sort active item variations in ascending order.<br /> <strong>Active variation (descending)</strong> = Sort active item variations in descending order.<br /> <strong>Main variation (ascending)</strong> = Sort main item variations in ascending order.<br /> <strong>Main variation (descending)</strong> = Sort main item variations in descending order.<br /> <strong>Manufacturer (ascending)</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer (descending)</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Random items</strong> = Display items in a different, randomly chosen order every time.
+<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item ID (ascending)</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID (descending)</strong> = Sort items by item ID in descending order.<br /> <strong>Item name (ascending)</strong>  = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name (descending)</strong>  = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position (ascending)</strong> = Display the item with the highest position number first.<br /> <strong>Item position (descending)</strong> = Display the item with the lowest position number first.<br /> <b><i>Important:</i></b> In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price (ascending)</strong> = Display the item with the lowest price first.<br /> <strong>Price (descending)</strong> = Display the item with the highest price first.<br /> <strong>Customer feedback (ascending)</strong> = Display the item with the lowest customer feedback first.<br /> <strong>Customer feedback (descending)</strong> = Display the item with the highest customer feedback first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID (ascending)</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID (descending)</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number (ascending)</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number (descending)</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last variation update</strong> = Display the last updated item variation first.<br /> <strong>First variation update</strong> = Display the first updated item variation first.<br /> <strong>Variation name (ascending)</strong> = Sort item variations in alphabetical order by variation name (A-Z).<br /> <strong>Variation name (descending)</strong> = Sort item variations in alphabetical order by variation name (Z-A).<br /> <strong>Variation position (ascending)</strong> = Display the item variation with the highest position number first.<br /> <strong>Variation position (descending)</strong> = Display the item variation with the lowest position number first.<br /> <b><i>Important:</i></b> In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Active variation (ascending)</strong> = Sort active item variations in ascending order.<br /> <strong>Active variation (descending)</strong> = Sort active item variations in descending order.<br /> <strong>Main variation (ascending)</strong> = Sort main item variations in ascending order.<br /> <strong>Main variation (descending)</strong> = Sort main item variations in descending order.<br /> <strong>Manufacturer (ascending)</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer (descending)</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Random items</strong> = Display items in a different, randomly chosen order every time.
 </td>
 </tr>
 <tr>
@@ -273,7 +273,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 </tr> 
 <tr>
 <td><b>Enable logging options</b></td>  
-<td>Activate one, multiple or <strong>ALL</strong> logging options.<br /> <strong>Print errors</strong> = Display error messages in the online store.<br /> <strong>Print success</strong> = Display success messages in the online store.<br /> <strong>Print warnings</strong> = Display warnings in the online store.<br /> <strong>Print information</strong> =Display information in the online store.<br /> <strong>Print stack trace</strong> = Display the stack trace.<br /> <strong>Log messages</strong> = Log messages.<br /> <strong>Show error codes</strong> = Display error codes.</td>
+<td>Activate one, multiple or <strong>ALL</strong> logging options.<br /> <strong>Print errors</strong> = Display error messages in the online store.<br /> <strong>Print success</strong> = Display success messages in the online store.<br /> <strong>Print warnings</strong> = Display warnings in the online store.<br /> <strong>Print information</strong> = Display information in the online store.<br /> <strong>Print stack trace</strong> = Display the stack trace.<br /> <strong>Log messages</strong> = Log messages.<br /> <strong>Show error codes</strong> = Display error codes.</td>
 </tr>
 <tr>
 <td><b>Performance level</b></td>  
@@ -283,9 +283,9 @@ Settings specifically aimed at plugin developers are available in the **Registra
 
 ### Setting online store languages
 
-By default **Ceres** will be available in German and English. Select these languages in the header area of your online store. **Ceres** supports all languages available in plentymarkets. You can translate your online store and your items into other languages. Carry out language settings in the plentymarkets back end.
+By default, **Ceres** will be available in German and English. Select these languages in the header area of your online store. **Ceres** supports all languages available in plentymarkets. You can translate your online store and your items into other languages. Carry out language settings in the plentymarkets back end.
 
-##### Setting online store languages
+##### Setting online store languages:
 
 1. Go to **Settings » Client (store) » Standard » Online store » Multilingualism**.
 2. Select additional languages under **Languages** by holding the Shift key.
