@@ -12,7 +12,7 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             basketItem: {currentBasketItem: { }},
-            timeToClose: 10,
+            timeToClose: 0,
             price: 0,
             currency: ""
         };
