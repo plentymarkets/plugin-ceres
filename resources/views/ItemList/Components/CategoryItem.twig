@@ -35,13 +35,19 @@
                     </a>
                     <div class="thumb-meta">
                         <div class="prices">
-                            <del class="crossprice" v-if="recommendedRetailPrice > 0">
-                                ${ recommendedRetailPrice | currency }
-                            </del>
 
-                            <div class="price">
-                                ${ variationRetailPrice | currency }
-                            </div>
+                            <a href="${ itemData | itemURL }" v-if="recommendedRetailPrice > 0">
+                                <del class="crossprice">
+                                    ${ recommendedRetailPrice | currency itemData.calculatedPrices.rrp.currency }
+                                </del>
+                            </a>
+
+                            <a href="${ itemData | itemURL }">
+                                <div class="price">
+                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency }
+                                </div>
+                            </a>
+
                         </div>
                     </div>
                 </div>

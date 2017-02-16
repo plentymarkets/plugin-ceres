@@ -32,7 +32,7 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = 100-(item.data.salesPrices[1].price/item.data.salesPrices[0].price*100) %}
+                    {% set percent = 100-(item.data.calculatedPrices.rrp.price/item.data.calculatedPrices.default.price*100) %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('PluginCeres.item.storeSpecial') %}
@@ -67,17 +67,19 @@
                 {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices", item) }}
 
                 <div class="prices">
-                    {% if item.data.salesPrices[1].price != '0' %}
-                        <del class="crossprice">
-                            {{ item.data.salesPrices[1].price }} €
-                            {#{{ item.data.salesPrices[1].price != '0' | formatMonetary(item.variationRetailPrice.currency) }}#}
-                        </del>
+                    {% if item.data.calculatedPrices.rrp.price != '0' %}
+                        <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                            <del class="crossprice">
+                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
+                            </del>
+                        </a>
                     {% endif %}
 
-                    <div class="price">
-                        {{ item.data.salesPrices[0].price }} €
-                        {#{{ variationRetailPrice | formatMonetary(item.variationRetailPrice.currency) }}#}
-                    </div>
+                    <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                        <div class="price">
+                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
+                        </div>
+                    </a>
                 </div>
 
                 {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices", item) }}

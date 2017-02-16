@@ -13,8 +13,9 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             basketItem: {currentBasketItem: { }},
-            timeToClose: 5,
-            price: 0
+            timeToClose: 0,
+            price: 0,
+            currency: ""
         };
     },
 
@@ -57,19 +58,12 @@ Vue.component("add-item-to-basket-overlay", {
             return render;
         },
 
-        /**
-         * iterate through the basketItem prices and get the "default" typed price
-         */
         setPriceFromData: function()
         {
-            for (var i in this.basketItem.currentBasketItem.salesPrices)
+            if (this.basketItem.currentBasketItem.calculatedPrices)
             {
-                var priceData = this.basketItem.currentBasketItem.salesPrices[i];
-
-                if (priceData.type === "default")
-                {
-                    this.price = priceData.price;
-                }
+                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
+                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
         },
 
@@ -93,7 +87,7 @@ Vue.component("add-item-to-basket-overlay", {
 
         startCounter: function()
         {
-            this.timeToClose = 5;
+            this.timeToClose = 10;
 
             var timerVar = setInterval(countTimer, 1000);
 
@@ -2387,30 +2381,8 @@ Vue.component("category-item", {
 
     created: function()
     {
-        this.setPrices();
-    },
-
-    methods:
-    {
-        /**
-         * set the properties recommendedRetailPrice and variationRetailPrice, based on instances' data
-         */
-        setPrices: function()
-        {
-            for (var i in this.itemData.salesPrices)
-            {
-                var priceData = this.itemData.salesPrices[i];
-
-                if (priceData.type === "rrp")
-                {
-                    this.recommendedRetailPrice = priceData.price;
-                }
-                else if (priceData.type === "default")
-                {
-                    this.variationRetailPrice = priceData.price;
-                }
-            }
-        }
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
     },
 
     computed:
