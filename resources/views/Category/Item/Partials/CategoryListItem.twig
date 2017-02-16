@@ -70,14 +70,14 @@
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
                         <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.currency) }}
+                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
                             </del>
                         </a>
                     {% endif %}
 
                     <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
                         <div class="price">
-                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.currency) }}
+                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
                         </div>
                     </a>
                 </div>
