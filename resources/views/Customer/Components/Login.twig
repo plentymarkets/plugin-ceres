@@ -23,9 +23,10 @@
                         <input class="form-check-input" type="checkbox" value="">
                         <span>{{ trans("PluginCeres::Template.accRememberPassword") }}</span>
                     </label>
-                    <div>
-                        <a href="#" class="small">{{ trans("PluginCeres::Template.accForgotPassword") }}</a>
-                    </div>
+                    {# TODO #}
+                    {#<div>#}
+                        {#<a href="#" class="small">{{ trans("PluginCeres::Template.accForgotPassword") }}</a>#}
+                    {#</div>#}
                 </div>
                 <div class="col-xs-4">
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.accLogin") }}</button>
