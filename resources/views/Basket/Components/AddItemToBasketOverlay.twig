@@ -1,11 +1,5 @@
 <script type="x/template" id="vue-add-item-to-basket-overlay">
 
-{% if not frontend.Account.getIsAccountLoggedIn %}
-    {% set linkedPage = '/login' %}
-{% else %}
-    {% set linkedPage = '/checkout'%}
-{% endif %}
-
 <div id="add-item-to-basket-overlay" v-if="startRendering()">
     <div class="modal fade">
         <div class="modal-dialog" role="document">
@@ -46,7 +40,7 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-sm-7 m-b-1 item-confirm-special-case-blue">
-                            <a href="{{ linkedPage }}" class="btn btn-primary">
+                            <a href="/checkout" class="btn btn-primary">
                                 {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </a>
                             <a href="/basket" class="btn btn-primary">
