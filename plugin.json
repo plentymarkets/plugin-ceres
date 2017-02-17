@@ -13,7 +13,7 @@
     "categories"        : ["3517"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
-    "require"           : ["PluginIO"],
+    "require"           : ["IO"],
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
