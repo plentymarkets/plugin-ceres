@@ -1,5 +1,5 @@
-{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
-{% set configItemName = config("PluginCeres.item.name") %}
+{{ component( "Ceres::Item.Components.QuantityInput" ) }}
+{% set configItemName = config("Ceres.item.name") %}
 
 <article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
@@ -26,7 +26,7 @@
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
             ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
@@ -34,10 +34,10 @@
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCeres::Template.generalDelete") }}
+                   {{ trans("Ceres::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
+                   {{ trans("Ceres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>

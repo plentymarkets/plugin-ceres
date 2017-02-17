@@ -1,9 +1,9 @@
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set numberOfCols = config('PluginCeres.footer.number_of_cols') %}
+{% set numberOfCols = config('Ceres.footer.number_of_cols') %}
 {% set colSize = (12 / (numberOfCols + 1)) %}
 {% set displayedCategories = [] %}
-{% set numberOfFeatures = config('PluginCeres.footer.number_of_features') %}
+{% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
 
 <div class="footer">
     <a href="#" class="to-top hidden-md-up">
@@ -16,7 +16,7 @@
                 {% for i in 1..numberOfFeatures %}
                     <div class="col-xs-12 col-sm-4 text-xs-center">
                         <i class="fa fa-check text-success" aria-hidden="true"></i>
-                        {{ config('PluginCeres.footer.store_feature_' ~ i) }}
+                        {{ config('Ceres.footer.store_feature_' ~ i) }}
                     </div>
                 {% endfor %}
             </div>
@@ -28,24 +28,24 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="footer-services m-t-2">
-                    {% set paymentMethodContent = LayoutContainer.show("PluginCeres::Homepage.PaymentMethods") %}
+                    {% set paymentMethodContent = LayoutContainer.show("Ceres::Homepage.PaymentMethods") %}
                     {% if paymentMethodContent|trim is not empty %}
                         <div class="services-payment m-b-1">
-                            <strong class="services-title">{{ trans("PluginCeres::Template.orderPaymentMethods") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.orderPaymentMethods") }}</strong>
                             {{ paymentMethodContent }}
                         </div>
                     {% endif %}
-                    {% set shippingContent = LayoutContainer.show("PluginCeres::Homepage.Shipping") %}
+                    {% set shippingContent = LayoutContainer.show("Ceres::Homepage.Shipping") %}
                     {% if shippingContent|trim is not empty %}
                         <div class="services-shipping m-b-1">
-                            <strong class="services-title">{{ trans("PluginCeres::Template.generalOrderShippedBy") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.generalOrderShippedBy") }}</strong>
                             {{ shippingContent }}
                         </div>
                     {% endif %}
-                    {% set certifiedContent = LayoutContainer.show("PluginCeres::Homepage.Certified") %}
+                    {% set certifiedContent = LayoutContainer.show("Ceres::Homepage.Certified") %}
                     {% if certifiedContent|trim is not empty %}
                         <div class="services-certificate m-b-1">
-                            <strong class="services-title">{{ trans("PluginCeres::Template.generalCertifiedBy") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.generalCertifiedBy") }}</strong>
                             {{ certifiedContent }}
                         </div>
                     {% endif %}
@@ -58,10 +58,10 @@
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
                     <nav class="footer-column m-b-2">
-                        <h5>{{ config('PluginCeres.footer.col_' ~ i ~ '_title') }}</h5>
+                        <h5>{{ config('Ceres.footer.col_' ~ i ~ '_title') }}</h5>
                         <ul class="list-unstyled">
 
-                            {% set footerCategories = config('PluginCeres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
+                            {% set footerCategories = config('Ceres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
                             {% for catID in footerCategories %}
 
                                 {% set cat = services.category.get(catID) %}
@@ -83,12 +83,12 @@
             <hr class="hidden-sm-up m-y-2">
             <div class="col-xs-6 col-sm-3">
                 <div class="footer-column">
-                    {{ LayoutContainer.show("PluginCeres::Footer.RowOne") }}
+                    {{ LayoutContainer.show("Ceres::Footer.RowOne") }}
                 </div>
             </div>
             <div class="col-sm-12 col-lg-3">
                 <div class="footer-column row">
-                    {% set rowTwo = LayoutContainer.show("PluginCeres::Footer.RowTwo") %}
+                    {% set rowTwo = LayoutContainer.show("Ceres::Footer.RowTwo") %}
 
                     {{ rowTwo }}
 
@@ -98,7 +98,7 @@
                         <div class="col-xs-12">
                             {% endif %}
 
-                            {{ LayoutContainer.show("PluginCeres::Footer.RowThree") }}
+                            {{ LayoutContainer.show("Ceres::Footer.RowThree") }}
                         </div>
                     </div>
                 </div>
@@ -107,21 +107,21 @@
 
             </div>
 
-            {% set cat = services.category.get(config('PluginCeres.global.category.legal_disclosure')) %}
+            {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
             <div class="copyright text-xs-center m-y-1">
                 <div class="static-link-list">
                     {% autoescape false %}
-                        <a href="/cancellation-rights">{{ trans("PluginCeres::Template.generalCancellationRight") }}</a>
-                        <a href="/legal-disclosure">{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</a>
-                        <a href="/privacy-policy">{{ trans("PluginCeres::Template.generalPrivacyPolicy") }}</a>
-                        <a href="/gtc">{{ trans("PluginCeres::Template.generalGtc") }}</a>
+                        <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
+                        <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
+                        <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
+                        <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
                     {% endautoescape %}
                 </div>
                 <a href="https://www.plentymarkets.eu">
-                    <img class="svg plenty-brand" src="{{ plugin_path('PluginCeres') }}/images/plentymarkets-logo.svg">
+                    <img class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg">
                 </a>
                 <br>
-                <small>&copy; Copyright 2017 | {{ trans("PluginCeres::Template.generalAllRightsReserved") }}</small>
+                <small>&copy; Copyright 2017 | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 <script type="x/template" id="vue-order-details">
     <div>
@@ -7,17 +7,17 @@
                 <div class="card small">
                     <!-- ORDER -->
                     <div class="card-header">
-                        <h5>{{ trans("PluginCeres::Template.orderId") }} ${ orderData.order.id }</h5>
+                        <h5>{{ trans("Ceres::Template.orderId") }} ${ orderData.order.id }</h5>
                     </div>
                     <div class="card-block">
                         <div class="details">
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderDate") }}</strong>
-                                <span class="col-xs-6 col-sm-7">${ orderData.order.createdAt | date "{{ trans("PluginCeres::Template.dateTimeFormatMoment") }}" }</span>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
+                                <span class="col-xs-6 col-sm-7">${ orderData.order.createdAt | date "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
                             </div>
 
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderStatus") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
                                 <span class="col-xs-6 col-sm-7">${ orderData.status.frontendName }</span>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
 
                         <div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderInvoiceAddress") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderInvoiceAddress") }}</strong>
                                 <span class="col-xs-6 col-sm-7">
                                                             <div>${orderData.order.billingAddress.name1}</div>
                                                             <div>${orderData.order.billingAddress.name2} ${orderData.order.billingAddress.name3}</div>
@@ -37,10 +37,10 @@
                             </div>
 
                             <div class="row m-t-1">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingAddress") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderShippingAddress") }}</strong>
                                 <span class="col-xs-6 col-sm-7">
                                                             <span v-if="orderData.order.billingAddress.id == orderData.order.deliveryAddress.id">
-                                                                {{ trans("PluginCeres::Template.addressSameAsInvoice") }}
+                                                                {{ trans("Ceres::Template.addressSameAsInvoice") }}
                                                             </span>
                                                             <span v-else>
                                                                 <div>${orderData.order.deliveryAddress.name1}</div>
@@ -57,19 +57,19 @@
 
                         <div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentMethod") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
                                 <span class="col-xs-6 col-sm-7">${ orderData.paymentMethodName }</span>
                             </div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderPaymentStatus") }}</strong>
-                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'unpaid'">{{ trans("PluginCeres::Template.paymentStatus_unpaid") }}</span>
-                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'prepaid'">{{ trans("PluginCeres::Template.paymentStatus_prepaid") }}</span>
-                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'partlyPaid'">{{ trans("PluginCeres::Template.paymentStatus_partlyPaid") }}</span>
-                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'fullyPaid'">{{ trans("PluginCeres::Template.paymentStatus_fullyPaid") }}</span>
-                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("PluginCeres::Template.paymentStatus_overpaid") }}</span>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
+                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'unpaid'">{{ trans("Ceres::Template.paymentStatus_unpaid") }}</span>
+                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'prepaid'">{{ trans("Ceres::Template.paymentStatus_prepaid") }}</span>
+                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'partlyPaid'">{{ trans("Ceres::Template.paymentStatus_partlyPaid") }}</span>
+                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'fullyPaid'">{{ trans("Ceres::Template.paymentStatus_fullyPaid") }}</span>
+                                <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("Ceres::Template.paymentStatus_overpaid") }}</span>
                             </div>
 
-                            {{ LayoutContainer.show("PluginCeres::OrderConfirmation.AdditionalPaymentInformation") }}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation") }}
 
                         </div>
 
@@ -77,13 +77,13 @@
 
                         <div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderShippingProfile") }}</strong>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderShippingProfile") }}</strong>
                                 <span class="col-xs-6 col-sm-7">${ orderData.shippingProvider } - ${ orderData.shippingProfileName }</span>
                             </div>
 
                             <div class="row" v-if="shippingDate">
-                                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderEstimatedShippingDate") }}</strong>
-                                <span class="col-xs-6 col-sm-7">${ shippingDate | moment "{{ trans("PluginCeres::Template.dateFormatMoment") }}" }</span>
+                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderEstimatedShippingDate") }}</strong>
+                                <span class="col-xs-6 col-sm-7">${ shippingDate | moment "{{ trans("Ceres::Template.dateFormatMoment") }}" }</span>
                             </div>
                         </div>
 
@@ -107,15 +107,15 @@
                                 </div>
                             </a>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPricePerPiece") }}</strong>
+                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderPricePerPiece") }}</strong>
                                 <span class="col-xs-6 col-sm-9">${ item.amounts[0].priceGross | currency item.amounts[0].currency  }</span>
                             </div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderPeace") }}</strong>
+                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderPeace") }}</strong>
                                 <span class="col-xs-6 col-sm-9">${ item.quantity }</span>
                             </div>
                             <div class="row">
-                                <strong class="col-xs-6 col-sm-3">{{ trans("PluginCeres::Template.orderTotal") }}</strong>
+                                <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderTotal") }}</strong>
                                 <strong class="col-xs-6 col-sm-9">${ (item.quantity * item.amounts[0].priceGross) | currency item.amounts[0].currency }</strong>
                             </div>
                         </div>
@@ -125,32 +125,32 @@
                 <div class="gesamtsumme">
                     <!-- BASKET TOTALS -->
                     <div class="cmp cmp-totals">
-                        <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
+                        <h3>{{ trans("Ceres::Template.basketSum") }}</h3>
                         <div>
                             <dl>
                                 <dt v-if="showProperty( 'basket.value_of_items_net' )">
-                                    {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                                    {{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketNet") }})
                                 </dt><!--
                          --><dd v-if="showProperty( 'basket.value_of_items_net' )">
                                     ${ totals.itemSumNet | currency totals.currency }
                                 </dd>
 
                                 <dt v-if="showProperty( 'basket.value_of_items_gross' )">
-                                    <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                                    <strong>{{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                                 </dt><!--
                          --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
                                     <strong>${ totals.itemSum | currency totals.currency }</strong>
                                 </dd>
 
                                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
-                                    {{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                                    {{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketNet") }})
                                 </dt><!--
                          --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                                     ${ totals.shippingAmountNet | currency totals.currency }
                                 </dd>
 
                                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                                    <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                                    <strong>{{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                                 </dt><!--
                          --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
                                     <strong>${ totals.shippingAmount | currency totals.currency }</strong>
@@ -158,26 +158,26 @@
 
                                 <hr>
 
-                                {% set grossNet = LayoutContainer.show("PluginCeres::OrderConfirmation.GrossNetReplace") %}
+                                {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace") %}
                                 {% if grossNet|trim is not empty %}
                                     {{ grossNet }}
                                 {% else %}
                                     <dt v-if="showProperty( 'basket.order_total_net' )">
-                                        {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                                        {{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketNet") }})
                                     </dt><!--
                                     --><dd v-if="showProperty( 'basket.order_total_net' )">
                                     ${ totals.totalAmountNet | currency totals.currency }
                                     </dd>
 
                                     <dt v-if="totals.couponValue !== 0">
-                                        <strong>{{ trans("PluginCeres::Template.basketCoupon") }}</strong>
+                                        <strong>{{ trans("Ceres::Template.basketCoupon") }}</strong>
                                     </dt><!--
                                     --><dd v-if="totals.couponValue !== 0">
                                         <strong>${ totals.couponValue | currency totals.currency }</strong>
                                     </dd>
 
                                     <dt v-if="showProperty( 'basket.vat' )">
-                                        {{ trans("PluginCeres::Template.basketVAT") }}
+                                        {{ trans("Ceres::Template.basketVAT") }}
                                     </dt><!--
                                      --><dd v-if="showProperty( 'basket.vat' )">
                                         ${ totals.vat | currency totals.currency }
@@ -186,7 +186,7 @@
                                     <hr>
 
                                     <dt v-if="showProperty( 'basket.order_total_gross' )">
-                                        <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                                        <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                                     </dt><!--
                                     --><dd v-if="showProperty( 'basket.order_total_gross' )">
                                     <strong>${ totals.totalAmount | currency totals.currency }</strong>
@@ -194,7 +194,7 @@
 
                                 {% endif %}
 
-                                {{ LayoutContainer.show("PluginCeres::OrderConfirmation.AfterTotals") }}
+                                {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals") }}
                             </dl>
                         </div>
                     </div>

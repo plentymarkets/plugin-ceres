@@ -1,4 +1,4 @@
-# Release Notes für PluginCeres
+# Release Notes für Ceres
 
 ## v1.0.2 (2017-02-16)
 

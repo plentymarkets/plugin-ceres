@@ -2,10 +2,10 @@
     <div class="cmp cmp-coupon">
 
         <div class="input-group">
-            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("PluginCeres::Template.generalEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
+            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("Ceres::Template.generalEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" @click="redeemCode()" :disabled="waiting" v-if="!basket.couponCode">{{ trans("PluginCeres::Template.generalRedeem") }}</button>
-                <button class="btn btn-danger" type="button" @click="removeCode()" :disabled="waiting" v-else>{{ trans("PluginCeres::Template.generalRemove") }}</button>
+                <button class="btn btn-primary" type="button" @click="redeemCode()" :disabled="waiting" v-if="!basket.couponCode">{{ trans("Ceres::Template.generalRedeem") }}</button>
+                <button class="btn btn-danger" type="button" @click="removeCode()" :disabled="waiting" v-else>{{ trans("Ceres::Template.generalRemove") }}</button>
             </span>
         </div>
     </div>

@@ -32,18 +32,18 @@ module.exports = (function($)
             _setIsLoading(true);
 
             return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "PluginCeres::ItemList.ItemListView"
+                template: "Ceres::ItemList.ItemListView"
             })
-            .done(function(response)
-            {
-                _setIsLoading(false);
-                ResourceService.getResource("itemList").set(response);
-            })
-            .fail(function()
-            {
-                _setIsLoading(false);
-                NotificationService.error("Error while searching").closeAfter(5000);
-            });
+                .done(function(response)
+                {
+                    _setIsLoading(false);
+                    ResourceService.getResource("itemList").set(response);
+                })
+                .fail(function()
+                {
+                    _setIsLoading(false);
+                    NotificationService.error("Error while searching").closeAfter(5000);
+                });
         }
 
         return null;

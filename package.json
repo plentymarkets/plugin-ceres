@@ -1,10 +1,10 @@
 {
-  "name": "PluginCeres",
+  "name": "Ceres",
   "license": "AGPL-3.0",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plentymarkets/callisto-4.git"
+    "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "devDependencies": {
     "browserify": "^13.0.1",

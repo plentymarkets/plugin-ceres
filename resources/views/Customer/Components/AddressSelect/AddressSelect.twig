@@ -1,4 +1,4 @@
-{{ component( "PluginCeres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
+{{ component( "Ceres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
     <div>
         <div class="cmp cmp-address-list m-b-3" v-bind:class="{'error': showError}">
@@ -14,7 +14,7 @@
 
                     <div class="item-inner">
                     <span v-if="selectedAddress.id == -99">
-                        <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }}
+                        <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
                             -</p>
                     </span>
                         <span v-else class="item-content">
@@ -27,10 +27,10 @@
                         </div>
 
                         <p v-if="!isAddressListEmpty() && !selectedAddressId"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.pleaseSelect") }}
+                           class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
                             -</p>
                         <p v-if="isAddressListEmpty()"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressNoAddress") }}
+                           class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
                             -</p>
                     </span>
 
@@ -39,7 +39,7 @@
 
                 <div class="add-item">
                     <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right"
-                       title="{{ trans("PluginCeres::Template.addressAddAddress") }}">
+                       title="{{ trans("Ceres::Template.addressAddAddress") }}">
                         <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -57,7 +57,7 @@
                             >
                             <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
                             <span v-if="address.id == -99">
-                                <p class="text-muted small font-italic p-t-1">- {{ trans("PluginCeres::Template.addressSameAsInvoice") }}
+                                <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
                                     -</p>
                             </span>
                                 <span v-else class="item-content small">
@@ -130,17 +130,17 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>{{ trans("PluginCeres::Template.addressDeleteWarning") }}</label>
+                                        <label>{{ trans("Ceres::Template.addressDeleteWarning") }}</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3 offset-sm-6">
                                         <button type="button" class="btn btn-primary btn-block"
-                                                @click="closeDeleteModal">{{ trans("PluginCeres::Template.generalCancel") }}</button>
+                                                @click="closeDeleteModal">{{ trans("Ceres::Template.generalCancel") }}</button>
                                     </div>
                                     <div class="col-sm-3">
                                         <button type="button" class="btn btn-primary btn-block"
-                                                @click="deleteAddress">{{ trans("PluginCeres::Template.generalDelete") }}</button>
+                                                @click="deleteAddress">{{ trans("Ceres::Template.generalDelete") }}</button>
                                     </div>
                                 </div>
                             </fieldset>

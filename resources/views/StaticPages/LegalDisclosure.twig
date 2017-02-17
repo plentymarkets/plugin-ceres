@@ -1,6 +1,6 @@
 {% extends getPartial('page-design') %}
 
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PageBody %}
 
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {% autoescape false %}
-                    <h1>{{ trans("PluginCeres::Template.generalLegalDisclosure") }}</h1>
+                    <h1>{{ trans("Ceres::Template.generalLegalDisclosure") }}</h1>
                 {% endautoescape %}
 
                 <hr class="m-y-3">
@@ -21,7 +21,7 @@
                     <p class="static-page-plain-text">{{ legalDisclosure.plainText }}</p>
                 {% endif %}
 
-                {{ LayoutContainer.show("PluginCeres::StaticPages.LegalDisclosure") }}
+                {{ LayoutContainer.show("Ceres::StaticPages.LegalDisclosure") }}
             </div>
         </div>
     </div>
