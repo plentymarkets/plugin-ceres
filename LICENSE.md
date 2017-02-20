@@ -1,4 +1,4 @@
-plentymarkets plugin Ceres
+plentymarkets Ceres
 
 Copyright © 2017 plentymarkets GmbH
 
