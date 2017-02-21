@@ -39,11 +39,13 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 6. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Tab. 1: Header und Footer anpassen</caption>
+<thead>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td colspan="2" class="th">Tab: Header</td>  
 </tr>   
@@ -94,10 +96,8 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 <td><b>List of category IDs to display in third column</b></td>  
 <td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der dritten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
 </tr>
-<!--tr>
-<td><b>Show newsletter registration column</b></td>  
-<td>Aktivieren, um eine zusätzliche Spalte für die Newsletteranmeldung einzublenden.</td>
-</tr-->   
+</tbody>
+<caption>Tab. 1: Header und Footer anpassen</caption>
 </table>
 
 ### Artikelansicht anpassen
@@ -113,11 +113,13 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Tab. 2: Artikelansicht anpassen</caption>
+<thead>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><b>Item name</b></td>  
 <td><strong>Name 1</strong>, <strong>Name 2</strong> oder <strong>Name 3</strong> wählen. Texte für die Felder werden im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels gespeichert. Wenn <strong>Name 2</strong> oder <strong>Name 3</strong> gewählt wurde, aber kein Name im Textfeld gespeichert wurde, wird <strong>Name 1</strong> als Artikelname verwendet.</td>
@@ -134,6 +136,8 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td><b>Show variations in the category item list</b></td>  
 <td>Varianten in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
 </tr>
+</tbody>
+<caption>Tab. 2: Artikelansicht anpassen</caption>
 </table>
 
 ### Warenkorb anpassen
@@ -150,11 +154,13 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Tab. 3: Warenkorb anpassen</caption>
+<thead>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th>
-</tr> 
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><b>Show item information</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Artikelinformationen wählen, um die Informationen in der Artikelübersicht im Warenkorb anzuzeigen.<br /> <strong>Item ID</strong> = Aktivieren, um die Artikel-ID anzuzeigen.<br /> <strong>Description</strong> = Aktivieren, um die Artikelbeschreibung anzuzeigen. Wenn Sie die Anzeige der <strong>Beschreibung</strong> aktivieren, aber keinen Text unter <strong>Beschreibung</strong> im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels speichern, wird die Artikelbeschreibung nicht angezeigt.<br /> <strong>Availability</strong> = Aktivieren, um die Verfügbarkeit anzuzeigen.<br /> <strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /> <strong>Condition</strong> = Aktivieren, um den Artikelzustand anzuzeigen.
@@ -176,6 +182,8 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <td><b>Add to shopping cart: Show overlay</b></td>  
 <td>Aktivieren, um ein Overlay des Warenkorbs nach Klick auf den <strong>In den Warenkorb</strong>-Button anzuzeigen.</td>
 </tr>
+</tbody>
+<caption>Tab. 3: Warenkorb anpassen</caption>
 </table>
 
 ### Paginierung und Sortierung anpassen
@@ -192,11 +200,13 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Tab. 4: Paginierung und Sortierung anpassen</caption>
+<thead>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th>
-</tr> 
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><b>Pagination position</b></td>  
 <td>Position für die Paginierung wählen.<br /> <strong>Top</strong> = Paginierung oberhalb der Artikelliste anzeigen.<br /> <strong>Bottom</strong> = Paginierung unterhalb der Artikelliste anzeigen.<br /> <strong>Top and bottom</strong> = Paginierung oberhalb und unterhalb der Artikelliste anzeigen.</td>
@@ -225,7 +235,9 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <tr>
 <td><b>Default item sorting by</b></td>  
 <td>Eintrag wählen, der standardmäßig bei der Artikelsortierung voreingestellt ist.</td>
-</tr>    
+</tr>
+</tbody>
+<caption>Tab. 4: Paginierung und Sortierung anpassen</caption>
 </table>
 
 ### Mein Konto anpassen
@@ -253,11 +265,13 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 5. **Speichern** Sie die Einstellungen.
 
 <table>
-<caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<thead>
 <tr>  
 <th>Einstellung</th>
 <th>Erläuterung</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td colspan="2" class="th">Tab: Registration</td>  
 </tr> 
@@ -280,6 +294,8 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 <td><b>Performance level</b></td>  
 <td>Performance-Level wählen.<br /> <strong>Live</strong> = Live-Modus wählen, wenn der Webshop produktiv verwendet wird. Dateien werden minimiert und gebündelt.<br /> <strong>Development</strong> = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.</td>
 </tr>
+</tbody>
+<caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
 
 ### Webshop-Sprachen einstellen

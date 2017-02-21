@@ -39,11 +39,13 @@ Customise the header and the footer of your design. Display your own logo and de
 6. **Save** the settings.
 
 <table>
-<caption>Table 1: Customising the header and footer</caption>
+<thead>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td colspan="2" class="th">Tab: Header</td>  
 </tr>   
@@ -94,10 +96,8 @@ Customise the header and the footer of your design. Display your own logo and de
 <td><b>List of category IDs to display in third column</b></td>  
 <td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the third footer column of the online store.<br /> <b><i>Note:</i></b> Multiple IDs must be separated by commas.</td>
 </tr>
-<!--tr>
-<td><b>Show newsletter registration column</b></td>  
-<td>Aktivieren, um eine zusätzliche Spalte für die Newsletteranmeldung einzublenden.?alt oder für zukünftige Funktion?</td>
-</tr-->   
+</tbody>
+<caption>Table 1: Customising the header and footer</caption> 
 </table>
 
 ### Customising the item view
@@ -113,11 +113,13 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 5. **Save** the settings.
 
 <table>
-<caption>Table 2: Customising the item view</caption>
+<thead>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><b>Item name</b></td>  
 <td>Select <strong>Name 1</strong>, <strong>Name 2</strong> or <strong>Name 3</strong>. Texts for these fields are saved in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of the item. If <strong>Name 2</strong> or <strong>Name 3</strong> is selected, but no name was saved in the text field, <strong>Name 1</strong> will be used as the item name.</td>
@@ -134,6 +136,8 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td><b>Show variations in the category item list</b></td>  
 <td>Display variations in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
 </tr>
+</tbody>
+<caption>Table 2: Customising the item view</caption>
 </table>
 
 ### Customising the shopping cart
@@ -150,11 +154,13 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 5. **Save** the settings.
 
 <table>
-<caption>Table 3: Customising the shopping cart</caption>
+<thead>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th>
-</tr> 
+</tr>
+ </thead>
+ <tbody>
 <tr>
 <td><b>Show item information</b></td>  
 <td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item overview of the shopping cart.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /><strong>Description</strong> = Activate to display the item description. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the item description will not be displayed.<br /><strong>Availability</strong> = Activate to display the item availability.<br /><strong>Variation number</strong> = Activate to display the variation number.<br /> <strong>Condition</strong> = Activate to display the item condition.
@@ -175,6 +181,8 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <td><b>Add to shopping cart: Show overlay</b></td>  
 <td>Activate to show the overlay of the shopping cart after clicking on the <strong>Add to shopping cart</strong> button.</td>
 </tr>
+</tbody>
+<caption>Table 3: Customising the shopping cart</caption>
 </table>
 
 ### Customising the pagination and sorting
@@ -191,11 +199,13 @@ Customise the pagination of the item overview and the online store's item sortin
 5. **Save** the settings.
 
 <table>
-<caption>Table 4: Customising the pagination and sorting</caption>
+<thead>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th>
-</tr> 
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><b>Pagination position</b></td>  
 <td>Select the pagination position.<br /> <strong>Top</strong> = Display the pagination on top of the item list.<br /> <strong>Bottom</strong> = Display the pagination on the bottom of the item list.<br /> <strong>Top and bottom</strong> = Display the pagination on the top and bottom of the item list.</td>
@@ -224,7 +234,9 @@ Customise the pagination of the item overview and the online store's item sortin
 <tr>
 <td><b>Default item sorting by</b></td>  
 <td>Select the entry that is selected by default for item sorting.</td>
-</tr>    
+</tr>
+</tbody>
+<caption>Table 4: Customising the pagination and sorting</caption>
 </table>
 
 ### Customising the My account area
@@ -252,11 +264,13 @@ Settings specifically aimed at plugin developers are available in the **Registra
 5. **Save** the settings.
 
 <table>
-<caption>Table 5: Carrying out settings for plugin development</caption>
+<thead>
 <tr>  
 <th>Setting</th>
 <th>Explanation</th> 
 </tr>
+</thead>
+<tbody>
 <tr>
 <td colspan="2" class="th">Tab: Registration</td>  
 </tr> 
@@ -279,6 +293,8 @@ Settings specifically aimed at plugin developers are available in the **Registra
 <td><b>Performance level</b></td>  
 <td>Select a performance level.<br /> <strong>Live</strong> = Select the live mode when using the online store as a productive system. Files will be minified and bundled.<br /> <strong>Development</strong> = Select the development mode to use debugging functionality. Files will not be minified and bundled.</td>
 </tr>
+</tbody>
+<caption>Table 5: Carrying out settings for plugin development</caption>
 </table>
 
 ### Setting online store languages
