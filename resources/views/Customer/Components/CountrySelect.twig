@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-country-select">
 
     <div class="input-unit" data-validate="">
-        <select  v-model="selectedCountryId" v-on:change="countryChanged" class="custom-select">
+        <select  class="custom-select">
             <option v-bind:value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
                 ${ country.name }
             </option>
