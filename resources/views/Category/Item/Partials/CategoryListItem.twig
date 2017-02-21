@@ -1,9 +1,9 @@
-{{ component( "PluginCeres::Basket.Components.AddToBasket" ) }}
+{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set image = item.data.images.all | first %}
-{% set configItemName = config("PluginCeres.item.name") %}
+{% set configItemName = config("Ceres.item.name") %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
@@ -32,10 +32,10 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = 100-(item.data.salesPrices[1].price/item.data.salesPrices[0].price*100) %}
+                    {% set percent = 100-(item.data.calculatedPrices.rrp.price/item.data.calculatedPrices.default.price*100) %}
 
                     {% if percent <= 0 %}
-                        {% set dezimalcount = config('PluginCeres.item.storeSpecial') %}
+                        {% set dezimalcount = config('Ceres.item.storeSpecial') %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
                     {% endif %}
@@ -64,23 +64,25 @@
                 {{ item.data.texts[0].name1 }}
             </a>
             <div class="thumb-meta">
-                {{ LayoutContainer.show("PluginCeres::CategoryItem.BeforePrices", item) }}
+                {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item) }}
 
                 <div class="prices">
-                    {% if item.data.salesPrices[1].price != '0' %}
-                        <del class="crossprice">
-                            {{ item.data.salesPrices[1].price }} €
-                            {#{{ item.data.salesPrices[1].price != '0' | formatMonetary(item.variationRetailPrice.currency) }}#}
-                        </del>
+                    {% if item.data.calculatedPrices.rrp.price != '0' %}
+                        <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                            <del class="crossprice">
+                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
+                            </del>
+                        </a>
                     {% endif %}
 
-                    <div class="price">
-                        {{ item.data.salesPrices[0].price }} €
-                        {#{{ variationRetailPrice | formatMonetary(item.variationRetailPrice.currency) }}#}
-                    </div>
+                    <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                        <div class="price">
+                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
+                        </div>
+                    </a>
                 </div>
 
-                {{ LayoutContainer.show("PluginCeres::CategoryItem.AfterPrices", item) }}
+                {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item) }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->

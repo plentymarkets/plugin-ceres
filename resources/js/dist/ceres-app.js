@@ -588,8 +588,9 @@ Vue.component("add-item-to-basket-overlay", {
     {
         return {
             basketItem: {currentBasketItem: { }},
-            timeToClose: 5,
-            price: 0
+            timeToClose: 0,
+            price: 0,
+            currency: ""
         };
     },
 
@@ -632,19 +633,12 @@ Vue.component("add-item-to-basket-overlay", {
             return render;
         },
 
-        /**
-         * iterate through the basketItem prices and get the "default" typed price
-         */
         setPriceFromData: function()
         {
-            for (var i in this.basketItem.currentBasketItem.salesPrices)
+            if (this.basketItem.currentBasketItem.calculatedPrices)
             {
-                var priceData = this.basketItem.currentBasketItem.salesPrices[i];
-
-                if (priceData.type === "default")
-                {
-                    this.price = priceData.price;
-                }
+                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
+                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
         },
 
@@ -668,7 +662,7 @@ Vue.component("add-item-to-basket-overlay", {
 
         startCounter: function()
         {
-            this.timeToClose = 5;
+            this.timeToClose = 10;
 
             var timerVar = setInterval(countTimer, 1000);
 
@@ -1937,13 +1931,18 @@ Vue.component("create-update-address", {
                 .done(function()
                 {
                     this.addressModal.hide();
+
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
 
                         if (address.id === this.addressData.id)
                         {
-                            address = this.addressData;
+                            for (var attribute in this.addressList[key])
+                            {
+                                this.addressList[key][attribute] = this.addressData[attribute];
+                            }
+
                             break;
                         }
                     }
@@ -2688,6 +2687,10 @@ Vue.component("quantity-input", {
             ResourceService.watch("currentVariation", function(newValue)
             {
                 this.currentVariation = newValue;
+
+                this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
+                this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
+
             }.bind(this));
         },
 
@@ -2962,30 +2965,8 @@ Vue.component("category-item", {
 
     created: function()
     {
-        this.setPrices();
-    },
-
-    methods:
-    {
-        /**
-         * set the properties recommendedRetailPrice and variationRetailPrice, based on instances' data
-         */
-        setPrices: function()
-        {
-            for (var i in this.itemData.salesPrices)
-            {
-                var priceData = this.itemData.salesPrices[i];
-
-                if (priceData.type === "rrp")
-                {
-                    this.recommendedRetailPrice = priceData.price;
-                }
-                else if (priceData.type === "default")
-                {
-                    this.variationRetailPrice = priceData.price;
-                }
-            }
-        }
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
     },
 
     computed:
@@ -3274,7 +3255,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "searchString",
-                params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
+                params: {template: "Ceres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -4287,7 +4268,6 @@ Vue.directive("resource-bind", {
 
         ResourceService.watch(this.arg, function(value)
         {
-
             var paths = self.expression.split(".");
 
             for (var i = 0; i < paths.length; i++)
@@ -5081,18 +5061,18 @@ module.exports = (function($)
             _setIsLoading(true);
 
             return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "PluginCeres::ItemList.ItemListView"
+                template: "Ceres::ItemList.ItemListView"
             })
-            .done(function(response)
-            {
-                _setIsLoading(false);
-                ResourceService.getResource("itemList").set(response);
-            })
-            .fail(function()
-            {
-                _setIsLoading(false);
-                NotificationService.error("Error while searching").closeAfter(5000);
-            });
+                .done(function(response)
+                {
+                    _setIsLoading(false);
+                    ResourceService.getResource("itemList").set(response);
+                })
+                .fail(function()
+                {
+                    _setIsLoading(false);
+                    NotificationService.error("Error while searching").closeAfter(5000);
+                });
         }
 
         return null;
@@ -6326,7 +6306,7 @@ module.exports = (function($)
 var init = (function($, window, document)
 {
 
-    function CallistoMain()
+    function CeresMain()
     {
 
         $(window).scroll(function()
@@ -6477,8 +6457,8 @@ var init = (function($, window, document)
         });
     }
 
-    window.CallistoMain = new CallistoMain();
+    window.CeresMain = new CeresMain();
 
 })(jQuery, window, document);
 
-//# sourceMappingURL=plugin-ceres-app.js.map
+//# sourceMappingURL=ceres-app.js.map

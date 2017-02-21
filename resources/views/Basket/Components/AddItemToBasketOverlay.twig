@@ -1,11 +1,5 @@
 <script type="x/template" id="vue-add-item-to-basket-overlay">
 
-{% if not frontend.Account.getIsAccountLoggedIn %}
-    {% set linkedPage = '/login' %}
-{% else %}
-    {% set linkedPage = '/checkout'%}
-{% endif %}
-
 <div id="add-item-to-basket-overlay" v-if="startRendering()">
     <div class="modal fade">
         <div class="modal-dialog" role="document">
@@ -17,7 +11,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer">${ timeToClose }</span>s</span>
-                    <h5 class="modal-title">{{ trans("PluginCeres::Template.basketItemAdded") }}</h5>
+                    <h5 class="modal-title">{{ trans("Ceres::Template.basketItemAdded") }}</h5>
                 </div>
                 <!-- ./MODAL HEADER -->
 
@@ -34,7 +28,7 @@
                             <p class="small">
                                 <strong>
                                     <span class="text-muted">${ basketItem.quantity } x</span>
-                                    <span v-text="price | currency"></span>
+                                    <span v-text="price | currency currency"></span>
                                 </strong>
                             </p>
                         </div>
@@ -46,16 +40,16 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-sm-7 m-b-1 item-confirm-special-case-blue">
-                            <a href="{{ linkedPage }}" class="btn btn-primary">
-                                {{ trans("PluginCeres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            <a href="/checkout" class="btn btn-primary">
+                                {{ trans("Ceres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             </a>
                             <a href="/basket" class="btn btn-primary">
-                                {{ trans("PluginCeres::Template.basket") }} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.basket") }} <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="col-sm-3 offset-sm-2 item-confirm-special-case-close">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans("PluginCeres::Template.generalClose") }}
+                                <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalClose") }}
                             </button>
                         </div>
                     </div>

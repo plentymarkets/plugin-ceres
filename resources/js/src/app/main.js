@@ -3,7 +3,7 @@
 var init = (function($, window, document)
 {
 
-    function CallistoMain()
+    function CeresMain()
     {
 
         $(window).scroll(function()
@@ -154,6 +154,6 @@ var init = (function($, window, document)
         });
     }
 
-    window.CallistoMain = new CallistoMain();
+    window.CeresMain = new CeresMain();
 
 })(jQuery, window, document);

@@ -2,7 +2,7 @@
     <div class="card-block">
         <div class="row  m-b-1">
             <div class="col-sm-4">
-                <strong>{{ trans("PluginCeres::Template.accEmail") }}</strong>
+                <strong>{{ trans("Ceres::Template.accEmail") }}</strong>
             </div>
             <div class="col-sm-8">
                 <span>${ getEmail() }</span>
@@ -11,13 +11,13 @@
 
         <div class="row">
             <div class="col-sm-4">
-                <strong>{{ trans("PluginCeres::Template.accPassword") }}</strong>
+                <strong>{{ trans("Ceres::Template.accPassword") }}</strong>
             </div>
             <div class="col-sm-8">
                 <span>***********</span>
             </div>
         </div>
-        <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("PluginCeres::Template.accChangeSettings") }}">
+        <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("Ceres::Template.accChangeSettings") }}">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </span>
     </div>
@@ -31,29 +31,29 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h6 class="modal-title">{{ trans("PluginCeres::Template.accChangePassword") }}</h6>
+                        <h6 class="modal-title">{{ trans("Ceres::Template.accChangePassword") }}</h6>
                     </div>
                     <div class="modal-body form-horizontal">
                         <div class="form-group">
-                            <label for="new_password" class="control-label">{{ trans("PluginCeres::Template.accNewPassword") }}</label>
+                            <label for="new_password" class="control-label">{{ trans("Ceres::Template.accNewPassword") }}</label>
                             <div class="controls">
                                 <input type="password" name="new_password" v-model="newPassword" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="confirm_password" class="control-label">{{ trans("PluginCeres::Template.accRepeatPassword") }}</label>
+                            <label for="confirm_password" class="control-label">{{ trans("Ceres::Template.accRepeatPassword") }}</label>
                             <div class="controls">
                                 <input type="password" name="confirm_password" v-model="confirmPassword" class="form-control">
                             </div>
                         </div>
-                        <div v-show="!matchPassword" style="color: red;">{{ trans("PluginCeres::Template.accCorrectPassword") }}</div>
+                        <div v-show="!matchPassword" style="color: red;">{{ trans("Ceres::Template.accCorrectPassword") }}</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearFields">
-                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans("PluginCeres::Template.generalCancel") }}
+                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
                         </button>
                         <button type="button" class="btn btn-primary" @click="saveAccountSettings">
-                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("PluginCeres::Template.generalSave") }}
+                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalSave") }}
                         </button>
                     </div>
                 </div>

@@ -70,13 +70,18 @@ Vue.component("create-update-address", {
                 .done(function()
                 {
                     this.addressModal.hide();
+
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
 
                         if (address.id === this.addressData.id)
                         {
-                            address = this.addressData;
+                            for (var attribute in this.addressList[key])
+                            {
+                                this.addressList[key][attribute] = this.addressData[attribute];
+                            }
+
                             break;
                         }
                     }

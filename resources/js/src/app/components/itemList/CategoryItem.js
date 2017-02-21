@@ -18,30 +18,8 @@ Vue.component("category-item", {
 
     created: function()
     {
-        this.setPrices();
-    },
-
-    methods:
-    {
-        /**
-         * set the properties recommendedRetailPrice and variationRetailPrice, based on instances' data
-         */
-        setPrices: function()
-        {
-            for (var i in this.itemData.salesPrices)
-            {
-                var priceData = this.itemData.salesPrices[i];
-
-                if (priceData.type === "rrp")
-                {
-                    this.recommendedRetailPrice = priceData.price;
-                }
-                else if (priceData.type === "default")
-                {
-                    this.variationRetailPrice = priceData.price;
-                }
-            }
-        }
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
     },
 
     computed:

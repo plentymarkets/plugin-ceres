@@ -50,25 +50,25 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension('Twig_Extension_StringLoader');
 
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer) {
-                $templateContainer->setTemplate('PluginCeres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
+                $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
 
         }, self::EVENT_LISTENER_PRIORITY);
 
         // provide mapped category IDs - DEPRECATED?
         $eventDispatcher->listen('init.categories', function (CategoryMap $categoryMap) use (&$config) {
             $categoryMap->setCategoryMap(array(
-                CategoryKey::HOME => $config->get("PluginCeres.global.category.home"),
-                CategoryKey::PAGE_NOT_FOUND => $config->get("PluginCeres.global.category.page_not_found"),
-                CategoryKey::ITEM_NOT_FOUND => $config->get("PluginCeres.global.category.item_not_found")
+                CategoryKey::HOME => $config->get("Ceres.global.category.home"),
+                CategoryKey::PAGE_NOT_FOUND => $config->get("Ceres.global.category.page_not_found"),
+                CategoryKey::ITEM_NOT_FOUND => $config->get("Ceres.global.category.item_not_found")
             ));
 
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial) {
-            $partial->set('head', 'PluginCeres::PageDesign.Partials.Head');
-            $partial->set('header', 'PluginCeres::PageDesign.Partials.Header.Header');
-            $partial->set('footer', 'PluginCeres::PageDesign.Partials.Footer');
-            $partial->set('page-design', 'PluginCeres::PageDesign.PageDesign');
+            $partial->set('head', 'Ceres::PageDesign.Partials.Head');
+            $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
+            $partial->set('footer', 'Ceres::PageDesign.Partials.Footer');
+            $partial->set('page-design', 'Ceres::PageDesign.PageDesign');
 
         }, self::EVENT_LISTENER_PRIORITY);
     }

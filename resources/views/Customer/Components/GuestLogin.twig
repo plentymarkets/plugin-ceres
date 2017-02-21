@@ -1,4 +1,4 @@
-{% set emailRegex = config("PluginCeres.register.email_regex") %}
+{% set emailRegex = config("Ceres.register.email_regex") %}
 
 <script type="x/template" id="vue-guest-login">
     <div>
@@ -7,12 +7,12 @@
                 <div class="col-xs-12">
                     <div class="input-unit" data-validate="regex">
                         <input type="email" name="email" id="txt_email" v-model="email" data-validate-ref="{{ emailRegex }}">
-                        <label for="txt_email">{{ trans("PluginCeres::Template.accEmail") }}*</label>
+                        <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-xs-4 offset-xs-8">
-                    <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("PluginCeres::Template.generalNext") }}</button>
+                    <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("Ceres::Template.generalNext") }}</button>
                 </div>
             </div>
         </form>
