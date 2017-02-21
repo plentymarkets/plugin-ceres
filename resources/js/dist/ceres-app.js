@@ -1356,13 +1356,18 @@ Vue.component("create-update-address", {
                 .done(function()
                 {
                     this.addressModal.hide();
+
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
 
                         if (address.id === this.addressData.id)
                         {
-                            address = this.addressData;
+                            for (var attribute in this.addressList[key])
+                            {
+                                this.addressList[key][attribute] = this.addressData[attribute];
+                            }
+
                             break;
                         }
                     }
@@ -2107,6 +2112,10 @@ Vue.component("quantity-input", {
             ResourceService.watch("currentVariation", function(newValue)
             {
                 this.currentVariation = newValue;
+
+                this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
+                this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
+
             }.bind(this));
         },
 
@@ -2671,7 +2680,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "searchString",
-                params: {template: "PluginCeres::ItemList.Components.ItemSearch"},
+                params: {template: "Ceres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -3684,7 +3693,6 @@ Vue.directive("resource-bind", {
 
         ResourceService.watch(this.arg, function(value)
         {
-
             var paths = self.expression.split(".");
 
             for (var i = 0; i < paths.length; i++)
@@ -4478,18 +4486,18 @@ module.exports = (function($)
             _setIsLoading(true);
 
             return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "PluginCeres::ItemList.ItemListView"
+                template: "Ceres::ItemList.ItemListView"
             })
-            .done(function(response)
-            {
-                _setIsLoading(false);
-                ResourceService.getResource("itemList").set(response);
-            })
-            .fail(function()
-            {
-                _setIsLoading(false);
-                NotificationService.error("Error while searching").closeAfter(5000);
-            });
+                .done(function(response)
+                {
+                    _setIsLoading(false);
+                    ResourceService.getResource("itemList").set(response);
+                })
+                .fail(function()
+                {
+                    _setIsLoading(false);
+                    NotificationService.error("Error while searching").closeAfter(5000);
+                });
         }
 
         return null;
@@ -6298,7 +6306,7 @@ module.exports =
 var init = (function($, window, document)
 {
 
-    function CallistoMain()
+    function CeresMain()
     {
 
         $(window).scroll(function()
@@ -6449,8 +6457,8 @@ var init = (function($, window, document)
         });
     }
 
-    window.CallistoMain = new CallistoMain();
+    window.CeresMain = new CeresMain();
 
 })(jQuery, window, document);
 
-//# sourceMappingURL=plugin-ceres-app.js.map
+//# sourceMappingURL=ceres-app.js.map

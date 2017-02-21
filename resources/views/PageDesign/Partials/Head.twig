@@ -2,16 +2,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set logData = config("PluginCeres.log.data")|split(', ') %}
+{% set logData = config("Ceres.log.data")|split(', ') %}
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
-<link rel="stylesheet" href="{{ plugin_path('PluginCeres') }}/css/plugin-ceres.css">
+<link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
 
 <!-- Extend the existing style with a template -->
-{{ LayoutContainer.show("PluginCeres::Template.Style") }}
+{{ LayoutContainer.show("Ceres::Template.Style") }}
 
 <script>
     App = {

@@ -53,6 +53,10 @@
             ResourceService.watch("currentVariation", function(newValue)
             {
                 this.currentVariation = newValue;
+
+                this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
+                this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
+
             }.bind(this));
         },
 

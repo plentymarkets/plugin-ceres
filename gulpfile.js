@@ -3,7 +3,7 @@ const JS_DIST   = './resources/js/dist/';
 const JS_LANG   = './resources/js/lang/';
 const SCSS_SRC  = './resources/scss/';
 const SCSS_DIST = './resources/css/';
-const OUTPUT_PREFIX = 'plugin-ceres';
+const OUTPUT_PREFIX = 'ceres';
 
 // import gulp
 var fs = require('fs');
@@ -170,7 +170,7 @@ function buildSass( outputFile, outputStyle )
     };
 
     return gulp
-        .src( SCSS_SRC + 'PluginCeres.scss' )
+        .src( SCSS_SRC + 'Ceres.scss' )
         .pipe( sourcemaps.init() )
         .pipe( sass( config.scssOptions ).on( 'error', sass.logError ) )
         .pipe( rename( outputFile ) )

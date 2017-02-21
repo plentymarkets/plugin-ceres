@@ -12,7 +12,6 @@ Vue.directive("resource-bind", {
 
         ResourceService.watch(this.arg, function(value)
         {
-
             var paths = self.expression.split(".");
 
             for (var i = 0; i < paths.length; i++)
