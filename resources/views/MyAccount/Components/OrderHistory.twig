@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-order-history">
 
-    <div class="page-content history container-max">
+    <div class="page-content history container-max" v-if="orderList.totalsCount">
         <div class="row m-b-3">
             <h1 class="h4 col-xs-12">{{ trans("Ceres::Template.orderHistory") }}</h1>
         </div>
