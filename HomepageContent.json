@@ -81,19 +81,19 @@
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_etsy.png",
         "pluginText": "Plugin for integrating the market Etsy",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/etsy/4689/5513",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/etsy/4689",
         "pluginTitle": "Etsy"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_contact.png",
         "pluginText": "Displaying contact data in the online store",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/contactcard/4695/5519",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/contactcard/4695",
         "pluginTitle": "Contact Card"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
         "pluginText": "The official PayPal plugin for plentymarkets",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/paypal/4690/5514",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/paypal/4690",
         "pluginTitle": "PayPal"
       }
     ]
