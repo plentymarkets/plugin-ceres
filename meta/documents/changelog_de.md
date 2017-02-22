@@ -5,6 +5,11 @@
 ### Geändert
 
 - Route für Standard-Startseite in `HomepageContent.json` angepasst.
+- Die Auftragshistorie wird ausgeblendet, wenn keine Aufträge vorhanden sind.
+
+### Behoben
+
+- Fehler beim Erweitern der Shop-Sprachen behoben. Wenn zusätzliche Sprachdateien im Ordner `resources/lang` [erstellt](https://developers.plentymarkets.com/dev-doc/template-plugins#design-lang) und per [Gulp kompiliert](https://developers.plentymarkets.com/dev-doc/template-plugins#gulp-ceres) wurden, wird das Template nun auch in der gewählten Sprache angezeigt.
 
 ### Bekannte Probleme
 
