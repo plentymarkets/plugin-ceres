@@ -5,6 +5,7 @@
 ### Geändert
 
 - Route für Standard-Startseite in `HomepageContent.json` angepasst.
+- Die Auftragshistorie wird ausgeblendet, wenn keine Aufträge vorhanden sind.
 
 ### Behoben
 

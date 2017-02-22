@@ -5,6 +5,7 @@
 ### Changed
 
 - Changed route to default homepage in `HomepageContent.json`.
+- The order history will be hidden, if no orders exist.
 
 ### Fixed
 
