@@ -130,8 +130,8 @@
                 position:relative;
                 background: #fff;
                 padding: 0;
-                width: 280px;
-                height: 150px;
+                width: 256px;
+                height: 256px;
                 margin-top: 15px;
                 overflow:hidden;
             }
@@ -228,7 +228,7 @@
             }
 
             var currentLang = document.getElementById("currentLang").textContent || document.getElementById("currentLang").innerText;
-            var json = JSON.parse(getJson('https://rawgit.com/plentymarkets/plugin-ceres/release/elastic_search/HomepageContent.json'));
+            var json = JSON.parse(getJson('https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/HomepageContent.json'));
 
             renderCarousel();
             renderTexts();
