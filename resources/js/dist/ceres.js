@@ -35376,23 +35376,6 @@ Vue.component("category-item", {
         texts: function()
         {
             return this.itemData.texts[0];
-        },
-
-        /**
-         * returns all urlPreviews in an array
-         */
-        imageUrls: function()
-        {
-            var urls = [];
-
-            for (var i in this.itemData.images.all)
-            {
-                var imgInformation = this.itemData.images.all[i];
-
-                urls.push(imgInformation.urlMiddle);
-            }
-
-            return urls;
         }
     }
 });
