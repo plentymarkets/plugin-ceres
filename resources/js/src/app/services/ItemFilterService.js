@@ -63,7 +63,7 @@ module.exports = (function($)
         {
             if (key === facetName)
             {
-                return filterParams[key];
+                return filterParams[key].split(",");
             }
         }
 
