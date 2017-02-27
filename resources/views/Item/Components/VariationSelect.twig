@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-md-6 col-lg-4" v-for="(attributeId, attribute) in attributes">
         <div class="input-unit">
             <select class="custom-select" v-model="selectedAttributes[attributeId]">
-                    <option :value="" disabled>{{ trans("PluginCeres::Template.pleaseSelect") }}</option>
+                    <option :value="" disabled>{{ trans("Ceres::Template.pleaseSelect") }}</option>
                     <option v-for="(attributeValueId, attributeValue) in attribute.values" :value="attributeValueId" :disabled="!isEnabled(attributeId, attributeValueId)">${ attributeValue }</option>
             </select>
             <label>${ attribute.name }</label>

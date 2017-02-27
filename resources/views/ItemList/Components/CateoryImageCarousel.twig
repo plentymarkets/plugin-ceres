@@ -1,0 +1,10 @@
+<script type="x/template" id="vue-category-image-carousel">
+    <div class="owl-carousel owl-theme">
+        <div v-for="imageUrl in imageUrls">
+            <a :href="itemUrl">
+                <item-lazy-img template="#vue-item-lazy-img" v-if="$index === 0" :image-url="imageUrl"></item-lazy-img>
+                <img v-else class="img-fluid owl-lazy" :data-src="imageUrl">
+            </a>
+        </div>
+    </div>
+</script>
