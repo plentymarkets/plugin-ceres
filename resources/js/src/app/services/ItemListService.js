@@ -1,6 +1,7 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
 
 module.exports = (function($)
 {
@@ -26,7 +27,7 @@ module.exports = (function($)
     {
         if (searchParams.searchString.length >= 3)
         {
-            _updateUrl();
+            UrlService.setUrlParams(searchParams);
 
             ResourceService.getResource("itemList").set({});
             _setIsLoading(true);
@@ -61,7 +62,7 @@ module.exports = (function($)
      */
     function setSearchParams(urlParams)
     {
-        var queryParams = _getQueryParams(urlParams);
+        var queryParams = UrlService.getUrlParams(urlParams);
 
         for (var key in queryParams)
         {
@@ -96,36 +97,6 @@ module.exports = (function($)
     {
         searchParams.page = page;
         _getItemList();
-    }
-
-    function _getQueryParams(searchString)
-    {
-        if (searchString)
-        {
-            var tokens;
-            var params = {};
-            var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-            searchString = searchString.split("+").join(" ");
-
-            // eslint-disable-next-line
-            while (tokens = regex.exec(searchString))
-            {
-                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-            }
-
-            return params;
-        }
-
-        return null;
-    }
-
-    function _updateUrl()
-    {
-        var url = window.location.pathname + "?" + $.param(searchParams);
-        var title = document.getElementsByTagName("title")[0].innerHTML;
-
-        window.history.replaceState({}, title, url);
     }
 
 })(jQuery);
