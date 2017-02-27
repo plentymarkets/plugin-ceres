@@ -6,6 +6,6 @@ Vue.component("vue-item-filter-list", {
 
     created: function()
     {
-        this.$options.template = this.template | "vue-item-filter-list";
+        this.$options.template = this.template || "#vue-item-filter-list";
     }
 });
