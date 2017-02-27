@@ -1,3 +1,21 @@
 <script type="x/template" id="vue-item-filter">
+    <div class="filter-group col-xs-6 col-sm-4 col-md-3 m-b-1">
+        <div class="input-unit" data-toggle="collapse" data-target="#filterBrands" aria-expanded="false" aria-controls="filterBrands">
+            <span class="input-unit-label">${facet.names[0].name}</span>
+            <div class="input-unit-preview">
+                ${selected}
+            </div>
+        </div>
 
+        <div id="filterBrands" class="collapse filter-content">
+            <div class="card card-block">
+                <div v-for="value in facet.values">
+                    <input type="checkbox" :name="value.names[0].name" v-model="selected" :value="value">
+                    <label >${ value.names[0].name }</label>
+                    <span class="badge badge-default">${ value.total }</span>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
 </script>

@@ -1,7 +1,8 @@
-Vue.component("vue-item-filter-list", {
+Vue.component("item-filter-list", {
 
     props: [
-        "template"
+        "template",
+        "facets"
     ],
 
     created: function()

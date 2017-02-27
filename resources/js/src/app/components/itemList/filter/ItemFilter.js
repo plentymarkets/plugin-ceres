@@ -1,8 +1,16 @@
 Vue.component("item-filter", {
 
     props: [
-        "template"
+        "template",
+        "facet"
     ],
+
+    data: function()
+    {
+        return {
+            selected: []
+        };
+    },
 
     created: function()
     {
