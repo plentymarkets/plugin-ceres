@@ -25,6 +25,13 @@
 
         <hr class="m-y-2">
 
+        {% set beforeCouponContainer = LayoutContainer.show("Ceres::Basket.BeforeCoupon") %}
+
+        {% if beforeCouponContainer|trim is not empty %}
+            {{ beforeCouponContainer }}
+            <hr class="m-y-2">
+        {% endif %}
+
         <div class="row">
             <div class="col-xs-12 col-sm-7 m-b-1">
                 <coupon template="#vue-coupon"></coupon>
