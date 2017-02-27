@@ -1,16 +1,18 @@
 // var ApiService = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
 // var ResourceService = require("services/ResourceService");
-// var UrlService = require("services/UrlService");
+var UrlService = require("services/UrlService");
 
 module.exports = (function($)
 {
-    // var filterParams =
-    //     {
-    //     };
-    //
-    // return {
-    // };
+    var filterParams =
+        {
+
+        };
+
+    return {
+        getFilterValuesByName : _getFilterValuesByName
+    };
 
     // function _getItemList()
     // {
@@ -47,5 +49,25 @@ module.exports = (function($)
     //         filterParams[key] = queryParams[key];
     //     }
     // }
+
+    function _getFilterValuesByName(facetName)
+    {
+        filterParams =
+            filterParams ?
+            UrlService.getUrlParams(document.location.search) :
+            filterParams;
+
+        console.log(filterParams);
+
+        for (var key in filterParams)
+        {
+            if (key === facetName)
+            {
+                return filterParams[key];
+            }
+        }
+
+        return [];
+    }
 
 })(jQuery);

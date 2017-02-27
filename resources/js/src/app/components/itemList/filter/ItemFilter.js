@@ -1,3 +1,5 @@
+var FilterService = require("services/ItemFilterService");
+
 Vue.component("item-filter", {
 
     props: [
@@ -15,5 +17,7 @@ Vue.component("item-filter", {
     created: function()
     {
         this.$options.template = this.template || "#vue-item-filter";
+
+        this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
     }
 });
