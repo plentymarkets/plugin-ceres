@@ -40,6 +40,8 @@
         @include img-contain();
         position: absolute;
         background-color: #fff;
+        display: flex;
+        align-items: center;
     }
 
     //TODO create separate mixin
