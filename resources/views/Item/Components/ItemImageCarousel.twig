@@ -1,9 +1,8 @@
 <script type="x/template" id="vue-item-image-carousel">
     <div class="owl-carousel owl-theme" v-el:single>
-        <div v-for="image in currentVariation.documents[0].data.images.all">
-            <a :href="image.url" data-lightbox="single-big-image-gallery">
-                {#<img class="owl-single-item-img owl-lazy" :data-src="image.url">#}
-                <img class="owl-lazy" :data-src="image.url">
+        <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor">
+            <a :href="image" data-lightbox="single-big-image-gallery">
+                <img class="owl-lazy" :data-src="image">
             </a>
         </div>
     </div>

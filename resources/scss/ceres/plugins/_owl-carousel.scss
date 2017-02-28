@@ -330,3 +330,9 @@ Custom classes
     top: 50%;
   }
 }
+
+.disabled {
+  .owl-single-item-nav {
+    display: none;
+  }
+}
