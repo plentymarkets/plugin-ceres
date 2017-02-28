@@ -83,7 +83,7 @@ module.exports = (function($)
 
         for (var key in filterParams)
         {
-            key = key.splice(2, key.length);
+            key = key.slice(2, key.length);
             if (key.toLowerCase() == facetName.toLowerCase())
             {
                 return filterParams[key].split(",");
