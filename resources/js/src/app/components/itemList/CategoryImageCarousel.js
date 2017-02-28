@@ -21,6 +21,7 @@ Vue.component("category-image-carousel", {
                 loop     : this.imageUrls.length > 1,
                 lazyLoad : true,
                 mouseDrag: false,
+                margin   : 10,
                 nav      : true,
                 navText  : [
                     "<i class='fa fa-chevron-left' aria-hidden='true'></i>",

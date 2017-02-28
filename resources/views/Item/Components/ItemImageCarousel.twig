@@ -1,0 +1,10 @@
+<script type="x/template" id="vue-item-image-carousel">
+    <div class="owl-carousel owl-theme" v-el:single>
+        <div v-for="image in currentVariation.documents[0].data.images.all">
+            <a :href="image.url" data-lightbox="single-big-image-gallery">
+                {#<img class="owl-single-item-img owl-lazy" :data-src="image.url">#}
+                <img class="owl-lazy" :data-src="image.url">
+            </a>
+        </div>
+    </div>
+</script>
