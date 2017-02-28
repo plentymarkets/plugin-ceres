@@ -50,27 +50,27 @@ module.exports = (function($)
     //     }
     // }
 
-    function _getFilterValues()
-    {
-        filterParams =
-            filterParams ?
-            UrlService.getUrlParams(document.location.search) :
-            filterParams;
-
-        var filterValues = {};
-
-        console.log(filterParams);
-
-        for (var key in filterParams)
-        {
-            var newKey = key.splice(2, key.length);
-            filterValues[newKey] = filterParams[key].split(",");
-        }
-
-        console.log(filterValues);
-
-        return filterValues;
-    }
+    // function _getFilterValues()
+    // {
+    //     filterParams =
+    //         filterParams ?
+    //         UrlService.getUrlParams(document.location.search) :
+    //         filterParams;
+    //
+    //     var filterValues = {};
+    //
+    //     console.log(filterParams);
+    //
+    //     for (var key in filterParams)
+    //     {
+    //         var newKey = key.splice(2, key.length);
+    //         filterValues[newKey] = filterParams[key].split(",");
+    //     }
+    //
+    //     console.log(filterValues);
+    //
+    //     return filterValues;
+    // }
 
     function _getFilterValuesByName(facetName)
     {
