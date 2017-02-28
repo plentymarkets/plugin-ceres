@@ -69,7 +69,7 @@
                                 <span class="col-xs-6 col-sm-7" v-if="paymentStatus === 'overpaid'">{{ trans("Ceres::Template.paymentStatus_overpaid") }}</span>
                             </div>
 
-                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder()) }}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder().order) }}
 
                         </div>
 
@@ -158,7 +158,7 @@
 
                                 <hr>
 
-                                {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", services.customer.getLatestOrder()) %}
+                                {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", services.customer.getLatestOrder().order) %}
                                 {% if grossNet|trim is not empty %}
                                     {{ grossNet }}
                                 {% else %}
@@ -194,7 +194,7 @@
 
                                 {% endif %}
 
-                                {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", services.customer.getLatestOrder()) }}
+                                {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", services.customer.getLatestOrder().order) }}
                             </dl>
                         </div>
                     </div>
