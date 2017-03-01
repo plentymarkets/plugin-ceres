@@ -19,6 +19,7 @@ Vue.component("item-filter", {
         this.$options.template = this.template || "#vue-item-filter";
 
         this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
+        console.log(FilterService.getFilterValues());
     },
 
     computed:
