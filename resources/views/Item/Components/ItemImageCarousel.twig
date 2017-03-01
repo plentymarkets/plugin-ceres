@@ -6,4 +6,7 @@
             </a>
         </div>
     </div>
+    <div class="owl-thumbs">
+        <img @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }" :src="imagePreview" v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview'">
+    </div>
 </script>

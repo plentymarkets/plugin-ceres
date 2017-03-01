@@ -3,7 +3,6 @@ var ResourceService = require("services/ResourceService");
 Vue.component("item-image-carousel", {
 
     props: [
-        "currentVariation",
         "imageUrlAccessor",
         "template"
     ],
@@ -11,7 +10,9 @@ Vue.component("item-image-carousel", {
     data: function()
     {
         return {
-            init: false
+            init            : false,
+            currentVariation: {},
+            currentItem     : 0
         };
     },
 
@@ -72,9 +73,10 @@ Vue.component("item-image-carousel", {
 
             $(this.$els.single).owlCarousel({
                 autoHeight       : true,
+                dots             : false,
                 items            : 1,
                 lazyLoad         : true,
-                loop             : imageCount > 1,
+                loop             : false,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
                 nav              : imageCount > 1,
@@ -89,6 +91,21 @@ Vue.component("item-image-carousel", {
                 ],
                 smartSpeed       : 350
             });
+
+            $(this.$els.single).on("changed.owl.carousel", function(event)
+            {
+                this.currentItem = event.item.index;
+            }.bind(this));
+        },
+
+        goTo: function(index)
+        {
+            var owl = $(".owl-carousel");
+
+            owl.trigger("to.owl.carousel", [
+                index,
+                350
+            ]);
         }
     }
 });

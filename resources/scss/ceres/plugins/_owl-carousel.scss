@@ -316,7 +316,7 @@ Custom classes
 
 .owl-single-item-nav {
   cursor: pointer;
-  bottom: 26px;
+  bottom: 0;
   opacity: 0;
   transition: opacity 300ms;
 
@@ -329,6 +329,10 @@ Custom classes
     position: relative;
     top: 50%;
   }
+}
+
+.owl-carousel .disabled {
+  display: none;
 }
 
 .disabled {
