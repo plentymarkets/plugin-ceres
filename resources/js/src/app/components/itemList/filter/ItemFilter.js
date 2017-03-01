@@ -1,5 +1,4 @@
 var FilterService   = require("services/ItemFilterService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("item-filter", {
 
@@ -54,7 +53,7 @@ Vue.component("item-filter", {
     {
         getFilteredItems: function()
         {
-            //call service
+            // call service
         }
     }
 });
