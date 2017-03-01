@@ -10,7 +10,7 @@
         <div id="filterBrands" class="collapse filter-content">
             <div class="card card-block">
                 <div v-for="value in facet.values">
-                    <input type="checkbox" :name="value.names[0].name" :value="value.id.toString()" v-model="selected" @click="getFilteredItems">
+                    <input type="checkbox" :name="value.names[0].name" :value="value.id.toString()" v-model="selected" @click="setFilter">
                     <label >${ value.names[0].name }</label>
                     <span class="badge badge-default">${ value.total }</span>
                     <br>
