@@ -31,18 +31,11 @@ Vue.component("item-filter", {
 
                 for (var i = 0; i < this.selected.length; i++)
                 {
-                    if (typeof this.selected[i].names != "undefined")
+                    for (var index = 0; index < this.facet.values.length; index++)
                     {
-                        names.push(this.selected[i].names[0].name);
-                    }
-                    else
-                    {
-                        for (var index = 0; index < this.facet.values.length; index++)
+                        if (this.facet.values[index].id == this.selected[i] && names.indexOf(this.facet.values[index].names[0].name) == -1)
                         {
-                            if (this.facet.values[index].id == this.selected[i])
-                            {
-                                names.push(this.facet.values[index].names[0].name);
-                            }
+                            names.push(this.facet.values[index].names[0].name);
                         }
                     }
                 }
