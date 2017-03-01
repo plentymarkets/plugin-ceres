@@ -1,4 +1,6 @@
-var FilterService = require("services/ItemFilterService");
+var FilterService   = require("services/ItemFilterService");
+var ResourceService = require("services/ResourceService");
+var APIService      = require("services/APIService");
 
 Vue.component("item-filter", {
 
@@ -19,6 +21,7 @@ Vue.component("item-filter", {
         this.$options.template = this.template || "#vue-item-filter";
 
         this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
+
         console.log(FilterService.getFilterValues());
     },
 
@@ -45,6 +48,26 @@ Vue.component("item-filter", {
             }
 
             return "";
+        }
+    },
+
+    methods:
+    {
+        getFilteredItems: function()
+        {
+            //call service
+            ApiService.post("TODO")
+                .done(
+                    function(response)
+                    {
+                        ResourceService.getResource("filteredItems", "itemData", response.itemData);
+                        console.log("api call sent");
+                    })
+                .fail(
+                    function()
+                    {
+                        console.log("api call failed");
+                    });
         }
     }
 });

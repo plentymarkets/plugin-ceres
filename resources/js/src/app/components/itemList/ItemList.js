@@ -11,7 +11,8 @@ Vue.component("item-list", {
     {
         return {
             itemList: {},
-            itemSearch: {}
+            itemSearch: {},
+            filteredItemList: {}
         };
     },
 
@@ -24,6 +25,7 @@ Vue.component("item-list", {
     {
         ResourceService.bind("itemList", this);
         ResourceService.bind("itemSearch", this);
+        ResourceService.bind("filteredItemList", this);
 
         ItemListService.setSearchParams(document.location.search);
     }

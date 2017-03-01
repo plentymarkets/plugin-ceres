@@ -4,7 +4,12 @@
 
 <script type="x/template" id="vue-item-list">
     <ul class="product-list row grid" v-show="!itemSearch.isLoading">
+
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
-                       decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
+                       decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle" v-if="filteredItemList.length == 0"></category-item>
+
+        <category-item v-for="itemData in filteredItemList.documents" :item-data="itemData.data"
+                       decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle" v-else></category-item>
+
     </ul>
 </script>
