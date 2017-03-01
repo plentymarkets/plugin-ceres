@@ -1,6 +1,5 @@
 var FilterService   = require("services/ItemFilterService");
 var ResourceService = require("services/ResourceService");
-var APIService      = require("services/APIService");
 
 Vue.component("item-filter", {
 
@@ -56,18 +55,6 @@ Vue.component("item-filter", {
         getFilteredItems: function()
         {
             //call service
-            ApiService.post("TODO")
-                .done(
-                    function(response)
-                    {
-                        ResourceService.getResource("filteredItems", "itemData", response.itemData);
-                        console.log("api call sent");
-                    })
-                .fail(
-                    function()
-                    {
-                        console.log("api call failed");
-                    });
         }
     }
 });

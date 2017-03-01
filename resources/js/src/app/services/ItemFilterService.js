@@ -12,7 +12,8 @@ module.exports = (function($)
 
     return {
         getFilterValuesByName : _getFilterValuesByName,
-        getFilterValues : _getFilterValues
+        getFilterValues : _getFilterValues,
+        setFilterByName : _setFilterByName
     };
 
     function _getFilterValues()
@@ -54,6 +55,11 @@ module.exports = (function($)
         }
 
         return [];
+    }
+
+    function _setFilterByName(filterName)
+    {
+
     }
 
 })(jQuery);
