@@ -1990,6 +1990,119 @@ Vue.component("user-login-handler", {
 });
 
 },{"services/ApiService":58,"services/ResourceService":64}],24:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+
+Vue.component("item-image-carousel", {
+
+    props: [
+        "imageUrlAccessor",
+        "template"
+    ],
+
+    data: function()
+    {
+        return {
+            init            : false,
+            currentVariation: {},
+            currentItem     : 0
+        };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        ResourceService.watch("currentVariation", function(newValue)
+        {
+            this.currentVariation = newValue;
+
+            var self = this;
+
+            if (!this.init)
+            {
+                $(window).load(function()
+                {
+                    self.initCarousel();
+
+                    self.init = true;
+                });
+            }
+
+            else
+            {
+                setTimeout(function()
+                {
+                    self.reInitialize();
+                }, 1);
+            }
+
+        }.bind(this));
+    },
+
+    methods:
+    {
+        getImageCount: function()
+        {
+            var images = this.currentVariation.documents[0].data.images;
+
+            return images.variation.length || images.all.length;
+        },
+
+        reInitialize: function()
+        {
+            var $owl = $(this.$els.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            this.initCarousel();
+        },
+
+        initCarousel: function()
+        {
+            var imageCount = this.getImageCount();
+
+            $(this.$els.single).owlCarousel({
+                autoHeight       : true,
+                dots             : false,
+                items            : 1,
+                lazyLoad         : true,
+                loop             : false,
+                margin           : 10,
+                mouseDrag        : imageCount > 1,
+                nav              : imageCount > 1,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350
+            });
+
+            $(this.$els.single).on("changed.owl.carousel", function(event)
+            {
+                this.currentItem = event.item.index;
+            }.bind(this));
+        },
+
+        goTo: function(index)
+        {
+            var owl = $(".owl-carousel");
+
+            owl.trigger("to.owl.carousel", [
+                index,
+                350
+            ]);
+        }
+    }
+});
+
+},{"services/ResourceService":64}],25:[function(require,module,exports){
 Vue.component("quantity-input", {
 
     props: [
@@ -2056,127 +2169,7 @@ Vue.component("quantity-input", {
 
 });
 
-},{}],25:[function(require,module,exports){
-(function($)
-{
-
-    var OWL_CONFIG = {
-        SINGLE : {
-            singleItem           : true,
-            slideSpeed           : 1000,
-            navigation           : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            responsiveRefreshRate: 200
-        },
-        PREVIEW: {
-            items                : 8,
-            itemsDesktop         : [1199, 8],
-            itemsDesktopSmall    : [979, 8],
-            itemsTablet          : [768, 6],
-            itemsMobile          : [479, 4],
-            navigation           : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            responsiveRefreshRate: 100
-        }
-    };
-
-    var ResourceService = require("services/ResourceService");
-
-    Vue.component("variation-image-list", {
-
-        props: [
-            "template"
-        ],
-
-        data: function()
-        {
-            return {
-                currentVariation: {},
-                currentItem     : 0
-            };
-        },
-
-        created: function()
-        {
-            this.$options.template = this.template;
-
-            // (Re-)initialize carousels on each variation change
-            ResourceService.watch("currentVariation", function(newValue)
-            {
-                this.currentVariation = newValue;
-
-                this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
-                this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
-
-            }.bind(this));
-        },
-
-        ready: function()
-        {
-            // (re-)init big image carousel
-            this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
-
-            // (re-)init preview image carousel
-            this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
-        },
-
-        methods: {
-            /**
-             * Initialize jquery carousel plugin
-             * @param {HTMLElement} el      The root element to initialize carousel on
-             * @param {*}           config  The carousel configuration (@see http://owlgraphic.com/owlcarousel/index.html#how-to)
-             */
-            initCarousel: function(el, config)
-            {
-                var self = this;
-                var owl = $(el).data("owlCarousel");
-
-                config.afterAction = function()
-                {
-                    // 'this' points to owl carousel instance
-                    self.currentItem = this.currentItem;
-                };
-
-                if (owl)
-                {
-                    owl.destroy();
-                }
-
-                // wait until markup is re-rendered with new data.
-                Vue.nextTick(function()
-                {
-                    $(el).owlCarousel(config);
-                });
-            },
-
-            /**
-             * Navigate to carousel element
-             * @param {number} index    The index of the element to go to.
-             */
-            goTo: function(index)
-            {
-                var owl = $(this.$els.single).data("owlCarousel");
-
-                if (owl)
-                {
-                    owl.goTo(index);
-                }
-            }
-        }
-
-    });
-
-})(jQuery);
-
-},{"services/ResourceService":64}],26:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -2370,6 +2363,41 @@ Vue.component("variation-select", {
 });
 
 },{"services/ApiService":58,"services/ResourceService":64}],27:[function(require,module,exports){
+Vue.component("category-image-carousel", {
+
+    props: [
+        "imageUrls",
+        "itemUrl",
+        "template"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
+
+    ready: function()
+    {
+        if (this.imageUrls && this.imageUrls.length > 0)
+        {
+            $(".owl-carousel").owlCarousel({
+                dots     : false,
+                items    : 1,
+                loop     : this.imageUrls.length > 1,
+                lazyLoad : true,
+                mouseDrag: false,
+                margin   : 10,
+                nav      : true,
+                navText  : [
+                    "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                    "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+                ]
+            });
+        }
+    }
+});
+
+},{}],28:[function(require,module,exports){
 Vue.component("category-item", {
 
     template: "#vue-category-item",
@@ -2413,98 +2441,6 @@ Vue.component("category-item", {
         }
     }
 });
-
-},{}],28:[function(require,module,exports){
-(function($)
-{
-
-    var OWL_CONFIG = {
-        SINGLE : {
-            singleItem           : true,
-            slideSpeed           : 1000,
-            navigation           : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            responsiveRefreshRate: 200
-        }
-    };
-
-    Vue.component("image-carousel", {
-
-        props: [
-            "imageUrls",
-            "itemUrl",
-            "template"
-        ],
-
-        data: function()
-        {
-            return {
-                currentVariation: {},
-                currentItem     : 0
-            };
-        },
-
-        created: function()
-        {
-            this.$options.template = this.template;
-        },
-
-        ready: function()
-        {
-            // (re-)init big image carousel
-            this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
-        },
-
-        methods: {
-            /**
-             * Initialize jquery carousel plugin
-             * @param {HTMLElement} el      The root element to initialize carousel on
-             * @param {*}           config  The carousel configuration (@see http://owlgraphic.com/owlcarousel/index.html#how-to)
-             */
-            initCarousel: function(el, config)
-            {
-                var self = this;
-                var owl = $(el).data("owlCarousel");
-
-                config.afterAction = function()
-                {
-                    // 'this' points to owl carousel instance
-                    self.currentItem = this.currentItem;
-                };
-
-                if (owl)
-                {
-                    owl.destroy();
-                }
-
-                // wait until markup is re-rendered with new data.
-                Vue.nextTick(function()
-                {
-                    $(el).owlCarousel(config);
-                });
-            },
-
-            /**
-             * Navigate to carousel element
-             * @param {number} index    The index of the element to go to.
-             */
-            goTo: function(index)
-            {
-                var owl = $(this.$els.single).data("owlCarousel");
-
-                if (owl)
-                {
-                    owl.goTo(index);
-                }
-            }
-        }
-    });
-
-})(jQuery);
 
 },{}],29:[function(require,module,exports){
 Vue.component("item-lazy-img", {
