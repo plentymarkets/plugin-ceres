@@ -19,6 +19,7 @@ Vue.component("item-filter", {
         this.$options.template = this.template || "#vue-item-filter";
 
         this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
+        console.log(FilterService.getFilterValues());
     },
 
     computed:
@@ -31,7 +32,7 @@ Vue.component("item-filter", {
 
                 for (var i = 0; i < this.selected.length; i++)
                 {
-                    if (typeof this.selected[i].names != "undefined")
+                    if (typeof this.selected[i].names !== "undefined")
                     {
                         names.push(this.selected[i].names[0].name);
                     }

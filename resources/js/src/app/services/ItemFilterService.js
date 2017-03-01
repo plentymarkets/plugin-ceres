@@ -11,66 +11,28 @@ module.exports = (function($)
         };
 
     return {
-        getFilterValuesByName : _getFilterValuesByName
+        getFilterValuesByName : _getFilterValuesByName,
+        getFilterValues : _getFilterValues
     };
 
-    // function _getItemList()
-    // {
-    //     if (searchParams.searchString.length >= 3)
-    //     {
-    //         UrlService.setUrlParams(searchParams);
-    //         ResourceService.getResource("itemList").set({});
-    //
-    //         return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-    //             template: "Ceres::ItemList.ItemListView"
-    //         })
-    //             .done(function(response)
-    //             {
-    //                 ResourceService.getResource("itemList").set(response);
-    //             })
-    //             .fail(function()
-    //             {
-    //                 NotificationService.error("Error while searching").closeAfter(5000);
-    //             });
-    //     }
-    //
-    //     return null;
-    // }
-    //
-    // /**
-    //  * @param filter
-    //  */
-    // function setFilter(filter)
-    // {
-    //     var queryParams = UrlService.getUrlParams(filter);
-    //
-    //     for (var key in queryParams)
-    //     {
-    //         filterParams[key] = queryParams[key];
-    //     }
-    // }
+    function _getFilterValues()
+    {
+        filterParams =
+            filterParams ?
+            UrlService.getUrlParams(document.location.search) :
+            filterParams;
 
-    // function _getFilterValues()
-    // {
-    //     filterParams =
-    //         filterParams ?
-    //         UrlService.getUrlParams(document.location.search) :
-    //         filterParams;
-    //
-    //     var filterValues = {};
-    //
-    //     console.log(filterParams);
-    //
-    //     for (var key in filterParams)
-    //     {
-    //         var newKey = key.splice(2, key.length);
-    //         filterValues[newKey] = filterParams[key].split(",");
-    //     }
-    //
-    //     console.log(filterValues);
-    //
-    //     return filterValues;
-    // }
+        var filterValues = {};
+
+        for (var key in filterParams)
+        {
+            var newKey = key.slice(2, key.length - 1);
+
+            filterValues[newKey] = filterParams[key].split(",");
+        }
+
+        return filterValues;
+    }
 
     function _getFilterValuesByName(facetName)
     {
@@ -83,8 +45,9 @@ module.exports = (function($)
 
         for (var key in filterParams)
         {
-            key = key.slice(2, key.length);
-            if (key.toLowerCase() == facetName.toLowerCase())
+            var newKey = key.slice(2, key.length - 1);
+
+            if (newKey.toLowerCase() == facetName.toLowerCase())
             {
                 return filterParams[key].split(",");
             }
