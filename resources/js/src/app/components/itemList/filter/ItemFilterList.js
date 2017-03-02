@@ -4,7 +4,8 @@ var UrlService = require("services/UrlService");
 Vue.component("item-filter-list", {
 
     props: [
-        "template"
+        "template",
+        "facets"
     ],
 
     created: function()
