@@ -5,22 +5,31 @@ var UrlService = require("services/UrlService");
 
 module.exports = (function($)
 {
-    var filterParams = {};
-
     return {
-        getFilterValuesByName : _getFilterValuesByName,
-        getFilterValues : _getFilterValues,
-        setFilterByName : _setFilterByName,
-        removeFilterValue : _removeFilterValue,
-        addFilterValue : _addFilterValue
+        getFacetValues      : _getFacetValues,
+        setFacetValues      : _setFacetValues,
+        removeFacetValue    : _removeFacetValue,
+        addFacetValue       : _addFacetValue,
+        applyFacets         : _applyFacets
     };
 
-    function _getFilterValues()
+    function _getFacetValues()
     {
         return ResourceService.getResource("facetParams").val();
     }
 
-    function _removeFilterValue(filterId)
+    function _setFacetValues(facets)
+    {
+        ResourceService.getResource("facetParams").set(facets);
+    }
+
+    function _applyFacets(facets)
+    {
+        _updateUrl(facets);
+        _sendFacetCall(facets);
+    }
+
+    function _removeFacetValue(filterId)
     {
         var filterParams = ResourceService.getResource("facetParams").val();
         var index = filterParams.indexOf(filterId);
@@ -31,92 +40,23 @@ module.exports = (function($)
         }
     }
 
-    function _addFilterValue(filterId)
+    function _addFacetValue(filterId)
     {
         var filterParams = ResourceService.getResource("facetParams").val();
 
-        filterParams.push(filter);
+        filterParams.push(filterId);
     }
 
-    function _getFilterValuesByName(facetName)
+    function _sendFacetCall(facets)
     {
-        filterParams =
-            filterParams ?
-            UrlService.getUrlParams(document.location.search) :
-            filterParams;
-
-        for (var key in filterParams)
-        {
-            var newKey = key.slice(2, key.length - 1);
-
-            if (newKey.toLowerCase() == facetName.toLowerCase())
-            {
-                return filterParams[key].split(",");
-            }
-        }
-
-        return [];
+        console.log("send facet call: ", facets);
     }
 
-    function _setFilterByName(filterName, params)
+    function _updateUrl(facets)
     {
-        var filterParamList = ResourceService.getResource("facetParams").val();
+        var urlParams = UrlService.getUrlParams(document.location.search);
 
-        filterParamList[filterName] = params;
-
-        _updateUrlFromName(filterName, params);
-        _sendFilterRequest();
+        urlParams.facets = facets.toString();
+        UrlService.setUrlParams(urlParams);
     }
-
-    function _sendFilterRequest()
-    {
-        // send request
-    }
-
-    function _updateUrlFromName(filterName, params)
-    {
-        var urlParamList =  UrlService.getUrlParams(document.location.search);
-
-        urlParamList["f[" + filterName + "]"] = params.toString();
-
-        var url = window.location.pathname + "?";
-        var title = document.getElementsByTagName("title")[0].innerHTML;
-        var delimiter = "";
-
-        for (var urlParam in urlParamList)
-        {
-            url = url + delimiter + urlParam + "=" + urlParamList[urlParam];
-            delimiter = "&";
-        }
-
-        console.log(url);
-
-        window.history.replaceState({}, title, url);
-    }
-
-    // function _updateUrl()
-    // {
-    //     var filterParamList = ResourceService.getResource("filterParams").val();
-    //     var urlParamList =  UrlService.getUrlParams(document.location.search);
-    //
-    //     for(var key in urlParamList)
-    //     {
-    //         if (key.indexOf("f[") != -1)
-    //         {
-    //             var newKey = key.slice(2, key.length - 1);
-    //
-    //             for(var filterParamKey in filterParamList)
-    //             {
-    //                 if(filterParamKey === newKey )
-    //                 {
-    //                     urlParamList[key] = filterParamList[filterParamKey];
-    //                 }
-    //                 else
-    //                 {
-    //                     urlParamList["f[" + filterParamKey + "]"] = filterParamList[filterParamKey];
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 })(jQuery);

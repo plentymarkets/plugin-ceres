@@ -1,4 +1,4 @@
-// var FilterService   = require("services/ItemFilterService");
+var FilterService   = require("services/ItemFilterService");
 var ResourceService = require("services/ResourceService");
 
 Vue.component("item-filter", {
@@ -51,8 +51,7 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
-            // FilterService.;
-            console.log("facet changed");
+            FilterService.applyFacets(this.facetParams);
         }
     }
 });
