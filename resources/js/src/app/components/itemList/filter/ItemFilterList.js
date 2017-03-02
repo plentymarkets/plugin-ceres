@@ -14,7 +14,7 @@ Vue.component("item-filter-list", {
 
         var urlParams = UrlService.getUrlParams(document.location.search);
 
-        if (urlParams !== null)
+        if (urlParams.facets)
         {
             ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
         }
