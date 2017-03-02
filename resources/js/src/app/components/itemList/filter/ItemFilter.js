@@ -49,10 +49,10 @@ Vue.component("item-filter", {
 
     methods:
     {
-        updateFilter: function()
+        updateFacet: function()
         {
             // FilterService.;
-            console.log("filter changed");
+            console.log("facet changed");
         }
     }
 });
