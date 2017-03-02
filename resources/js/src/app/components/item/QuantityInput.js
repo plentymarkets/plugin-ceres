@@ -58,8 +58,6 @@ Vue.component("quantity-input", {
                 },
                 this.timeout
             );
-
-            document.dispatchEvent(new CustomEvent("quantityChanged", {detail: this.value}));
         });
     }
 
