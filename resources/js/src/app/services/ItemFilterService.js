@@ -25,6 +25,7 @@ module.exports = (function($)
 
     function _applyFacets(facets)
     {
+        _setFacetValues(facets);
         _updateUrl(facets);
         _sendFacetCall(facets);
     }

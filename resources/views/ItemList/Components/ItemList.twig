@@ -8,11 +8,5 @@
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
                        decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
 
-        {#<category-item v-for="itemData in itemList.documents" :item-data="itemData.data"#}
-                       {#decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle" v-if="filteredItemList.length == 0"></category-item>#}
-
-        {#<category-item v-for="itemData in filteredItemList.documents" :item-data="itemData.data"#}
-                       {#decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle" v-else></category-item>#}
-
     </ul>
 </script>
