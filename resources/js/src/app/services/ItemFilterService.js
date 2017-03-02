@@ -10,26 +10,30 @@ module.exports = (function($)
     return {
         getFilterValuesByName : _getFilterValuesByName,
         getFilterValues : _getFilterValues,
-        setFilterByName : _setFilterByName
+        setFilterByName : _setFilterByName,
+        removeFilterValue : _removeFilterValue
     };
 
     function _getFilterValues()
     {
-        filterParams =
-            filterParams ?
-            UrlService.getUrlParams(document.location.search) :
-            filterParams;
+        return ResourceService.getResource("filterParams").val();
+    }
 
-        var filterValues = {};
+    function _removeFilterValue(filterId)
+    {
+        var filterParams = ResourceService.getResource("filterParams").val();
+        var index = filterParams.indexOf(filterId);
 
-        for (var key in filterParams)
+        if (index > -1)
         {
-            var newKey = key.slice(2, key.length - 1);
-
-            filterValues[newKey] = filterParams[key].split(",");
+            filterParams.splice(index, 1);
         }
+    }
 
-        return filterValues;
+    function _addFilterValue(filterId)
+    {
+        var filterParams = ResourceService.getResource("filterParams").val();
+        filterParams.push(filter);
     }
 
     function _getFilterValuesByName(facetName)

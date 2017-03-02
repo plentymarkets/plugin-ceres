@@ -1,5 +1,5 @@
-var FilterService   = require("services/ItemFilterService");
-// var ResourceService = require("services/ResourceService");
+// var FilterService   = require("services/ItemFilterService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("item-filter", {
 
@@ -11,40 +11,39 @@ Vue.component("item-filter", {
     data: function()
     {
         return {
-            selected: []
+            filterParams: []
         };
     },
 
     created: function()
     {
         this.$options.template = this.template || "#vue-item-filter";
-
-        this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
+        ResourceService.bind("filterParams", this);
     },
 
     computed:
     {
         selectedNames: function()
         {
-            if (this.selected.length > 0)
-            {
-                var names = [];
-
-                for (var i = 0; i < this.selected.length; i++)
-                {
-                    for (var index = 0; index < this.facet.values.length; index++)
-                    {
-                        if (this.facet.values[index].id == this.selected[i] && names.indexOf(this.facet.values[index].names[0].name) == -1)
-                        {
-                            names.push(this.facet.values[index].names[0].name);
-                        }
-                    }
-                }
-
-                return names;
-            }
-
-            return "";
+            // if (this.filterParams.length > 0)
+            // {
+            //     var names = [];
+            //
+            //     for (var i = 0; i < this.filterParams.length; i++)
+            //     {
+            //         for (var index = 0; index < this.facet.values.length; index++)
+            //         {
+            //             if (this.facet.values[index].id == this.filterParams[i] && names.indexOf(this.facet.values[index].names[0].name) == -1)
+            //             {
+            //                 names.push(this.facet.values[index].names[0].name);
+            //             }
+            //         }
+            //     }
+            //
+            //     return names;
+            // }
+            //
+            // return "";
         }
     },
 
@@ -52,7 +51,8 @@ Vue.component("item-filter", {
     {
         setFilter: function()
         {
-            FilterService.setFilterByName(this.facet.names[0].name, this.selected);
+            // FilterService.;
+
         }
     }
 });
