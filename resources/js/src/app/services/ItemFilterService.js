@@ -11,7 +11,8 @@ module.exports = (function($)
         getFilterValuesByName : _getFilterValuesByName,
         getFilterValues : _getFilterValues,
         setFilterByName : _setFilterByName,
-        removeFilterValue : _removeFilterValue
+        removeFilterValue : _removeFilterValue,
+        addFilterValue : _addFilterValue
     };
 
     function _getFilterValues()
@@ -33,6 +34,7 @@ module.exports = (function($)
     function _addFilterValue(filterId)
     {
         var filterParams = ResourceService.getResource("filterParams").val();
+
         filterParams.push(filter);
     }
 
