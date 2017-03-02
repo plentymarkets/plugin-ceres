@@ -39,7 +39,7 @@ Vue.component("payment-provider-select", {
                 .set(this.checkout)
                 .done(function()
                 {
-                    document.dispatchEvent(new CustomEvent("afterPaymentProviderChanged", {detail: this.checkout.methodOfPaymentId}));
+                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.checkout.methodOfPaymentId}));
                 }.bind(this));
 
             this.validate();
