@@ -17,12 +17,12 @@ module.exports = (function($)
 
     function _getFilterValues()
     {
-        return ResourceService.getResource("filterParams").val();
+        return ResourceService.getResource("facetParams").val();
     }
 
     function _removeFilterValue(filterId)
     {
-        var filterParams = ResourceService.getResource("filterParams").val();
+        var filterParams = ResourceService.getResource("facetParams").val();
         var index = filterParams.indexOf(filterId);
 
         if (index > -1)
@@ -33,7 +33,7 @@ module.exports = (function($)
 
     function _addFilterValue(filterId)
     {
-        var filterParams = ResourceService.getResource("filterParams").val();
+        var filterParams = ResourceService.getResource("facetParams").val();
 
         filterParams.push(filter);
     }
@@ -60,7 +60,7 @@ module.exports = (function($)
 
     function _setFilterByName(filterName, params)
     {
-        var filterParamList = ResourceService.getResource("filterParams").val();
+        var filterParamList = ResourceService.getResource("facetParams").val();
 
         filterParamList[filterName] = params;
 
