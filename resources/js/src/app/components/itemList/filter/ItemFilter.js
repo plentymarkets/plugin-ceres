@@ -1,4 +1,5 @@
 var FilterService   = require("services/ItemFilterService");
+// var ResourceService = require("services/ResourceService");
 
 Vue.component("item-filter", {
 
@@ -19,8 +20,6 @@ Vue.component("item-filter", {
         this.$options.template = this.template || "#vue-item-filter";
 
         this.selected = FilterService.getFilterValuesByName(this.facet.names[0].name);
-
-        console.log(FilterService.getFilterValues());
     },
 
     computed:
@@ -51,9 +50,9 @@ Vue.component("item-filter", {
 
     methods:
     {
-        getFilteredItems: function()
+        setFilter: function()
         {
-            // call service
+            FilterService.setFilterByName(this.facet.names[0].name, this.selected);
         }
     }
 });
