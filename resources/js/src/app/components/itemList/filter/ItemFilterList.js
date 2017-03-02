@@ -5,7 +5,8 @@ Vue.component("item-filter-list", {
 
     props: [
         "template",
-        "facets"
+        "facets",
+        "categoryId"
     ],
 
     created: function()

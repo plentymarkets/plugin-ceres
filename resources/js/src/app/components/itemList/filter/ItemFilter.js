@@ -5,7 +5,8 @@ Vue.component("item-filter", {
 
     props: [
         "template",
-        "facet"
+        "facet",
+        "categoryId"
     ],
 
     data: function()
@@ -33,7 +34,7 @@ Vue.component("item-filter", {
                 {
                     for (var facetIndex in this.facet.values)
                     {
-                        if ( this.facet.values[facetIndex].id == this.facetParams[selectedFacetId] &&
+                        if (this.facet.values[facetIndex].id == this.facetParams[selectedFacetId] &&
                              names.indexOf(this.facet.values[facetIndex].names[0].name) == -1)
                         {
                             names.push(this.facet.values[facetIndex].names[0].name);
@@ -52,7 +53,7 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
-            FilterService.applyFacets(this.facetParams);
+            FilterService.applyFacets(this.facetParams, this.categoryId);
         }
     }
 });

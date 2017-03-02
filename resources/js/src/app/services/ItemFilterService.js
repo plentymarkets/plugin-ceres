@@ -1,4 +1,4 @@
-// var ApiService = require("services/ApiService");
+var ApiService = require("services/ApiService");
 // var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
 var UrlService = require("services/UrlService");
@@ -23,11 +23,11 @@ module.exports = (function($)
         ResourceService.getResource("facetParams").set(facets);
     }
 
-    function _applyFacets(facets)
+    function _applyFacets(facets, categoryId)
     {
         _setFacetValues(facets);
         _updateUrl(facets);
-        _sendFacetCall(facets);
+        _sendFacetCall(facets, categoryId);
     }
 
     function _removeFacetValue(filterId)
@@ -48,8 +48,18 @@ module.exports = (function($)
         filterParams.push(filterId);
     }
 
-    function _sendFacetCall(facets)
+    function _sendFacetCall(facets, categoryId)
     {
+        ApiService.get("/rest/io/category", {template: "Ceres::Category.Item.CategoryItem", categoryId: categoryId, facets: facets.toString()})
+            .done(function(response)
+            {
+                ResourceService.getResource("itemList").set(response);
+            })
+            .fail(function(response)
+            {
+                console.log("ERRRRROOOOOOOOOOOOOR");
+            });
+
         console.log("send facet call: ", facets);
     }
 
