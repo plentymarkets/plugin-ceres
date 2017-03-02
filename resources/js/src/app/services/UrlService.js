@@ -24,7 +24,7 @@ module.exports = (function($)
             return params;
         }
 
-        return null;
+        return {};
     }
 
     function _setUrlParams(urlParams)

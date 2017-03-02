@@ -56,7 +56,15 @@ module.exports = (function($)
     {
         var urlParams = UrlService.getUrlParams(document.location.search);
 
-        urlParams.facets = facets.toString();
+        if (facets.length > 0)
+        {
+            urlParams.facets = facets.toString();
+        }
+        else
+        {
+            delete urlParams.facets;
+        }
+
         UrlService.setUrlParams(urlParams);
     }
 })(jQuery);
