@@ -23,6 +23,15 @@
 
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.ItemList") }}
+    {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+    {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
+    {{ component( "Ceres::ItemList.Components.ImageCarousel" ) }}
+    {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+    {{ component( "Ceres::ItemList.Components.ItemListSorting" ) }}
+    {{ component( "Ceres::ItemList.Components.ItemsPerPage" ) }}
+    {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
+    {{ component( "Ceres::ItemList.Components.LoadingAnimation" ) }}
+    {{ component( "Ceres::ItemList.Components.Pagination" ) }}
 
     <resource name="facetParams" :data="[]"></resource>
     <resource name="itemList" :data="{}"></resource>
@@ -35,7 +44,7 @@
         </div>
 
         <div class="list-controls m-b-3">
-            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}" :category-id="{{ category.id }}"></item-filter-list>
         </div>
 
         <div class="m-b-3">

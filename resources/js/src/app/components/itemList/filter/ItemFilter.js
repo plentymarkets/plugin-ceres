@@ -5,7 +5,8 @@ Vue.component("item-filter", {
 
     props: [
         "template",
-        "facet"
+        "facet",
+        "categoryId"
     ],
 
     data: function()
@@ -52,7 +53,7 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
-            FilterService.applyFacets(this.facetParams);
+            FilterService.applyFacets(this.facetParams, this.categoryId);
         }
     }
 });
