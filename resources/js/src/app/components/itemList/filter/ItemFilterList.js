@@ -13,6 +13,6 @@ Vue.component("item-filter-list", {
 
         var urlParams = UrlService.getUrlParams(document.location.search);
 
-        ResourceService.getResource("filterParams").set(urlParams["facets"]);
+        ResourceService.getResource("filterParams").set(urlParams.facets.split(","));
     }
 });

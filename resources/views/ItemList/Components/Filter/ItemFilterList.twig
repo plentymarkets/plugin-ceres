@@ -1,4 +1,6 @@
 <script type="x/template" id="vue-item-filter-list">
-    {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
-    <item-filter v-for="facet in facets" :facet="facet"></item-filter>
+    <div>
+        {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
+        <item-filter v-for="facet in facets" :facet="facet"></item-filter>
+    </div>
 </script>
