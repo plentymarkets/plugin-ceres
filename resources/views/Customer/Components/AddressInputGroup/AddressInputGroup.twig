@@ -1,14 +1,14 @@
-{{ component( "PluginCeres::Customer.Components.CountrySelect" ) }}
+{{ component( "Ceres::Customer.Components.CountrySelect" ) }}
 
 <script type="x/template" id="vue-address-input-group">
 
     <div>
         <div v-if="localeToShow == 'DE'">
-            {% include "PluginCeres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
         </div>
 
         <div v-if="localeToShow == 'GB'">
-            {% include "PluginCeres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
         </div>
 
         <div class="col-sm-5">

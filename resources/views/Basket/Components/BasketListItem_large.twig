@@ -1,4 +1,4 @@
-{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
+{{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
@@ -11,22 +11,22 @@
     <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.price | currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.price | currency }
+            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCeres::Template.generalDelete") }}
+                   {{ trans("Ceres::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
+                   {{ trans("Ceres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>
@@ -45,20 +45,20 @@
         </a>
 
         <p class="id">
-            <strong>{{ trans("PluginCeres::Template.itemId") }}</strong> ${ basketItem.itemId }
+            <strong>{{ trans("Ceres::Template.itemId") }}</strong> ${ basketItem.itemId }
         </p>
 
         <div class="item-description">
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemNumber") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemNumber") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.variation.number}</span>
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemCondition") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemCondition") }}:</strong>
                 {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{# TODO #}
             </div>
             <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.itemAvailability") }}:</strong>
+                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
                     ${ basketItem.variation.data.variation.availability.names[0].name }
                 </span>
@@ -67,7 +67,7 @@
                 {!! basketItem.variation.data.texts[0].description !!}
             </p>
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("PluginCeres::Template.itemShowMore") }}" data-show-less="{{ trans("PluginCeres::Template.itemShowLess") }}"></label>
+        <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
     </div>
     <!-- ./ITEM DETAILS -->
 </article>

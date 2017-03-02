@@ -52,12 +52,11 @@ Vue.component("basket-list-item", {
                 ResourceService
                     .getResource("basketItems")
                     .remove(this.basketItem.id)
-                    .done(
-                        function()
-                        {
-                            self.resetDelete();
-                            self.waiting = false;
-                        });
+                    .fail(function()
+                    {
+                        self.resetDelete();
+                        self.waiting = false;
+                    });
             }
         },
 
@@ -74,16 +73,14 @@ Vue.component("basket-list-item", {
 
             this.basketItem.quantity = quantity;
             this.waiting = true;
-            var self = this;
 
             ResourceService
                 .getResource("basketItems")
                 .set(this.basketItem.id, this.basketItem)
-                .done(
-                    function()
-                    {
-                        self.waiting = false;
-                    });
+                .fail(function()
+                {
+                    this.waiting = false;
+                }.bind(this));
         },
 
         /**

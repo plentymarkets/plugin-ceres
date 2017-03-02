@@ -1,15 +1,15 @@
-{% import "PluginCeres::PageDesign.Macros.IncludeComponents" as Loader %}
-{{ component( "PluginCeres::PageDesign.Components.Notifications" ) }}
-{{ component( "PluginCeres::Basket.Components.BasketPreview" ) }}
-{{ component( "PluginCeres::Customer.Components.Login" ) }}
-{{ component( "PluginCeres::Customer.Components.Registration" ) }}
-{{ component( "PluginCeres::Basket.Components.AddItemToBasketOverlay" ) }}
+{% import "Ceres::PageDesign.Macros.IncludeComponents" as Loader %}
+{{ component( "Ceres::PageDesign.Components.Notifications" ) }}
+{{ component( "Ceres::Basket.Components.BasketPreview" ) }}
+{{ component( "Ceres::Customer.Components.Login" ) }}
+{{ component( "Ceres::Customer.Components.Registration" ) }}
+{{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 
 <!DOCTYPE html>
 
 {% set lang = services.sessionStorage.getLang() %}
-{% set fixNavBarPos = config("PluginCeres.header.fixed_navbar") %}
-{% set showItemConfirm = config("PluginCeres.basket.add_item_to_basket_confirm") %}
+{% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
+{% set showItemConfirm = config("Ceres.basket.add_item_to_basket_confirm") %}
 
 <html lang="{{ lang }}" data-framework="vue">
 
@@ -23,7 +23,7 @@
         <resource name="itemSearch" :data="{}"></resource>
         <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
-        <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="PluginCeres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('PluginCeres::Basket.Basket') | json_encode() }}"></resource-list>
+        <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
 
         <div class="wrapper wrapper-top">
             <!-- messages -->
@@ -64,7 +64,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title">{{ trans("PluginCeres::Template.accLogin") }}</h3>
+                                <h3 class="modal-title">{{ trans("Ceres::Template.accLogin") }}</h3>
                             </div>
                             <div class="modal-body">
                                 <login template="#vue-login" modal-element="login-modal-wrapper"></login>
@@ -82,7 +82,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title">{{ trans("PluginCeres::Template.accCreateAccount") }}</h3>
+                                <h3 class="modal-title">{{ trans("Ceres::Template.accCreateAccount") }}</h3>
                             </div>
                             <div class="modal-body">
                                 <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
@@ -103,18 +103,18 @@
 
         {% set lang = services.sessionStorage.getLang() %}
 
-        {% if config("PluginCeres.log.performance.level") == 'development' %}
-            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
+        {% if config("Ceres.log.performance.level") == 'development' %}
+            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
             <script>var Translations = Languages['{{ lang }}'];</script>
-            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-vendor.js"></script>
-            <script src="{{ plugin_path('PluginCeres') }}/js/src/app.config.js"></script>
-            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres-app.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
         {% else %}
             {# TODO remove douplicate import #}
-            <script src="{{ plugin_path('PluginCeres') }}/js/lang/{{ lang }}.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
             <script>var Translations = Languages['{{ lang }}'];</script>
 
-            <script src="{{ plugin_path('PluginCeres') }}/js/dist/plugin-ceres.min.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
         <script>
