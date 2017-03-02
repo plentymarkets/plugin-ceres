@@ -9,7 +9,7 @@
 'itemsPerPage'      : request.get("items_per_page") | default( config('Ceres.pagination.defaultItemsPerPage') ),
 'orderBy'           : itemSort[0],
 'orderByKey'        : itemSort[1] | default('ASC'),
-'facetParams'       : request.get("f")
+'facetParams'       : request.get("facets")
 } %}
 
 {% set page                 = request.get("page") | default(1) %}
@@ -24,8 +24,8 @@
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.ItemList") }}
 
-    <resource name="filteredItemList" :data="{}"></resource>
-    <resource name="filterParams" :data="[]"></resource>
+    {#<resource name="filteredItemList" :data="{}"></resource> itemlist resource should be implemented here#}
+    <resource name="facetParams" :data="[]"></resource>
 
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">

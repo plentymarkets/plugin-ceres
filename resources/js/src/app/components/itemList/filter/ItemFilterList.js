@@ -16,7 +16,7 @@ Vue.component("item-filter-list", {
 
         if (urlParams !== null)
         {
-            ResourceService.getResource("filterParams").set(urlParams.facets.split(","));
+            ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
         }
     }
 });
