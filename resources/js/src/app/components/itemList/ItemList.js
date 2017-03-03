@@ -26,5 +26,16 @@ Vue.component("item-list", {
         ResourceService.bind("isLoading", this);
 
         ItemListService.setSearchParams(document.location.search);
+    },
+
+    watch:
+    {
+        itemList: function()
+        {
+            if (!$.isEmptyObject(this.itemList))
+            {
+                document.getElementById("filterCollapse").classList.add("in");
+            }
+        }
     }
 });
