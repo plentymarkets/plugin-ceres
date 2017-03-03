@@ -1,6 +1,7 @@
 <script type="x/template" id="vue-item-filter-list">
-    <div>
+    <div v-if="facets.length > 0">
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
+        {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
 
         <div class="row">
             <div class="col-xs-12">
@@ -10,24 +11,7 @@
                         <i class="fa fa-sliders" aria-hidden="true"></i> Filter
                     </a>
 
-                    <div class="selected-filters">
-                        <span class="selected-filter">
-                            <i class="fa fa-times" aria-hidden="true"></i> Draht
-                        </span>
-                        <span class="selected-filter">
-                            <i class="fa fa-times" aria-hidden="true"></i> Metall
-                        </span>
-                        <span class="selected-filter">
-                            <i class="fa fa-times" aria-hidden="true"></i> E27
-                        </span>
-                        <span class="selected-filter">
-                            <i class="fa fa-times" aria-hidden="true"></i> dimmbar
-                        </span>
-                        <span class="selected-filter">
-                            <i class="fa fa-times" aria-hidden="true"></i> silber
-                        </span>
-                    </div>
-
+                    <item-filter-tag-list :category-id="categoryId" :facets="facets"></item-filter-tag-list>
                 </div>
             </div>
         </div>
