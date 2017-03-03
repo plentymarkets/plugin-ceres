@@ -11,6 +11,8 @@ Vue.component("item-filter-list", {
 
     created: function()
     {
+        ResourceService.bind("facets", this);
+
         this.$options.template = this.template || "#vue-item-filter-list";
 
         var urlParams = UrlService.getUrlParams(document.location.search);

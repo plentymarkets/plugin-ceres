@@ -25,6 +25,7 @@
     {{ component( "Ceres::ItemList.Components.ItemList") }}
 
     <resource name="facetParams" :data="[]"></resource>
+    <resource name="facets" :data="{{ paginatedResult.facets | json_encode }}"></resource>
     <resource name="itemList" :data="{}"></resource>
 
     <div class="categoriegrid page-content container-max">
