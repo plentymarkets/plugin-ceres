@@ -8,8 +8,20 @@
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
+<resource name="isLoading" :data="{}"></resource>
+
 <script type="x/template" id="vue-item-list">
-    <ul class="product-list row grid" v-show="!itemSearch.isLoading">
+    <div class="loading-animation-frame col-xs-12 col-lg-12" v-if="isLoading">
+        <div class="loading-animation">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
+    <ul class="product-list row grid" v-show="!isLoading">
 
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
                        decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>

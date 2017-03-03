@@ -11,7 +11,7 @@ Vue.component("item-list", {
     {
         return {
             itemList: {},
-            itemSearch: {}
+            isLoading: false
         };
     },
 
@@ -23,7 +23,7 @@ Vue.component("item-list", {
     ready: function()
     {
         ResourceService.bind("itemList", this);
-        ResourceService.bind("itemSearch", this);
+        ResourceService.bind("isLoading", this);
 
         ItemListService.setSearchParams(document.location.search);
     }

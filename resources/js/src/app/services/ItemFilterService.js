@@ -48,15 +48,24 @@ module.exports = (function($)
         filterParams.push(filterId);
     }
 
+    function _setIsLoading(isLoading)
+    {
+        ResourceService.getResource("isLoading").set(isLoading);
+    }
+
     function _sendFacetCall(facets, categoryId)
     {
+        _setIsLoading(true);
+
         ApiService.get("/rest/io/category", {template: "Ceres::Category.Item.CategoryItem", categoryId: categoryId, facets: facets.toString()})
             .done(function(response)
             {
+                _setIsLoading(false);
                 ResourceService.getResource("itemList").set(response);
             })
             .fail(function(response)
             {
+                _setIsLoading(false);
                 console.log("ERRRRROOOOOOOOOOOOOR");
             });
 

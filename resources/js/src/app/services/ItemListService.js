@@ -11,8 +11,7 @@ module.exports = (function($)
             itemsPerPage: 20,
             orderBy     : "itemName",
             orderByKey  : "ASC",
-            page        : 1,
-            isLoading   : false
+            page        : 1
         };
 
     return {
@@ -52,8 +51,8 @@ module.exports = (function($)
 
     function _setIsLoading(isLoading)
     {
-        searchParams.isLoading = isLoading;
         ResourceService.getResource("itemSearch").set(searchParams);
+        ResourceService.getResource("isLoading").set(isLoading);
     }
 
     /**

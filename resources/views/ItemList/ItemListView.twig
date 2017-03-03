@@ -5,7 +5,6 @@
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
     {{ component( "Ceres::ItemList.Components.ItemListSorting" ) }}
     {{ component( "Ceres::ItemList.Components.ItemsPerPage" ) }}
-    {{ component( "Ceres::ItemList.Components.LoadingAnimation" ) }}
     {{ component( "Ceres::ItemList.Components.Pagination" ) }}
 
     <resource name="itemList" :data="{}"></resource>
@@ -22,7 +21,6 @@
         </div>
 
         <div class="col-xs-12">
-            <loading-animation template="#vue-loading-animation"></loading-animation>
             <item-list template="#vue-item-list"></item-list>
         </div>
 
