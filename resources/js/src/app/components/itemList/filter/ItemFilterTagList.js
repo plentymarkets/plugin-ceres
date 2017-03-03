@@ -1,4 +1,5 @@
 var ResourceService = require("services/ResourceService");
+var FilterService   = require("services/ItemFilterService");
 
 Vue.component("item-filter-tag-list", {
 
@@ -25,7 +26,8 @@ Vue.component("item-filter-tag-list", {
     {
         removeTag: function(tagId)
         {
-            console.log(tagId);
+            this.facetParams.splice(this.facetParams.indexOf(tagId.toString()), 1);
+            FilterService.applyFacets(this.facetParams, this.categoryId);
         }
     },
 
