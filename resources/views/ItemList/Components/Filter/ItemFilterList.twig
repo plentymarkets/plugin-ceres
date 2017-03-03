@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-item-filter-list">
-    <div v-if="facets.length > 0">
+    <div v-if="facets && facets.length > 0">
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
 
