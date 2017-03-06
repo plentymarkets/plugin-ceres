@@ -37216,6 +37216,7 @@ Vue.component("item-list", {
 
         ItemListService.setSearchParams(document.location.search);
 
+        this.watchFacetOpeningState();
     },
 
     methods:
