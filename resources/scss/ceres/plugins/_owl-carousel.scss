@@ -278,6 +278,7 @@
 .owl-theme .owl-nav .disabled {
   opacity: 0.5;
   cursor: default;
+
 }
 
 .owl-theme .owl-nav.disabled + .owl-dots {
@@ -287,6 +288,10 @@
 .owl-theme .owl-dots {
   text-align: center;
   -webkit-tap-highlight-color: transparent;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .owl-theme .owl-dots .owl-dot {
