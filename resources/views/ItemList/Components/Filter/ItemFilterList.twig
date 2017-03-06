@@ -16,6 +16,20 @@
             </div>
         </div>
 
-        <item-filter v-for="facet in facets" :facet="facet" :category-id="categoryId"></item-filter>
+
+        <div class="collapse" id="filterCollapse">
+            <div class="container-max page-content">
+                <div class="card-columns">
+                    <item-filter v-for="facet in facets" :facet="facet" :category-id="categoryId"></item-filter>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-xs-right">
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                            <i class="fa fa-check" aria-hidden="true"></i> Anwenden
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </script>
