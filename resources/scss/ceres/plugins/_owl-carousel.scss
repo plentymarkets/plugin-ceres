@@ -325,6 +325,10 @@ Custom classes
   opacity: 0;
   transition: opacity 300ms;
 
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+
   &:hover {
     opacity: .5 !important;
   }
