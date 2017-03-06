@@ -20,7 +20,6 @@ Vue.component("category-image-carousel", {
                 items    : 1,
                 loop     : this.imageUrls.length > 1,
                 lazyLoad : true,
-                mouseDrag: false,
                 margin   : 10,
                 nav      : true,
                 navText  : [

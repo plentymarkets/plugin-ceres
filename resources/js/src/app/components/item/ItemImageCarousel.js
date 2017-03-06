@@ -73,10 +73,10 @@ Vue.component("item-image-carousel", {
 
             $(this.$els.single).owlCarousel({
                 autoHeight       : true,
-                dots             : false,
+                dots             : true,
                 items            : 1,
                 lazyLoad         : true,
-                loop             : false,
+                loop             : true,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
                 nav              : imageCount > 1,
@@ -94,7 +94,7 @@ Vue.component("item-image-carousel", {
 
             $(this.$els.single).on("changed.owl.carousel", function(event)
             {
-                this.currentItem = event.item.index;
+                this.currentItem = event.page.index;
             }.bind(this));
         },
 
