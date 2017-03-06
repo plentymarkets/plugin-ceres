@@ -28,7 +28,6 @@ Vue.component("item-list", {
 
         ItemListService.setSearchParams(document.location.search);
 
-        this.watchFacetOpeningState();
     },
 
     methods:
@@ -56,6 +55,8 @@ Vue.component("item-list", {
     {
         itemList: function()
         {
+            this.watchFacetOpeningState();
+
             if (!$.isEmptyObject(this.itemList) && document.getElementById("filterCollapse") !== null)
             {
                 if (this.filterListState)
