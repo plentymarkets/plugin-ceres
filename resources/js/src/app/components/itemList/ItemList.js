@@ -11,7 +11,8 @@ Vue.component("item-list", {
     {
         return {
             itemList: {},
-            isLoading: false
+            isLoading: false,
+            filterListState: false
         };
     },
 
@@ -26,15 +27,41 @@ Vue.component("item-list", {
         ResourceService.bind("isLoading", this);
 
         ItemListService.setSearchParams(document.location.search);
+
+        this.watchFacetOpeningState();
+    },
+
+    methods:
+    {
+        watchFacetOpeningState: function()
+        {
+            if (document.getElementById("filterCollapse") !== null)
+            {
+                var observer = new MutationObserver(function(mutation)
+                {
+                    if (!document.getElementById("filterCollapse").classList.contains("collapsing"))
+                    {
+                        this.filterListState = document.getElementById("filterCollapse").classList.contains("in");
+                    }
+                }.bind(this));
+
+                var targetToWatch = document.getElementById("filterCollapse");
+
+                observer.observe(targetToWatch, {attributes: true, subtree: true});
+            }
+        }
     },
 
     watch:
     {
         itemList: function()
         {
-            if (!$.isEmptyObject(this.itemList))
+            if (!$.isEmptyObject(this.itemList) && document.getElementById("filterCollapse") !== null)
             {
-                document.getElementById("filterCollapse").classList.add("in");
+                if (this.filterListState)
+                {
+                    document.getElementById("filterCollapse").classList.add("in");
+                }
             }
         }
     }
