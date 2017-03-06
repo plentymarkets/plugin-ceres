@@ -12,7 +12,8 @@ Vue.component("item-filter", {
     data: function()
     {
         return {
-            facetParams: []
+            facetParams: [],
+            isLoading: false
         };
     },
 
@@ -20,6 +21,11 @@ Vue.component("item-filter", {
     {
         this.$options.template = this.template || "#vue-item-filter";
         ResourceService.bind("facetParams", this);
+    },
+
+    ready: function()
+    {
+        ResourceService.bind("isLoading", this);
     },
 
     methods:
