@@ -2,13 +2,15 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
-    template: "#vue-shipping-profile-select",
+    props: [
+        "template"
+    ],
 
     data: function()
     {
         return {
             checkout: {},
-            waiting: false
+            checkoutValidation: {shippingProfile: {}}
         };
     },
 
@@ -18,7 +20,12 @@ Vue.component("shipping-profile-select", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.shippingProfile.validate = this.validate;
     },
 
     methods: {
@@ -27,15 +34,14 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            this.waiting = true;
+            ResourceService.getResource("checkout").set(this.checkout);
 
-            ResourceService
-                .getResource("checkout").set(this.checkout)
-                .done(
-                    function()
-                    {
-                        this.waiting = false;
-                    }.bind(this));
+            this.validate();
+        },
+
+        validate: function()
+        {
+            this.checkoutValidation.shippingProfile.showError = !(this.checkout.shippingProfileId > 0);
         }
     }
 });

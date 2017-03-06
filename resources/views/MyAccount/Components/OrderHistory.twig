@@ -1,8 +1,8 @@
 <script type="x/template" id="vue-order-history">
 
-    <div class="page-content history container-max">
+    <div class="page-content history container-max" v-if="orderList.totalsCount">
         <div class="row m-b-3">
-            <h1 class="h4 col-xs-12">{{ trans("PluginCeres::Template.orderHistory") }}</h1>
+            <h1 class="h4 col-xs-12">{{ trans("Ceres::Template.orderHistory") }}</h1>
         </div>
 
         <div class="form-group">
@@ -12,7 +12,7 @@
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix" v-if="orderList.totalsCount > itemsPerPage">
                         <div class="pull-xs-left">
-                            {{ trans("PluginCeres::Template.orderShow", {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
+                            {{ trans("Ceres::Template.orderShow", {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
                         </div>
 
                         <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
@@ -79,23 +79,23 @@
                             <div class="item-details small">
 
                                 <div class="item-name">
-                                    <h5>{{ trans("PluginCeres::Template.orderId") }} ${ entry.order.id }</h5>
+                                    <h5>{{ trans("Ceres::Template.orderId") }} ${ entry.order.id }</h5>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("PluginCeres::Template.dateTimeFormatMoment") }}" }</span>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
                                         </div>
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("PluginCeres::Template.orderStatus") }}</strong>
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
-                                        <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("PluginCeres::Template.orderDetails") }}</button>
+                                        <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("Ceres::Template.orderDetails") }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,10 +111,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title">{{ trans("PluginCeres::Template.orderDetails") }}</h3>
+                                <h3 class="modal-title">{{ trans("Ceres::Template.orderDetails") }}</h3>
                             </div>
                             <div class="modal-body">
-                                <order-details :order-data="currentOrder" :totals-config="{{ config("PluginCeres.basket.data")|split(', ')|json_encode() }}"></order-details>
+                                <order-details template="#vue-order-details" :order-data="currentOrder" :totals-config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></order-details>
                             </div>
                         </div>
                     </div>
@@ -125,38 +125,38 @@
                 {#<div class="col-xs-12 col-md-3 col-lg-4">#}
                     {#<div class="input-unit">#}
                         {#<input id="auftragId" type="text">#}
-                        {#<label for="auftragId">{{ trans("PluginCeres::Template.orderEnterOrderId") }}</label>#}
+                        {#<label for="auftragId">{{ trans("Ceres::Template.orderEnterOrderId") }}</label>#}
                     {#</div>#}
 
                     {#<div class="input-unit">#}
                         {#<select class="custom-select" id="TimePeriod">#}
                             {#<option>---</option>#}
-                            {#<option>{{ trans("PluginCeres::Template.orderLast30Days") }}</option>#}
-                            {#<option>{{ trans("PluginCeres::Template.orderLast3Month") }}</option>#}
-                            {#<option>{{ trans("PluginCeres::Template.orderLast6Month") }}</option>#}
+                            {#<option>{{ trans("Ceres::Template.orderLast30Days") }}</option>#}
+                            {#<option>{{ trans("Ceres::Template.orderLast3Month") }}</option>#}
+                            {#<option>{{ trans("Ceres::Template.orderLast6Month") }}</option>#}
                         {#</select>#}
-                        {#<label for="TimePeriod">{{ trans("PluginCeres::Template.orderSelectTimePeriod") }}</label>#}
+                        {#<label for="TimePeriod">{{ trans("Ceres::Template.orderSelectTimePeriod") }}</label>#}
                     {#</div>#}
 
                     {#<div class="row">#}
                         {#<div class="col-xs-12 col-lg-6">#}
                             {#<div class="input-unit">#}
                                 {#<input id="von" type="text">#}
-                                {#<label for="von">{{ trans("PluginCeres::Template.orderFrom") }}</label>#}
+                                {#<label for="von">{{ trans("Ceres::Template.orderFrom") }}</label>#}
                             {#</div>#}
                         {#</div>#}
 
                         {#<div class="col-xs-12 col-lg-6">#}
                             {#<div class="input-unit">#}
                                 {#<input id="auftragId" type="text">#}
-                                {#<label for="auftragId">{{ trans("PluginCeres::Template.orderTo") }}</label>#}
+                                {#<label for="auftragId">{{ trans("Ceres::Template.orderTo") }}</label>#}
                             {#</div>#}
                         {#</div>#}
 
                     {#</div>#}
 
                     {#<div class="m-b-3">#}
-                        {#<input type="submit" class="btn btn-primary btn-block" value="{{ trans("PluginCeres::Template.orderApply") }}">#}
+                        {#<input type="submit" class="btn btn-primary btn-block" value="{{ trans("Ceres::Template.orderApply") }}">#}
                     {#</div>#}
 
                 {#</div>#}

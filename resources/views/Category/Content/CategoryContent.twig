@@ -1,4 +1,4 @@
-{% extends "PluginCeres::PageDesign.PageDesign" %}
+{% extends getPartial('page-design') %}
 
 {% block PageBody %}
 
@@ -7,3 +7,5 @@
     {% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
 
 {% endblock %}
+
+{# DEPRECATED #}

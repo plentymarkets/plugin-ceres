@@ -33,7 +33,9 @@
 
     Vue.component("variation-image-list", {
 
-        template: "#vue-variation-image-list",
+        props: [
+            "template"
+        ],
 
         data: function()
         {
@@ -43,19 +45,28 @@
             };
         },
 
-        ready: function()
+        created: function()
         {
+            this.$options.template = this.template;
+
             // (Re-)initialize carousels on each variation change
             ResourceService.watch("currentVariation", function(newValue)
             {
                 this.currentVariation = newValue;
 
-                // (re-)init big image carousel
                 this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
-
-                // (re-)init preview image carousel
                 this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
+
             }.bind(this));
+        },
+
+        ready: function()
+        {
+            // (re-)init big image carousel
+            this.initCarousel(this.$els.single, OWL_CONFIG.SINGLE);
+
+            // (re-)init preview image carousel
+            this.initCarousel(this.$els.preview, OWL_CONFIG.PREVIEW);
         },
 
         methods: {

@@ -1,0 +1,29 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {% set termsAndConditions = services.legalInformation.getTermsAndConditions() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% autoescape false %}
+                    <h1>{{ trans("Ceres::Template.generalGtc") }}</h1>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if termsAndConditions.htmlText %}
+                    {{ termsAndConditions.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ termsAndConditions.plainText }}</p>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::StaticPages.TermsAndConditions") }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

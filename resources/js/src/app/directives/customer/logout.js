@@ -8,14 +8,20 @@ Vue.directive("logout", function()
     $(this.el).click(
         function(event)
         {
-            ApiService.post("/rest/customer/logout")
+            $(this.el).addClass("disabled");
+
+            ApiService.post("/rest/io/customer/logout")
                 .done(
-                    function(response)
+                    function()
                     {
                         window.location.assign(window.location.origin);
-                    }
-                );
+                    })
+                .fail(
+                    function()
+                    {
+                        $(this.el).removeClass("disabled");
+                    }.bind(this));
 
             event.preventDefault();
-        });
+        }.bind(this));
 });

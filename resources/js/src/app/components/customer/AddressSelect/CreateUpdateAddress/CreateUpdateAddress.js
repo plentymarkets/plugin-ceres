@@ -3,14 +3,13 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
 
-    template: "#vue-create-update-address",
-
     props: [
         "addressData",
         "addressModal",
         "addressList",
         "modalType",
-        "addressType"
+        "addressType",
+        "template"
     ],
 
     data: function()
@@ -18,6 +17,11 @@ Vue.component("create-update-address", {
         return {
             waiting: false
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -66,13 +70,18 @@ Vue.component("create-update-address", {
                 .done(function()
                 {
                     this.addressModal.hide();
+
                     for (var key in this.addressList)
                     {
                         var address = this.addressList[key];
 
                         if (address.id === this.addressData.id)
                         {
-                            address = this.addressData;
+                            for (var attribute in this.addressList[key])
+                            {
+                                this.addressList[key][attribute] = this.addressData[attribute];
+                            }
+
                             break;
                         }
                     }

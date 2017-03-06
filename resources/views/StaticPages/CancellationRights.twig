@@ -1,0 +1,30 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {% set cancellationRights = services.legalInformation.getCancellationRights() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% autoescape false %}
+                    <h1>{{ trans("Ceres::Template.generalCancellationRight") }}</h1>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if cancellationRights.htmlText %}
+                    {{ cancellationRights.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ cancellationRights.plainText }}</p>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::StaticPages.CancellationRights") }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

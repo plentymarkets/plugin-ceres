@@ -1,57 +1,17 @@
 [
     {
-        "tab"               : "Categories",
-        "key"               : "global.category.home",
-        "label"             : "Homepage",
-        "type"              : "category_select",
-        "possibleValues"    :
-        [
-            "content"
-        ]
-    },
-    {
-        "tab"       : "Categories",
-        "key"       : "global.category.page_not_found",
-        "label"     : "Page not found",
-        "type"      : "category_select"
-    },
-    {
-        "tab"       : "Categories",
-        "key"       : "global.category.item_not_found",
-        "label"     : "Item not found",
-        "type"      : "category_select"
-    },
-    {
-        "tab"       : "Categories",
-        "key"       : "global.category.legal_disclosure",
-        "label"     : "Legal disclosure",
-        "type"      : "category_select"
-    },
-    {
-      "tab"       : "Categories",
-      "key"       : "global.category.privacy_policy",
-      "label"     : "Privacy policy",
-      "type"      : "category_select"
-    },
-    {
-      "tab"       : "Categories",
-      "key"       : "global.category.terms_and_conditions",
-      "label"     : "Terms and conditions",
-      "type"      : "category_select"
-    },
-
-    {
-        "tab"       : "Categories",
-        "key"       : "global.category.cancellation_rights",
-        "label"     : "Cancellation rights",
-        "type"      : "category_select"
+        "tab"       : "Homepage",
+        "key"       : "default.homepage",
+        "label"     : "Show default homepage",
+        "type"      : "checkbox",
+        "default"   : "true"
     },
     {
         "tab"       : "Header",
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/pluginceres/images/ceres-logo.png"
+        "default"   : "/layout/plugins/production/ceres/images/ceres-logo.svg"
     },
     {
         "tab"       : "Header",

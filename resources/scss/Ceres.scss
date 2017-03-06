@@ -68,8 +68,9 @@
 @import "ceres/views/Templates/ToggleCategoryListView/toggle-list-view";
 
 // Pages
+@import "ceres/views/Category/category-list";
 @import "ceres/views/Home/home";
 @import "ceres/views/Checkout/checkout";
 @import "ceres/views/Item/single-item";
 @import "ceres/views/ItemList/loading-animation";
-@import "ceres/views/Category/category-list";
+@import "ceres/views/StaticPages/static-pages";

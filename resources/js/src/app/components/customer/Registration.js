@@ -6,12 +6,12 @@ var ValidationService = require("services/ValidationService");
 
 Vue.component("registration", {
 
-    template: "#vue-registration",
-
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},
-        isSimpleRegistration: {type: Boolean, default: false}
+        isSimpleRegistration: {type: Boolean, default: false},
+        template: String,
+        backlink: String
     },
 
     data: function()
@@ -20,8 +20,14 @@ Vue.component("registration", {
             password      : "",
             passwordRepeat: "",
             username      : "",
-            billingAddress: {}
+            billingAddress: {},
+            isDisabled: false
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     methods: {
@@ -51,7 +57,9 @@ Vue.component("registration", {
             var userObject = this.getUserObject();
             var component  = this;
 
-            ApiService.post("/rest/customer", userObject)
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer", userObject)
                 .done(function(response)
                 {
                     ApiService.setToken(response);
@@ -62,8 +70,18 @@ Vue.component("registration", {
                     }
 
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
-                });
 
+                    if (component.backlink !== null && component.backlink)
+                    {
+                        window.location.assign(component.backlink);
+                    }
+
+                    component.isDisabled = false;
+                })
+                .fail(function()
+                {
+                    component.isDisabled = false;
+                });
         },
 
         /**

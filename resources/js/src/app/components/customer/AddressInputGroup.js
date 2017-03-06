@@ -1,10 +1,9 @@
 Vue.component("address-input-group", {
 
-    template: "#vue-address-input-group",
-
     props: [
         "addressData",
-        "defaultCountry"
+        "defaultCountry",
+        "template"
     ],
 
     data: function()
@@ -21,6 +20,8 @@ Vue.component("address-input-group", {
      */
     created: function()
     {
+        this.$options.template = this.template;
+
         if (!this.addressData)
         {
             this.addressData = {};

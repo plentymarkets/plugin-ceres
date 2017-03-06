@@ -1,0 +1,9 @@
+[
+  "salesPrices.type",
+  "salesPrices.price",
+  "item.storeSpecial.id",
+  "item.storeSpecial.names.name",
+  "texts.name*",
+  "images.all.url*",
+  "images.variation.url*"
+]

@@ -1,0 +1,29 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {% set privacyPolicy = services.legalInformation.getPrivacyPolicy() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% autoescape false %}
+                    <h1>{{ trans("Ceres::Template.generalPrivacyPolicy") }}</h1>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if privacyPolicy.htmlText %}
+                    {{ privacyPolicy.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ privacyPolicy.plainText }}</p>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::StaticPages.PrivacyPolicy") }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

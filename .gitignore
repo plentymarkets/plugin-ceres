@@ -2,3 +2,4 @@
 *.iml
 node_modules
 home.html
+sftp-config.json

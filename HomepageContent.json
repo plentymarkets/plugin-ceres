@@ -1,0 +1,101 @@
+{
+  "de":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider1.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      },
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider2.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      },
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider3.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      }
+    ],
+    "texts":
+    {
+      "welcome": "Herzlich Willkommen!",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "longText": "",
+      "recommendText": "plentymarkets empfiehlt"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_etsy.png",
+        "pluginText": "Plugin für Etsy-Marktplatzintegration",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/etsy/4689",
+        "pluginTitle": "Etsy"
+      },
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_contact.png",
+        "pluginText": "Anzeige von Kontaktdaten im Webshop",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/contactcard/4695",
+        "pluginTitle": "Contact Card"
+      },
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
+        "pluginText": "Das offizielle PayPal-Plugin für plentymarkets",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/paypal/4690",
+        "pluginTitle": "PayPal"
+      }
+      
+    ]
+  },
+  "en":
+  {
+    "pictures":
+    [
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider1.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      },
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider2.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      },
+      {
+        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider3.jpg?raw=true",
+        "text": "",
+        "pictureLink": ""
+      }
+    ],
+    "texts":
+    {
+      "welcome": "Welcome!",
+      "shortDescription": "... to our new responsive template <b>Ceres</b>.",
+      "longText": "",
+      "recommendText": "plentymarkets recommends"
+    },
+    "recommended":
+    [
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_etsy.png",
+        "pluginText": "Plugin for integrating the market Etsy",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/etsy/4689",
+        "pluginTitle": "Etsy"
+      },
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_contact.png",
+        "pluginText": "Displaying contact data in the online store",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/contactcard/4695",
+        "pluginTitle": "Contact Card"
+      },
+      {
+        "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
+        "pluginText": "The official PayPal plugin for plentymarkets",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/paypal/4690",
+        "pluginTitle": "PayPal"
+      }
+    ]
+  }
+}

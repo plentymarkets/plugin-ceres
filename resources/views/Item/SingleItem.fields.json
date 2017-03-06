@@ -1,0 +1,37 @@
+[
+  "itemId",
+  "id",
+
+  "item.id",
+  "item.manufacturer.name",
+  "item.documents.data",
+  "item.ageRestriction",
+  "item.customsTariffNumber",
+  "item.producingCountryId",
+
+  "variation.id",
+  "variation.name",
+  "variation.number",
+  "variation.externalId",
+  "variation.model",
+  "variation.weightG",
+  "variation.weightNetG",
+  "variation.lengthMM",
+  "variation.widthMM",
+  "variation.heightMM",
+  "variation.availability.id",
+
+  "texts.name*",
+  "texts.shortDescription",
+  "texts.description",
+  "texts.technicalData",
+
+  "salesPrices.price",
+  "salesPrices.type",
+
+  "unit.content",
+  "unit.names.name",
+
+  "images.all.url",
+  "images.all.urlPreview"
+]

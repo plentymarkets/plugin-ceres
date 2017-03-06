@@ -5,24 +5,38 @@
 
 .page-content{
     @extend .p-t-1;
-    background-color: white; 
+    background-color: $gray-lightest;
+    &.basket,
+    &.checkout,
+    &.myaccount {
+        background-color:$white;
+        color: $gray-darker;
+        margin-top: 30px;
+        padding-bottom: 30px;
+    }
 }
-
-
 .container-max{
     @extend .container-fluid;
     max-width: 1200px;
     z-index: auto;
+
+    &.login {
+        margin-top: 2rem;
+    }
 }
 
-
-
-
-// .shariff .orientation-horizontal li{
-//     min-width: 0;
-//     max-width: none;
-// }
-
+.page-not-found {
+    i.fa-search {
+        font-size: 10em;
+    }
+    .default-not-found {
+        background-color: rgb(247, 247, 249);
+    }
+    .not-found-text {
+        font-size: 115px;
+        text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
+    }
+}
 
 .rating{
     line-height: 1;
@@ -40,15 +54,61 @@
     }
 }
 
-
-
-
 dt {
     font-weight: 400;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
 }
 
 .border-left {
     border-left: 1px solid $gray-dark;
 }
 
+
+.carousel-control-next, .carousel-control-prev {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    color: #fff;
+    text-align: center;
+    opacity: .5;
+}
+.carousel-control-prev {
+    left: 0;
+}
+.carousel-control-next {
+    right: 0;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: transparent no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.pagination > li {
+    cursor: pointer;
+}
+
+@include media-breakpoint-up(xl){
+    .page-content{
+        padding-left: 0;
+        padding-right: 0;
+        &.basket,
+        &.checkout,
+        &.myaccount {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
 

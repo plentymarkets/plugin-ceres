@@ -1,8 +1,15 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <script type="x/template" id="vue-place-order">
     <div>
-        <button class="btn btn-primary btn-block" @click="preparePayment()">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("PluginCeres::Template.orderBuyNow") }}
-        </button>
+        {% set buttonReplacement = LayoutContainer.show("Ceres::Checkout.PlaceOrder") %}
+        {% if buttonReplacement|trim is not empty %}
+            {{ buttonReplacement }}
+        {% else %}
+            <button class="btn btn-primary btn-block" @click="preparePayment()" :disabled="waiting || waitingForInput">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.orderBuyNow") }}
+            </button>
+        {% endif %}
 
         <div class="modal fade" v-el:modal data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg" role="document">

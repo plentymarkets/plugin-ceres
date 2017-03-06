@@ -5,11 +5,10 @@ var ValidationService   = require("services/ValidationService");
 
 Vue.component("bank-data-select", {
 
-    template: "#vue-bank-data-select",
-
     props: [
         "userBankData",
-        "contactId"
+        "contactId",
+        "template"
     ],
 
     data: function()
@@ -23,6 +22,11 @@ Vue.component("bank-data-select", {
             doUpdate: null,
             headline : ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     /**
@@ -134,7 +138,7 @@ Vue.component("bank-data-select", {
 
             this.updateBankData.lastUpdateBy = "customer";
 
-            ApiService.put("/rest/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
+            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
                 .done(function(response)
                 {
                     _self.userBankData.splice(_self.updateBankIndex, 1, response);
@@ -161,7 +165,7 @@ Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
             this.updateBankData.contactId = this.contactId;
 
-            ApiService.post("/rest/customer/bank_data", this.updateBankData)
+            ApiService.post("/rest/io/customer/bank_data", this.updateBankData)
                 .done(function(response)
                 {
                     _self.userBankData.push(response);
@@ -185,7 +189,7 @@ Vue.component("bank-data-select", {
         {
             var _self = this;
 
-            ApiService.delete("/rest/customer/bank_data/" + this.updateBankData.id)
+            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id)
                 .done(function(response)
                 {
                     _self.checkBankDataSelection(false);

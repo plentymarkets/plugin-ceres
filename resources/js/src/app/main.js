@@ -1,13 +1,9 @@
-vueApp = new Vue({
-    el: "body"
-});
-
 // Frontend end scripts
-
-(function($, window, document)
+// eslint-disable-next-line
+var init = (function($, window, document)
 {
 
-    function CallistoMain()
+    function CeresMain()
     {
 
         $(window).scroll(function()
@@ -25,12 +21,39 @@ vueApp = new Vue({
             }
         });
 
+        // Replace all SVG images with inline SVG, class: svg
+        $("img[src$=\".svg\"]").each(function()
+        {
+            var $img = jQuery(this);
+            var imgURL = $img.attr("src");
+            var attributes = $img.prop("attributes");
+
+            $.get(imgURL, function(data)
+            {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find("svg");
+
+                // Remove any invalid XML tags
+                $svg = $svg.removeAttr("xmlns:a");
+
+                // Loop through IMG attributes and apply on SVG
+                $.each(attributes, function()
+                {
+                    $svg.attr(this.name, this.value);
+                });
+
+                // Replace IMG with SVG
+                $img.replaceWith($svg);
+            }, "xml");
+        });
+
         // Sticky sidebar single item
         if (window.matchMedia("(min-width: 768px)").matches)
         {
             var $singleRightside = $(".single-rightside");
+            var $headHeight = $(".top-bar").height();
 
-            $singleRightside.stick_in_parent({});
+            $singleRightside.stick_in_parent({offset_top: $headHeight + 10});
 
             $singleRightside.on("sticky_kit:bottom", function()
             {
@@ -41,16 +64,22 @@ vueApp = new Vue({
                     $(this).parent().css("position", "relative");
                 });
         }
-        var $toggleListView      = $(".toggle-list-view");
-        var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-        var $mainNavbarCollapse  = $("#mainNavbarCollapse");
 
-        $toggleBasketPreview.on("click", function(evt)
+        var $toggleListView = $(".toggle-list-view");
+        var $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+        setTimeout(function()
         {
-            evt.preventDefault();
-            evt.stopPropagation();
-            $("body").toggleClass("open-right");
-        });
+            var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
+
+            $toggleBasketPreview.on("click", function(evt)
+            {
+                evt.preventDefault();
+                evt.stopPropagation();
+                $("body").toggleClass("open-right");
+            });
+        }, 1);
+
         $(document).on("click", "body.open-right", function(evt)
         {
             if ($("body").hasClass("open-right"))
@@ -61,6 +90,16 @@ vueApp = new Vue({
                     $("body").toggleClass("open-right");
                 }
             }
+        });
+
+        $("#searchBox").on("show.bs.collapse", function()
+        {
+            $("#countrySettings").collapse("hide");
+        });
+
+        $("#countrySettings").on("show.bs.collapse", function()
+        {
+            $("#searchBox").collapse("hide");
         });
 
         $toggleListView.on("click", function(evt)
@@ -92,9 +131,12 @@ vueApp = new Vue({
             $("#mainNavbarCollapse").collapse("hide");
         }
 
-        // lazyload for articles
-
+        // initialize lazyload for articles
         $("img.lazy").show().lazyload({
+            effect: "fadeIn"
+        });
+        // test, to delete
+        $("img.testtest").show().lazyload({
             effect : "fadeIn"
         });
 
@@ -112,6 +154,6 @@ vueApp = new Vue({
         });
     }
 
-    window.CallistoMain = new CallistoMain();
+    window.CeresMain = new CeresMain();
 
 })(jQuery, window, document);

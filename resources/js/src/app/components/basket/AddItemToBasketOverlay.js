@@ -3,18 +3,24 @@ var ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    template: "#vue-add-item-to-basket-overlay",
-
     props: [
-        "showOverlay"
+        "showOverlay",
+        "template"
     ],
 
     data: function()
     {
         return {
             basketItem: {currentBasketItem: { }},
-            timeToClose: 5
+            timeToClose: 0,
+            price: 0,
+            currency: ""
         };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
     },
 
     ready: function()
@@ -46,7 +52,18 @@ Vue.component("add-item-to-basket-overlay", {
                 this.startCounter();
             }
 
+            this.setPriceFromData();
+
             return render;
+        },
+
+        setPriceFromData: function()
+        {
+            if (this.basketItem.currentBasketItem.calculatedPrices)
+            {
+                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
+                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
+            }
         },
 
         /**
@@ -69,7 +86,7 @@ Vue.component("add-item-to-basket-overlay", {
 
         startCounter: function()
         {
-            this.timeToClose = 5;
+            this.timeToClose = 10;
 
             var timerVar = setInterval(countTimer, 1000);
 
@@ -86,6 +103,17 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(timerVar);
                 }
             }
+        }
+    },
+
+    computed:
+    {
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.basketItem.currentBasketItem.texts[0];
         }
     }
 });

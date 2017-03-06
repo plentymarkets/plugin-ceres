@@ -1,8 +1,15 @@
 Vue.component("order-details", {
 
-    template: "#vue-order-details",
+    props: [
+        "orderData",
+        "totalsConfig",
+        "template"
+    ],
 
-    props: ["orderData", "totalsConfig"],
+    created: function()
+    {
+        this.$options.template = this.template;
+    },
 
     computed: {
         orderItems: function()
@@ -58,20 +65,55 @@ Vue.component("order-details", {
                 var itemSumNet = 0;
                 var shippingCosts = 0;
                 var shippingCostsNet = 0;
+                var couponValue = 0;
 
-                this.orderData.order.orderItems.forEach(function(orderItem)
+                for (var i in this.orderData.order.orderItems)
                 {
-                    if (orderItem.itemVariationId > 0)
+                    var orderItem = this.orderData.order.orderItems[i];
+
+                    switch (orderItem.typeId)
                     {
+                    // Item
+                    case 1:
                         itemSum += orderItem.amounts[0].priceGross;
                         itemSumNet += orderItem.amounts[0].priceNet;
-                    }
-                    else
-                    {
+                        break;
+                    // Bundle
+                    case 2:
+
+                        break;
+                    // Bundle-component
+                    case 3:
+
+                        break;
+                    // Aktionsgutschein
+                    case 4:
+                        couponValue += orderItem.amounts[0].priceGross;
+                        break;
+                    // Verkaufsgutschein
+                    case 5:
+                        couponValue += orderItem.amounts[0].priceGross;
+                        break;
+                    // Shipping-costs
+                    case 6:
                         shippingCosts += orderItem.amounts[0].priceGross;
                         shippingCostsNet += orderItem.amounts[0].priceNet;
+                        break;
+                    // Peyment-fee
+                    case 7:
+
+                        break;
+                    // Geschenke
+                    case 8:
+
+                        break;
+                    // Pfand
+                    case 10:
+
+                        break;
                     }
-                });
+                }
+
                 return {
                     currency: this.orderData.order.amounts[0].currency,
                     itemSum: itemSum,
@@ -79,6 +121,7 @@ Vue.component("order-details", {
                     shippingAmount: shippingCosts,
                     shippingAmountNet: shippingCostsNet,
                     vat: this.orderData.order.amounts[0].vatTotal,
+                    couponValue: couponValue,
                     totalAmount: this.orderData.order.amounts[0].grossTotal,
                     totalAmountNet: this.orderData.order.amounts[0].netTotal
                 };
@@ -91,6 +134,7 @@ Vue.component("order-details", {
                 shippingAmount: 0,
                 shippingAmountNet: 0,
                 vat: 0,
+                couponValue: 0,
                 totalAmount: 0,
                 totalAmountNet: 0
             };

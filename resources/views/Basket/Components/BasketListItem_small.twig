@@ -1,10 +1,10 @@
-{{ component( "PluginCeres::Item.Components.QuantityInput" ) }}
-{% set configItemName = config("PluginCeres.item.name") %}
+{{ component( "Ceres::Item.Components.QuantityInput" ) }}
+{% set configItemName = config("Ceres.item.name") %}
 
-<article class="cmp cmp-basket-preview-item" :class="{ 'wait': waiting }">
+<article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
-        <quantity-input @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
     </div>
     <!-- ./ITEM QUANTITY -->
 
@@ -12,7 +12,7 @@
     <div class="basket-item-image">
         <div class="square-container">
             <div class="square-inner center-xy main-image">
-                <img class="img-fluid" :src="basketItem.variation | itemImage" alt="${ basketItem.variation.itemDescription.name1 }">
+                <img class="img-fluid" :src="basketItem.variation.data.images.all[0].urlPreview" alt="${ basketItem.variation.data.texts[0].name1 }">
             </div>
         </div>
     </div>
@@ -20,24 +20,24 @@
 
     <!-- ITEM DETAILS -->
     <div class="basket-item-infos small">
-        <a class="clearfix" :href="basketItem.variation | itemURL">
+        <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItem.variation.itemDescription | itemName {{ configItemName }} } ${ basketItem.variation.variationBase.variationName }
+                ${ basketItem.variation.data.texts[0] | itemName {{ configItemName }} } {# ${ basketItem.variation.variationBase.variationName } #}
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.variationRetailPrice.basePrice | currency } / {{ trans("PluginCeres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.variationRetailPrice.price | currency }
+            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
 
-        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
               <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("PluginCeres::Template.generalDelete") }}
+                   {{ trans("Ceres::Template.generalDelete") }}
               </span>
             <span class="message" v-else>
-                   {{ trans("PluginCeres::Template.generalDeleteNow") }}
+                   {{ trans("Ceres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
                   <i class="fa fa-times"></i>

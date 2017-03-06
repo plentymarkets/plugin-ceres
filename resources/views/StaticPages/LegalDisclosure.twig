@@ -1,0 +1,29 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PageBody %}
+
+    {% set legalDisclosure = services.legalInformation.getLegalDisclosure() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                {% autoescape false %}
+                    <h1>{{ trans("Ceres::Template.generalLegalDisclosure") }}</h1>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if legalDisclosure.htmlText %}
+                    {{ legalDisclosure.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ legalDisclosure.plainText }}</p>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::StaticPages.LegalDisclosure") }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

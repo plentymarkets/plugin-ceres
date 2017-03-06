@@ -1,69 +1,78 @@
-{% import "PluginCeres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 <script type="x/template" id="vue-basket-totals">
     <!-- BASKET TOTALS -->
     <div class="cmp cmp-totals">
-        <h3>{{ trans("PluginCeres::Template.basketSum") }}</h3>
+        <h3>{{ trans("Ceres::Template.basketSum") }}</h3>
         <div>
             <dl>
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeItemSum") }}
-                <dt v-if="showProperty( 'basket.value_of_items_gross' )">
-                    <strong>{{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
-                </dt><!--
-                --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
-                    <strong>${ basket.itemSum | currency  }</strong>
-                </dd>
-
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
                 <dt v-if="showProperty( 'basket.value_of_items_net' )">
-                    {{ trans("PluginCeres::Template.basketValue") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                    {{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.value_of_items_net' )">
                     ${ basket.itemSumNet | currency }
                 </dd>
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterItemSum") }}
 
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeShippingCosts") }}
-                <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    <strong>{{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
+                <dt v-if="showProperty( 'basket.value_of_items_gross' )">
+                    <strong>{{ trans("Ceres::Template.basketValue") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                 </dt><!--
-                --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    <strong>${ basket.shippingAmount | currency }</strong>
+                --><dd v-if="showProperty( 'basket.value_of_items_gross' )">
+                    <strong>${ basket.itemSum | currency  }</strong>
                 </dd>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
 
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
-                    {{ trans("PluginCeres::Template.itemShippingCosts") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                    {{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                     ${ basket.shippingAmountNet | currency }
                 </dd>
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterShippingCosts") }}
 
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeVat") }}
-                <dt v-if="showProperty( 'basket.vat' )">
-                    {{ trans("PluginCeres::Template.basketVAT") }}
+                <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
+                    <strong>{{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                 </dt><!--
-                --><dd v-if="showProperty( 'basket.vat' )">
-                    ${ basket.itemSum - basket.itemSumNet | currency }
+                --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
+                    <strong>${ basket.shippingAmount | currency }</strong>
                 </dd>
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterVat") }}
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
 
                 <hr>
 
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.BeforeTotalSum") }}
-                <dt v-if="showProperty( 'basket.order_total_gross' )">
-                    <strong>{{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketGross") }})</strong>
-                </dt><!--
-                --><dd v-if="showProperty( 'basket.order_total_gross' )">
-                    <strong>${ basket.basketAmount | currency }</strong>
-                </dd>
-
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
                 <dt v-if="showProperty( 'basket.order_total_net' )">
-                    {{ trans("PluginCeres::Template.basketTotalSum") }} ({{ trans("PluginCeres::Template.basketNet") }})
+                    {{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.order_total_net' )">
                     ${ basket.basketAmountNet | currency }
                 </dd>
-                {{ LayoutContainer.show("PluginCeres::BasketTotals.AfterTotalSum") }}
+
+                <dt v-show="basket.couponCode">
+                    <strong>{{ trans("Ceres::Template.basketCoupon") }}</strong>
+                </dt><!--
+                --><dd v-show="basket.couponCode">
+                    <strong>${ basket.couponDiscount | currency }</strong>
+                </dd>
+
+                {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                <dt v-if="showProperty( 'basket.vat' )">
+                    {{ trans("Ceres::Template.basketVAT") }}
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.vat' )">
+                    ${ basket.itemSum - basket.itemSumNet | currency }
+                </dd>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+
+                <hr v-if="showProperty( 'basket.vat' )">
+
+                <dt v-if="showProperty( 'basket.order_total_gross' )">
+                    <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
+                </dt><!--
+                --><dd v-if="showProperty( 'basket.order_total_gross' )">
+                    <strong>${ basket.basketAmount | currency }</strong>
+                </dd>
+                {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
             </dl>
         </div>
     </div>
