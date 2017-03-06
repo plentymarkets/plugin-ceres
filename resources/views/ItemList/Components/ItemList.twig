@@ -8,7 +8,7 @@
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
-<resource name="isLoading" :data="{}"></resource>
+<resource name="isLoading" :data="false"></resource>
 
 <script type="x/template" id="vue-item-list">
     <div class="loading-animation-frame col-xs-12 col-lg-12" v-if="isLoading">
