@@ -1,3 +1,12 @@
 [
-
+  "images.all.urlMiddle",
+  "images.variation.urlMiddle",
+  "item.storeSpecial",
+  "salesPrices.price",
+  "salesPrices.type",
+  "texts.name*",
+  "item.id",
+  "texts*",
+  "variation.id",
+  "variation.itemId"
 ]
