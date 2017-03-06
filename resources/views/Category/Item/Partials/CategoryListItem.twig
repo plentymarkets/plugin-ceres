@@ -15,9 +15,17 @@
         <div class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
-                        <img class="img-fluid lazy" data-original="{{ image.urlMiddle }}">
-                    </a>
+
+                    <category-image-carousel template="#vue-category-image-carousel"
+                                             :image-urls="{{ item.data.images | json_encode() }} | itemImages 'urlMiddle'"
+                                             :item-url="{{ item.data | json_encode() }} | itemURL">
+                    </category-image-carousel>
+
+                    <noscript>
+                        <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                            <img class="img-fluid" src="{{ image.urlMiddle }}">
+                        </a>
+                    </noscript>
                 </div>
             </div>
         </div>

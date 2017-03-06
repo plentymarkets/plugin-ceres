@@ -1,0 +1,14 @@
+<script type="x/template" id="vue-item-image-carousel">
+    <div class="owl-carousel owl-theme owl-single-item" v-el:single>
+        <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor">
+            <a :href="image" data-lightbox="single-big-image-gallery">
+                <img class="owl-lazy" :data-src="image">
+            </a>
+        </div>
+    </div>
+    <div class="owl-thumbs">
+        <img @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }"
+             :src="imagePreview"
+             v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview'">
+    </div>
+</script>
