@@ -2562,48 +2562,6 @@ Vue.component("item-list", {
         ResourceService.bind("isLoading", this);
 
         ItemListService.setSearchParams(document.location.search);
-
-        this.watchFacetOpeningState();
-    },
-
-    methods:
-    {
-        watchFacetOpeningState: function()
-        {
-            if (document.getElementById("filterCollapse") !== null)
-            {
-                var observer = new MutationObserver(function(mutation)
-                {
-                    if (!document.getElementById("filterCollapse").classList.contains("collapsing"))
-                    {
-                        this.filterListState = document.getElementById("filterCollapse").classList.contains("in");
-                    }
-                }.bind(this));
-
-                var targetToWatch = document.getElementById("filterCollapse");
-
-                observer.observe(targetToWatch, {attributes: true, subtree: true});
-            }
-        }
-    },
-
-    watch:
-    {
-        isLoading: function()
-        {
-            this.watchFacetOpeningState();
-        },
-
-        itemList: function()
-        {
-            if (!$.isEmptyObject(this.itemList) && document.getElementById("filterCollapse") !== null)
-            {
-                if (this.filterListState)
-                {
-                    document.getElementById("filterCollapse").classList.add("in");
-                }
-            }
-        }
     }
 });
 
@@ -2980,6 +2938,13 @@ Vue.component("item-filter-list", {
         "categoryId"
     ],
 
+    data: function()
+    {
+        return {
+            isActive: false
+        };
+    },
+
     created: function()
     {
         ResourceService.bind("facets", this);
@@ -2991,6 +2956,17 @@ Vue.component("item-filter-list", {
         if (urlParams.facets)
         {
             ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+        }
+    },
+
+    methods:
+    {
+        toggleOpeningState: function()
+        {
+            window.setTimeout(function()
+            {
+                this.isActive = !this.isActive;
+            }.bind(this), 300);
         }
     }
 });
