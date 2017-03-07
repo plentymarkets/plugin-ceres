@@ -9,6 +9,13 @@ Vue.component("item-filter-list", {
         "categoryId"
     ],
 
+    data: function()
+    {
+        return {
+            isActive: false
+        };
+    },
+
     created: function()
     {
         ResourceService.bind("facets", this);
@@ -20,6 +27,17 @@ Vue.component("item-filter-list", {
         if (urlParams.facets)
         {
             ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+        }
+    },
+
+    methods:
+    {
+        toggleOpeningState: function()
+        {
+            window.setTimeout(function()
+            {
+                this.isActive = !this.isActive;
+            }.bind(this), 300);
         }
     }
 });

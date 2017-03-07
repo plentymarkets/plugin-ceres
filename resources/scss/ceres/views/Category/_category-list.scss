@@ -109,6 +109,7 @@
     display: inline-block;
     float: right;
     padding: .5em;
+    cursor: pointer;
     &[aria-expanded="true"]{
       i::before {
         content: "\f00d";
