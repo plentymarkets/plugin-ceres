@@ -9,7 +9,7 @@
                 <div class="text-xs-right">
 
                     <a class="filter-toggle" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
-                        <i class="fa fa-sliders" aria-hidden="true"></i> Filter
+                        <i class="fa fa-sliders" aria-hidden="true"></i> {{ trans("Ceres::Template.generalFilter") }}
                     </a>
 
                     <item-filter-tag-list :category-id="categoryId" :facets="facets"></item-filter-tag-list>
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-xs-12 text-xs-right">
                         <button type="button" class="btn btn-primary" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
-                            <i class="fa fa-check" aria-hidden="true"></i> Anwenden
+                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalApply") }}
                         </button>
                     </div>
                 </div>
