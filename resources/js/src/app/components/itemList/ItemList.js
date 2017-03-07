@@ -54,10 +54,13 @@ Vue.component("item-list", {
 
     watch:
     {
-        itemList: function()
+        isLoading: function()
         {
             this.watchFacetOpeningState();
+        },
 
+        itemList: function()
+        {
             if (!$.isEmptyObject(this.itemList) && document.getElementById("filterCollapse") !== null)
             {
                 if (this.filterListState)
