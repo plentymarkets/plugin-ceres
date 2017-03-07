@@ -6514,6 +6514,9 @@ var init = (function($, window, document)
             }
         });
 
+        // init bootstrap tooltips
+        $("[data-toggle=\"tooltip\"]").tooltip();
+
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
         {
