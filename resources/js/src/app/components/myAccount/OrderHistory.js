@@ -77,6 +77,16 @@ var ApiService = require("services/ApiService");
                     {
                         self.setOrders(response);
                     });
+            },
+
+            getCurrentOrderDetailsTemplate: function(currentOrder, totalsConfig)
+            {
+                ApiService
+                    .get("/rest/io/template", "Ceres::Checkout.Components.OrderDetails")
+                    .done(function(response)
+                    {
+                        console.log(response);
+                    });
             }
         }
     });
