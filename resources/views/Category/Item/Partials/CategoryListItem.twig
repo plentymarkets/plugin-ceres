@@ -18,7 +18,9 @@
 
                     <category-image-carousel template="#vue-category-image-carousel"
                                              :image-urls="{{ item.data.images | json_encode() }} | itemImages 'urlMiddle'"
-                                             :item-url="{{ item.data | json_encode() }} | itemURL">
+                                             :item-url="{{ item.data | json_encode() }} | itemURL"
+                                             :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
+                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
                     </category-image-carousel>
 
                     <noscript>

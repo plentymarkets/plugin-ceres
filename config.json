@@ -177,6 +177,20 @@
         "default"                       : "1"
     },
     {
+        "tab"       : "Item view",
+        "key"       : "item.category_show_dots",
+        "label"     : "Show category carousel dots",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"       : "Item view",
+        "key"       : "item.category_show_nav",
+        "label"     : "Show category carousel navigation",
+        "type"      : "checkbox",
+        "default"   : "false"
+    },
+    {
         "tab"                           : "Shopping cart",
         "key"                           : "basket.item_data",
         "label"                         : "Show item information",
