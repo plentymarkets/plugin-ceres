@@ -1,4 +1,5 @@
 <script type="x/template" id="vue-item-filter-list">
+
     <div v-if="facets && facets.length > 0">
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilter") }}
         {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
@@ -7,7 +8,7 @@
             <div class="col-xs-12">
                 <div class="text-xs-right">
 
-                    <a class="filter-toggle" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                    <a class="filter-toggle" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
                         <i class="fa fa-sliders" aria-hidden="true"></i> Filter
                     </a>
 
@@ -17,14 +18,14 @@
         </div>
 
 
-        <div class="collapse" id="filterCollapse">
+        <div id="filterCollapse" class="collapse" :class="{in: isActive}">
             <div class="container-max page-content">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :category-id="categoryId"></item-filter>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 text-xs-right">
-                        <button type="button" class="btn btn-primary" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" href="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse" @click="toggleOpeningState()">
                             <i class="fa fa-check" aria-hidden="true"></i> Anwenden
                         </button>
                     </div>
