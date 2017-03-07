@@ -1,31 +1,34 @@
 {% extends getPartial('page-design') %}
 
+{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'searchString': request.get("searchString"), 'page': 1, 'itemsPerPage': 20 }) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
     {{ component( "Ceres::ItemList.Components.ItemListSorting" ) }}
     {{ component( "Ceres::ItemList.Components.ItemsPerPage" ) }}
     {{ component( "Ceres::ItemList.Components.Pagination" ) }}
+    {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
 
     <resource name="itemList" :data="{}"></resource>
+    <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
+    <resource name="facetParams" :data="[]"></resource>
+
 
     <div class="categoriegrid page-content container-max">
-        <div class="m-b-3 col-xs-12">
+
+        <div class="m-b-3 col-xs-12 list-controls">
 
             <div class="col-xs-12 col-lg-5 offset-lg-7">
                 <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
                 <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
                 <pagination template="#vue-pagination"></pagination>
             </div>
-
+            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
         </div>
 
-        <div class="col-xs-12">
-            <item-list template="#vue-item-list"></item-list>
-        </div>
-
-        <div class="list-controls m-b-3 row">
+        <div class="row">
             <div class="col-xs-12">
+                <item-list template="#vue-item-list" :item-list="{{ paginatedResult | json_encode }}"></item-list>
             </div>
         </div>
     </div>

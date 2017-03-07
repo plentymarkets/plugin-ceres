@@ -1,16 +1,15 @@
 var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
     props: [
-        "template"
+        "template",
+        "itemList"
     ],
 
     data: function()
     {
         return {
-            itemList: {},
             isLoading: false,
             filterListState: false
         };
@@ -19,15 +18,13 @@ Vue.component("item-list", {
     created: function()
     {
         this.$options.template = this.template;
+        ResourceService.getResource("itemList").set(this.itemList);
     },
 
     ready: function()
     {
         ResourceService.bind("itemList", this);
         ResourceService.bind("isLoading", this);
-
-        ItemListService.setSearchParams(document.location.search);
-
     },
 
     methods:

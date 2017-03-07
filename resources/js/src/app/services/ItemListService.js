@@ -38,6 +38,7 @@ module.exports = (function($)
                 {
                     _setIsLoading(false);
                     ResourceService.getResource("itemList").set(response);
+                    ResourceService.getResource("facets").set(response.facets);
                 })
                 .fail(function()
                 {
