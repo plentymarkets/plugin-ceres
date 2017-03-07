@@ -62,7 +62,7 @@
                 </div>
                 {% endif %}
 
-                {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item) }}
+                {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.rrp.price" :filters="['currency']">
@@ -91,7 +91,7 @@
                         </span>
                     </div>
                 {% endfor %}
-                {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item) }}
+                {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
@@ -101,11 +101,11 @@
 
                 <div class="row m-y-1">
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item) }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
                     <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item) }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
 
                 <div class="row">
@@ -119,7 +119,7 @@
                 </div>
             <!-- ./ITEM DETAIL -->
 
-                {{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterAddToBasket", item) }}
+                {{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterAddToBasket", item.documents[0].data) }}
 
                 <hr>
 
