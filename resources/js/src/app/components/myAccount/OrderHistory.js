@@ -1,4 +1,5 @@
 var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
 
 (function($)
 {
@@ -19,7 +20,8 @@ var ApiService = require("services/ApiService");
                 pageMax: 1,
                 countStart: 0,
                 countEnd: 0,
-                currentOrder: null
+                currentOrder: null,
+                currentOrderTemplate: ""
             };
         },
 
@@ -56,10 +58,18 @@ var ApiService = require("services/ApiService");
                 this.currentOrder = order;
                 var self = this;
 
-                Vue.nextTick(function()
-                {
-                    $(self.$els.orderDetails).modal("show");
-                });
+                ApiService
+                    .get("/rest/io/template?template=Ceres::Checkout.Components.OrderDetails&params[orderData]=" + this.currentOrder)
+                    .done(function(response)
+                    {
+                        this.currentOrderTemplate = response;
+
+                        Vue.nextTick(function()
+                        {
+                            $(self.$els.orderDetails).modal("show");
+                        });
+
+                    }.bind(this));
             },
 
             showPage: function(page)
@@ -76,16 +86,6 @@ var ApiService = require("services/ApiService");
                     .done(function(response)
                     {
                         self.setOrders(response);
-                    });
-            },
-
-            getCurrentOrderDetailsTemplate: function(currentOrder, totalsConfig)
-            {
-                ApiService
-                    .get("/rest/io/template", "Ceres::Checkout.Components.OrderDetails")
-                    .done(function(response)
-                    {
-                        console.log(response);
                     });
             }
         }

@@ -114,12 +114,13 @@
                                 <h3 class="modal-title">{{ trans("Ceres::Template.orderDetails") }}</h3>
                             </div>
                             <div class="modal-body">
-                                ${ getCurrentOrderDetailsTemplate(currentOrder, config("Ceres.basket.data")|split(', '))) }
-                                {#<order-details template="#vue-order-details" :order-data="currentOrder" :totals-config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></order-details>#}
+                                ${ currentOrderTemplate }
+                                {#<order-details template="#vue-order-details" :load-external-template="true" :order-data="currentOrder" :totals-config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></order-details>#}
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- ./ORDER DETAILS MODAL -->
 
                 {#<!-- ORDER FILTER -->#}
