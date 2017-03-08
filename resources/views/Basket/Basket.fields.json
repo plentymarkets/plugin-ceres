@@ -7,5 +7,6 @@
   "variation.availability.names.name",
   "variation.itemId",
   "variation.id",
-  "images.all.urlPreview"
+  "images.all.urlPreview",
+  "images.variation.urlPreview"
 ]

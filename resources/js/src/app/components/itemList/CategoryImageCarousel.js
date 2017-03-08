@@ -20,7 +20,7 @@ Vue.component("category-image-carousel", {
             $(".owl-carousel").owlCarousel({
                 dots     : (this.showDots === "true"),
                 items    : 1,
-                loop     : true,
+                loop     : this.imageUrls.length > 1,
                 lazyLoad : true,
                 margin   : 10,
                 nav      : (this.showNav === "true"),
