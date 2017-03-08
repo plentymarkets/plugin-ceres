@@ -33,6 +33,7 @@ Vue.component("item-search", {
             if (document.location.pathname === "/search")
             {
                 ItemListService.setSearchString(this.itemSearch.searchString);
+                ItemListService.getItemList();
             }
             else
             {

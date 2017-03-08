@@ -36,7 +36,7 @@
         </div>
 
         <div class="list-controls m-b-3">
-            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}" :category-id="{{ category.id }}"></item-filter-list>
+            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
         </div>
 
         <div class="m-b-3">
@@ -54,7 +54,7 @@
                 </ul>
 
                 <div id="vue-rendered-item-list" style="display:none">
-                    <item-list template="#vue-item-list"></item-list>
+                    <item-list template="#vue-item-list" :category-id="{{ category.id }}"></item-list>
                 </div>
 
             </div>

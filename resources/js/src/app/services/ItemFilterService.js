@@ -56,10 +56,11 @@ module.exports = (function($)
     function _sendFacetCall(facets, categoryId)
     {
         var url = categoryId ? "/rest/io/category" : "/rest/io/item/search";
+        var template = categoryId ? "Ceres::Category.Item.CategoryItem" : "Ceres::ItemList.ItemListView";
 
         _setIsLoading(true);
 
-        ApiService.get(url, {template: "Ceres::Category.Item.CategoryItem", categoryId: categoryId, facets: facets.toString()})
+        ApiService.get(url, {template: template, categoryId: categoryId, facets: facets.toString()})
             .done(function(response)
             {
                 _setIsLoading(false);

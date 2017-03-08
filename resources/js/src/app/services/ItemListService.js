@@ -1,5 +1,5 @@
 var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
+// var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
 var UrlService = require("services/UrlService");
 
@@ -11,43 +11,50 @@ module.exports = (function($)
             itemsPerPage: 20,
             orderBy     : "itemName",
             orderByKey  : "ASC",
-            page        : 1
+            page        : 1,
+            facets      : "",
+            categoryId  : null,
+            template    : ""
         };
 
     return {
+        getItemList    : getItemList,
         setSearchString: setSearchString,
         setItemsPerPage: setItemsPerPage,
         setOrderBy     : setOrderBy,
         setPage        : setPage,
-        setSearchParams: setSearchParams
+        setSearchParams: setSearchParams,
+        setFacets      : setFacets,
+        setCategoryId  : setCategoryId
     };
 
-    function _getItemList()
+    function getItemList()
     {
-        if (searchParams.searchString.length >= 3)
+        if (searchParams.categoryId || searchParams.searchString.length >= 3)
         {
             UrlService.setUrlParams(searchParams);
 
-            ResourceService.getResource("itemList").set({});
-            _setIsLoading(true);
+            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
-            return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "Ceres::ItemList.ItemListView"
-            })
+            searchParams.template = searchParams.categoryId ? "Ceres::Category.Item.CategoryItem" : "Ceres::ItemList.ItemListView";
+
+            _setIsLoading(false);
+
+            ApiService.get(url, searchParams)
                 .done(function(response)
                 {
                     _setIsLoading(false);
+
                     ResourceService.getResource("itemList").set(response);
                     ResourceService.getResource("facets").set(response.facets);
                 })
-                .fail(function()
+                .fail(function(response)
                 {
                     _setIsLoading(false);
+
                     NotificationService.error("Error while searching").closeAfter(5000);
                 });
         }
-
-        return null;
     }
 
     function _setIsLoading(isLoading)
@@ -68,35 +75,38 @@ module.exports = (function($)
         {
             searchParams[key] = queryParams[key];
         }
-
-        _getItemList();
     }
 
     function setSearchString(searchString)
     {
         searchParams.searchString = searchString;
         searchParams.page = 1;
-
-        _getItemList();
     }
 
     function setItemsPerPage(itemsPerPage)
     {
         searchParams.itemsPerPage = itemsPerPage;
-        _getItemList();
     }
 
     function setOrderBy(orderBy)
     {
         searchParams.orderBy = orderBy.split("_")[0];
         searchParams.orderByKey = orderBy.split("_")[1];
-        _getItemList();
     }
 
     function setPage(page)
     {
         searchParams.page = page;
-        _getItemList();
+    }
+
+    function setFacets(facets)
+    {
+        searchParams.facets = facets.toString();
+    }
+
+    function setCategoryId(categoryId)
+    {
+        searchParams.categoryId = categoryId;
     }
 
 })(jQuery);

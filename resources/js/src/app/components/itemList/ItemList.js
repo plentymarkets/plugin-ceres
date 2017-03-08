@@ -1,10 +1,12 @@
 var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
     props: [
-        "template",
-        "itemList"
+        "categoryId",
+        "itemList",
+        "template"
     ],
 
     data: function()
@@ -19,6 +21,8 @@ Vue.component("item-list", {
     {
         this.$options.template = this.template;
         ResourceService.getResource("itemList").set(this.itemList);
+
+        ItemListService.setCategoryId(this.categoryId);
     },
 
     ready: function()
