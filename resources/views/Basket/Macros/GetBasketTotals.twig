@@ -16,9 +16,9 @@
 
         {% for item in currentOrderObject.order.orderItems %}
 
-            {% if currentOrderObject.order.orderItems[item].typeId == 1 %}
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 1 %}
 
-                {% set itemSumGross = itemSumGross + currentOrderObject.order.orderItems[item].amounts[0].priceGross %}
+                {% set itemSumGross = itemSumGross + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
 
             {% endif %}
 
@@ -38,9 +38,9 @@
 
         {% for item in currentOrderObject.order.orderItems %}
 
-            {% if currentOrderObject.order.orderItems[item].typeId == 1 %}
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 1 %}
 
-                {% set itemSumNet = itemSumNet + currentOrderObject.order.orderItems[item].amounts[0].priceNet %}
+                {% set itemSumNet = itemSumNet + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceNet %}
 
             {% endif %}
 
@@ -60,9 +60,9 @@
 
         {% for item in currentOrderObject.order.orderItems %}
 
-            {% if currentOrderObject.order.orderItems[item].typeId == 6 %}
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 6 %}
 
-                {% set shippingAmountGross = shippingAmountGross + currentOrderObject.order.orderItems[item].amounts[0].priceGross %}
+                {% set shippingAmountGross = shippingAmountGross + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
 
             {% endif %}
 
@@ -82,9 +82,9 @@
 
         {% for item in currentOrderObject.order.orderItems %}
 
-            {% if currentOrderObject.order.orderItems[item].typeId == 6 %}
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 6 %}
 
-                {% set shippingAmountNet = shippingAmountNet + currentOrderObject.order.orderItems[item].amounts[0].priceNet %}
+                {% set shippingAmountNet = shippingAmountNet + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceNet %}
 
             {% endif %}
 
@@ -114,9 +114,9 @@
 
         {% for item in currentOrderObject.order.orderItems %}
 
-            {% if currentOrderObject.order.orderItems[item].typeId == 4 or currentOrderObject.order.orderItems[item].typeId == 5 %}
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 4 or currentOrderObject.order.orderItems[loop.index0].typeId == 5 %}
 
-                {% set couponValue = couponValue + currentOrderObject.order.orderItems[item].amounts[0].priceGross %}
+                {% set couponValue = couponValue + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
 
             {% endif %}
 
