@@ -100,7 +100,7 @@ Vue.component("item-image-carousel", {
 
         goTo: function(index)
         {
-            var owl = $(".owl-carousel");
+            var $owl = $(this.$els.single);
 
             owl.trigger("to.owl.carousel", [
                 index,
