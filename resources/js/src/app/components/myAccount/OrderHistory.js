@@ -1,5 +1,4 @@
 var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
 
 (function($)
 {
@@ -59,7 +58,7 @@ var ResourceService = require("services/ResourceService");
                 var self = this;
 
                 ApiService
-                    .get("/rest/io/template?template=Ceres::Checkout.Components.OrderDetails&params[orderData]=" + this.currentOrder)
+                    .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + this.currentOrder)
                     .done(function(response)
                     {
                         this.currentOrderTemplate = response;

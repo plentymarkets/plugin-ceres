@@ -13,8 +13,8 @@
                 <p>{{ trans("Ceres::Template.orderWillBeProcessed") }}</p>
             </div>
         </div>
-
-        <order-details template="#vue-order-details" :order-data="{{ data | json_encode() }}" :totals-config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></order-details>
+        
+        {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
         <hr>
         <div class="row">
