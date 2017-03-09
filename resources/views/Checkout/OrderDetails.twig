@@ -70,8 +70,8 @@
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
 
                             {% for propertyKey in orderData.order.properties %}
-                                {% if orderData.order.properties[propertyKey].typeId ==  17 and orderData.order.properties[propertyKey].subTypeId == 3 %}
-                                    {% set paymentState = orderData.order.properties[propertyKey].value %}
+                                {% if orderData.order.properties[loop.index0].typeId ==  17 and orderData.order.properties[loop.index0].subTypeId == 3 %}
+                                    {% set paymentState = orderData.order.properties[loop.index0].value %}
                                 {% endif %}
                             {% endfor %}
 
