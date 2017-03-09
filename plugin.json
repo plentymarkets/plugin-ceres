@@ -298,6 +298,11 @@
             "key"           : "CategoryItem.AfterPrices",
             "name"          : "Category item list: After prices container",
             "description"   : "Add content after the prices in the category item view."
+        },
+        {
+            "key"           : "Script.Loader",
+            "name"          : "Script Loader: Register script, events and other JS related items",
+            "description"   : "Register/Load JS."
         }
     ],
     "dataProviders"     : []

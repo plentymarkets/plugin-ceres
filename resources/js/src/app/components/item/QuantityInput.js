@@ -34,7 +34,6 @@ Vue.component("quantity-input", {
 
         this.$watch("value", function(newValue)
         {
-
             if (newValue < this.min)
             {
                 this.value = this.min;
