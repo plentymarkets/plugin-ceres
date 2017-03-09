@@ -51,3 +51,25 @@
     {{ itemSumNet }}
 
 {% endmacro %}
+
+{% macro getShippingAmountGross( currentOrderObject ) %}
+
+    {% set shippingAmountGross = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[item].typeId == 6 %}
+
+                {% set shippingAmountGross = shippingAmountGross + currentOrderObject.order.orderItems[item].amounts[0].priceGross %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ shippingAmountGross }}
+
+{% endmacro %}
