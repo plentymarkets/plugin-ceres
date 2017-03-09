@@ -17,6 +17,16 @@ module.exports = (function($)
             template    : ""
         };
 
+    // var urlParams =
+    //     {
+    //         query: "Sofa",
+    //         categoryId: 1,
+    //         items: 20,
+    //         orderBy: "itemName_ASC",
+    //         page: 1,
+    //         facets: "1,2,3"
+    //     };
+
     return {
         getItemList    : getItemList,
         setSearchString: setSearchString,
@@ -25,14 +35,14 @@ module.exports = (function($)
         setPage        : setPage,
         setSearchParams: setSearchParams,
         setFacets      : setFacets,
-        setCategoryId  : setCategoryId
+        setCategoryId  : setCategoryId,
     };
 
     function getItemList()
     {
         if (searchParams.categoryId || searchParams.searchString.length >= 3)
         {
-            UrlService.setUrlParams(searchParams);
+            _updateUrlParams();
 
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
@@ -107,6 +117,11 @@ module.exports = (function($)
     function setCategoryId(categoryId)
     {
         searchParams.categoryId = categoryId;
+    }
+
+    function _updateUrlParams()
+    {
+
     }
 
 })(jQuery);
