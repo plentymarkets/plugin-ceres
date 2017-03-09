@@ -52,10 +52,10 @@ Vue.component("add-to-basket", {
             this.openAddToBasketOverlay();
         },
 
-        // directToItem: function()
-        // {
-        //     window.location.assign(this.itemUrl);
-        // },
+        directToItem: function()
+        {
+            window.location.assign(this.itemUrl);
+        },
 
         /**
          * open the AddItemToBasketOverlay

@@ -64,7 +64,7 @@
                 {{ item.data.texts[0].name1 }}
             </a>
             <div class="thumb-meta">
-                {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item) }}
+                {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
@@ -82,7 +82,7 @@
                     </a>
                 </div>
 
-                {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item) }}
+                {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
             </div>
         </div>
         <!-- ./ITEM DETAILS  -->
