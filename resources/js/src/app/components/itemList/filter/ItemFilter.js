@@ -11,7 +11,7 @@ Vue.component("item-filter", {
     data: function()
     {
         return {
-            facetParams: [],
+            searchParams: [],
             isLoading: false
         };
     },
@@ -19,7 +19,8 @@ Vue.component("item-filter", {
     created: function()
     {
         this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
+
+        ResourceService.bind("searchParams", this);
     },
 
     ready: function()
@@ -31,7 +32,7 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
-            ItemListService.setFacets(this.facetParams);
+            ItemListService.setFacets(this.searchParams.facetParams);
             ItemListService.getItemList();
         }
     }

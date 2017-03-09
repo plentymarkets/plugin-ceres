@@ -9,6 +9,7 @@
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
 <resource name="isLoading" :data="false"></resource>
+<resource name="searchParams" :data="{}"></resource>
 
 <script type="x/template" id="vue-item-list">
     <div class="loading-animation-frame col-xs-12 col-lg-12" v-if="isLoading">
