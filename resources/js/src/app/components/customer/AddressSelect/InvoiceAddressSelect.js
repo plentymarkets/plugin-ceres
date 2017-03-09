@@ -43,7 +43,12 @@ Vue.component("invoice-address-select", {
         {
             this.checkout.billingAddressId = selectedAddress.id;
 
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {detail: this.checkout.billingAddressId}));
+                }.bind(this));
 
             if (this.hasToValidate)
             {

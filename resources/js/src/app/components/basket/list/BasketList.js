@@ -26,5 +26,13 @@ Vue.component("basket-list", {
     {
         ResourceService.bind("basketItems", this);
         this.size = this.size || "large";
+
+        if (this.size === "small")
+        {
+            ResourceService.watch("basket", function(newValue)
+            {
+                document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+            });
+        }
     }
 });
