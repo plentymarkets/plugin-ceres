@@ -127,3 +127,23 @@
     {{ couponValue }}
 
 {% endmacro %}
+
+{% macro getTotalAmountGross( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].grossTotal }}
+
+    {% endif %}
+
+{% endmacro %}
+
+{% macro getTotalAmountNet( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].netTotal }}
+
+    {% endif %}
+
+{% endmacro %}
