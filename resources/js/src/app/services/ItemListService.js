@@ -5,7 +5,6 @@ var UrlService = require("services/UrlService");
 
 module.exports = (function($)
 {
-    // create resource
     var searchParams =
         {
             searchString: "",
