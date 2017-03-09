@@ -48,7 +48,7 @@ module.exports = (function($)
 
             searchParams.template = searchParams.categoryId ? "Ceres::Category.Item.CategoryItem" : "Ceres::ItemList.ItemListView";
 
-            _setIsLoading(false);
+            _setIsLoading(true);
 
             ApiService.get(url, searchParams)
                 .done(function(response)

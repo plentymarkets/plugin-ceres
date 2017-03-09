@@ -31,6 +31,7 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
+            ResourceService.getResource("facetParams").set(this.facetParams);
             ItemListService.setFacets(this.facetParams);
             ItemListService.getItemList();
         }

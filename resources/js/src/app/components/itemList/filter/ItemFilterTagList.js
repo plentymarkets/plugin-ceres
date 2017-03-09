@@ -27,6 +27,7 @@ Vue.component("item-filter-tag-list", {
         {
             this.facetParams.splice(this.facetParams.indexOf(tagId.toString()), 1);
 
+            ResourceService.getResource("facetParams").set(this.facetParams);
             ItemListService.setFacets(this.facetParams);
             ItemListService.getItemList();
         }
