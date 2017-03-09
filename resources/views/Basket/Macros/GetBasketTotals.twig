@@ -95,3 +95,13 @@
     {{ shippingAmountNet }}
 
 {% endmacro %}
+
+{% macro getVat( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].vatTotal }}
+
+    {% endif %}
+
+{% endmacro %}
