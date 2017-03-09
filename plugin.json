@@ -25,6 +25,11 @@
             "description"   : "Add style to Ceres with a theme plugin"
         },
         {
+            "key"           : "Script.Loader",
+            "name"          : "Script loader: Register/load JS",
+            "description"   : "Register scripts, events and other JS related items."
+        },
+        {
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
             "description"   : "Add additional content on the cancellation rights page"
@@ -298,11 +303,6 @@
             "key"           : "CategoryItem.AfterPrices",
             "name"          : "Category item list: After prices container",
             "description"   : "Add content after the prices in the category item view."
-        },
-        {
-            "key"           : "Script.Loader",
-            "name"          : "Script Loader: Register script, events and other JS related items",
-            "description"   : "Register/Load JS."
         }
     ],
     "dataProviders"     : []
