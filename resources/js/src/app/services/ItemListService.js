@@ -1,5 +1,5 @@
 var ApiService = require("services/ApiService");
-// var NotificationService = require("services/NotificationService");
+var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
 var UrlService = require("services/UrlService");
 
@@ -8,9 +8,8 @@ module.exports = (function($)
     var searchParams =
         {
             searchString: "",
-            itemsPerPage: 20,
-            orderBy     : "itemName",
-            orderByKey  : "ASC",
+            itemsPerPage: App.config.defaultItemsPerPage,
+            orderBy     : App.config.defaultSorting,
             page        : 1,
             facets      : "",
             categoryId  : null,
@@ -35,7 +34,7 @@ module.exports = (function($)
         setPage        : setPage,
         setSearchParams: setSearchParams,
         setFacets      : setFacets,
-        setCategoryId  : setCategoryId,
+        setCategoryId  : setCategoryId
     };
 
     function getItemList()
@@ -100,8 +99,7 @@ module.exports = (function($)
 
     function setOrderBy(orderBy)
     {
-        searchParams.orderBy = orderBy.split("_")[0];
-        searchParams.orderByKey = orderBy.split("_")[1];
+        searchParams.orderBy = orderBy;
     }
 
     function setPage(page)
@@ -121,7 +119,34 @@ module.exports = (function($)
 
     function _updateUrlParams()
     {
+        var params = {};
 
+        if (searchParams.searchString.length > 0)
+        {
+            params.query = searchParams.searchString;
+        }
+
+        if (searchParams.itemsPerPage !== App.config.defaultItemsPerPage)
+        {
+            params.items = searchParams.itemsPerPage;
+        }
+
+        if (searchParams.orderBy !== App.config.defaultSorting)
+        {
+            params.orderBy = searchParams.orderBy;
+        }
+
+        if (searchParams.page > 1)
+        {
+            params.page = searchParams.page;
+        }
+
+        if (searchParams.facets.length > 0)
+        {
+            params.facets = searchParams.facets;
+        }
+
+        UrlService.setUrlParams(params);
     }
 
 })(jQuery);
