@@ -1,6 +1,16 @@
 {% extends getPartial('page-design') %}
 
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'searchString': request.get("searchString"), 'page': 1, 'itemsPerPage': 20 }) %}
+{% set page = 1 %}
+{% if request.get("page") %}
+    {% set page = request.get("page") %}
+{% endif %}
+
+{% set itemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
+{% if request.get("items") %}
+    {% set itemsPerPage = request.get("items") %}
+{% endif %}
+
+{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'searchString': request.get("query"), 'page': page, 'itemsPerPage': itemsPerPage }) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
@@ -12,7 +22,6 @@
     <resource name="itemList" :data="{}"></resource>
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
     <resource name="facetParams" :data="[]"></resource>
-
 
     <div class="categoriegrid page-content container-max">
 

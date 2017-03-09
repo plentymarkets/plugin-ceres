@@ -1,5 +1,6 @@
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
 
 Vue.component("pagination", {
 
@@ -22,6 +23,10 @@ Vue.component("pagination", {
 
         ResourceService.bind("itemSearch", this);
         ResourceService.bind("itemList", this);
+
+        var urlParams = UrlService.getUrlParams(document.location.search);
+
+        this.itemSearch.page = urlParams.page;
     },
 
     methods:
@@ -29,6 +34,7 @@ Vue.component("pagination", {
         setPage: function(page)
         {
             ItemListService.setPage(page);
+            ItemListService.getItemList();
         }
     },
 

@@ -27,21 +27,22 @@ module.exports = (function($)
     //     };
 
     return {
-        getItemList    : getItemList,
-        setSearchString: setSearchString,
-        setItemsPerPage: setItemsPerPage,
-        setOrderBy     : setOrderBy,
-        setPage        : setPage,
-        setSearchParams: setSearchParams,
-        setFacets      : setFacets,
-        setCategoryId  : setCategoryId
+        getItemList       : getItemList,
+        updateSearchString: updateSearchString,
+        setSearchString   : setSearchString,
+        setItemsPerPage   : setItemsPerPage,
+        setOrderBy        : setOrderBy,
+        setPage           : setPage,
+        setSearchParams   : setSearchParams,
+        setFacets         : setFacets,
+        setCategoryId     : setCategoryId
     };
 
     function getItemList()
     {
         if (searchParams.categoryId || searchParams.searchString.length >= 3)
         {
-            _updateUrlParams();
+            ResourceService.getResource("itemList").val().total = 0;
 
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
@@ -86,30 +87,60 @@ module.exports = (function($)
         }
     }
 
+    function updateSearchString(searchString)
+    {
+        searchParams.searchString = searchString;
+
+        searchString = (searchString.length > 0) ? searchString : null;
+        UrlService.setUrlParam("query", searchString);
+    }
+
     function setSearchString(searchString)
     {
         searchParams.searchString = searchString;
         searchParams.page = 1;
+
+        setPage(1);
+        setFacets("");
+
+        ResourceService.getResource("facets").set({});
+        ResourceService.getResource("facetParams").set([]);
+
+        searchString = (searchString.length > 0) ? searchString : null;
+        UrlService.setUrlParam("query", searchString);
     }
 
     function setItemsPerPage(itemsPerPage)
     {
         searchParams.itemsPerPage = itemsPerPage;
+
+        itemsPerPage = (itemsPerPage !== App.config.defaultItemsPerPage) ? itemsPerPage : null;
+        UrlService.setUrlParam("items", itemsPerPage);
     }
 
     function setOrderBy(orderBy)
     {
         searchParams.orderBy = orderBy;
+
+        orderBy = (orderBy !== App.config.defaultSorting) ? orderBy : null;
+        UrlService.setUrlParam("orderBy", orderBy);
     }
 
     function setPage(page)
     {
         searchParams.page = page;
+
+        page = (page > 1) ? page : null;
+        UrlService.setUrlParam("page", page);
     }
 
     function setFacets(facets)
     {
         searchParams.facets = facets.toString();
+
+        facets = (facets.toString().length > 0) ? facets.toString() : null;
+
+        UrlService.setUrlParam("facets", facets);
     }
 
     function setCategoryId(categoryId)
@@ -117,36 +148,35 @@ module.exports = (function($)
         searchParams.categoryId = categoryId;
     }
 
-    function _updateUrlParams()
-    {
-        var params = {};
-
-        if (searchParams.searchString.length > 0)
-        {
-            params.query = searchParams.searchString;
-        }
-
-        if (searchParams.itemsPerPage !== App.config.defaultItemsPerPage)
-        {
-            params.items = searchParams.itemsPerPage;
-        }
-
-        if (searchParams.orderBy !== App.config.defaultSorting)
-        {
-            params.orderBy = searchParams.orderBy;
-        }
-
-        if (searchParams.page > 1)
-        {
-            params.page = searchParams.page;
-        }
-
-        if (searchParams.facets.length > 0)
-        {
-            params.facets = searchParams.facets;
-        }
-
-        UrlService.setUrlParams(params);
-    }
-
+    // function _updateUrlParams()
+    // {
+    //     var params = {};
+    //
+    //     if (searchParams.searchString.length > 0)
+    //     {
+    //         params.query = searchParams.searchString;
+    //     }
+    //
+    //     if (searchParams.itemsPerPage !== App.config.defaultItemsPerPage)
+    //     {
+    //         params.items = searchParams.itemsPerPage;
+    //     }
+    //
+    //     if (searchParams.orderBy !== App.config.defaultSorting)
+    //     {
+    //         params.orderBy = searchParams.orderBy;
+    //     }
+    //
+    //     if (searchParams.page > 1)
+    //     {
+    //         params.page = searchParams.page;
+    //     }
+    //
+    //     if (searchParams.facets.length > 0)
+    //     {
+    //         params.facets = searchParams.facets;
+    //     }
+    //
+    //     UrlService.setUrlParams(params);
+    // }
 })(jQuery);

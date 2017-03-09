@@ -2,7 +2,7 @@ module.exports = (function($)
 {
     return {
         getUrlParams: _getUrlParams,
-        setUrlParams: _setUrlParams
+        setUrlParam: _setUrlParam
     };
 
     function _getUrlParams(urlParams)
@@ -34,6 +34,22 @@ module.exports = (function($)
         var title = document.getElementsByTagName("title")[0].innerHTML;
 
         window.history.replaceState({}, title, pathName + params);
+    }
+
+    function _setUrlParam(key, value)
+    {
+        urlParams = _getUrlParams(document.location.search);
+
+        if (value !== null)
+        {
+            urlParams[key] = value;
+        }
+        else
+        {
+            delete urlParams[key];
+        }
+
+        _setUrlParams(urlParams);
     }
 
 })(jQuery);
