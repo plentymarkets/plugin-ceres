@@ -102,7 +102,7 @@ Vue.component("item-image-carousel", {
         {
             var $owl = $(this.$els.single);
 
-            owl.trigger("to.owl.carousel", [
+            $owl.trigger("to.owl.carousel", [
                 index,
                 350
             ]);
