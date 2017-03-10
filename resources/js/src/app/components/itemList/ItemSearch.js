@@ -29,7 +29,11 @@ Vue.component("item-search", {
         var urlParams = UrlService.getUrlParams(document.location.search);
 
         this.itemSearch.searchString = urlParams.query;
-        ItemListService.updateSearchString(this.itemSearch.searchString);
+
+        if (this.itemSearch.searchString)
+        {
+            ItemListService.updateSearchString(this.itemSearch.searchString);
+        }
     },
 
     methods:

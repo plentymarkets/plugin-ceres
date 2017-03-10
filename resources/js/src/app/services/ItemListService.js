@@ -42,7 +42,10 @@ module.exports = (function($)
     {
         if (searchParams.categoryId || searchParams.searchString.length >= 3)
         {
-            ResourceService.getResource("itemList").val().total = 0;
+            if (ResourceService.getResource("itemList").val())
+            {
+                ResourceService.getResource("itemList").val().total = 0;
+            }
 
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
