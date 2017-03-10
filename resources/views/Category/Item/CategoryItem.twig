@@ -27,6 +27,7 @@
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
+    {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
     {{ component( "Ceres::ItemList.Components.ItemList") }}
     {{ component( "Ceres::ItemList.Components.ItemListSorting") }}
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
@@ -44,13 +45,20 @@
         </div>
 
         <div class="list-controls m-b-3">
-            <div class="col-xs-12 col-lg-5 offset-lg-7">
-                <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
-                <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
-                <pagination template="#vue-pagination"></pagination>
+            <div class="list-controls-inner">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="list-wrapper">
+                            <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
+                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
+                            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+            {# TAGS #}
+            <item-filter-tag-list></item-filter-tag-list>
         </div>
 
         {#<div class="m-b-3">#}
@@ -76,7 +84,8 @@
     </div>
     <div class="list-controls m-b-3">
         <div class="col-xs-12">
-            {% include "Ceres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}
+            <pagination template="#vue-pagination"></pagination>
+            {#{% include "Ceres::Category.Item.Partials.Pagination" with { 'paginatedResult': paginatedResult } %}#}
         </div>
     </div>
 {% endblock %}

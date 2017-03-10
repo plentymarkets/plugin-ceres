@@ -4,13 +4,13 @@ var ItemListService = require("services/ItemListService");
 Vue.component("item-filter-tag-list", {
 
     props: [
-        "template",
-        "facets"
+        "template"
     ],
 
     data: function()
     {
         return {
+            facets: {},
             facetParams: []
         };
     },
@@ -19,6 +19,11 @@ Vue.component("item-filter-tag-list", {
     {
         this.$options.template = this.template || "#vue-item-filter-tag-list";
         ResourceService.bind("facetParams", this);
+    },
+
+    ready: function()
+    {
+        ResourceService.bind("facets", this);
     },
 
     methods:

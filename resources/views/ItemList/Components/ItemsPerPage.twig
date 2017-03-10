@@ -1,12 +1,9 @@
 <script type="x/template" id="vue-items-per-page">
-    <div class="col-sm-5">
-        <div class="input-unit">
-            <select class="custom-select" name="items_per_page" id="listItemsPerPage" v-model="itemSearch.itemsPerPage" @change="itemsPerPageChanged()">
-                <option :value="element" v-for="element in paginationValues">
-                    ${ element }
-                </option>
-            </select>
-            <label for="listItemsPerPage">{{ trans("Ceres::Template.itemCategoryItemsPerPage") }}</label>
-        </div>
+    <div class="list-itemsperpage">
+        <select class="custom-select" v-model="itemSearch.itemsPerPage" @change="itemsPerPageChanged()">
+            <option :value="element" v-for="element in paginationValues">
+                ${ element }
+            </option>
+        </select>
     </div>
 </script>
