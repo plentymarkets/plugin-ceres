@@ -207,7 +207,7 @@
                             </dd>
                                 {% endif %}
 
-                                {% if BasketTotals.getCouponValue( orderData ) != 0 %}
+                                {% if BasketTotals.getCouponValue( orderData ) | trimNewlines != 0 %}
                                 <dt>
                                     <strong>{{ trans("Ceres::Template.basketCoupon") }}</strong>
                                 </dt><!--
