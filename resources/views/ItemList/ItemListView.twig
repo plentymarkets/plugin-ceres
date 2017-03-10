@@ -19,7 +19,7 @@
     {{ component( "Ceres::ItemList.Components.Pagination" ) }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
 
-    <resource name="itemList" :data="{}"></resource>
+    <resource name="itemList" :data="{{ paginatedResult | json_encode }} || {}"></resource>
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
     <resource name="facetParams" :data="[]"></resource>
 
@@ -37,7 +37,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <item-list template="#vue-item-list" :item-list="{{ paginatedResult | json_encode }}"></item-list>
+                <item-list template="#vue-item-list"></item-list>
             </div>
         </div>
     </div>

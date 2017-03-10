@@ -5,13 +5,13 @@ Vue.component("item-list", {
 
     props: [
         "categoryId",
-        "itemList",
         "template"
     ],
 
     data: function()
     {
         return {
+            itemList: {},
             isLoading: false,
             filterListState: false
         };
@@ -20,7 +20,6 @@ Vue.component("item-list", {
     created: function()
     {
         this.$options.template = this.template;
-        ResourceService.getResource("itemList").set(this.itemList);
 
         ItemListService.setCategoryId(this.categoryId);
     },
