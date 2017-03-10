@@ -10,7 +10,7 @@
 {% block PageBody %}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
-    {{ component( "Ceres::Item.Components.VariationImageList" ) }}
+    {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -20,7 +20,8 @@
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
-                        <variation-image-list template="#vue-variation-image-list"></variation-image-list>
+                        <item-image-carousel image-url-accessor="url"
+                                             template="#vue-item-image-carousel"></item-image-carousel>
                     </div>
                 </div>
             </div>

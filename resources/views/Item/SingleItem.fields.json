@@ -33,5 +33,7 @@
   "unit.names.name",
 
   "images.all.url",
-  "images.all.urlPreview"
+  "images.all.urlPreview",
+  "images.variation.url",
+  "images.variation.urlPreview"
 ]
