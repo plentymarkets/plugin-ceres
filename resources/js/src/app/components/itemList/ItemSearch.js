@@ -47,7 +47,7 @@ Vue.component("item-search", {
             }
             else
             {
-                window.open("/search?searchString=" + this.itemSearch.searchString, "_self", false);
+                window.open("/search?query=" + this.itemSearch.searchString, "_self", false);
             }
         },
 
