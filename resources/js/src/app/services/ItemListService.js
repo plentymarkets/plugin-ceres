@@ -16,16 +16,6 @@ module.exports = (function($)
             template    : ""
         };
 
-    // var urlParams =
-    //     {
-    //         query: "Sofa",
-    //         categoryId: 1,
-    //         items: 20,
-    //         orderBy: "itemName_ASC",
-    //         page: 1,
-    //         facets: "1,2,3"
-    //     };
-
     return {
         getItemList       : getItemList,
         updateSearchString: updateSearchString,
@@ -152,36 +142,5 @@ module.exports = (function($)
     {
         searchParams.categoryId = categoryId;
     }
-
-    // function _updateUrlParams()
-    // {
-    //     var params = {};
-    //
-    //     if (searchParams.searchString.length > 0)
-    //     {
-    //         params.query = searchParams.searchString;
-    //     }
-    //
-    //     if (searchParams.itemsPerPage !== App.config.defaultItemsPerPage)
-    //     {
-    //         params.items = searchParams.itemsPerPage;
-    //     }
-    //
-    //     if (searchParams.orderBy !== App.config.defaultSorting)
-    //     {
-    //         params.orderBy = searchParams.orderBy;
-    //     }
-    //
-    //     if (searchParams.page > 1)
-    //     {
-    //         params.page = searchParams.page;
-    //     }
-    //
-    //     if (searchParams.facets.length > 0)
-    //     {
-    //         params.facets = searchParams.facets;
-    //     }
-    //
-    //     UrlService.setUrlParams(params);
-    // }
+    
 })(jQuery);
