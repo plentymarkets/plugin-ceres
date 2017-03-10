@@ -14,7 +14,7 @@
 
 {% set page                 = request.get("page") | default(1) %}
 
-{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::Category.Item.CategoryItem', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':categoryParams.itemsPerPage, 'facets': facetParams}) %}
+{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::Category.Item.CategoryItem', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':1, 'facets': facetParams}) %}
 
 {% set itemList             = paginatedResult.documents %}
 {% set paginationType       = config("Ceres.pagination.position") %}
@@ -29,7 +29,7 @@
 
     <resource name="facetParams" :data="[]"></resource>
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
-    <resource name="itemList" :data="{}"></resource>
+    <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
 
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">

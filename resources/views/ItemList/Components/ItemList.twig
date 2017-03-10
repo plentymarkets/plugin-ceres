@@ -11,7 +11,7 @@
 <resource name="isLoading" :data="false"></resource>
 
 <script type="x/template" id="vue-item-list">
-    <div class="loading-animation-frame col-xs-12 col-lg-12" v-if="isLoading">
+    <div class="loading-animation-frame col-xs-12 col-lg-12" v-show="isLoading">
         <div class="loading-animation">
             <div class="rect1"></div>
             <div class="rect2"></div>

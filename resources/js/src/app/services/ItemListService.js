@@ -143,6 +143,8 @@ module.exports = (function($)
 
         facets = (facets.toString().length > 0) ? facets.toString() : null;
 
+        setPage(1);
+
         UrlService.setUrlParam("facets", facets);
     }
 
