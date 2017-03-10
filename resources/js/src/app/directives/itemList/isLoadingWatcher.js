@@ -1,12 +1,12 @@
 var ResourceService = require("services/ResourceService");
 
-Vue.directive("facet-param-watcher",
+Vue.directive("is-loading-watcher",
     {
         bind: function()
         {
             var firstRendering = true;
 
-            ResourceService.watch("facetParams", function()
+            ResourceService.watch("isLoading", function()
             {
                 if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null)
                 {

@@ -142,5 +142,5 @@ module.exports = (function($)
     {
         searchParams.categoryId = categoryId;
     }
-    
+
 })(jQuery);
