@@ -4605,6 +4605,11 @@ var dateFilter = function()
     var input = args.shift();
     var date;
 
+    if (isNaN(new Date(input).getTime()))
+    {
+        return input;
+    }
+
     if (Array.isArray(input) && typeof input[0] === "string")
     {
         // If input is array, assume we're being passed a format pattern to parse against.
