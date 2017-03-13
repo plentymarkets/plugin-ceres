@@ -11,8 +11,8 @@
   "item.id",
   "texts*",
   "variation.id",
-  "variation.availability.averageDays",
   "variation.availability.names.name",
+  "variation.availability.id",
   "variation.itemId",
   "variation.releasedAt"
 ]
