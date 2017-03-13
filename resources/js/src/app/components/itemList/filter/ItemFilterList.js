@@ -5,9 +5,15 @@ Vue.component("item-filter-list", {
 
     props: [
         "template",
-        "facets",
-        "categoryId"
+        "facets"
     ],
+
+    data: function()
+    {
+        return {
+            isActive: false
+        };
+    },
 
     created: function()
     {
@@ -20,6 +26,17 @@ Vue.component("item-filter-list", {
         if (urlParams.facets)
         {
             ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+        }
+    },
+
+    methods:
+    {
+        toggleOpeningState: function()
+        {
+            window.setTimeout(function()
+            {
+                this.isActive = !this.isActive;
+            }.bind(this), 300);
         }
     }
 });

@@ -8,45 +8,56 @@ module.exports = (function($)
     var searchParams =
         {
             searchString: "",
-            itemsPerPage: 20,
-            orderBy     : "itemName",
-            orderByKey  : "ASC",
-            page        : 1
+            itemsPerPage: App.config.defaultItemsPerPage,
+            orderBy     : App.config.defaultSorting,
+            page        : 1,
+            facets      : "",
+            categoryId  : null,
+            template    : ""
         };
 
     return {
-        setSearchString: setSearchString,
-        setItemsPerPage: setItemsPerPage,
-        setOrderBy     : setOrderBy,
-        setPage        : setPage,
-        setSearchParams: setSearchParams
+        getItemList       : getItemList,
+        updateSearchString: updateSearchString,
+        setSearchString   : setSearchString,
+        setItemsPerPage   : setItemsPerPage,
+        setOrderBy        : setOrderBy,
+        setPage           : setPage,
+        setSearchParams   : setSearchParams,
+        setFacets         : setFacets,
+        setCategoryId     : setCategoryId
     };
 
-    function _getItemList()
+    function getItemList()
     {
-        if (searchParams.searchString.length >= 3)
+        if (searchParams.categoryId || searchParams.searchString.length >= 3)
         {
-            UrlService.setUrlParams(searchParams);
+            if (ResourceService.getResource("itemList").val())
+            {
+                ResourceService.getResource("itemList").val().total = 0;
+            }
 
-            ResourceService.getResource("itemList").set({});
+            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            searchParams.template = searchParams.categoryId ? "Ceres::Category.Item.CategoryItem" : "Ceres::ItemList.ItemListView";
+
             _setIsLoading(true);
 
-            return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "Ceres::ItemList.ItemListView"
-            })
+            ApiService.get(url, searchParams)
                 .done(function(response)
                 {
                     _setIsLoading(false);
+
                     ResourceService.getResource("itemList").set(response);
+                    ResourceService.getResource("facets").set(response.facets);
                 })
-                .fail(function()
+                .fail(function(response)
                 {
                     _setIsLoading(false);
+
                     NotificationService.error("Error while searching").closeAfter(5000);
                 });
         }
-
-        return null;
     }
 
     function _setIsLoading(isLoading)
@@ -67,8 +78,14 @@ module.exports = (function($)
         {
             searchParams[key] = queryParams[key];
         }
+    }
 
-        _getItemList();
+    function updateSearchString(searchString)
+    {
+        searchParams.searchString = searchString;
+
+        searchString = (searchString.length > 0) ? searchString : null;
+        UrlService.setUrlParam("query", searchString);
     }
 
     function setSearchString(searchString)
@@ -76,26 +93,54 @@ module.exports = (function($)
         searchParams.searchString = searchString;
         searchParams.page = 1;
 
-        _getItemList();
+        setPage(1);
+        setFacets("");
+
+        ResourceService.getResource("facets").set({});
+        ResourceService.getResource("facetParams").set([]);
+
+        searchString = (searchString.length > 0) ? searchString : null;
+        UrlService.setUrlParam("query", searchString);
     }
 
     function setItemsPerPage(itemsPerPage)
     {
         searchParams.itemsPerPage = itemsPerPage;
-        _getItemList();
+
+        itemsPerPage = (itemsPerPage !== App.config.defaultItemsPerPage) ? itemsPerPage : null;
+        UrlService.setUrlParam("items", itemsPerPage);
     }
 
     function setOrderBy(orderBy)
     {
-        searchParams.orderBy = orderBy.split("_")[0];
-        searchParams.orderByKey = orderBy.split("_")[1];
-        _getItemList();
+        searchParams.orderBy = orderBy;
+
+        orderBy = (orderBy !== App.config.defaultSorting) ? orderBy : null;
+        UrlService.setUrlParam("orderBy", orderBy);
     }
 
     function setPage(page)
     {
         searchParams.page = page;
-        _getItemList();
+
+        page = (page > 1) ? page : null;
+        UrlService.setUrlParam("page", page);
+    }
+
+    function setFacets(facets)
+    {
+        searchParams.facets = facets.toString();
+
+        facets = (facets.toString().length > 0) ? facets.toString() : null;
+
+        setPage(1);
+
+        UrlService.setUrlParam("facets", facets);
+    }
+
+    function setCategoryId(categoryId)
+    {
+        searchParams.categoryId = categoryId;
     }
 
 })(jQuery);

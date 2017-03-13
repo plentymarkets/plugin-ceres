@@ -1,12 +1,11 @@
-var FilterService   = require("services/ItemFilterService");
 var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
 
 Vue.component("item-filter", {
 
     props: [
         "template",
-        "facet",
-        "categoryId"
+        "facet"
     ],
 
     data: function()
@@ -32,7 +31,9 @@ Vue.component("item-filter", {
     {
         updateFacet: function()
         {
-            FilterService.applyFacets(this.facetParams, this.categoryId);
+            ResourceService.getResource("facetParams").set(this.facetParams);
+            ItemListService.setFacets(this.facetParams);
+            ItemListService.getItemList();
         }
     }
 });

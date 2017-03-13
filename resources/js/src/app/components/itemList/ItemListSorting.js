@@ -1,4 +1,5 @@
 var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
 
 Vue.component("item-list-sorting", {
 
@@ -20,6 +21,8 @@ Vue.component("item-list-sorting", {
 
         this.buildData();
         this.selectedSorting = this.sortData[0];
+
+        this.setSelectedValueByUrl();
     },
 
     methods:
@@ -42,6 +45,24 @@ Vue.component("item-list-sorting", {
         updateSorting: function()
         {
             ItemListService.setOrderBy(this.selectedSorting.value);
+            ItemListService.getItemList();
+        },
+
+        setSelectedValueByUrl: function()
+        {
+            var urlParams = UrlService.getUrlParams(document.location.search);
+
+            if (urlParams.orderBy)
+            {
+                for (var i in this.sortData)
+                {
+                    if (this.sortData[i].value === urlParams.orderBy)
+                    {
+                        this.selectedSorting = this.sortData[i];
+                        ItemListService.setOrderBy(this.selectedSorting.value);
+                    }
+                }
+            }
         }
     }
 });
