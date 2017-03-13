@@ -19,7 +19,7 @@
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
 
-{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::Category.Item.CategoryItem', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':itemsPerPage, 'facets': facetParams}) %}
+{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':itemsPerPage, 'facets': facetParams}) %}
 
 {% set itemList             = paginatedResult.documents %}
 {% set paginationType       = config("Ceres.pagination.position") %}

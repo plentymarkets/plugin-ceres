@@ -39,7 +39,7 @@ module.exports = (function($)
 
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
-            searchParams.template = searchParams.categoryId ? "Ceres::Category.Item.CategoryItem" : "Ceres::ItemList.ItemListView";
+            searchParams.template = "Ceres::ItemList.ItemListView";
 
             _setIsLoading(true);
 
