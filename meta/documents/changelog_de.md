@@ -8,7 +8,6 @@
 
 ### Bekannte Probleme
 
-- Shop-Sprachen erweitern, kann zu einem Fehler in IO führen.
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
 - Das Bundesland wird an der Adresse falsch gespeichert.
 - Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
