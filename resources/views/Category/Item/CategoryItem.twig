@@ -1,14 +1,12 @@
 {% extends getPartial('page-design') %}
 
-{% set itemSort             = request.get("itemSorting") | default( config('Ceres.sort.defaultSorting') ) | split('_') %}
+{% set itemSort             = request.get("sorting") %}
 {% set orderBy              = itemSort[0] %}
-{% set orderByKey           = itemSort[1] | default('ASC') %}
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
 {% set categoryParams = {
 'variationShowType' : config("Ceres.item.variation_show_type"),
-'itemsPerPage'      : request.get("items_per_page") | default( config('Ceres.pagination.defaultItemsPerPage') ),
-'orderBy'           : itemSort[0],
-'orderByKey'        : itemSort[1] | default('ASC'),
+'itemsPerPage'      : request.get("items") | default( config('Ceres.pagination.defaultItemsPerPage') ),
+'orderBy'           : itemSort,
 'facetParams'       : request.get("facets")
 } %}
 
@@ -19,7 +17,7 @@
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
 
-{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'itemsPerPage':itemsPerPage, 'facets': facetParams}) %}
+{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort}) %}
 
 {% set itemList             = paginatedResult.documents %}
 {% set paginationType       = config("Ceres.pagination.position") %}

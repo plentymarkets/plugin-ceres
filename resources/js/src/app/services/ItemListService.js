@@ -7,9 +7,9 @@ module.exports = (function($)
 {
     var searchParams =
         {
-            searchString: "",
-            itemsPerPage: App.config.defaultItemsPerPage,
-            orderBy     : App.config.defaultSorting,
+            query       : "",
+            items       : App.config.defaultItemsPerPage,
+            sorting     : App.config.defaultSorting,
             page        : 1,
             facets      : "",
             categoryId  : null,
@@ -30,7 +30,7 @@ module.exports = (function($)
 
     function getItemList()
     {
-        if (searchParams.categoryId || searchParams.searchString.length >= 3)
+        if (searchParams.categoryId || searchParams.query.length >= 3)
         {
             if (ResourceService.getResource("itemList").val())
             {
@@ -80,17 +80,17 @@ module.exports = (function($)
         }
     }
 
-    function updateSearchString(searchString)
+    function updateSearchString(query)
     {
-        searchParams.searchString = searchString;
+        searchParams.query = query;
 
-        searchString = (searchString.length > 0) ? searchString : null;
-        UrlService.setUrlParam("query", searchString);
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
     }
 
-    function setSearchString(searchString)
+    function setSearchString(query)
     {
-        searchParams.searchString = searchString;
+        searchParams.query = query;
         searchParams.page = 1;
 
         setPage(1);
@@ -99,24 +99,24 @@ module.exports = (function($)
         ResourceService.getResource("facets").set({});
         ResourceService.getResource("facetParams").set([]);
 
-        searchString = (searchString.length > 0) ? searchString : null;
-        UrlService.setUrlParam("query", searchString);
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
     }
 
-    function setItemsPerPage(itemsPerPage)
+    function setItemsPerPage(items)
     {
-        searchParams.itemsPerPage = itemsPerPage;
+        searchParams.items = items;
 
-        itemsPerPage = (itemsPerPage !== App.config.defaultItemsPerPage) ? itemsPerPage : null;
-        UrlService.setUrlParam("items", itemsPerPage);
+        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        UrlService.setUrlParam("items", items);
     }
 
-    function setOrderBy(orderBy)
+    function setOrderBy(sorting)
     {
-        searchParams.orderBy = orderBy;
+        searchParams.sorting = sorting;
 
-        orderBy = (orderBy !== App.config.defaultSorting) ? orderBy : null;
-        UrlService.setUrlParam("orderBy", orderBy);
+        sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
+        UrlService.setUrlParam("sorting", sorting);
     }
 
     function setPage(page)

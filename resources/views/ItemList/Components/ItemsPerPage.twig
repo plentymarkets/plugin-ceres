@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-items-per-page">
     <div class="list-itemsperpage">
-        <select class="custom-select" v-model="itemSearch.itemsPerPage" @change="itemsPerPageChanged()">
+        <select class="custom-select" v-model="itemSearch.items" @change="itemsPerPageChanged()">
             <option :value="element" v-for="element in paginationValues">
                 ${ element }
             </option>

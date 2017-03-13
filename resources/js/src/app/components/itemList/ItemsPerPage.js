@@ -29,7 +29,7 @@ Vue.component("items-per-page", {
     {
         itemsPerPageChanged: function()
         {
-            ItemListService.setItemsPerPage(this.itemSearch.itemsPerPage);
+            ItemListService.setItemsPerPage(this.itemSearch.items);
             ItemListService.setPage(1);
             ItemListService.getItemList();
         },
@@ -42,19 +42,19 @@ Vue.component("items-per-page", {
             {
                 if (this.paginationValues.indexOf(urlParams.items) > -1)
                 {
-                    this.itemSearch.itemsPerPage = urlParams.items;
+                    this.itemSearch.items = urlParams.items;
                 }
                 else
                 {
-                    this.itemSearch.itemsPerPage = App.config.defaultItemsPerPage;
+                    this.itemSearch.items = App.config.defaultItemsPerPage;
                 }
             }
             else
             {
-                this.itemSearch.itemsPerPage = App.config.defaultItemsPerPage;
+                this.itemSearch.items = App.config.defaultItemsPerPage;
             }
 
-            ItemListService.setItemsPerPage(this.itemSearch.itemsPerPage);
+            ItemListService.setItemsPerPage(this.itemSearch.items);
         }
     }
 });

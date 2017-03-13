@@ -10,7 +10,12 @@
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
 
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'searchString': request.get("query"), 'page': page, 'itemsPerPage': itemsPerPage }) %}
+{% set sorting = config("Ceres.sort.defaultSorting") %}
+{% if request.get("sorting") %}
+    {% set sorting = request.get("sorting") %}
+{% endif %}
+
+{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting}) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}

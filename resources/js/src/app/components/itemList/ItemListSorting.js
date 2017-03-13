@@ -52,11 +52,11 @@ Vue.component("item-list-sorting", {
         {
             var urlParams = UrlService.getUrlParams(document.location.search);
 
-            if (urlParams.orderBy)
+            if (urlParams.sorting)
             {
                 for (var i in this.sortData)
                 {
-                    if (this.sortData[i].value === urlParams.orderBy)
+                    if (this.sortData[i].value === urlParams.sorting)
                     {
                         this.selectedSorting = this.sortData[i];
                         ItemListService.setOrderBy(this.selectedSorting.value);
