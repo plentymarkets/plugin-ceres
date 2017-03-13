@@ -5,6 +5,8 @@
   "images.variation.urlMiddle",
   "images.variation.urlPreview",
   "item.storeSpecial",
+  "properties.group.backendName",
+  "properties.property.names.name",
   "salesPrices.price",
   "salesPrices.type",
   "texts.name*",
