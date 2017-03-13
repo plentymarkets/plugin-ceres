@@ -8,5 +8,6 @@
   "variation.itemId",
   "variation.id",
   "images.all.urlPreview",
+  "images.all.url",
   "images.variation.urlPreview"
 ]
