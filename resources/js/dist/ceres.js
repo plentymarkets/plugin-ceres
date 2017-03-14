@@ -37307,11 +37307,11 @@ Vue.component("item-list-sorting", {
         {
             var urlParams = UrlService.getUrlParams(document.location.search);
 
-            if (urlParams.orderBy)
+            if (urlParams.sorting)
             {
                 for (var i in this.sortData)
                 {
-                    if (this.sortData[i].value === urlParams.orderBy)
+                    if (this.sortData[i].value === urlParams.sorting)
                     {
                         this.selectedSorting = this.sortData[i];
                         ItemListService.setOrderBy(this.selectedSorting.value);
@@ -37353,11 +37353,11 @@ Vue.component("item-search", {
 
         var urlParams = UrlService.getUrlParams(document.location.search);
 
-        this.itemSearch.searchString = urlParams.query;
+        this.itemSearch.query = urlParams.query;
 
-        if (this.itemSearch.searchString)
+        if (this.itemSearch.query)
         {
-            ItemListService.updateSearchString(this.itemSearch.searchString);
+            ItemListService.updateSearchString(this.itemSearch.query);
         }
     },
 
@@ -37367,12 +37367,12 @@ Vue.component("item-search", {
         {
             if (document.location.pathname === "/search")
             {
-                ItemListService.setSearchString(this.itemSearch.searchString);
+                ItemListService.setSearchString(this.itemSearch.query);
                 ItemListService.getItemList();
             }
             else
             {
-                window.open("/search?query=" + this.itemSearch.searchString, "_self", false);
+                window.open("/search?query=" + this.itemSearch.query, "_self", false);
             }
         },
 
@@ -37382,7 +37382,7 @@ Vue.component("item-search", {
 
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "searchString",
+                paramName: "query",
                 params: {template: "Ceres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
@@ -37391,7 +37391,7 @@ Vue.component("item-search", {
                 preventBadQueries: false,
                 onSelect: function(suggestion)
                 {
-                    self.itemSearch.searchString = suggestion.value;
+                    self.itemSearch.query = suggestion.value;
                     self.search();
                 },
                 beforeRender: function()
@@ -37541,7 +37541,7 @@ Vue.component("items-per-page", {
     {
         itemsPerPageChanged: function()
         {
-            ItemListService.setItemsPerPage(this.itemSearch.itemsPerPage);
+            ItemListService.setItemsPerPage(this.itemSearch.items);
             ItemListService.setPage(1);
             ItemListService.getItemList();
         },
@@ -37554,19 +37554,19 @@ Vue.component("items-per-page", {
             {
                 if (this.paginationValues.indexOf(urlParams.items) > -1)
                 {
-                    this.itemSearch.itemsPerPage = urlParams.items;
+                    this.itemSearch.items = urlParams.items;
                 }
                 else
                 {
-                    this.itemSearch.itemsPerPage = App.config.defaultItemsPerPage;
+                    this.itemSearch.items = App.config.defaultItemsPerPage;
                 }
             }
             else
             {
-                this.itemSearch.itemsPerPage = App.config.defaultItemsPerPage;
+                this.itemSearch.items = App.config.defaultItemsPerPage;
             }
 
-            ItemListService.setItemsPerPage(this.itemSearch.itemsPerPage);
+            ItemListService.setItemsPerPage(this.itemSearch.items);
         }
     }
 });
@@ -39399,9 +39399,9 @@ module.exports = (function($)
 {
     var searchParams =
         {
-            searchString: "",
-            itemsPerPage: App.config.defaultItemsPerPage,
-            orderBy     : App.config.defaultSorting,
+            query       : "",
+            items       : App.config.defaultItemsPerPage,
+            sorting     : App.config.defaultSorting,
             page        : 1,
             facets      : "",
             categoryId  : null,
@@ -39422,7 +39422,7 @@ module.exports = (function($)
 
     function getItemList()
     {
-        if (searchParams.categoryId || searchParams.searchString.length >= 3)
+        if (searchParams.categoryId || searchParams.query.length >= 3)
         {
             if (ResourceService.getResource("itemList").val())
             {
@@ -39472,17 +39472,17 @@ module.exports = (function($)
         }
     }
 
-    function updateSearchString(searchString)
+    function updateSearchString(query)
     {
-        searchParams.searchString = searchString;
+        searchParams.query = query;
 
-        searchString = (searchString.length > 0) ? searchString : null;
-        UrlService.setUrlParam("query", searchString);
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
     }
 
-    function setSearchString(searchString)
+    function setSearchString(query)
     {
-        searchParams.searchString = searchString;
+        searchParams.query = query;
         searchParams.page = 1;
 
         setPage(1);
@@ -39491,24 +39491,24 @@ module.exports = (function($)
         ResourceService.getResource("facets").set({});
         ResourceService.getResource("facetParams").set([]);
 
-        searchString = (searchString.length > 0) ? searchString : null;
-        UrlService.setUrlParam("query", searchString);
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
     }
 
-    function setItemsPerPage(itemsPerPage)
+    function setItemsPerPage(items)
     {
-        searchParams.itemsPerPage = itemsPerPage;
+        searchParams.items = items;
 
-        itemsPerPage = (itemsPerPage !== App.config.defaultItemsPerPage) ? itemsPerPage : null;
-        UrlService.setUrlParam("items", itemsPerPage);
+        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        UrlService.setUrlParam("items", items);
     }
 
-    function setOrderBy(orderBy)
+    function setOrderBy(sorting)
     {
-        searchParams.orderBy = orderBy;
+        searchParams.sorting = sorting;
 
-        orderBy = (orderBy !== App.config.defaultSorting) ? orderBy : null;
-        UrlService.setUrlParam("orderBy", orderBy);
+        sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
+        UrlService.setUrlParam("sorting", sorting);
     }
 
     function setPage(page)
