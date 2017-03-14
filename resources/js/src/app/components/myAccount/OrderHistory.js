@@ -54,7 +54,7 @@ var ApiService = require("services/ApiService");
 
             setCurrentOrder: function(order)
             {
-                $("#dynamic-twig-modal").html("");
+                $("#dynamic-twig-content").html("");
                 this.isLoading = true;
 
                 this.currentOrder = order;
@@ -72,7 +72,7 @@ var ApiService = require("services/ApiService");
                     .done(function(response)
                     {
                         this.isLoading = false;
-                        $("#dynamic-twig-modal").html(response);
+                        $("#dynamic-twig-content").html(response);
                     }.bind(this));
             },
 
