@@ -16,7 +16,7 @@
                     <div class="details">
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
-                            <span class="col-xs-6 col-sm-7">{{ orderData.order.createdAt | date( trans("Ceres::Template.dateTimeFormat") ) }}</span>
+                            <span class="col-xs-6 col-sm-7">{{ orderData.order.createdAt | formatDateTime | date( trans("Ceres::Template.dateTimeFormat") ) }}</span>
                         </div>
 
                         <div class="row">
@@ -107,7 +107,7 @@
                                     {% set shippingDate = date %}
                                 {% endif %}
                             {% endfor %}
-                            <span class="col-xs-6 col-sm-7">{{ shippingDate | date( trans("Ceres::Template.dateFormat") ) }}" }}</span>
+                            <span class="col-xs-6 col-sm-7">{{ shippingDate | date( trans("Ceres::Template.dateFormat") ) }}</span>
                         </div>
                     </div>
 
