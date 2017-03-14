@@ -19,8 +19,7 @@ var ApiService = require("services/ApiService");
                 pageMax: 1,
                 countStart: 0,
                 countEnd: 0,
-                currentOrder: null,
-                currentOrderTemplate: ""
+                currentOrder: null
             };
         },
 
@@ -57,18 +56,19 @@ var ApiService = require("services/ApiService");
                 this.currentOrder = order;
                 var self = this;
 
+                Vue.nextTick(function()
+                {
+                    $(self.$els.orderDetails).modal("show");
+                });
+
+                var jsonEncodedOrder = JSON.stringify(order);
+
                 ApiService
-                    .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + this.currentOrder)
+                    .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder)
                     .done(function(response)
                     {
-                        this.currentOrderTemplate = response;
-
-                        Vue.nextTick(function()
-                        {
-                            $(self.$els.orderDetails).modal("show");
-                        });
-
-                    }.bind(this));
+                        $("#dynamic-twig-modal").html(response);
+                    });
             },
 
             showPage: function(page)
