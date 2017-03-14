@@ -22,7 +22,7 @@
         {
             "key"           : "Template.Style",
             "name"          : "Template: Style",
-            "description"   : "Add style to Ceres with a theme plugin"
+            "description"   : "Add style to Ceres with a theme plugin."
         },
         {
             "key"           : "Script.Loader",
@@ -32,62 +32,62 @@
         {
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
-            "description"   : "Add additional content on the cancellation rights page"
+            "description"   : "Add additional content on the cancellation rights page."
         },
         {
             "key"           : "StaticPages.LegalDisclosure",
             "name"          : "Static Pages: Legal disclosure",
-            "description"   : "Add additional content on the legal disclosure page"
+            "description"   : "Add additional content on the legal disclosure page."
         },
         {
             "key"           : "StaticPages.PrivacyPolicy",
             "name"          : "Static Pages: Privacy policy",
-            "description"   : "Add additional content on the privacy policy page"
+            "description"   : "Add additional content on the privacy policy page."
         },
         {
             "key"           : "StaticPages.TermsAndConditions",
             "name"          : "Static Pages: Terms and conditions",
-            "description"   : "Add additional content on the terms and conditions page"
+            "description"   : "Add additional content on the terms and conditions page."
         },
         {
             "key"           : "StaticPages.PageNotFound",
             "name"          : "Static Pages: Page not found",
-            "description"   : "Add additional content on the 404 page"
+            "description"   : "Add additional content on the 404 page."
         },
         {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
-            "description"   : "Add a logo of the payment method to the payment methods on the homepage"
+            "description"   : "Add a logo of the payment method to the payment methods on the homepage."
         },
         {
             "key"           : "Homepage.Shipping",
             "name"          : "Homepage: Shipping method container",
-            "description"   : "Add a logo of the shipping method to the shipping methods on the homepage"
+            "description"   : "Add a logo of the shipping method to the shipping methods on the homepage."
         },
         {
             "key"           : "Homepage.Certified",
             "name"          : "Homepage: Certified container",
-            "description"   : "Add a \"Certified by\" logo to the container on the homepage"
+            "description"   : "Add a \"Certified by\" logo to the container on the homepage."
         },
         {
             "key"           : "Header.LeftSide",
             "name"          : "Header: Left header container",
-            "description"   : "Add content to the container on the left in the header"
+            "description"   : "Add content to the container on the left in the header."
         },
         {
             "key"           : "Footer.RowOne",
             "name"          : "Footer: Row 1 container",
-            "description"   : "Add content to the first row of the footer"
+            "description"   : "Add content to the first row of the footer."
         },
         {
             "key"           : "Footer.RowTwo",
             "name"          : "Footer: Row 2 container",
-            "description"   : "Add content to the second row of the footer"
+            "description"   : "Add content to the second row of the footer."
         },
         {
             "key"           : "Footer.RowThree",
             "name"          : "Footer: Row 3 container",
-            "description"   : "Add content to the third row of the footer"
+            "description"   : "Add content to the third row of the footer."
         },
         {
             "key"           : "SingleItem.BeforePrice",
@@ -189,7 +189,7 @@
         {
             "key"           : "Checkout.BillingAddress",
             "name"          : "Checkout: Override invoice address control",
-            "description"   : "Override the invoice address control in the checkout.",
+            "description"   : "Override the invoice address control in the checkout. The containers 'Before invoice address' and 'After invoice address' will also be overridden.",
             "multiple"      : false
         },
         {
@@ -205,7 +205,7 @@
         {
             "key"           : "Checkout.ShippingAddress",
             "name"          : "Checkout: Override shipping address control",
-            "description"   : "Override the shipping address control in the checkout.",
+            "description"   : "Override the shipping address control in the checkout. The containers 'Before shipping address' and 'After shipping address' will also be overridden.",
             "multiple"      : false
         },
         {
@@ -221,7 +221,7 @@
         {
             "key"           : "Checkout.ShippingProfileList",
             "name"          : "Checkout: Override shipping method",
-            "description"   : "Override the list of shipping methods in the checkout."
+            "description"   : "Override the list of shipping methods in the checkout. The containers 'Before shipping method' and 'After shipping method' will also be overridden."
         },
         {
             "key"           : "Checkout.BeforeShippingProfileList",
@@ -236,7 +236,7 @@
         {
             "key"           : "Checkout.PaymentList",
             "name"          : "Checkout: Override payment method",
-            "description"   : "Override the list of payment methods in the checkout."
+            "description"   : "Override the list of payment methods in the checkout. The containers 'Before payment method' and 'After payment method' will also be overridden."
         },
         {
             "key"           : "Checkout.BeforePaymentList",
@@ -266,7 +266,7 @@
         {
             "key"           : "Checkout.PlaceOrder",
             "name"          : "Checkout: Override \"Order now\" button",
-            "description"   : "Override the 'Order now' button in the checkout."
+            "description"   : "Override the 'Order now' button in the checkout. The containers 'Before Order now button' and 'After Order now button' will also be overridden."
         },
         {
             "key"           : "Checkout.BeforePlaceOrder",
