@@ -1,4 +1,5 @@
 {% import "Ceres::PageDesign.Macros.IncludeComponents" as Loader %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::PageDesign.Components.Notifications" ) }}
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
@@ -100,6 +101,8 @@
         </div>
 
         {{ Loader.include_components() }}
+
+        {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
         {% set lang = services.sessionStorage.getLang() %}
 

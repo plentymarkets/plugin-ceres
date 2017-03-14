@@ -50,7 +50,12 @@ Vue.component("shipping-address-select", {
         addressChanged: function(selectedAddress)
         {
             this.checkout.deliveryAddressId = selectedAddress.id;
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {detail: this.checkout.deliveryAddressId}));
+                }.bind(this));
         }
     }
 });

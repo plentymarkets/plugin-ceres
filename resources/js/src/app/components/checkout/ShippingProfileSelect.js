@@ -34,7 +34,12 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.checkout.shippingProfileId}));
+                }.bind(this));
 
             this.validate();
         },
