@@ -95,7 +95,7 @@
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
-                    {{ availability.languages[0].name }}
+                    {{ item.documents[0].data.variation.availability.names[0].name }}
                 </span>
                 {% endfor %}
 
