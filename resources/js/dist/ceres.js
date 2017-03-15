@@ -40867,7 +40867,6 @@ var init = (function($, window, document)
 
         $("#detlef").on("click", function()
         {
-            console.log("detlef");
             $("html, body").animate({scrollTop: 0}, "slow");
         });
 
