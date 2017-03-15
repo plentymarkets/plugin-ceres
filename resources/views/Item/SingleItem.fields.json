@@ -35,5 +35,8 @@
   "images.all.url",
   "images.all.urlPreview",
   "images.variation.url",
-  "images.variation.urlPreview"
+  "images.variation.urlPreview",
+
+  "properties.group.backendName",
+  "properties.property.names.name"
 ]

@@ -9,5 +9,7 @@
   "variation.id",
   "images.all.urlPreview",
   "images.all.url",
-  "images.variation.urlPreview"
+  "images.variation.urlPreview",
+  "properties.group.backendName",
+  "properties.property.names.name",
 ]
