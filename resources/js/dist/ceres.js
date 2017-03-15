@@ -37636,6 +37636,8 @@ Vue.component("pagination", {
         {
             ItemListService.setPage(page);
             ItemListService.getItemList();
+
+            $("html, body").animate({scrollTop: 0}, "slow");
         }
     },
 
@@ -40861,6 +40863,12 @@ var init = (function($, window, document)
                     $("body").toggleClass("open-right");
                 }
             }
+        });
+
+        $("#detlef").on("click", function()
+        {
+            console.log("detlef");
+            $("html, body").animate({scrollTop: 0}, "slow");
         });
 
         $("#searchBox").on("show.bs.collapse", function()
