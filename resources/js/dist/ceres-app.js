@@ -3506,9 +3506,9 @@ Vue.component("pagination", {
                 return this.lastPageMax;
             }
 
-            var pageMax = this.itemList.total / parseInt(this.itemSearch.itemsPerPage);
+            var pageMax = this.itemList.total / parseInt(this.itemSearch.items);
 
-            if (this.itemList.total % parseInt(this.itemSearch.itemsPerPage) > 0)
+            if (this.itemList.total % parseInt(this.itemSearch.items) > 0)
             {
                 pageMax += 1;
             }
