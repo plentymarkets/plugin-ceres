@@ -9,7 +9,7 @@
         <div class="collapse" :class="{in: isActive}" id="filterCollapse">
             <div class="container-max page-content">
                 <div class="card-columns">
-                    <item-filter v-for="facet in facets" :facet="facet"></item-filter>
+                    <item-filter v-for="facet in facets | orderBy 'id' -1" :facet="facet"></item-filter>
                 </div>
 
                 <div class="row">
