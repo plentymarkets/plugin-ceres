@@ -35,6 +35,8 @@ Vue.component("pagination", {
         {
             ItemListService.setPage(page);
             ItemListService.getItemList();
+
+            $("html, body").animate({scrollTop: 0}, "slow");
         }
     },
 

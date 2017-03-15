@@ -92,6 +92,11 @@ var init = (function($, window, document)
             }
         });
 
+        $("#detlef").on("click", function()
+        {
+            $("html, body").animate({scrollTop: 0}, "slow");
+        });
+
         $("#searchBox").on("show.bs.collapse", function()
         {
             $("#countrySettings").collapse("hide");
