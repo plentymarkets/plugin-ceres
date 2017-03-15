@@ -2,7 +2,7 @@
     <div class="list-sort">
         <select class="custom-select" v-model="selectedSorting"
                 @change="updateSorting()">
-            <option :value="element" v-for="element in sortData">
+            <option :value="element" v-for="element in sortData" :selected="selectedSorting.value == element.value">
                 ${ element.displayName }
             </option>
         </select>
