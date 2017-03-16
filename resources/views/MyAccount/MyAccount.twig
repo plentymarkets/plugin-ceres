@@ -6,7 +6,6 @@
     {{ component( "Ceres::MyAccount.Components.AccountSettings" ) }}
     {{ component( "Ceres::MyAccount.Components.OrderHistory" ) }}
     {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
-    {{ component( "Ceres::Checkout.Components.OrderDetails" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
