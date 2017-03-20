@@ -403,6 +403,14 @@ Vue.component("basket-list", {
     {
         ResourceService.bind("basketItems", this);
         this.size = this.size || "large";
+
+        if (this.size === "small")
+        {
+            ResourceService.watch("basket", function(newValue)
+            {
+                document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+            });
+        }
     }
 });
 
@@ -737,7 +745,12 @@ Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange: function()
         {
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.checkout.methodOfPaymentId}));
+                }.bind(this));
 
             this.validate();
         },
@@ -931,7 +944,12 @@ Vue.component("shipping-profile-select", {
          */
         onShippingProfileChange: function()
         {
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.checkout.shippingProfileId}));
+                }.bind(this));
 
             this.validate();
         },
@@ -1447,7 +1465,12 @@ Vue.component("invoice-address-select", {
         {
             this.checkout.billingAddressId = selectedAddress.id;
 
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {detail: this.checkout.billingAddressId}));
+                }.bind(this));
 
             if (this.hasToValidate)
             {
@@ -1515,7 +1538,12 @@ Vue.component("shipping-address-select", {
         addressChanged: function(selectedAddress)
         {
             this.checkout.deliveryAddressId = selectedAddress.id;
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {detail: this.checkout.deliveryAddressId}));
+                }.bind(this));
         }
     }
 });
@@ -2026,7 +2054,6 @@ Vue.component("quantity-input", {
 
         this.$watch("value", function(newValue)
         {
-
             if (newValue < this.min)
             {
                 this.value = this.min;
