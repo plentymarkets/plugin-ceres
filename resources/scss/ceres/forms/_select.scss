@@ -12,6 +12,11 @@
 		width: auto;
 	}
 }
+.list-sort .custom-select,
+.list-itemsperpage .custom-select {
+	padding: .8rem 2rem .8rem 1rem;
+	background-position: calc(100% - 1rem) 1rem;
+}
 .login-form {
 	.custom-select{
 		text-align: left;

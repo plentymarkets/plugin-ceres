@@ -28,7 +28,7 @@ module.exports = (function($)
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if (!route && !initialValue)
+        if (!route && typeof initialValue === "undefined")
         {
             throw new Error("Cannot register resource. Route or initial value is required.");
         }
@@ -70,7 +70,7 @@ module.exports = (function($)
             throw new Error("Cannot register resource. Name is required.");
         }
 
-        if (!route && !initialValue)
+        if (!route && typeof initialValue === "undefined")
         {
             throw new Error("Cannot register resource. Route or initial value is required.");
         }
@@ -180,7 +180,7 @@ module.exports = (function($)
         var ready = false;
 
         // initialize resource
-        if (initialValue)
+        if (typeof initialValue !== "undefined")
         {
             // Initial value that was given by constructor
             data.value = initialValue;
@@ -351,7 +351,7 @@ module.exports = (function($)
             url += "/";
         }
 
-        if (initialValue)
+        if (typeof initialValue !== "undefined")
         {
             data.value = initialValue;
             ready = true;

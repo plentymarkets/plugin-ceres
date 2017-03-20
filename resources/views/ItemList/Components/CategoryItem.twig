@@ -13,10 +13,10 @@
                 <div class="thumb-image">
                     <div class="square-container">
                         <div class="square-inner main-image">
-                            <image-carousel
-                                    :image-urls="itemData.images | itemImages imageUrlAccessor"
-                                    :item-url="itemData | itemURL"
-                                    template="#vue-image-carousel"></image-carousel>
+                            <category-image-carousel template="#vue-category-image-carousel"
+                                                     :image-urls="itemData.images | itemImages imageUrlAccessor"
+                                                     :item-url="itemData | itemURL">
+                            </category-image-carousel>
                         </div>
                     </div>
                 </div>

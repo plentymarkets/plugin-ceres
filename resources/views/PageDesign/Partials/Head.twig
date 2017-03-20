@@ -5,6 +5,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set logData = config("Ceres.log.data")|split(', ') %}
+{% set defaultItemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
+{% set sortValues = config("Ceres.sort.data")|split(', ') %}
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
@@ -22,7 +24,10 @@
             printWarnings:      {% if "print_warnings" in logData or "all" in logData %}true{% else %}false{% endif %},
             printInfos:         {% if "print_infos" in logData or "all" in logData %}true{% else %}false{% endif %},
             printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
-            logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %}
+            logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
+
+            defaultSorting: "{{ sortValues[0] }}",
+            defaultItemsPerPage: "{{ defaultItemsPerPage }}"
         }
     };
 </script>

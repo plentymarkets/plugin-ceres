@@ -1,9 +1,19 @@
 [
-  "salesPrices.type",
+  "images.all.url",
+  "images.all.urlMiddle",
+  "images.all.urlPreview",
+  "images.variation.urlMiddle",
+  "images.variation.urlPreview",
+  "item.storeSpecial",
+  "properties.group.backendName",
+  "properties.property.names.name",
   "salesPrices.price",
-  "item.storeSpecial.id",
-  "item.storeSpecial.names.name",
-  "texts.name*",
-  "images.all.url*",
-  "images.variation.url*"
+  "salesPrices.type",
+  "item.id",
+  "texts*",
+  "variation.id",
+  "variation.availability.names.name",
+  "variation.availability.id",
+  "variation.itemId",
+  "variation.releasedAt"
 ]

@@ -1,0 +1,7 @@
+<script type="x/template" id="vue-item-filter-tag-list">
+    <div class="selected-filters clearfix">
+        <span class="selected-filter" v-for="tag in tagList" @click="removeTag(tag.id)">
+            <i class="fa fa-times" aria-hidden="true"></i> ${ tag.names[0].name }
+        </span>
+    </div>
+</script>

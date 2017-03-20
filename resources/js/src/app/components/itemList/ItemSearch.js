@@ -1,5 +1,6 @@
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
 
 Vue.component("item-search", {
 
@@ -24,6 +25,15 @@ Vue.component("item-search", {
     {
         ResourceService.bind("itemSearch", this);
         this.initAutocomplete();
+
+        var urlParams = UrlService.getUrlParams(document.location.search);
+
+        this.itemSearch.query = urlParams.query;
+
+        if (this.itemSearch.query)
+        {
+            ItemListService.updateSearchString(this.itemSearch.query);
+        }
     },
 
     methods:
@@ -32,11 +42,12 @@ Vue.component("item-search", {
         {
             if (document.location.pathname === "/search")
             {
-                ItemListService.setSearchString(this.itemSearch.searchString);
+                ItemListService.setSearchString(this.itemSearch.query);
+                ItemListService.getItemList();
             }
             else
             {
-                window.open("/search?searchString=" + this.itemSearch.searchString, "_self", false);
+                window.open("/search?query=" + this.itemSearch.query, "_self", false);
             }
         },
 
@@ -46,7 +57,7 @@ Vue.component("item-search", {
 
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "searchString",
+                paramName: "query",
                 params: {template: "Ceres::ItemList.Components.ItemSearch"},
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
@@ -55,7 +66,7 @@ Vue.component("item-search", {
                 preventBadQueries: false,
                 onSelect: function(suggestion)
                 {
-                    self.itemSearch.searchString = suggestion.value;
+                    self.itemSearch.query = suggestion.value;
                     self.search();
                 },
                 beforeRender: function()

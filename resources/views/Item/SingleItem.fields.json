@@ -19,7 +19,9 @@
   "variation.lengthMM",
   "variation.widthMM",
   "variation.heightMM",
+  "variation.availability.names.name",
   "variation.availability.id",
+  "variation.releasedAt",
 
   "texts.name*",
   "texts.shortDescription",
@@ -33,5 +35,10 @@
   "unit.names.name",
 
   "images.all.url",
-  "images.all.urlPreview"
+  "images.all.urlPreview",
+  "images.variation.url",
+  "images.variation.urlPreview",
+
+  "properties.group.backendName",
+  "properties.property.names.name"
 ]
