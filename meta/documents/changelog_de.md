@@ -1,16 +1,36 @@
 # Release Notes für Ceres
 
-## v1.0.2 (2017-02-23)
+## v1.0.3 (2017-03-22)
+
+### Hinzugefügt
+
+- Filter in Suche und Kategorie-Ansicht
+- Template-Container **Script.Loader**, um Events und JS zu laden
+
+### Geändert
+
+- Neues Image Carousel für Kategorie-Ansicht (konfigurierbar)
+- Neues Image Carousel für Artikel-Einzelansicht
 
 ### Behoben
 
-- Fehler beim Anzeigen der Artikelbilder in einer Kategorie
+- Das Overlay **AddToBasketOverlay** zeigt nun die richtigen Vorschaubilder für Varianten an
+- Warenkorb und Warenkorbvorschau zeigen nun die richtigen Vorschaubilder für Varianten an
+- Nach dem Wechsel von der Kategorie-Ansicht in eine Artikelansicht werden nun die richtigen Daten gesendet, sobald ein Artikel in den Warenkorb gelegt wird
+- Cross-Seller-Verknüpfungen am Artikel verursachen nun keinen internen Fehler mehr
+- Ein Fehler in den Template-Containern der Auftragsübersicht wurde behoben
 
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
 - Das Bundesland wird an der Adresse falsch gespeichert.
 - Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
+## v1.0.2 (2017-02-23)
+
+### Behoben
+
+- Fehler beim Anzeigen der Artikelbilder in einer Kategorie
 
 ## v1.0.1 (2017-02-22)
 
