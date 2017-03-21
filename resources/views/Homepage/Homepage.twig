@@ -294,9 +294,243 @@
 
     {% else %}
 
-        {% block ThemeHomepage %}
-            <!-- theme homepage -->
-        {% endblock %}
+        
+            
+
+    {% set lang         = services.sessionStorage.getLang() %}
+
+    
+
+    {% set heroExtras1 = services.category.get(config("Ceres.homepage.homepageTopCategoryId"), lang) %}
+    {% set heroExtras2 = services.category.get(config("Ceres.homepage.homepageTopCategory2Id"), lang) %}
+
+    {% set featuredCategory1 = services.category.get(config("Ceres.homepage.homepageFeatureCategoryId"), lang) %}
+    {% set featuredCategory2 = services.category.get(config("Ceres.homepage.homepageFeatureCategory2Id"), lang) %}
+
+    {% set homepageImageFirstSlide  = config("Ceres.homepage.homepageImageFirstSlide") %}
+    {% set homepageProductLinkFirstSlide  = config("Ceres.homepage.homepageProductLinkFirstSlide") %}
+    {% set homepageProductNameFirstSlide  = config("Ceres.homepage.homepageProductNameFirstSlide") %}
+
+    {% set homepageImageSecondSlide  = config("Ceres.homepage.homepageImageSecondSlide") %}
+    {% set homepageProductLinkSecondSlide  = config("Ceres.homepage.homepageProductLinkSecondSlide") %}
+    {% set homepageProductNameSecondSlide  = config("Ceres.homepage.homepageProductNameSecondSlide") %}
+
+    {% set homepageImageThirdSlide  = config("Ceres.homepage.homepageImageThirdSlide") %}
+    {% set homepageProductLinkThirdSlide  = config("Ceres.homepage.homepageProductLinkThirdSlide") %}
+    {% set homepageProductNameThirdSlide  = config("Ceres.homepage.homepageProductNameThirdSlide") %}
+
+    {% set homepageCategoryTop  = config("Ceres.homepage.homepageCategoryTop") %}
+    {% set homepageCategoryNew  = config("Ceres.homepage.homepageCategoryNew") %}
+    {% set homepageCategorySale  = config("Ceres.homepage.homepageCategorySale") %}
+
+    {% set topsellerId = services.category.get(homepageCategoryTop, lang) %}
+    {% set newId = services.category.get(homepageCategoryNew, lang) %}
+    {% set saleId = services.category.get(homepageCategorySale, lang) %}
+    
+
+    {% set paginatedResultTop      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryTop, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
+
+    {% set paginatedResultNew      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryNew, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
+
+    {% set itemListTop          = paginatedResultTop.documents %}
+    {% set itemListNew          = paginatedResultNew.documents %}
+
+    {% block ThemeHomepage %}
+        {{ component( "Ceres::ItemList.Components.ItemList") }}
+        {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+        {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+
+        <div class="home container-max">
+            <div class="row">
+                <div class="cmp cmp-hero">
+                    <div class="hero-main">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <a class="hero-category" href="{{ homepageProductLinkFirstSlide }}">
+                                        <img src="{{ homepageImageFirstSlide }}" alt="{{ homepageProductNameFirstSlide }}" class="img-fluid">
+                                        <div class="carousel-caption">
+                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameFirstSlide }}</h1>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="hero-category" href="{{ homepageProductLinkSecondSlide }}">
+                                        <img src="{{ homepageImageSecondSlide }}" alt="{{ homepageProductNameSecondSlide }}" class="img-fluid">
+                                        <div class="carousel-caption">
+                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameSecondSlide }}</h1>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a class="hero-category" href="{{ homepageProductLinkThirdSlide }}">
+                                        <img src="{{ homepageImageThirdSlide }}" alt="{{ homepageProductNameThirdSlide }}" class="img-fluid">
+                                        <div class="carousel-caption">
+                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameThirdSlide }}</h1>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                            </ol>
+
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <span class="icon-prev" aria-hidden="true"></span>
+                                <span class="sr-only">Zurück</span>
+                            </a>
+
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <span class="icon-next" aria-hidden="true"></span>
+                                <span class="sr-only">Nächste</span>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="hero-xtras">
+                        <a class="hero-category" href="{{ services.category.getURL(heroExtras1, lang) }}">
+                            <img class="img-fluid" src="/documents/{{ heroExtras1.details[0].imagePath }}" alt="{{ heroExtras1.details[0].name }}">
+                            <div class="hero-category-inner">
+                                <h2 class="hero-category-headline">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtras1.details[0].name }}
+                                </h2>
+
+                            </div>
+                        </a>
+                        <a class="hero-category" href="{{ services.category.getURL(heroExtras2, lang) }}">
+                            <img class="img-fluid" src="/documents/{{ heroExtras2.details[0].imagePath }}" alt="{{ heroExtras2.details[0].name }}">
+                            <div class="hero-category-inner">
+                                <h2 class="hero-category-headline">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtras2.details[0].name }}
+                                </h2>
+
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- SALE -->
+
+                <div class="row prop-row m-y-2 sale-new">
+                    <div class="col-xs-6">
+                        <div class="prop-xs-6-4 prop-md-3-1">
+                            <div class="prop-inner">
+                                <a class="featured-sale-new" href="{{ services.category.getURL(newId, lang) }}">
+
+                                    <img src="/documents/{{ newId.details[0].imagePath }}" alt="New">
+                                    <div class="featured-category-inner">
+                                        <h4 class="featured-category-headline">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> New
+                                        </h4>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="prop-xs-6-4 prop-md-3-1">
+                            <div class="prop-inner">
+                                <a class="featured-sale-new" href="{{ services.category.getURL(saleId, lang) }}">
+
+                                    <img src="/documents/{{ saleId.details[0].imagePath }}" alt="Sale">
+                                    <div class="featured-category-inner">
+                                        <h4 class="featured-category-headline">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> Sale
+                                        </h4>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <!-- END SALE -->
+
+                <div class="m-b-2 clearfix">
+                    <div class="section-header m-b-1">
+                        <h4>Topseller</h4>
+                        <a href="{{ services.category.getURL(topsellerId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                    </div>
+                    <!-- crosssell start -->
+                    <ul class="product-list row grid">
+                        {% for item in itemListTop %}
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- CATEGORIES -->
+
+                <div class="row prop-row m-y-2 featured-categories">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="prop-xs-6-4 prop-md-2-1">
+                            <div class="prop-inner">
+                                <a class="featured-category" href="{{ services.category.getURL(featuredCategory1, lang) }}">
+
+                                    <img src="/documents/{{ featuredCategory1.details[0].imagePath }}" alt="{{ featuredCategory1.details[0].name }}">
+                                    <div class="featured-category-inner">
+                                        <h4 class="featured-category-headline">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1.details[0].name }}
+                                        </h4>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4">
+                        <div class="prop-xs-6-4 prop-md-1-1">
+                            <div class="prop-inner">
+                                <a class="featured-category" href="{{ services.category.getURL(featuredCategory2, lang) }}">
+
+                                    <img src="/documents/{{ featuredCategory2.details[0].image2Path }}" alt="{{ featuredCategory2.details[0].name }}">
+                                    <div class="featured-category-inner">
+                                        <h4 class="featured-category-headline">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2.details[0].name }}
+                                        </h4>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END CATEGORIES -->
+
+                <div class="m-b-2 clearfix">
+                    <div class="section-header m-b-1">
+                        <h4>Neuheiten</h4>
+                        <a href="{{ services.category.getURL(newId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                    </div>
+                    <!-- crosssell start -->
+                     <ul class="product-list row grid">
+                        {% for item in itemListNew %}
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    {% endblock %}
 
     {% endif %}
 

@@ -7,6 +7,118 @@
         "default"   : "true"
     },
     {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryTop",
+        "label"     : "Kategorie ID für Topseller",
+        "type"      : "text",
+        "default"   : "17"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryNew",
+        "label"     : "Kategorie ID für Neuheiten",
+        "type"      : "text",
+        "default"   : "18"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategorySale",
+        "label"     : "Kategorie ID für Sale",
+        "type"      : "text",
+        "default"   : "20"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageImageFirstSlide",
+        "label"     : "Bildpfad für den ersten Slide",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_02.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductLinkFirstSlide",
+        "label"     : "Produkt-URL für den ersten Slide",
+        "type"      : "text",
+        "default"   : "/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductNameFirstSlide",
+        "label"     : "Produkt-Name für den ersten Slide",
+        "type"      : "text",
+        "default"   : "Produktname"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageImageSecondSlide",
+        "label"     : "Bildpfad für den zweiten Slide",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_03.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductLinkSecondSlide",
+        "label"     : "Produkt-URL für den zweiten Slide",
+        "type"      : "text",
+        "default"   : "/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductNameSecondSlide",
+        "label"     : "Produkt-Name für den zweiten Slide",
+        "type"      : "text",
+        "default"   : "Produktname"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageImageThirdSlide",
+        "label"     : "Bildpfad für den dritten Slide",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductLinkThirdSlide",
+        "label"     : "Produkt-URL für den dritten Slide",
+        "type"      : "text",
+        "default"   : "/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageProductNameThirdSlide",
+        "label"     : "Produkt-Name für den dritten Slide",
+        "type"      : "text",
+        "default"   : "Produktname"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageTopCategoryId",
+        "label"     : "Kategorie ID für erste Top-Kategorie neben dem Slider",
+        "type"      : "text",
+        "default"   : "17"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageTopCategory2Id",
+        "label"     : "Kategorie ID für zweite Top-Kategorie neben dem Slider",
+        "type"      : "text",
+        "default"   : "18"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageFeatureCategoryId",
+        "label"     : "Kategorie ID für erste Featured-Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "20"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageFeatureCategory2Id",
+        "label"     : "Kategorie ID für zweite Featured-Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "16"
+    },
+    {
         "tab"       : "Header",
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
