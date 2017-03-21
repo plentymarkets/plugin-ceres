@@ -6,7 +6,7 @@
 @import "../../node_modules/font-awesome/scss/font-awesome";
 @import "../../node_modules/shariff/build/shariff.complete.css";
 @import "../../node_modules/flag-icon-css/sass/flag-icon";
-@import "../../node_modules/owlcarousel/owl-carousel/owl.carousel.css";
+@import "../../node_modules/owl.carousel/dist/assets/owl.carousel.css";
 
 // ==========================================================================
 // Custom styles
@@ -69,6 +69,7 @@
 
 // Pages
 @import "ceres/views/Category/category-list";
+@import "ceres/views/Category/category-list-controls";
 @import "ceres/views/Home/home";
 @import "ceres/views/Checkout/checkout";
 @import "ceres/views/Item/single-item";

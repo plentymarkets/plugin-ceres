@@ -2,10 +2,13 @@
 
 <script type="x/template" id="vue-add-to-basket">
 
-    <div v-if="showQuantity">
+    <div>
+
+        <div v-if="showQuantity">
         <span>
             <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
-                <quantity-input :value="1" @quantity-change="updateQuantity" template="#vue-quantity-input"></quantity-input>
+                <quantity-input :value="1" @quantity-change="updateQuantity"
+                                template="#vue-quantity-input"></quantity-input>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
                 <button href="#" class="btn btn-block btn-primary" @click="addToBasket()">
@@ -14,19 +17,21 @@
                 </button>
             </div>
         </span>
-    </div>
-
-    <div v-else>
-
-        <div class="btn-group" role="group" aria-label="Thumb Control">
-            <button type="button" class="btn btn-outline-primary" @click="addToBasket()">
-                <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>
-            </button>
-            {# maybe use the button for wishlist #}
-            {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
-                {#<i class="fa fa-arrow-right" aria-hidden="true"></i>#}
-            {#</button>#}
         </div>
+
+        <div v-else>
+
+            <div class="btn-group" role="group" aria-label="Thumb Control">
+                <button type="button" class="btn btn-outline-primary" @click="addToBasket()">
+                    <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>
+                </button>
+                {# maybe use the button for wishlist #}
+                {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
+                {#<i class="fa fa-arrow-right" aria-hidden="true"></i>#}
+                {#</button>#}
+            </div>
+        </div>
+
     </div>
 
 </script>

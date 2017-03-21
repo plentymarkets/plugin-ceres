@@ -4,6 +4,7 @@ var ItemListService = require("services/ItemListService");
 Vue.component("item-list", {
 
     props: [
+        "categoryId",
         "template"
     ],
 
@@ -11,20 +12,21 @@ Vue.component("item-list", {
     {
         return {
             itemList: {},
-            itemSearch: {}
+            isLoading: false,
+            filterListState: false
         };
     },
 
     created: function()
     {
         this.$options.template = this.template;
+
+        ItemListService.setCategoryId(this.categoryId);
     },
 
     ready: function()
     {
         ResourceService.bind("itemList", this);
-        ResourceService.bind("itemSearch", this);
-
-        ItemListService.setSearchParams(document.location.search);
+        ResourceService.bind("isLoading", this);
     }
 });

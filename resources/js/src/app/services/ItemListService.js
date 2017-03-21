@@ -1,58 +1,69 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
 
 module.exports = (function($)
 {
     var searchParams =
         {
-            searchString: "",
-            itemsPerPage: 20,
-            orderBy     : "itemName",
-            orderByKey  : "ASC",
+            query       : "",
+            items       : App.config.defaultItemsPerPage,
+            sorting     : App.config.defaultSorting,
             page        : 1,
-            isLoading   : false
+            facets      : "",
+            categoryId  : null,
+            template    : ""
         };
 
     return {
-        setSearchString: setSearchString,
-        setItemsPerPage: setItemsPerPage,
-        setOrderBy     : setOrderBy,
-        setPage        : setPage,
-        setSearchParams: setSearchParams
+        getItemList       : getItemList,
+        updateSearchString: updateSearchString,
+        setSearchString   : setSearchString,
+        setItemsPerPage   : setItemsPerPage,
+        setOrderBy        : setOrderBy,
+        setPage           : setPage,
+        setSearchParams   : setSearchParams,
+        setFacets         : setFacets,
+        setCategoryId     : setCategoryId
     };
 
-    function _getItemList()
+    function getItemList()
     {
-        if (searchParams.searchString.length >= 3)
+        if (searchParams.categoryId || searchParams.query.length >= 3)
         {
-            _updateUrl();
+            if (ResourceService.getResource("itemList").val())
+            {
+                ResourceService.getResource("itemList").val().total = 0;
+            }
 
-            ResourceService.getResource("itemList").set({});
+            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            searchParams.template = "Ceres::ItemList.ItemListView";
+
             _setIsLoading(true);
 
-            return ApiService.get("/rest/io/item/search", {searchString: searchParams.searchString}, {searchParams: searchParams}, {
-                template: "Ceres::ItemList.ItemListView"
-            })
+            ApiService.get(url, searchParams)
                 .done(function(response)
                 {
                     _setIsLoading(false);
+
                     ResourceService.getResource("itemList").set(response);
+                    ResourceService.getResource("facets").set(response.facets);
                 })
-                .fail(function()
+                .fail(function(response)
                 {
                     _setIsLoading(false);
+
                     NotificationService.error("Error while searching").closeAfter(5000);
                 });
         }
-
-        return null;
     }
 
     function _setIsLoading(isLoading)
     {
-        searchParams.isLoading = isLoading;
         ResourceService.getResource("itemSearch").set(searchParams);
+        ResourceService.getResource("isLoading").set(isLoading);
     }
 
     /**
@@ -61,71 +72,75 @@ module.exports = (function($)
      */
     function setSearchParams(urlParams)
     {
-        var queryParams = _getQueryParams(urlParams);
+        var queryParams = UrlService.getUrlParams(urlParams);
 
         for (var key in queryParams)
         {
             searchParams[key] = queryParams[key];
         }
-
-        _getItemList();
     }
 
-    function setSearchString(searchString)
+    function updateSearchString(query)
     {
-        searchParams.searchString = searchString;
+        searchParams.query = query;
+
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
+    }
+
+    function setSearchString(query)
+    {
+        searchParams.query = query;
         searchParams.page = 1;
 
-        _getItemList();
+        setPage(1);
+        setFacets("");
+
+        ResourceService.getResource("facets").set({});
+        ResourceService.getResource("facetParams").set([]);
+
+        query = (query.length > 0) ? query : null;
+        UrlService.setUrlParam("query", query);
     }
 
-    function setItemsPerPage(itemsPerPage)
+    function setItemsPerPage(items)
     {
-        searchParams.itemsPerPage = itemsPerPage;
-        _getItemList();
+        searchParams.items = items;
+
+        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        UrlService.setUrlParam("items", items);
     }
 
-    function setOrderBy(orderBy)
+    function setOrderBy(sorting)
     {
-        searchParams.orderBy = orderBy.split("_")[0];
-        searchParams.orderByKey = orderBy.split("_")[1];
-        _getItemList();
+        searchParams.sorting = sorting;
+
+        sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
+        UrlService.setUrlParam("sorting", sorting);
     }
 
     function setPage(page)
     {
         searchParams.page = page;
-        _getItemList();
+
+        page = (page > 1) ? page : null;
+        UrlService.setUrlParam("page", page);
     }
 
-    function _getQueryParams(searchString)
+    function setFacets(facets)
     {
-        if (searchString)
-        {
-            var tokens;
-            var params = {};
-            var regex = /[?&]?([^=]+)=([^&]*)/g;
+        searchParams.facets = facets.toString();
 
-            searchString = searchString.split("+").join(" ");
+        facets = (facets.toString().length > 0) ? facets.toString() : null;
 
-            // eslint-disable-next-line
-            while (tokens = regex.exec(searchString))
-            {
-                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-            }
+        setPage(1);
 
-            return params;
-        }
-
-        return null;
+        UrlService.setUrlParam("facets", facets);
     }
 
-    function _updateUrl()
+    function setCategoryId(categoryId)
     {
-        var url = window.location.pathname + "?" + $.param(searchParams);
-        var title = document.getElementsByTagName("title")[0].innerHTML;
-
-        window.history.replaceState({}, title, url);
+        searchParams.categoryId = categoryId;
     }
 
 })(jQuery);

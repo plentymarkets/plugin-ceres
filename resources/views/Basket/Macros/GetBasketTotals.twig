@@ -1,0 +1,149 @@
+{% macro getCurrency( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].currency }}
+
+    {% endif %}
+
+{% endmacro %}
+
+{% macro getItemSumGross( currentOrderObject ) %}
+
+    {% set itemSumGross = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 1 %}
+
+                {% set itemSumGross = itemSumGross + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ itemSumGross }}
+
+{% endmacro %}
+
+{% macro getItemSumNet( currentOrderObject ) %}
+
+    {% set itemSumNet = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 1 %}
+
+                {% set itemSumNet = itemSumNet + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceNet %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ itemSumNet }}
+
+{% endmacro %}
+
+{% macro getShippingAmountGross( currentOrderObject ) %}
+
+    {% set shippingAmountGross = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 6 %}
+
+                {% set shippingAmountGross = shippingAmountGross + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ shippingAmountGross }}
+
+{% endmacro %}
+
+{% macro getShippingAmountNet( currentOrderObject ) %}
+
+    {% set shippingAmountNet = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 6 %}
+
+                {% set shippingAmountNet = shippingAmountNet + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceNet %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ shippingAmountNet }}
+
+{% endmacro %}
+
+{% macro getVat( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].vatTotal }}
+
+    {% endif %}
+
+{% endmacro %}
+
+{% macro getCouponValue( currentOrderObject ) %}
+
+    {% set couponValue = 0 %}
+
+    {% if currentOrderObject != null %}
+
+        {% for item in currentOrderObject.order.orderItems %}
+
+            {% if currentOrderObject.order.orderItems[loop.index0].typeId == 4 or currentOrderObject.order.orderItems[loop.index0].typeId == 5 %}
+
+                {% set couponValue = couponValue + currentOrderObject.order.orderItems[loop.index0].amounts[0].priceGross %}
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {{ couponValue }}
+
+{% endmacro %}
+
+{% macro getTotalAmountGross( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].grossTotal }}
+
+    {% endif %}
+
+{% endmacro %}
+
+{% macro getTotalAmountNet( currentOrderObject ) %}
+
+    {% if currentOrderObject != null %}
+
+        {{ currentOrderObject.order.amounts[0].netTotal }}
+
+    {% endif %}
+
+{% endmacro %}

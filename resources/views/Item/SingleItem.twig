@@ -10,7 +10,7 @@
 {% block PageBody %}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
-    {{ component( "Ceres::Item.Components.VariationImageList" ) }}
+    {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -20,7 +20,8 @@
             <div class="col-md-7 single-leftside">
                 <div class="row">
                     <div class="col-xs-12">
-                        <variation-image-list template="#vue-variation-image-list"></variation-image-list>
+                        <item-image-carousel image-url-accessor="url"
+                                             template="#vue-item-image-carousel"></item-image-carousel>
                     </div>
                 </div>
             </div>
@@ -94,7 +95,7 @@
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
-                    {{ availability.languages[0].name }}
+                    {{ item.documents[0].data.variation.availability.names[0].name }}
                 </span>
                 {% endfor %}
 
@@ -102,7 +103,8 @@
 
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
-                    <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode() }}" :show-quantity="true"></add-to-basket>
+                    <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
+                                   resource="currentVariation" :show-quantity="true"></add-to-basket>
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
@@ -267,24 +269,24 @@
         <!-- ./ITEM DESCRIPTION -->
 
         <!-- CROSSSELLING -->
-        {% if crossSellingList | length > 0 %}
-            <hr>
+        {#{% if crossSellingList | length > 0 %}#}
+            {#<hr>#}
 
-            <div class="row m-y-3">
-                <div class="col-xs-12">
-                    <h3 class="m-b-1">{{ (crossSellingList|first).relationship }}</h3>
-                </div>
-                <div class="col-xs-12">
-                    <ul class="crosssellers list-unstyled row">
-                        {% for crossSellingItem in crossSellingList %}
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endif %}
+            {#<div class="row m-y-3">#}
+                {#<div class="col-xs-12">#}
+                    {#<h3 class="m-b-1">{{ (crossSellingList|first).relationship }}</h3>#}
+                {#</div>#}
+                {#<div class="col-xs-12">#}
+                    {#<ul class="crosssellers list-unstyled row">#}
+                        {#{% for crossSellingItem in crossSellingList %}#}
+                            {#<li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">#}
+                                {#{% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}#}
+                            {#</li>#}
+                        {#{% endfor %}#}
+                    {#</ul>#}
+                {#</div>#}
+            {#</div>#}
+        {#{% endif %}#}
         <!-- ./CROSSSELLING -->
 
         {#<hr>#}

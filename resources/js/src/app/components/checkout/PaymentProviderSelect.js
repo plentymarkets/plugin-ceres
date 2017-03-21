@@ -35,7 +35,12 @@ Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange: function()
         {
-            ResourceService.getResource("checkout").set(this.checkout);
+            ResourceService.getResource("checkout")
+                .set(this.checkout)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.checkout.methodOfPaymentId}));
+                }.bind(this));
 
             this.validate();
         },

@@ -19,7 +19,8 @@ var ApiService = require("services/ApiService");
                 pageMax: 1,
                 countStart: 0,
                 countEnd: 0,
-                currentOrder: null
+                currentOrder: null,
+                isLoading: true
             };
         },
 
@@ -53,6 +54,9 @@ var ApiService = require("services/ApiService");
 
             setCurrentOrder: function(order)
             {
+                $("#dynamic-twig-content").html("");
+                this.isLoading = true;
+
                 this.currentOrder = order;
                 var self = this;
 
@@ -60,6 +64,16 @@ var ApiService = require("services/ApiService");
                 {
                     $(self.$els.orderDetails).modal("show");
                 });
+
+                var jsonEncodedOrder = JSON.stringify(order);
+
+                ApiService
+                    .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder)
+                    .done(function(response)
+                    {
+                        this.isLoading = false;
+                        $("#dynamic-twig-content").html(response);
+                    }.bind(this));
             },
 
             showPage: function(page)

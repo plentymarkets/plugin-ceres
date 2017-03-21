@@ -2,9 +2,29 @@
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
 {% set configItemName = config("Ceres.item.name") %}
 
+{{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
+{{ component( "Ceres::ItemList.Components.CategoryImageCarousel" ) }}
+{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+{{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
+
+<resource name="isLoading" :data="false"></resource>
+
 <script type="x/template" id="vue-item-list">
-    <ul class="product-list row grid" v-show="!itemSearch.isLoading">
+    <div class="loading-animation-frame col-xs-12 col-lg-12" v-show="isLoading">
+        <div class="loading-animation">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
+    <ul class="product-list row grid" v-show="!isLoading">
+
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
                        decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
+
     </ul>
 </script>

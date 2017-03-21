@@ -8,7 +8,7 @@
     "node_modules/shariff/build/shariff.complete.js",
     "node_modules/sticky-kit/dist/sticky-kit.js",
     "node_modules/lightbox2/dist/js/lightbox.js",
-    "node_modules/owlcarousel/owl-carousel/owl.carousel.js",
+    "node_modules/owl.carousel/dist/owl.carousel.js",
     "node_modules/bootstrap/dist/js/bootstrap.js",
     "node_modules/moment/moment.js",
 
