@@ -4,7 +4,7 @@
 	flex-flow: row wrap;
 	border-bottom:1px solid $gray-lighter;
 
-	.toggle-description, //TODO remove this class. deprecated
+	.toggle-description,
 	.item-toggle{
 	    display: none;
 	}
@@ -161,9 +161,14 @@
 	    color: $gray-lighter;
 	    cursor: pointer;
 		transition: color 250ms;
-			&:hover {
-	    	color: $brand-danger;
-			}
+		&:hover {
+    		color: $brand-danger;
+    		text-decoration: none;
+		}
+		&.btn-danger:hover {
+			color:white;
+		}
+		&:focus {outline:none;}
 	}
 
 	@include media-breakpoint-up(sm){
@@ -214,11 +219,6 @@
 
 		.item-remove{
 		    bottom: 1em;
-		    color: $gray-lighter;
-
-		    &:hover{
-		    	color: $brand-danger;
-		    }
 		}
 
 	}

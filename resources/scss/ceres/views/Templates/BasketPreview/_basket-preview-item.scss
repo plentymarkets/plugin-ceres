@@ -105,9 +105,13 @@
 	    cursor: pointer;					
 		color: $gray-lighter;
 
-			&:hover {
-				color:#d9534f;
-				text-decoration: none;
-			}
+		&:hover {
+			color:$brand-danger;
+			text-decoration: none;
 		}
+		&.btn-danger:hover {
+			color:white;
+		}
+		&:focus {outline:none;}
 	}
+}
