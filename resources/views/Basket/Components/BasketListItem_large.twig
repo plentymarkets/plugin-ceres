@@ -4,7 +4,7 @@
 
     <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation.data | itemURL">
-        <img :src="basketItem.variation.data.images.all[0].urlPreview">
+        <img :src="basketItem.variation.data.images | itemImages 'urlPreview' | arrayFirst">
     </a>
     <!-- ./ITEM IMAGE -->
 

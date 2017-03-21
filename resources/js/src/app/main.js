@@ -21,6 +21,9 @@ var init = (function($, window, document)
             }
         });
 
+        // init bootstrap tooltips
+        $("[data-toggle=\"tooltip\"]").tooltip();
+
         // Replace all SVG images with inline SVG, class: svg
         $("img[src$=\".svg\"]").each(function()
         {
@@ -90,6 +93,11 @@ var init = (function($, window, document)
                     $("body").toggleClass("open-right");
                 }
             }
+        });
+
+        $("#detlef").on("click", function()
+        {
+            $("html, body").animate({scrollTop: 0}, "slow");
         });
 
         $("#searchBox").on("show.bs.collapse", function()

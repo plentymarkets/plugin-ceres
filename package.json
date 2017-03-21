@@ -44,7 +44,7 @@
     "jquery": "^2.2.4",
     "lightbox2": "^2.8.2",
     "moment": "^2.15.2",
-    "owlcarousel": "^1.3.3",
+    "owl.carousel": "^2.2.0",
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.3.2",
