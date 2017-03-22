@@ -6,27 +6,7 @@
         "type"      : "checkbox",
         "default"   : "true"
     },
-    {
-        "tab"       : "Homepage",
-        "key"       : "homepage.homepageCategoryTop",
-        "label"     : "Kategorie ID für Topseller",
-        "type"      : "text",
-        "default"   : "17"
-    },
-    {
-        "tab"       : "Homepage",
-        "key"       : "homepage.homepageCategoryNew",
-        "label"     : "Kategorie ID für Neuheiten",
-        "type"      : "text",
-        "default"   : "18"
-    },
-    {
-        "tab"       : "Homepage",
-        "key"       : "homepage.homepageCategorySale",
-        "label"     : "Kategorie ID für Sale",
-        "type"      : "text",
-        "default"   : "20"
-    },
+    
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageImageFirstSlide",
@@ -131,6 +111,55 @@
         "label"     : "Titel für den unteren HeroExtra neben dem Slider",
         "type"      : "text",
         "default"   : "Titel 2"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryTop",
+        "label"     : "Kategorie ID für Topseller",
+        "type"      : "category_select",
+        "default"   : "17"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryNew",
+        "label"     : "Kategorie ID für Neuheiten",
+        "type"      : "category_select",
+        "default"   : "18"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryNewImage",
+        "label"     : "Bild-Pfad für Neuheiten-Teaser",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategoryNewName",
+        "label"     : "Titel für Neuheiten-Teaser",
+        "type"      : "text",
+        "default"   : "New"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategorySale",
+        "label"     : "Kategorie ID für Sale",
+        "type"      : "category_select",
+        "default"   : "20"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategorySaleImage",
+        "label"     : "Bild-Pfad für Sale-Teaser",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_02.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategorySaleName",
+        "label"     : "Titel für Sale-Teaser",
+        "type"      : "text",
+        "default"   : "Sale"
     },
     {
         "tab"       : "Homepage",

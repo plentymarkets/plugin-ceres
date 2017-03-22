@@ -332,8 +332,14 @@
     {% set homepageProductNameThirdSlide  = config("Ceres.homepage.homepageProductNameThirdSlide") %}
 
     {% set homepageCategoryTop  = config("Ceres.homepage.homepageCategoryTop") %}
+
     {% set homepageCategoryNew  = config("Ceres.homepage.homepageCategoryNew") %}
+    {% set homepageCategoryNewImage  = config("Ceres.homepage.homepageCategoryNewImage") %}
+    {% set homepageCategoryNewName  = config("Ceres.homepage.homepageCategoryNewName") %}
+
     {% set homepageCategorySale  = config("Ceres.homepage.homepageCategorySale") %}
+    {% set homepageCategorySaleImage  = config("Ceres.homepage.homepageCategorySaleImage") %}
+    {% set homepageCategorySaleName  = config("Ceres.homepage.homepageCategorySaleName") %}
 
     {% set topsellerId = services.category.get(homepageCategoryTop, lang) %}
     {% set newId = services.category.get(homepageCategoryNew, lang) %}
@@ -434,10 +440,10 @@
                             <div class="prop-inner">
                                 <a class="featured-sale-new" href="{{ services.category.getURL(newId, lang) }}">
 
-                                    <img src="/documents/{{ newId.details[0].imagePath }}" alt="New">
+                                    <img src="{{ homepageCategoryNewImage }}" alt="New">
                                     <div class="featured-category-inner">
                                         <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> New
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategoryNewName }}
                                         </h4>
 
                                     </div>
@@ -451,10 +457,10 @@
                             <div class="prop-inner">
                                 <a class="featured-sale-new" href="{{ services.category.getURL(saleId, lang) }}">
 
-                                    <img src="/documents/{{ saleId.details[0].imagePath }}" alt="Sale">
+                                    <img src="{{ homepageCategorySaleImage }}" alt="{{ homepageCategorySaleName }}">
                                     <div class="featured-category-inner">
                                         <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> Sale
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategorySaleName }}
                                         </h4>
 
                                     </div>
