@@ -1,16 +1,36 @@
 # Release Notes for Ceres
 
-## v1.0.2 (2017-02-23)
+## v1.0.3 (2017-03-22)
+
+### Added
+
+- Filters in the search and in the category view
+- Template container **Script.Loader**, to load events and JS
+
+### Changed
+
+- New Image Carousel for category view (configurable)
+- New Image Carousel for single item view
 
 ### Fixed
 
-- Fixed an error that no pictures were visible in a category
+- The **AddToBasketOverlay** overlay now displays the correct preview images for variations
+- The correct preview images for variations are now displayed in the shopping cart and shopping cart preview
+- When adding an item to the shopping cart, the correct data will be sent after switching from the category view to the single item view
+- Cross selling links saved for an item won't cause an internal error anymore
+- An error in the template containers of the order overview has been fixed
 
 ### Known issues
 
 - Due to a sporadically occurring error, addresses cannot be edited at the moment.
 - The federal state (German: Bundesland) is not saved correctly for the address.
 - No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
+## v1.0.2 (2017-02-23)
+
+### Fixed
+
+- Fixed an error that no pictures were visible in a category
 
 ## v1.0.1 (2017-02-22)
 
