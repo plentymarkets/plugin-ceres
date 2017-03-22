@@ -19,7 +19,7 @@
 						h3, h1 {
 							font-family: $font-family-heading;
 							text-shadow: none;
-							color: $gray-darker;
+							color: $white;
 							background: rgba($brand-primary, .8);
 							padding: .5rem 1rem;
 							font-size: 1.25rem;
@@ -88,7 +88,7 @@
 				    display: block;
 				    width: auto;
 				    text-align: left;
-				    color: $gray-darker;
+				    color: $white;
 				    transition: all .3s ease;
 				}
 			}
@@ -134,15 +134,16 @@
 	    margin: 0;
 	    text-transform: uppercase;
 	    font-size: 1.75rem;
+	    color: $white;
     }
     a.section-link-all {
     	position: absolute;
 	    top: 50%;
 	    right: 1.5rem;
 	    transform: translateY(-50%);
-	    color: $gray-darker;
+	    color: $white;
 	    &:hover {
-	    	color: $white;
+	    	color: $gray-darker;
 	    }
     }
 }
