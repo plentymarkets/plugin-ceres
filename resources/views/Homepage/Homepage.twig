@@ -301,11 +301,23 @@
 
     
 
-    {% set heroExtras1 = services.category.get(config("Ceres.homepage.homepageTopCategoryId"), lang) %}
-    {% set heroExtras2 = services.category.get(config("Ceres.homepage.homepageTopCategory2Id"), lang) %}
+    {% set heroExtra1Image  = config("Ceres.homepage.heroExtra1Image") %}
+    {% set heroExtra1Link  = config("Ceres.homepage.heroExtra1Link") %}
+    {% set heroExtra1Name  = config("Ceres.homepage.heroExtra1Name") %}
 
-    {% set featuredCategory1 = services.category.get(config("Ceres.homepage.homepageFeatureCategoryId"), lang) %}
-    {% set featuredCategory2 = services.category.get(config("Ceres.homepage.homepageFeatureCategory2Id"), lang) %}
+    {% set heroExtra2Image  = config("Ceres.homepage.heroExtra2Image") %}
+    {% set heroExtra2Link  = config("Ceres.homepage.heroExtra2Link") %}
+    {% set heroExtra2Name  = config("Ceres.homepage.heroExtra2Name") %}
+
+    {% set featuredCategory1Image  = config("Ceres.homepage.featuredCategory1Image") %}
+    {% set featuredCategory1Link  = config("Ceres.homepage.featuredCategory1Link") %}
+    {% set featuredCategory1Name  = config("Ceres.homepage.featuredCategory1Name") %}
+
+    {% set featuredCategory2Image  = config("Ceres.homepage.featuredCategory2Image") %}
+    {% set featuredCategory2Link  = config("Ceres.homepage.featuredCategory2Link") %}
+    {% set featuredCategory2Name  = config("Ceres.homepage.featuredCategory2Name") %}
+
+
 
     {% set homepageImageFirstSlide  = config("Ceres.homepage.homepageImageFirstSlide") %}
     {% set homepageProductLinkFirstSlide  = config("Ceres.homepage.homepageProductLinkFirstSlide") %}
@@ -392,20 +404,20 @@
                     </div>
 
                     <div class="hero-xtras">
-                        <a class="hero-category" href="{{ services.category.getURL(heroExtras1, lang) }}">
-                            <img class="img-fluid" src="/documents/{{ heroExtras1.details[0].imagePath }}" alt="{{ heroExtras1.details[0].name }}">
+                        <a class="hero-category" href="{{ heroExtra1Link }}">
+                            <img class="img-fluid" src="{{ heroExtra1Image }}" alt="{{ heroExtra1Name }}">
                             <div class="hero-category-inner">
                                 <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtras1.details[0].name }}
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1Name }}
                                 </h2>
 
                             </div>
                         </a>
-                        <a class="hero-category" href="{{ services.category.getURL(heroExtras2, lang) }}">
-                            <img class="img-fluid" src="/documents/{{ heroExtras2.details[0].imagePath }}" alt="{{ heroExtras2.details[0].name }}">
+                        <a class="hero-category" href="{{ heroExtra2Link }}">
+                            <img class="img-fluid" src="{{ heroExtra2Image }}" alt="{{ heroExtra2Name }}">
                             <div class="hero-category-inner">
                                 <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtras2.details[0].name }}
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2Name }}
                                 </h2>
 
                             </div>
@@ -478,12 +490,12 @@
                     <div class="col-xs-12 col-md-8">
                         <div class="prop-xs-6-4 prop-md-2-1">
                             <div class="prop-inner">
-                                <a class="featured-category" href="{{ services.category.getURL(featuredCategory1, lang) }}">
+                                <a class="featured-category" href="{{ featuredCategory1Link }}">
 
-                                    <img src="/documents/{{ featuredCategory1.details[0].imagePath }}" alt="{{ featuredCategory1.details[0].name }}">
+                                    <img src="{{ featuredCategory1Image }}" alt="{{ featuredCategory1Name }}">
                                     <div class="featured-category-inner">
                                         <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1.details[0].name }}
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1Name }}
                                         </h4>
 
                                     </div>
@@ -495,12 +507,12 @@
                     <div class="col-xs-12 col-md-4">
                         <div class="prop-xs-6-4 prop-md-1-1">
                             <div class="prop-inner">
-                                <a class="featured-category" href="{{ services.category.getURL(featuredCategory2, lang) }}">
+                                <a class="featured-category" href="{{ featuredCategory2Link }}">
 
-                                    <img src="/documents/{{ featuredCategory2.details[0].image2Path }}" alt="{{ featuredCategory2.details[0].name }}">
+                                    <img src="{{ featuredCategory2Image }}" alt="{{ featuredCategory2Name }}">
                                     <div class="featured-category-inner">
                                         <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2.details[0].name }}
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2Name }}
                                         </h4>
 
                                     </div>

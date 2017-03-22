@@ -92,31 +92,87 @@
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.homepageTopCategoryId",
-        "label"     : "Kategorie ID für erste Top-Kategorie neben dem Slider",
+        "key"       : "homepage.heroExtra1Image",
+        "label"     : "Bildpfad zum oberen HeroExtra neben dem Slider",
         "type"      : "text",
-        "default"   : "17"
+        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.homepageTopCategory2Id",
-        "label"     : "Kategorie ID für zweite Top-Kategorie neben dem Slider",
+        "key"       : "homepage.heroExtra1Link",
+        "label"     : "Produkt-URL für den oberen HeroExtra neben dem Slider",
         "type"      : "text",
-        "default"   : "18"
+        "default"   : "/"
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.homepageFeatureCategoryId",
-        "label"     : "Kategorie ID für erste Featured-Kategorie unter den Topsellern",
+        "key"       : "homepage.heroExtra1Name",
+        "label"     : "Titel für den oberen HeroExtra neben dem Slider",
         "type"      : "text",
-        "default"   : "20"
+        "default"   : "Titel 1"
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.homepageFeatureCategory2Id",
-        "label"     : "Kategorie ID für zweite Featured-Kategorie unter den Topsellern",
+        "key"       : "homepage.heroExtra2Image",
+        "label"     : "Bildpfad zum unteren HeroExtra neben dem Slider",
         "type"      : "text",
-        "default"   : "16"
+        "default"   : "/images/gallery/welcome-page/slide_sample_03.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtra2Link",
+        "label"     : "Produkt-URL für den unteren HeroExtra neben dem Slider",
+        "type"      : "text",
+        "default"   : "/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtra2Name",
+        "label"     : "Titel für den unteren HeroExtra neben dem Slider",
+        "type"      : "text",
+        "default"   : "Titel 2"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory1Image",
+        "label"     : "Bildpfad für erste featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_03.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory1Link",
+        "label"     : "Link-URL für erste featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "/wohnzimmer/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory1Name",
+        "label"     : "Titel für erste featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "Titel 1"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory2Image",
+        "label"     : "Bildpfad für zweite featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory2Link",
+        "label"     : "Link-URL für zweite featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "/wohnzimmer/"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.featuredCategory2Name",
+        "label"     : "Titel für zweite featured Kategorie unter den Topsellern",
+        "type"      : "text",
+        "default"   : "Titel 2"
     },
     {
         "tab"       : "Header",
