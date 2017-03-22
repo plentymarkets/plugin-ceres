@@ -116,15 +116,13 @@
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategoryTop",
         "label"     : "Kategorie ID für Topseller",
-        "type"      : "category_select",
-        "default"   : "17"
+        "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategoryNew",
         "label"     : "Kategorie ID für Neuheiten",
-        "type"      : "category_select",
-        "default"   : "18"
+        "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
@@ -144,8 +142,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategorySale",
         "label"     : "Kategorie ID für Sale",
-        "type"      : "category_select",
-        "default"   : "20"
+        "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
