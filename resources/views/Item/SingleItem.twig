@@ -7,6 +7,10 @@
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
+{% block PartialHead %}
+    <link rel=“canonical“ href=“https://{{ http_host }}{{ item.documents[0].data.item.id | buildItemURL(item.documents[0].data.variation.id, true) }}">
+{% endblock %}
+
 {% block PageBody %}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
