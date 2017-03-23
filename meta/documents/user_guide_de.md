@@ -8,7 +8,7 @@
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
