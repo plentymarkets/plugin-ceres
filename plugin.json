@@ -15,7 +15,7 @@
     "type"              : "template",
     "require"           : ["IO"],
     "namespace"         : "Ceres-Senkel-Online",
-    "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
+    "serviceProvider"   : "Ceres-Senkel-Online\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "containers"        :
     [
