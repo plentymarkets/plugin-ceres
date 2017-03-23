@@ -14,7 +14,7 @@
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
     "type"              : "template",
     "require"           : ["IO"],
-    "namespace"         : "Ceres",
+    "namespace"         : "Ceres-Senkel-Online",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "containers"        :
