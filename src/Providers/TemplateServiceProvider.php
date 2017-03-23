@@ -1,5 +1,5 @@
 <?php
-namespace Ceres\Providers;
+namespace Ceres-Senkel-Online\Providers;
 
 
 use IO\Extensions\Functions\Partial;
