@@ -1,11 +1,12 @@
 # Release Notes for Ceres
 
-## v1.0.3 (2017-03-22)
+## v1.0.3 (2017-03-23)
 
 ### Added
 
 - Filters in the search and in the category view
 - Template container **Script.Loader**, to load events and JS
+- Old Google rankings will be preserved by mapping of existing Callisto 3.5 URLs to the new **Ceres** URL structure (Canonical Tags)
 
 ### Changed
 
