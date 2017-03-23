@@ -1,10 +1,10 @@
 {
-  "name": "Ceres",
+  "name": "Ceres-Senkel-Online",
   "license": "AGPL-3.0",
   "version": "1.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plentymarkets/plugin-ceres.git"
+    "url": "https://github.com/breitissimo/plugin-ceres.git"
   },
   "devDependencies": {
     "browserify": "^13.0.1",
