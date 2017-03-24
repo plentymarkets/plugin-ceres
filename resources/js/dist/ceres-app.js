@@ -4140,16 +4140,14 @@ Vue.filter("itemName", function(item, selectedName)
 },{}],61:[function(require,module,exports){
 Vue.filter("itemURL", function(item)
 {
+    var urlPath = item.texts[0].urlPath;
 
-    var urlContent = item.texts[0].urlPath.split("/");
-    var i          = urlContent.length - 1;
-
-    if (urlContent[i].length > 0)
+    if (urlPath.length > 0)
     {
-        return "/" + urlContent[i] + "/" + item.variation.itemId + "/" + item.variation.id;
+        return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
     }
-    return "/" + item.variation.itemId + "/" + item.variation.id;
 
+    return "/" + item.item.id + "_" + item.variation.id;
 });
 
 },{}],62:[function(require,module,exports){
