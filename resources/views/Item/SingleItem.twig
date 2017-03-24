@@ -8,7 +8,7 @@
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
 {% block PartialHead %}
-    <link rel=“canonical“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data.item.id | buildItemURL(item.documents[0].data.variation.id, true) }}">
+    <link rel=“canonical“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemUrl }}">
 {% endblock %}
 
 {% block PageBody %}
