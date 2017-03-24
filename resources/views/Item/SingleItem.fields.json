@@ -23,10 +23,7 @@
   "variation.availability.id",
   "variation.releasedAt",
 
-  "texts.name*",
-  "texts.shortDescription",
-  "texts.description",
-  "texts.technicalData",
+  "texts.*",
 
   "salesPrices.price",
   "salesPrices.type",

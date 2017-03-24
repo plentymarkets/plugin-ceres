@@ -81,7 +81,7 @@ Vue.component("variation-select", {
                     {
                         // get variation data from remote
                         ApiService
-                            .get("/rest/io/variations/" + variationId)
+                            .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
                             .done(function(response)
                             {
                                 // store received variation data for later reuse
@@ -107,11 +107,12 @@ Vue.component("variation-select", {
             var url = window.location.pathname;
             var title = document.getElementsByTagName("title")[0].innerHTML;
             // ItemURLs should match: "/<ITEM_NAME>/<ITEM_ID>/<VARIATION_ID>/"
-            var match = url.match(/\/([^\/]*)\/([\d]+)\/?([\d]*)/);
+            // var match = url.match(/\/([^\/]*)\/([\d]+)\/?([\d]*)/);
+            var match = url.match(/\/([^\/]*)_([\d]+)_([\d]*)/);
 
             if (match)
             {
-                url = "/" + match[1] + "/" + match[2] + "/" + newVariation.documents[0].id;
+                url = "/" + match[1] + "_" + match[2] + "_" + newVariation.documents[0].id;
             }
 
             window.history.replaceState({}, title, url);

@@ -8,7 +8,7 @@
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
     When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the normal plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
 </div>
 
@@ -333,6 +333,16 @@ Alternatively, save your legal texts in HTML format. For this purpose, use the f
 7. **Save** the settings.
 
 Enter the texts for the **cancellation rights**, the **privacy policy** and the **legal disclosure** for your online store in the desired languages. These texts will be displayed on the respective pages in **Ceres**.
+
+### Setting up filters
+
+Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
+
+Set up attributes and properties first and link them with your items. For further information about attributes, refer to the [Managing attributes](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapter.
+For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapters.
+
+Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
+Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
 
 ## License
 

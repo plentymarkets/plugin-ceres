@@ -8,7 +8,7 @@
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
@@ -288,7 +288,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 </tr> 
 <tr>
 <td><b>Enable logging options</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print sucess</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stack trace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
+<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print success</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stack trace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
 </tr>
 <tr>
 <td><b>Performance level</b></td>  
@@ -334,6 +334,16 @@ Alternativ speichern Sie Ihre Rechtstexte im HTML-Format. Nutzen Sie hierfür di
 6. **Speichern** Sie die Einstellungen.
 
 Geben Sie die Texte für die **Widerrufsbelehrung**, die **Datenschutzerklärung** und das **Impressum** analog in den gewünschten Sprachen ein. Die Texte werden in **Ceres** auf den zugehörigen Seiten angezeigt.
+
+### Filter einrichten
+
+Im Webshop **Ceres** richten Sie Filter für die Suche sowie für die Kategorie-Ansicht mit Hilfe von Facetten vom Typ **Attribut/Merkmal** ein.
+
+Richten Sie dazu zunächst Attribute und Merkmale ein und verknüpfen diese mit Ihren Artikeln. Weitere Informationen zu Attributen finden Sie unter [Attribute verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#1).
+Weitere Informationen zu Merkmalen finden Sie unter [Merkmale verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#2).
+
+Anschließend erstellen Sie passende Facetten für Attribute und Merkmale. Weitere Informationen zu Facetten finden Sie unter [Facetten anlegen](https://www.plentymarkets.eu/handbuch/mandant-shop/globale-einstellungen/externe-dienste/facettensuche/#2-1).
+Eine ausführliche Anleitung zur Einrichtung von Filtern finden Sie auch in unserem [Forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679).
 
 ## Lizenz
 
