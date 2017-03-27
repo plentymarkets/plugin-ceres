@@ -138,11 +138,11 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  
-<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht links und rechts der Bildervorschau Punkte anzuzeigen.</td>
+<td>Aktivieren, um unterhalb des Bilderkarussells eines Artikels in der Kategorieansicht Punkte anzuzeigen.</td>
 </tr>
 <tr>
 <td><b>Show image carousel navigation in category item list</b></td>  
-<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht links und rechts der Bildervorschau Navigationspfeile anzuzeigen.</td>
+<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht Navigationspfeile anzuzeigen.</td>
 </tr>
 </tbody>
 <caption>Tab. 2: Artikelansicht anpassen</caption>

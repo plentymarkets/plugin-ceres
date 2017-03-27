@@ -138,11 +138,11 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  
-<td>Active, to show dots on the left and right sides of the image preview in the image carousel of the category item list.</td>
+<td>Active, to show dots below the image carousel of the category item list.</td>
 </tr>
 <tr>
 <td><b>Show image carousel navigation in category item list</b></td>  
-<td>Active, to show navigation arrows on the left and right sides of the image preview in the image carousel of the category item list.</td>
+<td>Active, to show navigation arrows in the image carousel of the category item list.</td>
 </tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
