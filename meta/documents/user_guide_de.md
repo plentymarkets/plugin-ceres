@@ -136,6 +136,14 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td><b>Show variations in the category item list</b></td>  
 <td>Varianten in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
 </tr>
+<tr>
+<td><b>Show image carousel dots in category item list</b></td>  
+<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht links und rechts der Bildervorschau Punkte anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Show image carousel navigation in category item list</b></td>  
+<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht links und rechts der Bildervorschau Navigationspfeile anzuzeigen.</td>
+</tr>
 </tbody>
 <caption>Tab. 2: Artikelansicht anpassen</caption>
 </table>

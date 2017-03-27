@@ -136,6 +136,14 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td><b>Show variations in the category item list</b></td>  
 <td>Display variations in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
 </tr>
+<tr>
+<td><b>Show image carousel dots in category item list</b></td>  
+<td>Active, to show dots on the left and right sides of the image preview in the image carousel of the category item list.</td>
+</tr>
+<tr>
+<td><b>Show image carousel navigation in category item list</b></td>  
+<td>Active, to show navigation arrows on the left and right sides of the image preview in the image carousel of the category item list.</td>
+</tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
 </table>
