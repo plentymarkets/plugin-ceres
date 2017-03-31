@@ -24,7 +24,7 @@ var init = (function($, window, document)
         function buildBreadcrumb()
         {
             var openElements = menu.find("li.open");
-            var breadcrumbArray = ["Alle"];
+            var breadcrumbArray = [Translations.Template.generalBigAll];
 
             $(openElements).each(function()
             {
