@@ -1,0 +1,41 @@
+{% macro get_nav_bar(categories, currentScopeUrl) %}
+
+    {% import _self as macros %}
+
+    {% for category in categories %}
+
+        {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+
+        {% if category.children %}
+
+            {#<noscript>#}
+                <li class="ddown">
+                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
+                    <ul data-level="1">
+
+                        {% for child in category.children %}
+
+                            <li>
+                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}">{{ child.details[0].name }}</a>
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </li>
+            {#</noscript>#}
+
+        {% else %}
+
+            {#<noscript>#}
+                <li>
+                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
+                </li>
+            {#</noscript>#}
+
+            {#vue component#}
+
+        {% endif %}
+    {% endfor %}
+
+{% endmacro %}
