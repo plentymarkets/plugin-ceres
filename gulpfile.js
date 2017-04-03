@@ -26,6 +26,7 @@ var minifyCSS = require('gulp-minify-css');
 var eslint = require('gulp-eslint');
 var props = require('gulp-props');
 var tap = require('gulp-tap');
+var babel = require('gulp-babel');
 
 // import sass tools
 var sass = require('gulp-sass');
@@ -72,6 +73,7 @@ gulp.task('build:app', ['build:lint'], function() {
         .pipe( source( OUTPUT_PREFIX + '-app.js' ) )
         .pipe( buffer() )
         .pipe( sourcemaps.init({ loadMaps: true }) )
+        .pipe( babel({presets: ['es2015']}) )
         .pipe( addSrc.append(JS_SRC + 'app/main.js') )
         .pipe( concat( OUTPUT_PREFIX + '-app.js') )
         .pipe( sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}) )
