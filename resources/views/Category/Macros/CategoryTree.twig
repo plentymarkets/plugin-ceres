@@ -1,14 +1,15 @@
 {% macro get_nav_bar(categories, currentScopeUrl) %}
 
-    {% import _self as macros %}
+    {{ component("Ceres::Category.Component.CategoryNavBarHeader") }}
 
-    {% for category in categories %}
+    <noscript>
 
-        {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+        {% for category in categories %}
 
-        {% if category.children %}
+            {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
 
-            {#<noscript>#}
+            {% if category.children %}
+
                 <li class="ddown">
                     <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
                     <ul data-level="1">
@@ -23,19 +24,18 @@
 
                     </ul>
                 </li>
-            {#</noscript>#}
 
-        {% else %}
+            {% else %}
 
-            {#<noscript>#}
                 <li>
                     <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
                 </li>
-            {#</noscript>#}
 
-            {#vue component#}
+            {% endif %}
+        {% endfor %}
 
-        {% endif %}
-    {% endfor %}
+    </noscript>
+
+    <category-renderer template="#vue-category-nav-bar-header" categories="{{ categories | json_encode() }}" current-scope-url="{{ currentScopeUrl }}"></category-renderer>
 
 {% endmacro %}

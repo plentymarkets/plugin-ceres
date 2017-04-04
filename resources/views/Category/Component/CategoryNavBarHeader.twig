@@ -1,0 +1,16 @@
+<script type="x/template" id="vue-category-nav-bar-header">
+
+    <li :class="{'ddown': category.children}" v-for="category in categories">
+        <a @click="renderItems(category.details[0].nameUrl, null)">${ category.details[0].name }</a>
+
+        <ul data-level="1" v-if="category.children">
+
+            <li v-for="child in category.children">
+                <a @click="renderItems(category.details[0].nameUrl, child.details[0].nameUrl)">${ child.details[0].name }</a>
+            </li>
+
+        </ul>
+    </li>
+
+
+</script>
