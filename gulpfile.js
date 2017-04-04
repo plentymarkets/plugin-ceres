@@ -44,7 +44,7 @@ gulp.task('watch:sass', function() {
 
 gulp.task('build', ['build:bundle', 'build:sass-min']);
 
-gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function() {
+gulp.task('build:bundle', ['build:lint', 'build:app', 'build:vendor', 'build:lang'], function() {
     return gulp.src( [
             JS_LANG + '*.js',
             JS_DIST + OUTPUT_PREFIX + '-vendor.js',
@@ -61,6 +61,7 @@ gulp.task('build:bundle', ['build:app', 'build:vendor', 'build:lang'], function(
 });
 
 gulp.task('build:app', ['build:lint'], function() {
+gulp.task('build:app', [], function() {
 
     var builder = browserify({
         entries: glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
