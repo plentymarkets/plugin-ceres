@@ -1,3 +1,5 @@
+var ItemListService = require("services/ItemListService");
+
 Vue.component("category-renderer", {
 
     props: [
@@ -25,12 +27,19 @@ Vue.component("category-renderer", {
 
     methods:
     {
+        /**
+         * initialize values
+         */
         init: function()
         {
             this.urlPaths = window.location.pathname.split("/");
             this.categories = JSON.parse(this.categories);
         },
 
+        /**
+         * check if current view is category
+         * @param category
+         */
         checkCategoryView: function(category)
         {
             for (var currentCategory in category)
@@ -49,29 +58,83 @@ Vue.component("category-renderer", {
         },
 
         /**
-         * ! rework ! => urlChild array and lvl param needs to be added
-         * @param urlParent
-         * @param urlChild
+         * render items in relation to location
+         * @param currentCategory
+         * @param currentChild
          */
-        renderItems: function(urlParent, urlChild)
+        renderItems: function(currentCategory, currentChild)
         {
-            if (urlChild !== null)
-            {
-                urlParent = "/" + urlParent + "/" + urlChild;
-            }
-            else
-            {
-                urlParent = "/" + urlParent;
-            }
+            this.updateUrl(currentCategory, currentChild);
 
             if (!this.isCategoryView)
             {
-                window.open(urlParent, "_self");
+                window.open(this.currentScopeUrl, "_self");
+            }
+
+            if (currentChild)
+            {
+                this.handleCurrentCategory(currentChild);
             }
             else
             {
-                console.log("trigger resource service");
+                this.handleCurrentCategory(currentCategory);
             }
+        },
+
+        /**
+         * bundle function
+         * @param currentCategory
+         */
+        handleCurrentCategory: function(currentCategory)
+        {
+            this.updateItemList(currentCategory);
+            this.updateHistory(currentCategory);
+        },
+
+        /**
+         * update the current node url
+         * @param parent
+         * @param child
+         */
+        updateUrl: function(parent, child)
+        {
+            var url = "";
+
+            if (child !== null)
+            {
+                url = "/" + parent.details[0].nameUrl + "/" + child.details[0].nameUrl;
+            }
+            else
+            {
+                url = "/" + parent.details[0].nameUrl;
+            }
+
+            this.currentScopeUrl = url;
+        },
+
+        /**
+         * update the current item list without reloading
+         */
+        updateItemList: function(category)
+        {
+            ItemListService.setCategoryId(category.id);
+
+            ItemListService.setPage(1);
+            ItemListService.setFacets("");
+            ItemListService.getItemList();
+        },
+
+        /**
+         * update history
+         * @param category
+         */
+        updateHistory: function(category)
+        {
+            var title = document.getElementsByTagName("title")[0].innerHTML;
+
+            window.history.replaceState({}, title, this.currentScopeUrl + window.location.search);
+
+            document.getElementsByTagName("h1")[0].innerHTML = category.details[0].name;
         }
     }
 });
