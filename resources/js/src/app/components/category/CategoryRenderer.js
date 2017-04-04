@@ -8,21 +8,11 @@ Vue.component("category-renderer", {
         "currentScopeUrl"
     ],
 
-    data: function()
-    {
-        return {
-            isCategoryView: false,
-            urlPaths: ""
-        };
-    },
-
     created: function()
     {
         this.$options.template = this.template;
 
         this.init();
-
-        this.checkCategoryView(this.categories);
     },
 
     methods:
@@ -32,7 +22,6 @@ Vue.component("category-renderer", {
          */
         init: function()
         {
-            this.urlPaths = window.location.pathname.split("/");
             this.categories = JSON.parse(this.categories);
         },
 
@@ -40,21 +29,22 @@ Vue.component("category-renderer", {
          * check if current view is category
          * @param category
          */
-        checkCategoryView: function(category)
+        checkCategoryView: function(category, paths)
         {
             for (var currentCategory in category)
             {
-                if (this.urlPaths.indexOf(category[currentCategory].details[0].nameUrl) > -1)
+                if (paths.indexOf(category[currentCategory].details[0].nameUrl) > -1)
                 {
-                    this.isCategoryView = true;
-                    break;
+                    return true;
                 }
 
                 if (category[currentCategory].children)
                 {
-                    this.checkCategoryView(category[currentCategory].children);
+                    this.checkCategoryView(category[currentCategory].children, paths);
                 }
             }
+
+            return false;
         },
 
         /**
@@ -64,9 +54,9 @@ Vue.component("category-renderer", {
          */
         renderItems: function(currentCategory, currentChild)
         {
-            this.updateUrl(currentCategory, currentChild);
+            this.updateScopeUrl(currentCategory, currentChild);
 
-            if (!this.isCategoryView)
+            if (!this.checkCategoryView(this.categories, window.location.pathname.split("/")))
             {
                 window.open(this.currentScopeUrl, "_self");
             }
@@ -82,7 +72,7 @@ Vue.component("category-renderer", {
         },
 
         /**
-         * bundle function
+         * bundle functions
          * @param currentCategory
          */
         handleCurrentCategory: function(currentCategory)
@@ -92,15 +82,15 @@ Vue.component("category-renderer", {
         },
 
         /**
-         * update the current node url
+         * update the current scope url
          * @param parent
          * @param child
          */
-        updateUrl: function(parent, child)
+        updateScopeUrl: function(parent, child)
         {
             var url = "";
 
-            if (child !== null)
+            if (child)
             {
                 url = "/" + parent.details[0].nameUrl + "/" + child.details[0].nameUrl;
             }
