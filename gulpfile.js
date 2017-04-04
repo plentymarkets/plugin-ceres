@@ -17,6 +17,7 @@ var del = require('del');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var browserify = require('browserify');
+var babelify = require('babelify');
 var glob = require('glob');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -66,7 +67,8 @@ gulp.task('build:app', [], function() {
         entries: glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
         debug: true,
         basedir: JS_SRC,
-        paths: [ 'app/' ]
+        paths: [ 'app/' ],
+        transform: babelify
     });
 
     return builder.bundle()
