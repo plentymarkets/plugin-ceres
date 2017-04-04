@@ -60,7 +60,6 @@ gulp.task('build:bundle', ['build:lint', 'build:app', 'build:vendor', 'build:lan
         .pipe( gulp.dest( JS_DIST ) );
 });
 
-gulp.task('build:app', ['build:lint'], function() {
 gulp.task('build:app', [], function() {
 
     var builder = browserify({
