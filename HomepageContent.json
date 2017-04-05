@@ -1,10 +1,10 @@
-{
+﻿{
   "de":
   {
     "pictures":
     [
       {
-        "pictureUrl": "https://github.com/plentymarkets/plugin-ceres/blob/stable/resources/images/homepage/slider1.jpg?raw=true",
+        "pictureUrl": "/layout/plugins/production/ceres/images/Fotolia_14751726_L.jpg",
         "text": "",
         "pictureLink": ""
       },
