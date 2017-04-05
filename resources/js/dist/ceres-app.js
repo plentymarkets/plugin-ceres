@@ -2671,14 +2671,16 @@ var UrlService = require("services/UrlService");
 Vue.component("items-per-page", {
 
     props: [
-        "paginationValues",
+        "columnsPerPage",
+        "rowsPerPage",
         "template"
     ],
 
     data: function()
     {
         return {
-            itemSearch: {}
+            itemSearch: {},
+            paginationValues: []
         };
     },
 
@@ -2686,8 +2688,8 @@ Vue.component("items-per-page", {
     {
         this.$options.template = this.template;
 
+        this.initPaginationValues();
         ResourceService.bind("itemSearch", this);
-
         this.setSelectedValueByUrl();
     },
 
@@ -2721,6 +2723,14 @@ Vue.component("items-per-page", {
             }
 
             ItemListService.setItemsPerPage(this.itemSearch.items);
+        },
+
+        initPaginationValues: function()
+        {
+            for (var rowKey in this.rowsPerPage)
+            {
+                this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
+            }
         }
     }
 });
