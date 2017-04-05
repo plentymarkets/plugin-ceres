@@ -3,6 +3,12 @@
 {% set itemSort             = request.get("sorting") %}
 {% set orderBy              = itemSort[0] %}
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
+
+{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
+{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
+
+{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
+
 {% set categoryParams = {
 'variationShowType' : config("Ceres.item.variation_show_type"),
 'itemsPerPage'      : request.get("items") | default( config('Ceres.pagination.defaultItemsPerPage') ),
@@ -12,7 +18,6 @@
 
 {% set page = request.get("page") | default(1) %}
 
-{% set itemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
 {% if request.get("items") %}
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
