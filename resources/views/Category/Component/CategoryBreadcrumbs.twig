@@ -1,15 +1,15 @@
 <script type="x/template" id="vue-category-breadcrumbs">
 
-    <nav class="container-max small hidden-sm-down" v-if="currentCategoryTree.length > 0">
+    <nav class="container-max small hidden-sm-down">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/">
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </a>
             </li>
-            <li class="breadcrumb-item" :class="{'active': index == currentCategoryTree.length - 1}" v-for="(index, category) in currentCategoryTree">
-                <span v-if="index == currentCategoryTree.length - 1">${ category.details[0].name }</span>
-                <a v-if="index != currentCategoryTree.length - 1" href="todo vue function">${ category.details[0].name }</a>
+            <li class="breadcrumb-item" :class="{'active': index == getBreadcrumbs.length - 1}" v-for="(index, category) in getBreadcrumbs">
+                <span v-if="index == getBreadcrumbs.length - 1">${ category.details[0].name }</span>
+                <a v-if="index != getBreadcrumbs.length - 1" @click="renderItems(category)">${ category.details[0].name }</a>
             </li>
         </ul>
     </nav>

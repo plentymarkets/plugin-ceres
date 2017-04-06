@@ -2,6 +2,8 @@
 
 {% set categoryTree = services.category.getHierarchy() %}
 
+{% set categories = services.category.getNavigationTree("item", lang) %}
+
 <noscript>
     {% if categoryTree is not empty %}
         <nav class="container-max small hidden-sm-down">
@@ -23,7 +25,7 @@
     {% endif %}
 </noscript>
 
-<category-breadcrumbs template="#vue-category-breadcrumbs" current-category-tree="{{ categoryTree | json_encode() }}"></category-breadcrumbs>
+<category-breadcrumbs template="#vue-category-breadcrumbs" categories="{{ categories | json_encode() }}"></category-breadcrumbs>
 
 
 

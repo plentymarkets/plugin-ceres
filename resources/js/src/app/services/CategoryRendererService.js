@@ -5,9 +5,20 @@ module.exports = (function($)
     var _categoryTree = {};
 
     return {
-        renderItems: _renderItems,
-        initialize: _initialize
+        initialize: _initialize,
+        getScopeUrl: _getScopeUrl,
+        renderItems: _renderItems
     };
+
+    /**
+     * initialize the service with the category tree
+     * @param categoryTree
+     * @private
+     */
+    function _initialize(categoryTree)
+    {
+        _categoryTree = categoryTree;
+    }
 
     /**
      * check if current view is category
@@ -37,16 +48,6 @@ module.exports = (function($)
         }
 
         return false;
-    }
-
-    /**
-     * initialize the service with the category tree
-     * @param categoryTree
-     * @private
-     */
-    function _initialize(categoryTree)
-    {
-        _categoryTree = categoryTree;
     }
 
     /**
