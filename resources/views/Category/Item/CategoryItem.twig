@@ -6,21 +6,21 @@
 
 {% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
 {% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-
-{% set categoryParams = {
-'variationShowType' : config("Ceres.item.variation_show_type"),
-'itemsPerPage'      : request.get("items") | default( config('Ceres.pagination.defaultItemsPerPage') ),
-'orderBy'           : itemSort,
-'facetParams'       : request.get("facets")
-} %}
-
-{% set page = request.get("page") | default(1) %}
 
 {% if request.get("items") %}
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
+
+{% set categoryParams = {
+        'variationShowType' : config("Ceres.item.variation_show_type"),
+        'itemsPerPage'      : request.get("items") | default( itemsPerPage ),
+        'orderBy'           : itemSort,
+        'facetParams'       : request.get("facets")
+    }
+%}
+
+{% set page = request.get("page") | default(1) %}
 
 {% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort}) %}
 
