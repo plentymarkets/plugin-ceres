@@ -1,5 +1,18 @@
 # Release Notes für Ceres
 
+## v1.0.4 (2017-04-06)
+
+### Hinzugefügt
+
+- Dateien in Productive werden ab sofort von CloudFront geladen
+- Dateien in Stage werden nicht mehr gecached
+
+Siehe Forum
+
+### Behoben
+
+- Firmenlogo wird nun richtig eingebunden
+
 ## v1.0.3 (2017-03-24)
 
 ### Hinzugefügt
