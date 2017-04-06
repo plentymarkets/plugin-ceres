@@ -4079,33 +4079,6 @@ Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
 },{}],58:[function(require,module,exports){
-Vue.filter("itemImage", function(item, baseUrl)
-{
-    var imageList = item.variationImageList;
-
-    baseUrl = baseUrl || "/";
-
-    if (baseUrl.charAt(baseUrl.length - 1) !== "/")
-    {
-        baseUrl += "/";
-    }
-
-    if (!!imageList && imageList.length > 0)
-    {
-        for (var i = 0; i < imageList.length; i++)
-        {
-            var image = imageList[i];
-
-            if (!!image.path && image.path.length > 0)
-            {
-                return baseUrl + image.path;
-            }
-        }
-    }
-
-    return "";
-
-});
 
 },{}],59:[function(require,module,exports){
 Vue.filter("itemImages", function(images, accessor)
@@ -4683,7 +4656,7 @@ module.exports = (function($)
     {
         searchParams.items = items;
 
-        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
         UrlService.setUrlParam("items", items);
     }
 
