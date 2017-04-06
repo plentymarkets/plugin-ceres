@@ -107,7 +107,7 @@ module.exports = (function($)
     {
         searchParams.items = items;
 
-        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
         UrlService.setUrlParam("items", items);
     }
 

@@ -48,12 +48,12 @@ Vue.component("items-per-page", {
                 }
                 else
                 {
-                    this.itemSearch.items = this.paginationValues[0];
+                    this.itemSearch.items = App.config.defaultItemsPerPage;
                 }
             }
             else
             {
-                this.itemSearch.items = this.paginationValues[0];
+                this.itemSearch.items = App.config.defaultItemsPerPage;
             }
 
             ItemListService.setItemsPerPage(this.itemSearch.items);
