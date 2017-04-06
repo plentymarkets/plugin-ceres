@@ -11,7 +11,8 @@ module.exports = (function($)
 
     /**
      * check if current view is category
-     * @param category
+     * @param categories - default
+     * @param paths - the url paths to parse
      */
     function _isCategoryView(paths, categories)
     {
@@ -38,6 +39,11 @@ module.exports = (function($)
         return false;
     }
 
+    /**
+     * initialize the service with the category tree
+     * @param categoryTree
+     * @private
+     */
     function _initialize(categoryTree)
     {
         _categoryTree = categoryTree;
@@ -71,6 +77,7 @@ module.exports = (function($)
 
     /**
      * update the current item list without reloading
+     * @param currentCategory
      */
     function _updateItemList(currentCategory)
     {
@@ -82,8 +89,8 @@ module.exports = (function($)
     }
 
     /**
-     * update history
-     * @param category
+     * update page informations
+     * @param currentCategory
      */
     function _updateHistory(currentCategory)
     {
@@ -95,9 +102,10 @@ module.exports = (function($)
     }
 
     /**
-     * update the current scope url
+     * get the current scope url
      * @param currentCategory
-     * @param scopeUrl
+     * @param scopeUrl - default
+     * @param categories - default
      */
     function _getScopeUrl(currentCategory, scopeUrl, categories)
     {
