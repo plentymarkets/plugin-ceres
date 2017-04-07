@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v1.0.5 (2017-04-07)
+
+### Added
+
+- Added different sources for the company logo.
+
 ## v1.0.4 (2017-04-06)
 
 ### Added
@@ -9,7 +15,7 @@
 
 ### Fixed
 
-- Online store logo path fixed.
+- Company logo path fixed.
 
 ### Known issues
 

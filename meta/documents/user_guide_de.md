@@ -51,7 +51,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Tab <strong>Dokumente</strong> einer Kategorie hochgeladen werden.</td>
+<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>layout</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Logo-Bild führt.</td>
 </tr>
 <tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  

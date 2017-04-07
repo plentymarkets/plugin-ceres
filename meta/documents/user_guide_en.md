@@ -51,7 +51,7 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>Documents</strong> tab of a category, for example.</td>
+<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>layout</strong> folder in the <strong>CMS » Webspace</strong> menu, for example. Alternatively, enter an http URL that leads to the logo.</td>
 </tr>
 <tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  

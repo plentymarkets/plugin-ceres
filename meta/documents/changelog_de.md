@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.0.5 (2017-04-07)
+
+### Hinzugefügt
+
+- Unterschiedliche Quellen für Firmenlogo hinzugefügt.
+
 ## v1.0.4 (2017-04-06)
 
 ### Hinzugefügt
@@ -9,7 +15,7 @@
 
 ### Behoben
 
-- Webshop-Logo wird nun richtig eingebunden.
+- Firmenlogo wird nun richtig eingebunden.
 
 ### Bekannte Probleme
 
