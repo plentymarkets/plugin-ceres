@@ -22,7 +22,7 @@
                     <li class="btnClose"></li>
                 </ul>
                 {% if showHeaderNavBar == "true" %}
-                    <ul class="mainmenu">
+                    <ul class="mainmenu pull-lg-right">
                         {% set categories = services.category.getNavigationTree("item", lang) %}
 
                         {{ Tree.get_nav_bar(categories, "") }}

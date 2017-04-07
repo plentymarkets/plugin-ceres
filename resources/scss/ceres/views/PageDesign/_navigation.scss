@@ -97,7 +97,6 @@ body.menu-is-visible { overflow-y : hidden; }
 		margin 		: 0;
 		padding 	: 0;
 		position 	: relative;
-		width 		: 100%;
 
 		li 	{
 			width : 100%;
@@ -150,7 +149,6 @@ body.menu-is-visible { overflow-y : hidden; }
 		.breadcrumb { display : none!important; }
 		ul.mainmenu {
 			color : $menu-color-lg;
-			width : 100%;
 			text-align: right;
 			.open>ul { display : none!important; }
 			>li {
