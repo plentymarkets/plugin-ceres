@@ -1,5 +1,22 @@
 # Release Notes for Ceres
 
+## v1.0.4 (2017-04-06)
+
+### Added
+
+- Loading of files from CloudFront in **Productive** mode.
+- No caching of files in **stage** mode. For further information, refer to our [forum](https://forum.plentymarkets.com/t/ladezeiten-verbessert-und-workflow-optimiert/48990).
+
+### Fixed
+
+- Online store logo path fixed.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
 ## v1.0.3 (2017-03-24)
 
 ### Added
@@ -20,12 +37,6 @@
 - When adding an item to the shopping cart, the correct data will be sent after switching from the category view to the single item view
 - Cross selling links saved for an item won't cause an internal error anymore
 - An error in the template containers of the order overview has been fixed
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.0.2 (2017-02-23)
 
