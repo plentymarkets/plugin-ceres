@@ -1,8 +1,10 @@
 var ItemListService = require("services/ItemListService");
+var ResourceService = require("services/ResourceService");
 
 module.exports = (function($)
 {
     var _categoryTree = {};
+    var _categoryBreadcrumbs = [];
 
     return {
         initialize: _initialize,
@@ -74,6 +76,12 @@ module.exports = (function($)
     {
         _updateItemList(currentCategory);
         _updateHistory(currentCategory);
+        _updateBreadcrumbs();
+    }
+
+    function _updateBreadcrumbs()
+    {
+        ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
     }
 
     /**
@@ -113,11 +121,18 @@ module.exports = (function($)
         scopeUrl = scopeUrl || "";
         categories = categories || _categoryTree;
 
+        if (scopeUrl.length == 0)
+        {
+            _categoryBreadcrumbs = [];
+        }
+
         for (var category in categories)
         {
-            if (categories[category].details[0].nameUrl == currentCategory.details[0].nameUrl)
+            if (categories[category].id == currentCategory.id)
             {
                 scopeUrl += "/" + categories[category].details[0].nameUrl;
+
+                _categoryBreadcrumbs.push(categories[category]);
 
                 return scopeUrl;
             }
@@ -130,6 +145,8 @@ module.exports = (function($)
 
                 if (urlScope.length > 0)
                 {
+                    _categoryBreadcrumbs.push(categories[category]);
+
                     return urlScope;
                 }
             }

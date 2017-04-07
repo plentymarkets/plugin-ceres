@@ -6,8 +6,15 @@ Vue.component("category-breadcrumbs", {
     props: [
         "template",
         "categories",
-        "breadcrumbs"
+        "currentCategoryTree"
     ],
+
+    data: function()
+    {
+        return {
+            breadcrumbs: {}
+        };
+    },
 
     created: function()
     {
@@ -24,13 +31,12 @@ Vue.component("category-breadcrumbs", {
         init: function()
         {
             this.categories = JSON.parse(this.categories);
+            this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
+
+            ResourceService.bind("breadcrumbs", this);
+            ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
 
             CategoryRendererService.initialize(this.categories);
-        },
-
-        getBreadcrumbs: function()
-        {
-            return window.location.pathname.split("/");
         },
 
         /**
