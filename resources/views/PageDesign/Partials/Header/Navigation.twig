@@ -1,11 +1,12 @@
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set lang         = services.sessionStorage.getLang() %}
+{% set showHeaderNavBar = config("Ceres.header.show_navbar") %}
 
 <nav class="navbar">
       <div class="container-max">
         <div class="row">
-             <div class="brand-wrapper">
+             <div class="brand-wrapper" {% if showHeaderNavBar == "false" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
                      <img src="{{ companyLogo }}" class="img-fluid"/>
                  </a>
@@ -20,11 +21,13 @@
                     <li class="breadcrumb-item"><a>{{ trans("Ceres::Template.generalBigAll") }}</a></li>
                     <li class="btnClose"></li>
                 </ul>
-                <ul class="mainmenu">
-                    {% set categories = services.category.getNavigationTree("item", lang) %}
+                {% if showHeaderNavBar == "true" %}
+                    <ul class="mainmenu">
+                        {% set categories = services.category.getNavigationTree("item", lang) %}
 
-                    {{ Tree.get_nav_bar(categories, "") }}
-                </ul>
+                        {{ Tree.get_nav_bar(categories, "") }}
+                    </ul>
+                {% endif %}
             </div>
 
         </div>

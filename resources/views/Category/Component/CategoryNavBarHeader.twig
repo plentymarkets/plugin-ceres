@@ -6,7 +6,7 @@
         <ul data-level="1" v-if="category.children">
 
             <li v-for="child in category.children">
-                <a @click="renderItems(child)">${ child.details[0].name }</a>
+                <a href="javascript:void(0)" @click="renderItems(child)">${ child.details[0].name }</a>
             </li>
 
         </ul>
