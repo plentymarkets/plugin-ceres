@@ -353,6 +353,33 @@ Weitere Informationen zu Merkmalen finden Sie unter [Merkmale verwalten](https:/
 Anschließend erstellen Sie passende Facetten für Attribute und Merkmale. Weitere Informationen zu Facetten finden Sie unter [Facetten anlegen](https://www.plentymarkets.eu/handbuch/mandant-shop/globale-einstellungen/externe-dienste/facettensuche/#2-1).
 Eine ausführliche Anleitung zur Einrichtung von Filtern finden Sie auch in unserem [Forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679).
 
+## Ceres individualisieren
+
+Ihnen stehen verschiedene Möglichkeiten zur Verfügung, um das Template-Plugin **Ceres** zu individualisieren und an Ihre Bedürfnisse anzupassen.
+
+### Eigenes Template erstellen
+
+**Ceres** steht als öffentliches Projekt auf [GitHub](https://github.com/plentymarkets/plugin-ceres) zur Verfügung. Den Plugin-Code können Sie als Vorlage nutzen, um Ihr eigenes Template-Plugin zu erstellen. Beachten Sie folgende Punkte, um ein eigenes Template auf Basis von **Ceres** zu erstellen:
+ 
+* Bei [GitHub](https://github.com/join?source=header-home) registrieren
+* Projekt [Ceres](https://github.com/plentymarkets/plugin-ceres) öffnen
+* Eigenen Fork des Projekts erstellen
+* Quellcode anpassen
+ 
+ Wie Sie den Quellcode anpassen, erfahren Sie in unserem [Template Guide](https://developers.plentymarkets.com/dev-doc/template-plugins).
+ 
+<div class="alert alert-warning" role="alert">
+    Beachten Sie, dass Sie Ihr eigenes Template manuell aktualisieren müssen, wenn Sie Funktionen aus einer neuen Version des Plugins <strong>Ceres</strong> nutzen möchten. Automatische Plugin-Aktualisierungen stehen in plentymarkets nur für Plugins von plentyMarketplace zur Verfügung.
+</div>
+
+### Theme in plentyMarketplace kaufen
+
+Theme-Plugins bieten eine einfachere Möglichkeit **Ceres** nach Ihren Wünschen optisch anzupassen. In plentyMarketplace finden Sie bereits verschiedene [Themes](https://marketplace.plentymarkets.com/plugins/themes), die das Aussehen von **Ceres** verändern. Anpassungen am Theme-Plugin wirken sich nicht auf Aktualisierungen des Template-Plugins **Ceres** aus. 
+
+### Eigenes Theme erstellen
+
+In unserem [Theme Guide](https://developers.plentymarkets.com/dev-doc/theme-plugins) finden Sie ausführliche Infomationen darüber, wie Sie Ihr eigenes Theme-Plugin erstellen und **Ceres** damit vollständig individualisieren. 
+
 ## Lizenz
 
 Das gesamte Projekt unterliegt der GNU AFFERO GENERAL PUBLIC LICENSE – weitere Informationen finden Sie in der [LICENSE.md](https://github.com/plentymarkets/plugin-ceres/blob/stable/LICENSE.md).

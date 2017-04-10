@@ -352,6 +352,33 @@ For further information about properties, refer to the [Managing properties](htt
 Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
 Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
 
+## Customising Ceres
+
+Various possibilities are available to customise the **Ceres** template plugin and tailor it to meet your needs.
+
+### Creating an individual template
+
+**Ceres** is a public project and available on [GitHub](https://github.com/plentymarkets/plugin-ceres). You can use the plugin code to create your own template plugin. Please note the following when creating your own template on the basis of **Ceres**:  
+
+* Register with [GitHub](https://github.com/join?source=header-home) 
+* Open the [Ceres](https://github.com/plentymarkets/plugin-ceres) project 
+* Create your own fork of the project 
+* Customise the source code 
+
+For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). 
+
+<div class="alert alert-warning" role="alert">
+    Note that you have to update your template manually if you want to use features of a newer version of the <strong>Ceres</strong> plugin. Automatic plugin updates are only available for plugins purchased on plentyMarketplace.
+</div>
+
+### Purchasing a theme on plentyMarketplace
+
+Theme plugins are an easy way of customising the looks of **Ceres**. Various [themes](https://marketplace.plentymarkets.com/plugins/themes) for **Ceres** are available on plentyMarketplace. Changes made to the theme plugin have no impact on future updates of the template plugin **Ceres**. 
+
+### Creating an individual theme
+
+Learn how to create your own theme plugin and how to fully customise **Ceres** in our [theme guide](https://developers.plentymarkets.com/dev-doc/theme-plugins).
+
 ## License
 
 This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE. – find further information in the [LICENSE.md](https://github.com/plentymarkets/plugin-ceres/blob/stable/LICENSE.md).
