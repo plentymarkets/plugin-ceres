@@ -21,6 +21,13 @@
         "default"   : "true"
     },
     {
+        "tab"       : "Header",
+        "key"       : "header.show_navbar",
+        "label"     : "Show the navigation bar at the top of the page",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.number_of_features",
         "label"         : "Number of store features",
