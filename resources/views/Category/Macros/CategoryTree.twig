@@ -1,6 +1,6 @@
 {% macro get_nav_bar(categories, currentScopeUrl) %}
 
-    {{ component("Ceres::Category.Component.CategoryNavBarHeader") }}
+    {{ component("Ceres::Category.Components.CategoryNavBarHeader") }}
 
     <noscript>
 
@@ -37,5 +37,28 @@
     </noscript>
 
     <category-renderer template="#vue-category-nav-bar-header" categories="{{ categories | json_encode() }}"></category-renderer>
+
+{% endmacro %}
+
+{% macro get_sidemenu(categories, currentScopeUrl) %}
+
+    {% import _self as sidemenu %}
+
+    {% set urlNow = currentScopeUrl %}
+
+        {% for category in categories %}
+
+            {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
+
+            <ul>
+                <li class="nav-item active">
+                    <a href="{{ urlNow }}" class="nav-link">{{ category.details[0].name }}</a>
+                    {% if category.children is not empty %}
+                        {{ sidemenu.get_sidemenu(category.children, urlNow) }}
+                    {% endif %}
+                </li>
+            </ul>
+
+        {% endfor %}
 
 {% endmacro %}

@@ -22,10 +22,16 @@
     },
     {
         "tab"       : "Header",
-        "key"       : "header.show_navbar",
-        "label"     : "Show the navigation bar at the top of the page",
-        "type"      : "checkbox",
-        "default"   : "true"
+        "key"       : "header.show_navbars",
+        "label"     : "Show the navigation bar at the top/left side of the page",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "top"         : "Show top navigation",
+            "side"         : "Show side navigation",
+            "both"         : "Show both (top and side navigation)"
+        },
+        "default"   : "top"
     },
     {
         "tab"           : "Footer",
