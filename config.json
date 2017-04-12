@@ -204,6 +204,19 @@
         "default"   : "false"
     },
     {
+        "tab"               : "Item view",
+        "key"               : "item.loading_animation_type",
+        "label"             : "Loading animation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "blur"          : "Blur effect",
+            "bars"          : "Bars",
+            "spinner"       : "Spinner"
+        },
+        "default"           : "blur"
+    },
+    {
         "tab"                           : "Shopping cart",
         "key"                           : "basket.item_data",
         "label"                         : "Show item information",
