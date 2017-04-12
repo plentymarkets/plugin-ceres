@@ -210,7 +210,7 @@
         "type"              : "dropdown",
         "possibleValues"    :
         {
-            "blur"          : "Blur effect",
+            "blur"          : "Blur",
             "bars"          : "Bars",
             "spinner"       : "Spinner"
         },

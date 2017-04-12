@@ -148,6 +148,10 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td><b>Show image carousel navigation in category item list</b></td>  
 <td>Active, to show navigation arrows in the image carousel of the category item list.</td>
 </tr>
+<tr>
+<td><b>Loading animation</b></td>  
+<td>Select the loading animation for the category view.<br /> <strong>Blur</strong> = The category view will be blurred when loading.<br /> <strong>Bars</strong> = A loading animation with bars will be displayed when loading the category view.<br /> <strong>Spinner</strong> = A loading animation with a spinner will be displayed when loading the category view.</td>
+</tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
 </table>
