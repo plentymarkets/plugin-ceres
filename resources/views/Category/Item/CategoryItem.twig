@@ -4,19 +4,24 @@
 {% set itemSort             = request.get("sorting") %}
 {% set orderBy              = itemSort[0] %}
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
-{% set categoryParams = {
-'variationShowType' : config("Ceres.item.variation_show_type"),
-'itemsPerPage'      : request.get("items") | default( config('Ceres.pagination.defaultItemsPerPage') ),
-'orderBy'           : itemSort,
-'facetParams'       : request.get("facets")
-} %}
 
-{% set page = request.get("page") | default(1) %}
+{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
+{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
+{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
 
-{% set itemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
 {% if request.get("items") %}
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
+
+{% set categoryParams = {
+        'variationShowType' : config("Ceres.item.variation_show_type"),
+        'itemsPerPage'      : request.get("items") | default( itemsPerPage ),
+        'orderBy'           : itemSort,
+        'facetParams'       : request.get("facets")
+    }
+%}
+
+{% set page = request.get("page") | default(1) %}
 
 {% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort}) %}
 
@@ -57,7 +62,10 @@
                     <div class="col-xs-12">
                         <div class="list-wrapper">
                             <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
-                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
+                            <items-per-page
+                                template="#vue-items-per-page"
+                                :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
+                                :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
                             <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>

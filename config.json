@@ -308,29 +308,31 @@
     },
     {
         "tab"           : "Pagination and sorting",
-        "key"           : "pagination.values",
-        "label"         : "Enable number of items per page",
-        "type"          : "multi_select",
-        "possibleValues":
-        {
-            "20"          : "20",
-            "50"          : "50",
-            "100"         : "100"
-        },
-        "default"       : "20, 50, 100"
-    },
-    {
-        "tab"           : "Pagination and sorting",
-        "key"           : "pagination.defaultItemsPerPage",
-        "label"         : "Default number of items per page",
+        "key"           : "pagination.columnsPerPage",
+        "label"         : "Columns per page",
         "type"          : "dropdown",
         "possibleValues":
         {
-            "20"          : "20",
-            "50"          : "50",
-            "100"         : "100"
+            "3"          : 3,
+            "4"          : 4,
+            "5"          : 5
         },
-        "default"       : "20"
+        "default"       : "4"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "pagination.rowsPerPage",
+        "label"         : "Rows per page",
+        "type"          : "multi_select",
+        "possibleValues":
+        {
+            "5"          : 5,
+            "10"         : 10,
+            "15"         : 15,
+            "20"         : 20,
+            "25"         : 25
+        },
+        "default"       : "5, 10, 25"
     },
     {
         "tab"                       : "Pagination and sorting",

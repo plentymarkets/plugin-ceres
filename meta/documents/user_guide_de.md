@@ -222,14 +222,14 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <tr>
 <td><b>Always show last page</b></td>  
 <td>Aktivieren, um die letzte Seite in der Paginierung immer anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Columns per page</b></td>  
+<td>Anzahl der Spalten wählen, die als Berechnungsgrundlage für das Dropdown-Menü <strong>Artikel pro Seite</strong> genutzt wird.</td>
 </tr>  
 <tr>
-<td><b>Enable number of items per page</b></td>  
-<td>Einen, mehrere oder alle Zahlenwerte aktivieren, um die gewählten Werte im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht anzuzeigen.</td>
-</tr>  
-<tr>
-<td><b>Default number of items per page</b></td>  
-<td>Standardwert für die Anzahl der Artikel in der Artikelliste wählen.</td>
+<td><b>Rows per page</b></td>  
+<td>Einen, mehrere oder alle Zahlenwerte aktivieren. Die aktivierten Werte werden mit den Spalten multipliziert und im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht angezeigt.</td>
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>

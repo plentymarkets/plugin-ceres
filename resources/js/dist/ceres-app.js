@@ -2869,14 +2869,16 @@ var UrlService = require("services/UrlService");
 Vue.component("items-per-page", {
 
     props: [
-        "paginationValues",
+        "columnsPerPage",
+        "rowsPerPage",
         "template"
     ],
 
     data: function()
     {
         return {
-            itemSearch: {}
+            itemSearch: {},
+            paginationValues: []
         };
     },
 
@@ -2884,8 +2886,8 @@ Vue.component("items-per-page", {
     {
         this.$options.template = this.template;
 
+        this.initPaginationValues();
         ResourceService.bind("itemSearch", this);
-
         this.setSelectedValueByUrl();
     },
 
@@ -2919,6 +2921,14 @@ Vue.component("items-per-page", {
             }
 
             ItemListService.setItemsPerPage(this.itemSearch.items);
+        },
+
+        initPaginationValues: function()
+        {
+            for (var rowKey in this.rowsPerPage)
+            {
+                this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
+            }
         }
     }
 });
@@ -4266,6 +4276,7 @@ var dateFilter = function()
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
+<<<<<<< HEAD
 },{}],62:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
@@ -4294,6 +4305,9 @@ Vue.filter("itemImage", function(item, baseUrl)
     return "";
 
 });
+=======
+},{}],58:[function(require,module,exports){
+>>>>>>> development
 
 },{}],63:[function(require,module,exports){
 Vue.filter("itemImages", function(images, accessor)
@@ -5029,7 +5043,7 @@ module.exports = (function($)
     {
         searchParams.items = items;
 
-        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
         UrlService.setUrlParam("items", items);
     }
 
