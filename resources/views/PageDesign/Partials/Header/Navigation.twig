@@ -21,7 +21,7 @@
                     <li class="breadcrumb-item"><a>{{ trans("Ceres::Template.generalBigAll") }}</a></li>
                     <li class="btnClose"></li>
                 </ul>
-                {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" %}
+                {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
                     <ul class="mainmenu pull-lg-right">
                         {% set categories = services.category.getNavigationTree("item", lang) %}
 
