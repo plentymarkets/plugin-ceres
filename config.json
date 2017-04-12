@@ -15,23 +15,23 @@
     },
     {
         "tab"       : "Header",
+        "key"       : "header.show_navbars",
+        "label"     : "Position of the navigation bar",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "top"         : "At the top",
+            "side"         : "On the left",
+            "both"         : "At the top and on the left"
+        },
+        "default"   : "top"
+    },
+    {
+        "tab"       : "Header",
         "key"       : "header.fixed_navbar",
         "label"     : "Fix the navigation bar at the top of the page",
         "type"      : "checkbox",
         "default"   : "true"
-    },
-    {
-        "tab"       : "Header",
-        "key"       : "header.show_navbars",
-        "label"     : "Show the navigation bar at the top/left side of the page",
-        "type"      : "dropdown",
-        "possibleValues":
-        {
-            "top"         : "Show top navigation",
-            "side"         : "Show side navigation",
-            "both"         : "Show both (top and side navigation)"
-        },
-        "default"   : "top"
     },
     {
         "tab"           : "Footer",

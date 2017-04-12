@@ -54,6 +54,10 @@ Customise the header and the footer of your design. Display your own logo and de
 <td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>Documents</strong> tab of a category, for example.</td>
 </tr>
 <tr>
+<td><b>Position of the navigation bar</b></td>  
+<td>Select the position of the navigation bar in the online store.<br /> <strong>At the top</strong> = Display the navigation bar at the top in your online store.<br /> <strong>On the left</strong> = Display the navigation bar on the left in your online store.<br /> <strong>At the top and on the left</strong> = Display the navigation bar at the top and on the left in your online store.</td>
+</tr>
+<tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  
 <td>Activate to fix the navigation bar at the top in your online store.</td>
 </tr>

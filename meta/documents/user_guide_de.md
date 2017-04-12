@@ -54,6 +54,10 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 <td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Tab <strong>Dokumente</strong> einer Kategorie hochgeladen werden.</td>
 </tr>
 <tr>
+<td><b>Position of the navigation bar</b></td>  
+<td>Position wählen, an der die Navigationsleiste im Webshop angezeigt wird.<br /> <strong>At the top</strong> = Navigationsleiste im Webshop oben anzeigen.<br /> <strong>On the left</strong> = Navigationsleiste im Webshop links anzeigen.<br /> <strong>At the top and on the left</strong> = Navigationsleiste im Webshop oben und links anzeigen.</td>
+</tr>
+<tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  
 <td>Aktivieren, um die Navigationsleiste im Webshop oben zu fixieren.</td>
 </tr>
