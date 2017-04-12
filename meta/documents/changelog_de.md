@@ -1,5 +1,14 @@
 # Release Notes für Ceres
 
+## v1.1.0 (2017-04-12)
+
+- Kategorien wurden hinsichtlich der Performance überarbeitet.
+- Kategorien wurden hinsichtlich des Styles überarbeitet.
+- Kategorien laden sich (innerhalb der Kategorie-Seite) ohne die Seite neuzuladen.
+- Hauptkategorie kann nun angeklickt werden.
+- Seitenbaum für Kategorien hinzugefügt (in der Konfiguration einstellbar).
+- Eine "Blur" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar). 
+
 ## v1.0.5 (2017-04-07)
 
 ### Hinzugefügt
