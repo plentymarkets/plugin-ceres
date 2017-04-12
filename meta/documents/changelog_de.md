@@ -8,6 +8,7 @@
 - Hauptkategorie kann nun angeklickt werden.
 - Seitenbaum für Kategorien hinzugefügt (in der Konfiguration einstellbar).
 - Eine "Blur" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar). 
+- Eine "Spinner" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar).
 - Pagination wurde überarbeitet. In der Konfiguration kann man nun die Zeilen und die Reihen einstellen und die Pagination berechnet sich selbst. 
 
 ## v1.0.5 (2017-04-07)
