@@ -16,6 +16,11 @@
                  </button>
              </div>
 
+            <div>
+                config value: {{ showHeaderNavBar }}
+                config value: {{ showHeaderNavBar | json_encode() }}
+            </div>
+
             <div id="mainNavbarCollapsable">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a>{{ trans("Ceres::Template.generalBigAll") }}</a></li>
