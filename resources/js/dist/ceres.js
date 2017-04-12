@@ -36614,9 +36614,7 @@ Vue.component("item-lazy-img", {
 
         setTimeout(function()
         {
-            $(self.$els.lazyImg).show().lazyload({
-                effect: "fadeIn"
-            });
+            $(self.$els.lazyImg).show().lazyload();
         }, 1);
     }
 });
@@ -41129,28 +41127,6 @@ var init = (function($, window, document)
         {
             $("#mainNavbarCollapse").collapse("hide");
         }
-
-        // initialize lazyload for articles
-        $("img.lazy").show().lazyload({
-            effect: "fadeIn"
-        });
-        // test, to delete
-        $("img.testtest").show().lazyload({
-            effect : "fadeIn"
-        });
-
-        $(".cmp-product-thumb").on("mouseover", function(event)
-        {
-            $(this).find("img").each(function(i, img)
-            {
-                var $img = $(img);
-
-                if (!$img.attr("src"))
-                {
-                    $(img).lazyload();
-                }
-            });
-        });
     }
 
     window.CeresMain = new CeresMain();
