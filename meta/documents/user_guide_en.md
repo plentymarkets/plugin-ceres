@@ -2,9 +2,9 @@
 
 <div class="container-toc"></div>
 
-**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins.
+**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide, you will learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets
+## Setting up Ceres in plentymarkets<a id="10."></a>
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
@@ -51,7 +51,7 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>Documents</strong> tab of a category, for example.</td>
+<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>layout</strong> folder in the <strong>CMS » Webspace</strong> menu, for example. Alternatively, enter an http URL that leads to the logo.</td>
 </tr>
 <tr>
 <td><b>Position of the navigation bar</b></td>  
@@ -139,6 +139,14 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <tr>
 <td><b>Show variations in the category item list</b></td>  
 <td>Display variations in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
+</tr>
+<tr>
+<td><b>Show image carousel dots in category item list</b></td>  
+<td>Active, to show dots below the image carousel of the category item list.</td>
+</tr>
+<tr>
+<td><b>Show image carousel navigation in category item list</b></td>  
+<td>Active, to show navigation arrows in the image carousel of the category item list.</td>
 </tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
@@ -347,6 +355,33 @@ For further information about properties, refer to the [Managing properties](htt
 
 Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
 Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
+
+## Customising Ceres<a id="20."></a>
+
+Various possibilities are available to customise the **Ceres** template plugin and tailor it to meet your needs.
+
+### Creating an individual template
+
+**Ceres** is a public project and available on [GitHub](https://github.com/plentymarkets/plugin-ceres). You can use the plugin code to create your own template plugin. Please note the following when creating your own template on the basis of **Ceres**:  
+
+* Register with [GitHub](https://github.com/join?source=header-home) 
+* Open the [Ceres](https://github.com/plentymarkets/plugin-ceres) project 
+* Create your own fork of the project 
+* Customise the source code 
+
+For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). 
+
+<div class="alert alert-warning" role="alert">
+    Note that you have to update your template manually if you want to use features of a newer version of the <strong>Ceres</strong> plugin. Automatic plugin updates are only available for plugins purchased on plentyMarketplace.
+</div>
+
+### Purchasing a theme on plentyMarketplace
+
+Theme plugins are an easy way of customising the looks of **Ceres**. Various [themes](https://marketplace.plentymarkets.com/plugins/themes) for **Ceres** are available on plentyMarketplace. Changes made to the theme plugin have no impact on future updates of the template plugin **Ceres**. 
+
+### Creating an individual theme
+
+Learn how to create your own theme plugin and how to fully customise **Ceres** in our [theme guide](https://developers.plentymarkets.com/dev-doc/theme-plugins).
 
 ## License
 

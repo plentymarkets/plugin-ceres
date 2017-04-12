@@ -11,7 +11,7 @@
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/ceres/images/ceres-logo.svg"
+        "default"   : "images/ceres-logo.svg"
     },
     {
         "tab"       : "Header",
@@ -192,14 +192,14 @@
     {
         "tab"       : "Item view",
         "key"       : "item.category_show_dots",
-        "label"     : "Show category carousel dots",
+        "label"     : "Show image carousel dots in category item list",
         "type"      : "checkbox",
         "default"   : "true"
     },
     {
         "tab"       : "Item view",
         "key"       : "item.category_show_nav",
-        "label"     : "Show category carousel navigation",
+        "label"     : "Show image carousel navigation in category item list",
         "type"      : "checkbox",
         "default"   : "false"
     },

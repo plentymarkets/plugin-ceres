@@ -1,5 +1,38 @@
 # Release Notes für Ceres
 
+## v1.1.0 (2017-04-12)
+
+- Kategorien wurden hinsichtlich der Performance überarbeitet.
+- Kategorien wurden hinsichtlich des Styles überarbeitet.
+- Kategorien laden sich (innerhalb der Kategorie-Seite) ohne die Seite neuzuladen.
+- Hauptkategorie kann nun angeklickt werden.
+- Seitenbaum für Kategorien hinzugefügt (in der Konfiguration einstellbar).
+- Eine "Blur" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar). 
+- Pagination wurde überarbeitet. In der Konfiguration kann man nun die Zeilen und die Reihen einstellen und die Pagination berechnet sich selbst. 
+
+## v1.0.5 (2017-04-07)
+
+### Hinzugefügt
+
+- Unterschiedliche Quellen für Firmenlogo hinzugefügt.
+
+## v1.0.4 (2017-04-06)
+
+### Hinzugefügt
+
+- Dateien im Produktivmodus **Productive** werden ab sofort von CloudFront geladen.
+- Dateien im Vorschaumodus **Stage** werden nicht mehr gecacht. Weitere Informationen im [Forum](https://forum.plentymarkets.com/t/ladezeiten-verbessert-und-workflow-optimiert/48990).
+
+### Behoben
+
+- Firmenlogo wird nun richtig eingebunden.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
 ## v1.0.3 (2017-03-24)
 
 ### Hinzugefügt
@@ -20,12 +53,6 @@
 - Nach dem Wechsel von der Kategorie-Ansicht in eine Artikelansicht werden nun die richtigen Daten gesendet, sobald ein Artikel in den Warenkorb gelegt wird
 - Cross-Seller-Verknüpfungen am Artikel verursachen nun keinen internen Fehler mehr
 - Ein Fehler in den Template-Containern der Auftragsübersicht wurde behoben
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.0.2 (2017-02-23)
 
