@@ -4276,7 +4276,6 @@ var dateFilter = function()
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-<<<<<<< HEAD
 },{}],62:[function(require,module,exports){
 Vue.filter("itemImage", function(item, baseUrl)
 {
@@ -4305,9 +4304,6 @@ Vue.filter("itemImage", function(item, baseUrl)
     return "";
 
 });
-=======
-},{}],58:[function(require,module,exports){
->>>>>>> development
 
 },{}],63:[function(require,module,exports){
 Vue.filter("itemImages", function(images, accessor)

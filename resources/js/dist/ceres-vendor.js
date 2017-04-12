@@ -10057,13 +10057,13 @@ return jQuery;
 })(jQuery, window, document);
 
 /**
-*  Ajax Autocomplete for jQuery, version 1.4.1
-*  (c) 2017 Tomas Kirda
+*  Ajax Autocomplete for jQuery, version 1.2.27
+*  (c) 2014 Tomas Kirda
 *
 *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
 *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
 */
-!function(a){"use strict";"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports&&"function"==typeof require?require("jquery"):jQuery)}(function(a){"use strict";function b(c,d){var e=this;e.element=c,e.el=a(c),e.suggestions=[],e.badQueries=[],e.selectedIndex=-1,e.currentValue=e.element.value,e.timeoutId=null,e.cachedResponse={},e.onChangeTimeout=null,e.onChange=null,e.isLocal=!1,e.suggestionsContainer=null,e.noSuggestionsContainer=null,e.options=a.extend({},b.defaults,d),e.classes={selected:"autocomplete-selected",suggestion:"autocomplete-suggestion"},e.hint=null,e.hintValue="",e.selection=null,e.initialize(),e.setOptions(d)}function c(a,b,c){return-1!==a.value.toLowerCase().indexOf(c)}function d(b){return"string"==typeof b?a.parseJSON(b):b}function e(a,b){if(!b)return a.value;var c="("+g.escapeRegExChars(b)+")";return a.value.replace(new RegExp(c,"gi"),"<strong>$1</strong>").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/&lt;(\/?strong)&gt;/g,"<$1>")}function f(a,b){return'<div class="autocomplete-group">'+b+"</div>"}var g=function(){return{escapeRegExChars:function(a){return a.replace(/[|\\{}()[\]^$+*?.]/g,"\\$&")},createNode:function(a){var b=document.createElement("div");return b.className=a,b.style.position="absolute",b.style.display="none",b}}}(),h={ESC:27,TAB:9,RETURN:13,LEFT:37,UP:38,RIGHT:39,DOWN:40},i=a.noop;b.utils=g,a.Autocomplete=b,b.defaults={ajaxSettings:{},autoSelectFirst:!1,appendTo:"body",serviceUrl:null,lookup:null,onSelect:null,width:"auto",minChars:1,maxHeight:300,deferRequestBy:0,params:{},formatResult:e,formatGroup:f,delimiter:null,zIndex:9999,type:"GET",noCache:!1,onSearchStart:i,onSearchComplete:i,onSearchError:i,preserveInput:!1,containerClass:"autocomplete-suggestions",tabDisabled:!1,dataType:"text",currentRequest:null,triggerSelectOnValidInput:!0,preventBadQueries:!0,lookupFilter:c,paramName:"query",transformResult:d,showNoSuggestionNotice:!1,noSuggestionNotice:"No results",orientation:"bottom",forceFixPosition:!1},b.prototype={initialize:function(){var c,d=this,e="."+d.classes.suggestion,f=d.classes.selected,g=d.options;d.element.setAttribute("autocomplete","off"),d.noSuggestionsContainer=a('<div class="autocomplete-no-suggestion"></div>').html(this.options.noSuggestionNotice).get(0),d.suggestionsContainer=b.utils.createNode(g.containerClass),c=a(d.suggestionsContainer),c.appendTo(g.appendTo||"body"),"auto"!==g.width&&c.css("width",g.width),c.on("mouseover.autocomplete",e,function(){d.activate(a(this).data("index"))}),c.on("mouseout.autocomplete",function(){d.selectedIndex=-1,c.children("."+f).removeClass(f)}),c.on("click.autocomplete",e,function(){d.select(a(this).data("index"))}),c.on("click.autocomplete",function(){clearTimeout(d.blurTimeoutId)}),d.fixPositionCapture=function(){d.visible&&d.fixPosition()},a(window).on("resize.autocomplete",d.fixPositionCapture),d.el.on("keydown.autocomplete",function(a){d.onKeyPress(a)}),d.el.on("keyup.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("blur.autocomplete",function(){d.onBlur()}),d.el.on("focus.autocomplete",function(){d.onFocus()}),d.el.on("change.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("input.autocomplete",function(a){d.onKeyUp(a)})},onFocus:function(){var a=this;a.fixPosition(),a.el.val().length>=a.options.minChars&&a.onValueChange()},onBlur:function(){var a=this;a.blurTimeoutId=setTimeout(function(){a.hide()},200)},abortAjax:function(){var a=this;a.currentRequest&&(a.currentRequest.abort(),a.currentRequest=null)},setOptions:function(b){var c=this,d=c.options;this.options=a.extend({},d,b),c.isLocal=a.isArray(d.lookup),c.isLocal&&(d.lookup=c.verifySuggestionsFormat(d.lookup)),d.orientation=c.validateOrientation(d.orientation,"bottom"),a(c.suggestionsContainer).css({"max-height":d.maxHeight+"px",width:d.width+"px","z-index":d.zIndex})},clearCache:function(){this.cachedResponse={},this.badQueries=[]},clear:function(){this.clearCache(),this.currentValue="",this.suggestions=[]},disable:function(){var a=this;a.disabled=!0,clearTimeout(a.onChangeTimeout),a.abortAjax()},enable:function(){this.disabled=!1},fixPosition:function(){var b=this,c=a(b.suggestionsContainer),d=c.parent().get(0);if(d===document.body||b.options.forceFixPosition){var e=b.options.orientation,f=c.outerHeight(),g=b.el.outerHeight(),h=b.el.offset(),i={top:h.top,left:h.left};if("auto"===e){var j=a(window).height(),k=a(window).scrollTop(),l=-k+h.top-f,m=k+j-(h.top+g+f);e=Math.max(l,m)===l?"top":"bottom"}if("top"===e?i.top+=-f:i.top+=g,d!==document.body){var n,o=c.css("opacity");b.visible||c.css("opacity",0).show(),n=c.offsetParent().offset(),i.top-=n.top,i.left-=n.left,b.visible||c.css("opacity",o).hide()}"auto"===b.options.width&&(i.width=b.el.outerWidth()+"px"),c.css(i)}},isCursorAtEnd:function(){var a,b=this,c=b.el.val().length,d=b.element.selectionStart;return"number"==typeof d?d===c:document.selection?(a=document.selection.createRange(),a.moveStart("character",-c),c===a.text.length):!0},onKeyPress:function(a){var b=this;if(!b.disabled&&!b.visible&&a.which===h.DOWN&&b.currentValue)return void b.suggest();if(!b.disabled&&b.visible){switch(a.which){case h.ESC:b.el.val(b.currentValue),b.hide();break;case h.RIGHT:if(b.hint&&b.options.onHint&&b.isCursorAtEnd()){b.selectHint();break}return;case h.TAB:if(b.hint&&b.options.onHint)return void b.selectHint();if(-1===b.selectedIndex)return void b.hide();if(b.select(b.selectedIndex),b.options.tabDisabled===!1)return;break;case h.RETURN:if(-1===b.selectedIndex)return void b.hide();b.select(b.selectedIndex);break;case h.UP:b.moveUp();break;case h.DOWN:b.moveDown();break;default:return}a.stopImmediatePropagation(),a.preventDefault()}},onKeyUp:function(a){var b=this;if(!b.disabled){switch(a.which){case h.UP:case h.DOWN:return}clearTimeout(b.onChangeTimeout),b.currentValue!==b.el.val()&&(b.findBestHint(),b.options.deferRequestBy>0?b.onChangeTimeout=setTimeout(function(){b.onValueChange()},b.options.deferRequestBy):b.onValueChange())}},onValueChange:function(){var b=this,c=b.options,d=b.el.val(),e=b.getQuery(d);return b.selection&&b.currentValue!==e&&(b.selection=null,(c.onInvalidateSelection||a.noop).call(b.element)),clearTimeout(b.onChangeTimeout),b.currentValue=d,b.selectedIndex=-1,c.triggerSelectOnValidInput&&b.isExactMatch(e)?void b.select(0):void(e.length<c.minChars?b.hide():b.getSuggestions(e))},isExactMatch:function(a){var b=this.suggestions;return 1===b.length&&b[0].value.toLowerCase()===a.toLowerCase()},getQuery:function(b){var c,d=this.options.delimiter;return d?(c=b.split(d),a.trim(c[c.length-1])):b},getSuggestionsLocal:function(b){var c,d=this,e=d.options,f=b.toLowerCase(),g=e.lookupFilter,h=parseInt(e.lookupLimit,10);return c={suggestions:a.grep(e.lookup,function(a){return g(a,b,f)})},h&&c.suggestions.length>h&&(c.suggestions=c.suggestions.slice(0,h)),c},getSuggestions:function(b){var c,d,e,f,g=this,h=g.options,i=h.serviceUrl;if(h.params[h.paramName]=b,h.onSearchStart.call(g.element,h.params)!==!1){if(d=h.ignoreParams?null:h.params,a.isFunction(h.lookup))return void h.lookup(b,function(a){g.suggestions=a.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,a.suggestions)});g.isLocal?c=g.getSuggestionsLocal(b):(a.isFunction(i)&&(i=i.call(g.element,b)),e=i+"?"+a.param(d||{}),c=g.cachedResponse[e]),c&&a.isArray(c.suggestions)?(g.suggestions=c.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,c.suggestions)):g.isBadQuery(b)?h.onSearchComplete.call(g.element,b,[]):(g.abortAjax(),f={url:i,data:d,type:h.type,dataType:h.dataType},a.extend(f,h.ajaxSettings),g.currentRequest=a.ajax(f).done(function(a){var c;g.currentRequest=null,c=h.transformResult(a,b),g.processResponse(c,b,e),h.onSearchComplete.call(g.element,b,c.suggestions)}).fail(function(a,c,d){h.onSearchError.call(g.element,b,a,c,d)}))}},isBadQuery:function(a){if(!this.options.preventBadQueries)return!1;for(var b=this.badQueries,c=b.length;c--;)if(0===a.indexOf(b[c]))return!0;return!1},hide:function(){var b=this,c=a(b.suggestionsContainer);a.isFunction(b.options.onHide)&&b.visible&&b.options.onHide.call(b.element,c),b.visible=!1,b.selectedIndex=-1,clearTimeout(b.onChangeTimeout),a(b.suggestionsContainer).hide(),b.signalHint(null)},suggest:function(){if(!this.suggestions.length)return void(this.options.showNoSuggestionNotice?this.noSuggestions():this.hide());var b,c=this,d=c.options,e=d.groupBy,f=d.formatResult,g=c.getQuery(c.currentValue),h=c.classes.suggestion,i=c.classes.selected,j=a(c.suggestionsContainer),k=a(c.noSuggestionsContainer),l=d.beforeRender,m="",n=function(a,c){var f=a.data[e];return b===f?"":(b=f,d.formatGroup(a,b))};return d.triggerSelectOnValidInput&&c.isExactMatch(g)?void c.select(0):(a.each(c.suggestions,function(a,b){e&&(m+=n(b,g,a)),m+='<div class="'+h+'" data-index="'+a+'">'+f(b,g,a)+"</div>"}),this.adjustContainerWidth(),k.detach(),j.html(m),a.isFunction(l)&&l.call(c.element,j,c.suggestions),c.fixPosition(),j.show(),d.autoSelectFirst&&(c.selectedIndex=0,j.scrollTop(0),j.children("."+h).first().addClass(i)),c.visible=!0,void c.findBestHint())},noSuggestions:function(){var b=this,c=b.options.beforeRender,d=a(b.suggestionsContainer),e=a(b.noSuggestionsContainer);this.adjustContainerWidth(),e.detach(),d.empty(),d.append(e),a.isFunction(c)&&c.call(b.element,d,b.suggestions),b.fixPosition(),d.show(),b.visible=!0},adjustContainerWidth:function(){var b,c=this,d=c.options,e=a(c.suggestionsContainer);"auto"===d.width?(b=c.el.outerWidth(),e.css("width",b>0?b:300)):"flex"===d.width&&e.css("width","")},findBestHint:function(){var b=this,c=b.el.val().toLowerCase(),d=null;c&&(a.each(b.suggestions,function(a,b){var e=0===b.value.toLowerCase().indexOf(c);return e&&(d=b),!e}),b.signalHint(d))},signalHint:function(b){var c="",d=this;b&&(c=d.currentValue+b.value.substr(d.currentValue.length)),d.hintValue!==c&&(d.hintValue=c,d.hint=b,(this.options.onHint||a.noop)(c))},verifySuggestionsFormat:function(b){return b.length&&"string"==typeof b[0]?a.map(b,function(a){return{value:a,data:null}}):b},validateOrientation:function(b,c){return b=a.trim(b||"").toLowerCase(),-1===a.inArray(b,["auto","bottom","top"])&&(b=c),b},processResponse:function(a,b,c){var d=this,e=d.options;a.suggestions=d.verifySuggestionsFormat(a.suggestions),e.noCache||(d.cachedResponse[c]=a,e.preventBadQueries&&!a.suggestions.length&&d.badQueries.push(b)),b===d.getQuery(d.currentValue)&&(d.suggestions=a.suggestions,d.suggest())},activate:function(b){var c,d=this,e=d.classes.selected,f=a(d.suggestionsContainer),g=f.find("."+d.classes.suggestion);return f.find("."+e).removeClass(e),d.selectedIndex=b,-1!==d.selectedIndex&&g.length>d.selectedIndex?(c=g.get(d.selectedIndex),a(c).addClass(e),c):null},selectHint:function(){var b=this,c=a.inArray(b.hint,b.suggestions);b.select(c)},select:function(a){var b=this;b.hide(),b.onSelect(a)},moveUp:function(){var b=this;if(-1!==b.selectedIndex)return 0===b.selectedIndex?(a(b.suggestionsContainer).children().first().removeClass(b.classes.selected),b.selectedIndex=-1,b.el.val(b.currentValue),void b.findBestHint()):void b.adjustScroll(b.selectedIndex-1)},moveDown:function(){var a=this;a.selectedIndex!==a.suggestions.length-1&&a.adjustScroll(a.selectedIndex+1)},adjustScroll:function(b){var c=this,d=c.activate(b);if(d){var e,f,g,h=a(d).outerHeight();e=d.offsetTop,f=a(c.suggestionsContainer).scrollTop(),g=f+c.options.maxHeight-h,f>e?a(c.suggestionsContainer).scrollTop(e):e>g&&a(c.suggestionsContainer).scrollTop(e-c.options.maxHeight+h),c.options.preserveInput||c.el.val(c.getValue(c.suggestions[b].value)),c.signalHint(null)}},onSelect:function(b){var c=this,d=c.options.onSelect,e=c.suggestions[b];c.currentValue=c.getValue(e.value),c.currentValue===c.el.val()||c.options.preserveInput||c.el.val(c.currentValue),c.signalHint(null),c.suggestions=[],c.selection=e,a.isFunction(d)&&d.call(c.element,e)},getValue:function(a){var b,c,d=this,e=d.options.delimiter;return e?(b=d.currentValue,c=b.split(e),1===c.length?a:b.substr(0,b.length-c[c.length-1].length)+a):a},dispose:function(){var b=this;b.el.off(".autocomplete").removeData("autocomplete"),a(window).off("resize.autocomplete",b.fixPositionCapture),a(b.suggestionsContainer).remove()}},a.fn.devbridgeAutocomplete=function(c,d){var e="autocomplete";return arguments.length?this.each(function(){var f=a(this),g=f.data(e);"string"==typeof c?g&&"function"==typeof g[c]&&g[c](d):(g&&g.dispose&&g.dispose(),g=new b(this,c),f.data(e,g))}):this.first().data(e)},a.fn.autocomplete||(a.fn.autocomplete=a.fn.devbridgeAutocomplete)});
+!function(a){"use strict";"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports&&"function"==typeof require?require("jquery"):jQuery)}(function(a){"use strict";function b(c,d){var e=a.noop,f=this,g={ajaxSettings:{},autoSelectFirst:!1,appendTo:document.body,serviceUrl:null,lookup:null,onSelect:null,width:"auto",minChars:1,maxHeight:300,deferRequestBy:0,params:{},formatResult:b.formatResult,delimiter:null,zIndex:9999,type:"GET",noCache:!1,onSearchStart:e,onSearchComplete:e,onSearchError:e,preserveInput:!1,containerClass:"autocomplete-suggestions",tabDisabled:!1,dataType:"text",currentRequest:null,triggerSelectOnValidInput:!0,preventBadQueries:!0,lookupFilter:function(a,b,c){return-1!==a.value.toLowerCase().indexOf(c)},paramName:"query",transformResult:function(b){return"string"==typeof b?a.parseJSON(b):b},showNoSuggestionNotice:!1,noSuggestionNotice:"No results",orientation:"bottom",forceFixPosition:!1};f.element=c,f.el=a(c),f.suggestions=[],f.badQueries=[],f.selectedIndex=-1,f.currentValue=f.element.value,f.intervalId=0,f.cachedResponse={},f.onChangeInterval=null,f.onChange=null,f.isLocal=!1,f.suggestionsContainer=null,f.noSuggestionsContainer=null,f.options=a.extend({},g,d),f.classes={selected:"autocomplete-selected",suggestion:"autocomplete-suggestion"},f.hint=null,f.hintValue="",f.selection=null,f.initialize(),f.setOptions(d)}var c=function(){return{escapeRegExChars:function(a){return a.replace(/[|\\{}()[\]^$+*?.]/g,"\\$&")},createNode:function(a){var b=document.createElement("div");return b.className=a,b.style.position="absolute",b.style.display="none",b}}}(),d={ESC:27,TAB:9,RETURN:13,LEFT:37,UP:38,RIGHT:39,DOWN:40};b.utils=c,a.Autocomplete=b,b.formatResult=function(a,b){if(!b)return a.value;var d="("+c.escapeRegExChars(b)+")";return a.value.replace(new RegExp(d,"gi"),"<strong>$1</strong>").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/&lt;(\/?strong)&gt;/g,"<$1>")},b.prototype={killerFn:null,initialize:function(){var c,d=this,e="."+d.classes.suggestion,f=d.classes.selected,g=d.options;d.element.setAttribute("autocomplete","off"),d.killerFn=function(b){a(b.target).closest("."+d.options.containerClass).length||(d.killSuggestions(),d.disableKillerFn())},d.noSuggestionsContainer=a('<div class="autocomplete-no-suggestion"></div>').html(this.options.noSuggestionNotice).get(0),d.suggestionsContainer=b.utils.createNode(g.containerClass),c=a(d.suggestionsContainer),c.appendTo(g.appendTo),"auto"!==g.width&&c.css("width",g.width),c.on("mouseover.autocomplete",e,function(){d.activate(a(this).data("index"))}),c.on("mouseout.autocomplete",function(){d.selectedIndex=-1,c.children("."+f).removeClass(f)}),c.on("click.autocomplete",e,function(){return d.select(a(this).data("index")),!1}),d.fixPositionCapture=function(){d.visible&&d.fixPosition()},a(window).on("resize.autocomplete",d.fixPositionCapture),d.el.on("keydown.autocomplete",function(a){d.onKeyPress(a)}),d.el.on("keyup.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("blur.autocomplete",function(){d.onBlur()}),d.el.on("focus.autocomplete",function(){d.onFocus()}),d.el.on("change.autocomplete",function(a){d.onKeyUp(a)}),d.el.on("input.autocomplete",function(a){d.onKeyUp(a)})},onFocus:function(){var a=this;a.fixPosition(),a.el.val().length>=a.options.minChars&&a.onValueChange()},onBlur:function(){this.enableKillerFn()},abortAjax:function(){var a=this;a.currentRequest&&(a.currentRequest.abort(),a.currentRequest=null)},setOptions:function(b){var c=this,d=c.options;a.extend(d,b),c.isLocal=a.isArray(d.lookup),c.isLocal&&(d.lookup=c.verifySuggestionsFormat(d.lookup)),d.orientation=c.validateOrientation(d.orientation,"bottom"),a(c.suggestionsContainer).css({"max-height":d.maxHeight+"px",width:d.width+"px","z-index":d.zIndex})},clearCache:function(){this.cachedResponse={},this.badQueries=[]},clear:function(){this.clearCache(),this.currentValue="",this.suggestions=[]},disable:function(){var a=this;a.disabled=!0,clearInterval(a.onChangeInterval),a.abortAjax()},enable:function(){this.disabled=!1},fixPosition:function(){var b=this,c=a(b.suggestionsContainer),d=c.parent().get(0);if(d===document.body||b.options.forceFixPosition){var e=b.options.orientation,f=c.outerHeight(),g=b.el.outerHeight(),h=b.el.offset(),i={top:h.top,left:h.left};if("auto"===e){var j=a(window).height(),k=a(window).scrollTop(),l=-k+h.top-f,m=k+j-(h.top+g+f);e=Math.max(l,m)===l?"top":"bottom"}if("top"===e?i.top+=-f:i.top+=g,d!==document.body){var n,o=c.css("opacity");b.visible||c.css("opacity",0).show(),n=c.offsetParent().offset(),i.top-=n.top,i.left-=n.left,b.visible||c.css("opacity",o).hide()}"auto"===b.options.width&&(i.width=b.el.outerWidth()+"px"),c.css(i)}},enableKillerFn:function(){var b=this;a(document).on("click.autocomplete",b.killerFn)},disableKillerFn:function(){var b=this;a(document).off("click.autocomplete",b.killerFn)},killSuggestions:function(){var a=this;a.stopKillSuggestions(),a.intervalId=window.setInterval(function(){a.visible&&(a.options.preserveInput||a.el.val(a.currentValue),a.hide()),a.stopKillSuggestions()},50)},stopKillSuggestions:function(){window.clearInterval(this.intervalId)},isCursorAtEnd:function(){var a,b=this,c=b.el.val().length,d=b.element.selectionStart;return"number"==typeof d?d===c:document.selection?(a=document.selection.createRange(),a.moveStart("character",-c),c===a.text.length):!0},onKeyPress:function(a){var b=this;if(!b.disabled&&!b.visible&&a.which===d.DOWN&&b.currentValue)return void b.suggest();if(!b.disabled&&b.visible){switch(a.which){case d.ESC:b.el.val(b.currentValue),b.hide();break;case d.RIGHT:if(b.hint&&b.options.onHint&&b.isCursorAtEnd()){b.selectHint();break}return;case d.TAB:if(b.hint&&b.options.onHint)return void b.selectHint();if(-1===b.selectedIndex)return void b.hide();if(b.select(b.selectedIndex),b.options.tabDisabled===!1)return;break;case d.RETURN:if(-1===b.selectedIndex)return void b.hide();b.select(b.selectedIndex);break;case d.UP:b.moveUp();break;case d.DOWN:b.moveDown();break;default:return}a.stopImmediatePropagation(),a.preventDefault()}},onKeyUp:function(a){var b=this;if(!b.disabled){switch(a.which){case d.UP:case d.DOWN:return}clearInterval(b.onChangeInterval),b.currentValue!==b.el.val()&&(b.findBestHint(),b.options.deferRequestBy>0?b.onChangeInterval=setInterval(function(){b.onValueChange()},b.options.deferRequestBy):b.onValueChange())}},onValueChange:function(){var b=this,c=b.options,d=b.el.val(),e=b.getQuery(d);return b.selection&&b.currentValue!==e&&(b.selection=null,(c.onInvalidateSelection||a.noop).call(b.element)),clearInterval(b.onChangeInterval),b.currentValue=d,b.selectedIndex=-1,c.triggerSelectOnValidInput&&b.isExactMatch(e)?void b.select(0):void(e.length<c.minChars?b.hide():b.getSuggestions(e))},isExactMatch:function(a){var b=this.suggestions;return 1===b.length&&b[0].value.toLowerCase()===a.toLowerCase()},getQuery:function(b){var c,d=this.options.delimiter;return d?(c=b.split(d),a.trim(c[c.length-1])):b},getSuggestionsLocal:function(b){var c,d=this,e=d.options,f=b.toLowerCase(),g=e.lookupFilter,h=parseInt(e.lookupLimit,10);return c={suggestions:a.grep(e.lookup,function(a){return g(a,b,f)})},h&&c.suggestions.length>h&&(c.suggestions=c.suggestions.slice(0,h)),c},getSuggestions:function(b){var c,d,e,f,g=this,h=g.options,i=h.serviceUrl;if(h.params[h.paramName]=b,d=h.ignoreParams?null:h.params,h.onSearchStart.call(g.element,h.params)!==!1){if(a.isFunction(h.lookup))return void h.lookup(b,function(a){g.suggestions=a.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,a.suggestions)});g.isLocal?c=g.getSuggestionsLocal(b):(a.isFunction(i)&&(i=i.call(g.element,b)),e=i+"?"+a.param(d||{}),c=g.cachedResponse[e]),c&&a.isArray(c.suggestions)?(g.suggestions=c.suggestions,g.suggest(),h.onSearchComplete.call(g.element,b,c.suggestions)):g.isBadQuery(b)?h.onSearchComplete.call(g.element,b,[]):(g.abortAjax(),f={url:i,data:d,type:h.type,dataType:h.dataType},a.extend(f,h.ajaxSettings),g.currentRequest=a.ajax(f).done(function(a){var c;g.currentRequest=null,c=h.transformResult(a,b),g.processResponse(c,b,e),h.onSearchComplete.call(g.element,b,c.suggestions)}).fail(function(a,c,d){h.onSearchError.call(g.element,b,a,c,d)}))}},isBadQuery:function(a){if(!this.options.preventBadQueries)return!1;for(var b=this.badQueries,c=b.length;c--;)if(0===a.indexOf(b[c]))return!0;return!1},hide:function(){var b=this,c=a(b.suggestionsContainer);a.isFunction(b.options.onHide)&&b.visible&&b.options.onHide.call(b.element,c),b.visible=!1,b.selectedIndex=-1,clearInterval(b.onChangeInterval),a(b.suggestionsContainer).hide(),b.signalHint(null)},suggest:function(){if(!this.suggestions.length)return void(this.options.showNoSuggestionNotice?this.noSuggestions():this.hide());var b,c=this,d=c.options,e=d.groupBy,f=d.formatResult,g=c.getQuery(c.currentValue),h=c.classes.suggestion,i=c.classes.selected,j=a(c.suggestionsContainer),k=a(c.noSuggestionsContainer),l=d.beforeRender,m="",n=function(a,c){var d=a.data[e];return b===d?"":(b=d,'<div class="autocomplete-group"><strong>'+b+"</strong></div>")};return d.triggerSelectOnValidInput&&c.isExactMatch(g)?void c.select(0):(a.each(c.suggestions,function(a,b){e&&(m+=n(b,g,a)),m+='<div class="'+h+'" data-index="'+a+'">'+f(b,g,a)+"</div>"}),this.adjustContainerWidth(),k.detach(),j.html(m),a.isFunction(l)&&l.call(c.element,j,c.suggestions),c.fixPosition(),j.show(),d.autoSelectFirst&&(c.selectedIndex=0,j.scrollTop(0),j.children("."+h).first().addClass(i)),c.visible=!0,void c.findBestHint())},noSuggestions:function(){var b=this,c=a(b.suggestionsContainer),d=a(b.noSuggestionsContainer);this.adjustContainerWidth(),d.detach(),c.empty(),c.append(d),b.fixPosition(),c.show(),b.visible=!0},adjustContainerWidth:function(){var b,c=this,d=c.options,e=a(c.suggestionsContainer);"auto"===d.width&&(b=c.el.outerWidth(),e.css("width",b>0?b:300))},findBestHint:function(){var b=this,c=b.el.val().toLowerCase(),d=null;c&&(a.each(b.suggestions,function(a,b){var e=0===b.value.toLowerCase().indexOf(c);return e&&(d=b),!e}),b.signalHint(d))},signalHint:function(b){var c="",d=this;b&&(c=d.currentValue+b.value.substr(d.currentValue.length)),d.hintValue!==c&&(d.hintValue=c,d.hint=b,(this.options.onHint||a.noop)(c))},verifySuggestionsFormat:function(b){return b.length&&"string"==typeof b[0]?a.map(b,function(a){return{value:a,data:null}}):b},validateOrientation:function(b,c){return b=a.trim(b||"").toLowerCase(),-1===a.inArray(b,["auto","bottom","top"])&&(b=c),b},processResponse:function(a,b,c){var d=this,e=d.options;a.suggestions=d.verifySuggestionsFormat(a.suggestions),e.noCache||(d.cachedResponse[c]=a,e.preventBadQueries&&!a.suggestions.length&&d.badQueries.push(b)),b===d.getQuery(d.currentValue)&&(d.suggestions=a.suggestions,d.suggest())},activate:function(b){var c,d=this,e=d.classes.selected,f=a(d.suggestionsContainer),g=f.find("."+d.classes.suggestion);return f.find("."+e).removeClass(e),d.selectedIndex=b,-1!==d.selectedIndex&&g.length>d.selectedIndex?(c=g.get(d.selectedIndex),a(c).addClass(e),c):null},selectHint:function(){var b=this,c=a.inArray(b.hint,b.suggestions);b.select(c)},select:function(a){var b=this;b.hide(),b.onSelect(a),b.disableKillerFn()},moveUp:function(){var b=this;if(-1!==b.selectedIndex)return 0===b.selectedIndex?(a(b.suggestionsContainer).children().first().removeClass(b.classes.selected),b.selectedIndex=-1,b.el.val(b.currentValue),void b.findBestHint()):void b.adjustScroll(b.selectedIndex-1)},moveDown:function(){var a=this;a.selectedIndex!==a.suggestions.length-1&&a.adjustScroll(a.selectedIndex+1)},adjustScroll:function(b){var c=this,d=c.activate(b);if(d){var e,f,g,h=a(d).outerHeight();e=d.offsetTop,f=a(c.suggestionsContainer).scrollTop(),g=f+c.options.maxHeight-h,f>e?a(c.suggestionsContainer).scrollTop(e):e>g&&a(c.suggestionsContainer).scrollTop(e-c.options.maxHeight+h),c.options.preserveInput||c.el.val(c.getValue(c.suggestions[b].value)),c.signalHint(null)}},onSelect:function(b){var c=this,d=c.options.onSelect,e=c.suggestions[b];c.currentValue=c.getValue(e.value),c.currentValue===c.el.val()||c.options.preserveInput||c.el.val(c.currentValue),c.signalHint(null),c.suggestions=[],c.selection=e,a.isFunction(d)&&d.call(c.element,e)},getValue:function(a){var b,c,d=this,e=d.options.delimiter;return e?(b=d.currentValue,c=b.split(e),1===c.length?a:b.substr(0,b.length-c[c.length-1].length)+a):a},dispose:function(){var b=this;b.el.off(".autocomplete").removeData("autocomplete"),b.disableKillerFn(),a(window).off("resize.autocomplete",b.fixPositionCapture),a(b.suggestionsContainer).remove()}},a.fn.autocomplete=a.fn.devbridgeAutocomplete=function(c,d){var e="autocomplete";return arguments.length?this.each(function(){var f=a(this),g=f.data(e);"string"==typeof c?g&&"function"==typeof g[c]&&g[c](d):(g&&g.dispose&&g.dispose(),g=new b(this,c),f.data(e,g))}):this.first().data(e)}});
 /*!
  * Vue.js v1.0.28
  * (c) 2016 Evan You
@@ -20301,7 +20301,7 @@ setTimeout(function () {
 return Vue;
 
 })));
-/*! tether 1.4.0 */
+/*! tether 1.3.7 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20411,7 +20411,7 @@ var getOrigin = function getOrigin() {
   // are equivilant or not.  We place an element at the top left of the page that will
   // get the same jitter, so we can cancel the two out.
   var node = zeroElement;
-  if (!node || !document.body.contains(node)) {
+  if (!node) {
     node = document.createElement('div');
     node.setAttribute('data-tether-id', uniqueId());
     extend(node.style, {
@@ -21550,24 +21550,20 @@ var TetherClass = (function (_Evented) {
       }
 
       if (!moved) {
-        if (this.options.bodyElement) {
-          this.options.bodyElement.appendChild(this.element);
-        } else {
-          var offsetParentIsBody = true;
-          var currentNode = this.element.parentNode;
-          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
-            if (getComputedStyle(currentNode).position !== 'static') {
-              offsetParentIsBody = false;
-              break;
-            }
-
-            currentNode = currentNode.parentNode;
+        var offsetParentIsBody = true;
+        var currentNode = this.element.parentNode;
+        while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
+          if (getComputedStyle(currentNode).position !== 'static') {
+            offsetParentIsBody = false;
+            break;
           }
 
-          if (!offsetParentIsBody) {
-            this.element.parentNode.removeChild(this.element);
-            this.element.ownerDocument.body.appendChild(this.element);
-          }
+          currentNode = currentNode.parentNode;
+        }
+
+        if (!offsetParentIsBody) {
+          this.element.parentNode.removeChild(this.element);
+          this.element.ownerDocument.body.appendChild(this.element);
         }
       }
 
@@ -22115,7 +22111,7 @@ return Tether;
 
 
 /*!
- * shariff - v1.24.1 - 17.11.2016
+ * shariff - v1.24.0 - 29.06.2016
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2016 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT license
@@ -22204,7 +22200,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
 },{}],26:[function(require,module,exports){
 (function (global){
-"use strict";var $=require("jquery"),url=require("url"),Shariff=function(e,t){var r=this;this.element=e,$(e).empty(),this.options=$.extend({},this.defaults,t,$(e).data());var i=[require("./services/addthis"),require("./services/diaspora"),require("./services/facebook"),require("./services/flattr"),require("./services/googleplus"),require("./services/info"),require("./services/linkedin"),require("./services/mail"),require("./services/pinterest"),require("./services/reddit"),require("./services/stumbleupon"),require("./services/twitter"),require("./services/whatsapp"),require("./services/xing"),require("./services/tumblr"),require("./services/threema"),require("./services/weibo"),require("./services/tencent-weibo"),require("./services/qzone")];this.services=$.map(this.options.services,function(e){var t;return i.forEach(function(i){if(i=i(r),i.name===e)return t=i,null}),t}),this._addButtonList(),null!==this.options.backendUrl&&this.getShares().then($.proxy(this._updateCounts,this))};Shariff.prototype={defaults:{theme:"color",backendUrl:null,infoUrl:"http://ct.de/-2467514",lang:"de",langFallback:"en",mailUrl:function(){var e=url.parse(this.getURL(),!0);return e.query.view="mail",delete e.search,url.format(e)},mailSubject:function(){return this.getMeta("DC.title")||this.getTitle()},mailBody:function(){return this.getURL()},mediaUrl:null,orientation:"horizontal",referrerTrack:null,services:["twitter","facebook","googleplus","info"],title:function(){return $("head title").text()},twitterVia:null,flattrUser:null,flattrCategory:null,url:function(){var e=global.document.location.href,t=$("link[rel=canonical]").attr("href")||this.getMeta("og:url")||"";return t.length>0&&(t.indexOf("http")<0&&(t=global.document.location.protocol+"//"+global.document.location.host+t),e=t),e}},$socialshareElement:function(){return $(this.element)},getLocalized:function(e,t){return"object"==typeof e[t]?"undefined"==typeof e[t][this.options.lang]?e[t][this.options.langFallback]:e[t][this.options.lang]:"string"==typeof e[t]?e[t]:void 0},getMeta:function(e){var t=$('meta[name="'+e+'"],[property="'+e+'"]').attr("content");return t||""},getInfoUrl:function(){return this.options.infoUrl},getURL:function(){return this.getOption("url")},getOption:function(e){var t=this.options[e];return"function"==typeof t?$.proxy(t,this)():t},getTitle:function(){return this.getOption("title")},getReferrerTrack:function(){return this.options.referrerTrack||""},getShares:function(){var e=url.parse(this.options.backendUrl,!0);return e.query.url=this.getURL(),delete e.search,$.getJSON(url.format(e))},_updateCounts:function(e){var t=this;$.each(e,function(e,r){r>=1e3&&(r=Math.round(r/1e3)+"k"),$(t.element).find("."+e+" a").append('&nbsp;<span class="share_count">'+r)})},_addButtonList:function(){var e=this,t=this.$socialshareElement(),r="theme-"+this.options.theme,i="orientation-"+this.options.orientation,n="col-"+this.options.services.length,a=$("<ul>").addClass(r).addClass(i).addClass(n);this.services.forEach(function(t){var r=$('<li class="shariff-button">').addClass(t.name),i='<span class="share_text">'+e.getLocalized(t,"shareText"),n=$("<a>").attr("href",t.shareUrl).append(i);"undefined"!=typeof t.faName&&n.prepend('<span class="fa '+t.faName+'">'),t.popup?n.attr("data-rel","popup"):t.blank&&n.attr("target","_blank"),n.attr("title",e.getLocalized(t,"title")),n.attr("role","button"),n.attr("aria-label",e.getLocalized(t,"title")),r.append(n),a.append(r)}),a.on("click",'[data-rel="popup"]',function(e){e.preventDefault();var t=$(this).attr("href"),r="_blank",i="600",n="460",a="width="+i+",height="+n;global.window.open(t,r,a)}),t.append(a)}},module.exports=Shariff,global.Shariff=Shariff,$(".shariff").each(function(){this.hasOwnProperty("shariff")||(this.shariff=new Shariff(this))});
+"use strict";var $=require("jquery"),url=require("url"),Shariff=function(e,t){var r=this;this.element=e,$(e).empty(),this.options=$.extend({},this.defaults,t,$(e).data());var i=[require("./services/addthis"),require("./services/diaspora"),require("./services/facebook"),require("./services/flattr"),require("./services/googleplus"),require("./services/info"),require("./services/linkedin"),require("./services/mail"),require("./services/pinterest"),require("./services/reddit"),require("./services/stumbleupon"),require("./services/twitter"),require("./services/whatsapp"),require("./services/xing"),require("./services/tumblr"),require("./services/threema"),require("./services/weibo"),require("./services/tencent-weibo"),require("./services/qzone")];this.services=$.map(this.options.services,function(e){var t;return i.forEach(function(i){if(i=i(r),i.name===e)return t=i,null}),t}),this._addButtonList(),null!==this.options.backendUrl&&this.getShares().then($.proxy(this._updateCounts,this))};Shariff.prototype={defaults:{theme:"color",backendUrl:null,infoUrl:"http://ct.de/-2467514",lang:"de",langFallback:"en",mailUrl:function(){var e=url.parse(this.getURL(),!0);return e.query.view="mail",delete e.search,url.format(e)},mailSubject:function(){return this.getMeta("DC.title")||this.getTitle()},mailBody:function(){return"<"+this.getURL()+">"},mediaUrl:null,orientation:"horizontal",referrerTrack:null,services:["twitter","facebook","googleplus","info"],title:function(){return $("head title").text()},twitterVia:null,flattrUser:null,flattrCategory:null,url:function(){var e=global.document.location.href,t=$("link[rel=canonical]").attr("href")||this.getMeta("og:url")||"";return t.length>0&&(t.indexOf("http")<0&&(t=global.document.location.protocol+"//"+global.document.location.host+t),e=t),e}},$socialshareElement:function(){return $(this.element)},getLocalized:function(e,t){return"object"==typeof e[t]?"undefined"==typeof e[t][this.options.lang]?e[t][this.options.langFallback]:e[t][this.options.lang]:"string"==typeof e[t]?e[t]:void 0},getMeta:function(e){var t=$('meta[name="'+e+'"],[property="'+e+'"]').attr("content");return t||""},getInfoUrl:function(){return this.options.infoUrl},getURL:function(){return this.getOption("url")},getOption:function(e){var t=this.options[e];return"function"==typeof t?$.proxy(t,this)():t},getTitle:function(){return this.getOption("title")},getReferrerTrack:function(){return this.options.referrerTrack||""},getShares:function(){var e=url.parse(this.options.backendUrl,!0);return e.query.url=this.getURL(),delete e.search,$.getJSON(url.format(e))},_updateCounts:function(e){var t=this;$.each(e,function(e,r){r>=1e3&&(r=Math.round(r/1e3)+"k"),$(t.element).find("."+e+" a").append('&nbsp;<span class="share_count">'+r)})},_addButtonList:function(){var e=this,t=this.$socialshareElement(),r="theme-"+this.options.theme,i="orientation-"+this.options.orientation,n="col-"+this.options.services.length,a=$("<ul>").addClass(r).addClass(i).addClass(n);this.services.forEach(function(t){var r=$('<li class="shariff-button">').addClass(t.name),i='<span class="share_text">'+e.getLocalized(t,"shareText"),n=$("<a>").attr("href",t.shareUrl).append(i);"undefined"!=typeof t.faName&&n.prepend('<span class="fa '+t.faName+'">'),t.popup?n.attr("data-rel","popup"):t.blank&&n.attr("target","_blank"),n.attr("title",e.getLocalized(t,"title")),n.attr("role","button"),n.attr("aria-label",e.getLocalized(t,"title")),r.append(n),a.append(r)}),a.on("click",'[data-rel="popup"]',function(e){e.preventDefault();var t=$(this).attr("href"),r="_blank",i="600",n="460",a="width="+i+",height="+n;global.window.open(t,r,a)}),t.append(a)}},module.exports=Shariff,global.Shariff=Shariff,$(".shariff").each(function(){this.hasOwnProperty("shariff")||(this.shariff=new Shariff(this))});
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./services/addthis":7,"./services/diaspora":8,"./services/facebook":9,"./services/flattr":10,"./services/googleplus":11,"./services/info":12,"./services/linkedin":13,"./services/mail":14,"./services/pinterest":15,"./services/qzone":16,"./services/reddit":17,"./services/stumbleupon":18,"./services/tencent-weibo":19,"./services/threema":20,"./services/tumblr":21,"./services/twitter":22,"./services/weibo":23,"./services/whatsapp":24,"./services/xing":25,"jquery":1,"url":6}]},{},[26]);
 
@@ -22480,7 +22476,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 }).call(this);
 
 /*!
- * Lightbox v2.9.0
+ * Lightbox v2.8.1
  * by Lokesh Dhakar
  *
  * More info:
@@ -22522,25 +22518,14 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   Lightbox.defaults = {
     albumLabel: 'Image %1 of %2',
     alwaysShowNavOnTouchDevices: false,
-    fadeDuration: 600,
+    fadeDuration: 500,
     fitImagesInViewport: true,
-    imageFadeDuration: 600,
     // maxWidth: 800,
     // maxHeight: 600,
     positionFromTop: 50,
     resizeDuration: 700,
     showImageNumberLabel: true,
-    wrapAround: false,
-    disableScrolling: false,
-    /*
-    Sanitize Title
-    If the caption data is trusted, for example you are hardcoding it in, then leave this to false.
-    This will free you to add html tags, such as links, in the caption.
-
-    If the caption data is user submitted or from some other untrusted source, then set this to true
-    to prevent xss and other injection attacks.
-     */
-    sanitizeTitle: false
+    wrapAround: false
   };
 
   Lightbox.prototype.option = function(options) {
@@ -22552,12 +22537,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   };
 
   Lightbox.prototype.init = function() {
-    var self = this;
-    // Both enable and build methods require the body tag to be in the DOM.
-    $(document).ready(function() {
-      self.enable();
-      self.build();
-    });
+    this.enable();
+    this.build();
   };
 
   // Loop through anchors and areamaps looking for either data-lightbox attributes or rel attributes
@@ -22581,23 +22562,12 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     this.$overlay        = $('#lightboxOverlay');
     this.$outerContainer = this.$lightbox.find('.lb-outerContainer');
     this.$container      = this.$lightbox.find('.lb-container');
-    this.$image          = this.$lightbox.find('.lb-image');
-    this.$nav            = this.$lightbox.find('.lb-nav');
 
     // Store css values for future lookup
-    this.containerPadding = {
-      top: parseInt(this.$container.css('padding-top'), 10),
-      right: parseInt(this.$container.css('padding-right'), 10),
-      bottom: parseInt(this.$container.css('padding-bottom'), 10),
-      left: parseInt(this.$container.css('padding-left'), 10)
-    };
-
-    this.imageBorderWidth = {
-      top: parseInt(this.$image.css('border-top-width'), 10),
-      right: parseInt(this.$image.css('border-right-width'), 10),
-      bottom: parseInt(this.$image.css('border-bottom-width'), 10),
-      left: parseInt(this.$image.css('border-left-width'), 10)
-    };
+    this.containerTopPadding = parseInt(this.$container.css('padding-top'), 10);
+    this.containerRightPadding = parseInt(this.$container.css('padding-right'), 10);
+    this.containerBottomPadding = parseInt(this.$container.css('padding-bottom'), 10);
+    this.containerLeftPadding = parseInt(this.$container.css('padding-left'), 10);
 
     // Attach event handlers to the newly minted DOM elements
     this.$overlay.hide().on('click', function() {
@@ -22636,32 +22606,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
       }
       return false;
     });
-
-    /*
-      Show context menu for image on right-click
-
-      There is a div containing the navigation that spans the entire image and lives above of it. If
-      you right-click, you are right clicking this div and not the image. This prevents users from
-      saving the image or using other context menu actions with the image.
-
-      To fix this, when we detect the right mouse button is pressed down, but not yet clicked, we
-      set pointer-events to none on the nav div. This is so that the upcoming right-click event on
-      the next mouseup will bubble down to the image. Once the right-click/contextmenu event occurs
-      we set the pointer events back to auto for the nav div so it can capture hover and left-click
-      events as usual.
-     */
-    this.$nav.on('mousedown', function(event) {
-      if (event.which === 3) {
-        self.$nav.css('pointer-events', 'none');
-
-        self.$lightbox.one('contextmenu', function() {
-          setTimeout(function() {
-              this.$nav.css('pointer-events', 'auto');
-          }.bind(self), 0);
-        });
-      }
-    });
-
 
     this.$lightbox.find('.lb-loader, .lb-close').on('click', function() {
       self.end();
@@ -22728,11 +22672,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
       left: left + 'px'
     }).fadeIn(this.options.fadeDuration);
 
-    // Disable scrolling of the page while open
-    if (this.options.disableScrolling) {
-      $('body').addClass('lb-disable-scrolling');
-    }
-
     this.changeImage(imageNumber);
   };
 
@@ -22774,8 +22713,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
         windowWidth    = $(window).width();
         windowHeight   = $(window).height();
-        maxImageWidth  = windowWidth - self.containerPadding.left - self.containerPadding.right - self.imageBorderWidth.left - self.imageBorderWidth.right - 20;
-        maxImageHeight = windowHeight - self.containerPadding.top - self.containerPadding.bottom - self.imageBorderWidth.top - self.imageBorderWidth.bottom - 120;
+        maxImageWidth  = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
+        maxImageHeight = windowHeight - self.containerTopPadding - self.containerBottomPadding - 120;
 
         // Check if image size is larger then maxWidth|maxHeight in settings
         if (self.options.maxWidth && self.options.maxWidth < maxImageWidth) {
@@ -22810,7 +22749,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Stretch overlay to fit the viewport
   Lightbox.prototype.sizeOverlay = function() {
     this.$overlay
-      .width($(document).width())
+      .width($(window).width())
       .height($(document).height());
   };
 
@@ -22820,8 +22759,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
     var oldWidth  = this.$outerContainer.outerWidth();
     var oldHeight = this.$outerContainer.outerHeight();
-    var newWidth  = imageWidth + this.containerPadding.left + this.containerPadding.right + this.imageBorderWidth.left + this.imageBorderWidth.right;
-    var newHeight = imageHeight + this.containerPadding.top + this.containerPadding.bottom + this.imageBorderWidth.top + this.imageBorderWidth.bottom;
+    var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
+    var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
 
     function postResize() {
       self.$lightbox.find('.lb-dataContainer').width(newWidth);
@@ -22845,7 +22784,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Display the image and its details and begin preload neighboring images.
   Lightbox.prototype.showImage = function() {
     this.$lightbox.find('.lb-loader').stop(true).hide();
-    this.$lightbox.find('.lb-image').fadeIn(this.options.imageFadeDuration);
+    this.$lightbox.find('.lb-image').fadeIn('slow');
 
     this.updateNav();
     this.updateDetails();
@@ -22897,13 +22836,9 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     // Thanks Nate Wright for the fix. @https://github.com/NateWr
     if (typeof this.album[this.currentImageIndex].title !== 'undefined' &&
       this.album[this.currentImageIndex].title !== '') {
-      var $caption = this.$lightbox.find('.lb-caption');
-      if (this.options.sanitizeTitle) {
-        $caption.text(this.album[this.currentImageIndex].title);
-      } else {
-        $caption.html(this.album[this.currentImageIndex].title);
-      }
-      $caption.fadeIn('fast')
+      this.$lightbox.find('.lb-caption')
+        .html(this.album[this.currentImageIndex].title)
+        .fadeIn('fast')
         .find('a').on('click', function(event) {
           if ($(this).attr('target') !== undefined) {
             window.open($(this).attr('href'), $(this).attr('target'));
@@ -22980,9 +22915,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     $('select, object, embed').css({
       visibility: 'visible'
     });
-    if (this.options.disableScrolling) {
-      $('body').removeClass('lb-disable-scrolling');
-    }
   };
 
   return new Lightbox();
@@ -29837,7 +29769,7 @@ var Popover = (function ($) {
 }(jQuery);
 
 //! moment.js
-//! version : 2.18.1
+//! version : 2.16.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -29879,12 +29811,8 @@ function isObjectEmpty(obj) {
     return true;
 }
 
-function isUndefined(input) {
-    return input === void 0;
-}
-
 function isNumber(input) {
-    return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
+    return typeof value === 'number' || Object.prototype.toString.call(input) === '[object Number]';
 }
 
 function isDate(input) {
@@ -29939,9 +29867,7 @@ function defaultParsingFlags() {
         userInvalidated : false,
         iso             : false,
         parsedDateParts : [],
-        meridiem        : null,
-        rfc2822         : false,
-        weekdayMismatch : false
+        meridiem        : null
     };
 }
 
@@ -30017,6 +29943,10 @@ function createInvalid (flags) {
     return m;
 }
 
+function isUndefined(input) {
+    return input === void 0;
+}
+
 // Plugins that add properties should also add the key here (null value),
 // so we can properly clone ourselves.
 var momentProperties = hooks.momentProperties = [];
@@ -30056,7 +29986,7 @@ function copyConfig(to, from) {
     }
 
     if (momentProperties.length > 0) {
-        for (i = 0; i < momentProperties.length; i++) {
+        for (i in momentProperties) {
             prop = momentProperties[i];
             val = from[prop];
             if (!isUndefined(val)) {
@@ -30074,9 +30004,6 @@ var updateInProgress = false;
 function Moment(config) {
     copyConfig(this, config);
     this._d = new Date(config._d != null ? config._d.getTime() : NaN);
-    if (!this.isValid()) {
-        this._d = new Date(NaN);
-    }
     // Prevent infinite loop in case updateOffset creates new moment
     // objects.
     if (updateInProgress === false) {
@@ -30193,11 +30120,8 @@ function set (config) {
     }
     this._config = config;
     // Lenient ordinal parsing accepts just a number in addition to
-    // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
-    // TODO: Remove "ordinalParse" fallback in next major release.
-    this._dayOfMonthOrdinalParseLenient = new RegExp(
-        (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
-            '|' + (/\d{1,2}/).source);
+    // number + (possibly) stuff coming from _ordinalParseLenient.
+    this._ordinalParseLenient = new RegExp(this._ordinalParse.source + '|' + (/\d{1,2}/).source);
 }
 
 function mergeConfigs(parentConfig, childConfig) {
@@ -30295,7 +30219,7 @@ function invalidDate () {
 }
 
 var defaultOrdinal = '%d';
-var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+var defaultOrdinalParse = /\d{1,2}/;
 
 function ordinal (number) {
     return this._ordinal.replace('%d', number);
@@ -30305,7 +30229,6 @@ var defaultRelativeTime = {
     future : 'in %s',
     past   : '%s ago',
     s  : 'a few seconds',
-    ss : '%d seconds',
     m  : 'a minute',
     mm : '%d minutes',
     h  : 'an hour',
@@ -30488,7 +30411,7 @@ function makeFormatFunction(format) {
     return function (mom) {
         var output = '', i;
         for (i = 0; i < length; i++) {
-            output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
+            output += array[i] instanceof Function ? array[i].call(mom, format) : array[i];
         }
         return output;
     };
@@ -30691,8 +30614,7 @@ var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
 var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
 function localeMonths (m, format) {
     if (!m) {
-        return isArray(this._months) ? this._months :
-            this._months['standalone'];
+        return this._months;
     }
     return isArray(this._months) ? this._months[m.month()] :
         this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
@@ -30701,8 +30623,7 @@ function localeMonths (m, format) {
 var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
 function localeMonthsShort (m, format) {
     if (!m) {
-        return isArray(this._monthsShort) ? this._monthsShort :
-            this._monthsShort['standalone'];
+        return this._monthsShort;
     }
     return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
         this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
@@ -30969,11 +30890,11 @@ function getIsLeapYear () {
 }
 
 function createDate (y, m, d, h, M, s, ms) {
-    // can't just apply() to create a date:
-    // https://stackoverflow.com/q/181348
+    //can't just apply() to create a date:
+    //http://stackoverflow.com/questions/181348/instantiating-a-javascript-object-by-calling-prototype-constructor-apply
     var date = new Date(y, m, d, h, M, s, ms);
 
-    // the date constructor remaps years 0-99 to 1900-1999
+    //the date constructor remaps years 0-99 to 1900-1999
     if (y < 100 && y >= 0 && isFinite(date.getFullYear())) {
         date.setFullYear(y);
     }
@@ -30983,7 +30904,7 @@ function createDate (y, m, d, h, M, s, ms) {
 function createUTCDate (y) {
     var date = new Date(Date.UTC.apply(null, arguments));
 
-    // the Date.UTC function remaps years 0-99 to 1900-1999
+    //the Date.UTC function remaps years 0-99 to 1900-1999
     if (y < 100 && y >= 0 && isFinite(date.getUTCFullYear())) {
         date.setUTCFullYear(y);
     }
@@ -31000,7 +30921,7 @@ function firstWeekOffset(year, dow, doy) {
     return -fwdlw + fwd - 1;
 }
 
-// https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+//http://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
 function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
     var localWeekday = (7 + weekday - dow) % 7,
         weekOffset = firstWeekOffset(year, dow, doy),
@@ -31201,8 +31122,7 @@ function parseIsoWeekday(input, locale) {
 var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
 function localeWeekdays (m, format) {
     if (!m) {
-        return isArray(this._weekdays) ? this._weekdays :
-            this._weekdays['standalone'];
+        return this._weekdays;
     }
     return isArray(this._weekdays) ? this._weekdays[m.day()] :
         this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
@@ -31522,10 +31442,8 @@ addRegexToken('a',  matchMeridiem);
 addRegexToken('A',  matchMeridiem);
 addRegexToken('H',  match1to2);
 addRegexToken('h',  match1to2);
-addRegexToken('k',  match1to2);
 addRegexToken('HH', match1to2, match2);
 addRegexToken('hh', match1to2, match2);
-addRegexToken('kk', match1to2, match2);
 
 addRegexToken('hmm', match3to4);
 addRegexToken('hmmss', match5to6);
@@ -31533,10 +31451,6 @@ addRegexToken('Hmm', match3to4);
 addRegexToken('Hmmss', match5to6);
 
 addParseToken(['H', 'HH'], HOUR);
-addParseToken(['k', 'kk'], function (input, array, config) {
-    var kInput = toInt(input);
-    array[HOUR] = kInput === 24 ? 0 : kInput;
-});
 addParseToken(['a', 'A'], function (input, array, config) {
     config._isPm = config._locale.isPM(input);
     config._meridiem = input;
@@ -31607,7 +31521,7 @@ var baseConfig = {
     longDateFormat: defaultLongDateFormat,
     invalidDate: defaultInvalidDate,
     ordinal: defaultOrdinal,
-    dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+    ordinalParse: defaultOrdinalParse,
     relativeTime: defaultRelativeTime,
 
     months: defaultLocaleMonths,
@@ -31918,77 +31832,6 @@ function configFromISO(config) {
     }
 }
 
-// RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
-var basicRfcRegex = /^((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d?\d\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(?:\d\d)?\d\d\s)(\d\d:\d\d)(\:\d\d)?(\s(?:UT|GMT|[ECMP][SD]T|[A-IK-Za-ik-z]|[+-]\d{4}))$/;
-
-// date and time from ref 2822 format
-function configFromRFC2822(config) {
-    var string, match, dayFormat,
-        dateFormat, timeFormat, tzFormat;
-    var timezones = {
-        ' GMT': ' +0000',
-        ' EDT': ' -0400',
-        ' EST': ' -0500',
-        ' CDT': ' -0500',
-        ' CST': ' -0600',
-        ' MDT': ' -0600',
-        ' MST': ' -0700',
-        ' PDT': ' -0700',
-        ' PST': ' -0800'
-    };
-    var military = 'YXWVUTSRQPONZABCDEFGHIKLM';
-    var timezone, timezoneIndex;
-
-    string = config._i
-        .replace(/\([^\)]*\)|[\n\t]/g, ' ') // Remove comments and folding whitespace
-        .replace(/(\s\s+)/g, ' ') // Replace multiple-spaces with a single space
-        .replace(/^\s|\s$/g, ''); // Remove leading and trailing spaces
-    match = basicRfcRegex.exec(string);
-
-    if (match) {
-        dayFormat = match[1] ? 'ddd' + ((match[1].length === 5) ? ', ' : ' ') : '';
-        dateFormat = 'D MMM ' + ((match[2].length > 10) ? 'YYYY ' : 'YY ');
-        timeFormat = 'HH:mm' + (match[4] ? ':ss' : '');
-
-        // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
-        if (match[1]) { // day of week given
-            var momentDate = new Date(match[2]);
-            var momentDay = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][momentDate.getDay()];
-
-            if (match[1].substr(0,3) !== momentDay) {
-                getParsingFlags(config).weekdayMismatch = true;
-                config._isValid = false;
-                return;
-            }
-        }
-
-        switch (match[5].length) {
-            case 2: // military
-                if (timezoneIndex === 0) {
-                    timezone = ' +0000';
-                } else {
-                    timezoneIndex = military.indexOf(match[5][1].toUpperCase()) - 12;
-                    timezone = ((timezoneIndex < 0) ? ' -' : ' +') +
-                        (('' + timezoneIndex).replace(/^-?/, '0')).match(/..$/)[0] + '00';
-                }
-                break;
-            case 4: // Zone
-                timezone = timezones[match[5]];
-                break;
-            default: // UT or +/-9999
-                timezone = timezones[' GMT'];
-        }
-        match[5] = timezone;
-        config._i = match.splice(1).join('');
-        tzFormat = ' ZZ';
-        config._f = dayFormat + dateFormat + timeFormat + tzFormat;
-        configFromStringAndFormat(config);
-        getParsingFlags(config).rfc2822 = true;
-    } else {
-        config._isValid = false;
-    }
-}
-
 // date from iso format or fallback
 function configFromString(config) {
     var matched = aspNetJsonRegex.exec(config._i);
@@ -32001,24 +31844,13 @@ function configFromString(config) {
     configFromISO(config);
     if (config._isValid === false) {
         delete config._isValid;
-    } else {
-        return;
+        hooks.createFromInputFallback(config);
     }
-
-    configFromRFC2822(config);
-    if (config._isValid === false) {
-        delete config._isValid;
-    } else {
-        return;
-    }
-
-    // Final attempt, use Input Fallback
-    hooks.createFromInputFallback(config);
 }
 
 hooks.createFromInputFallback = deprecate(
-    'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
-    'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+    'value provided is not in a recognized ISO format. moment construction falls back to js Date(), ' +
+    'which is not reliable across all browsers and versions. Non ISO date formats are ' +
     'discouraged and will be removed in an upcoming major release. Please refer to ' +
     'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
     function (config) {
@@ -32065,10 +31897,10 @@ function configFromArray (config) {
     }
 
     //if the day of the year is set, figure out what it is
-    if (config._dayOfYear != null) {
+    if (config._dayOfYear) {
         yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
 
-        if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+        if (config._dayOfYear > daysInYear(yearToUse)) {
             getParsingFlags(config)._overflowDayOfYear = true;
         }
 
@@ -32172,9 +32004,6 @@ function dayOfYearFromWeekInfo(config) {
 // constant that refers to the ISO standard
 hooks.ISO_8601 = function () {};
 
-// constant that refers to the RFC 2822 form
-hooks.RFC_2822 = function () {};
-
 // date from string and format string
 function configFromStringAndFormat(config) {
     // TODO: Move this to another part of the creation flow to prevent circular deps
@@ -32182,10 +32011,7 @@ function configFromStringAndFormat(config) {
         configFromISO(config);
         return;
     }
-    if (config._f === hooks.RFC_2822) {
-        configFromRFC2822(config);
-        return;
-    }
+
     config._a = [];
     getParsingFlags(config).empty = true;
 
@@ -32377,7 +32203,7 @@ function prepareConfig (config) {
 
 function configFromInput(config) {
     var input = config._i;
-    if (isUndefined(input)) {
+    if (input === undefined) {
         config._d = new Date(hooks.now());
     } else if (isDate(input)) {
         config._d = new Date(input.valueOf());
@@ -32388,7 +32214,7 @@ function configFromInput(config) {
             return parseInt(obj, 10);
         });
         configFromArray(config);
-    } else if (isObject(input)) {
+    } else if (typeof(input) === 'object') {
         configFromObject(config);
     } else if (isNumber(input)) {
         // from milliseconds
@@ -32489,38 +32315,6 @@ var now = function () {
     return Date.now ? Date.now() : +(new Date());
 };
 
-var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
-
-function isDurationValid(m) {
-    for (var key in m) {
-        if (!(ordering.indexOf(key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
-            return false;
-        }
-    }
-
-    var unitHasDecimal = false;
-    for (var i = 0; i < ordering.length; ++i) {
-        if (m[ordering[i]]) {
-            if (unitHasDecimal) {
-                return false; // only allow non-integers for smallest unit
-            }
-            if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
-                unitHasDecimal = true;
-            }
-        }
-    }
-
-    return true;
-}
-
-function isValid$1() {
-    return this._isValid;
-}
-
-function createInvalid$1() {
-    return createDuration(NaN);
-}
-
 function Duration (duration) {
     var normalizedInput = normalizeObjectUnits(duration),
         years = normalizedInput.year || 0,
@@ -32532,8 +32326,6 @@ function Duration (duration) {
         minutes = normalizedInput.minute || 0,
         seconds = normalizedInput.second || 0,
         milliseconds = normalizedInput.millisecond || 0;
-
-    this._isValid = isDurationValid(normalizedInput);
 
     // representation for dateAddRemove
     this._milliseconds = +milliseconds +
@@ -32658,7 +32450,7 @@ hooks.updateOffset = function () {};
 // a second time. In case it wants us to change the offset again
 // _changeInProgress == true case, then we have to adjust, because
 // there is no such time in the given timezone.
-function getSetOffset (input, keepLocalTime, keepMinutes) {
+function getSetOffset (input, keepLocalTime) {
     var offset = this._offset || 0,
         localAdjust;
     if (!this.isValid()) {
@@ -32670,7 +32462,7 @@ function getSetOffset (input, keepLocalTime, keepMinutes) {
             if (input === null) {
                 return this;
             }
-        } else if (Math.abs(input) < 16 && !keepMinutes) {
+        } else if (Math.abs(input) < 16) {
             input = input * 60;
         }
         if (!this._isUTC && keepLocalTime) {
@@ -32728,7 +32520,7 @@ function setOffsetToLocal (keepLocalTime) {
 
 function setOffsetToParsedOffset () {
     if (this._tzm != null) {
-        this.utcOffset(this._tzm, false, true);
+        this.utcOffset(this._tzm);
     } else if (typeof this._i === 'string') {
         var tZone = offsetFromString(matchOffset, this._i);
         if (tZone != null) {
@@ -32860,7 +32652,6 @@ function createDuration (input, key) {
 }
 
 createDuration.fn = Duration.prototype;
-createDuration.invalid = createInvalid$1;
 
 function parseIso (inp, sign) {
     // We'd normally use ~~inp for this, but unfortunately it also
@@ -33097,19 +32888,18 @@ function toString () {
     return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
 }
 
-function toISOString() {
-    if (!this.isValid()) {
-        return null;
-    }
+function toISOString () {
     var m = this.clone().utc();
-    if (m.year() < 0 || m.year() > 9999) {
+    if (0 < m.year() && m.year() <= 9999) {
+        if (isFunction(Date.prototype.toISOString)) {
+            // native implementation is ~50x faster, use it when we can
+            return this.toDate().toISOString();
+        } else {
+            return formatMoment(m, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+        }
+    } else {
         return formatMoment(m, 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
     }
-    if (isFunction(Date.prototype.toISOString)) {
-        // native implementation is ~50x faster, use it when we can
-        return this.toDate().toISOString();
-    }
-    return formatMoment(m, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
 }
 
 /**
@@ -33129,7 +32919,7 @@ function inspect () {
         zone = 'Z';
     }
     var prefix = '[' + func + '("]';
-    var year = (0 <= this.year() && this.year() <= 9999) ? 'YYYY' : 'YYYYYY';
+    var year = (0 < this.year() && this.year() <= 9999) ? 'YYYY' : 'YYYYYY';
     var datetime = '-MM-DD[T]HH:mm:ss.SSS';
     var suffix = zone + '[")]';
 
@@ -33297,7 +33087,7 @@ function toJSON () {
     return this.isValid() ? this.toISOString() : null;
 }
 
-function isValid$2 () {
+function isValid$1 () {
     return isValid(this);
 }
 
@@ -33457,10 +33247,7 @@ addUnitPriority('date', 9);
 addRegexToken('D',  match1to2);
 addRegexToken('DD', match1to2, match2);
 addRegexToken('Do', function (isStrict, locale) {
-    // TODO: Remove "ordinalParse" fallback in next major release.
-    return isStrict ?
-      (locale._dayOfMonthOrdinalParse || locale._ordinalParse) :
-      locale._dayOfMonthOrdinalParseLenient;
+    return isStrict ? locale._ordinalParse : locale._ordinalParseLenient;
 });
 
 addParseToken(['D', 'DD'], DATE);
@@ -33640,7 +33427,7 @@ proto.isBetween         = isBetween;
 proto.isSame            = isSame;
 proto.isSameOrAfter     = isSameOrAfter;
 proto.isSameOrBefore    = isSameOrBefore;
-proto.isValid           = isValid$2;
+proto.isValid           = isValid$1;
 proto.lang              = lang;
 proto.locale            = locale;
 proto.localeData        = localeData;
@@ -33865,7 +33652,7 @@ function listWeekdaysMin (localeSorted, format, index) {
 }
 
 getSetGlobalLocale('en', {
-    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinalParse: /\d{1,2}(th|st|nd|rd)/,
     ordinal : function (number) {
         var b = number % 10,
             output = (toInt(number % 100 / 10) === 1) ? 'th' :
@@ -33986,9 +33773,6 @@ function monthsToDays (months) {
 }
 
 function as (units) {
-    if (!this.isValid()) {
-        return NaN;
-    }
     var days;
     var months;
     var milliseconds = this._milliseconds;
@@ -34017,9 +33801,6 @@ function as (units) {
 
 // TODO: Use this.as('ms')?
 function valueOf$1 () {
-    if (!this.isValid()) {
-        return NaN;
-    }
     return (
         this._milliseconds +
         this._days * 864e5 +
@@ -34045,12 +33826,12 @@ var asYears        = makeAs('y');
 
 function get$2 (units) {
     units = normalizeUnits(units);
-    return this.isValid() ? this[units + 's']() : NaN;
+    return this[units + 's']();
 }
 
 function makeGetter(name) {
     return function () {
-        return this.isValid() ? this._data[name] : NaN;
+        return this._data[name];
     };
 }
 
@@ -34068,12 +33849,11 @@ function weeks () {
 
 var round = Math.round;
 var thresholds = {
-    ss: 44,         // a few seconds to seconds
-    s : 45,         // seconds to minute
-    m : 45,         // minutes to hour
-    h : 22,         // hours to day
-    d : 26,         // days to month
-    M : 11          // months to year
+    s: 45,  // seconds to minute
+    m: 45,  // minutes to hour
+    h: 22,  // hours to day
+    d: 26,  // days to month
+    M: 11   // months to year
 };
 
 // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
@@ -34090,17 +33870,16 @@ function relativeTime$1 (posNegDuration, withoutSuffix, locale) {
     var months   = round(duration.as('M'));
     var years    = round(duration.as('y'));
 
-    var a = seconds <= thresholds.ss && ['s', seconds]  ||
-            seconds < thresholds.s   && ['ss', seconds] ||
-            minutes <= 1             && ['m']           ||
-            minutes < thresholds.m   && ['mm', minutes] ||
-            hours   <= 1             && ['h']           ||
-            hours   < thresholds.h   && ['hh', hours]   ||
-            days    <= 1             && ['d']           ||
-            days    < thresholds.d   && ['dd', days]    ||
-            months  <= 1             && ['M']           ||
-            months  < thresholds.M   && ['MM', months]  ||
-            years   <= 1             && ['y']           || ['yy', years];
+    var a = seconds < thresholds.s && ['s', seconds]  ||
+            minutes <= 1           && ['m']           ||
+            minutes < thresholds.m && ['mm', minutes] ||
+            hours   <= 1           && ['h']           ||
+            hours   < thresholds.h && ['hh', hours]   ||
+            days    <= 1           && ['d']           ||
+            days    < thresholds.d && ['dd', days]    ||
+            months  <= 1           && ['M']           ||
+            months  < thresholds.M && ['MM', months]  ||
+            years   <= 1           && ['y']           || ['yy', years];
 
     a[2] = withoutSuffix;
     a[3] = +posNegDuration > 0;
@@ -34129,17 +33908,10 @@ function getSetRelativeTimeThreshold (threshold, limit) {
         return thresholds[threshold];
     }
     thresholds[threshold] = limit;
-    if (threshold === 's') {
-        thresholds.ss = limit - 1;
-    }
     return true;
 }
 
 function humanize (withSuffix) {
-    if (!this.isValid()) {
-        return this.localeData().invalidDate();
-    }
-
     var locale = this.localeData();
     var output = relativeTime$1(this, !withSuffix, locale);
 
@@ -34160,10 +33932,6 @@ function toISOString$1() {
     // This is because there is no context-free conversion between hours and days
     // (think of clock changes)
     // and also not between days and months (28-31 days per month)
-    if (!this.isValid()) {
-        return this.localeData().invalidDate();
-    }
-
     var seconds = abs$1(this._milliseconds) / 1000;
     var days         = abs$1(this._days);
     var months       = abs$1(this._months);
@@ -34208,7 +33976,6 @@ function toISOString$1() {
 
 var proto$2 = Duration.prototype;
 
-proto$2.isValid        = isValid$1;
 proto$2.abs            = abs;
 proto$2.add            = add$1;
 proto$2.subtract       = subtract$1;
@@ -34264,7 +34031,7 @@ addParseToken('x', function (input, array, config) {
 // Side effect imports
 
 
-hooks.version = '2.18.1';
+hooks.version = '2.16.0';
 
 setHookCallback(createLocal);
 
