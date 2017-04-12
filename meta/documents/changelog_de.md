@@ -2,14 +2,24 @@
 
 ## v1.1.0 (2017-04-12)
 
-- Kategorien wurden hinsichtlich der Performance überarbeitet.
-- Kategorien wurden hinsichtlich des Styles überarbeitet.
-- Kategorien laden sich (innerhalb der Kategorie-Seite) ohne die Seite neuzuladen.
-- Hauptkategorie kann nun angeklickt werden.
-- Seitenbaum für Kategorien hinzugefügt (in der Konfiguration einstellbar).
-- Eine "Blur" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar). 
-- Eine "Spinner" Ladeanimation wurde hinzugefügt (in der Konfiguration einstellbar).
-- Pagination wurde überarbeitet. In der Konfiguration kann man nun die Zeilen und die Reihen einstellen und die Pagination berechnet sich selbst. 
+### Hinzugefügt
+
+- Die Hauptkategorie in der Navigationsleiste ist nun ebenfalls verlinkt und leitet auf die Kategorieansicht weiter.
+- Ein Kategoriebaum wurde hinzugefügt, der optional links im Webshop angezeigt werden kann. Diese Einstellung befindet sich in der **Config** im Tab **Header**.
+- Verschiedene Ladeanimationen für die Kategorieansicht wurden hinzugefügt. Diese Einstellung befindet sich in der **Config** im Tab **Item view**.
+
+### Geändert
+
+- Die Performance der Kategorien wurde verbessert.
+- Das Styling der Kategorien wurde überarbeitet.
+- Die Kategorien werden nun in der Kategorieansicht neu geladen ohne die Seite neuzuladen.
+- Die Paginierung wurde überarbeitet. In den Einstellungen im Tab **Pagination and sorting** kann man nun die Zeilen und die Reihen wählen der Kategorieansicht wählen. Die Anzeigewerte werden automatisch berechnet und angezeigt. 
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.0.5 (2017-04-07)
 
@@ -27,12 +37,6 @@
 ### Behoben
 
 - Firmenlogo wird nun richtig eingebunden.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.0.3 (2017-03-24)
 
