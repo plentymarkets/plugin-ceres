@@ -1,10 +1,12 @@
 var ItemListService = require("services/ItemListService");
 var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
 
 module.exports = (function($)
 {
     var _categoryTree = {};
     var _categoryBreadcrumbs = [];
+    var _validate = false;
 
     return {
         initialize: _initialize,
@@ -17,8 +19,9 @@ module.exports = (function($)
      * @param categoryTree
      * @private
      */
-    function _initialize(categoryTree)
+    function _initialize(categoryTree, validate)
     {
+        _validate = validate || false;
         _categoryTree = categoryTree;
     }
 
@@ -128,6 +131,11 @@ module.exports = (function($)
 
         for (var category in categories)
         {
+            if(_validate && categories[category].details.length == 0)
+            {
+                NotificationService.error("Kategorie nicht geladen: " + categories[category].id).closeAfter(10000);
+            }
+
             if (categories[category].id == currentCategory.id)
             {
                 scopeUrl += "/" + categories[category].details[0].nameUrl;
