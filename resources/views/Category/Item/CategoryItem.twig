@@ -91,7 +91,7 @@
                 </div>
             {% endif %}
 
-            <div class="col-xs-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}9{% else %}12{% endif %}">
+            <div class="col-xs-12 col-lg-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}9{% else %}12{% endif %}">
 
                 <ul id="twig-rendered-item-list" class="product-list row grid" v-is-loading-watcher>
                     {% for item in itemList %}

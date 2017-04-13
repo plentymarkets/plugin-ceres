@@ -14,6 +14,30 @@
     }
 }
 
+.back-to-top {
+	background: none;
+	margin: 0;
+	position: fixed;
+	bottom: 50%;
+	right: 0;
+	width: 70px;
+	height: 70px;
+	z-index: 100;
+	display: none;
+	text-decoration: none;
+	color: #ffffff;
+	opacity: 0.5;
+	transition: opacity 300ms;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.back-to-top i {
+	font-size: 60px;
+}
+
 .footer{
 	display: block;
 	background-color: $footer-bg;

@@ -2,10 +2,15 @@
 
 ## v1.1.1 (2017-04-13)
 
+### Hinzugefügt
+
+- To top button wurde hinzugefügt.
+
 ### Behoben
 
 - Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst. 
 - Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
+- Wenn sie Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
 
 ### Bekannte Probleme
 
