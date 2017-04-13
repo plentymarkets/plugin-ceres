@@ -4,8 +4,14 @@
 
 ### Behoben
 
-- `AfterBasketChanged` wird nun nicht mehr beim Aufruf einer Seite ausgelöst. 
-- `AfterBasketChanged` wird bei einer Änderung nun nur noch 1 Mal anstatt 6 Mal ausgelöst.
+- Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst. 
+- Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.1.0 (2017-04-12)
 
@@ -21,12 +27,6 @@
 - Das Styling der Kategorien wurde überarbeitet.
 - Die Kategorien werden nun in der Kategorieansicht neu geladen ohne die Seite neuzuladen.
 - Die Paginierung wurde überarbeitet. In den Einstellungen im Tab **Pagination and sorting** kann man nun die Zeilen und die Reihen wählen der Kategorieansicht wählen. Die Anzeigewerte werden automatisch berechnet und angezeigt. 
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.0.5 (2017-04-07)
 

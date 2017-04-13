@@ -1,5 +1,18 @@
 # Release Notes for Ceres
 
+## v1.1.1 (2017-04-13)
+
+### Behoben
+
+- The `AfterBasketChanged` event is no longer triggered when loading a page. 
+- The `AfterBasketChanged` event will only be triggered once when the shopping cart is updated.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
 ## v1.1.0 (2017-04-12)
 
 ### Added
@@ -14,12 +27,6 @@
 - The styling of the categories has been updated.
 - The categories will now be reloaded in the category view without reloading the entire page.
 - The pagination has been updated. In the settings in the **Pagination and sorting** tab, you can now select the rows and columns of the category view. The pagination values will be calculated and displayed automatically. 
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.0.5 (2017-04-07)
 
