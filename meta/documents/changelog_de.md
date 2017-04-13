@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v1.1.1 (2017-04-13)
+
+### Behoben
+
+- `AfterBasketChanged` wird nun nicht mehr beim Aufruf einer Seite ausgelöst. 
+- `AfterBasketChanged` wird bei einer Änderung nun nur noch 1 Mal anstatt 6 Mal ausgelöst.
+
 ## v1.1.0 (2017-04-12)
 
 ### Hinzugefügt

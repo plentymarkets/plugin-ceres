@@ -34457,7 +34457,8 @@ Vue.component("basket-list", {
 
     props: [
         "size",
-        "template"
+        "template",
+        "triggerEvent"
     ],
 
     data: function()
@@ -34478,13 +34479,18 @@ Vue.component("basket-list", {
     ready: function()
     {
         ResourceService.bind("basketItems", this);
-        this.size = this.size || "large";
 
-        if (this.size === "small")
+        if (this.triggerEvent)
         {
-            ResourceService.watch("basket", function(newValue)
+            ResourceService.watch("basket", function(newValue, oldValue)
             {
-                document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                if (oldValue)
+                {
+                    if (JSON.stringify(newValue) != JSON.stringify(oldValue))
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                    }
+                }
             });
         }
     }
