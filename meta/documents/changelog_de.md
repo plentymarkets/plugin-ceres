@@ -11,7 +11,7 @@
 - Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst. 
 - Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
 - Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
-- Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht wird nun richtig ausgelesen.
+- Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
 
 ### Bekannte Probleme
 
