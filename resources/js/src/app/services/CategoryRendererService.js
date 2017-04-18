@@ -19,9 +19,8 @@ module.exports = (function($)
      * @param categoryTree
      * @private
      */
-    function _initialize(categoryTree, validate)
+    function _initialize(categoryTree)
     {
-        _validate = validate || false;
         _categoryTree = categoryTree;
     }
 
@@ -131,7 +130,7 @@ module.exports = (function($)
 
         for (var category in categories)
         {
-            if(_validate && categories[category].details.length == 0)
+            if (_validate && categories[category].details.length == 0)
             {
                 NotificationService.error("Kategorie nicht geladen: " + categories[category].id).closeAfter(10000);
             }
