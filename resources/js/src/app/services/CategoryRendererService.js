@@ -1,6 +1,5 @@
 var ItemListService = require("services/ItemListService");
 var ResourceService = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
 
 module.exports = (function($)
 {
