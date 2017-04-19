@@ -102,22 +102,14 @@ Vue.component("variation-select", {
         // watch for changes on selected variation to adjust url
         ResourceService.watch("currentVariation", function(newVariation, oldVariation)
         {
-
-            // replace variation id in url
-            var url = window.location.pathname;
-            var title = document.getElementsByTagName("title")[0].innerHTML;
-            // ItemURLs should match: "/<ITEM_NAME>/<ITEM_ID>/<VARIATION_ID>/"
-            // var match = url.match(/\/([^\/]*)\/([\d]+)\/?([\d]*)/);
-            var match = url.match(/\/([^\/]*)_([\d]+)_([\d]*)/);
-
-            if (match)
+            if (oldVariation)
             {
-                url = "/" + match[1] + "_" + match[2] + "_" + newVariation.documents[0].id;
+                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                window.history.replaceState({}, title, url);
             }
-
-            window.history.replaceState({}, title, url);
-
-        });
+        }.bind(this));
     },
 
     methods: {

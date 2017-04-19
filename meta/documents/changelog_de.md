@@ -14,6 +14,7 @@
 - Artikel-Daten werden nun auch in anderen Sprachen geladen.
 - Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
 - Item name filter wir nun richtig benutzt
+- Die URL von Artikeln zeigt die Kategorie nun korrekt an.
 
 ### Bekannte Probleme
 
