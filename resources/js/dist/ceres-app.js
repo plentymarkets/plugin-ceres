@@ -114,7 +114,7 @@ Vue.component("add-item-to-basket-overlay", {
          */
         texts: function()
         {
-            return this.basketItem.currentBasketItem.texts[0];
+            return this.basketItem.currentBasketItem.texts;
         }
     }
 });
@@ -2520,7 +2520,7 @@ Vue.component("category-item", {
          */
         texts: function()
         {
-            return this.itemData.texts[0];
+            return this.itemData.texts;
         }
     }
 });
@@ -2775,7 +2775,7 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, function(dataItem)
                     {
-                        var value = dataItem.data.texts[0].name1;
+                        var value = dataItem.data.texts.name1;
 
                         return {
                             value: value,
@@ -2839,17 +2839,7 @@ Vue.component("item-store-special", {
                 }
             }
 
-            for (var i in this.storeSpecial.names)
-            {
-                var name = this.storeSpecial.names[i];
-
-                if (name.lang === this.localization.shopLanguage)
-                {
-                    return name.name;
-                }
-            }
-
-            return this.storeSpecial.names[0].name;
+            return this.storeSpecial.names.name;
         },
 
         tagClass: function()
@@ -4335,7 +4325,6 @@ Vue.filter("itemImages", function(images, accessor)
 },{}],64:[function(require,module,exports){
 Vue.filter("itemName", function(item, selectedName)
 {
-
     if (selectedName === "0" && item.name1 !== "")
     {
         return item.name1;
@@ -4355,9 +4344,9 @@ Vue.filter("itemName", function(item, selectedName)
 },{}],65:[function(require,module,exports){
 Vue.filter("itemURL", function(item)
 {
-    var urlPath = item.texts[0].urlPath;
+    var urlPath = item.texts.urlPath;
 
-    if (urlPath.length > 0)
+    if (urlPath && urlPath.length > 0)
     {
         return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
     }
@@ -4596,11 +4585,13 @@ module.exports = (function($)
 },{"services/NotificationService":73,"services/WaitScreenService":77}],68:[function(require,module,exports){
 var ItemListService = require("services/ItemListService");
 var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
 
 module.exports = (function($)
 {
     var _categoryTree = {};
     var _categoryBreadcrumbs = [];
+    var _validate = false;
 
     return {
         initialize: _initialize,
@@ -4724,6 +4715,11 @@ module.exports = (function($)
 
         for (var category in categories)
         {
+            if (_validate && categories[category].details.length == 0)
+            {
+                NotificationService.error("Kategorie nicht geladen: " + categories[category].id).closeAfter(10000);
+            }
+
             if (categories[category].id == currentCategory.id)
             {
                 scopeUrl += "/" + categories[category].details[0].nameUrl;
@@ -4753,7 +4749,7 @@ module.exports = (function($)
 
 })(jQuery);
 
-},{"services/ItemListService":71,"services/ResourceService":74}],69:[function(require,module,exports){
+},{"services/ItemListService":71,"services/NotificationService":73,"services/ResourceService":74}],69:[function(require,module,exports){
 var ApiService = require("services/ApiService");
 
 module.exports = (function($)
@@ -7067,6 +7063,33 @@ var init = (function($, window, document)
         {
             $("#mainNavbarCollapse").collapse("hide");
         }
+
+        $(document).ready(function()
+        {
+            var offset = 250;
+            var duration = 300;
+
+            $(window).scroll(function()
+            {
+                if ($(this).scrollTop() > offset)
+                {
+                    $(".back-to-top").fadeIn(duration);
+                }
+                else
+                {
+                    $(".back-to-top").fadeOut(duration);
+                }
+            });
+
+            $(".back-to-top").click(function(event)
+            {
+                event.preventDefault();
+
+                $("html, body").animate({scrollTop: 0}, duration);
+
+                return false;
+            });
+        });
     }
 
     window.CeresMain = new CeresMain();

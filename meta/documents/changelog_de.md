@@ -1,5 +1,25 @@
 # Release Notes für Ceres
 
+## v1.1.2 (2017-04-19)
+
+### Hinzugefügt
+
+- To top button wurde hinzugefügt.
+
+### Behoben
+
+- Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
+- Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
+- Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
+- Artikel-Daten werden nun auch in anderen Sprachen geladen.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
+
 ## v1.1.1 (2017-04-13)
 
 ### Hinzugefügt
@@ -8,10 +28,10 @@
 
 ### Behoben
 
-- Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst. 
-- Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
 - Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
 - Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
+- Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
+- Artikel-Daten werden nun auch in anderen Sprachen geladen.
 
 ### Bekannte Probleme
 
