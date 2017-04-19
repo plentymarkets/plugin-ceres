@@ -13,6 +13,7 @@
 - Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
 - Artikel-Daten werden nun auch in anderen Sprachen geladen.
 - Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
+- Item name filter wir nun richtig benutzt
 
 ### Bekannte Probleme
 
