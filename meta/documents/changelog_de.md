@@ -12,6 +12,8 @@
 - Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
 - Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
 - Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
+- Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
+- Artikel-Daten werden nun auch in anderen Sprachen geladen.
 
 ### Bekannte Probleme
 

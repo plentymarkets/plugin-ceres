@@ -1,8 +1,8 @@
 Vue.filter("itemURL", function(item)
 {
-    var urlPath = item.texts[0].urlPath;
+    var urlPath = item.texts.urlPath;
 
-    if (urlPath.length > 0)
+    if (urlPath && urlPath.length > 0)
     {
         return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
     }

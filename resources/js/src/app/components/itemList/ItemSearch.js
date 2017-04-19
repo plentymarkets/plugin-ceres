@@ -92,7 +92,7 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, function(dataItem)
                     {
-                        var value = dataItem.data.texts[0].name1;
+                        var value = dataItem.data.texts.name1;
 
                         return {
                             value: value,
