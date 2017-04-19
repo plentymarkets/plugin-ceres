@@ -1,6 +1,5 @@
 Vue.filter("itemName", function(item, selectedName)
 {
-
     if (selectedName == 0 && item.name1 !== "")
     {
         return item.name1;

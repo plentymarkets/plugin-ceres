@@ -37,7 +37,7 @@
 
         {% if item.data.item.storeSpecial.id > 0 %}
 
-            {% set storeSpecial = item.data.item.storeSpecial.names[0].name %}
+            {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
             <div class="special-tags">
                 {% if  item.data.item.storeSpecial.id == 1 %}
