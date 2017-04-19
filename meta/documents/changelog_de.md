@@ -12,6 +12,7 @@
 - Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
 - Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
 - Artikel-Daten werden nun auch in anderen Sprachen geladen.
+- Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
 
 ### Bekannte Probleme
 
