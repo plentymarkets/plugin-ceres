@@ -18,6 +18,14 @@
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
+    "dataProviders"     :
+    [
+        {
+            "key":"Ceres\\Containers\\CeresLastSeenContainer",
+            "name":"Last Seen Items",
+            "description":"Display the last seen items list in your shop"
+        }
+    ],
     "containers"        :
     [
         {
