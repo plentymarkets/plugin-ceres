@@ -15,6 +15,7 @@
 - Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
 - Item name filter wir nun richtig benutzt
 - Die URL von Artikeln zeigt die Kategorie nun korrekt an.
+- Basket Seite zeigt wieder Artikel an
 
 ### Bekannte Probleme
 
