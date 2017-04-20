@@ -5,6 +5,7 @@
 ### Hinzugefügt
 
 - To top button wurde hinzugefügt.
+- Zuletzt gesehene Artikel wurden hinzugefügt und können optional über einen LayoutContainer verknüpft werden.
 
 ### Behoben
 
