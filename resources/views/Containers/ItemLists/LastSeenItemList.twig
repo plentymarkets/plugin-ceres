@@ -1,4 +1,4 @@
-{# TODO get itemList #}
+{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.LastSeenItemList', itemLoaderPresets.lastSeenItemsList, {'items':itemsPerPage}).documents %}
 
 <div class="col-xs-12 col-lg-2">
 

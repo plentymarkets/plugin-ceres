@@ -318,6 +318,5 @@
             "name"          : "Category item list: After prices container",
             "description"   : "Add content after the prices in the category item view."
         }
-    ],
-    "dataProviders"     : []
+    ]
 }
