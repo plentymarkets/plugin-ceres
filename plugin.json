@@ -124,6 +124,11 @@
             "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
         {
+            "key"           : "SingleItem.ItemListContainer",
+            "name"          : "Single item: Container for item lists",
+            "description"   : "Add item lists to the single item"
+        },
+        {
             "key"           : "BasketTotals.BeforeItemSum",
             "name"          : "Shopping cart: Before \"Value of items\"",
             "description"   : "Add content before the value of items in the Total column of the shopping cart."
