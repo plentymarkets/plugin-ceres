@@ -14,9 +14,9 @@
 - Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
 - Artikel-Daten werden nun auch in anderen Sprachen geladen.
 - Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
-- Item name filter wir nun richtig benutzt
+- Es wird jetzt immer der Artikelname aus der Config verwendet (Name 1-3).
 - Die URL von Artikeln zeigt die Kategorie nun korrekt an.
-- Basket Seite zeigt wieder Artikel an
+- Die Warenkorb Seite zeigt wieder Artikel an.
 
 ### Bekannte Probleme
 
@@ -27,16 +27,10 @@
 
 ## v1.1.1 (2017-04-13)
 
-### Hinzugefügt
-
-- To top button wurde hinzugefügt.
-
 ### Behoben
 
-- Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
-- Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
-- Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
-- Artikel-Daten werden nun auch in anderen Sprachen geladen.
+- Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst.
+- Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
 
 ### Bekannte Probleme
 
