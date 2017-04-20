@@ -18,6 +18,14 @@
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
+    "dataProviders"     :
+    [
+        {
+            "key":"Ceres\\Containers\\CeresLastSeenContainer",
+            "name":"Last Seen Items",
+            "description":"Display the last seen items list in your shop"
+        }
+    ],
     "containers"        :
     [
         {
@@ -114,6 +122,11 @@
             "key"           : "SingleItem.AdditionalContentAfterAddToBasket",
             "name"          : "Single item: Additional content after \"Add to shopping cart\" button",
             "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
+        },
+        {
+            "key"           : "SingleItem.ItemListContainer",
+            "name"          : "Single item: Container for item lists",
+            "description"   : "Add item lists to the single item"
         },
         {
             "key"           : "BasketTotals.BeforeItemSum",
@@ -310,6 +323,5 @@
             "name"          : "Category item list: After prices container",
             "description"   : "Add content after the prices in the category item view."
         }
-    ],
-    "dataProviders"     : []
+    ]
 }
