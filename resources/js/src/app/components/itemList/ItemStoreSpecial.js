@@ -47,17 +47,7 @@ Vue.component("item-store-special", {
                 }
             }
 
-            for (var i in this.storeSpecial.names)
-            {
-                var name = this.storeSpecial.names[i];
-
-                if (name.lang === this.localization.shopLanguage)
-                {
-                    return name.name;
-                }
-            }
-
-            return this.storeSpecial.names[0].name;
+            return this.storeSpecial.names.name;
         },
 
         tagClass: function()

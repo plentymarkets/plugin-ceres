@@ -11,7 +11,20 @@
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/ceres/images/ceres-logo.svg"
+        "default"   : "images/ceres-logo.svg"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.show_navbars",
+        "label"     : "Position of the navigation bar",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "top"         : "At the top",
+            "side"         : "On the left",
+            "both"         : "At the top and on the left"
+        },
+        "default"   : "top"
     },
     {
         "tab"       : "Header",
@@ -189,6 +202,19 @@
         "label"     : "Show image carousel navigation in category item list",
         "type"      : "checkbox",
         "default"   : "false"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.loading_animation_type",
+        "label"             : "Loading animation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "blur"          : "Blur",
+            "bars"          : "Bars",
+            "spinner"       : "Spinner"
+        },
+        "default"           : "blur"
     },
     {
         "tab"                           : "Shopping cart",

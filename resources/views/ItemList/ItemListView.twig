@@ -5,7 +5,9 @@
     {% set page = request.get("page") %}
 {% endif %}
 
-{% set itemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
+{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
+{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
+{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
 {% if request.get("items") %}
     {% set itemsPerPage = request.get("items") %}
 {% endif %}

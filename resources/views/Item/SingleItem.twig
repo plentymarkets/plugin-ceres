@@ -32,7 +32,6 @@
 
             <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
-
                 <h6 class="producertag">
                     <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.name }}</a>
                 </h6>
@@ -47,8 +46,8 @@
                     </span>
                 </h1>
 
-                {% if ('item.shortDescription' in itemData or 'all' in itemData) and item.documents[0].data.texts[0].shortDescription != '' %}
-                    <p class="single-description">{{ item.documents[0].data.texts[0].shortDescription }}</p>
+                {% if ('item.shortDescription' in itemData or 'all' in itemData) and item.documents[0].data.texts.shortDescription != '' %}
+                    <p class="single-description">{{ item.documents[0].data.texts.shortDescription }}</p>
                 {% endif %}
 
                 <hr>
@@ -99,7 +98,7 @@
 
                 {% for availability in services.availability.getAvailabilities() %}
                 <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
-                    {{ item.documents[0].data.variation.availability.names[0].name }}
+                    {{ item.documents[0].data.variation.availability.names.name }}
                 </span>
                 {% endfor %}
 
@@ -139,14 +138,14 @@
             <div class="col-md-7 m-y-3">
 
                 <ul class="nav nav-tabs" role="tablist">
-                    {% if not item.documents[0].data.texts[0].description == '' and('item.description' in itemData or 'all' in itemData) %}
+                    {% if not item.documents[0].data.texts.description == '' and('item.description' in itemData or 'all' in itemData) %}
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#details-{{ item.documents[0].data.variation.id }}"
                                role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
                         </li>
                     {% endif %}
 
-                    {% if not item.documents[0].data.texts[0].technicalData == '' and('item.technical_data' in itemData or 'all' in itemData) %}
+                    {% if not item.documents[0].data.texts.technicalData == '' and('item.technical_data' in itemData or 'all' in itemData) %}
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#data-{{ item.documents[0].data.variation.id }}"
                                role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
@@ -162,12 +161,12 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="details-{{ item.documents[0].data.variation.id }}" role="tabpanel">
                         <div class="m-y-2">
-                            {{ item.documents[0].data.texts[0].description|raw }}
+                            {{ item.documents[0].data.texts.description|raw }}
                         </div>
                     </div>
-                    <div class="tab-pane" id="data-{{ item.data.variation.id }}" role="tabpanel">
+                    <div class="tab-pane" id="data-{{ item.documents[0].data.variation.id }}" role="tabpanel">
                         <div class="m-y-2">
-                            {{ item.documents[0].data.texts[0].technicalData|raw }}
+                            {{ item.documents[0].data.texts.technicalData|raw }}
                         </div>
                     </div>
 
@@ -271,6 +270,8 @@
             </div>
         </div>
         <!-- ./ITEM DESCRIPTION -->
+
+        {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item.documents[0].data) }}
 
         <!-- CROSSSELLING -->
         {#{% if crossSellingList | length > 0 %}#}

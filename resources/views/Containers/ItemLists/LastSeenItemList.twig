@@ -1,0 +1,22 @@
+{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+
+{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.LastSeenItemList', itemLoaderPresets.lastSeenItemsList, {'items':itemsPerPage}).documents %}
+
+<hr>
+
+<h1 class="h3">{{ trans("Ceres::Template.itemListLastSeen") }}</h1>
+
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+
+        <ul id="twig-rendered-item-list" class="product-list row grid">
+            {% for item in itemList %}
+                <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>

@@ -37,7 +37,7 @@
 
         {% if item.data.item.storeSpecial.id > 0 %}
 
-            {% set storeSpecial = item.data.item.storeSpecial.names[0].name %}
+            {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
             <div class="special-tags">
                 {% if  item.data.item.storeSpecial.id == 1 %}
@@ -72,7 +72,7 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a href="{{ itemUrl }}" class="thumb-title small">
-                {{ item.data.texts[0].name1 }}
+                {{ item.data.texts | itemName(configItemName) }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}

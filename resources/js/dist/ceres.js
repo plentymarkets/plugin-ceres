@@ -1,5 +1,5 @@
-var Languages = Languages || {}; Languages['de'] = {Template: {accAccountSettings: "Kontoeinstellungen",accAlreadyLoggedIn: "Sie sind bereits eingeloggt.",accBankDetails: "Bankdaten",accChangeLoginData: "Ändern Sie Ihre Zugangsdaten",accChangePassword: "Passwort ändern",accChangePasswordFailed: "Das Passwort konnte nicht geändert werden.",accChangePasswordSuccessful: "Das Passwort wurde erfolgreich geändert.",accChangePaymentInformation: "Ändern Sie Ihre Zahlungsinformationen",accChangeSettings: "Einstellungen ändern",accCorrectPassword: "Bitte korrigieren",accCreateAccount: "Jetzt registrieren",accEmail: "E-Mail",accForgotPassword: "Passwort vergessen?",accHolder: "Kontoinhaber",accInvoiceAddresses: "Rechnungsadressen",accLogin: "Anmelden",accLoginFailed: "Die Anmeldedaten sind ungültig.",accLoginSuccessful: "Sie wurden erfolgreich eingeloggt.",accLogout: "Ausloggen",accLogoutSuccessful: "Sie wurden erfolgreich ausgeloggt.",accMyAccount: "Mein Konto",accNewPassword: "Neues Passwort",accOrderAsGuest: "Als Gast bestellen",accPassword: "Passwort",accPleaseLogin: "Bitte einloggen",accRegister: "Registrieren",accRegisterAccount: "Registrieren Sie sich",accRegistrationSuccessful: "Sie wurden erfolgreich registriert.",accRememberPassword: "Passwort merken",accRepeatPassword: "Passwort wiederholen",accShippingAddresses: "Lieferadressen",accUsername: "Benutzername",addressAddAddress: "Neue Adresse hinzufügen",addressAdditionalAddress1: "Adresszusatz 1",addressAdditionalAddress2: "Adresszusatz 2",addressAdditionalName: "Namenszusatz",addressChangeAddress: "Adresse ändern",addressCompany: "Firma",addressContact: "Kontakt",addressDeleteAddress: "Adresse löschen",addressDeleteWarning: "Adresse wirklich löschen?",addressFirstName: "Vorname",addressGBAdditionalLocality: "Adresszusatz",addressGBBuildingName: "Gebäude Name",addressGBNameAffix: "Namenszusatz",addressLastName: "Nachname",addressNoAddress: "Noch keine Adresse vorhanden",addressNumber: "Nr.",addressPlace: "Ort",addressSameAsInvoice: "Lieferadresse gleich Rechnungsadresse",addressStreet: "Straße",addressZip: "PLZ",addToBasket: "In den Warenkorb",bank: "Kreditinstitut",bankAddDataTitle: "Bankdaten hinzufügen",bankBicNotification: "Bitte BIC bei Auslandsüberweisungen angeben",bankDataAdded: "Bankdaten hinzugefügt",bankDataDeleted: "Bankdaten gelöscht",bankDataNotAdded: "Bankdaten nicht hinzugefügt",bankDataNotDeleted: "Bankdaten nicht gelöscht",bankDataNotUpdated: "Bankdaten nicht aktualisiert",bankDataUpdated: "Bankdaten aktualisiert",bankDeleteTitle: "Bankdaten löschen",bankDeleteWarning: "Bankdaten wirklich löschen?",bankNoBankData: "Noch keine Bankdaten vorhanden",bankUpdateDataTitle: "Bankdaten bearbeiten",basket: "Warenkorb",basketCoupon: "Gutschein",basketGross: "Brutto",basketItemAdded: "Der Artikel wurde in den Warenkorb gelegt.",basketItemNotAdded: "Der Artikel konnte nicht hinzugefügt werden.",basketNet: "Netto",basketOrderNow: "Jetzt bestellen",basketPreview: "Warenkorbvorschau",basketSum: "Summe",basketTotalSum: "Gesamtsumme",basketValue: "Warenwert",basketVAT: "MwSt. 19%",couponRedeemFailure: "Gutschein nicht eingelöst",couponRedeemSuccess: "Gutschein erfolgreich eingelöst",couponRemoveFailure: "Gutschein nicht entfernt",couponRemoveSuccess: "Gutschein erfolgreich entfernt",generalAdd: "Anlegen",generalAll: "alle",generalAllRightsReserved: "Alle Rechte vorbehalten.",generalAustria: "Österreich",generalCancel: "Abbrechen",generalCancellationRight: "Widerrufs&shy;recht",generalCertifiedBy: "Geprüfte Leistung",generalCheckEntries: "Bitte Eingaben prüfen.",generalChooseOur: "Bitte nehmen Sie unsere :gtc, :cancellation und :policy zur Kenntnis.",generalClose: "Schließen",generalCountry: "Land",generalCountrySettings: "Ländereinstellungen",generalDelete: "Löschen",generalDeleteNow: "Jetzt löschen",generalEdit: "Bearbeiten",generalEngland: "England",generalEnglish: "Englisch",generalEnterCoupon: "Gutschein-Code eingeben",generalEnterEmail: "E-Mail-Adresse eingeben",generalEnterFeedback: "Bewertung eingeben",generalFirstName: "Vorname",generalFilter: "Filter",generalFrance: "Frankreich",generalGerman: "Deutsch",generalGermany: "Deutschland",generalGiveFeedback: "Bewerten",generalGtc: "AGB",generalHello: "Hallo, :username",generalHomepage: "Startseite",generalItaly: "Italien",generalLastName: "Nachname",generalLegalDisclosure: "Impressum",generalNewsletter: "Newsletter",generalNext: "Weiter",generalOrderShippedBy: "Wir verschicken mit",generalPrivacyPolicy: "Daten&shy;schutz&shy;erklärung",generalRedeem: "Einlösen",generalRemove: "Entfernen",generalSave: "Speichern",generalSearch: "Suchen..",generalSearchNoDot: "Suchen",generalSelectLanguage: "Sprache",generalSelectShippingCountry: "Lieferland",generalSend: "Senden",generalState: "Bundesland",generalSwitzerland: "Schweiz",generalThanks: "Vielen Dank!",generalYourEmail: "Ihre E-Mail-Adresse",itemAge: "Altersfreigabe",itemAvailability: "Verfügbarkeit",itemCategoryIdDesc: "Art.-ID aufsteigend",itemCategoryItemAsc: "Positionsnummer aufsteigend",itemCategoryItemDesc: "Positionsnummer absteigend",itemCategoryItemsPerPage: "Artikel pro Seite",itemCategoryNameAsc: "Name aufsteigend",itemCategoryNameDesc: "Name absteigend",itemCategoryNext: "Nächste",itemCategoryPrevious: "Vorherige",itemCategoryPriceAsc: "Preis aufsteigend",itemCategoryPriceDesc: "Preis absteigend",itemCategoryRandom: "Zufällige Sortierung",itemCategoryReleaseAsc: "Erscheinungsdatum aufsteigend",itemCategoryReleaseDesc: "Erscheinungsdatum absteigend",itemCategorySort: "Sortieren",itemCategoryStoreSpecialAsc: "Shop-Aktion aufsteigend",itemCategoryStoreSpecialDesc: "Shop-Aktion absteigend",itemCategoryTopItems: "Top-Artikel",itemCondition: "Zustand",itemContent: "Inhalt",itemCustomerFeedback: "Kundenrezensionen",itemCustomsTariffNumber: "Zolltarifnummer",itemDescription: "Beschreibung",itemDimensions: "Maße",itemEach: "Stück",itemExclusive: "zzgl.",itemExternalVariationId: "Externe Varianten-ID",itemFSK: "FSK ab :age freigegeben",itemId: "Art.-ID",itemId_asc: "Artikel-ID (aufsteigend)",itemId_desc: " Artikel-ID (absteigend)",itemInclVAT: "* inkl. ges. MwSt.",itemManufacturer: "Hersteller",itemManufacturingCountry: "Herstellungsland",itemModel: "Modell",itemMoreDetails: "Weitere Details",itemName_asc: "Artikelname (aufsteigend)",itemName_desc: "Artikelname (absteigend)",itemNetWeight: "Netto-Gewicht",itemNew: "Neu",itemNumber: "Artikelnummer",itemPleaseSelect: "Bitte wählen",itemPosition_asc: "Artikelposition (aufsteigend)",itemPosition_desc: " Artikelposition (absteigend)",itemPrice_asc: "Preis (aufsteigend)",itemPrice_desc: "Preis (absteigend)",itemProducerName_asc: "Hersteller (aufsteigend)",itemProducerName_desc: "Hersteller (absteigend)",itemRand: "Zufällige Artikel",itemRating_asc: "Kundenbewertung (aufsteigend)",itemRating_desc: "Kundenbewertung (absteigend)",itemShippingCosts: "Versandkosten",itemShowLess: "Weniger",itemShowMore: "Mehr",itemState: "Status",itemTechnicalData: "Technische Daten",itemUnitPrice: "Grundpreis",itemWeight: "Gewicht",itemWishList: "Wunschliste",notFoundOops: "Ups, ein Fehler!",notFoundPage: "Die Seite, die du aufgerufen hast, wurde nicht gefunden.",orderApply: "Anwenden",orderBuyNow: "Kaufen",orderCheckout: "Kasse",orderDate: "Auftragsdatum",orderDetails: "Bestelldetails",orderDhlPackage: "DHL Paket",orderEnterOrderId: "Auftrags-ID eingeben",orderEstimatedShippingDate: "Voraussichtl. Versanddatum",orderFrom: "Von",orderHistory: "Auftragshistorie",orderId: "Auftrags-ID",orderInvoiceAddress: "Rechnungsadresse",orderInvoiceAddressCreate: "Rechnungsadresse anlegen",orderInvoiceAddressDelete: "Rechnungsadresse löschen",orderInvoiceAddressEdit: "Rechnungsadresse bearbeiten",orderItemId: "Art.-ID",orderItemsBought: "Gekaufte Artikel",orderLast30Days: "letzte 30 Tage",orderLast3Month: "letzte 3 Monate",orderLast6Month: "letzte 6 Monate",orderNoItemsInBasket: "Sie haben noch keine Artikel im Warenkorb.",orderPayEasy: "Zahlen Sie bequem per",orderPaymentEntry: "Zahlungseingang",orderPaymentMethod: "Zahlungsart",orderPaymentMethods: "Zahlungsarten",orderPaymentStatus: "Zahlungsstatus",orderPaypalPlus: "PayPal PLUS",orderPeace: "Stückzahl",orderPricePerPiece: "Einzelpreis",orderRecipient: "Empfänger",orderSelectTimePeriod: "Zeitraum wählen",orderShipped: "Versand",orderShippingAddress: "Lieferadresse",orderShippingAddressCreate: "Lieferadresse anlegen",orderShippingAddressDelete: "Lieferadresse löschen",orderShippingAddressEdit: "Lieferadresse bearbeiten",orderShippingProfile: "Versandart",orderShow: "Zeige :countStart - :countEnd von :orderMaxCount Aufträgen",orderStatus: "Status",orderStatusHistory: "Statushistorie",orderTo: "Bis",orderTotal: "Gesamt",orderWeShip: "Wir versenden mit",orderWillBeProcessed: "Ihre Bestellung wird bearbeitet. Hier finden Sie eine Zusammenfassung:",paymentStatus_fullyPaid: "Bezahlt",paymentStatus_overpaid: "Überzahlt",paymentStatus_partlyPaid: "Teilweise bezahlt",paymentStatus_prepaid: "Im Voraus bezahlt",paymentStatus_unpaid: "Nicht bezahlt",pleaseSelect: "Bitte wählen",variationActive_asc: "Aktive Variante (aufsteigend)",variationActive_desc: "Aktive Variante (absteigend)",variationCreateTimestamp_asc: "Neueste Varianten",variationCreateTimestamp_desc: "Älteste Varianten",variationCustomNumber_asc: "Variantennummer (aufsteigend)",variationCustomNumber_desc: "Variantennummer (absteigend)",variationId_asc: "Varianten-ID (aufsteigend)",variationId_desc: "Varianten-ID (absteigend)",variationLastUpdateTimestamp_asc: "Letzte Variantenaktualisierung",variationLastUpdateTimestamp_desc: "Erste Variantenaktualisierung",variationName_asc: "Variantenname (aufsteigend)",variationName_desc: "Variantenname (absteigend)",variationPosition_asc: "Variantenposition (aufsteigend)",variationPosition_desc: "Variantenposition (absteigend)",variationPrimary_asc: "Hauptvariante (aufsteigend)",variationPrimary_desc: "Hauptvariante (absteigend)",cn: "Chinesisch",cz: "Tschechisch",da: "Dänisch",de: "Deutsch",en: "Englisch",es: "Spanisch",fr: "Französisch",it: "Italienisch",nl: "Niederländisch",nn: "Norwegisch",pl: "Polnisch",pt: "Portugiesisch",ru: "Russisch",se: "Schwedisch",sk: "Slowakisch",tr: "Türkisch",vn: "Vietnamesisch",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",timeFormat: "H:i",timeFormatMoment: "HH:mm",},};
-var Languages = Languages || {}; Languages['en'] = {Template: {accAccountSettings: "Account settings",accAlreadyLoggedIn: "You are already logged in.",accBankDetails: "Bank details",accChangeLoginData: "Change your access data",accChangePassword: "Change password",accChangePasswordFailed: "The password could not be changed.",accChangePasswordSuccessful: "The password has been changed successfully.",accChangePaymentInformation: "Change your payment information",accChangeSettings: "Change settings",accCorrectPassword: "Please correct",accCreateAccount: "Register now",accEmail: "Email",accForgotPassword: "Forgot your password?",accHolder: "Account holder",accInvoiceAddresses: "Invoice addresses",accLogin: "Log in",accLoginFailed: "Your login data is invalid.",accLoginSuccessful: "You have been logged in successfully.",accLogout: "Log out",accLogoutSuccessful: "You have been logged out successfully.",accMyAccount: "My account",accNewPassword: "New password",accOrderAsGuest: "Order as a guest",accPassword: "Password",accPleaseLogin: "Please log in",accRegister: "Register",accRegisterAccount: "Register first",accRegistrationSuccessful: "You have been registered successfully.",accRememberPassword: "Remember password",accRepeatPassword: "Repeat password",accShippingAddresses: "Delivery addresses",accUsername: "User name",addressAddAddress: "Create a new address",addressAdditionalAddress1: "Additional address information 1",addressAdditionalAddress2: "Additional address information 2",addressAdditionalName: "Additional name",addressChangeAddress: "Change address",addressCompany: "Company",addressContact: "Contact",addressDeleteAddress: "Delete address",addressDeleteWarning: "Really delete address?",addressFirstName: "First name",addressGBAdditionalLocality: "Additional locality",addressGBBuildingName: "Building name",addressGBNameAffix: "Name affix",addressLastName: "Last name",addressNoAddress: "No Address saved",addressNumber: "House No.",addressPlace: "Town",addressSameAsInvoice: "Delivery address same as invoice address",addressStreet: "Street",addressZip: "Postcode",addToBasket: "Add to shopping cart",bank: "Bank",bankAddDataTitle: "Add bank details",bankBicNotification: "Please use the BIC for international bank transfers",bankDataAdded: "Bank details added",bankDataDeleted: "Bank details deleted",bankDataNotAdded: "Bank details not added",bankDataNotDeleted: "Bank details not deleted",bankDataNotUpdated: "Bank details not updated",bankDataUpdated: "Bank details updated",bankDeleteTitle: "Delete bank details",bankDeleteWarning: "Really delete bank details?",bankNoBankData: "No bank details saved",bankUpdateDataTitle: "Edit bank details",basket: "Shopping cart",basketCoupon: "Coupon",basketGross: "Gross",basketItemAdded: "The item was placed in the shopping cart.",basketItemNotAdded: "The item could not be added.",basketNet: "Net",basketOrderNow: "Order now",basketPreview: "Shopping cart preview",basketSum: "Total",basketTotalSum: "Total",basketValue: "Value of items",basketVAT: "VAT 19%",couponRedeemFailure: "Coupon not redeemed",couponRedeemSuccess: "Coupon redeemed successfully",couponRemoveFailure: "Coupon not removed",couponRemoveSuccess: "Coupon removed successfully",generalAdd: "Create",generalAll: "all",generalAllRightsReserved: "All rights reserved.",generalAustria: "Austria",generalCancel: "Cancel",generalCancellationRight: "Cancellation&shy; rights",generalCertifiedBy: "Certified by",generalCheckEntries: "Please check the entries.",generalChooseOur: "Please accept our :gtc, :cancellation and :policy.",generalClose: "Close",generalCountry: "Country",generalCountrySettings: "Locale settings",generalDelete: "Delete",generalDeleteNow: "Delete now",generalEdit: "Edit",generalEngland: "England",generalEnglish: "English",generalEnterCoupon: "Your coupon code",generalEnterEmail: "Enter email address",generalEnterFeedback: "Enter feedback",generalFirstName: "First name",generalFilter: "Filter",generalFrance: "France",generalGerman: "German",generalGermany: "Germany",generalGiveFeedback: "Rate item",generalGtc: "Terms and conditions",generalHello: "Hello, :username",generalHomepage: "Homepage",generalItaly: "Italy",generalLastName: "Last name",generalLegalDisclosure: "Legal disclosure",generalNewsletter: "Newsletter",generalNext: "Next",generalOrderShippedBy: "Your order is shipped by",generalPrivacyPolicy: "Privacy&shy; policy",generalRedeem: "Redeem coupon",generalRemove: "Remove",generalSave: "Save",generalSearch: "Search..",generalSearchNoDot: "Search",generalSelectLanguage: "Language",generalSelectShippingCountry: "Country of delivery",generalSend: "Send",generalState: "State/Province",generalSwitzerland: "Switzerland",generalThanks: "Thank you!",generalYourEmail: "Your email address",itemAge: "Age rating",itemAvailability: "Availability",itemCategoryIdDesc: "Item ID ascending",itemCategoryItemAsc: "Position ascending",itemCategoryItemDesc: "Position descending",itemCategoryItemsPerPage: "Items per page",itemCategoryNameAsc: "Name ascending",itemCategoryNameDesc: "Name descending",itemCategoryNext: "Next",itemCategoryPrevious: "Previous",itemCategoryPriceAsc: "Price ascending",itemCategoryPriceDesc: "Price descending",itemCategoryRandom: "Random sorting",itemCategoryReleaseAsc: "Release date ascending",itemCategoryReleaseDesc: "Release date descending",itemCategorySort: "Sort by",itemCategoryStoreSpecialAsc: "Store special ascending",itemCategoryStoreSpecialDesc: "Store special descending",itemCategoryTopItems: "Top items",itemCondition: "Condition",itemContent: "Content",itemCustomerFeedback: "Customer reviews",itemCustomsTariffNumber: "Customs tariff number",itemDescription: "Description",itemDimensions: "Dimensions",itemEach: "Each",itemExclusive: "excl.",itemExternalVariationId: "External variation ID",itemFSK: "Released for age :age and older",itemId: "Item ID",itemId_asc: "Item ID (ascending)",itemId_desc: "Item ID (descending)",itemInclVAT: "* Incl. VAT",itemManufacturer: "Manufacturer",itemManufacturingCountry: "Manufacturing country",itemModel: "Model",itemMoreDetails: "More details",itemName_asc: "Item name (ascending)",itemName_desc: "Item name (descending)",itemNetWeight: "Net weight",itemNew: "New",itemNumber: "Item number",itemPleaseSelect: "Please select",itemPosition_asc: "Item position (ascending)",itemPosition_desc: "Item position (descending)",itemPrice_asc: "Price (ascending)",itemPrice_desc: "Price (descending)",itemProducerName_asc: "Manufacturer (ascending)",itemProducerName_desc: "Manufacturer (descending)",itemRand: "Random items",itemRating_asc: "Customer feedback (ascending)",itemRating_desc: "Customer feedback (descending)",itemShippingCosts: "Shipping",itemShowLess: "Less",itemShowMore: "More",itemState: "State",itemTechnicalData: "Technical data",itemUnitPrice: "Unit price",itemWeight: "Weight",itemWishList: "Wish list",notFoundOops: "Oops, something went terribly wrong!",notFoundPage: "The requested page was not found.",orderApply: "Apply",orderBuyNow: "Order now",orderCheckout: "Checkout",orderDate: "Order date:",orderDetails: "Order details",orderDhlPackage: "DHL Paket",orderEnterOrderId: "Enter order ID",orderEstimatedShippingDate: "Estimated shipping date",orderFrom: "From",orderHistory: "Order history",orderId: "Order ID",orderInvoiceAddress: "Invoice address",orderInvoiceAddressCreate: "Create invoice address",orderInvoiceAddressDelete: "Delete invoice address",orderInvoiceAddressEdit: "Edit invoice address",orderItemId: "Item ID",orderItemsBought: "Purchased items",orderLast30Days: "the last 30 days",orderLast3Month: "the last 3 months",orderLast6Month: "the last 6 months",orderNoItemsInBasket: "Your shopping cart is empty.",orderPayEasy: "Pay quickly and easily with",orderPaymentEntry: "Incoming payment:",orderPaymentMethod: "Payment method",orderPaymentMethods: "Payment methods",orderPaymentStatus: "Payment status",orderPaypalPlus: "PayPal PLUS",orderPeace: "Quantity",orderPricePerPiece: "Price per piece",orderRecipient: "Recipient:",orderSelectTimePeriod: "Select a time period",orderShipped: "Shipping:",orderShippingAddress: "Delivery address",orderShippingAddressCreate: "Create delivery address",orderShippingAddressDelete: "Delete shipping address",orderShippingAddressEdit: "Edit delivery address",orderShippingProfile: "Shipping method",orderShow: "Show :countStart - :countEnd of :orderMaxCount orders",orderStatus: "Status:",orderStatusHistory: "Status history",orderTo: "To",orderTotal: "Total",orderWeShip: "Your order is shipped by",orderWillBeProcessed: "Your order is being processed. Here, you will find an overview:",paymentStatus_fullyPaid: "Paid",paymentStatus_overpaid: "Overpaid",paymentStatus_partlyPaid: "Partially paid",paymentStatus_prepaid: "Prepaid",paymentStatus_unpaid: "Not paid",pleaseSelect: "Please select",variationActive_asc: "Active variation (ascending)",variationActive_desc: "Active variation (descending)",variationCreateTimestamp_asc: "Newest variation",variationCreateTimestamp_desc: "Oldest variation",variationCustomNumber_asc: "Variation number (ascending)",variationCustomNumber_desc: "Variation number (descending)",variationId_asc: "Variation ID (ascending)",variationId_desc: "Variation ID (descending)",variationLastUpdateTimestamp_asc: "Last variation update",variationLastUpdateTimestamp_desc: "First variation update",variationName_asc: "Variation name (ascending)",variationName_desc: "Variation name (descending)",variationPosition_asc: "Variation position (ascending)",variationPosition_desc: "Variation position (descending)",variationPrimary_asc: "Main variation (ascending)",variationPrimary_desc: "Main variation (descending)",cn: "Chinese",cz: "Czech",da: "Danish",de: "German",en: "English",es: "Spanish",fr: "French",it: "Italian",nl: "Dutch",nn: "Norwegian",pl: "Polish",pt: "Portuguese",ru: "Russian",se: "Swedish",sk: "Slovak",tr: "Turkish",vn: "Vietnamese",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",timeFormat: "H:i",timeFormatMoment: "HH:mm",},};
+var Languages = Languages || {}; Languages['de'] = {Template: {accAccountSettings: "Kontoeinstellungen",accAlreadyLoggedIn: "Sie sind bereits eingeloggt.",accBankDetails: "Bankdaten",accChangeLoginData: "Ändern Sie Ihre Zugangsdaten",accChangePassword: "Passwort ändern",accChangePasswordFailed: "Das Passwort konnte nicht geändert werden.",accChangePasswordSuccessful: "Das Passwort wurde erfolgreich geändert.",accChangePaymentInformation: "Ändern Sie Ihre Zahlungsinformationen",accChangeSettings: "Einstellungen ändern",accCorrectPassword: "Bitte korrigieren",accCreateAccount: "Jetzt registrieren",accEmail: "E-Mail",accForgotPassword: "Passwort vergessen?",accHolder: "Kontoinhaber",accInvoiceAddresses: "Rechnungsadressen",accLogin: "Anmelden",accLoginFailed: "Die Anmeldedaten sind ungültig.",accLoginSuccessful: "Sie wurden erfolgreich eingeloggt.",accLogout: "Ausloggen",accLogoutSuccessful: "Sie wurden erfolgreich ausgeloggt.",accMyAccount: "Mein Konto",accNewPassword: "Neues Passwort",accOrderAsGuest: "Als Gast bestellen",accPassword: "Passwort",accPleaseLogin: "Bitte einloggen",accRegister: "Registrieren",accRegisterAccount: "Registrieren Sie sich",accRegistrationSuccessful: "Sie wurden erfolgreich registriert.",accRememberPassword: "Passwort merken",accRepeatPassword: "Passwort wiederholen",accShippingAddresses: "Lieferadressen",accUsername: "Benutzername",addressAddAddress: "Neue Adresse hinzufügen",addressAdditionalAddress1: "Adresszusatz 1",addressAdditionalAddress2: "Adresszusatz 2",addressAdditionalName: "Namenszusatz",addressChangeAddress: "Adresse ändern",addressCompany: "Firma",addressContact: "Kontakt",addressDeleteAddress: "Adresse löschen",addressDeleteWarning: "Adresse wirklich löschen?",addressFirstName: "Vorname",addressGBAdditionalLocality: "Adresszusatz",addressGBBuildingName: "Gebäude Name",addressGBNameAffix: "Namenszusatz",addressLastName: "Nachname",addressNoAddress: "Noch keine Adresse vorhanden",addressNumber: "Nr.",addressPlace: "Ort",addressSameAsInvoice: "Lieferadresse gleich Rechnungsadresse",addressStreet: "Straße",addressZip: "PLZ",addToBasket: "In den Warenkorb",bank: "Kreditinstitut",bankAddDataTitle: "Bankdaten hinzufügen",bankBicNotification: "Bitte BIC bei Auslandsüberweisungen angeben",bankDataAdded: "Bankdaten hinzugefügt",bankDataDeleted: "Bankdaten gelöscht",bankDataNotAdded: "Bankdaten nicht hinzugefügt",bankDataNotDeleted: "Bankdaten nicht gelöscht",bankDataNotUpdated: "Bankdaten nicht aktualisiert",bankDataUpdated: "Bankdaten aktualisiert",bankDeleteTitle: "Bankdaten löschen",bankDeleteWarning: "Bankdaten wirklich löschen?",bankNoBankData: "Noch keine Bankdaten vorhanden",bankUpdateDataTitle: "Bankdaten bearbeiten",basket: "Warenkorb",basketCoupon: "Gutschein",basketGross: "Brutto",basketItemAdded: "Der Artikel wurde in den Warenkorb gelegt.",basketItemNotAdded: "Der Artikel konnte nicht hinzugefügt werden.",basketNet: "Netto",basketOrderNow: "Jetzt bestellen",basketPreview: "Warenkorbvorschau",basketSum: "Summe",basketTotalSum: "Gesamtsumme",basketValue: "Warenwert",basketVAT: "MwSt. 19%",couponRedeemFailure: "Gutschein nicht eingelöst",couponRedeemSuccess: "Gutschein erfolgreich eingelöst",couponRemoveFailure: "Gutschein nicht entfernt",couponRemoveSuccess: "Gutschein erfolgreich entfernt",generalAdd: "Anlegen",generalAll: "alle",generalBigAll: "Alle",generalAllRightsReserved: "Alle Rechte vorbehalten.",generalAustria: "Österreich",generalCancel: "Abbrechen",generalCancellationRight: "Widerrufs&shy;recht",generalCategories: "Kategorien",generalCertifiedBy: "Geprüfte Leistung",generalCheckEntries: "Bitte Eingaben prüfen.",generalChooseOur: "Bitte nehmen Sie unsere :gtc, :cancellation und :policy zur Kenntnis.",generalClose: "Schließen",generalCountry: "Land",generalCountrySettings: "Ländereinstellungen",generalDelete: "Löschen",generalDeleteNow: "Jetzt löschen",generalEdit: "Bearbeiten",generalEngland: "England",generalEnglish: "Englisch",generalEnterCoupon: "Gutschein-Code eingeben",generalEnterEmail: "E-Mail-Adresse eingeben",generalEnterFeedback: "Bewertung eingeben",generalFirstName: "Vorname",generalFilter: "Filter",generalFrance: "Frankreich",generalGerman: "Deutsch",generalGermany: "Deutschland",generalGiveFeedback: "Bewerten",generalGtc: "AGB",generalHello: "Hallo, :username",generalHomepage: "Startseite",generalItaly: "Italien",generalLastName: "Nachname",generalLegalDisclosure: "Impressum",generalNewsletter: "Newsletter",generalNext: "Weiter",generalOrderShippedBy: "Wir verschicken mit",generalPrivacyPolicy: "Daten&shy;schutz&shy;erklärung",generalRedeem: "Einlösen",generalRemove: "Entfernen",generalSave: "Speichern",generalSearch: "Suchen..",generalSearchNoDot: "Suchen",generalSelectLanguage: "Sprache",generalSelectShippingCountry: "Lieferland",generalSend: "Senden",generalState: "Bundesland",generalSwitzerland: "Schweiz",generalThanks: "Vielen Dank!",generalYourEmail: "Ihre E-Mail-Adresse",itemAge: "Altersfreigabe",itemAvailability: "Verfügbarkeit",itemCategoryIdDesc: "Art.-ID aufsteigend",itemCategoryItemAsc: "Positionsnummer aufsteigend",itemCategoryItemDesc: "Positionsnummer absteigend",itemCategoryItemsPerPage: "Artikel pro Seite",itemCategoryNameAsc: "Name aufsteigend",itemCategoryNameDesc: "Name absteigend",itemCategoryNext: "Nächste",itemCategoryPrevious: "Vorherige",itemCategoryPriceAsc: "Preis aufsteigend",itemCategoryPriceDesc: "Preis absteigend",itemCategoryRandom: "Zufällige Sortierung",itemCategoryReleaseAsc: "Erscheinungsdatum aufsteigend",itemCategoryReleaseDesc: "Erscheinungsdatum absteigend",itemCategorySort: "Sortieren",itemCategoryStoreSpecialAsc: "Shop-Aktion aufsteigend",itemCategoryStoreSpecialDesc: "Shop-Aktion absteigend",itemCategoryTopItems: "Top-Artikel",itemCondition: "Zustand",itemContent: "Inhalt",itemCustomerFeedback: "Kundenrezensionen",itemCustomsTariffNumber: "Zolltarifnummer",itemDescription: "Beschreibung",itemDimensions: "Maße",itemEach: "Stück",itemExclusive: "zzgl.",itemExternalVariationId: "Externe Varianten-ID",itemFSK: "FSK ab :age freigegeben",itemId: "Art.-ID",itemId_asc: "Artikel-ID (aufsteigend)",itemId_desc: " Artikel-ID (absteigend)",itemInclVAT: "* inkl. ges. MwSt.",itemManufacturer: "Hersteller",itemManufacturingCountry: "Herstellungsland",itemModel: "Modell",itemMoreDetails: "Weitere Details",itemName_asc: "Artikelname (aufsteigend)",itemName_desc: "Artikelname (absteigend)",itemNetWeight: "Netto-Gewicht",itemNew: "Neu",itemNumber: "Artikelnummer",itemPleaseSelect: "Bitte wählen",itemPosition_asc: "Artikelposition (aufsteigend)",itemPosition_desc: " Artikelposition (absteigend)",itemPrice_asc: "Preis (aufsteigend)",itemPrice_desc: "Preis (absteigend)",itemProducerName_asc: "Hersteller (aufsteigend)",itemProducerName_desc: "Hersteller (absteigend)",itemRand: "Zufällige Artikel",itemRating_asc: "Kundenbewertung (aufsteigend)",itemRating_desc: "Kundenbewertung (absteigend)",itemShippingCosts: "Versandkosten",itemShowLess: "Weniger",itemShowMore: "Mehr",itemState: "Status",itemTechnicalData: "Technische Daten",itemUnitPrice: "Grundpreis",itemWeight: "Gewicht",itemWishList: "Wunschliste",notFoundOops: "Ups, ein Fehler!",notFoundPage: "Die Seite, die du aufgerufen hast, wurde nicht gefunden.",orderApply: "Anwenden",orderBuyNow: "Kaufen",orderCheckout: "Kasse",orderDate: "Auftragsdatum",orderDetails: "Bestelldetails",orderDhlPackage: "DHL Paket",orderEnterOrderId: "Auftrags-ID eingeben",orderEstimatedShippingDate: "Voraussichtl. Versanddatum",orderFrom: "Von",orderHistory: "Auftragshistorie",orderId: "Auftrags-ID",orderInvoiceAddress: "Rechnungsadresse",orderInvoiceAddressCreate: "Rechnungsadresse anlegen",orderInvoiceAddressDelete: "Rechnungsadresse löschen",orderInvoiceAddressEdit: "Rechnungsadresse bearbeiten",orderItemId: "Art.-ID",orderItemsBought: "Gekaufte Artikel",orderLast30Days: "letzte 30 Tage",orderLast3Month: "letzte 3 Monate",orderLast6Month: "letzte 6 Monate",orderNoItemsInBasket: "Sie haben noch keine Artikel im Warenkorb.",orderPayEasy: "Zahlen Sie bequem per",orderPaymentEntry: "Zahlungseingang",orderPaymentMethod: "Zahlungsart",orderPaymentMethods: "Zahlungsarten",orderPaymentStatus: "Zahlungsstatus",orderPaypalPlus: "PayPal PLUS",orderPeace: "Stückzahl",orderPricePerPiece: "Einzelpreis",orderRecipient: "Empfänger",orderSelectTimePeriod: "Zeitraum wählen",orderShipped: "Versand",orderShippingAddress: "Lieferadresse",orderShippingAddressCreate: "Lieferadresse anlegen",orderShippingAddressDelete: "Lieferadresse löschen",orderShippingAddressEdit: "Lieferadresse bearbeiten",orderShippingProfile: "Versandart",orderShow: "Zeige :countStart - :countEnd von :orderMaxCount Aufträgen",orderStatus: "Status",orderStatusHistory: "Statushistorie",orderTo: "Bis",orderTotal: "Gesamt",orderWeShip: "Wir versenden mit",orderWillBeProcessed: "Ihre Bestellung wird bearbeitet. Hier finden Sie eine Zusammenfassung:",paymentStatus_fullyPaid: "Bezahlt",paymentStatus_overpaid: "Überzahlt",paymentStatus_partlyPaid: "Teilweise bezahlt",paymentStatus_prepaid: "Im Voraus bezahlt",paymentStatus_unpaid: "Nicht bezahlt",pleaseSelect: "Bitte wählen",variationActive_asc: "Aktive Variante (aufsteigend)",variationActive_desc: "Aktive Variante (absteigend)",variationCreateTimestamp_asc: "Neueste Varianten",variationCreateTimestamp_desc: "Älteste Varianten",variationCustomNumber_asc: "Variantennummer (aufsteigend)",variationCustomNumber_desc: "Variantennummer (absteigend)",variationId_asc: "Varianten-ID (aufsteigend)",variationId_desc: "Varianten-ID (absteigend)",variationLastUpdateTimestamp_asc: "Letzte Variantenaktualisierung",variationLastUpdateTimestamp_desc: "Erste Variantenaktualisierung",variationName_asc: "Variantenname (aufsteigend)",variationName_desc: "Variantenname (absteigend)",variationPosition_asc: "Variantenposition (aufsteigend)",variationPosition_desc: "Variantenposition (absteigend)",variationPrimary_asc: "Hauptvariante (aufsteigend)",variationPrimary_desc: "Hauptvariante (absteigend)",cn: "Chinesisch",cz: "Tschechisch",da: "Dänisch",de: "Deutsch",en: "Englisch",es: "Spanisch",fr: "Französisch",it: "Italienisch",nl: "Niederländisch",nn: "Norwegisch",pl: "Polnisch",pt: "Portugiesisch",ru: "Russisch",se: "Schwedisch",sk: "Slowakisch",tr: "Türkisch",vn: "Vietnamesisch",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",timeFormat: "H:i",timeFormatMoment: "HH:mm",},};
+var Languages = Languages || {}; Languages['en'] = {Template: {accAccountSettings: "Account settings",accAlreadyLoggedIn: "You are already logged in.",accBankDetails: "Bank details",accChangeLoginData: "Change your access data",accChangePassword: "Change password",accChangePasswordFailed: "The password could not be changed.",accChangePasswordSuccessful: "The password has been changed successfully.",accChangePaymentInformation: "Change your payment information",accChangeSettings: "Change settings",accCorrectPassword: "Please correct",accCreateAccount: "Register now",accEmail: "Email",accForgotPassword: "Forgot your password?",accHolder: "Account holder",accInvoiceAddresses: "Invoice addresses",accLogin: "Log in",accLoginFailed: "Your login data is invalid.",accLoginSuccessful: "You have been logged in successfully.",accLogout: "Log out",accLogoutSuccessful: "You have been logged out successfully.",accMyAccount: "My account",accNewPassword: "New password",accOrderAsGuest: "Order as a guest",accPassword: "Password",accPleaseLogin: "Please log in",accRegister: "Register",accRegisterAccount: "Register first",accRegistrationSuccessful: "You have been registered successfully.",accRememberPassword: "Remember password",accRepeatPassword: "Repeat password",accShippingAddresses: "Delivery addresses",accUsername: "User name",addressAddAddress: "Create a new address",addressAdditionalAddress1: "Additional address information 1",addressAdditionalAddress2: "Additional address information 2",addressAdditionalName: "Additional name",addressChangeAddress: "Change address",addressCompany: "Company",addressContact: "Contact",addressDeleteAddress: "Delete address",addressDeleteWarning: "Really delete address?",addressFirstName: "First name",addressGBAdditionalLocality: "Additional locality",addressGBBuildingName: "Building name",addressGBNameAffix: "Name affix",addressLastName: "Last name",addressNoAddress: "No Address saved",addressNumber: "House No.",addressPlace: "Town",addressSameAsInvoice: "Delivery address same as invoice address",addressStreet: "Street",addressZip: "Postcode",addToBasket: "Add to shopping cart",bank: "Bank",bankAddDataTitle: "Add bank details",bankBicNotification: "Please use the BIC for international bank transfers",bankDataAdded: "Bank details added",bankDataDeleted: "Bank details deleted",bankDataNotAdded: "Bank details not added",bankDataNotDeleted: "Bank details not deleted",bankDataNotUpdated: "Bank details not updated",bankDataUpdated: "Bank details updated",bankDeleteTitle: "Delete bank details",bankDeleteWarning: "Really delete bank details?",bankNoBankData: "No bank details saved",bankUpdateDataTitle: "Edit bank details",basket: "Shopping cart",basketCoupon: "Coupon",basketGross: "Gross",basketItemAdded: "The item was placed in the shopping cart.",basketItemNotAdded: "The item could not be added.",basketNet: "Net",basketOrderNow: "Order now",basketPreview: "Shopping cart preview",basketSum: "Total",basketTotalSum: "Total",basketValue: "Value of items",basketVAT: "VAT 19%",couponRedeemFailure: "Coupon not redeemed",couponRedeemSuccess: "Coupon redeemed successfully",couponRemoveFailure: "Coupon not removed",couponRemoveSuccess: "Coupon removed successfully",generalAdd: "Create",generalAll: "all",generalBigAll: "All",generalAllRightsReserved: "All rights reserved.",generalAustria: "Austria",generalCancel: "Cancel",generalCancellationRight: "Cancellation&shy; rights",generalCategories: "Categories",generalCertifiedBy: "Certified by",generalCheckEntries: "Please check the entries.",generalChooseOur: "Please accept our :gtc, :cancellation and :policy.",generalClose: "Close",generalCountry: "Country",generalCountrySettings: "Locale settings",generalDelete: "Delete",generalDeleteNow: "Delete now",generalEdit: "Edit",generalEngland: "England",generalEnglish: "English",generalEnterCoupon: "Your coupon code",generalEnterEmail: "Enter email address",generalEnterFeedback: "Enter feedback",generalFirstName: "First name",generalFilter: "Filter",generalFrance: "France",generalGerman: "German",generalGermany: "Germany",generalGiveFeedback: "Rate item",generalGtc: "Terms and conditions",generalHello: "Hello, :username",generalHomepage: "Homepage",generalItaly: "Italy",generalLastName: "Last name",generalLegalDisclosure: "Legal disclosure",generalNewsletter: "Newsletter",generalNext: "Next",generalOrderShippedBy: "Your order is shipped by",generalPrivacyPolicy: "Privacy&shy; policy",generalRedeem: "Redeem coupon",generalRemove: "Remove",generalSave: "Save",generalSearch: "Search..",generalSearchNoDot: "Search",generalSelectLanguage: "Language",generalSelectShippingCountry: "Country of delivery",generalSend: "Send",generalState: "State/Province",generalSwitzerland: "Switzerland",generalThanks: "Thank you!",generalYourEmail: "Your email address",itemAge: "Age rating",itemAvailability: "Availability",itemCategoryIdDesc: "Item ID ascending",itemCategoryItemAsc: "Position ascending",itemCategoryItemDesc: "Position descending",itemCategoryItemsPerPage: "Items per page",itemCategoryNameAsc: "Name ascending",itemCategoryNameDesc: "Name descending",itemCategoryNext: "Next",itemCategoryPrevious: "Previous",itemCategoryPriceAsc: "Price ascending",itemCategoryPriceDesc: "Price descending",itemCategoryRandom: "Random sorting",itemCategoryReleaseAsc: "Release date ascending",itemCategoryReleaseDesc: "Release date descending",itemCategorySort: "Sort by",itemCategoryStoreSpecialAsc: "Store special ascending",itemCategoryStoreSpecialDesc: "Store special descending",itemCategoryTopItems: "Top items",itemCondition: "Condition",itemContent: "Content",itemCustomerFeedback: "Customer reviews",itemCustomsTariffNumber: "Customs tariff number",itemDescription: "Description",itemDimensions: "Dimensions",itemEach: "Each",itemExclusive: "excl.",itemExternalVariationId: "External variation ID",itemFSK: "Released for age :age and older",itemId: "Item ID",itemId_asc: "Item ID (ascending)",itemId_desc: "Item ID (descending)",itemInclVAT: "* Incl. VAT",itemManufacturer: "Manufacturer",itemManufacturingCountry: "Manufacturing country",itemModel: "Model",itemMoreDetails: "More details",itemName_asc: "Item name (ascending)",itemName_desc: "Item name (descending)",itemNetWeight: "Net weight",itemNew: "New",itemNumber: "Item number",itemPleaseSelect: "Please select",itemPosition_asc: "Item position (ascending)",itemPosition_desc: "Item position (descending)",itemPrice_asc: "Price (ascending)",itemPrice_desc: "Price (descending)",itemProducerName_asc: "Manufacturer (ascending)",itemProducerName_desc: "Manufacturer (descending)",itemRand: "Random items",itemRating_asc: "Customer feedback (ascending)",itemRating_desc: "Customer feedback (descending)",itemShippingCosts: "Shipping",itemShowLess: "Less",itemShowMore: "More",itemState: "State",itemTechnicalData: "Technical data",itemUnitPrice: "Unit price",itemWeight: "Weight",itemWishList: "Wish list",notFoundOops: "Oops, something went terribly wrong!",notFoundPage: "The requested page was not found.",orderApply: "Apply",orderBuyNow: "Order now",orderCheckout: "Checkout",orderDate: "Order date:",orderDetails: "Order details",orderDhlPackage: "DHL Paket",orderEnterOrderId: "Enter order ID",orderEstimatedShippingDate: "Estimated shipping date",orderFrom: "From",orderHistory: "Order history",orderId: "Order ID",orderInvoiceAddress: "Invoice address",orderInvoiceAddressCreate: "Create invoice address",orderInvoiceAddressDelete: "Delete invoice address",orderInvoiceAddressEdit: "Edit invoice address",orderItemId: "Item ID",orderItemsBought: "Purchased items",orderLast30Days: "the last 30 days",orderLast3Month: "the last 3 months",orderLast6Month: "the last 6 months",orderNoItemsInBasket: "Your shopping cart is empty.",orderPayEasy: "Pay quickly and easily with",orderPaymentEntry: "Incoming payment:",orderPaymentMethod: "Payment method",orderPaymentMethods: "Payment methods",orderPaymentStatus: "Payment status",orderPaypalPlus: "PayPal PLUS",orderPeace: "Quantity",orderPricePerPiece: "Price per piece",orderRecipient: "Recipient:",orderSelectTimePeriod: "Select a time period",orderShipped: "Shipping:",orderShippingAddress: "Delivery address",orderShippingAddressCreate: "Create delivery address",orderShippingAddressDelete: "Delete shipping address",orderShippingAddressEdit: "Edit delivery address",orderShippingProfile: "Shipping method",orderShow: "Show :countStart - :countEnd of :orderMaxCount orders",orderStatus: "Status:",orderStatusHistory: "Status history",orderTo: "To",orderTotal: "Total",orderWeShip: "Your order is shipped by",orderWillBeProcessed: "Your order is being processed. Here, you will find an overview:",paymentStatus_fullyPaid: "Paid",paymentStatus_overpaid: "Overpaid",paymentStatus_partlyPaid: "Partially paid",paymentStatus_prepaid: "Prepaid",paymentStatus_unpaid: "Not paid",pleaseSelect: "Please select",variationActive_asc: "Active variation (ascending)",variationActive_desc: "Active variation (descending)",variationCreateTimestamp_asc: "Newest variation",variationCreateTimestamp_desc: "Oldest variation",variationCustomNumber_asc: "Variation number (ascending)",variationCustomNumber_desc: "Variation number (descending)",variationId_asc: "Variation ID (ascending)",variationId_desc: "Variation ID (descending)",variationLastUpdateTimestamp_asc: "Last variation update",variationLastUpdateTimestamp_desc: "First variation update",variationName_asc: "Variation name (ascending)",variationName_desc: "Variation name (descending)",variationPosition_asc: "Variation position (ascending)",variationPosition_desc: "Variation position (descending)",variationPrimary_asc: "Main variation (ascending)",variationPrimary_desc: "Main variation (descending)",cn: "Chinese",cz: "Czech",da: "Danish",de: "German",en: "English",es: "Spanish",fr: "French",it: "Italian",nl: "Dutch",nn: "Norwegian",pl: "Polish",pt: "Portuguese",ru: "Russian",se: "Swedish",sk: "Slovak",tr: "Turkish",vn: "Vietnamese",dateFormat: "d.m.Y",dateFormatMoment: "DD.MM.YYYY",dateTimeFormat: "d.m.Y, H:i",dateTimeFormatMoment: "DD.MM.YYYY, HH:mm",timeFormat: "H:i",timeFormatMoment: "HH:mm",},};
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -20303,7 +20303,7 @@ setTimeout(function () {
 return Vue;
 
 })));
-/*! tether 1.4.0 */
+/*! tether 1.3.7 */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -20413,7 +20413,7 @@ var getOrigin = function getOrigin() {
   // are equivilant or not.  We place an element at the top left of the page that will
   // get the same jitter, so we can cancel the two out.
   var node = zeroElement;
-  if (!node || !document.body.contains(node)) {
+  if (!node) {
     node = document.createElement('div');
     node.setAttribute('data-tether-id', uniqueId());
     extend(node.style, {
@@ -21552,24 +21552,20 @@ var TetherClass = (function (_Evented) {
       }
 
       if (!moved) {
-        if (this.options.bodyElement) {
-          this.options.bodyElement.appendChild(this.element);
-        } else {
-          var offsetParentIsBody = true;
-          var currentNode = this.element.parentNode;
-          while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
-            if (getComputedStyle(currentNode).position !== 'static') {
-              offsetParentIsBody = false;
-              break;
-            }
-
-            currentNode = currentNode.parentNode;
+        var offsetParentIsBody = true;
+        var currentNode = this.element.parentNode;
+        while (currentNode && currentNode.nodeType === 1 && currentNode.tagName !== 'BODY') {
+          if (getComputedStyle(currentNode).position !== 'static') {
+            offsetParentIsBody = false;
+            break;
           }
 
-          if (!offsetParentIsBody) {
-            this.element.parentNode.removeChild(this.element);
-            this.element.ownerDocument.body.appendChild(this.element);
-          }
+          currentNode = currentNode.parentNode;
+        }
+
+        if (!offsetParentIsBody) {
+          this.element.parentNode.removeChild(this.element);
+          this.element.ownerDocument.body.appendChild(this.element);
         }
       }
 
@@ -22117,7 +22113,7 @@ return Tether;
 
 
 /*!
- * shariff - v1.24.1 - 17.11.2016
+ * shariff - v1.24.0 - 29.06.2016
  * https://github.com/heiseonline/shariff
  * Copyright (c) 2016 Ines Pauer, Philipp Busse, Sebastian Hilbig, Erich Kramer, Deniz Sesli
  * Licensed under the MIT license
@@ -22206,7 +22202,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
 },{}],26:[function(require,module,exports){
 (function (global){
-"use strict";var $=require("jquery"),url=require("url"),Shariff=function(e,t){var r=this;this.element=e,$(e).empty(),this.options=$.extend({},this.defaults,t,$(e).data());var i=[require("./services/addthis"),require("./services/diaspora"),require("./services/facebook"),require("./services/flattr"),require("./services/googleplus"),require("./services/info"),require("./services/linkedin"),require("./services/mail"),require("./services/pinterest"),require("./services/reddit"),require("./services/stumbleupon"),require("./services/twitter"),require("./services/whatsapp"),require("./services/xing"),require("./services/tumblr"),require("./services/threema"),require("./services/weibo"),require("./services/tencent-weibo"),require("./services/qzone")];this.services=$.map(this.options.services,function(e){var t;return i.forEach(function(i){if(i=i(r),i.name===e)return t=i,null}),t}),this._addButtonList(),null!==this.options.backendUrl&&this.getShares().then($.proxy(this._updateCounts,this))};Shariff.prototype={defaults:{theme:"color",backendUrl:null,infoUrl:"http://ct.de/-2467514",lang:"de",langFallback:"en",mailUrl:function(){var e=url.parse(this.getURL(),!0);return e.query.view="mail",delete e.search,url.format(e)},mailSubject:function(){return this.getMeta("DC.title")||this.getTitle()},mailBody:function(){return this.getURL()},mediaUrl:null,orientation:"horizontal",referrerTrack:null,services:["twitter","facebook","googleplus","info"],title:function(){return $("head title").text()},twitterVia:null,flattrUser:null,flattrCategory:null,url:function(){var e=global.document.location.href,t=$("link[rel=canonical]").attr("href")||this.getMeta("og:url")||"";return t.length>0&&(t.indexOf("http")<0&&(t=global.document.location.protocol+"//"+global.document.location.host+t),e=t),e}},$socialshareElement:function(){return $(this.element)},getLocalized:function(e,t){return"object"==typeof e[t]?"undefined"==typeof e[t][this.options.lang]?e[t][this.options.langFallback]:e[t][this.options.lang]:"string"==typeof e[t]?e[t]:void 0},getMeta:function(e){var t=$('meta[name="'+e+'"],[property="'+e+'"]').attr("content");return t||""},getInfoUrl:function(){return this.options.infoUrl},getURL:function(){return this.getOption("url")},getOption:function(e){var t=this.options[e];return"function"==typeof t?$.proxy(t,this)():t},getTitle:function(){return this.getOption("title")},getReferrerTrack:function(){return this.options.referrerTrack||""},getShares:function(){var e=url.parse(this.options.backendUrl,!0);return e.query.url=this.getURL(),delete e.search,$.getJSON(url.format(e))},_updateCounts:function(e){var t=this;$.each(e,function(e,r){r>=1e3&&(r=Math.round(r/1e3)+"k"),$(t.element).find("."+e+" a").append('&nbsp;<span class="share_count">'+r)})},_addButtonList:function(){var e=this,t=this.$socialshareElement(),r="theme-"+this.options.theme,i="orientation-"+this.options.orientation,n="col-"+this.options.services.length,a=$("<ul>").addClass(r).addClass(i).addClass(n);this.services.forEach(function(t){var r=$('<li class="shariff-button">').addClass(t.name),i='<span class="share_text">'+e.getLocalized(t,"shareText"),n=$("<a>").attr("href",t.shareUrl).append(i);"undefined"!=typeof t.faName&&n.prepend('<span class="fa '+t.faName+'">'),t.popup?n.attr("data-rel","popup"):t.blank&&n.attr("target","_blank"),n.attr("title",e.getLocalized(t,"title")),n.attr("role","button"),n.attr("aria-label",e.getLocalized(t,"title")),r.append(n),a.append(r)}),a.on("click",'[data-rel="popup"]',function(e){e.preventDefault();var t=$(this).attr("href"),r="_blank",i="600",n="460",a="width="+i+",height="+n;global.window.open(t,r,a)}),t.append(a)}},module.exports=Shariff,global.Shariff=Shariff,$(".shariff").each(function(){this.hasOwnProperty("shariff")||(this.shariff=new Shariff(this))});
+"use strict";var $=require("jquery"),url=require("url"),Shariff=function(e,t){var r=this;this.element=e,$(e).empty(),this.options=$.extend({},this.defaults,t,$(e).data());var i=[require("./services/addthis"),require("./services/diaspora"),require("./services/facebook"),require("./services/flattr"),require("./services/googleplus"),require("./services/info"),require("./services/linkedin"),require("./services/mail"),require("./services/pinterest"),require("./services/reddit"),require("./services/stumbleupon"),require("./services/twitter"),require("./services/whatsapp"),require("./services/xing"),require("./services/tumblr"),require("./services/threema"),require("./services/weibo"),require("./services/tencent-weibo"),require("./services/qzone")];this.services=$.map(this.options.services,function(e){var t;return i.forEach(function(i){if(i=i(r),i.name===e)return t=i,null}),t}),this._addButtonList(),null!==this.options.backendUrl&&this.getShares().then($.proxy(this._updateCounts,this))};Shariff.prototype={defaults:{theme:"color",backendUrl:null,infoUrl:"http://ct.de/-2467514",lang:"de",langFallback:"en",mailUrl:function(){var e=url.parse(this.getURL(),!0);return e.query.view="mail",delete e.search,url.format(e)},mailSubject:function(){return this.getMeta("DC.title")||this.getTitle()},mailBody:function(){return"<"+this.getURL()+">"},mediaUrl:null,orientation:"horizontal",referrerTrack:null,services:["twitter","facebook","googleplus","info"],title:function(){return $("head title").text()},twitterVia:null,flattrUser:null,flattrCategory:null,url:function(){var e=global.document.location.href,t=$("link[rel=canonical]").attr("href")||this.getMeta("og:url")||"";return t.length>0&&(t.indexOf("http")<0&&(t=global.document.location.protocol+"//"+global.document.location.host+t),e=t),e}},$socialshareElement:function(){return $(this.element)},getLocalized:function(e,t){return"object"==typeof e[t]?"undefined"==typeof e[t][this.options.lang]?e[t][this.options.langFallback]:e[t][this.options.lang]:"string"==typeof e[t]?e[t]:void 0},getMeta:function(e){var t=$('meta[name="'+e+'"],[property="'+e+'"]').attr("content");return t||""},getInfoUrl:function(){return this.options.infoUrl},getURL:function(){return this.getOption("url")},getOption:function(e){var t=this.options[e];return"function"==typeof t?$.proxy(t,this)():t},getTitle:function(){return this.getOption("title")},getReferrerTrack:function(){return this.options.referrerTrack||""},getShares:function(){var e=url.parse(this.options.backendUrl,!0);return e.query.url=this.getURL(),delete e.search,$.getJSON(url.format(e))},_updateCounts:function(e){var t=this;$.each(e,function(e,r){r>=1e3&&(r=Math.round(r/1e3)+"k"),$(t.element).find("."+e+" a").append('&nbsp;<span class="share_count">'+r)})},_addButtonList:function(){var e=this,t=this.$socialshareElement(),r="theme-"+this.options.theme,i="orientation-"+this.options.orientation,n="col-"+this.options.services.length,a=$("<ul>").addClass(r).addClass(i).addClass(n);this.services.forEach(function(t){var r=$('<li class="shariff-button">').addClass(t.name),i='<span class="share_text">'+e.getLocalized(t,"shareText"),n=$("<a>").attr("href",t.shareUrl).append(i);"undefined"!=typeof t.faName&&n.prepend('<span class="fa '+t.faName+'">'),t.popup?n.attr("data-rel","popup"):t.blank&&n.attr("target","_blank"),n.attr("title",e.getLocalized(t,"title")),n.attr("role","button"),n.attr("aria-label",e.getLocalized(t,"title")),r.append(n),a.append(r)}),a.on("click",'[data-rel="popup"]',function(e){e.preventDefault();var t=$(this).attr("href"),r="_blank",i="600",n="460",a="width="+i+",height="+n;global.window.open(t,r,a)}),t.append(a)}},module.exports=Shariff,global.Shariff=Shariff,$(".shariff").each(function(){this.hasOwnProperty("shariff")||(this.shariff=new Shariff(this))});
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./services/addthis":7,"./services/diaspora":8,"./services/facebook":9,"./services/flattr":10,"./services/googleplus":11,"./services/info":12,"./services/linkedin":13,"./services/mail":14,"./services/pinterest":15,"./services/qzone":16,"./services/reddit":17,"./services/stumbleupon":18,"./services/tencent-weibo":19,"./services/threema":20,"./services/tumblr":21,"./services/twitter":22,"./services/weibo":23,"./services/whatsapp":24,"./services/xing":25,"jquery":1,"url":6}]},{},[26]);
 
@@ -22482,7 +22478,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 }).call(this);
 
 /*!
- * Lightbox v2.9.0
+ * Lightbox v2.8.1
  * by Lokesh Dhakar
  *
  * More info:
@@ -22524,25 +22520,14 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   Lightbox.defaults = {
     albumLabel: 'Image %1 of %2',
     alwaysShowNavOnTouchDevices: false,
-    fadeDuration: 600,
+    fadeDuration: 500,
     fitImagesInViewport: true,
-    imageFadeDuration: 600,
     // maxWidth: 800,
     // maxHeight: 600,
     positionFromTop: 50,
     resizeDuration: 700,
     showImageNumberLabel: true,
-    wrapAround: false,
-    disableScrolling: false,
-    /*
-    Sanitize Title
-    If the caption data is trusted, for example you are hardcoding it in, then leave this to false.
-    This will free you to add html tags, such as links, in the caption.
-
-    If the caption data is user submitted or from some other untrusted source, then set this to true
-    to prevent xss and other injection attacks.
-     */
-    sanitizeTitle: false
+    wrapAround: false
   };
 
   Lightbox.prototype.option = function(options) {
@@ -22554,12 +22539,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   };
 
   Lightbox.prototype.init = function() {
-    var self = this;
-    // Both enable and build methods require the body tag to be in the DOM.
-    $(document).ready(function() {
-      self.enable();
-      self.build();
-    });
+    this.enable();
+    this.build();
   };
 
   // Loop through anchors and areamaps looking for either data-lightbox attributes or rel attributes
@@ -22583,23 +22564,12 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     this.$overlay        = $('#lightboxOverlay');
     this.$outerContainer = this.$lightbox.find('.lb-outerContainer');
     this.$container      = this.$lightbox.find('.lb-container');
-    this.$image          = this.$lightbox.find('.lb-image');
-    this.$nav            = this.$lightbox.find('.lb-nav');
 
     // Store css values for future lookup
-    this.containerPadding = {
-      top: parseInt(this.$container.css('padding-top'), 10),
-      right: parseInt(this.$container.css('padding-right'), 10),
-      bottom: parseInt(this.$container.css('padding-bottom'), 10),
-      left: parseInt(this.$container.css('padding-left'), 10)
-    };
-
-    this.imageBorderWidth = {
-      top: parseInt(this.$image.css('border-top-width'), 10),
-      right: parseInt(this.$image.css('border-right-width'), 10),
-      bottom: parseInt(this.$image.css('border-bottom-width'), 10),
-      left: parseInt(this.$image.css('border-left-width'), 10)
-    };
+    this.containerTopPadding = parseInt(this.$container.css('padding-top'), 10);
+    this.containerRightPadding = parseInt(this.$container.css('padding-right'), 10);
+    this.containerBottomPadding = parseInt(this.$container.css('padding-bottom'), 10);
+    this.containerLeftPadding = parseInt(this.$container.css('padding-left'), 10);
 
     // Attach event handlers to the newly minted DOM elements
     this.$overlay.hide().on('click', function() {
@@ -22638,32 +22608,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
       }
       return false;
     });
-
-    /*
-      Show context menu for image on right-click
-
-      There is a div containing the navigation that spans the entire image and lives above of it. If
-      you right-click, you are right clicking this div and not the image. This prevents users from
-      saving the image or using other context menu actions with the image.
-
-      To fix this, when we detect the right mouse button is pressed down, but not yet clicked, we
-      set pointer-events to none on the nav div. This is so that the upcoming right-click event on
-      the next mouseup will bubble down to the image. Once the right-click/contextmenu event occurs
-      we set the pointer events back to auto for the nav div so it can capture hover and left-click
-      events as usual.
-     */
-    this.$nav.on('mousedown', function(event) {
-      if (event.which === 3) {
-        self.$nav.css('pointer-events', 'none');
-
-        self.$lightbox.one('contextmenu', function() {
-          setTimeout(function() {
-              this.$nav.css('pointer-events', 'auto');
-          }.bind(self), 0);
-        });
-      }
-    });
-
 
     this.$lightbox.find('.lb-loader, .lb-close').on('click', function() {
       self.end();
@@ -22730,11 +22674,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
       left: left + 'px'
     }).fadeIn(this.options.fadeDuration);
 
-    // Disable scrolling of the page while open
-    if (this.options.disableScrolling) {
-      $('body').addClass('lb-disable-scrolling');
-    }
-
     this.changeImage(imageNumber);
   };
 
@@ -22776,8 +22715,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
         windowWidth    = $(window).width();
         windowHeight   = $(window).height();
-        maxImageWidth  = windowWidth - self.containerPadding.left - self.containerPadding.right - self.imageBorderWidth.left - self.imageBorderWidth.right - 20;
-        maxImageHeight = windowHeight - self.containerPadding.top - self.containerPadding.bottom - self.imageBorderWidth.top - self.imageBorderWidth.bottom - 120;
+        maxImageWidth  = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
+        maxImageHeight = windowHeight - self.containerTopPadding - self.containerBottomPadding - 120;
 
         // Check if image size is larger then maxWidth|maxHeight in settings
         if (self.options.maxWidth && self.options.maxWidth < maxImageWidth) {
@@ -22812,7 +22751,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Stretch overlay to fit the viewport
   Lightbox.prototype.sizeOverlay = function() {
     this.$overlay
-      .width($(document).width())
+      .width($(window).width())
       .height($(document).height());
   };
 
@@ -22822,8 +22761,8 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
 
     var oldWidth  = this.$outerContainer.outerWidth();
     var oldHeight = this.$outerContainer.outerHeight();
-    var newWidth  = imageWidth + this.containerPadding.left + this.containerPadding.right + this.imageBorderWidth.left + this.imageBorderWidth.right;
-    var newHeight = imageHeight + this.containerPadding.top + this.containerPadding.bottom + this.imageBorderWidth.top + this.imageBorderWidth.bottom;
+    var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
+    var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
 
     function postResize() {
       self.$lightbox.find('.lb-dataContainer').width(newWidth);
@@ -22847,7 +22786,7 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
   // Display the image and its details and begin preload neighboring images.
   Lightbox.prototype.showImage = function() {
     this.$lightbox.find('.lb-loader').stop(true).hide();
-    this.$lightbox.find('.lb-image').fadeIn(this.options.imageFadeDuration);
+    this.$lightbox.find('.lb-image').fadeIn('slow');
 
     this.updateNav();
     this.updateDetails();
@@ -22899,13 +22838,9 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     // Thanks Nate Wright for the fix. @https://github.com/NateWr
     if (typeof this.album[this.currentImageIndex].title !== 'undefined' &&
       this.album[this.currentImageIndex].title !== '') {
-      var $caption = this.$lightbox.find('.lb-caption');
-      if (this.options.sanitizeTitle) {
-        $caption.text(this.album[this.currentImageIndex].title);
-      } else {
-        $caption.html(this.album[this.currentImageIndex].title);
-      }
-      $caption.fadeIn('fast')
+      this.$lightbox.find('.lb-caption')
+        .html(this.album[this.currentImageIndex].title)
+        .fadeIn('fast')
         .find('a').on('click', function(event) {
           if ($(this).attr('target') !== undefined) {
             window.open($(this).attr('href'), $(this).attr('target'));
@@ -22982,9 +22917,6 @@ function Url(){this.protocol=null,this.slashes=null,this.auth=null,this.host=nul
     $('select, object, embed').css({
       visibility: 'visible'
     });
-    if (this.options.disableScrolling) {
-      $('body').removeClass('lb-disable-scrolling');
-    }
   };
 
   return new Lightbox();
@@ -29839,7 +29771,7 @@ var Popover = (function ($) {
 }(jQuery);
 
 //! moment.js
-//! version : 2.17.1
+//! version : 2.16.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -29882,7 +29814,7 @@ function isObjectEmpty(obj) {
 }
 
 function isNumber(input) {
-    return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
+    return typeof value === 'number' || Object.prototype.toString.call(input) === '[object Number]';
 }
 
 function isDate(input) {
@@ -30074,9 +30006,6 @@ var updateInProgress = false;
 function Moment(config) {
     copyConfig(this, config);
     this._d = new Date(config._d != null ? config._d.getTime() : NaN);
-    if (!this.isValid()) {
-        this._d = new Date(NaN);
-    }
     // Prevent infinite loop in case updateOffset creates new moment
     // objects.
     if (updateInProgress === false) {
@@ -34104,7 +34033,7 @@ addParseToken('x', function (input, array, config) {
 // Side effect imports
 
 
-hooks.version = '2.17.1';
+hooks.version = '2.16.0';
 
 setHookCallback(createLocal);
 
@@ -34270,6 +34199,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		Vue.component("add-to-basket", {
 
+<<<<<<< HEAD
 			props: ["item", "itemUrl", "showQuantity", "template"],
 
 			data: function data() {
@@ -34277,6 +34207,22 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					quantity: 1
 				};
 			},
+=======
+    computed:
+    {
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.basketItem.currentBasketItem.texts;
+        }
+    }
+});
+
+},{"services/ModalService":72,"services/ResourceService":74}],2:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -34340,12 +34286,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					basket: {},
 					basketItems: []
 				};
 			},
+=======
+},{"services/ResourceService":74}],3:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -34399,9 +34350,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ResourceService": 70 }], 5: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var ApiService = require("services/ApiService");
 		var ResourceService = require("services/ResourceService");
 		var NotificationService = require("services/NotificationService");
+=======
+},{"services/ResourceService":74}],4:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 		Vue.component("coupon", {
 
@@ -34440,6 +34396,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					});
 				},
 
+<<<<<<< HEAD
 				removeCode: function removeCode() {
 					this.waiting = true;
 					var self = this;
@@ -34454,6 +34411,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					});
 				}
 			},
+=======
+},{"services/ResourceService":74}],5:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 			computed: {
 				disabled: function disabled() {
@@ -34507,7 +34470,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		Vue.component("basket-list-item", {
 
+<<<<<<< HEAD
 			props: ["basketItem", "size", "language", "template"],
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74}],6:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+>>>>>>> development
 
 			data: function data() {
 				return {
@@ -34518,9 +34486,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				};
 			},
 
+<<<<<<< HEAD
 			created: function created() {
 				this.$options.template = this.template;
 			},
+=======
+    props: [
+        "size",
+        "template",
+        "triggerEvent"
+    ],
+>>>>>>> development
 
 			methods: {
 
@@ -34548,6 +34524,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
      * Update item quantity in basket
      * @param quantity
      */
+<<<<<<< HEAD
 				updateQuantity: function updateQuantity(quantity) {
 					if (this.basketItem.quantity === quantity) {
 						return;
@@ -34560,6 +34537,32 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						this.waiting = false;
 					}.bind(this));
 				},
+=======
+    ready: function()
+    {
+        ResourceService.bind("basketItems", this);
+
+        if (this.triggerEvent)
+        {
+            ResourceService.watch("basket", function(newValue, oldValue)
+            {
+                if (oldValue)
+                {
+                    if (JSON.stringify(newValue) != JSON.stringify(oldValue))
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                    }
+                }
+            });
+        }
+    }
+});
+
+},{"services/ResourceService":74}],7:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+// var ApiService          = require("services/ApiService");
+// var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 				/**
      * Cancel delete
@@ -34615,12 +34618,217 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					checkout: {},
 					checkoutValidation: { paymentProvider: {} }
 				};
 			},
+=======
+},{"services/ResourceService":74}],8:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("category-breadcrumbs", {
+
+    props: [
+        "template",
+        "categories",
+        "currentCategoryTree"
+    ],
+
+    data: function()
+    {
+        return {
+            breadcrumbs: {}
+        };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        this.init();
+    },
+
+    methods:
+    {
+        /**
+         * initialize values
+         */
+        init: function()
+        {
+            this.categories = JSON.parse(this.categories);
+            this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
+
+            ResourceService.bind("breadcrumbs", this);
+            ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
+
+            CategoryRendererService.initialize(this.categories);
+        },
+
+        /**
+         * render items in relation to location
+         * @param currentCategory
+         */
+        renderItems: function(currentCategory)
+        {
+            CategoryRendererService.renderItems(currentCategory);
+        }
+    }
+});
+
+},{"services/CategoryRendererService":68,"services/ResourceService":74}],9:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+
+Vue.component("category-renderer", {
+
+    props: [
+        "template",
+        "categories"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        this.init();
+    },
+
+    methods:
+    {
+        /**
+         * initialize values
+         */
+        init: function()
+        {
+            this.categories = JSON.parse(this.categories);
+
+            CategoryRendererService.initialize(this.categories);
+        },
+
+        /**
+         * render items in relation to location
+         * @param currentCategory
+         */
+        renderItems: function(currentCategory)
+        {
+            CategoryRendererService.renderItems(currentCategory);
+        }
+
+    }
+});
+
+},{"services/CategoryRendererService":68}],10:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("category-side-menu", {
+
+    props: [
+        "template",
+        "categories"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        CategoryRendererService.initialize(this.categories);
+    },
+
+    ready: function()
+    {
+        ResourceService.watch("breadcrumbs", function(values)
+        {
+            var nodeList = [];
+
+            for (var index in values)
+            {
+                nodeList.push(values[index].id);
+            }
+
+            this.$broadcast("update-nodes", nodeList);
+        }.bind(this));
+    },
+
+    events:
+    {
+        "category-node-activated": function(payload)
+        {
+            CategoryRendererService.renderItems(payload.node);
+        }
+    }
+});
+
+},{"services/CategoryRendererService":68,"services/ResourceService":74}],11:[function(require,module,exports){
+Vue.component("category-side-menu-node", {
+
+    props: [
+        "template",
+        "node",
+        "nodeList",
+        "url"
+    ],
+
+    data: function()
+    {
+        return {
+            isActive: false
+        };
+    },
+
+    created: function()
+    {
+        this.url += "/" + this.node.details[0].nameUrl;
+
+        this.nodeList.push(this.node.id);
+
+        this.$options.template = this.template;
+
+        // when url of this node matches the browser pathname; the tree will be actualized
+        if (this.url === window.location.pathname)
+        {
+            this.sendCategoryHierarchy();
+        }
+    },
+
+    methods:
+    {
+        nodeClicked: function()
+        {
+            this.sendCategoryHierarchy();
+        },
+
+        /*
+         * triggers the event 'category-node-clicked' upward to all components;
+         * is used to tell CategorySideMenu that the tree must be updated
+         */
+        sendCategoryHierarchy: function()
+        {
+            this.$dispatch("category-node-activated", {nodeList: this.nodeList, node: this.node});
+        }
+    },
+
+    events:
+    {
+        /*
+         * listens to the event 'update-nodes' and forward it to all downward components;
+         * used to iterate through the children nodes of current instance, to check if the category-node is active
+         */
+        "update-nodes": function(nodeList)
+        {
+            this.isActive = nodeList.indexOf(this.node.id) >= 0;
+
+            this.$broadcast("update-nodes", nodeList);
+        }
+    }
+});
+
+},{}],12:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			/**
     * Initialise the event listener
@@ -34648,9 +34856,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.validate();
 				},
 
+<<<<<<< HEAD
 				validate: function validate() {
 					this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
 				},
+=======
+},{"services/ResourceService":74}],13:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				initDefaultPaymentProvider: function initDefaultPaymentProvider() {
 					// todo get entry from config | select first payment provider
@@ -34714,11 +34927,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							}
 						}
 
+<<<<<<< HEAD
 						for (var i in this.checkoutValidation) {
 							if (this.checkoutValidation[i].showError) {
 								return false;
 							}
 						}
+=======
+},{"services/ResourceService":74}],14:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 						return true;
 					},
@@ -34820,7 +35040,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ResourceService": 70 }], 12: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		Vue.component("address-input-group", {
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74}],15:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			props: ["addressData", "defaultCountry", "template"],
 
@@ -34901,9 +35126,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.addressList = [];
 				}
 
+<<<<<<< HEAD
 				this.addressModal = ModalService.findModal(this.$els.addressModal);
 				this.deleteModal = ModalService.findModal(this.$els.deleteModal);
 			},
+=======
+},{"services/ResourceService":74}],16:[function(require,module,exports){
+Vue.component("address-input-group", {
+>>>>>>> development
 
 			methods: {
 				/**
@@ -34950,12 +35180,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				},
 
+<<<<<<< HEAD
 				/**
      * Update the selected address
      * @param index
      */
 				onAddressChanged: function onAddressChanged(index) {
 					this.selectedAddress = this.addressList[index];
+=======
+},{}],17:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ModalService = require("services/ModalService");
+var AddressService = require("services/AddressService");
+>>>>>>> development
 
 					this.$dispatch("address-changed", this.selectedAddress);
 				},
@@ -35173,8 +35410,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					AddressService.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
 						this.addressData = newAddress;
 
+<<<<<<< HEAD
 						this.addressModal.hide();
 						this.addressList.push(this.addressData);
+=======
+},{"services/AddressService":66,"services/ApiService":67,"services/ModalService":72}],18:[function(require,module,exports){
+var AddressService    = require("services/AddressService");
+var ValidationService = require("services/ValidationService");
+>>>>>>> development
 
 						this.$dispatch("new-address-created", this.addressData);
 
@@ -35248,11 +35491,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["addressList", "selectedAddressId"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					checkout: {}
 				};
 			},
+=======
+},{"services/AddressService":66,"services/ValidationService":76}],19:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			/**
     * Initialise the event listener
@@ -35314,8 +35562,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			created: function created() {
 				this.$options.template = this.template;
 
+<<<<<<< HEAD
 				ResourceService.bind("localization", this);
 				this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+=======
+},{"services/ResourceService":74}],20:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				CountryService.translateCountryNames(this.countryNameMap, this.countryList);
 				CountryService.sortCountries(this.countryList);
@@ -35369,7 +35622,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		var ValidationService = require("services/ValidationService");
 
+<<<<<<< HEAD
 		Vue.component("registration", {
+=======
+},{"services/ResourceService":74}],21:[function(require,module,exports){
+var CountryService = require("services/CountryService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			props: {
 				modalElement: String,
@@ -35435,6 +35694,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					});
 				},
 
+<<<<<<< HEAD
 				/**
      * Handle the user object which is send to the server
      * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
@@ -35454,6 +35714,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							}
 						}
 					};
+=======
+},{"services/CountryService":70,"services/ResourceService":74}],22:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+>>>>>>> development
 
 					if (!this.guestMode) {
 						userObject.contact.password = this.password;
@@ -35542,8 +35808,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					ModalService.findModal(document.getElementById(this.modalElement)).show();
 				},
 
+<<<<<<< HEAD
 				validateLogin: function validateLogin() {
 					var self = this;
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],23:[function(require,module,exports){
+var ValidationService = require("services/ValidationService");
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 					ValidationService.validate($("#login-form-" + this._uid)).done(function () {
 						self.sendLogin();
@@ -35577,6 +35849,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							location.reload();
 						}
 
+<<<<<<< HEAD
 						self.isDisabled = false;
 					}).fail(function (response) {
 						switch (response.code) {
@@ -35586,6 +35859,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							default:
 								return;
 						}
+=======
+},{"services/ApiService":67,"services/ValidationService":76}],24:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+var ValidationService = require("services/ValidationService");
+>>>>>>> development
 
 						self.isDisabled = false;
 					});
@@ -35666,6 +35946,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						ResourceService.getResource("user").set({ isLoggedIn: true });
 					});
 
+<<<<<<< HEAD
 					ApiService.listen("AfterAccountContactLogout", function () {
 						self.username = "";
 						ResourceService.getResource("user").set({ isLoggedIn: false });
@@ -35675,6 +35956,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/ApiService": 64, "services/ResourceService": 70 }], 23: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],25:[function(require,module,exports){
+Vue.component("login-view", {
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 
@@ -35682,6 +35967,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["imageUrlAccessor", "template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					init: false,
@@ -35689,6 +35975,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					currentItem: 0
 				};
 			},
+=======
+},{}],26:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -35729,6 +36020,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.initCarousel();
 				},
 
+<<<<<<< HEAD
 				initCarousel: function initCarousel() {
 					var imageCount = this.getImageCount();
 
@@ -35746,6 +36038,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
 						smartSpeed: 350
 					});
+=======
+},{"services/ApiService":67,"services/ResourceService":74}],27:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 					$(this.$els.single).on("changed.owl.carousel", function (event) {
 						this.currentItem = event.page.index;
@@ -35831,9 +36127,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			ready: function ready() {
 				// initialize selected attributes to be tracked by change detection
 				var attributes = {};
+=======
+},{"services/ResourceService":74}],28:[function(require,module,exports){
+Vue.component("quantity-input", {
+>>>>>>> development
 
 				for (var attributeId in this.attributes) {
 					attributes[attributeId] = null;
@@ -35904,6 +36205,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			methods: {
 
+<<<<<<< HEAD
 				/**
      * Finds all variations matching a given set of attributes.
      * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
@@ -35912,6 +36214,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				filterVariations: function filterVariations(attributes) {
 					attributes = attributes || this.selectedAttributes;
 					return this.variations.filter(function (variation) {
+=======
+},{}],29:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 						for (var i = 0; i < variation.attributes.length; i++) {
 							var id = variation.attributes[i].attributeId;
@@ -36070,6 +36377,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				ItemListService.setCategoryId(this.categoryId);
 			},
 
+<<<<<<< HEAD
 			ready: function ready() {
 				ResourceService.bind("itemList", this);
 				ResourceService.bind("isLoading", this);
@@ -36123,6 +36431,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				};
 			},
+=======
+},{"services/ApiService":67,"services/ResourceService":74}],30:[function(require,module,exports){
+Vue.component("category-image-carousel", {
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -36133,6 +36445,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.setSelectedValueByUrl();
 			},
 
+<<<<<<< HEAD
 			methods: {
 				buildData: function buildData() {
 					for (var i in this.sortData) {
@@ -36141,6 +36454,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							value: data,
 							displayName: Translations.Template[this.dataTranslationMapping[data]]
 						};
+=======
+},{}],31:[function(require,module,exports){
+Vue.component("category-item", {
+>>>>>>> development
 
 						this.sortData[i] = sortItem;
 					}
@@ -36170,11 +36487,26 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		var _UrlService = require("services/UrlService");
 
+<<<<<<< HEAD
 		var _UrlService2 = _interopRequireDefault(_UrlService);
 
 		function _interopRequireDefault(obj) {
 			return obj && obj.__esModule ? obj : { default: obj };
 		}
+=======
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.itemData.texts;
+        }
+    }
+});
+
+},{}],32:[function(require,module,exports){
+Vue.component("item-lazy-img", {
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 		var ItemListService = require("services/ItemListService");
@@ -36183,6 +36515,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					searchString: "",
@@ -36193,6 +36526,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			created: function created() {
 				this.$options.template = this.template;
 			},
+=======
+        setTimeout(function()
+        {
+            $(self.$els.lazyImg).show().lazyload();
+        }, 1);
+    }
+});
+
+},{}],33:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 			ready: function ready() {
 				ResourceService.bind("itemSearch", this);
@@ -36241,10 +36586,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						}
 					});
 
+<<<<<<< HEAD
 					$(window).resize(function () {
 						$(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
 					});
 				},
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],34:[function(require,module,exports){
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 				transformSuggestionResult: function transformSuggestionResult(result) {
 					result = JSON.parse(result);
@@ -36290,9 +36641,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				getPercentageSale: function getPercentageSale() {
 					var percent = 100 - this.recommendedRetailPrice / this.variationRetailPrice * 100;
 
+<<<<<<< HEAD
 					return accounting.formatNumber(percent, this.decimalCount, "");
 				}
 			},
+=======
+},{"services/ItemListService":71,"services/UrlService":75}],35:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 			computed: {
 				label: function label() {
@@ -36343,12 +36701,23 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["columnsPerPage", "rowsPerPage", "template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					itemSearch: {},
 					paginationValues: []
 				};
 			},
+=======
+        transformSuggestionResult: function(result)
+        {
+            result = JSON.parse(result);
+            var suggestions =
+                {
+                    suggestions: $.map(result.data.documents, function(dataItem)
+                    {
+                        var value = dataItem.data.texts.name1;
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -36358,12 +36727,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.setSelectedValueByUrl();
 			},
 
+<<<<<<< HEAD
 			methods: {
 				itemsPerPageChanged: function itemsPerPageChanged() {
 					ItemListService.setItemsPerPage(this.itemSearch.items);
 					ItemListService.setPage(1);
 					ItemListService.getItemList();
 				},
+=======
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],36:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var accounting = require("accounting");
+>>>>>>> development
 
 				setSelectedValueByUrl: function setSelectedValueByUrl() {
 					var urlParams = _UrlService2.default.getUrlParams(document.location.search);
@@ -36404,6 +36779,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		Vue.component("pagination", {
 
+<<<<<<< HEAD
 			props: ["template"],
 
 			data: function data() {
@@ -36416,11 +36792,22 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			created: function created() {
 				this.$options.template = this.template;
+=======
+            return this.storeSpecial.names.name;
+        },
+>>>>>>> development
 
 				ResourceService.bind("itemSearch", this);
 				ResourceService.bind("itemList", this);
 
+<<<<<<< HEAD
 				var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+=======
+},{"accounting":78,"services/ResourceService":74}],37:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 				this.itemSearch.page = urlParams.page;
 			},
@@ -36461,9 +36848,26 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		var ResourceService = require("services/ResourceService");
 		var ItemListService = require("services/ItemListService");
 
+<<<<<<< HEAD
 		Vue.component("item-filter", {
 
 			props: ["template", "facet"],
+=======
+        initPaginationValues: function()
+        {
+            for (var rowKey in this.rowsPerPage)
+            {
+                this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
+            }
+        }
+    }
+});
+
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],38:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 			data: function data() {
 				return {
@@ -36519,10 +36923,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
+<<<<<<< HEAD
 				if (urlParams.facets) {
 					ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
 				}
 			},
+=======
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],39:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 			methods: {
 				toggleOpeningState: function toggleOpeningState() {
@@ -36542,12 +36952,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					facets: {},
 					facetParams: []
 				};
 			},
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],40:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template || "#vue-item-filter-tag-list";
@@ -36593,7 +37009,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		var APIService = require("services/APIService");
 		var NotificationService = require("services/NotificationService");
 
+<<<<<<< HEAD
 		Vue.component("account-settings", {
+=======
+},{"services/ResourceService":74,"services/UrlService":75}],41:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 			props: ["userData", "template"],
 
@@ -36672,6 +37094,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.clearFields();
 				},
 
+<<<<<<< HEAD
 				/**
      * Get the current email address of the user
      * @returns {*}
@@ -36680,6 +37103,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					return this.userData.options[0].value;
 				}
 			}
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],42:[function(require,module,exports){
+var ModalService        = require("services/ModalService");
+var APIService          = require("services/APIService");
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 		});
 	}, { "services/APIService": 62, "services/ModalService": 68, "services/NotificationService": 69 }], 39: [function (require, module, exports) {
@@ -36795,11 +37224,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					});
 				},
 
+<<<<<<< HEAD
 				/**
      * Update bank-data
      */
 				updateBankInfo: function updateBankInfo() {
 					var _self = this;
+=======
+},{"services/APIService":67,"services/ModalService":72,"services/NotificationService":73}],43:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+var ValidationService   = require("services/ValidationService");
+>>>>>>> development
 
 					this.updateBankData.lastUpdateBy = "customer";
 
@@ -36980,7 +37417,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ApiService": 64 }], 41: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var NotificationService = require("services/NotificationService");
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],44:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 		Vue.component("notifications", {
 
@@ -37060,12 +37502,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				for (var i in this.localization.activeShippingCountries) {
 					var country = this.localization.activeShippingCountries[i];
 
+<<<<<<< HEAD
 					country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
 				}
 			}
 		});
 	}, { "services/ResourceService": 70 }], 43: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ApiService":67}],45:[function(require,module,exports){
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 
@@ -37110,7 +37557,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
   *
   */
 
+<<<<<<< HEAD
 		Vue.component("wait-screen", {
+=======
+},{"services/NotificationService":73}],46:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			// template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
 
@@ -37166,9 +37618,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			bind: function bind() {
 				var firstRendering = true;
 
+<<<<<<< HEAD
 				ResourceService.watch("isLoading", function () {
 					if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null) {
 						$("#twig-rendered-item-list").remove();
+=======
+},{"services/ResourceService":74}],47:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 						document.getElementById("vue-rendered-item-list").style.removeProperty("display");
 					} else {
@@ -37203,12 +37660,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		});
 
+<<<<<<< HEAD
 		Vue.elementDirective("resource-list", {
 			priority: 10000,
 			params: ["name", "route", "data", "events", "responseTemplate"],
 			bind: function bind() {
 				var resource = ResourceService.registerResourceList(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
 				var events = this.params.events || [];
+=======
+},{"services/ResourceService":74}],48:[function(require,module,exports){
+var WaitScreenService = require("services/WaitScreenService");
+>>>>>>> development
 
 				for (var i = 0; i < events.length; i++) {
 					var event = events[i].split("!");
@@ -37234,8 +37696,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			bind: function bind() {
 				var self = this;
 
+<<<<<<< HEAD
 				ResourceService.watch(this.arg, function (value) {
 					var paths = self.expression.split(".");
+=======
+},{"services/WaitScreenService":77}],49:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 					for (var i = 0; i < paths.length; i++) {
 						var path = paths[i];
@@ -37243,7 +37710,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						value = value[path];
 					}
 
+<<<<<<< HEAD
 					var filters = self.params.filters || [];
+=======
+},{"services/ApiService":67}],50:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 					for (var j = 0; j < filters.length; j++) {
 						var filter = Vue.filter(self.params.filters[j]);
@@ -37255,9 +37727,38 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				});
 			}
 
+<<<<<<< HEAD
 		});
 	}, { "services/ResourceService": 70 }], 49: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ResourceService":74}],51:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+
+Vue.elementDirective("resource", {
+    priority: 10000,
+    params  : [
+        "name",
+        "route",
+        "data",
+        "events",
+        "responseTemplate"
+    ],
+    bind    : function()
+    {
+        var resource = ResourceService.registerResource(
+            this.params.name,
+            this.params.route,
+            this.params.data,
+            this.params.responseTemplate
+        );
+        var events = this.params.events || [];
+
+        for (var i = 0; i < events.length; i++)
+        {
+            var event = events[i].split("!");
+            var usePayload;
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 
@@ -37277,6 +37778,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					// eslint-disable-next-line
 					var condition = new Function(keys, "return " + self.expression);
 
+<<<<<<< HEAD
 					if (condition.apply(null, values)) {
 						self.el.style.display = display;
 					} else {
@@ -37284,6 +37786,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				});
 			}
+=======
+},{"services/ResourceService":74}],52:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 		});
 	}, { "services/ResourceService": 70 }], 50: [function (require, module, exports) {
@@ -37325,6 +37831,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		var CheckoutService = require("services/CheckoutService");
 
+<<<<<<< HEAD
 		Vue.directive("shipping-country", function (value) {
 			$(this.el).click(function (event) {
 				event.preventDefault();
@@ -37333,6 +37840,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/CheckoutService": 65 }], 53: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ResourceService":74}],53:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 		Vue.directive("tooltip", {
 
@@ -37366,8 +37877,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			var currency = customCurrency || basket.currency;
 
+<<<<<<< HEAD
 			if (currency) {
 				var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+=======
+},{"services/ResourceService":74}],54:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				if (currencySymbol) {
 					currency = currencySymbol;
@@ -37395,9 +37911,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			var input = args.shift();
 			var date;
 
+<<<<<<< HEAD
 			if (isNaN(new Date(input).getTime())) {
 				return input;
 			}
+=======
+},{"services/ResourceService":74}],55:[function(require,module,exports){
+Vue.directive("change-lang", function(value)
+{
+    $(this.el).click(function(event)
+    {
+        var subPath = window.location.pathname.split("/");
+>>>>>>> development
 
 			if (Array.isArray(input) && typeof input[0] === "string") {
 				// If input is array, assume we're being passed a format pattern to parse against.
@@ -37415,18 +37940,29 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				return input;
 			}
 
+<<<<<<< HEAD
 			function parse() {
 				var args = Array.prototype.slice.call(arguments);
 				var method = args.shift();
+=======
+},{}],56:[function(require,module,exports){
+var CheckoutService = require("services/CheckoutService");
+>>>>>>> development
 
 				switch (method) {
 					case "add":
 
+<<<<<<< HEAD
 						// Mutates the original moment by adding time.
 						// http://momentjs.com/docs/#/manipulating/add/
+=======
+},{"services/CheckoutService":69}],57:[function(require,module,exports){
+Vue.directive("tooltip", {
+>>>>>>> development
 
 						var addends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
 
+<<<<<<< HEAD
 						obj = {};
 						for (var aId = 0; aId < addends.length; aId++) {
 							var addend = addends[aId].split(" ");
@@ -37437,6 +37973,24 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						break;
 
 					case "subtract":
+=======
+},{}],58:[function(require,module,exports){
+Vue.filter("arrayFirst", function(array)
+{
+    return array[0];
+});
+
+},{}],59:[function(require,module,exports){
+Vue.filter("attachText", function(item, text)
+{
+    return text + item;
+});
+
+},{}],60:[function(require,module,exports){
+var ResourceService   = require("services/ResourceService");
+var currencySymbolMap = require("currency-symbol-map");
+var accounting        = require("accounting");
+>>>>>>> development
 
 						// Mutates the original moment by subtracting time.
 						// http://momentjs.com/docs/#/manipulating/subtract/
@@ -37457,7 +38011,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						// Display a moment in relative time, either from now or from a specified date.
 						// http://momentjs.com/docs/#/displaying/fromnow/
 
+<<<<<<< HEAD
 						var from = "now";
+=======
+},{"accounting":78,"currency-symbol-map":79,"services/ResourceService":74}],61:[function(require,module,exports){
+// for docs see https://github.com/brockpetrie/vue-moment
+>>>>>>> development
 
 						if (args[0] === "now") args.shift();
 
@@ -37594,7 +38153,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		module.exports = function ($) {
 
+<<<<<<< HEAD
 			var _eventListeners = {};
+=======
+},{}],62:[function(require,module,exports){
+Vue.filter("itemImage", function(item, baseUrl)
+{
+    var imageList = item.variationImageList;
+>>>>>>> development
 
 			return {
 				get: _get,
@@ -37637,11 +38203,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				return _send(url, data, config);
 			}
 
+<<<<<<< HEAD
 			function _post(url, data, config) {
 				config = config || {};
 				config.method = "POST";
 				return _send(url, data, config);
 			}
+=======
+},{}],63:[function(require,module,exports){
+Vue.filter("itemImages", function(images, accessor)
+{
+    var imageUrls = [];
+    var imagesAccessor = "all";
+>>>>>>> development
 
 			function _delete(url, data, config) {
 				config = config || {};
@@ -37673,6 +38247,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				}).fail(function (jqXHR) {
 					var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
+<<<<<<< HEAD
 					if (!config.supressNotifications) {
 						printMessages(response);
 					}
@@ -37685,10 +38260,28 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				return deferred;
 			}
+=======
+},{}],64:[function(require,module,exports){
+Vue.filter("itemName", function(item, selectedName)
+{
+    if (selectedName === "0" && item.name1 !== "")
+    {
+        return item.name1;
+    }
+    else if (selectedName === "1" && item.name2 !== "")
+    {
+        return item.name2;
+    }
+    else if (selectedName === "2" && item.name3 !== "")
+    {
+        return item.name3;
+    }
+>>>>>>> development
 
 			function printMessages(response) {
 				var notification;
 
+<<<<<<< HEAD
 				if (response.error && response.error.message.length > 0) {
 					notification = NotificationService.error(response.error);
 				}
@@ -37696,14 +38289,93 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				if (response.success && response.success.message.length > 0) {
 					notification = NotificationService.success(response.success);
 				}
+=======
+},{}],65:[function(require,module,exports){
+Vue.filter("itemURL", function(item)
+{
+    var urlPath = item.texts.urlPath;
+
+    if (urlPath && urlPath.length > 0)
+    {
+        return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
+    }
+>>>>>>> development
 
 				if (response.warning && response.warning.message.length > 0) {
 					notification = NotificationService.warning(response.warning);
 				}
 
+<<<<<<< HEAD
 				if (response.info && response.info.message.length > 0) {
 					notification = NotificationService.info(response.info);
 				}
+=======
+},{}],66:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":67,"services/CheckoutService":69}],67:[function(require,module,exports){
+var NotificationService = require("services/NotificationService");
+var WaitScreenService   = require("services/WaitScreenService");
+>>>>>>> development
 
 				if (response.debug && response.debug.class.length > 0) {
 					notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
@@ -37872,6 +38544,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				});
 
+<<<<<<< HEAD
 				return deferred;
 			}
 
@@ -37901,6 +38574,177 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				}
 			}
+=======
+},{"services/NotificationService":73,"services/WaitScreenService":77}],68:[function(require,module,exports){
+var ItemListService = require("services/ItemListService");
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+
+module.exports = (function($)
+{
+    var _categoryTree = {};
+    var _categoryBreadcrumbs = [];
+    var _validate = false;
+
+    return {
+        initialize: _initialize,
+        getScopeUrl: _getScopeUrl,
+        renderItems: _renderItems
+    };
+
+    /**
+     * initialize the service with the category tree
+     * @param categoryTree
+     * @private
+     */
+    function _initialize(categoryTree)
+    {
+        _categoryTree = categoryTree;
+    }
+
+    /**
+     * check if current view is category
+     * @param categories - default
+     * @param paths - the url paths to parse
+     */
+    function _isCategoryView(paths, categories)
+    {
+        categories = categories || _categoryTree;
+
+        for (var currentCategory in categories)
+        {
+            if (paths[paths.length - 1].indexOf(categories[currentCategory].details[0].nameUrl) > -1)
+            {
+                return true;
+            }
+
+            if (categories[currentCategory].children)
+            {
+                var isCategory = _isCategoryView(paths, categories[currentCategory].children);
+
+                if (isCategory)
+                {
+                    return isCategory;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * render items in relation to location
+     * @param currentCategory
+     */
+    function _renderItems(currentCategory)
+    {
+        if (!_isCategoryView(window.location.pathname.split("/")))
+        {
+            window.open(_getScopeUrl(currentCategory), "_self");
+        }
+        else
+        {
+            _handleCurrentCategory(currentCategory);
+        }
+    }
+
+    /**
+     * bundle functions
+     * @param currentCategory
+     */
+    function _handleCurrentCategory(currentCategory)
+    {
+        _updateItemList(currentCategory);
+        _updateHistory(currentCategory);
+        _updateBreadcrumbs();
+    }
+
+    function _updateBreadcrumbs()
+    {
+        ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
+    }
+
+    /**
+     * update the current item list without reloading
+     * @param currentCategory
+     */
+    function _updateItemList(currentCategory)
+    {
+        ItemListService.setCategoryId(currentCategory.id);
+
+        ItemListService.setPage(1);
+        ItemListService.setFacets("");
+        ItemListService.getItemList();
+    }
+
+    /**
+     * update page informations
+     * @param currentCategory
+     */
+    function _updateHistory(currentCategory)
+    {
+        var title = document.getElementsByTagName("title")[0].innerHTML;
+
+        window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
+
+        document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    }
+
+    /**
+     * get the current scope url
+     * @param currentCategory
+     * @param scopeUrl - default
+     * @param categories - default
+     */
+    function _getScopeUrl(currentCategory, scopeUrl, categories)
+    {
+        scopeUrl = scopeUrl || "";
+        categories = categories || _categoryTree;
+
+        if (scopeUrl.length == 0)
+        {
+            _categoryBreadcrumbs = [];
+        }
+
+        for (var category in categories)
+        {
+            if (_validate && categories[category].details.length == 0)
+            {
+                NotificationService.error("Kategorie nicht geladen: " + categories[category].id).closeAfter(10000);
+            }
+
+            if (categories[category].id == currentCategory.id)
+            {
+                scopeUrl += "/" + categories[category].details[0].nameUrl;
+
+                _categoryBreadcrumbs.push(categories[category]);
+
+                return scopeUrl;
+            }
+
+            if (categories[category].children)
+            {
+                var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
+
+                var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
+
+                if (urlScope.length > 0)
+                {
+                    _categoryBreadcrumbs.push(categories[category]);
+
+                    return urlScope;
+                }
+            }
+        }
+
+        return "";
+    }
+
+})(jQuery);
+
+},{"services/ItemListService":71,"services/NotificationService":73,"services/ResourceService":74}],69:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 			function _setToken(token) {
 				this._token = token;
@@ -37976,9 +38820,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				return _set("methodOfPaymentId", methodOfPaymentId);
 			}
 
+<<<<<<< HEAD
 			function setShippingCountryId(shippingCountryId) {
 				return _set("shippingCountryId", shippingCountryId);
 			}
+=======
+},{"services/ApiService":67}],70:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 			function setShippingProfileId(shippingProfileId) {
 				return _set("shippingProfileId", shippingProfileId);
@@ -38056,11 +38906,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				}
 
+<<<<<<< HEAD
 				return states;
 			}
 		}(jQuery);
 	}, {}], 67: [function (require, module, exports) {
 		"use strict";
+=======
+},{}],71:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 		var _UrlService = require("services/UrlService");
 
@@ -38150,8 +39008,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				searchParams.query = query;
 				searchParams.page = 1;
 
+<<<<<<< HEAD
 				setPage(1);
 				setFacets("");
+=======
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
+        UrlService.setUrlParam("items", items);
+    }
+>>>>>>> development
 
 				ResourceService.getResource("facets").set({});
 				ResourceService.getResource("facetParams").set([]);
@@ -38186,7 +39050,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				facets = facets.toString().length > 0 ? facets.toString() : null;
 
+<<<<<<< HEAD
 				setPage(1);
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74,"services/UrlService":75}],72:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 				_UrlService2.default.setUrlParam("facets", facets);
 			}
@@ -38282,11 +39152,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						if (!paused) {
 							var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
 
+<<<<<<< HEAD
 							secondsRemaining = Math.round(secondsRemaining / 1000);
 							$bsModal.find(".timer").text(secondsRemaining);
 						}
 					}, 1000);
 				}
+=======
+},{}],73:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 				function pauseTimeout() {
 					paused = true;
@@ -38455,9 +39331,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					remove: remove
 				};
 
+<<<<<<< HEAD
 				function all() {
 					return elements;
 				}
+=======
+},{}],74:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 				function add(notification) {
 					elements.push(notification);
@@ -48298,8 +49179,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						}).append(this);
 					}
 
+<<<<<<< HEAD
 					return this;
 				},
+=======
+},{"services/ApiService":67}],75:[function(require,module,exports){
+module.exports = (function($)
+{
+    return {
+        getUrlParams: _getUrlParams,
+        setUrlParam: _setUrlParam
+    };
+>>>>>>> development
 
 				wrapInner: function wrapInner(html) {
 					if (jQuery.isFunction(html)) {
@@ -48360,9 +49251,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				if (jQuery.isArray(obj)) {
 
+<<<<<<< HEAD
 					// Serialize array item.
 					jQuery.each(obj, function (i, v) {
 						if (traditional || rbracket.test(prefix)) {
+=======
+},{}],76:[function(require,module,exports){
+module.exports = (function($)
+{
+    var $form;
+>>>>>>> development
 
 							// Treat each array item as a scalar.
 							add(prefix, v);
@@ -48651,6 +49549,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			var oldCallbacks = [],
 			    rjsonp = /(=)\?(?=&|$)|\?\?/;
 
+<<<<<<< HEAD
 			// Default jsonp settings
 			jQuery.ajaxSetup({
 				jsonp: "callback",
@@ -48660,6 +49559,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					return callback;
 				}
 			});
+=======
+},{}],77:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 			// Detect, normalize options and install callbacks for jsonp requests
 			jQuery.ajaxPrefilter("json jsonp", function (s, originalSettings, jqXHR) {
@@ -48702,9 +49606,23 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					// Clean-up function (fires after converters)
 					jqXHR.always(function () {
 
+<<<<<<< HEAD
 						// If previous value didn't exist - remove it
 						if (overwritten === undefined) {
 							jQuery(window).removeProp(callbackName);
+=======
+},{}],78:[function(require,module,exports){
+/*!
+ * accounting.js v0.4.1
+ * Copyright 2014 Open Exchange Rates
+ *
+ * Freely distributable under the MIT license.
+ * Portions of accounting.js are inspired or borrowed from underscore.js
+ *
+ * Full details and documentation:
+ * http://openexchangerates.github.io/accounting.js/
+ */
+>>>>>>> development
 
 							// Otherwise restore preexisting value
 						} else {
@@ -49134,6 +50052,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			// Map over jQuery in case of overwrite
 			_jQuery = window.jQuery,
 
+<<<<<<< HEAD
+=======
+},{}],79:[function(require,module,exports){
+var currencySymbolMap = require('./map');
+>>>>>>> development
 
 			// Map over the $ in case of overwrite
 			_$ = window.$;
@@ -49143,9 +50066,153 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					window.$ = _$;
 				}
 
+<<<<<<< HEAD
 				if (deep && window.jQuery === jQuery) {
 					window.jQuery = _jQuery;
 				}
+=======
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+},{"./map":80}],80:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,22,27,28,29,30,31,39,40,41,32,33,34,35,37,36,38,42,43,44,45,46,47,48,49,50,55,56,51,52,53,54,57,58,59,60,61,62,63,64,65])
+>>>>>>> development
 
 				return jQuery;
 			};
@@ -49167,6 +50234,76 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
+
+        var menu = $("#mainNavbarCollapsable");
+        var breadcrumb = menu.find("ul.breadcrumb");
+
+        $("#btnMainMenuToggler").click(function()
+        {
+            $("#mainNavbarCollapsable").toggleClass("open");
+            $("body").toggleClass("menu-is-visible");
+        });
+
+        $("#mainNavbarCollapsable .btnClose").click(function()
+        {
+            $("#mainNavbarCollapsable").removeClass("open");
+            $("body").removeClass("menu-is-visible");
+        });
+
+        function buildBreadcrumb()
+        {
+            var openElements = menu.find("li.open");
+            var breadcrumbArray = [Translations.Template.generalBigAll];
+
+            $(openElements).each(function()
+            {
+                breadcrumbArray.push($(this).children("a").text());
+            });
+
+            breadcrumb.find("li").not(".btnClose").remove();
+
+            $(breadcrumbArray).each(function()
+            {
+                breadcrumb.append("<li class=\"breadcrumb-item\">" + this + "</li>");
+            });
+            breadcrumb.find("li").not(".btnClose").click(function()
+            {
+                $(this).nextAll().remove();
+                closeSubCategories();
+            });
+
+        }
+
+        function closeSubCategories()
+        {
+            var openElements = menu.find("li.open");
+            var breadTotal = (breadcrumb.find("li").not(".btnClose").length) - 1;
+
+            $(openElements).each(function(i, vaa)
+            {
+                if (i >= breadTotal)
+                {
+                    $(this).removeClass("open");
+                }
+                openElements = menu.find("li.open");
+            });
+        }
+
+        menu.find("li>a").click(function(evt)
+        {
+            var paa = $(this).width() - evt.offsetX;
+
+            if (paa < 0)
+            {
+                evt.preventDefault();
+                $(this).closest(".ddown").addClass("open");
+                buildBreadcrumb();
+            }
+            $("#mainNavbarCollapsable").scrollTop = 0;
+            $("#mainNavbarCollapsable").animate({scrollTop: 0}, "fast");
+        });
+
+        buildBreadcrumb();
 
         $(window).scroll(function()
         {
@@ -49301,25 +50438,30 @@ var init = (function($, window, document)
             $("#mainNavbarCollapse").collapse("hide");
         }
 
-        // initialize lazyload for articles
-        $("img.lazy").show().lazyload({
-            effect: "fadeIn"
-        });
-        // test, to delete
-        $("img.testtest").show().lazyload({
-            effect : "fadeIn"
-        });
-
-        $(".cmp-product-thumb").on("mouseover", function(event)
+        $(document).ready(function()
         {
-            $(this).find("img").each(function(i, img)
-            {
-                var $img = $(img);
+            var offset = 250;
+            var duration = 300;
 
-                if (!$img.attr("src"))
+            $(window).scroll(function()
+            {
+                if ($(this).scrollTop() > offset)
                 {
-                    $(img).lazyload();
+                    $(".back-to-top").fadeIn(duration);
                 }
+                else
+                {
+                    $(".back-to-top").fadeOut(duration);
+                }
+            });
+
+            $(".back-to-top").click(function(event)
+            {
+                event.preventDefault();
+
+                $("html, body").animate({scrollTop: 0}, duration);
+
+                return false;
             });
         });
     }

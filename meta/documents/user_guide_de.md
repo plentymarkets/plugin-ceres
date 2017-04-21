@@ -2,9 +2,9 @@
 
 <div class="container-toc"></div>
 
-**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **Io** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden.
+**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **Io** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden. In diesem User Guide erfahren Sie, wie Sie <a href="#10.">Ceres einrichten</a> und wie Sie <a href="#20.">Ceres individualisieren</a>.
 
-## Ceres in plentymarkets einrichten
+## Ceres in plentymarkets einrichten<a id="10."></a>
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
@@ -51,7 +51,11 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Tab <strong>Dokumente</strong> einer Kategorie hochgeladen werden.</td>
+<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>layout</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Logo-Bild führt.</td>
+</tr>
+<tr>
+<td><b>Position of the navigation bar</b></td>  
+<td>Position wählen, an der die Navigationsleiste im Webshop angezeigt wird.<br /> <strong>At the top</strong> = Navigationsleiste im Webshop oben anzeigen.<br /> <strong>On the left</strong> = Navigationsleiste im Webshop links anzeigen.<br /> <strong>At the top and on the left</strong> = Navigationsleiste im Webshop oben und links anzeigen.</td>
 </tr>
 <tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  
@@ -144,6 +148,10 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td><b>Show image carousel navigation in category item list</b></td>  
 <td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht Navigationspfeile anzuzeigen.</td>
 </tr>
+<tr>
+<td><b>Loading animation</b></td>  
+<td>Ladeanimation für die Kategorieansicht wählen.<br /> <strong>Blur</strong> = Die Kategorieansicht wird beim Laden kurz verschwommen dargestellt.<br /> <strong>Bars</strong> = Beim Laden der Kategorienansicht wird eine Ladeanimation mit Balken angezeigt.<br /> <strong>Spinner</strong> = Beim Laden der Kategorieansicht wird eine Ladeanimation mit Spinner angezeigt.</td>
+</tr>
 </tbody>
 <caption>Tab. 2: Artikelansicht anpassen</caption>
 </table>
@@ -226,14 +234,14 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <tr>
 <td><b>Always show last page</b></td>  
 <td>Aktivieren, um die letzte Seite in der Paginierung immer anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Columns per page</b></td>  
+<td>Anzahl der Spalten wählen, die als Berechnungsgrundlage für das Dropdown-Menü <strong>Artikel pro Seite</strong> genutzt wird.</td>
 </tr>  
 <tr>
-<td><b>Enable number of items per page</b></td>  
-<td>Einen, mehrere oder alle Zahlenwerte aktivieren, um die gewählten Werte im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht anzuzeigen.</td>
-</tr>  
-<tr>
-<td><b>Default number of items per page</b></td>  
-<td>Standardwert für die Anzahl der Artikel in der Artikelliste wählen.</td>
+<td><b>Rows per page</b></td>  
+<td>Einen, mehrere oder alle Zahlenwerte aktivieren. Die aktivierten Werte werden mit den Spalten multipliziert und im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht angezeigt.</td>
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
@@ -352,6 +360,33 @@ Weitere Informationen zu Merkmalen finden Sie unter [Merkmale verwalten](https:/
 
 Anschließend erstellen Sie passende Facetten für Attribute und Merkmale. Weitere Informationen zu Facetten finden Sie unter [Facetten anlegen](https://www.plentymarkets.eu/handbuch/mandant-shop/globale-einstellungen/externe-dienste/facettensuche/#2-1).
 Eine ausführliche Anleitung zur Einrichtung von Filtern finden Sie auch in unserem [Forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679).
+
+## Ceres individualisieren<a id="20."></a>
+
+Ihnen stehen verschiedene Möglichkeiten zur Verfügung, um das Template-Plugin **Ceres** zu individualisieren und an Ihre Bedürfnisse anzupassen.
+
+### Eigenes Template erstellen
+
+**Ceres** steht als öffentliches Projekt auf [GitHub](https://github.com/plentymarkets/plugin-ceres) zur Verfügung. Den Plugin-Code können Sie als Vorlage nutzen, um Ihr eigenes Template-Plugin zu erstellen. Beachten Sie folgende Punkte, um ein eigenes Template auf Basis von **Ceres** zu erstellen:
+ 
+* Bei [GitHub](https://github.com/join?source=header-home) registrieren
+* Projekt [Ceres](https://github.com/plentymarkets/plugin-ceres) öffnen
+* Eigenen Fork des Projekts erstellen
+* Quellcode anpassen
+ 
+ Wie Sie den Quellcode anpassen, erfahren Sie in unserem [Template Guide](https://developers.plentymarkets.com/dev-doc/template-plugins).
+ 
+<div class="alert alert-warning" role="alert">
+    Beachten Sie, dass Sie Ihr eigenes Template manuell aktualisieren müssen, wenn Sie Funktionen aus einer neuen Version des Plugins <strong>Ceres</strong> nutzen möchten. Automatische Plugin-Aktualisierungen stehen in plentymarkets nur für Plugins von plentyMarketplace zur Verfügung.
+</div>
+
+### Theme in plentyMarketplace kaufen
+
+Theme-Plugins bieten eine einfachere Möglichkeit **Ceres** nach Ihren Wünschen optisch anzupassen. In plentyMarketplace finden Sie bereits verschiedene [Themes](https://marketplace.plentymarkets.com/plugins/themes), die das Aussehen von **Ceres** verändern. Anpassungen am Theme-Plugin wirken sich nicht auf Aktualisierungen des Template-Plugins **Ceres** aus. 
+
+### Eigenes Theme erstellen
+
+In unserem [Theme Guide](https://developers.plentymarkets.com/dev-doc/theme-plugins) finden Sie ausführliche Infomationen darüber, wie Sie Ihr eigenes Theme-Plugin erstellen und **Ceres** damit vollständig individualisieren. 
 
 ## Lizenz
 

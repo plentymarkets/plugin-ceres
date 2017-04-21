@@ -1,0 +1,64 @@
+{% macro get_nav_bar(categories, currentScopeUrl) %}
+
+    {{ component("Ceres::Category.Components.CategoryNavBarHeader") }}
+
+    <noscript>
+
+        {% for category in categories %}
+
+            {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+
+            {% if category.children %}
+
+                <li class="ddown">
+                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
+                    <ul data-level="1">
+
+                        {% for child in category.children %}
+
+                            <li>
+                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}">{{ child.details[0].name }}</a>
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </li>
+
+            {% else %}
+
+                <li>
+                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
+                </li>
+
+            {% endif %}
+        {% endfor %}
+
+    </noscript>
+
+    <category-renderer template="#vue-category-nav-bar-header" categories="{{ categories | json_encode() }}"></category-renderer>
+
+{% endmacro %}
+
+{% macro get_sidemenu(categories, currentScopeUrl) %}
+
+    {% import _self as sidemenu %}
+
+    {% set urlNow = currentScopeUrl %}
+
+        {% for category in categories %}
+
+            {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
+
+            <ul>
+                <li class="nav-item active">
+                    <a href="{{ urlNow }}" class="nav-link">{{ category.details[0].name }}</a>
+                    {% if category.children is not empty %}
+                        {{ sidemenu.get_sidemenu(category.children, urlNow) }}
+                    {% endif %}
+                </li>
+            </ul>
+
+        {% endfor %}
+
+{% endmacro %}

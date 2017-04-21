@@ -31,19 +31,19 @@
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_etsy.png",
         "pluginText": "Plugin für Etsy-Marktplatzintegration",
-        "pluginLink": "https://marketplace.plentymarkets.com/de/etsy/4689",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/plugins/plentymarkets-GmbH/Etsy_4689",
         "pluginTitle": "Etsy"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_contact.png",
         "pluginText": "Anzeige von Kontaktdaten im Webshop",
-        "pluginLink": "https://marketplace.plentymarkets.com/de/contactcard/4695",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/plugins/plentymarkets-gmbh/contactcard_4695",
         "pluginTitle": "Contact Card"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
         "pluginText": "Das offizielle PayPal-Plugin für plentymarkets",
-        "pluginLink": "https://marketplace.plentymarkets.com/de/paypal/4690",
+        "pluginLink": "https://marketplace.plentymarkets.com/de/plugins/plentymarkets-GmbH/PayPal_4690",
         "pluginTitle": "PayPal"
       }
       
@@ -81,19 +81,19 @@
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_etsy.png",
         "pluginText": "Plugin for integrating the market Etsy",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/etsy/4689",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/plugins/plentymarkets-GmbH/Etsy_4689",
         "pluginTitle": "Etsy"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_contact.png",
         "pluginText": "Displaying contact data in the online store",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/contactcard/4695",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/plugins/plentymarkets-gmbh/contactcard_4695",
         "pluginTitle": "Contact Card"
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
         "pluginText": "The official PayPal plugin for plentymarkets",
-        "pluginLink": "https://marketplace.plentymarkets.com/en/paypal/4690",
+        "pluginLink": "https://marketplace.plentymarkets.com/en/plugins/plentymarkets-GmbH/PayPal_4690",
         "pluginTitle": "PayPal"
       }
     ]

@@ -7,9 +7,9 @@
   "variation.availability.names.name",
   "variation.itemId",
   "variation.id",
-  "images.all.urlPreview",
-  "images.all.url",
+  "item.id",
+  "images.all.url*",
   "images.variation.urlPreview",
   "properties.group.backendName",
-  "properties.property.names.name",
+  "properties.property.names.name"
 ]

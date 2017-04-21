@@ -1,5 +1,8 @@
-{% set itemsPerPage     = request.get("items_per_page") | default( config('Ceres.pagination.defaultItemsPerPage') ) %}
-{% set itemSorting      = request.get("itemSorting") | default( config('Ceres.sort.defaultSorting') ) %}
+{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
+{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
+{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
+{% set itemsPerPage     = request.get("items") | default( itemsPerPage ) %}
+{% set itemSorting      = request.get("sorting") | default( config('Ceres.sort.defaultSorting') ) %}
 {% set query            = { 'items_per_page' : itemsPerPage, 'itemSorting' : itemSorting } %}
 
 {% set page             = paginatedResult.getPage() %}

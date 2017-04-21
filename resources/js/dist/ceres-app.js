@@ -131,6 +131,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				};
 			},
 
+<<<<<<< HEAD
 			created: function created() {
 				this.$options.template = this.template;
 			},
@@ -143,6 +144,22 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					return this.item.variation.id;
 				}
 			},
+=======
+    computed:
+    {
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.basketItem.currentBasketItem.texts;
+        }
+    }
+});
+
+},{"services/ModalService":72,"services/ResourceService":74}],2:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			methods: {
 				/**
@@ -204,6 +221,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			/**
     * Bind to basket and bind the basket items
     */
@@ -214,6 +232,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/ResourceService": 70 }], 4: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ResourceService":74}],3:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 
@@ -231,12 +253,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			/**
     * Bind to basket
     */
 			ready: function ready() {
 				ResourceService.bind("basket", this);
 			},
+=======
+},{"services/ResourceService":74}],4:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			methods: {
 				/**
@@ -273,6 +300,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				ResourceService.bind("basket", this);
 			},
 
+<<<<<<< HEAD
 			ready: function ready() {
 				if (this.disabled) {
 					this.couponCode = this.basket.couponCode;
@@ -307,6 +335,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					});
 				}
 			},
+=======
+},{"services/ResourceService":74}],5:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 			computed: {
 				disabled: function disabled() {
@@ -358,10 +392,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		// var ApiService          = require("services/ApiService");
 		// var NotificationService = require("services/NotificationService");
 
+<<<<<<< HEAD
 		Vue.component("basket-list-item", {
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74}],6:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+>>>>>>> development
 
 			props: ["basketItem", "size", "language", "template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					waiting: false,
@@ -370,6 +410,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					itemCondition: ""
 				};
 			},
+=======
+    props: [
+        "size",
+        "template",
+        "triggerEvent"
+    ],
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -380,6 +427,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				/**
      * Delete item from basket
      */
+<<<<<<< HEAD
 				deleteItem: function deleteItem() {
 					var self = this;
 
@@ -408,6 +456,32 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 					this.basketItem.quantity = quantity;
 					this.waiting = true;
+=======
+    ready: function()
+    {
+        ResourceService.bind("basketItems", this);
+
+        if (this.triggerEvent)
+        {
+            ResourceService.watch("basket", function(newValue, oldValue)
+            {
+                if (oldValue)
+                {
+                    if (JSON.stringify(newValue) != JSON.stringify(oldValue))
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                    }
+                }
+            });
+        }
+    }
+});
+
+},{"services/ResourceService":74}],7:[function(require,module,exports){
+var ResourceService       = require("services/ResourceService");
+// var ApiService          = require("services/ApiService");
+// var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 					ResourceService.getResource("basketItems").set(this.basketItem.id, this.basketItem).fail(function () {
 						this.waiting = false;
@@ -462,7 +536,212 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ResourceService": 70 }], 9: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var ResourceService = require("services/ResourceService");
+=======
+},{"services/ResourceService":74}],8:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("category-breadcrumbs", {
+
+    props: [
+        "template",
+        "categories",
+        "currentCategoryTree"
+    ],
+
+    data: function()
+    {
+        return {
+            breadcrumbs: {}
+        };
+    },
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        this.init();
+    },
+
+    methods:
+    {
+        /**
+         * initialize values
+         */
+        init: function()
+        {
+            this.categories = JSON.parse(this.categories);
+            this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
+
+            ResourceService.bind("breadcrumbs", this);
+            ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
+
+            CategoryRendererService.initialize(this.categories);
+        },
+
+        /**
+         * render items in relation to location
+         * @param currentCategory
+         */
+        renderItems: function(currentCategory)
+        {
+            CategoryRendererService.renderItems(currentCategory);
+        }
+    }
+});
+
+},{"services/CategoryRendererService":68,"services/ResourceService":74}],9:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+
+Vue.component("category-renderer", {
+
+    props: [
+        "template",
+        "categories"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        this.init();
+    },
+
+    methods:
+    {
+        /**
+         * initialize values
+         */
+        init: function()
+        {
+            this.categories = JSON.parse(this.categories);
+
+            CategoryRendererService.initialize(this.categories);
+        },
+
+        /**
+         * render items in relation to location
+         * @param currentCategory
+         */
+        renderItems: function(currentCategory)
+        {
+            CategoryRendererService.renderItems(currentCategory);
+        }
+
+    }
+});
+
+},{"services/CategoryRendererService":68}],10:[function(require,module,exports){
+var CategoryRendererService = require("services/CategoryRendererService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("category-side-menu", {
+
+    props: [
+        "template",
+        "categories"
+    ],
+
+    created: function()
+    {
+        this.$options.template = this.template;
+
+        CategoryRendererService.initialize(this.categories);
+    },
+
+    ready: function()
+    {
+        ResourceService.watch("breadcrumbs", function(values)
+        {
+            var nodeList = [];
+
+            for (var index in values)
+            {
+                nodeList.push(values[index].id);
+            }
+
+            this.$broadcast("update-nodes", nodeList);
+        }.bind(this));
+    },
+
+    events:
+    {
+        "category-node-activated": function(payload)
+        {
+            CategoryRendererService.renderItems(payload.node);
+        }
+    }
+});
+
+},{"services/CategoryRendererService":68,"services/ResourceService":74}],11:[function(require,module,exports){
+Vue.component("category-side-menu-node", {
+
+    props: [
+        "template",
+        "node",
+        "nodeList",
+        "url"
+    ],
+
+    data: function()
+    {
+        return {
+            isActive: false
+        };
+    },
+
+    created: function()
+    {
+        this.url += "/" + this.node.details[0].nameUrl;
+
+        this.nodeList.push(this.node.id);
+
+        this.$options.template = this.template;
+
+        // when url of this node matches the browser pathname; the tree will be actualized
+        if (this.url === window.location.pathname)
+        {
+            this.sendCategoryHierarchy();
+        }
+    },
+
+    methods:
+    {
+        nodeClicked: function()
+        {
+            this.sendCategoryHierarchy();
+        },
+
+        /*
+         * triggers the event 'category-node-clicked' upward to all components;
+         * is used to tell CategorySideMenu that the tree must be updated
+         */
+        sendCategoryHierarchy: function()
+        {
+            this.$dispatch("category-node-activated", {nodeList: this.nodeList, node: this.node});
+        }
+    },
+
+    events:
+    {
+        /*
+         * listens to the event 'update-nodes' and forward it to all downward components;
+         * used to iterate through the children nodes of current instance, to check if the category-node is active
+         */
+        "update-nodes": function(nodeList)
+        {
+            this.isActive = nodeList.indexOf(this.node.id) >= 0;
+
+            this.$broadcast("update-nodes", nodeList);
+        }
+    }
+});
+
+},{}],12:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 		Vue.component("payment-provider-select", {
 
@@ -486,8 +765,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				this.checkoutValidation.paymentProvider.validate = this.validate;
 
+<<<<<<< HEAD
 				this.initDefaultPaymentProvider();
 			},
+=======
+},{"services/ResourceService":74}],13:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			methods: {
 				/**
@@ -650,8 +934,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				ResourceService.bind("checkout", this);
 				ResourceService.bind("checkoutValidation", this);
 
+<<<<<<< HEAD
 				this.checkoutValidation.shippingProfile.validate = this.validate;
 			},
+=======
+},{"services/ResourceService":74}],14:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			methods: {
 				/**
@@ -813,6 +1104,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.$dispatch("address-changed", this.selectedAddress);
 				},
 
+<<<<<<< HEAD
 				/**
      * Check whether the address list is empty
      * @returns {boolean}
@@ -820,6 +1112,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				isAddressListEmpty: function isAddressListEmpty() {
 					return !(this.addressList && this.addressList.length > 0);
 				},
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74}],15:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				/**
      * Check whether a company name exists and show it in bold
@@ -957,11 +1253,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					waiting: false
 				};
 			},
+=======
+},{"services/ResourceService":74}],16:[function(require,module,exports){
+Vue.component("address-input-group", {
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -1004,10 +1305,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						for (var key in this.addressList) {
 							var address = this.addressList[key];
 
+<<<<<<< HEAD
 							if (address.id === this.addressData.id) {
 								for (var attribute in this.addressList[key]) {
 									this.addressList[key][attribute] = this.addressData[attribute];
 								}
+=======
+},{}],17:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ModalService = require("services/ModalService");
+var AddressService = require("services/AddressService");
+>>>>>>> development
 
 								break;
 							}
@@ -1146,8 +1454,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ResourceService": 70 }], 17: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var CountryService = require("services/CountryService");
 		var ResourceService = require("services/ResourceService");
+=======
+},{"services/AddressService":66,"services/ApiService":67,"services/ModalService":72}],18:[function(require,module,exports){
+var AddressService    = require("services/AddressService");
+var ValidationService = require("services/ValidationService");
+>>>>>>> development
 
 		Vue.component("country-select", {
 
@@ -1272,9 +1586,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					ApiService.post("/rest/io/customer", userObject).done(function (response) {
 						ApiService.setToken(response);
 
+<<<<<<< HEAD
 						if (document.getElementById(component.modalElement) !== null) {
 							ModalService.findModal(document.getElementById(component.modalElement)).hide();
 						}
+=======
+},{"services/AddressService":66,"services/ValidationService":76}],19:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 						NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
 
@@ -1387,6 +1706,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			methods: {
 				/**
      * Open the login modal
@@ -1447,6 +1767,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/ApiService": 64, "services/ModalService": 68, "services/NotificationService": 69, "services/ValidationService": 72 }], 21: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ResourceService":74}],20:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 		Vue.component("login-view", {
 
@@ -1479,9 +1803,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				};
 			},
 
+<<<<<<< HEAD
 			created: function created() {
 				this.$options.template = this.template;
 			},
+=======
+},{"services/ResourceService":74}],21:[function(require,module,exports){
+var CountryService = require("services/CountryService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			/**
     * Add the global event listener for login and logout
@@ -1684,9 +2014,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			ready: function ready() {
 				// initialize selected attributes to be tracked by change detection
 				var attributes = {};
+=======
+},{"services/CountryService":70,"services/ResourceService":74}],22:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+>>>>>>> development
 
 				for (var attributeId in this.attributes) {
 					attributes[attributeId] = null;
@@ -1883,7 +2220,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		Vue.component("item-lazy-img", {
 
+<<<<<<< HEAD
 			props: ["imageUrl", "template"],
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],23:[function(require,module,exports){
+var ValidationService = require("services/ValidationService");
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 			created: function created() {
 				this.$options.template = this.template;
@@ -1920,8 +2263,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			created: function created() {
 				this.$options.template = this.template;
 
+<<<<<<< HEAD
 				ItemListService.setCategoryId(this.categoryId);
 			},
+=======
+},{"services/ApiService":67,"services/ValidationService":76}],24:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+var ValidationService = require("services/ValidationService");
+>>>>>>> development
 
 			ready: function ready() {
 				ResourceService.bind("itemList", this);
@@ -2029,8 +2380,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			return obj && obj.__esModule ? obj : { default: obj };
 		}
 
+<<<<<<< HEAD
 		var ResourceService = require("services/ResourceService");
 		var ItemListService = require("services/ItemListService");
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],25:[function(require,module,exports){
+Vue.component("login-view", {
+>>>>>>> development
 
 		Vue.component("item-search", {
 
@@ -2043,9 +2399,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				};
 			},
 
+<<<<<<< HEAD
 			created: function created() {
 				this.$options.template = this.template;
 			},
+=======
+},{}],26:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			ready: function ready() {
 				ResourceService.bind("itemSearch", this);
@@ -2128,12 +2490,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount"],
 
+<<<<<<< HEAD
 			data: function data() {
 				return {
 					tagClassPrefix: "bg-",
 					localization: {}
 				};
 			},
+=======
+},{"services/ApiService":67,"services/ResourceService":74}],27:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			created: function created() {
 				ResourceService.bind("localization", this);
@@ -2275,8 +2642,38 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
+<<<<<<< HEAD
 				this.itemSearch.page = urlParams.page;
 			},
+=======
+            $owl.trigger("to.owl.carousel", [
+                index,
+                350
+            ]);
+        }
+    }
+});
+
+},{"services/ResourceService":74}],28:[function(require,module,exports){
+Vue.component("quantity-input", {
+
+    props: [
+        "value",
+        "timeout",
+        "min",
+        "max",
+        "vertical",
+        "template",
+        "waiting"
+    ],
+
+    data: function()
+    {
+        return {
+            timeoutHandle: null
+        };
+    },
+>>>>>>> development
 
 			methods: {
 				setPage: function setPage(page) {
@@ -2314,7 +2711,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		var ResourceService = require("services/ResourceService");
 		var ItemListService = require("services/ItemListService");
 
+<<<<<<< HEAD
 		Vue.component("item-filter", {
+=======
+},{}],29:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			props: ["template", "facet"],
 
@@ -2525,6 +2928,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.clearFields();
 				},
 
+<<<<<<< HEAD
 				/**
      * Get the current email address of the user
      * @returns {*}
@@ -2533,6 +2937,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					return this.userData.options[0].value;
 				}
 			}
+=======
+},{"services/ApiService":67,"services/ResourceService":74}],30:[function(require,module,exports){
+Vue.component("category-image-carousel", {
+>>>>>>> development
 
 		});
 	}, { "services/APIService": 62, "services/ModalService": 68, "services/NotificationService": 69 }], 39: [function (require, module, exports) {
@@ -2600,6 +3008,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.openModal(true);
 				},
 
+<<<<<<< HEAD
 				/**
      * Set data to remove and open the modal
      * @param index
@@ -2607,6 +3016,10 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
      */
 				openDeleteBank: function openDeleteBank(index, bankData) {
 					this.setUpdateData(index, bankData);
+=======
+},{}],31:[function(require,module,exports){
+Vue.component("category-item", {
+>>>>>>> development
 
 					this.doUpdate = false;
 					this.bankDeleteModal.show();
@@ -2661,6 +3074,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						_self.checkBankDataSelection();
 						_self.closeModal();
 
+<<<<<<< HEAD
 						NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
 					}).fail(function () {
 						_self.closeModal();
@@ -2668,6 +3082,20 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
 					});
 				},
+=======
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function()
+        {
+            return this.itemData.texts;
+        }
+    }
+});
+
+},{}],32:[function(require,module,exports){
+Vue.component("item-lazy-img", {
+>>>>>>> development
 
 				/**
      * Add new bank-data
@@ -2683,6 +3111,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						_self.checkBankDataSelection(true);
 						_self.closeModal();
 
+<<<<<<< HEAD
 						NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
 					}).fail(function () {
 						_self.closeModal();
@@ -2690,6 +3119,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
 					});
 				},
+=======
+        setTimeout(function()
+        {
+            $(self.$els.lazyImg).show().lazyload();
+        }, 1);
+    }
+});
+
+},{}],33:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 				/**
      * Delete bank-data
@@ -2744,6 +3185,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					this.resetData();
 				},
 
+<<<<<<< HEAD
 				/**
      * Close the current bank-delete-modal
      */
@@ -2832,6 +3274,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		})(jQuery);
 	}, { "services/ApiService": 64 }], 41: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],34:[function(require,module,exports){
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 		var NotificationService = require("services/NotificationService");
 
@@ -2893,7 +3340,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/NotificationService": 69 }], 42: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var ResourceService = require("services/ResourceService");
+=======
+},{"services/ItemListService":71,"services/UrlService":75}],35:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 		Vue.component("shipping-country-select", {
 
@@ -2933,10 +3387,37 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				};
 			},
 
+<<<<<<< HEAD
 			created: function created() {
 				this.$options.template = this.template;
 
 				ResourceService.bind("localization", this);
+=======
+        transformSuggestionResult: function(result)
+        {
+            result = JSON.parse(result);
+            var suggestions =
+                {
+                    suggestions: $.map(result.data.documents, function(dataItem)
+                    {
+                        var value = dataItem.data.texts.name1;
+
+                        return {
+                            value: value,
+                            data : value
+                        };
+                    })
+                };
+
+            return suggestions;
+        }
+    }
+});
+
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],36:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var accounting = require("accounting");
+>>>>>>> development
 
 				for (var i in this.localization.activeShopLanguageList) {
 					var languageKey = this.localization.activeShopLanguageList[i];
@@ -2979,6 +3460,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				this.$options.template = this.template;
 			},
 
+<<<<<<< HEAD
 			computed: {
 				/**
      * Show an overlay over the page
@@ -3018,11 +3500,16 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		Vue.directive("is-loading-watcher", {
 			bind: function bind() {
 				var firstRendering = true;
+=======
+            return this.storeSpecial.names.name;
+        },
+>>>>>>> development
 
 				ResourceService.watch("isLoading", function () {
 					if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null) {
 						$("#twig-rendered-item-list").remove();
 
+<<<<<<< HEAD
 						document.getElementById("vue-rendered-item-list").style.removeProperty("display");
 					} else {
 						firstRendering = false;
@@ -3032,6 +3519,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/ResourceService": 70 }], 47: [function (require, module, exports) {
 		"use strict";
+=======
+},{"accounting":78,"services/ResourceService":74}],37:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 		var ResourceService = require("services/ResourceService");
 
@@ -3078,7 +3571,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ResourceService": 70 }], 48: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var ResourceService = require("services/ResourceService");
+=======
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],38:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 		Vue.directive("resource-bind", {
 
@@ -3116,9 +3616,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		Vue.directive("resource-if", {
 
+<<<<<<< HEAD
 			bind: function bind() {
 				var self = this;
 				var display = window.getComputedStyle(this.el, null).getPropertyValue("display");
+=======
+},{"services/ItemListService":71,"services/ResourceService":74,"services/UrlService":75}],39:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 				ResourceService.watch(this.arg, function (value) {
 
@@ -3144,7 +3650,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		var ResourceService = require("services/ResourceService");
 
+<<<<<<< HEAD
 		Vue.directive("resource-push", {
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],40:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 			params: ["dataAccessor", "resource"],
 
@@ -3178,6 +3690,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 		var CheckoutService = require("services/CheckoutService");
 
+<<<<<<< HEAD
 		Vue.directive("shipping-country", function (value) {
 			$(this.el).click(function (event) {
 				event.preventDefault();
@@ -3186,6 +3699,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		});
 	}, { "services/CheckoutService": 65 }], 53: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ResourceService":74,"services/UrlService":75}],41:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+>>>>>>> development
 
 		Vue.directive("tooltip", {
 
@@ -3236,10 +3754,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				format: "%v %s"
 			};
 
+<<<<<<< HEAD
 			return accounting.formatMoney(price, options);
 		});
 	}, { "accounting": 74, "currency-symbol-map": 75, "services/ResourceService": 70 }], 57: [function (require, module, exports) {
 		"use strict";
+=======
+},{"services/ItemListService":71,"services/ResourceService":74}],42:[function(require,module,exports){
+var ModalService        = require("services/ModalService");
+var APIService          = require("services/APIService");
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 		// for docs see https://github.com/brockpetrie/vue-moment
 
@@ -3284,10 +3809,18 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						for (var aId = 0; aId < addends.length; aId++) {
 							var addend = addends[aId].split(" ");
 
+<<<<<<< HEAD
 							obj[addend[1]] = addend[0];
 						}
 						date = date.add(obj);
 						break;
+=======
+},{"services/APIService":67,"services/ModalService":72,"services/NotificationService":73}],43:[function(require,module,exports){
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+var ValidationService   = require("services/ValidationService");
+>>>>>>> development
 
 					case "subtract":
 
@@ -3375,7 +3908,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		Vue.filter("itemImage", function (item, baseUrl) {
 			var imageList = item.variationImageList;
 
+<<<<<<< HEAD
 			baseUrl = baseUrl || "/";
+=======
+},{"services/ApiService":67,"services/ModalService":72,"services/NotificationService":73,"services/ValidationService":76}],44:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 			if (baseUrl.charAt(baseUrl.length - 1) !== "/") {
 				baseUrl += "/";
@@ -3445,7 +3983,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		var NotificationService = require("services/NotificationService");
 		var WaitScreenService = require("services/WaitScreenService");
 
+<<<<<<< HEAD
 		module.exports = function ($) {
+=======
+},{"services/ApiService":67}],45:[function(require,module,exports){
+var NotificationService = require("services/NotificationService");
+>>>>>>> development
 
 			var _eventListeners = {};
 
@@ -3505,12 +4048,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			function _send(url, data, config) {
 				var deferred = $.Deferred();
 
+<<<<<<< HEAD
 				config = config || {};
 				config.data = data || null;
 				config.dataType = config.dataType || "json";
 				config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
 				config.doInBackground = !!config.doInBackground;
 				config.supressNotifications = !!config.supressNotifications;
+=======
+},{"services/NotificationService":73}],46:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				if (!config.doInBackground) {
 					WaitScreenService.showWaitScreen();
@@ -3566,9 +4114,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				}
 			}
 
+<<<<<<< HEAD
 			function _setToken(token) {
 				this._token = token;
 			}
+=======
+},{"services/ResourceService":74}],47:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			function _getToken() {
 				return this._token;
@@ -3631,8 +4184,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, { "services/ApiService": 64, "services/CheckoutService": 65 }], 64: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var NotificationService = require("services/NotificationService");
 		var WaitScreenService = require("services/WaitScreenService");
+=======
+},{"services/ResourceService":74}],48:[function(require,module,exports){
+var WaitScreenService = require("services/WaitScreenService");
+>>>>>>> development
 
 		module.exports = function ($) {
 
@@ -3667,6 +4225,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				}
 			}
 
+<<<<<<< HEAD
 			function _get(url, data, config) {
 				config = config || {};
 				config.method = "GET";
@@ -3678,6 +4237,45 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				config.method = "PUT";
 				return _send(url, data, config);
 			}
+=======
+},{"services/WaitScreenService":77}],49:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+
+Vue.directive("logout", function()
+{
+    /**
+     * Logout the current user
+     */
+    $(this.el).click(
+        function(event)
+        {
+            $(this.el).addClass("disabled");
+
+            ApiService.post("/rest/io/customer/logout")
+                .done(
+                    function()
+                    {
+                        window.location.assign(window.location.origin);
+                    })
+                .fail(
+                    function()
+                    {
+                        $(this.el).removeClass("disabled");
+                    }.bind(this));
+
+            event.preventDefault();
+        }.bind(this));
+});
+
+},{"services/ApiService":67}],50:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("is-loading-watcher",
+    {
+        bind: function()
+        {
+            var firstRendering = true;
+>>>>>>> development
 
 			function _post(url, data, config) {
 				config = config || {};
@@ -3685,11 +4283,50 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				return _send(url, data, config);
 			}
 
+<<<<<<< HEAD
 			function _delete(url, data, config) {
 				config = config || {};
 				config.method = "DELETE";
 				return _send(url, data, config);
 			}
+=======
+                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
+                }
+                else
+                {
+                    firstRendering = false;
+                }
+            });
+        }
+    });
+
+},{"services/ResourceService":74}],51:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+
+Vue.elementDirective("resource", {
+    priority: 10000,
+    params  : [
+        "name",
+        "route",
+        "data",
+        "events",
+        "responseTemplate"
+    ],
+    bind    : function()
+    {
+        var resource = ResourceService.registerResource(
+            this.params.name,
+            this.params.route,
+            this.params.data,
+            this.params.responseTemplate
+        );
+        var events = this.params.events || [];
+
+        for (var i = 0; i < events.length; i++)
+        {
+            var event = events[i].split("!");
+            var usePayload;
+>>>>>>> development
 
 			function _send(url, data, config) {
 				var deferred = $.Deferred();
@@ -3743,9 +4380,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					notification = NotificationService.warning(response.warning);
 				}
 
+<<<<<<< HEAD
 				if (response.info && response.info.message.length > 0) {
 					notification = NotificationService.info(response.info);
 				}
+=======
+},{"services/ResourceService":74}],52:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				if (response.debug && response.debug.class.length > 0) {
 					notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
@@ -3812,10 +4454,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					checkout[properties[i]] = checkoutData[properties[i]];
 				}
 
+<<<<<<< HEAD
 				return ApiService.post("/rest/io/checkout/", checkout).done(function (response) {
 					checkout = response;
 				});
 			}
+=======
+},{"services/ResourceService":74}],53:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 			function setDeliveryAddressId(deliveryAddressId) {
 				return _set("deliveryAddressId", deliveryAddressId);
@@ -3849,8 +4496,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				sortCountries: sortCountries
 			};
 
+<<<<<<< HEAD
 			function parseShippingCountries(countryList, id) {
 				var deliveryCountries = [];
+=======
+},{"services/ResourceService":74}],54:[function(require,module,exports){
+var ResourceService = require("services/ResourceService");
+>>>>>>> development
 
 				if (countryList === null) {
 					return deliveryCountries;
@@ -3874,8 +4526,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				for (var countryId in countryNameMap) {
 					var countryName = countryNameMap[countryId];
 
+<<<<<<< HEAD
 					for (var index in countryList) {
 						var country = countryList[index];
+=======
+},{"services/ResourceService":74}],55:[function(require,module,exports){
+Vue.directive("change-lang", function(value)
+{
+    $(this.el).click(function(event)
+    {
+        var subPath = window.location.pathname.split("/");
+>>>>>>> development
 
 						if (country.id === parseInt(countryId)) {
 							country.name = countryName;
@@ -3897,17 +4558,27 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				});
 			}
 
+<<<<<<< HEAD
 			function parseShippingStates(countryList, countryID) {
 				var states = [];
+=======
+},{}],56:[function(require,module,exports){
+var CheckoutService = require("services/CheckoutService");
+>>>>>>> development
 
 				for (var key in countryList) {
 					var country = countryList[key];
 
+<<<<<<< HEAD
 					if (country.id === countryID) {
 						states = country.states;
 						break;
 					}
 				}
+=======
+},{"services/CheckoutService":69}],57:[function(require,module,exports){
+Vue.directive("tooltip", {
+>>>>>>> development
 
 				return states;
 			}
@@ -3915,6 +4586,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 	}, {}], 67: [function (require, module, exports) {
 		"use strict";
 
+<<<<<<< HEAD
 		var _UrlService = require("services/UrlService");
 
 		var _UrlService2 = _interopRequireDefault(_UrlService);
@@ -3922,6 +4594,24 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 		function _interopRequireDefault(obj) {
 			return obj && obj.__esModule ? obj : { default: obj };
 		}
+=======
+},{}],58:[function(require,module,exports){
+Vue.filter("arrayFirst", function(array)
+{
+    return array[0];
+});
+
+},{}],59:[function(require,module,exports){
+Vue.filter("attachText", function(item, text)
+{
+    return text + item;
+});
+
+},{}],60:[function(require,module,exports){
+var ResourceService   = require("services/ResourceService");
+var currencySymbolMap = require("currency-symbol-map");
+var accounting        = require("accounting");
+>>>>>>> development
 
 		var ApiService = require("services/ApiService");
 		var NotificationService = require("services/NotificationService");
@@ -3962,8 +4652,13 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 					_setIsLoading(true);
 
+<<<<<<< HEAD
 					ApiService.get(url, searchParams).done(function (response) {
 						_setIsLoading(false);
+=======
+},{"accounting":78,"currency-symbol-map":79,"services/ResourceService":74}],61:[function(require,module,exports){
+// for docs see https://github.com/brockpetrie/vue-moment
+>>>>>>> development
 
 						ResourceService.getResource("itemList").set(response);
 						ResourceService.getResource("facets").set(response.facets);
@@ -4130,10 +4825,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						hide();
 					}, $bsModal.timeout);
 
+<<<<<<< HEAD
 					$bsModal.find(".timer").text(timeRemaining / 1000);
 					interval = window.setInterval(function () {
 						if (!paused) {
 							var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
+=======
+},{}],62:[function(require,module,exports){
+Vue.filter("itemImage", function(item, baseUrl)
+{
+    var imageList = item.variationImageList;
+>>>>>>> development
 
 							secondsRemaining = Math.round(secondsRemaining / 1000);
 							$bsModal.find(".timer").text(secondsRemaining);
@@ -4170,7 +4872,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			var notificationCount = 0;
 			var notifications = new NotificationList();
 
+<<<<<<< HEAD
 			var handlerList = [];
+=======
+},{}],63:[function(require,module,exports){
+Vue.filter("itemImages", function(images, accessor)
+{
+    var imageUrls = [];
+    var imagesAccessor = "all";
+>>>>>>> development
 
 			return {
 				log: _log,
@@ -4195,6 +4905,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			function _log(message, prefix) {
 				var notification = new Notification(message);
 
+<<<<<<< HEAD
 				if (App.config.logMessages) {
 					console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
 
@@ -4202,22 +4913,119 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 						_log(notification.stackTrace[i], " + ");
 					}
 				}
+=======
+},{}],64:[function(require,module,exports){
+Vue.filter("itemName", function(item, selectedName)
+{
+    if (selectedName === "0" && item.name1 !== "")
+    {
+        return item.name1;
+    }
+    else if (selectedName === "1" && item.name2 !== "")
+    {
+        return item.name2;
+    }
+    else if (selectedName === "2" && item.name3 !== "")
+    {
+        return item.name3;
+    }
+>>>>>>> development
 
 				return notification;
 			}
 
+<<<<<<< HEAD
 			function _info(message) {
 				var notification = new Notification(message, "info");
 
 				if (App.config.printInfos) {
 					_printNotification(notification);
 				}
+=======
+},{}],65:[function(require,module,exports){
+Vue.filter("itemURL", function(item)
+{
+    var urlPath = item.texts.urlPath;
+
+    if (urlPath && urlPath.length > 0)
+    {
+        return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
+    }
+>>>>>>> development
 
 				return notification;
 			}
 
+<<<<<<< HEAD
 			function _warn(message) {
 				var notification = new Notification(message, "warning");
+=======
+},{}],66:[function(require,module,exports){
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+module.exports = (function($)
+{
+
+    return {
+        createAddress: createAddress,
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
+    };
+
+    /**
+     * Create a new address
+     * @param address
+     * @param addressType
+     * @param setActive
+     * @returns {*}
+     */
+    function createAddress(address, addressType, setActive)
+    {
+        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
+        {
+            if (setActive)
+            {
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Update an existing address
+     * @param newData
+     * @param addressType
+     * @returns {*|Entry|undefined}
+     */
+    function updateAddress(newData, addressType)
+    {
+        addressType = addressType || newData.pivot.typeId;
+        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    }
+
+    /**
+     * Delete an existing address
+     * @param addressId
+     * @param addressType
+     * @returns {*}
+     */
+    function deleteAddress(addressId, addressType)
+    {
+        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    }
+})(jQuery);
+
+},{"services/ApiService":67,"services/CheckoutService":69}],67:[function(require,module,exports){
+var NotificationService = require("services/NotificationService");
+var WaitScreenService   = require("services/WaitScreenService");
+>>>>>>> development
 
 				if (App.config.printWarnings) {
 					_printNotification(notification);
@@ -4341,6 +5149,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 			var resources = {};
 
+<<<<<<< HEAD
 			return {
 				registerResource: registerResource,
 				registerResourceList: registerResourceList,
@@ -4380,6 +5189,177 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				name = name.toLowerCase();
 				resources[name] = new Resource(route, data, responseTemplate);
+=======
+},{"services/NotificationService":73,"services/WaitScreenService":77}],68:[function(require,module,exports){
+var ItemListService = require("services/ItemListService");
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+
+module.exports = (function($)
+{
+    var _categoryTree = {};
+    var _categoryBreadcrumbs = [];
+    var _validate = false;
+
+    return {
+        initialize: _initialize,
+        getScopeUrl: _getScopeUrl,
+        renderItems: _renderItems
+    };
+
+    /**
+     * initialize the service with the category tree
+     * @param categoryTree
+     * @private
+     */
+    function _initialize(categoryTree)
+    {
+        _categoryTree = categoryTree;
+    }
+
+    /**
+     * check if current view is category
+     * @param categories - default
+     * @param paths - the url paths to parse
+     */
+    function _isCategoryView(paths, categories)
+    {
+        categories = categories || _categoryTree;
+
+        for (var currentCategory in categories)
+        {
+            if (paths[paths.length - 1].indexOf(categories[currentCategory].details[0].nameUrl) > -1)
+            {
+                return true;
+            }
+
+            if (categories[currentCategory].children)
+            {
+                var isCategory = _isCategoryView(paths, categories[currentCategory].children);
+
+                if (isCategory)
+                {
+                    return isCategory;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * render items in relation to location
+     * @param currentCategory
+     */
+    function _renderItems(currentCategory)
+    {
+        if (!_isCategoryView(window.location.pathname.split("/")))
+        {
+            window.open(_getScopeUrl(currentCategory), "_self");
+        }
+        else
+        {
+            _handleCurrentCategory(currentCategory);
+        }
+    }
+
+    /**
+     * bundle functions
+     * @param currentCategory
+     */
+    function _handleCurrentCategory(currentCategory)
+    {
+        _updateItemList(currentCategory);
+        _updateHistory(currentCategory);
+        _updateBreadcrumbs();
+    }
+
+    function _updateBreadcrumbs()
+    {
+        ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
+    }
+
+    /**
+     * update the current item list without reloading
+     * @param currentCategory
+     */
+    function _updateItemList(currentCategory)
+    {
+        ItemListService.setCategoryId(currentCategory.id);
+
+        ItemListService.setPage(1);
+        ItemListService.setFacets("");
+        ItemListService.getItemList();
+    }
+
+    /**
+     * update page informations
+     * @param currentCategory
+     */
+    function _updateHistory(currentCategory)
+    {
+        var title = document.getElementsByTagName("title")[0].innerHTML;
+
+        window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
+
+        document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    }
+
+    /**
+     * get the current scope url
+     * @param currentCategory
+     * @param scopeUrl - default
+     * @param categories - default
+     */
+    function _getScopeUrl(currentCategory, scopeUrl, categories)
+    {
+        scopeUrl = scopeUrl || "";
+        categories = categories || _categoryTree;
+
+        if (scopeUrl.length == 0)
+        {
+            _categoryBreadcrumbs = [];
+        }
+
+        for (var category in categories)
+        {
+            if (_validate && categories[category].details.length == 0)
+            {
+                NotificationService.error("Kategorie nicht geladen: " + categories[category].id).closeAfter(10000);
+            }
+
+            if (categories[category].id == currentCategory.id)
+            {
+                scopeUrl += "/" + categories[category].details[0].nameUrl;
+
+                _categoryBreadcrumbs.push(categories[category]);
+
+                return scopeUrl;
+            }
+
+            if (categories[category].children)
+            {
+                var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
+
+                var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
+
+                if (urlScope.length > 0)
+                {
+                    _categoryBreadcrumbs.push(categories[category]);
+
+                    return urlScope;
+                }
+            }
+        }
+
+        return "";
+    }
+
+})(jQuery);
+
+},{"services/ItemListService":71,"services/NotificationService":73,"services/ResourceService":74}],69:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 				return resources[name];
 			}
@@ -10426,8 +11406,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				isImmediatePropagationStopped: returnFalse,
 				isSimulated: false,
 
+<<<<<<< HEAD
 				preventDefault: function preventDefault() {
 					var e = this.originalEvent;
+=======
+},{"services/ApiService":67}],70:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 					this.isDefaultPrevented = returnTrue;
 
@@ -10559,11 +11545,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 			function restoreScript(elem) {
 				var match = rscriptTypeMasked.exec(elem.type);
 
+<<<<<<< HEAD
 				if (match) {
 					elem.type = match[1];
 				} else {
 					elem.removeAttribute("type");
 				}
+=======
+},{}],71:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+var UrlService = require("services/UrlService");
+>>>>>>> development
 
 				return elem;
 			}
@@ -12362,8 +13356,14 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				fxNow = jQuery.now();
 
+<<<<<<< HEAD
 				for (; i < timers.length; i++) {
 					timer = timers[i];
+=======
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
+        UrlService.setUrlParam("items", items);
+    }
+>>>>>>> development
 
 					// Checks the timer has not already been removed
 					if (!timer() && timers[i] === timer) {
@@ -12464,6 +13464,7 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				}
 			});
 
+<<<<<<< HEAD
 			jQuery.extend({
 				attr: function attr(elem, name, value) {
 					var ret,
@@ -12548,6 +13549,11 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					}
 				}
 			});
+=======
+},{"services/ApiService":67,"services/NotificationService":73,"services/ResourceService":74,"services/UrlService":75}],72:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 			// Hooks for boolean attributes
 			boolHook = {
@@ -12887,9 +13893,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					return this.each(function (i) {
 						var val;
 
+<<<<<<< HEAD
 						if (this.nodeType !== 1) {
 							return;
 						}
+=======
+},{}],73:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 						if (isFunction) {
 							val = value.call(this, i, jQuery(this).val());
@@ -13317,7 +14329,12 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					    i = 0,
 					    dataTypes = dataTypeExpression.toLowerCase().match(rnotwhite) || [];
 
+<<<<<<< HEAD
 					if (jQuery.isFunction(func)) {
+=======
+},{}],74:[function(require,module,exports){
+var ApiService = require("services/ApiService");
+>>>>>>> development
 
 						// For each dataType in the dataTypeExpression
 						while (dataType = dataTypes[i++]) {
@@ -13713,9 +14730,19 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					strAbort = "canceled",
 
 
+<<<<<<< HEAD
 					// Fake xhr
 					jqXHR = {
 						readyState: 0,
+=======
+},{"services/ApiService":67}],75:[function(require,module,exports){
+module.exports = (function($)
+{
+    return {
+        getUrlParams: _getUrlParams,
+        setUrlParam: _setUrlParam
+    };
+>>>>>>> development
 
 						// Builds headers hashtable if needed
 						getResponseHeader: function getResponseHeader(key) {
@@ -14190,10 +15217,17 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 				}
 			});
 
+<<<<<<< HEAD
 			jQuery.expr.filters.hidden = function (elem) {
 				return !jQuery.expr.filters.visible(elem);
 			};
 			jQuery.expr.filters.visible = function (elem) {
+=======
+},{}],76:[function(require,module,exports){
+module.exports = (function($)
+{
+    var $form;
+>>>>>>> development
 
 				// Support: Opera <= 12.12
 				// Opera reports offsetWidths and offsetHeights less than zero on some elements
@@ -14570,9 +15604,15 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 							// Make sure that re-using the options doesn't screw things around
 							s.jsonpCallback = originalSettings.jsonpCallback;
 
+<<<<<<< HEAD
 							// Save the callback name for future use
 							oldCallbacks.push(callbackName);
 						}
+=======
+},{}],77:[function(require,module,exports){
+module.exports = (function($)
+{
+>>>>>>> development
 
 						// Call if it was a function and we have a response
 						if (responseContainer && jQuery.isFunction(overwritten)) {
@@ -14615,7 +15655,159 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 					jQuery(scripts).remove();
 				}
 
+<<<<<<< HEAD
 				return jQuery.merge([], parsed.childNodes);
+=======
+})(jQuery);
+
+},{}],78:[function(require,module,exports){
+/*!
+ * accounting.js v0.4.1
+ * Copyright 2014 Open Exchange Rates
+ *
+ * Freely distributable under the MIT license.
+ * Portions of accounting.js are inspired or borrowed from underscore.js
+ *
+ * Full details and documentation:
+ * http://openexchangerates.github.io/accounting.js/
+ */
+
+(function(root, undefined) {
+
+	/* --- Setup --- */
+
+	// Create the local library object, to be exported or referenced globally later
+	var lib = {};
+
+	// Current version
+	lib.version = '0.4.1';
+
+
+	/* --- Exposed settings --- */
+
+	// The library's settings configuration object. Contains default parameters for
+	// currency and number formatting
+	lib.settings = {
+		currency: {
+			symbol : "$",		// default currency symbol is '$'
+			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
+			decimal : ".",		// decimal point separator
+			thousand : ",",		// thousands separator
+			precision : 2,		// decimal places
+			grouping : 3		// digit grouping (not implemented yet)
+		},
+		number: {
+			precision : 0,		// default precision on numbers is 0
+			grouping : 3,		// digit grouping (not implemented yet)
+			thousand : ",",
+			decimal : "."
+		}
+	};
+
+
+	/* --- Internal Helper Methods --- */
+
+	// Store reference to possibly-available ECMAScript 5 methods for later
+	var nativeMap = Array.prototype.map,
+		nativeIsArray = Array.isArray,
+		toString = Object.prototype.toString;
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js
+	 */
+	function isString(obj) {
+		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
+	}
+
+	/**
+	 * Tests whether supplied parameter is a string
+	 * from underscore.js, delegates to ECMA5's native Array.isArray
+	 */
+	function isArray(obj) {
+		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
+	}
+
+	/**
+	 * Tests whether supplied parameter is a true object
+	 */
+	function isObject(obj) {
+		return obj && toString.call(obj) === '[object Object]';
+	}
+
+	/**
+	 * Extends an object with a defaults object, similar to underscore's _.defaults
+	 *
+	 * Used for abstracting parameter handling from API methods
+	 */
+	function defaults(object, defs) {
+		var key;
+		object = object || {};
+		defs = defs || {};
+		// Iterate over object non-prototype properties:
+		for (key in defs) {
+			if (defs.hasOwnProperty(key)) {
+				// Replace values with defaults only if undefined (allow empty/zero values):
+				if (object[key] == null) object[key] = defs[key];
+			}
+		}
+		return object;
+	}
+
+	/**
+	 * Implementation of `Array.map()` for iteration loops
+	 *
+	 * Returns a new Array as a result of calling `iterator` on each array value.
+	 * Defers to native Array.map if available
+	 */
+	function map(obj, iterator, context) {
+		var results = [], i, j;
+
+		if (!obj) return results;
+
+		// Use native .map method if it exists:
+		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
+
+		// Fallback for native .map:
+		for (i = 0, j = obj.length; i < j; i++ ) {
+			results[i] = iterator.call(context, obj[i], i, obj);
+		}
+		return results;
+	}
+
+	/**
+	 * Check and normalise the value of precision (must be positive integer)
+	 */
+	function checkPrecision(val, base) {
+		val = Math.round(Math.abs(val));
+		return isNaN(val)? base : val;
+	}
+
+
+	/**
+	 * Parses a format string or object and returns format obj for use in rendering
+	 *
+	 * `format` is either a string with the default (positive) format, or object
+	 * containing `pos` (required), `neg` and `zero` values (or a function returning
+	 * either a string or object)
+	 *
+	 * Either string or format.pos must contain "%v" (value) to be valid
+	 */
+	function checkCurrencyFormat(format) {
+		var defaults = lib.settings.currency.format;
+
+		// Allow function as format parameter (should return string or object):
+		if ( typeof format === "function" ) format = format();
+
+		// Format can be a string, in which case `value` ("%v") must be present:
+		if ( isString( format ) && format.match("%v") ) {
+
+			// Create and return positive, negative and zero formats:
+			return {
+				pos : format,
+				neg : format.replace("-", "").replace("%v", "-%v"),
+				zero : format
+>>>>>>> development
 			};
 
 			// Keep a copy of the old load method
@@ -15002,6 +16194,179 @@ var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbo
 
 				return jQuery;
 			};
+<<<<<<< HEAD
+=======
+		})(root.accounting);
+
+		// Declare `fx` on the root (global/window) object:
+		root['accounting'] = lib;
+	}
+
+	// Root will be `window` in browser or `global` on the server:
+}(this));
+
+},{}],79:[function(require,module,exports){
+var currencySymbolMap = require('./map');
+
+var symbolCurrencyMap = {};
+for (var key in currencySymbolMap) {
+  if (currencySymbolMap.hasOwnProperty(key)) {
+    var currency = key;
+    var symbol = currencySymbolMap[currency];
+    symbolCurrencyMap[symbol] = currency;
+  }
+}
+
+function getSymbolFromCurrency(currencyCode) {
+  if (currencySymbolMap.hasOwnProperty(currencyCode)) {
+    return currencySymbolMap[currencyCode];
+  } else {
+    return undefined;
+  }
+}
+
+function getCurrencyFromSymbol(symbol) {
+  if (symbolCurrencyMap.hasOwnProperty(symbol)) {
+    return symbolCurrencyMap[symbol];
+  } else {
+    return undefined;
+  }
+}
+
+function getSymbol(currencyCode) {
+  //Deprecated
+  var symbol = getSymbolFromCurrency(currencyCode);
+  return symbol !== undefined ? symbol : '?';
+}
+
+module.exports = getSymbol; //Backward compatibility
+module.exports.getSymbolFromCurrency = getSymbolFromCurrency;
+module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
+module.exports.symbolCurrencyMap = symbolCurrencyMap;
+module.exports.currencySymbolMap = currencySymbolMap;
+
+},{"./map":80}],80:[function(require,module,exports){
+module.exports =
+{ "ALL": "L"
+, "AFN": "؋"
+, "ARS": "$"
+, "AWG": "ƒ"
+, "AUD": "$"
+, "AZN": "₼"
+, "BSD": "$"
+, "BBD": "$"
+, "BYR": "p."
+, "BZD": "BZ$"
+, "BMD": "$"
+, "BOB": "Bs."
+, "BAM": "KM"
+, "BWP": "P"
+, "BGN": "лв"
+, "BRL": "R$"
+, "BND": "$"
+, "KHR": "៛"
+, "CAD": "$"
+, "KYD": "$"
+, "CLP": "$"
+, "CNY": "¥"
+, "COP": "$"
+, "CRC": "₡"
+, "HRK": "kn"
+, "CUP": "₱"
+, "CZK": "Kč"
+, "DKK": "kr"
+, "DOP": "RD$"
+, "XCD": "$"
+, "EGP": "£"
+, "SVC": "$"
+, "EEK": "kr"
+, "EUR": "€"
+, "FKP": "£"
+, "FJD": "$"
+, "GHC": "₵"
+, "GIP": "£"
+, "GTQ": "Q"
+, "GGP": "£"
+, "GYD": "$"
+, "HNL": "L"
+, "HKD": "$"
+, "HUF": "Ft"
+, "ISK": "kr"
+, "INR": "₹"
+, "IDR": "Rp"
+, "IRR": "﷼"
+, "IMP": "£"
+, "ILS": "₪"
+, "JMD": "J$"
+, "JPY": "¥"
+, "JEP": "£"
+, "KES": "KSh"
+, "KZT": "лв"
+, "KPW": "₩"
+, "KRW": "₩"
+, "KGS": "лв"
+, "LAK": "₭"
+, "LVL": "Ls"
+, "LBP": "£"
+, "LRD": "$"
+, "LTL": "Lt"
+, "MKD": "ден"
+, "MYR": "RM"
+, "MUR": "₨"
+, "MXN": "$"
+, "MNT": "₮"
+, "MZN": "MT"
+, "NAD": "$"
+, "NPR": "₨"
+, "ANG": "ƒ"
+, "NZD": "$"
+, "NIO": "C$"
+, "NGN": "₦"
+, "NOK": "kr"
+, "OMR": "﷼"
+, "PKR": "₨"
+, "PAB": "B/."
+, "PYG": "Gs"
+, "PEN": "S/."
+, "PHP": "₱"
+, "PLN": "zł"
+, "QAR": "﷼"
+, "RON": "lei"
+, "RUB": "₽"
+, "SHP": "£"
+, "SAR": "﷼"
+, "RSD": "Дин."
+, "SCR": "₨"
+, "SGD": "$"
+, "SBD": "$"
+, "SOS": "S"
+, "ZAR": "R"
+, "LKR": "₨"
+, "SEK": "kr"
+, "CHF": "CHF"
+, "SRD": "$"
+, "SYP": "£"
+, "TZS": "TSh"
+, "TWD": "NT$"
+, "THB": "฿"
+, "TTD": "TT$"
+, "TRY": ""
+, "TRL": "₤"
+, "TVD": "$"
+, "UGX": "USh"
+, "UAH": "₴"
+, "GBP": "£"
+, "USD": "$"
+, "UYU": "$U"
+, "UZS": "лв"
+, "VEF": "Bs"
+, "VND": "₫"
+, "YER": "﷼"
+, "ZWD": "Z$"
+}
+
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,22,27,28,29,30,31,39,40,41,32,33,34,35,37,36,38,42,43,44,45,46,47,48,49,50,55,56,51,52,53,54,57,58,59,60,61,62,63,64,65])
+>>>>>>> development
 
 			// Expose jQuery and $ identifiers, even in AMD
 			// (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
@@ -15020,6 +16385,76 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
+
+        var menu = $("#mainNavbarCollapsable");
+        var breadcrumb = menu.find("ul.breadcrumb");
+
+        $("#btnMainMenuToggler").click(function()
+        {
+            $("#mainNavbarCollapsable").toggleClass("open");
+            $("body").toggleClass("menu-is-visible");
+        });
+
+        $("#mainNavbarCollapsable .btnClose").click(function()
+        {
+            $("#mainNavbarCollapsable").removeClass("open");
+            $("body").removeClass("menu-is-visible");
+        });
+
+        function buildBreadcrumb()
+        {
+            var openElements = menu.find("li.open");
+            var breadcrumbArray = [Translations.Template.generalBigAll];
+
+            $(openElements).each(function()
+            {
+                breadcrumbArray.push($(this).children("a").text());
+            });
+
+            breadcrumb.find("li").not(".btnClose").remove();
+
+            $(breadcrumbArray).each(function()
+            {
+                breadcrumb.append("<li class=\"breadcrumb-item\">" + this + "</li>");
+            });
+            breadcrumb.find("li").not(".btnClose").click(function()
+            {
+                $(this).nextAll().remove();
+                closeSubCategories();
+            });
+
+        }
+
+        function closeSubCategories()
+        {
+            var openElements = menu.find("li.open");
+            var breadTotal = (breadcrumb.find("li").not(".btnClose").length) - 1;
+
+            $(openElements).each(function(i, vaa)
+            {
+                if (i >= breadTotal)
+                {
+                    $(this).removeClass("open");
+                }
+                openElements = menu.find("li.open");
+            });
+        }
+
+        menu.find("li>a").click(function(evt)
+        {
+            var paa = $(this).width() - evt.offsetX;
+
+            if (paa < 0)
+            {
+                evt.preventDefault();
+                $(this).closest(".ddown").addClass("open");
+                buildBreadcrumb();
+            }
+            $("#mainNavbarCollapsable").scrollTop = 0;
+            $("#mainNavbarCollapsable").animate({scrollTop: 0}, "fast");
+        });
+
+        buildBreadcrumb();
 
         $(window).scroll(function()
         {
@@ -15154,25 +16589,30 @@ var init = (function($, window, document)
             $("#mainNavbarCollapse").collapse("hide");
         }
 
-        // initialize lazyload for articles
-        $("img.lazy").show().lazyload({
-            effect: "fadeIn"
-        });
-        // test, to delete
-        $("img.testtest").show().lazyload({
-            effect : "fadeIn"
-        });
-
-        $(".cmp-product-thumb").on("mouseover", function(event)
+        $(document).ready(function()
         {
-            $(this).find("img").each(function(i, img)
-            {
-                var $img = $(img);
+            var offset = 250;
+            var duration = 300;
 
-                if (!$img.attr("src"))
+            $(window).scroll(function()
+            {
+                if ($(this).scrollTop() > offset)
                 {
-                    $(img).lazyload();
+                    $(".back-to-top").fadeIn(duration);
                 }
+                else
+                {
+                    $(".back-to-top").fadeOut(duration);
+                }
+            });
+
+            $(".back-to-top").click(function(event)
+            {
+                event.preventDefault();
+
+                $("html, body").animate({scrollTop: 0}, duration);
+
+                return false;
             });
         });
     }
