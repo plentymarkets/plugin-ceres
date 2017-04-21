@@ -19,6 +19,7 @@
 - Die Warenkorb Seite zeigt wieder Artikel an.
 - Passwort ändern style wurde an den von Ceres angepasst.
 - Beim Laden der Seite wird der Header nicht mehr ungewöhnlich groß.
+- Kleinere Performance Verbesserungen.
 
 ### Bekannte Probleme
 
