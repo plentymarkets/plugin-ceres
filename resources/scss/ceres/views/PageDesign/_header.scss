@@ -97,6 +97,12 @@
 
 }
 
+@include media-breakpoint-up(lg) {
+	.extended-container {
+		max-height: 30px;
+	}
+}
+
 
 //navigation scss
 .wrapper-main {
