@@ -103,6 +103,11 @@
 	}
 }
 
+@include media-breakpoint-down(md) {
+	.extended-container {
+		max-height: 35px;
+	}
+}
 
 //navigation scss
 .wrapper-main {
