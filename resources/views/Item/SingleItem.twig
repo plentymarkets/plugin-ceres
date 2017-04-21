@@ -1,7 +1,6 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{{ services.lastSeen.setLastSeenMaxCount(config("item.lists.last_seen")) }}
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
 {% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
@@ -13,6 +12,8 @@
 {% endblock %}
 
 {% block PageBody %}
+
+    {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen")) }}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
