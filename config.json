@@ -217,6 +217,19 @@
         "default"           : "blur"
     },
     {
+        "tab"               : "Item Lists",
+        "key"               : "item.lists.last_seen",
+        "label"             : "Last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : "4",
+            "8"          : "8",
+            "12"         : "12"
+        },
+        "default"           : "4"
+    },
+    {
         "tab"                           : "Shopping cart",
         "key"                           : "basket.item_data",
         "label"                         : "Show item information",
