@@ -71,14 +71,12 @@
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.rrp.price" :filters="['currency']">
-                            {#{{ item.data.salesPrices[1].price | formatMonetary(item.variationRetailPrice.currency) }} TODO get correct currency#}
                             {{ item.documents[0].data.calculatedPrices.rrp.price | formatMonetary(item.documents[0].data.calculatedPrices.rrp.currency) }}
                         </del>
                     </div>
                 {% endif %}
 
                 <span class="price h1">
-                    {#<span v-resource-bind:currentVariation="variationRetailPrice.price" :filters="['currency']">{{ item.data.salesPrices[0].price | formatMonetary(item.variationRetailPrice.currency) }}</span> TODO GET CORRECT CURRENCY#}
                     <span v-resource-bind:currentVariation="documents.0.data.calculatedPrices.default.price" :filters="['currency']">{{ item.documents[0].data.calculatedPrices.default.price | formatMonetary(item.documents[0].data.calculatedPrices.default.currency) }}</span>
                     <sup>*</sup>
                 </span>
@@ -86,7 +84,6 @@
                 {% for variationId, basePrice in basePriceList %}
                     <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="documents[0].data.variation.id == {{ variationId }}">
                         {{ trans("Ceres::Template.itemUnitPrice") }}
-                        {#<span class="base-price-value">{{ basePrice.price | formatMonetary(item.variationRetailPrice.currency) }}</span> / TODO GET CORRECT CURRENCY#}
                         <span class="base-price-value">{{ item.documents[0].data.calculatedPrices.default.unitPrice | formatMonetary(item.documents[0].data.calculatedPrices.default.currency) }}</span> /
                         <span class="base-price-amount">
                         {% if basePrice.lot > 1 %}
