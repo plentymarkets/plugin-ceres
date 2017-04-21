@@ -17,6 +17,8 @@
 - Es wird jetzt immer der Artikelname aus der Config verwendet (Name 1-3).
 - Die URL von Artikeln zeigt die Kategorie nun korrekt an.
 - Die Warenkorb Seite zeigt wieder Artikel an.
+- Passwort ändern style wurde an den von Ceres angepasst.
+- Beim Laden der Seite wird der Header nicht mehr ungewöhnlich groß.
 
 ### Bekannte Probleme
 
