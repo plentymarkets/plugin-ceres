@@ -178,7 +178,7 @@
     },
     {
         "tab"                           : "Item view",
-        "key"                           : "item.variation_show_type",
+        "key"                           : "item.group_by_main_variation",
         "label"                         : "Group by main variations",
         "type"                          : "checkbox",
         "default"                       : "true"

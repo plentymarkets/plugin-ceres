@@ -15,7 +15,7 @@
 
 {% set page = request.get("page") | default(1) %}
 
-{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort, 'variationShowType': config("Ceres.item.group_by_main_variation")}) %}
 
 {% set itemList             = paginatedResult.documents %}
 {% set paginationType       = config("Ceres.pagination.position") %}
