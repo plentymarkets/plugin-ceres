@@ -178,10 +178,16 @@
     },
     {
         "tab"                           : "Item view",
-        "key"                           : "item.group_by_main_variation",
-        "label"                         : "Group by main variations",
-        "type"                          : "checkbox",
-        "default"                       : true
+        "key"                           : "item.variation_show_type",
+        "label"                         : "Show variations by type",
+        "type"                          : "dropdown",
+        "possibleValues"                :
+        {
+            "all"                       : "All",
+            "main"                      : "Group by main variations",
+            "child"                     : "Show childs only"
+        }
+        "default"                       : "all"
     },
     {
         "tab"       : "Item view",
