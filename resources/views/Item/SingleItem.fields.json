@@ -19,7 +19,7 @@
   "variation.lengthMM",
   "variation.widthMM",
   "variation.heightMM",
-  "variation.availability.names.name",
+  "variation.availability.names.*",
   "variation.availability.id",
   "variation.releasedAt",
 
