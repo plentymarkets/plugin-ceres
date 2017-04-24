@@ -125,6 +125,9 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 </thead>
 <tbody>
 <tr>
+<td colspan="2" class="th">Tab: Item view</td>  
+</tr> 
+<tr>
 <td><b>Item name</b></td>  
 <td><strong>Name 1</strong>, <strong>Name 2</strong> oder <strong>Name 3</strong> wählen. Texte für die Felder werden im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels gespeichert. Wenn <strong>Name 2</strong> oder <strong>Name 3</strong> gewählt wurde, aber kein Name im Textfeld gespeichert wurde, wird <strong>Name 1</strong> als Artikelname verwendet.</td>
 </tr>
@@ -137,8 +140,8 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td>Anzahl der Dezimalstellen für den Rabatt wählen, der in der Artikelliste am Artikel angezeigt wird.</td>
 </tr>
 <tr>
-<td><b>Show variations in the category item list</b></td>  
-<td>Varianten in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
+<td><b>Show variations by type</b></td>  
+<td>Varianten nach Typ in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  
@@ -151,6 +154,13 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <tr>
 <td><b>Loading animation</b></td>  
 <td>Ladeanimation für die Kategorieansicht wählen.<br /> <strong>Blur</strong> = Die Kategorieansicht wird beim Laden kurz verschwommen dargestellt.<br /> <strong>Bars</strong> = Beim Laden der Kategorienansicht wird eine Ladeanimation mit Balken angezeigt.<br /> <strong>Spinner</strong> = Beim Laden der Kategorieansicht wird eine Ladeanimation mit Spinner angezeigt.</td>
+</tr>
+<tr>
+<td colspan="2" class="th">Tab: Item lists</td>  
+</tr>
+ <tr>
+<td><b>Number of last seen items</b></td>  
+<td>Anzahl der zuletzt gesehenen Artikel wählen.</td>
 </tr>
 </tbody>
 <caption>Tab. 2: Artikelansicht anpassen</caption>
@@ -313,6 +323,18 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 </tbody>
 <caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
+
+### Artikellisten verknüpfen
+
+Artikellisten, wie z.B. **Zuletzt gesehene Artikel**, verknüpfen Sie bequem über Template-Container an der gewünschten Stelle in Ihrem Webshop. Gehen Sie wie im Folgenden beschrieben vor, um die Artikelliste für zuletzt gesehene Artikel in der Einzelansicht eines Artikels im Webshops zu verknüpfen.
+
+##### Artikelliste verknüpfen:
+
+1. Klicken Sie auf **Start » Plugins**.
+2. Wechseln Sie in das Tab **Content**. 
+3. Wählen Sie den Bereich **Last seen items**.
+4. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Single item: Container for item lists**.
+5. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Webshop-Sprachen einstellen
 

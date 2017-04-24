@@ -184,8 +184,8 @@
         "possibleValues"                :
         {
             "all"                       : "All",
-            "main"                      : "Group by main variations",
-            "child"                     : "Show childs only"
+            "main"                      : "Only main variations",
+            "child"                     : "Only child variations"
         },
         "default"                       : "all"
     },
@@ -217,9 +217,9 @@
         "default"           : "blur"
     },
     {
-        "tab"               : "Item Lists",
+        "tab"               : "Item lists",
         "key"               : "item.lists.last_seen",
-        "label"             : "Last seen items",
+        "label"             : "Number of last seen items",
         "type"              : "dropdown",
         "possibleValues"    :
         {

@@ -4,24 +4,25 @@
 
 ### Hinzugefügt
 
-- To top button wurde hinzugefügt.
-- Zuletzt gesehene Artikel wurden hinzugefügt und können optional über einen LayoutContainer verknüpft werden.
-- In der Konfiguration (Item view: Show variations by type) ist es nun möglich einzustellen, nur Kinder einer Variation anzuzeigen.
+- Ein Back-to-top-Button wurde hinzugefügt.
+- Zuletzt gesehene Artikel wurden hinzugefügt und können optional über einen Template-Container verknüpft werden.
+- In den Einstellungen im Tab **Item view** unter **Show variations by type** ist es nun möglich, nur Untervarianten von Hauptvarianten anzuzeigen.
 
 ### Behoben
 
-- Wenn die Seitennavigation aktiv ist, werden die Kategorien in Mobile nun richtig angezeigt.
-- Die Werte aus der Konfiguration für das ImageCarousel in der Kategorie Ansicht werden nun richtig ausgelesen.
-- Es wurde ein Fehler behoben, der dazu führte das Kategorien nicht in anderen Sprachen geladen wurden.
-- Artikel-Daten werden nun auch in anderen Sprachen geladen.
+- Die Kategorien werden nun für jeden Mandant (Shop) richtig angezeigt.
+- Die Kategorien werden in der mobilen Ansicht nun auch in der linken Navigationsleiste korrekt angezeigt.
+- Die Einstellungen für das Bilderkarussell in der Kategorieansicht werden nun richtig ausgelesen.
+- Es wurde ein Fehler behoben, der dazu führte, dass Kategorien nicht in anderen Sprachen geladen wurden.
+- Artikeldaten werden nun auch in anderen Sprachen geladen.
 - Die Technischen Daten eines Artikels werden nun richtig ausgegeben.
-- Es wird jetzt immer der Artikelname aus der Config verwendet (Name 1-3).
-- Die URL von Artikeln zeigt die Kategorie nun korrekt an.
-- Die Warenkorb Seite zeigt wieder Artikel an.
-- Passwort ändern style wurde an den von Ceres angepasst.
-- Beim Laden der Seite wird der Header nicht mehr ungewöhnlich groß.
-- Kleinere Performance Verbesserungen.
-- Gruppieren nach der Hauptvariante funktioniert nun wieder.
+- Es wird nun der in den Einstellungen gewählte Artikelname (Name 1 bis 3) verwendet.
+- In der Artikel-URL wird die Kategorie korrekt ausgegeben.
+- Die Warenkorb-Seite zeigt wieder Artikel an.
+- Das Styling der Seite **Passwort ändern** wurde an den von Ceres angepasst.
+- Beim Laden des Webshops wird der Header nicht mehr ungewöhnlich groß.
+- Das Gruppieren nach der Hauptvariante funktioniert nun wieder.
+- Kleinere Performance-Verbesserungen.
 
 ### Bekannte Probleme
 
@@ -36,12 +37,6 @@
 
 - Das Event `AfterBasketChanged` wird nicht mehr beim Seitenaufruf ausgelöst.
 - Das Event `AfterBasketChanged` wird bei einer Aktualisierung des Warenkorbs nur noch einmalig ausgelöst.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.1.0 (2017-04-12)
 

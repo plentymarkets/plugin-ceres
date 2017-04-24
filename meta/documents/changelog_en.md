@@ -1,17 +1,42 @@
 # Release Notes for Ceres
 
-## v1.1.1 (2017-04-13)
+## v1.1.2 (2017-04-24)
 
-### Behoben
+### Added
 
-- The `AfterBasketChanged` event is no longer triggered when loading a page. 
-- The `AfterBasketChanged` event will only be triggered once when the shopping cart is updated.
+- A back-to-top button was added.
+- A list for **last seen items** was added and can be displayed in the online store by linking the list with a template container.
+- In the settings in the **Item view** tab, **Show variations by type** allows you to only display the sub-variations of a main variation.
+
+### Fixed
+
+- For every client (store), the categories will be displayed properly.
+- In the mobile view, categories will also be displayed correctly in the left navigation bar.
+- The settings for the image carousel of the category view will now be correctly read.
+- An error occurred when loading categories in different languages. This error was fixed.
+- Item data will now also be loaded in different languages.
+- The **technical details** of an item will be loaded correctly.
+- The item name (name 1 to 3) selected in the settings will now be used correctly.
+- In the item URL, the category will now also be displayed correctly.
+- A bug was fixed on the shopping cart page that resulted in items not being displayed.
+- The styling of the **Change password** page was updated to fit the style of Ceres.
+- A bug was fixed that resulted in the header of the online store being bigger than usually.
+- An error occurred when using the setting **Grouping items by main variation**. This has been fixed.
+- Smaller performance issues were fixed.
 
 ### Known issues
 
 - Due to a sporadically occurring error, addresses cannot be edited at the moment.
 - The federal state (German: Bundesland) is not saved correctly for the address.
 - No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
+
+## v1.1.1 (2017-04-13)
+
+### Fixed
+
+- The `AfterBasketChanged` event is no longer triggered when loading a page. 
+- The `AfterBasketChanged` event will only be triggered once when the shopping cart is updated.
 
 ## v1.1.0 (2017-04-12)
 

@@ -125,6 +125,9 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 </thead>
 <tbody>
 <tr>
+<td colspan="2" class="th">Tab: Item view</td>  
+</tr>  
+<tr>
 <td><b>Item name</b></td>  
 <td>Select <strong>Name 1</strong>, <strong>Name 2</strong> or <strong>Name 3</strong>. Texts for these fields are saved in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of the item. If <strong>Name 2</strong> or <strong>Name 3</strong> is selected, but no name was saved in the text field, <strong>Name 1</strong> will be used as the item name.</td>
 </tr>
@@ -137,8 +140,8 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td>Select the number of decimal places for discounts to be displayed for an item in the item list.</td>
 </tr>
 <tr>
-<td><b>Show variations in the category item list</b></td>  
-<td>Display variations in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
+<td><b>Show variations by type</b></td>  
+<td>Display variations by type in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  
@@ -151,6 +154,13 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <tr>
 <td><b>Loading animation</b></td>  
 <td>Select the loading animation for the category view.<br /> <strong>Blur</strong> = The category view will be blurred when loading.<br /> <strong>Bars</strong> = A loading animation with bars will be displayed when loading the category view.<br /> <strong>Spinner</strong> = A loading animation with a spinner will be displayed when loading the category view.</td>
+</tr>
+<tr>
+<td colspan="2" class="th">Tab: Item lists</td>  
+</tr>  
+ <tr>
+<td><b>Number of last seen items</b></td>  
+<td>Select the number of last seen items.</td>
 </tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
@@ -312,6 +322,18 @@ Settings specifically aimed at plugin developers are available in the **Registra
 </tbody>
 <caption>Table 5: Carrying out settings for plugin development</caption>
 </table>
+
+### Linking item lists
+
+Display item lists, e.g. **Last seen items**, in a very convenient way in your online store by using template containers. Proceed as follows to link the item list for last seen items with the item view of your online store.
+
+##### Linking an item list:
+
+1. Click on **Start » Plugins**. 
+2. Click on the **Content** tab. 
+3. Go to the **Last seen items** area. 
+4. Select one, several or **ALL** containers in which you want to display your item list, e.g. **Single item: Container for item lists**. 
+5. **Save** the settings.<br /> → The item list will be displayed in the selected containers in the online store.
 
 ### Setting online store languages
 

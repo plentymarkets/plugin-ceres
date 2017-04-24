@@ -1,5 +1,5 @@
 {
-    "version"           : "1.1.1",
+    "version"           : "1.1.2",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -22,8 +22,8 @@
     [
         {
             "key":"Ceres\\Containers\\CeresLastSeenContainer",
-            "name":"Last Seen Items",
-            "description":"Display the last seen items list in your shop"
+            "name":"Last seen items",
+            "description":"Display a list of last seen items in your online store"
         }
     ],
     "containers"        :
