@@ -1,11 +1,12 @@
 # Release Notes für Ceres
 
-## v1.1.2 (2017-04-19)
+## v1.1.2 (2017-04-24)
 
 ### Hinzugefügt
 
 - To top button wurde hinzugefügt.
 - Zuletzt gesehene Artikel wurden hinzugefügt und können optional über einen LayoutContainer verknüpft werden.
+- In der Konfiguration (Item view: Show variations by type) ist es nun möglich einzustellen, nur Kinder einer Variation anzuzeigen.
 
 ### Behoben
 
@@ -20,6 +21,7 @@
 - Passwort ändern style wurde an den von Ceres angepasst.
 - Beim Laden der Seite wird der Header nicht mehr ungewöhnlich groß.
 - Kleinere Performance Verbesserungen.
+- Gruppieren nach der Hauptvariante funktioniert nun wieder.
 
 ### Bekannte Probleme
 
