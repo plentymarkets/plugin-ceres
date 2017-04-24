@@ -17,7 +17,7 @@
     {% set sorting = request.get("sorting") %}
 {% endif %}
 
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting}) %}
+{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
