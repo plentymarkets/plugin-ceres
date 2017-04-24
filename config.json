@@ -179,15 +179,9 @@
     {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
-        "label"                         : "Show variations in the category item list",
-        "type"                          : "dropdown",
-        "possibleValues"                :
-        {
-            "1"     : "All",
-            "2"     : "Only main variations",
-            "3"     : "Only child variations"
-        },
-        "default"                       : "1"
+        "label"                         : "Group by main variations",
+        "type"                          : "checkbox",
+        "default"                       : "true"
     },
     {
         "tab"       : "Item view",
