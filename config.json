@@ -186,7 +186,7 @@
             "all"                       : "All",
             "main"                      : "Group by main variations",
             "child"                     : "Show childs only"
-        }
+        },
         "default"                       : "all"
     },
     {
