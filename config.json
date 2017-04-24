@@ -181,7 +181,7 @@
         "key"                           : "item.group_by_main_variation",
         "label"                         : "Group by main variations",
         "type"                          : "checkbox",
-        "default"                       : "true"
+        "default"                       : true
     },
     {
         "tab"       : "Item view",
