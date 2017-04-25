@@ -1,5 +1,17 @@
 # Release Notes für Ceres
 
+## v1.1.3 (2017-04-25)
+
+### Behoben
+
+- Artikelverfügbarkeiten funktionieren wieder.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
 ## v1.1.2 (2017-04-24)
 
 ### Hinzugefügt
@@ -23,13 +35,6 @@
 - Beim Laden des Webshops wird der Header nicht mehr ungewöhnlich groß.
 - Das Gruppieren nach der Hauptvariante funktioniert nun wieder.
 - Kleinere Performance-Verbesserungen.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
-
 
 ## v1.1.1 (2017-04-13)
 

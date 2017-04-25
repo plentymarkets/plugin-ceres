@@ -1,5 +1,17 @@
 # Release Notes for Ceres
 
+## v1.1.3 (2017-04-25)
+
+### Fixed
+
+- Item availabilities fixed.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
 ## v1.1.2 (2017-04-24)
 
 ### Added
@@ -23,13 +35,6 @@
 - A bug was fixed that resulted in the header of the online store being bigger than usually.
 - An error occurred when using the setting **Grouping items by main variation**. This has been fixed.
 - Smaller performance issues were fixed.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
-
 
 ## v1.1.1 (2017-04-13)
 
