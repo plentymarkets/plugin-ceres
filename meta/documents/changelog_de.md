@@ -1,16 +1,22 @@
 # Release Notes für Ceres
 
-## v1.1.3 (2017-04-25)
+## v1.1.4 (2017-04-25)
 
 ### Behoben
 
-- Artikelverfügbarkeiten funktionieren wieder.
+- Suchvorschläge funktionieren wieder.
 
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
 - Das Bundesland wird an der Adresse falsch gespeichert.
 - Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
+## v1.1.3 (2017-04-25)
+
+### Behoben
+
+- Artikelverfügbarkeiten funktionieren wieder.
 
 ## v1.1.2 (2017-04-24)
 
