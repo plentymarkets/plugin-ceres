@@ -1,5 +1,6 @@
 var ResourceService = require("services/ResourceService");
-var UrlService = require("services/UrlService");
+
+import UrlService from "services/UrlService";
 
 Vue.component("item-filter-list", {
 
