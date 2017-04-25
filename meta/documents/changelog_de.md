@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.1.4
+
+### Behoben
+
+- Artikelverfügbarkeiten werden nun auch korrekt beim wechseln der Variante angezeigt.
+
 ## v1.1.3 (2017-04-25)
 
 ### Behoben
