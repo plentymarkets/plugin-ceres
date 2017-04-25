@@ -31,57 +31,25 @@ var babel = require('gulp-babel');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('watch:js', ['build:vendor'], function()
-{
-    return gulp.watch(JS_SRC + '**/*.js', ['build:app']);
-});
-
-gulp.task('watch:sass', function()
-{
-    return gulp.watch(SCSS_SRC + '**/*.scss', ['build:sass']);
-});
-
-gulp.task('build:productive', [
-    'build:productive-bundle',
-    'build:sass-min'
-]);
-
-gulp.task('build:productive-bundle', [
-    'build:lint',
-    'build:productive-app',
-    'build:productive-vendor',
-    'build:lang'
-], function()
-{
-    return gulp.src([
-        JS_LANG + '*.js',
-        JS_DIST + OUTPUT_PREFIX + '-vendor.js',
-        JS_SRC + 'app.config.js',
-        JS_DIST + OUTPUT_PREFIX + '-app.js'
-    ])
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(concat(OUTPUT_PREFIX + '.js'))
-        .pipe(gulp.dest(JS_DIST))
-        .pipe(rename(OUTPUT_PREFIX + '.min.js'))
-        .pipe(uglify().on('error', gutil.log))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(JS_DIST));
-});
+gulp.task('default', ['build']);
 
 gulp.task('build', [
     'build:bundle',
     'build:sass-min'
 ]);
 
+// Bundle everything
 gulp.task('build:bundle', [
+    'build:lint',
     'build:app',
     'build:vendor',
+    'build:productive-vendor',
     'build:lang'
 ], function()
 {
     return gulp.src([
         JS_LANG + '*.js',
-        JS_DIST + OUTPUT_PREFIX + '-vendor.js',
+        JS_DIST + OUTPUT_PREFIX + '-vendor.productive.js',
         JS_SRC + 'app.config.js',
         JS_DIST + OUTPUT_PREFIX + '-app.js'
     ])
@@ -94,6 +62,7 @@ gulp.task('build:bundle', [
         .pipe(gulp.dest(JS_DIST));
 });
 
+// Build app
 gulp.task('build:app', [], function()
 {
     var builder = browserify({
@@ -117,63 +86,20 @@ gulp.task('build:app', [], function()
         .pipe(gulp.dest(JS_DIST));
 });
 
-gulp.task('build:test', [], function()
+// Build Vendor
+gulp.task('build:productive-vendor', function()
 {
-    var builder = browserify({
-        entries  : glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
-        debug    : true,
-        basedir  : JS_SRC,
-        paths    : ['app/'],
-    }).transform(babelify, {
-        // Use all of the ES2015 spec
-        presets: ["es2015"],
-        sourceMaps: true
-    });
-
-    return builder
-        .bundle()
-        .on('error', function(err)
-        {
-            console.error(err);
-            this.emit('end');
-        })
-        .pipe(source(OUTPUT_PREFIX + '-app.js'))
-        .pipe(buffer())
-        .pipe(addSrc.append(JS_SRC + 'app/main.js'))
-        .pipe(concat(OUTPUT_PREFIX + '-app.js'))
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify({ compress: false }))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(JS_DIST));
-});
-
-gulp.task('build:productive-app', [], function()
-{
-    var builder = browserify({
-        entries  : glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
-        debug    : false,
-        basedir  : JS_SRC,
-        paths    : ['app/'],
-        transform: babelify
-    });
-
-    return builder.bundle()
-        .pipe(source(OUTPUT_PREFIX + '-app.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(babel({presets: ['es2015']}))
-        .pipe(addSrc.append(JS_SRC + 'app/main.js'))
-        .pipe(concat(OUTPUT_PREFIX + '-app.js'))
-        .pipe(sourcemaps.write('.', {
-            includeContent: false,
-            sourceRoot    : '../src'
-        }))
+    var libraries = require(JS_SRC + 'vendor.productive.json');
+    return gulp.src(libraries)
+        .pipe(sourcemaps.init())
+        .pipe(concat(OUTPUT_PREFIX + '-vendor.productive.js'))
+        .pipe(sourcemaps.write('.', {sourceRoot: '../src/libraries'}))
         .pipe(gulp.dest(JS_DIST));
 });
 
 gulp.task('build:vendor', function()
 {
-    var libraries = require(JS_SRC + 'vendor.productive.json');
+    var libraries = require(JS_SRC + 'vendor.json');
     return gulp.src(libraries)
         .pipe(sourcemaps.init())
         .pipe(concat(OUTPUT_PREFIX + '-vendor.js'))
@@ -181,6 +107,7 @@ gulp.task('build:vendor', function()
         .pipe(gulp.dest(JS_DIST));
 });
 
+// ESLint
 gulp.task('build:lint', function()
 {
     // ESLint ignores files with "node_modules" paths.
@@ -290,3 +217,14 @@ function buildSass(outputFile, outputStyle)
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(SCSS_DIST));
 }
+
+// Watchers
+gulp.task('watch:js', ['build:vendor'], function()
+{
+    return gulp.watch(JS_SRC + '**/*.js', ['build:app']);
+});
+
+gulp.task('watch:sass', function()
+{
+    return gulp.watch(SCSS_SRC + '**/*.scss', ['build:sass']);
+});
