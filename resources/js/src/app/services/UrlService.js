@@ -1,55 +1,50 @@
-module.exports = (function($)
+var $ = require("jquery");
+
+const getUrlParams = function(urlParams)
 {
-    return {
-        getUrlParams: _getUrlParams,
-        setUrlParam: _setUrlParam
-    };
-
-    function _getUrlParams(urlParams)
+    if (urlParams)
     {
-        if (urlParams)
+        var tokens;
+        var params = {};
+        var regex = /[?&]?([^=]+)=([^&]*)/g;
+
+        urlParams = urlParams.split("+").join(" ");
+
+        // eslint-disable-next-line
+        while (tokens = regex.exec(urlParams))
         {
-            var tokens;
-            var params = {};
-            var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-            urlParams = urlParams.split("+").join(" ");
-
-            // eslint-disable-next-line
-            while (tokens = regex.exec(urlParams))
-            {
-                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-            }
-
-            return params;
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
         }
 
-        return {};
+        return params;
     }
 
-    function _setUrlParams(urlParams)
+    return {};
+};
+
+const setUrlParams = function(urlParams)
+{
+    var pathName = window.location.pathname;
+    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, pathName + params);
+};
+
+const setUrlParam = function(key, value)
+{
+    var urlParams = getUrlParams(document.location.search);
+
+    if (value !== null)
     {
-        var pathName = window.location.pathname;
-        var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-        var title = document.getElementsByTagName("title")[0].innerHTML;
-
-        window.history.replaceState({}, title, pathName + params);
+        urlParams[key] = value;
     }
-
-    function _setUrlParam(key, value)
+    else
     {
-        urlParams = _getUrlParams(document.location.search);
-
-        if (value !== null)
-        {
-            urlParams[key] = value;
-        }
-        else
-        {
-            delete urlParams[key];
-        }
-
-        _setUrlParams(urlParams);
+        delete urlParams[key];
     }
 
-})(jQuery);
+    setUrlParams(urlParams);
+};
+
+export default {setUrlParam, setUrlParams, getUrlParams};
