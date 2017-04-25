@@ -92,7 +92,7 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, function(dataItem)
                     {
-                        var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.performanceLevel);
+                        var value = this.$options.filters.itemName(dataItem.data.texts, window.App.itemName);
 
                         return {
                             value: value,
