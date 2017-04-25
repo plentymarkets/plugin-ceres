@@ -20,8 +20,6 @@ Vue.component("item-search", {
     created: function()
     {
         this.$options.template = this.template;
-
-        this.log("created")
     },
 
     ready: function()
@@ -37,8 +35,6 @@ Vue.component("item-search", {
         {
             ItemListService.updateSearchString(this.itemSearch.query);
         }
-
-        this.log("rdy")
     },
 
     methods:
@@ -107,10 +103,6 @@ Vue.component("item-search", {
                 };
 
             return suggestions;
-        },
-
-        log (test) {
-            console.log(test);
         }
     }
 });
