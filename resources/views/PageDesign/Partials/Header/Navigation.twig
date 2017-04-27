@@ -37,3 +37,21 @@
         </div>
     </div>
 </nav>
+
+{% block PartialHead %}
+
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "https://ceres.plentymarkets-cloud01.com/",
+            "potentialAction":
+            {
+                "@type": "SearchAction",
+                "target": "wohnzimmer={search_term}",
+                "query-input": "required name=search_term"
+            }
+        }
+    </script>
+
+{% endblock %}
