@@ -38,21 +38,3 @@
     </div>
 </nav>
 
-
-{% block PartialHead %}
-
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            "url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}",
-            "potentialAction":
-            {
-                "@type": "SearchAction",
-                "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}",
-                "query-input": "required name=search_term"
-            }
-        }
-    </script>
-
-{% endblock %}
