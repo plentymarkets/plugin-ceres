@@ -6,6 +6,7 @@
 
 - Artikelverfügbarkeiten werden nun auch korrekt beim wechseln der Variante angezeigt.
 - Inhalt auf Statischen Seiten läuft nicht mehr aus der Seite raus.
+- Artikelnamen werden wieder im Warenkorb angezeigt
 
 ## v1.1.3 (2017-04-25)
 
