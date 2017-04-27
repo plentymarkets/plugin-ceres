@@ -12,7 +12,24 @@
 {% endblock %}
 
 {% block JsonLd %}
-
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "Product",
+            "name": "{{ item.documents[0].data.texts | itemName(configItemName) }}",
+            "image": "{{ item.documents[0].data.images }}",
+            "description": "{{ item.documents[0].data.texts.description|raw }}",
+            "manufacturer": {
+                "@type": "Organization",
+                "name": "{{ item.documents[0].data.item.manufacturer.name }}"
+            },
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "item.documents[0].data.calculatedPrices.rrp.currency",
+                "price": "item.documents[0].data.calculatedPrices.default.price",
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block PageBody %}
