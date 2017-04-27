@@ -8,6 +8,12 @@
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
 {% block PartialHead %}
+    <meta property="og:title" content="{{ item.documents[0].data.texts | itemName(configItemName) }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}" />
+    <meta property="og:image" content="{{  item.documents[0].data.images.all[0].url }}" />
+    <meta property="og:description" content="{{ item.documents[0].data.texts.shortDescription }}" />
+
     <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
 {% endblock %}
 
