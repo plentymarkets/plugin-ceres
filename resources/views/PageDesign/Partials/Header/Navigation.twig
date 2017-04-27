@@ -5,14 +5,6 @@
 
 <nav class="navbar">
       <div class="container-max">
-      {{ app.request.getBaseURL() | json_encode() }}
-          {{ app.request.getSchemeAndHttpHost() | json_encode() }}
-          {{ app.request.baseUrl | json_encode() }}
-          ----------------
-
-          {{ app.request.getBaseURL() }}
-          {{ app.request.getSchemeAndHttpHost() }}
-          {{ app.request.baseUrl }}
         <div class="row">
              <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
@@ -52,11 +44,11 @@
         {
             "@context": "http://schema.org",
             "@type": "WebSite",
-            "url": "https://ceres.plentymarkets-cloud01.com/",
+            "url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}",
             "potentialAction":
             {
                 "@type": "SearchAction",
-                "target": "https://ceres.plentymarkets-cloud01.com/search?query={search_term}",
+                "target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}",
                 "query-input": "required name=search_term"
             }
         }
