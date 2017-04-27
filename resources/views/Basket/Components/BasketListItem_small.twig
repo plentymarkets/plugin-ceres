@@ -34,15 +34,15 @@
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
-              <span class="message" v-if="!deleteConfirmed">
-                   {{ trans("Ceres::Template.generalDelete") }}
-              </span>
+            <span class="message" v-if="!deleteConfirmed">
+                {{ trans("Ceres::Template.generalDelete") }}
+            </span>
             <span class="message" v-else>
-                   {{ trans("Ceres::Template.generalDeleteNow") }}
+                {{ trans("Ceres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
-                  <i class="fa fa-times"></i>
-              </span>
+                <i class="fa fa-times"></i>
+            </span>
         </button>
     </div>
     <!-- ./ITEM DETAILS -->

@@ -3,6 +3,7 @@
   "texts.name*",
   "texts.description",
   "texts.urlPath",
+  "texts.lang",
   "variation.number",
   "variation.availability.names.name",
   "variation.itemId",
