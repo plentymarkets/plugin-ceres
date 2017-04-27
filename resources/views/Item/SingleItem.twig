@@ -11,6 +11,10 @@
     <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
 {% endblock %}
 
+{% block JsonLd %}
+
+{% endblock %}
+
 {% block PageBody %}
 
     {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen")) }}
