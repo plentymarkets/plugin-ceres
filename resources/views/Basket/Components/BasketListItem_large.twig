@@ -4,7 +4,7 @@
 
     <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation.data | itemURL">
-        <img :src="basketItem.variation.data.images | itemImages 'urlMiddle' | arrayFirst">
+        <img itemprop="image" :src="basketItem.variation.data.images | itemImages 'urlMiddle' | arrayFirst">
     </a>
     <!-- ./ITEM IMAGE -->
 
@@ -13,11 +13,11 @@
 
         <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
 
-        <div class="item-unit-price">
+        <div class="item-unit-price" itemprop="price" content="${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency }">
             ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
 
-        <div class="item-total-price">
+        <div class="item-total-price" itemprop="totalPrice" content="${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }">
             ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
 
@@ -39,8 +39,8 @@
     <div class="item-details small">
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variationId }" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
-            <div class="item-name">
-                ${ basketItem.variation.data.texts | itemName {{configItemName}} } {# ${ basketItem.variation.variationBase.variationName }  TODO #}
+            <div class="item-name" itemprop="name">
+                ${ basketItem.variation.data.texts | itemName {{configItemName}} }
             </div>
         </a>
 
@@ -59,11 +59,11 @@
             </div>
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
-                <span class="col-xs-6 col-sm-7">
+                <span class="col-xs-6 col-sm-7" itemprop="availability">
                     ${ basketItem.variation.data.variation.availability.names.name }
                 </span>
             </div>
-            <p class="m-y-1">
+            <p class="m-y-1" itemprop="disambiguatingDescription">
                 {!! basketItem.variation.data.texts.description !!}
             </p>
         </div>
