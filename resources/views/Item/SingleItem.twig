@@ -25,8 +25,8 @@
             },
             "offers": {
                 "@type": "Offer",
-                "priceCurrency": "item.documents[0].data.calculatedPrices.rrp.currency",
-                "price": "item.documents[0].data.calculatedPrices.default.price",
+                "priceCurrency": "{{ item.documents[0].data.calculatedPrices.rrp.currency }}",
+                "price": "{{ item.documents[0].data.calculatedPrices.default.price }}",
             }
         }
     </script>
