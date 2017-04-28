@@ -9,12 +9,7 @@
     <meta property="og:title" content="{{ companyName }}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}" />
-
-    {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-        <meta property="og:image" content="{{ companyLogo }}" />
-    {% else %}
-        <meta property="og:image" content="{{ plugin_path('Ceres') }}/{{ companyLogo }}" />
-    {% endif %}
+    <meta property="og:image" content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}" />
 
     <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
 {% endblock %}
