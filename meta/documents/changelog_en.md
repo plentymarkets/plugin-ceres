@@ -7,6 +7,7 @@
 - Breadcrumbs added in the single item view.
 - Microdata scheme added.
 - OG tags added for Social Media, IMessage etc.
+- Alternative texts added for images.
 
 ### Fixed
 

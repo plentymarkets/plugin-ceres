@@ -7,6 +7,7 @@
 - Breadcrumbs in der Artikelansicht hinzugefügt.
 - Microdata Scheme hinzugefügt.
 - OG-Tags hinzugefügt für Social Media, IMessage etc.
+- Alternativtexte für Bilder hinzugefügt.
 
 ### Behoben
 
