@@ -2219,7 +2219,6 @@ Vue.component("item-search", {
 
     created: function created() {
         this.$options.template = this.template;
-        this.log('test');
     },
 
     ready: function ready() {
@@ -2233,8 +2232,6 @@ Vue.component("item-search", {
         if (this.itemSearch.query) {
             ItemListService.updateSearchString(this.itemSearch.query);
         }
-
-        this.log('test');
     },
 
     methods: {
@@ -2290,10 +2287,6 @@ Vue.component("item-search", {
             };
 
             return suggestions;
-        },
-
-        log: function log(test) {
-            console.log(test);
         }
     }
 });
