@@ -15,8 +15,8 @@
 - Inhalte auf statischen Seiten laufen nicht mehr aus der Seite raus.
 - Artikelnamen werden wieder im Warenkorb angezeigt.
 - Filter zeigen wieder Namen an.
-- Autocomplete in der Suche geht wieder.
-- Registrierung verbietet nun das anlegen doppelter emails.
+- Die Autovervollständigung in der Suche geht wieder.
+- Registrierungen mit einer E-Mail-Adresse, für die bereits ein Konto existiert, sind nun nicht mehr möglich.
 
 ### Bekannte Probleme
 

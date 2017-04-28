@@ -16,6 +16,7 @@
 - Item names are displayed again in the shopping cart.
 - Filter names are displayed again.
 - The auto-complete feature in the search has been fixed.
+- Registrations with an email address for which an account already exists are no longer possible.
 
 ### Known issues
 
