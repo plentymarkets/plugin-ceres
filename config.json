@@ -16,7 +16,7 @@
     {
         "tab"       : "Header",
         "key"       : "header.company_name",
-        "label"     : "Name of your shop",
+        "label"     : "Name of your store",
         "type"      : "text",
         "default"   : "Ceres Webshop"
     },

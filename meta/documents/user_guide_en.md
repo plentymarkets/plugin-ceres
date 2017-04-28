@@ -54,6 +54,10 @@ Customise the header and the footer of your design. Display your own logo and de
 <td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>layout</strong> folder in the <strong>CMS » Webspace</strong> menu, for example. Alternatively, enter an http URL that leads to the logo.</td>
 </tr>
 <tr>
+<td><b>Name of your store</b></td>  
+<td>Enter the name of the online store. The name will be used as the title of the page for your online store.</td>
+</tr>
+<tr>
 <td><b>Position of the navigation bar</b></td>  
 <td>Select the position of the navigation bar in the online store.<br /> <strong>At the top</strong> = Display the navigation bar at the top in your online store.<br /> <strong>On the left</strong> = Display the navigation bar on the left in your online store.<br /> <strong>At the top and on the left</strong> = Display the navigation bar at the top and on the left in your online store.</td>
 </tr>
