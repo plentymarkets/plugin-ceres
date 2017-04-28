@@ -1,6 +1,18 @@
 {% extends getPartial('page-design') %}
 
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
+{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set companyName  = config("Ceres.header.company_name") %}
+
+
+{% block PartialHead %}
+    <meta property="og:title" content="{{ companyName }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}" />
+    <meta property="og:image" content="{{ plugin_path('Ceres') }}/{{ companyLogo }}" />
+
+    <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
+{% endblock %}
 
 {% block PageBody %}
 
