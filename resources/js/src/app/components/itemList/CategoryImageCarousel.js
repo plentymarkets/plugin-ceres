@@ -3,6 +3,7 @@ Vue.component("category-image-carousel", {
     props: [
         "imageUrls",
         "itemUrl",
+        "altText",
         "showDots",
         "showNav",
         "template"
