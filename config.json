@@ -15,6 +15,13 @@
     },
     {
         "tab"       : "Header",
+        "key"       : "header.company_name",
+        "label"     : "Name of your store",
+        "type"      : "text",
+        "default"   : "Ceres Webshop"
+    },
+    {
+        "tab"       : "Header",
         "key"       : "header.show_navbars",
         "label"     : "Position of the navigation bar",
         "type"      : "dropdown",
