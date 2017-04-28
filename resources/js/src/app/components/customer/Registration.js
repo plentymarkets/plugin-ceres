@@ -69,7 +69,14 @@ Vue.component("registration", {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
 
-                    NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+                    if (typeof response === "object")
+                    {
+                        NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+                    }
+                    else
+                    {
+                        NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
+                    }
 
                     if (component.backlink !== null && component.backlink)
                     {

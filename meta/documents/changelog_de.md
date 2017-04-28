@@ -1,17 +1,18 @@
 # Release Notes für Ceres
 
-## v1.1.4 (2017-04-28)
+## v1.2.0 (2017-04-28)
 
 ### Hinzugefügt
 
-- Breadcrumbs befinden sich ab jetzt ebenfalls in der Artikelansicht.
-- Micro Data Scheme hinzugefügt.
+- Breadcrumbs in der Artikelansicht hinzugefügt.
+- Microdata Scheme hinzugefügt.
 - OG-Tags hinzugefügt für Social Media, IMessage etc.
+- Alternativtexte für Bilder hinzugefügt.
 
 ### Behoben
 
-- Artikelverfügbarkeiten werden nun auch korrekt beim wechseln der Variante angezeigt.
-- Inhalt auf Statischen Seiten läuft nicht mehr aus der Seite raus.
+- Artikelverfügbarkeiten werden beim Wechseln der Variante korrekt angezeigt.
+- Inhalte auf statischen Seiten laufen nicht mehr aus der Seite raus.
 - Artikelnamen werden wieder im Warenkorb angezeigt.
 - Filter zeigen wieder Namen an.
 - Autocomplete in der Suche geht wieder.
