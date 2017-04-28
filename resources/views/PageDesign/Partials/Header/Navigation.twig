@@ -12,7 +12,7 @@
                      {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
                          <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
                      {% else %}
-                        <img alt="Ceres Webshop Template Logo" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
                      {% endif %}
                  </a>
 
