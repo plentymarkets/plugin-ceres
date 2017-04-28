@@ -12,6 +12,12 @@
 - The federal state (German: Bundesland) is not saved correctly for the address.
 - No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
+## v1.1.3 (2017-04-25)
+
+### Fixed
+
+- Item availabilities fixed.
+
 ## v1.1.2 (2017-04-24)
 
 ### Added

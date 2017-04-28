@@ -93,13 +93,13 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, function(dataItem)
                     {
-                        var value = dataItem.data.texts.name1;
+                        var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
 
                         return {
                             value: value,
                             data : value
                         };
-                    })
+                    }.bind(this))
                 };
 
             return suggestions;

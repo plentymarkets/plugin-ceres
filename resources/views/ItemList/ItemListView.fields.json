@@ -10,7 +10,7 @@
   "salesPrices.price",
   "salesPrices.type",
   "item.id",
-  "texts*",
+  "texts.*",
   "variation.id",
   "variation.availability.names.name",
   "variation.availability.id",
