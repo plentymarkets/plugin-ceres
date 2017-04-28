@@ -1,24 +1,34 @@
 # Release Notes für Ceres
 
-## v1.1.4
+## v1.2.0 (2017-04-28)
+
+### Hinzugefügt
+
+- Breadcrumbs in der Artikelansicht hinzugefügt.
+- Microdata Scheme hinzugefügt.
+- OG-Tags hinzugefügt für Social Media, IMessage etc.
+- Alternativtexte für Bilder hinzugefügt.
 
 ### Behoben
 
-- Artikelverfügbarkeiten werden nun auch korrekt beim wechseln der Variante angezeigt.
-- Inhalt auf Statischen Seiten läuft nicht mehr aus der Seite raus.
-- Artikelnamen werden wieder im Warenkorb angezeigt
-
-## v1.1.3 (2017-04-25)
-
-### Behoben
-
-- Artikelverfügbarkeiten funktionieren wieder.
+- Artikelverfügbarkeiten werden beim Wechseln der Variante korrekt angezeigt.
+- Inhalte auf statischen Seiten laufen nicht mehr aus der Seite raus.
+- Artikelnamen werden wieder im Warenkorb angezeigt.
+- Filter zeigen wieder Namen an.
+- Autocomplete in der Suche geht wieder.
+- Registrierung verbietet nun das anlegen doppelter emails.
 
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
 - Das Bundesland wird an der Adresse falsch gespeichert.
 - Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+
+## v1.1.3 (2017-04-25)
+
+### Behoben
+
+- Artikelverfügbarkeiten funktionieren wieder.
 
 ## v1.1.2 (2017-04-24)
 

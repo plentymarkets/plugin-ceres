@@ -1,16 +1,39 @@
 # Release Notes for Ceres
 
-## v1.1.3 (2017-04-25)
+## v1.2.0 (2017-04-28)
+
+### Added
+
+- Breadcrumbs added in the single item view.
+- Microdata scheme added.
+- OG tags added for Social Media, IMessage etc.
+- Alternative texts added for images.
 
 ### Fixed
 
-- Item availabilities fixed.
+- Item availabilities will be displayed correctly after changing the variation.
+- Contents displayed on static pages will not be larger than the actual page.
+- Item names are displayed again in the shopping cart.
+- Filter names are displayed again.
+- The auto-complete feature in the search has been fixed.
 
 ### Known issues
 
 - Due to a sporadically occurring error, addresses cannot be edited at the moment.
 - The federal state (German: Bundesland) is not saved correctly for the address.
 - No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
+## v1.1.3 (2017-04-25)
+
+### Fixed
+
+- Item availabilities fixed.
+
+## v1.1.3 (2017-04-25)
+
+### Fixed
+
+- Item availabilities fixed.
 
 ## v1.1.2 (2017-04-24)
 

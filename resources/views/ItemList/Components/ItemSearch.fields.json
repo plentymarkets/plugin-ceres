@@ -1,3 +1,4 @@
 [
-  "texts.name*"
+  "texts.name*",
+  "texts.lang"
 ]
