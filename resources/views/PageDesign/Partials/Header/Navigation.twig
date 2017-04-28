@@ -2,6 +2,7 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set lang         = services.sessionStorage.getLang() %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
+{% set companyName  = config("Ceres.header.company_name") %}
 
 <nav class="navbar">
       <div class="container-max">
@@ -9,9 +10,9 @@
              <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
                      {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-                         <img src="{{ companyLogo }}" class="img-fluid"/>
+                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
                      {% else %}
-                        <img src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
                      {% endif %}
                  </a>
 
