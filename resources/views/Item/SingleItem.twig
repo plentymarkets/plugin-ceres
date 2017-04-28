@@ -192,12 +192,13 @@
                                     </tr>
                                 {% endif %}
 
-                                {% if 'item.condition' in itemData or 'all' in itemData %}
-                                    <tr>
-                                        <td>{{ trans("Ceres::Template.itemCondition") }}</td>
-                                        <td>{{ trans("Ceres::Template.itemNew") }}</td>
-                                    </tr>
-                                {% endif %}
+                                {# Condition #}
+                                {#{% if 'item.condition' in itemData or 'all' in itemData %}#}
+                                    {#<tr>#}
+                                        {#<td>{{ trans("Ceres::Template.itemCondition") }}</td>#}
+                                        {#<td>{{ trans("Ceres::Template.itemNew") }}</td>#}
+                                    {#</tr>#}
+                                {#{% endif %}#}
 
                                 {% if 'item.age_rating' in itemData or 'all' in itemData %}
                                     <tr>
