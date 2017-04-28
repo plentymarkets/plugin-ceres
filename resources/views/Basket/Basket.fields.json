@@ -5,7 +5,7 @@
   "texts.urlPath",
   "texts.lang",
   "variation.number",
-  "variation.availability.names.name",
+  "variation.availability.names.*",
   "variation.itemId",
   "variation.id",
   "item.id",
