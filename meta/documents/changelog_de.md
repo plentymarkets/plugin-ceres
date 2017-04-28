@@ -16,6 +16,7 @@
 - Artikelnamen werden wieder im Warenkorb angezeigt.
 - Filter zeigen wieder Namen an.
 - Autocomplete in der Suche geht wieder.
+- Registrierung verbietet nun das anlegen doppelter emails.
 
 ### Bekannte Probleme
 
