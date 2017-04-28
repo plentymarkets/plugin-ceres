@@ -8,8 +8,8 @@
                 </a>
             </li>
             <li class="breadcrumb-item" :class="{'active': index == breadcrumbs.length - 1}" v-for="(index, breadcrumb) in breadcrumbs">
-                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details != 'undefined'">${ breadcrumb.details[0].name }</span>
-                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details == 'undefined'">${ breadcrumb }</span>
+                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details != undefined">${ breadcrumb.details[0].name }</span>
+                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details == undefined">${ breadcrumb }</span>
                 <a href="javascript:void(0)" v-if="index != breadcrumbs.length - 1" @click="renderItems(breadcrumb)">${ breadcrumb.details[0].name }</a>
             </li>
         </ul>
