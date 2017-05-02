@@ -5,6 +5,7 @@
 ### Behoben
 
 - Shop-Logo kann wieder angeklickt werden.
+- Auftragsstatus und Zahlungsstatus in der Auftragsübersicht werden wieder angezeigt
 
 ## v1.2.0 (2017-04-28)
 
