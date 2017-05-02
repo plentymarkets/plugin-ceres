@@ -4,13 +4,14 @@
 
 {% set image = item.data.images.all | first %}
 {% set configItemName = config("Ceres.item.name") %}
+{% set itemUrl =  item.data | itemURL %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <div class="thumb-background"></div>
 
         <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false"
-                       item-url="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}"></add-to-basket>
+                       item-url="{{ itemUrl }}"></add-to-basket>
 
         <div class="thumb-image">
             <div class="square-container">
@@ -18,13 +19,14 @@
 
                     <category-image-carousel template="#vue-category-image-carousel"
                                              :image-urls="{{ item.data.images | json_encode() }} | itemImages 'urlMiddle'"
-                                             :item-url="{{ item.data | json_encode() }} | itemURL"
+                                             alt-text="{{ item.data.texts | itemName(configItemName) }}"
+                                             item-url="{{ itemUrl }}"
                                              :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                                              :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
                     </category-image-carousel>
 
                     <noscript>
-                        <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                        <a href="{{ itemUrl }}">
                             <img class="img-fluid" src="{{ image.urlMiddle }}">
                         </a>
                     </noscript>
@@ -36,7 +38,7 @@
 
         {% if item.data.item.storeSpecial.id > 0 %}
 
-            {% set storeSpecial = item.data.item.storeSpecial.names[0].name %}
+            {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
             <div class="special-tags">
                 {% if  item.data.item.storeSpecial.id == 1 %}
@@ -70,22 +72,22 @@
 
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
-            <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}" class="thumb-title small">
-                {{ item.data.texts[0].name1 }}
+            <a href="{{ itemUrl }}" class="thumb-title small">
+                {{ item.data.texts | itemName(configItemName) }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
-                        <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                        <a href="{{ itemUrl }}">
                             <del class="crossprice">
                                 {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
                             </del>
                         </a>
                     {% endif %}
 
-                    <a href="{{ item.data.item.id | buildItemURL(item.data.variation.id, true) }}">
+                    <a href="{{ itemUrl }}">
                         <div class="price">
                             {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
                         </div>

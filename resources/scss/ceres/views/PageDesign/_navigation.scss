@@ -14,3 +14,190 @@ nav.navbar ul.nav li.dropdown:hover .dropdown-menu {
 .dropdown-item.special-case {
 	padding: 3px 5px !important;
 }
+
+/* settings */
+// mobile
+$menu-h-sm  			: 100%;
+$menu-w-sm  			: 100%;
+$menu-bg-sm 			: $brand-primary;
+$menu-breadcrumb-bg 	: $gray-darker;
+$menu-breadcrumb-color 	: $white;
+$menu-color-sm 			: $white;
+$menu-font-s-sm  		: 1.2em;
+$menu-font-f-sm  		: $font-family-serif;
+
+// desktop
+$menu-h-lg  			: 100%;
+$menu-w-lg  			: 100%;
+$menu-bg-lg 			: transparent;
+$menu-color-lg 			: $brand-primary;
+$menu-font-s-lg  		: 1em;
+$menu-font-f-lg  		: $font-family-serif;
+$menu-li-bg-hover		: $brand-primary;
+$menu-li-color-hover	: $white;
+// bigmenu
+$menu-big-menu-bg 				: darken($brand-primary,10%);
+$menu-big-menu-li-bg			: transparent;
+$menu-big-menu-li-bg-hover		: $brand-primary;
+$menu-big-menu-li-color			: $white;
+$menu-big-menu-li-color-hover	: $text-color;
+
+body.menu-is-visible { overflow-y : hidden; }
+#mainNavbarCollapsable {
+	background 	: $menu-bg-sm;
+	bottom 		: 0;
+	color 		: $menu-color-sm;
+	font-size 	: $menu-font-s-sm;
+	left 		: 0;
+	opacity 	: .6;
+	overflow-y 	: auto;
+	position 	: fixed;
+	right 		: 0;
+	top 		: 0;
+	transform 	: translateX(-100%);
+	transition 	: all .3s ease;
+
+	&.open {
+		opacity 	: 1;
+		transform 	: translateX(0);
+	}
+
+	ul.breadcrumb {
+		background : $menu-breadcrumb-bg;
+		max-width  : initial;
+		font-size  : .8em;
+		padding    : 0 calc(15px + .5em) 0 15px;
+
+		li {
+			display : inline-block;
+			cursor 	: pointer;
+			padding : .8rem 0 .75rem;
+			&.btnClose {
+				float 		: right;
+				padding-top : .6em;
+				&:before {
+					content 	: "\f00d";
+					font-family : "FontAwesome";
+					font-size   : 1.2em;
+				}
+			}
+			&:not(:first-of-type) a:before {
+				content 		: "\f0da";
+				font-family 	: FontAwesome;
+				font-size 		: 1rem;
+				padding 		: 0 .3rem;
+			}
+			&:first-of-type a:before { display : none!important; };
+		}
+	}
+
+	ul.mainmenu {
+		list-style 	: none;
+		height 		: 100%;
+		margin 		: 0;
+		padding 	: 0;
+		position 	: relative;
+		width		: 100%;
+
+		li 	{
+			width : 100%;
+			cursor: pointer;
+
+			a 	{
+				color 	: inherit;
+				display : inline-block;
+				padding : 1rem ;
+				width 	: 100%;
+			}
+
+			ul {
+				background 	: $menu-bg-sm;
+				display 	: none;
+				left 		: 0;
+				list-style 	: none;
+				margin 		: 0;
+				min-height 	: 100%;
+				padding 	: 0;
+				position 	: absolute;
+				top 		: 0;
+				width 		: 100%;
+			}
+			&.open>ul { display : block; }
+			&.ddown>a:after {
+				border 			: none;
+				content			: "\f0da";
+				float 			: right;
+				font-family 	: FontAwesome;
+				font-size 		: 1.5rem;
+				height 			: auto;
+				padding 		: 0 .5em 0 1em;
+				width 			: auto;
+			}
+		}
+	}
+
+	@include media-breakpoint-up(lg){
+		background-color : transparent;
+		display 		 : block!important;
+		opacity 		 : 1;
+		overflow 		 : visible;
+		position 		 : relative;
+		transform 		 : translateX(0);
+		width 			 : 100%;
+		font-size 		 : $menu-font-s-lg;
+		transition 		 : all .1s ease;
+
+		.breadcrumb { display : none!important; }
+		ul.mainmenu {
+			color : $menu-color-lg;
+			text-align: right;
+			.open>ul { display : none!important; }
+			>li {
+				display : inline-block;
+				width 	: auto;
+				position: relative;
+				>a { padding: 1.3rem 1rem; }
+				>ul {
+
+					display 		: block;
+					visibility 		: hidden;
+					opacity 		: 0;
+					transition 		: all .1s ease;
+					background 		: $menu-big-menu-bg;
+					height 			: auto;
+					top 			: 100%;
+					width 			: 100%;
+					text-align 		: center;
+
+					>li {
+						background 	: $menu-big-menu-li-bg;
+						color 		: $menu-big-menu-li-color;
+						transition  : all .1s ease;
+						width 		: 100%;
+
+						&:hover {
+							background  	: $menu-big-menu-li-bg-hover;
+							color 			: $menu-big-menu-li-color;
+							text-decoration : none;
+						}
+					}
+				}
+
+				&:hover {
+					background-color : $menu-li-bg-hover;
+					color 			 : $menu-li-color-hover;
+					transition 		 : all .1s ease;
+					>ul {
+						visibility 		: visible;
+						opacity 		: 1;
+						transition 		: all .1s ease;
+					}
+
+				}
+				&.ddown>a:after { content : '\f0d7'; font-size: inherit; padding-left:.5em;}
+				&.ddown .ddown a:after { display : none; }
+			}
+		}
+	}
+
+}

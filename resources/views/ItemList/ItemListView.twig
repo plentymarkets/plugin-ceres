@@ -5,7 +5,9 @@
     {% set page = request.get("page") %}
 {% endif %}
 
-{% set itemsPerPage = config("Ceres.pagination.defaultItemsPerPage") %}
+{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
+{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
+{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
 {% if request.get("items") %}
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
@@ -15,7 +17,7 @@
     {% set sorting = request.get("sorting") %}
 {% endif %}
 
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting}) %}
+{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
@@ -42,7 +44,10 @@
                     <div class="col-xs-12">
                         <div class="list-wrapper">
                             <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
-                            <items-per-page template="#vue-items-per-page" :pagination-values="{{ config("Ceres.pagination.values") | split(', ') | json_encode() }}"></items-per-page>
+                            <items-per-page
+                                template="#vue-items-per-page"
+                                :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
+                                :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
                             <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
@@ -71,4 +76,8 @@
 
     </div>
 
+{% endblock %}
+
+{% block PartialHead %}
+<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 {% endblock %}

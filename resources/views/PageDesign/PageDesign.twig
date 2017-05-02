@@ -12,10 +12,13 @@
 {% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
 {% set showItemConfirm = config("Ceres.basket.add_item_to_basket_confirm") %}
 
-<html lang="{{ lang }}" data-framework="vue">
+<html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
     <head>
         {% include getPartial('head') %}
+
+        {% block PartialHead %}
+        {% endblock %}
     </head>
 
     <body>

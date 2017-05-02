@@ -1,8 +1,8 @@
 <script type="x/template" id="vue-category-image-carousel">
     <div class="owl-carousel owl-theme">
         <a v-for="imageUrl in imageUrls" :href="itemUrl">
-            <item-lazy-img template="#vue-item-lazy-img" v-if="$index === 0" :image-url="imageUrl"></item-lazy-img>
-            <img v-else class="img-fluid owl-lazy" :data-src="imageUrl">
+            <item-lazy-img template="#vue-item-lazy-img" v-if="$index === 0" :image-url="imageUrl" :alt="altText"></item-lazy-img>
+            <img v-else class="img-fluid owl-lazy" :data-src="imageUrl" :alt="altText">
         </a>
     </div>
 </script>

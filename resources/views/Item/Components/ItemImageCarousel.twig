@@ -1,14 +1,18 @@
+{% set configItemName = config("Ceres.item.name") %}
+
 <script type="x/template" id="vue-item-image-carousel">
-    <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" v-el:single>
-        <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor">
-            <a :href="image" data-lightbox="single-big-image-gallery">
-                <img class="owl-lazy" :data-src="image">
-            </a>
+    <div itemscope itemtype="http://schema.org/Thing">
+        <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" v-el:single>
+            <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor">
+                <a :href="image" data-lightbox="single-big-image-gallery">
+                    <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }" class="owl-lazy" :data-src="image" itemprop="image">
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="owl-thumbs">
-        <img @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }"
-             :src="imagePreview"
-             v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview'">
+        <div class="owl-thumbs">
+            <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }"  @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }"
+                 :src="imagePreview"
+                 v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview'">
+        </div>
     </div>
 </script>

@@ -2,13 +2,13 @@
 
 <div class="container-toc"></div>
 
-**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins.
+**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide, you will learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets
+## Setting up Ceres in plentymarkets<a id="10."></a>
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
     When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the normal plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
 </div>
 
@@ -51,7 +51,15 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>Documents</strong> tab of a category, for example.</td>
+<td>Enter the URL to your company logo. The company logo can be uploaded in the <strong>layout</strong> folder in the <strong>CMS » Webspace</strong> menu, for example. Alternatively, enter an http URL that leads to the logo.</td>
+</tr>
+<tr>
+<td><b>Name of your store</b></td>  
+<td>Enter the name of the online store. The name will be used as the title of the page for your online store.</td>
+</tr>
+<tr>
+<td><b>Position of the navigation bar</b></td>  
+<td>Select the position of the navigation bar in the online store.<br /> <strong>At the top</strong> = Display the navigation bar at the top in your online store.<br /> <strong>On the left</strong> = Display the navigation bar on the left in your online store.<br /> <strong>At the top and on the left</strong> = Display the navigation bar at the top and on the left in your online store.</td>
 </tr>
 <tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  
@@ -121,6 +129,9 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 </thead>
 <tbody>
 <tr>
+<td colspan="2" class="th">Tab: Item view</td>  
+</tr>  
+<tr>
 <td><b>Item name</b></td>  
 <td>Select <strong>Name 1</strong>, <strong>Name 2</strong> or <strong>Name 3</strong>. Texts for these fields are saved in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of the item. If <strong>Name 2</strong> or <strong>Name 3</strong> is selected, but no name was saved in the text field, <strong>Name 1</strong> will be used as the item name.</td>
 </tr>
@@ -133,8 +144,27 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td>Select the number of decimal places for discounts to be displayed for an item in the item list.</td>
 </tr>
 <tr>
-<td><b>Show variations in the category item list</b></td>  
-<td>Display variations in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
+<td><b>Show variations by type</b></td>  
+<td>Display variations by type in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
+</tr>
+<tr>
+<td><b>Show image carousel dots in category item list</b></td>  
+<td>Active, to show dots below the image carousel of the category item list.</td>
+</tr>
+<tr>
+<td><b>Show image carousel navigation in category item list</b></td>  
+<td>Active, to show navigation arrows in the image carousel of the category item list.</td>
+</tr>
+<tr>
+<td><b>Loading animation</b></td>  
+<td>Select the loading animation for the category view.<br /> <strong>Blur</strong> = The category view will be blurred when loading.<br /> <strong>Bars</strong> = A loading animation with bars will be displayed when loading the category view.<br /> <strong>Spinner</strong> = A loading animation with a spinner will be displayed when loading the category view.</td>
+</tr>
+<tr>
+<td colspan="2" class="th">Tab: Item lists</td>  
+</tr>  
+ <tr>
+<td><b>Number of last seen items</b></td>  
+<td>Select the number of last seen items.</td>
 </tr>
 </tbody>
 <caption>Table 2: Customising the item view</caption>
@@ -217,15 +247,15 @@ Customise the pagination of the item overview and the online store's item sortin
 <tr>
 <td><b>Always show last page</b></td>  
 <td>Activate to always display the last page in the pagination.</td>
+</tr>
+<tr>
+<td><b>Columns per page</b></td>  
+<td>Select the number of columns that is used for calculating the values in the <strong>Items per page</strong> drop-down menu.</td>
 </tr>  
 <tr>
-<td><b>Enable number of items per page</b></td>  
-<td>Activate one, multiple or all number values to display the selected values in the <strong>Items per page</strong> drop-down menu in the item overview.</td>
-</tr>  
-<tr>
-<td><b>Default number of items per page</b></td>  
-<td>Select the default number of items in the item list.</td>
-</tr>  
+<td><b>Rows per page</b></td>  
+<td>Activate one, multiple or all number values. The activated values are multiplied by the number of columns and displayed in the <strong>Items per page</strong> drop-down menu in the item overview.</td>
+</tr>
 <tr>
 <td><b>Enable item sorting by</b></td>
 <td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item ID (ascending)</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID (descending)</strong> = Sort items by item ID in descending order.<br /> <strong>Item name (ascending)</strong>  = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name (descending)</strong>  = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position (ascending)</strong> = Display the item with the highest position number first.<br /> <strong>Item position (descending)</strong> = Display the item with the lowest position number first.<br /> <b><i>Important:</i></b> In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price (ascending)</strong> = Display the item with the lowest price first.<br /> <strong>Price (descending)</strong> = Display the item with the highest price first.<br /> <strong>Customer feedback (ascending)</strong> = Display the item with the lowest customer feedback first.<br /> <strong>Customer feedback (descending)</strong> = Display the item with the highest customer feedback first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID (ascending)</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID (descending)</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number (ascending)</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number (descending)</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last variation update</strong> = Display the last updated item variation first.<br /> <strong>First variation update</strong> = Display the first updated item variation first.<br /> <strong>Variation name (ascending)</strong> = Sort item variations in alphabetical order by variation name (A-Z).<br /> <strong>Variation name (descending)</strong> = Sort item variations in alphabetical order by variation name (Z-A).<br /> <strong>Variation position (ascending)</strong> = Display the item variation with the highest position number first.<br /> <strong>Variation position (descending)</strong> = Display the item variation with the lowest position number first.<br /> <b><i>Important:</i></b> In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Active variation (ascending)</strong> = Sort active item variations in ascending order.<br /> <strong>Active variation (descending)</strong> = Sort active item variations in descending order.<br /> <strong>Main variation (ascending)</strong> = Sort main item variations in ascending order.<br /> <strong>Main variation (descending)</strong> = Sort main item variations in descending order.<br /> <strong>Manufacturer (ascending)</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer (descending)</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Random items</strong> = Display items in a different, randomly chosen order every time.
@@ -297,6 +327,18 @@ Settings specifically aimed at plugin developers are available in the **Registra
 <caption>Table 5: Carrying out settings for plugin development</caption>
 </table>
 
+### Linking item lists
+
+Display item lists, e.g. **Last seen items**, in a very convenient way in your online store by using template containers. Proceed as follows to link the item list for last seen items with the item view of your online store.
+
+##### Linking an item list:
+
+1. Click on **Start » Plugins**. 
+2. Click on the **Content** tab. 
+3. Go to the **Last seen items** area. 
+4. Select one, several or **ALL** containers in which you want to display your item list, e.g. **Single item: Container for item lists**. 
+5. **Save** the settings.<br /> → The item list will be displayed in the selected containers in the online store.
+
 ### Setting online store languages
 
 By default, **Ceres** will be available in German and English. Select these languages in the header area of your online store. **Ceres** supports all languages available in plentymarkets. You can translate your online store and your items into other languages. Carry out language settings in the plentymarkets back end.
@@ -333,6 +375,43 @@ Alternatively, save your legal texts in HTML format. For this purpose, use the f
 7. **Save** the settings.
 
 Enter the texts for the **cancellation rights**, the **privacy policy** and the **legal disclosure** for your online store in the desired languages. These texts will be displayed on the respective pages in **Ceres**.
+
+### Setting up filters
+
+Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
+
+Set up attributes and properties first and link them with your items. For further information about attributes, refer to the [Managing attributes](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapter.
+For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapters.
+
+Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
+Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
+
+## Customising Ceres<a id="20."></a>
+
+Various possibilities are available to customise the **Ceres** template plugin and tailor it to meet your needs.
+
+### Creating an individual template
+
+**Ceres** is a public project and available on [GitHub](https://github.com/plentymarkets/plugin-ceres). You can use the plugin code to create your own template plugin. Please note the following when creating your own template on the basis of **Ceres**:  
+
+* Register with [GitHub](https://github.com/join?source=header-home) 
+* Open the [Ceres](https://github.com/plentymarkets/plugin-ceres) project 
+* Create your own fork of the project 
+* Customise the source code 
+
+For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). 
+
+<div class="alert alert-warning" role="alert">
+    Note that you have to update your template manually if you want to use features of a newer version of the <strong>Ceres</strong> plugin. Automatic plugin updates are only available for plugins purchased on plentyMarketplace.
+</div>
+
+### Purchasing a theme on plentyMarketplace
+
+Theme plugins are an easy way of customising the looks of **Ceres**. Various [themes](https://marketplace.plentymarkets.com/plugins/themes) for **Ceres** are available on plentyMarketplace. Changes made to the theme plugin have no impact on future updates of the template plugin **Ceres**. 
+
+### Creating an individual theme
+
+Learn how to create your own theme plugin and how to fully customise **Ceres** in our [theme guide](https://developers.plentymarkets.com/dev-doc/theme-plugins).
 
 ## License
 

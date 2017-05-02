@@ -1,44 +1,41 @@
+{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set lang         = services.sessionStorage.getLang() %}
+{% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
+{% set companyName  = config("Ceres.header.company_name") %}
 
 <nav class="navbar">
       <div class="container-max">
         <div class="row">
-             <div class="brand-wrapper">
+             <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
-                     <img src="{{ companyLogo }}" class="img-fluid"/>
+                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
+                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
+                     {% else %}
+                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
+                     {% endif %}
                  </a>
 
-                <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">
+                 <button id="btnMainMenuToggler" class="navbar-toggler hidden-lg-up" type="button">
                      &#9776;
                  </button>
              </div>
 
-            <div class="collapse navbar-toggleable-md" id="mainNavbarCollapse">
-                 <ul class="nav navbar-nav pull-lg-right">
-                     {% for category in services.category.getNavigationTree("item", lang) %}
-                         {% if category.children is empty %}
-                             <li class="nav-item">
-                                 <a class="nav-link" href="{{ services.category.getURL( category, lang ) }}">{{ category.details.first.name }}</a>
-                             </li>
-                         {% else %}
-                             <li class="nav-item dropdown">
-                                 <a class="dropdown-toggle nav-link" id="{{ category.details.first.name }}_Menu" data-target="#"
-                                    href="{{ services.category.getURL( category, lang ) }}"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ category.details.first.name }}
-                                 </a>
-                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="{{ category.details.first.name }}_Menu">
-                                     {% for subcat in category.children %}
-                                         <a class="dropdown-item special-case" href="{{ services.category.getURL( subcat, lang ) }}">
-                                             {{ subcat.details.first.name }}
-                                         </a>
-                                     {% endfor %}
-                                 </div>
-                             </li>
-                         {% endif %}
-                     {% endfor %}
-                 </ul>
-             </div>
+            <div id="mainNavbarCollapsable">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a>{{ trans("Ceres::Template.generalBigAll") }}</a></li>
+                    <li class="btnClose"></li>
+                </ul>
+                {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
+                    <ul class="mainmenu pull-lg-right">
+                        {% set categories = services.category.getNavigationTree("item", lang) %}
+
+                        {{ Tree.get_nav_bar(categories, "") }}
+                    </ul>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 </nav>
+

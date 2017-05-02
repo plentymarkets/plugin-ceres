@@ -1,0 +1,10 @@
+<script type="x/template" id="vue-category-side-menu-node">
+    <li class="nav-item" v-bind:class="{ 'active': isActive }">
+        <a @click="nodeClicked()" class="nav-link">${ node.details[0].name }</a>
+        <ul>
+            <category-side-menu-node template="#vue-category-side-menu-node" v-for="children in node.children"
+                                     :node="children" :url="url"
+                                     :node-list="nodeList.slice(0)"></category-side-menu-node>
+        </ul>
+    </li>
+</script>

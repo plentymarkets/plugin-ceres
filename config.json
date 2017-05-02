@@ -205,7 +205,27 @@
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",
-        "default"   : "/layout/plugins/production/ceres/images/ceres-logo.svg"
+        "default"   : "images/ceres-logo.svg"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.company_name",
+        "label"     : "Name of your store",
+        "type"      : "text",
+        "default"   : "Ceres Webshop"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.show_navbars",
+        "label"     : "Position of the navigation bar",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "top"         : "At the top",
+            "side"         : "On the left",
+            "both"         : "At the top and on the left"
+        },
+        "default"   : "top"
     },
     {
         "tab"       : "Header",
@@ -360,29 +380,55 @@
     {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
-        "label"                         : "Show variations in the category item list",
+        "label"                         : "Show variations by type",
         "type"                          : "dropdown",
         "possibleValues"                :
         {
-            "1"     : "All",
-            "2"     : "Only main variations",
-            "3"     : "Only child variations"
+            "all"                       : "All",
+            "main"                      : "Only main variations",
+            "child"                     : "Only child variations"
         },
-        "default"                       : "1"
+        "default"                       : "all"
     },
     {
         "tab"       : "Item view",
         "key"       : "item.category_show_dots",
-        "label"     : "Show category carousel dots",
+        "label"     : "Show image carousel dots in category item list",
         "type"      : "checkbox",
         "default"   : "true"
     },
     {
         "tab"       : "Item view",
         "key"       : "item.category_show_nav",
-        "label"     : "Show category carousel navigation",
+        "label"     : "Show image carousel navigation in category item list",
         "type"      : "checkbox",
         "default"   : "false"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.loading_animation_type",
+        "label"             : "Loading animation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "blur"          : "Blur",
+            "bars"          : "Bars",
+            "spinner"       : "Spinner"
+        },
+        "default"           : "blur"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.last_seen",
+        "label"             : "Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
     },
     {
         "tab"                           : "Shopping cart",
@@ -476,29 +522,31 @@
     },
     {
         "tab"           : "Pagination and sorting",
-        "key"           : "pagination.values",
-        "label"         : "Enable number of items per page",
-        "type"          : "multi_select",
-        "possibleValues":
-        {
-            "20"          : "20",
-            "50"          : "50",
-            "100"         : "100"
-        },
-        "default"       : "20, 50, 100"
-    },
-    {
-        "tab"           : "Pagination and sorting",
-        "key"           : "pagination.defaultItemsPerPage",
-        "label"         : "Default number of items per page",
+        "key"           : "pagination.columnsPerPage",
+        "label"         : "Columns per page",
         "type"          : "dropdown",
         "possibleValues":
         {
-            "20"          : "20",
-            "50"          : "50",
-            "100"         : "100"
+            "3"          : 3,
+            "4"          : 4,
+            "5"          : 5
         },
-        "default"       : "20"
+        "default"       : "4"
+    },
+    {
+        "tab"           : "Pagination and sorting",
+        "key"           : "pagination.rowsPerPage",
+        "label"         : "Rows per page",
+        "type"          : "multi_select",
+        "possibleValues":
+        {
+            "5"          : 5,
+            "10"         : 10,
+            "15"         : 15,
+            "20"         : 20,
+            "25"         : 25
+        },
+        "default"       : "5, 10, 25"
     },
     {
         "tab"                       : "Pagination and sorting",

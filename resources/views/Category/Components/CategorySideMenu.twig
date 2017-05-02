@@ -1,0 +1,8 @@
+<script type="x/template" id="vue-category-side-menu">
+    <ul>
+        <category-side-menu-node template="#vue-category-side-menu-node" v-for="node in categories"
+                                 :node="node" url=""
+                                 :node-list="[]">
+        </category-side-menu-node>
+    </ul>
+</script>

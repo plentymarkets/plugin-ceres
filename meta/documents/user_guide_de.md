@@ -2,13 +2,13 @@
 
 <div class="container-toc"></div>
 
-**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **Io** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden.
+**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **Io** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden. In diesem User Guide erfahren Sie, wie Sie <a href="#10.">Ceres einrichten</a> und wie Sie <a href="#20.">Ceres individualisieren</a>.
 
-## Ceres in plentymarkets einrichten
+## Ceres in plentymarkets einrichten<a id="10."></a>
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-danger" role="alert">
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
@@ -51,7 +51,15 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>   
 <tr>
 <td><b>URL to your company logo</b></td>  
-<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Tab <strong>Dokumente</strong> einer Kategorie hochgeladen werden.</td>
+<td>URL des Firmenlogos eingeben. Das Firmenlogo kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>layout</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Logo-Bild führt.</td>
+</tr>
+<tr>
+<td><b>Name of your store</b></td>  
+<td>Namen des Webshops eingeben. Der Name wird als Seitentitel für den Webshop verwendet.</td>
+</tr>
+<tr>
+<td><b>Position of the navigation bar</b></td>  
+<td>Position wählen, an der die Navigationsleiste im Webshop angezeigt wird.<br /> <strong>At the top</strong> = Navigationsleiste im Webshop oben anzeigen.<br /> <strong>On the left</strong> = Navigationsleiste im Webshop links anzeigen.<br /> <strong>At the top and on the left</strong> = Navigationsleiste im Webshop oben und links anzeigen.</td>
 </tr>
 <tr>
 <td><b>Fix the navigation bar at the top of the page</b></td>  
@@ -121,6 +129,9 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 </thead>
 <tbody>
 <tr>
+<td colspan="2" class="th">Tab: Item view</td>  
+</tr> 
+<tr>
 <td><b>Item name</b></td>  
 <td><strong>Name 1</strong>, <strong>Name 2</strong> oder <strong>Name 3</strong> wählen. Texte für die Felder werden im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels gespeichert. Wenn <strong>Name 2</strong> oder <strong>Name 3</strong> gewählt wurde, aber kein Name im Textfeld gespeichert wurde, wird <strong>Name 1</strong> als Artikelname verwendet.</td>
 </tr>
@@ -133,8 +144,27 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td>Anzahl der Dezimalstellen für den Rabatt wählen, der in der Artikelliste am Artikel angezeigt wird.</td>
 </tr>
 <tr>
-<td><b>Show variations in the category item list</b></td>  
-<td>Varianten in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
+<td><b>Show variations by type</b></td>  
+<td>Varianten nach Typ in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
+</tr>
+<tr>
+<td><b>Show image carousel dots in category item list</b></td>  
+<td>Aktivieren, um unterhalb des Bilderkarussells eines Artikels in der Kategorieansicht Punkte anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Show image carousel navigation in category item list</b></td>  
+<td>Aktivieren, um im Bilderkarussell eines Artikels in der Kategorieansicht Navigationspfeile anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Loading animation</b></td>  
+<td>Ladeanimation für die Kategorieansicht wählen.<br /> <strong>Blur</strong> = Die Kategorieansicht wird beim Laden kurz verschwommen dargestellt.<br /> <strong>Bars</strong> = Beim Laden der Kategorienansicht wird eine Ladeanimation mit Balken angezeigt.<br /> <strong>Spinner</strong> = Beim Laden der Kategorieansicht wird eine Ladeanimation mit Spinner angezeigt.</td>
+</tr>
+<tr>
+<td colspan="2" class="th">Tab: Item lists</td>  
+</tr>
+ <tr>
+<td><b>Number of last seen items</b></td>  
+<td>Anzahl der zuletzt gesehenen Artikel wählen.</td>
 </tr>
 </tbody>
 <caption>Tab. 2: Artikelansicht anpassen</caption>
@@ -218,14 +248,14 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <tr>
 <td><b>Always show last page</b></td>  
 <td>Aktivieren, um die letzte Seite in der Paginierung immer anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>Columns per page</b></td>  
+<td>Anzahl der Spalten wählen, die als Berechnungsgrundlage für das Dropdown-Menü <strong>Artikel pro Seite</strong> genutzt wird.</td>
 </tr>  
 <tr>
-<td><b>Enable number of items per page</b></td>  
-<td>Einen, mehrere oder alle Zahlenwerte aktivieren, um die gewählten Werte im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht anzuzeigen.</td>
-</tr>  
-<tr>
-<td><b>Default number of items per page</b></td>  
-<td>Standardwert für die Anzahl der Artikel in der Artikelliste wählen.</td>
+<td><b>Rows per page</b></td>  
+<td>Einen, mehrere oder alle Zahlenwerte aktivieren. Die aktivierten Werte werden mit den Spalten multipliziert und im Dropdown-Menü <strong>Artikel pro Seite</strong> in der Artikelübersicht angezeigt.</td>
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
@@ -288,7 +318,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 </tr> 
 <tr>
 <td><b>Enable logging options</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print sucess</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stack trace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
+<td>Eine, mehrere oder <strong>ALLE</strong> Logging-Optionen aktivieren.<br /> <strong>Print errors</strong> = Fehlermeldungen im Webshop ausgeben.<br /> <strong>Print success</strong> = Erfolgsmeldungen im Webshop ausgeben.<br /> <strong>Print warnings</strong> = Warnungen im Webshop ausgeben.<br /> <strong>Print information</strong> = Informationen im Webshop ausgeben.<br /> <strong>Print stack trace</strong> = Stack trace ausgeben.<br /> <strong>Log messages</strong> = Meldungen loggen.<br /> <strong>Show error codes</strong> = Fehler-Codes anzeigen.</td>
 </tr>
 <tr>
 <td><b>Performance level</b></td>  
@@ -297,6 +327,18 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 </tbody>
 <caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
+
+### Artikellisten verknüpfen
+
+Artikellisten, wie z.B. **Zuletzt gesehene Artikel**, verknüpfen Sie bequem über Template-Container an der gewünschten Stelle in Ihrem Webshop. Gehen Sie wie im Folgenden beschrieben vor, um die Artikelliste für zuletzt gesehene Artikel in der Einzelansicht eines Artikels im Webshops zu verknüpfen.
+
+##### Artikelliste verknüpfen:
+
+1. Klicken Sie auf **Start » Plugins**.
+2. Wechseln Sie in das Tab **Content**. 
+3. Wählen Sie den Bereich **Last seen items**.
+4. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Single item: Container for item lists**.
+5. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Webshop-Sprachen einstellen
 
@@ -334,6 +376,43 @@ Alternativ speichern Sie Ihre Rechtstexte im HTML-Format. Nutzen Sie hierfür di
 6. **Speichern** Sie die Einstellungen.
 
 Geben Sie die Texte für die **Widerrufsbelehrung**, die **Datenschutzerklärung** und das **Impressum** analog in den gewünschten Sprachen ein. Die Texte werden in **Ceres** auf den zugehörigen Seiten angezeigt.
+
+### Filter einrichten
+
+Im Webshop **Ceres** richten Sie Filter für die Suche sowie für die Kategorie-Ansicht mit Hilfe von Facetten vom Typ **Attribut/Merkmal** ein.
+
+Richten Sie dazu zunächst Attribute und Merkmale ein und verknüpfen diese mit Ihren Artikeln. Weitere Informationen zu Attributen finden Sie unter [Attribute verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#1).
+Weitere Informationen zu Merkmalen finden Sie unter [Merkmale verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#2).
+
+Anschließend erstellen Sie passende Facetten für Attribute und Merkmale. Weitere Informationen zu Facetten finden Sie unter [Facetten anlegen](https://www.plentymarkets.eu/handbuch/mandant-shop/globale-einstellungen/externe-dienste/facettensuche/#2-1).
+Eine ausführliche Anleitung zur Einrichtung von Filtern finden Sie auch in unserem [Forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679).
+
+## Ceres individualisieren<a id="20."></a>
+
+Ihnen stehen verschiedene Möglichkeiten zur Verfügung, um das Template-Plugin **Ceres** zu individualisieren und an Ihre Bedürfnisse anzupassen.
+
+### Eigenes Template erstellen
+
+**Ceres** steht als öffentliches Projekt auf [GitHub](https://github.com/plentymarkets/plugin-ceres) zur Verfügung. Den Plugin-Code können Sie als Vorlage nutzen, um Ihr eigenes Template-Plugin zu erstellen. Beachten Sie folgende Punkte, um ein eigenes Template auf Basis von **Ceres** zu erstellen:
+ 
+* Bei [GitHub](https://github.com/join?source=header-home) registrieren
+* Projekt [Ceres](https://github.com/plentymarkets/plugin-ceres) öffnen
+* Eigenen Fork des Projekts erstellen
+* Quellcode anpassen
+ 
+ Wie Sie den Quellcode anpassen, erfahren Sie in unserem [Template Guide](https://developers.plentymarkets.com/dev-doc/template-plugins).
+ 
+<div class="alert alert-warning" role="alert">
+    Beachten Sie, dass Sie Ihr eigenes Template manuell aktualisieren müssen, wenn Sie Funktionen aus einer neuen Version des Plugins <strong>Ceres</strong> nutzen möchten. Automatische Plugin-Aktualisierungen stehen in plentymarkets nur für Plugins von plentyMarketplace zur Verfügung.
+</div>
+
+### Theme in plentyMarketplace kaufen
+
+Theme-Plugins bieten eine einfachere Möglichkeit **Ceres** nach Ihren Wünschen optisch anzupassen. In plentyMarketplace finden Sie bereits verschiedene [Themes](https://marketplace.plentymarkets.com/plugins/themes), die das Aussehen von **Ceres** verändern. Anpassungen am Theme-Plugin wirken sich nicht auf Aktualisierungen des Template-Plugins **Ceres** aus. 
+
+### Eigenes Theme erstellen
+
+In unserem [Theme Guide](https://developers.plentymarkets.com/dev-doc/theme-plugins) finden Sie ausführliche Infomationen darüber, wie Sie Ihr eigenes Theme-Plugin erstellen und **Ceres** damit vollständig individualisieren. 
 
 ## Lizenz
 

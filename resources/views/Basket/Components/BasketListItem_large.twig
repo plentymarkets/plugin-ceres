@@ -4,7 +4,7 @@
 
     <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation.data | itemURL">
-        <img :src="basketItem.variation.data.images | itemImages 'urlPreview' | arrayFirst">
+        <img alt="${ basketItem.variation.data.texts | itemName {{configItemName}} }" :src="basketItem.variation.data.images | itemImages 'urlMiddle' | arrayFirst">
     </a>
     <!-- ./ITEM IMAGE -->
 
@@ -40,7 +40,7 @@
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variationId }" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItem.variation.data.texts[0] | itemName {{configItemName}} } {# ${ basketItem.variation.variationBase.variationName }  TODO #}
+                ${ basketItem.variation.data.texts | itemName {{configItemName}} }
             </div>
         </a>
 
@@ -53,18 +53,18 @@
                 <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemNumber") }}:</strong>
                 <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.variation.number}</span>
             </div>
-            <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemCondition") }}:</strong>
-                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{# TODO #}
-            </div>
+            {#<div class="row">#}
+                {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemCondition") }}:</strong>#}
+                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{##}{# TODO #}
+            {#</div>#}
             <div class="row">
                 <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
                 <span class="col-xs-6 col-sm-7">
-                    ${ basketItem.variation.data.variation.availability.names[0].name }
+                    ${ basketItem.variation.data.variation.availability.names.name }
                 </span>
             </div>
             <p class="m-y-1">
-                {!! basketItem.variation.data.texts[0].description !!}
+                {!! basketItem.variation.data.texts.description !!}
             </p>
         </div>
         <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>

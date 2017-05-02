@@ -2,7 +2,8 @@
     <div class="card">
         <h3>${facet.names[0].name}</h3>
         <div class="form-check" v-for="value in facet.values | orderBy 'id' -1">
-            <input id="option-${ value.id }" class="form-check-input hidden-xs-up" type="checkbox" :value="value.id.toString()" v-model="facetParams" @change="updateFacet" :disabled="isLoading">
+            <input id="option-${ value.id }" class="form-check-input hidden-xs-up" type="checkbox"
+                   :value="value.id.toString()" v-model="facetParams" @change="updateFacet" :disabled="isLoading">
             <label for="option-${ value.id }" class="form-check-label">
                 ${ value.names[0].name }
             </label>

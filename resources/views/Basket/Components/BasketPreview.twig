@@ -14,7 +14,7 @@
         <!-- BASKET LIST -->
         <div class="p-a-1 list">
           <div class="cmp cmp-basket-preview-list" v-if="basketItems.length > 0">
-              <basket-list template="#vue-basket-list" size="small"></basket-list>
+              <basket-list template="#vue-basket-list" size="small" trigger-event="true"></basket-list>
           </div>
           <h5 v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</h5>
         </div>

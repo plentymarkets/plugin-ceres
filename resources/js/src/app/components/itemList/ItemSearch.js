@@ -1,6 +1,7 @@
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
-var UrlService = require("services/UrlService");
+
+import UrlService from "services/UrlService";
 
 Vue.component("item-search", {
 
@@ -92,13 +93,13 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, function(dataItem)
                     {
-                        var value = dataItem.data.texts[0].name1;
+                        var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
 
                         return {
                             value: value,
                             data : value
                         };
-                    })
+                    }.bind(this))
                 };
 
             return suggestions;

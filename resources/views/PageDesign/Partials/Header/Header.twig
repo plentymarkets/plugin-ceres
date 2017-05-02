@@ -7,8 +7,10 @@
 
 {% set lang = services.sessionStorage.getLang() %}
 
+<resource name="breadcrumbs" :data="{}"></resource>
+
 <header class="top-bar">
-    <div class="container-max">
+    <div class="container-max extended-container">
         <div class="row">
             {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
 

@@ -21,7 +21,7 @@
 
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
-                            <span class="col-xs-6 col-sm-7">{{ orderData.status.frontendName }}</span>
+                            <span class="col-xs-6 col-sm-7">{{ orderData.order.statusName }}</span>
                         </div>
                     </div>
 
@@ -70,22 +70,11 @@
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
 
                             {% for propertyKey in orderData.order.properties %}
-                                {% if orderData.order.properties[loop.index0].typeId ==  17 and orderData.order.properties[loop.index0].subTypeId == 3 %}
-                                    {% set paymentState = orderData.order.properties[loop.index0].value %}
+                                {% if orderData.order.properties[loop.index0].typeId == 4 %}
+                                    <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
                                 {% endif %}
                             {% endfor %}
 
-                            {% if paymentState == "unpaid" %}
-                                <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_unpaid") }}</span>
-                            {% elseif paymentState == "prepaid" %}
-                                <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_prepaid") }}</span>
-                            {% elseif paymentState == "partlyPaid" %}
-                                <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_partlyPaid") }}</span>
-                            {% elseif paymentState == "fullyPaid" %}
-                                <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_fullyPaid") }}</span>
-                            {% elseif paymentState == "overpaid" %}
-                                <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_overpaid") }}</span>
-                            {% endif %}
                         </div>
 
                         {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder().order) }}
@@ -125,7 +114,7 @@
                         {% set currentVariationId = item.itemVariationId | trimNewlines %}
                         <article class="cmp cmp-order-item">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">
-                                <img src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}">
+                                <img alt="{{ item.orderItemName }}" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}">
                             </a>
                             <div class="item-details small">
                                 <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">

@@ -113,7 +113,7 @@ Vue.component("add-item-to-basket-overlay", {
          */
         texts: function()
         {
-            return this.basketItem.currentBasketItem.texts[0];
+            return this.basketItem.currentBasketItem.texts;
         }
     }
 });

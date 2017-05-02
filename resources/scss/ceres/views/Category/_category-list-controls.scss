@@ -128,3 +128,59 @@
     }
   }
 }
+
+.sidebar-categories {
+  background:$white;
+  font-family: $font-family-heading;
+  height: 100%;
+  .category-title {
+    background: #efefef;
+    padding: 1.2rem 2rem;
+    text-transform: uppercase;
+  }
+  ul {
+    @include reset-list();
+    li {
+      &.first-level {display:none;}
+      &.first-level.active {display:list-item;}
+      a {
+        display: block;
+        color: $gray-dark;
+        padding: .75rem 15px;
+        font-size: 1rem;
+        cursor: pointer;
+        &:hover {
+          color: $gray-darker;
+          background: $gray-lightest;
+        }
+      }
+      ul {display:none;}
+      &.active {
+        & > ul {
+          display: block;
+        }
+        ul {
+          li {
+            a {
+              padding-left:1.5rem;
+            }
+            ul li {
+              a {
+                padding-left: 3.5rem;
+              }
+              ul li a {
+                padding-left: 5.5rem;
+              }
+            }
+
+          }
+        }
+      }
+      &.active {
+        &>a {
+          background: $gray-lighter2;
+        }
+      }
+    }
+  }
+}

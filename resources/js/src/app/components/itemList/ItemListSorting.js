@@ -1,5 +1,6 @@
 var ItemListService = require("services/ItemListService");
-var UrlService = require("services/UrlService");
+
+import UrlService from "services/UrlService";
 
 Vue.component("item-list-sorting", {
 

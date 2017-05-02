@@ -3,13 +3,14 @@
   "texts.name*",
   "texts.description",
   "texts.urlPath",
+  "texts.lang",
   "variation.number",
-  "variation.availability.names.name",
+  "variation.availability.names.*",
   "variation.itemId",
   "variation.id",
-  "images.all.urlPreview",
-  "images.all.url",
+  "item.id",
+  "images.all.url*",
   "images.variation.urlPreview",
   "properties.group.backendName",
-  "properties.property.names.name",
+  "properties.property.names.name"
 ]

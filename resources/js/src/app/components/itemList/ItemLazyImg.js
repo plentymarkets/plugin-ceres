@@ -16,9 +16,7 @@ Vue.component("item-lazy-img", {
 
         setTimeout(function()
         {
-            $(self.$els.lazyImg).show().lazyload({
-                effect: "fadeIn"
-            });
+            $(self.$els.lazyImg).show().lazyload();
         }, 1);
     }
 });

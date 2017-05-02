@@ -1,6 +1,20 @@
 {% extends getPartial('page-design') %}
 
 {% set showDefaultHomepage = config("Ceres.default.homepage") %}
+{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set companyName  = config("Ceres.header.company_name") %}
+
+
+{% block PartialHead %}
+    <meta property="og:title" content="{{ companyName }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}" />
+    <meta property="og:image" content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}" />
+
+    <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
+
+    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+{% endblock %}
 
 {% block PageBody %}
 
@@ -228,7 +242,7 @@
             }
 
             var currentLang = document.getElementById("currentLang").textContent || document.getElementById("currentLang").innerText;
-            var json = JSON.parse(getJson('https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/HomepageContent.json'));
+            var json = JSON.parse(getJson('https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json'));
 
             renderCarousel();
             renderTexts();

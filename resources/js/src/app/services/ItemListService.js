@@ -1,7 +1,8 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ResourceService = require("services/ResourceService");
-var UrlService = require("services/UrlService");
+
+import UrlService from "services/UrlService";
 
 module.exports = (function($)
 {
@@ -107,7 +108,7 @@ module.exports = (function($)
     {
         searchParams.items = items;
 
-        items = (items !== App.config.defaultItemsPerPage) ? items : null;
+        items = (items != App.config.defaultItemsPerPage) ? items : null;
         UrlService.setUrlParam("items", items);
     }
 

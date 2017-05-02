@@ -97,6 +97,17 @@
 
 }
 
+@include media-breakpoint-up(lg) {
+	.extended-container {
+		max-height: 30px;
+	}
+}
+
+@include media-breakpoint-down(md) {
+	.extended-container {
+		max-height: 35px;
+	}
+}
 
 //navigation scss
 .wrapper-main {
@@ -201,6 +212,7 @@
 .brand-wrapper{
 	position: relative;
 	padding:0 15px;
+	z-index:1000;
 }
 
 .navbar-brand {

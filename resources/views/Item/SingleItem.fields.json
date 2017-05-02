@@ -19,14 +19,11 @@
   "variation.lengthMM",
   "variation.widthMM",
   "variation.heightMM",
-  "variation.availability.names.name",
+  "variation.availability.names.*",
   "variation.availability.id",
   "variation.releasedAt",
 
-  "texts.name*",
-  "texts.shortDescription",
-  "texts.description",
-  "texts.technicalData",
+  "texts.*",
 
   "salesPrices.price",
   "salesPrices.type",
@@ -40,5 +37,7 @@
   "images.variation.urlPreview",
 
   "properties.group.backendName",
-  "properties.property.names.name"
+  "properties.property.names.name",
+
+  "defaultCategories"
 ]

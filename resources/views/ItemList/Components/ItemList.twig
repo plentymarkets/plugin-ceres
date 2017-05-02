@@ -1,6 +1,7 @@
 {% set decimalCount = config("Ceres.item.storeSpecial") %}
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
 {% set configItemName = config("Ceres.item.name") %}
+{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
 
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
@@ -11,18 +12,23 @@
 <resource name="isLoading" :data="false"></resource>
 
 <script type="x/template" id="vue-item-list">
-    <div class="loading-animation-frame col-xs-12 col-lg-12" v-show="isLoading">
-        <div class="loading-animation">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+
+    {% if loadingAnimationType != "blur" %}
+        <div class="loading-animation-frame col-xs-12 col-lg-12" v-show="isLoading">
+
+            {% if loadingAnimationType == "bars" %}
+                {% include "Ceres::ItemList.Partials.LoadingAnimationBars" %}
+
+            {% elseif loadingAnimationType == "spinner" %}
+                {% include "Ceres::ItemList.Partials.LoadingAnimationSpinner" %}
+
+            {% endif %}
+
         </div>
-    </div>
+    {% endif %}
 
-    <ul class="product-list row grid" v-show="!isLoading">
-
+    <ul class="product-list row grid{% if loadingAnimationType == "blur" %} blur-effect{% endif %}"
+        {% if loadingAnimationType != "blur" %}v-show="!isLoading"{% endif %} v-bind:class="{ 'loading': isLoading }">
         <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
                        decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
 

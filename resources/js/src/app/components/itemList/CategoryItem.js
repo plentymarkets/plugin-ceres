@@ -37,7 +37,7 @@ Vue.component("category-item", {
          */
         texts: function()
         {
-            return this.itemData.texts[0];
+            return this.itemData.texts;
         }
     }
 });
