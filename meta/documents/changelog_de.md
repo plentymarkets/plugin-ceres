@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.1
+
+### Behoben
+
+- Shop-Logo kann wieder angeklickt werden.
+
 ## v1.2.0 (2017-04-28)
 
 ### Hinzugefügt
