@@ -7,20 +7,9 @@ module.exports = (function($)
     var _categoryBreadcrumbs = [];
 
     return {
-        initialize: _initialize,
         getScopeUrl: _getScopeUrl,
         renderItems: _renderItems
     };
-
-    /**
-     * initialize the service with the category tree
-     * @param categoryTree
-     * @private
-     */
-    function _initialize(categoryTree)
-    {
-        _categoryTree = categoryTree;
-    }
 
     /**
      * check if current view is category
@@ -58,6 +47,11 @@ module.exports = (function($)
      */
     function _renderItems(currentCategory)
     {
+        if ($.isEmptyObject(_categoryTree))
+        {
+            _categoryTree = ResourceService.getResource("navigationTree").val();
+        }
+
         if (!_isCategoryView(window.location.pathname.split("/")))
         {
             window.open(_getScopeUrl(currentCategory), "_self");
