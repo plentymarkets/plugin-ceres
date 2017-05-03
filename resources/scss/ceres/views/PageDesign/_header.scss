@@ -212,7 +212,6 @@
 .brand-wrapper{
 	position: relative;
 	padding:0 15px;
-	z-index:1000;
 }
 
 .navbar-brand {
@@ -354,6 +353,7 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		z-index:1000;
 	}
 
 	.navbar-nav{
