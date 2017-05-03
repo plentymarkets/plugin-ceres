@@ -34,8 +34,6 @@
     {{ component( "Ceres::ItemList.Components.ItemListSorting") }}
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
     {{ component( "Ceres::ItemList.Components.Pagination") }}
-    {{ component( "Ceres::Category.Components.CategorySideMenu") }}
-    {{ component( "Ceres::Category.Components.CategorySideMenuNode") }}
 
     <resource name="facetParams" :data="[]"></resource>
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
@@ -74,11 +72,7 @@
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
                         <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
-                        <noscript>
-                            {{ Tree.get_sidemenu(categories, "") }}
-                        </noscript>
-                        <category-side-menu :categories="{{ categories | json_encode() }}"
-                                            template="#vue-category-side-menu"></category-side-menu>
+                        {{ Tree.get_sidemenu(categories, "") }}
                     </div>
                 </div>
             {% endif %}

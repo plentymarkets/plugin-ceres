@@ -2,7 +2,6 @@
 
 {% set categoryTree = services.category.getHierarchy() %}
 {% set lang         = services.sessionStorage.getLang() %}
-{% set categories = services.category.getNavigationTree("item", lang) %}
 
 <noscript>
     {% if categoryTree is not empty %}

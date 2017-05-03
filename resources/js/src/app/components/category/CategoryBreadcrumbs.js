@@ -35,8 +35,6 @@ Vue.component("category-breadcrumbs", {
 
             ResourceService.bind("breadcrumbs", this);
             ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
-
-            CategoryRendererService.initialize(this.categories);
         },
 
         /**
