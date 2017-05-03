@@ -1,0 +1,289 @@
+{% set currentLang = services.sessionStorage.getLang() %}
+
+<div style="visibility: hidden" id="currentLang">{{ currentLang }}</div>
+
+<div class="container-max" style="margin-bottom: 2rem">
+    <div class="carousel slide" data-interval="5000" data-ride="carousel" id="carousel-example">
+        <div class="carousel-inner" id="carousel-content">
+            <!-- dynamic add content -->
+        </div>
+        <a class="left carousel-control" href="#carousel-example" data-slide="prev"><i
+                    class="icon-prev  fa fa-angle-left"></i></a>
+        <a class="right carousel-control" href="#carousel-example" data-slide="next"><i
+                    class="icon-next fa fa-angle-right"></i></a>
+    </div>
+</div>
+<div class="container-max">
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 style="font-size: 3rem" id="welcome-text"><!-- welcome text --></h1>
+        </div>
+        <div class="col-lg-6">
+            <p id="short-description"><!-- short description --></p>
+        </div>
+    </div>
+
+    <hr class="my-2">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 style="text-align: center" id="recommend-text"><!-- recommend text --></h2>
+        </div>
+    </div>
+
+    <hr class="my-2">
+
+    <div class="row">
+        <div class="row mt-xs-0_5">
+            <ul class="flex-container" id="recommended-plugins">
+                <!-- recommended plugins -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .img-border {
+        border: 1px solid black;
+        width: 300px;
+        height: 200px;
+    }
+
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .mt-xs-0_5 {
+        margin-top: 6px;
+    }
+
+    .mb-xs-1_5 {
+        margin-bottom: 18px;
+    }
+
+    .mt-xs-1 {
+        margin-top: 12px;
+    }
+
+    .col-md-3 {
+        width: 25%;
+        float: left;
+        position: relative;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+    }
+
+    .padding-lr-resp {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .bgcolor-white {
+        background-color: #fff;
+    }
+
+    .color-box-inner {
+        display: block;
+        padding: 12px 15px;
+    }
+
+    .imageBox.isLogo {
+        line-height: 125px;
+        vertical-align: middle;
+        color: #008EBD;
+        text-decoration: none;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .block {
+        display: block;
+    }
+
+    a {
+        background: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 70%;
+        margin: auto;
+    }
+
+    .flex-item {
+        position: relative;
+        background: #fff;
+        padding: 0;
+        width: 180px;
+        height: 180px;
+        margin-top: 15px;
+        overflow: hidden;
+    }
+
+    .flex-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .flex-align-bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin-bottom: 0;
+        background: rgba(0, 142, 189, .7);
+        text-align: left;
+        padding: 0;
+        padding-left: .3em;
+        padding-right: .3em;
+        box-sizing: border-box;
+        line-height: 101%;
+        font-size: 14px;
+        transition: all 1s;
+    }
+
+    .flex-item:hover > a > .flex-align-bottom {
+        background: rgba(0, 142, 189, 1);
+        padding-bottom: .4em;
+
+    }
+
+    .flex-item:hover > a > .flex-align-bottom > .flex-text {
+        transform: scale(1, 1);
+        line-height: 110%;
+        transition: transform 1s, line-height 1s, color 1s;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1);
+
+    }
+
+    .flex-title {
+        font-size: 17px;
+        margin: 0;
+        line-height: 1.6em;
+        height: 1.6em;
+        font-weight: normal;
+        text-align: center;
+        color: #fff;
+        display: block;
+
+    }
+
+    .flex-text {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        text-align: left;
+        line-height: 0%;
+        transform: scale(1, 0); /* W3C */
+        -webkit-transform: scale(1, 0); /* Safari and Chrome */
+        -moz-transform: scale(1, 0); /* Firefox */
+        -ms-transform: scale(1, 0); /* IE 9 */
+        -o-transform: scale(1, 0); /* Opera */
+        font-size: 0;
+        transition: transform 1s, line-height 1s, font-size 1s;
+        color: rgba(0, 142, 189, 0);
+    }
+
+    .flex-container {
+        margin: 0 30px 25px;
+        padding: 0;
+        position: relative;
+        list-style: none;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+</style>
+
+<script>
+    function getJson(url)
+    {
+        var Httpreq = new XMLHttpRequest();
+        Httpreq.open("GET", url, false);
+        Httpreq.send(null);
+        return Httpreq.responseText;
+    }
+
+    var currentLang = document.getElementById("currentLang").textContent || document.getElementById("currentLang").innerText;
+    var json = JSON.parse(getJson('https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json'));
+
+    renderCarousel();
+    renderTexts();
+    renderRecommendPlugins();
+
+    function renderCarousel()
+    {
+        var carousel = document.getElementById("carousel-content");
+
+        for (var i = 0; i < json[currentLang].pictures.length; i++)
+        {
+            var contentToAddDiv = document.createElement('div');
+
+            contentToAddDiv.className = "carousel-item text-muted" + ( i == 0 ? " active" : "" );
+
+            var contentToAdd = '<a href="' + json[currentLang].pictures[i].pictureLink + '">' +
+                '<img class="img-fluid" src="' + json[currentLang].pictures[i].pictureUrl + '">' +
+                '</a>' +
+                '<div class="carousel-caption">' +
+                '<h2>' + json[currentLang].pictures[i].text + '</h2>' +
+                '</div>';
+
+            contentToAddDiv.innerHTML = contentToAdd;
+
+            carousel.appendChild(contentToAddDiv);
+        }
+    }
+
+    function renderTexts()
+    {
+        var welcomeText = document.getElementById("welcome-text");
+        var shortDescription = document.getElementById("short-description");
+        var recommendText = document.getElementById("recommend-text");
+
+        welcomeText.innerHTML = json[currentLang].texts.welcome;
+        shortDescription.innerHTML = json[currentLang].texts.shortDescription;
+        recommendText.innerHTML = json[currentLang].texts.recommendText;
+    }
+
+    function renderRecommendPlugins()
+    {
+        var recommendedPlugins = document.getElementById("recommended-plugins");
+
+        for (var i = 0; i < json[currentLang].recommended.length; i++)
+        {
+            var contentToAddLi = document.createElement('li');
+            contentToAddLi.className = "flex-item";
+
+            var contentToAdd = '<a target="_blank" href="' + json[currentLang].recommended[i].pluginLink + '">' +
+                '<img class="flex-image" src="' + json[currentLang].recommended[i].pluginIcon + '"</img>' +
+                '<div class="flex-align-bottom">' +
+                '<h1 class="flex-title">' + json[currentLang].recommended[i].pluginTitle + '</h1>' +
+                '<div class="flex-text">' + json[currentLang].recommended[i].pluginText + '</div>' +
+                '</div>' +
+                '</a>';
+
+            contentToAddLi.innerHTML = contentToAdd;
+
+            recommendedPlugins.appendChild(contentToAddLi);
+        }
+    }
+</script>

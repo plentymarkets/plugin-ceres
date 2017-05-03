@@ -20,549 +20,260 @@
 
     {% if showDefaultHomepage == "true" %}
 
-        {% set currentLang = services.sessionStorage.getLang() %}
-
-        <div style="visibility: hidden" id="currentLang">{{ currentLang }}</div>
-
-        <div class="container-max" style="margin-bottom: 2rem">
-            <div class="carousel slide" data-interval="5000" data-ride="carousel" id="carousel-example">
-                <div class="carousel-inner" id="carousel-content">
-                    <!-- dynamic add content -->
-                </div>
-                <a class="left carousel-control" href="#carousel-example" data-slide="prev"><i class="icon-prev  fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#carousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
-            </div>
-        </div>
-        <div class="container-max">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 style="font-size: 3rem" id="welcome-text"><!-- welcome text --></h1>
-                </div>
-                <div class="col-lg-6">
-                    <p id="short-description"><!-- short description --></p>
-                </div>
-            </div>
-
-            <hr class="my-2">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 style="text-align: center" id="recommend-text"><!-- recommend text --></h2>
-                </div>
-            </div>
-
-            <hr class="my-2">
-
-            <div class="row">
-                <div class="row mt-xs-0_5">
-                    <ul class="flex-container" id="recommended-plugins">
-                        <!-- recommended plugins -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <style>
-
-            .img-border {
-                border: 1px solid black;
-                width: 300px;
-                height: 200px;
-            }
-
-            .row {
-                margin-left: -15px;
-                margin-right: -15px;
-            }
-
-            .mt-xs-0_5 {
-                margin-top: 6px;
-            }
-
-            .mb-xs-1_5 {
-                margin-bottom: 18px;
-            }
-
-            .mt-xs-1 {
-                margin-top: 12px;
-            }
-
-            .col-md-3 {
-                width: 25%;
-                float: left;
-                position: relative;
-                padding-left: 15px;
-                padding-right: 15px;
-                box-sizing: border-box;
-            }
-
-            .padding-lr-resp {
-                padding-left: 30px;
-                padding-right: 30px;
-            }
-
-            .bgcolor-white {
-                background-color: #fff;
-            }
-
-            .color-box-inner {
-                display: block;
-                padding: 12px 15px;
-            }
-
-            .imageBox.isLogo {
-                line-height: 125px;
-                vertical-align: middle;
-                color: #008EBD;
-                text-decoration: none;
-            }
-
-            .center {
-                text-align: center;
-            }
-
-            .block {
-                display: block;
-            }
-
-            a {
-                background: transparent;
-                text-decoration: none;
-            }
-
-            a:hover {
-                text-decoration: none;
-            }
-
-            .carousel-inner > .item > img,
-            .carousel-inner > .item > a > img {
-                width: 70%;
-                margin: auto;
-            }
-
-            .flex-item {
-                position:relative;
-                background: #fff;
-                padding: 0;
-                width: 180px;
-                height: 180px;
-                margin-top: 15px;
-                overflow:hidden;
-            }
-
-            .flex-image {
-                position:absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:100%;
-
-            }
-            .flex-align-bottom {
-                position:absolute;
-                bottom:0;
-                width:100%;
-                margin-bottom:0;
-                background:rgba(0, 142, 189,.7);
-                text-align:left;
-                padding:0;
-                padding-left:.3em;
-                padding-right:.3em;
-                box-sizing:border-box;
-                line-height:101%;
-                font-size:14px;
-                transition:all 1s;
-            }
-
-            .flex-item:hover > a > .flex-align-bottom {
-                background:rgba(0, 142, 189,1);
-                padding-bottom:.4em;
-
-            }
-
-            .flex-item:hover > a > .flex-align-bottom > .flex-text {
-                transform:scale(1,1);
-                line-height:110%;
-                transition:transform 1s, line-height 1s, color 1s;
-                font-size:14px;
-                color:rgba(255, 255, 255,1);
-
-            }
-
-            .flex-title {
-                font-size:17px;
-                margin:0;
-                line-height:1.6em;
-                height:1.6em;
-                font-weight:normal;
-                text-align:center;
-                color:#fff;
-                display:block;
-
-            }
-            .flex-text {
-                margin:0;
-                padding:0;
-                font-weight:normal;
-                text-align:left;
-                line-height:0%;
-                transform:scale(1,0); /* W3C */
-                -webkit-transform:scale(1,0); /* Safari and Chrome */
-                -moz-transform:scale(1,0); /* Firefox */
-                -ms-transform:scale(1,0); /* IE 9 */
-                -o-transform:scale(1,0); /* Opera */
-                font-size:0;
-                transition:transform 1s, line-height 1s, font-size 1s ;
-                color:rgba(0, 142, 189,0);
-            }
-
-            .flex-container {
-                margin: 0 30px 25px;
-                padding: 0;
-                position:relative;
-                list-style: none;
-                display: -webkit-box;
-                display: -moz-box;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-flow: row wrap;
-                justify-content: space-around;
-            }
-
-        </style>
-
-        <script>
-            function getJson(url)
-            {
-                var Httpreq = new XMLHttpRequest();
-                Httpreq.open("GET", url, false);
-                Httpreq.send(null);
-                return Httpreq.responseText;
-            }
-
-            var currentLang = document.getElementById("currentLang").textContent || document.getElementById("currentLang").innerText;
-            var json = JSON.parse(getJson('https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json'));
-
-            renderCarousel();
-            renderTexts();
-            renderRecommendPlugins();
-
-            function renderCarousel()
-            {
-                var carousel = document.getElementById("carousel-content");
-
-                for(var i = 0; i < json[currentLang].pictures.length; i++)
-                {
-                    var contentToAddDiv = document.createElement('div');
-
-                    contentToAddDiv.className = "carousel-item text-muted" + ( i == 0 ? " active" : "" ) ;
-
-                    var contentToAdd = 	'<a href="' + json[currentLang].pictures[i].pictureLink + '">' +
-                        '<img class="img-fluid" src="' + json[currentLang].pictures[i].pictureUrl + '">' +
-                        '</a>' +
-                        '<div class="carousel-caption">' +
-                        '<h2>' + json[currentLang].pictures[i].text + '</h2>' +
-                        '</div>';
-
-                    contentToAddDiv.innerHTML = contentToAdd;
-
-                    carousel.appendChild(contentToAddDiv);
-                }
-            }
-
-            function renderTexts()
-            {
-                var welcomeText = document.getElementById("welcome-text");
-                var shortDescription = document.getElementById("short-description");
-                var recommendText = document.getElementById("recommend-text");
-
-                welcomeText.innerHTML = json[currentLang].texts.welcome;
-                shortDescription.innerHTML = json[currentLang].texts.shortDescription;
-                recommendText.innerHTML = json[currentLang].texts.recommendText;
-            }
-
-            function renderRecommendPlugins()
-            {
-                var recommendedPlugins = document.getElementById("recommended-plugins");
-
-                for(var i = 0; i < json[currentLang].recommended.length; i++)
-                {
-                    var contentToAddLi = document.createElement('li');
-                    contentToAddLi.className = "flex-item";
-
-                    var contentToAdd = 	'<a target="_blank" href="' + json[currentLang].recommended[i].pluginLink + '">' +
-                        '<img class="flex-image" src="' + json[currentLang].recommended[i].pluginIcon + '"</img>' +
-                        '<div class="flex-align-bottom">' +
-                        '<h1 class="flex-title">' + json[currentLang].recommended[i].pluginTitle + '</h1>' +
-                        '<div class="flex-text">' + json[currentLang].recommended[i].pluginText + '</div>' +
-                        '</div>' +
-                        '</a>';
-
-                    contentToAddLi.innerHTML = contentToAdd;
-
-                    recommendedPlugins.appendChild(contentToAddLi);
-                }
-            }
-        </script>
+        {% include 'MarketingHomepage.twig' %}
 
     {% else %}
 
-        
-            
+        {% set lang         = services.sessionStorage.getLang() %}
 
-    {% set lang         = services.sessionStorage.getLang() %}
+        {% set heroExtra1Image  = config("Ceres.homepage.heroExtra1Image") %}
+        {% set heroExtra1Link  = config("Ceres.homepage.heroExtra1Link") %}
+        {% set heroExtra1Name  = config("Ceres.homepage.heroExtra1Name") %}
 
-    
+        {% set heroExtra2Image  = config("Ceres.homepage.heroExtra2Image") %}
+        {% set heroExtra2Link  = config("Ceres.homepage.heroExtra2Link") %}
+        {% set heroExtra2Name  = config("Ceres.homepage.heroExtra2Name") %}
 
-    {% set heroExtra1Image  = config("Ceres.homepage.heroExtra1Image") %}
-    {% set heroExtra1Link  = config("Ceres.homepage.heroExtra1Link") %}
-    {% set heroExtra1Name  = config("Ceres.homepage.heroExtra1Name") %}
+        {% set featuredCategory1Image  = config("Ceres.homepage.featuredCategory1Image") %}
+        {% set featuredCategory1Link  = config("Ceres.homepage.featuredCategory1Link") %}
+        {% set featuredCategory1Name  = config("Ceres.homepage.featuredCategory1Name") %}
 
-    {% set heroExtra2Image  = config("Ceres.homepage.heroExtra2Image") %}
-    {% set heroExtra2Link  = config("Ceres.homepage.heroExtra2Link") %}
-    {% set heroExtra2Name  = config("Ceres.homepage.heroExtra2Name") %}
-
-    {% set featuredCategory1Image  = config("Ceres.homepage.featuredCategory1Image") %}
-    {% set featuredCategory1Link  = config("Ceres.homepage.featuredCategory1Link") %}
-    {% set featuredCategory1Name  = config("Ceres.homepage.featuredCategory1Name") %}
-
-    {% set featuredCategory2Image  = config("Ceres.homepage.featuredCategory2Image") %}
-    {% set featuredCategory2Link  = config("Ceres.homepage.featuredCategory2Link") %}
-    {% set featuredCategory2Name  = config("Ceres.homepage.featuredCategory2Name") %}
+        {% set featuredCategory2Image  = config("Ceres.homepage.featuredCategory2Image") %}
+        {% set featuredCategory2Link  = config("Ceres.homepage.featuredCategory2Link") %}
+        {% set featuredCategory2Name  = config("Ceres.homepage.featuredCategory2Name") %}
 
 
 
-    {% set homepageImageFirstSlide  = config("Ceres.homepage.homepageImageFirstSlide") %}
-    {% set homepageProductLinkFirstSlide  = config("Ceres.homepage.homepageProductLinkFirstSlide") %}
-    {% set homepageProductNameFirstSlide  = config("Ceres.homepage.homepageProductNameFirstSlide") %}
+        {% set homepageImageFirstSlide  = config("Ceres.homepage.homepageImageFirstSlide") %}
+        {% set homepageProductLinkFirstSlide  = config("Ceres.homepage.homepageProductLinkFirstSlide") %}
+        {% set homepageProductNameFirstSlide  = config("Ceres.homepage.homepageProductNameFirstSlide") %}
 
-    {% set homepageImageSecondSlide  = config("Ceres.homepage.homepageImageSecondSlide") %}
-    {% set homepageProductLinkSecondSlide  = config("Ceres.homepage.homepageProductLinkSecondSlide") %}
-    {% set homepageProductNameSecondSlide  = config("Ceres.homepage.homepageProductNameSecondSlide") %}
+        {% set homepageImageSecondSlide  = config("Ceres.homepage.homepageImageSecondSlide") %}
+        {% set homepageProductLinkSecondSlide  = config("Ceres.homepage.homepageProductLinkSecondSlide") %}
+        {% set homepageProductNameSecondSlide  = config("Ceres.homepage.homepageProductNameSecondSlide") %}
 
-    {% set homepageImageThirdSlide  = config("Ceres.homepage.homepageImageThirdSlide") %}
-    {% set homepageProductLinkThirdSlide  = config("Ceres.homepage.homepageProductLinkThirdSlide") %}
-    {% set homepageProductNameThirdSlide  = config("Ceres.homepage.homepageProductNameThirdSlide") %}
+        {% set homepageImageThirdSlide  = config("Ceres.homepage.homepageImageThirdSlide") %}
+        {% set homepageProductLinkThirdSlide  = config("Ceres.homepage.homepageProductLinkThirdSlide") %}
+        {% set homepageProductNameThirdSlide  = config("Ceres.homepage.homepageProductNameThirdSlide") %}
 
-    {% set homepageCategoryTop  = config("Ceres.homepage.homepageCategoryTop") %}
+        {% set homepageCategoryTop  = config("Ceres.homepage.homepageCategoryTop") %}
 
-    {% set homepageCategoryNew  = config("Ceres.homepage.homepageCategoryNew") %}
-    {% set homepageCategoryNewImage  = config("Ceres.homepage.homepageCategoryNewImage") %}
-    {% set homepageCategoryNewName  = config("Ceres.homepage.homepageCategoryNewName") %}
+        {% set homepageCategoryNew  = config("Ceres.homepage.homepageCategoryNew") %}
+        {% set homepageCategoryNewImage  = config("Ceres.homepage.homepageCategoryNewImage") %}
+        {% set homepageCategoryNewName  = config("Ceres.homepage.homepageCategoryNewName") %}
 
-    {% set homepageCategorySale  = config("Ceres.homepage.homepageCategorySale") %}
-    {% set homepageCategorySaleImage  = config("Ceres.homepage.homepageCategorySaleImage") %}
-    {% set homepageCategorySaleName  = config("Ceres.homepage.homepageCategorySaleName") %}
+        {% set homepageCategorySale  = config("Ceres.homepage.homepageCategorySale") %}
+        {% set homepageCategorySaleImage  = config("Ceres.homepage.homepageCategorySaleImage") %}
+        {% set homepageCategorySaleName  = config("Ceres.homepage.homepageCategorySaleName") %}
 
-    {% set topsellerId = services.category.get(homepageCategoryTop, lang) %}
-    {% set newId = services.category.get(homepageCategoryNew, lang) %}
-    {% set saleId = services.category.get(homepageCategorySale, lang) %}
-    
+        {% set topsellerId = services.category.get(homepageCategoryTop, lang) %}
+        {% set newId = services.category.get(homepageCategoryNew, lang) %}
+        {% set saleId = services.category.get(homepageCategorySale, lang) %}
 
-    {% set paginatedResultTop      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryTop, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
 
-    {% set paginatedResultNew      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryNew, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
+        {% set paginatedResultTop      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryTop, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
 
-    {% set itemListTop          = paginatedResultTop.documents %}
-    {% set itemListNew          = paginatedResultNew.documents %}
+        {% set paginatedResultNew      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryNew, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
 
-    {% block ThemeHomepage %}
-        {{ component( "Ceres::ItemList.Components.ItemList") }}
-        {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-        {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+        {% set itemListTop          = paginatedResultTop.documents %}
+        {% set itemListNew          = paginatedResultNew.documents %}
 
-        <div class="home container-max">
-            <div class="row">
-                <div class="cmp cmp-hero">
-                    <div class="hero-main">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <a class="hero-category" href="{{ homepageProductLinkFirstSlide }}">
-                                        <img src="{{ homepageImageFirstSlide }}" alt="{{ homepageProductNameFirstSlide }}" class="img-fluid">
-                                        <div class="carousel-caption">
-                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameFirstSlide }}</h1>
-                                        </div>
-                                    </a>
+        {% block ThemeHomepage %}
+            {{ component( "Ceres::ItemList.Components.ItemList") }}
+            {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+            {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+
+            <div class="home container-max">
+                <div class="row">
+                    <div class="cmp cmp-hero">
+                        <div class="hero-main">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="carousel-item active">
+                                        <a class="hero-category" href="{{ homepageProductLinkFirstSlide }}">
+                                            <img src="{{ homepageImageFirstSlide }}" alt="{{ homepageProductNameFirstSlide }}" class="img-fluid">
+                                            <div class="carousel-caption">
+                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameFirstSlide }}</h1>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="hero-category" href="{{ homepageProductLinkSecondSlide }}">
+                                            <img src="{{ homepageImageSecondSlide }}" alt="{{ homepageProductNameSecondSlide }}" class="img-fluid">
+                                            <div class="carousel-caption">
+                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameSecondSlide }}</h1>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <a class="hero-category" href="{{ homepageProductLinkThirdSlide }}">
+                                            <img src="{{ homepageImageThirdSlide }}" alt="{{ homepageProductNameThirdSlide }}" class="img-fluid">
+                                            <div class="carousel-caption">
+                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameThirdSlide }}</h1>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <a class="hero-category" href="{{ homepageProductLinkSecondSlide }}">
-                                        <img src="{{ homepageImageSecondSlide }}" alt="{{ homepageProductNameSecondSlide }}" class="img-fluid">
-                                        <div class="carousel-caption">
-                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameSecondSlide }}</h1>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="hero-category" href="{{ homepageProductLinkThirdSlide }}">
-                                        <img src="{{ homepageImageThirdSlide }}" alt="{{ homepageProductNameThirdSlide }}" class="img-fluid">
-                                        <div class="carousel-caption">
-                                            <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameThirdSlide }}</h1>
-                                        </div>
-                                    </a>
-                                </div>
+
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                </ol>
+
+                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                    <span class="icon-prev" aria-hidden="true"></span>
+                                    <span class="sr-only">Zurück</span>
+                                </a>
+
+                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                    <span class="icon-next" aria-hidden="true"></span>
+                                    <span class="sr-only">Nächste</span>
+                                </a>
+
                             </div>
+                        </div>
 
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                            </ol>
+                        <div class="hero-xtras">
+                            <a class="hero-category" href="{{ heroExtra1Link }}">
+                                <img src="{{ heroExtra1Image }}" alt="{{ heroExtra1Name }}">
+                                <div class="hero-category-inner">
+                                    <h2 class="hero-category-headline">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1Name }}
+                                    </h2>
 
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                <span class="icon-prev" aria-hidden="true"></span>
-                                <span class="sr-only">Zurück</span>
+                                </div>
                             </a>
+                            <a class="hero-category" href="{{ heroExtra2Link }}">
+                                <img src="{{ heroExtra2Image }}" alt="{{ heroExtra2Name }}">
+                                <div class="hero-category-inner">
+                                    <h2 class="hero-category-headline">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2Name }}
+                                    </h2>
 
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                <span class="icon-next" aria-hidden="true"></span>
-                                <span class="sr-only">Nächste</span>
+                                </div>
                             </a>
-
                         </div>
+
                     </div>
 
-                    <div class="hero-xtras">
-                        <a class="hero-category" href="{{ heroExtra1Link }}">
-                            <img src="{{ heroExtra1Image }}" alt="{{ heroExtra1Name }}">
-                            <div class="hero-category-inner">
-                                <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1Name }}
-                                </h2>
+                    <!-- SALE -->
 
-                            </div>
-                        </a>
-                        <a class="hero-category" href="{{ heroExtra2Link }}">
-                            <img src="{{ heroExtra2Image }}" alt="{{ heroExtra2Name }}">
-                            <div class="hero-category-inner">
-                                <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2Name }}
-                                </h2>
+                    <div class="row prop-row m-y-2 sale-new">
+                        <div class="col-xs-6">
+                            <div class="prop-xs-6-4 prop-md-3-1">
+                                <div class="prop-inner">
+                                    <a class="featured-sale-new" href="{{ services.category.getURL(newId, lang) }}">
 
-                            </div>
-                        </a>
-                    </div>
+                                        <img src="{{ homepageCategoryNewImage }}" alt="New">
+                                        <div class="featured-category-inner">
+                                            <h4 class="featured-category-headline">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategoryNewName }}
+                                            </h4>
 
-                </div>
-
-                <!-- SALE -->
-
-                <div class="row prop-row m-y-2 sale-new">
-                    <div class="col-xs-6">
-                        <div class="prop-xs-6-4 prop-md-3-1">
-                            <div class="prop-inner">
-                                <a class="featured-sale-new" href="{{ services.category.getURL(newId, lang) }}">
-
-                                    <img src="{{ homepageCategoryNewImage }}" alt="New">
-                                    <div class="featured-category-inner">
-                                        <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategoryNewName }}
-                                        </h4>
-
-                                    </div>
-                                </a>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-xs-6">
-                        <div class="prop-xs-6-4 prop-md-3-1">
-                            <div class="prop-inner">
-                                <a class="featured-sale-new" href="{{ services.category.getURL(saleId, lang) }}">
+                        <div class="col-xs-6">
+                            <div class="prop-xs-6-4 prop-md-3-1">
+                                <div class="prop-inner">
+                                    <a class="featured-sale-new" href="{{ services.category.getURL(saleId, lang) }}">
 
-                                    <img src="{{ homepageCategorySaleImage }}" alt="{{ homepageCategorySaleName }}">
-                                    <div class="featured-category-inner">
-                                        <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategorySaleName }}
-                                        </h4>
+                                        <img src="{{ homepageCategorySaleImage }}" alt="{{ homepageCategorySaleName }}">
+                                        <div class="featured-category-inner">
+                                            <h4 class="featured-category-headline">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategorySaleName }}
+                                            </h4>
 
-                                    </div>
-                                </a>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
 
 
-                </div>
+                    <!-- END SALE -->
 
-
-                <!-- END SALE -->
-
-                <div class="m-b-2 clearfix">
-                    <div class="section-header m-b-1">
-                        <h4>Topseller</h4>
-                        <a href="{{ services.category.getURL(topsellerId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                    <div class="m-b-2 clearfix">
+                        <div class="section-header m-b-1">
+                            <h4>Topseller</h4>
+                            <a href="{{ services.category.getURL(topsellerId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                        </div>
+                        <!-- crosssell start -->
+                        <ul class="product-list row grid">
+                            {% for item in itemListTop %}
+                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <!-- crosssell start -->
-                    <ul class="product-list row grid">
-                        {% for item in itemListTop %}
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
 
-                <!-- CATEGORIES -->
+                    <!-- CATEGORIES -->
 
-                <div class="row prop-row m-y-2 featured-categories">
-                    <div class="col-xs-12 col-lg-8">
-                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-2-1">
-                            <div class="prop-inner">
-                                <a class="featured-category" href="{{ featuredCategory1Link }}">
+                    <div class="row prop-row m-y-2 featured-categories">
+                        <div class="col-xs-12 col-lg-8">
+                            <div class="prop-xs-6-4 prop-md-3-1 prop-lg-2-1">
+                                <div class="prop-inner">
+                                    <a class="featured-category" href="{{ featuredCategory1Link }}">
 
-                                    <img src="{{ featuredCategory1Image }}" alt="{{ featuredCategory1Name }}">
-                                    <div class="featured-category-inner">
-                                        <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1Name }}
-                                        </h4>
+                                        <img src="{{ featuredCategory1Image }}" alt="{{ featuredCategory1Name }}">
+                                        <div class="featured-category-inner">
+                                            <h4 class="featured-category-headline">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1Name }}
+                                            </h4>
 
-                                    </div>
-                                </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="prop-xs-6-4 prop-md-3-1 prop-lg-1-1">
+                                <div class="prop-inner">
+                                    <a class="featured-category" href="{{ featuredCategory2Link }}">
+
+                                        <img src="{{ featuredCategory2Image }}" alt="{{ featuredCategory2Name }}">
+                                        <div class="featured-category-inner">
+                                            <h4 class="featured-category-headline">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2Name }}
+                                            </h4>
+
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-lg-4">
-                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-1-1">
-                            <div class="prop-inner">
-                                <a class="featured-category" href="{{ featuredCategory2Link }}">
+                    <!-- END CATEGORIES -->
 
-                                    <img src="{{ featuredCategory2Image }}" alt="{{ featuredCategory2Name }}">
-                                    <div class="featured-category-inner">
-                                        <h4 class="featured-category-headline">
-                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2Name }}
-                                        </h4>
-
-                                    </div>
-                                </a>
-                            </div>
+                    <div class="m-b-2 clearfix">
+                        <div class="section-header m-b-1">
+                            <h4>Neuheiten</h4>
+                            <a href="{{ services.category.getURL(newId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
                         </div>
+                        <!-- crosssell start -->
+                         <ul class="product-list row grid">
+                            {% for item in itemListNew %}
+                                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                </div>
-
-                <!-- END CATEGORIES -->
-
-                <div class="m-b-2 clearfix">
-                    <div class="section-header m-b-1">
-                        <h4>Neuheiten</h4>
-                        <a href="{{ services.category.getURL(newId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
-                    </div>
-                    <!-- crosssell start -->
-                     <ul class="product-list row grid">
-                        {% for item in itemListNew %}
-                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
-                            </li>
-                        {% endfor %}
-                    </ul>
                 </div>
             </div>
-        </div>
 
 
-    {% endblock %}
+        {% endblock %}
 
     {% endif %}
 
