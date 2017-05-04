@@ -2,6 +2,12 @@
 
 ## v1.2.1
 
+### Geändert
+
+- Top Navigation wurde überarbeitet für bessere performance und SEO.
+- Seiten Navigation wurde überarbeitet für bessere performance und SEO.
+- Breadcrumbs wurden überarbeitet für bessere performance und SEO.
+
 ### Behoben
 
 - Shop-Logo kann wieder angeklickt werden.
