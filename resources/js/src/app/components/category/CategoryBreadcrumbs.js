@@ -26,9 +26,9 @@ Vue.component("category-breadcrumbs",
 
     methods:
     {
-        /**
-         * initialize values
-         */
+    /**
+     * initialize values
+     */
         init: function()
         {
             this.categories = JSON.parse(this.categories);
@@ -38,15 +38,15 @@ Vue.component("category-breadcrumbs",
             ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
         },
 
-        /**
-         * render items in relation to location
-         * @param currentCategory
-         */
-        renderItems: function(event, currentCategory)
+    /**
+     * render items in relation to location
+     * @param currentCategory
+     */
+        renderItems: function(currentCategory)
         {
-            event.preventDefault();
-
             CategoryRendererService.renderItems(currentCategory);
+
+            return false;
         },
 
         getBreadcrumbURL: function(breadcrumb)
