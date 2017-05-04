@@ -16,7 +16,6 @@
 
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
-    <resource name="isLoadingBreadcrumbs" :data="false"></resource>
 {% endif %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -36,6 +35,7 @@
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
         <resource name="navigationTree" :data="{{ categories | json_encode() }}"></resource>
+        <resource name="isLoadingBreadcrumbs" :data="false"></resource>
 
         <div class="wrapper wrapper-top">
             <!-- messages -->
