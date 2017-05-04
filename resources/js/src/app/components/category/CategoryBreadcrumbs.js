@@ -1,7 +1,8 @@
 var CategoryRendererService = require("services/CategoryRendererService");
 var ResourceService = require("services/ResourceService");
 
-Vue.component("category-breadcrumbs", {
+Vue.component("category-breadcrumbs",
+{
 
     props: [
         "template",
@@ -41,9 +42,16 @@ Vue.component("category-breadcrumbs", {
          * render items in relation to location
          * @param currentCategory
          */
-        renderItems: function(currentCategory)
+        renderItems: function(event, currentCategory)
         {
+            event.preventDefault();
+
             CategoryRendererService.renderItems(currentCategory);
+        },
+
+        getBreadcrumbURL: function(breadcrumb)
+        {
+            return CategoryRendererService.getScopeUrl(breadcrumb);
         }
     }
 });
