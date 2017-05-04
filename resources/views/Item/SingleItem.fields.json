@@ -38,6 +38,7 @@
 
   "properties.group.backendName",
   "properties.property.names.name",
+  "properties.property.names.lang",
 
   "defaultCategories"
 ]
