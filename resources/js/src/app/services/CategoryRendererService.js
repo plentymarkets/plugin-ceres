@@ -47,6 +47,8 @@ module.exports = (function($)
      */
     function _renderItems(currentCategory)
     {
+        ResourceService.getResource("isLoadingBreadcrumbs").set(true);
+
         if ($.isEmptyObject(_categoryTree))
         {
             _categoryTree = ResourceService.getResource("navigationTree").val();

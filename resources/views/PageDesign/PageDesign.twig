@@ -14,6 +14,11 @@
 
 {% set categories = services.category.getNavigationTree("item", lang) %}
 
+{% if services.template.isCategory() or services.template.isItem() %}
+    {% set categoryBreadcrumbs = services.category.getHierarchy() %}
+    <resource name="isLoadingBreadcrumbs" :data="false"></resource>
+{% endif %}
+
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
     <head>
