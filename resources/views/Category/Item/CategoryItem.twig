@@ -17,6 +17,9 @@
 
 {% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 
+{% set pageMax = (paginatedResult.total / itemsPerPage) | round %}
+{% set query  = { 'items' : itemsPerPage, 'sorting' : itemSort } %}
+
 {% set itemList             = paginatedResult.documents %}
 {% set paginationType       = config("Ceres.pagination.position") %}
 
@@ -96,6 +99,11 @@
         <div class="list-controls m-b-3 row">
             <div class="col-xs-12">
                 <pagination template="#vue-pagination"></pagination>
+
+                <noscript>
+                    {% include "Ceres::Category.Item.Partials.Pagination" %}
+                </noscript>
+
             </div>
         </div>
     </div>
@@ -103,5 +111,13 @@
 {% endblock %}
 
 {% block PartialHead %}
-<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+
+    {% if page-1 > 0 %}
+        <link rel=“prev“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page-1 }) | url_encode }}“ />
+    {% endif %}
+
+    {% if page+1 <= pageMax %}
+        <link rel=“next“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page+1 }) | url_encode }}“ />
+    {% endif %}
 {% endblock %}

@@ -7,6 +7,7 @@
 - Top Navigation wurde überarbeitet für bessere performance und SEO.
 - Seiten Navigation wurde überarbeitet für bessere performance und SEO.
 - Breadcrumbs wurden überarbeitet für bessere performance und SEO.
+- Kategorien enthalten nun gültige Informationen über Pagination für SEO.
 
 ### Behoben
 
