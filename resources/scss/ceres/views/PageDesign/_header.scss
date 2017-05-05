@@ -93,20 +93,6 @@
 			}
 		}
 	}
-
-
-}
-
-@include media-breakpoint-up(lg) {
-	.extended-container {
-		max-height: 30px;
-	}
-}
-
-@include media-breakpoint-down(md) {
-	.extended-container {
-		max-height: 35px;
-	}
 }
 
 //navigation scss
