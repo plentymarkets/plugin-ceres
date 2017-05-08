@@ -1,5 +1,26 @@
 # Release Notes for Ceres
 
+## v1.2.1 (2017-05-08)
+
+### Changed
+
+- The top navigation bar has been reworked to improve performance and SEO.
+- The side navigation bar has been reworked to improve performance and SEO.
+- The breadcrumbs have been reworked to improve performance and SEO.
+- The categories have been further optimised for search engines now containing valid information about the pagination.
+
+### Fixed
+
+- The store company logo is clickable again.
+- The order and payment statuses are displayed correctly in the order summary.
+- The list of filters is displayed correctly.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
 ## v1.2.0 (2017-04-28)
 
 ### Added
@@ -17,12 +38,6 @@
 - Filter names are displayed again.
 - The auto-complete feature in the search has been fixed.
 - Registrations with an email address for which an account already exists are no longer possible.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.1.3 (2017-04-25)
 

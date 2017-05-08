@@ -24,7 +24,10 @@
 {% set paginationType       = config("Ceres.pagination.position") %}
 
 {% set lang         = services.sessionStorage.getLang() %}
-{% set categories = services.category.getNavigationTree("item", lang) %}
+
+{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}
+    {% set categories = services.category.getNavigationTree("item", lang) %}
+{% endif %}
 
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 
