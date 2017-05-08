@@ -81,3 +81,7 @@
       }
 
 }
+
+.item-list-frame.loading:not(.blur-effect) > ul {
+  display: none
+}

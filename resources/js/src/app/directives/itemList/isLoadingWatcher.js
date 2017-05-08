@@ -6,13 +6,20 @@ Vue.directive("is-loading-watcher",
         {
             var firstRendering = true;
 
-            ResourceService.watch("isLoading", function()
+            ResourceService.watch("isLoading", function(newValue)
             {
                 if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null)
                 {
-                    $("#twig-rendered-item-list").remove();
+                    if (!newValue)
+                    {
+                        $("#twig-rendered-item-list").remove();
 
-                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
+                        document.getElementById("vue-rendered-item-list").style.removeProperty("display");
+                    }
+                    else
+                    {
+                        $("#twig-rendered-item-list").addClass("loading");
+                    }
                 }
                 else
                 {
