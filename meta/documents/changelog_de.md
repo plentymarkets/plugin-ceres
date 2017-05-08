@@ -1,6 +1,10 @@
 # Release Notes für Ceres
 
-## v1.2.1
+## v1.2.1 (2017-05-08)
+
+### Hinzugefügt
+
+- Es wurde ein LayoutContainer hinzugefügt, um das komplette CSS von Ceres zu **überschreiben**. (Template: Style overwrite)
 
 ### Geändert
 

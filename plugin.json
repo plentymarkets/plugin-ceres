@@ -34,6 +34,11 @@
             "description"   : "Add style to Ceres with a theme plugin."
         },
         {
+            "key"           : "Template.StyleOverwrite",
+            "name"          : "Template: Style overwrite",
+            "description"   : "Overwrite Ceres default css."
+        },
+        {
             "key"           : "Script.Loader",
             "name"          : "Script loader: Register/load JS",
             "description"   : "Register scripts, events and other JS related items."

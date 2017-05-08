@@ -14,7 +14,11 @@
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
-<link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+{% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
+    <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+{% endif %}
+
+{{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 
 <!-- Extend the existing style with a template -->
 {{ LayoutContainer.show("Ceres::Template.Style") }}
