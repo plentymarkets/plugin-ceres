@@ -2,6 +2,11 @@
 
 ## v1.2.1 (2017-05-08)
 
+### Added
+
+- A new template container has been added allowing you to override the complete CSS of Ceres (Template: Override style).
+
+
 ### Changed
 
 - The top navigation bar has been reworked to improve performance and SEO.

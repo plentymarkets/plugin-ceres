@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Es wurde ein LayoutContainer hinzugefügt, um das komplette CSS von Ceres zu **überschreiben**. (Template: Style overwrite)
+- Es wurde ein Template-Container hinzugefügt, um das komplette CSS von Ceres zu überschreiben (Template: Override style).
 
 ### Geändert
 

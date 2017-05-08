@@ -35,8 +35,8 @@
         },
         {
             "key"           : "Template.StyleOverwrite",
-            "name"          : "Template: Style overwrite",
-            "description"   : "Overwrite Ceres default css."
+            "name"          : "Template: Override style",
+            "description"   : "Override the default CSS file of Ceres."
         },
         {
             "key"           : "Script.Loader",
