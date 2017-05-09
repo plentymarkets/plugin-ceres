@@ -19,6 +19,8 @@
 - The store company logo is clickable again.
 - The order and payment statuses are displayed correctly in the order summary.
 - The list of filters is displayed correctly.
+- Categories are displayed correctly in the default order.
+- The navigation bar is displayed correctly for categories with only one sub-category.
 
 ### Known issues
 
