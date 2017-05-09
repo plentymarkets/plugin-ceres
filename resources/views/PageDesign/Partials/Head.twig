@@ -6,6 +6,7 @@
 
 {% set logData = config("Ceres.log.data")|split(', ') %}
 {% set sortValues = config("Ceres.sort.data")|split(', ') %}
+{% set defaultSorting = config('Ceres.sort.defaultSorting') %}
 {% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
 {% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
@@ -34,7 +35,7 @@
             printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
             logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
             defaultItemsPerPage: "{{ itemsPerPage }}",
-            defaultSorting: "{{ sortValues[0] }}",
+            defaultSorting: "{{ defaultSorting }}",
             performanceLevel: "{{ performanceLevel }}",
             itemName: {{ itemName }}
         }

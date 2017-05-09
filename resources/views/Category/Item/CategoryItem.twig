@@ -1,7 +1,7 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 
-{% set itemSort             = request.get("sorting") %}
+{% set itemSort             = request.get("sorting") | default(config('Ceres.sort.defaultSorting')) %}
 {% set orderBy              = itemSort[0] %}
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
 
