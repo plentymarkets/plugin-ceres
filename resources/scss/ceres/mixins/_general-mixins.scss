@@ -181,7 +181,7 @@
     position: relative;
     overflow: hidden;
 
-    &>a>img{
+    &>noscript,a>img{
         position: absolute;
         top: -9999px;
         right: -9999px;
