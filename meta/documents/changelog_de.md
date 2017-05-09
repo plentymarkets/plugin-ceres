@@ -18,8 +18,8 @@
 - Das Shop-Logo kann wieder angeklickt werden.
 - Auftrags- und Zahlungsstatus werden in der Auftragsübersicht wieder angezeigt.
 - Die Liste der Filter wird wieder korrekt angezeigt.
-- Die Kategorien werden nun mit der korrekten standard Sortierung geöffnet.
-- Die Navigation wird nun korrekt ausgegeben wenn es nur eine Unterkategorie gibt.
+- Die Kategorien werden nun mit der korrekten Standardsortierung geöffnet.
+- Die Navigation wird nun korrekt ausgegeben, wenn eine Kategorie nur eine Unterkategorie hat.
 
 ### Bekannte Probleme
 
