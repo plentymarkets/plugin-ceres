@@ -4212,7 +4212,8 @@ module.exports = function ($) {
         page: 1,
         facets: "",
         categoryId: null,
-        template: ""
+        template: "",
+        variationShowType: App.config.variationShowType
     };
 
     return {
