@@ -407,11 +407,6 @@ return k({},n(this))}function Bc(){return n(this).overflow}function Cc(){return{
 Vue.config.delimiters = ["${", "}"];
 Vue.config.unsafeDelimiters = ["{!!", "!!}"];
 
-// Comment these three for local build. TODO dev/production
-// Vue.config.devtools = false;
-// Vue.config.debug = false;
-// Vue.config.silent = true;
-
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
@@ -2550,7 +2545,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch" },
+                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -3945,23 +3940,6 @@ Vue.filter("itemImage", function (item, baseUrl) {
 
 },{}],63:[function(require,module,exports){
 "use strict";
-
-Vue.filter("itemImages", function (images, accessor) {
-    var imageUrls = [];
-    var imagesAccessor = "all";
-
-    if (images.variation.length) {
-        imagesAccessor = "variation";
-    }
-
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
-
-        imageUrls.push(imageUrl);
-    }
-
-    return imageUrls;
-});
 
 },{}],64:[function(require,module,exports){
 "use strict";

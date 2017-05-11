@@ -2136,7 +2136,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch" },
+                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -3531,23 +3531,6 @@ Vue.filter("itemImage", function (item, baseUrl) {
 
 },{}],63:[function(require,module,exports){
 "use strict";
-
-Vue.filter("itemImages", function (images, accessor) {
-    var imageUrls = [];
-    var imagesAccessor = "all";
-
-    if (images.variation.length) {
-        imagesAccessor = "variation";
-    }
-
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
-
-        imageUrls.push(imageUrl);
-    }
-
-    return imageUrls;
-});
 
 },{}],64:[function(require,module,exports){
 "use strict";
