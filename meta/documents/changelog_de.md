@@ -6,6 +6,7 @@
 
 - Es wurde ein Fehler behoben, weswegen die Kategorien die Einstellungen für (Main-/Childvariations) ignoriert hatten.
 - Es wurde ein Fehler behoben, der zu einem Konsolen Fehler mit den Breadcrumbs geführt hatte.
+- Es wurde ein Fehler behoben, dass Notifications nicht richtig ausgegeben werden konnten.
 
 ## v1.2.1 (2017-05-08)
 
