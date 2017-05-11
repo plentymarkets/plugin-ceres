@@ -12,7 +12,7 @@
 - Es wurde ein Fehler behoben, der die Breadcrumbs betraf und in der Browser-Konsole angezeigt wurde.
 - Manchmal konnten Benachrichtigungen und Meldungen nicht richtig ausgegeben werden. Dieser Fehler wurde behoben.
 - Die Bilder in der Warenkorbvorschau werden nun wieder richtig dargestellt.
-- Die Vorschläge der Autovervollständigung berücksichtigen nun die Einstellung der Variantengruppierung.
+- Die Vorschläge der Autovervollständigung von Suchbegriffen berücksichtigen nun die Einstellung der Variantengruppierung.
 
 ### Bekannte Probleme
 

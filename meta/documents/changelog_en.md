@@ -12,6 +12,7 @@
 - An error regarding the breadcrumbs occurred in the browser console. This error was fixed.
 - In some cases, notifications and messages weren't displayed correctly. This error was fixed.
 - The images in the shopping cart preview are now displayed correctly.
+- Suggested search results created by the auto-complete feature are now taking into account the grouping of variations.
 
 ### Known issues
 
