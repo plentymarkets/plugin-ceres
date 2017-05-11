@@ -13,7 +13,7 @@
   "item.id",
   "texts.*",
   "variation.id",
-  "variation.availability.names.name",
+  "variation.availability.names.*",
   "variation.availability.id",
   "variation.itemId",
   "variation.releasedAt"

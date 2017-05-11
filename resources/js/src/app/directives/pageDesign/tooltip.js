@@ -4,7 +4,7 @@ Vue.directive("tooltip", {
     {
         setTimeout(function()
         {
-            $("[data-toggle=\"tooltip\"]").tooltip();
-        }, 1);
+            $(this.el).tooltip();
+        }.bind(this), 1);
     }
 });
