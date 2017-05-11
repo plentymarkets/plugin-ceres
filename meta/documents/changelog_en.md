@@ -2,6 +2,10 @@
 
 ## v1.2.2 (2017-05-11)
 
+### Added
+
+- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end. 
+
 ### Fixed
 
 - In some systems, the grouping settings for main and child variations were ignored. This error was fixed.
