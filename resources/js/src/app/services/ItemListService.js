@@ -8,13 +8,14 @@ module.exports = (function($)
 {
     var searchParams =
         {
-            query       : "",
-            items       : App.config.defaultItemsPerPage,
-            sorting     : App.config.defaultSorting,
-            page        : 1,
-            facets      : "",
-            categoryId  : null,
-            template    : ""
+            query               : "",
+            items               : App.config.defaultItemsPerPage,
+            sorting             : App.config.defaultSorting,
+            page                : 1,
+            facets              : "",
+            categoryId          : null,
+            template            : "",
+            variationShowType   : App.config.variationShowType
         };
 
     return {

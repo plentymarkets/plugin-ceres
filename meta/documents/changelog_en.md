@@ -1,5 +1,21 @@
 # Release Notes for Ceres
 
+## v1.2.2 (2017-05-11)
+
+### Fixed
+
+- In some systems, the grouping settings for main and child variations were ignored. This error was fixed.
+- An error regarding the breadcrumbs occurred in the browser console. This error was fixed.
+- In some cases, notifications and messages weren't displayed correctly. This error was fixed.
+- The images in the shopping cart preview are now displayed correctly.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
+
 ## v1.2.1 (2017-05-08)
 
 ### Added
@@ -21,12 +37,6 @@
 - The list of filters is displayed correctly.
 - Categories are displayed correctly in the default order.
 - The navigation bar is displayed correctly for categories with only one sub-category.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.2.0 (2017-04-28)
 
