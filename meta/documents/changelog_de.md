@@ -1,5 +1,18 @@
 # Release Notes für Ceres
 
+## v1.2.2 (2017-05-11)
+
+### Hinzugefügt
+
+- Die Artikelbilder werden nach ihrer im Backend festgelegten Position ausgegeben. 
+
+### Behoben
+
+- Es wurde ein Fehler behoben, weswegen die Kategorien die Einstellungen für (Main-/Childvariations) ignoriert hatten.
+- Es wurde ein Fehler behoben, der zu einem Konsolen Fehler mit den Breadcrumbs geführt hatte.
+- Es wurde ein Fehler behoben, dass Notifications nicht richtig ausgegeben werden konnten.
+- Die Bilder in der Warenkorbvorschau werden nun komplett dargestellt.
+
 ## v1.2.1 (2017-05-08)
 
 ### Hinzugefügt
