@@ -1,5 +1,26 @@
 <div class="col-sm-4">
     <div class="input-unit">
+        <input type="text" name="salutation" id="txtSalutation${_uid}" v-model="addressData.salutation">
+        <label for="txtSalutation${_uid}">{{ trans("Ceres::Template.addressSalutation") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit">
+        <input type="text" name="title" id="txtTitle${_uid}" v-model="addressData.title">
+        <label for="txtTitle${_uid}">{{ trans("Ceres::Template.addressTitle") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit">
+        <input class="form-control" type="date" name="birthdate" id="txtBirthdate${_uid}" v-model="addressData.birthdate">
+        <label for="txtBirthdate${_uid}">{{ trans("Ceres::Template.addressBirthdate") }}</label>
+    </div>
+</div>
+
+<div class="col-sm-4">
+    <div class="input-unit">
         <input type="text" name="decorateName" id="txtAdditionalName${_uid}" v-model="addressData.name4">
         <label for="txtAdditionalName${_uid}">{{ trans("Ceres::Template.addressGBNameAffix") }}</label>
     </div>
@@ -23,6 +44,13 @@
     <div class="input-unit">
         <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
         <label for="txtCompany${_uid}">{{ trans("Ceres::Template.addressCompany") }}</label>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="input-unit">
+        <input type="text" name="vatNumber" id="txtVatNumber${_uid}" v-model="addressData.vatNumber">
+        <label for="txtVatNumber${_uid}">{{ trans("Ceres::Template.addressVatNumber") }}</label>
     </div>
 </div>
 
