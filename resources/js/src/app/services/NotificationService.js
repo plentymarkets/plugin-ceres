@@ -111,7 +111,7 @@ module.exports = (function($)
 
     function Notification(data, context)
     {
-        if (!App.config.printStackTrace && data.stackTrace)
+        if (!App.config.printStackTrace && typeof (data) === "object")
         {
             data.stackTrace = [];
         }
