@@ -22,7 +22,7 @@
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
                                 <img style="max-height: 140px;" class="img-fluid m-x-auto"
-                                     :src="basketItem.currentBasketItem.images | itemImages 'urlPreview' | arrayFirst"
+                                     :src="basketItem.currentBasketItem.images | itemImages 'urlPreview' | arrayFirst | objectAttribute 'url' "
                                      alt="${ texts | itemName {{ configItemName }} }"/>
                             </div>
                             <div class="col-md-8">

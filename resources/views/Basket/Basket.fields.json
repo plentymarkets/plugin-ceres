@@ -10,6 +10,7 @@
   "variation.id",
   "item.id",
   "images.all.url*",
+  "images.all.position",
   "images.variation.urlPreview",
   "properties.group.backendName",
   "properties.property.names.name"

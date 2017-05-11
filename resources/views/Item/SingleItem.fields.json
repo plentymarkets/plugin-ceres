@@ -33,6 +33,7 @@
 
   "images.all.url",
   "images.all.urlPreview",
+  "images.all.position",
   "images.variation.url",
   "images.variation.urlPreview",
 

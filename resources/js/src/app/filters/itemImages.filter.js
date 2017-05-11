@@ -12,7 +12,7 @@ Vue.filter("itemImages", function(images, accessor)
     {
         var imageUrl = images[imagesAccessor][i][accessor];
 
-        imageUrls.push(imageUrl);
+        imageUrls.push({url: imageUrl, position: images[imagesAccessor][i].position});
     }
 
     return imageUrls;
