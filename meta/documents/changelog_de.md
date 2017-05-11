@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Die Artikelbilder werden nach ihrer im Backend festgelegten Position ausgegeben. 
+- Die Artikelbilder werden nach ihrer im Backend [festgelegten Position](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#14-8) sortiert. 
 
 ### Behoben
 
