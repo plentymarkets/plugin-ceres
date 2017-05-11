@@ -1,5 +1,12 @@
 # Release Notes für Ceres
 
+## v1.2.2 (2017-05-11)
+
+### Behoben
+
+- Es wurde ein Fehler behoben, weswegen die Kategorien die Einstellungen für (Main-/Childvariations) ignoriert hatten.
+- Es wurde ein Fehler behoben, der zu einem Konsolen Fehler mit den Breadcrumbs geführt hatte.
+
 ## v1.2.1 (2017-05-08)
 
 ### Hinzugefügt
