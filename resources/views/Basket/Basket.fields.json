@@ -2,6 +2,7 @@
   "itemId",
   "texts.name*",
   "texts.description",
+  "texts.shortDescription",
   "texts.urlPath",
   "texts.lang",
   "variation.number",
