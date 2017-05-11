@@ -2,6 +2,10 @@
 
 ## v1.2.2 (2017-05-11)
 
+### Hinzugefügt
+
+- Die Artikelbilder werden nach ihrer im Backend [festgelegten Position](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#14-8) sortiert. 
+
 ### Behoben
 
 - In einigen Systemen wurde die Gruppierung nach Haupt- und Untervarianten in der Kategorieansicht ignoriert. Dieser Fehler wurde behoben.

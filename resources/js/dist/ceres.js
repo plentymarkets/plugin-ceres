@@ -506,6 +506,12 @@ Vue.component("add-item-to-basket-overlay", {
          */
         texts: function texts() {
             return this.basketItem.currentBasketItem.texts;
+        },
+
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
+
+            return img.url;
         }
     }
 });
@@ -824,6 +830,14 @@ Vue.component("basket-list-item", {
             if (this.deleteConfirmedTimeout) {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
+        }
+    },
+
+    computed: {
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
         }
     }
 });
@@ -3940,6 +3954,23 @@ Vue.filter("itemImage", function (item, baseUrl) {
 
 },{}],63:[function(require,module,exports){
 "use strict";
+
+Vue.filter("itemImages", function (images, accessor) {
+    var imageUrls = [];
+    var imagesAccessor = "all";
+
+    if (images.variation.length) {
+        imagesAccessor = "variation";
+    }
+
+    for (var i in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][i][accessor];
+
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+    }
+
+    return imageUrls;
+});
 
 },{}],64:[function(require,module,exports){
 "use strict";
