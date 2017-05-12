@@ -15,6 +15,9 @@ $border-width: 1px;
 	border-radius: $border-radius;
 	overflow: hidden;
 
+  input[type="date"]{
+    max-height: 38px;
+  }
 
     input[type],
 	input:not([type="checkbox"]),
