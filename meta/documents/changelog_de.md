@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.3
+
+### Behoben
+
+- Es wurde ein Fehler behoben, wodruch die Breadcrumbs/Menüpunkte nicht korrekt weitergeleitet hatten.
+
 ## v1.2.2 (2017-05-11)
 
 ### Hinzugefügt
