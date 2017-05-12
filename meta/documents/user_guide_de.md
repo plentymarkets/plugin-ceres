@@ -18,8 +18,8 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
 
 ##### Standard-Startseite deaktivieren:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.<br /> → Das Tab **Homepage** ist bereits vorausgewählt.
 4. Deaktivieren Sie die Einstellung **Show default homepage**.
 5. **Speichern** Sie die Einstellungen.<br /> → Die Standard-Startseite wird deaktiviert.
@@ -31,7 +31,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 
 ##### Header und Footer anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Header** bzw. **Footer**.
@@ -114,11 +114,12 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 
 ##### Artikelansicht anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Wechseln Sie in das Tab **Item view**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
-5. **Speichern** Sie die Einstellungen.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Item view**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
+6. **Speichern** Sie die Einstellungen.
 
 <table>
 <thead>
@@ -177,11 +178,12 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 
 ##### Warenkorb anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Wechseln Sie in das Tab **Shopping cart**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
-5. **Speichern** Sie die Einstellungen.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Shopping cart**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
+6. **Speichern** Sie die Einstellungen.
 
 <table>
 <thead>
@@ -216,6 +218,48 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <caption>Tab. 3: Warenkorb anpassen</caption>
 </table>
 
+### Kaufabwicklung anpassen
+
+Im Tab **Checkout** nehmen Sie Änderungen an den Anzeigeoptionen der Kaufabwicklung vor. Wählen Sie, welche Felder im Adressformular angezeigt und validiert werden.
+
+
+##### Kaufabwicklung anpassen:
+
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Checkout**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+6. **Speichern** Sie die Einstellungen.
+
+<table>
+<thead>
+<tr>  
+<th>Einstellung</th>
+<th>Erläuterung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>Show address fields in address form</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
+<br /> <strong>First name</strong> = Aktivieren, um das Feld <strong>Vorname</strong> anzuzeigen.
+<br /> <strong>Last name</strong> = Aktivieren, um das Feld <strong>Nachname</strong> anzuzeigen.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
+<br /> <strong>Street</strong> = Aktivieren, um das Feld <strong>Straße</strong> anzuzeigen.<br /> <strong>Street number</strong> = Aktivieren, um das Feld <strong>Hausnummer</strong> anzuzeigen.<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> anzuzeigen. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> anzuzeigen.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>Postcode</strong> = Aktivieren, um das Feld <strong>PLZ</strong> anzuzeigen.<br /> <strong>Town</strong> = Aktivieren, um das Feld <strong>Ort</strong> anzuzeigen.
+</tr>
+<tr>
+<td><b>Enable address field validation</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> zu validieren.
+<br /> <strong>First name</strong> = Aktivieren, um das Feld <strong>Vorname</strong> zu validieren.
+<br /> <strong>Last name</strong> = Aktivieren, um das Feld <strong>Nachname</strong> zu validieren.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
+<br /> <strong>Street</strong> = Aktivieren, um das Feld <strong>Straße</strong> zu validieren.<br /> <strong>Street number</strong> = Aktivieren, um das Feld <strong>Hausnummer</strong> zu validieren.<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> zu validieren. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> zu validieren.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>Postcode</strong> = Aktivieren, um das Feld <strong>PLZ</strong> zu validieren.<br /> <strong>Town</strong> = Aktivieren, um das Feld <strong>Ort</strong> zu validieren.
+</tr>
+</tbody>
+<caption>Tab. 4: Kaufabwicklung anpassen</caption>
+</table>
+
 ### Paginierung und Sortierung anpassen
 
 Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersicht und die Sortierung von Artikeln im Webshop an.
@@ -223,11 +267,12 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 
 ##### Paginierung und Sortierung anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Wechseln Sie in das Tab **Pagination and sorting**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
-5. **Speichern** Sie die Einstellungen.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Pagination and sorting**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
+6. **Speichern** Sie die Einstellungen.
 
 <table>
 <thead>
@@ -267,7 +312,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <td>Eintrag wählen, der standardmäßig bei der Artikelsortierung voreingestellt ist.</td>
 </tr>
 </tbody>
-<caption>Tab. 4: Paginierung und Sortierung anpassen</caption>
+<caption>Tab. 5: Paginierung und Sortierung anpassen</caption>
 </table>
 
 ### Mein Konto anpassen
@@ -276,11 +321,12 @@ Im Tab **My account** nehmen Sie Einstellungen für den **Mein Konto**-Bereich d
 
 ##### Mein Konto anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Wechseln Sie in das Tab **My account**.
-4. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
-5. **Speichern** Sie die Einstellungen.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **My account**.
+5. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
+6. **Speichern** Sie die Einstellungen.
 
 ### Einstellungen für Plugin-Entwickler
 
@@ -288,11 +334,12 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 
 ##### Einstellungen für die Plugin-Entwicklung vornehmen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
-5. **Speichern** Sie die Einstellungen.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
+6. **Speichern** Sie die Einstellungen.
 
 <table>
 <thead>
@@ -325,7 +372,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 <td>Performance-Level wählen.<br /> <strong>Live</strong> = Live-Modus wählen, wenn der Webshop produktiv verwendet wird. Dateien werden minimiert und gebündelt.<br /> <strong>Development</strong> = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.</td>
 </tr>
 </tbody>
-<caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<caption>Tab. 6: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
 
 ### Artikellisten verknüpfen
@@ -334,11 +381,10 @@ Artikellisten, wie z.B. **Zuletzt gesehene Artikel**, verknüpfen Sie bequem üb
 
 ##### Artikelliste verknüpfen:
 
-1. Klicken Sie auf **Start » Plugins**.
-2. Wechseln Sie in das Tab **Content**. 
-3. Wählen Sie den Bereich **Last seen items**.
-4. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Single item: Container for item lists**.
-5. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
+1. Öffnen Sie das Menü **Plugins » Content**.
+2. Wählen Sie den Bereich **Last seen items**.
+3. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Single item: Container for item lists**.
+4. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Webshop-Sprachen einstellen
 
@@ -372,8 +418,8 @@ Alternativ speichern Sie Ihre Rechtstexte im HTML-Format. Nutzen Sie hierfür di
 3. Wechseln Sie in das Tab **AGB**.
 4. Öffnen Sie das Tab **HTML**.
 5. Wenn Sie den Text als HTML-Code eingeben möchten, klicken Sie auf **Quellcode**.
-5. Geben Sie den formatierten Text für Ihre AGB ein.
-6. **Speichern** Sie die Einstellungen.
+6. Geben Sie den formatierten Text für Ihre AGB ein.
+7. **Speichern** Sie die Einstellungen.
 
 Geben Sie die Texte für die **Widerrufsbelehrung**, die **Datenschutzerklärung** und das **Impressum** analog in den gewünschten Sprachen ein. Die Texte werden in **Ceres** auf den zugehörigen Seiten angezeigt.
 

@@ -300,6 +300,58 @@
         "default"   : "true"
     },
     {
+        "tab"                       : "Checkout",
+        "key"                       : "address.show",
+        "label"                     : "Show address fields in address form",
+        "type"                      : "multi_select",
+        "possibleValues"            :
+        {
+            "address.company"               : "Company",
+            "address.vatNumber"             : "VAT number",
+            "address.salutation"            : "Form of address",
+            "address.title"                 : "Title",
+            "address.birthdate"             : "Date of birth",
+            "address.firstName"             : "First name",
+            "address.lastName"              : "Last name",
+            "address.nameAffix"             : "Name affix",
+            "address.street"                : "Street",
+            "address.streetNumber"          : "Street number",
+            "address.buildingName"          : "Building name (EN)",
+            "address.additionalAddress1"    : "Additional address 1",
+            "address.additionalAddress2"    : "Additional address 2 (DE)",
+            "address.zip"                   : "Postcode",
+            "address.town"                  : "Town"
+
+        },
+        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
+    },
+    {
+        "tab"                       : "Checkout",
+        "key"                       : "address.require",
+        "label"                     : "Enable address field validation",
+        "type"                      : "multi_select",
+        "possibleValues"            :
+        {
+            "address.company"               : "Company",
+            "address.vatNumber"             : "VAT number",
+            "address.salutation"            : "Form of address",
+            "address.title"                 : "Title",
+            "address.birthdate"             : "Date of birth",
+            "address.firstName"             : "First name",
+            "address.lastName"              : "Last name",
+            "address.nameAffix"             : "Name affix",
+            "address.street"                : "Street",
+            "address.streetNumber"          : "Street number",
+            "address.buildingName"          : "Building name (EN)",
+            "address.additionalAddress1"    : "Additional address 1",
+            "address.additionalAddress2"    : "Additional address 2 (DE)",
+            "address.zip"                   : "Postcode",
+            "address.town"                  : "Town"
+
+        },
+        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
+    },
+    {
         "tab"               : "Pagination and sorting",
         "key"               : "pagination.position",
         "label"             : "Pagination position",
@@ -421,58 +473,6 @@
             "item.manufacturer.name_desc"       : "Manufacturer (descending)"
         },
         "default"                   : "texts.name1_asc"
-    },
-    {
-        "tab"                       : "Address Form",
-        "key"                       : "address.show",
-        "label"                     : "Enable address fields",
-        "type"                      : "multi_select",
-        "possibleValues"            :
-        {
-            "address.company"               : "Company",
-            "address.vatNumber"             : "VAT Number",
-            "address.salutation"            : "Salutation",
-            "address.title"                 : "Title",
-            "address.birthdate"             : "Date of birth",
-            "address.firstName"             : "First name",
-            "address.lastName"              : "Last name",
-            "address.nameAffix"             : "Name affix",
-            "address.street"                : "Street",
-            "address.streetNumber"          : "Street number",
-            "address.buildingName"          : "Building name (en)",
-            "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (de)",
-            "address.zip"                   : "Postcode",
-            "address.town"                  : "Town"
-
-        },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
-    },
-    {
-        "tab"                       : "Address Form",
-        "key"                       : "address.require",
-        "label"                     : "Enable address fields required",
-        "type"                      : "multi_select",
-        "possibleValues"            :
-        {
-            "address.company"               : "Company",
-            "address.vatNumber"             : "VAT Number",
-            "address.salutation"            : "Salutation",
-            "address.title"                 : "Title",
-            "address.birthdate"             : "Date of birth",
-            "address.firstName"             : "First name",
-            "address.lastName"              : "Last name",
-            "address.nameAffix"             : "Name affix",
-            "address.street"                : "Street",
-            "address.streetNumber"          : "Street number",
-            "address.buildingName"          : "Building name (en)",
-            "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (de)",
-            "address.zip"                   : "Postcode",
-            "address.town"                  : "Town"
-
-        },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
     },
     {
         "tab"               : "My account",
