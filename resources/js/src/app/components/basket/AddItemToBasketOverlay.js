@@ -114,6 +114,13 @@ Vue.component("add-item-to-basket-overlay", {
         texts: function()
         {
             return this.basketItem.currentBasketItem.texts;
+        },
+
+        imageUrl: function()
+        {
+            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
+
+            return img.url;
         }
     }
 });
