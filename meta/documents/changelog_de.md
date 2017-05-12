@@ -4,7 +4,8 @@
 
 ### Behoben
 
-- Es wurde ein Fehler behoben, wodruch die Breadcrumbs/Menüpunkte nicht korrekt weitergeleitet hatten.
+- Es wurde ein Fehler behoben, wodruch die Breadcrumbs/Menüpunkte nicht korrekt funktioniert hatten.
+- Es wurde ein Fehler behoben, dass Artikelbilder nicht richtig nach Position sortiert wurden, wenn eine Variante eigene Bilder hat.
 
 ## v1.2.2 (2017-05-11)
 
