@@ -4,7 +4,7 @@
 
 **Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets
+## Setting up Ceres in plentymarkets<a id="10."></a>
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
@@ -418,9 +418,11 @@ Enter the texts for the **cancellation rights**, the **privacy policy** and the 
 
 Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
 
-Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties] chapters.
+Set up attributes and properties first and link them with your items. For further information about attributes, refer to the [Managing attributes](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapter.
+For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapters.
 
 Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
+Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
 
 ## Customising Ceres<a id="20."></a>
 
