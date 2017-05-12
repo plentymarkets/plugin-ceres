@@ -22,7 +22,7 @@ module.exports = (function($)
 
         for (var currentCategory in categories)
         {
-            if (paths[paths.length - 1].indexOf(categories[currentCategory].details[0].nameUrl) > -1)
+            if (paths[paths.length - 1] == categories[currentCategory].details[0].nameUrl)
             {
                 return true;
             }
