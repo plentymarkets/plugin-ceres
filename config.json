@@ -431,7 +431,7 @@
         {
             "address.company"               : "Company",
             "address.vatNumber"             : "VAT Number",
-            "address.salutation"            : "Form of address",
+            "address.salutation"            : "Salutation",
             "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
             "address.firstName"             : "First name",
@@ -451,13 +451,13 @@
     {
         "tab"                       : "Address Form",
         "key"                       : "address.require",
-        "label"                     : "Enable address fields validation",
+        "label"                     : "Enable address fields required",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
             "address.company"               : "Company",
             "address.vatNumber"             : "VAT Number",
-            "address.salutation"            : "Form of address",
+            "address.salutation"            : "Salutation",
             "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
             "address.firstName"             : "First name",
