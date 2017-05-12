@@ -2,7 +2,7 @@
 
 <div class="container-toc"></div>
 
-**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
+**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you will learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
 ## Setting up Ceres in plentymarkets<a id="10."></a>
 
@@ -14,7 +14,7 @@ You can make changes to your design by carrying out the design settings. No prog
 
 ### Deactivating the default homepage
 
-**Ceres** comes with a default homepage. Deactivate this homepage, to display your own content on the homepage of your online store.
+**Ceres** comes with a default homepage. Deactivate this page, to display your own content on the homepage of your online store.
 
 ##### Deactivating the default homepage:
 
