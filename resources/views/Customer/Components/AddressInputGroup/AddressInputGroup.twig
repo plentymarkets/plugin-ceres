@@ -2,25 +2,28 @@
 
 <script type="x/template" id="vue-address-input-group">
 
-    <div>
-        <div v-if="localeToShow == 'DE'">
-            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
-        </div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div v-if="localeToShow == 'DE'">
+				{% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+			</div>
 
-        <div v-if="localeToShow == 'GB'">
-            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
-        </div>
+			<div v-if="localeToShow == 'GB'">
+				{% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+			</div>
 
-        <div class="col-sm-5">
-            <country-select
-                template="#vue-country-select"
-                :selected-country-id.sync="addressData.countryId"
-                :selected-state-id.sync="addressData.stateId"
-                @selected-country-changed="onSelectedCountryChanged"
-                :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
-                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}">
-            </country-select>
-        </div>
-    </div>
+			<div class="col-xs-12 col-sm-5">
+				<country-select
+						template="#vue-country-select"
+						:selected-country-id.sync="addressData.countryId"
+						:selected-state-id.sync="addressData.stateId"
+						@selected-country-changed="onSelectedCountryChanged"
+						:country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
+						:country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}">
+				</country-select>
+			</div>
+
+		</div>
+	</div>
 
 </script>
