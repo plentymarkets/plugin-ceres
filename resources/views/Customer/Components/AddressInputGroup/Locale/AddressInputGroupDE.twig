@@ -1,3 +1,5 @@
+{{ component( "Ceres::Customer.Components.SalutationSelect" ) }}
+
 {% set addressFields = config("Ceres.address.show") | split(', ') %}
 {% set addressFieldsRequired = config("Ceres.address.require") | split(', ') %}
 
@@ -22,7 +24,8 @@
 {% if "address.salutation" in addressFields %}
     <div class="col-xs-12">
         <div class="input-unit" {% if "address.salutation" in addressFieldsRequired %}data-validate="text"{% endif %}>
-            <input type="text" name="salutation" id="txtSalutation${_uid}" v-model="addressData.salutation">
+            <salutation-select
+                    template="#vue-salutation-select"></salutation-select>
             <label for="txtSalutation${_uid}">{{ trans("Ceres::Template.addressSalutation") }}{% if "address.salutation" in addressFieldsRequired %}*{% endif %}</label>
         </div>
     </div>

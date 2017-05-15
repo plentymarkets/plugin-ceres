@@ -1,0 +1,7 @@
+<script type="x/template" id="vue-salutation-select">
+        <select  v-model="addressData.salutation" class="custom-select">
+            <option v-bind:value="$index" v-for="salutation in currentSalutation">
+                ${ salutation }
+            </option>
+        </select>
+</script>

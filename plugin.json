@@ -302,7 +302,6 @@
             "name"          : "Checkout: After \"Order now\" button",
             "description"   : "Add content after the 'Order now' button in the checkout."
         },
-        ,
         {
             "key"           : "Checkout.CustomAddressField",
             "name"          : "Checkout: Custom Adress fields",
