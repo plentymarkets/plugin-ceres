@@ -9,7 +9,7 @@
         <label>{{ trans("Ceres::Template.generalCountry") }}</label>
     </div>
 
-    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0">
+    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0" data-validate="">
         <select v-model="selectedStateId" class="custom-select">
             <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
                 ${ state.name }
