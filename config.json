@@ -311,19 +311,13 @@
             "address.salutation"            : "Form of address",
             "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
-            "address.firstName"             : "First name",
-            "address.lastName"              : "Last name",
             "address.nameAffix"             : "Name affix",
-            "address.street"                : "Street",
-            "address.streetNumber"          : "Street number",
             "address.buildingName"          : "Building name (EN)",
             "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (DE)",
-            "address.zip"                   : "Postcode",
-            "address.town"                  : "Town"
+            "address.additionalAddress2"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
+        "default"                   : "address.salutation, address.title, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
     },
     {
         "tab"                       : "Checkout",
@@ -337,19 +331,13 @@
             "address.salutation"            : "Form of address",
             "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
-            "address.firstName"             : "First name",
-            "address.lastName"              : "Last name",
             "address.nameAffix"             : "Name affix",
-            "address.street"                : "Street",
-            "address.streetNumber"          : "Street number",
             "address.buildingName"          : "Building name (EN)",
             "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (DE)",
-            "address.zip"                   : "Postcode",
-            "address.town"                  : "Town"
+            "address.additionalAddress2"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.firstName, address.lastName, address.nameAffix, address.street, address.streetNumber, address.buildingName, address.additionalAddress1, address.zip, address.town"
+        "default"                   : "address.salutation, address.title, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
     },
     {
         "tab"               : "Pagination and sorting",
