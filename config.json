@@ -439,7 +439,6 @@
             "address.company"               : "Company",
             "address.vatNumber"             : "VAT number",
             "address.salutation"            : "Form of address",
-            "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
             "address.nameAffix"             : "Name affix",
             "address.buildingName"          : "Building name (EN)",
@@ -447,7 +446,7 @@
             "address.additionalAddress2"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
+        "default"                   : "address.salutation, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
     },
     {
         "tab"                       : "My account / Checkout",
@@ -459,7 +458,6 @@
             "address.company"               : "Company",
             "address.vatNumber"             : "VAT number",
             "address.salutation"            : "Form of address",
-            "address.title"                 : "Title",
             "address.birthdate"             : "Date of birth",
             "address.nameAffix"             : "Name affix",
             "address.buildingName"          : "Building name (EN)",
@@ -467,7 +465,7 @@
             "address.additionalAddress2"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.title, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
+        "default"                   : "address.salutation, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
     },
     {
         "tab"               : "Registration",
