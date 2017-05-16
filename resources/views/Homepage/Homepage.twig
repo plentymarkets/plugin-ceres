@@ -6,14 +6,20 @@
 
 
 {% block PartialHead %}
-    <meta property="og:title" content="{{ companyName }}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}" />
-    <meta property="og:image" content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}" />
+    <meta property="og:title" content="{{ companyName }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>
+    <meta property="og:image"
+          content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}"/>
 
-    <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
+    <link rel="canonical"
+          href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
 
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">
+        {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
+        ","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
+        /search?query={search_term}","query-input": "required name=search_term"}}
+    </script>
 {% endblock %}
 
 {% block PageBody %}
@@ -24,59 +30,37 @@
 
     {% else %}
 
-        {% set lang         = services.sessionStorage.getLang() %}
+        {% set lang = services.sessionStorage.getLang() %}
+        {% set configItemName = config("Ceres.item.name") %}
 
-        {% set heroExtra1Image  = config("Ceres.homepage.heroExtra1Image") %}
-        {% set heroExtra1Link  = config("Ceres.homepage.heroExtra1Link") %}
-        {% set heroExtra1Name  = config("Ceres.homepage.heroExtra1Name") %}
+        {% set slider1 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl1") } %}
+        {% set slider2 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl2") } %}
+        {% set slider3 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl3") } %}
 
-        {% set heroExtra2Image  = config("Ceres.homepage.heroExtra2Image") %}
-        {% set heroExtra2Link  = config("Ceres.homepage.heroExtra2Link") %}
-        {% set heroExtra2Name  = config("Ceres.homepage.heroExtra2Name") %}
+        {% set heroExtra1 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data, url: config("Ceres.homepage.heroExtraImageUrl1") } %}
+        {% set heroExtra2 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data, url: config("Ceres.homepage.heroExtraImageUrl2") } %}
 
-        {% set featuredCategory1Image  = config("Ceres.homepage.featuredCategory1Image") %}
-        {% set featuredCategory1Link  = config("Ceres.homepage.featuredCategory1Link") %}
-        {% set featuredCategory1Name  = config("Ceres.homepage.featuredCategory1Name") %}
+        {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
+        {% set category2 = services.category.get(config("Ceres.homepage.homepageCategory2"), lang) %}
+        {% set category3 = services.category.get(config("Ceres.homepage.homepageCategory3"), lang) %}
+        {% set category4 = services.category.get(config("Ceres.homepage.homepageCategory4"), lang) %}
+        {% set category5 = services.category.get(config("Ceres.homepage.homepageCategory5"), lang) %}
+        {% set category6 = services.category.get(config("Ceres.homepage.homepageCategory6"), lang) %}
 
-        {% set featuredCategory2Image  = config("Ceres.homepage.featuredCategory2Image") %}
-        {% set featuredCategory2Link  = config("Ceres.homepage.featuredCategory2Link") %}
-        {% set featuredCategory2Name  = config("Ceres.homepage.featuredCategory2Name") %}
+        {% set paginatedCategoryList1 =
+            services.itemLoader.loadForTemplate(
+                'Ceres::ItemList.ItemListView',
+                itemLoaderPresets.categoryList,
+                {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
 
+        {% set paginatedCategoryList2 =
+            services.itemLoader.loadForTemplate(
+                'Ceres::ItemList.ItemListView',
+                itemLoaderPresets.categoryList,
+                {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
 
-
-        {% set homepageImageFirstSlide  = config("Ceres.homepage.homepageImageFirstSlide") %}
-        {% set homepageProductLinkFirstSlide  = config("Ceres.homepage.homepageProductLinkFirstSlide") %}
-        {% set homepageProductNameFirstSlide  = config("Ceres.homepage.homepageProductNameFirstSlide") %}
-
-        {% set homepageImageSecondSlide  = config("Ceres.homepage.homepageImageSecondSlide") %}
-        {% set homepageProductLinkSecondSlide  = config("Ceres.homepage.homepageProductLinkSecondSlide") %}
-        {% set homepageProductNameSecondSlide  = config("Ceres.homepage.homepageProductNameSecondSlide") %}
-
-        {% set homepageImageThirdSlide  = config("Ceres.homepage.homepageImageThirdSlide") %}
-        {% set homepageProductLinkThirdSlide  = config("Ceres.homepage.homepageProductLinkThirdSlide") %}
-        {% set homepageProductNameThirdSlide  = config("Ceres.homepage.homepageProductNameThirdSlide") %}
-
-        {% set homepageCategoryTop  = config("Ceres.homepage.homepageCategoryTop") %}
-
-        {% set homepageCategoryNew  = config("Ceres.homepage.homepageCategoryNew") %}
-        {% set homepageCategoryNewImage  = config("Ceres.homepage.homepageCategoryNewImage") %}
-        {% set homepageCategoryNewName  = config("Ceres.homepage.homepageCategoryNewName") %}
-
-        {% set homepageCategorySale  = config("Ceres.homepage.homepageCategorySale") %}
-        {% set homepageCategorySaleImage  = config("Ceres.homepage.homepageCategorySaleImage") %}
-        {% set homepageCategorySaleName  = config("Ceres.homepage.homepageCategorySaleName") %}
-
-        {% set topsellerId = services.category.get(homepageCategoryTop, lang) %}
-        {% set newId = services.category.get(homepageCategoryNew, lang) %}
-        {% set saleId = services.category.get(homepageCategorySale, lang) %}
-
-
-        {% set paginatedResultTop      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryTop, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
-
-        {% set paginatedResultNew      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':homepageCategoryNew, 'page':1, 'items':4, 'facets': facetParams, 'sorting': itemSort}) %}
-
-        {% set itemListTop          = paginatedResultTop.documents %}
-        {% set itemListNew          = paginatedResultNew.documents %}
+        {% set categoryList1 = paginatedCategoryList1.documents %}
+        {% set categoryList2 = paginatedCategoryList2.documents %}
 
         {% block ThemeHomepage %}
             {{ component( "Ceres::ItemList.Components.ItemList") }}
@@ -90,26 +74,32 @@
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner" role="listbox">
                                     <div class="carousel-item active">
-                                        <a class="hero-category" href="{{ homepageProductLinkFirstSlide }}">
-                                            <img src="{{ homepageImageFirstSlide }}" alt="{{ homepageProductNameFirstSlide }}" class="img-fluid">
+                                        <a class="hero-category" href="{{ slider1.item | itemURL }}">
+                                            <img src="{{ slider1.url }}"
+                                                 alt="{{ slider1.item.texts | itemName(configItemName) }}" class="img-fluid">
                                             <div class="carousel-caption">
-                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameFirstSlide }}</h1>
+                                                <h1><i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}</h1>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="hero-category" href="{{ homepageProductLinkSecondSlide }}">
-                                            <img src="{{ homepageImageSecondSlide }}" alt="{{ homepageProductNameSecondSlide }}" class="img-fluid">
+                                        <a class="hero-category" href="{{ slider2.item | itemURL }}">
+                                            <img src="{{ slider2.url }}"
+                                                 alt="{{ slider2.item.texts | itemName(configItemName) }}" class="img-fluid">
                                             <div class="carousel-caption">
-                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameSecondSlide }}</h1>
+                                                <h1><i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}</h1>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="hero-category" href="{{ homepageProductLinkThirdSlide }}">
-                                            <img src="{{ homepageImageThirdSlide }}" alt="{{ homepageProductNameThirdSlide }}" class="img-fluid">
+                                        <a class="hero-category" href="{{ slider3.item | itemURL }}">
+                                            <img src="{{ slider3.url }}"
+                                                 alt="{{ slider3.item.texts | itemName(configItemName) }}" class="img-fluid">
                                             <div class="carousel-caption">
-                                                <h1><i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageProductNameThirdSlide }}</h1>
+                                                <h1><i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}</h1>
                                             </div>
                                         </a>
                                     </div>
@@ -121,12 +111,14 @@
                                     <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                                 </ol>
 
-                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                                   data-slide="prev">
                                     <span class="icon-prev" aria-hidden="true"></span>
                                     <span class="sr-only">Zurück</span>
                                 </a>
 
-                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                                   data-slide="next">
                                     <span class="icon-next" aria-hidden="true"></span>
                                     <span class="sr-only">Nächste</span>
                                 </a>
@@ -135,42 +127,36 @@
                         </div>
 
                         <div class="hero-xtras">
-                            <a class="hero-category" href="{{ heroExtra1Link }}">
-                                <img src="{{ heroExtra1Image }}" alt="{{ heroExtra1Name }}">
+                            <a class="hero-category" href="{{ heroExtra1.item | itemURL }}">
+                                <img src="{{ heroExtra1.url }}" alt="{{ heroExtra1.item.texts | itemName(configItemName) }}">
                                 <div class="hero-category-inner">
                                     <h2 class="hero-category-headline">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1Name }}
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1.item.texts | itemName(configItemName) }}
                                     </h2>
-
                                 </div>
                             </a>
-                            <a class="hero-category" href="{{ heroExtra2Link }}">
-                                <img src="{{ heroExtra2Image }}" alt="{{ heroExtra2Name }}">
+                            <a class="hero-category" href="{{ heroExtra2.item | itemURL }}">
+                                <img src="{{ heroExtra2.url }}" alt="{{ heroExtra2.item.texts | itemName(configItemName) }}">
                                 <div class="hero-category-inner">
                                     <h2 class="hero-category-headline">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2Name }}
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2.item.texts | itemName(configItemName) }}
                                     </h2>
-
                                 </div>
                             </a>
                         </div>
-
                     </div>
-
-                    <!-- SALE -->
 
                     <div class="row prop-row m-y-2 sale-new">
                         <div class="col-xs-6">
                             <div class="prop-xs-6-4 prop-md-3-1">
                                 <div class="prop-inner">
-                                    <a class="featured-sale-new" href="{{ services.category.getURL(newId, lang) }}">
-
-                                        <img src="{{ homepageCategoryNewImage }}" alt="New">
+                                    <a class="featured-sale-new" href="{{ services.category.getURL(category1, lang) }}">
+                                        <img src="{{ category1.details[0].image }}" alt="{{ category1.details[0].name }}">
                                         <div class="featured-category-inner">
                                             <h4 class="featured-category-headline">
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategoryNewName }}
+                                                <i class="fa fa-angle-double-right"
+                                                   aria-hidden="true"></i> {{ category1.details[0].name }}
                                             </h4>
-
                                         </div>
                                     </a>
                                 </div>
@@ -180,34 +166,28 @@
                         <div class="col-xs-6">
                             <div class="prop-xs-6-4 prop-md-3-1">
                                 <div class="prop-inner">
-                                    <a class="featured-sale-new" href="{{ services.category.getURL(saleId, lang) }}">
-
-                                        <img src="{{ homepageCategorySaleImage }}" alt="{{ homepageCategorySaleName }}">
+                                    <a class="featured-sale-new" href="{{ services.category.getURL(category2, lang) }}">
+                                        <img src="{{ category2.details[0].image }}" alt="{{ category2.details[0].name }}">
                                         <div class="featured-category-inner">
                                             <h4 class="featured-category-headline">
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ homepageCategorySaleName }}
+                                                <i class="fa fa-angle-double-right"
+                                                   aria-hidden="true"></i> {{ category2.details[0].name }}
                                             </h4>
-
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
-                    <!-- END SALE -->
 
                     <div class="m-b-2 clearfix">
                         <div class="section-header m-b-1">
-                            <h4>Topseller</h4>
-                            <a href="{{ services.category.getURL(topsellerId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                            <h4>{{ category3.details[0].name }}</h4>
+                            <a href="{{ services.category.getURL(category3.id, lang) }}" class="section-link-all"><i
+                                        class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
                         </div>
-                        <!-- crosssell start -->
                         <ul class="product-list row grid">
-                            {% for item in itemListTop %}
+                            {% for item in categoryList1 %}
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                     {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
                                 </li>
@@ -215,18 +195,19 @@
                         </ul>
                     </div>
 
-                    <!-- CATEGORIES -->
+                    {#<!-- CATEGORIES -->#}
 
                     <div class="row prop-row m-y-2 featured-categories">
                         <div class="col-xs-12 col-lg-8">
                             <div class="prop-xs-6-4 prop-md-3-1 prop-lg-2-1">
                                 <div class="prop-inner">
-                                    <a class="featured-category" href="{{ featuredCategory1Link }}">
+                                    <a class="featured-category" href="{{ services.category.getURL(category4, lang) }}">
 
-                                        <img src="{{ featuredCategory1Image }}" alt="{{ featuredCategory1Name }}">
+                                        <img src="{{ category2.details[0].image }}" alt="{{ category4.details[0].name }}">
                                         <div class="featured-category-inner">
                                             <h4 class="featured-category-headline">
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory1Name }}
+                                                <i class="fa fa-angle-double-right"
+                                                   aria-hidden="true"></i> {{ category4.details[0].name }}
                                             </h4>
 
                                         </div>
@@ -238,12 +219,13 @@
                         <div class="col-xs-12 col-lg-4">
                             <div class="prop-xs-6-4 prop-md-3-1 prop-lg-1-1">
                                 <div class="prop-inner">
-                                    <a class="featured-category" href="{{ featuredCategory2Link }}">
+                                    <a class="featured-category" href="{{ services.category.getURL(category5, lang) }}">
 
-                                        <img src="{{ featuredCategory2Image }}" alt="{{ featuredCategory2Name }}">
+                                        <img src="{{ category2.details[0].image }}" alt="{{ category5.details[0].name }}">
                                         <div class="featured-category-inner">
                                             <h4 class="featured-category-headline">
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ featuredCategory2Name }}
+                                                <i class="fa fa-angle-double-right"
+                                                   aria-hidden="true"></i> {{ category5.details[0].name }}
                                             </h4>
 
                                         </div>
@@ -257,12 +239,13 @@
 
                     <div class="m-b-2 clearfix">
                         <div class="section-header m-b-1">
-                            <h4>Neuheiten</h4>
-                            <a href="{{ services.category.getURL(newId, lang) }}" class="section-link-all"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
+                            <h4>{{ category6.details[0].name }}</h4>
+                            <a href="{{ services.category.getURL(category6, lang) }}" class="section-link-all"><i
+                                        class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
                         </div>
                         <!-- crosssell start -->
-                         <ul class="product-list row grid">
-                            {% for item in itemListNew %}
+                        <ul class="product-list row grid">
+                            {% for item in categoryList2 %}
                                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                     {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
                                 </li>
@@ -271,7 +254,6 @@
                     </div>
                 </div>
             </div>
-
 
         {% endblock %}
 

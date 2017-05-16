@@ -8,7 +8,7 @@
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.sliderProductId1",
+        "key"       : "homepage.sliderItemId1",
         "label"     : "Artikel-ID für den ersten Slide",
         "type"      : "text"
     },
@@ -21,7 +21,7 @@
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.sliderProductId2",
+        "key"       : "homepage.sliderItemId2",
         "label"     : "Artikel-ID für den zweiten Slide",
         "type"      : "text"
     },
@@ -34,7 +34,7 @@
     },
     {
         "tab"       : "Homepage",
-        "key"       : "homepage.sliderProductId3",
+        "key"       : "homepage.sliderItemId3",
         "label"     : "Artikel-ID für den dritten Slide",
         "type"      : "text"
     },
