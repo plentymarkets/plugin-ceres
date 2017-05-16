@@ -303,6 +303,11 @@
             "description"   : "Add content after the 'Order now' button in the checkout."
         },
         {
+            "key"           : "Checkout.CustomAddressField",
+            "name"          : "Checkout: Custom Adress fields",
+            "description"   : "Add a custom field after the address fields."
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page."
