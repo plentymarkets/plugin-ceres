@@ -9,67 +9,67 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderProductId1",
-        "label"     : "Artikel-ID für den ersten Slide",
+        "label"     : "ID of the item to display in the first slide of the image slider",
         "type"      : "text"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl1",
-        "label"     : "Bildpfad für den ersten Slide",
+        "label"     : "URL to the image of the first slide",
         "type"      : "text",
         "default"   : "/images/gallery/welcome-page/slide_sample_02.jpg"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderProductId2",
-        "label"     : "Artikel-ID für den zweiten Slide",
+        "label"     : "ID of the item to display in the second slide of the image slider",
         "type"      : "text"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl2",
-        "label"     : "Bildpfad für den zweiten Slide",
+        "label"     : "URL to the image of the second slide",
         "type"      : "text",
         "default"   : "/images/gallery/welcome-page/slide_sample_03.jpg"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderProductId3",
-        "label"     : "Artikel-ID für den dritten Slide",
+        "label"     : "ID of the item to display in the third slide of the image slider",
         "type"      : "text"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl3",
-        "label"     : "Bildpfad für den dritten Slide",
+        "label"     : "URL to the image of the third slide",
         "type"      : "text",
         "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraItemId1",
-        "label"     : "Artikel-Id für den oberen HeroExtra neben dem Slider",
+        "label"     : "ID of the item to display in the upper item preview",
         "type"      : "text",
         "default"   : ""
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraImageUrl1",
-        "label"     : "Bildpfad zum oberen HeroExtra neben dem Slider",
+        "label"     : "URL to the image of the upper item preview",
         "type"      : "text",
         "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraItemId2",
-        "label"     : "Artikel-Id für den unteren HeroExtra neben dem Slider",
+        "label"     : "ID of the item to display in the lower item preview",
         "type"      : "text",
         "default"   : ""
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraImageUrl2",
-        "label"     : "Bildpfad zum unteren HeroExtra neben dem Slider",
+        "label"     : "URL to the image of the lower item preview",
         "type"      : "text",
         "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
     },
@@ -78,37 +78,37 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory1",
-        "label"     : "Kategorie ID für erstes Kategoriefeld",
+        "label"     : "ID of the category to display in the first category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory2",
-        "label"     : "Kategorie ID für zweites Kategoriefeld",
+        "label"     : "ID of the category to display in the second category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory3",
-        "label"     : "Kategorie ID für drittes Kategoriefeld",
+        "label"     : "ID of the category to display in the first list of items",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory4",
-        "label"     : "Kategorie ID für viertes Kategoriefeld",
+        "label"     : "ID of the category to display in the third category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory5",
-        "label"     : "Kategorie ID für fünftes Kategoriefeld",
+        "label"     : "ID of the category to display in the fourth category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory6",
-        "label"     : "Kategorie ID für sechstes Kategoriefeld",
+        "label"     : "ID of the category to display in the second list of items",
         "type"      : "category_select"
     },
 
