@@ -436,17 +436,15 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "address.company"               : "Company",
+            "address.name1"               : "Company",
             "address.vatNumber"             : "VAT number",
-            "address.salutation"            : "Form of address",
-            "address.birthdate"             : "Date of birth",
-            "address.nameAffix"             : "Name affix",
-            "address.buildingName"          : "Building name (EN)",
-            "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (DE)"
+            "address.birthday"             : "Date of birth",
+            "address.name4"             : "Name affix",
+            "address.address3"          : "Additional address 1 / Building name (EN)",
+            "address.address4"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
+        "default"                   : " address.birthday, address.name4, address.buildingName, address.additionalAddress1"
     },
     {
         "tab"                       : "My account / Checkout",
@@ -455,17 +453,15 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "address.company"               : "Company",
+            "address.name1"               : "Company",
             "address.vatNumber"             : "VAT number",
-            "address.salutation"            : "Form of address",
-            "address.birthdate"             : "Date of birth",
-            "address.nameAffix"             : "Name affix",
-            "address.buildingName"          : "Building name (EN)",
-            "address.additionalAddress1"    : "Additional address 1",
-            "address.additionalAddress2"    : "Additional address 2 (DE)"
+            "address.birthday"             : "Date of birth",
+            "address.name4"             : "Name affix",
+            "address.address3"    : "Additional address 1 / Building name (EN)",
+            "address.address4"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.birthdate, address.nameAffix, address.buildingName, address.additionalAddress1"
+        "default"                   : "address.salutation, address.birthday, address.name4, address.address3, address.address4"
     },
     {
         "tab"               : "Registration",
