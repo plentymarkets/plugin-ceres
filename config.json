@@ -9,7 +9,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderItemId1",
-        "label"     : "ID of the item to display in the first slide of the image slider",
+        "label"     : "ID of the item variation to display in the first slide of the image slider",
         "type"      : "text"
     },
     {
@@ -21,7 +21,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderItemId2",
-        "label"     : "ID of the item to display in the second slide of the image slider",
+        "label"     : "ID of the item variation to display in the second slide of the image slider",
         "type"      : "text"
     },
     {
@@ -33,7 +33,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.sliderItemId3",
-        "label"     : "ID of the item to display in the third slide of the image slider",
+        "label"     : "ID of the item variation to display in the third slide of the image slider",
         "type"      : "text"
     },
     {
@@ -45,7 +45,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraItemId1",
-        "label"     : "ID of the item to display in the upper item preview",
+        "label"     : "ID of the item variation to display in the upper item preview",
         "type"      : "text",
         "default"   : ""
     },
@@ -59,7 +59,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraItemId2",
-        "label"     : "ID of the item to display in the lower item preview",
+        "label"     : "ID of the item variation to display in the lower item preview",
         "type"      : "text",
         "default"   : ""
     },
