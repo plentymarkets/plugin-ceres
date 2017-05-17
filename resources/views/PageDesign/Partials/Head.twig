@@ -6,6 +6,7 @@
 
 {% set logData = config("Ceres.log.data")|split(', ') %}
 {% set sortValues = config("Ceres.sort.data")|split(', ') %}
+{% set defaultSorting = config('Ceres.sort.defaultSorting') %}
 {% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
 {% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
@@ -14,7 +15,11 @@
 
 <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 
-<link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+{% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
+    <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+{% endif %}
+
+{{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 
 <!-- Extend the existing style with a template -->
 {{ LayoutContainer.show("Ceres::Template.Style") }}
@@ -30,9 +35,10 @@
             printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
             logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
             defaultItemsPerPage: "{{ itemsPerPage }}",
-            defaultSorting: "{{ sortValues[0] }}",
+            defaultSorting: "{{ defaultSorting }}",
             performanceLevel: "{{ performanceLevel }}",
-            itemName: {{ itemName }}
+            itemName: {{ itemName }},
+            variationShowType: "{{ config("Ceres.item.variation_show_type") }}"
         }
     };
 </script>

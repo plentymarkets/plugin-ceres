@@ -2,6 +2,7 @@
   "itemId",
   "texts.name*",
   "texts.description",
+  "texts.shortDescription",
   "texts.urlPath",
   "texts.lang",
   "variation.number",
@@ -10,6 +11,8 @@
   "variation.id",
   "item.id",
   "images.all.url*",
+  "images.all.position",
+  "images.variation.position",
   "images.variation.urlPreview",
   "properties.group.backendName",
   "properties.property.names.name"

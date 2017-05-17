@@ -28,8 +28,6 @@
                 </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
                     <ul class="mainmenu pull-lg-right">
-                        {% set categories = services.category.getNavigationTree("item", lang) %}
-
                         {{ Tree.get_nav_bar(categories, "") }}
                     </ul>
                 {% endif %}

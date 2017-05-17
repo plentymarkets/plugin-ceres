@@ -1,31 +1,31 @@
 {{ component("Ceres::Category.Components.CategoryBreadcrumbs") }}
 
-{% set categoryTree = services.category.getHierarchy() %}
 {% set lang         = services.sessionStorage.getLang() %}
-{% set categories = services.category.getNavigationTree("item", lang) %}
+{% set configItemName = config("Ceres.item.name") %}
 
-<noscript>
-    {% if categoryTree is not empty %}
-        <nav class="container-max small hidden-sm-down">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item" >
-                    <a href="/">
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                    </a>
-                </li>
-                {% for category in categoryTree %}
-                    {% if loop.last %}
+{% if categoryBreadcrumbs is not empty %}
+    <nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down" v-is-loading-breadcrumbs-watcher>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </a>
+            </li>
+            {% for category in categoryBreadcrumbs %}
+                {% if loop.last %}
+                    {% if category.details is defined %}
                         <li class="breadcrumb-item active"><span>{{ category.details.first.name }}</span></li>
                     {% else %}
-                        <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}">{{ category.details.first.name }}</a></li>
+                        <li class="breadcrumb-item active"><span>{{ category | itemName(configItemName) }}</span></li>
                     {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
-    {% endif %}
-</noscript>
+                {% else %}
+                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category }}">{{ category.details.first.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
 
-<category-breadcrumbs template="#vue-category-breadcrumbs" categories="{{ categories | json_encode() }}" current-category-tree="{{ categoryTree | json_encode() }}"></category-breadcrumbs>
-
+    <category-breadcrumbs template="#vue-category-breadcrumbs" categories="{{ categories | json_encode() }}" current-category-tree="{{ categoryBreadcrumbs | json_encode() }}"></category-breadcrumbs>
+{% endif %}
 
 

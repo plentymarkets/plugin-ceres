@@ -94,5 +94,15 @@ Vue.component("basket-list-item", {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
+    },
+
+    computed:
+    {
+        imageUrl: function()
+        {
+            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
+        }
     }
 });

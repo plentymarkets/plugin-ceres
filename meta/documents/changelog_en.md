@@ -1,5 +1,48 @@
 # Release Notes for Ceres
 
+## v1.2.2 (2017-05-11)
+
+### Added
+
+- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end. 
+
+### Fixed
+
+- In some systems, the grouping settings for main and child variations were ignored. This error was fixed.
+- An error regarding the breadcrumbs occurred in the browser console. This error was fixed.
+- In some cases, notifications and messages weren't displayed correctly. This error was fixed.
+- The images in the shopping cart preview are now displayed correctly.
+- Suggested search results created by the auto-complete feature are now taking into account the grouping of variations.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
+
+## v1.2.1 (2017-05-08)
+
+### Added
+
+- A new template container has been added allowing you to override the complete CSS of Ceres (Template: Override style).
+
+
+### Changed
+
+- The top navigation bar has been reworked to improve performance and SEO.
+- The side navigation bar has been reworked to improve performance and SEO.
+- The breadcrumbs have been reworked to improve performance and SEO.
+- The categories have been further optimised for search engines now containing valid information about the pagination.
+
+### Fixed
+
+- The store company logo is clickable again.
+- The order and payment statuses are displayed correctly in the order summary.
+- The list of filters is displayed correctly.
+- Categories are displayed correctly in the default order.
+- The navigation bar is displayed correctly for categories with only one sub-category.
+
 ## v1.2.0 (2017-04-28)
 
 ### Added
@@ -17,12 +60,6 @@
 - Filter names are displayed again.
 - The auto-complete feature in the search has been fixed.
 - Registrations with an email address for which an account already exists are no longer possible.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.1.3 (2017-04-25)
 

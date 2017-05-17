@@ -2,18 +2,18 @@
 
 <script type="x/template" id="vue-category-breadcrumbs">
 
-    <nav class="container-max small hidden-sm-down" v-if="breadcrumbs.length > 0">
+    <nav id="vue-rendered-breadcrumbs" style="display: none;" class="container-max small hidden-sm-down" v-if="breadcrumbs.length > 0">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/">
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </a>
             </li>
-            <li class="breadcrumb-item" :class="{'active': index == breadcrumbs.length - 1}" v-for="(index, breadcrumb) in breadcrumbs">
-                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details != undefined">${ breadcrumb.details[0].name }</span>
-                <span v-if="index == breadcrumbs.length - 1 && breadcrumb.details == undefined">${ breadcrumb | itemName {{ configItemName }} }</span>
-                <a href="javascript:void(0)" v-if="index != breadcrumbs.length - 1" @click="renderItems(breadcrumb)">${ breadcrumb.details[0].name }</a>
-            </li>
+            <li class="breadcrumb-item" :class="{'active': index == breadcrumbs.length - 1}" v-for="(index, breadcrumb) in breadcrumbs"><!--
+                --><span v-if="index == breadcrumbs.length - 1 && breadcrumb.details != undefined">${ breadcrumb.details[0].name }</span><!--
+                --><span v-if="index == breadcrumbs.length - 1 && breadcrumb.details == undefined">${ breadcrumb | itemName {{ configItemName }} }</span><!--
+                --><a href="${ getBreadcrumbURL(breadcrumb) }" v-if="index != breadcrumbs.length - 1" @click.prevent="renderItems(breadcrumb)">${ breadcrumb.details[0].name }</a><!--
+            --></li>
         </ul>
     </nav>
 

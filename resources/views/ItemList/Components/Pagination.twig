@@ -3,11 +3,13 @@
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- FIRST PAGE LINK -->
-            <li class="page-item" v-if="page > 2">
-                <a class="page-link" @click="setPage(1)">
-                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                </a>
-            </li>
+            {% if config('Ceres.pagination.showFirstPage') == "true" %}
+                <li class="page-item" v-if="page > 2">
+                    <a class="page-link" @click="setPage(1)">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+            {% endif %}
             <!-- ./FIRST PAGE LINK -->
 
             <!-- PREV LINK -->
@@ -49,11 +51,13 @@
             <!-- ./NEXT LINK -->
 
             <!-- LAST PAGE LINK -->
-            <li class="page-item" v-if="pageMax > 3 && page < pageMax - 1">
-                <a class="page-link" @click="setPage(pageMax)">
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                </a>
-            </li>
+            {% if config('Ceres.pagination.showLastPage') == "true" %}
+                <li class="page-item" v-if="pageMax > 3 && page < pageMax - 1">
+                    <a class="page-link" @click="setPage(pageMax)">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            {% endif %}
             <!-- ./LAST PAGE LINK -->
         </ul>
     </nav>

@@ -93,20 +93,6 @@
 			}
 		}
 	}
-
-
-}
-
-@include media-breakpoint-up(lg) {
-	.extended-container {
-		max-height: 30px;
-	}
-}
-
-@include media-breakpoint-down(md) {
-	.extended-container {
-		max-height: 35px;
-	}
 }
 
 //navigation scss
@@ -212,7 +198,6 @@
 .brand-wrapper{
 	position: relative;
 	padding:0 15px;
-	z-index:1000;
 }
 
 .navbar-brand {
@@ -354,6 +339,7 @@
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		z-index:1000;
 	}
 
 	.navbar-nav{

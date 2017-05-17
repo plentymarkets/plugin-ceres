@@ -3,16 +3,16 @@
 <script type="x/template" id="vue-item-image-carousel">
     <div itemscope itemtype="http://schema.org/Thing">
         <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" v-el:single>
-            <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor">
-                <a :href="image" data-lightbox="single-big-image-gallery">
-                    <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }" class="owl-lazy" :data-src="image" itemprop="image">
+            <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor | orderBy 'position'">
+                <a :href="image.url" data-lightbox="single-big-image-gallery">
+                    <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }" class="owl-lazy" :data-src="image.url" itemprop="image.url">
                 </a>
             </div>
         </div>
         <div class="owl-thumbs">
             <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }"  @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }"
-                 :src="imagePreview"
-                 v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview'">
+                 :src="imagePreview.url"
+                 v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview' | orderBy 'position'">
         </div>
     </div>
 </script>

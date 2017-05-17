@@ -10,7 +10,7 @@
 <resource name="breadcrumbs" :data="{}"></resource>
 
 <header class="top-bar">
-    <div class="container-max extended-container">
+    <div class="container-max">
         <div class="row">
             {{ LayoutContainer.show("Ceres::Header.LeftSide") }}
 
@@ -42,7 +42,7 @@
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        <span class="badge" v-resource-bind:basket="itemSum" :filters="['currency']"></span>
+                        <span class="badge" v-resource-bind:basket="itemSum" :filters="['currency']">0,00 €</span>
                     </a>
                 </li>
             </ul>

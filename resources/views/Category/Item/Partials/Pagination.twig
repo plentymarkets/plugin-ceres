@@ -1,30 +1,20 @@
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-{% set itemsPerPage     = request.get("items") | default( itemsPerPage ) %}
-{% set itemSorting      = request.get("sorting") | default( config('Ceres.sort.defaultSorting') ) %}
-{% set query            = { 'items_per_page' : itemsPerPage, 'itemSorting' : itemSorting } %}
-
-{% set page             = paginatedResult.getPage() %}
-{% set pageMax          = paginatedResult.getTotalCount() // itemsPerPage %}
-{% if paginatedResult.getTotalCount() % itemsPerPage > 0 %}
-    {% set pageMax = pageMax + 1 %}
-{% endif %}
-
 {% if pageMax > 1 %}
     <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
         <ul class="pagination col-xs-12 m-y-0">
 
             <!-- PREV LINK -->
             <li class="page-item{% if page == 1 %} disabled{% endif %}">
-                <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">&laquo;</a>
+                <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./PREV LINK -->
 
             <!-- FIRST PAGE LINK -->
             {% if page > 2 and config('Ceres.pagination.showFirstPage') == "true" %}
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : 1 }) | url_encode }}">1</a>
                 </li>
                 <li class="page-item page-link">...</li>
             {% endif %}
@@ -33,29 +23,33 @@
             <!-- PAGINATION -->
             {% if page == pageMax and page > 2 %}
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : page-2 }) | url_encode }}">{{ page - 2 }}</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : page-2 }) | url_encode }}">{{ page - 2 }}</a>
                 </li>
             {% endif %}
 
             {% if page > 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : page-1 }) | url_encode }}">{{ page - 1 }}</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : page-1 }) | url_encode }}">{{ page - 1 }}</a>
                 </li>
             {% endif %}
 
             <li class="page-item active">
-                <a class="page-link" href="">{{ page }}</a>
+                <a class="page-link">{{ page }}</a>
             </li>
 
             {% if page+1 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">{{ page + 1 }}</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : page+1 }) | url_encode }}">{{ page + 1 }}</a>
                 </li>
             {% endif %}
 
             {% if page == 1 and page+2 <= pageMax %}
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : page+2 }) | url_encode }}">{{ page + 2 }}</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : page+2 }) | url_encode }}">{{ page + 2 }}</a>
                 </li>
             {% endif %}
             <!-- ./PAGINATION -->
@@ -64,14 +58,18 @@
             {% if pageMax > 3 and page < pageMax-1 and config('Ceres.pagination.showLastPage') == "true" %}
                 <li class="page-item page-link">...</li>
                 <li class="page-item">
-                    <a class="page-link" href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>
+                    <a class="page-link"
+                       href="?{{ query | merge({'page' : pageMax }) | url_encode }}">{{ pageMax }}</a>
                 </li>
             {% endif %}
             <!-- ./LAST PAGE LINK -->
 
             <!-- NEXT LINK -->
             <li class="page-item{% if page == pageMax %} disabled{% endif %}">
-                <a class="page-link" href="?{{ query | merge({'page' : page+1 }) | url_encode }}">&raquo;</a>
+                <a class="page-link"
+                   href="?{{ query | merge({'page' : page+1 }) | url_encode }}">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
             </li>
             <!-- ./NEXT LINK -->
         </ul>

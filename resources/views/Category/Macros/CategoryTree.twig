@@ -1,64 +1,56 @@
 {% macro get_nav_bar(categories, currentScopeUrl) %}
 
-    {{ component("Ceres::Category.Components.CategoryNavBarHeader") }}
+    {% for category in categories %}
 
-    <noscript>
+        {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
 
-        {% for category in categories %}
+        {% if category.children %}
 
-            {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+            <li class="ddown">
+                <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+                <ul data-level="1">
 
-            {% if category.children %}
+                    {% for child in category.children %}
 
-                <li class="ddown">
-                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
-                    <ul data-level="1">
+                        <li>
+                            <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{{ child }}">{{ child.details[0].name }}</a>
+                        </li>
 
-                        {% for child in category.children %}
+                    {% endfor %}
 
-                            <li>
-                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}">{{ child.details[0].name }}</a>
-                            </li>
+                </ul>
+            </li>
 
-                        {% endfor %}
+        {% else %}
 
-                    </ul>
-                </li>
+            <li>
+                <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+            </li>
 
-            {% else %}
-
-                <li>
-                    <a href="{{ currentScopeUrl }}">{{ category.details[0].name }}</a>
-                </li>
-
-            {% endif %}
-        {% endfor %}
-
-    </noscript>
-
-    <category-renderer template="#vue-category-nav-bar-header" categories="{{ categories | json_encode() }}"></category-renderer>
+        {% endif %}
+    {% endfor %}
 
 {% endmacro %}
 
-{% macro get_sidemenu(categories, currentScopeUrl) %}
+{% macro get_sidemenu(breadcrumbs, categories, currentScopeUrl) %}
 
     {% import _self as sidemenu %}
 
     {% set urlNow = currentScopeUrl %}
 
-        {% for category in categories %}
+    {% for category in categories %}
 
-            {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
+        {% set urlNow = currentScopeUrl ~ "/" ~ category.details[0].nameUrl %}
 
-            <ul>
-                <li class="nav-item active">
-                    <a href="{{ urlNow }}" class="nav-link">{{ category.details[0].name }}</a>
-                    {% if category.children is not empty %}
-                        {{ sidemenu.get_sidemenu(category.children, urlNow) }}
-                    {% endif %}
-                </li>
-            </ul>
+        <ul>
+            <li class="nav-item {% for breadcrumb in breadcrumbs %}{{ breadcrumb | json_encode() }}{% if category.id == breadcrumb.id %} active {% endif %}{% endfor %}" v-check-active category="{{ category }}">
+                <a href="{{ urlNow }}" class="nav-link" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+                {% if category.children is not empty %}
+                    {{ sidemenu.get_sidemenu(breadcrumbs, category.children, urlNow) }}
+                {% endif %}
+            </li>
+        </ul>
 
-        {% endfor %}
+    {% endfor %}
 
 {% endmacro %}
