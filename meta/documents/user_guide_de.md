@@ -12,17 +12,58 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
-### Standard-Startseite deaktivieren
+### Standard-Startseite anpassen
 
-**Ceres** wird mit einer Standard-Startseite ausgeliefert. Deaktivieren Sie diese Startseite, um eigene Inhalte auf der Startseite anzeigen zu können.
+**Ceres** wird mit einer Standard-Startseite ausgeliefert. Passen Sie diese Startseite an, um eigene Inhalte auf der Startseite anzuzeigen. Produkt- und Kategorievorschauen sowie Artikellisten werden erst nach Einrichtung angezeigt.
 
-##### Standard-Startseite deaktivieren:
+##### Standard-Startseite anpassen:
 
-1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.<br /> → Das Tab **Homepage** ist bereits vorausgewählt.
 4. Deaktivieren Sie die Einstellung **Show default homepage**.
-5. **Speichern** Sie die Einstellungen.<br /> → Die Standard-Startseite wird deaktiviert.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 1.
+6. **Speichern** Sie die Einstellungen.<br /> → Die Standard-Startseite wird deaktiviert und Ihre Inhalte werden angezeigt.
+
+<table>
+<thead>
+<tr>  
+<th>Einstellung</th>
+<th>Erläuterung</th> 
+</tr>
+</thead>
+<tbody>  
+<tr>
+<td><b>Show default homepage</b></td>  
+<td>Aktivieren, um die Standard-Startseite anzuzeigen.</td>
+</tr>
+<tr>
+<td><b>ID of the item variation to display in the first slide of the image slider;<br />ID of the item variation to display in the second slide of the image slider;<br />ID of the item variation to display in the third slide of the image slider</b></td>  
+<td>ID der Variante eines Artikels eingeben, die auf der jeweiligen Folie des Image Sliders angezeigt wird.</td>
+</tr>
+<tr>
+<td><b>URL to the image of the first slide;<br />URL to the image of the second slide;<br />URL to the image of third first slide</b></td>  
+<td>URL des Artikelbildes eingeben. Das Bild kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>images</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Bild führt. Das Bild hat eine Breite von 900 Pixel und eine Höhe von 400 Pixel.</td>
+</tr>
+<tr>
+<td><b>ID of the image variation to display in the upper item preview,<br />ID of the item variation to display in the lower item preview</b></td>  
+<td>ID der Variante eines Artikels eingeben, die in der jeweiligen Artikelvorschau rechts des Image Sliders angezeigt wird.</td>
+</tr>
+<tr>
+<td><b>URL to the image of the upper item preview;<br />URL to the image of the lower item preview</b></td>  
+<td>URL des Artikelbildes eingeben. Das Bild kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>images</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Bild führt.</td>
+</tr>
+<tr>
+<td><b>ID of the category to display in the first category preview;<br />ID of the category to display in the second category preview;<br />ID of the category to display in the third category preview;<br />ID of the category to display in the fourth category preview</b></td>  
+<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, die in der jeweiligen Kategorievorschau angezeigt wird.</td>
+</tr>
+<tr>
+<td><b>ID of the category to display in the first list of items;<br />ID of the category to display in the second list of items</b></td>  
+<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, um eine Artikelliste auf der Startseite anzuzeigen.</td>
+</tr>
+</tbody>
+<caption>Tab. 1: Standard-Startseite anpassen</caption>
+</table>
 
 
 ### Header und Footer anpassen
@@ -35,7 +76,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Header** bzw. **Footer**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 1.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -105,7 +146,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 <td>IDs der Kategorien vom Typ <strong>Content</strong> eingeben, die in der dritten Spalte im Footer des Webshops angezeigt werden.<br /> <b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
 </tr>
 </tbody>
-<caption>Tab. 1: Header und Footer anpassen</caption>
+<caption>Tab. 2: Header und Footer anpassen</caption>
 </table>
 
 ### Artikelansicht anpassen
@@ -117,7 +158,7 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Item view**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -167,7 +208,7 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td>Anzahl der zuletzt gesehenen Artikel wählen.</td>
 </tr>
 </tbody>
-<caption>Tab. 2: Artikelansicht anpassen</caption>
+<caption>Tab. 3: Artikelansicht anpassen</caption>
 </table>
 
 ### Warenkorb anpassen
@@ -180,7 +221,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Shopping cart**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -213,7 +254,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <td>Aktivieren, um ein Overlay des Warenkorbs nach Klick auf den <strong>In den Warenkorb</strong>-Button anzuzeigen.</td>
 </tr>
 </tbody>
-<caption>Tab. 3: Warenkorb anpassen</caption>
+<caption>Tab. 4: Warenkorb anpassen</caption>
 </table>
 
 ### Paginierung und Sortierung anpassen
@@ -226,7 +267,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Pagination and sorting**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -267,7 +308,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <td>Eintrag wählen, der standardmäßig bei der Artikelsortierung voreingestellt ist.</td>
 </tr>
 </tbody>
-<caption>Tab. 4: Paginierung und Sortierung anpassen</caption>
+<caption>Tab. 5: Paginierung und Sortierung anpassen</caption>
 </table>
 
 ### Mein Konto anpassen
@@ -291,7 +332,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 1. Öffnen Sie das Menü **Start » Plugins**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
 3. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
+4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
 5. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -325,7 +366,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 <td>Performance-Level wählen.<br /> <strong>Live</strong> = Live-Modus wählen, wenn der Webshop produktiv verwendet wird. Dateien werden minimiert und gebündelt.<br /> <strong>Development</strong> = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.</td>
 </tr>
 </tbody>
-<caption>Tab. 5: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<caption>Tab. 6: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
 
 ### Artikellisten verknüpfen
