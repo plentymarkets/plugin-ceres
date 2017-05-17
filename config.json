@@ -423,14 +423,14 @@
         "default"                   : "texts.name1_asc"
     },
     {
-        "tab"               : "My account / Checkout",
+        "tab"               : "Checkout and My account",
         "key"               : "my_account.orders_per_page",
         "label"             : "Number of orders to show per page in order history",
         "type"              : "text",
         "default"           : "5"
     },
     {
-        "tab"                       : "My account / Checkout",
+        "tab"                       : "Checkout and My account",
         "key"                       : "address.show",
         "label"                     : "Show address fields in address form",
         "type"                      : "multi_select",
@@ -447,7 +447,7 @@
         "default"                   : " address.birthday, address.name4, address.buildingName, address.additionalAddress1"
     },
     {
-        "tab"                       : "My account / Checkout",
+        "tab"                       : "Checkout and My account",
         "key"                       : "address.require",
         "label"                     : "Enable address field validation",
         "type"                      : "multi_select",
