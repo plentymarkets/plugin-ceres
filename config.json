@@ -431,37 +431,67 @@
     },
     {
         "tab"                       : "Checkout and My account",
-        "key"                       : "address.show",
-        "label"                     : "Show address fields in address form",
+        "key"                       : "billing_address.show",
+        "label"                     : "Show billing address fields in address form",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "address.name1"               : "Company",
-            "address.vatNumber"             : "VAT number",
-            "address.birthday"             : "Date of birth",
-            "address.name4"             : "Name affix",
-            "address.address3"          : "Additional address 1 / Building name (EN)",
-            "address.address4"    : "Additional address 2 (DE)"
+            "billing_address.name1"               : "Company",
+            "billing_address.vatNumber"             : "VAT number",
+            "billing_address.birthday"             : "Date of birth",
+            "billing_address.name4"             : "Name affix",
+            "billing_address.address3"          : "Additional address 1 / Building name (EN)",
+            "billing_address.address4"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : " address.birthday, address.name4, address.buildingName, address.additionalAddress1"
+        "default"                   : " billing_address.birthday, billing_address.name4, billing_address.buildingName, billing_address.additionalAddress1"
     },
     {
         "tab"                       : "Checkout and My account",
-        "key"                       : "address.require",
-        "label"                     : "Enable address field validation",
+        "key"                       : "billing_address.require",
+        "label"                     : "Enable billing address field validation",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "address.name1"               : "Company",
-            "address.vatNumber"             : "VAT number",
-            "address.birthday"             : "Date of birth",
-            "address.name4"             : "Name affix",
-            "address.address3"    : "Additional address 1 / Building name (EN)",
-            "address.address4"    : "Additional address 2 (DE)"
+            "billing_address.name1"               : "Company",
+            "billing_address.vatNumber"             : "VAT number",
+            "billing_address.birthday"             : "Date of birth",
+            "billing_address.name4"             : "Name affix",
+            "billing_address.address3"    : "Additional address 1 / Building name (EN)",
+            "billing_address.address4"    : "Additional address 2 (DE)"
 
         },
-        "default"                   : "address.salutation, address.birthday, address.name4, address.address3, address.address4"
+        "default"                   : "billing_address.birthday, billing_address.name4, billing_address.address3, billing_address.address4"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.show",
+      "label"                     : "Show delivery address fields in address form",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"               : "Company",
+        "delivery_address.name4"             : "Name affix",
+        "delivery_address.address3"          : "Additional address 1 / Building name (EN)",
+        "delivery_address.address4"    : "Additional address 2 (DE)"
+
+      },
+      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.require",
+      "label"                     : "Enable delivery address field validation",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"               : "Company",
+        "delivery_address.name4"             : "Name affix",
+        "delivery_address.address3"    : "Additional address 1 / Building name (EN)",
+        "delivery_address.address4"    : "Additional address 2 (DE)"
+
+      },
+      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
     },
     {
         "tab"               : "Registration",
