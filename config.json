@@ -53,8 +53,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraImageUrl1",
         "label"     : "URL to the image of the upper item preview",
-        "type"      : "text",
-        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+        "type"      : "text"
     },
     {
         "tab"       : "Homepage",
@@ -67,8 +66,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.heroExtraImageUrl2",
         "label"     : "URL to the image of the lower item preview",
-        "type"      : "text",
-        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+        "type"      : "text"
     },
 
 
