@@ -19,7 +19,6 @@
         {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
         ","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
         /search?query={search_term}","query-input": "required name=search_term"}}
-
     </script>
 {% endblock %}
 
@@ -39,39 +38,12 @@
                 {% set lang = services.sessionStorage.getLang() %}
                 {% set configItemName = config("Ceres.item.name") %}
 
-                {% set slider1 = {
-                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
-                url: config("Ceres.homepage.sliderImageUrl1") } %}
-                {% set slider2 = {
-                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data,
-                url: config("Ceres.homepage.sliderImageUrl2") } %}
-                {% set slider3 = {
-                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
-                url: config("Ceres.homepage.sliderImageUrl3") } %}
+                {% set slider1 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl1") } %}
+                {% set slider2 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl2") } %}
+                {% set slider3 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data, url: config("Ceres.homepage.sliderImageUrl3") } %}
 
-                {% if slider1.url | trim is empty %}
-                    {% set slider1 = slider1 | merge({url: slider1.item.images | itemImages | first}) %}
-                {% endif %}
-                {% if slider2.url | trim is empty %}
-                    {% set slider2 = slider2 | merge({url: slider2.item.images | itemImages | first}) %}
-                {% endif %}
-                {% if slider3.url | trim is empty %}
-                    {% set slider3 = slider3 | merge({url: slider3.item.images | itemImages | first}) %}
-                {% endif %}
-
-                {% set heroExtra1 = {
-                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data,
-                url: config("Ceres.homepage.heroExtraImageUrl1") } %}
-                {% set heroExtra2 = {
-                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data,
-                url: config("Ceres.homepage.heroExtraImageUrl2") } %}
-
-                {% if heroExtra1.url | trim is empty %}
-                    {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1.item.images | itemImages | first}) %}
-                {% endif %}
-                {% if heroExtra2.url | trim is empty %}
-                    {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2.item.images | itemImages | first}) %}
-                {% endif %}
+                {% set heroExtra1 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data, url: config("Ceres.homepage.heroExtraImageUrl1") } %}
+                {% set heroExtra2 = { item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {itemIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data, url: config("Ceres.homepage.heroExtraImageUrl2") } %}
 
                 {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
                 {% set category2 = services.category.get(config("Ceres.homepage.homepageCategory2"), lang) %}
@@ -95,10 +67,6 @@
                 {% set categoryList1 = paginatedCategoryList1.documents %}
                 {% set categoryList2 = paginatedCategoryList2.documents %}
 
-                {{ component( "Ceres::ItemList.Components.ItemList") }}
-                {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-                {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
-
                 <div class="home container-max">
                     <div class="row">
                         <div class="cmp cmp-hero">
@@ -110,44 +78,37 @@
                                             <div class="carousel-item active">
                                                 <a class="hero-category" href="{{ slider1.item | itemURL }}">
                                                     <img src="{{ slider1.url }}"
-                                                         alt="{{ slider1.item.texts | itemName(configItemName) }}"
-                                                         class="img-fluid">
+                                                         alt="{{ slider1.item.texts | itemName(configItemName) }}" class="img-fluid">
                                                     <div class="carousel-caption">
                                                         <h1><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                               aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}</h1>
                                                     </div>
                                                 </a>
                                             </div>
                                             <div class="carousel-item">
                                                 <a class="hero-category" href="{{ slider2.item | itemURL }}">
                                                     <img src="{{ slider2.url }}"
-                                                         alt="{{ slider2.item.texts | itemName(configItemName) }}"
-                                                         class="img-fluid">
+                                                         alt="{{ slider2.item.texts | itemName(configItemName) }}" class="img-fluid">
                                                     <div class="carousel-caption">
                                                         <h1><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                               aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}</h1>
                                                     </div>
                                                 </a>
                                             </div>
                                             <div class="carousel-item">
                                                 <a class="hero-category" href="{{ slider3.item | itemURL }}">
                                                     <img src="{{ slider3.url }}"
-                                                         alt="{{ slider3.item.texts | itemName(configItemName) }}"
-                                                         class="img-fluid">
+                                                         alt="{{ slider3.item.texts | itemName(configItemName) }}" class="img-fluid">
                                                     <div class="carousel-caption">
                                                         <h1><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                               aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}</h1>
                                                     </div>
                                                 </a>
                                             </div>
                                         </div>
 
                                         <ol class="carousel-indicators">
-                                            <li data-target="#carousel-example-generic" data-slide-to="0"
-                                                class="active"></li>
+                                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                             <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
                                             <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                                         </ol>
@@ -174,12 +135,10 @@
                                 {% set homepageContainer2 = LayoutContainer.show("Ceres::Homepage.Container2") %}
                                 {% if homepageContainer2 | trim is empty %}
                                     <a class="hero-category" href="{{ heroExtra1.item | itemURL }}">
-                                        <img src="{{ heroExtra1.url }}"
-                                             alt="{{ heroExtra1.item.texts | itemName(configItemName) }}">
+                                        <img src="{{ heroExtra1.url }}" alt="{{ heroExtra1.item.texts | itemName(configItemName) }}">
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
-                                                <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra1.item.texts | itemName(configItemName) }}
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1.item.texts | itemName(configItemName) }}
                                             </h2>
                                         </div>
                                     </a>
@@ -190,12 +149,10 @@
                                 {% set homepageContainer3 = LayoutContainer.show("Ceres::Homepage.Container3") %}
                                 {% if homepageContainer3 | trim is empty %}
                                     <a class="hero-category" href="{{ heroExtra2.item | itemURL }}">
-                                        <img src="{{ heroExtra2.url }}"
-                                             alt="{{ heroExtra2.item.texts | itemName(configItemName) }}">
+                                        <img src="{{ heroExtra2.url }}" alt="{{ heroExtra2.item.texts | itemName(configItemName) }}">
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
-                                                <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra2.item.texts | itemName(configItemName) }}
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra2.item.texts | itemName(configItemName) }}
                                             </h2>
                                         </div>
                                     </a>
@@ -211,10 +168,10 @@
                                     {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
                                     {% if homepageContainer4 | trim is empty %}
                                         <div class="prop-inner">
-                                            <a class="featured-sale-new"
-                                               href="{{ services.category.getURL(category1, lang) }}">
-                                                <img src="documents/{{ category1.details[0].imagePath }}"
-                                                     alt="{{ category1.details[0].name }}">
+                                            <a class="featured-sale-new" href="{{ services.category.getURL(category1, lang) }}">
+                                                {% if category1.details[0].imagePath%}
+                                                    <img src="documents/{{ category1.details[0].imagePath }}" alt="{{ category1.details[0].name }}">
+                                                {% endif %}
                                                 <div class="featured-category-inner">
                                                     <h4 class="featured-category-headline">
                                                         <i class="fa fa-angle-double-right"
@@ -234,10 +191,10 @@
                                     {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
                                     {% if homepageContainer5 | trim is empty %}
                                         <div class="prop-inner">
-                                            <a class="featured-sale-new"
-                                               href="{{ services.category.getURL(category2, lang) }}">
-                                                <img src="documents/{{ category2.details[0].imagePath }}"
-                                                     alt="{{ category2.details[0].name }}">
+                                            <a class="featured-sale-new" href="{{ services.category.getURL(category2, lang) }}">
+                                                {% if category2.details[0].imagePath%}
+                                                    <img src="documents/{{ category2.details[0].imagePath }}" alt="{{ category2.details[0].name }}">
+                                                {% endif %}
                                                 <div class="featured-category-inner">
                                                     <h4 class="featured-category-headline">
                                                         <i class="fa fa-angle-double-right"
@@ -258,10 +215,8 @@
                             {% if homepageContainer6 | trim is empty %}
                                 <div class="section-header m-b-1">
                                     <h4>{{ category3.details[0].name }}</h4>
-                                    <a href="documents/{{ services.category.getURL(category3.id, lang) }}"
-                                       class="section-link-all"><i
-                                                class="fa fa-angle-double-right" aria-hidden="true"></i> Alle
-                                        ansehen</a>
+                                    <a href="documents/{{ services.category.getURL(category3.id, lang) }}" class="section-link-all"><i
+                                                class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
                                 </div>
                                 <ul class="product-list row grid">
                                     {% for item in categoryList1 %}
@@ -283,11 +238,10 @@
                                     {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
                                     {% if homepageContainer7 | trim is empty %}
                                         <div class="prop-inner">
-                                            <a class="featured-category"
-                                               href="{{ services.category.getURL(category4, lang) }}">
-
-                                                <img src="documents/{{ category4.details[0].imagePath }}"
-                                                     alt="{{ category4.details[0].name }}">
+                                            <a class="featured-category" href="{{ services.category.getURL(category4, lang) }}">
+                                                {% if category4.details[0].imagePath%}
+                                                    <img src="documents/{{ category4.details[0].imagePath }}" alt="{{ category4.details[0].name }}">
+                                                {% endif %}
                                                 <div class="featured-category-inner">
                                                     <h4 class="featured-category-headline">
                                                         <i class="fa fa-angle-double-right"
@@ -308,11 +262,10 @@
                                     {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
                                     {% if homepageContainer8 | trim is empty %}
                                         <div class="prop-inner">
-                                            <a class="featured-category"
-                                               href="{{ services.category.getURL(category5, lang) }}">
-
-                                                <img src="documents/{{ category5.details[0].imagePath }}"
-                                                     alt="{{ category5.details[0].name }}">
+                                            <a class="featured-category" href="{{ services.category.getURL(category5, lang) }}">
+                                                {% if category5.details[0].imagePath%}
+                                                    <img src="documents/{{ category5.details[0].imagePath }}" alt="{{ category5.details[0].name }}">
+                                                {% endif %}
                                                 <div class="featured-category-inner">
                                                     <h4 class="featured-category-headline">
                                                         <i class="fa fa-angle-double-right"
@@ -336,10 +289,8 @@
                             {% if homepageContainer9 | trim is empty %}
                                 <div class="section-header m-b-1">
                                     <h4>{{ category6.details[0].name }}</h4>
-                                    <a href="{{ services.category.getURL(category6, lang) }}"
-                                       class="section-link-all"><i
-                                                class="fa fa-angle-double-right" aria-hidden="true"></i> Alle
-                                        ansehen</a>
+                                    <a href="{{ services.category.getURL(category6, lang) }}" class="section-link-all"><i
+                                                class="fa fa-angle-double-right" aria-hidden="true"></i> Alle ansehen</a>
                                 </div>
                                 <!-- crosssell start -->
                                 <ul class="product-list row grid">
