@@ -16,8 +16,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl1",
         "label"     : "URL to the image of the first slide",
-        "type"      : "text",
-        "default"   : "/images/gallery/welcome-page/slide_sample_02.jpg"
+        "type"      : "text"
     },
     {
         "tab"       : "Homepage",
@@ -29,8 +28,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl2",
         "label"     : "URL to the image of the second slide",
-        "type"      : "text",
-        "default"   : "/images/gallery/welcome-page/slide_sample_03.jpg"
+        "type"      : "text"
     },
     {
         "tab"       : "Homepage",
@@ -42,8 +40,7 @@
         "tab"       : "Homepage",
         "key"       : "homepage.sliderImageUrl3",
         "label"     : "URL to the image of the third slide",
-        "type"      : "text",
-        "default"   : "/images/gallery/welcome-page/slide_sample_04.jpg"
+        "type"      : "text"
     },
     {
         "tab"       : "Homepage",
