@@ -218,17 +218,25 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <caption>Tab. 3: Warenkorb anpassen</caption>
 </table>
 
-### Kaufabwicklung anpassen
+### Kaufabwicklung und Mein Konto anpassen
 
-Im Tab **Checkout** nehmen Sie Änderungen an den Anzeigeoptionen der Kaufabwicklung vor. Wählen Sie, welche Felder im Adressformular angezeigt und validiert werden.
+Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen der Kaufabwicklung vor. Wählen Sie, welche Felder im Adressformular angezeigt und validiert werden. Passen Sie zudem den **Mein Konto**-Bereich an.
 
+##### Mein Konto anpassen:
+
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Checkout and My account**.
+5. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
+6. **Speichern** Sie die Einstellungen.
 
 ##### Kaufabwicklung anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
-4. Wechseln Sie in das Tab **Checkout**.
+4. Wechseln Sie in das Tab **Checkout and My account**.
 5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
 6. **Speichern** Sie die Einstellungen.
 
@@ -243,18 +251,14 @@ Im Tab **Checkout** nehmen Sie Änderungen an den Anzeigeoptionen der Kaufabwick
 <tr>
 <td><b>Show address fields in address form</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
-<br /> <strong>First name</strong> = Aktivieren, um das Feld <strong>Vorname</strong> anzuzeigen.
-<br /> <strong>Last name</strong> = Aktivieren, um das Feld <strong>Nachname</strong> anzuzeigen.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
-<br /> <strong>Street</strong> = Aktivieren, um das Feld <strong>Straße</strong> anzuzeigen.<br /> <strong>Street number</strong> = Aktivieren, um das Feld <strong>Hausnummer</strong> anzuzeigen.<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> anzuzeigen. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> anzuzeigen.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>Postcode</strong> = Aktivieren, um das Feld <strong>PLZ</strong> anzuzeigen.<br /> <strong>Town</strong> = Aktivieren, um das Feld <strong>Ort</strong> anzuzeigen.
+<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> anzuzeigen. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> anzuzeigen.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.
 </tr>
 <tr>
 <td><b>Enable address field validation</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> zu validieren.
-<br /> <strong>First name</strong> = Aktivieren, um das Feld <strong>Vorname</strong> zu validieren.
-<br /> <strong>Last name</strong> = Aktivieren, um das Feld <strong>Nachname</strong> zu validieren.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
-<br /> <strong>Street</strong> = Aktivieren, um das Feld <strong>Straße</strong> zu validieren.<br /> <strong>Street number</strong> = Aktivieren, um das Feld <strong>Hausnummer</strong> zu validieren.<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> zu validieren. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> zu validieren.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>Postcode</strong> = Aktivieren, um das Feld <strong>PLZ</strong> zu validieren.<br /> <strong>Town</strong> = Aktivieren, um das Feld <strong>Ort</strong> zu validieren.
+<br /> <strong>Building name (EN)</strong> = Aktivieren, um das Feld <strong>Building name</strong> zu validieren. Dieses Feld ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> zu validieren.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.
 </tr>
 </tbody>
 <caption>Tab. 4: Kaufabwicklung anpassen</caption>
@@ -315,18 +319,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <caption>Tab. 5: Paginierung und Sortierung anpassen</caption>
 </table>
 
-### Mein Konto anpassen
 
-Im Tab **My account** nehmen Sie Einstellungen für den **Mein Konto**-Bereich des Webshops vor.
-
-##### Mein Konto anpassen:
-
-1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
-4. Wechseln Sie in das Tab **My account**.
-5. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
-6. **Speichern** Sie die Einstellungen.
 
 ### Einstellungen für Plugin-Entwickler
 

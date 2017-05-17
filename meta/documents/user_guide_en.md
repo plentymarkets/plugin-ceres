@@ -217,17 +217,25 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <caption>Table 3: Customising the shopping cart</caption>
 </table>
 
-### Customising the checkout
+### Customising the checkout and the My account area
 
-Customise the display options of the checkout in the **Checkout** tab. Select the fields to be displayed and validated in the address form.
+Customise the display options of the checkout in the **Checkout and My account** tab. Select the fields to be displayed and validated in the address form. Furthermore, customise the **My account** area.
 
+##### Customising the My account area:
+
+1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
+2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+3. Click on **Configuration** in the directory tree. 
+4. Click on the **Checkout and My account** tab. 
+5. Enter the number of orders to be displayed per page in the order history. 
+6. **Save** the settings.
 
 ##### Customising the checkout:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
-4. Click on the **Checkout** tab. 
+4. Click on the **Checkout and My account** tab. 
 5. Carry out the settings. Pay attention to the information given in table 4. 
 6. **Save** the settings.
 
@@ -241,11 +249,11 @@ Customise the display options of the checkout in the **Checkout** tab. Select th
 <tbody>
 <tr>
 <td><b>Show address fields in address form</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>First name</strong> = Activate to display the <strong>First name</strong> field. <br /> <strong>Last name</strong> = Activate to display the <strong>Last name</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Street</strong> = Activate to display the <strong>Street</strong> field.<br /> <strong>Street number</strong> = Activate to display the <strong>Street number</strong> field.<br /> <strong>Building name (EN)</strong> = Activate to display the <strong>Building name</strong> field. This field is only available in the English address form.<br /> <strong>Additional address 1</strong> = Activate to display the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>Postcode</strong> = Activate to display the <strong>Postcode</strong> field.<br /> <strong>Town</strong> = Activate to display the <strong>Street number</strong> field.
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Building name (EN)</strong> = Activate to display the <strong>Building name</strong> field. This field is only available in the English address form.<br /> <strong>Additional address 1</strong> = Activate to display the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.
 </tr>
 <tr>
 <td><b>Enable address field validation</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>First name</strong> = Activate to validate the <strong>First name</strong> field. <br /> <strong>Last name</strong> = Activate to validate the <strong>Last name</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Street</strong> = Activate to validate the <strong>Street</strong> field.<br /> <strong>Street number</strong> = Activate to validate the <strong>Street number</strong> field.<br /> <strong>Building name (EN)</strong> = Activate to validate the <strong>Building name</strong> field. This field is only available in the English address form.<br /> <strong>Additional address 1</strong> = Activate to validate the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>Postcode</strong> = Activate to validate the <strong>Postcode</strong> field.<br /> <strong>Town</strong> = Activate to validate the <strong>Street number</strong> field.
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field.  <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Building name (EN)</strong> = Activate to validate the <strong>Building name</strong> field. This field is only available in the English address form.<br /> <strong>Additional address 1</strong> = Activate to validate the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.
 </tr>
 </tbody>
 <caption>Table 4: Customising the checkout</caption>
@@ -306,18 +314,6 @@ Customise the pagination of the item overview and the online store's item sortin
 <caption>Table 5: Customising the pagination and sorting</caption>
 </table>
 
-### Customising the My account area
-
-Carry out settings for the **My account** area of the online store in the **My account** tab.
-
-##### Customising the My account area:
-
-1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
-3. Click on **Configuration** in the directory tree. 
-4. Click on the **My account** tab. 
-5. Enter the number of orders to be displayed per page in the order history. 
-6. **Save** the settings.
 
 ### Settings for plugin developers
 

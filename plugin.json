@@ -304,8 +304,8 @@
         },
         {
             "key"           : "Checkout.CustomAddressField",
-            "name"          : "Checkout: Custom Adress fields",
-            "description"   : "Add a custom field after the address fields."
+            "name"          : "Checkout: Address field container",
+            "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
