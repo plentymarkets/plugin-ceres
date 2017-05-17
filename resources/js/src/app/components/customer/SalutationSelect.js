@@ -3,7 +3,8 @@ var ResourceService = require("services/ResourceService");
 Vue.component("salutation-select", {
 
     props: [
-        "template"
+        "template",
+        "addressData"
     ],
 
     data: function()

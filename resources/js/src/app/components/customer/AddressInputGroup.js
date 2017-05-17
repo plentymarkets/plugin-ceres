@@ -3,6 +3,7 @@ Vue.component("address-input-group", {
     props: [
         "addressData",
         "defaultCountry",
+        "addressType",
         "template"
     ],
 
