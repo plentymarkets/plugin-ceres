@@ -5,12 +5,20 @@
 <script type="x/template" id="vue-address-input-group">
 
     <div>
-        <div v-if="localeToShow == 'DE'">
-            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupDE" %}
+        <div v-if="localeToShow == 'DE' && addressType === '1'">
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupDE" %}
         </div>
 
-        <div v-if="localeToShow == 'GB'">
-            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.AddressInputGroupGB" %}
+        <div v-if="localeToShow == 'GB' && addressType === '1'">
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.BillingAddressInputGroupGB" %}
+        </div>
+
+        <div v-if="localeToShow == 'DE' && addressType === '2'">
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupDE" %}
+        </div>
+
+        <div v-if="localeToShow == 'GB' && addressType === '2'">
+            {% include "Ceres::Customer.Components.AddressInputGroup.Locale.DeliveryAddressInputGroupGB" %}
         </div>
 
         <div class="col-xs-12 col-sm-4">

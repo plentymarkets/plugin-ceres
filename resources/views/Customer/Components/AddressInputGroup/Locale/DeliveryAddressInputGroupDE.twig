@@ -1,7 +1,7 @@
 {{ component( "Ceres::Customer.Components.SalutationSelect" ) }}
 
-{% set addressFields = config("Ceres.address.show") | split(', ') %}
-{% set addressFieldsRequired = config("Ceres.address.require") | split(', ') %}
+{% set addressFields = config("Ceres.delivery_address.show") | split(', ') %}
+{% set addressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
 
 {#<div class="col-xs-12">#}
     {#<div class="row">#}
@@ -29,22 +29,12 @@
 
 <div class="col-xs-12">
     <div class="row">
-        {% if "address.company" in addressFields %}
+        {% if "delivery_address.name1" in addressFields %}
             <div class="col-xs-12 col-sm-6">
                 <div class="input-unit"
-                     {% if "address.company" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                     {% if "delivery_address.name1" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
-                    <label for="txtCompany${_uid}">{{ trans("Ceres::Template.addressCompany") }}{% if "address.company" in addressFieldsRequired %}*{% endif %}</label>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if "address.vatNumber" in addressFields %}
-            <div class="col-xs-12 col-sm-6" v-if="addressType === '1'">
-                <div class="input-unit"
-                     {% if "address.vatNumber" in addressFieldsRequired %}data-validate="text"{% endif %}>
-                    <input type="text" name="vatNumber" id="txtVatNumber${_uid}" v-model="addressData.vatNumber">
-                    <label for="txtVatNumber${_uid}">{{ trans("Ceres::Template.addressVatNumber") }}{% if "address.vatNumber" in addressFieldsRequired %}*{% endif %}</label>
+                    <label for="txtCompany${_uid}">{{ trans("Ceres::Template.addressCompany") }}{% if "delivery_address.name1" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
         {% endif %}
@@ -67,27 +57,17 @@
             </div>
         </div>
 
-        {% if "address.nameAffix" in addressFields %}
+        {% if "delivery_address.name4" in addressFields %}
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
-                     {% if "address.nameAffix" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                     {% if "delivery_address.name4" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="decorateName" id="txtAdditionalName${_uid}" v-model="addressData.name4">
-                    <label for="txtAdditionalName${_uid}">{{ trans("Ceres::Template.addressAdditionalName") }}{% if "address.nameAffix" in addressFieldsRequired %}*{% endif %}</label>
+                    <label for="txtAdditionalName${_uid}">{{ trans("Ceres::Template.addressAdditionalName") }}{% if "delivery_address.name4" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
         {% endif %}
     </div>
 </div>
-
-{% if "address.birthdate" in addressFields %}
-    <div class="col-xs-12 col-sm-4" v-if="addressType === '1'">
-        <div class="input-unit" {% if "address.birthdate" in addressFieldsRequired %}data-validate="text"{% endif %}>
-            <input type="date" name="birthday" id="txtBirthdate${_uid}" v-model="addressData.birthday">
-            <label for="txtBirthdate${_uid}">{{ trans("Ceres::Template.addressBirthdate") }}{% if "address.birthdate" in addressFieldsRequired %}*{% endif %}</label>
-        </div>
-    </div>
-{% endif %}
-
 <div class="col-xs-12">
     <div class="row">
         <div class="col-xs-12 col-sm-8">
@@ -108,24 +88,24 @@
 
 <div class="col-xs-12">
     <div class="row">
-        {% if "address.additionalAddress1" in addressFields %}
+        {% if "delivery_address.address3" in addressFields %}
             <div class="col-xs-12 col-sm-6">
                 <div class="input-unit"
-                     {% if "address.additionalAddress1" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                     {% if "delivery_address.address3" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="decorateAddress" id="decorateAddress0${_uid}"
                            v-model="addressData.address3">
-                    <label for="decorateAddress0${_uid}">{{ trans("Ceres::Template.addressAdditionalAddress1") }}{% if "address.additionalAddress1" in addressFieldsRequired %}*{% endif %}</label>
+                    <label for="decorateAddress0${_uid}">{{ trans("Ceres::Template.addressAdditionalAddress1") }}{% if "delivery_address.address3" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
         {% endif %}
 
-        {% if "address.additionalAddress2" in addressFields %}
+        {% if "delivery_address.address4" in addressFields %}
             <div class="col-xs-12 col-sm-6">
                 <div class="input-unit"
-                     {% if "address.additionalAddress2" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                     {% if "delivery_address.address4" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="decorateAddress" id="decorateAddress1${_uid}"
                            v-model="addressData.address4">
-                    <label for="decorateAddress1${_uid}">{{ trans("Ceres::Template.addressAdditionalAddress2") }}{% if "address.additionalAddress2" in addressFieldsRequired %}*{% endif %}</label>
+                    <label for="decorateAddress1${_uid}">{{ trans("Ceres::Template.addressAdditionalAddress2") }}{% if "delivery_address.address4" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
         {% endif %}
