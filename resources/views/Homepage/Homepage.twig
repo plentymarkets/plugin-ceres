@@ -84,13 +84,13 @@
                 services.itemLoader.loadForTemplate(
                 'Ceres::ItemList.ItemListView',
                 itemLoaderPresets.categoryList,
-                {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
+                {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 
                 {% set paginatedCategoryList2 =
                 services.itemLoader.loadForTemplate(
                 'Ceres::ItemList.ItemListView',
                 itemLoaderPresets.categoryList,
-                {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
+                {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 
                 {% set categoryList1 = paginatedCategoryList1.documents %}
                 {% set categoryList2 = paginatedCategoryList2.documents %}
