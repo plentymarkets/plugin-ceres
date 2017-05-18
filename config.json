@@ -432,7 +432,7 @@
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.show",
-        "label"                     : "Show billing address fields in address form",
+        "label"                     : "Show invoice address fields in address form",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
@@ -440,8 +440,8 @@
             "billing_address.vatNumber"             : "VAT number",
             "billing_address.birthday"             : "Date of birth",
             "billing_address.name4"             : "Name affix",
-            "billing_address.address3"          : "Additional address 1 / Building name (EN)",
-            "billing_address.address4"    : "Additional address 2 (DE)",
+            "billing_address.address3"          : "Additional address 1 / Building name",
+            "billing_address.address4"    : "Additional address 2",
             "billing_address.stateId" : "State"
 
         },
@@ -450,7 +450,7 @@
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.require",
-        "label"                     : "Enable billing address field validation",
+        "label"                     : "Enable invoice address field validation",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
@@ -458,8 +458,8 @@
             "billing_address.vatNumber"             : "VAT number",
             "billing_address.birthday"             : "Date of birth",
             "billing_address.name4"             : "Name affix",
-            "billing_address.address3"    : "Additional address 1 / Building name (EN)",
-            "billing_address.address4"    : "Additional address 2 (DE)",
+            "billing_address.address3"    : "Additional address 1 / Building name",
+            "billing_address.address4"    : "Additional address 2",
             "billing_address.stateId" : "State"
 
         },
@@ -474,8 +474,8 @@
       {
         "delivery_address.name1"               : "Company",
         "delivery_address.name4"             : "Name affix",
-        "delivery_address.address3"          : "Additional address 1 / Building name (EN)",
-        "delivery_address.address4"    : "Additional address 2 (DE)",
+        "delivery_address.address3"          : "Additional address 1 / Building name",
+        "delivery_address.address4"    : "Additional address 2",
         "delivery_address.stateId" : "State"
 
       },
@@ -490,8 +490,8 @@
       {
         "delivery_address.name1"               : "Company",
         "delivery_address.name4"             : "Name affix",
-        "delivery_address.address3"    : "Additional address 1 / Building name (EN)",
-        "delivery_address.address4"    : "Additional address 2 (DE)",
+        "delivery_address.address3"    : "Additional address 1 / Building name",
+        "delivery_address.address4"    : "Additional address 2",
         "delivery_address.stateId" : "State"
 
       },
