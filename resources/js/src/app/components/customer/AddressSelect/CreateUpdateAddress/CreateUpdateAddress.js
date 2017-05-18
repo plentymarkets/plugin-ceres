@@ -1,4 +1,4 @@
-var AddressService    = require("services/AddressService");
+var AddressService = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
@@ -33,7 +33,7 @@ Vue.component("create-update-address", {
             var self = this;
 
             if (this.addressType === "1")
-{
+            {
                 ValidationService.validate($("#billing_address_form"))
                     .done(function()
                     {
@@ -46,7 +46,7 @@ Vue.component("create-update-address", {
 
             }
             else if (this.addressType === "2")
-{
+            {
                 ValidationService.validate($("#delivery_address_form"))
                     .done(function()
                     {
@@ -104,6 +104,10 @@ Vue.component("create-update-address", {
                     }
 
                     this.waiting = false;
+                }.bind(this))
+                .fail(function()
+                {
+                    this.waiting = false;
                 }.bind(this));
         },
 
@@ -125,6 +129,10 @@ Vue.component("create-update-address", {
 
                     this.$dispatch("new-address-created", this.addressData);
 
+                    this.waiting = false;
+                }.bind(this))
+                .fail(function()
+                {
                     this.waiting = false;
                 }.bind(this));
         }
