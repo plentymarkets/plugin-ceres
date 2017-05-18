@@ -2,6 +2,10 @@
 
 ## v1.2.3
 
+### Hinzugefügt
+
+- Eine konfigurierbare Startseite wurde hinzugefügt.
+
 ### Behoben
 
 - Es wurde ein Fehler behoben, wodruch die Breadcrumbs/Menüpunkte nicht korrekt funktioniert hatten.
