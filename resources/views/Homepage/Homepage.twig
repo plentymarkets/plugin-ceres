@@ -321,60 +321,64 @@
                         {% endif %}
 
                         {#<!-- CATEGORIES -->#}
+                        {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
+                        {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
+                        {% if category4 is not empty or homepageContainer7 | trim is not empty or category5 is not empty or homepageContainer8 | trim is not empty %}
+                            <div class="row prop-row m-y-2 featured-categories">
+                                {% if category4 is not empty or homepageContainer7 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
+                                            {% if homepageContainer7 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-category"
+                                                       href="{{ services.category.getURL(category4, lang) }}">
+                                                        {% if category4.details[0].imagePath %}
+                                                            <img src="documents/{{ category4.details[0].imagePath }}"
+                                                                 alt="{{ category4.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category4.details[0].name }}
+                                                            </h4>
 
-                        <div class="row prop-row m-y-2 featured-categories">
-                            <div class="col-xs-12 col-lg-8">
-                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-2-1">
-                                    {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
-                                    {% if homepageContainer7 | trim is empty %}
-                                        <div class="prop-inner">
-                                            <a class="featured-category"
-                                               href="{{ services.category.getURL(category4, lang) }}">
-                                                {% if category4.details[0].imagePath %}
-                                                    <img src="documents/{{ category4.details[0].imagePath }}"
-                                                         alt="{{ category4.details[0].name }}">
-                                                {% endif %}
-                                                <div class="featured-category-inner">
-                                                    <h4 class="featured-category-headline">
-                                                        <i class="fa fa-angle-double-right"
-                                                           aria-hidden="true"></i> {{ category4.details[0].name }}
-                                                    </h4>
-
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
+                                            {% else %}
+                                                {{ homepageContainer7 }}
+                                            {% endif %}
                                         </div>
-                                    {% else %}
-                                        {{ homepageContainer7 }}
-                                    {% endif %}
-                                </div>
-                            </div>
+                                    </div>
+                                {% endif %}
 
-                            <div class="col-xs-12 col-lg-4">
-                                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-1-1">
-                                    {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
-                                    {% if homepageContainer8 | trim is empty %}
-                                        <div class="prop-inner">
-                                            <a class="featured-category"
-                                               href="{{ services.category.getURL(category5, lang) }}">
-                                                {% if category5.details[0].imagePath %}
-                                                    <img src="documents/{{ category5.details[0].imagePath }}"
-                                                         alt="{{ category5.details[0].name }}">
-                                                {% endif %}
-                                                <div class="featured-category-inner">
-                                                    <h4 class="featured-category-headline">
-                                                        <i class="fa fa-angle-double-right"
-                                                           aria-hidden="true"></i> {{ category5.details[0].name }}
-                                                    </h4>
-
+                                {% if category5 is not empty or homepageContainer8 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
+                                            {% if homepageContainer8 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-category"
+                                                       href="{{ services.category.getURL(category5, lang) }}">
+                                                        {% if category5.details[0].imagePath %}
+                                                            <img src="documents/{{ category5.details[0].imagePath }}"
+                                                                 alt="{{ category5.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category5.details[0].name }}
+                                                            </h4>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
+                                            {% else %}
+                                                {{ homepageContainer8 }}
+                                            {% endif %}
                                         </div>
-                                    {% else %}
-                                        {{ homepageContainer8 }}
-                                    {% endif %}
-                                </div>
+                                    </div>
+                                {% endif %}
                             </div>
-                        </div>
+                        {% endif %}
 
                         <!-- END CATEGORIES -->
 
