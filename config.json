@@ -440,9 +440,11 @@
             "billing_address.vatNumber"             : "VAT number",
             "billing_address.birthday"             : "Date of birth",
             "billing_address.name4"             : "Name affix",
-            "billing_address.address3"          : "Additional address 1 / Building name",
+            "billing_address.address3"          : "Additional address 1 / Building name (EN)",
             "billing_address.address4"    : "Additional address 2",
-            "billing_address.stateId" : "State"
+            "billing_address.stateId" : "State",
+            "billing_address.salutation":"Salutation",
+            "billing_address.title":"Title"
 
         },
         "default"                   : " billing_address.birthday, billing_address.name4, billing_address.buildingName, billing_address.additionalAddress1"
@@ -460,7 +462,9 @@
             "billing_address.name4"             : "Name affix",
             "billing_address.address3"    : "Additional address 1 / Building name",
             "billing_address.address4"    : "Additional address 2",
-            "billing_address.stateId" : "State"
+            "billing_address.stateId" : "State",
+            "billing_address.salutation":"Salutation",
+            "billing_address.title":"Title"
 
         },
         "default"                   : "billing_address.birthday, billing_address.name4, billing_address.address3, billing_address.address4"
@@ -476,7 +480,9 @@
         "delivery_address.name4"             : "Name affix",
         "delivery_address.address3"          : "Additional address 1 / Building name",
         "delivery_address.address4"    : "Additional address 2",
-        "delivery_address.stateId" : "State"
+        "delivery_address.stateId" : "State",
+          "delivery_address.salutation":"Salutation",
+          "delivery_address.title":"Title"
 
       },
       "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
@@ -492,7 +498,9 @@
         "delivery_address.name4"             : "Name affix",
         "delivery_address.address3"    : "Additional address 1 / Building name",
         "delivery_address.address4"    : "Additional address 2",
-        "delivery_address.stateId" : "State"
+        "delivery_address.stateId" : "State",
+          "delivery_address.salutation":"Salutation",
+          "delivery_address.title":"Title"
 
       },
       "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
