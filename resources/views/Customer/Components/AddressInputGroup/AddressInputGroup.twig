@@ -28,7 +28,8 @@
                 :selected-state-id.sync="addressData.stateId"
                 @selected-country-changed="onSelectedCountryChanged"
                 :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
-                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}">
+                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}"
+                :address-type="addressType">
             </country-select>
         </div>
     </div>

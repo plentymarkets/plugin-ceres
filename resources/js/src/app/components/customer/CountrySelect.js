@@ -8,7 +8,8 @@ Vue.component("country-select", {
         "countryNameMap",
         "selectedCountryId",
         "selectedStateId",
-        "template"
+        "template",
+        "addressType"
     ],
 
     data: function()

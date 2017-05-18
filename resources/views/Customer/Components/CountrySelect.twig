@@ -1,5 +1,10 @@
-<script type="x/template" id="vue-country-select">
+{% set billingAddressFields = config("Ceres.billing_address.show") | split(', ') %}
+{% set billingAddressFieldsRequired = config("Ceres.billing_address.require") | split(', ') %}
+{% set deliveryAddressFields = config("Ceres.delivery_address.show") | split(', ') %}
+{% set deliveryAddressFieldsRequired = config("Ceres.delivery_address.require") | split(', ') %}
 
+<script type="x/template" id="vue-country-select">
+<div>
     <div class="input-unit" data-validate="">
         <select  v-model="selectedCountryId" v-on:change="countryChanged" class="custom-select">
             <option v-bind:value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
@@ -9,13 +14,29 @@
         <label>{{ trans("Ceres::Template.generalCountry") }}</label>
     </div>
 
-    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0" data-validate="">
+    {% if "billing_address.stateId" in billingAddressFields %}
+    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate{% endif %}>
         <select v-model="selectedStateId" class="custom-select">
             <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
                 ${ state.name }
             </option>
         </select>
-        <label>{{ trans("Ceres::Template.generalState") }}</label>
+        <label>{{ trans("Ceres::Template.generalState") }}{% if "billing_address.stateId" in billingAddressFieldsRequired %}*{% endif %}</label>
+    </div>
+    {% endif %}
+
+
+    {% if "delivery_address.stateId" in deliveryAddressFields %}
+        <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate{% endif %}>
+            <select v-model="selectedStateId" class="custom-select">
+                <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
+                    ${ state.name }
+                </option>
+            </select>
+            <label>{{ trans("Ceres::Template.generalState") }}{% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}*{% endif %}</label>
+        </div>
+    {% endif %}
+
     </div>
 
 </script>
