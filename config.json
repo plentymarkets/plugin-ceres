@@ -441,7 +441,8 @@
             "billing_address.birthday"             : "Date of birth",
             "billing_address.name4"             : "Name affix",
             "billing_address.address3"          : "Additional address 1 / Building name (EN)",
-            "billing_address.address4"    : "Additional address 2 (DE)"
+            "billing_address.address4"    : "Additional address 2 (DE)",
+            "billing_address.stateId" : "State"
 
         },
         "default"                   : " billing_address.birthday, billing_address.name4, billing_address.buildingName, billing_address.additionalAddress1"
@@ -458,7 +459,8 @@
             "billing_address.birthday"             : "Date of birth",
             "billing_address.name4"             : "Name affix",
             "billing_address.address3"    : "Additional address 1 / Building name (EN)",
-            "billing_address.address4"    : "Additional address 2 (DE)"
+            "billing_address.address4"    : "Additional address 2 (DE)",
+            "billing_address.stateId" : "State"
 
         },
         "default"                   : "billing_address.birthday, billing_address.name4, billing_address.address3, billing_address.address4"
@@ -473,7 +475,8 @@
         "delivery_address.name1"               : "Company",
         "delivery_address.name4"             : "Name affix",
         "delivery_address.address3"          : "Additional address 1 / Building name (EN)",
-        "delivery_address.address4"    : "Additional address 2 (DE)"
+        "delivery_address.address4"    : "Additional address 2 (DE)",
+        "delivery_address.stateId" : "State"
 
       },
       "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
@@ -488,7 +491,8 @@
         "delivery_address.name1"               : "Company",
         "delivery_address.name4"             : "Name affix",
         "delivery_address.address3"    : "Additional address 1 / Building name (EN)",
-        "delivery_address.address4"    : "Additional address 2 (DE)"
+        "delivery_address.address4"    : "Additional address 2 (DE)",
+        "delivery_address.stateId" : "State"
 
       },
       "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
