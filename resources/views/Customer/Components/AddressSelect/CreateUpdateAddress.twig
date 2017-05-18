@@ -1,7 +1,17 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 
 <script type="x/template" id="vue-create-update-address">
-    <form id="my-form" >
+    <form id="billing_address_form" v-if="addressType === '1'">
+        <div class="row">
+
+            <address-input-group template="#vue-address-input-group" :address-data="addressData" :address-type="addressType"></address-input-group>
+
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-primary btn-block" @click="validate" :disabled="waiting">{{ trans("Ceres::Template.generalSave") }}</button>
+            </div>
+        </div>
+    </form>
+    <form id="delivery_address_form" v-if="addressType === '2'">
         <div class="row">
 
             <address-input-group template="#vue-address-input-group" :address-data="addressData" :address-type="addressType"></address-input-group>

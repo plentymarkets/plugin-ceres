@@ -32,15 +32,32 @@ Vue.component("create-update-address", {
         {
             var self = this;
 
-            ValidationService.validate($("#my-form"))
-                .done(function()
-                {
-                    self.saveAddress();
-                })
-                .fail(function(invalidFields)
-                {
-                    ValidationService.markInvalidFields(invalidFields, "error");
-                });
+            if (this.addressType === "1")
+{
+                ValidationService.validate($("#billing_address_form"))
+                    .done(function()
+                    {
+                        self.saveAddress();
+                    })
+                    .fail(function(invalidFields)
+                    {
+                        ValidationService.markInvalidFields(invalidFields, "error");
+                    });
+
+            }
+            else if (this.addressType === "2")
+{
+                ValidationService.validate($("#delivery_address_form"))
+                    .done(function()
+                    {
+                        self.saveAddress();
+                    })
+                    .fail(function(invalidFields)
+                    {
+                        ValidationService.markInvalidFields(invalidFields, "error");
+                    });
+            }
+
         },
 
         /**
