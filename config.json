@@ -7,6 +7,108 @@
         "default"   : "true"
     },
     {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderItemId1",
+        "label"     : "ID of the item variation to display in the first slide of the image slider",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderImageUrl1",
+        "label"     : "URL to the image of the first slide",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderItemId2",
+        "label"     : "ID of the item variation to display in the second slide of the image slider",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderImageUrl2",
+        "label"     : "URL to the image of the second slide",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderItemId3",
+        "label"     : "ID of the item variation to display in the third slide of the image slider",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.sliderImageUrl3",
+        "label"     : "URL to the image of the third slide",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtraItemId1",
+        "label"     : "ID of the item variation to display in the upper item preview",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtraImageUrl1",
+        "label"     : "URL to the image of the upper item preview",
+        "type"      : "text"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtraItemId2",
+        "label"     : "ID of the item variation to display in the lower item preview",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.heroExtraImageUrl2",
+        "label"     : "URL to the image of the lower item preview",
+        "type"      : "text"
+    },
+
+
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory1",
+        "label"     : "ID of the category to display in the first category preview",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory2",
+        "label"     : "ID of the category to display in the second category preview",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory3",
+        "label"     : "ID of the category to display in the first list of items",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory4",
+        "label"     : "ID of the category to display in the third category preview",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory5",
+        "label"     : "ID of the category to display in the fourth category preview",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Homepage",
+        "key"       : "homepage.homepageCategory6",
+        "label"     : "ID of the category to display in the second list of items",
+        "type"      : "category_select"
+    },
+
+
+    {
         "tab"       : "Header",
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",

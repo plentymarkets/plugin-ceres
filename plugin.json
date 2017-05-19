@@ -69,6 +69,61 @@
             "description"   : "Add additional content on the 404 page."
         },
         {
+            "key"           : "Homepage",
+            "name"          : "Override homepage",
+            "description"   : "Override the complete homepage."
+        },
+        {
+            "key"           : "Homepage.Container1",
+            "name"          : "Homepage: Container 1",
+            "description"   : "Replace the image slider of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container2",
+            "name"          : "Homepage: Container 2",
+            "description"   : "Replace the upper item preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container3",
+            "name"          : "Homepage: Container 3",
+            "description"   : "Replace the lower item preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container4",
+            "name"          : "Homepage: Container 4",
+            "description"   : "Replace the first category preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container5",
+            "name"          : "Homepage: Container 5",
+            "description"   : "Replace the second category preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container6",
+            "name"          : "Homepage: Container 6",
+            "description"   : "Replace the first list of items of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container7",
+            "name"          : "Homepage: Container 7",
+            "description"   : "Replace the third category preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container8",
+            "name"          : "Homepage: Container 8",
+            "description"   : "Replace the fourth category preview of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container9",
+            "name"          : "Homepage: Container 9",
+            "description"   : "Replace the second list of items of the homepage."
+        },
+        {
+            "key"           : "Homepage.Container10",
+            "name"          : "Homepage: Container 10",
+            "description"   : "Add additional content on the homepage."
+        },
+        {
             "key"           : "Homepage.PaymentMethods",
             "name"          : "Homepage: Payment method container",
             "description"   : "Add a logo of the payment method to the payment methods on the homepage."

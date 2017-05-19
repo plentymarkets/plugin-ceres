@@ -4,315 +4,415 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set companyName  = config("Ceres.header.company_name") %}
 
-
 {% block PartialHead %}
-    <meta property="og:title" content="{{ companyName }}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}" />
-    <meta property="og:image" content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}" />
+    <meta property="og:title" content="{{ companyName }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>
+    <meta property="og:image"
+          content="{% if ('http' in companyLogo) or ('layout/' in companyLogo) %}{{ companyLogo }}{% else %}{{ plugin_path('Ceres') }}/{{ companyLogo }}{% endif %}"/>
 
-    <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
+    <link rel="canonical"
+          href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
 
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">
+        {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
+        ","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}
+        /search?query={search_term}","query-input": "required name=search_term"}}
+
+    </script>
 {% endblock %}
 
 {% block PageBody %}
 
     {% if showDefaultHomepage == "true" %}
 
-        {% set currentLang = services.sessionStorage.getLang() %}
-
-        <div style="visibility: hidden" id="currentLang">{{ currentLang }}</div>
-
-        <div class="container-max" style="margin-bottom: 2rem">
-            <div class="carousel slide" data-interval="5000" data-ride="carousel" id="carousel-example">
-                <div class="carousel-inner" id="carousel-content">
-                    <!-- dynamic add content -->
-                </div>
-                <a class="left carousel-control" href="#carousel-example" data-slide="prev"><i class="icon-prev  fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#carousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
-            </div>
-        </div>
-        <div class="container-max">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 style="font-size: 3rem" id="welcome-text"><!-- welcome text --></h1>
-                </div>
-                <div class="col-lg-6">
-                    <p id="short-description"><!-- short description --></p>
-                </div>
-            </div>
-
-            <hr class="my-2">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 style="text-align: center" id="recommend-text"><!-- recommend text --></h2>
-                </div>
-            </div>
-
-            <hr class="my-2">
-
-            <div class="row">
-                <div class="row mt-xs-0_5">
-                    <ul class="flex-container" id="recommended-plugins">
-                        <!-- recommended plugins -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <style>
-
-            .img-border {
-                border: 1px solid black;
-                width: 300px;
-                height: 200px;
-            }
-
-            .row {
-                margin-left: -15px;
-                margin-right: -15px;
-            }
-
-            .mt-xs-0_5 {
-                margin-top: 6px;
-            }
-
-            .mb-xs-1_5 {
-                margin-bottom: 18px;
-            }
-
-            .mt-xs-1 {
-                margin-top: 12px;
-            }
-
-            .col-md-3 {
-                width: 25%;
-                float: left;
-                position: relative;
-                padding-left: 15px;
-                padding-right: 15px;
-                box-sizing: border-box;
-            }
-
-            .padding-lr-resp {
-                padding-left: 30px;
-                padding-right: 30px;
-            }
-
-            .bgcolor-white {
-                background-color: #fff;
-            }
-
-            .color-box-inner {
-                display: block;
-                padding: 12px 15px;
-            }
-
-            .imageBox.isLogo {
-                line-height: 125px;
-                vertical-align: middle;
-                color: #008EBD;
-                text-decoration: none;
-            }
-
-            .center {
-                text-align: center;
-            }
-
-            .block {
-                display: block;
-            }
-
-            a {
-                background: transparent;
-                text-decoration: none;
-            }
-
-            a:hover {
-                text-decoration: none;
-            }
-
-            .carousel-inner > .item > img,
-            .carousel-inner > .item > a > img {
-                width: 70%;
-                margin: auto;
-            }
-
-            .flex-item {
-                position:relative;
-                background: #fff;
-                padding: 0;
-                width: 180px;
-                height: 180px;
-                margin-top: 15px;
-                overflow:hidden;
-            }
-
-            .flex-image {
-                position:absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:100%;
-
-            }
-            .flex-align-bottom {
-                position:absolute;
-                bottom:0;
-                width:100%;
-                margin-bottom:0;
-                background:rgba(0, 142, 189,.7);
-                text-align:left;
-                padding:0;
-                padding-left:.3em;
-                padding-right:.3em;
-                box-sizing:border-box;
-                line-height:101%;
-                font-size:14px;
-                transition:all 1s;
-            }
-
-            .flex-item:hover > a > .flex-align-bottom {
-                background:rgba(0, 142, 189,1);
-                padding-bottom:.4em;
-
-            }
-
-            .flex-item:hover > a > .flex-align-bottom > .flex-text {
-                transform:scale(1,1);
-                line-height:110%;
-                transition:transform 1s, line-height 1s, color 1s;
-                font-size:14px;
-                color:rgba(255, 255, 255,1);
-
-            }
-
-            .flex-title {
-                font-size:17px;
-                margin:0;
-                line-height:1.6em;
-                height:1.6em;
-                font-weight:normal;
-                text-align:center;
-                color:#fff;
-                display:block;
-
-            }
-            .flex-text {
-                margin:0;
-                padding:0;
-                font-weight:normal;
-                text-align:left;
-                line-height:0%;
-                transform:scale(1,0); /* W3C */
-                -webkit-transform:scale(1,0); /* Safari and Chrome */
-                -moz-transform:scale(1,0); /* Firefox */
-                -ms-transform:scale(1,0); /* IE 9 */
-                -o-transform:scale(1,0); /* Opera */
-                font-size:0;
-                transition:transform 1s, line-height 1s, font-size 1s ;
-                color:rgba(0, 142, 189,0);
-            }
-
-            .flex-container {
-                margin: 0 30px 25px;
-                padding: 0;
-                position:relative;
-                list-style: none;
-                display: -webkit-box;
-                display: -moz-box;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-flow: row wrap;
-                justify-content: space-around;
-            }
-
-        </style>
-
-        <script>
-            function getJson(url)
-            {
-                var Httpreq = new XMLHttpRequest();
-                Httpreq.open("GET", url, false);
-                Httpreq.send(null);
-                return Httpreq.responseText;
-            }
-
-            var currentLang = document.getElementById("currentLang").textContent || document.getElementById("currentLang").innerText;
-            var json = JSON.parse(getJson('https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json'));
-
-            renderCarousel();
-            renderTexts();
-            renderRecommendPlugins();
-
-            function renderCarousel()
-            {
-                var carousel = document.getElementById("carousel-content");
-
-                for(var i = 0; i < json[currentLang].pictures.length; i++)
-                {
-                    var contentToAddDiv = document.createElement('div');
-
-                    contentToAddDiv.className = "carousel-item text-muted" + ( i == 0 ? " active" : "" ) ;
-
-                    var contentToAdd = 	'<a href="' + json[currentLang].pictures[i].pictureLink + '">' +
-                        '<img class="img-fluid" src="' + json[currentLang].pictures[i].pictureUrl + '">' +
-                        '</a>' +
-                        '<div class="carousel-caption">' +
-                        '<h2>' + json[currentLang].pictures[i].text + '</h2>' +
-                        '</div>';
-
-                    contentToAddDiv.innerHTML = contentToAdd;
-
-                    carousel.appendChild(contentToAddDiv);
-                }
-            }
-
-            function renderTexts()
-            {
-                var welcomeText = document.getElementById("welcome-text");
-                var shortDescription = document.getElementById("short-description");
-                var recommendText = document.getElementById("recommend-text");
-
-                welcomeText.innerHTML = json[currentLang].texts.welcome;
-                shortDescription.innerHTML = json[currentLang].texts.shortDescription;
-                recommendText.innerHTML = json[currentLang].texts.recommendText;
-            }
-
-            function renderRecommendPlugins()
-            {
-                var recommendedPlugins = document.getElementById("recommended-plugins");
-
-                for(var i = 0; i < json[currentLang].recommended.length; i++)
-                {
-                    var contentToAddLi = document.createElement('li');
-                    contentToAddLi.className = "flex-item";
-
-                    var contentToAdd = 	'<a target="_blank" href="' + json[currentLang].recommended[i].pluginLink + '">' +
-                        '<img class="flex-image" src="' + json[currentLang].recommended[i].pluginIcon + '"</img>' +
-                        '<div class="flex-align-bottom">' +
-                        '<h1 class="flex-title">' + json[currentLang].recommended[i].pluginTitle + '</h1>' +
-                        '<div class="flex-text">' + json[currentLang].recommended[i].pluginText + '</div>' +
-                        '</div>' +
-                        '</a>';
-
-                    contentToAddLi.innerHTML = contentToAdd;
-
-                    recommendedPlugins.appendChild(contentToAddLi);
-                }
-            }
-        </script>
+        {% include 'Ceres::Homepage.MarketingHomepage.twig' %}
 
     {% else %}
+        {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
         {% block ThemeHomepage %}
-            <!-- theme homepage -->
+            {% set overrideHomepageContainer = LayoutContainer.show("Ceres::Homepage") %}
+            {% if overrideHomepageContainer | trim is empty %}
+
+                {% set lang = services.sessionStorage.getLang() %}
+                {% set configItemName = config("Ceres.item.name") %}
+
+                {% set slider1 = {
+                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
+                url: config("Ceres.homepage.sliderImageUrl1") } %}
+                {% set slider2 = {
+                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data,
+                url: config("Ceres.homepage.sliderImageUrl2") } %}
+                {% set slider3 = {
+                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
+                url: config("Ceres.homepage.sliderImageUrl3") } %}
+
+                {% if slider1.url | trim is empty %}
+                    {% set slider1 = slider1 | merge({url: slider1.item.images | itemImages | first}) %}
+                {% endif %}
+                {% if slider2.url | trim is empty %}
+                    {% set slider2 = slider2 | merge({url: slider2.item.images | itemImages | first}) %}
+                {% endif %}
+                {% if slider3.url | trim is empty %}
+                    {% set slider3 = slider3 | merge({url: slider3.item.images | itemImages | first}) %}
+                {% endif %}
+
+                {% set heroExtra1 = {
+                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data,
+                url: config("Ceres.homepage.heroExtraImageUrl1") } %}
+                {% set heroExtra2 = {
+                item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data,
+                url: config("Ceres.homepage.heroExtraImageUrl2") } %}
+
+                {% if heroExtra1.url | trim is empty %}
+                    {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1.item.images | itemImages | first}) %}
+                {% endif %}
+                {% if heroExtra2.url | trim is empty %}
+                    {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2.item.images | itemImages | first}) %}
+                {% endif %}
+
+                {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
+                {% set category2 = services.category.get(config("Ceres.homepage.homepageCategory2"), lang) %}
+                {% set category3 = services.category.get(config("Ceres.homepage.homepageCategory3"), lang) %}
+                {% set category4 = services.category.get(config("Ceres.homepage.homepageCategory4"), lang) %}
+                {% set category5 = services.category.get(config("Ceres.homepage.homepageCategory5"), lang) %}
+                {% set category6 = services.category.get(config("Ceres.homepage.homepageCategory6"), lang) %}
+
+                {% set paginatedCategoryList1 =
+                services.itemLoader.loadForTemplate(
+                'Ceres::ItemList.ItemListView',
+                itemLoaderPresets.categoryList,
+                {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+
+                {% set paginatedCategoryList2 =
+                services.itemLoader.loadForTemplate(
+                'Ceres::ItemList.ItemListView',
+                itemLoaderPresets.categoryList,
+                {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+
+                {% set categoryList1 = paginatedCategoryList1.documents %}
+                {% set categoryList2 = paginatedCategoryList2.documents %}
+
+                {{ component( "Ceres::ItemList.Components.ItemList") }}
+                {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+                {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
+
+                <div class="home container-max">
+                    <div class="row">
+                        <div class="cmp cmp-hero">
+                            {% set homepageContainer1 = LayoutContainer.show("Ceres::Homepage.Container1") %}
+                            {% if homepageContainer1 | trim is empty %}
+                                {% if slider1.url or slider2.url or slider3.url %}
+                                    <div class="hero-main">
+                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                {% set slideCount = 0 %}
+                                                {% if slider1.url | trim is not empty %}
+                                                    {% set slideCount = slideCount + 1 %}
+                                                    <div class="carousel-item active">
+                                                        <a class="hero-category" {% if slider1.item is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
+                                                            <img src="{{ slider1.url }}"
+                                                                 alt="{{ slider1.item.texts | itemName(configItemName) }}"
+                                                                 class="img-fluid">
+                                                            {% if slider1.item is not empty %}
+                                                                <div class="carousel-caption">
+                                                                    <h1><i class="fa fa-angle-double-right"
+                                                                           aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}
+                                                                    </h1>
+                                                                </div>
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                                {% if slider2.url | trim is not empty %}
+                                                    {% set slideCount = slideCount + 1 %}
+                                                    <div class="carousel-item {% if slider1.url | trim is empty %}active{% endif %}">
+                                                        <a class="hero-category"
+                                                           {% if slider2.item is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
+                                                            <img src="{{ slider2.url }}"
+                                                                 alt="{{ slider2.item.texts | itemName(configItemName) }}"
+                                                                 class="img-fluid">
+                                                            {% if slider2.item is not empty %}
+                                                                <div class="carousel-caption">
+                                                                    <h1><i class="fa fa-angle-double-right"
+                                                                           aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}
+                                                                    </h1>
+                                                                </div>
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                                {% if slider3.url | trim is not empty %}
+                                                    {% set slideCount = slideCount +1 %}
+                                                    <div class="carousel-item {% if slider1.url | trim is empty and slider2.url | trim is empty %}active{% endif %}">
+                                                        <a class="hero-category" {% if slider3.item is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
+                                                            <img src="{{ slider3.url }}"
+                                                                 alt="{{ slider3.item.texts | itemName(configItemName) }}"
+                                                                 class="img-fluid">
+                                                            {% if slider3.item  is not empty %}
+                                                                <div class="carousel-caption">
+                                                                    <h1><i class="fa fa-angle-double-right"
+                                                                           aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}
+                                                                    </h1>
+                                                                </div>
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+
+                                            {% if slideCount > 1 %}
+                                                <ol class="carousel-indicators">
+                                                    {% for i in 1..slideCount %}
+                                                        <li data-target="#carousel-example-generic" data-slide-to="{{ i - 1 }}"
+                                                            {% if loop.first %}class="active"{% endif %}></li>
+                                                    {% endfor %}
+                                                </ol>
+
+                                                <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                                                   data-slide="prev">
+                                                    <span class="icon-prev" aria-hidden="true"></span>
+                                                    <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
+                                                </a>
+
+                                                <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                                                   data-slide="next">
+                                                    <span class="icon-next" aria-hidden="true"></span>
+                                                    <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+                                                </a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {{ homepageContainer1 }}
+                            {% endif %}
+
+                            {% set homepageContainer2 = LayoutContainer.show("Ceres::Homepage.Container2") %}
+                            {% set homepageContainer3 = LayoutContainer.show("Ceres::Homepage.Container3") %}
+
+                            {% if heroExtra1.url | trim is not empty or heroExtra2.url | trim is not empty or homepageContainer2 | trim is not empty or homepageContainer3 | trim is not empty %}
+                                <div class="hero-xtras">
+                                    {% if homepageContainer2 | trim is empty %}
+                                        {% if heroExtra1.url | trim is not empty %}
+                                            <a class="hero-category" {% if heroExtra1.item is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
+                                                <img src="{{ heroExtra1.url }}"
+                                                     alt="{{ heroExtra1.item.texts | itemName(configItemName) }}">
+                                                {% if heroExtra1.item is not empty %}
+                                                    <div class="hero-category-inner">
+                                                        <h2 class="hero-category-headline">
+                                                            <i class="fa fa-angle-double-right"
+                                                               aria-hidden="true"></i> {{ heroExtra1.item.texts | itemName(configItemName) }}
+                                                        </h2>
+                                                    </div>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    {% else %}
+                                        {{ homepageContainer2 }}
+                                    {% endif %}
+
+                                    {% if homepageContainer3 | trim is empty %}
+                                        {% if heroExtra2.url | trim is not empty %}
+                                            <a class="hero-category" {% if heroExtra2.item is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
+                                                <img src="{{ heroExtra2.url }}"
+                                                     alt="{{ heroExtra2.item.texts | itemName(configItemName) }}">
+                                                {% if heroExtra2.item is not empty %}
+                                                    <div class="hero-category-inner">
+                                                        <h2 class="hero-category-headline">
+                                                            <i class="fa fa-angle-double-right"
+                                                               aria-hidden="true"></i> {{ heroExtra2.item.texts | itemName(configItemName) }}
+                                                        </h2>
+                                                    </div>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    {% else %}
+                                        {{ homepageContainer3 }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
+                        {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
+
+                        {% if category1 is not empty or homepageContainer4 | trim is not empty or category2 is not empty or homepageContainer5 | trim is not empty %}
+                            <div class="row prop-row m-y-2 sale-new">
+                                {% if category1 is not empty or homepageContainer4 | trim is not empty %}
+                                    <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1">
+                                            {% if homepageContainer4 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-sale-new"
+                                                       href="{{ services.category.getURL(category1, lang) }}">
+                                                        {% if category1.details[0].imagePath %}
+                                                            <img src="documents/{{ category1.details[0].imagePath }}"
+                                                                 alt="{{ category1.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category1.details[0].name }}
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                {{ homepageContainer4 }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if category2 is not empty or homepageContainer5 | trim is not empty %}
+                                    <div class="col-xs-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1">
+                                            {% if homepageContainer5 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-sale-new"
+                                                       href="{{ services.category.getURL(category2, lang) }}">
+                                                        {% if category2.details[0].imagePath %}
+                                                            <img src="documents/{{ category2.details[0].imagePath }}"
+                                                                 alt="{{ category2.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category2.details[0].name }}
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                {{ homepageContainer5 }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% set homepageContainer6 = LayoutContainer.show("Ceres::Homepage.Container6") %}
+                        {% if categoryList1 is not empty or homepageContainer6 | trim is not empty %}
+                            <div class="m-b-2 clearfix">
+                                {% if homepageContainer6 | trim is empty %}
+                                    <div class="section-header m-b-1">
+                                        <h4>{{ category3.details[0].name }}</h4>
+                                        <a href="documents/{{ services.category.getURL(category3.id, lang) }}"
+                                           class="section-link-all"><i
+                                                    class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
+                                    </div>
+                                    <ul class="product-list row grid">
+                                        {% for item in categoryList1 %}
+                                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ homepageContainer6 }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {#<!-- CATEGORIES -->#}
+                        {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
+                        {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
+                        {% if category4 is not empty or homepageContainer7 | trim is not empty or category5 is not empty or homepageContainer8 | trim is not empty %}
+                            <div class="row prop-row m-y-2 featured-categories">
+                                {% if category4 is not empty or homepageContainer7 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
+                                            {% if homepageContainer7 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-category"
+                                                       href="{{ services.category.getURL(category4, lang) }}">
+                                                        {% if category4.details[0].imagePath %}
+                                                            <img src="documents/{{ category4.details[0].imagePath }}"
+                                                                 alt="{{ category4.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category4.details[0].name }}
+                                                            </h4>
+
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                {{ homepageContainer7 }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if category5 is not empty or homepageContainer8 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
+                                            {% if homepageContainer8 | trim is empty %}
+                                                <div class="prop-inner">
+                                                    <a class="featured-category"
+                                                       href="{{ services.category.getURL(category5, lang) }}">
+                                                        {% if category5.details[0].imagePath %}
+                                                            <img src="documents/{{ category5.details[0].imagePath }}"
+                                                                 alt="{{ category5.details[0].name }}">
+                                                        {% endif %}
+                                                        <div class="featured-category-inner">
+                                                            <h4 class="featured-category-headline">
+                                                                <i class="fa fa-angle-double-right"
+                                                                   aria-hidden="true"></i> {{ category5.details[0].name }}
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                {{ homepageContainer8 }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        <!-- END CATEGORIES -->
+
+                        {% set homepageContainer9 = LayoutContainer.show("Ceres::Homepage.Container9") %}
+                        {% if categoryList2 is not empty or homepageContainer9 | trim is not empty %}
+                            <div class="m-b-2 clearfix">
+                                {% if homepageContainer9 | trim is empty %}
+                                    <div class="section-header m-b-1">
+                                        <h4>{{ category6.details[0].name }}</h4>
+                                        <a href="{{ services.category.getURL(category6, lang) }}"
+                                           class="section-link-all"><i
+                                                    class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
+                                    </div>
+                                    <!-- crosssell start -->
+                                    <ul class="product-list row grid">
+                                        {% for item in categoryList2 %}
+                                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ homepageContainer9 }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {{ LayoutContainer.show("Ceres::Homepage.Container10") }}
+
+                    </div>
+                </div>
+            {% else %}
+                {{ overrideHomepageContainer }}
+            {% endif %}
         {% endblock %}
 
     {% endif %}
 
 {% endblock %}
-
