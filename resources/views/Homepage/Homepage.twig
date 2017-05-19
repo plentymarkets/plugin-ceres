@@ -4,7 +4,6 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set companyName  = config("Ceres.header.company_name") %}
 
-
 {% block PartialHead %}
     <meta property="og:title" content="{{ companyName }}"/>
     <meta property="og:type" content="article"/>
@@ -128,7 +127,7 @@
                                                 {% endif %}
                                                 {% if slider2.url | trim is not empty %}
                                                     {% set slideCount = slideCount + 1 %}
-                                                    <div class="carousel-item">
+                                                    <div class="carousel-item {% if slider1.url | trim is empty %}active{% endif %}">
                                                         <a class="hero-category"
                                                            {% if slider2.item is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
                                                             <img src="{{ slider2.url }}"
@@ -146,7 +145,7 @@
                                                 {% endif %}
                                                 {% if slider3.url | trim is not empty %}
                                                     {% set slideCount = slideCount +1 %}
-                                                    <div class="carousel-item">
+                                                    <div class="carousel-item {% if slider1.url | trim is empty and slider2.url | trim is empty %}active{% endif %}">
                                                         <a class="hero-category" {% if slider3.item is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
                                                             <img src="{{ slider3.url }}"
                                                                  alt="{{ slider3.item.texts | itemName(configItemName) }}"
