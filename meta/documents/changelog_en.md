@@ -1,5 +1,24 @@
 # Release Notes for Ceres
 
+## v1.2.3 (2017-05-19)
+
+### Added
+
+- A customisable homepage was added. This homepage can be set up in the **Homepage** tab of the Ceres config.
+- Furthermore, 10 template containers have been added to the homepage allowing you to display your own content. For further information refer to [Containers on the homepage](http://developers.plentymarkets.com/dev-doc/template-containers#container-homepage).
+- The address fields of the address forms in the checkout can now be shown or hidden individually as well as validated. These address fields can be set up in the **Checkout and My account** tab of the Ceres config.
+
+### Fixed
+
+- Due to an error, the breadcrumbs/menu points didn't work properly. This has been fixed.
+- Due to an error, the sorting of item images didn't work properly if a variation had its own images. This has been fixed.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- The federal state (German: Bundesland) is not saved correctly for the address.
+- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
+
 ## v1.2.2 (2017-05-11)
 
 ### Added
@@ -13,13 +32,6 @@
 - In some cases, notifications and messages weren't displayed correctly. This error was fixed.
 - The images in the shopping cart preview are now displayed correctly.
 - Suggested search results created by the auto-complete feature are now taking into account the grouping of variations.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
-
 
 ## v1.2.1 (2017-05-08)
 

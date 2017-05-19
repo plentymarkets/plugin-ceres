@@ -2,14 +2,14 @@
 
 <div class="container-toc"></div>
 
-**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **Io** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden. In diesem User Guide erfahren Sie, wie Sie <a href="#10.">Ceres einrichten</a> und wie Sie <a href="#20.">Ceres individualisieren</a>.
+**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **IO** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden. In diesem User Guide erfahren Sie, wie Sie <a href="#10.">Ceres einrichten</a> und wie Sie <a href="#20.">Ceres individualisieren</a>.
 
 ## Ceres in plentymarkets einrichten<a id="10."></a>
 
 Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse voraussetzen. Gehen Sie wie im Folgenden beschrieben vor, um Einstellungen an Ihrem Design vorzunehmen.
 
 <div class="alert alert-danger" role="alert">
-    Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der normale plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
+    Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der alte plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
 ### Standard-Startseite anpassen
@@ -39,11 +39,11 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
 </tr>
 <tr>
 <td><b>ID of the item variation to display in the first slide of the image slider;<br />ID of the item variation to display in the second slide of the image slider;<br />ID of the item variation to display in the third slide of the image slider</b></td>  
-<td>ID der Variante eines Artikels eingeben, die auf der jeweiligen Folie des Image Sliders angezeigt wird.</td>
+<td>ID der Variante eines Artikels eingeben, die auf der jeweiligen Folie des Image Sliders angezeigt wird. Wird keine ID eingegeben, sondern nur eine URL, dann wird nur das Bild im Slider angezeigt. Wird nur eine ID und keine URL eingegeben, dann wird das erste Bild der Artikelvariante im Slider angezeigt.</td>
 </tr>
 <tr>
 <td><b>URL to the image of the first slide;<br />URL to the image of the second slide;<br />URL to the image of third first slide</b></td>  
-<td>URL des Artikelbildes eingeben. Das Bild kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>images</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Bild führt. Das Bild hat eine Breite von 900 Pixel und eine Höhe von 400 Pixel.</td>
+<td>URL des Artikelbildes eingeben. Das Bild kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>images</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Bild führt. Das Bild hat eine Breite von 900 Pixeln und eine Höhe von 400 Pixeln.</td>
 </tr>
 <tr>
 <td><b>ID of the image variation to display in the upper item preview,<br />ID of the item variation to display in the lower item preview</b></td>  
@@ -55,7 +55,7 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
 </tr>
 <tr>
 <td><b>ID of the category to display in the first category preview;<br />ID of the category to display in the second category preview;<br />ID of the category to display in the third category preview;<br />ID of the category to display in the fourth category preview</b></td>  
-<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, die in der jeweiligen Kategorievorschau angezeigt wird.</td>
+<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, die in der jeweiligen Kategorievorschau angezeigt wird. Das Vorschaubild wird im Tab <strong>Dokumente</strong> der Kategorie hochgeladen und als Bild 1 markiert.</td>
 </tr>
 <tr>
 <td><b>ID of the category to display in the first list of items;<br />ID of the category to display in the second list of items</b></td>  
@@ -73,7 +73,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 ##### Header und Footer anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Header** bzw. **Footer**.
 5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
@@ -156,17 +156,11 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 ##### Artikelansicht anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-<<<<<<< HEAD
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Item view**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 2.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
 6. **Speichern** Sie die Einstellungen.
-=======
-3. Wechseln Sie in das Tab **Item view**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
-5. **Speichern** Sie die Einstellungen.
->>>>>>> feature/homepage
 
 <table>
 <thead>
@@ -226,17 +220,11 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 ##### Warenkorb anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-<<<<<<< HEAD
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Shopping cart**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 3.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
 6. **Speichern** Sie die Einstellungen.
-=======
-3. Wechseln Sie in das Tab **Shopping cart**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
-5. **Speichern** Sie die Einstellungen.
->>>>>>> feature/homepage
 
 <table>
 <thead>
@@ -278,7 +266,7 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 ##### Mein Konto anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Checkout and My account**.
 5. Geben Sie die Anzahl von Aufträgen an, die Sie in der Auftragshistorie pro Seite darstellen wollen.
@@ -337,17 +325,11 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 ##### Paginierung und Sortierung anpassen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-<<<<<<< HEAD
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Pagination and sorting**.
 5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 6. **Speichern** Sie die Einstellungen.
-=======
-3. Wechseln Sie in das Tab **Pagination and sorting**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
-5. **Speichern** Sie die Einstellungen.
->>>>>>> feature/homepage
 
 <table>
 <thead>
@@ -399,17 +381,11 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 ##### Einstellungen für die Plugin-Entwicklung vornehmen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
-2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird in einem neuen Tab geöffnet.
-<<<<<<< HEAD
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
 5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
 6. **Speichern** Sie die Einstellungen.
-=======
-3. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-4. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
-5. **Speichern** Sie die Einstellungen.
->>>>>>> feature/homepage
 
 <table>
 <thead>
@@ -453,7 +429,7 @@ Artikellisten, wie z.B. **Zuletzt gesehene Artikel**, verknüpfen Sie bequem üb
 
 1. Öffnen Sie das Menü **Plugins » Content**.
 2. Wählen Sie den Bereich **Last seen items**.
-3. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Single item: Container for item lists**.
+3. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Homepage: Container 7**, **Homepage: Container 9** oder **Single item: Container for item lists**.
 4. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Webshop-Sprachen einstellen
@@ -498,9 +474,11 @@ Geben Sie die Texte für die **Widerrufsbelehrung**, die **Datenschutzerklärung
 Im Webshop **Ceres** richten Sie Filter für die Suche sowie für die Kategorie-Ansicht mit Hilfe von Facetten vom Typ **Attribut/Merkmal** ein.
 
 Richten Sie dazu zunächst Attribute und Merkmale ein und verknüpfen diese mit Ihren Artikeln. Weitere Informationen zu Attributen finden Sie unter [Attribute verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#1).
+
 Weitere Informationen zu Merkmalen finden Sie unter [Merkmale verwalten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#2).
 
 Anschließend erstellen Sie passende Facetten für Attribute und Merkmale. Weitere Informationen zu Facetten finden Sie unter [Facetten anlegen](https://www.plentymarkets.eu/handbuch/mandant-shop/globale-einstellungen/externe-dienste/facettensuche/#2-1).
+
 Eine ausführliche Anleitung zur Einrichtung von Filtern finden Sie auch in unserem [Forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679).
 
 ## Ceres individualisieren<a id="20."></a>
@@ -516,7 +494,7 @@ Ihnen stehen verschiedene Möglichkeiten zur Verfügung, um das Template-Plugin 
 * Eigenen Fork des Projekts erstellen
 * Quellcode anpassen
  
- Wie Sie den Quellcode anpassen, erfahren Sie in unserem [Template Guide](https://developers.plentymarkets.com/dev-doc/template-plugins).
+Wie Sie den Quellcode anpassen, erfahren Sie in unserem [Template Guide](https://developers.plentymarkets.com/dev-doc/template-plugins).
  
 <div class="alert alert-warning" role="alert">
     Beachten Sie, dass Sie Ihr eigenes Template manuell aktualisieren müssen, wenn Sie Funktionen aus einer neuen Version des Plugins <strong>Ceres</strong> nutzen möchten. Automatische Plugin-Aktualisierungen stehen in plentymarkets nur für Plugins von plentyMarketplace zur Verfügung.

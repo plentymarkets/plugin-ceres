@@ -1,15 +1,23 @@
 # Release Notes für Ceres
 
-## v1.2.3
+## v1.2.3 (2017-05-19)
 
 ### Hinzugefügt
 
-- Eine konfigurierbare Startseite wurde hinzugefügt.
+- Eine konfigurierbare Startseite wurde hinzugefügt. Im Tab **Homepage** der Config von Ceres kann die Startseite eingerichtet werden.
+- Die Startseite wurde zudem um 10 Template-Container erweitert, die die Anzeige von eigenen Inhalten ermöglichen. Weitere Informationen zu den Containern unter [Containers on the homepage](http://developers.plentymarkets.com/dev-doc/template-containers#container-homepage).
+- Die Adressfelder der Adressformulare in der Kaufabwicklung können einzeln ein- und ausgeblendet sowie validiert werden. Im Tab **Checkout and My account** der Config von Ceres können die Adressfelder eingerichtet werden.
 
 ### Behoben
 
-- Es wurde ein Fehler behoben, wodruch die Breadcrumbs/Menüpunkte nicht korrekt funktioniert hatten.
-- Es wurde ein Fehler behoben, dass Artikelbilder nicht richtig nach Position sortiert wurden, wenn eine Variante eigene Bilder hat.
+- Es wurde ein Fehler behoben, wodurch die Breadcrumbs/Menüpunkte nicht korrekt funktioniert hatten.
+- Es wurde ein Fehler behoben, der dazu führte, dass Artikelbilder nicht richtig nach Position sortiert wurden, wenn eine Variante eigene Bilder hat.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Das Bundesland wird an der Adresse falsch gespeichert.
+- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.2.2 (2017-05-11)
 
@@ -24,12 +32,6 @@
 - Manchmal konnten Benachrichtigungen und Meldungen nicht richtig ausgegeben werden. Dieser Fehler wurde behoben.
 - Die Bilder in der Warenkorbvorschau werden nun wieder richtig dargestellt.
 - Die Vorschläge der Autovervollständigung von Suchbegriffen berücksichtigen nun die Einstellung der Variantengruppierung.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.2.1 (2017-05-08)
 

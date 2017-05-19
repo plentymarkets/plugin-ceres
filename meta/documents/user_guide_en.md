@@ -2,27 +2,68 @@
 
 <div class="container-toc"></div>
 
-**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **Io** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you will learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
+**Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **IO** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets<a id="10."></a>
+## Setting up Ceres in plentymarkets
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
 <div class="alert alert-danger" role="alert">
-    When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the normal plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
+    When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the old plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
 </div>
 
-### Deactivating the default homepage
+### Customising the default homepage
 
-**Ceres** comes with a default homepage. Deactivate this page, to display your own content on the homepage of your online store.
+**Ceres** comes with a default homepage. Customise this homepage, to display your own content on the homepage of your online store. Product and category previews as well as item lists will be displayed when they are set up.
 
-##### Deactivating the default homepage:
+##### Customising the default homepage:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree.<br /> → The **Homepage** is pre-selected. 
 4. Deactivate the setting **Show default homepage**. 
-5. **Save** the settings.<br /> → The default homepage is deactivated.
+5. Carry out the settings. Pay attention to the information given in table 1. 
+6. **Save** the settings.<br /> → The default homepage is deactivated and your content will be displayed.
+
+<table>
+<thead>
+<tr>  
+<th>Setting</th>
+<th>Explanation</th> 
+</tr>
+</thead>
+<tbody>  
+<tr>
+<td><b>Show default homepage</b></td>  
+<td>Activate, to display the default homepage.</td>
+</tr>
+<tr>
+<td><b>ID of the item variation to display in the first slide of the image slider;<br />ID of the item variation to display in the second slide of the image slider;<br />ID of the item variation to display in the third slide of the image slider</b></td>  
+<td>Enter the ID of an item variation to display this variation on the respective slide of the image slider. If a URL is entered without entering an ID, only the image will be displayed in the slider. If an ID is entered without entering a URL, the first image of the item variation is displayed in the slider.</td>
+</tr>
+<tr>
+<td><b>URL to the image of the first slide;<br />URL to the image of the second slide;<br />URL to the image of third first slide</b></td>  
+<td>Enter the URL of the item image. The image can be uploaded in the <strong>CMS » Webspace</strong> menu in the <strong>images</strong> folder. Alternatively, enter a http URL that leads to the image. The image has a width of 900 pixels and a height of 400 pixels.</td>
+</tr>
+<tr>
+<td><b>ID of the image variation to display in the upper item preview,<br />ID of the item variation to display in the lower item preview</b></td>  
+<td>Enter the ID of an item variation to display this variation in the item preview on the right of the image slider.</td>
+</tr>
+<tr>
+<td><b>URL to the image of the upper item preview;<br />URL to the image of the lower item preview</b></td>  
+<td>Enter the URL of the item image. The image can be uploaded in the <strong>CMS » Webspace</strong> menu in the <strong>images</strong> folder. Alternatively, enter a http URL that leads to the image.</td>
+</tr>
+<tr>
+<td><b>ID of the category to display in the first category preview;<br />ID of the category to display in the second category preview;<br />ID of the category to display in the third category preview;<br />ID of the category to display in the fourth category preview</b></td>  
+<td>Enter the ID of a category of the <b>Item</b> type to display this category in the category preview. The preview image can be uploaded in the <strong>Documents</strong> tab of the category and must be set as image 1.</td>
+</tr>
+<tr>
+<td><b>ID of the category to display in the first list of items;<br />ID of the category to display in the second list of items</b></td>  
+<td>Enter the ID of a category of the <b>Item</b> type to display a list of items on the homepage.</td>
+</tr>
+</tbody>
+<caption>Table 1: Customising the default homepage</caption>
+</table>
 
 
 ### Customising the header and footer
@@ -32,10 +73,10 @@ Customise the header and the footer of your design. Display your own logo and de
 ##### Customising the header and footer:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Open the **Header** or the **Footer** tab. 
-5. Carry out the settings. Pay attention to the information given in table 1. 
+5. Carry out the settings. Pay attention to the information given in table 2. 
 6. **Save** the settings.
 
 <table>
@@ -105,7 +146,7 @@ Customise the header and the footer of your design. Display your own logo and de
 <td>Enter the IDs of categories of the <strong>Content</strong> type to be displayed in the third footer column of the online store.<br /> <b><i>Note:</i></b> Multiple IDs must be separated by commas.</td>
 </tr>
 </tbody>
-<caption>Table 1: Customising the header and footer</caption>
+<caption>Table 2: Customising the header and footer</caption>
 </table>
 
 ### Customising the item view
@@ -115,10 +156,10 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 ##### Customising the item view:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Item view** tab. 
-5. Carry out the settings. Pay attention to the information given in table 2. 
+5. Carry out the settings. Pay attention to the information given in table 3. 
 6. **Save** the settings.
 
 <table>
@@ -168,7 +209,7 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td>Select the number of last seen items.</td>
 </tr>
 </tbody>
-<caption>Table 2: Customising the item view</caption>
+<caption>Table 3: Customising the item view</caption>
 </table>
 
 ### Customising the shopping cart
@@ -179,10 +220,10 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 ##### Customising the shopping cart:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Shopping cart** tab. 
-5. Carry out the settings. Pay attention to the information given in table 3. 
+5. Carry out the settings. Pay attention to the information given in table 4. 
 6. **Save** the settings.
 
 <table>
@@ -214,7 +255,7 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <td>Activate to show the overlay of the shopping cart after clicking on the <strong>Add to shopping cart</strong> button.</td>
 </tr>
 </tbody>
-<caption>Table 3: Customising the shopping cart</caption>
+<caption>Table 4: Customising the shopping cart</caption>
 </table>
 
 ### Customising the checkout and the My account area
@@ -224,7 +265,7 @@ Customise the display options of the checkout in the **Checkout and My account**
 ##### Customising the My account area:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Checkout and My account** tab. 
 5. Enter the number of orders to be displayed per page in the order history. 
@@ -249,19 +290,19 @@ Customise the display options of the checkout in the **Checkout and My account**
 <tbody>
 <tr>
 <td><b>Show invoice address fields in address form</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field.<br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form. <br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
 </tr>
 <tr>
 <td><b>Enable invoice address field validation</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field.  <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form. <br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form. <br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
 </tr>
 <tr>
 <td><b>Show delivery address fields in address form</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field.<br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form. <br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
 </tr>
 <tr>
 <td><b>Enable delivery address field validation</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form. <br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form. <br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
 </tr>
 </tbody>
 <caption>Table 4: Customising the checkout</caption>
@@ -275,7 +316,7 @@ Customise the pagination of the item overview and the online store's item sortin
 ##### Customising the pagination and sorting:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Open the **Pagination and sorting** tab. 
 5. Carry out the settings. Pay attention to the information given in table 5. 
@@ -323,6 +364,7 @@ Customise the pagination of the item overview and the online store's item sortin
 </table>
 
 
+
 ### Settings for plugin developers
 
 Settings specifically aimed at plugin developers are available in the **Registration** and **Logging and performance** tabs. Here, you can set the information to be logged during plugin development and the performance mode for the online store.
@@ -330,7 +372,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 ##### Carrying out settings for plugin development:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
-2. Click on **Ceres**.<br /> → The plugin will open in a new tab. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Registration** or **Logging and performance** tab. 
 5. Carry out the settings. Pay attention to the information given in table 6. 
@@ -378,7 +420,7 @@ Display item lists, e.g. **Last seen items**, in a very convenient way in your o
 
 1. Go to **Plugins » Content**. 
 2. Go to the **Last seen items** area. 
-3. Select one, several or **ALL** containers in which you want to display your item list, e.g. **Single item: Container for item lists**. 
+3. Select one, several or **ALL** containers in which you want to display your item list, e.g. **Homepage: Container 7**, **Homepage: Container 9** or **Single item: Container for item lists**. 
 4. **Save** the settings.<br /> → The item list will be displayed in the selected containers in the online store.
 
 ### Setting online store languages
@@ -422,10 +464,12 @@ Enter the texts for the **cancellation rights**, the **privacy policy** and the 
 
 Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
 
-Set up attributes and properties first and link them with your items. For further information about attributes, refer to the [Managing attributes](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapter.
-For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapters.
+Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties]https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapters.
+
+For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapter.
 
 Then, create facets for your attributes and properties. For further information about facets, refer to the [Creating facets](https://www.plentymarkets.co.uk/manual/client-store/global-settings/external-services/faceted-search/#2-1) chapter.
+
 Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
 
 ## Customising Ceres<a id="20."></a>
@@ -439,11 +483,7 @@ Various possibilities are available to customise the **Ceres** template plugin a
 * Register with [GitHub](https://github.com/join?source=header-home) 
 * Open the [Ceres](https://github.com/plentymarkets/plugin-ceres) project 
 * Create your own fork of the project 
-* Customise the source code 
-
-For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). 
-
-<div class="alert alert-warning" role="alert">
+* For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). <div class="alert alert-warning" role="alert">
     Note that you have to update your template manually if you want to use features of a newer version of the <strong>Ceres</strong> plugin. Automatic plugin updates are only available for plugins purchased on plentyMarketplace.
 </div>
 
@@ -453,7 +493,7 @@ Theme plugins are an easy way of customising the looks of **Ceres**. Various [th
 
 ### Creating an individual theme
 
-Learn how to create your own theme plugin and how to fully customise **Ceres** in our [theme guide](https://developers.plentymarkets.com/dev-doc/theme-plugins).
+Learn how to create your own theme plugin and how to fully customise **Ceres** in our [theme guide](https://developers.plentymarkets.com/dev-doc/theme-plugins). 
 
 ## License
 
