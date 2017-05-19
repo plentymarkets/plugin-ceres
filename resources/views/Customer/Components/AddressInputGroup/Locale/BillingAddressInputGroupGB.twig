@@ -42,7 +42,7 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="input-unit"
                      {% if "billing_address.vatNumber" in addressFieldsRequired %}data-validate="text"{% endif %}>
-                    <input type="text" name="vatNumber" id="txtVatNumber${_uid}" v-model="addressData.vatNumber">
+                    <input type="text" name="vatNumber" id="txtVatNumber${_uid}" v-model="addressData.vatNumber | optionType 1">
                     <label for="txtVatNumber${_uid}">{{ trans("Ceres::Template.addressVatNumber") }}{% if "billing_address.vatNumber" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
                      {% if "billing_address.birthday" in addressFieldsRequired %}data-validate="text"{% endif %}>
-                    <input type="date" name="birthday" id="txtBirthdate${_uid}" v-model="addressData.birthdate">
+                    <input type="date" name="birthday" id="txtBirthdate${_uid}" v-model="addressData.birthday | optionType 9">
                     <label for="txtBirthdate${_uid}">{{ trans("Ceres::Template.addressBirthdate") }}{% if "billing_address.birthday" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
