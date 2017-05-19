@@ -3934,31 +3934,6 @@ module.exports = function ($) {
     };
 
     /**
-     * check if current view is category
-     * @param categories - default
-     * @param paths - the url paths to parse
-     */
-    function _isCategoryView(paths, categories) {
-        categories = categories || _categoryTree;
-
-        for (var currentCategory in categories) {
-            if (paths[paths.length - 1] == categories[currentCategory].details[0].nameUrl) {
-                return true;
-            }
-
-            if (categories[currentCategory].children) {
-                var isCategory = _isCategoryView(paths, categories[currentCategory].children);
-
-                if (isCategory) {
-                    return isCategory;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * render items in relation to location
      * @param currentCategory
      */
@@ -3969,7 +3944,7 @@ module.exports = function ($) {
             _categoryTree = ResourceService.getResource("navigationTree").val();
         }
 
-        if (!_isCategoryView(window.location.pathname.split("/"))) {
+        if (!App.isCategoryView) {
             window.open(_getScopeUrl(currentCategory), "_self");
         } else {
             _handleCurrentCategory(currentCategory);
