@@ -12,7 +12,8 @@ Vue.component("add-to-basket", {
     data: function()
     {
         return {
-            quantity: 1
+            quantity: 1,
+            hasChildren: false
         };
     },
 
