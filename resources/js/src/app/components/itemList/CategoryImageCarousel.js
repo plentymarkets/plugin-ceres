@@ -6,12 +6,15 @@ Vue.component("category-image-carousel", {
         "altText",
         "showDots",
         "showNav",
+        "disableLazyload",
         "template"
     ],
 
     created: function()
     {
         this.$options.template = this.template;
+
+        this.disableLazyload = this.disableLazyload || false;
     },
 
     ready: function()
@@ -22,7 +25,7 @@ Vue.component("category-image-carousel", {
                 dots     : (this.showDots === "true"),
                 items    : 1,
                 loop     : this.imageUrls.length > 1,
-                lazyLoad : true,
+                lazyLoad : this.disableLazyload,
                 margin   : 10,
                 nav      : (this.showNav === "true"),
                 navText  : [
