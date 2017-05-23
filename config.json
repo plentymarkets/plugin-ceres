@@ -608,6 +608,90 @@
       "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
     },
     {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.show",
+      "label"                     : "Show invoice address fields in address form (EN)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address1"  : "Address 1",
+        "billing_address.address2"  : "Address 2",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.stateId"   : "County",
+        "billing_address.salutation": "Salutation",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : "billing_address.address1, billing_address.address2, billing_address.address3, billing_address.birthday"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.require",
+      "label"                     : "Enable invoice address field validation (EN)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address1"  : "Address 1",
+        "billing_address.address2"  : "Address 2",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.stateId"   : "County",
+        "billing_address.salutation": "Salutation",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : "billing_address.address1"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.show",
+      "label"                     : "Show delivery address fields in address form (EN)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address1"  : "Address 1",
+        "delivery_address.address2"  : "Address 2",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.stateId"   : "County",
+        "delivery_address.salutation": "Salutation",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : "delivery_address.address1, delivery_address.address2, delivery_address.address3, delivery_address.birthday"
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.require",
+      "label"                     : "Enable delivery address field validation (EN)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address1"  : "Address 1",
+        "delivery_address.address2"  : "Address 2",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.stateId"   : "County",
+        "delivery_address.salutation": "Salutation",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : "delivery_address.address1"
+    },
+    {
         "tab"               : "Registration",
         "key"               : "register.email_regex",
         "label"             : "The RegEx used for the email",
