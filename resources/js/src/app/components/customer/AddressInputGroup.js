@@ -8,7 +8,7 @@ Vue.component("address-input-group", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             stateList  : [],
@@ -17,39 +17,10 @@ Vue.component("address-input-group", {
         };
     },
 
-    filters:{
-        optionType:{
-
-            read: function(value, optionType)
-            {
-
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined")
-                {
-                    return value;
-                }
-                else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType))
-                {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-
-            },
-
-            write: function(value)
-            {
-                return value;
-            }
-
-        }
-    },
-
     /**
      * Check whether the address data exists. Else, create an empty one
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
@@ -67,7 +38,7 @@ Vue.component("address-input-group", {
          * Update the address input group to show.
          * @param value
          */
-        onSelectedCountryChanged: function(value)
+        onSelectedCountryChanged(value)
         {
             if (this.countryLocaleList.indexOf(value) > 0)
             {
@@ -79,28 +50,55 @@ Vue.component("address-input-group", {
             }
         },
 
-        getOptionType: function(data, optionType)
-    {
-            for (var i = 0; i < data.length; i++)
+        getOptionType(data, optionType)
         {
-                if (optionType === data[i].typeId)
+            for (var i = 0; i < data.length; i++)
             {
+                if (optionType === data[i].typeId)
+                {
                     return data[i].value;
                 }
             }
             return "";
         },
 
-        equalOptionValues: function(newValue, data, optionType)
-    {
+        equalOptionValues(newValue, data, optionType)
+        {
             var oldValue = this.getOptionType(data, optionType);
 
             if (typeof newValue === "undefined")
-{
+            {
                 return oldValue;
             }
 
             return oldValue === newValue;
+        }
+    },
+
+    filters: {
+        optionType:{
+
+            read(value, optionType)
+            {
+                var data = this.addressData.options;
+
+                if (typeof data === "undefined")
+                {
+                    return value;
+                }
+                else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType))
+                {
+                    return value;
+                }
+
+                return this.getOptionType(data, optionType);
+
+            },
+
+            write(value)
+            {
+                return value;
+            }
         }
     }
 });

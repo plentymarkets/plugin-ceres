@@ -747,28 +747,6 @@ Vue.component("address-input-group", {
         };
     },
 
-    filters: {
-        optionType: {
-
-            read: function read(value, optionType) {
-
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined") {
-                    return value;
-                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-            },
-
-            write: function write(value) {
-                return value;
-            }
-
-        }
-    },
 
     /**
      * Check whether the address data exists. Else, create an empty one
@@ -783,6 +761,7 @@ Vue.component("address-input-group", {
         this.defaultCountry = "DE";
     },
 
+
     methods: {
         /**
          * Update the address input group to show.
@@ -795,7 +774,6 @@ Vue.component("address-input-group", {
                 this.localeToShow = this.defaultCountry;
             }
         },
-
         getOptionType: function getOptionType(data, optionType) {
             for (var i = 0; i < data.length; i++) {
                 if (optionType === data[i].typeId) {
@@ -804,7 +782,6 @@ Vue.component("address-input-group", {
             }
             return "";
         },
-
         equalOptionValues: function equalOptionValues(newValue, data, optionType) {
             var oldValue = this.getOptionType(data, optionType);
 
@@ -813,6 +790,25 @@ Vue.component("address-input-group", {
             }
 
             return oldValue === newValue;
+        }
+    },
+
+    filters: {
+        optionType: {
+            read: function read(value, optionType) {
+                var data = this.addressData.options;
+
+                if (typeof data === "undefined") {
+                    return value;
+                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
+                    return value;
+                }
+
+                return this.getOptionType(data, optionType);
+            },
+            write: function write(value) {
+                return value;
+            }
         }
     }
 });
@@ -1295,6 +1291,7 @@ Vue.component("country-select", {
         CountryService.sortCountries(this.countryList);
     },
 
+
     methods: {
         /**
          * Method to fire when the country has changed
@@ -1302,6 +1299,7 @@ Vue.component("country-select", {
         countryChanged: function countryChanged() {
             this.selectedStateId = null;
         },
+
 
         /**
          * @param countryId
