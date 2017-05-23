@@ -549,10 +549,6 @@
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
             "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
             "item.manufacturer.name_desc"       : "Manufacturer (descending)"
         },
@@ -584,10 +580,6 @@
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
             "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
             "item.manufacturer.name_desc"       : "Manufacturer (descending)"
         },
@@ -619,10 +611,6 @@
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
             "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
             "item.manufacturer.name_desc"       : "Manufacturer (descending)"
         },
