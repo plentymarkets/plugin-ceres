@@ -24,7 +24,7 @@ Vue.component("country-select", {
     /**
      * Get the shipping countries
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
@@ -39,7 +39,7 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged: function()
+        countryChanged()
         {
             this.selectedStateId = null;
         },
@@ -48,7 +48,7 @@ Vue.component("country-select", {
          * @param countryId
          * @returns {*}
          */
-        getCountryById: function(countryId)
+        getCountryById(countryId)
         {
             return this.countryList.find(
                 function(country)
@@ -67,7 +67,7 @@ Vue.component("country-select", {
         /**
          * Add watcher to handle the country changed
          */
-        selectedCountryId: function()
+        selectedCountryId()
         {
             this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
