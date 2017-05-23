@@ -1,5 +1,11 @@
 <script type="x/template" id="vue-category-image-carousel">
-    <div class="owl-carousel owl-theme">
+    <div v-if="disableLazyLoad" class="owl-carousel owl-theme">
+        <a v-for="imageUrl in imageUrls | orderBy 'position'" :href="itemUrl">
+            <img v-if="disableLazyLoad" class="img-fluid" :src="imageUrl.url" :alt="altText">
+        </a>
+    </div>
+
+    <div v-else class="owl-carousel owl-theme">
         <a v-for="imageUrl in imageUrls | orderBy 'position'" :href="itemUrl">
             <item-lazy-img template="#vue-item-lazy-img" v-if="$index === 0" :image-url="imageUrl.url" :alt="altText"></item-lazy-img>
             <img v-else class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="altText">
