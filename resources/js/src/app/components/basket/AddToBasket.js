@@ -13,7 +13,7 @@ Vue.component("add-to-basket", {
     {
         return {
             quantity: 1,
-            hasChildren: false
+            hasChildren: this.item.filter.hasChildren
         };
     },
 
