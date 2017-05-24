@@ -6,14 +6,14 @@ Vue.component("add-to-basket", {
         "item",
         "itemUrl",
         "showQuantity",
-        "template"
+        "template",
+        "hasChildren"
     ],
 
     data: function()
     {
         return {
-            quantity: 1,
-            hasChildren: this.item.filter.hasChildren
+            quantity: 1
         };
     },
 

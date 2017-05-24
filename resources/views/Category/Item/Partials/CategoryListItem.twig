@@ -10,7 +10,7 @@
     <div class="thumb-inner">
         <div class="thumb-background"></div>
 
-        <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false"
+        <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :has-children="{{ item.data.filter.hasChildren }}" :show-quantity="false"
                        item-url="{{ itemUrl }}"></add-to-basket>
 
         <div class="thumb-image">
