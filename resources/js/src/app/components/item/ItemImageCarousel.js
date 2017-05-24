@@ -30,7 +30,7 @@ Vue.component("item-image-carousel", {
             {
                 $(window).load(function()
                 {
-                    // self.initCarousel();
+                    self.initCarousel();
                     self.initThumbCarousel();
 
                     self.init = true;
@@ -65,38 +65,49 @@ Vue.component("item-image-carousel", {
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
 
-            // this.initCarousel();
+            this.initCarousel();
         },
 
         initCarousel: function()
         {
-            // var imageCount = this.getImageCount();
+            var imageCount = this.getImageCount();
 
-            // $(this.$els.single).owlCarousel({
-            //     autoHeight       : true,
-            //     dots             : true,
-            //     items            : 1,
-            //     lazyLoad         : true,
-            //     loop             : true,
-            //     margin           : 10,
-            //     mouseDrag        : imageCount > 1,
-            //     nav              : imageCount > 1,
-            //     navClass         : [
-            //         "owl-single-item-nav left carousel-control",
-            //         "owl-single-item-nav right carousel-control"
-            //     ],
-            //     navContainerClass: "",
-            //     navText          : [
-            //         "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
-            //         "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
-            //     ],
-            //     smartSpeed       : 350
-            // });
-            //
-            // $(this.$els.single).on("changed.owl.carousel", function(event)
-            // {
-            //     this.currentItem = event.page.index;
-            // }.bind(this));
+            $(this.$els.single).owlCarousel({
+                autoHeight       : true,
+                dots             : true,
+                items            : 1,
+                lazyLoad         : true,
+                loop             : true,
+                margin           : 10,
+                mouseDrag        : imageCount > 1,
+                nav              : imageCount > 1,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350,
+                onChanged: function(event)
+                {
+                    console.log(event);
+
+                    // var $thumb = $(this.$els.thumb);
+
+                    // $thumb.trigger("to.owl.carousel", [
+                    //     index,
+                    //     350
+                    // ]);
+                }
+            });
+
+            $(this.$els.single).on("changed.owl.carousel", function(event)
+            {
+                this.currentItem = event.page.index;
+            }.bind(this));
         },
 
         initThumbCarousel: function()
@@ -106,7 +117,7 @@ Vue.component("item-image-carousel", {
                 dots             : false,
                 items            : 5,
                 lazyLoad         : true,
-                loop             : true,
+                loop             : false,
                 margin           : 10,
                 mouseDrag        : true,
                 nav              : true,
@@ -119,7 +130,11 @@ Vue.component("item-image-carousel", {
                     "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
-                smartSpeed       : 350
+                smartSpeed       : 350,
+                onChanged: function(event)
+                {
+                    console.log(event);
+                }
             });
 
             $(this.$els.thumbs).on("changed.owl.carousel", function(event)
