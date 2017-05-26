@@ -363,6 +363,12 @@
             "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
         },
         {
+            "key"           : "OrderConfirmation.Override",
+            "name"          : "Order confirmation: Override order confirmation",
+            "description"   : "Override the complete order confirmation page.",
+            "multiple"      : false
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page."
