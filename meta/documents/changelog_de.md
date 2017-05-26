@@ -4,6 +4,8 @@
 
 ### Hinzugefügt
 
+- Es wurde ein Layout Container hinzugefügt, um die komplette Order Confirmation Seite zu überschreiben.
+
 ### Behoben
 
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
