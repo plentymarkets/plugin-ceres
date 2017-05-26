@@ -535,15 +535,6 @@ Vue.component("add-to-basket", {
         this.$options.template = this.template;
     },
 
-    computed: {
-        /**
-         * returns item.variation.id
-         */
-        variationId: function variationId() {
-            return this.item.variation.id;
-        }
-    },
-
     methods: {
         /**
          * add an item to basket-resource
@@ -581,6 +572,19 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        }
+    },
+
+    computed: {
+        /**
+         * returns item.variation.id
+         */
+        variationId: function variationId() {
+            return this.item.variation.id;
+        },
+
+        hasChildren: function hasChildren() {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         }
     }
 });
