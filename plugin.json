@@ -1,5 +1,5 @@
 {
-    "version"           : "1.2.3",
+    "version"           : "1.2.4",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -361,6 +361,12 @@
             "key"           : "Checkout.CustomAddressField",
             "name"          : "Checkout: Address field container",
             "description"   : "Add content, e.g. one or multiple custom address fields, at the bottom of the address form."
+        },
+        {
+            "key"           : "OrderConfirmation.Override",
+            "name"          : "Order confirmation: Override order confirmation",
+            "description"   : "Override the complete order confirmation page.",
+            "multiple"      : false
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
