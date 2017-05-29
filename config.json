@@ -144,6 +144,18 @@
     },
     {
         "tab"           : "Footer",
+        "key"           : "footer.to_top_button",
+        "label"         : "To top button position",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "right"          : "Right",
+            "bottom"         : "Bottom"
+        },
+        "default"       : "right"
+    },
+    {
+        "tab"           : "Footer",
         "key"           : "footer.number_of_features",
         "label"         : "Number of store features",
         "type"          : "dropdown",
