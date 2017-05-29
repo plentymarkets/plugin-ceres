@@ -18,7 +18,7 @@ Vue.component("category-image-carousel", {
     {
         if (this.imageUrls && this.imageUrls.length > 0)
         {
-            $(".owl-carousel").owlCarousel({
+            $("#owl-carousel-" + this._uid).owlCarousel({
                 dots     : (this.showDots === "true"),
                 items    : 1,
                 loop     : this.imageUrls.length > 1,
