@@ -123,7 +123,7 @@
 		}
 
 		&:after{
-			content: 'Mehr';
+			content: attr(data-show-more);
 			font-weight: 700;
 			color: $gray-light;
 		    display: inline-block;
@@ -141,7 +141,7 @@
 
 		& ~ .expand-btn{
 			&:after{
-				content: 'Weniger';
+				content: attr(data-show-less);
 			}
 		}
 	}
