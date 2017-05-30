@@ -8,12 +8,17 @@
 - Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
 - Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
 
+### Geändert
+
+- In der Filteransicht wurde das Icon zu einem "x" geändert.
+
 ### Behoben
 
 - Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
 - Die Konfigurationsmöglichkeiten für die Anzeige der Informationen zu Artikeln im Warenkorb funktioniert nun.
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
 - Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
+- I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
 
 ### Bekannte Probleme
 
