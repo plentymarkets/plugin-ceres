@@ -11,6 +11,11 @@
 ### Geändert
 
 - In der Filteransicht wurde das Icon zu einem "x" geändert.
+- Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
+
+### To do
+
+- Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
 
 ### Behoben
 
