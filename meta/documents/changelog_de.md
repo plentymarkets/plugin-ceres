@@ -11,13 +11,13 @@
 ### Geändert
 
 - In der Filteransicht wurde das Icon zu einem "x" geändert.
+- Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
+- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
 
 ### Behoben
 
-- Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
 - Die Konfigurationsmöglichkeiten für die Anzeige der Informationen zu Artikeln im Warenkorb funktioniert nun.
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
-- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
 - I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
 
 ### Bekannte Probleme
