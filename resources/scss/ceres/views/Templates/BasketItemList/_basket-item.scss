@@ -136,7 +136,7 @@
 
 	.toggle-description:checked{
 		& ~ .item-description{
-			max-height: 25em;// 10 lines
+			max-height: 70em;// 10 lines
 		}
 
 		& ~ .expand-btn{

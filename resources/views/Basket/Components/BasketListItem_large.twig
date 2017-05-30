@@ -1,5 +1,7 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
+{% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
+
 <article class="cmp cmp-basket-item m-b-3 p-b-1">
 
     <!-- ITEM IMAGE -->
@@ -44,30 +46,45 @@
             </div>
         </a>
 
-        <p class="id">
-            <strong>{{ trans("Ceres::Template.itemId") }}</strong> ${ basketItem.itemId }
-        </p>
+        {% if "basket.item.item_id" in basketDetailsData %}
+            <p class="id">
+                <strong>{{ trans("Ceres::Template.itemId") }}</strong> ${ basketItem.itemId }
+            </p>
+        {% endif %}
 
         <div class="item-description">
-            <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemNumber") }}:</strong>
-                <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.variation.number}</span>
-            </div>
+            {% if "basket.item.customNumber" in basketDetailsData %}
+                <div class="row">
+                    <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemNumber") }}:</strong>
+                    <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.variation.number}</span>
+                </div>
+            {% endif %}
             {#<div class="row">#}
                 {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemCondition") }}:</strong>#}
-                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{##}{# TODO #}
+                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{##}{# TODO AND ADD CONFIG #}
             {#</div>#}
-            <div class="row">
-                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
-                <span class="col-xs-6 col-sm-7">
-                    ${ basketItem.variation.data.variation.availability.names.name }
-                </span>
-            </div>
-            <p class="m-y-1">
-                {!! basketItem.variation.data.texts.description !!}
-            </p>
+            {% if "basket.item.availability" in basketDetailsData %}
+                <div class="row">
+                    <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
+                    <span class="col-xs-6 col-sm-7">
+                        ${ basketItem.variation.data.variation.availability.names.name }
+                    </span>
+                </div>
+            {% endif %}
+            {% if "basket.item.description_long" in basketDetailsData %}
+                <p class="m-y-1">
+                    {!! basketItem.variation.data.texts.description !!}
+                </p>
+            {% endif %}
+            {% if "basket.item.description_short" in basketDetailsData %}
+                <p class="m-y-1">
+                    {!! basketItem.variation.data.texts.shortDescription !!}
+                </p>
+            {% endif %}
         </div>
-        <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+        {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
+            <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+        {% endif %}
     </div>
     <!-- ./ITEM DETAILS -->
 </article>
