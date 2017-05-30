@@ -125,6 +125,16 @@
                 </div>
             </div>
         {% endif %}
+
+        {% if "billing_address.address4" in addressFields %}
+            <div class="col-xs-12 col-sm-12">
+                <div class="input-unit"
+                     {% if "billing_address.address4" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                    <input type="text" name="buildingName" id="decorateAddress0${_uid}" v-model="addressData.address4">
+                    <label for="decorateAddress0${_uid}">{{ trans("Ceres::Template.addressENAddressLine4") }}{% if "billing_address.address4" in addressFieldsRequired %}*{% endif %}</label>
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>
 
