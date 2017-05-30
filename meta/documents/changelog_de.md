@@ -7,6 +7,9 @@
 - Es wurde ein Layout Container hinzugefügt, um die komplette Order Confirmation Seite zu überschreiben.
 - Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
 
+### Geändert
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
+
 ### Behoben
 
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
