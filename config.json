@@ -357,13 +357,13 @@
         "type"                          : "multi_select",
         "possibleValues"                :
         {
-          "basket.item.item_id"         : "Item ID",
-          "basket.item.description"     : "Description",
-          "basket.item.availability"    : "Availability",
-          "basket.item.customNumber"    : "Variation number",
-          "basket.item.state"           : "Condition"
+          "basket.item.item_id"          : "Item ID",
+          "basket.item.description_short": "Short description",
+          "basket.item.description_long" : "Long description",
+          "basket.item.availability"     : "Availability",
+          "basket.item.customNumber"     : "Variation number"
         },
-        "default"                       : "all"
+        "default"                       : "basket.item.item_id, basket.item.description_short, basket.item.availability, basket.item.customNumber"
     },
     {
         "tab"                               : "Shopping cart",
