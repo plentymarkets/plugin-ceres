@@ -93,15 +93,13 @@ Vue.component("item-image-carousel", {
                 smartSpeed       : 350,
                 onChanged: function(event)
                 {
-                    console.log(event);
+                    var $thumb = $(this.$els.thumbs);
 
-                    // var $thumb = $(this.$els.thumb);
-
-                    // $thumb.trigger("to.owl.carousel", [
-                    //     index,
-                    //     350
-                    // ]);
-                }
+                    $thumb.trigger("to.owl.carousel", [
+                        event.page.index,
+                        350
+                    ]);
+                }.bind(this)
             });
 
             $(this.$els.single).on("changed.owl.carousel", function(event)
@@ -119,7 +117,7 @@ Vue.component("item-image-carousel", {
                 lazyLoad         : true,
                 loop             : false,
                 margin           : 10,
-                mouseDrag        : true,
+                mouseDrag        : false,
                 nav              : true,
                 navClass         : [
                     "owl-single-item-nav left carousel-control",
@@ -130,11 +128,7 @@ Vue.component("item-image-carousel", {
                     "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
-                smartSpeed       : 350,
-                onChanged: function(event)
-                {
-                    console.log(event);
-                }
+                smartSpeed       : 350
             });
 
             $(this.$els.thumbs).on("changed.owl.carousel", function(event)
