@@ -6,7 +6,7 @@
 
 - Es wurde ein Layout Container hinzugefügt, um die komplette Order Confirmation Seite zu überschreiben.
 - Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
-- Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
+- Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um den Vorschautext eines Artikels anzuzeigen.
 
 ### Behoben
 
