@@ -5,5 +5,7 @@
   "item.id",
   "variation.id",
   "images.variation.url",
-  "images.all.url"
+  "images.variation.position",
+  "images.all.url",
+  "images.all.position"
 ]
