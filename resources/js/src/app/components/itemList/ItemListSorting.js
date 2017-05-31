@@ -6,7 +6,8 @@ Vue.component("item-list-sorting", {
 
     props: [
         "sortData",
-        "template"
+        "template",
+        "isSearch"
     ],
 
     data: function()
@@ -47,6 +48,12 @@ Vue.component("item-list-sorting", {
     created: function()
     {
         this.$options.template = this.template;
+
+        if (this.isSearch)
+        {
+            this.sortData.push("item.score");
+            this.dataTranslationMapping["item.score"] = "itemRelevance";
+        }
 
         this.buildData();
         this.selectedSorting = this.sortData[0];

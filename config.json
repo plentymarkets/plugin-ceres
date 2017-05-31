@@ -528,8 +528,8 @@
     },
     {
         "tab"           : "Recommended Sorting",
-        "key"           : "sorting.priority1",
-        "label"         : "Sorting criterion priority 1",
+        "key"           : "sorting.priorityCategory1",
+        "label"         : "Sorting criterion priority Categoryitem 1 ",
         "type"          : "dropdown",
         "possibleValues":
         {
@@ -558,12 +558,70 @@
     },
     {
         "tab"           : "Recommended Sorting",
-        "key"           : "sorting.priority2",
-        "label"         : "Sorting criterion priority 2",
+        "key"           : "sorting.priorityCategory2",
+        "label"         : "Sorting criterion priority Categoryitem 2",
         "type"          : "dropdown",
         "possibleValues":
         {
             "item.notSelected"                  : "Not selected",
+            "item.id_asc"                       : "Item ID (ascending)",
+            "item.id_desc"                      : "Item ID (descending)",
+            "texts.name1_asc"                   : "Item name (ascending)",
+            "texts.name1_desc"                  : "Item name (descending)",
+            "item.position_asc"                 : "Item position (ascending)",
+            "item.position_desc"                : "Item position (descending)",
+            "variation.createdAt_asc"           : "Newest variation",
+            "variation.createdAt_desc"          : "Oldest variation",
+            "variation.id_asc"                  : "Variation ID (ascending)",
+            "variation.id_desc"                 : "Variation ID (descending)",
+            "variation.number_asc"              : "Variation number (ascending)",
+            "variation.number_desc"             : "Variation number (descending)",
+            "variation.updatedAt_asc"           : "Last variation update",
+            "variation.updatedAt_desc"          : "First variation update",
+            "variation.position_asc"            : "Variation position (ascending)",
+            "variation.position_desc"           : "Variation position (descending)",
+            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
+            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+        },
+        "default"       : "item.notSelected"
+    },
+    {
+        "tab"           : "Recommended Sorting",
+        "key"           : "sorting.priorityCategory3",
+        "label"         : "Sorting criterion priority Categoryitem 3",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "item.notSelected"                  : "Not selected",
+            "item.id_asc"                       : "Item ID (ascending)",
+            "item.id_desc"                      : "Item ID (descending)",
+            "texts.name1_asc"                   : "Item name (ascending)",
+            "texts.name1_desc"                  : "Item name (descending)",
+            "item.position_asc"                 : "Item position (ascending)",
+            "item.position_desc"                : "Item position (descending)",
+            "variation.createdAt_asc"           : "Newest variation",
+            "variation.createdAt_desc"          : "Oldest variation",
+            "variation.id_asc"                  : "Variation ID (ascending)",
+            "variation.id_desc"                 : "Variation ID (descending)",
+            "variation.number_asc"              : "Variation number (ascending)",
+            "variation.number_desc"             : "Variation number (descending)",
+            "variation.updatedAt_asc"           : "Last variation update",
+            "variation.updatedAt_desc"          : "First variation update",
+            "variation.position_asc"            : "Variation position (ascending)",
+            "variation.position_desc"           : "Variation position (descending)",
+            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
+            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+        },
+        "default"       : "item.notSelected"
+    },
+    {
+        "tab"           : "Recommended Sorting",
+        "key"           : "sorting.prioritySearch1",
+        "label"         : "Sorting criterion priority Searchitem 1 ",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "item.score"                        : "Relevance",
             "item.id_asc"                       : "Item ID (ascending)",
             "item.id_desc"                      : "Item ID (descending)",
             "texts.name1_asc"                   : "Item name (ascending)",
@@ -585,24 +643,53 @@
             "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
             "item.manufacturer.name_desc"       : "Manufacturer (descending)"
         },
-        "default"       : "item.notSelected"
+        "default"       : "item.score"
     },
     {
         "tab"           : "Recommended Sorting",
-        "key"           : "sorting.priority3",
-        "label"         : "Sorting criterion priority 3",
+        "key"           : "sorting.prioritySearch2",
+        "label"         : "Sorting criterion priority Searchitem 2",
         "type"          : "dropdown",
         "possibleValues":
         {
             "item.notSelected"                  : "Not selected",
+            "item.score"                        : "Relevance",
             "item.id_asc"                       : "Item ID (ascending)",
             "item.id_desc"                      : "Item ID (descending)",
             "texts.name1_asc"                   : "Item name (ascending)",
             "texts.name1_desc"                  : "Item name (descending)",
             "item.position_asc"                 : "Item position (ascending)",
             "item.position_desc"                : "Item position (descending)",
-            "item.salesPrice.price_asc"         : "Price (ascending)",
-            "item.salesPrice.price_desc"        : "Price (descending)",
+            "variation.createdAt_asc"           : "Newest variation",
+            "variation.createdAt_desc"          : "Oldest variation",
+            "variation.id_asc"                  : "Variation ID (ascending)",
+            "variation.id_desc"                 : "Variation ID (descending)",
+            "variation.number_asc"              : "Variation number (ascending)",
+            "variation.number_desc"             : "Variation number (descending)",
+            "variation.updatedAt_asc"           : "Last variation update",
+            "variation.updatedAt_desc"          : "First variation update",
+            "variation.position_asc"            : "Variation position (ascending)",
+            "variation.position_desc"           : "Variation position (descending)",
+            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
+            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+        },
+        "default"       : "item.notSelected"
+    },
+    {
+        "tab"           : "Recommended Sorting",
+        "key"           : "sorting.prioritySearch3",
+        "label"         : "Sorting criterion priority SearchItem 3",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "item.notSelected"                  : "Not selected",
+            "item.score"                        : "Relevance",
+            "item.id_asc"                       : "Item ID (ascending)",
+            "item.id_desc"                      : "Item ID (descending)",
+            "texts.name1_asc"                   : "Item name (ascending)",
+            "texts.name1_desc"                  : "Item name (descending)",
+            "item.position_asc"                 : "Item position (ascending)",
+            "item.position_desc"                : "Item position (descending)",
             "variation.createdAt_asc"           : "Newest variation",
             "variation.createdAt_desc"          : "Oldest variation",
             "variation.id_asc"                  : "Variation ID (ascending)",
