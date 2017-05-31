@@ -14,6 +14,12 @@
 - In der Filteransicht wurde das Icon zu einem "x" geändert.
 - Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
 - Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
+- Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
+
+### To do
+
+- Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
 
 ### Behoben
 
