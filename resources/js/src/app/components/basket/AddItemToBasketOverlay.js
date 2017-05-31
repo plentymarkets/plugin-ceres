@@ -4,7 +4,7 @@ var ModalService        = require("services/ModalService");
 Vue.component("add-item-to-basket-overlay", {
 
     props: [
-        "showOverlay",
+        "basketAddInformation",
         "template"
     ],
 
@@ -31,9 +31,16 @@ Vue.component("add-item-to-basket-overlay", {
     watch: {
         basketItem: function()
         {
-            if (this.showOverlay)
+            if (this.basketAddInformation == "overlay")
             {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            }
+            else if (Object.keys(this.basketItem.currentBasketItem).length != 0)
+            {
+                setTimeout(function()
+                {
+                    $("body").toggleClass("open-right");
+                }, 1);
             }
         }
     },

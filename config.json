@@ -407,11 +407,16 @@
         "default"   : "false"
     },
     {
-        "tab"       : "Shopping cart",
-        "key"       : "basket.add_item_to_basket_confirm",
-        "label"     : "Add to shopping cart: Show overlay",
-        "type"      : "checkbox",
-        "default"   : "true"
+        "tab"               : "Shopping cart",
+        "key"               : "basket.add_item_to_basket_confirm",
+        "label"             : "Add to shopping cart: Show add information",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "overlay"       : "Show overlay",
+            "preview"       : "Toggle basket preview"
+        },
+        "default"           : "overlay"
     },
     {
         "tab"               : "Pagination and sorting",
