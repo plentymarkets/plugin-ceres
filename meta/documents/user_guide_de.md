@@ -108,7 +108,11 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 </tr>
 <tr>
 <td colspan="2" class="th">Tab: Footer</td>  
-</tr>  
+</tr>
+<tr>
+<td><b>Position of the Back-to-top button/b></td>  
+<td>Position wählen, an der der <strong>Nach oben</strong>-Button im Webshop angezeigt wird.<br /> <strong>On the right at the bottom</strong> = <strong>Nach oben</strong>-Button unten rechts anzeigen.<br /> <strong>In the middle at the bottom</strong> = <strong>Nach oben</strong>-Button unten mittig anzeigen.</td>
+</tr>
 <tr>
 <td><b>Number of store features</b></td>  
 <td>Anzahl der Features wählen, die im Footer des Webshops angezeigt werden.<br /> <strong>0</strong> = Keine Features im Webshop anzeigen.<br /> <strong>1</strong> = Nur das erste Feature im Footer anzeigen.<br /> <strong>2</strong> = Erstes und zweites Feature im Footer anzeigen.<br /> <strong>3</strong> = Alle drei Features im Footer anzeigen.</td>
