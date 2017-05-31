@@ -145,12 +145,12 @@
     {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
-        "label"         : "To top button position",
+        "label"         : "Position of the Back-to-top button",
         "type"          : "dropdown",
         "possibleValues":
         {
-            "right"          : "Right",
-            "bottom"         : "Bottom"
+            "right"          : "On the right at the bottom",
+            "bottom"         : "In the middle at the bottom"
         },
         "default"       : "right"
     },

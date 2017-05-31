@@ -12,6 +12,7 @@
 
 - In der Filteransicht wurde das Icon zu einem "x" geändert.
 - Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
 
 ### To do
 
@@ -25,6 +26,7 @@
 - Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
 - I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
 - Der Abstand zwischen den Hauptmenüpunkten in der Navigation wurde entfernt.
+- Auf der Startseite wird bei Artikeln nun das Bild mit der Position 0 ausgegeben.
 
 ### Bekannte Probleme
 

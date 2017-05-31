@@ -49,13 +49,16 @@
                 url: config("Ceres.homepage.sliderImageUrl3") } %}
 
                 {% if slider1.url | trim is empty %}
-                    {% set slider1 = slider1 | merge({url: slider1.item.images | itemImages | first}) %}
+                    {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider1 = slider1 | merge({url: slider1Image.url}) %}
                 {% endif %}
                 {% if slider2.url | trim is empty %}
-                    {% set slider2 = slider2 | merge({url: slider2.item.images | itemImages | first}) %}
+                    {% set slider2Image = slider2.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider2 = slider2 | merge({url: slider2Image.url}) %}
                 {% endif %}
                 {% if slider3.url | trim is empty %}
-                    {% set slider3 = slider3 | merge({url: slider3.item.images | itemImages | first}) %}
+                    {% set slider3Image = slider3.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider3 = slider3 | merge({url: slider3Image.url}) %}
                 {% endif %}
 
                 {% set heroExtra1 = {
@@ -66,10 +69,12 @@
                 url: config("Ceres.homepage.heroExtraImageUrl2") } %}
 
                 {% if heroExtra1.url | trim is empty %}
-                    {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1.item.images | itemImages | first}) %}
+                    {% set heroExtra1Image = heroExtra1.item.images | itemImages | orderByKey('position') | first %}
+                    {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1Image.url}) %}
                 {% endif %}
                 {% if heroExtra2.url | trim is empty %}
-                    {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2.item.images | itemImages | first}) %}
+                    {% set heroExtra2Image = heroExtra2.item.images | itemImages | orderByKey('position') | first %}
+                    {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2Image.url}) %}
                 {% endif %}
 
                 {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
