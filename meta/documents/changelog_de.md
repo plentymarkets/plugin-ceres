@@ -24,6 +24,7 @@
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
 - Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
 - I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
+- Der Abstand zwischen den Hauptmenüpunkten in der Navigation wurde entfernt.
 
 ### Bekannte Probleme
 
