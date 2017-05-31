@@ -167,6 +167,8 @@
                         <a class="nav-link" data-toggle="tab" href="#assessments-details"
                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                     </li>
+
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs") }}
                 </ul>
 
                 <div class="tab-content">
@@ -278,6 +280,8 @@
                             </table>
                         </div>
                     </div>
+
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent") }}
                 </div>
             </div>
         </div>

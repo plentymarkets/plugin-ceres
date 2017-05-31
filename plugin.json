@@ -184,6 +184,16 @@
             "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
         {
+            "key"           : "SingleItem.AddDetailTabs",
+            "name"          : "Single item: Add detail tabs to the tab menu on the single item",
+            "description"   : "Add detail tabs to the tab menu on the single item view."
+        },
+        {
+            "key"           : "SingleItem.AddDetailTabsContent",
+            "name"          : "Single item: Add content to the detail tabs on the single item",
+            "description"   : "Add content to the detail tabs on the single item view."
+        },
+        {
             "key"           : "SingleItem.ItemListContainer",
             "name"          : "Single item: Container for item lists",
             "description"   : "Add item lists to the single item"
