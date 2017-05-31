@@ -40,9 +40,7 @@ Vue.component("invoice-address-select", {
     {
         if (App.isCheckoutView && this.addressList.length <= 0)
         {
-            var invoiceAddressSelect = this.$refs.invoiceAddressSelect;
-
-            invoiceAddressSelect.showInitialAddModal();
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
         }
     },
 
