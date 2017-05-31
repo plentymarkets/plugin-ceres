@@ -840,6 +840,7 @@ Vue.component("address-select", {
         };
     },
 
+
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
      */
@@ -848,6 +849,7 @@ Vue.component("address-select", {
 
         this.addEventListener();
     },
+
 
     /**
      * Select the address modal
@@ -863,6 +865,7 @@ Vue.component("address-select", {
         this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
 
+
     methods: {
         /**
          * Add the event listener
@@ -874,6 +877,7 @@ Vue.component("address-select", {
                 self.cleanUserAddressData();
             });
         },
+
 
         /**
          * Load the address filtered by selectedId into selectedAddress
@@ -894,6 +898,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Remove all user related addresses from the component
          */
@@ -908,6 +913,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Update the selected address
          * @param index
@@ -918,6 +924,7 @@ Vue.component("address-select", {
             this.$dispatch("address-changed", this.selectedAddress);
         },
 
+
         /**
          * Check whether the address list is empty
          * @returns {boolean}
@@ -926,6 +933,7 @@ Vue.component("address-select", {
             return !(this.addressList && this.addressList.length > 0);
         },
 
+
         /**
          * Check whether a company name exists and show it in bold
          * @returns {boolean}
@@ -933,6 +941,18 @@ Vue.component("address-select", {
         showNameStrong: function showNameStrong() {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
+
+
+        /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal: function showInitialAddModal() {
+            this.modalType = "initial";
+            this.addressToEdit = {};
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
 
         /**
          * Show the add modal
@@ -943,6 +963,7 @@ Vue.component("address-select", {
             this.updateHeadline();
             this.addressModal.show();
         },
+
 
         /**
          * Show the edit modal
@@ -956,6 +977,7 @@ Vue.component("address-select", {
             this.addressModal.show();
         },
 
+
         /**
          * Show the delete modal
          * @param address
@@ -966,6 +988,7 @@ Vue.component("address-select", {
             this.updateHeadline();
             this.deleteModal.show();
         },
+
 
         /**
          * Delete the address selected before
@@ -981,12 +1004,14 @@ Vue.component("address-select", {
             });
         },
 
+
         /**
          * Close the current create/update address modal
          */
         closeAddressModal: function closeAddressModal() {
             this.addressModal.hide();
         },
+
 
         /**
          * Close the current delete address modal
@@ -995,13 +1020,16 @@ Vue.component("address-select", {
             this.deleteModal.hide();
         },
 
+
         /**
          * Dynamically create the header line in the modal
          */
         updateHeadline: function updateHeadline() {
             var headline;
 
-            if (this.addressType === "2") {
+            if (this.modalType === "initial") {
+                headline = Translations.Template.orderInvoiceAddressInitial;
+            } else if (this.addressType === "2") {
                 if (this.modalType === "update") {
                     headline = Translations.Template.orderShippingAddressEdit;
                 } else if (this.modalType === "create") {
@@ -1019,6 +1047,7 @@ Vue.component("address-select", {
 
             this.headline = headline;
         },
+
 
         /**
          * Remove an address from the addressList by ID
@@ -1038,6 +1067,7 @@ Vue.component("address-select", {
                 }
             }
         },
+
 
         /**
          * Update the selected address when a new address is created
@@ -1099,7 +1129,7 @@ Vue.component("create-update-address", {
          * Save the new address or update an existing one
          */
         saveAddress: function saveAddress() {
-            if (this.modalType === "create") {
+            if (this.modalType === "initial" || this.modalType === "create") {
                 this.createAddress();
             } else if (this.modalType === "update") {
                 this.updateAddress();
@@ -1163,7 +1193,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: ["addressList", "hasToValidate", "selectedAddressId"],
 
@@ -1173,6 +1203,7 @@ Vue.component("invoice-address-select", {
             checkoutValidation: { invoiceAddress: {} }
         };
     },
+
 
     /**
      * Initialise the event listener
@@ -1186,6 +1217,17 @@ Vue.component("invoice-address-select", {
             this.checkoutValidation.invoiceAddress.validate = this.validate;
         }
     },
+
+
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    ready: function ready() {
+        if (App.isCheckoutView && this.addressList.length <= 0) {
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
+        }
+    },
+
 
     methods: {
         /**
@@ -1203,7 +1245,6 @@ Vue.component("invoice-address-select", {
                 this.validate();
             }
         },
-
         validate: function validate() {
             this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
         }
