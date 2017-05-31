@@ -8,6 +8,7 @@
 - Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
 - Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
 - Es wurde ein LayoutContainer hinzugefügt, um die single item ansicht um weitere Tabs zu ergänzen.
+- Es wurde eine Konfigurationsmöglichkeit zum hinzufügen von Artikeln in den Warenkorb hinzugefügt, um den Warenkorb zu zeigen anstelle des Overlays.
 
 ### Geändert
 
