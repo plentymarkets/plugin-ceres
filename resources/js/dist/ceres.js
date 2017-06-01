@@ -979,7 +979,7 @@ Vue.component("add-item-to-basket-overlay", {
 
     watch: {
         basketItem: function basketItem() {
-            if (this.basketAddInformation == "overlay") {
+            if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
             } else if (Object.keys(this.basketItem.currentBasketItem).length != 0) {
                 setTimeout(function () {
