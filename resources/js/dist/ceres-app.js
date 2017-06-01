@@ -6,7 +6,7 @@ var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    props: ["showOverlay", "template"],
+    props: ["basketAddInformation", "template"],
 
     data: function data() {
         return {
@@ -16,19 +16,22 @@ Vue.component("add-item-to-basket-overlay", {
             currency: ""
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
-
     ready: function ready() {
         ResourceService.bind("basketItem", this);
     },
 
+
     watch: {
         basketItem: function basketItem() {
-            if (this.showOverlay) {
+            if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            } else if (Object.keys(this.basketItem.currentBasketItem).length != 0) {
+                setTimeout(function () {
+                    $("body").toggleClass("open-right");
+                }, 1);
             }
         }
     },
@@ -49,13 +52,13 @@ Vue.component("add-item-to-basket-overlay", {
 
             return render;
         },
-
         setPriceFromData: function setPriceFromData() {
             if (this.basketItem.currentBasketItem.calculatedPrices) {
                 this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
                 this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
         },
+
 
         /**
          * @returns {string}
@@ -71,23 +74,20 @@ Vue.component("add-item-to-basket-overlay", {
 
             return "/" + path;
         },
-
         startCounter: function startCounter() {
+            var _this = this;
+
             this.timeToClose = 10;
 
-            var timerVar = setInterval(countTimer, 1000);
+            var timerVar = setInterval(function () {
+                _this.timeToClose -= 1;
 
-            var self = this;
-
-            function countTimer() {
-                self.timeToClose -= 1;
-
-                if (self.timeToClose === 0) {
+                if (_this.timeToClose === 0) {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(timerVar);
                 }
-            }
+            }, 1000);
         }
     },
 
@@ -98,7 +98,6 @@ Vue.component("add-item-to-basket-overlay", {
         texts: function texts() {
             return this.basketItem.currentBasketItem.texts;
         },
-
         imageUrl: function imageUrl() {
             var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
 
