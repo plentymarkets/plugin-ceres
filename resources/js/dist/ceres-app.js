@@ -5214,9 +5214,17 @@ module.exports = function ($) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var $ = require("jquery");
+exports.getUrlParams = getUrlParams;
+exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
 
-var getUrlParams = function getUrlParams(urlParams) {
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUrlParams(urlParams) {
     if (urlParams) {
         var tokens;
         var params = {};
@@ -5233,17 +5241,17 @@ var getUrlParams = function getUrlParams(urlParams) {
     }
 
     return {};
-};
+}
 
-var setUrlParams = function setUrlParams(urlParams) {
+function setUrlParams(urlParams) {
     var pathName = window.location.pathname;
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
     window.history.replaceState({}, title, pathName + params);
-};
+}
 
-var setUrlParam = function setUrlParam(key, value) {
+function setUrlParam(key, value) {
     var urlParams = getUrlParams(document.location.search);
 
     if (value !== null) {
@@ -5253,7 +5261,7 @@ var setUrlParam = function setUrlParam(key, value) {
     }
 
     setUrlParams(urlParams);
-};
+}
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
