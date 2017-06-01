@@ -621,7 +621,6 @@
         "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
-        "billing_address.stateId"   : "County",
         "billing_address.salutation": "Form of address",
         "billing_address.title"     : "Title"
 
@@ -642,7 +641,6 @@
         "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
-        "billing_address.stateId"   : "County",
         "billing_address.salutation": "Form of address",
         "billing_address.title"     : "Title"
 
@@ -661,7 +659,6 @@
         "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
-        "delivery_address.stateId"   : "County",
         "delivery_address.salutation": "Form of address",
         "delivery_address.title"     : "Title"
 
@@ -680,7 +677,6 @@
         "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
-        "delivery_address.stateId"   : "County",
         "delivery_address.salutation": "Form of address",
         "delivery_address.title"     : "Title"
 
