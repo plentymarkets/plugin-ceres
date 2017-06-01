@@ -358,8 +358,8 @@
         "possibleValues"                :
         {
           "basket.item.item_id"          : "Item ID",
-          "basket.item.description_short": "Short description",
-          "basket.item.description_long" : "Long description",
+          "basket.item.description_short": "Preview text",
+          "basket.item.description_long" : "Item text",
           "basket.item.availability"     : "Availability",
           "basket.item.customNumber"     : "Variation number"
         },
