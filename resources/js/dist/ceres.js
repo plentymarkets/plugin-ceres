@@ -981,7 +981,7 @@ Vue.component("add-item-to-basket-overlay", {
         basketItem: function basketItem() {
             if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-            } else if (Object.keys(this.basketItem.currentBasketItem).length != 0) {
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
                 setTimeout(function () {
                     $("body").toggleClass("open-right");
                 }, 1);
@@ -4643,6 +4643,23 @@ Vue.filter("itemImage", function (item, baseUrl) {
 
 },{}],64:[function(require,module,exports){
 "use strict";
+
+Vue.filter("itemImages", function (images, accessor) {
+    var imageUrls = [];
+    var imagesAccessor = "all";
+
+    if (images.variation.length) {
+        imagesAccessor = "variation";
+    }
+
+    for (var i in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][i][accessor];
+
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+    }
+
+    return imageUrls;
+});
 
 },{}],65:[function(require,module,exports){
 "use strict";
