@@ -255,8 +255,8 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <td>Activate to display the <strong>Change variation</strong> button in the item overview in the shopping cart. By clicking on <strong>Change variation</strong>, customers can change an item's variation in the shopping cart. If you activate the <strong>Change variation</strong> button, but the item has no variations, the button will not be displayed.</td>
 </tr>    
  <tr>
-<td><b>Add to shopping cart: Show overlay</b></td>  
-<td>Activate to show the overlay of the shopping cart after clicking on the <strong>Add to shopping cart</strong> button.</td>
+ <td><b>Add to shopping cart: Show information</b></td>  
+<td>Select wether to show the overlay of the shopping cart or the shopping cart preview after clicking on the <strong>Add to shopping cart</strong> button.<br /> <strong>Show overlay</strong> = Display an overlay.<br /> <strong>Toggle shopping cart preview</strong> = Toggle the shopping cart preview.<br /> <strong>No information</strong> = Don't show any information.</td>
 </tr>
 </tbody>
 <caption>Table 4: Customising the shopping cart</caption>

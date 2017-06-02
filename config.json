@@ -409,12 +409,12 @@
     {
         "tab"               : "Shopping cart",
         "key"               : "basket.add_item_to_basket_confirm",
-        "label"             : "Add to shopping cart: Show add information",
+        "label"             : "Add to shopping cart: Show information",
         "type"              : "dropdown",
         "possibleValues"    :
         {
             "overlay"       : "Show overlay",
-            "preview"       : "Toggle basket preview",
+            "preview"       : "Toggle shopping cart preview",
             "no_information": "No information"
         },
         "default"           : "overlay"

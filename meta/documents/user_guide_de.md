@@ -256,8 +256,8 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <td>Aktivieren, um den <strong>Variante ändern</strong>-Button in der Artikelübersicht im Warenkorb anzuzeigen. Beim Klick auf <strong>Variante ändern</strong> können Kunden die Artikelvariante im Warenkorb ändern. Wenn Sie den <strong>Variante ändern</strong>-Button aktivieren, aber keine Varianten des Artikels vorhanden sind, wird der Button nicht angezeigt.</td>
 </tr>    
  <tr>
-<td><b>Add to shopping cart: Show overlay</b></td>  
-<td>Aktivieren, um ein Overlay des Warenkorbs nach Klick auf den <strong>In den Warenkorb</strong>-Button anzuzeigen.</td>
+<td><b>Add to shopping cart: Show information</b></td>  
+<td>Wählen, ob ein Overlay des Warenkorbs oder die Warenkorbvorschau nach Klick auf den <strong>In den Warenkorb</strong>-Button angezeigt wird.<br /> <strong>Show overlay</strong> = Ein Overlay des Warenkorbs anzeigen.<br /> <strong>Toggle shopping cart preview</strong> = Die Warenkorbvorschau einblenden.<br /> <strong>No information</strong> = Keine Informationen anzeigen.</td>
 </tr>
 </tbody>
 <caption>Tab. 4: Warenkorb anpassen</caption>
