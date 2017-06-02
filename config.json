@@ -587,7 +587,7 @@
         "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
+      "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
@@ -605,7 +605,7 @@
         "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
+      "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
@@ -618,14 +618,13 @@
         "billing_address.vatNumber" : "VAT number",
         "billing_address.birthday"  : "Date of birth",
         "billing_address.name4"     : "Name affix",
-        "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
         "billing_address.salutation": "Form of address",
         "billing_address.title"     : "Title"
 
       },
-      "default"                   : " billing_address.address2, billing_address.address3, billing_address.birthday"
+      "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
@@ -638,7 +637,6 @@
         "billing_address.vatNumber" : "VAT number",
         "billing_address.birthday"  : "Date of birth",
         "billing_address.name4"     : "Name affix",
-        "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
         "billing_address.salutation": "Form of address",
@@ -656,14 +654,13 @@
       {
         "delivery_address.name1"     : "Company",
         "delivery_address.name4"     : "Name affix",
-        "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
         "delivery_address.salutation": "Form of address",
         "delivery_address.title"     : "Title"
 
       },
-      "default"                   : "delivery_address.address2, delivery_address.address3, delivery_address.birthday"
+      "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
@@ -674,7 +671,6 @@
       {
         "delivery_address.name1"     : "Company",
         "delivery_address.name4"     : "Name affix",
-        "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
         "delivery_address.salutation": "Form of address",
