@@ -9,6 +9,8 @@
 - Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
 - Es wurde ein LayoutContainer hinzugefügt, um die single item ansicht um weitere Tabs zu ergänzen.
 - Es wurde eine Konfigurationsmöglichkeit zum hinzufügen von Artikeln in den Warenkorb hinzugefügt, um den Warenkorb zu zeigen anstelle des Overlays.
+- Es wurden Konfigurationsmöglichkeiten hinzugefügt, um die Pflichtfelder in Adresseingaben einstellen zu können.
+- Es wurden Konfigurationsmöglichkeiten hinzugefügt, um weitere Adressfelder zu der Adresseingabe hinzufügen zu können. 
 
 ### Geändert
 
@@ -17,6 +19,7 @@
 - Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
 - Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
 - Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
+- Eingabemöglichkeite für UK typische Adressen.
 
 ### To do
 
