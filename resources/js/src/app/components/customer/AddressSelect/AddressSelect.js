@@ -1,6 +1,7 @@
-var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
-var AddressService = require("services/AddressService");
+const ApiService = require("services/ApiService");
+const ModalService = require("services/ModalService");
+
+import AddressService from "services/AddressService";
 
 Vue.component("address-select", {
 
