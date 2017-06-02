@@ -108,7 +108,11 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>
 <tr>
 <td colspan="2" class="th">Tab: Footer</td>  
-</tr>  
+</tr>
+<tr>
+<td><b>Position of the Back-to-top button</b></td>  
+<td>Select a position. The <strong>Back-to-top</strong> button will be displayed at the selected position.<br /> <strong>On the right at the bottom</strong> = Display the <strong>Back-to-top</strong> button on the right at the bottom.<br /> <strong>In the middle at the bottom</strong> = Display the <strong>Back-to-top</strong> button in the middle at the bottom.</td>
+</tr>
 <tr>
 <td><b>Number of store features</b></td>  
 <td>Select the number of features to be displayed in the footer of the online store.<br /> <strong>0</strong> = Do not display any store features.<br /> <strong>1</strong> = Only display the first store feature in the footer.<br /> <strong>2</strong> = Display the first and the second store feature in the footer.<br /> <strong>3</strong> = Display all three store features in the footer.</td>
@@ -179,7 +183,7 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 </tr>
 <tr>
 <td><b>Show item information</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item view in the online store.<br /> <strong>Condition</strong> = Activate to display the item condition.<br /> <strong>Manufacturer</strong> = Activate to display the item manufacturer. The external name of a manufacturer is used for the display in the online store.<br /> <strong>Manufacturing country</strong> = Activate to display the manufacturing country of the item.<br /> <strong>Age rating</strong> = Activate to display the item's age rating.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Technical data</strong> = Activate to display the <strong>Technical data</strong> tab. If you activate the display of the <strong>Technical data</strong> without saving a text in the <strong>Technical data</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Description</strong> = Activate to display the <strong>Description</strong> tab. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Strikethrough price</strong> = Activate to show the strikethrough price next to the item price.<br /> <strong>Variation name</strong> = Activate to display the variation name.<br /><!--strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /--> <strong>External variation ID</strong> = Activate to display the external variation ID.<br /> <strong>Model</strong> = Activate to display the model.<br /> <strong>Dimensions</strong> = Activate to display the item's dimensions.<br /> <strong>Customs tariff number</strong> = Activate to display the customs tariff number.<br /> <strong>Net weight</strong> = Activate to display the net weight.<br /> <strong>Gross weight</strong> = Activate to display the gross weight.<br /> <strong>Content</strong> = Activate to display the content.</td>
+<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item view in the online store.<br /> <strong>Condition</strong> = Activate to display the item condition.<br /> <strong>Manufacturer</strong> = Activate to display the item manufacturer. The external name of the manufacturer will be displayed.<br /> <strong>Manufacturing country</strong> = Activate to display the manufacturing country of the item.<br /> <strong>Age rating</strong> = Activate to display the item's age rating.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Technical data</strong> = Activate to display the <strong>Technical data</strong> tab. If you activate the display of the <strong>Technical data</strong> without saving a text in the <strong>Technical data</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Description</strong> = Activate to display the <strong>Description</strong> tab. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Strikethrough price</strong> = Activate to show the strikethrough price next to the item price.<br /> <strong>Variation name</strong> = Activate to display the variation name.<br /><!--strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /--> <strong>External variation ID</strong> = Activate to display the external variation ID.<br /> <strong>Model</strong> = Activate to display the model.<br /> <strong>Dimensions</strong> = Activate to display the item's dimensions.<br /> <strong>Customs tariff number</strong> = Activate to display the customs tariff number.<br /> <strong>Net weight</strong> = Activate to display the net weight.<br /> <strong>Gross weight</strong> = Activate to display the gross weight.<br /> <strong>Content</strong> = Activate to display the content.</td>
 </tr>
 <tr>
 <td><b>Store specials: Number of decimal places for discounts</b></td>  
@@ -236,7 +240,7 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <tbody>
 <tr>
 <td><b>Show item information</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item overview of the shopping cart.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Description</strong> = Activate to display the item description. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the item description will not be displayed.<br /> <strong>Availability</strong> = Activate to display the item availability.<br /> <strong>Variation number</strong> = Activate to display the variation number.<br /> <strong>Condition</strong> = Activate to display the item condition.
+<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item overview of the shopping cart.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Item text</strong> = Activate to display the item description. If you activate the display of the <strong>Item text</strong> without saving a text in the <strong>Item text</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the item description will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Availability</strong> = Activate to display the item availability.<br /> <strong>Variation number</strong> = Activate to display the variation number.<br /> <strong>Condition</strong> = Activate to display the item condition.
 </tr>
  <tr>
 <td><b>Show price information</b></td>  
@@ -277,7 +281,7 @@ Customise the display options of the checkout in the **Checkout and My account**
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Checkout and My account** tab. 
-5. Carry out the settings. Pay attention to the information given in table 4. 
+5. Carry out the settings. Pay attention to the information given in table 5. 
 6. **Save** the settings.
 
 <table>
@@ -306,22 +310,22 @@ Customise the display options of the checkout in the **Checkout and My account**
 </tr>
 <tr>
 <td><b>Show invoice address fields in address form (UK)</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field. <br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field. <!--br /> <strong>County</strong> = Activate to display the <strong>County</strong> field.<-->
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <!--br /><strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field.<--> <br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field. <!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
 </tr>
 <tr>
 <td><b>Enable invoice address field validation (UK)</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Activate to validate the <strong>County</strong> field.<-->
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <!--br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<--><br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 <tr>
 <td><b>Show delivery address fields in address form (UK)</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Activate to display the <strong>County</strong> field.<-->
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <!--br /> <strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field.<--><br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
 </tr>
 <tr>
 <td><b>Enable delivery address field validation (UK)</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Activate to validate the <strong>County</strong> field.<-->
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <!--br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<--><br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field. <!--strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 </tbody>
-<caption>Table 4: Customising the checkout</caption>
+<caption>Table 5: Customising the checkout</caption>
 </table>
 
 ### Customising the pagination and sorting
@@ -335,7 +339,7 @@ Customise the pagination of the item overview and the online store's item sortin
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Open the **Pagination and sorting** tab. 
-5. Carry out the settings. Pay attention to the information given in table 5. 
+5. Carry out the settings. Pay attention to the information given in table 6. 
 6. **Save** the settings.
 
 <table>
@@ -376,7 +380,7 @@ Customise the pagination of the item overview and the online store's item sortin
 <td>Select the entry that is selected by default for item sorting.</td>
 </tr>
 </tbody>
-<caption>Table 5: Customising the pagination and sorting</caption>
+<caption>Table 6: Customising the pagination and sorting</caption>
 </table>
 
 
@@ -391,7 +395,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Registration** or **Logging and performance** tab. 
-5. Carry out the settings. Pay attention to the information given in table 6. 
+5. Carry out the settings. Pay attention to the information given in table 7. 
 6. **Save** the settings.
 
 <table>
@@ -425,7 +429,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 <td>Select a performance level.<br /> <strong>Live</strong> = Select the live mode when using the online store as a productive system. Files will be minified and bundled.<br /> <strong>Development</strong> = Select the development mode to use debugging functionality. Files will not be minified and bundled.</td>
 </tr>
 </tbody>
-<caption>Table 6: Carrying out settings for plugin development</caption>
+<caption>Table 7: Carrying out settings for plugin development</caption>
 </table>
 
 ### Linking item lists

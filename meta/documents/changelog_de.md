@@ -4,40 +4,44 @@
 
 ### Hinzugefügt
 
-- Es wurde ein Layout Container hinzugefügt, um die komplette Order Confirmation Seite zu überschreiben.
-- Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
-- Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
-- Es wurde ein LayoutContainer hinzugefügt, um die single item ansicht um weitere Tabs zu ergänzen.
-- Es wurde eine Konfigurationsmöglichkeit zum hinzufügen von Artikeln in den Warenkorb hinzugefügt, um den Warenkorb zu zeigen anstelle des Overlays.
-- Es wurden Konfigurationsmöglichkeiten hinzugefügt, um die Pflichtfelder in Adresseingaben einstellen zu können.
-- Es wurden Konfigurationsmöglichkeiten hinzugefügt, um weitere Adressfelder zu der Adresseingabe hinzufügen zu können. 
+- In der Kategorieansicht wird bei Artikeln mit Varianten anstatt des "Warenkorb"-Buttons ein Button mit einem Pfeil angezeigt, der in die Einzelansicht des Artikels führt.
+- Ein Template-Container wurde hinzugefügt, um die komplette Bestellbestätigungsseite zu überschreiben.
+- Der "Nach oben"-Button kann nun unten rechts oder unten mittig angezeigt werden.
+- Im Warenkorb kann nun auch der Vorschautext eines Artikels angezeigt werden.
+- Ein Template-Container wurde hinzugefügt, um in der Einzelansicht eines Artikels neben der Beschreibung und den technischen Daten weitere Tabs mit Beschreibungstexten oder anderen Inhalten zu ergänzen.
+- Die Felder des Adressformulars für das Lieferland **Vereinigtes Königreich** können nun individuell angezeigt und validiert werden.
+- Anstelle des angezeigten Overlays nach Klick auf **Zum Warenkorb hinzufügen** kann nun auch die Warenkorbvorschau eingeblendet werden.
 
 ### Geändert
 
-- In der Filteransicht wurde das Icon zu einem "x" geändert.
-- Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
-- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
-- Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
-- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
-- Eingabemöglichkeite für UK typische Adressen.
+- In der Filteransicht wurde das Icon des "Schließen"-Buttons zu einem "x" geändert.
+- Die maximale Größe der Anzeige von Artikelinformationen im Warenkorb wurde erhöht ("Mehr"-Button).
+- Optionale Adressfelder der Adressformulare sind nicht mehr standardmäßig aktiviert.
+- Im Webshop wird nicht mehr der interne Herstellername, sondern der externe Herstellername angezeigt.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch ein Overlay für die Adresseingabe.
+
+### Behoben
+
+- Die Artikelinformationen im Warenkorb wurden nicht angezeigt. Dies wurde behoben.
+- Namen von Unterkategorien werden umgebrochen, wenn der Name länger ist, als der Name der Oberkategorie.
+- Aufgrund eines Fehlers wurde die Übersetzung des "Mehr/Weniger"-Buttons im Warenkorb nicht angezeigt. Dies wurde behoben.
+- Der Abstand zwischen den Hauptkategorien in der Navigation wurde entfernt.
+- Auf der Startseite wird in Artikelvorschauen das Bild mit der Position 0 ausgegeben.
 
 ### To do
 
 - Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
 
-### Behoben
-
-- Die Konfigurationsmöglichkeiten für die Anzeige der Informationen zu Artikeln im Warenkorb funktioniert nun.
-- Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
-- I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
-- Der Abstand zwischen den Hauptmenüpunkten in der Navigation wurde entfernt.
-- Auf der Startseite wird bei Artikeln nun das Bild mit der Position 0 ausgegeben.
 
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
+- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.3 (2017-05-19)
 
