@@ -819,9 +819,14 @@ Vue.component("address-input-group", {
 },{}],14:[function(require,module,exports){
 "use strict";
 
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
-var AddressService = require("services/AddressService");
 
 Vue.component("address-select", {
 
@@ -997,7 +1002,7 @@ Vue.component("address-select", {
             var address = this.addressToDelete;
             var addressType = this.addressType;
 
-            AddressService.deleteAddress(address.id, addressType).done(function () {
+            _AddressService2.default.deleteAddress(address.id, addressType).done(function () {
                 self.closeDeleteModal();
                 self.removeIdFromList(address.id);
             });
@@ -1085,7 +1090,12 @@ Vue.component("address-select", {
 },{"services/AddressService":68,"services/ApiService":69,"services/ModalService":74}],15:[function(require,module,exports){
 "use strict";
 
-var AddressService = require("services/AddressService");
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ValidationService = require("services/ValidationService");
 
 Vue.component("create-update-address", {
@@ -1141,7 +1151,7 @@ Vue.component("create-update-address", {
         updateAddress: function updateAddress() {
             this.waiting = true;
 
-            AddressService.updateAddress(this.addressData, this.addressType).done(function () {
+            _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
                 this.addressModal.hide();
 
                 for (var key in this.addressList) {
@@ -1168,7 +1178,7 @@ Vue.component("create-update-address", {
         createAddress: function createAddress() {
             this.waiting = true;
 
-            AddressService.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
+            _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
                 this.addressData = newAddress;
 
                 this.addressModal.hide();
@@ -3742,7 +3752,6 @@ var NotificationService = require("services/NotificationService");
 var WaitScreenService = require("services/WaitScreenService");
 
 module.exports = function ($) {
-
     var _eventListeners = {};
 
     return {
@@ -3874,57 +3883,56 @@ module.exports = function ($) {
 },{"services/NotificationService":75,"services/WaitScreenService":79}],68:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.createAddress = createAddress;
+exports.updateAddress = updateAddress;
+exports.deleteAddress = deleteAddress;
 var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
-module.exports = function ($) {
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive) {
-        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
-            if (setActive) {
-                if (addressType === 1) {
-                    CheckoutService.setBillingAddressId(response.id);
-                } else if (addressType === 2) {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
+/**
+ * Create a new address
+ * @param address
+ * @param addressType
+ * @param setActive
+ * @returns {*}
+ */
+function createAddress(address, addressType, setActive) {
+    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
+        if (setActive) {
+            if (addressType === 1) {
+                CheckoutService.setBillingAddressId(response.id);
+            } else if (addressType === 2) {
+                CheckoutService.setDeliveryAddressId(response.id);
             }
-        });
-    }
+        }
+    });
+}
 
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType) {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
+/**
+ * Update an existing address
+ * @param newData
+ * @param addressType
+ * @returns {*|Entry|undefined}
+ */
+function updateAddress(newData, addressType) {
+    addressType = addressType || newData.pivot.typeId;
+    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+}
 
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType) {
-        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-}(jQuery);
+/**
+ * Delete an existing address
+ * @param addressId
+ * @param addressType
+ * @returns {*}
+ */
+function deleteAddress(addressId, addressType) {
+    return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+}
+
+exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
 
 },{"services/ApiService":69,"services/CheckoutService":71}],69:[function(require,module,exports){
 "use strict";
@@ -3933,7 +3941,6 @@ var NotificationService = require("services/NotificationService");
 var WaitScreenService = require("services/WaitScreenService");
 
 module.exports = function ($) {
-
     var _eventListeners = {};
 
     return {
