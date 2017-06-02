@@ -35,7 +35,7 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
             }
-            else if (Object.keys(this.basketItem.currentBasketItem).length != 0)
+            else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0)
             {
                 setTimeout(function()
                 {

@@ -414,7 +414,8 @@
         "possibleValues"    :
         {
             "overlay"       : "Show overlay",
-            "preview"       : "Toggle basket preview"
+            "preview"       : "Toggle basket preview",
+            "no_information": "No information"
         },
         "default"           : "overlay"
     },
