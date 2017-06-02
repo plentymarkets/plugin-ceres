@@ -6,7 +6,7 @@ var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    props: ["showOverlay", "template"],
+    props: ["basketAddInformation", "template"],
 
     data: function data() {
         return {
@@ -16,19 +16,22 @@ Vue.component("add-item-to-basket-overlay", {
             currency: ""
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
-
     ready: function ready() {
         ResourceService.bind("basketItem", this);
     },
 
+
     watch: {
         basketItem: function basketItem() {
-            if (this.showOverlay) {
+            if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            } else if (Object.keys(this.basketItem.currentBasketItem).length != 0) {
+                setTimeout(function () {
+                    $("body").toggleClass("open-right");
+                }, 1);
             }
         }
     },
@@ -49,13 +52,13 @@ Vue.component("add-item-to-basket-overlay", {
 
             return render;
         },
-
         setPriceFromData: function setPriceFromData() {
             if (this.basketItem.currentBasketItem.calculatedPrices) {
                 this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
                 this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
         },
+
 
         /**
          * @returns {string}
@@ -71,23 +74,20 @@ Vue.component("add-item-to-basket-overlay", {
 
             return "/" + path;
         },
-
         startCounter: function startCounter() {
+            var _this = this;
+
             this.timeToClose = 10;
 
-            var timerVar = setInterval(countTimer, 1000);
+            var timerVar = setInterval(function () {
+                _this.timeToClose -= 1;
 
-            var self = this;
-
-            function countTimer() {
-                self.timeToClose -= 1;
-
-                if (self.timeToClose === 0) {
+                if (_this.timeToClose === 0) {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(timerVar);
                 }
-            }
+            }, 1000);
         }
     },
 
@@ -98,7 +98,6 @@ Vue.component("add-item-to-basket-overlay", {
         texts: function texts() {
             return this.basketItem.currentBasketItem.texts;
         },
-
         imageUrl: function imageUrl() {
             var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
 
@@ -124,15 +123,6 @@ Vue.component("add-to-basket", {
 
     created: function created() {
         this.$options.template = this.template;
-    },
-
-    computed: {
-        /**
-         * returns item.variation.id
-         */
-        variationId: function variationId() {
-            return this.item.variation.id;
-        }
     },
 
     methods: {
@@ -172,6 +162,19 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        }
+    },
+
+    computed: {
+        /**
+         * returns item.variation.id
+         */
+        variationId: function variationId() {
+            return this.item.variation.id;
+        },
+
+        hasChildren: function hasChildren() {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         }
     }
 });
@@ -836,6 +839,7 @@ Vue.component("address-select", {
         };
     },
 
+
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
      */
@@ -844,6 +848,7 @@ Vue.component("address-select", {
 
         this.addEventListener();
     },
+
 
     /**
      * Select the address modal
@@ -859,6 +864,7 @@ Vue.component("address-select", {
         this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
 
+
     methods: {
         /**
          * Add the event listener
@@ -870,6 +876,7 @@ Vue.component("address-select", {
                 self.cleanUserAddressData();
             });
         },
+
 
         /**
          * Load the address filtered by selectedId into selectedAddress
@@ -890,6 +897,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Remove all user related addresses from the component
          */
@@ -904,6 +912,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Update the selected address
          * @param index
@@ -914,6 +923,7 @@ Vue.component("address-select", {
             this.$dispatch("address-changed", this.selectedAddress);
         },
 
+
         /**
          * Check whether the address list is empty
          * @returns {boolean}
@@ -922,6 +932,7 @@ Vue.component("address-select", {
             return !(this.addressList && this.addressList.length > 0);
         },
 
+
         /**
          * Check whether a company name exists and show it in bold
          * @returns {boolean}
@@ -929,6 +940,18 @@ Vue.component("address-select", {
         showNameStrong: function showNameStrong() {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
+
+
+        /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal: function showInitialAddModal() {
+            this.modalType = "initial";
+            this.addressToEdit = {};
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
 
         /**
          * Show the add modal
@@ -939,6 +962,7 @@ Vue.component("address-select", {
             this.updateHeadline();
             this.addressModal.show();
         },
+
 
         /**
          * Show the edit modal
@@ -952,6 +976,7 @@ Vue.component("address-select", {
             this.addressModal.show();
         },
 
+
         /**
          * Show the delete modal
          * @param address
@@ -962,6 +987,7 @@ Vue.component("address-select", {
             this.updateHeadline();
             this.deleteModal.show();
         },
+
 
         /**
          * Delete the address selected before
@@ -977,12 +1003,14 @@ Vue.component("address-select", {
             });
         },
 
+
         /**
          * Close the current create/update address modal
          */
         closeAddressModal: function closeAddressModal() {
             this.addressModal.hide();
         },
+
 
         /**
          * Close the current delete address modal
@@ -991,13 +1019,16 @@ Vue.component("address-select", {
             this.deleteModal.hide();
         },
 
+
         /**
          * Dynamically create the header line in the modal
          */
         updateHeadline: function updateHeadline() {
             var headline;
 
-            if (this.addressType === "2") {
+            if (this.modalType === "initial") {
+                headline = Translations.Template.orderInvoiceAddressInitial;
+            } else if (this.addressType === "2") {
                 if (this.modalType === "update") {
                     headline = Translations.Template.orderShippingAddressEdit;
                 } else if (this.modalType === "create") {
@@ -1015,6 +1046,7 @@ Vue.component("address-select", {
 
             this.headline = headline;
         },
+
 
         /**
          * Remove an address from the addressList by ID
@@ -1034,6 +1066,7 @@ Vue.component("address-select", {
                 }
             }
         },
+
 
         /**
          * Update the selected address when a new address is created
@@ -1095,7 +1128,7 @@ Vue.component("create-update-address", {
          * Save the new address or update an existing one
          */
         saveAddress: function saveAddress() {
-            if (this.modalType === "create") {
+            if (this.modalType === "initial" || this.modalType === "create") {
                 this.createAddress();
             } else if (this.modalType === "update") {
                 this.updateAddress();
@@ -1159,7 +1192,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: ["addressList", "hasToValidate", "selectedAddressId"],
 
@@ -1169,6 +1202,7 @@ Vue.component("invoice-address-select", {
             checkoutValidation: { invoiceAddress: {} }
         };
     },
+
 
     /**
      * Initialise the event listener
@@ -1182,6 +1216,17 @@ Vue.component("invoice-address-select", {
             this.checkoutValidation.invoiceAddress.validate = this.validate;
         }
     },
+
+
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    ready: function ready() {
+        if (App.isCheckoutView && this.addressList.length <= 0) {
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
+        }
+    },
+
 
     methods: {
         /**
@@ -1199,7 +1244,6 @@ Vue.component("invoice-address-select", {
                 this.validate();
             }
         },
-
         validate: function validate() {
             this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
         }
@@ -2009,7 +2053,7 @@ Vue.component("category-image-carousel", {
                 dots: this.showDots === "true",
                 items: 1,
                 loop: this.imageUrls.length > 1,
-                lazyLoad: this.disableLazyLoad,
+                lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === "true",
                 navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"]
@@ -3647,23 +3691,6 @@ Vue.filter("itemImage", function (item, baseUrl) {
 },{}],64:[function(require,module,exports){
 "use strict";
 
-Vue.filter("itemImages", function (images, accessor) {
-    var imageUrls = [];
-    var imagesAccessor = "all";
-
-    if (images.variation.length) {
-        imagesAccessor = "variation";
-    }
-
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
-
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
-    }
-
-    return imageUrls;
-});
-
 },{}],65:[function(require,module,exports){
 "use strict";
 
@@ -5170,9 +5197,17 @@ module.exports = function ($) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var $ = require("jquery");
+exports.getUrlParams = getUrlParams;
+exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
 
-var getUrlParams = function getUrlParams(urlParams) {
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUrlParams(urlParams) {
     if (urlParams) {
         var tokens;
         var params = {};
@@ -5189,17 +5224,17 @@ var getUrlParams = function getUrlParams(urlParams) {
     }
 
     return {};
-};
+}
 
-var setUrlParams = function setUrlParams(urlParams) {
+function setUrlParams(urlParams) {
     var pathName = window.location.pathname;
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
     window.history.replaceState({}, title, pathName + params);
-};
+}
 
-var setUrlParam = function setUrlParam(key, value) {
+function setUrlParam(key, value) {
     var urlParams = getUrlParams(document.location.search);
 
     if (value !== null) {
@@ -5209,7 +5244,7 @@ var setUrlParam = function setUrlParam(key, value) {
     }
 
     setUrlParams(urlParams);
-};
+}
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
@@ -16036,14 +16071,25 @@ var init = (function($, window, document)
                 if ($(this).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
+                    $(".back-to-top-center").fadeIn(duration);
                 }
                 else
                 {
                     $(".back-to-top").fadeOut(duration);
+                    $(".back-to-top-center").fadeOut(duration);
                 }
             });
 
             $(".back-to-top").click(function(event)
+            {
+                event.preventDefault();
+
+                $("html, body").animate({scrollTop: 0}, duration);
+
+                return false;
+            });
+
+            $(".back-to-top-center").click(function(event)
             {
                 event.preventDefault();
 
