@@ -110,7 +110,7 @@ Individualisieren Sie Header und Footer Ihres Designs. Zeigen Sie Ihr eigenes Lo
 <td colspan="2" class="th">Tab: Footer</td>  
 </tr>
 <tr>
-<td><b>Position of the Back-to-top button/b></td>  
+<td><b>Position of the Back-to-top button</b></td>  
 <td>Position wählen, an der der <strong>Nach oben</strong>-Button im Webshop angezeigt wird.<br /> <strong>On the right at the bottom</strong> = <strong>Nach oben</strong>-Button unten rechts anzeigen.<br /> <strong>In the middle at the bottom</strong> = <strong>Nach oben</strong>-Button unten mittig anzeigen.</td>
 </tr>
 <tr>
@@ -240,7 +240,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <tbody>
 <tr>
 <td><b>Show item information</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Artikelinformationen wählen, um die Informationen in der Artikelübersicht im Warenkorb anzuzeigen.<br /> <strong>Item ID</strong> = Aktivieren, um die Artikel-ID anzuzeigen.<br /> <strong>Description</strong> = Aktivieren, um die Artikelbeschreibung anzuzeigen. Wenn Sie die Anzeige der <strong>Beschreibung</strong> aktivieren, aber keinen Text unter <strong>Beschreibung</strong> im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels speichern, wird die Artikelbeschreibung nicht angezeigt.<br /> <strong>Availability</strong> = Aktivieren, um die Verfügbarkeit anzuzeigen.<br /> <strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /> <strong>Condition</strong> = Aktivieren, um den Artikelzustand anzuzeigen.
+<td>Eine, mehrere oder <strong>ALLE</strong> Artikelinformationen wählen, um die Informationen in der Artikelübersicht im Warenkorb anzuzeigen.<br /> <strong>Item ID</strong> = Aktivieren, um die Artikel-ID anzuzeigen.<br /> <strong>Item text</strong> = Aktivieren, um die Artikelbeschreibung anzuzeigen. Wenn Sie die Anzeige des <strong>Artikeltexts</strong> aktivieren, aber keinen Text unter <strong>Artikeltext</strong> im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels speichern, wird die Artikelbeschreibung nicht angezeigt.<br /> <strong>Preview text</strong> = Aktivieren, um den Vorschautext anzuzeigen.<br /> <strong>Availability</strong> = Aktivieren, um die Verfügbarkeit anzuzeigen.<br /> <strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /> <strong>Condition</strong> = Aktivieren, um den Artikelzustand anzuzeigen.
 </tr>
  <tr>
 <td><b>Show price information</b></td>  
@@ -282,7 +282,7 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Checkout and My account**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -294,31 +294,55 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 </thead>
 <tbody>
 <tr>
-<td><b>Show invoice address fields in address form</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
+<td><b>Show invoice address fields in address form (DE)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Deutschland</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
-<br /> <strong>Additional address 1 / Building name</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> bzw. <strong>Building name</strong> anzuzeigen. Das Feld <strong>Addresszusatz 1</strong> ist nur im deutschen Adressformular verfügbar. Das Feld <strong>Building name</strong> ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.
+<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> anzuzeigen.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. <br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> anzuzeigen.
 </tr>
 <tr>
-<td><b>Enable invoice address field validation</b></td>  
+<td><b>Enable invoice address field validation (DE)</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> zu validieren.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
-<br /> <strong>Additional address 1 / Building name</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> bzw. <strong>Building name</strong> zu validieren. Das Feld <strong>Addresszusatz 1</strong> ist nur im deutschen Adressformular verfügbar. Das Feld <strong>Building name</strong> ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.
+<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> zu validieren.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> zu validieren.
 </tr>
 <tr>
-<td><b>Show delivery address fields in address form</b></td>  
-<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.
+<td><b>Show delivery address fields in address form (DE)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Deutschland</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
-<br /> <strong>Additional address 1 / Building name</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> bzw. <strong>Building name</strong> anzuzeigen. Das Feld <strong>Addresszusatz 1</strong> ist nur im deutschen Adressformular verfügbar. Das Feld <strong>Building name</strong> ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> anzuzeigen. Dieses Feld ist nur im deutschen Adressformular verfügbar.
+<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> anzuzeigen.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> anzuzeigen.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> anzuzeigen.
 </tr>
 <tr>
-<td><b>Enable delivery address field validation</b></td>  
+<td><b>Enable delivery address field validation (DE)</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
-<br /> <strong>Additional address 1 / Building name</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> bzw. <strong>Building name</strong> zu validieren. Das Feld <strong>Addresszusatz 1</strong> ist nur im deutschen Adressformular verfügbar. Das Feld <strong>Building name</strong> ist nur im englischen Adressformular verfügbar.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> zu validieren. Dieses Feld ist nur im deutschen Adressformular verfügbar.
+<br /> <strong>Additional address 1</strong> = Aktivieren, um das Feld <strong>Adresszusatz 1</strong> zu validieren.<br /> <strong>Additional address 2</strong> = Aktivieren, um das Feld <strong>Adresszusatz 2</strong> zu validieren.<br /> <strong>State</strong> = Aktivieren, um das Feld <strong>Bundesland</strong> zu validieren.
+</tr>
+<tr>
+<td><b>Show invoice address fields in address form (UK)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Vereinigtes Königreich</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
+<!--br /><strong>Address 2</strong> = Aktivieren, um das Feld <strong>Adresse 2</strong> anzuzeigen.<--> <br /> <strong>Address 3</strong> = Aktivieren, um das Feld <strong>Adresse 3</strong> anzuzeigen.<br /> <strong>Address 4</strong> = Aktivieren, um das Feld <strong>Adresse 4</strong> anzuzeigen. <!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
+</tr>
+<tr>
+<td><b>Enable invoice address field validation (UK)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> zu validieren.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
+<!--br /> <strong>Address 2</strong> = Aktivieren, um das Feld <strong>Adresse 2</strong> zu validieren.<--><br /> <strong>Address 3</strong> = Aktivieren, um das Feld <strong>Adresse 3</strong> zu validieren.<br /> <strong>Address 4</strong> = Aktivieren, um das Feld <strong>Adresse 4</strong> zu validieren.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
+</tr>
+<tr>
+<td><b>Show delivery address fields in address form (UK)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Vereinigtes Königreich</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.
+<!--br /> <strong>Address 2</strong> = Aktivieren, um das Feld <strong>Adresse 2</strong> anzuzeigen.<--><br /> <strong>Address 3</strong> = Aktivieren, um das Feld <strong>Adresse 3</strong> anzuzeigen.<br /> <strong>Address 4</strong> = Aktivieren, um das Feld <strong>Adresse 4</strong> anzuzeigen.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
+</tr>
+<tr>
+<td><b>Enable delivery address field validation (UK)</b></td>  
+<td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder bei der Adresseingabe zu validieren.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> zu validieren.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> zu validieren.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> zu validieren.
+<br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> zu validieren.
+<!--br /> <strong>Address 2</strong> = Aktivieren, um das Feld <strong>Adresse 2</strong> zu validieren.<--><br /> <strong>Address 3</strong> = Aktivieren, um das Feld <strong>Adresse 3</strong> zu validieren.<br /> <strong>Address 4</strong> = Aktivieren, um das Feld <strong>Adresse 4</strong> zu validieren.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 </tbody>
-<caption>Tab. 4: Kaufabwicklung anpassen</caption>
+<caption>Tab. 5: Kaufabwicklung anpassen</caption>
 </table>
 
 ### Paginierung und Sortierung anpassen
@@ -332,7 +356,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Pagination and sorting**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -373,7 +397,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <td>Eintrag wählen, der standardmäßig bei der Artikelsortierung voreingestellt ist.</td>
 </tr>
 </tbody>
-<caption>Tab. 5: Paginierung und Sortierung anpassen</caption>
+<caption>Tab. 6: Paginierung und Sortierung anpassen</caption>
 </table>
 
 
@@ -388,7 +412,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 7.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -422,7 +446,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 <td>Performance-Level wählen.<br /> <strong>Live</strong> = Live-Modus wählen, wenn der Webshop produktiv verwendet wird. Dateien werden minimiert und gebündelt.<br /> <strong>Development</strong> = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.</td>
 </tr>
 </tbody>
-<caption>Tab. 6: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<caption>Tab. 7: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
 
 ### Artikellisten verknüpfen

@@ -28,7 +28,7 @@ Vue.component("add-item-to-basket-overlay", {
         basketItem: function basketItem() {
             if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-            } else if (Object.keys(this.basketItem.currentBasketItem).length != 0) {
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
                 setTimeout(function () {
                     $("body").toggleClass("open-right");
                 }, 1);
@@ -1342,6 +1342,7 @@ Vue.component("country-select", {
          */
         countryChanged: function countryChanged() {
             this.selectedStateId = null;
+            this.localization.currentShippingCountryId = this.selectedCountryId;
         },
 
 

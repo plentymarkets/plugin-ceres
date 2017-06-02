@@ -414,7 +414,8 @@
         "possibleValues"    :
         {
             "overlay"       : "Show overlay",
-            "preview"       : "Toggle basket preview"
+            "preview"       : "Toggle basket preview",
+            "no_information": "No information"
         },
         "default"           : "overlay"
     },
@@ -551,7 +552,7 @@
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.show",
-        "label"                     : "Show invoice address fields in address form",
+        "label"                     : "Show invoice address fields in address form (DE)",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
@@ -559,10 +560,10 @@
             "billing_address.vatNumber" : "VAT number",
             "billing_address.birthday"  : "Date of birth",
             "billing_address.name4"     : "Name affix",
-            "billing_address.address3"  : "Additional address 1 / Building name (EN)",
+            "billing_address.address3"  : "Additional address 1",
             "billing_address.address4"  : "Additional address 2",
             "billing_address.stateId"   : "State",
-            "billing_address.salutation": "Salutation",
+            "billing_address.salutation": "Form of address",
             "billing_address.title"     :"Title"
 
         },
@@ -571,7 +572,7 @@
     {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.require",
-        "label"                     : "Enable invoice address field validation",
+        "label"                     : "Enable invoice address field validation (DE)",
         "type"                      : "multi_select",
         "possibleValues"            :
         {
@@ -579,10 +580,10 @@
             "billing_address.vatNumber" : "VAT number",
             "billing_address.birthday"  : "Date of birth",
             "billing_address.name4"     : "Name affix",
-            "billing_address.address3"  : "Additional address 1 / Building name",
+            "billing_address.address3"  : "Additional address 1",
             "billing_address.address4"  : "Additional address 2",
             "billing_address.stateId"   : "State",
-            "billing_address.salutation": "Salutation",
+            "billing_address.salutation": "Form of address",
             "billing_address.title"     : "Title"
 
         },
@@ -591,38 +592,110 @@
     {
       "tab"                       : "Checkout and My account",
       "key"                       : "delivery_address.show",
-      "label"                     : "Show delivery address fields in address form",
+      "label"                     : "Show delivery address fields in address form (DE)",
       "type"                      : "multi_select",
       "possibleValues"            :
       {
         "delivery_address.name1"      : "Company",
         "delivery_address.name4"      : "Name affix",
-        "delivery_address.address3"   : "Additional address 1 / Building name",
+        "delivery_address.address3"   : "Additional address 1",
         "delivery_address.address4"   : "Additional address 2",
         "delivery_address.stateId"    : "State",
-        "delivery_address.salutation" : "Salutation",
+        "delivery_address.salutation" : "Form of address",
         "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.additionalAddress1"
+      "default"                   : ""
     },
     {
       "tab"                       : "Checkout and My account",
       "key"                       : "delivery_address.require",
-      "label"                     : "Enable delivery address field validation",
+      "label"                     : "Enable delivery address field validation (DE)",
       "type"                      : "multi_select",
       "possibleValues"            :
       {
         "delivery_address.name1"      : "Company",
         "delivery_address.name4"      : "Name affix",
-        "delivery_address.address3"   : "Additional address 1 / Building name",
+        "delivery_address.address3"   : "Additional address 1",
         "delivery_address.address4"   : "Additional address 2",
         "delivery_address.stateId"    : "State",
-        "delivery_address.salutation" : "Salutation",
-        "delivery_address.title"      :"Title"
+        "delivery_address.salutation" : "Form of address",
+        "delivery_address.title"      : "Title"
 
       },
-      "default"                   : "delivery_address.name4, delivery_address.address3, delivery_address.address4"
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.show",
+      "label"                     : "Show invoice address fields in address form (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.salutation": "Form of address",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "billing_address.en.require",
+      "label"                     : "Enable invoice address field validation (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "billing_address.name1"     : "Company",
+        "billing_address.vatNumber" : "VAT number",
+        "billing_address.birthday"  : "Date of birth",
+        "billing_address.name4"     : "Name affix",
+        "billing_address.address3"  : "Address 3",
+        "billing_address.address4"  : "Address 4",
+        "billing_address.salutation": "Form of address",
+        "billing_address.title"     : "Title"
+
+      },
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.show",
+      "label"                     : "Show delivery address fields in address form (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.salutation": "Form of address",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : ""
+    },
+    {
+      "tab"                       : "Checkout and My account",
+      "key"                       : "delivery_address.en.require",
+      "label"                     : "Enable delivery address field validation (UK)",
+      "type"                      : "multi_select",
+      "possibleValues"            :
+      {
+        "delivery_address.name1"     : "Company",
+        "delivery_address.name4"     : "Name affix",
+        "delivery_address.address3"  : "Address 3",
+        "delivery_address.address4"  : "Address 4",
+        "delivery_address.salutation": "Form of address",
+        "delivery_address.title"     : "Title"
+
+      },
+      "default"                   : ""
     },
     {
         "tab"               : "Registration",
