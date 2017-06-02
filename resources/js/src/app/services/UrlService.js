@@ -1,6 +1,6 @@
-var $ = require("jquery");
+import $ from "jquery";
 
-const getUrlParams = function(urlParams)
+export function getUrlParams(urlParams)
 {
     if (urlParams)
     {
@@ -20,18 +20,18 @@ const getUrlParams = function(urlParams)
     }
 
     return {};
-};
+}
 
-const setUrlParams = function(urlParams)
+export function setUrlParams(urlParams)
 {
     var pathName = window.location.pathname;
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
     window.history.replaceState({}, title, pathName + params);
-};
+}
 
-const setUrlParam = function(key, value)
+export function setUrlParam(key, value)
 {
     var urlParams = getUrlParams(document.location.search);
 
@@ -45,6 +45,6 @@ const setUrlParam = function(key, value)
     }
 
     setUrlParams(urlParams);
-};
+}
 
 export default {setUrlParam, setUrlParams, getUrlParams};

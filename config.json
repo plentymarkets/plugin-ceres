@@ -144,6 +144,18 @@
     },
     {
         "tab"           : "Footer",
+        "key"           : "footer.to_top_button",
+        "label"         : "Position of the Back-to-top button",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "right"          : "On the right at the bottom",
+            "bottom"         : "In the middle at the bottom"
+        },
+        "default"       : "right"
+    },
+    {
+        "tab"           : "Footer",
         "key"           : "footer.number_of_features",
         "label"         : "Number of store features",
         "type"          : "dropdown",
@@ -345,13 +357,13 @@
         "type"                          : "multi_select",
         "possibleValues"                :
         {
-          "basket.item.item_id"         : "Item ID",
-          "basket.item.description"     : "Description",
-          "basket.item.availability"    : "Availability",
-          "basket.item.customNumber"    : "Variation number",
-          "basket.item.state"           : "Condition"
+          "basket.item.item_id"          : "Item ID",
+          "basket.item.description_short": "Preview text",
+          "basket.item.description_long" : "Item text",
+          "basket.item.availability"     : "Availability",
+          "basket.item.customNumber"     : "Variation number"
         },
-        "default"                       : "all"
+        "default"                       : "basket.item.item_id, basket.item.description_short, basket.item.availability, basket.item.customNumber"
     },
     {
         "tab"                               : "Shopping cart",
@@ -395,11 +407,16 @@
         "default"   : "false"
     },
     {
-        "tab"       : "Shopping cart",
-        "key"       : "basket.add_item_to_basket_confirm",
-        "label"     : "Add to shopping cart: Show overlay",
-        "type"      : "checkbox",
-        "default"   : "true"
+        "tab"               : "Shopping cart",
+        "key"               : "basket.add_item_to_basket_confirm",
+        "label"             : "Add to shopping cart: Show add information",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "overlay"       : "Show overlay",
+            "preview"       : "Toggle basket preview"
+        },
+        "default"           : "overlay"
     },
     {
         "tab"               : "Pagination and sorting",

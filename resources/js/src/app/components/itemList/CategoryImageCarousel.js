@@ -26,7 +26,7 @@ Vue.component("category-image-carousel", {
                 dots    : (this.showDots === "true"),
                 items   : 1,
                 loop    : this.imageUrls.length > 1,
-                lazyLoad: this.disableLazyLoad,
+                lazyLoad: !this.disableLazyLoad,
                 margin  : 10,
                 nav     : (this.showNav === "true"),
                 navText : [

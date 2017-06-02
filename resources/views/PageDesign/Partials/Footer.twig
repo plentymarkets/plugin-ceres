@@ -4,10 +4,11 @@
 {% set colSize = (12 / (numberOfCols + 1)) %}
 {% set displayedCategories = [] %}
 {% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
+{% set topButtonPosition = config('Ceres.footer.to_top_button') %}
 
 <div class="footer">
 
-    <div class="back-to-top hidden-sm-down">
+    <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">
         <i class="fa fa-chevron-up"></i>
     </div>
 

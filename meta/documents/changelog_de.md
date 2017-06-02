@@ -4,10 +4,31 @@
 
 ### Hinzugefügt
 
+- Es wurde ein Layout Container hinzugefügt, um die komplette Order Confirmation Seite zu überschreiben.
+- Es wurde eine Konfigurationsmöglichkeit zu dem ToTop button hinzugefügt, um zu sagen ob er rechts oder mittig angezeigt werden soll.
+- Es wurde eine Konfigurationsmöglichkeit zu den Artikel-Informationen im Warenkorb hinzugefügt, um die kurze oder lange Beschreibung anzuzeigen.
+- Es wurde ein LayoutContainer hinzugefügt, um die single item ansicht um weitere Tabs zu ergänzen.
+- Es wurde eine Konfigurationsmöglichkeit zum hinzufügen von Artikeln in den Warenkorb hinzugefügt, um den Warenkorb zu zeigen anstelle des Overlays.
+
+### Geändert
+
+- In der Filteransicht wurde das Icon zu einem "x" geändert.
+- Die maximale Größe der Anzeige zu Artikel-Informationen im Warenkorb wurde erhöht ("mehr" button).
+- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
+- Für die Anzeige im Webshop wird nun nicht mehr der interne Herstellername, sondern der externe Herstellername genommen.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch das Popup zum Eingeben einer neuen Adresse
+
+### To do
+
+- Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
+
 ### Behoben
 
+- Die Konfigurationsmöglichkeiten für die Anzeige der Informationen zu Artikeln im Warenkorb funktioniert nun.
 - Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
-- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
+- I18n im Basket für "Mehr/Weniger" wurde hinzugefügt.
+- Der Abstand zwischen den Hauptmenüpunkten in der Navigation wurde entfernt.
+- Auf der Startseite wird bei Artikeln nun das Bild mit der Position 0 ausgegeben.
 
 ### Bekannte Probleme
 

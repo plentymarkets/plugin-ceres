@@ -17,5 +17,6 @@
   "variation.availability.names.name",
   "variation.availability.id",
   "variation.itemId",
-  "variation.releasedAt"
+  "variation.releasedAt",
+  "filter.hasChildren"
 ]

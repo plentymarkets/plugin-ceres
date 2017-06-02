@@ -2,7 +2,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: [
         "addressList",
@@ -10,7 +10,7 @@ Vue.component("invoice-address-select", {
         "selectedAddressId"
     ],
 
-    data: function()
+    data()
     {
         return {
             checkout: {},
@@ -21,7 +21,7 @@ Vue.component("invoice-address-select", {
     /**
      * Initialise the event listener
      */
-    created: function()
+    created()
     {
         ResourceService.bind("checkout", this);
 
@@ -33,13 +33,24 @@ Vue.component("invoice-address-select", {
         }
     },
 
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    ready()
+    {
+        if (App.isCheckoutView && this.addressList.length <= 0)
+        {
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
+        }
+    },
+
     methods:
     {
         /**
          * Update the invoice address
          * @param selectedAddress
          */
-        addressChanged: function(selectedAddress)
+        addressChanged(selectedAddress)
         {
             this.checkout.billingAddressId = selectedAddress.id;
 
@@ -56,7 +67,7 @@ Vue.component("invoice-address-select", {
             }
         },
 
-        validate: function()
+        validate()
         {
             this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
         }

@@ -15,7 +15,7 @@
     <meta property="og:description" content="{{ item.documents[0].data.texts.shortDescription }}" />
 
     <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
-    <script type="application/ld+json">{"@context":"http://schema.org/","@type":"Product","name":"{{ item.documents[0].data.texts | itemName(configItemName) }}","category":"item.","releaseDate":"{{ item.documents[0].data.variation.releasedAt }}","image":"{{ item.documents[0].data.images.all[0].urlPreview }}","identifier":"{{ item.documents[0].data.variation.id }}","description":"{{ item.documents[0].data.texts.description }}","disambiguatingDescription":"{{ item.documents[0].data.texts.shortDescription }}","manufacturer":{"@type":"Organization","name":"{{ item.documents[0].data.item.manufacturer.name }}"},"model":{"@type":"ProductModel","isVariantOf":"{{ item.documents[0].data.item.id }}","model":"{{ item.documents[0].data.variation.model }}"},"offers":{"@type":"Offer","priceCurrency":"{{ item.documents[0].data.calculatedPrices.default.currency }}","price":"{{ item.documents[0].data.calculatedPrices.default.price }}","availability":"{{ item.documents[0].data.variation.availability.names.name }}","itemCondition":"{{ item.documents[0].data.item.condition.name }}","serialNumber":"{{ item.documents[0].data.variation.number }}"},"depth":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.lengthMM }}"},"width":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.widthMM }}"},"height":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.heightMM }}"},"weight":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.weightG }}"}}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org/","@type":"Product","name":"{{ item.documents[0].data.texts | itemName(configItemName) }}","category":"item.","releaseDate":"{{ item.documents[0].data.variation.releasedAt }}","image":"{{ item.documents[0].data.images.all[0].urlPreview }}","identifier":"{{ item.documents[0].data.variation.id }}","description":"{{ item.documents[0].data.texts.description }}","disambiguatingDescription":"{{ item.documents[0].data.texts.shortDescription }}","manufacturer":{"@type":"Organization","name":"{{ item.documents[0].data.item.manufacturer.externalName }}"},"model":{"@type":"ProductModel","isVariantOf":"{{ item.documents[0].data.item.id }}","model":"{{ item.documents[0].data.variation.model }}"},"offers":{"@type":"Offer","priceCurrency":"{{ item.documents[0].data.calculatedPrices.default.currency }}","price":"{{ item.documents[0].data.calculatedPrices.default.price }}","availability":"{{ item.documents[0].data.variation.availability.names.name }}","itemCondition":"{{ item.documents[0].data.item.condition.name }}","serialNumber":"{{ item.documents[0].data.variation.number }}"},"depth":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.lengthMM }}"},"width":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.widthMM }}"},"height":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.heightMM }}"},"weight":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.weightG }}"}}</script>
 {% endblock %}
 
 {% block PageBody %}
@@ -42,7 +42,7 @@
             <!-- ITEM DETAIL -->
             <div class="col-md-5 single-rightside m-t-1">
                 <h6 class="producertag">
-                    <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.name }}</a>
+                    <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.externalName }}</a>
                 </h6>
 
                 <h1 class="h3 title">
@@ -167,6 +167,8 @@
                         <a class="nav-link" data-toggle="tab" href="#assessments-details"
                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                     </li>
+
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs") }}
                 </ul>
 
                 <div class="tab-content">
@@ -221,10 +223,10 @@
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.manufacturer' in itemData or 'all' in itemData) and item.documents[0].data.item.manufacturer.name != '' %}
+                                {% if ('item.manufacturer' in itemData or 'all' in itemData) and item.documents[0].data.item.manufacturer.externalName != '' %}
                                     <tr>
                                         <td>{{ trans("Ceres::Template.itemManufacturer") }}</td>
-                                        <td>{{ item.documents[0].data.item.manufacturer.name }}</td>
+                                        <td>{{ item.documents[0].data.item.manufacturer.externalName }}</td>
                                     </tr>
                                 {% endif %}
 
@@ -278,6 +280,8 @@
                             </table>
                         </div>
                     </div>
+
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent") }}
                 </div>
             </div>
         </div>
