@@ -76,6 +76,11 @@ var ApiService = require("services/ApiService");
                     }.bind(this));
             },
 
+            getPaymentStateText: function(paymentStateValue)
+            {
+                return Translations.Template["paymentStatus_" + paymentStateValue];
+            },
+
             showPage: function(page)
             {
                 var self = this;
