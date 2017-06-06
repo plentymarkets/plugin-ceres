@@ -6,6 +6,9 @@
     {% elseif loadingAnimationType == "spinner" %}
         {% include "Ceres::ItemList.Partials.LoadingAnimationSpinner" %}
 
+    {% else %}
+        {% include "Ceres::ItemList.Partials.LoadingAnimationBars" %}
+
     {% endif %}
 
 </div>
