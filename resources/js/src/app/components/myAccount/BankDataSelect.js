@@ -90,6 +90,7 @@ Vue.component("bank-data-select", {
         openModal: function(doUpdate)
         {
             this.doUpdate = doUpdate;
+            ValidationService.unmarkAllFields($(this.$els.bankInfoModal));
             this.bankInfoModal.show();
         },
 
