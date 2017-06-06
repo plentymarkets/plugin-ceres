@@ -14,6 +14,44 @@
     }
 }
 
+.back-to-top-center {
+	text-decoration: none;
+	opacity: .5;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+	border: 1px solid $gray-darker;
+	cursor: pointer;
+	text-align: center;
+	position: fixed;
+	bottom: -17px;
+	left: 50%;
+	width: 94px;
+	height: 50px;
+	margin-left: -47px;
+	z-index: 1000;
+	overflow: hidden;
+	background: #fff;
+	padding: 20px;
+	display: none;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.back-to-top-center i {
+	font-size: 29px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90px;
+	height: 40px;
+	display: block;
+	z-index: 1;
+}
+
 .back-to-top {
 	margin: 0;
 	position: fixed;

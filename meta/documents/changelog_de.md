@@ -1,5 +1,48 @@
 # Release Notes für Ceres
 
+## v1.2.4 (2017-06-02)
+
+### Hinzugefügt
+
+- In der Kategorieansicht wird bei Artikeln mit Varianten anstatt des "Warenkorb"-Buttons ein Button mit einem Pfeil angezeigt, der in die Einzelansicht des Artikels führt.
+- Ein Template-Container wurde hinzugefügt, um die komplette Bestellbestätigungsseite zu überschreiben.
+- Der "Nach oben"-Button kann nun unten rechts oder unten mittig angezeigt werden.
+- Im Warenkorb kann nun auch der Vorschautext eines Artikels angezeigt werden.
+- Ein Template-Container wurde hinzugefügt, um in der Einzelansicht eines Artikels neben der Beschreibung und den technischen Daten weitere Tabs mit Beschreibungstexten oder anderen Inhalten zu ergänzen.
+- Die Felder des Adressformulars für das Lieferland **Vereinigtes Königreich** können nun individuell angezeigt und validiert werden.
+- Anstelle des angezeigten Overlays nach Klick auf **Zum Warenkorb hinzufügen** kann nun auch die Warenkorbvorschau eingeblendet werden.
+
+### Geändert
+
+- In der Filteransicht wurde das Icon des "Schließen"-Buttons zu einem "x" geändert.
+- Die maximale Größe der Anzeige von Artikelinformationen im Warenkorb wurde erhöht ("Mehr"-Button).
+- Optionale Adressfelder der Adressformulare sind nicht mehr standardmäßig aktiviert.
+- Im Webshop wird nicht mehr der interne Herstellername, sondern der externe Herstellername angezeigt.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch ein Overlay für die Adresseingabe.
+
+### Behoben
+
+- Die Artikelinformationen im Warenkorb wurden nicht angezeigt. Dies wurde behoben.
+- Namen von Unterkategorien werden umgebrochen, wenn der Name länger ist, als der Name der Oberkategorie.
+- Aufgrund eines Fehlers wurde die Übersetzung des "Mehr/Weniger"-Buttons im Warenkorb nicht angezeigt. Dies wurde behoben.
+- Der Abstand zwischen den Hauptkategorien in der Navigation wurde entfernt.
+- Auf der Startseite wird in Artikelvorschauen das Bild mit der Position 0 ausgegeben.
+
+### To do
+
+- Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
+
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
+- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
 ## v1.2.3 (2017-05-19)
 
 ### Hinzugefügt
@@ -12,12 +55,6 @@
 
 - Es wurde ein Fehler behoben, wodurch die Breadcrumbs/Menüpunkte nicht korrekt funktioniert hatten.
 - Es wurde ein Fehler behoben, der dazu führte, dass Artikelbilder nicht richtig nach Position sortiert wurden, wenn eine Variante eigene Bilder hat.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
 
 ## v1.2.2 (2017-05-11)
 

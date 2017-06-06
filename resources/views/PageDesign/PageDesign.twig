@@ -10,7 +10,8 @@
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
-{% set showItemConfirm = config("Ceres.basket.add_item_to_basket_confirm") %}
+
+{% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
 
 {% set categories = services.category.getNavigationTree("item", lang) %}
 
@@ -106,7 +107,7 @@
             <!-- ./REGISTRATION MODAL -->
 
             <!-- BASKET MODAL -->
-            <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :show-overlay="{{ showItemConfirm }}"></add-item-to-basket-overlay>
+            <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
             <!-- ./BASKET MODAL -->
 
         </div>

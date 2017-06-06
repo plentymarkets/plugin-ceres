@@ -97,11 +97,11 @@ body.menu-is-visible { overflow-y : hidden; }
 		margin 		: 0;
 		padding 	: 0;
 		position 	: relative;
-		width		: 100%;
 
 		li 	{
 			width : 100%;
 			cursor: pointer;
+			float: left;
 
 			a 	{
 				color 	: inherit;
@@ -159,7 +159,6 @@ body.menu-is-visible { overflow-y : hidden; }
 				transition: all 300ms;
 				>a { padding: 1.3rem 1rem; }
 				>ul {
-
 					display 		: block;
 					visibility 		: hidden;
 					opacity 		: 0;
@@ -167,8 +166,13 @@ body.menu-is-visible { overflow-y : hidden; }
 					background 		: $menu-big-menu-bg;
 					height 			: auto;
 					top 			: 100%;
-					width 			: 100%;
 					text-align 		: center;
+					width 			: auto;
+					max-width 		: 25em;
+					min-width 		: 100%;
+					left 			: 50%;
+					transform 		: translateX(-50%);
+					word-wrap		: break-word;
 
 					>li {
 						background 	: $menu-big-menu-li-bg;

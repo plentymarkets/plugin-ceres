@@ -19,5 +19,6 @@
   "variation.availability.id",
   "variation.availability.averageDays",
   "variation.itemId",
-  "variation.releasedAt"
+  "variation.releasedAt",
+  "filter.hasChildren"
 ]

@@ -1,14 +1,14 @@
-var ResourceService     = require("services/ResourceService");
-var ModalService        = require("services/ModalService");
+const ResourceService     = require("services/ResourceService");
+const ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
     props: [
-        "showOverlay",
+        "basketAddInformation",
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             basketItem: {currentBasketItem: { }},
@@ -18,22 +18,29 @@ Vue.component("add-item-to-basket-overlay", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    ready()
     {
         ResourceService.bind("basketItem", this);
     },
 
     watch: {
-        basketItem: function()
+        basketItem()
         {
-            if (this.showOverlay)
+            if (this.basketAddInformation === "overlay")
             {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            }
+            else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0)
+            {
+                setTimeout(function()
+                {
+                    $("body").toggleClass("open-right");
+                }, 1);
             }
         }
     },
@@ -43,9 +50,9 @@ Vue.component("add-item-to-basket-overlay", {
         /**
          * check if current basket object exist and start rendering
          */
-        startRendering: function()
+        startRendering()
         {
-            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+            const render = Object.keys(this.basketItem.currentBasketItem).length != 0;
 
             if (render)
             {
@@ -57,7 +64,7 @@ Vue.component("add-item-to-basket-overlay", {
             return render;
         },
 
-        setPriceFromData: function()
+        setPriceFromData()
         {
             if (this.basketItem.currentBasketItem.calculatedPrices)
             {
@@ -69,11 +76,11 @@ Vue.component("add-item-to-basket-overlay", {
         /**
          * @returns {string}
          */
-        getImage: function()
+        getImage()
         {
-            var path = "";
+            let path = "";
 
-            for (var i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++)
+            for (let i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++)
             {
                 if (this.basketItem.currentBasketItem.variationImageList[i].path !== "")
                 {
@@ -84,25 +91,21 @@ Vue.component("add-item-to-basket-overlay", {
             return "/" + path;
         },
 
-        startCounter: function()
+        startCounter()
         {
             this.timeToClose = 10;
 
-            var timerVar = setInterval(countTimer, 1000);
-
-            var self = this;
-
-            function countTimer()
+            const timerVar = setInterval(() =>
             {
-                self.timeToClose -= 1;
+                this.timeToClose -= 1;
 
-                if (self.timeToClose === 0)
+                if (this.timeToClose === 0)
                 {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(timerVar);
                 }
-            }
+            }, 1000);
         }
     },
 
@@ -111,14 +114,14 @@ Vue.component("add-item-to-basket-overlay", {
         /**
          * returns itemData.texts[0]
          */
-        texts: function()
+        texts()
         {
             return this.basketItem.currentBasketItem.texts;
         },
 
-        imageUrl: function()
+        imageUrl()
         {
-            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
+            const img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
 
             return img.url;
         }

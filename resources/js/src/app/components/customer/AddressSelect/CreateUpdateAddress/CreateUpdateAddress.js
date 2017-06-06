@@ -65,7 +65,7 @@ Vue.component("create-update-address", {
          */
         saveAddress: function()
         {
-            if (this.modalType === "create")
+            if (this.modalType === "initial" || this.modalType === "create")
             {
                 this.createAddress();
             }

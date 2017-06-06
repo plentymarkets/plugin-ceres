@@ -1,5 +1,47 @@
 # Release Notes for Ceres
 
+## v1.2.4 (2017-06-02)
+
+### Added
+
+- For items with variations displayed in the category view, an arrow button is displayed instead of the "Shopping cart" button that will open the single item view.
+- A template container for overriding the complete order confirmation page has been added.
+- The "Back-to-top" button can now be displayed on the right at the bottom or in the middle at the bottom of the online store.
+- The preview text of an item can now be displayed in the shopping cart.
+- A template container was added for displaying additional tabs with description texts and other content next to the item description tab and technical data tab in the single item view.
+- The fields of the address form for the delivery country **United Kingdom** can now be displayed and validated individually.
+- Instead of displaying an overlay after clicking on **Add to shopping cart** the shopping cart preview can be shown.
+
+### Changed
+
+- The icon of the "Close" button has been changed in the filter view.
+- The maximum size of the area for displaying item information in the shopping cart has been increased ("More" button).
+- Optional fields of the address forms are not activated by default.
+- The external name of a manufacturer is displayed in the online store instead of the internal manufacturer name.
+- When a customer opens the checkout page and no address is available for this customer, the address form overlay will automatically open.
+
+### Fixed
+
+- Due to an error the item information were not shown in the shopping cart. This has been fixed.
+- Names of sub-categories will be wrapped to the next line if the name of the sub-category is longer than the name of the main category.
+- Due to an error the translation of the "More/less" buttons were not shown in the shopping cart. This has been fixed.
+- The margin between the main categories in the navigation has been removed.
+- The image with the position 0 will be displayed in the item previews on the homepage.
+
+### To do
+
+- In order to display the name of the manufacturer of an item in the online store, a name must be entered in the **External name** field in the **Settings » Item » Manufacturer** menu.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
+- It is not possible to search for variation numbers.
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+_ In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.3 (2017-05-19)
 
 ### Added
@@ -13,11 +55,6 @@
 - Due to an error, the breadcrumbs/menu points didn't work properly. This has been fixed.
 - Due to an error, the sorting of item images didn't work properly if a variation had its own images. This has been fixed.
 
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.2.2 (2017-05-11)
 
