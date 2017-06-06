@@ -1,5 +1,6 @@
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
+var ValidationService = require("services/ValidationService");
 
 Vue.component("user-login-handler", {
 
@@ -72,6 +73,12 @@ Vue.component("user-login-handler", {
                     self.username = "";
                     ResourceService.getResource("user").set({isLoggedIn: false});
                 });
+        },
+
+        unmarkInputFields: function()
+        {
+            ValidationService.unmarkAllFields($("#login"));
+            ValidationService.unmarkAllFields($("#registration"));
         }
     }
 });
