@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress"></address-input-group>
+        <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
 
         <div class="col-sm-5 offset-sm-7">
             <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-block">{{ trans("Ceres::Template.accRegister") }}</button>
