@@ -5,7 +5,8 @@ module.exports = (function($)
     return {
         validate         : _validate,
         getInvalidFields : _getInvalidFields,
-        markInvalidFields: _markInvalidFields
+        markInvalidFields: _markInvalidFields,
+        unmarkAllFields  : _unmarkAllFields
     };
 
     function _validate(form)
@@ -65,6 +66,18 @@ module.exports = (function($)
                     _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
                 }
             });
+        });
+    }
+
+    function _unmarkAllFields(form)
+    {
+        $form = $(form);
+
+        $form.find("[data-validate]").each(function(i, elem)
+        {
+            var $elem = $(elem);
+
+            $elem.removeClass("error");
         });
     }
 
