@@ -3030,6 +3030,10 @@ var ApiService = require("services/ApiService");
                 }.bind(this));
             },
 
+            getPaymentStateText: function getPaymentStateText(paymentStateValue) {
+                return Translations.Template["paymentStatus_" + paymentStateValue];
+            },
+
             showPage: function showPage(page) {
                 var self = this;
 
