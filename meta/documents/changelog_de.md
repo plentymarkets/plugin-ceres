@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.5 (unknown)
+
+### Geändert
+
+- Wenn ein Popup mit Benutzerdaten erneut geöffnet wird, wird die Validierung zurückgesetzt.
+
 ## v1.2.4 (2017-06-02)
 
 ### Hinzugefügt
