@@ -547,12 +547,16 @@
             "variation.id_desc"                 : "Variation ID (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
+            "variation.availability.averageDays_asc"      : "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"     : "Variation availability (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.manufacturer.name_asc"
     },
@@ -574,14 +578,18 @@
             "variation.createdAt_desc"          : "Oldest variation",
             "variation.id_asc"                  : "Variation ID (ascending)",
             "variation.id_desc"                 : "Variation ID (descending)",
+            "variation.availability.averageDays_asc"        : "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"       : "Variation availability (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -605,12 +613,16 @@
             "variation.id_desc"                 : "Variation ID (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
+            "variation.availability.averageDays_asc"        : "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"       : "Variation availability (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
-            "variation.position_asc"            : "Variation position (ascending)",
-            "variation.position_desc"           : "Variation position (descending)",
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
             "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.name_desc"       : "Manufacturer (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -636,12 +648,16 @@
             "variation.id_desc"                 : "Variation ID (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
+            "variation.availability.averageDays_asc"        : "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"       : "Variation availability (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.score"
     },
@@ -666,12 +682,16 @@
             "variation.id_desc"                 : "Variation ID (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
+            "variation.availability.averageDays_asc"        : "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"       : "Variation availability (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -696,12 +716,16 @@
             "variation.id_desc"                 : "Variation ID (descending)",
             "variation.number_asc"              : "Variation number (ascending)",
             "variation.number_desc"             : "Variation number (descending)",
+            "variation.availability.averageDays_asc": "Variation availability (ascending)",
+            "variation.availability.averageDays_desc"       : "Variation availability (descending)",
             "variation.updatedAt_asc"           : "Last variation update",
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },

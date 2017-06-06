@@ -12,10 +12,12 @@
   "salesPrices.price",
   "salesPrices.type",
   "item.id",
+  "item.manufacturer.externalName",
   "texts*",
   "variation.id",
   "variation.availability.names.name",
   "variation.availability.id",
+  "variation.availability.averageDays",
   "variation.itemId",
   "variation.releasedAt"
 ]
