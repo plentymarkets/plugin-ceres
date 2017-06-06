@@ -1,3 +1,4 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
 
 <script type="x/template" id="vue-order-history">
@@ -104,6 +105,8 @@
                                                 ${ getPaymentStateText(entry.order.properties[$index].value) }</span>
                                             </span>
                                         </div>
+
+                                        {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
