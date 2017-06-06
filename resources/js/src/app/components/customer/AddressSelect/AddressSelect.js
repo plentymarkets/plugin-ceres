@@ -1,6 +1,7 @@
 var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
+var ModalService = require("services/ModalService");
+var ValidationService = require("services/ValidationService");
 
 Vue.component("address-select", {
 
@@ -156,6 +157,7 @@ Vue.component("address-select", {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
@@ -169,6 +171,7 @@ Vue.component("address-select", {
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
