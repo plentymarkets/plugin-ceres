@@ -2972,84 +2972,82 @@ Vue.component("bank-data-select", {
 
 var ApiService = require("services/ApiService");
 
-(function ($) {
-    Vue.component("order-history", {
+Vue.component("order-history", {
 
-        props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
+    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
 
-        data: function data() {
-            return {
-                page: 1,
-                pageMax: 1,
-                countStart: 0,
-                countEnd: 0,
-                currentOrder: null,
-                isLoading: true
-            };
-        },
-        created: function created() {
-            this.$options.template = this.template;
-        },
-        ready: function ready() {
-            this.itemsPerPage = this.itemsPerPage || 10;
-            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-            this.setOrders(this.orderList);
-        },
+    data: function data() {
+        return {
+            page: 1,
+            pageMax: 1,
+            countStart: 0,
+            countEnd: 0,
+            currentOrder: null,
+            isLoading: true
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.itemsPerPage = this.itemsPerPage || 10;
+        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+        this.setOrders(this.orderList);
+    },
 
 
-        methods: {
-            setOrders: function setOrders(orderList) {
-                this.$set("orderList", orderList);
-                this.page = this.orderList.page;
-                this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
-                this.countEnd = this.orderList.page * this.itemsPerPage;
+    methods: {
+        setOrders: function setOrders(orderList) {
+            this.$set("orderList", orderList);
+            this.page = this.orderList.page;
+            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
+            this.countEnd = this.orderList.page * this.itemsPerPage;
 
-                if (this.countEnd > this.orderList.totalsCount) {
-                    this.countEnd = this.orderList.totalsCount;
-                }
-            },
-            setCurrentOrder: function setCurrentOrder(order) {
-                var _this = this;
-
-                $("#dynamic-twig-content").html("");
-                this.isLoading = true;
-
-                this.currentOrder = order;
-
-                Vue.nextTick(function () {
-                    $(_this.$els.orderDetails).modal("show");
-                });
-
-                var jsonEncodedOrder = JSON.stringify(order);
-
-                ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
-                    _this.isLoading = false;
-                    $("#dynamic-twig-content").html(response);
-                });
-            },
-            getPaymentStateText: function getPaymentStateText(paymentStates) {
-                for (var paymentState in paymentStates) {
-                    if (paymentStates[paymentState].typeId == 4) {
-                        return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
-                    }
-                }
-
-                return "";
-            },
-            showPage: function showPage(page) {
-                var _this2 = this;
-
-                if (page <= 0 || page > this.pageMax) {
-                    return;
-                }
-
-                ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
-                    _this2.setOrders(response);
-                });
+            if (this.countEnd > this.orderList.totalsCount) {
+                this.countEnd = this.orderList.totalsCount;
             }
+        },
+        setCurrentOrder: function setCurrentOrder(order) {
+            var _this = this;
+
+            $("#dynamic-twig-content").html("");
+            this.isLoading = true;
+
+            this.currentOrder = order;
+
+            Vue.nextTick(function () {
+                $(_this.$els.orderDetails).modal("show");
+            });
+
+            var jsonEncodedOrder = JSON.stringify(order);
+
+            ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
+                _this.isLoading = false;
+                $("#dynamic-twig-content").html(response);
+            });
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            for (var paymentState in paymentStates) {
+                if (paymentStates[paymentState].typeId == 4) {
+                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                }
+            }
+
+            return "";
+        },
+        showPage: function showPage(page) {
+            var _this2 = this;
+
+            if (page <= 0 || page > this.pageMax) {
+                return;
+            }
+
+            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
+                _this2.setOrders(response);
+            });
         }
-    });
-})(jQuery);
+    }
+});
 
 },{"services/ApiService":69}],43:[function(require,module,exports){
 "use strict";
