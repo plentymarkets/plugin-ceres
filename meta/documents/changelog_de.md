@@ -4,12 +4,17 @@
 
 ### Hinzugefügt
 
+- In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
+- Es wurde ein LayoutContainer hinzugefügt, um in der Auftragsübersicht zusätzliche Daten anzeigen zu können.
+
 ### Geändert
 
 - Das Registrierungs-Overlay schließt sich nun bei einem Fehler nichtmehr.
 - In Ceres sind jetzt standardmäßig die Notifications an.
 
 ### Behoben
+
+- In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
 
 ### Bekannte Probleme
 
