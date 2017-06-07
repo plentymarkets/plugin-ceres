@@ -101,8 +101,8 @@
                                         </div>
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
-                                            <span v-for="propertyKey in entry.order.properties" v-if="entry.order.properties[$index].typeId == 4" class="col-xs-6 col-sm-7">
-                                                ${ getPaymentStateText(entry.order.properties[$index].value) }</span>
+                                            <span class="col-xs-6 col-sm-7">
+                                                ${ getPaymentStateText(entry.order.properties) }
                                             </span>
                                         </div>
 

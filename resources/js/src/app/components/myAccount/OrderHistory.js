@@ -1,4 +1,4 @@
-var ApiService = require("services/ApiService");
+const ApiService = require("services/ApiService");
 
 (function($)
 {
@@ -12,7 +12,7 @@ var ApiService = require("services/ApiService");
             "template"
         ],
 
-        data: function()
+        data()
         {
             return {
                 page: 1,
@@ -24,12 +24,12 @@ var ApiService = require("services/ApiService");
             };
         },
 
-        created: function()
+        created()
         {
             this.$options.template = this.template;
         },
 
-        ready: function()
+        ready()
         {
             this.itemsPerPage = this.itemsPerPage || 10;
             this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
@@ -38,7 +38,7 @@ var ApiService = require("services/ApiService");
 
         methods: {
 
-            setOrders: function(orderList)
+            setOrders(orderList)
             {
                 this.$set("orderList", orderList);
                 this.page = this.orderList.page;
@@ -52,39 +52,44 @@ var ApiService = require("services/ApiService");
 
             },
 
-            setCurrentOrder: function(order)
+            setCurrentOrder(order)
             {
                 $("#dynamic-twig-content").html("");
                 this.isLoading = true;
 
                 this.currentOrder = order;
-                var self = this;
 
-                Vue.nextTick(function()
+                Vue.nextTick(() =>
                 {
-                    $(self.$els.orderDetails).modal("show");
+                    $(this.$els.orderDetails).modal("show");
                 });
 
-                var jsonEncodedOrder = JSON.stringify(order);
+                const jsonEncodedOrder = JSON.stringify(order);
 
                 ApiService
                     .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder)
-                    .done(function(response)
+                    .done(response =>
                     {
                         this.isLoading = false;
                         $("#dynamic-twig-content").html(response);
-                    }.bind(this));
+                    });
             },
 
-            getPaymentStateText: function(paymentStateValue)
+            getPaymentStateText(paymentStates)
             {
-                return Translations.Template["paymentStatus_" + paymentStateValue];
+                for (const paymentState in paymentStates)
+                {
+                    if (paymentStates[paymentState].typeId == 4)
+                    {
+                        return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                    }
+                }
+
+                return "";
             },
 
-            showPage: function(page)
+            showPage(page)
             {
-                var self = this;
-
                 if (page <= 0 || page > this.pageMax)
                 {
                     return;
@@ -92,9 +97,9 @@ var ApiService = require("services/ApiService");
 
                 ApiService
                     .get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage)
-                    .done(function(response)
+                    .done(response =>
                     {
-                        self.setOrders(response);
+                        this.setOrders(response);
                     });
             }
         }
