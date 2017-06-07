@@ -1,7 +1,8 @@
 var ApiService = require("services/ApiService");
 var AddressService = require("services/AddressService");
 var ModalService = require("services/ModalService");
-var ValidationService = require("services/ValidationService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
 

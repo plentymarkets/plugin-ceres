@@ -1,6 +1,7 @@
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
-var ValidationService = require("services/ValidationService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("user-login-handler", {
 
