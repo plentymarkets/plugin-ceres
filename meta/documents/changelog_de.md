@@ -13,6 +13,7 @@
 - In Ceres sind jetzt standardmäßig die Notifications an.
 - Die Sortierungen haben neue Übersetzungen.
 - Wenn ein Popup mit Benutzerdaten erneut geöffnet wird, wird die Validierung zurückgesetzt.
+- Kategorien ohne Übersetzung werden nun nichtmehr ausgegeben.
 
 ### Behoben
 
