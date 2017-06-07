@@ -2392,12 +2392,12 @@ Vue.component("registration", {
             ApiService.post("/rest/io/customer", userObject).done(function (response) {
                 ApiService.setToken(response);
 
-                if (document.getElementById(component.modalElement) !== null) {
-                    ModalService.findModal(document.getElementById(component.modalElement)).hide();
-                }
-
                 if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+
+                    if (document.getElementById(component.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
                 } else {
                     NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
                 }
