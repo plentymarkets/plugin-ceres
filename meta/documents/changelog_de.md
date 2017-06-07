@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.5 (unknown)
+
+### Behoben
+
+- Es wurde ein Fehler behoben, welcher in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
+
 ## v1.2.4 (2017-06-02)
 
 ### Hinzugefügt
