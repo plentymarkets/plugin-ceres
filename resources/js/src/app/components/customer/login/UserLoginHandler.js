@@ -1,5 +1,7 @@
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
+const ApiService = require("services/ApiService");
+const ResourceService = require("services/ResourceService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("user-login-handler", {
 
@@ -8,7 +10,7 @@ Vue.component("user-login-handler", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             username: "",
@@ -16,7 +18,7 @@ Vue.component("user-login-handler", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -24,7 +26,7 @@ Vue.component("user-login-handler", {
     /**
      * Add the global event listener for login and logout
      */
-    ready: function()
+    ready()
     {
         ResourceService.bind("user", this, "isLoggedIn");
 
@@ -37,7 +39,7 @@ Vue.component("user-login-handler", {
          * Set the current user logged in
          * @param userData
          */
-        setUsername: function(userData)
+        setUsername(userData)
         {
             if (userData)
             {
@@ -55,23 +57,25 @@ Vue.component("user-login-handler", {
         /**
          * Adds login/logout event listeners
          */
-        addEventListeners: function()
+        addEventListeners()
         {
-            var self = this;
+            ApiService.listen("AfterAccountAuthentication", userData =>
+            {
+                this.setUsername(userData.accountContact);
+                ResourceService.getResource("user").set({isLoggedIn: true});
+            });
 
-            ApiService.listen("AfterAccountAuthentication",
-                function(userData)
-                {
-                    self.setUsername(userData.accountContact);
-                    ResourceService.getResource("user").set({isLoggedIn: true});
-                });
+            ApiService.listen("AfterAccountContactLogout", () =>
+            {
+                this.username = "";
+                ResourceService.getResource("user").set({isLoggedIn: false});
+            });
+        },
 
-            ApiService.listen("AfterAccountContactLogout",
-                function()
-                {
-                    self.username = "";
-                    ResourceService.getResource("user").set({isLoggedIn: false});
-                });
+        unmarkInputFields()
+        {
+            ValidationService.unmarkAllFields($("#login"));
+            ValidationService.unmarkAllFields($("#registration"));
         }
     }
 });

@@ -1,6 +1,8 @@
-var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
-var AddressService = require("services/AddressService");
+const ApiService = require("services/ApiService");
+const AddressService = require("services/AddressService");
+const ModalService = require("services/ModalService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
 
@@ -59,13 +61,10 @@ Vue.component("address-select", {
          */
         addEventListener()
         {
-            var self = this;
-
-            ApiService.listen("AfterAccountContactLogout",
-                function()
-                {
-                    self.cleanUserAddressData();
-                });
+            ApiService.listen("AfterAccountContactLogout", () =>
+            {
+                this.cleanUserAddressData();
+            });
         },
 
         /**
@@ -73,9 +72,9 @@ Vue.component("address-select", {
          */
         loadSelectedAddress()
         {
-            var isSelectedAddressSet = false;
+            let isSelectedAddressSet = false;
 
-            for (var index in this.addressList)
+            for (const index in this.addressList)
             {
                 if (this.addressList[index].id === this.selectedAddressId)
                 {
@@ -96,7 +95,7 @@ Vue.component("address-select", {
          */
         cleanUserAddressData()
         {
-            this.addressList = this.addressList.filter(function(value)
+            this.addressList = this.addressList.filter(value =>
             {
                 return value.id === -99;
             });
@@ -156,6 +155,7 @@ Vue.component("address-select", {
             this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
@@ -169,6 +169,7 @@ Vue.component("address-select", {
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
@@ -189,17 +190,12 @@ Vue.component("address-select", {
          */
         deleteAddress()
         {
-            var self = this;
-            var address = this.addressToDelete;
-            var addressType = this.addressType;
-
-            AddressService.deleteAddress(address.id, addressType)
-                .done(function()
+            AddressService.deleteAddress(this.addressToDelete.id, this.addressType)
+                .done(() =>
                 {
-                    self.closeDeleteModal();
-                    self.removeIdFromList(address.id);
+                    this.closeDeleteModal();
+                    this.removeIdFromList(address.id);
                 });
-
         },
 
         /**
@@ -223,7 +219,7 @@ Vue.component("address-select", {
          */
         updateHeadline()
         {
-            var headline;
+            let headline;
 
             if (this.modalType === "initial")
             {
@@ -266,7 +262,7 @@ Vue.component("address-select", {
          */
         removeIdFromList(id)
         {
-            for (var i in this.addressList)
+            for (const i in this.addressList)
             {
                 if (this.addressList[i].id === id)
                 {
