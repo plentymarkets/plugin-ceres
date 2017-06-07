@@ -637,8 +637,6 @@
             "variation.updatedAt_desc"          : "First variation update",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)",
             "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
             "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
         },
