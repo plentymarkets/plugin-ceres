@@ -1,5 +1,32 @@
 # Release Notes für Ceres
 
+## v1.2.5 (unknown)
+
+### Hinzugefügt
+
+- In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
+- Es wurde ein LayoutContainer hinzugefügt, um in der Auftragsübersicht zusätzliche Daten anzeigen zu können.
+
+### Geändert
+
+- Das Registrierungs-Overlay schließt sich nun bei einem Fehler nichtmehr.
+- In Ceres sind jetzt standardmäßig die Notifications an.
+- Die Sortierungen haben neue Übersetzungen.
+
+### Behoben
+
+- In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
+- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
 ## v1.2.4 (2017-06-02)
 
 ### Hinzugefügt
@@ -31,17 +58,6 @@
 ### To do
 
 - Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
-
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
-- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.3 (2017-05-19)
 
