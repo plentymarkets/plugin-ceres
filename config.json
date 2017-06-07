@@ -567,7 +567,7 @@
             "billing_address.title"     :"Title"
 
         },
-        "default"                   : ""
+        "default"                   : "billing_address.name1, billing_address.salutation"
     },
     {
         "tab"                       : "Checkout and My account",
@@ -605,7 +605,7 @@
         "delivery_address.title"      : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
@@ -642,7 +642,7 @@
         "billing_address.title"     : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "billing_address.name1, billing_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
@@ -678,7 +678,7 @@
         "delivery_address.title"     : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
