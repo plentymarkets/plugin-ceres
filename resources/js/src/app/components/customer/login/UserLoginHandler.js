@@ -59,19 +59,17 @@ Vue.component("user-login-handler", {
          */
         addEventListeners()
         {
-            ApiService.listen("AfterAccountAuthentication",
-                function(userData)
-                {
-                    this.setUsername(userData.accountContact);
-                    ResourceService.getResource("user").set({isLoggedIn: true});
-                }.bind(this));
+            ApiService.listen("AfterAccountAuthentication", userData =>
+            {
+                this.setUsername(userData.accountContact);
+                ResourceService.getResource("user").set({isLoggedIn: true});
+            });
 
-            ApiService.listen("AfterAccountContactLogout",
-                function()
-                {
-                    this.username = "";
-                    ResourceService.getResource("user").set({isLoggedIn: false});
-                }.bind(this));
+            ApiService.listen("AfterAccountContactLogout", () =>
+            {
+                this.username = "";
+                ResourceService.getResource("user").set({isLoggedIn: false});
+            });
         },
 
         unmarkInputFields()

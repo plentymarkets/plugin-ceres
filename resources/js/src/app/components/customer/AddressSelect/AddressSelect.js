@@ -61,11 +61,10 @@ Vue.component("address-select", {
          */
         addEventListener()
         {
-            ApiService.listen("AfterAccountContactLogout",
-                function()
-                {
-                    self.cleanUserAddressData();
-                });
+            ApiService.listen("AfterAccountContactLogout", () =>
+            {
+                this.cleanUserAddressData();
+            });
         },
 
         /**
@@ -96,7 +95,7 @@ Vue.component("address-select", {
          */
         cleanUserAddressData()
         {
-            this.addressList = this.addressList.filter(function(value)
+            this.addressList = this.addressList.filter(value =>
             {
                 return value.id === -99;
             });
@@ -192,12 +191,11 @@ Vue.component("address-select", {
         deleteAddress()
         {
             AddressService.deleteAddress(this.addressToDelete.id, this.addressType)
-                .done(function()
+                .done(() =>
                 {
                     this.closeDeleteModal();
                     this.removeIdFromList(address.id);
-                }.bind(this));
-
+                });
         },
 
         /**
