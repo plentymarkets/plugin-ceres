@@ -1,5 +1,6 @@
-var ValidationService = require("services/ValidationService");
 var ApiService = require("services/ApiService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("guest-login", {
 
