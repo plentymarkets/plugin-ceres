@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.5 (unknown)
+
+### Geändert
+
+- Die Sortierungen haben neue Übersetzungen.
+
 ## v1.2.4 (2017-06-02)
 
 ### Hinzugefügt
