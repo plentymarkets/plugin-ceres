@@ -768,11 +768,11 @@ Vue.component("address-input-group", {
     methods: {
         /**
          * Update the address input group to show.
-         * @param value
+         * @param shippingCountry
          */
-        onSelectedCountryChanged: function onSelectedCountryChanged(value) {
-            if (this.countryLocaleList.indexOf(value) > 0) {
-                this.localeToShow = value;
+        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
+                this.localeToShow = shippingCountry.isoCode2;
             } else {
                 this.localeToShow = this.defaultCountry;
             }
@@ -1373,9 +1373,6 @@ Vue.component("country-select", {
     },
 
     watch: {
-        /**
-         * Add watcher to handle the country changed
-         */
         selectedCountryId: function selectedCountryId() {
             this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
@@ -1383,7 +1380,7 @@ Vue.component("country-select", {
             if (this.selectedCountry) {
                 this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry.isoCode2);
+                this.$dispatch("selected-country-changed", this.selectedCountry);
             }
         }
     }
