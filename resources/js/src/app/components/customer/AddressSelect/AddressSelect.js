@@ -1,6 +1,6 @@
-var ApiService = require("services/ApiService");
-var AddressService = require("services/AddressService");
-var ModalService = require("services/ModalService");
+const ApiService = require("services/ApiService");
+const AddressService = require("services/AddressService");
+const ModalService = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 
@@ -61,8 +61,6 @@ Vue.component("address-select", {
          */
         addEventListener()
         {
-            var self = this;
-
             ApiService.listen("AfterAccountContactLogout",
                 function()
                 {
@@ -75,9 +73,9 @@ Vue.component("address-select", {
          */
         loadSelectedAddress()
         {
-            var isSelectedAddressSet = false;
+            let isSelectedAddressSet = false;
 
-            for (var index in this.addressList)
+            for (const index in this.addressList)
             {
                 if (this.addressList[index].id === this.selectedAddressId)
                 {
@@ -193,16 +191,12 @@ Vue.component("address-select", {
          */
         deleteAddress()
         {
-            var self = this;
-            var address = this.addressToDelete;
-            var addressType = this.addressType;
-
-            AddressService.deleteAddress(address.id, addressType)
+            AddressService.deleteAddress(this.addressToDelete.id, this.addressType)
                 .done(function()
                 {
-                    self.closeDeleteModal();
-                    self.removeIdFromList(address.id);
-                });
+                    this.closeDeleteModal();
+                    this.removeIdFromList(address.id);
+                }.bind(this));
 
         },
 
@@ -227,7 +221,7 @@ Vue.component("address-select", {
          */
         updateHeadline()
         {
-            var headline;
+            let headline;
 
             if (this.modalType === "initial")
             {
@@ -270,7 +264,7 @@ Vue.component("address-select", {
          */
         removeIdFromList(id)
         {
-            for (var i in this.addressList)
+            for (const i in this.addressList)
             {
                 if (this.addressList[i].id === id)
                 {

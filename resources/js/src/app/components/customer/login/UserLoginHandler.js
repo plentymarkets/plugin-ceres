@@ -1,5 +1,5 @@
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
+const ApiService = require("services/ApiService");
+const ResourceService = require("services/ResourceService");
 
 import ValidationService from "services/ValidationService";
 
@@ -10,7 +10,7 @@ Vue.component("user-login-handler", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             username: "",
@@ -18,7 +18,7 @@ Vue.component("user-login-handler", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -26,7 +26,7 @@ Vue.component("user-login-handler", {
     /**
      * Add the global event listener for login and logout
      */
-    ready: function()
+    ready()
     {
         ResourceService.bind("user", this, "isLoggedIn");
 
@@ -39,7 +39,7 @@ Vue.component("user-login-handler", {
          * Set the current user logged in
          * @param userData
          */
-        setUsername: function(userData)
+        setUsername(userData)
         {
             if (userData)
             {
@@ -57,26 +57,24 @@ Vue.component("user-login-handler", {
         /**
          * Adds login/logout event listeners
          */
-        addEventListeners: function()
+        addEventListeners()
         {
-            var self = this;
-
             ApiService.listen("AfterAccountAuthentication",
                 function(userData)
                 {
-                    self.setUsername(userData.accountContact);
+                    this.setUsername(userData.accountContact);
                     ResourceService.getResource("user").set({isLoggedIn: true});
-                });
+                }.bind(this));
 
             ApiService.listen("AfterAccountContactLogout",
                 function()
                 {
-                    self.username = "";
+                    this.username = "";
                     ResourceService.getResource("user").set({isLoggedIn: false});
-                });
+                }.bind(this));
         },
 
-        unmarkInputFields: function()
+        unmarkInputFields()
         {
             ValidationService.unmarkAllFields($("#login"));
             ValidationService.unmarkAllFields($("#registration"));
