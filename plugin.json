@@ -395,6 +395,11 @@
             "description"   : "Add content after totals on the order confirmation page."
         },
         {
+            "key"           : "MyAccount.OrderHistoryPaymentInformation",
+            "name"          : "My account: Add content in order history after the order informations",
+            "description"   : "Add content in order history after the order informations."
+        },
+        {
             "key"           : "CategoryItem.BeforePrices",
             "name"          : "Category item list: Before prices container",
             "description"   : "Add content before the prices in the category item view."
