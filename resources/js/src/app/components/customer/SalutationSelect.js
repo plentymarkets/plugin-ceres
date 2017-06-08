@@ -37,5 +37,10 @@ Vue.component("salutation-select", {
         {
             this.currentSalutation = this.salutations.en;
         }
+    },
+
+    ready: function()
+{
+        this.addressData.addressSalutation = 0;
     }
 });
