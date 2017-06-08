@@ -19,6 +19,7 @@
 
 - In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
 - Es wurde ein Fehler behoben, welcher in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
+- Es wurde ein Fehler behoben, welcher einen Validationsfehler beim anlegen von Adressen verursacht hat.
 
 ### Bekannte Probleme
 
