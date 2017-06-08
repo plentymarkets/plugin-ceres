@@ -11,7 +11,7 @@
         <div class="form-group">
 
             <div class="row m-b-1">
-                <div class="col-xs-12 col-md-9 col-lg-8">
+                <div class="col-xs-12 col-md-12 col-lg-12">
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix" v-if="orderList.totalsCount > itemsPerPage">
                         <div class="pull-xs-left">
@@ -86,12 +86,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-8">
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
                                         </div>
-                                        <div class="row">
+                                        <div class="row my-account-no-line">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">${ entry.order.statusName }</span>
                                         </div>
@@ -109,8 +109,9 @@
                                         {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}
                                     </div>
 
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-4">
                                         <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("Ceres::Template.orderDetails") }}</button>
+                                        <button class="btn btn-primary btn-block">{{ trans("Ceres::Template.myAccountChangePayment") }}</button>
                                     </div>
                                 </div>
                             </div>
