@@ -9,7 +9,7 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
         {% if "billing_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
-                    <salutation-select template="#vue-salutation-select" :address-data="addressData"></salutation-select>
+                    <salutation-select template="#vue-salutation-select" :enabled-fields="{{ addressFields | json_encode() }}" :address-data="addressData"></salutation-select>
                     <label for="txtSalutation${_uid}">{{ trans("Ceres::Template.addressSalutation") }}{% if "billing_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>

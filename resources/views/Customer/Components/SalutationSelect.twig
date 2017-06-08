@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-salutation-select">
     <select  v-model="addressData.addressSalutation" class="custom-select">
-        <option v-bind:value="$index" :selected="addressData.addressSalutation === $index" v-for="salutation in currentSalutation">
-            ${ salutation }
+        <option v-bind:value="salutation.id" :selected="addressData.addressSalutation === $index" v-for="salutation in currentSalutation">
+            ${ salutation.value }
         </option>
     </select>
 </script>
