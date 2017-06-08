@@ -1,6 +1,7 @@
 const ApiService = require("services/ApiService");
 const AddressService = require("services/AddressService");
 const ModalService = require("services/ModalService");
+const ResourceService = require("services/ResourceService");
 
 import ValidationService from "services/ValidationService";
 
@@ -23,7 +24,8 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            localization: {}
         };
     },
 
@@ -33,6 +35,7 @@ Vue.component("address-select", {
     created()
     {
         this.$options.template = this.template;
+        ResourceService.bind("localization", this);
 
         this.addEventListener();
     },
@@ -142,7 +145,7 @@ Vue.component("address-select", {
         showInitialAddModal()
         {
             this.modalType = "initial";
-            this.addressToEdit = {};
+            this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
             this.updateHeadline();
             this.addressModal.show();
         },
@@ -153,7 +156,7 @@ Vue.component("address-select", {
         showAddModal()
         {
             this.modalType = "create";
-            this.addressToEdit = {};
+            this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
             this.updateHeadline();
             ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();

@@ -828,6 +828,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ApiService = require("services/ApiService");
 var AddressService = require("services/AddressService");
 var ModalService = require("services/ModalService");
+var ResourceService = require("services/ResourceService");
 
 Vue.component("address-select", {
 
@@ -841,7 +842,8 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            localization: {}
         };
     },
 
@@ -851,6 +853,7 @@ Vue.component("address-select", {
      */
     created: function created() {
         this.$options.template = this.template;
+        ResourceService.bind("localization", this);
 
         this.addEventListener();
     },
@@ -953,7 +956,7 @@ Vue.component("address-select", {
          */
         showInitialAddModal: function showInitialAddModal() {
             this.modalType = "initial";
-            this.addressToEdit = {};
+            this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
             this.updateHeadline();
             this.addressModal.show();
         },
@@ -964,7 +967,7 @@ Vue.component("address-select", {
          */
         showAddModal: function showAddModal() {
             this.modalType = "create";
-            this.addressToEdit = {};
+            this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
             this.updateHeadline();
             _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
@@ -1088,7 +1091,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":68,"services/ApiService":69,"services/ModalService":74,"services/ValidationService":78}],15:[function(require,module,exports){
+},{"services/AddressService":68,"services/ApiService":69,"services/ModalService":74,"services/ResourceService":76,"services/ValidationService":78}],15:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
