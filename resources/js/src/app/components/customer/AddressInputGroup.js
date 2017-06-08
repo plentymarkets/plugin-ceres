@@ -36,13 +36,13 @@ Vue.component("address-input-group", {
     {
         /**
          * Update the address input group to show.
-         * @param value
+         * @param shippingCountry
          */
-        onSelectedCountryChanged(value)
+        onSelectedCountryChanged(shippingCountry)
         {
-            if (this.countryLocaleList.indexOf(value) > 0)
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
-                this.localeToShow = value;
+                this.localeToShow = shippingCountry.isoCode2;
             }
             else
             {

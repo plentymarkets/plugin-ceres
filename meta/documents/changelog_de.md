@@ -12,10 +12,14 @@
 - Das Registrierungs-Overlay schließt sich nun bei einem Fehler nichtmehr.
 - In Ceres sind jetzt standardmäßig die Notifications an.
 - Die Sortierungen haben neue Übersetzungen.
+- Wenn ein Popup mit Benutzerdaten erneut geöffnet wird, wird die Validierung zurückgesetzt.
+- Kategorien ohne Übersetzung werden nun nichtmehr ausgegeben.
 
 ### Behoben
 
 - In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
+- Es wurde ein Fehler behoben, welcher in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
+- Es wurde ein Fehler behoben, welcher einen Validationsfehler beim anlegen von Adressen verursacht hat.
 
 ### Bekannte Probleme
 

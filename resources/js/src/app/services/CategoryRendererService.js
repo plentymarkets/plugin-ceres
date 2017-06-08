@@ -1,7 +1,7 @@
 const ItemListService = require("services/ItemListService");
 const ResourceService = require("services/ResourceService");
-var _categoryTree = {};
-var _categoryBreadcrumbs = [];
+let _categoryTree = {};
+let _categoryBreadcrumbs = [];
 
 /**
  * render items in relation to location
@@ -20,7 +20,7 @@ export function renderItems(currentCategory)
     {
         window.open(_getScopeUrl(currentCategory), "_self");
     }
-    else
+    else if (currentCategory.details.length)
     {
         _handleCurrentCategory(currentCategory);
     }
@@ -86,7 +86,7 @@ export function getScopeUrl(currentCategory, scopeUrl, categories)
 
     for (var category in categories)
     {
-        if (categories[category].id == currentCategory.id)
+        if (categories[category].id == currentCategory.id && categories[category].details.length)
         {
             scopeUrl += "/" + categories[category].details[0].nameUrl;
 
@@ -95,7 +95,7 @@ export function getScopeUrl(currentCategory, scopeUrl, categories)
             return scopeUrl;
         }
 
-        if (categories[category].children)
+        if (categories[category].children && categories[category].details.length)
         {
             var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
 
@@ -113,4 +113,7 @@ export function getScopeUrl(currentCategory, scopeUrl, categories)
     return "";
 }
 
-export default {getScopeUrl, renderItems};
+export default {
+    getScopeUrl,
+    renderItems
+};
