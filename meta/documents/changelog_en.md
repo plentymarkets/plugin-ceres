@@ -1,5 +1,37 @@
 # Release Notes for Ceres
 
+## v1.2.5 (2017-06-08)
+
+### Added
+
+- The payment method and the payment status are now be displayed in the order history.
+- The template container `MyAccount.OrderHistoryPaymentInformation` for displaying additional information in the order history of the **My account** area has been added.
+
+### Changed
+
+- The registration overlay will not close if an error occurs.
+- Online store notifications are now activated by default for Ceres.
+- Sorting options for the category view have new translation texts.
+- Validation will be reset if a user data overlay is opened again.
+- Categories for which no translation was saved will not be displayed if the respective language is selected in the online store.
+
+### Fixed
+
+- The order status is displayed again in the order history.
+- Due to an error, item images could sometimes not be loaded in the category view. This has been fixed.
+- Due to an error validation during creating an address failed. This has been fixed.
+
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
+- It is not possible to search for variation numbers.
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+_ In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.4 (2017-06-02)
 
 ### Added
@@ -31,16 +63,6 @@
 ### To do
 
 - In order to display the name of the manufacturer of an item in the online store, a name must be entered in the **External name** field in the **Settings » Item » Manufacturer** menu.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
-- It is not possible to search for variation numbers.
-- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-_ In the mobile view, the navigation will remain open after switching the category.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.3 (2017-05-19)
 
