@@ -1,5 +1,6 @@
 var AddressService = require("services/AddressService");
-var ValidationService = require("services/ValidationService");
+
+import ValidationService from "services/ValidationService";
 
 Vue.component("create-update-address", {
 

@@ -726,7 +726,7 @@
             "log_messages"      : "Log messages",
             "show_error_code"   : "Show error codes"
         },
-        "default"           : ""
+        "default"           : "print_errors, print_success"
     },
     {
         "tab"               : "Logging and performance",
