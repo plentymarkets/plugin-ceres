@@ -1,3 +1,6 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+
 <script type="x/template" id="vue-order-history">
 
     <div class="page-content history container-max" v-if="orderList.totalsCount">
@@ -90,8 +93,20 @@
                                         </div>
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.status.frontendName }</span>
+                                            <span class="col-xs-6 col-sm-7">${ entry.order.statusName }</span>
                                         </div>
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">${ entry.paymentMethodName }</span>
+                                        </div>
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
+                                            <span class="col-xs-6 col-sm-7">
+                                                ${ getPaymentStateText(entry.order.properties) }
+                                            </span>
+                                        </div>
+
+                                        {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}
                                     </div>
 
                                     <div class="col-xs-12 col-md-6">
@@ -113,16 +128,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h3 class="modal-title">{{ trans("Ceres::Template.orderDetails") }}</h3>
                             </div>
-                            <div class="modal-body" style="min-height:350px">
-                                <div class="loading-animation-frame col-xs-12 col-lg-12" v-if="isLoading">
-                                    <div class="loading-animation">
-                                        <div class="rect1"></div>
-                                        <div class="rect2"></div>
-                                        <div class="rect3"></div>
-                                        <div class="rect4"></div>
-                                        <div class="rect5"></div>
-                                    </div>
-                                </div>
+                            <div class="modal-body" :class="{'loading': isLoading}" style="min-height:350px">
+                                {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
                                 <div id="dynamic-twig-content">
                                     {# DYNAMIC ADD CONTENT #}
                                 </div>

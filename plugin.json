@@ -1,5 +1,5 @@
 {
-    "version"           : "1.2.4",
+    "version"           : "1.2.5",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -185,18 +185,18 @@
         },
         {
             "key"           : "SingleItem.AddDetailTabs",
-            "name"          : "Single item: Add detail tabs to the tab menu on the single item",
-            "description"   : "Add detail tabs to the tab menu on the single item view."
+            "name"          : "Single item: Add detail tabs",
+            "description"   : "Add additional tabs to the tab menu in the single item view."
         },
         {
             "key"           : "SingleItem.AddDetailTabsContent",
-            "name"          : "Single item: Add content to the detail tabs on the single item",
-            "description"   : "Add content to the detail tabs on the single item view."
+            "name"          : "Single item: Add content to detail tabs",
+            "description"   : "Add content to the detail tabs in the single item view."
         },
         {
             "key"           : "SingleItem.ItemListContainer",
             "name"          : "Single item: Container for item lists",
-            "description"   : "Add item lists to the single item"
+            "description"   : "Add item lists in the single item view."
         },
         {
             "key"           : "BasketTotals.BeforeItemSum",
@@ -393,6 +393,11 @@
             "key"           : "OrderConfirmation.AfterTotals",
             "name"          : "Order confirmation: Add content after totals",
             "description"   : "Add content after totals on the order confirmation page."
+        },
+        {
+            "key"           : "MyAccount.OrderHistoryPaymentInformation",
+            "name"          : "My account: Additional payment information",
+            "description"   : "Add additional payment information after the order information on the My account page."
         },
         {
             "key"           : "CategoryItem.BeforePrices",

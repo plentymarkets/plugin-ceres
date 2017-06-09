@@ -1,10 +1,13 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
+  },
+  "scripts": {
+    "merge": "git checkout development && git pull origin development && git checkout beta && git pull origin beta && git merge development && git push -u origin beta && git checkout stable && git pull origin stable && git merge beta && git push -u origin stable"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",
