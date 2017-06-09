@@ -72,5 +72,13 @@ Vue.component("salutation-select", {
 
     ready: function () {
         this.addressData.addressSalutation = 0;
+    },
+
+    methods: {
+        changeValue: function() {
+            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
+                this.addressData.name1 = "";
+            }
+        }
     }
 });
