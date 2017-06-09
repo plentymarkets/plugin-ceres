@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <button v-if="isChangePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal">
+    <button v-if="isChangePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
@@ -62,7 +62,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" @click="changePaymentMethod()">
                             <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.myAccountChangePaymentNow") }}
                         </button>
                     </div>

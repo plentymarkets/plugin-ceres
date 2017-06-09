@@ -1,4 +1,5 @@
 const ModalService        = require("services/ModalService");
+const ApiService          = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
@@ -46,6 +47,24 @@ Vue.component("change-payment-method", {
             this.getInitialPaymentMethod();
 
             this.changePaymentModal.show();
+        },
+
+        closeModal()
+        {
+            this.changePaymentModal.hide();
+        },
+
+        changePaymentMethod()
+        {
+            ApiService.post("/rest/io/order/payment?orderId=" + this.currentOrder.order.id + "&paymentMethodId=" + this.paymentMethod)
+                .done(response =>
+                {
+                    this.closeModal();
+                })
+                .fail(() =>
+                {
+                    this.closeModal();
+                });
         },
 
         getInitialPaymentMethod()
