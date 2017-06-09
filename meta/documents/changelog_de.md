@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.6 (unknown)
+
+### Geändert
+
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+
 ## v1.2.5 (2017-06-08)
 
 ### Behoben
