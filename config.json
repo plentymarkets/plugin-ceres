@@ -573,8 +573,8 @@
             "variation.position_desc"           : "Variation position (descending)",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.manufacturer.name_asc"
     },
@@ -606,8 +606,8 @@
             "variation.position_desc"           : "Variation position (descending)",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -637,8 +637,8 @@
             "variation.updatedAt_desc"          : "First variation update",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -672,8 +672,8 @@
             "variation.position_desc"           : "Variation position (descending)",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.score"
     },
@@ -706,8 +706,8 @@
             "variation.position_desc"           : "Variation position (descending)",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },
@@ -740,8 +740,8 @@
             "variation.position_desc"           : "Variation position (descending)",
             "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
             "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
-            "item.manufacturer.pos_asc"         : "Manufacturer position (ascending)",
-            "item.manufacturer.pos_desc"        : "Manufacturer position (descending)"
+            "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
+            "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.notSelected"
     },

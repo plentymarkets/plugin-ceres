@@ -12,6 +12,7 @@
   "salesPrices.price",
   "salesPrices.type",
   "item.id",
+  "item.manufacturer.position",
   "item.manufacturer.externalName",
   "texts*",
   "variation.id",
