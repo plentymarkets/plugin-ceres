@@ -2,6 +2,12 @@
 
 ## v1.2.5 (2017-06-08)
 
+### Behoben
+
+- Auf der Startseite wird verlinkt der "Alle anzeigen" Button der ersten Kategorieliste auf die richtige Kategorie.
+
+## v1.2.5 (2017-06-08)
+
 ### Hinzugefügt
 
 - In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.

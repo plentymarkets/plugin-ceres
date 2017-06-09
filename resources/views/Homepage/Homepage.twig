@@ -306,7 +306,7 @@
                                 {% if homepageContainer6 | trim is empty %}
                                     <div class="section-header m-b-1">
                                         <h4>{{ category3.details[0].name }}</h4>
-                                        <a href="documents/{{ services.category.getURL(category3.id, lang) }}"
+                                        <a href="{{ services.category.getURL(category3, lang) }}"
                                            class="section-link-all"><i
                                                     class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}</a>
                                     </div>
