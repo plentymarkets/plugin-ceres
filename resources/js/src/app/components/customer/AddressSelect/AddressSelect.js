@@ -1,6 +1,7 @@
 var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
 var AddressService = require("services/AddressService");
+var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("address-select", {
 
@@ -143,7 +144,16 @@ Vue.component("address-select", {
         showInitialAddModal()
         {
             this.modalType = "initial";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0};
+            }
+            else
+            {
+                this.addressToEdit = {};
+            }
+
             this.updateHeadline();
             this.addressModal.show();
         },
@@ -154,7 +164,16 @@ Vue.component("address-select", {
         showAddModal()
         {
             this.modalType = "create";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0};
+            }
+            else
+            {
+                this.addressToEdit = {};
+            }
+
             this.updateHeadline();
             this.addressModal.show();
         },

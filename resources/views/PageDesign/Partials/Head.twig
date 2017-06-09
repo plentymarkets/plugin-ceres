@@ -38,7 +38,11 @@
             defaultSorting: "{{ defaultSorting }}",
             performanceLevel: "{{ performanceLevel }}",
             itemName: {{ itemName }},
-            variationShowType: "{{ config("Ceres.item.variation_show_type") }}"
+            variationShowType: "{{ config("Ceres.item.variation_show_type") }}",
+            enabledBillingAddressFields: "{{ config("Ceres.billing_address.show") }}",
+            enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
+            enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",
+            enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}"
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %}

@@ -1,11 +1,12 @@
 var ResourceService = require("services/ResourceService");
+var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("salutation-select", {
 
     props: [
         "template",
         "addressData",
-        "enabledFields"
+        "addressType"
     ],
 
     data: function () {
@@ -54,14 +55,14 @@ Vue.component("salutation-select", {
         this.shopLanguage = this.localization.shopLanguage;
 
         if (this.shopLanguage === "de") {
-            if (this.isCompanyEnabled(this.enabledFields)) {
+            if (AddressFieldService.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
                 this.currentSalutation = this.salutations.complete.de;
             }
             else {
                 this.currentSalutation = this.salutations.withoutCompany.de;
             }
         }
-        else if (this.isCompanyEnabled(this.enabledFields)) {
+        else if (AddressFieldService.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
             this.currentSalutation = this.salutations.complete.en;
         }
         else {
@@ -71,18 +72,5 @@ Vue.component("salutation-select", {
 
     ready: function () {
         this.addressData.addressSalutation = 0;
-    },
-
-    methods: {
-        isCompanyEnabled: function (enabledFields) {
-
-            for (var i = 0; i < enabledFields.length; i++) {
-                if (enabledFields[i] === "billing_address.name1" || enabledFields[i] === "delivery_address.name1") {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 });
