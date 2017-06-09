@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.6 (unknown)
+
+### Behoben
+
+- Im Checkout ist die Verlinkung auf die AGB nun korrekt.
+
 ## v1.2.5 (2017-06-08)
 
 ### Behoben
