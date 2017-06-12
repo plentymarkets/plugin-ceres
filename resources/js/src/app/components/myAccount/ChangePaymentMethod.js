@@ -71,6 +71,8 @@ Vue.component("change-payment-method", {
                 .done(response =>
                 {
                     this.updateOrderHistory(response);
+
+                    document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: response}));
                 })
                 .fail(() =>
                 {
