@@ -22,7 +22,8 @@
                                              alt-text="{{ item.data.texts | itemName(configItemName) }}"
                                              item-url="{{ itemUrl }}"
                                              :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
+                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                                             :enable-carousel="{{ config("Ceres.item.enable_image_carousel") | json_encode() }}">
                     </category-image-carousel>
 
                     <noscript>

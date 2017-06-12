@@ -10,6 +10,7 @@ Vue.component("category-image-carousel", {
             type   : Boolean,
             default: false
         },
+        enableCarousel : {type: String},
         template       : {type: String}
     },
 
@@ -20,7 +21,7 @@ Vue.component("category-image-carousel", {
 
     ready: function()
     {
-        if (this.imageUrls && this.imageUrls.length > 0)
+        if (this.enableCarousel === "true" && this.imageUrls && this.imageUrls.length > 0)
         {
             $(".owl-carousel").owlCarousel({
                 dots    : (this.showDots === "true"),
