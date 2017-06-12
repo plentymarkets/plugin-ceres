@@ -56,7 +56,7 @@ Vue.component("change-payment-method", {
 
         changePaymentMethod()
         {
-            ApiService.post("/rest/io/order/payment?orderId=" + this.currentOrder.order.id + "&paymentMethodId=" + this.paymentMethod)
+            ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
                     this.closeModal();
