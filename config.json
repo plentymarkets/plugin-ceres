@@ -545,7 +545,7 @@
         "default"                   : "texts.name1_asc"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.priorityCategory1",
         "label"         : "Sorting criterion priority Categoryitem 1 ",
         "type"          : "dropdown",
@@ -571,15 +571,15 @@
             "variation.updatedAt_desc"          : "First variation update",
             "variation.position_asc"            : "Variation position (ascending)",
             "variation.position_desc"           : "Variation position (descending)",
-            "item.manufacturer.externalName_asc"        : "Manufacturer external name (ascending)",
-            "item.manufacturer.externalName_desc"       : "Manufacturer external name (descending)",
+            "item.manufacturer.externalName_asc"        : "Manufacturer (ascending)",
+            "item.manufacturer.externalName_desc"       : "Manufacturer (descending)",
             "item.manufacturer.position_asc"         : "Manufacturer position (ascending)",
             "item.manufacturer.position_desc"        : "Manufacturer position (descending)"
         },
         "default"       : "item.manufacturer.name_asc"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.priorityCategory2",
         "label"         : "Sorting criterion priority Categoryitem 2",
         "type"          : "dropdown",
@@ -612,7 +612,7 @@
         "default"       : "item.notSelected"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.priorityCategory3",
         "label"         : "Sorting criterion priority Categoryitem 3",
         "type"          : "dropdown",
@@ -643,7 +643,7 @@
         "default"       : "item.notSelected"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.prioritySearch1",
         "label"         : "Sorting criterion priority Searchitem 1 ",
         "type"          : "dropdown",
@@ -678,7 +678,7 @@
         "default"       : "item.score"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.prioritySearch2",
         "label"         : "Sorting criterion priority Searchitem 2",
         "type"          : "dropdown",
@@ -712,7 +712,7 @@
         "default"       : "item.notSelected"
     },
     {
-        "tab"           : "Recommended Sorting",
+        "tab"           : "Recommended sorting",
         "key"           : "sorting.prioritySearch3",
         "label"         : "Sorting criterion priority SearchItem 3",
         "type"          : "dropdown",
