@@ -14,7 +14,7 @@
             <div class="modal-dialog" role="dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChooseNewPayment") }}</h4>
@@ -63,7 +63,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
                         </button>
-                        <button type="button" class="btn btn-primary" @click="changePaymentMethod()">
+                        <button type="button" :class="{'disabled': isPending}" class="btn btn-primary" @click="changePaymentMethod()">
                             <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalChange") }}
                         </button>
                     </div>

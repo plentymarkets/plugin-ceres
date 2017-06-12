@@ -15,7 +15,8 @@ Vue.component("change-payment-method", {
             isChangePossible: false,
             changePaymentModal: {},
             encodedPaymentMethods: {},
-            paymentMethod: 0
+            paymentMethod: 0,
+            isPending: false
         };
     },
 
@@ -52,6 +53,7 @@ Vue.component("change-payment-method", {
         closeModal()
         {
             this.changePaymentModal.hide();
+            this.isPending = false;
         },
 
         updateOrderHistory(updatedOrder)
@@ -63,6 +65,8 @@ Vue.component("change-payment-method", {
 
         changePaymentMethod()
         {
+            this.isPending = true;
+
             ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
