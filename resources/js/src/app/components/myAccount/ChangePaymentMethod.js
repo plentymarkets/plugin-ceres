@@ -31,16 +31,31 @@ Vue.component("change-payment-method", {
     ready()
     {
         this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
-        this.isChangePossible = this.checkChangeAllowed();
-
         this.encodedPaymentMethods = JSON.parse(this.allowedPaymentMethods);
+        this.getInitialPaymentMethod();
+        this.setAllowedState();
     },
 
     methods:
     {
         checkChangeAllowed()
         {
-            return true;
+            ApiService.get("/rest/io/order/payment_allowed", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
+                .done(response =>
+                {
+                    return response;
+                })
+                .fail(() =>
+                {
+                    return false;
+                });
+
+            return false;
+        },
+
+        setAllowedState()
+        {
+            this.isChangePossible = this.checkChangeAllowed();
         },
 
         openPaymentChangeModal()
@@ -59,6 +74,7 @@ Vue.component("change-payment-method", {
         updateOrderHistory(updatedOrder)
         {
             this.currentOrder = updatedOrder;
+            this.setAllowedState();
 
             this.closeModal();
         },
