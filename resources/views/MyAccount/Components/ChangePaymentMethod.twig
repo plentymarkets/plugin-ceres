@@ -4,9 +4,9 @@
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
-    <button v-else class="btn btn-primary btn-block disabled" v-tooltip data-toggle="tooltip" data-placement="left" title="{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}">
-        {{ trans("Ceres::Template.myAccountChangePayment") }}
-    </button>
+    <div v-else class="payment-align-center">
+        <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+    </div>
 
     <!-- CHANGE_PAYMENT_MODAL -->
     <div v-el:change-payment-modal>
@@ -38,9 +38,9 @@
                                                     <img alt="${ paymentProvider.name }" :src="paymentProvider.icon">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="content">
-                                            ${ paymentProvider.name }
+                                        </div><!--
+                    --><div class="content">
+                                        ${ paymentProvider.name }
                                             <div>
                                                 <small>
                                                     ${ paymentProvider.fee | currency }
@@ -53,7 +53,8 @@
                                             </div>
                                         </div>
                                     </label>
-                                </li>
+                                </li><!--
+            -->
                             </ul>
                         </div>
 
@@ -63,7 +64,7 @@
                             <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
                         </button>
                         <button type="button" class="btn btn-primary" @click="changePaymentMethod()">
-                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.myAccountChangePaymentNow") }}
+                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalChange") }}
                         </button>
                     </div>
                 </div>
