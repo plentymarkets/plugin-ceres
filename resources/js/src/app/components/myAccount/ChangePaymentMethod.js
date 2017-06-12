@@ -54,12 +54,19 @@ Vue.component("change-payment-method", {
             this.changePaymentModal.hide();
         },
 
+        updateOrderHistory(updatedOrder)
+        {
+            this.currentOrder = updatedOrder;
+
+            this.closeModal();
+        },
+
         changePaymentMethod()
         {
             ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
-                    this.closeModal();
+                    this.updateOrderHistory(response);
                 })
                 .fail(() =>
                 {
