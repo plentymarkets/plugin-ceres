@@ -16,7 +16,7 @@ Vue.component("item-lazy-img", {
 
         setTimeout(function()
         {
-            $(self.$els.lazyImg).show().lazyload();
+            $(self.$els.lazyImg).show().lazyload({threshold : 100});
         }, 1);
     }
 });
