@@ -2,6 +2,15 @@
 
 ## v1.2.6 (unknown)
 
+### Hinzugefügt
+
+- Die Artikelsortierung **Empfohlen** in der Kategorieansicht wurde hinzugefügt. Bis zu drei Werte können für eine komplexe Artikelsortierung verkettet werden. Diese Sortierung kann in Ceres über den Filter **Empfohlen** eingeblendet werden. Die Einstellungen befinden sich im Tab **Pagination and sorting**.
+- Eine komplexe Artikelsuche über Elasticsearch kann eingerichtet werden. Bis zu drei Suchkriterien können für genauere Ergebnisse bei der Artikelsuche verkettet werden. Die Einstellungen befinden sich im Tab **Pagination and sorting**.
+
+### Geändert
+
+- Bei der Sortierung von Artikeln in der Kategorieansicht wird nun bei den Filtern **Hersteller (aufsteigend)** und **Hersteller (absteigend)** der externe Herstellername berücksichtigt.
+
 ### Behoben
 
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
