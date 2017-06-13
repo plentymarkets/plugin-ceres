@@ -2,6 +2,10 @@
 
 ## v1.2.6 (unknown)
 
+### Geändert
+
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+
 ### Behoben
 
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.

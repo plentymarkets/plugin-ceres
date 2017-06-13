@@ -48,15 +48,15 @@
                 item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
                 url: config("Ceres.homepage.sliderImageUrl3") } %}
 
-                {% if slider1.url | trim is empty %}
+                {% if slider1.url | trim is empty and slider1.item.texts is not empty %}
                     {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
                     {% set slider1 = slider1 | merge({url: slider1Image.url}) %}
                 {% endif %}
-                {% if slider2.url | trim is empty %}
+                {% if slider2.url | trim is empty and slider2.item.texts is not empty %}
                     {% set slider2Image = slider2.item.images | itemImages | orderByKey('position') | first %}
                     {% set slider2 = slider2 | merge({url: slider2Image.url}) %}
                 {% endif %}
-                {% if slider3.url | trim is empty %}
+                {% if slider3.url | trim is empty and slider3.item.texts is not empty %}
                     {% set slider3Image = slider3.item.images | itemImages | orderByKey('position') | first %}
                     {% set slider3 = slider3 | merge({url: slider3Image.url}) %}
                 {% endif %}
@@ -68,11 +68,11 @@
                 item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data,
                 url: config("Ceres.homepage.heroExtraImageUrl2") } %}
 
-                {% if heroExtra1.url | trim is empty %}
+                {% if heroExtra1.url | trim is empty and heroExtra1.item.texts is not empty %}
                     {% set heroExtra1Image = heroExtra1.item.images | itemImages | orderByKey('position') | first %}
                     {% set heroExtra1 = heroExtra1 | merge({url: heroExtra1Image.url}) %}
                 {% endif %}
-                {% if heroExtra2.url | trim is empty %}
+                {% if heroExtra2.url | trim is empty and heroExtra2.item.texts is not empty %}
                     {% set heroExtra2Image = heroExtra2.item.images | itemImages | orderByKey('position') | first %}
                     {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2Image.url}) %}
                 {% endif %}
@@ -116,11 +116,11 @@
                                                 {% if slider1.url | trim is not empty %}
                                                     {% set slideCount = slideCount + 1 %}
                                                     <div class="carousel-item active">
-                                                        <a class="hero-category" {% if slider1.item is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
+                                                        <a class="hero-category" {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
                                                             <img src="{{ slider1.url }}"
                                                                  alt="{{ slider1.item.texts | itemName(configItemName) }}"
                                                                  class="img-fluid">
-                                                            {% if slider1.item is not empty %}
+                                                            {% if slider1.item.texts is not empty %}
                                                                 <div class="carousel-caption">
                                                                     <h1><i class="fa fa-angle-double-right"
                                                                            aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}
@@ -134,11 +134,11 @@
                                                     {% set slideCount = slideCount + 1 %}
                                                     <div class="carousel-item {% if slider1.url | trim is empty %}active{% endif %}">
                                                         <a class="hero-category"
-                                                           {% if slider2.item is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
+                                                           {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
                                                             <img src="{{ slider2.url }}"
                                                                  alt="{{ slider2.item.texts | itemName(configItemName) }}"
                                                                  class="img-fluid">
-                                                            {% if slider2.item is not empty %}
+                                                            {% if slider2.item.texts is not empty %}
                                                                 <div class="carousel-caption">
                                                                     <h1><i class="fa fa-angle-double-right"
                                                                            aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}
@@ -151,11 +151,11 @@
                                                 {% if slider3.url | trim is not empty %}
                                                     {% set slideCount = slideCount +1 %}
                                                     <div class="carousel-item {% if slider1.url | trim is empty and slider2.url | trim is empty %}active{% endif %}">
-                                                        <a class="hero-category" {% if slider3.item is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
+                                                        <a class="hero-category" {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
                                                             <img src="{{ slider3.url }}"
                                                                  alt="{{ slider3.item.texts | itemName(configItemName) }}"
                                                                  class="img-fluid">
-                                                            {% if slider3.item  is not empty %}
+                                                            {% if slider3.item.texts is not empty %}
                                                                 <div class="carousel-caption">
                                                                     <h1><i class="fa fa-angle-double-right"
                                                                            aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}
@@ -202,10 +202,10 @@
                                 <div class="hero-xtras">
                                     {% if homepageContainer2 | trim is empty %}
                                         {% if heroExtra1.url | trim is not empty %}
-                                            <a class="hero-category" {% if heroExtra1.item is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
+                                            <a class="hero-category" {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
                                                 <img src="{{ heroExtra1.url }}"
                                                      alt="{{ heroExtra1.item.texts | itemName(configItemName) }}">
-                                                {% if heroExtra1.item is not empty %}
+                                                {% if heroExtra1.item.texts is not empty %}
                                                     <div class="hero-category-inner">
                                                         <h2 class="hero-category-headline">
                                                             <i class="fa fa-angle-double-right"
@@ -221,10 +221,10 @@
 
                                     {% if homepageContainer3 | trim is empty %}
                                         {% if heroExtra2.url | trim is not empty %}
-                                            <a class="hero-category" {% if heroExtra2.item is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
+                                            <a class="hero-category" {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
                                                 <img src="{{ heroExtra2.url }}"
                                                      alt="{{ heroExtra2.item.texts | itemName(configItemName) }}">
-                                                {% if heroExtra2.item is not empty %}
+                                                {% if heroExtra2.item.texts is not empty %}
                                                     <div class="hero-category-inner">
                                                         <h2 class="hero-category-headline">
                                                             <i class="fa fa-angle-double-right"
@@ -244,9 +244,9 @@
                         {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
                         {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
 
-                        {% if category1 is not empty or homepageContainer4 | trim is not empty or category2 is not empty or homepageContainer5 | trim is not empty %}
+                        {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
                             <div class="row prop-row m-y-2 sale-new">
-                                {% if category1 is not empty or homepageContainer4 | trim is not empty %}
+                                {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
                                     <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
                                         <div class="prop-xs-6-4 prop-md-3-1">
                                             {% if homepageContainer4 | trim is empty %}
@@ -272,7 +272,7 @@
                                     </div>
                                 {% endif %}
 
-                                {% if category2 is not empty or homepageContainer5 | trim is not empty %}
+                                {% if category2.details is not empty or homepageContainer5 | trim is not empty %}
                                     <div class="col-xs-{% if category1 is empty and homepageContainer4 | trim is empty %}12{% else %}6{% endif %}">
                                         <div class="prop-xs-6-4 prop-md-3-1">
                                             {% if homepageContainer5 | trim is empty %}
@@ -326,17 +326,17 @@
                         {#<!-- CATEGORIES -->#}
                         {% set homepageContainer7 = LayoutContainer.show("Ceres::Homepage.Container7") %}
                         {% set homepageContainer8 = LayoutContainer.show("Ceres::Homepage.Container8") %}
-                        {% if category4 is not empty or homepageContainer7 | trim is not empty or category5 is not empty or homepageContainer8 | trim is not empty %}
+                        {% if category4.details is not empty or homepageContainer7 | trim is not empty or category5.details is not empty or homepageContainer8 | trim is not empty %}
                             <div class="row prop-row m-y-2 featured-categories">
-                                {% if category4 is not empty or homepageContainer7 | trim is not empty %}
-                                    <div class="col-xs-12 col-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
-                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5 is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
+                                {% if category4.details is not empty or homepageContainer7 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}8{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category5.details is not empty or homepageContainer8 | trim is not empty %}2{% else %}3{% endif %}-1">
                                             {% if homepageContainer7 | trim is empty %}
                                                 <div class="prop-inner">
                                                     <a class="featured-category"
                                                        href="{{ services.category.getURL(category4, lang) }}">
                                                         {% if category4.details[0].imagePath %}
-                                                            <img src="documents/{{ category4.details[0].imagePath }}"
+                                                            <img src="/documents/{{ category4.details[0].imagePath }}"
                                                                  alt="{{ category4.details[0].name }}">
                                                         {% endif %}
                                                         <div class="featured-category-inner">
@@ -355,15 +355,15 @@
                                     </div>
                                 {% endif %}
 
-                                {% if category5 is not empty or homepageContainer8 | trim is not empty %}
-                                    <div class="col-xs-12 col-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
-                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4 is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
+                                {% if category5.details is not empty or homepageContainer8 | trim is not empty %}
+                                    <div class="col-xs-12 col-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}4{% else %}12{% endif %}">
+                                        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-{% if category4.details is not empty or homepageContainer7 | trim is not empty %}1{% else %}3{% endif %}-1">
                                             {% if homepageContainer8 | trim is empty %}
                                                 <div class="prop-inner">
                                                     <a class="featured-category"
                                                        href="{{ services.category.getURL(category5, lang) }}">
                                                         {% if category5.details[0].imagePath %}
-                                                            <img src="documents/{{ category5.details[0].imagePath }}"
+                                                            <img src="/documents/{{ category5.details[0].imagePath }}"
                                                                  alt="{{ category5.details[0].name }}">
                                                         {% endif %}
                                                         <div class="featured-category-inner">
