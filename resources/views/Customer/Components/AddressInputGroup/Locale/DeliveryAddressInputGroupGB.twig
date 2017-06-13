@@ -80,14 +80,14 @@
             </div>
         </div>
 
-        {# {% if "delivery_address.address2" in addressFields %} #}
+        {% if "delivery_address.address2" in addressFields %}
         <div class="col-xs-12 col-sm-12">
-            <div class="input-unit" {# {% if "delivery_address.address2" in addressFieldsRequired %} #}data-validate="text"{# {% endif %} ADD AFTER CUSTOMER REPO WORKS WELL #}>
+            <div class="input-unit" {% if "delivery_address.address2" in addressFieldsRequired %}data-validate="text"{% endif %}>
                 <input type="text" name="housenumber" id="txtNumber${_uid}" v-model="addressData.address2">
-                <label for="txtNumber${_uid}">{{ trans("Ceres::Template.addressENAddressLine2") }}{# {% if "delivery_address.address2" in addressFieldsRequired %} #}*{# {% endif %} #}</label>
+                <label for="txtNumber${_uid}">{{ trans("Ceres::Template.addressENAddressLine2") }}{% if "delivery_address.address2" in addressFieldsRequired %}*{% endif %}</label>
             </div>
         </div>
-        {# {% endif %} #}
+        {% endif %}
     </div>
 </div>
 
