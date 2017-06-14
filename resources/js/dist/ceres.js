@@ -1765,10 +1765,6 @@ Vue.component("country-select", {
          */
         countryChanged: function countryChanged() {
             this.selectedStateId = null;
-
-            if (this.addressType === "2") {
-                this.localization.currentShippingCountryId = this.selectedCountryId;
-            }
         },
 
 
