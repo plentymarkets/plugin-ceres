@@ -1,5 +1,27 @@
 # Release Notes for Ceres
 
+## v1.2.6 (2017-06-14)
+
+### Changed
+
+- Items and categories for which no translations are available will not be displayed on the homepage when the respective language is selected in the online store.
+
+### Fixed
+
+- The **Show all** button of the first category list on the homepage now references to the correct category.
+- Due to an error, the country of delivery in the invoice address form did not change when a different country was selected. This has been fixed.
+- The link for the **General terms and conditions** in the checkout now references the correct category.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
+- It is not possible to search for variation numbers.
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+_ In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.5 (2017-06-08)
 
 ### Added
@@ -20,17 +42,6 @@
 - The order status is displayed again in the order history.
 - Due to an error, item images could sometimes not be loaded in the category view. This has been fixed.
 - Due to an error validation during creating an address failed. This has been fixed.
-
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
-- It is not possible to search for variation numbers.
-- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-_ In the mobile view, the navigation will remain open after switching the category.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.4 (2017-06-02)
 

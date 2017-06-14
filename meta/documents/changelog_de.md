@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v1.2.6 (unknown)
+## v1.2.6 (2017-06-14)
 
 ### Geändert
 
