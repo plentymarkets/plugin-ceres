@@ -4,18 +4,13 @@
 
 ### Geändert
 
-- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 
 ### Behoben
+
+- Auf der Startseite verlinkt der Button **Alle anzeigen** der ersten Kategorieliste auf die richtige Kategorie.
 - Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
-
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
-
-## v1.2.5 (2017-06-08)
-
-### Behoben
-
-- Auf der Startseite wird verlinkt der "Alle anzeigen" Button der ersten Kategorieliste auf die richtige Kategorie.
 
 ## v1.2.5 (2017-06-08)
 
