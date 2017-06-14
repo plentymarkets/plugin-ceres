@@ -47,7 +47,6 @@ Vue.component("country-select", {
             {
                 this.localization.currentShippingCountryId = this.selectedCountryId;
             }
-            
         },
 
         /**
