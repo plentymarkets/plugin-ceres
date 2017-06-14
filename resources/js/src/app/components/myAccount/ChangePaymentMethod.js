@@ -6,13 +6,13 @@ Vue.component("change-payment-method", {
     props: [
         "template",
         "currentOrder",
-        "allowedPaymentMethods"
+        "allowedPaymentMethods",
+        "changePossible"
     ],
 
     data()
     {
         return {
-            isChangePossible: false,
             changePaymentModal: {},
             encodedPaymentMethods: {},
             paymentMethod: 0,
@@ -32,36 +32,25 @@ Vue.component("change-payment-method", {
     {
         this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
         this.encodedPaymentMethods = JSON.parse(this.allowedPaymentMethods);
-        this.getInitialPaymentMethod();
-        this.setAllowedState();
     },
 
     methods:
     {
         checkChangeAllowed()
         {
-            ApiService.get("/rest/io/order/payment_allowed", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
+            ApiService.get("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
-                    return response;
+                    this.changePossible = response;
                 })
                 .fail(() =>
                 {
-                    return false;
+                    this.changePossible = false;
                 });
-
-            return false;
-        },
-
-        setAllowedState()
-        {
-            this.isChangePossible = this.checkChangeAllowed();
         },
 
         openPaymentChangeModal()
         {
-            this.getInitialPaymentMethod();
-
             this.changePaymentModal.show();
         },
 
@@ -73,8 +62,8 @@ Vue.component("change-payment-method", {
 
         updateOrderHistory(updatedOrder)
         {
-            this.currentOrder = updatedOrder;
-            this.setAllowedState();
+            // this.currentOrder = updatedOrder;
+            this.checkChangeAllowed();
 
             this.closeModal();
         },
@@ -86,27 +75,14 @@ Vue.component("change-payment-method", {
             ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
-                    this.updateOrderHistory(response);
+                    document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: {oldOrder: this.currentOrder, newOrder: response}}));
 
-                    document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: response}));
+                    this.updateOrderHistory(response);
                 })
                 .fail(() =>
                 {
                     this.closeModal();
                 });
-        },
-
-        getInitialPaymentMethod()
-        {
-            for (const index in this.currentOrder.order.properties)
-            {
-                if (this.currentOrder.order.properties[index].typeId === 3)
-                {
-                    this.paymentMethod = this.currentOrder.order.properties[index].value;
-                }
-            }
-
-            return false;
         }
     }
 
