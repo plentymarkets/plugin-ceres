@@ -115,9 +115,10 @@ Vue.component("item-image-carousel", {
                 dots             : false,
                 items            : 5,
                 lazyLoad         : true,
-                loop             : false,
+                loop             : true,
                 margin           : 10,
                 mouseDrag        : false,
+                center           : true,
                 nav              : true,
                 navClass         : [
                     "owl-single-item-nav left carousel-control",
