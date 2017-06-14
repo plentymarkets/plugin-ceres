@@ -12,6 +12,16 @@
 - Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
 
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
+- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
 ## v1.2.5 (2017-06-08)
 
 ### Hinzugefügt
@@ -32,16 +42,6 @@
 - In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
 - Es wurde ein Fehler behoben, der in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
 - Es wurde ein Fehler behoben, der dazu führte, dass die Validierung beim Anlegen einer Adresse nicht durchgeführt wurde.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
-- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.4 (2017-06-02)
 
