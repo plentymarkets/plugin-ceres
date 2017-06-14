@@ -9,7 +9,7 @@ Vue.component("salutation-select", {
         "addressType"
     ],
 
-    data: function()
+    data()
     {
         return {
             localization     : {},
@@ -90,7 +90,7 @@ Vue.component("salutation-select", {
     /**
      * Get the shipping countries
      */
-    created: function()
+    created()
     {
 
         this.$options.template = this.template;
@@ -119,13 +119,14 @@ Vue.component("salutation-select", {
         }
     },
 
-    ready: function()
+    ready()
     {
         this.addressData.addressSalutation = 0;
     },
 
-    methods: {
-        changeValue: function()
+    methods:
+    {
+        changeValue()
         {
             if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "")
             {
