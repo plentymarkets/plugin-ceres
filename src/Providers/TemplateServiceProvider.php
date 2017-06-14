@@ -2,10 +2,12 @@
 namespace Ceres\Providers;
 
 
+use Ceres\Caching\HomepageCacheSettings;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\TemplateContainer;
+use IO\Services\ContentCaching\Services\Container;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Events\Dispatcher;
@@ -64,7 +66,10 @@ class TemplateServiceProvider extends ServiceProvider
 
         }, self::EVENT_LISTENER_PRIORITY);
 
-        $eventDispatcher->listen('IO.init.templates', function (Partial $partial) {
+        $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
+
+            pluginApp(Container::class)->register('Ceres::Homepage.DefaultHomepage.twig', HomepageCacheSettings::class);
+
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');
             $partial->set('footer', 'Ceres::PageDesign.Partials.Footer');
