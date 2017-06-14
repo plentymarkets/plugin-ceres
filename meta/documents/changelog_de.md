@@ -7,6 +7,7 @@
 - Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 
 ### Behoben
+- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
 
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
 
