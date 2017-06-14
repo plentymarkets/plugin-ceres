@@ -1,5 +1,16 @@
 # Release Notes für Ceres
 
+## v1.2.6 (unknown)
+
+### Geändert
+
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+
+### Behoben
+- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
+
+- Im Checkout ist die Verlinkung auf die AGB nun korrekt.
+
 ## v1.2.5 (2017-06-08)
 
 ### Behoben
@@ -26,7 +37,6 @@
 - In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
 - Es wurde ein Fehler behoben, der in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
 - Es wurde ein Fehler behoben, der dazu führte, dass die Validierung beim Anlegen einer Adresse nicht durchgeführt wurde.
-- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
 
 ### Bekannte Probleme
 
