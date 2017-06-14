@@ -54,6 +54,19 @@ Vue.component("change-payment-method", {
             this.changePaymentModal.show();
         },
 
+        getPaymentStateText(paymentStates)
+        {
+            for (const paymentState in paymentStates)
+            {
+                if (paymentStates[paymentState].typeId == 4)
+                {
+                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                }
+            }
+
+            return "";
+        },
+
         closeModal()
         {
             this.changePaymentModal.hide();
@@ -62,7 +75,9 @@ Vue.component("change-payment-method", {
 
         updateOrderHistory(updatedOrder)
         {
-            // this.currentOrder = updatedOrder;
+            document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
+            document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+
             this.checkChangeAllowed();
 
             this.closeModal();
