@@ -20,10 +20,10 @@ class NavigationCacheSettings implements CachingSettings
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getIdentifier(): string
+    public function getData(): array
     {
-        return '';
+        return [];
     }
 }
