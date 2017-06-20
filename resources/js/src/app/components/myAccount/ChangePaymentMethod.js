@@ -14,7 +14,6 @@ Vue.component("change-payment-method", {
     {
         return {
             changePaymentModal: {},
-            encodedPaymentMethods: {},
             paymentMethod: 0,
             isPending: false
         };
@@ -31,7 +30,6 @@ Vue.component("change-payment-method", {
     ready()
     {
         this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
-        this.encodedPaymentMethods = JSON.parse(this.allowedPaymentMethods);
     },
 
     methods:
@@ -96,7 +94,6 @@ Vue.component("change-payment-method", {
                 })
                 .fail(() =>
                 {
-                    this.closeModal();
                 });
         }
     }
