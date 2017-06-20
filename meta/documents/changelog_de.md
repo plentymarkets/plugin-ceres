@@ -5,8 +5,8 @@
 ### Geändert
 
 - Die Sortierung nach Preis wurde verbessert.
-- Es wurden verschiedene Einträge aus den Sortierungsmöglichkeiten der Config entfernt.
-- Die Namen der Sortiermöglichkeiten in der Config wurden an die des Ceres Shops angeglichen.
+- Es wurden verschiedene Einträge aus den Sortierungsmöglichkeiten der Konfig entfernt.
+- Die Namen der Sortiermöglichkeiten in der Konfig wurden an die des Ceres Shops angeglichen.
 
 ### Behoben
 
