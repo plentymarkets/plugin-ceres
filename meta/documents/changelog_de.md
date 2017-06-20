@@ -1,5 +1,17 @@
 # Release Notes für Ceres
 
+## v1.2.7 (2017-06-21)
+
+### Geändert
+
+- Die Sortierung nach Preis wurde verbessert.
+- Es wurden verschiedene Einträge aus den Sortierungsmöglichkeiten der Config entfernt.
+- Die Namen der Sortiermöglichkeiten in der Config wurden an die des Ceres Shops angeglichen.
+
+### Behoben
+
+
+
 ## v1.2.6 (2017-06-14)
 
 ### Geändert
