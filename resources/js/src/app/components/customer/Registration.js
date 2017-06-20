@@ -2,7 +2,7 @@ var ApiService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService        = require("services/ModalService");
 
-var ValidationService = require("services/ValidationService");
+import ValidationService from "services/ValidationService";
 
 Vue.component("registration", {
 

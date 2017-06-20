@@ -28,7 +28,7 @@ module.exports = (function($)
         {
             window.open(_getScopeUrl(currentCategory), "_self");
         }
-        else
+        else if (currentCategory.details.length)
         {
             _handleCurrentCategory(currentCategory);
         }
@@ -94,7 +94,7 @@ module.exports = (function($)
 
         for (var category in categories)
         {
-            if (categories[category].id == currentCategory.id)
+            if (categories[category].id == currentCategory.id && categories[category].details.length)
             {
                 scopeUrl += "/" + categories[category].details[0].nameUrl;
 
@@ -103,7 +103,7 @@ module.exports = (function($)
                 return scopeUrl;
             }
 
-            if (categories[category].children)
+            if (categories[category].children && categories[category].details.length)
             {
                 var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
 

@@ -1,20 +1,16 @@
 # Release Notes für Ceres
 
-## 1.2.5 ()
-
-### Hinzugefügt
-
-- In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
-- Es wurde ein LayoutContainer hinzugefügt, um in der Auftragsübersicht zusätzliche Daten anzeigen zu können.
+## v1.2.6 (2017-06-14)
 
 ### Geändert
 
-- Das Registrierungs-Overlay schließt sich nun bei einem Fehler nichtmehr.
-- In Ceres sind jetzt standardmäßig die Notifications an.
+- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 
 ### Behoben
 
-- In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
+- Auf der Startseite verlinkt der Button **Alle anzeigen** der ersten Kategorieliste auf die richtige Kategorie.
+- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
+- Im Checkout ist die Verlinkung auf die AGB nun korrekt.
 
 ### Bekannte Probleme
 
@@ -23,9 +19,29 @@
 - Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
 - Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
+## v1.2.5 (2017-06-08)
+
+### Hinzugefügt
+
+- In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
+- Es wurde der Template-Container `MyAccount.OrderHistoryPaymentInformation` hinzugefügt, um in der Auftragsübersicht im **Mein Konto**-Bereich zusätzliche Informationen anzuzeigen.
+
+### Geändert
+
+- Das Registrierungs-Overlay schließt sich nun im Fehlerfall nicht mehr.
+- In Ceres sind jetzt standardmäßig Webshop-Benachrichtigungen aktiviert.
+- Die Optionen der Sortierung für die Kategorieansicht haben neue Übersetzungen.
+- Wenn ein Overlay mit Benutzerdaten erneut geöffnet wird, wird die Validierung zurückgesetzt.
+- Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nicht mehr ausgegeben.
+
+### Behoben
+
+- In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
+- Es wurde ein Fehler behoben, der in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
+- Es wurde ein Fehler behoben, der dazu führte, dass die Validierung beim Anlegen einer Adresse nicht durchgeführt wurde.
 
 ## v1.2.4 (2017-06-02)
 
@@ -58,17 +74,6 @@ _ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie
 ### To do
 
 - Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
-
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
-- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-_ In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.3 (2017-05-19)
 
