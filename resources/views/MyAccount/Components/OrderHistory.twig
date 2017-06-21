@@ -181,7 +181,7 @@
                                             <change-payment-method  template="#vue-change-payment-method"
                                                                     :current-order="{{ entry | json_encode() }}"
                                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
-                                                                    allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId) | json_encode() }}">
+                                                                    allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}">
                                             </change-payment-method>
                                         </div>
                                     </div>
