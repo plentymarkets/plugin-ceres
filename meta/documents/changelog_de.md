@@ -5,12 +5,17 @@
 ### Geändert
 
 - Die Sortierung nach Preis wurde verbessert.
-- Es wurden verschiedene Einträge aus den Sortierungsmöglichkeiten der Konfig entfernt.
-- Die Namen der Sortiermöglichkeiten in der Konfig wurden an die des Ceres Shops angeglichen.
-
-### Behoben
+- Verschiedene Einträge wurden aus den Sortierungsmöglichkeiten der Konfig entfernt.
+- Die Bezeichnungen der Sortiermöglichkeiten in der Konfig wurden an die Anzeige im Webshop angepasst.
 
 
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.6 (2017-06-14)
 
@@ -23,16 +28,6 @@
 - Auf der Startseite verlinkt der Button **Alle anzeigen** der ersten Kategorieliste auf die richtige Kategorie.
 - Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
-- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.5 (2017-06-08)
 
