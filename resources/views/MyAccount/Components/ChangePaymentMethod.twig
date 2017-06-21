@@ -23,7 +23,7 @@
 
                         <div class="cmp cmp-method-list m-b-3">
                             <ul class="method-list">
-                                <li v-for="paymentProvider in encodedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
+                                <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
                                     <input
                                             type="radio"
                                             id="paymentMethod${ _uid }${ paymentProvider.id }"
