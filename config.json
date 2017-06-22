@@ -481,32 +481,22 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "item.id_asc"                       : "Item ID (ascending)",
-            "item.id_desc"                      : "Item ID (descending)",
-            "texts.name1_asc"                   : "Item name (ascending)",
-            "texts.name1_desc"                  : "Item name (descending)",
-            "item.position_asc"                 : "Item position (ascending)",
-            "item.position_desc"                : "Item position (descending)",
-            "item.salesPrice.price_asc"         : "Price (ascending)",
-            "item.salesPrice.price_desc"        : "Price (descending)",
-            "variation.createdAt_asc"           : "Newest variation",
-            "variation.createdAt_desc"          : "Oldest variation",
-            "variation.id_asc"                  : "Variation ID (ascending)",
-            "variation.id_desc"                 : "Variation ID (descending)",
-            "variation.number_asc"              : "Variation number (ascending)",
-            "variation.number_desc"             : "Variation number (descending)",
-            "variation.updatedAt_asc"           : "Last variation update",
-            "variation.updatedAt_desc"          : "First variation update",
-            "variation.position_asc"            : "Variation position (ascending)",
-            "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
-        "default"                   : "texts.name1_asc, texts.name1_desc, itemPrice_asc"
+        "default"                   : "texts.name1_asc, texts.name1_desc, item.salesPrices.price_asc, item.salesPrices.price_desc"
     },
     {
         "tab"                       : "Pagination and sorting",
@@ -515,30 +505,20 @@
         "type"                      : "dropdown",
         "possibleValues"            :
         {
-            "item.id_asc"                       : "Item ID (ascending)",
-            "item.id_desc"                      : "Item ID (descending)",
-            "texts.name1_asc"                   : "Item name (ascending)",
-            "texts.name1_desc"                  : "Item name (descending)",
-            "item.position_asc"                 : "Item position (ascending)",
-            "item.position_desc"                : "Item position (descending)",
-            "item.salesPrice.price_asc"         : "Price (ascending)",
-            "item.salesPrice.price_desc"        : "Price (descending)",
-            "variation.createdAt_asc"           : "Newest variation",
-            "variation.createdAt_desc"          : "Oldest variation",
-            "variation.id_asc"                  : "Variation ID (ascending)",
-            "variation.id_desc"                 : "Variation ID (descending)",
-            "variation.number_asc"              : "Variation number (ascending)",
-            "variation.number_desc"             : "Variation number (descending)",
-            "variation.updatedAt_asc"           : "Last variation update",
-            "variation.updatedAt_desc"          : "First variation update",
-            "variation.position_asc"            : "Variation position (ascending)",
-            "variation.position_desc"           : "Variation position (descending)",
-            "variation.isActive_asc"            : "Active variation (ascending)",
-            "variation.isActive_desc"           : "Active variation (descending)",
-            "variation.isMain_asc"              : "Main variation (ascending)",
-            "variation.isMain_desc"             : "Main variation (descending)",
-            "item.manufacturer.name_asc"        : "Manufacturer (ascending)",
-            "item.manufacturer.name_desc"       : "Manufacturer (descending)"
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
         "default"                   : "texts.name1_asc"
     },
@@ -567,7 +547,7 @@
             "billing_address.title"     :"Title"
 
         },
-        "default"                   : ""
+        "default"                   : "billing_address.name1, billing_address.salutation"
     },
     {
         "tab"                       : "Checkout and My account",
@@ -605,7 +585,7 @@
         "delivery_address.title"      : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
@@ -636,13 +616,14 @@
         "billing_address.vatNumber" : "VAT number",
         "billing_address.birthday"  : "Date of birth",
         "billing_address.name4"     : "Name affix",
+        "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
         "billing_address.salutation": "Form of address",
         "billing_address.title"     : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "billing_address.name1, billing_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
@@ -655,6 +636,7 @@
         "billing_address.vatNumber" : "VAT number",
         "billing_address.birthday"  : "Date of birth",
         "billing_address.name4"     : "Name affix",
+        "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
         "billing_address.salutation": "Form of address",
@@ -672,13 +654,14 @@
       {
         "delivery_address.name1"     : "Company",
         "delivery_address.name4"     : "Name affix",
+        "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
         "delivery_address.salutation": "Form of address",
         "delivery_address.title"     : "Title"
 
       },
-      "default"                   : ""
+      "default"                   : "delivery_address.name1, delivery_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
@@ -689,6 +672,7 @@
       {
         "delivery_address.name1"     : "Company",
         "delivery_address.name4"     : "Name affix",
+        "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
         "delivery_address.salutation": "Form of address",

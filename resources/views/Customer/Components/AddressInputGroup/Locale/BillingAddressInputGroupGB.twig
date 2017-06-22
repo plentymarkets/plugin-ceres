@@ -1,3 +1,5 @@
+{{ component( "Ceres::Customer.Components.SalutationSelect" ) }}
+
 {% set addressFields = config("Ceres.billing_address.en.show") | split(', ') %}
 {% set addressFieldsRequired = config("Ceres.billing_address.en.require") | split(', ') %}
 
@@ -8,7 +10,7 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
         {% if "billing_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
-                    <salutation-select template="#vue-salutation-select" :address-data="addressData"></salutation-select>
+                    <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="addressData"></salutation-select>
                     <label for="txtSalutation${_uid}">{{ trans("Ceres::Template.addressSalutation") }}{% if "billing_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
@@ -29,7 +31,7 @@
 <div class="col-xs-12">
     <div class="row">
         {% if "billing_address.name1" in addressFields %}
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6" v-if="addressData.addressSalutation === 2">
                 <div class="input-unit"
                      {% if "billing_address.name1" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
@@ -103,14 +105,14 @@
             </div>
         </div>
 
-        {# {% if "billing_address.address2" in addressFields %} #}
+        {% if "billing_address.address2" in addressFields %}
         <div class="col-xs-12 col-sm-12">
-            <div class="input-unit" {# {% if "billing_address.address2" in addressFieldsRequired %} #}data-validate="text"{# {% endif %} ADD AFTER CUSTOMER REPO WORKS WELL #}>
+            <div class="input-unit" {% if "billing_address.address2" in addressFieldsRequired %}data-validate="text"{% endif %}>
                 <input type="text" name="housenumber" id="txtNumber${_uid}" v-model="addressData.address2">
-                <label for="txtNumber${_uid}">{{ trans("Ceres::Template.addressENAddressLine2") }}{# {% if "billing_address.address2" in addressFieldsRequired %} #}*{# {% endif %} #}</label>
+                <label for="txtNumber${_uid}">{{ trans("Ceres::Template.addressENAddressLine2") }}{% if "billing_address.address2" in addressFieldsRequired %}*{% endif %}</label>
             </div>
         </div>
-        {# {% endif %} #}
+        {% endif %}
     </div>
 </div>
 
