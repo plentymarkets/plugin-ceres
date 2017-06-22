@@ -12,6 +12,7 @@
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
 - Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
 - In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.

@@ -11,6 +11,7 @@
 ### Known issues
 
 - Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
 - Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
 - The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
 _ In the mobile view, the navigation will remain open after switching the category.
