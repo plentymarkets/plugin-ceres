@@ -4,7 +4,7 @@
 
 **Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **IO** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets
+## Setting up Ceres in plentymarkets<a id="10."></a>
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
@@ -255,8 +255,8 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <td>Activate to display the <strong>Change variation</strong> button in the item overview in the shopping cart. By clicking on <strong>Change variation</strong>, customers can change an item's variation in the shopping cart. If you activate the <strong>Change variation</strong> button, but the item has no variations, the button will not be displayed.</td>
 </tr>    
  <tr>
- <td><b>Add to shopping cart: Show information</b></td>  
-<td>Select wether to show the overlay of the shopping cart or the shopping cart preview after clicking on the <strong>Add to shopping cart</strong> button.<br /> <strong>Show overlay</strong> = Display an overlay.<br /> <strong>Toggle shopping cart preview</strong> = Toggle the shopping cart preview.<br /> <strong>No information</strong> = Don't show any information.</td>
+<td><b>Add to shopping cart: Show information</b></td>  
+<td>Select whether to show the overlay of the shopping cart or toggle the shopping cart preview after clicking on the <strong>Add to shopping cart</strong> button.<br /> <strong>Show overlay</strong> = Display an overlay of the shopping cart.<br /> <strong>Toggle shopping cart preview</strong> = Toggle the shopping cart preview.<br /> <strong>No information</strong> = Do not show any information.</td>
 </tr>
 </tbody>
 <caption>Table 4: Customising the shopping cart</caption>
@@ -322,7 +322,7 @@ Customise the display options of the checkout in the **Checkout and My account**
 </tr>
 <tr>
 <td><b>Enable delivery address field validation (UK)</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <!--br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<--><br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field. <!--strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <!--br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<--><br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 </tbody>
 <caption>Table 5: Customising the checkout</caption>
@@ -372,7 +372,7 @@ Customise the pagination of the item overview and the online store's item sortin
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
-<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item ID (ascending)</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID (descending)</strong> = Sort items by item ID in descending order.<br /> <strong>Item name (ascending)</strong> = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name (descending)</strong> = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position (ascending)</strong> = Display items with the highest position number first.<br /> <strong>Item position (descending)</strong> = Display items with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price (ascending)</strong> = Display items with the lowest price first.<br /> <strong>Price (descending)</strong> = Display items with the highest price first.<br /> <strong>Customer feedback (ascending)</strong> = Display items with the lowest customer feedback first.<br /> <strong>Customer feedback (descending)</strong> = Display items with the highest customer feedback first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID (ascending)</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID (descending)</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number (ascending)</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number (descending)</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last variation update</strong> = Display the last updated item variation first.<br /> <strong>First variation update</strong> = Display the first updated item variation first.<br /> <strong>Variation name (ascending)</strong> = Sort item variations in alphabetical order by variation name (A-Z).<br /> <strong>Variation name (descending)</strong> = Sort item variations in alphabetical order by variation name (Z-A).<br /> <strong>Variation position (ascending)</strong> = Display item variation with the highest position number first.<br /> <strong>Variation position (descending)</strong> = Display item variation with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Active variation (ascending)</strong> = Sort active item variations in ascending order.<br /> <strong>Active variation (descending)</strong> = Sort active item variations in descending order.<br /> <strong>Main variation (ascending)</strong> = Sort main item variations in ascending order.<br /> <strong>Main variation (descending)</strong> = Sort main item variations in descending order.<br /> <strong>Manufacturer (ascending)</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer (descending)</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Random items</strong> = Display items in a different, randomly chosen order every time.
+<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item name A-Z</strong> = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name Z-A</strong> = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Price ⬆</strong> = Display items with the lowest price first.<br /> <strong>Price ⬇</strong> = Display items with the highest price first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Availability ⬆</strong> = Display item variations by availability in ascending order.<br /> <strong>Availability ⬇</strong> = Display item variations by availability in descending order.<br /> <strong>Variation number ⬆</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number ⬇</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last update</strong> = Display the last updated item variation first.<br /> <strong>First update</strong> = Display the first updated item variation first.<br /> <strong>Manufacturer A-Z</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer Z-A</strong> = Sort items in alphabetical order by manufacturer (Z-A).
 </td>
 </tr>
 <tr>
@@ -461,7 +461,7 @@ Specific templates for legal information are available in Ceres. You can save an
 
 1. Go to **Settings » Client (store) » Standard » Online store » Legal information**. 
 2. Expand a **language**. 
-3. Click on the **Terms and conditions** tab. 
+3. Click on the **Terms and conditions** tab.
 4. Click on the **Text** tab. 
 5. Enter the text for your terms and conditions. 
 6. **Save** the settings.
@@ -484,7 +484,7 @@ Enter the texts for the **cancellation rights**, the **privacy policy** and the 
 
 Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
 
-Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties]https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapters.
+Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapters.
 
 For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapter.
 

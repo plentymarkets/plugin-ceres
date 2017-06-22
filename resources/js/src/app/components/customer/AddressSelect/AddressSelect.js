@@ -2,6 +2,7 @@ const ApiService = require("services/ApiService");
 const AddressService = require("services/AddressService");
 const ModalService = require("services/ModalService");
 const ResourceService = require("services/ResourceService");
+const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";
 
@@ -145,7 +146,16 @@ Vue.component("address-select", {
         showInitialAddModal()
         {
             this.modalType = "initial";
-            this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
             this.updateHeadline();
             this.addressModal.show();
         },
@@ -156,7 +166,16 @@ Vue.component("address-select", {
         showAddModal()
         {
             this.modalType = "create";
-            this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
             this.updateHeadline();
             ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();

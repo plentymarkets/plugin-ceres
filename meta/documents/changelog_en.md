@@ -1,5 +1,22 @@
 # Release Notes for Ceres
 
+## v1.2.7 (2017-06-21)
+
+### Changed
+
+- Sorting items by price has been improved.
+- Various entries have been removed from the sorting options in the config.
+- The names of sorting options in the config have been changed. They now equal the names of the sorting options in the online store.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- In the address form, the value "Mr." is preselected in the form of address field but the value is not displayed in the drop-down.
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+_ In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.6 (2017-06-14)
 
 ### Changed
