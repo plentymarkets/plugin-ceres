@@ -36,6 +36,9 @@
 
 - In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
 - Es wurde der Template-Container `MyAccount.OrderHistoryPaymentInformation` hinzugefügt, um in der Auftragsübersicht im **Mein Konto**-Bereich zusätzliche Informationen anzuzeigen.
+- Das Firmenfeld wird jetzt standardmäßig im Formular angezeigt, wenn in der Anrede "Firma" ausgweählt wird.
+- Wenn das Firmenfeld im Backend nicht "enabled" ist, wird es auch nicht als Auswahlmöglichkeit in der Anrede bereitgestellt.  
+
 
 ### Geändert
 

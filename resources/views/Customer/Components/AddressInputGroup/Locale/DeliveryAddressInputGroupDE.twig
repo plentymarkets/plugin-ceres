@@ -9,7 +9,7 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit"
         {% if "delivery_address.salutation" in addressFieldsRequired %}data-validate{% endif %}>
-                    <salutation-select template="#vue-salutation-select" :address-data="addressData"></salutation-select>
+                    <salutation-select template="#vue-salutation-select" :address-type="addressType" :address-data="addressData"></salutation-select>
                     <label for="txtSalutation${_uid}">{{ trans("Ceres::Template.addressSalutation") }}{% if "delivery_address.salutation" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 <div class="col-xs-12">
     <div class="row">
         {% if "delivery_address.name1" in addressFields %}
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-6" v-show="addressData.addressSalutation === 2">
                 <div class="input-unit"
                      {% if "delivery_address.name1" in addressFieldsRequired %}data-validate="text"{% endif %}>
                     <input type="text" name="company" id="txtCompany${_uid}" v-model="addressData.name1">
