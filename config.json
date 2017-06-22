@@ -493,6 +493,7 @@
             "variation.number_desc"                     : "Variation number ⬇",
             "variation.updatedAt_asc"                   : "Last update",
             "variation.updatedAt_desc"                  : "First update",
+            "default.standard_sorting"                  : "Recommended",
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
@@ -505,6 +506,7 @@
         "type"                      : "dropdown",
         "possibleValues"            :
         {
+            "default.standard_sorting"                  : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
             "item.salesPrices.price_asc"                : "Price ⬆",
@@ -554,7 +556,7 @@
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
             "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
         },
-        "default"       : "item.manufacturer.externalName_desc"
+        "default"       : "texts.name1_asc"
     },
     {
         "tab"           : "Pagination and sorting",
