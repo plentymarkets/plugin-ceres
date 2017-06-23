@@ -40,7 +40,6 @@ gulp.task('build', [
 
 // Bundle everything
 gulp.task('build:bundle', [
-    'build:lint',
     'build:app',
     'build:vendor',
     'build:productive-vendor',
@@ -63,7 +62,7 @@ gulp.task('build:bundle', [
 });
 
 // Build app
-gulp.task('build:app', [], function()
+gulp.task('build:app', ['build:lint'], function()
 {
     var builder = browserify({
         entries  : glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
