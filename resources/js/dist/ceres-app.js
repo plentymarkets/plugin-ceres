@@ -19,8 +19,12 @@ Vue.component("add-item-to-basket-overlay", {
     created: function created() {
         this.$options.template = this.template;
     },
-    ready: function ready() {
-        ResourceService.bind("basketItem", this);
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            ResourceService.bind("basketItem", _this);
+        });
     },
 
 
@@ -75,14 +79,14 @@ Vue.component("add-item-to-basket-overlay", {
             return "/" + path;
         },
         startCounter: function startCounter() {
-            var _this = this;
+            var _this2 = this;
 
             this.timeToClose = 10;
 
             var timerVar = setInterval(function () {
-                _this.timeToClose -= 1;
+                _this2.timeToClose -= 1;
 
-                if (_this.timeToClose === 0) {
+                if (_this2.timeToClose === 0) {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(timerVar);
@@ -202,9 +206,13 @@ Vue.component("basket-preview", {
     /**
      * Bind to basket and bind the basket items
      */
-    ready: function ready() {
-        ResourceService.bind("basket", this);
-        ResourceService.bind("basketItems", this);
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            ResourceService.bind("basket", _this);
+            ResourceService.bind("basketItems", _this);
+        });
     }
 });
 
@@ -230,8 +238,12 @@ Vue.component("basket-totals", {
     /**
      * Bind to basket
      */
-    ready: function ready() {
-        ResourceService.bind("basket", this);
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            ResourceService.bind("basket", _this);
+        });
     },
 
     methods: {
@@ -270,10 +282,14 @@ Vue.component("coupon", {
         ResourceService.bind("basket", this);
     },
 
-    ready: function ready() {
-        if (this.disabled) {
-            this.couponCode = this.basket.couponCode;
-        }
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            if (_this.disabled) {
+                _this.couponCode = _this.basket.couponCode;
+            }
+        });
     },
 
     methods: {
@@ -338,18 +354,22 @@ Vue.component("basket-list", {
     /**
      * Bind to basket and show the items in a small or large list
      */
-    ready: function ready() {
-        ResourceService.bind("basketItems", this);
+    mounted: function mounted() {
+        var _this = this;
 
-        if (this.triggerEvent) {
-            ResourceService.watch("basket", function (newValue, oldValue) {
-                if (oldValue) {
-                    if (JSON.stringify(newValue) != JSON.stringify(oldValue)) {
-                        document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: newValue }));
+        this.$nextTick(function () {
+            ResourceService.bind("basketItems", _this);
+
+            if (_this.triggerEvent) {
+                ResourceService.watch("basket", function (newValue, oldValue) {
+                    if (oldValue) {
+                        if (JSON.stringify(newValue) != JSON.stringify(oldValue)) {
+                            document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: newValue }));
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
+        });
     }
 });
 
@@ -2024,7 +2044,7 @@ Vue.component("variation-select", {
         this.$options.template = this.template;
     },
 
-    ready: function ready() {
+    mounted: function mounted() {
         // initialize selected attributes to be tracked by change detection
         var attributes = {};
 
