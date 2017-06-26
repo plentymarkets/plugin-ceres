@@ -1,5 +1,7 @@
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
+const ResourceService = require("services/ResourceService");
+const AddressFieldService = require("services/AddressFieldService");
 
 import AddressService from "services/AddressService";
 import ValidationService from "services/ValidationService";
@@ -23,7 +25,8 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            localization: {}
         };
     },
 
@@ -33,6 +36,7 @@ Vue.component("address-select", {
     created()
     {
         this.$options.template = this.template;
+        ResourceService.bind("localization", this);
 
         this.addEventListener();
     },
@@ -142,7 +146,16 @@ Vue.component("address-select", {
         showInitialAddModal()
         {
             this.modalType = "initial";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
             this.updateHeadline();
             this.addressModal.show();
         },
@@ -153,7 +166,16 @@ Vue.component("address-select", {
         showAddModal()
         {
             this.modalType = "create";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
             this.updateHeadline();
             ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
@@ -194,7 +216,7 @@ Vue.component("address-select", {
                 .done(() =>
                 {
                     this.closeDeleteModal();
-                    this.removeIdFromList(address.id);
+                    this.removeIdFromList(this.addressToDelete.id);
                 });
         },
 
