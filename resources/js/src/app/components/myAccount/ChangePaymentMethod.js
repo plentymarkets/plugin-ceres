@@ -65,6 +65,19 @@ Vue.component("change-payment-method", {
             return "";
         },
 
+        getPaymentId(paymentIds)
+        {
+            for (const paymentId in paymentIds)
+            {
+                if (paymentIds[paymentId].typeId == 3)
+                {
+                    return paymentIds[paymentId].value;
+                }
+            }
+
+            return "";
+        },
+
         closeModal()
         {
             this.changePaymentModal.hide();
@@ -81,6 +94,19 @@ Vue.component("change-payment-method", {
             this.closeModal();
         },
 
+        updateAllowedPaymentMethods(paymentMethodId)
+        {
+
+            ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.order.id, paymentMethodId: paymentMethodId})
+                .done(response =>
+                {
+                    this.allowedPaymentMethods = response;
+                })
+                .fail(() =>
+                {
+                });
+        },
+
         changePaymentMethod()
         {
             this.isPending = true;
@@ -91,6 +117,7 @@ Vue.component("change-payment-method", {
                     document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: {oldOrder: this.currentOrder, newOrder: response}}));
 
                     this.updateOrderHistory(response);
+                    this.updateAllowedPaymentMethods(this.getPaymentId(response.order.properties));
                 })
                 .fail(() =>
                 {
