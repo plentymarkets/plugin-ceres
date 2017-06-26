@@ -18,7 +18,7 @@ export function renderItems(currentCategory)
 
     if (!App.isCategoryView)
     {
-        window.open(_getScopeUrl(currentCategory), "_self");
+        window.open(getScopeUrl(currentCategory), "_self");
     }
     else if (currentCategory.details.length)
     {
@@ -63,7 +63,7 @@ function _updateHistory(currentCategory)
 {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
+    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
 }
@@ -99,7 +99,7 @@ export function getScopeUrl(currentCategory, scopeUrl, categories)
         {
             var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
 
-            var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
+            var urlScope = getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
 
             if (urlScope.length > 0)
             {
