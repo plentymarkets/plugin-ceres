@@ -25,40 +25,42 @@ Vue.component("quantity-input", {
     /**
      * TODO
      */
-    ready: function()
+    mounted: function()
     {
-        this.timeout = this.timeout || 300;
-        this.min = this.min || 1;
-        this.max = this.max || 999;
-        this.vertical = this.vertical || false;
-
-        this.$watch("value", function(newValue)
+        this.$nextTick(() =>
         {
-            if (newValue < this.min)
+            this.timeout = this.timeout || 300;
+            this.min = this.min || 1;
+            this.max = this.max || 999;
+            this.vertical = this.vertical || false;
+
+            this.$watch("value", function(newValue)
             {
-                this.value = this.min;
-            }
-
-            if (newValue > this.max)
-            {
-                this.value = this.max;
-            }
-
-            if (this.timeoutHandle)
-            {
-                window.clearTimeout(this.timeoutHandle);
-            }
-
-            var self = this;
-
-            this.timeoutHandle = window.setTimeout(
-                function()
+                if (newValue < this.min)
                 {
-                    self.$dispatch("quantity-change", newValue);
-                },
-                this.timeout
-            );
+                    this.value = this.min;
+                }
+
+                if (newValue > this.max)
+                {
+                    this.value = this.max;
+                }
+
+                if (this.timeoutHandle)
+                {
+                    window.clearTimeout(this.timeoutHandle);
+                }
+
+                var self = this;
+
+                this.timeoutHandle = window.setTimeout(
+                    function()
+                    {
+                        self.$dispatch("quantity-change", newValue);
+                    },
+                    this.timeout
+                );
+            });
         });
     }
-
 });

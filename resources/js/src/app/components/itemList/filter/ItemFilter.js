@@ -22,9 +22,12 @@ Vue.component("item-filter", {
         ResourceService.bind("facetParams", this);
     },
 
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("isLoading", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("isLoading", this);
+        });
     },
 
     methods:

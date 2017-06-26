@@ -28,88 +28,91 @@ Vue.component("variation-select", {
 
     mounted: function()
     {
-        // initialize selected attributes to be tracked by change detection
-        var attributes = {};
-
-        for (var attributeId in this.attributes)
+        this.$nextTick(() =>
         {
-            attributes[attributeId] = null;
-        }
-        this.selectedAttributes = attributes;
+            // initialize selected attributes to be tracked by change detection
+            var attributes = {};
 
-        // set attributes of preselected variation if exists
-        if (this.preselect)
-        {
-            // find variation by id
-            var preselectedVariation = this.variations.filter(function(variation)
+            for (var attributeId in this.attributes)
             {
-                // eslint-disable-next-line eqeqeq
-                return variation.variationId == this.preselect;
-            }.bind(this));
-
-            if (!!preselectedVariation && preselectedVariation.length === 1)
-            {
-                // set attributes of preselected variation
-                this.setAttributes(preselectedVariation[0]);
+                attributes[attributeId] = null;
             }
-        }
+            this.selectedAttributes = attributes;
 
-        // search for matching variation on each change of attribute selection
-        this.$watch("selectedAttributes", function()
-        {
-
-            // search variations matching current selection
-            var possibleVariations = this.filterVariations();
-
-            if (possibleVariations.length === 1)
+            // set attributes of preselected variation if exists
+            if (this.preselect)
             {
-                // only 1 matching variation remaining:
-                // set remaining attributes if not set already. Will trigger this watcher again.
-                if (!this.setAttributes(possibleVariations[0]))
+                // find variation by id
+                var preselectedVariation = this.variations.filter(function(variation)
                 {
-                    // all attributes are set => load variation data
-                    var variationId = possibleVariations[0].variationId;
+                    // eslint-disable-next-line eqeqeq
+                    return variation.variationId == this.preselect;
+                }.bind(this));
 
-                    if (VariationData[variationId])
+                if (!!preselectedVariation && preselectedVariation.length === 1)
+                {
+                    // set attributes of preselected variation
+                    this.setAttributes(preselectedVariation[0]);
+                }
+            }
+
+            // search for matching variation on each change of attribute selection
+            this.$watch("selectedAttributes", function()
+            {
+
+                // search variations matching current selection
+                var possibleVariations = this.filterVariations();
+
+                if (possibleVariations.length === 1)
+                {
+                    // only 1 matching variation remaining:
+                    // set remaining attributes if not set already. Will trigger this watcher again.
+                    if (!this.setAttributes(possibleVariations[0]))
                     {
-                        // reuse cached variation data
-                        ResourceService
-                            .getResource("currentVariation")
-                            .set(VariationData[variationId]);
-                    }
-                    else
-                    {
-                        // get variation data from remote
-                        ApiService
-                            .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
-                            .done(function(response)
-                            {
-                                // store received variation data for later reuse
-                                VariationData[variationId] = response;
-                                ResourceService
-                                    .getResource("currentVariation")
-                                    .set(response);
-                            });
+                        // all attributes are set => load variation data
+                        var variationId = possibleVariations[0].variationId;
+
+                        if (VariationData[variationId])
+                        {
+                            // reuse cached variation data
+                            ResourceService
+                                .getResource("currentVariation")
+                                .set(VariationData[variationId]);
+                        }
+                        else
+                        {
+                            // get variation data from remote
+                            ApiService
+                                .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
+                                .done(function(response)
+                                {
+                                    // store received variation data for later reuse
+                                    VariationData[variationId] = response;
+                                    ResourceService
+                                        .getResource("currentVariation")
+                                        .set(response);
+                                });
+                        }
+
                     }
 
                 }
+            }, {
+                deep: true
+            });
 
-            }
-        }, {
-            deep: true
-        });
-
-        // watch for changes on selected variation to adjust url
-        ResourceService.watch("currentVariation", function(newVariation, oldVariation)
-        {
-            if (oldVariation)
+            // watch for changes on selected variation to adjust url
+            ResourceService.watch("currentVariation", function(newVariation, oldVariation)
             {
-                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                var title = document.getElementsByTagName("title")[0].innerHTML;
+                if (oldVariation)
+                {
+                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    var title = document.getElementsByTagName("title")[0].innerHTML;
 
-                window.history.replaceState({}, title, url);
-            }
-        }.bind(this));
+                    window.history.replaceState({}, title, url);
+                }
+            }.bind(this));
+        });
     },
 
     methods: {

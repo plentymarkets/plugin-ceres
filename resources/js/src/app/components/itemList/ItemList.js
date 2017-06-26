@@ -24,9 +24,12 @@ Vue.component("item-list", {
         ItemListService.setCategoryId(this.categoryId);
     },
 
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("itemList", this);
-        ResourceService.bind("isLoading", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("itemList", this);
+            ResourceService.bind("isLoading", this);
+        });
     }
 });

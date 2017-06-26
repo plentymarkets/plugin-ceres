@@ -10,13 +10,14 @@ Vue.component("item-lazy-img", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
-        var self = this;
-
-        setTimeout(function()
+        this.$nextTick(() =>
         {
-            $(self.$els.lazyImg).show().lazyload();
-        }, 1);
+            setTimeout(() =>
+            {
+                $(this.$els.lazyImg).show().lazyload();
+            }, 1);
+        });
     }
 });

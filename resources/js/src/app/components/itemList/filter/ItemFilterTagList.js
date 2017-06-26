@@ -21,9 +21,12 @@ Vue.component("item-filter-tag-list", {
         ResourceService.bind("facetParams", this);
     },
 
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("facets", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("facets", this);
+        });
     },
 
     methods:

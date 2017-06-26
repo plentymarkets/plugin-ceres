@@ -119,9 +119,12 @@ Vue.component("salutation-select", {
         }
     },
 
-    ready()
+    mounted()
     {
-        this.addressData.addressSalutation = 0;
+        this.$nextTick(() =>
+        {
+            this.addressData.addressSalutation = 0;
+        });
     },
 
     methods:

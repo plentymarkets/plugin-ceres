@@ -27,9 +27,12 @@ Vue.component("account-settings", {
     /**
      * Initialise the account settings modal
      */
-    ready: function()
+    mounted: function()
     {
-        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+        this.$nextTick(() =>
+        {
+            this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+        });
     },
 
     computed: {

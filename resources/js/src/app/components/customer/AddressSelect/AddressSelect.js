@@ -44,19 +44,22 @@ Vue.component("address-select", {
     /**
      * Select the address modal
      */
-    ready()
+    mounted()
     {
-        if (!this.isAddressListEmpty())
+        this.$nextTick(() =>
         {
-            this.loadSelectedAddress();
-        }
-        else
-        {
-            this.addressList = [];
-        }
+            if (!this.isAddressListEmpty())
+            {
+                this.loadSelectedAddress();
+            }
+            else
+            {
+                this.addressList = [];
+            }
 
-        this.addressModal = ModalService.findModal(this.$els.addressModal);
-        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+            this.addressModal = ModalService.findModal(this.$els.addressModal);
+            this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+        });
     },
 
     methods: {

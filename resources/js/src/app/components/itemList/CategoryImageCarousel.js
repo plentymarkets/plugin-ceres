@@ -18,22 +18,25 @@ Vue.component("category-image-carousel", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
-        if (this.imageUrls && this.imageUrls.length > 0)
+        this.$nextTick(() =>
         {
-            $(".owl-carousel").owlCarousel({
-                dots    : (this.showDots === "true"),
-                items   : 1,
-                loop    : this.imageUrls.length > 1,
-                lazyLoad: !this.disableLazyLoad,
-                margin  : 10,
-                nav     : (this.showNav === "true"),
-                navText : [
-                    "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                    "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-                ]
-            });
-        }
+            if (this.imageUrls && this.imageUrls.length > 0)
+            {
+                $(".owl-carousel").owlCarousel({
+                    dots    : (this.showDots === "true"),
+                    items   : 1,
+                    loop    : this.imageUrls.length > 1,
+                    lazyLoad: !this.disableLazyLoad,
+                    margin  : 10,
+                    nav     : (this.showNav === "true"),
+                    navText : [
+                        "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+                        "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+                    ]
+                });
+            }
+        });
     }
 });

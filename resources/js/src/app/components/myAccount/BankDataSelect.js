@@ -33,10 +33,13 @@ Vue.component("bank-data-select", {
     /**
      * Select the modals
      */
-    ready()
+    mounted()
     {
-        this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
-        this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
+        this.$nextTick(() =>
+        {
+            this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
+            this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
+        });
     },
 
     methods: {

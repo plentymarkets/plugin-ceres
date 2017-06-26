@@ -27,11 +27,14 @@ Vue.component("order-history", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.itemsPerPage = this.itemsPerPage || 10;
-        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-        this.setOrders(this.orderList);
+        this.$nextTick(() =>
+        {
+            this.itemsPerPage = this.itemsPerPage || 10;
+            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+            this.setOrders(this.orderList);
+        });
     },
 
     methods: {

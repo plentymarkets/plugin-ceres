@@ -36,12 +36,15 @@ Vue.component("invoice-address-select", {
     /**
      * If no address is related to the user, a popup will open to add an address
      */
-    ready()
+    mounted()
     {
-        if (App.isCheckoutView && this.addressList.length <= 0)
+        this.$nextTick(() =>
         {
-            this.$refs.invoiceAddressSelect.showInitialAddModal();
-        }
+            if (App.isCheckoutView && this.addressList.length <= 0)
+            {
+                this.$refs.invoiceAddressSelect.showInitialAddModal();
+            }
+        });
     },
 
     methods:

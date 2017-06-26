@@ -22,19 +22,22 @@ Vue.component("item-search", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("itemSearch", this);
-        this.initAutocomplete();
-
-        var urlParams = UrlService.getUrlParams(document.location.search);
-
-        this.itemSearch.query = urlParams.query;
-
-        if (this.itemSearch.query)
+        this.$nextTick(() =>
         {
-            ItemListService.updateSearchString(this.itemSearch.query);
-        }
+            ResourceService.bind("itemSearch", this);
+            this.initAutocomplete();
+
+            var urlParams = UrlService.getUrlParams(document.location.search);
+
+            this.itemSearch.query = urlParams.query;
+
+            if (this.itemSearch.query)
+            {
+                ItemListService.updateSearchString(this.itemSearch.query);
+            }
+        });
     },
 
     methods:

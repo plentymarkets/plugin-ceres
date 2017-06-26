@@ -26,12 +26,15 @@ Vue.component("user-login-handler", {
     /**
      * Add the global event listener for login and logout
      */
-    ready()
+    mounted()
     {
-        ResourceService.bind("user", this, "isLoggedIn");
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("user", this, "isLoggedIn");
 
-        this.setUsername(this.userData);
-        this.addEventListeners();
+            this.setUsername(this.userData);
+            this.addEventListeners();
+        });
     },
 
     methods: {
