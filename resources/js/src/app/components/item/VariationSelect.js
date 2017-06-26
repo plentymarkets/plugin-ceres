@@ -26,7 +26,7 @@ Vue.component("variation-select", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
         // initialize selected attributes to be tracked by change detection
         var attributes = {};

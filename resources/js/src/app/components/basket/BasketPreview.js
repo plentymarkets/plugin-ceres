@@ -22,9 +22,12 @@ Vue.component("basket-preview", {
     /**
      * Bind to basket and bind the basket items
      */
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("basket", this);
-        ResourceService.bind("basketItems", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("basket", this);
+            ResourceService.bind("basketItems", this);
+        });
     }
 });

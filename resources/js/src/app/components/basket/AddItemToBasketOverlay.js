@@ -23,9 +23,12 @@ Vue.component("add-item-to-basket-overlay", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        ResourceService.bind("basketItem", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("basketItem", this);
+        });
     },
 
     watch: {

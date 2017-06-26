@@ -23,12 +23,15 @@ Vue.component("coupon", {
         ResourceService.bind("basket", this);
     },
 
-    ready: function()
+    mounted: function()
     {
-        if (this.disabled)
+        this.$nextTick(() =>
         {
-            this.couponCode = this.basket.couponCode;
-        }
+            if (this.disabled)
+            {
+                this.couponCode = this.basket.couponCode;
+            }
+        });
     },
 
     methods:

@@ -22,9 +22,12 @@ Vue.component("basket-totals", {
     /**
      * Bind to basket
      */
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("basket", this);
+        this.$nextTick(() =>
+        {
+            ResourceService.bind("basket", this);
+        });
     },
 
     methods:

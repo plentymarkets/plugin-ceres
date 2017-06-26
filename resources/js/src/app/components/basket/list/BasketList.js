@@ -23,22 +23,25 @@ Vue.component("basket-list", {
     /**
      * Bind to basket and show the items in a small or large list
      */
-    ready: function()
+    mounted: function()
     {
-        ResourceService.bind("basketItems", this);
-
-        if (this.triggerEvent)
+        this.$nextTick(() =>
         {
-            ResourceService.watch("basket", function(newValue, oldValue)
+            ResourceService.bind("basketItems", this);
+
+            if (this.triggerEvent)
             {
-                if (oldValue)
+                ResourceService.watch("basket", function(newValue, oldValue)
                 {
-                    if (JSON.stringify(newValue) != JSON.stringify(oldValue))
+                    if (oldValue)
                     {
-                        document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                        if (JSON.stringify(newValue) != JSON.stringify(oldValue))
+                        {
+                            document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
+        });
     }
 });
