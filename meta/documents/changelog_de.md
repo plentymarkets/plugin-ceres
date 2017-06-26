@@ -1,19 +1,97 @@
 # Release Notes für Ceres
 
-## v1.2.4 (unknown)
+## v1.2.8 (unknown)
+
+## v1.2.7 (2017-06-22)
 
 ### Hinzugefügt
 
+- Das Feld **Firma** wird jetzt standardmäßig im Adressformular angezeigt, wenn in der Anrede **Firma** ausgewählt wird.
+- Wenn das Feld **Firma** im Tab **Checkout and My account** in der Konfig deaktiviert ist, wird die Option **Firma** in der Anrede ausgeblendet.  
+
+### Geändert
+
+- Die Sortierung nach Preis wurde verbessert.
+- Verschiedene Einträge wurden aus den Sortierungsmöglichkeiten der Konfig entfernt.
+- Die Bezeichnungen der Sortiermöglichkeiten in der Konfig wurden an die Anzeige im Webshop angepasst.
+
 ### Behoben
 
-- Die Kategorien in der Navigation haben nun einen Zeilenumbruch, wenn der Text breiter ist, als der Text in dem obersten Menüpunkt.
-- Optionale Felder aus der Adresseingabe sind nun nichtmehr standardmäßig aktiviert.
+- Im Adressformular ist bei der Anrede **Herr** vorausgewählt und wird im Dropdown nun auch angezeigt.
+
 
 ### Bekannte Probleme
 
 - Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Das Bundesland wird an der Adresse falsch gespeichert.
-- Es ist bisher kein Lieferland standardmäßig vorausgewählt. Beim Anlegen einer Adresse werden Eingabefelder erst nach Auswahl des Lieferlandes angezeigt.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
+## v1.2.6 (2017-06-14)
+
+### Geändert
+
+- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+
+### Behoben
+
+- Auf der Startseite verlinkt der Button **Alle anzeigen** der ersten Kategorieliste auf die richtige Kategorie.
+- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
+- Im Checkout ist die Verlinkung auf die AGB nun korrekt.
+
+## v1.2.5 (2017-06-08)
+
+### Hinzugefügt
+
+- In der Auftragsübersicht wird jetzt die Zahlungsart und der Zahlungsstatus angezeigt.
+- Es wurde der Template-Container `MyAccount.OrderHistoryPaymentInformation` hinzugefügt, um in der Auftragsübersicht im **Mein Konto**-Bereich zusätzliche Informationen anzuzeigen.
+
+### Geändert
+
+- Das Registrierungs-Overlay schließt sich nun im Fehlerfall nicht mehr.
+- In Ceres sind jetzt standardmäßig Webshop-Benachrichtigungen aktiviert.
+- Die Optionen der Sortierung für die Kategorieansicht haben neue Übersetzungen.
+- Wenn ein Overlay mit Benutzerdaten erneut geöffnet wird, wird die Validierung zurückgesetzt.
+- Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nicht mehr ausgegeben.
+
+### Behoben
+
+- In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
+- Es wurde ein Fehler behoben, der in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
+- Es wurde ein Fehler behoben, der dazu führte, dass die Validierung beim Anlegen einer Adresse nicht durchgeführt wurde.
+
+## v1.2.4 (2017-06-02)
+
+### Hinzugefügt
+
+- In der Kategorieansicht wird bei Artikeln mit Varianten anstatt des "Warenkorb"-Buttons ein Button mit einem Pfeil angezeigt, der in die Einzelansicht des Artikels führt.
+- Ein Template-Container wurde hinzugefügt, um die komplette Bestellbestätigungsseite zu überschreiben.
+- Der "Nach oben"-Button kann nun unten rechts oder unten mittig angezeigt werden.
+- Im Warenkorb kann nun auch der Vorschautext eines Artikels angezeigt werden.
+- Ein Template-Container wurde hinzugefügt, um in der Einzelansicht eines Artikels neben der Beschreibung und den technischen Daten weitere Tabs mit Beschreibungstexten oder anderen Inhalten zu ergänzen.
+- Die Felder des Adressformulars für das Lieferland **Vereinigtes Königreich** können nun individuell angezeigt und validiert werden.
+- Anstelle des angezeigten Overlays nach Klick auf **Zum Warenkorb hinzufügen** kann nun auch die Warenkorbvorschau eingeblendet werden.
+
+### Geändert
+
+- In der Filteransicht wurde das Icon des "Schließen"-Buttons zu einem "x" geändert.
+- Die maximale Größe der Anzeige von Artikelinformationen im Warenkorb wurde erhöht ("Mehr"-Button).
+- Optionale Adressfelder der Adressformulare sind nicht mehr standardmäßig aktiviert.
+- Im Webshop wird nicht mehr der interne Herstellername, sondern der externe Herstellername angezeigt.
+- Wenn ein Kunde in den Kassenbereich navigiert und noch keine Adresse hinterlegt hat, öffnet sich automatisch ein Overlay für die Adresseingabe.
+
+### Behoben
+
+- Die Artikelinformationen im Warenkorb wurden nicht angezeigt. Dies wurde behoben.
+- Namen von Unterkategorien werden umgebrochen, wenn der Name länger ist, als der Name der Oberkategorie.
+- Aufgrund eines Fehlers wurde die Übersetzung des "Mehr/Weniger"-Buttons im Warenkorb nicht angezeigt. Dies wurde behoben.
+- Der Abstand zwischen den Hauptkategorien in der Navigation wurde entfernt.
+- Auf der Startseite wird in Artikelvorschauen das Bild mit der Position 0 ausgegeben.
+
+### To do
+
+- Um den Herstellernamen im Webshop anzuzeigen, muss bei den Herstellern das Feld **Externer Name** im Menü **Einstellungen » Artikel » Hersteller** befüllt werden.
 
 ## v1.2.3 (2017-05-19)
 

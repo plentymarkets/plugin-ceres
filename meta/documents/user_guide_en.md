@@ -4,7 +4,7 @@
 
 **Ceres** is the official template plugin for the default online store of plentymarkets 7. In the new online store for plentymarkets 7, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **Ceres** plugin contains the new standard design of the online store and can be customised to meet your needs. The **IO** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins. In this user guide you learn how to <a href="#10.">set up Ceres</a> and how to <a href="#20.">customise Ceres</a>.
 
-## Setting up Ceres in plentymarkets
+## Setting up Ceres in plentymarkets<a id="10."></a>
 
 You can make changes to your design by carrying out the design settings. No programming experience is required. To carry out the design settings, proceed as follows.
 
@@ -108,7 +108,11 @@ Customise the header and the footer of your design. Display your own logo and de
 </tr>
 <tr>
 <td colspan="2" class="th">Tab: Footer</td>  
-</tr>  
+</tr>
+<tr>
+<td><b>Position of the Back-to-top button</b></td>  
+<td>Select a position. The <strong>Back-to-top</strong> button will be displayed at the selected position.<br /> <strong>On the right at the bottom</strong> = Display the <strong>Back-to-top</strong> button on the right at the bottom.<br /> <strong>In the middle at the bottom</strong> = Display the <strong>Back-to-top</strong> button in the middle at the bottom.</td>
+</tr>
 <tr>
 <td><b>Number of store features</b></td>  
 <td>Select the number of features to be displayed in the footer of the online store.<br /> <strong>0</strong> = Do not display any store features.<br /> <strong>1</strong> = Only display the first store feature in the footer.<br /> <strong>2</strong> = Display the first and the second store feature in the footer.<br /> <strong>3</strong> = Display all three store features in the footer.</td>
@@ -179,7 +183,7 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 </tr>
 <tr>
 <td><b>Show item information</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item view in the online store.<br /> <strong>Condition</strong> = Activate to display the item condition.<br /> <strong>Manufacturer</strong> = Activate to display the item manufacturer.<br /> <strong>Manufacturing country</strong> = Activate to display the manufacturing country of the item.<br /> <strong>Age rating</strong> = Activate to display the item's age rating.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Technical data</strong> = Activate to display the <strong>Technical data</strong> tab. If you activate the display of the <strong>Technical data</strong> without saving a text in the <strong>Technical data</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Description</strong> = Activate to display the <strong>Description</strong> tab. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Strikethrough price</strong> = Activate to show the strikethrough price next to the item price.<br /> <strong>Variation name</strong> = Activate to display the variation name.<br /><!--strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /--> <strong>External variation ID</strong> = Activate to display the external variation ID.<br /> <strong>Model</strong> = Activate to display the model.<br /> <strong>Dimensions</strong> = Activate to display the item's dimensions.<br /> <strong>Customs tariff number</strong> = Activate to display the customs tariff number.<br /> <strong>Net weight</strong> = Activate to display the net weight.<br /> <strong>Gross weight</strong> = Activate to display the gross weight.<br /> <strong>Content</strong> = Activate to display the content.</td>
+<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item view in the online store.<br /> <strong>Condition</strong> = Activate to display the item condition.<br /> <strong>Manufacturer</strong> = Activate to display the item manufacturer. The external name of the manufacturer will be displayed.<br /> <strong>Manufacturing country</strong> = Activate to display the manufacturing country of the item.<br /> <strong>Age rating</strong> = Activate to display the item's age rating.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Technical data</strong> = Activate to display the <strong>Technical data</strong> tab. If you activate the display of the <strong>Technical data</strong> without saving a text in the <strong>Technical data</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Description</strong> = Activate to display the <strong>Description</strong> tab. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the tab will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Strikethrough price</strong> = Activate to show the strikethrough price next to the item price.<br /> <strong>Variation name</strong> = Activate to display the variation name.<br /><!--strong>Variation number</strong> = Aktivieren, um die Variantennummer anzuzeigen.<br /--> <strong>External variation ID</strong> = Activate to display the external variation ID.<br /> <strong>Model</strong> = Activate to display the model.<br /> <strong>Dimensions</strong> = Activate to display the item's dimensions.<br /> <strong>Customs tariff number</strong> = Activate to display the customs tariff number.<br /> <strong>Net weight</strong> = Activate to display the net weight.<br /> <strong>Gross weight</strong> = Activate to display the gross weight.<br /> <strong>Content</strong> = Activate to display the content.</td>
 </tr>
 <tr>
 <td><b>Store specials: Number of decimal places for discounts</b></td>  
@@ -236,7 +240,7 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <tbody>
 <tr>
 <td><b>Show item information</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item overview of the shopping cart.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Description</strong> = Activate to display the item description. If you activate the display of the <strong>Description</strong> without saving a text in the <strong>Description</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the item description will not be displayed.<br /> <strong>Availability</strong> = Activate to display the item availability.<br /> <strong>Variation number</strong> = Activate to display the variation number.<br /> <strong>Condition</strong> = Activate to display the item condition.
+<td>Select one, multiple or <strong>ALL</strong> item information options to be displayed in the item overview of the shopping cart.<br /> <strong>Item ID</strong> = Activate to display the item's ID.<br /> <strong>Item text</strong> = Activate to display the item description. If you activate the display of the <strong>Item text</strong> without saving a text in the <strong>Item text</strong> field in the <strong><a href="{% Link(3177) %}#50.">Texts</a></strong> tab of an item, the item description will not be displayed.<br /> <strong>Preview text</strong> = Activate to display the preview text for the item.<br /> <strong>Availability</strong> = Activate to display the item availability.<br /> <strong>Variation number</strong> = Activate to display the variation number.<br /> <strong>Condition</strong> = Activate to display the item condition.
 </tr>
  <tr>
 <td><b>Show price information</b></td>  
@@ -251,8 +255,8 @@ Customise the display options of the shopping cart in the **Shopping cart** tab.
 <td>Activate to display the <strong>Change variation</strong> button in the item overview in the shopping cart. By clicking on <strong>Change variation</strong>, customers can change an item's variation in the shopping cart. If you activate the <strong>Change variation</strong> button, but the item has no variations, the button will not be displayed.</td>
 </tr>    
  <tr>
-<td><b>Add to shopping cart: Show overlay</b></td>  
-<td>Activate to show the overlay of the shopping cart after clicking on the <strong>Add to shopping cart</strong> button.</td>
+<td><b>Add to shopping cart: Show information</b></td>  
+<td>Select whether to show the overlay of the shopping cart or toggle the shopping cart preview after clicking on the <strong>Add to shopping cart</strong> button.<br /> <strong>Show overlay</strong> = Display an overlay of the shopping cart.<br /> <strong>Toggle shopping cart preview</strong> = Toggle the shopping cart preview.<br /> <strong>No information</strong> = Do not show any information.</td>
 </tr>
 </tbody>
 <caption>Table 4: Customising the shopping cart</caption>
@@ -277,7 +281,7 @@ Customise the display options of the checkout in the **Checkout and My account**
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Checkout and My account** tab. 
-5. Carry out the settings. Pay attention to the information given in table 4. 
+5. Carry out the settings. Pay attention to the information given in table 5. 
 6. **Save** the settings.
 
 <table>
@@ -289,23 +293,39 @@ Customise the display options of the checkout in the **Checkout and My account**
 </thead>
 <tbody>
 <tr>
-<td><b>Show invoice address fields in address form</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
+<td><b>Show invoice address fields in address form (DE)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>Germany</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1</strong> = Activate to display the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. <br /> <strong>State</strong> = Activate to display the <strong>State</strong> field.
 </tr>
 <tr>
-<td><b>Enable invoice address field validation</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
+<td><b>Enable invoice address field validation (DE)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1</strong> = Activate to validate the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field.
 </tr>
 <tr>
-<td><b>Show delivery address fields in address form</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to display the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to display the <strong>State</strong> field. This field is only available in the German address form.
+<td><b>Show delivery address fields in address form (DE)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>Germany</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1</strong> = Activate to display the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field.<br /> <strong>State</strong> = Activate to display the <strong>State</strong> field.
 </tr>
 <tr>
-<td><b>Enable delivery address field validation</b></td>  
-<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1 / Building name</strong> = Activate to validate the <strong>Additional address information 1</strong> field or the <strong>Building name</strong> field. The <strong>Additional address information 1</strong> field is only available in the German address form. The <strong>Building name</strong> field is only available in the English address form.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field. This field is only available in the German address form.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field. This field is only available in the German address form.
+<td><b>Enable delivery address field validation (DE)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Additional address 1</strong> = Activate to validate the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to validate the <strong>Additional address information 2</strong> field.<br /> <strong>State</strong> = Activate to validate the <strong>State</strong> field.
+</tr>
+<tr>
+<td><b>Show invoice address fields in address form (UK)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /><strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field. <!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
+</tr>
+<tr>
+<td><b>Enable invoice address field validation (UK)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to validate the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to validate the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
+</tr>
+<tr>
+<td><b>Show delivery address fields in address form (UK)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>United Kingdom</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to display the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to display the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to display the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> anzuzeigen.<-->
+</tr>
+<tr>
+<td><b>Enable delivery address field validation (UK)</b></td>  
+<td>Select one, multiple or <strong>ALL</strong> address fields to validate these fields when entering the address.<br /> <strong>Company</strong> = Activate to validate the <strong>Company</strong> field.<br /> <strong>Form of address</strong> = Activate to validate the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to validate the <strong>Title</strong> field. <br /> <strong>Name affix</strong> = Activate to validate the <strong>Name affix</strong> field. <br /> <strong>Address 2</strong> = Activate to validate the <strong>Address 2</strong> field.<br /> <strong>Address 3</strong> = Activate to validate the <strong>Address 3</strong> field.<br /> <strong>Address 4</strong> = Activate to validate the <strong>Address 4</strong> field.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 </tbody>
-<caption>Table 4: Customising the checkout</caption>
+<caption>Table 5: Customising the checkout</caption>
 </table>
 
 ### Customising the pagination and sorting
@@ -319,7 +339,7 @@ Customise the pagination of the item overview and the online store's item sortin
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Open the **Pagination and sorting** tab. 
-5. Carry out the settings. Pay attention to the information given in table 5. 
+5. Carry out the settings. Pay attention to the information given in table 6. 
 6. **Save** the settings.
 
 <table>
@@ -352,7 +372,7 @@ Customise the pagination of the item overview and the online store's item sortin
 </tr>  
 <tr>
 <td><b>Enable item sorting by</b></td>
-<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item ID (ascending)</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID (descending)</strong> = Sort items by item ID in descending order.<br /> <strong>Item name (ascending)</strong> = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name (descending)</strong> = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position (ascending)</strong> = Display items with the highest position number first.<br /> <strong>Item position (descending)</strong> = Display items with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price (ascending)</strong> = Display items with the lowest price first.<br /> <strong>Price (descending)</strong> = Display items with the highest price first.<br /> <strong>Customer feedback (ascending)</strong> = Display items with the lowest customer feedback first.<br /> <strong>Customer feedback (descending)</strong> = Display items with the highest customer feedback first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID (ascending)</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID (descending)</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number (ascending)</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number (descending)</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last variation update</strong> = Display the last updated item variation first.<br /> <strong>First variation update</strong> = Display the first updated item variation first.<br /> <strong>Variation name (ascending)</strong> = Sort item variations in alphabetical order by variation name (A-Z).<br /> <strong>Variation name (descending)</strong> = Sort item variations in alphabetical order by variation name (Z-A).<br /> <strong>Variation position (ascending)</strong> = Display item variation with the highest position number first.<br /> <strong>Variation position (descending)</strong> = Display item variation with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Active variation (ascending)</strong> = Sort active item variations in ascending order.<br /> <strong>Active variation (descending)</strong> = Sort active item variations in descending order.<br /> <strong>Main variation (ascending)</strong> = Sort main item variations in ascending order.<br /> <strong>Main variation (descending)</strong> = Sort main item variations in descending order.<br /> <strong>Manufacturer (ascending)</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer (descending)</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Random items</strong> = Display items in a different, randomly chosen order every time.
+<td>Activate one, several or <strong>ALL</strong> sorting options for item sorting.<br /> <strong>Item name A-Z</strong> = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name Z-A</strong> = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Price ⬆</strong> = Display items with the lowest price first.<br /> <strong>Price ⬇</strong> = Display items with the highest price first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Availability ⬆</strong> = Display item variations by availability in ascending order.<br /> <strong>Availability ⬇</strong> = Display item variations by availability in descending order.<br /> <strong>Variation number ⬆</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number ⬇</strong> = Sort item variations by variation number in descending order.<br /> <strong>Last update</strong> = Display the last updated item variation first.<br /> <strong>First update</strong> = Display the first updated item variation first.<br /> <strong>Manufacturer A-Z</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer Z-A</strong> = Sort items in alphabetical order by manufacturer (Z-A).
 </td>
 </tr>
 <tr>
@@ -360,7 +380,7 @@ Customise the pagination of the item overview and the online store's item sortin
 <td>Select the entry that is selected by default for item sorting.</td>
 </tr>
 </tbody>
-<caption>Table 5: Customising the pagination and sorting</caption>
+<caption>Table 6: Customising the pagination and sorting</caption>
 </table>
 
 
@@ -375,7 +395,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree. 
 4. Click on the **Registration** or **Logging and performance** tab. 
-5. Carry out the settings. Pay attention to the information given in table 6. 
+5. Carry out the settings. Pay attention to the information given in table 7. 
 6. **Save** the settings.
 
 <table>
@@ -409,7 +429,7 @@ Settings specifically aimed at plugin developers are available in the **Registra
 <td>Select a performance level.<br /> <strong>Live</strong> = Select the live mode when using the online store as a productive system. Files will be minified and bundled.<br /> <strong>Development</strong> = Select the development mode to use debugging functionality. Files will not be minified and bundled.</td>
 </tr>
 </tbody>
-<caption>Table 6: Carrying out settings for plugin development</caption>
+<caption>Table 7: Carrying out settings for plugin development</caption>
 </table>
 
 ### Linking item lists
@@ -441,7 +461,7 @@ Specific templates for legal information are available in Ceres. You can save an
 
 1. Go to **Settings » Client (store) » Standard » Online store » Legal information**. 
 2. Expand a **language**. 
-3. Click on the **Terms and conditions** tab. 
+3. Click on the **Terms and conditions** tab.
 4. Click on the **Text** tab. 
 5. Enter the text for your terms and conditions. 
 6. **Save** the settings.
@@ -464,7 +484,7 @@ Enter the texts for the **cancellation rights**, the **privacy policy** and the 
 
 Set up the filters for the search and category view of the online store **Ceres** with the help of facets of the **Attribute/property** type.
 
-Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties]https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapters.
+Set up attributes and properties first and link them with your items. For further information about attributes and properties, refer to the [Managing attributes and Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#1) chapters.
 
 For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapter.
 
@@ -483,7 +503,9 @@ Various possibilities are available to customise the **Ceres** template plugin a
 * Register with [GitHub](https://github.com/join?source=header-home) 
 * Open the [Ceres](https://github.com/plentymarkets/plugin-ceres) project 
 * Create your own fork of the project 
-* For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). <div class="alert alert-warning" role="alert">
+* For further information about changing the source code, refer to our [template guide](https://developers.plentymarkets.com/dev-doc/template-plugins). 
+
+<div class="alert alert-warning" role="alert">
     Note that you have to update your template manually if you want to use features of a newer version of the <strong>Ceres</strong> plugin. Automatic plugin updates are only available for plugins purchased on plentyMarketplace.
 </div>
 

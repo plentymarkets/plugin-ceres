@@ -1,5 +1,5 @@
-var AddressService = require("services/AddressService");
-var ValidationService = require("services/ValidationService");
+import AddressService from "services/AddressService";
+import ValidationService from "services/ValidationService";
 
 Vue.component("create-update-address", {
 
@@ -65,7 +65,7 @@ Vue.component("create-update-address", {
          */
         saveAddress: function()
         {
-            if (this.modalType === "create")
+            if (this.modalType === "initial" || this.modalType === "create")
             {
                 this.createAddress();
             }

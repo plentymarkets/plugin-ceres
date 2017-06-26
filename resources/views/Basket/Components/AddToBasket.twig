@@ -5,29 +5,38 @@
     <div>
 
         <div v-if="showQuantity">
-        <span>
-            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
-                <quantity-input :value="1" @quantity-change="updateQuantity"
-                                template="#vue-quantity-input"></quantity-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
-                <button href="#" class="btn btn-block btn-primary" @click="addToBasket()">
-                    {{ trans("Ceres::Template.addToBasket") }}
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                </button>
-            </div>
-        </span>
+            <span>
+                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
+                    <quantity-input :value="1" @quantity-change="updateQuantity"
+                                    template="#vue-quantity-input"></quantity-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
+                    <button href="#" v-if="!hasChildren" class="btn btn-block btn-primary" @click="addToBasket()">
+                        {{ trans("Ceres::Template.addToBasket") }}
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </button>
+                    <button href="#" v-if="hasChildren" class="btn btn-block btn-primary" @click="directToItem()">
+                        {{ trans("Ceres::Template.addToBasket") }}
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </span>
         </div>
 
         <div v-else>
 
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" class="btn btn-outline-primary" @click="addToBasket()">
+                <button type="button" v-if="!hasChildren" class="btn btn-outline-primary" @click="addToBasket()"
+                        v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}">
                     <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>
+                </button>
+                <button type="button" v-if="hasChildren" class="btn btn-outline-primary" @click="directToItem()"
+                        v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.showItem") }}">
+                    <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
                 </button>
                 {# maybe use the button for wishlist #}
                 {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
-                {#<i class="fa fa-arrow-right" aria-hidden="true"></i>#}
+                {#<i class="fa fa-heart-o" aria-hidden="true"></i>#}
                 {#</button>#}
             </div>
         </div>

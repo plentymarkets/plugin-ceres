@@ -5,7 +5,7 @@
         <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" v-el:single>
             <div v-for="image in currentVariation.documents[0].data.images | itemImages imageUrlAccessor | orderBy 'position'">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
-                    <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }" class="owl-lazy" :data-src="image.url" itemprop="image.url">
+                    <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }" class="owl-lazy" :data-src="image.url" itemprop="image">
                 </a>
             </div>
         </div>

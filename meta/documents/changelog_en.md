@@ -1,5 +1,95 @@
 # Release Notes for Ceres
 
+## v1.2.7 (2017-06-22)
+
+### Added
+
+- The **Company** field is shown in address forms as soon as **Company** is selected in the **Form of address** drop-down.
+- If the **Company** field is deactivated in the **Checkout and My account** tab in the config, the option **Company** is not shown in the **Form of address** drop-down.  
+
+### Changed
+
+- Sorting items by price has been improved.
+- Various entries have been removed from the sorting options in the config.
+- The names of sorting options in the config have been changed. They now equal the names of the sorting options in the online store.
+
+### Fixed
+
+- In the address form, the value **Mr.** is preselected in the form of address field and the value is now displayed in the drop-down.
+
+### Known issues
+
+- Due to a sporadically occurring error, addresses cannot be edited at the moment.
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+- In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
+## v1.2.6 (2017-06-14)
+
+### Changed
+
+- Items and categories for which no translations are available will not be displayed on the homepage when the respective language is selected in the online store.
+
+### Fixed
+
+- The **Show all** button of the first category list on the homepage now references to the correct category.
+- Due to an error, the country of delivery in the invoice address form did not change when a different country was selected. This has been fixed.
+- The link for the **General terms and conditions** in the checkout now references the correct category.
+
+## v1.2.5 (2017-06-08)
+
+### Added
+
+- The payment method and the payment status are now be displayed in the order history.
+- The template container `MyAccount.OrderHistoryPaymentInformation` for displaying additional information in the order history of the **My account** area has been added.
+
+### Changed
+
+- The registration overlay will not close if an error occurs.
+- Online store notifications are now activated by default for Ceres.
+- Sorting options for the category view have new translation texts.
+- Validation will be reset if a user data overlay is opened again.
+- Categories for which no translation was saved will not be displayed if the respective language is selected in the online store.
+
+### Fixed
+
+- The order status is displayed again in the order history.
+- Due to an error, item images could sometimes not be loaded in the category view. This has been fixed.
+- Due to an error validation during creating an address failed. This has been fixed.
+
+## v1.2.4 (2017-06-02)
+
+### Added
+
+- For items with variations displayed in the category view, an arrow button is displayed instead of the "Shopping cart" button that will open the single item view.
+- A template container for overriding the complete order confirmation page has been added.
+- The "Back-to-top" button can now be displayed on the right at the bottom or in the middle at the bottom of the online store.
+- The preview text of an item can now be displayed in the shopping cart.
+- A template container was added for displaying additional tabs with description texts and other content next to the item description tab and technical data tab in the single item view.
+- The fields of the address form for the delivery country **United Kingdom** can now be displayed and validated individually.
+- Instead of displaying an overlay after clicking on **Add to shopping cart** the shopping cart preview can be shown.
+
+### Changed
+
+- The icon of the "Close" button has been changed in the filter view.
+- The maximum size of the area for displaying item information in the shopping cart has been increased ("More" button).
+- Optional fields of the address forms are not activated by default.
+- The external name of a manufacturer is displayed in the online store instead of the internal manufacturer name.
+- When a customer opens the checkout page and no address is available for this customer, the address form overlay will automatically open.
+
+### Fixed
+
+- Due to an error the item information were not shown in the shopping cart. This has been fixed.
+- Names of sub-categories will be wrapped to the next line if the name of the sub-category is longer than the name of the main category.
+- Due to an error the translation of the "More/less" buttons were not shown in the shopping cart. This has been fixed.
+- The margin between the main categories in the navigation has been removed.
+- The image with the position 0 will be displayed in the item previews on the homepage.
+
+### To do
+
+- In order to display the name of the manufacturer of an item in the online store, a name must be entered in the **External name** field in the **Settings » Item » Manufacturer** menu.
+
 ## v1.2.3 (2017-05-19)
 
 ### Added
@@ -13,11 +103,6 @@
 - Due to an error, the breadcrumbs/menu points didn't work properly. This has been fixed.
 - Due to an error, the sorting of item images didn't work properly if a variation had its own images. This has been fixed.
 
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- The federal state (German: Bundesland) is not saved correctly for the address.
-- No shipping country is selected by default. When creating an address, input fields will only be displayed after selecting a shipping country.
 
 ## v1.2.2 (2017-05-11)
 

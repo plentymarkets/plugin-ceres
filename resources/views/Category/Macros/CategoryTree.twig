@@ -2,31 +2,34 @@
 
     {% for category in categories %}
 
-        {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
+        {% if category.details | length > 0 %}
 
-        {% if category.children %}
+            {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
 
-            <li class="ddown">
-                <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
-                <ul data-level="1">
+            {% if category.children %}
 
-                    {% for child in category.children %}
+                <li class="ddown">
+                    <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+                    <ul data-level="1">
 
-                        <li>
-                            <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{{ child }}">{{ child.details[0].name }}</a>
-                        </li>
+                        {% for child in category.children %}
+                            {% if child.details | length > 0 %}
+                                <li>
+                                    <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{{ child }}">{{ child.details[0].name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
 
-                    {% endfor %}
+                    </ul>
+                </li>
 
-                </ul>
-            </li>
+            {% else %}
 
-        {% else %}
+                <li>
+                    <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+                </li>
 
-            <li>
-                <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
-            </li>
-
+            {% endif %}
         {% endif %}
     {% endfor %}
 

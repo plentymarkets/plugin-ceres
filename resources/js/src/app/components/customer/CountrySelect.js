@@ -64,9 +64,6 @@ Vue.component("country-select", {
     },
 
     watch: {
-        /**
-         * Add watcher to handle the country changed
-         */
         selectedCountryId()
         {
             this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
@@ -76,7 +73,7 @@ Vue.component("country-select", {
             {
                 this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry.isoCode2);
+                this.$dispatch("selected-country-changed", this.selectedCountry);
             }
         }
     }

@@ -6,7 +6,7 @@ var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
-    props: ["showOverlay", "template"],
+    props: ["basketAddInformation", "template"],
 
     data: function data() {
         return {
@@ -16,19 +16,22 @@ Vue.component("add-item-to-basket-overlay", {
             currency: ""
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
-
     ready: function ready() {
         ResourceService.bind("basketItem", this);
     },
 
+
     watch: {
         basketItem: function basketItem() {
-            if (this.showOverlay) {
+            if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
+                setTimeout(function () {
+                    $("body").toggleClass("open-right");
+                }, 1);
             }
         }
     },
@@ -49,13 +52,13 @@ Vue.component("add-item-to-basket-overlay", {
 
             return render;
         },
-
         setPriceFromData: function setPriceFromData() {
             if (this.basketItem.currentBasketItem.calculatedPrices) {
                 this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
                 this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
         },
+
 
         /**
          * @returns {string}
@@ -71,23 +74,20 @@ Vue.component("add-item-to-basket-overlay", {
 
             return "/" + path;
         },
-
         startCounter: function startCounter() {
+            var _this = this;
+
             this.timeToClose = 10;
 
-            var timerVar = setInterval(countTimer, 1000);
+            var timerVar = setInterval(function () {
+                _this.timeToClose -= 1;
 
-            var self = this;
-
-            function countTimer() {
-                self.timeToClose -= 1;
-
-                if (self.timeToClose === 0) {
+                if (_this.timeToClose === 0) {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
                     clearInterval(timerVar);
                 }
-            }
+            }, 1000);
         }
     },
 
@@ -98,7 +98,6 @@ Vue.component("add-item-to-basket-overlay", {
         texts: function texts() {
             return this.basketItem.currentBasketItem.texts;
         },
-
         imageUrl: function imageUrl() {
             var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
 
@@ -124,15 +123,6 @@ Vue.component("add-to-basket", {
 
     created: function created() {
         this.$options.template = this.template;
-    },
-
-    computed: {
-        /**
-         * returns item.variation.id
-         */
-        variationId: function variationId() {
-            return this.item.variation.id;
-        }
     },
 
     methods: {
@@ -172,6 +162,19 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        }
+    },
+
+    computed: {
+        /**
+         * returns item.variation.id
+         */
+        variationId: function variationId() {
+            return this.item.variation.id;
+        },
+
+        hasChildren: function hasChildren() {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         }
     }
 });
@@ -436,7 +439,12 @@ Vue.component("basket-list-item", {
 },{"services/ResourceService":76}],8:[function(require,module,exports){
 "use strict";
 
-var CategoryRendererService = require("services/CategoryRendererService");
+var _CategoryRendererService = require("services/CategoryRendererService");
+
+var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ResourceService = require("services/ResourceService");
 
 Vue.component("category-breadcrumbs", {
@@ -472,13 +480,13 @@ Vue.component("category-breadcrumbs", {
          * @param currentCategory
          */
         renderItems: function renderItems(currentCategory) {
-            CategoryRendererService.renderItems(currentCategory);
+            _CategoryRendererService2.default.renderItems(currentCategory);
 
             return false;
         },
 
         getBreadcrumbURL: function getBreadcrumbURL(breadcrumb) {
-            return CategoryRendererService.getScopeUrl(breadcrumb);
+            return _CategoryRendererService2.default.getScopeUrl(breadcrumb);
         }
     }
 });
@@ -765,11 +773,11 @@ Vue.component("address-input-group", {
     methods: {
         /**
          * Update the address input group to show.
-         * @param value
+         * @param shippingCountry
          */
-        onSelectedCountryChanged: function onSelectedCountryChanged(value) {
-            if (this.countryLocaleList.indexOf(value) > 0) {
-                this.localeToShow = value;
+        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
+                this.localeToShow = shippingCountry.isoCode2;
             } else {
                 this.localeToShow = this.defaultCountry;
             }
@@ -816,9 +824,20 @@ Vue.component("address-input-group", {
 },{}],14:[function(require,module,exports){
 "use strict";
 
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var ModalService = require("services/ModalService");
-var AddressService = require("services/AddressService");
+var ResourceService = require("services/ResourceService");
+var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("address-select", {
 
@@ -832,18 +851,22 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            localization: {}
         };
     },
+
 
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
      */
     created: function created() {
         this.$options.template = this.template;
+        ResourceService.bind("localization", this);
 
         this.addEventListener();
     },
+
 
     /**
      * Select the address modal
@@ -859,17 +882,19 @@ Vue.component("address-select", {
         this.deleteModal = ModalService.findModal(this.$els.deleteModal);
     },
 
+
     methods: {
         /**
          * Add the event listener
          */
         addEventListener: function addEventListener() {
-            var self = this;
+            var _this = this;
 
             ApiService.listen("AfterAccountContactLogout", function () {
-                self.cleanUserAddressData();
+                _this.cleanUserAddressData();
             });
         },
+
 
         /**
          * Load the address filtered by selectedId into selectedAddress
@@ -890,6 +915,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Remove all user related addresses from the component
          */
@@ -904,6 +930,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Update the selected address
          * @param index
@@ -914,6 +941,7 @@ Vue.component("address-select", {
             this.$dispatch("address-changed", this.selectedAddress);
         },
 
+
         /**
          * Check whether the address list is empty
          * @returns {boolean}
@@ -921,6 +949,7 @@ Vue.component("address-select", {
         isAddressListEmpty: function isAddressListEmpty() {
             return !(this.addressList && this.addressList.length > 0);
         },
+
 
         /**
          * Check whether a company name exists and show it in bold
@@ -930,15 +959,41 @@ Vue.component("address-select", {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
 
+
+        /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal: function showInitialAddModal() {
+            this.modalType = "initial";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = { addressSalutation: 0, countryId: this.localization.currentShippingCountryId };
+            } else {
+                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+            }
+
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
+
         /**
          * Show the add modal
          */
         showAddModal: function showAddModal() {
             this.modalType = "create";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = { addressSalutation: 0, countryId: this.localization.currentShippingCountryId };
+            } else {
+                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+            }
+
             this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
+
 
         /**
          * Show the edit modal
@@ -949,8 +1004,10 @@ Vue.component("address-select", {
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
+
 
         /**
          * Show the delete modal
@@ -963,19 +1020,19 @@ Vue.component("address-select", {
             this.deleteModal.show();
         },
 
+
         /**
          * Delete the address selected before
          */
         deleteAddress: function deleteAddress() {
-            var self = this;
-            var address = this.addressToDelete;
-            var addressType = this.addressType;
+            var _this2 = this;
 
-            AddressService.deleteAddress(address.id, addressType).done(function () {
-                self.closeDeleteModal();
-                self.removeIdFromList(address.id);
+            _AddressService2.default.deleteAddress(this.addressToDelete.id, this.addressType).done(function () {
+                _this2.closeDeleteModal();
+                _this2.removeIdFromList(_this2.addressToDelete.id);
             });
         },
+
 
         /**
          * Close the current create/update address modal
@@ -984,6 +1041,7 @@ Vue.component("address-select", {
             this.addressModal.hide();
         },
 
+
         /**
          * Close the current delete address modal
          */
@@ -991,13 +1049,16 @@ Vue.component("address-select", {
             this.deleteModal.hide();
         },
 
+
         /**
          * Dynamically create the header line in the modal
          */
         updateHeadline: function updateHeadline() {
-            var headline;
+            var headline = void 0;
 
-            if (this.addressType === "2") {
+            if (this.modalType === "initial") {
+                headline = Translations.Template.orderInvoiceAddressInitial;
+            } else if (this.addressType === "2") {
                 if (this.modalType === "update") {
                     headline = Translations.Template.orderShippingAddressEdit;
                 } else if (this.modalType === "create") {
@@ -1015,6 +1076,7 @@ Vue.component("address-select", {
 
             this.headline = headline;
         },
+
 
         /**
          * Remove an address from the addressList by ID
@@ -1035,6 +1097,7 @@ Vue.component("address-select", {
             }
         },
 
+
         /**
          * Update the selected address when a new address is created
          * @param addressData
@@ -1049,11 +1112,18 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressService":68,"services/ApiService":69,"services/ModalService":74}],15:[function(require,module,exports){
+},{"services/AddressFieldService":67,"services/AddressService":68,"services/ApiService":69,"services/ModalService":74,"services/ResourceService":76,"services/ValidationService":78}],15:[function(require,module,exports){
 "use strict";
 
-var AddressService = require("services/AddressService");
-var ValidationService = require("services/ValidationService");
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("create-update-address", {
 
@@ -1077,16 +1147,16 @@ Vue.component("create-update-address", {
             var self = this;
 
             if (this.addressType === "1") {
-                ValidationService.validate($("#billing_address_form")).done(function () {
+                _ValidationService2.default.validate($("#billing_address_form")).done(function () {
                     self.saveAddress();
                 }).fail(function (invalidFields) {
-                    ValidationService.markInvalidFields(invalidFields, "error");
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
                 });
             } else if (this.addressType === "2") {
-                ValidationService.validate($("#delivery_address_form")).done(function () {
+                _ValidationService2.default.validate($("#delivery_address_form")).done(function () {
                     self.saveAddress();
                 }).fail(function (invalidFields) {
-                    ValidationService.markInvalidFields(invalidFields, "error");
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
                 });
             }
         },
@@ -1095,7 +1165,7 @@ Vue.component("create-update-address", {
          * Save the new address or update an existing one
          */
         saveAddress: function saveAddress() {
-            if (this.modalType === "create") {
+            if (this.modalType === "initial" || this.modalType === "create") {
                 this.createAddress();
             } else if (this.modalType === "update") {
                 this.updateAddress();
@@ -1108,7 +1178,7 @@ Vue.component("create-update-address", {
         updateAddress: function updateAddress() {
             this.waiting = true;
 
-            AddressService.updateAddress(this.addressData, this.addressType).done(function () {
+            _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
                 this.addressModal.hide();
 
                 for (var key in this.addressList) {
@@ -1135,7 +1205,7 @@ Vue.component("create-update-address", {
         createAddress: function createAddress() {
             this.waiting = true;
 
-            AddressService.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
+            _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
                 this.addressData = newAddress;
 
                 this.addressModal.hide();
@@ -1159,7 +1229,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: ["addressList", "hasToValidate", "selectedAddressId"],
 
@@ -1169,6 +1239,7 @@ Vue.component("invoice-address-select", {
             checkoutValidation: { invoiceAddress: {} }
         };
     },
+
 
     /**
      * Initialise the event listener
@@ -1182,6 +1253,17 @@ Vue.component("invoice-address-select", {
             this.checkoutValidation.invoiceAddress.validate = this.validate;
         }
     },
+
+
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    ready: function ready() {
+        if (App.isCheckoutView && this.addressList.length <= 0) {
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
+        }
+    },
+
 
     methods: {
         /**
@@ -1199,7 +1281,6 @@ Vue.component("invoice-address-select", {
                 this.validate();
             }
         },
-
         validate: function validate() {
             this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
         }
@@ -1317,9 +1398,6 @@ Vue.component("country-select", {
     },
 
     watch: {
-        /**
-         * Add watcher to handle the country changed
-         */
         selectedCountryId: function selectedCountryId() {
             this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
@@ -1327,7 +1405,7 @@ Vue.component("country-select", {
             if (this.selectedCountry) {
                 this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry.isoCode2);
+                this.$dispatch("selected-country-changed", this.selectedCountry);
             }
         }
     }
@@ -1338,11 +1416,15 @@ Vue.component("country-select", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
-
-var ValidationService = require("services/ValidationService");
 
 Vue.component("registration", {
 
@@ -1375,10 +1457,10 @@ Vue.component("registration", {
         validateRegistration: function validateRegistration() {
             var self = this;
 
-            ValidationService.validate($("#registration" + this._uid)).done(function () {
+            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
                 self.sendRegistration();
             }).fail(function (invalidFields) {
-                ValidationService.markInvalidFields(invalidFields, "error");
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
 
@@ -1394,12 +1476,12 @@ Vue.component("registration", {
             ApiService.post("/rest/io/customer", userObject).done(function (response) {
                 ApiService.setToken(response);
 
-                if (document.getElementById(component.modalElement) !== null) {
-                    ModalService.findModal(document.getElementById(component.modalElement)).hide();
-                }
-
                 if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+
+                    if (document.getElementById(component.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
                 } else {
                     NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
                 }
@@ -1450,44 +1532,125 @@ Vue.component("registration", {
 },{"services/ApiService":69,"services/ModalService":74,"services/NotificationService":75,"services/ValidationService":78}],20:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
+var _AddressFieldService = require("services/AddressFieldService");
+
+var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
+
+var _ResourceService = require("services/ResourceService");
+
+var _ResourceService2 = _interopRequireDefault(_ResourceService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("salutation-select", {
 
-    props: ["template", "addressData"],
+    props: ["template", "addressData", "addressType"],
 
     data: function data() {
         return {
             localization: {},
             salutations: {
-                de: ["Herr", "Frau", "Firma", "Familie"],
-                en: ["Mr.", "Ms.", "Company", "Family"]
+                complete: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }, {
+                        value: "Firma",
+                        id: 2
+                    }, {
+                        value: "Familie",
+                        id: 3
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }, {
+                        value: "Company",
+                        id: 2
+                    }, {
+                        value: "Family",
+                        id: 3
+                    }]
+                },
+                withoutCompany: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }, {
+                        value: "Familie",
+                        id: 3
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }, {
+                        value: "Family",
+                        id: 3
+                    }]
+                }
             },
             currentSalutation: {}
         };
     },
 
+
     /**
      * Get the shipping countries
      */
     created: function created() {
+
         this.$options.template = this.template;
 
-        ResourceService.bind("localization", this);
+        _ResourceService2.default.bind("localization", this);
         this.shopLanguage = this.localization.shopLanguage;
 
         if (this.shopLanguage === "de") {
-            this.currentSalutation = this.salutations.de;
+            if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+                this.currentSalutation = this.salutations.complete.de;
+            } else {
+                this.currentSalutation = this.salutations.withoutCompany.de;
+            }
+        } else if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+            this.currentSalutation = this.salutations.complete.en;
         } else {
-            this.currentSalutation = this.salutations.en;
+            this.currentSalutation = this.salutations.withoutCompany.en;
+        }
+    },
+    ready: function ready() {
+        this.addressData.addressSalutation = 0;
+    },
+
+
+    methods: {
+        changeValue: function changeValue() {
+            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
+                this.addressData.name1 = "";
+            }
         }
     }
 });
 
-},{"services/ResourceService":76}],21:[function(require,module,exports){
+},{"services/AddressFieldService":67,"services/ResourceService":76}],21:[function(require,module,exports){
 "use strict";
 
-var ValidationService = require("services/ValidationService");
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
@@ -1507,10 +1670,10 @@ Vue.component("guest-login", {
 
     methods: {
         validate: function validate() {
-            ValidationService.validate($("#guest-login-form-" + this._uid)).done(function () {
+            _ValidationService2.default.validate($("#guest-login-form-" + this._uid)).done(function () {
                 this.sendEMail();
             }.bind(this)).fail(function (invalidFields) {
-                ValidationService.markInvalidFields(invalidFields, "error");
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
 
@@ -1531,10 +1694,15 @@ Vue.component("guest-login", {
 },{"services/ApiService":69,"services/ValidationService":78}],22:[function(require,module,exports){
 "use strict";
 
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
-var ValidationService = require("services/ValidationService");
 
 Vue.component("login", {
 
@@ -1563,10 +1731,10 @@ Vue.component("login", {
         validateLogin: function validateLogin() {
             var self = this;
 
-            ValidationService.validate($("#login-form-" + this._uid)).done(function () {
+            _ValidationService2.default.validate($("#login-form-" + this._uid)).done(function () {
                 self.sendLogin();
             }).fail(function (invalidFields) {
-                ValidationService.markInvalidFields(invalidFields, "error");
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
 
@@ -1632,6 +1800,12 @@ Vue.component("login-view", {
 },{}],24:[function(require,module,exports){
 "use strict";
 
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
@@ -1645,10 +1819,10 @@ Vue.component("user-login-handler", {
             isLoggedIn: {}
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
+
 
     /**
      * Add the global event listener for login and logout
@@ -1659,6 +1833,7 @@ Vue.component("user-login-handler", {
         this.setUsername(this.userData);
         this.addEventListeners();
     },
+
 
     methods: {
         /**
@@ -1675,26 +1850,31 @@ Vue.component("user-login-handler", {
             }
         },
 
+
         /**
          * Adds login/logout event listeners
          */
         addEventListeners: function addEventListeners() {
-            var self = this;
+            var _this = this;
 
             ApiService.listen("AfterAccountAuthentication", function (userData) {
-                self.setUsername(userData.accountContact);
+                _this.setUsername(userData.accountContact);
                 ResourceService.getResource("user").set({ isLoggedIn: true });
             });
 
             ApiService.listen("AfterAccountContactLogout", function () {
-                self.username = "";
+                _this.username = "";
                 ResourceService.getResource("user").set({ isLoggedIn: false });
             });
+        },
+        unmarkInputFields: function unmarkInputFields() {
+            _ValidationService2.default.unmarkAllFields($("#login"));
+            _ValidationService2.default.unmarkAllFields($("#registration"));
         }
     }
 });
 
-},{"services/ApiService":69,"services/ResourceService":76}],25:[function(require,module,exports){
+},{"services/ApiService":69,"services/ResourceService":76,"services/ValidationService":78}],25:[function(require,module,exports){
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -2020,7 +2200,18 @@ Vue.component("variation-select", {
 
 Vue.component("category-image-carousel", {
 
-    props: ["imageUrls", "itemUrl", "altText", "showDots", "showNav", "template"],
+    props: {
+        imageUrls: { type: Array },
+        itemUrl: { type: String },
+        altText: { type: String },
+        showDots: { type: String },
+        showNav: { type: String },
+        disableLazyLoad: {
+            type: Boolean,
+            default: false
+        },
+        template: { type: String }
+    },
 
     created: function created() {
         this.$options.template = this.template;
@@ -2032,7 +2223,7 @@ Vue.component("category-image-carousel", {
                 dots: this.showDots === "true",
                 items: 1,
                 loop: this.imageUrls.length > 1,
-                lazyLoad: true,
+                lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === "true",
                 navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"]
@@ -2148,30 +2339,20 @@ Vue.component("item-list-sorting", {
         return {
             selectedSorting: {},
             dataTranslationMapping: {
-                "item.id_asc": "itemId_asc",
-                "item.id_desc": "itemId_desc",
                 "texts.name1_asc": "itemName_asc",
                 "texts.name1_desc": "itemName_desc",
-                "item.position_asc": "itemPosition_asc",
-                "item.position_desc": "itemPosition_desc",
-                "item.salesPrice.price_asc": "itemPrice_asc",
-                "item.salesPrice.price_desc": "itemPrice_desc",
+                "item.salesPrices.price_asc": "itemPrice_asc",
+                "item.salesPrices.price_desc": "itemPrice_desc",
                 "variation.createdAt_asc": "variationCreateTimestamp_asc",
                 "variation.createdAt_desc": "variationCreateTimestamp_desc",
-                "variation.id_asc": "variationId_asc",
-                "variation.id_desc": "variationId_desc",
+                "variation.availability.averageDays_asc": "availabilityAverageDays_asc",
+                "variation.availability.averageDays_desc": "availabilityAverageDays_desc",
                 "variation.number_asc": "variationCustomNumber_asc",
                 "variation.number_desc": "variationCustomNumber_desc",
                 "variation.updatedAt_asc": "variationLastUpdateTimestamp_asc",
                 "variation.updatedAt_desc": "variationLastUpdateTimestamp_desc",
-                "variation.position_asc": "variationPosition_asc",
-                "variation.position_desc": "variationPosition_desc",
-                "variation.isActive_asc": "variationActive_asc",
-                "variation.isActive_desc": "variationActive_desc",
-                "variation.isMain_asc": "variationPrimary_asc",
-                "variation.isMain_desc": "variationPrimary_desc",
-                "item.manufacturer.name_asc": "itemProducerName_asc",
-                "item.manufacturer.name_desc": "itemProducerName_desc"
+                "item.manufacturer.externalName_asc": "itemProducerName_asc",
+                "item.manufacturer.externalName_desc": "itemProducerName_desc"
             }
         };
     },
@@ -2634,7 +2815,7 @@ Vue.component("item-filter-tag-list", {
 "use strict";
 
 var ModalService = require("services/ModalService");
-var APIService = require("services/APIService");
+var APIService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
@@ -2727,13 +2908,18 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/APIService":67,"services/ModalService":74,"services/NotificationService":75}],41:[function(require,module,exports){
+},{"services/ApiService":69,"services/ModalService":74,"services/NotificationService":75}],41:[function(require,module,exports){
 "use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
-var ValidationService = require("services/ValidationService");
 
 Vue.component("bank-data-select", {
 
@@ -2750,10 +2936,10 @@ Vue.component("bank-data-select", {
             headline: ""
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
+
 
     /**
      * Select the modals
@@ -2762,6 +2948,7 @@ Vue.component("bank-data-select", {
         this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
         this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
     },
+
 
     methods: {
 
@@ -2772,6 +2959,7 @@ Vue.component("bank-data-select", {
             this.selectedBankData = bankData;
         },
 
+
         /**
          * Open the modal to add new bank-data
          */
@@ -2779,6 +2967,7 @@ Vue.component("bank-data-select", {
             this.headline = Translations.Template.bankAddDataTitle;
             this.openModal(false);
         },
+
 
         /**
          * Set data to update and open the modal
@@ -2792,6 +2981,7 @@ Vue.component("bank-data-select", {
             this.openModal(true);
         },
 
+
         /**
          * Set data to remove and open the modal
          * @param index
@@ -2804,14 +2994,17 @@ Vue.component("bank-data-select", {
             this.bankDeleteModal.show();
         },
 
+
         /**
          * Open the modal
          * @param doUpdate
          */
         openModal: function openModal(doUpdate) {
             this.doUpdate = doUpdate;
+            _ValidationService2.default.unmarkAllFields($(this.$els.bankInfoModal));
             this.bankInfoModal.show();
         },
+
 
         /**
          * Set data to change
@@ -2823,84 +3016,89 @@ Vue.component("bank-data-select", {
             this.updateBankIndex = index;
         },
 
+
         /**
          * Validate the input-fields-data
          */
         validateInput: function validateInput() {
-            var _self = this;
+            var _this = this;
 
-            ValidationService.validate($("#my-bankForm")).done(function () {
-                if (_self.doUpdate) {
-                    _self.updateBankInfo();
+            _ValidationService2.default.validate($("#my-bankForm")).done(function () {
+                if (_this.doUpdate) {
+                    _this.updateBankInfo();
                 } else {
-                    _self.addBankInfo();
+                    _this.addBankInfo();
                 }
             }).fail(function (invalidFields) {
-                ValidationService.markInvalidFields(invalidFields, "error");
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
+
 
         /**
          * Update bank-data
          */
         updateBankInfo: function updateBankInfo() {
-            var _self = this;
+            var _this2 = this;
 
             this.updateBankData.lastUpdateBy = "customer";
 
             ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _self.userBankData.splice(_self.updateBankIndex, 1, response);
-                _self.checkBankDataSelection();
-                _self.closeModal();
+                _this2.userBankData.splice(_self.updateBankIndex, 1, response);
+                _this2.checkBankDataSelection();
+                _this2.closeModal();
 
                 NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
             }).fail(function () {
-                _self.closeModal();
+                _this2.closeModal();
 
                 NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
             });
         },
 
+
         /**
          * Add new bank-data
          */
         addBankInfo: function addBankInfo() {
-            var _self = this;
+            var _this3 = this;
 
             this.updateBankData.lastUpdateBy = "customer";
             this.updateBankData.contactId = this.contactId;
 
             ApiService.post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
-                _self.userBankData.push(response);
-                _self.checkBankDataSelection(true);
-                _self.closeModal();
+                _this3.userBankData.push(response);
+                _this3.checkBankDataSelection(true);
+                _this3.closeModal();
 
                 NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
             }).fail(function () {
-                _self.closeModal();
+                _this3.closeModal();
 
                 NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
             });
         },
 
+
         /**
          * Delete bank-data
          */
         removeBankInfo: function removeBankInfo() {
-            var _self = this;
+            var _this4 = this;
 
             ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
-                _self.checkBankDataSelection(false);
-                _self.closeDeleteModal();
-                _self.userBankData.splice(_self.updateBankIndex, 1);
+                _this4.checkBankDataSelection(false);
+                _this4.closeDeleteModal();
+                _this4.userBankData.splice(_self.updateBankIndex, 1);
 
                 NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
             }).fail(function () {
-                _self.closeDeleteModal();
+                _this4.closeDeleteModal();
 
                 NotificationService.error(Translations.Template.bankDataNotDeleted).closeAfter(5000);
             });
         },
+
 
         /**
          * Check selection on delete and on add bank-data
@@ -2919,6 +3117,7 @@ Vue.component("bank-data-select", {
             }
         },
 
+
         /**
          * Reset the updateBankData and updateBankIndex
          */
@@ -2928,6 +3127,7 @@ Vue.component("bank-data-select", {
             this.doUpdate = false;
         },
 
+
         /**
          * Close the current bank-modal
          */
@@ -2935,6 +3135,7 @@ Vue.component("bank-data-select", {
             this.bankInfoModal.hide();
             this.resetData();
         },
+
 
         /**
          * Close the current bank-delete-modal
@@ -2951,78 +3152,82 @@ Vue.component("bank-data-select", {
 
 var ApiService = require("services/ApiService");
 
-(function ($) {
-    Vue.component("order-history", {
+Vue.component("order-history", {
 
-        props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
+    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
 
-        data: function data() {
-            return {
-                page: 1,
-                pageMax: 1,
-                countStart: 0,
-                countEnd: 0,
-                currentOrder: null,
-                isLoading: true
-            };
-        },
+    data: function data() {
+        return {
+            page: 1,
+            pageMax: 1,
+            countStart: 0,
+            countEnd: 0,
+            currentOrder: null,
+            isLoading: true
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.itemsPerPage = this.itemsPerPage || 10;
+        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+        this.setOrders(this.orderList);
+    },
 
-        created: function created() {
-            this.$options.template = this.template;
-        },
 
-        ready: function ready() {
-            this.itemsPerPage = this.itemsPerPage || 10;
-            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-            this.setOrders(this.orderList);
-        },
+    methods: {
+        setOrders: function setOrders(orderList) {
+            this.$set("orderList", orderList);
+            this.page = this.orderList.page;
+            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
+            this.countEnd = this.orderList.page * this.itemsPerPage;
 
-        methods: {
-
-            setOrders: function setOrders(orderList) {
-                this.$set("orderList", orderList);
-                this.page = this.orderList.page;
-                this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
-                this.countEnd = this.orderList.page * this.itemsPerPage;
-
-                if (this.countEnd > this.orderList.totalsCount) {
-                    this.countEnd = this.orderList.totalsCount;
-                }
-            },
-
-            setCurrentOrder: function setCurrentOrder(order) {
-                $("#dynamic-twig-content").html("");
-                this.isLoading = true;
-
-                this.currentOrder = order;
-                var self = this;
-
-                Vue.nextTick(function () {
-                    $(self.$els.orderDetails).modal("show");
-                });
-
-                var jsonEncodedOrder = JSON.stringify(order);
-
-                ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
-                    this.isLoading = false;
-                    $("#dynamic-twig-content").html(response);
-                }.bind(this));
-            },
-
-            showPage: function showPage(page) {
-                var self = this;
-
-                if (page <= 0 || page > this.pageMax) {
-                    return;
-                }
-
-                ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
-                    self.setOrders(response);
-                });
+            if (this.countEnd > this.orderList.totalsCount) {
+                this.countEnd = this.orderList.totalsCount;
             }
+        },
+        setCurrentOrder: function setCurrentOrder(order) {
+            var _this = this;
+
+            $("#dynamic-twig-content").html("");
+            this.isLoading = true;
+
+            this.currentOrder = order;
+
+            Vue.nextTick(function () {
+                $(_this.$els.orderDetails).modal("show");
+            });
+
+            var jsonEncodedOrder = JSON.stringify(order);
+
+            ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
+                _this.isLoading = false;
+                $("#dynamic-twig-content").html(response);
+            });
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            for (var paymentState in paymentStates) {
+                if (paymentStates[paymentState].typeId == 4) {
+                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                }
+            }
+
+            return "";
+        },
+        showPage: function showPage(page) {
+            var _this2 = this;
+
+            if (page <= 0 || page > this.pageMax) {
+                return;
+            }
+
+            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
+                _this2.setOrders(response);
+            });
         }
-    });
-})(jQuery);
+    }
+});
 
 },{"services/ApiService":69}],43:[function(require,module,exports){
 "use strict";
@@ -3282,13 +3487,13 @@ Vue.directive("is-loading-breadcrumbs-watcher", {
 },{"services/ResourceService":76}],51:[function(require,module,exports){
 "use strict";
 
-var CategoryRendererService = require("services/CategoryRendererService");
+var _CategoryRendererService = require("services/CategoryRendererService");
 
 Vue.directive("render-category", function (value) {
     $(this.el).click(function (event) {
         event.preventDefault();
 
-        CategoryRendererService.renderItems(value);
+        (0, _CategoryRendererService.renderItems)(value);
     });
 });
 
@@ -3718,193 +3923,125 @@ Vue.filter("itemURL", function (item) {
 },{}],67:[function(require,module,exports){
 "use strict";
 
-var NotificationService = require("services/NotificationService");
-var WaitScreenService = require("services/WaitScreenService");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.isAddressFieldEnabled = isAddressFieldEnabled;
+function isAddressFieldEnabled(countryId, addressType, field) {
+    var address = {};
+    var enabledFields = {};
 
-module.exports = function ($) {
-
-    var _eventListeners = {};
-
-    return {
-        get: _get,
-        put: _put,
-        post: _post,
-        delete: _delete,
-        send: _send,
-        setToken: _setToken,
-        getToken: _getToken,
-        listen: _listen
-    };
-
-    function _listen(event, handler) {
-        _eventListeners[event] = _eventListeners[event] || [];
-        _eventListeners[event].push(handler);
+    if (typeof countryId === "undefined") {
+        countryId = 1;
     }
 
-    function _triggerEvent(event, payload) {
-        if (_eventListeners[event]) {
-            for (var i = 0; i < _eventListeners[event].length; i++) {
-                var listener = _eventListeners[event][i];
+    if (addressType === "1") {
+        address = "billing_address";
 
-                if (typeof listener !== "function") {
-                    continue;
-                }
-                listener.call(Object, payload);
+        if (countryId === 1) {
+            enabledFields = App.config.enabledBillingAddressFields;
+        } else {
+            enabledFields = App.config.enabledBillingAddressFieldsUK;
+        }
+    } else {
+        address = "delivery_address";
+
+        if (countryId === "1") {
+            enabledFields = App.config.enabledDeliveryAddressFields;
+        } else {
+            enabledFields = App.config.enabledDeliveryAddressFieldsUK;
+        }
+    }
+
+    enabledFields = enabledFields.split(", ");
+
+    var fullField = address + "." + field;
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = enabledFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var enabledField = _step.value;
+
+            if (enabledField === fullField) {
+                return true;
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
             }
         }
     }
 
-    function _get(url, data, config) {
-        config = config || {};
-        config.method = "GET";
-        return _send(url, data, config);
-    }
+    return false;
+}
 
-    function _put(url, data, config) {
-        config = config || {};
-        config.method = "PUT";
-        return _send(url, data, config);
-    }
+exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
 
-    function _post(url, data, config) {
-        config = config || {};
-        config.method = "POST";
-        return _send(url, data, config);
-    }
-
-    function _delete(url, data, config) {
-        config = config || {};
-        config.method = "DELETE";
-        return _send(url, data, config);
-    }
-
-    function _send(url, data, config) {
-        var deferred = $.Deferred();
-
-        config = config || {};
-        config.data = data || null;
-        config.dataType = config.dataType || "json";
-        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
-        config.doInBackground = !!config.doInBackground;
-        config.supressNotifications = !!config.supressNotifications;
-
-        if (!config.doInBackground) {
-            WaitScreenService.showWaitScreen();
-        }
-        $.ajax(url, config).done(function (response) {
-            if (!config.supressNotifications) {
-                printMessages(response);
-            }
-            for (var event in response.events) {
-                _triggerEvent(event, response.events[event]);
-            }
-            deferred.resolve(response.data || response);
-        }).fail(function (jqXHR) {
-            var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
-
-            if (!config.supressNotifications) {
-                printMessages(response);
-            }
-            deferred.reject(response.error);
-        }).always(function () {
-            if (!config.doInBackground) {
-                WaitScreenService.hideWaitScreen();
-            }
-        });
-
-        return deferred;
-    }
-
-    function printMessages(response) {
-        var notification;
-
-        if (response.error && response.error.message.length > 0) {
-            notification = NotificationService.error(response.error);
-        }
-
-        if (response.success && response.success.message.length > 0) {
-            notification = NotificationService.success(response.success);
-        }
-
-        if (response.warning && response.warning.message.length > 0) {
-            notification = NotificationService.warning(response.warning);
-        }
-
-        if (response.info && response.info.message.length > 0) {
-            notification = NotificationService.info(response.info);
-        }
-
-        if (response.debug && response.debug.class.length > 0) {
-            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
-            for (var i = 0; i < response.debug.trace.length; i++) {
-                notification.trace(response.debug.trace[i]);
-            }
-        }
-    }
-
-    function _setToken(token) {
-        this._token = token;
-    }
-
-    function _getToken() {
-        return this._token;
-    }
-}(jQuery);
-
-},{"services/NotificationService":75,"services/WaitScreenService":79}],68:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.createAddress = createAddress;
+exports.updateAddress = updateAddress;
+exports.deleteAddress = deleteAddress;
 var ApiService = require("services/ApiService");
 var CheckoutService = require("services/CheckoutService");
 
-module.exports = function ($) {
-
-    return {
-        createAddress: createAddress,
-        updateAddress: updateAddress,
-        deleteAddress: deleteAddress
-    };
-
-    /**
-     * Create a new address
-     * @param address
-     * @param addressType
-     * @param setActive
-     * @returns {*}
-     */
-    function createAddress(address, addressType, setActive) {
-        return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
-            if (setActive) {
-                if (addressType === 1) {
-                    CheckoutService.setBillingAddressId(response.id);
-                } else if (addressType === 2) {
-                    CheckoutService.setDeliveryAddressId(response.id);
-                }
+/**
+ * Create a new address
+ * @param address
+ * @param addressType
+ * @param setActive
+ * @returns {*}
+ */
+function createAddress(address, addressType, setActive) {
+    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
+        if (setActive) {
+            if (addressType === 1) {
+                CheckoutService.setBillingAddressId(response.id);
+            } else if (addressType === 2) {
+                CheckoutService.setDeliveryAddressId(response.id);
             }
-        });
-    }
+        }
+    });
+}
 
-    /**
-     * Update an existing address
-     * @param newData
-     * @param addressType
-     * @returns {*|Entry|undefined}
-     */
-    function updateAddress(newData, addressType) {
-        addressType = addressType || newData.pivot.typeId;
-        return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
-    }
+/**
+ * Update an existing address
+ * @param newData
+ * @param addressType
+ * @returns {*|Entry|undefined}
+ */
+function updateAddress(newData, addressType) {
+    addressType = addressType || newData.pivot.typeId;
+    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+}
 
-    /**
-     * Delete an existing address
-     * @param addressId
-     * @param addressType
-     * @returns {*}
-     */
-    function deleteAddress(addressId, addressType) {
-        return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
-    }
-}(jQuery);
+/**
+ * Delete an existing address
+ * @param addressId
+ * @param addressType
+ * @returns {*}
+ */
+function deleteAddress(addressId, addressType) {
+    return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+}
+
+exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
 
 },{"services/ApiService":69,"services/CheckoutService":71}],69:[function(require,module,exports){
 "use strict";
@@ -4045,113 +4182,115 @@ module.exports = function ($) {
 },{"services/NotificationService":75,"services/WaitScreenService":79}],70:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.renderItems = renderItems;
+exports.getScopeUrl = getScopeUrl;
 var ItemListService = require("services/ItemListService");
 var ResourceService = require("services/ResourceService");
+var _categoryTree = {};
+var _categoryBreadcrumbs = [];
 
-module.exports = function ($) {
-    var _categoryTree = {};
-    var _categoryBreadcrumbs = [];
+/**
+ * render items in relation to location
+ * @param currentCategory
+ */
+function renderItems(currentCategory) {
+    ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
-    return {
-        getScopeUrl: _getScopeUrl,
-        renderItems: _renderItems
-    };
+    if ($.isEmptyObject(_categoryTree)) {
+        _categoryTree = ResourceService.getResource("navigationTree").val();
+    }
 
-    /**
-     * render items in relation to location
-     * @param currentCategory
-     */
-    function _renderItems(currentCategory) {
-        ResourceService.getResource("isLoadingBreadcrumbs").set(true);
+    if (!App.isCategoryView) {
+        window.open(_getScopeUrl(currentCategory), "_self");
+    } else if (currentCategory.details.length) {
+        _handleCurrentCategory(currentCategory);
+    }
+}
 
-        if ($.isEmptyObject(_categoryTree)) {
-            _categoryTree = ResourceService.getResource("navigationTree").val();
+/**
+ * bundle functions
+ * @param currentCategory
+ */
+function _handleCurrentCategory(currentCategory) {
+    _updateItemList(currentCategory);
+    _updateHistory(currentCategory);
+    _updateBreadcrumbs();
+}
+
+function _updateBreadcrumbs() {
+    ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
+}
+
+/**
+ * update the current item list without reloading
+ * @param currentCategory
+ */
+function _updateItemList(currentCategory) {
+    ItemListService.setCategoryId(currentCategory.id);
+
+    ItemListService.setPage(1);
+    ItemListService.setFacets("");
+    ItemListService.getItemList();
+}
+
+/**
+ * update page informations
+ * @param currentCategory
+ */
+function _updateHistory(currentCategory) {
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
+
+    document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+}
+
+/**
+ * get the current scope url
+ * @param currentCategory
+ * @param scopeUrl - default
+ * @param categories - default
+ */
+function getScopeUrl(currentCategory, scopeUrl, categories) {
+    scopeUrl = scopeUrl || "";
+    categories = categories || _categoryTree;
+
+    if (scopeUrl.length == 0) {
+        _categoryBreadcrumbs = [];
+    }
+
+    for (var category in categories) {
+        if (categories[category].id == currentCategory.id && categories[category].details.length) {
+            scopeUrl += "/" + categories[category].details[0].nameUrl;
+
+            _categoryBreadcrumbs.push(categories[category]);
+
+            return scopeUrl;
         }
 
-        if (!App.isCategoryView) {
-            window.open(_getScopeUrl(currentCategory), "_self");
-        } else {
-            _handleCurrentCategory(currentCategory);
-        }
-    }
+        if (categories[category].children && categories[category].details.length) {
+            var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
 
-    /**
-     * bundle functions
-     * @param currentCategory
-     */
-    function _handleCurrentCategory(currentCategory) {
-        _updateItemList(currentCategory);
-        _updateHistory(currentCategory);
-        _updateBreadcrumbs();
-    }
+            var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
 
-    function _updateBreadcrumbs() {
-        ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
-    }
-
-    /**
-     * update the current item list without reloading
-     * @param currentCategory
-     */
-    function _updateItemList(currentCategory) {
-        ItemListService.setCategoryId(currentCategory.id);
-
-        ItemListService.setPage(1);
-        ItemListService.setFacets("");
-        ItemListService.getItemList();
-    }
-
-    /**
-     * update page informations
-     * @param currentCategory
-     */
-    function _updateHistory(currentCategory) {
-        var title = document.getElementsByTagName("title")[0].innerHTML;
-
-        window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
-
-        document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
-    }
-
-    /**
-     * get the current scope url
-     * @param currentCategory
-     * @param scopeUrl - default
-     * @param categories - default
-     */
-    function _getScopeUrl(currentCategory, scopeUrl, categories) {
-        scopeUrl = scopeUrl || "";
-        categories = categories || _categoryTree;
-
-        if (scopeUrl.length == 0) {
-            _categoryBreadcrumbs = [];
-        }
-
-        for (var category in categories) {
-            if (categories[category].id == currentCategory.id) {
-                scopeUrl += "/" + categories[category].details[0].nameUrl;
-
+            if (urlScope.length > 0) {
                 _categoryBreadcrumbs.push(categories[category]);
 
-                return scopeUrl;
-            }
-
-            if (categories[category].children) {
-                var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
-
-                var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
-
-                if (urlScope.length > 0) {
-                    _categoryBreadcrumbs.push(categories[category]);
-
-                    return urlScope;
-                }
+                return urlScope;
             }
         }
-
-        return "";
     }
-}(jQuery);
+
+    return "";
+}
+
+exports.default = {
+    getScopeUrl: getScopeUrl,
+    renderItems: renderItems
+};
 
 },{"services/ItemListService":73,"services/ResourceService":76}],71:[function(require,module,exports){
 "use strict";
@@ -5193,9 +5332,17 @@ module.exports = function ($) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var $ = require("jquery");
+exports.getUrlParams = getUrlParams;
+exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
 
-var getUrlParams = function getUrlParams(urlParams) {
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUrlParams(urlParams) {
     if (urlParams) {
         var tokens;
         var params = {};
@@ -5212,17 +5359,17 @@ var getUrlParams = function getUrlParams(urlParams) {
     }
 
     return {};
-};
+}
 
-var setUrlParams = function setUrlParams(urlParams) {
+function setUrlParams(urlParams) {
     var pathName = window.location.pathname;
-    var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
     window.history.replaceState({}, title, pathName + params);
-};
+}
 
-var setUrlParam = function setUrlParam(key, value) {
+function setUrlParam(key, value) {
     var urlParams = getUrlParams(document.location.search);
 
     if (value !== null) {
@@ -5232,176 +5379,196 @@ var setUrlParam = function setUrlParam(key, value) {
     }
 
     setUrlParams(urlParams);
-};
+}
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
 },{"jquery":83}],78:[function(require,module,exports){
 "use strict";
 
-module.exports = function ($) {
-    var $form;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.validate = validate;
+exports.getInvalidFields = getInvalidFields;
+exports.markInvalidFields = markInvalidFields;
+exports.unmarkAllFields = unmarkAllFields;
 
-    return {
-        validate: _validate,
-        getInvalidFields: _getInvalidFields,
-        markInvalidFields: _markInvalidFields
-    };
+var _jquery = require("jquery");
 
-    function _validate(form) {
-        var deferred = $.Deferred();
-        var invalidFields = _getInvalidFields(form);
+var _jquery2 = _interopRequireDefault(_jquery);
 
-        if (invalidFields.length > 0) {
-            deferred.rejectWith(form, [invalidFields]);
-        } else {
-            deferred.resolveWith(form);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $form = void 0;
+
+function validate(form) {
+    var deferred = _jquery2.default.Deferred();
+    var invalidFields = getInvalidFields(form);
+
+    if (invalidFields.length > 0) {
+        deferred.rejectWith(form, [invalidFields]);
+    } else {
+        deferred.resolveWith(form);
+    }
+
+    return deferred;
+}
+
+function getInvalidFields(form) {
+    $form = (0, _jquery2.default)(form);
+    var invalidFormControls = [];
+
+    $form.find("[data-validate]").each(function (i, elem) {
+
+        if (!_validateElement((0, _jquery2.default)(elem))) {
+            invalidFormControls.push(elem);
+        }
+    });
+
+    return invalidFormControls;
+}
+
+function markInvalidFields(fields, errorClass) {
+    errorClass = errorClass || "has-error";
+
+    (0, _jquery2.default)(fields).each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.addClass(errorClass);
+        _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
+            if (_validateElement($elem)) {
+                $elem.removeClass(errorClass);
+                if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
+                    var groupName = $elem.attr("name");
+
+                    (0, _jquery2.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
+                }
+                _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
+            }
+        });
+    });
+}
+
+function unmarkAllFields(form) {
+    $form = (0, _jquery2.default)(form);
+
+    $form.find("[data-validate]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.removeClass("error");
+    });
+}
+
+function _validateElement(elem) {
+    var $elem = (0, _jquery2.default)(elem);
+    var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
+        return i.trim();
+    }) || ["text"];
+    var hasError = false;
+
+    _findFormControls($elem).each(function (i, formControl) {
+        var $formControl = (0, _jquery2.default)(formControl);
+        var validationKey = validationKeys[i] || validationKeys[0];
+
+        if (!_isActive($formControl)) {
+            // continue loop
+            return true;
         }
 
-        return deferred;
-    }
+        if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
 
-    function _getInvalidFields(form) {
-        $form = $(form);
-        var invalidFormControls = [];
-
-        $form.find("[data-validate]").each(function (i, elem) {
-
-            if (!_validateElement($(elem))) {
-                invalidFormControls.push(elem);
-            }
-        });
-
-        return invalidFormControls;
-    }
-
-    function _markInvalidFields(fields, errorClass) {
-        errorClass = errorClass || "has-error";
-
-        $(fields).each(function (i, elem) {
-            var $elem = $(elem);
-
-            $elem.addClass(errorClass);
-            _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
-                if (_validateElement($elem)) {
-                    $elem.removeClass(errorClass);
-                    if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
-                        var groupName = $elem.attr("name");
-
-                        $("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
-                    }
-                    _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
-                }
-            });
-        });
-    }
-
-    function _validateElement(elem) {
-        var $elem = $(elem);
-        var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
-            return i.trim();
-        }) || ["text"];
-        var hasError = false;
-
-        _findFormControls($elem).each(function (i, formControl) {
-            var $formControl = $(formControl);
-            var validationKey = validationKeys[i] || validationKeys[0];
-
-            if (!_isActive($formControl)) {
-                // continue loop
-                return true;
-            }
-
-            if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
-
-                if (!_validateGroup($formControl, validationKey)) {
-                    hasError = true;
-                }
-
-                return true;
-            }
-
-            if ($formControl.is("select")) {
-                if (!_validateSelect($formControl, validationKey)) {
-                    hasError = true;
-                }
-
-                return true;
-            }
-
-            if (!_validateInput($formControl, validationKey)) {
+            if (!_validateGroup($formControl, validationKey)) {
                 hasError = true;
             }
 
-            return false;
-        });
+            return true;
+        }
 
-        return !hasError;
-    }
+        if ($formControl.is("select")) {
+            if (!_validateSelect($formControl, validationKey)) {
+                hasError = true;
+            }
 
-    function _validateGroup($formControl, validationKey) {
-        var groupName = $formControl.attr("name");
-        var $group = $form.find("[name=\"" + groupName + "\"]");
-        var range = _eval(validationKey) || { min: 1, max: 1 };
-        var checked = $group.filter(":checked").length;
+            return true;
+        }
 
-        return checked >= range.min && checked <= range.max;
-    }
+        if (!_validateInput($formControl, validationKey)) {
+            hasError = true;
+        }
 
-    function _validateSelect($formControl, validationKey) {
-        return $.trim($formControl.val()) !== validationKey;
-    }
+        return false;
+    });
 
-    function _validateInput($formControl, validationKey) {
-        switch (validationKey) {
-            case "text":
-                return _hasValue($formControl);
-            case "number":
-                return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
-            case "ref":
-                return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
-            case "regex":
+    return !hasError;
+}
+
+function _validateGroup($formControl, validationKey) {
+    var groupName = $formControl.attr("name");
+    var $group = $form.find("[name=\"" + groupName + "\"]");
+    var range = _eval(validationKey) || { min: 1, max: 1 };
+    var checked = $group.filter(":checked").length;
+
+    return checked >= range.min && checked <= range.max;
+}
+
+function _validateSelect($formControl, validationKey) {
+    return _jquery2.default.trim($formControl.val()) !== validationKey;
+}
+
+function _validateInput($formControl, validationKey) {
+    switch (validationKey) {
+        case "text":
+            return _hasValue($formControl);
+        case "number":
+            return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
+        case "ref":
+            return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
+        case "regex":
+            {
                 var ref = $formControl.attr("data-validate-ref");
                 var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
 
-                return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-            default:
-                console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
-                return true;
-        }
+                return _hasValue($formControl) && regex.test(_jquery2.default.trim($formControl.val()));
+            }
+        default:
+            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
+            return true;
+    }
+}
+
+function _hasValue($formControl) {
+    return _jquery2.default.trim($formControl.val()).length > 0;
+}
+
+function _compareRef(value, ref) {
+    if ((0, _jquery2.default)(ref).length > 0) {
+        ref = _jquery2.default.trim((0, _jquery2.default)(ref).val());
     }
 
-    function _hasValue($formControl) {
-        return $.trim($formControl.val()).length > 0;
+    return value === ref;
+}
+
+function _findFormControls($elem) {
+    if ($elem.is("input, select, textarea")) {
+        return $elem;
     }
 
-    function _compareRef(value, ref) {
-        if ($(ref).length > 0) {
-            ref = $.trim($(ref).val());
-        }
+    return $elem.find("input, select, textarea");
+}
 
-        return value === ref;
-    }
+function _isActive($elem) {
+    return $elem.is(":visible") && $elem.is(":enabled");
+}
 
-    function _findFormControls($elem) {
-        if ($elem.is("input, select, textarea")) {
-            return $elem;
-        }
+function _eval(input) {
+    // eslint-disable-next-line
+    return new Function("return " + input)();
+}
 
-        return $elem.find("input, select, textarea");
-    }
+exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, unmarkAllFields: unmarkAllFields };
 
-    function _isActive($elem) {
-        return $elem.is(":visible") && $elem.is(":enabled");
-    }
-
-    function _eval(input) {
-        // eslint-disable-next-line
-        return new Function("return " + input)();
-    }
-}(jQuery);
-
-},{}],79:[function(require,module,exports){
+},{"jquery":83}],79:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -16059,14 +16226,25 @@ var init = (function($, window, document)
                 if ($(this).scrollTop() > offset)
                 {
                     $(".back-to-top").fadeIn(duration);
+                    $(".back-to-top-center").fadeIn(duration);
                 }
                 else
                 {
                     $(".back-to-top").fadeOut(duration);
+                    $(".back-to-top-center").fadeOut(duration);
                 }
             });
 
             $(".back-to-top").click(function(event)
+            {
+                event.preventDefault();
+
+                $("html, body").animate({scrollTop: 0}, duration);
+
+                return false;
+            });
+
+            $(".back-to-top-center").click(function(event)
             {
                 event.preventDefault();
 

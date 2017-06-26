@@ -1,6 +1,10 @@
-var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
-var AddressService = require("services/AddressService");
+const ApiService = require("services/ApiService");
+const ModalService = require("services/ModalService");
+const ResourceService = require("services/ResourceService");
+const AddressFieldService = require("services/AddressFieldService");
+
+import AddressService from "services/AddressService";
+import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
 
@@ -12,7 +16,7 @@ Vue.component("address-select", {
         "showError"
     ],
 
-    data: function()
+    data()
     {
         return {
             selectedAddress: {},
@@ -21,16 +25,18 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            localization: {}
         };
     },
 
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
+        ResourceService.bind("localization", this);
 
         this.addEventListener();
     },
@@ -38,7 +44,7 @@ Vue.component("address-select", {
     /**
      * Select the address modal
      */
-    ready: function()
+    ready()
     {
         if (!this.isAddressListEmpty())
         {
@@ -57,25 +63,22 @@ Vue.component("address-select", {
         /**
          * Add the event listener
          */
-        addEventListener: function()
+        addEventListener()
         {
-            var self = this;
-
-            ApiService.listen("AfterAccountContactLogout",
-                function()
-                {
-                    self.cleanUserAddressData();
-                });
+            ApiService.listen("AfterAccountContactLogout", () =>
+            {
+                this.cleanUserAddressData();
+            });
         },
 
         /**
          * Load the address filtered by selectedId into selectedAddress
          */
-        loadSelectedAddress: function()
+        loadSelectedAddress()
         {
-            var isSelectedAddressSet = false;
+            let isSelectedAddressSet = false;
 
-            for (var index in this.addressList)
+            for (const index in this.addressList)
             {
                 if (this.addressList[index].id === this.selectedAddressId)
                 {
@@ -94,9 +97,9 @@ Vue.component("address-select", {
         /**
          * Remove all user related addresses from the component
          */
-        cleanUserAddressData: function()
+        cleanUserAddressData()
         {
-            this.addressList = this.addressList.filter(function(value)
+            this.addressList = this.addressList.filter(value =>
             {
                 return value.id === -99;
             });
@@ -112,7 +115,7 @@ Vue.component("address-select", {
          * Update the selected address
          * @param index
          */
-        onAddressChanged: function(index)
+        onAddressChanged(index)
         {
             this.selectedAddress = this.addressList[index];
 
@@ -123,7 +126,7 @@ Vue.component("address-select", {
          * Check whether the address list is empty
          * @returns {boolean}
          */
-        isAddressListEmpty: function()
+        isAddressListEmpty()
         {
             return !(this.addressList && this.addressList.length > 0);
         },
@@ -132,19 +135,49 @@ Vue.component("address-select", {
          * Check whether a company name exists and show it in bold
          * @returns {boolean}
          */
-        showNameStrong: function()
+        showNameStrong()
         {
             return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
         },
 
         /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal()
+        {
+            this.modalType = "initial";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
+        /**
          * Show the add modal
          */
-        showAddModal: function()
+        showAddModal()
         {
             this.modalType = "create";
-            this.addressToEdit = {};
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
+            {
+                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+            }
+            else
+            {
+                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+            }
+
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
@@ -152,12 +185,13 @@ Vue.component("address-select", {
          * Show the edit modal
          * @param address
          */
-        showEditModal: function(address)
+        showEditModal(address)
         {
             this.modalType = "update";
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
             this.updateHeadline();
+            ValidationService.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
         },
 
@@ -165,7 +199,7 @@ Vue.component("address-select", {
          * Show the delete modal
          * @param address
          */
-        showDeleteModal: function(address)
+        showDeleteModal(address)
         {
             this.modalType = "delete";
             this.addressToDelete = address;
@@ -176,25 +210,20 @@ Vue.component("address-select", {
         /**
          * Delete the address selected before
          */
-        deleteAddress: function()
+        deleteAddress()
         {
-            var self = this;
-            var address = this.addressToDelete;
-            var addressType = this.addressType;
-
-            AddressService.deleteAddress(address.id, addressType)
-                .done(function()
+            AddressService.deleteAddress(this.addressToDelete.id, this.addressType)
+                .done(() =>
                 {
-                    self.closeDeleteModal();
-                    self.removeIdFromList(address.id);
+                    this.closeDeleteModal();
+                    this.removeIdFromList(this.addressToDelete.id);
                 });
-
         },
 
         /**
          * Close the current create/update address modal
          */
-        closeAddressModal: function()
+        closeAddressModal()
         {
             this.addressModal.hide();
         },
@@ -202,7 +231,7 @@ Vue.component("address-select", {
         /**
          * Close the current delete address modal
          */
-        closeDeleteModal: function()
+        closeDeleteModal()
         {
             this.deleteModal.hide();
         },
@@ -210,11 +239,15 @@ Vue.component("address-select", {
         /**
          * Dynamically create the header line in the modal
          */
-        updateHeadline: function()
+        updateHeadline()
         {
-            var headline;
+            let headline;
 
-            if (this.addressType === "2")
+            if (this.modalType === "initial")
+            {
+                headline = Translations.Template.orderInvoiceAddressInitial;
+            }
+            else if (this.addressType === "2")
             {
                 if (this.modalType === "update")
                 {
@@ -249,9 +282,9 @@ Vue.component("address-select", {
          * Remove an address from the addressList by ID
          * @param id
          */
-        removeIdFromList: function(id)
+        removeIdFromList(id)
         {
-            for (var i in this.addressList)
+            for (const i in this.addressList)
             {
                 if (this.addressList[i].id === id)
                 {
@@ -272,7 +305,7 @@ Vue.component("address-select", {
          * Update the selected address when a new address is created
          * @param addressData
          */
-        onAddressCreated: function(addressData)
+        onAddressCreated(addressData)
         {
             if (!this.selectedAddressId)
             {
