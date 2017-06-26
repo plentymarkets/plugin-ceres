@@ -5,6 +5,15 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
+        var classNames = $("[class*=\"truncate\"]").attr("class");
+
+        var className = classNames.split("truncate-");
+        var charLength = className[className.length - 1];
+
+        if ($("[class*=\"truncate\"]").text().length > charLength)
+        {
+            $("[class*=\"truncate\"]").html($("[class*=\"truncate\"]").text().substring(0, charLength)).append("...");
+        }
 
         var menu = $("#mainNavbarCollapsable");
         var breadcrumb = menu.find("ul.breadcrumb");
