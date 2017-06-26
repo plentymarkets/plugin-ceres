@@ -216,7 +216,7 @@ Vue.component("address-select", {
                 .done(() =>
                 {
                     this.closeDeleteModal();
-                    this.removeIdFromList(address.id);
+                    this.removeIdFromList(this.addressToDelete.id);
                 });
         },
 
