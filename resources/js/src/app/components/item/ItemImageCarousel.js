@@ -77,7 +77,7 @@ Vue.component("item-image-carousel", {
                 dots             : true,
                 items            : 1,
                 lazyLoad         : true,
-                loop             : true,
+                loop             : false,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
                 nav              : imageCount > 1,
@@ -110,23 +110,15 @@ Vue.component("item-image-carousel", {
 
         initThumbCarousel: function()
         {
-            let loopable = false;
-
-            if (this.currentVariation.documents[0].data.images.variation.length >= 5 ||
-                this.currentVariation.documents[0].data.images.all.length >= 5)
-            {
-                loopable = true;
-            }
-
             $(this.$els.thumbs).owlCarousel({
                 autoHeight       : true,
                 dots             : false,
                 items            : 5,
                 lazyLoad         : true,
-                loop             : loopable,
+                loop             : false,
                 margin           : 10,
                 mouseDrag        : false,
-                center           : true,
+                center           : false,
                 nav              : true,
                 navClass         : [
                     "owl-single-item-nav left carousel-control",
@@ -139,11 +131,6 @@ Vue.component("item-image-carousel", {
                 ],
                 smartSpeed       : 350
             });
-
-            $(this.$els.thumbs).on("changed.owl.carousel", function(event)
-            {
-                this.currentItem = event.page.index;
-            }.bind(this));
         },
 
         goTo: function(index)
