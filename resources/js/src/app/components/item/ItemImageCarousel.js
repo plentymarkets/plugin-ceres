@@ -110,12 +110,20 @@ Vue.component("item-image-carousel", {
 
         initThumbCarousel: function()
         {
+            let loopable = false;
+
+            if (this.currentVariation.documents[0].data.images.variation.length >= 5 ||
+                this.currentVariation.documents[0].data.images.all.length >= 5)
+            {
+                loopable = true;
+            }
+
             $(this.$els.thumbs).owlCarousel({
                 autoHeight       : true,
                 dots             : false,
                 items            : 5,
                 lazyLoad         : true,
-                loop             : true,
+                loop             : loopable,
                 margin           : 10,
                 mouseDrag        : false,
                 center           : true,
