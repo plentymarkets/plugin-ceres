@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="add-item">
-                    <a href="#" class="" @click.prevent="showAddModal" data-toggle="tooltip" data-placement="right"
+                    <a href="#" class="" v-if="isAddAddressEnabled" @click.prevent="showAddModal" data-toggle="tooltip"
                        title="{{ trans("Ceres::Template.addressAddAddress") }}">
                         <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
                     </a>

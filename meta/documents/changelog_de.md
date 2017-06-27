@@ -2,10 +2,20 @@
 
 ## v1.2.8 (unknown)
 
-- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+## Hinzugefügt
+
 - In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
+
+## Geändert
+
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - Die LastSeenItemList hat nun kein Image Carousel mehr.
 - Das Image Carousel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
+
+## Behoben
+
+- Als Gast kann man im Checkout nur noch eine Rechnungsadresse, sowie Lieferadresse speichern.
+- Es wurde ein Fehler behoben, dass nach dem Löschen einer selektierten Adresse, diese weiterhin in den Browserdaten (Session) gespeichert war.
 
 ## v1.2.7 (2017-06-22)
 
