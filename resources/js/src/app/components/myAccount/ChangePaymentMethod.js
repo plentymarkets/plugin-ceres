@@ -54,7 +54,7 @@ Vue.component("change-payment-method", {
 
         getPaymentStateText(paymentStates)
         {
-            return Translations.Template["paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId == 4).value];
+            return Translations.Template["paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId === 4).value];
         },
 
         closeModal()
