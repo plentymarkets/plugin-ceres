@@ -67,12 +67,11 @@ Vue.component("change-payment-method", {
 
         getPaymentId(paymentIds)
         {
-            for (const paymentId in paymentIds)
+            const paymentId = paymentIds.find(paymentId => paymentId.typeId === 3).value;
+
+            if(paymentId != "undefined")
             {
-                if (paymentIds[paymentId].typeId == 3)
-                {
-                    return paymentIds[paymentId].value;
-                }
+                return paymentId;
             }
 
             return "";
