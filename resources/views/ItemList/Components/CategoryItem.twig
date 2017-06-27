@@ -44,17 +44,17 @@
 
                             <a href="${ itemData | itemURL }" v-if="recommendedRetailPrice > 0">
                                 <del class="crossprice">
-                                    ${ recommendedRetailPrice | currency itemData.calculatedPrices.rrp.currency }
+                                    ${ recommendedRetailPrice | currency itemData.calculatedPrices.rrp.currency } *
                                 </del>
                             </a>
 
                             <a href="${ itemData | itemURL }">
                                 <div class="price">
-                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency }
+                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency } *
                                 </div>
                             </a>
                             <span class="vat small text-muted">
-                                {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                                * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
                                 <a href="#" title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                             </span>
                         </div>

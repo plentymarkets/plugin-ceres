@@ -82,18 +82,18 @@
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
                         <a href="{{ itemUrl }}">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
+                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }} *
                             </del>
                         </a>
                     {% endif %}
 
                     <a href="{{ itemUrl }}">
                         <div class="price">
-                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
+                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }} *
                         </div>
                     </a>
                     <span class="vat small text-muted">
-                        {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                        * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
                         <a href="#" title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
                 </div>
