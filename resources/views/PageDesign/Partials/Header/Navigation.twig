@@ -1,8 +1,8 @@
-{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set lang         = services.sessionStorage.getLang() %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = config("Ceres.header.company_name") %}
+
 
 <nav class="navbar">
       <div class="container-max">
@@ -27,9 +27,7 @@
                     <li class="btnClose"></li>
                 </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
-                    <ul class="mainmenu pull-lg-right">
-                        {{ Tree.get_nav_bar(categories, "") }}
-                    </ul>
+                    {{ includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
                 {% endif %}
             </div>
 

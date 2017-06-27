@@ -1,4 +1,4 @@
-var CategoryRendererService = require("services/CategoryRendererService");
+import CategoryRendererService from "services/CategoryRendererService";
 var ResourceService = require("services/ResourceService");
 
 Vue.component("category-breadcrumbs",

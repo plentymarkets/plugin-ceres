@@ -1,23 +1,48 @@
 # Release Notes für Ceres
 
-## v1.2.6 (unknown)
-
-### Geändert
+## v1.2.8 (unknown)
 
 - Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 - Die LastSeenItemList hat nun kein Image Carousel mehr.
 - Das Image Carousel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
 
+## v1.2.7 (2017-06-22)
+
+### Hinzugefügt
+
+- Das Feld **Firma** wird jetzt standardmäßig im Adressformular angezeigt, wenn in der Anrede **Firma** ausgewählt wird.
+- Wenn das Feld **Firma** im Tab **Checkout and My account** in der Konfig deaktiviert ist, wird die Option **Firma** in der Anrede ausgeblendet.  
+
+### Geändert
+
+- Die Sortierung nach Preis wurde verbessert.
+- Verschiedene Einträge wurden aus den Sortierungsmöglichkeiten der Konfig entfernt.
+- Die Bezeichnungen der Sortiermöglichkeiten in der Konfig wurden an die Anzeige im Webshop angepasst.
+
 ### Behoben
 
+- Im Adressformular ist bei der Anrede **Herr** vorausgewählt und wird im Dropdown nun auch angezeigt.
+
+### Bekannte Probleme
+
+- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
+- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
+## v1.2.6 (2017-06-14)
+
+### Geändert
+
+- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+
+### Behoben
+
+- Auf der Startseite verlinkt der Button **Alle anzeigen** der ersten Kategorieliste auf die richtige Kategorie.
+- Es wurde ein Fehler behoben, der bei der Auswahl des Landes im Formular der Rechnungsadresse das Lieferland wechselt.
 - Im Checkout ist die Verlinkung auf die AGB nun korrekt.
-
-## v1.2.5 (2017-06-08)
-
-### Behoben
-
-- Auf der Startseite wird verlinkt der "Alle anzeigen" Button der ersten Kategorieliste auf die richtige Kategorie.
 
 ## v1.2.5 (2017-06-08)
 
@@ -39,16 +64,6 @@
 - In der Auftragsübersicht wird der Auftragsstatus wieder angezeigt.
 - Es wurde ein Fehler behoben, der in einigen Fällen das Laden von Artikelbildern in der Kategorie-Ansicht verhindert hat.
 - Es wurde ein Fehler behoben, der dazu führte, dass die Validierung beim Anlegen einer Adresse nicht durchgeführt wurde.
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Im Adressformular ist bei der Anrede "Herr" vorausgewählt, dies wird im Dropdown aber nicht angezeigt.
-- Mit der Suche kann noch nicht nach Variantennummern gesucht werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.4 (2017-06-02)
 
