@@ -54,15 +54,7 @@ Vue.component("change-payment-method", {
 
         getPaymentStateText(paymentStates)
         {
-            for (const paymentState in paymentStates)
-            {
-                if (paymentStates[paymentState].typeId == 4)
-                {
-                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
-                }
-            }
-
-            return "";
+            return Translations.Template["paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId == 4).value];
         },
 
         closeModal()
@@ -71,13 +63,18 @@ Vue.component("change-payment-method", {
             this.isPending = false;
         },
 
+        getNewAllowedPaymentMethods()
+        {
+            // rest call to get the new payment methods
+        },
+
         updateOrderHistory(updatedOrder)
         {
             document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
             document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
 
             this.checkChangeAllowed();
-
+            this.getNewAllowedPaymentMethods();
             this.closeModal();
         },
 
@@ -94,6 +91,7 @@ Vue.component("change-payment-method", {
                 })
                 .fail(() =>
                 {
+                    // TODO add error msg
                 });
         }
     }
