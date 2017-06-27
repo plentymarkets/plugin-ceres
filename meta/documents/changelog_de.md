@@ -3,11 +3,12 @@
 ## v1.2.8 (unknown)
 
 ## Hinzugefügt
-
 - In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 
 ## Geändert
 
+- Allgemeine Performance verbesserungen.
+- Im MyAccount Bereich kann nun die Zahlungsart eines Auftrags geändert werden.
 - Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - Die LastSeenItemList hat nun kein Image Carousel mehr.
 - Das Image Carousel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
