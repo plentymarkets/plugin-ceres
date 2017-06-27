@@ -345,9 +345,21 @@
         "default"           : "blur"
     },
     {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.1.list_type",
+        "label"     : "1. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling"
+        },
+        "default"           : "last_seen"
+    },
+    {
         "tab"               : "Item lists",
-        "key"               : "item.lists.last_seen",
-        "label"             : "Number of last seen items",
+        "key"               : "item.lists.1.last_seen_number",
+        "label"             : "1. Last seen: Number of last seen items",
         "type"              : "dropdown",
         "possibleValues"    :
         {
@@ -356,6 +368,176 @@
             "12"         : 12
         },
         "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.1.cross_selling_type",
+        "label"             : "1. Cross-Selling: Cross-Selling type",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "similar"       : "Similar",
+            "accessories"   : "Accessories",
+            "spare_part"    : "Spare part",
+            "item_package"  : "Item package"
+        },
+        "default"           : "similar"
+    },
+    {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.2.list_type",
+        "label"     : "2. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling"
+        },
+        "default"           : "cross_selling"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.2.last_seen_number",
+        "label"             : "2. Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.2.cross_selling_type",
+        "label"             : "2. Cross-Selling: Cross-Selling type",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "similar"       : "Similar",
+            "accessories"   : "Accessories",
+            "spare_part"    : "Spare part",
+            "item_package"  : "Item package"
+        },
+        "default"           : "similar"
+    },
+    {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.3.list_type",
+        "label"     : "3. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling"
+        },
+        "default"           : "cross_selling"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.3.last_seen_number",
+        "label"             : "3. Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.3.cross_selling_type",
+        "label"             : "3. Cross-Selling: Cross-Selling type",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "similar"       : "Similar",
+            "accessories"   : "Accessories",
+            "spare_part"    : "Spare part",
+            "item_package"  : "Item package"
+        },
+        "default"           : "accessories"
+    },
+    {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.4.list_type",
+        "label"     : "4. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling"
+        },
+        "default"           : "cross_selling"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.4.last_seen_number",
+        "label"             : "4. Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.4.cross_selling_type",
+        "label"             : "4. Cross-Selling: Cross-Selling type",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "similar"       : "Similar",
+            "accessories"   : "Accessories",
+            "spare_part"    : "Spare part",
+            "item_package"  : "Item package"
+        },
+        "default"           : "spare_part"
+    },
+    {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.5.list_type",
+        "label"     : "5. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling"
+        },
+        "default"           : "cross_selling"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.5.last_seen_number",
+        "label"             : "5. Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.5.cross_selling_type",
+        "label"             : "5. Cross-Selling: Cross-Selling type",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "similar"       : "Similar",
+            "accessories"   : "Accessories",
+            "spare_part"    : "Spare part",
+            "item_package"  : "Item package"
+        },
+        "default"           : "item_package"
     },
     {
         "tab"                           : "Shopping cart",
