@@ -13,7 +13,7 @@
         <ul id="twig-rendered-item-list" class="product-list row grid">
             {% for item in itemList %}
                 <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %}
                 </li>
             {% endfor %}
         </ul>

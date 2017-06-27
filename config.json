@@ -312,6 +312,13 @@
     },
     {
         "tab"       : "Item view",
+        "key"       : "item.enable_image_carousel",
+        "label"     : "Enable image carousel for category item list",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"       : "Item view",
         "key"       : "item.category_show_dots",
         "label"     : "Show image carousel dots in category item list",
         "type"      : "checkbox",
