@@ -1,4 +1,4 @@
-var ItemListService = require("services/ItemListService");
+const ItemListService = require("services/ItemListService");
 
 import UrlService from "services/UrlService";
 
@@ -10,7 +10,7 @@ Vue.component("item-list-sorting", {
         "isSearch"
     ],
 
-    data: function()
+    data()
     {
         return {
             selectedSorting: {},
@@ -35,30 +35,30 @@ Vue.component("item-list-sorting", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
         if (this.isSearch)
         {
-            this.sortData.push("item.score");
+            this.sortData.unshift("item.score");
             this.dataTranslationMapping["item.score"] = "itemRelevance";
         }
 
         this.buildData();
-        this.selectedSorting = this.sortData[0];
+        this.setDefaultSorting();
 
         this.setSelectedValueByUrl();
     },
 
     methods:
     {
-        buildData: function()
+        buildData()
         {
-            for (var i in this.sortData)
+            for (const i in this.sortData)
             {
-                var data = this.sortData[i];
-                var sortItem =
+                const data = this.sortData[i];
+                const sortItem =
                     {
                         value      : data,
                         displayName: Translations.Template[this.dataTranslationMapping[data]]
@@ -68,19 +68,26 @@ Vue.component("item-list-sorting", {
             }
         },
 
-        updateSorting: function()
+        setDefaultSorting()
+        {
+            const defaultSortKey = this.isSearch ? "item.score" : App.config.defaultSorting;
+
+            this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
+        },
+
+        updateSorting()
         {
             ItemListService.setOrderBy(this.selectedSorting.value);
             ItemListService.getItemList();
         },
 
-        setSelectedValueByUrl: function()
+        setSelectedValueByUrl()
         {
-            var urlParams = UrlService.getUrlParams(document.location.search);
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
             if (urlParams.sorting)
             {
-                for (var i in this.sortData)
+                for (const i in this.sortData)
                 {
                     if (this.sortData[i].value === urlParams.sorting)
                     {
