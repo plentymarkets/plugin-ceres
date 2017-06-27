@@ -5,15 +5,32 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-        var classNames = $("[class*=\"truncate\"]").attr("class");
+        // var classNames = $("[class*=\" truncate\"]").attr("class");
+        var classNames = $(".testabc").find(".test123");
 
-        var className = classNames.split("truncate-");
-        var charLength = className[className.length - 1];
+        console.log("class:--------------------" + classNames);
 
-        if ($("[class*=\"truncate\"]").text().length > charLength)
+        var className = "-";
+        var charLength = "-";
+
+        classNames.each(function()
         {
-            $("[class*=\"truncate\"]").html($("[class*=\"truncate\"]").text().substring(0, charLength)).append("...");
-        }
+            console.log(className);
+
+            className = $(this).attr("class").split("truncate-");
+            console.log("className[0]:" + className[0]);
+            console.log("className[1]:" + className[1]);
+
+            charLength = className[1];
+
+            if ($(this).text().length > charLength)
+            {
+                $(this).html($(this).text().substring(0, charLength)).append("...");
+            }
+
+        });
+
+        // console.log("CHar------------------" + charLength);
 
         var menu = $("#mainNavbarCollapsable");
         var breadcrumb = menu.find("ul.breadcrumb");
