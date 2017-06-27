@@ -63,18 +63,12 @@ Vue.component("change-payment-method", {
             this.isPending = false;
         },
 
-        getNewAllowedPaymentMethods()
-        {
-            // rest call to get the new payment methods
-        },
-
         updateOrderHistory(updatedOrder)
         {
             document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
             document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
 
             this.checkChangeAllowed();
-            this.getNewAllowedPaymentMethods();
             this.closeModal();
         },
 
