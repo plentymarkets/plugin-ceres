@@ -52,10 +52,6 @@ Vue.component("category-image-carousel", {
                     var owlItem = $(target.find(".owl-item.active"));
 
                     owlItem.find(".img-fluid.lazy").show().lazyload({threshold : 100});
-                },
-                onTranslate: function(event)
-                {
-                    console.log(event);
                 }
             });
         }
