@@ -3,6 +3,14 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set configItemName = config("Ceres.item.name") %}
 
+{% if enableCarousel is not defined %}
+    {% if config("Ceres.item.enable_image_carousel") == "true" %}
+        {% set enableCarousel = "true" %}
+    {% else %}
+        {% set enableCarousel = "false" %}
+    {% endif %}
+{% endif %}
+
 <script type="x/template" id="vue-category-item">
     <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if (showHeaderNavBar == "side" or showHeaderNavBar == "both") and not services.template.isSearch() %}4{% else %}3{% endif %}">
 
@@ -21,7 +29,8 @@
                                                      :alt-text="texts | itemName {{ configItemName }}"
                                                      :item-url="itemData | itemURL"
                                                      :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
+                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                                                     :enable-carousel="{{ enableCarousel }}">
                             </category-image-carousel>
                         </div>
                     </div>

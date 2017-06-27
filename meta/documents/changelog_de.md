@@ -2,6 +2,15 @@
 
 ## v1.2.8 (unknown)
 
+### Geändert
+
+- Allgemeine Performance verbesserungen.
+- Im MyAccount Bereich kann nun die Zahlungsart eines Auftrags geändert werden.
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+- In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
+- Die LastSeenItemList hat nun kein Image Carousel mehr.
+- Das Image Carousel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
+
 ## v1.2.7 (2017-06-22)
 
 ### Hinzugefügt
@@ -18,7 +27,6 @@
 ### Behoben
 
 - Im Adressformular ist bei der Anrede **Herr** vorausgewählt und wird im Dropdown nun auch angezeigt.
-
 
 ### Bekannte Probleme
 
