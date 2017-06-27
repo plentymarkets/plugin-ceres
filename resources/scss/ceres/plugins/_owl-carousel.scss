@@ -229,7 +229,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-  transition: opacity 400ms ease;
+  transition: opacity .4s ease, transform .4s cubic-bezier(0, 0, .26, 1), opacity .3s cubic-bezier(0, 0, .26, 1), -webkit-transform .3s cubic-bezier(0, 0, .26, 1);
 }
 
 .owl-carousel .owl-video-frame {
