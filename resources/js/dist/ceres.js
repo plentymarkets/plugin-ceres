@@ -2719,7 +2719,6 @@ Vue.component("item-list-sorting", {
             }
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
 
@@ -2729,10 +2728,11 @@ Vue.component("item-list-sorting", {
         }
 
         this.buildData();
-        this.selectedSorting = this.sortData[0];
+        this.setDefaultSorting();
 
         this.setSelectedValueByUrl();
     },
+
 
     methods: {
         buildData: function buildData() {
@@ -2746,12 +2746,17 @@ Vue.component("item-list-sorting", {
                 this.sortData[i] = sortItem;
             }
         },
+        setDefaultSorting: function setDefaultSorting() {
+            var defaultSortKey = this.isSearch ? "item.score" : App.config.defaultSorting;
 
+            this.selectedSorting = this.sortData.find(function (entry) {
+                return entry.displayName === defaultSortKey;
+            });
+        },
         updateSorting: function updateSorting() {
             ItemListService.setOrderBy(this.selectedSorting.value);
             ItemListService.getItemList();
         },
-
         setSelectedValueByUrl: function setSelectedValueByUrl() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
