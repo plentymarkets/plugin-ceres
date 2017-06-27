@@ -2582,23 +2582,40 @@ Vue.component("category-image-carousel", {
             type: Boolean,
             default: false
         },
+        enableCarousel: { type: Boolean },
         template: { type: String }
     },
 
     created: function created() {
         this.$options.template = this.template;
+
+        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
     ready: function ready() {
-        if (this.imageUrls && this.imageUrls.length > 0) {
+        if (this.enableCarousel) {
+            this.initializeCarousel();
+        }
+    },
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
             $(".owl-carousel").owlCarousel({
                 dots: this.showDots === "true",
                 items: 1,
+                mouseDrag: false,
                 loop: this.imageUrls.length > 1,
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === "true",
-                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"]
+                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                onTranslated: function onTranslated(event) {
+                    var target = $(event.currentTarget);
+
+                    var owlItem = $(target.find(".owl-item.active"));
+
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                }
             });
         }
     }
@@ -2657,7 +2674,7 @@ Vue.component("item-lazy-img", {
         var self = this;
 
         setTimeout(function () {
-            $(self.$els.lazyImg).show().lazyload();
+            $(self.$els.lazyImg).show().lazyload({ threshold: 100 });
         }, 1);
     }
 });
@@ -3563,13 +3580,9 @@ Vue.component("change-payment-method", {
             this.changePaymentModal.show();
         },
         getPaymentStateText: function getPaymentStateText(paymentStates) {
-            for (var paymentState in paymentStates) {
-                if (paymentStates[paymentState].typeId == 4) {
-                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
-                }
-            }
-
-            return "";
+            return Translations.Template["paymentStatus_" + paymentStates.find(function (paymentState) {
+                return paymentState.typeId === 4;
+            }).value];
         },
         closeModal: function closeModal() {
             this.changePaymentModal.hide();
@@ -3580,7 +3593,6 @@ Vue.component("change-payment-method", {
             document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
 
             this.checkChangeAllowed();
-
             this.closeModal();
         },
         changePaymentMethod: function changePaymentMethod() {
@@ -3592,7 +3604,9 @@ Vue.component("change-payment-method", {
                 document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this2.currentOrder, newOrder: response } }));
 
                 _this2.updateOrderHistory(response);
-            }).fail(function () {});
+            }).fail(function () {
+                // TODO add error msg
+            });
         }
     }
 
