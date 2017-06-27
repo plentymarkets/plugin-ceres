@@ -2584,23 +2584,40 @@ Vue.component("category-image-carousel", {
             type: Boolean,
             default: false
         },
+        enableCarousel: { type: Boolean },
         template: { type: String }
     },
 
     created: function created() {
         this.$options.template = this.template;
+
+        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
     ready: function ready() {
-        if (this.imageUrls && this.imageUrls.length > 0) {
+        if (this.enableCarousel) {
+            this.initializeCarousel();
+        }
+    },
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
             $(".owl-carousel").owlCarousel({
                 dots: this.showDots === "true",
                 items: 1,
+                mouseDrag: false,
                 loop: this.imageUrls.length > 1,
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === "true",
-                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"]
+                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                onTranslated: function onTranslated(event) {
+                    var target = $(event.currentTarget);
+
+                    var owlItem = $(target.find(".owl-item.active"));
+
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                }
             });
         }
     }
@@ -2659,7 +2676,7 @@ Vue.component("item-lazy-img", {
         var self = this;
 
         setTimeout(function () {
-            $(self.$els.lazyImg).show().lazyload();
+            $(self.$els.lazyImg).show().lazyload({ threshold: 100 });
         }, 1);
     }
 });
@@ -4578,7 +4595,7 @@ function renderItems(currentCategory) {
     }
 
     if (!App.isCategoryView) {
-        window.open(_getScopeUrl(currentCategory), "_self");
+        window.open(getScopeUrl(currentCategory), "_self");
     } else if (currentCategory.details.length) {
         _handleCurrentCategory(currentCategory);
     }
@@ -4617,7 +4634,7 @@ function _updateItemList(currentCategory) {
 function _updateHistory(currentCategory) {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, _getScopeUrl(currentCategory) + window.location.search);
+    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
 }
@@ -4648,7 +4665,7 @@ function getScopeUrl(currentCategory, scopeUrl, categories) {
         if (categories[category].children && categories[category].details.length) {
             var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
 
-            var urlScope = _getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
+            var urlScope = getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
 
             if (urlScope.length > 0) {
                 _categoryBreadcrumbs.push(categories[category]);
