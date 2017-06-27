@@ -2,6 +2,10 @@
 
 ## v1.2.8 (unknown)
 
+### Geändert
+
+- Allgemeine Performance verbesserungen.
+- Im MyAccount Bereich kann nun die Zahlungsart eines Auftrags geändert werden.
 - Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 - Die LastSeenItemList hat nun kein Image Carousel mehr.
