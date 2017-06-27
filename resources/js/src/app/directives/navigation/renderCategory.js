@@ -1,4 +1,4 @@
-var CategoryRendererService = require("services/CategoryRendererService");
+import {renderItems}from "services/CategoryRendererService";
 
 Vue.directive("render-category", function(value)
 {
@@ -6,6 +6,6 @@ Vue.directive("render-category", function(value)
     {
         event.preventDefault();
 
-        CategoryRendererService.renderItems(value);
+        renderItems(value);
     });
 });

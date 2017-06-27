@@ -1,9 +1,9 @@
 const ApiService = require("services/ApiService");
-const AddressService = require("services/AddressService");
 const ModalService = require("services/ModalService");
 const ResourceService = require("services/ResourceService");
 const AddressFieldService = require("services/AddressFieldService");
 
+import AddressService from "services/AddressService";
 import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
@@ -216,7 +216,7 @@ Vue.component("address-select", {
                 .done(() =>
                 {
                     this.closeDeleteModal();
-                    this.removeIdFromList(address.id);
+                    this.removeIdFromList(this.addressToDelete.id);
                 });
         },
 
