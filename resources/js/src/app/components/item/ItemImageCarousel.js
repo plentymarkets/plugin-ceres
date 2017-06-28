@@ -77,7 +77,7 @@ Vue.component("item-image-carousel", {
                 dots             : true,
                 items            : 1,
                 lazyLoad         : true,
-                loop             : false,
+                loop             : true,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
                 nav              : imageCount > 1,
