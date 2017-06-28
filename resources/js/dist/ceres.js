@@ -2309,6 +2309,7 @@ Vue.component("item-image-carousel", {
             if (!this.init) {
                 $(window).load(function () {
                     self.initCarousel();
+                    self.initThumbCarousel();
 
                     self.init = true;
                 });
@@ -2352,10 +2353,44 @@ Vue.component("item-image-carousel", {
                 navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
                 navContainerClass: "",
                 navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
+                smartSpeed: 350,
+                onChanged: function (event) {
+                    console.log(event);
+
+                    // var $thumb = $(this.$els.thumb);
+
+                    // $thumb.trigger("to.owl.carousel", [
+                    //     index,
+                    //     350
+                    // ]);
+                }.bind(this)
             });
 
             $(this.$els.single).on("changed.owl.carousel", function (event) {
+                this.currentItem = event.page.index;
+            }.bind(this));
+        },
+
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$els.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: true,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function onChanged(event) {
+                    console.log(event);
+                }
+            });
+
+            $(this.$els.thumbs).on("changed.owl.carousel", function (event) {
                 this.currentItem = event.page.index;
             }.bind(this));
         },
