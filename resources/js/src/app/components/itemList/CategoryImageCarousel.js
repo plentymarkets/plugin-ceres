@@ -33,7 +33,7 @@ Vue.component("category-image-carousel", {
     {
         initializeCarousel: function()
         {
-            $(".owl-carousel").owlCarousel({
+            $("#owl-carousel-" + this._uid).owlCarousel({
                 dots     : (this.showDots === "true"),
                 items    : 1,
                 mouseDrag: false,
@@ -42,6 +42,7 @@ Vue.component("category-image-carousel", {
                 margin   : 10,
                 nav      : (this.showNav === "true"),
                 navText  : [
+
                     "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
                     "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
                 ],

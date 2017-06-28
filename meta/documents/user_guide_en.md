@@ -12,6 +12,20 @@ You can make changes to your design by carrying out the design settings. No prog
     When deploying the online store plugin <b>Ceres</b> in <b>Productive</b>, the old plentymarkets online store will be unavailable. <b>Ceres</b> will use the URL of the online store.
 </div>
 
+### Carrying out global settings
+
+Carry out global settings that affect the entire template in the **Global** tab. For example, link a category to display information concerning your shipping costs in the online store.
+
+##### Carrying out global settings:
+
+1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
+2. Click on **Ceres**.<br /> → The plugin will open. 
+3. Click on **Configuration** in the directory tree.<br /> → The **Global** is pre-selected. 
+4. Click on **Search**. 
+5. Select a category to link this category for displaying information concerning shipping costs. 
+6. Click on **Select**. 
+7. **Save** the settings.<br /> → The category will be linked.
+
 ### Customising the default homepage
 
 **Ceres** comes with a default homepage. Customise this homepage, to display your own content on the homepage of your online store. Product and category previews as well as item lists will be displayed when they are set up.
@@ -20,10 +34,11 @@ You can make changes to your design by carrying out the design settings. No prog
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
 2. Click on **Ceres**.<br /> → The plugin will open. 
-3. Click on **Configuration** in the directory tree.<br /> → The **Homepage** is pre-selected. 
-4. Deactivate the setting **Show default homepage**. 
-5. Carry out the settings. Pay attention to the information given in table 1. 
-6. **Save** the settings.<br /> → The default homepage is deactivated and your content will be displayed.
+3. Click on **Configuration** in the directory tree. 
+4. Click on the **Homepage** tab. 
+5. Deactivate the setting **Show default homepage**. 
+6. Carry out the settings. Pay attention to the information given in table 1. 
+7. **Save** the settings.<br /> → The default homepage is deactivated and your content will be displayed.
 
 <table>
 <thead>
@@ -192,6 +207,10 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <tr>
 <td><b>Show variations by type</b></td>  
 <td>Display variations by type in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
+</tr>
+<tr>
+<td><b>Enable image carousel in category item list</b></td>  
+<td>Activate to display the image carousel in the category view.</td>
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  
@@ -461,7 +480,7 @@ Specific templates for legal information are available in Ceres. You can save an
 
 1. Go to **Settings » Client (store) » Standard » Online store » Legal information**. 
 2. Expand a **language**. 
-3. Click on the **Terms and conditions** tab.
+3. Click on the **Terms and conditions** tab. 
 4. Click on the **Text** tab. 
 5. Enter the text for your terms and conditions. 
 6. **Save** the settings.

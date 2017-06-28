@@ -31,6 +31,7 @@ Vue.component("item-image-carousel", {
                 $(window).load(function()
                 {
                     self.initCarousel();
+                    self.initThumbCarousel();
 
                     self.init = true;
                 });
@@ -89,13 +90,47 @@ Vue.component("item-image-carousel", {
                     "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
-                smartSpeed       : 350
+                smartSpeed       : 350,
+                onChanged: function(event)
+                {
+                    var $thumb = $(this.$els.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [
+                        event.page.index,
+                        350
+                    ]);
+                }.bind(this)
             });
 
             $(this.$els.single).on("changed.owl.carousel", function(event)
             {
                 this.currentItem = event.page.index;
             }.bind(this));
+        },
+
+        initThumbCarousel: function()
+        {
+            $(this.$els.thumbs).owlCarousel({
+                autoHeight       : true,
+                dots             : false,
+                items            : 5,
+                lazyLoad         : true,
+                loop             : false,
+                margin           : 10,
+                mouseDrag        : false,
+                center           : false,
+                nav              : true,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350
+            });
         },
 
         goTo: function(index)
