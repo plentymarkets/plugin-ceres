@@ -113,7 +113,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template"],
+    props: ["item", "itemUrl", "showQuantity", "template", "salable"],
 
     data: function data() {
         return {
