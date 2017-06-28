@@ -7,9 +7,8 @@
 - Im **Mein Konto**-Bereich kann nun die Zahlungsart eines Auftrags geändert werden, wenn die Zahlungsart dies zulässt.
 - Das Bilderkarussell kann nun auch für die Kategorieansicht aktiviert werden.
 - Der Template-Container `CategoryItem.SideNavBarBottom` wurde hinzugefügt, um in der Kategorieansicht eigene Inhalte unter der Seitennavigation anzuzeigen.
-- In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 - Die Artikel werden in der Kategorieansicht mit dem Zusatz "* inkl. ges. MwSt. zzgl. Versandkosten" ausgegeben.
-- Hinzugefügt wurde ein Modal zur Darstellung der Versandkosten. Die entsprechende Kategorie kann im Backend unter dem Tab "Global" mit dem Modal verknüpft werden.
+- Ein Modal zur Darstellung der Versandkosten wurde hinzugefügt. Die entsprechende Kategorie kann in der Konfiguration von **Ceres** im Tab **Global** mit dem Modal verknüpft werden.
 
 ### Geändert
 
