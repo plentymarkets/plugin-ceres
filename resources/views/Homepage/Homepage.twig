@@ -48,18 +48,18 @@
                 item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
                 url: config("Ceres.homepage.sliderImageUrl3") } %}
 
-                '{% if slider1.url | trim is empty and slider1.item.texts is not empty %}
-                '    {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
-                '    {% set slider1 = slider1 | merge({url: slider1Image.url}) %}
-                '{% endif %}
-                '{% if slider2.url | trim is empty and slider2.item.texts is not empty %}
-                '    {% set slider2Image = slider2.item.images | itemImages | orderByKey('position') | first %}
-                '    {% set slider2 = slider2 | merge({url: slider2Image.url}) %}
-                '{% endif %}
-                '{% if slider3.url | trim is empty and slider3.item.texts is not empty %}
-                '    {% set slider3Image = slider3.item.images | itemImages | orderByKey('position') | first %}
-                '    {% set slider3 = slider3 | merge({url: slider3Image.url}) %}
-                '{% endif %}
+                {% if slider1.url | trim is empty and slider1.item.texts is not empty %}
+                    {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider1 = slider1 | merge({url: slider1Image.url}) %}
+                {% endif %}
+                {% if slider2.url | trim is empty and slider2.item.texts is not empty %}
+                    {% set slider2Image = slider2.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider2 = slider2 | merge({url: slider2Image.url}) %}
+                {% endif %}
+                {% if slider3.url | trim is empty and slider3.item.texts is not empty %}
+                    {% set slider3Image = slider3.item.images | itemImages | orderByKey('position') | first %}
+                    {% set slider3 = slider3 | merge({url: slider3Image.url}) %}
+                {% endif %}
 
                 {% set heroExtra1 = {
                 item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data,
