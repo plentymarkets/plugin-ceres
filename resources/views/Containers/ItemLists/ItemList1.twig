@@ -1,19 +1,23 @@
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 
-{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.LastSeenItemList', itemLoaderPresets.lastSeenItemsList, {'items':itemsPerPage}).documents %}
+{% if config("Ceres.item.lists.1.list_type") == "last_seen" %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.LastSeenItemList', itemLoaderPresets.lastSeenItemsList, {'items':itemsPerPage}).documents %}
+{% else %}
+    {% set itemList = item.CrossSellingItems.documents %}
+{% endif %}
 
 <hr>
 
 <div class="section-header m-b-1">
-    <h4>{{ trans("Ceres::Template.itemListLastSeen") }}</h4>
+    <h4>{% if config("Ceres.item.lists.1.list_type") == "last_seen" %}{{ trans("Ceres::Template.itemListLastSeen") }}{% else %}CROSS SELLING{% endif %}</h4>
 </div>
 
 <div class="row">
     <div class="col-xs-12 col-lg-12">
 
         <ul id="twig-rendered-item-list" class="product-list row grid">
-            {% for item in itemList %}
+            {% for items in itemList %}
                 <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %}
                 </li>

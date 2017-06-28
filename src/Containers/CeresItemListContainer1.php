@@ -6,8 +6,8 @@ use Plenty\Plugin\Templates\Twig;
 
 class CeresItemListContainer1
 {
-    public function call(Twig $twig):string
+    public function call(Twig $twig, $arg):string
     {
-        return $twig->render('Ceres::Containers.ItemLists.ItemList1');
+        return $twig->render('Ceres::Containers.ItemLists.ItemList1', ["item" => $arg[0]]);
     }
 }
