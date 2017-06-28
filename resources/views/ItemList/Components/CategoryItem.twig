@@ -3,6 +3,10 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set configItemName = config("Ceres.item.name") %}
 
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set shippingCat = services.category.get(config("Ceres.global.shippingCostsCategoryId"), lang) %}
+
 <script type="x/template" id="vue-category-item">
     <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if (showHeaderNavBar == "side" or showHeaderNavBar == "both") and not services.template.isSearch() %}4{% else %}3{% endif %}">
 
