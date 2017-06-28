@@ -411,8 +411,8 @@
         },
         {
             "key"           : "CategoryItem.SideNavBarBottom",
-            "name"          : "Category item: Container under side navigation",
-            "description"   : "Add content under the side navigation in the category item."
+            "name"          : "Category item list: Container below side navigation",
+            "description"   : "Add content below the side navigation bar in the category item view."
         }
     ]
 }
