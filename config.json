@@ -372,8 +372,8 @@
         {
             "Similar"            : "Similar",
             "Accessory"          : "Accessory",
-            "ReplacementPart"    : "Spare part",
-            "Bundle"             : "Item package"
+            "ReplacementPart"    : "Replacement part",
+            "Bundle"             : "Bundle"
         },
         "default"           : "Similar"
     },
