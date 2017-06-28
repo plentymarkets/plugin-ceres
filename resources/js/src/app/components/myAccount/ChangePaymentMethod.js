@@ -61,7 +61,7 @@ Vue.component("change-payment-method", {
         {
             const paymentId = paymentIds.find(paymentId => paymentId.typeId === 3).value;
 
-            if(paymentId)
+            if (paymentId)
             {
                 return paymentId;
             }
