@@ -5,6 +5,7 @@
 ### Hinzugefügt
 
 - Im MyAccount Bereich kann nun die Zahlungsart eines Auftrags geändert werden.
+- In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 
 ### Geändert
 
@@ -12,7 +13,6 @@
 - Das ImageCarousel ist in der SingleItem nun auch für die Thumbnails verfügbar.
 - Alle Bilder in dem SingleItem Carousel und dem Thumb Carousel werden nun auf 1 Größe skaliert.
 - Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
-- In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 - Die LastSeenItemList hat nun kein Image Carousel mehr.
 - Das Image Carousel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
 
