@@ -194,6 +194,10 @@ Customise the design of the item view in the **Item view** tab. Select the item 
 <td>Display variations by type in the item overview of a category.<br /> <strong>All</strong> = Select to display main variations and variations of items.<br /> <strong>Only main variations</strong> = Select to display only main variations.<br /> <strong>Only child variations</strong> = Select to display only variations. Main variations will not be displayed.</td>
 </tr>
 <tr>
+<td><b>Enable image carousel in category item list</b></td>  
+<td>Activate to display the image carousel in the category view.</td>
+</tr>
+<tr>
 <td><b>Show image carousel dots in category item list</b></td>  
 <td>Activate to display dots below the image carousel of an item in the category view.</td>
 </tr>
