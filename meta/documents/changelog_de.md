@@ -1,5 +1,25 @@
 # Release Notes für Ceres
 
+## v1.2.8 (XXX)
+
+### Hinzugefügt
+
+- Die Artikel werden in der Kategorieansicht mit dem Zusatz "* inkl. ges. MwSt. zzgl. Versandkosten" ausgegeben.
+- Hinzugefügt wurde ein Modal zur Darstellung der Versandkosten. Die entsprechende Kategorie kann im Backend unter dem Tab "Global" mit dem Modal verknüpft werden.
+
+### Geändert
+
+
+
+### Behoben
+
+
+
+
+### Bekannte Probleme
+
+
+
 ## v1.2.7 (2017-06-22)
 
 ### Hinzugefügt

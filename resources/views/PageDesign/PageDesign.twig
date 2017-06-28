@@ -15,6 +15,8 @@
 
 {% set categories = services.category.getNavigationTree("item", lang) %}
 
+{% set shippingCat = services.category.get(config("Ceres.global.shippingCostsCategoryId"), lang) %}
+
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
 {% endif %}
@@ -109,6 +111,24 @@
             <!-- BASKET MODAL -->
             <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
             <!-- ./BASKET MODAL -->
+
+            <!-- SHIPPINGCOSTS MODAL -->
+            <div id="shippingscosts-modal-wrapper">
+                <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans('Ceres::Template.itemShippingCosts') }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                {{ shippingCat.details[0].description | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./SHIPPINGCOSTS MODAL -->
 
         </div>
 
