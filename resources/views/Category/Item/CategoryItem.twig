@@ -1,5 +1,6 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set itemSort             = request.get("sorting") | default(config('Ceres.sort.defaultSorting')) %}
 {% set orderBy              = itemSort[0] %}
@@ -83,6 +84,9 @@
                         {{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "") }}
                     </div>
                 </div>
+
+                {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}
+
             {% endif %}
 
             <div class="col-xs-12 col-lg-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}9{% else %}12{% endif %}">

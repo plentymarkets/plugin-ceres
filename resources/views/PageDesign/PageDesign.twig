@@ -13,7 +13,6 @@
 
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
 
-{% set categories = services.category.getNavigationTree("item", lang) %}
 
 {% set shippingCat = services.category.get(config("Ceres.global.shippingCostsCategoryId"), lang) %}
 
@@ -37,7 +36,7 @@
         <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
-        <resource name="navigationTree" :data="{{ categories | json_encode() }}"></resource>
+
         <resource name="isLoadingBreadcrumbs" :data="false"></resource>
 
         <div class="wrapper wrapper-top">

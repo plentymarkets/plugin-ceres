@@ -6,6 +6,14 @@
 {% set configItemName = config("Ceres.item.name") %}
 {% set itemUrl =  item.data | itemURL %}
 
+{% if enableCarousel is not defined %}
+    {% if config("Ceres.item.enable_image_carousel") == "true" %}
+        {% set enableCarousel = "true" %}
+    {% else %}
+        {% set enableCarousel = "false" %}
+    {% endif %}
+{% endif %}
+
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <div class="thumb-background"></div>
@@ -22,7 +30,8 @@
                                              alt-text="{{ item.data.texts | itemName(configItemName) }}"
                                              item-url="{{ itemUrl }}"
                                              :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
+                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                                             :enable-carousel="{{ enableCarousel }}">
                     </category-image-carousel>
 
                     <noscript>
