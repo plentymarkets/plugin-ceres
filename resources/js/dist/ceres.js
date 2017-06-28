@@ -2697,7 +2697,7 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list-sorting", {
 
-    props: ["sortData", "template", "isSearch"],
+    props: ["sortData", "template"],
 
     data: function data() {
         return {
@@ -2724,7 +2724,7 @@ Vue.component("item-list-sorting", {
     created: function created() {
         this.$options.template = this.template;
 
-        if (this.isSearch) {
+        if (App.isSearch) {
             this.sortData.unshift("item.score");
             this.dataTranslationMapping["item.score"] = "itemRelevance";
         }
@@ -2749,7 +2749,7 @@ Vue.component("item-list-sorting", {
             }
         },
         setDefaultSorting: function setDefaultSorting() {
-            var defaultSortKey = this.isSearch ? "item.score" : App.config.defaultSorting;
+            var defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
             this.selectedSorting = this.sortData.find(function (entry) {
                 return entry.value === defaultSortKey;
@@ -4834,7 +4834,7 @@ module.exports = function ($) {
     var searchParams = {
         query: "",
         items: App.config.defaultItemsPerPage,
-        sorting: App.config.defaultSorting,
+        sorting: App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting,
         page: 1,
         facets: "",
         categoryId: null,
@@ -4927,7 +4927,12 @@ module.exports = function ($) {
     function setOrderBy(sorting) {
         searchParams.sorting = sorting;
 
-        sorting = sorting !== App.config.defaultSorting ? sorting : null;
+        if (App.isSearch) {
+            sorting = sorting !== App.config.defaultSortingSearch ? sorting : null;
+        } else {
+            sorting = sorting !== App.config.defaultSorting ? sorting : null;
+        }
+
         _UrlService2.default.setUrlParam("sorting", sorting);
     }
 

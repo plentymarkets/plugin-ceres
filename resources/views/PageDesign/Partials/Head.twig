@@ -7,6 +7,7 @@
 {% set logData = config("Ceres.log.data")|split(', ') %}
 {% set sortValues = config("Ceres.sort.data")|split(', ') %}
 {% set defaultSorting = config('Ceres.sort.defaultSorting') %}
+{% set defaultSortingSearch = config('Ceres.sort.defaultSortingSearch') %}
 {% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
 {% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
@@ -36,6 +37,7 @@
             logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
             defaultItemsPerPage: "{{ itemsPerPage }}",
             defaultSorting: "{{ defaultSorting }}",
+            defaultSortingSearch: "{{ defaultSortingSearch }}",
             performanceLevel: "{{ performanceLevel }}",
             itemName: {{ itemName }},
             variationShowType: "{{ config("Ceres.item.variation_show_type") }}",
@@ -45,6 +47,7 @@
             enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}"
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
-        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %}
+        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %}
     };
 </script>

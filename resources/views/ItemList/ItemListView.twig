@@ -12,7 +12,12 @@
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
 
-{% set sorting = config("Ceres.sort.defaultSorting") %}
+{% if services.template.isSearch() %}
+    {% set sorting = config("Ceres.sort.defaultSortingSearch") %}
+{% else %}
+    {% set sorting = config("Ceres.sort.defaultSorting") %}
+{% endif %}
+
 {% if request.get("sorting") %}
     {% set sorting = request.get("sorting") %}
 {% endif %}
@@ -43,7 +48,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            <item-list-sorting template="#vue-item-list-sorting" :is-search="{{ services.template.isSearch }}" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
+                            <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
                             <items-per-page
                                 template="#vue-items-per-page"
                                 :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"

@@ -506,7 +506,7 @@
         "type"                      : "dropdown",
         "possibleValues"            :
         {
-            "default.recommended_sorting"                  : "Recommended",
+            "default.recommended_sorting"               : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
             "item.salesPrices.price_asc"                : "Price ⬆",
@@ -627,6 +627,32 @@
             "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
         },
         "default"       : "notSelected"
+    },
+    {
+        "tab"                       : "Pagination and sorting",
+        "key"                       : "sort.defaultSortingSearch",
+        "label"                     : "Search' default item sorting by",
+        "type"                      : "dropdown",
+        "possibleValues"            :
+        {
+            "item.score"                                : "Relevance",
+            "default.recommended_sorting"               : "Recommended",
+            "texts.name1_asc"                           : "Item name A-Z",
+            "texts.name1_desc"                          : "Item name Z-A",
+            "item.salesPrices.price_asc"                : "Price ⬆",
+            "item.salesPrices.price_desc"               : "Price ⬇",
+            "variation.createdAt_asc"                   : "Newest variation",
+            "variation.createdAt_desc"                  : "Oldest variation",
+            "variation.availability.averageDays_asc"    : "Availability ⬆",
+            "variation.availability.averageDays_desc"   : "Availability ⬇",
+            "variation.number_asc"                      : "Variation number ⬆",
+            "variation.number_desc"                     : "Variation number ⬇",
+            "variation.updatedAt_asc"                   : "Last update",
+            "variation.updatedAt_desc"                  : "First update",
+            "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
+            "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
+        },
+        "default"                   : "item.score"
     },
     {
         "tab"           : "Pagination and sorting",

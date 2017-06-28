@@ -6,8 +6,7 @@ Vue.component("item-list-sorting", {
 
     props: [
         "sortData",
-        "template",
-        "isSearch"
+        "template"
     ],
 
     data()
@@ -39,7 +38,7 @@ Vue.component("item-list-sorting", {
     {
         this.$options.template = this.template;
 
-        if (this.isSearch)
+        if (App.isSearch)
         {
             this.sortData.unshift("item.score");
             this.dataTranslationMapping["item.score"] = "itemRelevance";
@@ -70,7 +69,7 @@ Vue.component("item-list-sorting", {
 
         setDefaultSorting()
         {
-            const defaultSortKey = this.isSearch ? "item.score" : App.config.defaultSorting;
+            const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
             this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
         },
