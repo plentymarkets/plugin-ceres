@@ -7,28 +7,31 @@
 - Im **Mein Konto**-Bereich kann nun die Zahlungsart eines Auftrags geändert werden, wenn die Zahlungsart dies zulässt.
 - Das Bilderkarussell kann nun auch für die Kategorieansicht aktiviert werden.
 - Der Template-Container `CategoryItem.SideNavBarBottom` wurde hinzugefügt, um in der Kategorieansicht eigene Inhalte unter der Seitennavigation anzuzeigen.
+- In der Konfiguration kann nun entschieden werden, ob das Image Carousel für die Kategorieansicht aktiviert ist.
 
 ### Geändert
 
 - Allgemeine Performance-Verbesserungen.
+- Im MyAccount Bereich kann nun die Zahlungsart eines Auftrags geändert werden.
 - Das Bilderkarussell ist in der Einzelansicht eines Artikel nun auch für die Vorschaubilder verfügbar.
+- Die LastSeenItemList hat nun kein Image Carousel mehr.
 - Alle Bilder, die in der Einzelansicht eines Artikels angezeigt werden, werden nun auf eine feste Größe skaliert.
-- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+- Artikel, sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - Das Bilderkarussell wurde in der Liste **Zuletzt angesehene Artikel** entfernt.
 - Das Bilderkarussel in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
 
 ### Behoben
 
 - Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
+- Als Gast kann man im Checkout nur noch eine Rechnungsadresse, sowie Lieferadresse speichern.
+- Es wurde ein Fehler behoben, dass nach dem Löschen einer selektierten Adresse, diese weiterhin in den Browserdaten (Session) gespeichert war.
 
 ### Bekannte Probleme
 
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
 - Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
 - In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
-
 
 ## v1.2.7 (2017-06-22)
 
