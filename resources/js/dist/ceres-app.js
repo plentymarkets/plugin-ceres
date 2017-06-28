@@ -2294,7 +2294,7 @@ Vue.component("item-list-sorting", {
         return {
             selectedSorting: {},
             dataTranslationMapping: {
-                "default.standard_sorting": "itemStandardSorting",
+                "default.recommended_sorting": "itemRecommendedSorting",
                 "texts.name1_asc": "itemName_asc",
                 "texts.name1_desc": "itemName_desc",
                 "item.salesPrices.price_asc": "itemPrice_asc",

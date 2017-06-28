@@ -481,7 +481,7 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "default.standard_sorting"                  : "Recommended",
+            "default.recommended_sorting"                  : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
             "item.salesPrices.price_asc"                : "Price ⬆",
@@ -506,7 +506,7 @@
         "type"                      : "dropdown",
         "possibleValues"            :
         {
-            "default.standard_sorting"                  : "Recommended",
+            "default.recommended_sorting"                  : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
             "item.salesPrices.price_asc"                : "Price ⬆",
