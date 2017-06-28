@@ -370,12 +370,12 @@
         "type"              : "dropdown",
         "possibleValues"    :
         {
-            "similar"       : "Similar",
-            "accessories"   : "Accessories",
-            "spare_part"    : "Spare part",
-            "item_package"  : "Item package"
+            "Similar"            : "Similar",
+            "Accessory"          : "Accessory",
+            "ReplacementPart"    : "Spare part",
+            "Bundle"             : "Item package"
         },
-        "default"           : "similar"
+        "default"           : "Similar"
     },
     {
         "tab"       : "Item lists",

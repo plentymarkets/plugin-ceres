@@ -19,7 +19,7 @@
 
 {% block PageBody %}
 
-    {# remove this because we need to set it in each item list seperated #}
+    {{ services.crossSelling.setType(config("item.lists.cross_selling_type")) }}
     {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen_number")) }}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}

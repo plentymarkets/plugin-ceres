@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xs-12 col-lg-12">
 
-            <ul id="twig-rendered-item-list" class="product-list row grid">
+            <div id="list-carousel" class="product-list row grid owl-carousel owl-theme owl-single-item">
                 {% for item in itemList %}
                     <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                         {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %}
@@ -27,4 +27,32 @@
 
         </div>
     </div>
+
+    <script>
+        $(window).load(function()
+        {
+           $("#list-carousel").owlCarousel({
+                autoHeight       : true,
+                dots             : true,
+                items            : 4,
+                lazyLoad         : true,
+                loop             : true,
+                margin           : 10,
+                mouseDrag        : true,
+                nav              : true,
+                navClass         : [
+                    "owl-single-item-nav left carousel-control",
+                    "owl-single-item-nav right carousel-control"
+                ],
+                navContainerClass: "",
+                navText          : [
+                    "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                    "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                ],
+                smartSpeed       : 350,
+            });
+        });
+    </script>
+
 {% endif %}
+
