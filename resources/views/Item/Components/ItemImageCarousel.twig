@@ -9,7 +9,7 @@
                 </a>
             </div>
         </div>
-        <div class="owl-thumbs">
+        <div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" v-el:thumbs>
             <img alt="${ currentVariation.documents[0].data.texts | itemName {{configItemName}} }"  @click="goTo($index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === $index }"
                  :src="imagePreview.url"
                  v-for="imagePreview in currentVariation.documents[0].data.images | itemImages 'urlPreview' | orderBy 'position'">

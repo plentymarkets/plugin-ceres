@@ -1,5 +1,36 @@
 # Release Notes for Ceres
 
+## v1.2.8 (unknown)
+
+### Added
+
+- A payment method can be changed subsequently for an order in the **My account** area if this feature is enabled in the payment method.
+- The image carousel can now be enabled for the category view.
+- The `CategoryItem.SideNavBarBottom` template container has been added. This container allows you to add content below the side navigation bar in the category view.
+- The information text "* Incl. VAT excl. Shipping" is now displayed for each item in the category view.
+- A modal for displaying the shipping costs has been added. A category can be linked to this modal in the configuration of **Ceres** in the **Global** tab.
+
+### Changed
+
+- General performance optimisations.
+- The image carousel is now also available for preview images in the single item view.
+- All images displayed in the single item view are now scaled to a fixed size.
+- Items as well as categories for which no translations are available are no longer displayed on the homepage after the respective language is selected.
+- The image carousel in the **Last seen items** list has been removed.
+- The image carousel in the category view will only be initialised for items with more than one linked image.
+
+### Fixed
+
+- Due to an error, a deleted address was not removed from the address list. This has been fixed.
+- Only one invoice address and delivery address can be saved in the checkout when ordering as a guest.
+
+### Known issues
+
+- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+- In the mobile view, the navigation will remain open after switching the category.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.7 (2017-06-22)
 
 ### Added
@@ -16,14 +47,6 @@
 ### Fixed
 
 - In the address form, the value **Mr.** is preselected in the form of address field and the value is now displayed in the drop-down.
-
-### Known issues
-
-- Due to a sporadically occurring error, addresses cannot be edited at the moment.
-- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- In the mobile view, the navigation will remain open after switching the category.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.6 (2017-06-14)
 

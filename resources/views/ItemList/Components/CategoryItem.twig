@@ -3,6 +3,10 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set configItemName = config("Ceres.item.name") %}
 
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set shippingCat = services.category.get(config("Ceres.global.shippingCostsCategoryId"), lang) %}
+
 {% if enableCarousel is not defined %}
     {% if config("Ceres.item.enable_image_carousel") == "true" %}
         {% set enableCarousel = "true" %}
@@ -59,10 +63,13 @@
 
                             <a href="${ itemData | itemURL }">
                                 <div class="price">
-                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency }
+                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency } *
                                 </div>
                             </a>
-
+                            <span class="vat small text-muted">
+                                * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                                <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                            </span>
                         </div>
                     </div>
                 </div>
