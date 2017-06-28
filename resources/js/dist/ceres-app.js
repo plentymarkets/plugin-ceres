@@ -852,7 +852,8 @@ Vue.component("address-select", {
             addressToEdit: {},
             addressToDelete: {},
             deleteModal: "",
-            localization: {}
+            localization: {},
+            user: {}
         };
     },
 
@@ -863,6 +864,7 @@ Vue.component("address-select", {
     created: function created() {
         this.$options.template = this.template;
         ResourceService.bind("localization", this);
+        ResourceService.bind("user", this);
 
         this.addEventListener();
     },
@@ -1003,6 +1005,11 @@ Vue.component("address-select", {
             this.modalType = "update";
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (typeof this.addressToEdit.addressSalutation === "undefined") {
+                this.addressToEdit.addressSalutation = 0;
+            }
+
             this.updateHeadline();
             _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
@@ -1088,8 +1095,15 @@ Vue.component("address-select", {
                     this.addressList.splice(i, 1);
 
                     if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString()) {
-                        this.selectedAddress = {};
-                        this.selectedAddressId = "";
+                        if (this.addressList.length) {
+                            this.selectedAddress = this.addressList[0];
+                            this.selectedAddressId = this.selectedAddress.id;
+                        } else {
+                            this.selectedAddress = {};
+                            this.selectedAddressId = "";
+                        }
+
+                        this.$dispatch("address-changed", this.selectedAddress);
 
                         break;
                     }
@@ -1108,6 +1122,18 @@ Vue.component("address-select", {
 
                 this.loadSelectedAddress();
             }
+        }
+    },
+
+    computed: {
+        isAddAddressEnabled: function isAddAddressEnabled() {
+            var isLoggedIn = this.user.isLoggedIn;
+
+            if (this.addressType === "1") {
+                return isLoggedIn || this.addressList.length < 1;
+            }
+
+            return isLoggedIn || this.addressList.length < 2;
         }
     }
 });
@@ -3201,6 +3227,17 @@ Vue.component("change-payment-method", {
                 return paymentState.typeId === 4;
             }).value];
         },
+        getPaymentId: function getPaymentId(paymentIds) {
+            var paymentId = paymentIds.find(function (paymentId) {
+                return paymentId.typeId === 3;
+            }).value;
+
+            if (paymentId) {
+                return paymentId;
+            }
+
+            return "";
+        },
         closeModal: function closeModal() {
             this.changePaymentModal.hide();
             this.isPending = false;
@@ -3212,15 +3249,23 @@ Vue.component("change-payment-method", {
             this.checkChangeAllowed();
             this.closeModal();
         },
-        changePaymentMethod: function changePaymentMethod() {
+        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
             var _this2 = this;
+
+            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.order.id, paymentMethodId: paymentMethodId }).done(function (response) {
+                _this2.allowedPaymentMethods = response;
+            }).fail(function () {});
+        },
+        changePaymentMethod: function changePaymentMethod() {
+            var _this3 = this;
 
             this.isPending = true;
 
             ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this2.currentOrder, newOrder: response } }));
+                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this3.currentOrder, newOrder: response } }));
 
-                _this2.updateOrderHistory(response);
+                _this3.updateOrderHistory(response);
+                _this3.updateAllowedPaymentMethods(_this3.getPaymentId(response.order.properties));
             }).fail(function () {
                 // TODO add error msg
             });
