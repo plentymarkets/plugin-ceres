@@ -113,7 +113,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template"],
+    props: ["item", "itemUrl", "showQuantity", "template", "salable"],
 
     data: function data() {
         return {
@@ -852,7 +852,8 @@ Vue.component("address-select", {
             addressToEdit: {},
             addressToDelete: {},
             deleteModal: "",
-            localization: {}
+            localization: {},
+            user: {}
         };
     },
 
@@ -863,6 +864,7 @@ Vue.component("address-select", {
     created: function created() {
         this.$options.template = this.template;
         ResourceService.bind("localization", this);
+        ResourceService.bind("user", this);
 
         this.addEventListener();
     },
@@ -1003,6 +1005,11 @@ Vue.component("address-select", {
             this.modalType = "update";
             // Creates a tmp address to prevent unwanted two-way binding
             this.addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (typeof this.addressToEdit.addressSalutation === "undefined") {
+                this.addressToEdit.addressSalutation = 0;
+            }
+
             this.updateHeadline();
             _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
             this.addressModal.show();
@@ -1088,8 +1095,15 @@ Vue.component("address-select", {
                     this.addressList.splice(i, 1);
 
                     if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString()) {
-                        this.selectedAddress = {};
-                        this.selectedAddressId = "";
+                        if (this.addressList.length) {
+                            this.selectedAddress = this.addressList[0];
+                            this.selectedAddressId = this.selectedAddress.id;
+                        } else {
+                            this.selectedAddress = {};
+                            this.selectedAddressId = "";
+                        }
+
+                        this.$dispatch("address-changed", this.selectedAddress);
 
                         break;
                     }
@@ -1108,6 +1122,18 @@ Vue.component("address-select", {
 
                 this.loadSelectedAddress();
             }
+        }
+    },
+
+    computed: {
+        isAddAddressEnabled: function isAddAddressEnabled() {
+            var isLoggedIn = this.user.isLoggedIn;
+
+            if (this.addressType === "1") {
+                return isLoggedIn || this.addressList.length < 1;
+            }
+
+            return isLoggedIn || this.addressList.length < 2;
         }
     }
 });
@@ -1902,6 +1928,7 @@ Vue.component("item-image-carousel", {
             if (!this.init) {
                 $(window).load(function () {
                     self.initCarousel();
+                    self.initThumbCarousel();
 
                     self.init = true;
                 });
@@ -1945,12 +1972,35 @@ Vue.component("item-image-carousel", {
                 navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
                 navContainerClass: "",
                 navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
+                smartSpeed: 350,
+                onChanged: function (event) {
+                    var $thumb = $(this.$els.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+                }.bind(this)
             });
 
             $(this.$els.single).on("changed.owl.carousel", function (event) {
                 this.currentItem = event.page.index;
             }.bind(this));
+        },
+
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$els.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
         },
 
         goTo: function goTo(index) {
@@ -2193,7 +2243,7 @@ Vue.component("category-image-carousel", {
 
     methods: {
         initializeCarousel: function initializeCarousel() {
-            $(".owl-carousel").owlCarousel({
+            $("#owl-carousel-" + this._uid).owlCarousel({
                 dots: this.showDots === "true",
                 items: 1,
                 mouseDrag: false,
@@ -3177,6 +3227,17 @@ Vue.component("change-payment-method", {
                 return paymentState.typeId === 4;
             }).value];
         },
+        getPaymentId: function getPaymentId(paymentIds) {
+            var paymentId = paymentIds.find(function (paymentId) {
+                return paymentId.typeId === 3;
+            }).value;
+
+            if (paymentId) {
+                return paymentId;
+            }
+
+            return "";
+        },
         closeModal: function closeModal() {
             this.changePaymentModal.hide();
             this.isPending = false;
@@ -3188,15 +3249,23 @@ Vue.component("change-payment-method", {
             this.checkChangeAllowed();
             this.closeModal();
         },
-        changePaymentMethod: function changePaymentMethod() {
+        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
             var _this2 = this;
+
+            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.order.id, paymentMethodId: paymentMethodId }).done(function (response) {
+                _this2.allowedPaymentMethods = response;
+            }).fail(function () {});
+        },
+        changePaymentMethod: function changePaymentMethod() {
+            var _this3 = this;
 
             this.isPending = true;
 
             ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this2.currentOrder, newOrder: response } }));
+                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this3.currentOrder, newOrder: response } }));
 
-                _this2.updateOrderHistory(response);
+                _this3.updateOrderHistory(response);
+                _this3.updateAllowedPaymentMethods(_this3.getPaymentId(response.order.properties));
             }).fail(function () {
                 // TODO add error msg
             });
@@ -16070,32 +16139,6 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-        // var classNames = $("[class*=\" truncate\"]").attr("class");
-        var classNames = $(".testabc").find(".test123");
-
-        console.log("class:--------------------" + classNames);
-
-        var className = "-";
-        var charLength = "-";
-
-        classNames.each(function()
-        {
-            console.log(className);
-
-            className = $(this).attr("class").split("truncate-");
-            console.log("className[0]:" + className[0]);
-            console.log("className[1]:" + className[1]);
-
-            charLength = className[1];
-
-            if ($(this).text().length > charLength)
-            {
-                $(this).html($(this).text().substring(0, charLength)).append("...");
-            }
-
-        });
-
-        // console.log("CHar------------------" + charLength);
 
         var menu = $("#mainNavbarCollapsable");
         var breadcrumb = menu.find("ul.breadcrumb");

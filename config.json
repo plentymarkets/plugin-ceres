@@ -1,5 +1,11 @@
 [
     {
+        "tab"       : "Global",
+        "key"       : "global.shippingCostsCategoryId",
+        "label"     : "ID of the category to display the shipping costs",
+        "type"      : "category_select"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
