@@ -11,7 +11,13 @@
     <hr>
 
     <div class="section-header m-b-1">
-        <h4>{% if config("Ceres.item.lists.1.list_type") == "last_seen" %}{{ trans("Ceres::Template.itemListLastSeen") }}{% else %}CROSS SELLING{% endif %}</h4>
+        <h4>
+            {% if config("Ceres.item.lists.1.list_type") == "last_seen" %}
+                {{ trans("Ceres::Template.itemListLastSeen") }}
+            {% else %}
+                {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
+            {% endif %}
+        </h4>
     </div>
 
     <div class="row">
