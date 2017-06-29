@@ -30,7 +30,6 @@
 
 ### Bekannte Probleme
 
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
