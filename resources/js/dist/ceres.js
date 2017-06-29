@@ -4733,6 +4733,9 @@ var _categoryBreadcrumbs = [];
 function renderItems(currentCategory) {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
+    $("#mainNavbarCollapsable").toggleClass("open");
+    $("body").toggleClass("menu-is-visible");
+
     if ($.isEmptyObject(_categoryTree)) {
         _categoryTree = ResourceService.getResource("navigationTree").val();
     }
