@@ -19,7 +19,7 @@
         <div class="thumb-background"></div>
 
         <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false"
-                       item-url="{{ itemUrl }}"></add-to-basket>
+                       item-url="{{ itemUrl }}" :salable="{{ services.item.getVariationIsSalable(item.data.variation.id) | json_encode() }}"></add-to-basket>
 
         <div class="thumb-image">
             <div class="square-container">
