@@ -17,30 +17,20 @@
                               <img alt="${ paymentProvider.name }" :src="paymentProvider.icon">
                             </div>
                         </div>
-                    </div><!--
-                    --><div class="content">
+                    </div>
+                    <div class="content">
                     ${ paymentProvider.name }
+                        <small class="pull-xs-right">
+                            <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
+                        </small>
                         <div>
                             <small>
-                                ${ paymentProvider.fee | currency }
-                            </small>
-                            <small class="pull-xs-right">
-                                {#externe quelle einbinden#}
-                                <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
-                            </small>
-                        </div>
-                        <div>
-                            {#class truncate-xxx must always be the last given class#}
-                            <small class="test123 truncate-150">
-                                ${ paymentProvider.description } Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sd diam vo
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sd diam vo.
+                                ${ paymentProvider.description | truncate '150' }
                             </small>
                         </div>
                     </div>
                 </label>
-            </li><!--
-            -->
+            </li>
         </ul>
     </div>
 </script>
-*
