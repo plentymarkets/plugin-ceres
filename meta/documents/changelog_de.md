@@ -18,11 +18,14 @@
 - Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - Das Bilderkarussell wurde in der Liste **Zuletzt angesehene Artikel** entfernt.
 - Das Bilderkarussell in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
+- Varianten ohne Bestand können nicht mehr in den Warenkorb gelegt werden.
+- Varianten ohne Bestand werden beim Aufruf auf die nächst kaufbare Variante umgeleitet.
 
 ### Behoben
 
 - Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
 - Als Gast kann man im Checkout nur noch eine Rechnungsadresse sowie Lieferadresse speichern.
+- In der Einzelansicht werden keine inaktiven Varianten und ohne Bestand im Dropdown angezeigt.
 
 ### Bekannte Probleme
 
