@@ -116,8 +116,10 @@
 
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
-                    <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
-                                   resource="currentVariation" :show-quantity="true" :salable="{{ salable | json_encode() }}"></add-to-basket>
+                    {% if salable %}
+                        <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
+                                   resource="currentVariation" :show-quantity="true"></add-to-basket>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
