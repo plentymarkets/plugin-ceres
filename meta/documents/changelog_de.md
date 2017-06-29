@@ -21,6 +21,7 @@
 
 ### Behoben
 
+- In der mobilen Ansicht schließt die Navigation jetzt wenn man die Kategorie wechselt.
 - Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
 - Als Gast kann man im Checkout nur noch eine Rechnungsadresse sowie Lieferadresse speichern.
 
@@ -28,7 +29,6 @@
 
 - Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.7 (2017-06-22)
