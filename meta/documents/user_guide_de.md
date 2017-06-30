@@ -12,6 +12,20 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
     Wenn Sie das Webshop-Plugin <b>Ceres</b> in <b>Productive</b> bereitstellen, ist der alte plentymarkets Webshop nicht mehr erreichbar, da <b>Ceres</b> die URL des Webshops übernimmt.
 </div>
 
+### Globale Einstellungen vornehmen
+
+Globale Einstellungen, die sich auf das gesamte Template auswirken, nehmen Sie im Tab **Global** vor. Hier verknüpfen Sie beispielsweise eine Kategorie, um im Webshop Informationen zu ihren Versandkosten anzuzeigen.
+
+##### Globale Einstellungen vornehmen:
+
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.<br /> → Das Tab **Global** ist bereits vorausgewählt.
+4. Klicken Sie auf **Suchen**.
+5. Wählen Sie eine Kategorie, um diese für die Anzeige der Informationen zu Versandkosten zu verknüpfen.
+6. Klicken Sie auf **Auswählen**.
+7. **Speichern** Sie die Einstellungen.<br /> → Kategorie wird verknüpft.
+
 ### Standard-Startseite anpassen
 
 **Ceres** wird mit einer Standard-Startseite ausgeliefert. Passen Sie diese Startseite an, um eigene Inhalte auf der Startseite anzuzeigen. Produkt- und Kategorievorschauen sowie Artikellisten werden erst nach Einrichtung angezeigt.
@@ -20,10 +34,11 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
-3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.<br /> → Das Tab **Homepage** ist bereits vorausgewählt.
-4. Deaktivieren Sie die Einstellung **Show default homepage**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 1.
-6. **Speichern** Sie die Einstellungen.<br /> → Die Standard-Startseite wird deaktiviert und Ihre Inhalte werden angezeigt.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Homepage**.
+5. Deaktivieren Sie die Einstellung **Show default homepage**.
+6. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 1.
+7. **Speichern** Sie die Einstellungen.<br /> → Die Standard-Startseite wird deaktiviert und Ihre Inhalte werden angezeigt.
 
 <table>
 <thead>
@@ -192,6 +207,10 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <tr>
 <td><b>Show variations by type</b></td>  
 <td>Varianten nach Typ in der Artikelliste einer Kategorie anzeigen.<br /> <strong>All</strong> = Wählen, um Hauptvarianten und Varianten von Artikeln anzuzeigen.<br /> <strong>Only main variations</strong> = Wählen, um nur Hauptvarianten anzuzeigen.<br /> <strong>Only child variations</strong> = Wählen, um nur Varianten anzuzeigen. Hauptvarianten werden ausgeblendet.</td>
+</tr>
+<tr>
+<td><b>Enable image carousel in category item list</b></td>  
+<td>Aktivieren, um das Bilderkarussell in der Kategorieansicht anzuzeigen.</td>
 </tr>
 <tr>
 <td><b>Show image carousel dots in category item list</b></td>  

@@ -6,7 +6,8 @@ Vue.component("add-to-basket", {
         "item",
         "itemUrl",
         "showQuantity",
-        "template"
+        "template",
+        "salable"
     ],
 
     data: function()

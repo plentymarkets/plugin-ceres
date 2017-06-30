@@ -3,7 +3,6 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
-{% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
@@ -70,7 +69,7 @@
 
                 {% if variations is not null %}
                 <div class="row m-b-1">
-                    <variation-select template="#vue-variation-select" :attributes="{{ services.item.getAttributeNameMap( item.documents[0].data.item.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
+                    <variation-select template="#vue-variation-select" :attributes="{{ attributeNameMap | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
                 </div>
                 {% endif %}
 
@@ -117,8 +116,10 @@
 
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
-                    <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
+                    {% if salable %}
+                        <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
                                    resource="currentVariation" :show-quantity="true"></add-to-basket>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
@@ -139,8 +140,8 @@
                 <hr>
 
                 <span class="vat small text-muted">
-                    {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
-                    <a href="#" title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                    * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
 
             </div>

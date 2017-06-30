@@ -1,5 +1,11 @@
 [
     {
+        "tab"       : "Global",
+        "key"       : "global.shippingCostsCategoryId",
+        "label"     : "ID of the category to display the shipping costs",
+        "type"      : "category_select"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
@@ -309,6 +315,13 @@
             "child"                     : "Only child variations"
         },
         "default"                       : "all"
+    },
+    {
+        "tab"       : "Item view",
+        "key"       : "item.enable_image_carousel",
+        "label"     : "Enable image carousel for category item list",
+        "type"      : "checkbox",
+        "default"   : "true"
     },
     {
         "tab"       : "Item view",

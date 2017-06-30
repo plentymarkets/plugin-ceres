@@ -1,5 +1,18 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+
+{% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
+{% if not (ordersPerPage matches '/^\\d+$/') %}
+    {# config value is not a valid number #}
+    {% set ordersPerPage = 5 %}
+{% endif %}
+
+{% set orderList = services.customer.getOrders(1, ordersPerPage).getResult() %}
+
+{% set paymentMethodId = 0 %}
+
+{{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
 <script type="x/template" id="vue-order-history">
 
@@ -11,7 +24,7 @@
         <div class="form-group">
 
             <div class="row m-b-1">
-                <div class="col-xs-12 col-md-9 col-lg-8">
+                <div class="col-xs-12 col-md-12 col-lg-12">
                     <!-- ORDER PAGINATION -->
                     <div class="clearfix" v-if="orderList.totalsCount > itemsPerPage">
                         <div class="pull-xs-left">
@@ -76,48 +89,108 @@
                     <hr>
 
                     <!-- ORDER HISTORY -->
-                    <div class="order-list">
-                        <article class="cmp cmp-order-item" v-for="entry in orderList.entries">
+                    {#<div class="order-list">#}
+                        {#<article class="cmp cmp-order-item" v-for="entry in orderList.entries">#}
 
-                            <div class="item-details small">
+                            {#<div class="item-details small">#}
 
-                                <div class="item-name">
-                                    <h5>{{ trans("Ceres::Template.orderId") }} ${ entry.order.id }</h5>
-                                </div>
+                                {#<div class="item-name">#}
+                                    {#<h5>{{ trans("Ceres::Template.orderId") }} ${ entry.order.id }</h5>#}
+                                {#</div>#}
 
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-6">
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
-                                        </div>
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.order.statusName }</span>
-                                        </div>
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">${ entry.paymentMethodName }</span>
-                                        </div>
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">
-                                                ${ getPaymentStateText(entry.order.properties) }
-                                            </span>
-                                        </div>
+                                {#<div class="row">#}
+                                    {#<div class="col-xs-12 col-md-8">#}
+                                        {#<div class="row">#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>#}
+                                            {#<span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>#}
+                                        {#</div>#}
+                                        {#<div class="row my-account-no-line">#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>#}
+                                            {#<span class="col-xs-6 col-sm-7">${ entry.order.statusName }</span>#}
+                                        {#</div>#}
+                                        {#<div class="row">#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>#}
+                                            {#<span class="col-xs-6 col-sm-7">${ entry.paymentMethodName }</span>#}
+                                        {#</div>#}
+                                        {#<div class="row">#}
+                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>#}
+                                            {#<span class="col-xs-6 col-sm-7">#}
+                                                {#${ getPaymentStateText(entry.order.properties) }#}
+                                            {#</span>#}
+                                        {#</div>#}
 
-                                        {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}
-                                    </div>
+                                        {#{{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}#}
+                                    {#</div>#}
 
-                                    <div class="col-xs-12 col-md-6">
-                                        <button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("Ceres::Template.orderDetails") }}</button>
-                                    </div>
-                                </div>
-                            </div>
+                                    {#<div class="col-xs-12 col-md-4">#}
+                                        {#<button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("Ceres::Template.orderDetails") }}</button>#}
+                                        {#<change-payment-method template="#vue-change-payment-method" :current-order.sync="entry" allowed-payment-methods="{{ allowedPaymentMethods | json_encode() }}"></change-payment-method>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
 
-                        </article>
-                    </div>
+                        {#</article>#}
+                    {#</div>#}
                     <!-- ./ORDER HISTORY -->
+
+                    <!-- ORDER HISTORY TWIG -->
+                    <div class="order-list">
+                        {% for entry in orderList %}
+                            <article class="cmp cmp-order-item">
+
+                                <div class="item-details small">
+
+                                    <div class="item-name">
+                                        <h5>{{ trans("Ceres::Template.orderId") }} {{ entry.order.id }}</h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-8">
+                                            <div class="row">
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
+                                                <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.dateTimeFormat") ) }}</span>
+                                            </div>
+                                            <div class="row my-account-no-line">
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
+                                                <span class="col-xs-6 col-sm-7">{{ entry.order.statusName }}</span>
+                                            </div>
+                                            <div class="row">
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
+                                                <span class="col-xs-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
+                                            </div>
+                                            <div class="row">
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
+                                                <span class="col-xs-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
+                                                    {% for propertyKey in entry.order.properties %}
+                                                        {% if entry.order.properties[loop.index0].typeId == 4 %}
+                                                            {{ trans("Ceres::Template.paymentStatus_" ~ entry.order.properties[loop.index0].value) }}
+                                                        {% endif %}
+
+                                                        {% if entry.order.properties[loop.index0].typeId == 3 %}
+                                                            {% set paymentMethodId = entry.order.properties[loop.index0].value %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </span>
+                                            </div>
+
+                                            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
+                                        </div>
+
+                                        <div class="col-xs-12 col-md-4">
+                                            <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
+                                            <change-payment-method  template="#vue-change-payment-method"
+                                                                    :current-order="{{ entry | json_encode() }}"
+                                                                    :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
+                                                                    :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}">
+                                            </change-payment-method>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </article>
+                        {% endfor %}
+                    </div>
+                    <!-- ./ORDER HISTORY TWIG -->
                 </div>
 
                 <!-- ORDER DETAILS MODAL -->
