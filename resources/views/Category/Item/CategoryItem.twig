@@ -81,11 +81,11 @@
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
                         <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
-                        {{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "") }}
+                        {{ includeCached('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
-                </div>
 
-                {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}
+                    {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}
+                </div>
 
             {% endif %}
 

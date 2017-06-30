@@ -1,6 +1,17 @@
 # Release Notes für Ceres
 
-## v1.2.8 (unknown)
+## v1.2.9 (2017-06-30)
+
+### Geändert
+
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung wurde geändert. Eine Zahlungsart kann nun auch eine Kurzbeschreibung anzeigen.
+
+### Bekannte Probleme
+
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
+## v1.2.8 (2017-06-29)
 
 ### Hinzugefügt
 
@@ -12,27 +23,20 @@
 
 ### Geändert
 
-- Allgemeine Performance-Verbesserungen.
 - Das Bilderkarussell ist in der Einzelansicht eines Artikel nun auch für die Vorschaubilder verfügbar.
 - Alle Bilder, die in der Einzelansicht eines Artikels angezeigt werden, werden nun auf eine feste Größe skaliert.
 - Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
 - Das Bilderkarussell wurde in der Liste **Zuletzt angesehene Artikel** entfernt.
 - Das Bilderkarussell in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
 - Varianten ohne Bestand können nicht mehr in den Warenkorb gelegt werden.
-- Varianten ohne Bestand werden beim Aufruf auf die nächst kaufbare Variante umgeleitet.
+- Varianten ohne Bestand werden beim Aufruf auf die nächste kaufbare Variante umgeleitet.
 
 ### Behoben
 
+- In der mobilen Ansicht schließt die Navigation jetzt wenn man die Kategorie wechselt.
 - Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
 - Als Gast kann man im Checkout nur noch eine Rechnungsadresse sowie Lieferadresse speichern.
-- In der Einzelansicht werden keine inaktiven Varianten und ohne Bestand im Dropdown angezeigt.
-
-### Bekannte Probleme
-
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+- In der Einzelansicht werden keine inaktiven Varianten oder Varianten ohne Bestand im Dropdown angezeigt.
 
 ## v1.2.7 (2017-06-22)
 
