@@ -106,11 +106,11 @@
                 {% endfor %}
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
 
-                {% for availability in services.availability.getAvailabilities() %}
-                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
-                    <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">{{ item.documents[0].data.variation.availability.names.name }}</span>
+                <span class="availability tag availability_{{ item.documents[0].data.variation.availability.id }}" v-availability-class:currentVariation>
+                    <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">
+                        {{ item.documents[0].data.variation.availability.names.name }}
+                    </span>
                 </span>
-                {% endfor %}
 
                 <div class="row m-y-1">
 
