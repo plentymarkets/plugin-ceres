@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.2.9 (2017-06-30)
+
+### Geändert
+
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung wurde geändert.
+
 ## v1.2.8 (2017-06-29)
 
 ### Hinzugefügt

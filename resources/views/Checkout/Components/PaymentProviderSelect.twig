@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-payment-provider-select">
-    <div class="cmp cmp-method-list m-b-3" v-bind:class="{ 'error': this.checkoutValidation.paymentProvider.showError }">
+    <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.checkoutValidation.paymentProvider.showError }">
         <ul class="method-list">
             <li v-for="paymentProvider in checkout.paymentDataList" class="method-list-item" data-id="${paymentProvider.id}">
                 <input
@@ -20,14 +20,12 @@
                     </div><!--
                     --><div class="content">
                     ${ paymentProvider.name }
+                        <small class="pull-xs-right">
+                            <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
+                        </small>
                         <div>
                             <small>
-                                ${ paymentProvider.fee | currency }
-                            </small>
-                        </div>
-                        <div>
-                            <small>
-                                ${ paymentProvider.description }
+                                ${ paymentProvider.description | truncate '150' }
                             </small>
                         </div>
                     </div>
