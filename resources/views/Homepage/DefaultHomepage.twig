@@ -4,17 +4,17 @@
 {% if overrideHomepageContainer | trim is empty %}
 
     {% set lang = services.sessionStorage.getLang() %}
-    {% set configItemName = options.name %}
+    {% set configItemName = config("Ceres.item.name") %}
 
     {% set slider1 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [options.sliderItemId1]}).documents[0].data,
-    url: options.sliderImageUrl1 } %}
+    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
+    url: config("Ceres.homepage.sliderImageUrl1") } %}
     {% set slider2 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [options.sliderItemId2]}).documents[0].data,
-    url: options.sliderImageUrl2 } %}
+    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId2")]}).documents[0].data,
+    url: config("Ceres.homepage.sliderImageUrl2") } %}
     {% set slider3 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [options.sliderItemId3]}).documents[0].data,
-    url: options.sliderImageUrl3 } %}
+    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId3")]}).documents[0].data,
+    url: config("Ceres.homepage.sliderImageUrl3") } %}
 
     {% if slider1.url | trim is empty and slider1.item.texts is not empty %}
         {% set slider1Image = slider1.item.images | itemImages | orderByKey('position') | first %}
@@ -30,11 +30,11 @@
     {% endif %}
 
     {% set heroExtra1 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [options.heroExtraItemId1]}).documents[0].data,
-    url: options.heroExtraImageUrl1 } %}
+    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId1")]}).documents[0].data,
+    url: config("Ceres.homepage.heroExtraImageUrl1") } %}
     {% set heroExtra2 = {
-    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [options.heroExtraItemId2]}).documents[0].data,
-    url: options.heroExtraImageUrl2 } %}
+    item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.heroExtraItemId2")]}).documents[0].data,
+    url: config("Ceres.homepage.heroExtraImageUrl2") } %}
 
     {% if heroExtra1.url | trim is empty and heroExtra1.item.texts is not empty %}
         {% set heroExtra1Image = heroExtra1.item.images | itemImages | orderByKey('position') | first %}
@@ -45,24 +45,24 @@
         {% set heroExtra2 = heroExtra2 | merge({url: heroExtra2Image.url}) %}
     {% endif %}
 
-    {% set category1 = services.category.get(options.homepageCategory1, lang) %}
-    {% set category2 = services.category.get(options.homepageCategory2, lang) %}
-    {% set category3 = services.category.get(options.homepageCategory3, lang) %}
-    {% set category4 = services.category.get(options.homepageCategory4, lang) %}
-    {% set category5 = services.category.get(options.homepageCategory5, lang) %}
-    {% set category6 = services.category.get(options.homepageCategory6, lang) %}
+    {% set category1 = services.category.get(config("Ceres.homepage.homepageCategory1"), lang) %}
+    {% set category2 = services.category.get(config("Ceres.homepage.homepageCategory2"), lang) %}
+    {% set category3 = services.category.get(config("Ceres.homepage.homepageCategory3"), lang) %}
+    {% set category4 = services.category.get(config("Ceres.homepage.homepageCategory4"), lang) %}
+    {% set category5 = services.category.get(config("Ceres.homepage.homepageCategory5"), lang) %}
+    {% set category6 = services.category.get(config("Ceres.homepage.homepageCategory6"), lang) %}
 
     {% set paginatedCategoryList1 =
     services.itemLoader.loadForTemplate(
     'Ceres::ItemList.ItemListView',
     itemLoaderPresets.categoryList,
-    {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': options.variation_show_type}) %}
+    {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 
     {% set paginatedCategoryList2 =
     services.itemLoader.loadForTemplate(
     'Ceres::ItemList.ItemListView',
     itemLoaderPresets.categoryList,
-    {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': options.variation_show_type}) %}
+    {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
 
     {% set categoryList1 = paginatedCategoryList1.documents %}
     {% set categoryList2 = paginatedCategoryList2.documents %}
