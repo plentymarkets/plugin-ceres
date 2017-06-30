@@ -481,7 +481,7 @@
         "type"                      : "multi_select",
         "possibleValues"            :
         {
-            "default.recommended_sorting"                  : "Recommended",
+            "default.recommended_sorting"               : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
             "item.salesPrices.price_asc"                : "Price ⬆",
@@ -533,8 +533,8 @@
         {
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
@@ -556,7 +556,7 @@
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
             "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
         },
-        "default"       : "texts.name1_asc"
+        "default"       : "texts.name_asc"
     },
     {
         "tab"           : "Pagination and sorting",
@@ -568,8 +568,8 @@
             "notSelected"                               : "Not selected",
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
@@ -603,8 +603,8 @@
             "notSelected"                               : "Not selected",
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
@@ -664,8 +664,8 @@
             "item.score"                                : "Relevance",
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
@@ -700,8 +700,8 @@
             "item.score"                                : "Relevance",
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
@@ -732,12 +732,12 @@
         "type"          : "dropdown",
         "possibleValues":
         {
-            "notSelected"                          : "Not selected",
+            "notSelected"                               : "Not selected",
             "item.score"                                : "Relevance",
             "item.id_asc"                               : "Item ID ⬆",
             "item.id_desc"                              : "Item ID ⬇",
-            "texts.name1_asc"                           : "Item name A-Z",
-            "texts.name1_desc"                          : "Item name Z-A",
+            "texts.name_asc"                            : "Item name A-Z",
+            "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
             "item.salesPrice.price_asc"                 : "Price ⬆",
