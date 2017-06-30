@@ -1,5 +1,16 @@
 # Release Notes for Ceres
 
+## v1.2.9 (2017-06-30)
+
+### Changed
+
+- The design of the list of payment methods in the checkout has been changed. A payment method can now also display a short description.
+
+### Known issues
+
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.8 (2017-06-29)
 
 ### Added
@@ -26,11 +37,6 @@
 - Due to an error, a deleted address was not removed from the address list. This has been fixed.
 - Only one invoice address and delivery address can be saved in the checkout when ordering as a guest.
 - In the single item view, inactive variations or variations that are out of stock will not be displayed.
-
-### Known issues
-
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.7 (2017-06-22)
 
