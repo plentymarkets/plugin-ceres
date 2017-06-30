@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v1.2.8 (unknown)
+## v1.2.8 (2017-06-29)
 
 ### Added
 
@@ -12,23 +12,24 @@
 
 ### Changed
 
-- General performance optimisations.
 - The image carousel is now also available for preview images in the single item view.
 - All images displayed in the single item view are now scaled to a fixed size.
 - Items as well as categories for which no translations are available are no longer displayed on the homepage after the respective language is selected.
 - The image carousel in the **Last seen items** list has been removed.
 - The image carousel in the category view will only be initialised for items with more than one linked image.
+- Variations that are out of stock cannot be added to the shopping cart anymore.
+- When selecting a variation that is out of stock the customer will be forwarded to the next variation with stock.
 
 ### Fixed
 
+- In the mobile view, the navigation will now close after switching the category.
 - Due to an error, a deleted address was not removed from the address list. This has been fixed.
 - Only one invoice address and delivery address can be saved in the checkout when ordering as a guest.
+- In the single item view, inactive variations or variations that are out of stock will not be displayed.
 
 ### Known issues
 
-- Variations that are not active will be displayed in the variation drop-down in the single item view, but cannot be selected.
 - The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- In the mobile view, the navigation will remain open after switching the category.
 - Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.7 (2017-06-22)
