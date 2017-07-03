@@ -16206,16 +16206,26 @@ var init = (function($, window, document)
             });
         }
 
-        menu.find("li>a").click(function(evt)
+        menu.find("li>a, li>button").click(function(evt)
         {
-            var paa = $(this).width() - evt.offsetX;
+             // var paa = $(this).width() - evt.offsetX;
 
-            if (paa < 0)
-            {
-                evt.preventDefault();
+            // if (paa < 0)
+            // {
+            evt.preventDefault();
+
+            if (!$(this).closest(".ddown").hasClass("open"))
+                {
+                menu.find("li.open").toggleClass("open");
                 $(this).closest(".ddown").addClass("open");
-                buildBreadcrumb();
             }
+            else
+                {
+                $(this).closest(".ddown").removeClass("open");
+            }
+            buildBreadcrumb();
+            // }
+
             $("#mainNavbarCollapsable").scrollTop = 0;
             $("#mainNavbarCollapsable").animate({scrollTop: 0}, "fast");
         });

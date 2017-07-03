@@ -10,6 +10,7 @@
 
                 <li class="ddown">
                     <a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ category.details[0].name }}</a>
+                    <button class="hidden-lg-up nav-dots"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     <ul data-level="1">
 
                         {% for child in category.children %}
