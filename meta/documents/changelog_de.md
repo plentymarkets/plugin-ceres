@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+## Behoben
+
+- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
