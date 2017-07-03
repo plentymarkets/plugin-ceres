@@ -2,9 +2,14 @@
 
 ## v1.3.0 (unknown)
 
-## Behoben
+### Behoben
 
+- Die Autocompletion setzt nun die Nr in das richtige Input.
 - Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+
+### Geändert
+
+- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
 
 ## v1.2.9 (2017-06-30)
 
