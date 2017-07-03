@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Geändert
+
+- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
