@@ -644,7 +644,7 @@
     {
         "tab"                       : "Pagination and sorting",
         "key"                       : "sort.defaultSortingSearch",
-        "label"                     : "Search' default item sorting by",
+        "label"                     : "Search default item sorting by",
         "type"                      : "dropdown",
         "possibleValues"            :
         {
