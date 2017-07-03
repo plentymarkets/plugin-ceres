@@ -10,15 +10,13 @@
 {% if itemList is not empty %}
     <hr>
 
-    <div class="section-header m-b-1">
-        <h4>
-            {% if config("Ceres.item.lists.2.list_type") == "last_seen" %}
-                {{ trans("Ceres::Template.itemListLastSeen") }}
-            {% else %}
-                {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
-            {% endif %}
-        </h4>
-    </div>
+    <h1 class="h3">
+        {% if config("Ceres.item.lists.1.list_type") == "last_seen" %}
+            {{ trans("Ceres::Template.itemListLastSeen") }}
+        {% else %}
+            {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
+        {% endif %}
+    </h1>
 
     <div class="row">
         <div class="col-xs-12 col-lg-12">
