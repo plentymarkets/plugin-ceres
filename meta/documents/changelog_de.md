@@ -2,6 +2,10 @@
 
 ## v1.3.0 (unknown)
 
+### Behoben
+
+- Die Autocompletion setzt nun die Nr in das richtige Input.
+
 ### Geändert
 
 - Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
