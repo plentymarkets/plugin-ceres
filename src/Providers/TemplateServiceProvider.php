@@ -4,6 +4,7 @@ namespace Ceres\Providers;
 
 use Ceres\Caching\HomepageCacheSettings;
 use Ceres\Caching\NavigationCacheSettings;
+use Ceres\Caching\SideNavigationCacheSettings;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
@@ -71,6 +72,7 @@ class TemplateServiceProvider extends ServiceProvider
 
             pluginApp(Container::class)->register('Ceres::Homepage.DefaultHomepage.twig', HomepageCacheSettings::class);
             pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.NavigationList.twig', NavigationCacheSettings::class);
+            pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.SideNavigation.twig', SideNavigationCacheSettings::class);
 
             $partial->set('head', 'Ceres::PageDesign.Partials.Head');
             $partial->set('header', 'Ceres::PageDesign.Partials.Header.Header');

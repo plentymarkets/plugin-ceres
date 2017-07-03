@@ -19,7 +19,7 @@
         <div class="thumb-background"></div>
 
         <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false"
-                       item-url="{{ itemUrl }}"></add-to-basket>
+                       item-url="{{ itemUrl }}" :salable="{{ services.item.getVariationIsSalable(item.data.variation.id) | json_encode() }}"></add-to-basket>
 
         <div class="thumb-image">
             <div class="square-container">
@@ -101,7 +101,7 @@
                             {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }} *
                         </div>
                     </a>
-                    <span class="vat small text-muted">
+                    <span class="vat-porto-info small text-muted">
                         * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
                         <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
