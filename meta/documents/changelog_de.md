@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Behoben
+
+- Die Autocompletion setzt nun die Nr in das richtige Input.
+
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
