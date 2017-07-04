@@ -2371,6 +2371,7 @@ Vue.component("item-list-sorting", {
         return {
             selectedSorting: {},
             dataTranslationMapping: {
+                "default.recommended_sorting": "itemRecommendedSorting",
                 "texts.name1_asc": "itemName_asc",
                 "texts.name1_desc": "itemName_desc",
                 "item.salesPrices.price_asc": "itemPrice_asc",
@@ -2388,15 +2389,20 @@ Vue.component("item-list-sorting", {
             }
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
 
+        if (App.isSearch) {
+            this.sortData.unshift("item.score");
+            this.dataTranslationMapping["item.score"] = "itemRelevance";
+        }
+
         this.buildData();
-        this.selectedSorting = this.sortData[0];
+        this.setDefaultSorting();
 
         this.setSelectedValueByUrl();
     },
+
 
     methods: {
         buildData: function buildData() {
@@ -2410,12 +2416,17 @@ Vue.component("item-list-sorting", {
                 this.sortData[i] = sortItem;
             }
         },
+        setDefaultSorting: function setDefaultSorting() {
+            var defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
+            this.selectedSorting = this.sortData.find(function (entry) {
+                return entry.value === defaultSortKey;
+            });
+        },
         updateSorting: function updateSorting() {
             ItemListService.setOrderBy(this.selectedSorting.value);
             ItemListService.getItemList();
         },
-
         setSelectedValueByUrl: function setSelectedValueByUrl() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
@@ -4600,7 +4611,7 @@ module.exports = function ($) {
     var searchParams = {
         query: "",
         items: App.config.defaultItemsPerPage,
-        sorting: App.config.defaultSorting,
+        sorting: App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting,
         page: 1,
         facets: "",
         categoryId: null,
@@ -4693,7 +4704,12 @@ module.exports = function ($) {
     function setOrderBy(sorting) {
         searchParams.sorting = sorting;
 
-        sorting = sorting !== App.config.defaultSorting ? sorting : null;
+        if (App.isSearch) {
+            sorting = sorting !== App.config.defaultSortingSearch ? sorting : null;
+        } else {
+            sorting = sorting !== App.config.defaultSorting ? sorting : null;
+        }
+
         _UrlService2.default.setUrlParam("sorting", sorting);
     }
 
