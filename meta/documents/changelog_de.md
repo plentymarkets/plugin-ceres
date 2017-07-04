@@ -4,6 +4,7 @@
 
 ### Hinzugefügt
 - Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung und beim Ändern der Zahlungsart im **Mein Konto**-Bereich wurde geändert. Eine Zahlungsart kann nun auch einen externen Link anzeigen.
 
 ### Behoben
 
