@@ -110,7 +110,7 @@ body.menu-is-visible { overflow-y : hidden; }
 				width 	: 70%;
 			}
 
-			.nav-dots{
+			.nav-direction{
 				width: 28%;
 				text-align: right;
 				color: $white;
@@ -131,7 +131,7 @@ body.menu-is-visible { overflow-y : hidden; }
 			}
 			&.open>ul { display : block !important; }
 			&.ddown.open{
-				.nav-dots{
+				.nav-direction{
 					i{
 						transform: rotate(180deg);
 					}
@@ -154,7 +154,7 @@ body.menu-is-visible { overflow-y : hidden; }
 
 		ul.mainmenu {
 			li 	{
-				.nav-dots{
+				.nav-direction{
 					padding-right: calc(4px + .5em);
 				}
 			}
