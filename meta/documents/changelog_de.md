@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Geändert
+
+- In der Artikelansicht werden nun Preise, sowie Einheiten Informationen nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
