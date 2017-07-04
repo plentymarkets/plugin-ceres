@@ -4,8 +4,9 @@
 
 ### Behoben
 
-- Die Autocompletion setzt nun die Nr in das richtige Input.
+- Die Autocompletion setzt nun die Nr in das richtige Input. (Setzt Browser Autofill Format vor)
 - Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+- Ein Fehler im Thumb-Carousel wurde behoben, der dazu führte, dass der Border abgeschnitten wurde.
 
 ### Geändert
 
