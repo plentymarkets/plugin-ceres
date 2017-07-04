@@ -2,6 +2,9 @@
 
 ## v1.3.0 (unknown)
 
+### Hinzugefügt
+- Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+
 ### Behoben
 
 - Die Autocompletion setzt nun die Nr in das richtige Input. (Setzt Browser Autofill Format vor)
