@@ -1,6 +1,6 @@
 var ResourceService = require("services/ResourceService");
 
-Vue.directive("availabilityClass",
+Vue.directive("availability-class",
     {
         bind()
         {
