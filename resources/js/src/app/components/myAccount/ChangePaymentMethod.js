@@ -39,7 +39,7 @@ Vue.component("change-payment-method", {
             ApiService.get("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
-                    this.changePossible = response.data;
+                    this.changePossible = response;
                 })
                 .fail(() =>
                 {
