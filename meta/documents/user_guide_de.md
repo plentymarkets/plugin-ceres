@@ -14,17 +14,34 @@ Sie können Einstellungen am Design vornehmen, die keine Programmierkenntnisse v
 
 ### Globale Einstellungen vornehmen
 
-Globale Einstellungen, die sich auf das gesamte Template auswirken, nehmen Sie im Tab **Global** vor. Hier verknüpfen Sie beispielsweise eine Kategorie, um im Webshop Informationen zu ihren Versandkosten anzuzeigen.
+Globale Einstellungen, die sich auf das gesamte Template auswirken, nehmen Sie im Tab **Global** vor. Hier verknüpfen Sie beispielsweise eine Kategorie, um im Webshop Informationen zu ihren Versandkosten anzuzeigen. Erstellen Sie dafür zunächst eine Kategorie vom Typ **Content**.
+
+##### Kategorie erstellen:
+
+1. Öffnen Sie das Menü **Artikel » Kategorien**.
+2. Klicken Sie links unten auf **Neue Kategorie**.<br /> → Das Fenster **Neue Kategorie erstellen** wird geöffnet.
+3. Geben Sie einen **Namen** für die Kategorie ein.
+4. Wählen Sie die Kategorieart.
+5. Klicken Sie auf **Erstellen**.<br /> → Die neue Kategorie wird erstellt und im Kategoriebaum angezeigt.
+6. Öffnen Sie die neue Kategorie links im Kategoriebaum.
+7. Wählen Sie unter **Typ** die Option **Content** aus dem Dropdown-Menü.
+8. Aktivieren Sie den **Mandanten**.
+9. Wechseln Sie in das Tab **Template**.
+10. Geben Sie den Inhalt ein, der im Webshop angezeigt werden soll.
+11. **Speichern** Sie die Einstellungen.
+
+Nach dem Speichern der Kategorie wird das Plugin **CategoryTemplates** im Menü **Plugin » Plugin-Übersicht** verfügbar. Das Plugin muss mit einem Mandanten verknüpft und in Stage oder Productive bereitgestellt werden. Anschließend verknüpfen Sie Kategorie in den Einstellungen von **Ceres**.
 
 ##### Globale Einstellungen vornehmen:
 
 1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.<br /> → Das Tab **Global** ist bereits vorausgewählt.
-4. Klicken Sie auf **Suchen**.
+4. Klicken Sie unter **Category to display shipping information** auf **Suchen**.<br /> → Das Fenster **Kategorien** wird geöffnet.
 5. Wählen Sie eine Kategorie, um diese für die Anzeige der Informationen zu Versandkosten zu verknüpfen.
 6. Klicken Sie auf **Auswählen**.
 7. **Speichern** Sie die Einstellungen.<br /> → Kategorie wird verknüpft.
+
 
 ### Standard-Startseite anpassen
 
@@ -69,12 +86,12 @@ Globale Einstellungen, die sich auf das gesamte Template auswirken, nehmen Sie i
 <td>URL des Artikelbildes eingeben. Das Bild kann z.B. im Menü <strong>CMS » Webspace</strong> im Ordner <strong>images</strong> hochgeladen werden. Alternativ eine http-URL eingeben, die zum Bild führt.</td>
 </tr>
 <tr>
-<td><b>ID of the category to display in the first category preview;<br />ID of the category to display in the second category preview;<br />ID of the category to display in the third category preview;<br />ID of the category to display in the fourth category preview</b></td>  
-<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, die in der jeweiligen Kategorievorschau angezeigt wird. Das Vorschaubild wird im Tab <strong>Dokumente</strong> der Kategorie hochgeladen und als Bild 1 markiert.</td>
+<td><b>Category to display in the first category preview;<br />Category to display in the second category preview;<br />Category to display in the third category preview;<br />Category to display in the fourth category preview</b></td>  
+<td>Kategorie vom Typ <b>Artikel</b> verknüpfen, die in der jeweiligen Kategorievorschau angezeigt wird. Das Vorschaubild wird im Tab <strong>Dokumente</strong> der Kategorie hochgeladen und als Bild 1 markiert.</td>
 </tr>
 <tr>
-<td><b>ID of the category to display in the first list of items;<br />ID of the category to display in the second list of items</b></td>  
-<td>ID der Kategorie vom Typ <b>Artikel</b> eingeben, um eine Artikelliste auf der Startseite anzuzeigen.</td>
+<td><b>Category to display in the first list of items;<br />Category to display in the second list of items</b></td>  
+<td>Kategorie vom Typ <b>Artikel</b> verknüpfen, um eine Artikelliste auf der Startseite anzuzeigen.</td>
 </tr>
 </tbody>
 <caption>Tab. 1: Standard-Startseite anpassen</caption>

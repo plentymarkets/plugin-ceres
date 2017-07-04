@@ -2,7 +2,7 @@
     {
         "tab"       : "Global",
         "key"       : "global.shippingCostsCategoryId",
-        "label"     : "ID of the category to display the shipping costs",
+        "label"     : "Category to display shipping information",
         "type"      : "category_select"
     },
     {
@@ -79,37 +79,37 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory1",
-        "label"     : "ID of the category to display in the first category preview",
+        "label"     : "Category to display in the first category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory2",
-        "label"     : "ID of the category to display in the second category preview",
+        "label"     : "Category to display in the second category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory3",
-        "label"     : "ID of the category to display in the first list of items",
+        "label"     : "Category to display in the first list of items",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory4",
-        "label"     : "ID of the category to display in the third category preview",
+        "label"     : "Category to display in the third category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory5",
-        "label"     : "ID of the category to display in the fourth category preview",
+        "label"     : "Category to display in the fourth category preview",
         "type"      : "category_select"
     },
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory6",
-        "label"     : "ID of the category to display in the second list of items",
+        "label"     : "Category to display in the second list of items",
         "type"      : "category_select"
     },
 

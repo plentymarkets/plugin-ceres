@@ -1,5 +1,27 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Behoben
+
+- Die Autocompletion setzt nun die Nr in das richtige Input.
+- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+
+### Geändert
+
+- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+
+## v1.2.9 (2017-06-30)
+
+### Geändert
+
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung wurde geändert. Eine Zahlungsart kann nun auch eine Kurzbeschreibung anzeigen.
+
+### Bekannte Probleme
+
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
 ## v1.2.8 (2017-06-29)
 
 ### Hinzugefügt
@@ -26,11 +48,6 @@
 - Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
 - Als Gast kann man im Checkout nur noch eine Rechnungsadresse sowie Lieferadresse speichern.
 - In der Einzelansicht werden keine inaktiven Varianten oder Varianten ohne Bestand im Dropdown angezeigt.
-
-### Bekannte Probleme
-
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.7 (2017-06-22)
 
