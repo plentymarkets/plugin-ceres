@@ -28,7 +28,7 @@ Vue.component("item-store-special", {
     methods: {
         getPercentageSale: function()
         {
-            var percent = 100 - (this.recommendedRetailPrice / this.variationRetailPrice * 100);
+            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");
         }

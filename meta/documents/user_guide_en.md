@@ -14,17 +14,34 @@ You can make changes to your design by carrying out the design settings. No prog
 
 ### Carrying out global settings
 
-Carry out global settings that affect the entire template in the **Global** tab. For example, link a category to display information concerning your shipping costs in the online store.
+Carry out global settings that affect the entire template in the **Global** tab. For example, link a category to display information concerning your shipping costs in the online store. Create a category of the **Content** tab first.
+
+##### Creating a category:
+
+1. Go to **Item » Categories**. 
+2. Click on **New category**.<br /> → The **Create new category** window will open. 
+3. Enter a name for the category. 
+4. Select the category type. 
+5. Click on **Create**.<br /> → The new category will be created and displayed in the category tree. 
+6. Open the new category in the directory tree on the left. 
+7. Select **Content** from the **Type** drop-down menu. 
+8. Activate the **Client (store)**. 
+9. Click on the **Template** tab. 
+10. Enter the content that you wish to have displayed in the online store. 
+11. **Save** the settings.
+
+After saving the category settings, the **CategoryTemplates** plugin will be available in the **Plugin » Plugin overview** menu. This plugin needs to be linked to a client and deployed in Stage or Productive. Then, link the category in the configuration of the **Ceres** plugin.
 
 ##### Carrying out global settings:
 
 1. Go to **Plugins » Plugin overview**.<br /> → The plugin overview will open. 
 2. Click on **Ceres**.<br /> → The plugin will open. 
 3. Click on **Configuration** in the directory tree.<br /> → The **Global** is pre-selected. 
-4. Click on **Search**. 
+4. Click on **Search** under **Category to display shipping information**.<br /> → The **Categories** window will open. 
 5. Select a category to link this category for displaying information concerning shipping costs. 
 6. Click on **Select**. 
 7. **Save** the settings.<br /> → The category will be linked.
+
 
 ### Customising the default homepage
 
@@ -69,12 +86,12 @@ Carry out global settings that affect the entire template in the **Global** tab.
 <td>Enter the URL of the item image. The image can be uploaded in the <strong>CMS » Webspace</strong> menu in the <strong>images</strong> folder. Alternatively, enter a http URL that leads to the image.</td>
 </tr>
 <tr>
-<td><b>ID of the category to display in the first category preview;<br />ID of the category to display in the second category preview;<br />ID of the category to display in the third category preview;<br />ID of the category to display in the fourth category preview</b></td>  
-<td>Enter the ID of a category of the <b>Item</b> type to display this category in the category preview. The preview image can be uploaded in the <strong>Documents</strong> tab of the category and must be set as image 1.</td>
+<td><b>Category to display in the first category preview;<br />Category to display in the second category preview;<br />Category to display in the third category preview;<br />Category to display in the fourth category preview</b></td>  
+<td>Link a category of the <b>Item</b> type to display this category in the category preview. The preview image can be uploaded in the <strong>Documents</strong> tab of the category and must be set as image 1.</td>
 </tr>
 <tr>
-<td><b>ID of the category to display in the first list of items;<br />ID of the category to display in the second list of items</b></td>  
-<td>Enter the ID of a category of the <b>Item</b> type to display a list of items on the homepage.</td>
+<td><b>Category to display in the first list of items;<br />Category to display in the second list of items</b></td>  
+<td>Link a category of the <b>Item</b> type to display a list of items on the homepage.</td>
 </tr>
 </tbody>
 <caption>Table 1: Customising the default homepage</caption>
@@ -395,8 +412,20 @@ Customise the pagination of the item overview and the online store's item sortin
 </td>
 </tr>
 <tr>
-<td><b>Default item sorting by</b></td>  
-<td>Select the entry that is selected by default for item sorting.</td>
+<td><b>Default sorting value for category view</b></td>  
+<td>Select the entry that is selected by default for item sorting in the category view.</td>
+</tr>
+<tr>
+<td><b>Recommended item sorting: First sorting value;<br />Second sorting value;<br />Third sorting value</b></td>  
+<td>Select the value for the recommended item sorting in the category view. Up to three values can be concatenated.<br /> <strong>Not selected</strong> = Select no value.<br /> <strong>Item ID ⬆</strong> = Sort items by item ID in ascending order.<br /> <strong>Item ID ⬇</strong> = Sort items by item ID in descending order.<br /> <strong>Item name A-Z</strong> = Sort items in alphabetical order by item name (A-Z).<br /> <strong>Item name Z-A</strong> = Sort items in alphabetical order by item name (Z-A).<br /> <strong>Item position ⬆</strong> = Display items with the highest position number first.<br /> <strong>Item position ⬇</strong> = Display items with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Price ⬆</strong> = Display items with the lowest price first.<br /> <strong>Price ⬇</strong> = Display items with the highest price first.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID ⬆</strong> = Sort item variations by variation ID in ascending order.<br /> <strong>Variation ID ⬇</strong> = Sort item variations by variation ID in descending order.<br /> <strong>Variation number ⬆</strong> = Sort item variations by variation number in ascending order.<br /> <strong>Variation number ⬇</strong> = Sort item variations by variation number in descending order.<br /> <strong>Availability ⬆</strong> = Display item variations by availability in ascending order.<br /> <strong>Availability ⬇</strong> = Display item variations by availability in descending order.<br /> <strong>Last update</strong> = Display the last updated item variation first.<br /> <strong>First update</strong> = Display the first updated item variation first.<!--br /> <strong>Variation name A-Z</strong> = Artikelvarianten alphabetisch aufsteigend nach Name sortieren.<br /> <strong>Variation name Z-A</strong> = Artikelvarianten alphabetisch absteigend nach Name sortieren.<--><br /> <strong>Variation position ⬆</strong> = Display item variation with the highest position number first.<br /> <strong>Variation position ⬇</strong> = Display item variation with the lowest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<!--br /> <strong>Active variation ⬆</strong> = Aktive Artikelvarianten aufsteigend sortieren.<br /> <strong>Active variation ⬇</strong> = Aktive Artikelvarianten absteigend sortieren.<br /> <strong>Main variation ⬆</strong> = Hauptvarianten aufsteigend sortieren.<br /> <strong>Main variation ⬇</strong> = Hauptvarianten absteigend sortieren.<--><br /> <strong>Manufacturer A-Z</strong> = Sort items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer Z-A</strong> = Sort items in alphabetical order by manufacturer (Z-A).<br /> <strong>Manufacturer position ⬆</strong> = Sort items by manufacturer position in ascending order.<br /> <strong>Manufacturer position ⬇</strong> = Sort items by manufacturer position in descending order.</td>
+</tr>
+<tr>
+<td><b>Default sorting value for search results</b></td>  
+<td>Select the entry that is selected by default for sorting the search results of an item search.</td>
+</tr>
+<tr>
+<td><b>Recommended search results: First search value;<br />Second search value;<br />Third search value</b></td>  
+<td>Select values for the recommended item search. Up to three values can be concatenated for the item search.<br /> <strong>Not selected</strong> = Select no value.<br /> <strong>Relevance</strong> = Display items by relevance.<br /> <strong>Item ID ⬆</strong> = Display items by item ID in ascending order.<br /> <strong>Item ID ⬇</strong> = Display items by item ID in descending order.<br /> <strong>Item name A-Z</strong> = Display items in alphabetical order by item name (A-Z).<br /> <strong>Item name Z-A</strong> = Display items in alphabetical order by item name (Z-A).<br /> <strong>Item position ⬆</strong> = Display items with the lowest position number first.<br /> <strong>Item position ⬇</strong> = Display items with the highest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<br /> <strong>Newest variation</strong> = Display the newest item variations first.<br /> <strong>Oldest variation</strong> = Display the oldest item variations first.<br /> <strong>Variation ID ⬆</strong> = Display item variations by variation ID in ascending order.<br /> <strong>Variation ID ⬇</strong> = Display item variations by variation ID in descending order.<br /> <strong>Variation number ⬆</strong> = Display item variations by variation number in ascending order.<br /> <strong>Variation number ⬇</strong> = Display item variations by variation number in descending order.<br /> <strong>Availability ⬆</strong> = Display item variations by availability in ascending order.<br /> <strong>Availability ⬇</strong> = Display item variations by availability in descending order.<br /> <strong>Last update</strong> = Display the last updated item variation first.<br /> <strong>First update</strong> = Display the first updated item variation first.<!--br /> <strong>Variation name A-Z</strong> = Artikelvarianten alphabetisch aufsteigend nach Name anzeigen.<br /> <strong>Variation name Z-A</strong> = Artikelvarianten alphabetisch absteigend nach Name anzeigen.<--><br /> <strong>Variation position ⬆</strong> = Display item variation with the lowest position number first.<br /> <strong>Variation position ⬇</strong> = Display item variation with the highest position number first.<br /> <b><i>Important</i></b>: In order for this function to work, a position number has to be saved for each of the item variations within the variation tab.<!--br /> <strong>Active variation ⬆</strong> = Aktive Artikelvarianten aufsteigend anzeigen.<br /> <strong>Active variation ⬇</strong> = Aktive Artikelvarianten absteigend anzeigen.<br /> <strong>Main variation ⬆</strong> = Hauptvarianten aufsteigend anzeigen.<br /> <strong>Main variation ⬇</strong> = Hauptvarianten absteigend anzeigen.<--><br /> <strong>Manufacturer A-Z</strong> = Display items in alphabetical order by manufacturer (A-Z).<br /> <strong>Manufacturer Z-A</strong> = Display items in alphabetical order by manufacturer (Z-A).<br /> <strong>Manufacturer position ⬆</strong> = Display items by manufacturer position in ascending order.<br /> <strong>Manufacturer position ⬇</strong> = Display items by manufacturer position in descending order.</td>
 </tr>
 </tbody>
 <caption>Table 6: Customising the pagination and sorting</caption>

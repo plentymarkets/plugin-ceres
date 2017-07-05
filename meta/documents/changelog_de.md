@@ -1,5 +1,21 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Hinzugefügt
+- Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+
+### Behoben
+
+- Die Autocompletion setzt nun die Nr in das richtige Input. (Setzt Browser Autofill Format vor)
+- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+- Ein Fehler im Thumb-Carousel wurde behoben, der dazu führte, dass der Border abgeschnitten wurde.
+
+### Geändert
+
+- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+- In der Artikelansicht werden nun Preise, sowie Einheiten Informationen nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
