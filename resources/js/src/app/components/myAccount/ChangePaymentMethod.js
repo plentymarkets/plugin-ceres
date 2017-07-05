@@ -27,9 +27,12 @@ Vue.component("change-payment-method", {
     /**
      * Initialize the change payment modal
      */
-    ready()
+    mounted()
     {
-        this.changePaymentModal = ModalService.findModal(this.$refs.changePaymentModal);
+        this.$nextTick(() =>
+        {
+            this.changePaymentModal = ModalService.findModal(this.$refs.changePaymentModal);
+        });
     },
 
     methods:
