@@ -4,6 +4,7 @@
 
 ### Hinzugefügt
 - Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+- Caching für die Side- und Top-Navigation wurde hinzugefügt
 
 ### Behoben
 
