@@ -14,6 +14,7 @@
 ### Geändert
 
 - Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+- In der Artikelansicht werden nun Preise, sowie Einheiten Informationen nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
 
 ## v1.2.9 (2017-06-30)
 
