@@ -3764,19 +3764,19 @@ var ResourceService = require("services/ResourceService");
 Vue.directive("check-active", {
     params: ["category"],
 
-    bind: function bind() {
+    bind: function bind(el) {
         var categoryObject = JSON.parse(this.params.category);
 
         ResourceService.watch("breadcrumbs", function (values) {
             for (var index in values) {
                 if (values[index].id == categoryObject.id) {
-                    this.el.classList.add("active");
+                    el.classList.add("active");
                     break;
                 } else {
-                    this.el.classList.remove("active");
+                    el.classList.remove("active");
                 }
             }
-        }.bind(this));
+        });
     }
 });
 
@@ -3806,12 +3806,13 @@ Vue.directive("is-loading-breadcrumbs-watcher", {
 
 var _CategoryRendererService = require("services/CategoryRendererService");
 
-Vue.directive("render-category", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-
-        (0, _CategoryRendererService.renderItems)(value);
-    });
+Vue.directive("render-category", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            event.preventDefault();
+            (0, _CategoryRendererService.renderItems)(value);
+        });
+    }
 });
 
 },{"services/CategoryRendererService":73}],53:[function(require,module,exports){
@@ -3869,10 +3870,10 @@ Vue.directive("resource-bind", {
 
     params: ["filters"],
 
-    bind: function bind() {
+    bind: function bind(el, binding) {
         var self = this;
 
-        ResourceService.watch(this.arg, function (value) {
+        ResourceService.watch(binding.arg, function (value) {
             var paths = self.expression.split(".");
 
             for (var i = 0; i < paths.length; i++) {
@@ -3902,11 +3903,11 @@ var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
 
-    bind: function bind() {
+    bind: function bind(el, binding) {
         var self = this;
-        var display = window.getComputedStyle(this.el, null).getPropertyValue("display");
+        var display = window.getComputedStyle(el, null).getPropertyValue("display");
 
-        ResourceService.watch(this.arg, function (value) {
+        ResourceService.watch(binding.arg, function (value) {
 
             var keys = Object.keys(value);
             var values = keys.map(function (key) {
@@ -3952,14 +3953,16 @@ Vue.directive("resource-push", {
 },{"services/ResourceService":79}],57:[function(require,module,exports){
 "use strict";
 
-Vue.directive("change-lang", function (value) {
-    $(this.el).click(function (event) {
-        var subPath = window.location.pathname.split("/");
+Vue.directive("change-lang", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            var subPath = window.location.pathname.split("/");
 
-        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
+            subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
 
-        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
-    });
+            window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+        });
+    }
 });
 
 },{}],58:[function(require,module,exports){
@@ -3967,11 +3970,13 @@ Vue.directive("change-lang", function (value) {
 
 var CheckoutService = require("services/CheckoutService");
 
-Vue.directive("shipping-country", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-        CheckoutService.setShippingCountryId(value);
-    });
+Vue.directive("shipping-country", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            event.preventDefault();
+            CheckoutService.setShippingCountryId(value);
+        });
+    }
 });
 
 },{"services/CheckoutService":74}],59:[function(require,module,exports){
@@ -3979,10 +3984,10 @@ Vue.directive("shipping-country", function (value) {
 
 Vue.directive("tooltip", {
 
-    bind: function bind() {
+    bind: function bind(el) {
         setTimeout(function () {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+            $(el).tooltip();
+        }, 1);
     }
 });
 
@@ -3992,13 +3997,11 @@ Vue.directive("tooltip", {
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("availability-class", {
-    bind: function bind() {
-        var _this = this;
-
-        ResourceService.watch(this.arg, function (value) {
+    bind: function bind(el, binding) {
+        ResourceService.watch(binding.arg, function (value) {
             var availabilityId = value.documents[0].data.variation.availability.id;
 
-            _this.el.className = "availability tag availability_" + availabilityId;
+            el.className = "availability tag availability_" + availabilityId;
         });
     }
 });

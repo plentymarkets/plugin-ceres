@@ -411,6 +411,8 @@ var ModalService = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
+    delimiters: ["${", "}"],
+
     props: ["basketAddInformation", "template"],
 
     data: function data() {
@@ -522,6 +524,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
+    delimiters: ["${", "}"],
+
     props: ["item", "itemUrl", "showQuantity", "template", "salable"],
 
     data: function data() {
@@ -595,6 +599,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-preview", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -627,6 +633,8 @@ Vue.component("basket-preview", {
 var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
+
+    delimiters: ["${", "}"],
 
     props: ["config", "template"],
 
@@ -671,6 +679,8 @@ var ResourceService = require("services/ResourceService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
@@ -744,6 +754,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-list", {
 
+    delimiters: ["${", "}"],
+
     props: ["size", "template", "triggerEvent"],
 
     data: function data() {
@@ -786,6 +798,8 @@ var ResourceService = require("services/ResourceService");
 // var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
+
+    delimiters: ["${", "}"],
 
     props: ["basketItem", "size", "language", "template"],
 
@@ -874,6 +888,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("category-breadcrumbs", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "categories", "currentCategoryTree"],
 
     data: function data() {
@@ -923,6 +939,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("accept-gtc-check", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -957,6 +975,8 @@ Vue.component("accept-gtc-check", {
 var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
@@ -1017,6 +1037,8 @@ var ResourceService = require("services/ResourceService");
 
 (function ($) {
     Vue.component("place-order", {
+
+        delimiters: ["${", "}"],
 
         props: ["targetContinue", "template"],
 
@@ -1125,6 +1147,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-profile-select", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -1169,6 +1193,8 @@ Vue.component("shipping-profile-select", {
 "use strict";
 
 Vue.component("address-input-group", {
+
+    delimiters: ["${", "}"],
 
     props: ["addressData", "defaultCountry", "addressType", "modalType", "template"],
 
@@ -1265,6 +1291,8 @@ var ResourceService = require("services/ResourceService");
 var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("address-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["addressList", "addressType", "selectedAddressId", "template", "showError"],
 
@@ -1582,6 +1610,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 Vue.component("create-update-address", {
 
+    delimiters: ["${", "}"],
+
     props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
 
     data: function data() {
@@ -1684,6 +1714,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
+    delimiters: ["${", "}"],
+
     template: "<address-select ref=\"invoiceAddressSelect\" template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: ["addressList", "hasToValidate", "selectedAddressId"],
@@ -1753,6 +1785,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
+    delimiters: ["${", "}"],
+
     template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: ["addressList", "selectedAddressId"],
@@ -1807,6 +1841,8 @@ var CountryService = require("services/CountryService");
 var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["countryList", "countryNameMap", "selectedCountryId", "selectedStateId", "template", "addressType"],
 
@@ -1886,6 +1922,8 @@ var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
 
 Vue.component("registration", {
+
+    delimiters: ["${", "}"],
 
     props: {
         modalElement: String,
@@ -2003,6 +2041,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 Vue.component("salutation-select", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "addressData", "addressType"],
 
     data: function data() {
@@ -2118,6 +2158,8 @@ var ApiService = require("services/ApiService");
 
 Vue.component("guest-login", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "backlink"],
 
     data: function data() {
@@ -2168,6 +2210,8 @@ var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
 
 Vue.component("login", {
+
+    delimiters: ["${", "}"],
 
     props: ["modalElement", "backlink", "hasToForward", "template"],
 
@@ -2247,6 +2291,8 @@ Vue.component("login", {
 
 Vue.component("login-view", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -2273,6 +2319,8 @@ var ApiService = require("services/ApiService");
 var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
+
+    delimiters: ["${", "}"],
 
     props: ["userData", "template"],
 
@@ -2347,6 +2395,8 @@ Vue.component("user-login-handler", {
 var ResourceService = require("services/ResourceService");
 
 Vue.component("item-image-carousel", {
+
+    delimiters: ["${", "}"],
 
     props: ["imageUrlAccessor", "template"],
 
@@ -2457,6 +2507,8 @@ Vue.component("item-image-carousel", {
 
 Vue.component("quantity-input", {
 
+    delimiters: ["${", "}"],
+
     props: ["value", "timeout", "min", "max", "vertical", "template", "waiting"],
 
     data: function data() {
@@ -2514,6 +2566,8 @@ var ResourceService = require("services/ResourceService");
 var VariationData = {};
 
 Vue.component("variation-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["attributes", "variations", "preselect", "template"],
 
@@ -2663,6 +2717,8 @@ Vue.component("variation-select", {
 
 Vue.component("category-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: {
         imageUrls: { type: Array },
         itemUrl: { type: String },
@@ -2721,6 +2777,8 @@ Vue.component("category-image-carousel", {
 
 Vue.component("category-item", {
 
+    delimiters: ["${", "}"],
+
     template: "#vue-category-item",
 
     props: ["decimalCount", "itemData", "imageUrlAccessor"],
@@ -2759,6 +2817,8 @@ Vue.component("category-item", {
 
 Vue.component("item-lazy-img", {
 
+    delimiters: ["${", "}"],
+
     props: ["imageUrl", "template"],
 
     created: function created() {
@@ -2783,6 +2843,8 @@ var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
+
+    delimiters: ["${", "}"],
 
     props: ["categoryId", "template"],
 
@@ -2851,7 +2913,6 @@ Vue.component("item-list-sorting", {
     },
     created: function created() {
         this.$options.template = this.template;
-        this.$options.delimiters = ["${", "}"];
 
         if (App.isSearch) {
             this.sortData.unshift("item.score");
@@ -2916,6 +2977,8 @@ var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
 Vue.component("item-search", {
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
@@ -3012,6 +3075,8 @@ var accounting = require("accounting");
 
 Vue.component("item-store-special", {
 
+    delimiters: ["${", "}"],
+
     template: "#vue-item-store-special",
 
     props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount"],
@@ -3072,6 +3137,8 @@ var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
 Vue.component("items-per-page", {
+
+    delimiters: ["${", "}"],
 
     props: ["columnsPerPage", "rowsPerPage", "template"],
 
@@ -3135,6 +3202,8 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("pagination", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -3195,6 +3264,8 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-filter", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "facet"],
 
     data: function data() {
@@ -3239,6 +3310,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("item-filter-list", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "facets"],
 
     data: function data() {
@@ -3275,6 +3348,8 @@ var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
 Vue.component("item-filter-tag-list", {
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
@@ -3335,6 +3410,8 @@ var APIService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
+
+    delimiters: ["${", "}"],
 
     props: ["userData", "template"],
 
@@ -3442,6 +3519,8 @@ var NotificationService = require("services/NotificationService");
 var ModalService = require("services/ModalService");
 
 Vue.component("bank-data-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["userBankData", "contactId", "template"],
 
@@ -3679,6 +3758,8 @@ var ApiService = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
+    delimiters: ["${", "}"],
+
     props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible"],
 
     data: function data() {
@@ -3777,6 +3858,8 @@ var ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
 
+    delimiters: ["${", "}"],
+
     props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
 
     data: function data() {
@@ -3863,6 +3946,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 
+    delimiters: ["${", "}"],
+
     props: ["initialNotifications", "template"],
 
     data: function data() {
@@ -3928,6 +4013,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
 
+    delimiters: ["${", "}"],
+
     props: ["countryFlagPrefix", "template"],
 
     data: function data() {
@@ -3955,6 +4042,8 @@ Vue.component("shipping-country-select", {
 var ResourceService = require("services/ResourceService");
 
 Vue.component("shop-language-select", {
+
+    delimiters: ["${", "}"],
 
     props: ["countryFlagPrefix", "template"],
 
@@ -3999,6 +4088,8 @@ var WaitScreenService = require("services/WaitScreenService");
 Vue.component("wait-screen", {
 
     // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
@@ -4078,19 +4169,19 @@ var ResourceService = require("services/ResourceService");
 Vue.directive("check-active", {
     params: ["category"],
 
-    bind: function bind() {
+    bind: function bind(el) {
         var categoryObject = JSON.parse(this.params.category);
 
         ResourceService.watch("breadcrumbs", function (values) {
             for (var index in values) {
                 if (values[index].id == categoryObject.id) {
-                    this.el.classList.add("active");
+                    el.classList.add("active");
                     break;
                 } else {
-                    this.el.classList.remove("active");
+                    el.classList.remove("active");
                 }
             }
-        }.bind(this));
+        });
     }
 });
 
@@ -4120,12 +4211,13 @@ Vue.directive("is-loading-breadcrumbs-watcher", {
 
 var _CategoryRendererService = require("services/CategoryRendererService");
 
-Vue.directive("render-category", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-
-        (0, _CategoryRendererService.renderItems)(value);
-    });
+Vue.directive("render-category", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            event.preventDefault();
+            (0, _CategoryRendererService.renderItems)(value);
+        });
+    }
 });
 
 },{"services/CategoryRendererService":73}],53:[function(require,module,exports){
@@ -4183,10 +4275,10 @@ Vue.directive("resource-bind", {
 
     params: ["filters"],
 
-    bind: function bind() {
+    bind: function bind(el, binding) {
         var self = this;
 
-        ResourceService.watch(this.arg, function (value) {
+        ResourceService.watch(binding.arg, function (value) {
             var paths = self.expression.split(".");
 
             for (var i = 0; i < paths.length; i++) {
@@ -4216,11 +4308,11 @@ var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
 
-    bind: function bind() {
+    bind: function bind(el, binding) {
         var self = this;
-        var display = window.getComputedStyle(this.el, null).getPropertyValue("display");
+        var display = window.getComputedStyle(el, null).getPropertyValue("display");
 
-        ResourceService.watch(this.arg, function (value) {
+        ResourceService.watch(binding.arg, function (value) {
 
             var keys = Object.keys(value);
             var values = keys.map(function (key) {
@@ -4266,14 +4358,16 @@ Vue.directive("resource-push", {
 },{"services/ResourceService":79}],57:[function(require,module,exports){
 "use strict";
 
-Vue.directive("change-lang", function (value) {
-    $(this.el).click(function (event) {
-        var subPath = window.location.pathname.split("/");
+Vue.directive("change-lang", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            var subPath = window.location.pathname.split("/");
 
-        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
+            subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
 
-        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
-    });
+            window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+        });
+    }
 });
 
 },{}],58:[function(require,module,exports){
@@ -4281,11 +4375,13 @@ Vue.directive("change-lang", function (value) {
 
 var CheckoutService = require("services/CheckoutService");
 
-Vue.directive("shipping-country", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-        CheckoutService.setShippingCountryId(value);
-    });
+Vue.directive("shipping-country", {
+    bind: function bind(el) {
+        el.onclick(function (event) {
+            event.preventDefault();
+            CheckoutService.setShippingCountryId(value);
+        });
+    }
 });
 
 },{"services/CheckoutService":74}],59:[function(require,module,exports){
@@ -4293,10 +4389,10 @@ Vue.directive("shipping-country", function (value) {
 
 Vue.directive("tooltip", {
 
-    bind: function bind() {
+    bind: function bind(el) {
         setTimeout(function () {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+            $(el).tooltip();
+        }, 1);
     }
 });
 
@@ -4306,13 +4402,11 @@ Vue.directive("tooltip", {
 var ResourceService = require("services/ResourceService");
 
 Vue.directive("availability-class", {
-    bind: function bind() {
-        var _this = this;
-
-        ResourceService.watch(this.arg, function (value) {
+    bind: function bind(el, binding) {
+        ResourceService.watch(binding.arg, function (value) {
             var availabilityId = value.documents[0].data.variation.availability.id;
 
-            _this.el.className = "availability tag availability_" + availabilityId;
+            el.className = "availability tag availability_" + availabilityId;
         });
     }
 });
