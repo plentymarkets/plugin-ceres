@@ -30,6 +30,7 @@
 
   "unit.content",
   "unit.names.name",
+  "unit.names.lang",
 
   "images.all.url",
   "images.all.urlPreview",
