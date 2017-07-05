@@ -1,10 +1,10 @@
 Vue.directive("tooltip", {
 
-    bind: function()
+    bind: function(el)
     {
         setTimeout(function()
         {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+            $(el).tooltip();
+        }, 1);
     }
 });

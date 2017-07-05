@@ -1,10 +1,13 @@
 var CheckoutService = require("services/CheckoutService");
 
-Vue.directive("shipping-country", function(value)
-{
-    $(this.el).click(function(event)
+Vue.directive("shipping-country",
     {
-        event.preventDefault();
-        CheckoutService.setShippingCountryId(value);
+        bind(el)
+        {
+            el.onclick(function(event)
+            {
+                event.preventDefault();
+                CheckoutService.setShippingCountryId(value);
+            });
+        }
     });
-});

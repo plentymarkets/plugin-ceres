@@ -2,13 +2,13 @@ var ResourceService = require("services/ResourceService");
 
 Vue.directive("availability-class",
     {
-        bind()
+        bind(el, binding)
         {
-            ResourceService.watch(this.arg, value =>
+            ResourceService.watch(binding.arg, value =>
             {
                 const availabilityId = value.documents[0].data.variation.availability.id;
 
-                this.el.className = "availability tag availability_" + availabilityId;
+                el.className = "availability tag availability_" + availabilityId;
             });
         }
     });

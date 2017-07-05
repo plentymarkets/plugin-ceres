@@ -2,12 +2,12 @@ var ResourceService = require("services/ResourceService");
 
 Vue.directive("resource-if", {
 
-    bind: function()
+    bind: function(el, binding)
     {
         var self = this;
-        var display = window.getComputedStyle(this.el, null).getPropertyValue("display");
+        var display = window.getComputedStyle(el, null).getPropertyValue("display");
 
-        ResourceService.watch(this.arg, function(value)
+        ResourceService.watch(binding.arg, function(value)
         {
 
             var keys = Object.keys(value);

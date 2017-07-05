@@ -4,7 +4,7 @@ Vue.directive("check-active",
     {
         params: ["category"],
 
-        bind: function()
+        bind: function(el)
         {
             var categoryObject = JSON.parse(this.params.category);
 
@@ -14,14 +14,14 @@ Vue.directive("check-active",
                 {
                     if (values[index].id == categoryObject.id)
                     {
-                        this.el.classList.add("active");
+                        el.classList.add("active");
                         break;
                     }
                     else
                     {
-                        this.el.classList.remove("active");
+                        el.classList.remove("active");
                     }
                 }
-            }.bind(this));
+            });
         }
     });

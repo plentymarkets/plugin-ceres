@@ -6,11 +6,11 @@ Vue.directive("resource-bind", {
         "filters"
     ],
 
-    bind: function()
+    bind: function(el, binding)
     {
         var self = this;
 
-        ResourceService.watch(this.arg, function(value)
+        ResourceService.watch(binding.arg, function(value)
         {
             var paths = self.expression.split(".");
 

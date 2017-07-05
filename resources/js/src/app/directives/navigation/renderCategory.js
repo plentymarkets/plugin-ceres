@@ -1,11 +1,14 @@
 import {renderItems}from "services/CategoryRendererService";
 
-Vue.directive("render-category", function(value)
-{
-    $(this.el).click(function(event)
+Vue.directive(
+    "render-category",
     {
-        event.preventDefault();
-
-        renderItems(value);
+        bind: function(el)
+        {
+            el.onclick(function(event)
+            {
+                event.preventDefault();
+                renderItems(value);
+            });
+        }
     });
-});
