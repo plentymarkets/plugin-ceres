@@ -5,10 +5,10 @@ Vue.directive(
     {
         bind: function(el)
         {
-            el.onclick(function(event)
+            el.onclick = function(event)
             {
                 event.preventDefault();
                 renderItems(value);
-            });
+            };
         }
     });
