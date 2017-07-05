@@ -1,5 +1,22 @@
 # Release Notes for Ceres
 
+## v1.3.0 (2017-07-05)
+
+### Added
+
+- It is now possible to set up complex item sorting for the category view and the search by using the recommended sorting options. Up to three sorting values can be concatenated in th **Pagination and Sorting** tab of the Ceres configuration. With the sorting option **Recommended** enabled, recommended sorting will be displayed in the online store.
+
+### Changed
+
+- Instead of the **Description 1** tab, the content of the **Template** tab of a category is now used for displaying shipping information in a modal in the online store. Due to this change Twig code can also be rendered.
+- Prices and units are only displayed once in the single item view and updated dynamically.
+
+### Fixed
+
+- Due to an error the **House No.** field was not auto-filled (Auto-fill support of the browser required) correctly in the German address form. This has been fixed.
+- An error occurred when calculating discounts. This has been fixed.
+- Due to a formatting error in the image carousel for preview images, the right border was not visible. This has been fixed.
+
 ## v1.2.9 (2017-06-30)
 
 ### Changed

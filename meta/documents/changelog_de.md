@@ -1,20 +1,22 @@
 # Release Notes für Ceres
 
-## v1.3.0 (unknown)
+## v1.3.0 (2017-07-05)
 
 ### Hinzugefügt
-- Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
 
-### Behoben
-
-- Die Autocompletion setzt nun die Nr in das richtige Input. (Setzt Browser Autofill Format vor)
-- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
-- Ein Fehler im Thumb-Carousel wurde behoben, der dazu führte, dass der Border abgeschnitten wurde.
+- Komplexe Sortierungen von Artikeln sind in Kategorieansicht und Suche über die Einstellung **Empfohlen** möglich. Bis zu drei Sortierwerte können im Tab **Pagination and Sorting** in der Konfiguration von Ceres verkettet werden. Bei aktiver Sortiereinstellung **Recommended** wird im Webshop die empfohlene Sortierung angezeigt.
 
 ### Geändert
 
-- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
-- In der Artikelansicht werden nun Preise, sowie Einheiten Informationen nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+- Im Modal zur Anzeige von Versandkosteninformationen wird nun der Inhalt aus dem Tab **Template** statt des Inhalts aus dem Tab **Beschreibung 1** der verknüpften Kategorie angezeigt. Durch diese Änderung kann nun auch Twig-Code ausgegeben werden.
+- In der Artikelansicht werden nun Preise sowie Einheiten nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+
+### Behoben
+
+- Durch einen Fehler wurde bei automatischer Befüllung des Adressformulars (Browser muss Form Autofill unterstützen) die Hausnummer nicht in das richtige Feld eingetragen.
+- Es wurde ein Fehler in der Berechnung von Rabatten behoben.
+- Durch einen Formatierungsfehler im Karussell der Vorschaubilder wurde der Rand rechts abgeschnitten. Dies wurde behoben.
+
 
 ## v1.2.9 (2017-06-30)
 
