@@ -3,6 +3,18 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set configItemName = config("Ceres.item.name") %}
 
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
+{% if enableCarousel is not defined %}
+    {% if config("Ceres.item.enable_image_carousel") == "true" %}
+        {% set enableCarousel = "true" %}
+    {% else %}
+        {% set enableCarousel = "false" %}
+    {% endif %}
+{% endif %}
+
 <script type="x/template" id="vue-category-item">
     <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if (showHeaderNavBar == "side" or showHeaderNavBar == "both") and not services.template.isSearch() %}4{% else %}3{% endif %}">
 
@@ -21,7 +33,8 @@
                                                      :alt-text="texts | itemName {{ configItemName }}"
                                                      :item-url="itemData | itemURL"
                                                      :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
+                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                                                     :enable-carousel="{{ enableCarousel }}">
                             </category-image-carousel>
                         </div>
                     </div>
@@ -50,10 +63,13 @@
 
                             <a href="${ itemData | itemURL }">
                                 <div class="price">
-                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency }
+                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency } *
                                 </div>
                             </a>
-
+                            <span class="vat small text-muted">
+                                * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                                <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,10 @@
+{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set categories = services.category.getNavigationTree("item", lang) %}
+
+<resource name="navigationTree" :data="{{ categories | json_encode() }}"></resource>
+
+<ul class="mainmenu pull-lg-right">
+    {{ Tree.get_nav_bar(categories, "") }}
+</ul>

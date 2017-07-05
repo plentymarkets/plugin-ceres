@@ -13,7 +13,8 @@
 
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
 
-{% set categories = services.category.getNavigationTree("item", lang) %}
+
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
@@ -35,7 +36,7 @@
         <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
-        <resource name="navigationTree" :data="{{ categories | json_encode() }}"></resource>
+
         <resource name="isLoadingBreadcrumbs" :data="false"></resource>
 
         <div class="wrapper wrapper-top">
@@ -109,6 +110,24 @@
             <!-- BASKET MODAL -->
             <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
             <!-- ./BASKET MODAL -->
+
+            <!-- SHIPPINGCOSTS MODAL -->
+            <div id="shippingscosts-modal-wrapper">
+                <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title">{{ trans('Ceres::Template.itemShippingCosts') }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                {% include category_template(shippingCat, lang, services.webstoreConfig.getWebstoreConfig().webstoreId) ignore missing %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./SHIPPINGCOSTS MODAL -->
 
         </div>
 

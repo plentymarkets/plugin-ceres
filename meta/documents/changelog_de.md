@@ -1,5 +1,59 @@
 # Release Notes für Ceres
 
+## v1.3.0 (unknown)
+
+### Hinzugefügt
+- Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+
+### Behoben
+
+- Die Autocompletion setzt nun die Nr in das richtige Input. (Setzt Browser Autofill Format vor)
+- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+- Ein Fehler im Thumb-Carousel wurde behoben, der dazu führte, dass der Border abgeschnitten wurde.
+
+### Geändert
+
+- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+- In der Artikelansicht werden nun Preise, sowie Einheiten Informationen nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+
+## v1.2.9 (2017-06-30)
+
+### Geändert
+
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung wurde geändert. Eine Zahlungsart kann nun auch eine Kurzbeschreibung anzeigen.
+
+### Bekannte Probleme
+
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+
+## v1.2.8 (2017-06-29)
+
+### Hinzugefügt
+
+- Im **Mein Konto**-Bereich kann nun die Zahlungsart eines Auftrags geändert werden, wenn die Zahlungsart dies zulässt.
+- Das Bilderkarussell kann nun auch für die Kategorieansicht aktiviert werden.
+- Der Template-Container `CategoryItem.SideNavBarBottom` wurde hinzugefügt, um in der Kategorieansicht eigene Inhalte unter der Seitennavigation anzuzeigen.
+- Die Artikel werden in der Kategorieansicht mit dem Zusatz "* inkl. ges. MwSt. zzgl. Versandkosten" ausgegeben.
+- Ein Modal zur Darstellung der Versandkosten wurde hinzugefügt. Die entsprechende Kategorie kann in der Konfiguration von **Ceres** im Tab **Global** mit dem Modal verknüpft werden.
+
+### Geändert
+
+- Das Bilderkarussell ist in der Einzelansicht eines Artikel nun auch für die Vorschaubilder verfügbar.
+- Alle Bilder, die in der Einzelansicht eines Artikels angezeigt werden, werden nun auf eine feste Größe skaliert.
+- Artikel sowie Kategorien ohne Übersetzung werden bei Auswahl der entsprechenden Sprache nichtmehr auf der Startseite angezeigt.
+- Das Bilderkarussell wurde in der Liste **Zuletzt angesehene Artikel** entfernt.
+- Das Bilderkarussell in der Kategorieansicht wird nur noch initialisiert, wenn der Artikel mehr als ein Bild hat.
+- Varianten ohne Bestand können nicht mehr in den Warenkorb gelegt werden.
+- Varianten ohne Bestand werden beim Aufruf auf die nächste kaufbare Variante umgeleitet.
+
+### Behoben
+
+- In der mobilen Ansicht schließt die Navigation jetzt wenn man die Kategorie wechselt.
+- Ein Fehler führte dazu, dass eine gelöschte Adresse nicht aus der Adressliste entfernt wurde. Dies wurde behoben.
+- Als Gast kann man im Checkout nur noch eine Rechnungsadresse sowie Lieferadresse speichern.
+- In der Einzelansicht werden keine inaktiven Varianten oder Varianten ohne Bestand im Dropdown angezeigt.
+
 ## v1.2.7 (2017-06-22)
 
 ### Hinzugefügt
@@ -16,15 +70,6 @@
 ### Behoben
 
 - Im Adressformular ist bei der Anrede **Herr** vorausgewählt und wird im Dropdown nun auch angezeigt.
-
-
-### Bekannte Probleme
-
-- Adressen können aktuell durch einen sporadischen Fehler nicht editiert werden.
-- Nicht aktive Varianten werden in der Einzelansicht des Artikels im Varianten-Dropdown angezeigt, können aber nicht ausgewählt werden.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- In der mobilen Ansicht bleibt die Navigation geöffnet, wenn man die Kategorie wechselt.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.6 (2017-06-14)
 

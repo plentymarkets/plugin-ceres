@@ -91,6 +91,12 @@
         margin-top: .5rem;
         text-align:left;
 
+        .vat-porto-info{
+            display: block;
+            white-space: nowrap;
+            margin-top: 5px;
+        }
+
     }
 
     .crossprice{
@@ -145,7 +151,7 @@
         }
 
         .btn-group {
-            bottom: .8rem;
+            bottom: 2.5rem;
             left: auto;
             right: .8rem;
         }
@@ -185,6 +191,9 @@
 
     }
     @include media-breakpoint-up(lg){
+        .btn-group {
+            bottom: .8rem;
+        }
         .btn-group {
             transition:all .3s ease;
             opacity: 0;

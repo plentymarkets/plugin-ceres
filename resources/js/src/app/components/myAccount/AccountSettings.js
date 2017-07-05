@@ -1,5 +1,5 @@
 var ModalService        = require("services/ModalService");
-var APIService          = require("services/APIService");
+var APIService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {

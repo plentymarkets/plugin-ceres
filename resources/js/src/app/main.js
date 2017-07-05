@@ -5,7 +5,6 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-
         var menu = $("#mainNavbarCollapsable");
         var breadcrumb = menu.find("ul.breadcrumb");
 

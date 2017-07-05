@@ -52,8 +52,14 @@
 }
 
 .owl-carousel .owl-item img {
-  width: 100%;
+  width: 99%;
   -webkit-transform-style: preserve-3d;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+#single-carousel .owl-item img {
+  height: 300px;
 }
 
 .owl-carousel .owl-nav.disabled,
@@ -229,7 +235,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-  transition: opacity 400ms ease;
+  transition: opacity .4s ease, transform .4s cubic-bezier(0, 0, .26, 1), opacity .3s cubic-bezier(0, 0, .26, 1), -webkit-transform .3s cubic-bezier(0, 0, .26, 1);
 }
 
 .owl-carousel .owl-video-frame {
@@ -334,8 +340,9 @@ Custom classes
 
   .owl-single-item-control {
     margin: auto;
-    position: relative;
+    position: absolute;
     top: 50%;
+    transform:translateY(-36%);
   }
 }
 
@@ -362,6 +369,13 @@ Custom classes
     background-image: none !important;
     opacity: 1;
     display: block;
+    text-align:left;
+    &.right {
+      text-align:right;
+      .owl-single-item-control {
+        right: 0;
+      }
+    }
     &:hover {
       opacity: 1 !important;
       i {color:$brand-primary;}
@@ -376,15 +390,28 @@ Custom classes
     display: block;
   }
 }
+#thumb-carousel {
+  .carousel-control {
+   width:5%;
+  }
+}
 
+@include media-breakpoint-up(sm) {
+  #single-carousel .owl-item img {
+    height: 500px;
+  }
+}
 @include media-breakpoint-up(md) {
-
   .owl-thumbs {
     display: inline-block;
     .owl-thumb {
-      max-height: 8em;
+      object-fit: contain;
+      width: 8em;
+      height: 8em;
+      display: inline-block;
+      vertical-align: middle;
       background:$white;
-      border:1px solid rgba($brand-primary, .5);
+      border:1px solid transparent;
       margin:.5rem .5rem 0 0;
       &.active,
       &:hover {
@@ -394,4 +421,13 @@ Custom classes
     }
   }
 }
-
+@include media-breakpoint-up(lg) {
+  #single-carousel .owl-item img {
+    height: 600px;
+  }
+}
+@include media-breakpoint-up(xl) {
+  #single-carousel .owl-item img {
+    height: 700px;
+  }
+}

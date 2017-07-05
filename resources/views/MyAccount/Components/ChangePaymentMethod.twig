@@ -1,0 +1,74 @@
+<script type="x/template" id="vue-change-payment-method">
+
+    <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
+        {{ trans("Ceres::Template.myAccountChangePayment") }}
+    </button>
+
+    <div v-if="!changePossible" class="payment-align-center">
+        <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+    </div>
+
+    <!-- CHANGE_PAYMENT_MODAL -->
+    <div v-el:change-payment-modal>
+        <div class="modal fade" data-backdrop="static">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChooseNewPayment") }}</h4>
+                    </div>
+                    <div class="modal-body form-horizontal">
+
+                        <div class="cmp cmp-method-list list m-b-3">
+                        <ul class="method-list">
+                                <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
+                                    <input
+                                            type="radio"
+                                            id="paymentMethod${ _uid }${ paymentProvider.id }"
+                                            name="MethodOfPaymentID_${ currentOrder.order.id }"
+                                            v-model="paymentMethod"
+                                            :value="paymentProvider.id"
+                                    >
+                                    <label for="paymentMethod${ _uid }${ paymentProvider.id }">
+                                        <div class="icon">
+                                            <div class="square-container">
+                                                <div class="square-inner center-xy">
+                                                    <img alt="${ paymentProvider.name }" :src="paymentProvider.icon">
+                                                </div>
+                                            </div>
+                                        </div><!--
+                    --><div class="content">
+                                            ${ paymentProvider.name }
+                                            <small class="pull-xs-right">
+                                                <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
+                                            </small>
+                                            <div>
+                                                <small>
+                                                    ${ paymentProvider.description | truncate '150' }
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </li><!--
+                                -->
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
+                        </button>
+                        <button type="button" :class="{'disabled': isPending}" class="btn btn-primary" @click="changePaymentMethod()">
+                            <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalChange") }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./CHANGE_PAYMENT_MODAL -->
+
+</script>

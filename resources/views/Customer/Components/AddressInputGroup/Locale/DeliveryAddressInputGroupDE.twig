@@ -72,14 +72,14 @@
     <div class="row">
         <div class="col-xs-12 col-sm-8">
             <div class="input-unit" data-validate="text">
-                <input type="text" name="street" id="txtStreet${_uid}" v-model="addressData.address1">
+                <input type="text" name="street" autocomplete="address-line1" id="txtStreet${_uid}" v-model="addressData.address1">
                 <label for="txtStreet${_uid}">{{ trans("Ceres::Template.addressStreet") }}*</label>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-4">
             <div class="input-unit" data-validate="text">
-                <input type="text" name="housenumber" id="txtNumber${_uid}" v-model="addressData.address2">
+                <input type="text" name="housenumber" autocomplete="address-line2" id="txtNumber${_uid}" v-model="addressData.address2">
                 <label for="txtNumber${_uid}">{{ trans("Ceres::Template.addressNumber") }}*</label>
             </div>
         </div>

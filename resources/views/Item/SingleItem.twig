@@ -3,8 +3,6 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
-{% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
-{% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 {% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
 
 {% block PartialHead %}
@@ -70,55 +68,54 @@
 
                 {% if variations is not null %}
                 <div class="row m-b-1">
-                    <variation-select template="#vue-variation-select" :attributes="{{ services.item.getAttributeNameMap( item.documents[0].data.item.id ) | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
+                    <variation-select template="#vue-variation-select" :attributes="{{ attributeNameMap | json_encode() }}" :variations="{{ variations | json_encode() }}" preselect="{{ item.documents[0].data.variation.id }}"></variation-select>
                 </div>
                 {% endif %}
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
+
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
-                        <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.rrp.price" :filters="['currency']">
-                            {{ item.documents[0].data.calculatedPrices.rrp.price | formatMonetary(item.documents[0].data.calculatedPrices.rrp.currency) }}
+                        <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.rrpPrice">
+                            {{ item.documents[0].data.calculatedPrices.formatted.rrpPrice }}
                         </del>
                     </div>
                 {% endif %}
 
                 <span class="price h1" >
-                    <span   v-resource-bind:currentVariation="documents.0.data.calculatedPrices.default.price"
-                            :filters="['currency']"
-                            content="{{ item.documents[0].data.calculatedPrices.default.price }}">
-                        {{ item.documents[0].data.calculatedPrices.default.price | formatMonetary(item.documents[0].data.calculatedPrices.default.currency) }}
+                    <span v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultPrice"
+                          content="{{ item.documents[0].data.calculatedPrices.default.price }}">
+                        {{ item.documents[0].data.calculatedPrices.formatted.defaultPrice }}
                     </span>
                     <sup>*</sup>
                     <span content="{{ item.documents[0].data.calculatedPrices.default.currency }}"></span>
                 </span>
 
-                {% for variationId, basePrice in basePriceList %}
-                    <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="documents[0].data.variation.id == {{ variationId }}">
+                <div class="base-price text-muted m-y-1">
                         {{ trans("Ceres::Template.itemUnitPrice") }}
-                        <span class="base-price-value">{{ item.documents[0].data.calculatedPrices.default.unitPrice | formatMonetary(item.documents[0].data.calculatedPrices.default.currency) }}</span> /
-                        <span class="base-price-amount">
-                        {% if basePrice.lot > 1 %}
-                            {{ basePrice.lot }}
-                        {% endif %}
-                        {{ services.unit.getUnitById( basePrice.unit, services.sessionStorage.getLang() ).name }}
-                        </span>
-                    </div>
-                {% endfor %}
+                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultUnitPrice">{{ item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice }}</span> /
+                            
+                        <span v-if="true" class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.content" v-resource-if:currentVariation="documents[0].data.unit.content > 1">{{ item.documents[0].data.unit.content }}</span>
+
+                        <span class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                </div>
+
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
 
-                {% for availability in services.availability.getAvailabilities() %}
-                <span class="availability tag availability_{{ availability.id }}" v-resource-if:currentVariation="documents[0].data.variation.availability.id == {{ availability.id }}">
-                    <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">{{ item.documents[0].data.variation.availability.names.name }}</span>
+                <span class="availability tag availability_{{ item.documents[0].data.variation.availability.id }}" v-availability-class:currentVariation>
+                    <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">
+                        {{ item.documents[0].data.variation.availability.names.name }}
+                    </span>
                 </span>
-                {% endfor %}
 
                 <div class="row m-y-1">
 
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
-                    <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
+                    {% if salable %}
+                        <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
                                    resource="currentVariation" :show-quantity="true"></add-to-basket>
+                    {% endif %}
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
@@ -139,8 +136,8 @@
                 <hr>
 
                 <span class="vat small text-muted">
-                    {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
-                    <a href="#" title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                    * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                    <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
 
             </div>

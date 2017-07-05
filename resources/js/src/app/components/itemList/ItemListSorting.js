@@ -1,4 +1,4 @@
-var ItemListService = require("services/ItemListService");
+const ItemListService = require("services/ItemListService");
 
 import UrlService from "services/UrlService";
 
@@ -9,12 +9,13 @@ Vue.component("item-list-sorting", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             selectedSorting: {},
             dataTranslationMapping:
             {
+                "default.recommended_sorting"               : "itemRecommendedSorting",
                 "texts.name1_asc"                           : "itemName_asc",
                 "texts.name1_desc"                          : "itemName_desc",
                 "item.salesPrices.price_asc"                : "itemPrice_asc",
@@ -33,24 +34,30 @@ Vue.component("item-list-sorting", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
+        if (App.isSearch)
+        {
+            this.sortData.unshift("item.score");
+            this.dataTranslationMapping["item.score"] = "itemRelevance";
+        }
+
         this.buildData();
-        this.selectedSorting = this.sortData[0];
+        this.setDefaultSorting();
 
         this.setSelectedValueByUrl();
     },
 
     methods:
     {
-        buildData: function()
+        buildData()
         {
-            for (var i in this.sortData)
+            for (const i in this.sortData)
             {
-                var data = this.sortData[i];
-                var sortItem =
+                const data = this.sortData[i];
+                const sortItem =
                     {
                         value      : data,
                         displayName: Translations.Template[this.dataTranslationMapping[data]]
@@ -60,19 +67,26 @@ Vue.component("item-list-sorting", {
             }
         },
 
-        updateSorting: function()
+        setDefaultSorting()
+        {
+            const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
+
+            this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
+        },
+
+        updateSorting()
         {
             ItemListService.setOrderBy(this.selectedSorting.value);
             ItemListService.getItemList();
         },
 
-        setSelectedValueByUrl: function()
+        setSelectedValueByUrl()
         {
-            var urlParams = UrlService.getUrlParams(document.location.search);
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
             if (urlParams.sorting)
             {
-                for (var i in this.sortData)
+                for (const i in this.sortData)
                 {
                     if (this.sortData[i].value === urlParams.sorting)
                     {

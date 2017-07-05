@@ -6,12 +6,20 @@
 {% set configItemName = config("Ceres.item.name") %}
 {% set itemUrl =  item.data | itemURL %}
 
+{% if enableCarousel is not defined %}
+    {% if config("Ceres.item.enable_image_carousel") == "true" %}
+        {% set enableCarousel = "true" %}
+    {% else %}
+        {% set enableCarousel = "false" %}
+    {% endif %}
+{% endif %}
+
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <div class="thumb-background"></div>
 
         <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false"
-                       item-url="{{ itemUrl }}"></add-to-basket>
+                       item-url="{{ itemUrl }}" :salable="{{ services.item.getVariationIsSalable(item.data.variation.id) | json_encode() }}"></add-to-basket>
 
         <div class="thumb-image">
             <div class="square-container">
@@ -22,7 +30,8 @@
                                              alt-text="{{ item.data.texts | itemName(configItemName) }}"
                                              item-url="{{ itemUrl }}"
                                              :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}">
+                                             :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                                             :enable-carousel="{{ enableCarousel }}">
                     </category-image-carousel>
 
                     <noscript>
@@ -44,7 +53,7 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = 100-(item.data.calculatedPrices.rrp.price/item.data.calculatedPrices.default.price*100) %}
+                    {% set percent = (1 - item.data.calculatedPrices.default.price / item.data.calculatedPrices.rrp.price) * -100 %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('Ceres.item.storeSpecial') %}
@@ -89,9 +98,13 @@
 
                     <a href="{{ itemUrl }}">
                         <div class="price">
-                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }}
+                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }} *
                         </div>
                     </a>
+                    <span class="vat-porto-info small text-muted">
+                        * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                        <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
+                    </span>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
