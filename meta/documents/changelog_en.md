@@ -1,10 +1,13 @@
 # Release Notes for Ceres
 
-## v1.3.0 (2017-07-05)
+## v1.2.10 (2017-07-05)
 
 ### Added
 
 - It is now possible to set up complex item sorting for the category view and the search by using the recommended sorting options. Up to three sorting values can be concatenated in th **Pagination and Sorting** tab of the Ceres configuration. With the sorting option **Recommended** enabled, recommended sorting will be displayed in the online store.
+- The template container `ExtendOverlayButtons` has been added to the shopping cart overlay.
+- The template container `AdditionalContentAfterButtons` has been added to the login page.
+- The template container `ExtendOverlayButtons` has been added to the overlay of the login page.
 
 ### Changed
 
