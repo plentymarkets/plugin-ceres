@@ -2,6 +2,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "initialNotifications",
         "template"

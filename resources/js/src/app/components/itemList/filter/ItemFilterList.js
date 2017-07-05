@@ -4,6 +4,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("item-filter-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "facets"

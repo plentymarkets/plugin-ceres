@@ -3,6 +3,8 @@ const ModalService        = require("services/ModalService");
 
 Vue.component("add-item-to-basket-overlay", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "basketAddInformation",
         "template"

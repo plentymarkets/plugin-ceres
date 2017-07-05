@@ -5,6 +5,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("pagination", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

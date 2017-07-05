@@ -4,6 +4,8 @@ var ResourceService = require("services/ResourceService");
 Vue.component("category-breadcrumbs",
     {
 
+        delimiters: ["${", "}"],
+
         props: [
             "template",
             "categories",

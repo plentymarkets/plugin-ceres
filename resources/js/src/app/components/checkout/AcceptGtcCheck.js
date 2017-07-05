@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("accept-gtc-check", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

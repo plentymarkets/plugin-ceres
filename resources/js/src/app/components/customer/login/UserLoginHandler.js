@@ -5,6 +5,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("user-login-handler", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userData",
         "template"

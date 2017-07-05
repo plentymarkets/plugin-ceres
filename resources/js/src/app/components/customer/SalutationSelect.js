@@ -3,6 +3,8 @@ import ResourceService from "services/ResourceService";
 
 Vue.component("salutation-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "addressData",

@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("item-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "imageUrlAccessor",
         "template"

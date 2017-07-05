@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
+    delimiters: ["${", "}"],
+
     template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: [

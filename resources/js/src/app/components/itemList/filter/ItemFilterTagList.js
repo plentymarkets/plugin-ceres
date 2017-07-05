@@ -3,6 +3,8 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-filter-tag-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

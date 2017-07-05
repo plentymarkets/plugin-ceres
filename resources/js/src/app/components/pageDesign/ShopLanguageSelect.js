@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shop-language-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "countryFlagPrefix",
         "template"

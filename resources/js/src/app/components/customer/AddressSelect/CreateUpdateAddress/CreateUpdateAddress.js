@@ -3,6 +3,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("create-update-address", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "addressData",
         "addressModal",

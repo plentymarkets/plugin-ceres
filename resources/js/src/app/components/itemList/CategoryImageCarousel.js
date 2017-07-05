@@ -1,5 +1,7 @@
 Vue.component("category-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: {
         imageUrls      : {type: Array},
         itemUrl        : {type: String},

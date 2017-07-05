@@ -8,6 +8,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "addressList",
         "addressType",

@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-country-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "countryFlagPrefix",
         "template"

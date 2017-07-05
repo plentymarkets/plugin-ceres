@@ -1,5 +1,7 @@
 Vue.component("quantity-input", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "value",
         "timeout",

@@ -3,6 +3,8 @@ const ApiService          = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "currentOrder",

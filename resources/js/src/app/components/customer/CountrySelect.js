@@ -3,6 +3,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "countryList",
         "countryNameMap",

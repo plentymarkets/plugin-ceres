@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

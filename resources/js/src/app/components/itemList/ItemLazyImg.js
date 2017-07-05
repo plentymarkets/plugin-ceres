@@ -1,5 +1,7 @@
 Vue.component("item-lazy-img", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "imageUrl",
         "template"

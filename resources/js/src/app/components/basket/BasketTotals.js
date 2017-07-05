@@ -2,6 +2,8 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("basket-totals", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "config",
         "template"

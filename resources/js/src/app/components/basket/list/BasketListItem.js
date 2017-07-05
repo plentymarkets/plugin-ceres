@@ -4,6 +4,8 @@ var ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-list-item", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "basketItem",
         "size",

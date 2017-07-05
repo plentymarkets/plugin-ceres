@@ -5,6 +5,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("item-search", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

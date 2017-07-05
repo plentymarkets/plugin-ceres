@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("bank-data-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userBankData",
         "contactId",

@@ -6,6 +6,8 @@ var ResourceService = require("services/ResourceService");
 {
     Vue.component("place-order", {
 
+        delimiters: ["${", "}"],
+
         props: [
             "targetContinue",
             "template"

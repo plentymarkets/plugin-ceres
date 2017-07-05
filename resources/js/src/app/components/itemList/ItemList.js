@@ -3,6 +3,8 @@ var ItemListService = require("services/ItemListService");
 
 Vue.component("item-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "categoryId",
         "template"

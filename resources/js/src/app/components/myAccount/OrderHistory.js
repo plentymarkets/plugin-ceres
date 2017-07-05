@@ -2,6 +2,8 @@ const ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "orderList",
         "itemsPerPage",
