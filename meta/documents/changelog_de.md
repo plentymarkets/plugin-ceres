@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.x.x (unknown)
+
+### Geändert
+
+- Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
+
 ## v1.2.10 (2017-07-05)
 
 ### Hinzugefügt
