@@ -1,9 +1,13 @@
 # Release Notes für Ceres
 
-## v1.3.0 (unknown)
+## v1.2.10 (unknown)
 
 ### Hinzugefügt
+
 - Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+- Es wurde ein LayoutContainer zu dem "addToBasketOverlay" hinzugefügt (Basket.ExtendOverlayButtons).
+- Es wurde ein LayoutContainer zu der Login Seite hinzugefügt (Login.AdditionalContentAfterButtons).
+- Es wurde ein LayoutContainer zu dem Login Overlay hinzugefügt (LoginOverlay.ExtendOverlayButtons).
 
 ### Behoben
 
