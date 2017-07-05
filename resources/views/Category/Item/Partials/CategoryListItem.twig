@@ -53,7 +53,7 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = 100-(item.data.calculatedPrices.rrp.price/item.data.calculatedPrices.default.price*100) %}
+                    {% set percent = (1 - item.data.calculatedPrices.default.price / item.data.calculatedPrices.rrp.price) * -100 %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('Ceres.item.storeSpecial') %}

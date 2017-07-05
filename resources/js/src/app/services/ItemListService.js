@@ -10,7 +10,7 @@ module.exports = (function($)
         {
             query               : "",
             items               : App.config.defaultItemsPerPage,
-            sorting             : App.config.defaultSorting,
+            sorting             : App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting,
             page                : 1,
             facets              : "",
             categoryId          : null,
@@ -117,7 +117,15 @@ module.exports = (function($)
     {
         searchParams.sorting = sorting;
 
-        sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
+        if (App.isSearch)
+        {
+            sorting = (sorting !== App.config.defaultSortingSearch) ? sorting : null;
+        }
+        else
+        {
+            sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
+        }
+
         UrlService.setUrlParam("sorting", sorting);
     }
 
