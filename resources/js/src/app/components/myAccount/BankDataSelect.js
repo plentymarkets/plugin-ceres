@@ -37,8 +37,8 @@ Vue.component("bank-data-select", {
     {
         this.$nextTick(() =>
         {
-            this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
-            this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
+            this.bankInfoModal = ModalService.findModal(this.$refs.bankInfoModal);
+            this.bankDeleteModal = ModalService.findModal(this.$refs.bankDeleteModal);
         });
     },
 
@@ -94,7 +94,7 @@ Vue.component("bank-data-select", {
         openModal(doUpdate)
         {
             this.doUpdate = doUpdate;
-            ValidationService.unmarkAllFields($(this.$els.bankInfoModal));
+            ValidationService.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
         },
 

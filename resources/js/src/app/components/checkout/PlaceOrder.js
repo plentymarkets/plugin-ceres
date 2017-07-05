@@ -113,8 +113,8 @@ var ResourceService = require("services/ResourceService");
 
             showModal: function(content, isExternalContent)
             {
-                var $modal = $(this.$els.modal);
-                var $modalBody = $(this.$els.modalContent);
+                var $modal = $(this.$refs.modal);
+                var $modalBody = $(this.$refs.modalContent);
 
                 if (isExternalContent)
                 {

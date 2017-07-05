@@ -2,7 +2,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select ref=\"invoiceAddressSelect\" template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
 
     props: [
         "addressList",

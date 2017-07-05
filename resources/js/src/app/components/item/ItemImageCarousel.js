@@ -59,7 +59,7 @@ Vue.component("item-image-carousel", {
 
         reInitialize: function()
         {
-            var $owl = $(this.$els.single);
+            var $owl = $(this.$refs.single);
 
             $owl.trigger("destroy.owl.carousel");
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
@@ -72,7 +72,7 @@ Vue.component("item-image-carousel", {
         {
             var imageCount = this.getImageCount();
 
-            $(this.$els.single).owlCarousel({
+            $(this.$refs.single).owlCarousel({
                 autoHeight       : true,
                 dots             : true,
                 items            : 1,
@@ -93,7 +93,7 @@ Vue.component("item-image-carousel", {
                 smartSpeed       : 350,
                 onChanged: function(event)
                 {
-                    var $thumb = $(this.$els.thumbs);
+                    var $thumb = $(this.$refs.thumbs);
 
                     $thumb.trigger("to.owl.carousel", [
                         event.page.index,
@@ -102,7 +102,7 @@ Vue.component("item-image-carousel", {
                 }.bind(this)
             });
 
-            $(this.$els.single).on("changed.owl.carousel", function(event)
+            $(this.$refs.single).on("changed.owl.carousel", function(event)
             {
                 this.currentItem = event.page.index;
             }.bind(this));
@@ -110,7 +110,7 @@ Vue.component("item-image-carousel", {
 
         initThumbCarousel: function()
         {
-            $(this.$els.thumbs).owlCarousel({
+            $(this.$refs.thumbs).owlCarousel({
                 autoHeight       : true,
                 dots             : false,
                 items            : 5,
@@ -135,7 +135,7 @@ Vue.component("item-image-carousel", {
 
         goTo: function(index)
         {
-            var $owl = $(this.$els.single);
+            var $owl = $(this.$refs.single);
 
             $owl.trigger("to.owl.carousel", [
                 index,

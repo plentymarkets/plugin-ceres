@@ -59,8 +59,8 @@ Vue.component("address-select", {
                 this.addressList = [];
             }
 
-            this.addressModal = ModalService.findModal(this.$els.addressModal);
-            this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+            this.addressModal = ModalService.findModal(this.$refs.addressModal);
+            this.deleteModal = ModalService.findModal(this.$refs.deleteModal);
         });
     },
 
@@ -182,7 +182,7 @@ Vue.component("address-select", {
             }
 
             this.updateHeadline();
-            ValidationService.unmarkAllFields($(this.$els.addressModal));
+            ValidationService.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
         },
 
@@ -202,7 +202,7 @@ Vue.component("address-select", {
             }
 
             this.updateHeadline();
-            ValidationService.unmarkAllFields($(this.$els.addressModal));
+            ValidationService.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
         },
 

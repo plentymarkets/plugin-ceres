@@ -62,7 +62,7 @@ Vue.component("order-history", {
 
             Vue.nextTick(() =>
             {
-                $(this.$els.orderDetails).modal("show");
+                $(this.$refs.orderDetails).modal("show");
             });
 
             const jsonEncodedOrder = JSON.stringify(order);

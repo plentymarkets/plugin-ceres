@@ -29,7 +29,7 @@ Vue.component("change-payment-method", {
      */
     ready()
     {
-        this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
+        this.changePaymentModal = ModalService.findModal(this.$refs.changePaymentModal);
     },
 
     methods:

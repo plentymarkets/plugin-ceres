@@ -31,7 +31,7 @@ Vue.component("account-settings", {
     {
         this.$nextTick(() =>
         {
-            this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+            this.accountSettingsModal = ModalService.findModal(this.$refs.accountSettingsModal);
         });
     },
 
