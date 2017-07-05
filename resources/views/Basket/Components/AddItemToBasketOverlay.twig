@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <script type="x/template" id="vue-add-item-to-basket-overlay">
 
     {% set configItemName = config("Ceres.item.name") %}
@@ -51,6 +53,7 @@
                                     {{ trans("Ceres::Template.basket") }} <i class="fa fa-shopping-cart"
                                                                              aria-hidden="true"></i>
                                 </a>
+                                {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
                             </div>
                             <div class="col-sm-3 offset-sm-2 item-confirm-special-case-close">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
