@@ -1,9 +1,11 @@
 # Release Notes für Ceres
 
-## v1.3.0 (2017-07-05)
+## v1.2.10 (2017-07-05)
 
 ### Hinzugefügt
 
+- Eine empfohlene Vorsortierung kann für den Kunden eingestellt werden
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung und beim Ändern der Zahlungsart im **Mein Konto**-Bereich wurde geändert. Eine Zahlungsart kann nun auch einen externen Link anzeigen.
 - Komplexe Sortierungen von Artikeln sind in Kategorieansicht und Suche über die Einstellung **Empfohlen** möglich. Bis zu drei Sortierwerte können im Tab **Pagination and Sorting** in der Konfiguration von Ceres verkettet werden. Bei aktiver Sortiereinstellung **Recommended** wird im Webshop die empfohlene Sortierung angezeigt.
 - Es wurde ein LayoutContainer zu dem "addToBasketOverlay" hinzugefügt (Basket.ExtendOverlayButtons).
 - Es wurde ein LayoutContainer zu der Login Seite hinzugefügt (Login.AdditionalContentAfterButtons).
