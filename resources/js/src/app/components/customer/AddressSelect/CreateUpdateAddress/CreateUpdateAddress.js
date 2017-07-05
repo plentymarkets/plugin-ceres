@@ -82,6 +82,8 @@ Vue.component("create-update-address", {
         {
             this.waiting = true;
 
+            this._syncOptionTypesAddressData();
+
             AddressService
                 .updateAddress(this.addressData, this.addressType)
                 .done(function()
@@ -118,6 +120,8 @@ Vue.component("create-update-address", {
         {
             this.waiting = true;
 
+            this._syncOptionTypesAddressData();
+
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
                 .done(function(newAddress)
@@ -135,6 +139,46 @@ Vue.component("create-update-address", {
                 {
                     this.waiting = false;
                 }.bind(this));
+        },
+
+        _syncOptionTypesAddressData: function()
+        {
+
+            if (typeof this.addressData.options !== "undefined")
+            {
+                for (var optionType of this.addressData.options)
+                {
+                    switch (optionType.typeId)
+                    {
+                    case 1:
+                        {
+                            this._changeOptionTypeData(optionType.value, this.addressData.vatNumber);
+                            break;
+                        }
+
+                    case 9:
+                        {
+                            this._changeOptionTypeData(optionType.value, this.addressData.birthday);
+                            break;
+                        }
+
+                    case 11:
+                        {
+                            this._changeOptionTypeData(optionType.value, this.addressData.title);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        },
+
+        _changeOptionTypeData: function(optionTypeValue, addressDataValue)
+        {
+            if (addressDataValue !== optionTypeValue)
+            {
+                optionTypeValue = addressDataValue;
+            }
         }
     }
 

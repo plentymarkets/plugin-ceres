@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-sm-6">
         <div class="input-unit"
         {% if "billing_address.title" in addressFieldsRequired %}data-validate="text"{% endif %}>
-        <input type="text" name="title" id="txtTitle${_uid}" v-model="addressData.title">
+        <input type="text" name="title" id="txtTitle${_uid}" v-model="addressData.title | optionType 11">
         <label for="txtTitle${_uid}">{{ trans("Ceres::Template.addressTitle") }}{% if "billing_address.title" in addressFieldsRequired %}*{% endif %}</label>
         </div>
         </div>
