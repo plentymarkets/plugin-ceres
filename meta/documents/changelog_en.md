@@ -5,6 +5,7 @@
 ### Added
 
 - It is now possible to set up complex item sorting for the category view and the search by using the recommended sorting options. Up to three sorting values can be concatenated in th **Pagination and Sorting** tab of the Ceres configuration. With the sorting option **Recommended** enabled, recommended sorting will be displayed in the online store.
+- The design of the list of payment methods displayed in the checkout and in the overlay when changing a payment method in the **My Account** area has been updated. An external link can now be displayed by a payment plugin.
 - The template container `ExtendOverlayButtons` has been added to the shopping cart overlay.
 - The template container `AdditionalContentAfterButtons` has been added to the login page.
 - The template container `ExtendOverlayButtons` has been added to the overlay of the login page.
