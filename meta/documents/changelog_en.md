@@ -17,16 +17,16 @@
 - An error occurred when calculating discounts. This has been fixed.
 - Due to a formatting error in the image carousel for preview images, the right border was not visible. This has been fixed.
 
+### Known issues
+
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.9 (2017-06-30)
 
 ### Changed
 
 - The design of the list of payment methods in the checkout has been changed. A payment method can now also display a short description.
-
-### Known issues
-
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.8 (2017-06-29)
 
