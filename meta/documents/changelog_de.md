@@ -2,6 +2,10 @@
 
 ## v1.x.x (unknown)
 
+### Hinzugefügt
+
+- Die Adressfelder besitzen jetzt ein zusätzliches Feld für den akademischen Titel
+
 ### Geändert
 
 - Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
