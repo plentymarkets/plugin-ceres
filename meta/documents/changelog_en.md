@@ -1,15 +1,36 @@
 # Release Notes for Ceres
 
-## v1.2.9 (2017-06-30)
+## v1.2.10 (2017-07-05)
+
+### Added
+
+- It is now possible to set up complex item sorting for the category view and the search by using the recommended sorting options. Up to three sorting values can be concatenated in th **Pagination and Sorting** tab of the Ceres configuration. With the sorting option **Recommended** enabled, recommended sorting will be displayed in the online store.
+- The design of the list of payment methods displayed in the checkout and in the overlay when changing a payment method in the **My Account** area has been updated. An external link can now be displayed by a payment plugin.
+- The template container `ExtendOverlayButtons` has been added to the shopping cart overlay.
+- The template container `AdditionalContentAfterButtons` has been added to the login page.
+- The template container `ExtendOverlayButtons` has been added to the overlay of the login page.
 
 ### Changed
 
-- The design of the list of payment methods in the checkout has been changed. A payment method can now also display a short description.
+- Instead of the **Description 1** tab, the content of the **Template** tab of a category is now used for displaying shipping information in a modal in the online store. Due to this change Twig code can also be rendered.
+- Prices and units are only displayed once in the single item view and updated dynamically.
+
+### Fixed
+
+- Due to an error the **House No.** field was not auto-filled (Auto-fill support of the browser required) correctly in the German address form. This has been fixed.
+- An error occurred when calculating discounts. This has been fixed.
+- Due to a formatting error in the image carousel for preview images, the right border was not visible. This has been fixed.
 
 ### Known issues
 
 - The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
 - Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
+## v1.2.9 (2017-06-30)
+
+### Changed
+
+- The design of the list of payment methods in the checkout has been changed. A payment method can now also display a short description.
 
 ## v1.2.8 (2017-06-29)
 

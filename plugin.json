@@ -1,5 +1,5 @@
 {
-    "version"           : "1.3.0",
+    "version"           : "1.2.10",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -254,6 +254,11 @@
             "description"   : "Add content after the 'Checkout' button in the shopping cart."
         },
         {
+            "key"           : "Basket.ExtendOverlayButtons",
+            "name"          : "Shopping cart overlay: Extend buttons",
+            "description"   : "Add additional content to the 'add to basket overlay' buttons."
+        },
+        {
             "key"           : "BasketPreview.BeforeCheckoutButton",
             "name"          : "Shopping cart preview: Before \"Checkout\" button",
             "description"   : "Add content before the 'Checkout' button in the shopping cart preview."
@@ -413,6 +418,16 @@
             "key"           : "CategoryItem.SideNavBarBottom",
             "name"          : "Category item list: Container below side navigation",
             "description"   : "Add content below the side navigation bar in the category item view."
+        },
+        {
+            "key"           : "Login.AdditionalContentAfterButtons",
+            "name"          : "Login: Container below the buttons",
+            "description"   : "Add content below the buttons in the login view."
+        },
+        {
+            "key"           : "LoginOverlay.ExtendOverlayButtons",
+            "name"          : "Login overlay: Container in a row with the buttons",
+            "description"   : "Add content in the login overlay."
         }
     ]
 }

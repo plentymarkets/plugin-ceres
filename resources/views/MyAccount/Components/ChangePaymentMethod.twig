@@ -41,8 +41,8 @@
                                         </div><!--
                     --><div class="content">
                                             ${ paymentProvider.name }
-                                            <small class="pull-xs-right">
-                                                <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
+                                            <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
+                                                <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
                                             </small>
                                             <div>
                                                 <small>
