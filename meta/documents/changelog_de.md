@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Die Adressfelder besitzen jetzt ein zusätzliches Feld für den akademischen Titel
+- In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Titel** hinzugefügt.
 
 ### Geändert
 
