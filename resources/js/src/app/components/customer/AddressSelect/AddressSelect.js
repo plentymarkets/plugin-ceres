@@ -50,6 +50,10 @@ Vue.component("address-select", {
     {
         if (!this.isAddressListEmpty())
         {
+            if (!this.selectedAddressId || this.selectedAddressId <= 0 )
+            {
+                this.selectedAddressId = this.addressList[0].id;
+            }
             this.loadSelectedAddress();
         }
         else
@@ -325,12 +329,9 @@ Vue.component("address-select", {
          */
         onAddressCreated(addressData)
         {
-            if (!this.selectedAddressId)
-            {
-                this.selectedAddressId = addressData.id;
+            this.selectedAddressId = addressData.id;
 
-                this.loadSelectedAddress();
-            }
+            this.loadSelectedAddress();
         }
     },
 

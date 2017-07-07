@@ -875,6 +875,9 @@ Vue.component("address-select", {
      */
     ready: function ready() {
         if (!this.isAddressListEmpty()) {
+            if (!this.selectedAddressId || this.selectedAddressId <= 0) {
+                this.selectedAddressId = this.addressList[0].id;
+            }
             this.loadSelectedAddress();
         } else {
             this.addressList = [];
@@ -1117,11 +1120,9 @@ Vue.component("address-select", {
          * @param addressData
          */
         onAddressCreated: function onAddressCreated(addressData) {
-            if (!this.selectedAddressId) {
-                this.selectedAddressId = addressData.id;
+            this.selectedAddressId = addressData.id;
 
-                this.loadSelectedAddress();
-            }
+            this.loadSelectedAddress();
         }
     },
 
@@ -1287,6 +1288,8 @@ Vue.component("invoice-address-select", {
     ready: function ready() {
         if (App.isCheckoutView && this.addressList.length <= 0) {
             this.$refs.invoiceAddressSelect.showInitialAddModal();
+        } else {
+            this.addressChanged(this.addressList[0]);
         }
     },
 
@@ -1320,7 +1323,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: ["addressList", "selectedAddressId"],
 
