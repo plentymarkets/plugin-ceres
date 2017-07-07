@@ -2,6 +2,14 @@
 
 ## v1.x.x (unknown)
 
+### Hinzugefügt
+
+- Caching für die Side- und Top-Navigation wurde hinzugefügt
+
+### Behoben
+
+- Die Seitennavigation zeigt nun wieder alle Kategorien an.
+
 ### Geändert
 
 - Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
