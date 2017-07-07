@@ -1,48 +1,47 @@
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 
-{% if config("Ceres.item.lists.2.list_type") == "last_seen" %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.LastSeenItemList', itemLoaderPresets.lastSeenItemsList, {'items':itemsPerPage}).documents %}
-{% else %}
+{% set listType = config("Ceres.item.lists.2.list_type") %}
+{% set tagIds = config("Ceres.item.lists.2.tag_ids") | split(",") %}
+
+{% if listType == "last_seen" %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList3', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}
+{% elseif listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
+{% elseif listType == "tag_list" %}
+	{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList3', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
 
 {% if itemList is not empty %}
     <hr>
 
     <h1 class="h3">
-        {% if config("Ceres.item.lists.1.list_type") == "last_seen" %}
+        {% if listType == "last_seen" %}
             {{ trans("Ceres::Template.itemListLastSeen") }}
-        {% else %}
+        {% elseif listType == "cross_selling" %}
             {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
+		{% elseif listType == "tag_list" %}
+			TAGS TRANSLATION???
         {% endif %}
     </h1>
 
     <div class="row">
         <div class="col-xs-12 col-lg-12">
-
             {% if itemList | length > 4 %}
-                <div id="list-carousel" class="owl-carousel owl-theme owl-single-item">
-                
-                    {% for item in itemList %}
-                        
-                            {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %}
-                        
+                <div id="list-carousel" class="owl-carousel owl-theme owl-single-item">      
+                    {% for item in itemList %}    
+                            {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %} 
                     {% endfor %}
-            
                 </div>
             {% else %}
                 <ul id="list-carousel" class="product-list row grid">
-                
                     {% for item in itemList %}
                         <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false } %}
                         </li>
                     {% endfor %}
-            
                 </ul>
             {% endif %}
-
         </div>
     </div>
 

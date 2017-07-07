@@ -2,7 +2,7 @@
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 
 {% set listType = config("Ceres.item.lists.3.list_type") %}
-{% set tagIds = config("Ceres.item.lists.tag_ids") | split(",") %}
+{% set tagIds = config("Ceres.item.lists.3.tag_ids") | split(",") %}
 
 {% if listType == "last_seen" %}
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList3', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}

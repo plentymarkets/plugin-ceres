@@ -378,13 +378,6 @@
         "default"           : "Similar"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.tag_ids",
-        "label"             : "Tags: Tag ID's",
-        "type"              : "text",
-        "default"           : "1,2,3"
-    },
-    {
         "tab"       : "Item lists",
         "key"       : "item.lists.1.list_type",
         "label"     : "1. Select a list to show",
@@ -396,6 +389,13 @@
             "tag_list"      : "Tags"
         },
         "default"           : "last_seen"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.1.tag_ids",
+        "label"             : "1. Tags: Tag ID's",
+        "type"              : "text",
+        "default"           : "1,2,3"
     },
     {
         "tab"       : "Item lists",
@@ -411,6 +411,13 @@
         "default"           : "cross_selling"
     },
     {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.2.tag_ids",
+        "label"             : "2. Tags: Tag ID's",
+        "type"              : "text",
+        "default"           : "1,2,3"
+    },
+    {
         "tab"       : "Item lists",
         "key"       : "item.lists.3.list_type",
         "label"     : "3. Select a list to show",
@@ -422,6 +429,13 @@
             "tag_list"      : "Tags"
         },
         "default"           : "tag_list"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.3.tag_ids",
+        "label"             : "3. Tags: Tag ID's",
+        "type"              : "text",
+        "default"           : "1,2,3"
     },
     {
         "tab"                           : "Shopping cart",
