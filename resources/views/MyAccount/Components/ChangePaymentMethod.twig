@@ -21,8 +21,8 @@
                     </div>
                     <div class="modal-body form-horizontal">
 
-                        <div class="cmp cmp-method-list m-b-3">
-                            <ul class="method-list">
+                        <div class="cmp cmp-method-list list m-b-3">
+                        <ul class="method-list">
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
                                     <input
                                             type="radio"
@@ -40,21 +40,19 @@
                                             </div>
                                         </div><!--
                     --><div class="content">
-                                        ${ paymentProvider.name }
+                                            ${ paymentProvider.name }
+                                            <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
+                                                <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
+                                            </small>
                                             <div>
                                                 <small>
-                                                    ${ paymentProvider.fee | currency }
-                                                </small>
-                                            </div>
-                                            <div>
-                                                <small>
-                                                    ${ paymentProvider.description }
+                                                    ${ paymentProvider.description | truncate '150' }
                                                 </small>
                                             </div>
                                         </div>
                                     </label>
                                 </li><!--
-            -->
+                                -->
                             </ul>
                         </div>
 

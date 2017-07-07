@@ -1,0 +1,9 @@
+{% import "Ceres::Category.Macros.CategoryTree" as Tree %}
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set categories = services.category.getNavigationTree("item", lang) %}
+{% set categoryBreadcrumbs = services.category.getHierarchy() %}
+
+<resource name="navigationTree" :data="{{ categories | json_encode() }}"></resource>
+
+{{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "") }}

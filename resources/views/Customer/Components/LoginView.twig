@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <script type="x/template" id="vue-login-view" >
     <div class="container-max login">
         <div class="row m-b-3">
@@ -33,8 +35,10 @@
                             {{ trans("Ceres::Template.accOrderAsGuest") }}
                         </button>
                     </div>
-
                 </div>
+
+                {{ LayoutContainer.show("Ceres::Login.AdditionalContentAfterButtons") }}
+
             </div>
         </div>
     </div>

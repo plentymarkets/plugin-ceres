@@ -170,8 +170,8 @@ body.menu-is-visible { overflow-y : hidden; }
 					width 			: auto;
 					max-width 		: 25em;
 					min-width 		: 100%;
-					left 			: 50%;
-					transform 		: translateX(-50%);
+					/*left 			: 50%;
+					transform 		: translateX(-50%);*/
 					word-wrap		: break-word;
 
 					>li {
@@ -179,6 +179,8 @@ body.menu-is-visible { overflow-y : hidden; }
 						color 		: $menu-big-menu-li-color;
 						transition  : all .1s ease;
 						width 		: 100%;
+						min-width	: 150px;
+						text-align  : initial;
 
 						&:hover {
 							background  	: $menu-big-menu-li-bg-hover;
