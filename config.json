@@ -378,6 +378,13 @@
         "default"           : "Similar"
     },
     {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.tag_ids",
+        "label"             : "Tags: Tag ID's",
+        "type"              : "text",
+        "default"           : "1,2,3"
+    },
+    {
         "tab"       : "Item lists",
         "key"       : "item.lists.1.list_type",
         "label"     : "1. Select a list to show",
@@ -385,7 +392,8 @@
         "possibleValues"    :
         {
             "last_seen"     : "Last seen",
-            "cross_selling" : "Cross-Selling"
+            "cross_selling" : "Cross-Selling",
+            "tag_list"      : "Tags"
         },
         "default"           : "last_seen"
     },
@@ -397,9 +405,23 @@
         "possibleValues"    :
         {
             "last_seen"     : "Last seen",
-            "cross_selling" : "Cross-Selling"
+            "cross_selling" : "Cross-Selling",
+            "tag_list"      : "Tags"
         },
         "default"           : "cross_selling"
+    },
+    {
+        "tab"       : "Item lists",
+        "key"       : "item.lists.3.list_type",
+        "label"     : "3. Select a list to show",
+        "type"      : "dropdown",
+        "possibleValues"    :
+        {
+            "last_seen"     : "Last seen",
+            "cross_selling" : "Cross-Selling",
+            "tag_list"      : "Tags"
+        },
+        "default"           : "tag_list"
     },
     {
         "tab"                           : "Shopping cart",

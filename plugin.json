@@ -29,6 +29,11 @@
             "key":"Ceres\\Containers\\CeresItemListContainer2",
             "name":"Itemlist Container 2",
             "description":"Display a configurable list of items in your online store"
+        },
+        {
+            "key":"Ceres\\Containers\\CeresItemListContainer3",
+            "name":"Itemlist Container 3",
+            "description":"Display a configurable list of items in your online store"
         }
     ],
     "containers"        :
