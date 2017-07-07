@@ -37,6 +37,13 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-y-1">
+            <div class="input-unit" data-validate="text">
+                <input type="text" name="title" id="txtTitle${_uid}" v-model="item.properties[0].property.names.value">
+                <label for="txtTitle${_uid}">${item.properties[0].property.names.name}*</label>
+            </div>
+        </div>
+
     </div>
 
 </script>
