@@ -35,9 +35,11 @@
   "images.all.url",
   "images.all.urlPreview",
   "images.all.position",
+  "images.all.path"
   "images.variation.url",
   "images.variation.urlPreview",
   "images.variation.position",
+  "images.variation.path",
 
   "properties.group.backendName",
   "properties.property.names.name",
