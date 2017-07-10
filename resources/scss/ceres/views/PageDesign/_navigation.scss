@@ -102,38 +102,42 @@ body.menu-is-visible { overflow-y : hidden; }
 			width : 100%;
 			cursor: pointer;
 			float: left;
+			display: flex;
+			flex-wrap: wrap;
 
 			a 	{
 				color 	: inherit;
 				display : inline-block;
 				padding : 1rem ;
-				width 	: 70%;
+				flex: 1 0 80%;
 			}
 
 			.nav-direction{
-				width: 28%;
-				text-align: right;
-				color: $white;
-				padding-right: calc(13px + .5em);
+				padding: 1rem;
+				flex: 1 0 20%;
+				text-align: center;
 			}
 
 			ul {
 				background 	: $menu-bg-sm;
-				display 	: none;
 				left 		: 0;
 				list-style 	: none;
 				margin 		: 0;
-				//min-height 	: 100%;
 				padding 	: 0;
 				position 	: relative;
 				top 		: 0;
 				width 		: 100%;
 			}
-			&.open>ul { display : block !important; }
-			&.ddown.open{
-				.nav-direction{
-					i{
-						transform: rotate(180deg);
+			&.ddown {
+				.nav-direction {
+					i {
+						transition: transform 300ms ease-out;
+						transform: rotateX(0deg);
+					}
+				}
+				.nav-direction[aria-expanded="true"] {
+					i {
+						transform: rotateX(180deg);
 					}
 				}
 			}
