@@ -31,8 +31,9 @@ Vue.component("add-to-basket", {
         {
             var basketObject =
                 {
-                    variationId: this.variationId,
-                    quantity   : this.quantity
+                    variationId             :   this.variationId,
+                    quantity                :   this.quantity,
+                    basketItemOrderParams   :   this.item.properties
                 };
 
             ResourceService

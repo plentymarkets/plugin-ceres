@@ -52,6 +52,11 @@
             </p>
         {% endif %}
 
+        <div class="row">
+            <strong class="col-xs-6 col-sm-5">${basketItem.variation.data.orderProperties[0].name}</strong>
+            <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.orderProperties[0].value}</span>
+        </div>
+
         <div class="item-description">
             {% if "basket.item.customNumber" in basketDetailsData %}
                 <div class="row">

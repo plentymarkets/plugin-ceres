@@ -39,9 +39,7 @@
   "images.variation.urlPreview",
   "images.variation.position",
 
-  "properties.group.backendName",
-  "properties.property.names.name",
-  "properties.property.names.lang",
+  "properties.*",
 
   "defaultCategories"
 ]
