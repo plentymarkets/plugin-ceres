@@ -1,5 +1,27 @@
 # Release Notes for Ceres
 
+## v1.x.x (unknown)
+
+### Added
+
+- Caching has been implemented for the side navigation and the top navigation.
+
+### Changed
+
+- The online store search will now use the **AND** operator. This replaces the **OR** search that was previously used.
+- The search icon in the header will now switch to an **X** when clicking the search to help the customer with closing the current search.
+- The mobile navigation has been refactored. Using the mobile navigation is now easier than before due to a larger button for opening sub-categories.
+
+### Fixed
+
+- Only those item images activated for a client will be displayed in the respective online store.
+- The side navigation now displays the categories on every level again.
+
+### Known issues
+
+- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.2.10 (2017-07-05)
 
 ### Added
@@ -20,11 +42,6 @@
 - Due to an error the **House No.** field was not auto-filled (Auto-fill support of the browser required) correctly in the German address form. This has been fixed.
 - An error occurred when calculating discounts. This has been fixed.
 - Due to a formatting error in the image carousel for preview images, the right border was not visible. This has been fixed.
-
-### Known issues
-
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.9 (2017-06-30)
 
