@@ -4,18 +4,23 @@
 
 ### Hinzugefügt
 
-- Caching für die Side- und Top-Navigation wurde hinzugefügt
-
-### Behoben
-
-- Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder ausgeliefert.
-- Die Seitennavigation zeigt nun wieder alle Kategorien an.
+- Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
 
 ### Geändert
 
-- Die Suche wird nun mit einer "UND"-Logik ausgeführt. (Vorher wurden alle Wörter mit "ODER" verkettet)
-- Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
-- Die Mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
+- Die Suche wird nun mit einer **UND**-Logik ausgeführt und ersetzt damit die vorherige **ODER**-Suche.
+- Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen wie man die Suche wieder schließt.
+- Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
+
+### Behoben
+
+- Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder im Webshop angezeigt.
+- Die Seitennavigation zeigt nun wieder alle Kategorien sämtlicher Ebenen an.
+
+### Bekannte Probleme
+
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.10 (2017-07-05)
 
@@ -37,11 +42,6 @@
 - Durch einen Fehler wurde bei automatischer Befüllung des Adressformulars (Browser muss Form Autofill unterstützen) die Hausnummer nicht in das richtige Feld eingetragen.
 - Es wurde ein Fehler in der Berechnung von Rabatten behoben.
 - Durch einen Formatierungsfehler im Karussell der Vorschaubilder wurde der Rand rechts abgeschnitten. Dies wurde behoben.
-
-### Bekannte Probleme
-
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.9 (2017-06-30)
 
