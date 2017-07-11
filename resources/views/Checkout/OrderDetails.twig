@@ -134,6 +134,14 @@
                                     <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderTotal") }}</strong>
                                     <strong class="col-xs-6 col-sm-9">{{ (item.quantity * item.amounts[0].priceGross) | formatMonetary( item.amounts[0].currency ) }}</strong>
                                 </div>
+                                {% if item.orderProperties %}
+                                    {% for property in item.orderProperties %}
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-3">Zusatz:</strong>
+                                            <span class="col-xs-6 col-sm-9">{{ property.value }}</span>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </article>
                     {% endif %}
