@@ -7,7 +7,8 @@ Vue.component("add-to-basket", {
         "itemUrl",
         "showQuantity",
         "template",
-        "salable"
+        "salable",
+        "useLargeScale"
     ],
 
     data: function()
@@ -20,6 +21,8 @@ Vue.component("add-to-basket", {
     created: function()
     {
         this.$options.template = this.template;
+
+        this.useLargeScale = this.useLargeScale || false;
     },
 
     methods:
