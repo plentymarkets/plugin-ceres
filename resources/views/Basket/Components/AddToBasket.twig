@@ -4,9 +4,14 @@
 
     <div>
 
-        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale" @click="handleButtonDirection()">
-            <i class="fa fa-cart-plus fa-lg mobile-icon-right" v-if="!hasChildren && !salable"></i>
-            <i class="fa fa-arrow-right fa-lg mobile-icon-right" v-if="hasChildren || salable"></i>
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="(!showQuantity && useLargeScale) && (!hasChildren && !salable)" 
+             v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}"@click="addToBasket()">
+            <i class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
+        </div>
+
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="(!showQuantity && useLargeScale) && (hasChildren || salable)" 
+             v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.showItem") }}" @click="directToItem()">
+            <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
         </div>
 
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
@@ -27,13 +32,11 @@
         <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale">
 
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" v-if="!hasChildren && !salable" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()"
-                        v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}">
+                <button type="button" v-if="!hasChildren && !salable" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
                     <span class="mobile-text-only">{{ trans("Ceres::Template.addToBasket") }}</span>
                     <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
                 </button>
-                <button type="button" v-if="hasChildren || salable" class="btn btn-outline-primary mobile-width-button" @click="directToItem()"
-                        v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.showItem") }}">
+                <button type="button" v-if="hasChildren || salable" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
                     <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
                     <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
                 </button>

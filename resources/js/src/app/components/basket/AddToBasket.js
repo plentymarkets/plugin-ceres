@@ -27,18 +27,6 @@ Vue.component("add-to-basket", {
 
     methods:
     {
-        handleButtonDirection()
-        {
-            if (!this.hasChildren && !this.salable)
-            {
-                this.addToBasket();
-            }
-            else
-            {
-                this.directToItem();
-            }
-        },
-
         /**
          * add an item to basket-resource
          */
