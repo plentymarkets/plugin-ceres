@@ -2,7 +2,7 @@
 
 <script type="x/template" id="vue-add-to-basket">
 
-    <div>
+    <div class="category-list-view-port">
 
         <div v-if="showQuantity">
             <span>
@@ -22,13 +22,15 @@
         <div v-else>
 
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" v-if="!hasChildren && !salable" class="btn btn-outline-primary" @click="addToBasket()"
+                <button type="button" v-if="!hasChildren && !salable" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()"
                         v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}">
-                    <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.addToBasket") }}</span>
+                    <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
                 </button>
-                <button type="button" v-if="hasChildren || salable" class="btn btn-outline-primary" @click="directToItem()"
+                <button type="button" v-if="hasChildren || salable" class="btn btn-outline-primary mobile-width-button" @click="directToItem()"
                         v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.showItem") }}">
-                    <i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
+                    <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
                 </button>
                 {# maybe use the button for wishlist #}
                 {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
