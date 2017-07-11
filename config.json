@@ -782,6 +782,13 @@
         "default"           : "5"
     },
     {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.change_payment",
+        "label"             : "Allow customer to change method of payment",
+        "type"              : "checkbox",
+        "default"           : "true"
+    },
+    {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.show",
         "label"                     : "Show invoice address fields in address form (DE)",
