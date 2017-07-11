@@ -8,11 +8,14 @@
 
 ### Behoben
 
+- Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder ausgeliefert.
 - Die Seitennavigation zeigt nun wieder alle Kategorien an.
 
 ### Geändert
 
+- Die Suche wird nun mit einer "UND"-Logik ausgeführt. (Vorher wurden alle Wörter mit "ODER" verkettet)
 - Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
+- Die Mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
 
 ## v1.2.10 (2017-07-05)
 
