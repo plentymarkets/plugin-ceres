@@ -4,9 +4,9 @@
 
     <div>
 
-        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale">
-            <i class="fa fa-cart-plus fa-lg mobile-icon-right" v-if="!hasChildren && !salable" @click="addToBasket()"></i>
-            <i class="fa fa-arrow-right fa-lg mobile-icon-right" v-if="hasChildren || salable" @click="directToItem()"></i>
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale" @click="handleButtonDirection()">
+            <i class="fa fa-cart-plus fa-lg mobile-icon-right" v-if="!hasChildren && !salable"></i>
+            <i class="fa fa-arrow-right fa-lg mobile-icon-right" v-if="hasChildren || salable"></i>
         </div>
 
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
