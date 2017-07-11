@@ -52,9 +52,9 @@
             </p>
         {% endif %}
 
-        <div class="row">
-            <strong class="col-xs-6 col-sm-5">${basketItem.variation.data.orderProperties[0].name}</strong>
-            <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.orderProperties[0].value}</span>
+        <div class="row" v-for="property in basketItem.variation.data.orderProperties">
+            <strong class="col-xs-6 col-sm-5">${property.name}</strong>
+            <span class="col-xs-6 col-sm-7">${property.value}</span>
         </div>
 
         <div class="item-description">
