@@ -5,9 +5,6 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-        var menu = $("#mainNavbarCollapsable");
-        var breadcrumb = menu.find("ul.breadcrumb");
-
         $("#btnMainMenuToggler").click(function()
         {
             $("#mainNavbarCollapsable").toggleClass("open");
@@ -19,61 +16,6 @@ var init = (function($, window, document)
             $("#mainNavbarCollapsable").removeClass("open");
             $("body").removeClass("menu-is-visible");
         });
-
-        function buildBreadcrumb()
-        {
-            var openElements = menu.find("li.open");
-            var breadcrumbArray = [Translations.Template.generalBigAll];
-
-            $(openElements).each(function()
-            {
-                breadcrumbArray.push($(this).children("a").text());
-            });
-
-            breadcrumb.find("li").not(".btnClose").remove();
-
-            $(breadcrumbArray).each(function()
-            {
-                breadcrumb.append("<li class=\"breadcrumb-item\">" + this + "</li>");
-            });
-            breadcrumb.find("li").not(".btnClose").click(function()
-            {
-                $(this).nextAll().remove();
-                closeSubCategories();
-            });
-
-        }
-
-        function closeSubCategories()
-        {
-            var openElements = menu.find("li.open");
-            var breadTotal = (breadcrumb.find("li").not(".btnClose").length) - 1;
-
-            $(openElements).each(function(i, vaa)
-            {
-                if (i >= breadTotal)
-                {
-                    $(this).removeClass("open");
-                }
-                openElements = menu.find("li.open");
-            });
-        }
-
-        menu.find("li>a").click(function(evt)
-        {
-            var paa = $(this).width() - evt.offsetX;
-
-            if (paa < 0)
-            {
-                evt.preventDefault();
-                $(this).closest(".ddown").addClass("open");
-                buildBreadcrumb();
-            }
-            $("#mainNavbarCollapsable").scrollTop = 0;
-            $("#mainNavbarCollapsable").animate({scrollTop: 0}, "fast");
-        });
-
-        buildBreadcrumb();
 
         $(window).scroll(function()
         {
