@@ -1,26 +1,52 @@
 # Release Notes für Ceres
 
-## v1.3.0 (unknown)
+## v1.x.x (unknown)
+
+### Hinzugefügt
+
+- Caching für die Side- und Top-Navigation wurde hinzugefügt
 
 ### Behoben
 
-- Die Autocompletion setzt nun die Nr in das richtige Input.
-- Es wurde ein Fehler in der Berechnung des Rabattes behoben.
+- Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder ausgeliefert.
+- Die Seitennavigation zeigt nun wieder alle Kategorien an.
 
 ### Geändert
 
-- Das Modal zur Anzeige der Versandkosten beinhaltet jetzt das Template der jeweiligen Kategorie.
+- Die Suche wird nun mit einer "UND"-Logik ausgeführt. (Vorher wurden alle Wörter mit "ODER" verkettet)
+- Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
+
+## v1.2.10 (2017-07-05)
+
+### Hinzugefügt
+
+- Komplexe Sortierungen von Artikeln sind in Kategorieansicht und Suche über die Einstellung **Empfohlen** möglich. Bis zu drei Sortierwerte können im Tab **Pagination and Sorting** in der Konfiguration von Ceres verkettet werden. Bei aktiver Sortiereinstellung **Recommended** wird im Webshop die empfohlene Sortierung angezeigt.
+- Das Design für die Liste der Zahlungsarten in der Kaufabwicklung und beim Ändern der Zahlungsart im **Mein Konto**-Bereich wurde geändert. Eine Zahlungsart kann nun auch einen externen Link anzeigen.
+- Der Template-Container `ExtendOverlayButtons` wurde auf dem Overlay des Warenkorbs hinzugefügt.
+- Der Template-Container `AdditionalContentAfterButtons` wurde auf der Login-Seite hinzugefügt.
+- Der Template-Container `ExtendOverlayButtons` wurde auf dem Overlay der Login-Seite hinzugefügt.
+
+### Geändert
+
+- Im Modal zur Anzeige von Versandkosteninformationen wird nun der Inhalt aus dem Tab **Template** statt des Inhalts aus dem Tab **Beschreibung 1** der verknüpften Kategorie angezeigt. Durch diese Änderung kann nun auch Twig-Code ausgegeben werden.
+- In der Artikelansicht werden nun Preise sowie Einheiten nur noch einmal ausgegeben und zur Laufzeit aktualisiert.
+
+### Behoben
+
+- Durch einen Fehler wurde bei automatischer Befüllung des Adressformulars (Browser muss Form Autofill unterstützen) die Hausnummer nicht in das richtige Feld eingetragen.
+- Es wurde ein Fehler in der Berechnung von Rabatten behoben.
+- Durch einen Formatierungsfehler im Karussell der Vorschaubilder wurde der Rand rechts abgeschnitten. Dies wurde behoben.
+
+### Bekannte Probleme
+
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
+- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.9 (2017-06-30)
 
 ### Geändert
 
 - Das Design für die Liste der Zahlungsarten in der Kaufabwicklung wurde geändert. Eine Zahlungsart kann nun auch eine Kurzbeschreibung anzeigen.
-
-### Bekannte Probleme
-
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.8 (2017-06-29)
 

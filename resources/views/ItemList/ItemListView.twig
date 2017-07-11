@@ -12,7 +12,12 @@
     {% set itemsPerPage = request.get("items") %}
 {% endif %}
 
-{% set sorting = config("Ceres.sort.defaultSorting") %}
+{% if services.template.isSearch() %}
+    {% set sorting = config("Ceres.sort.defaultSortingSearch") %}
+{% else %}
+    {% set sorting = config("Ceres.sort.defaultSorting") %}
+{% endif %}
+
 {% if request.get("sorting") %}
     {% set sorting = request.get("sorting") %}
 {% endif %}

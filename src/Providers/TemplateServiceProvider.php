@@ -70,7 +70,6 @@ class TemplateServiceProvider extends ServiceProvider
 
         $eventDispatcher->listen('IO.init.templates', function (Partial $partial){
 
-            pluginApp(Container::class)->register('Ceres::Homepage.DefaultHomepage.twig', HomepageCacheSettings::class);
             pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.NavigationList.twig', NavigationCacheSettings::class);
             pluginApp(Container::class)->register('Ceres::PageDesign.Partials.Header.SideNavigation.twig', SideNavigationCacheSettings::class);
 
