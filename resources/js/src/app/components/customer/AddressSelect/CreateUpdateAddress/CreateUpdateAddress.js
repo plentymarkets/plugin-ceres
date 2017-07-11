@@ -38,7 +38,7 @@ Vue.component("create-update-address", {
                     {
                         this.saveAddress();
                     })
-                    .fail(() =>
+                    .fail(invalidFields =>
                     {
                         ValidationService.markInvalidFields(invalidFields, "error");
                     });
@@ -47,7 +47,7 @@ Vue.component("create-update-address", {
             else if (this.addressType === "2")
             {
                 ValidationService.validate($("#delivery_address_form"))
-                    .done(() =>
+                    .done(invalidFields =>
                     {
                         this.saveAddress();
                     })
