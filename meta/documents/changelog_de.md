@@ -8,11 +8,13 @@
 
 ### Behoben
 
+- Die Category List ansicht wurde für Mobile Geräte überarbeitet.
 - Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder ausgeliefert.
 - Die Seitennavigation zeigt nun wieder alle Kategorien an.
 
 ### Geändert
 
+- Der "In den Warenkorb"-Button auf der Category List hat ein neues styling bekommen, um moderner zu wirken.
 - Die Suche wird nun mit einer "UND"-Logik ausgeführt. (Vorher wurden alle Wörter mit "ODER" verkettet)
 - Das Suche Icon im Header ändert sich nun zu einem "x", um dem Benutzer eindeutiger zu zeigen wie man die Suche wieder schließt.
 - Die Mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
