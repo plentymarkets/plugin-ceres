@@ -29,6 +29,12 @@ Vue.component("payment-provider-select", {
         this.initDefaultPaymentProvider();
     },
 
+    /*
+    * if ($(".method-list input:checked[name=\"MethodOfPaymentID\"]").length === 0)
+     {
+     $(".method-list input[name=\"MethodOfPaymentID\"]")[0].checked = true;
+     }*/
+
     methods: {
         /**
          * Event when changing the payment provider
@@ -53,7 +59,7 @@ Vue.component("payment-provider-select", {
         initDefaultPaymentProvider: function()
         {
             // todo get entry from config | select first payment provider
-            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
+            if (this.checkout.methodOfPaymentId === 0 && this.checkout.paymentDataList.length > 0)
             {
                 this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
 

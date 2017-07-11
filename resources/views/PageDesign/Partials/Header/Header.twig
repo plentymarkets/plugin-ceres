@@ -81,7 +81,7 @@
                         <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
                         <hr>
                     </div>
-                    <shipping-country-select template="#vue-shipping-country-select" country-flag-prefix="flag-icon-"/>
+                    <shipping-country-select template="#vue-shipping-country-select" country-flag-prefix="flag-icon-" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
                 </div>
             </div>
         </div>
