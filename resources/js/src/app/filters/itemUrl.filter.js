@@ -5,22 +5,17 @@ Vue.filter("itemURL", function(item)
 
     let link = "/";
 
-    if (urlPath && urlPath.length > 0)
+    if (urlPath && urlPath.length)
     {
         link += urlPath;
+
+        link += enableOldUrlPattern ? "/" : "_";
     }
 
     if (enableOldUrlPattern)
     {
-        return link + "/a-" + item.item.id;
+        return link + "a-" + item.item.id;
     }
 
-    else if (link === "/")
-    {
-        return link + item.item.id + "_" + item.variation.id;
-    }
-    else
-    {
-        return link + "_" + item.item.id + "_" + item.variation.id;
-    }
+    return link + item.item.id + "_" + item.variation.id;
 });
