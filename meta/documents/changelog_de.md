@@ -8,18 +8,20 @@
 
 ### Geändert
 
+- Der "In den Warenkorb"-Button auf der Category List hat ein neues styling bekommen, um moderner zu wirken.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen nicht mehr abgeschnitten.
 - Die Suche wird nun mit einer **UND**-Logik ausgeführt und ersetzt damit die vorherige **ODER**-Suche.
 - Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen wie man die Suche wieder schließt.
 - Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
 
 ### Behoben
 
+- Die Category List ansicht wurde für Mobile Geräte überarbeitet.
 - Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder im Webshop angezeigt.
 - Die Seitennavigation zeigt nun wieder alle Kategorien sämtlicher Ebenen an.
 
 ### Bekannte Probleme
 
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.10 (2017-07-05)
