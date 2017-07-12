@@ -8,7 +8,7 @@
     {
         "tab"       : "Global",
         "key"       : "global.enableOldUrlPattern",
-        "label"     : "Enable Callisto route pattern for articles",
+        "label"     : "Enable Callisto route pattern for items",
         "type"      : "checkbox",
         "default"   : "false"
     },
