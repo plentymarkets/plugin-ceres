@@ -13,6 +13,7 @@
 - Die Suche wird nun mit einer **UND**-Logik ausgeführt und ersetzt damit die vorherige **ODER**-Suche.
 - Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen wie man die Suche wieder schließt.
 - Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
+- Das Addressfeld 2 wurde bei der UK Addresseingabe als Default hinzugefügt.
 
 ### Behoben
 
