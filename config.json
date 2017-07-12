@@ -366,7 +366,7 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.cross_selling_type",
-        "label"             : "Cross-Selling: Cross-Selling type",
+        "label"             : "Cross-selling: Cross-selling relation",
         "type"              : "dropdown",
         "possibleValues"    :
         {
@@ -380,12 +380,12 @@
     {
         "tab"       : "Item lists",
         "key"       : "item.lists.1.list_type",
-        "label"     : "1. Select a list to show",
+        "label"     : "First item list",
         "type"      : "dropdown",
         "possibleValues"    :
         {
             "last_seen"     : "Last seen",
-            "cross_selling" : "Cross-Selling",
+            "cross_selling" : "Cross-selling",
             "tag_list"      : "Tags"
         },
         "default"           : "last_seen"
@@ -393,19 +393,19 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.1.tag_ids",
-        "label"             : "1. Tags: Tag ID's",
+        "label"             : "List of IDs of tags to display in the first item list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
     {
         "tab"       : "Item lists",
         "key"       : "item.lists.2.list_type",
-        "label"     : "2. Select a list to show",
+        "label"     : "Second item list",
         "type"      : "dropdown",
         "possibleValues"    :
         {
             "last_seen"     : "Last seen",
-            "cross_selling" : "Cross-Selling",
+            "cross_selling" : "Cross-selling",
             "tag_list"      : "Tags"
         },
         "default"           : "cross_selling"
@@ -413,19 +413,19 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.2.tag_ids",
-        "label"             : "2. Tags: Tag ID's",
+        "label"             : "List of IDs of tags to display in the second item list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
     {
         "tab"       : "Item lists",
         "key"       : "item.lists.3.list_type",
-        "label"     : "3. Select a list to show",
+        "label"     : "Third item list",
         "type"      : "dropdown",
         "possibleValues"    :
         {
             "last_seen"     : "Last seen",
-            "cross_selling" : "Cross-Selling",
+            "cross_selling" : "Cross-selling",
             "tag_list"      : "Tags"
         },
         "default"           : "tag_list"
@@ -433,7 +433,7 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.3.tag_ids",
-        "label"             : "3. Tags: Tag ID's",
+        "label"             : "List of IDs of tags to display in the third item list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
