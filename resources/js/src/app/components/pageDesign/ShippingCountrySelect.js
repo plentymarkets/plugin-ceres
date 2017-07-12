@@ -1,10 +1,12 @@
 var ResourceService = require("services/ResourceService");
+var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-country-select", {
 
     props: [
         "countryFlagPrefix",
-        "template"
+        "template",
+        "selectable"
     ],
 
     data: function()
@@ -26,5 +28,18 @@ Vue.component("shipping-country-select", {
 
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
+    },
+
+    methods:
+    {
+        setShippingCountry: function(id)
+        {
+            if (!this.selectable)
+            {
+                this.localization.currentShippingCountryId = id;
+                CheckoutService.setShippingCountryId(id);
+            }
+        }
     }
 });
+

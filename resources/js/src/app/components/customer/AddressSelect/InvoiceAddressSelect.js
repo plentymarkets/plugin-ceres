@@ -42,6 +42,10 @@ Vue.component("invoice-address-select", {
         {
             this.$refs.invoiceAddressSelect.showInitialAddModal();
         }
+        else
+        {
+            this.addressChanged(this.addressList[0]);
+        }
     },
 
     methods:

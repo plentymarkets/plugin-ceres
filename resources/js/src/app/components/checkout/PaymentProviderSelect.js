@@ -29,6 +29,28 @@ Vue.component("payment-provider-select", {
         this.initDefaultPaymentProvider();
     },
 
+    watch:
+    {
+        checkout: function()
+        {
+            var paymentExist = false;
+
+            for (var i in this.checkout.paymentDataList)
+            {
+                if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId)
+                {
+                    paymentExist = true;
+                }
+            }
+
+            if (!paymentExist)
+            {
+                this.checkout.methodOfPaymentId = 0;
+                this.initDefaultPaymentProvider();
+            }
+        }
+    },
+
     methods: {
         /**
          * Event when changing the payment provider
