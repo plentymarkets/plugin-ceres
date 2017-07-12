@@ -11,7 +11,7 @@
   "salesPrices.type",
   "item.id",
   "texts*",
-  "tags.names.name",
+  "tags*",
   "variation.id",
   "variation.availability.names.name",
   "variation.availability.id",
