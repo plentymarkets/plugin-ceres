@@ -1,0 +1,9 @@
+<script type="x/template" id="vue-mobile-breadcrumbs">
+
+    <li @click="navigateToHome" class="breadcrumb-item">
+        <i class="fa fa-home" aria-hidden="true"></i>
+    </li>
+
+    <li v-for="breadcrumb in breadcrumbs | orderBy 'level'" class="breadcrumb-item" v-render-category="breadcrumb">${ breadcrumb.details[0].name }</li>
+
+</script>
