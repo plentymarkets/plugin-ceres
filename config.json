@@ -392,6 +392,20 @@
     },
     {
         "tab"               : "Item lists",
+        "key"               : "item.lists.1.de.tag_list_name",
+        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.1.en.tag_list_name",
+        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists",
         "key"               : "item.lists.1.tag_ids",
         "label"             : "List of IDs of tags to display in the first item list",
         "type"              : "text",
@@ -412,6 +426,20 @@
     },
     {
         "tab"               : "Item lists",
+        "key"               : "item.lists.2.de.tag_list_name",
+        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.2.en.tag_list_name",
+        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists",
         "key"               : "item.lists.2.tag_ids",
         "label"             : "List of IDs of tags to display in the second item list",
         "type"              : "text",
@@ -429,6 +457,20 @@
             "tag_list"      : "Tags"
         },
         "default"           : "tag_list"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.3.de.tag_list_name",
+        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists",
+        "key"               : "item.lists.3.en.tag_list_name",
+        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "type"              : "text",
+        "default"           : "EN name"
     },
     {
         "tab"               : "Item lists",
