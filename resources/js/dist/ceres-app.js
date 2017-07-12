@@ -113,17 +113,19 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable"],
+    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale"],
 
     data: function data() {
         return {
             quantity: 1
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
+
+        this.useLargeScale = this.useLargeScale || false;
     },
+
 
     methods: {
         /**
@@ -139,10 +141,10 @@ Vue.component("add-to-basket", {
 
             this.openAddToBasketOverlay();
         },
-
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
         },
+
 
         /**
          * open the AddItemToBasketOverlay
@@ -155,6 +157,7 @@ Vue.component("add-to-basket", {
 
             ResourceService.getResource("basketItem").set(currentBasketObject);
         },
+
 
         /**
          * update the property quantity of the current instance
@@ -172,7 +175,6 @@ Vue.component("add-to-basket", {
         variationId: function variationId() {
             return this.item.variation.id;
         },
-
         hasChildren: function hasChildren() {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         }
