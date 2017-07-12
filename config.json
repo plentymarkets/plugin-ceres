@@ -393,14 +393,14 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.1.de.tag_list_name",
-        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "label"             : "Name of the first item list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.1.en.tag_list_name",
-        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "label"             : "Name of the first item list (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
@@ -427,14 +427,14 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.2.de.tag_list_name",
-        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "label"             : "Name of the second item list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.2.en.tag_list_name",
-        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "label"             : "Name of the second item list (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
@@ -461,14 +461,14 @@
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.3.de.tag_list_name",
-        "label"             : "(DE) Name of list of tags to display above the third item list",
+        "label"             : "Name of the third item list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists",
         "key"               : "item.lists.3.en.tag_list_name",
-        "label"             : "(EN) Name of list of tags to display above the third item list",
+        "label"             : "Name of the third item list (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
