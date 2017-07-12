@@ -22,17 +22,17 @@
     [
         {
             "key":"Ceres\\Containers\\CeresItemListContainer1",
-            "name":"Itemlist Container 1",
+            "name":"First item list",
             "description":"Display a configurable list of items in your online store"
         },
         {
             "key":"Ceres\\Containers\\CeresItemListContainer2",
-            "name":"Itemlist Container 2",
+            "name":"Second item list",
             "description":"Display a configurable list of items in your online store"
         },
         {
             "key":"Ceres\\Containers\\CeresItemListContainer3",
-            "name":"Itemlist Container 3",
+            "name":"Third item list",
             "description":"Display a configurable list of items in your online store"
         }
     ],
