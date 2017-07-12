@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-xs-12 col-lg-12">
             {% if itemList | length > 4 %}
-                <div id="list-carousel-{{ randomIdentifier }}" class="owl-carousel owl-theme owl-single-item">      
+                <div id="list-carousel-{{ randomIdentifier }}" class="list-item-carousel owl-carousel owl-theme owl-single-item">      
                     {% for item in itemList %}    
                             {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false, 'tags': item.data.tags } %} 
                     {% endfor %}
