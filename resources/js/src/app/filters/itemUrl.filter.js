@@ -1,11 +1,26 @@
 Vue.filter("itemURL", function(item)
 {
-    var urlPath = item.texts.urlPath;
+    const enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
+    const urlPath = item.texts.urlPath;
+
+    let link = "/";
 
     if (urlPath && urlPath.length > 0)
     {
-        return "/" + urlPath + "_" + item.item.id + "_" + item.variation.id;
+        link += urlPath;
     }
 
-    return "/" + item.item.id + "_" + item.variation.id;
+    if (enableOldUrlPattern)
+    {
+        return link + "/a-" + item.item.id;
+    }
+
+    else if (link === "/")
+    {
+        return link + item.item.id + "_" + item.variation.id;
+    }
+    else
+    {
+        return link + "_" + item.item.id + "_" + item.variation.id;
+    }
 });
