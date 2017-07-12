@@ -5,6 +5,7 @@
 ### Hinzugefügt
 
 - Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
+- Es wurde ein neuer Wert in die Konfiguration hinzugefügt, damit Artikel URLs wie in Callisto aufgebaut sind.
 
 ### Geändert
 
