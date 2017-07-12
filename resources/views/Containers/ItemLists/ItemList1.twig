@@ -21,7 +21,7 @@
         {% elseif listType == "cross_selling" %}
             {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
 		{% elseif listType == "tag_list" %}
-			{{ itemList[0].data.tags[0].names.name }}
+            {{ config("Ceres.item.lists.1." ~ services.sessionStorage.getLang() ~ ".tag_list_name") }}
         {% endif %}
     </h1>
 
