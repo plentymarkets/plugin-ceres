@@ -875,7 +875,7 @@
         "billing_address.title"     : "Title"
 
       },
-      "default"                   : "billing_address.name1, billing_address.salutation"
+      "default"                   : "billing_address.name1, billing_address.address2, billing_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
