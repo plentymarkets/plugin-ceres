@@ -6,6 +6,27 @@
     background-color: #fff;
     margin-bottom: $grid-gutter-width/2;
 
+    .tag-list span{
+        background-color: #4D4F4D;
+        text-transform: uppercase;
+    }
+
+    .prices{
+        display: flex;
+    }
+
+    .crossprice{
+        font-size: 1rem;
+    }
+
+    .price-view-port{
+        flex: 1 0 0;
+    }
+
+    .thumb-title{
+        min-height: 32px;
+    }
+
     .add-to-basket-lg-container{
         -webkit-transform: rotate(360deg);
         border-style: solid;
@@ -15,12 +36,14 @@
         z-index: 99;
         top: 0;
         right: 0;
+        transition: 300ms ease-out;
         cursor: pointer;
 
         & > i{
             right: -56px;
             top: 11px;
-            position: absolute
+            position: absolute;
+            transition: 300ms ease-out;
         }
 
         &:hover{
@@ -188,10 +211,6 @@
             width: 100%;
         }
 
-        .prices{
-            min-height: 60px;
-        }
-
         .mobile-text-only{
             display: inline;
             margin-left: -8px;
@@ -203,10 +222,6 @@
 
         .mobile-icon-right {
             float: right;
-        }
-
-        .thumb-content {
-            margin-bottom: 40px;
         }
 
         .thumb-title {
