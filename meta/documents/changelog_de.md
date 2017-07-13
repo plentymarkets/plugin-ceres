@@ -6,21 +6,29 @@
 
 - In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Titel** hinzugefügt.
 - Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
+- Es wurde ein neuer Wert in die Konfiguration hinzugefügt, damit Artikel URLs wie in Callisto aufgebaut sind.
 
 ### Geändert
 
+- Der "In den Warenkorb"-Button auf der Category List hat ein neues styling bekommen, um moderner zu wirken.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen nicht mehr abgeschnitten.
 - Die Suche wird nun mit einer **UND**-Logik ausgeführt und ersetzt damit die vorherige **ODER**-Suche.
 - Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen wie man die Suche wieder schließt.
 - Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
+- Das Addressfeld 2 wurde bei der UK Addresseingabe als Default hinzugefügt.
+- Im Checkout wird default/initial die erste Adresse aus der Adressliste hinzugefügt.
+- Im Checkout wird das Lieferland anhand der Lieferadresse gesetzt.
+- Im Checkout kann man im Menü das Lieferland nicht mehr manuel setzen.
 
 ### Behoben
 
+- Die Category List ansicht wurde für Mobile Geräte überarbeitet.
 - Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder im Webshop angezeigt.
 - Die Seitennavigation zeigt nun wieder alle Kategorien sämtlicher Ebenen an.
+- Bei wechsel der Lieferadresse im Checkout wird die nächst zulassige Zahlungsart ausgewählt.
 
 ### Bekannte Probleme
 
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen abgeschnitten und nicht umgebrochen.
 - Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
 
 ## v1.2.10 (2017-07-05)
