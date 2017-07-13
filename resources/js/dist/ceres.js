@@ -1820,7 +1820,7 @@ Vue.component("invoice-address-select", {
     ready: function ready() {
         if (App.isCheckoutView && this.addressList.length <= 0) {
             this.$refs.invoiceAddressSelect.showInitialAddModal();
-        } else {
+        } else if (this.addressList.length) {
             this.addressChanged(this.addressList[0]);
         }
     },
