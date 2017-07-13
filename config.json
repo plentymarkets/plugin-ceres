@@ -6,6 +6,13 @@
         "type"      : "category_select"
     },
     {
+        "tab"       : "Global",
+        "key"       : "global.enableOldUrlPattern",
+        "label"     : "Enable Callisto route pattern for items",
+        "type"      : "checkbox",
+        "default"   : "false"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
@@ -875,7 +882,7 @@
         "billing_address.address4"  : "Address 4"
 
       },
-      "default"                   : "billing_address.name1, billing_address.salutation"
+      "default"                   : "billing_address.name1, billing_address.address2, billing_address.salutation"
     },
     {
       "tab"                       : "Checkout and My account",
