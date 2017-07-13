@@ -544,6 +544,7 @@ Vue.component("payment-provider-select", {
         };
     },
 
+
     /**
      * Initialise the event listener
      */
@@ -557,6 +558,7 @@ Vue.component("payment-provider-select", {
 
         this.initDefaultPaymentProvider();
     },
+
 
     watch: {
         checkout: function checkout() {
@@ -580,17 +582,17 @@ Vue.component("payment-provider-select", {
          * Event when changing the payment provider
          */
         onPaymentProviderChange: function onPaymentProviderChange() {
+            var _this = this;
+
             ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: this.checkout.methodOfPaymentId }));
-            }.bind(this));
+                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.checkout.methodOfPaymentId }));
+            });
 
             this.validate();
         },
-
         validate: function validate() {
             this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
         },
-
         initDefaultPaymentProvider: function initDefaultPaymentProvider() {
             // todo get entry from config | select first payment provider
             if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0) {
@@ -1421,11 +1423,13 @@ Vue.component("invoice-address-select", {
          * @param selectedAddress
          */
         addressChanged: function addressChanged(selectedAddress) {
+            var _this = this;
+
             this.checkout.billingAddressId = selectedAddress.id;
 
             ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.checkout.billingAddressId }));
-            }.bind(this));
+                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this.checkout.billingAddressId }));
+            });
 
             if (this.hasToValidate) {
                 this.validate();
@@ -1454,6 +1458,7 @@ Vue.component("shipping-address-select", {
         };
     },
 
+
     /**
      * Initialise the event listener
      */
@@ -1477,16 +1482,19 @@ Vue.component("shipping-address-select", {
         }
     },
 
+
     methods: {
         /**
          * Update the delivery address
          * @param selectedAddress
          */
         addressChanged: function addressChanged(selectedAddress) {
+            var _this = this;
+
             this.checkout.deliveryAddressId = selectedAddress.id;
             ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.checkout.deliveryAddressId }));
-            }.bind(this));
+                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.checkout.deliveryAddressId }));
+            });
         }
     }
 });
@@ -3599,7 +3607,6 @@ Vue.component("shipping-country-select", {
             localization: {}
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
 
@@ -3611,6 +3618,7 @@ Vue.component("shipping-country-select", {
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
     },
+
 
     methods: {
         setShippingCountry: function setShippingCountry(id) {
