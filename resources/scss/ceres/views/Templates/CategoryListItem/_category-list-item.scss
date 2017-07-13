@@ -9,6 +9,7 @@
     .tag-list span{
         background-color: #4D4F4D;
         text-transform: uppercase;
+        cursor: default;
     }
 
     .prices{
@@ -164,6 +165,7 @@
         line-height: 1.1;
         font-weight: 700;
         font-size: 1.2rem;
+        min-height: 21px;
     }
 
     .thumb-buy{

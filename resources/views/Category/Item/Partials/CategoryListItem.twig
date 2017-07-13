@@ -113,15 +113,16 @@
                 <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </span>
 
-            <div class="m-t-1 tag-list">
-                {% if tags > 0 %}
+            
+            {% if tags > 0 %}
+                <div class="m-t-1 tag-list">
                     {% for tag in tags %}
                         <span class="tag bg-black">
                             {{ tag.names.name }}
                         </span>
                     {% endfor %}
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
         <!-- ./ITEM DETAILS  -->
     </div>
