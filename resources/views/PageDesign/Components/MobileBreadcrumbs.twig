@@ -4,6 +4,9 @@
         <i class="fa fa-home" aria-hidden="true"></i>
     </li>
 
-    <li v-for="breadcrumb in breadcrumbs | orderBy 'level'" class="breadcrumb-item" v-render-category="breadcrumb">${ breadcrumb.details[0].name }</li>
+    <li v-for="breadcrumb in breadcrumbs | orderBy 'level'" class="breadcrumb-item" v-render-category="breadcrumb">
+        <label v-if="breadcrumb.details">${ breadcrumb.details[0].name }</label>
+        <label v-else>${ breadcrumb.name1 }</label>
+    </li> 
 
 </script>
