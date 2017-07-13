@@ -27,7 +27,7 @@
 {% set lang         = services.sessionStorage.getLang() %}
 
 {% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}
-    {% set categories = services.category.getNavigationTree("item", lang) %}
+    {% set categories = services.category.getNavigationTree("item", lang, 6) %}
 {% endif %}
 
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}

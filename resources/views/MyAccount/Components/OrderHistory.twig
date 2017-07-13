@@ -88,51 +88,6 @@
 
                     <hr>
 
-                    <!-- ORDER HISTORY -->
-                    {#<div class="order-list">#}
-                        {#<article class="cmp cmp-order-item" v-for="entry in orderList.entries">#}
-
-                            {#<div class="item-details small">#}
-
-                                {#<div class="item-name">#}
-                                    {#<h5>{{ trans("Ceres::Template.orderId") }} ${ entry.order.id }</h5>#}
-                                {#</div>#}
-
-                                {#<div class="row">#}
-                                    {#<div class="col-xs-12 col-md-8">#}
-                                        {#<div class="row">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>#}
-                                            {#<span class="col-xs-6 col-sm-7">${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>#}
-                                        {#</div>#}
-                                        {#<div class="row my-account-no-line">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>#}
-                                            {#<span class="col-xs-6 col-sm-7">${ entry.order.statusName }</span>#}
-                                        {#</div>#}
-                                        {#<div class="row">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>#}
-                                            {#<span class="col-xs-6 col-sm-7">${ entry.paymentMethodName }</span>#}
-                                        {#</div>#}
-                                        {#<div class="row">#}
-                                            {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>#}
-                                            {#<span class="col-xs-6 col-sm-7">#}
-                                                {#${ getPaymentStateText(entry.order.properties) }#}
-                                            {#</span>#}
-                                        {#</div>#}
-
-                                        {#{{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation") }}#}
-                                    {#</div>#}
-
-                                    {#<div class="col-xs-12 col-md-4">#}
-                                        {#<button class="btn btn-primary btn-block" @click="setCurrentOrder(entry)">{{ trans("Ceres::Template.orderDetails") }}</button>#}
-                                        {#<change-payment-method template="#vue-change-payment-method" :current-order.sync="entry" allowed-payment-methods="{{ allowedPaymentMethods | json_encode() }}"></change-payment-method>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-
-                        {#</article>#}
-                    {#</div>#}
-                    <!-- ./ORDER HISTORY -->
-
                     <!-- ORDER HISTORY TWIG -->
                     <div class="order-list">
                         {% for entry in orderList %}
@@ -172,8 +127,6 @@
                                                     {% endfor %}
                                                 </span>
                                             </div>
-
-                                            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
                                         </div>
 
                                         <div class="col-xs-12 col-md-4">
@@ -183,6 +136,7 @@
                                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
                                                                     :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}">
                                             </change-payment-method>
+                                            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
                                         </div>
                                     </div>
                                 </div>

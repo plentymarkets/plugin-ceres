@@ -21,9 +21,19 @@
     "dataProviders"     :
     [
         {
-            "key":"Ceres\\Containers\\CeresLastSeenContainer",
-            "name":"Last seen items",
-            "description":"Display a list of last seen items in your online store"
+            "key":"Ceres\\Containers\\CeresItemListContainer1",
+            "name":"First item list",
+            "description":"Display a configurable list of items in your online store"
+        },
+        {
+            "key":"Ceres\\Containers\\CeresItemListContainer2",
+            "name":"Second item list",
+            "description":"Display a configurable list of items in your online store"
+        },
+        {
+            "key":"Ceres\\Containers\\CeresItemListContainer3",
+            "name":"Third item list",
+            "description":"Display a configurable list of items in your online store"
         }
     ],
     "containers"        :
@@ -254,6 +264,11 @@
             "description"   : "Add content after the 'Checkout' button in the shopping cart."
         },
         {
+            "key"           : "Basket.ExtendOverlayButtons",
+            "name"          : "Shopping cart overlay: Extend buttons",
+            "description"   : "Add additional content to the 'add to basket overlay' buttons."
+        },
+        {
             "key"           : "BasketPreview.BeforeCheckoutButton",
             "name"          : "Shopping cart preview: Before \"Checkout\" button",
             "description"   : "Add content before the 'Checkout' button in the shopping cart preview."
@@ -413,6 +428,16 @@
             "key"           : "CategoryItem.SideNavBarBottom",
             "name"          : "Category item list: Container below side navigation",
             "description"   : "Add content below the side navigation bar in the category item view."
+        },
+        {
+            "key"           : "Login.AdditionalContentAfterButtons",
+            "name"          : "Login: Container below the buttons",
+            "description"   : "Add content below the buttons in the login view."
+        },
+        {
+            "key"           : "LoginOverlay.ExtendOverlayButtons",
+            "name"          : "Login overlay: Container in a row with the buttons",
+            "description"   : "Add content in the login overlay."
         }
     ]
 }

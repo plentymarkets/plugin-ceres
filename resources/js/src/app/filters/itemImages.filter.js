@@ -3,7 +3,7 @@ Vue.filter("itemImages", function(images, accessor)
     var imageUrls = [];
     var imagesAccessor = "all";
 
-    if (images.variation.length)
+    if (images.variation && images.variation.length)
     {
         imagesAccessor = "variation";
     }

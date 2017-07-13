@@ -1,15 +1,65 @@
 # Release Notes for Ceres
 
+## v1.3.0 (2017-07-13)
+
+### Added
+
+- Item lists provided by Ceres are now loaded dynamically and each list can be set independently.
+- Items can now be displayed in item lists with the help of tags.
+- Cross-selling items can now be displayed in item lists (only available in the single item view).
+- The **Title** field has been added to the address forms of the delivery countries DE and UK.
+- Caching has been implemented for the side navigation and the top navigation.
+- It is now possible to change the pattern of item URLs to match the pattern of the old online store (e.g. Callisto 3.5). To do so, activate the **Enable Callisto route pattern for items** setting in the **Global** tab of the Ceres configuration.
+
+### Changed
+
+- The design of the **Add to shopping cart** button in the category view has been changed.
+- The online store search will now use the **AND** operator. This replaces the **OR** search that was previously used.
+- The search icon in the header will now switch to an **X** when clicking the search to help the customer with closing the current search.
+- The mobile navigation has been refactored. Using the mobile navigation is now easier than before due to a larger button for opening sub-categories.
+- The address field 2 is now a default field of the address form of the delivery country UK.
+- The first address in the address list will now be displayed by default in the checkout.
+- The delivery country will now be set automatically based on the delivery address in the checkout.
+- On the checkout page, the delivery country cannot be changed in the header menu anymore.
+- The category view has been refactored for mobile devices.
+
+### Fixed
+
+- Only those item images activated for a client will be displayed in the respective online store.
+- The side navigation now displays the categories on every level again.
+- When changing the delivery country in the checkout, the first allowed payment method will now be selected automatically.
+- The name of an item displayed in the category view or an item list is not "cut off" after 35 characters and now wrapped.
+
+### Known issues
+
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
+## v1.2.10 (2017-07-05)
+
+### Added
+
+- It is now possible to set up complex item sorting for the category view and the search by using the recommended sorting options. Up to three sorting values can be concatenated in th **Pagination and Sorting** tab of the Ceres configuration. With the sorting option **Recommended** enabled, recommended sorting will be displayed in the online store.
+- The design of the list of payment methods displayed in the checkout and in the overlay when changing a payment method in the **My Account** area has been updated. An external link can now be displayed by a payment plugin.
+- The template container `ExtendOverlayButtons` has been added to the shopping cart overlay.
+- The template container `AdditionalContentAfterButtons` has been added to the login page.
+- The template container `ExtendOverlayButtons` has been added to the overlay of the login page.
+
+### Changed
+
+- Instead of the **Description 1** tab, the content of the **Template** tab of a category is now used for displaying shipping information in a modal in the online store. Due to this change Twig code can also be rendered.
+- Prices and units are only displayed once in the single item view and updated dynamically.
+
+### Fixed
+
+- Due to an error the **House No.** field was not auto-filled (Auto-fill support of the browser required) correctly in the German address form. This has been fixed.
+- An error occurred when calculating discounts. This has been fixed.
+- Due to a formatting error in the image carousel for preview images, the right border was not visible. This has been fixed.
+
 ## v1.2.9 (2017-06-30)
 
 ### Changed
 
 - The design of the list of payment methods in the checkout has been changed. A payment method can now also display a short description.
-
-### Known issues
-
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.8 (2017-06-29)
 

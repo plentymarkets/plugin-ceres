@@ -1,13 +1,13 @@
 [
   "itemId",
   "id",
-
   "item.id",
   "item.manufacturer.externalName",
   "item.documents.data",
   "item.ageRestriction",
   "item.customsTariffNumber",
   "item.producingCountryId",
+  "item.storeSpecial",
 
   "variation.id",
   "variation.name",
@@ -33,15 +33,18 @@
   "unit.names.lang",
 
   "images.all.url",
+  "images.all.urlMiddle",
   "images.all.urlPreview",
   "images.all.position",
+  "images.all.path",
   "images.variation.url",
   "images.variation.urlPreview",
   "images.variation.position",
+  "images.variation.path",
 
   "properties.group.backendName",
   "properties.property.names.name",
   "properties.property.names.lang",
-
+  
   "defaultCategories"
 ]

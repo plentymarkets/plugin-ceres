@@ -28,7 +28,7 @@
     {% else %}
         {% block ThemeHomepage %}
 
-            {{ includeCached('Ceres::Homepage.DefaultHomepage.twig') }}
+            {% include 'Ceres::Homepage.DefaultHomepage.twig' %}
 
         {% endblock %}
 

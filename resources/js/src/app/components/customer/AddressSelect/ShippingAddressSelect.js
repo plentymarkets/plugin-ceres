@@ -1,17 +1,17 @@
-var ResourceService = require("services/ResourceService");
+const ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select ref=\"shippingAddressSelect\" template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: [
         "addressList",
         "selectedAddressId"
     ],
 
-    data: function()
+    data()
     {
         return {
             checkout: {}
@@ -21,7 +21,7 @@ Vue.component("shipping-address-select", {
     /**
      * Initialise the event listener
      */
-    created: function()
+    created()
     {
         ResourceService.bind("checkout", this);
 
@@ -49,15 +49,15 @@ Vue.component("shipping-address-select", {
          * Update the delivery address
          * @param selectedAddress
          */
-        addressChanged: function(selectedAddress)
+        addressChanged(selectedAddress)
         {
             this.checkout.deliveryAddressId = selectedAddress.id;
             ResourceService.getResource("checkout")
                 .set(this.checkout)
-                .done(function()
+                .done(() =>
                 {
                     document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", {detail: this.checkout.deliveryAddressId}));
-                }.bind(this));
+                });
         }
     }
 });
