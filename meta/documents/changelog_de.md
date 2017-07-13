@@ -1,12 +1,12 @@
 # Release Notes für Ceres
 
-## v1.x.x (unknown)
+## v1.3.0 (2017-07-13)
 
 ### Hinzugefügt
 
-- Die Artikellisten die Ceres bereitstellt sind nun dynamisch und jede Liste kann frei gesetzt werden.
-- Den Artikellisten von Ceres wurden Tags hinzugefügt.
-- Den Artikellisten von Ceres wurde Cross-selling (nur auf der Einzel Artikelanzeige verfügbar) hinzugefügt.
+- Die Artikellisten die Ceres bereitstellt, sind nun dynamisch und jede Liste kann frei gesetzt werden.
+- Artikel können nun mit Hilfe von Tags in Artikellisten dargestellt werden.
+- Cross-Selling-Artikel können nun in Artikellisten dargestellt werden (nur in der Einzelansicht eines Artikels verfügbar).
 - In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Titel** hinzugefügt.
 - Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
 - Es ist nun möglich, den Aufbau der Artikel-URLs analog zum alten Webshop (z.B. Callisto 3.5) anzupassen. Dafür muss die Einstellung **Enable Callisto route pattern for items** im Tab **Global** der Konfiguration von Ceres aktiviert werden.
