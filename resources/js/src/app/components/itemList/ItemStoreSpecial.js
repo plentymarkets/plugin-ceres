@@ -12,36 +12,37 @@ Vue.component("item-store-special", {
         "decimalCount"
     ],
 
-    data: function()
+    data()
     {
         return {
-            tagClassPrefix: "bg-",
-            localization  : {}
+            localization  : {},
+            tagClass: "",
+            label: "",
+            tagClasses:
+            {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
         };
     },
 
-    created: function()
+    created()
     {
         ResourceService.bind("localization", this);
+
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.label = this.getLabel();
     },
 
     methods: {
-        getPercentageSale: function()
-        {
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
-
-            return accounting.formatNumber(percent, this.decimalCount, "");
-        }
-    },
-
-    computed: {
-        label: function()
+        getLabel()
         {
             if (this.storeSpecial.id === 1)
             {
-                var percent = this.getPercentageSale();
+                const percent = this.getPercentageSale();
 
-                if (percent <= 0)
+                if (parseInt(percent) < 0)
                 {
                     return percent + "%";
                 }
@@ -50,17 +51,11 @@ Vue.component("item-store-special", {
             return this.storeSpecial.names.name;
         },
 
-        tagClass: function()
+        getPercentageSale()
         {
-            if (this.storeSpecial.id === 1)
-            {
-                return this.tagClassPrefix + "danger";
-            }
-            else if (this.storeSpecial.id === 2)
-            {
-                return this.tagClassPrefix + "primary";
-            }
-            return this.tagClassPrefix + "success";
+            const percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
+
+            return accounting.formatNumber(percent, this.decimalCount, "");
         }
     }
 });
