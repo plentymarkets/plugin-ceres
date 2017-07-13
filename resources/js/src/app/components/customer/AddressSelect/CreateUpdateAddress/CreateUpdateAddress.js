@@ -12,14 +12,14 @@ Vue.component("create-update-address", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             waiting: false
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -28,18 +28,17 @@ Vue.component("create-update-address", {
         /**
          * Validate the address fields
          */
-        validate: function()
+        validate()
         {
-            var self = this;
 
             if (this.addressType === "1")
             {
                 ValidationService.validate($("#billing_address_form"))
-                    .done(function()
+                    .done(() =>
                     {
-                        self.saveAddress();
+                        this.saveAddress();
                     })
-                    .fail(function(invalidFields)
+                    .fail(invalidFields =>
                     {
                         ValidationService.markInvalidFields(invalidFields, "error");
                     });
@@ -48,11 +47,11 @@ Vue.component("create-update-address", {
             else if (this.addressType === "2")
             {
                 ValidationService.validate($("#delivery_address_form"))
-                    .done(function()
+                    .done(invalidFields =>
                     {
-                        self.saveAddress();
+                        this.saveAddress();
                     })
-                    .fail(function(invalidFields)
+                    .fail(invalidFields =>
                     {
                         ValidationService.markInvalidFields(invalidFields, "error");
                     });
@@ -63,7 +62,7 @@ Vue.component("create-update-address", {
         /**
          * Save the new address or update an existing one
          */
-        saveAddress: function()
+        saveAddress()
         {
             if (this.modalType === "initial" || this.modalType === "create")
             {
@@ -78,9 +77,11 @@ Vue.component("create-update-address", {
         /**
          * Update an address
          */
-        updateAddress: function()
+        updateAddress()
         {
             this.waiting = true;
+
+            this._syncOptionTypesAddressData();
 
             AddressService
                 .updateAddress(this.addressData, this.addressType)
@@ -88,13 +89,13 @@ Vue.component("create-update-address", {
                 {
                     this.addressModal.hide();
 
-                    for (var key in this.addressList)
+                    for (const key in this.addressList)
                     {
-                        var address = this.addressList[key];
+                        const address = this.addressList[key];
 
                         if (address.id === this.addressData.id)
                         {
-                            for (var attribute in this.addressList[key])
+                            for (const attribute in this.addressList[key])
                             {
                                 this.addressList[key][attribute] = this.addressData[attribute];
                             }
@@ -114,9 +115,11 @@ Vue.component("create-update-address", {
         /**
          * Create a new address
          */
-        createAddress: function()
+        createAddress()
         {
             this.waiting = true;
+
+            this._syncOptionTypesAddressData();
 
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
@@ -135,6 +138,48 @@ Vue.component("create-update-address", {
                 {
                     this.waiting = false;
                 }.bind(this));
+        },
+
+        _syncOptionTypesAddressData()
+        {
+
+            if (typeof this.addressData.options !== "undefined")
+            {
+                for (const optionType of this.addressData.options)
+                {
+                    switch (optionType.typeId)
+                    {
+                    case 1:
+                        {
+                            if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value)
+                            {
+                                optionType.value = this.addressData.vatNumber;
+                            }
+
+                            break;
+                        }
+
+                    case 9:
+                        {
+                            if (this.addressData.birthday && this.addressData.birthday !== optionType.value)
+                            {
+                                optionType.value = this.addressData.birthday;
+                            }
+                            break;
+                        }
+
+                    case 11:
+                        {
+                            if (this.addressData.title && this.addressData.title !== optionType.value)
+                            {
+                                optionType.value = this.addressData.title;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+
         }
     }
 

@@ -25,9 +25,9 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal: "",
-            localization: {},
-            user: {}
+            deleteModal    : "",
+            localization   : {},
+            user           : {}
         };
     },
 
@@ -151,7 +151,10 @@ Vue.component("address-select", {
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
             {
-                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId        : this.localization.currentShippingCountryId
+                };
             }
             else
             {
@@ -171,7 +174,10 @@ Vue.component("address-select", {
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
             {
-                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId        : this.localization.currentShippingCountryId
+                };
             }
             else
             {
@@ -334,8 +340,7 @@ Vue.component("address-select", {
         }
     },
 
-    computed:
-    {
+    computed: {
         isAddAddressEnabled()
         {
             var isLoggedIn = this.user.isLoggedIn;
@@ -347,5 +352,25 @@ Vue.component("address-select", {
 
             return isLoggedIn || this.addressList.length < 2;
         }
+    },
+    filters : {
+
+        optionType(selectedAddress, typeId)
+        {
+            if (selectedAddress.name2)
+            {
+                for (const optionType of selectedAddress.options)
+                {
+                    if (optionType.typeId === typeId)
+                    {
+                        return optionType.value;
+                    }
+                }
+            }
+
+            return "";
+
+        }
+
     }
 });
