@@ -6,7 +6,7 @@
 
 - The **Title** field has been added to the address forms of the delivery countries DE and UK.
 - Caching has been implemented for the side navigation and the top navigation.
-- It is now possible to change the pattern of item URLs to match the pattern of the old online store (e.g. Callisto 3.5). To do so, activate the **Enable Callisto route pattern for items** in the **Global** tab of the Ceres configuration.
+- It is now possible to change the pattern of item URLs to match the pattern of the old online store (e.g. Callisto 3.5). To do so, activate the **Enable Callisto route pattern for items** setting in the **Global** tab of the Ceres configuration.
 
 ### Changed
 
