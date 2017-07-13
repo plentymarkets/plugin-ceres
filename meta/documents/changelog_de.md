@@ -4,6 +4,9 @@
 
 ### Hinzugefügt
 
+- Die Artikellisten die Ceres bereitstellt sind nun dynamisch und jede Liste kann frei gesetzt werden.
+- Den Artikellisten von Ceres wurden Tags hinzugefügt.
+- Den Artikellisten von Ceres wurde Cross-selling (nur auf der Einzel Artikelanzeige verfügbar) hinzugefügt.
 - In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Titel** hinzugefügt.
 - Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
 - Es wurde ein neuer Wert in die Konfiguration hinzugefügt, damit Artikel URLs wie in Callisto aufgebaut sind.
