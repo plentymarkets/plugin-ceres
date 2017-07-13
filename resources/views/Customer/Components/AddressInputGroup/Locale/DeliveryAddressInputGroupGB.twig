@@ -15,16 +15,6 @@
                 </div>
             </div>
         {% endif %}
-
-        {% if "delivery_address.title" in addressFields %}
-        <div class="col-xs-12 col-sm-6">
-        <div class="input-unit"
-        {% if "delivery_address.title" in addressFieldsRequired %}data-validate="text"{% endif %}>
-        <input type="text" name="title" id="txtTitle${_uid}" v-model="addressData.title">
-        <label for="txtTitle${_uid}">{{ trans("Ceres::Template.addressTitle") }}{% if "delivery_address.title" in addressFieldsRequired %}*{% endif %}</label>
-        </div>
-        </div>
-        {% endif %}
     </div>
 </div>
 
@@ -45,6 +35,17 @@
 
 <div class="col-xs-12">
     <div class="row">
+
+        {% if "delivery_address.title" in addressFields %}
+            <div class="col-xs-12 col-sm-4">
+                <div class="input-unit"
+                     {% if "delivery_address.title" in addressFieldsRequired %}data-validate="text"{% endif %}>
+                    <input type="text" name="title" id="txtTitle${_uid}" v-model="addressData.title | optionType 11">
+                    <label for="txtTitle${_uid}">{{ trans("Ceres::Template.addressTitle") }}{% if "delivery_address.title" in addressFieldsRequired %}*{% endif %}</label>
+                </div>
+            </div>
+        {% endif %}
+
         <div class="col-xs-12 col-sm-4">
             <div class="input-unit" data-validate="text">
                 <input type="text" name="firstName" id="txtFirstName${_uid}" v-model="addressData.name2">
