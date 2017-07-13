@@ -1,4 +1,4 @@
-var ResourceService = require("services/ResourceService");
+const ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
@@ -60,10 +60,10 @@ Vue.component("invoice-address-select", {
 
             ResourceService.getResource("checkout")
                 .set(this.checkout)
-                .done(function()
+                .done(() =>
                 {
                     document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {detail: this.checkout.billingAddressId}));
-                }.bind(this));
+                });
 
             if (this.hasToValidate)
             {

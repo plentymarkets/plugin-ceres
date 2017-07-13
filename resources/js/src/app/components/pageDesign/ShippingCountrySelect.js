@@ -1,5 +1,5 @@
-var ResourceService = require("services/ResourceService");
-var CheckoutService = require("services/CheckoutService");
+const ResourceService = require("services/ResourceService");
+const CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-country-select", {
 
@@ -9,22 +9,22 @@ Vue.component("shipping-country-select", {
         "selectable"
     ],
 
-    data: function()
+    data()
     {
         return {
             localization: {}
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
         ResourceService.bind("localization", this);
 
-        for (var i in this.localization.activeShippingCountries)
+        for (const i in this.localization.activeShippingCountries)
         {
-            var country = this.localization.activeShippingCountries[i];
+            const country = this.localization.activeShippingCountries[i];
 
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
@@ -32,7 +32,7 @@ Vue.component("shipping-country-select", {
 
     methods:
     {
-        setShippingCountry: function(id)
+        setShippingCountry(id)
         {
             if (!this.selectable)
             {

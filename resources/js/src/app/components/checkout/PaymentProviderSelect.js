@@ -1,4 +1,4 @@
-var ResourceService = require("services/ResourceService");
+const ResourceService = require("services/ResourceService");
 
 Vue.component("payment-provider-select", {
 
@@ -6,7 +6,7 @@ Vue.component("payment-provider-select", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             checkout: {},
@@ -17,7 +17,7 @@ Vue.component("payment-provider-select", {
     /**
      * Initialise the event listener
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
@@ -31,11 +31,11 @@ Vue.component("payment-provider-select", {
 
     watch:
     {
-        checkout: function()
+        checkout()
         {
-            var paymentExist = false;
+            let paymentExist = false;
 
-            for (var i in this.checkout.paymentDataList)
+            for (const i in this.checkout.paymentDataList)
             {
                 if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId)
                 {
@@ -55,24 +55,24 @@ Vue.component("payment-provider-select", {
         /**
          * Event when changing the payment provider
          */
-        onPaymentProviderChange: function()
+        onPaymentProviderChange()
         {
             ResourceService.getResource("checkout")
                 .set(this.checkout)
-                .done(function()
+                .done(() =>
                 {
                     document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.checkout.methodOfPaymentId}));
-                }.bind(this));
+                });
 
             this.validate();
         },
 
-        validate: function()
+        validate()
         {
             this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
         },
 
-        initDefaultPaymentProvider: function()
+        initDefaultPaymentProvider()
         {
             // todo get entry from config | select first payment provider
             if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
