@@ -329,6 +329,9 @@ Customise the display options of the checkout in the **Checkout and My account**
 </thead>
 <tbody>
 <tr>
+<td><strong>Allow customer to change the payment method</strong></td><td>Activate to allow customers to change the payment method after the checkout. If deactivated, any change is impossible. <strong><i>Note:</i></strong> This setting is activated by default.</td>
+</tr>
+<tr>
 <td><b>Show invoice address fields in address form (DE)</b></td>  
 <td>Select one, multiple or <strong>ALL</strong> address fields to be displayed in the address form for the country of delivery <b>Germany</b> of the checkout.<br /> <strong>Company</strong> = Activate to display the <strong>Company</strong> field.<br /> <strong>VAT number</strong> = Activate to display the <strong>VAT number</strong> field.<br /> <strong>Form of address</strong> = Activate to display the <strong>Form of address</strong> field.<br /> <strong>Title</strong> = Activate to display the <strong>Title</strong> field.<br /> <strong>Date of birth</strong> = Activate to display the <strong>Date of birth</strong> field. <br /> <strong>Name affix</strong> = Activate to display the <strong>Name affix</strong> field. <br /> <strong>Additional address 1</strong> = Activate to display the <strong>Additional address information 1</strong> field.<br /> <strong>Additional address 2</strong> = Activate to display the <strong>Additional address information 2</strong> field. <br /> <strong>State</strong> = Activate to display the <strong>State</strong> field.
 </tr>
