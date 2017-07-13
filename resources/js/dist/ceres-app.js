@@ -2656,43 +2656,40 @@ Vue.component("item-store-special", {
 
     data: function data() {
         return {
-            tagClassPrefix: "bg-",
-            localization: {}
+            localization: {},
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
         };
     },
-
     created: function created() {
         ResourceService.bind("localization", this);
+
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.label = this.getLabel();
     },
+
 
     methods: {
-        getPercentageSale: function getPercentageSale() {
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
-
-            return accounting.formatNumber(percent, this.decimalCount, "");
-        }
-    },
-
-    computed: {
-        label: function label() {
+        getLabel: function getLabel() {
             if (this.storeSpecial.id === 1) {
                 var percent = this.getPercentageSale();
 
-                if (percent <= 0) {
+                if (parseInt(percent) < 0) {
                     return percent + "%";
                 }
             }
 
             return this.storeSpecial.names.name;
         },
+        getPercentageSale: function getPercentageSale() {
+            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
 
-        tagClass: function tagClass() {
-            if (this.storeSpecial.id === 1) {
-                return this.tagClassPrefix + "danger";
-            } else if (this.storeSpecial.id === 2) {
-                return this.tagClassPrefix + "primary";
-            }
-            return this.tagClassPrefix + "success";
+            return accounting.formatNumber(percent, this.decimalCount, "");
         }
     }
 });
