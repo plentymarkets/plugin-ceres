@@ -965,23 +965,6 @@ Vue.component("payment-provider-select", {
         this.initDefaultPaymentProvider();
     },
 
-    watch: {
-        checkout: function checkout() {
-            var paymentExist = false;
-
-            for (var i in this.checkout.paymentDataList) {
-                if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId) {
-                    paymentExist = true;
-                }
-            }
-
-            if (!paymentExist) {
-                this.checkout.methodOfPaymentId = 0;
-                this.initDefaultPaymentProvider();
-            }
-        }
-    },
-
     methods: {
         /**
          * Event when changing the payment provider
@@ -1301,10 +1284,6 @@ Vue.component("address-select", {
      */
     ready: function ready() {
         if (!this.isAddressListEmpty()) {
-            if (!this.selectedAddressId || this.selectedAddressId <= 0) {
-                this.selectedAddressId = this.addressList[0].id;
-            }
-
             this.loadSelectedAddress();
         } else {
             this.addressList = [];
@@ -1399,7 +1378,10 @@ Vue.component("address-select", {
             this.modalType = "initial";
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = { addressSalutation: 0, countryId: this.localization.currentShippingCountryId };
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId: this.localization.currentShippingCountryId
+                };
             } else {
                 this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
             }
@@ -1416,7 +1398,10 @@ Vue.component("address-select", {
             this.modalType = "create";
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = { addressSalutation: 0, countryId: this.localization.currentShippingCountryId };
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId: this.localization.currentShippingCountryId
+                };
             } else {
                 this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
             }
@@ -1547,9 +1532,11 @@ Vue.component("address-select", {
          * @param addressData
          */
         onAddressCreated: function onAddressCreated(addressData) {
-            this.selectedAddressId = addressData.id;
+            if (!this.selectedAddressId) {
+                this.selectedAddressId = addressData.id;
 
-            this.loadSelectedAddress();
+                this.loadSelectedAddress();
+            }
         }
     },
 
@@ -1562,6 +1549,40 @@ Vue.component("address-select", {
             }
 
             return isLoggedIn || this.addressList.length < 2;
+        }
+    },
+    filters: {
+        optionType: function optionType(selectedAddress, typeId) {
+            if (selectedAddress.name2) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var optionType = _step.value;
+
+                        if (optionType.typeId === typeId) {
+                            return optionType.value;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return "";
         }
     }
 });
@@ -1588,32 +1609,33 @@ Vue.component("create-update-address", {
             waiting: false
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
+
 
     methods: {
         /**
          * Validate the address fields
          */
         validate: function validate() {
-            var self = this;
+            var _this = this;
 
             if (this.addressType === "1") {
                 _ValidationService2.default.validate($("#billing_address_form")).done(function () {
-                    self.saveAddress();
+                    _this.saveAddress();
                 }).fail(function (invalidFields) {
                     _ValidationService2.default.markInvalidFields(invalidFields, "error");
                 });
             } else if (this.addressType === "2") {
-                _ValidationService2.default.validate($("#delivery_address_form")).done(function () {
-                    self.saveAddress();
+                _ValidationService2.default.validate($("#delivery_address_form")).done(function (invalidFields) {
+                    _this.saveAddress();
                 }).fail(function (invalidFields) {
                     _ValidationService2.default.markInvalidFields(invalidFields, "error");
                 });
             }
         },
+
 
         /**
          * Save the new address or update an existing one
@@ -1626,11 +1648,14 @@ Vue.component("create-update-address", {
             }
         },
 
+
         /**
          * Update an address
          */
         updateAddress: function updateAddress() {
             this.waiting = true;
+
+            this._syncOptionTypesAddressData();
 
             _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
                 this.addressModal.hide();
@@ -1653,11 +1678,14 @@ Vue.component("create-update-address", {
             }.bind(this));
         },
 
+
         /**
          * Create a new address
          */
         createAddress: function createAddress() {
             this.waiting = true;
+
+            this._syncOptionTypesAddressData();
 
             _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
                 this.addressData = newAddress;
@@ -1671,6 +1699,60 @@ Vue.component("create-update-address", {
             }.bind(this)).fail(function () {
                 this.waiting = false;
             }.bind(this));
+        },
+        _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
+
+            if (typeof this.addressData.options !== "undefined") {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.addressData.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var optionType = _step.value;
+
+                        switch (optionType.typeId) {
+                            case 1:
+                                {
+                                    if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
+                                        optionType.value = this.addressData.vatNumber;
+                                    }
+
+                                    break;
+                                }
+
+                            case 9:
+                                {
+                                    if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
+                                        optionType.value = this.addressData.birthday;
+                                    }
+                                    break;
+                                }
+
+                            case 11:
+                                {
+                                    if (this.addressData.title && this.addressData.title !== optionType.value) {
+                                        optionType.value = this.addressData.title;
+                                    }
+                                    break;
+                                }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1715,8 +1797,6 @@ Vue.component("invoice-address-select", {
     ready: function ready() {
         if (App.isCheckoutView && this.addressList.length <= 0) {
             this.$refs.invoiceAddressSelect.showInitialAddModal();
-        } else {
-            this.addressChanged(this.addressList[0]);
         }
     },
 
@@ -1750,7 +1830,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: ["addressList", "selectedAddressId"],
 
@@ -2374,7 +2454,11 @@ Vue.component("item-image-carousel", {
         getImageCount: function getImageCount() {
             var images = this.currentVariation.documents[0].data.images;
 
-            return images.variation.length || images.all.length;
+            if (images.variation && images.variation.length) {
+                return images.variation.length;
+            }
+
+            return images.all.length;
         },
 
         reInitialize: function reInitialize() {
@@ -2983,43 +3067,40 @@ Vue.component("item-store-special", {
 
     data: function data() {
         return {
-            tagClassPrefix: "bg-",
-            localization: {}
+            localization: {},
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
         };
     },
-
     created: function created() {
         ResourceService.bind("localization", this);
+
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.label = this.getLabel();
     },
+
 
     methods: {
-        getPercentageSale: function getPercentageSale() {
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
-
-            return accounting.formatNumber(percent, this.decimalCount, "");
-        }
-    },
-
-    computed: {
-        label: function label() {
+        getLabel: function getLabel() {
             if (this.storeSpecial.id === 1) {
                 var percent = this.getPercentageSale();
 
-                if (percent <= 0) {
+                if (parseInt(percent) < 0) {
                     return percent + "%";
                 }
             }
 
             return this.storeSpecial.names.name;
         },
+        getPercentageSale: function getPercentageSale() {
+            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
 
-        tagClass: function tagClass() {
-            if (this.storeSpecial.id === 1) {
-                return this.tagClassPrefix + "danger";
-            } else if (this.storeSpecial.id === 2) {
-                return this.tagClassPrefix + "primary";
-            }
-            return this.tagClassPrefix + "success";
+            return accounting.formatNumber(percent, this.decimalCount, "");
         }
     }
 });
@@ -3893,11 +3974,10 @@ Vue.component("notifications", {
 "use strict";
 
 var ResourceService = require("services/ResourceService");
-var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-country-select", {
 
-    props: ["countryFlagPrefix", "template", "selectable"],
+    props: ["countryFlagPrefix", "template"],
 
     data: function data() {
         return {
@@ -3915,19 +3995,10 @@ Vue.component("shipping-country-select", {
 
             country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
         }
-    },
-
-    methods: {
-        setShippingCountry: function setShippingCountry(id) {
-            if (!this.selectable) {
-                this.localization.currentShippingCountryId = id;
-                CheckoutService.setShippingCountryId(id);
-            }
-        }
     }
 });
 
-},{"services/CheckoutService":75,"services/ResourceService":80}],47:[function(require,module,exports){
+},{"services/ResourceService":80}],47:[function(require,module,exports){
 "use strict";
 
 var ResourceService = require("services/ResourceService");
