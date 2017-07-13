@@ -386,6 +386,9 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 </thead>
 <tbody>
 <tr>
+<td><strong>Allow customer to change the payment method</strong></td><td>Aktivieren, um eine nachträgliche Änderung der Zahlungsart durch den Kunden zuzulassen. Ist diese Einstellung deaktiviert, ist eine Änderung nicht mehr möglich. <strong><i>Hinweis:</i></strong> Diese Einstellung ist standardmäßig aktiviert.</td>
+</tr>
+<tr>
 <td><b>Show invoice address fields in address form (DE)</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Deutschland</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
 <br /> <strong>Name affix</strong> = Aktivieren, um das Feld <strong>Namenszusatz</strong> anzuzeigen.

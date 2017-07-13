@@ -907,7 +907,7 @@
     {
         "tab"               : "Checkout and My account",
         "key"               : "my_account.change_payment",
-        "label"             : "Allow customer to change method of payment",
+        "label"             : "Allow customer to change the payment method",
         "type"              : "checkbox",
         "default"           : "true"
     },

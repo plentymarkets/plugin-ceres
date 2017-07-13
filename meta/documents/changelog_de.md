@@ -9,30 +9,30 @@
 - Den Artikellisten von Ceres wurde Cross-selling (nur auf der Einzel Artikelanzeige verfügbar) hinzugefügt.
 - In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Titel** hinzugefügt.
 - Für die Seitennavigation und die Navigation oben wurde Caching implementiert.
-- Es wurde ein neuer Wert in die Konfiguration hinzugefügt, damit Artikel URLs wie in Callisto aufgebaut sind.
+- Es ist nun möglich, den Aufbau der Artikel-URLs analog zum alten Webshop (z.B. Callisto 3.5) anzupassen. Dafür muss die Einstellung **Enable Callisto route pattern for items** im Tab **Global** der Konfiguration von Ceres aktiviert werden.
 
 ### Geändert
 
-- Der "In den Warenkorb"-Button auf der Category List hat ein neues styling bekommen, um moderner zu wirken.
-- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nach 35 Zeichen nicht mehr abgeschnitten.
+- Das Design des **In den Warenkorb**-Buttons in der Kategorieansicht wurde geändert.
 - Die Suche wird nun mit einer **UND**-Logik ausgeführt und ersetzt damit die vorherige **ODER**-Suche.
-- Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen wie man die Suche wieder schließt.
-- Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum öffnen der Unterkategorien vergrößert wurde.
-- Das Addressfeld 2 wurde bei der UK Addresseingabe als Default hinzugefügt.
-- Im Checkout wird default/initial die erste Adresse aus der Adressliste hinzugefügt.
-- Im Checkout wird das Lieferland anhand der Lieferadresse gesetzt.
-- Im Checkout kann man im Menü das Lieferland nicht mehr manuel setzen.
+- Das Icon für die Suche im Header ändert sich nun zu einem **X**, um dem Webshop-Besucher eindeutiger zu zeigen, wie man die Suche wieder schließt.
+- Die mobile Navigation wurde überarbeitet. Sie kann nun leichter bedient werden, da der Button zum Öffnen der Unterkategorien vergrößert wurde.
+- Das Addressfeld 2 wurde als Standardwert für das Adressformular des Lieferlandes UK hinzugefügt.
+- In der Zahlungsabwicklung wird standardmäßig die erste Adresse aus der Adressliste angezeigt.
+- In der Zahlungsabwicklung wird das Lieferland automatisch anhand der Lieferadresse gesetzt.
+- In der Zahlungsabwicklung kann man das Lieferland nicht mehr über das Menü im Header ändern.
+- Die Kategorieansicht wurde für mobile Geräte überarbeitet.
 
 ### Behoben
 
-- Die Category List ansicht wurde für Mobile Geräte überarbeitet.
-- Bei Artikeln werden nun nur noch die für den Mandanten aktivierten Bilder im Webshop angezeigt.
+- Bei Artikeln werden nur noch die für den Mandanten aktivierten Bilder im Webshop angezeigt.
 - Die Seitennavigation zeigt nun wieder alle Kategorien sämtlicher Ebenen an.
-- Bei wechsel der Lieferadresse im Checkout wird die nächst zulassige Zahlungsart ausgewählt.
+- In der Zahlungsabwicklung wird beim Wechseln der Lieferadresse nun automatisch die erste erlaubte Zahlungsart gewählt.
+- Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nicht mehr nach 35 Zeichen abgeschnitten.
 
 ### Bekannte Probleme
 
-- Artikelkategorien werden auch ohne verküpfte Artikel im Webshop angezeigt.
+- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
 
 ## v1.2.10 (2017-07-05)
 

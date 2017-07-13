@@ -20,8 +20,8 @@
                         <span v-else class="item-content">
                         <div v-if="!isAddressListEmpty()">
                             <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
-                            <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress.name2} ${selectedAddress.name3}</strong>
-                            <span v-else>${selectedAddress.name2} ${selectedAddress.name3}</span>
+                            <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
+                            <span v-else>${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</span>
                             <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
                         </div>
@@ -62,8 +62,8 @@
                             </span>
                                 <span v-else class="item-content small">
                                 <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
-                                <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
-                                <span v-else>${address.name2} ${address.name3}</span>
+                                <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address | optionType 11} ${address.name2} ${address.name3}</strong>
+                                <span v-else>${selectedAddress | optionType 11} ${address.name2} ${address.name3}</span>
                                 <span>${address.name4}</span>
                                 <span>${address.address1} ${address.address2}</span>
                                 <span>${address.postalCode} ${address.town}</span>
