@@ -119,13 +119,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-<<<<<<< HEAD
     delimiters: ["${", "}"],
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable"],
-=======
     props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale"],
->>>>>>> development
 
     data: function data() {
         return {
@@ -946,31 +942,22 @@ Vue.component("address-select", {
     /**
      * Select the address modal
      */
-<<<<<<< HEAD
     mounted: function mounted() {
         var _this = this;
-=======
-    ready: function ready() {
-        if (!this.isAddressListEmpty()) {
-            if (!this.selectedAddressId || this.selectedAddressId <= 0) {
-                this.selectedAddressId = this.addressList[0].id;
-            }
-
-            this.loadSelectedAddress();
-        } else {
-            this.addressList = [];
-        }
->>>>>>> development
 
         this.$nextTick(function () {
             if (!_this.isAddressListEmpty()) {
+                if (!_this.selectedAddressId || _this.selectedAddressId <= 0) {
+                    _this.selectedAddressId = _this.addressList[0].id;
+                }
+
                 _this.loadSelectedAddress();
             } else {
                 _this.addressList = [];
             }
 
-            _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
-            _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
+            _this.addressModal = ModalService.findModal(_this.$els.addressModal);
+            _this.deleteModal = ModalService.findModal(_this.$els.deleteModal);
         });
     },
 
@@ -1477,23 +1464,16 @@ Vue.component("invoice-address-select", {
     /**
      * If no address is related to the user, a popup will open to add an address
      */
-<<<<<<< HEAD
     mounted: function mounted() {
         var _this = this;
 
         this.$nextTick(function () {
             if (App.isCheckoutView && _this.addressList.length <= 0) {
                 _this.$refs.invoiceAddressSelect.showInitialAddModal();
+            } else if (_this.addressList.length) {
+                _this.addressChanged(_this.addressList[0]);
             }
         });
-=======
-    ready: function ready() {
-        if (App.isCheckoutView && this.addressList.length <= 0) {
-            this.$refs.invoiceAddressSelect.showInitialAddModal();
-        } else if (this.addressList.length) {
-            this.addressChanged(this.addressList[0]);
-        }
->>>>>>> development
     },
 
 
@@ -1503,12 +1483,12 @@ Vue.component("invoice-address-select", {
          * @param selectedAddress
          */
         addressChanged: function addressChanged(selectedAddress) {
-            var _this = this;
+            var _this2 = this;
 
             this.checkout.billingAddressId = selectedAddress.id;
 
             ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this.checkout.billingAddressId }));
+                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this2.checkout.billingAddressId }));
             });
 
             if (this.hasToValidate) {
@@ -1528,13 +1508,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-<<<<<<< HEAD
     delimiters: ["${", "}"],
 
-    template: "<address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
-=======
-    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
->>>>>>> development
+    template: "<address-select ref=\"shippingAddressSelect\" template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
 
     props: ["addressList", "selectedAddressId"],
 
@@ -3797,13 +3773,9 @@ var CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-country-select", {
 
-<<<<<<< HEAD
     delimiters: ["${", "}"],
 
-    props: ["countryFlagPrefix", "template"],
-=======
     props: ["countryFlagPrefix", "template", "selectable"],
->>>>>>> development
 
     data: function data() {
         return {
@@ -3916,21 +3888,23 @@ Vue.component("wait-screen", {
 
 var ApiService = require("services/ApiService");
 
-Vue.directive("logout", function () {
-    /**
-     * Logout the current user
-     */
-    $(this.el).click(function (event) {
-        $(this.el).addClass("disabled");
+Vue.directive("logout", {
+    bind: function bind(el) {
+        /**
+         * Logout the current user
+         */
+        $(el).click(function (event) {
+            $(el).addClass("disabled");
 
-        ApiService.post("/rest/io/customer/logout").done(function () {
-            window.location.assign(window.location.origin);
-        }).fail(function () {
-            $(this.el).removeClass("disabled");
-        }.bind(this));
+            ApiService.post("/rest/io/customer/logout").done(function () {
+                window.location.assign(window.location.origin);
+            }).fail(function () {
+                $(el).removeClass("disabled");
+            });
 
-        event.preventDefault();
-    }.bind(this));
+            event.preventDefault();
+        });
+    }
 });
 
 },{"services/ApiService":73}],50:[function(require,module,exports){
@@ -4010,10 +3984,10 @@ var _CategoryRendererService = require("services/CategoryRendererService");
 
 Vue.directive("render-category", {
     bind: function bind(el) {
-        el.onclick(function (event) {
+        el.onclick = function (event) {
             event.preventDefault();
             (0, _CategoryRendererService.renderItems)(value);
-        });
+        };
     }
 });
 
@@ -4157,13 +4131,13 @@ Vue.directive("resource-push", {
 
 Vue.directive("change-lang", {
     bind: function bind(el) {
-        el.onclick(function (event) {
+        el.onclick = function (event) {
             var subPath = window.location.pathname.split("/");
 
             subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
 
             window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
-        });
+        };
     }
 });
 
@@ -4174,10 +4148,10 @@ var CheckoutService = require("services/CheckoutService");
 
 Vue.directive("shipping-country", {
     bind: function bind(el) {
-        el.onclick(function (event) {
+        el.onclick = function (event) {
             event.preventDefault();
             CheckoutService.setShippingCountryId(value);
-        });
+        };
     }
 });
 
