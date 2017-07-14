@@ -1,5 +1,19 @@
 # Release Notes für Ceres
 
+## v1.3.1 (unknown)
+
+### Hinzugefügt
+
+### Geändert
+
+### Behoben
+
+- Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
+
+### Bekannte Probleme
+
+- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
+
 ## v1.3.0 (2017-07-13)
 
 ### Hinzugefügt
@@ -30,9 +44,6 @@
 - In der Zahlungsabwicklung wird beim Wechseln der Lieferadresse nun automatisch die erste erlaubte Zahlungsart gewählt.
 - Der Name eines Artikels, der in der Kategorieansicht oder in einer Artikelliste angezeigt wird, wird nicht mehr nach 35 Zeichen abgeschnitten.
 
-### Bekannte Probleme
-
-- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
 
 ## v1.2.10 (2017-07-05)
 
