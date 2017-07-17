@@ -70,7 +70,7 @@
                             {% set footerCategories = config('Ceres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
                             {% for catID in footerCategories %}
 
-                                {% set cat = services.category.get(catID) %}
+                                {% set cat = services.category.get(catID, lang) %}
 
                                 {% if cat is not null %}
                                     {% set displayedCategories = displayedCategories | merge([catID]) %}
