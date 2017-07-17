@@ -8,7 +8,9 @@ Vue.component("add-to-basket", {
         "showQuantity",
         "template",
         "salable",
-        "useLargeScale"
+        "useLargeScale",
+        "min",
+        "max"
     ],
 
     data()

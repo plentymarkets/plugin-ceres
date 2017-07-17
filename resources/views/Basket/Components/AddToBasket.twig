@@ -5,7 +5,7 @@
     <div>
 
         <div class="add-to-basket-lg-container hidden-md-down" v-if="(!showQuantity && useLargeScale) && (!hasChildren && !salable)" 
-             v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}"@click="addToBasket()">
+             v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}" @click="addToBasket()">
             <i class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
         </div>
 
@@ -17,7 +17,9 @@
         <div class="category-list-view-port" v-if="showQuantity && !useLargeScale">
             <span>
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
-                    <quantity-input :value="1" @quantity-change="updateQuantity"
+                    <quantity-input :value="1" @quantity-change="updateQuantity" 
+                                    :min="min"
+                                    :max="max"
                                     template="#vue-quantity-input"></quantity-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
