@@ -1,10 +1,12 @@
 Vue.directive("tooltip", {
 
-    bind: function()
+    bind()
     {
-        setTimeout(function()
+        setTimeout(() =>
         {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+            $(this.el).tooltip({
+                trigger: "hover"
+            });
+        }, 1);
     }
 });
