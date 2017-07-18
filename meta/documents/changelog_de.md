@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Ein Custom-Event 'OnVariationChanged' wurde hinzugefügt.
+- Ein Custom-Event 'onVariationChanged' wurde hinzugefügt.
 
 ### Geändert
 
