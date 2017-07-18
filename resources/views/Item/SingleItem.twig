@@ -115,8 +115,6 @@
 
                     {% if salable %}
                         <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
-                                       :min="{{ item.documents[0].data.variation.minimumOrderQuantity | json_encode }}"
-                                       :max="{{ item.documents[0].data.variation.maximumOrderQuantity | json_encode }}"
                                        resource="currentVariation" :show-quantity="true"></add-to-basket>
                     {% endif %}
 
