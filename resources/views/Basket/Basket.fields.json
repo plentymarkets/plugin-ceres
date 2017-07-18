@@ -8,6 +8,8 @@
   "variation.number",
   "variation.availability.names.*",
   "variation.itemId",
+  "variation.minimumOrderQuantity",
+  "variation.maximumOrderQuantity",
   "variation.id",
   "item.id",
   "images.all.url*",
