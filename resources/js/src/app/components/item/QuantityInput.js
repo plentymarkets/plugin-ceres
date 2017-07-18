@@ -32,6 +32,8 @@ Vue.component("quantity-input", {
         this.max = this.max || 999;
         this.vertical = this.vertical || false;
 
+        this.value = this.min;
+
         this.$watch("value", function(newValue)
         {
             if (newValue < this.min)

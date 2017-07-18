@@ -1,21 +1,25 @@
 <script type="x/template" id="vue-quantity-input">
     <div class="input-group" :class="{'vert':vertical}">
         <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
+            <button class="btn btn-secondary" :class="{'disabled': value >= max || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+                    data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }" @click="value++">+</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
+            <button class="btn btn-secondary" :class="{'disabled': value <= min || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+                    data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }" @click="value--">-</button>
         </span>
 
         <input type="text" class="form-control text-xs-center" size="3" maxlength="3" v-model="value">
 
         <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
+            <button class="btn btn-secondary" :class="{'disabled': value <= min || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+                    data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }" @click="value--">-</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
+            <button class="btn btn-secondary" :class="{'disabled': value >= max || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+                    data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }" @click="value++">+</button>
         </span>
 
     </div>
