@@ -24,7 +24,7 @@ Globale Einstellungen, die sich auf das gesamte Template auswirken, nehmen Sie i
 4. Wählen Sie die Kategorieart.
 5. Klicken Sie auf **Erstellen**.<br /> → Die neue Kategorie wird erstellt und im Kategoriebaum angezeigt.
 6. Öffnen Sie die neue Kategorie links im Kategoriebaum.
-7. Wählen Sie für die Option **￼Typ**￼ die Einstellung **￼Content**￼ aus dem Dropdown-Menü.
+7. Wählen Sie für die Option **Typ** die Einstellung **Content** aus dem Dropdown-Menü.
 8. Aktivieren Sie den **Mandant (Shop)**.
 9. Wechseln Sie in das Tab **Template**.
 10. Geben Sie den Inhalt ein, der im Webshop angezeigt werden soll.
@@ -205,10 +205,7 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <th>Erläuterung</th> 
 </tr>
 </thead>
-<tbody>
-<tr>
-<td colspan="2" class="th">Tab: Item view</td>  
-</tr> 
+<tbody> 
 <tr>
 <td><b>Item name</b></td>  
 <td><strong>Name 1</strong>, <strong>Name 2</strong> oder <strong>Name 3</strong> wählen. Texte für die Felder werden im Tab <strong><a href="{% Link(3177) %}#50.">Texte</a></strong> eines Artikels gespeichert. Wenn <strong>Name 2</strong> oder <strong>Name 3</strong> gewählt wurde, aber kein Name im Textfeld gespeichert wurde, wird <strong>Name 1</strong> als Artikelname verwendet.</td>
@@ -241,16 +238,75 @@ Im Tab **Item view** passen Sie das Aussehen der Artikelansicht an. Wählen Sie,
 <td><b>Loading animation</b></td>  
 <td>Ladeanimation für die Kategorieansicht wählen.<br /> <strong>Blur</strong> = Die Kategorieansicht wird beim Laden kurz verschwommen dargestellt.<br /> <strong>Bars</strong> = Beim Laden der Kategorienansicht wird eine Ladeanimation mit Balken angezeigt.<br /> <strong>Spinner</strong> = Beim Laden der Kategorieansicht wird eine Ladeanimation mit Spinner angezeigt.</td>
 </tr>
-<tr>
-<td colspan="2" class="th">Tab: Item lists</td>  
-</tr>
- <tr>
-<td><b>Number of last seen items</b></td>  
-<td>Anzahl der zuletzt gesehenen Artikel wählen.</td>
-</tr>
 </tbody>
 <caption>Tab. 3: Artikelansicht anpassen</caption>
 </table>
+
+### Artikellisten einrichten
+
+Mit Artikellisten lassen sich Artikel gruppieren und im Webshop auf der Startseite und der Einzelansicht eines Artikels hervorheben. Folgende Artikellisten können in Ceres eingerichet werden:
+
+* Shop-Aktionen: Neuheiten, Sonderangebote, etc. werden in Ceres mit Hilfe von Tags abgebildet. Weitere Informationen finden Sie im Handbuch unter [Artikel mit Tags versehen](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#150.).
+* Cross-Selling: Cross-Selling-Artikel werden über **Beziehungen** in Webshop angezeigt. Weitere Informationen finden Sie im Handbuch unter [Cross-Selling einrichten](https://www.plentymarkets.eu/handbuch/artikel/artikel-verwalten/#950.).
+* Zuletzt gesehene Artikel: Eine Liste der vom Kunden zuletzt gesehenen Artikel wird angezeigt.
+ 
+ Artikellisten verknüpfen Sie bequem über Template-Container an der gewünschten Stelle in Ihrem Webshop. Richten Sie zunächst die Ihre Artikellisten ein.
+ 
+##### Artikellisten einrichten:
+
+1. Öffnen Sie das Menü **Plugins » Plugin-Übersicht**.<br /> → Die Plugin-Übersicht wird geöffnet.
+2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
+3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
+4. Wechseln Sie in das Tab **Item lists**.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+6. **Speichern** Sie die Einstellungen.
+
+<table>
+<thead>
+<tr>  
+<th>Einstellung</th>
+<th>Erläuterung</th> 
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>Last seen: Number of last seen items</b></td>  
+<td>Anzahl der zuletzt gesehenen Artikel wählen.</td>
+</tr>
+<tr>
+<td><b>Cross-selling: Cross-selling relation</b></td>  
+<td>Beziehung für Cross-Selling-Artikel wählen. Artikel mit dieser Beziehung werden in einer Artikelliste vom Typ <b>Cross-selling</b> angezeigt. <br /><b>Similar</b> = Gewählte Artikel sind dem geöffneten Artikel ähnlich. <br /><b>Accessory</b> = Gewählte Artikel sind Zubehör des geöffneten Artikels. <br /><b>Replacement part</b> = Gewählte Artikel sind Ersatzteile des geöffneten Artikels. <br /><b>Collection</b> = Gewählte Artikel eignen sich dazu, mit dem geöffneten Artikel zusammen als Paket gekauft zu werden.</td>
+</tr>
+<tr>
+<td><b>First item list; <br />Second item list; <br />Third item list</b></td>  
+<td>Typ der Artikelliste wählen. <br /><b>Last seen</b> = Eine Liste zuletzt gesehener Artikel wird im Webshop angezeigt. <br /><b>Cross-selling</b> = Eine Liste von Cross-Selling-Artikeln mit der gewählten Beziehung wird im Webshop angezeigt. <br /><b>Tags</b> = Eine Liste von Artikeln der verknüpften Tags wird im Webshop angezeigt.</td>
+</tr>
+<tr>
+<td><b>Name of the first item list (DE); <br />Name of the second item list (DE); <br />Name of the third item list (DE)</b></td>  
+<td>Namen der Artikelliste für den deutschen Webshop eingeben. Dieser Name ist für die Artikellisten vom Typ <b>Last seen</b> und <b>Cross-selling</b> optional.</td>
+</tr>
+<tr>
+<td><b>Name of the first item list (EN); <br />Name of the second item list (EN); <br />Name of the third item list (EN)</b></td>  
+<td>Namen der Artikelliste für den englischen Webshop eingeben. Dieser Name ist für die Artikellisten vom Typ <b>Last seen</b> und <b>Cross-selling</b> optional.</td>
+</tr>
+<tr>
+<td><b>List of IDs of tags to display in the first item list; <br />List of IDs of tags to display in the second item list; <br />List of IDs of tags to display in the third item list</b></td>  
+<td>IDs der Tags eingeben, um mit diesen Tags verknüpfte Artikel in der der Artikelliste vom Typ <b>Tags</b> anzuzeigen. <br />
+<b><i>Hinweis:</i></b> Mehrere IDs kommasepariert eingeben.</td>
+</tr>
+</tbody>
+<caption>Tab. 4: Artikellisten einrichten</caption>
+</table>
+
+
+Gehen Sie wie im Folgenden beschrieben vor, um die Artikelliste für zuletzt gesehene Artikel in der Einzelansicht eines Artikels im Webshops zu verknüpfen. Weitere Artikellisten verknüpfen Sie analog.
+
+##### Artikelliste verknüpfen:
+
+1. Öffnen Sie das Menü **Plugins » Content**.
+2. Wählen Sie den Bereich **First item list**. <br /> → Für die erste Artikelliste ist standardmäßig der Typ **Last seen** voreingestellt.
+3. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Homepage: Container 7**, **Homepage: Container 9** oder **Single item: Container for item lists**.
+4. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Warenkorb anpassen
 
@@ -263,7 +319,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Shopping cart**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 4.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -296,7 +352,7 @@ Im Tab **Shopping cart** nehmen Sie Änderungen an den Anzeigeoptionen des Waren
 <td>Wählen, ob ein Overlay des Warenkorbs oder die Warenkorbvorschau nach Klick auf den <strong>In den Warenkorb</strong>-Button angezeigt wird.<br /> <strong>Show overlay</strong> = Ein Overlay des Warenkorbs anzeigen.<br /> <strong>Toggle shopping cart preview</strong> = Die Warenkorbvorschau einblenden.<br /> <strong>No information</strong> = Keine Informationen anzeigen.</td>
 </tr>
 </tbody>
-<caption>Tab. 4: Warenkorb anpassen</caption>
+<caption>Tab. 5: Warenkorb anpassen</caption>
 </table>
 
 ### Kaufabwicklung und Mein Konto anpassen
@@ -318,7 +374,7 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Checkout and My account**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 5.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -329,6 +385,9 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>Allow customer to change the payment method</strong></td><td>Aktivieren, um eine nachträgliche Änderung der Zahlungsart durch den Kunden zuzulassen. Ist diese Einstellung deaktiviert, ist eine Änderung nicht mehr möglich. <strong><i>Hinweis:</i></strong> Diese Einstellung ist standardmäßig aktiviert.</td>
+</tr>
 <tr>
 <td><b>Show invoice address fields in address form (DE)</b></td>  
 <td>Eine, mehrere oder <strong>ALLE</strong> Adressfelder wählen, um diese Felder im Adressformular für das Lieferland <b>Deutschland</b> in der Kaufabwicklung anzuzeigen.<br /> <strong>Company</strong> = Aktivieren, um das Feld <strong>Firma</strong> anzuzeigen.<br /> <strong>VAT number</strong> = Aktivieren, um das Feld <strong>USt.-Nr.</strong> anzuzeigen.<br /> <strong>Form of address</strong> = Aktivieren, um das Feld <strong>Anrede</strong> anzuzeigen.<br /> <strong>Title</strong> = Aktivieren, um das Feld <strong>Titel</strong> anzuzeigen.<br /> <strong>Date of birth</strong> = Aktivieren, um das Feld <strong>Geburtsdatum</strong> anzuzeigen.
@@ -378,7 +437,7 @@ Im Tab **Checkout and My account** nehmen Sie Änderungen an den Anzeigeoptionen
 <br /> <strong>Address 2</strong> = Aktivieren, um das Feld <strong>Adresse 2</strong> zu validieren.<br /> <strong>Address 3</strong> = Aktivieren, um das Feld <strong>Adresse 3</strong> zu validieren.<br /> <strong>Address 4</strong> = Aktivieren, um das Feld <strong>Adresse 4</strong> zu validieren.<!--br /> <strong>County</strong> = Aktivieren, um das Feld <strong>County</strong> zu validieren.<-->
 </tr>
 </tbody>
-<caption>Tab. 5: Kaufabwicklung anpassen</caption>
+<caption>Tab. 6: Kaufabwicklung anpassen</caption>
 </table>
 
 ### Paginierung und Sortierung anpassen
@@ -392,7 +451,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Pagination and sorting**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 6.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 7.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -445,7 +504,7 @@ Im Tab **Pagination and sorting** passen Sie die Paginierung der Artikelübersic
 <td>Wert für die empfohlene Artikelsuche wählen. Es können bis zu drei Werte für die Artikelsuche verkettet werden.<br /> <strong>Not selected</strong> = Keinen Wert wählen.<br /> <strong>Relevance</strong> = Artikel nach Relevanz anzeigen.<br /> <strong>Item ID ⬆</strong> = Artikel aufsteigend nach Artikel-ID anzeigen.<br /> <strong>Item ID ⬇</strong> = Artikel absteigend nach Artikel-ID anzeigen.<br /> <strong>Item name A-Z</strong> = Artikel alphabetisch aufsteigend nach Artikelname anzeigen.<br /> <strong>Item name Z-A</strong> = Artikel alphabetisch absteigend nach Artikelname anzeigen.<br /> <strong>Item position ⬆</strong> = Artikel mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <strong>Item position ⬇</strong> = Artikel mit der höchsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<br /> <strong>Newest variation</strong> = Neueste Artikelvarianten zuerst anzeigen.<br /> <strong>Oldest variation</strong> = Älteste Artikelvarianten zuerst anzeigen.<br /> <strong>Variation ID ⬆</strong> = Artikelvarianten aufsteigend nach Varianten-ID anzeigen.<br /> <strong>Variation ID ⬇</strong> = Artikelvarianten absteigend nach Varianten-ID anzeigen.<br /> <strong>Variation number ⬆</strong> = Artikelvarianten aufsteigend nach Variantennummer anzeigen.<br /> <strong>Variation number ⬇</strong> = Artikelvarianten absteigend nach Variantennummer anzeigen.<br /> <strong>Availability ⬆</strong> = Artikelvarianten aufsteigend nach Verfügbarkeit anzeigen.<br /> <strong>Availability ⬇</strong> = Artikelvarianten absteigend nach Verfügbarkeit anzeigen.<br /> <strong>Last update</strong> = Zuletzt aktualisierte Artikelvariante zuerst anzeigen.<br /> <strong>First update</strong> = Zuerst aktualisierte Artikelvariante zuerst anzeigen.<!--br /> <strong>Variation name A-Z</strong> = Artikelvarianten alphabetisch aufsteigend nach Name anzeigen.<br /> <strong>Variation name Z-A</strong> = Artikelvarianten alphabetisch absteigend nach Name anzeigen.<--><br /> <strong>Variation position ⬆</strong> = Artikelvariante mit der niedrigsten Positionsnummer zuerst anzeigen.<br /> <strong>Variation position ⬇</strong> = Artikelvariante mit der höchsten Positionsnummer zuerst anzeigen.<br /> <b><i>Wichtig</i></b>: Eine Bedingung für die Funktion ist, dass bei den Artikelvarianten jeweils eine Position im Tab der Variante hinterlegt ist.<!--br /> <strong>Active variation ⬆</strong> = Aktive Artikelvarianten aufsteigend anzeigen.<br /> <strong>Active variation ⬇</strong> = Aktive Artikelvarianten absteigend anzeigen.<br /> <strong>Main variation ⬆</strong> = Hauptvarianten aufsteigend anzeigen.<br /> <strong>Main variation ⬇</strong> = Hauptvarianten absteigend anzeigen.<--><br /> <strong>Manufacturer A-Z</strong> = Artikel alphabetisch aufsteigend nach Hersteller anzeigen.<br /> <strong>Manufacturer Z-A</strong> = Artikel alphabetisch absteigend nach Hersteller anzeigen.<br /> <strong>Manufacturer position ⬆</strong> = Artikel aufsteigend nach Herstellerposition anzeigen.<br /> <strong>Manufacturer position ⬇</strong> = Artikel absteigend nach Herstellerposition anzeigen.</td>
 </tr>
 </tbody>
-<caption>Tab. 6: Paginierung und Sortierung anpassen</caption>
+<caption>Tab. 7: Paginierung und Sortierung anpassen</caption>
 </table>
 
 
@@ -460,7 +519,7 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 2. Klicken Sie auf **Ceres**.<br /> → Das Plugin wird geöffnet.
 3. Klicken Sie im Verzeichnisbaum auf **Konfiguration**.
 4. Wechseln Sie in das Tab **Registration** bzw. **Logging and performance**.
-5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 7.
+5. Nehmen Sie die Einstellungen vor. Beachten Sie dazu die Erläuterungen in Tabelle 8.
 6. **Speichern** Sie die Einstellungen.
 
 <table>
@@ -494,19 +553,8 @@ In den Tabs **Registration** und **Logging and performance** stehen insbesondere
 <td>Performance-Level wählen.<br /> <strong>Live</strong> = Live-Modus wählen, wenn der Webshop produktiv verwendet wird. Dateien werden minimiert und gebündelt.<br /> <strong>Development</strong> = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.</td>
 </tr>
 </tbody>
-<caption>Tab. 7: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
+<caption>Tab. 8: Einstellungen für die Plugin-Entwicklung vornehmen</caption>
 </table>
-
-### Artikellisten verknüpfen
-
-Artikellisten, wie z.B. **Zuletzt gesehene Artikel**, verknüpfen Sie bequem über Template-Container an der gewünschten Stelle in Ihrem Webshop. Gehen Sie wie im Folgenden beschrieben vor, um die Artikelliste für zuletzt gesehene Artikel in der Einzelansicht eines Artikels im Webshops zu verknüpfen.
-
-##### Artikelliste verknüpfen:
-
-1. Öffnen Sie das Menü **Plugins » Content**.
-2. Wählen Sie den Bereich **Last seen items**.
-3. Wählen Sie einen, mehrere oder **ALLE** Container, in denen Sie die Artikelliste anzeigen möchten, z.B. **Homepage: Container 7**, **Homepage: Container 9** oder **Single item: Container for item lists**.
-4. **Speichern** Sie die Einstellungen.<br /> → Die Artikelliste wird im gewählten Container im Webshop angezeigt.
 
 ### Webshop-Sprachen einstellen
 

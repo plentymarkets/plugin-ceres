@@ -6,6 +6,60 @@
     background-color: #fff;
     margin-bottom: $grid-gutter-width/2;
 
+    .tag-list span{
+        background-color: #4D4F4D;
+        text-transform: uppercase;
+        cursor: default;
+    }
+
+    .prices{
+        display: flex;
+    }
+
+    .crossprice{
+        font-size: 1rem;
+    }
+
+    .price-view-port{
+        flex: 1 0 0;
+    }
+
+    .thumb-title{
+        min-height: 32px;
+    }
+
+    .add-to-basket-lg-container{
+        -webkit-transform: rotate(360deg);
+        border-style: solid;
+        border-width: 0px 70px 70px 0;
+        border-color: transparent #F7F7F9 transparent transparent;
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        right: 0;
+        transition: 300ms ease-out;
+        cursor: pointer;
+
+        & > i{
+            right: -56px;
+            top: 11px;
+            position: absolute;
+            transition: 300ms ease-out;
+        }
+
+        &:hover{
+            border-color: transparent $brand-primary transparent transparent;
+
+            & > i{
+                color: #fff;
+            }
+        }
+    }
+
+    .category-list-view-port{
+            display: none;
+    }
+
     .thumb-background{
         position: absolute;
         top: -1px;
@@ -62,6 +116,7 @@
             font-size: .9rem;
             font-weight: 300;
             box-shadow: 0 0 3px 0 rgba(0,0,0,.4);
+            margin-bottom: 5px;
         }
     }
 
@@ -110,6 +165,7 @@
         line-height: 1.1;
         font-weight: 700;
         font-size: 1.2rem;
+        min-height: 21px;
     }
 
     .thumb-buy{
@@ -125,7 +181,60 @@
         opacity: 1;
     }
 
+    .mobile-text-only{
+        display: none;
+    }
 
+    @include media-breakpoint-up(lg){
+        .btn-group{
+            right: 15px;
+            position: absolute;
+        }
+    }
+
+    @include media-breakpoint-down(xs){
+        .btn-group {
+            width: 52%;
+        }
+
+        .mobile-icon-right {
+            display: none;
+        }
+
+        .vat-porto-info {
+            white-space: normal !important;
+        }
+    }
+
+    @include media-breakpoint-down(md){
+        .btn-group{
+            margin-top: 5px;
+            position: inherit;
+            width: 100%;
+        }
+
+        .mobile-text-only{
+            display: inline;
+            margin-left: -8px;
+        }
+
+        .mobile-width-button {
+            width: 100%;
+        }
+
+        .mobile-icon-right {
+            float: right;
+        }
+
+        .thumb-title {
+            min-height: 32px;
+        }
+
+        .category-list-view-port{
+            display: inline;
+        }
+    }
+    
     @include media-breakpoint-up(sm){
         padding: 0;
         margin-bottom: $grid-gutter-width;
@@ -158,12 +267,7 @@
 
         .thumb-title{
             font-weight: 400;
-
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
             line-height: 1.5em;
-            max-width: 75%;
         }
 
         .thumb-image{

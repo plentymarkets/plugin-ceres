@@ -2,11 +2,9 @@
   "images.all.url",
   "images.all.urlMiddle",
   "images.all.urlPreview",
-  "images.all.position",
   "images.all.path",
   "images.variation.urlMiddle",
   "images.variation.urlPreview",
-  "images.variation.position",
   "images.variation.path",
   "item.storeSpecial",
   "properties.group.backendName",
@@ -14,14 +12,11 @@
   "salesPrices.price",
   "salesPrices.type",
   "item.id",
-  "item.manufacturer.position",
-  "item.manufacturer.externalName",
   "texts*",
+  "tags*",
   "variation.id",
   "variation.availability.names.name",
   "variation.availability.id",
-  "variation.availability.averageDays",
   "variation.itemId",
-  "variation.releasedAt",
-  "filter.hasChildren"
+  "variation.releasedAt"
 ]

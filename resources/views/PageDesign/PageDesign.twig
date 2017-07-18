@@ -18,6 +18,7 @@
 
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
+    {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
 {% endif %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
@@ -34,7 +35,7 @@
         <resource name="basket" route="/rest/io/basket/" data="{{ services.basket.getBasket() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
         <resource name="itemSearch" :data="{}"></resource>
         <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
-        <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}"></resource>
+        <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}" :events="['LocalizationChanged!localization']"></resource>
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
 
         <resource name="isLoadingBreadcrumbs" :data="false"></resource>

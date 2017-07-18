@@ -25,9 +25,9 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal: "",
-            localization: {},
-            user: {}
+            deleteModal    : "",
+            localization   : {},
+            user           : {}
         };
     },
 
@@ -50,6 +50,11 @@ Vue.component("address-select", {
     {
         if (!this.isAddressListEmpty())
         {
+            if (!this.selectedAddressId || this.selectedAddressId <= 0)
+            {
+                this.selectedAddressId = this.addressList[0].id;
+            }
+
             this.loadSelectedAddress();
         }
         else
@@ -151,7 +156,10 @@ Vue.component("address-select", {
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
             {
-                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId        : this.localization.currentShippingCountryId
+                };
             }
             else
             {
@@ -171,7 +179,10 @@ Vue.component("address-select", {
 
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation"))
             {
-                this.addressToEdit = {addressSalutation: 0, countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId        : this.localization.currentShippingCountryId
+                };
             }
             else
             {
@@ -325,17 +336,13 @@ Vue.component("address-select", {
          */
         onAddressCreated(addressData)
         {
-            if (!this.selectedAddressId)
-            {
-                this.selectedAddressId = addressData.id;
+            this.selectedAddressId = addressData.id;
 
-                this.loadSelectedAddress();
-            }
+            this.loadSelectedAddress();
         }
     },
 
-    computed:
-    {
+    computed: {
         isAddAddressEnabled()
         {
             var isLoggedIn = this.user.isLoggedIn;
@@ -347,5 +354,25 @@ Vue.component("address-select", {
 
             return isLoggedIn || this.addressList.length < 2;
         }
+    },
+    filters : {
+
+        optionType(selectedAddress, typeId)
+        {
+            if (selectedAddress.name2)
+            {
+                for (const optionType of selectedAddress.options)
+                {
+                    if (optionType.typeId === typeId)
+                    {
+                        return optionType.value;
+                    }
+                }
+            }
+
+            return "";
+
+        }
+
     }
 });
