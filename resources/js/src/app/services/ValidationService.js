@@ -38,7 +38,7 @@ export function getInvalidFields(form)
 
 export function markInvalidFields(fields, errorClass)
 {
-    errorClass = errorClass || "has-error";
+    errorClass = errorClass || "error";
 
     $(fields).each(function(i, elem)
     {
@@ -59,6 +59,31 @@ export function markInvalidFields(fields, errorClass)
                 _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
             }
         });
+    });
+}
+
+export function markFailedValidationFields(form, validationErrors, errorClass)
+{
+    $form = $(form);
+
+    errorClass = errorClass || "error";
+
+    $form.find("[data-model]").each((i, elem) =>
+    {
+        const $elem = $(elem);
+        const attribute = $elem.attr("data-model");
+
+        if (attribute in validationErrors)
+        {
+            $elem.addClass(errorClass);
+
+            const fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
+
+            if (fieldLabel)
+            {
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute, fieldLabel);
+            }
+        }
     });
 }
 
@@ -200,4 +225,4 @@ function _eval(input)
     return (new Function("return " + input))();
 }
 
-export default {validate, getInvalidFields, markInvalidFields, unmarkAllFields};
+export default {validate, getInvalidFields, markInvalidFields, markFailedValidationFields, unmarkAllFields};
