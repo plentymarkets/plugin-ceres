@@ -10,14 +10,16 @@ Vue.component("quantity-input", {
         "waiting"
     ],
 
-    data: function()
+    data()
     {
         return {
-            timeoutHandle: null
+            timeoutHandle: null,
+            internalMin: null,
+            internalMax: null
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -25,25 +27,29 @@ Vue.component("quantity-input", {
     /**
      * TODO
      */
-    ready: function()
+    ready()
     {
+        if (this.min)
+        {
+            this.value = this.min;
+            this.$dispatch("quantity-change", this.min);
+        }
+
         this.timeout = this.timeout || 300;
-        this.min = this.min || 1;
-        this.max = this.max || 999;
+        this.internalMin = this.min || 1;
+        this.internalMax = this.max || 9999;
         this.vertical = this.vertical || false;
 
-        this.value = this.min;
-
-        this.$watch("value", function(newValue)
+        this.$watch("value", newValue =>
         {
-            if (newValue < this.min)
+            if (newValue < this.internalMin)
             {
-                this.value = this.min;
+                this.value = this.internalMin;
             }
 
-            if (newValue > this.max)
+            if (newValue > this.internalMax)
             {
-                this.value = this.max;
+                this.value = this.internalMax;
             }
 
             if (this.timeoutHandle)
@@ -51,15 +57,10 @@ Vue.component("quantity-input", {
                 window.clearTimeout(this.timeoutHandle);
             }
 
-            var self = this;
-
-            this.timeoutHandle = window.setTimeout(
-                function()
-                {
-                    self.$dispatch("quantity-change", newValue);
-                },
-                this.timeout
-            );
+            this.timeoutHandle = window.setTimeout(() =>
+            {
+                this.$dispatch("quantity-change", newValue);
+            }, this.timeout);
         });
     }
 
