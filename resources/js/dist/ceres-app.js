@@ -2245,7 +2245,6 @@ Vue.component("variation-select", {
 
         // search for matching variation on each change of attribute selection
         this.$watch("selectedAttributes", function () {
-
             // search variations matching current selection
             var possibleVariations = this.filterVariations();
 
@@ -2259,12 +2258,21 @@ Vue.component("variation-select", {
                     if (VariationData[variationId]) {
                         // reuse cached variation data
                         ResourceService.getResource("currentVariation").set(VariationData[variationId]);
+
+                        document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                            detail: {
+                                attributes: VariationData[variationId].attributes,
+                                documents: VariationData[variationId].documents
+                            }
+                        }));
                     } else {
                         // get variation data from remote
                         ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
                             // store received variation data for later reuse
                             VariationData[variationId] = response;
                             ResourceService.getResource("currentVariation").set(response);
+
+                            document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
                         });
                     }
                 }
