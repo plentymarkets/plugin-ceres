@@ -81,13 +81,16 @@ Vue.component("add-item-to-basket-overlay", {
             for (const property of this.basketItem.currentBasketItem.properties)
             {
 
-                if (property.surcharge > 0)
+                if (typeof property.property.value !== "undefined" && property.property.value.length > 0)
                 {
-                    sumSurcharge += property.surcharge;
-                }
-                else if (property.property.surcharge > 0)
-                {
-                    sumSurcharge += property.property.surcharge;
+                    if (property.surcharge > 0)
+                    {
+                        sumSurcharge += property.surcharge;
+                    }
+                    else if (property.property.surcharge > 0)
+                    {
+                        sumSurcharge += property.property.surcharge;
+                    }
                 }
             }
 

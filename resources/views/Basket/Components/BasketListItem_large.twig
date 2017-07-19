@@ -53,7 +53,7 @@
         {% endif %}
 
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
-            <strong class="col-xs-6 col-sm-5">${property.name}</strong>
+            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>
             <span class="col-xs-6 col-sm-7">${property.value}</span>
         </div>
 
