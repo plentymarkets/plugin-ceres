@@ -1,11 +1,17 @@
+const ApiService = require("services/ApiService");
+
 Vue.directive("change-lang", function(value)
 {
     $(this.el).click(function(event)
     {
-        var subPath = window.location.pathname.split("/");
+        ApiService.put("/rest/io/localization/language/" + value.lang)
+            .done(function(response)
+            {
+                window.location.reload();
+            })
+            .fail(function(response)
+            {
 
-        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
-
-        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+            });
     });
 });
