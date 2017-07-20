@@ -81,7 +81,7 @@ Vue.component("add-item-to-basket-overlay", {
             for (const property of this.basketItem.currentBasketItem.properties)
             {
 
-                if (typeof property.property.value !== "undefined" && property.property.value.length > 0)
+                if (property.property.value && property.property.value.length > 0)
                 {
                     if (property.surcharge > 0)
                     {
