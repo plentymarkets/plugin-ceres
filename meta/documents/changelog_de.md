@@ -11,6 +11,7 @@
 ### Behoben
 
 - Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
+- Beim wechseln der Sprache des Webshops treten nun keine Folgefehler mehr auf.
 
 ### Bekannte Probleme
 
