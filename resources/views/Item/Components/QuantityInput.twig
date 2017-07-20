@@ -1,27 +1,27 @@
 <script type="x/template" id="vue-quantity-input">
     <div class="input-group" :class="{'vert':vertical}">
         <span class="input-group-btn" v-if="vertical">
-            <button v-if="max" class="btn btn-secondary no-outline-button" :class="{'disabled': value >= internalMax || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+            <button v-if="max && value === internalMax && internalMax != 0" class="btn btn-secondary no-outline-button" :class="{'disabled': value === internalMax}" type="button" v-tooltip data-toggle="tooltip" 
                     data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }" @click="value++">+</button>
             <button v-else class="btn btn-secondary no-outline-button" :class="{'disabled': value >= internalMax || waiting}" type="button" @click="value++">+</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button v-if="min" class="btn btn-secondary no-outline-button" :class="{'disabled': value <= internalMin || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+            <button v-if="min && value === min && min === internalMin" class="btn btn-secondary no-outline-button" :class="{'disabled': value === min}" type="button" v-tooltip data-toggle="tooltip" 
                     data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }" @click="value--">-</button>
             <button v-else class="btn btn-secondary no-outline-button" :class="{'disabled': value <= internalMin || waiting}" type="button" @click="value--">-</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center" size="3" maxlength="3" v-model="value">
+        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="value">
 
         <span class="input-group-btn" v-if="vertical">
-            <button v-if="min" class="btn btn-secondary no-outline-button" :class="{'disabled': value <= internalMin || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+            <button v-if="min && value === min && min === internalMin" class="btn btn-secondary no-outline-button" :class="{'disabled': value === min}" type="button" v-tooltip data-toggle="tooltip" 
                     data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }" @click="value--">-</button>
             <button v-else class="btn btn-secondary no-outline-button" :class="{'disabled': value <= internalMin || waiting}" type="button" @click="value--">-</button>
         </span>
 
         <span class="input-group-btn" v-if="!vertical">
-            <button v-if="max" class="btn btn-secondary no-outline-button" :class="{'disabled': value >= internalMax || waiting}" type="button" v-tooltip data-toggle="tooltip" 
+            <button v-if="max && value === internalMax && internalMax != 0" class="btn btn-secondary no-outline-button" :class="{'disabled': value === internalMax}" type="button" v-tooltip data-toggle="tooltip" 
                     data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }" @click="value++">+</button>
             <button v-else class="btn btn-secondary no-outline-button" :class="{'disabled': value >= internalMax || waiting}" type="button" @click="value++">+</button>
         </span>

@@ -1,3 +1,5 @@
+const ResourceService = require("services/ResourceService");
+
 Vue.component("quantity-input", {
 
     props: [
@@ -7,7 +9,8 @@ Vue.component("quantity-input", {
         "max",
         "vertical",
         "template",
-        "waiting"
+        "waiting",
+        "variationId"
     ],
 
     data()
@@ -15,7 +18,9 @@ Vue.component("quantity-input", {
         return {
             timeoutHandle: null,
             internalMin: null,
-            internalMax: null
+            internalMax: null,
+            basketItems: [],
+            currentCount: 0
         };
     },
 
@@ -24,44 +29,107 @@ Vue.component("quantity-input", {
         this.$options.template = this.template;
     },
 
-    /**
-     * TODO
-     */
     ready()
     {
-        if (this.min)
+        ResourceService.bind("basketItems", this);
+
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this.vertical)
         {
-            this.value = this.min;
-            this.$dispatch("quantity-change", this.min);
+            this.initBasketValueWatcher();
+            this.handleMissingItems();
         }
+    },
 
-        this.timeout = this.timeout || 300;
-        this.internalMin = this.min || 1;
-        this.internalMax = this.max || 9999;
-        this.vertical = this.vertical || false;
-
-        this.$watch("value", newValue =>
+    methods:
+    {
+        initDefaultVars()
         {
-            if (newValue < this.internalMin)
+            this.timeout = this.timeout || 300;
+            this.internalMin = this.min || 1;
+            this.internalMax = this.max || 9999;
+            this.vertical = this.vertical || false;
+        },
+
+        initValueWatcher()
+        {
+            this.$watch("value", newValue =>
             {
-                this.value = this.internalMin;
+                if (newValue < this.internalMin)
+                {
+                    this.value = this.internalMin;
+                }
+
+                if (newValue > this.internalMax)
+                {
+                    this.value = this.internalMax;
+                }
+
+                if (this.timeoutHandle)
+                {
+                    window.clearTimeout(this.timeoutHandle);
+                }
+
+                this.timeoutHandle = window.setTimeout(() =>
+                {
+                    this.$dispatch("quantity-change", newValue);
+                }, this.timeout);
+            });
+        },
+
+        handleMissingItems()
+        {
+            if (this.alreadyInBasketCount() >= this.internalMin)
+            {
+                this.internalMin = 1;
             }
 
-            if (newValue > this.internalMax)
+            if (this.max !== null)
             {
-                this.value = this.internalMax;
+                this.internalMax = this.max - this.alreadyInBasketCount();
+
+                if (this.alreadyInBasketCount() === this.max)
+                {
+                    this.internalMin = 0;
+                    this.internalMax = 0;
+                    this.$dispatch("out-of-stock", true);
+                }
+                else
+                {
+                    this.$dispatch("out-of-stock", false);
+                }
             }
 
-            if (this.timeoutHandle)
+            this.value = this.internalMin;
+        },
+
+        initBasketValueWatcher()
+        {
+            ResourceService.watch("basketItems", (newBasketItems, oldBasketItems) =>
             {
-                window.clearTimeout(this.timeoutHandle);
+                if (oldBasketItems)
+                {
+                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems))
+                    {
+                        this.initDefaultVars();
+
+                        this.handleMissingItems();
+                    }
+                }
+            });
+        },
+
+        alreadyInBasketCount()
+        {
+            if (this.basketItems.find(variations => variations.variationId === this.variationId))
+            {
+                return this.basketItems.find(variations => variations.variationId === this.variationId).quantity;
             }
 
-            this.timeoutHandle = window.setTimeout(() =>
-            {
-                this.$dispatch("quantity-change", newValue);
-            }, this.timeout);
-        });
+            return 0;
+        }
     }
 
 });
