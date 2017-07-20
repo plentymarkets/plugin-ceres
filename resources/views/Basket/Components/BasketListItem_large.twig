@@ -13,7 +13,8 @@
     <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+                        :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
         <div class="item-unit-price">
             ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}

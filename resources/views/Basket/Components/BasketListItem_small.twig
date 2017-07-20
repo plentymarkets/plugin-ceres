@@ -4,7 +4,8 @@
 <article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+                        :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
     </div>
     <!-- ./ITEM QUANTITY -->
 
