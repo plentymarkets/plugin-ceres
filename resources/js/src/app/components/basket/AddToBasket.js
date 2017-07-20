@@ -8,7 +8,8 @@ Vue.component("add-to-basket", {
         "showQuantity",
         "template",
         "salable",
-        "useLargeScale"
+        "useLargeScale",
+        "showOrderProperties"
     ],
 
     data()
