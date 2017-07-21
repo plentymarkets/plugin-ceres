@@ -8,6 +8,8 @@
 
 ### Geändert
 
+- Das Design für die Liste der Versandarten in der Kaufabwicklung wurde geändert.
+
 ### Behoben
 
 - Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
