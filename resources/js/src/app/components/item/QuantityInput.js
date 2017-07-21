@@ -45,6 +45,22 @@ Vue.component("quantity-input", {
 
     methods:
     {
+        countValueUp()
+        {
+            if (!(this.max && this.value === this.internalMax) && !this.waiting)
+            {
+                this.value++;
+            }
+        },
+
+        countValueDown()
+        {
+            if (!(this.min && this.value === this.min && this.min === this.internalMin) && !this.waiting)
+            {
+                this.value--;
+            }
+        },
+
         initDefaultVars()
         {
             this.timeout = this.timeout || 300;
