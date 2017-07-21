@@ -1,5 +1,23 @@
 # Release Notes for Ceres
 
+## v1.3.1 (unknown)
+
+### Added
+
+- The custom event 'onVariationChanged' was added.
+
+### Changed
+
+- The design for the list of shipping methods in the checkout was updated.
+
+### Fixed
+
+- If categories are linked in the footer, they will be loaded in the respective language.
+
+### Known issues
+
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+
 ## v1.3.0 (2017-07-13)
 
 ### Added
@@ -29,10 +47,6 @@
 - The side navigation now displays the categories on every level again.
 - When changing the delivery country in the checkout, the first allowed payment method will now be selected automatically.
 - The name of an item displayed in the category view or an item list is not "cut off" after 35 characters and now wrapped.
-
-### Known issues
-
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.2.10 (2017-07-05)
 
