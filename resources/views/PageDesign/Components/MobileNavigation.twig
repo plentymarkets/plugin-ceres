@@ -1,0 +1,200 @@
+<script type="x/template" id="vue-mobile-navigation">
+
+    <div id="MobileNavigation" style="display:none" ref="MobileNavigation">
+        <div class="top-menu">
+            <ul class="breadcrumb">
+                <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
+                    <a href="#" @click="navigateTo(item, true)">${ item.title }</a>
+                </li>
+            </ul>
+
+            <a class="button-close" href="#" onclick="$('#MobileNavigation').trigger('close');">X</a>
+        </div>
+
+        <div class="menu-wrap">
+            <ul v-menu class="menu menu-${ menuIndex }" v-for="(menuIndex, menu) in getGroupedMenus()">
+                <li class="menu-item" v-bind:class="{ 'has-sub': itemHasChildren(item), 'has-url': item.url }" v-for="item in menu" v-bind:key="item.id">
+                    <a href="#" @click="directTo(item)">${ item.title }</a>
+                    <a class="dots" href="#" @click="navigateTo(item)" v-if="itemHasChildren(item)">...</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</script>
+
+<style>
+    @charset "UTF-8";
+/* Vue 2.x */
+/*
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+*/
+/* Vue 1.x */
+.breadcrumb-item-transition {
+  transition: all 1s ease;
+  overflow: hidden; }
+
+.breadcrumb-item-enter, .breadcrumb-item-leave {
+  opacity: 0;
+  transform: translateX(-30px); }
+
+.menu[class^='animate-'],
+.menu[class*=' animate-'] {
+  visibility: visible !important; }
+
+.animate-outToRight .menu-item {
+  -webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+
+@-webkit-keyframes outToRight {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); } }
+@keyframes outToRight {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); } }
+.animate-outToLeft .menu-item {
+  -webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+
+@-webkit-keyframes outToLeft {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); } }
+@keyframes outToLeft {
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); } }
+.animate-inFromLeft .menu-item {
+  -webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+
+@-webkit-keyframes inFromLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+@keyframes inFromLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+.animate-inFromRight .menu-item {
+  -webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+
+@-webkit-keyframes inFromRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+@keyframes inFromRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+#MobileNavigation {
+  background-color: #1c1d22;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow: hidden; }
+  #MobileNavigation .menu-wrap {
+    position: absolute;
+    bottom: 0;
+    top: 3.5em;
+    overflow: hidden;
+    width: 100%; }
+  #MobileNavigation .menu {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0; }
+    #MobileNavigation .menu.menu-active {
+      visibility: visible; }
+    #MobileNavigation .menu li.menu-item {
+      clear: both; }
+      #MobileNavigation .menu li.menu-item a {
+        padding: 0.6em 1em;
+        display: inline-block;
+        color: #bdbdbd;
+        text-decoration: none; }
+        #MobileNavigation .menu li.menu-item a:hover {
+          color: #5c5edc; }
+        #MobileNavigation .menu li.menu-item a.dots {
+          float: right; }
+  #MobileNavigation .top-menu {
+    clear: both;
+    overflow: hidden;
+    padding: 1em 1em 0 1em; }
+    #MobileNavigation .top-menu ul.breadcrumb {
+      overflow: hidden;
+      float: left;
+      padding: 0;
+      margin: 0;
+      color: #5c5edc; }
+      #MobileNavigation .top-menu ul.breadcrumb li {
+        float: left;
+        display: block;
+        padding: 0; }
+        #MobileNavigation .top-menu ul.breadcrumb li::before {
+          content: '→';
+          margin: 0 10px 0 16px;
+          color: #45464e; }
+        #MobileNavigation .top-menu ul.breadcrumb li:first-child {
+          padding-left: 0; }
+          #MobileNavigation .top-menu ul.breadcrumb li:first-child::before {
+            content: none;
+            margin: 0; }
+        #MobileNavigation .top-menu ul.breadcrumb li:last-child {
+          pointer-events: none;
+          cursor: default;
+          padding-right: 0; }
+        #MobileNavigation .top-menu ul.breadcrumb li a {
+          color: #5c5edc;
+          text-decoration: none; }
+          #MobileNavigation .top-menu ul.breadcrumb li a:hover {
+            color: #8182e0; }
+  #MobileNavigation .button-close {
+    float: right;
+    text-decoration: none;
+    color: #45464e; }
+
+/*# sourceMappingURL=MobileNavigation.css.map */
+
+</style>
