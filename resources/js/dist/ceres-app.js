@@ -1253,13 +1253,19 @@ var _ValidationService2 = _interopRequireDefault(_ValidationService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var NotificationService = require("services/NotificationService");
+
 Vue.component("create-update-address", {
 
     props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
 
     data: function data() {
         return {
-            waiting: false
+            waiting: false,
+            addressFormNames: {
+                1: "#billing_address_form",
+                2: "#delivery_address_form"
+            }
         };
     },
     created: function created() {
@@ -1274,19 +1280,11 @@ Vue.component("create-update-address", {
         validate: function validate() {
             var _this = this;
 
-            if (this.addressType === "1") {
-                _ValidationService2.default.validate($("#billing_address_form")).done(function () {
-                    _this.saveAddress();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            } else if (this.addressType === "2") {
-                _ValidationService2.default.validate($("#delivery_address_form")).done(function (invalidFields) {
-                    _this.saveAddress();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
+            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+                _this.saveAddress();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
         },
 
 
@@ -1306,29 +1304,35 @@ Vue.component("create-update-address", {
          * Update an address
          */
         updateAddress: function updateAddress() {
+            var _this2 = this;
+
             this.waiting = true;
 
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
-                this.addressModal.hide();
+                _this2.addressModal.hide();
 
-                for (var key in this.addressList) {
-                    var address = this.addressList[key];
+                for (var key in _this2.addressList) {
+                    var address = _this2.addressList[key];
 
-                    if (address.id === this.addressData.id) {
-                        for (var attribute in this.addressList[key]) {
-                            this.addressList[key][attribute] = this.addressData[attribute];
+                    if (address.id === _this2.addressData.id) {
+                        for (var attribute in _this2.addressList[key]) {
+                            _this2.addressList[key][attribute] = _this2.addressData[attribute];
                         }
 
                         break;
                     }
                 }
 
-                this.waiting = false;
-            }.bind(this)).fail(function () {
-                this.waiting = false;
-            }.bind(this));
+                _this2.waiting = false;
+            }).fail(function (response) {
+                _this2.waiting = false;
+
+                if (response.validation_errors) {
+                    _this2._handleValidationErrors(response.validation_errors);
+                }
+            });
         },
 
 
@@ -1336,33 +1340,71 @@ Vue.component("create-update-address", {
          * Create a new address
          */
         createAddress: function createAddress() {
+            var _this3 = this;
+
             this.waiting = true;
 
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
-                this.addressData = newAddress;
+                _this3.addressData = newAddress;
 
-                this.addressModal.hide();
-                this.addressList.push(this.addressData);
+                _this3.addressModal.hide();
+                _this3.addressList.push(_this3.addressData);
 
-                this.$dispatch("new-address-created", this.addressData);
+                _this3.$dispatch("new-address-created", _this3.addressData);
 
-                this.waiting = false;
-            }.bind(this)).fail(function () {
-                this.waiting = false;
-            }.bind(this));
+                _this3.waiting = false;
+            }).fail(function (response) {
+                _this3.waiting = false;
+
+                if (response.validation_errors) {
+                    _this3._handleValidationErrors(response.validation_errors);
+                }
+            });
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
         },
         _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
 
             if (typeof this.addressData.options !== "undefined") {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
 
                 try {
-                    for (var _iterator = this.addressData.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var optionType = _step.value;
+                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
 
                         switch (optionType.typeId) {
                             case 1:
@@ -1392,26 +1434,25 @@ Vue.component("create-update-address", {
                         }
                     }
                 } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
                         }
                     } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
                         }
                     }
                 }
             }
         }
     }
-
 });
 
-},{"services/AddressService":73,"services/ValidationService":83}],16:[function(require,module,exports){
+},{"services/AddressService":73,"services/NotificationService":80,"services/ValidationService":83}],16:[function(require,module,exports){
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4410,7 +4451,7 @@ var CheckoutService = require("services/CheckoutService");
  * @returns {*}
  */
 function createAddress(address, addressType, setActive) {
-    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
+    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
         if (setActive) {
             if (addressType === 1) {
                 CheckoutService.setBillingAddressId(response.id);
@@ -4429,7 +4470,7 @@ function createAddress(address, addressType, setActive) {
  */
 function updateAddress(newData, addressType) {
     addressType = addressType || newData.pivot.typeId;
-    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
 }
 
 /**
@@ -4534,7 +4575,7 @@ module.exports = function ($) {
             if (!config.supressNotifications) {
                 printMessages(response);
             }
-            deferred.reject(response.error);
+            deferred.reject(response);
         }).always(function () {
             if (!config.doInBackground) {
                 WaitScreenService.hideWaitScreen();
@@ -5801,6 +5842,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.validate = validate;
 exports.getInvalidFields = getInvalidFields;
 exports.markInvalidFields = markInvalidFields;
+exports.markFailedValidationFields = markFailedValidationFields;
 exports.unmarkAllFields = unmarkAllFields;
 
 var _jquery = require("jquery");
@@ -5839,7 +5881,7 @@ function getInvalidFields(form) {
 }
 
 function markInvalidFields(fields, errorClass) {
-    errorClass = errorClass || "has-error";
+    errorClass = errorClass || "error";
 
     (0, _jquery2.default)(fields).each(function (i, elem) {
         var $elem = (0, _jquery2.default)(elem);
@@ -5856,6 +5898,27 @@ function markInvalidFields(fields, errorClass) {
                 _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
             }
         });
+    });
+}
+
+function markFailedValidationFields(form, validationErrors, errorClass) {
+    $form = (0, _jquery2.default)(form);
+
+    errorClass = errorClass || "error";
+
+    $form.find("[data-model]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+        var attribute = $elem.attr("data-model");
+
+        if (attribute in validationErrors) {
+            $elem.addClass(errorClass);
+
+            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
+
+            if (fieldLabel) {
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute, fieldLabel);
+            }
+        }
     });
 }
 
@@ -5975,7 +6038,7 @@ function _eval(input) {
     return new Function("return " + input)();
 }
 
-exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, unmarkAllFields: unmarkAllFields };
+exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
 },{"jquery":88}],84:[function(require,module,exports){
 "use strict";
