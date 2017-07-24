@@ -8,7 +8,8 @@ Vue.component("add-to-basket", {
         "showQuantity",
         "template",
         "salable",
-        "useLargeScale"
+        "useLargeScale",
+        "showOrderProperties"
     ],
 
     data()
@@ -34,8 +35,9 @@ Vue.component("add-to-basket", {
         {
             const basketObject =
                 {
-                    variationId: this.variationId,
-                    quantity   : this.quantity
+                    variationId             :   this.variationId,
+                    quantity                :   this.quantity,
+                    basketItemOrderParams   :   this.item.properties
                 };
 
             ResourceService
