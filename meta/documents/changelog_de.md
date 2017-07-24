@@ -5,6 +5,7 @@
 ### Hinzugefügt
 
 - Ein Custom-Event 'onVariationChanged' wurde hinzugefügt.
+- Angabe von Bestellmerkmalen am Artikel (MINIMAL: Nur Typ Text, keine Merkmalsgruppen etc. möglich!)
 
 ### Geändert
 
