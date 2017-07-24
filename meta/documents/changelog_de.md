@@ -12,6 +12,7 @@
 ### Behoben
 
 - Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
+- Im MyAccount Bereich wird nun immer die E-Mail des Eingeloggten Kundens angezeigt.
 
 ### Bekannte Probleme
 

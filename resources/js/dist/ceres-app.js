@@ -3118,14 +3118,6 @@ Vue.component("account-settings", {
         clearFieldsAndClose: function clearFieldsAndClose() {
             this.accountSettingsModal.hide();
             this.clearFields();
-        },
-
-        /**
-         * Get the current email address of the user
-         * @returns {*}
-         */
-        getEmail: function getEmail() {
-            return this.userData.options[0].value;
         }
     }
 
