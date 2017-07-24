@@ -157,13 +157,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-<<<<<<< HEAD
     delimiters: ["${", "}"],
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale"],
-=======
     props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale", "showOrderProperties"],
->>>>>>> development
 
     data: function data() {
         return {
@@ -2423,18 +2419,10 @@ Vue.component("variation-select", {
                 }
             }
 
-<<<<<<< HEAD
             // search for matching variation on each change of attribute selection
             _this.$watch("selectedAttributes", function () {
-
                 // search variations matching current selection
                 var possibleVariations = this.filterVariations();
-=======
-        // search for matching variation on each change of attribute selection
-        this.$watch("selectedAttributes", function () {
-            // search variations matching current selection
-            var possibleVariations = this.filterVariations();
->>>>>>> development
 
                 if (possibleVariations.length === 1) {
                     // only 1 matching variation remaining:
@@ -2443,39 +2431,26 @@ Vue.component("variation-select", {
                         // all attributes are set => load variation data
                         var variationId = possibleVariations[0].variationId;
 
-<<<<<<< HEAD
                         if (VariationData[variationId]) {
                             // reuse cached variation data
                             ResourceService.getResource("currentVariation").set(VariationData[variationId]);
+
+                            document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                                detail: {
+                                    attributes: VariationData[variationId].attributes,
+                                    documents: VariationData[variationId].documents
+                                }
+                            }));
                         } else {
                             // get variation data from remote
                             ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
                                 // store received variation data for later reuse
                                 VariationData[variationId] = response;
                                 ResourceService.getResource("currentVariation").set(response);
+
+                                document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
                             });
                         }
-=======
-                    if (VariationData[variationId]) {
-                        // reuse cached variation data
-                        ResourceService.getResource("currentVariation").set(VariationData[variationId]);
-
-                        document.dispatchEvent(new CustomEvent("onVariationChanged", {
-                            detail: {
-                                attributes: VariationData[variationId].attributes,
-                                documents: VariationData[variationId].documents
-                            }
-                        }));
-                    } else {
-                        // get variation data from remote
-                        ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
-                            // store received variation data for later reuse
-                            VariationData[variationId] = response;
-                            ResourceService.getResource("currentVariation").set(response);
-
-                            document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
-                        });
->>>>>>> development
                     }
                 }
             }, {
