@@ -145,9 +145,9 @@ Vue.component("create-update-address", {
 
             let errorMessage = "";
 
-            for (const i in validationErrors)
+            for (const value of Object.values(validationErrors))
             {
-                errorMessage += validationErrors[i] + "<br>";
+                errorMessage += value + "<br>";
             }
 
             NotificationService.error(errorMessage);
