@@ -585,6 +585,16 @@ Then, create facets for your attributes and properties. For further information 
 
 Find detailed instructions about setting up filters in our [forum](https://forum.plentymarkets.com/t/howto-filter-in-ceres-einrichten/46679) (German link).
 
+### Setting up order properties
+
+With order properties, you allow your customers to enter a text when ordering an item linked to the order property. For example, customers choose an individual text that will be printed on an item. Set up order properties first and link them with your items. For further information about properties, refer to the [Managing properties](https://www.plentymarkets.co.uk/manual/item/managing-items/#2) chapter.
+
+Find details instructions about setting up order properties in our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155).
+
+<div class="alert alert-warning" role="alert">
+    Only order properties of the type <strong>Text</strong> are available in the <strong>Ceres</strong> online store at the moment. Furthermore, organising order properties in property groups is not yet possible.
+</div>
+
 ## Customising Ceres<a id="20."></a>
 
 Various possibilities are available to customise the **Ceres** template plugin and tailor it to meet your needs.

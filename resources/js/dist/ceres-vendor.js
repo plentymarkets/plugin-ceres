@@ -21614,10 +21614,17 @@ return Tether;
 
 },{}],15:[function(require,module,exports){
 "use strict";module.exports=function(e){var i=e.getOption("mailUrl");return 0===i.indexOf("mailto:")&&(i+="?subject="+encodeURIComponent(e.getOption("mailSubject")),i+="&body="+encodeURIComponent(e.getOption("mailBody"))),{blank:0===i.indexOf("http"),popup:!1,shareText:{en:"mail",zh:"分享"},name:"mail",faName:"fa-envelope",title:{bg:"Изпрати по имейл",da:"Sende via e-mail",de:"Per E-Mail versenden",en:"Send by email",es:"Enviar por email",fi:"Lähetä sähköpostitse",fr:"Envoyer par courriel",hr:"Pošaljite emailom",hu:"Elküldés e-mailben",it:"Inviare via email",ja:"電子メールで送信",ko:"이메일로 보내기",nl:"Sturen via e-mail",no:"Send via epost",pl:"Wyślij e-mailem",pt:"Enviar por e-mail",ro:"Trimite prin e-mail",ru:"Отправить по эл. почте",sk:"Poslať e-mailom",sl:"Pošlji po elektronski pošti",sr:"Pošalji putem email-a",sv:"Skicka via e-post",tr:"E-posta ile gönder",zh:"通过电子邮件传送"},shareUrl:i}};
+<<<<<<< HEAD
 
 },{}],16:[function(require,module,exports){
 "use strict";var url=require("url");module.exports=function(e){var t=e.getMeta("DC.title")||e.getTitle(),r=e.getMeta("DC.creator");r.length>0&&(t+=" - "+r);var i=e.getOption("mediaUrl");(!i||i.length<=0)&&(i=e.getMeta("og:image"));var n=url.parse("https://www.pinterest.com/pin/create/link/",!0);return n.query.url=e.getURL(),n.query.media=i,n.query.description=t,delete n.search,{popup:!0,shareText:"pin it",name:"pinterest",faName:"fa-pinterest-p",title:{de:"Bei Pinterest pinnen",en:"Pin it on Pinterest",es:"Compartir en Pinterest",fr:"Partager sur Pinterest",it:"Condividi su Pinterest",da:"Del på Pinterest",nl:"Delen op Pinterest",zh:"分享至Pinterest"},shareUrl:url.format(n)+e.getReferrerTrack()}};
 
+=======
+
+},{}],16:[function(require,module,exports){
+"use strict";var url=require("url");module.exports=function(e){var t=e.getMeta("DC.title")||e.getTitle(),r=e.getMeta("DC.creator");r.length>0&&(t+=" - "+r);var i=e.getOption("mediaUrl");(!i||i.length<=0)&&(i=e.getMeta("og:image"));var n=url.parse("https://www.pinterest.com/pin/create/link/",!0);return n.query.url=e.getURL(),n.query.media=i,n.query.description=t,delete n.search,{popup:!0,shareText:"pin it",name:"pinterest",faName:"fa-pinterest-p",title:{de:"Bei Pinterest pinnen",en:"Pin it on Pinterest",es:"Compartir en Pinterest",fr:"Partager sur Pinterest",it:"Condividi su Pinterest",da:"Del på Pinterest",nl:"Delen op Pinterest",zh:"分享至Pinterest"},shareUrl:url.format(n)+e.getReferrerTrack()}};
+
+>>>>>>> development
 },{"url":1}],17:[function(require,module,exports){
 "use strict";module.exports=function(e){var t=encodeURIComponent(e.getURL()),r=e.getMeta("DC.title"),a=e.getMeta("DC.creator");return r.length>0&&a.length>0?r+=" - "+a:r=e.getTitle(),{popup:!0,shareText:{bg:"cподеляне",da:"del",de:"teilen",en:"share",es:"compartir",fi:"Jaa",fr:"partager",hr:"podijelite",hu:"megosztás",it:"condividi",ja:"共有",ko:"공유하기",nl:"delen",no:"del",pl:"udostępnij",pt:"compartilhar",ro:"partajează",ru:"поделиться",sk:"zdieľať",sl:"deli",sr:"podeli",sv:"dela",tr:"paylaş",zh:"分享"},name:"qzone",faName:"fa-qq",title:{de:"Bei Qzone teilen",en:"Share on Qzone",zh:"分享至QQ空间"},shareUrl:"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+t+"&title="+r+e.getReferrerTrack()}};
 
