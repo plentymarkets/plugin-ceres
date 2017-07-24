@@ -1,10 +1,11 @@
 # Release Notes for Ceres
 
-## v1.3.1 (unknown)
+## v1.3.1 (2017-07-24)
 
 ### Added
 
-- The custom event 'onVariationChanged' was added.
+- The custom event `onVariationChanged` has been added.
+- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155). 
 
 ### Changed
 
@@ -12,7 +13,8 @@
 
 ### Fixed
 
-- If categories are linked in the footer, they will be loaded in the respective language.
+- When linking categories in the footer, the content of these categories will now be displayed depending on the respective language.
+- The email address of a logged-in customer will be displayed in the **My account** area.
 
 ### Known issues
 
