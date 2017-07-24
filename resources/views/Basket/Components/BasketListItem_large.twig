@@ -77,14 +77,10 @@
                 </div>
             {% endif %}
             {% if "basket.item.description_long" in basketDetailsData %}
-                <p class="m-y-1">
-                    {!! basketItem.variation.data.texts.description !!}
-                </p>
+                <p class="m-y-1" v-html="basketItem.variation.data.texts.description"></p>
             {% endif %}
             {% if "basket.item.description_short" in basketDetailsData %}
-                <p class="m-y-1">
-                    {!! basketItem.variation.data.texts.shortDescription !!}
-                </p>
+                <p class="m-y-1" v-html="basketItem.variation.data.texts.shortDescription"></p>
             {% endif %}
         </div>
         {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}

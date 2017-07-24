@@ -1,1 +1,0 @@
-Vue.config.unsafeDelimiters = ["{!!", "!!}"];
