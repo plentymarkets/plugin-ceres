@@ -33,6 +33,7 @@ Vue.component("quantity-input", {
     {
         ResourceService.bind("basketItems", this);
 
+        this.checkDefaultVars();
         this.initDefaultVars();
         this.initValueWatcher();
 
@@ -59,6 +60,12 @@ Vue.component("quantity-input", {
             {
                 this.value--;
             }
+        },
+
+        checkDefaultVars()
+        {
+            this.min = this.min === 0 ? null : this.min;
+            this.max = this.max === 0 ? null : this.max;
         },
 
         initDefaultVars()
