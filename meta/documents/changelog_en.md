@@ -5,7 +5,8 @@
 ### Added
 
 - The custom event `onVariationChanged` has been added.
-- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155). 
+- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155).
+- When creating/editing addresses, the text fields will be marked red if the server returns an error. Also, instead of a generic "Validation errors", the specific error message is shown.
 
 ### Changed
 

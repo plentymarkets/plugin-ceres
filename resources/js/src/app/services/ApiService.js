@@ -104,7 +104,7 @@ module.exports = (function($)
                 {
                     printMessages(response);
                 }
-                deferred.reject(response.error);
+                deferred.reject(response);
             })
             .always(function()
             {

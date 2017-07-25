@@ -5,7 +5,7 @@
 
 <script type="x/template" id="vue-country-select">
 <div>
-    <div class="input-unit" data-validate="">
+    <div class="input-unit" data-validate="" data-model="countryId">
         <select  v-model="selectedCountryId" v-on:change="countryChanged" class="custom-select">
             <option v-bind:value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
                 ${ country.name }
@@ -15,7 +15,7 @@
     </div>
 
     {% if "billing_address.stateId" in billingAddressFields %}
-    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate{% endif %}>
+    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
         <select v-model="selectedStateId" class="custom-select">
             <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
                 ${ state.name }
@@ -27,7 +27,7 @@
 
 
     {% if "delivery_address.stateId" in deliveryAddressFields %}
-        <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate{% endif %}>
+        <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
             <select v-model="selectedStateId" class="custom-select">
                 <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
                     ${ state.name }
