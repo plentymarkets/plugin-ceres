@@ -48,7 +48,7 @@ Vue.component("quantity-input", {
     {
         countValueUp()
         {
-            if (!(this.max && this.value === this.internalMax) && !this.waiting)
+            if (!(this.value === this.internalMax) && !this.waiting)
             {
                 this.value++;
             }
@@ -56,7 +56,7 @@ Vue.component("quantity-input", {
 
         countValueDown()
         {
-            if (!(this.min && this.value === this.min && this.min === this.internalMin) && !this.waiting)
+            if (!(this.value === this.internalMin) && !this.waiting)
             {
                 this.value--;
             }
