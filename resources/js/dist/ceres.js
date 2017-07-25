@@ -2584,6 +2584,7 @@ Vue.component("quantity-input", {
     ready: function ready() {
         ResourceService.bind("basketItems", this);
 
+        this.checkDefaultVars();
         this.initDefaultVars();
         this.initValueWatcher();
 
@@ -2604,6 +2605,10 @@ Vue.component("quantity-input", {
             if (!(this.min && this.value === this.min && this.min === this.internalMin) && !this.waiting) {
                 this.value--;
             }
+        },
+        checkDefaultVars: function checkDefaultVars() {
+            this.min = this.min === 0 ? null : this.min;
+            this.max = this.max === 0 ? null : this.max;
         },
         initDefaultVars: function initDefaultVars() {
             this.timeout = this.timeout || 300;
