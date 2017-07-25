@@ -155,7 +155,8 @@ Vue.component("add-to-basket", {
 
     data: function data() {
         return {
-            quantity: 1
+            quantity: 1,
+            buttonLockState: false
         };
     },
     created: function created() {
@@ -182,6 +183,9 @@ Vue.component("add-to-basket", {
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
+        },
+        handleButtonState: function handleButtonState(value) {
+            this.buttonLockState = value;
         },
 
 
@@ -2230,53 +2234,130 @@ Vue.component("item-image-carousel", {
 },{"services/ResourceService":81}],26:[function(require,module,exports){
 "use strict";
 
+var ResourceService = require("services/ResourceService");
+
 Vue.component("quantity-input", {
 
-    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting"],
+    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting", "variationId"],
 
     data: function data() {
         return {
-            timeoutHandle: null
+            timeoutHandle: null,
+            internalMin: null,
+            internalMax: null,
+            basketItems: [],
+            currentCount: 0
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
-
-    /**
-     * TODO
-     */
     ready: function ready() {
-        this.timeout = this.timeout || 300;
-        this.min = this.min || 1;
-        this.max = this.max || 999;
-        this.vertical = this.vertical || false;
+        ResourceService.bind("basketItems", this);
 
-        this.$watch("value", function (newValue) {
-            if (newValue < this.min) {
-                this.value = this.min;
+        this.checkDefaultVars();
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this.vertical) {
+            this.initBasketValueWatcher();
+            this.handleMissingItems();
+        }
+    },
+
+
+    methods: {
+        countValueUp: function countValueUp() {
+            if (!(this.max && this.value === this.internalMax) && !this.waiting) {
+                this.value++;
+            }
+        },
+        countValueDown: function countValueDown() {
+            if (!(this.min && this.value === this.min && this.min === this.internalMin) && !this.waiting) {
+                this.value--;
+            }
+        },
+        checkDefaultVars: function checkDefaultVars() {
+            this.min = this.min === 0 ? null : this.min;
+            this.max = this.max === 0 ? null : this.max;
+        },
+        initDefaultVars: function initDefaultVars() {
+            this.timeout = this.timeout || 300;
+            this.internalMin = this.min || 1;
+            this.internalMax = this.max || 9999;
+            this.vertical = this.vertical || false;
+        },
+        initValueWatcher: function initValueWatcher() {
+            var _this = this;
+
+            this.$watch("value", function (newValue) {
+                if (newValue < _this.internalMin) {
+                    _this.value = _this.internalMin;
+                }
+
+                if (newValue > _this.internalMax) {
+                    _this.value = _this.internalMax;
+                }
+
+                if (_this.timeoutHandle) {
+                    window.clearTimeout(_this.timeoutHandle);
+                }
+
+                _this.timeoutHandle = window.setTimeout(function () {
+                    _this.$dispatch("quantity-change", newValue);
+                }, _this.timeout);
+            });
+        },
+        handleMissingItems: function handleMissingItems() {
+            if (this.alreadyInBasketCount() >= this.internalMin) {
+                this.internalMin = 1;
             }
 
-            if (newValue > this.max) {
-                this.value = this.max;
+            if (this.max !== null) {
+                this.internalMax = this.max - this.alreadyInBasketCount();
+
+                if (this.alreadyInBasketCount() === this.max) {
+                    this.internalMin = 0;
+                    this.internalMax = 0;
+                    this.$dispatch("out-of-stock", true);
+                } else {
+                    this.$dispatch("out-of-stock", false);
+                }
             }
 
-            if (this.timeoutHandle) {
-                window.clearTimeout(this.timeoutHandle);
+            this.value = this.internalMin;
+        },
+        initBasketValueWatcher: function initBasketValueWatcher() {
+            var _this2 = this;
+
+            ResourceService.watch("basketItems", function (newBasketItems, oldBasketItems) {
+                if (oldBasketItems) {
+                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems)) {
+                        _this2.initDefaultVars();
+
+                        _this2.handleMissingItems();
+                    }
+                }
+            });
+        },
+        alreadyInBasketCount: function alreadyInBasketCount() {
+            var _this3 = this;
+
+            if (this.basketItems.find(function (variations) {
+                return variations.variationId === _this3.variationId;
+            })) {
+                return this.basketItems.find(function (variations) {
+                    return variations.variationId === _this3.variationId;
+                }).quantity;
             }
 
-            var self = this;
-
-            this.timeoutHandle = window.setTimeout(function () {
-                self.$dispatch("quantity-change", newValue);
-            }, this.timeout);
-        });
+            return 0;
+        }
     }
 
 });
 
-},{}],27:[function(require,module,exports){
+},{"services/ResourceService":80}],27:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -4053,11 +4134,25 @@ Vue.directive("shipping-country", function (value) {
 "use strict";
 
 Vue.directive("tooltip", {
+    unbind: function unbind() {
+        $(this.el).tooltip("dispose");
+    },
+    update: function update(value) {
+        var _this = this;
 
-    bind: function bind() {
-        setTimeout(function () {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+        if (typeof value === "undefined" || value) {
+            setTimeout(function () {
+                $(_this.el).tooltip({
+                    trigger: "hover",
+                    // eslint-disable-next-line
+                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+                });
+            }, 1);
+        } else {
+            setTimeout(function () {
+                $(_this.el).tooltip("dispose");
+            }, 1);
+        }
     }
 });
 
