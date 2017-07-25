@@ -3,22 +3,42 @@
     <div id="MobileNavigation" style="display:none" ref="MobileNavigation">
         <div class="top-menu">
             <ul class="breadcrumb">
-                <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
+                {# <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
                     <a href="#" @click="navigateTo(item, true)">${ item.title }</a>
+                </li> #}
+                <li transition="breadcrumb-item" v-for="bread in breads">
+                    <a href="#" @click="navigateToNew(bread.layer, true)">${ bread.name }</a>
                 </li>
             </ul>
 
             <a class="button-close" href="#" onclick="$('#MobileNavigation').trigger('close');">X</a>
         </div>
-
-        <div class="menu-wrap">
+        
+         {# <div class="menu-wrap">
             <ul v-menu class="menu menu-${ menuIndex }" v-for="(menuIndex, menu) in getGroupedMenus()">
                 <li class="menu-item" v-bind:class="{ 'has-sub': itemHasChildren(item), 'has-url': item.url }" v-for="item in menu" v-bind:key="item.id">
                     <a href="#" @click="directTo(item)">${ item.title }</a>
                     <a class="dots" href="#" @click="navigateTo(item)" v-if="itemHasChildren(item)">...</a>
                 </li>
             </ul>
+        </div>  #}
+
+        <div class="menu-wrap">
+            <ul v-menu id="menu-1" class="menu menu-active">
+                <li class="menu-item" v-for="cat in dataContainer1">
+                    <a href="#">${ cat.name }</a>
+                    <a class="dots" href="#" v-if="cat.children.length" @click="navigateToNew(cat.children)">...</a>
+                </li>
+            </ul>
+
+            <ul v-menu id="menu-2" class="menu">
+                <li class="menu-item" v-for="cat in dataContainer2">
+                    <a href="#">${ cat.name }</a>
+                    <a class="dots" href="#" v-if="cat.children.length" @click="navigateToNew(cat.children)">...</a>
+                </li>
+            </ul>
         </div>
+
     </div>
 
 </script>

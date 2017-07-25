@@ -2,20 +2,29 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "detlef"
+        "categoryTreeRaw"
     ],
 
     data()
     {
         return {
             items: [],
-            activeItem: null
+            activeItem: null,
+            dataContainer1: [],
+            dataContainer2: [],
+            useFirstContainer: false,
+            categoryTree: [],
+            breads: []
         };
     },
 
     created()
     {
         this.$options.template = this.template;
+
+        this.buildTree(this.categoryTreeRaw);
+
+        this.dataContainer1 = this.categoryTree;
     },
 
     ready()
@@ -70,6 +79,87 @@ Vue.component("mobile-navigation", {
     },
 
     methods: {
+        // NEW
+        buildBreads()
+        {
+            this.breads = [];
+
+            const breads = [];
+            let root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
+
+            while (root.parent)
+            {
+                breads.unshift(
+                    {
+                        name: root.parent.name,
+                        layer: root.parent ? root.parent.children : this.categoryTree
+                    });
+
+                root = root.parent;
+            }
+
+            breads.unshift(
+                {
+                    name: "Home",
+                    layer: this.categoryTree
+                });
+
+            this.breads = breads;
+        },
+
+        buildTree(currentArray, parent)
+        {
+            for (const category of currentArray)
+            {
+                const newCategory =
+                    {
+                        id: category.id,
+                        level: category.level,
+                        name: category.details[0].name,
+                        url: parent ? parent.url + "/" + category.details[0].nameUrl : "/" + category.details[0].nameUrl,
+                        parent: parent,
+                        children: []
+                    };
+
+                if (parent)
+                {
+                    parent.children.push(newCategory);
+                }
+                else
+                {
+                    this.categoryTree.push(newCategory);
+                }
+
+                if (category.children)
+                {
+                    this.buildTree(category.children, newCategory);
+                }
+            }
+        },
+
+        navigateToNew(children, back)
+        {
+            back = !!back;
+
+            if (this.useFirstContainer)
+            {
+                this.dataContainer1 = children;
+
+                $("#menu-2").trigger("menu-deactivated", {back: back});
+                $("#menu-1").trigger("menu-activated", {back: back});
+            }
+            else
+            {
+                this.dataContainer2 = children;
+
+                $("#menu-1").trigger("menu-deactivated", {back: back});
+                $("#menu-2").trigger("menu-activated", {back: back});
+            }
+
+            this.useFirstContainer = !this.useFirstContainer;
+            this.buildBreads();
+        },
+        // ./NEW
         getItemById(id)
         {
             for (const key in this.items)
