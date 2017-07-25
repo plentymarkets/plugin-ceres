@@ -2268,12 +2268,12 @@ Vue.component("quantity-input", {
 
     methods: {
         countValueUp: function countValueUp() {
-            if (!(this.max && this.value === this.internalMax) && !this.waiting) {
+            if (!(this.value === this.internalMax) && !this.waiting) {
                 this.value++;
             }
         },
         countValueDown: function countValueDown() {
-            if (!(this.min && this.value === this.min && this.min === this.internalMin) && !this.waiting) {
+            if (!(this.value === this.internalMin) && !this.waiting) {
                 this.value--;
             }
         },
@@ -2357,7 +2357,7 @@ Vue.component("quantity-input", {
 
 });
 
-},{"services/ResourceService":80}],27:[function(require,module,exports){
+},{"services/ResourceService":81}],27:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
