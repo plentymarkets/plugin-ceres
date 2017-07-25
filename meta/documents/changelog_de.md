@@ -1,14 +1,23 @@
 # Release Notes für Ceres
 
-## v1.3.1 (unknown)
+## v1.3.2 (UNKNOWN)
+
+### Geändert
+
+- Das Design für die Liste der Versandarten in der Kaufabwicklung wurde geändert.
+
+## v1.3.1 (2017-07-24)
 
 ### Hinzugefügt
 
-### Geändert
+- Das Custom-Event `onVariationChanged` wurde hinzugefügt.
+- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im [Handbuch](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#275) und im [Forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155). 
+- Beim Anlegen/Editieren von Adressen werden die Felder nun rot markiert, wenn vom Server eine Fehlermeldung für diese Felder kommt. Außerdem werden die Fehler ausgegeben anstatt "Validation errors".
 
 ### Behoben
 
 - Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
+- Im **Mein Konto**-Bereich wird nun immer die E-Mail-Adresse des eingeloggten Shop-Besuchers angezeigt.
 
 ### Bekannte Probleme
 

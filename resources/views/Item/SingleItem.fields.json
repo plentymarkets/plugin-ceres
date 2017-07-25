@@ -44,9 +44,7 @@
   "images.variation.position",
   "images.variation.path",
 
-  "properties.group.backendName",
-  "properties.property.names.name",
-  "properties.property.names.lang",
-  
+  "properties.*",
+
   "defaultCategories"
 ]

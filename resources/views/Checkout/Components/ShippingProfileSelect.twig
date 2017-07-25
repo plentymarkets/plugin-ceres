@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-shipping-profile-select">
-    <div class="cmp cmp-method-list m-b-3" v-bind:class="{ 'error': this.checkoutValidation.shippingProfile.showError }">
+    <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.checkoutValidation.shippingProfile.showError }">
         <ul class="method-list">
             <li v-for="shippingProfile in checkout.shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServicePresetId }">
                 <input

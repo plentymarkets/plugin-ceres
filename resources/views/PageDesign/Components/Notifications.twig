@@ -10,7 +10,7 @@
             {% if "show_error_code" in logData or "all" in logData %}
                 <strong>${ notification.code }</strong>
             {% endif %}
-            ${ notification.message }
+            {!! notification.message !!}
             <p class="small" v-for="trace in notification.stackTrace">${ trace.message }</p>
         </div>
     </div>

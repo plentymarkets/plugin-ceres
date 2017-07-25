@@ -1,3 +1,5 @@
+const NotificationService = require("services/NotificationService");
+
 import AddressService from "services/AddressService";
 import ValidationService from "services/ValidationService";
 
@@ -15,7 +17,12 @@ Vue.component("create-update-address", {
     data()
     {
         return {
-            waiting: false
+            waiting: false,
+            addressFormNames:
+            {
+                1: "#billing_address_form",
+                2: "#delivery_address_form"
+            }
         };
     },
 
@@ -30,33 +37,15 @@ Vue.component("create-update-address", {
          */
         validate()
         {
-
-            if (this.addressType === "1")
-            {
-                ValidationService.validate($("#billing_address_form"))
-                    .done(() =>
-                    {
-                        this.saveAddress();
-                    })
-                    .fail(invalidFields =>
-                    {
-                        ValidationService.markInvalidFields(invalidFields, "error");
-                    });
-
-            }
-            else if (this.addressType === "2")
-            {
-                ValidationService.validate($("#delivery_address_form"))
-                    .done(invalidFields =>
-                    {
-                        this.saveAddress();
-                    })
-                    .fail(invalidFields =>
-                    {
-                        ValidationService.markInvalidFields(invalidFields, "error");
-                    });
-            }
-
+            ValidationService.validate($(this.addressFormNames[this.addressType]))
+                .done(() =>
+                {
+                    this.saveAddress();
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
         },
 
         /**
@@ -85,7 +74,7 @@ Vue.component("create-update-address", {
 
             AddressService
                 .updateAddress(this.addressData, this.addressType)
-                .done(function()
+                .done(() =>
                 {
                     this.addressModal.hide();
 
@@ -105,11 +94,16 @@ Vue.component("create-update-address", {
                     }
 
                     this.waiting = false;
-                }.bind(this))
-                .fail(function()
+                })
+                .fail(response =>
                 {
                     this.waiting = false;
-                }.bind(this));
+
+                    if (response.validation_errors)
+                    {
+                        this._handleValidationErrors(response.validation_errors);
+                    }
+                });
         },
 
         /**
@@ -123,7 +117,7 @@ Vue.component("create-update-address", {
 
             AddressService
                 .createAddress(this.addressData, this.addressType, true)
-                .done(function(newAddress)
+                .done(newAddress =>
                 {
                     this.addressData = newAddress;
 
@@ -133,11 +127,30 @@ Vue.component("create-update-address", {
                     this.$dispatch("new-address-created", this.addressData);
 
                     this.waiting = false;
-                }.bind(this))
-                .fail(function()
+                })
+                .fail(response =>
                 {
                     this.waiting = false;
-                }.bind(this));
+
+                    if (response.validation_errors)
+                    {
+                        this._handleValidationErrors(response.validation_errors);
+                    }
+                });
+        },
+
+        _handleValidationErrors(validationErrors)
+        {
+            ValidationService.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+
+            let errorMessage = "";
+
+            for (const value of Object.values(validationErrors))
+            {
+                errorMessage += value + "<br>";
+            }
+
+            NotificationService.error(errorMessage);
         },
 
         _syncOptionTypesAddressData()
@@ -179,8 +192,6 @@ Vue.component("create-update-address", {
                     }
                 }
             }
-
         }
     }
-
 });
