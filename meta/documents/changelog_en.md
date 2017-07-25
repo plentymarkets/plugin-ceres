@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v1.3.2 (UNKNOWN)
+
+### Changed
+
+- The design for the list of shipping methods in the checkout was updated.
+
 ## v1.3.1 (2017-07-24)
 
 ### Added
