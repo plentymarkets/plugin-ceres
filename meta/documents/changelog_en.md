@@ -2,6 +2,10 @@
 
 ## v1.3.2 (2017-07-26)
 
+### Added
+
+- The **Phone number** field has been added to the address forms of the delivery countries DE and UK.
+
 ### Changed
 
 - The design for the list of shipping methods in the checkout was updated.

@@ -3,7 +3,8 @@
 ## v1.3.2 (2017-07-26)
 
 ### Hinzugefügt
-- In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Telefon** hinzugefügt
+
+- In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Telefon** hinzugefügt.
 
 ### Geändert
 
