@@ -267,7 +267,7 @@ body.menu-is-visible { overflow-y : hidden; }
 	position 	: fixed;
 	right 		: 0;
 	top 		: 0;
-	transform 	: translateX(-100%);
+	transform 	: translateX(100%);
 	transition 	: all .3s ease;
 
 	&.open {
@@ -311,7 +311,7 @@ body.menu-is-visible { overflow-y : hidden; }
 
 	ul.mainmenu {
 		list-style 	: none;
-		height 		: 100%;
+		height 		: 90%;
 		margin 		: 0;
 		padding 	: 0;
 		position 	: absolute;
@@ -383,8 +383,8 @@ body.menu-is-visible { overflow-y : hidden; }
 }
 
 .animate-outToRight .ddown {
-  -webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+  -webkit-animation: outToRight 0.2s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToRight 0.2s both cubic-bezier(0.7, 0, 0.3, 1); }
 
 @-webkit-keyframes outToRight {
   to {
@@ -397,8 +397,8 @@ body.menu-is-visible { overflow-y : hidden; }
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0); } }
 .animate-outToLeft .ddown {
-  -webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+  -webkit-animation: outToLeft 0.2s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: outToLeft 0.2s both cubic-bezier(0.7, 0, 0.3, 1); }
 
 @-webkit-keyframes outToLeft {
   to {
@@ -411,8 +411,8 @@ body.menu-is-visible { overflow-y : hidden; }
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0); } }
 .animate-inFromLeft .ddown {
-  -webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+  -webkit-animation: inFromLeft 0.2s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromLeft 0.2s both cubic-bezier(0.7, 0, 0.3, 1); }
 
 @-webkit-keyframes inFromLeft {
   from {
@@ -433,8 +433,8 @@ body.menu-is-visible { overflow-y : hidden; }
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 .animate-inFromRight .ddown {
-  -webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
+  -webkit-animation: inFromRight 0.2s both cubic-bezier(0.7, 0, 0.3, 1);
+  animation: inFromRight 0.2s both cubic-bezier(0.7, 0, 0.3, 1); }
 
 @-webkit-keyframes inFromRight {
   from {

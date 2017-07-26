@@ -13,11 +13,12 @@
             </li>
         </ul>
 
+
         <ul v-menu id="menu-1" class="mainmenu menu-active">
             <li class="ddown" v-for="category in dataContainer1">
-                <a href="#" @click="navigateTo(category)">${ category.details[0].name }</a>
+                <a href="#" @click="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
 
-                <span class="nav-direction" v-if="category.children" @click="slideTo(category.children)">
+                <span class="nav-direction" v-if="category.children && category.showChilds" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
@@ -25,9 +26,9 @@
 
         <ul v-menu id="menu-2" class="mainmenu">
             <li class="ddown" v-for="category in dataContainer2">
-                <a href="#" @click="navigateTo(category)">${ category.details[0].name }</a>
+                <a href="#" @click="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
                 
-                <span class="nav-direction" v-if="category.children" @click="slideTo(category.children)">
+                <span class="nav-direction" v-if="category.children && category.showChilds" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>

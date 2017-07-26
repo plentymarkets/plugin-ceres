@@ -39,14 +39,26 @@ Vue.component("mobile-navigation", {
     methods: {
         buildTree(currentArray, parent)
         {
+            let showChilds = false;
+
             for (const category of currentArray)
             {
                 category.parent = parent;
+
+                if (category.details.length && category.details[0].name)
+                {
+                    showChilds = true;
+                }
 
                 if (category.children)
                 {
                     this.buildTree(category.children, category);
                 }
+            }
+
+            if (parent)
+            {
+                parent.showChilds = showChilds;
             }
         },
 
