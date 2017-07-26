@@ -2,7 +2,7 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "categoryTreeRaw"
+        "categoryTree"
     ],
 
     data()
@@ -11,8 +11,7 @@ Vue.component("mobile-navigation", {
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
-            categoryTree: [],
-            breads: []
+            breadcrumbs: []
         };
     },
 
@@ -20,7 +19,7 @@ Vue.component("mobile-navigation", {
     {
         this.$options.template = this.template;
 
-        this.buildTree(this.categoryTreeRaw);
+        this.buildTree(this.categoryTree);
 
         this.dataContainer1 = this.categoryTree;
     },
@@ -40,28 +39,11 @@ Vue.component("mobile-navigation", {
         {
             for (const category of currentArray)
             {
-                const newCategory =
-                    {
-                        id: category.id,
-                        level: category.level,
-                        name: category.details[0].name,
-                        url: parent ? parent.url + "/" + category.details[0].nameUrl : "/" + category.details[0].nameUrl,
-                        parent: parent,
-                        children: []
-                    };
-
-                if (parent)
-                {
-                    parent.children.push(newCategory);
-                }
-                else
-                {
-                    this.categoryTree.push(newCategory);
-                }
+                category.parent = parent;
 
                 if (category.children)
                 {
-                    this.buildTree(category.children, newCategory);
+                    this.buildTree(category.children, category);
                 }
             }
         },
@@ -86,28 +68,25 @@ Vue.component("mobile-navigation", {
             }
 
             this.useFirstContainer = !this.useFirstContainer;
-            this.buildBreads();
+            this.buildBreadcrumbs();
         },
 
-        buildBreads()
+        buildBreadcrumbs()
         {
-            this.breads = [];
+            this.breadcrumbs = [];
 
-            const breads = [];
             let root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
 
             while (root.parent)
             {
-                breads.unshift(
+                this.breadcrumbs.unshift(
                     {
-                        name: root.parent.name,
+                        name: root.parent.details[0].name,
                         layer: root.parent ? root.parent.children : this.categoryTree
                     });
 
                 root = root.parent;
             }
-
-            this.breads = breads;
         },
 
         closeNavigation()

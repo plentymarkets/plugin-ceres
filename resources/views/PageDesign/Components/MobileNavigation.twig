@@ -8,16 +8,16 @@
                 <i class="fa fa-home" aria-hidden="true"></i>
             </li>
 
-            <li  class="breadcrumb-item" v-for="bread in breads" @click="navigateTo(bread.layer, true)">
-                ${ bread.name }
+            <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="navigateTo(breadcrumb.layer, true)">
+                ${ breadcrumb.name }
             </li>
         </ul>
 
         <ul v-menu id="menu-1" class="mainmenu menu-active">
             <li class="ddown" v-for="cat in dataContainer1">
-                <a href="#">${ cat.name }</a>
+                <a href="#">${ cat.details[0].name }</a>
 
-                <span class="nav-direction" v-if="cat.children.length" @click="navigateTo(cat.children)">
+                <span class="nav-direction" v-if="cat.children" @click="navigateTo(cat.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
@@ -25,9 +25,9 @@
 
         <ul v-menu id="menu-2" class="mainmenu">
             <li class="ddown" v-for="cat in dataContainer2">
-                <a href="#">${ cat.name }</a>
+                <a href="#">${ cat.details[0].name }</a>
                 
-                <span class="nav-direction" v-if="cat.children.length" @click="navigateTo(cat.children)">
+                <span class="nav-direction" v-if="cat.children" @click="navigateTo(cat.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
