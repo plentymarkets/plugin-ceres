@@ -1,14 +1,14 @@
 <script type="x/template" id="vue-mobile-navigation">
-
     <div class="mobile-navigation" style="z-index:9999999">
-        <ul class="breadcrumb">
-            <li class="btnClose"></li>
 
-            <li class="breadcrumb-item" @click="navigateToNew(categoryTree, true)">
+        <ul class="breadcrumb">
+            <li class="btn-close" @click="closeNavigation()"></li>
+
+            <li class="breadcrumb-item" @click="navigateTo(categoryTree, true)">
                 <i class="fa fa-home" aria-hidden="true"></i>
             </li>
 
-            <li transition="breadcrumb-item" :key="bread.name" class="breadcrumb-item" v-for="bread in breads" @click="navigateToNew(bread.layer, true)">
+            <li  class="breadcrumb-item" v-for="bread in breads" @click="navigateTo(bread.layer, true)">
                 ${ bread.name }
             </li>
         </ul>
@@ -17,7 +17,7 @@
             <li class="ddown" v-for="cat in dataContainer1">
                 <a href="#">${ cat.name }</a>
 
-                <span class="nav-direction" v-if="cat.children.length" @click="navigateToNew(cat.children)">
+                <span class="nav-direction" v-if="cat.children.length" @click="navigateTo(cat.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
@@ -27,141 +27,11 @@
             <li class="ddown" v-for="cat in dataContainer2">
                 <a href="#">${ cat.name }</a>
                 
-                <span class="nav-direction" v-if="cat.children.length" @click="navigateToNew(cat.children)">
+                <span class="nav-direction" v-if="cat.children.length" @click="navigateTo(cat.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
         </ul>
-    </div>
-
-    <div id="MobileNavigation" ref="MobileNavigation" style="display:none">
-        <div class="top-menu">
-            <ul class="breadcrumb">
-                {# <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
-                    <a href="#" @click="navigateTo(item, true)">${ item.title }</a>
-                </li> #}
-                <li transition="breadcrumb-item" v-for="bread in breads">
-                    <a href="#" @click="navigateToNew(bread.layer, true)">${ bread.name }</a>
-                </li>
-            </ul>
-
-            <a class="button-close" href="#" onclick="$('#MobileNavigation').trigger('close');">X</a>
-        </div>
-        
-         {# <div class="menu-wrap">
-            <ul v-menu class="menu menu-${ menuIndex }" v-for="(menuIndex, menu) in getGroupedMenus()">
-                <li class="menu-item" v-bind:class="{ 'has-sub': itemHasChildren(item), 'has-url': item.url }" v-for="item in menu" v-bind:key="item.id">
-                    <a href="#" @click="directTo(item)">${ item.title }</a>
-                    <a class="dots" href="#" @click="navigateTo(item)" v-if="itemHasChildren(item)">...</a>
-                </li>
-            </ul>
-        </div>  #}
-
-         <div class="menu-wrap">
-            <ul v-menu id="menu-1" class="menu menu-active">
-                <li class="menu-item" v-for="cat in dataContainer1">
-                    <a href="#">${ cat.name }</a>
-                    <a class="dots" href="#" v-if="cat.children.length" @click="navigateToNew(cat.children)">...</a>
-                </li>
-            </ul>
-
-            <ul v-menu id="menu-2" class="menu">
-                <li class="menu-item" v-for="cat in dataContainer2">
-                    <a href="#">${ cat.name }</a>
-                    <a class="dots" href="#" v-if="cat.children.length" @click="navigateToNew(cat.children)">...</a>
-                </li>
-            </ul>
-        </div> 
 
     </div>
-
 </script>
-
-<style>
-    @charset "UTF-8";
-.breadcrumb-item-transition {
-  transition: all 1s ease;
-  overflow: hidden; }
-
-.breadcrumb-item-enter, .breadcrumb-item-leave {
-  opacity: 0;
-  transform: translateX(-30px); }
-
-.mainmenu-[class^='animate-'],
-.mainmenu[class*=' animate-'] {
-  display: block !important;
-}
-
-.animate-outToRight .ddown {
-  -webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
-
-@-webkit-keyframes outToRight {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0); } }
-@keyframes outToRight {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0); } }
-.animate-outToLeft .ddown {
-  -webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
-
-@-webkit-keyframes outToLeft {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0); } }
-@keyframes outToLeft {
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0); } }
-.animate-inFromLeft .ddown {
-  -webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
-
-@-webkit-keyframes inFromLeft {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0); }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); } }
-@keyframes inFromLeft {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0); }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); } }
-.animate-inFromRight .ddown {
-  -webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
-  animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
-
-@-webkit-keyframes inFromRight {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0); }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); } }
-@keyframes inFromRight {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0); }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); } }
-</style>
