@@ -1,3 +1,5 @@
+import CategoryRendererService from "services/CategoryRendererService";
+
 Vue.component("mobile-navigation", {
 
     props: [
@@ -48,7 +50,13 @@ Vue.component("mobile-navigation", {
             }
         },
 
-        navigateTo(children, back)
+        navigateTo(category)
+        {
+            this.closeNavigation();
+            CategoryRendererService.renderItems(category);
+        },
+
+        slideTo(children, back)
         {
             back = !!back;
 

@@ -4,30 +4,30 @@
         <ul class="breadcrumb">
             <li class="btn-close" @click="closeNavigation()"></li>
 
-            <li class="breadcrumb-item" @click="navigateTo(categoryTree, true)">
+            <li class="breadcrumb-item" @click="slideTo(categoryTree, true)">
                 <i class="fa fa-home" aria-hidden="true"></i>
             </li>
 
-            <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="navigateTo(breadcrumb.layer, true)">
+            <li  class="breadcrumb-item" v-for="breadcrumb in breadcrumbs" @click="slideTo(breadcrumb.layer, true)">
                 ${ breadcrumb.name }
             </li>
         </ul>
 
         <ul v-menu id="menu-1" class="mainmenu menu-active">
-            <li class="ddown" v-for="cat in dataContainer1">
-                <a href="#">${ cat.details[0].name }</a>
+            <li class="ddown" v-for="category in dataContainer1">
+                <a href="#" @click="navigateTo(category)">${ category.details[0].name }</a>
 
-                <span class="nav-direction" v-if="cat.children" @click="navigateTo(cat.children)">
+                <span class="nav-direction" v-if="category.children" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
         </ul>
 
         <ul v-menu id="menu-2" class="mainmenu">
-            <li class="ddown" v-for="cat in dataContainer2">
-                <a href="#">${ cat.details[0].name }</a>
+            <li class="ddown" v-for="category in dataContainer2">
+                <a href="#" @click="navigateTo(category)">${ category.details[0].name }</a>
                 
-                <span class="nav-direction" v-if="cat.children" @click="navigateTo(cat.children)">
+                <span class="nav-direction" v-if="category.children" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </span>
             </li>
