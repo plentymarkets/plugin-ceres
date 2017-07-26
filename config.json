@@ -927,7 +927,7 @@
             "billing_address.address3"  : "Additional address 1",
             "billing_address.address4"  : "Additional address 2",
             "billing_address.stateId"   : "State",
-            "billing_address.telephone" : "Telephone"
+            "billing_address.phoneNumber" : "Phone number"
 
         },
         "default"                   : "billing_address.name1, billing_address.salutation"
@@ -948,7 +948,7 @@
             "billing_address.address3"  : "Additional address 1",
             "billing_address.address4"  : "Additional address 2",
             "billing_address.stateId"   : "State",
-            "billing_address.telephone" : "Telephone"
+            "billing_address.phoneNumber" : "Phone number"
 
         },
         "default"                   : ""
@@ -967,7 +967,7 @@
         "delivery_address.address3"   : "Additional address 1",
         "delivery_address.address4"   : "Additional address 2",
         "delivery_address.stateId"    : "State",
-        "delivery_address.telephone"  : "Telephone"
+        "delivery_address.phoneNumber"  : "Phone number"
 
       },
       "default"                   : "delivery_address.name1, delivery_address.salutation"
@@ -986,7 +986,7 @@
         "delivery_address.address3"   : "Additional address 1",
         "delivery_address.address4"   : "Additional address 2",
         "delivery_address.stateId"    : "State",
-        "delivery_address.telephone"  : "Telephone"
+        "delivery_address.phoneNumber"  : "Phone number"
 
       },
       "default"                   : ""
@@ -1007,7 +1007,7 @@
         "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
-        "billing_address.telephone" : "Telephone"
+        "billing_address.phoneNumber" : "Phone number"
 
       },
       "default"                   : "billing_address.name1, billing_address.address2, billing_address.salutation"
@@ -1028,7 +1028,7 @@
         "billing_address.address2"  : "Address 2",
         "billing_address.address3"  : "Address 3",
         "billing_address.address4"  : "Address 4",
-        "billing_address.telephone" : "Telephone"
+        "billing_address.phoneNumber" : "Phone number"
 
       },
       "default"                   : ""
@@ -1047,7 +1047,7 @@
         "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
-        "delivery_address.telephone" : "Telephone"
+        "delivery_address.phoneNumber"  : "Phone number"
 
       },
       "default"                   : "delivery_address.name1, delivery_address.salutation"
@@ -1066,7 +1066,7 @@
         "delivery_address.address2"  : "Address 2",
         "delivery_address.address3"  : "Address 3",
         "delivery_address.address4"  : "Address 4",
-        "delivery_address.telephone" : "Telephone"
+        "delivery_address.phoneNumber"  : "Phone number"
 
       },
       "default"                   : ""
