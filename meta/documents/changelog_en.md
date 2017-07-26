@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v1.3.2 (UNKNOWN)
+## v1.3.2 (2017-07-26)
 
 ### Changed
 
@@ -9,6 +9,7 @@
 ### Fixed
 
 - The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
+- The item images on the order confirmation page are now displayed correctly.
 
 ### Known issues
 

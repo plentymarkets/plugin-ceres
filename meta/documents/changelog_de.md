@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v1.3.2 (UNKNOWN)
+## v1.3.2 (2017-07-26)
 
 ### Geändert
 
@@ -9,6 +9,7 @@
 ### Behoben
 
 - Die Mengeneingabe in der Einzelansicht eines Artikels, der Warenkorbvorschau und im Warenkorb berücksichtigt nun die Minimal- und Maximalbestellmenge eines Artikels.
+- Die Artikelbilder in der Bestellbestätigungsseite werden nun korrekt ausgegeben.
 
 ### Bekannte Probleme
 
