@@ -2,6 +2,9 @@
 
 ## v1.3.2 (UNKNOWN)
 
+### Hinzugefügt
+- In den Adressformularen für die Lieferländer DE und UK wurde das Feld **Telefon** hinzugefügt
+
 ### Geändert
 
 - Das Design für die Liste der Versandarten in der Kaufabwicklung wurde geändert.
