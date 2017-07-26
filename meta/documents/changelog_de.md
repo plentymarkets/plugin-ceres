@@ -9,6 +9,15 @@
 
 - Das Design für die Liste der Versandarten in der Kaufabwicklung wurde geändert.
 
+### Behoben
+
+- Der QuantityInput berücksichtigt nun die Min- und Maxbestellmenge eines Artikels.
+
+### Bekannte Probleme
+
+- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
+- Wenn ein Artikel öfter in den Warenkorb gelegt wird als Warenbestand vorhanden ist kommt eine "Bad Params" Fehlermeldung.
+
 ## v1.3.1 (2017-07-24)
 
 ### Hinzugefügt
@@ -21,10 +30,6 @@
 
 - Wenn im Footer Kategorien verknüpft werden, werden diese nun sprachabhängig geladen.
 - Im **Mein Konto**-Bereich wird nun immer die E-Mail-Adresse des eingeloggten Shop-Besuchers angezeigt.
-
-### Bekannte Probleme
-
-- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
 
 ## v1.3.0 (2017-07-13)
 
