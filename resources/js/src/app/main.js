@@ -7,7 +7,8 @@ var init = (function($, window, document)
     {
         $("#btnMainMenuToggler").click(function()
         {
-            $("#mainNavbarCollapsable").toggleClass("open");
+            // $("#mainNavbarCollapsable").toggleClass("open");
+            $(".mobile-navigation").toggleClass("open");
             $("body").toggleClass("menu-is-visible");
         });
 
