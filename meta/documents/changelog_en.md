@@ -6,6 +6,15 @@
 
 - The design for the list of shipping methods in the checkout was updated.
 
+### Fixed
+
+- The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
+
+### Known issues
+
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+- If the quantity of an item added to the shopping cart exceeds the stock of the item, a `Bad Params` error message is shown.
+
 ## v1.3.1 (2017-07-24)
 
 ### Added
@@ -18,10 +27,6 @@
 
 - When linking categories in the footer, the content of these categories will now be displayed depending on the respective language.
 - The email address of a logged-in customer will be displayed in the **My account** area.
-
-### Known issues
-
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
 
 ## v1.3.0 (2017-07-13)
 
