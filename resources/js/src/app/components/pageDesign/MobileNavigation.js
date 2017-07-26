@@ -98,12 +98,6 @@ Vue.component("mobile-navigation", {
                 root = root.parent;
             }
 
-            breads.unshift(
-                {
-                    name: "Home",
-                    layer: this.categoryTree
-                });
-
             this.breads = breads;
         },
 
@@ -272,7 +266,7 @@ Vue.component("mobile-navigation", {
 				// this removes the animation class automatically after the animation has completed
                 $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () =>
                 {
-                    $(".menu").removeClass((index, className) =>
+                    $(".mainmenu").removeClass((index, className) =>
                     {
                         return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
                     });

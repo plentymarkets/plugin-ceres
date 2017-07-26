@@ -1,6 +1,40 @@
 <script type="x/template" id="vue-mobile-navigation">
 
-    <div id="MobileNavigation" style="display:none" ref="MobileNavigation">
+    <div class="mobile-navigation" style="z-index:9999999">
+        <ul class="breadcrumb">
+            <li class="btnClose"></li>
+
+            <li class="breadcrumb-item" @click="navigateToNew(categoryTree, true)">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </li>
+
+            <li transition="breadcrumb-item" :key="bread.name" class="breadcrumb-item" v-for="bread in breads" @click="navigateToNew(bread.layer, true)">
+                ${ bread.name }
+            </li>
+        </ul>
+
+        <ul v-menu id="menu-1" class="mainmenu menu-active">
+            <li class="ddown" v-for="cat in dataContainer1">
+                <a href="#">${ cat.name }</a>
+
+                <span class="nav-direction" v-if="cat.children.length" @click="navigateToNew(cat.children)">
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                </span>
+            </li>
+        </ul>
+
+        <ul v-menu id="menu-2" class="mainmenu">
+            <li class="ddown" v-for="cat in dataContainer2">
+                <a href="#">${ cat.name }</a>
+                
+                <span class="nav-direction" v-if="cat.children.length" @click="navigateToNew(cat.children)">
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <div id="MobileNavigation" ref="MobileNavigation" style="display:none">
         <div class="top-menu">
             <ul class="breadcrumb">
                 {# <li transition="breadcrumb-item" v-for="item in getBreadcrumbItems(activeItem)" v-bind:key="item.id">
@@ -23,7 +57,7 @@
             </ul>
         </div>  #}
 
-        <div class="menu-wrap">
+         <div class="menu-wrap">
             <ul v-menu id="menu-1" class="menu menu-active">
                 <li class="menu-item" v-for="cat in dataContainer1">
                     <a href="#">${ cat.name }</a>
@@ -37,7 +71,7 @@
                     <a class="dots" href="#" v-if="cat.children.length" @click="navigateToNew(cat.children)">...</a>
                 </li>
             </ul>
-        </div>
+        </div> 
 
     </div>
 
@@ -45,17 +79,6 @@
 
 <style>
     @charset "UTF-8";
-/* Vue 2.x */
-/*
-.list-enter-active, .list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-*/
-/* Vue 1.x */
 .breadcrumb-item-transition {
   transition: all 1s ease;
   overflow: hidden; }
@@ -64,11 +87,12 @@
   opacity: 0;
   transform: translateX(-30px); }
 
-.menu[class^='animate-'],
-.menu[class*=' animate-'] {
-  visibility: visible !important; }
+.mainmenu-[class^='animate-'],
+.mainmenu[class*=' animate-'] {
+  display: block !important;
+}
 
-.animate-outToRight .menu-item {
+.animate-outToRight .ddown {
   -webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
   animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
 
@@ -82,7 +106,7 @@
     opacity: 0;
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0); } }
-.animate-outToLeft .menu-item {
+.animate-outToLeft .ddown {
   -webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
   animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
 
@@ -96,7 +120,7 @@
     opacity: 0;
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0); } }
-.animate-inFromLeft .menu-item {
+.animate-inFromLeft .ddown {
   -webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
   animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
 
@@ -118,7 +142,7 @@
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-.animate-inFromRight .menu-item {
+.animate-inFromRight .ddown {
   -webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
   animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1); }
 
@@ -140,81 +164,4 @@
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
-#MobileNavigation {
-  background-color: #1c1d22;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  overflow: hidden; }
-  #MobileNavigation .menu-wrap {
-    position: absolute;
-    bottom: 0;
-    top: 3.5em;
-    overflow: hidden;
-    width: 100%; }
-  #MobileNavigation .menu {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    list-style-type: none;
-    width: 100%;
-    padding: 0;
-    margin: 0; }
-    #MobileNavigation .menu.menu-active {
-      visibility: visible; }
-    #MobileNavigation .menu li.menu-item {
-      clear: both; }
-      #MobileNavigation .menu li.menu-item a {
-        padding: 0.6em 1em;
-        display: inline-block;
-        color: #bdbdbd;
-        text-decoration: none; }
-        #MobileNavigation .menu li.menu-item a:hover {
-          color: #5c5edc; }
-        #MobileNavigation .menu li.menu-item a.dots {
-          float: right; }
-  #MobileNavigation .top-menu {
-    clear: both;
-    overflow: hidden;
-    padding: 1em 1em 0 1em; }
-    #MobileNavigation .top-menu ul.breadcrumb {
-      overflow: hidden;
-      float: left;
-      padding: 0;
-      margin: 0;
-      color: #5c5edc; }
-      #MobileNavigation .top-menu ul.breadcrumb li {
-        float: left;
-        display: block;
-        padding: 0; }
-        #MobileNavigation .top-menu ul.breadcrumb li::before {
-          content: '→';
-          margin: 0 10px 0 16px;
-          color: #45464e; }
-        #MobileNavigation .top-menu ul.breadcrumb li:first-child {
-          padding-left: 0; }
-          #MobileNavigation .top-menu ul.breadcrumb li:first-child::before {
-            content: none;
-            margin: 0; }
-        #MobileNavigation .top-menu ul.breadcrumb li:last-child {
-          pointer-events: none;
-          cursor: default;
-          padding-right: 0; }
-        #MobileNavigation .top-menu ul.breadcrumb li a {
-          color: #5c5edc;
-          text-decoration: none; }
-          #MobileNavigation .top-menu ul.breadcrumb li a:hover {
-            color: #8182e0; }
-  #MobileNavigation .button-close {
-    float: right;
-    text-decoration: none;
-    color: #45464e; }
-
-/*# sourceMappingURL=MobileNavigation.css.map */
-
 </style>

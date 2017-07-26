@@ -57,8 +57,7 @@
             {% include getPartial('header') %}
 
             <div id="page-body" class="main">
-                <button onclick="$('#MobileNavigation').trigger('open');">Demo</button>
-                <mobile-navigation template="#vue-mobile-navigation" :category-tree-raw="{{ services.category.getNavigationTree("item", lang, 6) | json_encode }}"></mobile-navigation>                
+                <mobile-navigation template="#vue-mobile-navigation" :category-tree-raw="{{ services.category.getNavigationTree("item", lang, 6) | json_encode }}"></mobile-navigation>
                 {% block PageBody %}
                     <!-- inject content of inherited templates here -->
                 {% endblock %}
