@@ -77,7 +77,7 @@
 
                         </div>
 
-                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder().order) }}
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
 
                     </div>
 
@@ -192,7 +192,7 @@
 
                             <hr>
 
-                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", services.customer.getLatestOrder().order) %}
+                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
                             {% if grossNet|trim is not empty %}
                                 {{ grossNet }}
                             {% else %}
@@ -236,7 +236,7 @@
 
                             {% endif %}
 
-                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", services.customer.getLatestOrder().order) }}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
                         </dl>
                     </div>
                 </div>

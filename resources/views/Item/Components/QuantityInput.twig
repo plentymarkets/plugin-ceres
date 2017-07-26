@@ -1,22 +1,29 @@
 <script type="x/template" id="vue-quantity-input">
-    <div class="input-group" :class="{'vert':vertical}">
-        <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
+    <div class="input-group vert" v-if="vertical">
+        <span class="input-group-btn" v-tooltip="max && value === internalMax && internalMax != 0" data-toggle="tooltip" 
+                    data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }">
+            <button class="btn btn-secondary no-outline-button" :class="{'disabled': max && value === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
         </span>
 
-        <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
+        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="value">
+
+        <span class="input-group-btn" v-tooltip="min && value === min && min === internalMin" data-toggle="tooltip" 
+                    data-placement="left" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }">
+            <button class="btn btn-secondary no-outline-button" :class="{'disabled': min && value === min && min === internalMin || value <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
+        </span>
+    </div>
+
+    <div class="input-group" v-else>
+        <span class="input-group-btn" v-tooltip="min && value === min && min === internalMin" data-toggle="tooltip" 
+                    data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMin") }}: ${ min }">
+            <button class="btn btn-secondary no-outline-button" :class="{'disabled': min && value === min && min === internalMin || value <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center" size="3" maxlength="3" v-model="value">
+        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="value">
 
-        <span class="input-group-btn" v-if="vertical">
-            <button class="btn btn-secondary" type="button" @click="value--" :disabled="value <= min || waiting">-</button>
+        <span class="input-group-btn" v-tooltip="max && value === internalMax && internalMax != 0" data-toggle="tooltip" 
+                    data-placement="bottom" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ max }">
+            <button class="btn btn-secondary no-outline-button" :class="{'disabled': max && value === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
         </span>
-
-        <span class="input-group-btn" v-if="!vertical">
-            <button class="btn btn-secondary" type="button" @click="value++" :disabled="value >= max || waiting">+</button>
-        </span>
-
     </div>
 </script>
