@@ -136,4 +136,6 @@
     {% if page+1 <= pageMax %}
         <link rel=“next“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page+1 }) | url_encode }}“ />
     {% endif %}
+
+    <title>{{ category.details.first.name }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
