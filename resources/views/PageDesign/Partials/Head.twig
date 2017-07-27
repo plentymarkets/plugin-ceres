@@ -49,7 +49,8 @@
             enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
             enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",
             enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}",
-            enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}"
+            enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
+            shopName: "{{ config("Ceres.header.company_name") }}"
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
