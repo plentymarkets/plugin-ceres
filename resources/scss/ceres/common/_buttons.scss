@@ -1,5 +1,9 @@
 .input-group{
 
+	.no-outline-button {
+		outline: none !important;
+	}
+
 	&.vert{
 		.input-group-btn{
 			display: block;

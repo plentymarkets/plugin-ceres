@@ -191,6 +191,15 @@ Vue.component("create-update-address", {
                             }
                             break;
                         }
+
+                    case 4:
+                        {
+                            if (this.addressData.telephone && this.addressData.telephone !== optionType.value)
+                            {
+                                optionType.value = this.addressData.telephone;
+                            }
+                            break;
+                        }
                     }
                 }
             }
