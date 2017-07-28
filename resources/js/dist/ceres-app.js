@@ -4794,6 +4794,7 @@ function _updateHistory(currentCategory) {
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 }
 
 /**
@@ -5075,6 +5076,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setSearchString(query) {
@@ -5089,6 +5092,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setItemsPerPage(items) {
