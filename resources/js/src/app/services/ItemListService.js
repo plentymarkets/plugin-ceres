@@ -88,6 +88,8 @@ module.exports = (function($)
 
         query = (query.length > 0) ? query : null;
         UrlService.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setSearchString(query)
@@ -103,6 +105,8 @@ module.exports = (function($)
 
         query = (query.length > 0) ? query : null;
         UrlService.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setItemsPerPage(items)

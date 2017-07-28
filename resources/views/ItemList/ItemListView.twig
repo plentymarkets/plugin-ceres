@@ -14,6 +14,7 @@
 
 {% if services.template.isSearch() %}
     {% set sorting = config("Ceres.sort.defaultSortingSearch") %}
+    {% set searchString = request.get("query") %}
 {% else %}
     {% set sorting = config("Ceres.sort.defaultSorting") %}
 {% endif %}
@@ -85,4 +86,7 @@
 
 {% block PartialHead %}
 <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    {% if services.template.isSearch() %}
+        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ config("Ceres.header.company_name") }}</title>
+    {% endif %}
 {% endblock %}
