@@ -11,7 +11,6 @@ export function renderItems(currentCategory)
 {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
-    $("#mainNavbarCollapsable").removeClass("open");
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree))
