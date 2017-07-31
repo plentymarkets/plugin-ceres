@@ -2,6 +2,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+{% set favicon = services.webstoreConfig.getWebstoreConfig().domainSsl ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
+
+<link rel="icon" type="img/ico" href="{{ favicon }}">
+
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set logData = config("Ceres.log.data")|split(', ') %}
@@ -14,7 +18,7 @@
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
 
-<title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+{# <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title> #}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
     <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
@@ -45,7 +49,8 @@
             enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
             enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",
             enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}",
-            enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}"
+            enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
+            shopName: "{{ config("Ceres.header.company_name") }}"
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},

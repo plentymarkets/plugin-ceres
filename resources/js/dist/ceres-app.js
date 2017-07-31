@@ -1435,6 +1435,14 @@ Vue.component("create-update-address", {
                                     }
                                     break;
                                 }
+
+                            case 4:
+                                {
+                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                                        optionType.value = this.addressData.telephone;
+                                    }
+                                    break;
+                                }
                         }
                     }
                 } catch (err) {
@@ -4546,7 +4554,7 @@ var CheckoutService = require("services/CheckoutService");
  * @returns {*}
  */
 function createAddress(address, addressType, setActive) {
-    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
+    return ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
         if (setActive) {
             if (addressType === 1) {
                 CheckoutService.setBillingAddressId(response.id);
@@ -4565,7 +4573,7 @@ function createAddress(address, addressType, setActive) {
  */
 function updateAddress(newData, addressType) {
     addressType = addressType || newData.pivot.typeId;
-    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
+    return ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
 }
 
 /**
@@ -4575,7 +4583,7 @@ function updateAddress(newData, addressType) {
  * @returns {*}
  */
 function deleteAddress(addressId, addressType) {
-    return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    return ApiService.delete("/rest/io/customer/address/" + addressId + "?typeId=" + addressType);
 }
 
 exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
@@ -4786,6 +4794,7 @@ function _updateHistory(currentCategory) {
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 }
 
 /**
@@ -5067,6 +5076,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setSearchString(query) {
@@ -5081,6 +5092,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setItemsPerPage(items) {
