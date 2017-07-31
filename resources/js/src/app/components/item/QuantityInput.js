@@ -139,7 +139,7 @@ Vue.component("quantity-input", {
             {
                 if (oldBasketItems)
                 {
-                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems))
+                    if (JSON.stringify(newBasketItems) !== JSON.stringify(oldBasketItems))
                     {
                         this.initDefaultVars();
 

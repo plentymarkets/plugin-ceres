@@ -3,12 +3,12 @@ import {renderItems}from "services/CategoryRendererService";
 Vue.directive(
     "render-category",
     {
-        bind: function(el)
+        bind: function(el, binding)
         {
             el.onclick = function(event)
             {
                 event.preventDefault();
-                renderItems(value);
+                renderItems(binding.value);
             };
         }
     });
