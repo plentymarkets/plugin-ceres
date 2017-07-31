@@ -1,4 +1,7 @@
-const ResourceService = require("services/ResourceService");
+import ExceptionMap from "exceptions/ExceptionMap";
+
+const ResourceService     = require("services/ResourceService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
 
@@ -41,11 +44,16 @@ Vue.component("add-to-basket", {
                     basketItemOrderParams   :   this.item.properties
                 };
 
-            ResourceService
-                .getResource("basketItems")
-                .push(basketObject);
-
-            this.openAddToBasketOverlay();
+            ResourceService.getResource("basketItems").push(basketObject)
+                .done(function()
+                {
+                    this.openAddToBasketOverlay();
+                }
+                .bind(this))
+                .fail(function(response)
+                {
+                    NotificationService.error(Translations.Template[ExceptionMap.get(response.data.exceptionCode.toString())]).closeAfter(5000);
+                });
         },
 
         directToItem()
