@@ -48,6 +48,8 @@
     <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
     <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
 
+    {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
+
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">
             <div class="col-xs-12">

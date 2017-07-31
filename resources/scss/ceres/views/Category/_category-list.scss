@@ -81,3 +81,51 @@
 .item-list-frame.loading:not(.blur-effect) > ul {
   display: none
 }
+
+.parallax-img-container {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 300px;
+
+    & > .parallax-text-container {
+        position: absolute;
+        bottom: 0;
+
+        & > h1 {
+            color: #fff;
+            font-size: 300%;
+            text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.75);
+            bottom: 0;
+            width: 100%;
+            margin-left: 1rem;
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+@include media-breakpoint-up(sm){
+    .parallax-img-container {
+        height: 350px;
+
+        & > .parallax-text-container > h1 {
+            font-size: 400%;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+@include media-breakpoint-up(md){
+    .parallax-img-container {
+        height: 400px;
+
+        & > .parallax-text-container > h1 {
+            font-size: 500%;
+            margin-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+}
