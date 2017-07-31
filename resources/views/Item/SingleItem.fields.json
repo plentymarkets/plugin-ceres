@@ -46,5 +46,7 @@
 
   "properties.*",
 
-  "defaultCategories"
+  "defaultCategories",
+
+  "filter.isSalable"
 ]

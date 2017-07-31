@@ -19,5 +19,6 @@
   "images.variation.position",
   "images.variation.urlPreview",
   "images.variation.path",
-  "properties.*"
+  "properties.*",
+  "filter.isSalable"
 ]
