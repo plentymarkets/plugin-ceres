@@ -104,6 +104,19 @@
             margin-bottom: .5rem;
         }
     }
+
+    &:not([style^='background-image']) {
+        height: auto;
+        
+        & > .parallax-text-container {
+        position: inherit;
+
+            & > h1 {
+                margin-left: 0;
+                margin-bottom: 0;
+            }
+        }    
+    }
 }
 
 @include media-breakpoint-up(sm){
