@@ -1,6 +1,10 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.basket") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
 {% block PageBody %}
 
     {{ component( "Ceres::Basket.Components.BasketList" ) }}

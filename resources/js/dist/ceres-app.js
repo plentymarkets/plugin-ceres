@@ -54,9 +54,47 @@ Vue.component("add-item-to-basket-overlay", {
         },
         setPriceFromData: function setPriceFromData() {
             if (this.basketItem.currentBasketItem.calculatedPrices) {
-                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price;
+                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price + this.calculateSurcharge();
                 this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
             }
+        },
+        calculateSurcharge: function calculateSurcharge() {
+
+            var sumSurcharge = 0;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.basketItem.currentBasketItem.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+
+                    if (property.property.value && property.property.value.length > 0) {
+                        if (property.surcharge > 0) {
+                            sumSurcharge += property.surcharge;
+                        } else if (property.property.surcharge > 0) {
+                            sumSurcharge += property.property.surcharge;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return sumSurcharge;
         },
 
 
@@ -113,11 +151,12 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale"],
+    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale", "showOrderProperties"],
 
     data: function data() {
         return {
-            quantity: 1
+            quantity: 1,
+            buttonLockState: false
         };
     },
     created: function created() {
@@ -134,7 +173,8 @@ Vue.component("add-to-basket", {
         addToBasket: function addToBasket() {
             var basketObject = {
                 variationId: this.variationId,
-                quantity: this.quantity
+                quantity: this.quantity,
+                basketItemOrderParams: this.item.properties
             };
 
             ResourceService.getResource("basketItems").push(basketObject);
@@ -143,6 +183,9 @@ Vue.component("add-to-basket", {
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
+        },
+        handleButtonState: function handleButtonState(value) {
+            this.buttonLockState = value;
         },
 
 
@@ -1214,13 +1257,19 @@ var _ValidationService2 = _interopRequireDefault(_ValidationService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var NotificationService = require("services/NotificationService");
+
 Vue.component("create-update-address", {
 
     props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
 
     data: function data() {
         return {
-            waiting: false
+            waiting: false,
+            addressFormNames: {
+                1: "#billing_address_form",
+                2: "#delivery_address_form"
+            }
         };
     },
     created: function created() {
@@ -1235,19 +1284,11 @@ Vue.component("create-update-address", {
         validate: function validate() {
             var _this = this;
 
-            if (this.addressType === "1") {
-                _ValidationService2.default.validate($("#billing_address_form")).done(function () {
-                    _this.saveAddress();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            } else if (this.addressType === "2") {
-                _ValidationService2.default.validate($("#delivery_address_form")).done(function (invalidFields) {
-                    _this.saveAddress();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
+            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+                _this.saveAddress();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
         },
 
 
@@ -1267,29 +1308,35 @@ Vue.component("create-update-address", {
          * Update an address
          */
         updateAddress: function updateAddress() {
+            var _this2 = this;
+
             this.waiting = true;
 
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
-                this.addressModal.hide();
+                _this2.addressModal.hide();
 
-                for (var key in this.addressList) {
-                    var address = this.addressList[key];
+                for (var key in _this2.addressList) {
+                    var address = _this2.addressList[key];
 
-                    if (address.id === this.addressData.id) {
-                        for (var attribute in this.addressList[key]) {
-                            this.addressList[key][attribute] = this.addressData[attribute];
+                    if (address.id === _this2.addressData.id) {
+                        for (var attribute in _this2.addressList[key]) {
+                            _this2.addressList[key][attribute] = _this2.addressData[attribute];
                         }
 
                         break;
                     }
                 }
 
-                this.waiting = false;
-            }.bind(this)).fail(function () {
-                this.waiting = false;
-            }.bind(this));
+                _this2.waiting = false;
+            }).fail(function (response) {
+                _this2.waiting = false;
+
+                if (response.validation_errors) {
+                    _this2._handleValidationErrors(response.validation_errors);
+                }
+            });
         },
 
 
@@ -1297,33 +1344,71 @@ Vue.component("create-update-address", {
          * Create a new address
          */
         createAddress: function createAddress() {
+            var _this3 = this;
+
             this.waiting = true;
 
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
-                this.addressData = newAddress;
+                _this3.addressData = newAddress;
 
-                this.addressModal.hide();
-                this.addressList.push(this.addressData);
+                _this3.addressModal.hide();
+                _this3.addressList.push(_this3.addressData);
 
-                this.$dispatch("new-address-created", this.addressData);
+                _this3.$dispatch("new-address-created", _this3.addressData);
 
-                this.waiting = false;
-            }.bind(this)).fail(function () {
-                this.waiting = false;
-            }.bind(this));
+                _this3.waiting = false;
+            }).fail(function (response) {
+                _this3.waiting = false;
+
+                if (response.validation_errors) {
+                    _this3._handleValidationErrors(response.validation_errors);
+                }
+            });
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
         },
         _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
 
             if (typeof this.addressData.options !== "undefined") {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
 
                 try {
-                    for (var _iterator = this.addressData.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var optionType = _step.value;
+                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
 
                         switch (optionType.typeId) {
                             case 1:
@@ -1350,29 +1435,40 @@ Vue.component("create-update-address", {
                                     }
                                     break;
                                 }
+
+                            case 4:
+                                {
+                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                                        optionType.value = this.addressData.telephone;
+                                    }
+                                    break;
+                                }
                         }
                     }
                 } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
                         }
                     } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
                         }
                     }
                 }
             }
         }
     }
-
 });
 
+<<<<<<< HEAD
 },{"services/AddressService":73,"services/ValidationService":83}],16:[function(require,module,exports){
+=======
+},{"services/AddressService":73,"services/NotificationService":80,"services/ValidationService":83}],16:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -2150,53 +2246,130 @@ Vue.component("item-image-carousel", {
 },{"services/ResourceService":81}],26:[function(require,module,exports){
 "use strict";
 
+var ResourceService = require("services/ResourceService");
+
 Vue.component("quantity-input", {
 
-    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting"],
+    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting", "variationId"],
 
     data: function data() {
         return {
-            timeoutHandle: null
+            timeoutHandle: null,
+            internalMin: null,
+            internalMax: null,
+            basketItems: [],
+            currentCount: 0
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
-
-    /**
-     * TODO
-     */
     ready: function ready() {
-        this.timeout = this.timeout || 300;
-        this.min = this.min || 1;
-        this.max = this.max || 999;
-        this.vertical = this.vertical || false;
+        ResourceService.bind("basketItems", this);
 
-        this.$watch("value", function (newValue) {
-            if (newValue < this.min) {
-                this.value = this.min;
+        this.checkDefaultVars();
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this.vertical) {
+            this.initBasketValueWatcher();
+            this.handleMissingItems();
+        }
+    },
+
+
+    methods: {
+        countValueUp: function countValueUp() {
+            if (!(this.value === this.internalMax) && !this.waiting) {
+                this.value++;
+            }
+        },
+        countValueDown: function countValueDown() {
+            if (!(this.value === this.internalMin) && !this.waiting) {
+                this.value--;
+            }
+        },
+        checkDefaultVars: function checkDefaultVars() {
+            this.min = this.min === 0 ? null : this.min;
+            this.max = this.max === 0 ? null : this.max;
+        },
+        initDefaultVars: function initDefaultVars() {
+            this.timeout = this.timeout || 300;
+            this.internalMin = this.min || 1;
+            this.internalMax = this.max || 9999;
+            this.vertical = this.vertical || false;
+        },
+        initValueWatcher: function initValueWatcher() {
+            var _this = this;
+
+            this.$watch("value", function (newValue) {
+                if (newValue < _this.internalMin) {
+                    _this.value = _this.internalMin;
+                }
+
+                if (newValue > _this.internalMax) {
+                    _this.value = _this.internalMax;
+                }
+
+                if (_this.timeoutHandle) {
+                    window.clearTimeout(_this.timeoutHandle);
+                }
+
+                _this.timeoutHandle = window.setTimeout(function () {
+                    _this.$dispatch("quantity-change", newValue);
+                }, _this.timeout);
+            });
+        },
+        handleMissingItems: function handleMissingItems() {
+            if (this.alreadyInBasketCount() >= this.internalMin) {
+                this.internalMin = 1;
             }
 
-            if (newValue > this.max) {
-                this.value = this.max;
+            if (this.max !== null) {
+                this.internalMax = this.max - this.alreadyInBasketCount();
+
+                if (this.alreadyInBasketCount() === this.max) {
+                    this.internalMin = 0;
+                    this.internalMax = 0;
+                    this.$dispatch("out-of-stock", true);
+                } else {
+                    this.$dispatch("out-of-stock", false);
+                }
             }
 
-            if (this.timeoutHandle) {
-                window.clearTimeout(this.timeoutHandle);
+            this.value = this.internalMin;
+        },
+        initBasketValueWatcher: function initBasketValueWatcher() {
+            var _this2 = this;
+
+            ResourceService.watch("basketItems", function (newBasketItems, oldBasketItems) {
+                if (oldBasketItems) {
+                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems)) {
+                        _this2.initDefaultVars();
+
+                        _this2.handleMissingItems();
+                    }
+                }
+            });
+        },
+        alreadyInBasketCount: function alreadyInBasketCount() {
+            var _this3 = this;
+
+            if (this.basketItems.find(function (variations) {
+                return variations.variationId === _this3.variationId;
+            })) {
+                return this.basketItems.find(function (variations) {
+                    return variations.variationId === _this3.variationId;
+                }).quantity;
             }
 
-            var self = this;
-
-            this.timeoutHandle = window.setTimeout(function () {
-                self.$dispatch("quantity-change", newValue);
-            }, this.timeout);
-        });
+            return 0;
+        }
     }
 
 });
 
-},{}],27:[function(require,module,exports){
+},{"services/ResourceService":81}],27:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -3532,6 +3705,7 @@ Vue.component("mobile-breadcrumbs", {
 });
 
 },{"services/ResourceService":81}],45:[function(require,module,exports){
+<<<<<<< HEAD
 "use strict";
 
 Vue.component("mobile-navigation", {
@@ -3787,6 +3961,8 @@ Vue.component("mobile-navigation", {
 });
 
 },{}],46:[function(require,module,exports){
+=======
+>>>>>>> development
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -3847,7 +4023,11 @@ Vue.component("notifications", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/NotificationService":80}],47:[function(require,module,exports){
+=======
+},{"services/NotificationService":80}],46:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -3885,7 +4065,11 @@ Vue.component("shipping-country-select", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/CheckoutService":76,"services/ResourceService":81}],48:[function(require,module,exports){
+=======
+},{"services/CheckoutService":76,"services/ResourceService":81}],47:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -3920,7 +4104,11 @@ Vue.component("shop-language-select", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],49:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],48:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -3959,7 +4147,11 @@ Vue.component("wait-screen", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/WaitScreenService":84}],50:[function(require,module,exports){
+=======
+},{"services/WaitScreenService":84}],49:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -3981,7 +4173,11 @@ Vue.directive("logout", function () {
     }.bind(this));
 });
 
+<<<<<<< HEAD
 },{"services/ApiService":74}],51:[function(require,module,exports){
+=======
+},{"services/ApiService":74}],50:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4006,7 +4202,11 @@ Vue.directive("is-loading-watcher", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],52:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],51:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4030,7 +4230,11 @@ Vue.directive("check-active", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],53:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],52:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4051,7 +4255,11 @@ Vue.directive("is-loading-breadcrumbs-watcher", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],54:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],53:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var _CategoryRendererService = require("services/CategoryRendererService");
@@ -4064,7 +4272,11 @@ Vue.directive("render-category", function (value) {
     });
 });
 
+<<<<<<< HEAD
 },{"services/CategoryRendererService":75}],55:[function(require,module,exports){
+=======
+},{"services/CategoryRendererService":75}],54:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4110,7 +4322,11 @@ Vue.elementDirective("resource-list", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],56:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],55:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4145,7 +4361,11 @@ Vue.directive("resource-bind", {
 
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],57:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],56:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4176,7 +4396,11 @@ Vue.directive("resource-if", {
 
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],58:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],57:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -4199,7 +4423,11 @@ Vue.directive("resource-push", {
 
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],59:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],58:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 Vue.directive("change-lang", function (value) {
@@ -4224,15 +4452,33 @@ Vue.directive("shipping-country", function (value) {
     });
 });
 
+<<<<<<< HEAD
 },{"services/CheckoutService":76}],61:[function(require,module,exports){
+=======
+},{"services/CheckoutService":76}],60:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 Vue.directive("tooltip", {
+    unbind: function unbind() {
+        $(this.el).tooltip("dispose");
+    },
+    update: function update(value) {
+        var _this = this;
 
-    bind: function bind() {
-        setTimeout(function () {
-            $(this.el).tooltip();
-        }.bind(this), 1);
+        if (typeof value === "undefined" || value) {
+            setTimeout(function () {
+                $(_this.el).tooltip({
+                    trigger: "hover",
+                    // eslint-disable-next-line
+                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+                });
+            }, 1);
+        } else {
+            setTimeout(function () {
+                $(_this.el).tooltip("dispose");
+            }, 1);
+        }
     }
 });
 
@@ -4253,7 +4499,11 @@ Vue.directive("availability-class", {
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":81}],63:[function(require,module,exports){
+=======
+},{"services/ResourceService":81}],62:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 Vue.filter("arrayFirst", function (array) {
@@ -4299,7 +4549,11 @@ Vue.filter("currency", function (price, customCurrency) {
     return accounting.formatMoney(price, options);
 });
 
+<<<<<<< HEAD
 },{"accounting":85,"currency-symbol-map":86,"services/ResourceService":81}],66:[function(require,module,exports){
+=======
+},{"accounting":85,"currency-symbol-map":86,"services/ResourceService":81}],65:[function(require,module,exports){
+>>>>>>> development
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -4516,6 +4770,20 @@ Vue.filter("itemURL", function (item) {
 },{}],71:[function(require,module,exports){
 "use strict";
 
+Vue.filter("propertySurcharge", function (property) {
+
+    if (property.surcharge > 0) {
+        return property.surcharge;
+    } else if (property.property.surcharge > 0) {
+        return property.property.surcharge;
+    }
+
+    return 0;
+});
+
+},{}],71:[function(require,module,exports){
+"use strict";
+
 Vue.filter("truncate", function (string, value) {
     if (string.length > value) {
         return string.substring(0, value) + "...";
@@ -4612,7 +4880,7 @@ var CheckoutService = require("services/CheckoutService");
  * @returns {*}
  */
 function createAddress(address, addressType, setActive) {
-    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function (response) {
+    return ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
         if (setActive) {
             if (addressType === 1) {
                 CheckoutService.setBillingAddressId(response.id);
@@ -4631,7 +4899,7 @@ function createAddress(address, addressType, setActive) {
  */
 function updateAddress(newData, addressType) {
     addressType = addressType || newData.pivot.typeId;
-    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    return ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
 }
 
 /**
@@ -4641,7 +4909,7 @@ function updateAddress(newData, addressType) {
  * @returns {*}
  */
 function deleteAddress(addressId, addressType) {
-    return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    return ApiService.delete("/rest/io/customer/address/" + addressId + "?typeId=" + addressType);
 }
 
 exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
@@ -4736,7 +5004,7 @@ module.exports = function ($) {
             if (!config.supressNotifications) {
                 printMessages(response);
             }
-            deferred.reject(response.error);
+            deferred.reject(response);
         }).always(function () {
             if (!config.doInBackground) {
                 WaitScreenService.hideWaitScreen();
@@ -4852,6 +5120,7 @@ function _updateHistory(currentCategory) {
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 }
 
 /**
@@ -5133,6 +5402,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setSearchString(query) {
@@ -5147,6 +5418,8 @@ module.exports = function ($) {
 
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
+
+        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
     }
 
     function setItemsPerPage(items) {
@@ -6003,6 +6276,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.validate = validate;
 exports.getInvalidFields = getInvalidFields;
 exports.markInvalidFields = markInvalidFields;
+exports.markFailedValidationFields = markFailedValidationFields;
 exports.unmarkAllFields = unmarkAllFields;
 
 var _jquery = require("jquery");
@@ -6041,7 +6315,7 @@ function getInvalidFields(form) {
 }
 
 function markInvalidFields(fields, errorClass) {
-    errorClass = errorClass || "has-error";
+    errorClass = errorClass || "error";
 
     (0, _jquery2.default)(fields).each(function (i, elem) {
         var $elem = (0, _jquery2.default)(elem);
@@ -6058,6 +6332,27 @@ function markInvalidFields(fields, errorClass) {
                 _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
             }
         });
+    });
+}
+
+function markFailedValidationFields(form, validationErrors, errorClass) {
+    $form = (0, _jquery2.default)(form);
+
+    errorClass = errorClass || "error";
+
+    $form.find("[data-model]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+        var attribute = $elem.attr("data-model");
+
+        if (attribute in validationErrors) {
+            $elem.addClass(errorClass);
+
+            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
+
+            if (fieldLabel) {
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute, fieldLabel);
+            }
+        }
     });
 }
 
@@ -6177,7 +6472,7 @@ function _eval(input) {
     return new Function("return " + input)();
 }
 
-exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, unmarkAllFields: unmarkAllFields };
+exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
 },{"jquery":88}],84:[function(require,module,exports){
 "use strict";
@@ -16613,7 +16908,11 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
+<<<<<<< HEAD
 },{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21,22,23,24,19,20,25,26,27,28,29,37,38,39,30,31,32,33,35,34,36,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,59,60,55,56,57,58,61,62,63,64,65,66,67,68,69,70,71])
+=======
+},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,21,22,23,24,19,20,25,26,27,28,29,37,38,39,30,31,32,33,35,34,36,40,41,42,43,44,45,46,47,48,49,50,51,52,53,58,59,54,55,56,57,60,61,62,63,64,65,66,67,68,69,70,71])
+>>>>>>> development
 
 
 // Frontend end scripts

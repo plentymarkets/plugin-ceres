@@ -21,7 +21,10 @@
   "variation.availability.names.name",
   "variation.availability.id",
   "variation.availability.averageDays",
+  "variation.minimumOrderQuantity",
+  "variation.maximumOrderQuantity",
   "variation.itemId",
   "variation.releasedAt",
-  "filter.hasChildren"
+  "filter.hasChildren",
+  "filter.isSalable"
 ]

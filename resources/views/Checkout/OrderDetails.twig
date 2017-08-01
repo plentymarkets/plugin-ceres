@@ -77,7 +77,7 @@
 
                         </div>
 
-                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder().order) }}
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
 
                     </div>
 
@@ -134,6 +134,14 @@
                                     <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderTotal") }}</strong>
                                     <strong class="col-xs-6 col-sm-9">{{ (item.quantity * item.amounts[0].priceGross) | formatMonetary( item.amounts[0].currency ) }}</strong>
                                 </div>
+                                {% if item.orderProperties %}
+                                    {% for property in item.orderProperties %}
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-3">{{ property.name }}</strong>
+                                            <span class="col-xs-6 col-sm-9">{{ property.value }}</span>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </article>
                     {% endif %}
@@ -184,7 +192,7 @@
 
                             <hr>
 
-                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", services.customer.getLatestOrder().order) %}
+                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
                             {% if grossNet|trim is not empty %}
                                 {{ grossNet }}
                             {% else %}
@@ -228,7 +236,7 @@
 
                             {% endif %}
 
-                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", services.customer.getLatestOrder().order) }}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
                         </dl>
                     </div>
                 </div>

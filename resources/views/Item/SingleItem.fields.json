@@ -13,6 +13,8 @@
   "variation.name",
   "variation.number",
   "variation.externalId",
+  "variation.minimumOrderQuantity",
+  "variation.maximumOrderQuantity",
   "variation.model",
   "variation.weightG",
   "variation.weightNetG",
@@ -42,9 +44,9 @@
   "images.variation.position",
   "images.variation.path",
 
-  "properties.group.backendName",
-  "properties.property.names.name",
-  "properties.property.names.lang",
-  
-  "defaultCategories"
+  "properties.*",
+
+  "defaultCategories",
+
+  "filter.isSalable"
 ]

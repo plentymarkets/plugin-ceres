@@ -13,14 +13,15 @@
     <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+                        :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
+            ${ basketItem.quantity * basketItem.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
@@ -39,7 +40,7 @@
 
     <!-- ITEM DETAILS -->
     <div class="item-details small">
-        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.variationId }" value="">
+        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.id }" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
                 ${ basketItem.variation.data.texts | itemName {{configItemName}} }
@@ -51,6 +52,11 @@
                 <strong>{{ trans("Ceres::Template.itemId") }}</strong> ${ basketItem.itemId }
             </p>
         {% endif %}
+
+        <div class="row" v-for="property in basketItem.basketItemOrderParams">
+            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>
+            <span class="col-xs-6 col-sm-7">${property.value}</span>
+        </div>
 
         <div class="item-description">
             {% if "basket.item.customNumber" in basketDetailsData %}
@@ -83,7 +89,7 @@
             {% endif %}
         </div>
         {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
-            <label class="expand-btn" for="itemid-${ basketItem.variationId }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+            <label class="expand-btn" for="itemid-${ basketItem.id }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
         {% endif %}
     </div>
     <!-- ./ITEM DETAILS -->

@@ -8,13 +8,15 @@ Vue.component("add-to-basket", {
         "showQuantity",
         "template",
         "salable",
-        "useLargeScale"
+        "useLargeScale",
+        "showOrderProperties"
     ],
 
     data()
     {
         return {
-            quantity: 1
+            quantity: 1,
+            buttonLockState: false
         };
     },
 
@@ -34,8 +36,9 @@ Vue.component("add-to-basket", {
         {
             const basketObject =
                 {
-                    variationId: this.variationId,
-                    quantity   : this.quantity
+                    variationId             :   this.variationId,
+                    quantity                :   this.quantity,
+                    basketItemOrderParams   :   this.item.properties
                 };
 
             ResourceService
@@ -48,6 +51,11 @@ Vue.component("add-to-basket", {
         directToItem()
         {
             window.location.assign(this.itemUrl);
+        },
+
+        handleButtonState(value)
+        {
+            this.buttonLockState = value;
         },
 
         /**
