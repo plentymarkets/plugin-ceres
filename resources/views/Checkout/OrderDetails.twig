@@ -77,7 +77,14 @@
 
                         </div>
 
-                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", services.customer.getLatestOrder().order) }}
+                        <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ orderData }})">{{ trans("Ceres::Template.orderDetails") }}</button>
+                        <change-payment-method  template="#vue-change-payment-method"
+                                                :current-order="{{ orderData | json_encode() }}"
+                                                :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
+                                                :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}">
+                        </change-payment-method>
+
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
 
                     </div>
 
