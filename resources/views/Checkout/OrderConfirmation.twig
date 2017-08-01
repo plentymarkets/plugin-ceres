@@ -4,6 +4,10 @@
 
 {% set data = services.customer.getLatestOrder() %}
 
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.orderConfirmation") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
 {% block PageBody %}
 
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
