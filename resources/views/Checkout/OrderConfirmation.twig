@@ -6,6 +6,8 @@
 
 {% block PageBody %}
 
+    {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
+
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
 
     {% if overrideConfirmation|trim is empty %}
