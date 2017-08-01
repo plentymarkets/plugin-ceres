@@ -96,9 +96,9 @@
         bottom: 0;
 
         & > h1 {
-            color: #fff;
+            color: $category-text-color;
             font-size: 300%;
-            text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.75);
+            text-shadow: $category-text-shadow;
             bottom: 0;
             width: 100%;
             margin-left: 1rem;
