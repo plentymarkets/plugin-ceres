@@ -89,6 +89,7 @@
     background-attachment: fixed;
     background-position: center;
     height: 300px;
+    max-width: none;
 
     & > .parallax-text-container {
         position: absolute;
