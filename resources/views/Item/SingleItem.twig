@@ -25,6 +25,7 @@
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
+    {{ component( "Ceres::Item.Components.WishList" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -124,13 +125,9 @@
                 </div>
 
                 <div class="row">
-                    <!--
-                    <div class="col-xs-6 offset-xs-6 m-t-1">
-                        <a class="pull-xs-right text-muted small" href="#">
-                            {{ trans("Ceres::Template.itemWishList") }}
-                            <i class="fa fa-heart"></i>
-                        </a>
-                    </div> -->
+
+                    <wish-list template="#vue-wish-list" variation-id="{{ item.documents[0].data.variation.id }}" :is-active="{{ item.documents[0].isInWishListVariation | json_encode() }}"></wish-list>
+
                 </div>
             <!-- ./ITEM DETAIL -->
 

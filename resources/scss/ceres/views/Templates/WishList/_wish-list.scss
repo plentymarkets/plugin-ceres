@@ -1,0 +1,18 @@
+.wishList {
+
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+
+      i{
+        color: #d9534f!important;
+      }
+    }
+
+    &.active{
+      i{
+        color: #d9534f!important;
+      }
+    }
+}
