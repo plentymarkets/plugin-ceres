@@ -1,3 +1,5 @@
+const ResourceService = require("services/ResourceService");
+
 Vue.component("wish-list", {
 
     props: [
