@@ -22,10 +22,9 @@
             </div>
         </div>
 
-        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1">
-            <div style="float:right">X</div>
-            <div style="float:left">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
-            
+        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1" style="display:flex">
+            <div style="align-self:center;font-size: 1.4em;font-weight: 600">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
+            <div style="margin-left:auto"><i class="fa fa-times" aria-hidden="true"></i></div>
         </div>
     </div>
 
