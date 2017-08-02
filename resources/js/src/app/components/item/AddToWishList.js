@@ -1,6 +1,6 @@
 const ApiService = require("services/ApiService");
 
-Vue.component("wish-list", {
+Vue.component("add-to-wish-list", {
 
     props: [
         "isActive",
