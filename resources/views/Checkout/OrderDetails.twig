@@ -64,14 +64,14 @@
                     <div>
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
-                            <span class="col-xs-6 col-sm-7">{{ orderData.paymentMethodName }}</span>
+                            <span class="col-xs-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
                         </div>
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
                             {% set paymentMethodId = -1 %}
                             {% for propertyKey in orderData.order.properties %}
                                 {% if orderData.order.properties[loop.index0].typeId == 4 %}
-                                    <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
+                                    <span class="col-xs-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.paymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
                                 {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
                                     {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
                                 {% endif %}
