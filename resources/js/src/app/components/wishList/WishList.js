@@ -2,18 +2,24 @@ Vue.component("wish-list", {
 
     props: [
         "template",
-        "wishList"
+        "wishListIds"
     ],
 
-    data: function()
+    data()
     {
         return {
+            basketItems: []
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
+    },
+
+    ready()
+    {
+        ResourceService.bind("basketItems", this);
     },
 
     methods:

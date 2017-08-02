@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block PageBody %}
-
+    {{ component( "Ceres::WishList.Components.WishList" ) }}
     <!-- {{ wishList | json_encode() }} -->
-
-    <!-- <wish-list template="#vue-wish-list" :wish-list=""></wish-list> -->
+     <wish-list template="#vue-wish-list" :wish-list-ids="{{ wishList | json_encode() }}"></wish-list>
 {% endblock %}
