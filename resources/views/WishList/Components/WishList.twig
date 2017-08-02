@@ -1,3 +1,7 @@
 <script type="x/template" id="vue-wish-list">
-    
+
+    <div v-for="item in wishList">
+        {% include "Ceres::WishList.Components.WishListItem" %}
+    </div>
+
 </script>

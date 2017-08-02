@@ -1,0 +1,84 @@
+{{ component( "Ceres::Item.Components.QuantityInput" ) }}
+
+{% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
+
+<article class="cmp cmp-basket-item m-b-3 p-b-1">
+
+    <!-- ITEM IMAGE -->
+    <a class="item-image" :href="item.variation.data | itemURL">
+        <img alt="${ item.variation.data.texts | itemName {{configItemName}} }" :src="imageUrl">
+    </a>
+    <!-- ./ITEM IMAGE -->
+
+    <!-- ITEM QUANTITY HANDLING -->
+    <div class="item-quantity">
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+              <span class="message" v-if="!deleteConfirmed">
+                   {{ trans("Ceres::Template.generalDelete") }}
+              </span>
+            <span class="message" v-else>
+                   {{ trans("Ceres::Template.generalDeleteNow") }}
+              </span>
+            <span class="btn-label" @click.stop="resetDelete">
+                  <i class="fa fa-times"></i>
+              </span>
+        </button>
+    </div>
+    <!-- ./ITEM QUANTITY HANDLING -->
+
+    <!-- ITEM DETAILS -->
+    <div class="item-details small">
+        <input type="checkbox" class="toggle-description" id="itemid-${ item.id }" value="">
+        <a class="clearfix" :href="item.variation.data | itemURL">
+            <div class="item-name">
+                ${ item.variation.data.texts | itemName {{configItemName}} }
+            </div>
+        </a>
+
+        {% if "basket.item.item_id" in basketDetailsData %}
+            <p class="id">
+                <strong>{{ trans("Ceres::Template.itemId") }}</strong> ${ item.itemId }
+            </p>
+        {% endif %}
+
+        <div class="row" v-for="property in item.basketItemOrderParams">
+            <strong class="col-xs-6 col-sm-5">${property.name} (${item.variation.data.properties[$index] | propertySurcharge | currency })</strong>
+            <span class="col-xs-6 col-sm-7">${property.value}</span>
+        </div>
+
+        <div class="item-description">
+            {% if "basket.item.customNumber" in basketDetailsData %}
+                <div class="row">
+                    <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemNumber") }}:</strong>
+                    <span class="col-xs-6 col-sm-7">${ item.variation.data.variation.number}</span>
+                </div>
+            {% endif %}
+            {#<div class="row">#}
+                {#<strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemCondition") }}:</strong>#}
+                {#<span class="col-xs-6 col-sm-7">${ itemCondition }</span> #}{##}{# TODO AND ADD CONFIG #}
+            {#</div>#}
+            {% if "basket.item.availability" in basketDetailsData %}
+                <div class="row">
+                    <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemAvailability") }}:</strong>
+                    <span class="col-xs-6 col-sm-7">
+                        ${ item.variation.data.variation.availability.names.name }
+                    </span>
+                </div>
+            {% endif %}
+            {% if "basket.item.description_long" in basketDetailsData %}
+                <p class="m-y-1">
+                    {!! item.variation.data.texts.description !!}
+                </p>
+            {% endif %}
+            {% if "basket.item.description_short" in basketDetailsData %}
+                <p class="m-y-1">
+                    {!! item.variation.data.texts.shortDescription !!}
+                </p>
+            {% endif %}
+        </div>
+        {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
+            <label class="expand-btn" for="itemid-${ item.id }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+        {% endif %}
+    </div>
+    <!-- ./ITEM DETAILS -->
+</article>
