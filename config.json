@@ -156,6 +156,19 @@
         "default"   : "true"
     },
     {
+        "tab"       : "Header",
+        "key"       : "header.basket_values",
+        "label"     : "Show basket top informations",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "sum"         : "Total of all basket items",
+            "quantity"    : "Quantity of all basket items",
+            "both"        : "Quantity and total of all basket items"
+        },
+        "default"   : "sum"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
