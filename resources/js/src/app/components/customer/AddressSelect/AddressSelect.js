@@ -13,7 +13,8 @@ Vue.component("address-select", {
         "addressType",
         "selectedAddressId",
         "template",
-        "showError"
+        "showError",
+        "countryNameMap"
     ],
 
     data()
@@ -339,6 +340,16 @@ Vue.component("address-select", {
             this.selectedAddressId = addressData.id;
 
             this.loadSelectedAddress();
+        },
+
+        getCountryName(countryId)
+        {
+            if(this.countryNameMap[countryId])
+            {
+                return this.countryNameMap[countryId];
+            }
+
+            return "";
         }
     },
 
