@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-lg-6">
-                        <a :href="basketItem.variation.data | itemURL">
+                        <a :href="wishListItem.data | itemURL">
                             <h2 class="h5">${ wishListItem.data.texts | itemName {{configItemName}} }</h2>
                         </a>
                     </div>
@@ -25,8 +25,8 @@
         </div>
 
         <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
-            <div class="wish-list-price">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
-            <div class="wish-list-remove" @click="removeFromList(wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+            <div class="wish-list-price">${ wishListItem.data.calculatedPrices.default.basePrice | currency wishListItem.data.calculatedPrices.default.currency }</div>
+            <div class="wish-list-remove" @click="removeWishListItem(wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 
