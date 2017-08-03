@@ -28,7 +28,7 @@ Vue.component("wish-list", {
     {
         removeWishListItem(wishListItem, index)
         {
-            ApiService.delete("/rest/io/itemWishList/" + variationId)
+            ApiService.delete("/rest/io/itemWishList/" + wishListItem.data.variation.id)
                 .done(data =>
                 {
                     // remove this in done to prevent no items in this list label to be shown
