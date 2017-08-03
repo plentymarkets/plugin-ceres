@@ -1,4 +1,3 @@
-const ResourceService = require("services/ResourceService");
 const ApiService = require("services/ApiService");
 
 Vue.component("wish-list", {
@@ -11,7 +10,6 @@ Vue.component("wish-list", {
     data()
     {
         return {
-            basketItems: [],
             wishListItems: []
         };
     },
@@ -23,14 +21,12 @@ Vue.component("wish-list", {
 
     ready()
     {
-        ResourceService.bind("basketItems", this);
-
         this.getWishListItems();
     },
 
     methods:
     {
-        removeFromList(basketItem, index)
+        removeFromList(index)
         {
             this.wishListItems.splice(index, 1);
             this.wishListIds.splice(index, 1);
