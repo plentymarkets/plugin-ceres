@@ -158,13 +158,13 @@
     {
         "tab"       : "Header",
         "key"       : "header.basket_values",
-        "label"     : "Show basket top informations",
+        "label"     : "Show shopping cart information",
         "type"      : "dropdown",
         "possibleValues":
         {
-            "sum"         : "Total of all basket items",
-            "quantity"    : "Quantity of all basket items",
-            "both"        : "Quantity and total of all basket items"
+            "sum"         : "Value of items",
+            "quantity"    : "Quantity of items",
+            "both"        : "Value and quantity of items"
         },
         "default"   : "sum"
     },
