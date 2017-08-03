@@ -16,3 +16,73 @@
       }
     }
 }
+
+.wish-list-item {
+      border-bottom: 1px solid #dcdbd8;
+      padding: 10px 0px;
+      overflow: hidden;
+
+      & > div.row {
+          display:flex;
+          height: 100px;
+
+          & > .wish-list-image-container {
+              height: 100%;
+              display: flex;
+
+              & > .wish-list-image {
+                  max-height: 100%;
+                  max-width: 100%;
+                  width: auto;
+                  margin:auto;
+              }
+          }
+
+          & > .wish-list-texts {
+              align-self: center;
+          }
+
+          & .wish-list-availability {
+              color: red;    
+          }
+
+          & > .wish-list-price-container {
+              display:flex;
+
+              & > .wish-list-price {
+                  align-self: center;
+                  font-size: 1.4em;
+                  font-weight: 600;          
+              }
+
+              & > .wish-list-remove {
+                  margin-left: auto;
+                  font-size: 1.5rem;          
+              }
+          }
+      }
+  }
+
+.wish-list-item-transition-leave {
+    animation-name: wish-list-item-leaving;
+    animation-duration: .175s;
+    animation-delay: .175s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes wish-list-item-leaving {
+    from { max-height: 130px; padding: 10px 0;}
+    to { max-height: 0px; padding: 0; border: none; }
+}
+
+@include media-breakpoint-down(md) { 
+    .wish-list-item-transition-leave > div.row {
+        transform: translateX(-200%);
+        transition: transform 200ms cubic-bezier(0, 0, 0.82, 0.1);
+    }
+}
+
+.wish-list-no-items-label {
+    text-align: center;
+    margin: 75px 0 100px 0;
+}

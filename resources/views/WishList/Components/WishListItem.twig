@@ -2,7 +2,7 @@
 
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
-<article v-for="basketItem in basketItems" class="wish-list-item">
+<article transition="wish-list-item-transition" v-for="basketItem in basketItems" class="wish-list-item" id="article_${ $index }">
 
     <div class="row">
         <div class="col-xs-3 col-sm-2 wish-list-image-container">
@@ -24,56 +24,10 @@
 
         <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
             <div class="wish-list-price">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
-            <div class="text-muted wish-list-remove"><i class="fa fa-trash" aria-hidden="true"></i></div>
+            <div class="text-muted wish-list-remove" @click="removeFromList(basketItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 
 </article>
 
-<style>
-    .wish-list-item {
-       border-bottom: 1px solid #dcdbd8;
-       padding: 10px 0px;
-    }
-
-    .wish-list-item > div.row {
-        display:flex;
-        height: 100px;
-    }
-
-    .wish-list-item > div.row > .wish-list-image-container {
-        height: 100%;
-        display:flex;
-    }
-
-    .wish-list-item > div.row > .wish-list-image-container > .wish-list-image {
-        max-height: 100%;
-        max-width: 100%;
-        width: auto;
-        margin:auto;
-    }
-
-    .wish-list-item > div.row > .wish-list-texts {
-        align-self: center;
-    }
-
-    .wish-list-item > div.row .wish-list-availability {
-        color: red;
-    }
-
-    .wish-list-item > div.row > .wish-list-price-container {
-        display:flex;
-    }
-
-    .wish-list-item > div.row > .wish-list-price-container > .wish-list-price {
-        align-self:center;
-        font-size: 1.4em;
-        font-weight: 600;
-    }
-
-    .wish-list-item > div.row > .wish-list-price-container > .wish-list-remove {
-        margin-left:auto;
-        font-size:1.5rem;
-    }
-
-</style>
+<p class="h4 text-muted wish-list-no-items-label" v-if="!basketItems[0]">Noch keine Artikel in Wunschliste.</p>

@@ -26,5 +26,9 @@ Vue.component("wish-list", {
 
     methods:
     {
+        removeFromList(basketItem, index)
+        {
+            this.basketItems.splice(index, 1);
+        }
     }
 });
