@@ -23,14 +23,21 @@ Vue.component("wish-list", {
     ready()
     {
         ResourceService.bind("basketItems", this);
+
+        this.getWishListItems();
     },
 
     methods:
     {
         removeWishListItem(variationId)
         {
-            ApiService.delete("/rest/io/itemWishList/" + this.variationId);
+            ApiService.delete("/rest/io/itemWishList/" + variationId);
             // TODO handle done and error
+        },
+
+        getWishListItems()
+        {
+            ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"});
         }
     }
 });
