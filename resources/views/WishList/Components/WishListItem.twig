@@ -2,30 +2,78 @@
 
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
-<article v-for="basketItem in basketItems" style="border-bottom: 1px solid #dcdbd8; margin-bottom: 14px;">
+<article v-for="basketItem in basketItems" class="wish-list-item">
 
-    <div class="row" style="display:flex; height: 100px">
-        <div class="col-xs-3 col-sm-2" style="height: 100%; display:flex">
-            <img :src="basketItem.variation.data.images.all[0].urlMiddle" style="max-height: 100%; max-width: 100%; width: auto; margin:auto" alt="">
+    <div class="row">
+        <div class="col-xs-3 col-sm-2 wish-list-image-container">
+            <img :src="basketItem.variation.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
         </div>
 
-        <div class="col-xs-5 col-sm-7" style="align-self: center">
+        <div class="col-xs-5 col-sm-7 wish-list-texts">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        ${ basketItem.variation.data.texts | itemName {{configItemName}} }
+                    <div class="col-xs-12 col-lg-6">
+                        <h2 class="h5">${ basketItem.variation.data.texts | itemName {{configItemName}} }</h2>
                     </div>
-                    <div class="col-xs-12 col-md-6" style="font-size: 75%; color: green">
+                    <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + basketItem.variation.data.variation.availability.id">
                         ${ basketItem.variation.data.variation.availability.names.name }
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1" style="display:flex">
-            <div style="align-self:center;font-size: 1.4em;font-weight: 600">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
-            <div style="margin-left:auto"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
+            <div class="wish-list-price">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
+            <div class="text-muted wish-list-remove"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 
 </article>
+
+<style>
+    .wish-list-item {
+       border-bottom: 1px solid #dcdbd8;
+       padding: 10px 0px;
+    }
+
+    .wish-list-item > div.row {
+        display:flex;
+        height: 100px;
+    }
+
+    .wish-list-item > div.row > .wish-list-image-container {
+        height: 100%;
+        display:flex;
+    }
+
+    .wish-list-item > div.row > .wish-list-image-container > .wish-list-image {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        margin:auto;
+    }
+
+    .wish-list-item > div.row > .wish-list-texts {
+        align-self: center;
+    }
+
+    .wish-list-item > div.row .wish-list-availability {
+        color: red;
+    }
+
+    .wish-list-item > div.row > .wish-list-price-container {
+        display:flex;
+    }
+
+    .wish-list-item > div.row > .wish-list-price-container > .wish-list-price {
+        align-self:center;
+        font-size: 1.4em;
+        font-weight: 600;
+    }
+
+    .wish-list-item > div.row > .wish-list-price-container > .wish-list-remove {
+        margin-left:auto;
+        font-size:1.5rem;
+    }
+
+</style>
