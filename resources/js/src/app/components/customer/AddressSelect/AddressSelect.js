@@ -342,9 +342,27 @@ Vue.component("address-select", {
             this.loadSelectedAddress();
         },
 
+        /**
+         * Update the selected address on address update
+         * @param addressData
+         */
+        onSelectedAddressUpdated(addressData)
+        {
+            if (parseInt(this.selectedAddressId) === parseInt(addressData.id))
+            {
+                this.selectedAddressId = addressData.id;
+
+                this.loadSelectedAddress();
+            }
+        },
+
+        /**
+         * @param countryId
+         * @returns country name | empty string
+         */
         getCountryName(countryId)
         {
-            if(this.countryNameMap[countryId])
+            if (this.countryNameMap[countryId])
             {
                 return this.countryNameMap[countryId];
             }
