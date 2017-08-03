@@ -26,16 +26,20 @@ Vue.component("wish-list", {
 
     methods:
     {
-        removeFromList(index)
+        removeWishListItem(wishListItem, index)
         {
-            this.wishListItems.splice(index, 1);
-            this.wishListIds.splice(index, 1);
-        },
+            ApiService.delete("/rest/io/itemWishList/" + wishListItem.data.variation.id)
+                .done(data =>
+                {
+                    // remove this in done to prevent no items in this list label to be shown
+                    this.wishListIds.splice(this.wishListIds.indexOf(wishListItem.data.variation.id), 1);
+                })
+                .fail(error =>
+                {
+                    this.wishListItems.splice(index, 0, wishListItem);
+                });
 
-        removeWishListItem(variationId)
-        {
-            ApiService.delete("/rest/io/itemWishList/" + variationId);
-            // TODO handle done and error
+            this.wishListItems.splice(index, 1);
         },
 
         getWishListItems()
