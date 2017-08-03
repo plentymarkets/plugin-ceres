@@ -1,19 +1,21 @@
-{% set configItemName = config("Ceres.item.name") %}
-
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
 <article transition="wish-list-item-transition" v-for="basketItem in basketItems" class="wish-list-item" id="article_${ $index }">
 
     <div class="row">
         <div class="col-xs-3 col-sm-2 wish-list-image-container">
-            <img :src="basketItem.variation.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
+            <a :href="basketItem.variation.data | itemURL">
+                <img :src="basketItem.variation.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
+            </a>
         </div>
 
         <div class="col-xs-5 col-sm-7 wish-list-texts">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-lg-6">
-                        <h2 class="h5">${ basketItem.variation.data.texts | itemName {{configItemName}} }</h2>
+                        <a :href="basketItem.variation.data | itemURL">
+                            <h2 class="h5">${ basketItem.variation.data.texts | itemName {{configItemName}} }</h2>
+                        </a>
                     </div>
                     <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + basketItem.variation.data.variation.availability.id">
                         ${ basketItem.variation.data.variation.availability.names.name }

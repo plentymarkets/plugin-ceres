@@ -18,49 +18,62 @@
 }
 
 .wish-list-item {
-      border-bottom: 1px solid #dcdbd8;
-      padding: 10px 0px;
-      overflow: hidden;
+    border-bottom: 1px solid #dcdbd8;
+    padding: 10px 0px;
+    overflow: hidden;
 
-      & > div.row {
-          display:flex;
-          height: 100px;
+    & > div.row {
+        display:flex;
+        height: 100px;
 
-          & > .wish-list-image-container {
-              height: 100%;
-              display: flex;
+        & > .wish-list-image-container {
+            height: 100%;
+            display: flex;
 
-              & > .wish-list-image {
-                  max-height: 100%;
-                  max-width: 100%;
-                  width: auto;
-                  margin:auto;
-              }
-          }
+        & > a {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
 
-          & > .wish-list-texts {
-              align-self: center;
-          }
+            & > .wish-list-image {
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                margin: auto;
+            } 
+        }
 
-          & .wish-list-availability {
-              color: red;    
-          }
+            & > .wish-list-image {
+                max-height: 100%;
+                max-width: 100%;
+                width: auto;
+                margin: auto;
+            }
+        }
 
-          & > .wish-list-price-container {
-              display:flex;
+        & > .wish-list-texts {
+            align-self: center;
+        }
 
-              & > .wish-list-price {
-                  align-self: center;
-                  font-size: 1.4em;
-                  font-weight: 600;          
-              }
+        & .wish-list-availability {
+            color: red;    
+        }
 
-              & > .wish-list-remove {
-                  margin-left: auto;
-                  font-size: 1.5rem;          
-              }
-          }
-      }
+        & > .wish-list-price-container {
+            display:flex;
+
+            & > .wish-list-price {
+                align-self: center;
+                font-size: 1.4em;
+                font-weight: 600;          
+            }
+
+            & > .wish-list-remove {
+                margin-left: auto;
+                font-size: 1.5rem;          
+            }
+        }
+    }
   }
 
 .wish-list-item-transition-leave {

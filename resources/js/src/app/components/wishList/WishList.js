@@ -33,7 +33,7 @@ Vue.component("wish-list", {
         {
             this.basketItems.splice(index, 1);
         },
-        
+
         removeWishListItem(variationId)
         {
             ApiService.delete("/rest/io/itemWishList/" + variationId);
