@@ -1,4 +1,5 @@
 const ResourceService = require("services/ResourceService");
+const ApiService = require("services/ApiService");
 
 Vue.component("wish-list", {
 
@@ -29,6 +30,12 @@ Vue.component("wish-list", {
         removeFromList(basketItem, index)
         {
             this.basketItems.splice(index, 1);
+        },
+        
+        removeWishListItem(variationId)
+        {
+            ApiService.delete("/rest/io/itemWishList/" + this.variationId);
+            // TODO handle done and error
         }
     }
 });
