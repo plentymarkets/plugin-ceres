@@ -164,6 +164,13 @@
     },
     {
         "tab"                         : "Contact data",
+        "key"                         : "contact.shop_mail",
+        "label"                       : "Shop email address",
+        "type"                        : "text",
+        "default"                     : "your@email.com"
+    },
+    {
+        "tab"                         : "Contact data",
         "key"                         : "contact.show_data",
         "label"                       : "Show contact data",
         "type"                        : "multi_select",
