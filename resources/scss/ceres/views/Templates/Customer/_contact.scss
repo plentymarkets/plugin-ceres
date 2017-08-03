@@ -17,11 +17,6 @@
 		display: flex;
 	}
 
-	.contact-card {
-		margin-bottom: 1.5rem!important;
-		margin: auto;
-	}
-
 	.no-resize {
 		resize: none;
 	}
@@ -30,8 +25,20 @@
 		border-color: rgba(0,0,0,.15);
 	}
 
-	.contact-card > p > .fa {
-		vertical-align: top;
-		line-height: 1.5;
+	.contact-card {
+
+		margin-bottom: 1.5rem!important;
+		margin: auto;
+		
+		& i {
+
+			vertical-align: top;
+			line-height: 1.5;
+
+			& .fa-map-marker {
+				float: left;
+				margin-right: 4px; 
+			}
+		}
 	}
 }
