@@ -1,0 +1,55 @@
+<script type="x/template" id="vue-contact-form">
+
+	<div class="row cmp-contact">
+		<div class="col-xs-12">
+			<h1 class="m-b-3">{{ trans("Ceres::Template.generalContact") }}</h1>
+
+			<div class="row m-b-3">
+				<div class="col-md-3 flex-style">
+					{% include "Ceres::Customer.Components.Contact.ContactCard" %}
+				</div>
+				<div class="col-md-8">
+					<div class="well well-sm">
+						<form>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="col-xs-12">
+										<div class="input-unit">
+											<input type="name" name="name" id="txt_name">
+											<label for="txt_name">Name*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit">
+											<input type="email" name="email" id="txt_email">
+											<label for="txt_email">E-Mail*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit">
+											<input type="subject" name="subject" id="txt_subject">
+											<label for="txt_subject">Subject*</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<textarea name="message" id="message" class="form-control no-resize" rows="13" cols="25" placeholder="Message"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<hr>
+					<div class="col-xs-12">
+						<button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+						Send Message</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</script>
