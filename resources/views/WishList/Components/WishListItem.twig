@@ -1,11 +1,11 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
-<article transition="wish-list-item-transition" v-for="basketItem in basketItems" class="wish-list-item" id="article_${ $index }">
+<article transition="wish-list-item-transition" v-for="wishListItem in wishListItems" class="wish-list-item" id="article_${ $index }">
 
     <div class="row">
         <div class="col-xs-3 col-sm-2 wish-list-image-container">
-            <a :href="basketItem.variation.data | itemURL">
-                <img :src="basketItem.variation.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
+            <a :href="wishListItem.data | itemURL">
+                <img :src="wishListItem.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
             </a>
         </div>
 
@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="col-xs-12 col-lg-6">
                         <a :href="basketItem.variation.data | itemURL">
-                            <h2 class="h5">${ basketItem.variation.data.texts | itemName {{configItemName}} }</h2>
+                            <h2 class="h5">${ wishListItem.data.texts | itemName {{configItemName}} }</h2>
                         </a>
                     </div>
-                    <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + basketItem.variation.data.variation.availability.id">
-                        ${ basketItem.variation.data.variation.availability.names.name }
+                    <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + wishListItem.data.variation.availability.id">
+                        ${ wishListItem.data.variation.availability.names.name }
                     </div>
                 </div>
             </div>
@@ -26,10 +26,10 @@
 
         <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
             <div class="wish-list-price">${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency }</div>
-            <div class="wish-list-remove" @click="removeFromList(basketItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+            <div class="wish-list-remove" @click="removeFromList(wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 
 </article>
 
-<p class="h4 text-muted wish-list-no-items-label" v-if="!basketItems[0]">Noch keine Artikel in Wunschliste.</p>
+<p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">Noch keine Artikel in Wunschliste.</p>

@@ -11,7 +11,8 @@ Vue.component("wish-list", {
     data()
     {
         return {
-            basketItems: []
+            basketItems: [],
+            wishListItems: []
         };
     },
 
@@ -31,7 +32,8 @@ Vue.component("wish-list", {
     {
         removeFromList(basketItem, index)
         {
-            this.basketItems.splice(index, 1);
+            this.wishListItems.splice(index, 1);
+            this.wishListIds.splice(index, 1);
         },
 
         removeWishListItem(variationId)
@@ -42,7 +44,11 @@ Vue.component("wish-list", {
 
         getWishListItems()
         {
-            ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"});
+            ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"})
+                .done(data =>
+                {
+                    this.wishListItems = data.documents;
+                });
         }
     }
 });
