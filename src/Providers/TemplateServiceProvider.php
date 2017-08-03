@@ -37,6 +37,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.login'              => 'Customer.Login',                   // provide template to use for login
         'tpl.register'           => 'Customer.Register',                // provide template to use for register
         'tpl.guest'              => 'Customer.Guest',                   // provide template to use for guest
+        'tpl.contact'            => 'Customer.Contact',                 // provide template to use for contact
         'tpl.search'             => 'ItemList.ItemListView',            // provide template to use for item search
         'tpl.cancellation-rights'=> 'StaticPages.CancellationRights',   // provide template to use for cancellation rights
         'tpl.legal-disclosure'   => 'StaticPages.LegalDisclosure',      // provide template to use for legal disclosure
