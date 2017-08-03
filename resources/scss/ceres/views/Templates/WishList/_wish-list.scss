@@ -65,12 +65,19 @@
             & > .wish-list-price {
                 align-self: center;
                 font-size: 1.4em;
-                font-weight: 600;          
+                font-weight: 600;
             }
 
             & > .wish-list-remove {
                 margin-left: auto;
-                font-size: 1.5rem;          
+                font-size: 1.5rem;
+                color: $gray-light;
+                cursor: pointer;
+                transition: color .2s ease-in-out;
+
+                &:hover {
+                    color: $gray-dark;
+                }
             }
         }
     }
