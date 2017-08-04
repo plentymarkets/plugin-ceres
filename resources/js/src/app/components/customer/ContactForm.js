@@ -27,12 +27,19 @@ Vue.component("contact-form", {
 
     methods:
     {
-        validate()
+        validate(useCapture)
         {
             ValidationService.validate($("#contact-form"))
                 .done(() =>
                 {
-                    grecaptcha.execute();
+                    if (useCapture)
+                    {
+                        grecaptcha.execute();
+                    }
+                    else
+                    {
+                        this.sendMail();
+                    }
                 })
                 .fail(invalidFields =>
                 {

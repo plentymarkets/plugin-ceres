@@ -35,7 +35,7 @@
 								<div class="col-md-6">
 									<div class="col-xs-12">
 										<div class="form-group" data-validate="text">
-											<textarea name="message" id="txt_message" v-model="message" class="form-control no-resize" rows="13" cols="25" placeholder="{{ trans('Ceres::Template.contactMessage') }}"></textarea>
+											<textarea name="message" id="txt_message" v-model="message" class="form-control no-resize" rows="13" cols="25" placeholder="{{ trans('Ceres::Template.contactMessage') }}*"></textarea>
 										</div>
 									</div>
 								</div>
@@ -44,12 +44,14 @@
 					</div>
 					<hr>
 					<div class="col-xs-12">
-						<div id='recaptcha' class="g-recaptcha"
-							 data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-							 data-callback="sendMail"
-							 data-size="invisible">
-						</div>
-						<button type="submit" class="btn btn-primary pull-right" @click="validate">
+						{% if config("Ceres.contact.use_capture") == "true" %}
+							<div id="recaptcha" class="g-recaptcha"
+								data-sitekey="{{ config('Ceres.contact.capture_key') }}"
+								data-callback="sendMail"
+								data-size="invisible">
+							</div>
+						{% endif %}
+						<button type="submit" class="btn btn-primary pull-right" @click="validate({{ config("Ceres.contact.use_capture") }})">
 							{{ trans("Ceres::Template.contactSend") }}
 						</button>
 					</div>
