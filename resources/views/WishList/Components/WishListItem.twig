@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-3 col-sm-2 wish-list-image-container">
             <a :href="wishListItem.data | itemURL">
-                <img :src="wishListItem.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
+                <img class="wish-list-image" :src="wishListItem.data.images | itemImages 'urlMiddle' | itemImage">
             </a>
         </div>
 
