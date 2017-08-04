@@ -33,7 +33,7 @@ Vue.component("contact-form", {
             ValidationService.validate($("#contact-form"))
                 .done(() =>
                 {
-                    this.$els.captcha.execute();
+                    grecaptcha.execute();
                 })
                 .fail(invalidFields =>
                 {
