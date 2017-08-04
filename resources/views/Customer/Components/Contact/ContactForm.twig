@@ -21,7 +21,7 @@
 									</div>
 									<div class="col-xs-12">
 										<div class="input-unit">
-											<input type="email" name="email" v-model="email" id="txt_email">
+											<input type="email" name="email" v-model="userMail" id="txt_email">
 											<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
 										</div>
 									</div>
@@ -44,7 +44,8 @@
 					</div>
 					<hr>
 					<div class="col-xs-12">
-						<button type="submit" class="btn btn-primary pull-right" @click="sendMail()">
+						<button type="submit" class="btn btn-primary pull-right g-recaptcha" data-sitekey="6Ld3qSsUAAAAAMrU4qkg4CZH7DNPa4wNg6raQlP8"
+								:data-callback="sendMail">
 							{{ trans("Ceres::Template.contactSend") }}
 						</button>
 					</div>

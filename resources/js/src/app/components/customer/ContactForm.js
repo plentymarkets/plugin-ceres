@@ -26,6 +26,8 @@ Vue.component("contact-form", {
     {
         sendMail()
         {
+            console.log("CAPTCHA WORK");
+
             const mailObj =
                 {
                     contactData:
@@ -38,7 +40,7 @@ Vue.component("contact-form", {
                     }
                 };
 
-            ApiService.post("/rest/io/customer", mailObj)
+            ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
                 .done(function(response)
                 {
                     // success message
