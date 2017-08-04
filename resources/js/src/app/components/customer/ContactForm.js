@@ -57,7 +57,7 @@ Vue.component("contact-form", {
                     }
                 };
 
-            ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
+            ApiService.post("/rest/io/customer/contact/mail", {mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
                 .done(function(response)
                 {
                     // success message
