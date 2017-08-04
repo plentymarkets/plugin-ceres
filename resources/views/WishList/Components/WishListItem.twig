@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-3 col-sm-2 wish-list-image-container">
             <a :href="wishListItem.data | itemURL">
-                <img :src="wishListItem.data.images.all[0].urlMiddle" alt="" class="wish-list-image">
+                <img class="wish-list-image" :src="wishListItem.data.images | itemImages 'urlMiddle' | itemImage">
             </a>
         </div>
 
@@ -26,10 +26,8 @@
 
         <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
             <div class="wish-list-price">${ wishListItem.data.calculatedPrices.default.basePrice | currency wishListItem.data.calculatedPrices.default.currency }</div>
-            <div class="wish-list-remove" @click="removeFromList(wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+            <div class="wish-list-remove" @click="removeWishListItem(wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>
     </div>
 
 </article>
-
-<p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>

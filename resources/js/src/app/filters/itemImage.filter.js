@@ -1,27 +1,12 @@
-Vue.filter("itemImage", function(item, baseUrl)
+Vue.filter("itemImage", function(itemImages)
 {
-    var imageList = item.variationImageList;
-
-    baseUrl = baseUrl || "/";
-
-    if (baseUrl.charAt(baseUrl.length - 1) !== "/")
+    if (itemImages.length === 1)
     {
-        baseUrl += "/";
+        return itemImages[0].url;
     }
 
-    if (!!imageList && imageList.length > 0)
+    return itemImages.reduce(function(prev, current)
     {
-        for (var i = 0; i < imageList.length; i++)
-        {
-            var image = imageList[i];
-
-            if (!!image.path && image.path.length > 0)
-            {
-                return baseUrl + image.path;
-            }
-        }
-    }
-
-    return "";
-
+        return (prev.position < current.position) ? prev.url : current.url;
+    });
 });
