@@ -6,6 +6,10 @@ $border-color: $gray-lighter;
 $border-active: $gray-light;
 $border-width: 1px;
 
+.form-group.error {
+    border: 1px solid red;
+}
+
 .input-unit{
     position:relative;
     
