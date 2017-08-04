@@ -78,7 +78,7 @@
                             {% endfor %}
                         </div>
 
-                        {% if paymentMethoId != -1 %}
+                        {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
                             <change-payment-method  template="#vue-change-payment-method"
                                                     :current-order="{{ orderData | json_encode() }}"
                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
