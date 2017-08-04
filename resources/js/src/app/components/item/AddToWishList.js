@@ -13,6 +13,11 @@ Vue.component("add-to-wish-list", {
         this.$options.template = this.template;
     },
 
+    ready()
+    {
+        this.changeTooltipText();
+    },
+
     methods:
     {
         switchState()
@@ -33,6 +38,7 @@ Vue.component("add-to-wish-list", {
                 .done(function()
                 {
                     this.isActive = true;
+                    this.changeTooltipText();
                 }.bind(this));
         },
 
@@ -42,7 +48,15 @@ Vue.component("add-to-wish-list", {
                 .done(function()
                 {
                     this.isActive = false;
+                    this.changeTooltipText();
                 }.bind(this));
+        },
+
+        changeTooltipText()
+        {
+            const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
+
+            $(".add-to-wishList").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
         }
     }
 });
