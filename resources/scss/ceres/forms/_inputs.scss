@@ -8,6 +8,19 @@ $border-width: 1px;
 
 .form-group.error {
     border: 1px solid red;
+
+    & > textarea::-webkit-input-placeholder {
+        color: red;
+    } 
+    & > textarea::-moz-placeholder {
+        color: red;
+    }
+    & > textarea:-ms-input-placeholder { 
+        color: red;
+    }
+    & > textarea:-moz-placeholder {
+        color: red;
+    }
 }
 
 .input-unit{
