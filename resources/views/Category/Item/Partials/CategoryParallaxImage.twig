@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-12">
         <div class="parallax-img-container page-content container-max"{% if category.details[0].imagePath is not empty %} style="background-image: url(/documents/{{ category.details[0].imagePath }});"{% endif %}>
             <div class="parallax-text-container">
-                <h1>{{ category.details[0].name | raw }}</h1>
+                <h1 class="h4 m-t-1">{{ category.details[0].name | raw }}</h1>
             </div>
         </div>
     </div>
