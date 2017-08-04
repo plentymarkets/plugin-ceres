@@ -1,5 +1,7 @@
 var ApiService = require("services/ApiService");
 
+import ValidationService from "services/ValidationService";
+
 Vue.component("contact-form", {
 
     props: [
@@ -20,10 +22,25 @@ Vue.component("contact-form", {
     created()
     {
         this.$options.template = this.template;
+
+        window.sendMail = this.sendMail;
     },
 
     methods:
     {
+        validate()
+        {
+            ValidationService.validate($("#contact-form"))
+                .done(() =>
+                {
+                    this.$els.captcha.execute();
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
+        },
+
         sendMail()
         {
             console.log("CAPTCHA WORK");
@@ -32,11 +49,11 @@ Vue.component("contact-form", {
                 {
                     contactData:
                     {
-                        name    : this.name,
-                        shopMail: this.shopMail,
                         subject : this.subject,
+                        name    : this.name,
                         message : this.message,
-                        userMail: this.userMail
+                        userMail: this.userMail,
+                        shopMail: this.shopMail
                     }
                 };
 
