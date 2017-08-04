@@ -4793,8 +4793,16 @@ function _updateHistory(currentCategory) {
 
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+
+    var categoryImage = currentCategory.details[0].imagePath;
+
+    if (categoryImage) {
+        document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+    } else {
+        document.querySelector(".parallax-img-container").style.removeProperty("background-image");
+    }
 }
 
 /**
