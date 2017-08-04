@@ -5,8 +5,7 @@ import ValidationService from "services/ValidationService";
 Vue.component("contact-form", {
 
     props: [
-        "template",
-        "shopMail"
+        "template"
     ],
 
     data()
@@ -47,17 +46,13 @@ Vue.component("contact-form", {
 
             const mailObj =
                 {
-                    contactData:
-                    {
-                        subject : this.subject,
-                        name    : this.name,
-                        message : this.message,
-                        userMail: this.userMail,
-                        shopMail: this.shopMail
-                    }
+                    subject : this.subject,
+                    name    : this.name,
+                    message : this.message,
+                    userMail: this.userMail
                 };
 
-            ApiService.post("/rest/io/customer/contact/mail", {mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
+            ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
                 .done(function(response)
                 {
                     // success message
