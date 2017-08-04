@@ -44,11 +44,14 @@ Vue.component("wish-list", {
 
         getWishListItems()
         {
-            ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"})
-                .done(data =>
-                {
-                    this.wishListItems = data.documents;
-                });
+            if (this.wishListIds[0])
+            {
+                ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"})
+                    .done(data =>
+                    {
+                        this.wishListItems = data.documents;
+                    });
+            }
         }
     }
 });
