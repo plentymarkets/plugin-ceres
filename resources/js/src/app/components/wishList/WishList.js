@@ -10,7 +10,8 @@ Vue.component("wish-list", {
     data()
     {
         return {
-            wishListItems: []
+            wishListItems: [],
+            isLoading: false
         };
     },
 
@@ -46,10 +47,18 @@ Vue.component("wish-list", {
         {
             if (this.wishListIds[0])
             {
+                this.isLoading = true;
+
                 ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"})
                     .done(data =>
                     {
                         this.wishListItems = data.documents;
+
+                        this.isLoading = false;
+                    })
+                    .fail(() =>
+                    {
+                        this.isLoading = false;
                     });
             }
         }
