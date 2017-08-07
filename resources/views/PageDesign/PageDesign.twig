@@ -56,9 +56,8 @@
             {% include getPartial('header') %}
 
             <div id="page-body" class="main">
-                {% block PageBody %}
-                    <!-- inject content of inherited templates here -->
-                {% endblock %}
+                <comp1></comp1>
+                <comp2></comp2>
             </div>
 
             {% include getPartial('footer') %}
@@ -153,8 +152,45 @@
         {% endif %}
 
         <script>
+            // import test from "store/modules/test";
+
+            const state =
+                {
+                    testField: ""
+                };
+
+            const mutations =
+                {
+                    updateField(state, text)
+                    {
+                        state.testField = text;
+                    }
+                };
+
+            const actions =
+                {
+                    updateField({commit, state}, text)
+                    {
+                        commit("updateField", text);
+                        console.log("text changed:", text);
+                    }
+                };
+
+            var store = new Vuex.Store(
+                {
+                    state,
+                    mutations,
+                    actions
+                    // modules:
+                    // {
+                    //     test
+                    // }
+                }); 
+
+            
             vueApp = new Vue({
-                el: "body"
+                el: "body",
+                store
             });
         </script>
     </body>
