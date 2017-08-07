@@ -8,6 +8,7 @@
 {% set lang = services.sessionStorage.getLang() %}
 
 <resource name="breadcrumbs" :data="{}"></resource>
+<resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishListForContact() }}' }"></resource>
 
 <header class="top-bar">
     <div class="container-max">
@@ -20,7 +21,13 @@
                     <user-login-handler template="#vue-user-login-handler"
                             :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
-
+                <li class="list-inline-item control-wish-list">
+                    <a href="/wish-list">
+                        <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
+                        <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true"></i>
+                        <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
+                    </a>
+                </li>
                 <li class="list-inline-item dropdown control-languages">
                     <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
                        aria-controls="countrySettings"
@@ -28,7 +35,6 @@
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
-
                 <li class="list-inline-item control-search">
                     <a class="" data-toggle="collapse" href="#searchBox"
                        aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
@@ -39,7 +45,6 @@
                         <span class="hidden-xs-down">{{ trans("Ceres::Template.generalSearchNoDot") }}</span>
                     </a>
                 </li>
-
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>

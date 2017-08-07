@@ -1,4 +1,5 @@
-const ApiService = require("services/ApiService");
+const ApiService      = require("services/ApiService");
+const ResourceService = require("services/ResourceService");
 
 Vue.component("wish-list", {
 
@@ -11,7 +12,8 @@ Vue.component("wish-list", {
     {
         return {
             wishListItems: [],
-            isLoading: false
+            isLoading: false,
+            wishListCount: {}
         };
     },
 
@@ -22,6 +24,8 @@ Vue.component("wish-list", {
 
     ready()
     {
+        ResourceService.bind("wishListCount", this);
+
         this.getWishListItems();
     },
 
@@ -34,6 +38,8 @@ Vue.component("wish-list", {
                 {
                     // remove this in done to prevent no items in this list label to be shown
                     this.wishListIds.splice(this.wishListIds.indexOf(wishListItem.data.variation.id), 1);
+                    this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
+
                 })
                 .fail(error =>
                 {
@@ -60,6 +66,14 @@ Vue.component("wish-list", {
                     {
                         this.isLoading = false;
                     });
+            }
+        },
+
+        updateWatchListCount(count)
+        {
+            if (count >= 0)
+            {
+                ResourceService.getResource("wishListCount").set({count: count});
             }
         }
     }

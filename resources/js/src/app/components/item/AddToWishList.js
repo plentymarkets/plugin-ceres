@@ -1,4 +1,5 @@
-const ApiService = require("services/ApiService");
+const ApiService      = require("services/ApiService");
+const ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-wish-list", {
 
@@ -8,6 +9,13 @@ Vue.component("add-to-wish-list", {
         "template"
     ],
 
+    data()
+    {
+        return {
+            wishListCount: 0
+        };
+    },
+
     created()
     {
         this.$options.template = this.template;
@@ -15,6 +23,8 @@ Vue.component("add-to-wish-list", {
 
     ready()
     {
+        ResourceService.bind("wishListCount", this);
+
         this.changeTooltipText();
     },
 
@@ -39,6 +49,7 @@ Vue.component("add-to-wish-list", {
                 {
                     this.isActive = true;
                     this.changeTooltipText();
+                    this.updateWatchListCount(parseInt(this.wishListCount.count) + 1);
                 }.bind(this));
         },
 
@@ -49,6 +60,7 @@ Vue.component("add-to-wish-list", {
                 {
                     this.isActive = false;
                     this.changeTooltipText();
+                    this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
                 }.bind(this));
         },
 
@@ -57,6 +69,14 @@ Vue.component("add-to-wish-list", {
             const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
 
             $(".add-to-wishList").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
+        },
+
+        updateWatchListCount(count)
+        {
+            if (count >= 0)
+            {
+                ResourceService.getResource("wishListCount").set({count: count});
+            }
         }
     }
 });
