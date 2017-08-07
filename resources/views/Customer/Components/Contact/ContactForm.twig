@@ -51,7 +51,7 @@
 								data-size="invisible">
 							</div>
 						{% endif %}
-						<button type="submit" class="btn btn-primary pull-right" @click="validate({{ config("Ceres.contact.use_capture") }})">
+						<button type="submit" class="btn btn-primary pull-right" :disabled="disabledSend" @click="validate({{ config("Ceres.contact.use_capture") }})">
 							{{ trans("Ceres::Template.contactSend") }}
 						</button>
 					</div>

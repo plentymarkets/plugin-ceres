@@ -1,4 +1,5 @@
-var ApiService = require("services/ApiService");
+const ApiService = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
 import ValidationService from "services/ValidationService";
 
@@ -14,7 +15,8 @@ Vue.component("contact-form", {
             name    : "",
             userMail: "",
             subject : "",
-            message : ""
+            message : "",
+            disabledSend: false
         };
     },
 
@@ -49,7 +51,7 @@ Vue.component("contact-form", {
 
         sendMail()
         {
-            console.log("CAPTCHA WORK");
+            this.disabledSend = true;
 
             const mailObj =
                 {
@@ -62,12 +64,13 @@ Vue.component("contact-form", {
             ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
                 .done(function(response)
                 {
-                    // success message
-
+                    this.disabledSend = false;
+                    NotificationService.success(Translations.Template.contactSendSuccess);
                 })
                 .fail(function()
                 {
-                    // error message
+                    this.disabledSend = false;
+                    NotificationService.error(Translations.Template.contactSendFail);
                 });
         }
     }
