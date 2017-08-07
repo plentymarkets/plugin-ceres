@@ -1,3 +1,5 @@
+{% set mailRegex = "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
+
 <script type="x/template" id="vue-contact-form">
 
 	<div class="row cmp-contact">
@@ -20,8 +22,8 @@
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div class="input-unit" data-validate="text">
-											<input type="email" name="email" v-model="userMail" id="txt_email">
+										<div class="input-unit" data-validate="regex">
+											<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
 											<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
 										</div>
 									</div>

@@ -62,12 +62,12 @@ Vue.component("contact-form", {
                 };
 
             ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"})
-                .done(function(response)
+                .done(response =>
                 {
                     this.disabledSend = false;
                     NotificationService.success(Translations.Template.contactSendSuccess);
                 })
-                .fail(function()
+                .fail(() =>
                 {
                     this.disabledSend = false;
                     NotificationService.error(Translations.Template.contactSendFail);
