@@ -311,6 +311,13 @@
         "default"       : "0"
     },
     {
+        "tab"           : "Item view",
+        "key"           : "item.show_variation_over_dropdown",
+        "label"         : "Show variations over dropdown",
+        "type"          : "checkbox",
+        "default"       : "false"
+    },
+    {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
         "label"                         : "Show variations by type",

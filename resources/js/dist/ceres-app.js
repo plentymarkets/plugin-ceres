@@ -151,7 +151,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale", "showOrderProperties"],
+    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale", "showOrderProperties"],
 
     data: function data() {
         return {
@@ -164,6 +164,9 @@ Vue.component("add-to-basket", {
 
         this.useLargeScale = this.useLargeScale || false;
     },
+    ready: function ready() {
+        this.checkMinMaxOrderQuantity();
+    },
 
 
     methods: {
@@ -171,15 +174,17 @@ Vue.component("add-to-basket", {
          * add an item to basket-resource
          */
         addToBasket: function addToBasket() {
-            var basketObject = {
-                variationId: this.variationId,
-                quantity: this.quantity,
-                basketItemOrderParams: this.item.properties
-            };
+            if (this.item.filter.isSalable) {
+                var basketObject = {
+                    variationId: this.variationId,
+                    quantity: this.quantity,
+                    basketItemOrderParams: this.item.properties
+                };
 
-            ResourceService.getResource("basketItems").push(basketObject);
+                ResourceService.getResource("basketItems").push(basketObject);
 
-            this.openAddToBasketOverlay();
+                this.openAddToBasketOverlay();
+            }
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
@@ -208,6 +213,15 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        },
+
+
+        /**
+         * Check min - max order quantity
+         */
+        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
+            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
+            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
     },
 
