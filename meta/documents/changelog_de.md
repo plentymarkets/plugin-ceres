@@ -7,6 +7,14 @@
 - Das Favicon wird nun aus den Backend Einstellungen für das Favicon geladen.
 - Jede Seite hat jetzt einen dynamisch generierten Seitentitel.
 
+## Geändert
+
+- Die 3 Artikel Listen haben nun als Überschrift ein p-Element, anstatt h1-Element
+
+### Behoben
+
+- Bild positionen werden nun auch in den Artikellisten berücksichtigt.
+
 ## v1.3.2 (2017-07-26)
 
 ### Hinzugefügt
