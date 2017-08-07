@@ -1,4 +1,5 @@
 import CategoryRendererService from "services/CategoryRendererService";
+const ResourceService = require("services/ResourceService");
 
 Vue.component("mobile-navigation", {
 
@@ -20,24 +21,19 @@ Vue.component("mobile-navigation", {
     created()
     {
         this.$options.template = this.template;
-
-        this.buildTree(this.categoryTree);
-
-        this.dataContainer1 = this.categoryTree;
     },
 
     ready()
     {
-        // REFACTOR!!!
-        /*
-            - setze das aktuelle auf aktiv
-            - trigger menu-activated auf das aktuelle
-        */
-        // ./REFACTOR
+        const currentCategory = ResourceService.getResource("breadcrumbs").val();
+
+        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+
+        this.dataContainer1 = this.categoryTree;
     },
 
     methods: {
-        buildTree(currentArray, parent)
+        buildTree(currentArray, parent, currentCategoryId)
         {
             let showChilds = false;
 
@@ -52,7 +48,19 @@ Vue.component("mobile-navigation", {
 
                 if (category.children)
                 {
-                    this.buildTree(category.children, category);
+                    this.buildTree(category.children, category, currentCategoryId);
+                }
+
+                if (category.id === currentCategoryId)
+                {
+                    if (category.children)
+                    {
+                        this.slideTo(category.children);
+                    }
+                    else if (category.parent)
+                    {
+                        this.slideTo(category.parent.children);
+                    }
                 }
             }
 
@@ -64,6 +72,11 @@ Vue.component("mobile-navigation", {
 
         navigateTo(category)
         {
+            if (category.children)
+            {
+                this.slideTo(category.children);
+            }
+
             this.closeNavigation();
             CategoryRendererService.renderItems(category, this.categoryTree);
         },

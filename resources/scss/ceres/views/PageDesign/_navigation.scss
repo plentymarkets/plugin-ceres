@@ -267,8 +267,9 @@ body.menu-is-visible { overflow-y : hidden; }
 	position 	: fixed;
 	right 		: 0;
 	top 		: 0;
-	transform 	: translateX(100%);
+	transform   : translateX(100%);
 	transition 	: all .3s ease;
+	z-index     : 99999;
 
 	&.open {
 		opacity 	: 1;
