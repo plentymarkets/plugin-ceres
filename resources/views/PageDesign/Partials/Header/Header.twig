@@ -6,9 +6,12 @@
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
 <resource name="breadcrumbs" :data="{}"></resource>
-<resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishListForContact() }}' }"></resource>
+{% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+    <resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishListForContact() }}' }"></resource>
+{% endif %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -21,13 +24,15 @@
                     <user-login-handler template="#vue-user-login-handler"
                             :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
-                <li class="list-inline-item control-wish-list">
-                    <a href="/wish-list">
-                        <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
-                        <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true" style="display:none"></i>
-                        <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
-                    </a>
-                </li>
+                {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    <li class="list-inline-item control-wish-list">
+                        <a href="/wish-list">
+                            <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
+                            <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true" style="display:none"></i>
+                            <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="list-inline-item dropdown control-languages">
                     <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
                        aria-controls="countrySettings"

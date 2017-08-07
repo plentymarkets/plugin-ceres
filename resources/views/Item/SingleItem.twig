@@ -3,6 +3,7 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
@@ -123,12 +124,12 @@
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
-
-                <div class="row">
-
-                    <add-to-wish-list template="#vue-add-to-wish-list" variation-id="{{ item.documents[0].data.variation.id }}" :is-active="{{ item.documents[0].isInWishListVariation | json_encode() }}"></add-to-wish-list>
-
-                </div>
+                
+                {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    <div class="row">
+                        <add-to-wish-list template="#vue-add-to-wish-list" variation-id="{{ item.documents[0].data.variation.id }}" :is-active="{{ item.documents[0].isInWishListVariation | json_encode() }}"></add-to-wish-list>
+                    </div>
+                {% endif %}
             <!-- ./ITEM DETAIL -->
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterAddToBasket", item.documents[0].data) }}
