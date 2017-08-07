@@ -6,23 +6,6 @@ $border-color: $gray-lighter;
 $border-active: $gray-light;
 $border-width: 1px;
 
-.form-group.error {
-    border: 1px solid $brand-danger;
-
-    & > textarea::-webkit-input-placeholder {
-        color: $brand-danger;
-    } 
-    & > textarea::-moz-placeholder {
-        color: $brand-danger;
-    }
-    & > textarea:-ms-input-placeholder { 
-        color: $brand-danger;
-    }
-    & > textarea:-moz-placeholder {
-        color: $brand-danger;
-    }
-}
-
 .input-unit.textarea{
     background-color: #fff;
 
