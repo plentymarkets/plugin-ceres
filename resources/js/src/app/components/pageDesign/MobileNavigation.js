@@ -65,7 +65,7 @@ Vue.component("mobile-navigation", {
         navigateTo(category)
         {
             this.closeNavigation();
-            CategoryRendererService.renderItems(category);
+            CategoryRendererService.renderItems(category, this.categoryTree);
         },
 
         slideTo(children, back)
