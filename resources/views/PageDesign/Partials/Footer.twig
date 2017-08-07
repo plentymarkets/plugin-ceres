@@ -121,7 +121,9 @@
                         <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
                         <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
                         <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
-                        <a href="/contact">{{ trans("Ceres::Template.generalContact") }}</a>
+                        {% if config("Ceres.contact.shop_mail") | length > 0 %}
+                            <a href="/contact">{{ trans("Ceres::Template.generalContact") }}</a>
+                        {% endif %}
                     {% endautoescape %}
                 </div>
                 <a href="https://www.plentymarkets.eu">
