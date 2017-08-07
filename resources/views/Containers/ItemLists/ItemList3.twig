@@ -21,7 +21,7 @@
 {% if itemList is not empty %}
     <hr>
 
-    <h1 class="h3">
+    <p class="h3">
         {% if listType == "last_seen" %}
             {% if isNameEmpty %}
                 {{ trans("Ceres::Template.itemListLastSeen") }}
@@ -41,7 +41,7 @@
                 {{ config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") }}
             {% endif %}
         {% endif %}
-    </h1>
+    </p>
 
     <div class="row">
         <div class="col-xs-12 col-lg-12">

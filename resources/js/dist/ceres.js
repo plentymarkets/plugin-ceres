@@ -4118,6 +4118,8 @@ var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ResourceService = require("services/ResourceService");
+
 Vue.component("mobile-navigation", {
 
     props: ["template", "categoryTree"],
@@ -4132,23 +4134,18 @@ Vue.component("mobile-navigation", {
     },
     created: function created() {
         this.$options.template = this.template;
-
-        this.buildTree(this.categoryTree);
-
-        this.dataContainer1 = this.categoryTree;
     },
     ready: function ready() {
-        // REFACTOR!!!
-        /*
-            - setze das aktuelle auf aktiv
-            - trigger menu-activated auf das aktuelle
-        */
-        // ./REFACTOR
+        var currentCategory = ResourceService.getResource("breadcrumbs").val();
+
+        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+
+        this.dataContainer1 = this.categoryTree;
     },
 
 
     methods: {
-        buildTree: function buildTree(currentArray, parent) {
+        buildTree: function buildTree(currentArray, parent, currentCategoryId) {
             var showChilds = false;
 
             var _iteratorNormalCompletion = true;
@@ -4166,7 +4163,15 @@ Vue.component("mobile-navigation", {
                     }
 
                     if (category.children) {
-                        this.buildTree(category.children, category);
+                        this.buildTree(category.children, category, currentCategoryId);
+                    }
+
+                    if (category.id === currentCategoryId) {
+                        if (category.children) {
+                            this.slideTo(category.children);
+                        } else if (category.parent) {
+                            this.slideTo(category.parent.children);
+                        }
                     }
                 }
             } catch (err) {
@@ -4189,8 +4194,12 @@ Vue.component("mobile-navigation", {
             }
         },
         navigateTo: function navigateTo(category) {
+            if (category.children) {
+                this.slideTo(category.children);
+            }
+
             this.closeNavigation();
-            _CategoryRendererService2.default.renderItems(category);
+            _CategoryRendererService2.default.renderItems(category, this.categoryTree);
         },
         slideTo: function slideTo(children, back) {
             back = !!back;
@@ -4254,7 +4263,7 @@ Vue.component("mobile-navigation", {
     }
 });
 
-},{"services/CategoryRendererService":76}],46:[function(require,module,exports){
+},{"services/CategoryRendererService":76,"services/ResourceService":82}],46:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -4916,26 +4925,24 @@ Vue.filter("date", dateFilter);
 },{}],67:[function(require,module,exports){
 "use strict";
 
-Vue.filter("itemImage", function (item, baseUrl) {
-    var imageList = item.variationImageList;
-
-    baseUrl = baseUrl || "/";
-
-    if (baseUrl.charAt(baseUrl.length - 1) !== "/") {
-        baseUrl += "/";
+Vue.filter("itemImage", function (itemImages, highestPosition) {
+    if (itemImages.length === 0) {
+        return "";
     }
 
-    if (!!imageList && imageList.length > 0) {
-        for (var i = 0; i < imageList.length; i++) {
-            var image = imageList[i];
-
-            if (!!image.path && image.path.length > 0) {
-                return baseUrl + image.path;
-            }
-        }
+    if (itemImages.length === 1) {
+        return itemImages[0].url;
     }
 
-    return "";
+    if (highestPosition) {
+        return itemImages.reduce(function (prev, current) {
+            return prev.position > current.position ? prev : current;
+        }).url;
+    }
+
+    return itemImages.reduce(function (prev, current) {
+        return prev.position < current.position ? prev : current;
+    }).url;
 });
 
 },{}],68:[function(require,module,exports){
@@ -5295,7 +5302,7 @@ var _categoryBreadcrumbs = [];
  * render items in relation to location
  * @param currentCategory
  */
-function renderItems(currentCategory) {
+function renderItems(currentCategory, categoryTree) {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
     $("body").removeClass("menu-is-visible");
@@ -5305,9 +5312,9 @@ function renderItems(currentCategory) {
     }
 
     if (!App.isCategoryView) {
-        window.open(getScopeUrl(currentCategory), "_self");
+        window.open(getScopeUrl(currentCategory, null, categoryTree), "_self");
     } else if (currentCategory.details.length) {
-        _handleCurrentCategory(currentCategory);
+        _handleCurrentCategory(currentCategory, categoryTree);
     }
 }
 
@@ -5315,9 +5322,9 @@ function renderItems(currentCategory) {
  * bundle functions
  * @param currentCategory
  */
-function _handleCurrentCategory(currentCategory) {
+function _handleCurrentCategory(currentCategory, categoryTree) {
     _updateItemList(currentCategory);
-    _updateHistory(currentCategory);
+    _updateHistory(currentCategory, categoryTree);
     _updateBreadcrumbs();
 }
 
@@ -5341,10 +5348,10 @@ function _updateItemList(currentCategory) {
  * update page informations
  * @param currentCategory
  */
-function _updateHistory(currentCategory) {
+function _updateHistory(currentCategory, categoryTree) {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
+    window.history.replaceState({}, title, getScopeUrl(currentCategory, null, categoryTree) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
