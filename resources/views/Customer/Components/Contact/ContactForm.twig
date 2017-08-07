@@ -16,19 +16,19 @@
 							<div class="row ">
 								<div class="col-md-6">
 									<div class="col-xs-12">
-										<div class="input-unit" data-validate="text">
+										<div class="input-unit" data-validate="text" data-model="name">
 											<input type="name" name="name" v-model="name" id="txt_name">
 											<label for="txt_name">{{ trans("Ceres::Template.contactName") }}*</label>
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div class="input-unit" data-validate="regex">
+										<div class="input-unit" data-validate="regex" data-model="user_mail">
 											<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
 											<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div class="input-unit" data-validate="text">
+										<div class="input-unit" data-validate="text" data-model="subject">
 											<input type="subject" name="subject" v-model="subject" id="txt_subject">
 											<label for="txt_subject">{{ trans("Ceres::Template.contactSubject") }}*</label>
 										</div>
@@ -36,8 +36,9 @@
 								</div>
 								<div class="col-md-6">
 									<div class="col-xs-12">
-										<div class="form-group" data-validate="text">
-											<textarea name="message" id="txt_message" v-model="message" class="form-control no-resize" rows="13" cols="25" placeholder="{{ trans('Ceres::Template.contactMessage') }}*"></textarea>
+										<div class="input-unit" data-validate="text" data-model="message">
+											<textarea name="message" id="txt_message" v-model="message" class="no-resize" rows="13" cols="25"></textarea>
+											<label for="txt_message">{{ trans('Ceres::Template.contactMessage') }}*</label>
 										</div>
 									</div>
 								</div>

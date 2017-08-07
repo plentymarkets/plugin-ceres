@@ -67,11 +67,33 @@ Vue.component("contact-form", {
                     this.disabledSend = false;
                     NotificationService.success(Translations.Template.contactSendSuccess);
                 })
-                .fail(() =>
+                .fail(response =>
                 {
                     this.disabledSend = false;
-                    NotificationService.error(Translations.Template.contactSendFail);
+
+                    if (response.validation_errors)
+                    {
+                        this._handleValidationErrors(response.validation_errors);
+                    }
+                    else
+                    {
+                        NotificationService.error(Translations.Template.contactSendFail);
+                    }
                 });
+        },
+
+        _handleValidationErrors(validationErrors)
+        {
+            ValidationService.markFailedValidationFields($("#contact-form"), validationErrors);
+
+            let errorMessage = "";
+
+            for (const value of Object.values(validationErrors))
+            {
+                errorMessage += value + "<br>";
+            }
+
+            NotificationService.error(errorMessage);
         }
     }
 });

@@ -81,7 +81,7 @@ export function markFailedValidationFields(form, validationErrors, errorClass)
 
             if (fieldLabel)
             {
-                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute, fieldLabel);
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute.replace("_", " "), fieldLabel);
             }
         }
     });
