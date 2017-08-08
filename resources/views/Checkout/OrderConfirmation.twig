@@ -6,10 +6,6 @@
     <title>{{ trans("Ceres::Template.orderConfirmation") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
-{% block PartialHead %}
-    <title>{{ trans("Ceres::Template.orderConfirmation") }} | {{ config("Ceres.header.company_name") }}</title>
-{% endblock %}
-
 {% block PageBody %}
 
     {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
