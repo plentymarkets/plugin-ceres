@@ -5,7 +5,6 @@ Vue.directive("resource-if", {
     bind: function()
     {
         var self = this;
-        var display = window.getComputedStyle(this.el, null).getPropertyValue("display");
 
         ResourceService.watch(this.arg, function(value)
         {
@@ -21,7 +20,7 @@ Vue.directive("resource-if", {
 
             if (condition.apply(null, values))
             {
-                self.el.style.display = display;
+                self.el.style.display = "";
             }
             else
             {
