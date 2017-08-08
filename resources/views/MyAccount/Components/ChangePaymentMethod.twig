@@ -4,8 +4,10 @@
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
-    <div v-if="!changePossible && paymentStatus != 'fullyPaid'" class="payment-align-center">
-        <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+    <div v-if="paymentStatus != 'fullyPaid'">
+        <div v-if="!changePossible" class="payment-align-center">
+            <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+        </div>
     </div>
 
     <!-- CHANGE_PAYMENT_MODAL -->
