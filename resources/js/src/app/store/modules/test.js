@@ -16,7 +16,6 @@ const actions =
         updateField({commit, state}, text)
         {
             commit("updateField", text);
-            console.log("text changed:", text);
         }
     };
 

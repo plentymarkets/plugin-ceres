@@ -9,6 +9,6 @@ const store = new Vuex.Store(
         }
     });
 
-window.vuexStore = store;
+window.ceresStore = store;
 
 export default store;
