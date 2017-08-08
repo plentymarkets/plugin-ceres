@@ -42,7 +42,10 @@ $menu-big-menu-li-bg-hover		: $brand-primary;
 $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 
-body.menu-is-visible { overflow-y : hidden; }
+body.menu-is-visible { 
+	overflow-y : hidden;
+	position: fixed;
+}
 #mainNavbarCollapsable {
 	background 	: $menu-bg-sm;
 	bottom 		: 0;
@@ -270,6 +273,7 @@ body.menu-is-visible { overflow-y : hidden; }
 	transform   : translateX(100%);
 	transition 	: all .3s ease;
 	z-index     : 99999;
+	-webkit-overflow-scrolling: touch;
 
 	&.open {
 		opacity 	: 1;
