@@ -157,20 +157,6 @@
     },
     {
         "tab"                         : "Contact data",
-        "key"                         : "contact.use_capture",
-        "label"                       : "Enable capture bot security for mails",
-        "type"                        : "checkbox",
-        "default"                     : "true"
-    },
-    {
-        "tab"                         : "Contact data",
-        "key"                         : "contact.capture_key",
-        "label"                       : "Hidden reCAPTCHA key",
-        "type"                        : "text",
-        "default"                     : "reCAPTCHA key"
-    },
-    {
-        "tab"                         : "Contact data",
         "key"                         : "contact.opening_times",
         "label"                       : "Opening hours",
         "type"                        : "text",

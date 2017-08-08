@@ -1,4 +1,5 @@
 {% set mailRegex = "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
+{% set gCapture = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
 
 <script type="x/template" id="vue-contact-form">
 
@@ -36,7 +37,7 @@
 									<div class="col-xs-12">
 										<div class="input-unit">
 											<input type="order" name="order" v-model="orderId" id="txt_order">
-											<label for="txt_order">Auftrags ID (optional)</label>
+											<label for="txt_order">Auftrags-ID (optional)</label>
 										</div>
 									</div>
 								</div>
@@ -53,14 +54,15 @@
 					</div>
 					<hr>
 					<div class="col-xs-12">
-						{% if config("Ceres.contact.use_capture") == "true" %}
+						{% if gCapture | length > 0 %}
 							<div id="recaptcha" class="g-recaptcha"
-								data-sitekey="{{ config('Ceres.contact.capture_key') }}"
+								data-sitekey="{{ gCapture }}"
 								data-callback="sendMail"
-								data-size="invisible">
+								data-size="invisible"
+								data-badge="bottomleft">
 							</div>
 						{% endif %}
-						<button type="submit" class="btn btn-primary pull-right" :disabled="disabledSend" @click="validate({{ config("Ceres.contact.use_capture") }})">
+						<button type="submit" class="btn btn-primary pull-right" :disabled="disabledSend" @click="validate({{ gCapture | length > 0 }})">
 							{{ trans("Ceres::Template.contactSend") }}
 						</button>
 					</div>

@@ -3,7 +3,7 @@
 {% block PartialHead %}
     <title>{{ trans("Ceres::Template.generalContact") }} | {{ config("Ceres.header.company_name") }}</title>
 
-    {% if config("Ceres.contact.use_capture") == "true" %}
+    {% if services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey | length > 0 %}
         <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     {% endif %}
 {% endblock %}
