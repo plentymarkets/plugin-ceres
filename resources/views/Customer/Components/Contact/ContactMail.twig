@@ -1,6 +1,11 @@
-<b>Hallo</b> test,
+<b>Absender E-Mail:</b> {{ userMail }}<br>
+
+{% if orderId | length > 0 %}
+    <b>Auftrags-ID:</b> {{ orderId }}<br><br>
+{% endif %}
 
 {{ message }}
+_________________________________________________________
 
-<b>Liebe grüße<b>,
-        {{ name }} {{ user_mail }}
+Mit freundlichen Grüßen, 
+{{ name }}

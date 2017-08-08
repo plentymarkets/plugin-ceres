@@ -22,7 +22,7 @@
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div class="input-unit" data-validate="regex" data-model="user_mail">
+										<div class="input-unit" data-validate="regex" data-model="userMail">
 											<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
 											<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
 										</div>
@@ -31,6 +31,12 @@
 										<div class="input-unit" data-validate="text" data-model="subject">
 											<input type="subject" name="subject" v-model="subject" id="txt_subject">
 											<label for="txt_subject">{{ trans("Ceres::Template.contactSubject") }}*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit">
+											<input type="order" name="order" v-model="orderId" id="txt_order">
+											<label for="txt_order">Auftrags ID (optional)</label>
 										</div>
 									</div>
 								</div>

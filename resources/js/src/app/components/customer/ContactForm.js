@@ -16,6 +16,7 @@ Vue.component("contact-form", {
             userMail: "",
             subject : "",
             message : "",
+            orderId : "",
             disabledSend: false
         };
     },
@@ -58,6 +59,7 @@ Vue.component("contact-form", {
                     subject : this.subject,
                     name    : this.name,
                     message : this.message,
+                    orderId : this.orderId,
                     userMail: this.userMail
                 };
 
