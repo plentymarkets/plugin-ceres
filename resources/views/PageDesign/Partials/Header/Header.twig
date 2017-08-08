@@ -9,8 +9,9 @@
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
 <resource name="breadcrumbs" :data="{}"></resource>
+
 {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
-    <resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishListForContact() }}' }"></resource>
+    <resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishList() }}' }"></resource>
 {% endif %}
 
 <header class="top-bar">

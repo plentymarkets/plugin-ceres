@@ -87,7 +87,7 @@ Vue.component("add-to-wish-list", {
         {
             const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
 
-            $(".add-to-wishList").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
+            $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
         },
 
         updateWatchListCount(count)
