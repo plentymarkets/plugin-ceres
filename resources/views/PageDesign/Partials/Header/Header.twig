@@ -28,9 +28,9 @@
                 {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
                     <li class="list-inline-item control-wish-list">
                         <a href="/wish-list">
-                            <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
                             <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true" style="display:none"></i>
                             <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
+                            <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
                         </a>
                     </li>
                 {% endif %}
