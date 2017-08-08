@@ -81,7 +81,9 @@ export function markFailedValidationFields(form, validationErrors, errorClass)
 
             if (fieldLabel)
             {
-                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attribute.replace("_", " "), fieldLabel);
+                const attributeCamel = attribute.replace(/([A-Z])/g, " $1").toLowerCase();
+
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attributeCamel.replace("_", " "), fieldLabel);
             }
         }
     });
