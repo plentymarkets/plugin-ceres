@@ -10,20 +10,21 @@ const CheckoutService = require("services/CheckoutService");
  */
 export function createAddress(address, addressType, setActive)
 {
-    return ApiService.post("rest/io/customer/address?typeId=" + addressType, address).done(function(response)
-    {
-        if (setActive)
+    return ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true})
+        .done(response =>
         {
-            if (addressType === 1)
+            if (setActive)
             {
-                CheckoutService.setBillingAddressId(response.id);
+                if (addressType === 1)
+                {
+                    CheckoutService.setBillingAddressId(response.id);
+                }
+                else if (addressType === 2)
+                {
+                    CheckoutService.setDeliveryAddressId(response.id);
+                }
             }
-            else if (addressType === 2)
-            {
-                CheckoutService.setDeliveryAddressId(response.id);
-            }
-        }
-    });
+        });
 }
 
 /**
@@ -35,7 +36,7 @@ export function createAddress(address, addressType, setActive)
 export function updateAddress(newData, addressType)
 {
     addressType = addressType || newData.pivot.typeId;
-    return ApiService.put("rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData);
+    return ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, {supressNotifications: true});
 }
 
 /**
@@ -46,7 +47,7 @@ export function updateAddress(newData, addressType)
  */
 export function deleteAddress(addressId, addressType)
 {
-    return ApiService.delete("rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+    return ApiService.delete("/rest/io/customer/address/" + addressId + "?typeId=" + addressType);
 }
 
 export default {createAddress, updateAddress, deleteAddress};

@@ -3,7 +3,8 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
-{% set crossSellingList = services.item.getItemCrossSellingList( item.documents[0].data.item.id  ) %}
+{% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
+{% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
 {% block PartialHead %}
     <meta property="og:title" content="{{ item.documents[0].data.texts | itemName(configItemName) }}" />
@@ -14,11 +15,13 @@
 
     <link rel="canonical" href="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}">
     <script type="application/ld+json">{"@context":"http://schema.org/","@type":"Product","name":"{{ item.documents[0].data.texts | itemName(configItemName) }}","category":"item.","releaseDate":"{{ item.documents[0].data.variation.releasedAt }}","image":"{{ item.documents[0].data.images.all[0].urlPreview }}","identifier":"{{ item.documents[0].data.variation.id }}","description":"{{ item.documents[0].data.texts.description }}","disambiguatingDescription":"{{ item.documents[0].data.texts.shortDescription }}","manufacturer":{"@type":"Organization","name":"{{ item.documents[0].data.item.manufacturer.externalName }}"},"model":{"@type":"ProductModel","isVariantOf":"{{ item.documents[0].data.item.id }}","model":"{{ item.documents[0].data.variation.model }}"},"offers":{"@type":"Offer","priceCurrency":"{{ item.documents[0].data.calculatedPrices.default.currency }}","price":"{{ item.documents[0].data.calculatedPrices.default.price }}","availability":"{{ item.documents[0].data.variation.availability.names.name }}","itemCondition":"{{ item.documents[0].data.item.condition.name }}","serialNumber":"{{ item.documents[0].data.variation.number }}"},"depth":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.lengthMM }}"},"width":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.widthMM }}"},"height":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.heightMM }}"},"weight":{"@type":"QuantitativeValue","value":"{{ item.documents[0].data.variation.weightG }}"}}</script>
+
+    <title>{{ item.documents[0].data.texts | itemName(configItemName) }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}
 
-    {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen")) }}
+    {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen_number")) }}
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
@@ -114,7 +117,7 @@
 
                     {% if salable %}
                         <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
-                                   resource="currentVariation" :show-quantity="true"></add-to-basket>
+                                   resource="currentVariation" :show-quantity="true" :show-order-properties="true"></add-to-basket>
                     {% endif %}
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
@@ -284,28 +287,7 @@
         </div>
         <!-- ./ITEM DESCRIPTION -->
 
-        {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item.documents[0].data) }}
-
-        <!-- CROSSSELLING -->
-        {#{% if crossSellingList | length > 0 %}#}
-            {#<hr>#}
-
-            {#<div class="row m-y-3">#}
-                {#<div class="col-xs-12">#}
-                    {#<h3 class="m-b-1">{{ (crossSellingList|first).relationship }}</h3>#}
-                {#</div>#}
-                {#<div class="col-xs-12">#}
-                    {#<ul class="crosssellers list-unstyled row">#}
-                        {#{% for crossSellingItem in crossSellingList %}#}
-                            {#<li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">#}
-                                {#{% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': services.item.getItem(crossSellingItem.crossItemId) } %}#}
-                            {#</li>#}
-                        {#{% endfor %}#}
-                    {#</ul>#}
-                {#</div>#}
-            {#</div>#}
-        {#{% endif %}#}
-        <!-- ./CROSSSELLING -->
+        {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
 
         {#<hr>#}
 

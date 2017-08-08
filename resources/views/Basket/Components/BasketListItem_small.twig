@@ -4,7 +4,8 @@
 <article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"></quantity-input>
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+                        :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
     </div>
     <!-- ./ITEM QUANTITY -->
 
@@ -22,17 +23,19 @@
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItems | json }
                 ${ basketItem.variation.data.texts | itemName {{ configItemName }} } {# ${ basketItem.variation.variationBase.variationName } #}
             </div>
         </a>
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
         </div>
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.price | currency basketItem.variation.data.calculatedPrices.default.currency }
+            ${ basketItem.quantity * basketItem.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
-
+        <div class="item-order-param" v-for="property in basketItem.basketItemOrderParams">
+            <strong>${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>:
+            <span>${property.value}</span>
+        </div>
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
             <span class="message" v-if="!deleteConfirmed">
                 {{ trans("Ceres::Template.generalDelete") }}

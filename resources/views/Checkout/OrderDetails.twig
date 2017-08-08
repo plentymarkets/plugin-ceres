@@ -83,14 +83,14 @@
                         {% if loggedIn %}
                             {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
                                 <change-payment-method  template="#vue-change-payment-method"
-                                                        :current-order="{{ orderData | json_encode() }}"
+                                                        :current-order="{{ orderData.order | json_encode() }}"
                                                         :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
                                                         :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}">
                                 </change-payment-method>
                             {% endif %}
                         {% endif %}
 
-                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData) }}
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
 
                     </div>
 
@@ -147,6 +147,14 @@
                                     <strong class="col-xs-6 col-sm-3">{{ trans("Ceres::Template.orderTotal") }}</strong>
                                     <strong class="col-xs-6 col-sm-9">{{ (item.quantity * item.amounts[0].priceGross) | formatMonetary( item.amounts[0].currency ) }}</strong>
                                 </div>
+                                {% if item.orderProperties %}
+                                    {% for property in item.orderProperties %}
+                                        <div class="row">
+                                            <strong class="col-xs-6 col-sm-3">{{ property.name }}</strong>
+                                            <span class="col-xs-6 col-sm-9">{{ property.value }}</span>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         </article>
                     {% endif %}
@@ -197,7 +205,7 @@
 
                             <hr>
 
-                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", services.customer.getLatestOrder().order) %}
+                            {% set grossNet = LayoutContainer.show("Ceres::OrderConfirmation.GrossNetReplace", orderData.order) %}
                             {% if grossNet|trim is not empty %}
                                 {{ grossNet }}
                             {% else %}
@@ -241,7 +249,7 @@
 
                             {% endif %}
 
-                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", services.customer.getLatestOrder().order) }}
+                            {{ LayoutContainer.show("Ceres::OrderConfirmation.AfterTotals", orderData.order) }}
                         </dl>
                     </div>
                 </div>

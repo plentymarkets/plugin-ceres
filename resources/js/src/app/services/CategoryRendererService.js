@@ -69,6 +69,7 @@ function _updateHistory(currentCategory)
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 }
 
 /**

@@ -1,26 +1,67 @@
 # Release Notes for Ceres
 
-## v1.x.x (unknown)
+## v1.3.2 (2017-07-26)
 
 ### Added
 
-- Caching has been implemented for the side navigation and the top navigation.
+- The **Phone number** field has been added to the address forms of the delivery countries DE and UK.
 
 ### Changed
 
+- The design for the list of shipping methods in the checkout was updated.
+
+### Fixed
+
+- The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
+- The item images on the order confirmation page are now displayed correctly.
+
+### Known issues
+
+- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+- If the quantity of an item added to the shopping cart exceeds the stock of the item, a `Bad Params` error message is shown.
+
+## v1.3.1 (2017-07-24)
+
+### Added
+
+- The custom event `onVariationChanged` has been added.
+- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155).
+- When creating/editing addresses, the text fields will be marked red if the server returns an error. Also, instead of a generic "Validation errors", the specific error message is shown.
+
+### Fixed
+
+- When linking categories in the footer, the content of these categories will now be displayed depending on the respective language.
+- The email address of a logged-in customer will be displayed in the **My account** area.
+
+## v1.3.0 (2017-07-13)
+
+### Added
+
+- Item lists provided by Ceres are now loaded dynamically and each list can be set independently.
+- Items can now be displayed in item lists with the help of tags.
+- Cross-selling items can now be displayed in item lists (only available in the single item view).
+- The **Title** field has been added to the address forms of the delivery countries DE and UK.
+- Caching has been implemented for the side navigation and the top navigation.
+- It is now possible to change the pattern of item URLs to match the pattern of the old online store (e.g. Callisto 3.5). To do so, activate the **Enable Callisto route pattern for items** setting in the **Global** tab of the Ceres configuration.
+
+### Changed
+
+- The design of the **Add to shopping cart** button in the category view has been changed.
 - The online store search will now use the **AND** operator. This replaces the **OR** search that was previously used.
 - The search icon in the header will now switch to an **X** when clicking the search to help the customer with closing the current search.
 - The mobile navigation has been refactored. Using the mobile navigation is now easier than before due to a larger button for opening sub-categories.
+- The address field 2 is now a default field of the address form of the delivery country UK.
+- The first address in the address list will now be displayed by default in the checkout.
+- The delivery country will now be set automatically based on the delivery address in the checkout.
+- On the checkout page, the delivery country cannot be changed in the header menu anymore.
+- The category view has been refactored for mobile devices.
 
 ### Fixed
 
 - Only those item images activated for a client will be displayed in the respective online store.
 - The side navigation now displays the categories on every level again.
-
-### Known issues
-
-- The name of an item displayed in the category view or an item list is "cut off" after 35 characters and not wrapped.
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
+- When changing the delivery country in the checkout, the first allowed payment method will now be selected automatically.
+- The name of an item displayed in the category view or an item list is not "cut off" after 35 characters and now wrapped.
 
 ## v1.2.10 (2017-07-05)
 
