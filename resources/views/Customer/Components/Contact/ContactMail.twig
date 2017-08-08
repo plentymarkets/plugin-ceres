@@ -1,11 +1,11 @@
+<b>{{ trans("Ceres::Template.contactName") }}:</b> {{ name }} <br>
+
 <b>{{ trans("Ceres::Template.contactSenderMail") }}:</b> {{ userMail }}<br>
 
 {% if orderId | length > 0 %}
     <b>{{ trans("Ceres::Template.contactOrderId") }}:</b> {{ orderId }}<br><br>
 {% endif %}
 
-{{ message }}
-_________________________________________________________
+_________________________________________________________<br><br>
 
-{{ trans("Ceres::Template.contactBestRegards") }}, 
-{{ name }}
+{{ message }}
