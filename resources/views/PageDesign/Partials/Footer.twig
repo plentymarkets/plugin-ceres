@@ -121,7 +121,7 @@
                         <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
                         <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
                         <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
-                        {% if config("Ceres.contact.shop_mail") | length > 0 %}
+                        {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
                             <a href="/contact">{{ trans("Ceres::Template.generalContact") }}</a>
                         {% endif %}
                     {% endautoescape %}
