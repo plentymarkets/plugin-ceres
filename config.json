@@ -22,7 +22,7 @@
     {
         "tab"                         : "Global",
         "key"                         : "contact.shop_mail",
-        "label"                       : "Store email address",
+        "label"                       : "Contact form email address",
         "type"                        : "text",
         "default"                     : "your@email.com"
     },
