@@ -23,7 +23,6 @@
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItems | json }
                 ${ basketItem.variation.data.texts | itemName {{ configItemName }} } {# ${ basketItem.variation.variationBase.variationName } #}
             </div>
         </a>

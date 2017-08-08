@@ -76,6 +76,8 @@ Vue.component("create-update-address", {
                 .updateAddress(this.addressData, this.addressType)
                 .done(() =>
                 {
+                    this.$dispatch("selected-address-updated", this.addressData);
+
                     this.addressModal.hide();
 
                     for (const key in this.addressList)
