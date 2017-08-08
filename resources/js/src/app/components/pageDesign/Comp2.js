@@ -1,10 +1,16 @@
 Vue.component("comp2", {
-    template: "<button @click='dispatchy()'>Hallo2</button>",
-    methods:
+    template: "<input v-model=\"message\" @input=\"updateField(message)\">",
+
+    data()
     {
-        dispatchy()
-        {
-            this.$store.dispatch("updateField", "dispatchyyy");
-        }
-    }
+        return {
+            message: "message"
+        };
+    },
+
+    ready()
+    {
+    },
+
+    methods: Vuex.mapActions(["updateField"])
 });

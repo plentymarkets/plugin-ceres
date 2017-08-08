@@ -1,34 +1,14 @@
-// import test from "store/modules/test";
+import test from "store/modules/test";
 
-const state =
+// eslint-disable-next-line
+const store = new Vuex.Store(
     {
-        testField: ""
-    };
-
-const mutations =
-    {
-        updateField(state, text)
+        modules:
         {
-            state.testField = text;
+            test
         }
-    };
-
-const actions =
-    {
-        updateField({commit, state}, text)
-        {
-            commit("updateField", text);
-            console.log("text changed:", text);
-        }
-    };
-
-export default new Vuex.Store(
-    {
-        state,
-        mutations,
-        actions
-        // modules:
-        // {
-        //     test
-        // }
     });
+
+window.vuexStore = store;
+
+export default store;
