@@ -81,3 +81,72 @@
 .item-list-frame.loading:not(.blur-effect) > ul {
   display: none
 }
+
+.parallax-img-container {
+    height: auto;
+        
+    .parallax-text-container {
+        position: inherit;
+
+        h1 {
+            margin-left: 15px;
+            margin-bottom: 0;
+        }
+    }
+
+    &[style^='background-image'] {
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        height: 300px;
+        max-width: none;
+        position: relative;
+
+        .parallax-text-container {
+            position: absolute;
+            bottom: 0;
+
+            h1 {
+                color: $category-text-color;
+                font-size: 300%;
+                text-shadow: $category-text-shadow;
+                bottom: 0;
+                width: 100%;
+                margin-bottom: .5rem;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(sm){
+        .parallax-text-container h1 {
+            margin-top: 1rem;
+        }
+        &[style^='background-image'] {
+            height: 350px;
+
+            .parallax-text-container h1 {
+                font-size: 400%;
+                margin: 0 0 1rem;
+            }
+        }
+    }
+
+    @include media-breakpoint-up(md){
+        &[style^='background-image'] {
+            height: 400px;
+
+            .parallax-text-container h1 {
+                font-size: 500%;
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+    @include media-breakpoint-up(lg){
+        .parallax-text-container h1 {
+            margin-left: 0;
+        }
+    }
+
+}

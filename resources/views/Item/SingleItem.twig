@@ -46,7 +46,7 @@
                     <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.externalName }}</a>
                 </h6>
 
-                <h1 class="h3 title">
+                <h1 class="h2 title">
                     <span v-resource-bind:currentVariation="documents.0.data.variation.name" v-resource-if:currentVariation="documents[0].data.variation.name != ''">
                         {{ item.documents[0].data.texts | itemName(configItemName) }}
                     </span>
