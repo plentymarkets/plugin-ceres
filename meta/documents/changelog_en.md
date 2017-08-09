@@ -4,17 +4,17 @@
 
 ### Added
 
-- The shopping cart information to be displayed in the header can now be specified. It is possible to display the value of items, the quantity of items or the value and quantity of items in the header. For further information, refer to the <a href=„https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#80“ target=„_blank“>manual</a>.
-- A custom favicon can be uploaded for the online store. For further information about uploading a favicon, refer to the <a href=„https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#340“ target=„_blank“>manual</a>.
+- The shopping cart information to be displayed in the header can now be specified. It is possible to display the value of items, the quantity of items or the value and quantity of items in the header. For further information, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#80" target="_blank">manual</a>.
+- A custom favicon can be uploaded for the online store. For further information about uploading a favicon, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#340" target="_blank">manual</a>.
 - Every page now has a dynamically generated page title.
 - The stock of items is now taken into consideration in the online store.
 - The setting **Invisible: in item list** in the **Settings** tab of a variation is now taken into consideration in the online store.
-- Variations without stock can now be activated for the variation drop-down menu. For further information, refer to the<a href=„https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90“ target=„_blank“>manual</a>.
+- Variations without stock can now be activated for the variation drop-down menu. For further information, refer to the<a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">manual</a>.
 - A wish list has been added. **Note:** In order to display the wish list in the online store, the route `/wish-list` must be activated in the **Routing** tab in the configuration of **IO**.
-- A contact page and the contact form has been added. **Note:** In order to display the contact page in the online store, the route `/contact` must be activated in the **Routing** tab in the configuration of **IO**. For further information about setting up the contact page, refer to the <a href=„https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#370“ target=„_blank“>manual</a>.
+- A contact page and the contact form has been added. **Note:** In order to display the contact page in the online store, the route `/contact` must be activated in the **Routing** tab in the configuration of **IO**. For further information about setting up the contact page, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#370" target="_blank">manual</a>.
 - Error messages sent by the server are now displayed correctly in the front-end.
 - The link in the order confirmation email now forwards to the order confirmation page of Ceres.
-- A category image can now be displayed in the category view. For further information, refer to the <a href=„https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#100“ target=„_blank“>manual</a>.
+- A category image can now be displayed in the category view. For further information, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#100" target="_blank">manual</a>.
 
 ## Changed
 
