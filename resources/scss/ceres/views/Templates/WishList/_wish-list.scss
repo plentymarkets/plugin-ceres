@@ -58,6 +58,19 @@
             font-size: .75rem;
         }
 
+        .wish-list-availability.availability_1, .availability_2 {
+            color: $availability_1;
+            background-color: inherit
+        }
+        .wish-list-availability.availability_3, .availability_4 {
+            color: $availability_3;
+            background-color: inherit
+        }
+        .wish-list-availability.availability_5 {
+            color: $availability_5;
+            background-color: inherit
+        }
+
         & > .wish-list-price-container {
             display:flex;
 
