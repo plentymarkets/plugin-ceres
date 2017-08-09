@@ -79,10 +79,10 @@
 }
 
 .availability_1,
-.availability_2 {background-color: $availability_1;}
+.availability_2 {color: $availability_1;}
 .availability_3,
-.availability_4 {background-color: $availability_3;}
-.availability_5 {background-color: $availability_5;}
+.availability_4 {color: $availability_3;}
+.availability_5 {color: $availability_5;}
 
 
 .rating{
@@ -110,13 +110,6 @@
     border:none;
     border-radius:none;
     padding: .75rem .45rem .25rem 0;
-}
-
-.wishlist {
-    &:hover {
-        color: #d9534f!important;
-        text-decoration: none;
-    }
 }
 
 .single-rightside {

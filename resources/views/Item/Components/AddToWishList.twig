@@ -1,0 +1,8 @@
+<script type="x/template" id="vue-add-to-wish-list">
+    <div class="col-xs-6">
+        <a class="text-muted small add-to-wish-list" :class="{active: isActive}" href="javascript:void(0)" @click="switchState()" data-toggle="tooltip" data-placement="top" title="">
+            <i class="fa fa-heart"></i>
+            {{ trans("Ceres::Template.itemWishList") }}
+        </a>
+    </div>
+</script>

@@ -1,0 +1,22 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.wishList") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+    {{ component( "Ceres::WishList.Components.WishList" ) }}
+
+    <div class="page-content basket container-max">
+
+        <div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h2">{{ trans("Ceres::Template.wishList") }}</h1>
+            </div>
+        </div>
+
+        <hr>
+
+         <wish-list template="#vue-wish-list" :wish-list-ids="{{ wishList | json_encode() }}"></wish-list>
+    </div>
+{% endblock %}
