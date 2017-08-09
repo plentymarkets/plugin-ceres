@@ -253,10 +253,10 @@ Vue.component("basket-preview", {
             basketItems: []
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
+
 
     /**
      * Bind to basket and bind the basket items
@@ -528,7 +528,6 @@ Vue.component("category-breadcrumbs", {
          */
         init: function init() {
             this.categories = JSON.parse(this.categories);
-            // this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
 
             ResourceService.bind("breadcrumbs", this);
             ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
@@ -3982,11 +3981,7 @@ Vue.component("mobile-navigation", {
     }
 });
 
-<<<<<<< HEAD
-},{"services/ResourceService":82}],46:[function(require,module,exports){
-=======
-},{"services/CategoryRendererService":75,"services/ResourceService":81}],45:[function(require,module,exports){
->>>>>>> feature/new_mobile_navigation
+},{"services/CategoryRendererService":76,"services/ResourceService":82}],46:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
