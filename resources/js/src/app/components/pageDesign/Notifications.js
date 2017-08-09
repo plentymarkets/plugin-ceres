@@ -56,7 +56,7 @@ Vue.component("notifications", {
                 var message = this.initialNotifications[key].message;
                 var messageCode = this.initialNotifications[key].code;
 
-                if(messageCode > 0)
+                if (messageCode > 0)
                 {
                     message = Translations.Template[ExceptionMap.get(messageCode.toString())];
                 }
