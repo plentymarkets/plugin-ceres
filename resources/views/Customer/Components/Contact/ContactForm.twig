@@ -1,9 +1,11 @@
 {% set mailRegex = "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
 {% set gCapture = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
 
 <script type="x/template" id="vue-contact-form">
 
 	<div class="row cmp-contact">
+
 		<div class="col-xs-12">
 			<h1>{{ trans("Ceres::Template.generalContact") }}</h1>
 
@@ -12,14 +14,16 @@
 			</p>
 
 			<div class="row m-b-3">
-				<div class="col-md-3 flex-style">
-					{% include "Ceres::Customer.Components.Contact.ContactCard" %}
-				</div>
-				<div class="col-md-8">
+				{% if contactConfigSet %}
+					<div class="col-md-3 flex-style">
+						{% include "Ceres::Customer.Components.Contact.ContactCard" %}
+					</div>
+				{% endif %}
+				<div {% if contactConfigSet %}class="col-md-8"{% else %}class="col-md-12"{% endif %}>
 					<div class="well well-sm">
 						<form id="contact-form">
 							<div class="row ">
-								<div class="col-md-6">
+								<div {% if contactConfigSet %}class="col-md-6"{% else %}class="col-md-4"{% endif %}>
 									<div class="col-xs-12">
 										<div class="input-unit" data-validate="text" data-model="name">
 											<input type="name" name="name" v-model="name" id="txt_name">
@@ -45,7 +49,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div {% if contactConfigSet %}class="col-md-6"{% else %}class="col-md-8"{% endif %}>
 									<div class="col-xs-12">
 										<div class="input-unit textarea" data-validate="text" data-model="message">
 											<textarea name="message" id="txt_message" v-model="message" class="no-resize" rows="13" cols="25"></textarea>

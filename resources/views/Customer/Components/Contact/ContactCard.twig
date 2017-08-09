@@ -36,37 +36,38 @@
 {% endif %}
 
 <div class="contact-card hidden-sm-down">
-	<p>
-		<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
-		<span class="d-inline-block">
-			{% if "name" in showData %}
-				{{ name }}<br>
-			{% endif %}
+	{% if "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
+		<p>
+			<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+			<span class="d-inline-block">
+				{% if "name" in showData %}
+					{{ name }}<br>
+				{% endif %}
 
-			{% if "ceo" in showData %}
-				{{ ceo }} <br>
-			{% endif %}
+				{% if "ceo" in showData %}
+					{{ ceo }} <br>
+				{% endif %}
 
-			{% if "street" in showData %}
-				{{ street }} <br>
-			{% endif %}
+				{% if "street" in showData %}
+					{{ street }} <br>
+				{% endif %}
 
-			{% if "zip" in showData %}
-				{{ zip }}
-			{% endif %}
-			{% if "city" in showData %}
-				{{ city }}
-			{% endif %}
-			{% if "zip" in showData or "city" in showData %}
-				<br>
-			{% endif %}
+				{% if "zip" in showData %}
+					{{ zip }}
+				{% endif %}
+				{% if "city" in showData %}
+					{{ city }}
+				{% endif %}
+				{% if "zip" in showData or "city" in showData %}
+					<br>
+				{% endif %}
 
-			{% if "country" in showData %}
-				{{ country }}
-			{% endif %}
-		</span>
-	</p>
-
+				{% if "country" in showData %}
+					{{ country }}
+				{% endif %}
+			</span>
+		</p>
+	{% endif %}
 	{% if "fon" in showData %}
 		<p class="m-y-0">
 			<i class="fa fa-fw fa-phone" aria-hidden="true"></i>
