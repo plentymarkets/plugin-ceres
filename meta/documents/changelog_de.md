@@ -7,6 +7,7 @@
 - Das Favicon wird nun aus den Backend Einstellungen für das Favicon geladen.
 - Jede Seite hat jetzt einen dynamisch generierten Seitentitel.
 - Varianten ohne Bestand können aus dem Varianten-Dropdown über die Ceres-Einstellungen aufrufbar sein.
+- Serverseitige Fehlermeldungen werden im Frontend richtig ausgegeben.
 
 ## Geändert
 
