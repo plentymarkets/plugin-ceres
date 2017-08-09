@@ -926,6 +926,13 @@
         "default"           : "true"
     },
     {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.confirmation_link_login_redirect",
+        "label"             : "Forward to login page after clicking link in order confirmation",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
         "tab"                       : "Checkout and My account",
         "key"                       : "billing_address.show",
         "label"                     : "Show invoice address fields in address form (DE)",
