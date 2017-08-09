@@ -13,6 +13,43 @@
         "default"   : "false"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "contact.opening_times",
+        "label"                       : "Opening hours",
+        "type"                        : "text",
+        "default"                     : "Monday - Friday, 00:00 - 24:00"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.shop_mail",
+        "label"                       : "Contact form email address",
+        "type"                        : "text",
+        "default"                     : "your@email.com"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.show_data",
+        "label"                       : "Show contact data",
+        "type"                        : "multi_select",
+        "possibleValues"              :
+        {
+            "name"                    : "Company",
+        "ceo"                         : "CEO",
+        "city"                        : "City",
+        "country"                     : "Country",
+        "email"                       : "Email",
+        "fax"                         : "Fax",
+        "fon"                         : "Phone",
+        "hotline"                     : "Hotline",
+        "street"                      : "Street",
+        "vatNumber"                   : "VAT number",
+        "zip"                         : "ZIP",
+        "timezone"                    : "Time zone",
+        "opening_times"               : "Opening hours"
+        },
+        "default"                     : "street, zip, city, hotline, email, opening_times"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
