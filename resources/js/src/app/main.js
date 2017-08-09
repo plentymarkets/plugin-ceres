@@ -7,14 +7,8 @@ var init = (function($, window, document)
     {
         $("#btnMainMenuToggler").click(function()
         {
-            $("#mainNavbarCollapsable").toggleClass("open");
+            $(".mobile-navigation").toggleClass("open");
             $("body").toggleClass("menu-is-visible");
-        });
-
-        $("#mainNavbarCollapsable .btnClose").click(function()
-        {
-            $("#mainNavbarCollapsable").removeClass("open");
-            $("body").removeClass("menu-is-visible");
         });
 
         $(window).scroll(function()

@@ -1,0 +1,119 @@
+{% set name =           config("system.company.name") %}
+{% set ceo =            config("system.company.ceo") %}
+{% set city =           config("system.company.city") %}
+{% set country =        config("system.company.country") %}
+{% set email =          config("system.company.email") %}
+{% set fax =            config("system.company.fax") %}
+{% set fon =            config("system.company.fon") %}
+{% set hotline =        config("system.company.hotline") %}
+{% set street =         config("system.company.street") %}
+{% set vat =            config("system.company.vatNumber") %}
+{% set zip =            config("system.company.zip") %}
+{% set timezone =       config("system.company.timezone") %}
+{% set openingTimes =   config("Ceres.contact.opening_times") %}
+{% set showData =       config("Ceres.contact.show_data") %}
+
+{% if showData == "all" %}
+    {% set showData =
+		[
+			"name",
+			"ceo",
+			"city",
+			"country",
+			"email",
+			"fax",
+			"fon",
+			"hotline",
+			"street",
+			"vatNumber",
+			"zip",
+			"timezone",
+			"opening_times"
+		] 
+	%}
+{% else %}
+    {% set showData = showData|split(', ') %}
+{% endif %}
+
+<div class="contact-card hidden-sm-down">
+	{% if "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
+		<p>
+			<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+			<span class="d-inline-block">
+				{% if "name" in showData %}
+					{{ name }}<br>
+				{% endif %}
+
+				{% if "ceo" in showData %}
+					{{ ceo }} <br>
+				{% endif %}
+
+				{% if "street" in showData %}
+					{{ street }} <br>
+				{% endif %}
+
+				{% if "zip" in showData %}
+					{{ zip }}
+				{% endif %}
+				{% if "city" in showData %}
+					{{ city }}
+				{% endif %}
+				{% if "zip" in showData or "city" in showData %}
+					<br>
+				{% endif %}
+
+				{% if "country" in showData %}
+					{{ country }}
+				{% endif %}
+			</span>
+		</p>
+	{% endif %}
+	{% if "fon" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ fon }}</span>
+		</p>
+	{% endif %}
+
+	{% if "hotline" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ hotline }}</span>
+		</p>
+	{% endif %}
+
+	{% if "fax" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ fax }}</span>
+		</p>
+	{% endif %}
+
+	{% if "email" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ email }}</span>
+		</p>
+	{% endif %}
+
+	{% if "opening_times" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ openingTimes }}</span>
+		</p>
+	{% endif %}
+
+	{% if "timezone" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-globe" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ timezone }}</span>
+		</p>
+	{% endif %}
+
+	{% if "vatNumber" in showData %}
+		<p class="m-y-0">
+			<i class="fa fa-fw" aria-hidden="true"></i>
+			<span class="d-inline-block">VAT: {{ vat }}</span>
+		</p>
+	{% endif %}
+</div>

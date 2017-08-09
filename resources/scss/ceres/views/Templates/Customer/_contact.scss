@@ -1,0 +1,44 @@
+.cmp-contact{
+
+	.jumbotron-sm { 
+		padding-top: 24px;
+		padding-bottom: 24px; 
+	}
+
+	.jumbotron small {
+		color: #FFF;
+	}
+
+	.h1 small {
+		font-size: 24px;
+	}
+
+	.flex-style {
+		display: flex;
+	}
+
+	.no-resize {
+		resize: none;
+	}
+
+	textarea:focus {
+		border-color: rgba(0,0,0,.15);
+	}
+
+	.contact-card {
+
+		margin-bottom: 1.5rem!important;
+		margin: auto;
+		
+		& i {
+
+			vertical-align: top;
+			line-height: 1.5;
+
+			& .fa-map-marker {
+				float: left;
+				margin-right: 4px; 
+			}
+		}
+	}
+}

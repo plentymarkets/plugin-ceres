@@ -1,3 +1,5 @@
+import ExceptionMap from "exceptions/ExceptionMap";
+
 var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
@@ -52,6 +54,12 @@ Vue.component("notifications", {
                 // set default type top 'log'
                 var type = this.initialNotifications[key].type || "log";
                 var message = this.initialNotifications[key].message;
+                var messageCode = this.initialNotifications[key].code;
+
+                if (messageCode > 0)
+                {
+                    message = Translations.Template[ExceptionMap.get(messageCode.toString())];
+                }
 
                 // type cannot be undefined
                 if (message)

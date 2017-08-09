@@ -1,4 +1,4 @@
-var ResourceService       = require("services/ResourceService");
+const ResourceService       = require("services/ResourceService");
 
 Vue.component("basket-preview", {
 
@@ -6,7 +6,7 @@ Vue.component("basket-preview", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             basket: {},
@@ -14,7 +14,7 @@ Vue.component("basket-preview", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -22,7 +22,7 @@ Vue.component("basket-preview", {
     /**
      * Bind to basket and bind the basket items
      */
-    ready: function()
+    ready()
     {
         ResourceService.bind("basket", this);
         ResourceService.bind("basketItems", this);

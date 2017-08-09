@@ -1,0 +1,82 @@
+{% set mailRegex = "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
+{% set gCapture = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
+
+<script type="x/template" id="vue-contact-form">
+
+	<div class="row cmp-contact">
+
+		<div class="col-xs-12">
+			<h1>{{ trans("Ceres::Template.generalContact") }}</h1>
+
+			<p class="m-b-3">
+				{{ trans("Ceres::Template.contactShopMessage") }}
+			</p>
+
+			<div class="row m-b-3">
+				{% if contactConfigSet %}
+					<div class="col-md-3 flex-style">
+						{% include "Ceres::Customer.Components.Contact.ContactCard" %}
+					</div>
+				{% endif %}
+				<div {% if contactConfigSet %}class="col-md-8"{% else %}class="col-md-12"{% endif %}>
+					<div class="well well-sm">
+						<form id="contact-form">
+							<div class="row ">
+								<div {% if contactConfigSet %}class="col-md-6"{% else %}class="col-md-4"{% endif %}>
+									<div class="col-xs-12">
+										<div class="input-unit" data-validate="text" data-model="name">
+											<input type="name" name="name" v-model="name" id="txt_name">
+											<label for="txt_name">{{ trans("Ceres::Template.contactName") }}*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit" data-validate="regex" data-model="userMail">
+											<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
+											<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit" data-validate="text" data-model="subject">
+											<input type="subject" name="subject" v-model="subject" id="txt_subject">
+											<label for="txt_subject">{{ trans("Ceres::Template.contactSubject") }}*</label>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="input-unit">
+											<input type="order" name="order" v-model="orderId" id="txt_order">
+											<label for="txt_order">{{ trans("Ceres::Template.contactOrderId") }} ({{ trans("Ceres::Template.generalOptional") }})</label>
+										</div>
+									</div>
+								</div>
+								<div {% if contactConfigSet %}class="col-md-6"{% else %}class="col-md-8"{% endif %}>
+									<div class="col-xs-12">
+										<div class="input-unit textarea" data-validate="text" data-model="message">
+											<textarea name="message" id="txt_message" v-model="message" class="no-resize" rows="13" cols="25"></textarea>
+											<label for="txt_message">{{ trans('Ceres::Template.contactMessage') }}*</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<hr>
+					<div class="col-xs-12">
+						{% if gCapture | length > 0 %}
+							<div id="recaptcha" class="g-recaptcha"
+								data-sitekey="{{ gCapture }}"
+								data-callback="sendMail"
+								data-size="invisible"
+								data-badge="bottomleft">
+							</div>
+						{% endif %}
+						<button type="submit" class="btn btn-primary pull-right" :disabled="disabledSend" @click="validate({{ gCapture | length > 0 }})">
+							{{ trans("Ceres::Template.contactSend") }}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</script>
