@@ -59,3 +59,13 @@
 .payment-align-center {
 	text-align: center;
 }
+
+.payment-change-box {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	.payment-change-box-item:nth-child(2) {
+		order: 1;
+		margin-top: .5rem;
+	}
+}

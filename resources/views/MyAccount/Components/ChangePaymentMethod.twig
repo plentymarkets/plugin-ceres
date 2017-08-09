@@ -1,11 +1,16 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
+    <button v-if="changePossible" class="payment-change-box-item btn btn-primary btn-block" @click="openPaymentChangeModal()">
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
-    <div v-if="!changePossible" class="payment-align-center">
-        <h1 class="h2 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+    <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
+        <div v-if="!changePossible" class="payment-align-center">
+            <div class="alert alert-warning">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}
+            </div>
+        </div>
     </div>
 
     <!-- CHANGE_PAYMENT_MODAL -->
