@@ -11,10 +11,15 @@
 ## Geändert
 
 - Die 3 Artikel Listen haben nun als Überschrift ein p-Element, anstatt h1-Element
+- Die mobile Navigation wurde grundlegend überarbeitet und zeigt bis zu 6 Unterebenen an.
 
 ### Behoben
 
 - Bild positionen werden nun auch in den Artikellisten berücksichtigt.
+
+### Entfernt
+
+- Die Komponente Mobile-Breadcrumbs wurde entfernt, da die neue mobile Navigation eigene Breadcrumbs enthält.
 
 ## v1.3.2 (2017-07-26)
 
