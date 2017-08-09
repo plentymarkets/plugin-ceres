@@ -3,8 +3,6 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = config("Ceres.header.company_name") %}
 
-{{ component( "Ceres::PageDesign.Components.MobileBreadcrumbs" ) }}
-
 <nav class="navbar">
       <div class="container-max">
         <div class="row">
@@ -25,8 +23,6 @@
             <div id="mainNavbarCollapsable">
                 <ul class="breadcrumb">
                     <li class="btnClose"></li>
-
-                    <mobile-breadcrumbs template="#vue-mobile-breadcrumbs"></mobile-breadcrumbs>
                 </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
                     {{ includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
