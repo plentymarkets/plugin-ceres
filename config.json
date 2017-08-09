@@ -311,6 +311,13 @@
         "default"       : "0"
     },
     {
+        "tab"           : "Item view",
+        "key"           : "item.show_variation_over_dropdown",
+        "label"         : "Enable selection of variations without stock in variation dropdown",
+        "type"          : "checkbox",
+        "default"       : "false"
+    },
+    {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
         "label"                         : "Show variations by type",
@@ -356,6 +363,13 @@
             "spinner"       : "Spinner"
         },
         "default"           : "blur"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.show_category_image",
+        "label"             : "Show category image in category view",
+        "type"              : "checkbox",
+        "default"           : "true"
     },
     {
         "tab"               : "Item lists",

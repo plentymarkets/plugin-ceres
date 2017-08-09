@@ -151,7 +151,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale", "showOrderProperties"],
+    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale", "showOrderProperties"],
 
     data: function data() {
         return {
@@ -164,6 +164,9 @@ Vue.component("add-to-basket", {
 
         this.useLargeScale = this.useLargeScale || false;
     },
+    ready: function ready() {
+        this.checkMinMaxOrderQuantity();
+    },
 
 
     methods: {
@@ -171,15 +174,17 @@ Vue.component("add-to-basket", {
          * add an item to basket-resource
          */
         addToBasket: function addToBasket() {
-            var basketObject = {
-                variationId: this.variationId,
-                quantity: this.quantity,
-                basketItemOrderParams: this.item.properties
-            };
+            if (this.item.filter.isSalable) {
+                var basketObject = {
+                    variationId: this.variationId,
+                    quantity: this.quantity,
+                    basketItemOrderParams: this.item.properties
+                };
 
-            ResourceService.getResource("basketItems").push(basketObject);
+                ResourceService.getResource("basketItems").push(basketObject);
 
-            this.openAddToBasketOverlay();
+                this.openAddToBasketOverlay();
+            }
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
@@ -208,6 +213,15 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        },
+
+
+        /**
+         * Check min - max order quantity
+         */
+        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
+            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
+            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
     },
 
@@ -905,7 +919,7 @@ var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("address-select", {
 
-    props: ["addressList", "addressType", "selectedAddressId", "template", "showError"],
+    props: ["addressList", "addressType", "selectedAddressId", "template", "showError", "countryNameMap"],
 
     data: function data() {
         return {
@@ -1194,6 +1208,32 @@ Vue.component("address-select", {
             this.selectedAddressId = addressData.id;
 
             this.loadSelectedAddress();
+        },
+
+
+        /**
+         * Update the selected address on address update
+         * @param addressData
+         */
+        onSelectedAddressUpdated: function onSelectedAddressUpdated(addressData) {
+            if (parseInt(this.selectedAddressId) === parseInt(addressData.id)) {
+                this.selectedAddressId = addressData.id;
+
+                this.loadSelectedAddress();
+            }
+        },
+
+
+        /**
+         * @param countryId
+         * @returns country name | empty string
+         */
+        getCountryName: function getCountryName(countryId) {
+            if (this.countryNameMap[countryId]) {
+                return this.countryNameMap[countryId];
+            }
+
+            return "";
         }
     },
 
@@ -1315,6 +1355,8 @@ Vue.component("create-update-address", {
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
+                _this2.$dispatch("selected-address-updated", _this2.addressData);
+
                 _this2.addressModal.hide();
 
                 for (var key in _this2.addressList) {
@@ -1471,9 +1513,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError' :country-name-map=\"countryNameMap\"></address-select>",
 
-    props: ["addressList", "hasToValidate", "selectedAddressId"],
+    props: ["addressList", "hasToValidate", "selectedAddressId", "countryNameMap"],
 
     data: function data() {
         return {
@@ -1540,9 +1582,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :country-name-map=\"countryNameMap\"></address-select>",
 
-    props: ["addressList", "selectedAddressId"],
+    props: ["addressList", "selectedAddressId", "countryNameMap"],
 
     data: function data() {
         return {
@@ -3713,10 +3755,11 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("mobile-navigation", {
 
-    props: ["template", "categoryTree"],
+    props: ["template"],
 
     data: function data() {
         return {
+            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
@@ -3728,6 +3771,8 @@ Vue.component("mobile-navigation", {
     },
     ready: function ready() {
         var currentCategory = ResourceService.getResource("breadcrumbs").val();
+
+        this.categoryTree = ResourceService.getResource("navigationTree").val();
 
         this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
 
@@ -3748,6 +3793,12 @@ Vue.component("mobile-navigation", {
                     var category = _step.value;
 
                     category.parent = parent;
+
+                    if (parent) {
+                        category.url = parent.url + "/" + category.details[0].nameUrl;
+                    } else {
+                        category.url = "/" + category.details[0].nameUrl;
+                    }
 
                     if (category.details.length && category.details[0].name) {
                         showChilds = true;
@@ -4893,7 +4944,7 @@ var _categoryBreadcrumbs = [];
  * render items in relation to location
  * @param currentCategory
  */
-function renderItems(currentCategory, categoryTree) {
+function renderItems(currentCategory) {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
     $("body").removeClass("menu-is-visible");
@@ -4903,9 +4954,9 @@ function renderItems(currentCategory, categoryTree) {
     }
 
     if (!App.isCategoryView) {
-        window.open(getScopeUrl(currentCategory, null, categoryTree), "_self");
+        window.open(getScopeUrl(currentCategory), "_self");
     } else if (currentCategory.details.length) {
-        _handleCurrentCategory(currentCategory, categoryTree);
+        _handleCurrentCategory(currentCategory);
     }
 }
 
@@ -4913,9 +4964,9 @@ function renderItems(currentCategory, categoryTree) {
  * bundle functions
  * @param currentCategory
  */
-function _handleCurrentCategory(currentCategory, categoryTree) {
+function _handleCurrentCategory(currentCategory) {
     _updateItemList(currentCategory);
-    _updateHistory(currentCategory, categoryTree);
+    _updateHistory(currentCategory);
     _updateBreadcrumbs();
 }
 
@@ -4939,13 +4990,21 @@ function _updateItemList(currentCategory) {
  * update page informations
  * @param currentCategory
  */
-function _updateHistory(currentCategory, categoryTree) {
+function _updateHistory(currentCategory) {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, getScopeUrl(currentCategory, null, categoryTree) + window.location.search);
+    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+
+    var categoryImage = currentCategory.details[0].imagePath;
+
+    if (categoryImage) {
+        document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+    } else {
+        document.querySelector(".parallax-img-container").style.removeProperty("background-image");
+    }
 }
 
 /**
