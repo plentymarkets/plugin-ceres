@@ -3,6 +3,7 @@
   "node_modules/jquery-lazyload/jquery.lazyload.js",
   "node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js",
   "node_modules/vue/dist/vue.min.js",
+  "node_modules/vuex/dist/vuex.min.js",
   "node_modules/tether/dist/js/tether.min.js",
 
   "node_modules/shariff/build/shariff.min.js",
