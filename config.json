@@ -313,7 +313,7 @@
     {
         "tab"           : "Item view",
         "key"           : "item.show_variation_over_dropdown",
-        "label"         : "Show variations over dropdown",
+        "label"         : "Enable selection of variations without stock in variation dropdown",
         "type"          : "checkbox",
         "default"       : "false"
     },
