@@ -853,7 +853,7 @@ Vue.component("category-breadcrumbs", {
          */
         init: function init() {
             this.categories = JSON.parse(this.categories);
-            this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
+            // this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
 
             ResourceService.bind("breadcrumbs", this);
             ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
@@ -1244,7 +1244,7 @@ var AddressFieldService = require("services/AddressFieldService");
 
 Vue.component("address-select", {
 
-    props: ["addressList", "addressType", "selectedAddressId", "template", "showError"],
+    props: ["addressList", "addressType", "selectedAddressId", "template", "showError", "countryNameMap"],
 
     data: function data() {
         return {
@@ -1533,6 +1533,32 @@ Vue.component("address-select", {
             this.selectedAddressId = addressData.id;
 
             this.loadSelectedAddress();
+        },
+
+
+        /**
+         * Update the selected address on address update
+         * @param addressData
+         */
+        onSelectedAddressUpdated: function onSelectedAddressUpdated(addressData) {
+            if (parseInt(this.selectedAddressId) === parseInt(addressData.id)) {
+                this.selectedAddressId = addressData.id;
+
+                this.loadSelectedAddress();
+            }
+        },
+
+
+        /**
+         * @param countryId
+         * @returns country name | empty string
+         */
+        getCountryName: function getCountryName(countryId) {
+            if (this.countryNameMap[countryId]) {
+                return this.countryNameMap[countryId];
+            }
+
+            return "";
         }
     },
 
@@ -1654,6 +1680,8 @@ Vue.component("create-update-address", {
             this._syncOptionTypesAddressData();
 
             _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
+                _this2.$dispatch("selected-address-updated", _this2.addressData);
+
                 _this2.addressModal.hide();
 
                 for (var key in _this2.addressList) {
@@ -1810,9 +1838,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("invoice-address-select", {
 
-    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError'></address-select>",
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError' :country-name-map=\"countryNameMap\"></address-select>",
 
-    props: ["addressList", "hasToValidate", "selectedAddressId"],
+    props: ["addressList", "hasToValidate", "selectedAddressId", "countryNameMap"],
 
     data: function data() {
         return {
@@ -1879,9 +1907,9 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("shipping-address-select", {
 
-    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\"></address-select>",
+    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :country-name-map=\"countryNameMap\"></address-select>",
 
-    props: ["addressList", "selectedAddressId"],
+    props: ["addressList", "selectedAddressId", "countryNameMap"],
 
     data: function data() {
         return {
@@ -4119,35 +4147,171 @@ Vue.component("order-history", {
 },{"services/ApiService":75}],45:[function(require,module,exports){
 "use strict";
 
+var _CategoryRendererService = require("services/CategoryRendererService");
+
+var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ResourceService = require("services/ResourceService");
 
-Vue.component("mobile-breadcrumbs", {
+Vue.component("mobile-navigation", {
 
     props: ["template"],
 
     data: function data() {
         return {
-            breadcrumbs: {}
+            categoryTree: [],
+            dataContainer1: [],
+            dataContainer2: [],
+            useFirstContainer: false,
+            breadcrumbs: []
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
+    },
+    ready: function ready() {
+        var currentCategory = ResourceService.getResource("breadcrumbs").val();
 
-        ResourceService.bind("breadcrumbs", this);
+        this.categoryTree = ResourceService.getResource("navigationTree").val();
+
+        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+
+        this.dataContainer1 = this.categoryTree;
     },
 
-    methods: {
-        navigateToHome: function navigateToHome() {
-            $("#mainNavbarCollapsable").removeClass("open");
-            $("body").removeClass("menu-is-visible");
 
-            window.location.href = "/";
+    methods: {
+        buildTree: function buildTree(currentArray, parent, currentCategoryId) {
+            var showChilds = false;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = currentArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var category = _step.value;
+
+                    category.parent = parent;
+
+                    if (parent) {
+                        category.url = parent.url + "/" + category.details[0].nameUrl;
+                    } else {
+                        category.url = "/" + category.details[0].nameUrl;
+                    }
+
+                    if (category.details.length && category.details[0].name) {
+                        showChilds = true;
+                    }
+
+                    if (category.children) {
+                        this.buildTree(category.children, category, currentCategoryId);
+                    }
+
+                    if (category.id === currentCategoryId) {
+                        if (category.children) {
+                            this.slideTo(category.children);
+                        } else if (category.parent) {
+                            this.slideTo(category.parent.children);
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (parent) {
+                parent.showChilds = showChilds;
+            }
+        },
+        navigateTo: function navigateTo(category) {
+            if (category.children) {
+                this.slideTo(category.children);
+            }
+
+            this.closeNavigation();
+            _CategoryRendererService2.default.renderItems(category, this.categoryTree);
+        },
+        slideTo: function slideTo(children, back) {
+            back = !!back;
+
+            if (this.useFirstContainer) {
+                this.dataContainer1 = children;
+
+                $("#menu-2").trigger("menu-deactivated", { back: back });
+                $("#menu-1").trigger("menu-activated", { back: back });
+            } else {
+                this.dataContainer2 = children;
+
+                $("#menu-1").trigger("menu-deactivated", { back: back });
+                $("#menu-2").trigger("menu-activated", { back: back });
+            }
+
+            this.useFirstContainer = !this.useFirstContainer;
+            this.buildBreadcrumbs();
+        },
+        buildBreadcrumbs: function buildBreadcrumbs() {
+            this.breadcrumbs = [];
+
+            var root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
+
+            while (root.parent) {
+                this.breadcrumbs.unshift({
+                    name: root.parent.details[0].name,
+                    layer: root.parent ? root.parent.children : this.categoryTree
+                });
+
+                root = root.parent;
+            }
+        },
+        closeNavigation: function closeNavigation() {
+            $(".mobile-navigation").removeClass("open");
+            $("body").removeClass("menu-is-visible");
+        }
+    },
+
+    directives: {
+        menu: {
+            bind: function bind() {
+                // add "activated" classes when menu is activated
+                $(this.el).on("menu-activated", function (event, params) {
+                    $(event.target).addClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
+                });
+                // add "deactivated" classes when menu is deactivated
+                $(this.el).on("menu-deactivated", function (event, params) {
+                    $(event.target).removeClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
+                });
+                // this removes the animation class automatically after the animation has completed
+                $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
+                    $(".mainmenu").removeClass(function (index, className) {
+                        return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
+                    });
+                });
+            }
         }
     }
 });
 
+<<<<<<< HEAD
 },{"services/ResourceService":82}],46:[function(require,module,exports){
+=======
+},{"services/CategoryRendererService":75,"services/ResourceService":81}],45:[function(require,module,exports){
+>>>>>>> feature/new_mobile_navigation
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -5189,7 +5353,6 @@ var _categoryBreadcrumbs = [];
 function renderItems(currentCategory) {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
-    $("#mainNavbarCollapsable").removeClass("open");
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree)) {
@@ -17049,14 +17212,8 @@ var init = (function($, window, document)
     {
         $("#btnMainMenuToggler").click(function()
         {
-            $("#mainNavbarCollapsable").toggleClass("open");
+            $(".mobile-navigation").toggleClass("open");
             $("body").toggleClass("menu-is-visible");
-        });
-
-        $("#mainNavbarCollapsable .btnClose").click(function()
-        {
-            $("#mainNavbarCollapsable").removeClass("open");
-            $("body").removeClass("menu-is-visible");
         });
 
         $(window).scroll(function()

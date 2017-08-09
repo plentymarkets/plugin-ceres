@@ -31,7 +31,6 @@ Vue.component("category-breadcrumbs",
             init: function()
             {
                 this.categories = JSON.parse(this.categories);
-                this.currentCategoryTree = JSON.parse(this.currentCategoryTree);
 
                 ResourceService.bind("breadcrumbs", this);
                 ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
