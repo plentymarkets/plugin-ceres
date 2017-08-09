@@ -58,6 +58,9 @@
             <div id="page-body" class="main">
                 <comp1></comp1>
                 <comp2></comp2>
+                {% block PageBody %}
+                    <!-- inject content of inherited templates here -->
+                {% endblock %}
             </div>
 
             {% include getPartial('footer') %}
