@@ -151,7 +151,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-basket", {
 
-    props: ["item", "itemUrl", "showQuantity", "template", "salable", "useLargeScale", "showOrderProperties"],
+    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale", "showOrderProperties"],
 
     data: function data() {
         return {
@@ -164,6 +164,9 @@ Vue.component("add-to-basket", {
 
         this.useLargeScale = this.useLargeScale || false;
     },
+    ready: function ready() {
+        this.checkMinMaxOrderQuantity();
+    },
 
 
     methods: {
@@ -171,15 +174,17 @@ Vue.component("add-to-basket", {
          * add an item to basket-resource
          */
         addToBasket: function addToBasket() {
-            var basketObject = {
-                variationId: this.variationId,
-                quantity: this.quantity,
-                basketItemOrderParams: this.item.properties
-            };
+            if (this.item.filter.isSalable) {
+                var basketObject = {
+                    variationId: this.variationId,
+                    quantity: this.quantity,
+                    basketItemOrderParams: this.item.properties
+                };
 
-            ResourceService.getResource("basketItems").push(basketObject);
+                ResourceService.getResource("basketItems").push(basketObject);
 
-            this.openAddToBasketOverlay();
+                this.openAddToBasketOverlay();
+            }
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
@@ -208,6 +213,15 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
+        },
+
+
+        /**
+         * Check min - max order quantity
+         */
+        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
+            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
+            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
     },
 
@@ -4362,26 +4376,24 @@ Vue.filter("date", dateFilter);
 },{}],66:[function(require,module,exports){
 "use strict";
 
-Vue.filter("itemImage", function (item, baseUrl) {
-    var imageList = item.variationImageList;
-
-    baseUrl = baseUrl || "/";
-
-    if (baseUrl.charAt(baseUrl.length - 1) !== "/") {
-        baseUrl += "/";
+Vue.filter("itemImage", function (itemImages, highestPosition) {
+    if (itemImages.length === 0) {
+        return "";
     }
 
-    if (!!imageList && imageList.length > 0) {
-        for (var i = 0; i < imageList.length; i++) {
-            var image = imageList[i];
-
-            if (!!image.path && image.path.length > 0) {
-                return baseUrl + image.path;
-            }
-        }
+    if (itemImages.length === 1) {
+        return itemImages[0].url;
     }
 
-    return "";
+    if (highestPosition) {
+        return itemImages.reduce(function (prev, current) {
+            return prev.position > current.position ? prev : current;
+        }).url;
+    }
+
+    return itemImages.reduce(function (prev, current) {
+        return prev.position < current.position ? prev : current;
+    }).url;
 });
 
 },{}],67:[function(require,module,exports){
@@ -4793,8 +4805,16 @@ function _updateHistory(currentCategory) {
 
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
+    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+
+    var categoryImage = currentCategory.details[0].imagePath;
+
+    if (categoryImage) {
+        document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+    } else {
+        document.querySelector(".parallax-img-container").style.removeProperty("background-image");
+    }
 }
 
 /**

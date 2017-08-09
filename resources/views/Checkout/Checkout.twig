@@ -5,6 +5,8 @@
     <title>{{ trans("Ceres::Template.orderCheckout") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
+{% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
+
 {% block PageBody %}
 
     {{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
@@ -29,7 +31,7 @@
         {% if overrideCheckout|trim is empty %}
             <div class="row m-t-1">
                 <div class="col-xs-12 m-b-3">
-                    <h1 class="h4">{{ trans("Ceres::Template.orderCheckout") }}</h1>
+                    <h1 class="h2">{{ trans("Ceres::Template.orderCheckout") }}</h1>
                     <hr>
                 </div>
             </div>
@@ -51,7 +53,8 @@
                                     <invoice-address-select
                                             :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
                                             has-to-validate="true"
-                                            :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
+                                            :selected-address-id="{{ services.checkout.getBillingAddressId() }}"
+                                            :country-name-map="{{ countryNameMap | json_encode() }}"></invoice-address-select>
                                 </div>
                                 {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
                             {% else %}
@@ -67,7 +70,8 @@
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
                                 <div class="shipping-addresses-select">
                                         <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
-                                                                 :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
+                                                                 :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"
+                                                                 :country-name-map="{{ countryNameMap | json_encode() }}"></shipping-address-select>
                                 </div>
                                 {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
                             {% else %}
