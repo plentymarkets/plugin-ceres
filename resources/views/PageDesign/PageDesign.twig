@@ -1,7 +1,6 @@
 {% import "Ceres::PageDesign.Macros.IncludeComponents" as Loader %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 {{ component( "Ceres::PageDesign.Components.Notifications" ) }}
-{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
 {{ component( "Ceres::Customer.Components.Registration" ) }}
@@ -57,7 +56,6 @@
             {% include getPartial('header') %}
 
             <div id="page-body" class="main">
-                <mobile-navigation template="#vue-mobile-navigation" :category-tree="{{ services.category.getNavigationTree("item", lang, 6) | json_encode }}"></mobile-navigation>
                 {% block PageBody %}
                     <!-- inject content of inherited templates here -->
                 {% endblock %}

@@ -339,6 +339,10 @@ body.menu-is-visible {
 				display : inline-block;
 				padding : 1rem ;
 				flex: 1 0 80%;
+
+				&:hover {
+					color: inherit;
+				}
 			}
 
 			.nav-direction{

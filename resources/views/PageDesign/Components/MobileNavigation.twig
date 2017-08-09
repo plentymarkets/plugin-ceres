@@ -16,7 +16,7 @@
 
         <ul v-menu id="menu-1" class="mainmenu menu-active">
             <li class="ddown" v-for="category in dataContainer1">
-                <a href="javascript:void(0);" @click="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
+                <a :href="category.url" @click.prevent="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
 
                 <span class="nav-direction" v-if="category.children && category.showChilds" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
@@ -26,7 +26,7 @@
 
         <ul v-menu id="menu-2" class="mainmenu">
             <li class="ddown" v-for="category in dataContainer2">
-                <a href="javascript:void(0);" @click="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
+                <a :href="category.url" @click.prevent="navigateTo(category)" v-if="category.showChilds || category.details[0]">${ category.details[0].name }</a>
                 
                 <span class="nav-direction" v-if="category.children && category.showChilds" @click="slideTo(category.children)">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>

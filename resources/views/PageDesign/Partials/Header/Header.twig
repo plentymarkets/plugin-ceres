@@ -3,6 +3,7 @@
 {{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
 {{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "Ceres::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
@@ -58,6 +59,8 @@
 {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
+
+<mobile-navigation template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">

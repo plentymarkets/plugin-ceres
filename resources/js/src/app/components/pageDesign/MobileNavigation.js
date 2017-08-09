@@ -4,13 +4,13 @@ const ResourceService = require("services/ResourceService");
 Vue.component("mobile-navigation", {
 
     props: [
-        "template",
-        "categoryTree"
+        "template"
     ],
 
     data()
     {
         return {
+            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
@@ -27,6 +27,8 @@ Vue.component("mobile-navigation", {
     {
         const currentCategory = ResourceService.getResource("breadcrumbs").val();
 
+        this.categoryTree = ResourceService.getResource("navigationTree").val();
+
         this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
 
         this.dataContainer1 = this.categoryTree;
@@ -40,6 +42,15 @@ Vue.component("mobile-navigation", {
             for (const category of currentArray)
             {
                 category.parent = parent;
+
+                if (parent)
+                {
+                    category.url = parent.url + "/" + category.details[0].nameUrl;
+                }
+                else
+                {
+                    category.url = "/" + category.details[0].nameUrl;
+                }
 
                 if (category.details.length && category.details[0].name)
                 {

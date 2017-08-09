@@ -7,7 +7,7 @@ let _categoryBreadcrumbs = [];
  * render items in relation to location
  * @param currentCategory
  */
-export function renderItems(currentCategory, categoryTree)
+export function renderItems(currentCategory)
 {
     ResourceService.getResource("isLoadingBreadcrumbs").set(true);
 
@@ -20,11 +20,11 @@ export function renderItems(currentCategory, categoryTree)
 
     if (!App.isCategoryView)
     {
-        window.open(getScopeUrl(currentCategory, null, categoryTree), "_self");
+        window.open(getScopeUrl(currentCategory), "_self");
     }
     else if (currentCategory.details.length)
     {
-        _handleCurrentCategory(currentCategory, categoryTree);
+        _handleCurrentCategory(currentCategory);
     }
 }
 
@@ -32,10 +32,10 @@ export function renderItems(currentCategory, categoryTree)
  * bundle functions
  * @param currentCategory
  */
-function _handleCurrentCategory(currentCategory, categoryTree)
+function _handleCurrentCategory(currentCategory)
 {
     _updateItemList(currentCategory);
-    _updateHistory(currentCategory, categoryTree);
+    _updateHistory(currentCategory);
     _updateBreadcrumbs();
 }
 
@@ -61,11 +61,11 @@ function _updateItemList(currentCategory)
  * update page informations
  * @param currentCategory
  */
-function _updateHistory(currentCategory, categoryTree)
+function _updateHistory(currentCategory)
 {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, getScopeUrl(currentCategory, null, categoryTree) + window.location.search);
+    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
     document.getElementsByTagName("h1")[0].innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
