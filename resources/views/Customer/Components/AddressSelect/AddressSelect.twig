@@ -24,6 +24,7 @@
                             <span v-else>${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</span>
                             <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
+                            <span>${getCountryName(selectedAddress.countryId)}</span>
                         </div>
 
                         <p v-if="!isAddressListEmpty() && !selectedAddressId"
@@ -67,6 +68,7 @@
                                 <span>${address.name4}</span>
                                 <span>${address.address1} ${address.address2}</span>
                                 <span>${address.postalCode} ${address.town}</span>
+                                <span>${getCountryName(address.countryId)}</span>
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
@@ -102,6 +104,7 @@
                                 <create-update-address
                                         template="#vue-create-update-address"
                                         v-on:new-address-created="onAddressCreated"
+                                        v-on:selected-address-updated="onSelectedAddressUpdated"
                                         :address-data="addressToEdit"
                                         :address-modal="addressModal"
                                         :address-list="addressList"

@@ -193,6 +193,19 @@
         "default"   : "true"
     },
     {
+        "tab"       : "Header",
+        "key"       : "header.basket_values",
+        "label"     : "Show shopping cart information",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "sum"         : "Value of items",
+            "quantity"    : "Quantity of items",
+            "both"        : "Value and quantity of items"
+        },
+        "default"   : "sum"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
@@ -348,6 +361,13 @@
         "default"       : "0"
     },
     {
+        "tab"           : "Item view",
+        "key"           : "item.show_variation_over_dropdown",
+        "label"         : "Enable selection of variations without stock in variation dropdown",
+        "type"          : "checkbox",
+        "default"       : "false"
+    },
+    {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
         "label"                         : "Show variations by type",
@@ -393,6 +413,13 @@
             "spinner"       : "Spinner"
         },
         "default"           : "blur"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.show_category_image",
+        "label"             : "Show category image in category view",
+        "type"              : "checkbox",
+        "default"           : "true"
     },
     {
         "tab"               : "Item lists",
@@ -947,6 +974,13 @@
         "label"             : "Allow customer to change the payment method",
         "type"              : "checkbox",
         "default"           : "true"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.confirmation_link_login_redirect",
+        "label"             : "Forward to login page after clicking link in order confirmation",
+        "type"              : "checkbox",
+        "default"           : "false"
     },
     {
         "tab"                       : "Checkout and My account",
