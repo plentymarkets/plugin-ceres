@@ -1,0 +1,13 @@
+<script type="x/template" id="vue-wish-list">
+
+    {% set configItemName = config("Ceres.item.name") %}
+
+    {% include "Ceres::WishList.Components.WishListItem" %}
+
+    <p class="h4 text-muted wish-list-no-items-label" v-if="!wishListIds[0]">{{ trans("Ceres::Template.wishListNoItems") }}</p>
+
+    <div :class="{'loading': isLoading}">
+        {% include "Ceres::ItemList.Partials.LoadingAnimation" with { 'loadingAnimationType': config("Ceres.item.loading_animation_type") } %}
+    </div>
+
+</script>

@@ -3,6 +3,7 @@
 
 {% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
@@ -25,6 +26,7 @@
 
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
+    {{ component( "Ceres::Item.Components.AddToWishList" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -46,7 +48,7 @@
                     <a href="#" class="producer text-muted">{{ item.documents[0].data.item.manufacturer.externalName }}</a>
                 </h6>
 
-                <h1 class="h3 title">
+                <h1 class="h2 title">
                     <span v-resource-bind:currentVariation="documents.0.data.variation.name" v-resource-if:currentVariation="documents[0].data.variation.name != ''">
                         {{ item.documents[0].data.texts | itemName(configItemName) }}
                     </span>
@@ -115,23 +117,18 @@
 
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
-                    {% if salable %}
-                        <add-to-basket template="#vue-add-to-basket" v-resource-push:item data-accessor="true"
+                    <add-to-basket template="#vue-add-to-basket" v-resource-if:currentVariation="documents[0].data.filter.isSalable" v-resource-push:item data-accessor="true"
                                    resource="currentVariation" :show-quantity="true" :show-order-properties="true"></add-to-basket>
-                    {% endif %}
+
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
-
-                <div class="row">
-                    <!--
-                    <div class="col-xs-6 offset-xs-6 m-t-1">
-                        <a class="pull-xs-right text-muted small" href="#">
-                            {{ trans("Ceres::Template.itemWishList") }}
-                            <i class="fa fa-heart"></i>
-                        </a>
-                    </div> -->
-                </div>
+                
+                {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    <div class="row">
+                        <add-to-wish-list template="#vue-add-to-wish-list" variation-id="{{ item.documents[0].data.variation.id }}" :is-active="{{ item.documents[0].isInWishListVariation | json_encode() }}"></add-to-wish-list>
+                    </div>
+                {% endif %}
             <!-- ./ITEM DETAIL -->
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterAddToBasket", item.documents[0].data) }}

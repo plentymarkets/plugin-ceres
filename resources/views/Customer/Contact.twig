@@ -1,0 +1,19 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.generalContact") }} | {{ config("Ceres.header.company_name") }}</title>
+
+    {% if services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey | length > 0 %}
+        <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    {% endif %}
+{% endblock %}
+
+{% block PageBody %}
+
+    {{ component( "Ceres::Customer.Components.Contact.ContactForm" ) }}
+
+    <div class="page-content container-max">
+        <contact-form template="#vue-contact-form"></contact-form>
+    </div>
+
+{% endblock %}
