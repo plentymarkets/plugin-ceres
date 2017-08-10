@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <button v-if="changePossible" class="payment-change-box-item btn btn-primary btn-block" @click="openPaymentChangeModal()">
+    <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
@@ -47,7 +47,6 @@
                                         </div><!--
                     --><div class="content">
                                             ${ paymentProvider.name }
-                                            ${ paymentProvider | json }
                                             <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
                                                 <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
                                             </small>
