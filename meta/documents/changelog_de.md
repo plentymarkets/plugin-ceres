@@ -2,9 +2,13 @@
 
 ## v1.4.1 (2017-08-10)
 
+### Hinzugefügt
+- Der Suchseite wurde eine Überschrift hinzugefügt.
+
 ### Behoben
 - Wenn das Kategoriebild nicht ausgegeben wird, gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie.
 - Die Größe der Überschrift von Kategorien ist nun korrekt, wenn das Bild der Kategorie ausgegeben wird.
+- Die Größe der Bilder in der Wunschliste werden nun korrekt skaliert.
 
 ## v1.4.0 (2017-08-09)
 
