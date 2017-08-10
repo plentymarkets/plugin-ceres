@@ -9,6 +9,8 @@
 - Wenn das Kategoriebild nicht ausgegeben wird, gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie.
 - Die Größe der Überschrift von Kategorien ist nun korrekt, wenn das Bild der Kategorie ausgegeben wird.
 - Die Größe der Bilder in der Wunschliste werden nun korrekt skaliert.
+- Das Wunschliste Icon wurde im header nun neben den Warenkorb gelegt und die Position der Artikel in der wunschliste wurde links neben das icon geändert.
+- Der Zähler für Artikel in dem Warenkorb wurde optisch leicht angepasst.
 
 ## v1.4.0 (2017-08-09)
 
