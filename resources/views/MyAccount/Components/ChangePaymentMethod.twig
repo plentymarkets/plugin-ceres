@@ -1,14 +1,38 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
-        {{ trans("Ceres::Template.myAccountChangePayment") }}
-    </button>
+    <!-- ************************ MY-ACCOUNT ************************* -->
+    <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
-    <div v-if="paymentStatus != 'fullyPaid'">
-        <div v-if="!changePossible" class="payment-align-center">
-            <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+        <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
+            {{ trans("Ceres::Template.myAccountChangePayment") }}
+        </button>
+
+        <div v-if="paymentStatus != 'fullyPaid'">
+            <div v-if="!changePossible" class="payment-align-center">
+                <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+            </div>
         </div>
+
     </div>
+    <!-- ***************************** END ***************************** -->
+
+    <!-- ************************ CONFIRMATION ************************* -->
+    <div class="button-spacer" v-if="currentTemplate == 'tpl.confirmation'">
+
+        <button v-if="changePossible" class="btn btn-primary" @click="openPaymentChangeModal()">
+            {{ trans("Ceres::Template.myAccountChangePayment") }}
+            YEAH
+        </button>
+
+        <div v-if="paymentStatus != 'fullyPaid'">
+            <div v-if="!changePossible" class="payment-align-center">
+                <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+                YEAH
+            </div>
+        </div>
+
+    </div>
+    <!-- ***************************** END ***************************** -->
 
     <!-- CHANGE_PAYMENT_MODAL -->
     <div v-el:change-payment-modal>
