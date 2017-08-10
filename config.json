@@ -12,13 +12,7 @@
         "type"      : "checkbox",
         "default"   : "false"
     },
-    {
-        "tab"                         : "Global",
-        "key"                         : "contact.opening_times",
-        "label"                       : "Opening hours",
-        "type"                        : "text",
-        "default"                     : "Monday - Friday, 00:00 - 24:00"
-    },
+
     {
         "tab"                         : "Global",
         "key"                         : "contact.shop_mail",
@@ -28,26 +22,47 @@
     },
     {
         "tab"                         : "Global",
+        "key"                         : "contact.opening_times",
+        "label"                       : "Opening hours",
+        "type"                        : "text",
+        "default"                     : "Monday - Friday, 00:00 - 24:00"
+    },
+    {
+        "tab"                         : "Global",
         "key"                         : "contact.show_data",
         "label"                       : "Show contact data",
         "type"                        : "multi_select",
         "possibleValues"              :
         {
-            "name"                    : "Company",
-        "ceo"                         : "CEO",
-        "city"                        : "City",
-        "country"                     : "Country",
-        "email"                       : "Email",
-        "fax"                         : "Fax",
-        "fon"                         : "Phone",
-        "hotline"                     : "Hotline",
-        "street"                      : "Street",
-        "vatNumber"                   : "VAT number",
-        "zip"                         : "ZIP",
-        "timezone"                    : "Time zone",
-        "opening_times"               : "Opening hours"
+            "name"                      : "Company",
+            "ceo"                       : "CEO",
+            "city"                      : "City",
+            "country"                   : "Country",
+            "email"                     : "Email",
+            "fax"                       : "Fax",
+            "fon"                       : "Phone",
+            "hotline"                   : "Hotline",
+            "street"                    : "Street",
+            "vatNumber"                 : "VAT number",
+            "zip"                       : "ZIP",
+            "timezone"                  : "Time zone",
+            "opening_times"             : "Opening hours"
         },
         "default"                     : "street, zip, city, hotline, email, opening_times"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.api_key",
+        "label"                       : "Google Maps API key",
+        "type"                        : "text",
+        "default"                     : "API key"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.map_zoom",
+        "label"                       : "Zoom level",
+        "type"                        : "text",
+        "default"                     : "16"
     },
     {
         "tab"       : "Homepage",
@@ -118,8 +133,6 @@
         "label"     : "URL to the image of the lower item preview",
         "type"      : "text"
     },
-
-
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory1",
@@ -156,8 +169,6 @@
         "label"     : "Category to display in the second list of items",
         "type"      : "category_select"
     },
-
-
     {
         "tab"       : "Header",
         "key"       : "header.company_logo",
