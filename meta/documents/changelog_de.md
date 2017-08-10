@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.4.1 (2017-08-10)
+
+### Behoben
+- Wenn das Kategoriebild nicht ausgegeben wird, gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie.
+- Die Größe der Überschrift von Kategorien ist nun korrekt, wenn das Bild der Kategorie ausgegeben wird.
+
 ## v1.4.0 (2017-08-09)
 
 ### Hinzugefügt
