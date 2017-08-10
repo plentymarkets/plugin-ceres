@@ -6,7 +6,7 @@
 
     <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
         <div v-if="!changePossible" class="payment-align-center">
-            <div class="cannot-change-payment">
+            <div class="alert alert-info cannot-change-payment">
                 <i class="fa fa-info-circle" aria-hidden="true"></i>
                 {{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}
             </div>
