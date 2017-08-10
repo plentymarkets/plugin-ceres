@@ -6,8 +6,8 @@
 
     <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
         <div v-if="!changePossible" class="payment-align-center">
-            <div class="alert alert-warning">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <div class="cannot-change-payment">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
                 {{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}
             </div>
         </div>
@@ -29,6 +29,7 @@
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
+
                                     <input
                                             type="radio"
                                             id="paymentMethod${ _uid }${ paymentProvider.id }"
@@ -46,6 +47,7 @@
                                         </div><!--
                     --><div class="content">
                                             ${ paymentProvider.name }
+                                            ${ paymentProvider | json }
                                             <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
                                                 <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
                                             </small>
