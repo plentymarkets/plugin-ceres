@@ -130,15 +130,6 @@
                                         </div>
 
                                         <div class="col-xs-12 col-md-4">
-<<<<<<< Updated upstream
-                                            <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
-                                            <change-payment-method  template="#vue-change-payment-method"
-                                                                    :current-order="{{ entry | json_encode() }}"
-                                                                    :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
-                                                                    :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}">
-                                            </change-payment-method>
-                                            {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
-=======
                                             <div class="payment-change-box">
                                                 <button class="payment-change-box-item btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
                                                 <change-payment-method  template="#vue-change-payment-method"
@@ -149,7 +140,6 @@
                                                 </change-payment-method>
                                                 {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
                                             </div>
->>>>>>> Stashed changes
                                         </div>
                                     </div>
                                 </div>
