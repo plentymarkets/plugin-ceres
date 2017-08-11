@@ -54,6 +54,7 @@ Vue.component("contact-form", {
         sendMail()
         {
             this.disabledSend = true;
+            this.onSendIcon();
 
             const mailObj =
                 {
@@ -69,12 +70,14 @@ Vue.component("contact-form", {
                 .done(response =>
                 {
                     this.disabledSend = false;
+                    this.onSendIcon();
                     this.clearFields();
                     NotificationService.success(Translations.Template.contactSendSuccess);
                 })
                 .fail(response =>
                 {
                     this.disabledSend = false;
+                    this.onSendIcon();
 
                     if (response.validation_errors)
                     {
@@ -94,20 +97,20 @@ Vue.component("contact-form", {
             this.subject = "";
             this.message = "";
             this.orderId = "";
-            this.cc      = false;
+            this.cc = false;
         },
 
-        onSendIcon(onSend)
+        onSendIcon()
         {
-            let sendIcon = $('.send-icon');
+            const sendIcon = $(".send-btn i");
 
-            if(onSend)
+            if (this.disabledSend)
             {
-                sendIcon.removeClass("").addClass("");
+                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
             }
             else
             {
-                sendIcon.removeClass("").addClass("");
+                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
             }
         },
 
