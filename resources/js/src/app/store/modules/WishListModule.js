@@ -18,13 +18,26 @@ const mutations =
             state.wishListIds = wishListIds;
         },
 
+        sliceWishListItem(state, index, wishListItem)
+        {
+
+        },
+
         removeWishListItem(state, wishListItem)
         {
             if (state.wishListItem.indexOf(wishListItem) >= 0)
                 state.wishListItem.splice(state.wishListItem.indexOf(wishListItem), 1);
+        },
 
-            if (state.wishListIds.indexOf(wishListItem.data.variation.id) >= 0)
-                state.wishListIds.splice(state.wishListIds.indexOf(wishListItem.data.variation.id), 1);
+        removeWishListId(state, id)
+        {
+            if (state.wishListIds.indexOf(id) >= 0)
+                state.wishListIds.splice(state.wishListIds.indexOf(id), 1);
+        },
+
+        addWishListItemToIndex(state, wishListItem, index)
+        {
+            state.wishListItems.splice(index, 0, wishListItem);
         }
     };
 
@@ -32,29 +45,33 @@ const actions =
     {
         initWishListItems({commit}, ids)
         {
-            commit("setWishListIds", ids);
+            if (ids && ids[0])
+            {
+                commit("setWishListIds", ids);
 
-            ApiService.get("/rest/io/variations/", {variationIds: ids, template: "Ceres::WishList.WishList"})
-                .done(data =>
-                {
-                    commit("setWishListItems", data.documents);
-                })
-                .fail(() =>
-                {
-                });
+                ApiService.get("/rest/io/variations/", {variationIds: ids, template: "Ceres::WishList.WishList"})
+                    .done(data =>
+                    {
+                        commit("setWishListItems", data.documents);
+                    })
+                    .fail(() =>
+                    {
+                    });
+            }
         },
 
-        removeWishListItem({commit}, wishListItem)
+        removeWishListItem({commit}, wishListItem, index)
         {
-            ApiService.delete("/rest/io/itemWishList/" + id)
+            commit("removeWishListItem", wishListItem);
+
+            ApiService.delete("/rest/io/itemWishList/" + wishListItem.data.variation.id)
                 .done(data =>
                 {
-                    // remove this in done to prevent no items in this list label to be shown
-                    commit("removeWishListItem", wishListItem);
+                    commit("removeWishListId", wishListItem);
                 })
                 .fail(error =>
                 {
-                    // this.wishListItems.splice(index, 0, wishListItem);
+                    commit("addWishListItemToIndex", wishListItem, index);
                 });
         }
     };
