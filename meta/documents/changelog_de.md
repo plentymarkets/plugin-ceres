@@ -4,6 +4,7 @@
 
 ### Hinzugefügt
 - Der Suchseite wurde eine Überschrift hinzugefügt.
+- Es wurde eine neuere Passwort Überprüfung zu der Registrierung hinzugefügt.
 
 ### Behoben
 - Wenn das Kategoriebild nicht ausgegeben wird, gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie.
@@ -11,6 +12,11 @@
 - Die Größe der Bilder in der Wunschliste werden nun korrekt skaliert.
 - Das Wunschliste Icon wurde im header nun neben den Warenkorb gelegt und die Position der Artikel in der wunschliste wurde links neben das icon geändert.
 - Der Zähler für Artikel in dem Warenkorb wurde optisch leicht angepasst.
+
+## Geändert
+
+- Der Tab "Registration" wurde aus der Config entfernt.
+- Das RegEx für E-Mail und Passwort wird jetzt von Ceres vorgegeben.
 
 ## v1.4.0 (2017-08-09)
 
