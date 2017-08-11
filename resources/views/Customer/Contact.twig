@@ -1,32 +1,11 @@
 {% extends getPartial('page-design') %}
 
-{% set googleApiKey =  config("Ceres.contact.api_key") %}
-
 {% block PartialHead %}
     <title>{{ trans("Ceres::Template.generalContact") }} | {{ config("Ceres.header.company_name") }}</title>
 
     {% if services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey | length > 0 %}
         <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     {% endif %}
-
-    <script async defer>
-
-        function addScript(path)
-        {
-            let head = document.getElementsByTagName("head")[0];
-            let s = document.createElement("script");
-            s.type = "text/javascript";
-            s.src = path;
-            s.id = "contact-map-api";
-            head.appendChild(s);
-        }
-
-        if (!document.getElementById('maps-api') && {{ googleApiKey }})
-        {
-            addScript("https://maps.googleapis.com/maps/api/js?key={{ googleApiKey }}");
-        }
-
-    </script>
 
 {% endblock %}
 

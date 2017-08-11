@@ -37,62 +37,64 @@
 
 <div class="contact-card">
     {% if "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
-		<p>
-			<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
-			<span class="d-inline-block">
-				{% if "name" in showData %}
-                    {{ name }}<br>
-                {% endif %}
+        <p class="contact-address">
+            <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+            {% if "name" in showData %}
+                <span class="d-inline-block">{{ name }}</span><br>
+            {% endif %}
 
-                {% if "ceo" in showData %}
-                    {{ ceo }} <br>
-                {% endif %}
+            {% if "ceo" in showData %}
+                <span class="d-inline-block">{{ ceo }}</span> <br>
+            {% endif %}
 
-                {% if "street" in showData %}
-                    {{ street }} <br>
-                {% endif %}
+            {% if "street" in showData %}
+                <span class="d-inline-block">{{ street }}</span> <br>
+            {% endif %}
 
-                {% if "zip" in showData %}
-                    {{ zip }}
-                {% endif %}
-                {% if "city" in showData %}
-                    {{ city }}
-                {% endif %}
-                {% if "zip" in showData or "city" in showData %}
-					<br>
-                {% endif %}
+            {% if "zip" in showData or "city" in showData %}
+                <span class="d-inline-block">{{ zip }} {{ city }}</span>
+            {% endif %}
 
-                {% if "country" in showData %}
-                    {{ country }}
-                {% endif %}
-			</span>
+            {% if "zip" in showData or "city" in showData %}
+                <br>
+            {% endif %}
+
+            {% if "country" in showData %}
+                <span class="d-inline-block">{{ country }}</span>
+            {% endif %}
 		</p>
     {% endif %}
     {% if "fon" in showData %}
 		<p class="m-y-0">
-			<i class="fa fa-fw fa-phone" aria-hidden="true"></i>
-			<span class="d-inline-block">{{ fon }}</span>
+            <a href="tel:{{ fon | replace({' ':'', '/':'', '-':''}) }}">
+                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ fon }}</span>
+            </a>
 		</p>
     {% endif %}
 
     {% if "hotline" in showData %}
 		<p class="m-y-0">
-			<i class="fa fa-fw fa-phone" aria-hidden="true"></i>
-			<span class="d-inline-block">{{ hotline }}</span>
+            <a href="tel:{{ hotline | replace({' ':'', '/':'', '-':''}) }}">
+                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ hotline }}</span>
+            </a>
 		</p>
     {% endif %}
 
     {% if "fax" in showData %}
 		<p class="m-y-0">
-			<i class="fa fa-fw fa-fax" aria-hidden="true"></i>
-			<span class="d-inline-block">{{ fax }}</span>
+            <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+            <span class="d-inline-block">{{ fax }}</span>
 		</p>
     {% endif %}
 
     {% if "email" in showData %}
 		<p class="m-y-0">
-			<i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
-			<span class="d-inline-block">{{ email }}</span>
+            <a href="mailto:{{ email }}">
+                <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ email }}</span>
+            </a>
 		</p>
     {% endif %}
 

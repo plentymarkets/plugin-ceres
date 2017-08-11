@@ -1,44 +1,85 @@
 .cmp-contact{
 
-	.jumbotron-sm { 
+	.jumbotron-sm{
 		padding-top: 24px;
 		padding-bottom: 24px; 
 	}
 
-	.jumbotron small {
+	.jumbotron small{
 		color: #FFF;
 	}
 
-	.h1 small {
+	.h1 small{
 		font-size: 24px;
 	}
 
-	.flex-style {
+	.flex-style{
 		display: flex;
 	}
 
-	.no-resize {
+	.no-resize{
 		resize: none;
 	}
 
-	textarea:focus {
+	textarea:focus{
 		border-color: rgba(0,0,0,.15);
 	}
 
-	.contact-card {
+	.contact-card{
+		p{
+			&.contact-address{
+				span{
+					&:not(:nth-child(2)) {
+						margin-left: 27px;
+					}
 
-		margin-bottom: 1.5rem!important;
-		margin: auto;
-		
-		& i {
-
-			vertical-align: top;
-			line-height: 1.5;
-
-			& .fa-map-marker {
-				float: left;
-				margin-right: 4px; 
+					line-height: 1;
+				}
 			}
+			span{
+				line-height: 1.8;
+			}
+
+			a{
+				color: $gray-dark;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		}
+
+		i{
+			vertical-align: baseline;
+			margin-right: 5px;
+		}
+	}
+
+	.copy-mail-check{
+		margin-bottom: 10px;
+		text-align: initial;
+
+		input{
+			vertical-align: text-bottom;
+			margin-right: 4px;
+		}
+
+		@include media-breakpoint-up(sm){
+
+		}
+
+		@include media-breakpoint-up(md){
+			margin-bottom: 0;
+			text-align: right;
+			line-height: 2.3;
+		}
+
+		@include media-breakpoint-up(lg){
+
+		}
+	}
+
+	.send-mail{
+		i{
+			margin-right: 5px;
 		}
 	}
 }

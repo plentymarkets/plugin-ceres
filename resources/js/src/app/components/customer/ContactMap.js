@@ -4,6 +4,7 @@ Vue.component("contact-map", {
         "mapZoom",
         "zip",
         "street",
+        "googleApiKey",
         "template"
     ],
 
@@ -14,7 +15,10 @@ Vue.component("contact-map", {
 
     ready()
     {
-        this.initMap();
+        if (!document.getElementById("maps-api"))
+        {
+            this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
+        }
     },
 
     methods:
@@ -24,11 +28,10 @@ Vue.component("contact-map", {
             const coordinates = {lat: -34.397, lng: 150.644};
             const self = this;
 
-            const gMap = new google.maps.Map(document.getElementsByClassName("contact-map"),
+            const gMap = new google.maps.Map(document.getElementById("contact-map"),
                 {
                     center: coordinates,
-                    zoom  : self.mapZoom,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    zoom  : self.mapZoom
                 });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
@@ -46,7 +49,7 @@ Vue.component("contact-map", {
                     resultsMap.setCenter(results[0].geometry.location);
 
                     // eslint-disable-next-line
-                    const marker = new google.maps.Marker(
+                    var marker = new google.maps.Marker(
                         {
                             map: resultsMap,
                             position: results[0].geometry.location
@@ -57,6 +60,37 @@ Vue.component("contact-map", {
                     console.log("Not possible to get Ltd and Lng for the given address. State: " + status);
                 }
             });
+        },
+
+        addScript(path)
+        {
+            const head = document.getElementsByTagName("head")[0];
+            const script = document.createElement("script");
+
+            script.type = "text/javascript";
+            script.src = path;
+            script.id = "contact-map-api";
+
+            if (script.readyState)
+            {
+                script.onreadystatechange = () =>
+                {
+                    if (script.readyState === "loaded" || script.readyState === "complete")
+                    {
+                        script.onreadystatechange = null;
+                        this.initMap();
+                    }
+                };
+            }
+            else
+            {
+                script.onload = () =>
+                {
+                    this.initMap();
+                };
+            }
+
+            head.appendChild(script);
         }
     }
 });
