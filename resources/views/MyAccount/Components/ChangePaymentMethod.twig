@@ -26,7 +26,7 @@
 
         <div v-if="paymentStatus != 'fullyPaid'">
             <div v-if="!changePossible" class="payment-align-center">
-                <h1 class="h4 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+                <span class="">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>
             </div>
         </div>
 
