@@ -1,18 +1,18 @@
 .cmp-order-item{
 	position: relative;
 	margin-bottom: 1em;
-	
+
 	.item-main{
 		display: table;
 	}
-	
+
 	.item-image{
 		display: table-cell;
 		vertical-align: top;
 
 		@include img-contain();
 	}
-	
+
 	.item-details{
 		display: table-cell;
 		vertical-align: top;
@@ -35,7 +35,7 @@
 			height: 50%;
 			position:absolute;
 			right: .25em;
-			bottom: 0; 
+			bottom: 0;
 			background-color: white;
 	    }
 	}
@@ -60,6 +60,12 @@
 	    }
 	}
 
+	.payment-link-style {
+		color: #008ebd;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
 	@include media-breakpoint-up(sm){
 
 		// .item-name:after{
@@ -75,10 +81,10 @@
 	}
 
 	@include media-breakpoint-up(md){
-		
+
 	}
 
 	@include media-breakpoint-up(lg){
-		
+
 	}
 }
