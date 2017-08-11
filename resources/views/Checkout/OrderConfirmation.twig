@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data) }}
+            {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
 
 
             {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
