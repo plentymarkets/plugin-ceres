@@ -26,6 +26,8 @@
 
 - Image positions are now also taken into consideration in item lists.
 - The language selection in the header of the online store displays languages again.
+- Categories of the **Item** type have been displayed in the online store even if no item was linked with this category. This has been fixed.
+- If the quantity of an item added to the shopping cart exceeded the stock of the item, a `Bad Params` error message was shown. His has been fixed.
 
 ### Removed
 
@@ -45,11 +47,6 @@
 
 - The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
 - The item images on the order confirmation page are now displayed correctly.
-
-### Known issues
-
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
-- If the quantity of an item added to the shopping cart exceeds the stock of the item, a `Bad Params` error message is shown.
 
 ## v1.3.1 (2017-07-24)
 

@@ -26,6 +26,8 @@
 
 - Bildpositionen werden nun auch in den Artikellisten berücksichtigt.
 - Die Sprachauswahl im Header des Webshops zeigt nun wieder Sprachen an.
+- Artikelkategorien wurden auch ohne verknüpfte Artikel im Webshop angezeigt. Dies wurde behoben.
+- Wenn ein Artikel öfter in den Warenkorb gelegt wurde, als Warenbestand vorhanden war, kam eine `Bad Params` Fehlermeldung. Dies wurde behoben.
 
 ### Entfernt
 
@@ -45,11 +47,6 @@
 
 - Die Mengeneingabe in der Einzelansicht eines Artikels, der Warenkorbvorschau und im Warenkorb berücksichtigt nun die Minimal- und Maximalbestellmenge eines Artikels.
 - Die Artikelbilder in der Bestellbestätigungsseite werden nun korrekt ausgegeben.
-
-### Bekannte Probleme
-
-- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
-- Wenn ein Artikel öfter in den Warenkorb gelegt wird, als Warenbestand vorhanden ist, kommt eine `Bad Params` Fehlermeldung.
 
 ## v1.3.1 (2017-07-24)
 
