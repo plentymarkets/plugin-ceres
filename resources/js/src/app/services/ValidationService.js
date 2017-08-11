@@ -178,6 +178,10 @@ function _validateInput($formControl, validationKey)
         return _hasValue($formControl) && $.isNumeric($.trim($formControl.val()));
     case "ref":
         return _compareRef($.trim($formControl.val()), $.trim($formControl.attr("data-validate-ref")));
+    case "mail":
+        return _isMail($formControl);
+    case "password":
+        return _isPassword($formControl);
     case "regex":
         {
             const ref = $formControl.attr("data-validate-ref");
@@ -194,6 +198,30 @@ function _validateInput($formControl, validationKey)
 function _hasValue($formControl)
 {
     return $.trim($formControl.val()).length > 0;
+}
+
+/**
+ * @param {any} value
+ * @returns value is valid mail
+ */
+function _isMail($formControl)
+{
+    const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    return mailRegEx.test($formControl.val());
+}
+
+/**
+ * Minimum eight characters, at least one letter and one number
+ *
+ * @param {any} value
+ * @returns value is valid password
+ */
+function _isPassword($formControl)
+{
+    const passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
+
+    return passwordRegEx.test($formControl.val());
 }
 
 function _compareRef(value, ref)

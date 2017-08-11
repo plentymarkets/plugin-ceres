@@ -72,7 +72,7 @@ function _updateHistory(currentCategory)
 
     const categoryImage = currentCategory.details[0].imagePath;
 
-    if (categoryImage)
+    if (document.querySelector(".parallax-img-container") && categoryImage)
     {
         document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
     }

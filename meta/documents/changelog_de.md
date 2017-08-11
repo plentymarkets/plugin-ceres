@@ -1,5 +1,23 @@
 # Release Notes für Ceres
 
+## v1.4.1 (2017-08-11)
+
+### Hinzugefügt
+- Der Suchseite wurde eine Überschrift hinzugefügt.
+- Es wurde eine aktualisierte Passwort-Überprüfung zur Registrierung hinzugefügt.
+
+### Behoben
+- Es gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie, wenn das Kategoriebild nicht ausgegeben wird.
+- Die Größe der Überschrift von Kategorien ist nun korrekt, wenn das Bild der Kategorie ausgegeben wird.
+- Die Größe der Bilder in der Wunschliste wird nun korrekt skaliert.
+- Das Icon der Wunschliste wird im Header nun neben den Warenkorb gelegt und die Position der Artikel in der Wunschliste wurde auf links neben das Icon geändert.
+- Der Zähler für Artikel im Warenkorb wurde optisch leicht angepasst.
+
+## Geändert
+
+- Der Tab **Registration** wurde aus der Config entfernt.
+- Das RegEx für E-Mail und Passwort wird jetzt von Ceres vorgegeben.
+
 ## v1.4.0 (2017-08-09)
 
 ### Hinzugefügt
