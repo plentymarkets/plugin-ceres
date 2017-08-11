@@ -17,11 +17,12 @@
     <!-- ***************************** END ***************************** -->
 
     <!-- ************************ CONFIRMATION ************************* -->
-    <div class="row" v-if="currentTemplate == 'tpl.confirmation'">
+    <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
 
         <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.myAccountChangePayment") }}</strong>
         <a v-if="changePossible" class="payment-link-style" @click="openPaymentChangeModal()">
-            <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
+            <i class="fa fa-retweet" aria-hidden="true"></i>
+            <span>{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
         </a>
 
         <div v-if="paymentStatus != 'fullyPaid'">
