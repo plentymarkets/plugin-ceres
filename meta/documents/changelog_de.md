@@ -1,9 +1,10 @@
 # Release Notes für Ceres
 
-## v1.4.1 (2017-08-10)
+## v1.4.1 (2017-08-11)
 
 ### Hinzugefügt
 - Der Suchseite wurde eine Überschrift hinzugefügt.
+- Das Kontaktformular wurde um google maps erweitert.
 
 ### Behoben
 - Wenn das Kategoriebild nicht ausgegeben wird, gibt es keine Fehlermeldungen mehr beim Wechseln der Kategorie.

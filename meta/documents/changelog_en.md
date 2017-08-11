@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## 1.4.1 (2017-08-11)
+
+### Added
+- Header added to search page.
+- Google maps added to contact form.
+
 ## v1.4.0 (2017-08-09)
 
 ### Added
