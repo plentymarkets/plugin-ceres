@@ -1,20 +1,37 @@
 # Release Notes für Ceres
 
-## v1.3.3 (unknown lol)
+## v1.4.0 (2017-08-09)
 
 ### Hinzugefügt
 
-- Das Favicon wird nun aus den Backend Einstellungen für das Favicon geladen.
+- Für den Warenkorb im Header können nun die angezeigten Informationen eingestellt werden. Es ist möglich den Warenwert, die Anzahl der Artikel oder Warenwert und die Artikelanzahl im Header anzuzeigen. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#80" target="_blank">Handbuch</a>.
+- Ein eigenes Favicon kann für den Webshop hochgeladen werden. Weitere Informationen zum Hochladen des Favicons finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#350" target="_blank">Handbuch</a>.
 - Jede Seite hat jetzt einen dynamisch generierten Seitentitel.
-- Varianten ohne Bestand können aus dem Varianten-Dropdown über die Ceres-Einstellungen aufrufbar sein.
+- Der Warenbestand von Artikeln wird nun im Webshop berücksichtigt.
+- Die Einstellung **Unsichtbar: in Artikelauflistung** im Tab **Einstellungen** einer Variante wird nun im Webshop berücksichtigt.
+- Varianten ohne Bestand können nun für das Varianten-Dropdown aktiviert werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Handbuch</a>.
+- Eine Wunschliste wurde hinzugefügt. **Hinweis:** Um die Wunschliste im Webshop anzuzeigen, muss die Route `/wish-list` im Tab **Routing** in der Konfiguration von **IO** aktiviert werden.
+- Die Kontaktseite und das Kontaktformular wurden hinzugefügt. **Hinweis:** Um die Kontaktseite im Webshop anzuzeigen, muss die Route `/contact` im Tab **Routing** in der Konfiguration von **IO** aktiviert werden. Weitere Informationen zum Einrichten der Kontaktseite finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#370" target="_blank">Handbuch</a>.
+- Serverseitige Fehlermeldungen werden im Frontend richtig ausgegeben.
+- Der Link aus der Bestellbestätigung leitet nun auf die Bestellbestätigungsseite von Ceres weiter.
+- Das Bild einer Kategorie kann nun in der Kategorieansicht anzeigt werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#100" target="_blank">Handbuch</a>.
 
 ## Geändert
 
-- Die 3 Artikel Listen haben nun als Überschrift ein p-Element, anstatt h1-Element
+- Die Überschriften auf den Seiten des Webshops wurden vergrößert.
+- Die Überschriften der Artikellisten wurde von `h1` auf ein `p`-Element geändert.
+- Die mobile Navigation wurde grundlegend überarbeitet und zeigt bis zu 6 Unterebenen an.
 
 ### Behoben
 
-- Bild positionen werden nun auch in den Artikellisten berücksichtigt.
+- Bildpositionen werden nun auch in den Artikellisten berücksichtigt.
+- Die Sprachauswahl im Header des Webshops zeigt nun wieder Sprachen an.
+- Artikelkategorien wurden auch ohne verknüpfte Artikel im Webshop angezeigt. Dies wurde behoben.
+- Wenn ein Artikel öfter in den Warenkorb gelegt wurde, als Warenbestand vorhanden war, kam eine `Bad Params` Fehlermeldung. Dies wurde behoben.
+
+### Entfernt
+
+- Die Komponente `Mobile-Breadcrumbs` wurde entfernt, da die neue mobile Navigation eigene Breadcrumbs enthält.
 
 ## v1.3.2 (2017-07-26)
 
@@ -31,17 +48,12 @@
 - Die Mengeneingabe in der Einzelansicht eines Artikels, der Warenkorbvorschau und im Warenkorb berücksichtigt nun die Minimal- und Maximalbestellmenge eines Artikels.
 - Die Artikelbilder in der Bestellbestätigungsseite werden nun korrekt ausgegeben.
 
-### Bekannte Probleme
-
-- Artikelkategorien werden auch ohne verknüpfte Artikel im Webshop angezeigt.
-- Wenn ein Artikel öfter in den Warenkorb gelegt wird, als Warenbestand vorhanden ist, kommt eine `Bad Params` Fehlermeldung.
-
 ## v1.3.1 (2017-07-24)
 
 ### Hinzugefügt
 
 - Das Custom-Event `onVariationChanged` wurde hinzugefügt.
-- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im [Handbuch](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#340) und im [Forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155). 
+- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#340" target ="_blank">Handbuch</a> und im <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">Forum</a>. 
 - Beim Anlegen/Editieren von Adressen werden die Felder nun rot markiert, wenn vom Server eine Fehlermeldung für diese Felder kommt. Außerdem werden die Fehler ausgegeben anstatt "Validation errors".
 
 ### Behoben

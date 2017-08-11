@@ -3,11 +3,17 @@
 {{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
 {{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "Ceres::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
 <resource name="breadcrumbs" :data="{}"></resource>
+
+{% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+    <resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishList() }}' }"></resource>
+{% endif %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -20,7 +26,15 @@
                     <user-login-handler template="#vue-user-login-handler"
                             :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
-
+                {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    <li class="list-inline-item control-wish-list">
+                        <a href="/wish-list">
+                            <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true" style="display:none"></i>
+                            <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
+                            <span class="badge" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="list-inline-item dropdown control-languages">
                     <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
                        aria-controls="countrySettings"
@@ -28,7 +42,6 @@
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
-
                 <li class="list-inline-item control-search">
                     <a class="" data-toggle="collapse" href="#searchBox"
                        aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
@@ -39,7 +52,6 @@
                         <span class="hidden-xs-down">{{ trans("Ceres::Template.generalSearchNoDot") }}</span>
                     </a>
                 </li>
-
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -66,6 +78,8 @@
 {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
+
+<mobile-navigation template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">

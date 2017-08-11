@@ -75,6 +75,22 @@
 			}
 		}
 
+		.control-wish-list {
+			a {
+				i{
+					&.fa-heart-o{
+						font-size: .9rem;
+					}
+
+					&.fa-heart{
+						margin-right: .2rem;
+						font-size: .8rem;
+						color: rgba(255, 0, 0, 0.67);
+					}
+				}
+			}
+		}
+
 		.control-languages a[aria-expanded="true"],
 		.control-search a[aria-expanded="true"] {
 			background:$gray-darker;
