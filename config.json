@@ -65,6 +65,13 @@
         "default"                     : "16"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "contact.map_show_in_mobile",
+        "label"                       : "Show map in mobile view",
+        "type"                        : "checkbox",
+        "default"                     : "false"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
