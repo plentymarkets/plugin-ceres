@@ -85,9 +85,11 @@
 
 .payment-link-style {
 	color: #008ebd!important;
-	text-decoration: underline!important;
 	cursor: pointer!important;
 	padding: 0 15px!important;
+	span {
+		text-decoration: underline!important;
+	}
 }
 
 .top-spacer {
