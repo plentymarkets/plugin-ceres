@@ -1161,20 +1161,6 @@
       "default"                   : ""
     },
     {
-        "tab"               : "Registration",
-        "key"               : "register.email_regex",
-        "label"             : "The RegEx used for the email",
-        "type"              : "text",
-        "default"           : "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"
-    },
-    {
-        "tab"               : "Registration",
-        "key"               : "register.password_regex",
-        "label"             : "The RegEx used for the password",
-        "type"              : "text",
-        "default"           : "^(?!\\s*$).+"
-    },
-    {
         "tab"               : "Logging and performance",
         "key"               : "log.data",
         "label"             : "Enable logging options",
