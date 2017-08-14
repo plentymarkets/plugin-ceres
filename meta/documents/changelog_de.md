@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.4.2 (unknown)
+
+### Behoben
+
+- Nicht übersetzte Kategorien werden nun von der MobilenNavigation ignoriert und verursachen keine JavaScript-Fehler mehr.
+
 ## v1.4.1 (2017-08-11)
 
 ### Hinzugefügt
