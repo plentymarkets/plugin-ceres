@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v1.4.2 (unknown)
+
+### Fixed
+
+- Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
+- Untranslated categories are not displayed in the side navigation.
+- When opening an item page, the current category is displayed correctly.
+
 ## v1.4.1 (2017-08-11)
 
 ### Added
