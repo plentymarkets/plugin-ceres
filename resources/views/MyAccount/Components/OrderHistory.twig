@@ -143,7 +143,7 @@
                                                                         :payment-status="{{ paymentStatus | json_encode() }}"
                                                                         :current-template="{{ currentTemplate | json_encode() }}">
                                                 </change-payment-method>
-                                                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry) }}
+                                                {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry.order) }}
                                             </div>
                                         </div>
                                     </div>
