@@ -48,18 +48,18 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                ApiService.post("/rest/io/itemWishList", {variationId: this.variationId})
-                    .done(() =>
-                    {
-                        this.isActive = true;
-                        this.isLoading = false;
-                        this.changeTooltipText();
-                        this.updateWatchListCount(parseInt(this.wishListCount.count) + 1);
-                    })
-                    .fail(() =>
-                    {
-                        this.isLoading = false;
-                    });
+
+                this.$store.dispatch("addToWishList", this.variationId).then(response =>
+                {
+                    this.isActive = true;
+                    this.isLoading = false;
+                    this.changeTooltipText();
+                    this.updateWatchListCount(parseInt(this.wishListCount.count) + 1);
+                },
+                error =>
+                {
+                    this.isLoading = false;
+                });
             }
         },
 
@@ -68,18 +68,18 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                ApiService.delete("/rest/io/itemWishList/" + this.variationId)
-                    .done(() =>
-                    {
-                        this.isActive = false;
-                        this.isLoading = false;
-                        this.changeTooltipText();
-                        this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
-                    })
-                    .fail(() =>
-                    {
-                        this.isLoading = false;
-                    });
+
+                this.$store.dispatch("removeWishListItem", this.variationId).then(response =>
+                {
+                    this.isActive = false;
+                    this.isLoading = false;
+                    this.changeTooltipText();
+                    this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
+                },
+                error =>
+                {
+                    this.isLoading = false;
+                });
             }
         },
 

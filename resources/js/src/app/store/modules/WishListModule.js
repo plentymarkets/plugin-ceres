@@ -18,15 +18,12 @@ const mutations =
             state.wishListIds = wishListIds;
         },
 
-        sliceWishListItem(state, index, wishListItem)
-        {
-
-        },
-
         removeWishListItem(state, wishListItem)
         {
-            if (state.wishListItem.indexOf(wishListItem) >= 0)
-                state.wishListItem.splice(state.wishListItem.indexOf(wishListItem), 1);
+            const index = state.wishListItems.indexOf(wishListItem);
+
+            if (index >= 0)
+                state.wishListItems.splice(index, 1);
         },
 
         removeWishListId(state, id)
@@ -45,40 +42,76 @@ const actions =
     {
         initWishListItems({commit}, ids)
         {
-            if (ids && ids[0])
+            return new Promise((resolve, reject) =>
             {
-                commit("setWishListIds", ids);
+                if (ids && ids[0])
+                {
+                    commit("setWishListIds", ids);
 
-                ApiService.get("/rest/io/variations/", {variationIds: ids, template: "Ceres::WishList.WishList"})
+                    ApiService.get("/rest/io/variations/", {variationIds: ids, template: "Ceres::WishList.WishList"})
+                        .done(data =>
+                        {
+                            commit("setWishListItems", data.documents);
+                            resolve();
+                        })
+                        .fail(() =>
+                        {
+                            reject();
+                        });
+                }
+                else
+                {
+                    resolve();
+                }
+            });
+        },
+
+        removeWishListItem({commit}, id, wishListItem, index)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                if (wishListItem)
+                {
+                    commit("removeWishListItem", wishListItem);
+                }
+
+                ApiService.delete("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {
-                        commit("setWishListItems", data.documents);
+                        commit("removeWishListId", wishListItem);
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        if (index)
+                        {
+                            commit("addWishListItemToIndex", wishListItem, index);
+                        }
+                        reject();
+                    });
+            });
+        },
+
+        addToWishList({commit}, id)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.post("/rest/io/itemWishList", {variationId: id})
+                    .done(() =>
+                    {
+                        resolve();
                     })
                     .fail(() =>
                     {
+                        reject();
                     });
-            }
-        },
-
-        removeWishListItem({commit}, wishListItem, index)
-        {
-            commit("removeWishListItem", wishListItem);
-
-            ApiService.delete("/rest/io/itemWishList/" + wishListItem.data.variation.id)
-                .done(data =>
-                {
-                    commit("removeWishListId", wishListItem);
-                })
-                .fail(error =>
-                {
-                    commit("addWishListItemToIndex", wishListItem, index);
-                });
+            });
         }
     };
 
 const getters =
     {
-        wishListCount: state => state.wishListItems.length
+        wishListCount: state => state.wishListIds.length
     };
 
 export default

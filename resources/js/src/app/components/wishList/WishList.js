@@ -23,7 +23,16 @@ Vue.component("wish-list", {
     created()
     {
         this.$options.template = this.template;
-        this.$store.dispatch("initWishListItems", this.initIds);
+
+        this.isLoading = true;
+        this.$store.dispatch("initWishListItems", this.initIds).then(response =>
+        {
+            this.isLoading = false;
+        },
+        error =>
+        {
+            this.isLoading = false;
+        });
     },
 
     ready()
