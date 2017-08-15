@@ -17,6 +17,10 @@
 - Ein Fehler wurde behoben wenn kein Title HTML-Tag vorhanden ist.
 - Die Artikel namen im Basket werden nun wieder in der richtigen größe angezeigt.
 
+### Geändert
+
+- Artikeltexte in der Wunschliste werden nun nach 4 Zeilen abgekürzt.
+
 ## v1.4.1 (2017-08-11)
 
 ### Hinzugefügt
