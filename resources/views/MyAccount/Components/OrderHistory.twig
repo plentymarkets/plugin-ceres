@@ -122,7 +122,6 @@
                                                             {% set paymentStatus = entry.order.properties[loop.index0].value %}
                                                             {{ trans("Ceres::Template.paymentStatus_" ~ entry.order.properties[loop.index0].value) }}
                                                         {% endif %}
-
                                                         {% if entry.order.properties[loop.index0].typeId == 3 %}
                                                             {% set paymentMethodId = entry.order.properties[loop.index0].value %}
                                                         {% endif %}
@@ -130,17 +129,16 @@
                                                 </span>
                                             </div>
                                         </div>
-
+                                        {% set currentTemplate = services.template.getCurrentTemplate() %}
                                         <div class="col-xs-12 col-md-4">
                                             <div class="payment-change-box">
-
-                                                <button class="payment-change-box-item btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
-
+                                                <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
                                                 <change-payment-method  template="#vue-change-payment-method"
                                                                         :current-order="{{ entry.order | json_encode() }}"
                                                                         :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
                                                                         :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}"
-                                                                        :payment-status="{{ paymentStatus | json_encode() }}">
+                                                                        :payment-status="{{ paymentStatus | json_encode() }}"
+                                                                        :current-template="{{ currentTemplate | json_encode() }}">
                                                 </change-payment-method>
                                                 {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry.order) }}
                                             </div>
