@@ -4,7 +4,8 @@ const ResourceService = require("services/ResourceService");
 Vue.component("mobile-navigation", {
 
     props: [
-        "template"
+        "template",
+        "categoryBreadcrumbs"
     ],
 
     data()
@@ -25,11 +26,9 @@ Vue.component("mobile-navigation", {
 
     ready()
     {
-        const currentCategory = ResourceService.getResource("breadcrumbs").val();
-
         this.categoryTree = ResourceService.getResource("navigationTree").val();
 
-        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs[0] ? this.categoryBreadcrumbs.pop().id : null);
 
         this.dataContainer1 = this.categoryTree;
     },
