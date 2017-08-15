@@ -44,6 +44,7 @@ Vue.component("item-search", {
             if (document.location.pathname === "/search")
             {
                 ItemListService.setSearchString(this.itemSearch.query);
+                document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + this.itemSearch.query;
                 ItemListService.getItemList();
             }
             else

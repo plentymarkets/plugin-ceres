@@ -1,19 +1,16 @@
-{% set emailRegex = config("Ceres.register.email_regex") %}
-{% set passwordRegex = config("Ceres.register.password_regex") %}
-
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
 	<div class="row" id="registration${_uid}">
         <div class="col-sm-12">
-            <div class="input-unit" data-validate="regex">
-                <input type="text" name="email" id="txt_email" v-model="username" data-validate-ref="{{ emailRegex }}">
+            <div class="input-unit" data-validate="mail">
+                <input type="text" name="email" id="txt_email" v-model="username">
                 <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
             </div>
         </div>
 
         <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordBox" data-validate="regex">
-                <input type="password" name="password" id="registration_password_input" v-model="password" data-validate-ref="{{ passwordRegex }}">
+            <div class="input-unit" id="passwordBox" data-validate="password">
+                <input type="password" name="password" id="registration_password_input" v-model="password">
                 <label for="txt_pw">{{ trans("Ceres::Template.accPassword") }}*</label>
             </div>
         </div>
@@ -22,6 +19,13 @@
             <div class="input-unit" id="passwordRepeatBox" data-validate="ref">
                 <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
                 <label for="txt_pwrepeat">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="alert alert-info password-info">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
             </div>
         </div>
 
