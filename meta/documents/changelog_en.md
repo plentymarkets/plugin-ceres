@@ -15,6 +15,10 @@
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
 
+### Changed
+
+- Item names in the wish list are shortened after four lines.
+
 ## v1.4.1 (2017-08-11)
 
 ### Added
