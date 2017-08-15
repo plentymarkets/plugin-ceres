@@ -35,6 +35,11 @@ const mutations =
         addWishListItemToIndex(state, wishListItem, index)
         {
             state.wishListItems.splice(index, 0, wishListItem);
+        },
+
+        addWishListId(state, id)
+        {
+            state.wishListIds.push(id);
         }
     };
 
@@ -96,6 +101,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                commit("addWishListId", id);
                 ApiService.post("/rest/io/itemWishList", {variationId: id})
                     .done(() =>
                     {
@@ -103,6 +109,7 @@ const actions =
                     })
                     .fail(() =>
                     {
+                        commit("removeWishListId", id);
                         reject();
                     });
             });
