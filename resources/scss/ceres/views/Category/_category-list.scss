@@ -84,12 +84,18 @@
 
 .parallax-img-container {
     height: auto;
+
+    .parallax-text-wrapper {
+        @include media-breakpoint-up(xl){
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+    }
         
     .parallax-text-container {
         position: inherit;
 
         h1 {
-            margin-left: 15px;
             margin-bottom: 0;
         }
     }
