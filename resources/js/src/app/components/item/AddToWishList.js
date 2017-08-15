@@ -1,4 +1,3 @@
-const ApiService      = require("services/ApiService");
 const ResourceService = require("services/ResourceService");
 
 Vue.component("add-to-wish-list", {
