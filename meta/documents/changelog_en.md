@@ -5,6 +5,9 @@
 ### Added
 
 - Google maps added to contact form.
+- Google maps available in mobile view.
+- If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
+- If the user registers via pop-up, the page will be reloaded after successful registration.
 
 ### Fixed
 
