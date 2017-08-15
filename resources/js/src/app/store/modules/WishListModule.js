@@ -71,7 +71,7 @@ const actions =
             });
         },
 
-        removeWishListItem({commit}, id, wishListItem, index)
+        removeWishListItem({commit}, {id, wishListItem, index})
         {
             return new Promise((resolve, reject) =>
             {
@@ -83,7 +83,7 @@ const actions =
                 ApiService.delete("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {
-                        commit("removeWishListId", wishListItem);
+                        commit("removeWishListId", id);
                         resolve();
                     })
                     .fail(error =>
