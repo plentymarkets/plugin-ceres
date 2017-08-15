@@ -1,10 +1,19 @@
 # Release Notes for Ceres
 
-
-## 1.4.X (2017-08-XX)
+## v1.4.2 (unknown)
 
 ### Added
+
 - Google maps added to contact form.
+- Google maps available in mobile view.
+- If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
+- If the user registers via pop-up, the page will be reloaded after successful registration.
+
+### Fixed
+
+- Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
+- Untranslated categories are not displayed in the side navigation.
+- When opening an item page, the current category is displayed correctly.
 
 ## v1.4.1 (2017-08-11)
 

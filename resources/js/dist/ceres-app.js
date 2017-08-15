@@ -517,7 +517,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("category-breadcrumbs", {
 
-    props: ["template", "categories", "currentCategoryTree"],
+    props: ["template", "currentCategoryTree"],
 
     data: function data() {
         return {
@@ -536,10 +536,9 @@ Vue.component("category-breadcrumbs", {
          * initialize values
          */
         init: function init() {
-            this.categories = JSON.parse(this.categories);
-
             ResourceService.bind("breadcrumbs", this);
-            ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
+
+            this.breadcrumbs = this.currentCategoryTree;
         },
 
         /**
@@ -4015,7 +4014,7 @@ var ResourceService = require("services/ResourceService");
 
 Vue.component("mobile-navigation", {
 
-    props: ["template"],
+    props: ["template", "categoryBreadcrumbs"],
 
     data: function data() {
         return {
@@ -4030,11 +4029,9 @@ Vue.component("mobile-navigation", {
         this.$options.template = this.template;
     },
     ready: function ready() {
-        var currentCategory = ResourceService.getResource("breadcrumbs").val();
-
         this.categoryTree = ResourceService.getResource("navigationTree").val();
 
-        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs ? this.categoryBreadcrumbs.pop().id : null);
 
         this.dataContainer1 = this.categoryTree;
     },
@@ -4054,25 +4051,34 @@ Vue.component("mobile-navigation", {
 
                     category.parent = parent;
 
-                    if (parent) {
-                        category.url = parent.url + "/" + category.details[0].nameUrl;
+                    // hide category if there is no translation
+                    if (!category.details[0]) {
+                        category.hideCategory = true;
+
+                        if (parent && parent.children && parent.children.length > 1 && !parent.showChilds) {
+                            parent.showChilds = false;
+                        }
                     } else {
-                        category.url = "/" + category.details[0].nameUrl;
-                    }
+                        if (parent) {
+                            category.url = parent.url + "/" + category.details[0].nameUrl;
+                        } else {
+                            category.url = "/" + category.details[0].nameUrl;
+                        }
 
-                    if (category.details.length && category.details[0].name) {
-                        showChilds = true;
-                    }
+                        if (category.details.length && category.details[0].name) {
+                            showChilds = true;
+                        }
 
-                    if (category.children) {
-                        this.buildTree(category.children, category, currentCategoryId);
-                    }
-
-                    if (category.id === currentCategoryId) {
                         if (category.children) {
-                            this.slideTo(category.children);
-                        } else if (category.parent) {
-                            this.slideTo(category.parent.children);
+                            this.buildTree(category.children, category, currentCategoryId);
+                        }
+
+                        if (category.id === currentCategoryId) {
+                            if (category.children && category.showChilds) {
+                                this.slideTo(category.children);
+                            } else if (category.parent) {
+                                this.slideTo(category.parent.children);
+                            }
                         }
                     }
                 }
@@ -4096,7 +4102,7 @@ Vue.component("mobile-navigation", {
             }
         },
         navigateTo: function navigateTo(category) {
-            if (category.children) {
+            if (category.children && category.showChilds) {
                 this.slideTo(category.children);
             }
 
@@ -5343,11 +5349,14 @@ function _updateHistory(currentCategory) {
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 
     var categoryImage = currentCategory.details[0].imagePath;
+    var parallaxImgContainer = document.querySelector(".parallax-img-container");
 
-    if (document.querySelector(".parallax-img-container") && categoryImage) {
-        document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
-    } else {
-        document.querySelector(".parallax-img-container").style.removeProperty("background-image");
+    if (parallaxImgContainer) {
+        if (categoryImage) {
+            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+        } else {
+            parallaxImgContainer.style.removeProperty("background-image");
+        }
     }
 }
 

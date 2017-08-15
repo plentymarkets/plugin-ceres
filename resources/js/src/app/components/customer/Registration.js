@@ -82,6 +82,10 @@ Vue.component("registration", {
                     {
                         window.location.assign(component.backlink);
                     }
+                    else
+                    {
+                        location.reload();
+                    }
 
                     component.isDisabled = false;
                 })
