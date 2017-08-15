@@ -26,9 +26,9 @@ export function setUrlParams(urlParams)
 {
     var pathName = window.location.pathname;
     var params = $.isEmptyObject(urlParams) ? "" : "?" + $.param(urlParams);
-    var title = document.getElementsByTagName("title")[0].innerHTML;
+    var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({}, title, pathName + params);
+    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
 }
 
 export function setUrlParam(key, value)
