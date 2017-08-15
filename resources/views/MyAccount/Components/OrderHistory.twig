@@ -116,8 +116,10 @@
                                             <div class="row">
                                                 <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
                                                 <span class="col-xs-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
+                                                    {% set paymentStatus = '' %}
                                                     {% for propertyKey in entry.order.properties %}
                                                         {% if entry.order.properties[loop.index0].typeId == 4 %}
+                                                            {% set paymentStatus = entry.order.properties[loop.index0].value %}
                                                             {{ trans("Ceres::Template.paymentStatus_" ~ entry.order.properties[loop.index0].value) }}
                                                         {% endif %}
 
@@ -131,7 +133,9 @@
 
                                         <div class="col-xs-12 col-md-4">
                                             <div class="payment-change-box">
+
                                                 <button class="payment-change-box-item btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
+
                                                 <change-payment-method  template="#vue-change-payment-method"
                                                                         :current-order="{{ entry | json_encode() }}"
                                                                         :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"

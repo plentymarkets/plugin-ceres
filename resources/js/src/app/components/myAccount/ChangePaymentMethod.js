@@ -7,7 +7,8 @@ Vue.component("change-payment-method", {
         "template",
         "currentOrder",
         "allowedPaymentMethods",
-        "changePossible"
+        "changePossible",
+        "paymentStatus"
     ],
 
     data()
@@ -36,7 +37,7 @@ Vue.component("change-payment-method", {
     {
         checkChangeAllowed()
         {
-            ApiService.get("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
+            ApiService.get("/rest/io/order/payment", {orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
                     this.changePossible = response;
@@ -77,8 +78,8 @@ Vue.component("change-payment-method", {
 
         updateOrderHistory(updatedOrder)
         {
-            document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
-            document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+            document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
+            document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
 
             this.checkChangeAllowed();
             this.closeModal();
@@ -87,7 +88,7 @@ Vue.component("change-payment-method", {
         updateAllowedPaymentMethods(paymentMethodId)
         {
 
-            ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.order.id, paymentMethodId: paymentMethodId})
+            ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.id, paymentMethodId: paymentMethodId})
                 .done(response =>
                 {
                     this.allowedPaymentMethods = response;
@@ -101,7 +102,7 @@ Vue.component("change-payment-method", {
         {
             this.isPending = true;
 
-            ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.order.id, paymentMethodId: this.paymentMethod})
+            ApiService.post("/rest/io/order/payment", {orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod})
                 .done(response =>
                 {
                     document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", {detail: {oldOrder: this.currentOrder, newOrder: response}}));
