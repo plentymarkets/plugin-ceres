@@ -3834,7 +3834,7 @@ var ApiService = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
-    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus"],
+    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate"],
 
     data: function data() {
         return {

@@ -27,7 +27,7 @@
             <i class="fa fa-retweet" aria-hidden="true"></i>
             <span>{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
         </a>
-        
+
         <div v-if="paymentStatus != 'fullyPaid'">
             <div v-if="!changePossible" class="payment-align-center">
                 <span class="">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>

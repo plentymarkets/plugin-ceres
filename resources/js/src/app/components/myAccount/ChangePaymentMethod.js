@@ -8,7 +8,8 @@ Vue.component("change-payment-method", {
         "currentOrder",
         "allowedPaymentMethods",
         "changePossible",
-        "paymentStatus"
+        "paymentStatus",
+        "currentTemplate"
     ],
 
     data()
