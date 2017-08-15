@@ -1992,6 +1992,8 @@ Vue.component("registration", {
 
                 if (component.backlink !== null && component.backlink) {
                     window.location.assign(component.backlink);
+                } else {
+                    location.reload();
                 }
 
                 component.isDisabled = false;
