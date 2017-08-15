@@ -133,7 +133,9 @@
 
                                         <div class="col-xs-12 col-md-4">
                                             <div class="payment-change-box">
-                                                <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
+
+                                                <button class="payment-change-box-item btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
+
                                                 <change-payment-method  template="#vue-change-payment-method"
                                                                         :current-order="{{ entry | json_encode() }}"
                                                                         :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
