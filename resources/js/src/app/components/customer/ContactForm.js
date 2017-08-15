@@ -17,6 +17,7 @@ Vue.component("contact-form", {
             subject : "",
             message : "",
             orderId : "",
+            cc      : false,
             disabledSend: false
         };
     },
@@ -53,6 +54,7 @@ Vue.component("contact-form", {
         sendMail()
         {
             this.disabledSend = true;
+            this.onSendIcon();
 
             const mailObj =
                 {
@@ -60,18 +62,22 @@ Vue.component("contact-form", {
                     name    : this.name,
                     message : this.message,
                     orderId : this.orderId,
-                    userMail: this.userMail
+                    userMail: this.userMail,
+                    cc      : this.cc
                 };
 
             ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"}, {supressNotifications: true})
                 .done(response =>
                 {
                     this.disabledSend = false;
+                    this.onSendIcon();
+                    this.clearFields();
                     NotificationService.success(Translations.Template.contactSendSuccess);
                 })
                 .fail(response =>
                 {
                     this.disabledSend = false;
+                    this.onSendIcon();
 
                     if (response.validation_errors)
                     {
@@ -82,6 +88,30 @@ Vue.component("contact-form", {
                         NotificationService.error(Translations.Template.contactSendFail);
                     }
                 });
+        },
+
+        clearFields()
+        {
+            this.name = "";
+            this.userMail = "";
+            this.subject = "";
+            this.message = "";
+            this.orderId = "";
+            this.cc = false;
+        },
+
+        onSendIcon()
+        {
+            const sendIcon = $(".send-btn i");
+
+            if (this.disabledSend)
+            {
+                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
+            }
+            else
+            {
+                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
+            }
         },
 
         _handleValidationErrors(validationErrors)
