@@ -31,8 +31,7 @@
 ## Changed
 
 - The Tab **Registration** has been removed from the Config.
-- RegEx for email and password wird is now predetermined by Ceres.
->>>>>>> development
+- RegEx for email and password is now predetermined by Ceres.
 
 ## v1.4.0 (2017-08-09)
 
