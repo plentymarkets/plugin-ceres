@@ -55,7 +55,5 @@
     "sticky-kit": "^1.1.3",
     "tether": "^1.3.2",
     "vue": "^1.0.28"
-  },
-  "main": "index.js",
-  "author": "Dietmar Langhuth <dietmar.langhuth@plentymarkets.com>"
+  }
 }
