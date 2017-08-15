@@ -5,7 +5,9 @@
 ### Hinzugefügt
 
 - Das Kontaktformular wurde um google maps erweitert.
-- Einstellung um google maps in der Mobile-Ansicht anzuzeigen
+- Einstellung um google maps in der Mobile-Ansicht anzuzeigen.
+- Wenn der Browser beim Registrieren einen Weiterleitungslink hat wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
+- Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neugeladen.
 
 ### Behoben
 
