@@ -1,5 +1,39 @@
 # Release Notes for Ceres
 
+## v1.4.2 (unknown)
+
+### Added
+
+- Google maps added to contact form.
+- Google maps available in mobile view.
+- If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
+- If the user registers via pop-up, the page will be reloaded after successful registration.
+
+### Fixed
+
+- Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
+- Untranslated categories are not displayed in the side navigation.
+- When opening an item page, the current category is displayed correctly.
+
+## v1.4.1 (2017-08-11)
+
+### Added
+- A header was added to the search page.
+- An updated password validation was added to the registration.
+
+### Fixed
+- No error messages when changing categories if the category image is not displayed.
+- Corrected header size of categories when category image is displayed.
+- Image size in wish list is scaled correctly.
+- The wish list icon was placed next to the basket in the header; the position of the items in the wish list was changed is now left of the icon.
+- Modified the item counter in the basket.
+
+## Changed
+
+- The Tab **Registration** has been removed from the Config.
+- RegEx for email and password wird is now predetermined by Ceres.
+>>>>>>> development
+
 ## v1.4.0 (2017-08-09)
 
 ### Added
@@ -26,6 +60,8 @@
 
 - Image positions are now also taken into consideration in item lists.
 - The language selection in the header of the online store displays languages again.
+- Categories of the **Item** type have been displayed in the online store even if no item was linked with this category. This has been fixed.
+- If the quantity of an item added to the shopping cart exceeded the stock of the item, a `Bad Params` error message was shown. His has been fixed.
 
 ### Removed
 
@@ -45,11 +81,6 @@
 
 - The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
 - The item images on the order confirmation page are now displayed correctly.
-
-### Known issues
-
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
-- If the quantity of an item added to the shopping cart exceeds the stock of the item, a `Bad Params` error message is shown.
 
 ## v1.3.1 (2017-07-24)
 

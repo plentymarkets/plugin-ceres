@@ -77,6 +77,9 @@
 
 		.control-wish-list {
 			a {
+				.badge-right{
+					margin-right: .5rem; 
+				}
 				i{
 					&.fa-heart-o{
 						font-size: .9rem;
@@ -126,6 +129,10 @@
 
 				.badge{
 					margin-left: .5rem;
+				}
+
+				.badge-right{
+					margin-right: .5rem; 
 				}
 
 				&:hover{
