@@ -4,8 +4,13 @@
         {{ trans("Ceres::Template.myAccountChangePayment") }}
     </button>
 
-    <div v-if="!changePossible" class="payment-align-center">
-        <h1 class="h2 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+    <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
+        <div v-if="!changePossible" class="payment-align-center">
+            <div class="alert alert-info cannot-change-payment">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="info-badge">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</span>
+            </div>
+        </div>
     </div>
 
     <!-- CHANGE_PAYMENT_MODAL -->
@@ -24,6 +29,7 @@
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
+
                                     <input
                                             type="radio"
                                             id="paymentMethod${ _uid }${ paymentProvider.id }"
