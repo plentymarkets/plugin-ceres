@@ -80,6 +80,8 @@
                             {% endfor %}
                         </div>
 
+                        {% set currentTemplate = services.template.getCurrentTemplate() %}
+
                         {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
 
                         {% if loggedIn %}

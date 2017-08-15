@@ -129,7 +129,9 @@
                                                 </span>
                                             </div>
                                         </div>
+
                                         {% set currentTemplate = services.template.getCurrentTemplate() %}
+
                                         <div class="col-xs-12 col-md-4">
                                             <div class="payment-change-box">
                                                 <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
