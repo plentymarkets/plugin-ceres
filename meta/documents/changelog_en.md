@@ -1,10 +1,16 @@
 # Release Notes for Ceres
 
-
-## 1.4.X (2017-08-XX)
+## v1.4.2 (unknown)
 
 ### Added
+
 - Google maps added to contact form.
+
+### Fixed
+
+- Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
+- Untranslated categories are not displayed in the side navigation.
+- When opening an item page, the current category is displayed correctly.
 
 ## v1.4.1 (2017-08-11)
 

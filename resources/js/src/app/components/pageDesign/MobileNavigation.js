@@ -4,7 +4,8 @@ const ResourceService = require("services/ResourceService");
 Vue.component("mobile-navigation", {
 
     props: [
-        "template"
+        "template",
+        "categoryBreadcrumbs"
     ],
 
     data()
@@ -25,11 +26,9 @@ Vue.component("mobile-navigation", {
 
     ready()
     {
-        const currentCategory = ResourceService.getResource("breadcrumbs").val();
-
         this.categoryTree = ResourceService.getResource("navigationTree").val();
 
-        this.buildTree(this.categoryTree, null, currentCategory[0] ? currentCategory.pop().id : null);
+        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs[0] ? this.categoryBreadcrumbs.pop().id : null);
 
         this.dataContainer1 = this.categoryTree;
     },
@@ -43,34 +42,47 @@ Vue.component("mobile-navigation", {
             {
                 category.parent = parent;
 
-                if (parent)
+                // hide category if there is no translation
+                if (!category.details[0])
                 {
-                    category.url = parent.url + "/" + category.details[0].nameUrl;
+                    category.hideCategory = true;
+
+                    if (parent && parent.children && parent.children.length > 1 && !parent.showChilds)
+                    {
+                        parent.showChilds = false;
+                    }
                 }
                 else
                 {
-                    category.url = "/" + category.details[0].nameUrl;
-                }
+                    if (parent)
+                    {
+                        category.url = parent.url + "/" + category.details[0].nameUrl;
+                    }
+                    else
+                    {
+                        category.url = "/" + category.details[0].nameUrl;
+                    }
 
-                if (category.details.length && category.details[0].name)
-                {
-                    showChilds = true;
-                }
+                    if (category.details.length && category.details[0].name)
+                    {
+                        showChilds = true;
+                    }
 
-                if (category.children)
-                {
-                    this.buildTree(category.children, category, currentCategoryId);
-                }
-
-                if (category.id === currentCategoryId)
-                {
                     if (category.children)
                     {
-                        this.slideTo(category.children);
+                        this.buildTree(category.children, category, currentCategoryId);
                     }
-                    else if (category.parent)
+
+                    if (category.id === currentCategoryId)
                     {
-                        this.slideTo(category.parent.children);
+                        if (category.children && category.showChilds)
+                        {
+                            this.slideTo(category.children);
+                        }
+                        else if (category.parent)
+                        {
+                            this.slideTo(category.parent.children);
+                        }
                     }
                 }
             }
@@ -83,7 +95,7 @@ Vue.component("mobile-navigation", {
 
         navigateTo(category)
         {
-            if (category.children)
+            if (category.children && category.showChilds)
             {
                 this.slideTo(category.children);
             }
