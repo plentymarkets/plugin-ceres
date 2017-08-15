@@ -1,5 +1,20 @@
 # Release Notes für Ceres
 
+## v1.4.2 (unknown)
+
+### Hinzugefügt
+
+- Das Kontaktformular wurde um Google Maps erweitert.
+- Einstellung, um Google Maps in der Mobile-Ansicht anzuzeigen.
+- Wenn der Browser beim Registrieren einen Weiterleitungslink hat, wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
+- Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neu geladen.
+
+### Behoben
+
+- Nicht übersetzte Kategorien werden nun von der mobilen Navigation ignoriert und verursachen keine JavaScript-Fehler mehr.
+- Nicht übersetzte Kategorien werden nun in der Seitennavigation nicht mehr ausgegeben.
+- Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
+
 ## v1.4.1 (2017-08-11)
 
 ### Hinzugefügt

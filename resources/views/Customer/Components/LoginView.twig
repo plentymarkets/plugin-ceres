@@ -1,4 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% set backlink = request.get("backlink") %}
 
 <script type="x/template" id="vue-login-view" >
     <div class="container-max login">
@@ -7,18 +8,18 @@
 
                 <div v-if="!isGuestMode">
                     <h1 class="m-b-3">{{ trans("Ceres::Template.accLogin") }}</h1>
-                    <login template="#vue-login" backlink="{{ request.get("backlink") }}" has-to-forward="true"></login>
+                    <login template="#vue-login" backlink="{{ backlink }}" has-to-forward="true"></login>
                 </div>
 
                 <div v-else>
                     <h1 class="m-b-3">{{ trans("Ceres::Template.accOrderAsGuest") }}</h1>
-                    <guest-login template="#vue-guest-login" backlink="{{ request.get("backlink") }}"></guest-login>
+                    <guest-login template="#vue-guest-login" backlink="{{ backlink }}"></guest-login>
                 </div>
 
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                        <a class="btn btn-primary btn-block m-b-1" href="/register">
+                        <a class="btn btn-primary btn-block m-b-1" href="/register{% if backlink | trim is not empty %}?backlink={{ backlink }}{% endif %}">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.accRegister") }}
                         </a>
