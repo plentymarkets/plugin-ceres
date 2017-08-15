@@ -14,9 +14,9 @@
 - Nicht übersetzte Kategorien werden nun von der mobilen Navigation ignoriert und verursachen keine JavaScript-Fehler mehr.
 - Nicht übersetzte Kategorien werden nun in der Seitennavigation nicht mehr ausgegeben.
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
-- Ein Fehler wurde behoben wenn kein Title HTML-Tag vorhanden ist.
-- Die Artikel namen im Basket werden nun wieder in der richtigen größe angezeigt.
-- In der Kategorie Ansicht wurde bei Geräten der mittleren Größe die Margin vom Header und der Breadcrumbs falsch berechnet.
+- Ein Fehler, wenn kein Title-HTML-Tag vorhanden ist, wurde behoben.
+- Die Artikelnamen im Basket werden nun wieder in der richtigen Größe angezeigt.
+- In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 
 ## v1.4.1 (2017-08-11)
 
