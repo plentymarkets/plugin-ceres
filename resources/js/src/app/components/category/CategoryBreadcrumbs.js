@@ -6,7 +6,6 @@ Vue.component("category-breadcrumbs",
 
         props: [
             "template",
-            "categories",
             "currentCategoryTree"
         ],
 
@@ -30,10 +29,9 @@ Vue.component("category-breadcrumbs",
              */
             init: function()
             {
-                this.categories = JSON.parse(this.categories);
-
                 ResourceService.bind("breadcrumbs", this);
-                ResourceService.getResource("breadcrumbs").set(this.currentCategoryTree);
+
+                this.breadcrumbs = this.currentCategoryTree;
             },
 
             /**

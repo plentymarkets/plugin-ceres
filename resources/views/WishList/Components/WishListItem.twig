@@ -3,10 +3,12 @@
 <article transition="wish-list-item-transition" v-for="wishListItem in wishListItems" class="wish-list-item" id="article_${ $index }">
 
     <div class="row">
-        <div class="col-xs-3 col-sm-2 wish-list-image-container">
-            <a :href="wishListItem.data | itemURL">
-                <img class="wish-list-image" :src="wishListItem.data.images | itemImages 'urlMiddle' | itemImage">
-            </a>
+        <div class="col-xs-3 col-sm-2 wish-list-container">
+            <div class="wish-list-image-container">
+                <a :href="wishListItem.data | itemURL">
+                    <img class="wish-list-image" :src="wishListItem.data.images | itemImages 'urlMiddle' | itemImage">
+                </a>
+            </div>
         </div>
 
         <div class="col-xs-5 col-sm-7 wish-list-texts">
@@ -24,7 +26,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-price-container">
+        <div class="col-xs-4 col-sm-3 col-lg-2 offset-lg-1 wish-list-container">
             <div class="wish-list-price">${ wishListItem.data.calculatedPrices.default.basePrice | currency wishListItem.data.calculatedPrices.default.currency }</div>
             <div class="wish-list-remove" @click="removeWishListItem(wishListItem.data.variation.id, wishListItem, $index)"><i class="fa fa-trash" aria-hidden="true"></i></div>
         </div>

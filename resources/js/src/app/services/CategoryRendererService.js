@@ -71,14 +71,18 @@ function _updateHistory(currentCategory)
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 
     const categoryImage = currentCategory.details[0].imagePath;
+    const parallaxImgContainer = document.querySelector(".parallax-img-container");
 
-    if (categoryImage)
+    if (parallaxImgContainer)
     {
-        document.querySelector(".parallax-img-container").style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
-    }
-    else
-    {
-        document.querySelector(".parallax-img-container").style.removeProperty("background-image");
+        if (categoryImage)
+        {
+            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+        }
+        else
+        {
+            parallaxImgContainer.style.removeProperty("background-image");
+        }
     }
 }
 
