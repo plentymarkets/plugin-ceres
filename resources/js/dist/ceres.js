@@ -6715,9 +6715,9 @@ function getUrlParams(urlParams) {
 function setUrlParams(urlParams) {
     var pathName = window.location.pathname;
     var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
-    var title = document.getElementsByTagName("title")[0].innerHTML;
+    var titleElement = document.getElementsByTagName("title")[0];
 
-    window.history.replaceState({}, title, pathName + params);
+    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
 }
 
 function setUrlParam(key, value) {
