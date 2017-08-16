@@ -28,10 +28,8 @@
             <span>{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
         </a>
 
-        <div v-if="paymentStatus != 'fullyPaid'">
-            <div v-if="!changePossible" class="payment-align-center">
-                <span class="">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>
-            </div>
+        <div v-if="paymentStatus != 'fullyPaid'" class="col-xs-6 col-sm-7">
+            <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>
         </div>
 
     </div>
