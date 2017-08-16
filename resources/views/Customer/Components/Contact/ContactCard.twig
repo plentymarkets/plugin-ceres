@@ -95,9 +95,10 @@
     {% endif %}
 
     {% if "vatNumber" in showData or showData == 'all' %}
-		<p class="m-y-0">
+		<p class="m-y-0 contact-vat-number">
 			<i class="fa fa-fw" aria-hidden="true"></i>
-			<span class="d-inline-block">VAT: {{ vat }}</span>
+			<span class="d-inline-block vat-number-field">{{ trans("Ceres::Template.accVatNumber") }}:</span><br>
+			<span class="d-inline-block">{{ vat }}</span>
 		</p>
     {% endif %}
 </div>
