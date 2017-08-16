@@ -50,6 +50,8 @@
                     </div>
                     <div class="modal-body form-horizontal">
 
+                        <label v-if="showIsSwitchableWarning" class="alert-warning cannot-change-payment"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ trans("Ceres::Template.myAccountChangePaymentNotSwitchableWarning") }}</label>
+
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
@@ -69,7 +71,7 @@
                                                 </div>
                                             </div>
                                         </div><!--
-                    --><div class="content">
+                                    --><div class="content">
                                             ${ paymentProvider.name }
                                             <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
                                                 <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>

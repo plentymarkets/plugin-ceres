@@ -17,7 +17,8 @@ Vue.component("change-payment-method", {
         return {
             changePaymentModal: {},
             paymentMethod: 0,
-            isPending: false
+            isPending: false,
+            showErrorMessage: false
         };
     },
 
@@ -115,6 +116,24 @@ Vue.component("change-payment-method", {
                 {
                     // TODO add error msg
                 });
+        }
+    },
+
+    computed:
+    {
+        showIsSwitchableWarning()
+        {
+            const currentPaymentMethod = this.allowedPaymentMethods.find(paymentMethod =>
+            {
+                return paymentMethod.id === this.paymentMethod;
+            });
+
+            if (currentPaymentMethod)
+            {
+                return !currentPaymentMethod.isSwitchableFrom;
+            }
+
+            return false;
         }
     }
 
