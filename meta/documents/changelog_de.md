@@ -1,17 +1,28 @@
 # Release Notes für Ceres
 
-## v1.4.2 (unknown)
+## v1.4.3 (unknown)
 
 ### Hinzugefügt
 
-- Das Kontaktformular wurde um google maps erweitert.
-- Einstellung um google maps in der Mobile-Ansicht anzuzeigen
+- Das Kontaktformular wurde um Google Maps erweitert.
+- Einstellung, um Google Maps in der Mobile-Ansicht anzuzeigen.
+- Wenn der Browser beim Registrieren einen Weiterleitungslink hat, wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
+- Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neu geladen.
+- Im Kontaktformular gibt es eine Checkbox "Kopie an mich", um es dem Kunden zu ermöglichen, eine Kopie seiner Anfrage zu erhalten.
+
+### Behoben
+
+- In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
+
+## v1.4.2 (2017-08-16)
 
 ### Behoben
 
 - Nicht übersetzte Kategorien werden nun von der mobilen Navigation ignoriert und verursachen keine JavaScript-Fehler mehr.
 - Nicht übersetzte Kategorien werden nun in der Seitennavigation nicht mehr ausgegeben.
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
+- Ein Fehler, wenn kein Title-HTML-Tag vorhanden ist, wurde behoben.
+- Die Artikelnamen im Basket werden nun wieder in der richtigen Größe angezeigt.
 
 ## v1.4.1 (2017-08-11)
 

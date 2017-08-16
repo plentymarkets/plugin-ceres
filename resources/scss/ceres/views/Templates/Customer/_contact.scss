@@ -31,10 +31,14 @@
 
 	.contact-card{
 		p{
-			&.contact-address{
+			&.contact-address,&.contact-vat-number{
 				span{
 					&:not(:nth-child(2)) {
 						margin-left: 27px;
+					}
+
+					&.vat-number-field{
+						font-weight: bold;
 					}
 
 					line-height: 1;
@@ -55,6 +59,11 @@
 			vertical-align: baseline;
 			margin-right: 5px;
 		}
+	}
+
+	#contact-map{
+		min-height: 300px;
+		height: auto;
 	}
 
 	#contact-form{

@@ -89,6 +89,8 @@ Vue.component("login", {
                 })
                 .fail(function(response)
                 {
+                    self.isDisabled = false;
+
                     switch (response.code)
                     {
                     case 401:
@@ -97,8 +99,6 @@ Vue.component("login", {
                     default:
                         return;
                     }
-
-                    self.isDisabled = false;
                 });
         }
     }

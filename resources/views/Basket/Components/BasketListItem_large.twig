@@ -42,9 +42,9 @@
     <div class="item-details small">
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.id }" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
-            <h2 class="item-name">
+            <p class="item-name">
                 ${ basketItem.variation.data.texts | itemName {{configItemName}} }
-            </h2>
+            </p>
         </a>
 
         {% if "basket.item.item_id" in basketDetailsData %}

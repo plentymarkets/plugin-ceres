@@ -1,16 +1,28 @@
 # Release Notes for Ceres
 
-## v1.4.2 (unknown)
+## 1.4.3 (unkown)
 
 ### Added
 
 - Google maps added to contact form.
+- Google maps available in mobile view.
+- If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
+- If the user registers via pop-up, the page will be reloaded after successful registration.
+- A "Send me a copy" checkbox was added to the contact form to enable the customer to receive a copy of their message.
+
+### Fixed
+
+- Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
+
+## v1.4.2 (2017-08-16)
 
 ### Fixed
 
 - Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
+- Fixed error with missing title HTML tag.
+- Item names in the basket are displayed in the right size.
 
 ## v1.4.1 (2017-08-11)
 
@@ -28,8 +40,7 @@
 ## Changed
 
 - The Tab **Registration** has been removed from the Config.
-- RegEx for email and password wird is now predetermined by Ceres.
->>>>>>> development
+- RegEx for email and password is now predetermined by Ceres.
 
 ## v1.4.0 (2017-08-09)
 
