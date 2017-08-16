@@ -1,10 +1,7 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("wish-list", {
 
     props: [
-        "template",
-        "initIds"
+        "template"
     ],
 
     data()
@@ -25,7 +22,7 @@ Vue.component("wish-list", {
         this.$options.template = this.template;
 
         this.isLoading = true;
-        this.$store.dispatch("initWishListItems", this.initIds).then(response =>
+        this.$store.dispatch("initWishListItems", this.wishListIds).then(response =>
         {
             this.isLoading = false;
         },
@@ -35,21 +32,8 @@ Vue.component("wish-list", {
         });
     },
 
-    ready()
-    {
-        ResourceService.bind("wishListCount", this);
-    },
-
     methods:
     {
-        updateWatchListCount(count)
-        {
-            if (count >= 0)
-            {
-                ResourceService.getResource("wishListCount").set({count: count});
-            }
-        },
-
         ...Vuex.mapActions([
             "initWishListItems",
             "removeWishListItem"

@@ -1,5 +1,3 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("add-to-wish-list", {
 
     props: [
@@ -23,8 +21,6 @@ Vue.component("add-to-wish-list", {
 
     ready()
     {
-        ResourceService.bind("wishListCount", this);
-
         this.changeTooltipText();
     },
 
@@ -47,17 +43,18 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
+                this.isActive = true;
+                this.changeTooltipText();
 
-                this.$store.dispatch("addToWishList", this.variationId).then(response =>
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(response =>
                 {
-                    this.isActive = true;
                     this.isLoading = false;
-                    this.changeTooltipText();
-                    this.updateWatchListCount(parseInt(this.wishListCount.count) + 1);
                 },
                 error =>
                 {
                     this.isLoading = false;
+                    this.isActive = false;
+                    this.changeTooltipText();
                 });
             }
         },
@@ -67,17 +64,18 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
+                this.isActive = false;
+                this.changeTooltipText();
 
-                this.$store.dispatch("removeWishListItem", this.variationId).then(response =>
+                this.$store.dispatch("removeWishListItem", {id: parseInt(this.variationId)}).then(response =>
                 {
-                    this.isActive = false;
                     this.isLoading = false;
-                    this.changeTooltipText();
-                    this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
                 },
                 error =>
                 {
                     this.isLoading = false;
+                    this.isActive = true;
+                    this.changeTooltipText();
                 });
             }
         },
@@ -87,14 +85,6 @@ Vue.component("add-to-wish-list", {
             const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
 
             $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
-        },
-
-        updateWatchListCount(count)
-        {
-            if (count >= 0)
-            {
-                ResourceService.getResource("wishListCount").set({count: count});
-            }
         }
     }
 });
