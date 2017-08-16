@@ -1,12 +1,15 @@
 # Release Notes für Ceres
 
-## v1.4.2 (unknown)
+## v1.4.2 (2017-08-16)
 
 ### Behoben
 
 - Nicht übersetzte Kategorien werden nun von der mobilen Navigation ignoriert und verursachen keine JavaScript-Fehler mehr.
 - Nicht übersetzte Kategorien werden nun in der Seitennavigation nicht mehr ausgegeben.
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
+- Ein Fehler wurde behoben wenn kein Title HTML-Tag vorhanden ist.
+- Die Artikel namen im Basket werden nun wieder in der richtigen größe angezeigt.
+
 
 ## v1.4.1 (2017-08-11)
 
