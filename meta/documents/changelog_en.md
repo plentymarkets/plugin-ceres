@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v1.4.2 (unknown)
+## 1.4.3 (unkown)
 
 ### Added
 
@@ -12,12 +12,17 @@
 
 ### Fixed
 
+- Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
+
+## v1.4.2 (2017-08-16)
+
+### Fixed
+
 - Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
 - Fixed error with missing title HTML tag.
 - Item names in the basket are displayed in the right size.
-- Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
 
 ## v1.4.1 (2017-08-11)
 
