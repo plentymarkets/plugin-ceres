@@ -8,7 +8,7 @@
 - Einstellung, um Google Maps in der Mobile-Ansicht anzuzeigen.
 - Wenn der Browser beim Registrieren einen Weiterleitungslink hat, wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
 - Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neu geladen.
-- AM Kontaktformular, "Kopie an mich" um den Kunden zu ermöglichen eine Kopie seiner Anfrage zu erhalten
+- Im Kontaktformular gibt es eine Checkbox "Kopie an mich", um es dem Kunden zu ermöglichen, eine Kopie seiner Anfrage zu erhalten.
 
 ### Behoben
 
