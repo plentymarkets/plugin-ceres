@@ -3840,7 +3840,8 @@ Vue.component("change-payment-method", {
         return {
             changePaymentModal: {},
             paymentMethod: 0,
-            isPending: false
+            isPending: false,
+            showErrorMessage: false
         };
     },
     created: function created() {
@@ -3916,6 +3917,22 @@ Vue.component("change-payment-method", {
             }).fail(function () {
                 // TODO add error msg
             });
+        }
+    },
+
+    computed: {
+        showIsSwitchableWarning: function showIsSwitchableWarning() {
+            var _this4 = this;
+
+            var currentPaymentMethod = this.allowedPaymentMethods.find(function (paymentMethod) {
+                return paymentMethod.id === _this4.paymentMethod;
+            });
+
+            if (currentPaymentMethod) {
+                return !currentPaymentMethod.isSwitchableFrom;
+            }
+
+            return false;
         }
     }
 
