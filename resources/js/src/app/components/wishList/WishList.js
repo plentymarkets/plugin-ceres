@@ -22,14 +22,15 @@ Vue.component("wish-list", {
         this.$options.template = this.template;
 
         this.isLoading = true;
-        this.$store.dispatch("initWishListItems", this.wishListIds).then(response =>
-        {
-            this.isLoading = false;
-        },
-        error =>
-        {
-            this.isLoading = false;
-        });
+        this.initWishListItems(this.wishListIds).then(
+            response =>
+            {
+                this.isLoading = false;
+            },
+            error =>
+            {
+                this.isLoading = false;
+            });
     },
 
     methods:
