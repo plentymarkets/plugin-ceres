@@ -17,6 +17,8 @@
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+
+    {{ component( "Ceres::Checkout.Components.Checkout" ) }}
     <div class="page-content checkout container-max">
         <resource
             name="checkout"
@@ -35,6 +37,8 @@
                     <hr>
                 </div>
             </div>
+
+            <checkout template="#vue-checkout" :checkout="{{ services.checkout.getCheckout() | json_encode() }}"></checkout>
 
             <div class="row">
                 <!-- ADDRESS SELECT -->
