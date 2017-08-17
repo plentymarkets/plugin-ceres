@@ -7,7 +7,8 @@ Vue.component("change-payment-method", {
         "template",
         "currentOrder",
         "allowedPaymentMethods",
-        "changePossible"
+        "changePossible",
+        "paymentMethodName"
     ],
 
     data()
@@ -79,6 +80,7 @@ Vue.component("change-payment-method", {
         {
             document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
             document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+            document.getElementById("current_payment_method_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
 
             this.checkChangeAllowed();
             this.closeModal();

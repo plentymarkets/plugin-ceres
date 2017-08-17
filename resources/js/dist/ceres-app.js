@@ -3834,7 +3834,7 @@ var ApiService = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
-    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible"],
+    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentMethodName"],
 
     data: function data() {
         return {
@@ -3892,6 +3892,7 @@ Vue.component("change-payment-method", {
         updateOrderHistory: function updateOrderHistory(updatedOrder) {
             document.getElementById("payment_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
             document.getElementById("payment_state_" + this.currentOrder.order.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+            document.getElementById("current_payment_method_name_" + this.currentOrder.order.id).innerHTML = updatedOrder.paymentMethodName;
 
             this.checkChangeAllowed();
             this.closeModal();

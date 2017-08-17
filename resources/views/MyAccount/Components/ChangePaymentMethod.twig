@@ -20,9 +20,15 @@
                         <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChooseNewPayment") }}</h4>
                     </div>
                     <div class="modal-body form-horizontal">
-
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
+                            <li class="method-list-item">
+                                <label class="alert-info">
+                                    <div class="content">
+                                        {{ trans("Ceres::Template.myAccountCurrentPaymentText") }} <span id="current_payment_method_name_${ currentOrder.order.id }"> ${ paymentMethodName } </span>
+                                    </div>
+                                </label>
+                            </li>
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
                                     <input
                                             type="radio"
@@ -39,7 +45,7 @@
                                                 </div>
                                             </div>
                                         </div><!--
-                    --><div class="content">
+                                        --><div class="content">
                                             ${ paymentProvider.name }
                                             <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
                                                 <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>
