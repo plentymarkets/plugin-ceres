@@ -2271,8 +2271,6 @@ Vue.component("login", {
 
                 self.isDisabled = false;
             }).fail(function (response) {
-                self.isDisabled = false;
-
                 switch (response.code) {
                     case 401:
                         NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
@@ -2280,6 +2278,8 @@ Vue.component("login", {
                     default:
                         return;
                 }
+
+                self.isDisabled = false;
             });
         }
     }
@@ -3834,7 +3834,7 @@ var ApiService = require("services/ApiService");
 
 Vue.component("change-payment-method", {
 
-    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "paymentMethodName"],
+    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate"],
 
     data: function data() {
         return {
@@ -3893,7 +3893,6 @@ Vue.component("change-payment-method", {
         updateOrderHistory: function updateOrderHistory(updatedOrder) {
             document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
             document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
-            document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
 
             this.checkChangeAllowed();
             this.closeModal();
