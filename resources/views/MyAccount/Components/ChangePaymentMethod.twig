@@ -52,6 +52,13 @@
 
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
+                            <li class="method-list-item">
+                                <label class="alert-info">
+                                    <div class="content">
+                                        {{ trans("Ceres::Template.myAccountCurrentPaymentText") }} <span id="current_payment_method_name_${ currentOrder.order.id }"> ${ paymentMethodName } </span>
+                                    </div>
+                                </label>
+                            </li>
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
 
                                     <input

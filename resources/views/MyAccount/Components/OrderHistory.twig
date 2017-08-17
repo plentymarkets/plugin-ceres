@@ -140,14 +140,14 @@
                                                                         :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
                                                                         :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, entry.order.id) | json_encode() }}"
                                                                         :payment-status="{{ paymentStatus | json_encode() }}"
-                                                                        :current-template="{{ currentTemplate | json_encode() }}">
+                                                                        :current-template="{{ currentTemplate | json_encode() }}"
+                                                                        :payment-method-name="{{ entry.paymentMethodName | json_encode() }}>
                                                 </change-payment-method>
                                                 {{ LayoutContainer.show("Ceres::MyAccount.OrderHistoryPaymentInformation", entry.order) }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </article>
                         {% endfor %}
                     </div>
