@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unknown)
+## v1.4.3 (beta)
 
 ### Hinzugefügt
 
@@ -12,6 +12,7 @@
 
 ### Behoben
 
+- Login zu MyAccount bietet keine Möglichkeit mehr, sich als Gast einzuloggen.
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 
 ## v1.4.2 (2017-08-16)
