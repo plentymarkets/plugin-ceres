@@ -23,6 +23,7 @@
 - When opening an item page, the current category is displayed correctly.
 - Fixed error with missing title HTML tag.
 - Item names in the basket are displayed in the right size.
+- Fixed Javascript errors in older browsers.
 
 ## v1.4.1 (2017-08-11)
 

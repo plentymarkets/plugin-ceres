@@ -23,6 +23,7 @@
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
 - Ein Fehler, wenn kein Title-HTML-Tag vorhanden ist, wurde behoben.
 - Die Artikelnamen im Basket werden nun wieder in der richtigen Größe angezeigt.
+- Javascript-Fehler in älteren Browsern behoben.
 
 ## v1.4.1 (2017-08-11)
 
