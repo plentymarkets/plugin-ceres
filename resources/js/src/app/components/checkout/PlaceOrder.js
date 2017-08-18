@@ -104,9 +104,11 @@ var ResourceService = require("services/ResourceService");
 
                 case "errorCode":
                     NotificationService.error(paymentValue);
+                    this.waiting = false;
                     break;
                 default:
                     NotificationService.error("Unknown response from payment provider: " + paymentType);
+                    this.waiting = false;
                     break;
                 }
             },
