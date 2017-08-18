@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## 1.4.3 (unkown)
+## 1.4.3 (unknown)
 
 ### Added
 
@@ -9,6 +9,7 @@
 - If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
 - If the user registers via pop-up, the page will be reloaded after successful registration.
 - A "Send me a copy" checkbox was added to the contact form to enable the customer to receive a copy of their message.
+- The ScriptLoader container has been moved to a position where all frameworks used by us are implemented.
 
 ### Fixed
 
