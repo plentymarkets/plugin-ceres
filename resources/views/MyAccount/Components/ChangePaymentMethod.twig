@@ -48,14 +48,19 @@
                     </div>
                     <div class="modal-body form-horizontal">
 
-                        <label v-if="showIsSwitchableWarning" class="alert-warning cannot-change-payment"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ trans("Ceres::Template.myAccountChangePaymentNotSwitchableWarning") }}</label>
+                        <div v-if="showIsSwitchableWarning" class="alert-warning cannot-change-payment switchable-warning">
+                            <div class="warning-triangle">
+                                <i class="fa fa-exclamation-triangle font-size"  aria-hidden="true"></i>
+                            </div>
+                            <p class="warning-text">{{ trans("Ceres::Template.myAccountChangePaymentNotSwitchableWarning") }}</p>
+                        </div>
 
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
                             <li class="method-list-item">
                                 <label class="alert-info">
                                     <div class="content">
-                                        {{ trans("Ceres::Template.myAccountCurrentPaymentText") }} <span id="current_payment_method_name_${ currentOrder.id }"> ${ paymentMethodName } </span>
+                                        {{ trans("Ceres::Template.myAccountCurrentPaymentText") }} <span id="current_payment_method_name_${ currentOrder.id }"> ${ currentPaymentMethodName} </span>
                                     </div>
                                 </label>
                             </li>
