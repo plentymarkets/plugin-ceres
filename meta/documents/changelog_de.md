@@ -12,6 +12,7 @@
 
 ### Behoben
 
+- Sortierung nach neuste und älteste Artikel funktioniert nun korrekt.
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 
 ## v1.4.2 (2017-08-16)
