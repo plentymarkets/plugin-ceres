@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "accounting": "^0.4.1",
+    "babel-polyfill": "^6.26.0",
     "bootstrap": "v4.0.0-alpha.3",
     "devbridge-autocomplete": "^1.2.27",
     "flag-icon-css": "^2.4.0",
