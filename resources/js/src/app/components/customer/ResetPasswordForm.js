@@ -31,19 +31,26 @@ Vue.component("reset-password-form", {
                 ApiService.post("/rest/io/customer/password", {password: this.passwordFirst, contactId: this.contactId, hash: this.hash})
                     .done(() =>
                     {
-
-                        this.passwordFirst = "";
-                        this.passwordSecond = "";
-                        this.contactId = 0;
-                        this.hash = "";
+                        this.resetFields();
 
                         NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+
+                        window.location.assign(window.location.origin);
+
                     })
                     .fail(() =>
                     {
                         NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
                     });
             }
+        },
+
+        resetFields()
+        {
+            this.passwordFirst = "";
+            this.passwordSecond = "";
+            this.contactId = 0;
+            this.hash = "";
         }
     }
 
