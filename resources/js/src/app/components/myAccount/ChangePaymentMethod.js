@@ -10,7 +10,7 @@ Vue.component("change-payment-method", {
         "changePossible",
         "paymentStatus",
         "currentTemplate",
-        "paymentMethodName"
+        "currentPaymentMethodName"
     ],
 
     data()
