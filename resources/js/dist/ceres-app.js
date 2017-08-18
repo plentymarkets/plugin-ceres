@@ -3862,7 +3862,7 @@ Vue.component("change-payment-method", {
             var _this = this;
 
             ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                _this.changePossible = response;
+                _this.changePossible = response.data;
             }).fail(function () {
                 _this.changePossible = false;
             });
