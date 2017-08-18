@@ -126,7 +126,7 @@ Vue.component("login", {
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer/password_reset", {email: this.username})
-                .done( () =>
+                .done(() =>
                 {
                     if (document.getElementById(this.modalElement) !== null)
                     {
@@ -140,7 +140,7 @@ Vue.component("login", {
                     this.cancelResetPwd();
 
                 })
-                .fail( () =>
+                .fail(() =>
                 {
                     this.isDisabled = false;
                 });
