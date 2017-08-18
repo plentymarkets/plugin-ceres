@@ -1,0 +1,54 @@
+.login-container{
+
+  .send-login-btn {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  @include media-breakpoint-up(sm){
+
+    .send-login-btn {
+      display: inline-block;
+      margin-top: auto;
+      width: auto;
+    }
+  }
+}
+
+.reset-pwd-container{
+  display: none;
+
+  .cancel-reset-pwd-btn{
+    display: block;
+    outline: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .send-reset-pwd-btn{
+    display: block;
+    outline: none;
+    width: 100%;
+
+    i{
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+
+  @include media-breakpoint-up(sm){
+
+    .cancel-reset-pwd-btn{
+      display: inline-block;
+      width: auto;
+      margin-right: 10px;
+      margin-bottom: auto;
+    }
+
+    .send-reset-pwd-btn{
+      display: inline-block;
+      width: auto;
+    }
+  }
+}
