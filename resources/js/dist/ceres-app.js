@@ -2038,11 +2038,14 @@ Vue.component("registration", {
 },{"services/ApiService":80,"services/ModalService":85,"services/NotificationService":86,"services/ValidationService":89}],22:[function(require,module,exports){
 "use strict";
 
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
 Vue.component("reset-password-form", {
 
-    props: ["template"],
+    props: ["contactId", "hash", "template"],
 
-    date: function date() {
+    data: function data() {
         return {
             passwordFirst: "",
             passwordSecond: ""
@@ -2053,11 +2056,29 @@ Vue.component("reset-password-form", {
     },
 
 
-    methods: {}
+    methods: {
+        saveNewPassword: function saveNewPassword() {
+            var _this = this;
+
+            if (this.passwordFirst !== "" && this.passwordFirst === this.passwordSecond) {
+                ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, contactId: this.contactId, hash: this.hash }).done(function () {
+
+                    _this.passwordFirst = "";
+                    _this.passwordSecond = "";
+                    _this.contactId = 0;
+                    _this.hash = "";
+
+                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+                }).fail(function () {
+                    NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+                });
+            }
+        }
+    }
 
 });
 
-},{}],23:[function(require,module,exports){
+},{"services/ApiService":80,"services/NotificationService":86}],23:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
