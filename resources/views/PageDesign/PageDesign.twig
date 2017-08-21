@@ -136,8 +136,6 @@
 
         {{ Loader.include_components() }}
 
-        {{ LayoutContainer.show("Ceres::Script.Loader") }}
-
         {% set lang = services.sessionStorage.getLang() %}
 
         {% if config("Ceres.log.performance.level") == 'development' %}
@@ -153,6 +151,8 @@
 
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
+
+        {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
         <script>
             vueApp = new Vue({

@@ -29,7 +29,9 @@
 		    top:88px;
 		}
 		.breadcrumb{
-		    padding: .5rem 0;
+			@include media-breakpoint-up(xl){
+				padding: .5rem 0;
+			}
 		}
 	}
 }
