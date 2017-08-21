@@ -15,6 +15,10 @@
 
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 
+### Geändert
+
+- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
+
 ## v1.4.2 (2017-08-16)
 
 ### Behoben
