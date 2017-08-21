@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <!-- ************************ MYACCOUNT ************************* -->
+    <!-- MyAccount -->
     <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
         <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
@@ -17,9 +17,9 @@
         </div>
 
     </div>
-    <!-- ***************************** END ***************************** -->
+    <!-- ./MyAccount -->
 
-    <!-- ************************ CONFIRMATION ************************* -->
+    <!-- CONFIRMATION  -->
     <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
 
         <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.myAccountChangePayment") }}</strong>
@@ -33,7 +33,7 @@
         </div>
 
     </div>
-    <!-- ***************************** END ***************************** -->
+    <!-- ./CONFIRMATION  -->
 
     <!-- CHANGE_PAYMENT_MODAL -->
     <div v-el:change-payment-modal>

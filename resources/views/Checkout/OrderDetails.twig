@@ -68,7 +68,6 @@
                         </div>
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
-                            {% set paymentStatus = '' %}
                             {% set paymentMethodId = -1 %}
                             {% for propertyKey in orderData.order.properties %}
                                 {% if orderData.order.properties[loop.index0].typeId == 4 %}

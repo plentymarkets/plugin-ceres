@@ -44,18 +44,7 @@ Vue.component("change-payment-method", {
                 .done(response =>
                 {
                     // TODO: research - if response should be false, it returns an object
-                    if (response === true)
-                    {
-                        this.changePossible = true;
-                    }
-                    else if (response.data === false)
-                    {
-                        this.changePossible = false;
-                    }
-                    else
-                    {
-                        this.changePossible = response;
-                    }
+                    this.changePossible = typeof response === "object" ? response.data : response;
                 })
                 .fail(() =>
                 {
