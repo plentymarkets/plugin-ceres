@@ -1,3 +1,5 @@
+import ValidationService from "services/ValidationService";
+
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
@@ -13,7 +15,9 @@ Vue.component("reset-password-form", {
     {
         return {
             passwordFirst: "",
-            passwordSecond: ""
+            passwordSecond: "",
+            pwdFields: [],
+            isDisabled: false
         };
     },
 
@@ -22,27 +26,85 @@ Vue.component("reset-password-form", {
         this.$options.template = this.template;
     },
 
+    ready()
+    {
+        this.pwdFields = $("#reset-password-form-" + this._uid).find(".input-unit");
+    },
+
+    watch:
+    {
+        passwordFirst(val, oldVal)
+        {
+            this.resetError();
+        },
+
+        passwordSecond(val, oldVal)
+        {
+            this.resetError();
+        }
+    },
+
     methods: {
+
+        validatePassword()
+        {
+
+            ValidationService.validate($("#reset-password-form-" + this._uid))
+                .done(() =>
+                {
+                    if (this.checkPasswordEquals())
+                    {
+                        this.saveNewPassword();
+                    }
+                })
+                .fail(invalidFields =>
+                {
+                    ValidationService.markInvalidFields(invalidFields, "error");
+                });
+        },
+
+        resetError()
+        {
+            ValidationService.unmarkAllFields($("#reset-password-form-" + this._uid));
+            this.pwdFields.removeClass("check-pwds-error");
+            $(".error-save-pwd-msg").hide();
+        },
+
+        checkPasswordEquals()
+        {
+            if (this.passwordFirst !== this.passwordSecond)
+            {
+                this.pwdFields.addClass("check-pwds-error");
+                $(".error-save-pwd-msg").show();
+
+                return false;
+            }
+
+            return true;
+        },
 
         saveNewPassword()
         {
-            if (this.passwordFirst !== "" && (this.passwordFirst === this.passwordSecond))
-            {
-                ApiService.post("/rest/io/customer/password", {password: this.passwordFirst, contactId: this.contactId, hash: this.hash})
-                    .done(() =>
-                    {
-                        this.resetFields();
+            this.isDisabled = true;
 
-                        NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+            ApiService.post("/rest/io/customer/password", {password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash})
+                .done(() =>
+                {
+                    this.resetFields();
 
-                        window.location.assign(window.location.origin);
+                    this.isDisabled = false;
 
-                    })
-                    .fail(() =>
-                    {
-                        NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
-                    });
-            }
+                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+
+                    window.location.assign(window.location.origin);
+
+                })
+                .fail(() =>
+                {
+                    this.isDisabled = false;
+
+                    NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+                });
         },
 
         resetFields()

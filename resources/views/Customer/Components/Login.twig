@@ -3,21 +3,24 @@
 {% set gCapture   = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
 
 <script type="x/template" id="vue-login">
-    <div>
+    <div class="login-pwd-reset">
 
         <form id="login-form-${_uid}" class="login-container m-b-1">
             <div class="row">
                 <div class="col-xs-12">
+                    <span class="error-msg-login">{{ trans("Ceres::Template.accLoginFailed") }}</span>
                     <div class="input-unit" data-validate="mail">
                         <input type="email" name="email" id="txt_email" v-model="username">
                         <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
                     </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                 </div>
                 <div class="col-xs-12">
                     <div class="input-unit" data-validate="text">
                         <input type="password" name="password" id="txt_password" v-model="password">
                         <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
                     </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <div>
@@ -28,24 +31,32 @@
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary send-login-btn">
-                        {{ trans("Ceres::Template.accLogin") }}
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> {{ trans("Ceres::Template.accLogin") }}
                     </button>
                 </div>
             </div>
         </form>
 
         <form id="reset-pwd-form-${_uid}" class="reset-pwd-container m-b-1">
+            <div class="alert alert-info alert-dismissible pwd-forgot-info">
+                <span class="info-badge">{{ trans("Ceres::Template.accForgotPasswordInfo") }}</span>
+            </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="input-unit" data-validate="mail">
                         <input type="email" name="email" id="txt_email" v-model="username">
                         <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
                     </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                 </div>
                 <div class="col-xs-12 text-sm-right">
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
-                    <button @click.prevent="cancelResetPwd" class="btn btn-secondary cancel-reset-pwd-btn">{{ trans("Ceres::Template.generalCancel") }}</button>
+                    <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary cancel-reset-pwd-btn" data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.generalBackToLogin") }}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+
                     <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary send-reset-pwd-btn">
                         <i class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
                     </button>

@@ -18,6 +18,7 @@ Vue.component("login", {
         return {
             password: "",
             username: "",
+            loginFields: [],
             isDisabled: false,
             isPwdReset: false
         };
@@ -26,6 +27,24 @@ Vue.component("login", {
     created()
     {
         this.$options.template = this.template;
+    },
+
+    ready()
+    {
+        this.loginFields = $(".login-container").find(".input-unit");
+    },
+
+    watch:
+    {
+        password: function(val, oldVal)
+            {
+            this.resetError();
+        },
+
+        username: function(val, oldVal)
+            {
+            this.resetError();
+        }
     },
 
     methods: {
@@ -43,11 +62,11 @@ Vue.component("login", {
             {
                 ValidationService.validate($("#login-form-" + this._uid))
                     .done(() =>
-{
+                    {
                         this.sendLogin();
                     })
                     .fail(invalidFields =>
-{
+                    {
                         ValidationService.markInvalidFields(invalidFields, "error");
                     });
             }
@@ -58,12 +77,12 @@ Vue.component("login", {
             if (this.isPwdReset)
             {
                 ValidationService.validate($("#reset-pwd-form-" + this._uid))
-                    .done(data =>
-{
+                    .done(() =>
+                    {
                         this.sendResetPwd();
                     })
                     .fail(invalidFields =>
-{
+                    {
                         ValidationService.markInvalidFields(invalidFields, "error");
                     });
             }
@@ -107,10 +126,11 @@ Vue.component("login", {
                 {
                     this.isDisabled = false;
 
-                    switch (response.code)
+                    switch (response.error.code)
                     {
                     case 401:
-                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
+                        $(".error-msg-login").show();
+                        this.loginFields.addClass("has-login-error");
                         break;
                     default:
                         return;
@@ -133,7 +153,7 @@ Vue.component("login", {
                         ModalService.findModal(document.getElementById(this.modalElement)).hide();
                     }
 
-                    NotificationService.success("PwdReset").closeAfter(10000);
+                    NotificationService.success(Translations.Template.generalSendEmailOk).closeAfter(5000);
 
                     this.isDisabled = false;
 
@@ -143,22 +163,23 @@ Vue.component("login", {
                 .fail(() =>
                 {
                     this.isDisabled = false;
+
+                    NotificationService.error(Translations.Template.accResetPwDErrorOnSendEmail).closeAfter(5000);
                 });
         },
 
         showResetPwdView()
         {
-            const tooltip = "data-toggle=\"tooltip\" data-placement=\"right\" title=\"jknk\"";
-
+            this.resetError();
             this.isPwdReset = true;
 
             if (document.getElementById(this.modalElement) !== null)
             {
-                $(".modal-title").html(Translations.Template.accForgotPassword + " <i class=\"fa fa-question-circle-o\" aria-hidden=\"true\" " + tooltip + "></i>");
+                $(".login-modal .modal-title").html(Translations.Template.accForgotPassword);
             }
             else
             {
-                $(".login-view-title").html(Translations.Template.accForgotPassword + " <i class=\"fa fa-question-circle-o\" aria-hidden=\"true\" " + tooltip + "></i>");
+                $(".login-view-title").html(Translations.Template.accForgotPassword);
             }
 
             $(".login-container").slideUp("fast", function()
@@ -169,11 +190,12 @@ Vue.component("login", {
 
         cancelResetPwd()
         {
+            this.resetError();
             this.isPwdReset = false;
 
             if (document.getElementById(this.modalElement) !== null)
             {
-                $(".modal-title").text(Translations.Template.accLogin);
+                $(".login-modal .modal-title").text(Translations.Template.accLogin);
             }
             else
             {
@@ -184,6 +206,14 @@ Vue.component("login", {
             {
                 $(".login-container").slideDown("fast");
             });
+        },
+
+        resetError()
+        {
+            $(".error-msg-login").hide();
+            this.loginFields.removeClass("has-login-error");
+            ValidationService.unmarkAllFields($("#login-form-" + this._uid));
+            ValidationService.unmarkAllFields($("#reset-pwd-form-" + this._uid));
         }
     }
 });
