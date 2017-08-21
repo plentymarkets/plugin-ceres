@@ -1,3 +1,5 @@
+require("babel-polyfill");
+
 const JS_SRC = "./resources/js/src/";
 const JS_DIST = "./resources/js/dist/";
 const JS_LANG = "./resources/js/lang/";

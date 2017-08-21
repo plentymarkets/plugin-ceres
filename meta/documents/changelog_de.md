@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unknown)
+## v1.4.3 (beta)
 
 ### Hinzugefügt
 
@@ -9,10 +9,12 @@
 - Wenn der Browser beim Registrieren einen Weiterleitungslink hat, wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
 - Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neu geladen.
 - Im Kontaktformular gibt es eine Checkbox "Kopie an mich", um es dem Kunden zu ermöglichen, eine Kopie seiner Anfrage zu erhalten.
+- Der ScriptLoader-Container wurde an eine Position verschoben, an der alle von uns eingebundenen Frameworks vorhanden sind.
 
 ### Behoben
 
 - Sortierung nach neuste und älteste Artikel funktioniert nun korrekt.
+- Login zu MyAccount bietet keine Möglichkeit mehr, sich als Gast einzuloggen.
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 
 ## v1.4.2 (2017-08-16)
@@ -24,6 +26,7 @@
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
 - Ein Fehler, wenn kein Title-HTML-Tag vorhanden ist, wurde behoben.
 - Die Artikelnamen im Basket werden nun wieder in der richtigen Größe angezeigt.
+- Javascript-Fehler in älteren Browsern behoben.
 
 ## v1.4.1 (2017-08-11)
 
