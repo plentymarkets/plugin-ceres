@@ -8,7 +8,7 @@
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList1', itemLoaderPresets.lastSeenItemsList, {'items': lastSeenItemCount}).documents %}
 {% elseif listType == "cross_selling" %}
     {% set crossSellingRelation = config("Ceres.item.lists.1.cross_selling_type") %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList1', itemLoaderPresets.crossSellingItemsList, {'crossSellingItemId': 112, 'relation': crossSellingRelation}).documents %} %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList1', itemLoaderPresets.crossSellingItemsList, {'crossSellingItemId': item.documents[0].data.item.id, 'relation': crossSellingRelation}).documents %} %}
 {% elseif listType == "tag_list" %}
     {% set tagIds = config("Ceres.item.lists.1.tag_ids") | split(",") %}
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList1', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}

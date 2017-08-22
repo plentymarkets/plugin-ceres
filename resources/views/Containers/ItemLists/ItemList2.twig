@@ -7,8 +7,8 @@
     {% set lastSeenItemCount = config("Ceres.item.lists.2.last_seen_number") %}
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList2', itemLoaderPresets.lastSeenItemsList, {'items': lastSeenItemCount}).documents %}
 {% elseif listType == "cross_selling" %}
-    {% set CrossSellingRelation = config("Ceres.item.lists.2.cross_selling_type") %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList2', itemLoaderPresets.TODO, {'TODO': CrossSellingRelation}).documents %} %} %}
+    {% set crossSellingRelation = config("Ceres.item.lists.2.cross_selling_type") %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList2', itemLoaderPresets.crossSellingItemsList, {'crossSellingItemId': item.documents[0].data.item.id, 'relation': crossSellingRelation}).documents %} %} %}
 {% elseif listType == "tag_list" %}
     {% set tagIds = config("Ceres.item.lists.2.tag_ids") | split(",") %}
 	{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList2', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
@@ -32,7 +32,7 @@
             {% endif %}
         {% elseif listType == "cross_selling" %}
             {% if isNameEmpty %}
-                {{ trans("Ceres::Template.itemListX" ~ CrossSellingRelation) }}
+                {{ trans("Ceres::Template.itemListX" ~ crossSellingRelation) }}
             {% else %}
                 {{ config("Ceres.item.lists.2." ~ services.sessionStorage.getLang() ~ ".list_name") }}
             {% endif %}
