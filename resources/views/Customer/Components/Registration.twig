@@ -1,6 +1,13 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
 	<div class="row" id="registration${_uid}">
+
+        <div class="col-sm-12">
+            <div class="alert alert-info password-info">
+                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
+            </div>
+        </div>
+
         <div class="col-sm-12">
             <div class="input-unit" data-validate="mail">
                 <input type="text" name="email" id="txt_email" v-model="username">
@@ -19,13 +26,6 @@
             <div class="input-unit" id="passwordRepeatBox" data-validate="ref">
                 <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
                 <label for="txt_pwrepeat">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="alert alert-info password-info">
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
             </div>
         </div>
 

@@ -94,9 +94,9 @@ Vue.component("reset-password-form", {
 
                     this.isDisabled = false;
 
-                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
-
                     window.location.assign(window.location.origin);
+
+                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
 
                 })
                 .fail(() =>

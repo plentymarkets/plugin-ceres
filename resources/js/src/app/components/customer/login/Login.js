@@ -129,8 +129,8 @@ Vue.component("login", {
                     switch (response.error.code)
                     {
                     case 401:
-                        $(".error-msg-login").show();
                         this.loginFields.addClass("has-login-error");
+                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
                         break;
                     default:
                         return;
@@ -151,13 +151,17 @@ Vue.component("login", {
                     if (document.getElementById(this.modalElement) !== null)
                     {
                         ModalService.findModal(document.getElementById(this.modalElement)).hide();
+
+                        this.isDisabled = false;
+
+                        this.cancelResetPwd();
+                    }
+                    else
+                    {
+                        window.location.assign(window.location.origin);
                     }
 
                     NotificationService.success(Translations.Template.generalSendEmailOk).closeAfter(5000);
-
-                    this.isDisabled = false;
-
-                    this.cancelResetPwd();
 
                 })
                 .fail(() =>
@@ -210,7 +214,6 @@ Vue.component("login", {
 
         resetError()
         {
-            $(".error-msg-login").hide();
             this.loginFields.removeClass("has-login-error");
             ValidationService.unmarkAllFields($("#login-form-" + this._uid));
             ValidationService.unmarkAllFields($("#reset-pwd-form-" + this._uid));

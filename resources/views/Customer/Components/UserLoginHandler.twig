@@ -12,7 +12,7 @@
             </div>
         </div>
         <div v-resource-if:user="!isLoggedIn">
-            <a data-toggle="modal" href="#login" @click="unmarkInputFields()">
+            <a data-toggle="modal" href="{% if services.template.isCurrentTemplate("tpl.login") %}javascript:void(0){% else %}#login{% endif %}" @click="unmarkInputFields()">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span class="hidden-xs-down">{{ trans("Ceres::Template.accLogin") }}</span>
             </a>
