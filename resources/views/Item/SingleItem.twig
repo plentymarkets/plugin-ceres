@@ -22,8 +22,6 @@
 
 {% block PageBody %}
 
-    {{ services.lastSeen.setLastSeenMaxCount(config("Ceres.item.lists.last_seen_number")) }}
-
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Item.Components.AddToWishList" ) }}
@@ -289,7 +287,7 @@
         <!-- ./Container Lists -->
 
         <!-- Internal Item Lists -->
-        {% include "Ceres::ItemList.ItemListInternal" with { itemLists: itemListsArray } %}
+        {# {% include "Ceres::ItemList.ItemListInternal" with { itemLists: itemListArray } %} #}
         <!-- ./ Internal Item Lists -->
 
         {#<hr>#}
