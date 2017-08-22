@@ -15,6 +15,7 @@
 
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
 - Item-Listen geben nun das Bild mit der niedrigsten Position aus.
+- Der Title der Suchseite ist nun nicht mehr Fehlerhaft wenn man eine leere Eingabe sucht.
 
 ### Geändert
 
