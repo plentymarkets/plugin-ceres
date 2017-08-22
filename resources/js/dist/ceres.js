@@ -13855,7 +13855,6 @@ Vue.component("item-search", {
         search: function search() {
             if (document.location.pathname === "/search") {
                 ItemListService.setSearchString(this.itemSearch.query);
-                document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + this.itemSearch.query;
                 ItemListService.getItemList();
             } else {
                 window.open("/search?query=" + this.itemSearch.query, "_self", false);
@@ -16365,7 +16364,10 @@ module.exports = function ($) {
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
 
-        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
     }
 
     function setSearchString(query) {
@@ -16381,7 +16383,10 @@ module.exports = function ($) {
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
 
-        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
     }
 
     function setItemsPerPage(items) {
