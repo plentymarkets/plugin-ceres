@@ -284,7 +284,13 @@
         </div>
         <!-- ./ITEM DESCRIPTION -->
 
+        <!-- Container Lists -->
         {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
+        <!-- ./Container Lists -->
+
+        <!-- Internal Item Lists -->
+        {% include "Ceres::ItemList.ItemListInternal" with { itemLists: itemListsArray } %}
+        <!-- ./ Internal Item Lists -->
 
         {#<hr>#}
 
