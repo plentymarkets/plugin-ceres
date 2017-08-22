@@ -17695,7 +17695,7 @@ var init = (function($, window, document)
 
     window.CeresMain = new CeresMain();
 
-    console.log("Cache invalidated!");
+    console.log("Cache invalidated successfully!");
 
 })(jQuery, window, document);
 
