@@ -1,6 +1,29 @@
 .cmp-totals{
-	dl{
 
+
+	.totalSum {
+		clear: right;
+
+
+		dt{
+			width: 68%;
+			float:left;
+		}
+
+		dd{
+			float: right;
+		}
+	}
+
+	.vatTotals {
+		dt{
+			width: 68%;
+			float:left;
+		}
+
+		dd{
+			float: right;
+		}
 	}
 
 	dt, dd{
