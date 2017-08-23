@@ -1,6 +1,17 @@
 # Release Notes for Ceres
 
-## 1.4.3 (unknown)
+## v1.4.3 (unkown)
+
+### Fixed
+
+- Item list now gives out the picture with the lowest priority.
+- The title of the search page is now correct when an empty search input is carried out.
+
+### Changed
+
+- Item names in the wish list are shortened after four lines.
+
+## 1.4.2 (2017-08-23)
 
 ### Added
 
@@ -13,24 +24,15 @@
 
 ### Fixed
 
+- Sorting by newest and oldest items now works correctly.
+- MyAccount login does not offer login as guest anymore.
 - Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
-- Item list now gives out the picture with the lowest priority.
-- The title of the search page is now correct when an empty search input is carried out.
-
-## v1.4.2 (2017-08-16)
-
-### Fixed
-
 - Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
 - Fixed error with missing title HTML tag.
 - Item names in the basket are displayed in the right size.
 - Fixed Javascript errors in older browsers.
-
-### Changed
-
-- Item names in the wish list are shortened after four lines.
 
 ## v1.4.1 (2017-08-11)
 

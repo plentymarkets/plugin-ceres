@@ -1,6 +1,17 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unknown)
+## v1.4.3 (unkown)
+
+### Behoben
+
+- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
+- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
+
+### Geändert
+
+- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
+
+## v1.4.2 (2017-08-23)
 
 ### Hinzugefügt
 
@@ -13,13 +24,10 @@
 
 ### Behoben
 
+- Sortierung nach neusten und ältesten Artikeln funktioniert nun korrekt.
+- Login zu MyAccount bietet keine Möglichkeit mehr, sich als Gast einzuloggen.
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
-- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
-- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
 
-### Geändert
-
-- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
 
 ## v1.4.2 (2017-08-16)
 
