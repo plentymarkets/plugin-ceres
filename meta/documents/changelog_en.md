@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## 1.4.3 (unknown)
+## 1.4.2 (2017-08-16)
 
 ### Added
 
@@ -13,12 +13,9 @@
 
 ### Fixed
 
+- Sorting by newest and oldest items now works correctly.
+- MyAccount login does not offer login as guest anymore.
 - Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
-
-## v1.4.2 (2017-08-16)
-
-### Fixed
-
 - Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
