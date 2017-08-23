@@ -14,6 +14,8 @@
 ### Fixed
 
 - Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
+- Item list now gives out the picture with the lowest priority.
+- The title of the search page is now correct when an empty search input is carried out.
 
 ## v1.4.2 (2017-08-16)
 
