@@ -440,15 +440,22 @@
         "default"           : "true"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.show_last_seen",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.show_last_seen",
         "label"             : "Show last seen list",
         "type"              : "checkbox",
         "default"           : "false"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.last_seen_number",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.last_seen.position",
+        "label"             : "Last seen list position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.last_seen_number",
         "label"             : "Number of last seen items",
         "type"              : "dropdown",
         "possibleValues"    :
@@ -460,113 +467,148 @@
         "default"           : "4"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.last_seen.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.last_seen.de.name",
         "label"             : "Name of last seen (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.last_seen.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.last_seen.en.name",
         "label"             : "Name of last seen (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.show_tag_list",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.show_tag_list",
         "label"             : "Show tag list",
         "type"              : "checkbox",
         "default"           : "false"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.tag_ids",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.tag_list.position",
+        "label"             : "Tag list position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.tag_ids",
         "label"             : "List of IDs of tags to display in the tag list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.tag_list.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.tag_list.de.name",
         "label"             : "Name of tag list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.tag_list.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.tag_list.en.name",
         "label"             : "Name of tag list (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
     {
-        "tab"                                           : "Item lists (internal)",
-        "key"                                           : "item.lists.intern.show_cross_lists",
+        "tab"                                           : "Item lists (SingleItem)",
+        "key"                                           : "item.lists.single_item.show_cross_lists",
         "label"                                         : "Show cross-selling lists",
         "type"                                          : "multi_select",
         "possibleValues"                                :
         {
-            "item.lists.intern.cross.similar"           : "Similar",
-            "item.lists.intern.cross.accessory"         : "Accessory",
-            "item.lists.intern.cross.replacement"       : "Replacement part",
-            "item.lists.intern.cross.collection"        : "Collection"
+            "item.lists.single_item.cross.similar"           : "Similar",
+            "item.lists.single_item.cross.accessory"         : "Accessory",
+            "item.lists.single_item.cross.replacement"       : "Replacement part",
+            "item.lists.single_item.cross.collection"        : "Collection"
         },
         "default"                                       : ""
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.similar.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.similar.position",
+        "label"             : "Cross-selling list similar position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.similar.de.name",
         "label"             : "Name of cross-selling similar (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.similar.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.similar.en.name",
         "label"             : "Name of cross-selling similar (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.accessory.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.accessory.position",
+        "label"             : "Cross-selling list accessory position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.accessory.de.name",
         "label"             : "Name of cross-selling accessory (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.accessory.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.accessory.en.name",
         "label"             : "Name of cross-selling accessory (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.replacement.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.replacement.position",
+        "label"             : "Cross-selling list replacement part position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.replacement.de.name",
         "label"             : "Name of cross-selling replacement part (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.replacement.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.replacement.en.name",
         "label"             : "Name of cross-selling replacement part (EN)",
         "type"              : "text",
         "default"           : "EN name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.collection.de.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.collection.position",
+        "label"             : "Cross-selling list collection position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.collection.de.name",
         "label"             : "Name of cross-selling collection (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists (internal)",
-        "key"               : "item.lists.intern.cross.collection.en.name",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.cross.collection.en.name",
         "label"             : "Name of cross-selling collection (EN)",
         "type"              : "text",
         "default"           : "DE name"
