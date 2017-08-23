@@ -1,16 +1,19 @@
-Vue.filter("propertySurcharge", function(property)
+Vue.filter("propertySurcharge", function(properties, propertyId)
 {
+    const property = properties.find(prop => prop.property.id === propertyId);
 
-    if (property.surcharge > 0)
+    if (property)
     {
-        return property.surcharge;
+        if (property.surcharge > 0)
+        {
+            return property.surcharge;
 
-    }
-    else if (property.property.surcharge > 0)
-    {
-        return property.property.surcharge;
+        }
+        else if (property.property.surcharge > 0)
+        {
+            return property.property.surcharge;
+        }
     }
 
     return 0;
-
 });

@@ -1,0 +1,15 @@
+<script type="x/template" id="vue-order-properties">
+    <div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 m-y-1" v-for="property in item.properties">
+            <div v-if="property.property.isOderProperty" class="input-unit" data-validate="text">
+                <input type="text" name="title" id="txtTitle${_uid}" v-model="property.property.value">
+                <label for="txtTitle${_uid}">${property.property.names.name}
+                    <strong v-if="property.property.surcharge >= 0 && property.surcharge > 0">(+ ${ property.surcharge  | currency})</strong>
+                    <strong v-if="property.property.surcharge > 0 && property.surcharge === 0">(+ ${ property.property.surcharge  | currency})</strong>
+                    *</label>
+            </div>
+        </div>
+
+    </div>
+</script>

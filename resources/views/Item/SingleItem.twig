@@ -27,6 +27,7 @@
     {{ component( "Ceres::Item.Components.VariationSelect" ) }}
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Item.Components.AddToWishList" ) }}
+    {{ component( "Ceres::Item.Components.OrderProperties" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -118,7 +119,9 @@
                     {{ LayoutContainer.show("Ceres::SingleItem.BeforeAddToBasket", item.documents[0].data) }}
 
                     <add-to-basket template="#vue-add-to-basket" v-resource-if:currentVariation="documents[0].data.filter.isSalable" v-resource-push:item data-accessor="true"
-                                   resource="currentVariation" :show-quantity="true" :show-order-properties="true"></add-to-basket>
+                                   resource="currentVariation" :show-quantity="true"></add-to-basket>
+
+                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
 
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}

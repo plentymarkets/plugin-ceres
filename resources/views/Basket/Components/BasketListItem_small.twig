@@ -33,7 +33,7 @@
             ${ basketItem.quantity * basketItem.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
         <div class="item-order-param" v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>:
+            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge property.propertyId | currency })</strong>:
             <span>${property.value}</span>
         </div>
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
