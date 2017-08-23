@@ -468,14 +468,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.last_seen.de.name",
+        "key"               : "item.lists.single_item.LastSeenItemsList.de.name",
         "label"             : "Name of last seen (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.last_seen.en.name",
+        "key"               : "item.lists.single_item.LastSeenItemsList.en.name",
         "label"             : "Name of last seen (EN)",
         "type"              : "text",
         "default"           : "EN name"
@@ -503,14 +503,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.tag_list.de.name",
+        "key"               : "item.lists.single_item.TagItemsList.de.name",
         "label"             : "Name of tag list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.tag_list.en.name",
+        "key"               : "item.lists.single_item.TagItemsList.en.name",
         "label"             : "Name of tag list (EN)",
         "type"              : "text",
         "default"           : "EN name"
@@ -538,14 +538,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.similar.de.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.de.name",
         "label"             : "Name of cross-selling similar (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.similar.en.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.en.name",
         "label"             : "Name of cross-selling similar (EN)",
         "type"              : "text",
         "default"           : "EN name"
@@ -559,14 +559,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.accessory.de.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.de.name",
         "label"             : "Name of cross-selling accessory (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.accessory.en.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.en.name",
         "label"             : "Name of cross-selling accessory (EN)",
         "type"              : "text",
         "default"           : "EN name"
@@ -580,14 +580,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.replacement.de.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.de.name",
         "label"             : "Name of cross-selling replacement part (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.replacement.en.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.en.name",
         "label"             : "Name of cross-selling replacement part (EN)",
         "type"              : "text",
         "default"           : "EN name"
@@ -601,14 +601,14 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.collection.de.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.de.name",
         "label"             : "Name of cross-selling collection (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.collection.en.name",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.en.name",
         "label"             : "Name of cross-selling collection (EN)",
         "type"              : "text",
         "default"           : "DE name"
