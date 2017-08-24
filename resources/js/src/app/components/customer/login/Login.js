@@ -145,7 +145,7 @@ Vue.component("login", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", {email: this.username})
+            ApiService.post("/rest/io/customer/password_reset", {email: this.username, template: "Ceres::Customer.ResetPasswordMail"})
                 .done(() =>
                 {
                     if (document.getElementById(this.modalElement) !== null)
