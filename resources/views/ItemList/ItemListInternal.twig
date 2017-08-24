@@ -51,42 +51,10 @@
         <hr>
 
         <p class="h3">
-            {% if itemList == "LastSeenItemsList" %}
-                {% if isNameEmpty %}
-                    {{ trans("Ceres::Template.itemListLastSeen") }}
-                {% else %}
-                    {{ listName }}
-                {% endif %}
-            {% elseif itemList == "TagItemsList" %}
-                {% if isNameEmpty %}
-                    Tags
-                {% else %}
-                    {{ listName }}
-                {% endif %}
-            {% elseif itemList == "CrossSellingItemsListSimilar" %}
-                {% if isNameEmpty %}
-                    {{ trans("Ceres::Template.itemListXSimilar") }}
-                {% else %}
-                    {{ listName }}
-                {% endif %}
-            {% elseif listType == "CrossSellingItemsListAccessory" %}
-                {% if isNameEmpty %}
-                    {{ trans("Ceres::Template.itemListXAccessory") }}
-                {% else %}
-                    {{ listName }}
-                {% endif %}
-            {% elseif listType == "CrossSellingItemsListReplacement" %}
-                {% if isNameEmpty %}
-                    {{ trans("Ceres::Template.itemListXReplacementPart") }}
-                {% else %}
-                    {{ listName }}
-                {% endif %}
-            {% elseif listType == "CrossSellingItemsListCollection" %}
-                {% if isNameEmpty %}
-                    {{ trans("Ceres::Template.itemListXCollection") }}
-                {% else %}
-                    {{ listName }}
-                {% endif %}
+            {% if isNameEmpty %}
+                {{ trans("Ceres::Template.itemList" ~ itemList) }}
+            {% else %}
+                {{ listName }}
             {% endif %}
         </p>
 
