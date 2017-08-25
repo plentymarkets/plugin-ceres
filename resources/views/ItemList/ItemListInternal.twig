@@ -6,8 +6,8 @@
 {% for possibleList in item | keys %}
     {% if "List" in possibleList %}
         {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ "." ~ possibleList ~ ".position") %}
-        {% set ListToAdd = {(possibleList): pos} %}
-        {% set itemLists = itemLists | merge (ListToAdd) %}
+        {% set listToAdd = {(possibleList): pos} %}
+        {% set itemLists = itemLists | merge (listToAdd) %}
     {% endif %}
 {% endfor %}
 
