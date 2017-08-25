@@ -1,5 +1,12 @@
 # Release Notes for Ceres
 
+## v1.4.3 (2017-08-25)
+
+### Fixed
+
+- Fixed an error in MyAccount with the address select.
+- The Script.Loader container was set to his previous position.
+
 ## 1.4.2 (2017-08-23)
 
 ### Added
