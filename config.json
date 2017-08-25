@@ -448,7 +448,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.last_seen.position",
+        "key"               : "item.lists.single_item.LastSeenItemsList.position",
         "label"             : "Last seen list position",
         "type"              : "text",
         "default"           : "0"
@@ -489,7 +489,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.tag_list.position",
+        "key"               : "item.lists.single_item.TagItemsList.position",
         "label"             : "Tag list position",
         "type"              : "text",
         "default"           : "0"
@@ -531,7 +531,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.similar.position",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.position",
         "label"             : "Cross-selling list similar position",
         "type"              : "text",
         "default"           : "0"
@@ -552,7 +552,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.accessory.position",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.position",
         "label"             : "Cross-selling list accessory position",
         "type"              : "text",
         "default"           : "0"
@@ -573,7 +573,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.replacement.position",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.position",
         "label"             : "Cross-selling list replacement part position",
         "type"              : "text",
         "default"           : "0"
@@ -594,7 +594,7 @@
     },
     {
         "tab"               : "Item lists (SingleItem)",
-        "key"               : "item.lists.single_item.cross.collection.position",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.position",
         "label"             : "Cross-selling list collection position",
         "type"              : "text",
         "default"           : "0"

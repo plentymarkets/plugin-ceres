@@ -3,41 +3,13 @@
 
 {% set itemLists = {} %}
 
-{% if item.LastSeenItemsList %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".last_seen.position") %}
-    {% set LastSeenItemsList = {"LastSeenItemsList": pos} %}
-    {% set itemLists = itemLists | merge (LastSeenItemsList) %}
-{% endif %}
-
-{% if item.TagItemsList %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".tag_list.position") %}
-    {% set TagItemsList = {"TagItemsList": pos} %}
-    {% set itemLists = itemLists | merge (TagItemsList) %}
-{% endif %}
-
-{% if item.CrossSellingItemsListSimilar %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.similar.position") %}
-    {% set CrossSellingItemsListSimilar = {"CrossSellingItemsListSimilar": pos} %}
-    {% set itemLists = itemLists | merge (CrossSellingItemsListSimilar) %}
-{% endif %}
-
-{% if item.CrossSellingItemsListAccessory %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.accessory.position") %}
-    {% set CrossSellingItemsListAccessory = {"CrossSellingItemsListAccessory": pos} %}
-    {% set itemLists = itemLists | merge (CrossSellingItemsListAccessory) %}
-{% endif %}
-
-{% if item.CrossSellingItemsListReplacement %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.replacement.position") %}
-    {% set CrossSellingItemsListReplacement = {"CrossSellingItemsListReplacement": pos} %}
-    {% set itemLists = itemLists | merge (CrossSellingItemsListReplacement) %}
-{% endif %}
-
-{% if item.CrossSellingItemsListCollection %}
-    {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ ".cross.collection.position") %}
-    {% set CrossSellingItemsListCollection = {"CrossSellingItemsListCollection": pos} %}
-    {% set itemLists = itemLists | merge (CrossSellingItemsListCollection) %}
-{% endif %}
+{% for possibleList in item | keys %}
+    {% if "List" in possibleList %}
+        {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ "." ~ possibleList ~ ".position") %}
+        {% set ListToAdd = {(possibleList): pos} %}
+        {% set itemLists = itemLists | merge (ListToAdd) %}
+    {% endif %}
+{% endfor %}
 
 {% for itemList in itemLists | sort | keys %}
     
