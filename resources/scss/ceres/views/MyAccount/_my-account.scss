@@ -36,3 +36,14 @@
     width: 85%;
     margin: auto;
 }
+
+.current-payment-text
+{
+    border: 1px solid $gray-lighter;
+    border-radius: $border-radius;
+}
+
+.current-payment-width
+{
+    width: 100%!important;
+}
