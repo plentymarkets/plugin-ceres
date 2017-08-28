@@ -525,7 +525,8 @@
             "item.lists.single_item.cross.similar"           : "Similar",
             "item.lists.single_item.cross.accessory"         : "Accessory",
             "item.lists.single_item.cross.replacement"       : "Replacement part",
-            "item.lists.single_item.cross.collection"        : "Collection"
+            "item.lists.single_item.cross.collection"        : "Collection",
+            "item.lists.single_item.cross.dynamic"           : "Dynamic"
         },
         "default"                                       : ""
     },
@@ -614,6 +615,27 @@
         "default"           : "DE name"
     },
     {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.position",
+        "label"             : "Cross-selling list dynamic position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.de.name",
+        "label"             : "Name of cross-selling dynamic (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.en.name",
+        "label"             : "Name of cross-selling dynamic (EN)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
         "tab"       : "Item lists (container)",
         "key"       : "item.lists.1.list_type",
         "label"     : "First item list",
@@ -649,7 +671,8 @@
             "Similar"            : "Similar",
             "Accessory"          : "Accessory",
             "ReplacementPart"    : "Replacement part",
-            "Collection"         : "Collection"
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
         },
         "default"           : "Similar"
     },
@@ -710,7 +733,8 @@
             "Similar"            : "Similar",
             "Accessory"          : "Accessory",
             "ReplacementPart"    : "Replacement part",
-            "Collection"         : "Collection"
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
         },
         "default"           : "Similar"
     },
@@ -771,7 +795,8 @@
             "Similar"            : "Similar",
             "Accessory"          : "Accessory",
             "ReplacementPart"    : "Replacement part",
-            "Collection"         : "Collection"
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
         },
         "default"           : "Similar"
     },
