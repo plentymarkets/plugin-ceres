@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v1.4.3 (unkown)
+## v1.4.4 (beta)
 
 ### Fixed
 
@@ -10,6 +10,13 @@
 ### Changed
 
 - Item names in the wish list are shortened after four lines.
+
+## v1.4.3 (2017-08-25)
+
+### Fixed
+
+- Fixed an error in MyAccount with the address select.
+- The Script.Loader container was set to his previous position.
 
 ## 1.4.2 (2017-08-23)
 
