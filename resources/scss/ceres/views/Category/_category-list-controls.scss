@@ -26,10 +26,15 @@
   }
   .filter-toggle {
 
+    text-decoration: none;
+
+    & i {
+      transition: all .3s ease;
+    }
+
     &[aria-expanded="true"]{
       i {
         transform: rotate(-90deg);
-        transition: all .2s ease;
       }
     }
   }
