@@ -101,6 +101,9 @@
 	    line-height: 1;
 	    cursor: pointer;					
 		color: $gray-lighter;
+		text-decoration: none;
+		width: 114px;
+		text-align: left;
 
 		&:hover {
 			color:$brand-danger;
