@@ -32,7 +32,7 @@
 
     <body>
         <resource name="user" :data="{ isLoggedIn: {{ frontend.Account.getIsAccountLoggedIn | json_encode() }} }" ></resource>
-        <resource name="basket" route="/rest/io/basket/" :data="{{ services.basket.getBasketForTemplate() | json_encode() }}" :events="['AfterBasketChanged!basket']"></resource>
+        <resource name="basket" route="/rest/io/basket/" :data="{{ services.basket.getBasketForTemplate() | json_encode() }}" :events="['AfterBasketChanged!basket.totalVats']"></resource>
         <resource name="itemSearch" :data="{}"></resource>
         <resource name="basketItem" :data="{ currentBasketItem: { }, quantity: 1 }"></resource>
         <resource name="localization" :data="{{ services.localization.getLocalizationData() | json_encode() }}" :events="['LocalizationChanged!localization']"></resource>

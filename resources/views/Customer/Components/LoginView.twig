@@ -18,24 +18,26 @@
 
                 <hr>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <a class="btn btn-primary btn-block m-b-1" href="/register{% if backlink | trim is not empty %}?backlink={{ backlink }}{% endif %}">
+                    <div class="col-sm-{% if 'my-account' not in backlink %}6{% else %}12{% endif %}">
+                        <a class="btn btn-primary btn-block m-b-1" href="/register{% if backlink | trim is not empty %}?backlink={{ backlink | url_encode}}{% endif %}">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.accRegister") }}
                         </a>
                     </div>
 
-                    <div class="col-sm-6">
-                         <button v-if="isGuestMode" class="btn btn-primary btn-block m-b-1" @click="isGuestMode = !isGuestMode">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.accLogin") }}
-                        </button>
-
-                        <button v-else class="btn btn-primary btn-block m-b-1" @click="isGuestMode = !isGuestMode">
-                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.accOrderAsGuest") }}
-                        </button>
-                    </div>
+                    {% if "my-account" not in backlink %}
+                        <div class="col-sm-6">
+                            <button v-if="isGuestMode" class="btn btn-primary btn-block m-b-1" @click="isGuestMode = !isGuestMode">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.accLogin") }}
+                            </button>
+                            
+                            <button v-else class="btn btn-primary btn-block m-b-1" @click="isGuestMode = !isGuestMode">
+                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                {{ trans("Ceres::Template.accOrderAsGuest") }}
+                            </button>
+                        </div>
+                    {% endif %}
                 </div>
 
                 {{ LayoutContainer.show("Ceres::Login.AdditionalContentAfterButtons") }}

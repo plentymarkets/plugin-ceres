@@ -1,6 +1,24 @@
 # Release Notes for Ceres
 
-## 1.4.3 (unkown)
+## v1.4.4 (beta)
+
+### Fixed
+
+- Item list now gives out the picture with the lowest priority.
+- The title of the search page is now correct when an empty search input is carried out.
+
+### Changed
+
+- Item names in the wish list are shortened after four lines.
+
+## v1.4.3 (2017-08-25)
+
+### Fixed
+
+- Fixed an error in MyAccount with the address select.
+- The Script.Loader container was set to his previous position.
+
+## 1.4.2 (2017-08-23)
 
 ### Added
 
@@ -9,20 +27,19 @@
 - If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
 - If the user registers via pop-up, the page will be reloaded after successful registration.
 - A "Send me a copy" checkbox was added to the contact form to enable the customer to receive a copy of their message.
+- The ScriptLoader container has been moved to a position where all frameworks used by us are implemented.
 
 ### Fixed
 
+- Sorting by newest and oldest items now works correctly.
+- MyAccount login does not offer login as guest anymore.
 - Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
-
-## v1.4.2 (2017-08-16)
-
-### Fixed
-
 - Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
 - Untranslated categories are not displayed in the side navigation.
 - When opening an item page, the current category is displayed correctly.
 - Fixed error with missing title HTML tag.
 - Item names in the basket are displayed in the right size.
+- Fixed Javascript errors in older browsers.
 
 ## v1.4.1 (2017-08-11)
 

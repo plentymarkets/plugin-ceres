@@ -1,6 +1,24 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unknown)
+## v1.4.4 (beta)
+
+### Behoben
+
+- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
+- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
+
+### Geändert
+
+- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
+
+## v1.4.3 (2017-08-25)
+
+### Behoben
+
+- Im Bereich MyAccount wurde ein Fehler bei der Addressauswahl behoben.
+- Der Script.Loader Container wurde wieder an seine vorherige Position gesetzt.
+
+## v1.4.2 (2017-08-23)
 
 ### Hinzugefügt
 
@@ -9,20 +27,19 @@
 - Wenn der Browser beim Registrieren einen Weiterleitungslink hat, wird dieser nach erfolgreichem Registrieren geöffnet. Ansonsten wird auf die Startseite weitergeleitet.
 - Wenn der Benutzer sich über das Popup registriert, wird nach erfolgreichem Registrieren die Seite neu geladen.
 - Im Kontaktformular gibt es eine Checkbox "Kopie an mich", um es dem Kunden zu ermöglichen, eine Kopie seiner Anfrage zu erhalten.
+- Der ScriptLoader-Container wurde an eine Position verschoben, an der alle von uns eingebundenen Frameworks vorhanden sind.
 
 ### Behoben
 
+- Sortierung nach neusten und ältesten Artikeln funktioniert nun korrekt.
+- Login zu MyAccount bietet keine Möglichkeit mehr, sich als Gast einzuloggen.
 - In der Kategorie-Ansicht wurde bei Geräten der mittleren Größe die Margin des Headers und der Breadcrumbs falsch berechnet.
-
-## v1.4.2 (2017-08-16)
-
-### Behoben
-
 - Nicht übersetzte Kategorien werden nun von der mobilen Navigation ignoriert und verursachen keine JavaScript-Fehler mehr.
 - Nicht übersetzte Kategorien werden nun in der Seitennavigation nicht mehr ausgegeben.
 - Wenn eine Artikelseite geöffnet wird, wird die aktuelle Kategorie in der Seitennavigation nun korrekt angezeigt.
 - Ein Fehler, wenn kein Title-HTML-Tag vorhanden ist, wurde behoben.
 - Die Artikelnamen im Basket werden nun wieder in der richtigen Größe angezeigt.
+- Javascript-Fehler in älteren Browsern behoben.
 
 ## v1.4.1 (2017-08-11)
 

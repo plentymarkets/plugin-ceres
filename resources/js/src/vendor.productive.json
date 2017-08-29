@@ -1,4 +1,5 @@
 [
+  "node_modules/babel-polyfill/dist/polyfill.min.js",
   "node_modules/jquery/dist/jquery.min.js",
   "node_modules/jquery-lazyload/jquery.lazyload.js",
   "node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js",
