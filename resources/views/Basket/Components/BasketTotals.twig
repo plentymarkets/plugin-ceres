@@ -56,22 +56,26 @@
                 </dd>
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
-                <dt v-if="showProperty( 'basket.vat' )">
-                    {{ trans("Ceres::Template.basketVAT") }}
-                </dt><!--
-                --><dd v-if="showProperty( 'basket.vat' )">
-                    ${ basket.itemSum - basket.itemSumNet | currency }
-                </dd>
+                <div class="vatTotals" v-for="totalVat in basket.totalVats">
+                    <dt v-if="showProperty( 'basket.vat' )">
+                        {{ trans("Ceres::Template.basketVAT") }} ${ totalVat.vatValue }%
+                    </dt><!--
+                --> <dd v-if="showProperty( 'basket.vat' )">
+                        ${ totalVat.vatAmount | currency }
+                    </dd>
+                </div>
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
 
                 <hr v-if="showProperty( 'basket.vat' )">
 
-                <dt v-if="showProperty( 'basket.order_total_gross' )">
-                    <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
-                </dt><!--
-                --><dd v-if="showProperty( 'basket.order_total_gross' )">
-                    <strong>${ basket.basketAmount | currency }</strong>
-                </dd>
+                <div class="totalSum">
+                    <dt v-if="showProperty( 'basket.order_total_gross' )">
+                        <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
+                    </dt><!--
+                    --><dd v-if="showProperty( 'basket.order_total_gross' )">
+                        <strong>${ basket.basketAmount | currency }</strong>
+                    </dd>
+                </div>
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
             </dl>
         </div>

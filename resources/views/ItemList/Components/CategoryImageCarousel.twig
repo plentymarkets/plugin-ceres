@@ -13,7 +13,7 @@
     </div>
 
     <a v-else :href="itemUrl">
-        <item-lazy-img v-if="!disableLazyLoad" template="#vue-item-lazy-img" :image-url="imageUrls[0].url" :alt="altText"></item-lazy-img>
-        <img v-else class="img-fluid" :src="imageUrls[0].url" :alt="altText">
+        <item-lazy-img v-if="!disableLazyLoad" template="#vue-item-lazy-img" :image-url="imageUrls | itemImage" :alt="altText"></item-lazy-img>
+        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="altText">
     </a>
 </script>
