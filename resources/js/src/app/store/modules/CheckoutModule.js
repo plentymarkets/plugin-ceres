@@ -37,7 +37,7 @@ const mutations =
         {
             if (shippingCountryId)
             {
-                state.shipping.ShippingCountryId = shippingCountryId;
+                state.shipping.shippingCountryId = shippingCountryId;
             }
         },
 
