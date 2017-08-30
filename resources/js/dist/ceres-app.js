@@ -755,9 +755,11 @@ var ResourceService = require("services/ResourceService");
 
                     case "errorCode":
                         NotificationService.error(paymentValue);
+                        this.waiting = false;
                         break;
                     default:
                         NotificationService.error("Unknown response from payment provider: " + paymentType);
+                        this.waiting = false;
                         break;
                 }
             },
@@ -3144,7 +3146,6 @@ Vue.component("item-search", {
         search: function search() {
             if (document.location.pathname === "/search") {
                 ItemListService.setSearchString(this.itemSearch.query);
-                document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + this.itemSearch.query;
                 ItemListService.getItemList();
             } else {
                 window.open("/search?query=" + this.itemSearch.query, "_self", false);
@@ -5326,6 +5327,11 @@ function renderItems(currentCategory) {
         window.open(getScopeUrl(currentCategory), "_self");
     } else if (currentCategory.details.length) {
         _handleCurrentCategory(currentCategory);
+
+        document.dispatchEvent(new CustomEvent("afterCategoryChanged", { detail: {
+                currentCategory: currentCategory,
+                categoryTree: _categoryTree
+            } }));
     }
 }
 
@@ -5659,7 +5665,10 @@ module.exports = function ($) {
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
 
-        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
     }
 
     function setSearchString(query) {
@@ -5675,7 +5684,10 @@ module.exports = function ($) {
         query = query.length > 0 ? query : null;
         _UrlService2.default.setUrlParam("query", query);
 
-        document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
     }
 
     function setItemsPerPage(items) {
@@ -9851,14 +9863,9 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 						}
 					}
 
-<<<<<<< HEAD
-},{"services/ModalService":89,"services/ResourceService":91}],6:[function(require,module,exports){
-"use strict";
-=======
 					// Discard index placeholder values to get only actual matches
 					setMatched = condense( setMatched );
 				}
->>>>>>> stable
 
 				// Add matches to results
 				push.apply( results, setMatched );
@@ -9880,14 +9887,10 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 			return unmatched;
 		};
 
-<<<<<<< HEAD
-    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale"],
-=======
 	return bySet ?
 		markFunction( superMatcher ) :
 		superMatcher;
 }
->>>>>>> stable
 
 compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 	var i,
@@ -9981,16 +9984,11 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 						return results;
 					}
 
-<<<<<<< HEAD
-},{"exceptions/ExceptionMap":71,"services/NotificationService":90,"services/ResourceService":91}],7:[function(require,module,exports){
-"use strict";
-=======
 					break;
 				}
 			}
 		}
 	}
->>>>>>> stable
 
 	// Compile and execute a filtering function if one is not provided
 	// Provide `match` to avoid retokenization if we modified the selector above
@@ -10023,10 +10021,6 @@ support.sortDetached = assert(function( div1 ) {
 	return div1.compareDocumentPosition( document.createElement("div") ) & 1;
 });
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],8:[function(require,module,exports){
-"use strict";
-=======
 // Support: IE<8
 // Prevent attribute/property "interpolation"
 // http://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
@@ -10040,7 +10034,6 @@ if ( !assert(function( div ) {
 		}
 	});
 }
->>>>>>> stable
 
 // Support: IE<9
 // Use defaultValue in place of getAttribute("value")
@@ -10086,11 +10079,6 @@ jQuery.text = Sizzle.getText;
 jQuery.isXMLDoc = Sizzle.isXML;
 jQuery.contains = Sizzle.contains;
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],9:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 
 var dir = function( elem, dir, until ) {
@@ -10152,13 +10140,8 @@ function winnow( elements, qualifier, not ) {
 			return jQuery.filter( qualifier, elements, not );
 		}
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/NotificationService":90,"services/ResourceService":91}],10:[function(require,module,exports){
-"use strict";
-=======
 		qualifier = jQuery.filter( qualifier, elements );
 	}
->>>>>>> stable
 
 	return jQuery.grep( elements, function( elem ) {
 		return ( indexOf.call( qualifier, elem ) > -1 ) !== not;
@@ -10200,10 +10183,6 @@ jQuery.fn.extend( {
 			jQuery.find( selector, self[ i ], ret );
 		}
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],11:[function(require,module,exports){
-"use strict";
-=======
 		// Needed because $( selector, context ) becomes $( context ).find( selector )
 		ret = this.pushStack( len > 1 ? jQuery.unique( ret ) : ret );
 		ret.selector = this.selector ? this.selector + " " + selector : selector;
@@ -10218,7 +10197,6 @@ jQuery.fn.extend( {
 	is: function( selector ) {
 		return !!winnow(
 			this,
->>>>>>> stable
 
 			// If this is a positional/relative selector, check membership in the returned set
 			// so $("p:first").is("p:last") won't return true for a doc with two "p".
@@ -10274,10 +10252,6 @@ var rootjQuery,
 				if ( match[ 1 ] ) {
 					context = context instanceof jQuery ? context[ 0 ] : context;
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],12:[function(require,module,exports){
-"use strict";
-=======
 					// Option to run scripts is true for back-compat
 					// Intentionally let the error be thrown if parseHTML is not present
 					jQuery.merge( this, jQuery.parseHTML(
@@ -10285,7 +10259,6 @@ var rootjQuery,
 						context && context.nodeType ? context.ownerDocument || context : document,
 						true
 					) );
->>>>>>> stable
 
 					// HANDLE: $(html, props)
 					if ( rsingleTag.test( match[ 1 ] ) && jQuery.isPlainObject( context ) ) {
@@ -10359,13 +10332,8 @@ var rootjQuery,
 // Give the init function the jQuery prototype for later instantiation
 init.prototype = jQuery.fn;
 
-<<<<<<< HEAD
-},{"services/CategoryRendererService":85,"services/ResourceService":91}],13:[function(require,module,exports){
-"use strict";
-=======
 // Initialize central reference
 rootjQuery = jQuery( document );
->>>>>>> stable
 
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
@@ -10405,14 +10373,9 @@ jQuery.fn.extend( {
 		for ( ; i < l; i++ ) {
 			for ( cur = this[ i ]; cur && cur !== context; cur = cur.parentNode ) {
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],14:[function(require,module,exports){
-"use strict";
-=======
 				// Always skip document fragments
 				if ( cur.nodeType < 11 && ( pos ?
 					pos.index( cur ) > -1 :
->>>>>>> stable
 
 					// Don't pass non-elements to Sizzle
 					cur.nodeType === 1 &&
@@ -10531,15 +10494,10 @@ jQuery.each( {
 			}
 		}
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],15:[function(require,module,exports){
-"use strict";
-=======
 		return this.pushStack( matched );
 	};
 } );
 var rnotwhite = ( /\S+/g );
->>>>>>> stable
 
 
 
@@ -10616,22 +10574,9 @@ jQuery.Callbacks = function( options ) {
 				memory = queue.shift();
 				while ( ++firingIndex < list.length ) {
 
-<<<<<<< HEAD
-                    case "errorCode":
-                        NotificationService.error(paymentValue);
-                        this.waiting = false;
-                        break;
-                    default:
-                        NotificationService.error("Unknown response from payment provider: " + paymentType);
-                        this.waiting = false;
-                        break;
-                }
-            },
-=======
 					// Run callback and check for early termination
 					if ( list[ firingIndex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
 						options.stopOnFalse ) {
->>>>>>> stable
 
 						// Jump to end and forget the data so .add doesn't re-fire
 						firingIndex = list.length;
@@ -10647,13 +10592,8 @@ jQuery.Callbacks = function( options ) {
 
 			firing = false;
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/NotificationService":90,"services/ResourceService":91}],16:[function(require,module,exports){
-"use strict";
-=======
 			// Clean up if we're done firing for good
 			if ( locked ) {
->>>>>>> stable
 
 				// Keep an empty list if we have data for future add calls
 				if ( memory ) {
@@ -10716,10 +10656,6 @@ jQuery.Callbacks = function( options ) {
 				return this;
 			},
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],17:[function(require,module,exports){
-"use strict";
-=======
 			// Check if a given callback is in the list.
 			// If no argument is given, return whether or not list has callbacks attached.
 			has: function( fn ) {
@@ -10727,7 +10663,6 @@ jQuery.Callbacks = function( options ) {
 					jQuery.inArray( fn, list ) > -1 :
 					list.length > 0;
 			},
->>>>>>> stable
 
 			// Remove all callbacks from the list
 			empty: function() {
@@ -11243,14 +11178,9 @@ Data.prototype = {
 		var i, name, camel,
 			cache = owner[ this.expando ];
 
-<<<<<<< HEAD
-},{"services/AddressFieldService":82,"services/AddressService":83,"services/ApiService":84,"services/ModalService":89,"services/ResourceService":91,"services/ValidationService":93}],19:[function(require,module,exports){
-"use strict";
-=======
 		if ( cache === undefined ) {
 			return;
 		}
->>>>>>> stable
 
 		if ( key === undefined ) {
 			this.register( owner );
@@ -11494,14 +11424,9 @@ jQuery.fn.extend( {
 } );
 
 
-<<<<<<< HEAD
-},{"services/AddressService":83,"services/NotificationService":90,"services/ValidationService":93}],20:[function(require,module,exports){
-"use strict";
-=======
 jQuery.extend( {
 	queue: function( elem, type, data ) {
 		var queue;
->>>>>>> stable
 
 		if ( elem ) {
 			type = ( type || "fx" ) + "queue";
@@ -11601,10 +11526,6 @@ jQuery.fn.extend( {
 		return this.queue( type || "fx", [] );
 	},
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],21:[function(require,module,exports){
-"use strict";
-=======
 	// Get a promise resolved when queues of a certain type
 	// are emptied (fx is the type by default)
 	promise: function( type, obj ) {
@@ -11618,7 +11539,6 @@ jQuery.fn.extend( {
 					defer.resolveWith( elements, [ elements ] );
 				}
 			};
->>>>>>> stable
 
 		if ( typeof type !== "string" ) {
 			obj = type;
@@ -11674,13 +11594,8 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		// Trust units reported by jQuery.css
 		unit = unit || initialInUnit[ 3 ];
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],22:[function(require,module,exports){
-"use strict";
-=======
 		// Make sure we update the tween properties later on
 		valueParts = valueParts || [];
->>>>>>> stable
 
 		// Iteratively approximate from a nonzero starting point
 		initialInUnit = +initial || 1;
@@ -11765,15 +11680,10 @@ function getAll( context, tag ) {
 }
 
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/NotificationService":90,"services/ValidationService":93}],23:[function(require,module,exports){
-"use strict";
-=======
 // Mark scripts as having already been evaluated
 function setGlobalEval( elems, refElements ) {
 	var i = 0,
 		l = elems.length;
->>>>>>> stable
 
 	for ( ; i < l; i++ ) {
 		dataPriv.set(
@@ -11903,15 +11813,10 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 } )();
 
 
-<<<<<<< HEAD
-},{"services/CountryService":87,"services/ResourceService":91}],25:[function(require,module,exports){
-"use strict";
-=======
 var
 	rkeyEvent = /^key/,
 	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
 	rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
->>>>>>> stable
 
 function returnTrue() {
 	return true;
@@ -12029,17 +11934,12 @@ jQuery.event = {
 		if ( !( eventHandle = elemData.handle ) ) {
 			eventHandle = elemData.handle = function( e ) {
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ModalService":89,"services/NotificationService":90,"services/ValidationService":93}],26:[function(require,module,exports){
-"use strict";
-=======
 				// Discard the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
 				return typeof jQuery !== "undefined" && jQuery.event.triggered !== e.type ?
 					jQuery.event.dispatch.apply( elem, arguments ) : undefined;
 			};
 		}
->>>>>>> stable
 
 		// Handle multiple events separated by a space
 		types = ( types || "" ).match( rnotwhite ) || [ "" ];
@@ -12114,15 +12014,10 @@ jQuery.event = {
 	// Detach an event or set of events from an element
 	remove: function( elem, types, handler, selector, mappedTypes ) {
 
-<<<<<<< HEAD
-},{"services/AddressFieldService":82,"services/ResourceService":91}],27:[function(require,module,exports){
-"use strict";
-=======
 		var j, origCount, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
 			elemData = dataPriv.hasData( elem ) && dataPriv.get( elem );
->>>>>>> stable
 
 		if ( !elemData || !( events = elemData.events ) ) {
 			return;
@@ -12192,13 +12087,8 @@ jQuery.event = {
 
 	dispatch: function( event ) {
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ValidationService":93}],28:[function(require,module,exports){
-"use strict";
-=======
 		// Make a writable jQuery.Event from the native event object
 		event = jQuery.event.fix( event );
->>>>>>> stable
 
 		var i, j, ret, matched, handleObj,
 			handlerQueue = [],
@@ -12303,13 +12193,8 @@ jQuery.event = {
 			handlerQueue.push( { elem: this, handlers: handlers.slice( delegateCount ) } );
 		}
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ModalService":89,"services/NotificationService":90,"services/ValidationService":93}],29:[function(require,module,exports){
-"use strict";
-=======
 		return handlerQueue;
 	},
->>>>>>> stable
 
 	// Includes some event props shared by KeyEvent and MouseEvent
 	props: ( "altKey bubbles cancelable ctrlKey currentTarget detail eventPhase " +
@@ -12431,10 +12316,6 @@ jQuery.event = {
 		},
 		click: {
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ResourceService":91,"services/ValidationService":93}],31:[function(require,module,exports){
-"use strict";
-=======
 			// For checkbox, fire native event so checked state will be right
 			trigger: function() {
 				if ( this.type === "checkbox" && this.click && jQuery.nodeName( this, "input" ) ) {
@@ -12442,7 +12323,6 @@ jQuery.event = {
 					return false;
 				}
 			},
->>>>>>> stable
 
 			// For cross-browser consistency, don't fire native .click() on links
 			_default: function( event ) {
@@ -12493,15 +12373,10 @@ jQuery.Event = function( src, props ) {
 			returnTrue :
 			returnFalse;
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ResourceService":91}],32:[function(require,module,exports){
-"use strict";
-=======
 	// Event type
 	} else {
 		this.type = src;
 	}
->>>>>>> stable
 
 	// Put explicitly provided properties onto the event object
 	if ( props ) {
@@ -12660,22 +12535,6 @@ function manipulationTarget( elem, content ) {
 		elem;
 }
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],33:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template", "item"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],34:[function(require,module,exports){
-"use strict";
-=======
 // Replace/restore the type attribute of script elements for safe DOM manipulation
 function disableScript( elem ) {
 	elem.type = ( elem.getAttribute( "type" ) !== null ) + "/" + elem.type;
@@ -12683,7 +12542,6 @@ function disableScript( elem ) {
 }
 function restoreScript( elem ) {
 	var match = rscriptTypeMasked.exec( elem.type );
->>>>>>> stable
 
 	if ( match ) {
 		elem.type = match[ 1 ];
@@ -12789,13 +12647,8 @@ function domManip( collection, args, callback, ignored ) {
 				if ( i !== iNoClone ) {
 					node = jQuery.clone( node, true, true );
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],35:[function(require,module,exports){
-"use strict";
-=======
 					// Keep references to cloned scripts for later restoration
 					if ( hasScripts ) {
->>>>>>> stable
 
 						// Support: Android<4.1, PhantomJS<2
 						// push.apply(_, arraylike) throws on ancient WebKit
@@ -12965,10 +12818,6 @@ jQuery.fn.extend( {
 		}, null, value, arguments.length );
 	},
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ResourceService":91}],36:[function(require,module,exports){
-"use strict";
-=======
 	append: function() {
 		return domManip( this, arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
@@ -12977,7 +12826,6 @@ jQuery.fn.extend( {
 			}
 		} );
 	},
->>>>>>> stable
 
 	prepend: function() {
 		return domManip( this, arguments, function( elem ) {
@@ -13022,14 +12870,9 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-<<<<<<< HEAD
-},{}],37:[function(require,module,exports){
-"use strict";
-=======
 	clone: function( dataAndEvents, deepDataAndEvents ) {
 		dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
 		deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
->>>>>>> stable
 
 		return this.map( function() {
 			return jQuery.clone( this, dataAndEvents, deepDataAndEvents );
@@ -13063,12 +12906,7 @@ jQuery.fn.extend( {
 						}
 					}
 
-<<<<<<< HEAD
-},{}],38:[function(require,module,exports){
-"use strict";
-=======
 					elem = 0;
->>>>>>> stable
 
 				// If using innerHTML throws an exception, use the fallback method
 				} catch ( e ) {}
@@ -13099,10 +12937,6 @@ jQuery.fn.extend( {
 	}
 } );
 
-<<<<<<< HEAD
-},{}],39:[function(require,module,exports){
-"use strict";
-=======
 jQuery.each( {
 	appendTo: "append",
 	prependTo: "prepend",
@@ -13116,7 +12950,6 @@ jQuery.each( {
 			insert = jQuery( selector ),
 			last = insert.length - 1,
 			i = 0;
->>>>>>> stable
 
 		for ( ; i <= last; i++ ) {
 			elems = i === last ? this : this.clone( true );
@@ -13147,14 +12980,9 @@ var iframe,
  * @param {Object} doc Document object
  */
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91}],40:[function(require,module,exports){
-"use strict";
-=======
 // Called only from within defaultDisplay
 function actualDisplay( name, doc ) {
 	var elem = jQuery( doc.createElement( name ) ).appendTo( doc.body ),
->>>>>>> stable
 
 		display = jQuery.css( elem[ 0 ], "display" );
 
@@ -13211,14 +13039,9 @@ var getStyles = function( elem ) {
 		// FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
 		var view = elem.ownerDocument.defaultView;
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/UrlService":92}],41:[function(require,module,exports){
-"use strict";
-=======
 		if ( !view || !view.opener ) {
 			view = window;
 		}
->>>>>>> stable
 
 		return view.getComputedStyle( elem );
 	};
@@ -13258,23 +13081,11 @@ var documentElement = document.documentElement;
 		return;
 	}
 
-<<<<<<< HEAD
-    methods: {
-        search: function search() {
-            if (document.location.pathname === "/search") {
-                ItemListService.setSearchString(this.itemSearch.query);
-                ItemListService.getItemList();
-            } else {
-                window.open("/search?query=" + this.itemSearch.query, "_self", false);
-            }
-        },
-=======
 	// Support: IE9-11+
 	// Style of cloned element affects source element cloned (#8908)
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
 	support.clearCloneStyle = div.style.backgroundClip === "content-box";
->>>>>>> stable
 
 	container.style.cssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
 		"padding:0;margin-top:1px;position:absolute";
@@ -13307,13 +13118,8 @@ var documentElement = document.documentElement;
 		documentElement.removeChild( container );
 	}
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91,"services/UrlService":92}],42:[function(require,module,exports){
-"use strict";
-=======
 	jQuery.extend( support, {
 		pixelPosition: function() {
->>>>>>> stable
 
 			// This test is executed only once but we still do memoizing
 			// since we can use the boxSizingReliable pre-computing.
@@ -13381,13 +13187,8 @@ function curCSS( elem, name, computed ) {
 	var width, minWidth, maxWidth, ret,
 		style = elem.style;
 
-<<<<<<< HEAD
-},{"accounting":1,"services/ResourceService":91}],43:[function(require,module,exports){
-"use strict";
-=======
 	computed = computed || getStyles( elem );
 	ret = computed ? computed.getPropertyValue( name ) || computed[ name ] : undefined;
->>>>>>> stable
 
 	// Support: Opera 12.1x only
 	// Fall back to style even without computed
@@ -13452,12 +13253,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 }
 
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91,"services/UrlService":92}],44:[function(require,module,exports){
-"use strict";
-=======
 var
->>>>>>> stable
 
 	// Swappable if display is none or starts with table
 	// except "table", "table-cell", or "table-caption"
@@ -13530,16 +13326,11 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 				val -= jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
 			}
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91,"services/UrlService":92}],45:[function(require,module,exports){
-"use strict";
-=======
 			// At this point, extra isn't border nor margin, so remove border
 			if ( extra !== "margin" ) {
 				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
 			}
 		} else {
->>>>>>> stable
 
 			// At this point, extra isn't content, so add padding
 			val += jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
@@ -13573,15 +13364,10 @@ function getWidthOrHeight( elem, name, extra ) {
 			val = elem.style[ name ];
 		}
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91}],46:[function(require,module,exports){
-"use strict";
-=======
 		// Computed unit is not pixels. Stop here and return.
 		if ( rnumnonpx.test( val ) ) {
 			return val;
 		}
->>>>>>> stable
 
 		// Check for style in case a browser which returns unreliable values
 		// for getComputedStyle silently falls back to the reliable elem.style
@@ -13681,10 +13467,6 @@ jQuery.extend( {
 		}
 	},
 
-<<<<<<< HEAD
-},{"services/ResourceService":91,"services/UrlService":92}],47:[function(require,module,exports){
-"use strict";
-=======
 	// Don't automatically add "px" to these possibly-unitless properties
 	cssNumber: {
 		"animationIterationCount": true,
@@ -13701,7 +13483,6 @@ jQuery.extend( {
 		"zIndex": true,
 		"zoom": true
 	},
->>>>>>> stable
 
 	// Add in properties whose names you wish to fix before
 	// setting or getting the value
@@ -13750,16 +13531,11 @@ jQuery.extend( {
 				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
 			}
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91}],48:[function(require,module,exports){
-"use strict";
-=======
 			// Support: IE9-11+
 			// background-* props affect original clone's values
 			if ( !support.clearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
 				style[ name ] = "inherit";
 			}
->>>>>>> stable
 
 			// If a hook was provided, use that value, otherwise just set the specified value
 			if ( !hooks || !( "set" in hooks ) ||
@@ -13822,10 +13598,6 @@ jQuery.each( [ "height", "width" ], function( i, name ) {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ModalService":89,"services/NotificationService":90}],49:[function(require,module,exports){
-"use strict";
-=======
 				// Certain elements can have dimension info if we invisibly show them
 				// but it must have a current display style that would benefit
 				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
@@ -13836,7 +13608,6 @@ jQuery.each( [ "height", "width" ], function( i, name ) {
 						getWidthOrHeight( elem, name, extra );
 			}
 		},
->>>>>>> stable
 
 		set: function( elem, value, extra ) {
 			var matches,
@@ -14181,10 +13952,6 @@ function defaultPrefilter( elem, props, opts ) {
 		}
 	}
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ModalService":89,"services/NotificationService":90,"services/ValidationService":93}],50:[function(require,module,exports){
-"use strict";
-=======
 	if ( opts.overflow ) {
 		style.overflow = "hidden";
 		anim.always( function() {
@@ -14193,7 +13960,6 @@ function defaultPrefilter( elem, props, opts ) {
 			style.overflowY = opts.overflow[ 2 ];
 		} );
 	}
->>>>>>> stable
 
 	// show/hide pass
 	for ( prop in props ) {
@@ -14330,12 +14096,7 @@ function Animation( elem, properties, options ) {
 				animation.tweens[ index ].run( percent );
 			}
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ModalService":89}],51:[function(require,module,exports){
-"use strict";
-=======
 			deferred.notifyWith( elem, [ animation, percent, remaining ] );
->>>>>>> stable
 
 			if ( percent < 1 && length ) {
 				return remaining;
@@ -14461,10 +14222,6 @@ jQuery.Animation = jQuery.extend( Animation, {
 	}
 } );
 
-<<<<<<< HEAD
-},{"services/ApiService":84}],52:[function(require,module,exports){
-"use strict";
-=======
 jQuery.speed = function( speed, easing, fn ) {
 	var opt = speed && typeof speed === "object" ? jQuery.extend( {}, speed ) : {
 		complete: fn || !fn && easing ||
@@ -14472,7 +14229,6 @@ jQuery.speed = function( speed, easing, fn ) {
 		duration: speed,
 		easing: fn && easing || easing && !jQuery.isFunction( easing ) && easing
 	};
->>>>>>> stable
 
 	opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === "number" ?
 		opt.duration : opt.duration in jQuery.fx.speeds ?
@@ -14656,16 +14412,11 @@ jQuery.fx.tick = function() {
 	for ( ; i < timers.length; i++ ) {
 		timer = timers[ i ];
 
-<<<<<<< HEAD
-},{"services/CategoryRendererService":85,"services/ResourceService":91}],53:[function(require,module,exports){
-"use strict";
-=======
 		// Checks the timer has not already been removed
 		if ( !timer() && timers[ i ] === timer ) {
 			timers.splice( i--, 1 );
 		}
 	}
->>>>>>> stable
 
 	if ( !timers.length ) {
 		jQuery.fx.stop();
@@ -14734,15 +14485,10 @@ jQuery.fn.delay = function( time, type ) {
 	// Must access selectedIndex to make default options select
 	support.optSelected = opt.selected;
 
-<<<<<<< HEAD
-},{"exceptions/ExceptionMap":71,"services/NotificationService":90}],54:[function(require,module,exports){
-"use strict";
-=======
 	// Support: Android<=2.3
 	// Options inside disabled selects are incorrectly marked as disabled
 	select.disabled = true;
 	support.optDisabled = !opt.disabled;
->>>>>>> stable
 
 	// Support: IE<=11+
 	// An input loses its value after becoming a radio
@@ -14806,14 +14552,9 @@ jQuery.extend( {
 			return value;
 		}
 
-<<<<<<< HEAD
-},{"services/CheckoutService":86,"services/ResourceService":91}],55:[function(require,module,exports){
-"use strict";
-=======
 		if ( hooks && "get" in hooks && ( ret = hooks.get( elem, name ) ) !== null ) {
 			return ret;
 		}
->>>>>>> stable
 
 		ret = jQuery.find.attr( elem, name );
 
@@ -14859,15 +14600,10 @@ jQuery.extend( {
 	}
 } );
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],56:[function(require,module,exports){
-"use strict";
-=======
 // Hooks for boolean attributes
 boolHook = {
 	set: function( elem, value, name ) {
 		if ( value === false ) {
->>>>>>> stable
 
 			// Remove boolean attributes when set to false
 			jQuery.removeAttr( elem, name );
@@ -14907,17 +14643,12 @@ jQuery.fn.extend( {
 		return access( this, jQuery.prop, name, value, arguments.length > 1 );
 	},
 
-<<<<<<< HEAD
-},{"services/WaitScreenService":94}],57:[function(require,module,exports){
-"use strict";
-=======
 	removeProp: function( name ) {
 		return this.each( function() {
 			delete this[ jQuery.propFix[ name ] || name ];
 		} );
 	}
 } );
->>>>>>> stable
 
 jQuery.extend( {
 	prop: function( elem, name, value ) {
@@ -14978,10 +14709,6 @@ jQuery.extend( {
 	}
 } );
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/ResourceService":91}],58:[function(require,module,exports){
-"use strict";
-=======
 // Support: IE <=11 only
 // Accessing the selectedIndex property
 // forces the browser to respect setting selected
@@ -15001,7 +14728,6 @@ if ( !support.optSelected ) {
 			var parent = elem.parentNode;
 			if ( parent ) {
 				parent.selectedIndex;
->>>>>>> stable
 
 				if ( parent.parentNode ) {
 					parent.parentNode.selectedIndex;
@@ -15028,11 +14754,6 @@ jQuery.each( [
 
 
 
-<<<<<<< HEAD
-},{"services/ApiService":84}],59:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 var rclass = /[\t\r\n\f]/g;
 
@@ -15051,13 +14772,8 @@ jQuery.fn.extend( {
 			} );
 		}
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],60:[function(require,module,exports){
-"use strict";
-=======
 		if ( typeof value === "string" && value ) {
 			classes = value.match( rnotwhite ) || [];
->>>>>>> stable
 
 			while ( ( elem = this[ i++ ] ) ) {
 				curValue = getClass( elem );
@@ -15084,14 +14800,9 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],61:[function(require,module,exports){
-"use strict";
-=======
 	removeClass: function( value ) {
 		var classes, elem, cur, curValue, clazz, j, finalValue,
 			i = 0;
->>>>>>> stable
 
 		if ( jQuery.isFunction( value ) ) {
 			return this.each( function( j ) {
@@ -15109,14 +14820,9 @@ jQuery.fn.extend( {
 			while ( ( elem = this[ i++ ] ) ) {
 				curValue = getClass( elem );
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],62:[function(require,module,exports){
-"use strict";
-=======
 				// This expression is here for better compressibility (see addClass)
 				cur = elem.nodeType === 1 &&
 					( " " + curValue + " " ).replace( rclass, " " );
->>>>>>> stable
 
 				if ( cur ) {
 					j = 0;
@@ -15137,13 +14843,8 @@ jQuery.fn.extend( {
 			}
 		}
 
-<<<<<<< HEAD
-},{"services/CategoryRendererService":85}],63:[function(require,module,exports){
-"use strict";
-=======
 		return this;
 	},
->>>>>>> stable
 
 	toggleClass: function( value, stateVal ) {
 		var type = typeof value;
@@ -15190,10 +14891,6 @@ jQuery.fn.extend( {
 					dataPriv.set( this, "__className__", className );
 				}
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],64:[function(require,module,exports){
-"use strict";
-=======
 				// If the element has a class name or if we're passed `false`,
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
@@ -15208,7 +14905,6 @@ jQuery.fn.extend( {
 			}
 		} );
 	},
->>>>>>> stable
 
 	hasClass: function( selector ) {
 		var className, elem,
@@ -15255,13 +14951,8 @@ jQuery.fn.extend( {
 
 				return typeof ret === "string" ?
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],65:[function(require,module,exports){
-"use strict";
-=======
 					// Handle most common string cases
 					ret.replace( rreturn, "" ) :
->>>>>>> stable
 
 					// Handle cases where value is null/undef or number
 					ret == null ? "" : ret;
@@ -15292,16 +14983,11 @@ jQuery.fn.extend( {
 			} else if ( typeof val === "number" ) {
 				val += "";
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],66:[function(require,module,exports){
-"use strict";
-=======
 			} else if ( jQuery.isArray( val ) ) {
 				val = jQuery.map( val, function( value ) {
 					return value == null ? "" : value + "";
 				} );
 			}
->>>>>>> stable
 
 			hooks = jQuery.valHooks[ this.type ] || jQuery.valHooks[ this.nodeName.toLowerCase() ];
 
@@ -15345,13 +15031,8 @@ jQuery.extend( {
 				for ( ; i < max; i++ ) {
 					option = options[ i ];
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],67:[function(require,module,exports){
-"use strict";
-=======
 					// IE8-9 doesn't update selected after form reset (#2551)
 					if ( ( option.selected || i === index ) &&
->>>>>>> stable
 
 							// Don't return options that are disabled or in a disabled optgroup
 							( support.optDisabled ?
@@ -15367,15 +15048,10 @@ jQuery.extend( {
 							return value;
 						}
 
-<<<<<<< HEAD
-},{}],68:[function(require,module,exports){
-"use strict";
-=======
 						// Multi-Selects return an array
 						values.push( value );
 					}
 				}
->>>>>>> stable
 
 				return values;
 			},
@@ -15386,10 +15062,6 @@ jQuery.extend( {
 					values = jQuery.makeArray( value ),
 					i = options.length;
 
-<<<<<<< HEAD
-},{"services/CheckoutService":86}],69:[function(require,module,exports){
-"use strict";
-=======
 				while ( i-- ) {
 					option = options[ i ];
 					if ( option.selected =
@@ -15398,7 +15070,6 @@ jQuery.extend( {
 						optionSet = true;
 					}
 				}
->>>>>>> stable
 
 				// Force browsers to behave consistently when non-matching value is set
 				if ( !optionSet ) {
@@ -15426,61 +15097,36 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 	}
 } );
 
-<<<<<<< HEAD
-},{}],70:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 
 
 // Return jQuery for attributes-only inclusion
 
 
-<<<<<<< HEAD
-},{"services/ResourceService":91}],71:[function(require,module,exports){
-"use strict";
-=======
 var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/;
->>>>>>> stable
 
 jQuery.extend( jQuery.event, {
 
 	trigger: function( event, data, elem, onlyHandlers ) {
 
-<<<<<<< HEAD
-},{}],72:[function(require,module,exports){
-"use strict";
-=======
 		var i, cur, tmp, bubbleType, ontype, handle, special,
 			eventPath = [ elem || document ],
 			type = hasOwn.call( event, "type" ) ? event.type : event,
 			namespaces = hasOwn.call( event, "namespace" ) ? event.namespace.split( "." ) : [];
->>>>>>> stable
 
 		cur = tmp = elem = elem || document;
 
-<<<<<<< HEAD
-},{}],73:[function(require,module,exports){
-"use strict";
-=======
 		// Don't do events on text and comment nodes
 		if ( elem.nodeType === 3 || elem.nodeType === 8 ) {
 			return;
 		}
->>>>>>> stable
 
 		// focus/blur morphs to focusin/out; ensure we're not firing them right now
 		if ( rfocusMorph.test( type + jQuery.event.triggered ) ) {
 			return;
 		}
 
-<<<<<<< HEAD
-},{}],74:[function(require,module,exports){
-"use strict";
-=======
 		if ( type.indexOf( "." ) > -1 ) {
->>>>>>> stable
 
 			// Namespaced trigger; create a regexp to match event type in handle()
 			namespaces = type.split( "." );
@@ -15522,10 +15168,6 @@ jQuery.extend( jQuery.event, {
 		// Bubble up to document, then to window; watch for a global ownerDocument var (#9724)
 		if ( !onlyHandlers && !special.noBubble && !jQuery.isWindow( elem ) ) {
 
-<<<<<<< HEAD
-},{"accounting":1,"currency-symbol-map":2,"services/ResourceService":91}],75:[function(require,module,exports){
-"use strict";
-=======
 			bubbleType = special.delegateType || type;
 			if ( !rfocusMorph.test( bubbleType + type ) ) {
 				cur = cur.parentNode;
@@ -15534,7 +15176,6 @@ jQuery.extend( jQuery.event, {
 				eventPath.push( cur );
 				tmp = cur;
 			}
->>>>>>> stable
 
 			// Only add window if we got to document (e.g., not plain obj or detached DOM)
 			if ( tmp === ( elem.ownerDocument || document ) ) {
@@ -15708,16 +15349,11 @@ var rquery = ( /\?/ );
 
 
 
-<<<<<<< HEAD
-},{}],76:[function(require,module,exports){
-"use strict";
-=======
 // Support: Android 2.3
 // Workaround failure to string-cast null input
 jQuery.parseJSON = function( data ) {
 	return JSON.parse( data + "" );
 };
->>>>>>> stable
 
 
 // Cross-browser xml parsing
@@ -15740,11 +15376,6 @@ jQuery.parseXML = function( data ) {
 	return xml;
 };
 
-<<<<<<< HEAD
-},{}],77:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 var
 	rhash = /#.*$/,
@@ -15777,14 +15408,9 @@ var
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
 	allTypes = "*/".concat( "*" ),
 
-<<<<<<< HEAD
-},{}],78:[function(require,module,exports){
-"use strict";
-=======
 	// Anchor tag for parsing the document origin
 	originAnchor = document.createElement( "a" );
 	originAnchor.href = location.href;
->>>>>>> stable
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
@@ -15792,15 +15418,10 @@ function addToPrefiltersOrTransports( structure ) {
 	// dataTypeExpression is optional and defaults to "*"
 	return function( dataTypeExpression, func ) {
 
-<<<<<<< HEAD
-},{}],79:[function(require,module,exports){
-"use strict";
-=======
 		if ( typeof dataTypeExpression !== "string" ) {
 			func = dataTypeExpression;
 			dataTypeExpression = "*";
 		}
->>>>>>> stable
 
 		var dataType,
 			i = 0,
@@ -15828,23 +15449,6 @@ function addToPrefiltersOrTransports( structure ) {
 // Base inspection function for prefilters and transports
 function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {
 
-<<<<<<< HEAD
-},{}],80:[function(require,module,exports){
-"use strict";
-
-Vue.filter("propertySurcharge", function (properties, propertyId) {
-    var property = properties.find(function (prop) {
-        return prop.property.id === propertyId;
-    });
-
-    if (property) {
-        if (property.surcharge > 0) {
-            return property.surcharge;
-        } else if (property.property.surcharge > 0) {
-            return property.property.surcharge;
-        }
-    }
-=======
 	var inspected = {},
 		seekingTransport = ( structure === transports );
 
@@ -15865,22 +15469,16 @@ Vue.filter("propertySurcharge", function (properties, propertyId) {
 		} );
 		return selected;
 	}
->>>>>>> stable
 
 	return inspect( options.dataTypes[ 0 ] ) || !inspected[ "*" ] && inspect( "*" );
 }
 
-<<<<<<< HEAD
-},{}],81:[function(require,module,exports){
-"use strict";
-=======
 // A special extend for ajax options
 // that takes "flat" options (not to be deep extended)
 // Fixes #9887
 function ajaxExtend( target, src ) {
 	var key, deep,
 		flatOptions = jQuery.ajaxSettings.flatOptions || {};
->>>>>>> stable
 
 	for ( key in src ) {
 		if ( src[ key ] !== undefined ) {
@@ -15891,13 +15489,8 @@ function ajaxExtend( target, src ) {
 		jQuery.extend( true, target, deep );
 	}
 
-<<<<<<< HEAD
-},{}],82:[function(require,module,exports){
-"use strict";
-=======
 	return target;
 }
->>>>>>> stable
 
 /* Handles responses to an ajax request:
  * - finds the right dataType (mediates between content-type and expected dataType)
@@ -15977,13 +15570,8 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 	current = dataTypes.shift();
 
-<<<<<<< HEAD
-},{}],83:[function(require,module,exports){
-"use strict";
-=======
 	// Convert to each sequential dataType
 	while ( current ) {
->>>>>>> stable
 
 		if ( s.responseFields[ current ] ) {
 			jqXHR[ s.responseFields[ current ] ] = response;
@@ -16002,12 +15590,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		// There's only work to do if current dataType is non-auto
 			if ( current === "*" ) {
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/CheckoutService":86}],84:[function(require,module,exports){
-"use strict";
-=======
 				current = prev;
->>>>>>> stable
 
 			// Convert response if prev dataType is non-auto and differs from current
 			} else if ( prev !== "*" && prev !== current ) {
@@ -16149,13 +15732,8 @@ jQuery.extend( {
 	ajaxSetup: function( target, settings ) {
 		return settings ?
 
-<<<<<<< HEAD
-},{"services/NotificationService":90,"services/WaitScreenService":94}],85:[function(require,module,exports){
-"use strict";
-=======
 			// Building a settings object
 			ajaxExtend( ajaxExtend( target, jQuery.ajaxSettings ), settings ) :
->>>>>>> stable
 
 			// Extending ajaxSettings
 			ajaxExtend( jQuery.ajaxSettings, target );
@@ -16275,15 +15853,10 @@ jQuery.extend( {
 						if ( state < 2 ) {
 							for ( code in map ) {
 
-<<<<<<< HEAD
-},{"services/ItemListService":88,"services/ResourceService":91}],86:[function(require,module,exports){
-"use strict";
-=======
 								// Lazy-add the new callback in a way that preserves old ones
 								statusCode[ code ] = [ statusCode[ code ], map[ code ] ];
 							}
 						} else {
->>>>>>> stable
 
 							// Execute the appropriate callbacks
 							jqXHR.always( map[ jqXHR.status ] );
@@ -16365,13 +15938,8 @@ jQuery.extend( {
 			jQuery.event.trigger( "ajaxStart" );
 		}
 
-<<<<<<< HEAD
-},{"services/ApiService":84}],87:[function(require,module,exports){
-"use strict";
-=======
 		// Uppercase the type
 		s.type = s.type.toUpperCase();
->>>>>>> stable
 
 		// Determine if request has content
 		s.hasContent = !rnoContent.test( s.type );
@@ -16443,15 +16011,10 @@ jQuery.extend( {
 		// Aborting is no longer a cancellation
 		strAbort = "abort";
 
-<<<<<<< HEAD
-},{}],88:[function(require,module,exports){
-"use strict";
-=======
 		// Install callbacks on deferreds
 		for ( i in { success: 1, error: 1, complete: 1 } ) {
 			jqXHR[ i ]( s[ i ] );
 		}
->>>>>>> stable
 
 		// Get transport
 		transport = inspectPrefiltersOrTransports( transports, s, options, jqXHR );
@@ -16537,13 +16100,6 @@ jQuery.extend( {
 			// If successful, handle type chaining
 			if ( isSuccess ) {
 
-<<<<<<< HEAD
-        if (query) {
-            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
-            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
-        }
-    }
-=======
 				// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
 				if ( s.ifModified ) {
 					modified = jqXHR.getResponseHeader( "Last-Modified" );
@@ -16555,7 +16111,6 @@ jQuery.extend( {
 						jQuery.etag[ cacheURL ] = modified;
 					}
 				}
->>>>>>> stable
 
 				// if no content
 				if ( status === 204 || s.type === "HEAD" ) {
@@ -16584,17 +16139,9 @@ jQuery.extend( {
 				}
 			}
 
-<<<<<<< HEAD
-        if (query) {
-            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
-            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
-        }
-    }
-=======
 			// Set data for the fake xhr object
 			jqXHR.status = status;
 			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
->>>>>>> stable
 
 			// Success/Error
 			if ( isSuccess ) {
@@ -16658,11 +16205,6 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 	};
 } );
 
-<<<<<<< HEAD
-},{"services/ApiService":84,"services/NotificationService":90,"services/ResourceService":91,"services/UrlService":92}],89:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 jQuery._evalUrl = function( url ) {
 	return jQuery.ajax( {
@@ -16762,11 +16304,6 @@ jQuery.expr.filters.visible = function( elem ) {
 };
 
 
-<<<<<<< HEAD
-},{}],90:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 
 var r20 = /%20/g,
@@ -16956,14 +16493,9 @@ jQuery.ajaxTransport( function( options ) {
 							callback = errorCallback = xhr.onload =
 								xhr.onerror = xhr.onabort = xhr.onreadystatechange = null;
 
-<<<<<<< HEAD
-},{}],91:[function(require,module,exports){
-"use strict";
-=======
 							if ( type === "abort" ) {
 								xhr.abort();
 							} else if ( type === "error" ) {
->>>>>>> stable
 
 								// Support: IE9
 								// On a manual native abort, IE9 throws
@@ -17314,11 +16846,6 @@ jQuery.fn.load = function( url, params, callback ) {
 	return this;
 };
 
-<<<<<<< HEAD
-},{"services/ApiService":84}],92:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 
 
@@ -17380,15 +16907,10 @@ jQuery.offset = {
 			curTop = curPosition.top;
 			curLeft = curPosition.left;
 
-<<<<<<< HEAD
-},{"jquery":4}],93:[function(require,module,exports){
-"use strict";
-=======
 		} else {
 			curTop = parseFloat( curCSSTop ) || 0;
 			curLeft = parseFloat( curCSSLeft ) || 0;
 		}
->>>>>>> stable
 
 		if ( jQuery.isFunction( options ) ) {
 
@@ -17651,11 +17173,6 @@ if ( typeof define === "function" && define.amd ) {
 }
 
 
-<<<<<<< HEAD
-},{"jquery":4}],94:[function(require,module,exports){
-"use strict";
-=======
->>>>>>> stable
 
 var
 
@@ -17687,11 +17204,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-<<<<<<< HEAD
-},{}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,28,29,30,25,26,31,32,33,34,35,36,37,45,46,47,38,39,40,41,43,42,44,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,67,68,63,64,65,66,69,70,71,72,73,74,75,76,77,78,79,80,81])
-=======
 },{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,23,24,25,26,21,22,27,28,29,30,31,32,33,41,42,43,34,35,36,37,39,38,40,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,59,60,61,62,65,66,67,68,69,70,71,72,73,74,75,76,77])
->>>>>>> stable
 
 
 // Frontend end scripts
