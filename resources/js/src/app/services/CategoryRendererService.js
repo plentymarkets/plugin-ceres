@@ -25,6 +25,12 @@ export function renderItems(currentCategory)
     else if (currentCategory.details.length)
     {
         _handleCurrentCategory(currentCategory);
+
+        document.dispatchEvent(new CustomEvent("afterCategoryChanged", {detail:
+        {
+            currentCategory: currentCategory,
+            categoryTree: _categoryTree
+        }}));
     }
 }
 

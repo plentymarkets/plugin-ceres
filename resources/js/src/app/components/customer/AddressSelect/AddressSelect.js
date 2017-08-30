@@ -362,7 +362,7 @@ Vue.component("address-select", {
          */
         getCountryName(countryId)
         {
-            if (this.countryNameMap[countryId])
+            if (countryId > 0)
             {
                 return this.countryNameMap[countryId];
             }
