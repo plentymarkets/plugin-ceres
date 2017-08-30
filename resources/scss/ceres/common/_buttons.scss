@@ -83,17 +83,10 @@ button:focus {
 	@include button-outline-variant($btn-default-color);
 }
 
-
-// <button type="button" class="btn btn-labeled btn-success">
-//     <span class="btn-label">
-//         <i class="glyphicon glyphicon-ok"></i>
-//     </span>
-//     Success
-// </button>
-
-
-.btn-remove{
-
+.btn {
+	& > .fa {
+		float: right;
+	}
 }
 
 .btn-labeled {
