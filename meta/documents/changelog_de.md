@@ -8,6 +8,8 @@
 
 ### Behoben
 
+- Die Sortierung nach Preis funktioniert nun wie erwartet.
+
 ## v1.4.3 (2017-08-25)
 
 ### Behoben
