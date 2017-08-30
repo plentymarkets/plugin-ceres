@@ -2,21 +2,19 @@
 
 ## v1.4.4 (beta)
 
-### Fixed
-
-- Item list now gives out the picture with the lowest priority.
-- The title of the search page is now correct when an empty search input is carried out.
-
-### Changed
-
-- Item names in the wish list are shortened after four lines.
 
 ## v1.4.3 (2017-08-25)
 
 ### Fixed
 
+- The title of the search page is now correct when an empty search input is carried out.
+- Item list now gives out the picture with the lowest priority.
 - Fixed an error in MyAccount with the address select.
 - The Script.Loader container was set to his previous position.
+
+### Changed
+
+- Item names in the wish list are shortened after four lines.
 
 ## 1.4.2 (2017-08-23)
 

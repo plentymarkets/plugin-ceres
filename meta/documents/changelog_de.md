@@ -1,15 +1,15 @@
 # Release Notes für Ceres
 
-## v1.4.4 (beta)
+## v1.4.4 (2017-08-30)
+
+### Hinzugefügt
+
+- Wenn zwischen den Kategorien gewechselt wird, schmeißt Ceres ein Event mit dem Namen afterCategoryChanged, welches die aktuelle Kategorie, sowie alle Kategorien mitschickt.
+- Der Scripts.AfterScriptsLoaded Container wurde hinzugefügt. An dieser Stelle kann man z.B. eigene Vue Komponenten einfügen und auch alle anderen Frameworks die wir in Ceres einbinden benutzen.
 
 ### Behoben
 
-- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
-- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
-
-### Geändert
-
-- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
+- Die Sortierung nach Preis funktioniert nun wie erwartet.
 
 ## v1.4.3 (2017-08-25)
 
@@ -17,6 +17,10 @@
 
 - Im Bereich MyAccount wurde ein Fehler bei der Addressauswahl behoben.
 - Der Script.Loader Container wurde wieder an seine vorherige Position gesetzt.
+
+### Geändert
+
+- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
 
 ## v1.4.2 (2017-08-23)
 
