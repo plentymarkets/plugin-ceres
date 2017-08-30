@@ -1,15 +1,21 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unkown)
+## v1.4.4 (2017-08-30)
+
+### Hinzugefügt
+
+- Wenn zwischen den Kategorien gewechselt wird, schmeißt Ceres ein Event mit dem Namen afterCategoryChanged, welches die aktuelle Kategorie, sowie alle Kategorien mitschickt.
 
 ### Behoben
 
-- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
-- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
+- Die Sortierung nach Preis funktioniert nun wie erwartet.
 
-### Geändert
+## v1.4.3 (2017-08-25)
 
-- Artikelnamen in der Wunschliste werden nun nach vier Zeilen abgekürzt.
+### Behoben
+
+- Im Bereich MyAccount wurde ein Fehler bei der Addressauswahl behoben.
+- Der Script.Loader Container wurde wieder an seine vorherige Position gesetzt.
 
 ## v1.4.2 (2017-08-23)
 
