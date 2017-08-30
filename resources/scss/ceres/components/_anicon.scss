@@ -1,0 +1,110 @@
+.anicon {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    transition: 0.3s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 40px;
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;
+	
+    & > * {
+        display: block;
+	}
+	
+    &:hover,
+    &:focus {
+        outline: none;
+	}
+	
+    & > .anicon-search-item {
+        display: inline-block;
+        border-radius: 0;
+        transition: 0.3s;
+        background: transparent;
+        position: relative;
+        transform: rotateZ(225deg);
+        margin-bottom: 3px;
+		width: 18px;
+		
+        &:before {
+            display: inline-block;
+            height: 1px;
+            width: 15px;
+            border-radius: 2.85714px;
+            transition: 0.3s;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            background: #fff;
+		}
+		
+        &:after {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            transition: 0.3s;
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            background: #4D4F4D;
+            border: 1px solid #fff;
+            transform-origin: 50% 50%;
+        }
+	}
+	
+    &.anicon-search-xcross {
+        &[aria-expanded="false"] {
+            &:hover {
+                & > .anicon-search-item {
+                    &:after {
+                        background: $brand-primary;
+                    }
+                }
+            }
+		}
+		
+        &[aria-expanded="true"] {
+            & > .anicon-search-item {
+                width: 15px;
+				margin-left: 1px;
+				
+                &:before {
+                    border-radius: 2.85714px;
+                    background: #fff;
+				}
+				
+                &:after {
+                    border-radius: 2.85714px;
+                    background: #fff;
+                    height: 1px;
+                    width: 100%;
+                    top: 0;
+                    right: 0;
+                    border: 0;
+                    transform: rotate3d(0, 0, 1, 90deg);
+                }
+            }
+        }
+    }
+}

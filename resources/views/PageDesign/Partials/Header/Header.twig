@@ -34,13 +34,12 @@
                     </a>
                 </li>
                 <li class="list-inline-item control-search">
-                    <a class="" data-toggle="collapse" href="#searchBox"
-                       aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
-                       aria-controls="searchBox"
-                       data-parent="#controlsList">
-                        <i class="fa fa-search"></i>
-                        <i class="fa fa-close"></i>
-                        <span class="hidden-xs-down">{{ trans("Ceres::Template.generalSearchNoDot") }}</span>
+                    <a class="anicon anicon-search-xcross" aria-label="toggle search"
+                            data-toggle="collapse" href="#searchBox"
+                            aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
+                            aria-controls="searchBox"
+                            data-parent="#controlsList">
+                        <span class="anicon-search-item" aria-hidden="true"></span>
                     </a>
                 </li>
                 {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}

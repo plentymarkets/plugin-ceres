@@ -1,72 +1,65 @@
 .cmp-search-box {
-  background-color: $gray-darker;
-  padding: 0px 15px;
-
-  z-index: 1070;
-  position: fixed;
-  top: 30px;
-  right: 0;
-  left: 0;
-  width: 100%;
-
-  .search-box-inner {
-    display: flex;
-    flex-flow: row nowrap;
-    padding: 1rem 0em;
-
-    position: relative;
-    max-width: 1200px;
-    margin:0 auto;
-  }
-
-  .search-box-shadow-frame {
-    display: flex;
-    flex: 100;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  }
-
-  .search-input {
-    flex: 1 0 70%;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 1.3rem;
-    line-height: 1;
-    border: none;
-    padding: .4rem 1rem;
-    outline: none;
-  }
-
-  .search-submit {
-    display: inline-block;
-    vertical-align: top;
-    font-size: 1.3rem;
-    line-height: 1;
-    background: #ffffff;
-    padding: .4rem 1rem;
-    color: $brand-primary;
-    border: none;
-    transition: all 300ms;
-    outline: none;
-
-    &:hover{
-      color: darken($brand-primary, 20%);
+    background-color: $gray-darker;
+    padding: 0px 15px;
+    z-index: 1070;
+    position: fixed;
+    top: 30px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    .search-box-inner {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 1rem 0em;
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
     }
-  }
+    .search-box-shadow-frame {
+        display: flex;
+        flex: 100;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+    .search-input {
+        flex: 1 0 70%;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 1.3rem;
+        line-height: 1;
+        border: none;
+        padding: .4rem 1rem;
+        outline: none;
+    }
+    .search-submit {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 1.3rem;
+        line-height: 1;
+        background: #ffffff;
+        padding: .4rem 1rem;
+        color: $brand-primary;
+        border: none;
+        transition: all 300ms;
+        outline: none;
+        &:hover {
+            color: darken($brand-primary, 20%);
+        }
+    }
 }
 
 .autocomplete-suggestions {
-  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2),0 0 0 1px rgba(0,0,0,0.08);
-  background: #ffffff;
-  overflow: auto;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    overflow: auto;
 }
 
 .autocomplete-suggestion {
-  padding: 5px 15px;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
+    padding: 5px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .autocomplete-selected {
-  background: $gray-lighter;
+    background: $gray-lighter;
 }
