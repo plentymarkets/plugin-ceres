@@ -1,9 +1,5 @@
 .input-group{
 
-	.no-outline-button {
-		outline: none !important;
-	}
-
 	&.vert{
 		.input-group-btn{
 			display: block;
@@ -135,4 +131,8 @@ button:focus {
 			padding: $btn-padding-y-sm 0;
 		}
 	}
+}
+
+.no-outline-button {
+	outline: none !important;
 }
