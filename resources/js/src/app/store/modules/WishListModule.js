@@ -20,16 +20,12 @@ const mutations =
 
         removeWishListItem(state, wishListItem)
         {
-            const index = state.wishListItems.indexOf(wishListItem);
-
-            if (index >= 0)
-                state.wishListItems.splice(index, 1);
+            state.wishListItems = state.wishListItems.filter(item => item !== wishListItem);
         },
 
         removeWishListId(state, id)
         {
-            if (state.wishListIds.indexOf(id) >= 0)
-                state.wishListIds.splice(state.wishListIds.indexOf(id), 1);
+            state.wishListIds = state.wishListIds.filter(wishListId => wishListId !== id);
         },
 
         addWishListItemToIndex(state, wishListItem, index)
