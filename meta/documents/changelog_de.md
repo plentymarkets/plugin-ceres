@@ -5,7 +5,7 @@
 ### Hinzugefügt
 
 - Wenn zwischen den Kategorien gewechselt wird, schmeißt Ceres ein Event mit dem Namen afterCategoryChanged, welches die aktuelle Kategorie, sowie alle Kategorien mitschickt.
-- Der Scripts.AfterScriptsLoaded Container wurde hinzugefügt.
+- Der Scripts.AfterScriptsLoaded Container wurde hinzugefügt. An dieser Stelle kann man z.B. eigene Vue Komponenten einfügen und auch alle anderen Frameworks die wir in Ceres einbinden benutzen.
 
 ### Behoben
 
