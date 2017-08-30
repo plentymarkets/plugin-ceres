@@ -55,8 +55,8 @@
         },
         {
             "key"           : "Script.AfterScriptsLoaded",
-            "name"          : "Script loader: Register/load JS after the scripts from Ceres are loaded.",
-            "description"   : "Register scripts, events and other JS related items after the scripts from Ceres are loaded."
+            "name"          : "Script loader: After scripts loaded",
+            "description"   : "Load scripts, events and other JS related items, e.g. Vue components, after frameworks and scripts have been initialised."
         },
         {
             "key"           : "StaticPages.CancellationRights",
