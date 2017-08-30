@@ -1,3 +1,5 @@
+const NotificationService = require("services/NotificationService");
+
 Vue.component("wish-list", {
 
     props: [
@@ -35,6 +37,11 @@ Vue.component("wish-list", {
 
     methods:
     {
+        removeItem(item)
+        {
+            this.removeWishListItem(item)
+                .then(() => NotificationService.success(Translations.Template.itemWishListRemoved));
+        },
         ...Vuex.mapActions([
             "initWishListItems",
             "removeWishListItem"
