@@ -7,10 +7,13 @@
 - A feature was implemented so that customers can reset the password in the online store.
 - When switching categories the `afterCategoryChanged` event is triggered in Ceres which sends the current category as well as all categories.
 - The container `Script.AfterScriptsLoaded` container has been added. Using this container own Vue components can be added, for example and all other frameworks implemented in Ceres can be used.
+- When the customer chooses to change the payment method, the current payment method is displayed.
+- The customer gets a warning when he wants to switch to a payment method from which he cannot switch back anymore.
 
 ### Fixed
 
 - The sorting option by price now works correctly.
+- The variation selection dropdown in the single item view now also displays the attributes of the main variation.
 
 ### TODO
 
