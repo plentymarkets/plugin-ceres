@@ -4,18 +4,24 @@
 
 ### Hinzugefügt
 
-- Es wurde eine Funktion hinzugefügt, damit der Kunde sein Passwort zurücksetzen kann.
-- Wenn zwischen den Kategorien gewechselt wird, schmeißt Ceres ein Event mit dem Namen afterCategoryChanged, welches die aktuelle Kategorie, sowie alle Kategorien mitschickt.
-- Der Scripts.AfterScriptsLoaded Container wurde hinzugefügt. An dieser Stelle kann man z.B. eigene Vue Komponenten einfügen und auch alle anderen Frameworks die wir in Ceres einbinden benutzen.
+- Es wurde eine Funktion hinzugefügt, damit der Kunde das Passwort zurücksetzen kann.
+- Wenn zwischen den Kategorien gewechselt wird, wird in Ceres ein Event mit dem Namen `afterCategoryChanged` ausgelöst, welches die aktuelle Kategorie sowie alle Kategorien mitschickt.
+- Der Container `Script.AfterScriptsLoaded` wurde hinzugefügt. Mit diesem Container können z.B. eigene Vue-Komponenten eingefügt und auch alle anderen in Ceres eingebundenen Frameworks benutzt werden.
 
 ### Behoben
 
 - Die Sortierung nach Preis funktioniert nun wie erwartet.
 
+### TODO
+
+- Die Route `password-reset` muss in IO aktiviert werden, um die Funktion **Passwort vergessen** in Ceres zu nutzen.
+
 ## v1.4.3 (2017-08-25)
 
 ### Behoben
 
+- Der Titel der Suchseite wird nun korrekt angezeigt, wenn eine leere Suche ausgeführt wird.
+- In Artikellisten wird nun das Bild mit der niedrigsten Priorität ausgegeben.
 - Im Bereich MyAccount wurde ein Fehler bei der Addressauswahl behoben.
 - Der Script.Loader Container wurde wieder an seine vorherige Position gesetzt.
 

@@ -1,7 +1,20 @@
 # Release Notes for Ceres
 
-## v1.4.4 (beta)
+## v1.4.4 (2017-08-30)
 
+### Added
+
+- A feature was implemented so that customers can reset the password in the online store.
+- When switching categories the `afterCategoryChanged` event is triggered in Ceres which sends the current category as well as all categories.
+- The container `Script.AfterScriptsLoaded` container has been added. Using this container own Vue components can be added, for example and all other frameworks implemented in Ceres can be used.
+
+### Fixed
+
+- The sorting option by price now works correctly.
+
+### TODO
+
+- The `password-reset` route must be activated in IO in order to use the **Forgot your password?** feature in Ceres.
 
 ## v1.4.3 (2017-08-25)
 
