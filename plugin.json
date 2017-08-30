@@ -54,6 +54,11 @@
             "description"   : "Register scripts, events and other JS related items."
         },
         {
+            "key"           : "Script.AfterScriptsLoaded",
+            "name"          : "Script loader: Register/load JS after the scripts from Ceres are loaded.",
+            "description"   : "Register scripts, events and other JS related items after the scripts from Ceres are loaded."
+        },
+        {
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
             "description"   : "Add additional content on the cancellation rights page."

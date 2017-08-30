@@ -154,6 +154,8 @@
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
+        {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
+
         <script>
             vueApp = new Vue({
                 el: "body",
