@@ -20,8 +20,6 @@ Vue.component("item-list-sorting", {
                 "texts.name1_desc"                          : "itemName_desc",
                 "sorting.price.min_asc"                     : "itemPrice_asc",
                 "sorting.price.max_desc"                    : "itemPrice_desc",
-                "sorting.price.avg_asc"                     : "itemPriceAvg_asc",
-                "sorting.price.avg_desc"                    : "itemPriceAvg_desc",
                 "variation.createdAt_desc"                  : "variationCreateTimestamp_desc",
                 "variation.createdAt_asc"                   : "variationCreateTimestamp_asc",
                 "variation.availability.averageDays_asc"    : "availabilityAverageDays_asc",
