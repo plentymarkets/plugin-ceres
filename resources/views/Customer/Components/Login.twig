@@ -56,8 +56,8 @@
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </button>
 
-                    <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary send-reset-pwd-btn">
-                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
+                    <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium send-reset-pwd-btn">
+                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
                     </button>
                 </div>
             </div>

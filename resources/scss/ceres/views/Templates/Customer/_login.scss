@@ -30,12 +30,12 @@
       outline: none;
       width: 100%;
       margin-bottom: 10px;
+      height: 33px;
     }
 
     .send-reset-pwd-btn {
       display: block;
       outline: none;
-      width: 100%;
 
       i {
         vertical-align: middle;
@@ -54,7 +54,6 @@
 
       .send-reset-pwd-btn {
         display: inline-block;
-        width: auto;
       }
     }
   }
