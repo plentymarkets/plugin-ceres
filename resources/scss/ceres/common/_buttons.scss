@@ -87,6 +87,10 @@ button:focus {
 	& > .fa {
 		float: right;
 	}
+
+	&.btn-medium {
+		width: 10rem;
+	}
 }
 
 .btn-labeled {
