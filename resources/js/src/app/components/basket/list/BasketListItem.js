@@ -1,6 +1,4 @@
 var ResourceService       = require("services/ResourceService");
-// var ApiService          = require("services/ApiService");
-// var NotificationService = require("services/NotificationService");
 
 Vue.component("basket-list-item", {
 
@@ -15,6 +13,7 @@ Vue.component("basket-list-item", {
     {
         return {
             waiting: false,
+            waitForDelete: false,
             deleteConfirmed: false,
             deleteConfirmedTimeout: null,
             itemCondition: ""
@@ -48,6 +47,7 @@ Vue.component("basket-list-item", {
             }
             else
             {
+                this.waitForDelete = true;
                 this.waiting = true;
                 ResourceService
                     .getResource("basketItems")
@@ -55,6 +55,7 @@ Vue.component("basket-list-item", {
                     .fail(function()
                     {
                         self.resetDelete();
+                        self.waitForDelete = false;
                         self.waiting = false;
                     });
             }

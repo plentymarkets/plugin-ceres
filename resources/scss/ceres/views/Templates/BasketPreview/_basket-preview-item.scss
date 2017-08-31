@@ -105,6 +105,10 @@
 		width: 114px;
 		text-align: left;
 
+		& .btn-label {
+			background: transparent;
+		}
+
 		&:hover {
 			color:$brand-danger;
 			text-decoration: none;

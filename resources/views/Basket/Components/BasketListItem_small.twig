@@ -44,7 +44,7 @@
                 {{ trans("Ceres::Template.generalDeleteNow") }}
               </span>
             <span class="btn-label" @click.stop="resetDelete">
-                <i class="fa fa-times"></i>
+                <i v-waiting-animation="waitForDelete" class="fa fa-times"></i>
             </span>
         </button>
     </div>

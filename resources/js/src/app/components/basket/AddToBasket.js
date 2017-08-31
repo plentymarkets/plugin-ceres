@@ -17,7 +17,8 @@ Vue.component("add-to-basket", {
     {
         return {
             quantity: 1,
-            buttonLockState: false
+            buttonLockState: false,
+            waiting: false
         };
     },
 
@@ -42,6 +43,8 @@ Vue.component("add-to-basket", {
         {
             if (this.item.filter.isSalable)
             {
+                this.waiting = true;
+
                 const basketObject =
                     {
                         variationId             :   this.variationId,
@@ -52,6 +55,7 @@ Vue.component("add-to-basket", {
                 ResourceService.getResource("basketItems").push(basketObject)
                     .done(function()
                     {
+                        this.waiting = false;
                         this.openAddToBasketOverlay();
                     }
                     .bind(this))
