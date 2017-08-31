@@ -84,8 +84,13 @@ button:focus {
 }
 
 .btn {
+
 	& > .fa {
 		float: right;
+
+		&.default-float {
+			float: none;
+		}
 	}
 
 	&.btn-medium {
