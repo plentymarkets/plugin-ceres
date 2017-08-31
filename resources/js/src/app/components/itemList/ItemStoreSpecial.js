@@ -53,6 +53,7 @@ Vue.component("item-store-special", {
 
         getPercentageSale()
         {
+            // eslint-disable-next-line
             const percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");
