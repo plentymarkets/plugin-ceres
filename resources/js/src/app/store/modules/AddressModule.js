@@ -60,6 +60,36 @@ const mutations =
             {
                 state.deliveryAddressList.splice(index, 1);
             }
+        },
+
+        addBillingAddress(state, billingAddress, index)
+        {
+            if (billingAddress)
+            {
+                if (index)
+                {
+                    state.billingAddressList.splice(index, 0, billingAddress);
+                }
+                else
+                {
+                    state.billingAddressList.push(billingAddress);
+                }
+            }
+        },
+
+        addDeliveryAddress(state, deliveryAddress, index)
+        {
+            if (deliveryAddress)
+            {
+                if (index)
+                {
+                    state.deliveryAddressList.splice(index, 0, deliveryAddress);
+                }
+                else
+                {
+                    state.deliveryAddressList.push(deliveryAddress);
+                }
+            }
         }
     };
 
@@ -123,19 +153,23 @@ const actions =
             return new Promise();
         },
 
-        deleteBillingAddress({commit}, billingAddress)
+        deleteBillingAddress({commit, state}, billingAddress)
         {
             return new Promise((resolve, reject) =>
             {
+                // ADD when delete failed const index = state.billingAddressList.indexOf(billingAddress);
+
                 commit("removeBillingAddress", billingAddress);
                 resolve();
             });
         },
 
-        deleteDeliveryAddress({commit}, deliveryAddress)
+        deleteDeliveryAddress({commit, state}, deliveryAddress)
         {
             return new Promise((resolve, reject) =>
             {
+                // ADD when delete failed const index = state.deleteAddressList.indexOf(deliveryAddress);
+
                 commit("removeDeliveryAddress", deliveryAddress);
                 resolve();
             });
