@@ -83,6 +83,24 @@ const actions =
             commit("setShippingProfileList", checkout.shippingProfileList);
             commit("setMethodOfPayment", checkout.methodOfPaymentList.find(profile => profile.id === checkout.methodOfPaymentId));
             commit("setMethodOfPaymentList", checkout.methodOfPaymentList);
+        },
+
+        selectMethodOfPayment({commit}, methodOfPayment)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                commit("setMethodOfPayment", methodOfPayment);
+                resolve();
+            });
+        },
+
+        selectShippingProfile({commit}, shippingProfile)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                commit("setShippingProfile", shippingProfile);
+                resolve();
+            });
         }
     };
 
