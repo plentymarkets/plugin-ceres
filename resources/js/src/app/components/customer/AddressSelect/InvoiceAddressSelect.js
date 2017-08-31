@@ -25,6 +25,7 @@ Vue.component("invoice-address-select", {
     created()
     {
         ResourceService.bind("checkout", this);
+        this.$store.dispatch("setBillingAddress", {id: this.selectedAddressId, addressList: this.addressList});
 
         if (this.hasToValidate)
         {

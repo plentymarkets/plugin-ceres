@@ -55,6 +55,30 @@ const actions =
         {
             commit("setDeliveryAddressList", addressList);
             commit("setDeliveryAddressId", id);
+        },
+
+        setSelectedAddress({dispatch}, {selectedAddressId, addressType})
+        {
+            if (addressType === "1")
+            {
+                dispatch("setSelectedBillingAddressId", selectedAddressId);
+            }
+            else if (addressType === "2")
+            {
+                dispatch("setSelectedDeliveryAddressId", selectedAddressId);
+            }
+        },
+
+        setSelectedBillingAddressId({commit}, selectedAddressId)
+        {
+            // TODO add call to set address
+            commit("setBillingAddressId", selectedAddressId);
+        },
+
+        setSelectedDeliveryAddressId({commit}, selectedAddressId)
+        {
+            // TODO add call to set address
+            commit("setDeliveryAddressId", selectedAddressId);
         }
     };
 

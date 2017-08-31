@@ -41,6 +41,8 @@ Vue.component("shipping-address-select", {
             this.checkout.deliveryAddressId = -99;
             ResourceService.getResource("checkout").set(this.checkout);
         }
+
+        this.$store.dispatch("setDeliveryAddress", {id: this.selectedAddressId, addressList: this.addressList});
     },
 
     methods: {
