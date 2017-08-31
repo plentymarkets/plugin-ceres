@@ -48,13 +48,13 @@
 	}
 }
 
-
+.btn {
+	outline: 0 !important;
+}
 
 button:focus {
 	outline:none;
 }
-
-
 
 // button combinations 
 .btn-group.extended,
@@ -124,8 +124,4 @@ button:focus {
 			padding: $btn-padding-y-sm 0;
 		}
 	}
-}
-
-.no-outline-button {
-	outline: none !important;
 }
