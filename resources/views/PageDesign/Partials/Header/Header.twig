@@ -5,15 +5,12 @@
 {{ component( "Ceres::PageDesign.Components.ShopLanguageSelect" ) }}
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
+{{ component( "Ceres::WishList.Components.WishListCount" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
 <resource name="breadcrumbs" :data="{}"></resource>
-
-{% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
-    <resource name="wishListCount" :data="{ count: '{{ services.wishList.getCountedItemWishList() }}' }"></resource>
-{% endif %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -44,11 +41,7 @@
                 </li>
                 {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
                     <li class="list-inline-item control-wish-list">
-                        <a href="/wish-list">
-                            <span class="badge-right" v-resource-if:wishListCount="count > 0" v-resource-bind:wishListCount="count"></span>
-                            <i class="fa fa-heart" v-resource-if:wishListCount="count > 0" aria-hidden="true" style="display:none"></i>
-                            <i class="fa fa-heart-o" v-resource-if:wishListCount="count <= 0" aria-hidden="true"></i>
-                        </a>
+                        <wish-list-count :init-ids="{{ services.wishList.getItemWishList() | json_encode }}"></wish-list-count>
                     </li>
                 {% endif %}
                 <li class="list-inline-item control-basket">

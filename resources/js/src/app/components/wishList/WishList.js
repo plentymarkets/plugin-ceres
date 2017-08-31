@@ -1,80 +1,50 @@
-const ApiService      = require("services/ApiService");
-const ResourceService = require("services/ResourceService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("wish-list", {
 
     props: [
-        "template",
-        "wishListIds"
+        "template"
     ],
 
     data()
     {
         return {
-            wishListItems: [],
             isLoading: false,
             wishListCount: {}
         };
     },
 
+    computed: Vuex.mapState({
+        wishListItems: state => state.wishList.wishListItems,
+        wishListIds: state => state.wishList.wishListIds
+    }),
+
     created()
     {
         this.$options.template = this.template;
-    },
 
-    ready()
-    {
-        ResourceService.bind("wishListCount", this);
-
-        this.getWishListItems();
+        this.isLoading = true;
+        this.initWishListItems(this.wishListIds).then(
+            response =>
+            {
+                this.isLoading = false;
+            },
+            error =>
+            {
+                this.isLoading = false;
+            });
     },
 
     methods:
     {
-        removeWishListItem(wishListItem, index)
+        removeItem(item)
         {
-            ApiService.delete("/rest/io/itemWishList/" + wishListItem.data.variation.id)
-                .done(data =>
-                {
-                    // remove this in done to prevent no items in this list label to be shown
-                    this.wishListIds.splice(this.wishListIds.indexOf(wishListItem.data.variation.id), 1);
-                    this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
-
-                })
-                .fail(error =>
-                {
-                    this.wishListItems.splice(index, 0, wishListItem);
-                });
-
-            this.wishListItems.splice(index, 1);
+            this.removeWishListItem(item)
+                .then(() => NotificationService.success(Translations.Template.itemWishListRemoved));
         },
-
-        getWishListItems()
-        {
-            if (this.wishListIds[0])
-            {
-                this.isLoading = true;
-
-                ApiService.get("/rest/io/variations/", {variationIds: this.wishListIds, template: "Ceres::WishList.WishList"})
-                    .done(data =>
-                    {
-                        this.wishListItems = data.documents;
-
-                        this.isLoading = false;
-                    })
-                    .fail(() =>
-                    {
-                        this.isLoading = false;
-                    });
-            }
-        },
-
-        updateWatchListCount(count)
-        {
-            if (count >= 0)
-            {
-                ResourceService.getResource("wishListCount").set({count: count});
-            }
-        }
+        ...Vuex.mapActions([
+            "initWishListItems",
+            "removeWishListItem"
+        ])
     }
 });

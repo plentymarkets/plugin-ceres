@@ -1,22 +1,36 @@
 # Release Notes for Ceres
 
-## v1.4.4 (beta)
+## v1.4.4 (2017-08-30)
+
+### Added
+
+- A feature was implemented so that customers can reset the password in the online store.
+- When switching categories the `afterCategoryChanged` event is triggered in Ceres which sends the current category as well as all categories.
+- The container `Script.AfterScriptsLoaded` container has been added. Using this container own Vue components can be added, for example and all other frameworks implemented in Ceres can be used.
+- When the customer chooses to change the payment method, the current payment method is displayed.
+- The customer gets a warning when he wants to switch to a payment method from which he cannot switch back anymore.
 
 ### Fixed
 
-- Item list now gives out the picture with the lowest priority.
-- The title of the search page is now correct when an empty search input is carried out.
+- The sorting option by price now works correctly.
+- The variation selection dropdown in the single item view now also displays the attributes of the main variation.
 
-### Changed
+### TODO
 
-- Item names in the wish list are shortened after four lines.
+- The `password-reset` route must be activated in IO in order to use the **Forgot your password?** feature in Ceres.
 
 ## v1.4.3 (2017-08-25)
 
 ### Fixed
 
+- The title of the search page is now correct when an empty search input is carried out.
+- Item list now gives out the picture with the lowest priority.
 - Fixed an error in MyAccount with the address select.
 - The Script.Loader container was set to his previous position.
+
+### Changed
+
+- Item names in the wish list are shortened after four lines.
 
 ## 1.4.2 (2017-08-23)
 

@@ -1,5 +1,4 @@
-const ApiService      = require("services/ApiService");
-const ResourceService = require("services/ResourceService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-wish-list", {
 
@@ -24,8 +23,6 @@ Vue.component("add-to-wish-list", {
 
     ready()
     {
-        ResourceService.bind("wishListCount", this);
-
         this.changeTooltipText();
     },
 
@@ -48,18 +45,21 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                ApiService.post("/rest/io/itemWishList", {variationId: this.variationId})
-                    .done(() =>
-                    {
-                        this.isActive = true;
-                        this.isLoading = false;
-                        this.changeTooltipText();
-                        this.updateWatchListCount(parseInt(this.wishListCount.count) + 1);
-                    })
-                    .fail(() =>
-                    {
-                        this.isLoading = false;
-                    });
+                this.isActive = true;
+                this.changeTooltipText();
+
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(response =>
+                {
+                    this.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListAdded);
+                },
+                error =>
+                {
+                    this.isLoading = false;
+                    this.isActive = false;
+                    this.changeTooltipText();
+                });
             }
         },
 
@@ -68,34 +68,29 @@ Vue.component("add-to-wish-list", {
             if (!this.isLoading)
             {
                 this.isLoading = true;
-                ApiService.delete("/rest/io/itemWishList/" + this.variationId)
-                    .done(() =>
-                    {
-                        this.isActive = false;
-                        this.isLoading = false;
-                        this.changeTooltipText();
-                        this.updateWatchListCount(parseInt(this.wishListCount.count) - 1);
-                    })
-                    .fail(() =>
-                    {
-                        this.isLoading = false;
-                    });
+                this.isActive = false;
+                this.changeTooltipText();
+
+                this.$store.dispatch("removeWishListItem", {id: parseInt(this.variationId)}).then(response =>
+                {
+                    this.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListRemoved);
+                },
+                error =>
+                {
+                    this.isLoading = false;
+                    this.isActive = true;
+                    this.changeTooltipText();
+                });
             }
         },
 
         changeTooltipText()
         {
-            const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
+            const tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
 
             $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
-        },
-
-        updateWatchListCount(count)
-        {
-            if (count >= 0)
-            {
-                ResourceService.getResource("wishListCount").set({count: count});
-            }
         }
     }
 });

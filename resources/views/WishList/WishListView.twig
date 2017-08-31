@@ -1,7 +1,7 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <title>{{ trans("Ceres::Template.wishList") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.itemWishList") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -11,12 +11,12 @@
 
         <div class="row m-t-1">
             <div class="col-xs-12">
-                <h1 class="h2">{{ trans("Ceres::Template.wishList") }}</h1>
+                <h1 class="h2">{{ trans("Ceres::Template.itemWishList") }}</h1>
             </div>
         </div>
 
         <hr>
 
-         <wish-list template="#vue-wish-list" :wish-list-ids="{{ wishList | json_encode() }}"></wish-list>
+         <wish-list template="#vue-wish-list" :init-ids="{{ wishList | json_encode() }}"></wish-list>
     </div>
 {% endblock %}

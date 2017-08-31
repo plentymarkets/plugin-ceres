@@ -1,0 +1,49 @@
+.button-spacer {
+  margin-top: .5rem;
+}
+
+.cannot-change-payment
+{
+    font-size: 1rem;
+    padding: 5px;
+    cursor: default;
+    .info-badge
+    {
+        margin-left: .2rem;
+    }
+}
+
+.switchable-warning
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    margin-bottom: 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.warning-triangle
+{
+    margin: auto;
+    font-size: large;
+}
+
+.warning-text
+{
+    text-align: justify;
+    width: 85%;
+    margin: auto;
+}
+
+.current-payment-text
+{
+    border: 1px solid $gray-lighter;
+    border-radius: $border-radius;
+}
+
+.current-payment-width
+{
+    width: 100%!important;
+}
