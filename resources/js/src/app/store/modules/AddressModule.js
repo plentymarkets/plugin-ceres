@@ -40,6 +40,26 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddressId;
             }
+        },
+
+        removeBillingAddress(state, billingAddress)
+        {
+            const index = state.billingAddressList.indexOf(billingAddress);
+
+            if (index !== -1)
+            {
+                state.billingAddressList.splice(index, 1);
+            }
+        },
+
+        removeDeliveryAddress(state, deliveryAddress)
+        {
+            const index = state.deliveryAddressList.indexOf(deliveryAddress);
+
+            if (index !== -1)
+            {
+                state.deliveryAddressList.splice(index, 1);
+            }
         }
     };
 
@@ -57,28 +77,68 @@ const actions =
             commit("setDeliveryAddressId", id);
         },
 
-        setSelectedAddress({dispatch}, {selectedAddressId, addressType})
+        selectAddress({dispatch}, {selectedAddressId, addressType})
         {
             if (addressType === "1")
             {
-                dispatch("setSelectedBillingAddressId", selectedAddressId);
+                return dispatch("selectBillingAddress", selectedAddressId);
             }
             else if (addressType === "2")
             {
-                dispatch("setSelectedDeliveryAddressId", selectedAddressId);
+                return dispatch("selectDeliveryAddress", selectedAddressId);
             }
+
+            return new Promise();
         },
 
-        setSelectedBillingAddressId({commit}, selectedAddressId)
+        selectBillingAddress({commit}, selectedAddressId)
         {
-            // TODO add call to set address
-            commit("setBillingAddressId", selectedAddressId);
+            return new Promise((resolve, reject) =>
+            {
+                // TODO add call to set address
+                commit("setBillingAddressId", selectedAddressId);
+            });
         },
 
-        setSelectedDeliveryAddressId({commit}, selectedAddressId)
+        selectDeliveryAddress({commit}, selectedAddressId)
         {
-            // TODO add call to set address
-            commit("setDeliveryAddressId", selectedAddressId);
+            return new Promise((resolve, reject) =>
+            {
+                // TODO add call to set address
+                commit("setDeliveryAddressId", selectedAddressId);
+            });
+        },
+
+        deleteAddress({dispatch}, {address, addressType})
+        {
+            if (addressType === "1")
+            {
+                return dispatch("deleteBillingAddress", address);
+            }
+            else if (addressType === "2")
+            {
+                return dispatch("deleteDeliveryAddress", address);
+            }
+
+            return new Promise();
+        },
+
+        deleteBillingAddress({commit}, billingAddress)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                commit("removeBillingAddress", billingAddress);
+                resolve();
+            });
+        },
+
+        deleteDeliveryAddress({commit}, deliveryAddress)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                commit("removeDeliveryAddress", deliveryAddress);
+                resolve();
+            });
         }
     };
 
