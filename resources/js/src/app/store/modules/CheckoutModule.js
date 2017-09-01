@@ -1,4 +1,4 @@
-// import ApiService from "services/ApiService";
+import ApiService from "services/ApiService";
 
 const state =
     {
@@ -89,7 +89,16 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                commit("setMethodOfPayment", methodOfPayment);
+                ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPayment.id})
+                    .done(response =>
+                    {
+                        commit("setMethodOfPayment", methodOfPayment);
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        reject();
+                    });
                 resolve();
             });
         },
@@ -98,7 +107,16 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                commit("setShippingProfile", shippingProfile);
+                ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.id})
+                    .done(response =>
+                    {
+                        commit("setShippingProfile", shippingProfile);
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        reject();
+                    });
                 resolve();
             });
         }
