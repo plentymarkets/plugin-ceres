@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\resources",
-    "\\resources\\images"
+    "\\resources\\css",
+    "\\resources\\images",
+    "\\resources\\images\\homepage"
   ],
-  "SelectedNode": "\\resources\\images\\ceres-logo.svg",
+  "SelectedNode": "\\resources\\css\\ceres.min.css",
   "PreviewInSolutionExplorer": false
 }
