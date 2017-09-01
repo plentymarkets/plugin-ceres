@@ -160,14 +160,27 @@
 	    line-height: 1;
 	    color: $gray-lighter;
 	    cursor: pointer;
-		transition: color 250ms;
+		transition: all .2s;
+		text-decoration: none;
+
+		&.btn-link {
+			> .message {
+				margin-right: 5px;
+			}
+
+			> .btn-trans {
+				right: 0;
+			}
+		}
+
 		&:hover {
     		color: $brand-danger;
-    		text-decoration: none;
 		}
+
 		&.btn-danger:hover {
 			color:white;
 		}
+
 		&:focus {outline:none;}
 	}
 
