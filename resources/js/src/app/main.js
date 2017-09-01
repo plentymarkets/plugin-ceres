@@ -115,6 +115,12 @@ var init = (function($, window, document)
             $("#searchBox").collapse("hide");
         });
 
+        $("#accountMenuList").on("click", function()
+        {
+            $("#countrySettings").collapse("hide");
+            $("#searchBox").collapse("hide");
+        });
+
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();

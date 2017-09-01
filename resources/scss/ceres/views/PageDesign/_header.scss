@@ -53,19 +53,53 @@
 			//login | register
 			#login-change {
 				position:relative;
-				.dropdown-menu {
-					z-index: 2000;
-					a {
-						padding:1rem .8rem;
-						border:0;
-						border-top: 1px solid $gray-lighter;
-						display: block;
-						color: $brand-primary;
-						&:first-child {
-							border-top:0;
+
+				& > .dropdown {
+
+					& .dropdown-toggle {
+						transition: all .1s;
+	
+						&:after {
+							margin-left: 7px;
 						}
-						&:hover {
-							color: white;
+					}
+	
+					&.open {
+						& > .dropdown-toggle {
+							background-color: #282D2F;
+						}
+	
+						& .dropdown-menu {
+							max-height: 200px;
+						}
+					}
+	
+					.dropdown-menu {
+						z-index: 2000;
+						transition: all 0.3s;
+						max-height: 0;
+						display: block;
+						overflow: hidden;
+						border: none !important;
+
+						a {
+							padding:1rem .8rem;
+							border:0;
+							border-top: 1px solid $gray-lighter;
+							display: block;
+							color: #fff;
+							background-color: #282D2F;
+							&:hover {
+								color: $brand-primary;
+							}
+	
+							& > .fa-user {
+								margin-right: 5px;
+							}
+	
+							& > .fa-sign-out {
+								margin-right: 3px;
+							}
 						}
 					}
 				}
