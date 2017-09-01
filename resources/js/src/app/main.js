@@ -181,7 +181,7 @@ var init = (function($, window, document)
                 return false;
             });
 
-            $("#accountMenuList").on("click", function()
+            $("#accountMenuList").click(function()
             {
                 $("#countrySettings").collapse("hide");
                 $("#searchBox").collapse("hide");
