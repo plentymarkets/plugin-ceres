@@ -1,4 +1,4 @@
-// import ApiService from "services/ApiService";
+import ApiService from "services/ApiService";
 
 const state =
     {
@@ -139,41 +139,89 @@ const actions =
             });
         },
 
-        deleteAddress({dispatch}, {address, addressType})
-        {
-            if (addressType === "1")
-            {
-                return dispatch("deleteBillingAddress", address);
-            }
-            else if (addressType === "2")
-            {
-                return dispatch("deleteDeliveryAddress", address);
-            }
-
-            return new Promise();
-        },
-
-        deleteBillingAddress({commit, state}, billingAddress)
+        deleteAddress({dispatch, state, commit}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
-                // ADD when delete failed const index = state.billingAddressList.indexOf(billingAddress);
+                let addressIndex = -1;
 
-                commit("removeBillingAddress", billingAddress);
-                resolve();
+                if (addressType === "1")
+                {
+                    addressIndex = state.billingAddressList.indexOf(address);
+                    commit("removeBillingAddress", address);
+                }
+                else if (addressType === "2")
+                {
+                    addressIndex = state.deliveryAddressList.indexOf(address);
+                    commit("removeDeliveryAddress", address);
+                }
+
+                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType)
+                    .done(response =>
+                    {
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        if (addressType === "1")
+                        {
+                            commit("addBillingAddress", address, addressIndex);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("addDeliveryAddress", address, addressIndex);
+                        }
+                        reject();
+                    });
             });
         },
 
-        deleteDeliveryAddress({commit, state}, deliveryAddress)
+        ceateAddress({commit}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {
-                // ADD when delete failed const index = state.deleteAddressList.indexOf(deliveryAddress);
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true})
+                    .done(response =>
+                    {
+                        if (addressType === "1")
+                        {
+                            commit("addBillingAddress", address);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("addDeliveryAddress", address);
+                        }
 
-                commit("removeDeliveryAddress", deliveryAddress);
-                resolve();
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        reject();
+                    });
             });
         }
+
+        // deleteBillingAddress({commit, state}, billingAddress)
+        // {
+        //     return new Promise((resolve, reject) =>
+        //     {
+        //         // ADD when delete failed const index = state.billingAddressList.indexOf(billingAddress);
+
+        //         commit("removeBillingAddress", billingAddress);
+        //         resolve();
+        //     });
+        // },
+
+        // deleteDeliveryAddress({commit, state}, deliveryAddress)
+        // {
+        //     return new Promise((resolve, reject) =>
+        //     {
+        //         // ADD when delete failed const index = state.deleteAddressList.indexOf(deliveryAddress);
+
+        //         commit("removeDeliveryAddress", deliveryAddress);
+        //         resolve();
+        //     });
+        // }
     };
 
 const getters =
