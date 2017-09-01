@@ -90,6 +90,24 @@ const mutations =
                     state.deliveryAddressList.push(deliveryAddress);
                 }
             }
+        },
+
+        updateBillingAddress(state, billingAddress)
+        {
+            if (billingAddress)
+            {
+                addressToUpdate = state.billingAddressList.find(entry => entry.id === billingAddress.id);
+                addressToUpdate = billingAddress;
+            }
+        },
+
+        updateDeliveryAddress(state, deliveryAddress)
+        {
+            if (deliveryAddress)
+            {
+                addressToUpdate = state.deliveryAddressList.find(entry => entry.id === deliveryAddress.id);
+                addressToUpdate = deliveryAddress;
+            }
         }
     };
 
@@ -199,29 +217,32 @@ const actions =
                         reject();
                     });
             });
+        },
+
+        updateAddress({commit}, {address, addressType})
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, {supressNotifications: true})
+                    .done(response =>
+                    {
+                        if (addressType === "1")
+                        {
+                            commit("updateBillingAddress", address);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("updateDeliveryAddress", address);
+                        }
+
+                        resolve();
+                    })
+                    .fail(error =>
+                    {
+                        reject();
+                    });
+            });
         }
-
-        // deleteBillingAddress({commit, state}, billingAddress)
-        // {
-        //     return new Promise((resolve, reject) =>
-        //     {
-        //         // ADD when delete failed const index = state.billingAddressList.indexOf(billingAddress);
-
-        //         commit("removeBillingAddress", billingAddress);
-        //         resolve();
-        //     });
-        // },
-
-        // deleteDeliveryAddress({commit, state}, deliveryAddress)
-        // {
-        //     return new Promise((resolve, reject) =>
-        //     {
-        //         // ADD when delete failed const index = state.deleteAddressList.indexOf(deliveryAddress);
-
-        //         commit("removeDeliveryAddress", deliveryAddress);
-        //         resolve();
-        //     });
-        // }
     };
 
 const getters =
