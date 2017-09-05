@@ -81,6 +81,11 @@ const mutations =
         setShippingProfileValidator(state, shippingProfileValidator)
         {
             state.validation.shippingProfile.validate = shippingProfileValidator;
+        },
+
+        setGtcValidator(state, gtcValidator)
+        {
+            state.validation.gtc.validate = gtcValidator;
         }
     };
 
