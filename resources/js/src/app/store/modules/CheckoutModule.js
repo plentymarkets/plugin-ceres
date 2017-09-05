@@ -76,6 +76,11 @@ const mutations =
         setPaymentProviderValidator(state, paymentProviderValidator)
         {
             state.validation.paymentProvider.validate = paymentProviderValidator;
+        },
+
+        setShippingProfileValidator(state, shippingProfileValidator)
+        {
+            state.validation.shippingProfile.validate = shippingProfileValidator;
         }
     };
 
