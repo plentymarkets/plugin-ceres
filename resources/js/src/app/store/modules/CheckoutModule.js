@@ -71,6 +71,11 @@ const mutations =
             {
                 state.payment.methodOfPaymentList = methodOfPaymentList;
             }
+        },
+
+        setPaymentProviderValidator(state, paymentProviderValidator)
+        {
+            state.validation.paymentProvider.validate = paymentProviderValidator;
         }
     };
 
@@ -81,11 +86,11 @@ const actions =
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileList.find(profile => profile.parcelServicePresetId === checkout.shippingProfileId));
             commit("setShippingProfileList", checkout.shippingProfileList);
-            commit("setMethodOfPayment", checkout.methodOfPaymentList.find(profile => profile.id === checkout.methodOfPaymentId));
-            commit("setMethodOfPaymentList", checkout.methodOfPaymentList);
+            commit("setMethodOfPayment", checkout.paymentDataList.find(profile => profile.id === checkout.methodOfPaymentId));
+            commit("setMethodOfPaymentList", checkout.paymentDataList);
         },
 
-        selectMethodOfPayment({commit}, methodOfPayment)
+        selectMethodOfPayment({commit, dispatch}, methodOfPayment)
         {
             return new Promise((resolve, reject) =>
             {
@@ -103,7 +108,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({commit}, shippingProfile)
+        selectShippingProfile({commit, dispatch}, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {

@@ -1,14 +1,14 @@
 <script type="x/template" id="vue-payment-provider-select">
-    <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.checkoutValidation.paymentProvider.showError }">
+    <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.showError }">
         <ul class="method-list">
-            <li v-for="paymentProvider in checkout.paymentDataList" class="method-list-item" data-id="${paymentProvider.id}">
+            <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" data-id="${paymentProvider.id}">
                 <input
                         type="radio"
                         id="paymentMethod${ _uid }${ paymentProvider.id }"
                         name="MethodOfPaymentID"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange()"
-                        v-model="checkout.methodOfPaymentId"
+                        v-model="methodOfPaymentId"
                 >
                 <label for="paymentMethod${ _uid }${ paymentProvider.id }">
                     <div class="icon">
