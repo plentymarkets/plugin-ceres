@@ -1,8 +1,17 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("invoice-address-select", {
 
-    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError' :country-name-map=\"countryNameMap\"></address-select>",
+    template: `
+        <address-select 
+            v-ref:invoice-address-select
+            template="#vue-address-select"
+            v-on:address-changed="addressChanged"
+            address-type="1"
+            :address-list="addressList"
+            :selected-address-id="selectedAddressId"
+            :show-error='showError'
+            :country-name-map="countryNameMap">
+        </address-select>
+    `,
 
     props: [
         "addressList",
@@ -11,27 +20,21 @@ Vue.component("invoice-address-select", {
         "countryNameMap"
     ],
 
-    data()
-    {
-        return {
-            checkout: {},
-            checkoutValidation: {invoiceAddress: {}}
-        };
-    },
+    computed: Vuex.mapState({
+        billingAddressId: state => state.address.billingAddressId,
+        showError: state => state.checkout.validation.invoiceAddress.showError
+    }),
 
     /**
      * Initialise the event listener
      */
     created()
     {
-        ResourceService.bind("checkout", this);
         this.$store.dispatch("setBillingAddress", {id: this.selectedAddressId, addressList: this.addressList});
 
         if (this.hasToValidate)
         {
-            ResourceService.bind("checkoutValidation", this);
-
-            this.checkoutValidation.invoiceAddress.validate = this.validate;
+            this.$store.commit("setInvoiceAddressValidator", this.validate);
         }
     },
 
@@ -58,13 +61,15 @@ Vue.component("invoice-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.checkout.billingAddressId = selectedAddress.id;
-
-            ResourceService.getResource("checkout")
-                .set(this.checkout)
-                .done(() =>
+            this.$store.dispatch("selectBillingAddress", selectedAddress.id)
+                .then(
+                response =>
                 {
-                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {detail: this.checkout.billingAddressId}));
+                    document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {detail: this.billingAddressId}));
+                },
+                error =>
+                {
+
                 });
 
             if (this.hasToValidate)
@@ -75,7 +80,7 @@ Vue.component("invoice-address-select", {
 
         validate()
         {
-            this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
+            this.showError = this.billingAddressId <= 0;
         }
     }
 });

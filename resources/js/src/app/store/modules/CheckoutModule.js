@@ -86,6 +86,11 @@ const mutations =
         setGtcValidator(state, gtcValidator)
         {
             state.validation.gtc.validate = gtcValidator;
+        },
+
+        setInvoiceAddressValidator(state, invoiceAddressValidator)
+        {
+            state.validation.invoiceAddress.validate = invoiceAddressValidator;
         }
     };
 
@@ -96,8 +101,13 @@ const actions =
             commit("setShippingCountryId", checkout.shippingCountryId);
             commit("setShippingProfile", checkout.shippingProfileList.find(profile => profile.parcelServicePresetId === checkout.shippingProfileId));
             commit("setShippingProfileList", checkout.shippingProfileList);
-            commit("setMethodOfPayment", checkout.paymentDataList.find(profile => profile.id === checkout.methodOfPaymentId));
             commit("setMethodOfPaymentList", checkout.paymentDataList);
+            // TODO why server doesn't set method of payment id
+            const methodOfPayment = checkout.paymentDataList.find(profile => profile.id === checkout.methodOfPaymentId);
+
+            // methodOfPayment = methodOfPayment ? methodOfPayment : checkout.paymentDataList[0];
+            // dispatch select method of payment
+            commit("setMethodOfPayment", methodOfPayment ? methodOfPayment : checkout.paymentDataList[0]);
         },
 
         selectMethodOfPayment({commit, dispatch}, methodOfPayment)
