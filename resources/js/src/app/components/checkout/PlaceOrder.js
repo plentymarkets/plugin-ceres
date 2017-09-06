@@ -35,7 +35,7 @@ var ResourceService = require("services/ResourceService");
             {
                 this.waiting = true;
 
-                if (this.contactWish.contactWishValue.length > 0)
+                if (this.contactWish.contactWishValue && this.contactWish.contactWishValue.length > 0)
                 {
                     ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish.contactWishValue}, {supressNotifications: true})
                         .always(() =>
