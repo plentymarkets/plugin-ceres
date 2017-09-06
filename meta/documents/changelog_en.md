@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v1.4.5 (2017-09-06)
+
+### Fixed
+
+- Due to an error, the variation selection in the single item view didn't work properly. This has been fixed.
+- Due to an error, item data wasn't displayed in the mobile navigation. This has been fixed.
+- Due to an error, the number of items wasn't displayed correctly in the shopping cart preview. This has been fixed.
+
 ## v1.4.4 (2017-08-30)
 
 ### Added
