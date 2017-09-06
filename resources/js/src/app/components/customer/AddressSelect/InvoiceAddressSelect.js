@@ -30,7 +30,7 @@ Vue.component("invoice-address-select", {
      */
     created()
     {
-        this.$store.dispatch("setBillingAddress", {id: this.selectedAddressId, addressList: this.addressList});
+        this.$store.dispatch("initBillingAddress", {id: this.selectedAddressId, addressList: this.addressList});
 
         if (this.hasToValidate)
         {
@@ -61,7 +61,7 @@ Vue.component("invoice-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.$store.dispatch("selectBillingAddress", selectedAddress.id)
+            this.$store.dispatch("selectBillingAddress", selectedAddress)
                 .then(
                 response =>
                 {

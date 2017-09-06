@@ -3,8 +3,10 @@ import ApiService from "services/ApiService";
 const state =
     {
         billingAddressId: null,
+        billingAddress: null,
         billingAddressList: [],
         deliveryAddressId: null,
+        deliveryAddress: null,
         deliveryAddressList: []
     };
 
@@ -16,6 +18,7 @@ const mutations =
             {
                 state.billingAddressList = billingAddressList;
             }
+            console.log("setBillingAddressList");
         },
 
         setBillingAddressId(state, billingAddressId)
@@ -24,6 +27,16 @@ const mutations =
             {
                 state.billingAddressId = billingAddressId;
             }
+            console.log("setBillingAddressId");
+        },
+
+        setBillingAddress(state, billingAddress)
+        {
+            if (billingAddress)
+            {
+                state.billingAddress = billingAddress;
+            }
+            console.log("setBillingAddress");
         },
 
         setDeliveryAddressList(state, deliveryAddressList)
@@ -32,6 +45,7 @@ const mutations =
             {
                 state.deliveryAddressList = deliveryAddressList;
             }
+            console.log("setDeliveryAddressList");
         },
 
         setDeliveryAddressId(state, deliveryAddressId)
@@ -40,6 +54,16 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddressId;
             }
+            console.log("setDeliveryAddressId");
+        },
+
+        setDeliveryAddress(state, deliveryAddress)
+        {
+            if (deliveryAddress)
+            {
+                state.deliveryAddress = deliveryAddress;
+            }
+            console.log("setDeliveryAddress");
         },
 
         removeBillingAddress(state, billingAddress)
@@ -50,6 +74,7 @@ const mutations =
             {
                 state.billingAddressList.splice(index, 1);
             }
+            console.log("removeBillingAddress");
         },
 
         removeDeliveryAddress(state, deliveryAddress)
@@ -60,6 +85,7 @@ const mutations =
             {
                 state.deliveryAddressList.splice(index, 1);
             }
+            console.log("removeDeliveryAddress");
         },
 
         addBillingAddress(state, billingAddress, index)
@@ -75,6 +101,7 @@ const mutations =
                     state.billingAddressList.push(billingAddress);
                 }
             }
+            console.log("addBillingAddress");
         },
 
         addDeliveryAddress(state, deliveryAddress, index)
@@ -90,6 +117,7 @@ const mutations =
                     state.deliveryAddressList.push(deliveryAddress);
                 }
             }
+            console.log("addDeliveryAddress");
         },
 
         updateBillingAddress(state, billingAddress)
@@ -99,6 +127,7 @@ const mutations =
                 addressToUpdate = state.billingAddressList.find(entry => entry.id === billingAddress.id);
                 addressToUpdate = billingAddress;
             }
+            console.log("updateBillingAddress");
         },
 
         updateDeliveryAddress(state, deliveryAddress)
@@ -108,52 +137,57 @@ const mutations =
                 addressToUpdate = state.deliveryAddressList.find(entry => entry.id === deliveryAddress.id);
                 addressToUpdate = deliveryAddress;
             }
+            console.log("updateDeliveryAddress");
         }
     };
 
 const actions =
     {
-        setBillingAddress({commit}, {id, addressList})
+        initBillingAddress({commit}, {id, addressList})
         {
             commit("setBillingAddressList", addressList);
             commit("setBillingAddressId", id);
+            commit("setBillingAddress", addressList.find(address => address.id === id));
         },
 
-        setDeliveryAddress({commit}, {id, addressList})
+        initDeliveryAddress({commit}, {id, addressList})
         {
             commit("setDeliveryAddressList", addressList);
             commit("setDeliveryAddressId", id);
+            commit("setDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({dispatch}, {selectedAddressId, addressType})
+        selectAddress({dispatch}, {selectedAddress, addressType})
         {
             if (addressType === "1")
             {
-                return dispatch("selectBillingAddress", selectedAddressId);
+                return dispatch("selectBillingAddress", selectedAddress);
             }
             else if (addressType === "2")
             {
-                return dispatch("selectDeliveryAddress", selectedAddressId);
+                return dispatch("selectDeliveryAddress", selectedAddress);
             }
 
             return new Promise();
         },
 
-        selectBillingAddress({commit}, selectedAddressId)
+        selectBillingAddress({commit}, selectedAddress)
         {
             return new Promise((resolve, reject) =>
             {
                 // TODO add call to set address
-                commit("setBillingAddressId", selectedAddressId);
+                commit("setBillingAddressId", selectedAddress.id);
+                commit("setBillingAddress", selectedAddress);
             });
         },
 
-        selectDeliveryAddress({commit}, selectedAddressId)
+        selectDeliveryAddress({commit}, selectedAddress)
         {
             return new Promise((resolve, reject) =>
             {
                 // TODO add call to set address
-                commit("setDeliveryAddressId", selectedAddressId);
+                commit("setDeliveryAddressId", selectedAddress.id);
+                commit("setDeliveryAddress", selectedAddress);
             });
         },
 

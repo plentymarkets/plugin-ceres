@@ -93,7 +93,7 @@ Vue.component("address-select", {
                     this.selectedAddress = this.addressList[index];
                     isSelectedAddressSet = true;
                     this.$dispatch("address-changed", this.selectedAddress);
-                    this.$store.dispatch("selectAddress", {selectedAddressId: this.selectedAddressId, addressType: this.addressType});
+                    this.$store.dispatch("selectAddress", {selectedAddress: this.selectedAddress, addressType: this.addressType});
                 }
             }
 
@@ -129,7 +129,7 @@ Vue.component("address-select", {
             this.selectedAddress = this.addressList[index];
 
             this.$dispatch("address-changed", this.selectedAddress);
-            this.$store.dispatch("selectAddress", {selectedAddressId: this.selectedAddressId, addressType: this.addressType});
+            this.$store.dispatch("selectAddress", {selectedAddress: this.selectedAddress, addressType: this.addressType});
         },
 
         /**
@@ -328,7 +328,7 @@ Vue.component("address-select", {
                         }
 
                         this.$dispatch("address-changed", this.selectedAddress);
-                        this.$store.dispatch("selectAddress", {selectedAddressId: this.selectedAddressId, addressType: this.addressType});
+                        this.$store.dispatch("selectAddress", {selectedAddress: this.selectedAddress, addressType: this.addressType});
 
                         break;
                     }
