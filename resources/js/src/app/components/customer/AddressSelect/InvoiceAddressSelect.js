@@ -73,7 +73,7 @@ Vue.component("invoice-address-select", {
 
         validate()
         {
-            this.showError = this.billingAddressId <= 0;
+            this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
         }
     }
 });

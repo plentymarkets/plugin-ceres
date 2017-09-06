@@ -65,7 +65,7 @@ Vue.component("payment-provider-select", {
 
         validate()
         {
-            this.showError = !(this.methodOfPaymentId > 0);
+            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
         }
     }
 });

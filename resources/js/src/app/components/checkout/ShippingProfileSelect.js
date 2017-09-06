@@ -42,7 +42,7 @@ Vue.component("shipping-profile-select", {
 
         validate: function()
         {
-            this.showError = !(this.shippingProfileId > 0);
+            this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
         }
     }
 });

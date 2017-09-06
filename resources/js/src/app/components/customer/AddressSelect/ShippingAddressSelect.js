@@ -16,7 +16,7 @@ Vue.component("shipping-address-select", {
     ],
 
     computed: Vuex.mapState({
-        deliveryAddressId: state => state.address.deliveryAddressId,
+        deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
     created()
