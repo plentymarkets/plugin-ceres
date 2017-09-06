@@ -14,6 +14,7 @@
     {{ component( "Ceres::Checkout.Components.PaymentProviderSelect" ) }}
     {{ component( "Ceres::Checkout.Components.ShippingProfileSelect" ) }}
     {{ component( "Ceres::Checkout.Components.PlaceOrder" ) }}
+    {{ component( "Ceres::Checkout.Components.ContactWishInput" ) }}
     {{ component( "Ceres::Basket.Components.Coupon" ) }}
     {{ component( "Ceres::Basket.Components.BasketList" ) }}
     {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
@@ -26,6 +27,8 @@
         <resource
             name="checkoutValidation"
             :data="{ invoiceAddress: { showError: false }, paymentProvider: { showError: false }, shippingProfile: { showError: false }, gtc: { showError: false } }"></resource>
+
+        <resource name="contactWish" :data="{ contactWishValue: '' }"></resource>
 
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout|trim is empty %}
@@ -121,6 +124,8 @@
                             </div>
                             <hr>
                             <coupon template="#vue-coupon"></coupon>
+                            <hr>
+                            <contact-wish-input template="#vue-contact-wish-input"></contact-wish-input>
                             <hr>
                             {{ LayoutContainer.show("Ceres::Checkout.BeforeBasketTotals") }}
                             <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
