@@ -102,12 +102,7 @@ const actions =
             commit("setShippingProfile", checkout.shippingProfileList.find(profile => profile.parcelServicePresetId === checkout.shippingProfileId));
             commit("setShippingProfileList", checkout.shippingProfileList);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
-            // TODO why server doesn't set method of payment id
-            const methodOfPayment = checkout.paymentDataList.find(profile => profile.id === checkout.methodOfPaymentId);
-
-            // methodOfPayment = methodOfPayment ? methodOfPayment : checkout.paymentDataList[0];
-            // dispatch select method of payment
-            commit("setMethodOfPayment", methodOfPayment ? methodOfPayment : checkout.paymentDataList[0]);
+            commit("setMethodOfPayment", checkout.methodOfPaymentId);
         },
 
         selectMethodOfPayment({commit, dispatch}, methodOfPayment)
