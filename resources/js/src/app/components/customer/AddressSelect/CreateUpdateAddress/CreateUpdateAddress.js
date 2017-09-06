@@ -1,6 +1,5 @@
 const NotificationService = require("services/NotificationService");
 
-import AddressService from "services/AddressService";
 import ValidationService from "services/ValidationService";
 
 Vue.component("create-update-address", {
@@ -8,7 +7,6 @@ Vue.component("create-update-address", {
     props: [
         "addressData",
         "addressModal",
-        "addressList",
         "modalType",
         "addressType",
         "template"
@@ -24,6 +22,14 @@ Vue.component("create-update-address", {
                 2: "#delivery_address_form"
             }
         };
+    },
+
+    computed:
+    {
+        addressList()
+        {
+            this.$store.getters.getAddressList(this.addressType);
+        }
     },
 
     created()
@@ -69,43 +75,39 @@ Vue.component("create-update-address", {
         updateAddress()
         {
             this.waiting = true;
-
             this._syncOptionTypesAddressData();
 
-            AddressService
-                .updateAddress(this.addressData, this.addressType)
-                .done(() =>
-                {
-                    this.$dispatch("selected-address-updated", this.addressData);
-
-                    this.addressModal.hide();
-
-                    for (const key in this.addressList)
+            this.$store.dispatch("updateAddress", {address: this.addressData, addressType: this.addressType})
+                .then(
+                    resolve =>
                     {
-                        const address = this.addressList[key];
+                        this.addressModal.hide();
+                        this.waiting = false;
+                        // for (const key in this.addressList)
+                        // {
+                        //     const address = this.addressList[key];
 
-                        if (address.id === this.addressData.id)
+                        //     if (address.id === this.addressData.id)
+                        //     {
+                        //         for (const attribute in this.addressList[key])
+                        //         {
+                        //             this.addressList[key][attribute] = this.addressData[attribute];
+                        //         }
+
+                        //         break;
+                        //     }
+                        // }
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+
+                        if (error.validation_errors)
                         {
-                            for (const attribute in this.addressList[key])
-                            {
-                                this.addressList[key][attribute] = this.addressData[attribute];
-                            }
-
-                            break;
+                            this._handleValidationErrors(error.validation_errors);
                         }
                     }
-
-                    this.waiting = false;
-                })
-                .fail(response =>
-                {
-                    this.waiting = false;
-
-                    if (response.validation_errors)
-                    {
-                        this._handleValidationErrors(response.validation_errors);
-                    }
-                });
+                );
         },
 
         /**
@@ -114,31 +116,25 @@ Vue.component("create-update-address", {
         createAddress()
         {
             this.waiting = true;
-
             this._syncOptionTypesAddressData();
 
-            AddressService
-                .createAddress(this.addressData, this.addressType, true)
-                .done(newAddress =>
-                {
-                    this.addressData = newAddress;
-
-                    this.addressModal.hide();
-                    this.addressList.push(this.addressData);
-
-                    this.$dispatch("new-address-created", this.addressData);
-
-                    this.waiting = false;
-                })
-                .fail(response =>
-                {
-                    this.waiting = false;
-
-                    if (response.validation_errors)
+            this.$store("createAddress", {address: this.addressData, addressType: this.addressType})
+                .resolve(
+                    response =>
                     {
-                        this._handleValidationErrors(response.validation_errors);
+                        this.addressModal.hide();
+                        this.waiting = false;
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+
+                        if (error.validation_errors)
+                        {
+                            this._handleValidationErrors(error.validation_errors);
+                        }
                     }
-                });
+                );
         },
 
         _handleValidationErrors(validationErrors)

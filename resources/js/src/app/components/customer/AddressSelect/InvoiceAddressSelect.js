@@ -6,8 +6,6 @@ Vue.component("invoice-address-select", {
             template="#vue-address-select"
             v-on:address-changed="addressChanged"
             address-type="1"
-            :address-list="addressList"
-            :selected-address-id="selectedAddressId"
             :show-error='showError'
             :country-name-map="countryNameMap">
         </address-select>
@@ -16,7 +14,6 @@ Vue.component("invoice-address-select", {
     props: [
         "addressList",
         "hasToValidate",
-        "selectedAddressId",
         "countryNameMap"
     ],
 
@@ -43,13 +40,9 @@ Vue.component("invoice-address-select", {
      */
     ready()
     {
-        if (App.isCheckoutView && this.addressList.length <= 0)
+        if (App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
         {
             this.$refs.invoiceAddressSelect.showInitialAddModal();
-        }
-        else if (this.addressList.length)
-        {
-            this.addressChanged(this.addressList[0]);
         }
     },
 

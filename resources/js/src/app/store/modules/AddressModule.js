@@ -191,6 +191,7 @@ const actions =
             });
         },
 
+        // TODO what to do after a selected address is deleted
         deleteAddress({dispatch, state, commit}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
@@ -211,7 +212,7 @@ const actions =
                 ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType)
                     .done(response =>
                     {
-                        resolve();
+                        resolve(response);
                     })
                     .fail(error =>
                     {
@@ -223,7 +224,7 @@ const actions =
                         {
                             commit("addDeliveryAddress", address, addressIndex);
                         }
-                        reject();
+                        reject(error);
                     });
             });
         },
@@ -237,18 +238,18 @@ const actions =
                     {
                         if (addressType === "1")
                         {
-                            commit("addBillingAddress", address);
+                            commit("addBillingAddress", response);
                         }
                         else if (addressType === "2")
                         {
-                            commit("addDeliveryAddress", address);
+                            commit("addDeliveryAddress", response);
                         }
 
-                        resolve();
+                        resolve(response);
                     })
                     .fail(error =>
                     {
-                        reject();
+                        reject(error);
                     });
             });
         },
@@ -257,7 +258,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, {supressNotifications: true})
+                ApiService.put("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, address, {supressNotifications: true})
                     .done(response =>
                     {
                         if (addressType === "1")
@@ -269,18 +270,55 @@ const actions =
                             commit("updateDeliveryAddress", address);
                         }
 
-                        resolve();
+                        resolve(response);
                     })
                     .fail(error =>
                     {
-                        reject();
+                        reject(error);
                     });
             });
+        },
+
+        emptyAddressList({commit, dispatch}, {addressType})
+        {
+            // TODO remove address and unselect
+            // keep -99 for shipping
         }
     };
 
 const getters =
     {
+        getSelectedAddress: state => addressType =>
+        {
+            let selectedAddress = {};
+
+            if (addressType === "1")
+            {
+                selectAddress = state.billingAddress;
+            }
+            else if (addressType === "2")
+            {
+                selectedAddress = state.deliveryAddress;
+            }
+
+            return selectedAddress;
+        },
+
+        getAddressList: state => addressType =>
+        {
+            let addressList = [];
+
+            if (addressType === "1")
+            {
+                addressList = state.billingAddressList;
+            }
+            else if (addressType === "2")
+            {
+                addressList = state.deliveryAddressList;
+            }
+
+            return addressList;
+        }
     };
 
 export default

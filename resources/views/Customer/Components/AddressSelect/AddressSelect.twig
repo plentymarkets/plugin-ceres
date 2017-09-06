@@ -103,11 +103,8 @@
                             <fieldset>
                                 <create-update-address
                                         template="#vue-create-update-address"
-                                        v-on:new-address-created="onAddressCreated"
-                                        v-on:selected-address-updated="onSelectedAddressUpdated"
                                         :address-data="addressToEdit"
                                         :address-modal="addressModal"
-                                        :address-list="addressList"
                                         :modal-type="modalType"
                                         :address-type="addressType">
                                 </create-update-address>
