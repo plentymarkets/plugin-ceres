@@ -113,11 +113,11 @@ const actions =
                     .done(response =>
                     {
                         commit("setMethodOfPayment", methodOfPayment);
-                        resolve();
+                        resolve(response);
                     })
                     .fail(error =>
                     {
-                        reject();
+                        reject(error);
                     });
                 resolve();
             });
@@ -131,11 +131,11 @@ const actions =
                     .done(response =>
                     {
                         commit("setShippingProfile", shippingProfile);
-                        resolve();
+                        resolve(response);
                     })
                     .fail(error =>
                     {
-                        reject();
+                        reject(error);
                     });
                 resolve();
             });
