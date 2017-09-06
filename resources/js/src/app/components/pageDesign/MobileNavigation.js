@@ -28,7 +28,7 @@ Vue.component("mobile-navigation", {
     {
         this.categoryTree = ResourceService.getResource("navigationTree").val();
 
-        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs.length ? this.categoryBreadcrumbs.pop().id : null);
+        this.buildTree(this.categoryTree, null, (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null);
 
         this.dataContainer1 = this.categoryTree;
     },

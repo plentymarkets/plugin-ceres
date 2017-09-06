@@ -335,7171 +335,6 @@ Vue.config.delimiters = ["${", "}"];
 Vue.config.unsafeDelimiters = ["{!!", "!!}"];
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var ModalService = require("services/ModalService");
-
-Vue.component("add-item-to-basket-overlay", {
-
-    props: ["basketAddInformation", "template"],
-
-    data: function data() {
-        return {
-            basketItem: { currentBasketItem: {} },
-            timeToClose: 0,
-            price: 0,
-            currency: ""
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        ResourceService.bind("basketItem", this);
-    },
-
-
-    watch: {
-        basketItem: function basketItem() {
-            if (this.basketAddInformation === "overlay") {
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
-                setTimeout(function () {
-                    $("body").toggleClass("open-right");
-                }, 1);
-            }
-        }
-    },
-
-    methods: {
-
-        /**
-         * check if current basket object exist and start rendering
-         */
-        startRendering: function startRendering() {
-            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
-
-            if (render) {
-                this.startCounter();
-            }
-
-            this.setPriceFromData();
-
-            return render;
-        },
-        setPriceFromData: function setPriceFromData() {
-            if (this.basketItem.currentBasketItem.calculatedPrices) {
-                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price + this.calculateSurcharge();
-                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
-            }
-        },
-        calculateSurcharge: function calculateSurcharge() {
-
-            var sumSurcharge = 0;
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = this.basketItem.currentBasketItem.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var property = _step.value;
-
-
-                    if (property.property.value && property.property.value.length > 0) {
-                        if (property.surcharge > 0) {
-                            sumSurcharge += property.surcharge;
-                        } else if (property.property.surcharge > 0) {
-                            sumSurcharge += property.property.surcharge;
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            return sumSurcharge;
-        },
-
-
-        /**
-         * @returns {string}
-         */
-        getImage: function getImage() {
-            var path = "";
-
-            for (var i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++) {
-                if (this.basketItem.currentBasketItem.variationImageList[i].path !== "") {
-                    path = this.basketItem.currentBasketItem.variationImageList[i].path;
-                }
-            }
-
-            return "/" + path;
-        },
-        startCounter: function startCounter() {
-            var _this = this;
-
-            this.timeToClose = 10;
-
-            var timerVar = setInterval(function () {
-                _this.timeToClose -= 1;
-
-                if (_this.timeToClose === 0) {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
-
-                    clearInterval(timerVar);
-                }
-            }, 1000);
-        }
-    },
-
-    computed: {
-        /**
-         * returns itemData.texts[0]
-         */
-        texts: function texts() {
-            return this.basketItem.currentBasketItem.texts;
-        },
-        imageUrl: function imageUrl() {
-            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
-
-            return img.url;
-        }
-    }
-});
-
-},{"services/ModalService":87,"services/ResourceService":89}],2:[function(require,module,exports){
-"use strict";
-
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-basket", {
-
-    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale"],
-
-    data: function data() {
-        return {
-            quantity: 1,
-            buttonLockState: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.useLargeScale = this.useLargeScale || false;
-    },
-    ready: function ready() {
-        this.checkMinMaxOrderQuantity();
-    },
-
-
-    methods: {
-        /**
-         * add an item to basket-resource
-         */
-        addToBasket: function addToBasket() {
-            if (this.item.filter.isSalable) {
-                var basketObject = {
-                    variationId: this.variationId,
-                    quantity: this.quantity,
-                    basketItemOrderParams: this.item.properties
-                };
-
-                ResourceService.getResource("basketItems").push(basketObject).done(function () {
-                    this.openAddToBasketOverlay();
-                }.bind(this)).fail(function (response) {
-                    NotificationService.error(Translations.Template[_ExceptionMap2.default.get(response.data.exceptionCode.toString())]).closeAfter(5000);
-                });
-            }
-        },
-        directToItem: function directToItem() {
-            window.location.assign(this.itemUrl);
-        },
-        handleButtonState: function handleButtonState(value) {
-            this.buttonLockState = value;
-        },
-
-
-        /**
-         * open the AddItemToBasketOverlay
-         */
-        openAddToBasketOverlay: function openAddToBasketOverlay() {
-            var currentBasketObject = {
-                currentBasketItem: this.item,
-                quantity: this.quantity
-            };
-
-            ResourceService.getResource("basketItem").set(currentBasketObject);
-        },
-
-
-        /**
-         * update the property quantity of the current instance
-         * @param value
-         */
-        updateQuantity: function updateQuantity(value) {
-            this.quantity = value;
-        },
-
-
-        /**
-         * Check min - max order quantity
-         */
-        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
-            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
-            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
-        }
-    },
-
-    computed: {
-        /**
-         * returns item.variation.id
-         */
-        variationId: function variationId() {
-            return this.item.variation.id;
-        },
-        hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
-        }
-    }
-});
-
-},{"exceptions/ExceptionMap":69,"services/NotificationService":88,"services/ResourceService":89}],3:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("basket-preview", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            basket: {},
-            basketItems: []
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Bind to basket and bind the basket items
-     */
-    ready: function ready() {
-        ResourceService.bind("basket", this);
-        ResourceService.bind("basketItems", this);
-    }
-});
-
-},{"services/ResourceService":89}],4:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("basket-totals", {
-
-    props: ["config", "template"],
-
-    data: function data() {
-        return {
-            basket: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    /**
-     * Bind to basket
-     */
-    ready: function ready() {
-        ResourceService.bind("basket", this);
-    },
-
-    methods: {
-        /**
-         * TODO
-         * @param name
-         * @returns {boolean}
-         */
-        showProperty: function showProperty(name) {
-            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
-        }
-    }
-});
-
-},{"services/ResourceService":89}],5:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("coupon", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            couponCode: "",
-            basket: {},
-            waiting: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-        ResourceService.bind("basket", this);
-    },
-
-    ready: function ready() {
-        if (this.disabled) {
-            this.couponCode = this.basket.couponCode;
-        }
-    },
-
-    methods: {
-        redeemCode: function redeemCode() {
-            this.waiting = true;
-            var self = this;
-
-            ApiService.post("/rest/io/coupon", { couponCode: this.couponCode }).always(function () {
-                self.waiting = false;
-            }).done(function (response) {
-                NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-            }).fail(function (response) {
-                NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
-            });
-        },
-
-        removeCode: function removeCode() {
-            this.waiting = true;
-            var self = this;
-
-            ApiService.delete("/rest/io/coupon/" + this.basket.couponCode).always(function () {
-                self.waiting = false;
-            }).done(function (response) {
-                self.couponCode = "";
-                NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
-            }).fail(function (response) {
-                NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
-            });
-        }
-    },
-
-    computed: {
-        disabled: function disabled() {
-            if (this.basket.couponCode) {
-                return true;
-            }
-
-            return false;
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/NotificationService":88,"services/ResourceService":89}],6:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("basket-list", {
-
-    props: ["size", "template", "triggerEvent"],
-
-    data: function data() {
-        return {
-            basketItems: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    /**
-     * Bind to basket and show the items in a small or large list
-     */
-    ready: function ready() {
-        ResourceService.bind("basketItems", this);
-
-        if (this.triggerEvent) {
-            ResourceService.watch("basket", function (newValue, oldValue) {
-                if (oldValue) {
-                    if (JSON.stringify(newValue) != JSON.stringify(oldValue)) {
-                        document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: newValue }));
-                    }
-                }
-            });
-        }
-    }
-});
-
-},{"services/ResourceService":89}],7:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-// var ApiService          = require("services/ApiService");
-// var NotificationService = require("services/NotificationService");
-
-Vue.component("basket-list-item", {
-
-    props: ["basketItem", "size", "language", "template"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            deleteConfirmed: false,
-            deleteConfirmedTimeout: null,
-            itemCondition: ""
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-
-        /**
-         * Delete item from basket
-         */
-        deleteItem: function deleteItem() {
-            var self = this;
-
-            if (!this.deleteConfirmed) {
-                this.deleteConfirmed = true;
-                this.deleteConfirmedTimeout = window.setTimeout(function () {
-                    self.resetDelete();
-                }, 5000);
-            } else {
-                this.waiting = true;
-                ResourceService.getResource("basketItems").remove(this.basketItem.id).fail(function () {
-                    self.resetDelete();
-                    self.waiting = false;
-                });
-            }
-        },
-
-        /**
-         * Update item quantity in basket
-         * @param quantity
-         */
-        updateQuantity: function updateQuantity(quantity) {
-            if (this.basketItem.quantity === quantity) {
-                return;
-            }
-
-            this.basketItem.quantity = quantity;
-            this.waiting = true;
-
-            ResourceService.getResource("basketItems").set(this.basketItem.id, this.basketItem).fail(function () {
-                this.waiting = false;
-            }.bind(this));
-        },
-
-        /**
-         * Cancel delete
-         */
-        resetDelete: function resetDelete() {
-            this.deleteConfirmed = false;
-            if (this.deleteConfirmedTimeout) {
-                window.clearTimeout(this.deleteConfirmedTimeout);
-            }
-        }
-    },
-
-    computed: {
-        imageUrl: function imageUrl() {
-            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
-
-            return img.url;
-        }
-    }
-});
-
-},{"services/ResourceService":89}],8:[function(require,module,exports){
-"use strict";
-
-var _CategoryRendererService = require("services/CategoryRendererService");
-
-var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("category-breadcrumbs", {
-
-    props: ["template", "currentCategoryTree"],
-
-    data: function data() {
-        return {
-            breadcrumbs: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.init();
-    },
-
-    methods: {
-        /**
-         * initialize values
-         */
-        init: function init() {
-            ResourceService.bind("breadcrumbs", this);
-
-            this.breadcrumbs = this.currentCategoryTree;
-        },
-
-        /**
-         * render items in relation to location
-         * @param currentCategory
-         */
-        renderItems: function renderItems(currentCategory) {
-            _CategoryRendererService2.default.renderItems(currentCategory);
-
-            return false;
-        },
-
-        getBreadcrumbURL: function getBreadcrumbURL(breadcrumb) {
-            return _CategoryRendererService2.default.getScopeUrl(breadcrumb);
-        }
-    }
-});
-
-},{"services/CategoryRendererService":83,"services/ResourceService":89}],9:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("accept-gtc-check", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            isChecked: false,
-            checkoutValidation: { gtc: {} }
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-        ResourceService.bind("checkoutValidation", this);
-        this.checkoutValidation.gtc.validate = this.validate;
-    },
-
-    methods: {
-        validate: function validate() {
-            this.checkoutValidation.gtc.showError = !this.isChecked;
-        }
-    },
-
-    watch: {
-        isChecked: function isChecked() {
-            this.checkoutValidation.gtc.showError = false;
-        }
-    }
-});
-
-},{"services/ResourceService":89}],10:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("payment-provider-select", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            checkout: {},
-            checkoutValidation: { paymentProvider: {} }
-        };
-    },
-
-
-    /**
-     * Initialise the event listener
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
-
-        this.checkoutValidation.paymentProvider.validate = this.validate;
-
-        this.initDefaultPaymentProvider();
-    },
-
-
-    watch: {
-        checkout: function checkout() {
-            var paymentExist = false;
-
-            for (var i in this.checkout.paymentDataList) {
-                if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId) {
-                    paymentExist = true;
-                }
-            }
-
-            if (!paymentExist) {
-                this.checkout.methodOfPaymentId = 0;
-                this.initDefaultPaymentProvider();
-            }
-        }
-    },
-
-    methods: {
-        /**
-         * Event when changing the payment provider
-         */
-        onPaymentProviderChange: function onPaymentProviderChange() {
-            var _this = this;
-
-            ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.checkout.methodOfPaymentId }));
-            });
-
-            this.validate();
-        },
-        validate: function validate() {
-            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
-        },
-        initDefaultPaymentProvider: function initDefaultPaymentProvider() {
-            // todo get entry from config | select first payment provider
-            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0) {
-                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
-
-                ResourceService.getResource("checkout").set(this.checkout);
-            }
-        }
-    }
-});
-
-},{"services/ResourceService":89}],11:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ResourceService = require("services/ResourceService");
-
-(function ($) {
-    Vue.component("place-order", {
-
-        props: ["targetContinue", "template"],
-
-        data: function data() {
-            return {
-                waiting: false,
-                checkout: {},
-                checkoutValidation: {}
-            };
-        },
-
-        created: function created() {
-            this.$options.template = this.template;
-
-            ResourceService.bind("checkout", this);
-            ResourceService.bind("checkoutValidation", this);
-        },
-
-        methods: {
-
-            preparePayment: function preparePayment() {
-                this.waiting = true;
-                var self = this;
-
-                if (self.validateCheckout()) {
-                    ApiService.post("/rest/io/checkout/payment").done(function (response) {
-                        self.afterPreparePayment(response);
-                    }).fail(function (response) {
-                        self.waiting = false;
-                    });
-                } else {
-                    NotificationService.error(Translations.Template.generalCheckEntries);
-                    this.waiting = false;
-                }
-            },
-
-            validateCheckout: function validateCheckout() {
-                for (var validator in this.checkoutValidation) {
-                    if (this.checkoutValidation[validator].validate) {
-                        this.checkoutValidation[validator].validate();
-                    }
-                }
-
-                for (var i in this.checkoutValidation) {
-                    if (this.checkoutValidation[i].showError) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-
-            afterPreparePayment: function afterPreparePayment(response) {
-                var paymentType = response.type || "errorCode";
-                var paymentValue = response.value || "";
-
-                switch (paymentType) {
-                    case "continue":
-                        var target = this.targetContinue;
-
-                        if (target) {
-                            window.location.assign(target);
-                        }
-                        break;
-                    case "redirectUrl":
-                        // redirect to given payment provider
-                        window.location.assign(paymentValue);
-                        break;
-                    case "externalContentUrl":
-                        // show external content in iframe
-                        this.showModal(paymentValue, true);
-                        break;
-                    case "htmlContent":
-                        this.showModal(paymentValue, false);
-                        break;
-
-                    case "errorCode":
-                        NotificationService.error(paymentValue);
-                        this.waiting = false;
-                        break;
-                    default:
-                        NotificationService.error("Unknown response from payment provider: " + paymentType);
-                        this.waiting = false;
-                        break;
-                }
-            },
-
-            showModal: function showModal(content, isExternalContent) {
-                var $modal = $(this.$els.modal);
-                var $modalBody = $(this.$els.modalContent);
-
-                if (isExternalContent) {
-                    $modalBody.html("<iframe src=\"" + content + "\">");
-                } else {
-                    $modalBody.html(content);
-                }
-
-                $modal.modal("show");
-            }
-        }
-    });
-})(jQuery);
-
-},{"services/ApiService":82,"services/NotificationService":88,"services/ResourceService":89}],12:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("shipping-profile-select", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            checkout: {},
-            checkoutValidation: { shippingProfile: {} }
-        };
-    },
-
-    /**
-     * Add a shipping provider
-     * Initialise the event listener
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
-
-        this.checkoutValidation.shippingProfile.validate = this.validate;
-    },
-
-    methods: {
-        /**
-         * Method on shipping profile changed
-         */
-        onShippingProfileChange: function onShippingProfileChange() {
-            ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: this.checkout.shippingProfileId }));
-            }.bind(this));
-
-            this.validate();
-        },
-
-        validate: function validate() {
-            this.checkoutValidation.shippingProfile.showError = !(this.checkout.shippingProfileId > 0);
-        }
-    }
-});
-
-},{"services/ResourceService":89}],13:[function(require,module,exports){
-"use strict";
-
-Vue.component("address-input-group", {
-
-    props: ["addressData", "defaultCountry", "addressType", "modalType", "template"],
-
-    data: function data() {
-        return {
-            stateList: [],
-            countryLocaleList: ["DE", "GB"],
-            localeToShow: ""
-        };
-    },
-
-
-    /**
-     * Check whether the address data exists. Else, create an empty one
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        if (!this.addressData) {
-            this.addressData = {};
-        }
-
-        this.defaultCountry = "DE";
-    },
-
-
-    methods: {
-        /**
-         * Update the address input group to show.
-         * @param shippingCountry
-         */
-        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
-            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
-                this.localeToShow = shippingCountry.isoCode2;
-            } else {
-                this.localeToShow = this.defaultCountry;
-            }
-        },
-        getOptionType: function getOptionType(data, optionType) {
-            for (var i = 0; i < data.length; i++) {
-                if (optionType === data[i].typeId) {
-                    return data[i].value;
-                }
-            }
-            return "";
-        },
-        equalOptionValues: function equalOptionValues(newValue, data, optionType) {
-            var oldValue = this.getOptionType(data, optionType);
-
-            if (typeof newValue === "undefined") {
-                return oldValue;
-            }
-
-            return oldValue === newValue;
-        }
-    },
-
-    filters: {
-        optionType: {
-            read: function read(value, optionType) {
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined") {
-                    return value;
-                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-            },
-            write: function write(value) {
-                return value;
-            }
-        }
-    }
-});
-
-},{}],14:[function(require,module,exports){
-"use strict";
-
-var _AddressService = require("services/AddressService");
-
-var _AddressService2 = _interopRequireDefault(_AddressService);
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var ModalService = require("services/ModalService");
-var ResourceService = require("services/ResourceService");
-var AddressFieldService = require("services/AddressFieldService");
-
-Vue.component("address-select", {
-
-    props: ["addressList", "addressType", "selectedAddressId", "template", "showError", "countryNameMap"],
-
-    data: function data() {
-        return {
-            selectedAddress: {},
-            addressModal: {},
-            modalType: "",
-            headline: "",
-            addressToEdit: {},
-            addressToDelete: {},
-            deleteModal: "",
-            localization: {},
-            user: {}
-        };
-    },
-
-
-    /**
-     *  Check whether the address list is not empty and select the address with the matching ID
-     */
-    created: function created() {
-        this.$options.template = this.template;
-        ResourceService.bind("localization", this);
-        ResourceService.bind("user", this);
-
-        this.addEventListener();
-    },
-
-
-    /**
-     * Select the address modal
-     */
-    ready: function ready() {
-        if (!this.isAddressListEmpty()) {
-            if (!this.selectedAddressId || this.selectedAddressId <= 0) {
-                this.selectedAddressId = this.addressList[0].id;
-            }
-
-            this.loadSelectedAddress();
-        } else {
-            this.addressList = [];
-        }
-
-        this.addressModal = ModalService.findModal(this.$els.addressModal);
-        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
-    },
-
-
-    methods: {
-        /**
-         * Add the event listener
-         */
-        addEventListener: function addEventListener() {
-            var _this = this;
-
-            ApiService.listen("AfterAccountContactLogout", function () {
-                _this.cleanUserAddressData();
-            });
-        },
-
-
-        /**
-         * Load the address filtered by selectedId into selectedAddress
-         */
-        loadSelectedAddress: function loadSelectedAddress() {
-            var isSelectedAddressSet = false;
-
-            for (var index in this.addressList) {
-                if (this.addressList[index].id === this.selectedAddressId) {
-                    this.selectedAddress = this.addressList[index];
-                    isSelectedAddressSet = true;
-                    this.$dispatch("address-changed", this.selectedAddress);
-                }
-            }
-
-            if (!isSelectedAddressSet) {
-                this.selectedAddressId = null;
-            }
-        },
-
-
-        /**
-         * Remove all user related addresses from the component
-         */
-        cleanUserAddressData: function cleanUserAddressData() {
-            this.addressList = this.addressList.filter(function (value) {
-                return value.id === -99;
-            });
-
-            if (this.selectedAddressId !== -99) {
-                this.selectedAddress = {};
-                this.selectedAddressId = "";
-            }
-        },
-
-
-        /**
-         * Update the selected address
-         * @param index
-         */
-        onAddressChanged: function onAddressChanged(index) {
-            this.selectedAddress = this.addressList[index];
-
-            this.$dispatch("address-changed", this.selectedAddress);
-        },
-
-
-        /**
-         * Check whether the address list is empty
-         * @returns {boolean}
-         */
-        isAddressListEmpty: function isAddressListEmpty() {
-            return !(this.addressList && this.addressList.length > 0);
-        },
-
-
-        /**
-         * Check whether a company name exists and show it in bold
-         * @returns {boolean}
-         */
-        showNameStrong: function showNameStrong() {
-            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
-        },
-
-
-        /**
-         * Show the add modal initially, if no address is selected in checkout
-         */
-        showInitialAddModal: function showInitialAddModal() {
-            this.modalType = "initial";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    countryId: this.localization.currentShippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
-            }
-
-            this.updateHeadline();
-            this.addressModal.show();
-        },
-
-
-        /**
-         * Show the add modal
-         */
-        showAddModal: function showAddModal() {
-            this.modalType = "create";
-
-            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
-                this.addressToEdit = {
-                    addressSalutation: 0,
-                    countryId: this.localization.currentShippingCountryId
-                };
-            } else {
-                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
-            }
-
-            this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
-            this.addressModal.show();
-        },
-
-
-        /**
-         * Show the edit modal
-         * @param address
-         */
-        showEditModal: function showEditModal(address) {
-            this.modalType = "update";
-            // Creates a tmp address to prevent unwanted two-way binding
-            this.addressToEdit = JSON.parse(JSON.stringify(address));
-
-            if (typeof this.addressToEdit.addressSalutation === "undefined") {
-                this.addressToEdit.addressSalutation = 0;
-            }
-
-            this.updateHeadline();
-            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
-            this.addressModal.show();
-        },
-
-
-        /**
-         * Show the delete modal
-         * @param address
-         */
-        showDeleteModal: function showDeleteModal(address) {
-            this.modalType = "delete";
-            this.addressToDelete = address;
-            this.updateHeadline();
-            this.deleteModal.show();
-        },
-
-
-        /**
-         * Delete the address selected before
-         */
-        deleteAddress: function deleteAddress() {
-            var _this2 = this;
-
-            _AddressService2.default.deleteAddress(this.addressToDelete.id, this.addressType).done(function () {
-                _this2.closeDeleteModal();
-                _this2.removeIdFromList(_this2.addressToDelete.id);
-            });
-        },
-
-
-        /**
-         * Close the current create/update address modal
-         */
-        closeAddressModal: function closeAddressModal() {
-            this.addressModal.hide();
-        },
-
-
-        /**
-         * Close the current delete address modal
-         */
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModal.hide();
-        },
-
-
-        /**
-         * Dynamically create the header line in the modal
-         */
-        updateHeadline: function updateHeadline() {
-            var headline = void 0;
-
-            if (this.modalType === "initial") {
-                headline = Translations.Template.orderInvoiceAddressInitial;
-            } else if (this.addressType === "2") {
-                if (this.modalType === "update") {
-                    headline = Translations.Template.orderShippingAddressEdit;
-                } else if (this.modalType === "create") {
-                    headline = Translations.Template.orderShippingAddressCreate;
-                } else {
-                    headline = Translations.Template.orderShippingAddressDelete;
-                }
-            } else if (this.modalType === "update") {
-                headline = Translations.Template.orderInvoiceAddressEdit;
-            } else if (this.modalType === "create") {
-                headline = Translations.Template.orderInvoiceAddressCreate;
-            } else {
-                headline = Translations.Template.orderInvoiceAddressDelete;
-            }
-
-            this.headline = headline;
-        },
-
-
-        /**
-         * Remove an address from the addressList by ID
-         * @param id
-         */
-        removeIdFromList: function removeIdFromList(id) {
-            for (var i in this.addressList) {
-                if (this.addressList[i].id === id) {
-                    this.addressList.splice(i, 1);
-
-                    if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString()) {
-                        if (this.addressList.length) {
-                            this.selectedAddress = this.addressList[0];
-                            this.selectedAddressId = this.selectedAddress.id;
-                        } else {
-                            this.selectedAddress = {};
-                            this.selectedAddressId = "";
-                        }
-
-                        this.$dispatch("address-changed", this.selectedAddress);
-
-                        break;
-                    }
-                }
-            }
-        },
-
-
-        /**
-         * Update the selected address when a new address is created
-         * @param addressData
-         */
-        onAddressCreated: function onAddressCreated(addressData) {
-            this.selectedAddressId = addressData.id;
-
-            this.loadSelectedAddress();
-        },
-
-
-        /**
-         * Update the selected address on address update
-         * @param addressData
-         */
-        onSelectedAddressUpdated: function onSelectedAddressUpdated(addressData) {
-            if (parseInt(this.selectedAddressId) === parseInt(addressData.id)) {
-                this.selectedAddressId = addressData.id;
-
-                this.loadSelectedAddress();
-            }
-        },
-
-
-        /**
-         * @param countryId
-         * @returns country name | empty string
-         */
-        getCountryName: function getCountryName(countryId) {
-            if (countryId > 0) {
-                return this.countryNameMap[countryId];
-            }
-
-            return "";
-        }
-    },
-
-    computed: {
-        isAddAddressEnabled: function isAddAddressEnabled() {
-            var isLoggedIn = this.user.isLoggedIn;
-
-            if (this.addressType === "1") {
-                return isLoggedIn || this.addressList.length < 1;
-            }
-
-            return isLoggedIn || this.addressList.length < 2;
-        }
-    },
-    filters: {
-        optionType: function optionType(selectedAddress, typeId) {
-            if (selectedAddress.name2) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var optionType = _step.value;
-
-                        if (optionType.typeId === typeId) {
-                            return optionType.value;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-
-            return "";
-        }
-    }
-});
-
-},{"services/AddressFieldService":80,"services/AddressService":81,"services/ApiService":82,"services/ModalService":87,"services/ResourceService":89,"services/ValidationService":91}],15:[function(require,module,exports){
-"use strict";
-
-var _AddressService = require("services/AddressService");
-
-var _AddressService2 = _interopRequireDefault(_AddressService);
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("create-update-address", {
-
-    props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
-
-    data: function data() {
-        return {
-            waiting: false,
-            addressFormNames: {
-                1: "#billing_address_form",
-                2: "#delivery_address_form"
-            }
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * Validate the address fields
-         */
-        validate: function validate() {
-            var _this = this;
-
-            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
-                _this.saveAddress();
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-
-        /**
-         * Save the new address or update an existing one
-         */
-        saveAddress: function saveAddress() {
-            if (this.modalType === "initial" || this.modalType === "create") {
-                this.createAddress();
-            } else if (this.modalType === "update") {
-                this.updateAddress();
-            }
-        },
-
-
-        /**
-         * Update an address
-         */
-        updateAddress: function updateAddress() {
-            var _this2 = this;
-
-            this.waiting = true;
-
-            this._syncOptionTypesAddressData();
-
-            _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
-                _this2.$dispatch("selected-address-updated", _this2.addressData);
-
-                _this2.addressModal.hide();
-
-                for (var key in _this2.addressList) {
-                    var address = _this2.addressList[key];
-
-                    if (address.id === _this2.addressData.id) {
-                        for (var attribute in _this2.addressList[key]) {
-                            _this2.addressList[key][attribute] = _this2.addressData[attribute];
-                        }
-
-                        break;
-                    }
-                }
-
-                _this2.waiting = false;
-            }).fail(function (response) {
-                _this2.waiting = false;
-
-                if (response.validation_errors) {
-                    _this2._handleValidationErrors(response.validation_errors);
-                }
-            });
-        },
-
-
-        /**
-         * Create a new address
-         */
-        createAddress: function createAddress() {
-            var _this3 = this;
-
-            this.waiting = true;
-
-            this._syncOptionTypesAddressData();
-
-            _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
-                _this3.addressData = newAddress;
-
-                _this3.addressModal.hide();
-                _this3.addressList.push(_this3.addressData);
-
-                _this3.$dispatch("new-address-created", _this3.addressData);
-
-                _this3.waiting = false;
-            }).fail(function (response) {
-                _this3.waiting = false;
-
-                if (response.validation_errors) {
-                    _this3._handleValidationErrors(response.validation_errors);
-                }
-            });
-        },
-        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
-
-            var errorMessage = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
-
-                    errorMessage += value + "<br>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            NotificationService.error(errorMessage);
-        },
-        _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
-
-            if (typeof this.addressData.options !== "undefined") {
-                var _iteratorNormalCompletion2 = true;
-                var _didIteratorError2 = false;
-                var _iteratorError2 = undefined;
-
-                try {
-                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                        var optionType = _step2.value;
-
-                        switch (optionType.typeId) {
-                            case 1:
-                                {
-                                    if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
-                                        optionType.value = this.addressData.vatNumber;
-                                    }
-
-                                    break;
-                                }
-
-                            case 9:
-                                {
-                                    if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
-                                        optionType.value = this.addressData.birthday;
-                                    }
-                                    break;
-                                }
-
-                            case 11:
-                                {
-                                    if (this.addressData.title && this.addressData.title !== optionType.value) {
-                                        optionType.value = this.addressData.title;
-                                    }
-                                    break;
-                                }
-
-                            case 4:
-                                {
-                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
-                                        optionType.value = this.addressData.telephone;
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                            _iterator2.return();
-                        }
-                    } finally {
-                        if (_didIteratorError2) {
-                            throw _iteratorError2;
-                        }
-                    }
-                }
-            }
-        }
-    }
-});
-
-},{"services/AddressService":81,"services/NotificationService":88,"services/ValidationService":91}],16:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("invoice-address-select", {
-
-    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError' :country-name-map=\"countryNameMap\"></address-select>",
-
-    props: ["addressList", "hasToValidate", "selectedAddressId", "countryNameMap"],
-
-    data: function data() {
-        return {
-            checkout: {},
-            checkoutValidation: { invoiceAddress: {} }
-        };
-    },
-
-
-    /**
-     * Initialise the event listener
-     */
-    created: function created() {
-        ResourceService.bind("checkout", this);
-
-        if (this.hasToValidate) {
-            ResourceService.bind("checkoutValidation", this);
-
-            this.checkoutValidation.invoiceAddress.validate = this.validate;
-        }
-    },
-
-
-    /**
-     * If no address is related to the user, a popup will open to add an address
-     */
-    ready: function ready() {
-        if (App.isCheckoutView && this.addressList.length <= 0) {
-            this.$refs.invoiceAddressSelect.showInitialAddModal();
-        } else if (this.addressList.length) {
-            this.addressChanged(this.addressList[0]);
-        }
-    },
-
-
-    methods: {
-        /**
-         * Update the invoice address
-         * @param selectedAddress
-         */
-        addressChanged: function addressChanged(selectedAddress) {
-            var _this = this;
-
-            this.checkout.billingAddressId = selectedAddress.id;
-
-            ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this.checkout.billingAddressId }));
-            });
-
-            if (this.hasToValidate) {
-                this.validate();
-            }
-        },
-        validate: function validate() {
-            this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
-        }
-    }
-});
-
-},{"services/ResourceService":89}],17:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("shipping-address-select", {
-
-    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :country-name-map=\"countryNameMap\"></address-select>",
-
-    props: ["addressList", "selectedAddressId", "countryNameMap"],
-
-    data: function data() {
-        return {
-            checkout: {}
-        };
-    },
-
-
-    /**
-     * Initialise the event listener
-     */
-    created: function created() {
-        ResourceService.bind("checkout", this);
-
-        if (!this.addressList) {
-            this.addressList = [];
-        }
-
-        // Adds the dummy entry for "delivery address same as invoice address"
-        this.addressList.unshift({
-            id: -99
-        });
-
-        // if there is no selection for delivery address, the dummy entry will be selected
-        if (this.selectedAddressId === 0) {
-            this.selectedAddressId = -99;
-            this.checkout.deliveryAddressId = -99;
-            ResourceService.getResource("checkout").set(this.checkout);
-        }
-    },
-
-
-    methods: {
-        /**
-         * Update the delivery address
-         * @param selectedAddress
-         */
-        addressChanged: function addressChanged(selectedAddress) {
-            var _this = this;
-
-            this.checkout.deliveryAddressId = selectedAddress.id;
-            ResourceService.getResource("checkout").set(this.checkout).done(function () {
-                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.checkout.deliveryAddressId }));
-            });
-        }
-    }
-});
-
-},{"services/ResourceService":89}],18:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("contact-form", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            name: "",
-            userMail: "",
-            subject: "",
-            message: "",
-            orderId: "",
-            cc: false,
-            disabledSend: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        window.sendMail = this.sendMail;
-    },
-
-
-    methods: {
-        validate: function validate(useCapture) {
-            var _this = this;
-
-            _ValidationService2.default.validate($("#contact-form")).done(function () {
-                if (useCapture) {
-                    grecaptcha.execute();
-                } else {
-                    _this.sendMail();
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-        sendMail: function sendMail() {
-            var _this2 = this;
-
-            this.disabledSend = true;
-            this.onSendIcon();
-
-            var mailObj = {
-                subject: this.subject,
-                name: this.name,
-                message: this.message,
-                orderId: this.orderId,
-                userMail: this.userMail,
-                cc: this.cc
-            };
-
-            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
-                _this2.clearFields();
-                NotificationService.success(Translations.Template.contactSendSuccess);
-            }).fail(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
-
-                if (response.validation_errors) {
-                    _this2._handleValidationErrors(response.validation_errors);
-                } else {
-                    NotificationService.error(Translations.Template.contactSendFail);
-                }
-            });
-        },
-        clearFields: function clearFields() {
-            this.name = "";
-            this.userMail = "";
-            this.subject = "";
-            this.message = "";
-            this.orderId = "";
-            this.cc = false;
-        },
-        onSendIcon: function onSendIcon() {
-            var sendIcon = $(".send-btn i");
-
-            if (this.disabledSend) {
-                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
-            } else {
-                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
-            }
-        },
-        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
-            _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
-
-            var errorMessage = "";
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var value = _step.value;
-
-                    errorMessage += value + "<br>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            NotificationService.error(errorMessage);
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/NotificationService":88,"services/ValidationService":91}],19:[function(require,module,exports){
-"use strict";
-
-Vue.component("contact-map", {
-
-    props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        if (!document.getElementById("maps-api")) {
-            this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
-        }
-    },
-
-
-    methods: {
-        initMap: function initMap() {
-            var coordinates = { lat: -34.397, lng: 150.644 };
-            var self = this;
-
-            var gMap = new google.maps.Map(document.getElementById("contact-map"), {
-                center: coordinates,
-                zoom: self.mapZoom
-            });
-
-            this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
-        },
-        getLatLngByAddress: function getLatLngByAddress(geocoder, resultsMap) {
-            var addressData = this.zip + " " + this.street;
-
-            geocoder.geocode({ address: addressData }, function (results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    resultsMap.setCenter(results[0].geometry.location);
-
-                    // eslint-disable-next-line
-                    var marker = new google.maps.Marker({
-                        map: resultsMap,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    console.log("Not possible to get Ltd and Lng for the given address. State: " + status);
-                }
-            });
-        },
-        addScript: function addScript(path) {
-            var _this = this;
-
-            var head = document.getElementsByTagName("head")[0];
-            var script = document.createElement("script");
-
-            script.type = "text/javascript";
-            script.src = path;
-            script.id = "contact-map-api";
-
-            if (script.readyState) {
-                script.onreadystatechange = function () {
-                    if (script.readyState === "loaded" || script.readyState === "complete") {
-                        script.onreadystatechange = null;
-                        _this.initMap();
-                    }
-                };
-            } else {
-                script.onload = function () {
-                    _this.initMap();
-                };
-            }
-
-            head.appendChild(script);
-        }
-    }
-});
-
-},{}],20:[function(require,module,exports){
-"use strict";
-
-var CountryService = require("services/CountryService");
-var ResourceService = require("services/ResourceService");
-
-Vue.component("country-select", {
-
-    props: ["countryList", "countryNameMap", "selectedCountryId", "selectedStateId", "template", "addressType"],
-
-    data: function data() {
-        return {
-            stateList: [],
-            selectedCountry: {},
-            localization: {}
-        };
-    },
-
-    /**
-     * Get the shipping countries
-     */
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
-
-        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
-        CountryService.sortCountries(this.countryList);
-    },
-
-
-    methods: {
-        /**
-         * Method to fire when the country has changed
-         */
-        countryChanged: function countryChanged() {
-            this.selectedStateId = null;
-        },
-
-
-        /**
-         * @param countryId
-         * @returns {*}
-         */
-        getCountryById: function getCountryById(countryId) {
-            return this.countryList.find(function (country) {
-                if (country.id === countryId) {
-                    return country;
-                }
-
-                return null;
-            });
-        }
-    },
-
-    watch: {
-        selectedCountryId: function selectedCountryId() {
-            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
-            this.selectedCountry = this.getCountryById(this.selectedCountryId);
-
-            if (this.selectedCountry) {
-                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
-
-                this.$dispatch("selected-country-changed", this.selectedCountry);
-            }
-        }
-    }
-});
-
-},{"services/CountryService":85,"services/ResourceService":89}],21:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("registration", {
-
-    props: {
-        modalElement: String,
-        guestMode: { type: Boolean, default: false },
-        isSimpleRegistration: { type: Boolean, default: false },
-        template: String,
-        backlink: String
-    },
-
-    data: function data() {
-        return {
-            password: "",
-            passwordRepeat: "",
-            username: "",
-            billingAddress: {},
-            isDisabled: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        /**
-         * Validate the registration form
-         */
-        validateRegistration: function validateRegistration() {
-            var self = this;
-
-            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
-                self.sendRegistration();
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-        /**
-         * Send the registration
-         */
-        sendRegistration: function sendRegistration() {
-            var userObject = this.getUserObject();
-            var component = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer", userObject).done(function (response) {
-                ApiService.setToken(response);
-
-                if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
-                    NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
-
-                    if (document.getElementById(component.modalElement) !== null) {
-                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
-                    }
-                } else {
-                    NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
-                }
-
-                if (component.backlink !== null && component.backlink) {
-                    window.location.assign(component.backlink);
-                } else {
-                    location.reload();
-                }
-
-                component.isDisabled = false;
-            }).fail(function () {
-                component.isDisabled = false;
-            });
-        },
-
-        /**
-         * Handle the user object which is send to the server
-         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
-         */
-        getUserObject: function getUserObject() {
-            var userObject = {
-                contact: {
-                    referrerId: 1,
-                    typeId: 1,
-                    options: {
-                        typeId: {
-                            typeId: 2,
-                            subTypeId: 4,
-                            value: this.username,
-                            priority: 0
-                        }
-                    }
-                }
-            };
-
-            if (!this.guestMode) {
-                userObject.contact.password = this.password;
-            }
-
-            if (!this.isSimpleRegistration) {
-                userObject.billingAddress = this.billingAddress;
-            }
-
-            return userObject;
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/ModalService":87,"services/NotificationService":88,"services/ValidationService":91}],22:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("reset-password-form", {
-
-    props: ["contactId", "hash", "template"],
-
-    data: function data() {
-        return {
-            passwordFirst: "",
-            passwordSecond: "",
-            pwdFields: [],
-            isDisabled: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        this.pwdFields = $("#reset-password-form-" + this._uid).find(".input-unit");
-    },
-
-
-    watch: {
-        passwordFirst: function passwordFirst(val, oldVal) {
-            this.resetError();
-        },
-        passwordSecond: function passwordSecond(val, oldVal) {
-            this.resetError();
-        }
-    },
-
-    methods: {
-        validatePassword: function validatePassword() {
-            var _this = this;
-
-            _ValidationService2.default.validate($("#reset-password-form-" + this._uid)).done(function () {
-                if (_this.checkPasswordEquals()) {
-                    _this.saveNewPassword();
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-        resetError: function resetError() {
-            _ValidationService2.default.unmarkAllFields($("#reset-password-form-" + this._uid));
-            this.pwdFields.removeClass("check-pwds-error");
-            $(".error-save-pwd-msg").hide();
-        },
-        checkPasswordEquals: function checkPasswordEquals() {
-            if (this.passwordFirst !== this.passwordSecond) {
-                this.pwdFields.addClass("check-pwds-error");
-                $(".error-save-pwd-msg").show();
-
-                return false;
-            }
-
-            return true;
-        },
-        saveNewPassword: function saveNewPassword() {
-            var _this2 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash }).done(function () {
-                _this2.resetFields();
-
-                _this2.isDisabled = false;
-
-                window.location.assign(window.location.origin);
-
-                NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
-            }).fail(function () {
-                _this2.isDisabled = false;
-
-                NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
-            });
-        },
-        resetFields: function resetFields() {
-            this.passwordFirst = "";
-            this.passwordSecond = "";
-            this.contactId = 0;
-            this.hash = "";
-        }
-    }
-
-});
-
-},{"services/ApiService":82,"services/NotificationService":88,"services/ValidationService":91}],23:[function(require,module,exports){
-"use strict";
-
-var _AddressFieldService = require("services/AddressFieldService");
-
-var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
-
-var _ResourceService = require("services/ResourceService");
-
-var _ResourceService2 = _interopRequireDefault(_ResourceService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-Vue.component("salutation-select", {
-
-    props: ["template", "addressData", "addressType"],
-
-    data: function data() {
-        return {
-            localization: {},
-            salutations: {
-                complete: {
-                    de: [{
-                        value: "Herr",
-                        id: 0
-                    }, {
-                        value: "Frau",
-                        id: 1
-                    }, {
-                        value: "Firma",
-                        id: 2
-                    }, {
-                        value: "Familie",
-                        id: 3
-                    }],
-                    en: [{
-                        value: "Mr.",
-                        id: 0
-                    }, {
-                        value: "Ms.",
-                        id: 1
-                    }, {
-                        value: "Company",
-                        id: 2
-                    }, {
-                        value: "Family",
-                        id: 3
-                    }]
-                },
-                withoutCompany: {
-                    de: [{
-                        value: "Herr",
-                        id: 0
-                    }, {
-                        value: "Frau",
-                        id: 1
-                    }, {
-                        value: "Familie",
-                        id: 3
-                    }],
-                    en: [{
-                        value: "Mr.",
-                        id: 0
-                    }, {
-                        value: "Ms.",
-                        id: 1
-                    }, {
-                        value: "Family",
-                        id: 3
-                    }]
-                }
-            },
-            currentSalutation: {}
-        };
-    },
-
-
-    /**
-     * Get the shipping countries
-     */
-    created: function created() {
-
-        this.$options.template = this.template;
-
-        _ResourceService2.default.bind("localization", this);
-        this.shopLanguage = this.localization.shopLanguage;
-
-        if (this.shopLanguage === "de") {
-            if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
-                this.currentSalutation = this.salutations.complete.de;
-            } else {
-                this.currentSalutation = this.salutations.withoutCompany.de;
-            }
-        } else if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
-            this.currentSalutation = this.salutations.complete.en;
-        } else {
-            this.currentSalutation = this.salutations.withoutCompany.en;
-        }
-    },
-    ready: function ready() {
-        this.addressData.addressSalutation = 0;
-    },
-
-
-    methods: {
-        changeValue: function changeValue() {
-            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
-                this.addressData.name1 = "";
-            }
-        }
-    }
-});
-
-},{"services/AddressFieldService":80,"services/ResourceService":89}],24:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-
-Vue.component("guest-login", {
-
-    props: ["template", "backlink"],
-
-    data: function data() {
-        return {
-            email: "",
-            isDisabled: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    methods: {
-        validate: function validate() {
-            _ValidationService2.default.validate($("#guest-login-form-" + this._uid)).done(function () {
-                this.sendEMail();
-            }.bind(this)).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-        sendEMail: function sendEMail() {
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/guest", { email: this.email }).done(function () {
-                if (this.backlink !== null && this.backlink) {
-                    window.location.assign(this.backlink);
-                }
-
-                this.isDisabled = false;
-            }.bind(this));
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/ValidationService":91}],25:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("login", {
-
-    props: ["modalElement", "backlink", "hasToForward", "template"],
-
-    data: function data() {
-        return {
-            password: "",
-            username: "",
-            loginFields: [],
-            isDisabled: false,
-            isPwdReset: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        this.loginFields = $(".login-container").find(".input-unit");
-    },
-
-
-    watch: {
-        password: function password(val, oldVal) {
-            this.resetError();
-        },
-
-        username: function username(val, oldVal) {
-            this.resetError();
-        }
-    },
-
-    methods: {
-        /**
-         * Open the login modal
-         */
-        showLogin: function showLogin() {
-            ModalService.findModal(document.getElementById(this.modalElement)).show();
-        },
-        validateLogin: function validateLogin() {
-            var _this = this;
-
-            if (!this.isPwdReset) {
-                _ValidationService2.default.validate($("#login-form-" + this._uid)).done(function () {
-                    _this.sendLogin();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
-        },
-        validateResetPwd: function validateResetPwd() {
-            var _this2 = this;
-
-            if (this.isPwdReset) {
-                _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
-                    _this2.sendResetPwd();
-                }).fail(function (invalidFields) {
-                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
-                });
-            }
-        },
-
-
-        /**
-         * Send the login data
-         */
-        sendLogin: function sendLogin() {
-            var _this3 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true }).done(function (response) {
-                ApiService.setToken(response);
-
-                if (document.getElementById(_this3.modalElement) !== null) {
-                    ModalService.findModal(document.getElementById(_this3.modalElement)).hide();
-                }
-
-                NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
-
-                if (_this3.backlink !== null && _this3.backlink) {
-                    location.assign(_this3.backlink);
-                } else if (_this3.hasToForward) {
-                    location.assign(location.origin);
-                } else {
-                    location.reload();
-                }
-
-                _this3.isDisabled = false;
-            }).fail(function (response) {
-                _this3.isDisabled = false;
-
-                switch (response.error.code) {
-                    case 401:
-                        _this3.loginFields.addClass("has-login-error");
-                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
-                        break;
-                    default:
-                        return;
-                }
-            });
-        },
-
-
-        /**
-         *  Reset password
-         */
-        sendResetPwd: function sendResetPwd() {
-            var _this4 = this;
-
-            this.isDisabled = true;
-
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail" }).done(function () {
-                if (document.getElementById(_this4.modalElement) !== null) {
-                    ModalService.findModal(document.getElementById(_this4.modalElement)).hide();
-
-                    _this4.isDisabled = false;
-
-                    _this4.cancelResetPwd();
-                } else {
-                    window.location.assign(window.location.origin);
-                }
-
-                NotificationService.success(Translations.Template.generalSendEmailOk).closeAfter(5000);
-            }).fail(function () {
-                _this4.isDisabled = false;
-
-                NotificationService.error(Translations.Template.accResetPwDErrorOnSendEmail).closeAfter(5000);
-            });
-        },
-        showResetPwdView: function showResetPwdView() {
-            this.resetError();
-            this.isPwdReset = true;
-
-            if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").html(Translations.Template.accForgotPassword);
-            } else {
-                $(".login-view-title").html(Translations.Template.accForgotPassword);
-            }
-
-            $(".login-container").slideUp("fast", function () {
-                $(".reset-pwd-container").slideDown("fast");
-            });
-        },
-        cancelResetPwd: function cancelResetPwd() {
-            this.resetError();
-            this.isPwdReset = false;
-
-            if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").text(Translations.Template.accLogin);
-            } else {
-                $(".login-view-title").text(Translations.Template.accLogin);
-            }
-
-            $(".reset-pwd-container").slideUp("fast", function () {
-                $(".login-container").slideDown("fast");
-            });
-        },
-        resetError: function resetError() {
-            this.loginFields.removeClass("has-login-error");
-            _ValidationService2.default.unmarkAllFields($("#login-form-" + this._uid));
-            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/ModalService":87,"services/NotificationService":88,"services/ValidationService":91}],26:[function(require,module,exports){
-"use strict";
-
-Vue.component("login-view", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            isGuestMode: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],27:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
-
-Vue.component("user-login-handler", {
-
-    props: ["userData", "template"],
-
-    data: function data() {
-        return {
-            username: "",
-            isLoggedIn: {}
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Add the global event listener for login and logout
-     */
-    ready: function ready() {
-        ResourceService.bind("user", this, "isLoggedIn");
-
-        this.setUsername(this.userData);
-        this.addEventListeners();
-    },
-
-
-    methods: {
-        /**
-         * Set the current user logged in
-         * @param userData
-         */
-        setUsername: function setUsername(userData) {
-            if (userData) {
-                if (userData.firstName.length > 0 && userData.lastName.length > 0) {
-                    this.username = userData.firstName + " " + userData.lastName;
-                } else {
-                    this.username = userData.options[0].value;
-                }
-            }
-        },
-
-
-        /**
-         * Adds login/logout event listeners
-         */
-        addEventListeners: function addEventListeners() {
-            var _this = this;
-
-            ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this.setUsername(userData.accountContact);
-                ResourceService.getResource("user").set({ isLoggedIn: true });
-            });
-
-            ApiService.listen("AfterAccountContactLogout", function () {
-                _this.username = "";
-                ResourceService.getResource("user").set({ isLoggedIn: false });
-            });
-        },
-        unmarkInputFields: function unmarkInputFields() {
-            _ValidationService2.default.unmarkAllFields($("#login"));
-            _ValidationService2.default.unmarkAllFields($("#registration"));
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/ResourceService":89,"services/ValidationService":91}],28:[function(require,module,exports){
-"use strict";
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("add-to-wish-list", {
-
-    props: ["isActive", "variationId", "template"],
-
-    data: function data() {
-        return {
-            wishListCount: 0,
-            isLoading: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        this.changeTooltipText();
-    },
-
-
-    methods: {
-        switchState: function switchState() {
-            if (this.isActive) {
-                this.removeFromWishList();
-            } else {
-                this.addToWishList();
-            }
-        },
-        addToWishList: function addToWishList() {
-            var _this = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.isActive = true;
-                this.changeTooltipText();
-
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
-                    _this.isLoading = false;
-
-                    NotificationService.success(Translations.Template.itemWishListAdded);
-                }, function (error) {
-                    _this.isLoading = false;
-                    _this.isActive = false;
-                    _this.changeTooltipText();
-                });
-            }
-        },
-        removeFromWishList: function removeFromWishList() {
-            var _this2 = this;
-
-            if (!this.isLoading) {
-                this.isLoading = true;
-                this.isActive = false;
-                this.changeTooltipText();
-
-                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
-                    _this2.isLoading = false;
-
-                    NotificationService.success(Translations.Template.itemWishListRemoved);
-                }, function (error) {
-                    _this2.isLoading = false;
-                    _this2.isActive = true;
-                    _this2.changeTooltipText();
-                });
-            }
-        },
-        changeTooltipText: function changeTooltipText() {
-            var tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
-
-            $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
-        }
-    }
-});
-
-},{"services/NotificationService":88}],29:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("item-image-carousel", {
-
-    props: ["imageUrlAccessor", "template"],
-
-    data: function data() {
-        return {
-            init: false,
-            currentVariation: {},
-            currentItem: 0
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.watch("currentVariation", function (newValue) {
-            this.currentVariation = newValue;
-
-            var self = this;
-
-            if (!this.init) {
-                $(window).load(function () {
-                    self.initCarousel();
-                    self.initThumbCarousel();
-
-                    self.init = true;
-                });
-            } else {
-                setTimeout(function () {
-                    self.reInitialize();
-                }, 1);
-            }
-        }.bind(this));
-    },
-
-    methods: {
-        getImageCount: function getImageCount() {
-            var images = this.currentVariation.documents[0].data.images;
-
-            if (images.variation && images.variation.length) {
-                return images.variation.length;
-            }
-
-            return images.all.length;
-        },
-
-        reInitialize: function reInitialize() {
-            var $owl = $(this.$els.single);
-
-            $owl.trigger("destroy.owl.carousel");
-            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
-            $owl.find(".owl-item").remove();
-
-            this.initCarousel();
-        },
-
-        initCarousel: function initCarousel() {
-            var imageCount = this.getImageCount();
-
-            $(this.$els.single).owlCarousel({
-                autoHeight: true,
-                dots: true,
-                items: 1,
-                lazyLoad: true,
-                loop: true,
-                margin: 10,
-                mouseDrag: imageCount > 1,
-                nav: imageCount > 1,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350,
-                onChanged: function (event) {
-                    var $thumb = $(this.$els.thumbs);
-
-                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }.bind(this)
-            });
-
-            $(this.$els.single).on("changed.owl.carousel", function (event) {
-                this.currentItem = event.page.index;
-            }.bind(this));
-        },
-
-        initThumbCarousel: function initThumbCarousel() {
-            $(this.$els.thumbs).owlCarousel({
-                autoHeight: true,
-                dots: false,
-                items: 5,
-                lazyLoad: true,
-                loop: false,
-                margin: 10,
-                mouseDrag: false,
-                center: false,
-                nav: true,
-                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
-                navContainerClass: "",
-                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
-            });
-        },
-
-        goTo: function goTo(index) {
-            var $owl = $(this.$els.single);
-
-            $owl.trigger("to.owl.carousel", [index, 350]);
-        }
-    }
-});
-
-},{"services/ResourceService":89}],30:[function(require,module,exports){
-"use strict";
-
-Vue.component("order-properties", {
-
-    props: ["template", "item"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    }
-});
-
-},{}],31:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("quantity-input", {
-
-    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting", "variationId"],
-
-    data: function data() {
-        return {
-            timeoutHandle: null,
-            internalMin: null,
-            internalMax: null,
-            basketItems: [],
-            currentCount: 0
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        ResourceService.bind("basketItems", this);
-
-        this.checkDefaultVars();
-        this.initDefaultVars();
-        this.initValueWatcher();
-
-        if (!this.vertical) {
-            this.initBasketValueWatcher();
-            this.handleMissingItems();
-        }
-    },
-
-
-    methods: {
-        countValueUp: function countValueUp() {
-            if (!(this.value === this.internalMax) && !this.waiting) {
-                this.value++;
-            }
-        },
-        countValueDown: function countValueDown() {
-            if (!(this.value === this.internalMin) && !this.waiting) {
-                this.value--;
-            }
-        },
-        checkDefaultVars: function checkDefaultVars() {
-            this.min = this.min === 0 ? null : this.min;
-            this.max = this.max === 0 ? null : this.max;
-        },
-        initDefaultVars: function initDefaultVars() {
-            this.timeout = this.timeout || 300;
-            this.internalMin = this.min || 1;
-            this.internalMax = this.max || 9999;
-            this.vertical = this.vertical || false;
-        },
-        initValueWatcher: function initValueWatcher() {
-            var _this = this;
-
-            this.$watch("value", function (newValue) {
-                if (newValue < _this.internalMin) {
-                    _this.value = _this.internalMin;
-                }
-
-                if (newValue > _this.internalMax) {
-                    _this.value = _this.internalMax;
-                }
-
-                if (_this.timeoutHandle) {
-                    window.clearTimeout(_this.timeoutHandle);
-                }
-
-                _this.timeoutHandle = window.setTimeout(function () {
-                    _this.$dispatch("quantity-change", newValue);
-                }, _this.timeout);
-            });
-        },
-        handleMissingItems: function handleMissingItems() {
-            if (this.alreadyInBasketCount() >= this.internalMin) {
-                this.internalMin = 1;
-            }
-
-            if (this.max !== null) {
-                this.internalMax = this.max - this.alreadyInBasketCount();
-
-                if (this.alreadyInBasketCount() === this.max) {
-                    this.internalMin = 0;
-                    this.internalMax = 0;
-                    this.$dispatch("out-of-stock", true);
-                } else {
-                    this.$dispatch("out-of-stock", false);
-                }
-            }
-
-            this.value = this.internalMin;
-        },
-        initBasketValueWatcher: function initBasketValueWatcher() {
-            var _this2 = this;
-
-            ResourceService.watch("basketItems", function (newBasketItems, oldBasketItems) {
-                if (oldBasketItems) {
-                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems)) {
-                        _this2.initDefaultVars();
-
-                        _this2.handleMissingItems();
-                    }
-                }
-            });
-        },
-        alreadyInBasketCount: function alreadyInBasketCount() {
-            var _this3 = this;
-
-            if (this.basketItems.find(function (variations) {
-                return variations.variationId === _this3.variationId;
-            })) {
-                return this.basketItems.find(function (variations) {
-                    return variations.variationId === _this3.variationId;
-                }).quantity;
-            }
-
-            return 0;
-        }
-    }
-
-});
-
-},{"services/ResourceService":89}],32:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
-
-// cache loaded variation data for reuse
-var VariationData = {};
-
-Vue.component("variation-select", {
-
-    props: ["attributes", "variations", "preselect", "template"],
-
-    data: function data() {
-        return {
-            // Collection of currently selected variation attributes.
-            selectedAttributes: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    ready: function ready() {
-        // initialize selected attributes to be tracked by change detection
-        var attributes = {};
-
-        for (var attributeId in this.attributes) {
-            attributes[attributeId] = null;
-        }
-        this.selectedAttributes = attributes;
-
-        // set attributes of preselected variation if exists
-        if (this.preselect) {
-            // find variation by id
-            var preselectedVariation = this.variations.filter(function (variation) {
-                // eslint-disable-next-line eqeqeq
-                return variation.variationId == this.preselect;
-            }.bind(this));
-
-            if (!!preselectedVariation && preselectedVariation.length === 1) {
-                // set attributes of preselected variation
-                this.setAttributes(preselectedVariation[0]);
-            }
-        }
-
-        // search for matching variation on each change of attribute selection
-        this.$watch("selectedAttributes", function () {
-            // search variations matching current selection
-            var possibleVariations = this.filterVariations();
-
-            if (possibleVariations.length === 1) {
-                // only 1 matching variation remaining:
-                // set remaining attributes if not set already. Will trigger this watcher again.
-                if (!this.setAttributes(possibleVariations[0])) {
-                    // all attributes are set => load variation data
-                    var variationId = possibleVariations[0].variationId;
-
-                    if (VariationData[variationId]) {
-                        // reuse cached variation data
-                        ResourceService.getResource("currentVariation").set(VariationData[variationId]);
-
-                        document.dispatchEvent(new CustomEvent("onVariationChanged", {
-                            detail: {
-                                attributes: VariationData[variationId].attributes,
-                                documents: VariationData[variationId].documents
-                            }
-                        }));
-                    } else {
-                        // get variation data from remote
-                        ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
-                            // store received variation data for later reuse
-                            VariationData[variationId] = response;
-                            ResourceService.getResource("currentVariation").set(response);
-
-                            document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
-                        });
-                    }
-                }
-            }
-        }, {
-            deep: true
-        });
-
-        // watch for changes on selected variation to adjust url
-        ResourceService.watch("currentVariation", function (newVariation, oldVariation) {
-            if (oldVariation) {
-                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                var title = document.getElementsByTagName("title")[0].innerHTML;
-
-                window.history.replaceState({}, title, url);
-            }
-        }.bind(this));
-    },
-
-    methods: {
-
-        /**
-         * Finds all variations matching a given set of attributes.
-         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
-         * @returns {array}                    A list of matching variations.
-         */
-        filterVariations: function filterVariations(attributes) {
-            attributes = attributes || this.selectedAttributes;
-            return this.variations.filter(function (variation) {
-
-                for (var i = 0; i < variation.attributes.length; i++) {
-                    var id = variation.attributes[i].attributeId;
-                    var val = variation.attributes[i].attributeValueId;
-
-                    if (!!attributes[id] && attributes[id] != val) {
-                        return false;
-                    }
-                }
-                return true;
-            });
-        },
-
-        /**
-         * Tests if a given attribute value is not available depending on the current selection.
-         * @param {int}     attributeId         The id of the attribute
-         * @param {int}     attributeValueId    The valueId of the attribute
-         * @returns {boolean}                   True if the value can be combined with the current selection.
-         */
-        isEnabled: function isEnabled(attributeId, attributeValueId) {
-            // clone selectedAttributes to avoid touching objects bound to UI
-            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
-
-            attributes[attributeId] = attributeValueId;
-            return this.filterVariations(attributes).length > 0;
-        },
-
-        /**
-         * Set selected attributes by a given variation.
-         * @param {*}           variation   The variation to set as selected
-         * @returns {boolean}               true if at least one attribute has been changed
-         */
-        setAttributes: function setAttributes(variation) {
-            var hasChanges = false;
-
-            for (var i = 0; i < variation.attributes.length; i++) {
-                var id = variation.attributes[i].attributeId;
-                var val = variation.attributes[i].attributeValueId;
-
-                if (this.selectedAttributes[id] !== val) {
-                    this.selectedAttributes[id] = val;
-                    hasChanges = true;
-                }
-            }
-
-            return hasChanges;
-        }
-
-    }
-
-});
-
-},{"services/ApiService":82,"services/ResourceService":89}],33:[function(require,module,exports){
-"use strict";
-
-Vue.component("category-image-carousel", {
-
-    props: {
-        imageUrls: { type: Array },
-        itemUrl: { type: String },
-        altText: { type: String },
-        showDots: { type: String },
-        showNav: { type: String },
-        disableLazyLoad: {
-            type: Boolean,
-            default: false
-        },
-        enableCarousel: { type: Boolean },
-        template: { type: String }
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
-    },
-
-    ready: function ready() {
-        if (this.enableCarousel) {
-            this.initializeCarousel();
-        }
-    },
-
-    methods: {
-        initializeCarousel: function initializeCarousel() {
-            $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: this.showDots === "true",
-                items: 1,
-                mouseDrag: false,
-                loop: this.imageUrls.length > 1,
-                lazyLoad: !this.disableLazyLoad,
-                margin: 10,
-                nav: this.showNav === "true",
-                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
-                onTranslated: function onTranslated(event) {
-                    var target = $(event.currentTarget);
-
-                    var owlItem = $(target.find(".owl-item.active"));
-
-                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
-                }
-            });
-        }
-    }
-});
-
-},{}],34:[function(require,module,exports){
-"use strict";
-
-Vue.component("category-item", {
-
-    template: "#vue-category-item",
-
-    props: ["decimalCount", "itemData", "imageUrlAccessor"],
-
-    data: function data() {
-        return {
-            recommendedRetailPrice: 0,
-            variationRetailPrice: 0
-        };
-    },
-
-    created: function created() {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
-    },
-
-    computed: {
-        /**
-         * returns itemData.item.storeSpecial
-         */
-        storeSpecial: function storeSpecial() {
-            return this.itemData.item.storeSpecial;
-        },
-
-        /**
-         * returns itemData.texts[0]
-         */
-        texts: function texts() {
-            return this.itemData.texts;
-        }
-    }
-});
-
-},{}],35:[function(require,module,exports){
-"use strict";
-
-Vue.component("item-lazy-img", {
-
-    props: ["imageUrl", "template"],
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    ready: function ready() {
-        var self = this;
-
-        setTimeout(function () {
-            $(self.$els.lazyImg).show().lazyload({ threshold: 100 });
-        }, 1);
-    }
-});
-
-},{}],36:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("item-list", {
-
-    props: ["categoryId", "template"],
-
-    data: function data() {
-        return {
-            itemList: {},
-            isLoading: false,
-            filterListState: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        ItemListService.setCategoryId(this.categoryId);
-    },
-
-    ready: function ready() {
-        ResourceService.bind("itemList", this);
-        ResourceService.bind("isLoading", this);
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89}],37:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ItemListService = require("services/ItemListService");
-
-Vue.component("item-list-sorting", {
-
-    props: ["sortData", "template"],
-
-    data: function data() {
-        return {
-            selectedSorting: {},
-            dataTranslationMapping: {
-                "default.recommended_sorting": "itemRecommendedSorting",
-                "texts.name1_asc": "itemName_asc",
-                "texts.name1_desc": "itemName_desc",
-                "sorting.price.min_asc": "itemPrice_asc",
-                "sorting.price.max_desc": "itemPrice_desc",
-                "variation.createdAt_desc": "variationCreateTimestamp_desc",
-                "variation.createdAt_asc": "variationCreateTimestamp_asc",
-                "variation.availability.averageDays_asc": "availabilityAverageDays_asc",
-                "variation.availability.averageDays_desc": "availabilityAverageDays_desc",
-                "variation.number_asc": "variationCustomNumber_asc",
-                "variation.number_desc": "variationCustomNumber_desc",
-                "variation.updatedAt_asc": "variationLastUpdateTimestamp_asc",
-                "variation.updatedAt_desc": "variationLastUpdateTimestamp_desc",
-                "item.manufacturer.externalName_asc": "itemProducerName_asc",
-                "item.manufacturer.externalName_desc": "itemProducerName_desc"
-            }
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        if (App.isSearch) {
-            this.sortData.unshift("item.score");
-            this.dataTranslationMapping["item.score"] = "itemRelevance";
-        }
-
-        this.buildData();
-        this.setDefaultSorting();
-
-        this.setSelectedValueByUrl();
-    },
-
-
-    methods: {
-        buildData: function buildData() {
-            for (var i in this.sortData) {
-                var data = this.sortData[i];
-                var sortItem = {
-                    value: data,
-                    displayName: Translations.Template[this.dataTranslationMapping[data]]
-                };
-
-                this.sortData[i] = sortItem;
-            }
-        },
-        setDefaultSorting: function setDefaultSorting() {
-            var defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
-
-            this.selectedSorting = this.sortData.find(function (entry) {
-                return entry.value === defaultSortKey;
-            });
-        },
-        updateSorting: function updateSorting() {
-            ItemListService.setOrderBy(this.selectedSorting.value);
-            ItemListService.getItemList();
-        },
-        setSelectedValueByUrl: function setSelectedValueByUrl() {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            if (urlParams.sorting) {
-                for (var i in this.sortData) {
-                    if (this.sortData[i].value === urlParams.sorting) {
-                        this.selectedSorting = this.sortData[i];
-                        ItemListService.setOrderBy(this.selectedSorting.value);
-                    }
-                }
-            }
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/UrlService":90}],38:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("item-search", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            searchString: "",
-            itemSearch: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    ready: function ready() {
-        ResourceService.bind("itemSearch", this);
-        this.initAutocomplete();
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        this.itemSearch.query = urlParams.query;
-
-        if (this.itemSearch.query) {
-            ItemListService.updateSearchString(this.itemSearch.query);
-        }
-    },
-
-    methods: {
-        search: function search() {
-            if (document.location.pathname === "/search") {
-                ItemListService.setSearchString(this.itemSearch.query);
-                ItemListService.getItemList();
-            } else {
-                window.open("/search?query=" + this.itemSearch.query, "_self", false);
-            }
-        },
-
-        initAutocomplete: function initAutocomplete() {
-            var self = this;
-
-            $(".search-input").autocomplete({
-                serviceUrl: "/rest/io/item/search/autocomplete",
-                paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
-                width: $(".search-box-shadow-frame").width(),
-                zIndex: 1070,
-                maxHeight: 310,
-                minChars: 2,
-                preventBadQueries: false,
-                onSelect: function onSelect(suggestion) {
-                    self.itemSearch.query = suggestion.value;
-                    self.search();
-                },
-                beforeRender: function beforeRender() {
-                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-                },
-                transformResult: function transformResult(response) {
-                    return self.transformSuggestionResult(response);
-                }
-            });
-
-            $(window).resize(function () {
-                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
-            });
-        },
-
-        transformSuggestionResult: function transformSuggestionResult(result) {
-            result = JSON.parse(result);
-            var suggestions = {
-                suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
-
-                    return {
-                        value: value,
-                        data: value
-                    };
-                }.bind(this))
-            };
-
-            return suggestions;
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89,"services/UrlService":90}],39:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var accounting = require("accounting");
-
-Vue.component("item-store-special", {
-
-    template: "#vue-item-store-special",
-
-    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount"],
-
-    data: function data() {
-        return {
-            localization: {},
-            tagClass: "",
-            label: "",
-            tagClasses: {
-                1: "bg-danger",
-                2: "bg-primary",
-                default: "bg-success"
-            }
-        };
-    },
-    created: function created() {
-        ResourceService.bind("localization", this);
-
-        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
-        this.label = this.getLabel();
-    },
-
-
-    methods: {
-        getLabel: function getLabel() {
-            if (this.storeSpecial.id === 1) {
-                var percent = this.getPercentageSale();
-
-                if (parseInt(percent) < 0) {
-                    return percent + "%";
-                }
-            }
-
-            return this.storeSpecial.names.name;
-        },
-        getPercentageSale: function getPercentageSale() {
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
-
-            return accounting.formatNumber(percent, this.decimalCount, "");
-        }
-    }
-});
-
-},{"accounting":95,"services/ResourceService":89}],40:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("items-per-page", {
-
-    props: ["columnsPerPage", "rowsPerPage", "template"],
-
-    data: function data() {
-        return {
-            itemSearch: {},
-            paginationValues: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        this.initPaginationValues();
-        ResourceService.bind("itemSearch", this);
-        this.setSelectedValueByUrl();
-    },
-
-    methods: {
-        itemsPerPageChanged: function itemsPerPageChanged() {
-            ItemListService.setItemsPerPage(this.itemSearch.items);
-            ItemListService.setPage(1);
-            ItemListService.getItemList();
-        },
-
-        setSelectedValueByUrl: function setSelectedValueByUrl() {
-            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-            if (urlParams.items) {
-                if (this.paginationValues.indexOf(urlParams.items) > -1) {
-                    this.itemSearch.items = urlParams.items;
-                } else {
-                    this.itemSearch.items = App.config.defaultItemsPerPage;
-                }
-            } else {
-                this.itemSearch.items = App.config.defaultItemsPerPage;
-            }
-
-            ItemListService.setItemsPerPage(this.itemSearch.items);
-        },
-
-        initPaginationValues: function initPaginationValues() {
-            for (var rowKey in this.rowsPerPage) {
-                this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
-            }
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89,"services/UrlService":90}],41:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("pagination", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            itemSearch: {},
-            itemList: {},
-            lastPageMax: 0
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("itemSearch", this);
-        ResourceService.bind("itemList", this);
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        this.itemSearch.page = urlParams.page;
-    },
-
-    methods: {
-        setPage: function setPage(page) {
-            ItemListService.setPage(page);
-            ItemListService.getItemList();
-
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-    },
-
-    computed: {
-        page: function page() {
-            return parseInt(this.itemSearch.page) || 1;
-        },
-
-        pageMax: function pageMax() {
-            if (this.itemSearch.isLoading) {
-                return this.lastPageMax;
-            }
-
-            var pageMax = this.itemList.total / parseInt(this.itemSearch.items);
-
-            if (this.itemList.total % parseInt(this.itemSearch.items) > 0) {
-                pageMax += 1;
-            }
-
-            this.lastPageMax = parseInt(pageMax) || 1;
-            return parseInt(pageMax) || 1;
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89,"services/UrlService":90}],42:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("item-filter", {
-
-    props: ["template", "facet"],
-
-    data: function data() {
-        return {
-            facetParams: [],
-            isLoading: false
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
-    },
-
-    ready: function ready() {
-        ResourceService.bind("isLoading", this);
-    },
-
-    methods: {
-        updateFacet: function updateFacet() {
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
-            ItemListService.getItemList();
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89}],43:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("item-filter-list", {
-
-    props: ["template", "facets"],
-
-    data: function data() {
-        return {
-            isActive: false
-        };
-    },
-
-    created: function created() {
-        ResourceService.bind("facets", this);
-
-        this.$options.template = this.template || "#vue-item-filter-list";
-
-        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
-
-        if (urlParams.facets) {
-            ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
-        }
-    },
-
-    methods: {
-        toggleOpeningState: function toggleOpeningState() {
-            window.setTimeout(function () {
-                this.isActive = !this.isActive;
-            }.bind(this), 300);
-        }
-    }
-});
-
-},{"services/ResourceService":89,"services/UrlService":90}],44:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
-Vue.component("item-filter-tag-list", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            facets: {},
-            facetParams: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-item-filter-tag-list";
-        ResourceService.bind("facetParams", this);
-    },
-
-    ready: function ready() {
-        ResourceService.bind("facets", this);
-    },
-
-    methods: {
-        removeTag: function removeTag(tagId) {
-            this.facetParams.splice(this.facetParams.indexOf(tagId.toString()), 1);
-
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
-            ItemListService.getItemList();
-        }
-    },
-
-    computed: {
-        tagList: function tagList() {
-            var tagList = [];
-
-            if (this.facetParams.length > 0) {
-                for (var facetKey in this.facets) {
-                    for (var facetItemKey in this.facets[facetKey].values) {
-                        if (this.facetParams.indexOf(this.facets[facetKey].values[facetItemKey].id.toString()) > -1) {
-                            tagList.push(this.facets[facetKey].values[facetItemKey]);
-                        }
-                    }
-                }
-            }
-
-            return tagList;
-        }
-    }
-});
-
-},{"services/ItemListService":86,"services/ResourceService":89}],45:[function(require,module,exports){
-"use strict";
-
-var ModalService = require("services/ModalService");
-var APIService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-
-Vue.component("account-settings", {
-
-    props: ["userData", "template"],
-
-    data: function data() {
-        return {
-            newPassword: "",
-            confirmPassword: "",
-            accountSettingsClass: "",
-            accountSettingsModal: {}
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    /**
-     * Initialise the account settings modal
-     */
-    ready: function ready() {
-        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
-    },
-
-    computed: {
-        /**
-         * Check whether the passwords match
-         * @returns {boolean}
-         */
-        matchPassword: function matchPassword() {
-            if (this.confirmPassword !== "") {
-                return this.newPassword === this.confirmPassword;
-            }
-            return true;
-        }
-    },
-
-    methods: {
-
-        /**
-         * Open the account settings modal
-         */
-        showChangeAccountSettings: function showChangeAccountSettings() {
-            this.accountSettingsModal.show();
-        },
-
-        /**
-         * Save the new password
-         */
-        saveAccountSettings: function saveAccountSettings() {
-            var self = this;
-
-            if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
-                APIService.post("/rest/io/customer/password", { password: this.newPassword }).done(function (response) {
-                    self.clearFieldsAndClose();
-                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
-                }).fail(function (response) {
-                    self.clearFieldsAndClose();
-                    NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
-                });
-            }
-        },
-
-        /**
-         * Clear the password fields in the modal
-         */
-        clearFields: function clearFields() {
-            this.newPassword = "";
-            this.confirmPassword = "";
-        },
-
-        /**
-         * Clear the fields and close the modal
-         */
-        clearFieldsAndClose: function clearFieldsAndClose() {
-            this.accountSettingsModal.hide();
-            this.clearFields();
-        }
-    }
-
-});
-
-},{"services/ApiService":82,"services/ModalService":87,"services/NotificationService":88}],46:[function(require,module,exports){
-"use strict";
-
-var _ValidationService = require("services/ValidationService");
-
-var _ValidationService2 = _interopRequireDefault(_ValidationService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService = require("services/ModalService");
-
-Vue.component("bank-data-select", {
-
-    props: ["userBankData", "contactId", "template"],
-
-    data: function data() {
-        return {
-            bankInfoModal: {},
-            bankDeleteModal: {},
-            updateBankData: {},
-            selectedBankData: null,
-            updateBankIndex: 0,
-            doUpdate: null,
-            headline: ""
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Select the modals
-     */
-    ready: function ready() {
-        this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
-        this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
-    },
-
-
-    methods: {
-
-        /**
-         * Set the selected bank-data
-         */
-        changeSelecting: function changeSelecting(bankData) {
-            this.selectedBankData = bankData;
-        },
-
-
-        /**
-         * Open the modal to add new bank-data
-         */
-        openAddBank: function openAddBank() {
-            this.headline = Translations.Template.bankAddDataTitle;
-            this.openModal(false);
-        },
-
-
-        /**
-         * Set data to update and open the modal
-         * @param index
-         * @param bankdata
-         */
-        openUpdateBank: function openUpdateBank(index, bankData) {
-            this.headline = Translations.Template.bankUpdateDataTitle;
-
-            this.setUpdateData(index, bankData);
-            this.openModal(true);
-        },
-
-
-        /**
-         * Set data to remove and open the modal
-         * @param index
-         * @param bankdata
-         */
-        openDeleteBank: function openDeleteBank(index, bankData) {
-            this.setUpdateData(index, bankData);
-
-            this.doUpdate = false;
-            this.bankDeleteModal.show();
-        },
-
-
-        /**
-         * Open the modal
-         * @param doUpdate
-         */
-        openModal: function openModal(doUpdate) {
-            this.doUpdate = doUpdate;
-            _ValidationService2.default.unmarkAllFields($(this.$els.bankInfoModal));
-            this.bankInfoModal.show();
-        },
-
-
-        /**
-         * Set data to change
-         * @param index
-         * @param bankdata
-         */
-        setUpdateData: function setUpdateData(index, bankData) {
-            this.updateBankData = JSON.parse(JSON.stringify(bankData));
-            this.updateBankIndex = index;
-        },
-
-
-        /**
-         * Validate the input-fields-data
-         */
-        validateInput: function validateInput() {
-            var _this = this;
-
-            _ValidationService2.default.validate($("#my-bankForm")).done(function () {
-                if (_this.doUpdate) {
-                    _this.updateBankInfo();
-                } else {
-                    _this.addBankInfo();
-                }
-            }).fail(function (invalidFields) {
-                _ValidationService2.default.markInvalidFields(invalidFields, "error");
-            });
-        },
-
-
-        /**
-         * Update bank-data
-         */
-        updateBankInfo: function updateBankInfo() {
-            var _this2 = this;
-
-            this.updateBankData.lastUpdateBy = "customer";
-
-            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _this2.userBankData.splice(_self.updateBankIndex, 1, response);
-                _this2.checkBankDataSelection();
-                _this2.closeModal();
-
-                NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
-            }).fail(function () {
-                _this2.closeModal();
-
-                NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Add new bank-data
-         */
-        addBankInfo: function addBankInfo() {
-            var _this3 = this;
-
-            this.updateBankData.lastUpdateBy = "customer";
-            this.updateBankData.contactId = this.contactId;
-
-            ApiService.post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
-                _this3.userBankData.push(response);
-                _this3.checkBankDataSelection(true);
-                _this3.closeModal();
-
-                NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
-            }).fail(function () {
-                _this3.closeModal();
-
-                NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Delete bank-data
-         */
-        removeBankInfo: function removeBankInfo() {
-            var _this4 = this;
-
-            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
-                _this4.checkBankDataSelection(false);
-                _this4.closeDeleteModal();
-                _this4.userBankData.splice(_self.updateBankIndex, 1);
-
-                NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
-            }).fail(function () {
-                _this4.closeDeleteModal();
-
-                NotificationService.error(Translations.Template.bankDataNotDeleted).closeAfter(5000);
-            });
-        },
-
-
-        /**
-         * Check selection on delete and on add bank-data
-         */
-        checkBankDataSelection: function checkBankDataSelection(addData) {
-            if (addData && !this.doUpdate && this.userBankData.length < 1) {
-                this.selectedBankData = this.userBankData[0];
-            }
-
-            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id) {
-                if (!this.doUpdate) {
-                    this.selectedBankData = null;
-                } else {
-                    this.selectedBankData = this.userBankData[this.updateBankIndex];
-                }
-            }
-        },
-
-
-        /**
-         * Reset the updateBankData and updateBankIndex
-         */
-        resetData: function resetData() {
-            this.updateBankData = {};
-            this.updateBankIndex = 0;
-            this.doUpdate = false;
-        },
-
-
-        /**
-         * Close the current bank-modal
-         */
-        closeModal: function closeModal() {
-            this.bankInfoModal.hide();
-            this.resetData();
-        },
-
-
-        /**
-         * Close the current bank-delete-modal
-         */
-        closeDeleteModal: function closeDeleteModal() {
-            this.bankDeleteModal.hide();
-            this.resetData();
-        }
-    }
-});
-
-},{"services/ApiService":82,"services/ModalService":87,"services/NotificationService":88,"services/ValidationService":91}],47:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var ModalService = require("services/ModalService");
-var ApiService = require("services/ApiService");
-
-Vue.component("change-payment-method", {
-
-    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "currentPaymentMethodName"],
-
-    data: function data() {
-        return {
-            changePaymentModal: {},
-            paymentMethod: 0,
-            isPending: false,
-            showErrorMessage: false
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-
-    /**
-     * Initialize the change payment modal
-     */
-    ready: function ready() {
-        this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
-    },
-
-
-    methods: {
-        checkChangeAllowed: function checkChangeAllowed() {
-            var _this = this;
-
-            ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                // TODO: research - if response should be false, it returns an object
-                _this.changePossible = (typeof response === "undefined" ? "undefined" : _typeof(response)) === "object" ? response.data : response;
-            }).fail(function () {
-                _this.changePossible = false;
-            });
-        },
-        openPaymentChangeModal: function openPaymentChangeModal() {
-            this.changePaymentModal.show();
-        },
-        getPaymentStateText: function getPaymentStateText(paymentStates) {
-            return Translations.Template["paymentStatus_" + paymentStates.find(function (paymentState) {
-                return paymentState.typeId === 4;
-            }).value];
-        },
-        getPaymentId: function getPaymentId(paymentIds) {
-            var paymentId = paymentIds.find(function (paymentId) {
-                return paymentId.typeId === 3;
-            }).value;
-
-            if (paymentId) {
-                return paymentId;
-            }
-
-            return "";
-        },
-        closeModal: function closeModal() {
-            this.changePaymentModal.hide();
-            this.isPending = false;
-        },
-        updateOrderHistory: function updateOrderHistory(updatedOrder) {
-            document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-            document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
-            document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
-
-            this.checkChangeAllowed();
-            this.closeModal();
-        },
-        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
-            var _this2 = this;
-
-            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId }).done(function (response) {
-                _this2.allowedPaymentMethods = response;
-            }).fail(function () {});
-        },
-        changePaymentMethod: function changePaymentMethod() {
-            var _this3 = this;
-
-            this.isPending = true;
-
-            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
-                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this3.currentOrder, newOrder: response } }));
-
-                _this3.updateOrderHistory(response);
-                _this3.updateAllowedPaymentMethods(_this3.getPaymentId(response.order.properties));
-            }).fail(function () {
-                // TODO add error msg
-            });
-        }
-    },
-
-    computed: {
-        showIsSwitchableWarning: function showIsSwitchableWarning() {
-            var _this4 = this;
-
-            var currentPaymentMethod = this.allowedPaymentMethods.find(function (paymentMethod) {
-                return paymentMethod.id === _this4.paymentMethod;
-            });
-
-            if (currentPaymentMethod) {
-                return !currentPaymentMethod.isSwitchableFrom;
-            }
-
-            return false;
-        }
-    }
-
-});
-
-},{"services/ApiService":82,"services/ModalService":87}],48:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-
-Vue.component("order-history", {
-
-    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
-
-    data: function data() {
-        return {
-            page: 1,
-            pageMax: 1,
-            countStart: 0,
-            countEnd: 0,
-            currentOrder: null,
-            isLoading: true
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        this.itemsPerPage = this.itemsPerPage || 10;
-        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-        this.setOrders(this.orderList);
-    },
-
-
-    methods: {
-        setOrders: function setOrders(orderList) {
-            this.$set("orderList", orderList);
-            this.page = this.orderList.page;
-            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
-            this.countEnd = this.orderList.page * this.itemsPerPage;
-
-            if (this.countEnd > this.orderList.totalsCount) {
-                this.countEnd = this.orderList.totalsCount;
-            }
-        },
-        setCurrentOrder: function setCurrentOrder(order) {
-            var _this = this;
-
-            $("#dynamic-twig-content").html("");
-            this.isLoading = true;
-
-            this.currentOrder = order;
-
-            Vue.nextTick(function () {
-                $(_this.$els.orderDetails).modal("show");
-            });
-
-            var jsonEncodedOrder = JSON.stringify(order);
-
-            ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
-                _this.isLoading = false;
-                $("#dynamic-twig-content").html(response);
-            });
-        },
-        getPaymentStateText: function getPaymentStateText(paymentStates) {
-            for (var paymentState in paymentStates) {
-                if (paymentStates[paymentState].typeId == 4) {
-                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
-                }
-            }
-
-            return "";
-        },
-        showPage: function showPage(page) {
-            var _this2 = this;
-
-            if (page <= 0 || page > this.pageMax) {
-                return;
-            }
-
-            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
-                _this2.setOrders(response);
-            });
-        }
-    }
-});
-
-},{"services/ApiService":82}],49:[function(require,module,exports){
-"use strict";
-
-var _CategoryRendererService = require("services/CategoryRendererService");
-
-var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("mobile-navigation", {
-
-    props: ["template", "categoryBreadcrumbs"],
-
-    data: function data() {
-        return {
-            categoryTree: [],
-            dataContainer1: [],
-            dataContainer2: [],
-            useFirstContainer: false,
-            breadcrumbs: []
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-    },
-    ready: function ready() {
-        this.categoryTree = ResourceService.getResource("navigationTree").val();
-
-        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs ? this.categoryBreadcrumbs.pop().id : null);
-
-        this.dataContainer1 = this.categoryTree;
-    },
-
-
-    methods: {
-        buildTree: function buildTree(currentArray, parent, currentCategoryId) {
-            var showChilds = false;
-
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = currentArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var category = _step.value;
-
-                    category.parent = parent;
-
-                    // hide category if there is no translation
-                    if (!category.details[0]) {
-                        category.hideCategory = true;
-
-                        if (parent && parent.children && parent.children.length > 1 && !parent.showChilds) {
-                            parent.showChilds = false;
-                        }
-                    } else {
-                        if (parent) {
-                            category.url = parent.url + "/" + category.details[0].nameUrl;
-                        } else {
-                            category.url = "/" + category.details[0].nameUrl;
-                        }
-
-                        if (category.details.length && category.details[0].name) {
-                            showChilds = true;
-                        }
-
-                        if (category.children) {
-                            this.buildTree(category.children, category, currentCategoryId);
-                        }
-
-                        if (category.id === currentCategoryId) {
-                            if (category.children && category.showChilds) {
-                                this.slideTo(category.children);
-                            } else if (category.parent) {
-                                this.slideTo(category.parent.children);
-                            }
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            if (parent) {
-                parent.showChilds = showChilds;
-            }
-        },
-        navigateTo: function navigateTo(category) {
-            if (category.children && category.showChilds) {
-                this.slideTo(category.children);
-            }
-
-            this.closeNavigation();
-            _CategoryRendererService2.default.renderItems(category, this.categoryTree);
-        },
-        slideTo: function slideTo(children, back) {
-            back = !!back;
-
-            if (this.useFirstContainer) {
-                this.dataContainer1 = children;
-
-                $("#menu-2").trigger("menu-deactivated", { back: back });
-                $("#menu-1").trigger("menu-activated", { back: back });
-            } else {
-                this.dataContainer2 = children;
-
-                $("#menu-1").trigger("menu-deactivated", { back: back });
-                $("#menu-2").trigger("menu-activated", { back: back });
-            }
-
-            this.useFirstContainer = !this.useFirstContainer;
-            this.buildBreadcrumbs();
-        },
-        buildBreadcrumbs: function buildBreadcrumbs() {
-            this.breadcrumbs = [];
-
-            var root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
-
-            while (root.parent) {
-                this.breadcrumbs.unshift({
-                    name: root.parent.details[0].name,
-                    layer: root.parent ? root.parent.children : this.categoryTree
-                });
-
-                root = root.parent;
-            }
-        },
-        closeNavigation: function closeNavigation() {
-            $(".mobile-navigation").removeClass("open");
-            $("body").removeClass("menu-is-visible");
-        }
-    },
-
-    directives: {
-        menu: {
-            bind: function bind() {
-                // add "activated" classes when menu is activated
-                $(this.el).on("menu-activated", function (event, params) {
-                    $(event.target).addClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
-                });
-                // add "deactivated" classes when menu is deactivated
-                $(this.el).on("menu-deactivated", function (event, params) {
-                    $(event.target).removeClass("menu-active");
-                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
-                });
-                // this removes the animation class automatically after the animation has completed
-                $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
-                    $(".mainmenu").removeClass(function (index, className) {
-                        return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
-                    });
-                });
-            }
-        }
-    }
-});
-
-},{"services/CategoryRendererService":83,"services/ResourceService":89}],50:[function(require,module,exports){
-"use strict";
-
-var _ExceptionMap = require("exceptions/ExceptionMap");
-
-var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("notifications", {
-
-    props: ["initialNotifications", "template"],
-
-    data: function data() {
-        return {
-            notifications: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    ready: function ready() {
-        var self = this;
-
-        NotificationService.listen(function (notifications) {
-            self.$set("notifications", notifications);
-        });
-
-        self.showInitialNotifications();
-    },
-
-    methods: {
-        /**
-         * Dissmiss the notification
-         * @param notification
-         */
-        dismiss: function dismiss(notification) {
-            NotificationService.getNotifications().remove(notification);
-        },
-
-        /**
-         * show initial notifications from server
-         */
-        showInitialNotifications: function showInitialNotifications() {
-            for (var key in this.initialNotifications) {
-                // set default type top 'log'
-                var type = this.initialNotifications[key].type || "log";
-                var message = this.initialNotifications[key].message;
-                var messageCode = this.initialNotifications[key].code;
-
-                if (messageCode > 0) {
-                    message = Translations.Template[_ExceptionMap2.default.get(messageCode.toString())];
-                }
-
-                // type cannot be undefined
-                if (message) {
-                    if (NotificationService[type] && typeof NotificationService[type] === "function") {
-                        NotificationService[type](message);
-                    } else {
-                        // unkown type
-                        NotificationService.log(message);
-                    }
-                }
-            }
-        }
-    }
-});
-
-},{"exceptions/ExceptionMap":69,"services/NotificationService":88}],51:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var CheckoutService = require("services/CheckoutService");
-
-Vue.component("shipping-country-select", {
-
-    props: ["countryFlagPrefix", "template", "selectable"],
-
-    data: function data() {
-        return {
-            localization: {}
-        };
-    },
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-
-        for (var i in this.localization.activeShippingCountries) {
-            var country = this.localization.activeShippingCountries[i];
-
-            country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
-        }
-    },
-
-
-    methods: {
-        setShippingCountry: function setShippingCountry(id) {
-            if (!this.selectable) {
-                this.localization.currentShippingCountryId = id;
-                CheckoutService.setShippingCountryId(id);
-            }
-        }
-    }
-});
-
-},{"services/CheckoutService":84,"services/ResourceService":89}],52:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.component("shop-language-select", {
-
-    props: ["countryFlagPrefix", "template"],
-
-    data: function data() {
-        return {
-            localization: {},
-            languageList: []
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-
-        for (var i in this.localization.activeShopLanguageList) {
-            var languageKey = this.localization.activeShopLanguageList[i];
-            var languageName = Translations.Template[languageKey];
-            var language = {
-                key: languageKey,
-                name: languageName,
-                flagClass: this.countryFlagPrefix + languageKey
-            };
-
-            this.languageList.push(language);
-        }
-    }
-});
-
-},{"services/ResourceService":89}],53:[function(require,module,exports){
-"use strict";
-
-var WaitScreenService = require("services/WaitScreenService");
-
-/**
-*
-* CURRENTLY NOT IN USE
-* MAY BE USEFUL LATER
-*
-*/
-
-Vue.component("wait-screen", {
-
-    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            overlay: WaitScreenService.getOverlay()
-        };
-    },
-
-    created: function created() {
-        this.$options.template = this.template;
-    },
-
-    computed: {
-        /**
-         * Show an overlay over the page
-         * @returns {boolean}
-         */
-        visible: function visible() {
-            return this.overlay.count > 0;
-        }
-    }
-});
-
-},{"services/WaitScreenService":92}],54:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var NotificationService = require("services/NotificationService");
-
-Vue.component("wish-list", {
-
-    props: ["template"],
-
-    data: function data() {
-        return {
-            isLoading: false,
-            wishListCount: {}
-        };
-    },
-
-
-    computed: Vuex.mapState({
-        wishListItems: function wishListItems(state) {
-            return state.wishList.wishListItems;
-        },
-        wishListIds: function wishListIds(state) {
-            return state.wishList.wishListIds;
-        }
-    }),
-
-    created: function created() {
-        var _this = this;
-
-        this.$options.template = this.template;
-
-        this.isLoading = true;
-        this.initWishListItems(this.wishListIds).then(function (response) {
-            _this.isLoading = false;
-        }, function (error) {
-            _this.isLoading = false;
-        });
-    },
-
-
-    methods: _extends({
-        removeItem: function removeItem(item) {
-            this.removeWishListItem(item).then(function () {
-                return NotificationService.success(Translations.Template.itemWishListRemoved);
-            });
-        }
-    }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
-});
-
-},{"services/NotificationService":88}],55:[function(require,module,exports){
-"use strict";
-
-Vue.component("wish-list-count", {
-
-    props: ["template", "initIds"],
-
-    computed: {
-        wishListCount: function wishListCount() {
-            return this.$store.getters.wishListCount;
-        }
-    },
-
-    created: function created() {
-        this.$options.template = this.template || "#vue-wish-list-count";
-        this.$store.commit("setWishListIds", this.initIds);
-    }
-});
-
-},{}],56:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-
-Vue.directive("logout", function () {
-    /**
-     * Logout the current user
-     */
-    $(this.el).click(function (event) {
-        $(this.el).addClass("disabled");
-
-        ApiService.post("/rest/io/customer/logout").done(function () {
-            window.location.assign(window.location.origin);
-        }).fail(function () {
-            $(this.el).removeClass("disabled");
-        }.bind(this));
-
-        event.preventDefault();
-    }.bind(this));
-});
-
-},{"services/ApiService":82}],57:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("is-loading-watcher", {
-    bind: function bind() {
-        var firstRendering = true;
-
-        ResourceService.watch("isLoading", function (newValue) {
-            if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null) {
-                if (!newValue) {
-                    $("#twig-rendered-item-list").remove();
-
-                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
-                } else {
-                    $("#twig-rendered-item-list").addClass("loading");
-                }
-            } else {
-                firstRendering = false;
-            }
-        });
-    }
-});
-
-},{"services/ResourceService":89}],58:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("check-active", {
-    params: ["category"],
-
-    bind: function bind() {
-        var categoryObject = JSON.parse(this.params.category);
-
-        ResourceService.watch("breadcrumbs", function (values) {
-            for (var index in values) {
-                if (values[index].id == categoryObject.id) {
-                    this.el.classList.add("active");
-                    break;
-                } else {
-                    this.el.classList.remove("active");
-                }
-            }
-        }.bind(this));
-    }
-});
-
-},{"services/ResourceService":89}],59:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("is-loading-breadcrumbs-watcher", {
-    bind: function bind() {
-        var firstRendering = true;
-
-        ResourceService.watch("isLoadingBreadcrumbs", function () {
-            if (!firstRendering && document.getElementById("twig-rendered-breadcrumbs") !== null) {
-                $("#twig-rendered-breadcrumbs").remove();
-
-                document.getElementById("vue-rendered-breadcrumbs").style.removeProperty("display");
-            } else {
-                firstRendering = false;
-            }
-        });
-    }
-});
-
-},{"services/ResourceService":89}],60:[function(require,module,exports){
-"use strict";
-
-var _CategoryRendererService = require("services/CategoryRendererService");
-
-Vue.directive("render-category", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-
-        (0, _CategoryRendererService.renderItems)(value);
-    });
-});
-
-},{"services/CategoryRendererService":83}],61:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.elementDirective("resource", {
-    priority: 10000,
-    params: ["name", "route", "data", "events", "responseTemplate"],
-    bind: function bind() {
-        var resource = ResourceService.registerResource(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
-        var events = this.params.events || [];
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i].split("!");
-            var usePayload;
-
-            if (event.length > 1) {
-                usePayload = event[1];
-            }
-
-            resource.listen(event[0], usePayload);
-        }
-    }
-
-});
-
-Vue.elementDirective("resource-list", {
-    priority: 10000,
-    params: ["name", "route", "data", "events", "responseTemplate"],
-    bind: function bind() {
-        var resource = ResourceService.registerResourceList(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
-        var events = this.params.events || [];
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i].split("!");
-            var usePayload;
-
-            if (event.length > 1) {
-                usePayload = event[1];
-            }
-
-            resource.listen(event[0], usePayload);
-        }
-    }
-});
-
-},{"services/ResourceService":89}],62:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-bind", {
-
-    params: ["filters"],
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.arg, function (value) {
-            var paths = self.expression.split(".");
-
-            for (var i = 0; i < paths.length; i++) {
-                var path = paths[i];
-
-                value = value[path];
-            }
-
-            var filters = self.params.filters || [];
-
-            for (var j = 0; j < filters.length; j++) {
-                var filter = Vue.filter(self.params.filters[j]);
-
-                value = filter.apply(Object, [value]);
-            }
-
-            self.el.innerHTML = value;
-        });
-    }
-
-});
-
-},{"services/ResourceService":89}],63:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-if", {
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.arg, function (value) {
-
-            var keys = Object.keys(value);
-            var values = keys.map(function (key) {
-                return value[key];
-            });
-
-            // eslint-disable-next-line
-            var condition = new Function(keys, "return " + self.expression);
-
-            if (condition.apply(null, values)) {
-                self.el.style.display = "";
-            } else {
-                self.el.style.display = "none";
-            }
-        });
-    }
-
-});
-
-},{"services/ResourceService":89}],64:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-push", {
-
-    params: ["dataAccessor", "resource"],
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.params.resource, function (newValue, oldValue) {
-            if (self.params.dataAccessor) {
-                self.el.__vue__[self.arg] = newValue.documents[0].data;
-            } else {
-                self.el.__vue__[self.arg] = newValue;
-            }
-        });
-    }
-
-});
-
-},{"services/ResourceService":89}],65:[function(require,module,exports){
-"use strict";
-
-Vue.directive("change-lang", function (value) {
-    $(this.el).click(function (event) {
-        var subPath = window.location.pathname.split("/");
-
-        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
-
-        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
-    });
-});
-
-},{}],66:[function(require,module,exports){
-"use strict";
-
-var CheckoutService = require("services/CheckoutService");
-
-Vue.directive("shipping-country", function (value) {
-    $(this.el).click(function (event) {
-        event.preventDefault();
-        CheckoutService.setShippingCountryId(value);
-    });
-});
-
-},{"services/CheckoutService":84}],67:[function(require,module,exports){
-"use strict";
-
-Vue.directive("tooltip", {
-    unbind: function unbind() {
-        $(this.el).tooltip("dispose");
-    },
-    update: function update(value) {
-        var _this = this;
-
-        if (typeof value === "undefined" || value) {
-            setTimeout(function () {
-                $(_this.el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-            }, 1);
-        } else {
-            setTimeout(function () {
-                $(_this.el).tooltip("dispose");
-            }, 1);
-        }
-    }
-});
-
-},{}],68:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("availability-class", {
-    bind: function bind() {
-        var _this = this;
-
-        ResourceService.watch(this.arg, function (value) {
-            var availabilityId = value.documents[0].data.variation.availability.id;
-
-            _this.el.className = "availability tag availability_" + availabilityId;
-        });
-    }
-});
-
-},{"services/ResourceService":89}],69:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"]]);
-
-exports.default = exceptionMap;
-
-},{}],70:[function(require,module,exports){
-"use strict";
-
-Vue.filter("arrayFirst", function (array) {
-    return array[0];
-});
-
-},{}],71:[function(require,module,exports){
-"use strict";
-
-Vue.filter("attachText", function (item, text) {
-    return text + item;
-});
-
-},{}],72:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-var currencySymbolMap = require("currency-symbol-map");
-var accounting = require("accounting");
-
-Vue.filter("currency", function (price, customCurrency) {
-    var basket = ResourceService.getResource("basket").val();
-
-    var currency = customCurrency || basket.currency;
-
-    if (currency) {
-        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-
-        if (currencySymbol) {
-            currency = currencySymbol;
-        }
-    }
-
-    // (%v = value, %s = symbol)
-    var options = {
-        symbol: currency,
-        decimal: ",",
-        thousand: ".",
-        precision: 2,
-        format: "%v %s"
-    };
-
-    return accounting.formatMoney(price, options);
-});
-
-},{"accounting":95,"currency-symbol-map":96,"services/ResourceService":89}],73:[function(require,module,exports){
-"use strict";
-
-// for docs see https://github.com/brockpetrie/vue-moment
-
-var dateFilter = function dateFilter() {
-    var args = Array.prototype.slice.call(arguments);
-    var input = args.shift();
-    var date;
-
-    if (isNaN(new Date(input).getTime())) {
-        return input;
-    }
-
-    if (Array.isArray(input) && typeof input[0] === "string") {
-        // If input is array, assume we're being passed a format pattern to parse against.
-        // Format pattern will accept an array of potential formats to parse against.
-        // Date string should be at [0], format pattern(s) should be at [1]
-        date = moment(string = input[0], formats = input[1], true);
-    } else {
-        // Otherwise, throw the input at moment and see what happens...
-        date = moment(input);
-    }
-
-    if (!date.isValid()) {
-        // Log a warning if moment couldn't reconcile the input. Better than throwing an error?
-        console.warn("Could not build a valid `moment` object from input.");
-        return input;
-    }
-
-    function parse() {
-        var args = Array.prototype.slice.call(arguments);
-        var method = args.shift();
-
-        switch (method) {
-            case "add":
-
-                // Mutates the original moment by adding time.
-                // http://momentjs.com/docs/#/manipulating/add/
-
-                var addends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
-
-                obj = {};
-                for (var aId = 0; aId < addends.length; aId++) {
-                    var addend = addends[aId].split(" ");
-
-                    obj[addend[1]] = addend[0];
-                }
-                date = date.add(obj);
-                break;
-
-            case "subtract":
-
-                // Mutates the original moment by subtracting time.
-                // http://momentjs.com/docs/#/manipulating/subtract/
-
-                var subtrahends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
-
-                obj = {};
-                for (var sId = 0; sId < subtrahends.length; sId++) {
-                    var subtrahend = subtrahends[sId].split(" ");
-
-                    obj[subtrahend[1]] = subtrahend[0];
-                }
-                date = date.subtract(obj);
-                break;
-
-            case "from":
-
-                // Display a moment in relative time, either from now or from a specified date.
-                // http://momentjs.com/docs/#/displaying/fromnow/
-
-                var from = "now";
-
-                if (args[0] === "now") args.shift();
-
-                if (moment(args[0]).isValid()) {
-                    // If valid, assume it is a date we want the output computed against.
-                    from = moment(args.shift());
-                }
-
-                var removeSuffix = false;
-
-                if (args[0] === true) {
-                    args.shift();
-                    removeSuffix = true;
-                }
-
-                if (from != "now") {
-                    date = date.from(from, removeSuffix);
-                    break;
-                }
-
-                date = date.fromNow(removeSuffix);
-                break;
-
-            case "calendar":
-
-                // Formats a date with different strings depending on how close to a certain date (today by default) the date is.
-                // http://momentjs.com/docs/#/displaying/calendar-time/
-
-                var referenceTime = moment();
-
-                if (moment(args[0]).isValid()) {
-                    // If valid, assume it is a date we want the output computed against.
-                    referenceTime = moment(args.shift());
-                }
-
-                date = date.calendar(referenceTime);
-                break;
-
-            default:
-                // Format
-                // Formats a date by taking a string of tokens and replacing them with their corresponding values.
-                // http://momentjs.com/docs/#/displaying/format/
-
-                var format = method;
-
-                date = date.format(format);
-        }
-
-        if (args.length) parse.apply(parse, args);
-    }
-
-    parse.apply(parse, args);
-
-    return date;
-};
-
-Vue.filter("moment", dateFilter);
-Vue.filter("date", dateFilter);
-
-},{}],74:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemImage", function (itemImages, highestPosition) {
-    if (itemImages.length === 0) {
-        return "";
-    }
-
-    if (itemImages.length === 1) {
-        return itemImages[0].url;
-    }
-
-    if (highestPosition) {
-        return itemImages.reduce(function (prev, current) {
-            return prev.position > current.position ? prev : current;
-        }).url;
-    }
-
-    return itemImages.reduce(function (prev, current) {
-        return prev.position < current.position ? prev : current;
-    }).url;
-});
-
-},{}],75:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemImages", function (images, accessor) {
-    var imageUrls = [];
-    var imagesAccessor = "all";
-
-    if (images.variation && images.variation.length) {
-        imagesAccessor = "variation";
-    }
-
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
-
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
-    }
-
-    return imageUrls;
-});
-
-},{}],76:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemName", function (item, selectedName) {
-    if (selectedName == 0 && item.name1 !== "") {
-        return item.name1;
-    } else if (selectedName == 1 && item.name2 !== "") {
-        return item.name2;
-    } else if (selectedName == 2 && item.name3 !== "") {
-        return item.name3;
-    }
-
-    return item.name1;
-});
-
-},{}],77:[function(require,module,exports){
-"use strict";
-
-Vue.filter("itemURL", function (item) {
-    var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
-    var urlPath = item.texts.urlPath;
-
-    var link = "/";
-
-    if (urlPath && urlPath.length) {
-        link += urlPath;
-
-        link += enableOldUrlPattern ? "/" : "_";
-    }
-
-    if (enableOldUrlPattern) {
-        return link + "a-" + item.item.id;
-    }
-
-    return link + item.item.id + "_" + item.variation.id;
-});
-
-},{}],78:[function(require,module,exports){
-"use strict";
-
-Vue.filter("propertySurcharge", function (properties, propertyId) {
-    var property = properties.find(function (prop) {
-        return prop.property.id === propertyId;
-    });
-
-    if (property) {
-        if (property.surcharge > 0) {
-            return property.surcharge;
-        } else if (property.property.surcharge > 0) {
-            return property.property.surcharge;
-        }
-    }
-
-    return 0;
-});
-
-},{}],79:[function(require,module,exports){
-"use strict";
-
-Vue.filter("truncate", function (string, value) {
-    if (string.length > value) {
-        return string.substring(0, value) + "...";
-    }
-    return string;
-});
-
-},{}],80:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.isAddressFieldEnabled = isAddressFieldEnabled;
-function isAddressFieldEnabled(countryId, addressType, field) {
-    var address = {};
-    var enabledFields = {};
-
-    if (typeof countryId === "undefined") {
-        countryId = 1;
-    }
-
-    if (addressType === "1") {
-        address = "billing_address";
-
-        if (countryId === 1) {
-            enabledFields = App.config.enabledBillingAddressFields;
-        } else {
-            enabledFields = App.config.enabledBillingAddressFieldsUK;
-        }
-    } else {
-        address = "delivery_address";
-
-        if (countryId === "1") {
-            enabledFields = App.config.enabledDeliveryAddressFields;
-        } else {
-            enabledFields = App.config.enabledDeliveryAddressFieldsUK;
-        }
-    }
-
-    enabledFields = enabledFields.split(", ");
-
-    var fullField = address + "." + field;
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = enabledFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var enabledField = _step.value;
-
-            if (enabledField === fullField) {
-                return true;
-            }
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    return false;
-}
-
-exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
-
-},{}],81:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.createAddress = createAddress;
-exports.updateAddress = updateAddress;
-exports.deleteAddress = deleteAddress;
-var ApiService = require("services/ApiService");
-var CheckoutService = require("services/CheckoutService");
-
-/**
- * Create a new address
- * @param address
- * @param addressType
- * @param setActive
- * @returns {*}
- */
-function createAddress(address, addressType, setActive) {
-    return ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
-        if (setActive) {
-            if (addressType === 1) {
-                CheckoutService.setBillingAddressId(response.id);
-            } else if (addressType === 2) {
-                CheckoutService.setDeliveryAddressId(response.id);
-            }
-        }
-    });
-}
-
-/**
- * Update an existing address
- * @param newData
- * @param addressType
- * @returns {*|Entry|undefined}
- */
-function updateAddress(newData, addressType) {
-    addressType = addressType || newData.pivot.typeId;
-    return ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
-}
-
-/**
- * Delete an existing address
- * @param addressId
- * @param addressType
- * @returns {*}
- */
-function deleteAddress(addressId, addressType) {
-    return ApiService.delete("/rest/io/customer/address/" + addressId + "?typeId=" + addressType);
-}
-
-exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
-
-},{"services/ApiService":82,"services/CheckoutService":84}],82:[function(require,module,exports){
-"use strict";
-
-var NotificationService = require("services/NotificationService");
-var WaitScreenService = require("services/WaitScreenService");
-
-module.exports = function ($) {
-
-    var _eventListeners = {};
-
-    return {
-        get: _get,
-        put: _put,
-        post: _post,
-        delete: _delete,
-        send: _send,
-        setToken: _setToken,
-        getToken: _getToken,
-        listen: _listen
-    };
-
-    function _listen(event, handler) {
-        _eventListeners[event] = _eventListeners[event] || [];
-        _eventListeners[event].push(handler);
-    }
-
-    function _triggerEvent(event, payload) {
-        if (_eventListeners[event]) {
-            for (var i = 0; i < _eventListeners[event].length; i++) {
-                var listener = _eventListeners[event][i];
-
-                if (typeof listener !== "function") {
-                    continue;
-                }
-                listener.call(Object, payload);
-            }
-        }
-    }
-
-    function _get(url, data, config) {
-        config = config || {};
-        config.method = "GET";
-        return _send(url, data, config);
-    }
-
-    function _put(url, data, config) {
-        config = config || {};
-        config.method = "PUT";
-        return _send(url, data, config);
-    }
-
-    function _post(url, data, config) {
-        config = config || {};
-        config.method = "POST";
-        return _send(url, data, config);
-    }
-
-    function _delete(url, data, config) {
-        config = config || {};
-        config.method = "DELETE";
-        return _send(url, data, config);
-    }
-
-    function _send(url, data, config) {
-        var deferred = $.Deferred();
-
-        config = config || {};
-        config.data = data || null;
-        config.dataType = config.dataType || "json";
-        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
-        config.doInBackground = !!config.doInBackground;
-        config.supressNotifications = !!config.supressNotifications;
-
-        if (!config.doInBackground) {
-            WaitScreenService.showWaitScreen();
-        }
-        $.ajax(url, config).done(function (response) {
-            if (!config.supressNotifications) {
-                printMessages(response);
-            }
-            for (var event in response.events) {
-                _triggerEvent(event, response.events[event]);
-            }
-            deferred.resolve(response.data || response);
-        }).fail(function (jqXHR) {
-            var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
-
-            if (!config.supressNotifications) {
-                printMessages(response);
-            }
-            deferred.reject(response);
-        }).always(function () {
-            if (!config.doInBackground) {
-                WaitScreenService.hideWaitScreen();
-            }
-        });
-
-        return deferred;
-    }
-
-    function printMessages(response) {
-        var notification;
-
-        if (response.error && response.error.message.length > 0) {
-            notification = NotificationService.error(response.error);
-        }
-
-        if (response.success && response.success.message.length > 0) {
-            notification = NotificationService.success(response.success);
-        }
-
-        if (response.warning && response.warning.message.length > 0) {
-            notification = NotificationService.warning(response.warning);
-        }
-
-        if (response.info && response.info.message.length > 0) {
-            notification = NotificationService.info(response.info);
-        }
-
-        if (response.debug && response.debug.class.length > 0) {
-            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
-            for (var i = 0; i < response.debug.trace.length; i++) {
-                notification.trace(response.debug.trace[i]);
-            }
-        }
-    }
-
-    function _setToken(token) {
-        this._token = token;
-    }
-
-    function _getToken() {
-        return this._token;
-    }
-}(jQuery);
-
-},{"services/NotificationService":88,"services/WaitScreenService":92}],83:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.renderItems = renderItems;
-exports.getScopeUrl = getScopeUrl;
-var ItemListService = require("services/ItemListService");
-var ResourceService = require("services/ResourceService");
-var _categoryTree = {};
-var _categoryBreadcrumbs = [];
-
-/**
- * render items in relation to location
- * @param currentCategory
- */
-function renderItems(currentCategory) {
-    ResourceService.getResource("isLoadingBreadcrumbs").set(true);
-
-    $("body").removeClass("menu-is-visible");
-
-    if ($.isEmptyObject(_categoryTree)) {
-        _categoryTree = ResourceService.getResource("navigationTree").val();
-    }
-
-    if (!App.isCategoryView) {
-        window.open(getScopeUrl(currentCategory), "_self");
-    } else if (currentCategory.details.length) {
-        _handleCurrentCategory(currentCategory);
-
-        document.dispatchEvent(new CustomEvent("afterCategoryChanged", { detail: {
-                currentCategory: currentCategory,
-                categoryTree: _categoryTree
-            } }));
-    }
-}
-
-/**
- * bundle functions
- * @param currentCategory
- */
-function _handleCurrentCategory(currentCategory) {
-    _updateItemList(currentCategory);
-    _updateHistory(currentCategory);
-    _updateBreadcrumbs();
-}
-
-function _updateBreadcrumbs() {
-    ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
-}
-
-/**
- * update the current item list without reloading
- * @param currentCategory
- */
-function _updateItemList(currentCategory) {
-    ItemListService.setCategoryId(currentCategory.id);
-
-    ItemListService.setPage(1);
-    ItemListService.setFacets("");
-    ItemListService.getItemList();
-}
-
-/**
- * update page informations
- * @param currentCategory
- */
-function _updateHistory(currentCategory) {
-    var title = document.getElementsByTagName("title")[0].innerHTML;
-
-    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
-
-    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
-
-    var categoryImage = currentCategory.details[0].imagePath;
-    var parallaxImgContainer = document.querySelector(".parallax-img-container");
-
-    if (parallaxImgContainer) {
-        if (categoryImage) {
-            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
-        } else {
-            parallaxImgContainer.style.removeProperty("background-image");
-        }
-    }
-}
-
-/**
- * get the current scope url
- * @param currentCategory
- * @param scopeUrl - default
- * @param categories - default
- */
-function getScopeUrl(currentCategory, scopeUrl, categories) {
-    scopeUrl = scopeUrl || "";
-    categories = categories || _categoryTree;
-
-    if (scopeUrl.length == 0) {
-        _categoryBreadcrumbs = [];
-    }
-
-    for (var category in categories) {
-        if (categories[category].id == currentCategory.id && categories[category].details.length) {
-            scopeUrl += "/" + categories[category].details[0].nameUrl;
-
-            _categoryBreadcrumbs.push(categories[category]);
-
-            return scopeUrl;
-        }
-
-        if (categories[category].children && categories[category].details.length) {
-            var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
-
-            var urlScope = getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
-
-            if (urlScope.length > 0) {
-                _categoryBreadcrumbs.push(categories[category]);
-
-                return urlScope;
-            }
-        }
-    }
-
-    return "";
-}
-
-exports.default = {
-    getScopeUrl: getScopeUrl,
-    renderItems: renderItems
-};
-
-},{"services/ItemListService":86,"services/ResourceService":89}],84:[function(require,module,exports){
-"use strict";
-
-var ApiService = require("services/ApiService");
-
-module.exports = function ($) {
-
-    var checkout = {};
-    var initPromise;
-
-    return {
-        init: init,
-        setCheckout: setCheckout,
-        setDeliveryAddressId: setDeliveryAddressId,
-        setBillingAddressId: setBillingAddressId,
-        setMethodOfPaymentId: setMethodOfPaymentId,
-        setShippingCountryId: setShippingCountryId,
-        setShippingProfileId: setShippingProfileId
-    };
-
-    function init(checkoutData) {
-        if (!initPromise) {
-            if (checkoutData) {
-                initPromise = $.Deferred();
-                checkout = checkoutData;
-                initPromise.resolve();
-            } else {
-                initPromise = ApiService.get("/rest/io/checkout").done(function (response) {
-                    checkout = response;
-                });
-            }
-        }
-        return initPromise;
-    }
-
-    function _set(property, value) {
-        checkout[property] = value;
-        return ApiService.post("/rest/io/checkout/", checkout).done(function (response) {
-            checkout = response;
-        });
-    }
-
-    function setCheckout(checkoutData) {
-        var properties = Object.keys(checkoutData);
-
-        for (var i = 0; i < properties.length; i++) {
-            checkout[properties[i]] = checkoutData[properties[i]];
-        }
-
-        return ApiService.post("/rest/io/checkout/", checkout).done(function (response) {
-            checkout = response;
-        });
-    }
-
-    function setDeliveryAddressId(deliveryAddressId) {
-        return _set("deliveryAddressId", deliveryAddressId);
-    }
-
-    function setBillingAddressId(billingAddressId) {
-        return _set("billingAddressId", billingAddressId);
-    }
-
-    function setMethodOfPaymentId(methodOfPaymentId) {
-        return _set("methodOfPaymentId", methodOfPaymentId);
-    }
-
-    function setShippingCountryId(shippingCountryId) {
-        return _set("shippingCountryId", shippingCountryId);
-    }
-
-    function setShippingProfileId(shippingProfileId) {
-        return _set("shippingProfileId", shippingProfileId);
-    }
-}(jQuery);
-
-},{"services/ApiService":82}],85:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    return {
-        parseShippingCountries: parseShippingCountries,
-        parseShippingStates: parseShippingStates,
-        translateCountryNames: translateCountryNames,
-        sortCountries: sortCountries
-    };
-
-    function parseShippingCountries(countryList, id) {
-        var deliveryCountries = [];
-
-        if (countryList === null) {
-            return deliveryCountries;
-        }
-
-        for (var key in countryList) {
-            var country = countryList[key];
-            var option = { id: country.id, name: country.name, locale: country.isoCode2, selected: false };
-
-            option.selected = id === country.id;
-            deliveryCountries.push(option);
-        }
-
-        return deliveryCountries;
-    }
-
-    function translateCountryNames(countryNameMap, countryList) {
-        if (countryNameMap === null) {
-            return;
-        }
-        for (var countryId in countryNameMap) {
-            var countryName = countryNameMap[countryId];
-
-            for (var index in countryList) {
-                var country = countryList[index];
-
-                if (country.id === parseInt(countryId)) {
-                    country.name = countryName;
-                    break;
-                }
-            }
-        }
-    }
-
-    function sortCountries(countries) {
-        countries.sort(function (first, second) {
-            if (first.name < second.name) {
-                return -1;
-            }
-            if (first.name > second.name) {
-                return 1;
-            }
-            return 0;
-        });
-    }
-
-    function parseShippingStates(countryList, countryID) {
-        var states = [];
-
-        for (var key in countryList) {
-            var country = countryList[key];
-
-            if (country.id === countryID) {
-                states = country.states;
-                break;
-            }
-        }
-
-        return states;
-    }
-}(jQuery);
-
-},{}],86:[function(require,module,exports){
-"use strict";
-
-var _UrlService = require("services/UrlService");
-
-var _UrlService2 = _interopRequireDefault(_UrlService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ApiService = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ResourceService = require("services/ResourceService");
-
-module.exports = function ($) {
-    var searchParams = {
-        query: "",
-        items: App.config.defaultItemsPerPage,
-        sorting: App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting,
-        page: 1,
-        facets: "",
-        categoryId: null,
-        template: "",
-        variationShowType: App.config.variationShowType
-    };
-
-    return {
-        getItemList: getItemList,
-        updateSearchString: updateSearchString,
-        setSearchString: setSearchString,
-        setItemsPerPage: setItemsPerPage,
-        setOrderBy: setOrderBy,
-        setPage: setPage,
-        setSearchParams: setSearchParams,
-        setFacets: setFacets,
-        setCategoryId: setCategoryId
-    };
-
-    function getItemList() {
-        if (searchParams.categoryId || searchParams.query.length >= 3) {
-            if (ResourceService.getResource("itemList").val()) {
-                ResourceService.getResource("itemList").val().total = 0;
-            }
-
-            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
-
-            searchParams.template = "Ceres::ItemList.ItemListView";
-
-            _setIsLoading(true);
-
-            ApiService.get(url, searchParams).done(function (response) {
-                _setIsLoading(false);
-
-                ResourceService.getResource("itemList").set(response);
-                ResourceService.getResource("facets").set(response.facets);
-            }).fail(function (response) {
-                _setIsLoading(false);
-
-                NotificationService.error("Error while searching").closeAfter(5000);
-            });
-        }
-    }
-
-    function _setIsLoading(isLoading) {
-        ResourceService.getResource("itemSearch").set(searchParams);
-        ResourceService.getResource("isLoading").set(isLoading);
-    }
-
-    /**
-     * ?searchString=searchString&itemsPerPage=itemsPerPage&orderBy=orderBy&orderByKey=orderByKey&page=page
-     * @param urlParams
-     */
-    function setSearchParams(urlParams) {
-        var queryParams = _UrlService2.default.getUrlParams(urlParams);
-
-        for (var key in queryParams) {
-            searchParams[key] = queryParams[key];
-        }
-    }
-
-    function updateSearchString(query) {
-        searchParams.query = query;
-
-        query = query.length > 0 ? query : null;
-        _UrlService2.default.setUrlParam("query", query);
-
-        if (query) {
-            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
-            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
-        }
-    }
-
-    function setSearchString(query) {
-        searchParams.query = query;
-        searchParams.page = 1;
-
-        setPage(1);
-        setFacets("");
-
-        ResourceService.getResource("facets").set({});
-        ResourceService.getResource("facetParams").set([]);
-
-        query = query.length > 0 ? query : null;
-        _UrlService2.default.setUrlParam("query", query);
-
-        if (query) {
-            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
-            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
-        }
-    }
-
-    function setItemsPerPage(items) {
-        searchParams.items = items;
-
-        items = items != App.config.defaultItemsPerPage ? items : null;
-        _UrlService2.default.setUrlParam("items", items);
-    }
-
-    function setOrderBy(sorting) {
-        searchParams.sorting = sorting;
-
-        if (App.isSearch) {
-            sorting = sorting !== App.config.defaultSortingSearch ? sorting : null;
-        } else {
-            sorting = sorting !== App.config.defaultSorting ? sorting : null;
-        }
-
-        _UrlService2.default.setUrlParam("sorting", sorting);
-    }
-
-    function setPage(page) {
-        searchParams.page = page;
-
-        page = page > 1 ? page : null;
-        _UrlService2.default.setUrlParam("page", page);
-    }
-
-    function setFacets(facets) {
-        searchParams.facets = facets.toString();
-
-        facets = facets.toString().length > 0 ? facets.toString() : null;
-
-        setPage(1);
-
-        _UrlService2.default.setUrlParam("facets", facets);
-    }
-
-    function setCategoryId(categoryId) {
-        searchParams.categoryId = categoryId;
-    }
-}(jQuery);
-
-},{"services/ApiService":82,"services/NotificationService":88,"services/ResourceService":89,"services/UrlService":90}],87:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    var paused = false;
-    var timeout = -1;
-    var interval;
-    var timeRemaining;
-    var timeStart;
-
-    return {
-        findModal: findModal
-    };
-
-    function findModal(element) {
-        return new Modal(element);
-    }
-
-    function Modal(element) {
-        var self = this;
-        var $bsModal;
-
-        if ($(element).is(".modal")) {
-            $bsModal = $(element);
-        } else {
-            $bsModal = $(element).find(".modal").first();
-        }
-
-        return {
-            show: show,
-            hide: hide,
-            setTimeout: setTimeout,
-            startTimeout: startTimeout,
-            pauseTimeout: pauseTimeout,
-            continueTimeout: continueTimeout,
-            stopTimeout: stopTimeout,
-            getModalContainer: getModalContainer
-        };
-
-        function show() {
-            $bsModal.modal("show");
-
-            if ($bsModal.timeout > 0) {
-                startTimeout();
-            }
-
-            return self;
-        }
-
-        function hide() {
-            $bsModal.modal("hide");
-            return self;
-        }
-
-        function getModalContainer() {
-            return $bsModal;
-        }
-
-        function setTimeout(timeout) {
-            $bsModal.timeout = timeout;
-
-            $bsModal.find(".modal-content").mouseover(function () {
-                pauseTimeout();
-            });
-
-            $bsModal.find(".modal-content").mouseout(function () {
-                continueTimeout();
-            });
-
-            return this;
-        }
-
-        function startTimeout() {
-            timeRemaining = $bsModal.timeout;
-            timeStart = new Date().getTime();
-
-            timeout = window.setTimeout(function () {
-                window.clearInterval(interval);
-                hide();
-            }, $bsModal.timeout);
-
-            $bsModal.find(".timer").text(timeRemaining / 1000);
-            interval = window.setInterval(function () {
-                if (!paused) {
-                    var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
-
-                    secondsRemaining = Math.round(secondsRemaining / 1000);
-                    $bsModal.find(".timer").text(secondsRemaining);
-                }
-            }, 1000);
-        }
-
-        function pauseTimeout() {
-            paused = true;
-            timeRemaining -= new Date().getTime() - timeStart;
-            window.clearTimeout(timeout);
-        }
-
-        function continueTimeout() {
-            paused = false;
-            timeStart = new Date().getTime();
-            timeout = window.setTimeout(function () {
-                hide();
-                window.clearInterval(interval);
-            }, timeRemaining);
-        }
-
-        function stopTimeout() {
-            window.clearTimeout(timeout);
-            window.clearInterval(interval);
-        }
-    }
-}(jQuery);
-
-},{}],88:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-module.exports = function ($) {
-
-    var notificationCount = 0;
-    var notifications = new NotificationList();
-
-    var handlerList = [];
-
-    return {
-        log: _log,
-        info: _info,
-        warn: _warn,
-        error: _error,
-        success: _success,
-        getNotifications: getNotifications,
-        listen: _listen
-    };
-
-    function _listen(handler) {
-        handlerList.push(handler);
-    }
-
-    function trigger() {
-        for (var i = 0; i < handlerList.length; i++) {
-            handlerList[i].call({}, notifications.all());
-        }
-    }
-
-    function _log(message, prefix) {
-        var notification = new Notification(message);
-
-        if (App.config.logMessages) {
-            console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
-
-            for (var i = 0; i < notification.stackTrace.length; i++) {
-                _log(notification.stackTrace[i], " + ");
-            }
-        }
-
-        return notification;
-    }
-
-    function _info(message) {
-        var notification = new Notification(message, "info");
-
-        if (App.config.printInfos) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _warn(message) {
-        var notification = new Notification(message, "warning");
-
-        if (App.config.printWarnings) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _error(message) {
-        var notification = new Notification(message, "danger");
-
-        if (App.config.printErrors) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function _success(message) {
-        var notification = new Notification(message, "success");
-
-        if (App.config.printSuccess) {
-            _printNotification(notification);
-        }
-
-        return notification;
-    }
-
-    function getNotifications() {
-        return notifications;
-    }
-
-    function _printNotification(notification) {
-        notifications.add(notification);
-        _log(notification);
-
-        trigger();
-
-        return notification;
-    }
-
-    function Notification(data, context) {
-        if (!App.config.printStackTrace && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
-            data.stackTrace = [];
-        }
-        var id = notificationCount++;
-        var self = {
-            id: id,
-            code: data.code || 0,
-            message: data.message || data || "",
-            context: context || "info",
-            stackTrace: data.stackTrace || [],
-            close: close,
-            closeAfter: closeAfter,
-            trace: trace
-        };
-
-        return self;
-
-        function close() {
-            notifications.remove(self);
-            trigger();
-        }
-
-        function closeAfter(timeout) {
-            setTimeout(function () {
-                notifications.remove(self);
-                trigger();
-            }, timeout);
-        }
-
-        function trace(message, code) {
-            if (App.config.printStackTrace) {
-                self.stackTrace.push({
-                    code: code || 0,
-                    message: message
-                });
-            }
-        }
-    }
-
-    function NotificationList() {
-        var elements = [];
-
-        return {
-            all: all,
-            add: add,
-            remove: remove
-        };
-
-        function all() {
-            return elements;
-        }
-
-        function add(notification) {
-            elements.push(notification);
-        }
-
-        function remove(notification) {
-            for (var i = 0; i < elements.length; i++) {
-                if (elements[i].id === notification.id) {
-                    elements.splice(i, 1);
-                    break;
-                }
-            }
-        }
-    }
-}(jQuery);
-
-},{}],89:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var ApiService = require("services/ApiService");
-
-module.exports = function ($) {
-
-    var resources = {};
-
-    return {
-        registerResource: registerResource,
-        registerResourceList: registerResourceList,
-        getResource: getResource,
-        watch: watch,
-        bind: bind
-    };
-
-    /**
-     * Register a new resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource} The created resource.
-     */
-    function registerResource(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new Resource(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Register a new list resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource}            The created resource.
-     */
-    function registerResourceList(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new ResourceList(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Receive a registered resource by its name
-     * @param {string}  name    The name of the resource to receive
-     *
-     * @returns {Resource}      The resource
-     */
-    function getResource(name) {
-        name = name.toLowerCase();
-
-        if (!resources[name]) {
-            throw new Error("Unkown resource: " + name);
-        }
-
-        return resources[name];
-    }
-
-    /**
-     * Track changes of a given resource.
-     * @param {string}      name        The name of the resource to watch
-     * @param {function}    callback    The handler to call on each change
-     */
-    function watch(name, callback) {
-        getResource(name).watch(callback);
-    }
-
-    /**
-     * Bind a resource to a property of a vue instance.
-     * @param {string}  name        The name of the resource to bind
-     * @param {Vue}     vue         The vue instance
-     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
-     */
-    function bind(name, vue, property) {
-        property = property || name;
-        getResource(name).bind(vue, property);
-    }
-
-    /**
-     * @class Observable
-     * Automatically notify all attached listeners on any changes.
-     */
-    function Observable() {
-        var _value;
-        var _watchers = [];
-
-        return {
-            get value() {
-                return _value;
-            },
-            set value(newValue) {
-                for (var i = 0; i < _watchers.length; i++) {
-                    var watcher = _watchers[i];
-
-                    watcher.apply({}, [newValue, _value]);
-                }
-                _value = newValue;
-            },
-            watch: function watch(cb) {
-                _watchers.push(cb);
-            }
-        };
-    }
-
-    /**
-     * @class Resource
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function Resource(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        // initialize resource
-        if (typeof initialValue !== "undefined") {
-            // Initial value that was given by constructor
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            // If no initial value was given, get the value from the URL
-            ApiService.get(url, { template: this.responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {string}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of the resource.
-         * @param {*}   value   The value to set.
-         * @returns {Deferred}  The PUT request to the url of the resource
-         */
-        function set(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            } else if (url) {
-                return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            throw new Error("Cannot update resource. Neither an URL nor a value is prodivded.");
-        }
-    }
-
-    /**
-     * @class ResourceList
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function ResourceList(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        if (url.charAt(url.length - 1) !== "/") {
-            url += "/";
-        }
-
-        if (typeof initialValue !== "undefined") {
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            push: push,
-            remove: remove,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {sting}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of a single element of this resource.
-         * @param {string|number}   key     The key of the element
-         * @param {*}               value   The value to set.
-         * @returns {Deferred}      The PUT request to the url of the resource
-         */
-        function set(key, value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url + key, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Add a new element to this resource
-         * @param {*}   value   The element to add
-         * @returns {Deferred}  The POST request to the url of the resource
-         */
-        function push(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.post(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.push(value);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Remove an element from this resource
-         * @param {string|number}   key     The key of the element
-         * @returns {Deferred}              The DELETE request to the url of the resource
-         */
-        function remove(key) {
-            if (url) {
-                return ApiService.delete(url + key, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.splice(key, 1);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            }
-
-            return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-            });
-        }
-    }
-}(jQuery);
-
-},{"services/ApiService":82}],90:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getUrlParams = getUrlParams;
-exports.setUrlParams = setUrlParams;
-exports.setUrlParam = setUrlParam;
-
-var _jquery = require("jquery");
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getUrlParams(urlParams) {
-    if (urlParams) {
-        var tokens;
-        var params = {};
-        var regex = /[?&]?([^=]+)=([^&]*)/g;
-
-        urlParams = urlParams.split("+").join(" ");
-
-        // eslint-disable-next-line
-        while (tokens = regex.exec(urlParams)) {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-        }
-
-        return params;
-    }
-
-    return {};
-}
-
-function setUrlParams(urlParams) {
-    var pathName = window.location.pathname;
-    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
-    var titleElement = document.getElementsByTagName("title")[0];
-
-    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
-}
-
-function setUrlParam(key, value) {
-    var urlParams = getUrlParams(document.location.search);
-
-    if (value !== null) {
-        urlParams[key] = value;
-    } else {
-        delete urlParams[key];
-    }
-
-    setUrlParams(urlParams);
-}
-
-exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
-
-},{"jquery":98}],91:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.validate = validate;
-exports.getInvalidFields = getInvalidFields;
-exports.markInvalidFields = markInvalidFields;
-exports.markFailedValidationFields = markFailedValidationFields;
-exports.unmarkAllFields = unmarkAllFields;
-
-var _jquery = require("jquery");
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var $form = void 0;
-
-function validate(form) {
-    var deferred = _jquery2.default.Deferred();
-    var invalidFields = getInvalidFields(form);
-
-    if (invalidFields.length > 0) {
-        deferred.rejectWith(form, [invalidFields]);
-    } else {
-        deferred.resolveWith(form);
-    }
-
-    return deferred;
-}
-
-function getInvalidFields(form) {
-    $form = (0, _jquery2.default)(form);
-    var invalidFormControls = [];
-
-    $form.find("[data-validate]").each(function (i, elem) {
-
-        if (!_validateElement((0, _jquery2.default)(elem))) {
-            invalidFormControls.push(elem);
-        }
-    });
-
-    return invalidFormControls;
-}
-
-function markInvalidFields(fields, errorClass) {
-    errorClass = errorClass || "error";
-
-    (0, _jquery2.default)(fields).each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-
-        $elem.addClass(errorClass);
-        _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
-            if (_validateElement($elem)) {
-                $elem.removeClass(errorClass);
-                if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
-                    var groupName = $elem.attr("name");
-
-                    (0, _jquery2.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
-                }
-                _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
-            }
-        });
-    });
-}
-
-function markFailedValidationFields(form, validationErrors, errorClass) {
-    $form = (0, _jquery2.default)(form);
-
-    errorClass = errorClass || "error";
-
-    $form.find("[data-model]").each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-        var attribute = $elem.attr("data-model");
-
-        if (attribute in validationErrors) {
-            $elem.addClass(errorClass);
-
-            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
-
-            if (fieldLabel) {
-                var attributeCamel = attribute.replace(/([A-Z])/g, " $1").toLowerCase();
-
-                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attributeCamel.replace("_", " "), fieldLabel);
-            }
-        }
-    });
-}
-
-function unmarkAllFields(form) {
-    $form = (0, _jquery2.default)(form);
-
-    $form.find("[data-validate]").each(function (i, elem) {
-        var $elem = (0, _jquery2.default)(elem);
-
-        $elem.removeClass("error");
-    });
-}
-
-function _validateElement(elem) {
-    var $elem = (0, _jquery2.default)(elem);
-    var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
-        return i.trim();
-    }) || ["text"];
-    var hasError = false;
-
-    _findFormControls($elem).each(function (i, formControl) {
-        var $formControl = (0, _jquery2.default)(formControl);
-        var validationKey = validationKeys[i] || validationKeys[0];
-
-        if (!_isActive($formControl)) {
-            // continue loop
-            return true;
-        }
-
-        if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
-
-            if (!_validateGroup($formControl, validationKey)) {
-                hasError = true;
-            }
-
-            return true;
-        }
-
-        if ($formControl.is("select")) {
-            if (!_validateSelect($formControl, validationKey)) {
-                hasError = true;
-            }
-
-            return true;
-        }
-
-        if (!_validateInput($formControl, validationKey)) {
-            hasError = true;
-        }
-
-        return false;
-    });
-
-    return !hasError;
-}
-
-function _validateGroup($formControl, validationKey) {
-    var groupName = $formControl.attr("name");
-    var $group = $form.find("[name=\"" + groupName + "\"]");
-    var range = _eval(validationKey) || { min: 1, max: 1 };
-    var checked = $group.filter(":checked").length;
-
-    return checked >= range.min && checked <= range.max;
-}
-
-function _validateSelect($formControl, validationKey) {
-    return _jquery2.default.trim($formControl.val()) !== validationKey;
-}
-
-function _validateInput($formControl, validationKey) {
-    switch (validationKey) {
-        case "text":
-            return _hasValue($formControl);
-        case "number":
-            return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
-        case "ref":
-            return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
-        case "mail":
-            return _isMail($formControl);
-        case "password":
-            return _isPassword($formControl);
-        case "regex":
-            {
-                var ref = $formControl.attr("data-validate-ref");
-                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
-
-                return _hasValue($formControl) && regex.test(_jquery2.default.trim($formControl.val()));
-            }
-        default:
-            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
-            return true;
-    }
-}
-
-function _hasValue($formControl) {
-    return _jquery2.default.trim($formControl.val()).length > 0;
-}
-
-/**
- * @param {any} value
- * @returns value is valid mail
- */
-function _isMail($formControl) {
-    var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    return mailRegEx.test($formControl.val());
-}
-
-/**
- * Minimum eight characters, at least one letter and one number
- *
- * @param {any} value
- * @returns value is valid password
- */
-function _isPassword($formControl) {
-    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
-
-    return passwordRegEx.test($formControl.val());
-}
-
-function _compareRef(value, ref) {
-    if ((0, _jquery2.default)(ref).length > 0) {
-        ref = _jquery2.default.trim((0, _jquery2.default)(ref).val());
-    }
-
-    return value === ref;
-}
-
-function _findFormControls($elem) {
-    if ($elem.is("input, select, textarea")) {
-        return $elem;
-    }
-
-    return $elem.find("input, select, textarea");
-}
-
-function _isActive($elem) {
-    return $elem.is(":visible") && $elem.is(":enabled");
-}
-
-function _eval(input) {
-    // eslint-disable-next-line
-    return new Function("return " + input)();
-}
-
-exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
-
-},{"jquery":98}],92:[function(require,module,exports){
-"use strict";
-
-module.exports = function ($) {
-
-    var overlay = {
-        count: 0,
-        isVisible: false
-    };
-
-    return {
-        getOverlay: getOverlay,
-        showWaitScreen: showWaitScreen,
-        hideWaitScreen: hideWaitScreen
-    };
-
-    function getOverlay() {
-        return overlay;
-    }
-
-    function showWaitScreen() {
-        overlay.count = overlay.count || 0;
-        overlay.count++;
-        overlay.isVisible = true;
-    }
-
-    function hideWaitScreen(force) {
-        overlay.count = overlay.count || 0;
-        if (overlay.count > 0) {
-            overlay.count--;
-        }
-
-        if (force) {
-            overlay.count = 0;
-        }
-
-        if (overlay.count <= 0) {
-            overlay.count = 0;
-            overlay.visible = false;
-        }
-    }
-}(jQuery);
-
-},{}],93:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _WishListModule = require("store/modules/WishListModule");
-
-var _WishListModule2 = _interopRequireDefault(_WishListModule);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// eslint-disable-next-line
-var store = new Vuex.Store({
-    modules: {
-        wishList: _WishListModule2.default
-    }
-});
-
-window.ceresStore = store;
-
-exports.default = store;
-
-},{"store/modules/WishListModule":94}],94:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _ApiService = require("services/ApiService");
-
-var _ApiService2 = _interopRequireDefault(_ApiService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var state = {
-    wishListIds: [],
-    wishListItems: []
-};
-
-var mutations = {
-    setWishListItems: function setWishListItems(state, wishListItems) {
-        state.wishListItems = wishListItems;
-    },
-    setWishListIds: function setWishListIds(state, wishListIds) {
-        state.wishListIds = wishListIds;
-    },
-    removeWishListItem: function removeWishListItem(state, wishListItem) {
-        state.wishListItems = state.wishListItems.filter(function (item) {
-            return item !== wishListItem;
-        });
-    },
-    removeWishListId: function removeWishListId(state, id) {
-        state.wishListIds = state.wishListIds.filter(function (wishListId) {
-            return wishListId !== id;
-        });
-    },
-    addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
-        state.wishListItems.splice(index, 0, wishListItem);
-    },
-    addWishListId: function addWishListId(state, id) {
-        state.wishListIds.push(id);
-    }
-};
-
-var actions = {
-    initWishListItems: function initWishListItems(_ref, ids) {
-        var commit = _ref.commit;
-
-        return new Promise(function (resolve, reject) {
-            if (ids && ids[0]) {
-                commit("setWishListIds", ids);
-
-                _ApiService2.default.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" }).done(function (data) {
-                    commit("setWishListItems", data.documents);
-                    resolve();
-                }).fail(function () {
-                    reject();
-                });
-            } else {
-                resolve();
-            }
-        });
-    },
-    removeWishListItem: function removeWishListItem(_ref2, _ref3) {
-        var commit = _ref2.commit;
-        var id = _ref3.id,
-            wishListItem = _ref3.wishListItem,
-            index = _ref3.index;
-
-        return new Promise(function (resolve, reject) {
-            if (wishListItem) {
-                commit("removeWishListItem", wishListItem);
-            }
-
-            _ApiService2.default.delete("/rest/io/itemWishList/" + id).done(function (data) {
-                commit("removeWishListId", id);
-                resolve();
-            }).fail(function (error) {
-                if (index) {
-                    commit("addWishListItemToIndex", wishListItem, index);
-                }
-                reject();
-            });
-        });
-    },
-    addToWishList: function addToWishList(_ref4, id) {
-        var commit = _ref4.commit;
-
-        return new Promise(function (resolve, reject) {
-            commit("addWishListId", id);
-            _ApiService2.default.post("/rest/io/itemWishList", { variationId: id }).done(function () {
-                resolve();
-            }).fail(function () {
-                commit("removeWishListId", id);
-                reject();
-            });
-        });
-    }
-};
-
-var getters = {
-    wishListCount: function wishListCount(state) {
-        return state.wishListIds.length;
-    }
-};
-
-exports.default = {
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
-};
-
-},{"services/ApiService":82}],95:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -7914,7 +749,7 @@ exports.default = {
 	// Root will be `window` in browser or `global` on the server:
 }(this));
 
-},{}],96:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 var currencySymbolMap = require('./map');
 
 var symbolCurrencyMap = {};
@@ -7954,7 +789,7 @@ module.exports.getCurrencyFromSymbol = getCurrencyFromSymbol;
 module.exports.symbolCurrencyMap = symbolCurrencyMap;
 module.exports.currencySymbolMap = currencySymbolMap;
 
-},{"./map":97}],97:[function(require,module,exports){
+},{"./map":3}],3:[function(require,module,exports){
 module.exports =
 { "ALL": "L"
 , "AFN": "؋"
@@ -8074,7 +909,7 @@ module.exports =
 , "ZWD": "Z$"
 }
 
-},{}],98:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -17890,7 +10725,7172 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}]},{},[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,24,25,26,27,21,22,23,28,29,30,31,32,33,34,42,43,44,35,36,37,38,40,39,41,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,65,66,61,62,63,64,67,68,69,70,71,72,73,74,75,76,77,78,79,93,94])
+},{}],5:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var ModalService = require("services/ModalService");
+
+Vue.component("add-item-to-basket-overlay", {
+
+    props: ["basketAddInformation", "template"],
+
+    data: function data() {
+        return {
+            basketItem: { currentBasketItem: {} },
+            timeToClose: 0,
+            price: 0,
+            currency: ""
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        ResourceService.bind("basketItem", this);
+    },
+
+
+    watch: {
+        basketItem: function basketItem() {
+            if (this.basketAddInformation === "overlay") {
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
+                setTimeout(function () {
+                    $("body").toggleClass("open-right");
+                }, 1);
+            }
+        }
+    },
+
+    methods: {
+
+        /**
+         * check if current basket object exist and start rendering
+         */
+        startRendering: function startRendering() {
+            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+
+            if (render) {
+                this.startCounter();
+            }
+
+            this.setPriceFromData();
+
+            return render;
+        },
+        setPriceFromData: function setPriceFromData() {
+            if (this.basketItem.currentBasketItem.calculatedPrices) {
+                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price + this.calculateSurcharge();
+                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
+            }
+        },
+        calculateSurcharge: function calculateSurcharge() {
+
+            var sumSurcharge = 0;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.basketItem.currentBasketItem.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+
+                    if (property.property.value && property.property.value.length > 0) {
+                        if (property.surcharge > 0) {
+                            sumSurcharge += property.surcharge;
+                        } else if (property.property.surcharge > 0) {
+                            sumSurcharge += property.property.surcharge;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return sumSurcharge;
+        },
+
+
+        /**
+         * @returns {string}
+         */
+        getImage: function getImage() {
+            var path = "";
+
+            for (var i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++) {
+                if (this.basketItem.currentBasketItem.variationImageList[i].path !== "") {
+                    path = this.basketItem.currentBasketItem.variationImageList[i].path;
+                }
+            }
+
+            return "/" + path;
+        },
+        startCounter: function startCounter() {
+            var _this = this;
+
+            this.timeToClose = 10;
+
+            var timerVar = setInterval(function () {
+                _this.timeToClose -= 1;
+
+                if (_this.timeToClose === 0) {
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
+
+                    clearInterval(timerVar);
+                }
+            }, 1000);
+        }
+    },
+
+    computed: {
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function texts() {
+            return this.basketItem.currentBasketItem.texts;
+        },
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
+
+            return img.url;
+        }
+    }
+});
+
+},{"services/ModalService":91,"services/ResourceService":93}],6:[function(require,module,exports){
+"use strict";
+
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-basket", {
+
+    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale"],
+
+    data: function data() {
+        return {
+            quantity: 1,
+            buttonLockState: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.useLargeScale = this.useLargeScale || false;
+    },
+    ready: function ready() {
+        this.checkMinMaxOrderQuantity();
+    },
+
+
+    methods: {
+        /**
+         * add an item to basket-resource
+         */
+        addToBasket: function addToBasket() {
+            if (this.item.filter.isSalable) {
+                var basketObject = {
+                    variationId: this.variationId,
+                    quantity: this.quantity,
+                    basketItemOrderParams: this.item.properties
+                };
+
+                ResourceService.getResource("basketItems").push(basketObject).done(function () {
+                    this.openAddToBasketOverlay();
+                }.bind(this)).fail(function (response) {
+                    NotificationService.error(Translations.Template[_ExceptionMap2.default.get(response.data.exceptionCode.toString())]).closeAfter(5000);
+                });
+            }
+        },
+        directToItem: function directToItem() {
+            window.location.assign(this.itemUrl);
+        },
+        handleButtonState: function handleButtonState(value) {
+            this.buttonLockState = value;
+        },
+
+
+        /**
+         * open the AddItemToBasketOverlay
+         */
+        openAddToBasketOverlay: function openAddToBasketOverlay() {
+            var currentBasketObject = {
+                currentBasketItem: this.item,
+                quantity: this.quantity
+            };
+
+            ResourceService.getResource("basketItem").set(currentBasketObject);
+        },
+
+
+        /**
+         * update the property quantity of the current instance
+         * @param value
+         */
+        updateQuantity: function updateQuantity(value) {
+            this.quantity = value;
+        },
+
+
+        /**
+         * Check min - max order quantity
+         */
+        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
+            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
+            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
+        }
+    },
+
+    computed: {
+        /**
+         * returns item.variation.id
+         */
+        variationId: function variationId() {
+            return this.item.variation.id;
+        },
+        hasChildren: function hasChildren() {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        }
+    }
+});
+
+},{"exceptions/ExceptionMap":73,"services/NotificationService":92,"services/ResourceService":93}],7:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("basket-preview", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            basket: {},
+            basketItems: []
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Bind to basket and bind the basket items
+     */
+    ready: function ready() {
+        ResourceService.bind("basket", this);
+        ResourceService.bind("basketItems", this);
+    }
+});
+
+},{"services/ResourceService":93}],8:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("basket-totals", {
+
+    props: ["config", "template"],
+
+    data: function data() {
+        return {
+            basket: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    /**
+     * Bind to basket
+     */
+    ready: function ready() {
+        ResourceService.bind("basket", this);
+    },
+
+    methods: {
+        /**
+         * TODO
+         * @param name
+         * @returns {boolean}
+         */
+        showProperty: function showProperty(name) {
+            return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
+        }
+    }
+});
+
+},{"services/ResourceService":93}],9:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("coupon", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            couponCode: "",
+            basket: {},
+            waiting: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+        ResourceService.bind("basket", this);
+    },
+
+    ready: function ready() {
+        if (this.disabled) {
+            this.couponCode = this.basket.couponCode;
+        }
+    },
+
+    methods: {
+        redeemCode: function redeemCode() {
+            this.waiting = true;
+            var self = this;
+
+            ApiService.post("/rest/io/coupon", { couponCode: this.couponCode }).always(function () {
+                self.waiting = false;
+            }).done(function (response) {
+                NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+            }).fail(function (response) {
+                NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
+            });
+        },
+
+        removeCode: function removeCode() {
+            this.waiting = true;
+            var self = this;
+
+            ApiService.delete("/rest/io/coupon/" + this.basket.couponCode).always(function () {
+                self.waiting = false;
+            }).done(function (response) {
+                self.couponCode = "";
+                NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
+            }).fail(function (response) {
+                NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
+            });
+        }
+    },
+
+    computed: {
+        disabled: function disabled() {
+            if (this.basket.couponCode) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/NotificationService":92,"services/ResourceService":93}],10:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("basket-list", {
+
+    props: ["size", "template", "triggerEvent"],
+
+    data: function data() {
+        return {
+            basketItems: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    /**
+     * Bind to basket and show the items in a small or large list
+     */
+    ready: function ready() {
+        ResourceService.bind("basketItems", this);
+
+        if (this.triggerEvent) {
+            ResourceService.watch("basket", function (newValue, oldValue) {
+                if (oldValue) {
+                    if (JSON.stringify(newValue) != JSON.stringify(oldValue)) {
+                        document.dispatchEvent(new CustomEvent("afterBasketChanged", { detail: newValue }));
+                    }
+                }
+            });
+        }
+    }
+});
+
+},{"services/ResourceService":93}],11:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+// var ApiService          = require("services/ApiService");
+// var NotificationService = require("services/NotificationService");
+
+Vue.component("basket-list-item", {
+
+    props: ["basketItem", "size", "language", "template"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            deleteConfirmed: false,
+            deleteConfirmedTimeout: null,
+            itemCondition: ""
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+
+        /**
+         * Delete item from basket
+         */
+        deleteItem: function deleteItem() {
+            var self = this;
+
+            if (!this.deleteConfirmed) {
+                this.deleteConfirmed = true;
+                this.deleteConfirmedTimeout = window.setTimeout(function () {
+                    self.resetDelete();
+                }, 5000);
+            } else {
+                this.waiting = true;
+                ResourceService.getResource("basketItems").remove(this.basketItem.id).fail(function () {
+                    self.resetDelete();
+                    self.waiting = false;
+                });
+            }
+        },
+
+        /**
+         * Update item quantity in basket
+         * @param quantity
+         */
+        updateQuantity: function updateQuantity(quantity) {
+            if (this.basketItem.quantity === quantity) {
+                return;
+            }
+
+            this.basketItem.quantity = quantity;
+            this.waiting = true;
+
+            ResourceService.getResource("basketItems").set(this.basketItem.id, this.basketItem).fail(function () {
+                this.waiting = false;
+            }.bind(this));
+        },
+
+        /**
+         * Cancel delete
+         */
+        resetDelete: function resetDelete() {
+            this.deleteConfirmed = false;
+            if (this.deleteConfirmedTimeout) {
+                window.clearTimeout(this.deleteConfirmedTimeout);
+            }
+        }
+    },
+
+    computed: {
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
+        }
+    }
+});
+
+},{"services/ResourceService":93}],12:[function(require,module,exports){
+"use strict";
+
+var _CategoryRendererService = require("services/CategoryRendererService");
+
+var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("category-breadcrumbs", {
+
+    props: ["template", "currentCategoryTree"],
+
+    data: function data() {
+        return {
+            breadcrumbs: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.init();
+    },
+
+    methods: {
+        /**
+         * initialize values
+         */
+        init: function init() {
+            ResourceService.bind("breadcrumbs", this);
+
+            this.breadcrumbs = this.currentCategoryTree;
+        },
+
+        /**
+         * render items in relation to location
+         * @param currentCategory
+         */
+        renderItems: function renderItems(currentCategory) {
+            _CategoryRendererService2.default.renderItems(currentCategory);
+
+            return false;
+        },
+
+        getBreadcrumbURL: function getBreadcrumbURL(breadcrumb) {
+            return _CategoryRendererService2.default.getScopeUrl(breadcrumb);
+        }
+    }
+});
+
+},{"services/CategoryRendererService":87,"services/ResourceService":93}],13:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("accept-gtc-check", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            isChecked: false,
+            checkoutValidation: { gtc: {} }
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+        ResourceService.bind("checkoutValidation", this);
+        this.checkoutValidation.gtc.validate = this.validate;
+    },
+
+    methods: {
+        validate: function validate() {
+            this.checkoutValidation.gtc.showError = !this.isChecked;
+        }
+    },
+
+    watch: {
+        isChecked: function isChecked() {
+            this.checkoutValidation.gtc.showError = false;
+        }
+    }
+});
+
+},{"services/ResourceService":93}],14:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("payment-provider-select", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            checkout: {},
+            checkoutValidation: { paymentProvider: {} }
+        };
+    },
+
+
+    /**
+     * Initialise the event listener
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.paymentProvider.validate = this.validate;
+
+        this.initDefaultPaymentProvider();
+    },
+
+
+    watch: {
+        checkout: function checkout() {
+            var paymentExist = false;
+
+            for (var i in this.checkout.paymentDataList) {
+                if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId) {
+                    paymentExist = true;
+                }
+            }
+
+            if (!paymentExist) {
+                this.checkout.methodOfPaymentId = 0;
+                this.initDefaultPaymentProvider();
+            }
+        }
+    },
+
+    methods: {
+        /**
+         * Event when changing the payment provider
+         */
+        onPaymentProviderChange: function onPaymentProviderChange() {
+            var _this = this;
+
+            ResourceService.getResource("checkout").set(this.checkout).done(function () {
+                document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.checkout.methodOfPaymentId }));
+            });
+
+            this.validate();
+        },
+        validate: function validate() {
+            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
+        },
+        initDefaultPaymentProvider: function initDefaultPaymentProvider() {
+            // todo get entry from config | select first payment provider
+            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0) {
+                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
+
+                ResourceService.getResource("checkout").set(this.checkout);
+            }
+        }
+    }
+});
+
+},{"services/ResourceService":93}],15:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+
+(function ($) {
+    Vue.component("place-order", {
+
+        props: ["targetContinue", "template"],
+
+        data: function data() {
+            return {
+                waiting: false,
+                checkout: {},
+                checkoutValidation: {}
+            };
+        },
+
+        created: function created() {
+            this.$options.template = this.template;
+
+            ResourceService.bind("checkout", this);
+            ResourceService.bind("checkoutValidation", this);
+        },
+
+        methods: {
+
+            preparePayment: function preparePayment() {
+                this.waiting = true;
+                var self = this;
+
+                if (self.validateCheckout()) {
+                    ApiService.post("/rest/io/checkout/payment").done(function (response) {
+                        self.afterPreparePayment(response);
+                    }).fail(function (response) {
+                        self.waiting = false;
+                    });
+                } else {
+                    NotificationService.error(Translations.Template.generalCheckEntries);
+                    this.waiting = false;
+                }
+            },
+
+            validateCheckout: function validateCheckout() {
+                for (var validator in this.checkoutValidation) {
+                    if (this.checkoutValidation[validator].validate) {
+                        this.checkoutValidation[validator].validate();
+                    }
+                }
+
+                for (var i in this.checkoutValidation) {
+                    if (this.checkoutValidation[i].showError) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+
+            afterPreparePayment: function afterPreparePayment(response) {
+                var paymentType = response.type || "errorCode";
+                var paymentValue = response.value || "";
+
+                switch (paymentType) {
+                    case "continue":
+                        var target = this.targetContinue;
+
+                        if (target) {
+                            window.location.assign(target);
+                        }
+                        break;
+                    case "redirectUrl":
+                        // redirect to given payment provider
+                        window.location.assign(paymentValue);
+                        break;
+                    case "externalContentUrl":
+                        // show external content in iframe
+                        this.showModal(paymentValue, true);
+                        break;
+                    case "htmlContent":
+                        this.showModal(paymentValue, false);
+                        break;
+
+                    case "errorCode":
+                        NotificationService.error(paymentValue);
+                        this.waiting = false;
+                        break;
+                    default:
+                        NotificationService.error("Unknown response from payment provider: " + paymentType);
+                        this.waiting = false;
+                        break;
+                }
+            },
+
+            showModal: function showModal(content, isExternalContent) {
+                var $modal = $(this.$els.modal);
+                var $modalBody = $(this.$els.modalContent);
+
+                if (isExternalContent) {
+                    $modalBody.html("<iframe src=\"" + content + "\">");
+                } else {
+                    $modalBody.html(content);
+                }
+
+                $modal.modal("show");
+            }
+        }
+    });
+})(jQuery);
+
+},{"services/ApiService":86,"services/NotificationService":92,"services/ResourceService":93}],16:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("shipping-profile-select", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            checkout: {},
+            checkoutValidation: { shippingProfile: {} }
+        };
+    },
+
+    /**
+     * Add a shipping provider
+     * Initialise the event listener
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("checkout", this);
+        ResourceService.bind("checkoutValidation", this);
+
+        this.checkoutValidation.shippingProfile.validate = this.validate;
+    },
+
+    methods: {
+        /**
+         * Method on shipping profile changed
+         */
+        onShippingProfileChange: function onShippingProfileChange() {
+            ResourceService.getResource("checkout").set(this.checkout).done(function () {
+                document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: this.checkout.shippingProfileId }));
+            }.bind(this));
+
+            this.validate();
+        },
+
+        validate: function validate() {
+            this.checkoutValidation.shippingProfile.showError = !(this.checkout.shippingProfileId > 0);
+        }
+    }
+});
+
+},{"services/ResourceService":93}],17:[function(require,module,exports){
+"use strict";
+
+Vue.component("address-input-group", {
+
+    props: ["addressData", "defaultCountry", "addressType", "modalType", "template"],
+
+    data: function data() {
+        return {
+            stateList: [],
+            countryLocaleList: ["DE", "GB"],
+            localeToShow: ""
+        };
+    },
+
+
+    /**
+     * Check whether the address data exists. Else, create an empty one
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        if (!this.addressData) {
+            this.addressData = {};
+        }
+
+        this.defaultCountry = "DE";
+    },
+
+
+    methods: {
+        /**
+         * Update the address input group to show.
+         * @param shippingCountry
+         */
+        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
+                this.localeToShow = shippingCountry.isoCode2;
+            } else {
+                this.localeToShow = this.defaultCountry;
+            }
+        },
+        getOptionType: function getOptionType(data, optionType) {
+            for (var i = 0; i < data.length; i++) {
+                if (optionType === data[i].typeId) {
+                    return data[i].value;
+                }
+            }
+            return "";
+        },
+        equalOptionValues: function equalOptionValues(newValue, data, optionType) {
+            var oldValue = this.getOptionType(data, optionType);
+
+            if (typeof newValue === "undefined") {
+                return oldValue;
+            }
+
+            return oldValue === newValue;
+        }
+    },
+
+    filters: {
+        optionType: {
+            read: function read(value, optionType) {
+                var data = this.addressData.options;
+
+                if (typeof data === "undefined") {
+                    return value;
+                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
+                    return value;
+                }
+
+                return this.getOptionType(data, optionType);
+            },
+            write: function write(value) {
+                return value;
+            }
+        }
+    }
+});
+
+},{}],18:[function(require,module,exports){
+"use strict";
+
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var ModalService = require("services/ModalService");
+var ResourceService = require("services/ResourceService");
+var AddressFieldService = require("services/AddressFieldService");
+
+Vue.component("address-select", {
+
+    props: ["addressList", "addressType", "selectedAddressId", "template", "showError", "countryNameMap"],
+
+    data: function data() {
+        return {
+            selectedAddress: {},
+            addressModal: {},
+            modalType: "",
+            headline: "",
+            addressToEdit: {},
+            addressToDelete: {},
+            deleteModal: "",
+            localization: {},
+            user: {}
+        };
+    },
+
+
+    /**
+     *  Check whether the address list is not empty and select the address with the matching ID
+     */
+    created: function created() {
+        this.$options.template = this.template;
+        ResourceService.bind("localization", this);
+        ResourceService.bind("user", this);
+
+        this.addEventListener();
+    },
+
+
+    /**
+     * Select the address modal
+     */
+    ready: function ready() {
+        if (!this.isAddressListEmpty()) {
+            if (!this.selectedAddressId || this.selectedAddressId <= 0) {
+                this.selectedAddressId = this.addressList[0].id;
+            }
+
+            this.loadSelectedAddress();
+        } else {
+            this.addressList = [];
+        }
+
+        this.addressModal = ModalService.findModal(this.$els.addressModal);
+        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+    },
+
+
+    methods: {
+        /**
+         * Add the event listener
+         */
+        addEventListener: function addEventListener() {
+            var _this = this;
+
+            ApiService.listen("AfterAccountContactLogout", function () {
+                _this.cleanUserAddressData();
+            });
+        },
+
+
+        /**
+         * Load the address filtered by selectedId into selectedAddress
+         */
+        loadSelectedAddress: function loadSelectedAddress() {
+            var isSelectedAddressSet = false;
+
+            for (var index in this.addressList) {
+                if (this.addressList[index].id === this.selectedAddressId) {
+                    this.selectedAddress = this.addressList[index];
+                    isSelectedAddressSet = true;
+                    this.$dispatch("address-changed", this.selectedAddress);
+                }
+            }
+
+            if (!isSelectedAddressSet) {
+                this.selectedAddressId = null;
+            }
+        },
+
+
+        /**
+         * Remove all user related addresses from the component
+         */
+        cleanUserAddressData: function cleanUserAddressData() {
+            this.addressList = this.addressList.filter(function (value) {
+                return value.id === -99;
+            });
+
+            if (this.selectedAddressId !== -99) {
+                this.selectedAddress = {};
+                this.selectedAddressId = "";
+            }
+        },
+
+
+        /**
+         * Update the selected address
+         * @param index
+         */
+        onAddressChanged: function onAddressChanged(index) {
+            this.selectedAddress = this.addressList[index];
+
+            this.$dispatch("address-changed", this.selectedAddress);
+        },
+
+
+        /**
+         * Check whether the address list is empty
+         * @returns {boolean}
+         */
+        isAddressListEmpty: function isAddressListEmpty() {
+            return !(this.addressList && this.addressList.length > 0);
+        },
+
+
+        /**
+         * Check whether a company name exists and show it in bold
+         * @returns {boolean}
+         */
+        showNameStrong: function showNameStrong() {
+            return !this.selectedAddress.name1 || this.selectedAddress.name1.length === 0;
+        },
+
+
+        /**
+         * Show the add modal initially, if no address is selected in checkout
+         */
+        showInitialAddModal: function showInitialAddModal() {
+            this.modalType = "initial";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId: this.localization.currentShippingCountryId
+                };
+            } else {
+                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+            }
+
+            this.updateHeadline();
+            this.addressModal.show();
+        },
+
+
+        /**
+         * Show the add modal
+         */
+        showAddModal: function showAddModal() {
+            this.modalType = "create";
+
+            if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
+                this.addressToEdit = {
+                    addressSalutation: 0,
+                    countryId: this.localization.currentShippingCountryId
+                };
+            } else {
+                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+            }
+
+            this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
+            this.addressModal.show();
+        },
+
+
+        /**
+         * Show the edit modal
+         * @param address
+         */
+        showEditModal: function showEditModal(address) {
+            this.modalType = "update";
+            // Creates a tmp address to prevent unwanted two-way binding
+            this.addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (typeof this.addressToEdit.addressSalutation === "undefined") {
+                this.addressToEdit.addressSalutation = 0;
+            }
+
+            this.updateHeadline();
+            _ValidationService2.default.unmarkAllFields($(this.$els.addressModal));
+            this.addressModal.show();
+        },
+
+
+        /**
+         * Show the delete modal
+         * @param address
+         */
+        showDeleteModal: function showDeleteModal(address) {
+            this.modalType = "delete";
+            this.addressToDelete = address;
+            this.updateHeadline();
+            this.deleteModal.show();
+        },
+
+
+        /**
+         * Delete the address selected before
+         */
+        deleteAddress: function deleteAddress() {
+            var _this2 = this;
+
+            _AddressService2.default.deleteAddress(this.addressToDelete.id, this.addressType).done(function () {
+                _this2.closeDeleteModal();
+                _this2.removeIdFromList(_this2.addressToDelete.id);
+            });
+        },
+
+
+        /**
+         * Close the current create/update address modal
+         */
+        closeAddressModal: function closeAddressModal() {
+            this.addressModal.hide();
+        },
+
+
+        /**
+         * Close the current delete address modal
+         */
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModal.hide();
+        },
+
+
+        /**
+         * Dynamically create the header line in the modal
+         */
+        updateHeadline: function updateHeadline() {
+            var headline = void 0;
+
+            if (this.modalType === "initial") {
+                headline = Translations.Template.orderInvoiceAddressInitial;
+            } else if (this.addressType === "2") {
+                if (this.modalType === "update") {
+                    headline = Translations.Template.orderShippingAddressEdit;
+                } else if (this.modalType === "create") {
+                    headline = Translations.Template.orderShippingAddressCreate;
+                } else {
+                    headline = Translations.Template.orderShippingAddressDelete;
+                }
+            } else if (this.modalType === "update") {
+                headline = Translations.Template.orderInvoiceAddressEdit;
+            } else if (this.modalType === "create") {
+                headline = Translations.Template.orderInvoiceAddressCreate;
+            } else {
+                headline = Translations.Template.orderInvoiceAddressDelete;
+            }
+
+            this.headline = headline;
+        },
+
+
+        /**
+         * Remove an address from the addressList by ID
+         * @param id
+         */
+        removeIdFromList: function removeIdFromList(id) {
+            for (var i in this.addressList) {
+                if (this.addressList[i].id === id) {
+                    this.addressList.splice(i, 1);
+
+                    if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString()) {
+                        if (this.addressList.length) {
+                            this.selectedAddress = this.addressList[0];
+                            this.selectedAddressId = this.selectedAddress.id;
+                        } else {
+                            this.selectedAddress = {};
+                            this.selectedAddressId = "";
+                        }
+
+                        this.$dispatch("address-changed", this.selectedAddress);
+
+                        break;
+                    }
+                }
+            }
+        },
+
+
+        /**
+         * Update the selected address when a new address is created
+         * @param addressData
+         */
+        onAddressCreated: function onAddressCreated(addressData) {
+            this.selectedAddressId = addressData.id;
+
+            this.loadSelectedAddress();
+        },
+
+
+        /**
+         * Update the selected address on address update
+         * @param addressData
+         */
+        onSelectedAddressUpdated: function onSelectedAddressUpdated(addressData) {
+            if (parseInt(this.selectedAddressId) === parseInt(addressData.id)) {
+                this.selectedAddressId = addressData.id;
+
+                this.loadSelectedAddress();
+            }
+        },
+
+
+        /**
+         * @param countryId
+         * @returns country name | empty string
+         */
+        getCountryName: function getCountryName(countryId) {
+            if (countryId > 0) {
+                return this.countryNameMap[countryId];
+            }
+
+            return "";
+        }
+    },
+
+    computed: {
+        isAddAddressEnabled: function isAddAddressEnabled() {
+            var isLoggedIn = this.user.isLoggedIn;
+
+            if (this.addressType === "1") {
+                return isLoggedIn || this.addressList.length < 1;
+            }
+
+            return isLoggedIn || this.addressList.length < 2;
+        }
+    },
+    filters: {
+        optionType: function optionType(selectedAddress, typeId) {
+            if (selectedAddress.name2) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var optionType = _step.value;
+
+                        if (optionType.typeId === typeId) {
+                            return optionType.value;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return "";
+        }
+    }
+});
+
+},{"services/AddressFieldService":84,"services/AddressService":85,"services/ApiService":86,"services/ModalService":91,"services/ResourceService":93,"services/ValidationService":95}],19:[function(require,module,exports){
+"use strict";
+
+var _AddressService = require("services/AddressService");
+
+var _AddressService2 = _interopRequireDefault(_AddressService);
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("create-update-address", {
+
+    props: ["addressData", "addressModal", "addressList", "modalType", "addressType", "template"],
+
+    data: function data() {
+        return {
+            waiting: false,
+            addressFormNames: {
+                1: "#billing_address_form",
+                2: "#delivery_address_form"
+            }
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        /**
+         * Validate the address fields
+         */
+        validate: function validate() {
+            var _this = this;
+
+            _ValidationService2.default.validate($(this.addressFormNames[this.addressType])).done(function () {
+                _this.saveAddress();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Save the new address or update an existing one
+         */
+        saveAddress: function saveAddress() {
+            if (this.modalType === "initial" || this.modalType === "create") {
+                this.createAddress();
+            } else if (this.modalType === "update") {
+                this.updateAddress();
+            }
+        },
+
+
+        /**
+         * Update an address
+         */
+        updateAddress: function updateAddress() {
+            var _this2 = this;
+
+            this.waiting = true;
+
+            this._syncOptionTypesAddressData();
+
+            _AddressService2.default.updateAddress(this.addressData, this.addressType).done(function () {
+                _this2.$dispatch("selected-address-updated", _this2.addressData);
+
+                _this2.addressModal.hide();
+
+                for (var key in _this2.addressList) {
+                    var address = _this2.addressList[key];
+
+                    if (address.id === _this2.addressData.id) {
+                        for (var attribute in _this2.addressList[key]) {
+                            _this2.addressList[key][attribute] = _this2.addressData[attribute];
+                        }
+
+                        break;
+                    }
+                }
+
+                _this2.waiting = false;
+            }).fail(function (response) {
+                _this2.waiting = false;
+
+                if (response.validation_errors) {
+                    _this2._handleValidationErrors(response.validation_errors);
+                }
+            });
+        },
+
+
+        /**
+         * Create a new address
+         */
+        createAddress: function createAddress() {
+            var _this3 = this;
+
+            this.waiting = true;
+
+            this._syncOptionTypesAddressData();
+
+            _AddressService2.default.createAddress(this.addressData, this.addressType, true).done(function (newAddress) {
+                _this3.addressData = newAddress;
+
+                _this3.addressModal.hide();
+                _this3.addressList.push(_this3.addressData);
+
+                _this3.$dispatch("new-address-created", _this3.addressData);
+
+                _this3.waiting = false;
+            }).fail(function (response) {
+                _this3.waiting = false;
+
+                if (response.validation_errors) {
+                    _this3._handleValidationErrors(response.validation_errors);
+                }
+            });
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($(this.addressFormNames[this.addressType]), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
+        },
+        _syncOptionTypesAddressData: function _syncOptionTypesAddressData() {
+
+            if (typeof this.addressData.options !== "undefined") {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = this.addressData.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
+
+                        switch (optionType.typeId) {
+                            case 1:
+                                {
+                                    if (this.addressData.vatNumber && this.addressData.vatNumber !== optionType.value) {
+                                        optionType.value = this.addressData.vatNumber;
+                                    }
+
+                                    break;
+                                }
+
+                            case 9:
+                                {
+                                    if (this.addressData.birthday && this.addressData.birthday !== optionType.value) {
+                                        optionType.value = this.addressData.birthday;
+                                    }
+                                    break;
+                                }
+
+                            case 11:
+                                {
+                                    if (this.addressData.title && this.addressData.title !== optionType.value) {
+                                        optionType.value = this.addressData.title;
+                                    }
+                                    break;
+                                }
+
+                            case 4:
+                                {
+                                    if (this.addressData.telephone && this.addressData.telephone !== optionType.value) {
+                                        optionType.value = this.addressData.telephone;
+                                    }
+                                    break;
+                                }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+},{"services/AddressService":85,"services/NotificationService":92,"services/ValidationService":95}],20:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("invoice-address-select", {
+
+    template: "<address-select v-ref:invoice-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"1\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :show-error='checkoutValidation.invoiceAddress.showError' :country-name-map=\"countryNameMap\"></address-select>",
+
+    props: ["addressList", "hasToValidate", "selectedAddressId", "countryNameMap"],
+
+    data: function data() {
+        return {
+            checkout: {},
+            checkoutValidation: { invoiceAddress: {} }
+        };
+    },
+
+
+    /**
+     * Initialise the event listener
+     */
+    created: function created() {
+        ResourceService.bind("checkout", this);
+
+        if (this.hasToValidate) {
+            ResourceService.bind("checkoutValidation", this);
+
+            this.checkoutValidation.invoiceAddress.validate = this.validate;
+        }
+    },
+
+
+    /**
+     * If no address is related to the user, a popup will open to add an address
+     */
+    ready: function ready() {
+        if (App.isCheckoutView && this.addressList.length <= 0) {
+            this.$refs.invoiceAddressSelect.showInitialAddModal();
+        } else if (this.addressList.length) {
+            this.addressChanged(this.addressList[0]);
+        }
+    },
+
+
+    methods: {
+        /**
+         * Update the invoice address
+         * @param selectedAddress
+         */
+        addressChanged: function addressChanged(selectedAddress) {
+            var _this = this;
+
+            this.checkout.billingAddressId = selectedAddress.id;
+
+            ResourceService.getResource("checkout").set(this.checkout).done(function () {
+                document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this.checkout.billingAddressId }));
+            });
+
+            if (this.hasToValidate) {
+                this.validate();
+            }
+        },
+        validate: function validate() {
+            this.checkoutValidation.invoiceAddress.showError = this.checkout.billingAddressId <= 0;
+        }
+    }
+});
+
+},{"services/ResourceService":93}],21:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("shipping-address-select", {
+
+    template: "<address-select v-ref:shipping-address-select template=\"#vue-address-select\" v-on:address-changed=\"addressChanged\" address-type=\"2\" :address-list=\"addressList\" :selected-address-id=\"selectedAddressId\" :country-name-map=\"countryNameMap\"></address-select>",
+
+    props: ["addressList", "selectedAddressId", "countryNameMap"],
+
+    data: function data() {
+        return {
+            checkout: {}
+        };
+    },
+
+
+    /**
+     * Initialise the event listener
+     */
+    created: function created() {
+        ResourceService.bind("checkout", this);
+
+        if (!this.addressList) {
+            this.addressList = [];
+        }
+
+        // Adds the dummy entry for "delivery address same as invoice address"
+        this.addressList.unshift({
+            id: -99
+        });
+
+        // if there is no selection for delivery address, the dummy entry will be selected
+        if (this.selectedAddressId === 0) {
+            this.selectedAddressId = -99;
+            this.checkout.deliveryAddressId = -99;
+            ResourceService.getResource("checkout").set(this.checkout);
+        }
+    },
+
+
+    methods: {
+        /**
+         * Update the delivery address
+         * @param selectedAddress
+         */
+        addressChanged: function addressChanged(selectedAddress) {
+            var _this = this;
+
+            this.checkout.deliveryAddressId = selectedAddress.id;
+            ResourceService.getResource("checkout").set(this.checkout).done(function () {
+                document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.checkout.deliveryAddressId }));
+            });
+        }
+    }
+});
+
+},{"services/ResourceService":93}],22:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("contact-form", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            name: "",
+            userMail: "",
+            subject: "",
+            message: "",
+            orderId: "",
+            cc: false,
+            disabledSend: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        window.sendMail = this.sendMail;
+    },
+
+
+    methods: {
+        validate: function validate(useCapture) {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#contact-form")).done(function () {
+                if (useCapture) {
+                    grecaptcha.execute();
+                } else {
+                    _this.sendMail();
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+        sendMail: function sendMail() {
+            var _this2 = this;
+
+            this.disabledSend = true;
+            this.onSendIcon();
+
+            var mailObj = {
+                subject: this.subject,
+                name: this.name,
+                message: this.message,
+                orderId: this.orderId,
+                userMail: this.userMail,
+                cc: this.cc
+            };
+
+            ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
+                _this2.disabledSend = false;
+                _this2.onSendIcon();
+                _this2.clearFields();
+                NotificationService.success(Translations.Template.contactSendSuccess);
+            }).fail(function (response) {
+                _this2.disabledSend = false;
+                _this2.onSendIcon();
+
+                if (response.validation_errors) {
+                    _this2._handleValidationErrors(response.validation_errors);
+                } else {
+                    NotificationService.error(Translations.Template.contactSendFail);
+                }
+            });
+        },
+        clearFields: function clearFields() {
+            this.name = "";
+            this.userMail = "";
+            this.subject = "";
+            this.message = "";
+            this.orderId = "";
+            this.cc = false;
+        },
+        onSendIcon: function onSendIcon() {
+            var sendIcon = $(".send-btn i");
+
+            if (this.disabledSend) {
+                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
+            } else {
+                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
+            }
+        },
+        _handleValidationErrors: function _handleValidationErrors(validationErrors) {
+            _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
+
+            var errorMessage = "";
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = Object.values(validationErrors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var value = _step.value;
+
+                    errorMessage += value + "<br>";
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            NotificationService.error(errorMessage);
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/NotificationService":92,"services/ValidationService":95}],23:[function(require,module,exports){
+"use strict";
+
+Vue.component("contact-map", {
+
+    props: ["mapZoom", "zip", "street", "googleApiKey", "template"],
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        if (!document.getElementById("maps-api")) {
+            this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
+        }
+    },
+
+
+    methods: {
+        initMap: function initMap() {
+            var coordinates = { lat: -34.397, lng: 150.644 };
+            var self = this;
+
+            var gMap = new google.maps.Map(document.getElementById("contact-map"), {
+                center: coordinates,
+                zoom: self.mapZoom
+            });
+
+            this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
+        },
+        getLatLngByAddress: function getLatLngByAddress(geocoder, resultsMap) {
+            var addressData = this.zip + " " + this.street;
+
+            geocoder.geocode({ address: addressData }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    resultsMap.setCenter(results[0].geometry.location);
+
+                    // eslint-disable-next-line
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    console.log("Not possible to get Ltd and Lng for the given address. State: " + status);
+                }
+            });
+        },
+        addScript: function addScript(path) {
+            var _this = this;
+
+            var head = document.getElementsByTagName("head")[0];
+            var script = document.createElement("script");
+
+            script.type = "text/javascript";
+            script.src = path;
+            script.id = "contact-map-api";
+
+            if (script.readyState) {
+                script.onreadystatechange = function () {
+                    if (script.readyState === "loaded" || script.readyState === "complete") {
+                        script.onreadystatechange = null;
+                        _this.initMap();
+                    }
+                };
+            } else {
+                script.onload = function () {
+                    _this.initMap();
+                };
+            }
+
+            head.appendChild(script);
+        }
+    }
+});
+
+},{}],24:[function(require,module,exports){
+"use strict";
+
+var CountryService = require("services/CountryService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("country-select", {
+
+    props: ["countryList", "countryNameMap", "selectedCountryId", "selectedStateId", "template", "addressType"],
+
+    data: function data() {
+        return {
+            stateList: [],
+            selectedCountry: {},
+            localization: {}
+        };
+    },
+
+    /**
+     * Get the shipping countries
+     */
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("localization", this);
+        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+
+        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
+        CountryService.sortCountries(this.countryList);
+    },
+
+
+    methods: {
+        /**
+         * Method to fire when the country has changed
+         */
+        countryChanged: function countryChanged() {
+            this.selectedStateId = null;
+        },
+
+
+        /**
+         * @param countryId
+         * @returns {*}
+         */
+        getCountryById: function getCountryById(countryId) {
+            return this.countryList.find(function (country) {
+                if (country.id === countryId) {
+                    return country;
+                }
+
+                return null;
+            });
+        }
+    },
+
+    watch: {
+        selectedCountryId: function selectedCountryId() {
+            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+
+            if (this.selectedCountry) {
+                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+
+                this.$dispatch("selected-country-changed", this.selectedCountry);
+            }
+        }
+    }
+});
+
+},{"services/CountryService":89,"services/ResourceService":93}],25:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("registration", {
+
+    props: {
+        modalElement: String,
+        guestMode: { type: Boolean, default: false },
+        isSimpleRegistration: { type: Boolean, default: false },
+        template: String,
+        backlink: String
+    },
+
+    data: function data() {
+        return {
+            password: "",
+            passwordRepeat: "",
+            username: "",
+            billingAddress: {},
+            isDisabled: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+        /**
+         * Validate the registration form
+         */
+        validateRegistration: function validateRegistration() {
+            var self = this;
+
+            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
+                self.sendRegistration();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+        /**
+         * Send the registration
+         */
+        sendRegistration: function sendRegistration() {
+            var userObject = this.getUserObject();
+            var component = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer", userObject).done(function (response) {
+                ApiService.setToken(response);
+
+                if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
+                    NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+
+                    if (document.getElementById(component.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    }
+                } else {
+                    NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
+                }
+
+                if (component.backlink !== null && component.backlink) {
+                    window.location.assign(component.backlink);
+                } else {
+                    location.reload();
+                }
+
+                component.isDisabled = false;
+            }).fail(function () {
+                component.isDisabled = false;
+            });
+        },
+
+        /**
+         * Handle the user object which is send to the server
+         * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
+         */
+        getUserObject: function getUserObject() {
+            var userObject = {
+                contact: {
+                    referrerId: 1,
+                    typeId: 1,
+                    options: {
+                        typeId: {
+                            typeId: 2,
+                            subTypeId: 4,
+                            value: this.username,
+                            priority: 0
+                        }
+                    }
+                }
+            };
+
+            if (!this.guestMode) {
+                userObject.contact.password = this.password;
+            }
+
+            if (!this.isSimpleRegistration) {
+                userObject.billingAddress = this.billingAddress;
+            }
+
+            return userObject;
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/ModalService":91,"services/NotificationService":92,"services/ValidationService":95}],26:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("reset-password-form", {
+
+    props: ["contactId", "hash", "template"],
+
+    data: function data() {
+        return {
+            passwordFirst: "",
+            passwordSecond: "",
+            pwdFields: [],
+            isDisabled: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.pwdFields = $("#reset-password-form-" + this._uid).find(".input-unit");
+    },
+
+
+    watch: {
+        passwordFirst: function passwordFirst(val, oldVal) {
+            this.resetError();
+        },
+        passwordSecond: function passwordSecond(val, oldVal) {
+            this.resetError();
+        }
+    },
+
+    methods: {
+        validatePassword: function validatePassword() {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#reset-password-form-" + this._uid)).done(function () {
+                if (_this.checkPasswordEquals()) {
+                    _this.saveNewPassword();
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+        resetError: function resetError() {
+            _ValidationService2.default.unmarkAllFields($("#reset-password-form-" + this._uid));
+            this.pwdFields.removeClass("check-pwds-error");
+            $(".error-save-pwd-msg").hide();
+        },
+        checkPasswordEquals: function checkPasswordEquals() {
+            if (this.passwordFirst !== this.passwordSecond) {
+                this.pwdFields.addClass("check-pwds-error");
+                $(".error-save-pwd-msg").show();
+
+                return false;
+            }
+
+            return true;
+        },
+        saveNewPassword: function saveNewPassword() {
+            var _this2 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/password", { password: this.passwordFirst, password2: this.passwordSecond, contactId: this.contactId, hash: this.hash }).done(function () {
+                _this2.resetFields();
+
+                _this2.isDisabled = false;
+
+                window.location.assign(window.location.origin);
+
+                NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+            }).fail(function () {
+                _this2.isDisabled = false;
+
+                NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+            });
+        },
+        resetFields: function resetFields() {
+            this.passwordFirst = "";
+            this.passwordSecond = "";
+            this.contactId = 0;
+            this.hash = "";
+        }
+    }
+
+});
+
+},{"services/ApiService":86,"services/NotificationService":92,"services/ValidationService":95}],27:[function(require,module,exports){
+"use strict";
+
+var _AddressFieldService = require("services/AddressFieldService");
+
+var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
+
+var _ResourceService = require("services/ResourceService");
+
+var _ResourceService2 = _interopRequireDefault(_ResourceService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Vue.component("salutation-select", {
+
+    props: ["template", "addressData", "addressType"],
+
+    data: function data() {
+        return {
+            localization: {},
+            salutations: {
+                complete: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }, {
+                        value: "Firma",
+                        id: 2
+                    }, {
+                        value: "Familie",
+                        id: 3
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }, {
+                        value: "Company",
+                        id: 2
+                    }, {
+                        value: "Family",
+                        id: 3
+                    }]
+                },
+                withoutCompany: {
+                    de: [{
+                        value: "Herr",
+                        id: 0
+                    }, {
+                        value: "Frau",
+                        id: 1
+                    }, {
+                        value: "Familie",
+                        id: 3
+                    }],
+                    en: [{
+                        value: "Mr.",
+                        id: 0
+                    }, {
+                        value: "Ms.",
+                        id: 1
+                    }, {
+                        value: "Family",
+                        id: 3
+                    }]
+                }
+            },
+            currentSalutation: {}
+        };
+    },
+
+
+    /**
+     * Get the shipping countries
+     */
+    created: function created() {
+
+        this.$options.template = this.template;
+
+        _ResourceService2.default.bind("localization", this);
+        this.shopLanguage = this.localization.shopLanguage;
+
+        if (this.shopLanguage === "de") {
+            if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+                this.currentSalutation = this.salutations.complete.de;
+            } else {
+                this.currentSalutation = this.salutations.withoutCompany.de;
+            }
+        } else if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
+            this.currentSalutation = this.salutations.complete.en;
+        } else {
+            this.currentSalutation = this.salutations.withoutCompany.en;
+        }
+    },
+    ready: function ready() {
+        this.addressData.addressSalutation = 0;
+    },
+
+
+    methods: {
+        changeValue: function changeValue() {
+            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
+                this.addressData.name1 = "";
+            }
+        }
+    }
+});
+
+},{"services/AddressFieldService":84,"services/ResourceService":93}],28:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+
+Vue.component("guest-login", {
+
+    props: ["template", "backlink"],
+
+    data: function data() {
+        return {
+            email: "",
+            isDisabled: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    methods: {
+        validate: function validate() {
+            _ValidationService2.default.validate($("#guest-login-form-" + this._uid)).done(function () {
+                this.sendEMail();
+            }.bind(this)).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+        sendEMail: function sendEMail() {
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/guest", { email: this.email }).done(function () {
+                if (this.backlink !== null && this.backlink) {
+                    window.location.assign(this.backlink);
+                }
+
+                this.isDisabled = false;
+            }.bind(this));
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/ValidationService":95}],29:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("login", {
+
+    props: ["modalElement", "backlink", "hasToForward", "template"],
+
+    data: function data() {
+        return {
+            password: "",
+            username: "",
+            loginFields: [],
+            isDisabled: false,
+            isPwdReset: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.loginFields = $(".login-container").find(".input-unit");
+    },
+
+
+    watch: {
+        password: function password(val, oldVal) {
+            this.resetError();
+        },
+
+        username: function username(val, oldVal) {
+            this.resetError();
+        }
+    },
+
+    methods: {
+        /**
+         * Open the login modal
+         */
+        showLogin: function showLogin() {
+            ModalService.findModal(document.getElementById(this.modalElement)).show();
+        },
+        validateLogin: function validateLogin() {
+            var _this = this;
+
+            if (!this.isPwdReset) {
+                _ValidationService2.default.validate($("#login-form-" + this._uid)).done(function () {
+                    _this.sendLogin();
+                }).fail(function (invalidFields) {
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                });
+            }
+        },
+        validateResetPwd: function validateResetPwd() {
+            var _this2 = this;
+
+            if (this.isPwdReset) {
+                _ValidationService2.default.validate($("#reset-pwd-form-" + this._uid)).done(function () {
+                    _this2.sendResetPwd();
+                }).fail(function (invalidFields) {
+                    _ValidationService2.default.markInvalidFields(invalidFields, "error");
+                });
+            }
+        },
+
+
+        /**
+         * Send the login data
+         */
+        sendLogin: function sendLogin() {
+            var _this3 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true }).done(function (response) {
+                ApiService.setToken(response);
+
+                if (document.getElementById(_this3.modalElement) !== null) {
+                    ModalService.findModal(document.getElementById(_this3.modalElement)).hide();
+                }
+
+                NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
+
+                if (_this3.backlink !== null && _this3.backlink) {
+                    location.assign(_this3.backlink);
+                } else if (_this3.hasToForward) {
+                    location.assign(location.origin);
+                } else {
+                    location.reload();
+                }
+
+                _this3.isDisabled = false;
+            }).fail(function (response) {
+                _this3.isDisabled = false;
+
+                switch (response.error.code) {
+                    case 401:
+                        _this3.loginFields.addClass("has-login-error");
+                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
+                        break;
+                    default:
+                        return;
+                }
+            });
+        },
+
+
+        /**
+         *  Reset password
+         */
+        sendResetPwd: function sendResetPwd() {
+            var _this4 = this;
+
+            this.isDisabled = true;
+
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail" }).done(function () {
+                if (document.getElementById(_this4.modalElement) !== null) {
+                    ModalService.findModal(document.getElementById(_this4.modalElement)).hide();
+
+                    _this4.isDisabled = false;
+
+                    _this4.cancelResetPwd();
+                } else {
+                    window.location.assign(window.location.origin);
+                }
+
+                NotificationService.success(Translations.Template.generalSendEmailOk).closeAfter(5000);
+            }).fail(function () {
+                _this4.isDisabled = false;
+
+                NotificationService.error(Translations.Template.accResetPwDErrorOnSendEmail).closeAfter(5000);
+            });
+        },
+        showResetPwdView: function showResetPwdView() {
+            this.resetError();
+            this.isPwdReset = true;
+
+            if (document.getElementById(this.modalElement) !== null) {
+                $(".login-modal .modal-title").html(Translations.Template.accForgotPassword);
+            } else {
+                $(".login-view-title").html(Translations.Template.accForgotPassword);
+            }
+
+            $(".login-container").slideUp("fast", function () {
+                $(".reset-pwd-container").slideDown("fast");
+            });
+        },
+        cancelResetPwd: function cancelResetPwd() {
+            this.resetError();
+            this.isPwdReset = false;
+
+            if (document.getElementById(this.modalElement) !== null) {
+                $(".login-modal .modal-title").text(Translations.Template.accLogin);
+            } else {
+                $(".login-view-title").text(Translations.Template.accLogin);
+            }
+
+            $(".reset-pwd-container").slideUp("fast", function () {
+                $(".login-container").slideDown("fast");
+            });
+        },
+        resetError: function resetError() {
+            this.loginFields.removeClass("has-login-error");
+            _ValidationService2.default.unmarkAllFields($("#login-form-" + this._uid));
+            _ValidationService2.default.unmarkAllFields($("#reset-pwd-form-" + this._uid));
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/ModalService":91,"services/NotificationService":92,"services/ValidationService":95}],30:[function(require,module,exports){
+"use strict";
+
+Vue.component("login-view", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            isGuestMode: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],31:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+
+Vue.component("user-login-handler", {
+
+    props: ["userData", "template"],
+
+    data: function data() {
+        return {
+            username: "",
+            isLoggedIn: {}
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Add the global event listener for login and logout
+     */
+    ready: function ready() {
+        ResourceService.bind("user", this, "isLoggedIn");
+
+        this.setUsername(this.userData);
+        this.addEventListeners();
+    },
+
+
+    methods: {
+        /**
+         * Set the current user logged in
+         * @param userData
+         */
+        setUsername: function setUsername(userData) {
+            if (userData) {
+                if (userData.firstName.length > 0 && userData.lastName.length > 0) {
+                    this.username = userData.firstName + " " + userData.lastName;
+                } else {
+                    this.username = userData.options[0].value;
+                }
+            }
+        },
+
+
+        /**
+         * Adds login/logout event listeners
+         */
+        addEventListeners: function addEventListeners() {
+            var _this = this;
+
+            ApiService.listen("AfterAccountAuthentication", function (userData) {
+                _this.setUsername(userData.accountContact);
+                ResourceService.getResource("user").set({ isLoggedIn: true });
+            });
+
+            ApiService.listen("AfterAccountContactLogout", function () {
+                _this.username = "";
+                ResourceService.getResource("user").set({ isLoggedIn: false });
+            });
+        },
+        unmarkInputFields: function unmarkInputFields() {
+            _ValidationService2.default.unmarkAllFields($("#login"));
+            _ValidationService2.default.unmarkAllFields($("#registration"));
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/ResourceService":93,"services/ValidationService":95}],32:[function(require,module,exports){
+"use strict";
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("add-to-wish-list", {
+
+    props: ["isActive", "variationId", "template"],
+
+    data: function data() {
+        return {
+            wishListCount: 0,
+            isLoading: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.changeTooltipText();
+    },
+
+
+    methods: {
+        switchState: function switchState() {
+            if (this.isActive) {
+                this.removeFromWishList();
+            } else {
+                this.addToWishList();
+            }
+        },
+        addToWishList: function addToWishList() {
+            var _this = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.isActive = true;
+                this.changeTooltipText();
+
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
+                    _this.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListAdded);
+                }, function (error) {
+                    _this.isLoading = false;
+                    _this.isActive = false;
+                    _this.changeTooltipText();
+                });
+            }
+        },
+        removeFromWishList: function removeFromWishList() {
+            var _this2 = this;
+
+            if (!this.isLoading) {
+                this.isLoading = true;
+                this.isActive = false;
+                this.changeTooltipText();
+
+                this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
+                    _this2.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListRemoved);
+                }, function (error) {
+                    _this2.isLoading = false;
+                    _this2.isActive = true;
+                    _this2.changeTooltipText();
+                });
+            }
+        },
+        changeTooltipText: function changeTooltipText() {
+            var tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
+
+            $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
+        }
+    }
+});
+
+},{"services/NotificationService":92}],33:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("item-image-carousel", {
+
+    props: ["imageUrlAccessor", "template"],
+
+    data: function data() {
+        return {
+            init: false,
+            currentVariation: {},
+            currentItem: 0
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.watch("currentVariation", function (newValue) {
+            this.currentVariation = newValue;
+
+            var self = this;
+
+            if (!this.init) {
+                $(window).load(function () {
+                    self.initCarousel();
+                    self.initThumbCarousel();
+
+                    self.init = true;
+                });
+            } else {
+                setTimeout(function () {
+                    self.reInitialize();
+                }, 1);
+            }
+        }.bind(this));
+    },
+
+    methods: {
+        getImageCount: function getImageCount() {
+            var images = this.currentVariation.documents[0].data.images;
+
+            if (images.variation && images.variation.length) {
+                return images.variation.length;
+            }
+
+            return images.all.length;
+        },
+
+        reInitialize: function reInitialize() {
+            var $owl = $(this.$els.single);
+
+            $owl.trigger("destroy.owl.carousel");
+            $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $owl.find(".owl-item").remove();
+
+            this.initCarousel();
+        },
+
+        initCarousel: function initCarousel() {
+            var imageCount = this.getImageCount();
+
+            $(this.$els.single).owlCarousel({
+                autoHeight: true,
+                dots: true,
+                items: 1,
+                lazyLoad: true,
+                loop: true,
+                margin: 10,
+                mouseDrag: imageCount > 1,
+                nav: imageCount > 1,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350,
+                onChanged: function (event) {
+                    var $thumb = $(this.$els.thumbs);
+
+                    $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+                }.bind(this)
+            });
+
+            $(this.$els.single).on("changed.owl.carousel", function (event) {
+                this.currentItem = event.page.index;
+            }.bind(this));
+        },
+
+        initThumbCarousel: function initThumbCarousel() {
+            $(this.$els.thumbs).owlCarousel({
+                autoHeight: true,
+                dots: false,
+                items: 5,
+                lazyLoad: true,
+                loop: false,
+                margin: 10,
+                mouseDrag: false,
+                center: false,
+                nav: true,
+                navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+                navContainerClass: "",
+                navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+                smartSpeed: 350
+            });
+        },
+
+        goTo: function goTo(index) {
+            var $owl = $(this.$els.single);
+
+            $owl.trigger("to.owl.carousel", [index, 350]);
+        }
+    }
+});
+
+},{"services/ResourceService":93}],34:[function(require,module,exports){
+"use strict";
+
+Vue.component("order-properties", {
+
+    props: ["template", "item"],
+
+    created: function created() {
+        this.$options.template = this.template;
+    }
+});
+
+},{}],35:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("quantity-input", {
+
+    props: ["value", "timeout", "min", "max", "vertical", "template", "waiting", "variationId"],
+
+    data: function data() {
+        return {
+            timeoutHandle: null,
+            internalMin: null,
+            internalMax: null,
+            basketItems: [],
+            currentCount: 0
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        ResourceService.bind("basketItems", this);
+
+        this.checkDefaultVars();
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this.vertical) {
+            this.initBasketValueWatcher();
+            this.handleMissingItems();
+        }
+    },
+
+
+    methods: {
+        countValueUp: function countValueUp() {
+            if (!(this.value === this.internalMax) && !this.waiting) {
+                this.value++;
+            }
+        },
+        countValueDown: function countValueDown() {
+            if (!(this.value === this.internalMin) && !this.waiting) {
+                this.value--;
+            }
+        },
+        checkDefaultVars: function checkDefaultVars() {
+            this.min = this.min === 0 ? null : this.min;
+            this.max = this.max === 0 ? null : this.max;
+        },
+        initDefaultVars: function initDefaultVars() {
+            this.timeout = this.timeout || 300;
+            this.internalMin = this.min || 1;
+            this.internalMax = this.max || 9999;
+            this.vertical = this.vertical || false;
+        },
+        initValueWatcher: function initValueWatcher() {
+            var _this = this;
+
+            this.$watch("value", function (newValue) {
+                if (newValue < _this.internalMin) {
+                    _this.value = _this.internalMin;
+                }
+
+                if (newValue > _this.internalMax) {
+                    _this.value = _this.internalMax;
+                }
+
+                if (_this.timeoutHandle) {
+                    window.clearTimeout(_this.timeoutHandle);
+                }
+
+                _this.timeoutHandle = window.setTimeout(function () {
+                    _this.$dispatch("quantity-change", newValue);
+                }, _this.timeout);
+            });
+        },
+        handleMissingItems: function handleMissingItems() {
+            if (this.alreadyInBasketCount() >= this.internalMin) {
+                this.internalMin = 1;
+            }
+
+            if (this.max !== null) {
+                this.internalMax = this.max - this.alreadyInBasketCount();
+
+                if (this.alreadyInBasketCount() === this.max) {
+                    this.internalMin = 0;
+                    this.internalMax = 0;
+                    this.$dispatch("out-of-stock", true);
+                } else {
+                    this.$dispatch("out-of-stock", false);
+                }
+            }
+
+            this.value = this.internalMin;
+        },
+        initBasketValueWatcher: function initBasketValueWatcher() {
+            var _this2 = this;
+
+            ResourceService.watch("basketItems", function (newBasketItems, oldBasketItems) {
+                if (oldBasketItems) {
+                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems)) {
+                        _this2.initDefaultVars();
+
+                        _this2.handleMissingItems();
+                    }
+                }
+            });
+        },
+        alreadyInBasketCount: function alreadyInBasketCount() {
+            var _this3 = this;
+
+            if (this.basketItems.find(function (variations) {
+                return variations.variationId === _this3.variationId;
+            })) {
+                return this.basketItems.find(function (variations) {
+                    return variations.variationId === _this3.variationId;
+                }).quantity;
+            }
+
+            return 0;
+        }
+    }
+
+});
+
+},{"services/ResourceService":93}],36:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+var ResourceService = require("services/ResourceService");
+
+// cache loaded variation data for reuse
+var VariationData = {};
+
+Vue.component("variation-select", {
+
+    props: ["attributes", "variations", "preselect", "template"],
+
+    data: function data() {
+        return {
+            // Collection of currently selected variation attributes.
+            selectedAttributes: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    ready: function ready() {
+        // initialize selected attributes to be tracked by change detection
+        var attributes = {};
+
+        for (var attributeId in this.attributes) {
+            attributes[attributeId] = null;
+        }
+        this.selectedAttributes = attributes;
+
+        // set attributes of preselected variation if exists
+        if (this.preselect) {
+            // find variation by id
+            var preselectedVariation = this.variations.filter(function (variation) {
+                // eslint-disable-next-line eqeqeq
+                return variation.variationId == this.preselect;
+            }.bind(this));
+
+            if (!!preselectedVariation && preselectedVariation.length === 1) {
+                // set attributes of preselected variation
+                this.setAttributes(preselectedVariation[0]);
+            }
+        }
+
+        // search for matching variation on each change of attribute selection
+        this.$watch("selectedAttributes", function () {
+            // search variations matching current selection
+            var possibleVariations = this.filterVariations();
+
+            if (possibleVariations.length === 1) {
+                // only 1 matching variation remaining:
+                // set remaining attributes if not set already. Will trigger this watcher again.
+                if (!this.setAttributes(possibleVariations[0])) {
+                    // all attributes are set => load variation data
+                    var variationId = possibleVariations[0].variationId;
+
+                    if (VariationData[variationId]) {
+                        // reuse cached variation data
+                        ResourceService.getResource("currentVariation").set(VariationData[variationId]);
+
+                        document.dispatchEvent(new CustomEvent("onVariationChanged", {
+                            detail: {
+                                attributes: VariationData[variationId].attributes,
+                                documents: VariationData[variationId].documents
+                            }
+                        }));
+                    } else {
+                        // get variation data from remote
+                        ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
+                            // store received variation data for later reuse
+                            VariationData[variationId] = response;
+                            ResourceService.getResource("currentVariation").set(response);
+
+                            document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
+                        });
+                    }
+                }
+            }
+        }, {
+            deep: true
+        });
+
+        // watch for changes on selected variation to adjust url
+        ResourceService.watch("currentVariation", function (newVariation, oldVariation) {
+            if (oldVariation) {
+                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                window.history.replaceState({}, title, url);
+            }
+        }.bind(this));
+    },
+
+    methods: {
+
+        /**
+         * Finds all variations matching a given set of attributes.
+         * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
+         * @returns {array}                    A list of matching variations.
+         */
+        filterVariations: function filterVariations(attributes) {
+            attributes = attributes || this.selectedAttributes;
+            return this.variations.filter(function (variation) {
+
+                for (var i = 0; i < variation.attributes.length; i++) {
+                    var id = variation.attributes[i].attributeId;
+                    var val = variation.attributes[i].attributeValueId;
+
+                    if (!!attributes[id] && attributes[id] != val) {
+                        return false;
+                    }
+                }
+                return variation.attributes.length > 0;
+            });
+        },
+
+        /**
+         * Tests if a given attribute value is not available depending on the current selection.
+         * @param {int}     attributeId         The id of the attribute
+         * @param {int}     attributeValueId    The valueId of the attribute
+         * @returns {boolean}                   True if the value can be combined with the current selection.
+         */
+        isEnabled: function isEnabled(attributeId, attributeValueId) {
+            // clone selectedAttributes to avoid touching objects bound to UI
+            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+
+            attributes[attributeId] = attributeValueId;
+            return this.filterVariations(attributes).length > 0;
+        },
+
+        /**
+         * Set selected attributes by a given variation.
+         * @param {*}           variation   The variation to set as selected
+         * @returns {boolean}               true if at least one attribute has been changed
+         */
+        setAttributes: function setAttributes(variation) {
+            var hasChanges = false;
+
+            for (var i = 0; i < variation.attributes.length; i++) {
+                var id = variation.attributes[i].attributeId;
+                var val = variation.attributes[i].attributeValueId;
+
+                if (this.selectedAttributes[id] !== val) {
+                    this.selectedAttributes[id] = val;
+                    hasChanges = true;
+                }
+            }
+
+            return hasChanges;
+        }
+
+    }
+
+});
+
+},{"services/ApiService":86,"services/ResourceService":93}],37:[function(require,module,exports){
+"use strict";
+
+Vue.component("category-image-carousel", {
+
+    props: {
+        imageUrls: { type: Array },
+        itemUrl: { type: String },
+        altText: { type: String },
+        showDots: { type: String },
+        showNav: { type: String },
+        disableLazyLoad: {
+            type: Boolean,
+            default: false
+        },
+        enableCarousel: { type: Boolean },
+        template: { type: String }
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+    },
+
+    ready: function ready() {
+        if (this.enableCarousel) {
+            this.initializeCarousel();
+        }
+    },
+
+    methods: {
+        initializeCarousel: function initializeCarousel() {
+            $("#owl-carousel-" + this._uid).owlCarousel({
+                dots: this.showDots === "true",
+                items: 1,
+                mouseDrag: false,
+                loop: this.imageUrls.length > 1,
+                lazyLoad: !this.disableLazyLoad,
+                margin: 10,
+                nav: this.showNav === "true",
+                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                onTranslated: function onTranslated(event) {
+                    var target = $(event.currentTarget);
+
+                    var owlItem = $(target.find(".owl-item.active"));
+
+                    owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                }
+            });
+        }
+    }
+});
+
+},{}],38:[function(require,module,exports){
+"use strict";
+
+Vue.component("category-item", {
+
+    template: "#vue-category-item",
+
+    props: ["decimalCount", "itemData", "imageUrlAccessor"],
+
+    data: function data() {
+        return {
+            recommendedRetailPrice: 0,
+            variationRetailPrice: 0
+        };
+    },
+
+    created: function created() {
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+    },
+
+    computed: {
+        /**
+         * returns itemData.item.storeSpecial
+         */
+        storeSpecial: function storeSpecial() {
+            return this.itemData.item.storeSpecial;
+        },
+
+        /**
+         * returns itemData.texts[0]
+         */
+        texts: function texts() {
+            return this.itemData.texts;
+        }
+    }
+});
+
+},{}],39:[function(require,module,exports){
+"use strict";
+
+Vue.component("item-lazy-img", {
+
+    props: ["imageUrl", "template"],
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    ready: function ready() {
+        var self = this;
+
+        setTimeout(function () {
+            $(self.$els.lazyImg).show().lazyload({ threshold: 100 });
+        }, 1);
+    }
+});
+
+},{}],40:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("item-list", {
+
+    props: ["categoryId", "template"],
+
+    data: function data() {
+        return {
+            itemList: {},
+            isLoading: false,
+            filterListState: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        ItemListService.setCategoryId(this.categoryId);
+    },
+
+    ready: function ready() {
+        ResourceService.bind("itemList", this);
+        ResourceService.bind("isLoading", this);
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93}],41:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ItemListService = require("services/ItemListService");
+
+Vue.component("item-list-sorting", {
+
+    props: ["sortData", "template"],
+
+    data: function data() {
+        return {
+            selectedSorting: {},
+            dataTranslationMapping: {
+                "default.recommended_sorting": "itemRecommendedSorting",
+                "texts.name1_asc": "itemName_asc",
+                "texts.name1_desc": "itemName_desc",
+                "sorting.price.min_asc": "itemPrice_asc",
+                "sorting.price.max_desc": "itemPrice_desc",
+                "variation.createdAt_desc": "variationCreateTimestamp_desc",
+                "variation.createdAt_asc": "variationCreateTimestamp_asc",
+                "variation.availability.averageDays_asc": "availabilityAverageDays_asc",
+                "variation.availability.averageDays_desc": "availabilityAverageDays_desc",
+                "variation.number_asc": "variationCustomNumber_asc",
+                "variation.number_desc": "variationCustomNumber_desc",
+                "variation.updatedAt_asc": "variationLastUpdateTimestamp_asc",
+                "variation.updatedAt_desc": "variationLastUpdateTimestamp_desc",
+                "item.manufacturer.externalName_asc": "itemProducerName_asc",
+                "item.manufacturer.externalName_desc": "itemProducerName_desc"
+            }
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        if (App.isSearch) {
+            this.sortData.unshift("item.score");
+            this.dataTranslationMapping["item.score"] = "itemRelevance";
+        }
+
+        this.buildData();
+        this.setDefaultSorting();
+
+        this.setSelectedValueByUrl();
+    },
+
+
+    methods: {
+        buildData: function buildData() {
+            for (var i in this.sortData) {
+                var data = this.sortData[i];
+                var sortItem = {
+                    value: data,
+                    displayName: Translations.Template[this.dataTranslationMapping[data]]
+                };
+
+                this.sortData[i] = sortItem;
+            }
+        },
+        setDefaultSorting: function setDefaultSorting() {
+            var defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
+
+            this.selectedSorting = this.sortData.find(function (entry) {
+                return entry.value === defaultSortKey;
+            });
+        },
+        updateSorting: function updateSorting() {
+            ItemListService.setOrderBy(this.selectedSorting.value);
+            ItemListService.getItemList();
+        },
+        setSelectedValueByUrl: function setSelectedValueByUrl() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (urlParams.sorting) {
+                for (var i in this.sortData) {
+                    if (this.sortData[i].value === urlParams.sorting) {
+                        this.selectedSorting = this.sortData[i];
+                        ItemListService.setOrderBy(this.selectedSorting.value);
+                    }
+                }
+            }
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/UrlService":94}],42:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("item-search", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            searchString: "",
+            itemSearch: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    ready: function ready() {
+        ResourceService.bind("itemSearch", this);
+        this.initAutocomplete();
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        this.itemSearch.query = urlParams.query;
+
+        if (this.itemSearch.query) {
+            ItemListService.updateSearchString(this.itemSearch.query);
+        }
+    },
+
+    methods: {
+        search: function search() {
+            if (document.location.pathname === "/search") {
+                ItemListService.setSearchString(this.itemSearch.query);
+                ItemListService.getItemList();
+            } else {
+                window.open("/search?query=" + this.itemSearch.query, "_self", false);
+            }
+        },
+
+        initAutocomplete: function initAutocomplete() {
+            var self = this;
+
+            $(".search-input").autocomplete({
+                serviceUrl: "/rest/io/item/search/autocomplete",
+                paramName: "query",
+                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
+                width: $(".search-box-shadow-frame").width(),
+                zIndex: 1070,
+                maxHeight: 310,
+                minChars: 2,
+                preventBadQueries: false,
+                onSelect: function onSelect(suggestion) {
+                    self.itemSearch.query = suggestion.value;
+                    self.search();
+                },
+                beforeRender: function beforeRender() {
+                    $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+                },
+                transformResult: function transformResult(response) {
+                    return self.transformSuggestionResult(response);
+                }
+            });
+
+            $(window).resize(function () {
+                $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
+            });
+        },
+
+        transformSuggestionResult: function transformSuggestionResult(result) {
+            result = JSON.parse(result);
+            var suggestions = {
+                suggestions: $.map(result.data.documents, function (dataItem) {
+                    var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
+
+                    return {
+                        value: value,
+                        data: value
+                    };
+                }.bind(this))
+            };
+
+            return suggestions;
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93,"services/UrlService":94}],43:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var accounting = require("accounting");
+
+Vue.component("item-store-special", {
+
+    template: "#vue-item-store-special",
+
+    props: ["storeSpecial", "recommendedRetailPrice", "variationRetailPrice", "decimalCount"],
+
+    data: function data() {
+        return {
+            localization: {},
+            tagClass: "",
+            label: "",
+            tagClasses: {
+                1: "bg-danger",
+                2: "bg-primary",
+                default: "bg-success"
+            }
+        };
+    },
+    created: function created() {
+        ResourceService.bind("localization", this);
+
+        this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
+        this.label = this.getLabel();
+    },
+
+
+    methods: {
+        getLabel: function getLabel() {
+            if (this.storeSpecial.id === 1) {
+                var percent = this.getPercentageSale();
+
+                if (parseInt(percent) < 0) {
+                    return percent + "%";
+                }
+            }
+
+            return this.storeSpecial.names.name;
+        },
+        getPercentageSale: function getPercentageSale() {
+            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
+
+            return accounting.formatNumber(percent, this.decimalCount, "");
+        }
+    }
+});
+
+},{"accounting":1,"services/ResourceService":93}],44:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("items-per-page", {
+
+    props: ["columnsPerPage", "rowsPerPage", "template"],
+
+    data: function data() {
+        return {
+            itemSearch: {},
+            paginationValues: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        this.initPaginationValues();
+        ResourceService.bind("itemSearch", this);
+        this.setSelectedValueByUrl();
+    },
+
+    methods: {
+        itemsPerPageChanged: function itemsPerPageChanged() {
+            ItemListService.setItemsPerPage(this.itemSearch.items);
+            ItemListService.setPage(1);
+            ItemListService.getItemList();
+        },
+
+        setSelectedValueByUrl: function setSelectedValueByUrl() {
+            var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+            if (urlParams.items) {
+                if (this.paginationValues.indexOf(urlParams.items) > -1) {
+                    this.itemSearch.items = urlParams.items;
+                } else {
+                    this.itemSearch.items = App.config.defaultItemsPerPage;
+                }
+            } else {
+                this.itemSearch.items = App.config.defaultItemsPerPage;
+            }
+
+            ItemListService.setItemsPerPage(this.itemSearch.items);
+        },
+
+        initPaginationValues: function initPaginationValues() {
+            for (var rowKey in this.rowsPerPage) {
+                this.paginationValues.push(this.rowsPerPage[rowKey] * this.columnsPerPage);
+            }
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93,"services/UrlService":94}],45:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("pagination", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            itemSearch: {},
+            itemList: {},
+            lastPageMax: 0
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("itemSearch", this);
+        ResourceService.bind("itemList", this);
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        this.itemSearch.page = urlParams.page;
+    },
+
+    methods: {
+        setPage: function setPage(page) {
+            ItemListService.setPage(page);
+            ItemListService.getItemList();
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    },
+
+    computed: {
+        page: function page() {
+            return parseInt(this.itemSearch.page) || 1;
+        },
+
+        pageMax: function pageMax() {
+            if (this.itemSearch.isLoading) {
+                return this.lastPageMax;
+            }
+
+            var pageMax = this.itemList.total / parseInt(this.itemSearch.items);
+
+            if (this.itemList.total % parseInt(this.itemSearch.items) > 0) {
+                pageMax += 1;
+            }
+
+            this.lastPageMax = parseInt(pageMax) || 1;
+            return parseInt(pageMax) || 1;
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93,"services/UrlService":94}],46:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("item-filter", {
+
+    props: ["template", "facet"],
+
+    data: function data() {
+        return {
+            facetParams: [],
+            isLoading: false
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter";
+        ResourceService.bind("facetParams", this);
+    },
+
+    ready: function ready() {
+        ResourceService.bind("isLoading", this);
+    },
+
+    methods: {
+        updateFacet: function updateFacet() {
+            ResourceService.getResource("facetParams").set(this.facetParams);
+            ItemListService.setFacets(this.facetParams);
+            ItemListService.getItemList();
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93}],47:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("item-filter-list", {
+
+    props: ["template", "facets"],
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+    created: function created() {
+        ResourceService.bind("facets", this);
+
+        this.$options.template = this.template || "#vue-item-filter-list";
+
+        var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+
+        if (urlParams.facets) {
+            ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+        }
+    },
+
+    methods: {
+        toggleOpeningState: function toggleOpeningState() {
+            window.setTimeout(function () {
+                this.isActive = !this.isActive;
+            }.bind(this), 300);
+        }
+    }
+});
+
+},{"services/ResourceService":93,"services/UrlService":94}],48:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var ItemListService = require("services/ItemListService");
+
+Vue.component("item-filter-tag-list", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            facets: {},
+            facetParams: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-item-filter-tag-list";
+        ResourceService.bind("facetParams", this);
+    },
+
+    ready: function ready() {
+        ResourceService.bind("facets", this);
+    },
+
+    methods: {
+        removeTag: function removeTag(tagId) {
+            this.facetParams.splice(this.facetParams.indexOf(tagId.toString()), 1);
+
+            ResourceService.getResource("facetParams").set(this.facetParams);
+            ItemListService.setFacets(this.facetParams);
+            ItemListService.getItemList();
+        }
+    },
+
+    computed: {
+        tagList: function tagList() {
+            var tagList = [];
+
+            if (this.facetParams.length > 0) {
+                for (var facetKey in this.facets) {
+                    for (var facetItemKey in this.facets[facetKey].values) {
+                        if (this.facetParams.indexOf(this.facets[facetKey].values[facetItemKey].id.toString()) > -1) {
+                            tagList.push(this.facets[facetKey].values[facetItemKey]);
+                        }
+                    }
+                }
+            }
+
+            return tagList;
+        }
+    }
+});
+
+},{"services/ItemListService":90,"services/ResourceService":93}],49:[function(require,module,exports){
+"use strict";
+
+var ModalService = require("services/ModalService");
+var APIService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
+Vue.component("account-settings", {
+
+    props: ["userData", "template"],
+
+    data: function data() {
+        return {
+            newPassword: "",
+            confirmPassword: "",
+            accountSettingsClass: "",
+            accountSettingsModal: {}
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    /**
+     * Initialise the account settings modal
+     */
+    ready: function ready() {
+        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+    },
+
+    computed: {
+        /**
+         * Check whether the passwords match
+         * @returns {boolean}
+         */
+        matchPassword: function matchPassword() {
+            if (this.confirmPassword !== "") {
+                return this.newPassword === this.confirmPassword;
+            }
+            return true;
+        }
+    },
+
+    methods: {
+
+        /**
+         * Open the account settings modal
+         */
+        showChangeAccountSettings: function showChangeAccountSettings() {
+            this.accountSettingsModal.show();
+        },
+
+        /**
+         * Save the new password
+         */
+        saveAccountSettings: function saveAccountSettings() {
+            var self = this;
+
+            if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
+                APIService.post("/rest/io/customer/password", { password: this.newPassword }).done(function (response) {
+                    self.clearFieldsAndClose();
+                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+                }).fail(function (response) {
+                    self.clearFieldsAndClose();
+                    NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+                });
+            }
+        },
+
+        /**
+         * Clear the password fields in the modal
+         */
+        clearFields: function clearFields() {
+            this.newPassword = "";
+            this.confirmPassword = "";
+        },
+
+        /**
+         * Clear the fields and close the modal
+         */
+        clearFieldsAndClose: function clearFieldsAndClose() {
+            this.accountSettingsModal.hide();
+            this.clearFields();
+        }
+    }
+
+});
+
+},{"services/ApiService":86,"services/ModalService":91,"services/NotificationService":92}],50:[function(require,module,exports){
+"use strict";
+
+var _ValidationService = require("services/ValidationService");
+
+var _ValidationService2 = _interopRequireDefault(_ValidationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService = require("services/ModalService");
+
+Vue.component("bank-data-select", {
+
+    props: ["userBankData", "contactId", "template"],
+
+    data: function data() {
+        return {
+            bankInfoModal: {},
+            bankDeleteModal: {},
+            updateBankData: {},
+            selectedBankData: null,
+            updateBankIndex: 0,
+            doUpdate: null,
+            headline: ""
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Select the modals
+     */
+    ready: function ready() {
+        this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
+        this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
+    },
+
+
+    methods: {
+
+        /**
+         * Set the selected bank-data
+         */
+        changeSelecting: function changeSelecting(bankData) {
+            this.selectedBankData = bankData;
+        },
+
+
+        /**
+         * Open the modal to add new bank-data
+         */
+        openAddBank: function openAddBank() {
+            this.headline = Translations.Template.bankAddDataTitle;
+            this.openModal(false);
+        },
+
+
+        /**
+         * Set data to update and open the modal
+         * @param index
+         * @param bankdata
+         */
+        openUpdateBank: function openUpdateBank(index, bankData) {
+            this.headline = Translations.Template.bankUpdateDataTitle;
+
+            this.setUpdateData(index, bankData);
+            this.openModal(true);
+        },
+
+
+        /**
+         * Set data to remove and open the modal
+         * @param index
+         * @param bankdata
+         */
+        openDeleteBank: function openDeleteBank(index, bankData) {
+            this.setUpdateData(index, bankData);
+
+            this.doUpdate = false;
+            this.bankDeleteModal.show();
+        },
+
+
+        /**
+         * Open the modal
+         * @param doUpdate
+         */
+        openModal: function openModal(doUpdate) {
+            this.doUpdate = doUpdate;
+            _ValidationService2.default.unmarkAllFields($(this.$els.bankInfoModal));
+            this.bankInfoModal.show();
+        },
+
+
+        /**
+         * Set data to change
+         * @param index
+         * @param bankdata
+         */
+        setUpdateData: function setUpdateData(index, bankData) {
+            this.updateBankData = JSON.parse(JSON.stringify(bankData));
+            this.updateBankIndex = index;
+        },
+
+
+        /**
+         * Validate the input-fields-data
+         */
+        validateInput: function validateInput() {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#my-bankForm")).done(function () {
+                if (_this.doUpdate) {
+                    _this.updateBankInfo();
+                } else {
+                    _this.addBankInfo();
+                }
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Update bank-data
+         */
+        updateBankInfo: function updateBankInfo() {
+            var _this2 = this;
+
+            this.updateBankData.lastUpdateBy = "customer";
+
+            ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
+                _this2.userBankData.splice(_self.updateBankIndex, 1, response);
+                _this2.checkBankDataSelection();
+                _this2.closeModal();
+
+                NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
+            }).fail(function () {
+                _this2.closeModal();
+
+                NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Add new bank-data
+         */
+        addBankInfo: function addBankInfo() {
+            var _this3 = this;
+
+            this.updateBankData.lastUpdateBy = "customer";
+            this.updateBankData.contactId = this.contactId;
+
+            ApiService.post("/rest/io/customer/bank_data", this.updateBankData).done(function (response) {
+                _this3.userBankData.push(response);
+                _this3.checkBankDataSelection(true);
+                _this3.closeModal();
+
+                NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
+            }).fail(function () {
+                _this3.closeModal();
+
+                NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Delete bank-data
+         */
+        removeBankInfo: function removeBankInfo() {
+            var _this4 = this;
+
+            ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
+                _this4.checkBankDataSelection(false);
+                _this4.closeDeleteModal();
+                _this4.userBankData.splice(_self.updateBankIndex, 1);
+
+                NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
+            }).fail(function () {
+                _this4.closeDeleteModal();
+
+                NotificationService.error(Translations.Template.bankDataNotDeleted).closeAfter(5000);
+            });
+        },
+
+
+        /**
+         * Check selection on delete and on add bank-data
+         */
+        checkBankDataSelection: function checkBankDataSelection(addData) {
+            if (addData && !this.doUpdate && this.userBankData.length < 1) {
+                this.selectedBankData = this.userBankData[0];
+            }
+
+            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id) {
+                if (!this.doUpdate) {
+                    this.selectedBankData = null;
+                } else {
+                    this.selectedBankData = this.userBankData[this.updateBankIndex];
+                }
+            }
+        },
+
+
+        /**
+         * Reset the updateBankData and updateBankIndex
+         */
+        resetData: function resetData() {
+            this.updateBankData = {};
+            this.updateBankIndex = 0;
+            this.doUpdate = false;
+        },
+
+
+        /**
+         * Close the current bank-modal
+         */
+        closeModal: function closeModal() {
+            this.bankInfoModal.hide();
+            this.resetData();
+        },
+
+
+        /**
+         * Close the current bank-delete-modal
+         */
+        closeDeleteModal: function closeDeleteModal() {
+            this.bankDeleteModal.hide();
+            this.resetData();
+        }
+    }
+});
+
+},{"services/ApiService":86,"services/ModalService":91,"services/NotificationService":92,"services/ValidationService":95}],51:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var ModalService = require("services/ModalService");
+var ApiService = require("services/ApiService");
+
+Vue.component("change-payment-method", {
+
+    props: ["template", "currentOrder", "allowedPaymentMethods", "changePossible", "paymentStatus", "currentTemplate", "currentPaymentMethodName"],
+
+    data: function data() {
+        return {
+            changePaymentModal: {},
+            paymentMethod: 0,
+            isPending: false,
+            showErrorMessage: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    /**
+     * Initialize the change payment modal
+     */
+    ready: function ready() {
+        this.changePaymentModal = ModalService.findModal(this.$els.changePaymentModal);
+    },
+
+
+    methods: {
+        checkChangeAllowed: function checkChangeAllowed() {
+            var _this = this;
+
+            ApiService.get("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
+                // TODO: research - if response should be false, it returns an object
+                _this.changePossible = (typeof response === "undefined" ? "undefined" : _typeof(response)) === "object" ? response.data : response;
+            }).fail(function () {
+                _this.changePossible = false;
+            });
+        },
+        openPaymentChangeModal: function openPaymentChangeModal() {
+            this.changePaymentModal.show();
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            return Translations.Template["paymentStatus_" + paymentStates.find(function (paymentState) {
+                return paymentState.typeId === 4;
+            }).value];
+        },
+        getPaymentId: function getPaymentId(paymentIds) {
+            var paymentId = paymentIds.find(function (paymentId) {
+                return paymentId.typeId === 3;
+            }).value;
+
+            if (paymentId) {
+                return paymentId;
+            }
+
+            return "";
+        },
+        closeModal: function closeModal() {
+            this.changePaymentModal.hide();
+            this.isPending = false;
+        },
+        updateOrderHistory: function updateOrderHistory(updatedOrder) {
+            document.getElementById("payment_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
+            document.getElementById("payment_state_" + this.currentOrder.id).innerHTML = this.getPaymentStateText(updatedOrder.order.properties);
+            document.getElementById("current_payment_method_name_" + this.currentOrder.id).innerHTML = updatedOrder.paymentMethodName;
+
+            this.checkChangeAllowed();
+            this.closeModal();
+        },
+        updateAllowedPaymentMethods: function updateAllowedPaymentMethods(paymentMethodId) {
+            var _this2 = this;
+
+            ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId }).done(function (response) {
+                _this2.allowedPaymentMethods = response;
+            }).fail(function () {});
+        },
+        changePaymentMethod: function changePaymentMethod() {
+            var _this3 = this;
+
+            this.isPending = true;
+
+            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod }).done(function (response) {
+                document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: _this3.currentOrder, newOrder: response } }));
+
+                _this3.updateOrderHistory(response);
+                _this3.updateAllowedPaymentMethods(_this3.getPaymentId(response.order.properties));
+            }).fail(function () {
+                // TODO add error msg
+            });
+        }
+    },
+
+    computed: {
+        showIsSwitchableWarning: function showIsSwitchableWarning() {
+            var _this4 = this;
+
+            var currentPaymentMethod = this.allowedPaymentMethods.find(function (paymentMethod) {
+                return paymentMethod.id === _this4.paymentMethod;
+            });
+
+            if (currentPaymentMethod) {
+                return !currentPaymentMethod.isSwitchableFrom;
+            }
+
+            return false;
+        }
+    }
+
+});
+
+},{"services/ApiService":86,"services/ModalService":91}],52:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+
+Vue.component("order-history", {
+
+    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
+
+    data: function data() {
+        return {
+            page: 1,
+            pageMax: 1,
+            countStart: 0,
+            countEnd: 0,
+            currentOrder: null,
+            isLoading: true
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.itemsPerPage = this.itemsPerPage || 10;
+        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+        this.setOrders(this.orderList);
+    },
+
+
+    methods: {
+        setOrders: function setOrders(orderList) {
+            this.$set("orderList", orderList);
+            this.page = this.orderList.page;
+            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
+            this.countEnd = this.orderList.page * this.itemsPerPage;
+
+            if (this.countEnd > this.orderList.totalsCount) {
+                this.countEnd = this.orderList.totalsCount;
+            }
+        },
+        setCurrentOrder: function setCurrentOrder(order) {
+            var _this = this;
+
+            $("#dynamic-twig-content").html("");
+            this.isLoading = true;
+
+            this.currentOrder = order;
+
+            Vue.nextTick(function () {
+                $(_this.$els.orderDetails).modal("show");
+            });
+
+            var jsonEncodedOrder = JSON.stringify(order);
+
+            ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
+                _this.isLoading = false;
+                $("#dynamic-twig-content").html(response);
+            });
+        },
+        getPaymentStateText: function getPaymentStateText(paymentStates) {
+            for (var paymentState in paymentStates) {
+                if (paymentStates[paymentState].typeId == 4) {
+                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                }
+            }
+
+            return "";
+        },
+        showPage: function showPage(page) {
+            var _this2 = this;
+
+            if (page <= 0 || page > this.pageMax) {
+                return;
+            }
+
+            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
+                _this2.setOrders(response);
+            });
+        }
+    }
+});
+
+},{"services/ApiService":86}],53:[function(require,module,exports){
+"use strict";
+
+var _CategoryRendererService = require("services/CategoryRendererService");
+
+var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("mobile-navigation", {
+
+    props: ["template", "categoryBreadcrumbs"],
+
+    data: function data() {
+        return {
+            categoryTree: [],
+            dataContainer1: [],
+            dataContainer2: [],
+            useFirstContainer: false,
+            breadcrumbs: []
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+    ready: function ready() {
+        this.categoryTree = ResourceService.getResource("navigationTree").val();
+
+        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs && this.categoryBreadcrumbs.length ? this.categoryBreadcrumbs.pop().id : null);
+
+        this.dataContainer1 = this.categoryTree;
+    },
+
+
+    methods: {
+        buildTree: function buildTree(currentArray, parent, currentCategoryId) {
+            var showChilds = false;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = currentArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var category = _step.value;
+
+                    category.parent = parent;
+
+                    // hide category if there is no translation
+                    if (!category.details[0]) {
+                        category.hideCategory = true;
+
+                        if (parent && parent.children && parent.children.length > 1 && !parent.showChilds) {
+                            parent.showChilds = false;
+                        }
+                    } else {
+                        if (parent) {
+                            category.url = parent.url + "/" + category.details[0].nameUrl;
+                        } else {
+                            category.url = "/" + category.details[0].nameUrl;
+                        }
+
+                        if (category.details.length && category.details[0].name) {
+                            showChilds = true;
+                        }
+
+                        if (category.children) {
+                            this.buildTree(category.children, category, currentCategoryId);
+                        }
+
+                        if (category.id === currentCategoryId) {
+                            if (category.children && category.showChilds) {
+                                this.slideTo(category.children);
+                            } else if (category.parent) {
+                                this.slideTo(category.parent.children);
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (parent) {
+                parent.showChilds = showChilds;
+            }
+        },
+        navigateTo: function navigateTo(category) {
+            if (category.children && category.showChilds) {
+                this.slideTo(category.children);
+            }
+
+            this.closeNavigation();
+            _CategoryRendererService2.default.renderItems(category, this.categoryTree);
+        },
+        slideTo: function slideTo(children, back) {
+            back = !!back;
+
+            if (this.useFirstContainer) {
+                this.dataContainer1 = children;
+
+                $("#menu-2").trigger("menu-deactivated", { back: back });
+                $("#menu-1").trigger("menu-activated", { back: back });
+            } else {
+                this.dataContainer2 = children;
+
+                $("#menu-1").trigger("menu-deactivated", { back: back });
+                $("#menu-2").trigger("menu-activated", { back: back });
+            }
+
+            this.useFirstContainer = !this.useFirstContainer;
+            this.buildBreadcrumbs();
+        },
+        buildBreadcrumbs: function buildBreadcrumbs() {
+            this.breadcrumbs = [];
+
+            var root = this.useFirstContainer ? this.dataContainer2[0] : this.dataContainer1[0];
+
+            while (root.parent) {
+                this.breadcrumbs.unshift({
+                    name: root.parent.details[0].name,
+                    layer: root.parent ? root.parent.children : this.categoryTree
+                });
+
+                root = root.parent;
+            }
+        },
+        closeNavigation: function closeNavigation() {
+            $(".mobile-navigation").removeClass("open");
+            $("body").removeClass("menu-is-visible");
+        }
+    },
+
+    directives: {
+        menu: {
+            bind: function bind() {
+                // add "activated" classes when menu is activated
+                $(this.el).on("menu-activated", function (event, params) {
+                    $(event.target).addClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
+                });
+                // add "deactivated" classes when menu is deactivated
+                $(this.el).on("menu-deactivated", function (event, params) {
+                    $(event.target).removeClass("menu-active");
+                    $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
+                });
+                // this removes the animation class automatically after the animation has completed
+                $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
+                    $(".mainmenu").removeClass(function (index, className) {
+                        return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
+                    });
+                });
+            }
+        }
+    }
+});
+
+},{"services/CategoryRendererService":87,"services/ResourceService":93}],54:[function(require,module,exports){
+"use strict";
+
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("notifications", {
+
+    props: ["initialNotifications", "template"],
+
+    data: function data() {
+        return {
+            notifications: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    ready: function ready() {
+        var self = this;
+
+        NotificationService.listen(function (notifications) {
+            self.$set("notifications", notifications);
+        });
+
+        self.showInitialNotifications();
+    },
+
+    methods: {
+        /**
+         * Dissmiss the notification
+         * @param notification
+         */
+        dismiss: function dismiss(notification) {
+            NotificationService.getNotifications().remove(notification);
+        },
+
+        /**
+         * show initial notifications from server
+         */
+        showInitialNotifications: function showInitialNotifications() {
+            for (var key in this.initialNotifications) {
+                // set default type top 'log'
+                var type = this.initialNotifications[key].type || "log";
+                var message = this.initialNotifications[key].message;
+                var messageCode = this.initialNotifications[key].code;
+
+                if (messageCode > 0) {
+                    message = Translations.Template[_ExceptionMap2.default.get(messageCode.toString())];
+                }
+
+                // type cannot be undefined
+                if (message) {
+                    if (NotificationService[type] && typeof NotificationService[type] === "function") {
+                        NotificationService[type](message);
+                    } else {
+                        // unkown type
+                        NotificationService.log(message);
+                    }
+                }
+            }
+        }
+    }
+});
+
+},{"exceptions/ExceptionMap":73,"services/NotificationService":92}],55:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var CheckoutService = require("services/CheckoutService");
+
+Vue.component("shipping-country-select", {
+
+    props: ["countryFlagPrefix", "template", "selectable"],
+
+    data: function data() {
+        return {
+            localization: {}
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("localization", this);
+
+        for (var i in this.localization.activeShippingCountries) {
+            var country = this.localization.activeShippingCountries[i];
+
+            country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
+        }
+    },
+
+
+    methods: {
+        setShippingCountry: function setShippingCountry(id) {
+            if (!this.selectable) {
+                this.localization.currentShippingCountryId = id;
+                CheckoutService.setShippingCountryId(id);
+            }
+        }
+    }
+});
+
+},{"services/CheckoutService":88,"services/ResourceService":93}],56:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.component("shop-language-select", {
+
+    props: ["countryFlagPrefix", "template"],
+
+    data: function data() {
+        return {
+            localization: {},
+            languageList: []
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+
+        ResourceService.bind("localization", this);
+
+        for (var i in this.localization.activeShopLanguageList) {
+            var languageKey = this.localization.activeShopLanguageList[i];
+            var languageName = Translations.Template[languageKey];
+            var language = {
+                key: languageKey,
+                name: languageName,
+                flagClass: this.countryFlagPrefix + languageKey
+            };
+
+            this.languageList.push(language);
+        }
+    }
+});
+
+},{"services/ResourceService":93}],57:[function(require,module,exports){
+"use strict";
+
+var WaitScreenService = require("services/WaitScreenService");
+
+/**
+*
+* CURRENTLY NOT IN USE
+* MAY BE USEFUL LATER
+*
+*/
+
+Vue.component("wait-screen", {
+
+    // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            overlay: WaitScreenService.getOverlay()
+        };
+    },
+
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+    computed: {
+        /**
+         * Show an overlay over the page
+         * @returns {boolean}
+         */
+        visible: function visible() {
+            return this.overlay.count > 0;
+        }
+    }
+});
+
+},{"services/WaitScreenService":96}],58:[function(require,module,exports){
+"use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var NotificationService = require("services/NotificationService");
+
+Vue.component("wish-list", {
+
+    props: ["template"],
+
+    data: function data() {
+        return {
+            isLoading: false,
+            wishListCount: {}
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        wishListItems: function wishListItems(state) {
+            return state.wishList.wishListItems;
+        },
+        wishListIds: function wishListIds(state) {
+            return state.wishList.wishListIds;
+        }
+    }),
+
+    created: function created() {
+        var _this = this;
+
+        this.$options.template = this.template;
+
+        this.isLoading = true;
+        this.initWishListItems(this.wishListIds).then(function (response) {
+            _this.isLoading = false;
+        }, function (error) {
+            _this.isLoading = false;
+        });
+    },
+
+
+    methods: _extends({
+        removeItem: function removeItem(item) {
+            this.removeWishListItem(item).then(function () {
+                return NotificationService.success(Translations.Template.itemWishListRemoved);
+            });
+        }
+    }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
+});
+
+},{"services/NotificationService":92}],59:[function(require,module,exports){
+"use strict";
+
+Vue.component("wish-list-count", {
+
+    props: ["template", "initIds"],
+
+    computed: {
+        wishListCount: function wishListCount() {
+            return this.$store.getters.wishListCount;
+        }
+    },
+
+    created: function created() {
+        this.$options.template = this.template || "#vue-wish-list-count";
+        this.$store.commit("setWishListIds", this.initIds);
+    }
+});
+
+},{}],60:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+
+Vue.directive("logout", function () {
+    /**
+     * Logout the current user
+     */
+    $(this.el).click(function (event) {
+        $(this.el).addClass("disabled");
+
+        ApiService.post("/rest/io/customer/logout").done(function () {
+            window.location.assign(window.location.origin);
+        }).fail(function () {
+            $(this.el).removeClass("disabled");
+        }.bind(this));
+
+        event.preventDefault();
+    }.bind(this));
+});
+
+},{"services/ApiService":86}],61:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("is-loading-watcher", {
+    bind: function bind() {
+        var firstRendering = true;
+
+        ResourceService.watch("isLoading", function (newValue) {
+            if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null) {
+                if (!newValue) {
+                    $("#twig-rendered-item-list").remove();
+
+                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
+                } else {
+                    $("#twig-rendered-item-list").addClass("loading");
+                }
+            } else {
+                firstRendering = false;
+            }
+        });
+    }
+});
+
+},{"services/ResourceService":93}],62:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("check-active", {
+    params: ["category"],
+
+    bind: function bind() {
+        var categoryObject = JSON.parse(this.params.category);
+
+        ResourceService.watch("breadcrumbs", function (values) {
+            for (var index in values) {
+                if (values[index].id == categoryObject.id) {
+                    this.el.classList.add("active");
+                    break;
+                } else {
+                    this.el.classList.remove("active");
+                }
+            }
+        }.bind(this));
+    }
+});
+
+},{"services/ResourceService":93}],63:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("is-loading-breadcrumbs-watcher", {
+    bind: function bind() {
+        var firstRendering = true;
+
+        ResourceService.watch("isLoadingBreadcrumbs", function () {
+            if (!firstRendering && document.getElementById("twig-rendered-breadcrumbs") !== null) {
+                $("#twig-rendered-breadcrumbs").remove();
+
+                document.getElementById("vue-rendered-breadcrumbs").style.removeProperty("display");
+            } else {
+                firstRendering = false;
+            }
+        });
+    }
+});
+
+},{"services/ResourceService":93}],64:[function(require,module,exports){
+"use strict";
+
+var _CategoryRendererService = require("services/CategoryRendererService");
+
+Vue.directive("render-category", function (value) {
+    $(this.el).click(function (event) {
+        event.preventDefault();
+
+        (0, _CategoryRendererService.renderItems)(value);
+    });
+});
+
+},{"services/CategoryRendererService":87}],65:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.elementDirective("resource", {
+    priority: 10000,
+    params: ["name", "route", "data", "events", "responseTemplate"],
+    bind: function bind() {
+        var resource = ResourceService.registerResource(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
+        var events = this.params.events || [];
+
+        for (var i = 0; i < events.length; i++) {
+            var event = events[i].split("!");
+            var usePayload;
+
+            if (event.length > 1) {
+                usePayload = event[1];
+            }
+
+            resource.listen(event[0], usePayload);
+        }
+    }
+
+});
+
+Vue.elementDirective("resource-list", {
+    priority: 10000,
+    params: ["name", "route", "data", "events", "responseTemplate"],
+    bind: function bind() {
+        var resource = ResourceService.registerResourceList(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
+        var events = this.params.events || [];
+
+        for (var i = 0; i < events.length; i++) {
+            var event = events[i].split("!");
+            var usePayload;
+
+            if (event.length > 1) {
+                usePayload = event[1];
+            }
+
+            resource.listen(event[0], usePayload);
+        }
+    }
+});
+
+},{"services/ResourceService":93}],66:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("resource-bind", {
+
+    params: ["filters"],
+
+    bind: function bind() {
+        var self = this;
+
+        ResourceService.watch(this.arg, function (value) {
+            var paths = self.expression.split(".");
+
+            for (var i = 0; i < paths.length; i++) {
+                var path = paths[i];
+
+                value = value[path];
+            }
+
+            var filters = self.params.filters || [];
+
+            for (var j = 0; j < filters.length; j++) {
+                var filter = Vue.filter(self.params.filters[j]);
+
+                value = filter.apply(Object, [value]);
+            }
+
+            self.el.innerHTML = value;
+        });
+    }
+
+});
+
+},{"services/ResourceService":93}],67:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("resource-if", {
+
+    bind: function bind() {
+        var self = this;
+
+        ResourceService.watch(this.arg, function (value) {
+
+            var keys = Object.keys(value);
+            var values = keys.map(function (key) {
+                return value[key];
+            });
+
+            // eslint-disable-next-line
+            var condition = new Function(keys, "return " + self.expression);
+
+            if (condition.apply(null, values)) {
+                self.el.style.display = "";
+            } else {
+                self.el.style.display = "none";
+            }
+        });
+    }
+
+});
+
+},{"services/ResourceService":93}],68:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("resource-push", {
+
+    params: ["dataAccessor", "resource"],
+
+    bind: function bind() {
+        var self = this;
+
+        ResourceService.watch(this.params.resource, function (newValue, oldValue) {
+            if (self.params.dataAccessor) {
+                self.el.__vue__[self.arg] = newValue.documents[0].data;
+            } else {
+                self.el.__vue__[self.arg] = newValue;
+            }
+        });
+    }
+
+});
+
+},{"services/ResourceService":93}],69:[function(require,module,exports){
+"use strict";
+
+Vue.directive("change-lang", function (value) {
+    $(this.el).click(function (event) {
+        var subPath = window.location.pathname.split("/");
+
+        subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
+
+        window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+    });
+});
+
+},{}],70:[function(require,module,exports){
+"use strict";
+
+var CheckoutService = require("services/CheckoutService");
+
+Vue.directive("shipping-country", function (value) {
+    $(this.el).click(function (event) {
+        event.preventDefault();
+        CheckoutService.setShippingCountryId(value);
+    });
+});
+
+},{"services/CheckoutService":88}],71:[function(require,module,exports){
+"use strict";
+
+Vue.directive("tooltip", {
+    unbind: function unbind() {
+        $(this.el).tooltip("dispose");
+    },
+    update: function update(value) {
+        var _this = this;
+
+        if (typeof value === "undefined" || value) {
+            setTimeout(function () {
+                $(_this.el).tooltip({
+                    trigger: "hover",
+                    // eslint-disable-next-line
+                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+                });
+            }, 1);
+        } else {
+            setTimeout(function () {
+                $(_this.el).tooltip("dispose");
+            }, 1);
+        }
+    }
+});
+
+},{}],72:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+
+Vue.directive("availability-class", {
+    bind: function bind() {
+        var _this = this;
+
+        ResourceService.watch(this.arg, function (value) {
+            var availabilityId = value.documents[0].data.variation.availability.id;
+
+            _this.el.className = "availability tag availability_" + availabilityId;
+        });
+    }
+});
+
+},{"services/ResourceService":93}],73:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"]]);
+
+exports.default = exceptionMap;
+
+},{}],74:[function(require,module,exports){
+"use strict";
+
+Vue.filter("arrayFirst", function (array) {
+    return array[0];
+});
+
+},{}],75:[function(require,module,exports){
+"use strict";
+
+Vue.filter("attachText", function (item, text) {
+    return text + item;
+});
+
+},{}],76:[function(require,module,exports){
+"use strict";
+
+var ResourceService = require("services/ResourceService");
+var currencySymbolMap = require("currency-symbol-map");
+var accounting = require("accounting");
+
+Vue.filter("currency", function (price, customCurrency) {
+    var basket = ResourceService.getResource("basket").val();
+
+    var currency = customCurrency || basket.currency;
+
+    if (currency) {
+        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
+
+        if (currencySymbol) {
+            currency = currencySymbol;
+        }
+    }
+
+    // (%v = value, %s = symbol)
+    var options = {
+        symbol: currency,
+        decimal: ",",
+        thousand: ".",
+        precision: 2,
+        format: "%v %s"
+    };
+
+    return accounting.formatMoney(price, options);
+});
+
+},{"accounting":1,"currency-symbol-map":2,"services/ResourceService":93}],77:[function(require,module,exports){
+"use strict";
+
+// for docs see https://github.com/brockpetrie/vue-moment
+
+var dateFilter = function dateFilter() {
+    var args = Array.prototype.slice.call(arguments);
+    var input = args.shift();
+    var date;
+
+    if (isNaN(new Date(input).getTime())) {
+        return input;
+    }
+
+    if (Array.isArray(input) && typeof input[0] === "string") {
+        // If input is array, assume we're being passed a format pattern to parse against.
+        // Format pattern will accept an array of potential formats to parse against.
+        // Date string should be at [0], format pattern(s) should be at [1]
+        date = moment(string = input[0], formats = input[1], true);
+    } else {
+        // Otherwise, throw the input at moment and see what happens...
+        date = moment(input);
+    }
+
+    if (!date.isValid()) {
+        // Log a warning if moment couldn't reconcile the input. Better than throwing an error?
+        console.warn("Could not build a valid `moment` object from input.");
+        return input;
+    }
+
+    function parse() {
+        var args = Array.prototype.slice.call(arguments);
+        var method = args.shift();
+
+        switch (method) {
+            case "add":
+
+                // Mutates the original moment by adding time.
+                // http://momentjs.com/docs/#/manipulating/add/
+
+                var addends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
+
+                obj = {};
+                for (var aId = 0; aId < addends.length; aId++) {
+                    var addend = addends[aId].split(" ");
+
+                    obj[addend[1]] = addend[0];
+                }
+                date = date.add(obj);
+                break;
+
+            case "subtract":
+
+                // Mutates the original moment by subtracting time.
+                // http://momentjs.com/docs/#/manipulating/subtract/
+
+                var subtrahends = args.shift().split(",").map(Function.prototype.call, String.prototype.trim);
+
+                obj = {};
+                for (var sId = 0; sId < subtrahends.length; sId++) {
+                    var subtrahend = subtrahends[sId].split(" ");
+
+                    obj[subtrahend[1]] = subtrahend[0];
+                }
+                date = date.subtract(obj);
+                break;
+
+            case "from":
+
+                // Display a moment in relative time, either from now or from a specified date.
+                // http://momentjs.com/docs/#/displaying/fromnow/
+
+                var from = "now";
+
+                if (args[0] === "now") args.shift();
+
+                if (moment(args[0]).isValid()) {
+                    // If valid, assume it is a date we want the output computed against.
+                    from = moment(args.shift());
+                }
+
+                var removeSuffix = false;
+
+                if (args[0] === true) {
+                    args.shift();
+                    removeSuffix = true;
+                }
+
+                if (from != "now") {
+                    date = date.from(from, removeSuffix);
+                    break;
+                }
+
+                date = date.fromNow(removeSuffix);
+                break;
+
+            case "calendar":
+
+                // Formats a date with different strings depending on how close to a certain date (today by default) the date is.
+                // http://momentjs.com/docs/#/displaying/calendar-time/
+
+                var referenceTime = moment();
+
+                if (moment(args[0]).isValid()) {
+                    // If valid, assume it is a date we want the output computed against.
+                    referenceTime = moment(args.shift());
+                }
+
+                date = date.calendar(referenceTime);
+                break;
+
+            default:
+                // Format
+                // Formats a date by taking a string of tokens and replacing them with their corresponding values.
+                // http://momentjs.com/docs/#/displaying/format/
+
+                var format = method;
+
+                date = date.format(format);
+        }
+
+        if (args.length) parse.apply(parse, args);
+    }
+
+    parse.apply(parse, args);
+
+    return date;
+};
+
+Vue.filter("moment", dateFilter);
+Vue.filter("date", dateFilter);
+
+},{}],78:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemImage", function (itemImages, highestPosition) {
+    if (itemImages.length === 0) {
+        return "";
+    }
+
+    if (itemImages.length === 1) {
+        return itemImages[0].url;
+    }
+
+    if (highestPosition) {
+        return itemImages.reduce(function (prev, current) {
+            return prev.position > current.position ? prev : current;
+        }).url;
+    }
+
+    return itemImages.reduce(function (prev, current) {
+        return prev.position < current.position ? prev : current;
+    }).url;
+});
+
+},{}],79:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemImages", function (images, accessor) {
+    var imageUrls = [];
+    var imagesAccessor = "all";
+
+    if (images.variation && images.variation.length) {
+        imagesAccessor = "variation";
+    }
+
+    for (var i in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][i][accessor];
+
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+    }
+
+    return imageUrls;
+});
+
+},{}],80:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemName", function (item, selectedName) {
+    if (selectedName == 0 && item.name1 !== "") {
+        return item.name1;
+    } else if (selectedName == 1 && item.name2 !== "") {
+        return item.name2;
+    } else if (selectedName == 2 && item.name3 !== "") {
+        return item.name3;
+    }
+
+    return item.name1;
+});
+
+},{}],81:[function(require,module,exports){
+"use strict";
+
+Vue.filter("itemURL", function (item) {
+    var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
+    var urlPath = item.texts.urlPath;
+
+    var link = "/";
+
+    if (urlPath && urlPath.length) {
+        link += urlPath;
+
+        link += enableOldUrlPattern ? "/" : "_";
+    }
+
+    if (enableOldUrlPattern) {
+        return link + "a-" + item.item.id;
+    }
+
+    return link + item.item.id + "_" + item.variation.id;
+});
+
+},{}],82:[function(require,module,exports){
+"use strict";
+
+Vue.filter("propertySurcharge", function (properties, propertyId) {
+    var property = properties.find(function (prop) {
+        return prop.property.id === propertyId;
+    });
+
+    if (property) {
+        if (property.surcharge > 0) {
+            return property.surcharge;
+        } else if (property.property.surcharge > 0) {
+            return property.property.surcharge;
+        }
+    }
+
+    return 0;
+});
+
+},{}],83:[function(require,module,exports){
+"use strict";
+
+Vue.filter("truncate", function (string, value) {
+    if (string.length > value) {
+        return string.substring(0, value) + "...";
+    }
+    return string;
+});
+
+},{}],84:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.isAddressFieldEnabled = isAddressFieldEnabled;
+function isAddressFieldEnabled(countryId, addressType, field) {
+    var address = {};
+    var enabledFields = {};
+
+    if (typeof countryId === "undefined") {
+        countryId = 1;
+    }
+
+    if (addressType === "1") {
+        address = "billing_address";
+
+        if (countryId === 1) {
+            enabledFields = App.config.enabledBillingAddressFields;
+        } else {
+            enabledFields = App.config.enabledBillingAddressFieldsUK;
+        }
+    } else {
+        address = "delivery_address";
+
+        if (countryId === "1") {
+            enabledFields = App.config.enabledDeliveryAddressFields;
+        } else {
+            enabledFields = App.config.enabledDeliveryAddressFieldsUK;
+        }
+    }
+
+    enabledFields = enabledFields.split(", ");
+
+    var fullField = address + "." + field;
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = enabledFields[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var enabledField = _step.value;
+
+            if (enabledField === fullField) {
+                return true;
+            }
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    return false;
+}
+
+exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
+
+},{}],85:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.createAddress = createAddress;
+exports.updateAddress = updateAddress;
+exports.deleteAddress = deleteAddress;
+var ApiService = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
+
+/**
+ * Create a new address
+ * @param address
+ * @param addressType
+ * @param setActive
+ * @returns {*}
+ */
+function createAddress(address, addressType, setActive) {
+    return ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
+        if (setActive) {
+            if (addressType === 1) {
+                CheckoutService.setBillingAddressId(response.id);
+            } else if (addressType === 2) {
+                CheckoutService.setDeliveryAddressId(response.id);
+            }
+        }
+    });
+}
+
+/**
+ * Update an existing address
+ * @param newData
+ * @param addressType
+ * @returns {*|Entry|undefined}
+ */
+function updateAddress(newData, addressType) {
+    addressType = addressType || newData.pivot.typeId;
+    return ApiService.put("/rest/io/customer/address/" + newData.id + "?typeId=" + addressType, newData, { supressNotifications: true });
+}
+
+/**
+ * Delete an existing address
+ * @param addressId
+ * @param addressType
+ * @returns {*}
+ */
+function deleteAddress(addressId, addressType) {
+    return ApiService.delete("/rest/io/customer/address/" + addressId + "?typeId=" + addressType);
+}
+
+exports.default = { createAddress: createAddress, updateAddress: updateAddress, deleteAddress: deleteAddress };
+
+},{"services/ApiService":86,"services/CheckoutService":88}],86:[function(require,module,exports){
+"use strict";
+
+var NotificationService = require("services/NotificationService");
+var WaitScreenService = require("services/WaitScreenService");
+
+module.exports = function ($) {
+
+    var _eventListeners = {};
+
+    return {
+        get: _get,
+        put: _put,
+        post: _post,
+        delete: _delete,
+        send: _send,
+        setToken: _setToken,
+        getToken: _getToken,
+        listen: _listen
+    };
+
+    function _listen(event, handler) {
+        _eventListeners[event] = _eventListeners[event] || [];
+        _eventListeners[event].push(handler);
+    }
+
+    function _triggerEvent(event, payload) {
+        if (_eventListeners[event]) {
+            for (var i = 0; i < _eventListeners[event].length; i++) {
+                var listener = _eventListeners[event][i];
+
+                if (typeof listener !== "function") {
+                    continue;
+                }
+                listener.call(Object, payload);
+            }
+        }
+    }
+
+    function _get(url, data, config) {
+        config = config || {};
+        config.method = "GET";
+        return _send(url, data, config);
+    }
+
+    function _put(url, data, config) {
+        config = config || {};
+        config.method = "PUT";
+        return _send(url, data, config);
+    }
+
+    function _post(url, data, config) {
+        config = config || {};
+        config.method = "POST";
+        return _send(url, data, config);
+    }
+
+    function _delete(url, data, config) {
+        config = config || {};
+        config.method = "DELETE";
+        return _send(url, data, config);
+    }
+
+    function _send(url, data, config) {
+        var deferred = $.Deferred();
+
+        config = config || {};
+        config.data = data || null;
+        config.dataType = config.dataType || "json";
+        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
+        config.doInBackground = !!config.doInBackground;
+        config.supressNotifications = !!config.supressNotifications;
+
+        if (!config.doInBackground) {
+            WaitScreenService.showWaitScreen();
+        }
+        $.ajax(url, config).done(function (response) {
+            if (!config.supressNotifications) {
+                printMessages(response);
+            }
+            for (var event in response.events) {
+                _triggerEvent(event, response.events[event]);
+            }
+            deferred.resolve(response.data || response);
+        }).fail(function (jqXHR) {
+            var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
+
+            if (!config.supressNotifications) {
+                printMessages(response);
+            }
+            deferred.reject(response);
+        }).always(function () {
+            if (!config.doInBackground) {
+                WaitScreenService.hideWaitScreen();
+            }
+        });
+
+        return deferred;
+    }
+
+    function printMessages(response) {
+        var notification;
+
+        if (response.error && response.error.message.length > 0) {
+            notification = NotificationService.error(response.error);
+        }
+
+        if (response.success && response.success.message.length > 0) {
+            notification = NotificationService.success(response.success);
+        }
+
+        if (response.warning && response.warning.message.length > 0) {
+            notification = NotificationService.warning(response.warning);
+        }
+
+        if (response.info && response.info.message.length > 0) {
+            notification = NotificationService.info(response.info);
+        }
+
+        if (response.debug && response.debug.class.length > 0) {
+            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
+            for (var i = 0; i < response.debug.trace.length; i++) {
+                notification.trace(response.debug.trace[i]);
+            }
+        }
+    }
+
+    function _setToken(token) {
+        this._token = token;
+    }
+
+    function _getToken() {
+        return this._token;
+    }
+}(jQuery);
+
+},{"services/NotificationService":92,"services/WaitScreenService":96}],87:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.renderItems = renderItems;
+exports.getScopeUrl = getScopeUrl;
+var ItemListService = require("services/ItemListService");
+var ResourceService = require("services/ResourceService");
+var _categoryTree = {};
+var _categoryBreadcrumbs = [];
+
+/**
+ * render items in relation to location
+ * @param currentCategory
+ */
+function renderItems(currentCategory) {
+    ResourceService.getResource("isLoadingBreadcrumbs").set(true);
+
+    $("body").removeClass("menu-is-visible");
+
+    if ($.isEmptyObject(_categoryTree)) {
+        _categoryTree = ResourceService.getResource("navigationTree").val();
+    }
+
+    if (!App.isCategoryView) {
+        window.open(getScopeUrl(currentCategory), "_self");
+    } else if (currentCategory.details.length) {
+        _handleCurrentCategory(currentCategory);
+
+        document.dispatchEvent(new CustomEvent("afterCategoryChanged", { detail: {
+                currentCategory: currentCategory,
+                categoryTree: _categoryTree
+            } }));
+    }
+}
+
+/**
+ * bundle functions
+ * @param currentCategory
+ */
+function _handleCurrentCategory(currentCategory) {
+    _updateItemList(currentCategory);
+    _updateHistory(currentCategory);
+    _updateBreadcrumbs();
+}
+
+function _updateBreadcrumbs() {
+    ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
+}
+
+/**
+ * update the current item list without reloading
+ * @param currentCategory
+ */
+function _updateItemList(currentCategory) {
+    ItemListService.setCategoryId(currentCategory.id);
+
+    ItemListService.setPage(1);
+    ItemListService.setFacets("");
+    ItemListService.getItemList();
+}
+
+/**
+ * update page informations
+ * @param currentCategory
+ */
+function _updateHistory(currentCategory) {
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
+
+    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
+    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+
+    var categoryImage = currentCategory.details[0].imagePath;
+    var parallaxImgContainer = document.querySelector(".parallax-img-container");
+
+    if (parallaxImgContainer) {
+        if (categoryImage) {
+            parallaxImgContainer.style.backgroundImage = "url(/documents/" + currentCategory.details[0].imagePath + ")";
+        } else {
+            parallaxImgContainer.style.removeProperty("background-image");
+        }
+    }
+}
+
+/**
+ * get the current scope url
+ * @param currentCategory
+ * @param scopeUrl - default
+ * @param categories - default
+ */
+function getScopeUrl(currentCategory, scopeUrl, categories) {
+    scopeUrl = scopeUrl || "";
+    categories = categories || _categoryTree;
+
+    if (scopeUrl.length == 0) {
+        _categoryBreadcrumbs = [];
+    }
+
+    for (var category in categories) {
+        if (categories[category].id == currentCategory.id && categories[category].details.length) {
+            scopeUrl += "/" + categories[category].details[0].nameUrl;
+
+            _categoryBreadcrumbs.push(categories[category]);
+
+            return scopeUrl;
+        }
+
+        if (categories[category].children && categories[category].details.length) {
+            var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
+
+            var urlScope = getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
+
+            if (urlScope.length > 0) {
+                _categoryBreadcrumbs.push(categories[category]);
+
+                return urlScope;
+            }
+        }
+    }
+
+    return "";
+}
+
+exports.default = {
+    getScopeUrl: getScopeUrl,
+    renderItems: renderItems
+};
+
+},{"services/ItemListService":90,"services/ResourceService":93}],88:[function(require,module,exports){
+"use strict";
+
+var ApiService = require("services/ApiService");
+
+module.exports = function ($) {
+
+    var checkout = {};
+    var initPromise;
+
+    return {
+        init: init,
+        setCheckout: setCheckout,
+        setDeliveryAddressId: setDeliveryAddressId,
+        setBillingAddressId: setBillingAddressId,
+        setMethodOfPaymentId: setMethodOfPaymentId,
+        setShippingCountryId: setShippingCountryId,
+        setShippingProfileId: setShippingProfileId
+    };
+
+    function init(checkoutData) {
+        if (!initPromise) {
+            if (checkoutData) {
+                initPromise = $.Deferred();
+                checkout = checkoutData;
+                initPromise.resolve();
+            } else {
+                initPromise = ApiService.get("/rest/io/checkout").done(function (response) {
+                    checkout = response;
+                });
+            }
+        }
+        return initPromise;
+    }
+
+    function _set(property, value) {
+        checkout[property] = value;
+        return ApiService.post("/rest/io/checkout/", checkout).done(function (response) {
+            checkout = response;
+        });
+    }
+
+    function setCheckout(checkoutData) {
+        var properties = Object.keys(checkoutData);
+
+        for (var i = 0; i < properties.length; i++) {
+            checkout[properties[i]] = checkoutData[properties[i]];
+        }
+
+        return ApiService.post("/rest/io/checkout/", checkout).done(function (response) {
+            checkout = response;
+        });
+    }
+
+    function setDeliveryAddressId(deliveryAddressId) {
+        return _set("deliveryAddressId", deliveryAddressId);
+    }
+
+    function setBillingAddressId(billingAddressId) {
+        return _set("billingAddressId", billingAddressId);
+    }
+
+    function setMethodOfPaymentId(methodOfPaymentId) {
+        return _set("methodOfPaymentId", methodOfPaymentId);
+    }
+
+    function setShippingCountryId(shippingCountryId) {
+        return _set("shippingCountryId", shippingCountryId);
+    }
+
+    function setShippingProfileId(shippingProfileId) {
+        return _set("shippingProfileId", shippingProfileId);
+    }
+}(jQuery);
+
+},{"services/ApiService":86}],89:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    return {
+        parseShippingCountries: parseShippingCountries,
+        parseShippingStates: parseShippingStates,
+        translateCountryNames: translateCountryNames,
+        sortCountries: sortCountries
+    };
+
+    function parseShippingCountries(countryList, id) {
+        var deliveryCountries = [];
+
+        if (countryList === null) {
+            return deliveryCountries;
+        }
+
+        for (var key in countryList) {
+            var country = countryList[key];
+            var option = { id: country.id, name: country.name, locale: country.isoCode2, selected: false };
+
+            option.selected = id === country.id;
+            deliveryCountries.push(option);
+        }
+
+        return deliveryCountries;
+    }
+
+    function translateCountryNames(countryNameMap, countryList) {
+        if (countryNameMap === null) {
+            return;
+        }
+        for (var countryId in countryNameMap) {
+            var countryName = countryNameMap[countryId];
+
+            for (var index in countryList) {
+                var country = countryList[index];
+
+                if (country.id === parseInt(countryId)) {
+                    country.name = countryName;
+                    break;
+                }
+            }
+        }
+    }
+
+    function sortCountries(countries) {
+        countries.sort(function (first, second) {
+            if (first.name < second.name) {
+                return -1;
+            }
+            if (first.name > second.name) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    function parseShippingStates(countryList, countryID) {
+        var states = [];
+
+        for (var key in countryList) {
+            var country = countryList[key];
+
+            if (country.id === countryID) {
+                states = country.states;
+                break;
+            }
+        }
+
+        return states;
+    }
+}(jQuery);
+
+},{}],90:[function(require,module,exports){
+"use strict";
+
+var _UrlService = require("services/UrlService");
+
+var _UrlService2 = _interopRequireDefault(_UrlService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ResourceService = require("services/ResourceService");
+
+module.exports = function ($) {
+    var searchParams = {
+        query: "",
+        items: App.config.defaultItemsPerPage,
+        sorting: App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting,
+        page: 1,
+        facets: "",
+        categoryId: null,
+        template: "",
+        variationShowType: App.config.variationShowType
+    };
+
+    return {
+        getItemList: getItemList,
+        updateSearchString: updateSearchString,
+        setSearchString: setSearchString,
+        setItemsPerPage: setItemsPerPage,
+        setOrderBy: setOrderBy,
+        setPage: setPage,
+        setSearchParams: setSearchParams,
+        setFacets: setFacets,
+        setCategoryId: setCategoryId
+    };
+
+    function getItemList() {
+        if (searchParams.categoryId || searchParams.query.length >= 3) {
+            if (ResourceService.getResource("itemList").val()) {
+                ResourceService.getResource("itemList").val().total = 0;
+            }
+
+            var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+            searchParams.template = "Ceres::ItemList.ItemListView";
+
+            _setIsLoading(true);
+
+            ApiService.get(url, searchParams).done(function (response) {
+                _setIsLoading(false);
+
+                ResourceService.getResource("itemList").set(response);
+                ResourceService.getResource("facets").set(response.facets);
+            }).fail(function (response) {
+                _setIsLoading(false);
+
+                NotificationService.error("Error while searching").closeAfter(5000);
+            });
+        }
+    }
+
+    function _setIsLoading(isLoading) {
+        ResourceService.getResource("itemSearch").set(searchParams);
+        ResourceService.getResource("isLoading").set(isLoading);
+    }
+
+    /**
+     * ?searchString=searchString&itemsPerPage=itemsPerPage&orderBy=orderBy&orderByKey=orderByKey&page=page
+     * @param urlParams
+     */
+    function setSearchParams(urlParams) {
+        var queryParams = _UrlService2.default.getUrlParams(urlParams);
+
+        for (var key in queryParams) {
+            searchParams[key] = queryParams[key];
+        }
+    }
+
+    function updateSearchString(query) {
+        searchParams.query = query;
+
+        query = query.length > 0 ? query : null;
+        _UrlService2.default.setUrlParam("query", query);
+
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
+    }
+
+    function setSearchString(query) {
+        searchParams.query = query;
+        searchParams.page = 1;
+
+        setPage(1);
+        setFacets("");
+
+        ResourceService.getResource("facets").set({});
+        ResourceService.getResource("facetParams").set([]);
+
+        query = query.length > 0 ? query : null;
+        _UrlService2.default.setUrlParam("query", query);
+
+        if (query) {
+            document.title = Translations.Template.generalSearchResults + " " + query + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerText = Translations.Template.generalSearchResults + " " + query;
+        }
+    }
+
+    function setItemsPerPage(items) {
+        searchParams.items = items;
+
+        items = items != App.config.defaultItemsPerPage ? items : null;
+        _UrlService2.default.setUrlParam("items", items);
+    }
+
+    function setOrderBy(sorting) {
+        searchParams.sorting = sorting;
+
+        if (App.isSearch) {
+            sorting = sorting !== App.config.defaultSortingSearch ? sorting : null;
+        } else {
+            sorting = sorting !== App.config.defaultSorting ? sorting : null;
+        }
+
+        _UrlService2.default.setUrlParam("sorting", sorting);
+    }
+
+    function setPage(page) {
+        searchParams.page = page;
+
+        page = page > 1 ? page : null;
+        _UrlService2.default.setUrlParam("page", page);
+    }
+
+    function setFacets(facets) {
+        searchParams.facets = facets.toString();
+
+        facets = facets.toString().length > 0 ? facets.toString() : null;
+
+        setPage(1);
+
+        _UrlService2.default.setUrlParam("facets", facets);
+    }
+
+    function setCategoryId(categoryId) {
+        searchParams.categoryId = categoryId;
+    }
+}(jQuery);
+
+},{"services/ApiService":86,"services/NotificationService":92,"services/ResourceService":93,"services/UrlService":94}],91:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    var paused = false;
+    var timeout = -1;
+    var interval;
+    var timeRemaining;
+    var timeStart;
+
+    return {
+        findModal: findModal
+    };
+
+    function findModal(element) {
+        return new Modal(element);
+    }
+
+    function Modal(element) {
+        var self = this;
+        var $bsModal;
+
+        if ($(element).is(".modal")) {
+            $bsModal = $(element);
+        } else {
+            $bsModal = $(element).find(".modal").first();
+        }
+
+        return {
+            show: show,
+            hide: hide,
+            setTimeout: setTimeout,
+            startTimeout: startTimeout,
+            pauseTimeout: pauseTimeout,
+            continueTimeout: continueTimeout,
+            stopTimeout: stopTimeout,
+            getModalContainer: getModalContainer
+        };
+
+        function show() {
+            $bsModal.modal("show");
+
+            if ($bsModal.timeout > 0) {
+                startTimeout();
+            }
+
+            return self;
+        }
+
+        function hide() {
+            $bsModal.modal("hide");
+            return self;
+        }
+
+        function getModalContainer() {
+            return $bsModal;
+        }
+
+        function setTimeout(timeout) {
+            $bsModal.timeout = timeout;
+
+            $bsModal.find(".modal-content").mouseover(function () {
+                pauseTimeout();
+            });
+
+            $bsModal.find(".modal-content").mouseout(function () {
+                continueTimeout();
+            });
+
+            return this;
+        }
+
+        function startTimeout() {
+            timeRemaining = $bsModal.timeout;
+            timeStart = new Date().getTime();
+
+            timeout = window.setTimeout(function () {
+                window.clearInterval(interval);
+                hide();
+            }, $bsModal.timeout);
+
+            $bsModal.find(".timer").text(timeRemaining / 1000);
+            interval = window.setInterval(function () {
+                if (!paused) {
+                    var secondsRemaining = timeRemaining - new Date().getTime() + timeStart;
+
+                    secondsRemaining = Math.round(secondsRemaining / 1000);
+                    $bsModal.find(".timer").text(secondsRemaining);
+                }
+            }, 1000);
+        }
+
+        function pauseTimeout() {
+            paused = true;
+            timeRemaining -= new Date().getTime() - timeStart;
+            window.clearTimeout(timeout);
+        }
+
+        function continueTimeout() {
+            paused = false;
+            timeStart = new Date().getTime();
+            timeout = window.setTimeout(function () {
+                hide();
+                window.clearInterval(interval);
+            }, timeRemaining);
+        }
+
+        function stopTimeout() {
+            window.clearTimeout(timeout);
+            window.clearInterval(interval);
+        }
+    }
+}(jQuery);
+
+},{}],92:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+module.exports = function ($) {
+
+    var notificationCount = 0;
+    var notifications = new NotificationList();
+
+    var handlerList = [];
+
+    return {
+        log: _log,
+        info: _info,
+        warn: _warn,
+        error: _error,
+        success: _success,
+        getNotifications: getNotifications,
+        listen: _listen
+    };
+
+    function _listen(handler) {
+        handlerList.push(handler);
+    }
+
+    function trigger() {
+        for (var i = 0; i < handlerList.length; i++) {
+            handlerList[i].call({}, notifications.all());
+        }
+    }
+
+    function _log(message, prefix) {
+        var notification = new Notification(message);
+
+        if (App.config.logMessages) {
+            console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
+
+            for (var i = 0; i < notification.stackTrace.length; i++) {
+                _log(notification.stackTrace[i], " + ");
+            }
+        }
+
+        return notification;
+    }
+
+    function _info(message) {
+        var notification = new Notification(message, "info");
+
+        if (App.config.printInfos) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _warn(message) {
+        var notification = new Notification(message, "warning");
+
+        if (App.config.printWarnings) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _error(message) {
+        var notification = new Notification(message, "danger");
+
+        if (App.config.printErrors) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function _success(message) {
+        var notification = new Notification(message, "success");
+
+        if (App.config.printSuccess) {
+            _printNotification(notification);
+        }
+
+        return notification;
+    }
+
+    function getNotifications() {
+        return notifications;
+    }
+
+    function _printNotification(notification) {
+        notifications.add(notification);
+        _log(notification);
+
+        trigger();
+
+        return notification;
+    }
+
+    function Notification(data, context) {
+        if (!App.config.printStackTrace && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
+            data.stackTrace = [];
+        }
+        var id = notificationCount++;
+        var self = {
+            id: id,
+            code: data.code || 0,
+            message: data.message || data || "",
+            context: context || "info",
+            stackTrace: data.stackTrace || [],
+            close: close,
+            closeAfter: closeAfter,
+            trace: trace
+        };
+
+        return self;
+
+        function close() {
+            notifications.remove(self);
+            trigger();
+        }
+
+        function closeAfter(timeout) {
+            setTimeout(function () {
+                notifications.remove(self);
+                trigger();
+            }, timeout);
+        }
+
+        function trace(message, code) {
+            if (App.config.printStackTrace) {
+                self.stackTrace.push({
+                    code: code || 0,
+                    message: message
+                });
+            }
+        }
+    }
+
+    function NotificationList() {
+        var elements = [];
+
+        return {
+            all: all,
+            add: add,
+            remove: remove
+        };
+
+        function all() {
+            return elements;
+        }
+
+        function add(notification) {
+            elements.push(notification);
+        }
+
+        function remove(notification) {
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].id === notification.id) {
+                    elements.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+}(jQuery);
+
+},{}],93:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var ApiService = require("services/ApiService");
+
+module.exports = function ($) {
+
+    var resources = {};
+
+    return {
+        registerResource: registerResource,
+        registerResourceList: registerResourceList,
+        getResource: getResource,
+        watch: watch,
+        bind: bind
+    };
+
+    /**
+     * Register a new resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource} The created resource.
+     */
+    function registerResource(name, route, initialValue, responseTemplate) {
+        if (!name) {
+            throw new Error("Cannot register resource. Name is required.");
+        }
+
+        if (!route && typeof initialValue === "undefined") {
+            throw new Error("Cannot register resource. Route or initial value is required.");
+        }
+
+        if (resources[name]) {
+            throw new Error("Resource '" + name + "' already exists.");
+        }
+
+        var data;
+
+        try {
+            data = $.parseJSON(initialValue);
+        } catch (err) {
+            data = initialValue;
+        }
+
+        name = name.toLowerCase();
+        resources[name] = new Resource(route, data, responseTemplate);
+
+        return resources[name];
+    }
+
+    /**
+     * Register a new list resource
+     * @param {string}  name          The name of the resource. Must be a unique identifier
+     * @param {string}  route         The route to bind the resource to
+     * @param {*}       initialValue  The initial value to assign to the resource
+     *
+     * @returns {Resource}            The created resource.
+     */
+    function registerResourceList(name, route, initialValue, responseTemplate) {
+        if (!name) {
+            throw new Error("Cannot register resource. Name is required.");
+        }
+
+        if (!route && typeof initialValue === "undefined") {
+            throw new Error("Cannot register resource. Route or initial value is required.");
+        }
+
+        if (resources[name]) {
+            throw new Error("Resource '" + name + "' already exists.");
+        }
+
+        var data;
+
+        try {
+            data = $.parseJSON(initialValue);
+        } catch (err) {
+            data = initialValue;
+        }
+
+        name = name.toLowerCase();
+        resources[name] = new ResourceList(route, data, responseTemplate);
+
+        return resources[name];
+    }
+
+    /**
+     * Receive a registered resource by its name
+     * @param {string}  name    The name of the resource to receive
+     *
+     * @returns {Resource}      The resource
+     */
+    function getResource(name) {
+        name = name.toLowerCase();
+
+        if (!resources[name]) {
+            throw new Error("Unkown resource: " + name);
+        }
+
+        return resources[name];
+    }
+
+    /**
+     * Track changes of a given resource.
+     * @param {string}      name        The name of the resource to watch
+     * @param {function}    callback    The handler to call on each change
+     */
+    function watch(name, callback) {
+        getResource(name).watch(callback);
+    }
+
+    /**
+     * Bind a resource to a property of a vue instance.
+     * @param {string}  name        The name of the resource to bind
+     * @param {Vue}     vue         The vue instance
+     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
+     */
+    function bind(name, vue, property) {
+        property = property || name;
+        getResource(name).bind(vue, property);
+    }
+
+    /**
+     * @class Observable
+     * Automatically notify all attached listeners on any changes.
+     */
+    function Observable() {
+        var _value;
+        var _watchers = [];
+
+        return {
+            get value() {
+                return _value;
+            },
+            set value(newValue) {
+                for (var i = 0; i < _watchers.length; i++) {
+                    var watcher = _watchers[i];
+
+                    watcher.apply({}, [newValue, _value]);
+                }
+                _value = newValue;
+            },
+            watch: function watch(cb) {
+                _watchers.push(cb);
+            }
+        };
+    }
+
+    /**
+     * @class Resource
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
+     */
+    function Resource(url, initialValue, responseTemplate) {
+        var data = new Observable();
+        var ready = false;
+
+        // initialize resource
+        if (typeof initialValue !== "undefined") {
+            // Initial value that was given by constructor
+            data.value = initialValue;
+            ready = true;
+        } else if (url) {
+            // If no initial value was given, get the value from the URL
+            ApiService.get(url, { template: this.responseTemplate }).done(function (response) {
+                data.value = response;
+                ready = true;
+            });
+        } else {
+            throw new Error("Cannot initialize resource.");
+        }
+
+        return {
+            watch: watch,
+            bind: bind,
+            val: val,
+            set: set,
+            update: update,
+            listen: listen
+        };
+
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
+        function listen(event, usePayload) {
+            ApiService.listen(event, function (payload) {
+                if (usePayload) {
+                    update(payload[usePayload]);
+                } else {
+                    update();
+                }
+            });
+        }
+
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
+        function watch(cb) {
+            if (typeof cb !== "function") {
+                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
+            }
+            data.watch(cb);
+            if (ready) {
+                cb.apply({}, [data.value, null]);
+            }
+        }
+
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {string}   property    The property of the vue instance
+         */
+        function bind(vue, property) {
+            if (!vue) {
+                throw new Error("Vue instance not set.");
+            }
+
+            if (!property) {
+                throw new Error("Cannot bind undefined property.");
+            }
+
+            watch(function (newValue) {
+                vue.$set(property, newValue);
+            });
+        }
+
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
+        function val() {
+            return data.value;
+        }
+
+        /**
+         * Set the value of the resource.
+         * @param {*}   value   The value to set.
+         * @returns {Deferred}  The PUT request to the url of the resource
+         */
+        function set(value) {
+            if (url) {
+                value.template = responseTemplate;
+                return ApiService.put(url, value).done(function (response) {
+                    data.value = response;
+                });
+            }
+
+            var deferred = $.Deferred();
+
+            data.value = value;
+            deferred.resolve();
+            return deferred;
+        }
+
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
+        function update(value) {
+            if (value) {
+                var deferred = $.Deferred();
+
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            } else if (url) {
+                return ApiService.get(url, { template: responseTemplate }).done(function (response) {
+                    data.value = response;
+                });
+            }
+
+            throw new Error("Cannot update resource. Neither an URL nor a value is prodivded.");
+        }
+    }
+
+    /**
+     * @class ResourceList
+     * @param {string}  url              The url to bind the resource to
+     * @param {string}  initialValue     The initial value to assign to the resource
+     * @param {string}  responseTemplate The path to the response fields file
+     */
+    function ResourceList(url, initialValue, responseTemplate) {
+        var data = new Observable();
+        var ready = false;
+
+        if (url.charAt(url.length - 1) !== "/") {
+            url += "/";
+        }
+
+        if (typeof initialValue !== "undefined") {
+            data.value = initialValue;
+            ready = true;
+        } else if (url) {
+            ApiService.get(url, { template: responseTemplate }).done(function (response) {
+                data.value = response;
+                ready = true;
+            });
+        } else {
+            throw new Error("Cannot initialize resource.");
+        }
+
+        return {
+            watch: watch,
+            bind: bind,
+            val: val,
+            set: set,
+            push: push,
+            remove: remove,
+            update: update,
+            listen: listen
+        };
+
+        /**
+         * Update this resource on a given event triggered by ApiService.
+         * @param {string} event        The event to listen on
+         * @param {string} usePayload   A property of the payload to assign to this resource.
+         *                              The resource will be updated by GET request if not set.
+         */
+        function listen(event, usePayload) {
+            ApiService.listen(event, function (payload) {
+                if (usePayload) {
+                    update(payload[usePayload]);
+                } else {
+                    update();
+                }
+            });
+        }
+
+        /**
+         * Add handler to track changes on this resource
+         * @param {function} cb     The callback to call on each change
+         */
+        function watch(cb) {
+            if (typeof cb !== "function") {
+                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
+            }
+            data.watch(cb);
+
+            if (ready) {
+                cb.apply({}, [data.value, null]);
+            }
+        }
+
+        /**
+         * Bind a property of a vue instance to this resource
+         * @param {Vue}     vue         The vue instance
+         * @param {sting}   property    The property of the vue instance
+         */
+        function bind(vue, property) {
+            if (!vue) {
+                throw new Error("Vue instance not set.");
+            }
+
+            if (!property) {
+                throw new Error("Cannot bind undefined property.");
+            }
+
+            watch(function (newValue) {
+                vue.$set(property, newValue);
+            });
+        }
+
+        /**
+         * Receive the current value of this resource
+         * @returns {*}
+         */
+        function val() {
+            return data.value;
+        }
+
+        /**
+         * Set the value of a single element of this resource.
+         * @param {string|number}   key     The key of the element
+         * @param {*}               value   The value to set.
+         * @returns {Deferred}      The PUT request to the url of the resource
+         */
+        function set(key, value) {
+            if (url) {
+                value.template = responseTemplate;
+                return ApiService.put(url + key, value).done(function (response) {
+                    data.value = response;
+                });
+            }
+            var deferred = $.Deferred();
+
+            data.value = value;
+            deferred.resolve();
+            return deferred;
+        }
+
+        /**
+         * Add a new element to this resource
+         * @param {*}   value   The element to add
+         * @returns {Deferred}  The POST request to the url of the resource
+         */
+        function push(value) {
+            if (url) {
+                value.template = responseTemplate;
+                return ApiService.post(url, value).done(function (response) {
+                    data.value = response;
+                });
+            }
+
+            var deferred = $.Deferred();
+            var list = data.value;
+
+            list.push(value);
+            data.value = list;
+
+            deferred.resolve();
+            return deferred;
+        }
+
+        /**
+         * Remove an element from this resource
+         * @param {string|number}   key     The key of the element
+         * @returns {Deferred}              The DELETE request to the url of the resource
+         */
+        function remove(key) {
+            if (url) {
+                return ApiService.delete(url + key, { template: responseTemplate }).done(function (response) {
+                    data.value = response;
+                });
+            }
+
+            var deferred = $.Deferred();
+            var list = data.value;
+
+            list.splice(key, 1);
+            data.value = list;
+
+            deferred.resolve();
+            return deferred;
+        }
+
+        /**
+         * Update the value of the resource.
+         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
+         * @returns {Deferred}          The GET request to the url of the resource
+         */
+        function update(value) {
+            if (value) {
+                var deferred = $.Deferred();
+
+                data.value = value;
+                deferred.resolve();
+                return deferred;
+            }
+
+            return ApiService.get(url, { template: responseTemplate }).done(function (response) {
+                data.value = response;
+            });
+        }
+    }
+}(jQuery);
+
+},{"services/ApiService":86}],94:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getUrlParams = getUrlParams;
+exports.setUrlParams = setUrlParams;
+exports.setUrlParam = setUrlParam;
+
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUrlParams(urlParams) {
+    if (urlParams) {
+        var tokens;
+        var params = {};
+        var regex = /[?&]?([^=]+)=([^&]*)/g;
+
+        urlParams = urlParams.split("+").join(" ");
+
+        // eslint-disable-next-line
+        while (tokens = regex.exec(urlParams)) {
+            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        }
+
+        return params;
+    }
+
+    return {};
+}
+
+function setUrlParams(urlParams) {
+    var pathName = window.location.pathname;
+    var params = _jquery2.default.isEmptyObject(urlParams) ? "" : "?" + _jquery2.default.param(urlParams);
+    var titleElement = document.getElementsByTagName("title")[0];
+
+    window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+}
+
+function setUrlParam(key, value) {
+    var urlParams = getUrlParams(document.location.search);
+
+    if (value !== null) {
+        urlParams[key] = value;
+    } else {
+        delete urlParams[key];
+    }
+
+    setUrlParams(urlParams);
+}
+
+exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
+
+},{"jquery":4}],95:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.validate = validate;
+exports.getInvalidFields = getInvalidFields;
+exports.markInvalidFields = markInvalidFields;
+exports.markFailedValidationFields = markFailedValidationFields;
+exports.unmarkAllFields = unmarkAllFields;
+
+var _jquery = require("jquery");
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var $form = void 0;
+
+function validate(form) {
+    var deferred = _jquery2.default.Deferred();
+    var invalidFields = getInvalidFields(form);
+
+    if (invalidFields.length > 0) {
+        deferred.rejectWith(form, [invalidFields]);
+    } else {
+        deferred.resolveWith(form);
+    }
+
+    return deferred;
+}
+
+function getInvalidFields(form) {
+    $form = (0, _jquery2.default)(form);
+    var invalidFormControls = [];
+
+    $form.find("[data-validate]").each(function (i, elem) {
+
+        if (!_validateElement((0, _jquery2.default)(elem))) {
+            invalidFormControls.push(elem);
+        }
+    });
+
+    return invalidFormControls;
+}
+
+function markInvalidFields(fields, errorClass) {
+    errorClass = errorClass || "error";
+
+    (0, _jquery2.default)(fields).each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.addClass(errorClass);
+        _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function () {
+            if (_validateElement($elem)) {
+                $elem.removeClass(errorClass);
+                if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]")) {
+                    var groupName = $elem.attr("name");
+
+                    (0, _jquery2.default)("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
+                }
+                _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");
+            }
+        });
+    });
+}
+
+function markFailedValidationFields(form, validationErrors, errorClass) {
+    $form = (0, _jquery2.default)(form);
+
+    errorClass = errorClass || "error";
+
+    $form.find("[data-model]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+        var attribute = $elem.attr("data-model");
+
+        if (attribute in validationErrors) {
+            $elem.addClass(errorClass);
+
+            var fieldLabel = $elem.find("label")[0].innerHTML.replace("*", "");
+
+            if (fieldLabel) {
+                var attributeCamel = attribute.replace(/([A-Z])/g, " $1").toLowerCase();
+
+                validationErrors[attribute][0] = validationErrors[attribute][0].replace(attributeCamel.replace("_", " "), fieldLabel);
+            }
+        }
+    });
+}
+
+function unmarkAllFields(form) {
+    $form = (0, _jquery2.default)(form);
+
+    $form.find("[data-validate]").each(function (i, elem) {
+        var $elem = (0, _jquery2.default)(elem);
+
+        $elem.removeClass("error");
+    });
+}
+
+function _validateElement(elem) {
+    var $elem = (0, _jquery2.default)(elem);
+    var validationKeys = $elem.attr("data-validate").split("|").map(function (i) {
+        return i.trim();
+    }) || ["text"];
+    var hasError = false;
+
+    _findFormControls($elem).each(function (i, formControl) {
+        var $formControl = (0, _jquery2.default)(formControl);
+        var validationKey = validationKeys[i] || validationKeys[0];
+
+        if (!_isActive($formControl)) {
+            // continue loop
+            return true;
+        }
+
+        if ($formControl.is("[type=\"checkbox\"], [type=\"radio\"]")) {
+
+            if (!_validateGroup($formControl, validationKey)) {
+                hasError = true;
+            }
+
+            return true;
+        }
+
+        if ($formControl.is("select")) {
+            if (!_validateSelect($formControl, validationKey)) {
+                hasError = true;
+            }
+
+            return true;
+        }
+
+        if (!_validateInput($formControl, validationKey)) {
+            hasError = true;
+        }
+
+        return false;
+    });
+
+    return !hasError;
+}
+
+function _validateGroup($formControl, validationKey) {
+    var groupName = $formControl.attr("name");
+    var $group = $form.find("[name=\"" + groupName + "\"]");
+    var range = _eval(validationKey) || { min: 1, max: 1 };
+    var checked = $group.filter(":checked").length;
+
+    return checked >= range.min && checked <= range.max;
+}
+
+function _validateSelect($formControl, validationKey) {
+    return _jquery2.default.trim($formControl.val()) !== validationKey;
+}
+
+function _validateInput($formControl, validationKey) {
+    switch (validationKey) {
+        case "text":
+            return _hasValue($formControl);
+        case "number":
+            return _hasValue($formControl) && _jquery2.default.isNumeric(_jquery2.default.trim($formControl.val()));
+        case "ref":
+            return _compareRef(_jquery2.default.trim($formControl.val()), _jquery2.default.trim($formControl.attr("data-validate-ref")));
+        case "mail":
+            return _isMail($formControl);
+        case "password":
+            return _isPassword($formControl);
+        case "regex":
+            {
+                var ref = $formControl.attr("data-validate-ref");
+                var regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+
+                return _hasValue($formControl) && regex.test(_jquery2.default.trim($formControl.val()));
+            }
+        default:
+            console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
+            return true;
+    }
+}
+
+function _hasValue($formControl) {
+    return _jquery2.default.trim($formControl.val()).length > 0;
+}
+
+/**
+ * @param {any} value
+ * @returns value is valid mail
+ */
+function _isMail($formControl) {
+    var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    return mailRegEx.test($formControl.val());
+}
+
+/**
+ * Minimum eight characters, at least one letter and one number
+ *
+ * @param {any} value
+ * @returns value is valid password
+ */
+function _isPassword($formControl) {
+    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
+
+    return passwordRegEx.test($formControl.val());
+}
+
+function _compareRef(value, ref) {
+    if ((0, _jquery2.default)(ref).length > 0) {
+        ref = _jquery2.default.trim((0, _jquery2.default)(ref).val());
+    }
+
+    return value === ref;
+}
+
+function _findFormControls($elem) {
+    if ($elem.is("input, select, textarea")) {
+        return $elem;
+    }
+
+    return $elem.find("input, select, textarea");
+}
+
+function _isActive($elem) {
+    return $elem.is(":visible") && $elem.is(":enabled");
+}
+
+function _eval(input) {
+    // eslint-disable-next-line
+    return new Function("return " + input)();
+}
+
+exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
+
+},{"jquery":4}],96:[function(require,module,exports){
+"use strict";
+
+module.exports = function ($) {
+
+    var overlay = {
+        count: 0,
+        isVisible: false
+    };
+
+    return {
+        getOverlay: getOverlay,
+        showWaitScreen: showWaitScreen,
+        hideWaitScreen: hideWaitScreen
+    };
+
+    function getOverlay() {
+        return overlay;
+    }
+
+    function showWaitScreen() {
+        overlay.count = overlay.count || 0;
+        overlay.count++;
+        overlay.isVisible = true;
+    }
+
+    function hideWaitScreen(force) {
+        overlay.count = overlay.count || 0;
+        if (overlay.count > 0) {
+            overlay.count--;
+        }
+
+        if (force) {
+            overlay.count = 0;
+        }
+
+        if (overlay.count <= 0) {
+            overlay.count = 0;
+            overlay.visible = false;
+        }
+    }
+}(jQuery);
+
+},{}],97:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _WishListModule = require("store/modules/WishListModule");
+
+var _WishListModule2 = _interopRequireDefault(_WishListModule);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line
+var store = new Vuex.Store({
+    modules: {
+        wishList: _WishListModule2.default
+    }
+});
+
+window.ceresStore = store;
+
+exports.default = store;
+
+},{"store/modules/WishListModule":98}],98:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+    wishListIds: [],
+    wishListItems: []
+};
+
+var mutations = {
+    setWishListItems: function setWishListItems(state, wishListItems) {
+        state.wishListItems = wishListItems;
+    },
+    setWishListIds: function setWishListIds(state, wishListIds) {
+        state.wishListIds = wishListIds;
+    },
+    removeWishListItem: function removeWishListItem(state, wishListItem) {
+        state.wishListItems = state.wishListItems.filter(function (item) {
+            return item !== wishListItem;
+        });
+    },
+    removeWishListId: function removeWishListId(state, id) {
+        state.wishListIds = state.wishListIds.filter(function (wishListId) {
+            return wishListId !== id;
+        });
+    },
+    addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
+        state.wishListItems.splice(index, 0, wishListItem);
+    },
+    addWishListId: function addWishListId(state, id) {
+        state.wishListIds.push(id);
+    }
+};
+
+var actions = {
+    initWishListItems: function initWishListItems(_ref, ids) {
+        var commit = _ref.commit;
+
+        return new Promise(function (resolve, reject) {
+            if (ids && ids[0]) {
+                commit("setWishListIds", ids);
+
+                _ApiService2.default.get("/rest/io/variations/", { variationIds: ids, template: "Ceres::WishList.WishList" }).done(function (data) {
+                    commit("setWishListItems", data.documents);
+                    resolve();
+                }).fail(function () {
+                    reject();
+                });
+            } else {
+                resolve();
+            }
+        });
+    },
+    removeWishListItem: function removeWishListItem(_ref2, _ref3) {
+        var commit = _ref2.commit;
+        var id = _ref3.id,
+            wishListItem = _ref3.wishListItem,
+            index = _ref3.index;
+
+        return new Promise(function (resolve, reject) {
+            if (wishListItem) {
+                commit("removeWishListItem", wishListItem);
+            }
+
+            _ApiService2.default.delete("/rest/io/itemWishList/" + id).done(function (data) {
+                commit("removeWishListId", id);
+                resolve();
+            }).fail(function (error) {
+                if (index) {
+                    commit("addWishListItemToIndex", wishListItem, index);
+                }
+                reject();
+            });
+        });
+    },
+    addToWishList: function addToWishList(_ref4, id) {
+        var commit = _ref4.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("addWishListId", id);
+            _ApiService2.default.post("/rest/io/itemWishList", { variationId: id }).done(function () {
+                resolve();
+            }).fail(function () {
+                commit("removeWishListId", id);
+                reject();
+            });
+        });
+    }
+};
+
+var getters = {
+    wishListCount: function wishListCount(state) {
+        return state.wishListIds.length;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{"services/ApiService":86}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,28,29,30,31,25,26,27,32,33,34,35,36,37,38,46,47,48,39,40,41,42,44,43,45,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,69,70,65,66,67,68,71,72,73,74,75,76,77,78,79,80,81,82,83,97,98])
 
 
 // Frontend end scripts
