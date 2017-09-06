@@ -16,7 +16,8 @@ var ResourceService = require("services/ResourceService");
             return {
                 waiting: false,
                 checkout: {},
-                checkoutValidation: {}
+                checkoutValidation: {},
+                contactWish: {}
             };
         },
 
@@ -26,9 +27,27 @@ var ResourceService = require("services/ResourceService");
 
             ResourceService.bind("checkout", this);
             ResourceService.bind("checkoutValidation", this);
+            ResourceService.bind("contactWish", this);
         },
 
         methods: {
+            placeOrder: function()
+            {
+                this.waiting = true;
+
+                if (this.contactWish.contactWishValue && this.contactWish.contactWishValue.length > 0)
+                {
+                    ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish.contactWishValue}, {supressNotifications: true})
+                        .always(() =>
+                        {
+                            this.preparePayment();
+                        });
+                }
+                else
+                {
+                    this.preparePayment();
+                }
+            },
 
             preparePayment: function()
             {
