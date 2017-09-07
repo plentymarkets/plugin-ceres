@@ -11,6 +11,7 @@ Vue.component("shipping-address-select", {
     `,
 
     props: [
+        "selectedAddressId",
         "addressList",
         "countryNameMap"
     ],
@@ -25,19 +26,9 @@ Vue.component("shipping-address-select", {
         {
             this.addressList = [];
         }
-
         // Adds the dummy entry for "delivery address same as invoice address"
         this.addressList.unshift({id: -99});
-        this.$store.dispatch("initDeliveryAddress", {id: this.selectedAddressId, addressList: this.addressList});
-
-        // if there is no selection for delivery address, the dummy entry will be selected
-        if (this.selectedAddressId === 0)
-        {
-            this.selectedAddressId = -99;
-
-            // TODO could this be handled by io aswell?
-            this.$store.dispatch("selectDeliveryAddress", {id: -99});
-        }
+        this.$store.dispatch("initDeliveryAddress", {id: this.selectedAddressId === 0 ? -99 : this.selectedAddressId, addressList: this.addressList});
     },
 
     methods:

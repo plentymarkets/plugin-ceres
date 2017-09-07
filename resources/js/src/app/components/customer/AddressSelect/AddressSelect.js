@@ -32,12 +32,12 @@ Vue.component("address-select", {
     {
         selectedAddress()
         {
-            this.$store.getters.getSelectedAddress(this.addressType);
+            return this.$store.getters.getSelectedAddress(this.addressType);
         },
 
         addressList()
         {
-            this.$store.getters.getAddressList(this.addressType);
+            return this.$store.getters.getAddressList(this.addressType);
         },
 
         isAddAddressEnabled()

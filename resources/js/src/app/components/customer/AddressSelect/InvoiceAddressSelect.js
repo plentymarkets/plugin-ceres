@@ -12,6 +12,7 @@ Vue.component("invoice-address-select", {
     `,
 
     props: [
+        "selectedAddressId",
         "addressList",
         "hasToValidate",
         "countryNameMap"

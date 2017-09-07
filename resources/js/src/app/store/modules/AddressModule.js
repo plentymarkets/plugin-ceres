@@ -294,7 +294,7 @@ const getters =
 
             if (addressType === "1")
             {
-                selectAddress = state.billingAddress;
+                selectedAddress = state.billingAddress;
             }
             else if (addressType === "2")
             {

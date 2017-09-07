@@ -13,7 +13,7 @@
                 >
 
                     <div class="item-inner">
-                    <span v-if="selectedAddress.id == -99">
+                    <span v-if="selectedAddress && selectedAddress.id == -99">
                         <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
                             -</p>
                     </span>

@@ -57,11 +57,11 @@ const mutations =
             }
         },
 
-        setMethodOfPayment(state, methodOfPayment)
+        setMethodOfPayment(state, methodOfPaymentId)
         {
-            if (methodOfPayment)
+            if (methodOfPaymentId)
             {
-                state.payment.methodOfPaymentId = methodOfPayment.id;
+                state.payment.methodOfPaymentId = methodOfPaymentId;
             }
         },
 
