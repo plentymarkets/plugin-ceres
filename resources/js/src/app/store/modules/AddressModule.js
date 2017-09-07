@@ -18,7 +18,6 @@ const mutations =
             {
                 state.billingAddressList = billingAddressList;
             }
-            console.log("setBillingAddressList");
         },
 
         setBillingAddressId(state, billingAddressId)
@@ -27,7 +26,6 @@ const mutations =
             {
                 state.billingAddressId = billingAddressId;
             }
-            console.log("setBillingAddressId");
         },
 
         setBillingAddress(state, billingAddress)
@@ -36,7 +34,6 @@ const mutations =
             {
                 state.billingAddress = billingAddress;
             }
-            console.log("setBillingAddress");
         },
 
         setDeliveryAddressList(state, deliveryAddressList)
@@ -45,7 +42,6 @@ const mutations =
             {
                 state.deliveryAddressList = deliveryAddressList;
             }
-            console.log("setDeliveryAddressList");
         },
 
         setDeliveryAddressId(state, deliveryAddressId)
@@ -54,7 +50,6 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddressId;
             }
-            console.log("setDeliveryAddressId");
         },
 
         setDeliveryAddress(state, deliveryAddress)
@@ -63,7 +58,6 @@ const mutations =
             {
                 state.deliveryAddress = deliveryAddress;
             }
-            console.log("setDeliveryAddress");
         },
 
         removeBillingAddress(state, billingAddress)
@@ -74,7 +68,6 @@ const mutations =
             {
                 state.billingAddressList.splice(index, 1);
             }
-            console.log("removeBillingAddress");
         },
 
         removeDeliveryAddress(state, deliveryAddress)
@@ -85,7 +78,6 @@ const mutations =
             {
                 state.deliveryAddressList.splice(index, 1);
             }
-            console.log("removeDeliveryAddress");
         },
 
         addBillingAddress(state, billingAddress, index)
@@ -101,7 +93,6 @@ const mutations =
                     state.billingAddressList.push(billingAddress);
                 }
             }
-            console.log("addBillingAddress");
         },
 
         addDeliveryAddress(state, deliveryAddress, index)
@@ -117,7 +108,6 @@ const mutations =
                     state.deliveryAddressList.push(deliveryAddress);
                 }
             }
-            console.log("addDeliveryAddress");
         },
 
         updateBillingAddress(state, billingAddress)
@@ -127,7 +117,6 @@ const mutations =
                 addressToUpdate = state.billingAddressList.find(entry => entry.id === billingAddress.id);
                 addressToUpdate = billingAddress;
             }
-            console.log("updateBillingAddress");
         },
 
         updateDeliveryAddress(state, deliveryAddress)
@@ -137,7 +126,6 @@ const mutations =
                 addressToUpdate = state.deliveryAddressList.find(entry => entry.id === deliveryAddress.id);
                 addressToUpdate = deliveryAddress;
             }
-            console.log("updateDeliveryAddress");
         }
     };
 
