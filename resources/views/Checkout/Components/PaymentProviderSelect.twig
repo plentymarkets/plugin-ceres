@@ -7,7 +7,7 @@
                         id="paymentMethod${ _uid }${ paymentProvider.id }"
                         name="MethodOfPaymentID"
                         :value="paymentProvider.id"
-                        @change="onPaymentProviderChange()"
+                        @change="onPaymentProviderChange(paymentProvider)"
                         v-model="methodOfPaymentId"
                 >
                 <label for="paymentMethod${ _uid }${ paymentProvider.id }">
