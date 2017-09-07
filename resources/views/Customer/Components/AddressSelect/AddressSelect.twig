@@ -27,7 +27,7 @@
                             <span>${getCountryName(selectedAddress.countryId)}</span>
                         </div>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId"
+                        <p v-if="!isAddressListEmpty() && !selectedAddress"
                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
                             -</p>
                         <p v-if="isAddressListEmpty()"
