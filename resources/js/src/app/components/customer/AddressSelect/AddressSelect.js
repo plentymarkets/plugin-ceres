@@ -50,6 +50,11 @@ Vue.component("address-select", {
             }
 
             return isLoggedIn || this.addressList.length < 2;
+        },
+
+        isAddressListEmpty()
+        {
+            return !(this.addressList && this.addressList.length > 0);
         }
     },
 
@@ -93,15 +98,6 @@ Vue.component("address-select", {
         onAddressChanged(address)
         {
             this.$dispatch("address-changed", address);
-        },
-
-        /**
-         * Check whether the address list is empty
-         * @returns {boolean}
-         */
-        isAddressListEmpty()
-        {
-            return !(this.addressList && this.addressList.length > 0);
         },
 
         /**
