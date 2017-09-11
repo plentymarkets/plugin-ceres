@@ -10974,7 +10974,7 @@ Vue.component("accept-gtc-check", {
 
     methods: {
         validate: function validate() {
-            this.showError = !this.isChecked;
+            this.$store.commit("setGtcShowError", this.showError = !this.isChecked);
         }
     },
 
@@ -11081,114 +11081,115 @@ Vue.component("payment-provider-select", {
 
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
-var ResourceService = require("services/ResourceService");
 
-(function ($) {
-    Vue.component("place-order", {
+Vue.component("place-order", {
 
-        props: ["targetContinue", "template"],
+    props: ["targetContinue", "template"],
 
-        data: function data() {
-            return {
-                waiting: false,
-                checkout: {},
-                checkoutValidation: {}
-            };
-        },
+    data: function data() {
+        return {
+            waiting: false
+        };
+    },
 
-        created: function created() {
-            this.$options.template = this.template;
 
-            ResourceService.bind("checkout", this);
-            ResourceService.bind("checkoutValidation", this);
-        },
-
-        methods: {
-
-            preparePayment: function preparePayment() {
-                this.waiting = true;
-                var self = this;
-
-                if (self.validateCheckout()) {
-                    ApiService.post("/rest/io/checkout/payment").done(function (response) {
-                        self.afterPreparePayment(response);
-                    }).fail(function (response) {
-                        self.waiting = false;
-                    });
-                } else {
-                    NotificationService.error(Translations.Template.generalCheckEntries);
-                    this.waiting = false;
-                }
-            },
-
-            validateCheckout: function validateCheckout() {
-                for (var validator in this.checkoutValidation) {
-                    if (this.checkoutValidation[validator].validate) {
-                        this.checkoutValidation[validator].validate();
-                    }
-                }
-
-                for (var i in this.checkoutValidation) {
-                    if (this.checkoutValidation[i].showError) {
-                        return false;
-                    }
-                }
-
-                return true;
-            },
-
-            afterPreparePayment: function afterPreparePayment(response) {
-                var paymentType = response.type || "errorCode";
-                var paymentValue = response.value || "";
-
-                switch (paymentType) {
-                    case "continue":
-                        var target = this.targetContinue;
-
-                        if (target) {
-                            window.location.assign(target);
-                        }
-                        break;
-                    case "redirectUrl":
-                        // redirect to given payment provider
-                        window.location.assign(paymentValue);
-                        break;
-                    case "externalContentUrl":
-                        // show external content in iframe
-                        this.showModal(paymentValue, true);
-                        break;
-                    case "htmlContent":
-                        this.showModal(paymentValue, false);
-                        break;
-
-                    case "errorCode":
-                        NotificationService.error(paymentValue);
-                        this.waiting = false;
-                        break;
-                    default:
-                        NotificationService.error("Unknown response from payment provider: " + paymentType);
-                        this.waiting = false;
-                        break;
-                }
-            },
-
-            showModal: function showModal(content, isExternalContent) {
-                var $modal = $(this.$els.modal);
-                var $modalBody = $(this.$els.modalContent);
-
-                if (isExternalContent) {
-                    $modalBody.html("<iframe src=\"" + content + "\">");
-                } else {
-                    $modalBody.html(content);
-                }
-
-                $modal.modal("show");
-            }
+    computed: Vuex.mapState({
+        checkoutValidation: function checkoutValidation(state) {
+            return state.checkout.validation;
         }
-    });
-})(jQuery);
+    }),
 
-},{"services/ApiService":85,"services/NotificationService":91,"services/ResourceService":92}],17:[function(require,module,exports){
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        preparePayment: function preparePayment() {
+            this.waiting = true;
+
+            if (this.validateCheckout()) {
+                // ApiService.post("/rest/io/checkout/payment")
+                //     .done(response =>
+                //     {
+                //         this.afterPreparePayment(response);
+                //     })
+                //     .fail(error =>
+                //     {
+                //         this.waiting = false;
+                //     });
+
+                console.log("done");
+            } else {
+                NotificationService.error(Translations.Template.generalCheckEntries);
+                this.waiting = false;
+            }
+        },
+        validateCheckout: function validateCheckout() {
+            var isValid = true;
+
+            for (var index in this.checkoutValidation) {
+                if (this.checkoutValidation[index].validate) {
+                    this.checkoutValidation[index].validate();
+
+                    if (this.checkoutValidation[index].showError) {
+                        isValid = !this.checkoutValidation[index].showError;
+                    }
+                }
+            }
+
+            return isValid;
+        },
+        afterPreparePayment: function afterPreparePayment(response) {
+            var paymentType = response.type || "errorCode";
+            var paymentValue = response.value || "";
+
+            switch (paymentType) {
+                case "continue":
+                    var target = this.targetContinue;
+
+                    if (target) {
+                        window.location.assign(target);
+                    }
+                    break;
+                case "redirectUrl":
+                    // redirect to given payment provider
+                    window.location.assign(paymentValue);
+                    break;
+                case "externalContentUrl":
+                    // show external content in iframe
+                    this.showModal(paymentValue, true);
+                    break;
+                case "htmlContent":
+                    this.showModal(paymentValue, false);
+                    break;
+
+                case "errorCode":
+                    NotificationService.error(paymentValue);
+                    this.waiting = false;
+                    break;
+                default:
+                    NotificationService.error("Unknown response from payment provider: " + paymentType);
+                    this.waiting = false;
+                    break;
+            }
+        },
+        showModal: function showModal(content, isExternalContent) {
+            var $modal = $(this.$els.modal);
+            var $modalBody = $(this.$els.modalContent);
+
+            if (isExternalContent) {
+                $modalBody.html("<iframe src=\"" + content + "\">");
+            } else {
+                $modalBody.html(content);
+            }
+
+            $modal.modal("show");
+        }
+    }
+});
+
+},{"services/ApiService":85,"services/NotificationService":91}],17:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {
@@ -11680,20 +11681,6 @@ Vue.component("create-update-address", {
             this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType }).then(function (resolve) {
                 _this2.addressModal.hide();
                 _this2.waiting = false;
-                // for (const key in this.addressList)
-                // {
-                //     const address = this.addressList[key];
-
-                //     if (address.id === this.addressData.id)
-                //     {
-                //         for (const attribute in this.addressList[key])
-                //         {
-                //             this.addressList[key][attribute] = this.addressData[attribute];
-                //         }
-
-                //         break;
-                //     }
-                // }
             }, function (error) {
                 _this2.waiting = false;
 
@@ -17228,9 +17215,6 @@ var actions = {
             commit("selectDeliveryAddress", selectedAddress);
         });
     },
-
-
-    // TODO what to do after a selected address is deleted
     deleteAddress: function deleteAddress(_ref9, _ref10) {
         var dispatch = _ref9.dispatch,
             state = _ref9.state,
@@ -17604,21 +17588,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":85}],100:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// Wish List
-var SET_WISH_LIST_ITEMS = exports.SET_WISH_LIST_ITEMS = "SET_WISH_LIST_ITEMS";
-var SET_WISH_LIST_IDS = exports.SET_WISH_LIST_IDS = "SET_WISH_LIST_IDS";
-var REMOVE_WISH_LIST_ITEM = exports.REMOVE_WISH_LIST_ITEM = "REMOVE_WISH_LIST_ITEM";
-var REMOVE_WISH_LIST_ID = exports.REMOVE_WISH_LIST_ID = "REMOVE_WISH_LIST_ID";
-var ADD_WISH_LIST_ITEM_TO_INDEX = exports.ADD_WISH_LIST_ITEM_TO_INDEX = "ADD_WISH_LIST_ITEM_TO_INDEX";
-var ADD_WISH_LIST_ID = exports.ADD_WISH_LIST_ID = "ADD_WISH_LIST_ID";
-
-},{}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,28,29,30,31,26,27,32,33,34,35,36,37,38,46,47,48,39,40,41,42,44,43,45,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,69,70,65,66,67,68,71,72,73,74,75,76,77,78,79,80,81,82,83,96,97,98,99,100])
+},{"services/ApiService":85}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,28,29,30,31,26,27,32,33,34,35,36,37,38,46,47,48,39,40,41,42,44,43,45,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,69,70,65,66,67,68,71,72,73,74,75,76,77,78,79,80,81,82,83,96,97,98,99])
 
 
 // Frontend end scripts

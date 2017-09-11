@@ -83,20 +83,6 @@ Vue.component("create-update-address", {
                     {
                         this.addressModal.hide();
                         this.waiting = false;
-                        // for (const key in this.addressList)
-                        // {
-                        //     const address = this.addressList[key];
-
-                        //     if (address.id === this.addressData.id)
-                        //     {
-                        //         for (const attribute in this.addressList[key])
-                        //         {
-                        //             this.addressList[key][attribute] = this.addressData[attribute];
-                        //         }
-
-                        //         break;
-                        //     }
-                        // }
                     },
                     error =>
                     {

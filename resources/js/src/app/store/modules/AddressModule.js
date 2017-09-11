@@ -183,7 +183,6 @@ const actions =
             });
         },
 
-        // TODO what to do after a selected address is deleted
         deleteAddress({dispatch, state, commit}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
