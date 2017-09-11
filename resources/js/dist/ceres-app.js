@@ -11406,23 +11406,6 @@ Vue.component("address-select", {
         },
 
 
-        // /**
-        //  * Remove all user related addresses from the component
-        //  */
-        // cleanUserAddressData()
-        // {
-        //     this.addressList = this.addressList.filter(value =>
-        //     {
-        //         return value.id === -99;
-        //     });
-
-        //     if (this.selectedAddressId !== -99)
-        //     {
-        //         this.selectedAddress = {};
-        //         this.selectedAddressId = "";
-        //     }
-        // },
-
         /**
          * Update the selected address
          * @param index
@@ -11578,16 +11561,6 @@ Vue.component("address-select", {
         },
 
 
-        // /**
-        //  * Update the selected address when a new address is created
-        //  * @param addressData
-        //  */
-        // onAddressCreated(addressData)
-        // {
-        //     // TODO is the request to set the address needed here? maybe remove the event completly
-        //     this.$store.dispatch("selectAddress", {address: this.addressData, addressType: this.addressType});
-        // },
-
         /**
          * @param countryId
          * @returns country name | empty string
@@ -11603,7 +11576,7 @@ Vue.component("address-select", {
 
     filters: {
         optionType: function optionType(selectedAddress, typeId) {
-            if (selectedAddress.name2) {
+            if (selectedAddress && selectedAddress.name2) {
                 var _iteratorNormalCompletion = true;
                 var _didIteratorError = false;
                 var _iteratorError = undefined;
@@ -17152,6 +17125,11 @@ var mutations = {
 
         if (index !== -1) {
             state.billingAddressList.splice(index, 1);
+
+            if (state.billingAddress === billingAddress) {
+                state.billingAddress = null;
+                state.billingAddressId = null;
+            }
         }
     },
     removeDeliveryAddress: function removeDeliveryAddress(state, deliveryAddress) {
@@ -17159,6 +17137,13 @@ var mutations = {
 
         if (index !== -1) {
             state.deliveryAddressList.splice(index, 1);
+
+            if (state.deliveryAddress === deliveryAddress) {
+                state.deliveryAddress = state.deliveryAddress.find(function (address) {
+                    return address.id === -99;
+                });
+                state.deliveryAddressId = -99;
+            }
         }
     },
     addBillingAddress: function addBillingAddress(state, billingAddress, index) {
@@ -17185,7 +17170,7 @@ var mutations = {
                 return entry.id === billingAddress.id;
             });
 
-            // using this method to trigger the address list to render again
+            // using this "trick" to trigger the address list to render again
             state.billingAddressList.splice(indexToUpdate, 1);
             state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
         }
@@ -17196,7 +17181,9 @@ var mutations = {
                 return entry.id === deliveryAddress.id;
             });
 
-            state.deliveryAddressList[indexToUpdate] = deliveryAddress;
+            // using this "trick" to trigger the address list to render again
+            state.deliveryAddressList.splice(indexToUpdate, 1);
+            state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
         }
     }
 };

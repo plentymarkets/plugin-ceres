@@ -18,7 +18,7 @@
                             -</p>
                     </span>
                         <span v-else class="item-content">
-                        <div v-if="!isAddressListEmpty()">
+                        <div v-if="!isAddressListEmpty() && selectedAddress">
                             <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
                             <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
                             <span v-else>${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</span>

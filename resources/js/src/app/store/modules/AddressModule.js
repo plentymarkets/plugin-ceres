@@ -67,6 +67,12 @@ const mutations =
             if (index !== -1)
             {
                 state.billingAddressList.splice(index, 1);
+
+                if (state.billingAddress === billingAddress)
+                {
+                    state.billingAddress = null;
+                    state.billingAddressId = null;
+                }
             }
         },
 
@@ -77,6 +83,12 @@ const mutations =
             if (index !== -1)
             {
                 state.deliveryAddressList.splice(index, 1);
+
+                if (state.deliveryAddress === deliveryAddress)
+                {
+                    state.deliveryAddress = state.deliveryAddress.find(address => address.id === -99);
+                    state.deliveryAddressId = -99;
+                }
             }
         },
 
@@ -116,7 +128,7 @@ const mutations =
             {
                 const indexToUpdate = state.billingAddressList.findIndex(entry => entry.id === billingAddress.id);
 
-                // using this method to trigger the address list to render again
+                // using this "trick" to trigger the address list to render again
                 state.billingAddressList.splice(indexToUpdate, 1);
                 state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
             }
@@ -128,7 +140,7 @@ const mutations =
             {
                 const indexToUpdate = state.deliveryAddressList.findIndex(entry => entry.id === deliveryAddress.id);
 
-                // using this method to trigger the address list to render again
+                // using this "trick" to trigger the address list to render again
                 state.deliveryAddressList.splice(indexToUpdate, 1);
                 state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
             }

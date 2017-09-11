@@ -86,23 +86,6 @@ Vue.component("address-select", {
             });
         },
 
-        // /**
-        //  * Remove all user related addresses from the component
-        //  */
-        // cleanUserAddressData()
-        // {
-        //     this.addressList = this.addressList.filter(value =>
-        //     {
-        //         return value.id === -99;
-        //     });
-
-        //     if (this.selectedAddressId !== -99)
-        //     {
-        //         this.selectedAddress = {};
-        //         this.selectedAddressId = "";
-        //     }
-        // },
-
         /**
          * Update the selected address
          * @param index
@@ -284,16 +267,6 @@ Vue.component("address-select", {
             this.headline = headline;
         },
 
-        // /**
-        //  * Update the selected address when a new address is created
-        //  * @param addressData
-        //  */
-        // onAddressCreated(addressData)
-        // {
-        //     // TODO is the request to set the address needed here? maybe remove the event completly
-        //     this.$store.dispatch("selectAddress", {address: this.addressData, addressType: this.addressType});
-        // },
-
         /**
          * @param countryId
          * @returns country name | empty string
@@ -313,7 +286,7 @@ Vue.component("address-select", {
     {
         optionType(selectedAddress, typeId)
         {
-            if (selectedAddress.name2)
+            if (selectedAddress && selectedAddress.name2)
             {
                 for (const optionType of selectedAddress.options)
                 {
