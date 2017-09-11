@@ -73,8 +73,15 @@ function _updateHistory(currentCategory)
 
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
+    _updateCategoryTexts(currentCategory);
+}
+
+function _updateCategoryTexts(currentCategory)
+{
+    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+
+    _loadCategoryDescription(currentCategory);
 
     const categoryImage = currentCategory.details[0].imagePath;
     const parallaxImgContainer = document.querySelector(".parallax-img-container");
@@ -89,6 +96,31 @@ function _updateHistory(currentCategory)
         {
             parallaxImgContainer.style.removeProperty("background-image");
         }
+    }
+}
+
+function _loadCategoryDescription(currentCategory)
+{
+    const categoryDescContainer = document.querySelector(".category-description");
+
+    if (categoryDescContainer)
+    {
+        ApiService.get("/rest/io/category", {categoryId: this.current})
+        .done(response =>
+        {
+            if (response.?)
+            {
+                categoryDescContainer.innerHTML = response.?
+            }
+            else
+            {
+                //TODO
+            }
+        })
+        .fail(() =>
+        {
+            this.changePossible = false;
+        });
     }
 }
 
