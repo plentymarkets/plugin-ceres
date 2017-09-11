@@ -114,8 +114,11 @@ const mutations =
         {
             if (billingAddress)
             {
-                addressToUpdate = state.billingAddressList.find(entry => entry.id === billingAddress.id);
-                addressToUpdate = billingAddress;
+                const indexToUpdate = state.billingAddressList.findIndex(entry => entry.id === billingAddress.id);
+
+                // using this method to trigger the address list to render again
+                state.billingAddressList.splice(indexToUpdate, 1);
+                state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
             }
         },
 
@@ -123,8 +126,11 @@ const mutations =
         {
             if (deliveryAddress)
             {
-                addressToUpdate = state.deliveryAddressList.find(entry => entry.id === deliveryAddress.id);
-                addressToUpdate = deliveryAddress;
+                const indexToUpdate = state.deliveryAddressList.findIndex(entry => entry.id === deliveryAddress.id);
+
+                // using this method to trigger the address list to render again
+                state.deliveryAddressList.splice(indexToUpdate, 1);
+                state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
             }
         }
     };

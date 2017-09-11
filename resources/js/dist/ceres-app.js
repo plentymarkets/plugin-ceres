@@ -17181,18 +17181,22 @@ var mutations = {
     },
     updateBillingAddress: function updateBillingAddress(state, billingAddress) {
         if (billingAddress) {
-            addressToUpdate = state.billingAddressList.find(function (entry) {
+            var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
                 return entry.id === billingAddress.id;
             });
-            addressToUpdate = billingAddress;
+
+            // using this method to trigger the address list to render again
+            state.billingAddressList.splice(indexToUpdate, 1);
+            state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
         }
     },
     updateDeliveryAddress: function updateDeliveryAddress(state, deliveryAddress) {
         if (deliveryAddress) {
-            addressToUpdate = state.deliveryAddressList.find(function (entry) {
+            var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
                 return entry.id === deliveryAddress.id;
             });
-            addressToUpdate = deliveryAddress;
+
+            state.deliveryAddressList[indexToUpdate] = deliveryAddress;
         }
     }
 };
