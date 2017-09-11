@@ -11369,6 +11369,9 @@ Vue.component("address-select", {
             }
 
             return isLoggedIn || this.addressList.length < 2;
+        },
+        isAddressListEmpty: function isAddressListEmpty() {
+            return !(this.addressList && this.addressList.length > 0);
         }
     },
 
@@ -11412,15 +11415,6 @@ Vue.component("address-select", {
          */
         onAddressChanged: function onAddressChanged(address) {
             this.$dispatch("address-changed", address);
-        },
-
-
-        /**
-         * Check whether the address list is empty
-         * @returns {boolean}
-         */
-        isAddressListEmpty: function isAddressListEmpty() {
-            return !(this.addressList && this.addressList.length > 0);
         },
 
 
@@ -17095,13 +17089,9 @@ var mutations = {
             state.billingAddressList = billingAddressList;
         }
     },
-    setBillingAddressId: function setBillingAddressId(state, billingAddressId) {
-        if (billingAddressId) {
-            state.billingAddressId = billingAddressId;
-        }
-    },
-    setBillingAddress: function setBillingAddress(state, billingAddress) {
+    selectBillingAddress: function selectBillingAddress(state, billingAddress) {
         if (billingAddress) {
+            state.billingAddressId = billingAddress.id;
             state.billingAddress = billingAddress;
         }
     },
@@ -17110,13 +17100,9 @@ var mutations = {
             state.deliveryAddressList = deliveryAddressList;
         }
     },
-    setDeliveryAddressId: function setDeliveryAddressId(state, deliveryAddressId) {
-        if (deliveryAddressId) {
-            state.deliveryAddressId = deliveryAddressId;
-        }
-    },
-    setDeliveryAddress: function setDeliveryAddress(state, deliveryAddress) {
+    selectDeliveryAddress: function selectDeliveryAddress(state, deliveryAddress) {
         if (deliveryAddress) {
+            state.deliveryAddressId = deliveryAddress.id;
             state.deliveryAddress = deliveryAddress;
         }
     },
@@ -17152,6 +17138,8 @@ var mutations = {
                 state.billingAddressList.splice(index, 0, billingAddress);
             } else {
                 state.billingAddressList.push(billingAddress);
+                state.billingAddressId = billingAddress.id;
+                state.billingAddress = billingAddress;
             }
         }
     },
@@ -17161,6 +17149,8 @@ var mutations = {
                 state.deliveryAddressList.splice(index, 0, deliveryAddress);
             } else {
                 state.deliveryAddressList.push(deliveryAddress);
+                state.deliveryAddressId = deliveryAddress.id;
+                state.deliveryAddress = deliveryAddress;
             }
         }
     },
@@ -17195,8 +17185,7 @@ var actions = {
             addressList = _ref2.addressList;
 
         commit("setBillingAddressList", addressList);
-        commit("setBillingAddressId", id);
-        commit("setBillingAddress", addressList.find(function (address) {
+        commit("selectBillingAddress", addressList.find(function (address) {
             return address.id === id;
         }));
     },
@@ -17206,8 +17195,7 @@ var actions = {
             addressList = _ref4.addressList;
 
         commit("setDeliveryAddressList", addressList);
-        commit("setDeliveryAddressId", id);
-        commit("setDeliveryAddress", addressList.find(function (address) {
+        commit("selectDeliveryAddress", addressList.find(function (address) {
             return address.id === id;
         }));
     },
@@ -17229,8 +17217,7 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             // TODO add call to set address
-            commit("setBillingAddressId", selectedAddress.id);
-            commit("setBillingAddress", selectedAddress);
+            commit("selectBillingAddress", selectedAddress);
         });
     },
     selectDeliveryAddress: function selectDeliveryAddress(_ref8, selectedAddress) {
@@ -17238,8 +17225,7 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             // TODO add call to set address
-            commit("setDeliveryAddressId", selectedAddress.id);
-            commit("setDeliveryAddress", selectedAddress);
+            commit("selectDeliveryAddress", selectedAddress);
         });
     },
 

@@ -89,6 +89,8 @@ const mutations =
                 else
                 {
                     state.billingAddressList.push(billingAddress);
+                    state.billingAddressId = billingAddress.id;
+                    state.billingAddress = billingAddress;
                 }
             }
         },
@@ -104,6 +106,8 @@ const mutations =
                 else
                 {
                     state.deliveryAddressList.push(deliveryAddress);
+                    state.deliveryAddressId = deliveryAddress.id;
+                    state.deliveryAddress = deliveryAddress;
                 }
             }
         },
