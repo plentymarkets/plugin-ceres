@@ -53,8 +53,7 @@
                                     name="shippingAddress${ _uid }"
                                     id="addressSelectItem${ _uid }${ address.id }"
                                     value="${address.id}"
-                                    v-model="selectedAddressId"
-                                    @change="onAddressChanged(index)"
+                                    @change="onAddressChanged(address)"
                             >
                             <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
                             <span v-if="address.id == -99">

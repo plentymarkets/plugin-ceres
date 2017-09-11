@@ -107,9 +107,9 @@ Vue.component("address-select", {
          * Update the selected address
          * @param index
          */
-        onAddressChanged(index)
+        onAddressChanged(address)
         {
-            this.$dispatch("address-changed", this.selectedAddress);
+            this.$dispatch("address-changed", address);
         },
 
         /**

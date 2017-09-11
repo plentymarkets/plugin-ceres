@@ -118,7 +118,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store("createAddress", {address: this.addressData, addressType: this.addressType})
+            this.$store.dispatch("createAddress", {address: this.addressData, addressType: this.addressType})
                 .resolve(
                     response =>
                     {
