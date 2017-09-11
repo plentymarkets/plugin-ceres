@@ -217,7 +217,7 @@ const actions =
             });
         },
 
-        ceateAddress({commit}, {address, addressType})
+        createAddress({commit}, {address, addressType})
         {
             return new Promise((resolve, reject) =>
             {

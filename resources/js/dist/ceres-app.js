@@ -11746,7 +11746,7 @@ Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            this.$store("createAddress", { address: this.addressData, addressType: this.addressType }).resolve(function (response) {
+            this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType }).then(function (response) {
                 _this3.addressModal.hide();
                 _this3.waiting = false;
             }, function (error) {
@@ -17284,7 +17284,7 @@ var actions = {
             });
         });
     },
-    ceateAddress: function ceateAddress(_ref11, _ref12) {
+    createAddress: function createAddress(_ref11, _ref12) {
         var commit = _ref11.commit;
         var address = _ref12.address,
             addressType = _ref12.addressType;

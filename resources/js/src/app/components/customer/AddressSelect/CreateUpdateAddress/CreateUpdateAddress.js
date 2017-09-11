@@ -119,7 +119,7 @@ Vue.component("create-update-address", {
             this._syncOptionTypesAddressData();
 
             this.$store.dispatch("createAddress", {address: this.addressData, addressType: this.addressType})
-                .resolve(
+                .then(
                     response =>
                     {
                         this.addressModal.hide();
