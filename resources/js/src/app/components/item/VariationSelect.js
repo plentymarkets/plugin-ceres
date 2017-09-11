@@ -146,7 +146,7 @@ Vue.component("variation-select", {
                         return false;
                     }
                 }
-                return true;
+                return variation.attributes.length > 0;
 
             });
         },
