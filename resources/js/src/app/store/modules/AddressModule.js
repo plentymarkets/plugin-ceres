@@ -20,18 +20,11 @@ const mutations =
             }
         },
 
-        setBillingAddressId(state, billingAddressId)
-        {
-            if (billingAddressId)
-            {
-                state.billingAddressId = billingAddressId;
-            }
-        },
-
-        setBillingAddress(state, billingAddress)
+        selectBillingAddress(state, billingAddress)
         {
             if (billingAddress)
             {
+                state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
             }
         },
@@ -44,18 +37,11 @@ const mutations =
             }
         },
 
-        setDeliveryAddressId(state, deliveryAddressId)
-        {
-            if (deliveryAddressId)
-            {
-                state.deliveryAddressId = deliveryAddressId;
-            }
-        },
-
-        setDeliveryAddress(state, deliveryAddress)
+        selectDeliveryAddress(state, deliveryAddress)
         {
             if (deliveryAddress)
             {
+                state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
             }
         },
@@ -152,15 +138,13 @@ const actions =
         initBillingAddress({commit}, {id, addressList})
         {
             commit("setBillingAddressList", addressList);
-            commit("setBillingAddressId", id);
-            commit("setBillingAddress", addressList.find(address => address.id === id));
+            commit("selectBillingAddress", addressList.find(address => address.id === id));
         },
 
         initDeliveryAddress({commit}, {id, addressList})
         {
             commit("setDeliveryAddressList", addressList);
-            commit("setDeliveryAddressId", id);
-            commit("setDeliveryAddress", addressList.find(address => address.id === id));
+            commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
         selectAddress({dispatch}, {selectedAddress, addressType})
@@ -182,8 +166,7 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 // TODO add call to set address
-                commit("setBillingAddressId", selectedAddress.id);
-                commit("setBillingAddress", selectedAddress);
+                commit("selectBillingAddress", selectedAddress);
             });
         },
 
@@ -192,8 +175,7 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 // TODO add call to set address
-                commit("setDeliveryAddressId", selectedAddress.id);
-                commit("setDeliveryAddress", selectedAddress);
+                commit("selectDeliveryAddress", selectedAddress);
             });
         },
 
