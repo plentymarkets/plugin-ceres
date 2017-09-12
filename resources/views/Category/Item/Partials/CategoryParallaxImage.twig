@@ -4,7 +4,7 @@
             <div class="parallax-text-container">
                 <h1 class="h2 p-t-3 category-title">{{ category.details[0].name | raw }}</h1>
                 {% if showCategoryDescription %}
-                    <h2 class="h3 p-t-3 category-description">{{ category.details[0].description | raw }}</h2>
+                    <h2 class="h3 p-t-3 category-description {% if category.details[0].imagePath is not empty %}category-description-parallax container-max{% endif %}">{{ category.details[0].description | raw }}</h2>
                 {% endif %}
             </div>
         </div>
