@@ -1,5 +1,3 @@
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-
 {{ component( "Ceres::Customer.Components.SalutationSelect" ) }}
 
 {% set addressFields = config("Ceres.delivery_address.en.show") | split(', ') %}
