@@ -47,8 +47,11 @@ Vue.component("guest-login", {
                     {
                         window.location.assign(this.backlink);
                     }
+                    else
+                    {
+                        this.isDisabled = false;
+                    }
 
-                    this.isDisabled = false;
                 }.bind(this));
         }
     }
