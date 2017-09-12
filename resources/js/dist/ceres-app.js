@@ -11029,18 +11029,21 @@ Vue.component("checkout", {
             }
 
             if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-                NotificationService.warning("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
+                NotificationService.warn("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
                 this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
             }
 
             if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-                NotificationService.warning("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
+                NotificationService.warn("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
                 this.$store.commit("setShippingProfile", checkout.shippingProfileId);
             }
 
             if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
             }
+
+            NotificationService.warn("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
+            NotificationService.info("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
         },
         isEquals: function isEquals(oldList, newList, fieldToCompare) {
             if (oldList.length !== newList.length) {

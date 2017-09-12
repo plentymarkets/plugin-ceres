@@ -46,13 +46,13 @@ Vue.component("checkout", {
 
             if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId)
             {
-                NotificationService.warning("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
+                NotificationService.warn("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
                 this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
             }
 
             if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId)
             {
-                NotificationService.warning("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
+                NotificationService.warn("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
                 this.$store.commit("setShippingProfile", checkout.shippingProfileId);
             }
 
