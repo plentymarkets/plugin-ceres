@@ -80,7 +80,12 @@ function _updateHistory(currentCategory)
 
 function _removeTempDesc()
 {
-    document.querySelector(".category-description").innerHTML = "";
+    const tempDesc = document.querySelector(".category-description");
+
+    if (tempDesc)
+    {
+        tempDesc.innerHTML = "";
+    }
 }
 
 function _updateCategoryTexts(currentCategory)
