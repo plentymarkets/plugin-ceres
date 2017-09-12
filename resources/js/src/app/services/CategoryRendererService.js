@@ -1,5 +1,6 @@
 const ItemListService = require("services/ItemListService");
 const ResourceService = require("services/ResourceService");
+const ApiService          = require("services/ApiService");
 let _categoryTree = {};
 let _categoryBreadcrumbs = [];
 
@@ -40,6 +41,7 @@ export function renderItems(currentCategory)
  */
 function _handleCurrentCategory(currentCategory)
 {
+    _removeTempDesc();
     _updateItemList(currentCategory);
     _updateHistory(currentCategory);
     _updateBreadcrumbs();
@@ -76,13 +78,21 @@ function _updateHistory(currentCategory)
     _updateCategoryTexts(currentCategory);
 }
 
+function _removeTempDesc()
+{
+    document.querySelector(".category-description").innerHTML = "";
+}
+
 function _updateCategoryTexts(currentCategory)
 {
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 
-    _loadCategoryDescription(currentCategory);
+    _loadOptionalData(currentCategory);
+}
 
+function _loadOptionalData(currentCategory)
+{
     const categoryImage = currentCategory.details[0].imagePath;
     const parallaxImgContainer = document.querySelector(".parallax-img-container");
 
@@ -97,29 +107,18 @@ function _updateCategoryTexts(currentCategory)
             parallaxImgContainer.style.removeProperty("background-image");
         }
     }
-}
 
-function _loadCategoryDescription(currentCategory)
-{
     const categoryDescContainer = document.querySelector(".category-description");
 
     if (categoryDescContainer)
     {
-        ApiService.get("/rest/io/category", {categoryId: this.current})
+        ApiService.get("/rest/io/category/description/" + currentCategory.id)
         .done(response =>
         {
-            if (response.?)
+            if (typeof response !== "object")
             {
-                categoryDescContainer.innerHTML = response.?
+                categoryDescContainer.innerHTML = response;
             }
-            else
-            {
-                //TODO
-            }
-        })
-        .fail(() =>
-        {
-            this.changePossible = false;
         });
     }
 }
