@@ -87,7 +87,7 @@ Vue.component("address-select", {
         {
             ApiService.listen("AfterAccountContactLogout", () =>
             {
-                this.$store.dispatch("emptyAddressList", {addressType: this.addressType});
+                this.$store.commit("resetAddress", this.addressType);
             });
         },
 

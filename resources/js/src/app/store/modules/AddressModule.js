@@ -134,6 +134,22 @@ const mutations =
                 state.deliveryAddressList.splice(indexToUpdate, 1);
                 state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
             }
+        },
+
+        resetAddress(state, addressType)
+        {
+            if (addressType === "1")
+            {
+                state.billingAddress = null;
+                state.billingAddressId = null;
+                state.billingAddressList = [];
+            }
+            else if (addressType === "2")
+            {
+                state.deliveryAddressList = [{id: -99}];
+                state.addDeliveryAddress = state.deliveryAddressList[0];
+                state.deliveryAddressId = tate.deliveryAddressList[0].id;
+            }
         }
     };
 
@@ -273,12 +289,6 @@ const actions =
                         reject(error);
                     });
             });
-        },
-
-        emptyAddressList({commit, dispatch}, {addressType})
-        {
-            // TODO remove address and unselect
-            // keep -99 for shipping
         }
     };
 
