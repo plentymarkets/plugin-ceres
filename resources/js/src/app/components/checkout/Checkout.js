@@ -34,25 +34,25 @@ Vue.component("checkout", {
         {
             if (this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id"))
             {
-                NotificationService.info("TODO Die Liste der Zahlungsarten hat sich geändert.");
+                NotificationService.info(Translations.Template.orderMethodOfPaymentListChanged);
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
             if (this.isEquals(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList, "parcelServicePresetId"))
             {
-                NotificationService.info("TODO Die Liste der Versandarten hat sich geändert.");
+                NotificationService.info(Translations.Template.orderShippingProfileListChanged);
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
             if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId)
             {
-                NotificationService.warn("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
+                NotificationService.warn(Translations.Template.orderMethodOfPaymentChanged);
                 this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
             }
 
             if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId)
             {
-                NotificationService.warn("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
+                NotificationService.warn(Translations.Template.orderShippingProfileChanged);
                 this.$store.commit("setShippingProfile", checkout.shippingProfileId);
             }
 
