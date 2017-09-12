@@ -39,7 +39,7 @@ Vue.component("shipping-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.$store.dispatch("selectDeliveryAddress", selectedAddress)
+            this.$store.dispatch("selectAddress", {selectedAddress, addressType: "2"})
                 .then(
                     response =>
                     {

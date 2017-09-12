@@ -55,7 +55,7 @@ Vue.component("invoice-address-select", {
          */
         addressChanged(selectedAddress)
         {
-            this.$store.dispatch("selectBillingAddress", selectedAddress)
+            this.$store.dispatch("selectAddress", {selectedAddress, addressType: "1"})
                 .then(
                 response =>
                 {

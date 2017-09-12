@@ -151,35 +151,40 @@ const actions =
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
         },
 
-        selectAddress({dispatch}, {selectedAddress, addressType})
-        {
-            if (addressType === "1")
-            {
-                return dispatch("selectBillingAddress", selectedAddress);
-            }
-            else if (addressType === "2")
-            {
-                return dispatch("selectDeliveryAddress", selectedAddress);
-            }
-
-            return new Promise();
-        },
-
-        selectBillingAddress({commit}, selectedAddress)
+        selectAddress({commit, state}, {selectedAddress, addressType})
         {
             return new Promise((resolve, reject) =>
             {
-                // TODO add call to set address
-                commit("selectBillingAddress", selectedAddress);
-            });
-        },
+                let oldAddress = {};
 
-        selectDeliveryAddress({commit}, selectedAddress)
-        {
-            return new Promise((resolve, reject) =>
-            {
-                // TODO add call to set address
-                commit("selectDeliveryAddress", selectedAddress);
+                if (addressType === "1")
+                {
+                    oldAddress = state.billingAddress;
+                    commit("selectBillingAddress", selectedAddress);
+                }
+                else if (addressType === "2")
+                {
+                    oldAddress = state.deliveryAddress;
+                    commit("selectDeliveryAddress", selectedAddress);
+                }
+
+                ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
+                    .done(response =>
+                    {
+                        return resolve(response);
+                    })
+                    .fail(error =>
+                    {
+                        if (addressType === "1")
+                        {
+                            commit("selectBillingAddress", oldAddress);
+                        }
+                        else if (addressType === "2")
+                        {
+                            commit("selectDeliveryAddress", oldAddress);
+                        }
+                        reject(error);
+                    });
             });
         },
 
@@ -249,7 +254,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.put("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, address, {supressNotifications: true})
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true})
                     .done(response =>
                     {
                         if (addressType === "1")

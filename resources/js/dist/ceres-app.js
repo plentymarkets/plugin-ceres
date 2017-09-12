@@ -11106,20 +11106,16 @@ Vue.component("place-order", {
 
     methods: {
         preparePayment: function preparePayment() {
+            var _this = this;
+
             this.waiting = true;
 
             if (this.validateCheckout()) {
-                // ApiService.post("/rest/io/checkout/payment")
-                //     .done(response =>
-                //     {
-                //         this.afterPreparePayment(response);
-                //     })
-                //     .fail(error =>
-                //     {
-                //         this.waiting = false;
-                //     });
-
-                console.log("done");
+                ApiService.post("/rest/io/checkout/payment").done(function (response) {
+                    _this.afterPreparePayment(response);
+                }).fail(function (error) {
+                    _this.waiting = false;
+                });
             } else {
                 NotificationService.error(Translations.Template.generalCheckEntries);
                 this.waiting = false;
@@ -11856,7 +11852,7 @@ Vue.component("invoice-address-select", {
         addressChanged: function addressChanged(selectedAddress) {
             var _this = this;
 
-            this.$store.dispatch("selectBillingAddress", selectedAddress).then(function (response) {
+            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "1" }).then(function (response) {
                 document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: _this.billingAddressId }));
             }, function (error) {});
 
@@ -11903,7 +11899,7 @@ Vue.component("shipping-address-select", {
         addressChanged: function addressChanged(selectedAddress) {
             var _this = this;
 
-            this.$store.dispatch("selectDeliveryAddress", selectedAddress).then(function (response) {
+            this.$store.dispatch("selectAddress", { selectedAddress: selectedAddress, addressType: "2" }).then(function (response) {
                 document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: _this.deliveryAddressId }));
             }, function (error) {});
         }
@@ -17187,40 +17183,40 @@ var actions = {
         }));
     },
     selectAddress: function selectAddress(_ref5, _ref6) {
-        var dispatch = _ref5.dispatch;
+        var commit = _ref5.commit,
+            state = _ref5.state;
         var selectedAddress = _ref6.selectedAddress,
             addressType = _ref6.addressType;
 
-        if (addressType === "1") {
-            return dispatch("selectBillingAddress", selectedAddress);
-        } else if (addressType === "2") {
-            return dispatch("selectDeliveryAddress", selectedAddress);
-        }
-
-        return new Promise();
-    },
-    selectBillingAddress: function selectBillingAddress(_ref7, selectedAddress) {
-        var commit = _ref7.commit;
-
         return new Promise(function (resolve, reject) {
-            // TODO add call to set address
-            commit("selectBillingAddress", selectedAddress);
+            var oldAddress = {};
+
+            if (addressType === "1") {
+                oldAddress = state.billingAddress;
+                commit("selectBillingAddress", selectedAddress);
+            } else if (addressType === "2") {
+                oldAddress = state.deliveryAddress;
+                commit("selectDeliveryAddress", selectedAddress);
+            }
+
+            _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                return resolve(response);
+            }).fail(function (error) {
+                if (addressType === "1") {
+                    commit("selectBillingAddress", oldAddress);
+                } else if (addressType === "2") {
+                    commit("selectDeliveryAddress", oldAddress);
+                }
+                reject(error);
+            });
         });
     },
-    selectDeliveryAddress: function selectDeliveryAddress(_ref8, selectedAddress) {
-        var commit = _ref8.commit;
-
-        return new Promise(function (resolve, reject) {
-            // TODO add call to set address
-            commit("selectDeliveryAddress", selectedAddress);
-        });
-    },
-    deleteAddress: function deleteAddress(_ref9, _ref10) {
-        var dispatch = _ref9.dispatch,
-            state = _ref9.state,
-            commit = _ref9.commit;
-        var address = _ref10.address,
-            addressType = _ref10.addressType;
+    deleteAddress: function deleteAddress(_ref7, _ref8) {
+        var dispatch = _ref7.dispatch,
+            state = _ref7.state,
+            commit = _ref7.commit;
+        var address = _ref8.address,
+            addressType = _ref8.addressType;
 
         return new Promise(function (resolve, reject) {
             var addressIndex = -1;
@@ -17245,10 +17241,10 @@ var actions = {
             });
         });
     },
-    createAddress: function createAddress(_ref11, _ref12) {
-        var commit = _ref11.commit;
-        var address = _ref12.address,
-            addressType = _ref12.addressType;
+    createAddress: function createAddress(_ref9, _ref10) {
+        var commit = _ref9.commit;
+        var address = _ref10.address,
+            addressType = _ref10.addressType;
 
         return new Promise(function (resolve, reject) {
             _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
@@ -17264,13 +17260,13 @@ var actions = {
             });
         });
     },
-    updateAddress: function updateAddress(_ref13, _ref14) {
-        var commit = _ref13.commit;
-        var address = _ref14.address,
-            addressType = _ref14.addressType;
+    updateAddress: function updateAddress(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var address = _ref12.address,
+            addressType = _ref12.addressType;
 
         return new Promise(function (resolve, reject) {
-            _ApiService2.default.put("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
+            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
                 if (addressType === "1") {
                     commit("updateBillingAddress", address);
                 } else if (addressType === "2") {
@@ -17283,13 +17279,13 @@ var actions = {
             });
         });
     },
-    emptyAddressList: function emptyAddressList(_ref15, _ref16) {
+    emptyAddressList: function emptyAddressList(_ref13, _ref14) {
         // TODO remove address and unselect
         // keep -99 for shipping
 
-        var commit = _ref15.commit,
-            dispatch = _ref15.dispatch;
-        var addressType = _ref16.addressType;
+        var commit = _ref13.commit,
+            dispatch = _ref13.dispatch;
+        var addressType = _ref14.addressType;
     }
 };
 
