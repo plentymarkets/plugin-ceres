@@ -85,6 +85,10 @@ button:focus {
 
 .btn {
 
+	&.btn-right {
+		float: right;
+	}
+
 	& .btn-label {
 		&.btn-trans {
 			background: transparent;
