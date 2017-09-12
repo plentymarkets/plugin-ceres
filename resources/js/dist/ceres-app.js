@@ -10988,20 +10988,108 @@ Vue.component("accept-gtc-check", {
 },{}],14:[function(require,module,exports){
 "use strict";
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
 Vue.component("checkout", {
 
-    props: ["template", "checkout"],
+    props: ["template", "initialCheckout"],
+
+    computed: Vuex.mapState({
+        checkout: function checkout(state) {
+            return state.checkout;
+        }
+    }),
 
     created: function created() {
         this.$options.template = this.template;
-
-        this.$store.dispatch("setCheckout", this.checkout);
+        this.$store.dispatch("setCheckout", this.initialCheckout);
+        this.addEventHandler();
     },
 
-    methods: {}
+    methods: {
+        addEventHandler: function addEventHandler() {
+            var _this = this;
+
+            ApiService.listen("CheckoutChanged", function (checkout) {
+                _this.handleCheckoutChangedEvent(checkout.checkout);
+            });
+        },
+        handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
+            if (this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
+                NotificationService.info("TODO Die Liste der Zahlungsarten hat sich geändert.");
+                this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
+            }
+
+            if (this.isEquals(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList, "parcelServicePresetId")) {
+                NotificationService.info("TODO Die Liste der Versandarten hat sich geändert.");
+                this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
+            }
+
+            if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
+                NotificationService.warning("TODO Die von Ihnen ausgewähle Zahlart ist nicht mehr verfügbar.");
+                this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
+            }
+
+            if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
+                NotificationService.warning("TODO Die von Ihnen ausgewähle Versandart ist nicht mehr verfügbar.");
+                this.$store.commit("setShippingProfile", checkout.shippingProfileId);
+            }
+
+            if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
+                this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
+            }
+        },
+        isEquals: function isEquals(oldList, newList, fieldToCompare) {
+            if (oldList.length !== newList.length) {
+                return true;
+            }
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                var _loop = function _loop() {
+                    var oldListItem = _step.value;
+
+                    if (newList.findIndex(function (newListItem) {
+                        return newListItem[fieldToCompare] === oldListItem[fieldToCompare];
+                    }) === -1) {
+                        return {
+                            v: true
+                        };
+                    }
+                };
+
+                for (var _iterator = oldList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var _ret = _loop();
+
+                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
 });
 
-},{}],15:[function(require,module,exports){
+},{"services/ApiService":85,"services/NotificationService":91}],15:[function(require,module,exports){
 "use strict";
 
 Vue.component("payment-provider-select", {
@@ -11401,7 +11489,7 @@ Vue.component("address-select", {
             var _this = this;
 
             ApiService.listen("AfterAccountContactLogout", function () {
-                _this.$store.dispatch("emptyAddressList", { addressType: _this.addressType });
+                _this.$store.commit("resetAddress", _this.addressType);
             });
         },
 
@@ -17158,6 +17246,17 @@ var mutations = {
             state.deliveryAddressList.splice(indexToUpdate, 1);
             state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
         }
+    },
+    resetAddress: function resetAddress(state, addressType) {
+        if (addressType === "1") {
+            state.billingAddress = null;
+            state.billingAddressId = null;
+            state.billingAddressList = [];
+        } else if (addressType === "2") {
+            state.deliveryAddressList = [{ id: -99 }];
+            state.addDeliveryAddress = state.deliveryAddressList[0];
+            state.deliveryAddressId = tate.deliveryAddressList[0].id;
+        }
     }
 };
 
@@ -17278,14 +17377,6 @@ var actions = {
                 reject(error);
             });
         });
-    },
-    emptyAddressList: function emptyAddressList(_ref13, _ref14) {
-        // TODO remove address and unselect
-        // keep -99 for shipping
-
-        var commit = _ref13.commit,
-            dispatch = _ref13.dispatch;
-        var addressType = _ref14.addressType;
     }
 };
 
@@ -17375,9 +17466,9 @@ var mutations = {
             state.shipping.shippingCountryId = shippingCountryId;
         }
     },
-    setShippingProfile: function setShippingProfile(state, shippingProfile) {
-        if (shippingProfile) {
-            state.shipping.shippingProfileId = shippingProfile.parcelServicePresetId;
+    setShippingProfile: function setShippingProfile(state, shippingProfileId) {
+        if (shippingProfileId) {
+            state.shipping.shippingProfileId = shippingProfileId;
         }
     },
     setShippingProfileList: function setShippingProfileList(state, shippingProfileList) {
@@ -17426,9 +17517,7 @@ var actions = {
         var commit = _ref.commit;
 
         commit("setShippingCountryId", checkout.shippingCountryId);
-        commit("setShippingProfile", checkout.shippingProfileList.find(function (profile) {
-            return profile.parcelServicePresetId === checkout.shippingProfileId;
-        }));
+        commit("setShippingProfile", checkout.shippingProfileId);
         commit("setShippingProfileList", checkout.shippingProfileList);
         commit("setMethodOfPaymentList", checkout.paymentDataList);
         commit("setMethodOfPayment", checkout.methodOfPaymentId);
@@ -17452,8 +17541,8 @@ var actions = {
             dispatch = _ref3.dispatch;
 
         return new Promise(function (resolve, reject) {
-            _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.id }).done(function (response) {
-                commit("setShippingProfile", shippingProfile);
+            _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setShippingProfile", shippingProfile.parcelServicePresetId);
                 resolve(response);
             }).fail(function (error) {
                 reject(error);

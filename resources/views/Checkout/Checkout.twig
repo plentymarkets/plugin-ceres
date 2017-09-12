@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <checkout template="#vue-checkout" :checkout="{{ services.checkout.getCheckout() | json_encode() }}"></checkout>
+            <checkout template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}"></checkout>
 
             <div class="row">
                 <!-- ADDRESS SELECT -->

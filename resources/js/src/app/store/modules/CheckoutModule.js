@@ -41,11 +41,11 @@ const mutations =
             }
         },
 
-        setShippingProfile(state, shippingProfile)
+        setShippingProfile(state, shippingProfileId)
         {
-            if (shippingProfile)
+            if (shippingProfileId)
             {
-                state.shipping.shippingProfileId = shippingProfile.parcelServicePresetId;
+                state.shipping.shippingProfileId = shippingProfileId;
             }
         },
 
@@ -119,7 +119,7 @@ const actions =
         setCheckout({commit}, checkout)
         {
             commit("setShippingCountryId", checkout.shippingCountryId);
-            commit("setShippingProfile", checkout.shippingProfileList.find(profile => profile.parcelServicePresetId === checkout.shippingProfileId));
+            commit("setShippingProfile", checkout.shippingProfileId);
             commit("setShippingProfileList", checkout.shippingProfileList);
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
@@ -147,10 +147,10 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.id})
+                ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
                     .done(response =>
                     {
-                        commit("setShippingProfile", shippingProfile);
+                        commit("setShippingProfile", shippingProfile.parcelServicePresetId);
                         resolve(response);
                     })
                     .fail(error =>
