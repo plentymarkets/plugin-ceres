@@ -1,5 +1,6 @@
 const ItemListService = require("services/ItemListService");
 const ResourceService = require("services/ResourceService");
+const ApiService          = require("services/ApiService");
 let _categoryTree = {};
 let _categoryBreadcrumbs = [];
 
@@ -40,6 +41,7 @@ export function renderItems(currentCategory)
  */
 function _handleCurrentCategory(currentCategory)
 {
+    _removeTempDesc();
     _updateItemList(currentCategory);
     _updateHistory(currentCategory);
     _updateBreadcrumbs();
@@ -73,9 +75,29 @@ function _updateHistory(currentCategory)
 
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
+    _updateCategoryTexts(currentCategory);
+}
+
+function _removeTempDesc()
+{
+    const tempDesc = document.querySelector(".category-description");
+
+    if (tempDesc)
+    {
+        tempDesc.innerHTML = "";
+    }
+}
+
+function _updateCategoryTexts(currentCategory)
+{
+    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 
+    _loadOptionalData(currentCategory);
+}
+
+function _loadOptionalData(currentCategory)
+{
     const categoryImage = currentCategory.details[0].imagePath;
     const parallaxImgContainer = document.querySelector(".parallax-img-container");
 
@@ -89,6 +111,20 @@ function _updateHistory(currentCategory)
         {
             parallaxImgContainer.style.removeProperty("background-image");
         }
+    }
+
+    const categoryDescContainer = document.querySelector(".category-description");
+
+    if (categoryDescContainer)
+    {
+        ApiService.get("/rest/io/category/description/" + currentCategory.id)
+        .done(response =>
+        {
+            if (typeof response !== "object")
+            {
+                categoryDescContainer.innerHTML = response;
+            }
+        });
     }
 }
 

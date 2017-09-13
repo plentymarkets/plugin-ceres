@@ -60,7 +60,7 @@
                     <dt v-if="showProperty( 'basket.vat' )">
                         {{ trans("Ceres::Template.basketVAT") }} ${ totalVat.vatValue }%
                     </dt><!--
-                --> <dd v-if="showProperty( 'basket.vat' )">
+                    --><dd v-if="showProperty( 'basket.vat' )">
                         ${ totalVat.vatAmount | currency }
                     </dd>
                 </div>

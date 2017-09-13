@@ -1,5 +1,10 @@
 .categories-list{}
 
+.category-description-parallax {
+    color: #fff;
+    text-shadow: 0 0 0.1em rgba(0,0,0,.75);
+}
+
 .page-infos{
 	display: flex;
     flex-flow: row nowrap;
