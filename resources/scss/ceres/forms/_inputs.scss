@@ -29,6 +29,10 @@ $border-width: 1px;
 	border-radius: $border-radius;
     overflow: hidden;
 
+    &.no-bottom {
+        margin-bottom: 0px; 
+    }
+
   input[type="date"]{
     max-height: 38px;
   }
