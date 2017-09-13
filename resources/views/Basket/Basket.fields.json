@@ -20,5 +20,7 @@
   "images.variation.urlPreview",
   "images.variation.path",
   "properties.*",
-  "filter.isSalable"
+  "filter.isSalable",
+  "attributes.attribute.names.*",
+  "attributes.value.names.*"
 ]

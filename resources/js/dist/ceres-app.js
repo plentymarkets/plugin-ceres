@@ -15944,10 +15944,14 @@ module.exports = function ($) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.renderItems = renderItems;
 exports.getScopeUrl = getScopeUrl;
 var ItemListService = require("services/ItemListService");
 var ResourceService = require("services/ResourceService");
+var ApiService = require("services/ApiService");
 var _categoryTree = {};
 var _categoryBreadcrumbs = [];
 
@@ -15981,6 +15985,7 @@ function renderItems(currentCategory) {
  * @param currentCategory
  */
 function _handleCurrentCategory(currentCategory) {
+    _removeTempDesc();
     _updateItemList(currentCategory);
     _updateHistory(currentCategory);
     _updateBreadcrumbs();
@@ -16011,9 +16016,25 @@ function _updateHistory(currentCategory) {
 
     window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
 
-    document.querySelector("h1").innerHTML = currentCategory.details[0].name;
+    _updateCategoryTexts(currentCategory);
+}
+
+function _removeTempDesc() {
+    var tempDesc = document.querySelector(".category-description");
+
+    if (tempDesc) {
+        tempDesc.innerHTML = "";
+    }
+}
+
+function _updateCategoryTexts(currentCategory) {
+    document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
     document.title = currentCategory.details[0].name + " | " + App.config.shopName;
 
+    _loadOptionalData(currentCategory);
+}
+
+function _loadOptionalData(currentCategory) {
     var categoryImage = currentCategory.details[0].imagePath;
     var parallaxImgContainer = document.querySelector(".parallax-img-container");
 
@@ -16023,6 +16044,16 @@ function _updateHistory(currentCategory) {
         } else {
             parallaxImgContainer.style.removeProperty("background-image");
         }
+    }
+
+    var categoryDescContainer = document.querySelector(".category-description");
+
+    if (categoryDescContainer) {
+        ApiService.get("/rest/io/category/description/" + currentCategory.id).done(function (response) {
+            if ((typeof response === "undefined" ? "undefined" : _typeof(response)) !== "object") {
+                categoryDescContainer.innerHTML = response;
+            }
+        });
     }
 }
 
@@ -16070,7 +16101,7 @@ exports.default = {
     renderItems: renderItems
 };
 
-},{"services/ItemListService":91,"services/ResourceService":94}],89:[function(require,module,exports){
+},{"services/ApiService":87,"services/ItemListService":91,"services/ResourceService":94}],89:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");

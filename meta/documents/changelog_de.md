@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+##v1.4.6 (unknown)
+
+### Hinzugefügt
+
+- Im Warenkorb werden nun die Attribute (wie z.b. Größe) angezeigt.
+
 ## v1.4.5 (2017-09-06)
 
 ### Behoben
