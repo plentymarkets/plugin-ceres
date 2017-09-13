@@ -3,38 +3,45 @@
 {% set gCapture   = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
 
 <script type="x/template" id="vue-login">
+    
     <div class="login-pwd-reset">
 
-        <form id="login-form-${_uid}" class="login-container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="input-unit" data-validate="mail">
-                        <input type="email" name="email" id="txt_email" v-model="username">
-                        <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+        
+            <form id="login-form-${_uid}" class="login-container">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="input-unit" data-validate="mail">
+                                <input type="email" name="email" id="txt_email" v-model="username">
+                                <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            </div>
+                            <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="input-unit" data-validate="text">
+                                <input type="password" name="password" id="txt_password" v-model="password">
+                                <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
+                            </div>
+                            <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
+                        </div>
                     </div>
-                    <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                 </div>
-                <div class="col-xs-12">
-                    <div class="input-unit" data-validate="text">
-                        <input type="password" name="password" id="txt_password" v-model="password">
-                        <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
+                <div class="modal-footer">
+                    <div class="col-xs-12 col-sm-4">
+                        <div>
+                            <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.accForgotPassword") }}?</a>
+                        </div>
                     </div>
-                    <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <div>
-                        <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.accForgotPassword") }}?</a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-8 text-sm-right">
-                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+                    <div class="col-xs-12 col-sm-8 text-sm-right">
+                        {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
-                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>{{ trans("Ceres::Template.accLogin") }}
-                    </button>
+                        <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
+                            <i class="fa fa-user" v-waiting-animation="isDisabled"></i>{{ trans("Ceres::Template.accLogin") }}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+    
 
         <form id="reset-pwd-form-${_uid}" class="reset-pwd-container">
             <div class="alert alert-info alert-dismissible pwd-forgot-info">
