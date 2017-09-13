@@ -1,10 +1,12 @@
 # Release Notes für Ceres
 
-##v1.4.6 (unknown)
+## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
-- Im Warenkorb werden nun die Attribute (wie z.b. Größe) angezeigt.
+- Im Warenkorb werden nun die Attribute (z.B. Größe) angezeigt.
+- In der Kaufabwicklung können nun Auftragsnotizen eingegeben werden.
+- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank"><b>Show category description in category view<b/></a>.
 
 ## v1.4.5 (2017-09-06)
 
