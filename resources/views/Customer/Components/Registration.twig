@@ -1,38 +1,42 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
-	<div class="row" id="registration${_uid}">
+    <div class="modal-body">
+        <div class="row" id="registration${_uid}">
 
-        <div class="col-sm-12">
-            <div class="alert alert-info password-info">
-                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
+            <div class="col-sm-12">
+                <div class="alert alert-info password-info">
+                    <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
+                </div>
             </div>
-        </div>
 
-        <div class="col-sm-12">
-            <div class="input-unit" data-validate="mail">
-                <input type="text" name="email" id="txt_email" v-model="username">
-                <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+            <div class="col-sm-12">
+                <div class="input-unit" data-validate="mail">
+                    <input type="text" name="email" id="txt_email" v-model="username">
+                    <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                </div>
             </div>
-        </div>
 
-        <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordBox" data-validate="password">
-                <input type="password" name="password" id="registration_password_input" v-model="password">
-                <label for="txt_pw">{{ trans("Ceres::Template.accPassword") }}*</label>
+            <div class="col-sm-6" v-if="!guestMode">
+                <div class="input-unit no-bottom" id="passwordBox" data-validate="password">
+                    <input type="password" name="password" id="registration_password_input" v-model="password">
+                    <label for="txt_pw">{{ trans("Ceres::Template.accPassword") }}*</label>
+                </div>
             </div>
-        </div>
 
-        <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordRepeatBox" data-validate="ref">
-                <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
-                <label for="txt_pwrepeat">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
+            <div class="col-sm-6" v-if="!guestMode">
+                <div class="input-unit no-bottom" id="passwordRepeatBox" data-validate="ref">
+                    <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
+                    <label for="txt_pwrepeat">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
+                </div>
             </div>
-        </div>
 
-        <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
-
-        <div class="col-sm-5 offset-sm-7">
-            <button v-waiting-animation-infinite @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ trans("Ceres::Template.accRegister") }}</button>
+            <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
         </div>
+    </div>
+    <div class="modal-footer">
+        <button v-waiting-animation="isDisabled" @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right">
+            <i class="fa fa-user-plus" aria-hidden="true"></i> 
+            {{ trans("Ceres::Template.accRegister") }}
+        </button>
     </div>
 </script>
