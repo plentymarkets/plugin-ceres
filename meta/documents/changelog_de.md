@@ -6,7 +6,7 @@
 
 - Im Warenkorb werden nun die Attribute (z.B. Größe) angezeigt.
 - In der Kaufabwicklung können nun Auftragsnotizen eingegeben werden.
-- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank"><b>Show category description in category view<b/></a>.
+- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank"><b>Show category description in category view</b></a>.
 - Die Suche nach Variantennummern wurde implementiert.
 
 ## v1.4.5 (2017-09-06)
