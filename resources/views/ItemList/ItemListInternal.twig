@@ -1,0 +1,84 @@
+{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
+{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+
+{% set itemLists = {} %}
+
+{% for possibleList in item | keys %}
+    {% if "List" in possibleList %}
+        {% set pos = config("Ceres.item.lists." ~ currentTemplate ~ "." ~ possibleList ~ ".position") %}
+        {% set listToAdd = {(possibleList): pos} %}
+        {% set itemLists = itemLists | merge (listToAdd) %}
+    {% endif %}
+{% endfor %}
+
+{% for itemList in itemLists | sort | keys %}
+    
+    {% set randomIdentifier = random() %}
+
+    {% set listName = config("Ceres.item.lists." ~ currentTemplate ~ "." ~ itemList ~ "." ~ services.sessionStorage.getLang() ~ ".name") %}
+
+    {% set isNameEmpty = listName == 'DE name' or listName == 'EN name' or listName is empty %}
+
+    {% if item[itemList].total > 0 %}
+        <hr>
+
+        <p class="h3">
+            {% if isNameEmpty %}
+                {{ trans("Ceres::Template.itemList" ~ itemList) }}
+            {% else %}
+                {{ listName }}
+            {% endif %}
+        </p>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                {% if item[itemList].total > 4 %}
+                    <div id="list-carousel-{{ randomIdentifier }}" class="list-item-carousel owl-carousel owl-theme owl-single-item">      
+                        {% for itemListItem in item[itemList].documents %}    
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': itemListItem, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <ul id="list-carousel-{{ randomIdentifier }}" class="product-list row grid">
+                        {% for itemListItem in item[itemList].documents %}
+                            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': itemListItem, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if item[itemList].total > 4 %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function()
+                {
+                    $("#list-carousel-{{ randomIdentifier }}").owlCarousel({
+                        autoHeight       : true,
+                        dots             : true,
+                        items            : 4,
+                        lazyLoad         : false,
+                        loop             : false,
+                        margin           : 10,
+                        mouseDrag        : true,
+                        nav              : true,
+                        navClass         : [
+                            "owl-single-item-nav left carousel-control list-control-special",
+                            "owl-single-item-nav right carousel-control list-control-special"
+                        ],
+                        navContainerClass: "",
+                        navText          : [
+                            "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
+                            "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
+                        ],
+                        smartSpeed       : 350,
+                    });
+                });
+            </script>
+        {% endif %}
+
+    {% endif %}
+{% endfor %}
+

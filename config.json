@@ -440,9 +440,23 @@
         "default"           : "true"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.last_seen_number",
-        "label"             : "Last seen: Number of last seen items",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.show_last_seen",
+        "label"             : "Show last seen list",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.LastSeenItemsList.position",
+        "label"             : "Last seen list position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.last_seen_number",
+        "label"             : "Number of last seen items",
         "type"              : "dropdown",
         "possibleValues"    :
         {
@@ -453,21 +467,176 @@
         "default"           : "4"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.cross_selling_type",
-        "label"             : "Cross-selling: Cross-selling relation",
-        "type"              : "dropdown",
-        "possibleValues"    :
-        {
-            "Similar"            : "Similar",
-            "Accessory"          : "Accessory",
-            "ReplacementPart"    : "Replacement part",
-            "Collection"         : "Collection"
-        },
-        "default"           : "Similar"
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.LastSeenItemsList.de.name",
+        "label"             : "Name of last seen (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
     },
     {
-        "tab"       : "Item lists",
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.LastSeenItemsList.en.name",
+        "label"             : "Name of last seen (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.show_tag_list",
+        "label"             : "Show tag list",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.TagItemsList.position",
+        "label"             : "Tag list position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.tag_ids",
+        "label"             : "List of IDs of tags to display in the tag list",
+        "type"              : "text",
+        "default"           : "1,2,3"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.TagItemsList.de.name",
+        "label"             : "Name of tag list (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.TagItemsList.en.name",
+        "label"             : "Name of tag list (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"                                           : "Item lists (SingleItem)",
+        "key"                                           : "item.lists.single_item.show_cross_lists",
+        "label"                                         : "Show cross-selling lists",
+        "type"                                          : "multi_select",
+        "possibleValues"                                :
+        {
+            "item.lists.single_item.cross.similar"           : "Similar",
+            "item.lists.single_item.cross.accessory"         : "Accessory",
+            "item.lists.single_item.cross.replacement"       : "Replacement part",
+            "item.lists.single_item.cross.collection"        : "Collection",
+            "item.lists.single_item.cross.dynamic"           : "Dynamic"
+        },
+        "default"                                       : ""
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.position",
+        "label"             : "Cross-selling list similar position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.de.name",
+        "label"             : "Name of cross-selling similar (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListSimilar.en.name",
+        "label"             : "Name of cross-selling similar (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.position",
+        "label"             : "Cross-selling list accessory position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.de.name",
+        "label"             : "Name of cross-selling accessory (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListAccessory.en.name",
+        "label"             : "Name of cross-selling accessory (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.position",
+        "label"             : "Cross-selling list replacement part position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.de.name",
+        "label"             : "Name of cross-selling replacement part (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListReplacement.en.name",
+        "label"             : "Name of cross-selling replacement part (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.position",
+        "label"             : "Cross-selling list collection position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.de.name",
+        "label"             : "Name of cross-selling collection (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListCollection.en.name",
+        "label"             : "Name of cross-selling collection (EN)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.position",
+        "label"             : "Cross-selling list dynamic position",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.de.name",
+        "label"             : "Name of cross-selling dynamic (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (SingleItem)",
+        "key"               : "item.lists.single_item.CrossSellingItemsListDynamic.en.name",
+        "label"             : "Name of cross-selling dynamic (EN)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"       : "Item lists (container)",
         "key"       : "item.lists.1.list_type",
         "label"     : "First item list",
         "type"      : "dropdown",
@@ -480,28 +649,56 @@
         "default"           : "last_seen"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.1.de.list_name",
-        "label"             : "Name of the first item list (DE)",
-        "type"              : "text",
-        "default"           : "DE name"
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.1.last_seen_number",
+        "label"             : "Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.1.en.list_name",
-        "label"             : "Name of the first item list (EN)",
-        "type"              : "text",
-        "default"           : "EN name"
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.1.cross_selling_type",
+        "label"             : "Cross-selling: Cross-selling relation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "Similar"            : "Similar",
+            "Accessory"          : "Accessory",
+            "ReplacementPart"    : "Replacement part",
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
+        },
+        "default"           : "Similar"
     },
     {
-        "tab"               : "Item lists",
+        "tab"               : "Item lists (container)",
         "key"               : "item.lists.1.tag_ids",
         "label"             : "List of IDs of tags to display in the first item list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
     {
-        "tab"       : "Item lists",
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.1.de.list_name",
+        "label"             : "Name of the first item list (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.1.en.list_name",
+        "label"             : "Name of the first item list (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"       : "Item lists (container)",
         "key"       : "item.lists.2.list_type",
         "label"     : "Second item list",
         "type"      : "dropdown",
@@ -514,28 +711,56 @@
         "default"           : "cross_selling"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.2.de.list_name",
-        "label"             : "Name of the second item list (DE)",
-        "type"              : "text",
-        "default"           : "DE name"
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.2.last_seen_number",
+        "label"             : "Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
     },
     {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.2.en.list_name",
-        "label"             : "Name of the second item list (EN)",
-        "type"              : "text",
-        "default"           : "EN name"
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.2.cross_selling_type",
+        "label"             : "Cross-selling: Cross-selling relation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "Similar"            : "Similar",
+            "Accessory"          : "Accessory",
+            "ReplacementPart"    : "Replacement part",
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
+        },
+        "default"           : "Similar"
     },
     {
-        "tab"               : "Item lists",
+        "tab"               : "Item lists (container)",
         "key"               : "item.lists.2.tag_ids",
         "label"             : "List of IDs of tags to display in the second item list",
         "type"              : "text",
         "default"           : "1,2,3"
     },
     {
-        "tab"       : "Item lists",
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.2.de.list_name",
+        "label"             : "Name of the second item list (DE)",
+        "type"              : "text",
+        "default"           : "DE name"
+    },
+    {
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.2.en.list_name",
+        "label"             : "Name of the second item list (EN)",
+        "type"              : "text",
+        "default"           : "EN name"
+    },
+    {
+        "tab"       : "Item lists (container)",
         "key"       : "item.lists.3.list_type",
         "label"     : "Third item list",
         "type"      : "dropdown",
@@ -548,25 +773,53 @@
         "default"           : "tag_list"
     },
     {
-        "tab"               : "Item lists",
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.3.last_seen_number",
+        "label"             : "Last seen: Number of last seen items",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "4"          : 4,
+            "8"          : 8,
+            "12"         : 12
+        },
+        "default"           : "4"
+    },
+    {
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.3.cross_selling_type",
+        "label"             : "Cross-selling: Cross-selling relation",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "Similar"            : "Similar",
+            "Accessory"          : "Accessory",
+            "ReplacementPart"    : "Replacement part",
+            "Collection"         : "Collection",
+            "Dynamic"            : "Dynamic"
+        },
+        "default"           : "Similar"
+    },
+    {
+        "tab"               : "Item lists (container)",
+        "key"               : "item.lists.3.tag_ids",
+        "label"             : "List of IDs of tags to display in the third item list",
+        "type"              : "text",
+        "default"           : "1,2,3"
+    },
+    {
+        "tab"               : "Item lists (container)",
         "key"               : "item.lists.3.de.list_name",
         "label"             : "Name of the third item list (DE)",
         "type"              : "text",
         "default"           : "DE name"
     },
     {
-        "tab"               : "Item lists",
+        "tab"               : "Item lists (container)",
         "key"               : "item.lists.3.en.list_name",
         "label"             : "Name of the third item list (EN)",
         "type"              : "text",
         "default"           : "EN name"
-    },
-    {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.3.tag_ids",
-        "label"             : "List of IDs of tags to display in the third item list",
-        "type"              : "text",
-        "default"           : "1,2,3"
     },
     {
         "tab"                           : "Shopping cart",

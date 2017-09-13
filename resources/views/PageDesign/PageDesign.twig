@@ -13,12 +13,10 @@
 
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
 
-
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
-    {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
 {% endif %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
