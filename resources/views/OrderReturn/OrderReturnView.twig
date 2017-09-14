@@ -5,9 +5,20 @@
 {% endblock %}
 
 {% block PageBody %}
-	<div class="page-content container-max m-b-3 m-t-1">
 
-		DETLEF
+	{{ component( "Ceres::OrderReturn.Components.OrderReturn" ) }}
+
+	<div class="page-content basket order-return container-max m-b-3 m-t-1">
+
+		<div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h2">Retoure</h1>
+            </div>
+        </div>
+
+        <hr>
+
+		<order-return template="#vue-order-return" :order-data="{{ orderData }}"></order-return>
 
 	</div>
 {% endblock %}

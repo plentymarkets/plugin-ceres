@@ -18,6 +18,7 @@ Vue.component("order-history", {
             countStart: 0,
             countEnd: 0,
             currentOrder: null,
+            isReturnable: false,
             isLoading: true
         };
     },
@@ -32,6 +33,7 @@ Vue.component("order-history", {
         this.itemsPerPage = this.itemsPerPage || 10;
         this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
         this.setOrders(this.orderList);
+        this.checkOrderReturnable();
     },
 
     methods: {
@@ -84,6 +86,11 @@ Vue.component("order-history", {
             }
 
             return "";
+        },
+
+        checkOrderReturnable()
+        {
+            this.isReturnable = true;
         },
 
         showPage(page)
