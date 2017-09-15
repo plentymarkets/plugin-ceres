@@ -78,13 +78,13 @@ const mutations =
             }
         },
 
-        addBillingAddress(state, billingAddress, index)
+        addBillingAddress(state, {billingAddress, addressIndex})
         {
             if (billingAddress)
             {
-                if (index)
+                if (addressIndex)
                 {
-                    state.billingAddressList.splice(index, 0, billingAddress);
+                    state.billingAddressList.splice(addressIndex, 0, billingAddress);
                 }
                 else
                 {
@@ -95,13 +95,13 @@ const mutations =
             }
         },
 
-        addDeliveryAddress(state, deliveryAddress, index)
+        addDeliveryAddress(state, {deliveryAddress, addressIndex})
         {
             if (deliveryAddress)
             {
-                if (index)
+                if (addressIndex)
                 {
-                    state.deliveryAddressList.splice(index, 0, deliveryAddress);
+                    state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
                 }
                 else
                 {
@@ -147,7 +147,7 @@ const mutations =
             else if (addressType === "2")
             {
                 state.deliveryAddressList = [{id: -99}];
-                state.addDeliveryAddress = state.deliveryAddressList[0];
+                state.deliveryAddress = state.deliveryAddressList[0];
                 state.deliveryAddressId = tate.deliveryAddressList[0].id;
             }
         }
@@ -230,11 +230,11 @@ const actions =
                     {
                         if (addressType === "1")
                         {
-                            commit("addBillingAddress", address, addressIndex);
+                            commit("addBillingAddress", {billingAddress: address, addressIndex});
                         }
                         else if (addressType === "2")
                         {
-                            commit("addDeliveryAddress", address, addressIndex);
+                            commit("addDeliveryAddress", {deliveryAddress: address, addressIndex});
                         }
                         reject(error);
                     });
@@ -250,11 +250,11 @@ const actions =
                     {
                         if (addressType === "1")
                         {
-                            commit("addBillingAddress", response);
+                            commit("addBillingAddress", {billingAddress: response});
                         }
                         else if (addressType === "2")
                         {
-                            commit("addDeliveryAddress", response);
+                            commit("addDeliveryAddress", {deliveryAddress: response});
                         }
 
                         resolve(response);
