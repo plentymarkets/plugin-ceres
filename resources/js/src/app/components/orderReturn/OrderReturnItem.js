@@ -9,7 +9,8 @@ Vue.component("order-return-item", {
     data()
 	{
         return {
-            isChecked: false
+            isChecked: false,
+            returnCount: 0
         };
     },
 
@@ -20,6 +21,28 @@ Vue.component("order-return-item", {
 
     methods:
     {
+        validateValue()
+		{
+            if (this.returnCount > this.orderItem.quantity)
+			{
+                this.returnCount = this.orderItem.quantity;
+            }
+            else if (this.returnCount <= 0)
+			{
+                this.returnCount = 1;
+            }
+        },
 
+        updateValue(event)
+		{
+            if (event.currentTarget.checked)
+			{
+                this.returnCount = 1;
+            }
+            else
+			{
+                this.returnCount = 0;
+            }
+        }
     }
 });

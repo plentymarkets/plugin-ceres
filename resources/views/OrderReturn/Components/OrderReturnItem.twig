@@ -3,9 +3,9 @@
 		<div class="col-xs-3 col-sm-2 order-flex">
 			<div class="input-group">
 				<span class="input-group-addon">
-					<input type="checkbox" v-model="isChecked">
+					<input type="checkbox" v-model="isChecked" @change="updateValue($event)">
 				</span>
-				<input type="text" class="form-control" :disabled="!isChecked" placeholder="0">
+				<input type="number" min="1" :max="orderItem.quantity" class="form-control" :disabled="!isChecked" @change="validateValue()" v-model="returnCount" placeholder="0">
 			</div>
 			<div class="max-counter-slash">
 				/
