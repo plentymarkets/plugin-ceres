@@ -1,6 +1,13 @@
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
 	<div class="row" id="registration${_uid}">
+
+        <div class="col-sm-12">
+            <div class="alert alert-info password-info">
+                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
+            </div>
+        </div>
+
         <div class="col-sm-12">
             <div class="input-unit" data-validate="mail">
                 <input type="text" name="email" id="txt_email" v-model="username">
@@ -22,17 +29,10 @@
             </div>
         </div>
 
-        <div class="col-sm-12">
-            <div class="alert alert-info password-info">
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
-            </div>
-        </div>
-
         <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
 
         <div class="col-sm-5 offset-sm-7">
-            <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-block">{{ trans("Ceres::Template.accRegister") }}</button>
+            <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ trans("Ceres::Template.accRegister") }}</button>
         </div>
     </div>
 </script>

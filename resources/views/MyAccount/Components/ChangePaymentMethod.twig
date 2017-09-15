@@ -1,12 +1,39 @@
 <script type="x/template" id="vue-change-payment-method">
 
-    <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
-        {{ trans("Ceres::Template.myAccountChangePayment") }}
-    </button>
+    <!-- MyAccount -->
+    <div class="button-spacer" v-if="currentTemplate == 'tpl.my-account'">
 
-    <div v-if="!changePossible" class="payment-align-center">
-        <h1 class="h2 text-mute font-italic payment-change-text">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</h1>
+        <button v-if="changePossible" class="btn btn-primary btn-block" @click="openPaymentChangeModal()">
+            {{ trans("Ceres::Template.myAccountChangePayment") }}
+        </button>
+
+        <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
+            <div v-if="!changePossible" class="payment-align-center">
+                <div class="alert alert-info cannot-change-payment">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span class="info-badge">{{ trans("Ceres::Template.myAccountChangePaymentNotAllowed") }}</span>
+                </div>
+            </div>
+        </div>
+
     </div>
+    <!-- ./MyAccount -->
+
+    <!-- CONFIRMATION  -->
+    <div class="row top-spacer" v-if="currentTemplate == 'tpl.confirmation'">
+
+        <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.myAccountChangePayment") }}</strong>
+        <a v-if="changePossible" class="payment-link-style" @click="openPaymentChangeModal()">
+            <i class="fa fa-retweet" aria-hidden="true"></i>
+            <span>{{ trans("Ceres::Template.confirmationChangePaymentLink") }}</span>
+        </a>
+
+        <div v-if="paymentStatus != 'fullyPaid'" class="col-xs-6 col-sm-7">
+            <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.confirmationChangePaymentNotPossible") }}</span>
+        </div>
+
+    </div>
+    <!-- ./CONFIRMATION  -->
 
     <!-- CHANGE_PAYMENT_MODAL -->
     <div v-el:change-payment-modal>
@@ -21,13 +48,27 @@
                     </div>
                     <div class="modal-body form-horizontal">
 
+                        <div v-if="showIsSwitchableWarning" class="alert-warning cannot-change-payment switchable-warning">
+                            <div class="warning-triangle">
+                                <i class="fa fa-exclamation-triangle font-size"  aria-hidden="true"></i>
+                            </div>
+                            <p class="warning-text">{{ trans("Ceres::Template.myAccountChangePaymentNotSwitchableWarning") }}</p>
+                        </div>
+
                         <div class="cmp cmp-method-list list m-b-3">
                         <ul class="method-list">
+                            <div class="method-list-item current-payment-text">
+                                <div class="content alert-info current-payment-width">
+                                    {{ trans("Ceres::Template.myAccountCurrentPaymentText") }}
+                                    <span id="current_payment_method_name_${ currentOrder.id }"> ${ currentPaymentMethodName} </span>
+                                </div>
+                            </div>
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" data-id="${paymentProvider.id}">
+
                                     <input
                                             type="radio"
                                             id="paymentMethod${ _uid }${ paymentProvider.id }"
-                                            name="MethodOfPaymentID_${ currentOrder.order.id }"
+                                            name="MethodOfPaymentID_${ currentOrder.id }"
                                             v-model="paymentMethod"
                                             :value="paymentProvider.id"
                                     >
@@ -39,7 +80,7 @@
                                                 </div>
                                             </div>
                                         </div><!--
-                    --><div class="content">
+                                    --><div class="content">
                                             ${ paymentProvider.name }
                                             <small v-if="paymentProvider.sourceUrl" class="pull-xs-right">
                                                 <a href="${ paymentProvider.sourceUrl }" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> details</a>

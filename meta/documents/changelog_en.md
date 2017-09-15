@@ -1,11 +1,49 @@
 # Release Notes for Ceres
 
-## v1.4.3 (unkown)
+## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Attributes (e.g. size) are now displayed in the shopping cart.
+- Order notes can now be entered in the checkout.
+- The description of a category can now be displayed in the category view. Activate the setting <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank"><b>Show category description in category view<b/></a>.
+- The search by variation number has been implemented.
+
+## v1.4.5 (2017-09-06)
 
 ### Fixed
 
-- Item list now gives out the picture with the lowest priority.
+- Due to an error, the variation selection in the single item view didn't work properly. This has been fixed.
+- Due to an error, item data wasn't displayed in the mobile navigation. This has been fixed.
+- Due to an error, the number of items wasn't displayed correctly in the shopping cart preview. This has been fixed.
+
+## v1.4.4 (2017-08-30)
+
+### Added
+
+- A feature was implemented so that customers can reset the password in the online store.
+- When switching categories the `afterCategoryChanged` event is triggered in Ceres which sends the current category as well as all categories.
+- The container `Script.AfterScriptsLoaded` container has been added. Using this container own Vue components can be added, for example and all other frameworks implemented in Ceres can be used.
+- When the customer chooses to change the payment method, the current payment method is displayed.
+- The customer gets a warning when he wants to switch to a payment method from which he cannot switch back anymore.
+
+### Fixed
+
+- The sorting option by price now works correctly.
+- The variation selection dropdown in the single item view now also displays the attributes of the main variation.
+
+### TODO
+
+- The `password-reset` route must be activated in IO in order to use the **Forgot your password?** feature in Ceres.
+
+## v1.4.3 (2017-08-25)
+
+### Fixed
+
 - The title of the search page is now correct when an empty search input is carried out.
+- Item list now gives out the picture with the lowest priority.
+- Fixed an error in MyAccount with the address select.
+- The Script.Loader container was set to his previous position.
 
 ### Changed
 

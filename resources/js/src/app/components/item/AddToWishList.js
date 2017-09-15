@@ -1,3 +1,5 @@
+const NotificationService = require("services/NotificationService");
+
 Vue.component("add-to-wish-list", {
 
     props: [
@@ -49,6 +51,8 @@ Vue.component("add-to-wish-list", {
                 this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(response =>
                 {
                     this.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListAdded);
                 },
                 error =>
                 {
@@ -70,6 +74,8 @@ Vue.component("add-to-wish-list", {
                 this.$store.dispatch("removeWishListItem", {id: parseInt(this.variationId)}).then(response =>
                 {
                     this.isLoading = false;
+
+                    NotificationService.success(Translations.Template.itemWishListRemoved);
                 },
                 error =>
                 {
@@ -82,7 +88,7 @@ Vue.component("add-to-wish-list", {
 
         changeTooltipText()
         {
-            const tooltipText = this.isActive ? "itemRemoveFromWishList" : "itemAddToWishList";
+            const tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
 
             $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
         }

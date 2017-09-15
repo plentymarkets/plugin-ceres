@@ -1,11 +1,49 @@
 # Release Notes für Ceres
 
-## v1.4.3 (unkown)
+## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Im Warenkorb werden nun die Attribute (z.B. Größe) angezeigt.
+- In der Kaufabwicklung können nun Auftragsnotizen eingegeben werden.
+- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank"><b>Show category description in category view<b/></a>.
+- Die Suche nach Variantennummern wurde implementiert.
+
+## v1.4.5 (2017-09-06)
 
 ### Behoben
 
-- Item-Listen geben nun das Bild mit der niedrigsten Position aus.
-- Der Titel der Suchseite ist nun nicht mehr fehlerhaft, wenn man eine leere Eingabe sucht.
+- Durch einen Fehler hat die Variantenauswahl in der Einzelansicht eines Artikels manchmal nicht richtig funktioniert. Dies wurde behoben.
+- Durch einen Fehler wurden Artikeldaten in der mobilen Navigation manchmal nicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde die Artikelanzahl in der Warenkorbvorschau manchmal nicht richtig anzeigt. Dies wurde behoben.
+
+## v1.4.4 (2017-08-30)
+
+### Hinzugefügt
+
+- Es wurde eine Funktion hinzugefügt, damit der Kunde das Passwort zurücksetzen kann.
+- Wenn zwischen den Kategorien gewechselt wird, wird in Ceres ein Event mit dem Namen `afterCategoryChanged` ausgelöst, welches die aktuelle Kategorie sowie alle Kategorien mitschickt.
+- Der Container `Script.AfterScriptsLoaded` wurde hinzugefügt. Mit diesem Container können z.B. eigene Vue-Komponenten eingefügt und auch alle anderen in Ceres eingebundenen Frameworks benutzt werden.
+- Wenn der Kunde die Zahlungsart wechseln möchte, wird ihm die aktuelle Zahlungsart angezeigt.
+- Der Kunde erhält eine Warnmeldung, wenn er auf eine Zahlungsart wechseln möchte, von der aus er nicht mehr wechseln kann.
+
+### Behoben
+
+- Die Sortierung nach Preis funktioniert nun wie erwartet.
+- Die Variantenauswahl in der Einzelansicht eines Artikels zeigt nun auch die Attribute der Hauptvariante mit ein.
+
+### TODO
+
+- Die Route `password-reset` muss in IO aktiviert werden, um die Funktion **Passwort vergessen** in Ceres zu nutzen.
+
+## v1.4.3 (2017-08-25)
+
+### Behoben
+
+- Der Titel der Suchseite wird nun korrekt angezeigt, wenn eine leere Suche ausgeführt wird.
+- In Artikellisten wird nun das Bild mit der niedrigsten Priorität ausgegeben.
+- Im Bereich MyAccount wurde ein Fehler bei der Addressauswahl behoben.
+- Der Script.Loader Container wurde wieder an seine vorherige Position gesetzt.
 
 ### Geändert
 

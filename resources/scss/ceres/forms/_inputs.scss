@@ -10,7 +10,7 @@ $border-width: 1px;
     background-color: #fff;
 
     & > textarea {
-        overflow-y: scroll;
+        overflow-y: auto;
         white-space: normal;
     }
 

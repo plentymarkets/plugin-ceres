@@ -11,7 +11,8 @@ Vue.component("place-order", {
     data()
     {
         return {
-            waiting: false
+            waiting: false,
+            contactWish: {}
         };
     },
 
@@ -22,9 +23,27 @@ Vue.component("place-order", {
     created()
     {
         this.$options.template = this.template;
+        ResourceService.bind("contactWish", this);
     },
 
     methods: {
+        placeOrder()
+        {
+            this.waiting = true;
+
+            if (this.contactWish.contactWishValue && this.contactWish.contactWishValue.length > 0)
+            {
+                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish.contactWishValue}, {supressNotifications: true})
+                    .always(() =>
+                    {
+                        this.preparePayment();
+                    });
+            }
+            else
+            {
+                this.preparePayment();
+            }
+        },
 
         preparePayment()
         {
