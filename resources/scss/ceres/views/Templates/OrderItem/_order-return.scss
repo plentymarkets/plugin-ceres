@@ -84,6 +84,10 @@
 		}
 	}
 
+	input[type='text'] {
+		border-left: 1px solid darkgrey;
+	}
+
 	& .return-button {
 		float: right; 
 		margin-top:30px

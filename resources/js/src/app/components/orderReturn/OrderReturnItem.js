@@ -1,22 +1,21 @@
-Vue.component("order-return", {
+Vue.component("order-return-item", {
 
     props: [
         "orderData",
+        "orderItem",
         "template"
     ],
 
     data()
-    {
+	{
         return {
-            isDisabled: true
+            isChecked: false
         };
     },
 
     created()
-    {
+	{
         this.$options.template = this.template;
-
-        console.log(this.orderData);
     },
 
     methods:
