@@ -7,7 +7,7 @@
 			<order-return-item template="#vue-order-return-item" :order-item="orderItem"></order-return-item>
 		</article>
 
-		<button class="btn btn-primary return-button" :disabled="isDisabled" @click="sendReturnItems()">Senden</button>
+		<button class="btn btn-primary return-button" :disabled="isDisabled || isLoading" @click="sendReturnItems()">Senden</button>
     </div>
 </script>
   

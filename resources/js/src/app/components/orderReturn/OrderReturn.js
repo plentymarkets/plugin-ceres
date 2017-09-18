@@ -1,3 +1,5 @@
+const NotificationService = require("services/NotificationService");
+
 Vue.component("order-return", {
 
     props: [
@@ -8,6 +10,7 @@ Vue.component("order-return", {
     data()
     {
         return {
+            isLoading: false
         };
     },
 
@@ -16,27 +19,29 @@ Vue.component("order-return", {
         this.$options.template = this.template;
 
         this.$store.commit("setOrderReturnData", this.initOrderData);
-
-        console.log(this.orderData);
     },
 
     computed: Vuex.mapState({
         orderData: state => state.orderReturn.orderData,
-        isDisabled: state => state.orderReturn.orderReturnItems.length === 0
+        isDisabled: state => state.orderReturn.orderReturnItemsLength == 0
     }),
 
     methods:
     {
         sendReturnItems()
         {
+            this.isLoading = true;
+
             this.sendOrderReturn().then(
                 response =>
                 {
-                    console.log("done");
+                    NotificationService.success("Artikel wurden erfolgreich zurückgeschickt");
+
+                    window.open("/my-account", "_self");
                 },
                 error =>
                 {
-                    console.log("fail");
+                    this.isLoading = false;
                 });
         },
 

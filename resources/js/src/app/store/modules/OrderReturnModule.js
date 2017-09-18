@@ -3,7 +3,8 @@ import ApiService from "services/ApiService";
 const state =
     {
         orderData: {},
-        orderReturnItems: {}
+        orderReturnItems: {},
+        orderReturnItemsLength: 0
     };
 
 const mutations =
@@ -25,6 +26,8 @@ const mutations =
 				{
                     delete state.orderReturnItems[orderItem.itemVariationId];
                 }
+
+                state.orderReturnItemsLength = Object.keys(state.orderReturnItems).length;
             }
         }
     };
@@ -49,7 +52,7 @@ const actions =
                 }
                 else
                 {
-                    resolve();
+                    reject();
                 }
             });
         }
