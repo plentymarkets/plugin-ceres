@@ -4,10 +4,10 @@
 
 	<div>
 		<article v-for="orderItem in orderData.order.orderItems" class="order-return-item" id="article_${ $index }">
-			<order-return-item template="#vue-order-return-item" :order-item="orderItem" :order-data="orderData"></order-return-item>
+			<order-return-item template="#vue-order-return-item" :order-item="orderItem"></order-return-item>
 		</article>
 
-		<button class="btn btn-primary return-button" :disabled="isDisabled">Senden</button>
+		<button class="btn btn-primary return-button" :disabled="isDisabled" @click="sendReturnItems()">Senden</button>
     </div>
 </script>
   

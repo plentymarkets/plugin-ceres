@@ -1,7 +1,6 @@
 Vue.component("order-return-item", {
 
     props: [
-        "orderData",
         "orderItem",
         "template"
     ],
@@ -19,6 +18,19 @@ Vue.component("order-return-item", {
         this.$options.template = this.template;
     },
 
+    computed:
+    {
+        orderItemImage()
+		{
+            return this.$store.getters.getOrderItemImage(this.orderItem.itemVariationId);
+        },
+
+        orderItemURL()
+		{
+            return this.$store.getters.getOrderItemURL(this.orderItem.itemVariationId);
+        }
+    },
+
     methods:
     {
         validateValue()
@@ -31,6 +43,8 @@ Vue.component("order-return-item", {
 			{
                 this.returnCount = 1;
             }
+
+            this.$store.commit("updateOrderReturnItems", {orderItemQuantity: parseInt(this.returnCount), orderItem: this.orderItem});
         },
 
         updateValue(event)
@@ -43,6 +57,8 @@ Vue.component("order-return-item", {
 			{
                 this.returnCount = 0;
             }
+
+            this.$store.commit("updateOrderReturnItems", {orderItemQuantity: parseInt(this.returnCount), orderItem: this.orderItem});
         }
     }
 });
