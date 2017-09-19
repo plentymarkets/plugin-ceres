@@ -99,11 +99,7 @@
 
                 <div class="base-price text-muted m-y-1">
                         {{ trans("Ceres::Template.itemUnitPrice") }}
-                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultUnitPrice">{{ item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice }}</span> /
-                            
-                        <span v-if="true" class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.content" v-resource-if:currentVariation="documents[0].data.unit.content > 1">{{ item.documents[0].data.unit.content }}</span>
-
-                        <span class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.basePrice">{{ item.documents[0].data.calculatedPrices.formatted.basePrice }}</span>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
