@@ -16,7 +16,7 @@
                 </li>
                 {% set counter = counter + 1 %}
                 {% if counter == maxitems[level]%}
-                    <li class="level{{ level }} bt-mehr"><a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                    <li class="level{{ level }} bt-more"><a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
                 {% endif %}
             {% endif %}
         {% endfor %}

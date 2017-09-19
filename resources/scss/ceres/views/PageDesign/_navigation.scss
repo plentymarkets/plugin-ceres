@@ -293,7 +293,8 @@ nav.navbar.megamenu {
 							&.level1 a { font-weight : bold; }
 							&.level2 a { padding : .2rem 1rem .2rem 1rem; }
 							&.level3 a { padding : .2rem 1rem .2rem 1.5rem; }
-							&.level3.bt-mehr a { font-size : .8em; text-transform: lowercase; }
+							&.level3.bt-more a { font-size : .8em; }
+							&.bt-more a { text-transform: lowercase; }
 						}
 					}
 				}
