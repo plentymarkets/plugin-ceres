@@ -121,6 +121,11 @@ const mutations =
                 // using this "trick" to trigger the address list to render again
                 state.billingAddressList.splice(indexToUpdate, 1);
                 state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
+
+                if (billingAddress.id === state.billingAddressId)
+                {
+                    state.billingAddress = billingAddress;
+                }
             }
         },
 
@@ -133,6 +138,12 @@ const mutations =
                 // using this "trick" to trigger the address list to render again
                 state.deliveryAddressList.splice(indexToUpdate, 1);
                 state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
+
+                if (deliveryAddress.id === state.deliveryAddressId)
+                {
+                    state.deliveryAddress = deliveryAddress;
+                }
+
             }
         },
 

@@ -17870,6 +17870,8 @@ var mutations = {
             // using this "trick" to trigger the address list to render again
             state.billingAddressList.splice(indexToUpdate, 1);
             state.billingAddressList.splice(indexToUpdate, 0, billingAddress);
+            state.billingAddress = billingAddress;
+            state.billingAddressId = billingAddress.id;
         }
     },
     updateDeliveryAddress: function updateDeliveryAddress(state, deliveryAddress) {
@@ -17881,6 +17883,8 @@ var mutations = {
             // using this "trick" to trigger the address list to render again
             state.deliveryAddressList.splice(indexToUpdate, 1);
             state.deliveryAddressList.splice(indexToUpdate, 0, deliveryAddress);
+            state.deliveryAddress = deliveryAddress;
+            state.deliveryAddressId = deliveryAddress.id;
         }
     },
     resetAddress: function resetAddress(state, addressType) {
