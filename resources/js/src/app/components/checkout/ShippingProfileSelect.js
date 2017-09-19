@@ -29,7 +29,6 @@ Vue.component("shipping-profile-select", {
             this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(shippingProfile => shippingProfile.parcelServiceId === shippingProfileId))
                 .then(data =>
                 {
-                    // TODO handle new chekcout object
                     document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.shippingProfileId}));
                 },
                 error =>

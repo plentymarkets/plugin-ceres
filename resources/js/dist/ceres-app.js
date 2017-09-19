@@ -11193,7 +11193,6 @@ Vue.component("payment-provider-select", {
 
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("place-order", {
 
@@ -11314,7 +11313,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":87,"services/NotificationService":93,"services/ResourceService":94}],18:[function(require,module,exports){
+},{"services/ApiService":87,"services/NotificationService":93}],18:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {

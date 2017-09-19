@@ -52,7 +52,6 @@ Vue.component("payment-provider-select", {
             this.$store.dispatch("selectMethodOfPayment", this.methodOfPaymentList.find(methodOfPayment => methodOfPayment.id === newMethodOfPayment.id))
                 .then(data =>
                 {
-                    // TODO handle new chekcout object
                     document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.methodOfPaymentId}));
                 },
                 error =>
