@@ -11,6 +11,7 @@ const state =
             methodOfPaymentId: null,
             methodOfPaymentList: []
         },
+        contactWish: null,
         validation: {
             gtc: {
                 showError: false,
@@ -71,6 +72,11 @@ const mutations =
             {
                 state.payment.methodOfPaymentList = methodOfPaymentList;
             }
+        },
+
+        setContactWish(state, contactWish)
+        {
+            state.contactWish = contactWish;
         },
 
         setPaymentProviderValidator(state, paymentProviderValidator)

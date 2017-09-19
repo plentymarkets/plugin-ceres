@@ -1,21 +1,22 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("contact-wish-input", {
 
     props: [
         "template"
     ],
 
-    data: function()
-    {
-        return {
-            contactWish: ""
-        };
-    },
+    computed: Vuex.mapState({
+        contactWish: state => state.checkout.contactWish
+    }),
 
     created: function()
     {
         this.$options.template = this.template;
-        ResourceService.bind("contactWish", this);
+    },
+
+    methods: {
+        updateContactWish(event)
+        {
+            this.$store.commit("setContactWish", event.srcElement.value);
+        }
     }
 });

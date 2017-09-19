@@ -21,8 +21,6 @@
 
     {{ component( "Ceres::Checkout.Components.Checkout" ) }}
     <div class="page-content checkout container-max">
-        <resource name="contactWish" :data="{ contactWishValue: '' }"></resource>
-
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout|trim is empty %}
             <div class="row m-t-1">

@@ -12,19 +12,18 @@ Vue.component("place-order", {
     data()
     {
         return {
-            waiting: false,
-            contactWish: {}
+            waiting: false
         };
     },
 
     computed: Vuex.mapState({
-        checkoutValidation: state => state.checkout.validation
+        checkoutValidation: state => state.checkout.validation,
+        contactWish: state => state.checkout.contactWish
     }),
 
     created()
     {
         this.$options.template = this.template;
-        ResourceService.bind("contactWish", this);
     },
 
     methods: {
@@ -32,9 +31,9 @@ Vue.component("place-order", {
         {
             this.waiting = true;
 
-            if (this.contactWish.contactWishValue && this.contactWish.contactWishValue.length > 0)
+            if (this.contactWish && this.contactWish.length > 0)
             {
-                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish.contactWishValue}, {supressNotifications: true})
+                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
                     .always(() =>
                     {
                         this.preparePayment();

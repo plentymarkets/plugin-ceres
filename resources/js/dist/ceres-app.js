@@ -11092,25 +11092,28 @@ Vue.component("checkout", {
 },{"services/ApiService":87,"services/NotificationService":93}],15:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("contact-wish-input", {
 
     props: ["template"],
 
-    data: function data() {
-        return {
-            contactWish: ""
-        };
-    },
+    computed: Vuex.mapState({
+        contactWish: function contactWish(state) {
+            return state.checkout.contactWish;
+        }
+    }),
 
     created: function created() {
         this.$options.template = this.template;
-        ResourceService.bind("contactWish", this);
+    },
+
+    methods: {
+        updateContactWish: function updateContactWish(event) {
+            this.$store.commit("setContactWish", event.srcElement.value);
+        }
     }
 });
 
-},{"services/ResourceService":94}],16:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 Vue.component("payment-provider-select", {
@@ -11198,8 +11201,7 @@ Vue.component("place-order", {
 
     data: function data() {
         return {
-            waiting: false,
-            contactWish: {}
+            waiting: false
         };
     },
 
@@ -11207,12 +11209,14 @@ Vue.component("place-order", {
     computed: Vuex.mapState({
         checkoutValidation: function checkoutValidation(state) {
             return state.checkout.validation;
+        },
+        contactWish: function contactWish(state) {
+            return state.checkout.contactWish;
         }
     }),
 
     created: function created() {
         this.$options.template = this.template;
-        ResourceService.bind("contactWish", this);
     },
 
 
@@ -11222,8 +11226,8 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.contactWish.contactWishValue && this.contactWish.contactWishValue.length > 0) {
-                ApiService.post("/rest/io/order/contactWish", { orderContactWish: this.contactWish.contactWishValue }, { supressNotifications: true }).always(function () {
+            if (this.contactWish && this.contactWish.length > 0) {
+                ApiService.post("/rest/io/order/contactWish", { orderContactWish: this.contactWish }, { supressNotifications: true }).always(function () {
                     _this.preparePayment();
                 });
             } else {
@@ -17749,6 +17753,7 @@ var state = {
         methodOfPaymentId: null,
         methodOfPaymentList: []
     },
+    contactWish: null,
     validation: {
         gtc: {
             showError: false,
@@ -17794,6 +17799,9 @@ var mutations = {
         if (Array.isArray(methodOfPaymentList)) {
             state.payment.methodOfPaymentList = methodOfPaymentList;
         }
+    },
+    setContactWish: function setContactWish(state, contactWish) {
+        state.contactWish = contactWish;
     },
     setPaymentProviderValidator: function setPaymentProviderValidator(state, paymentProviderValidator) {
         state.validation.paymentProvider.validate = paymentProviderValidator;
