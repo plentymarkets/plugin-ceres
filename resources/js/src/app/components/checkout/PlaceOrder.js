@@ -1,6 +1,5 @@
 var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("place-order", {
 
