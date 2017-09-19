@@ -11141,29 +11141,6 @@ Vue.component("payment-provider-select", {
     },
 
 
-    watch: {
-        // checkout()
-        // {
-        //  TODO take care in vuex?
-
-        // let paymentExist = false;
-
-        // for (const i in this.checkout.paymentDataList)
-        // {
-        //     if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId)
-        //     {
-        //         paymentExist = true;
-        //     }
-        // }
-
-        // if (!paymentExist)
-        // {
-        //     this.checkout.methodOfPaymentId = 0;
-        //     this.initDefaultPaymentProvider();
-        // }
-        // }
-    },
-
     methods: {
         /**
          * Event when changing the payment provider
@@ -11174,7 +11151,6 @@ Vue.component("payment-provider-select", {
             this.$store.dispatch("selectMethodOfPayment", this.methodOfPaymentList.find(function (methodOfPayment) {
                 return methodOfPayment.id === newMethodOfPayment.id;
             })).then(function (data) {
-                // TODO handle new chekcout object
                 document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.methodOfPaymentId }));
             }, function (error) {
                 console.log("error");
@@ -11351,7 +11327,6 @@ Vue.component("shipping-profile-select", {
             this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
                 return shippingProfile.parcelServiceId === shippingProfileId;
             })).then(function (data) {
-                // TODO handle new chekcout object
                 document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
             }, function (error) {
                 console.log("error");
