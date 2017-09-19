@@ -2,7 +2,7 @@
 {{ component( "Ceres::MyAccount.Components.OrderReturnHistory" ) }}
 
 <script type="x/template" id="vue-history">
-	<div class="page-content history container-max">
+	<div class="page-content basket history container-max">
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item" v-if="orderList.totalsCount > 0">
 				<a class="nav-link active" data-toggle="tab" href="#order-history-tab" role="tab" aria-expanded="true">{{ trans("Ceres::Template.orderHistory") }}</a>
@@ -22,7 +22,12 @@
 				</order-history>
 			</div>
 			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false">
-                <order-return-history :returns-list="returnsList" template="#vue-order-return-history"></order-return-history>
+                <order-return-history template="#vue-order-return-history"
+					:returns-list="returnsList"
+					:items-per-page="ordersPerPage"
+					:show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
+					:show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
+				</order-return-history>
             </div>
 		</div>
 	</div>

@@ -15,6 +15,23 @@
 
 .history-pagination {
     margin-top: 15px;
+
+    & .counter {
+        margin-top: 5px;
+    }
+}
+
+.order-return-history-image-container {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+
+    @include img-contain();
+}
+
+.order-return-history-count {
+    color: $gray;
+    margin-top: 15px;
 }
 
 .switchable-warning
