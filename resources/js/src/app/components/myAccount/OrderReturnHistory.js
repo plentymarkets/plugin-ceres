@@ -1,7 +1,8 @@
 Vue.component("order-return-history", {
 
     props: [
-        "template"
+        "template",
+        "returnsList"
     ],
 
     data()
@@ -13,6 +14,8 @@ Vue.component("order-return-history", {
     created()
 	{
         this.$options.template = this.template;
+
+        console.log(this.returnsList);
     },
 
     methods:

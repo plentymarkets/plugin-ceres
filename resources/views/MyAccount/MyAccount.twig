@@ -109,7 +109,11 @@
     {% endif %}
 
     <!-- HISTORY -->
-    <history template="#vue-history" :ordersPerPage="{{ ordersPerPage }}" :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"></history>
+    <history template="#vue-history" 
+            :orders-per-page="{{ ordersPerPage }}" 
+            :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
+            :returns-list="{{ services.customer.getReturns(1, ordersPerPage) | json_encode() }}">
+    </history>
     <!-- ./HISTORY -->
 
 {% endblock %}

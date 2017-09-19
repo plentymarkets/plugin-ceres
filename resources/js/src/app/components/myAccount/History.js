@@ -3,7 +3,8 @@ Vue.component("history", {
     props: [
         "template",
         "orderList",
-        "ordersPerPage"
+        "ordersPerPage",
+        "returnsList"
     ],
 
     data()
