@@ -224,6 +224,20 @@
         "default"   : "sum"
     },
     {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_levels",
+        "label"         : "Number of levels in megamenu",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "1"         : "inactive",
+            "2"         : "2",
+            "3"         : "3",
+            "4"         : "4"
+        },
+        "default"       : "0"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
