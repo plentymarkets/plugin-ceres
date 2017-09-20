@@ -244,8 +244,8 @@
         "type"          : "dropdown",
         "possibleValues":
         {
-            "1"         : "left",
-            "2"         : "right"
+            "1"         : "Left",
+            "2"         : "Right"
         },
         "default"       : "2"
     },
