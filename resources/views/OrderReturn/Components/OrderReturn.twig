@@ -3,9 +3,7 @@
 	{{ component( "Ceres::OrderReturn.Components.OrderReturnItem" ) }}
 
 	<div>
-		<article v-for="orderItem in orderData.order.orderItems" class="order-return-item" id="article_${ $index }">
-			<order-return-item template="#vue-order-return-item" :order-item="orderItem"></order-return-item>
-		</article>
+		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
 		<button class="btn btn-primary return-button" :disabled="isDisabled || isLoading" @click="sendReturnItems()">Senden</button>
     </div>

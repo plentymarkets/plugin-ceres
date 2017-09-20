@@ -44,7 +44,7 @@ Vue.component("order-return-item", {
                 this.returnCount = 1;
             }
 
-            this.$store.commit("updateOrderReturnItems", {orderItemQuantity: parseInt(this.returnCount), orderItem: this.orderItem});
+            this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
         },
 
         updateValue(event)
@@ -58,7 +58,7 @@ Vue.component("order-return-item", {
                 this.returnCount = 0;
             }
 
-            this.$store.commit("updateOrderReturnItems", {orderItemQuantity: parseInt(this.returnCount), orderItem: this.orderItem});
+            this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
         }
     }
 });

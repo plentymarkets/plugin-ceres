@@ -3,8 +3,7 @@ import ApiService from "services/ApiService";
 const state =
     {
         orderData: {},
-        orderReturnItems: {},
-        orderReturnItemsLength: 0
+        orderReturnItems: []
     };
 
 const mutations =
@@ -14,20 +13,28 @@ const mutations =
             state.orderData = orderData;
         },
 
-        updateOrderReturnItems(state, {orderItemQuantity, orderItem})
+        updateOrderReturnItems(state, {quantity, orderItem})
 		{
-            if (orderItemQuantity <= orderItem.quantity)
+            if (quantity <= orderItem.quantity)
 			{
-                if (orderItemQuantity != 0)
+                const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.itemVariationId === orderItem.itemVariationId);
+
+                if (quantity !== 0)
 				{
-                    state.orderReturnItems[orderItem.itemVariationId] = orderItemQuantity;
+                    if (orderItemIndex === -1)
+                    {
+                        state.orderReturnItems.push({quantity, orderItem});
+                    }
+                    else
+                    {
+                        state.orderReturnItems.splice(orderItemIndex, 1);
+                        state.orderReturnItems.splice(orderItemIndex, 0, {quantity, orderItem});
+                    }
                 }
                 else
 				{
-                    delete state.orderReturnItems[orderItem.itemVariationId];
+                    state.orderReturnItems.splice(orderItemIndex, 1);
                 }
-
-                state.orderReturnItemsLength = Object.keys(state.orderReturnItems).length;
             }
         }
     };
@@ -38,9 +45,16 @@ const actions =
 		{
             return new Promise((resolve, reject) =>
             {
-                if (!$.isEmptyObject(state.orderReturnItems))
+                if (state.orderReturnItems.length > 0)
                 {
-                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds: state.orderReturnItems})
+                    const variationIds = {};
+
+                    for (const index in state.orderReturnItems)
+                    {
+                        variationIds[state.orderReturnItems[index].quantity] = state.orderReturnItems[index].itemVariationId;
+                    }
+
+                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds})
                         .done(data =>
                         {
                             resolve();
