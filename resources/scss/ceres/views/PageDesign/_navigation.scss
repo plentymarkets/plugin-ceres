@@ -278,27 +278,36 @@ nav.navbar.megamenu {
 				>li {
 					position : static;
 
-					>ul { 
-						align-content 	: flex-end;
-						align-items 	: flex-end;
-						background 		: white !important;
-						display   		: flex;
-						flex-direction 	: column;
-						flex-wrap 		: wrap; 
-						max-height 		: 340px; 
-						min-height 		: 340px; 
-						overflow 		: hidden;
-						padding 		: 1rem;
-						width  	  		: 100%;
+					&:hover .navDropdown_wrapper { display: flex; }
 
-						>li { 
-							flex 	  : 0 1 auto;
-							max-width : 25%; 
-							min-width : 20%;
-							width 	  : 25%;
+					.navDropdown_wrapper {
+						display 	: none;
+						left 		: 0;
+						max-height	: 340px;
+						overflow 	: hidden;
+						position	: absolute;
+						width 		: 100%;
 
-							&.level1>a { font-weight : bold; color : $megamenu-color-top; }
-							ul { background: white; }
+						>ul {
+							align-items 	: flex-end; 
+							background 		: white;
+							display 		: flex;
+							flex-direction 	: column;
+							flex-wrap 		: wrap;
+							width 			: 100%;
+
+							>li {
+								flex 		: 0 1 auto;
+								max-width 	: 25%;
+								min-width 	: 20%;
+								&.level1>a { font-weight : bold; color : $megamenu-color-top; }
+								.level2>a { padding : .2rem 1rem!important; }
+								.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
+								.level3.bt-more>a { font-size : .8em; }
+								.bt-more>a { text-transform: lowercase; }
+							}
+
+							ul { background-color : white; }
 							a {
 								background : white;
 								color : $megamenu-color-bottom;
@@ -309,10 +318,6 @@ nav.navbar.megamenu {
 									color 		: white;
 								}
 							}
-							.level2>a { padding : .2rem 1rem!important; }
-							.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
-							.level3.bt-more>a { font-size : .8em; }
-							.bt-more>a { text-transform: lowercase; }
 						}
 					}
 				}
