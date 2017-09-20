@@ -9,9 +9,11 @@
                     {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
                     <a href="{{ newScope }}" v-render-category="{{ child }}">{{ child.details[0].name }}</a>
                     {% if child.children %}
-                        {% set level = level + 1 %}
-                        {{ childlist.get_children(child, newScope, level) }}
-                        {% set level = level - 1 %}
+                        {% if level == 2 %}<ul>{% endif %}
+                            {% set level = level + 1 %}
+                            {{ childlist.get_children(child, newScope, level) }}
+                            {% set level = level - 1 %}
+                        {% if level == 2 %}</ul>{% endif %}
                     {% endif %}
                 </li>
                 {% set counter = counter + 1 %}
