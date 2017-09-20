@@ -23,7 +23,7 @@ Vue.component("order-return", {
 
     computed: Vuex.mapState({
         orderData: state => state.orderReturn.orderData,
-        isDisabled: state => state.orderReturn.orderReturnItemsLength == 0
+        isDisabled: state => state.orderReturn.orderReturnItems.length === 0
     }),
 
     methods:
