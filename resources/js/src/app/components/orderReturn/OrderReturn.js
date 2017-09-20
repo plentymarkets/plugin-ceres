@@ -35,7 +35,7 @@ Vue.component("order-return", {
             this.sendOrderReturn().then(
                 response =>
                 {
-                    NotificationService.success("Artikel wurden erfolgreich zurückgeschickt");
+                    NotificationService.success(Translations.Template.myAccountReturnSuccess);
 
                     window.open("/my-account", "_self");
                 },

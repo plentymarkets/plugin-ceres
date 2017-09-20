@@ -127,7 +127,7 @@
                                     <div class="col-xs-12 col-md-4">
                                         <div class="payment-change-box">
                                             <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
-                                            <a class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}" :disabled="!isReturnable">Artikel zurückgeben</a>
+                                            <a class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}" :disabled="!isReturnable">{{ trans("Ceres::Template.myAccountReturnSendBack") }}</a>
                                             <change-payment-method  template="#vue-change-payment-method"
                                                                     :current-order="{{ entry.order | json_encode() }}"
                                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, entry.order.id) | json_encode() }}"
