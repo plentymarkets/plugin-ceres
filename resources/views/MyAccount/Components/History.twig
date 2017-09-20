@@ -2,7 +2,7 @@
 {{ component( "Ceres::MyAccount.Components.OrderReturnHistory" ) }}
 
 <script type="x/template" id="vue-history">
-	<div class="page-content basket history container-max">
+	<div class="page-content basket history container-max" v-if="orderList.totalsCount > 0 || returnsList.totalsCount > 0">
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item" v-if="orderList.totalsCount > 0">
 				<a class="nav-link active" data-toggle="tab" href="#order-history-tab" role="tab" aria-expanded="true">{{ trans("Ceres::Template.orderHistory") }}</a>
