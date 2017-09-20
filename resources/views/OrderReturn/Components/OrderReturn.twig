@@ -5,7 +5,7 @@
 	<div>
 		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
-		<button class="btn btn-primary return-button" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">Senden</button>
+		<button class="btn btn-primary return-button" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">{{ trans("Ceres::Template.myAccountReturnTrigger") }}</button>
 
 		{# confirmation modal #}
 		<div class="modal fade" v-el:order-return-confirmation tabindex="-1" role="dialog">
