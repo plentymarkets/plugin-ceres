@@ -21,13 +21,15 @@
 {# <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title> #}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+    <!-- <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css"> -->
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
 
 <!-- Extend the existing style with a template -->
 {{ LayoutContainer.show("Ceres::Template.Style") }}
+
+<link rel="stylesheet" href="https://www.frontend-studios.de/getzlaw/ceres.css">
 
 <script>
     App = {
