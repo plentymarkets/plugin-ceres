@@ -51,7 +51,7 @@ const actions =
 
                     for (const index in state.orderReturnItems)
                     {
-                        variationIds[state.orderReturnItems[index].itemVariationId] = state.orderReturnItems[index].quantity;
+                        variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
                     ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds})
