@@ -43,6 +43,10 @@
                     <span class="hidden-lg-up nav-direction" data-toggle="collapse" href="#navDropdown{{ counter }}" aria-expanded="false">
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
+                    
+                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+                    <div class="navDropdown_wrapper">
+                    {% endif %}
 
                     <ul data-level="1" id="navDropdown{{ counter }}" class="collapse"{% if config('Ceres.header.megamenu_align') == "1" %} style="-ms-flex-line-pack: start;align-content: flex-start;-webkit-box-align: start;-ms-flex-align: start;align-items:flex-start;"{% endif %}>
 
@@ -58,10 +62,10 @@
                         {% else %}
                             {{ navbar.get_children(category, currentScopeUrl, 1) }}
                         {% endif %}
-
                     </ul>
-
-                    
+                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+                    </div>
+                    {% endif %}
                 </li>
 
             {% else %}
