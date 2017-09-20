@@ -280,7 +280,6 @@ nav.navbar.megamenu {
 
 					>ul { 
 						align-content 	: flex-end;
-						align-items 	: flex-end;
 						background 		: white !important;
 						display   		: flex;
 						flex-direction 	: column;
@@ -296,24 +295,22 @@ nav.navbar.megamenu {
 							min-width : 20%;
 							width 	  : 25%;
 
-							ul { background: white;}
+							&.level1>a { font-weight : bold; color : $megamenu-color-top; }
+							ul { background: white; }
+							a {
+								background : white;
+								color : $megamenu-color-bottom;
+								padding : .4rem 1rem;
 
-							a { padding : .4rem 1rem!important; color : $megamenu-color-bottom; }
-							&.level1 a { font-weight : bold; color : $megamenu-color-top; }
-							&.level2 {
-								>a { padding : .2rem 1rem!important; }
-								>.level3 a { padding : .2rem 1rem .2rem 2.5rem !important; }
-								>.level3.bt-more a { font-size : .8em; }
-								>.bt-more a { text-transform: lowercase; }
-								&:hover {
-									background : white !important;
-									>a { color : white; background-color : $brand-primary; }
+								&:hover{ 
+									background 	: $brand-primary; 
+									color 		: white;
 								}
 							}
-							&:hover {
-								background : white !important;
-								>a { color : white; background-color : $brand-primary; }
-							}
+							.level2>a { padding : .2rem 1rem!important; }
+							.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
+							.level3.bt-more>a { font-size : .8em; }
+							.bt-more>a { text-transform: lowercase; }
 						}
 					}
 				}
