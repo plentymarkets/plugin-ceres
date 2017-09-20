@@ -44,7 +44,7 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
 
-                    <ul data-level="1" id="navDropdown{{ counter }}" class="collapse"{% if config('Ceres.header.megamenu_align') == "1" %} style="-ms-flex-line-pack: start;align-content: flex-start;"{% endif %}>
+                    <ul data-level="1" id="navDropdown{{ counter }}" class="collapse"{% if config('Ceres.header.megamenu_align') == "1" %} style="-ms-flex-line-pack: start;align-content: flex-start;-webkit-box-align: start;-ms-flex-align: start;align-items:flex-start;"{% endif %}>
 
                         {% set counter = counter + 1 %}
                         {% if config('Ceres.header.megamenu_levels')=="1" %}
