@@ -66,6 +66,12 @@
                                 </div>
                             </a>
                         </div>
+
+                        <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
+                            <span>${ itemData.unit.content }</span>
+                            <span>${ itemData.unit.names.name }</span> |
+                            ${ itemData.calculatedPrices.formatted.basePrice }
+                        </div>
                     </div>
                     <add-to-basket template="#vue-add-to-basket" :item="itemData" :show-quantity="false" :item-url="itemData | itemURL"></add-to-basket>
                     <span class="vat small text-muted">

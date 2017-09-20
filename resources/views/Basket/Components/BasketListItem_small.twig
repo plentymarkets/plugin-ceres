@@ -28,7 +28,7 @@
         </a>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
 
         <div class="item-total-price">
@@ -38,6 +38,12 @@
         <div v-for="attribute in basketItem.variation.data.attributes">
             <strong>${ attribute.attribute.names.name }</strong>:
             <span>${ attribute.value.names.name }</span>
+        </div>
+
+        <div v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1)">
+            <strong>{{ trans("Ceres::Template.itemContent") }}:</strong>
+            <br>
+            <span>${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }</span>
         </div>
 
         <div v-for="property in basketItem.basketItemOrderParams">
