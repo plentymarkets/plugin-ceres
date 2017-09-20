@@ -154,7 +154,7 @@ var ResourceService = require("services/ResourceService");
         {
             "checkout.shippingCountryId": function(newVal, oldVal)
             {
-                if(newVal !== oldVal)
+                if (newVal !== oldVal)
                 {
                     document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", {detail: newVal}));
                 }
