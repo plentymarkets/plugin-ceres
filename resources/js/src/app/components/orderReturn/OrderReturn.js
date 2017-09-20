@@ -23,11 +23,17 @@ Vue.component("order-return", {
 
     computed: Vuex.mapState({
         orderData: state => state.orderReturn.orderData,
+        orderReturnItems: state => state.orderReturn.orderReturnItems,
         isDisabled: state => state.orderReturn.orderReturnItems.length === 0
     }),
 
     methods:
     {
+        showConfirmationModal()
+        {
+            $(this.$els.orderReturnConfirmation).modal("show");
+        },
+
         sendReturnItems()
         {
             this.isLoading = true;
@@ -38,10 +44,12 @@ Vue.component("order-return", {
                     NotificationService.success("Artikel wurden erfolgreich zurückgeschickt");
 
                     window.open("/my-account", "_self");
+                    $(this.$els.orderReturnConfirmation).modal("hide");
                 },
                 error =>
                 {
                     this.isLoading = false;
+                    $(this.$els.orderReturnConfirmation).modal("hide");
                 });
         },
 
