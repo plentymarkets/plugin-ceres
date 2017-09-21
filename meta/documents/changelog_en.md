@@ -1,5 +1,14 @@
 # Release Notes for Ceres
 
+## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Attributes (e.g. size) are now displayed in the shopping cart.
+- Order notes can now be entered in the checkout.
+- The description of a category can now be displayed in the category view. Activate the setting <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank"><b>Show category description in category view<b/></a>.
+- The search by variation number has been implemented.
+
 ## v1.4.5 (2017-09-06)
 
 ### Fixed
