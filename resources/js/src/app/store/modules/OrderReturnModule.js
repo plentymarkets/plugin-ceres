@@ -17,7 +17,7 @@ const mutations =
 		{
             if (quantity <= orderItem.quantity)
 			{
-                const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.itemVariationId === orderItem.itemVariationId);
+                const orderItemIndex = state.orderReturnItems.findIndex(entry => entry.orderItem.itemVariationId === orderItem.itemVariationId);
 
                 if (quantity !== 0)
 				{
