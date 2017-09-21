@@ -1,12 +1,24 @@
 # Release Notes for Ceres
 
+## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The `afterBasketItemRemoved` event has been added. This event will be triggered after removing an item from the shopping cart.
+- The `afterBasketItemQuantityUpdated` event has been added. This event will be triggered after updating the quantity of items in the shopping cart.
+- The `afterShippingCountryChanged` event has been added. This event will be triggered after changing the shipping country in the checkout.
+
+### Fixed
+
+- Due to an error the unit price wasn’t displayed correctly. This has been fixed.
+
 ## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 
 - Attributes (e.g. size) are now displayed in the shopping cart.
 - Order notes can now be entered in the checkout.
-- The description of a category can now be displayed in the category view. Activate the setting <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank"><b>Show category description in category view<b/></a>.
+- The description of a category can now be displayed in the category view. Activate the setting <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank"><b>Show category description in category view</b></a>.
 - The search by variation number has been implemented.
 
 ## v1.4.5 (2017-09-06)
