@@ -14741,7 +14741,7 @@ Vue.component("order-return-history", {
                 }
             }
 
-            return "0";
+            return "-";
         }
     }
 });
