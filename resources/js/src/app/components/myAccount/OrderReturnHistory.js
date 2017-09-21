@@ -33,5 +33,17 @@ Vue.component("order-return-history", {
 
     methods:
     {
+        getOriginOrderId(order)
+        {
+            for (const orderRef of order.orderReferences)
+            {
+                if (orderRef.referenceType === "parent")
+                {
+                    return orderRef.referenceOrderId;
+                }
+            }
+
+            return "0";
+        }
     }
 });

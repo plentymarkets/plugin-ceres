@@ -21,6 +21,12 @@
     }
 }
 
+.gradient-hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+}
+
 .order-return-history-image-container {
     max-width: 100%;
     width: 100%;

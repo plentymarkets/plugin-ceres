@@ -81,6 +81,10 @@
 											<strong>{{ trans("Ceres::Template.myAccountReturnId") }}: </strong>
 											<span>${ entry.order.id }</span>
 										</div>
+										<div class="col-md-2">
+											<strong>Auftrags-ID: </strong>
+											<span>${ getOriginOrderId(entry.order) }</span>
+										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.orderDate") }}: </strong>
 											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
@@ -90,6 +94,7 @@
 											<span>${ entry.paymentMethodName }</span>
 										</div>
 									</div>
+									<hr class="gradient-hr">
 								</div>
 							</div>
 
