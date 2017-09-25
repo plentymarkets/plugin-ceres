@@ -2,8 +2,8 @@
 
 const state =
     {
-        activeShippingCountries: [],
-        activeShopLanguageList: [],
+        shippingCountries: [],
+        shopLanguageList: [],
         shippingCountryId: null,
         shopLanguage: null,
         countryFlagPrefix: null
@@ -11,14 +11,14 @@ const state =
 
 const mutations =
     {
-        setActiveShippingCountries(state, activeShippingCountries)
+        setShippingCountries(state, shippingCountries)
         {
-            state.activeShippingCountries = activeShippingCountries;
+            state.shippingCountries = shippingCountries;
         },
 
-        setActiveShopLanguageList(state, activeShopLanguageList)
+        setShopLanguageList(state, shopLanguageList)
         {
-            state.activeShopLanguageList = activeShopLanguageList;
+            state.shopLanguageList = shopLanguageList;
         },
 
         setShippingCountryId(state, shippingCountryId)
@@ -46,8 +46,8 @@ const actions =
     {
         initLocalization({commit}, {localizationData, countryFlagPrefix})
         {
-            commit("setActiveShippingCountries", localizationData.activeShippingCountries);
-            commit("setActiveShopLanguageList", localizationData.activeShopLanguageList);
+            commit("setShippingCountries", localizationData.activeShippingCountries);
+            commit("setShopLanguageList", localizationData.activeShopLanguageList);
             commit("setShippingCountryId", localizationData.currentShippingCountryId);
             commit("setShopLanguage", localizationData.shopLanguage);
             commit("setCountryFlagPrefix", countryFlagPrefix);
@@ -80,9 +80,9 @@ const getters =
         {
             const languageList = [];
 
-            for (const index in sate.activeShopLanguageList)
+            for (const index in sate.shopLanguageList)
             {
-                const languageKey = sate.activeShopLanguageList[index];
+                const languageKey = sate.shopLanguageList[index];
                 const languageName = Translations.Template[languageKey];
                 // TODO get css class from config
                 const language =
