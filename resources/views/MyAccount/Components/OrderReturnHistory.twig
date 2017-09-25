@@ -5,67 +5,21 @@
 				<!-- RETURN PAGINATION -->
                 <div class="clearfix history-pagination" v-if="returnsList.totalsCount > itemsPerPage">
                     <div class="pull-xs-left counter">
-                        {{ trans("Ceres::Template.orderShow", {"countStart": "${ countStart }", "countEnd": "${ countEnd }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
+                        {{ trans("Ceres::Template.orderShow", {"countStart": "${ returnsList.firstOnPage }", "countEnd": "${ returnsList.lastOnPage }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
                     </div>
 
-                    <nav class="cmp cmp-paginator row pull-xs-right text-xs-center">
-                        <ul class="pagination col-xs-12 m-y-0">
+					{% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}
 
-                            <!-- PREV LINK -->
-                            <li class="page-item" :class="{disabled: page == 1}">
-                                <button class="page-link" @click="showPage(page-1)">&laquo;</button>
-                            </li>
-                            <!-- ./PREV LINK -->
-
-                            <!-- FIRST PAGE LINK -->
-                            <li class="page-item" v-if="page > 2 && showFirstPage == true">
-                                <button class="page-link" @click="showPage(1)">1</button>
-                            </li>
-                            <li class="page-item page-link" v-if="page > 2 && showFirstPage == true">...</li>
-                            <!-- ./FIRST PAGE LINK -->
-
-                            <!-- PAGINATION -->
-                            <li class="page-item" v-if="returnsList.isLastPage && page > 2">
-                                <button class="page-link" @click="showPage(page-2)">${ page - 2 }</button>
-                            </li>
-
-                            <li class="page-item" v-if="page > 1">
-                                <button class="page-link" @click="showPage(page-1)">${ page - 1 }</button>
-                            </li>
-
-                            <li class="page-item active">
-                                <span class="page-link">${ page }</span>
-                            </li>
-
-                            <li class="page-item" v-if="!returnsList.isLastPage">
-                                <button class="page-link" @click="showPage(page+1)">${ page + 1 }</button>
-                            </li>
-
-                            <li class="page-item" v-if="page == 1 && page+2 <= pageMax">
-                                <button class="page-link" @click="showPage(page+2)">${ page + 2 }</button>
-                            </li>
-                            <!-- ./PAGINATION -->
-
-                            <!-- LAST PAGE LINK -->
-                            <li class="page-item page-link" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">...</li>
-                            <li class="page-item" v-if="pageMax > 3 && page < pageMax-1 && showLastPage">
-                                <button class="page-link" @click="showPage(pageMax)">${ pageMax }</button>
-                            </li>
-                            <!-- ./LAST PAGE LINK -->
-
-                            <!-- NEXT LINK -->
-                            <li class="page-item" :class="{disabled: returnsList.isLastPage}">
-                                <button class="page-link" @click="showPage(page+1)">&raquo;</button>
-                            </li>
-                            <!-- ./NEXT LINK -->
-                        </ul>
-                    </nav>
                 </div>
                 <!-- ./RETURN PAGINATION -->
 
 				<hr>
 
-				<div class="order-list">
+				<div :class="{ 'loading': waiting }">
+					{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+				<div>
+
+				<div v-if="!waiting" class="order-list">
 					<article class="cmp cmp-order-item" v-for="entry in returnsList.entries">
 
 						<div class="item-details small">
