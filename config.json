@@ -1005,7 +1005,7 @@
         "key"               : "my_account.order_return_initial_status",
         "label"             : "Status id for initial return",
         "type"              : "text",
-        "default"           : "8"
+        "default"           : "9"
     },
     {
         "tab"               : "Checkout and My account",
