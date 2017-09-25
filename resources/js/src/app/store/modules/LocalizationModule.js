@@ -1,8 +1,10 @@
+// import ApiService from "services/ApiService";
+
 const state =
     {
         activeShippingCountries: [],
         activeShopLanguageList: [],
-        currentShippingCountryId: null,
+        shippingCountryId: null,
         shopLanguage: null,
         countryFlagPrefix: null
     };
@@ -19,9 +21,14 @@ const mutations =
             state.activeShopLanguageList = activeShopLanguageList;
         },
 
-        setCurrentShippingCountryId(state, currentShippingCountryId)
+        setShippingCountryId(state, shippingCountryId)
         {
-            state.currentShippingCountryId = currentShippingCountryId;
+            if (shippingCountryId !== state.shippingCountryId)
+            {
+                document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", {detail: shippingCountryId}));
+            }
+
+            state.shippingCountryId = shippingCountryId;
         },
 
         setShopLanguage(state, shopLanguage)
@@ -41,9 +48,29 @@ const actions =
         {
             commit("setActiveShippingCountries", localizationData.activeShippingCountries);
             commit("setActiveShopLanguageList", localizationData.activeShopLanguageList);
-            commit("setCurrentShippingCountryId", localizationData.currentShippingCountryId);
+            commit("setShippingCountryId", localizationData.currentShippingCountryId);
             commit("setShopLanguage", localizationData.shopLanguage);
             commit("setCountryFlagPrefix", countryFlagPrefix);
+        },
+
+        selectShippingCountry({commit, state}, shippingCountryId)
+        {
+            return new Promise((resolve, reject) =>
+            {
+                // const oldShippingCountryId = state.shippingCountryId;
+
+                commit("setShippingCountryId", shippingCountryId);
+                // ApiService.post("TODO", {TODO})
+                //     .done(data =>
+                //     {
+                //         resolve(data);
+                //     })
+                //     .fail(error =>
+                //     {
+                //         commit("removeWishListId", oldShippingCountryId);
+                //         reject(error);
+                //     });
+            });
         }
     };
 
