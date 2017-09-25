@@ -11152,9 +11152,7 @@ Vue.component("payment-provider-select", {
         onPaymentProviderChange: function onPaymentProviderChange(newMethodOfPayment) {
             var _this = this;
 
-            this.$store.dispatch("selectMethodOfPayment", this.methodOfPaymentList.find(function (methodOfPayment) {
-                return methodOfPayment.id === newMethodOfPayment.id;
-            })).then(function (data) {
+            this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id).then(function (data) {
                 document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", { detail: _this.methodOfPaymentId }));
             }, function (error) {
                 console.log("error");
@@ -11287,19 +11285,8 @@ Vue.component("place-order", {
             } else {
                 $modalBody.html(content);
             }
-<<<<<<< HEAD
 
             $modal.modal("show");
-=======
-        },
-
-        watch: {
-            "checkout.shippingCountryId": function checkoutShippingCountryId(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: newVal }));
-                }
-            }
->>>>>>> development
         }
     }
 });
@@ -17767,6 +17754,7 @@ var mutations = {
     setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
         if (shippingCountryId) {
             state.shipping.shippingCountryId = shippingCountryId;
+            document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: shippingCountryId }));
         }
     },
     setShippingProfile: function setShippingProfile(state, shippingProfileId) {
@@ -17828,15 +17816,19 @@ var actions = {
         commit("setMethodOfPaymentList", checkout.paymentDataList);
         commit("setMethodOfPayment", checkout.methodOfPaymentId);
     },
-    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPayment) {
+    selectMethodOfPayment: function selectMethodOfPayment(_ref2, methodOfPaymentId) {
         var commit = _ref2.commit,
             dispatch = _ref2.dispatch;
 
         return new Promise(function (resolve, reject) {
-            _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPayment.id }).done(function (response) {
-                commit("setMethodOfPayment", methodOfPayment);
+            var oldMethodOfPayment = state.payment.methodOfPaymentId;
+
+            commit("setMethodOfPayment", methodOfPaymentId);
+
+            _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId }).done(function (response) {
                 resolve(response);
             }).fail(function (error) {
+                commit("setMethodOfPayment", oldMethodOfPayment);
                 reject(error);
             });
             resolve();
@@ -17847,10 +17839,14 @@ var actions = {
             dispatch = _ref3.dispatch;
 
         return new Promise(function (resolve, reject) {
+            var oldShippingProfile = state.shipping.shippingProfileId;
+
+            commit("setShippingProfile", shippingProfile.parcelServicePresetId);
+
             _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
-                commit("setShippingProfile", shippingProfile.parcelServicePresetId);
                 resolve(response);
             }).fail(function (error) {
+                commit("setShippingProfile", oldShippingProfile);
                 reject(error);
             });
             resolve();
