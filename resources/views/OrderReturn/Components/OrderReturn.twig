@@ -5,7 +5,8 @@
 	<div>
 		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
-		<button class="btn btn-primary return-button" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">{{ trans("Ceres::Template.myAccountReturnTrigger") }}</button>
+		<button class="btn btn-secondary m-t-2" @click="selectAllItems()">{{ trans("Ceres::Template.generalSelectAll") }}</button>
+		<button class="btn btn-primary btn-right m-t-2" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">{{ trans("Ceres::Template.myAccountReturnTrigger") }}</button>
 
 		{# confirmation modal #}
 		<div class="modal fade" v-el:order-return-confirmation tabindex="-1" role="dialog">
@@ -13,7 +14,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title">Artikel zurücksenden</h3>
+						<h3 class="modal-title">{{ trans("Ceres::Template.myAccountReturnSendBack") }}</h3>
 					</div>
 					<div class="modal-body">
 						<ul>
@@ -25,10 +26,10 @@
 					<div class="modal-footer">
 						<div class="row">
 							 <div class="col-sm-3 offset-sm-6">
-								<button type="button" data-dismiss="modal" class="btn btn-primary btn-block pull-xs-right btn-medium">Abbrechen</button>		
+								<button type="button" data-dismiss="modal" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalCancel") }}</button>		
 							</div>
 							 <div class="col-sm-3">
-								<button @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">Bestätigen</button>
+								<button @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalConfirm") }}</button>
 							</div>
 						</div>
 					</div>

@@ -87,11 +87,6 @@
 	input[type='number'] {
 		border-left: 1px solid darkgrey;
 	}
-
-	& .return-button {
-		float: right; 
-		margin-top:30px
-	}
 	
 	@include media-breakpoint-up(md) {
 		.order-return-name {

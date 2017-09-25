@@ -47,11 +47,18 @@ Vue.component("order-return-item", {
             this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
         },
 
-        updateValue(event)
+        selectItem()
+        {
+            this.isChecked = true;
+
+            this.updateValue();
+        },
+
+        updateValue()
 		{
-            if (event.currentTarget.checked)
+            if (this.isChecked)
 			{
-                this.returnCount = 1;
+                this.returnCount = this.orderItem.quantity;
             }
             else
 			{
@@ -59,6 +66,14 @@ Vue.component("order-return-item", {
             }
 
             this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
+        }
+    },
+
+    events:
+    {
+        "select-all-items"()
+        {
+            this.selectItem();
         }
     }
 });

@@ -53,6 +53,11 @@ Vue.component("order-return", {
                 });
         },
 
+        selectAllItems()
+        {
+            this.$broadcast("select-all-items");
+        },
+
         ...Vuex.mapActions([
             "sendOrderReturn"
         ])
