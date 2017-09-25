@@ -1,0 +1,24 @@
+<script type="x/template" id="vue-graduated-prices">
+    <div class="m-y-1" v-if="graduatedPrices[0]">
+        <b>Staffelpreise:</b>
+        <!-- <br>
+        <div v-for="price in graduatedPrices">
+            <span>ab ${ price.minimumOrderQuantity } Stück</span>
+            <span>${ price.price | currency }</span>
+        </div> -->
+
+        <table>
+            <tr v-for="price in graduatedPrices | orderBy 'position'">
+                <td>ab ${ price.minimumOrderQuantity } Stück</td>
+                <td>${ price.price | currency }</td>
+            </tr>
+        </table>
+    </div>
+</script>
+
+<style>
+    td:first-child {
+        padding-right: 15px;
+        font-style: italic;
+    }
+</style>

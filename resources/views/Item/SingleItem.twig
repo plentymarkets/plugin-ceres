@@ -28,6 +28,7 @@
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Item.Components.AddToWishList" ) }}
     {{ component( "Ceres::Item.Components.OrderProperties" ) }}
+    {{ component( "Ceres::Item.Components.GraduatedPrices" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -110,6 +111,8 @@
                 </div>
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
+
+                <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                 <span class="availability tag availability_{{ item.documents[0].data.variation.availability.id }}" v-availability-class:currentVariation>
                     <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">
