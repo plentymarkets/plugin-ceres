@@ -25,7 +25,7 @@ Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange(newMethodOfPayment)
         {
-            this.$store.dispatch("selectMethodOfPayment", this.methodOfPaymentList.find(methodOfPayment => methodOfPayment.id === newMethodOfPayment.id))
+            this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id)
                 .then(data =>
                 {
                     document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.methodOfPaymentId}));
