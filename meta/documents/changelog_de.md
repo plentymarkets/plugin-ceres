@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.4.8 (2017-09-27)
+
+### Behoben
+
+- Es wurde ein Fehler behoben bei dem das Falsche Versanddatum in der Bestellbestätigunsseite angezeigt wurde.
+
 ## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
