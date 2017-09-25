@@ -14892,13 +14892,6 @@ Vue.component("shop-language-select", {
 
     props: ["countryFlagPrefix", "template"],
 
-    data: function data() {
-        return {
-            languageList: []
-        };
-    },
-
-
     computed: _extends({}, Vuex.mapState({
         localization: function localization(state) {
             return state.localization;
