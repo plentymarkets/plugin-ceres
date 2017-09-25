@@ -7,7 +7,7 @@ Vue.component("shop-language-select", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             localization: {},
@@ -15,7 +15,7 @@ Vue.component("shop-language-select", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
