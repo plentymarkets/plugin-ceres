@@ -11187,7 +11187,9 @@ Vue.component("basket-list-item", {
                 }, 5000);
             } else {
                 this.waiting = true;
-                ResourceService.getResource("basketItems").remove(this.basketItem.id).fail(function () {
+                ResourceService.getResource("basketItems").remove(this.basketItem.id).done(function () {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: this.basketItem }));
+                }.bind(this)).fail(function () {
                     self.resetDelete();
                     self.waiting = false;
                 });
@@ -11206,7 +11208,9 @@ Vue.component("basket-list-item", {
             this.basketItem.quantity = quantity;
             this.waiting = true;
 
-            ResourceService.getResource("basketItems").set(this.basketItem.id, this.basketItem).fail(function () {
+            ResourceService.getResource("basketItems").set(this.basketItem.id, this.basketItem).done(function () {
+                document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
+            }.bind(this)).fail(function () {
                 this.waiting = false;
             }.bind(this));
         },
@@ -11619,8 +11623,19 @@ Vue.component("place-order", {
             } else {
                 $modalBody.html(content);
             }
+<<<<<<< HEAD
 
             $modal.modal("show");
+=======
+        },
+
+        watch: {
+            "checkout.shippingCountryId": function checkoutShippingCountryId(newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", { detail: newVal }));
+                }
+            }
+>>>>>>> development
         }
     }
 });

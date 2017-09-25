@@ -39,6 +39,7 @@ const mutations =
             if (shippingCountryId)
             {
                 state.shipping.shippingCountryId = shippingCountryId;
+                document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", {detail: shippingCountryId}));
             }
         },
 
