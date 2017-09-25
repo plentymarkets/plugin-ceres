@@ -11452,7 +11452,6 @@ Vue.component("address-select", {
             addressToEdit: {},
             addressToDelete: {},
             deleteModal: "",
-            localization: {},
             user: {}
         };
     },
@@ -11464,6 +11463,9 @@ Vue.component("address-select", {
         },
         addressList: function addressList() {
             return this.$store.getters.getAddressList(this.addressType);
+        },
+        shippingCountryId: function shippingCountryId() {
+            return this.$store.state.localization.shippingCountryId;
         },
         isAddAddressEnabled: function isAddAddressEnabled() {
             var isLoggedIn = this.user.isLoggedIn;
@@ -11484,7 +11486,6 @@ Vue.component("address-select", {
      */
     created: function created() {
         this.$options.template = this.template;
-        ResourceService.bind("localization", this);
         ResourceService.bind("user", this);
 
         this.addEventListener();
@@ -11540,10 +11541,10 @@ Vue.component("address-select", {
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId: this.localization.currentShippingCountryId
+                    countryId: this.shippingCountryId
                 };
             } else {
-                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+                this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
@@ -11560,10 +11561,10 @@ Vue.component("address-select", {
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId: this.localization.currentShippingCountryId
+                    countryId: this.shippingCountryId
                 };
             } else {
-                this.addressToEdit = { countryId: this.localization.currentShippingCountryId };
+                this.addressToEdit = { countryId: this.shippingCountryId };
             }
 
             this.updateHeadline();
@@ -12222,7 +12223,6 @@ Vue.component("contact-map", {
 "use strict";
 
 var CountryService = require("services/CountryService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
@@ -12231,10 +12231,15 @@ Vue.component("country-select", {
     data: function data() {
         return {
             stateList: [],
-            selectedCountry: {},
-            localization: {}
+            selectedCountry: {}
         };
     },
+
+    computed: Vuex.mapState({
+        shippingCountryId: function shippingCountryId(state) {
+            return state.localization.shippingCountryId;
+        }
+    }),
 
     /**
      * Get the shipping countries
@@ -12242,8 +12247,7 @@ Vue.component("country-select", {
     created: function created() {
         this.$options.template = this.template;
 
-        ResourceService.bind("localization", this);
-        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+        this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -12276,7 +12280,7 @@ Vue.component("country-select", {
 
     watch: {
         selectedCountryId: function selectedCountryId() {
-            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+            this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry) {
@@ -12288,7 +12292,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":89,"services/ResourceService":93}],27:[function(require,module,exports){
+},{"services/CountryService":89}],27:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -12512,10 +12516,6 @@ var _AddressFieldService = require("services/AddressFieldService");
 
 var _AddressFieldService2 = _interopRequireDefault(_AddressFieldService);
 
-var _ResourceService = require("services/ResourceService");
-
-var _ResourceService2 = _interopRequireDefault(_ResourceService);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("salutation-select", {
@@ -12524,7 +12524,6 @@ Vue.component("salutation-select", {
 
     data: function data() {
         return {
-            localization: {},
             salutations: {
                 complete: {
                     de: [{
@@ -12582,15 +12581,17 @@ Vue.component("salutation-select", {
     },
 
 
+    computed: Vuex.mapState({
+        shopLanguage: function shopLanguage(state) {
+            return state.localization.shopLanguage;
+        }
+    }),
+
     /**
      * Get the shipping countries
      */
     created: function created() {
-
         this.$options.template = this.template;
-
-        _ResourceService2.default.bind("localization", this);
-        this.shopLanguage = this.localization.shopLanguage;
 
         if (this.shopLanguage === "de") {
             if (_AddressFieldService2.default.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1")) {
@@ -12618,7 +12619,7 @@ Vue.component("salutation-select", {
     }
 });
 
-},{"services/AddressFieldService":86,"services/ResourceService":93}],30:[function(require,module,exports){
+},{"services/AddressFieldService":86}],30:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -13760,7 +13761,6 @@ Vue.component("item-search", {
 },{"services/ItemListService":90,"services/ResourceService":93,"services/UrlService":94}],45:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
 var accounting = require("accounting");
 
 Vue.component("item-store-special", {
@@ -13771,7 +13771,6 @@ Vue.component("item-store-special", {
 
     data: function data() {
         return {
-            localization: {},
             tagClass: "",
             label: "",
             tagClasses: {
@@ -13782,8 +13781,6 @@ Vue.component("item-store-special", {
         };
     },
     created: function created() {
-        ResourceService.bind("localization", this);
-
         this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         this.label = this.getLabel();
     },
@@ -13809,7 +13806,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"accounting":1,"services/ResourceService":93}],46:[function(require,module,exports){
+},{"accounting":1}],46:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -14840,29 +14837,20 @@ Vue.component("notifications", {
 },{"exceptions/ExceptionMap":75,"services/NotificationService":92}],57:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("shipping-country-select", {
 
-    props: ["countryFlagPrefix", "template", "selectable"],
+    props: ["template", "selectable"],
 
-    data: function data() {
-        return {
-            localization: {}
-        };
-    },
     created: function created() {
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-
-        for (var i in this.localization.activeShippingCountries) {
-            var country = this.localization.activeShippingCountries[i];
-
-            country.countryFlagClass = this.countryFlagPrefix + country.isoCode2.toLowerCase();
-        }
     },
 
+
+    computed: Vuex.mapState({
+        localization: function localization(state) {
+            return state.localization;
+        }
+    }),
 
     methods: {
         setShippingCountry: function setShippingCountry(id) {
@@ -14873,7 +14861,7 @@ Vue.component("shipping-country-select", {
     }
 });
 
-},{"services/ResourceService":93}],58:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -14898,7 +14886,7 @@ Vue.component("shop-country-settings", {
 },{"services/ApiService":87}],59:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 Vue.component("shop-language-select", {
 
@@ -14906,30 +14894,23 @@ Vue.component("shop-language-select", {
 
     data: function data() {
         return {
-            localization: {},
             languageList: []
         };
     },
+
+
+    computed: _extends({}, Vuex.mapState({
+        localization: function localization(state) {
+            return state.localization;
+        }
+    }), Vuex.mapGetters(["languageList"])),
+
     created: function created() {
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-
-        for (var i in this.localization.activeShopLanguageList) {
-            var languageKey = this.localization.activeShopLanguageList[i];
-            var languageName = Translations.Template[languageKey];
-            var language = {
-                key: languageKey,
-                name: languageName,
-                flagClass: this.countryFlagPrefix + languageKey
-            };
-
-            this.languageList.push(language);
-        }
     }
 });
 
-},{"services/ResourceService":93}],60:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -17796,19 +17777,19 @@ Object.defineProperty(exports, "__esModule", {
 // import ApiService from "services/ApiService";
 
 var state = {
-    activeShippingCountries: [],
-    activeShopLanguageList: [],
+    shippingCountries: [],
+    shopLanguageList: [],
     shippingCountryId: null,
     shopLanguage: null,
     countryFlagPrefix: null
 };
 
 var mutations = {
-    setActiveShippingCountries: function setActiveShippingCountries(state, activeShippingCountries) {
-        state.activeShippingCountries = activeShippingCountries;
+    setShippingCountries: function setShippingCountries(state, shippingCountries) {
+        state.shippingCountries = shippingCountries;
     },
-    setActiveShopLanguageList: function setActiveShopLanguageList(state, activeShopLanguageList) {
-        state.activeShopLanguageList = activeShopLanguageList;
+    setShopLanguageList: function setShopLanguageList(state, shopLanguageList) {
+        state.shopLanguageList = shopLanguageList;
     },
     setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
         if (shippingCountryId !== state.shippingCountryId) {
@@ -17831,8 +17812,8 @@ var actions = {
         var localizationData = _ref2.localizationData,
             countryFlagPrefix = _ref2.countryFlagPrefix;
 
-        commit("setActiveShippingCountries", localizationData.activeShippingCountries);
-        commit("setActiveShopLanguageList", localizationData.activeShopLanguageList);
+        commit("setShippingCountries", localizationData.activeShippingCountries);
+        commit("setShopLanguageList", localizationData.activeShopLanguageList);
         commit("setShippingCountryId", localizationData.currentShippingCountryId);
         commit("setShopLanguage", localizationData.shopLanguage);
         commit("setCountryFlagPrefix", countryFlagPrefix);
@@ -17863,8 +17844,8 @@ var getters = {
     languageList: function languageList(sate) {
         var languageList = [];
 
-        for (var index in sate.activeShopLanguageList) {
-            var languageKey = sate.activeShopLanguageList[index];
+        for (var index in sate.shopLanguageList) {
+            var languageKey = sate.shopLanguageList[index];
             var languageName = Translations.Template[languageKey];
             // TODO get css class from config
             var language = {
