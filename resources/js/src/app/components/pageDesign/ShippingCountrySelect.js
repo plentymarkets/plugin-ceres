@@ -1,5 +1,4 @@
 const ResourceService = require("services/ResourceService");
-const CheckoutService = require("services/CheckoutService");
 
 Vue.component("shipping-country-select", {
 
@@ -36,8 +35,7 @@ Vue.component("shipping-country-select", {
         {
             if (!this.selectable)
             {
-                this.localization.currentShippingCountryId = id;
-                CheckoutService.setShippingCountryId(id);
+                this.$store.dispatch("selectShippingCountry", id);
             }
         }
     }
