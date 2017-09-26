@@ -11451,8 +11451,7 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {},
             addressToDelete: {},
-            deleteModal: "",
-            user: {}
+            deleteModal: ""
         };
     },
 
@@ -11468,13 +11467,11 @@ Vue.component("address-select", {
             return this.$store.state.localization.shippingCountryId;
         },
         isAddAddressEnabled: function isAddAddressEnabled() {
-            var isLoggedIn = this.user.isLoggedIn;
-
             if (this.addressType === "1") {
-                return isLoggedIn || this.addressList.length < 1;
+                return this.$store.getters.isLoggedIn || this.addressList.length < 1;
             }
 
-            return isLoggedIn || this.addressList.length < 2;
+            return this.$store.getters.isLoggedIn || this.addressList.length < 2;
         },
         isAddressListEmpty: function isAddressListEmpty() {
             return !(this.addressList && this.addressList.length > 0);
@@ -11486,8 +11483,6 @@ Vue.component("address-select", {
      */
     created: function created() {
         this.$options.template = this.template;
-        ResourceService.bind("user", this);
-
         this.addEventListener();
     },
 
@@ -12874,20 +12869,16 @@ var _ValidationService2 = _interopRequireDefault(_ValidationService);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("user-login-handler", {
 
     props: ["userData", "template"],
 
-    data: function data() {
-        return {
-            username: "",
-            isLoggedIn: {}
-        };
-    },
+    computed: Vuex.mapGetters(["username", "isLoggedIn"]),
+
     created: function created() {
         this.$options.template = this.template;
+        this.$store.commit("setUserData", this.userData);
     },
 
 
@@ -12895,29 +12886,11 @@ Vue.component("user-login-handler", {
      * Add the global event listener for login and logout
      */
     ready: function ready() {
-        ResourceService.bind("user", this, "isLoggedIn");
-
-        this.setUsername(this.userData);
         this.addEventListeners();
     },
 
 
     methods: {
-        /**
-         * Set the current user logged in
-         * @param userData
-         */
-        setUsername: function setUsername(userData) {
-            if (userData) {
-                if (userData.firstName.length > 0 && userData.lastName.length > 0) {
-                    this.username = userData.firstName + " " + userData.lastName;
-                } else {
-                    this.username = userData.options[0].value;
-                }
-            }
-        },
-
-
         /**
          * Adds login/logout event listeners
          */
@@ -12925,13 +12898,11 @@ Vue.component("user-login-handler", {
             var _this = this;
 
             ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this.setUsername(userData.accountContact);
-                ResourceService.getResource("user").set({ isLoggedIn: true });
+                _this.$store.commit("setUserData", userData);
             });
 
             ApiService.listen("AfterAccountContactLogout", function () {
-                _this.username = "";
-                ResourceService.getResource("user").set({ isLoggedIn: false });
+                _this.$store.commit("setUserData", null);
             });
         },
         unmarkInputFields: function unmarkInputFields() {
@@ -12941,7 +12912,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":87,"services/ResourceService":93,"services/ValidationService":95}],34:[function(require,module,exports){
+},{"services/ApiService":87,"services/ValidationService":95}],34:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -17304,6 +17275,10 @@ var _LocalizationModule = require("store/modules/LocalizationModule");
 
 var _LocalizationModule2 = _interopRequireDefault(_LocalizationModule);
 
+var _UserModule = require("store/modules/UserModule");
+
+var _UserModule2 = _interopRequireDefault(_UserModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line
@@ -17312,7 +17287,8 @@ var store = new Vuex.Store({
         wishList: _WishListModule2.default,
         checkout: _CheckoutModule2.default,
         address: _AddressModule2.default,
-        localization: _LocalizationModule2.default
+        localization: _LocalizationModule2.default,
+        user: _UserModule2.default
     }
 });
 
@@ -17320,7 +17296,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":98,"store/modules/CheckoutModule":99,"store/modules/LocalizationModule":100,"store/modules/WishListModule":101}],98:[function(require,module,exports){
+},{"store/modules/AddressModule":98,"store/modules/CheckoutModule":99,"store/modules/LocalizationModule":100,"store/modules/UserModule":101,"store/modules/WishListModule":102}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17867,6 +17843,47 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var state = {
+    userData: null
+};
+
+var mutations = {
+    setUserData: function setUserData(state, userData) {
+        state.userData = userData;
+    }
+};
+
+var getters = {
+    username: function username(state) {
+        var username = "";
+
+        if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0) {
+            username = state.userData.firstName + " " + state.userData.lastName;
+        } else {
+            username = state.userData.options[0].value;
+        }
+
+        return username;
+    },
+
+
+    isLoggedIn: function isLoggedIn(state) {
+        return state.userData.id > 0;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    getters: getters
+};
+
+},{}],102:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _ApiService = require("services/ApiService");
 
@@ -17973,7 +17990,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":87}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,72,68,69,70,71,73,74,75,76,77,78,79,80,81,82,83,84,85,97,98,99,100,101])
+},{"services/ApiService":87}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,72,68,69,70,71,73,74,75,76,77,78,79,80,81,82,83,84,85,97,98,99,100,101,102])
 
 
 // Frontend end scripts
