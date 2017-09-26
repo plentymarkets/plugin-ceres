@@ -14572,36 +14572,41 @@ var _CategoryRendererService2 = _interopRequireDefault(_CategoryRendererService)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("mobile-navigation", {
 
-    props: ["template", "categoryBreadcrumbs"],
+    props: ["template", "categoryBreadcrumbs", "navigationTreeData"],
 
     data: function data() {
         return {
-            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
             breadcrumbs: []
         };
     },
+
+
+    computed: Vuex.mapState({
+        navigationTree: function navigationTree(state) {
+            return state.navigation.tree;
+        }
+    }),
+
     created: function created() {
         this.$options.template = this.template;
     },
     ready: function ready() {
-        this.categoryTree = ResourceService.getResource("navigationTree").val();
+        this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-        this.buildTree(this.categoryTree, null, this.categoryBreadcrumbs && this.categoryBreadcrumbs.length ? this.categoryBreadcrumbs.pop().id : null);
+        // (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null)
 
-        this.dataContainer1 = this.categoryTree;
+        this.dataContainer1 = this.navigationTree;
     },
 
 
     methods: {
         buildTree: function buildTree(currentArray, parent, currentCategoryId) {
-            var showChilds = false;
+            var showChildren = false;
 
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -14617,8 +14622,8 @@ Vue.component("mobile-navigation", {
                     if (!category.details[0]) {
                         category.hideCategory = true;
 
-                        if (parent && parent.children && parent.children.length > 1 && !parent.showChilds) {
-                            parent.showChilds = false;
+                        if (parent && parent.children && parent.children.length > 1 && !parent.showChildren) {
+                            parent.showChildren = false;
                         }
                     } else {
                         if (parent) {
@@ -14628,7 +14633,7 @@ Vue.component("mobile-navigation", {
                         }
 
                         if (category.details.length && category.details[0].name) {
-                            showChilds = true;
+                            showChildren = true;
                         }
 
                         if (category.children) {
@@ -14636,7 +14641,7 @@ Vue.component("mobile-navigation", {
                         }
 
                         if (category.id === currentCategoryId) {
-                            if (category.children && category.showChilds) {
+                            if (category.children && category.showChildren) {
                                 this.slideTo(category.children);
                             } else if (category.parent) {
                                 this.slideTo(category.parent.children);
@@ -14660,16 +14665,16 @@ Vue.component("mobile-navigation", {
             }
 
             if (parent) {
-                parent.showChilds = showChilds;
+                parent.showChildren = showChildren;
             }
         },
         navigateTo: function navigateTo(category) {
-            if (category.children && category.showChilds) {
+            if (category.children && category.showChildren) {
                 this.slideTo(category.children);
             }
 
             this.closeNavigation();
-            _CategoryRendererService2.default.renderItems(category, this.categoryTree);
+            _CategoryRendererService2.default.renderItems(category, this.navigationTree);
         },
         slideTo: function slideTo(children, back) {
             back = !!back;
@@ -14697,7 +14702,7 @@ Vue.component("mobile-navigation", {
             while (root.parent) {
                 this.breadcrumbs.unshift({
                     name: root.parent.details[0].name,
-                    layer: root.parent ? root.parent.children : this.categoryTree
+                    layer: root.parent ? root.parent.children : this.navigationTree
                 });
 
                 root = root.parent;
@@ -14733,7 +14738,7 @@ Vue.component("mobile-navigation", {
     }
 });
 
-},{"services/CategoryRendererService":88,"services/ResourceService":93}],56:[function(require,module,exports){
+},{"services/CategoryRendererService":88}],56:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
@@ -15807,7 +15812,7 @@ function renderItems(currentCategory) {
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree)) {
-        _categoryTree = ResourceService.getResource("navigationTree").val();
+        _categoryTree = window.ceresStore.state.navigation.tree;
     }
 
     if (!App.isCategoryView) {
@@ -15906,15 +15911,19 @@ function _loadOptionalData(currentCategory) {
  * @param categories - default
  */
 function getScopeUrl(currentCategory, scopeUrl, categories) {
+    if (currentCategory.url) {
+        return currentCategory.url;
+    }
+
     scopeUrl = scopeUrl || "";
     categories = categories || _categoryTree;
 
-    if (scopeUrl.length == 0) {
+    if (scopeUrl.length === 0) {
         _categoryBreadcrumbs = [];
     }
 
     for (var category in categories) {
-        if (categories[category].id == currentCategory.id && categories[category].details.length) {
+        if (categories[category].id === currentCategory.id && categories[category].details.length) {
             scopeUrl += "/" + categories[category].details[0].nameUrl;
 
             _categoryBreadcrumbs.push(categories[category]);
@@ -17279,6 +17288,10 @@ var _UserModule = require("store/modules/UserModule");
 
 var _UserModule2 = _interopRequireDefault(_UserModule);
 
+var _NavigationModule = require("store/modules/NavigationModule");
+
+var _NavigationModule2 = _interopRequireDefault(_NavigationModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line
@@ -17288,7 +17301,8 @@ var store = new Vuex.Store({
         checkout: _CheckoutModule2.default,
         address: _AddressModule2.default,
         localization: _LocalizationModule2.default,
-        user: _UserModule2.default
+        user: _UserModule2.default,
+        navigation: _NavigationModule2.default
     }
 });
 
@@ -17296,7 +17310,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":98,"store/modules/CheckoutModule":99,"store/modules/LocalizationModule":100,"store/modules/UserModule":101,"store/modules/WishListModule":102}],98:[function(require,module,exports){
+},{"store/modules/AddressModule":98,"store/modules/CheckoutModule":99,"store/modules/LocalizationModule":100,"store/modules/NavigationModule":101,"store/modules/UserModule":102,"store/modules/WishListModule":103}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17844,6 +17858,96 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var state = {
+    tree: []
+};
+
+var mutations = {
+    setNavigationTree: function setNavigationTree(state, navigationTree) {
+        state.tree = navigationTree;
+    }
+};
+
+var actions = {
+    initNavigationTree: function initNavigationTree(_ref, navigationTree) {
+        var dispatch = _ref.dispatch,
+            commit = _ref.commit;
+
+        if (navigationTree) {
+            dispatch("buildNavigationTreeItem", { navigationTree: navigationTree });
+        }
+
+        commit("setNavigationTree", navigationTree);
+    },
+    buildNavigationTreeItem: function buildNavigationTreeItem(_ref2, _ref3) {
+        var state = _ref2.state,
+            commit = _ref2.commit,
+            dispatch = _ref2.dispatch;
+        var navigationTree = _ref3.navigationTree,
+            parent = _ref3.parent;
+
+        var showChildren = false;
+
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = navigationTree[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var category = _step.value;
+
+                category.parent = parent;
+
+                // hide category if there is no translation
+                if (!category.details[0]) {
+                    category.hideCategory = true;
+                } else {
+                    var parentUrl = parent ? parent.url : "";
+
+                    category.url = parentUrl + "/" + category.details[0].nameUrl;
+                    showChildren = true;
+
+                    if (category.children) {
+                        dispatch("buildNavigationTreeItem", { navigationTree: category.children, parent: category });
+                    }
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        if (parent) {
+            parent.showChildren = showChildren;
+        }
+    }
+};
+
+var getters = {};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{}],102:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var state = {
     userData: null
 };
 
@@ -17878,7 +17982,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17990,7 +18094,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":87}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,72,68,69,70,71,73,74,75,76,77,78,79,80,81,82,83,84,85,97,98,99,100,101,102])
+},{"services/ApiService":87}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,72,68,69,70,71,73,74,75,76,77,78,79,80,81,82,83,84,85,97,98,99,100,101,102,103])
 
 
 // Frontend end scripts

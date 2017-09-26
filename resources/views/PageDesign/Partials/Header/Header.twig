@@ -69,7 +69,7 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-<mobile-navigation :category-breadcrumbs="{{ categoryBreadcrumbs | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :category-breadcrumbs="{{ categoryBreadcrumbs | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">

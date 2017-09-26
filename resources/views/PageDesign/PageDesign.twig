@@ -13,13 +13,14 @@
 
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
 
-
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% if services.template.isCategory() or services.template.isItem() %}
     {% set categoryBreadcrumbs = services.category.getHierarchy() %}
     {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
 {% endif %}
+
+{% set categories = services.category.getNavigationTree("item", lang, 6) %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
@@ -37,7 +38,6 @@
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
 
         <resource name="isLoadingBreadcrumbs" :data="false"></resource>
-
         <div class="wrapper wrapper-top">
             <!-- messages -->
             <notifications template="#vue-notifications"

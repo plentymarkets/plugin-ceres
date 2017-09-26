@@ -1,23 +1,26 @@
 import CategoryRendererService from "services/CategoryRendererService";
-const ResourceService = require("services/ResourceService");
 
 Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "categoryBreadcrumbs"
+        "categoryBreadcrumbs",
+        "navigationTreeData"
     ],
 
     data()
     {
         return {
-            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
             breadcrumbs: []
         };
     },
+
+    computed: Vuex.mapState({
+        navigationTree: state => state.navigation.tree
+    }),
 
     created()
     {
@@ -26,17 +29,17 @@ Vue.component("mobile-navigation", {
 
     ready()
     {
-        this.categoryTree = ResourceService.getResource("navigationTree").val();
+        this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-        this.buildTree(this.categoryTree, null, (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null);
+        // (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null)
 
-        this.dataContainer1 = this.categoryTree;
+        this.dataContainer1 = this.navigationTree;
     },
 
     methods: {
         buildTree(currentArray, parent, currentCategoryId)
         {
-            let showChilds = false;
+            let showChildren = false;
 
             for (const category of currentArray)
             {
@@ -47,9 +50,9 @@ Vue.component("mobile-navigation", {
                 {
                     category.hideCategory = true;
 
-                    if (parent && parent.children && parent.children.length > 1 && !parent.showChilds)
+                    if (parent && parent.children && parent.children.length > 1 && !parent.showChildren)
                     {
-                        parent.showChilds = false;
+                        parent.showChildren = false;
                     }
                 }
                 else
@@ -65,7 +68,7 @@ Vue.component("mobile-navigation", {
 
                     if (category.details.length && category.details[0].name)
                     {
-                        showChilds = true;
+                        showChildren = true;
                     }
 
                     if (category.children)
@@ -75,7 +78,7 @@ Vue.component("mobile-navigation", {
 
                     if (category.id === currentCategoryId)
                     {
-                        if (category.children && category.showChilds)
+                        if (category.children && category.showChildren)
                         {
                             this.slideTo(category.children);
                         }
@@ -89,19 +92,19 @@ Vue.component("mobile-navigation", {
 
             if (parent)
             {
-                parent.showChilds = showChilds;
+                parent.showChildren = showChildren;
             }
         },
 
         navigateTo(category)
         {
-            if (category.children && category.showChilds)
+            if (category.children && category.showChildren)
             {
                 this.slideTo(category.children);
             }
 
             this.closeNavigation();
-            CategoryRendererService.renderItems(category, this.categoryTree);
+            CategoryRendererService.renderItems(category, this.navigationTree);
         },
 
         slideTo(children, back)
@@ -138,7 +141,7 @@ Vue.component("mobile-navigation", {
                 this.breadcrumbs.unshift(
                     {
                         name: root.parent.details[0].name,
-                        layer: root.parent ? root.parent.children : this.categoryTree
+                        layer: root.parent ? root.parent.children : this.navigationTree
                     });
 
                 root = root.parent;

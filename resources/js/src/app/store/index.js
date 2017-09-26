@@ -3,6 +3,7 @@ import checkout from "store/modules/CheckoutModule";
 import address from "store/modules/AddressModule";
 import localization from "store/modules/LocalizationModule";
 import user from "store/modules/UserModule";
+import navigation from "store/modules/NavigationModule";
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
@@ -13,7 +14,8 @@ const store = new Vuex.Store(
             checkout,
             address,
             localization,
-            user
+            user,
+            navigation
         }
     });
 

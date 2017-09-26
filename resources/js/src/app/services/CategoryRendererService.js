@@ -16,7 +16,7 @@ export function renderItems(currentCategory)
 
     if ($.isEmptyObject(_categoryTree))
     {
-        _categoryTree = ResourceService.getResource("navigationTree").val();
+        _categoryTree = window.ceresStore.state.navigation.tree;
     }
 
     if (!App.isCategoryView)
@@ -136,17 +136,22 @@ function _loadOptionalData(currentCategory)
  */
 export function getScopeUrl(currentCategory, scopeUrl, categories)
 {
+    if (currentCategory.url)
+    {
+        return currentCategory.url;
+    }
+
     scopeUrl = scopeUrl || "";
     categories = categories || _categoryTree;
 
-    if (scopeUrl.length == 0)
+    if (scopeUrl.length === 0)
     {
         _categoryBreadcrumbs = [];
     }
 
     for (var category in categories)
     {
-        if (categories[category].id == currentCategory.id && categories[category].details.length)
+        if (categories[category].id === currentCategory.id && categories[category].details.length)
         {
             scopeUrl += "/" + categories[category].details[0].nameUrl;
 
