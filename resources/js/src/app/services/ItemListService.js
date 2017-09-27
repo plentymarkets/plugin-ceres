@@ -30,10 +30,17 @@ module.exports = (function($)
         setCategoryId     : setCategoryId
     };
 
+    function updateSearchParams()
+    {
+
+    }
+
     function getItemList()
     {
         if (searchParams.categoryId || searchParams.query.length >= 3)
         {
+            // updateSearchParams();
+
             if (ResourceService.getResource("itemList").val())
             {
                 ResourceService.getResource("itemList").val().total = 0;
@@ -51,7 +58,7 @@ module.exports = (function($)
                     _setIsLoading(false);
 
                     ResourceService.getResource("itemList").set(response);
-                    ResourceService.getResource("facets").set(response.facets);
+                    window.ceresStore.commit("setFacets", response.facets);
                 })
                 .fail(function(response)
                 {

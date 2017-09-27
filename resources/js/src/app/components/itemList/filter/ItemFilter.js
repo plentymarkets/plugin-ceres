@@ -8,32 +8,43 @@ Vue.component("item-filter", {
         "facet"
     ],
 
-    data: function()
+    data()
     {
         return {
-            facetParams: [],
             isLoading: false
         };
     },
 
-    created: function()
+    computed:
     {
-        this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
+        ...Vuex.mapState({
+            selectedFacets: state => state.itemList.selectedFacets
+        })
     },
 
-    ready: function()
+    created()
+    {
+        this.$options.template = this.template || "#vue-item-filter";
+    },
+
+    ready()
     {
         ResourceService.bind("isLoading", this);
     },
 
     methods:
     {
-        updateFacet: function()
+        updateFacet(facetValue)
         {
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
+            this.$store.dispatch("selectFacet", facetValue);
+
+            ItemListService.setFacets(this.$store.getters.selectedFacetIds);
             ItemListService.getItemList();
+        },
+
+        isSelected(facetValueId)
+        {
+            return this.selectedFacets.findIndex(selectedFacet => selectedFacet.id === facetValueId) > -1;
         }
     }
 });
