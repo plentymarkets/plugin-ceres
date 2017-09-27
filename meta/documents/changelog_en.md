@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v1.4.x (TBA)
+
+### Added
+
+- The **Container for customer feedback** container has been added.
+
 ## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
