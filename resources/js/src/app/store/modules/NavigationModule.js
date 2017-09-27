@@ -1,6 +1,7 @@
 const state =
     {
-        tree: []
+        tree: [],
+        currentCategory: null
     };
 
 const mutations =
@@ -8,6 +9,11 @@ const mutations =
         setNavigationTree(state, navigationTree)
         {
             state.tree = navigationTree;
+        },
+
+        setCurrentCategory(state, category)
+        {
+            state.currentCategory = category;
         }
     };
 
@@ -54,11 +60,46 @@ const actions =
             {
                 parent.showChildren = showChildren;
             }
+        },
+
+        setCurrentCategoryById({state, commit, dispatch}, {categoryId, categories})
+        {
+            categories = categories || state.tree;
+
+            for (const category of categories)
+            {
+                if (category.id === categoryId)
+                {
+                    commit("setCurrentCategory", category);
+                    return;
+                }
+                else if (category.children)
+                {
+                    dispatch("setCurrentCategoryById", {categoryId, categories: category.children});
+                }
+            }
         }
     };
 
 const getters =
     {
+        breadcrumbs(state)
+        {
+            const breadcrumbs = [];
+
+            if (state.currentCategory)
+            {
+                let currentIteration = state.currentCategory;
+
+                while (currentIteration)
+                {
+                    breadcrumbs.unshift(currentIteration);
+                    currentIteration = currentIteration.parent;
+                }
+            }
+
+            return breadcrumbs;
+        }
     };
 
 export default

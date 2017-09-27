@@ -1,11 +1,14 @@
 import {renderItems}from "services/CategoryRendererService";
 
-Vue.directive("render-category", function(value)
-{
-    $(this.el).click(function(event)
+Vue.directive("render-category",
     {
-        event.preventDefault();
-
-        renderItems(value);
+        bind()
+        {
+            this.el.addEventListener("click", event =>
+            {
+                event.preventDefault();
+                window.ceresStore.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.expression)});
+                renderItems();
+            });
+        }
     });
-});

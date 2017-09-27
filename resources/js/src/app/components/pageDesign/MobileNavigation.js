@@ -4,7 +4,7 @@ Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "categoryBreadcrumbs",
+        "currentCategoryId",
         "navigationTreeData"
     ],
 
@@ -31,68 +31,29 @@ Vue.component("mobile-navigation", {
     {
         this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-        // (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null)
+        if (this.currentCategoryId)
+        {
+            this.$store.dispatch("setCurrentCategoryById", {categoryId: this.currentCategoryId});
+            this.initialSlide(this.$store.state.navigation.currentCategory);
+        }
 
         this.dataContainer1 = this.navigationTree;
     },
 
-    methods: {
-        buildTree(currentArray, parent, currentCategoryId)
+    methods:
+    {
+        initialSlide(currentCategory)
         {
-            let showChildren = false;
-
-            for (const category of currentArray)
+            if (currentCategory)
             {
-                category.parent = parent;
-
-                // hide category if there is no translation
-                if (!category.details[0])
+                if (currentCategory.children && currentCategory.showChildren)
                 {
-                    category.hideCategory = true;
-
-                    if (parent && parent.children && parent.children.length > 1 && !parent.showChildren)
-                    {
-                        parent.showChildren = false;
-                    }
+                    this.slideTo(currentCategory.children);
                 }
-                else
+                else if (currentCategory.parent)
                 {
-                    if (parent)
-                    {
-                        category.url = parent.url + "/" + category.details[0].nameUrl;
-                    }
-                    else
-                    {
-                        category.url = "/" + category.details[0].nameUrl;
-                    }
-
-                    if (category.details.length && category.details[0].name)
-                    {
-                        showChildren = true;
-                    }
-
-                    if (category.children)
-                    {
-                        this.buildTree(category.children, category, currentCategoryId);
-                    }
-
-                    if (category.id === currentCategoryId)
-                    {
-                        if (category.children && category.showChildren)
-                        {
-                            this.slideTo(category.children);
-                        }
-                        else if (category.parent)
-                        {
-                            this.slideTo(category.parent.children);
-                        }
-                    }
+                    this.slideTo(currentCategory.parent.children);
                 }
-            }
-
-            if (parent)
-            {
-                parent.showChildren = showChildren;
             }
         },
 
@@ -104,7 +65,8 @@ Vue.component("mobile-navigation", {
             }
 
             this.closeNavigation();
-            CategoryRendererService.renderItems(category, this.navigationTree);
+            this.$store.commit("setCurrentCategory", category);
+            CategoryRendererService.renderItems();
         },
 
         slideTo(children, back)
