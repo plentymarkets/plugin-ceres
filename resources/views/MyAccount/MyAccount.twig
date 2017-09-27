@@ -14,6 +14,7 @@
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
     {% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
+    {% set isReturnActive = services.order.isReturnActive() %}
 
     <div class="page-content myaccount container-max m-b-3 m-t-1">
 
@@ -112,8 +113,8 @@
     <history template="#vue-history" 
             :orders-per-page="{{ ordersPerPage }}" 
             :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
-            :returns-list="{{ services.customer.getReturns(1, ordersPerPage) | json_encode() }}">
+            :is-return-active="{{ isReturnActive | json_encode }}">
     </history>
     <!-- ./HISTORY -->
-
+    
 {% endblock %}

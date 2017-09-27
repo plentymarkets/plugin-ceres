@@ -4,12 +4,13 @@ Vue.component("history", {
         "template",
         "orderList",
         "ordersPerPage",
-        "returnsList"
+        "isReturnActive"
     ],
 
     data()
     {
         return {
+            returnsFirstOpened: false
         };
     },
 
@@ -20,5 +21,14 @@ Vue.component("history", {
 
     methods:
     {
+        returnsTabsOpened()
+        {
+            if (!this.returnsFirstOpened)
+            {
+                this.returnsFirstOpened = true;
+
+                this.$broadcast("returns-first-opening");
+            }
+        }
     }
 });

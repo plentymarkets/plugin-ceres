@@ -2,13 +2,13 @@
 {{ component( "Ceres::MyAccount.Components.OrderReturnHistory" ) }}
 
 <script type="x/template" id="vue-history">
-	<div class="page-content basket history container-max" v-if="orderList.totalsCount > 0 || returnsList.totalsCount > 0">
+	<div class="page-content basket history container-max" v-if="orderList.totalsCount > 0">
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item" v-if="orderList.totalsCount > 0">
 				<a class="nav-link active" data-toggle="tab" href="#order-history-tab" role="tab" aria-expanded="true">{{ trans("Ceres::Template.orderHistory") }}</a>
 			</li>
-			<li class="nav-item" v-if="returnsList.totalsCount > 0">
-				<a class="nav-link" data-toggle="tab" href="#order-return-tab" role="tab" aria-expanded="false">{{ trans("Ceres::Template.myAccountReturnHistory") }}</a>
+			<li class="nav-item" v-if="isReturnActive">
+				<a @click="returnsTabsOpened()" class="nav-link" data-toggle="tab" href="#order-return-tab" role="tab" aria-expanded="false">{{ trans("Ceres::Template.myAccountReturnHistory") }}</a>
 			</li>
 		</ul>	
 
@@ -21,9 +21,8 @@
 					:show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
 				</order-history>
 			</div>
-			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false">
+			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false" v-if="isReturnActive">
                 <order-return-history template="#vue-order-return-history"
-					:returns-list="returnsList"
 					:items-per-page="ordersPerPage"
 					:show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
 					:show-last-page="{{ config('Ceres.pagination.showLastPage') }}">

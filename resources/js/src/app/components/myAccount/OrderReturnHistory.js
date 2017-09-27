@@ -7,14 +7,14 @@ Vue.component("order-return-history", {
         "template",
         "itemsPerPage",
         "showFirstPage",
-        "showLastPage",
-        "returnsList"
+        "showLastPage"
     ],
 
     data()
 	{
         return {
-            waiting: false
+            waiting: false,
+            returnsList: {page: 1}
         };
     },
 
@@ -66,6 +66,14 @@ Vue.component("order-return-history", {
             }
 
             return "-";
+        }
+    },
+
+    events:
+    {
+        "returns-first-opening"()
+        {
+            this.setPage(1);
         }
     }
 });
