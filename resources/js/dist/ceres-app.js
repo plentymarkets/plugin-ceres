@@ -13888,6 +13888,8 @@ Vue.component("pagination", {
 },{"services/ItemListService":89,"services/ResourceService":92,"services/UrlService":93}],48:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var ResourceService = require("services/ResourceService");
 var ItemListService = require("services/ItemListService");
 
@@ -13897,25 +13899,36 @@ Vue.component("item-filter", {
 
     data: function data() {
         return {
-            facetParams: [],
             isLoading: false
         };
     },
 
+
+    computed: _extends({}, Vuex.mapState({
+        selectedFacets: function selectedFacets(state) {
+            return state.itemList.selectedFacets;
+        }
+    })),
+
     created: function created() {
         this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
     },
-
     ready: function ready() {
         ResourceService.bind("isLoading", this);
     },
 
+
     methods: {
-        updateFacet: function updateFacet() {
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
+        updateFacet: function updateFacet(facetValue) {
+            this.$store.dispatch("selectFacet", facetValue);
+
+            ItemListService.setFacets(this.$store.getters.selectedFacetIds);
             ItemListService.getItemList();
+        },
+        isSelected: function isSelected(facetValueId) {
+            return this.selectedFacets.findIndex(function (selectedFacet) {
+                return selectedFacet.id === facetValueId;
+            }) > -1;
         }
     }
 });
@@ -13929,11 +13942,9 @@ var _UrlService2 = _interopRequireDefault(_UrlService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("item-filter-list", {
 
-    props: ["template", "facets"],
+    props: ["template", "facetData"],
 
     data: function data() {
         return {
@@ -13941,28 +13952,38 @@ Vue.component("item-filter-list", {
         };
     },
 
+
+    computed: Vuex.mapState({
+        facets: function facets(state) {
+            return state.itemList.facets;
+        }
+    }),
+
     created: function created() {
-        ResourceService.bind("facets", this);
+        this.$store.commit("setFacets", this.facetData);
 
         this.$options.template = this.template || "#vue-item-filter-list";
 
         var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
         if (urlParams.facets) {
-            ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+            this.$store.commit("setSelectedFacetsByIds", urlParams.facets.split(","));
         }
     },
 
+
     methods: {
         toggleOpeningState: function toggleOpeningState() {
+            var _this = this;
+
             window.setTimeout(function () {
-                this.isActive = !this.isActive;
-            }.bind(this), 300);
+                _this.isActive = !_this.isActive;
+            }, 300);
         }
     }
 });
 
-},{"services/ResourceService":92,"services/UrlService":93}],50:[function(require,module,exports){
+},{"services/UrlService":93}],50:[function(require,module,exports){
 "use strict";
 
 var ResourceService = require("services/ResourceService");
@@ -13972,47 +13993,21 @@ Vue.component("item-filter-tag-list", {
 
     props: ["template"],
 
-    data: function data() {
-        return {
-            facets: {},
-            facetParams: []
-        };
-    },
+    computed: Vuex.mapState({
+        tagList: function tagList(state) {
+            return state.itemList.selectedFacets;
+        }
+    }),
 
     created: function created() {
         this.$options.template = this.template || "#vue-item-filter-tag-list";
-        ResourceService.bind("facetParams", this);
-    },
-
-    ready: function ready() {
-        ResourceService.bind("facets", this);
     },
 
     methods: {
-        removeTag: function removeTag(tagId) {
-            this.facetParams.splice(this.facetParams.indexOf(tagId.toString()), 1);
-
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
+        removeTag: function removeTag(tag) {
+            this.$store.dispatch("selectFacet", tag);
+            ItemListService.setFacets(this.$store.getters.selectedFacetIds);
             ItemListService.getItemList();
-        }
-    },
-
-    computed: {
-        tagList: function tagList() {
-            var tagList = [];
-
-            if (this.facetParams.length > 0) {
-                for (var facetKey in this.facets) {
-                    for (var facetItemKey in this.facets[facetKey].values) {
-                        if (this.facetParams.indexOf(this.facets[facetKey].values[facetItemKey].id.toString()) > -1) {
-                            tagList.push(this.facets[facetKey].values[facetItemKey]);
-                        }
-                    }
-                }
-            }
-
-            return tagList;
         }
     }
 });
@@ -15956,8 +15951,12 @@ module.exports = function ($) {
         setCategoryId: setCategoryId
     };
 
+    function updateSearchParams() {}
+
     function getItemList() {
         if (searchParams.categoryId || searchParams.query.length >= 3) {
+            // updateSearchParams();
+
             if (ResourceService.getResource("itemList").val()) {
                 ResourceService.getResource("itemList").val().total = 0;
             }
@@ -15972,7 +15971,7 @@ module.exports = function ($) {
                 _setIsLoading(false);
 
                 ResourceService.getResource("itemList").set(response);
-                ResourceService.getResource("facets").set(response.facets);
+                window.ceresStore.commit("setFacets", response.facets);
             }).fail(function (response) {
                 _setIsLoading(false);
 
@@ -17183,6 +17182,10 @@ var _NavigationModule = require("store/modules/NavigationModule");
 
 var _NavigationModule2 = _interopRequireDefault(_NavigationModule);
 
+var _ItemListModule = require("store/modules/ItemListModule");
+
+var _ItemListModule2 = _interopRequireDefault(_ItemListModule);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line
@@ -17193,7 +17196,8 @@ var store = new Vuex.Store({
         address: _AddressModule2.default,
         localization: _LocalizationModule2.default,
         user: _UserModule2.default,
-        navigation: _NavigationModule2.default
+        navigation: _NavigationModule2.default,
+        itemList: _ItemListModule2.default
     }
 });
 
@@ -17201,7 +17205,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":97,"store/modules/CheckoutModule":98,"store/modules/LocalizationModule":99,"store/modules/NavigationModule":100,"store/modules/UserModule":101,"store/modules/WishListModule":102}],97:[function(require,module,exports){
+},{"store/modules/AddressModule":97,"store/modules/CheckoutModule":98,"store/modules/ItemListModule":99,"store/modules/LocalizationModule":100,"store/modules/NavigationModule":101,"store/modules/UserModule":102,"store/modules/WishListModule":103}],97:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17648,6 +17652,97 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var state = {
+    facets: [],
+    selectedFacets: []
+};
+
+var mutations = {
+    setFacets: function setFacets(state, facets) {
+        state.facets = facets;
+    },
+    setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
+        var selectedFacets = [];
+
+        if (selectedFacetIds.length > 0) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = state.facets[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var facet = _step.value;
+
+                    selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
+                        return selectedFacetIds.includes(facetValue.id);
+                    }));
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+
+        state.selectedFacets = selectedFacets;
+    },
+    toggleSelectedFacet: function toggleSelectedFacet(state, facetValue) {
+        if (!state.selectedFacets.find(function (selectedFacet) {
+            return selectedFacet.id === facetValue.id;
+        })) {
+            state.selectedFacets.push(facetValue);
+        } else {
+            state.selectedFacets = state.selectedFacets.filter(function (selectedFacet) {
+                return selectedFacet.id !== facetValue.id;
+            });
+        }
+    }
+};
+
+var actions = {
+    selectFacet: function selectFacet(_ref, facetValue) {
+        var state = _ref.state,
+            commit = _ref.commit;
+
+        commit("toggleSelectedFacet", facetValue);
+        // set page = 1;
+    }
+};
+
+var getters = {
+    selectedFacetIds: function selectedFacetIds(state) {
+        var selectedFacetIds = [];
+
+        state.selectedFacets.every(function (facet) {
+            return selectedFacetIds.push(facet.id);
+        });
+
+        return selectedFacetIds;
+    }
+};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{}],100:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 // import ApiService from "services/ApiService";
 
 var state = {
@@ -17742,7 +17837,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],100:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17890,7 +17985,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],101:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17931,7 +18026,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18043,7 +18138,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":86}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,71,67,68,69,70,72,73,74,75,76,77,78,79,80,81,82,83,84,96,97,98,99,100,101,102])
+},{"services/ApiService":86}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,71,67,68,69,70,72,73,74,75,76,77,78,79,80,81,82,83,84,96,97,98,99,100,101,102,103])
 
 
 // Frontend end scripts
