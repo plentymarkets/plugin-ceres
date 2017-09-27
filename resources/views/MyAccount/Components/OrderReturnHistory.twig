@@ -41,7 +41,7 @@
 										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.orderDate") }}: </strong>
-											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" }</span>
+											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" } <i class="fa fa-clock-o" aria-hidden="true"></i></span>
 										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.orderPaymentMethod") }}: </strong>
