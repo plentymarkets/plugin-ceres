@@ -22,5 +22,9 @@
   "properties.*",
   "filter.isSalable",
   "attributes.attribute.names.*",
-  "attributes.value.names.*"
+  "attributes.value.names.*",
+  "unit.content",
+  "unit.names.name",
+  "unit.names.lang",
+  "unit.unitOfMeasurement"
 ]

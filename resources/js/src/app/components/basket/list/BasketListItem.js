@@ -52,6 +52,10 @@ Vue.component("basket-list-item", {
                 ResourceService
                     .getResource("basketItems")
                     .remove(this.basketItem.id)
+                    .done(function()
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                    }.bind(this))
                     .fail(function()
                     {
                         self.resetDelete();
@@ -78,6 +82,10 @@ Vue.component("basket-list-item", {
             ResourceService
                 .getResource("basketItems")
                 .set(this.basketItem.id, this.basketItem)
+                .done(function()
+                {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                }.bind(this))
                 .fail(function()
                 {
                     this.waiting = false;
