@@ -61,10 +61,10 @@ function _updateItemList(currentCategory)
 {
     ItemListService.setCategoryId(currentCategory.id);
 
-    window.ceresStore.commit("setItemListPage", 1);
-    ItemListService.setPage(1);
-    ItemListService.setFacets("");
-    ItemListService.getItemList();
+    window.ceresStore.dispatch("selectItemListPage", 1);
+    // ItemListService.setPage(1);
+    window.ceresStore.dispatch()
+    // ItemListService.getItemList();
 }
 
 /**

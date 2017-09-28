@@ -1,5 +1,3 @@
-import {renderItems}from "services/CategoryRendererService";
-
 Vue.directive("render-category",
     {
         bind()
@@ -7,8 +5,18 @@ Vue.directive("render-category",
             this.el.addEventListener("click", event =>
             {
                 event.preventDefault();
-                window.ceresStore.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.expression)});
-                renderItems();
+
+                if (!App.isCategoryView)
+                {
+                    window.ceresStore.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.expression)});
+                    const url = window.ceresStore.state.navigation.currentCategory.url;
+
+                    window.open(url, "_self");
+                }
+                else
+                {
+                    window.ceresStore.dispatch("selectCategory", {categoryId: parseInt(this.expression)});
+                }
             });
         }
     });

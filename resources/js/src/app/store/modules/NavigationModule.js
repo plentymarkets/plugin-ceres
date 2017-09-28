@@ -62,6 +62,20 @@ const actions =
             }
         },
 
+        selectCategory({state, commit, dispatch}, {category, categoryId})
+        {
+            if (category)
+            {
+                commit("setCurrentCategory", category);
+            }
+            else if (categoryId)
+            {
+                dispatch("setCurrentCategoryById", {categoryId});
+            }
+
+            dispatch("retrieveItemList");
+        },
+
         setCurrentCategoryById({state, commit, dispatch}, {categoryId, categories})
         {
             categories = categories || state.tree;

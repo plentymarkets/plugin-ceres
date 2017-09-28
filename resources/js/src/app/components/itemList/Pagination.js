@@ -1,5 +1,4 @@
 const ResourceService = require("services/ResourceService");
-const ItemListService = require("services/ItemListService");
 
 import UrlService from "services/UrlService";
 
@@ -12,59 +11,57 @@ Vue.component("pagination", {
     data()
     {
         return {
-            itemSearch : {},
             itemList   : {},
             lastPageMax: 0
         };
     },
 
-    created()
-    {
-        this.$options.template = this.template;
-
-        ResourceService.bind("itemSearch", this);
-        ResourceService.bind("itemList", this);
-
-        const urlParams = UrlService.getUrlParams(document.location.search);
-
-        this.itemSearch.page = urlParams.page;
-    },
-
-    methods:
-    {
-        setPage(page)
-        {
-            this.$store.commit("setItemListPage", page);
-            ItemListService.setPage(page);
-            ItemListService.getItemList();
-
-            $("html, body").animate({scrollTop: 0}, "slow");
-        }
-    },
-
     computed:
     {
-        page()
-        {
-            return parseInt(this.itemSearch.page) || 1;
-        },
-
         pageMax()
         {
-            if (this.itemSearch.isLoading)
+            if (this.isLoading)
             {
                 return this.lastPageMax;
             }
 
-            let pageMax = this.itemList.total / parseInt(this.itemSearch.items);
+            let pageMax = this.itemList.total / parseInt(this.itemsPerPage);
 
-            if (this.itemList.total % parseInt(this.itemSearch.items) > 0)
+            if (this.itemList.total % parseInt(this.itemsPerPage) > 0)
             {
                 pageMax += 1;
             }
 
             this.lastPageMax = parseInt(pageMax) || 1;
             return parseInt(pageMax) || 1;
+        },
+
+        ...Vuex.mapState({
+            page: state => state.itemList.page || 1,
+            isLoading: state => state.itemList.isLoading,
+            itemsPerPage: state => state.itemList.itemsPerPage
+        })
+    },
+
+    created()
+    {
+        this.$options.template = this.template;
+
+        ResourceService.bind("itemList", this);
+
+        const urlParams = UrlService.getUrlParams(document.location.search);
+        const page = urlParams.page || 1;
+
+        this.$store.commit("setItemListPage", parseInt(page));
+    },
+
+    methods:
+    {
+        setPage(page)
+        {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({scrollTop: 0}, "slow");
         }
     }
 });

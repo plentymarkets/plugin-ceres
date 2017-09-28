@@ -19,12 +19,12 @@ Vue.component("category-breadcrumbs",
         methods: {
             /**
              * render items in relation to location
-             * @param currentCategory
+             * @param category
              */
-            selectBreadcrumb(currentCategory)
+            selectBreadcrumb(category)
             {
-                this.$store.commit("setCurrentCategory", currentCategory);
-                CategoryRendererService.renderItems();
+                this.$store.dispatch("selectCategory", {category});
+                // CategoryRendererService.renderItems();
                 return false;
             }
         }

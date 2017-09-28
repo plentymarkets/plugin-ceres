@@ -1,5 +1,3 @@
-const ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-list-sorting", {
@@ -72,12 +70,15 @@ Vue.component("item-list-sorting", {
             const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
             this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
+            
+            this.$store.commit("setItemListSorting", this.selectedSorting.value);
         },
 
         updateSorting()
         {
-            ItemListService.setOrderBy(this.selectedSorting.value);
-            ItemListService.getItemList();
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting.value);
+            // ItemListService.setOrderBy(this.selectedSorting.value);
+            // ItemListService.getItemList();
         },
 
         setSelectedValueByUrl()
@@ -91,7 +92,8 @@ Vue.component("item-list-sorting", {
                     if (this.sortData[i].value === urlParams.sorting)
                     {
                         this.selectedSorting = this.sortData[i];
-                        ItemListService.setOrderBy(this.selectedSorting.value);
+                        this.$store.commit("setItemListSorting", this.selectedSorting.value);
+                        // ItemListService.setOrderBy(this.selectedSorting.value);
                     }
                 }
             }

@@ -59,14 +59,21 @@ Vue.component("mobile-navigation", {
 
         navigateTo(category)
         {
-            if (category.children && category.showChildren)
-            {
-                this.slideTo(category.children);
-            }
-
             this.closeNavigation();
-            this.$store.commit("setCurrentCategory", category);
-            CategoryRendererService.renderItems();
+
+            if (!App.isCategoryView)
+            {
+                window.open(category.url, "_self");
+            }
+            else
+            {
+                this.$store.dispatch("selectCategory", {category});
+
+                if (category.children && category.showChildren)
+                {
+                    this.slideTo(category.children);
+                }
+            }
         },
 
         slideTo(children, back)

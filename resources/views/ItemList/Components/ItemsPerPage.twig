@@ -1,8 +1,8 @@
 <script type="x/template" id="vue-items-per-page">
     <div class="list-itemsperpage">
-        <select class="custom-select" v-model="itemSearch.items" @change="itemsPerPageChanged()">
-            <option :value="element" v-for="element in paginationValues" :selected="element == itemSearch.items">
-                ${ element }
+        <select class="custom-select" v-model="selectedValue" @change="itemsPerPageChanged()">
+            <option :value="value" v-for="value in paginationValues" :selected="value == selectedValue">
+                ${ value }
             </option>
         </select>
     </div>

@@ -70,7 +70,6 @@ module.exports = (function($)
 
     function _setIsLoading(isLoading)
     {
-        ResourceService.getResource("itemSearch").set(searchParams);
         window.ceresStore.commit("setIsItemListLoading", isLoading);
     }
 
