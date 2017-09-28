@@ -32,7 +32,6 @@ Vue.component("order-history", {
         this.itemsPerPage = this.itemsPerPage || 10;
         this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
         this.setOrders(this.orderList);
-        this.checkOrderReturnable();
     },
 
     methods: {
