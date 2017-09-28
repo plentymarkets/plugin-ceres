@@ -4,6 +4,7 @@ Vue.component("basket-totals", {
 
     props: [
         "config",
+        "preview",
         "template"
     ],
 
@@ -25,6 +26,8 @@ Vue.component("basket-totals", {
     ready: function()
     {
         ResourceService.bind("basket", this);
+
+        this.preview = this.preview || false;
     },
 
     methods:

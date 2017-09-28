@@ -16,6 +16,11 @@
 	}
 
 	.vatTotals {
+
+		&.big-totals {
+			margin-bottom: 30px;
+		}
+
 		dt{
 			width: 68%;
 			float:left;
