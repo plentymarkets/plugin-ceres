@@ -104,6 +104,15 @@
                 </div>
 
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
+
+                {% if not (item.data.unit.unitOfMeasurement == 'C62' and item.data.unit.content == 1) %}
+                    <div class="category-unit-price">
+                        <span>{{ item.data.unit.content }}</span>
+                        <span>{{ item.data.unit.names.name }}</span> |
+                        {{ item.data.calculatedPrices.formatted.basePrice }}
+                    </div>
+                {% endif %}
+
             </div>
             <add-to-basket template="#vue-add-to-basket" :item="{{ item.data | json_encode() }}" :show-quantity="false" :show-order-properties="{{ showOrderProperties }}" :use-large-scale="false"
                        item-url="{{ itemUrl }}" :salable="{{ services.item.getVariationIsSalable(item.data.variation.id) | json_encode() }}"></add-to-basket>

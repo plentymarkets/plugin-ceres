@@ -148,6 +148,17 @@ var ResourceService = require("services/ResourceService");
 
                 $modal.modal("show");
             }
+        },
+
+        watch:
+        {
+            "checkout.shippingCountryId": function(newVal, oldVal)
+            {
+                if (newVal !== oldVal)
+                {
+                    document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", {detail: newVal}));
+                }
+            }
         }
     });
 })(jQuery);

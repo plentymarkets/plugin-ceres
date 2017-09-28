@@ -85,7 +85,8 @@
 
 	.item-unit-price {
 	    width: 50%;
-	    float: left;
+		float: left;
+		white-space: nowrap;
 	}
 
 	.item-total-price {

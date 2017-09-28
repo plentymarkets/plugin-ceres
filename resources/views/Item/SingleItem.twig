@@ -97,13 +97,16 @@
                     <span content="{{ item.documents[0].data.calculatedPrices.default.currency }}"></span>
                 </span>
 
-                <div class="base-price text-muted m-y-1">
+                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="!(documents[0].data.unit.unitOfMeasurement === 'C62' && documents[0].data.unit.content === 1)">
+                    <div>
+                        {{ trans("Ceres::Template.itemContent") }}
+                        <span v-resource-bind:currentVariation="documents.0.data.unit.content">{{ item.documents[0].data.unit.content }}</span>
+                        <span v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                    </div>
+                    <div>
                         {{ trans("Ceres::Template.itemUnitPrice") }}
-                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultUnitPrice">{{ item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice }}</span> /
-                            
-                        <span v-if="true" class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.content" v-resource-if:currentVariation="documents[0].data.unit.content > 1">{{ item.documents[0].data.unit.content }}</span>
-
-                        <span class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.basePrice">{{ item.documents[0].data.calculatedPrices.formatted.basePrice }}</span>
+                    </div>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
@@ -289,12 +292,7 @@
 
         {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
 
-        {#<hr>#}
-
-        {#<h3 class="m-t-3 m-b-1">{{ trans("Ceres::Template.itemCustomerFeedback") }}</h3>#}
-        {#<div class="row m-b-3">#}
-            {#{% include "Ceres::Item.Partials.ItemRating" %}#}
-        {#</div>#}
+        {{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer") }}
 
     </div>
 
