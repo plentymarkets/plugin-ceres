@@ -17,19 +17,22 @@ const getters =
         {
             let username = "";
 
-            if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0)
+            if (state.userData)
             {
-                username = state.userData.firstName + " " + state.userData.lastName;
-            }
-            else
-            {
-                username = state.userData.options[0].value;
+                if (state.userData.firstName.length > 0 && state.userData.lastName.length > 0)
+                {
+                    username = state.userData.firstName + " " + state.userData.lastName;
+                }
+                else
+                {
+                    username = state.userData.options[0].value;
+                }
             }
 
             return username;
         },
 
-        isLoggedIn: state => state.userData.id > 0
+        isLoggedIn: state => (state.userData && state.userData.id > 0)
     };
 
 export default
