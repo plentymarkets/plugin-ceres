@@ -48,10 +48,6 @@
 	}
 }
 
-.btn {
-	outline: 0 !important;
-}
-
 button:focus {
 	outline:none;
 }
@@ -74,16 +70,14 @@ button:focus {
     }
 }
 
-.btn.btn-nohover{
-
-}
-
 // create gray outline button 
 .btn-outline-default{
 	@include button-outline-variant($btn-default-color);
 }
 
 .btn {
+
+	outline: 0 !important;
 
 	&.btn-right {
 		float: right;
@@ -109,6 +103,10 @@ button:focus {
 
 	&.btn-large {
 		width: 15rem;
+	}
+
+	&.btn-m-r {
+		margin-right: 10px;
 	}
 }
 
