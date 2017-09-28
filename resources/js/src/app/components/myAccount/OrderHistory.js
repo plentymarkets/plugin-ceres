@@ -18,7 +18,6 @@ Vue.component("order-history", {
             countStart: 0,
             countEnd: 0,
             currentOrder: null,
-            isReturnable: false,
             isLoading: true
         };
     },
@@ -84,11 +83,6 @@ Vue.component("order-history", {
             }
 
             return "";
-        },
-
-        checkOrderReturnable()
-        {
-            this.isReturnable = true;
         },
 
         showPage(page)

@@ -129,7 +129,7 @@
                                             <button class="btn btn-primary btn-block" @click="setCurrentOrder({{ entry }})">{{ trans("Ceres::Template.orderDetails") }}</button>
 
                                             {% if entry.isReturnable %}
-                                                <a class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}" :disabled="!isReturnable">{{ trans("Ceres::Template.myAccountReturnSendBack") }}</a>
+                                                <a class="btn btn-primary btn-block" href="/returns/{{ entry.order.id }}">{{ trans("Ceres::Template.myAccountReturnSendBack") }}</a>
                                             {% endif %}
 
                                             <change-payment-method  template="#vue-change-payment-method"
