@@ -14586,17 +14586,27 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderList", "ordersPerPage", "returnsList"],
+    props: ["template", "orderList", "ordersPerPage", "isReturnActive"],
 
     data: function data() {
-        return {};
+        return {
+            returnsFirstOpened: false
+        };
     },
     created: function created() {
         this.$options.template = this.template;
     },
 
 
-    methods: {}
+    methods: {
+        returnsTabsOpened: function returnsTabsOpened() {
+            if (!this.returnsFirstOpened) {
+                this.returnsFirstOpened = true;
+
+                this.$broadcast("returns-first-opening");
+            }
+        }
+    }
 });
 
 },{}],54:[function(require,module,exports){
@@ -14615,7 +14625,6 @@ Vue.component("order-history", {
             countStart: 0,
             countEnd: 0,
             currentOrder: null,
-            isReturnable: false,
             isLoading: true
         };
     },
@@ -14626,7 +14635,6 @@ Vue.component("order-history", {
         this.itemsPerPage = this.itemsPerPage || 10;
         this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
         this.setOrders(this.orderList);
-        this.checkOrderReturnable();
     },
 
 
@@ -14653,9 +14661,7 @@ Vue.component("order-history", {
                 $(_this.$els.orderDetails).modal("show");
             });
 
-            var jsonEncodedOrder = JSON.stringify(order);
-
-            ApiService.get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder).done(function (response) {
+            ApiService.get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id).done(function (response) {
                 _this.isLoading = false;
                 $("#dynamic-twig-content").html(response);
             });
@@ -14668,9 +14674,6 @@ Vue.component("order-history", {
             }
 
             return "";
-        },
-        checkOrderReturnable: function checkOrderReturnable() {
-            this.isReturnable = true;
         },
         showPage: function showPage(page) {
             var _this2 = this;
@@ -14689,30 +14692,48 @@ Vue.component("order-history", {
 },{"services/ApiService":91}],55:[function(require,module,exports){
 "use strict";
 
+var ApiService = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+
 Vue.component("order-return-history", {
 
-    props: ["template", "itemsPerPage", "showFirstPage", "showLastPage", "returnsList"],
+    props: ["template", "itemsPerPage", "showFirstPage", "showLastPage"],
 
     data: function data() {
         return {
-            page: 1,
-            pageMax: 1,
-            countStart: 0,
-            countEnd: 0
+            waiting: false,
+            returnsList: { page: 1 }
         };
     },
     created: function created() {
         this.$options.template = this.template;
-
-        console.log(this.returnsList);
     },
     ready: function ready() {
         this.itemsPerPage = this.itemsPerPage || 10;
-        this.pageMax = Math.ceil(this.returnsList.totalsCount / this.itemsPerPage);
     },
 
 
     methods: {
+        setPage: function setPage(page) {
+            var _this = this;
+
+            if (!this.waiting) {
+                this.waiting = true;
+
+                var lastPage = this.returnsList.page;
+
+                this.returnsList.page = page;
+
+                ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage }).done(function (response) {
+                    _this.waiting = false;
+                    _this.returnsList = response;
+                }).fail(function (response) {
+                    _this.waiting = false;
+                    _this.returnsList.page = lastPage;
+                    NotificationService.error(Translations.Template.notFoundOops);
+                });
+            }
+        },
         getOriginOrderId: function getOriginOrderId(order) {
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -14743,10 +14764,16 @@ Vue.component("order-return-history", {
 
             return "-";
         }
+    },
+
+    events: {
+        "returns-first-opening": function returnsFirstOpening() {
+            this.setPage(1);
+        }
     }
 });
 
-},{}],56:[function(require,module,exports){
+},{"services/ApiService":91,"services/NotificationService":97}],56:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14799,6 +14826,9 @@ Vue.component("order-return", {
                 _this.isLoading = false;
                 $(_this.$els.orderReturnConfirmation).modal("hide");
             });
+        },
+        selectAllItems: function selectAllItems() {
+            this.$broadcast("select-all-items");
         }
     }, Vuex.mapActions(["sendOrderReturn"]))
 });
@@ -14840,14 +14870,25 @@ Vue.component("order-return-item", {
 
             this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
         },
-        updateValue: function updateValue(event) {
-            if (event.currentTarget.checked) {
-                this.returnCount = 1;
+        selectItem: function selectItem() {
+            this.isChecked = true;
+
+            this.updateValue();
+        },
+        updateValue: function updateValue() {
+            if (this.isChecked) {
+                this.returnCount = this.orderItem.quantity;
             } else {
                 this.returnCount = 0;
             }
 
             this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
+        }
+    },
+
+    events: {
+        "select-all-items": function selectAllItems() {
+            this.selectItem();
         }
     }
 });
