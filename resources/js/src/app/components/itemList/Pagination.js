@@ -1,5 +1,5 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
+const ResourceService = require("services/ResourceService");
+const ItemListService = require("services/ItemListService");
 
 import UrlService from "services/UrlService";
 
@@ -9,7 +9,7 @@ Vue.component("pagination", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             itemSearch : {},
@@ -18,22 +18,23 @@ Vue.component("pagination", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
 
         ResourceService.bind("itemSearch", this);
         ResourceService.bind("itemList", this);
 
-        var urlParams = UrlService.getUrlParams(document.location.search);
+        const urlParams = UrlService.getUrlParams(document.location.search);
 
         this.itemSearch.page = urlParams.page;
     },
 
     methods:
     {
-        setPage: function(page)
+        setPage(page)
         {
+            this.$store.commit("setItemListPage", page);
             ItemListService.setPage(page);
             ItemListService.getItemList();
 
@@ -43,19 +44,19 @@ Vue.component("pagination", {
 
     computed:
     {
-        page: function()
+        page()
         {
             return parseInt(this.itemSearch.page) || 1;
         },
 
-        pageMax: function()
+        pageMax()
         {
             if (this.itemSearch.isLoading)
             {
                 return this.lastPageMax;
             }
 
-            var pageMax = this.itemList.total / parseInt(this.itemSearch.items);
+            let pageMax = this.itemList.total / parseInt(this.itemSearch.items);
 
             if (this.itemList.total % parseInt(this.itemSearch.items) > 0)
             {

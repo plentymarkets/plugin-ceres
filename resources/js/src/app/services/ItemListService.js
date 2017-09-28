@@ -25,15 +25,14 @@ module.exports = (function($)
         setItemsPerPage   : setItemsPerPage,
         setOrderBy        : setOrderBy,
         setPage           : setPage,
-        setSearchParams   : setSearchParams,
         setFacets         : setFacets,
         setCategoryId     : setCategoryId
     };
 
-    function updateSearchParams()
-    {
+    // function updateSearchParams()
+    // {
 
-    }
+    // }
 
     function getItemList()
     {
@@ -72,21 +71,7 @@ module.exports = (function($)
     function _setIsLoading(isLoading)
     {
         ResourceService.getResource("itemSearch").set(searchParams);
-        ResourceService.getResource("isLoading").set(isLoading);
-    }
-
-    /**
-     * ?searchString=searchString&itemsPerPage=itemsPerPage&orderBy=orderBy&orderByKey=orderByKey&page=page
-     * @param urlParams
-     */
-    function setSearchParams(urlParams)
-    {
-        var queryParams = UrlService.getUrlParams(urlParams);
-
-        for (var key in queryParams)
-        {
-            searchParams[key] = queryParams[key];
-        }
+        window.ceresStore.commit("setIsItemListLoading", isLoading);
     }
 
     function updateSearchString(query)
@@ -108,6 +93,7 @@ module.exports = (function($)
         searchParams.query = query;
         searchParams.page = 1;
 
+        window.ceresStore.commit("setItemListPage", 1);
         setPage(1);
         setFacets("");
 
@@ -156,16 +142,19 @@ module.exports = (function($)
         UrlService.setUrlParam("page", page);
     }
 
+    // DONE!
     function setFacets(facets)
     {
         searchParams.facets = facets.toString();
 
         facets = (facets.toString().length > 0) ? facets.toString() : null;
 
+        window.ceresStore.commit("setItemListPage", 1);
         setPage(1);
 
         UrlService.setUrlParam("facets", facets);
     }
+    // DONE!
 
     function setCategoryId(categoryId)
     {

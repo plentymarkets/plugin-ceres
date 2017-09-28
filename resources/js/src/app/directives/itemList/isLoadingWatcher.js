@@ -1,30 +1,27 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.directive("is-loading-watcher",
     {
-        bind: function()
+        bind()
         {
-            var firstRendering = true;
+            this.el.isFirstRendering = true;
+        },
 
-            ResourceService.watch("isLoading", function(newValue)
+        update(isLoading)
+        {
+            if (!this.el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null)
             {
-                if (!firstRendering && document.getElementById("twig-rendered-item-list") !== null)
+                if (!isLoading)
                 {
-                    if (!newValue)
-                    {
-                        $("#twig-rendered-item-list").remove();
-
-                        document.getElementById("vue-rendered-item-list").style.removeProperty("display");
-                    }
-                    else
-                    {
-                        $("#twig-rendered-item-list").addClass("loading");
-                    }
+                    $("#twig-rendered-item-list").remove();
+                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
                 }
                 else
                 {
-                    firstRendering = false;
+                    $("#twig-rendered-item-list").addClass("loading");
                 }
-            });
+            }
+            else
+            {
+                this.el.isFirstRendering = false;
+            }
         }
     });

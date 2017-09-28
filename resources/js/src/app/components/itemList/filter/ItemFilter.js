@@ -8,28 +8,17 @@ Vue.component("item-filter", {
         "facet"
     ],
 
-    data()
-    {
-        return {
-            isLoading: false
-        };
-    },
-
     computed:
     {
         ...Vuex.mapState({
-            selectedFacets: state => state.itemList.selectedFacets
+            selectedFacets: state => state.itemList.selectedFacets,
+            isLoading: state => state.itemList.isLoading
         })
     },
 
     created()
     {
         this.$options.template = this.template || "#vue-item-filter";
-    },
-
-    ready()
-    {
-        ResourceService.bind("isLoading", this);
     },
 
     methods:

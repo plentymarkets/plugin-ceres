@@ -32,6 +32,7 @@ Vue.component("items-per-page", {
     {
         itemsPerPageChanged: function()
         {
+            this.$store.commit("setItemListPage", 1);
             ItemListService.setItemsPerPage(this.itemSearch.items);
             ItemListService.setPage(1);
             ItemListService.getItemList();

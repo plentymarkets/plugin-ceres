@@ -12,10 +12,13 @@ Vue.component("item-list", {
     {
         return {
             itemList: {},
-            isLoading: false,
             filterListState: false
         };
     },
+
+    computed: Vuex.mapState({
+        isLoading: state => state.itemList.isLoading
+    }),
 
     created: function()
     {
@@ -27,6 +30,5 @@ Vue.component("item-list", {
     ready: function()
     {
         ResourceService.bind("itemList", this);
-        ResourceService.bind("isLoading", this);
     }
 });
