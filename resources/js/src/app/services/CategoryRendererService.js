@@ -9,6 +9,8 @@ let firstInitDone = false;
  */
 export function renderItems()
 {
+    const currentCategory = window.ceresStore.state.navigation.currentCategory;
+
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree))
@@ -18,9 +20,9 @@ export function renderItems()
 
     if (!App.isCategoryView)
     {
-        window.open(window.ceresStore.state.navigation.currentCategory.url, "_self");
+        window.open(currentCategory.url, "_self");
     }
-    else if (window.ceresStore.state.navigation.currentCategory.details.length)
+    else if (currentCategory.details.length)
     {
         if (!firstInitDone)
         {
@@ -28,11 +30,11 @@ export function renderItems()
             _firstRendering();
         }
 
-        _handleCurrentCategory(window.ceresStore.state.navigation.currentCategory);
+        _handleCurrentCategory();
 
         document.dispatchEvent(new CustomEvent("afterCategoryChanged", {detail:
         {
-            currentCategory: window.ceresStore.state.navigation.currentCategory,
+            currentCategory,
             categoryTree: _categoryTree
         }}));
     }
@@ -42,12 +44,13 @@ export function renderItems()
  * bundle functions
  * @param currentCategory
  */
-function _handleCurrentCategory(currentCategory)
+function _handleCurrentCategory()
 {
+    const currentCategory = window.ceresStore.state.navigation.currentCategory;
+
     _removeTempDesc();
     _updateItemList(currentCategory);
     _updateHistory(currentCategory);
-    window.ceresStore.commit("setCurrentCategory", currentCategory);
 }
 
 /**
