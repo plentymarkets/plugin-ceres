@@ -27,11 +27,11 @@
                     </div>
                 </div>
                 <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
-                    <div class="reset-pwd-direction" :class="{'col-xs-12 col-sm-4': !modalElement}">
+                    <div class="reset-pwd-direction" :class="{'col-xs-7 col-sm-4': !modalElement}">
                         <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.accForgotPassword") }}?</a>
                         {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
                     </div>
-                    <div :class="{'col-xs-12 col-sm-8 text-sm-right': !modalElement}">
+                    <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
                         <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
                             <i class="fa fa-user" v-waiting-animation="isDisabled"></i>{{ trans("Ceres::Template.accLogin") }}
                         </button>
