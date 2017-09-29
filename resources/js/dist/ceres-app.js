@@ -13143,7 +13143,14 @@ Vue.component("item-image-carousel", {
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
 
+            var $thumbs = $(this.$els.thumbs);
+
+            $thumbs.trigger("destroy.owl.carousel");
+            $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+            $thumbs.find(".owl-item").remove();
+
             this.initCarousel();
+            this.initThumbCarousel();
         },
 
         initCarousel: function initCarousel() {
