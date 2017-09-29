@@ -1,5 +1,4 @@
 const ApiService = require("services/ApiService");
-const ResourceService = require("services/ResourceService");
 
 import ValidationService from "services/ValidationService";
 
@@ -10,17 +9,15 @@ Vue.component("user-login-handler", {
         "template"
     ],
 
-    data()
-    {
-        return {
-            username: "",
-            isLoggedIn: {}
-        };
-    },
+    computed: Vuex.mapGetters([
+        "username",
+        "isLoggedIn"
+    ]),
 
     created()
     {
         this.$options.template = this.template;
+        this.$store.commit("setUserData", this.userData);
     },
 
     /**
@@ -28,32 +25,10 @@ Vue.component("user-login-handler", {
      */
     ready()
     {
-        ResourceService.bind("user", this, "isLoggedIn");
-
-        this.setUsername(this.userData);
         this.addEventListeners();
     },
 
     methods: {
-        /**
-         * Set the current user logged in
-         * @param userData
-         */
-        setUsername(userData)
-        {
-            if (userData)
-            {
-                if (userData.firstName.length > 0 && userData.lastName.length > 0)
-                {
-                    this.username = userData.firstName + " " + userData.lastName;
-                }
-                else
-                {
-                    this.username = userData.options[0].value;
-                }
-            }
-        },
-
         /**
          * Adds login/logout event listeners
          */
@@ -61,14 +36,12 @@ Vue.component("user-login-handler", {
         {
             ApiService.listen("AfterAccountAuthentication", userData =>
             {
-                this.setUsername(userData.accountContact);
-                ResourceService.getResource("user").set({isLoggedIn: true});
+                this.$store.commit("setUserData", userData);
             });
 
             ApiService.listen("AfterAccountContactLogout", () =>
             {
-                this.username = "";
-                ResourceService.getResource("user").set({isLoggedIn: false});
+                this.$store.commit("setUserData", null);
             });
         },
 
