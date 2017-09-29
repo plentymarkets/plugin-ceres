@@ -29,7 +29,7 @@
 								<button type="button" data-dismiss="modal" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalCancel") }}</button>		
 							</div>
 							 <div class="col-sm-3">
-								<button @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalConfirm") }}</button>
+								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalConfirm") }}</button>
 							</div>
 						</div>
 					</div>
