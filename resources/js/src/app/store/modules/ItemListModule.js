@@ -136,7 +136,7 @@ const actions =
                         items               : state.itemsPerPage,
                         sorting             : state.sorting,
                         page                : state.page,
-                        facets              : getters.selectedFacetIds,
+                        facets              : getters.selectedFacetIds.toString(),
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                         template            : "Ceres::ItemList.ItemListView",
                         variationShowType   : App.config.variationShowType
@@ -168,9 +168,9 @@ const actions =
             const urlParams = {};
 
             urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
-            urlParams.items = (searchParams.items !== App.config.defaultItemsPerPage) ? searchParams.items : null;
+            urlParams.items = (searchParams.items !== parseInt(App.config.defaultItemsPerPage)) ? searchParams.items : null;
             urlParams.page = (searchParams.page > 1) ? searchParams.page : null;
-            urlParams.facets = (searchParams.facets.toString().length > 0) ? searchParams.facets.toString() : null;
+            urlParams.facets = (searchParams.facets.length > 0) ? searchParams.facets : null;
             if (App.isSearch)
             {
                 urlParams.sorting = (searchParams.sorting !== App.config.defaultSortingSearch) ? searchParams.sorting : null;
