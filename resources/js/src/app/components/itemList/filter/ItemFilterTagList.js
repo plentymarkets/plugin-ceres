@@ -18,8 +18,6 @@ Vue.component("item-filter-tag-list", {
         removeTag(tag)
         {
             this.$store.dispatch("selectFacet", tag);
-            // ItemListService.setFacets(this.$store.getters.selectedFacetIds);
-            // ItemListService.getItemList();
         }
     }
 });

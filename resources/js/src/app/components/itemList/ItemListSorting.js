@@ -76,8 +76,6 @@ Vue.component("item-list-sorting", {
         updateSorting()
         {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting.value);
-            // ItemListService.setOrderBy(this.selectedSorting.value);
-            // ItemListService.getItemList();
         },
 
         setSelectedValueByUrl()
@@ -92,7 +90,6 @@ Vue.component("item-list-sorting", {
                     {
                         this.selectedSorting = this.sortData[i];
                         this.$store.commit("setItemListSorting", this.selectedSorting.value);
-                        // ItemListService.setOrderBy(this.selectedSorting.value);
                     }
                 }
             }

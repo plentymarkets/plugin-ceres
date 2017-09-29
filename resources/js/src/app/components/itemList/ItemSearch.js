@@ -30,11 +30,6 @@ Vue.component("item-search", {
 
         this.$store.commit("setItemListSearchString", urlParams.query);
         this.currentSearchString = urlParams.query;
-
-        // if (this.searchString)
-        // {
-        //     ItemListService.updateSearchString(this.searchString);
-        // }
     },
 
     methods:

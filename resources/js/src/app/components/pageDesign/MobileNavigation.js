@@ -1,5 +1,3 @@
-import CategoryRendererService from "services/CategoryRendererService";
-
 Vue.component("mobile-navigation", {
 
     props: [

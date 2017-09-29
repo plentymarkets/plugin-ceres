@@ -24,6 +24,5 @@ Vue.component("item-list", {
         this.$options.template = this.template;
         this.$store.commit("setItemListItems", this.itemData);
         this.$store.commit("setItemListTotalItems", this.totalItemsData);
-        // ItemListService.setCategoryId(this.categoryId);
     }
 });

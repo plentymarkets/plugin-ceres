@@ -23,8 +23,6 @@ Vue.component("item-filter", {
         updateFacet(facetValue)
         {
             this.$store.dispatch("selectFacet", facetValue);
-            // ItemListService.setFacets(this.$store.getters.selectedFacetIds);
-            // ItemListService.getItemList();
         },
 
         isSelected(facetValueId)
