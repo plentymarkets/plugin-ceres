@@ -105,16 +105,6 @@ var init = (function($, window, document)
             $("html, body").animate({scrollTop: 0}, "slow");
         });
 
-        $("#searchBox").on("show.bs.collapse", function()
-        {
-            $("#countrySettings").collapse("hide");
-        });
-
-        $("#countrySettings").on("show.bs.collapse", function()
-        {
-            $("#searchBox").collapse("hide");
-        });
-
         $toggleListView.on("click", function(evt)
         {
             evt.preventDefault();
@@ -179,6 +169,16 @@ var init = (function($, window, document)
                 $("html, body").animate({scrollTop: 0}, duration);
 
                 return false;
+            });
+
+            $("#searchBox").on("show.bs.collapse", function()
+            {
+                $("#countrySettings").collapse("hide");
+            });
+
+            $("#countrySettings").on("show.bs.collapse", function()
+            {
+                $("#searchBox").collapse("hide");
             });
 
             $("#accountMenuList").click(function()
