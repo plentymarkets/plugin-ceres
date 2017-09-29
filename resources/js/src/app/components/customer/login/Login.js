@@ -100,11 +100,6 @@ Vue.component("login", {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(this.modalElement) !== null)
-                    {
-                        ModalService.findModal(document.getElementById(this.modalElement)).hide();
-                    }
-
                     NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
 
                     if (this.backlink !== null && this.backlink)
@@ -119,8 +114,6 @@ Vue.component("login", {
                     {
                         location.reload();
                     }
-
-                    this.isDisabled = false;
                 })
                 .fail(response =>
                 {
