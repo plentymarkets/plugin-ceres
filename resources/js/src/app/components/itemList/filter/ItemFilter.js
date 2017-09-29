@@ -1,6 +1,3 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 Vue.component("item-filter", {
 
     props: [
@@ -26,9 +23,8 @@ Vue.component("item-filter", {
         updateFacet(facetValue)
         {
             this.$store.dispatch("selectFacet", facetValue);
-
-            ItemListService.setFacets(this.$store.getters.selectedFacetIds);
-            ItemListService.getItemList();
+            // ItemListService.setFacets(this.$store.getters.selectedFacetIds);
+            // ItemListService.getItemList();
         },
 
         isSelected(facetValueId)

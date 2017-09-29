@@ -1,4 +1,3 @@
-const ItemListService = require("services/ItemListService");
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
 let firstInitDone = false;
@@ -59,11 +58,10 @@ function _handleCurrentCategory()
  */
 function _updateItemList(currentCategory)
 {
-    ItemListService.setCategoryId(currentCategory.id);
+    // ItemListService.setCategoryId(currentCategory.id);
 
     window.ceresStore.dispatch("selectItemListPage", 1);
     // ItemListService.setPage(1);
-    window.ceresStore.dispatch()
     // ItemListService.getItemList();
 }
 

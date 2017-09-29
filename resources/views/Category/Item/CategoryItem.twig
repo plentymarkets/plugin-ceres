@@ -42,8 +42,6 @@
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
     {{ component( "Ceres::ItemList.Components.Pagination") }}
 
-    <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
-
     {% if showCategoryImage %}
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
     {% endif %}
@@ -112,7 +110,7 @@
                 </div>
 
                 <div id="vue-rendered-item-list" style="display:none">
-                    <item-list template="#vue-item-list" :category-id="{{ category.id }}"></item-list>
+                    <item-list template="#vue-item-list" :total-items-data="{{ paginatedResult.total }}" :category-id="{{ category.id }}"></item-list>
                 </div>
 
             </div>

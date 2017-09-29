@@ -1,5 +1,3 @@
-const ResourceService = require("services/ResourceService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("pagination", {
@@ -11,7 +9,6 @@ Vue.component("pagination", {
     data()
     {
         return {
-            itemList   : {},
             lastPageMax: 0
         };
     },
@@ -25,29 +22,29 @@ Vue.component("pagination", {
                 return this.lastPageMax;
             }
 
-            let pageMax = this.itemList.total / parseInt(this.itemsPerPage);
+            let pageMax = this.totalItems / parseInt(this.itemsPerPage);
 
-            if (this.itemList.total % parseInt(this.itemsPerPage) > 0)
+            if (this.totalItems % parseInt(this.itemsPerPage) > 0)
             {
                 pageMax += 1;
             }
 
             this.lastPageMax = parseInt(pageMax) || 1;
+
             return parseInt(pageMax) || 1;
         },
 
         ...Vuex.mapState({
             page: state => state.itemList.page || 1,
             isLoading: state => state.itemList.isLoading,
-            itemsPerPage: state => state.itemList.itemsPerPage
+            itemsPerPage: state => state.itemList.itemsPerPage,
+            totalItems: state => state.itemList.totalItems
         })
     },
 
     created()
     {
         this.$options.template = this.template;
-
-        ResourceService.bind("itemList", this);
 
         const urlParams = UrlService.getUrlParams(document.location.search);
         const page = urlParams.page || 1;

@@ -1,4 +1,5 @@
 import UrlService from "services/UrlService";
+import ApiService from "services/ApiService";
 
 const state =
     {
@@ -8,7 +9,9 @@ const state =
         sorting: null,
         isLoading: false,
         itemsPerPage: null,
-        searchString: null
+        searchString: null,
+        items: [],
+        totalItems: null
     };
 
 const mutations =
@@ -68,24 +71,32 @@ const mutations =
         setItemListSearchString(state, searchString)
         {
             state.searchString = searchString;
+        },
+
+        setItemListItems(state, items)
+        {
+            state.items = items;
+        },
+
+        setItemListTotalItems(state, totalItems)
+        {
+            state.totalItems = totalItems;
         }
     };
 
 const actions =
     {
-        selectFacet({commit}, facetValue)
+        selectFacet({dispatch, commit}, facetValue)
         {
             commit("toggleSelectedFacet", facetValue);
-            // set page = 1;
+            commit("setItemListPage", 1);
+
+            dispatch("retrieveItemList");
         },
 
         selectItemListPage({dispatch, commit}, page)
         {
             commit("setItemListPage", page);
-            // set url params/fire get item list
-
-            page = (page > 1) ? page : null;
-            UrlService.setUrlParam("page", page);
 
             dispatch("retrieveItemList");
         },
@@ -95,16 +106,6 @@ const actions =
             commit("setItemListSorting", sorting);
             commit("setItemListPage", 1);
 
-            // if (App.isSearch)
-            // {
-            //     sorting = (sorting !== App.config.defaultSortingSearch) ? sorting : null;
-            // }
-            // else
-            // {
-            //     sorting = (sorting !== App.config.defaultSorting) ? sorting : null;
-            // }
-
-            // UrlService.setUrlParam("sorting", sorting);
             dispatch("retrieveItemList");
         },
 
@@ -125,21 +126,64 @@ const actions =
             dispatch("retrieveItemList");
         },
 
-        retrieveItemList({state, dispatch, commit})
+        retrieveItemList({state, dispatch, commit, getters, rootState})
         {
             return new Promise((resolve, reject) =>
             {
-                console.log("TODO retrieve items");
-                // ApiService.get("TODO", {TODO})
-                //     .done(data =>
-                //     {
-                //         resolve(data);
-                //     })
-                //     .fail(error =>
-                //     {
-                //         reject(error);
-                //     });
+                const searchParams =
+                    {
+                        query               : state.searchString,
+                        items               : state.itemsPerPage,
+                        sorting             : state.sorting,
+                        page                : state.page,
+                        facets              : getters.selectedFacetIds,
+                        categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
+                        template            : "Ceres::ItemList.ItemListView",
+                        variationShowType   : App.config.variationShowType
+                    };
+                const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
+
+                dispatch("updateItemListUrlParams", searchParams);
+                commit("setIsItemListLoading", true);
+
+                ApiService.get(url, searchParams)
+                    .done(data =>
+                    {
+                        commit("setItemListItems", data.documents);
+                        commit("setItemListTotalItems", data.total);
+                        commit("setFacets", data.facets);
+                        commit("setIsItemListLoading", false);
+                        resolve(data);
+                    })
+                    .fail(error =>
+                    {
+                        commit("setIsItemListLoading", false);
+                        reject(error);
+                    });
             });
+        },
+
+        updateItemListUrlParams({state}, searchParams)
+        {
+            const urlParams = {};
+
+            urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
+            urlParams.items = (searchParams.items !== App.config.defaultItemsPerPage) ? searchParams.items : null;
+            urlParams.page = (searchParams.page > 1) ? searchParams.page : null;
+            urlParams.facets = (searchParams.facets.toString().length > 0) ? searchParams.facets.toString() : null;
+            if (App.isSearch)
+            {
+                urlParams.sorting = (searchParams.sorting !== App.config.defaultSortingSearch) ? searchParams.sorting : null;
+            }
+            else
+            {
+                urlParams.sorting = (searchParams.sorting !== App.config.defaultSorting) ? searchParams.sorting : null;
+            }
+
+            for (const urlParamKey in urlParams)
+            {
+                UrlService.setUrlParam(urlParamKey, urlParams[urlParamKey]);
+            }
         }
     };
 

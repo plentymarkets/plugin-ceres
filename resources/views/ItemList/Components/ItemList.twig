@@ -19,7 +19,7 @@
         {% endif %}
 
         <ul class="product-list row grid">
-            <category-item v-for="itemData in itemList.documents" :item-data="itemData.data"
+            <category-item v-for="item in items" :item-data="item.data"
                            decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
 
         </ul>

@@ -1,5 +1,3 @@
-const ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-search", {
@@ -33,10 +31,10 @@ Vue.component("item-search", {
         this.$store.commit("setItemListSearchString", urlParams.query);
         this.currentSearchString = urlParams.query;
 
-        if (this.searchString)
-        {
-            ItemListService.updateSearchString(this.searchString);
-        }
+        // if (this.searchString)
+        // {
+        //     ItemListService.updateSearchString(this.searchString);
+        // }
     },
 
     methods:

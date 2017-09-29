@@ -70,7 +70,6 @@ Vue.component("item-list-sorting", {
             const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
             this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
-            
             this.$store.commit("setItemListSorting", this.selectedSorting.value);
         },
 

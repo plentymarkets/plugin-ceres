@@ -1,34 +1,29 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 Vue.component("item-list", {
 
     props: [
         "categoryId",
-        "template"
+        "template",
+        "itemData",
+        "totalItemsData"
     ],
 
-    data: function()
+    data()
     {
         return {
-            itemList: {},
             filterListState: false
         };
     },
 
     computed: Vuex.mapState({
-        isLoading: state => state.itemList.isLoading
+        isLoading: state => state.itemList.isLoading,
+        items: state => state.itemList.items
     }),
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
-
-        ItemListService.setCategoryId(this.categoryId);
-    },
-
-    ready: function()
-    {
-        ResourceService.bind("itemList", this);
+        this.$store.commit("setItemListItems", this.itemData);
+        this.$store.commit("setItemListTotalItems", this.totalItemsData);
+        // ItemListService.setCategoryId(this.categoryId);
     }
 });
