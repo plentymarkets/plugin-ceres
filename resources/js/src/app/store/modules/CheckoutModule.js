@@ -3,7 +3,6 @@ import ApiService from "services/ApiService";
 const state =
     {
         shipping: {
-            shippingCountryId: null,
             shippingProfileId: null,
             shippingProfileList: []
         },
@@ -34,15 +33,6 @@ const state =
 
 const mutations =
     {
-        setShippingCountryId(state, shippingCountryId)
-        {
-            if (shippingCountryId)
-            {
-                state.shipping.shippingCountryId = shippingCountryId;
-                document.dispatchEvent(new CustomEvent("afterShippingCountryChanged", {detail: shippingCountryId}));
-            }
-        },
-
         setShippingProfile(state, shippingProfileId)
         {
             if (shippingProfileId)

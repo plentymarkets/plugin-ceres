@@ -1,9 +1,9 @@
 <script type="x/template" id="vue-shipping-country-select">
     <ul>
-        <div v-for="shippingCountry in localization.activeShippingCountries">
-            <li :class="{'active': localization.currentShippingCountryId == shippingCountry.id}">
+        <div v-for="shippingCountry in localization.shippingCountries">
+            <li :class="{'active': localization.shippingCountryId == shippingCountry.id}">
                 <a data-toggle="collapse" href="#countrySettings" @click="setShippingCountry(shippingCountry.id)" :class="{'is-disabled': selectable}" :disabled="selectable">
-                    <i :class="'flag-icon ' +  countryFlagPrefix + shippingCountry.isoCode2|lowercase"></i>
+                    <i :class="'flag-icon ' +  localization.countryFlagPrefix + shippingCountry.isoCode2|lowercase"></i>
                     ${shippingCountry.currLangName}
                 </a>
             </li>

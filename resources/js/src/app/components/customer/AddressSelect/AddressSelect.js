@@ -23,7 +23,6 @@ Vue.component("address-select", {
             addressToEdit  : {},
             addressToDelete: {},
             deleteModal    : "",
-            localization   : {},
             user           : {}
         };
     },
@@ -38,6 +37,11 @@ Vue.component("address-select", {
         addressList()
         {
             return this.$store.getters.getAddressList(this.addressType);
+        },
+
+        shippingCountryId()
+        {
+            return this.$store.state.localization.shippingCountryId;
         },
 
         isAddAddressEnabled()
@@ -64,7 +68,6 @@ Vue.component("address-select", {
     created()
     {
         this.$options.template = this.template;
-        ResourceService.bind("localization", this);
         ResourceService.bind("user", this);
 
         this.addEventListener();
@@ -120,12 +123,12 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId        : this.localization.currentShippingCountryId
+                    countryId        : this.shippingCountryId
                 };
             }
             else
             {
-                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {countryId: this.shippingCountryId};
             }
 
             this.updateHeadline();
@@ -143,12 +146,12 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId        : this.localization.currentShippingCountryId
+                    countryId        : this.shippingCountryId
                 };
             }
             else
             {
-                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {countryId: this.shippingCountryId};
             }
 
             this.updateHeadline();
