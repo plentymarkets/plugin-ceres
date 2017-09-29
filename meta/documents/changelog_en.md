@@ -8,9 +8,10 @@
 
 ### Fixed
 
-- Due to an error, the shipping date on the order confirmation page was incorrect. This has been fixed.
-- Due to an error, the order overview could not be loaded when an order with an old payment method was saved. This has been fixed.
-- Due to a randomly occurring error, the checkout could not be opened when ordering as a guest. This has been fixed.
+- Due to an error the shipping date on the order confirmation page was incorrect. This has been fixed.
+- Due to an error the order overview could not be loaded when an order with an old payment method was saved. This has been fixed.
+- Due to a randomly occurring error the checkout could not be opened when ordering as a guest. This has been fixed.
+- Due to an error the image gallery in the single item view wasn't displayed correctly when switching the variation of the item. This has been fixed.
 
 ## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
 
