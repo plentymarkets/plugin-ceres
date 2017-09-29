@@ -1,6 +1,5 @@
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
-const ResourceService = require("services/ResourceService");
 const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";

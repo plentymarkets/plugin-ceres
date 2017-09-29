@@ -122,18 +122,22 @@ const actions =
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
         },
 
-        selectMethodOfPayment({commit, dispatch}, methodOfPayment)
+        selectMethodOfPayment({commit, dispatch}, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPayment.id})
+                const oldMethodOfPayment = state.payment.methodOfPaymentId;
+
+                commit("setMethodOfPayment", methodOfPaymentId);
+
+                ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPaymentId})
                     .done(response =>
                     {
-                        commit("setMethodOfPayment", methodOfPayment);
                         resolve(response);
                     })
                     .fail(error =>
                     {
+                        commit("setMethodOfPayment", oldMethodOfPayment);
                         reject(error);
                     });
                 resolve();
@@ -144,14 +148,18 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                const oldShippingProfile = state.shipping.shippingProfileId;
+
+                commit("setShippingProfile", shippingProfile.parcelServicePresetId);
+
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
                     .done(response =>
                     {
-                        commit("setShippingProfile", shippingProfile.parcelServicePresetId);
                         resolve(response);
                     })
                     .fail(error =>
                     {
+                        commit("setShippingProfile", oldShippingProfile);
                         reject(error);
                     });
                 resolve();

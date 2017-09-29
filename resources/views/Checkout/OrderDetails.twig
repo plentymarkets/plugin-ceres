@@ -109,9 +109,10 @@
 
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderEstimatedShippingDate") }}</strong>
+                            {% set shippingDate = "" %}
                             {% for date in orderData.order.dates %}
                                 {% if date.typeId == 8 %}
-                                    {% set shippingDate = date %}
+                                    {% set shippingDate = date.date %}
                                 {% endif %}
                             {% endfor %}
                             <span class="col-xs-6 col-sm-7">{{ shippingDate | date( trans("Ceres::Template.dateFormat") ) }}</span>

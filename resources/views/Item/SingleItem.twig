@@ -292,12 +292,7 @@
 
         {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
 
-        {#<hr>#}
-
-        {#<h3 class="m-t-3 m-b-1">{{ trans("Ceres::Template.itemCustomerFeedback") }}</h3>#}
-        {#<div class="row m-b-3">#}
-            {#{% include "Ceres::Item.Partials.ItemRating" %}#}
-        {#</div>#}
+        {{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer") }}
 
     </div>
 

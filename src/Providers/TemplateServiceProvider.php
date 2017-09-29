@@ -41,6 +41,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.contact'            => 'Customer.Contact',                 // provide template to use for contact
         'tpl.search'             => 'ItemList.ItemListView',            // provide template to use for item search
         'tpl.wish-list'          => 'WishList.WishListView',            // provide template to use for wishlist
+        'tpl.order.return'       => 'OrderReturn.OrderReturnView',      // provide template to use for order return
         'tpl.cancellation-rights'=> 'StaticPages.CancellationRights',   // provide template to use for cancellation rights
         'tpl.legal-disclosure'   => 'StaticPages.LegalDisclosure',      // provide template to use for legal disclosure
         'tpl.privacy-policy'     => 'StaticPages.PrivacyPolicy',        // provide template to use for privacy policy
