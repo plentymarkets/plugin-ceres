@@ -7,7 +7,7 @@ Vue.directive("render-category",
                 event.preventDefault();
 
                 window.ceresStore.dispatch("selectCategory", {categoryId: parseInt(this.expression)});
-                
+
                 if (!App.isCategoryView)
                 {
                     const url = window.ceresStore.state.navigation.currentCategory.url;
