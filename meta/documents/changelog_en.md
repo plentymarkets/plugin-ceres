@@ -1,5 +1,24 @@
 # Release Notes for Ceres
 
+## v1.5.x (TBA)
+
+### Added
+
+- The **Container for customer feedback** container has been added.
+
+## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- It is now possible to return items of an order in the **My account** area. For further information about returns, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#430" target="_blank"><b>Activating returns</b></a>.
+
+### Fixed
+
+- Due to an error the shipping date on the order confirmation page was incorrect. This has been fixed.
+- Due to an error the order overview could not be loaded when an order with an old payment method was saved. This has been fixed.
+- Due to a randomly occurring error the checkout could not be opened when ordering as a guest. This has been fixed.
+- Due to an error the image gallery in the single item view wasn't displayed correctly when switching the variation of the item. This has been fixed.
+
 ## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
