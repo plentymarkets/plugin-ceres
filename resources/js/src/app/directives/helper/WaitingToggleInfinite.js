@@ -6,10 +6,5 @@ Vue.directive("waiting-animation-infinite", function()
 
         event.currentTarget.children[0].className = "";
         event.currentTarget.children[0].className = "fa fa-circle-o-notch fa-spin";
-
-        if (event.currentTarget.children[0].initialClass.includes("fa-lg"))
-		{
-            event.currentTarget.children[0].className += " fa-lg";
-        }
     });
 });
