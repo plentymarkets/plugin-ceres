@@ -29,6 +29,12 @@ $border-width: 1px;
 	border-radius: $border-radius;
     overflow: hidden;
 
+    &.media-xs-d {
+        @include media-breakpoint-down(xs) { 
+            margin-bottom: $grid-gutter-width/2 !important;
+        }
+    }
+
     &.no-bottom {
         margin-bottom: 0px; 
     }
