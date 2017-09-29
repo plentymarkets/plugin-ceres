@@ -4,7 +4,7 @@
 {% set configItemName = config("Ceres.item.name") %}
 
 {% if categoryBreadcrumbs is not empty %}
-    <nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down" v-is-loading-breadcrumbs-watcher>
+    <nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="/">
@@ -19,11 +19,11 @@
                         <li class="breadcrumb-item active"><span>{{ category | itemName(configItemName) }}</span></li>
                     {% endif %}
                 {% else %}
-                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category }}">{{ category.details.first.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category.id }}">{{ category.details.first.name }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
     </nav>
 
-    <category-breadcrumbs template="#vue-category-breadcrumbs" :current-category-tree="{{ categoryBreadcrumbs | json_encode() }}"></category-breadcrumbs>
+    <category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs>
 {% endif %}

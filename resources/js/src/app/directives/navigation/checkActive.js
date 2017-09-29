@@ -1,27 +1,24 @@
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("check-active",
+Vue.directive("update-sidenav-selection",
     {
-        params: ["category"],
+        params: ["categoryId"],
 
         bind: function()
         {
-            var categoryObject = JSON.parse(this.params.category);
+        },
 
-            ResourceService.watch("breadcrumbs", function(values)
+        update(breadcrumbs)
+        {
+            for (const breadcrumb of breadcrumbs)
             {
-                for (var index in values)
+                if (breadcrumb.id === parseInt(this.params.categoryId))
                 {
-                    if (values[index].id == categoryObject.id)
-                    {
-                        this.el.classList.add("active");
-                        break;
-                    }
-                    else
-                    {
-                        this.el.classList.remove("active");
-                    }
+                    this.el.classList.add("active");
+                    break;
                 }
-            }.bind(this));
+                else
+                {
+                    this.el.classList.remove("active");
+                }
+            }
         }
     });
