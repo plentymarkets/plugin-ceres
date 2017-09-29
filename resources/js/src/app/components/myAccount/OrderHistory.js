@@ -62,10 +62,8 @@ Vue.component("order-history", {
                 $(this.$els.orderDetails).modal("show");
             });
 
-            const jsonEncodedOrder = JSON.stringify(order);
-
             ApiService
-                .get("/rest/io/template?template=Ceres::Checkout.OrderDetails&params[orderData]=" + jsonEncodedOrder)
+                .get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id)
                 .done(response =>
                 {
                     this.isLoading = false;
