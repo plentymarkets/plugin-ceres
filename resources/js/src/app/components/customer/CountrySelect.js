@@ -1,5 +1,4 @@
 var CountryService = require("services/CountryService");
-var ResourceService = require("services/ResourceService");
 
 Vue.component("country-select", {
 
@@ -16,10 +15,13 @@ Vue.component("country-select", {
     {
         return {
             stateList  : [],
-            selectedCountry: {},
-            localization: {}
+            selectedCountry: {}
         };
     },
+
+    computed: Vuex.mapState({
+        shippingCountryId: state => state.localization.shippingCountryId
+    }),
 
     /**
      * Get the shipping countries
@@ -28,8 +30,7 @@ Vue.component("country-select", {
     {
         this.$options.template = this.template;
 
-        ResourceService.bind("localization", this);
-        this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+        this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -66,7 +67,7 @@ Vue.component("country-select", {
     watch: {
         selectedCountryId()
         {
-            this.selectedCountryId = this.selectedCountryId || this.localization.currentShippingCountryId;
+            this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
             this.selectedCountry = this.getCountryById(this.selectedCountryId);
 
             if (this.selectedCountry)
