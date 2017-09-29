@@ -1,6 +1,5 @@
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
-const ResourceService = require("services/ResourceService");
 const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";
@@ -22,8 +21,7 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal    : "",
-            user           : {}
+            deleteModal    : ""
         };
     },
 
@@ -46,14 +44,12 @@ Vue.component("address-select", {
 
         isAddAddressEnabled()
         {
-            var isLoggedIn = this.user.isLoggedIn;
-
             if (this.addressType === "1")
             {
-                return isLoggedIn || this.addressList.length < 1;
+                return this.$store.getters.isLoggedIn || this.addressList.length < 1;
             }
 
-            return isLoggedIn || this.addressList.length < 2;
+            return this.$store.getters.isLoggedIn || this.addressList.length < 2;
         },
 
         isAddressListEmpty()
@@ -68,8 +64,6 @@ Vue.component("address-select", {
     created()
     {
         this.$options.template = this.template;
-        ResourceService.bind("user", this);
-
         this.addEventListener();
     },
 
