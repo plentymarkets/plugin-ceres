@@ -1,23 +1,26 @@
 import CategoryRendererService from "services/CategoryRendererService";
-const ResourceService = require("services/ResourceService");
 
 Vue.component("mobile-navigation", {
 
     props: [
         "template",
-        "categoryBreadcrumbs"
+        "currentCategoryId",
+        "navigationTreeData"
     ],
 
     data()
     {
         return {
-            categoryTree: [],
             dataContainer1: [],
             dataContainer2: [],
             useFirstContainer: false,
             breadcrumbs: []
         };
     },
+
+    computed: Vuex.mapState({
+        navigationTree: state => state.navigation.tree
+    }),
 
     created()
     {
@@ -26,82 +29,44 @@ Vue.component("mobile-navigation", {
 
     ready()
     {
-        this.categoryTree = ResourceService.getResource("navigationTree").val();
+        this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-        this.buildTree(this.categoryTree, null, (this.categoryBreadcrumbs && this.categoryBreadcrumbs.length) ? this.categoryBreadcrumbs.pop().id : null);
+        if (this.currentCategoryId)
+        {
+            this.$store.dispatch("setCurrentCategoryById", {categoryId: this.currentCategoryId});
+            this.initialSlide(this.$store.state.navigation.currentCategory);
+        }
 
-        this.dataContainer1 = this.categoryTree;
+        this.dataContainer1 = this.navigationTree;
     },
 
-    methods: {
-        buildTree(currentArray, parent, currentCategoryId)
+    methods:
+    {
+        initialSlide(currentCategory)
         {
-            let showChilds = false;
-
-            for (const category of currentArray)
+            if (currentCategory)
             {
-                category.parent = parent;
-
-                // hide category if there is no translation
-                if (!category.details[0])
+                if (currentCategory.children && currentCategory.showChildren)
                 {
-                    category.hideCategory = true;
-
-                    if (parent && parent.children && parent.children.length > 1 && !parent.showChilds)
-                    {
-                        parent.showChilds = false;
-                    }
+                    this.slideTo(currentCategory.children);
                 }
-                else
+                else if (currentCategory.parent)
                 {
-                    if (parent)
-                    {
-                        category.url = parent.url + "/" + category.details[0].nameUrl;
-                    }
-                    else
-                    {
-                        category.url = "/" + category.details[0].nameUrl;
-                    }
-
-                    if (category.details.length && category.details[0].name)
-                    {
-                        showChilds = true;
-                    }
-
-                    if (category.children)
-                    {
-                        this.buildTree(category.children, category, currentCategoryId);
-                    }
-
-                    if (category.id === currentCategoryId)
-                    {
-                        if (category.children && category.showChilds)
-                        {
-                            this.slideTo(category.children);
-                        }
-                        else if (category.parent)
-                        {
-                            this.slideTo(category.parent.children);
-                        }
-                    }
+                    this.slideTo(currentCategory.parent.children);
                 }
-            }
-
-            if (parent)
-            {
-                parent.showChilds = showChilds;
             }
         },
 
         navigateTo(category)
         {
-            if (category.children && category.showChilds)
+            if (category.children && category.showChildren)
             {
                 this.slideTo(category.children);
             }
 
             this.closeNavigation();
-            CategoryRendererService.renderItems(category, this.categoryTree);
+            this.$store.commit("setCurrentCategory", category);
+            CategoryRendererService.renderItems();
         },
 
         slideTo(children, back)
@@ -138,7 +103,7 @@ Vue.component("mobile-navigation", {
                 this.breadcrumbs.unshift(
                     {
                         name: root.parent.details[0].name,
-                        layer: root.parent ? root.parent.children : this.categoryTree
+                        layer: root.parent ? root.parent.children : this.navigationTree
                     });
 
                 root = root.parent;

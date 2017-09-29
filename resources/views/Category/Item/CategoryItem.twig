@@ -26,10 +26,6 @@
 
 {% set lang         = services.sessionStorage.getLang() %}
 
-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}
-    {% set categories = services.category.getNavigationTree("item", lang, 6) %}
-{% endif %}
-
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 
 {% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
@@ -92,7 +88,7 @@
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
                         <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
-                        {{ includeCached('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
+                        {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
 
                     {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}

@@ -10,8 +10,6 @@
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
-<resource name="breadcrumbs" :data="{}"></resource>
-
 <header class="top-bar">
     <div class="container-max">
         <div class="row">
@@ -68,7 +66,7 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-<mobile-navigation :category-breadcrumbs="{{ categoryBreadcrumbs | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :current-category-id="{{ category.id }}" template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">

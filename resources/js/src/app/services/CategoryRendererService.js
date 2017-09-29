@@ -1,35 +1,40 @@
 const ItemListService = require("services/ItemListService");
-const ResourceService = require("services/ResourceService");
-const ApiService          = require("services/ApiService");
+const ApiService = require("services/ApiService");
 let _categoryTree = {};
-let _categoryBreadcrumbs = [];
+let firstInitDone = false;
 
 /**
  * render items in relation to location
  * @param currentCategory
  */
-export function renderItems(currentCategory)
+export function renderItems()
 {
-    ResourceService.getResource("isLoadingBreadcrumbs").set(true);
+    const currentCategory = window.ceresStore.state.navigation.currentCategory;
 
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree))
     {
-        _categoryTree = ResourceService.getResource("navigationTree").val();
+        _categoryTree = window.ceresStore.state.navigation.tree;
     }
 
     if (!App.isCategoryView)
     {
-        window.open(getScopeUrl(currentCategory), "_self");
+        window.open(currentCategory.url, "_self");
     }
     else if (currentCategory.details.length)
     {
-        _handleCurrentCategory(currentCategory);
+        if (!firstInitDone)
+        {
+            firstInitDone = true;
+            _firstRendering();
+        }
+
+        _handleCurrentCategory();
 
         document.dispatchEvent(new CustomEvent("afterCategoryChanged", {detail:
         {
-            currentCategory: currentCategory,
+            currentCategory,
             categoryTree: _categoryTree
         }}));
     }
@@ -39,17 +44,13 @@ export function renderItems(currentCategory)
  * bundle functions
  * @param currentCategory
  */
-function _handleCurrentCategory(currentCategory)
+function _handleCurrentCategory()
 {
+    const currentCategory = window.ceresStore.state.navigation.currentCategory;
+
     _removeTempDesc();
     _updateItemList(currentCategory);
     _updateHistory(currentCategory);
-    _updateBreadcrumbs();
-}
-
-function _updateBreadcrumbs()
-{
-    ResourceService.getResource("breadcrumbs").set(_categoryBreadcrumbs.reverse());
 }
 
 /**
@@ -73,7 +74,7 @@ function _updateHistory(currentCategory)
 {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, getScopeUrl(currentCategory) + window.location.search);
+    window.history.replaceState({}, title, currentCategory.url + window.location.search);
 
     _updateCategoryTexts(currentCategory);
 }
@@ -128,52 +129,15 @@ function _loadOptionalData(currentCategory)
     }
 }
 
-/**
- * get the current scope url
- * @param currentCategory
- * @param scopeUrl - default
- * @param categories - default
- */
-export function getScopeUrl(currentCategory, scopeUrl, categories)
+function _firstRendering()
 {
-    scopeUrl = scopeUrl || "";
-    categories = categories || _categoryTree;
+    const twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
 
-    if (scopeUrl.length == 0)
-    {
-        _categoryBreadcrumbs = [];
-    }
+    twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
 
-    for (var category in categories)
-    {
-        if (categories[category].id == currentCategory.id && categories[category].details.length)
-        {
-            scopeUrl += "/" + categories[category].details[0].nameUrl;
-
-            _categoryBreadcrumbs.push(categories[category]);
-
-            return scopeUrl;
-        }
-
-        if (categories[category].children && categories[category].details.length)
-        {
-            var tempScopeUrl = scopeUrl + "/" + categories[category].details[0].nameUrl;
-
-            var urlScope = getScopeUrl(currentCategory, tempScopeUrl, categories[category].children);
-
-            if (urlScope.length > 0)
-            {
-                _categoryBreadcrumbs.push(categories[category]);
-
-                return urlScope;
-            }
-        }
-    }
-
-    return "";
+    document.querySelector("#vue-rendered-breadcrumbs").style.removeProperty("display");
 }
 
 export default {
-    getScopeUrl,
     renderItems
 };
