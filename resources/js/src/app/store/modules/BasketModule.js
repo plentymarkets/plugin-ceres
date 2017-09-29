@@ -1,6 +1,7 @@
 const state =
     {
-
+        data: {},
+        items: 
     };
 
 const mutations =
