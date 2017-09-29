@@ -1,43 +1,45 @@
-var ResourceService = require("services/ResourceService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-filter-list", {
 
     props: [
         "template",
-        "facets"
+        "facetData"
     ],
 
-    data: function()
+    data()
     {
         return {
             isActive: false
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        facets: state => state.itemList.facets
+    }),
+
+    created()
     {
-        ResourceService.bind("facets", this);
+        this.$store.commit("setFacets", this.facetData);
 
         this.$options.template = this.template || "#vue-item-filter-list";
 
-        var urlParams = UrlService.getUrlParams(document.location.search);
+        const urlParams = UrlService.getUrlParams(document.location.search);
 
         if (urlParams.facets)
         {
-            ResourceService.getResource("facetParams").set(urlParams.facets.split(","));
+            this.$store.commit("setSelectedFacetsByIds", urlParams.facets.split(","));
         }
     },
 
     methods:
     {
-        toggleOpeningState: function()
+        toggleOpeningState()
         {
-            window.setTimeout(function()
+            window.setTimeout(() =>
             {
                 this.isActive = !this.isActive;
-            }.bind(this), 300);
+            }, 300);
         }
     }
 });

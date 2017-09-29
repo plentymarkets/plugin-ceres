@@ -1,4 +1,3 @@
-const ItemListService = require("services/ItemListService");
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
 let firstInitDone = false;
@@ -7,7 +6,7 @@ let firstInitDone = false;
  * render items in relation to location
  * @param currentCategory
  */
-export function renderItems()
+export function updateCategoryHtml()
 {
     const currentCategory = window.ceresStore.state.navigation.currentCategory;
 
@@ -18,11 +17,7 @@ export function renderItems()
         _categoryTree = window.ceresStore.state.navigation.tree;
     }
 
-    if (!App.isCategoryView)
-    {
-        window.open(currentCategory.url, "_self");
-    }
-    else if (currentCategory.details.length)
+    if (App.isCategoryView && currentCategory.details.length)
     {
         if (!firstInitDone)
         {
@@ -49,21 +44,7 @@ function _handleCurrentCategory()
     const currentCategory = window.ceresStore.state.navigation.currentCategory;
 
     _removeTempDesc();
-    _updateItemList(currentCategory);
     _updateHistory(currentCategory);
-}
-
-/**
- * update the current item list without reloading
- * @param currentCategory
- */
-function _updateItemList(currentCategory)
-{
-    ItemListService.setCategoryId(currentCategory.id);
-
-    ItemListService.setPage(1);
-    ItemListService.setFacets("");
-    ItemListService.getItemList();
 }
 
 /**
@@ -139,5 +120,5 @@ function _firstRendering()
 }
 
 export default {
-    renderItems
+    updateCategoryHtml
 };

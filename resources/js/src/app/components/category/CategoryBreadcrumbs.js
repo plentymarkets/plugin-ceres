@@ -1,5 +1,3 @@
-import CategoryRendererService from "services/CategoryRendererService";
-
 Vue.component("category-breadcrumbs",
     {
 
@@ -19,12 +17,11 @@ Vue.component("category-breadcrumbs",
         methods: {
             /**
              * render items in relation to location
-             * @param currentCategory
+             * @param category
              */
-            selectBreadcrumb(currentCategory)
+            selectBreadcrumb(category)
             {
-                this.$store.commit("setCurrentCategory", currentCategory);
-                CategoryRendererService.renderItems();
+                this.$store.dispatch("selectCategory", {category});
                 return false;
             }
         }

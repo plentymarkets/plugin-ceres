@@ -42,10 +42,6 @@
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
     {{ component( "Ceres::ItemList.Components.Pagination") }}
 
-    <resource name="facetParams" :data="[]"></resource>
-    <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
-    <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
-
     {% if showCategoryImage %}
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
     {% endif %}
@@ -72,7 +68,7 @@
                                 template="#vue-items-per-page"
                                 :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
                                 :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
-                            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+                            <item-filter-list :facet-data="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
                 </div>
@@ -104,7 +100,7 @@
                         {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
                     {% endif %}
 
-                    <ul class="product-list row grid" v-is-loading-watcher>
+                    <ul class="product-list row grid" v-is-loading-watcher="$store.state.itemList.isLoading">
                         {% for item in itemList %}
                             <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}4{% else %}3{% endif %}">
                                 {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
@@ -114,7 +110,7 @@
                 </div>
 
                 <div id="vue-rendered-item-list" style="display:none">
-                    <item-list template="#vue-item-list" :category-id="{{ category.id }}"></item-list>
+                    <item-list template="#vue-item-list" :total-items-data="{{ paginatedResult.total }}" :category-id="{{ category.id }}"></item-list>
                 </div>
 
             </div>
