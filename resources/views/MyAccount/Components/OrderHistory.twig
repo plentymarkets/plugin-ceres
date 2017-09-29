@@ -102,10 +102,12 @@
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7">{{ entry.order.statusName }}</span>
                                         </div>
-                                        <div class="row">
-                                            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
-                                            <span class="col-xs-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
-                                        </div>
+                                        {% if entry.paymentMethodName | trim is not empty %}
+                                            <div class="row">
+                                                <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
+                                                <span class="col-xs-6 col-sm-7" id="payment_name_{{ entry.order.id }}">{{ entry.paymentMethodName }}</span>
+                                            </div>
+                                        {% endif %}
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
                                             <span class="col-xs-6 col-sm-7" id="payment_state_{{ entry.order.id }}">
