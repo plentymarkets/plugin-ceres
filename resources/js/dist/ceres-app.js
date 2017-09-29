@@ -10392,6 +10392,8 @@ return jQuery;
 },{}],5:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var ResourceService = require("services/ResourceService");
 var ModalService = require("services/ModalService");
 
@@ -10407,19 +10409,33 @@ Vue.component("add-item-to-basket-overlay", {
             currency: ""
         };
     },
+
+
+    computed: _extends({
+        texts: function texts() {
+            return this.latestBasketEntry.item.texts;
+        },
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+
+            return img.url;
+        }
+    }, Vuex.mapState({
+        latestBasketEntry: function latestBasketEntry(state) {
+            return state.basket.latestEntry;
+        }
+    })),
+
     created: function created() {
         this.$options.template = this.template;
-    },
-    ready: function ready() {
-        ResourceService.bind("basketItem", this);
     },
 
 
     watch: {
-        basketItem: function basketItem() {
+        latestBasketEntry: function latestBasketEntry() {
             if (this.basketAddInformation === "overlay") {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-            } else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0) {
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length != 0) {
                 setTimeout(function () {
                     $("body").toggleClass("open-right");
                 }, 1);
@@ -10433,7 +10449,7 @@ Vue.component("add-item-to-basket-overlay", {
          * check if current basket object exist and start rendering
          */
         startRendering: function startRendering() {
-            var render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
 
             if (render) {
                 this.startCounter();
@@ -10444,9 +10460,9 @@ Vue.component("add-item-to-basket-overlay", {
             return render;
         },
         setPriceFromData: function setPriceFromData() {
-            if (this.basketItem.currentBasketItem.calculatedPrices) {
-                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price + this.calculateSurcharge();
-                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
+            if (this.latestBasketEntry.item.calculatedPrices) {
+                this.price = this.latestBasketEntry.item.calculatedPrices.default.price + this.calculateSurcharge();
+                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
             }
         },
         calculateSurcharge: function calculateSurcharge() {
@@ -10458,7 +10474,7 @@ Vue.component("add-item-to-basket-overlay", {
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = this.basketItem.currentBasketItem.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = this.latestBasketEntry.item.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var property = _step.value;
 
 
@@ -10495,9 +10511,9 @@ Vue.component("add-item-to-basket-overlay", {
         getImage: function getImage() {
             var path = "";
 
-            for (var i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++) {
-                if (this.basketItem.currentBasketItem.variationImageList[i].path !== "") {
-                    path = this.basketItem.currentBasketItem.variationImageList[i].path;
+            for (var i = 0; i < this.latestBasketEntry.item.variationImageList.length; i++) {
+                if (this.latestBasketEntry.item.variationImageList[i].path !== "") {
+                    path = this.latestBasketEntry.item.variationImageList[i].path;
                 }
             }
 
@@ -10517,20 +10533,6 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(timerVar);
                 }
             }, 1000);
-        }
-    },
-
-    computed: {
-        /**
-         * returns itemData.texts[0]
-         */
-        texts: function texts() {
-            return this.basketItem.currentBasketItem.texts;
-        },
-        imageUrl: function imageUrl() {
-            var img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
-
-            return img.url;
         }
     }
 });
@@ -10598,12 +10600,12 @@ Vue.component("add-to-basket", {
          * open the AddItemToBasketOverlay
          */
         openAddToBasketOverlay: function openAddToBasketOverlay() {
-            var currentBasketObject = {
-                currentBasketItem: this.item,
+            var latestBasketEntry = {
+                item: this.item,
                 quantity: this.quantity
             };
 
-            ResourceService.getResource("basketItem").set(currentBasketObject);
+            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
 
 
@@ -10903,7 +10905,6 @@ Vue.component("basket-list-item", {
 "use strict";
 
 Vue.component("category-breadcrumbs", {
-
     props: ["template"],
 
     computed: Vuex.mapGetters(["breadcrumbs"]),
@@ -17279,6 +17280,10 @@ var _ItemListModule = require("store/modules/ItemListModule");
 
 var _ItemListModule2 = _interopRequireDefault(_ItemListModule);
 
+var _BasketModule = require("store/modules/BasketModule");
+
+var _BasketModule2 = _interopRequireDefault(_BasketModule);
+
 var _OrderReturnModule = require("store/modules/OrderReturnModule");
 
 var _OrderReturnModule2 = _interopRequireDefault(_OrderReturnModule);
@@ -17295,6 +17300,7 @@ var store = new Vuex.Store({
         user: _UserModule2.default,
         navigation: _NavigationModule2.default,
         itemList: _ItemListModule2.default,
+        basket: _BasketModule2.default,
         orderReturn: _OrderReturnModule2.default
     }
 });
@@ -17303,7 +17309,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":101,"store/modules/CheckoutModule":102,"store/modules/ItemListModule":103,"store/modules/LocalizationModule":104,"store/modules/NavigationModule":105,"store/modules/OrderReturnModule":106,"store/modules/UserModule":107,"store/modules/WishListModule":108}],101:[function(require,module,exports){
+},{"store/modules/AddressModule":101,"store/modules/BasketModule":102,"store/modules/CheckoutModule":103,"store/modules/ItemListModule":104,"store/modules/LocalizationModule":105,"store/modules/NavigationModule":106,"store/modules/OrderReturnModule":107,"store/modules/UserModule":108,"store/modules/WishListModule":109}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17608,6 +17614,44 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var state = {
+    data: {},
+    items: [],
+    latestEntry: {
+        item: {},
+        quantity: null
+    }
+};
+
+var mutations = {
+    setBasket: function setBasket(state, basket) {
+        state.data = basket;
+    },
+    setBasketItems: function setBasketItems(state, basketItems) {
+        state.items = basketItems;
+    },
+    setLatestBasketEntry: function setLatestBasketEntry(state, latestBasketEntry) {
+        state.latestEntry = latestBasketEntry;
+    }
+};
+
+var actions = {};
+
+var getters = {};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{}],103:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _ApiService = require("services/ApiService");
 
@@ -17752,7 +17796,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":90}],103:[function(require,module,exports){
+},{"services/ApiService":90}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17953,7 +17997,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":90,"services/ItemListUrlService":93}],104:[function(require,module,exports){
+},{"services/ApiService":90,"services/ItemListUrlService":93}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18053,7 +18097,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],105:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18224,7 +18268,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":91}],106:[function(require,module,exports){
+},{"services/CategoryService":91}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18282,9 +18326,9 @@ var actions = {
                 }
 
                 _ApiService2.default.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds: variationIds }).done(function (data) {
-                    resolve();
-                }).fail(function () {
-                    reject();
+                    resolve(data);
+                }).fail(function (error) {
+                    reject(error);
                 });
             } else {
                 reject();
@@ -18314,7 +18358,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":90}],107:[function(require,module,exports){
+},{"services/ApiService":90}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18357,7 +18401,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18469,7 +18513,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":90}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,75,71,72,73,74,76,77,78,79,80,81,82,83,84,85,86,87,88,100,101,102,103,104,105,106,107,108])
+},{"services/ApiService":90}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,75,71,72,73,74,76,77,78,79,80,81,82,83,84,85,86,87,88,100,101,102,103,104,105,106,107,108,109])
 
 
 // Frontend end scripts

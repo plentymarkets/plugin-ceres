@@ -77,15 +77,13 @@ Vue.component("add-to-basket", {
          */
         openAddToBasketOverlay()
         {
-            const currentBasketObject =
+            const latestBasketEntry =
                 {
-                    currentBasketItem: this.item,
-                    quantity         : this.quantity
+                    item: this.item,
+                    quantity: this.quantity
                 };
 
-            ResourceService
-                .getResource("basketItem")
-                .set(currentBasketObject);
+            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
 
         /**
