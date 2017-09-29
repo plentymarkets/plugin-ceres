@@ -53,11 +53,11 @@ const actions =
                         .done(data =>
                         {
                             commit("setWishListItems", data.documents);
-                            resolve();
+                            resolve(data);
                         })
-                        .fail(() =>
+                        .fail(error =>
                         {
-                            reject();
+                            reject(error);
                         });
                 }
                 else
@@ -80,7 +80,7 @@ const actions =
                     .done(data =>
                     {
                         commit("removeWishListId", id);
-                        resolve();
+                        resolve(data);
                     })
                     .fail(error =>
                     {
@@ -88,7 +88,7 @@ const actions =
                         {
                             commit("addWishListItemToIndex", wishListItem, index);
                         }
-                        reject();
+                        reject(error);
                     });
             });
         },
@@ -99,14 +99,14 @@ const actions =
             {
                 commit("addWishListId", id);
                 ApiService.post("/rest/io/itemWishList", {variationId: id})
-                    .done(() =>
+                    .done(data =>
                     {
-                        resolve();
+                        resolve(data);
                     })
-                    .fail(() =>
+                    .fail(error =>
                     {
                         commit("removeWishListId", id);
-                        reject();
+                        reject(error);
                     });
             });
         }
