@@ -1,3 +1,5 @@
+import {updateCategoryHtml}from "services/CategoryService";
+
 const state =
     {
         tree: [],
@@ -72,6 +74,11 @@ const actions =
             {
                 dispatch("setCurrentCategoryById", {categoryId});
             }
+
+            updateCategoryHtml();
+
+            commit("setItemListPage", 1);
+            commit("setSelectedFacetsByIds", []);
 
             dispatch("retrieveItemList");
         },

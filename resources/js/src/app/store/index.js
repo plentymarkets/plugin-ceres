@@ -6,6 +6,7 @@ import user from "store/modules/UserModule";
 import navigation from "store/modules/NavigationModule";
 import itemList from "store/modules/ItemListModule";
 import basket from "store/modules/BasketModule";
+import orderReturn from "store/modules/OrderReturnModule";
 
 // eslint-disable-next-line
 const store = new Vuex.Store(
@@ -19,7 +20,8 @@ const store = new Vuex.Store(
             user,
             navigation,
             itemList,
-            basket
+            basket,
+            orderReturn
         }
     });
 
