@@ -6,6 +6,11 @@
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
 
+### Bearbeitet
+
+- Der LayoutContainer **SingleItem.AddDetailTabs** beinhaltet nun das aktuelle Item.
+- Der LayoutContainer **SingleItem.AddDetailTabsContent** beinhaltet nun das aktuelle Item.
+
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
