@@ -88,7 +88,7 @@ var init = (function($, window, document)
             });
         }, 1);
 
-        $(document).on("click", "body.open-right", function(evt)
+        $(document).on("click", function(evt)
         {
             if ($("body").hasClass("open-right"))
             {
@@ -97,6 +97,20 @@ var init = (function($, window, document)
                     evt.preventDefault();
                     $("body").toggleClass("open-right");
                 }
+            }
+
+            if ((evt.target.id != "countrySettings") &&
+                ($(evt.target).parents("#countrySettings").length <= 0) &&
+                ($("#countrySettings").attr("aria-expanded") == "true"))
+            {
+                $("#countrySettings").collapse("hide");
+            }
+
+            if ((evt.target.id != "searchBox") &&
+                ($(evt.target).parents("#searchBox").length <= 0) &&
+                ($("#searchBox").attr("aria-expanded") == "true"))
+            {
+                $("#searchBox").collapse("hide");
             }
         });
 
