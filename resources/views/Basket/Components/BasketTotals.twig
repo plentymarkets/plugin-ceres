@@ -56,7 +56,7 @@
                 </dd>
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
-                <div class="vatTotals" :class="{'big-totals': !preview}" v-for="totalVat in basket.totalVats">
+                <div class="vatTotals" v-for="totalVat in basket.totalVats">
                     <dt v-if="showProperty( 'basket.vat' )">
                         {{ trans("Ceres::Template.basketVAT") }} ${ totalVat.vatValue }%
                     </dt><!--

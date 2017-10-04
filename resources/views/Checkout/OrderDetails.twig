@@ -234,7 +234,7 @@
                                 {% endif %}
 
                                 {% if "basket.vat" in totalsConfigData %}
-                                    <div class="vatTotals big-totals">
+                                    <div class="vatTotals">
                                         {% for vat in orderData.order.amounts[0].vats %}
                                             <dt>
                                                 {{ trans("Ceres::Template.basketVAT") }} {{ vat.vatRate }}%
