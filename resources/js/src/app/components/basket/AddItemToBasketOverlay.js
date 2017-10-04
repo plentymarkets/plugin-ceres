@@ -18,24 +18,38 @@ Vue.component("add-item-to-basket-overlay", {
         };
     },
 
+    computed:
+    {
+        texts()
+        {
+            return this.latestBasketEntry.item.texts;
+        },
+
+        imageUrl()
+        {
+            const img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+
+            return img.url;
+        },
+
+        ...Vuex.mapState({
+            latestBasketEntry: state => state.basket.latestEntry
+        })
+    },
+
     created()
     {
         this.$options.template = this.template;
     },
 
-    ready()
-    {
-        ResourceService.bind("basketItem", this);
-    },
-
     watch: {
-        basketItem()
+        latestBasketEntry()
         {
             if (this.basketAddInformation === "overlay")
             {
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
             }
-            else if (this.basketAddInformation === "preview" && Object.keys(this.basketItem.currentBasketItem).length != 0)
+            else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length != 0)
             {
                 setTimeout(function()
                 {
@@ -52,7 +66,7 @@ Vue.component("add-item-to-basket-overlay", {
          */
         startRendering()
         {
-            const render = Object.keys(this.basketItem.currentBasketItem).length != 0;
+            const render = Object.keys(this.latestBasketEntry.item).length !== 0;
 
             if (render)
             {
@@ -66,10 +80,10 @@ Vue.component("add-item-to-basket-overlay", {
 
         setPriceFromData()
         {
-            if (this.basketItem.currentBasketItem.calculatedPrices)
+            if (this.latestBasketEntry.item.calculatedPrices)
             {
-                this.price = this.basketItem.currentBasketItem.calculatedPrices.default.price + this.calculateSurcharge();
-                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
+                this.price = this.latestBasketEntry.item.calculatedPrices.default.price + this.calculateSurcharge();
+                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
             }
         },
 
@@ -78,7 +92,7 @@ Vue.component("add-item-to-basket-overlay", {
 
             let sumSurcharge = 0;
 
-            for (const property of this.basketItem.currentBasketItem.properties)
+            for (const property of this.latestBasketEntry.item.properties)
             {
 
                 if (property.property.value && property.property.value.length > 0)
@@ -104,11 +118,11 @@ Vue.component("add-item-to-basket-overlay", {
         {
             let path = "";
 
-            for (let i = 0; i < this.basketItem.currentBasketItem.variationImageList.length; i++)
+            for (let i = 0; i < this.latestBasketEntry.item.variationImageList.length; i++)
             {
-                if (this.basketItem.currentBasketItem.variationImageList[i].path !== "")
+                if (this.latestBasketEntry.item.variationImageList[i].path !== "")
                 {
-                    path = this.basketItem.currentBasketItem.variationImageList[i].path;
+                    path = this.latestBasketEntry.item.variationImageList[i].path;
                 }
             }
 
@@ -130,24 +144,6 @@ Vue.component("add-item-to-basket-overlay", {
                     clearInterval(timerVar);
                 }
             }, 1000);
-        }
-    },
-
-    computed:
-    {
-        /**
-         * returns itemData.texts[0]
-         */
-        texts()
-        {
-            return this.basketItem.currentBasketItem.texts;
-        },
-
-        imageUrl()
-        {
-            const img = this.$options.filters.itemImages(this.basketItem.currentBasketItem.images, "urlPreview")[0];
-
-            return img.url;
         }
     }
 });
