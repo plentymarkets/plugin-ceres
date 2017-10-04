@@ -53,14 +53,9 @@ Vue.component("basket-list-item", {
                     },
                     error =>
                     {
-<<<<<<< HEAD
-                        self.resetDelete();
-                        self.waitForDelete = false;
-                        self.waiting = false;
-=======
                         this.resetDelete();
+                        this.waitForDelete = false;
                         this.waiting = false;
->>>>>>> refactor/basket_vuex
                     });
             }
         },
