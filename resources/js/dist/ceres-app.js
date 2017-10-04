@@ -10672,11 +10672,6 @@ Vue.component("basket-preview", {
         _ApiService2.default.listen("AfterBasketChanged", function (data) {
             _this.$store.commit("setBasket", data.basket);
         });
-    },
-    ready: function ready() {
-        // TODO remove basket property not used?
-        // ResourceService.bind("basket", this);
-        // ResourceService.bind("basketItems", this);
     }
 });
 
@@ -10695,14 +10690,6 @@ Vue.component("basket-totals", {
 
     created: function created() {
         this.$options.template = this.template;
-    },
-
-
-    /**
-     * Bind to basket
-     */
-    ready: function ready() {
-        // ResourceService.bind("basket", this);
     },
 
 
@@ -10753,7 +10740,6 @@ Vue.component("coupon", {
 
     created: function created() {
         this.$options.template = this.template;
-        // ResourceService.bind("basket", this);
     },
     ready: function ready() {
         var _this = this;
@@ -10819,9 +10805,6 @@ Vue.component("basket-list", {
     created: function created() {
         this.$options.template = this.template;
     }
-    // ResourceService.bind("basketItems", this);
-    // "basket"
-
 });
 
 },{}],11:[function(require,module,exports){
@@ -13107,8 +13090,6 @@ Vue.component("order-properties", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("quantity-input", {
 
     props: ["value", "timeout", "min", "max", "vertical", "template", "waiting", "variationId"],
@@ -13140,8 +13121,6 @@ Vue.component("quantity-input", {
     watch: {
         basketItems: {
             handler: function handler(val, oldVal) {
-                console.log("onBasketItemsChange", val, oldVal);
-
                 if (oldVal) {
                     if (JSON.stringify(val) != JSON.stringify(oldVal)) {
                         this.initDefaultVars();
@@ -13159,8 +13138,6 @@ Vue.component("quantity-input", {
         this.$options.template = this.template;
     },
     ready: function ready() {
-        // ResourceService.bind("basketItems", this);
-
         this.checkDefaultVars();
         this.initDefaultVars();
         this.initValueWatcher();
@@ -13235,7 +13212,7 @@ Vue.component("quantity-input", {
     }
 });
 
-},{"services/ResourceService":98}],38:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -17711,8 +17688,6 @@ var actions = {
         var commit = _ref2.commit;
 
         return new Promise(function (resolve, reject) {
-            // commit("addBasketItem", basketItem);
-
             basketItem.template = "Ceres::Basket.Basket";
             _ApiService2.default.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
                 commit("setBasketItems", basketItems);
@@ -17729,8 +17704,6 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
-
-            console.log("updateBasketItem");
 
             basketItem.template = "Ceres::Basket.Basket";
             _ApiService2.default.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
@@ -17783,13 +17756,10 @@ var actions = {
     }
 };
 
-var getters = {};
-
 exports.default = {
     state: state,
     mutations: mutations,
-    actions: actions,
-    getters: getters
+    actions: actions
 };
 
 },{"services/ApiService":92}],105:[function(require,module,exports){

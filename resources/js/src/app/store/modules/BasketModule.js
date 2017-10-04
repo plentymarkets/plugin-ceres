@@ -71,8 +71,6 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                // commit("addBasketItem", basketItem);
-
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.post("/rest/io/basket/items/", basketItem)
                     .done(basketItems =>
@@ -161,15 +159,9 @@ const actions =
         }
     };
 
-const getters =
-    {
-
-    };
-
 export default
 {
     state,
     mutations,
-    actions,
-    getters
+    actions
 };

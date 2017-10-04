@@ -14,14 +14,6 @@ Vue.component("basket-totals", {
         this.$options.template = this.template;
     },
 
-    /**
-     * Bind to basket
-     */
-    ready()
-    {
-        // ResourceService.bind("basket", this);
-    },
-
     methods:
     {
         /**

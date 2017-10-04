@@ -32,8 +32,6 @@
     </head>
 
     <body>
-        <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
-
         <div class="wrapper wrapper-top">
             <!-- messages -->
             <notifications template="#vue-notifications"

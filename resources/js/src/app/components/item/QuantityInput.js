@@ -1,5 +1,3 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("quantity-input", {
 
     props: [
@@ -60,8 +58,6 @@ Vue.component("quantity-input", {
 
     ready()
     {
-        // ResourceService.bind("basketItems", this);
-
         this.checkDefaultVars();
         this.initDefaultVars();
         this.initValueWatcher();

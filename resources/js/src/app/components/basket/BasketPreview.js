@@ -24,12 +24,5 @@ Vue.component("basket-preview", {
             {
                 this.$store.commit("setBasket", data.basket);
             });
-    },
-
-    ready()
-    {
-        // TODO remove basket property not used?
-        // ResourceService.bind("basket", this);
-        // ResourceService.bind("basketItems", this);
     }
 });

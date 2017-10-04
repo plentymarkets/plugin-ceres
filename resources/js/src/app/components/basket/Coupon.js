@@ -34,7 +34,6 @@ Vue.component("coupon", {
     created()
     {
         this.$options.template = this.template;
-        // ResourceService.bind("basket", this);
     },
 
     ready()

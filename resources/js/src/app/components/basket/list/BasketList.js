@@ -20,6 +20,4 @@ Vue.component("basket-list", {
     {
         this.$options.template = this.template;
     }
-    // ResourceService.bind("basketItems", this);
-    // "basket"
 });
