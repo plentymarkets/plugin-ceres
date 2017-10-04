@@ -32,7 +32,6 @@
     </head>
 
     <body>
-        <resource name="basket" route="/rest/io/basket/" :data="{{ services.basket.getBasketForTemplate() | json_encode() }}" :events="['AfterBasketChanged!basket.totalVats']"></resource>
         <resource-list name="basketItems" route="/rest/io/basket/items/" response-template="Ceres::Basket.Basket" data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}"></resource-list>
 
         <div class="wrapper wrapper-top">
@@ -64,7 +63,11 @@
         </div>
 
         <div class="wrapper wrapper-right">
-          <basket-preview template="#vue-basket-preview"></basket-preview>
+            <basket-preview
+                template="#vue-basket-preview"
+                :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+            </basket-preview>
         </div>
 
         <div class="wrapper wrapper-bottom">
