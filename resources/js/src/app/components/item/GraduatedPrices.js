@@ -26,29 +26,12 @@ Vue.component("graduated-prices", {
     {
         graduatedPrices()
         {
-            if (!this.currentVariation)
+            if (this.currentVariation)
             {
-                return [];
+                return this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
             }
 
-            const prices = this.currentVariation.documents[0].data.salesPrices.filter(price =>
-            {
-                return price.type === "default" && parseInt(price.minimumOrderQuantity) > 1;
-            });
-
-            const priceList = [];
-
-            for (const price of prices)
-            {
-                priceList.push(
-                    {
-                        position: parseInt(price.position),
-                        price: parseFloat(price.price),
-                        minimumOrderQuantity: parseInt(price.minimumOrderQuantity)
-                    });
-            }
-
-            return priceList;
+            return [];
         }
     }
 });

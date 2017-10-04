@@ -5,9 +5,9 @@
         <b>{{ trans("Ceres::Template.graduatedPrices") }}:</b>
 
         <table class="graduated-prices-table text-muted">
-            <tr v-for="price in graduatedPrices | orderBy 'position'">
+            <tr v-for="price in graduatedPrices | orderBy 'minimumOrderQuantity'">
                 <td>ab ${ price.minimumOrderQuantity } {{ itemEachTranslation }}</td>
-                <td>${ price.price | currency }</td>
+                <td>${ price.formatted }</td>
             </tr>
         </table>
 
