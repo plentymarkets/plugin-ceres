@@ -8,6 +8,7 @@
 
 ### Behoben
 
+- Die Aufpreise der Bestellmerkmale werden nun wieder korrekt ausgegeben.
 - Im MyAccount wird der Text "Zahlungsart kann nicht geändert werden" nun nichtmehr angezeigt, wenn der Auftrag bezahlt ist.
 
 ### Geändert
