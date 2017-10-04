@@ -15709,10 +15709,6 @@ Vue.filter("itemURL", function (item) {
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
-    console.log("propertySurcharge");
-    console.log("properties", properties);
-    console.log("propertyId", propertyId);
-
     var property = properties.find(function (prop) {
         return prop.property.id === propertyId;
     });
