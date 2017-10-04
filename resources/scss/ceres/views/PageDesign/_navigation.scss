@@ -278,7 +278,12 @@ nav.navbar.megamenu {
 				>li {
 					position : static;
 
-					&:hover .navDropdown_wrapper { display: flex; background-color : white; color : $brand-primary; }
+					&:hover {
+						background-color 	: white; 
+						color 				: $brand-primary; 
+						
+						.navDropdown_wrapper { display: flex; } 
+					}
 
 					.navDropdown_wrapper {
 						display 	: none;
