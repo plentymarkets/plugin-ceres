@@ -6,6 +6,10 @@
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
 
+### Behoben
+
+- Die Aufpreise der Bestellmerkmale werden nun wieder korrekt ausgegeben.
+
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
