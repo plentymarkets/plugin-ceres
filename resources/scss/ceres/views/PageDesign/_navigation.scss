@@ -290,7 +290,6 @@ nav.navbar.megamenu {
 
 						>ul {
 							align-items 	: flex-end; 
-							background 		: white;
 							display 		: flex;
 							flex-direction 	: column;
 							flex-wrap 		: wrap;
@@ -305,6 +304,7 @@ nav.navbar.megamenu {
 								.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
 								.level3.bt-more>a { font-size : .8em; }
 								.bt-more>a { text-transform: lowercase; }
+								&:hover { background-color : white; color : $brand-primary; }
 							}
 
 							ul { background-color : white; }
@@ -316,7 +316,7 @@ nav.navbar.megamenu {
 
 								&:hover{ 
 									background 	: $brand-primary; 
-									color 		: white;
+									color 		: white !important;
 								}
 							}
 						}
