@@ -1,6 +1,4 @@
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
@@ -8,83 +6,81 @@ Vue.component("coupon", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            couponCode: "",
-            basket: {},
-            waiting: false
+            waiting: false,
+            couponCode: ""
         };
-    },
-
-    created: function()
-    {
-        this.$options.template = this.template;
-        ResourceService.bind("basket", this);
-    },
-
-    ready: function()
-    {
-        if (this.disabled)
-        {
-            this.couponCode = this.basket.couponCode;
-        }
-    },
-
-    methods:
-    {
-        redeemCode: function()
-        {
-            this.waiting = true;
-            var self = this;
-
-            ApiService.post("/rest/io/coupon", {couponCode: this.couponCode})
-                .always(function()
-                {
-                    self.waiting = false;
-                })
-                .done(function(response)
-                {
-                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-                })
-                .fail(function(response)
-                {
-                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
-                });
-        },
-
-        removeCode: function()
-        {
-            this.waiting = true;
-            var self = this;
-
-            ApiService.delete("/rest/io/coupon/" + this.basket.couponCode)
-                .always(function()
-                {
-                    self.waiting = false;
-                })
-                .done(function(response)
-                {
-                    self.couponCode = "";
-                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
-                })
-                .fail(function(response)
-                {
-                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
-                });
-        }
     },
 
     computed:
     {
-        disabled: function()
+        disabled()
         {
-            if (this.basket.couponCode)
+            if (this.redeemedCouponCode)
             {
                 return true;
             }
 
             return false;
+        },
+
+        ...Vuex.mapState({
+            redeemedCouponCode: state => state.basket.data.couponCode
+        })
+    },
+
+    created()
+    {
+        this.$options.template = this.template;
+    },
+
+    ready()
+    {
+        Vue.nextTick(() =>
+        {
+            if (this.redeemedCouponCode)
+            {
+                this.couponCode = this.redeemedCouponCode;
+            }
+        });
+    },
+
+    methods:
+    {
+        redeemCode()
+        {
+            this.waiting = true;
+
+            this.$store.dispatch("redeemCouponCode", this.couponCode).then(
+                response =>
+                {
+                    this.waiting = false;
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                },
+                error =>
+                {
+                    this.waiting = false;
+                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
+                });
+        },
+
+        removeCode()
+        {
+            this.waiting = true;
+
+            this.$store.dispatch("removeCouponCode", this.couponCode).then(
+                response =>
+                {
+                    this.waiting = false;
+                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
+                },
+                error =>
+                {
+                    this.waiting = false;
+                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
+                });
         }
     }
 });

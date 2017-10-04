@@ -1,5 +1,3 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("quantity-input", {
 
     props: [
@@ -19,9 +17,38 @@ Vue.component("quantity-input", {
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
-            basketItems: [],
             currentCount: 0
         };
+    },
+
+    computed: {
+        alreadyInBasketCount()
+        {
+            return this.$store.state.basket.items.find(variations => variations.variationId === this.variationId) || 0;
+        },
+
+        ...Vuex.mapState({
+            basketItems: state => state.basket.items
+        })
+    },
+
+    watch: {
+        basketItems:
+        {
+            handler(val, oldVal)
+            {
+                if (oldVal)
+                {
+                    if (JSON.stringify(val) != JSON.stringify(oldVal))
+                    {
+                        this.initDefaultVars();
+
+                        this.handleMissingItems();
+                    }
+                }
+            },
+            deep: true
+        }
     },
 
     created()
@@ -31,15 +58,12 @@ Vue.component("quantity-input", {
 
     ready()
     {
-        ResourceService.bind("basketItems", this);
-
         this.checkDefaultVars();
         this.initDefaultVars();
         this.initValueWatcher();
 
         if (!this.vertical)
         {
-            this.initBasketValueWatcher();
             this.handleMissingItems();
         }
     },
@@ -104,16 +128,16 @@ Vue.component("quantity-input", {
 
         handleMissingItems()
         {
-            if (this.alreadyInBasketCount() >= this.internalMin)
+            if (this.alreadyInBasketCount >= this.internalMin)
             {
                 this.internalMin = 1;
             }
 
             if (this.max !== null)
             {
-                this.internalMax = this.max - this.alreadyInBasketCount();
+                this.internalMax = this.max - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount() === this.max)
+                if (this.alreadyInBasketCount === this.max)
                 {
                     this.internalMin = 0;
                     this.internalMax = 0;
@@ -126,33 +150,6 @@ Vue.component("quantity-input", {
             }
 
             this.value = this.internalMin;
-        },
-
-        initBasketValueWatcher()
-        {
-            ResourceService.watch("basketItems", (newBasketItems, oldBasketItems) =>
-            {
-                if (oldBasketItems)
-                {
-                    if (JSON.stringify(newBasketItems) != JSON.stringify(oldBasketItems))
-                    {
-                        this.initDefaultVars();
-
-                        this.handleMissingItems();
-                    }
-                }
-            });
-        },
-
-        alreadyInBasketCount()
-        {
-            if (this.basketItems.find(variations => variations.variationId === this.variationId))
-            {
-                return this.basketItems.find(variations => variations.variationId === this.variationId).quantity;
-            }
-
-            return 0;
         }
     }
-
 });
