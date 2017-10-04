@@ -1,6 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 
-const ResourceService     = require("services/ResourceService");
 const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
