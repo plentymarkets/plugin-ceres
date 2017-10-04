@@ -108,12 +108,11 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                commit("removeBasketItem", basketItemId);
-
                 ApiService.delete("/rest/io/basket/items/" + basketItemId, {template: "Ceres::Basket.Basket"})
-                    .done(data =>
+                    .done(basketItems =>
                     {
-                        resolve(data);
+                        commit("setBasketItems", basketItems);
+                        resolve(basketItems);
                     })
                     .fail(error =>
                     {

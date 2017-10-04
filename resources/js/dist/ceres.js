@@ -14020,7 +14020,7 @@ Vue.component("item-search", {
             result = JSON.parse(result);
             var suggestions = {
                 suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = _this2.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
+                    var value = _this2.$options.filters.itemName(dataItem.data.texts, App.config.itemName);
 
                     return {
                         value: value,
@@ -18050,9 +18050,8 @@ var actions = {
         var commit = _ref5.commit;
 
         return new Promise(function (resolve, reject) {
-            commit("removeBasketItem", basketItemId);
-
             _ApiService2.default.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" }).done(function (data) {
+                commit("setBasketItems", basketItems);
                 resolve(data);
             }).fail(function (error) {
                 reject(error);
