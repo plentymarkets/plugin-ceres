@@ -81,6 +81,8 @@
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
+                <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.rrpPrice">
@@ -111,8 +113,6 @@
                 </div>
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
-
-                <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                 <span class="availability tag availability_{{ item.documents[0].data.variation.availability.id }}" v-availability-class:currentVariation>
                     <span v-resource-bind:currentVariation="documents.0.data.variation.availability.names.name">
