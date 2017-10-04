@@ -10545,7 +10545,6 @@ var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ResourceService = require("services/ResourceService");
 var NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
@@ -10640,7 +10639,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":80,"services/NotificationService":97,"services/ResourceService":98}],7:[function(require,module,exports){
+},{"exceptions/ExceptionMap":80,"services/NotificationService":97}],7:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -10845,6 +10844,7 @@ Vue.component("basket-list-item", {
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
+                    _this.waiting = false;
                 }, function (error) {
                     _this.resetDelete();
                     _this.waiting = false;
@@ -10865,6 +10865,7 @@ Vue.component("basket-list-item", {
 
                 this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: _this2.basketItem }));
+                    _this2.waiting = false;
                 }, function (error) {
                     _this2.waiting = false;
                 });

@@ -48,6 +48,7 @@ Vue.component("basket-list-item", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                        this.waiting = false;
                     },
                     error =>
                     {
@@ -71,6 +72,7 @@ Vue.component("basket-list-item", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        this.waiting = false;
                     },
                     error =>
                     {
