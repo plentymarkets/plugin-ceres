@@ -6,7 +6,11 @@
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
 
-### Bearbeitet
+### Behoben
+
+- Im MyAccount wird der Text "Zahlungsart kann nicht geändert werden" nun nichtmehr angezeigt, wenn der Auftrag bezahlt ist.
+
+### Geändert
 
 - Der LayoutContainer **SingleItem.AddDetailTabs** beinhaltet nun das aktuelle Item.
 - Der LayoutContainer **SingleItem.AddDetailTabsContent** beinhaltet nun das aktuelle Item.
