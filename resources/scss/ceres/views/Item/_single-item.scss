@@ -78,6 +78,8 @@
     }
 
     .graduated-prices-table {
+        color: $gray-light;
+
         td:first-child {
             padding-right: 1rem;
             font-style: italic;
