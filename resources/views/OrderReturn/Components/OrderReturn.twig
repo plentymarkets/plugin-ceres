@@ -5,8 +5,14 @@
 	<div>
 		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
-		<button class="btn btn-secondary m-t-2" @click="selectAllItems()">{{ trans("Ceres::Template.generalSelectAll") }}</button>
-		<button class="btn btn-primary btn-right m-t-2" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">{{ trans("Ceres::Template.myAccountReturnTrigger") }}</button>
+		<button class="btn btn-primary btn-medium-large m-t-2" @click="selectAllItems()">
+			<i class="fa fa-check-square-o" aria-hidden="true"></i>
+			{{ trans("Ceres::Template.generalSelectAll") }}
+		</button>
+		<button class="btn btn-primary btn-right btn-medium-large m-t-2" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">
+			<i class="fa fa-arrow-right" aria-hidden="true"></i>
+			{{ trans("Ceres::Template.myAccountReturnTrigger") }}
+		</button>
 
 		{# confirmation modal #}
 		<div class="modal fade" v-el:order-return-confirmation tabindex="-1" role="dialog">
@@ -26,10 +32,16 @@
 					<div class="modal-footer">
 						<div class="row">
 							 <div class="col-sm-3 offset-sm-6">
-								<button type="button" data-dismiss="modal" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalCancel") }}</button>		
+								<button type="button" data-dismiss="modal" class="btn btn-secondary btn-block pull-xs-right btn-medium">
+									<i class="fa fa-times" aria-hidden="true"></i>
+									{{ trans("Ceres::Template.generalCancel") }}
+								</button>		
 							</div>
 							 <div class="col-sm-3">
-								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalConfirm") }}</button>
+								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">
+									<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
+									{{ trans("Ceres::Template.generalConfirm") }}
+								</button>
 							</div>
 						</div>
 					</div>
