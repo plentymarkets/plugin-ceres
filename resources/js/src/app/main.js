@@ -92,7 +92,9 @@ var init = (function($, window, document)
         {
             if ($("body").hasClass("open-right"))
             {
-                if ((evt.target != $(".basket-preview")) && ($(evt.target).parents(".basket-preview").length <= 0))
+                if ((evt.target != $(".basket-preview")) &&
+                    (evt.target.classList[0] != "message") &&
+                    ($(evt.target).parents(".basket-preview").length <= 0))
                 {
                     evt.preventDefault();
                     $("body").toggleClass("open-right");
