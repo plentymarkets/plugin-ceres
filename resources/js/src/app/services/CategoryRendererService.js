@@ -80,7 +80,7 @@ function _updateHistory(currentCategory)
 
 function _removeTempDesc()
 {
-    const tempDesc = document.querySelector(".category-description");
+    const tempDesc = document.querySelector("#category-description-container");
 
     if (tempDesc)
     {
@@ -113,7 +113,7 @@ function _loadOptionalData(currentCategory)
         }
     }
 
-    const categoryDescContainer = document.querySelector(".category-description");
+    const categoryDescContainer = document.querySelector("#category-description-container");
 
     if (categoryDescContainer)
     {
