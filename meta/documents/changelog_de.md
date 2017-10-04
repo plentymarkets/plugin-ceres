@@ -9,6 +9,12 @@
 ### Behoben
 
 - Die Aufpreise der Bestellmerkmale werden nun wieder korrekt ausgegeben.
+- Im MyAccount wird der Text "Zahlungsart kann nicht geändert werden" nun nichtmehr angezeigt, wenn der Auftrag bezahlt ist.
+
+### Geändert
+
+- Der LayoutContainer **SingleItem.AddDetailTabs** beinhaltet nun das aktuelle Item.
+- Der LayoutContainer **SingleItem.AddDetailTabsContent** beinhaltet nun das aktuelle Item.
 
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
