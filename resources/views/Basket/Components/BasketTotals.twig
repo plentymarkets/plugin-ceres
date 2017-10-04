@@ -66,9 +66,8 @@
                 </div>
                 {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
 
-                <hr v-if="showProperty( 'basket.vat' )">
-
                 <div class="totalSum">
+                    <hr v-if="showProperty( 'basket.vat' )">
                     <dt v-if="showProperty( 'basket.order_total_gross' )">
                         <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                     </dt><!--

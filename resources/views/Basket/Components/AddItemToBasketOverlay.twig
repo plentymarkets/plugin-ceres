@@ -36,8 +36,14 @@
                                         <span v-text="price | currency currency"></span>
                                     </strong>
                                 </p>
+
+                                <p class="small" v-for="attribute in basketItem.currentBasketItem.attributes">
+                                    <strong>${ attribute.attribute.names.name }</strong>:
+                                    <span>${ attribute.value.names.name }</span>
+                                </p>
+
                                 <p class="small" v-for="property in basketItem.currentBasketItem.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (${basketItem.currentBasketItem.properties | propertySurcharge property.propertyId | currency }):</strong>
+                                    <strong v-if="property.property.value">${property.property.names.name} (${basketItem.currentBasketItem.properties | propertySurcharge property.property.id | currency }):</strong>
                                     <span v-if="property.property.value">${property.property.value}</span>
                                 </p>
                             </div>

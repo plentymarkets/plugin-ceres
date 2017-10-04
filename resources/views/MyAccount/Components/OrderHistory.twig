@@ -11,6 +11,7 @@
 {% set orderList = services.customer.getOrders(1, ordersPerPage).getResult() %}
 
 {% set paymentMethodId = 0 %}
+{% set paymentStatus = "" %}
 
 {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
