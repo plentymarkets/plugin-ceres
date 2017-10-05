@@ -47,7 +47,7 @@
         </div>
 
         <div v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge property.propertyId | currency })</strong>:
+            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency })</strong>:
             <span>${property.value}</span>
         </div>
 

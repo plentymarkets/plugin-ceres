@@ -171,7 +171,7 @@
                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                     </li>
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs") }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs", item.documents[0].data) }}
                 </ul>
 
                 <div class="tab-content">
@@ -284,7 +284,7 @@
                         </div>
                     </div>
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent") }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}
                 </div>
             </div>
         </div>
@@ -292,12 +292,7 @@
 
         {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
 
-        {#<hr>#}
-
-        {#<h3 class="m-t-3 m-b-1">{{ trans("Ceres::Template.itemCustomerFeedback") }}</h3>#}
-        {#<div class="row m-b-3">#}
-            {#{% include "Ceres::Item.Partials.ItemRating" %}#}
-        {#</div>#}
+        {{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}
 
     </div>
 
