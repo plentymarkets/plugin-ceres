@@ -1,5 +1,3 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("item-image-carousel", {
 
     props: [
@@ -7,50 +5,78 @@ Vue.component("item-image-carousel", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             init            : false,
-            currentVariation: {},
             currentItem     : 0
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        currentVariation: state => state.item.variation
+    }),
+
+    watch: {
+        currentVariation: {
+            handler(val, oldVal)
+            {
+                if (!this.init)
+                {
+                    $(window).load(() =>
+                    {
+                        this.initCarousel();
+                        this.initThumbCarousel();
+
+                        this.init = true;
+                    });
+                }
+
+                else
+                {
+                    setTimeout(() =>
+                    {
+                        this.reInitialize();
+                    }, 1);
+                }
+            },
+            deep: true
+        }
+    },
+
+    created()
     {
         this.$options.template = this.template;
 
-        ResourceService.watch("currentVariation", function(newValue)
-        {
-            this.currentVariation = newValue;
+        // ResourceService.watch("currentVariation", newValue =>
+        // {
+        //     this.currentVariation = newValue;
 
-            var self = this;
+        //     if (!this.init)
+        //     {
+        //         $(window).load(() =>
+        //         {
+        //             this.initCarousel();
+        //             this.initThumbCarousel();
 
-            if (!this.init)
-            {
-                $(window).load(function()
-                {
-                    self.initCarousel();
-                    self.initThumbCarousel();
+        //             this.init = true;
+        //         });
+        //     }
 
-                    self.init = true;
-                });
-            }
-
-            else
-            {
-                setTimeout(function()
-                {
-                    self.reInitialize();
-                }, 1);
-            }
-
-        }.bind(this));
+        //     else
+        //     {
+        //         setTimeout(() =>
+        //         {
+        //             this.reInitialize();
+        //         }, 1);
+        //     }
+        //
+        // });
     },
 
     methods:
     {
-        getImageCount: function()
+        getImageCount()
         {
             var images = this.currentVariation.documents[0].data.images;
 
@@ -63,7 +89,7 @@ Vue.component("item-image-carousel", {
 
         },
 
-        reInitialize: function()
+        reInitialize()
         {
             var $owl = $(this.$els.single);
 
@@ -81,7 +107,7 @@ Vue.component("item-image-carousel", {
             this.initThumbCarousel();
         },
 
-        initCarousel: function()
+        initCarousel()
         {
             var imageCount = this.getImageCount();
 

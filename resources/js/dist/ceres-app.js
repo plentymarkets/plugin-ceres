@@ -12962,8 +12962,6 @@ Vue.component("add-to-wish-list", {
 },{"services/NotificationService":95}],35:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("item-image-carousel", {
 
     props: ["imageUrlAccessor", "template"],
@@ -12971,33 +12969,69 @@ Vue.component("item-image-carousel", {
     data: function data() {
         return {
             init: false,
-            currentVariation: {},
             currentItem: 0
         };
+    },
+
+
+    computed: Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    }),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+                if (!this.init) {
+                    $(window).load(function () {
+                        _this.initCarousel();
+                        _this.initThumbCarousel();
+
+                        _this.init = true;
+                    });
+                } else {
+                    setTimeout(function () {
+                        _this.reInitialize();
+                    }, 1);
+                }
+            },
+
+            deep: true
+        }
     },
 
     created: function created() {
         this.$options.template = this.template;
 
-        ResourceService.watch("currentVariation", function (newValue) {
-            this.currentVariation = newValue;
+        // ResourceService.watch("currentVariation", newValue =>
+        // {
+        //     this.currentVariation = newValue;
 
-            var self = this;
+        //     if (!this.init)
+        //     {
+        //         $(window).load(() =>
+        //         {
+        //             this.initCarousel();
+        //             this.initThumbCarousel();
 
-            if (!this.init) {
-                $(window).load(function () {
-                    self.initCarousel();
-                    self.initThumbCarousel();
+        //             this.init = true;
+        //         });
+        //     }
 
-                    self.init = true;
-                });
-            } else {
-                setTimeout(function () {
-                    self.reInitialize();
-                }, 1);
-            }
-        }.bind(this));
+        //     else
+        //     {
+        //         setTimeout(() =>
+        //         {
+        //             this.reInitialize();
+        //         }, 1);
+        //     }
+        //
+        // });
     },
+
 
     methods: {
         getImageCount: function getImageCount() {
@@ -13009,7 +13043,6 @@ Vue.component("item-image-carousel", {
 
             return images.all.length;
         },
-
         reInitialize: function reInitialize() {
             var $owl = $(this.$els.single);
 
@@ -13026,7 +13059,6 @@ Vue.component("item-image-carousel", {
             this.initCarousel();
             this.initThumbCarousel();
         },
-
         initCarousel: function initCarousel() {
             var imageCount = this.getImageCount();
 
@@ -13055,6 +13087,7 @@ Vue.component("item-image-carousel", {
             }.bind(this));
         },
 
+
         initThumbCarousel: function initThumbCarousel() {
             $(this.$els.thumbs).owlCarousel({
                 autoHeight: true,
@@ -13081,7 +13114,7 @@ Vue.component("item-image-carousel", {
     }
 });
 
-},{"services/ResourceService":96}],36:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -13239,11 +13272,34 @@ Vue.component("variation-select", {
         };
     },
 
+
+    computed: Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation;
+        }
+    }),
+
+    watch: {
+        currentVariation: {
+            handler: function handler(newVariation, oldVariation) {
+                if (oldVariation) {
+                    var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    var title = document.getElementsByTagName("title")[0].innerHTML;
+
+                    window.history.replaceState({}, title, url);
+                }
+            },
+
+            deep: true
+        }
+    },
+
     created: function created() {
         this.$options.template = this.template;
     },
-
     ready: function ready() {
+        var _this = this;
+
         // initialize selected attributes to be tracked by change detection
         var attributes = {};
 
@@ -13257,8 +13313,8 @@ Vue.component("variation-select", {
             // find variation by id
             var preselectedVariation = this.variations.filter(function (variation) {
                 // eslint-disable-next-line eqeqeq
-                return variation.variationId == this.preselect;
-            }.bind(this));
+                return variation.variationId == _this.preselect;
+            });
 
             if (!!preselectedVariation && preselectedVariation.length === 1) {
                 // set attributes of preselected variation
@@ -13269,18 +13325,20 @@ Vue.component("variation-select", {
         // search for matching variation on each change of attribute selection
         this.$watch("selectedAttributes", function () {
             // search variations matching current selection
-            var possibleVariations = this.filterVariations();
+            var possibleVariations = _this.filterVariations();
 
             if (possibleVariations.length === 1) {
                 // only 1 matching variation remaining:
                 // set remaining attributes if not set already. Will trigger this watcher again.
-                if (!this.setAttributes(possibleVariations[0])) {
+                if (!_this.setAttributes(possibleVariations[0])) {
                     // all attributes are set => load variation data
                     var variationId = possibleVariations[0].variationId;
 
                     if (VariationData[variationId]) {
                         // reuse cached variation data
                         ResourceService.getResource("currentVariation").set(VariationData[variationId]);
+
+                        _this.$store.commit("setVariation", VariationData[variationId]);
 
                         document.dispatchEvent(new CustomEvent("onVariationChanged", {
                             detail: {
@@ -13295,6 +13353,8 @@ Vue.component("variation-select", {
                             VariationData[variationId] = response;
                             ResourceService.getResource("currentVariation").set(response);
 
+                            _this.$store.commit("setVariation", response);
+
                             document.dispatchEvent(new CustomEvent("onVariationChanged", { detail: { attributes: response.attributes, documents: response.documents } }));
                         });
                     }
@@ -13304,16 +13364,19 @@ Vue.component("variation-select", {
             deep: true
         });
 
-        // watch for changes on selected variation to adjust url
-        ResourceService.watch("currentVariation", function (newVariation, oldVariation) {
-            if (oldVariation) {
-                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                var title = document.getElementsByTagName("title")[0].innerHTML;
+        // // watch for changes on selected variation to adjust url
+        // ResourceService.watch("currentVariation", (newVariation, oldVariation) =>
+        // {
+        //     if (oldVariation)
+        //     {
+        //         var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+        //         var title = document.getElementsByTagName("title")[0].innerHTML;
 
-                window.history.replaceState({}, title, url);
-            }
-        }.bind(this));
+        //         window.history.replaceState({}, title, url);
+        //     }
+        // });
     },
+
 
     methods: {
 
@@ -13338,6 +13401,7 @@ Vue.component("variation-select", {
             });
         },
 
+
         /**
          * Tests if a given attribute value is not available depending on the current selection.
          * @param {int}     attributeId         The id of the attribute
@@ -13351,6 +13415,7 @@ Vue.component("variation-select", {
             attributes[attributeId] = attributeValueId;
             return this.filterVariations(attributes).length > 0;
         },
+
 
         /**
          * Set selected attributes by a given variation.
@@ -13372,7 +13437,6 @@ Vue.component("variation-select", {
 
             return hasChanges;
         }
-
     }
 
 });
@@ -17279,6 +17343,10 @@ var _ItemListModule = require("store/modules/ItemListModule");
 
 var _ItemListModule2 = _interopRequireDefault(_ItemListModule);
 
+var _SingleItemModule = require("store/modules/SingleItemModule");
+
+var _SingleItemModule2 = _interopRequireDefault(_SingleItemModule);
+
 var _OrderReturnModule = require("store/modules/OrderReturnModule");
 
 var _OrderReturnModule2 = _interopRequireDefault(_OrderReturnModule);
@@ -17295,6 +17363,7 @@ var store = new Vuex.Store({
         user: _UserModule2.default,
         navigation: _NavigationModule2.default,
         itemList: _ItemListModule2.default,
+        item: _SingleItemModule2.default,
         orderReturn: _OrderReturnModule2.default
     }
 });
@@ -17303,7 +17372,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":101,"store/modules/CheckoutModule":102,"store/modules/ItemListModule":103,"store/modules/LocalizationModule":104,"store/modules/NavigationModule":105,"store/modules/OrderReturnModule":106,"store/modules/UserModule":107,"store/modules/WishListModule":108}],101:[function(require,module,exports){
+},{"store/modules/AddressModule":101,"store/modules/CheckoutModule":102,"store/modules/ItemListModule":103,"store/modules/LocalizationModule":104,"store/modules/NavigationModule":105,"store/modules/OrderReturnModule":106,"store/modules/SingleItemModule":107,"store/modules/UserModule":108,"store/modules/WishListModule":109}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18320,6 +18389,35 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+// import ApiService from "services/ApiService";
+
+var state = {
+    variationList: []
+};
+
+var mutations = {
+    setVariationList: function setVariationList(state, variationList) {
+        state.variationList = variationList;
+    }
+};
+
+var actions = {};
+
+var getters = {};
+
+exports.default = {
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
+};
+
+},{}],108:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 var state = {
     userData: null
 };
@@ -18357,7 +18455,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18469,7 +18567,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":90}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,75,71,72,73,74,76,77,78,79,80,81,82,83,84,85,86,87,88,100,101,102,103,104,105,106,107,108])
+},{"services/ApiService":90}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,75,71,72,73,74,76,77,78,79,80,81,82,83,84,85,86,87,88,100,101,102,103,104,105,106,107,108,109])
 
 
 // Frontend end scripts
