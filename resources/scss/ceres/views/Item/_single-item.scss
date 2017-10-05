@@ -1,5 +1,5 @@
 
-.single{
+.single {
     
     .list-item-carousel {
         .list-control-special{
@@ -75,6 +75,13 @@
                 margin-left: 0;
             }
         }
+    }
+
+    .graduated-prices-table {
+        td:first-child {
+            padding-right: 1rem;
+            font-style: italic;
+        }          
     }
 }
 
