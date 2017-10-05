@@ -1,30 +1,28 @@
-const ResourceService       = require("services/ResourceService");
+import ApiService from "services/ApiService";
 
 Vue.component("basket-preview", {
 
     props: [
-        "template"
+        "template",
+        "basketData",
+        "basketItemsData"
     ],
 
-    data()
-    {
-        return {
-            basket: {},
-            basketItems: []
-        };
-    },
+    computed: Vuex.mapState({
+        basket: state => state.basket.data,
+        basketItems: state => state.basket.items
+    }),
 
     created()
     {
         this.$options.template = this.template;
-    },
+        this.$store.commit("setBasket", this.basketData);
+        this.$store.commit("setBasketItems", this.basketItemsData);
 
-    /**
-     * Bind to basket and bind the basket items
-     */
-    ready()
-    {
-        ResourceService.bind("basket", this);
-        ResourceService.bind("basketItems", this);
+        ApiService.listen("AfterBasketChanged",
+            data =>
+            {
+                this.$store.commit("setBasket", data.basket);
+            });
     }
 });

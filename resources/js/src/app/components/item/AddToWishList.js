@@ -48,18 +48,19 @@ Vue.component("add-to-wish-list", {
                 this.isActive = true;
                 this.changeTooltipText();
 
-                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(response =>
-                {
-                    this.isLoading = false;
+                this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(
+                    response =>
+                    {
+                        this.isLoading = false;
 
-                    NotificationService.success(Translations.Template.itemWishListAdded);
-                },
-                error =>
-                {
-                    this.isLoading = false;
-                    this.isActive = false;
-                    this.changeTooltipText();
-                });
+                        NotificationService.success(Translations.Template.itemWishListAdded);
+                    },
+                    error =>
+                    {
+                        this.isLoading = false;
+                        this.isActive = false;
+                        this.changeTooltipText();
+                    });
             }
         },
 

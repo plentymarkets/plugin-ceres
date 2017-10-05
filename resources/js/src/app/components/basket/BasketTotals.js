@@ -1,5 +1,3 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("basket-totals", {
 
     props: [
@@ -7,24 +5,13 @@ Vue.component("basket-totals", {
         "template"
     ],
 
-    data: function()
-    {
-        return {
-            basket: {}
-        };
-    },
+    computed: Vuex.mapState({
+        basket: state => state.basket.data
+    }),
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
-    },
-
-    /**
-     * Bind to basket
-     */
-    ready: function()
-    {
-        ResourceService.bind("basket", this);
     },
 
     methods:
@@ -34,7 +21,7 @@ Vue.component("basket-totals", {
          * @param name
          * @returns {boolean}
          */
-        showProperty: function(name)
+        showProperty(name)
         {
             return !this.config || this.config.indexOf(name) >= 0 || this.config.indexOf("all") >= 0;
         }

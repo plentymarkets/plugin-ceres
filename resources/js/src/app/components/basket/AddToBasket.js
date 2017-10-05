@@ -1,6 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 
-const ResourceService     = require("services/ResourceService");
 const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
@@ -19,6 +18,19 @@ Vue.component("add-to-basket", {
             quantity: 1,
             buttonLockState: false
         };
+    },
+
+    computed:
+    {
+        variationId()
+        {
+            return this.item.variation.id;
+        },
+
+        hasChildren()
+        {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        }
     },
 
     created()
@@ -49,15 +61,14 @@ Vue.component("add-to-basket", {
                         basketItemOrderParams   :   this.item.properties
                     };
 
-                ResourceService.getResource("basketItems").push(basketObject)
-                    .done(function()
+                this.$store.dispatch("addBasketItem", basketObject).then(
+                    response =>
                     {
                         this.openAddToBasketOverlay();
-                    }
-                    .bind(this))
-                    .fail(function(response)
+                    },
+                    error =>
                     {
-                        NotificationService.error(Translations.Template[ExceptionMap.get(response.data.exceptionCode.toString())]).closeAfter(5000);
+                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     });
             }
         },
@@ -77,15 +88,13 @@ Vue.component("add-to-basket", {
          */
         openAddToBasketOverlay()
         {
-            const currentBasketObject =
+            const latestBasketEntry =
                 {
-                    currentBasketItem: this.item,
-                    quantity         : this.quantity
+                    item: this.item,
+                    quantity: this.quantity
                 };
 
-            ResourceService
-                .getResource("basketItem")
-                .set(currentBasketObject);
+            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
 
         /**
@@ -104,22 +113,6 @@ Vue.component("add-to-basket", {
         {
             this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
             this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
-        }
-    },
-
-    computed:
-    {
-        /**
-         * returns item.variation.id
-         */
-        variationId()
-        {
-            return this.item.variation.id;
-        },
-
-        hasChildren()
-        {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         }
     }
 });
