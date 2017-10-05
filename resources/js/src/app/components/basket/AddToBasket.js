@@ -72,6 +72,7 @@ Vue.component("add-to-basket", {
                     },
                     error =>
                     {
+                        this.waiting = false;
                         NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     });
             }
