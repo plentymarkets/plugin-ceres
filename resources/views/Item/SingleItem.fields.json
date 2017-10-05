@@ -1,4 +1,7 @@
 [
+  "attributes.attribute.names.*",
+  "attributes.value.names.*",
+
   "itemId",
   "id",
   "item.id",

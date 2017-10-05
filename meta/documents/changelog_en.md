@@ -1,10 +1,20 @@
 # Release Notes for Ceres
 
-## v1.5.x (TBA)
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 
 - The **Container for customer feedback** container has been added.
+
+### Changed
+
+- Der template container **Single item: Add detail tabs** now contains the current `Item` object.
+- Der template container **Single item: Add content to detail tabs** now contains the current `Item` object.
+
+### Fixed
+
+- Surcharges for order properties are now correctly displayed in the shopping cart and shopping cart preview.
+- In the **My account** area the note **Payment method cannot be changed** will be hidden as soon as the order was paid.
 
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Overview of all changes</b></a>
 
