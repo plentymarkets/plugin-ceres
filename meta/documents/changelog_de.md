@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.5.3 (unknown)
+
+### Geändert
+
+- Die OrderProperties-Komponente wird nun oberhalb der Preise angezeigt.
+
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
