@@ -20,6 +20,11 @@ Vue.component("graduated-prices", {
     ready()
     {
         this.currentVariation = ResourceService.getResource("currentVariation").val();
+
+        ResourceService.watch("currentVariation", (newValue, oldValue) =>
+        {
+            this.currentVariation = newValue;
+        });
     },
 
     computed:
