@@ -3,7 +3,8 @@ import ApiService from "services/ApiService";
 const state =
     {
         orderData: {},
-        orderReturnItems: []
+        orderReturnItems: [],
+        orderReturnNote: ""
     };
 
 const mutations =
@@ -36,6 +37,11 @@ const mutations =
                     state.orderReturnItems.splice(orderItemIndex, 1);
                 }
             }
+        },
+
+        updateOrderReturnNote(state, orderReturnNote)
+        {
+            state.orderReturnNote = orderReturnNote;
         }
     };
 
@@ -54,7 +60,7 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds})
+                    ApiService.post("/rest/io/order/return", {orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote})
                         .done(data =>
                         {
                             resolve();

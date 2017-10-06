@@ -22,6 +22,12 @@
 								${orderReturnItem.quantity}x ${orderReturnItem.orderItem.orderItemName}
 							</li>
 						</ul>
+
+						<div class="input-unit textarea cmp-contact m-t-2">
+							<textarea id="contact_wish" class="no-resize" rows="5" @change="updateOrderReturnNote($event.target.value)"></textarea>
+							<label for="contact_wish">{{ trans("Ceres::Template.myAccountReturnReason") }}</label>
+						</div>
+
 					</div>
 					<div class="modal-footer">
 						<div class="row">
