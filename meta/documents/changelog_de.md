@@ -5,6 +5,7 @@
 ### Geändert
 
 - Der Text von Bestellmerkmalen wird in der Basketvorschau nichtmehr ausgegeben. 
+- Die OrderProperties (SingleItem) werden nun oberhalb der Preise ausgegeben.
 
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
