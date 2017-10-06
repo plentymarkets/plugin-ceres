@@ -8,5 +8,9 @@ Vue.component("order-properties", {
     created()
     {
         this.$options.template = this.template;
-    }
+    },
+
+    methods: Vuex.mapMutations([
+        "setVariationOrderProperty"
+    ])
 });

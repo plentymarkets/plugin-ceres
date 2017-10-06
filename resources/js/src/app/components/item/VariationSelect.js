@@ -1,5 +1,4 @@
 const ApiService = require("services/ApiService");
-const ResourceService = require("services/ResourceService");
 
 // cache loaded variation data for reuse
 const VariationData = {};
@@ -92,9 +91,6 @@ Vue.component("variation-select", {
                     if (VariationData[variationId])
                     {
                         // reuse cached variation data
-                        ResourceService
-                            .getResource("currentVariation")
-                            .set(VariationData[variationId]);
 
                         this.$store.commit("setVariation", VariationData[variationId]);
 
@@ -117,9 +113,6 @@ Vue.component("variation-select", {
                             {
                                 // store received variation data for later reuse
                                 VariationData[variationId] = response;
-                                ResourceService
-                                    .getResource("currentVariation")
-                                    .set(response);
 
                                 this.$store.commit("setVariation", response);
 

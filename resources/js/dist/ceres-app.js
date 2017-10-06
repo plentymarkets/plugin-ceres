@@ -10536,7 +10536,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":96}],6:[function(require,module,exports){
+},{"services/ModalService":92}],6:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
@@ -10639,7 +10639,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":80,"services/NotificationService":97}],7:[function(require,module,exports){
+},{"exceptions/ExceptionMap":76,"services/NotificationService":93}],7:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -10674,7 +10674,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ApiService":92}],8:[function(require,module,exports){
+},{"services/ApiService":88}],8:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
@@ -10781,7 +10781,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/NotificationService":97}],10:[function(require,module,exports){
+},{"services/NotificationService":93}],10:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
@@ -11059,7 +11059,7 @@ Vue.component("checkout", {
     }
 });
 
-},{"services/ApiService":92,"services/NotificationService":97}],15:[function(require,module,exports){
+},{"services/ApiService":88,"services/NotificationService":93}],15:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -11257,7 +11257,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":92,"services/NotificationService":97}],18:[function(require,module,exports){
+},{"services/ApiService":88,"services/NotificationService":93}],18:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {
@@ -11667,7 +11667,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressFieldService":91,"services/ApiService":92,"services/ModalService":96,"services/ValidationService":100}],21:[function(require,module,exports){
+},{"services/AddressFieldService":87,"services/ApiService":88,"services/ModalService":92,"services/ValidationService":95}],21:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -11870,7 +11870,7 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":97,"services/ValidationService":100}],22:[function(require,module,exports){
+},{"services/NotificationService":93,"services/ValidationService":95}],22:[function(require,module,exports){
 "use strict";
 
 Vue.component("invoice-address-select", {
@@ -12103,7 +12103,7 @@ Vue.component("contact-form", {
     }
 });
 
-},{"services/ApiService":92,"services/NotificationService":97,"services/ValidationService":100}],25:[function(require,module,exports){
+},{"services/ApiService":88,"services/NotificationService":93,"services/ValidationService":95}],25:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -12250,7 +12250,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":94}],27:[function(require,module,exports){
+},{"services/CountryService":90}],27:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -12370,7 +12370,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":92,"services/ModalService":96,"services/NotificationService":97,"services/ValidationService":100}],28:[function(require,module,exports){
+},{"services/ApiService":88,"services/ModalService":92,"services/NotificationService":93,"services/ValidationService":95}],28:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12467,7 +12467,7 @@ Vue.component("reset-password-form", {
 
 });
 
-},{"services/ApiService":92,"services/NotificationService":97,"services/ValidationService":100}],29:[function(require,module,exports){
+},{"services/ApiService":88,"services/NotificationService":93,"services/ValidationService":95}],29:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
@@ -12577,7 +12577,7 @@ Vue.component("salutation-select", {
     }
 });
 
-},{"services/AddressFieldService":91}],30:[function(require,module,exports){
+},{"services/AddressFieldService":87}],30:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12626,7 +12626,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":92,"services/ValidationService":100}],31:[function(require,module,exports){
+},{"services/ApiService":88,"services/ValidationService":95}],31:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12804,7 +12804,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":92,"services/ModalService":96,"services/NotificationService":97,"services/ValidationService":100}],32:[function(require,module,exports){
+},{"services/ApiService":88,"services/ModalService":92,"services/NotificationService":93,"services/ValidationService":95}],32:[function(require,module,exports){
 "use strict";
 
 Vue.component("login-view", {
@@ -12875,7 +12875,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":92,"services/ValidationService":100}],34:[function(require,module,exports){
+},{"services/ApiService":88,"services/ValidationService":95}],34:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -12952,7 +12952,7 @@ Vue.component("add-to-wish-list", {
     }
 });
 
-},{"services/NotificationService":97}],35:[function(require,module,exports){
+},{"services/NotificationService":93}],35:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-image-carousel", {
@@ -12961,7 +12961,6 @@ Vue.component("item-image-carousel", {
 
     data: function data() {
         return {
-            init: false,
             currentItem: 0
         };
     },
@@ -12978,14 +12977,7 @@ Vue.component("item-image-carousel", {
             handler: function handler(val, oldVal) {
                 var _this = this;
 
-                if (!this.init) {
-                    $(window).load(function () {
-                        _this.initCarousel();
-                        _this.initThumbCarousel();
-
-                        _this.init = true;
-                    });
-                } else {
+                if (val !== oldVal) {
                     setTimeout(function () {
                         _this.reInitialize();
                     }, 1);
@@ -12998,31 +12990,10 @@ Vue.component("item-image-carousel", {
 
     created: function created() {
         this.$options.template = this.template;
-
-        // ResourceService.watch("currentVariation", newValue =>
-        // {
-        //     this.currentVariation = newValue;
-
-        //     if (!this.init)
-        //     {
-        //         $(window).load(() =>
-        //         {
-        //             this.initCarousel();
-        //             this.initThumbCarousel();
-
-        //             this.init = true;
-        //         });
-        //     }
-
-        //     else
-        //     {
-        //         setTimeout(() =>
-        //         {
-        //             this.reInitialize();
-        //         }, 1);
-        //     }
-        //
-        // });
+    },
+    ready: function ready() {
+        this.initCarousel();
+        this.initThumbCarousel();
     },
 
 
@@ -13053,6 +13024,8 @@ Vue.component("item-image-carousel", {
             this.initThumbCarousel();
         },
         initCarousel: function initCarousel() {
+            var _this2 = this;
+
             var imageCount = this.getImageCount();
 
             $(this.$els.single).owlCarousel({
@@ -13068,19 +13041,17 @@ Vue.component("item-image-carousel", {
                 navContainerClass: "",
                 navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
                 smartSpeed: 350,
-                onChanged: function (event) {
-                    var $thumb = $(this.$els.thumbs);
+                onChanged: function onChanged(event) {
+                    var $thumb = $(_this2.$els.thumbs);
 
                     $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
-                }.bind(this)
+                }
             });
 
             $(this.$els.single).on("changed.owl.carousel", function (event) {
-                this.currentItem = event.page.index;
-            }.bind(this));
+                _this2.currentItem = event.page.index;
+            });
         },
-
-
         initThumbCarousel: function initThumbCarousel() {
             $(this.$els.thumbs).owlCarousel({
                 autoHeight: true,
@@ -13099,8 +13070,9 @@ Vue.component("item-image-carousel", {
             });
         },
 
+
         goTo: function goTo(index) {
-            var $owl = $(this.$els.single);
+            var $owl = $(undefined.$els.single);
 
             $owl.trigger("to.owl.carousel", [index, 350]);
         }
@@ -13116,7 +13088,10 @@ Vue.component("order-properties", {
 
     created: function created() {
         this.$options.template = this.template;
-    }
+    },
+
+
+    methods: Vuex.mapMutations(["setVariationOrderProperty"])
 });
 
 },{}],37:[function(require,module,exports){
@@ -13249,8 +13224,61 @@ Vue.component("quantity-input", {
 },{}],38:[function(require,module,exports){
 "use strict";
 
+Vue.component("single-item", {
+
+    props: ["template", "itemData", "variationListData", "attributeNameMap"],
+
+    data: function data() {
+        return {
+            firstVariationChange: true
+        };
+    },
+
+
+    computed: Vuex.mapState({
+        currentVariation: function currentVariation(state) {
+            return state.item.variation.documents[0].data;
+        },
+        variations: function variations(state) {
+            return state.item.variationList;
+        },
+        isInWishList: function isInWishList(state) {
+            return state.item.variation.documents[0].isInWishListVariation;
+        }
+    }),
+
+    created: function created() {
+        this.$options.template = this.template;
+        this.$store.commit("setVariation", this.itemData);
+        this.$store.commit("setVariationList", this.variationListData);
+
+        this.lol();
+    },
+
+
+    methods: {
+        lol: function lol() {
+            var _this = this;
+
+            document.addEventListener("onVariationChanged", function (event) {
+                if (_this.firstVariationChange) {
+                    var twigSingleItem = document.querySelector("#twig-rendered-single-item");
+
+                    twigSingleItem.parentElement.removeChild(twigSingleItem);
+
+                    _this.firstVariationChange = false;
+
+                    _this.$el.style.removeProperty("display");
+                }
+            });
+        }
+    }
+});
+
+},{}],39:[function(require,module,exports){
+"use strict";
+
 var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
 
 // cache loaded variation data for reuse
 var VariationData = {};
@@ -13330,7 +13358,6 @@ Vue.component("variation-select", {
 
                     if (VariationData[variationId]) {
                         // reuse cached variation data
-                        ResourceService.getResource("currentVariation").set(VariationData[variationId]);
 
                         _this.$store.commit("setVariation", VariationData[variationId]);
 
@@ -13345,7 +13372,6 @@ Vue.component("variation-select", {
                         ApiService.get("/rest/io/variations/" + variationId, { template: "Ceres::Item.SingleItem" }).done(function (response) {
                             // store received variation data for later reuse
                             VariationData[variationId] = response;
-                            ResourceService.getResource("currentVariation").set(response);
 
                             _this.$store.commit("setVariation", response);
 
@@ -13435,7 +13461,7 @@ Vue.component("variation-select", {
 
 });
 
-},{"services/ApiService":92,"services/ResourceService":98}],39:[function(require,module,exports){
+},{"services/ApiService":88}],40:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -13489,7 +13515,7 @@ Vue.component("category-image-carousel", {
     }
 });
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-item", {
@@ -13527,7 +13553,7 @@ Vue.component("category-item", {
     }
 });
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-lazy-img", {
@@ -13547,7 +13573,7 @@ Vue.component("item-lazy-img", {
     }
 });
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-list", {
@@ -13577,7 +13603,7 @@ Vue.component("item-list", {
     }
 });
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -13665,7 +13691,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":99}],44:[function(require,module,exports){
+},{"services/UrlService":94}],45:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -13762,7 +13788,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/UrlService":99}],45:[function(require,module,exports){
+},{"services/UrlService":94}],46:[function(require,module,exports){
 "use strict";
 
 var accounting = require("accounting");
@@ -13810,7 +13836,7 @@ Vue.component("item-store-special", {
     }
 });
 
-},{"accounting":1}],46:[function(require,module,exports){
+},{"accounting":1}],47:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -13885,7 +13911,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":99}],47:[function(require,module,exports){
+},{"services/UrlService":94}],48:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13957,7 +13983,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":99}],48:[function(require,module,exports){
+},{"services/UrlService":94}],49:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13992,7 +14018,7 @@ Vue.component("item-filter", {
     }
 });
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -14042,7 +14068,7 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":99}],50:[function(require,module,exports){
+},{"services/UrlService":94}],51:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -14067,7 +14093,7 @@ Vue.component("item-filter-tag-list", {
     }
 });
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 "use strict";
 
 var ModalService = require("services/ModalService");
@@ -14156,7 +14182,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/ApiService":92,"services/ModalService":96,"services/NotificationService":97}],52:[function(require,module,exports){
+},{"services/ApiService":88,"services/ModalService":92,"services/NotificationService":93}],53:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -14395,7 +14421,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":92,"services/ModalService":96,"services/NotificationService":97,"services/ValidationService":100}],53:[function(require,module,exports){
+},{"services/ApiService":88,"services/ModalService":92,"services/NotificationService":93,"services/ValidationService":95}],54:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -14511,7 +14537,7 @@ Vue.component("change-payment-method", {
 
 });
 
-},{"services/ApiService":92,"services/ModalService":96}],54:[function(require,module,exports){
+},{"services/ApiService":88,"services/ModalService":92}],55:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -14539,7 +14565,7 @@ Vue.component("history", {
     }
 });
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -14619,7 +14645,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":92}],56:[function(require,module,exports){
+},{"services/ApiService":88}],57:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -14703,7 +14729,7 @@ Vue.component("order-return-history", {
     }
 });
 
-},{"services/ApiService":92,"services/NotificationService":97}],57:[function(require,module,exports){
+},{"services/ApiService":88,"services/NotificationService":93}],58:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14763,7 +14789,7 @@ Vue.component("order-return", {
     }, Vuex.mapActions(["sendOrderReturn"]))
 });
 
-},{"services/NotificationService":97}],58:[function(require,module,exports){
+},{"services/NotificationService":93}],59:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-item", {
@@ -14823,7 +14849,7 @@ Vue.component("order-return-item", {
     }
 });
 
-},{}],59:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 "use strict";
 
 Vue.component("mobile-navigation", {
@@ -14946,7 +14972,7 @@ Vue.component("mobile-navigation", {
     }
 });
 
-},{}],60:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
@@ -15018,7 +15044,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"exceptions/ExceptionMap":80,"services/NotificationService":97}],61:[function(require,module,exports){
+},{"exceptions/ExceptionMap":76,"services/NotificationService":93}],62:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-country-select", {
@@ -15045,7 +15071,7 @@ Vue.component("shipping-country-select", {
     }
 });
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -15067,7 +15093,7 @@ Vue.component("shop-country-settings", {
     }
 });
 
-},{"services/ApiService":92}],63:[function(require,module,exports){
+},{"services/ApiService":88}],64:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15087,7 +15113,7 @@ Vue.component("shop-language-select", {
     }
 });
 
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -15126,7 +15152,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":101}],65:[function(require,module,exports){
+},{"services/WaitScreenService":96}],66:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15177,7 +15203,7 @@ Vue.component("wish-list", {
     }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-},{"services/NotificationService":97}],66:[function(require,module,exports){
+},{"services/NotificationService":93}],67:[function(require,module,exports){
 "use strict";
 
 Vue.component("wish-list-count", {
@@ -15196,7 +15222,7 @@ Vue.component("wish-list-count", {
     }
 });
 
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-quantity", {
@@ -15205,7 +15231,7 @@ Vue.directive("basket-item-quantity", {
     }
 });
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -15214,7 +15240,7 @@ Vue.directive("basket-item-sum", {
     }
 });
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -15236,7 +15262,7 @@ Vue.directive("logout", function () {
     }.bind(this));
 });
 
-},{"services/ApiService":92}],70:[function(require,module,exports){
+},{"services/ApiService":88}],71:[function(require,module,exports){
 "use strict";
 
 Vue.directive("is-loading-watcher", {
@@ -15257,7 +15283,7 @@ Vue.directive("is-loading-watcher", {
     }
 });
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 "use strict";
 
 Vue.directive("update-sidenav-selection", {
@@ -15298,7 +15324,7 @@ Vue.directive("update-sidenav-selection", {
     }
 });
 
-},{}],72:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 "use strict";
 
 Vue.directive("render-category", {
@@ -15319,141 +15345,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{}],73:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.elementDirective("resource", {
-    priority: 10000,
-    params: ["name", "route", "data", "events", "responseTemplate"],
-    bind: function bind() {
-        var resource = ResourceService.registerResource(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
-        var events = this.params.events || [];
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i].split("!");
-            var usePayload;
-
-            if (event.length > 1) {
-                usePayload = event[1];
-            }
-
-            resource.listen(event[0], usePayload);
-        }
-    }
-
-});
-
-Vue.elementDirective("resource-list", {
-    priority: 10000,
-    params: ["name", "route", "data", "events", "responseTemplate"],
-    bind: function bind() {
-        var resource = ResourceService.registerResourceList(this.params.name, this.params.route, this.params.data, this.params.responseTemplate);
-        var events = this.params.events || [];
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i].split("!");
-            var usePayload;
-
-            if (event.length > 1) {
-                usePayload = event[1];
-            }
-
-            resource.listen(event[0], usePayload);
-        }
-    }
-});
-
-},{"services/ResourceService":98}],74:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-bind", {
-
-    params: ["filters"],
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.arg, function (value) {
-            var paths = self.expression.split(".");
-
-            for (var i = 0; i < paths.length; i++) {
-                var path = paths[i];
-
-                value = value[path];
-            }
-
-            var filters = self.params.filters || [];
-
-            for (var j = 0; j < filters.length; j++) {
-                var filter = Vue.filter(self.params.filters[j]);
-
-                value = filter.apply(Object, [value]);
-            }
-
-            self.el.innerHTML = value;
-        });
-    }
-
-});
-
-},{"services/ResourceService":98}],75:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-if", {
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.arg, function (value) {
-
-            var keys = Object.keys(value);
-            var values = keys.map(function (key) {
-                return value[key];
-            });
-
-            // eslint-disable-next-line
-            var condition = new Function(keys, "return " + self.expression);
-
-            if (condition.apply(null, values)) {
-                self.el.style.display = "";
-            } else {
-                self.el.style.display = "none";
-            }
-        });
-    }
-
-});
-
-},{"services/ResourceService":98}],76:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("resource-push", {
-
-    params: ["dataAccessor", "resource"],
-
-    bind: function bind() {
-        var self = this;
-
-        ResourceService.watch(this.params.resource, function (newValue, oldValue) {
-            if (self.params.dataAccessor) {
-                self.el.__vue__[self.arg] = newValue.documents[0].data;
-            } else {
-                self.el.__vue__[self.arg] = newValue;
-            }
-        });
-    }
-
-});
-
-},{"services/ResourceService":98}],77:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 "use strict";
 
 Vue.directive("change-lang", function (value) {
@@ -15466,7 +15358,7 @@ Vue.directive("change-lang", function (value) {
     });
 });
 
-},{}],78:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 "use strict";
 
 Vue.directive("tooltip", {
@@ -15492,24 +15384,7 @@ Vue.directive("tooltip", {
     }
 });
 
-},{}],79:[function(require,module,exports){
-"use strict";
-
-var ResourceService = require("services/ResourceService");
-
-Vue.directive("availability-class", {
-    bind: function bind() {
-        var _this = this;
-
-        ResourceService.watch(this.arg, function (value) {
-            var availabilityId = value.documents[0].data.variation.availability.id;
-
-            _this.el.className = "availability tag availability_" + availabilityId;
-        });
-    }
-});
-
-},{"services/ResourceService":98}],80:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15519,21 +15394,21 @@ var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], 
 
 exports.default = exceptionMap;
 
-},{}],81:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 "use strict";
 
 Vue.filter("arrayFirst", function (array) {
     return array[0];
 });
 
-},{}],82:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 "use strict";
 
 Vue.filter("attachText", function (item, text) {
     return text + item;
 });
 
-},{}],83:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 "use strict";
 
 var currencySymbolMap = require("currency-symbol-map");
@@ -15558,7 +15433,7 @@ Vue.filter("currency", function (price, customCurrency) {
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":1,"currency-symbol-map":2}],84:[function(require,module,exports){
+},{"accounting":1,"currency-symbol-map":2}],80:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -15690,7 +15565,7 @@ var dateFilter = function dateFilter() {
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],85:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImage", function (itemImages, highestPosition) {
@@ -15713,7 +15588,7 @@ Vue.filter("itemImage", function (itemImages, highestPosition) {
     }).url;
 });
 
-},{}],86:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImages", function (images, accessor) {
@@ -15733,7 +15608,7 @@ Vue.filter("itemImages", function (images, accessor) {
     return imageUrls;
 });
 
-},{}],87:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemName", function (item, selectedName) {
@@ -15748,7 +15623,7 @@ Vue.filter("itemName", function (item, selectedName) {
     return item.name1;
 });
 
-},{}],88:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemURL", function (item) {
@@ -15770,7 +15645,7 @@ Vue.filter("itemURL", function (item) {
     return link + item.item.id + "_" + item.variation.id;
 });
 
-},{}],89:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -15789,7 +15664,7 @@ Vue.filter("propertySurcharge", function (properties, propertyId) {
     return 0;
 });
 
-},{}],90:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -15799,7 +15674,7 @@ Vue.filter("truncate", function (string, value) {
     return string;
 });
 
-},{}],91:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15868,7 +15743,7 @@ function isAddressFieldEnabled(countryId, addressType, field) {
 
 exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
 
-},{}],92:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -16004,7 +15879,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{"services/NotificationService":97,"services/WaitScreenService":101}],93:[function(require,module,exports){
+},{"services/NotificationService":93,"services/WaitScreenService":96}],89:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16119,7 +15994,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":92}],94:[function(require,module,exports){
+},{"services/ApiService":88}],90:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -16195,7 +16070,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],95:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16231,7 +16106,7 @@ exports.default = {
     updateItemListUrlParams: updateItemListUrlParams
 };
 
-},{"services/UrlService":99}],96:[function(require,module,exports){
+},{"services/UrlService":94}],92:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -16346,7 +16221,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],97:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -16513,472 +16388,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],98:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var ApiService = require("services/ApiService");
-
-module.exports = function ($) {
-
-    var resources = {};
-
-    return {
-        registerResource: registerResource,
-        registerResourceList: registerResourceList,
-        getResource: getResource,
-        watch: watch,
-        bind: bind
-    };
-
-    /**
-     * Register a new resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource} The created resource.
-     */
-    function registerResource(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new Resource(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Register a new list resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource}            The created resource.
-     */
-    function registerResourceList(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new ResourceList(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Receive a registered resource by its name
-     * @param {string}  name    The name of the resource to receive
-     *
-     * @returns {Resource}      The resource
-     */
-    function getResource(name) {
-        name = name.toLowerCase();
-
-        if (!resources[name]) {
-            throw new Error("Unkown resource: " + name);
-        }
-
-        return resources[name];
-    }
-
-    /**
-     * Track changes of a given resource.
-     * @param {string}      name        The name of the resource to watch
-     * @param {function}    callback    The handler to call on each change
-     */
-    function watch(name, callback) {
-        getResource(name).watch(callback);
-    }
-
-    /**
-     * Bind a resource to a property of a vue instance.
-     * @param {string}  name        The name of the resource to bind
-     * @param {Vue}     vue         The vue instance
-     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
-     */
-    function bind(name, vue, property) {
-        property = property || name;
-        getResource(name).bind(vue, property);
-    }
-
-    /**
-     * @class Observable
-     * Automatically notify all attached listeners on any changes.
-     */
-    function Observable() {
-        var _value;
-        var _watchers = [];
-
-        return {
-            get value() {
-                return _value;
-            },
-            set value(newValue) {
-                for (var i = 0; i < _watchers.length; i++) {
-                    var watcher = _watchers[i];
-
-                    watcher.apply({}, [newValue, _value]);
-                }
-                _value = newValue;
-            },
-            watch: function watch(cb) {
-                _watchers.push(cb);
-            }
-        };
-    }
-
-    /**
-     * @class Resource
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function Resource(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        // initialize resource
-        if (typeof initialValue !== "undefined") {
-            // Initial value that was given by constructor
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            // If no initial value was given, get the value from the URL
-            ApiService.get(url, { template: this.responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {string}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of the resource.
-         * @param {*}   value   The value to set.
-         * @returns {Deferred}  The PUT request to the url of the resource
-         */
-        function set(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            } else if (url) {
-                return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            throw new Error("Cannot update resource. Neither an URL nor a value is prodivded.");
-        }
-    }
-
-    /**
-     * @class ResourceList
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function ResourceList(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        if (url.charAt(url.length - 1) !== "/") {
-            url += "/";
-        }
-
-        if (typeof initialValue !== "undefined") {
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            push: push,
-            remove: remove,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {sting}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of a single element of this resource.
-         * @param {string|number}   key     The key of the element
-         * @param {*}               value   The value to set.
-         * @returns {Deferred}      The PUT request to the url of the resource
-         */
-        function set(key, value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url + key, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Add a new element to this resource
-         * @param {*}   value   The element to add
-         * @returns {Deferred}  The POST request to the url of the resource
-         */
-        function push(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.post(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.push(value);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Remove an element from this resource
-         * @param {string|number}   key     The key of the element
-         * @returns {Deferred}              The DELETE request to the url of the resource
-         */
-        function remove(key) {
-            if (url) {
-                return ApiService.delete(url + key, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.splice(key, 1);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            }
-
-            return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-            });
-        }
-    }
-}(jQuery);
-
-},{"services/ApiService":92}],99:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17035,7 +16445,7 @@ function setUrlParam(key, value) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
-},{"jquery":4}],100:[function(require,module,exports){
+},{"jquery":4}],95:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17270,7 +16680,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":4}],101:[function(require,module,exports){
+},{"jquery":4}],96:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -17313,7 +16723,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],102:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17382,7 +16792,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":103,"store/modules/BasketModule":104,"store/modules/CheckoutModule":105,"store/modules/ItemListModule":106,"store/modules/LocalizationModule":107,"store/modules/NavigationModule":108,"store/modules/OrderReturnModule":109,"store/modules/SingleItemModule":110,"store/modules/UserModule":111,"store/modules/WishListModule":112}],103:[function(require,module,exports){
+},{"store/modules/AddressModule":98,"store/modules/BasketModule":99,"store/modules/CheckoutModule":100,"store/modules/ItemListModule":101,"store/modules/LocalizationModule":102,"store/modules/NavigationModule":103,"store/modules/OrderReturnModule":104,"store/modules/SingleItemModule":105,"store/modules/UserModule":106,"store/modules/WishListModule":107}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17681,7 +17091,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":92}],104:[function(require,module,exports){
+},{"services/ApiService":88}],99:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17827,7 +17237,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":92}],105:[function(require,module,exports){
+},{"services/ApiService":88}],100:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17977,7 +17387,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":92}],106:[function(require,module,exports){
+},{"services/ApiService":88}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18178,7 +17588,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":92,"services/ItemListUrlService":95}],107:[function(require,module,exports){
+},{"services/ApiService":88,"services/ItemListUrlService":91}],102:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18278,7 +17688,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],108:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18449,7 +17859,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":93}],109:[function(require,module,exports){
+},{"services/CategoryService":89}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18539,7 +17949,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":92}],110:[function(require,module,exports){
+},{"services/ApiService":88}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18548,12 +17958,29 @@ Object.defineProperty(exports, "__esModule", {
 // import ApiService from "services/ApiService";
 
 var state = {
+    variation: {},
     variationList: []
 };
 
 var mutations = {
+    setVariation: function setVariation(state, variation) {
+        state.variation = variation;
+    },
     setVariationList: function setVariationList(state, variationList) {
         state.variationList = variationList;
+    },
+    setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
+        var propertyId = _ref.propertyId,
+            value = _ref.value;
+
+        var properties = state.variation.documents[0].data.properties;
+        var prop = properties.find(function (property) {
+            return property.property.id === propertyId;
+        });
+
+        if (prop) {
+            prop.property.value = value;
+        }
     }
 };
 
@@ -18568,7 +17995,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],111:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18611,7 +18038,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],112:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18723,7 +18150,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":92}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,48,49,50,41,42,43,44,46,45,47,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,77,73,74,75,76,78,79,80,81,82,83,84,85,86,87,88,89,90,102,103,104,105,106,107,108,109,110,111,112])
+},{"services/ApiService":88}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,41,49,50,51,42,43,44,45,47,46,48,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,97,98,99,100,101,102,103,104,105,106,107])
 
 
 // Frontend end scripts
