@@ -83,6 +83,10 @@
 
                 <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
+                <div class="row">
+                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
+                </div>
+
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.rrpPrice">
