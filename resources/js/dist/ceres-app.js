@@ -14875,7 +14875,7 @@ Vue.component("order-return", {
         selectAllItems: function selectAllItems() {
             this.$broadcast("select-all-items");
         }
-    }, Vuex.mapActions(["sendOrderReturn"]))
+    }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
 });
 
 },{"services/NotificationService":98}],58:[function(require,module,exports){
@@ -17816,7 +17816,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var state = {
     orderData: {},
-    orderReturnItems: []
+    orderReturnItems: [],
+    orderReturnNote: ""
 };
 
 var mutations = {
@@ -17843,6 +17844,9 @@ var mutations = {
                 state.orderReturnItems.splice(orderItemIndex, 1);
             }
         }
+    },
+    updateOrderReturnNote: function updateOrderReturnNote(state, orderReturnNote) {
+        state.orderReturnNote = orderReturnNote;
     }
 };
 
@@ -17858,7 +17862,7 @@ var actions = {
                     variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                 }
 
-                _ApiService2.default.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds: variationIds }).done(function (data) {
+                _ApiService2.default.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds: variationIds, returnNote: state.orderReturnNote }).done(function (data) {
                     resolve();
                 }).fail(function () {
                     reject();
