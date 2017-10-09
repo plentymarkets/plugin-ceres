@@ -120,6 +120,31 @@ Vue.component("add-to-basket", {
         hasChildren()
         {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+
+        totalPrice()
+        {
+            if (this.item)
+            {
+                const currency = this.item.calculatedPrices.default.currency;
+                const graduatedPrice = this.$options.filters.graduatedPrice(this.item, this.quantity);
+                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
+
+                return this.$options.filters.currency(graduatedPrice + propertySurcharge, currency);
+            }
+
+            return null;
+        }
+    },
+
+    watch:
+    {
+        totalPrice(newValue, oldValue)
+        {
+            if (newValue && newValue !== oldValue)
+            {
+                document.dispatchEvent(new CustomEvent("itemTotalPriceChanged", {detail: newValue}));
+            }
         }
     }
 });
