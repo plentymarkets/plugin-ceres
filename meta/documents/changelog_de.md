@@ -6,6 +6,9 @@
 
 - Der Text von Bestellmerkmalen wird in der Basketvorschau nichtmehr ausgegeben. 
 - Die OrderProperties (SingleItem) werden nun oberhalb der Preise ausgegeben.
+- Im SingleItem wird der Artikelpreis nun live berechnet anhand der Merkmalaufpreise und den Staffelpreisen.
+- Das AddToBasketOverlay zeigt die Preise nun korrekt berechnet an, anhand der Merkmalaufpreise und den Staffelpreisen.
+- Die Staffelpreise werden nun unterhalb der Bestellmerkmale ausgegeben.
 
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
