@@ -42,10 +42,11 @@ $menu-big-menu-li-bg-hover		: $brand-primary;
 $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 // megamenu
-$megamenu-bg 					: transparent;
-$megamenu-color-top				: darken($brand-primary,10%);
-$megamenu-color-bottom			: $gray-darker;
-
+$megamenu-bg 					: white;
+$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-bottom-btn		: black;
+$megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
+$megamenu-btn-more 				: $gray;
 
 body.menu-is-visible { 
 	overflow-y : hidden;
@@ -279,8 +280,8 @@ nav.navbar.megamenu {
 					position : static;
 
 					&:hover {
-						background-color : white !important; 
-						color 			 : $brand-primary !important;  
+						background 	: $megamenu-bg; 
+						color 		: $megamenu-btn-hover !important;  
 
 						.navDropdown_wrapper { display: flex; } 
 					}
@@ -301,11 +302,12 @@ nav.navbar.megamenu {
 							flex-wrap 		: wrap;
 							width 			: 100%;
 
+
 							>li {
 								flex 		: 0 1 auto;
 								max-width 	: 25%;
 								min-width 	: 20%;
-								&.level1>a { font-weight : bold; color : $megamenu-color-top; }
+								&.level1>a { font-weight : bold; color : $megamenu-color-top-btn; }
 								.level2>a { padding : .2rem 1rem!important; }
 								.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
 								.level3.bt-more>a { font-size : .8em; }
@@ -315,13 +317,13 @@ nav.navbar.megamenu {
 							ul { background-color : white; }
 							a {
 								background 	: white;
-								color 		: $megamenu-color-bottom;
+								color 		: $megamenu-color-bottom-btn;
 								padding 	: .4rem 1rem;
 								text-align 	: left;
 
 								&:hover{ 
-									background 	: $brand-primary; 
-									color 		: white !important;
+									background 	: $megamenu-bg; 
+									color 		: $megamenu-btn-hover !important;  
 								}
 							}
 						}
