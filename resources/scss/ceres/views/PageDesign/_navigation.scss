@@ -292,7 +292,7 @@ nav.navbar.megamenu {
 						column-gap 		: .5em;
 						column-rule 	: 1px solid #dcdbd7;
 						display 		: none;
-						max-height 		: 380px;
+						max-height 		: 340px;
 						overflow 		: hidden;
 						padding 		: 1em;
 
@@ -302,18 +302,18 @@ nav.navbar.megamenu {
 							width 	 	 : 100%; 
 
 							&.level1 { 
-								padding : 1em;
-								a {								
+								padding : .5em 0;
+								>a {								
 									color 		: $megamenu-color-top-btn; 
 									font-weight : bold; 
 								}
 							}
 							&:hover { background : $megamenu-bg; }
 							 .level2 { 
-							 	padding : .5em 1em!important; 
+							 	padding : .25em 0!important; 
 							 }
 							 .level3 { 
-							 	padding : .5em 1em .5em 2.5em !important; 
+							 	padding : 0 1em .25em 1.4em !important; 
 							 }
 							.bt-more>a { 
 								color 			: $gray;
@@ -323,7 +323,7 @@ nav.navbar.megamenu {
 							a {
 								background 	: white;
 								color 		: $megamenu-color-bottom-btn;
-								padding 	: .4rem 1rem;
+								padding 	: 0;
 								text-align 	: left;
 
 								&:hover{ 
