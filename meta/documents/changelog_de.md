@@ -6,6 +6,9 @@
 
 - Der Text von Bestellmerkmalen wird in der Basketvorschau nichtmehr ausgegeben. 
 - Die OrderProperties (SingleItem) werden nun oberhalb der Preise ausgegeben.
+- Im SingleItem wird der Artikelpreis nun live berechnet anhand der Merkmalaufpreise und den Staffelpreisen.
+- Das AddToBasketOverlay zeigt die Preise nun korrekt berechnet an, anhand der Merkmalaufpreise und den Staffelpreisen.
+- Die Staffelpreise werden nun unterhalb der Bestellmerkmale ausgegeben.
 - Das Uhrensymbol in der OrderHistorie wurde gegen einen Text ausgetauscht.
 - Das Uhrensymbol in der RetourenHistorie wurde gegen einen Text ausgetauscht.
 
