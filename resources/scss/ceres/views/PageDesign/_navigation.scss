@@ -302,7 +302,7 @@ nav.navbar.megamenu {
 							width 	 	 : 100%; 
 
 							&.level1 { 
-								padding : .5em 0;
+								padding : .5em 1em;
 								>a {								
 									color 		: $megamenu-color-top-btn; 
 									font-weight : bold; 
@@ -310,10 +310,10 @@ nav.navbar.megamenu {
 							}
 							&:hover { background : $megamenu-bg; }
 							 .level2 { 
-							 	padding : .25em 0!important; 
+							 	padding : .25em 1em!important; 
 							 }
 							 .level3 { 
-							 	padding : 0 1em .25em 1.4em !important; 
+							 	padding : 0 1em .25em 2.4em !important; 
 							 }
 							.bt-more>a { 
 								color 			: $gray;
