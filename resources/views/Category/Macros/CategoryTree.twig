@@ -44,10 +44,10 @@
                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </span>
                     
-                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+{#                     {% if config('Ceres.header.megamenu_levels') > 1 %}
                     <div class="navDropdown_wrapper">
                     {% endif %}
-
+ #}
                     <ul data-level="1" id="navDropdown{{ counter }}" class="collapse">
 
                         {% set counter = counter + 1 %}
@@ -63,9 +63,9 @@
                             {{ navbar.get_children(category, currentScopeUrl, 1) }}
                         {% endif %}
                     </ul>
-                    {% if config('Ceres.header.megamenu_levels') > 1 %}
+{#                     {% if config('Ceres.header.megamenu_levels') > 1 %}
                     </div>
-                    {% endif %}
+                    {% endif %} #}
                 </li>
 
             {% else %}

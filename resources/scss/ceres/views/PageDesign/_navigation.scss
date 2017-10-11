@@ -283,13 +283,13 @@ nav.navbar.megamenu {
 						background : $megamenu-bg; 
 						color 	   : $megamenu-btn-hover !important;  
 
-						.navDropdown_wrapper { display : flex; } 
+						>ul.collapse { display : block; } 
 					}
 
 					>ul.collapse {
 						background-color: $megamenu-bg;
 						columns 		: 5 240px;
-						display 		: block;
+						display 		: none;
 						padding 		: 1em;
 
 						>li {
