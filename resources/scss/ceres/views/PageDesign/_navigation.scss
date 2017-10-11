@@ -290,7 +290,7 @@ nav.navbar.megamenu {
 						background-color: $megamenu-bg;
 						columns 		: 5 228px;
 						column-gap 		: .5em;
-						column-rule 	: 1px solid $gray;
+						column-rule 	: 1px solid #dcdbd7;
 						display 		: none;
 						max-height 		: 380px;
 						overflow 		: hidden;
@@ -301,12 +301,22 @@ nav.navbar.megamenu {
 							break-inside : avoid;
 							width 	 	 : 100%; 
 
-							&.level1>a { font-weight : bold; color : $megamenu-color-top-btn; }
-							.level2>a { padding : .2rem 1rem!important; }
-							.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
-							.level3.bt-more>a { font-size : .8em; }
+							&.level1 { 
+								padding : 1em;
+								a {								
+									color 		: $megamenu-color-top-btn; 
+									font-weight : bold; 
+								}
+							}
+							 .level2 { 
+							 	padding : .5em 1em!important; 
+							 }
+							 .level3 { 
+							 	padding : .5em 1em .5em 2.5em !important; 
+							 }
 							.bt-more>a { 
 								color 			: $gray;
+								font-size 		: .8em;
 								text-transform 	: lowercase; 
 							}
 						}
