@@ -46,11 +46,11 @@
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
                         {% if config("Ceres.header.basket_values") != "sum" %}
-                            <span class="badge-right" v-resource-bind:basket="itemQuantity">0</span>
+                            <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
                         {% endif %}
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         {% if config("Ceres.header.basket_values") != "quantity" %}
-                            <span class="badge" v-resource-bind:basket="itemSum" :filters="['currency']">0,00 €</span>
+                            <span class="badge" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 €</span>
                         {% endif %}
                     </a>
                 </li>

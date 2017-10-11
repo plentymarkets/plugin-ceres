@@ -33,10 +33,6 @@
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterTagList") }}
 
-    <resource name="itemList" :data="{{ paginatedResult | json_encode }} || {}"></resource>
-    <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
-    <resource name="facetParams" :data="[]"></resource>
-
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">
             <div class="col-xs-12">
@@ -54,7 +50,7 @@
                                 template="#vue-items-per-page"
                                 :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
                                 :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
-                            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+                            <item-filter-list :facet-data="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
                 </div>
@@ -67,7 +63,7 @@
             <div class="col-xs-12">
 
                 <div id="vue-rendered-item-list" class="item-list-frame">
-                    <item-list template="#vue-item-list"></item-list>
+                    <item-list :item-data="{{ paginatedResult.documents | json_encode }}" :total-items-data="{{ paginatedResult.total }}" template="#vue-item-list"></item-list>
                 </div>
 
             </div>

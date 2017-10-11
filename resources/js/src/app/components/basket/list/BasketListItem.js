@@ -1,7 +1,3 @@
-var ResourceService       = require("services/ResourceService");
-// var ApiService          = require("services/ApiService");
-// var NotificationService = require("services/NotificationService");
-
 Vue.component("basket-list-item", {
 
     props: [
@@ -11,7 +7,7 @@ Vue.component("basket-list-item", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             waiting: false,
@@ -21,7 +17,7 @@ Vue.component("basket-list-item", {
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -31,17 +27,15 @@ Vue.component("basket-list-item", {
         /**
          * Delete item from basket
          */
-        deleteItem: function()
+        deleteItem()
         {
-            var self = this;
-
             if (!this.deleteConfirmed)
             {
                 this.deleteConfirmed = true;
                 this.deleteConfirmedTimeout = window.setTimeout(
-                    function()
+                    () =>
                     {
-                        self.resetDelete();
+                        this.resetDelete();
                     },
                     5000
                 );
@@ -49,17 +43,17 @@ Vue.component("basket-list-item", {
             else
             {
                 this.waiting = true;
-                ResourceService
-                    .getResource("basketItems")
-                    .remove(this.basketItem.id)
-                    .done(function()
+
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
+                    response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
-                    }.bind(this))
-                    .fail(function()
+                        this.waiting = false;
+                    },
+                    error =>
                     {
-                        self.resetDelete();
-                        self.waiting = false;
+                        this.resetDelete();
+                        this.waiting = false;
                     });
             }
         },
@@ -68,33 +62,29 @@ Vue.component("basket-list-item", {
          * Update item quantity in basket
          * @param quantity
          */
-        updateQuantity: function(quantity)
+        updateQuantity(quantity)
         {
-            if (this.basketItem.quantity === quantity)
+            if (this.basketItem.quantity !== quantity)
             {
-                return;
+                this.waiting = true;
+
+                this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
+                    response =>
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
+                        this.waiting = false;
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+                    });
             }
-
-            this.basketItem.quantity = quantity;
-            this.waiting = true;
-
-            ResourceService
-                .getResource("basketItems")
-                .set(this.basketItem.id, this.basketItem)
-                .done(function()
-                {
-                    document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {detail: this.basketItem}));
-                }.bind(this))
-                .fail(function()
-                {
-                    this.waiting = false;
-                }.bind(this));
         },
 
         /**
          * Cancel delete
          */
-        resetDelete: function()
+        resetDelete()
         {
             this.deleteConfirmed = false;
             if (this.deleteConfirmedTimeout)
@@ -106,9 +96,9 @@ Vue.component("basket-list-item", {
 
     computed:
     {
-        imageUrl: function()
+        imageUrl()
         {
-            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+            const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
             return img.url;
         }

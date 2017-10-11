@@ -40,8 +40,8 @@
 											<span>${ getOriginOrderId(entry.order) }</span>
 										</div>
 										<div class="col-md-3">
-											<strong>{{ trans("Ceres::Template.orderDate") }}: </strong>
-											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" } <i class="fa fa-clock-o" aria-hidden="true"></i></span>
+											<strong>{{ trans("Ceres::Template.returnDate") }}: </strong>
+											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" } {{ trans("Ceres::Template.time") }}</span>
 										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.orderPaymentMethod") }}: </strong>

@@ -1,3 +1,5 @@
+import {updateCategoryHtml}from "services/CategoryService";
+
 const state =
     {
         tree: [],
@@ -60,6 +62,25 @@ const actions =
             {
                 parent.showChildren = showChildren;
             }
+        },
+
+        selectCategory({state, commit, dispatch}, {category, categoryId})
+        {
+            if (category)
+            {
+                commit("setCurrentCategory", category);
+            }
+            else if (categoryId)
+            {
+                dispatch("setCurrentCategoryById", {categoryId});
+            }
+
+            updateCategoryHtml();
+
+            commit("setItemListPage", 1);
+            commit("setSelectedFacetsByIds", []);
+
+            dispatch("retrieveItemList");
         },
 
         setCurrentCategoryById({state, commit, dispatch}, {categoryId, categories})

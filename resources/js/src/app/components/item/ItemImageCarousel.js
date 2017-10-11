@@ -1,5 +1,3 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("item-image-carousel", {
 
     props: [
@@ -7,52 +5,49 @@ Vue.component("item-image-carousel", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            init            : false,
-            currentVariation: {},
             currentItem     : 0
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        currentVariation: state => state.item.variation
+    }),
+
+    watch: {
+        currentVariation: {
+            handler(val, oldVal)
+            {
+                if (val !== oldVal)
+                {
+                    setTimeout(() =>
+                    {
+                        this.reInitialize();
+                    }, 1);
+                }
+            },
+            deep: true
+        }
+    },
+
+    created()
     {
         this.$options.template = this.template;
+    },
 
-        ResourceService.watch("currentVariation", function(newValue)
-        {
-            this.currentVariation = newValue;
-
-            var self = this;
-
-            if (!this.init)
-            {
-                $(window).load(function()
-                {
-                    self.initCarousel();
-                    self.initThumbCarousel();
-
-                    self.init = true;
-                });
-            }
-
-            else
-            {
-                setTimeout(function()
-                {
-                    self.reInitialize();
-                }, 1);
-            }
-
-        }.bind(this));
+    ready()
+    {
+        this.initCarousel();
+        this.initThumbCarousel();
     },
 
     methods:
     {
-        getImageCount: function()
+        getImageCount()
         {
-            var images = this.currentVariation.documents[0].data.images;
+            const images = this.currentVariation.documents[0].data.images;
 
             if (images.variation && images.variation.length)
             {
@@ -63,15 +58,15 @@ Vue.component("item-image-carousel", {
 
         },
 
-        reInitialize: function()
+        reInitialize()
         {
-            var $owl = $(this.$els.single);
+            const $owl = $(this.$els.single);
 
             $owl.trigger("destroy.owl.carousel");
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
 
-            var $thumbs = $(this.$els.thumbs);
+            const $thumbs = $(this.$els.thumbs);
 
             $thumbs.trigger("destroy.owl.carousel");
             $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
@@ -81,9 +76,9 @@ Vue.component("item-image-carousel", {
             this.initThumbCarousel();
         },
 
-        initCarousel: function()
+        initCarousel()
         {
-            var imageCount = this.getImageCount();
+            const imageCount = this.getImageCount();
 
             $(this.$els.single).owlCarousel({
                 autoHeight       : true,
@@ -104,24 +99,24 @@ Vue.component("item-image-carousel", {
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
                 smartSpeed       : 350,
-                onChanged: function(event)
+                onChanged: event =>
                 {
-                    var $thumb = $(this.$els.thumbs);
+                    const $thumb = $(this.$els.thumbs);
 
                     $thumb.trigger("to.owl.carousel", [
                         event.page.index,
                         350
                     ]);
-                }.bind(this)
+                }
             });
 
-            $(this.$els.single).on("changed.owl.carousel", function(event)
+            $(this.$els.single).on("changed.owl.carousel", event =>
             {
                 this.currentItem = event.page.index;
-            }.bind(this));
+            });
         },
 
-        initThumbCarousel: function()
+        initThumbCarousel()
         {
             $(this.$els.thumbs).owlCarousel({
                 autoHeight       : true,
@@ -146,9 +141,9 @@ Vue.component("item-image-carousel", {
             });
         },
 
-        goTo: function(index)
+        goTo: index =>
         {
-            var $owl = $(this.$els.single);
+            const $owl = $(this.$els.single);
 
             $owl.trigger("to.owl.carousel", [
                 index,

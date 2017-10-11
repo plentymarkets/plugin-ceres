@@ -1,6 +1,3 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("pagination", {
@@ -9,61 +6,59 @@ Vue.component("pagination", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            itemSearch : {},
-            itemList   : {},
             lastPageMax: 0
         };
     },
 
-    created: function()
-    {
-        this.$options.template = this.template;
-
-        ResourceService.bind("itemSearch", this);
-        ResourceService.bind("itemList", this);
-
-        var urlParams = UrlService.getUrlParams(document.location.search);
-
-        this.itemSearch.page = urlParams.page;
-    },
-
-    methods:
-    {
-        setPage: function(page)
-        {
-            ItemListService.setPage(page);
-            ItemListService.getItemList();
-
-            $("html, body").animate({scrollTop: 0}, "slow");
-        }
-    },
-
     computed:
     {
-        page: function()
+        pageMax()
         {
-            return parseInt(this.itemSearch.page) || 1;
-        },
-
-        pageMax: function()
-        {
-            if (this.itemSearch.isLoading)
+            if (this.isLoading)
             {
                 return this.lastPageMax;
             }
 
-            var pageMax = this.itemList.total / parseInt(this.itemSearch.items);
+            let pageMax = this.totalItems / parseInt(this.itemsPerPage);
 
-            if (this.itemList.total % parseInt(this.itemSearch.items) > 0)
+            if (this.totalItems % parseInt(this.itemsPerPage) > 0)
             {
                 pageMax += 1;
             }
 
             this.lastPageMax = parseInt(pageMax) || 1;
+
             return parseInt(pageMax) || 1;
+        },
+
+        ...Vuex.mapState({
+            page: state => state.itemList.page || 1,
+            isLoading: state => state.itemList.isLoading,
+            itemsPerPage: state => state.itemList.itemsPerPage,
+            totalItems: state => state.itemList.totalItems
+        })
+    },
+
+    created()
+    {
+        this.$options.template = this.template;
+
+        const urlParams = UrlService.getUrlParams(document.location.search);
+        const page = urlParams.page || 1;
+
+        this.$store.commit("setItemListPage", parseInt(page));
+    },
+
+    methods:
+    {
+        setPage(page)
+        {
+            this.$store.dispatch("selectItemListPage", page);
+
+            $("html, body").animate({scrollTop: 0}, "slow");
         }
     }
 });

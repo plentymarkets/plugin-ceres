@@ -57,19 +57,19 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                // const oldShippingCountryId = state.shippingCountryId;
+                const oldShippingCountryId = state.shippingCountryId;
 
                 commit("setShippingCountryId", shippingCountryId);
-                // ApiService.post("TODO", {TODO})
-                //     .done(data =>
-                //     {
-                //         resolve(data);
-                //     })
-                //     .fail(error =>
-                //     {
-                //         commit("removeWishListId", oldShippingCountryId);
-                //         reject(error);
-                //     });
+                ApiService.post("/rest/io/shippingCountryId", {shippingCountryId})
+                    .done(data =>
+                    {
+                        resolve(data);
+                    })
+                    .fail(error =>
+                    {
+                        commit("removeWishListId", oldShippingCountryId);
+                        reject(error);
+                    });
             });
         }
     };

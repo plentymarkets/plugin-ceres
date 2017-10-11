@@ -4,7 +4,7 @@
         <div class="input-group">
             <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("Ceres::Template.generalEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" @click="redeemCode()" :disabled="waiting" v-if="!basket.couponCode">{{ trans("Ceres::Template.generalRedeem") }}</button>
+                <button class="btn btn-primary" type="button" @click="redeemCode()" :disabled="waiting" v-if="!disabled">{{ trans("Ceres::Template.generalRedeem") }}</button>
                 <button class="btn btn-danger" type="button" @click="removeCode()" :disabled="waiting" v-else>{{ trans("Ceres::Template.generalRemove") }}</button>
             </span>
         </div>

@@ -32,12 +32,18 @@
                                 </p>
                                 <p class="small">
                                     <strong>
-                                        <span class="text-muted">${ basketItem.quantity } x</span>
+                                        <span class="text-muted">${ latestBasketEntry.quantity } x</span>
                                         <span v-text="price | currency currency"></span>
                                     </strong>
                                 </p>
-                                <p class="small" v-for="property in basketItem.currentBasketItem.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (${basketItem.currentBasketItem.properties | propertySurcharge property.propertyId | currency }):</strong>
+
+                                <p class="small" v-for="attribute in latestBasketEntry.item.attributes">
+                                    <strong>${ attribute.attribute.names.name }</strong>:
+                                    <span>${ attribute.value.names.name }</span>
+                                </p>
+
+                                <p class="small" v-for="property in latestBasketEntry.item.properties">
+                                    <strong v-if="property.property.value">${property.property.names.name} (${latestBasketEntry.item.properties | propertySurcharge property.property.id | currency }):</strong>
                                     <span v-if="property.property.value">${property.property.value}</span>
                                 </p>
                             </div>

@@ -1,0 +1,24 @@
+<script type="x/template" id="vue-graduated-prices">
+    <div>
+        <div class="m-y-1" v-if="graduatedPrices[0]">
+            <b>{{ trans("Ceres::Template.graduatedPrices") }}:</b>
+
+            <table class="graduated-prices-table text-muted">
+                <tr v-for="price in graduatedPrices | orderBy 'minimumOrderQuantity'">
+                    <td>{{ trans("Ceres::Template.generalFrom") }} ${ price.minimumOrderQuantity }</td>
+                    <td>
+                        ${ price.formatted }
+                        <i  id="${ price.minimumOrderQuantity }_qty" 
+                            transition="graduated-price-display" 
+                            class="fa fa-check-circle-o" 
+                            aria-hidden="true">
+                    </i>
+                    </td>
+                </tr>
+            </table>
+
+            <hr>
+
+        </div>
+    </div>
+</script>

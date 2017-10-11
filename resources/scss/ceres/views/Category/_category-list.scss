@@ -1,10 +1,5 @@
 .categories-list{}
 
-.category-description-parallax {
-    color: #fff;
-    text-shadow: 0 0 0.1em rgba(0,0,0,.75);
-}
-
 .page-infos{
 	display: flex;
     flex-flow: row nowrap;
@@ -102,6 +97,11 @@
 
         h1 {
             margin-bottom: 0;
+            word-wrap: break-word;
+        }
+
+        .category-description {
+            word-wrap: break-word;
         }
     }
 
@@ -115,49 +115,64 @@
         max-width: none;
         position: relative;
 
+        @include media-breakpoint-up(sm) {
+            height: 350px;
+        }
+
+        @include media-breakpoint-up(md) {
+            height: 400px;
+        }
+
         .parallax-text-container {
+            max-width: 100%;
             position: absolute;
             bottom: 0;
+            padding-right: 30px;
+
+            @include media-breakpoint-up(md) {
+                margin-right: 0;
+            }
+
+            @include media-breakpoint-up(xl) {
+                max-width: 1200px;
+                padding-right: 0;
+            }
 
             h1 {
                 color: $category-text-color;
                 font-size: 300%;
-                text-shadow: $category-text-shadow;
+                text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.75);
                 bottom: 0;
                 width: 100%;
                 margin-bottom: .5rem;
+                letter-spacing: 1px;
+
+                @include media-breakpoint-up(sm) {
+                    font-size: 400%;
+                    margin: 0 0 1rem;
+                }
+
+                @include media-breakpoint-up(md) {
+                    font-size: 500%;
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            .category-description {
+                font-size: 1rem;
+                line-height: 1.25;
+                color: $white;
+                text-shadow: 0 0 0.2em rgba(0,0,0,.75);
+                letter-spacing: 1px;
+
+                @include media-breakpoint-up(sm){
+                    font-size: 1.25rem;
+                }
+
+                @include media-breakpoint-up(md) {
+                    font-size: 2rem;
+                }
             }
         }
     }
-
-    @include media-breakpoint-up(sm){
-        .parallax-text-container h1 {
-            margin-top: 1rem;
-        }
-        &[style^='background-image'] {
-            height: 350px;
-
-            .parallax-text-container h1 {
-                font-size: 400%;
-                margin: 0 0 1rem;
-            }
-        }
-    }
-
-    @include media-breakpoint-up(md){
-        &[style^='background-image'] {
-            height: 400px;
-
-            .parallax-text-container h1 {
-                font-size: 500%;
-                margin-bottom: 1.5rem;
-            }
-        }
-    }
-    @include media-breakpoint-up(lg){
-        .parallax-text-container h1 {
-            margin-left: 0;
-        }
-    }
-
 }
