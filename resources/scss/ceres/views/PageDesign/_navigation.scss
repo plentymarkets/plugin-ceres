@@ -271,7 +271,7 @@ nav.navbar.megamenu {
 
 		@include media-breakpoint-up(lg){
 			ul.mainmenu {
-				background 		: $megamenu-bg;
+				background 		: transparent;
 				display 		: flex;
 				justify-content : flex-end; 
 				width 			: 100%; 
