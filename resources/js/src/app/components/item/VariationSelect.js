@@ -1,8 +1,7 @@
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
+const ApiService = require("services/ApiService");
 
 // cache loaded variation data for reuse
-var VariationData = {};
+const VariationData = {};
 
 Vue.component("variation-select", {
 
@@ -13,7 +12,7 @@ Vue.component("variation-select", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             // Collection of currently selected variation attributes.
@@ -21,17 +20,37 @@ Vue.component("variation-select", {
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        currentVariation: state => state.item.variation
+    }),
+
+    watch: {
+        currentVariation: {
+            handler(newVariation, oldVariation)
+            {
+                if (oldVariation)
+                {
+                    const url = this.$options.filters.itemURL(newVariation.documents[0].data);
+                    const title = document.getElementsByTagName("title")[0].innerHTML;
+
+                    window.history.replaceState({}, title, url);
+                }
+            },
+            deep: true
+        }
+    },
+
+    created()
     {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    ready()
     {
         // initialize selected attributes to be tracked by change detection
-        var attributes = {};
+        const attributes = {};
 
-        for (var attributeId in this.attributes)
+        for (const attributeId in this.attributes)
         {
             attributes[attributeId] = null;
         }
@@ -41,11 +60,11 @@ Vue.component("variation-select", {
         if (this.preselect)
         {
             // find variation by id
-            var preselectedVariation = this.variations.filter(function(variation)
+            const preselectedVariation = this.variations.filter(variation =>
             {
                 // eslint-disable-next-line eqeqeq
                 return variation.variationId == this.preselect;
-            }.bind(this));
+            });
 
             if (!!preselectedVariation && preselectedVariation.length === 1)
             {
@@ -55,10 +74,10 @@ Vue.component("variation-select", {
         }
 
         // search for matching variation on each change of attribute selection
-        this.$watch("selectedAttributes", function()
+        this.$watch("selectedAttributes", () =>
         {
             // search variations matching current selection
-            var possibleVariations = this.filterVariations();
+            const possibleVariations = this.filterVariations();
 
             if (possibleVariations.length === 1)
             {
@@ -67,14 +86,13 @@ Vue.component("variation-select", {
                 if (!this.setAttributes(possibleVariations[0]))
                 {
                     // all attributes are set => load variation data
-                    var variationId = possibleVariations[0].variationId;
+                    const variationId = possibleVariations[0].variationId;
 
                     if (VariationData[variationId])
                     {
                         // reuse cached variation data
-                        ResourceService
-                            .getResource("currentVariation")
-                            .set(VariationData[variationId]);
+
+                        this.$store.commit("setVariation", VariationData[variationId]);
 
                         document.dispatchEvent(new CustomEvent(
                             "onVariationChanged",
@@ -91,13 +109,12 @@ Vue.component("variation-select", {
                         // get variation data from remote
                         ApiService
                             .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
-                            .done(function(response)
+                            .done(response =>
                             {
                                 // store received variation data for later reuse
                                 VariationData[variationId] = response;
-                                ResourceService
-                                    .getResource("currentVariation")
-                                    .set(response);
+
+                                this.$store.commit("setVariation", response);
 
                                 document.dispatchEvent(new CustomEvent("onVariationChanged", {detail: {attributes: response.attributes, documents: response.documents}}));
                             });
@@ -110,17 +127,17 @@ Vue.component("variation-select", {
             deep: true
         });
 
-        // watch for changes on selected variation to adjust url
-        ResourceService.watch("currentVariation", function(newVariation, oldVariation)
-        {
-            if (oldVariation)
-            {
-                var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-                var title = document.getElementsByTagName("title")[0].innerHTML;
+        // // watch for changes on selected variation to adjust url
+        // ResourceService.watch("currentVariation", (newVariation, oldVariation) =>
+        // {
+        //     if (oldVariation)
+        //     {
+        //         var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+        //         var title = document.getElementsByTagName("title")[0].innerHTML;
 
-                window.history.replaceState({}, title, url);
-            }
-        }.bind(this));
+        //         window.history.replaceState({}, title, url);
+        //     }
+        // });
     },
 
     methods: {
@@ -130,7 +147,7 @@ Vue.component("variation-select", {
          * @param {{[int]: int}}  attributes   A map containing attributeIds and attributeValueIds. Used to filter variations
          * @returns {array}                    A list of matching variations.
          */
-        filterVariations: function(attributes)
+        filterVariations(attributes)
         {
             attributes = attributes || this.selectedAttributes;
             return this.variations.filter(function(variation)
@@ -157,7 +174,7 @@ Vue.component("variation-select", {
          * @param {int}     attributeValueId    The valueId of the attribute
          * @returns {boolean}                   True if the value can be combined with the current selection.
          */
-        isEnabled: function(attributeId, attributeValueId)
+        isEnabled(attributeId, attributeValueId)
         {
             // clone selectedAttributes to avoid touching objects bound to UI
             var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
@@ -171,7 +188,7 @@ Vue.component("variation-select", {
          * @param {*}           variation   The variation to set as selected
          * @returns {boolean}               true if at least one attribute has been changed
          */
-        setAttributes: function(variation)
+        setAttributes(variation)
         {
             var hasChanges = false;
 

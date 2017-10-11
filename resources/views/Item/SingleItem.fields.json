@@ -30,8 +30,7 @@
 
   "texts.*",
 
-  "salesPrices.price",
-  "salesPrices.type",
+  "salesPrices.*",
 
   "unit.content",
   "unit.names.name",

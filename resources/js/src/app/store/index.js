@@ -5,6 +5,7 @@ import localization from "store/modules/LocalizationModule";
 import user from "store/modules/UserModule";
 import navigation from "store/modules/NavigationModule";
 import itemList from "store/modules/ItemListModule";
+import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
 
@@ -20,6 +21,7 @@ const store = new Vuex.Store(
             user,
             navigation,
             itemList,
+            item,
             basket,
             orderReturn
         }

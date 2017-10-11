@@ -1,5 +1,5 @@
 
-.single{
+.single {
     
     .list-item-carousel {
         .list-control-special{
@@ -75,6 +75,30 @@
                 margin-left: 0;
             }
         }
+    }
+
+    .graduated-prices-table {
+        td:first-child {
+            padding-right: 1rem;
+            font-style: italic;
+        }  
+        
+        & i {
+            color: $brand-success;
+            font-size: 17px;
+            margin-left: 5px;
+            opacity: 0;
+        }
+    }
+
+    .graduated-price-display-transition {
+        transition: all .3s ease-out;
+        opacity: 1;
+    }
+
+    .graduated-price-display-enter, .graduated-price-display-leave {
+        transition: all .3s ease-out;
+        opacity: 0;
     }
 }
 

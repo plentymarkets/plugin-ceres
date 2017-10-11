@@ -21,19 +21,6 @@ Vue.component("add-to-basket", {
         };
     },
 
-    computed:
-    {
-        variationId()
-        {
-            return this.item.variation.id;
-        },
-
-        hasChildren()
-        {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
-        }
-    },
-
     created()
     {
         this.$options.template = this.template;
@@ -118,6 +105,51 @@ Vue.component("add-to-basket", {
         {
             this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
             this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
+        }
+
+    },
+
+    computed:
+    {
+        /**
+         * returns item.variation.id
+         */
+        variationId()
+        {
+            return this.item.variation.id;
+        },
+
+        hasChildren()
+        {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+
+        totalPrice()
+        {
+            if (this.item)
+            {
+                const currency = this.item.calculatedPrices.default.currency;
+                const graduatedPrice = this.$options.filters.graduatedPrice(this.item, this.quantity);
+                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
+
+                return this.$options.filters.currency(graduatedPrice + propertySurcharge, currency);
+            }
+
+            return null;
+        }
+    },
+
+    watch:
+    {
+        totalPrice(newValue, oldValue)
+        {
+            if (newValue && newValue !== oldValue)
+            {
+                document.dispatchEvent(new CustomEvent("itemTotalPriceChanged", {detail: newValue}));
+
+                // TODO - remove this in the vuex branch and just broadcast this event to the graduated component
+                document.dispatchEvent(new CustomEvent("itemGraduatedPriceChanged", {detail: this.quantity}));
+            }
         }
     }
 });
