@@ -8,8 +8,7 @@ Vue.component("graduated-prices", {
     data()
     {
         return {
-            currentVariation: null,
-            actualItemCount: 0
+            currentVariation: null
         };
     },
 
@@ -22,19 +21,59 @@ Vue.component("graduated-prices", {
     {
         this.currentVariation = ResourceService.getResource("currentVariation").val();
 
-        ResourceService.watch("currentVariation", (newValue, oldValue) =>
+        this.initializeEvents();
+    },
+
+    methods:
+    {
+        initializeEvents()
         {
-            this.currentVariation = newValue;
-        });
+            this.initCurrentWatcher();
+            this.initQuantityPriceWatcher();
+        },
 
-        // TODO replace this after vuex change and single item component change
-
-        const _this = this;
-
-        document.addEventListener("itemGraduatedPriceChanged", event =>
+        initCurrentWatcher()
         {
-            _this.actualItemCount = event.detail;
-        });
+            ResourceService.watch("currentVariation", (newValue, oldValue) =>
+            {
+                this.currentVariation = newValue;
+            });
+        },
+
+        initQuantityPriceWatcher()
+        {
+            // TODO replace this after vuex change and single item component change
+
+            document.addEventListener("itemGraduatedPriceChanged", event =>
+            {
+                let graduatedPrices = this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
+
+                graduatedPrices = graduatedPrices.sort((firstValue, secondValue) =>
+                {
+                    return firstValue.minimumOrderQuantity - secondValue.minimumOrderQuantity;
+                });
+
+                let priceToMark = 0;
+
+                for (const price of graduatedPrices)
+                {
+                    // unmark other selections
+                    document.getElementById(price.minimumOrderQuantity + "_qty").style.opacity = 0;
+
+                    // get correct price to mark
+                    if (event.detail >= price.minimumOrderQuantity)
+                    {
+                        priceToMark = price.minimumOrderQuantity;
+                    }
+                }
+
+                // mark new selection
+                if (priceToMark != 0)
+                {
+                    document.getElementById(priceToMark + "_qty").style.opacity = 1;
+                }
+            });
+        }
     },
 
     computed:
