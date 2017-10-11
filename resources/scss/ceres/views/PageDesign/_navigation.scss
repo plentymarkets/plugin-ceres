@@ -288,7 +288,9 @@ nav.navbar.megamenu {
 
 					>ul.collapse {
 						background-color: $megamenu-bg;
-						columns 		: 5 240px;
+						columns 		: 5 220px;
+						column-gap 		: 5px;
+						column-rule 	: 1px solid $gray;
 						display 		: none;
 						padding 		: 1em;
 
