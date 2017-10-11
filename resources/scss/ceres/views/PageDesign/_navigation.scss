@@ -288,16 +288,18 @@ nav.navbar.megamenu {
 
 					>ul.collapse {
 						background-color: $megamenu-bg;
-						columns 		: 5 220px;
-						column-gap 		: 5px;
+						columns 		: 5 228px;
+						column-gap 		: .5em;
 						column-rule 	: 1px solid $gray;
 						display 		: none;
+						max-height 		: 380px;
+						overflow 		: hidden;
 						padding 		: 1em;
 
 						>li {
 							display 	 : inline-block;
 							break-inside : avoid;
-							min-width 	 : 240px; 
+							width 	 	 : 100%; 
 
 							&.level1>a { font-weight : bold; color : $megamenu-color-top-btn; }
 							.level2>a { padding : .2rem 1rem!important; }
