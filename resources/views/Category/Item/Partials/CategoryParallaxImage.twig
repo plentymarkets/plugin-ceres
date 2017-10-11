@@ -2,9 +2,10 @@
     <div class="container-max">
         <div class="parallax-text-wrapper">
             <div class="parallax-text-container">
-                <h1 class="h2 p-t-3 category-title">{{ category.details[0].name | raw }}</h1>
+                <h1 class="h2 p-t-2 category-title">{{ category.details[0].name | raw }}</h1>
+
                 {% if showCategoryDescription %}
-                    <h2 class="h3 p-t-3 category-description {% if category.details[0].imagePath is not empty %}category-description-parallax container-max{% endif %}">{{ category.details[0].description | raw }}</h2>
+                    <div id="category-description-container" class="category-description m-b-1">{{ category.details[0].description | raw }}</div>
                 {% endif %}
             </div>
         </div>

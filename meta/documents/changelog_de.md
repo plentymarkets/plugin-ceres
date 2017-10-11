@@ -1,10 +1,32 @@
 # Release Notes für Ceres
 
-## v1.5.x (TBA)
+## 1.5.2 (???)
+
+### Geändert
+
+- Der Text von Bestellmerkmalen wird in der Basketvorschau nichtmehr ausgegeben. 
+- Die OrderProperties (SingleItem) werden nun oberhalb der Preise ausgegeben.
+- Im SingleItem wird der Artikelpreis nun live berechnet anhand der Merkmalaufpreise und den Staffelpreisen.
+- Das AddToBasketOverlay zeigt die Preise nun korrekt berechnet an, anhand der Merkmalaufpreise und den Staffelpreisen.
+- Die Staffelpreise werden nun unterhalb der Bestellmerkmale ausgegeben.
+- Das Uhrensymbol in der OrderHistorie wurde gegen einen Text ausgetauscht.
+- Das Uhrensymbol in der RetourenHistorie wurde gegen einen Text ausgetauscht.
+
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
+
+### Geändert
+
+- Der Template-Container **Single item: Add detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+- Der Template-Container **Single item: Add content to detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+
+### Behoben
+
+- Die Aufpreise der Bestellmerkmale werden nun im Warenkorb und der Warenkorbvorschau wieder korrekt ausgegeben.
+- Im **Mein Konto**-Bereich wird der Hinweis **Zahlungsart kann nicht geändert werden** nicht mehr angezeigt, sobald der Auftrag bezahlt wurde.
 
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 

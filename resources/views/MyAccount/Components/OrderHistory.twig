@@ -11,6 +11,7 @@
 {% set orderList = services.customer.getOrders(1, ordersPerPage).getResult() %}
 
 {% set paymentMethodId = 0 %}
+{% set paymentStatus = "" %}
 
 {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
@@ -96,7 +97,7 @@
                                     <div class="col-xs-12 col-md-8">
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderDate") }}</strong>
-                                            <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.dateTimeFormat") ) }} <i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                            <span class="col-xs-6 col-sm-7">{{ entry.order.createdAt | formatDateTime | date( trans("Ceres::Template.dateTimeFormat") ) }} {{ trans("Ceres::Template.time") }}</span>
                                         </div>
                                         <div class="row my-account-no-line">
                                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderStatus") }}</strong>

@@ -1,4 +1,7 @@
 [
+  "attributes.attribute.names.*",
+  "attributes.value.names.*",
+
   "itemId",
   "id",
   "item.id",
@@ -27,8 +30,7 @@
 
   "texts.*",
 
-  "salesPrices.price",
-  "salesPrices.type",
+  "salesPrices.*",
 
   "unit.content",
   "unit.names.name",
