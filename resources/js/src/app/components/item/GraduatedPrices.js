@@ -8,7 +8,8 @@ Vue.component("graduated-prices", {
     data()
     {
         return {
-            currentVariation: null
+            currentVariation: null,
+            actualItemCount: 0
         };
     },
 
@@ -24,6 +25,15 @@ Vue.component("graduated-prices", {
         ResourceService.watch("currentVariation", (newValue, oldValue) =>
         {
             this.currentVariation = newValue;
+        });
+
+        // TODO replace this after vuex change and single item component change
+
+        const _this = this;
+
+        document.addEventListener("itemGraduatedPriceChanged", event =>
+        {
+            _this.actualItemCount = event.detail;
         });
     },
 

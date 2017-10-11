@@ -144,6 +144,9 @@ Vue.component("add-to-basket", {
             if (newValue && newValue !== oldValue)
             {
                 document.dispatchEvent(new CustomEvent("itemTotalPriceChanged", {detail: newValue}));
+
+                // TODO - remove this in the vuex branch and just broadcast this event to the graduated component
+                document.dispatchEvent(new CustomEvent("itemGraduatedPriceChanged", {detail: this.quantity}));
             }
         }
     }
