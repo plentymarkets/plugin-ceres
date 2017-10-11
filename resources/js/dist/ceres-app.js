@@ -17643,19 +17643,15 @@ var actions = {
             state = _ref3.state;
 
         return new Promise(function (resolve, reject) {
-            // const oldShippingCountryId = state.shippingCountryId;
+            var oldShippingCountryId = state.shippingCountryId;
 
             commit("setShippingCountryId", shippingCountryId);
-            // ApiService.post("TODO", {TODO})
-            //     .done(data =>
-            //     {
-            //         resolve(data);
-            //     })
-            //     .fail(error =>
-            //     {
-            //         commit("removeWishListId", oldShippingCountryId);
-            //         reject(error);
-            //     });
+            ApiService.post("/rest/io/shippingCountryId", { shippingCountryId: shippingCountryId }).done(function (data) {
+                resolve(data);
+            }).fail(function (error) {
+                commit("removeWishListId", oldShippingCountryId);
+                reject(error);
+            });
         });
     }
 };
