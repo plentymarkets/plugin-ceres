@@ -308,6 +308,7 @@ nav.navbar.megamenu {
 									font-weight : bold; 
 								}
 							}
+							&:hover { background : $megamenu-bg; }
 							 .level2 { 
 							 	padding : .5em 1em!important; 
 							 }
@@ -319,20 +320,20 @@ nav.navbar.megamenu {
 								font-size 		: .8em;
 								text-transform 	: lowercase; 
 							}
-						}
+							a {
+								background 	: white;
+								color 		: $megamenu-color-bottom-btn;
+								padding 	: .4rem 1rem;
+								text-align 	: left;
 
-						ul { background-color : white; }
-						a {
-							background 	: white;
-							color 		: $megamenu-color-bottom-btn;
-							padding 	: .4rem 1rem;
-							text-align 	: left;
-
-							&:hover{ 
-								background 	: $megamenu-bg; 
-								color 		: $megamenu-btn-hover !important;  
+								&:hover{ 
+									background 	: $megamenu-bg; 
+									color 		: $megamenu-btn-hover !important;  
+								}
 							}
+							ul { background-color : $megamenu-bg; }
 						}
+
 					}
 
 				}
