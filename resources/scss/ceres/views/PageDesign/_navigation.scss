@@ -280,54 +280,47 @@ nav.navbar.megamenu {
 					position : static;
 
 					&:hover {
-						background 	: $megamenu-bg; 
-						color 		: $megamenu-btn-hover !important;  
+						background : $megamenu-bg; 
+						color 	   : $megamenu-btn-hover !important;  
 
-						.navDropdown_wrapper { display: flex; } 
+						.navDropdown_wrapper { display : flex; } 
 					}
 
-					.navDropdown_wrapper {
-						display 	: none;
-						left 		: 0;
-						max-height	: 340px;
-						overflow 	: hidden;
-						position	: absolute;
-						width 		: 100%;
+					>ul.collapse {
+						background-color: $megamenu-bg;
+						columns 		: 5 240px;
+						display 		: block;
+						padding 		: 1em;
 
-						>ul {
-							align-items 	: flex-end; 
-							background-color: white;
-							display 		: flex;
-							flex-direction 	: column;
-							flex-wrap 		: wrap;
-							width 			: 100%;
+						>li {
+							display 	 : inline-block;
+							break-inside : avoid;
+							min-width 	 : 240px; 
 
-
-							>li {
-								flex 		: 0 1 auto;
-								max-width 	: 25%;
-								min-width 	: 20%;
-								&.level1>a { font-weight : bold; color : $megamenu-color-top-btn; }
-								.level2>a { padding : .2rem 1rem!important; }
-								.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
-								.level3.bt-more>a { font-size : .8em; }
-								.bt-more>a { text-transform: lowercase; }
+							&.level1>a { font-weight : bold; color : $megamenu-color-top-btn; }
+							.level2>a { padding : .2rem 1rem!important; }
+							.level3>a { padding : .2rem 1rem .2rem 2.5rem !important; }
+							.level3.bt-more>a { font-size : .8em; }
+							.bt-more>a { 
+								color 			: $gray;
+								text-transform 	: lowercase; 
 							}
+						}
 
-							ul { background-color : white; }
-							a {
-								background 	: white;
-								color 		: $megamenu-color-bottom-btn;
-								padding 	: .4rem 1rem;
-								text-align 	: left;
+						ul { background-color : white; }
+						a {
+							background 	: white;
+							color 		: $megamenu-color-bottom-btn;
+							padding 	: .4rem 1rem;
+							text-align 	: left;
 
-								&:hover{ 
-									background 	: $megamenu-bg; 
-									color 		: $megamenu-btn-hover !important;  
-								}
+							&:hover{ 
+								background 	: $megamenu-bg; 
+								color 		: $megamenu-btn-hover !important;  
 							}
 						}
 					}
+
 				}
 			}
 		}
