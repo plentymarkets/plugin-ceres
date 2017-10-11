@@ -238,18 +238,6 @@
         "default"       : "0"
     },
     {
-        "tab"           : "Header",
-        "key"           : "header.megamenu_align",
-        "label"         : "Align megamenu content",
-        "type"          : "dropdown",
-        "possibleValues":
-        {
-            "1"         : "Left",
-            "2"         : "Right"
-        },
-        "default"       : "2"
-    },
-    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
