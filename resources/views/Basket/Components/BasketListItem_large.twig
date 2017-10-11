@@ -17,7 +17,7 @@
                         :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
 
         <div class="item-total-price">
@@ -42,9 +42,9 @@
     <div class="item-details small">
         <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.id }" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
-            <div class="item-name">
+            <p class="item-name">
                 ${ basketItem.variation.data.texts | itemName {{configItemName}} }
-            </div>
+            </p>
         </a>
 
         {% if "basket.item.item_id" in basketDetailsData %}
@@ -53,8 +53,18 @@
             </p>
         {% endif %}
 
+        <div class="row" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1)">
+            <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.itemContent") }}</strong>
+            <span class="col-xs-6 col-sm-7">${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }</span>
+        </div>
+
+        <div class="row" v-for="attribute in basketItem.variation.data.attributes">
+            <strong class="col-xs-6 col-sm-5">${ attribute.attribute.names.name }</strong>
+            <span class="col-xs-6 col-sm-7">${ attribute.value.names.name }</span>
+        </div>
+        
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
-            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>
+            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties | propertySurcharge property.propertyId | currency })</strong>
             <span class="col-xs-6 col-sm-7">${property.value}</span>
         </div>
 

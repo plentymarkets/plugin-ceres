@@ -23,20 +23,34 @@
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItems | json }
                 ${ basketItem.variation.data.texts | itemName {{ configItemName }} } {# ${ basketItem.variation.variationBase.variationName } #}
             </div>
         </a>
+
         <div class="item-unit-price">
-            ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency basketItem.variation.data.calculatedPrices.default.currency } / {{ trans("Ceres::Template.itemEach") }}
+            ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
+
         <div class="item-total-price">
             ${ basketItem.quantity * basketItem.price | currency basketItem.variation.data.calculatedPrices.default.currency }
         </div>
-        <div class="item-order-param" v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} (${basketItem.variation.data.properties[$index] | propertySurcharge | currency })</strong>:
+
+        <div v-for="attribute in basketItem.variation.data.attributes">
+            <strong>${ attribute.attribute.names.name }</strong>:
+            <span>${ attribute.value.names.name }</span>
+        </div>
+
+        <div v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1)">
+            <strong>{{ trans("Ceres::Template.itemContent") }}:</strong>
+            <br>
+            <span>${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }</span>
+        </div>
+
+        <div v-for="property in basketItem.basketItemOrderParams">
+            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge property.propertyId | currency })</strong>:
             <span>${property.value}</span>
         </div>
+
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
             <span class="message" v-if="!deleteConfirmed">
                 {{ trans("Ceres::Template.generalDelete") }}

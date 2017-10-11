@@ -2,9 +2,13 @@
 {% import "Ceres::Checkout.Macros.Address" as address %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set data = services.customer.getLatestOrder() %}
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.orderConfirmation") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
 
 {% block PageBody %}
+
+    {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
     {% set overrideConfirmation = LayoutContainer.show("Ceres::OrderConfirmation.Override") %}
 
@@ -12,10 +16,13 @@
         <div class="page-content myaccount container-max m-b-3 m-t-1 p-b-3">
             <div class="row m-b-3">
                 <div class="col-xs-12">
-                    <h1 class="h4">{{ trans("Ceres::Template.generalThanks") }}</h1>
+                    <h1 class="h2">{{ trans("Ceres::Template.generalThanks") }}</h1>
                     <p>{{ trans("Ceres::Template.orderWillBeProcessed") }}</p>
                 </div>
             </div>
+
+            {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
+
 
             {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 

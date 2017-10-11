@@ -1,5 +1,9 @@
 {% extends getPartial('page-design') %}
 
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.accRegister") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
 {% block PageBody %}
     {{ component( "Ceres::Customer.Components.Registration") }}
     <div class="registration container-max">

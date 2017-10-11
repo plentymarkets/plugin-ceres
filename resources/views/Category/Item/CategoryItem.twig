@@ -26,13 +26,11 @@
 
 {% set lang         = services.sessionStorage.getLang() %}
 
-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}
-    {% set categories = services.category.getNavigationTree("item", lang, 6) %}
-{% endif %}
-
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 
 {% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+{% set showCategoryImage = config('Ceres.item.show_category_image') == "true" %}
+{% set showCategoryDescription = config('Ceres.item.show_category_description') == "true" %}
 
 {% block PageBody %}
 
@@ -44,16 +42,21 @@
     {{ component( "Ceres::ItemList.Components.ItemsPerPage") }}
     {{ component( "Ceres::ItemList.Components.Pagination") }}
 
-    <resource name="facetParams" :data="[]"></resource>
-    <resource name="facets" :data="{{ paginatedResult.facets | json_encode }} || []"></resource>
-    <resource name="itemList" :data="{ total: {{  paginatedResult.total | json_encode() }} }"></resource>
+    {% if showCategoryImage %}
+        {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
+    {% endif %}
 
     <div class="categoriegrid page-content container-max">
-        <div class="row m-t-1">
-            <div class="col-xs-12">
-                <h1 class="h4">{{ category.details.first.name }}</h1>
+        {% if not showCategoryImage %}
+            <div class="row m-t-1">
+                <div class="col-xs-12">
+                    <h1 class="h2 category-title">{{ category.details.first.name }}</h1>
+                    {% if showCategoryDescription %}
+                        <h2 class="h3 p-t-3 category-description">{{ category.details[0].description | raw }}</h2>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         <div class="list-controls m-b-3">
             <div class="list-controls-inner">
@@ -65,7 +68,7 @@
                                 template="#vue-items-per-page"
                                 :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
                                 :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
-                            <item-filter-list :facets="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+                            <item-filter-list :facet-data="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
                 </div>
@@ -81,7 +84,7 @@
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
                         <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
-                        {{ includeCached('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
+                        {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
 
                     {{ LayoutContainer.show("Ceres::CategoryItem.SideNavBarBottom") }}
@@ -97,7 +100,7 @@
                         {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
                     {% endif %}
 
-                    <ul class="product-list row grid" v-is-loading-watcher>
+                    <ul class="product-list row grid" v-is-loading-watcher="$store.state.itemList.isLoading">
                         {% for item in itemList %}
                             <li class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if showHeaderNavBar == "side" or showHeaderNavBar == "both" %}4{% else %}3{% endif %}">
                                 {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
@@ -107,7 +110,7 @@
                 </div>
 
                 <div id="vue-rendered-item-list" style="display:none">
-                    <item-list template="#vue-item-list" :category-id="{{ category.id }}"></item-list>
+                    <item-list template="#vue-item-list" :total-items-data="{{ paginatedResult.total }}" :category-id="{{ category.id }}"></item-list>
                 </div>
 
             </div>
@@ -136,4 +139,6 @@
     {% if page+1 <= pageMax %}
         <link rel=“next“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page+1 }) | url_encode }}“ />
     {% endif %}
+
+    <title>{{ category.details.first.name }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}

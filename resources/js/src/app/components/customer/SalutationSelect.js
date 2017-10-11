@@ -1,5 +1,4 @@
 import AddressFieldService from "services/AddressFieldService";
-import ResourceService from "services/ResourceService";
 
 Vue.component("salutation-select", {
 
@@ -14,7 +13,6 @@ Vue.component("salutation-select", {
     data()
     {
         return {
-            localization     : {},
             salutations      : {
                 complete      : {
                     de: [
@@ -89,16 +87,16 @@ Vue.component("salutation-select", {
         };
     },
 
+    computed: Vuex.mapState({
+        shopLanguage: state => state.localization.shopLanguage
+    }),
+
     /**
      * Get the shipping countries
      */
     created()
     {
-
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-        this.shopLanguage = this.localization.shopLanguage;
 
         if (this.shopLanguage === "de")
         {

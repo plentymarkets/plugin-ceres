@@ -1,5 +1,3 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("shop-language-select", {
 
     delimiters: ["${", "}"],
@@ -9,32 +7,18 @@ Vue.component("shop-language-select", {
         "template"
     ],
 
-    data: function()
-    {
-        return {
-            localization: {},
-            languageList: []
-        };
+    computed: {
+        ...Vuex.mapState({
+            localization: state => state.localization
+        }),
+
+        ...Vuex.mapGetters([
+            "languageList"
+        ])
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
-
-        ResourceService.bind("localization", this);
-
-        for (var i in this.localization.activeShopLanguageList)
-        {
-            var languageKey = this.localization.activeShopLanguageList[i];
-            var languageName = Translations.Template[languageKey];
-            var language =
-                {
-                    key: languageKey,
-                    name: languageName,
-                    flagClass: this.countryFlagPrefix + languageKey
-                };
-
-            this.languageList.push(language);
-        }
     }
 });

@@ -1,9 +1,7 @@
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
-const ResourceService = require("services/ResourceService");
 const AddressFieldService = require("services/AddressFieldService");
 
-import AddressService from "services/AddressService";
 import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
@@ -11,26 +9,55 @@ Vue.component("address-select", {
     delimiters: ["${", "}"],
 
     props: [
-        "addressList",
-        "addressType",
-        "selectedAddressId",
         "template",
-        "showError"
+        "addressType",
+        "showError",
+        "countryNameMap"
     ],
 
     data()
     {
         return {
-            selectedAddress: {},
             addressModal   : {},
             modalType      : "",
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal    : "",
-            localization   : {},
-            user           : {}
+            deleteModal    : ""
         };
+    },
+
+    computed:
+    {
+        selectedAddress()
+        {
+            return this.$store.getters.getSelectedAddress(this.addressType);
+        },
+
+        addressList()
+        {
+            return this.$store.getters.getAddressList(this.addressType);
+        },
+
+        shippingCountryId()
+        {
+            return this.$store.state.localization.shippingCountryId;
+        },
+
+        isAddAddressEnabled()
+        {
+            if (this.addressType === "1")
+            {
+                return this.$store.getters.isLoggedIn || this.addressList.length < 1;
+            }
+
+            return this.$store.getters.isLoggedIn || this.addressList.length < 2;
+        },
+
+        isAddressListEmpty()
+        {
+            return !(this.addressList && this.addressList.length > 0);
+        }
     },
 
     /**
@@ -39,9 +66,6 @@ Vue.component("address-select", {
     created()
     {
         this.$options.template = this.template;
-        ResourceService.bind("localization", this);
-        ResourceService.bind("user", this);
-
         this.addEventListener();
     },
 
@@ -52,20 +76,6 @@ Vue.component("address-select", {
     {
         this.$nextTick(() =>
         {
-            if (!this.isAddressListEmpty())
-            {
-                if (!this.selectedAddressId || this.selectedAddressId <= 0)
-                {
-                    this.selectedAddressId = this.addressList[0].id;
-                }
-
-                this.loadSelectedAddress();
-            }
-            else
-            {
-                this.addressList = [];
-            }
-
             this.addressModal = ModalService.findModal(this.$els.addressModal);
             this.deleteModal = ModalService.findModal(this.$els.deleteModal);
         });
@@ -79,68 +89,17 @@ Vue.component("address-select", {
         {
             ApiService.listen("AfterAccountContactLogout", () =>
             {
-                this.cleanUserAddressData();
+                this.$store.commit("resetAddress", this.addressType);
             });
-        },
-
-        /**
-         * Load the address filtered by selectedId into selectedAddress
-         */
-        loadSelectedAddress()
-        {
-            let isSelectedAddressSet = false;
-
-            for (const index in this.addressList)
-            {
-                if (this.addressList[index].id === this.selectedAddressId)
-                {
-                    this.selectedAddress = this.addressList[index];
-                    isSelectedAddressSet = true;
-                    this.$dispatch("address-changed", this.selectedAddress);
-                }
-            }
-
-            if (!isSelectedAddressSet)
-            {
-                this.selectedAddressId = null;
-            }
-        },
-
-        /**
-         * Remove all user related addresses from the component
-         */
-        cleanUserAddressData()
-        {
-            this.addressList = this.addressList.filter(value =>
-            {
-                return value.id === -99;
-            });
-
-            if (this.selectedAddressId !== -99)
-            {
-                this.selectedAddress = {};
-                this.selectedAddressId = "";
-            }
         },
 
         /**
          * Update the selected address
          * @param index
          */
-        onAddressChanged(index)
+        onAddressChanged(address)
         {
-            this.selectedAddress = this.addressList[index];
-
-            this.$dispatch("address-changed", this.selectedAddress);
-        },
-
-        /**
-         * Check whether the address list is empty
-         * @returns {boolean}
-         */
-        isAddressListEmpty()
-        {
-            return !(this.addressList && this.addressList.length > 0);
+            this.$dispatch("address-changed", address);
         },
 
         /**
@@ -163,12 +122,12 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId        : this.localization.currentShippingCountryId
+                    countryId        : this.shippingCountryId
                 };
             }
             else
             {
-                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {countryId: this.shippingCountryId};
             }
 
             this.updateHeadline();
@@ -186,12 +145,12 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
-                    countryId        : this.localization.currentShippingCountryId
+                    countryId        : this.shippingCountryId
                 };
             }
             else
             {
-                this.addressToEdit = {countryId: this.localization.currentShippingCountryId};
+                this.addressToEdit = {countryId: this.shippingCountryId};
             }
 
             this.updateHeadline();
@@ -236,12 +195,16 @@ Vue.component("address-select", {
          */
         deleteAddress()
         {
-            AddressService.deleteAddress(this.addressToDelete.id, this.addressType)
-                .done(() =>
-                {
-                    this.closeDeleteModal();
-                    this.removeIdFromList(this.addressToDelete.id);
-                });
+
+            this.$store.dispatch("deleteAddress", {address: this.addressToDelete, addressType: this.addressType})
+                .then(
+                    response =>
+                    {
+                        this.closeDeleteModal();
+                    },
+                    error =>
+                    {}
+                );
         },
 
         /**
@@ -303,68 +266,25 @@ Vue.component("address-select", {
         },
 
         /**
-         * Remove an address from the addressList by ID
-         * @param id
+         * @param countryId
+         * @returns country name | empty string
          */
-        removeIdFromList(id)
+        getCountryName(countryId)
         {
-            for (const i in this.addressList)
+            if (countryId > 0)
             {
-                if (this.addressList[i].id === id)
-                {
-                    this.addressList.splice(i, 1);
-
-                    if (this.selectedAddressId && this.selectedAddressId.toString() === id.toString())
-                    {
-                        if (this.addressList.length)
-                        {
-                            this.selectedAddress = this.addressList[0];
-                            this.selectedAddressId = this.selectedAddress.id;
-                        }
-                        else
-                        {
-                            this.selectedAddress = {};
-                            this.selectedAddressId = "";
-                        }
-
-                        this.$dispatch("address-changed", this.selectedAddress);
-
-                        break;
-                    }
-                }
+                return this.countryNameMap[countryId];
             }
-        },
 
-        /**
-         * Update the selected address when a new address is created
-         * @param addressData
-         */
-        onAddressCreated(addressData)
-        {
-            this.selectedAddressId = addressData.id;
-
-            this.loadSelectedAddress();
+            return "";
         }
     },
 
-    computed: {
-        isAddAddressEnabled()
-        {
-            var isLoggedIn = this.user.isLoggedIn;
-
-            if (this.addressType === "1")
-            {
-                return isLoggedIn || this.addressList.length < 1;
-            }
-
-            return isLoggedIn || this.addressList.length < 2;
-        }
-    },
-    filters : {
-
+    filters :
+    {
         optionType(selectedAddress, typeId)
         {
-            if (selectedAddress.name2)
+            if (selectedAddress && selectedAddress.name2)
             {
                 for (const optionType of selectedAddress.options)
                 {
@@ -378,6 +298,5 @@ Vue.component("address-select", {
             return "";
 
         }
-
     }
 });

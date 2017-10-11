@@ -1,6 +1,3 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-search", {
@@ -11,56 +8,51 @@ Vue.component("item-search", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            searchString: "",
-            itemSearch: {}
+            currentSearchString: ""
         };
     },
 
-    created: function()
+    computed: Vuex.mapState({
+        searchString: state => state.itemList.searchString
+    }),
+
+    created()
     {
         this.$options.template = this.template;
     },
 
-    mounted: function()
+    mounted()
     {
         this.$nextTick(() =>
         {
-            ResourceService.bind("itemSearch", this);
             this.initAutocomplete();
 
-            var urlParams = UrlService.getUrlParams(document.location.search);
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
-            this.itemSearch.query = urlParams.query;
-
-            if (this.itemSearch.query)
-            {
-                ItemListService.updateSearchString(this.itemSearch.query);
-            }
+            this.$store.commit("setItemListSearchString", urlParams.query);
+            this.currentSearchString = urlParams.query;
         });
     },
 
     methods:
     {
-        search: function()
+        search()
         {
             if (document.location.pathname === "/search")
             {
-                ItemListService.setSearchString(this.itemSearch.query);
-                ItemListService.getItemList();
+                this.$store.dispatch("searchItems", this.currentSearchString);
             }
             else
             {
-                window.open("/search?query=" + this.itemSearch.query, "_self", false);
+                window.open("/search?query=" + this.currentSearchString, "_self", false);
             }
         },
 
-        initAutocomplete: function()
+        initAutocomplete()
         {
-            var self = this;
-
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
@@ -70,41 +62,42 @@ Vue.component("item-search", {
                 maxHeight: 310,
                 minChars: 2,
                 preventBadQueries: false,
-                onSelect: function(suggestion)
+                onSelect: suggestion =>
                 {
-                    self.itemSearch.query = suggestion.value;
-                    self.search();
+                    this.$store.commit("setItemListSearchString", suggestion.value);
+                    this.currentSearchString = suggestion.value;
+                    this.search();
                 },
-                beforeRender: function()
+                beforeRender()
                 {
                     $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
                 },
-                transformResult: function(response)
+                transformResult: response =>
                 {
-                    return self.transformSuggestionResult(response);
+                    return this.transformSuggestionResult(response);
                 }
             });
 
-            $(window).resize(function()
+            $(window).resize(() =>
             {
                 $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
             });
         },
 
-        transformSuggestionResult: function(result)
+        transformSuggestionResult(result)
         {
             result = JSON.parse(result);
-            var suggestions =
+            const suggestions =
                 {
-                    suggestions: $.map(result.data.documents, function(dataItem)
+                    suggestions: $.map(result.data.documents, dataItem =>
                     {
-                        var value = this.$options.filters.itemName(dataItem.data.texts, window.App.config.itemName);
+                        const value = this.$options.filters.itemName(dataItem.data.texts, App.config.itemName);
 
                         return {
                             value: value,
                             data : value
                         };
-                    }.bind(this))
+                    })
                 };
 
             return suggestions;

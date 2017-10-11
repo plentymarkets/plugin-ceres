@@ -1,0 +1,104 @@
+{% set name =           config("system.company.name") %}
+{% set ceo =            config("system.company.ceo") %}
+{% set city =           config("system.company.city") %}
+{% set country =        config("system.company.country") %}
+{% set email =          config("system.company.email") %}
+{% set fax =            config("system.company.fax") %}
+{% set fon =            config("system.company.fon") %}
+{% set hotline =        config("system.company.hotline") %}
+{% set street =         config("system.company.street") %}
+{% set vat =            config("system.company.vatNumber") %}
+{% set zip =            config("system.company.zip") %}
+{% set timezone =       config("system.company.timezone") %}
+{% set openingTimes =   config("Ceres.contact.opening_times") %}
+{% set showData =       config("Ceres.contact.show_data") %}
+
+{% if showData != "all" %}
+    {% set showData = showData|split(', ') %}
+{% endif %}
+
+<div class="contact-card">
+    {% if "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
+        <p class="contact-address">
+            <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
+            {% if "name" in showData or showData == 'all' %}
+                <span class="d-inline-block">{{ name }}</span><br>
+            {% endif %}
+
+            {% if "ceo" in showData or showData == 'all' %}
+                <span class="d-inline-block">{{ ceo }}</span> <br>
+            {% endif %}
+
+            {% if "street" in showData or showData == 'all' %}
+                <span class="d-inline-block">{{ street }}</span> <br>
+            {% endif %}
+
+            {% if "zip" in showData or "city" in showData or showData == 'all' %}
+                <span class="d-inline-block">{{ zip }} {{ city }}</span>
+            {% endif %}
+
+            {% if "zip" in showData or "city" in showData or showData == 'all' %}
+                <br>
+            {% endif %}
+
+            {% if "country" in showData or showData == 'all' %}
+                <span class="d-inline-block">{{ country }}</span>
+            {% endif %}
+		</p>
+    {% endif %}
+    {% if "fon" in showData or showData == 'all' %}
+		<p class="m-y-0">
+            <a href="tel:{{ fon | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ fon }}</span>
+            </a>
+		</p>
+    {% endif %}
+
+    {% if "hotline" in showData or showData == 'all' %}
+		<p class="m-y-0">
+            <a href="tel:{{ hotline | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ hotline }}</span>
+            </a>
+		</p>
+    {% endif %}
+
+    {% if "fax" in showData or showData == 'all' %}
+		<p class="m-y-0">
+            <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+            <span class="d-inline-block">{{ fax }}</span>
+		</p>
+    {% endif %}
+
+    {% if "email" in showData or showData == 'all' %}
+		<p class="m-y-0">
+            <a href="mailto:{{ email }}">
+                <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+                <span class="d-inline-block">{{ email }}</span>
+            </a>
+		</p>
+    {% endif %}
+
+    {% if "opening_times" in showData or showData == 'all' %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ openingTimes }}</span>
+		</p>
+    {% endif %}
+
+    {% if "timezone" in showData or showData == 'all' %}
+		<p class="m-y-0">
+			<i class="fa fa-fw fa-globe" aria-hidden="true"></i>
+			<span class="d-inline-block">{{ timezone }}</span>
+		</p>
+    {% endif %}
+
+    {% if "vatNumber" in showData or showData == 'all' %}
+		<p class="m-y-0 contact-vat-number">
+			<i class="fa fa-fw" aria-hidden="true"></i>
+			<span class="d-inline-block vat-number-field">{{ trans("Ceres::Template.accVatNumber") }}:</span><br>
+			<span class="d-inline-block">{{ vat }}</span>
+		</p>
+    {% endif %}
+</div>

@@ -1,19 +1,23 @@
-{% set emailRegex = config("Ceres.register.email_regex") %}
-{% set passwordRegex = config("Ceres.register.password_regex") %}
-
 {{ component( "Ceres::Customer.Components.AddressInputGroup.AddressInputGroup" ) }}
 <script type="x/template" id="vue-registration">
 	<div class="row" id="registration${_uid}">
+
         <div class="col-sm-12">
-            <div class="input-unit" data-validate="regex">
-                <input type="text" name="email" id="txt_email" v-model="username" data-validate-ref="{{ emailRegex }}">
+            <div class="alert alert-info password-info">
+                <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="input-unit" data-validate="mail">
+                <input type="text" name="email" id="txt_email" v-model="username">
                 <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
             </div>
         </div>
 
         <div class="col-sm-6" v-if="!guestMode">
-            <div class="input-unit" id="passwordBox" data-validate="regex">
-                <input type="password" name="password" id="registration_password_input" v-model="password" data-validate-ref="{{ passwordRegex }}">
+            <div class="input-unit" id="passwordBox" data-validate="password">
+                <input type="password" name="password" id="registration_password_input" v-model="password">
                 <label for="txt_pw">{{ trans("Ceres::Template.accPassword") }}*</label>
             </div>
         </div>
@@ -28,7 +32,7 @@
         <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
 
         <div class="col-sm-5 offset-sm-7">
-            <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-block">{{ trans("Ceres::Template.accRegister") }}</button>
+            <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-block"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ trans("Ceres::Template.accRegister") }}</button>
         </div>
     </div>
 </script>

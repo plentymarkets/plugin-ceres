@@ -1,43 +1,67 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set emailRegex = config("Ceres.register.email_regex") %}
+{% set gCapture   = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
 
 <script type="x/template" id="vue-login">
-    <div>
-        <form id="login-form-${_uid}" class="m-b-1">
+    <div class="login-pwd-reset">
+
+        <form id="login-form-${_uid}" class="login-container m-b-1">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="input-unit" data-validate="regex">
-                        <input type="email" name="email" id="txt_email" v-model="username" data-validate-ref="{{ emailRegex }}">
+                    <div class="input-unit" data-validate="mail">
+                        <input type="email" name="email" id="txt_email" v-model="username">
                         <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
                     </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                 </div>
-
                 <div class="col-xs-12">
                     <div class="input-unit" data-validate="text">
                         <input type="password" name="password" id="txt_password" v-model="password">
                         <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
                     </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
                 </div>
-
-                {# TODO #}
-                {#<div class="col-xs-8">#}
-                    {#<label class="form-check-label">#}
-                        {#<input class="form-check-input" type="checkbox" value="">#}
-                        {#<span>{{ trans("Ceres::Template.accRememberPassword") }}</span>#}
-                    {#</label>#}
-
-                    {#<div>#}
-                        {#<a href="#" class="small">{{ trans("Ceres::Template.accForgotPassword") }}</a>#}
-                    {#</div>#}
-                {#</div>#}
-
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-sm-4">
+                    <div>
+                        <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.accForgotPassword") }}?</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-8 text-sm-right">
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
-                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary pull-xs-right">{{ trans("Ceres::Template.accLogin") }}</button>
+                    <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary send-login-btn">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> {{ trans("Ceres::Template.accLogin") }}
+                    </button>
                 </div>
             </div>
         </form>
+
+        <form id="reset-pwd-form-${_uid}" class="reset-pwd-container m-b-1">
+            <div class="alert alert-info alert-dismissible pwd-forgot-info">
+                <span class="info-badge">{{ trans("Ceres::Template.accForgotPasswordInfo") }}</span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-unit" data-validate="mail">
+                        <input type="email" name="email" id="txt_email" v-model="username">
+                        <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                    </div>
+                    <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
+                </div>
+                <div class="col-xs-12 text-sm-right">
+                    {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+
+                    <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary cancel-reset-pwd-btn" data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.generalBackToLogin") }}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </button>
+
+                    <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary send-reset-pwd-btn">
+                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
+                    </button>
+                </div>
+            </div>
+        </form>
+
     </div>
 </script>

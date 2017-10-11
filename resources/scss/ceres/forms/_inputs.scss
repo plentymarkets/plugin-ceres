@@ -6,6 +6,20 @@ $border-color: $gray-lighter;
 $border-active: $gray-light;
 $border-width: 1px;
 
+.input-unit.textarea{
+    background-color: #fff;
+
+    & > textarea {
+        overflow-y: auto;
+        white-space: normal;
+    }
+
+    & > label {
+        background-color: #fff;
+        opacity: 0.9;
+    }
+}
+
 .input-unit{
     position:relative;
     
@@ -13,13 +27,13 @@ $border-width: 1px;
     margin-bottom: $grid-gutter-width/2;
     border:$border-width solid $border-color;
 	border-radius: $border-radius;
-	overflow: hidden;
+    overflow: hidden;
 
   input[type="date"]{
     max-height: 38px;
   }
 
-    input[type],
+    input[type], textarea,
 	input:not([type="checkbox"]),
 	input:not([type="radio"]),
 	.input-unit-preview{

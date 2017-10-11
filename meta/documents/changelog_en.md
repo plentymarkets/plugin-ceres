@@ -1,5 +1,159 @@
 # Release Notes for Ceres
 
+## v1.5.x (TBA)
+
+### Added
+
+- The **Container for customer feedback** container has been added.
+
+## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- It is now possible to return items of an order in the **My account** area. For further information about returns, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#430" target="_blank"><b>Activating returns</b></a>.
+
+### Fixed
+
+- Due to an error the shipping date on the order confirmation page was incorrect. This has been fixed.
+- Due to an error the order overview could not be loaded when an order with an old payment method was saved. This has been fixed.
+- Due to a randomly occurring error the checkout could not be opened when ordering as a guest. This has been fixed.
+- Due to an error the image gallery in the single item view wasn't displayed correctly when switching the variation of the item. This has been fixed.
+
+## v1.4.7 (2017-09-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.6...1.4.7" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The `afterBasketItemRemoved` event has been added. This event will be triggered after removing an item from the shopping cart.
+- The `afterBasketItemQuantityUpdated` event has been added. This event will be triggered after updating the quantity of items in the shopping cart.
+- The `afterShippingCountryChanged` event has been added. This event will be triggered after changing the shipping country in the checkout.
+
+### Fixed
+
+- Due to an error the unit price wasn’t displayed correctly. This has been fixed.
+
+## v1.4.6 (2017-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.5...1.4.6" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Attributes (e.g. size) are now displayed in the shopping cart.
+- Order notes can now be entered in the checkout.
+- The description of a category can now be displayed in the category view. Activate the setting <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank"><b>Show category description in category view</b></a>.
+- The search by variation number has been implemented.
+
+## v1.4.5 (2017-09-06)
+
+### Fixed
+
+- Due to an error, the variation selection in the single item view didn't work properly. This has been fixed.
+- Due to an error, item data wasn't displayed in the mobile navigation. This has been fixed.
+- Due to an error, the number of items wasn't displayed correctly in the shopping cart preview. This has been fixed.
+
+## v1.4.4 (2017-08-30)
+
+### Added
+
+- A feature was implemented so that customers can reset the password in the online store.
+- When switching categories the `afterCategoryChanged` event is triggered in Ceres which sends the current category as well as all categories.
+- The container `Script.AfterScriptsLoaded` container has been added. Using this container own Vue components can be added, for example and all other frameworks implemented in Ceres can be used.
+- When the customer chooses to change the payment method, the current payment method is displayed.
+- The customer gets a warning when he wants to switch to a payment method from which he cannot switch back anymore.
+
+### Fixed
+
+- The sorting option by price now works correctly.
+- The variation selection dropdown in the single item view now also displays the attributes of the main variation.
+
+### TODO
+
+- The `password-reset` route must be activated in IO in order to use the **Forgot your password?** feature in Ceres.
+
+## v1.4.3 (2017-08-25)
+
+### Fixed
+
+- The title of the search page is now correct when an empty search input is carried out.
+- Item list now gives out the picture with the lowest priority.
+- Fixed an error in MyAccount with the address select.
+- The Script.Loader container was set to his previous position.
+
+### Changed
+
+- Item names in the wish list are shortened after four lines.
+
+## 1.4.2 (2017-08-23)
+
+### Added
+
+- Google maps added to contact form.
+- Google maps available in mobile view.
+- If the browser has a forward link when registering, it will be opened after successful registration. If not, the user is redirected to the start page.
+- If the user registers via pop-up, the page will be reloaded after successful registration.
+- A "Send me a copy" checkbox was added to the contact form to enable the customer to receive a copy of their message.
+- The ScriptLoader container has been moved to a position where all frameworks used by us are implemented.
+
+### Fixed
+
+- Sorting by newest and oldest items now works correctly.
+- MyAccount login does not offer login as guest anymore.
+- Fixed wrong header and breadcrumbs in the category view on medium-sized mobile devices.
+- Untranslated categories are ignored in the mobile navigation and do not cause JavaScript errors any more.
+- Untranslated categories are not displayed in the side navigation.
+- When opening an item page, the current category is displayed correctly.
+- Fixed error with missing title HTML tag.
+- Item names in the basket are displayed in the right size.
+- Fixed Javascript errors in older browsers.
+
+## v1.4.1 (2017-08-11)
+
+### Added
+- A header was added to the search page.
+- An updated password validation was added to the registration.
+
+### Fixed
+- No error messages when changing categories if the category image is not displayed.
+- Corrected header size of categories when category image is displayed.
+- Image size in wish list is scaled correctly.
+- The wish list icon was placed next to the basket in the header; the position of the items in the wish list was changed is now left of the icon.
+- Modified the item counter in the basket.
+
+## Changed
+
+- The Tab **Registration** has been removed from the Config.
+- RegEx for email and password is now predetermined by Ceres.
+
+## v1.4.0 (2017-08-09)
+
+### Added
+
+- The shopping cart information to be displayed in the header can now be specified. It is possible to display the value of items, the quantity of items or the value and quantity of items in the header. For further information, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#80" target="_blank">manual</a>.
+- A custom favicon can be uploaded for the online store. For further information about uploading a favicon, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#350" target="_blank">manual</a>.
+- Every page now has a dynamically generated page title.
+- The stock of items is now taken into consideration in the online store.
+- The setting **Invisible: in item list** in the **Settings** tab of a variation is now taken into consideration in the online store.
+- Variations without stock can now be activated for the variation drop-down menu. For further information, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">manual</a>.
+- A wish list has been added. **Note:** In order to display the wish list in the online store, the route `/wish-list` must be activated in the **Routing** tab in the configuration of **IO**.
+- A contact page and the contact form has been added. **Note:** In order to display the contact page in the online store, the route `/contact` must be activated in the **Routing** tab in the configuration of **IO**. For further information about setting up the contact page, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#370" target="_blank">manual</a>.
+- Error messages sent by the server are now displayed correctly in the front-end.
+- The link in the order confirmation email now forwards to the order confirmation page of Ceres.
+- A category image can now be displayed in the category view. For further information, refer to the <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#100" target="_blank">manual</a>.
+
+## Changed
+
+- The size of headlines on all pages of the online store has been increased.
+- The headlines of item lists have been changed from `h1` to a `p` element.
+- The mobile navigation has been refactored and displays up to 6 sub-categories.
+
+### Fixed
+
+- Image positions are now also taken into consideration in item lists.
+- The language selection in the header of the online store displays languages again.
+- Categories of the **Item** type have been displayed in the online store even if no item was linked with this category. This has been fixed.
+- If the quantity of an item added to the shopping cart exceeded the stock of the item, a `Bad Params` error message was shown. His has been fixed.
+
+### Removed
+
+- The `Mobile-Breadcrumbs` component has been removed, because the new mobile navigation contains its own breadcrumbs.
+
 ## v1.3.2 (2017-07-26)
 
 ### Added
@@ -15,17 +169,12 @@
 - The quantity input in the single item view, the shopping cart preview and the shopping cart now takes  into account the minimum order quantity and the maximum order quantity of an item.
 - The item images on the order confirmation page are now displayed correctly.
 
-### Known issues
-
-- Categories of the **Item** type will be displayed in the online store even if no item is linked with this category.
-- If the quantity of an item added to the shopping cart exceeds the stock of the item, a `Bad Params` error message is shown.
-
 ## v1.3.1 (2017-07-24)
 
 ### Added
 
 - The custom event `onVariationChanged` has been added.
-- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our [forum](https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155).
+- Order properties of the **Text** type can now be linked with items. These order properties will be displayed in the single item view (Note: Only order properties of the type **Text** are available in the **Ceres** online store at the moment. Furthermore, organising order properties in property groups is not yet possible). For further information about setting up order properties, refer to our <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">forum</a>.
 - When creating/editing addresses, the text fields will be marked red if the server returns an error. Also, instead of a generic "Validation errors", the specific error message is shown.
 
 ### Fixed

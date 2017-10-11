@@ -1,5 +1,3 @@
-const ResourceService = require("services/ResourceService");
-
 Vue.component("payment-provider-select", {
 
     delimiters: ["${", "}"],
@@ -8,13 +6,11 @@ Vue.component("payment-provider-select", {
         "template"
     ],
 
-    data()
-    {
-        return {
-            checkout: {},
-            checkoutValidation: {paymentProvider: {}}
-        };
-    },
+    computed: Vuex.mapState({
+        methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,
+        methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
+        showError: state => state.checkout.validation.paymentProvider.showError
+    }),
 
     /**
      * Initialise the event listener
@@ -22,48 +18,23 @@ Vue.component("payment-provider-select", {
     created()
     {
         this.$options.template = this.template;
-
-        ResourceService.bind("checkout", this);
-        ResourceService.bind("checkoutValidation", this);
-
-        this.checkoutValidation.paymentProvider.validate = this.validate;
-
-        this.initDefaultPaymentProvider();
-    },
-
-    watch:
-    {
-        checkout()
-        {
-            let paymentExist = false;
-
-            for (const i in this.checkout.paymentDataList)
-            {
-                if (this.checkout.paymentDataList[i].id === this.checkout.methodOfPaymentId)
-                {
-                    paymentExist = true;
-                }
-            }
-
-            if (!paymentExist)
-            {
-                this.checkout.methodOfPaymentId = 0;
-                this.initDefaultPaymentProvider();
-            }
-        }
+        this.$store.commit("setPaymentProviderValidator", this.validate);
     },
 
     methods: {
         /**
          * Event when changing the payment provider
          */
-        onPaymentProviderChange()
+        onPaymentProviderChange(newMethodOfPayment)
         {
-            ResourceService.getResource("checkout")
-                .set(this.checkout)
-                .done(() =>
+            this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id)
+                .then(data =>
                 {
-                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.checkout.methodOfPaymentId}));
+                    document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {detail: this.methodOfPaymentId}));
+                },
+                error =>
+                {
+                    console.log("error");
                 });
 
             this.validate();
@@ -71,18 +42,7 @@ Vue.component("payment-provider-select", {
 
         validate()
         {
-            this.checkoutValidation.paymentProvider.showError = !(this.checkout.methodOfPaymentId > 0);
-        },
-
-        initDefaultPaymentProvider()
-        {
-            // todo get entry from config | select first payment provider
-            if (this.checkout.methodOfPaymentId == 0 && this.checkout.paymentDataList.length > 0)
-            {
-                this.checkout.methodOfPaymentId = this.checkout.paymentDataList[0].id;
-
-                ResourceService.getResource("checkout").set(this.checkout);
-            }
+            this.$store.commit("setPaymentProviderShowError", !(this.methodOfPaymentId > 0));
         }
     }
 });

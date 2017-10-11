@@ -1,5 +1,3 @@
-var ResourceService = require("services/ResourceService");
-
 Vue.component("accept-gtc-check", {
 
     delimiters: ["${", "}"],
@@ -11,23 +9,25 @@ Vue.component("accept-gtc-check", {
     data: function()
     {
         return {
-            isChecked: false,
-            checkoutValidation: {gtc: {}}
+            isChecked: false
         };
     },
+
+    computed: Vuex.mapState({
+        showError: state => state.checkout.validation.gtc.showError
+    }),
 
     created: function()
     {
         this.$options.template = this.template;
-        ResourceService.bind("checkoutValidation", this);
-        this.checkoutValidation.gtc.validate = this.validate;
+        this.$store.commit("setGtcValidator", this.validate);
     },
 
     methods:
     {
         validate: function()
         {
-            this.checkoutValidation.gtc.showError = !this.isChecked;
+            this.$store.commit("setGtcShowError", this.showError = !this.isChecked);
         }
     },
 
@@ -35,7 +35,7 @@ Vue.component("accept-gtc-check", {
     {
         isChecked: function()
         {
-            this.checkoutValidation.gtc.showError = false;
+            this.showError = false;
         }
     }
 });

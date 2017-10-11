@@ -3,11 +3,12 @@
 {{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
 {{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
 {{ component( "Ceres::PageDesign.Components.ShopLanguageSelect" ) }}
+{{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
+{{ component( "Ceres::WishList.Components.WishListCount" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
-
-<resource name="breadcrumbs" :data="{}"></resource>
+{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 
 <header class="top-bar">
     <div class="container-max">
@@ -20,7 +21,6 @@
                     <user-login-handler template="#vue-user-login-handler"
                             :user-data="{{ services.customer.getContact() | json_encode() }}"></user-login-handler>
                 </li>
-
                 <li class="list-inline-item dropdown control-languages">
                     <a class="" data-toggle="collapse" href="#countrySettings" aria-expanded="false"
                        aria-controls="countrySettings"
@@ -28,7 +28,6 @@
                         <i class="flag-icon flag-icon-{{ lang }}"></i>
                     </a>
                 </li>
-
                 <li class="list-inline-item control-search">
                     <a class="" data-toggle="collapse" href="#searchBox"
                        aria-expanded="{% if services.template.isSearch() %}true{% else %}false{% endif %}"
@@ -39,11 +38,20 @@
                         <span class="hidden-xs-down">{{ trans("Ceres::Template.generalSearchNoDot") }}</span>
                     </a>
                 </li>
-
+                {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
+                    <li class="list-inline-item control-wish-list">
+                        <wish-list-count :init-ids="{{ services.wishList.getItemWishList() | json_encode }}"></wish-list-count>
+                    </li>
+                {% endif %}
                 <li class="list-inline-item control-basket">
                     <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
+                        {% if config("Ceres.header.basket_values") != "sum" %}
+                            <span class="badge-right" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
+                        {% endif %}
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        <span class="badge" v-resource-bind:basket="itemSum" :filters="['currency']">0,00 €</span>
+                        {% if config("Ceres.header.basket_values") != "quantity" %}
+                            <span class="badge" v-basket-item-sum="$store.state.basket.data.itemSum">0,00 €</span>
+                        {% endif %}
                     </a>
                 </li>
             </ul>
@@ -59,35 +67,35 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :current-category-id="{{ category.id }}" template="#vue-mobile-navigation"></mobile-navigation>
+
 <div class="container-max page-header">
     <div class="row">
         <div id="searchBox" class="cmp cmp-search-box collapse {% if services.template.isSearch() %} in {% endif %}">
             <item-search template="#vue-item-search"></item-search>
         </div>
+        
+        <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
+            <div id="countrySettings" class="cmp cmp-country-settings collapse">
+                <div class="country-settings-inner row">
 
-        <div id="countrySettings" class="cmp cmp-country-settings collapse">
-            <div class="country-settings-inner row">
-
-                <div class="language-settings col-xs-12 col-sm-6">
-                    <div class="list-title">
-                        <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
-                        <hr>
+                    <div class="language-settings col-xs-12 col-sm-6">
+                        <div class="list-title">
+                            <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                            <hr>
+                        </div>
+                        <shop-language-select template="#vue-shop-language-select"/>
                     </div>
-                    <shop-language-select template="#vue-shop-language-select" country-flag-prefix="flag-icon-"/>
-                </div>
 
-                <div class="shipping-settings col-xs-12 col-sm-6">
-                    <div class="list-title">
-                        <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
-                        <hr>
+                    <div class="shipping-settings col-xs-12 col-sm-6">
+                        <div class="list-title">
+                            <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
+                            <hr>
+                        </div>
+                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
                     </div>
-                    <shipping-country-select template="#vue-shipping-country-select" country-flag-prefix="flag-icon-" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
                 </div>
             </div>
-        </div>
-        
-
-        
-
+        </shop-country-settings>
     </div>
 </div>

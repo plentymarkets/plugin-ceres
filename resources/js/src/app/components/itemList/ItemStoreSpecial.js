@@ -1,4 +1,3 @@
-var ResourceService = require("services/ResourceService");
 var accounting = require("accounting");
 
 Vue.component("item-store-special", {
@@ -17,7 +16,6 @@ Vue.component("item-store-special", {
     data()
     {
         return {
-            localization  : {},
             tagClass: "",
             label: "",
             tagClasses:
@@ -31,8 +29,6 @@ Vue.component("item-store-special", {
 
     created()
     {
-        ResourceService.bind("localization", this);
-
         this.tagClass = this.tagClasses[this.storeSpecial.id] || this.tagClasses.default;
         this.label = this.getLabel();
     },

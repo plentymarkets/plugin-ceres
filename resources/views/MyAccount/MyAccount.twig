@@ -1,25 +1,26 @@
 {% extends getPartial('page-design') %}
 
+{% block PartialHead %}
+    <title>{{ trans("Ceres::Template.accMyAccount") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
 {% block PageBody %}
 
     {{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
     {{ component( "Ceres::MyAccount.Components.AccountSettings" ) }}
-    {{ component( "Ceres::MyAccount.Components.OrderHistory" ) }}
+    {{ component( "Ceres::MyAccount.Components.History" ) }}
     {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
+    {% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
+    {% set isReturnActive = services.order.isReturnActive() %}
 
     <div class="page-content myaccount container-max m-b-3 m-t-1">
-
-        <resource
-                name="checkout"
-                route="/rest/io/checkout/"
-                :data="{{ services.checkout.getCheckout() | json_encode() }}"></resource>
         <!-- HEADER -->
         <div class="row m-b-3">
             <div class="col-sm-9">
-                <h1 class="h4">{{ trans("Ceres::Template.accMyAccount") }}</h1>
+                <h1 class="h2">{{ trans("Ceres::Template.accMyAccount") }}</h1>
                 {% if frontend.Account.getIsAccountLoggedIn %}
                     {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
                         <span class="text-muted">{{ trans("Ceres::Template.generalHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
@@ -49,7 +50,8 @@
                 <p class="text-muted small font-italic">{{ trans("Ceres::Template.generalAll") }} {{ trans("Ceres::Template.accInvoiceAddresses") }}</p>
                 <div class="shipping-addresses-select">
                     <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
-                                            :selected-address-id="{{ services.checkout.getBillingAddressId() }}"></invoice-address-select>
+                                            :selected-address-id="{{ services.checkout.getBillingAddressId() }}"
+                                            :country-name-map="{{ countryNameMap | json_encode()}}"></invoice-address-select>
                 </div>
             </div>
             <div class="col-md-6">
@@ -59,7 +61,8 @@
                 <p class="text-muted small font-italic">{{ trans("Ceres::Template.generalAll") }} {{ trans("Ceres::Template.accShippingAddresses") }}</p>
                 <div class="shipping-addresses-select">
                     <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
-                                             :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"></shipping-address-select>
+                                             :selected-address-id="{{ services.checkout.getDeliveryAddressId() }}"
+                                             :country-name-map="{{ countryNameMap | json_encode()}}"></shipping-address-select>
                 </div>
             </div>
         </div>
@@ -95,19 +98,18 @@
 
     </div>
 
-    <!-- ORDER HISTORY -->
     {% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
     {% if not (ordersPerPage matches '/^\\d+$/') %}
         {# config value is not a valid number #}
         {% set ordersPerPage = 5 %}
     {% endif %}
-    <order-history
-            template="#vue-order-history"
-            :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
-            :items-per-page="{{ ordersPerPage }}"
-            :show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
-            :show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
-    </order-history>
-    <!-- ./ORDER HISTORY -->
 
+    <!-- HISTORY -->
+    <history template="#vue-history" 
+            :orders-per-page="{{ ordersPerPage }}" 
+            :order-list="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
+            :is-return-active="{{ isReturnActive | json_encode }}">
+    </history>
+    <!-- ./HISTORY -->
+    
 {% endblock %}

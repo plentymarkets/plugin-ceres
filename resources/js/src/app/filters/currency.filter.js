@@ -1,31 +1,23 @@
-var ResourceService   = require("services/ResourceService");
-var currencySymbolMap = require("currency-symbol-map");
-var accounting        = require("accounting");
+const currencySymbolMap = require("currency-symbol-map");
+const accounting = require("accounting");
 
 Vue.filter("currency", function(price, customCurrency)
 {
-    var basket = ResourceService.getResource("basket").val();
-
-    var currency = customCurrency || basket.currency;
-
-    if (currency)
-    {
-        var currencySymbol = currencySymbolMap.getSymbolFromCurrency(currency);
-
-        if (currencySymbol)
-        {
-            currency = currencySymbol;
-        }
-    }
+    const currency = customCurrency || window.ceresStore.state.basket.data.currency;
 
     // (%v = value, %s = symbol)
-    var options = {
-        symbol   : currency,
+    const options = {
+        symbol   : "",
         decimal  : ",",
         thousand : ".",
         precision: 2,
         format   : "%v %s"
     };
+
+    if (currency)
+    {
+        options.symbol = currencySymbolMap.getSymbolFromCurrency(currency) || currency;
+    }
 
     return accounting.formatMoney(price, options);
 });

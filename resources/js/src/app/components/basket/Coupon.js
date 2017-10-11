@@ -1,6 +1,4 @@
-var ApiService = require("services/ApiService");
-var ResourceService = require("services/ResourceService");
-var NotificationService = require("services/NotificationService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
@@ -10,86 +8,81 @@ Vue.component("coupon", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
-            couponCode: "",
-            basket: {},
-            waiting: false
+            waiting: false,
+            couponCode: ""
         };
     },
 
-    created: function()
+    computed:
     {
-        this.$options.template = this.template;
-        ResourceService.bind("basket", this);
+        disabled()
+        {
+            if (this.redeemedCouponCode)
+            {
+                return true;
+            }
+
+            return false;
+        },
+
+        ...Vuex.mapState({
+            redeemedCouponCode: state => state.basket.data.couponCode
+        })
     },
 
-    mounted: function()
+    created()
+    {
+        this.$options.template = this.template;
+    },
+
+    mounted()
     {
         this.$nextTick(() =>
         {
-            if (this.disabled)
+            if (this.redeemedCouponCode)
             {
-                this.couponCode = this.basket.couponCode;
+                this.couponCode = this.redeemedCouponCode;
             }
         });
     },
 
     methods:
     {
-        redeemCode: function()
+        redeemCode()
         {
             this.waiting = true;
-            var self = this;
 
-            ApiService.post("/rest/io/coupon", {couponCode: this.couponCode})
-                .always(function()
+            this.$store.dispatch("redeemCouponCode", this.couponCode).then(
+                response =>
                 {
-                    self.waiting = false;
-                })
-                .done(function(response)
-                {
+                    this.waiting = false;
                     NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-                })
-                .fail(function(response)
+                },
+                error =>
                 {
+                    this.waiting = false;
                     NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
                 });
         },
 
-        removeCode: function()
+        removeCode()
         {
             this.waiting = true;
-            var self = this;
 
-            ApiService.delete("/rest/io/coupon/" + this.basket.couponCode)
-                .always(function()
+            this.$store.dispatch("removeCouponCode", this.couponCode).then(
+                response =>
                 {
-                    self.waiting = false;
-                })
-                .done(function(response)
-                {
-                    self.couponCode = "";
+                    this.waiting = false;
                     NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
-                })
-                .fail(function(response)
+                },
+                error =>
                 {
+                    this.waiting = false;
                     NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
-        }
-    },
-
-    computed:
-    {
-        disabled: function()
-        {
-            if (this.basket.couponCode)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 });

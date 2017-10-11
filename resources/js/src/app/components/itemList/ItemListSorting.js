@@ -1,5 +1,3 @@
-const ItemListService = require("services/ItemListService");
-
 import UrlService from "services/UrlService";
 
 Vue.component("item-list-sorting", {
@@ -20,10 +18,10 @@ Vue.component("item-list-sorting", {
                 "default.recommended_sorting"               : "itemRecommendedSorting",
                 "texts.name1_asc"                           : "itemName_asc",
                 "texts.name1_desc"                          : "itemName_desc",
-                "item.salesPrices.price_asc"                : "itemPrice_asc",
-                "item.salesPrices.price_desc"               : "itemPrice_desc",
-                "variation.createdAt_asc"                   : "variationCreateTimestamp_asc",
+                "sorting.price.min_asc"                     : "itemPrice_asc",
+                "sorting.price.max_desc"                    : "itemPrice_desc",
                 "variation.createdAt_desc"                  : "variationCreateTimestamp_desc",
+                "variation.createdAt_asc"                   : "variationCreateTimestamp_asc",
                 "variation.availability.averageDays_asc"    : "availabilityAverageDays_asc",
                 "variation.availability.averageDays_desc"   : "availabilityAverageDays_desc",
                 "variation.number_asc"                      : "variationCustomNumber_asc",
@@ -74,12 +72,12 @@ Vue.component("item-list-sorting", {
             const defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
 
             this.selectedSorting = this.sortData.find(entry => entry.value === defaultSortKey);
+            this.$store.commit("setItemListSorting", this.selectedSorting.value);
         },
 
         updateSorting()
         {
-            ItemListService.setOrderBy(this.selectedSorting.value);
-            ItemListService.getItemList();
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting.value);
         },
 
         setSelectedValueByUrl()
@@ -93,7 +91,7 @@ Vue.component("item-list-sorting", {
                     if (this.sortData[i].value === urlParams.sorting)
                     {
                         this.selectedSorting = this.sortData[i];
-                        ItemListService.setOrderBy(this.selectedSorting.value);
+                        this.$store.commit("setItemListSorting", this.selectedSorting.value);
                     }
                 }
             }

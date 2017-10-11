@@ -40,6 +40,10 @@
 			.fa{
 				font-size: 1.2rem;
 			}
+
+			.basket-seperator{
+				margin: 0 2px;
+			}
 		}
 
 		.control-user{
@@ -68,6 +72,25 @@
 			.account-menu {
 				padding:0;
 				margin:0;
+			}
+		}
+
+		.control-wish-list {
+			a {
+				.badge-right{
+					margin-right: .5rem; 
+				}
+				i{
+					&.fa-heart-o{
+						font-size: .9rem;
+					}
+
+					&.fa-heart{
+						margin-right: .2rem;
+						font-size: .8rem;
+						color: rgba(255, 0, 0, 0.67);
+					}
+				}
 			}
 		}
 
@@ -106,6 +129,10 @@
 
 				.badge{
 					margin-left: .5rem;
+				}
+
+				.badge-right{
+					margin-right: .5rem; 
 				}
 
 				&:hover{

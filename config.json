@@ -12,6 +12,65 @@
         "type"      : "checkbox",
         "default"   : "false"
     },
+
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.shop_mail",
+        "label"                       : "Contact form email address",
+        "type"                        : "text",
+        "default"                     : "your@email.com"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.opening_times",
+        "label"                       : "Opening hours",
+        "type"                        : "text",
+        "default"                     : "Monday - Friday, 00:00 - 24:00"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.show_data",
+        "label"                       : "Show contact data",
+        "type"                        : "multi_select",
+        "possibleValues"              :
+        {
+            "name"                      : "Company",
+            "ceo"                       : "CEO",
+            "city"                      : "City",
+            "country"                   : "Country",
+            "email"                     : "Email",
+            "fax"                       : "Fax",
+            "fon"                       : "Phone",
+            "hotline"                   : "Hotline",
+            "street"                    : "Street",
+            "vatNumber"                 : "VAT number",
+            "zip"                       : "ZIP",
+            "timezone"                  : "Time zone",
+            "opening_times"             : "Opening hours"
+        },
+        "default"                     : "street, zip, city, hotline, email, opening_times"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.api_key",
+        "label"                       : "Google Maps API key",
+        "type"                        : "text",
+        "default"                     : "API key"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.map_zoom",
+        "label"                       : "Zoom level",
+        "type"                        : "text",
+        "default"                     : "16"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.map_show_in_mobile",
+        "label"                       : "Show map in mobile view",
+        "type"                        : "checkbox",
+        "default"                     : "false"
+    },
     {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
@@ -81,8 +140,6 @@
         "label"     : "URL to the image of the lower item preview",
         "type"      : "text"
     },
-
-
     {
         "tab"       : "Homepage",
         "key"       : "homepage.homepageCategory1",
@@ -119,8 +176,6 @@
         "label"     : "Category to display in the second list of items",
         "type"      : "category_select"
     },
-
-
     {
         "tab"       : "Header",
         "key"       : "header.company_logo",
@@ -154,6 +209,19 @@
         "label"     : "Fix the navigation bar at the top of the page",
         "type"      : "checkbox",
         "default"   : "true"
+    },
+    {
+        "tab"       : "Header",
+        "key"       : "header.basket_values",
+        "label"     : "Show shopping cart information",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+            "sum"         : "Value of items",
+            "quantity"    : "Quantity of items",
+            "both"        : "Value and quantity of items"
+        },
+        "default"   : "sum"
     },
     {
         "tab"           : "Footer",
@@ -311,6 +379,13 @@
         "default"       : "0"
     },
     {
+        "tab"           : "Item view",
+        "key"           : "item.show_variation_over_dropdown",
+        "label"         : "Enable selection of variations without stock in variation dropdown",
+        "type"          : "checkbox",
+        "default"       : "false"
+    },
+    {
         "tab"                           : "Item view",
         "key"                           : "item.variation_show_type",
         "label"                         : "Show variations by type",
@@ -356,6 +431,20 @@
             "spinner"       : "Spinner"
         },
         "default"           : "blur"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.show_category_image",
+        "label"             : "Show category image in category view",
+        "type"              : "checkbox",
+        "default"           : "true"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.show_category_description",
+        "label"             : "Show category description in category view",
+        "type"              : "checkbox",
+        "default"           : "true"
     },
     {
         "tab"               : "Item lists",
@@ -620,10 +709,10 @@
             "default.recommended_sorting"               : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
-            "item.salesPrices.price_asc"                : "Price ⬆",
-            "item.salesPrices.price_desc"               : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.availability.averageDays_asc"    : "Availability ⬆",
             "variation.availability.averageDays_desc"   : "Availability ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -633,7 +722,7 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A"
         },
-        "default"                   : "texts.name1_asc, texts.name1_desc, item.salesPrices.price_asc, item.salesPrices.price_desc"
+        "default"                   : "texts.name1_asc, texts.name1_desc, sorting.price.min_asc, sorting.price.max_desc"
     },
     {
         "tab"                       : "Pagination and sorting",
@@ -645,10 +734,10 @@
             "default.recommended_sorting"               : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
-            "item.salesPrices.price_asc"                : "Price ⬆",
-            "item.salesPrices.price_desc"               : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.availability.averageDays_asc"    : "Availability ⬆",
             "variation.availability.averageDays_desc"   : "Availability ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -673,10 +762,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -708,10 +797,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -743,10 +832,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -775,10 +864,10 @@
             "default.recommended_sorting"               : "Recommended",
             "texts.name1_asc"                           : "Item name A-Z",
             "texts.name1_desc"                          : "Item name Z-A",
-            "item.salesPrices.price_asc"                : "Price ⬆",
-            "item.salesPrices.price_desc"               : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.availability.averageDays_asc"    : "Availability ⬆",
             "variation.availability.averageDays_desc"   : "Availability ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -804,10 +893,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -840,10 +929,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -876,10 +965,10 @@
             "texts.name_desc"                           : "Item name Z-A",
             "item.position_asc"                         : "Item position ⬆",
             "item.position_desc"                        : "Item position ⬇",
-            "item.salesPrice.price_asc"                 : "Price ⬆",
-            "item.salesPrice.price_desc"                : "Price ⬇",
-            "variation.createdAt_asc"                   : "Newest variation",
-            "variation.createdAt_desc"                  : "Oldest variation",
+            "sorting.price.min_asc"                     : "Price ⬆",
+            "sorting.price.max_desc"                    : "Price ⬇",
+            "variation.createdAt_desc"                  : "Newest variation",
+            "variation.createdAt_asc"                   : "Oldest variation",
             "variation.id_asc"                          : "Variation ID ⬆",
             "variation.id_desc"                         : "Variation ID ⬇",
             "variation.number_asc"                      : "Variation number ⬆",
@@ -906,10 +995,31 @@
     },
     {
         "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_days",
+        "label"             : "Number of days to return items of an order",
+        "type"              : "text",
+        "default"           : "14"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_initial_status",
+        "label"             : "Default status for return",
+        "type"              : "text",
+        "default"           : "9"
+    },
+    {
+        "tab"               : "Checkout and My account",
         "key"               : "my_account.change_payment",
         "label"             : "Allow customer to change the payment method",
         "type"              : "checkbox",
         "default"           : "true"
+    },
+    {
+        "tab"               : "Checkout and My account",
+        "key"               : "my_account.confirmation_link_login_redirect",
+        "label"             : "Forward to login page after clicking link in order confirmation",
+        "type"              : "checkbox",
+        "default"           : "false"
     },
     {
         "tab"                       : "Checkout and My account",
@@ -1070,20 +1180,6 @@
 
       },
       "default"                   : ""
-    },
-    {
-        "tab"               : "Registration",
-        "key"               : "register.email_regex",
-        "label"             : "The RegEx used for the email",
-        "type"              : "text",
-        "default"           : "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"
-    },
-    {
-        "tab"               : "Registration",
-        "key"               : "register.password_regex",
-        "label"             : "The RegEx used for the password",
-        "type"              : "text",
-        "default"           : "^(?!\\s*$).+"
     },
     {
         "tab"               : "Logging and performance",

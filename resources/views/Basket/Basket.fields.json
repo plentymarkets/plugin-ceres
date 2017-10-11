@@ -19,5 +19,12 @@
   "images.variation.position",
   "images.variation.urlPreview",
   "images.variation.path",
-  "properties.*"
+  "properties.*",
+  "filter.isSalable",
+  "attributes.attribute.names.*",
+  "attributes.value.names.*",
+  "unit.content",
+  "unit.names.name",
+  "unit.names.lang",
+  "unit.unitOfMeasurement"
 ]

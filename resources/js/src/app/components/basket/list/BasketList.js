@@ -1,49 +1,18 @@
-var ResourceService       = require("services/ResourceService");
-
 Vue.component("basket-list", {
 
     delimiters: ["${", "}"],
 
     props: [
         "size",
-        "template",
-        "triggerEvent"
+        "template"
     ],
 
-    data: function()
-    {
-        return {
-            basketItems: []
-        };
-    },
+    computed: Vuex.mapState({
+        basketItems: state => state.basket.items
+    }),
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
-    },
-
-    /**
-     * Bind to basket and show the items in a small or large list
-     */
-    mounted: function()
-    {
-        this.$nextTick(() =>
-        {
-            ResourceService.bind("basketItems", this);
-
-            if (this.triggerEvent)
-            {
-                ResourceService.watch("basket", function(newValue, oldValue)
-                {
-                    if (oldValue)
-                    {
-                        if (JSON.stringify(newValue) != JSON.stringify(oldValue))
-                        {
-                            document.dispatchEvent(new CustomEvent("afterBasketChanged", {detail: newValue}));
-                        }
-                    }
-                });
-            }
-        });
     }
 });

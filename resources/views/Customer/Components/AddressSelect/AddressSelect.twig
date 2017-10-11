@@ -6,30 +6,31 @@
 
                 <div
                         id="addressMultiSelect${ _uid }"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty(), 'items items-empty': isAddressListEmpty()}"
+                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                 >
 
                     <div class="item-inner">
-                    <span v-if="selectedAddress.id == -99">
+                    <span v-if="selectedAddress && selectedAddress.id == -99">
                         <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
                             -</p>
                     </span>
                         <span v-else class="item-content">
-                        <div v-if="!isAddressListEmpty()">
+                        <div v-if="!isAddressListEmpty && selectedAddress">
                             <strong v-if="selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
                             <strong v-if="!this.selectedAddress.name1 || this.selectedAddress.name1.length == 0">${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
                             <span v-else>${selectedAddress | optionType 11} ${selectedAddress.name2} ${selectedAddress.name3}</span>
                             <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
                             <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
+                            <span>${getCountryName(selectedAddress.countryId)}</span>
                         </div>
 
-                        <p v-if="!isAddressListEmpty() && !selectedAddressId"
+                        <p v-if="!isAddressListEmpty && !selectedAddress"
                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
                             -</p>
-                        <p v-if="isAddressListEmpty()"
+                        <p v-if="isAddressListEmpty"
                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
                             -</p>
                     </span>
@@ -44,7 +45,7 @@
                     </a>
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty()">
+                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty">
                     <ul>
                         <li class="item" v-for="(index, address) in addressList">
                             <input
@@ -52,8 +53,7 @@
                                     name="shippingAddress${ _uid }"
                                     id="addressSelectItem${ _uid }${ address.id }"
                                     value="${address.id}"
-                                    v-model="selectedAddressId"
-                                    @change="onAddressChanged(index)"
+                                    @change="onAddressChanged(address)"
                             >
                             <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
                             <span v-if="address.id == -99">
@@ -67,6 +67,7 @@
                                 <span>${address.name4}</span>
                                 <span>${address.address1} ${address.address2}</span>
                                 <span>${address.postalCode} ${address.town}</span>
+                                <span>${getCountryName(address.countryId)}</span>
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
@@ -101,10 +102,8 @@
                             <fieldset>
                                 <create-update-address
                                         template="#vue-create-update-address"
-                                        v-on:new-address-created="onAddressCreated"
                                         :address-data="addressToEdit"
                                         :address-modal="addressModal"
-                                        :address-list="addressList"
                                         :modal-type="modalType"
                                         :address-type="addressType">
                                 </create-update-address>

@@ -1,6 +1,3 @@
-var ResourceService = require("services/ResourceService");
-var ItemListService = require("services/ItemListService");
-
 Vue.component("item-filter", {
 
     delimiters: ["${", "}"],
@@ -10,35 +7,29 @@ Vue.component("item-filter", {
         "facet"
     ],
 
-    data: function()
+    computed:
     {
-        return {
-            facetParams: [],
-            isLoading: false
-        };
+        ...Vuex.mapState({
+            selectedFacets: state => state.itemList.selectedFacets,
+            isLoading: state => state.itemList.isLoading
+        })
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template || "#vue-item-filter";
-        ResourceService.bind("facetParams", this);
-    },
-
-    mounted: function()
-    {
-        this.$nextTick(() =>
-        {
-            ResourceService.bind("isLoading", this);
-        });
     },
 
     methods:
     {
-        updateFacet: function()
+        updateFacet(facetValue)
         {
-            ResourceService.getResource("facetParams").set(this.facetParams);
-            ItemListService.setFacets(this.facetParams);
-            ItemListService.getItemList();
+            this.$store.dispatch("selectFacet", facetValue);
+        },
+
+        isSelected(facetValueId)
+        {
+            return this.selectedFacets.findIndex(selectedFacet => selectedFacet.id === facetValueId) > -1;
         }
     }
 });

@@ -2,11 +2,13 @@
   "images.all.url",
   "images.all.urlMiddle",
   "images.all.urlPreview",
+  "images.all.position",
   "images.all.path",
   "images.variation.urlMiddle",
   "images.variation.urlPreview",
+  "images.variation.position",
   "images.variation.path",
-  "item.storeSpecial",
+  "item.storeSpecial", 
   "properties.group.backendName",
   "properties.property.names.name",
   "salesPrices.price",
@@ -20,5 +22,6 @@
   "variation.itemId",
   "variation.releasedAt",
   "variation.minimumOrderQuantity",
-  "variation.maximumOrderQuantity"
+  "variation.maximumOrderQuantity",
+  "filter.isSalable"
 ]

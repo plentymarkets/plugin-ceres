@@ -14,6 +14,10 @@
   "properties.property.names.lang",
   "salesPrices.price",
   "salesPrices.type",
+  "unit.content",
+  "unit.names.name",
+  "unit.names.lang",
+  "unit.unitOfMeasurement",
   "item.id",
   "item.manufacturer.position",
   "item.manufacturer.externalName",
@@ -26,5 +30,6 @@
   "variation.minimumOrderQuantity",
   "variation.maximumOrderQuantity",
   "variation.releasedAt",
-  "filter.hasChildren"
+  "filter.hasChildren",
+  "filter.isSalable"
 ]

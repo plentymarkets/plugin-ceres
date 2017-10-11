@@ -64,18 +64,36 @@
                     <div>
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentMethod") }}</strong>
-                            <span class="col-xs-6 col-sm-7">{{ orderData.paymentMethodName }}</span>
+                            <span class="col-xs-6 col-sm-7" id="payment_name_{{ orderData.order.id }}">{{ orderData.paymentMethodName }}</span>
                         </div>
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderPaymentStatus") }}</strong>
-
+                            {% set paymentMethodId = -1 %}
                             {% for propertyKey in orderData.order.properties %}
                                 {% if orderData.order.properties[loop.index0].typeId == 4 %}
-                                    <span class="col-xs-6 col-sm-7">{{ trans("Ceres::Template.paymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
+                                    {% set paymentStatus = entry.order.properties[loop.index0].value %}
+                                    <span class="col-xs-6 col-sm-7" id="payment_state_{{ orderData.order.id }}">{{ trans("Ceres::Template.paymentStatus_" ~ orderData.order.properties[loop.index0].value) }}</span>
+                                {% elseif orderData.order.properties[loop.index0].typeId == 3 %}
+                                    {% set paymentMethodId = orderData.order.properties[loop.index0].value %}
                                 {% endif %}
                             {% endfor %}
-
                         </div>
+
+                        {% set currentTemplate = services.template.getCurrentTemplate() %}
+
+                        {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
+
+                        {% if loggedIn %}
+                            {% if paymentMethoId != -1 and showAdditionalPaymentInformation == true %}
+                                <change-payment-method  template="#vue-change-payment-method"
+                                                        :current-order="{{ orderData.order | json_encode() }}"
+                                                        :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
+                                                        :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
+                                                        :payment-status="{{ paymentStatus | json_encode() }}"
+                                                        :current-template="{{ currentTemplate | json_encode() }}">
+                                </change-payment-method>
+                            {% endif %}
+                        {% endif %}
 
                         {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalPaymentInformation", orderData.order) }}
 
@@ -91,9 +109,10 @@
 
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderEstimatedShippingDate") }}</strong>
+                            {% set shippingDate = "" %}
                             {% for date in orderData.order.dates %}
                                 {% if date.typeId == 8 %}
-                                    {% set shippingDate = date %}
+                                    {% set shippingDate = date.date %}
                                 {% endif %}
                             {% endfor %}
                             <span class="col-xs-6 col-sm-7">{{ shippingDate | date( trans("Ceres::Template.dateFormat") ) }}</span>
@@ -215,23 +234,29 @@
                                 {% endif %}
 
                                 {% if "basket.vat" in totalsConfigData %}
-                                <dt>
-                                    {{ trans("Ceres::Template.basketVAT") }}
-                                </dt><!--
-                                 --><dd>
-                                {{ BasketTotals.getVat( orderData ) | formatMonetary( basketTotalsCurrency ) }}
-                            </dd>
+                                    <div class="vatTotals">
+                                        {% for vat in orderData.order.amounts[0].vats %}
+                                            <dt>
+                                                {{ trans("Ceres::Template.basketVAT") }} {{ vat.vatRate }}%
+                                            </dt>
+                                            <dd>
+                                                {{ vat.value | formatMonetary( basketTotalsCurrency ) }}
+                                            </dd>
+                                        {% endfor %}
+                                    </div>
                                 {% endif %}
 
                                 <hr>
 
                                 {% if "basket.order_total_gross" in totalsConfigData %}
-                                <dt>
-                                    <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
-                                </dt><!--
-                                --><dd>
-                                <strong>{{ BasketTotals.getTotalAmountGross( orderData ) | formatMonetary( basketTotalsCurrency ) }}</strong>
-                            </dd>
+                                    <div class="totalSum">
+                                        <dt>
+                                            <strong>{{ trans("Ceres::Template.basketTotalSum") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
+                                        </dt>
+                                        <dd>
+                                            <strong>{{ BasketTotals.getTotalAmountGross( orderData ) | formatMonetary( basketTotalsCurrency ) }}</strong>
+                                        </dd>
+                                    </div>
                                 {% endif %}
 
                             {% endif %}

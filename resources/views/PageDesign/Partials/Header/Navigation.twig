@@ -3,18 +3,11 @@
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = config("Ceres.header.company_name") %}
 
-{{ component( "Ceres::PageDesign.Components.MobileBreadcrumbs" ) }}
-
 <nav class="navbar">
       <div class="container-max">
         <div class="row">
              <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
                  <a class="navbar-brand pull-lg-left" href="/">
-                     {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
-                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
-                     {% else %}
-                        <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
-                     {% endif %}
                  </a>
 
                  <button id="btnMainMenuToggler" class="navbar-toggler hidden-lg-up" type="button">
@@ -25,11 +18,9 @@
             <div id="mainNavbarCollapsable">
                 <ul class="breadcrumb">
                     <li class="btnClose"></li>
-
-                    <mobile-breadcrumbs template="#vue-mobile-breadcrumbs"></mobile-breadcrumbs>
                 </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
-                    {{ includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
+                    {{ include('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
                 {% endif %}
             </div>
 
