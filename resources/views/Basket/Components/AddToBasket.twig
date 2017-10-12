@@ -30,7 +30,7 @@
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
                     <button v-else href="#" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" 
-                            data-placement="top" title="{{ trans("Ceres::Template.orderQuantityMax") }}: ${ item.variation.maximumOrderQuantity }">
+                            data-placement="top" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}:' + item.variation.maximumOrderQuantity">
                         {{ trans("Ceres::Template.addToBasket") }}
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>

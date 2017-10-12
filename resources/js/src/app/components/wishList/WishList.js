@@ -25,8 +25,6 @@ Vue.component("wish-list", {
     {
         this.$options.template = this.template;
 
-        this.$store.commit("setWishListIds", [1007,1005,1006]);
-
         this.isLoading = true;
         this.initWishListItems(this.wishListIds).then(
             response =>
