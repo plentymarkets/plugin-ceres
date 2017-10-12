@@ -15086,19 +15086,19 @@ Vue.component("mobile-navigation", {
 
     directives: {
         menu: {
-            bind: function bind() {
+            bind: function bind(el) {
                 // add "activated" classes when menu is activated
-                $(this.el).on("menu-activated", function (event, params) {
+                $(el).on("menu-activated", function (event, params) {
                     $(event.target).addClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-inFromLeft" : "animate-inFromRight");
                 });
                 // add "deactivated" classes when menu is deactivated
-                $(this.el).on("menu-deactivated", function (event, params) {
+                $(el).on("menu-deactivated", function (event, params) {
                     $(event.target).removeClass("menu-active");
                     $(event.target).addClass(params.back ? "animate-outToRight" : "animate-outToLeft");
                 });
                 // this removes the animation class automatically after the animation has completed
-                $(this.el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
+                $(el).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
                     $(".mainmenu").removeClass(function (index, className) {
                         return (className.match(/(^|\s)animate-\S+/g) || []).join(" ");
                     });
@@ -15334,8 +15334,6 @@ Vue.component("wish-list", {
         var _this = this;
 
         this.$options.template = this.template;
-
-        this.$store.commit("setWishListIds", [1007, 1005, 1006]);
 
         this.isLoading = true;
         this.initWishListItems(this.wishListIds).then(function (response) {

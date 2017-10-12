@@ -11133,13 +11133,6 @@ Vue.component("basket-list", {
 
     props: ["size", "template"],
 
-    data: function data() {
-        return {
-            basketItems: []
-        };
-    },
-
-
     computed: Vuex.mapState({
         basketItems: function basketItems(state) {
             return state.basket.items;
@@ -15640,6 +15633,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var NotificationService = require("services/NotificationService");
 
 Vue.component("wish-list", {
+
+    delimiters: ["${", "}"],
 
     props: ["template"],
 
