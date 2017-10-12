@@ -40,7 +40,7 @@
 
     <!-- ITEM DETAILS -->
     <div class="item-details small">
-        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.id }" value="">
+        <input type="checkbox" class="toggle-description" :id="'itemid-' + basketItem.id" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <p class="item-name">
                 ${ basketItem.variation.data.texts | itemName {{configItemName}} }
@@ -95,7 +95,7 @@
             {% endif %}
         </div>
         {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
-            <label class="expand-btn" for="itemid-${ basketItem.id }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+            <label class="expand-btn" :for="'itemid-' + basketItem.id" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
         {% endif %}
     </div>
     <!-- ./ITEM DETAILS -->

@@ -83,7 +83,7 @@
 
                     <slot name="AfterPrice"></slot>
 
-                    <span class="availability tag availability_${ currentVariation.variation.availability.id }">
+                    <span :class="'availability tag availability_' + currentVariation.variation.availability.id">
                         <span>
                             ${ currentVariation.variation.availability.names.name }
                         </span>
@@ -126,7 +126,7 @@
 
                         {% if 'item.technical_data' in itemData or 'all' in itemData %}
                             <li class="nav-item" v-if="currentVariation.texts.technicalData !== ''">
-                                <a class="nav-link" data-toggle="tab" href="#data-${ currentVariation.variation.id }"
+                                <a class="nav-link" data-toggle="tab" :href="'#data-' + currentVariation.variation.id"
                                 role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
                             </li>
                         {% endif %}
@@ -140,12 +140,12 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" id="details-${ currentVariation.variation.id }" role="tabpanel">
+                        <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel">
                             <div class="m-y-2">
                                 {!! currentVariation.texts.description !!}
                             </div>
                         </div>
-                        <div class="tab-pane" id="data-${ currentVariation.variation.id }" role="tabpanel">
+                        <div class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel">
                             <div class="m-y-2">
                                 {!! currentVariation.texts.technicalData !!}
                             </div>

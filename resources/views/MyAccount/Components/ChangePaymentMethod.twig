@@ -60,19 +60,19 @@
                             <div class="method-list-item current-payment-text">
                                 <div class="content alert-info current-payment-width">
                                     {{ trans("Ceres::Template.myAccountCurrentPaymentText") }}
-                                    <span id="current_payment_method_name_${ currentOrder.id }"> ${ currentPaymentMethodName} </span>
+                                    <span :id="'current_payment_method_name_' + currentOrder.id"> ${ currentPaymentMethodName} </span>
                                 </div>
                             </div>
                                 <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" :data-id="paymentProvider.id">
 
                                     <input
                                             type="radio"
-                                            id="paymentMethod${ _uid }${ paymentProvider.id }"
-                                            name="MethodOfPaymentID_${ currentOrder.id }"
+                                            :id="'paymentMethod' + _uid + paymentProvider.id"
+                                            :name="'MethodOfPaymentID_' + currentOrder.id"
                                             v-model="paymentMethod"
                                             :value="paymentProvider.id"
                                     >
-                                    <label for="paymentMethod${ _uid }${ paymentProvider.id }">
+                                    <label :for="'paymentMethod' + _uid + paymentProvider.id">
                                         <div class="icon">
                                             <div class="square-container">
                                                 <div class="square-inner center-xy">

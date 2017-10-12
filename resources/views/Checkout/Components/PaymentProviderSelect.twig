@@ -4,13 +4,13 @@
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
                         type="radio"
-                        id="paymentMethod${ _uid }${ paymentProvider.id }"
+                        :id="'paymentMethod' + _uid + paymentProvider.id"
                         name="MethodOfPaymentID"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         v-model="methodOfPaymentId"
                 >
-                <label for="paymentMethod${ _uid }${ paymentProvider.id }">
+                <label :for="'paymentMethod' + _uid + paymentProvider.id">
                     <div class="icon">
                         <div class="square-container">
                             <div class="square-inner center-xy">
