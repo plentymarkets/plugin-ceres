@@ -15309,6 +15309,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("wish-list", {
 
+    delimiters: ["${", "}"],
+
     props: ["template"],
 
     data: function data() {
@@ -15332,6 +15334,8 @@ Vue.component("wish-list", {
         var _this = this;
 
         this.$options.template = this.template;
+
+        this.$store.commit("setWishListIds", [1007, 1005, 1006]);
 
         this.isLoading = true;
         this.initWishListItems(this.wishListIds).then(function (response) {

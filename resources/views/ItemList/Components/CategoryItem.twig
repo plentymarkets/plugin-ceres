@@ -28,8 +28,8 @@
                     <div class="square-container">
                         <div class="square-inner main-image">
                             <category-image-carousel template="#vue-category-image-carousel"
-                                                     :image-urls="itemData.images | itemImages imageUrlAccessor"
-                                                     :alt-text="texts | itemName {{ configItemName }}"
+                                                     :image-urls="itemData.images | itemImages(imageUrlAccessor)"
+                                                     :alt-text="texts | itemName({{ configItemName }})"
                                                      :item-url="itemData | itemURL"
                                                      :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                                                      :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
@@ -48,21 +48,21 @@
 
                 <!-- ITEM DETAILS -->
                 <div class="thumb-content">
-                    <a href="${ itemData | itemURL }" class="thumb-title small">
-                        ${ texts | itemName {{ configItemName }} }
+                    <a :href="itemData | itemURL" class="thumb-title small">
+                        ${ texts | itemName({{ configItemName }}) }
                     </a>
                     <div class="thumb-meta">
                         <div class="prices">
 
-                            <a href="${ itemData | itemURL }" v-if="recommendedRetailPrice > 0" class="price-view-port">
+                            <a :href="itemData | itemURL" v-if="recommendedRetailPrice > 0" class="price-view-port">
                                 <del class="crossprice">
-                                    ${ recommendedRetailPrice | currency itemData.calculatedPrices.rrp.currency }
+                                    ${ recommendedRetailPrice | currency(itemData.calculatedPrices.rrp.currency) }
                                 </del>
                             </a>
 
-                            <a href="${ itemData | itemURL }">
+                            <a href="itemData | itemURL">
                                 <div class="price">
-                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency } *
+                                    ${ variationRetailPrice | currency(itemData.calculatedPrices.default.currency) } *
                                 </div>
                             </a>
                         </div>
