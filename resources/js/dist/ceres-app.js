@@ -15376,8 +15376,8 @@ Vue.component("wish-list-count", {
 "use strict";
 
 Vue.directive("basket-item-quantity", {
-    update: function update(quantity) {
-        this.el.innerHTML = quantity;
+    update: function update(el, binding) {
+        el.innerHTML = binding.value;
     }
 });
 
@@ -15385,8 +15385,8 @@ Vue.directive("basket-item-quantity", {
 "use strict";
 
 Vue.directive("basket-item-sum", {
-    update: function update(sum) {
-        this.el.innerHTML = Vue.filter("currency").apply(Object, [sum]);
+    update: function update(el, binding) {
+        el.innerHTML = Vue.filter("currency").apply(Object, [binding.value]);
     }
 });
 
@@ -15418,19 +15418,19 @@ Vue.directive("logout", {
 "use strict";
 
 Vue.directive("is-loading-watcher", {
-    bind: function bind() {
-        this.el.isFirstRendering = true;
+    bind: function bind(el) {
+        el.isFirstRendering = true;
     },
-    update: function update(isLoading) {
-        if (!this.el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null) {
-            if (!isLoading) {
+    update: function update(el, binding) {
+        if (!el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null) {
+            if (!binding.value) {
                 $("#twig-rendered-item-list").remove();
                 document.getElementById("vue-rendered-item-list").style.removeProperty("display");
             } else {
                 $("#twig-rendered-item-list").addClass("loading");
             }
         } else {
-            this.el.isFirstRendering = false;
+            el.isFirstRendering = false;
         }
     }
 });
@@ -15442,21 +15442,20 @@ Vue.directive("update-sidenav-selection", {
     params: ["categoryId"],
 
     bind: function bind(el) {},
-
-    update: function update(breadcrumbs) {
+    update: function update(el, binding) {
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
 
         try {
-            for (var _iterator = breadcrumbs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (var _iterator = binding.value[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var breadcrumb = _step.value;
 
-                if (breadcrumb.id === parseInt(this.params.categoryId)) {
-                    this.el.classList.add("active");
+                if (breadcrumb.id === parseInt(el.dataset.categoryId)) {
+                    el.classList.add("active");
                     break;
                 } else {
-                    this.el.classList.remove("active");
+                    el.classList.remove("active");
                 }
             }
         } catch (err) {

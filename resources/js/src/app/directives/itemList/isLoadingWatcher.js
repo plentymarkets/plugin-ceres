@@ -1,15 +1,15 @@
 Vue.directive("is-loading-watcher",
     {
-        bind()
+        bind(el)
         {
-            this.el.isFirstRendering = true;
+            el.isFirstRendering = true;
         },
 
-        update(isLoading)
+        update(el, binding)
         {
-            if (!this.el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null)
+            if (!el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null)
             {
-                if (!isLoading)
+                if (!binding.value)
                 {
                     $("#twig-rendered-item-list").remove();
                     document.getElementById("vue-rendered-item-list").style.removeProperty("display");
@@ -21,7 +21,7 @@ Vue.directive("is-loading-watcher",
             }
             else
             {
-                this.el.isFirstRendering = false;
+                el.isFirstRendering = false;
             }
         }
     });
