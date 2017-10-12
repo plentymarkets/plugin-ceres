@@ -17,7 +17,7 @@
     {% if "billing_address.stateId" in billingAddressFields %}
     <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
         <select v-model="selectedStateId" class="custom-select">
-            <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
+            <option :value="state.id" :selected="state.selected" v-for="state in stateList">
                 ${ state.name }
             </option>
         </select>
@@ -29,7 +29,7 @@
     {% if "delivery_address.stateId" in deliveryAddressFields %}
         <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
             <select v-model="selectedStateId" class="custom-select">
-                <option v-bind:value="state.id" selected="${ state.selected }" v-for="state in stateList">
+                <option :value="state.id" :selected="state.selected" v-for="state in stateList">
                     ${ state.name }
                 </option>
             </select>

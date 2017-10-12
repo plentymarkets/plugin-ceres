@@ -28,8 +28,8 @@
         <div class="dropdown-menu" aria-labelledby="bankData">
             <ul>
                 <li class="item" v-for="(index,bankData) in userBankData">
-                    <input type="radio" id="${ bankData.id }" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
-                    <label for="${ bankData.id }" class="item-inner">
+                    <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
+                    <label :for="bankData.id" class="item-inner">
                         <span class="item-content small">
                             <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
                             <span>Bank:        ${ bankData.bankName }</span>
