@@ -1,7 +1,7 @@
 Vue.directive("basket-item-quantity",
     {
-        update(quantity)
+        update(el, binding)
         {
-            this.el.innerHTML = quantity;
+            el.innerHTML = binding.value;
         }
     });

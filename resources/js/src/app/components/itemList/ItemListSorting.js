@@ -2,6 +2,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("item-list-sorting", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "sortData",
         "template"

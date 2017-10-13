@@ -1,5 +1,7 @@
 Vue.component("item-filter", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "facet"

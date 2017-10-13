@@ -1,16 +1,16 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.showError }">
         <ul class="method-list">
-            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" data-id="${ shippingProfile.parcelServicePresetId }">
+            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
-                        id="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }"
+                        :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
                         name="ShippingProfileID"
-                        value="${ shippingProfile.parcelServicePresetId }"
+                        :value="shippingProfile.parcelServicePresetId"
                         v-model="shippingProfileId"
                         @change="onShippingProfileChange()"
                 >
-                <label for="ShippingProfileID${ _uid }${ shippingProfile.parcelServicePresetId }">
+                <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
                     <div class="icon">
                         {#<img src="">#}
                     </div><!--

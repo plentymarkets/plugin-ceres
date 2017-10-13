@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("registration", {
 
+    delimiters: ["${", "}"],
+
     props: {
         modalElement: String,
         guestMode: {type: Boolean, default: false},

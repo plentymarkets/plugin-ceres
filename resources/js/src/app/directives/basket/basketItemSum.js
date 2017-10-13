@@ -1,7 +1,7 @@
 Vue.directive("basket-item-sum",
     {
-        update(sum)
+        update(el, binding)
         {
-            this.el.innerHTML = Vue.filter("currency").apply(Object, [sum]);
+            el.innerHTML = Vue.filter("currency").apply(Object, [binding.value]);
         }
     });

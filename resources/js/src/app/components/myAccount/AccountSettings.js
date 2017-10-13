@@ -4,6 +4,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("account-settings", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userData",
         "template"
@@ -27,9 +29,12 @@ Vue.component("account-settings", {
     /**
      * Initialise the account settings modal
      */
-    ready: function()
+    mounted: function()
     {
-        this.accountSettingsModal = ModalService.findModal(this.$els.accountSettingsModal);
+        this.$nextTick(() =>
+        {
+            this.accountSettingsModal = ModalService.findModal(this.$refs.accountSettingsModal);
+        });
     },
 
     computed: {

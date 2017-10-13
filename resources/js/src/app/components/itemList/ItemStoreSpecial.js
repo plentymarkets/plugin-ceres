@@ -2,6 +2,8 @@ var accounting = require("accounting");
 
 Vue.component("item-store-special", {
 
+    delimiters: ["${", "}"],
+
     template: "#vue-item-store-special",
 
     props: [

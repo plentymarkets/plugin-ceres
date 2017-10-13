@@ -2,6 +2,8 @@ import AddressFieldService from "services/AddressFieldService";
 
 Vue.component("salutation-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "addressData",
@@ -117,9 +119,12 @@ Vue.component("salutation-select", {
         }
     },
 
-    ready()
+    mounted()
     {
-        this.addressData.addressSalutation = 0;
+        this.$nextTick(() =>
+        {
+            this.addressData.addressSalutation = 0;
+        });
     },
 
     methods:

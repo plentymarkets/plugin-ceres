@@ -1,5 +1,7 @@
 Vue.component("quantity-input", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "value",
         "timeout",
@@ -56,16 +58,19 @@ Vue.component("quantity-input", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.checkDefaultVars();
-        this.initDefaultVars();
-        this.initValueWatcher();
-
-        if (!this.vertical)
+        this.$nextTick(() =>
         {
-            this.handleMissingItems();
-        }
+            this.checkDefaultVars();
+            this.initDefaultVars();
+            this.initValueWatcher();
+
+            if (!this.vertical)
+            {
+                this.handleMissingItems();
+            }
+        });
     },
 
     methods:

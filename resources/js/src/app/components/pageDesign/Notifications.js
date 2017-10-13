@@ -4,6 +4,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("notifications", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "initialNotifications",
         "template"
@@ -21,17 +23,20 @@ Vue.component("notifications", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
-        var self = this;
+        this.$nextTick(() =>
+        {
+            var self = this;
 
-        NotificationService.listen(
-            function(notifications)
-            {
-                self.$set("notifications", notifications);
-            });
+            NotificationService.listen(
+                function(notifications)
+                {
+                    self.$set("notifications", notifications);
+                });
 
-        self.showInitialNotifications();
+            this.showInitialNotifications();
+        });
     },
 
     methods : {

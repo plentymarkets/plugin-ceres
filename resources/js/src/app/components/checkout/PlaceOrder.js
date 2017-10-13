@@ -3,6 +3,8 @@ var NotificationService = require("services/NotificationService");
 
 Vue.component("place-order", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "targetContinue",
         "template"
@@ -127,8 +129,8 @@ Vue.component("place-order", {
 
         showModal(content, isExternalContent)
         {
-            var $modal = $(this.$els.modal);
-            var $modalBody = $(this.$els.modalContent);
+            var $modal = $(this.$refs.modal);
+            var $modalBody = $(this.$refs.modalContent);
 
             if (isExternalContent)
             {

@@ -5,6 +5,8 @@ const VariationData = {};
 
 Vue.component("variation-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "attributes",
         "variations",
@@ -45,99 +47,102 @@ Vue.component("variation-select", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        // initialize selected attributes to be tracked by change detection
-        const attributes = {};
-
-        for (const attributeId in this.attributes)
+        this.$nextTick(() =>
         {
-            attributes[attributeId] = null;
-        }
-        this.selectedAttributes = attributes;
+            // initialize selected attributes to be tracked by change detection
+            const attributes = {};
 
-        // set attributes of preselected variation if exists
-        if (this.preselect)
-        {
-            // find variation by id
-            const preselectedVariation = this.variations.filter(variation =>
+            for (const attributeId in this.attributes)
             {
-                // eslint-disable-next-line eqeqeq
-                return variation.variationId == this.preselect;
-            });
-
-            if (!!preselectedVariation && preselectedVariation.length === 1)
-            {
-                // set attributes of preselected variation
-                this.setAttributes(preselectedVariation[0]);
+                attributes[attributeId] = null;
             }
-        }
+            this.selectedAttributes = attributes;
 
-        // search for matching variation on each change of attribute selection
-        this.$watch("selectedAttributes", () =>
-        {
-            // search variations matching current selection
-            const possibleVariations = this.filterVariations();
-
-            if (possibleVariations.length === 1)
+            // set attributes of preselected variation if exists
+            if (this.preselect)
             {
-                // only 1 matching variation remaining:
-                // set remaining attributes if not set already. Will trigger this watcher again.
-                if (!this.setAttributes(possibleVariations[0]))
+                // find variation by id
+                const preselectedVariation = this.variations.filter(variation =>
                 {
-                    // all attributes are set => load variation data
-                    const variationId = possibleVariations[0].variationId;
+                    // eslint-disable-next-line eqeqeq
+                    return variation.variationId == this.preselect;
+                });
 
-                    if (VariationData[variationId])
+                if (!!preselectedVariation && preselectedVariation.length === 1)
+                {
+                    // set attributes of preselected variation
+                    this.setAttributes(preselectedVariation[0]);
+                }
+            }
+
+            // search for matching variation on each change of attribute selection
+            this.$watch("selectedAttributes", () =>
+            {
+                // search variations matching current selection
+                const possibleVariations = this.filterVariations();
+
+                if (possibleVariations.length === 1)
+                {
+                    // only 1 matching variation remaining:
+                    // set remaining attributes if not set already. Will trigger this watcher again.
+                    if (!this.setAttributes(possibleVariations[0]))
                     {
-                        // reuse cached variation data
+                        // all attributes are set => load variation data
+                        const variationId = possibleVariations[0].variationId;
 
-                        this.$store.commit("setVariation", VariationData[variationId]);
+                        if (VariationData[variationId])
+                        {
+                            // reuse cached variation data
 
-                        document.dispatchEvent(new CustomEvent(
-                            "onVariationChanged",
-                            {
-                                detail:
+                            this.$store.commit("setVariation", VariationData[variationId]);
+
+                            document.dispatchEvent(new CustomEvent(
+                                "onVariationChanged",
                                 {
-                                    attributes: VariationData[variationId].attributes,
-                                    documents: VariationData[variationId].documents
-                                }
-                            }));
-                    }
-                    else
-                    {
-                        // get variation data from remote
-                        ApiService
-                            .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
-                            .done(response =>
-                            {
-                                // store received variation data for later reuse
-                                VariationData[variationId] = response;
+                                    detail:
+                                    {
+                                        attributes: VariationData[variationId].attributes,
+                                        documents: VariationData[variationId].documents
+                                    }
+                                }));
+                        }
+                        else
+                        {
+                            // get variation data from remote
+                            ApiService
+                                .get("/rest/io/variations/" + variationId, {template: "Ceres::Item.SingleItem"})
+                                .done(response =>
+                                {
+                                    // store received variation data for later reuse
+                                    VariationData[variationId] = response;
 
-                                this.$store.commit("setVariation", response);
+                                    this.$store.commit("setVariation", response);
 
-                                document.dispatchEvent(new CustomEvent("onVariationChanged", {detail: {attributes: response.attributes, documents: response.documents}}));
-                            });
+                                    document.dispatchEvent(new CustomEvent("onVariationChanged", {detail: {attributes: response.attributes, documents: response.documents}}));
+                                });
+                        }
+
                     }
 
                 }
+            }, {
+                deep: true
+            });
 
-            }
-        }, {
-            deep: true
+            // // watch for changes on selected variation to adjust url
+            // ResourceService.watch("currentVariation", (newVariation, oldVariation) =>
+            // {
+            //     if (oldVariation)
+            //     {
+            //         var url = this.$options.filters.itemURL(newVariation.documents[0].data);
+            //         var title = document.getElementsByTagName("title")[0].innerHTML;
+
+            //         window.history.replaceState({}, title, url);
+            //     }
+            // });
         });
-
-        // // watch for changes on selected variation to adjust url
-        // ResourceService.watch("currentVariation", (newVariation, oldVariation) =>
-        // {
-        //     if (oldVariation)
-        //     {
-        //         var url = this.$options.filters.itemURL(newVariation.documents[0].data);
-        //         var title = document.getElementsByTagName("title")[0].innerHTML;
-
-        //         window.history.replaceState({}, title, url);
-        //     }
-        // });
     },
 
     methods: {

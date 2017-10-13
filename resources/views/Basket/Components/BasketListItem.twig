@@ -3,13 +3,13 @@
 {% set configItemName = config("Ceres.item.name") %}
 
 <script type="x/template" id="vue-basket-list-item">
+    <div>
+        <div v-if="size == 'large'">
+            {% include "Ceres::Basket.Components.BasketListItem_large" %}
+        </div>
 
-    <div v-if="size == 'large'">
-        {% include "Ceres::Basket.Components.BasketListItem_large" %}
+        <div v-if="size == 'small'">
+            {% include "Ceres::Basket.Components.BasketListItem_small" %}
+        </div>
     </div>
-
-    <div v-if="size == 'small'">
-        {% include "Ceres::Basket.Components.BasketListItem_small" %}
-    </div>
-
 </script>

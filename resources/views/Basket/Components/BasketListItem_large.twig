@@ -6,7 +6,7 @@
 
     <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation.data | itemURL">
-        <img alt="${ basketItem.variation.data.texts | itemName {{configItemName}} }" :src="imageUrl">
+        <img :alt="basketItem.variation.data.texts | itemName {{configItemName}}" :src="imageUrl">
     </a>
     <!-- ./ITEM IMAGE -->
 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.price | currency basketItem.variation.data.calculatedPrices.default.currency }
+            ${ basketItem.quantity * basketItem.price | currency(basketItem.variation.data.calculatedPrices.default.currency) }
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
@@ -40,7 +40,7 @@
 
     <!-- ITEM DETAILS -->
     <div class="item-details small">
-        <input type="checkbox" class="toggle-description" id="itemid-${ basketItem.id }" value="">
+        <input type="checkbox" class="toggle-description" :id="'itemid-' + basketItem.id" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <p class="item-name">
                 ${ basketItem.variation.data.texts | itemName {{configItemName}} }
@@ -64,7 +64,7 @@
         </div>
         
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
-            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency })</strong>
+            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
             <span class="col-xs-6 col-sm-7">${property.value}</span>
         </div>
 
@@ -88,18 +88,14 @@
                 </div>
             {% endif %}
             {% if "basket.item.description_long" in basketDetailsData %}
-                <p class="m-y-1">
-                    {!! basketItem.variation.data.texts.description !!}
-                </p>
+                <p class="m-y-1" v-html="basketItem.variation.data.texts.description"></p>
             {% endif %}
             {% if "basket.item.description_short" in basketDetailsData %}
-                <p class="m-y-1">
-                    {!! basketItem.variation.data.texts.shortDescription !!}
-                </p>
+                <p class="m-y-1" v-html="basketItem.variation.data.texts.shortDescription"></p>
             {% endif %}
         </div>
         {% if "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
-            <label class="expand-btn" for="itemid-${ basketItem.id }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+            <label class="expand-btn" :for="'itemid-' + basketItem.id" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
         {% endif %}
     </div>
     <!-- ./ITEM DETAILS -->

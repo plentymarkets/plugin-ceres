@@ -2,6 +2,8 @@ const ApiService = require("services/ApiService");
 
 Vue.component("order-history", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "orderList",
         "itemsPerPage",
@@ -27,11 +29,14 @@ Vue.component("order-history", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.itemsPerPage = this.itemsPerPage || 10;
-        this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-        this.setOrders(this.orderList);
+        this.$nextTick(() =>
+        {
+            this.itemsPerPage = this.itemsPerPage || 10;
+            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
+            this.setOrders(this.orderList);
+        });
     },
 
     methods: {
@@ -59,7 +64,7 @@ Vue.component("order-history", {
 
             Vue.nextTick(() =>
             {
-                $(this.$els.orderDetails).modal("show");
+                $(this.$refs.orderDetails).modal("show");
             });
 
             ApiService

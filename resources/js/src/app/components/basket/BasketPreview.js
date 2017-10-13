@@ -2,6 +2,8 @@ import ApiService from "services/ApiService";
 
 Vue.component("basket-preview", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "basketData",
@@ -18,11 +20,20 @@ Vue.component("basket-preview", {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
         this.$store.commit("setBasketItems", this.basketItemsData);
+    },
 
-        ApiService.listen("AfterBasketChanged",
+    /**
+     * Bind to basket and bind the basket items
+     */
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            ApiService.listen("AfterBasketChanged",
             data =>
             {
                 this.$store.commit("setBasket", data.basket);
             });
+        });
     }
 });

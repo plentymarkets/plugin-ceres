@@ -4,6 +4,8 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "item",
         "itemUrl",

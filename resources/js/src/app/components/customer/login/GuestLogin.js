@@ -4,6 +4,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("guest-login", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "backlink"

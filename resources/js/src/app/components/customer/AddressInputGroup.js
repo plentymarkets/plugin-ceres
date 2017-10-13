@@ -1,5 +1,7 @@
 Vue.component("address-input-group", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "addressData",
         "defaultCountry",

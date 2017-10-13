@@ -2,6 +2,8 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("coupon", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],
@@ -36,9 +38,9 @@ Vue.component("coupon", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        Vue.nextTick(() =>
+        this.$nextTick(() =>
         {
             if (this.redeemedCouponCode)
             {

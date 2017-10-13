@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("login", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "modalElement",
         "backlink",

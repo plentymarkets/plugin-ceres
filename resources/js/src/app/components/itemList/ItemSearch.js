@@ -2,6 +2,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("item-search", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],
@@ -22,14 +24,17 @@ Vue.component("item-search", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.initAutocomplete();
+        this.$nextTick(() =>
+        {
+            this.initAutocomplete();
 
-        const urlParams = UrlService.getUrlParams(document.location.search);
+            const urlParams = UrlService.getUrlParams(document.location.search);
 
-        this.$store.commit("setItemListSearchString", urlParams.query);
-        this.currentSearchString = urlParams.query;
+            this.$store.commit("setItemListSearchString", urlParams.query);
+            this.currentSearchString = urlParams.query;
+        });
     },
 
     methods:

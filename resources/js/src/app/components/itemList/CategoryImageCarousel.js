@@ -1,5 +1,7 @@
 Vue.component("category-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: {
         imageUrls      : {type: Array},
         itemUrl        : {type: String},
@@ -21,12 +23,15 @@ Vue.component("category-image-carousel", {
         this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
-    ready: function()
+    mounted: function()
     {
-        if (this.enableCarousel)
+        this.$nextTick(() =>
         {
-            this.initializeCarousel();
-        }
+            if (this.enableCarousel)
+            {
+                this.initializeCarousel();
+            }
+        });
     },
 
     methods:

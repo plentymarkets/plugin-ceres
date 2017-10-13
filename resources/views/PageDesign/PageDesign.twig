@@ -32,6 +32,7 @@
     </head>
 
     <body>
+        <div id="vue-app">
         <div class="wrapper wrapper-top">
             <!-- messages -->
             <notifications template="#vue-notifications"
@@ -125,35 +126,55 @@
             </div>
             <!-- ./SHIPPINGCOSTS MODAL -->
         </div>
+        </div>
 
-        {{ Loader.include_components() }}
+            {{ Loader.include_components() }}
 
-        {{ LayoutContainer.show("Ceres::Script.Loader") }}
+            {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
-        {% set lang = services.sessionStorage.getLang() %}
+            {% set lang = services.sessionStorage.getLang() %}
 
-        {% if config("Ceres.log.performance.level") == 'development' %}
-            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
-            <script>var Translations = Languages['{{ lang }}'];</script>
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
-        {% else %}
-            {# TODO remove douplicate import #}
-            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
-            <script>var Translations = Languages['{{ lang }}'];</script>
+            {% if config("Ceres.log.performance.level") == 'development' %}
+                <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
+                <script>var Translations = Languages['{{ lang }}'];</script>
+                <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
+                <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
+                <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
+            {% else %}
+                {# TODO remove douplicate import #}
+                <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
+                <script>var Translations = Languages['{{ lang }}'];</script>
 
-            <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
-        {% endif %}
+                <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
+            {% endif %}
 
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
         <script>
+            Vue.options.delimiters = ['${', '}'];
+            
+            Vue.component('my-component', {
+                
+                props: [
+                    "template"
+                ],
+
+                data() {
+                    return {
+                        testData: "testData11234123"
+                    }
+                },
+                
+                created()
+                {
+                    this.$options.template = this.template;
+                }
+            });
+
             vueApp = new Vue({
-                el: "body",
+                el: "#vue-app",
                 store: window.ceresStore
             });
         </script>
     </body>
-
 </html>

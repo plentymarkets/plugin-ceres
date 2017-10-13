@@ -26,7 +26,7 @@
                 <div class="square-inner main-image">
 
                     <category-image-carousel template="#vue-category-image-carousel"
-                                             :image-urls="{{ item.data.images | json_encode() }} | itemImages 'urlMiddle'"
+                                             :image-urls="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
                                              alt-text="{{ item.data.texts | itemName(configItemName) }}"
                                              item-url="{{ itemUrl }}"
                                              :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"

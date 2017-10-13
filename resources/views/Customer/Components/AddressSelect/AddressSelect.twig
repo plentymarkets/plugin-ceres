@@ -5,7 +5,7 @@
             <div class="dropdown items">
 
                 <div
-                        id="addressMultiSelect${ _uid }"
+                        :id="'addressMultiSelect' + _uid"
                         v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
@@ -50,12 +50,12 @@
                         <li class="item" v-for="(index, address) in addressList">
                             <input
                                     type="radio"
-                                    name="shippingAddress${ _uid }"
-                                    id="addressSelectItem${ _uid }${ address.id }"
-                                    value="${address.id}"
+                                    :name="'shippingAddress' + _uid"
+                                    :id="'addressSelectItem' + _uid + address.id"
+                                    :value="address.id"
                                     @change="onAddressChanged(address)"
                             >
-                            <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
+                            <label :for="'addressSelectItem + _uid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
                                 <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
                                     -</p>
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <div v-el:address-modal>
+        <div ref="addressModal">
             <div class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div v-el:delete-modal>
+        <div ref="deleteModal">
             <div class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

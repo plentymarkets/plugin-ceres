@@ -1,8 +1,10 @@
 Vue.component("shipping-address-select", {
 
+    delimiters: ["${", "}"],
+
     template: `
         <address-select
-            v-ref:shipping-address-select
+            ref:shipping-address-select
             template="#vue-address-select"
             v-on:address-changed="addressChanged"
             address-type="2"

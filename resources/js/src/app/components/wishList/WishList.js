@@ -2,6 +2,8 @@ const NotificationService = require("services/NotificationService");
 
 Vue.component("wish-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

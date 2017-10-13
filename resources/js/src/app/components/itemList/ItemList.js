@@ -1,5 +1,7 @@
 Vue.component("item-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "categoryId",
         "template",

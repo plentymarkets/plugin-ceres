@@ -1,5 +1,7 @@
 Vue.component("basket-totals", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "config",
         "template"
@@ -14,8 +16,7 @@ Vue.component("basket-totals", {
         this.$options.template = this.template;
     },
 
-    methods:
-    {
+    methods: {
         /**
          * TODO
          * @param name

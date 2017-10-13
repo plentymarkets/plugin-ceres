@@ -2,6 +2,8 @@ import UrlService from "services/UrlService";
 
 Vue.component("items-per-page", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "columnsPerPage",
         "rowsPerPage",

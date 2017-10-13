@@ -2,22 +2,22 @@ Vue.directive("update-sidenav-selection",
     {
         params: ["categoryId"],
 
-        bind: function()
+        bind(el)
         {
         },
 
-        update(breadcrumbs)
+        update(el, binding)
         {
-            for (const breadcrumb of breadcrumbs)
+            for (const breadcrumb of binding.value)
             {
-                if (breadcrumb.id === parseInt(this.params.categoryId))
+                if (breadcrumb.id === parseInt(el.dataset.categoryId))
                 {
-                    this.el.classList.add("active");
+                    el.classList.add("active");
                     break;
                 }
                 else
                 {
-                    this.el.classList.remove("active");
+                    el.classList.remove("active");
                 }
             }
         }

@@ -1,5 +1,7 @@
 Vue.component("basket-list-item", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "basketItem",
         "size",

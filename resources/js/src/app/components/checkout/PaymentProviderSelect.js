@@ -1,5 +1,7 @@
 Vue.component("payment-provider-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

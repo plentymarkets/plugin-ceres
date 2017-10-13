@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("bank-data-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userBankData",
         "contactId",
@@ -33,10 +35,13 @@ Vue.component("bank-data-select", {
     /**
      * Select the modals
      */
-    ready()
+    mounted()
     {
-        this.bankInfoModal = ModalService.findModal(this.$els.bankInfoModal);
-        this.bankDeleteModal = ModalService.findModal(this.$els.bankDeleteModal);
+        this.$nextTick(() =>
+        {
+            this.bankInfoModal = ModalService.findModal(this.$refs.bankInfoModal);
+            this.bankDeleteModal = ModalService.findModal(this.$refs.bankDeleteModal);
+        });
     },
 
     methods: {
@@ -91,7 +96,7 @@ Vue.component("bank-data-select", {
         openModal(doUpdate)
         {
             this.doUpdate = doUpdate;
-            ValidationService.unmarkAllFields($(this.$els.bankInfoModal));
+            ValidationService.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
         },
 

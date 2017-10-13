@@ -1,5 +1,7 @@
 Vue.component("shipping-country-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "selectable"

@@ -1,5 +1,7 @@
 Vue.component("shop-language-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "countryFlagPrefix",
         "template"

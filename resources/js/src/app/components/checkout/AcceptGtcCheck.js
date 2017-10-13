@@ -1,5 +1,7 @@
 Vue.component("accept-gtc-check", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

@@ -1,5 +1,7 @@
 Vue.component("item-lazy-img", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "imageUrl",
         "template"
@@ -10,13 +12,14 @@ Vue.component("item-lazy-img", {
         this.$options.template = this.template;
     },
 
-    ready: function()
+    mounted: function()
     {
-        var self = this;
-
-        setTimeout(function()
+        this.$nextTick(() =>
         {
-            $(self.$els.lazyImg).show().lazyload({threshold : 100});
-        }, 1);
+            setTimeout(() =>
+            {
+                $(this.$refs.lazyImg).show().lazyload({threshold : 100});
+            }, 1);
+        });
     }
 });

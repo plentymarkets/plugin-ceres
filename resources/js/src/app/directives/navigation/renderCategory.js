@@ -1,12 +1,12 @@
 Vue.directive("render-category",
     {
-        bind()
+        bind(el, binding)
         {
-            this.el.addEventListener("click", event =>
+            el.onclick = function(event)
             {
                 event.preventDefault();
 
-                window.ceresStore.dispatch("selectCategory", {categoryId: parseInt(this.expression)});
+                window.ceresStore.dispatch("selectCategory", {categoryId: parseInt(binding.value)});
 
                 if (!App.isCategoryView)
                 {
@@ -14,6 +14,6 @@ Vue.directive("render-category",
 
                     window.open(url, "_self");
                 }
-            });
+            };
         }
     });

@@ -1,16 +1,11 @@
 Vue.component("basket-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "size",
         "template"
     ],
-
-    data()
-    {
-        return {
-            basketItems: []
-        };
-    },
 
     computed: Vuex.mapState({
         basketItems: state => state.basket.items

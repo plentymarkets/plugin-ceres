@@ -1,5 +1,7 @@
 Vue.component("item-filter-tag-list", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

@@ -2,6 +2,8 @@ var CountryService = require("services/CountryService");
 
 Vue.component("country-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "countryList",
         "countryNameMap",

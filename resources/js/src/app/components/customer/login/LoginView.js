@@ -1,5 +1,7 @@
 Vue.component("login-view", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

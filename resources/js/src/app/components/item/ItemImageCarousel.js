@@ -1,5 +1,7 @@
 Vue.component("item-image-carousel", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "imageUrlAccessor",
         "template"
@@ -60,7 +62,7 @@ Vue.component("item-image-carousel", {
 
         reInitialize()
         {
-            const $owl = $(this.$els.single);
+            const $owl = $(this.$refs.single);
 
             $owl.trigger("destroy.owl.carousel");
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
@@ -80,7 +82,7 @@ Vue.component("item-image-carousel", {
         {
             const imageCount = this.getImageCount();
 
-            $(this.$els.single).owlCarousel({
+            $(this.$refs.single).owlCarousel({
                 autoHeight       : true,
                 dots             : true,
                 items            : 1,
@@ -101,7 +103,7 @@ Vue.component("item-image-carousel", {
                 smartSpeed       : 350,
                 onChanged: event =>
                 {
-                    const $thumb = $(this.$els.thumbs);
+                    const $thumb = $(this.$refs.thumbs);
 
                     $thumb.trigger("to.owl.carousel", [
                         event.page.index,
@@ -110,7 +112,7 @@ Vue.component("item-image-carousel", {
                 }
             });
 
-            $(this.$els.single).on("changed.owl.carousel", event =>
+            $(this.$refs.single).on("changed.owl.carousel", event =>
             {
                 this.currentItem = event.page.index;
             });
@@ -118,7 +120,7 @@ Vue.component("item-image-carousel", {
 
         initThumbCarousel()
         {
-            $(this.$els.thumbs).owlCarousel({
+            $(this.$refs.thumbs).owlCarousel({
                 autoHeight       : true,
                 dots             : false,
                 items            : 5,
@@ -143,7 +145,7 @@ Vue.component("item-image-carousel", {
 
         goTo: index =>
         {
-            const $owl = $(this.$els.single);
+            const $owl = $(this.$refs.single);
 
             $owl.trigger("to.owl.carousel", [
                 index,

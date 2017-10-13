@@ -1,27 +1,30 @@
 var ApiService = require("services/ApiService");
 
-Vue.directive("logout", function()
-{
-    /**
-     * Logout the current user
-     */
-    $(this.el).click(
-        function(event)
+Vue.directive("logout",
+    {
+        bind(el)
         {
-            $(this.el).addClass("disabled");
+            /**
+             * Logout the current user
+             */
+            $(el).click(
+                function(event)
+                {
+                    $(el).addClass("disabled");
 
-            ApiService.post("/rest/io/customer/logout")
-                .done(
-                    function()
-                    {
-                        window.location.assign(window.location.origin);
-                    })
-                .fail(
-                    function()
-                    {
-                        $(this.el).removeClass("disabled");
-                    }.bind(this));
+                    ApiService.post("/rest/io/customer/logout")
+                        .done(
+                            function()
+                            {
+                                window.location.assign(window.location.origin);
+                            })
+                        .fail(
+                            function()
+                            {
+                                $(el).removeClass("disabled");
+                            });
 
-            event.preventDefault();
-        }.bind(this));
-});
+                    event.preventDefault();
+                });
+        }
+    });

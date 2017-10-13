@@ -11,6 +11,8 @@ Vue.component("wait-screen", {
 
     // template: "#vue-wait-screen", NEED TO IMPLEMENT TEMPLATE IN COMPONENT
 
+    delimiters: ["${", "}"],
+
     props: [
         "template"
     ],

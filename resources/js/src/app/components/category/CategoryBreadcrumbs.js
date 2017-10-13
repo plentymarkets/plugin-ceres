@@ -1,5 +1,8 @@
 Vue.component("category-breadcrumbs",
     {
+
+        delimiters: ["${", "}"],
+
         props: [
             "template"
         ],

@@ -1,8 +1,10 @@
 Vue.component("invoice-address-select", {
 
+    delimiters: ["${", "}"],
+
     template: `
         <address-select 
-            v-ref:invoice-address-select
+            ref:invoice-address-select
             template="#vue-address-select"
             v-on:address-changed="addressChanged"
             address-type="1"
@@ -39,12 +41,15 @@ Vue.component("invoice-address-select", {
     /**
      * If no address is related to the user, a popup will open to add an address
      */
-    ready()
+    mounted()
     {
-        if (App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
+        this.$nextTick(() =>
         {
-            this.$refs.invoiceAddressSelect.showInitialAddModal();
-        }
+            if (App.isCheckoutView && this.billingAddressList && this.billingAddressList.length <= 0)
+            {
+                this.$refs.invoiceAddressSelect.showInitialAddModal();
+            }
+        });
     },
 
     methods:

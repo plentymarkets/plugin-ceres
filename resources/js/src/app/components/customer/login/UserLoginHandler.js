@@ -4,6 +4,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("user-login-handler", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "userData",
         "template"
@@ -23,9 +25,12 @@ Vue.component("user-login-handler", {
     /**
      * Add the global event listener for login and logout
      */
-    ready()
+    mounted()
     {
-        this.addEventListeners();
+        this.$nextTick(() =>
+        {
+            this.addEventListeners();
+        });
     },
 
     methods: {

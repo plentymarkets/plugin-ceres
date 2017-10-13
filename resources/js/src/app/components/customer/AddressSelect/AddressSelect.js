@@ -6,6 +6,8 @@ import ValidationService from "services/ValidationService";
 
 Vue.component("address-select", {
 
+    delimiters: ["${", "}"],
+
     props: [
         "template",
         "addressType",
@@ -70,10 +72,13 @@ Vue.component("address-select", {
     /**
      * Select the address modal
      */
-    ready()
+    mounted()
     {
-        this.addressModal = ModalService.findModal(this.$els.addressModal);
-        this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+        this.$nextTick(() =>
+        {
+            this.addressModal = ModalService.findModal(this.$els.addressModal);
+            this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+        });
     },
 
     methods: {
@@ -149,7 +154,7 @@ Vue.component("address-select", {
             }
 
             this.updateHeadline();
-            ValidationService.unmarkAllFields($(this.$els.addressModal));
+            ValidationService.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
         },
 
@@ -169,7 +174,7 @@ Vue.component("address-select", {
             }
 
             this.updateHeadline();
-            ValidationService.unmarkAllFields($(this.$els.addressModal));
+            ValidationService.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
         },
 

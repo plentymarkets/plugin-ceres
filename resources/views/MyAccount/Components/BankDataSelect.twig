@@ -28,8 +28,8 @@
         <div class="dropdown-menu" aria-labelledby="bankData">
             <ul>
                 <li class="item" v-for="(index,bankData) in userBankData">
-                    <input type="radio" id="${ bankData.id }" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
-                    <label for="${ bankData.id }" class="item-inner">
+                    <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
+                    <label :for="bankData.id" class="item-inner">
                         <span class="item-content small">
                             <strong>Kontoinh.: ${ bankData.accountOwner }</strong>
                             <span>Bank:        ${ bankData.bankName }</span>
@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div v-el:bank-info-modal>
+<div ref="bankInfoModal">
     <div class="modal fade" tabindex="-1" role="dialog" data-keybord="false" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -74,25 +74,25 @@
                             <div class="col-xs-12">
                                 <div class="input-unit accountOwner" data-validate="text">
                                     <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" :value="updateBankData.accountOwner">
-                                    <label for="txt_firma${_uid}">{{ trans("Ceres::Template.accHolder") }}*</label>
+                                    <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.accHolder") }}*</label>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="input-unit">
                                     <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" :value="updateBankData.bankName">
-                                    <label for="txt_firma${_uid}">{{ trans("Ceres::Template.bank") }}</label>
+                                    <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.bank") }}</label>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="input-unit iban" data-validate="regex">
                                     <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" :value="updateBankData.iban">
-                                    <label for="txt_firma${_uid}">IBAN*</label>
+                                    <label :for="'txt_firma' + _uid">IBAN*</label>
                                 </div>
                             </div>
                             <div class="col-xs-12">
                                 <div class="input-unit no-bottom" data-validate="regex">
                                     <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" :value="updateBankData.bic">
-                                    <label for="txt_firma${_uid}">BIC* - {{ trans("Ceres::Template.bankBicNotification") }}</label>
+                                    <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.bankBicNotification") }}</label>
                                 </div>
                             </div>
                           </div>
@@ -114,7 +114,7 @@
     </div>
 </div>
 
-<div v-el:bank-delete-modal>
+<div ref="bankDeleteModal">
     <div class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
