@@ -84,20 +84,20 @@ var init = (function($, window, document)
             {
                 evt.preventDefault();
                 evt.stopPropagation();
-                $("body").toggleClass("open-right");
+                $("#vue-app").toggleClass("open-right");
             });
         }, 1);
 
         $(document).on("click", function(evt)
         {
-            if ($("body").hasClass("open-right"))
+            if ($("#vue-app").hasClass("open-right"))
             {
                 if ((evt.target != $(".basket-preview")) &&
                     (evt.target.classList[0] != "message") &&
                     ($(evt.target).parents(".basket-preview").length <= 0))
                 {
                     evt.preventDefault();
-                    $("body").toggleClass("open-right");
+                    $("#vue-app").toggleClass("open-right");
                 }
             }
 
