@@ -6,7 +6,7 @@
 
     <!-- ITEM IMAGE -->
     <a class="item-image" :href="basketItem.variation.data | itemURL">
-        <img :alt="basketItem.variation.data.texts | itemName {{configItemName}}" :src="imageUrl">
+        <img :alt="basketItem.variation.data.texts | itemName({{configItemName}})" :src="imageUrl">
     </a>
     <!-- ./ITEM IMAGE -->
 
@@ -43,7 +43,7 @@
         <input type="checkbox" class="toggle-description" :id="'itemid-' + basketItem.id" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <p class="item-name">
-                ${ basketItem.variation.data.texts | itemName {{configItemName}} }
+                ${ basketItem.variation.data.texts | itemName({{configItemName}}) }
             </p>
         </a>
 

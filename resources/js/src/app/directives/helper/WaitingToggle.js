@@ -1,30 +1,30 @@
 Vue.directive("waiting-animation", {
-    bind()
+    bind(el)
 	{
-        this.el.firstRendering = true;
-        this.el.initialClass = this.el.className;
+        el.firstRendering = true;
+        el.initialClass = el.className;
     },
 
-    update(value)
+    update(el, binding)
 	{
-        if (this.el.firstRendering)
+        if (el.firstRendering)
 		{
-            this.el.firstRendering = false;
+            el.firstRendering = false;
             return;
         }
-        if (value)
+        if (binding.value)
 		{
-            this.el.className = "";
-            this.el.className = "fa fa-circle-o-notch fa-spin";
+            el.className = "";
+            el.className = "fa fa-circle-o-notch fa-spin";
 
-            if (this.el.initialClass.includes("fa-lg"))
+            if (el.initialClass.includes("fa-lg"))
 			{
-                this.el.className += " fa-lg";
+                el.className += " fa-lg";
             }
         }
         else
 		{
-            this.el.className = this.el.initialClass;
+            el.className = el.initialClass;
         }
     }
 });

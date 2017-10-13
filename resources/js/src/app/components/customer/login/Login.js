@@ -31,20 +31,23 @@ Vue.component("login", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.loginFields = $(".login-container").find(".input-unit");
+        this.$nextTick(() =>
+        {
+            this.loginFields = $(".login-container").find(".input-unit");
+        });
     },
 
     watch:
     {
-        password: function(val, oldVal)
-            {
+        password(val, oldVal)
+        {
             this.resetError();
         },
 
-        username: function(val, oldVal)
-            {
+        username(val, oldVal)
+        {
             this.resetError();
         }
     },
