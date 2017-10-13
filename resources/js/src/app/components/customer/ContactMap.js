@@ -13,12 +13,15 @@ Vue.component("contact-map", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        if (!document.getElementById("maps-api"))
+        this.$nextTick(() =>
         {
-            this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
-        }
+            if (!document.getElementById("maps-api"))
+            {
+                this.addScript("https://maps.googleapis.com/maps/api/js?key=" + this.googleApiKey);
+            }
+        });
     },
 
     methods:

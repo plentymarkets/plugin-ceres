@@ -21,10 +21,6 @@ Vue.component("order-return-history", {
     created()
 	{
         this.$options.template = this.template;
-    },
-
-    ready()
-	{
         this.itemsPerPage = this.itemsPerPage || 10;
     },
 

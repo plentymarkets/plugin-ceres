@@ -39,10 +39,13 @@ Vue.component("item-image-carousel", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.initCarousel();
-        this.initThumbCarousel();
+        this.$nextTick(() =>
+        {
+            this.initCarousel();
+            this.initThumbCarousel();
+        });
     },
 
     methods:

@@ -30,9 +30,12 @@ Vue.component("add-to-basket", {
         this.useLargeScale = this.useLargeScale || false;
     },
 
-    ready()
+    mounted()
     {
-        this.checkMinMaxOrderQuantity();
+        this.$nextTick(() =>
+        {
+            this.checkMinMaxOrderQuantity();
+        });
     },
 
     methods:

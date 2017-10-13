@@ -25,17 +25,20 @@ Vue.component("mobile-navigation", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.$store.dispatch("initNavigationTree", this.navigationTreeData);
-
-        if (this.currentCategoryId)
+        this.$nextTick(() =>
         {
-            this.$store.dispatch("setCurrentCategoryById", {categoryId: this.currentCategoryId});
-            this.initialSlide(this.$store.state.navigation.currentCategory);
-        }
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
 
-        this.dataContainer1 = this.navigationTree;
+            if (this.currentCategoryId)
+            {
+                this.$store.dispatch("setCurrentCategoryById", {categoryId: this.currentCategoryId});
+                this.initialSlide(this.$store.state.navigation.currentCategory);
+            }
+
+            this.dataContainer1 = this.navigationTree;
+        });
     },
 
     methods:

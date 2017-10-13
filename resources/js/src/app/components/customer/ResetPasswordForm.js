@@ -26,9 +26,12 @@ Vue.component("reset-password-form", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.pwdFields = $("#reset-password-form-" + this._uid).find(".input-unit");
+        this.$nextTick(() =>
+        {
+            this.pwdFields = $("#reset-password-form-" + this._uid).find(".input-unit");
+        });
     },
 
     watch:

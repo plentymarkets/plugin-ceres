@@ -21,9 +21,12 @@ Vue.component("add-to-wish-list", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.changeTooltipText();
+        this.$nextTick(() =>
+        {
+            this.changeTooltipText();
+        });
     },
 
     methods:

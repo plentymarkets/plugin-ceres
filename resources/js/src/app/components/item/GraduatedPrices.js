@@ -17,11 +17,13 @@ Vue.component("graduated-prices", {
         this.$options.template = this.template;
     },
 
-    ready()
+    mounted()
     {
-        this.currentVariation = ResourceService.getResource("currentVariation").val();
-
-        this.initializeEvents();
+        this.$nextTick(() =>
+        {
+            this.currentVariation = ResourceService.getResource("currentVariation").val();
+            this.initializeEvents();
+        });
     },
 
     methods:
