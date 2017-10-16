@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.5.3 (development)
+
+### Hinzugefügt
+
+- Meta Description kann jetzt für den Shop in der Konfig gesetzt werden.
+
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
