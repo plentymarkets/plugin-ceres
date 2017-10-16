@@ -1,16 +1,19 @@
 # Release Notes für Ceres
 
-## 1.5.2 (???)
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Staffelpreise sind nun in Ceres integriert und werden unterhalb der Bestellmerkmale in der Einzelansicht eines Artikels ausgegeben. Weitere Informationen zu Staffelpreisen finden Sie unter <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#870" target="_blank"><b>Verkaufspreise verwalten</b></a>.
 
 ### Geändert
 
-- Der Text von Bestellmerkmalen wird in der Basketvorschau nichtmehr ausgegeben. 
-- Die OrderProperties (SingleItem) werden nun oberhalb der Preise ausgegeben.
-- Im SingleItem wird der Artikelpreis nun live berechnet anhand der Merkmalaufpreise und den Staffelpreisen.
-- Das AddToBasketOverlay zeigt die Preise nun korrekt berechnet an, anhand der Merkmalaufpreise und den Staffelpreisen.
-- Die Staffelpreise werden nun unterhalb der Bestellmerkmale ausgegeben.
-- Das Uhrensymbol in der OrderHistorie wurde gegen einen Text ausgetauscht.
-- Das Uhrensymbol in der RetourenHistorie wurde gegen einen Text ausgetauscht.
+- Der Text von Bestellmerkmalen wird in der Warenkorbvorschau nicht mehr ausgegeben. 
+- Bestellmerkmale werden in der Einzelansicht eines Artikels oberhalb der Preise ausgegeben.
+- In der Einzelansicht eines Artikels wird der Artikelpreis nun live anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Im Overlay **Zum Warenkorb hinzufügen** wird der Artikelpreis nun korrekt anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Das Uhrensymbol in der Auftragshistorie wurde durch einen Text ersetzt.
+- Das Uhrensymbol in der Retourenhistorie wurde durch einen Text ersetzt.
 
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
