@@ -1,5 +1,20 @@
 # Release Notes for Ceres
 
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Graduated prices are now integrated in Ceres and will be displayed below the order properties in the single item view. For further information about graduated prices, refer to <a href="https://knowledge.plentymarkets.com/en/item/managing-items#870" target="_blank"><b>Managing sales prices</b></a>.
+
+### Changed
+
+- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- Order properties will now be displayed above the price in the single item view.
+- In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
+- The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
+- In the order history, the clock icon has been replaced with a text.
+- In the return history, the clock icon has been replaced with a text.
+
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
