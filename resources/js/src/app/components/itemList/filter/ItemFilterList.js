@@ -17,7 +17,22 @@ Vue.component("item-filter-list", {
     },
 
     computed: Vuex.mapState({
-        facets: state => state.itemList.facets
+        facets(state)
+        {
+            return state.itemList.facets.sort((facetA, facetB) =>
+            {
+                if (facetA.id > facetB.id)
+                {
+                    return 1;
+                }
+                if (facetA.id < facetB.id)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
     }),
 
     created()
