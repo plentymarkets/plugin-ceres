@@ -28,6 +28,7 @@
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Item.Components.AddToWishList" ) }}
     {{ component( "Ceres::Item.Components.OrderProperties" ) }}
+    {{ component( "Ceres::Item.Components.GraduatedPrices" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -80,6 +81,12 @@
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
+                <div class="row">
+                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
+                </div>
+
+                <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.rrpPrice">
@@ -89,8 +96,7 @@
                 {% endif %}
 
                 <span class="price h1" >
-                    <span v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultPrice"
-                          content="{{ item.documents[0].data.calculatedPrices.default.price }}">
+                    <span v-item-total-price content="{{ item.documents[0].data.calculatedPrices.default.price }}">
                         {{ item.documents[0].data.calculatedPrices.formatted.defaultPrice }}
                     </span>
                     <sup>*</sup>
@@ -123,9 +129,6 @@
 
                     <add-to-basket template="#vue-add-to-basket" v-resource-if:currentVariation="documents[0].data.filter.isSalable" v-resource-push:item data-accessor="true"
                                    resource="currentVariation" :show-quantity="true"></add-to-basket>
-
-                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
-
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
