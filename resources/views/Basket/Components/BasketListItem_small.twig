@@ -47,8 +47,7 @@
         </div>
 
         <div v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency })</strong>:
-            <span>${property.value}</span>
+            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency })</strong>
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">

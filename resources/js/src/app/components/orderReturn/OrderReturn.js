@@ -58,6 +58,10 @@ Vue.component("order-return", {
             this.$broadcast("select-all-items");
         },
 
+        ...Vuex.mapMutations([
+            "updateOrderReturnNote"
+        ]),
+
         ...Vuex.mapActions([
             "sendOrderReturn"
         ])
