@@ -3,7 +3,7 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrls      : {type: Array},
+        imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
         showDots       : {type: String},
@@ -14,6 +14,26 @@ Vue.component("category-image-carousel", {
         },
         enableCarousel : {type: Boolean},
         template       : {type: String}
+    },
+
+    computed:
+    {
+        imageUrls()
+        {
+            return this.imageUrlsData.sort((imageUrlA, imageUrlB) =>
+            {
+                if (imageUrlA.position > imageUrlB.position)
+                {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
     },
 
     created: function()

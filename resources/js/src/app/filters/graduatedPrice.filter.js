@@ -4,7 +4,7 @@ Vue.filter("graduatedPrice", function(item, quantity)
 
     let returnPrice;
 
-    if (graduatedPrices[0])
+    if (graduatedPrices && graduatedPrices[0])
     {
         const prices = graduatedPrices.filter(price =>
         {

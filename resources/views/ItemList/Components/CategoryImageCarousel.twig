@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-category-image-carousel">
     <div :id="'owl-carousel-' + _uid" v-if="enableCarousel" class="owl-carousel owl-theme">
-        <a v-for="(imageUrl, index) in imageUrls | orderBy 'position'" :href="itemUrl">
+        <a v-for="(imageUrl, index) in imageUrls" :href="itemUrl">
 
             <item-lazy-img template="#vue-item-lazy-img" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url"
                         :alt="altText"></item-lazy-img>

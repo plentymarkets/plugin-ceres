@@ -9,6 +9,23 @@ Vue.component("item-filter", {
 
     computed:
     {
+        facets()
+        {
+            return this.facet.values.sort((facetA, facetB) =>
+            {
+                if (facetA.id > facetB.id)
+                {
+                    return 1;
+                }
+                if (facetA.id < facetB.id)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
+
         ...Vuex.mapState({
             selectedFacets: state => state.itemList.selectedFacets,
             isLoading: state => state.itemList.isLoading

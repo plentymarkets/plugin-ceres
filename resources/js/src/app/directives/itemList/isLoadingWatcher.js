@@ -21,7 +21,7 @@ Vue.directive("is-loading-watcher",
             }
             else
             {
-                el.isFirstRendering = false;
+                el.isFirstRendering = !binding.value;
             }
         }
     });
