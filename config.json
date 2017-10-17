@@ -1,6 +1,12 @@
 [
     {
         "tab"       : "Global",
+        "key"       : "global.meta_description",
+        "label"     : "Meta description for your store",
+        "type"      : "textarea"
+    },
+    {
+        "tab"       : "Global",
         "key"       : "global.shippingCostsCategoryId",
         "label"     : "Category to display shipping information",
         "type"      : "category_select"

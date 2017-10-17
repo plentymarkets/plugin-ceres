@@ -1,15 +1,41 @@
 # Release Notes für Ceres
 
-## v1.5.x (TBA)
+## v1.6.1 (beta)
+
+### Hinzugefügt
+
+- Meta Description kann jetzt für den Shop in der Konfig gesetzt werden.
+
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Staffelpreise sind nun in Ceres integriert und werden unterhalb der Bestellmerkmale in der Einzelansicht eines Artikels ausgegeben. Weitere Informationen zu Staffelpreisen finden Sie unter <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#870" target="_blank"><b>Verkaufspreise verwalten</b></a>.
+
+### Geändert
+
+- Der Text von Bestellmerkmalen wird in der Warenkorbvorschau nicht mehr ausgegeben. 
+- Bestellmerkmale werden in der Einzelansicht eines Artikels oberhalb der Preise ausgegeben.
+- In der Einzelansicht eines Artikels wird der Artikelpreis nun live anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Im Overlay **Zum Warenkorb hinzufügen** wird der Artikelpreis nun korrekt anhand der Merkmalaufpreise und Staffelpreise berechnet.
+- Das Uhrensymbol in der Auftragshistorie wurde durch einen Text ersetzt.
+- Das Uhrensymbol in der Retourenhistorie wurde durch einen Text ersetzt.
+
+## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
 
-### Bearbeitet
+### Geändert
 
-- Der LayoutContainer **SingleItem.AddDetailTabs** beinhaltet nun das aktuelle Item.
-- Der LayoutContainer **SingleItem.AddDetailTabsContent** beinhaltet nun das aktuelle Item.
+- Der Template-Container **Single item: Add detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+- Der Template-Container **Single item: Add content to detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
+
+### Behoben
+
+- Die Aufpreise der Bestellmerkmale werden nun im Warenkorb und der Warenkorbvorschau wieder korrekt ausgegeben.
+- Im **Mein Konto**-Bereich wird der Hinweis **Zahlungsart kann nicht geändert werden** nicht mehr angezeigt, sobald der Auftrag bezahlt wurde.
 
 ## v1.5.0 (2017-09-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.4.7...1.5.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
