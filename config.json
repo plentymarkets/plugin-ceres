@@ -995,6 +995,13 @@
     },
     {
         "tab"               : "Checkout and My account",
+        "key"               : "my_account.order_return_active",
+        "label"             : "Allow returns in My account",
+        "type"              : "checkbox",
+        "default"           : "true"
+    },
+    {
+        "tab"               : "Checkout and My account",
         "key"               : "my_account.order_return_days",
         "label"             : "Number of days to return items of an order",
         "type"              : "text",
