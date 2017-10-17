@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-item-filter">
     <div class="card">
         <h3>${facet.names[0].name}</h3>
-        <div class="form-check" v-for="value in facet.values | orderBy 'id' -1">
+        <div class="form-check" v-for="value in facets">
             <input :id="'option-' + value.id" class="form-check-input hidden-xs-up" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading">
             <label :for="'option-' + value.id" class="form-check-label">
                 ${ value.names[0].name }
