@@ -1,6 +1,7 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta.description_my_account") }}">
     <title>{{ trans("Ceres::Template.accMyAccount") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 

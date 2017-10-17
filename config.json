@@ -15,12 +15,6 @@
     },
     {
         "tab"       : "Global",
-        "key"       : "global.meta_description",
-        "label"     : "Meta description for your store",
-        "type"      : "textarea"
-    },
-    {
-        "tab"       : "Global",
         "key"       : "global.shippingCostsCategoryId",
         "label"     : "Category to display shipping information",
         "type"      : "category_select"
@@ -90,6 +84,118 @@
         "label"                       : "Show map in mobile view",
         "type"                        : "checkbox",
         "default"                     : "false"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_home",
+        "label"     : "Meta description for homepage",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_basket",
+        "label"     : "Meta description for basket",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_checkout",
+        "label"     : "Meta description for checkout",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_order_confirmation",
+        "label"     : "Meta description for order confirmation",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_contact",
+        "label"     : "Meta description for contact",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_login",
+        "label"     : "Meta description for login",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_register",
+        "label"     : "Meta description for register",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_password_reset",
+        "label"     : "Meta description for password reset",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_my_account",
+        "label"     : "Meta description for my account",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_order_return",
+        "label"     : "Meta description for order return",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_item_not_found",
+        "label"     : "Meta description for item 404",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {  
+        "tab"       : "SEO",
+        "key"       : "meta.description_page_not_found",
+        "label"     : "Meta description for page 404",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.description_cancel_rights",
+        "label"     : "Meta description for cancel rights",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {  
+        "tab"       : "SEO",
+        "key"       : "meta.description_legal_disclosure",
+        "label"     : "Meta description for legal disclosure",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {  
+        "tab"       : "SEO",
+        "key"       : "meta.description_privacy_policy",
+        "label"     : "Meta description for privacy policy",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {  
+        "tab"       : "SEO",
+        "key"       : "meta.description_terms_and_conditions",
+        "label"     : "Meta description for terms and conditions",
+        "type"      : "textarea",
+        "default"   : ""
     },
     {
         "tab"       : "Homepage",

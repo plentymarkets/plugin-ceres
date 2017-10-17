@@ -2,6 +2,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta.description_basket") }}">
     <title>{{ trans("Ceres::Template.basket") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 

@@ -1,6 +1,7 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta.description_contact") }}"> 
     <title>{{ trans("Ceres::Template.generalContact") }} | {{ config("Ceres.header.company_name") }}</title>
 
     {% if services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey | length > 0 %}
