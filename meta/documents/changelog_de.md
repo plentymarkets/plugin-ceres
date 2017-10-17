@@ -4,7 +4,11 @@
 
 ### Hinzugefügt
 
-- Meta Description kann jetzt für den Shop in der Konfig gesetzt werden.
+- Meta Description kann jetzt für den Shop in der Konfiguration gesetzt werden.
+
+### Geändert
+
+- **Name of your store** & **URL to your company logo** befinden sich nun im Tab *General* der Konfiguration.
 
 ## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 

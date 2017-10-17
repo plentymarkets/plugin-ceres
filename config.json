@@ -1,6 +1,20 @@
 [
     {
         "tab"       : "Global",
+        "key"       : "header.company_name",
+        "label"     : "Name of your store",
+        "type"      : "text",
+        "default"   : "Ceres Webshop"
+    },
+    {
+        "tab"       : "Global",
+        "key"       : "header.company_logo",
+        "label"     : "URL to your company logo",
+        "type"      : "text",
+        "default"   : "images/ceres-logo.svg"
+    },
+    {
+        "tab"       : "Global",
         "key"       : "global.meta_description",
         "label"     : "Meta description for your store",
         "type"      : "textarea"
@@ -181,20 +195,6 @@
         "key"       : "homepage.homepageCategory6",
         "label"     : "Category to display in the second list of items",
         "type"      : "category_select"
-    },
-    {
-        "tab"       : "Header",
-        "key"       : "header.company_logo",
-        "label"     : "URL to your company logo",
-        "type"      : "text",
-        "default"   : "images/ceres-logo.svg"
-    },
-    {
-        "tab"       : "Header",
-        "key"       : "header.company_name",
-        "label"     : "Name of your store",
-        "type"      : "text",
-        "default"   : "Ceres Webshop"
     },
     {
         "tab"       : "Header",
