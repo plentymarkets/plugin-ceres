@@ -41,7 +41,7 @@ Vue.component("user-login-handler", {
         {
             ApiService.listen("AfterAccountAuthentication", userData =>
             {
-                this.$store.commit("setUserData", userData);
+                this.$store.commit("setUserData", userData.accountContact);
             });
 
             ApiService.listen("AfterAccountContactLogout", () =>

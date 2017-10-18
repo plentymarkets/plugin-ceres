@@ -82,7 +82,7 @@ Vue.component("graduated-prices", {
     {
         graduatedPrices()
         {
-            if (this.currentVariation)
+            if (this.currentVariation && this.currentVariation.documents[0])
             {
                 return this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
             }
