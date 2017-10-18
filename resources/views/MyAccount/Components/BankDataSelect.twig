@@ -27,7 +27,7 @@
         </div>
         <div class="dropdown-menu" aria-labelledby="bankData">
             <ul>
-                <li class="item" v-for="(index,bankData) in userBankData">
+                <li class="item" v-for="(bankData, index) in userBankData">
                     <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
                     <label :for="bankData.id" class="item-inner">
                         <span class="item-content small">

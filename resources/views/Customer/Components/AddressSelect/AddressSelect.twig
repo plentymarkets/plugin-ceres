@@ -47,7 +47,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty">
                     <ul>
-                        <li class="item" v-for="(index, address) in addressList">
+                        <li class="item" v-for="(address, index) in addressList">
                             <input
                                     type="radio"
                                     :name="'shippingAddress' + _uid"
