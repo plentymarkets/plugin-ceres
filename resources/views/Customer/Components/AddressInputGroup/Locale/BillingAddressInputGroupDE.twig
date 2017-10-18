@@ -145,14 +145,14 @@
 </div>
 
 <div class="col-xs-12 col-sm-4">
-    <div class="input-unit" data-validate="text" data-model="postalCode" data-model="postalCode">
+    <div class="input-unit" data-validate="text" data-model="postalCode">
         <input type="text" name="zip" :id="'txtZip' + _uid" v-model="addressData.postalCode">
         <label :for="'txtZip' + _uid">{{ trans("Ceres::Template.addressZip") }}*</label>
     </div>
 </div>
 
 <div class="col-xs-12 col-sm-4">
-    <div class="input-unit" data-validate="text" data-model="town" data-model="town">
+    <div class="input-unit" data-validate="text" data-model="town">
         <input type="text" name="town" :id="'txtPlace' + _uid" v-model="addressData.town">
         <label :for="'txtPlace' + _uid">{{ trans("Ceres::Template.addressPlace") }}*</label>
     </div>

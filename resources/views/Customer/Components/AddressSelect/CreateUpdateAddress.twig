@@ -11,7 +11,7 @@
             </div>
         </div>
     </form>
-    <form id="delivery_address_form" v-if="addressType === '2'">
+    <form id="delivery_address_form" v-else-if="addressType === '2'">
         <div class="row">
 
             <address-input-group template="#vue-address-input-group" :address-data="addressData" :address-type="addressType" :modal-type="modalType"></address-input-group>

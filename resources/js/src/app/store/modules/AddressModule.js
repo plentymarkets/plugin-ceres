@@ -307,7 +307,7 @@ const getters =
     {
         getSelectedAddress: state => addressType =>
         {
-            let selectedAddress = {};
+            let selectedAddress;
 
             if (addressType === "1")
             {
