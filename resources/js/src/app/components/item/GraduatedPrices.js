@@ -7,7 +7,7 @@ Vue.component("graduated-prices", {
     {
         graduatedPrices()
         {
-            return this.$store.state.singleItem.variation.documents[0].data.calculatedPrices.graduatedPrices.sort((priceA, priceB) =>
+            return this.$store.state.tem.variation.documents[0].data.calculatedPrices.graduatedPrices.sort((priceA, priceB) =>
             {
                 if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity)
                 {
