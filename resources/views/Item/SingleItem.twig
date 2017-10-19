@@ -8,7 +8,8 @@
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ item.documents[0].data.texts.shortDescription }}">
+    <meta name="description" content="{{ item.documents[0].data.texts.metaDescription }}">
+    <meta name="keywords" content="{{ item.documents[0].data.texts.keywords | json_encode }}">
 
     <meta property="og:title" content="{{ item.documents[0].data.texts | itemName(configItemName) }}" />
     <meta property="og:type" content="article" />
