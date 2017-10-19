@@ -1,5 +1,16 @@
 # Release Notes for Ceres
 
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Add
+
+- Meta descriptions and robots settings for static pages of the online store can now be entered in the **SEO** tab. For further information about this, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#201" target="_blank"><b>Carrying out settings for search engine optimisation</b></a>.
+
+### Changed
+
+- **Name of your store** and **URL to your company logo** have been moved to the **Global** tab of the configuration.
+- The **Allow returns** setting has been added in the **Checkout and My account** tab of the configuration and replaced the old setting for activating returns in the plentymarkets back end.
+
 ## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
