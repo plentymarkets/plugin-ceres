@@ -1220,7 +1220,7 @@
     {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_contact",
-        "label"                       : "Robots for contact",
+        "label"                       : "Robots for contact page",
         "type"                        : "dropdown",
         "possibleValues"              :
         {
@@ -1228,21 +1228,21 @@
           "index"                     : "index",
           "nofollow"                  : "nofollow",
           "noindex"                   : "noindex",
-          "noindex_nofollow"          : "noindex, nofollow"
+          "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
     },
     {
         "tab"       : "SEO",
         "key"       : "meta.de.description_contact",
-        "label"     : "Meta description for contact (DE)",
+        "label"     : "Meta description for contact page (DE)",
         "type"      : "textarea",
         "default"   : ""
     },
     {
         "tab"       : "SEO",
         "key"       : "meta.en.description_contact",
-        "label"     : "Meta description for contact (EN)",
+        "label"     : "Meta description for contact page (EN)",
         "type"      : "textarea",
         "default"   : ""
     },
@@ -1257,7 +1257,7 @@
           "index"                     : "index",
           "nofollow"                  : "nofollow",
           "noindex"                   : "noindex",
-          "noindex_nofollow"          : "noindex, nofollow"
+          "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
     },
@@ -1286,7 +1286,7 @@
           "index"                     : "index",
           "nofollow"                  : "nofollow",
           "noindex"                   : "noindex",
-          "noindex_nofollow"          : "noindex, nofollow"
+          "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
     },
@@ -1315,7 +1315,7 @@
           "index"                     : "index",
           "nofollow"                  : "nofollow",
           "noindex"                   : "noindex",
-          "noindex_nofollow"          : "noindex, nofollow"
+          "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
     },
@@ -1344,7 +1344,7 @@
           "index"                     : "index",
           "nofollow"                  : "nofollow",
           "noindex"                   : "noindex",
-          "noindex_nofollow"          : "noindex, nofollow"
+          "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
     },

@@ -4,12 +4,12 @@
 
 ### Hinzugefügt
 
-- Meta Description kann jetzt für jede Seite des Shops in der Konfiguration gesetzt werden.
+- Meta-Beschreibungen und Robots-Einstellungen können jetzt für statische Seiten des Webshops im Tab **SEO** in der Konfiguration eingegeben werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#201" target="_blank"><b>Einstellungen für Suchmaschinenoptimierung vornehmen</b></a>.
 
 ### Geändert
 
-- **Name of your store** & **URL to your company logo** befinden sich nun im Tab *General* der Konfiguration.
-- Einstellung Retoure aktiv
+- **Name of your store** and **URL to your company logo** befinden sich nun im Tab **Global** der Konfiguration.
+- Die Einstellung **Allow returns** wurde im Tab **Checkout and My account** der Konfiguration hinzugefügt und ersetzt die alte Einstellung zur Aktivierung von Retouren im plentymarkets Backend.
 
 ## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
