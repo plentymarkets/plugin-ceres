@@ -71,7 +71,7 @@ Vue.component("item-image-carousel", {
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
 
-            const $thumbs = $(this.$els.thumbs);
+            const $thumbs = $(this.$refs.thumbs);
 
             $thumbs.trigger("destroy.owl.carousel");
             $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");

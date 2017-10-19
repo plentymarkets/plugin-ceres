@@ -31,7 +31,7 @@ Vue.component("order-return", {
     {
         showConfirmationModal()
         {
-            $(this.$els.orderReturnConfirmation).modal("show");
+            $(this.$refs.orderReturnConfirmation).modal("show");
         },
 
         sendReturnItems()
@@ -44,12 +44,12 @@ Vue.component("order-return", {
                     NotificationService.success(Translations.Template.myAccountReturnSuccess);
 
                     window.open("/my-account", "_self");
-                    $(this.$els.orderReturnConfirmation).modal("hide");
+                    $(this.$refs.orderReturnConfirmation).modal("hide");
                 },
                 error =>
                 {
                     this.isLoading = false;
-                    $(this.$els.orderReturnConfirmation).modal("hide");
+                    $(this.$refs.orderReturnConfirmation).modal("hide");
                 });
         },
 

@@ -76,8 +76,8 @@ Vue.component("address-select", {
     {
         this.$nextTick(() =>
         {
-            this.addressModal = ModalService.findModal(this.$els.addressModal);
-            this.deleteModal = ModalService.findModal(this.$els.deleteModal);
+            this.addressModal = ModalService.findModal(this.$refs.addressModal);
+            this.deleteModal = ModalService.findModal(this.$refs.deleteModal);
         });
     },
 
