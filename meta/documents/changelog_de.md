@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v1.6.1 (beta)
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
@@ -9,6 +9,7 @@
 ### Geändert
 
 - **Name of your store** & **URL to your company logo** befinden sich nun im Tab *General* der Konfiguration.
+- Einstellung Retoure aktiv
 
 ## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
