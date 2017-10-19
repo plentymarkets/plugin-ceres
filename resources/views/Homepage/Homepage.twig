@@ -5,6 +5,9 @@
 {% set companyName  = config("Ceres.header.company_name") %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_home") }}">
+    <meta name="robots" content="{{ config("Ceres.meta.robots_home") }}">
+
     <meta property="og:title" content="{{ companyName }}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}"/>

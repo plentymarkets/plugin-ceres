@@ -3,6 +3,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_privacy_policy") }}">
+    <meta name="robots" content="{{ config("Ceres.meta.robots_privacy_policy") }}">
     <title>{{ trans("Ceres::Template.generalPrivacyPolicyNoShy") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 

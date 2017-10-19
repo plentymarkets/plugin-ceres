@@ -3,6 +3,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_terms_and_conditions") }}">
+    <meta name="robots" content="{{ config("Ceres.meta.robots_terms_and_conditions") }}">
     <title>{{ trans("Ceres::Template.generalGtc") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 

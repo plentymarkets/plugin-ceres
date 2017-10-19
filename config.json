@@ -15,12 +15,6 @@
     },
     {
         "tab"       : "Global",
-        "key"       : "global.meta_description",
-        "label"     : "Meta description for your store",
-        "type"      : "textarea"
-    },
-    {
-        "tab"       : "Global",
         "key"       : "global.shippingCostsCategoryId",
         "label"     : "Category to display shipping information",
         "type"      : "category_select"
@@ -1193,6 +1187,180 @@
 
       },
       "default"                   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_home",
+        "label"                       : "Robots for homepage",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_home",
+        "label"     : "Meta description for homepage (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_home",
+        "label"     : "Meta description for homepage (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_contact",
+        "label"                       : "Robots for contact",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex_nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_contact",
+        "label"     : "Meta description for contact (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_contact",
+        "label"     : "Meta description for contact (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_cancel_rights",
+        "label"                       : "Robots for cancellation rights",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex_nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_cancel_rights",
+        "label"     : "Meta description for cancellation rights (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_cancel_rights",
+        "label"     : "Meta description for cancellation rights (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_legal_disclosure",
+        "label"                       : "Robots for legal disclosure",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex_nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_legal_disclosure",
+        "label"     : "Meta description for legal disclosure (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_legal_disclosure",
+        "label"     : "Meta description for legal disclosure (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_privacy_policy",
+        "label"                       : "Robots for privacy policy",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex_nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_privacy_policy",
+        "label"     : "Meta description for privacy policy (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_privacy_policy",
+        "label"     : "Meta description for privacy policy (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_terms_and_conditions",
+        "label"                       : "Robots for terms and conditions",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex_nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_terms_and_conditions",
+        "label"     : "Meta description for terms and conditions (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_terms_and_conditions",
+        "label"     : "Meta description for terms and conditions (EN)",
+        "type"      : "textarea",
+        "default"   : ""
     },
     {
         "tab"               : "Logging and performance",

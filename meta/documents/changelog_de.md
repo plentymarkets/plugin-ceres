@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Meta Description kann jetzt für den Shop in der Konfiguration gesetzt werden.
+- Meta Description kann jetzt für jede Seite des Shops in der Konfiguration gesetzt werden.
 
 ### Geändert
 
