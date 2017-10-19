@@ -12932,7 +12932,7 @@ Vue.component("user-login-handler", {
             var _this2 = this;
 
             ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this2.$store.commit("setUserData", userData);
+                _this2.$store.commit("setUserData", userData.accountContact);
             });
 
             ApiService.listen("AfterAccountContactLogout", function () {
@@ -13121,7 +13121,7 @@ Vue.component("graduated-prices", {
 
     computed: {
         graduatedPrices: function graduatedPrices() {
-            if (this.currentVariation) {
+            if (this.currentVariation && this.currentVariation.documents[0]) {
                 return this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
             }
 
@@ -13663,7 +13663,7 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrls: { type: Array },
+        imageUrlsData: { type: Array },
         itemUrl: { type: String },
         altText: { type: String },
         showDots: { type: String },
@@ -13674,6 +13674,21 @@ Vue.component("category-image-carousel", {
         },
         enableCarousel: { type: Boolean },
         template: { type: String }
+    },
+
+    computed: {
+        imageUrls: function imageUrls() {
+            return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
+                if (imageUrlA.position > imageUrlB.position) {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
     },
 
     created: function created() {
@@ -14217,7 +14232,20 @@ Vue.component("item-filter", {
 
     props: ["template", "facet"],
 
-    computed: _extends({}, Vuex.mapState({
+    computed: _extends({
+        facets: function facets() {
+            return this.facet.values.sort(function (facetA, facetB) {
+                if (facetA.id > facetB.id) {
+                    return 1;
+                }
+                if (facetA.id < facetB.id) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }, Vuex.mapState({
         selectedFacets: function selectedFacets(state) {
             return state.itemList.selectedFacets;
         },
@@ -14267,7 +14295,16 @@ Vue.component("item-filter-list", {
 
     computed: Vuex.mapState({
         facets: function facets(state) {
-            return state.itemList.facets;
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.id > facetB.id) {
+                    return 1;
+                }
+                if (facetA.id < facetB.id) {
+                    return -1;
+                }
+
+                return 0;
+            });
         }
     }),
 
@@ -15589,7 +15626,7 @@ Vue.directive("is-loading-watcher", {
                 $("#twig-rendered-item-list").addClass("loading");
             }
         } else {
-            el.isFirstRendering = false;
+            el.isFirstRendering = !binding.value;
         }
     }
 });
@@ -15902,7 +15939,7 @@ Vue.filter("graduatedPrice", function (item, quantity) {
 
     var returnPrice = void 0;
 
-    if (graduatedPrices[0]) {
+    if (graduatedPrices && graduatedPrices[0]) {
         var prices = graduatedPrices.filter(function (price) {
             return parseInt(quantity) >= price.minimumOrderQuantity;
         });
@@ -17913,7 +17950,7 @@ var actions = {
 var getters = {
     getSelectedAddress: function getSelectedAddress(state) {
         return function (addressType) {
-            var selectedAddress = {};
+            var selectedAddress = void 0;
 
             if (addressType === "1") {
                 selectedAddress = state.billingAddress;
@@ -19095,20 +19132,20 @@ var init = (function($, window, document)
             {
                 evt.preventDefault();
                 evt.stopPropagation();
-                $("body").toggleClass("open-right");
+                $("#vue-app").toggleClass("open-right");
             });
         }, 1);
 
         $(document).on("click", function(evt)
         {
-            if ($("body").hasClass("open-right"))
+            if ($("#vue-app").hasClass("open-right"))
             {
                 if ((evt.target != $(".basket-preview")) &&
                     (evt.target.classList[0] != "message") &&
                     ($(evt.target).parents(".basket-preview").length <= 0))
                 {
                     evt.preventDefault();
-                    $("body").toggleClass("open-right");
+                    $("#vue-app").toggleClass("open-right");
                 }
             }
 
