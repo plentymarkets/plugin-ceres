@@ -27,12 +27,10 @@ Vue.component("notifications", {
     {
         this.$nextTick(() =>
         {
-            var self = this;
-
             NotificationService.listen(
-                function(notifications)
+                notifications =>
                 {
-                    self.$set("notifications", notifications);
+                    Vue.set(this, "notifications", notifications);
                 });
 
             this.showInitialNotifications();
