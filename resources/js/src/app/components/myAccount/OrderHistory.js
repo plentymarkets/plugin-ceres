@@ -43,7 +43,7 @@ Vue.component("order-history", {
 
         setOrders(orderList)
         {
-            this.$set("orderList", orderList);
+            Vue.set(this, "orderList", orderList);
             this.page = this.orderList.page;
             this.countStart = ((this.orderList.page - 1) * this.itemsPerPage) + 1;
             this.countEnd = this.orderList.page * this.itemsPerPage;

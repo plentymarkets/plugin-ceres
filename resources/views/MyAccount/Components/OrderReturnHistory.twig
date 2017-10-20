@@ -17,7 +17,7 @@
 
 				<div :class="{ 'loading': waiting }">
 					{% include "Ceres::ItemList.Partials.LoadingAnimation" %}
-				<div>
+				</div>
 
 				<div v-if="!waiting" class="order-list">
 					<article class="cmp cmp-order-item" v-for="entry in returnsList.entries">
@@ -41,7 +41,7 @@
 										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.returnDate") }}: </strong>
-											<span>${ entry.order.createdAt | moment "{{ trans("Ceres::Template.dateTimeFormatMoment") }}" } {{ trans("Ceres::Template.time") }}</span>
+											<span>${ entry.order.createdAt | moment("{{ trans("Ceres::Template.dateTimeFormatMoment") }}") } {{ trans("Ceres::Template.time") }}</span>
 										</div>
 										<div class="col-md-3">
 											<strong>{{ trans("Ceres::Template.orderPaymentMethod") }}: </strong>

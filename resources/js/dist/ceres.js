@@ -11812,8 +11812,8 @@ Vue.component("address-select", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.addressModal = ModalService.findModal(_this.$els.addressModal);
-            _this.deleteModal = ModalService.findModal(_this.$els.deleteModal);
+            _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
+            _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
         });
     },
 
@@ -12026,7 +12026,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressFieldService":93,"services/ApiService":94,"services/ModalService":98,"services/ValidationService":102}],21:[function(require,module,exports){
+},{"services/AddressFieldService":93,"services/ApiService":94,"services/ModalService":98,"services/ValidationService":101}],21:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12231,7 +12231,7 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":99,"services/ValidationService":102}],22:[function(require,module,exports){
+},{"services/NotificationService":99,"services/ValidationService":101}],22:[function(require,module,exports){
 "use strict";
 
 Vue.component("invoice-address-select", {
@@ -12472,7 +12472,7 @@ Vue.component("contact-form", {
     }
 });
 
-},{"services/ApiService":94,"services/NotificationService":99,"services/ValidationService":102}],25:[function(require,module,exports){
+},{"services/ApiService":94,"services/NotificationService":99,"services/ValidationService":101}],25:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -12747,7 +12747,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":102}],28:[function(require,module,exports){
+},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":101}],28:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12848,7 +12848,7 @@ Vue.component("reset-password-form", {
 
 });
 
-},{"services/ApiService":94,"services/NotificationService":99,"services/ValidationService":102}],29:[function(require,module,exports){
+},{"services/ApiService":94,"services/NotificationService":99,"services/ValidationService":101}],29:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
@@ -13015,7 +13015,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":94,"services/ValidationService":102}],31:[function(require,module,exports){
+},{"services/ApiService":94,"services/ValidationService":101}],31:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -13192,7 +13192,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":102}],32:[function(require,module,exports){
+},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":101}],32:[function(require,module,exports){
 "use strict";
 
 Vue.component("login-view", {
@@ -13257,7 +13257,7 @@ Vue.component("user-login-handler", {
             var _this2 = this;
 
             ApiService.listen("AfterAccountAuthentication", function (userData) {
-                _this2.$store.commit("setUserData", userData);
+                _this2.$store.commit("setUserData", userData.accountContact);
             });
 
             ApiService.listen("AfterAccountContactLogout", function () {
@@ -13271,7 +13271,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":94,"services/ValidationService":102}],34:[function(require,module,exports){
+},{"services/ApiService":94,"services/ValidationService":101}],34:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -13355,16 +13355,24 @@ Vue.component("add-to-wish-list", {
 },{"services/NotificationService":99}],35:[function(require,module,exports){
 "use strict";
 
-var ResourceService = require("services/ResourceService");
-
 Vue.component("graduated-prices", {
     props: ["template"],
 
-    data: function data() {
-        return {
-            currentVariation: null
-        };
+    computed: {
+        graduatedPrices: function graduatedPrices() {
+            return this.$store.state.tem.variation.documents[0].data.calculatedPrices.graduatedPrices.sort(function (priceA, priceB) {
+                if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity) {
+                    return 1;
+                }
+                if (priceA.minimumOrderQuantity < priceB.minimumOrderQuantity) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
     },
+
     created: function created() {
         this.$options.template = this.template;
     },
@@ -13372,7 +13380,6 @@ Vue.component("graduated-prices", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.currentVariation = ResourceService.getResource("currentVariation").val();
             _this.initializeEvents();
         });
     },
@@ -13383,33 +13390,18 @@ Vue.component("graduated-prices", {
             this.initCurrentWatcher();
             this.initQuantityPriceWatcher();
         },
-        initCurrentWatcher: function initCurrentWatcher() {
-            var _this2 = this;
-
-            ResourceService.watch("currentVariation", function (newValue, oldValue) {
-                _this2.currentVariation = newValue;
-            });
-        },
         initQuantityPriceWatcher: function initQuantityPriceWatcher() {
-            var _this3 = this;
+            var _this2 = this;
 
             // TODO replace this after vuex change and single item component change
 
             document.addEventListener("itemGraduatedPriceChanged", function (event) {
-                var graduatedPrices = _this3.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
-
-                graduatedPrices = graduatedPrices.sort(function (firstValue, secondValue) {
-                    return firstValue.minimumOrderQuantity - secondValue.minimumOrderQuantity;
-                });
-
-                var priceToMark = 0;
-
                 var _iteratorNormalCompletion = true;
                 var _didIteratorError = false;
                 var _iteratorError = undefined;
 
                 try {
-                    for (var _iterator = graduatedPrices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    for (var _iterator = _this2.graduatedPrices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var price = _step.value;
 
                         // unmark other selections
@@ -13442,20 +13434,10 @@ Vue.component("graduated-prices", {
                 }
             });
         }
-    },
-
-    computed: {
-        graduatedPrices: function graduatedPrices() {
-            if (this.currentVariation) {
-                return this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
-            }
-
-            return [];
-        }
     }
 });
 
-},{"services/ResourceService":100}],36:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-image-carousel", {
@@ -13523,7 +13505,7 @@ Vue.component("item-image-carousel", {
             $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
             $owl.find(".owl-item").remove();
 
-            var $thumbs = $(this.$els.thumbs);
+            var $thumbs = $(this.$refs.thumbs);
 
             $thumbs.trigger("destroy.owl.carousel");
             $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
@@ -13988,7 +13970,7 @@ Vue.component("category-image-carousel", {
     delimiters: ["${", "}"],
 
     props: {
-        imageUrls: { type: Array },
+        imageUrlsData: { type: Array },
         itemUrl: { type: String },
         altText: { type: String },
         showDots: { type: String },
@@ -13999,6 +13981,21 @@ Vue.component("category-image-carousel", {
         },
         enableCarousel: { type: Boolean },
         template: { type: String }
+    },
+
+    computed: {
+        imageUrls: function imageUrls() {
+            return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
+                if (imageUrlA.position > imageUrlB.position) {
+                    return 1;
+                }
+                if (imageUrlA.position < imageUrlB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
     },
 
     created: function created() {
@@ -14226,7 +14223,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":101}],46:[function(require,module,exports){
+},{"services/UrlService":100}],46:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -14329,7 +14326,7 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/UrlService":101}],47:[function(require,module,exports){
+},{"services/UrlService":100}],47:[function(require,module,exports){
 "use strict";
 
 var accounting = require("accounting");
@@ -14457,7 +14454,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":101}],49:[function(require,module,exports){
+},{"services/UrlService":100}],49:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14531,7 +14528,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":101}],50:[function(require,module,exports){
+},{"services/UrlService":100}],50:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14542,7 +14539,20 @@ Vue.component("item-filter", {
 
     props: ["template", "facet"],
 
-    computed: _extends({}, Vuex.mapState({
+    computed: _extends({
+        facets: function facets() {
+            return this.facet.values.sort(function (facetA, facetB) {
+                if (facetA.id > facetB.id) {
+                    return 1;
+                }
+                if (facetA.id < facetB.id) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        }
+    }, Vuex.mapState({
         selectedFacets: function selectedFacets(state) {
             return state.itemList.selectedFacets;
         },
@@ -14592,7 +14602,16 @@ Vue.component("item-filter-list", {
 
     computed: Vuex.mapState({
         facets: function facets(state) {
-            return state.itemList.facets;
+            return state.itemList.facets.sort(function (facetA, facetB) {
+                if (facetA.id > facetB.id) {
+                    return 1;
+                }
+                if (facetA.id < facetB.id) {
+                    return -1;
+                }
+
+                return 0;
+            });
         }
     }),
 
@@ -14620,7 +14639,7 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":101}],52:[function(require,module,exports){
+},{"services/UrlService":100}],52:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -14987,7 +15006,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":102}],55:[function(require,module,exports){
+},{"services/ApiService":94,"services/ModalService":98,"services/NotificationService":99,"services/ValidationService":101}],55:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -15342,7 +15361,7 @@ Vue.component("order-return", {
 
     methods: _extends({
         showConfirmationModal: function showConfirmationModal() {
-            $(this.$els.orderReturnConfirmation).modal("show");
+            $(this.$refs.orderReturnConfirmation).modal("show");
         },
         sendReturnItems: function sendReturnItems() {
             var _this = this;
@@ -15353,10 +15372,10 @@ Vue.component("order-return", {
                 NotificationService.success(Translations.Template.myAccountReturnSuccess);
 
                 window.open("/my-account", "_self");
-                $(_this.$els.orderReturnConfirmation).modal("hide");
+                $(_this.$refs.orderReturnConfirmation).modal("hide");
             }, function (error) {
                 _this.isLoading = false;
-                $(_this.$els.orderReturnConfirmation).modal("hide");
+                $(_this.$refs.orderReturnConfirmation).modal("hide");
             });
         },
         selectAllItems: function selectAllItems() {
@@ -15744,7 +15763,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":103}],67:[function(require,module,exports){
+},{"services/WaitScreenService":102}],67:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15914,7 +15933,7 @@ Vue.directive("is-loading-watcher", {
                 $("#twig-rendered-item-list").addClass("loading");
             }
         } else {
-            el.isFirstRendering = false;
+            el.isFirstRendering = !binding.value;
         }
     }
 });
@@ -16227,7 +16246,7 @@ Vue.filter("graduatedPrice", function (item, quantity) {
 
     var returnPrice = void 0;
 
-    if (graduatedPrices[0]) {
+    if (graduatedPrices && graduatedPrices[0]) {
         var prices = graduatedPrices.filter(function (price) {
             return parseInt(quantity) >= price.minimumOrderQuantity;
         });
@@ -16595,7 +16614,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{"services/NotificationService":99,"services/WaitScreenService":103}],95:[function(require,module,exports){
+},{"services/NotificationService":99,"services/WaitScreenService":102}],95:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16822,7 +16841,7 @@ exports.default = {
     updateItemListUrlParams: updateItemListUrlParams
 };
 
-},{"services/UrlService":101}],98:[function(require,module,exports){
+},{"services/UrlService":100}],98:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -17107,471 +17126,6 @@ module.exports = function ($) {
 },{}],100:[function(require,module,exports){
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var ApiService = require("services/ApiService");
-
-module.exports = function ($) {
-
-    var resources = {};
-
-    return {
-        registerResource: registerResource,
-        registerResourceList: registerResourceList,
-        getResource: getResource,
-        watch: watch,
-        bind: bind
-    };
-
-    /**
-     * Register a new resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource} The created resource.
-     */
-    function registerResource(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new Resource(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Register a new list resource
-     * @param {string}  name          The name of the resource. Must be a unique identifier
-     * @param {string}  route         The route to bind the resource to
-     * @param {*}       initialValue  The initial value to assign to the resource
-     *
-     * @returns {Resource}            The created resource.
-     */
-    function registerResourceList(name, route, initialValue, responseTemplate) {
-        if (!name) {
-            throw new Error("Cannot register resource. Name is required.");
-        }
-
-        if (!route && typeof initialValue === "undefined") {
-            throw new Error("Cannot register resource. Route or initial value is required.");
-        }
-
-        if (resources[name]) {
-            throw new Error("Resource '" + name + "' already exists.");
-        }
-
-        var data;
-
-        try {
-            data = $.parseJSON(initialValue);
-        } catch (err) {
-            data = initialValue;
-        }
-
-        name = name.toLowerCase();
-        resources[name] = new ResourceList(route, data, responseTemplate);
-
-        return resources[name];
-    }
-
-    /**
-     * Receive a registered resource by its name
-     * @param {string}  name    The name of the resource to receive
-     *
-     * @returns {Resource}      The resource
-     */
-    function getResource(name) {
-        name = name.toLowerCase();
-
-        if (!resources[name]) {
-            throw new Error("Unkown resource: " + name);
-        }
-
-        return resources[name];
-    }
-
-    /**
-     * Track changes of a given resource.
-     * @param {string}      name        The name of the resource to watch
-     * @param {function}    callback    The handler to call on each change
-     */
-    function watch(name, callback) {
-        getResource(name).watch(callback);
-    }
-
-    /**
-     * Bind a resource to a property of a vue instance.
-     * @param {string}  name        The name of the resource to bind
-     * @param {Vue}     vue         The vue instance
-     * @param {string}  property    The property of the vue instance. Optional if the property name is equal to the resource name.
-     */
-    function bind(name, vue, property) {
-        property = property || name;
-        getResource(name).bind(vue, property);
-    }
-
-    /**
-     * @class Observable
-     * Automatically notify all attached listeners on any changes.
-     */
-    function Observable() {
-        var _value;
-        var _watchers = [];
-
-        return {
-            get value() {
-                return _value;
-            },
-            set value(newValue) {
-                for (var i = 0; i < _watchers.length; i++) {
-                    var watcher = _watchers[i];
-
-                    watcher.apply({}, [newValue, _value]);
-                }
-                _value = newValue;
-            },
-            watch: function watch(cb) {
-                _watchers.push(cb);
-            }
-        };
-    }
-
-    /**
-     * @class Resource
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function Resource(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        // initialize resource
-        if (typeof initialValue !== "undefined") {
-            // Initial value that was given by constructor
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            // If no initial value was given, get the value from the URL
-            ApiService.get(url, { template: this.responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {string}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of the resource.
-         * @param {*}   value   The value to set.
-         * @returns {Deferred}  The PUT request to the url of the resource
-         */
-        function set(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            } else if (url) {
-                return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            throw new Error("Cannot update resource. Neither an URL nor a value is prodivded.");
-        }
-    }
-
-    /**
-     * @class ResourceList
-     * @param {string}  url              The url to bind the resource to
-     * @param {string}  initialValue     The initial value to assign to the resource
-     * @param {string}  responseTemplate The path to the response fields file
-     */
-    function ResourceList(url, initialValue, responseTemplate) {
-        var data = new Observable();
-        var ready = false;
-
-        if (url.charAt(url.length - 1) !== "/") {
-            url += "/";
-        }
-
-        if (typeof initialValue !== "undefined") {
-            data.value = initialValue;
-            ready = true;
-        } else if (url) {
-            ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-                ready = true;
-            });
-        } else {
-            throw new Error("Cannot initialize resource.");
-        }
-
-        return {
-            watch: watch,
-            bind: bind,
-            val: val,
-            set: set,
-            push: push,
-            remove: remove,
-            update: update,
-            listen: listen
-        };
-
-        /**
-         * Update this resource on a given event triggered by ApiService.
-         * @param {string} event        The event to listen on
-         * @param {string} usePayload   A property of the payload to assign to this resource.
-         *                              The resource will be updated by GET request if not set.
-         */
-        function listen(event, usePayload) {
-            ApiService.listen(event, function (payload) {
-                if (usePayload) {
-                    update(payload[usePayload]);
-                } else {
-                    update();
-                }
-            });
-        }
-
-        /**
-         * Add handler to track changes on this resource
-         * @param {function} cb     The callback to call on each change
-         */
-        function watch(cb) {
-            if (typeof cb !== "function") {
-                throw new Error("Callback expected but got '" + (typeof cb === "undefined" ? "undefined" : _typeof(cb)) + "'.");
-            }
-            data.watch(cb);
-
-            if (ready) {
-                cb.apply({}, [data.value, null]);
-            }
-        }
-
-        /**
-         * Bind a property of a vue instance to this resource
-         * @param {Vue}     vue         The vue instance
-         * @param {sting}   property    The property of the vue instance
-         */
-        function bind(vue, property) {
-            if (!vue) {
-                throw new Error("Vue instance not set.");
-            }
-
-            if (!property) {
-                throw new Error("Cannot bind undefined property.");
-            }
-
-            watch(function (newValue) {
-                vue.$set(property, newValue);
-            });
-        }
-
-        /**
-         * Receive the current value of this resource
-         * @returns {*}
-         */
-        function val() {
-            return data.value;
-        }
-
-        /**
-         * Set the value of a single element of this resource.
-         * @param {string|number}   key     The key of the element
-         * @param {*}               value   The value to set.
-         * @returns {Deferred}      The PUT request to the url of the resource
-         */
-        function set(key, value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.put(url + key, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-            var deferred = $.Deferred();
-
-            data.value = value;
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Add a new element to this resource
-         * @param {*}   value   The element to add
-         * @returns {Deferred}  The POST request to the url of the resource
-         */
-        function push(value) {
-            if (url) {
-                value.template = responseTemplate;
-                return ApiService.post(url, value).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.push(value);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Remove an element from this resource
-         * @param {string|number}   key     The key of the element
-         * @returns {Deferred}              The DELETE request to the url of the resource
-         */
-        function remove(key) {
-            if (url) {
-                return ApiService.delete(url + key, { template: responseTemplate }).done(function (response) {
-                    data.value = response;
-                });
-            }
-
-            var deferred = $.Deferred();
-            var list = data.value;
-
-            list.splice(key, 1);
-            data.value = list;
-
-            deferred.resolve();
-            return deferred;
-        }
-
-        /**
-         * Update the value of the resource.
-         * @param {*}           value   The new value to assign to this resource. Will receive current value from url if not set
-         * @returns {Deferred}          The GET request to the url of the resource
-         */
-        function update(value) {
-            if (value) {
-                var deferred = $.Deferred();
-
-                data.value = value;
-                deferred.resolve();
-                return deferred;
-            }
-
-            return ApiService.get(url, { template: responseTemplate }).done(function (response) {
-                data.value = response;
-            });
-        }
-    }
-}(jQuery);
-
-},{"services/ApiService":94}],101:[function(require,module,exports){
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -17626,7 +17180,7 @@ function setUrlParam(key, value) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
-},{"jquery":4}],102:[function(require,module,exports){
+},{"jquery":4}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17861,7 +17415,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":4}],103:[function(require,module,exports){
+},{"jquery":4}],102:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -17904,7 +17458,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],104:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17973,7 +17527,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":105,"store/modules/BasketModule":106,"store/modules/CheckoutModule":107,"store/modules/ItemListModule":108,"store/modules/LocalizationModule":109,"store/modules/NavigationModule":110,"store/modules/OrderReturnModule":111,"store/modules/SingleItemModule":112,"store/modules/UserModule":113,"store/modules/WishListModule":114}],105:[function(require,module,exports){
+},{"store/modules/AddressModule":104,"store/modules/BasketModule":105,"store/modules/CheckoutModule":106,"store/modules/ItemListModule":107,"store/modules/LocalizationModule":108,"store/modules/NavigationModule":109,"store/modules/OrderReturnModule":110,"store/modules/SingleItemModule":111,"store/modules/UserModule":112,"store/modules/WishListModule":113}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18238,7 +17792,7 @@ var actions = {
 var getters = {
     getSelectedAddress: function getSelectedAddress(state) {
         return function (addressType) {
-            var selectedAddress = {};
+            var selectedAddress = void 0;
 
             if (addressType === "1") {
                 selectedAddress = state.billingAddress;
@@ -18272,7 +17826,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":94}],106:[function(require,module,exports){
+},{"services/ApiService":94}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18418,7 +17972,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":94}],107:[function(require,module,exports){
+},{"services/ApiService":94}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18568,7 +18122,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":94}],108:[function(require,module,exports){
+},{"services/ApiService":94}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18769,7 +18323,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":94,"services/ItemListUrlService":97}],109:[function(require,module,exports){
+},{"services/ApiService":94,"services/ItemListUrlService":97}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18865,7 +18419,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],110:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19036,7 +18590,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":95}],111:[function(require,module,exports){
+},{"services/CategoryService":95}],110:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19130,7 +18684,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":94}],112:[function(require,module,exports){
+},{"services/ApiService":94}],111:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19176,7 +18730,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],113:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19219,7 +18773,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],114:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19331,7 +18885,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":94}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,41,42,50,51,52,43,44,45,46,48,47,49,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,104,105,106,107,108,109,110,111,112,113,114])
+},{"services/ApiService":94}]},{},[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,30,31,32,33,27,28,29,34,35,36,37,38,39,40,41,42,50,51,52,43,44,45,46,48,47,49,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,103,104,105,106,107,108,109,110,111,112,113])
 
 
 // Frontend end scripts
