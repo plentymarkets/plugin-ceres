@@ -99,7 +99,7 @@ Vue.component("address-select", {
          */
         onAddressChanged(address)
         {
-            this.$dispatch("address-changed", address);
+            this.$emit("address-changed", address);
         },
 
         /**
