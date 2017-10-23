@@ -2,12 +2,19 @@
 {% set homepageJson = getExternalContent("https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json") %}
 {% set homepageData = homepageJson[currentLang] %}
 
-<!-- <div style="visibility: hidden" id="currentLang">{{ currentLang }}</div> -->
-
 <div class="container-max mkt-homepage">
     <div class="carousel slide" data-interval="5000" data-ride="carousel" id="carousel-example">
         <div class="carousel-inner" id="carousel-content">
-            <!-- dynamic add content -->
+            {% for picture in homepageData.pictures %}
+                <div class="carousel-item text-muted {% if loop.first %}active{% endif %}">
+                    <a href="{{ picture.pictureLink }}">
+                        <img class="img-fluid" src="{{ picture.pictureUrl }}" />
+                    </a>
+                    <div class="carousel-caption">
+                        <h2>{{ picture.text }}</h2>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
         <a class="left carousel-control" href="#carousel-example" data-slide="prev"><i
                     class="icon-prev  fa fa-angle-left"></i></a>
