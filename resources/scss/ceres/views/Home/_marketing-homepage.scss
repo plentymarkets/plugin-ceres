@@ -1,0 +1,119 @@
+.mkt-homepage
+{
+	margin-bottom: 2rem;
+
+	.carousel-inner > .item > img,
+	.carousel-inner > .item > a > img {
+		width: 70%;
+		margin: auto;
+	}
+
+	.flex-item {
+		position: relative;
+		background: #fff;
+		padding: 0;
+		width: 180px;
+		height: 180px;
+		margin-top: 15px;
+		overflow: hidden;
+
+		&:hover {
+			& a {
+				& .flex-align-bottom {
+					background: rgba(0, 142, 189, 1);
+					padding-bottom: .4em;
+
+					& .flex-text {
+						transform: scale(1, 1);
+						line-height: 110%;
+						transition: transform 1s, line-height 1s, color 1s;
+						font-size: 14px;
+						color: rgba(255, 255, 255, 1);
+					}
+				}
+			}
+		}
+	}
+
+	.flex-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.flex-align-bottom {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		margin-bottom: 0;
+		background: rgba(0, 142, 189, .7);
+		text-align: left;
+		padding: 0;
+		padding-left: .3em;
+		padding-right: .3em;
+		box-sizing: border-box;
+		line-height: 101%;
+		font-size: 14px;
+		transition: all 1s;
+	}
+
+	.flex-title {
+		font-size: 17px;
+		margin: 0;
+		line-height: 1.6em;
+		height: 1.6em;
+		font-weight: normal;
+		text-align: center;
+		color: #fff;
+		display: block;
+	}
+
+	.flex-text {
+		margin: 0;
+		padding: 0;
+		font-weight: normal;
+		text-align: left;
+		line-height: 0%;
+		transform: scale(1, 0); /* W3C */
+		-webkit-transform: scale(1, 0); /* Safari and Chrome */
+		-moz-transform: scale(1, 0); /* Firefox */
+		-ms-transform: scale(1, 0); /* IE 9 */
+		-o-transform: scale(1, 0); /* Opera */
+		font-size: 0;
+		transition: transform 1s, line-height 1s, font-size 1s;
+		color: rgba(0, 142, 189, 0);
+	}
+
+	.flex-container {
+		margin: 0 30px 25px;
+		padding: 0;
+		position: relative;
+		list-style: none;
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-flow: row wrap;
+		justify-content: space-around;
+	}
+
+	#welcome-text {
+		font-size: 3rem
+	}
+
+	#recommend-text {
+		text-align: center
+	}
+
+	.mt-xs-0_5 {
+        margin-top: 6px;
+	}
+	
+	.row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
