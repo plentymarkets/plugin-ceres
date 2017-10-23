@@ -3,16 +3,21 @@
 <script type="x/template" id="vue-item-image-carousel">
     <div itemscope itemtype="http://schema.org/Thing">
         <div id="single-carousel" class="owl-carousel owl-theme owl-single-item" ref="single">
-            <div v-for="image in currentVariation.documents[0].data.images | itemImages(imageUrlAccessor) | orderBy('position')">
+            <div v-for="image in singleImages">
                 <a :href="image.url" data-lightbox="single-big-image-gallery">
                     <img :alt="currentVariation.documents[0].data.texts | itemName({{configItemName}})" class="owl-lazy" :data-src="image.url" itemprop="image">
                 </a>
             </div>
         </div>
         <div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <img :alt="currentVariation.documents[0].data.texts | itemName({{configItemName}})"  @click="goTo(index)" class="owl-thumb" v-bind:class="{ 'active': currentItem === index }"
-                 :src="imagePreview.url"
-                 v-for="(imagePreview, index) in currentVariation.documents[0].data.images | itemImages('urlPreview') | orderBy('position')">
+            <img
+                :alt="currentVariation.documents[0].data.texts | itemName({{configItemName}})"
+                @click="goTo(index)"
+                class="owl-thumb"
+                v-bind:class="{ 'active': currentItem === index }"
+                :src="imagePreview.url"
+                v-for="(imagePreview, index) in carouselImages"
+            >
         </div>
     </div>
 </script>
