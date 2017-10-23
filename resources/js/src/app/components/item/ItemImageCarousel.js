@@ -14,9 +14,22 @@ Vue.component("item-image-carousel", {
         };
     },
 
-    computed: Vuex.mapState({
-        currentVariation: state => state.item.variation
-    }),
+    computed:
+    {
+        carouselImages()
+        {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+
+        singleImages()
+        {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        },
+
+        ...Vuex.mapState({
+            currentVariation: state => state.item.variation
+        })
+    },
 
     watch: {
         currentVariation: {
@@ -154,6 +167,24 @@ Vue.component("item-image-carousel", {
                 index,
                 350
             ]);
+        },
+
+        orderByPosition(list)
+        {
+            return list.sort(
+                (entryA, entryB) =>
+                {
+                    if (entryA.position > entryB.position)
+                    {
+                        return 1;
+                    }
+                    if (entryA.position < entryB.position)
+                    {
+                        return -1;
+                    }
+
+                    return 0;
+                });
         }
     }
 });
