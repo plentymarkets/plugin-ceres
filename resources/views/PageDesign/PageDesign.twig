@@ -152,24 +152,8 @@
 
         <script>
             Vue.options.delimiters = ['${', '}'];
-            
-            Vue.component('my-component', {
-                
-                props: [
-                    "template"
-                ],
 
-                data() {
-                    return {
-                        testData: "testData11234123"
-                    }
-                },
-                
-                created()
-                {
-                    this.$options.template = this.template;
-                }
-            });
+            var vueEventHub = new Vue();
 
             vueApp = new Vue({
                 el: "#vue-app",

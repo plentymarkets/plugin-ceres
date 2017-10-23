@@ -27,7 +27,7 @@ Vue.component("history", {
             {
                 this.returnsFirstOpened = true;
 
-                this.$broadcast("returns-first-opening");
+                vueEventHub.$emit("returns-first-opening");
             }
         }
     }
