@@ -94,7 +94,7 @@
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
                 <div class="row">
-                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
+                    <order-properties template="#vue-order-properties" :item="{{ item.documents[0].data | json_encode }}"></order-properties>
                 </div>
 
                 <graduated-prices template="#vue-graduated-prices"></graduated-prices>
@@ -143,7 +143,6 @@
 
                     {% if item.documents[0].data.filter.isSalable %}
                         <add-to-basket template="#vue-add-to-basket" :item="{{ item.documents[0].data | json_encode }}" :show-quantity="true"></add-to-basket>
-                        <order-properties template="#vue-order-properties" :item="{{ item.documents[0].data | json_encode }}"></order-properties>
                     {% endif %}
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
