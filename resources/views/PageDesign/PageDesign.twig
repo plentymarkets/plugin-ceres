@@ -153,6 +153,8 @@
         <script>
             Vue.options.delimiters = ['${', '}'];
 
+            var vueEventHub = new Vue();
+
             vueApp = new Vue({
                 el: "#vue-app",
                 store: window.ceresStore

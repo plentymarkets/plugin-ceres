@@ -126,7 +126,7 @@ Vue.component("quantity-input", {
 
                 this.timeoutHandle = window.setTimeout(() =>
                 {
-                    this.$dispatch("quantity-change", newValue);
+                    this.$emit("quantity-change", newValue);
                 }, this.timeout);
             });
         },
@@ -146,11 +146,11 @@ Vue.component("quantity-input", {
                 {
                     this.internalMin = 0;
                     this.internalMax = 0;
-                    this.$dispatch("out-of-stock", true);
+                    this.$emit("out-of-stock", true);
                 }
                 else
                 {
-                    this.$dispatch("out-of-stock", false);
+                    this.$emit("out-of-stock", false);
                 }
             }
 

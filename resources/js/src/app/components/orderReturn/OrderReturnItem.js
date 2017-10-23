@@ -16,6 +16,7 @@ Vue.component("order-return-item", {
     created()
 	{
         this.$options.template = this.template;
+        vueEventHub.$on("select-all-items", () => this.selectItem());
     },
 
     computed:
@@ -66,14 +67,6 @@ Vue.component("order-return-item", {
             }
 
             this.$store.commit("updateOrderReturnItems", {quantity: parseInt(this.returnCount), orderItem: this.orderItem});
-        }
-    },
-
-    events:
-    {
-        "select-all-items"()
-        {
-            this.selectItem();
         }
     }
 });

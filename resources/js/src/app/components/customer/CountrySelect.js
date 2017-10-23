@@ -76,7 +76,7 @@ Vue.component("country-select", {
             {
                 this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry);
+                this.$emit("selected-country-changed", this.selectedCountry);
             }
         }
     }

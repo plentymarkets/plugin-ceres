@@ -53,6 +53,12 @@
 
                     <slot name="BeforePrice"></slot>
 
+                    <div class="row">
+                        <order-properties template="#vue-order-properties" :item="currentVariation" v-if="currentVariation.filter.isSalable"></order-properties>
+                    </div>
+
+                    <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
                     {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                         <div class="crossprice" v-if="currentVariation.calculatedPrices.rrp.price > 0">
                             <del class="text-muted small">
@@ -92,7 +98,6 @@
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
                         <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="currentVariation" :show-quantity="true"></add-to-basket>
-                        <order-properties template="#vue-order-properties" :item="currentVariation" v-if="currentVariation.filter.isSalable"></order-properties>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
                     

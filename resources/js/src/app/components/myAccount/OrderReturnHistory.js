@@ -22,6 +22,8 @@ Vue.component("order-return-history", {
 	{
         this.$options.template = this.template;
         this.itemsPerPage = this.itemsPerPage || 10;
+
+        vueEventHub.$on("returns-first-opening", () => this.setPage(1));
     },
 
     methods:
@@ -62,14 +64,6 @@ Vue.component("order-return-history", {
             }
 
             return "-";
-        }
-    },
-
-    events:
-    {
-        "returns-first-opening"()
-        {
-            this.setPage(1);
         }
     }
 });

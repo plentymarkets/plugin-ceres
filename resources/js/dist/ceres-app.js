@@ -11511,7 +11511,7 @@ Vue.component("address-select", {
          * @param index
          */
         onAddressChanged: function onAddressChanged(address) {
-            this.$dispatch("address-changed", address);
+            this.$emit("address-changed", address);
         },
 
 
@@ -12294,7 +12294,7 @@ Vue.component("country-select", {
             if (this.selectedCountry) {
                 this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
 
-                this.$dispatch("selected-country-changed", this.selectedCountry);
+                this.$emit("selected-country-changed", this.selectedCountry);
             }
         }
     }
@@ -13035,7 +13035,7 @@ Vue.component("graduated-prices", {
 
     computed: {
         graduatedPrices: function graduatedPrices() {
-            return this.$store.state.tem.variation.documents[0].data.calculatedPrices.graduatedPrices.sort(function (priceA, priceB) {
+            return this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices.sort(function (priceA, priceB) {
                 if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity) {
                     return 1;
                 }
@@ -13062,7 +13062,6 @@ Vue.component("graduated-prices", {
 
     methods: {
         initializeEvents: function initializeEvents() {
-            this.initCurrentWatcher();
             this.initQuantityPriceWatcher();
         },
         initQuantityPriceWatcher: function initQuantityPriceWatcher() {
@@ -13367,7 +13366,7 @@ Vue.component("quantity-input", {
                 }
 
                 _this3.timeoutHandle = window.setTimeout(function () {
-                    _this3.$dispatch("quantity-change", newValue);
+                    _this3.$emit("quantity-change", newValue);
                 }, _this3.timeout);
             });
         },
@@ -13382,9 +13381,9 @@ Vue.component("quantity-input", {
                 if (this.alreadyInBasketCount === this.max) {
                     this.internalMin = 0;
                     this.internalMax = 0;
-                    this.$dispatch("out-of-stock", true);
+                    this.$emit("out-of-stock", true);
                 } else {
-                    this.$dispatch("out-of-stock", false);
+                    this.$emit("out-of-stock", false);
                 }
             }
 
@@ -14826,7 +14825,7 @@ Vue.component("history", {
             if (!this.returnsFirstOpened) {
                 this.returnsFirstOpened = true;
 
-                this.$broadcast("returns-first-opening");
+                vueEventHub.$emit("returns-first-opening");
             }
         }
     }
@@ -14935,14 +14934,20 @@ Vue.component("order-return-history", {
         };
     },
     created: function created() {
+        var _this = this;
+
         this.$options.template = this.template;
         this.itemsPerPage = this.itemsPerPage || 10;
+
+        vueEventHub.$on("returns-first-opening", function () {
+            return _this.setPage(1);
+        });
     },
 
 
     methods: {
         setPage: function setPage(page) {
-            var _this = this;
+            var _this2 = this;
 
             if (!this.waiting) {
                 this.waiting = true;
@@ -14952,11 +14957,11 @@ Vue.component("order-return-history", {
                 this.returnsList.page = page;
 
                 ApiService.get("/rest/io/customer/order/return", { page: page, items: this.itemsPerPage }).done(function (response) {
-                    _this.waiting = false;
-                    _this.returnsList = response;
+                    _this2.waiting = false;
+                    _this2.returnsList = response;
                 }).fail(function (response) {
-                    _this.waiting = false;
-                    _this.returnsList.page = lastPage;
+                    _this2.waiting = false;
+                    _this2.returnsList.page = lastPage;
                     NotificationService.error(Translations.Template.notFoundOops);
                 });
             }
@@ -14990,12 +14995,6 @@ Vue.component("order-return-history", {
             }
 
             return "-";
-        }
-    },
-
-    events: {
-        "returns-first-opening": function returnsFirstOpening() {
-            this.setPage(1);
         }
     }
 });
@@ -15055,7 +15054,7 @@ Vue.component("order-return", {
             });
         },
         selectAllItems: function selectAllItems() {
-            this.$broadcast("select-all-items");
+            vueEventHub.$emit("select-all-items");
         }
     }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
 });
@@ -15074,7 +15073,12 @@ Vue.component("order-return-item", {
         };
     },
     created: function created() {
+        var _this = this;
+
         this.$options.template = this.template;
+        vueEventHub.$on("select-all-items", function () {
+            return _this.selectItem();
+        });
     },
 
 
@@ -15110,12 +15114,6 @@ Vue.component("order-return-item", {
             }
 
             this.$store.commit("updateOrderReturnItems", { quantity: parseInt(this.returnCount), orderItem: this.orderItem });
-        }
-    },
-
-    events: {
-        "select-all-items": function selectAllItems() {
-            this.selectItem();
         }
     }
 });

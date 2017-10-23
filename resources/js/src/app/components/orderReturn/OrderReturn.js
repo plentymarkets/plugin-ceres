@@ -55,7 +55,7 @@ Vue.component("order-return", {
 
         selectAllItems()
         {
-            this.$broadcast("select-all-items");
+            vueEventHub.$emit("select-all-items");
         },
 
         ...Vuex.mapMutations([
