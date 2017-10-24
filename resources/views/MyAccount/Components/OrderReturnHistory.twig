@@ -20,7 +20,7 @@
 				<div>
 
 				<div v-if="!waiting" class="order-list">
-					<article class="cmp cmp-order-item" v-for="entry in returnsList.entries">
+					<article class="cmp cmp-order-item" v-for="(index, entry) in returnsList.entries">
 
 						<div class="item-details small">
 
@@ -52,26 +52,54 @@
 								</div>
 							</div>
 
+							<!-- show initial -->
 							<div class="row">
-								<div class="col-md-6 m-t-1" v-for="item in entry.order.orderItems" style="display:flex">
+								<div class="col-md-6 m-t-1" v-for="n in 4" style="display:flex">
+									<div class="col-md-3" style="display:flex" v-if="entry.order.orderItems[n]">
+										<div class="order-return-history-image-container" style="height: 80px">
+											<a :href="entry.itemURLs[entry.order.orderItems[n].itemVariationId]">
+												<img class="order-return-history-image" :src="entry.itemImages[entry.order.orderItems[n].itemVariationId]">
+											</a>
+										</div>
+									</div>
+
+									<div class="col-md-8" style="display:flex;" v-if="entry.order.orderItems[n]">
+										<div class="order-return-history-text-container" style="align-self: center">
+											<a :href="entry.itemURLs[entry.order.orderItems[n].itemVariationId]">
+												<h2 class="h5 order-return-history-name">${ entry.order.orderItems[n].orderItemName }</h2>
+											</a>
+											<h2 class="h5 order-return-history-count">Anzahl: ${entry.order.orderItems[n].quantity}</h2>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- ./show initial -->
+							<!-- load on click -->
+							<div class="row collapse" id="more-return-items-${ index }" v-if="entry.order.orderItems.length > 4">
+								<div class="col-md-6 m-t-1" v-for="n in entry.order.orderItems.length - 4" style="display:flex">
 									<div class="col-md-3" style="display:flex">
 										<div class="order-return-history-image-container" style="height: 80px">
-											<a :href="entry.itemURLs[item.itemVariationId]">
-												<img class="order-return-history-image" :src="entry.itemImages[item.itemVariationId]">
+											<a :href="entry.itemURLs[entry.order.orderItems[n+4].itemVariationId]">
+												<img class="order-return-history-image" :src="entry.itemImages[entry.order.orderItems[n+4].itemVariationId]">
 											</a>
 										</div>
 									</div>
 
 									<div class="col-md-8" style="display:flex;">
 										<div class="order-return-history-text-container" style="align-self: center">
-											<a :href="entry.itemURLs[item.itemVariationId]">
-												<h2 class="h5 order-return-history-name">${ item.orderItemName }</h2>
+											<a :href="entry.itemURLs[entry.order.orderItems[n+4].itemVariationId]">
+												<h2 class="h5 order-return-history-name">${ entry.order.orderItems[n+4].orderItemName }</h2>
 											</a>
-											<h2 class="h5 order-return-history-count">Anzahl: ${item.quantity}</h2>
+											<h2 class="h5 order-return-history-count">Anzahl: ${entry.order.orderItems[n+4].quantity}</h2>
 										</div>
 									</div>
 								</div>
 							</div>
+							<!-- ./load on click -->
+							<hr class="gradient-hr" v-if="entry.order.orderItems.length > 4">
+							<a v-if="entry.order.orderItems.length > 4" class="show-more-returns" data-toggle="collapse" href="#more-return-items-${ index }" aria-expanded="false" aria-controls="collapseExample">
+								Mehr anzeigen
+							</a>
 						</div>
 					</article>
 				</div>
