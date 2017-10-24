@@ -6,7 +6,7 @@ Vue.component("accept-gtc-check", {
         "template"
     ],
 
-    data: function()
+    data()
     {
         return {
             isChecked: false
@@ -17,7 +17,7 @@ Vue.component("accept-gtc-check", {
         showError: state => state.checkout.validation.gtc.showError
     }),
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
         this.$store.commit("setGtcValidator", this.validate);
@@ -25,17 +25,9 @@ Vue.component("accept-gtc-check", {
 
     methods:
     {
-        validate: function()
+        validate()
         {
             this.$store.commit("setGtcShowError", this.showError = !this.isChecked);
-        }
-    },
-
-    watch:
-    {
-        isChecked: function()
-        {
-            this.showError = false;
         }
     }
 });
