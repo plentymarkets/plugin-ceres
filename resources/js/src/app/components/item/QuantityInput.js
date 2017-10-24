@@ -16,6 +16,11 @@ Vue.component("quantity-input", {
     data()
     {
         return {
+            _value: this.value,
+            _timeout: this.timeout,
+            _min: this.min,
+            _max: this.max,
+            _vertical: this.vertical,
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
@@ -56,20 +61,22 @@ Vue.component("quantity-input", {
     created()
     {
         this.$options.template = this.template;
+
+        this.checkDefaultVars();
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this._vertical)
+        {
+            this.handleMissingItems();
+        }
     },
 
     mounted()
     {
         this.$nextTick(() =>
         {
-            this.checkDefaultVars();
-            this.initDefaultVars();
-            this.initValueWatcher();
-
-            if (!this.vertical)
-            {
-                this.handleMissingItems();
-            }
+           
         });
     },
 
@@ -77,46 +84,46 @@ Vue.component("quantity-input", {
     {
         countValueUp()
         {
-            if (!(this.value === this.internalMax) && !this.waiting)
+            if (!(this._value === this.internalMax) && !this.waiting)
             {
-                this.value++;
+                this._value++;
             }
         },
 
         countValueDown()
         {
-            if (!(this.value === this.internalMin) && !this.waiting)
+            if (!(this._value === this.internalMin) && !this.waiting)
             {
-                this.value--;
+                this._value--;
             }
         },
 
         checkDefaultVars()
         {
-            this.min = this.min === 0 ? null : this.min;
-            this.max = this.max === 0 ? null : this.max;
+            this._min = this._min === 0 || this._min === undefined ? null : this._min;
+            this._max = this._max === 0 || this._max === undefined ? null : this._max;
         },
 
         initDefaultVars()
         {
-            this.timeout = this.timeout || 300;
-            this.internalMin = this.min || 1;
-            this.internalMax = this.max || 9999;
-            this.vertical = this.vertical || false;
+            this._timeout = this._timeout || 300;
+            this.internalMin = this._min || 1;
+            this.internalMax = this._max || 9999;
+            this._vertical = this._vertical || false;
         },
 
         initValueWatcher()
         {
-            this.$watch("value", newValue =>
+            this.$watch("_value", newValue =>
             {
                 if (newValue < this.internalMin)
                 {
-                    this.value = this.internalMin;
+                    this._value = this.internalMin;
                 }
 
                 if (newValue > this.internalMax)
                 {
-                    this.value = this.internalMax;
+                    this._value = this.internalMax;
                 }
 
                 if (this.timeoutHandle)
@@ -127,7 +134,7 @@ Vue.component("quantity-input", {
                 this.timeoutHandle = window.setTimeout(() =>
                 {
                     this.$emit("quantity-change", newValue);
-                }, this.timeout);
+                }, this._timeout);
             });
         },
 
@@ -138,11 +145,11 @@ Vue.component("quantity-input", {
                 this.internalMin = 1;
             }
 
-            if (this.max !== null)
+            if (this._max !== null)
             {
-                this.internalMax = this.max - this.alreadyInBasketCount;
+                this.internalMax = this._max - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount === this.max)
+                if (this.alreadyInBasketCount === this._max)
                 {
                     this.internalMin = 0;
                     this.internalMax = 0;
@@ -154,7 +161,7 @@ Vue.component("quantity-input", {
                 }
             }
 
-            this.value = this.internalMin;
+            this._value = this.internalMin;
         }
     }
 });

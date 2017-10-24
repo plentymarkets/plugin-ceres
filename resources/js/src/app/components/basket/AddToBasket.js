@@ -17,6 +17,7 @@ Vue.component("add-to-basket", {
     data()
     {
         return {
+            _useLargeScale: this.useLargeScale,
             quantity: 1,
             buttonLockState: false,
             waiting: false
@@ -27,7 +28,7 @@ Vue.component("add-to-basket", {
     {
         this.$options.template = this.template;
 
-        this.useLargeScale = this.useLargeScale || false;
+        this._useLargeScale = this._useLargeScale || false;
     },
 
     mounted()
