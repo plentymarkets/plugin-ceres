@@ -7,7 +7,7 @@
 			<li class="nav-item" v-if="orderList.totalsCount > 0">
 				<a class="nav-link active" data-toggle="tab" href="#order-history-tab" role="tab" aria-expanded="true">{{ trans("Ceres::Template.orderHistory") }}</a>
 			</li>
-			<li class="nav-item" v-if="isReturnActive">
+			<li class="nav-item" v-if="isReturnActive && contactHasReturns">
 				<a @click="returnsTabsOpened()" class="nav-link" data-toggle="tab" href="#order-return-tab" role="tab" aria-expanded="false">{{ trans("Ceres::Template.myAccountReturnHistory") }}</a>
 			</li>
 		</ul>	
@@ -21,7 +21,7 @@
 					:show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
 				</order-history>
 			</div>
-			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false" v-if="isReturnActive">
+			 <div class="tab-pane" id="order-return-tab" role="tabpanel" aria-expanded="false" v-if="isReturnActive && contactHasReturns">
                 <order-return-history template="#vue-order-return-history"
 					:items-per-page="ordersPerPage"
 					:show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
