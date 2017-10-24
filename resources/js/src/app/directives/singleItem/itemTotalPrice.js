@@ -1,6 +1,6 @@
 Vue.directive("item-total-price",
     {
-        bind()
+        bind(el)
         {
             let firstRendering = true;
 
@@ -12,9 +12,9 @@ Vue.directive("item-total-price",
                 }
                 else
                 {
-                    this.el.innerHTML = event.detail;
+                    el.innerHTML = event.detail;
 
-                    $(this.el).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                    $(el).fadeTo(100, 0.1).fadeTo(400, 1.0);
                 }
             });
         }
