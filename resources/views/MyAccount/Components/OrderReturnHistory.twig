@@ -68,7 +68,7 @@
 											<a :href="entry.itemURLs[entry.order.orderItems[n].itemVariationId]">
 												<h2 class="h5 order-return-history-name">${ entry.order.orderItems[n].orderItemName }</h2>
 											</a>
-											<h2 class="h5 order-return-history-count">Anzahl: ${entry.order.orderItems[n].quantity}</h2>
+											<h2 class="h5 order-return-history-count">{{ trans("Ceres::Template.myAccountReturnCount") }}: ${entry.order.orderItems[n].quantity}</h2>
 										</div>
 									</div>
 								</div>
@@ -90,15 +90,15 @@
 											<a :href="entry.itemURLs[entry.order.orderItems[n+4].itemVariationId]">
 												<h2 class="h5 order-return-history-name">${ entry.order.orderItems[n+4].orderItemName }</h2>
 											</a>
-											<h2 class="h5 order-return-history-count">Anzahl: ${entry.order.orderItems[n+4].quantity}</h2>
+											<h2 class="h5 order-return-history-count">{{ trans("Ceres::Template.myAccountReturnCount") }}: ${entry.order.orderItems[n+4].quantity}</h2>
 										</div>
 									</div>
 								</div>
 							</div>
 							<!-- ./load on click -->
 							<hr class="gradient-hr" v-if="entry.order.orderItems.length > 4">
-							<a v-if="entry.order.orderItems.length > 4" class="show-more-returns" data-toggle="collapse" href="#more-return-items-${ index }" aria-expanded="false" aria-controls="collapseExample">
-								Mehr anzeigen
+							<a v-if="entry.order.orderItems.length > 4" @click="toggleNaming('more-return-text-' + index)" id="more-return-text-${ index }" class="show-more-returns" data-toggle="collapse" href="#more-return-items-${ index }" aria-expanded="false" aria-controls="collapseExample">
+								{{ trans("Ceres::Template.myAccountReturnShowMore") }}
 							</a>
 						</div>
 					</article>
