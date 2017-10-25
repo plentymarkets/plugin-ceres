@@ -1,5 +1,18 @@
 # Release Notes for Ceres
 
+## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the return history, only four images per order are loaded initially.
+- In the return history, a "Show more" button was added.
+- If items with order properties are in the basket, each surcharge is followed by "per item".
+- After the customer has filed a return request, they are forwarded to a confirmation page.
+
+### Fixed
+
+- The returns tab in the My account area is deactivated if the customer does not have any returns.
+
 ## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Add
