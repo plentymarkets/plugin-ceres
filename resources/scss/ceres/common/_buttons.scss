@@ -97,6 +97,16 @@ button:focus {
 		}
 	}
 
+	&.btn-remove-address {
+		background-color: $brand-danger;
+		margin-right: -5px;
+		color: #fff;
+
+		&:hover{
+			background-color: #c9302c;
+		}
+	}
+
 	&.btn-medium {
 		width: 10rem;
 	}
