@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.6.2 (unknown)
+
+### Hinzugefügt
+
+- In der Retourenhistorie werden initial nur noch 4 Bilder pro Auftrag angezeigt und ein "Mehr anzeigen" - Button wurde hinzugefügt.
+
 ## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
