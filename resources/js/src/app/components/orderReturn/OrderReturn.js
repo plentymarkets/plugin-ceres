@@ -1,5 +1,3 @@
-const NotificationService = require("services/NotificationService");
-
 Vue.component("order-return", {
 
     props: [
@@ -41,8 +39,6 @@ Vue.component("order-return", {
             this.sendOrderReturn().then(
                 response =>
                 {
-                    NotificationService.success(Translations.Template.myAccountReturnSuccess);
-
                     window.open("/return-confirmation", "_self");
                     $(this.$els.orderReturnConfirmation).modal("hide");
                 },
