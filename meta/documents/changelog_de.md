@@ -4,12 +4,12 @@
 
 ### Hinzugefügt
 
-- In der Retourenhistorie werden initial nur noch 4 Bilder pro Auftrag angezeigt 
-- In der Retourenhistorie wird ein "Mehr anzeigen"-Button hinzugefügt.
+- In der Retourenhistorie werden initial nur noch 4 Bilder pro Auftrag angezeigt.
+- In der Retourenhistorie wurde ein "Mehr anzeigen"-Button hinzugefügt.
 - Wenn Artikel mit Bestellmerkmalen im Warenkorb liegen, wird hinter dem Aufpreis "pro Artikel" angezeigt.
 - Nachdem der Kunde eine Retoure angelegt hat, wird er auf eine Bestätigungsseite geleitet.
 
-### Gefixt
+### Behoben
 
 - Der Retouren-Tab im Mein-Konto-Bereich wird ausgeblendet, wenn der Kunde keine Retouren hat.
 
