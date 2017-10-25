@@ -1,0 +1,33 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <meta name="robots" content="NOINDEX, NOFOLLOW">
+    <title>{{ trans("Ceres::Template.myAccountReturnConfirmationTitle") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+<div class="page-content basket order-return container-max m-b-3 m-t-1">
+    <div class="row m-b-3">
+        <div class="col-xs-12">
+            <h2 class="h1">{{ trans("Ceres::Template.generalThanks") }}</h2>
+            <p>{{ trans('Ceres::Template.myAccountReturnConfirmationInfo') }}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        {% set loggedIn = frontend.Account.getIsAccountLoggedIn %}
+        <div class="col-xs-6 col-md-4 {% if loggedIn %}offset-md-2{% else %}offset-xs-3 offset-md-4{% endif %}">
+            <a href="/" type="" class="btn btn-primary btn-block bg-primary">{{ trans("Ceres::Template.generalHomepage") }}</a>
+        </div>
+
+
+        {% if loggedIn %}
+            <div class="col-xs-6 col-md-4">
+                <a href="/my-account" type="" class="btn btn-primary btn-block bg-primary">{{ trans("Ceres::Template.accMyAccount") }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

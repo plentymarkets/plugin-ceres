@@ -64,8 +64,9 @@
         </div>
         
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
-            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency })</strong>
+            <strong class="col-xs-6 col-sm-5">${property.name}</strong>
             <span class="col-xs-6 col-sm-7">${property.value}</span>
+            <strong class="col-xs-6 col-sm-5">${basketItem.variation.data.properties | propertySurcharge parseInt(property.propertyId) | currency} {{ trans('Ceres::Template.basketPerItem') }}</strong>
         </div>
 
         <div class="item-description">

@@ -4,7 +4,8 @@ Vue.component("history", {
         "template",
         "orderList",
         "ordersPerPage",
-        "isReturnActive"
+        "isReturnActive",
+        "contactHasReturns"
     ],
 
     data()

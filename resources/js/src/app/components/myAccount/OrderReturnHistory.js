@@ -55,6 +55,18 @@ Vue.component("order-return-history", {
             }
         },
 
+        toggleNaming(element)
+        {
+            if(document.getElementById(element).innerText == Translations.Template.myAccountReturnShowMore)
+            {
+                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
+            }
+            else
+            {
+                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
+            } 
+        },
+
         getOriginOrderId(order)
         {
             for (const orderRef of order.orderReferences)
