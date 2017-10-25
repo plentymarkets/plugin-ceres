@@ -43,7 +43,7 @@ Vue.component("order-return", {
                 {
                     NotificationService.success(Translations.Template.myAccountReturnSuccess);
 
-                    window.open("/my-account", "_self");
+                    window.open("/return-confirmation", "_self");
                     $(this.$els.orderReturnConfirmation).modal("hide");
                 },
                 error =>
