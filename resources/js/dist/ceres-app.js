@@ -14680,7 +14680,7 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderList", "ordersPerPage", "isReturnActive"],
+    props: ["template", "orderList", "ordersPerPage", "isReturnActive", "contactHasReturns"],
 
     data: function data() {
         return {
@@ -14828,6 +14828,13 @@ Vue.component("order-return-history", {
                 });
             }
         },
+        toggleNaming: function toggleNaming(element) {
+            if (document.getElementById(element).innerText == Translations.Template.myAccountReturnShowMore) {
+                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
+            } else {
+                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
+            }
+        },
         getOriginOrderId: function getOriginOrderId(order) {
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -14872,8 +14879,6 @@ Vue.component("order-return-history", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var NotificationService = require("services/NotificationService");
-
 Vue.component("order-return", {
 
     props: ["initOrderData", "template"],
@@ -14912,9 +14917,7 @@ Vue.component("order-return", {
             this.isLoading = true;
 
             this.sendOrderReturn().then(function (response) {
-                NotificationService.success(Translations.Template.myAccountReturnSuccess);
-
-                window.open("/my-account", "_self");
+                window.open("/return-confirmation", "_self");
                 $(_this.$els.orderReturnConfirmation).modal("hide");
             }, function (error) {
                 _this.isLoading = false;
@@ -14927,7 +14930,7 @@ Vue.component("order-return", {
     }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
 });
 
-},{"services/NotificationService":101}],58:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-item", {
