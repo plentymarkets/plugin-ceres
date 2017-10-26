@@ -76,7 +76,7 @@ Vue.component("quantity-input", {
     {
         this.$nextTick(() =>
         {
-           
+
         });
     },
 
@@ -100,8 +100,8 @@ Vue.component("quantity-input", {
 
         checkDefaultVars()
         {
-            this._min = this._min === 0 || this._min === undefined ? null : this._min;
-            this._max = this._max === 0 || this._max === undefined ? null : this._max;
+            this._min = this._min === 0 || this._min ? null : this._min;
+            this._max = this._max === 0 || this._max ? null : this._max;
         },
 
         initDefaultVars()

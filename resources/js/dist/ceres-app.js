@@ -10462,9 +10462,9 @@ Vue.component("add-item-to-basket-overlay", {
         },
         setPriceFromData: function setPriceFromData() {
             if (this.latestBasketEntry.item.calculatedPrices) {
-                this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
-                var graduatedPrice = this.$options.filters.graduatedPrice(this.basketItem.currentBasketItem, this.basketItem.quantity);
-                var propertySurcharge = this.$options.filters.propertySurchargeSum(this.basketItem.currentBasketItem);
+                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+                var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
+                var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
                 this.price = graduatedPrice + propertySurcharge;
             }
@@ -10522,6 +10522,7 @@ Vue.component("add-to-basket", {
 
     data: function data() {
         return {
+            _useLargeScale: this.useLargeScale,
             quantity: 1,
             buttonLockState: false,
             waiting: false
@@ -10530,7 +10531,7 @@ Vue.component("add-to-basket", {
     created: function created() {
         this.$options.template = this.template;
 
-        this.useLargeScale = this.useLargeScale || false;
+        this._useLargeScale = this._useLargeScale || false;
     },
     mounted: function mounted() {
         var _this = this;
@@ -10951,6 +10952,7 @@ Vue.component("accept-gtc-check", {
         };
     },
 
+
     computed: Vuex.mapState({
         showError: function showError(state) {
             return state.checkout.validation.gtc.showError;
@@ -10962,15 +10964,10 @@ Vue.component("accept-gtc-check", {
         this.$store.commit("setGtcValidator", this.validate);
     },
 
+
     methods: {
         validate: function validate() {
-            this.$store.commit("setGtcShowError", this.showError = !this.isChecked);
-        }
-    },
-
-    watch: {
-        isChecked: function isChecked() {
-            this.showError = false;
+            this.$store.commit("setGtcShowError", !this.isChecked);
         }
     }
 });
@@ -13114,6 +13111,8 @@ Vue.component("graduated-prices", {
 },{}],36:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("item-image-carousel", {
 
     delimiters: ["${", "}"],
@@ -13127,11 +13126,18 @@ Vue.component("item-image-carousel", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        carouselImages: function carouselImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, "urlPreview"));
+        },
+        singleImages: function singleImages() {
+            return this.orderByPosition(this.$options.filters.itemImages(this.currentVariation.documents[0].data.images, this.imageUrlAccessor));
+        }
+    }, Vuex.mapState({
         currentVariation: function currentVariation(state) {
             return state.item.variation;
         }
-    }),
+    })),
 
     watch: {
         currentVariation: {
@@ -13240,6 +13246,19 @@ Vue.component("item-image-carousel", {
             var $owl = $(undefined.$refs.single);
 
             $owl.trigger("to.owl.carousel", [index, 350]);
+        },
+
+        orderByPosition: function orderByPosition(list) {
+            return list.sort(function (entryA, entryB) {
+                if (entryA.position > entryB.position) {
+                    return 1;
+                }
+                if (entryA.position < entryB.position) {
+                    return -1;
+                }
+
+                return 0;
+            });
         }
     }
 });
@@ -13272,6 +13291,11 @@ Vue.component("quantity-input", {
 
     data: function data() {
         return {
+            _value: this.value,
+            _timeout: this.timeout,
+            _min: this.min,
+            _max: this.max,
+            _vertical: this.vertical,
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
@@ -13312,62 +13336,60 @@ Vue.component("quantity-input", {
 
     created: function created() {
         this.$options.template = this.template;
+
+        this.checkDefaultVars();
+        this.initDefaultVars();
+        this.initValueWatcher();
+
+        if (!this._vertical) {
+            this.handleMissingItems();
+        }
     },
     mounted: function mounted() {
-        var _this2 = this;
-
-        this.$nextTick(function () {
-            _this2.checkDefaultVars();
-            _this2.initDefaultVars();
-            _this2.initValueWatcher();
-
-            if (!_this2.vertical) {
-                _this2.handleMissingItems();
-            }
-        });
+        this.$nextTick(function () {});
     },
 
 
     methods: {
         countValueUp: function countValueUp() {
-            if (!(this.value === this.internalMax) && !this.waiting) {
-                this.value++;
+            if (!(this._value === this.internalMax) && !this.waiting) {
+                this._value++;
             }
         },
         countValueDown: function countValueDown() {
-            if (!(this.value === this.internalMin) && !this.waiting) {
-                this.value--;
+            if (!(this._value === this.internalMin) && !this.waiting) {
+                this._value--;
             }
         },
         checkDefaultVars: function checkDefaultVars() {
-            this.min = this.min === 0 ? null : this.min;
-            this.max = this.max === 0 ? null : this.max;
+            this._min = this._min === 0 || this._min ? null : this._min;
+            this._max = this._max === 0 || this._max ? null : this._max;
         },
         initDefaultVars: function initDefaultVars() {
-            this.timeout = this.timeout || 300;
-            this.internalMin = this.min || 1;
-            this.internalMax = this.max || 9999;
-            this.vertical = this.vertical || false;
+            this._timeout = this._timeout || 300;
+            this.internalMin = this._min || 1;
+            this.internalMax = this._max || 9999;
+            this._vertical = this._vertical || false;
         },
         initValueWatcher: function initValueWatcher() {
-            var _this3 = this;
+            var _this2 = this;
 
-            this.$watch("value", function (newValue) {
-                if (newValue < _this3.internalMin) {
-                    _this3.value = _this3.internalMin;
+            this.$watch("_value", function (newValue) {
+                if (newValue < _this2.internalMin) {
+                    _this2._value = _this2.internalMin;
                 }
 
-                if (newValue > _this3.internalMax) {
-                    _this3.value = _this3.internalMax;
+                if (newValue > _this2.internalMax) {
+                    _this2._value = _this2.internalMax;
                 }
 
-                if (_this3.timeoutHandle) {
-                    window.clearTimeout(_this3.timeoutHandle);
+                if (_this2.timeoutHandle) {
+                    window.clearTimeout(_this2.timeoutHandle);
                 }
 
-                _this3.timeoutHandle = window.setTimeout(function () {
-                    _this3.$emit("quantity-change", newValue);
-                }, _this3.timeout);
+                _this2.timeoutHandle = window.setTimeout(function () {
+                    _this2.$emit("quantity-change", newValue);
+                }, _this2._timeout);
             });
         },
         handleMissingItems: function handleMissingItems() {
@@ -13375,10 +13397,10 @@ Vue.component("quantity-input", {
                 this.internalMin = 1;
             }
 
-            if (this.max !== null) {
-                this.internalMax = this.max - this.alreadyInBasketCount;
+            if (this._max !== null) {
+                this.internalMax = this._max - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount === this.max) {
+                if (this.alreadyInBasketCount === this._max) {
                     this.internalMin = 0;
                     this.internalMax = 0;
                     this.$emit("out-of-stock", true);
@@ -13387,7 +13409,7 @@ Vue.component("quantity-input", {
                 }
             }
 
-            this.value = this.internalMin;
+            this._value = this.internalMin;
         }
     }
 });
@@ -15712,18 +15734,16 @@ Vue.directive("tooltip", {
 "use strict";
 
 Vue.directive("item-total-price", {
-    bind: function bind() {
-        var _this = this;
-
+    bind: function bind(el) {
         var firstRendering = true;
 
         document.addEventListener("itemTotalPriceChanged", function (event) {
             if (firstRendering) {
                 firstRendering = false;
             } else {
-                _this.el.innerHTML = event.detail;
+                el.innerHTML = event.detail;
 
-                $(_this.el).fadeTo(100, 0.1).fadeTo(400, 1.0);
+                $(el).fadeTo(100, 0.1).fadeTo(400, 1.0);
             }
         });
     }
