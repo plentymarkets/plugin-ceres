@@ -16,6 +16,13 @@ Vue.component("category-image-carousel", {
         template       : {type: String}
     },
 
+    data()
+    {
+        return {
+            $_enableCarousel: false
+        };
+    },
+
     computed:
     {
         imageUrls()
@@ -40,14 +47,14 @@ Vue.component("category-image-carousel", {
     {
         this.$options.template = this.template;
 
-        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
     mounted: function()
     {
         this.$nextTick(() =>
         {
-            if (this.enableCarousel)
+            if (this.$_enableCarousel)
             {
                 this.initializeCarousel();
             }
