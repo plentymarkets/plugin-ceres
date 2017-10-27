@@ -13616,11 +13616,11 @@ Vue.component("quantity-input", {
 
     data: function data() {
         return {
-            _value: this.value,
-            _timeout: this.timeout,
-            _min: this.min,
-            _max: this.max,
-            _vertical: this.vertical,
+            compQuantity: 0,
+            compTimeout: this.timeout,
+            compMin: this.min,
+            compMax: this.max,
+            compVertical: this.vertical,
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
@@ -13666,46 +13666,43 @@ Vue.component("quantity-input", {
         this.initDefaultVars();
         this.initValueWatcher();
 
-        if (!this._vertical) {
+        if (!this.compVertical) {
             this.handleMissingItems();
         }
-    },
-    mounted: function mounted() {
-        this.$nextTick(function () {});
     },
 
 
     methods: {
         countValueUp: function countValueUp() {
-            if (!(this._value === this.internalMax) && !this.waiting) {
-                this._value++;
+            if (!(this.compQuantity === this.internalMax) && !this.waiting) {
+                this.compQuantity++;
             }
         },
         countValueDown: function countValueDown() {
-            if (!(this._value === this.internalMin) && !this.waiting) {
-                this._value--;
+            if (!(this.compQuantity === this.internalMin) && !this.waiting) {
+                this.compQuantity--;
             }
         },
         checkDefaultVars: function checkDefaultVars() {
-            this._min = this._min === 0 || this._min ? null : this._min;
-            this._max = this._max === 0 || this._max ? null : this._max;
+            this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
+            this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
         },
         initDefaultVars: function initDefaultVars() {
-            this._timeout = this._timeout || 300;
-            this.internalMin = this._min || 1;
-            this.internalMax = this._max || 9999;
-            this._vertical = this._vertical || false;
+            this.compTimeout = this.compTimeout || 300;
+            this.internalMin = this.compMin || 1;
+            this.internalMax = this.compMax || 9999;
+            this.compVertical = this.compVertical || false;
         },
         initValueWatcher: function initValueWatcher() {
             var _this2 = this;
 
-            this.$watch("_value", function (newValue) {
+            this.$watch("compQuantity", function (newValue) {
                 if (newValue < _this2.internalMin) {
-                    _this2._value = _this2.internalMin;
+                    _this2.compQuantity = _this2.internalMin;
                 }
 
                 if (newValue > _this2.internalMax) {
-                    _this2._value = _this2.internalMax;
+                    _this2.compQuantity = _this2.internalMax;
                 }
 
                 if (_this2.timeoutHandle) {
@@ -13714,7 +13711,7 @@ Vue.component("quantity-input", {
 
                 _this2.timeoutHandle = window.setTimeout(function () {
                     _this2.$emit("quantity-change", newValue);
-                }, _this2._timeout);
+                }, _this2.compTimeout);
             });
         },
         handleMissingItems: function handleMissingItems() {
@@ -13722,10 +13719,10 @@ Vue.component("quantity-input", {
                 this.internalMin = 1;
             }
 
-            if (this._max !== null) {
-                this.internalMax = this._max - this.alreadyInBasketCount;
+            if (this.compMax !== null) {
+                this.internalMax = this.compMax - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount === this._max) {
+                if (this.alreadyInBasketCount === this.compMax) {
                     this.internalMin = 0;
                     this.internalMax = 0;
                     this.$emit("out-of-stock", true);
@@ -13734,7 +13731,7 @@ Vue.component("quantity-input", {
                 }
             }
 
-            this._value = this.internalMin;
+            this.compQuantity = this.internalMin;
         }
     }
 });
