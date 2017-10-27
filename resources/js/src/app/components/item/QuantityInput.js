@@ -16,11 +16,11 @@ Vue.component("quantity-input", {
     data()
     {
         return {
-            _value: this.value,
-            _timeout: this.timeout,
-            _min: this.min,
-            _max: this.max,
-            _vertical: this.vertical,
+            compQuantity: 0,
+            compTimeout: this.timeout,
+            compMin: this.min,
+            compMax: this.max,
+            compVertical: this.vertical,
             timeoutHandle: null,
             internalMin: null,
             internalMax: null,
@@ -66,64 +66,56 @@ Vue.component("quantity-input", {
         this.initDefaultVars();
         this.initValueWatcher();
 
-        if (!this._vertical)
+        if (!this.compVertical)
         {
             this.handleMissingItems();
         }
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-
-        });
     },
 
     methods:
     {
         countValueUp()
         {
-            if (!(this._value === this.internalMax) && !this.waiting)
+            if (!(this.compQuantity === this.internalMax) && !this.waiting)
             {
-                this._value++;
+                this.compQuantity++;
             }
         },
 
         countValueDown()
         {
-            if (!(this._value === this.internalMin) && !this.waiting)
+            if (!(this.compQuantity === this.internalMin) && !this.waiting)
             {
-                this._value--;
+                this.compQuantity--;
             }
         },
 
         checkDefaultVars()
         {
-            this._min = this._min === 0 || typeof this._min === "undefined" ? null : this._min;
-            this._max = this._max === 0 || typeof this._max === "undefined" ? null : this._max;
+            this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
+            this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
         },
 
         initDefaultVars()
         {
-            this._timeout = this._timeout || 300;
-            this.internalMin = this._min || 1;
-            this.internalMax = this._max || 9999;
-            this._vertical = this._vertical || false;
+            this.compTimeout = this.compTimeout || 300;
+            this.internalMin = this.compMin || 1;
+            this.internalMax = this.compMax || 9999;
+            this.compVertical = this.compVertical || false;
         },
 
         initValueWatcher()
         {
-            this.$watch("_value", newValue =>
+            this.$watch("compQuantity", newValue =>
             {
                 if (newValue < this.internalMin)
                 {
-                    this._value = this.internalMin;
+                    this.compQuantity = this.internalMin;
                 }
 
                 if (newValue > this.internalMax)
                 {
-                    this._value = this.internalMax;
+                    this.compQuantity = this.internalMax;
                 }
 
                 if (this.timeoutHandle)
@@ -134,7 +126,7 @@ Vue.component("quantity-input", {
                 this.timeoutHandle = window.setTimeout(() =>
                 {
                     this.$emit("quantity-change", newValue);
-                }, this._timeout);
+                }, this.compTimeout);
             });
         },
 
@@ -145,11 +137,11 @@ Vue.component("quantity-input", {
                 this.internalMin = 1;
             }
 
-            if (this._max !== null)
+            if (this.compMax !== null)
             {
-                this.internalMax = this._max - this.alreadyInBasketCount;
+                this.internalMax = this.compMax - this.alreadyInBasketCount;
 
-                if (this.alreadyInBasketCount === this._max)
+                if (this.alreadyInBasketCount === this.compMax)
                 {
                     this.internalMin = 0;
                     this.internalMax = 0;
@@ -161,7 +153,7 @@ Vue.component("quantity-input", {
                 }
             }
 
-            this._value = this.internalMin;
+            this.compQuantity = this.internalMin;
         }
     }
 });

@@ -1,29 +1,29 @@
 <script type="x/template" id="vue-quantity-input">
-    <div class="input-group vert" v-if="vertical">
-        <span class="input-group-btn" v-tooltip="_max && _value === internalMax && internalMax != 0" data-toggle="tooltip" 
-                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}:' + _max">
-            <button class="btn btn-secondary" :class="{'disabled': _max && _value === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
+    <div class="input-group vert" v-if="compVertical">
+        <span class="input-group-btn" v-tooltip="compMax && compQuantity === internalMax && internalMax != 0" data-toggle="tooltip" 
+                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
+            <button class="btn btn-secondary" :class="{'disabled': compMax && compQuantity === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="_value">
+        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="compQuantity">
 
-        <span class="input-group-btn" v-tooltip="_min && _value === _min && _min === internalMin" data-toggle="tooltip"
-                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}:' + _min">
-            <button class="btn btn-secondary" :class="{'disabled': _min && _value === _min && _min === internalMin || _value <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
+        <span class="input-group-btn" v-tooltip="compMin && compQuantity === compMin && compMin === internalMin" data-toggle="tooltip"
+                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
+            <button class="btn btn-secondary" :class="{'disabled': compMin && compQuantity === compMin && compMin === internalMin || compQuantity <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
         </span>
     </div>
 
     <div class="input-group" v-else>
-        <span class="input-group-btn" v-tooltip="_min && _value === _min && _min === internalMin" data-toggle="tooltip"
-                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}:' + _min">
-            <button class="btn btn-secondary" :class="{'disabled': _min && _value === _min && _min === internalMin || _value <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
+        <span class="input-group-btn" v-tooltip="compMin && compQuantity === compMin && compMin === internalMin" data-toggle="tooltip"
+                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
+            <button class="btn btn-secondary" :class="{'disabled': compMin && compQuantity === compMin && compMin === internalMin || compQuantity <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="_value">
+        <input type="text" class="form-control text-xs-center" size="4" maxlength="4" v-model="compQuantity">
 
-        <span class="input-group-btn" v-tooltip="_max && _value === internalMax && internalMax != 0" data-toggle="tooltip" 
-                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}:' + _max">
-            <button class="btn btn-secondary" :class="{'disabled': _max && _value === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
+        <span class="input-group-btn" v-tooltip="compMax && compQuantity === internalMax && internalMax != 0" data-toggle="tooltip" 
+                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
+            <button class="btn btn-secondary" :class="{'disabled': compMax && compQuantity === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
         </span>
     </div>
 </script>
