@@ -13676,6 +13676,13 @@ Vue.component("category-image-carousel", {
         template: { type: String }
     },
 
+    data: function data() {
+        return {
+            $_enableCarousel: false
+        };
+    },
+
+
     computed: {
         imageUrls: function imageUrls() {
             return this.imageUrlsData.sort(function (imageUrlA, imageUrlB) {
@@ -13694,14 +13701,14 @@ Vue.component("category-image-carousel", {
     created: function created() {
         this.$options.template = this.template;
 
-        this.enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
+        this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
 
     mounted: function mounted() {
         var _this = this;
 
         this.$nextTick(function () {
-            if (_this.enableCarousel) {
+            if (_this.$_enableCarousel) {
                 _this.initializeCarousel();
             }
         });

@@ -36,8 +36,8 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "jquery-lazyload": "^1.9.7",
-    "q": "^1.4.1",
-    "sassdoc": "^2.1.20",
+    "q": "^1.5.1",
+    "sassdoc": "^2.4.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
@@ -50,12 +50,12 @@
     "font-awesome": "^4.6.3",
     "jquery": "^2.2.4",
     "lightbox2": "^2.8.2",
-    "moment": "^2.15.2",
+    "moment": "^2.19.1",
     "owl.carousel": "^2.2.0",
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.3.2",
-    "vue": "^2.3.4",
-    "vuex": "^2.3.1"
+    "vue": "^2.5.2",
+    "vuex": "^3.0.0"
   }
 }
