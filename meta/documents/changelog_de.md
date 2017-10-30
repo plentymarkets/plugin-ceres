@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.6.3 (unknown)
+
+### Behoben
+
+- Die Bestellmerkmale im Single Item werden nun nicht mehr doppelt ausgegeben.
+
 ## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
