@@ -84,10 +84,6 @@
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
-                <div class="row">
-                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
-                </div>
-
                 <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                 <div class="row">
