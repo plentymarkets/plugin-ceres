@@ -16,7 +16,7 @@ Vue.component("quantity-input", {
     data()
     {
         return {
-            compQuantity: 0,
+            compQuantity: this.value,
             compTimeout: this.timeout,
             compMin: this.min,
             compMax: this.max,
