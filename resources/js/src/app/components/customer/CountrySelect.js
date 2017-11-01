@@ -13,7 +13,7 @@ Vue.component("country-select", {
         "addressType"
     ],
 
-    data: function()
+    data()
     {
         return {
             stateList  : [],
@@ -31,8 +31,6 @@ Vue.component("country-select", {
     created()
     {
         this.$options.template = this.template;
-
-        this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -69,12 +67,13 @@ Vue.component("country-select", {
     watch: {
         selectedCountryId()
         {
-            this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
-            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+            const countryId = this.selectedCountryId || this.shippingCountryId;
+
+            this.selectedCountry = this.getCountryById(countryId);
 
             if (this.selectedCountry)
             {
-                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
 
                 this.$emit("selected-country-changed", this.selectedCountry);
             }
