@@ -6,18 +6,30 @@ Vue.component("add-to-basket", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "item",
-        "itemUrl",
-        "showQuantity",
-        "template",
-        "useLargeScale"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-add-to-basket"
+        },
+        item: Object,
+        itemUrl: String,
+        showQuantity:
+        {
+            type: Boolean,
+            default: false
+        },
+        useLargeScale:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {
         return {
-            _useLargeScale: this.useLargeScale,
             quantity: 1,
             buttonLockState: false,
             waiting: false
@@ -27,8 +39,6 @@ Vue.component("add-to-basket", {
     created()
     {
         this.$options.template = this.template;
-
-        this._useLargeScale = this._useLargeScale || false;
     },
 
     mounted()
