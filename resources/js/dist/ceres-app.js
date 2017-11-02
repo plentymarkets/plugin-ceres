@@ -15183,7 +15183,7 @@ Vue.component("mobile-navigation", {
             _this.$store.dispatch("initNavigationTree", _this.navigationTreeData);
 
             if (_this.currentCategoryId) {
-                _this.$store.dispatch("setCurrentCategoryById", { categoryId: _this.currentCategoryId });
+                _this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(_this.currentCategoryId) });
                 _this.initialSlide(_this.$store.state.navigation.currentCategory);
             }
 

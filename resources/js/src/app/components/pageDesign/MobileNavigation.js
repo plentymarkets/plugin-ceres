@@ -33,7 +33,7 @@ Vue.component("mobile-navigation", {
 
             if (this.currentCategoryId)
             {
-                this.$store.dispatch("setCurrentCategoryById", {categoryId: this.currentCategoryId});
+                this.$store.dispatch("setCurrentCategoryById", {categoryId: parseInt(this.currentCategoryId)});
                 this.initialSlide(this.$store.state.navigation.currentCategory);
             }
 
