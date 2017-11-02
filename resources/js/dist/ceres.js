@@ -11672,7 +11672,16 @@ Vue.component("address-input-group", {
 
     delimiters: ["${", "}"],
 
-    props: ["addressData", "defaultCountry", "addressType", "modalType", "template"],
+    props: {
+        addressData: Object,
+        defaultCountry: {
+            type: String,
+            default: "DE"
+        },
+        addressType: String,
+        modalType: String,
+        template: String
+    },
 
     data: function data() {
         return {
@@ -11692,8 +11701,6 @@ Vue.component("address-input-group", {
         if (!this.addressData) {
             this.addressData = {};
         }
-
-        this.defaultCountry = "DE";
     },
 
 
@@ -15508,7 +15515,7 @@ Vue.component("mobile-navigation", {
             _this.$store.dispatch("initNavigationTree", _this.navigationTreeData);
 
             if (_this.currentCategoryId) {
-                _this.$store.dispatch("setCurrentCategoryById", { categoryId: _this.currentCategoryId });
+                _this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(_this.currentCategoryId) });
                 _this.initialSlide(_this.$store.state.navigation.currentCategory);
             }
 
