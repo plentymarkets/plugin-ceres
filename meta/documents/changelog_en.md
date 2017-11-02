@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Order properties will not be displayed twice on the single item view.
+
 ## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
