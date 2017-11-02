@@ -40,7 +40,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (render)
             {
                 this.startCounter();
-    
+
                 this.setPriceFromData();
             }
 

@@ -10745,6 +10745,17 @@ Vue.component("add-item-to-basket-overlay", {
             var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
             return img.url;
+        },
+        showOverlay: function showOverlay() {
+            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
+
+            if (render) {
+                this.startCounter();
+
+                this.setPriceFromData();
+            }
+
+            return render;
         }
     }, Vuex.mapState({
         latestBasketEntry: function latestBasketEntry(state) {
@@ -10770,21 +10781,6 @@ Vue.component("add-item-to-basket-overlay", {
     },
 
     methods: {
-
-        /**
-         * check if current basket object exist and start rendering
-         */
-        startRendering: function startRendering() {
-            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
-
-            if (render) {
-                this.startCounter();
-            }
-
-            this.setPriceFromData();
-
-            return render;
-        },
         setPriceFromData: function setPriceFromData() {
             if (this.latestBasketEntry.item.calculatedPrices) {
                 this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
@@ -12589,8 +12585,6 @@ Vue.component("country-select", {
     created: function created() {
         this.$options.template = this.template;
 
-        this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
-
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
     },
@@ -12622,11 +12616,12 @@ Vue.component("country-select", {
 
     watch: {
         selectedCountryId: function selectedCountryId() {
-            this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
-            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+            var countryId = this.selectedCountryId || this.shippingCountryId;
+
+            this.selectedCountry = this.getCountryById(countryId);
 
             if (this.selectedCountry) {
-                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
 
                 this.$emit("selected-country-changed", this.selectedCountry);
             }

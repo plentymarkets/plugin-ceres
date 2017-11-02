@@ -10420,6 +10420,17 @@ Vue.component("add-item-to-basket-overlay", {
             var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
             return img.url;
+        },
+        showOverlay: function showOverlay() {
+            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
+
+            if (render) {
+                this.startCounter();
+
+                this.setPriceFromData();
+            }
+
+            return render;
         }
     }, Vuex.mapState({
         latestBasketEntry: function latestBasketEntry(state) {
@@ -10445,21 +10456,6 @@ Vue.component("add-item-to-basket-overlay", {
     },
 
     methods: {
-
-        /**
-         * check if current basket object exist and start rendering
-         */
-        startRendering: function startRendering() {
-            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
-
-            if (render) {
-                this.startCounter();
-            }
-
-            this.setPriceFromData();
-
-            return render;
-        },
         setPriceFromData: function setPriceFromData() {
             if (this.latestBasketEntry.item.calculatedPrices) {
                 this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
