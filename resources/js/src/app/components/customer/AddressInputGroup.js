@@ -2,13 +2,17 @@ Vue.component("address-input-group", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "addressData",
-        "defaultCountry",
-        "addressType",
-        "modalType",
-        "template"
-    ],
+    props:
+    {
+        addressData: Object,
+        defaultCountry: {
+            type: String,
+            default: "DE"
+        },
+        addressType: String,
+        modalType: String,
+        template: String
+    },
 
     data()
     {
@@ -30,8 +34,6 @@ Vue.component("address-input-group", {
         {
             this.addressData = {};
         }
-
-        this.defaultCountry = "DE";
     },
 
     methods:
