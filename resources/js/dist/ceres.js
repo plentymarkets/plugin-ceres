@@ -15165,7 +15165,7 @@ Vue.component("order-return-history", {
             }
         },
         toggleNaming: function toggleNaming(element) {
-            if (document.getElementById(element).innerText == Translations.Template.myAccountReturnShowMore) {
+            if (document.getElementById(element).innerText === Translations.Template.myAccountReturnShowMore) {
                 document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
             } else {
                 document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
