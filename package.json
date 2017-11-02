@@ -45,7 +45,7 @@
     "accounting": "^0.4.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "v4.0.0-alpha.3",
-    "devbridge-autocomplete": "^1.2.27",
+    "devbridge-autocomplete": "^1.4.4",
     "flag-icon-css": "^2.4.0",
     "font-awesome": "^4.6.3",
     "jquery": "^2.2.4",

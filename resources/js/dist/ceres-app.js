@@ -10518,11 +10518,25 @@ Vue.component("add-to-basket", {
 
     delimiters: ["${", "}"],
 
-    props: ["item", "itemUrl", "showQuantity", "template", "useLargeScale"],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-add-to-basket"
+        },
+        item: Object,
+        itemUrl: String,
+        showQuantity: {
+            type: Boolean,
+            default: false
+        },
+        useLargeScale: {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data: function data() {
         return {
-            _useLargeScale: this.useLargeScale,
             quantity: 1,
             buttonLockState: false,
             waiting: false
@@ -10530,8 +10544,6 @@ Vue.component("add-to-basket", {
     },
     created: function created() {
         this.$options.template = this.template;
-
-        this._useLargeScale = this._useLargeScale || false;
     },
     mounted: function mounted() {
         var _this = this;
@@ -12168,11 +12180,10 @@ Vue.component("contact-map", {
     methods: {
         initMap: function initMap() {
             var coordinates = { lat: -34.397, lng: 150.644 };
-            var self = this;
 
             var gMap = new google.maps.Map(document.getElementById("contact-map"), {
                 center: coordinates,
-                zoom: self.mapZoom
+                zoom: this.mapZoom
             });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
@@ -12240,6 +12251,7 @@ Vue.component("country-select", {
         };
     },
 
+
     computed: Vuex.mapState({
         shippingCountryId: function shippingCountryId(state) {
             return state.localization.shippingCountryId;
@@ -12251,8 +12263,6 @@ Vue.component("country-select", {
      */
     created: function created() {
         this.$options.template = this.template;
-
-        this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
@@ -12285,11 +12295,12 @@ Vue.component("country-select", {
 
     watch: {
         selectedCountryId: function selectedCountryId() {
-            this.selectedCountryId = this.selectedCountryId || this.shippingCountryId;
-            this.selectedCountry = this.getCountryById(this.selectedCountryId);
+            var countryId = this.selectedCountryId || this.shippingCountryId;
+
+            this.selectedCountry = this.getCountryById(countryId);
 
             if (this.selectedCountry) {
-                this.stateList = CountryService.parseShippingStates(this.countryList, this.selectedCountryId);
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
 
                 this.$emit("selected-country-changed", this.selectedCountry);
             }
@@ -13291,7 +13302,7 @@ Vue.component("quantity-input", {
 
     data: function data() {
         return {
-            compQuantity: 0,
+            compQuantity: this.value,
             compTimeout: this.timeout,
             compMin: this.min,
             compMax: this.max,
@@ -13789,7 +13800,6 @@ Vue.component("item-lazy-img", {
     created: function created() {
         this.$options.template = this.template;
     },
-
     mounted: function mounted() {
         var _this = this;
 

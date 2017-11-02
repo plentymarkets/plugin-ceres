@@ -29,16 +29,14 @@ Vue.component("contact-map", {
         initMap()
         {
             const coordinates = {lat: -34.397, lng: 150.644};
-            const self = this;
 
             const gMap = new google.maps.Map(document.getElementById("contact-map"),
                 {
                     center: coordinates,
-                    zoom  : self.mapZoom
+                    zoom  : this.mapZoom
                 });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
-
         },
 
         getLatLngByAddress(geocoder, resultsMap)
