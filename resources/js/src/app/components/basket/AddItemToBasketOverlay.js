@@ -33,6 +33,20 @@ Vue.component("add-item-to-basket-overlay", {
             return img.url;
         },
 
+        showOverlay()
+        {
+            const render = Object.keys(this.latestBasketEntry.item).length !== 0;
+
+            if (render)
+            {
+                this.startCounter();
+    
+                this.setPriceFromData();
+            }
+
+            return render;
+        },
+
         ...Vuex.mapState({
             latestBasketEntry: state => state.basket.latestEntry
         })
@@ -61,24 +75,6 @@ Vue.component("add-item-to-basket-overlay", {
     },
 
     methods: {
-
-        /**
-         * check if current basket object exist and start rendering
-         */
-        startRendering()
-        {
-            const render = Object.keys(this.latestBasketEntry.item).length !== 0;
-
-            if (render)
-            {
-                this.startCounter();
-            }
-
-            this.setPriceFromData();
-
-            return render;
-        },
-
         setPriceFromData()
         {
             if (this.latestBasketEntry.item.calculatedPrices)
