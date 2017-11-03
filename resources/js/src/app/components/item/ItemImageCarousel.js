@@ -159,7 +159,7 @@ Vue.component("item-image-carousel", {
             });
         },
 
-        goTo: index =>
+        goTo(index)
         {
             const $owl = $(this.$refs.single);
 
