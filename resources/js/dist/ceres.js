@@ -13377,12 +13377,23 @@ Vue.component("add-to-wish-list", {
 },{"services/NotificationService":99}],35:[function(require,module,exports){
 "use strict";
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 Vue.component("graduated-prices", {
     props: ["template"],
 
+    data: function data() {
+        return {
+            test: 0
+        };
+    },
+
+
     computed: {
         graduatedPrices: function graduatedPrices() {
-            return this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices.sort(function (priceA, priceB) {
+            var prices = this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices;
+
+            return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
                 if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity) {
                     return 1;
                 }
