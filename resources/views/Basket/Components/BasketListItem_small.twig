@@ -4,7 +4,7 @@
 <article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
     <div class="basket-item-quantity">
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
                         :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
     </div>
     <!-- ./ITEM QUANTITY -->
@@ -50,7 +50,7 @@
             <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
         </div>
 
-        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="isInputLocked" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
             <span class="message" v-if="!deleteConfirmed">
                 {{ trans("Ceres::Template.generalDelete") }}
             </span>

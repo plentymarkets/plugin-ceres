@@ -13,7 +13,7 @@
     <!-- ITEM QUANTITY HANDLING -->
     <div class="item-quantity">
 
-        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
                         :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
         <div class="item-unit-price">

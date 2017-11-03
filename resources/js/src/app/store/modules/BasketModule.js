@@ -7,7 +7,8 @@ const state =
         latestEntry: {
             item: {},
             quantity: null
-        }
+        },
+        isBasketLoading: false
     };
 
 const mutations =
@@ -62,6 +63,11 @@ const mutations =
         setCouponCode(state, couponCode)
         {
             state.data.couponCode = couponCode;
+        },
+
+        setIsBasketLoading(state, isBasketLoading)
+        {
+            state.isBasketLoading = !!isBasketLoading;
         }
     };
 
@@ -71,15 +77,19 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                commit("setIsBasketLoading", true);
+
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.post("/rest/io/basket/items/", basketItem)
                     .done(basketItems =>
                     {
                         commit("setBasketItems", basketItems);
+                        commit("setIsBasketLoading", false);
                         resolve(basketItems);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });
@@ -90,16 +100,19 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 commit("updateBasketItemQuantity", {basketItem, quantity});
+                commit("setIsBasketLoading", true);
 
                 basketItem.template = "Ceres::Basket.Basket";
                 ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem)
                     .done(data =>
                     {
                         commit("setBasketItems", data);
+                        commit("setIsBasketLoading", false);
                         resolve(data);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });
@@ -109,14 +122,18 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                commit("setIsBasketLoading", true);
+
                 ApiService.delete("/rest/io/basket/items/" + basketItemId, {template: "Ceres::Basket.Basket"})
                     .done(basketItems =>
                     {
                         commit("setBasketItems", basketItems);
+                        commit("setIsBasketLoading", false);
                         resolve(basketItems);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });
@@ -127,14 +144,17 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 commit("setCouponCode", couponCode);
+                commit("setIsBasketLoading", true);
 
                 ApiService.post("/rest/io/coupon", {couponCode})
                     .done(data =>
                     {
+                        commit("setIsBasketLoading", false);
                         resolve(data);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });
@@ -145,14 +165,17 @@ const actions =
             return new Promise((resolve, reject) =>
             {
                 commit("setCouponCode", null);
+                commit("setIsBasketLoading", true);
 
                 ApiService.delete("/rest/io/coupon/" + couponCode)
                     .done(response =>
                     {
+                        commit("setIsBasketLoading", false);
                         resolve(data);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });

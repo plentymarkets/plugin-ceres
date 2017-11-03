@@ -16,7 +16,7 @@ Vue.component("quantity-input", {
     data()
     {
         return {
-            compQuantity: this.value,
+            compValue: this.value,
             compTimeout: this.timeout,
             compMin: this.min,
             compMax: this.max,
@@ -31,7 +31,9 @@ Vue.component("quantity-input", {
     computed: {
         alreadyInBasketCount()
         {
-            return this.$store.state.basket.items.find(variations => variations.variationId === this.variationId) || 0;
+            const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.variationId);
+
+            return basketObject ? basketObject.quantity : 0;
         },
 
         ...Vuex.mapState({
@@ -46,7 +48,7 @@ Vue.component("quantity-input", {
             {
                 if (oldVal)
                 {
-                    if (JSON.stringify(val) != JSON.stringify(oldVal))
+                    if (JSON.stringify(val) !== JSON.stringify(oldVal))
                     {
                         this.initDefaultVars();
 
@@ -55,6 +57,14 @@ Vue.component("quantity-input", {
                 }
             },
             deep: true
+        },
+
+        value(val, oldVal)
+        {
+            if (val !== oldVal)
+            {
+                this.compValue = val;
+            }
         }
     },
 
@@ -64,7 +74,6 @@ Vue.component("quantity-input", {
 
         this.checkDefaultVars();
         this.initDefaultVars();
-        this.initValueWatcher();
 
         if (!this.compVertical)
         {
@@ -76,18 +85,57 @@ Vue.component("quantity-input", {
     {
         countValueUp()
         {
-            if (!(this.compQuantity === this.internalMax) && !this.waiting)
+            if (!(this.compValue === this.internalMax) && !this.waiting)
             {
-                this.compQuantity++;
+                this.compValue++;
+                this.validateValue(this.compValue);
             }
         },
 
         countValueDown()
         {
-            if (!(this.compQuantity === this.internalMin) && !this.waiting)
+            if (!(this.compValue === this.internalMin) && !this.waiting)
             {
-                this.compQuantity--;
+                this.compValue--;
+                this.validateValue(this.compValue);
             }
+        },
+
+        setValue(value)
+        {
+            this.compValue = parseInt(value);
+            this.validateValue();
+        },
+
+        validateValue()
+        {
+            if (isNaN(this.compValue))
+            {
+                this.compValue = this.internalMin || 1;
+            }
+            else if (this.compValue < this.internalMin)
+            {
+                this.compValue = this.internalMin;
+            }
+            else if (this.compValue > this.internalMax)
+            {
+                this.compValue = this.internalMax;
+            }
+
+            this.onValueChanged();
+        },
+
+        onValueChanged()
+        {
+            if (this.timeoutHandle)
+            {
+                window.clearTimeout(this.timeoutHandle);
+            }
+
+            this.timeoutHandle = window.setTimeout(() =>
+            {
+                this.$emit("quantity-change", this.compValue);
+            }, this.compTimeout);
         },
 
         checkDefaultVars()
@@ -98,36 +146,10 @@ Vue.component("quantity-input", {
 
         initDefaultVars()
         {
-            this.compTimeout = this.compTimeout || 300;
+            this.compTimeout = this.compTimeout || 500;
             this.internalMin = this.compMin || 1;
             this.internalMax = this.compMax || 9999;
             this.compVertical = this.compVertical || false;
-        },
-
-        initValueWatcher()
-        {
-            this.$watch("compQuantity", newValue =>
-            {
-                if (newValue < this.internalMin)
-                {
-                    this.compQuantity = this.internalMin;
-                }
-
-                if (newValue > this.internalMax)
-                {
-                    this.compQuantity = this.internalMax;
-                }
-
-                if (this.timeoutHandle)
-                {
-                    window.clearTimeout(this.timeoutHandle);
-                }
-
-                this.timeoutHandle = window.setTimeout(() =>
-                {
-                    this.$emit("quantity-change", newValue);
-                }, this.compTimeout);
-            });
         },
 
         handleMissingItems()
@@ -152,8 +174,6 @@ Vue.component("quantity-input", {
                     this.$emit("out-of-stock", false);
                 }
             }
-
-            this.compQuantity = this.internalMin;
         }
     }
 });

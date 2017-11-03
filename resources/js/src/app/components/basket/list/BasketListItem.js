@@ -20,6 +20,25 @@ Vue.component("basket-list-item", {
         };
     },
 
+    computed:
+    {
+        imageUrl()
+        {
+            const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
+        },
+
+        isInputLocked()
+        {
+            return this.waiting || this.isBasketLoading;
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
+    },
+
     created()
     {
         this.$options.template = this.template;
@@ -96,16 +115,6 @@ Vue.component("basket-list-item", {
             {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
-        }
-    },
-
-    computed:
-    {
-        imageUrl()
-        {
-            const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
-
-            return img.url;
         }
     }
 });
