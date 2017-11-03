@@ -6,7 +6,7 @@
             </option>
 
             {% for sortingValueKey, sortingTranslationKey in services.item.AdditionalItemSorting %}
-                <option value="{{ sortingValueKey }}" :selected="selectedSorting.value == '{{ sortingValueKey }}'">{{ trans(sortingTranslationKey) }}</option>
+                <option :value="{value: '{{ sortingValueKey }}'}" :selected="selectedSorting.value == '{{ sortingValueKey }}'">{{ trans(sortingTranslationKey) }}</option>
             {% endfor %}
         </select>
     </div>
