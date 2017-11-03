@@ -28193,7 +28193,7 @@ return Vue$3;
 })));
 
 /**
- * vuex v3.0.1
+ * vuex v3.0.0
  * (c) 2017 Evan You
  * @license MIT
  */
@@ -29119,7 +29119,7 @@ function getModuleByNamespace (store, helper, namespace) {
 var index = {
   Store: Store,
   install: install,
-  version: '3.0.1',
+  version: '3.0.0',
   mapState: mapState,
   mapMutations: mapMutations,
   mapGetters: mapGetters,

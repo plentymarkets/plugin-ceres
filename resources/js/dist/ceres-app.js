@@ -10828,6 +10828,8 @@ Vue.component("basket-list", {
 },{}],11:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("basket-list-item", {
 
     delimiters: ["${", "}"],
@@ -10843,6 +10845,23 @@ Vue.component("basket-list-item", {
             itemCondition: ""
         };
     },
+
+
+    computed: _extends({
+        imageUrl: function imageUrl() {
+            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+
+            return img.url;
+        },
+        isInputLocked: function isInputLocked() {
+            return this.waiting || this.isBasketLoading;
+        }
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    })),
+
     created: function created() {
         this.$options.template = this.template;
     },
@@ -10905,14 +10924,6 @@ Vue.component("basket-list-item", {
             if (this.deleteConfirmedTimeout) {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
-        }
-    },
-
-    computed: {
-        imageUrl: function imageUrl() {
-            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
-
-            return img.url;
         }
     }
 });
@@ -13305,7 +13316,7 @@ Vue.component("quantity-input", {
 
     data: function data() {
         return {
-            compQuantity: this.value,
+            compValue: this.value,
             compTimeout: this.timeout,
             compMin: this.min,
             compMax: this.max,
@@ -13322,9 +13333,11 @@ Vue.component("quantity-input", {
         alreadyInBasketCount: function alreadyInBasketCount() {
             var _this = this;
 
-            return this.$store.state.basket.items.find(function (variations) {
+            var basketObject = this.$store.state.basket.items.find(function (variations) {
                 return variations.variationId === _this.variationId;
-            }) || 0;
+            });
+
+            return basketObject ? basketObject.quantity : 0;
         }
     }, Vuex.mapState({
         basketItems: function basketItems(state) {
@@ -13336,7 +13349,7 @@ Vue.component("quantity-input", {
         basketItems: {
             handler: function handler(val, oldVal) {
                 if (oldVal) {
-                    if (JSON.stringify(val) != JSON.stringify(oldVal)) {
+                    if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
                         this.initDefaultVars();
 
                         this.handleMissingItems();
@@ -13345,6 +13358,12 @@ Vue.component("quantity-input", {
             },
 
             deep: true
+        },
+
+        value: function value(val, oldVal) {
+            if (val !== oldVal) {
+                this.compValue = val;
+            }
         }
     },
 
@@ -13353,7 +13372,6 @@ Vue.component("quantity-input", {
 
         this.checkDefaultVars();
         this.initDefaultVars();
-        this.initValueWatcher();
 
         if (!this.compVertical) {
             this.handleMissingItems();
@@ -13363,45 +13381,52 @@ Vue.component("quantity-input", {
 
     methods: {
         countValueUp: function countValueUp() {
-            if (!(this.compQuantity === this.internalMax) && !this.waiting) {
-                this.compQuantity++;
+            if (!(this.compValue === this.internalMax) && !this.waiting) {
+                this.compValue++;
+                this.validateValue(this.compValue);
             }
         },
         countValueDown: function countValueDown() {
-            if (!(this.compQuantity === this.internalMin) && !this.waiting) {
-                this.compQuantity--;
+            if (!(this.compValue === this.internalMin) && !this.waiting) {
+                this.compValue--;
+                this.validateValue(this.compValue);
             }
+        },
+        setValue: function setValue(value) {
+            this.compValue = parseInt(value);
+            this.validateValue();
+        },
+        validateValue: function validateValue() {
+            if (isNaN(this.compValue)) {
+                this.compValue = this.internalMin || 1;
+            } else if (this.compValue < this.internalMin) {
+                this.compValue = this.internalMin;
+            } else if (this.compValue > this.internalMax) {
+                this.compValue = this.internalMax;
+            }
+
+            this.onValueChanged();
+        },
+        onValueChanged: function onValueChanged() {
+            var _this2 = this;
+
+            if (this.timeoutHandle) {
+                window.clearTimeout(this.timeoutHandle);
+            }
+
+            this.timeoutHandle = window.setTimeout(function () {
+                _this2.$emit("quantity-change", _this2.compValue);
+            }, this.compTimeout);
         },
         checkDefaultVars: function checkDefaultVars() {
             this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
             this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
         },
         initDefaultVars: function initDefaultVars() {
-            this.compTimeout = this.compTimeout || 300;
+            this.compTimeout = this.compTimeout || 500;
             this.internalMin = this.compMin || 1;
             this.internalMax = this.compMax || 9999;
             this.compVertical = this.compVertical || false;
-        },
-        initValueWatcher: function initValueWatcher() {
-            var _this2 = this;
-
-            this.$watch("compQuantity", function (newValue) {
-                if (newValue < _this2.internalMin) {
-                    _this2.compQuantity = _this2.internalMin;
-                }
-
-                if (newValue > _this2.internalMax) {
-                    _this2.compQuantity = _this2.internalMax;
-                }
-
-                if (_this2.timeoutHandle) {
-                    window.clearTimeout(_this2.timeoutHandle);
-                }
-
-                _this2.timeoutHandle = window.setTimeout(function () {
-                    _this2.$emit("quantity-change", newValue);
-                }, _this2.compTimeout);
-            });
         },
         handleMissingItems: function handleMissingItems() {
             if (this.alreadyInBasketCount >= this.internalMin) {
@@ -13419,8 +13444,6 @@ Vue.component("quantity-input", {
                     this.$emit("out-of-stock", false);
                 }
             }
-
-            this.compQuantity = this.internalMin;
         }
     }
 });
@@ -17558,7 +17581,8 @@ var state = {
     latestEntry: {
         item: {},
         quantity: null
-    }
+    },
+    isBasketLoading: false
 };
 
 var mutations = {
@@ -17604,6 +17628,9 @@ var mutations = {
     },
     setCouponCode: function setCouponCode(state, couponCode) {
         state.data.couponCode = couponCode;
+    },
+    setIsBasketLoading: function setIsBasketLoading(state, isBasketLoading) {
+        state.isBasketLoading = !!isBasketLoading;
     }
 };
 
@@ -17612,11 +17639,15 @@ var actions = {
         var commit = _ref2.commit;
 
         return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
             basketItem.template = "Ceres::Basket.Basket";
             _ApiService2.default.post("/rest/io/basket/items/", basketItem).done(function (basketItems) {
                 commit("setBasketItems", basketItems);
+                commit("setIsBasketLoading", false);
                 resolve(basketItems);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
@@ -17628,11 +17659,15 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
+            commit("setIsBasketLoading", true);
 
             basketItem.template = "Ceres::Basket.Basket";
             _ApiService2.default.put("/rest/io/basket/items/" + basketItem.id, basketItem).done(function (data) {
+                commit("setBasketItems", data);
+                commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
@@ -17641,10 +17676,14 @@ var actions = {
         var commit = _ref5.commit;
 
         return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
             _ApiService2.default.delete("/rest/io/basket/items/" + basketItemId, { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
                 commit("setBasketItems", basketItems);
+                commit("setIsBasketLoading", false);
                 resolve(basketItems);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
@@ -17655,10 +17694,13 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             commit("setCouponCode", couponCode);
+            commit("setIsBasketLoading", true);
 
             _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }).done(function (data) {
+                commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
@@ -17669,10 +17711,13 @@ var actions = {
 
         return new Promise(function (resolve, reject) {
             commit("setCouponCode", null);
+            commit("setIsBasketLoading", true);
 
             _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (response) {
+                commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
