@@ -95,6 +95,7 @@ const actions =
                 ApiService.put("/rest/io/basket/items/" + basketItem.id, basketItem)
                     .done(data =>
                     {
+                        commit("setBasketItems", data);
                         resolve(data);
                     })
                     .fail(error =>
