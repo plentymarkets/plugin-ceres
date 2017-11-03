@@ -72,6 +72,11 @@ gulp.task("build:app", function()
     });
 
     return builder.bundle()
+        .on("error", function(err)
+        {
+            console.log(err.toString());
+            this.emit("end");
+        })
         .pipe(source(OUTPUT_PREFIX + "-app.js"))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
