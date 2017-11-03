@@ -146,13 +146,11 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2">
-                                {!! currentVariation.texts.description !!}
+                            <div class="m-y-2" v-html="currentVariation.texts.description">
                             </div>
                         </div>
                         <div class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2">
-                                {!! currentVariation.texts.technicalData !!}
+                            <div class="m-y-2" v-html="currentVariation.texts.technicalData">
                             </div>
                         </div>
 

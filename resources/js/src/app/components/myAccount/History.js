@@ -2,7 +2,7 @@ Vue.component("history", {
 
     props: [
         "template",
-        "orderList",
+        "orderListData",
         "ordersPerPage",
         "isReturnActive"
     ],
@@ -10,7 +10,8 @@ Vue.component("history", {
     data()
     {
         return {
-            returnsFirstOpened: false
+            returnsFirstOpened: false,
+            orderList: this.orderListData
         };
     },
 
@@ -29,6 +30,12 @@ Vue.component("history", {
 
                 vueEventHub.$emit("returns-first-opening");
             }
+        },
+
+        onOrderListChanged(newOrderList)
+        {
+            console.log("onOrderListChanged", newOrderList);
+            this.orderList = newOrderList;
         }
     }
 });

@@ -14847,11 +14847,12 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderList", "ordersPerPage", "isReturnActive"],
+    props: ["template", "orderListData", "ordersPerPage", "isReturnActive"],
 
     data: function data() {
         return {
-            returnsFirstOpened: false
+            returnsFirstOpened: false,
+            orderList: this.orderListData
         };
     },
     created: function created() {
@@ -14866,6 +14867,10 @@ Vue.component("history", {
 
                 vueEventHub.$emit("returns-first-opening");
             }
+        },
+        onOrderListChanged: function onOrderListChanged(newOrderList) {
+            console.log("onOrderListChanged", newOrderList);
+            this.orderList = newOrderList;
         }
     }
 });
@@ -14907,7 +14912,7 @@ Vue.component("order-history", {
 
     methods: {
         setOrders: function setOrders(orderList) {
-            Vue.set(this, "orderList", orderList);
+            this.$emit("orderListChanged", orderList);
             this.page = this.orderList.page;
             this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
             this.countEnd = this.orderList.page * this.itemsPerPage;
@@ -15712,13 +15717,12 @@ Vue.directive("render-category", {
 "use strict";
 
 Vue.directive("change-lang", {
-    bind: function bind(el) {
+    bind: function bind(el, binding) {
         el.onclick = function (event) {
             var subPath = window.location.pathname.split("/");
 
-            subPath = subPath[1] == value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
-
-            window.location.assign(window.location.origin + "/" + value.lang + "" + subPath);
+            subPath = subPath[1] === binding.value.currLang ? window.location.pathname.substring(3) : window.location.pathname;
+            window.location.assign(window.location.origin + "/" + binding.value.lang + "" + subPath);
         };
     }
 });
@@ -18038,7 +18042,12 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-// import ApiService from "services/ApiService";
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
     shippingCountries: [],
@@ -18090,7 +18099,7 @@ var actions = {
             var oldShippingCountryId = state.shippingCountryId;
 
             commit("setShippingCountryId", shippingCountryId);
-            ApiService.post("/rest/io/shippingCountryId", { shippingCountryId: shippingCountryId }).done(function (data) {
+            _ApiService2.default.post("/rest/io/shipping/country", { shippingCountryId: shippingCountryId }).done(function (data) {
                 resolve(data);
             }).fail(function (error) {
                 commit("removeWishListId", oldShippingCountryId);
@@ -18128,7 +18137,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],109:[function(require,module,exports){
+},{"services/ApiService":94}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

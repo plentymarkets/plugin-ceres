@@ -16,6 +16,7 @@
             <div class="tab-pane active" id="order-history-tab" role="tabpanel" aria-expanded="true">
 				<order-history template="#vue-order-history"
 				 	:order-list="orderList"
+					@order-list-changed="onOrderListChanged"
 					:items-per-page="ordersPerPage"
 					:show-first-page="{{ config('Ceres.pagination.showFirstPage') }}"
 					:show-last-page="{{ config('Ceres.pagination.showLastPage') }}">
