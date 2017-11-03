@@ -1,4 +1,4 @@
-// import ApiService from "services/ApiService";
+import ApiService from "services/ApiService";
 
 const state =
     {
@@ -60,7 +60,7 @@ const actions =
                 const oldShippingCountryId = state.shippingCountryId;
 
                 commit("setShippingCountryId", shippingCountryId);
-                ApiService.post("/rest/io/shippingCountryId", {shippingCountryId})
+                ApiService.post("/rest/io/shipping/country", {shippingCountryId})
                     .done(data =>
                     {
                         resolve(data);

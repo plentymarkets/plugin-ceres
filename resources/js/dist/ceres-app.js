@@ -18038,7 +18038,12 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-// import ApiService from "services/ApiService";
+
+var _ApiService = require("services/ApiService");
+
+var _ApiService2 = _interopRequireDefault(_ApiService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var state = {
     shippingCountries: [],
@@ -18090,7 +18095,7 @@ var actions = {
             var oldShippingCountryId = state.shippingCountryId;
 
             commit("setShippingCountryId", shippingCountryId);
-            ApiService.post("/rest/io/shippingCountryId", { shippingCountryId: shippingCountryId }).done(function (data) {
+            _ApiService2.default.post("/rest/io/shipping/country", { shippingCountryId: shippingCountryId }).done(function (data) {
                 resolve(data);
             }).fail(function (error) {
                 commit("removeWishListId", oldShippingCountryId);
@@ -18128,7 +18133,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],109:[function(require,module,exports){
+},{"services/ApiService":94}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
