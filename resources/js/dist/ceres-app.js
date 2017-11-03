@@ -13276,14 +13276,11 @@ Vue.component("item-image-carousel", {
                 smartSpeed: 350
             });
         },
-
-
         goTo: function goTo(index) {
-            var $owl = $(undefined.$refs.single);
+            var $owl = $(this.$refs.single);
 
             $owl.trigger("to.owl.carousel", [index, 350]);
         },
-
         orderByPosition: function orderByPosition(list) {
             return list.sort(function (entryA, entryB) {
                 if (entryA.position > entryB.position) {
