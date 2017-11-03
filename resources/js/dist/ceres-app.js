@@ -14847,11 +14847,12 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderList", "ordersPerPage", "isReturnActive"],
+    props: ["template", "orderListData", "ordersPerPage", "isReturnActive"],
 
     data: function data() {
         return {
-            returnsFirstOpened: false
+            returnsFirstOpened: false,
+            orderList: this.orderListData
         };
     },
     created: function created() {
@@ -14866,6 +14867,10 @@ Vue.component("history", {
 
                 vueEventHub.$emit("returns-first-opening");
             }
+        },
+        onOrderListChanged: function onOrderListChanged(newOrderList) {
+            console.log("onOrderListChanged", newOrderList);
+            this.orderList = newOrderList;
         }
     }
 });
@@ -14907,7 +14912,7 @@ Vue.component("order-history", {
 
     methods: {
         setOrders: function setOrders(orderList) {
-            Vue.set(this, "orderList", orderList);
+            this.$emit("orderListChanged", orderList);
             this.page = this.orderList.page;
             this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
             this.countEnd = this.orderList.page * this.itemsPerPage;
