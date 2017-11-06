@@ -26,12 +26,12 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
 
-        this.lol();
+        this.initFirstVariationChangeEvent();
     },
 
     methods:
     {
-        lol()
+        initFirstVariationChangeEvent()
         {
             document.addEventListener("onVariationChanged", event =>
             {
