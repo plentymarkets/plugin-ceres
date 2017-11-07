@@ -5,12 +5,6 @@ var init = (function($, window, document)
 
     function CeresMain()
     {
-        $("#btnMainMenuToggler").click(function()
-        {
-            $(".mobile-navigation").toggleClass("open");
-            $("body").toggleClass("menu-is-visible");
-        });
-
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
@@ -114,11 +108,6 @@ var init = (function($, window, document)
             {
                 $("#searchBox").collapse("hide");
             }
-        });
-
-        $("#to-top").on("click", function()
-        {
-            $("html, body").animate({scrollTop: 0}, "slow");
         });
 
         $toggleListView.on("click", function(evt)

@@ -120,8 +120,8 @@ Vue.component("mobile-navigation", {
 
         closeNavigation()
         {
-            $(".mobile-navigation").removeClass("open");
-            $("body").removeClass("menu-is-visible");
+            document.querySelector(".mobile-navigation").classList.remove("open");
+            document.querySelector("body").classList.remove("menu-is-visible");
         }
     },
 

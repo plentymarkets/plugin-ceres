@@ -12,7 +12,7 @@ export function updateCategoryHtml()
 {
     const currentCategory = store.state.navigation.currentCategory;
 
-    $("body").removeClass("menu-is-visible");
+    document.querySelector("body").classList.remove("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree))
     {
