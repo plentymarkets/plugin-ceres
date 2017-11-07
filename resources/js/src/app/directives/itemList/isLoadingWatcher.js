@@ -1,27 +1,16 @@
 Vue.directive("is-loading-watcher",
     {
-        bind(el)
-        {
-            el.isFirstRendering = true;
-        },
-
         update(el, binding)
         {
-            if (!el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null)
+            if (binding.value)
             {
-                if (!binding.value)
-                {
-                    $("#twig-rendered-item-list").remove();
-                    document.getElementById("vue-rendered-item-list").style.removeProperty("display");
-                }
-                else
-                {
-                    $("#twig-rendered-item-list").addClass("loading");
-                }
+                $("#twig-rendered-item-list").addClass("loading");
+                el.removeTwig = true;
             }
-            else
+            else if (el.removeTwig)
             {
-                el.isFirstRendering = !binding.value;
+                $("#twig-rendered-item-list").remove();
+                document.getElementById("vue-rendered-item-list").style.removeProperty("display");
             }
         }
     });
