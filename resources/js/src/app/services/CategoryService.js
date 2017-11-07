@@ -1,3 +1,5 @@
+import store from "store/index.js";
+
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
 let firstInitDone = false;
@@ -8,13 +10,13 @@ let firstInitDone = false;
  */
 export function updateCategoryHtml()
 {
-    const currentCategory = window.ceresStore.state.navigation.currentCategory;
+    const currentCategory = store.state.navigation.currentCategory;
 
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree))
     {
-        _categoryTree = window.ceresStore.state.navigation.tree;
+        _categoryTree = store.state.navigation.tree;
     }
 
     if (App.isCategoryView && currentCategory.details.length)
@@ -41,7 +43,7 @@ export function updateCategoryHtml()
  */
 function _handleCurrentCategory()
 {
-    const currentCategory = window.ceresStore.state.navigation.currentCategory;
+    const currentCategory = store.state.navigation.currentCategory;
 
     _removeTempDesc();
     _updateHistory(currentCategory);

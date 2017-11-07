@@ -1,3 +1,5 @@
+import store from "store/index.js";
+
 Vue.directive("render-category",
     {
         bind(el, binding)
@@ -6,11 +8,11 @@ Vue.directive("render-category",
             {
                 event.preventDefault();
 
-                window.ceresStore.dispatch("selectCategory", {categoryId: parseInt(binding.value)});
+                store.dispatch("selectCategory", {categoryId: parseInt(binding.value)});
 
                 if (!App.isCategoryView)
                 {
-                    const url = window.ceresStore.state.navigation.currentCategory.url;
+                    const url = store.state.navigation.currentCategory.url;
 
                     window.open(url, "_self");
                 }

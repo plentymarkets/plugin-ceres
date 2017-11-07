@@ -15629,14 +15629,9 @@ Vue.directive("logout", {
 
 Vue.directive("waiting-animation", {
     bind: function bind(el) {
-        el.firstRendering = true;
         el.initialClass = el.className;
     },
     update: function update(el, binding) {
-        if (el.firstRendering) {
-            el.firstRendering = false;
-            return;
-        }
         if (binding.value) {
             el.className = "";
             el.className = "fa fa-circle-o-notch fa-spin";
@@ -15668,19 +15663,13 @@ Vue.directive("waiting-animation-infinite", {
 "use strict";
 
 Vue.directive("is-loading-watcher", {
-    bind: function bind(el) {
-        el.isFirstRendering = true;
-    },
     update: function update(el, binding) {
-        if (!el.isFirstRendering && document.getElementById("twig-rendered-item-list") !== null) {
-            if (!binding.value) {
-                $("#twig-rendered-item-list").remove();
-                document.getElementById("vue-rendered-item-list").style.removeProperty("display");
-            } else {
-                $("#twig-rendered-item-list").addClass("loading");
-            }
-        } else {
-            el.isFirstRendering = !binding.value;
+        if (binding.value) {
+            $("#twig-rendered-item-list").addClass("loading");
+            el.removeTwig = true;
+        } else if (el.removeTwig) {
+            $("#twig-rendered-item-list").remove();
+            document.getElementById("vue-rendered-item-list").style.removeProperty("display");
         }
     }
 });
@@ -15728,15 +15717,21 @@ Vue.directive("update-sidenav-selection", {
 },{}],76:[function(require,module,exports){
 "use strict";
 
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.directive("render-category", {
     bind: function bind(el, binding) {
         el.onclick = function (event) {
             event.preventDefault();
 
-            window.ceresStore.dispatch("selectCategory", { categoryId: parseInt(binding.value) });
+            _index2.default.dispatch("selectCategory", { categoryId: parseInt(binding.value) });
 
             if (!App.isCategoryView) {
-                var url = window.ceresStore.state.navigation.currentCategory.url;
+                var url = _index2.default.state.navigation.currentCategory.url;
 
                 window.open(url, "_self");
             }
@@ -15744,7 +15739,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{}],77:[function(require,module,exports){
+},{"store/index.js":103}],77:[function(require,module,exports){
 "use strict";
 
 Vue.directive("change-lang", {
@@ -15787,16 +15782,10 @@ Vue.directive("tooltip", {
 
 Vue.directive("item-total-price", {
     bind: function bind(el) {
-        var firstRendering = true;
-
         document.addEventListener("itemTotalPriceChanged", function (event) {
-            if (firstRendering) {
-                firstRendering = false;
-            } else {
-                el.innerHTML = event.detail;
+            el.innerHTML = event.detail;
 
-                $(el).fadeTo(100, 0.1).fadeTo(400, 1.0);
-            }
+            $(el).fadeTo(100, 0.1).fadeTo(400, 1.0);
         });
     }
 });
@@ -15828,11 +15817,17 @@ Vue.filter("attachText", function (item, text) {
 },{}],83:[function(require,module,exports){
 "use strict";
 
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var currencySymbolMap = require("currency-symbol-map");
 var accounting = require("accounting");
 
 Vue.filter("currency", function (price, customCurrency) {
-    var currency = customCurrency || window.ceresStore.state.basket.data.currency;
+    var currency = customCurrency || _index2.default.state.basket.data.currency;
 
     // (%v = value, %s = symbol)
     var options = {
@@ -15850,7 +15845,7 @@ Vue.filter("currency", function (price, customCurrency) {
     return accounting.formatMoney(price, options);
 });
 
-},{"accounting":1,"currency-symbol-map":2}],84:[function(require,module,exports){
+},{"accounting":1,"currency-symbol-map":2,"store/index.js":103}],84:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -16368,6 +16363,13 @@ Object.defineProperty(exports, "__esModule", {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.updateCategoryHtml = updateCategoryHtml;
+
+var _index = require("store/index.js");
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ApiService = require("services/ApiService");
 var _categoryTree = {};
 var firstInitDone = false;
@@ -16377,12 +16379,12 @@ var firstInitDone = false;
  * @param currentCategory
  */
 function updateCategoryHtml() {
-    var currentCategory = window.ceresStore.state.navigation.currentCategory;
+    var currentCategory = _index2.default.state.navigation.currentCategory;
 
     $("body").removeClass("menu-is-visible");
 
     if ($.isEmptyObject(_categoryTree)) {
-        _categoryTree = window.ceresStore.state.navigation.tree;
+        _categoryTree = _index2.default.state.navigation.tree;
     }
 
     if (App.isCategoryView && currentCategory.details.length) {
@@ -16405,7 +16407,7 @@ function updateCategoryHtml() {
  * @param currentCategory
  */
 function _handleCurrentCategory() {
-    var currentCategory = window.ceresStore.state.navigation.currentCategory;
+    var currentCategory = _index2.default.state.navigation.currentCategory;
 
     _removeTempDesc();
     _updateHistory(currentCategory);
@@ -16473,7 +16475,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":94}],96:[function(require,module,exports){
+},{"services/ApiService":94,"store/index.js":103}],96:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
