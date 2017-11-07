@@ -1,9 +1,11 @@
+import store from "store/index.js";
+
 const currencySymbolMap = require("currency-symbol-map");
 const accounting = require("accounting");
 
 Vue.filter("currency", function(price, customCurrency)
 {
-    const currency = customCurrency || window.ceresStore.state.basket.data.currency;
+    const currency = customCurrency || store.state.basket.data.currency;
 
     // (%v = value, %s = symbol)
     const options = {
