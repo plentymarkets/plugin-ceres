@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.6.4 (unknown)
+
+### Behoben
+
+- Die Einstellung an der Variante für die Grundpreisangabe: "Grundpreis anzeigen" wird nun berücksichtigt.
+
 ## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
