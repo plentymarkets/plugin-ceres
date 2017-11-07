@@ -46,6 +46,11 @@ const getters =
     {
         variationPropertySurcharge(state)
         {
+            if (!state || !state.variation.documents)
+            {
+                return 0;
+            }
+
             const addedProperties = state.variation.documents[0].data.properties.filter(property =>
             {
                 return !!property.property.value;
@@ -63,7 +68,7 @@ const getters =
 
         variationGraduatedPrice(state)
         {
-            if (!state)
+            if (!state || !state.variation.documents)
             {
                 return 0;
             }
