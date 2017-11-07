@@ -11012,6 +11012,9 @@ Vue.component("basket-totals", {
     computed: Vuex.mapState({
         basket: function basket(state) {
             return state.basket.data;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -18765,6 +18768,10 @@ var actions = {};
 
 var getters = {
     variationPropertySurcharge: function variationPropertySurcharge(state) {
+        if (!state || !state.variation.documents) {
+            return 0;
+        }
+
         var addedProperties = state.variation.documents[0].data.properties.filter(function (property) {
             return !!property.property.value;
         });
@@ -18799,7 +18806,7 @@ var getters = {
         return sum;
     },
     variationGraduatedPrice: function variationGraduatedPrice(state) {
-        if (!state) {
+        if (!state || !state.variation.documents) {
             return 0;
         }
 
