@@ -2,9 +2,9 @@
 
 <script type="x/template" id="vue-basket-totals">
     <!-- BASKET TOTALS -->
-    <div class="cmp cmp-totals m-b-2">
+    <div class="cmp cmp-totals">
         <h3>{{ trans("Ceres::Template.basketSum") }}</h3>
-        <div>
+        <div class="basket-totals-loading" :class="{ 'isLoading': isBasketLoading }">
             <dl>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
                 <dt v-if="showProperty( 'basket.value_of_items_net' )">

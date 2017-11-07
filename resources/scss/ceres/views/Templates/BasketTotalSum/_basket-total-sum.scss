@@ -1,31 +1,31 @@
 .cmp-totals{
 
 
-	.totalSum {
-		clear: right;
+	// .totalSum {
+	// 	clear: right;
 
 
-		dt{
-			width: 68%;
-			float:left;
-		}
+	// 	dt{
+	// 		width: 68%;
+	// 		float:left;
+	// 	}
 
-		dd{
-			float: right;
-		}
-	}
+	// 	dd{
+	// 		float: right;
+	// 	}
+	// }
 
-	.vatTotals {
+	// .vatTotals {
 
-		dt{
-			width: 68%;
-			float:left;
-		}
+	// 	dt{
+	// 		width: 68%;
+	// 		float:left;
+	// 	}
 
-		dd{
-			float: right;
-		}
-	}
+	// 	dd{
+	// 		float: right;
+	// 	}
+	// }
 
 	dt, dd{
 		display: inline-block;
@@ -39,5 +39,46 @@
 	dd{
 		text-align: right;
 		width: 30%;
+	}
+
+	.basket-totals-loading {
+		position: relative;
+
+		&:before {
+			content: "";
+			width: 102%;
+			height: 102%;
+			position: absolute;
+			background: #f7f7f9;
+			border-radius: 1px;
+			opacity: 0;
+			transition: opacity .1s ease-out;
+		}
+
+		&:after {
+			content: "\f021";
+			font-family: FontAwesome;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			display: flex;
+			align-items: center;
+			font-size: 2rem;
+			justify-content: center;
+			animation: fa-spin 1.5s infinite linear;
+			color: $gray;
+			opacity: 0;
+			transition: opacity .1s ease-out;
+		}
+
+		&.isLoading {
+			&:before {
+				opacity: 0.5;
+			}	
+			&:after {
+				opacity: 1;
+			}
+		}
 	}
 }

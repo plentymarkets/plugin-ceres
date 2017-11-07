@@ -198,4 +198,8 @@ $border-width: 1px;
     }
 }
 
-
+.remove-disabled-coloring {
+    &:disabled {
+        background-color: initial !important;
+    }
+}

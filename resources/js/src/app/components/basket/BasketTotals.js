@@ -8,7 +8,8 @@ Vue.component("basket-totals", {
     ],
 
     computed: Vuex.mapState({
-        basket: state => state.basket.data
+        basket: state => state.basket.data,
+        isBasketLoading: state => state.basket.isBasketLoading
     }),
 
     created()
