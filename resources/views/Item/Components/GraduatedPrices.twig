@@ -4,15 +4,13 @@
             <b>{{ trans("Ceres::Template.graduatedPrices") }}:</b>
 
             <table class="graduated-prices-table text-muted">
-                <tr v-for="price in graduatedPrices">
+                <tr v-for="(price, index) in graduatedPrices">
                     <td>{{ trans("Ceres::Template.generalFrom") }} ${ price.minimumOrderQuantity }</td>
                     <td>
                         ${ price.formatted }
-                        <i  :id="price.minimumOrderQuantity + '_qty'" 
-                            transition="graduated-price-display" 
-                            class="fa fa-check-circle-o" 
-                            aria-hidden="true">
-                    </i>
+                        <transition name="fade">
+                            <i class="fa fa-lg fa-check-circle-o m-l-1" v-if="index === activeGraduationIndex" aria-hidden="true"></i>
+                        </transition>
                     </td>
                 </tr>
             </table>

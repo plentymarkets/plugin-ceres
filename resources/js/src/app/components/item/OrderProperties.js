@@ -1,9 +1,12 @@
 Vue.component("order-properties", {
 
     props: [
-        "template",
-        "item"
+        "template"
     ],
+
+    computed: Vuex.mapState({
+        properties: state => state.item.variation.documents[0].data.properties
+    }),
 
     created()
     {

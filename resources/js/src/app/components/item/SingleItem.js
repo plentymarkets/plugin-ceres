@@ -7,18 +7,18 @@ Vue.component("single-item", {
         "attributeNameMap"
     ],
 
-    data()
+    computed:
     {
-        return {
-            firstVariationChange: true
-        };
-    },
+        ...Vuex.mapState({
+            currentVariation: state => state.item.variation.documents[0].data,
+            variations: state => state.item.variationList,
+            isInWishList: state => state.item.variation.documents[0].isInWishListVariation
+        }),
 
-    computed: Vuex.mapState({
-        currentVariation: state => state.item.variation.documents[0].data,
-        variations: state => state.item.variationList,
-        isInWishList: state => state.item.variation.documents[0].isInWishListVariation
-    }),
+        ...Vuex.mapGetters([
+            "variationTotalPrice"
+        ])
+    },
 
     created()
     {
@@ -26,26 +26,9 @@ Vue.component("single-item", {
         this.$store.commit("setVariation", this.itemData);
         this.$store.commit("setVariationList", this.variationListData);
 
-        this.initFirstVariationChangeEvent();
-    },
-
-    methods:
-    {
-        initFirstVariationChangeEvent()
+        this.$store.watch(() => this.$store.getters.variationTotalPrice, () =>
         {
-            document.addEventListener("onVariationChanged", event =>
-            {
-                if (this.firstVariationChange)
-                {
-                    const twigSingleItem = document.querySelector("#twig-rendered-single-item");
-
-                    twigSingleItem.parentElement.removeChild(twigSingleItem);
-
-                    this.firstVariationChange = false;
-
-                    this.$el.style.removeProperty("display");
-                }
-            });
-        }
+            $(this.$refs.variationTotalPrice).fadeTo(100, 0.1).fadeTo(400, 1.0);
+        });
     }
 });

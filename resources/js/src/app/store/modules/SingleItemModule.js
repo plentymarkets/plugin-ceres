@@ -1,9 +1,8 @@
-// import ApiService from "services/ApiService";
-
 const state =
     {
         variation: {},
-        variationList: []
+        variationList: [],
+        variationOrderQuantity: 1
     };
 
 const mutations =
@@ -11,6 +10,7 @@ const mutations =
         setVariation(state, variation)
         {
             state.variation = variation;
+            state.variationOrderQuantity = 1;
         },
 
         setVariationList(state, variationList)
@@ -20,13 +20,21 @@ const mutations =
 
         setVariationOrderProperty(state, {propertyId, value})
         {
-            const properties = state.variation.documents[0].data.properties;
-            const prop = properties.find(property => property.property.id === propertyId);
+            const index = state.variation.documents[0].data.properties.findIndex(property => property.property.id === propertyId);
 
-            if (prop)
+            if (index >= 0)
             {
-                prop.property.value = value;
+                Vue.set(state.variation.documents[0].data.properties[index], "property",
+                    {
+                        ...state.variation.documents[0].data.properties[index].property,
+                        value: value
+                    });
             }
+        },
+
+        setVariationOrderQuantity(state, quantity)
+        {
+            state.variationOrderQuantity = quantity;
         }
     };
 
@@ -36,6 +44,56 @@ const actions =
 
 const getters =
     {
+        variationPropertySurcharge(state)
+        {
+            const addedProperties = state.variation.documents[0].data.properties.filter(property =>
+            {
+                return !!property.property.value;
+            });
+
+            let sum = 0;
+
+            for (const property of addedProperties)
+            {
+                sum += property.property.surcharge;
+            }
+
+            return sum;
+        },
+
+        variationGraduatedPrice(state)
+        {
+            if (!state)
+            {
+                return 0;
+            }
+
+            const calculatedPrices = state.variation.documents[0].data.calculatedPrices;
+            const graduatedPrices = calculatedPrices.graduatedPrices;
+
+            let returnPrice;
+
+            if (graduatedPrices && graduatedPrices[0])
+            {
+                const prices = graduatedPrices.filter(price =>
+                {
+                    return parseInt(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+                });
+
+                if (prices[0])
+                {
+                    returnPrice = prices.reduce((prev, current) => (prev.minimumOrderQuantity > current.minimumOrderQuantity) ? prev : current);
+                    returnPrice = returnPrice.price;
+                }
+            }
+
+            return returnPrice || calculatedPrices.default.unitPrice;
+        },
+
+        variationTotalPrice(state, getters, rootState, rootGetters)
+        {
+            return getters.variationPropertySurcharge + getters.variationGraduatedPrice;
+        }
     };
 
 export default

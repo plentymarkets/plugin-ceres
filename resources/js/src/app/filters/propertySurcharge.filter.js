@@ -1,6 +1,6 @@
 Vue.filter("propertySurcharge", function(properties, propertyId)
 {
-    const property = properties.find(prop => prop.property.id === propertyId);
+    const property = properties.find(prop => prop.property.id === parseInt(propertyId));
 
     if (property)
     {

@@ -3,13 +3,6 @@ Vue.component("graduated-prices", {
         "template"
     ],
 
-    data()
-    {
-        return {
-            test: 0
-        };
-    },
-
     computed:
     {
         graduatedPrices()
@@ -29,53 +22,29 @@ Vue.component("graduated-prices", {
 
                 return 0;
             });
-        }
+        },
+
+        activeGraduationIndex()
+        {
+            const prices = this.graduatedPrices.filter(price => this.variationOrderQuantity >= price.minimumOrderQuantity);
+
+            if (!prices.length)
+            {
+                return -1;
+            }
+
+            const price = prices.reduce((prev, current) => (prev.minimumOrderQuantity > current.minimumOrderQuantity) ? prev : current);
+
+            return this.graduatedPrices.indexOf(price);
+        },
+
+        ...Vuex.mapState({
+            variationOrderQuantity: state => state.item.variationOrderQuantity
+        })
     },
 
     created()
     {
         this.$options.template = this.template;
-    },
-
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.initializeEvents();
-        });
-    },
-
-    methods:
-    {
-        initializeEvents()
-        {
-            this.initQuantityPriceWatcher();
-        },
-
-        initQuantityPriceWatcher()
-        {
-            // TODO replace this after vuex change and single item component change
-
-            document.addEventListener("itemGraduatedPriceChanged", event =>
-            {
-                for (const price of this.graduatedPrices)
-                {
-                    // unmark other selections
-                    document.getElementById(price.minimumOrderQuantity + "_qty").style.opacity = 0;
-
-                    // get correct price to mark
-                    if (event.detail >= price.minimumOrderQuantity)
-                    {
-                        priceToMark = price.minimumOrderQuantity;
-                    }
-                }
-
-                // mark new selection
-                if (priceToMark != 0)
-                {
-                    document.getElementById(priceToMark + "_qty").style.opacity = 1;
-                }
-            });
-        }
     }
 });

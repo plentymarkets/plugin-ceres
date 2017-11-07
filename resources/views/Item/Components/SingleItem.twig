@@ -4,7 +4,7 @@
 
 <script type="x/template" id="vue-single-item">
     <div>
-        <div class="single container-max page-content" v-if="!firstVariationChange">
+        <div class="single container-max page-content">
             <div class="row m-t-3">
                 <div class="col-md-7 single-leftside">
                     <div class="row">
@@ -54,7 +54,7 @@
                     <slot name="BeforePrice"></slot>
 
                     <div class="row">
-                        <order-properties template="#vue-order-properties" :item="currentVariation" v-if="currentVariation.filter.isSalable"></order-properties>
+                        <order-properties template="#vue-order-properties" v-if="currentVariation.filter.isSalable"></order-properties>
                     </div>
 
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
@@ -67,9 +67,9 @@
                         </div>
                     {% endif %}
 
-                    <span class="price h1" >
-                        <span :content="currentVariation.calculatedPrices.default.price">
-                            ${ currentVariation.calculatedPrices.formatted.defaultPrice }
+                    <span class="price h1">
+                        <span ref="variationTotalPrice" :content="currentVariation.calculatedPrices.default.price">
+                            ${ variationTotalPrice | currency(currentVariation.calculatedPrices.default.currency) }
                         </span>
                         <sup>*</sup>
                         <span :content="currentVariation.calculatedPrices.default.currency"></span>
@@ -97,7 +97,7 @@
 
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
-                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="currentVariation" :show-quantity="true"></add-to-basket>
+                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true"></add-to-basket>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
                     

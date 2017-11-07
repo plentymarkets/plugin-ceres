@@ -85,20 +85,22 @@
         
         & i {
             color: $brand-success;
-            font-size: 17px;
-            margin-left: 5px;
-            opacity: 0;
         }
     }
 
-    .graduated-price-display-transition {
-        transition: all .3s ease-out;
-        opacity: 1;
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .3s ease-out;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0
     }
 
-    .graduated-price-display-enter, .graduated-price-display-leave {
-        transition: all .3s ease-out;
-        opacity: 0;
+    .order-property-input {
+        transition: border-color .3s ease-out;
+
+        &.active {
+            border-color: $brand-success;
+        }
     }
 }
 
