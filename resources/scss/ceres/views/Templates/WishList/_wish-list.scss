@@ -125,7 +125,14 @@
     }
 }
 
-.wish-list-item-transition-leave {
+.wish-list-no-items-transition-enter-active, .wish-list-no-items-transition-leave-active {
+    transition: margin .1s;
+}
+.wish-list-no-items-transition-enter, .wish-list-no-items-transition-leave-to {
+    margin: 0 !important;
+}
+
+.wish-list-item-transition-leave-active {
     animation-name: wish-list-item-leaving;
     animation-duration: .175s;
     animation-delay: .175s;
@@ -138,7 +145,7 @@
 }
 
 @include media-breakpoint-down(md) { 
-    .wish-list-item-transition-leave > div.row {
+    .wish-list-item-transition-leave-active > div.row {
         transform: translateX(-200%);
         transition: transform 200ms cubic-bezier(0, 0, 0.82, 0.1);
     }
