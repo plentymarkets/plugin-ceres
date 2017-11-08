@@ -1,11 +1,8 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set itemData = config("Ceres.item.data") | split(', ') %}
 {% set configItemName = config("Ceres.item.name") %}
-{% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set variations = services.item.getVariationAttributeMap( item.documents[0].data.item.id  ) %}
-{% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
 {% block PartialHead %}
     <meta property="og:title" content="{{ item.documents[0].data.texts | itemName(configItemName) }}" />
