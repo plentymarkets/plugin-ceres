@@ -195,7 +195,6 @@ Vue.component("address-select", {
          */
         deleteAddress()
         {
-
             this.$store.dispatch("deleteAddress", {address: this.addressToDelete, addressType: this.addressType})
                 .then(
                     response =>
