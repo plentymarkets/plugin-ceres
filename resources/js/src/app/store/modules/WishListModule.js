@@ -15,7 +15,7 @@ const mutations =
 
         setWishListIds(state, wishListIds)
         {
-            state.wishListIds = wishListIds;
+            state.wishListIds = wishListIds.map(Number);
         },
 
         removeWishListItem(state, wishListItem)

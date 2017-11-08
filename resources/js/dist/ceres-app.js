@@ -12964,6 +12964,7 @@ Vue.component("add-to-wish-list", {
     data: function data() {
         return {
             wishListCount: 0,
+            _isActive: this.isActive,
             isLoading: false
         };
     },
@@ -12981,7 +12982,7 @@ Vue.component("add-to-wish-list", {
 
     methods: {
         switchState: function switchState() {
-            if (this.isActive) {
+            if (this.$data._isActive) {
                 this.removeFromWishList();
             } else {
                 this.addToWishList();
@@ -12992,7 +12993,7 @@ Vue.component("add-to-wish-list", {
 
             if (!this.isLoading) {
                 this.isLoading = true;
-                this.isActive = true;
+                this.$data._isActive = true;
                 this.changeTooltipText();
 
                 this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
@@ -13001,7 +13002,7 @@ Vue.component("add-to-wish-list", {
                     NotificationService.success(Translations.Template.itemWishListAdded);
                 }, function (error) {
                     _this2.isLoading = false;
-                    _this2.isActive = false;
+                    _this2.$data._isActive = false;
                     _this2.changeTooltipText();
                 });
             }
@@ -13011,7 +13012,7 @@ Vue.component("add-to-wish-list", {
 
             if (!this.isLoading) {
                 this.isLoading = true;
-                this.isActive = false;
+                this.$data._isActive = false;
                 this.changeTooltipText();
 
                 this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
@@ -13020,13 +13021,13 @@ Vue.component("add-to-wish-list", {
                     NotificationService.success(Translations.Template.itemWishListRemoved);
                 }, function (error) {
                     _this3.isLoading = false;
-                    _this3.isActive = true;
+                    _this3.$data._isActive = true;
                     _this3.changeTooltipText();
                 });
             }
         },
         changeTooltipText: function changeTooltipText() {
-            var tooltipText = this.isActive ? "itemWishListRemove" : "itemWishListAdd";
+            var tooltipText = this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd";
 
             $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
         }
@@ -18583,7 +18584,7 @@ var mutations = {
         state.wishListItems = wishListItems;
     },
     setWishListIds: function setWishListIds(state, wishListIds) {
-        state.wishListIds = wishListIds;
+        state.wishListIds = wishListIds.map(Number);
     },
     removeWishListItem: function removeWishListItem(state, wishListItem) {
         state.wishListItems = state.wishListItems.filter(function (item) {
