@@ -8,6 +8,9 @@
 {% set basePriceList = getBasePriceList( services.item.getVariationList( item.documents[0].data.item.id  ) ) %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ item.documents[0].data.texts.metaDescription }}">
+    <meta name="keywords" content="{{ item.documents[0].data.texts.keywords | json_encode }}">
+
     <meta property="og:title" content="{{ item.documents[0].data.texts | itemName(configItemName) }}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}{{ item.documents[0].data | itemURL }}" />
@@ -28,6 +31,7 @@
     {{ component( "Ceres::Item.Components.ItemImageCarousel" ) }}
     {{ component( "Ceres::Item.Components.AddToWishList" ) }}
     {{ component( "Ceres::Item.Components.OrderProperties" ) }}
+    {{ component( "Ceres::Item.Components.GraduatedPrices" ) }}
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <resource name="currentVariation" :data="{{ item | json_encode() }}"></resource>
@@ -80,6 +84,16 @@
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
+                <div class="row">
+                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
+                </div>
+
+                <graduated-prices template="#vue-graduated-prices"></graduated-prices>
+
+                <div class="row">
+                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
+                </div>
+
                 {% if ('item.recommendedPrice' in itemData or 'all' in itemData) %}
                     <div class="crossprice" v-resource-if:currentVariation="documents[0].data.calculatedPrices.rrp.price > 0">
                         <del class="text-muted small" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.rrpPrice">
@@ -89,21 +103,23 @@
                 {% endif %}
 
                 <span class="price h1" >
-                    <span v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultPrice"
-                          content="{{ item.documents[0].data.calculatedPrices.default.price }}">
+                    <span v-item-total-price content="{{ item.documents[0].data.calculatedPrices.default.price }}">
                         {{ item.documents[0].data.calculatedPrices.formatted.defaultPrice }}
                     </span>
                     <sup>*</sup>
                     <span content="{{ item.documents[0].data.calculatedPrices.default.currency }}"></span>
                 </span>
 
-                <div class="base-price text-muted m-y-1">
+                <div class="base-price text-muted m-y-1" v-resource-if:currentVariation="!(documents[0].data.unit.unitOfMeasurement === 'C62' && documents[0].data.unit.content === 1)">
+                    <div>
+                        {{ trans("Ceres::Template.itemContent") }}
+                        <span v-resource-bind:currentVariation="documents.0.data.unit.content">{{ item.documents[0].data.unit.content }}</span>
+                        <span v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                    </div>
+                    <div>
                         {{ trans("Ceres::Template.itemUnitPrice") }}
-                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.defaultUnitPrice">{{ item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice }}</span> /
-                            
-                        <span v-if="true" class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.content" v-resource-if:currentVariation="documents[0].data.unit.content > 1">{{ item.documents[0].data.unit.content }}</span>
-
-                        <span class="base-price-amount" v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
+                        <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.basePrice">{{ item.documents[0].data.calculatedPrices.formatted.basePrice }}</span>
+                    </div>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::SingleItem.AfterPrice", item.documents[0].data) }}
@@ -120,9 +136,6 @@
 
                     <add-to-basket template="#vue-add-to-basket" v-resource-if:currentVariation="documents[0].data.filter.isSalable" v-resource-push:item data-accessor="true"
                                    resource="currentVariation" :show-quantity="true"></add-to-basket>
-
-                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
-
 
                     {{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}
                 </div>
@@ -168,7 +181,7 @@
                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                     </li>
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs") }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs", item.documents[0].data) }}
                 </ul>
 
                 <div class="tab-content">
@@ -281,7 +294,7 @@
                         </div>
                     </div>
 
-                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent") }}
+                    {{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}
                 </div>
             </div>
         </div>
@@ -289,12 +302,7 @@
 
         {{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}
 
-        {#<hr>#}
-
-        {#<h3 class="m-t-3 m-b-1">{{ trans("Ceres::Template.itemCustomerFeedback") }}</h3>#}
-        {#<div class="row m-b-3">#}
-            {#{% include "Ceres::Item.Partials.ItemRating" %}#}
-        {#</div>#}
+        {{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}
 
     </div>
 

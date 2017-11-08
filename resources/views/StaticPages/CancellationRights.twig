@@ -3,6 +3,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_cancel_rights") }}">
+    <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_rights") }}">
     <title>{{ trans("Ceres::Template.generalCancellationRightNoShy") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 

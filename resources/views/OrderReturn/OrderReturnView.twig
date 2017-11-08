@@ -1,0 +1,25 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <meta name="robots" content="NOINDEX, NOFOLLOW">
+    <title>{{ trans("Ceres::Template.myAccountReturnCenter") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+	{{ component( "Ceres::OrderReturn.Components.OrderReturn" ) }}
+
+	<div class="page-content basket order-return container-max m-b-3 m-t-1">
+
+		<div class="row m-t-1">
+            <div class="col-xs-12">
+                <h1 class="h2">{{ trans("Ceres::Template.myAccountReturn") }}</h1>
+            </div>
+        </div>
+
+        <hr>
+
+		<order-return template="#vue-order-return" :init-order-data="{{ orderData }}"></order-return>
+
+	</div>
+{% endblock %}

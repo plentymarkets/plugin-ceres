@@ -13,6 +13,42 @@
     }
 }
 
+.history-pagination {
+    margin-top: 15px;
+
+    & .counter {
+        margin-top: 5px;
+    }
+}
+
+.gradient-hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+}
+
+.show-more-returns {
+    position: absolute;
+    bottom: 22px;
+    left: 40%;
+    background-color: #fff;
+    width: 96px;
+    text-align: center;
+}
+
+.order-return-history-image-container {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+
+    @include img-contain();
+}
+
+.order-return-history-count {
+    color: $gray;
+    margin-top: 15px;
+}
+
 .switchable-warning
 {
     display: flex;

@@ -60,7 +60,7 @@
                 <div class="col-xs-12">
                     <h1 class="h2 category-title">{{ category.details.first.name }}</h1>
                     {% if showCategoryDescription %}
-                        <h2 class="h3 p-t-3 category-description">{{ category.details[0].description | raw }}</h2>
+                        <div id="category-description-container" class="category-description m-b-1">{{ category.details[0].description | raw }}</div>
                     {% endif %}
                 </div>
             </div>
@@ -149,4 +149,12 @@
     {% endif %}
 
     <title>{{ category.details.first.name }} | {{ config("Ceres.header.company_name") }}</title>
+
+    <meta name="description" content="{{ category.details[0].metaDescription | json_encode }}">
+    <meta name="keywords" content="{{ category.details[0].metaKeywords | json_encode }}">
+
+    {% set metaRobots = category.details[0].metaRobots | json_encode %}
+    {% set formattedMetaRobots = metaRobots|replace({'_': ', '}) %}
+
+    <meta name="robots" content="{{  formattedMetaRobots }}">
 {% endblock %}

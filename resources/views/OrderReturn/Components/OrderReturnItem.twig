@@ -1,0 +1,46 @@
+<script type="x/template" id="vue-order-return-item">
+	<article  class="order-return-item" id="article_${ $index }">
+		<div class="row">
+			<div class="col-xs-3 col-sm-2 order-flex">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<input type="checkbox" v-model="isChecked" @change="updateValue($event)">
+					</span>
+					<input 	type="number" 
+							min="1" 
+							:max="orderItem.quantity" 
+							class="form-control" 
+							:disabled="!isChecked" 
+							@change="validateValue()" 
+							v-model="returnCount" 
+							placeholder="0">
+				</div>
+				<div class="max-counter-slash">
+					/
+				</div>
+				<div class="max-counter-return">
+					${ orderItem.quantity }
+				</div>
+			</div>
+			<div class="col-xs-3 col-sm-2 order-return-container">
+				<div class="order-return-image-container">
+					<a :href="orderItemURL">
+						<img class="order-return-image" :src="orderItemImage">
+					</a>
+				</div>
+			</div>
+
+			<div class="col-xs-5 col-sm-7 order-return-texts">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 col-lg-6">
+							<a :href="orderItemURL">
+								<h2 class="h5 order-return-name">${ orderItem.orderItemName }</h2>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+</script>

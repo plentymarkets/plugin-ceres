@@ -1,0 +1,48 @@
+<script type="x/template" id="vue-order-return">
+
+	{{ component( "Ceres::OrderReturn.Components.OrderReturnItem" ) }}
+
+	<div>
+		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
+
+		<button class="btn btn-secondary m-t-2" @click="selectAllItems()">{{ trans("Ceres::Template.generalSelectAll") }}</button>
+		<button class="btn btn-primary btn-right m-t-2" :disabled="isDisabled || isLoading" @click="showConfirmationModal()">{{ trans("Ceres::Template.myAccountReturnTrigger") }}</button>
+
+		{# confirmation modal #}
+		<div class="modal fade" v-el:order-return-confirmation tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h3 class="modal-title">{{ trans("Ceres::Template.myAccountReturnSendBack") }}</h3>
+					</div>
+					<div class="modal-body">
+						<ul>
+							<li v-for="orderReturnItem in orderReturnItems">
+								${orderReturnItem.quantity}x ${orderReturnItem.orderItem.orderItemName}
+							</li>
+						</ul>
+
+						<div class="input-unit textarea cmp-contact m-t-2">
+							<textarea id="contact_wish" class="no-resize" rows="5" @change="updateOrderReturnNote($event.target.value)"></textarea>
+							<label for="contact_wish">{{ trans("Ceres::Template.myAccountReturnReason") }}</label>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<div class="row">
+							 <div class="col-sm-3 offset-sm-6">
+								<button type="button" data-dismiss="modal" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalCancel") }}</button>		
+							</div>
+							 <div class="col-sm-3">
+								<button :disabled="isLoading" @click="sendReturnItems()" type="button" class="btn btn-primary btn-block pull-xs-right btn-medium">{{ trans("Ceres::Template.generalConfirm") }}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{# confirmation modal #}
+    </div>
+</script>
+  
