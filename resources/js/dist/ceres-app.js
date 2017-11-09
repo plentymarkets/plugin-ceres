@@ -17352,7 +17352,7 @@ var mutations = {
         } else if (addressType === "2") {
             state.deliveryAddressList = [{ id: -99 }];
             state.deliveryAddress = state.deliveryAddressList[0];
-            state.deliveryAddressId = tate.deliveryAddressList[0].id;
+            state.deliveryAddressId = state.deliveryAddressList[0].id;
         }
     }
 };
