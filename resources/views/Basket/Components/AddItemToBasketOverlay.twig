@@ -4,7 +4,7 @@
 
     {% set configItemName = config("Ceres.item.name") %}
 
-    <div id="add-item-to-basket-overlay" v-if="showOverlay">
+    <div id="add-item-to-basket-overlay">
         <div class="modal fade">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -24,11 +24,11 @@
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
                                 <img style="max-height: 140px;" class="img-fluid m-x-auto"
-                                     :src="imageUrl" :alt="texts | itemName({{ configItemName }})"/>
+                                     :src="imageUrl" :alt="itemName"/>
                             </div>
                             <div class="col-md-8">
                                 <p>
-                                    <strong>${ texts | itemName({{ configItemName }}) }</strong>
+                                    <strong>${ itemName }</strong>
                                 </p>
                                 <p class="small">
                                     <strong>
