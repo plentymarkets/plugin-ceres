@@ -10451,7 +10451,9 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+                if (this.timeToClose <= 0) {
+                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+                }
 
                 this.startCounter();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
@@ -11174,6 +11176,9 @@ Vue.component("place-order", {
         },
         contactWish: function contactWish(state) {
             return state.checkout.contactWish;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -14693,6 +14698,7 @@ Vue.component("change-payment-method", {
 
     data: function data() {
         return {
+            compAllowedPaymentMethods: this.allowedPaymentMethods,
             changePaymentModal: {},
             paymentMethod: 0,
             isPending: false,
@@ -14762,7 +14768,7 @@ Vue.component("change-payment-method", {
             var _this3 = this;
 
             ApiService.get("/rest/io/order/paymentMethods", { orderId: this.currentOrder.id, paymentMethodId: paymentMethodId }).done(function (response) {
-                _this3.allowedPaymentMethods = response;
+                _this3.compAllowedPaymentMethods = response;
             }).fail(function () {});
         },
         changePaymentMethod: function changePaymentMethod() {
@@ -14785,7 +14791,7 @@ Vue.component("change-payment-method", {
         showIsSwitchableWarning: function showIsSwitchableWarning() {
             var _this5 = this;
 
-            var currentPaymentMethod = this.allowedPaymentMethods.find(function (paymentMethod) {
+            var currentPaymentMethod = this.compAllowedPaymentMethods.find(function (paymentMethod) {
                 return paymentMethod.id === _this5.paymentMethod;
             });
 
