@@ -2,8 +2,9 @@
 {% set lang         = services.sessionStorage.getLang() %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = config("Ceres.header.company_name") %}
+{% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
-<nav class="navbar">
+<nav class="navbar{% if useMegaMenu %} megamenu{%endif%}">
       <div class="container-max">
         <div class="row">
              <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
@@ -25,7 +26,8 @@
                     <li class="btnClose"></li>
                 </ul>
                 {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
-                    {{ includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
+                    {# includeCached('Ceres::PageDesign.Partials.Header.NavigationList.twig') #}
+                    {% include "Ceres::PageDesign.Partials.Header.NavigationList" %}
                 {% endif %}
             </div>
 
