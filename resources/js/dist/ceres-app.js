@@ -10400,37 +10400,40 @@ Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 
-    props: ["basketAddInformation", "template"],
+    props: ["basketAddInformation", "configItemName", "template"],
 
     data: function data() {
         return {
             basketItem: { currentBasketItem: {} },
-            timeToClose: 0,
+            currency: "",
             price: 0,
-            currency: ""
+            timeToClose: 0,
+            timerVar: null
         };
     },
 
 
     computed: _extends({
-        texts: function texts() {
-            return this.latestBasketEntry.item.texts;
+        isLastBasketEntrySet: function isLastBasketEntrySet() {
+            return Object.keys(this.latestBasketEntry.item).length !== 0;
         },
-        imageUrl: function imageUrl() {
-            var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+        itemName: function itemName() {
+            if (this.isLastBasketEntrySet) {
+                var texts = this.latestBasketEntry.item.texts;
 
-            return img.url;
-        },
-        showOverlay: function showOverlay() {
-            var render = Object.keys(this.latestBasketEntry.item).length !== 0;
-
-            if (render) {
-                this.startCounter();
-
-                this.setPriceFromData();
+                return this.$options.filters.itemName(texts, this.configItemName);
             }
 
-            return render;
+            return "";
+        },
+        imageUrl: function imageUrl() {
+            if (this.isLastBasketEntrySet) {
+                var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
+
+                return img.url;
+            }
+
+            return "";
         }
     }, Vuex.mapState({
         latestBasketEntry: function latestBasketEntry(state) {
@@ -10446,8 +10449,12 @@ Vue.component("add-item-to-basket-overlay", {
     watch: {
         latestBasketEntry: function latestBasketEntry() {
             if (this.basketAddInformation === "overlay") {
+                this.setPriceFromData();
+
                 ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-            } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length != 0) {
+
+                this.startCounter();
+            } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     $("body").toggleClass("open-right");
                 }, 1);
@@ -10465,34 +10472,22 @@ Vue.component("add-item-to-basket-overlay", {
                 this.price = graduatedPrice + propertySurcharge;
             }
         },
-
-
-        /**
-         * @returns {string}
-         */
-        getImage: function getImage() {
-            var path = "";
-
-            for (var i = 0; i < this.latestBasketEntry.item.variationImageList.length; i++) {
-                if (this.latestBasketEntry.item.variationImageList[i].path !== "") {
-                    path = this.latestBasketEntry.item.variationImageList[i].path;
-                }
-            }
-
-            return "/" + path;
-        },
         startCounter: function startCounter() {
             var _this = this;
 
+            if (this.timerVar) {
+                clearInterval(this.timerVar);
+            }
+
             this.timeToClose = 10;
 
-            var timerVar = setInterval(function () {
+            this.timerVar = setInterval(function () {
                 _this.timeToClose -= 1;
 
                 if (_this.timeToClose === 0) {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).hide();
 
-                    clearInterval(timerVar);
+                    clearInterval(_this.timerVar);
                 }
             }, 1000);
         }
