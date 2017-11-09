@@ -63,7 +63,7 @@
                                         <span :id="'current_payment_method_name_' + currentOrder.id"> ${ currentPaymentMethodName} </span>
                                     </div>
                                 </div>
-                                    <li v-for="paymentProvider in allowedPaymentMethods" class="method-list-item" :data-id="paymentProvider.id">
+                                    <li v-for="paymentProvider in compAllowedPaymentMethods" class="method-list-item" :data-id="paymentProvider.id">
 
                                         <input
                                                 type="radio"
@@ -102,7 +102,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 <i class="fa fa-times" aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}
                             </button>
-                            <button type="button" :class="{'disabled': isPending}" class="btn btn-primary" @click="changePaymentMethod()">
+                            <button type="button" :disabled="isPending || paymentMethod === 0" :class="{'disabled': isPending || paymentMethod === 0}" class="btn btn-primary" @click="changePaymentMethod()">
                                 <i class="fa fa-check" aria-hidden="true"></i> {{ trans("Ceres::Template.generalChange") }}
                             </button>
                         </div>

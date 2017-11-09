@@ -18,6 +18,7 @@ Vue.component("change-payment-method", {
     data()
     {
         return {
+            compAllowedPaymentMethods: this.allowedPaymentMethods,
             changePaymentModal: {},
             paymentMethod: 0,
             isPending: false,
@@ -101,7 +102,7 @@ Vue.component("change-payment-method", {
             ApiService.get("/rest/io/order/paymentMethods", {orderId: this.currentOrder.id, paymentMethodId: paymentMethodId})
                 .done(response =>
                 {
-                    this.allowedPaymentMethods = response;
+                    this.compAllowedPaymentMethods = response;
                 })
                 .fail(() =>
                 {
@@ -131,7 +132,7 @@ Vue.component("change-payment-method", {
     {
         showIsSwitchableWarning()
         {
-            const currentPaymentMethod = this.allowedPaymentMethods.find(paymentMethod =>
+            const currentPaymentMethod = this.compAllowedPaymentMethods.find(paymentMethod =>
             {
                 return paymentMethod.id === this.paymentMethod;
             });
