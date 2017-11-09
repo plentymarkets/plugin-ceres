@@ -14733,7 +14733,7 @@ Vue.component("account-settings", {
             var self = this;
 
             if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
-                APIService.post("/rest/io/customer/password", { password: this.newPassword }).done(function (response) {
+                APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword }).done(function (response) {
                     self.clearFieldsAndClose();
                     NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
                 }).fail(function (response) {
