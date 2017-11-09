@@ -91,14 +91,14 @@
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
                         <a href="{{ itemUrl }}" class="price-view-port">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
+                                {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
                             </del>
                         </a>
                     {% endif %}
 
                     <a href="{{ itemUrl }}">
                         <div class="price">
-                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }} *
+                            {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
                         </div>
                     </a>
                 </div>

@@ -1,5 +1,27 @@
 # Release Notes for Ceres
 
+## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Customer classes are now taken into consideration when displaying item data in the online store.
+
+### Fixed
+
+- The variation setting for unite prices **Show unit price** is now taken into account. When deactivating this setting, the unit price is not displayed in the online store.
+
+### Known issues
+
+- No discounts for customer classes are taken into consideration when calulating graduated prices.
+- The minimum order quantity set for a customer class is not yet displayed in the single item view.
+- Items that are only available for a certain customer class will also be displayed to all customer classes in the variation selection. These items still can only be purchased by the respective customer class.
+
+## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Order properties will not be displayed twice on the single item view.
+
 ## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

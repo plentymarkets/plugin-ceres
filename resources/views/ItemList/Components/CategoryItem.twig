@@ -56,13 +56,13 @@
 
                             <a href="${ itemData | itemURL }" v-if="recommendedRetailPrice > 0" class="price-view-port">
                                 <del class="crossprice">
-                                    ${ recommendedRetailPrice | currency itemData.calculatedPrices.rrp.currency }
+                                    ${ itemData.calculatedPrices.formatted.rrpUnitPrice }
                                 </del>
                             </a>
 
                             <a href="${ itemData | itemURL }">
                                 <div class="price">
-                                    ${ variationRetailPrice | currency itemData.calculatedPrices.default.currency } *
+                                    ${ itemData.calculatedPrices.formatted.defaultUnitPrice } *
                                 </div>
                             </a>
                         </div>

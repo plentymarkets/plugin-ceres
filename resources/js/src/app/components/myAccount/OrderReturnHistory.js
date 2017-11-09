@@ -57,7 +57,7 @@ Vue.component("order-return-history", {
 
         toggleNaming(element)
         {
-            if (document.getElementById(element).innerText == Translations.Template.myAccountReturnShowMore)
+            if (document.getElementById(element).innerText === Translations.Template.myAccountReturnShowMore)
             {
                 document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
             }

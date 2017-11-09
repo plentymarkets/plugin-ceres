@@ -84,10 +84,6 @@
 
                 {{ LayoutContainer.show("Ceres::SingleItem.BeforePrice", item.documents[0].data) }}
 
-                <div class="row">
-                    <order-properties template="#vue-order-properties" v-resource-push:item data-accessor="true" resource="currentVariation" v-resource-if:currentVariation="documents[0].data.filter.isSalable"></order-properties>
-                </div>
-
                 <graduated-prices template="#vue-graduated-prices"></graduated-prices>
 
                 <div class="row">
@@ -104,7 +100,7 @@
 
                 <span class="price h1" >
                     <span v-item-total-price content="{{ item.documents[0].data.calculatedPrices.default.price }}">
-                        {{ item.documents[0].data.calculatedPrices.formatted.defaultPrice }}
+                        {{ item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice }}
                     </span>
                     <sup>*</sup>
                     <span content="{{ item.documents[0].data.calculatedPrices.default.currency }}"></span>
@@ -116,7 +112,7 @@
                         <span v-resource-bind:currentVariation="documents.0.data.unit.content">{{ item.documents[0].data.unit.content }}</span>
                         <span v-resource-bind:currentVariation="documents.0.data.unit.names.name">{{ item.documents[0].data.unit.names.name }}</span>
                     </div>
-                    <div>
+                    <div v-resource-if:currentVariation="documents[0].data.variation.mayShowUnitPrice == true">
                         {{ trans("Ceres::Template.itemUnitPrice") }}
                         <span class="base-price-value" v-resource-bind:currentVariation="documents.0.data.calculatedPrices.formatted.basePrice">{{ item.documents[0].data.calculatedPrices.formatted.basePrice }}</span>
                     </div>

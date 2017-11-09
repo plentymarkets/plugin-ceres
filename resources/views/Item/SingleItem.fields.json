@@ -27,6 +27,7 @@
   "variation.availability.names.*",
   "variation.availability.id",
   "variation.releasedAt",
+  "variation.mayShowUnitPrice",
 
   "texts.*",
 

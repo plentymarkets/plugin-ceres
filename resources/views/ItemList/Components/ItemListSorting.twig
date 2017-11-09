@@ -4,6 +4,10 @@
             <option :value="element" v-for="element in sortData" :selected="selectedSorting.value == element.value">
                 ${ element.displayName }
             </option>
+
+            {% for sortingValueKey, sortingTranslationKey in services.item.AdditionalItemSorting %}
+                <option :value="{value: '{{ sortingValueKey }}'}" :selected="selectedSorting.value == '{{ sortingValueKey }}'">{{ trans(sortingTranslationKey) }}</option>
+            {% endfor %}
         </select>
     </div>
 </script>
