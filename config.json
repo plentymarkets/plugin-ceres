@@ -238,6 +238,20 @@
         "default"       : "1"
     },
     {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_1",
+        "label"         : "Number of Categorys to show in the fist stage",
+        "type"          : "text",
+        "default"       : "999"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_2",
+        "label"         : "Number of Categorys to show in the second stage",
+        "type"          : "text",
+        "default"       : "999"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
