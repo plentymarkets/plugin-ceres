@@ -3,7 +3,7 @@
 	{{ component( "Ceres::OrderReturn.Components.OrderReturnItem" ) }}
 
 	<div>
-		<order-return-item v-for="orderItem in orderData.order.orderItems"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
+		<order-return-item v-for="(orderItem, index) in orderData.order.orderItems" :key="index"  :order-item="orderItem" template="#vue-order-return-item"></order-return-item>
 
 		<button class="btn btn-primary btn-medium-large m-t-2" @click="selectAllItems()">
 			<i class="fa fa-check-square-o" aria-hidden="true"></i>
