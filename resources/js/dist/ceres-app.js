@@ -10404,7 +10404,6 @@ Vue.component("add-item-to-basket-overlay", {
 
     data: function data() {
         return {
-            basketItem: { currentBasketItem: {} },
             currency: "",
             price: 0,
             timeToClose: 0,
