@@ -42,9 +42,9 @@ $menu-big-menu-li-bg-hover		: $brand-primary;
 $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
 // megamenu
-$megamenu-bg 					: white;
+$megamenu-bg 					: $white;
 $megamenu-color-top-btn			: $brand-primary;
-$megamenu-color-bottom-btn		: black;
+$megamenu-color-bottom-btn		: $black;
 $megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
 $megamenu-btn-more 				: $gray;
 
@@ -320,7 +320,7 @@ nav.navbar.megamenu {
 								text-transform 	: lowercase; 
 							}
 							a {
-								background 	: white;
+								background 	: $white;
 								color 		: $megamenu-color-bottom-btn;
 								padding 	: 0;
 								text-align 	: left;
