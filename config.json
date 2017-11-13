@@ -226,7 +226,7 @@
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_levels",
-        "label"         : "Number of levels in megamenu",
+        "label"         : "Category levels in mega menu",
         "type"          : "dropdown",
         "possibleValues":
         {
@@ -240,21 +240,21 @@
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_items_stage_1",
-        "label"         : "Number of Categorys to show in level 2",
+        "label"         : "Number of categories in level 2",
         "type"          : "text",
         "default"       : "30"
     },
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_items_stage_2",
-        "label"         : "Number of Categorys to show in level 3",
+        "label"         : "Number of categories in level 3",
         "type"          : "text",
         "default"       : "3"
     },
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_items_stage_3",
-        "label"         : "Number of Categorys to show in level 4",
+        "label"         : "Number of categories in level 4",
         "type"          : "text",
         "default"       : "2"
     },
