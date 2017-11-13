@@ -240,16 +240,23 @@
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_items_stage_1",
-        "label"         : "Number of Categorys to show in the fist stage",
+        "label"         : "Number of Categorys to show in level 2",
         "type"          : "text",
-        "default"       : "999"
+        "default"       : "30"
     },
     {
         "tab"           : "Header",
         "key"           : "header.megamenu_items_stage_2",
-        "label"         : "Number of Categorys to show in the second stage",
+        "label"         : "Number of Categorys to show in level 3",
         "type"          : "text",
-        "default"       : "999"
+        "default"       : "3"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_3",
+        "label"         : "Number of Categorys to show in level 4",
+        "type"          : "text",
+        "default"       : "2"
     },
     {
         "tab"           : "Footer",
