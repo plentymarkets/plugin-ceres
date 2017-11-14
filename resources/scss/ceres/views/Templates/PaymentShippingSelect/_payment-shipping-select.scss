@@ -56,7 +56,7 @@
 		}
         }
         &.list {
-		.method-list-item{
+		.method-list-item:not(:last-child){
 			margin-bottom: 1em;
 		}
 		.content{

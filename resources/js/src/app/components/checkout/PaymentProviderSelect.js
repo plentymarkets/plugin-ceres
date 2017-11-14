@@ -9,7 +9,8 @@ Vue.component("payment-provider-select", {
     computed: Vuex.mapState({
         methodOfPaymentList: state => state.checkout.payment.methodOfPaymentList,
         methodOfPaymentId: state => state.checkout.payment.methodOfPaymentId,
-        showError: state => state.checkout.validation.paymentProvider.showError
+        showError: state => state.checkout.validation.paymentProvider.showError,
+        isBasketLoading: state => state.basket.isBasketLoading
     }),
 
     /**

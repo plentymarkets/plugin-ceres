@@ -9,7 +9,8 @@ Vue.component("shipping-profile-select", {
     computed: Vuex.mapState({
         shippingProfileList: state => state.checkout.shipping.shippingProfileList,
         shippingProfileId: state => state.checkout.shipping.shippingProfileId,
-        showError: state => state.checkout.validation.shippingProfile.showError
+        showError: state => state.checkout.validation.shippingProfile.showError,
+        isBasketLoading: state => state.basket.isBasketLoading
     }),
 
     /**
