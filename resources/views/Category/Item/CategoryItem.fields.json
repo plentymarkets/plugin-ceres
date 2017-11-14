@@ -24,6 +24,7 @@
   "variation.minimumOrderQuantity",
   "variation.maximumOrderQuantity",
   "variation.itemId",
+  "variation.mayShowUnitPrice",
   "variation.releasedAt",
   "filter.hasChildren",
   "filter.isSalable"
