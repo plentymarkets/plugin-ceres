@@ -27,7 +27,7 @@ module.exports = (function($)
 
             if (!options.supressNotifications)
             {
-                printMessages(response);
+                _printMessages(response);
             }
         }
     });
@@ -131,7 +131,7 @@ module.exports = (function($)
         return deferred;
     }
 
-    function printMessages(response)
+    function _printMessages(response)
     {
         var notification;
 
