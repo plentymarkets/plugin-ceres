@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v1.7.2 (unknown)
+
+### Hinzugefügt
+
+- Es wurde ein konfigurierbares Mega Menu hinzugefügt.
+
 ## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
