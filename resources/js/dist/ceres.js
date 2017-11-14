@@ -11635,15 +11635,16 @@ Vue.component("shipping-profile-select", {
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
+
     methods: {
         /**
          * Method on shipping profile changed
          */
-        onShippingProfileChange: function onShippingProfileChange() {
+        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
             var _this = this;
 
             this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
-                return shippingProfile.parcelServiceId === shippingProfileId;
+                return shippingProfile.parcelServicePresetId === shippingProfileId;
             })).then(function (data) {
                 document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
             }, function (error) {
@@ -11652,7 +11653,6 @@ Vue.component("shipping-profile-select", {
 
             this.validate();
         },
-
         validate: function validate() {
             this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
         }
@@ -15886,11 +15886,12 @@ Vue.directive("logout", {
 Vue.directive("waiting-animation", {
     bind: function bind(el) {
         el.initialClass = el.className;
+        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
     },
     update: function update(el, binding) {
         if (binding.value) {
             el.className = "";
-            el.className = "fa fa-circle-o-notch fa-spin";
+            el.className = el.waitingClass;
 
             if (el.initialClass.includes("fa-lg")) {
                 el.className += " fa-lg";
@@ -18116,11 +18117,14 @@ var actions = {
         return new Promise(function (resolve, reject) {
             var oldMethodOfPayment = state.payment.methodOfPaymentId;
 
+            commit("setIsBasketLoading", true);
             commit("setMethodOfPayment", methodOfPaymentId);
 
             _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId }).done(function (response) {
+                commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 commit("setMethodOfPayment", oldMethodOfPayment);
                 reject(error);
             });
@@ -18134,11 +18138,14 @@ var actions = {
         return new Promise(function (resolve, reject) {
             var oldShippingProfile = state.shipping.shippingProfileId;
 
+            commit("setIsBasketLoading", true);
             commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
             _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 commit("setShippingProfile", oldShippingProfile);
                 reject(error);
             });
