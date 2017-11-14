@@ -8,7 +8,7 @@
                         name="MethodOfPaymentID"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
-                        v-model="methodOfPaymentId"
+                        :checked="methodOfPaymentId === paymentProvider.id"
                 >
                 <label :for="'paymentMethod' + _uid + paymentProvider.id">
                     <div class="icon">
