@@ -17732,7 +17732,11 @@ var actions = {
                 commit("selectDeliveryAddress", selectedAddress);
             }
 
+            commit("setIsBasketLoading", true);
+
             _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                commit("setIsBasketLoading", false);
+
                 return resolve(response);
             }).fail(function (error) {
                 if (addressType === "1") {
@@ -17740,6 +17744,8 @@ var actions = {
                 } else if (addressType === "2") {
                     commit("selectDeliveryAddress", oldAddress);
                 }
+
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
