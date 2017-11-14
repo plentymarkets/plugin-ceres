@@ -57,7 +57,11 @@ Vue.component("address-select", {
         isAddressListEmpty()
         {
             return !(this.addressList && this.addressList.length > 0);
-        }
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
     },
 
     /**

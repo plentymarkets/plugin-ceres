@@ -4,13 +4,11 @@
         <div class="cmp cmp-address-list m-b-3" v-bind:class="{'error': showError}">
             <div class="dropdown items">
 
-                <div
-                        :id="'addressMultiSelect' + _uid"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty}"
+                <div class="component-loading" :id="'addressMultiSelect' + _uid"
+                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty, 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
-                        aria-expanded="false"
-                >
+                        aria-expanded="false">
 
                     <div class="item-inner">
                     <span v-if="selectedAddress && selectedAddress.id == -99">
@@ -39,7 +37,7 @@
                 </div>
 
                 <div class="add-item">
-                    <button href="#" class="btn btn-primary btn-large" v-if="isAddAddressEnabled" @click.prevent="showAddModal">
+                    <button href="#" class="btn btn-primary btn-large" v-if="isAddAddressEnabled" @click.prevent="showAddModal" :disabled="isBasketLoading">
                         {{ trans("Ceres::Template.addressAddAddress") }}
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </button>
