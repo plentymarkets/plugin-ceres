@@ -224,6 +224,41 @@
         "default"   : "sum"
     },
     {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_levels",
+        "label"         : "Category levels in mega menu",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "1"         : "inactive",
+            "2"         : "2",
+            "3"         : "3",
+            "4"         : "4"
+        },
+        "default"       : "1"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_1",
+        "label"         : "Number of categories in level 2",
+        "type"          : "text",
+        "default"       : "30"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_2",
+        "label"         : "Number of categories in level 3",
+        "type"          : "text",
+        "default"       : "3"
+    },
+    {
+        "tab"           : "Header",
+        "key"           : "header.megamenu_items_stage_3",
+        "label"         : "Number of categories in level 4",
+        "type"          : "text",
+        "default"       : "2"
+    },
+    {
         "tab"           : "Footer",
         "key"           : "footer.to_top_button",
         "label"         : "Position of the Back-to-top button",
