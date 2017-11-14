@@ -7,8 +7,8 @@
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
                         name="ShippingProfileID"
                         :value="shippingProfile.parcelServicePresetId"
-                        v-model="shippingProfileId"
-                        @change="onShippingProfileChange()"
+                        @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
+                        :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
                 >
                 <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
                     <div class="icon">

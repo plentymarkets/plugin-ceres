@@ -16,7 +16,7 @@ Vue.component("shipping-profile-select", {
      * Add a shipping provider
      * Initialise the event listener
      */
-    created: function()
+    created()
     {
         this.$options.template = this.template;
         this.$store.commit("setShippingProfileValidator", this.validate);
@@ -26,9 +26,9 @@ Vue.component("shipping-profile-select", {
         /**
          * Method on shipping profile changed
          */
-        onShippingProfileChange: function()
+        onShippingProfileChange(shippingProfileId)
         {
-            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(shippingProfile => shippingProfile.parcelServiceId === shippingProfileId))
+            this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(shippingProfile => shippingProfile.parcelServicePresetId === shippingProfileId))
                 .then(data =>
                 {
                     document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", {detail: this.shippingProfileId}));
@@ -41,7 +41,7 @@ Vue.component("shipping-profile-select", {
             this.validate();
         },
 
-        validate: function()
+        validate()
         {
             this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
         }
