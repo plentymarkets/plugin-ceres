@@ -128,15 +128,18 @@ const actions =
             {
                 const oldMethodOfPayment = state.payment.methodOfPaymentId;
 
+                commit("setIsBasketLoading", true);
                 commit("setMethodOfPayment", methodOfPaymentId);
 
                 ApiService.post("/rest/io/checkout/paymentId/", {paymentId: methodOfPaymentId})
                     .done(response =>
                     {
+                        commit("setIsBasketLoading", false);
                         resolve(response);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         commit("setMethodOfPayment", oldMethodOfPayment);
                         reject(error);
                     });
@@ -150,15 +153,18 @@ const actions =
             {
                 const oldShippingProfile = state.shipping.shippingProfileId;
 
+                commit("setIsBasketLoading", true);
                 commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
                 ApiService.post("/rest/io/checkout/shippingId/", {shippingId: shippingProfile.parcelServicePresetId})
                     .done(response =>
                     {
+                        commit("setIsBasketLoading", false);
                         resolve(response);
                     })
                     .fail(error =>
                     {
+                        commit("setIsBasketLoading", false);
                         commit("setShippingProfile", oldShippingProfile);
                         reject(error);
                     });
