@@ -50,7 +50,7 @@
             <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
         </div>
 
-        <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="isInputLocked" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
+        <button type="button" class="item-remove btn btn-labeled btn-sm" @click="deleteItem" :disabled="isInputLocked" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
             <span class="message" v-if="!deleteConfirmed">
                 {{ trans("Ceres::Template.generalDelete") }}
             </span>
