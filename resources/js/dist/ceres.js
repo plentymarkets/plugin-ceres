@@ -11442,6 +11442,9 @@ Vue.component("payment-provider-select", {
         },
         showError: function showError(state) {
             return state.checkout.validation.paymentProvider.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -11623,6 +11626,9 @@ Vue.component("shipping-profile-select", {
         },
         showError: function showError(state) {
             return state.checkout.validation.shippingProfile.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -11752,6 +11758,8 @@ Vue.component("address-input-group", {
 },{}],20:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -11780,7 +11788,7 @@ Vue.component("address-select", {
     },
 
 
-    computed: {
+    computed: _extends({
         selectedAddress: function selectedAddress() {
             return this.$store.getters.getSelectedAddress(this.addressType);
         },
@@ -11800,7 +11808,11 @@ Vue.component("address-select", {
         isAddressListEmpty: function isAddressListEmpty() {
             return !(this.addressList && this.addressList.length > 0);
         }
-    },
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    })),
 
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
