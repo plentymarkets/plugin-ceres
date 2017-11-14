@@ -9,7 +9,7 @@
   "item.documents.data",
   "item.ageRestriction",
   "item.customsTariffNumber",
-  "item.producingCountryId",
+  "item.producingCountry.names.*",
   "item.storeSpecial",
 
   "variation.id",

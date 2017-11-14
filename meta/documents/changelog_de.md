@@ -5,6 +5,7 @@
 ### Behoben
 
 - Es wurde ein Fehler behoben, der dazu führte, dass die Option zum anzeigen eines Grundpreises ignoriert wurde.
+- Es wurde ein Fehler behoben, wodurch das Herstellungsland nicht in den Details am Artikel angezeigt wurde (obwohl die Einstellung an war).
 
 ### Geändert
 
