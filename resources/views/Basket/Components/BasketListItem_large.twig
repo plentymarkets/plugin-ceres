@@ -16,7 +16,7 @@
         <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="waiting"
                         :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
-        <div class="item-unit-price">
+        <div class="item-unit-price" v-if="basketItem.variation.data.variation.mayShowUnitPrice">
             ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
 

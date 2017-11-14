@@ -1,5 +1,15 @@
 # Release Notes für Ceres
 
+## v1.7.1 (unknown)
+
+### Behoben
+
+- Es wurde ein Fehler behoben, der dazu führte, dass die Option zum anzeigen eines Grundpreises ignoriert wurde.
+
+### Geändert
+
+- Ext. Varianten Name? 
+
 ## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

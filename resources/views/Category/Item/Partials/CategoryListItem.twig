@@ -105,7 +105,7 @@
 
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
 
-                {% if not (item.data.unit.unitOfMeasurement == 'C62' and item.data.unit.content == 1) %}
+                {% if not (item.data.unit.unitOfMeasurement == 'C62' and item.data.unit.content == 1) and item.data.variation.mayShowUnitPrice %}
                     <div class="category-unit-price">
                         <span>{{ item.data.unit.content }}</span>
                         <span>{{ item.data.unit.names.name }}</span> |

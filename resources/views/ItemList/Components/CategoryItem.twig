@@ -67,7 +67,7 @@
                             </a>
                         </div>
 
-                        <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
+                        <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1) && itemData.variation.mayShowUnitPrice">
                             <span>${ itemData.unit.content }</span>
                             <span>${ itemData.unit.names.name }</span> |
                             ${ itemData.calculatedPrices.formatted.basePrice }
