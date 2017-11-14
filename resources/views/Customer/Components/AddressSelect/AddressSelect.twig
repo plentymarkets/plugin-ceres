@@ -51,6 +51,7 @@
                                     :name="'shippingAddress' + _uid"
                                     :id="'addressSelectItem' + _uid + address.id"
                                     :value="address.id"
+                                    :checked="selectedAddress.id === address.id"
                                     @change="onAddressChanged(address)"
                             >
                             <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
