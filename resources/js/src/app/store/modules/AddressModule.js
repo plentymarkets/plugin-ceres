@@ -195,9 +195,13 @@ const actions =
                     commit("selectDeliveryAddress", selectedAddress);
                 }
 
+                commit("setIsBasketLoading", true);
+
                 ApiService.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, {supressNotifications: true})
                     .done(response =>
                     {
+                        commit("setIsBasketLoading", false);
+
                         return resolve(response);
                     })
                     .fail(error =>
@@ -210,6 +214,8 @@ const actions =
                         {
                             commit("selectDeliveryAddress", oldAddress);
                         }
+
+                        commit("setIsBasketLoading", false);
                         reject(error);
                     });
             });

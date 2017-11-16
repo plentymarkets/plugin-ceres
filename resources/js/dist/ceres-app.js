@@ -10404,7 +10404,6 @@ Vue.component("add-item-to-basket-overlay", {
 
     data: function data() {
         return {
-            basketItem: { currentBasketItem: {} },
             currency: "",
             price: 0,
             timeToClose: 0,
@@ -11118,6 +11117,9 @@ Vue.component("payment-provider-select", {
         },
         showError: function showError(state) {
             return state.checkout.validation.paymentProvider.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -11299,6 +11301,9 @@ Vue.component("shipping-profile-select", {
         },
         showError: function showError(state) {
             return state.checkout.validation.shippingProfile.showError;
+        },
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
         }
     }),
 
@@ -11311,15 +11316,16 @@ Vue.component("shipping-profile-select", {
         this.$store.commit("setShippingProfileValidator", this.validate);
     },
 
+
     methods: {
         /**
          * Method on shipping profile changed
          */
-        onShippingProfileChange: function onShippingProfileChange() {
+        onShippingProfileChange: function onShippingProfileChange(shippingProfileId) {
             var _this = this;
 
             this.$store.dispatch("selectShippingProfile", this.shippingProfileList.find(function (shippingProfile) {
-                return shippingProfile.parcelServiceId === shippingProfileId;
+                return shippingProfile.parcelServicePresetId === shippingProfileId;
             })).then(function (data) {
                 document.dispatchEvent(new CustomEvent("afterShippingProfileChanged", { detail: _this.shippingProfileId }));
             }, function (error) {
@@ -11328,7 +11334,6 @@ Vue.component("shipping-profile-select", {
 
             this.validate();
         },
-
         validate: function validate() {
             this.$store.commit("setShippingProfileShowError", !(this.shippingProfileId > 0));
         }
@@ -11428,6 +11433,8 @@ Vue.component("address-input-group", {
 },{}],20:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -11456,7 +11463,7 @@ Vue.component("address-select", {
     },
 
 
-    computed: {
+    computed: _extends({
         selectedAddress: function selectedAddress() {
             return this.$store.getters.getSelectedAddress(this.addressType);
         },
@@ -11476,7 +11483,11 @@ Vue.component("address-select", {
         isAddressListEmpty: function isAddressListEmpty() {
             return !(this.addressList && this.addressList.length > 0);
         }
-    },
+    }, Vuex.mapState({
+        isBasketLoading: function isBasketLoading(state) {
+            return state.basket.isBasketLoading;
+        }
+    })),
 
     /**
      *  Check whether the address list is not empty and select the address with the matching ID
@@ -15562,11 +15573,12 @@ Vue.directive("logout", {
 Vue.directive("waiting-animation", {
     bind: function bind(el) {
         el.initialClass = el.className;
+        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
     },
     update: function update(el, binding) {
         if (binding.value) {
             el.className = "";
-            el.className = "fa fa-circle-o-notch fa-spin";
+            el.className = el.waitingClass;
 
             if (el.initialClass.includes("fa-lg")) {
                 el.className += " fa-lg";
@@ -17395,7 +17407,11 @@ var actions = {
                 commit("selectDeliveryAddress", selectedAddress);
             }
 
+            commit("setIsBasketLoading", true);
+
             _ApiService2.default.put("/rest/io/customer/address/" + selectedAddress.id + "?typeId=" + addressType, { supressNotifications: true }).done(function (response) {
+                commit("setIsBasketLoading", false);
+
                 return resolve(response);
             }).fail(function (error) {
                 if (addressType === "1") {
@@ -17403,6 +17419,8 @@ var actions = {
                 } else if (addressType === "2") {
                     commit("selectDeliveryAddress", oldAddress);
                 }
+
+                commit("setIsBasketLoading", false);
                 reject(error);
             });
         });
@@ -17792,11 +17810,14 @@ var actions = {
         return new Promise(function (resolve, reject) {
             var oldMethodOfPayment = state.payment.methodOfPaymentId;
 
+            commit("setIsBasketLoading", true);
             commit("setMethodOfPayment", methodOfPaymentId);
 
             _ApiService2.default.post("/rest/io/checkout/paymentId/", { paymentId: methodOfPaymentId }).done(function (response) {
+                commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 commit("setMethodOfPayment", oldMethodOfPayment);
                 reject(error);
             });
@@ -17810,11 +17831,14 @@ var actions = {
         return new Promise(function (resolve, reject) {
             var oldShippingProfile = state.shipping.shippingProfileId;
 
+            commit("setIsBasketLoading", true);
             commit("setShippingProfile", shippingProfile.parcelServicePresetId);
 
             _ApiService2.default.post("/rest/io/checkout/shippingId/", { shippingId: shippingProfile.parcelServicePresetId }).done(function (response) {
+                commit("setIsBasketLoading", false);
                 resolve(response);
             }).fail(function (error) {
+                commit("setIsBasketLoading", false);
                 commit("setShippingProfile", oldShippingProfile);
                 reject(error);
             });

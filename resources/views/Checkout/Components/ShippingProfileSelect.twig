@@ -1,14 +1,15 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list m-b-3" v-bind:class="{ 'error': this.showError }">
-        <ul class="method-list">
+        <ul class="method-list component-loading" :class="{ 'isLoading': isBasketLoading }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
                         name="ShippingProfileID"
                         :value="shippingProfile.parcelServicePresetId"
-                        v-model="shippingProfileId"
-                        @change="onShippingProfileChange()"
+                        @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
+                        :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
+                        :disabled = "isBasketLoading"
                 >
                 <label :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId">
                     <div class="icon">

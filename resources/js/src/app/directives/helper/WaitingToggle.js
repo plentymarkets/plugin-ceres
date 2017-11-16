@@ -2,6 +2,7 @@ Vue.directive("waiting-animation", {
     bind(el)
 	{
         el.initialClass = el.className;
+        el.waitingClass = el.getAttribute("waiting-class") || "fa fa-circle-o-notch fa-spin";
     },
 
     update(el, binding)
@@ -9,7 +10,7 @@ Vue.directive("waiting-animation", {
         if (binding.value)
 		{
             el.className = "";
-            el.className = "fa fa-circle-o-notch fa-spin";
+            el.className = el.waitingClass;
 
             if (el.initialClass.includes("fa-lg"))
 			{
