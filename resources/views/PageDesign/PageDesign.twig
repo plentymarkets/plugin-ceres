@@ -128,6 +128,10 @@
             </div>
         </div>
 
+        <div id="vue-error" style="display:none">
+            {% include "Ceres::PageDesign.Partials.VueError" %}
+        </div>
+
         {{ Loader.include_components() }}
 
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
@@ -151,14 +155,30 @@
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
         <script>
+
+            var rootElement = document.getElementById("vue-app");
+            var errorElement = document.getElementById("vue-error");
+
             Vue.options.delimiters = ['${', '}'];
 
             var vueEventHub = new Vue();
 
-            vueApp = new Vue({
-                el: "#vue-app",
+            var vueApp = new Vue({
                 store: window.ceresStore
             });
+            vueApp.$mount( rootElement.cloneNode(true) );
+
+            if ( vueApp.$el.id !== "vue-app")
+            {
+                rootElement.remove();
+                errorElement.style.display = "block";
+            }
+            else
+            {
+                document.body.replaceChild( vueApp.$el, rootElement );
+                errorElement.remove();
+            }
+
         </script>
     </body>
 </html>

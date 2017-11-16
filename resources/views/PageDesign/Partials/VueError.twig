@@ -1,0 +1,69 @@
+{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set lang         = services.sessionStorage.getLang() %}
+{% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
+{% set companyName  = config("Ceres.header.company_name") %}
+
+<div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
+
+    <header class="top-bar">
+        <div class="container-max">
+            <div class="row">
+                <ul class="controls-list list-inline">
+                    <li class="list-inline-item"><a href="#">&nbsp;</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <div class="container-max">
+                <div class="row">
+                    <div class="brand-wrapper" {% if showHeaderNavBar == "side" %}style="position: relative"{% endif %}>
+                        <a class="navbar-brand pull-lg-left" href="/">
+                            {% if ('http' in companyLogo) or ('layout/' in companyLogo) %}
+                                <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid"/>
+                            {% else %}
+                                <img alt="{{ companyName }}" src="{{ plugin_path('Ceres') }}/{{ companyLogo }}" class="img-fluid"/>
+                            {% endif %}
+                        </a>
+
+                        <button id="btnMainMenuToggler" class="navbar-toggler hidden-lg-up" type="button">
+                            &#9776;
+                        </button>
+                    </div>
+
+                    <div id="mainNavbarCollapsable">
+                        <ul class="breadcrumb">
+                            <li class="btnClose"></li>
+                        </ul>
+                        {% if showHeaderNavBar == "top" or showHeaderNavBar == "both" or not services.template.isCategory() %}
+                            {{ include('Ceres::PageDesign.Partials.Header.NavigationList.twig') }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="page-body" class="main">
+        <div class="container-max m-b-3">
+            <div class="row">
+                <div class="jumbotron col-md-8 offset-md-2 m-y-3">
+                    <h1 class="m-b-2">
+                        <span class="fa fa-warning text-danger"></span>
+                        {{ trans("Ceres::Template.vueErrorTitle") }}
+                    </h1>
+                    <p class="lead">
+                        {% autoescape false %}
+                        {{ trans("Ceres::Template.vueErrorMessage") }}
+                        {% endautoescape %}
+                    </p>
+                    <a href="{{ trans("Ceres::Template.vueErrorLinkURL") }}" target="_blank" class="btn btn-primary btn-lg">{{ trans("Ceres::Template.vueErrorLink") }}</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include getPartial('footer') %}
+</div>

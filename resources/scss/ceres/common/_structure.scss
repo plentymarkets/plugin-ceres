@@ -1,6 +1,7 @@
 body {
 
-	> #vue-app {
+	> #vue-app,
+	> #vue-error {
 
 		background-color: $gray-lightest;
 		
