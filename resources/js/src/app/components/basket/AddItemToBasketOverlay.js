@@ -69,10 +69,10 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketItem.currentBasketItem.calculatedPrices)
             {
                 this.currency = this.basketItem.currentBasketItem.calculatedPrices.default.currency;
-                const graduatedPrice = this.$options.filters.graduatedPrice(this.basketItem.currentBasketItem, this.basketItem.quantity);
+                //const graduatedPrice = this.$options.filters.graduatedPrice(this.basketItem.currentBasketItem, this.basketItem.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.basketItem.currentBasketItem);
 
-                this.price = graduatedPrice + propertySurcharge;
+                this.price = graduatedPrice;
             }
         },
 
