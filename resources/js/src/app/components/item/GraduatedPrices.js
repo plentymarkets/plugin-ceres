@@ -57,13 +57,16 @@ Vue.component("graduated-prices", {
 
                 for (const price of graduatedPrices)
                 {
-                    // unmark other selections
-                    document.getElementById(price.minimumOrderQuantity + "_qty").style.opacity = 0;
-
-                    // get correct price to mark
-                    if (event.detail >= price.minimumOrderQuantity)
+                    if (price.minimumOrderQuantity > 1)
                     {
-                        priceToMark = price.minimumOrderQuantity;
+                        // unmark other selections
+                        document.getElementById(price.minimumOrderQuantity + "_qty").style.opacity = 0;
+
+                        // get correct price to mark
+                        if (event.detail >= price.minimumOrderQuantity)
+                        {
+                            priceToMark = price.minimumOrderQuantity;
+                        }
                     }
                 }
 
@@ -82,7 +85,9 @@ Vue.component("graduated-prices", {
         {
             if (this.currentVariation)
             {
-                return this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
+                const prices = this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
+
+                return prices.filter(price => price.minimumOrderQuantity > 1);
             }
 
             return [];

@@ -1,5 +1,20 @@
 # Release Notes for Ceres
 
+## v1.7.1 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the setting for displaying the unit price of an item has been ignored. This has been fixed.
+- Due to an error the manufacturing country hasn't been displayed in the details tab on the single item view even when the related setting has been activated. This has been fixed.
+- Due to an error, the the quantity of an item hasn't been displayed in the category view. This has been fixed.
+- Due to an error, customers were unable to change the password in the **My account** area. This has been fixed.
+- Due to an error, graduated prices were displayed for customer with a certain customer class, even though this price was not set for the customer class. This has been fixed.
+- Due to an error, graduated prices for items with a the quantity 1 have been displayed. This has been fixed.
+
+### Changed
+
+- The field **External variation ID** in the details tab on the single item view has been changed to **Variation ID**.
+
 ## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

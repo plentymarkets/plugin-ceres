@@ -239,8 +239,8 @@
                                     </tr>
                                 {% endif %}
 
-                                {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.documents[0].data.item.producingCountryId != '' %}
-                                    {% set country = services.country.getCountryName(item.documents[0].data.item.producingCountryId) %}
+                                {% if ('item.producerCountry' in itemData or 'all' in itemData) and item.documents[0].data.item.producingCountry.names.name != "" %}
+                                    {% set country = item.documents[0].data.item.producingCountry.names.name %}
                                     <tr>
                                         <td>{{ trans("Ceres::Template.itemManufacturingCountry") }}</td>
                                         <td>{{ country }}</td>

@@ -8,6 +8,22 @@
 - Events die in IO gefeuert werden, werden jetzt direkt in Ceres ausgelöst.
 - Notifications die vom Server kommen, werden jetzt direkt in Ceres ausgegeben, wodurch plugin entwickler einfacher auf die Notifications von Ceres zugreifen können.
 
+## v1.7.1 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurde die Einstellung zum Anzeigen des Grundpreises eines Artikels ignoriert. Dies wurde behoben.
+- Durch einen Fehler wurde trotz aktivierter Einstellung das Herstellungsland nicht in den Details auf der Artikelansicht angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde die Stückzahl eines Artikels in der Kategorieansicht nicht angezeigt. Dies wurde behoben.
+- Ein Fehler führte dazu, dass das Passwort im **Mein Konto**-Bereich nicht geändert werden konnte. Dies wurde behoben.
+- Ein Fehler führte dazu, dass für Kunden mit einer bestimmten Kundenklasse Staffelpreise angezeigt wurden, auch wenn diese Preise nicht für die Kundenklasse freigeschaltet waren. Dies wurde behoben.
+- Es wurde ein Fehler behoben, der Staffelpreise ab Menge 1 angezeigt hatte.
+
+
+### Geändert
+
+- In den Artikeldetails auf der Artikelansicht wurde das Feld **Externe Varianten-ID** in **Varianten-ID** umbenannt.
+
 ## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
