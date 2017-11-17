@@ -70,6 +70,7 @@
                     <span class="price h1">
                         <span ref="variationTotalPrice" :content="currentVariation.calculatedPrices.default.price">
                             ${ variationTotalPrice | currency(currentVariation.calculatedPrices.default.currency) }
+                            {# item.documents[0].data.calculatedPrices.formatted.defaultUnitPrice #}
                         </span>
                         <sup>*</sup>
                         <span :content="currentVariation.calculatedPrices.default.currency"></span>
@@ -81,7 +82,7 @@
                             <span>${ currentVariation.unit.content }</span>
                             <span>${ currentVariation.unit.names.name }</span>
                         </div>
-                        <div>
+                        <div v-if="currentVariation.mayShowUnitPrice">
                             {{ trans("Ceres::Template.itemUnitPrice") }}
                             <span class="base-price-value">${ currentVariation.calculatedPrices.formatted.basePrice }</span>
                         </div>
@@ -202,10 +203,9 @@
                                     {% endif %}
 
                                     {% if 'item.producerCountry' in itemData or 'all' in itemData %}
-                                        {# {% set country = services.country.getCountryName(item.documents[0].data.item.producingCountryId) %} #}
-                                        <tr v-if="currentVariation.item.producingCountryId != ''">
+                                        <tr v-if="currentVariation.item.producingCountry.names.name != ''">
                                             <td>{{ trans("Ceres::Template.itemManufacturingCountry") }}</td>
-                                            <!-- <td>{{ country }}</td> -->
+                                            <td>${ currentVariation.item.producingCountry.names.name }</td>
                                         </tr>
                                     {% endif %}
 
