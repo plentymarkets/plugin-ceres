@@ -1,5 +1,30 @@
-{% macro get_nav_bar(categories, currentScopeUrl) %}
+{% macro get_children(category, currentScopeUrl, level) %}
+    {% set maxitems = { "1": config('Ceres.header.megamenu_items_stage_1'), "2": config('Ceres.header.megamenu_items_stage_2') ,"3": config('Ceres.header.megamenu_items_stage_3')} %}
+    {% import _self as childlist %}
+    {% set counter = 0 %}
+    {% if level < config('Ceres.header.megamenu_levels') %}
+        {% for child in category.children if counter < maxitems[level] %}
+            {% if (child.details | length > 0) %}
+                <li class="level{{ level }}">
+                    {% set newScope = currentScopeUrl ~ "/" ~ child.details[0].nameUrl %}
+                    <a href="{{ newScope }}" v-render-category="{{ child }}">{{ child.details[0].name }}</a>
+                    {% if child.children %}
+                        {% if level == 1 %}<ul>{% endif %}
+                            {{ childlist.get_children(child, newScope, level + 1) }}
+                        {% if level == 1 %}</ul>{% endif %}
+                    {% endif %}
+                </li>
+                {% set counter = counter + 1 %}
+                {% if counter == maxitems[level]%}
+                    <li class="level{{ level }} bt-more"><a href="{{ currentScopeUrl }}" v-render-category="{{ category }}">{{ trans("Ceres::Template.itemShowMore") }}...</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
 
+{% macro get_nav_bar(categories, currentScopeUrl) %}
+    {% import _self as navbar %}
     {% set counter = 0 %}
 
     {% for category in categories %}
@@ -18,17 +43,18 @@
                     </span>
 
                     <ul data-level="1" id="navDropdown{{ counter }}" class="collapse">
-
                         {% set counter = counter + 1 %}
-
-                        {% for child in category.children %}
-                            {% if child.details | length > 0 %}
-                                <li>
-                                    <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{{ child.id }}">{{ child.details[0].name }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-
+                        {% if config('Ceres.header.megamenu_levels')=="1" %}
+                            {% for child in category.children %}
+                                {% if child.details | length > 0 %}
+                                    <li>
+                                        <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}" v-render-category="{{ child.id }}">{{ child.details[0].name }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {{ navbar.get_children(category, currentScopeUrl, 1) }}
+                        {% endif %}
                     </ul>
                 </li>
 

@@ -9,6 +9,12 @@
 <!DOCTYPE html>
 
 {% set lang = services.sessionStorage.getLang() %}
+
+{% set metaLang = "de" %}
+{% if lang == "de" or lang == "en" %}
+    {% set metaLang = lang %}
+{% endif %}
+
 {% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
 
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}

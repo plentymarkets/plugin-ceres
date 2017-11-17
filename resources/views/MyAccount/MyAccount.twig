@@ -1,6 +1,7 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
+    <meta name="robots" content="NOINDEX, NOFOLLOW">
     <title>{{ trans("Ceres::Template.accMyAccount") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
@@ -15,6 +16,7 @@
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
     {% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
     {% set isReturnActive = services.order.isReturnActive() %}
+    {% set contactHasReturns = services.customer.hasReturns() %}
 
     <div class="page-content myaccount container-max m-b-3 m-t-1">
         <!-- HEADER -->
@@ -108,7 +110,8 @@
     <history template="#vue-history" 
             :orders-per-page="{{ ordersPerPage }}" 
             :order-list-data="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
-            :is-return-active="{{ isReturnActive | json_encode }}">
+            :is-return-active="{{ isReturnActive | json_encode }}"
+            :contact-has-returns="{{ contactHasReturns | json_encode }}">
     </history>
     <!-- ./HISTORY -->
     

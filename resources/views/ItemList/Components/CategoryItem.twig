@@ -49,24 +49,23 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-
                         <a :href="itemData | itemURL" v-if="recommendedRetailPrice > 0" class="price-view-port">
                             <del class="crossprice">
-                                ${ recommendedRetailPrice | currency(itemData.calculatedPrices.rrp.currency) }
+                                ${ itemData.calculatedPrices.formatted.rrpUnitPrice }
                             </del>
                         </a>
 
-                        <a href="itemData | itemURL">
+                        <a :href="itemData | itemURL">
                             <div class="price">
-                                ${ variationRetailPrice | currency(itemData.calculatedPrices.default.currency) } *
+                                ${ itemData.calculatedPrices.formatted.defaultUnitPrice } *
                             </div>
                         </a>
                     </div>
 
                     <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
                         <span>${ itemData.unit.content }</span>
-                        <span>${ itemData.unit.names.name }</span> |
-                        ${ itemData.calculatedPrices.formatted.basePrice }
+                        <span>${ itemData.unit.names.name }</span>
+                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.calculatedPrices.formatted.basePrice }</span>
                     </div>
                 </div>
                 <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>

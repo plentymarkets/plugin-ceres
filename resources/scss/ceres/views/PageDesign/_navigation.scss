@@ -41,6 +41,12 @@ $menu-big-menu-li-bg			: transparent;
 $menu-big-menu-li-bg-hover		: $brand-primary;
 $menu-big-menu-li-color			: $white;
 $menu-big-menu-li-color-hover	: $text-color;
+// megamenu
+$megamenu-bg 					: $white;
+$megamenu-color-top-btn			: $brand-primary;
+$megamenu-color-bottom-btn		: $black;
+$megamenu-btn-hover 			: darken($top-bar-basket-btn, 20%);
+$megamenu-btn-more 				: $gray;
 
 body.menu-is-visible { 
 	overflow-y : hidden;
@@ -257,6 +263,82 @@ body.menu-is-visible {
 		}
 	}
 
+}
+
+nav.navbar.megamenu {
+	@include media-breakpoint-up(lg){ position : relative; }
+	#mainNavbarCollapsable {
+
+		@include media-breakpoint-up(lg){
+			ul.mainmenu {
+				background 		: transparent;
+				display 		: flex;
+				justify-content : flex-end; 
+				width 			: 100%; 
+
+				>li {
+					position : static;
+
+					&:hover {
+						background : $megamenu-bg; 
+						color 	   : $megamenu-btn-hover !important;  
+
+						>ul.collapse { display : block; } 
+					}
+
+					>ul.collapse {
+						background-color: $megamenu-bg;
+						columns 		: 5 228px;
+						column-gap 		: .5em;
+						column-rule 	: 1px solid #dcdbd7;
+						display 		: none;
+						max-height 		: 340px;
+						overflow 		: hidden;
+						padding 		: 1em;
+
+						>li {
+							display 	 : inline-block;
+							break-inside : avoid;
+							width 	 	 : 100%; 
+
+							&.level1 { 
+								padding : .5em 1em;
+								>a {								
+									color 		: $megamenu-color-top-btn; 
+									font-weight : bold; 
+								}
+							}
+							&:hover { background : $megamenu-bg; }
+							 .level2 { 
+							 	padding : .25em 0!important; 
+							 }
+							 .level3 { 
+							 	padding : 0 1em .25em 1.4em !important; 
+							 }
+							.bt-more>a { 
+								color 			: $gray;
+								text-transform 	: lowercase; 
+							}
+							a {
+								background 	: $white;
+								color 		: $megamenu-color-bottom-btn;
+								padding 	: 0;
+								text-align 	: left;
+
+								&:hover{ 
+									background 	: $megamenu-bg; 
+									color 		: $megamenu-btn-hover !important;  
+								}
+							}
+							ul { background-color : $megamenu-bg; }
+						}
+
+					}
+
+				}
+			}
+		}
+	}
 }
 
 .mobile-navigation{

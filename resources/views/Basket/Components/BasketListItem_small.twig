@@ -27,12 +27,14 @@
             </div>
         </a>
 
-        <div class="item-unit-price">
+        <div class="item-unit-price" v-if="basketItem.variation.data.variation.mayShowUnitPrice">
             ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
 
         <div class="item-total-price">
             ${ basketItem.quantity * basketItem.price | currency(basketItem.variation.data.calculatedPrices.default.currency) }
+            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.unitPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }
+            {# ${ basketItem.variation.data.calculatedPrices.formatted.defaultUnitPrice } #}
         </div>
 
         <div v-for="attribute in basketItem.variation.data.attributes">
@@ -47,7 +49,9 @@
         </div>
 
         <div v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+            <strong>${property.name} ${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
+            <br>
+            <span>{{ trans('Ceres::Template.basketPerItem') }}</span>
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-sm" @click="deleteItem" :disabled="isInputLocked" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">

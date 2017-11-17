@@ -12,6 +12,7 @@
   "variation.maximumOrderQuantity",
   "variation.id",
   "variation.data.orderProperties.*",
+  "variation.mayShowUnitPrice",
   "item.id",
   "images.all.url*",
   "images.all.position",

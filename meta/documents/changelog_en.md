@@ -1,5 +1,81 @@
 # Release Notes for Ceres
 
+## v1.7.1 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the setting for displaying the unit price of an item has been ignored. This has been fixed.
+- Due to an error the manufacturing country hasn't been displayed in the details tab on the single item view even when the related setting has been activated. This has been fixed.
+- Due to an error, the the quantity of an item hasn't been displayed in the category view. This has been fixed.
+- Due to an error, customers were unable to change the password in the **My account** area. This has been fixed.
+- Due to an error, graduated prices were displayed for customer with a certain customer class, even though this price was not set for the customer class. This has been fixed.
+- Due to an error, graduated prices for items with a the quantity 1 have been displayed. This has been fixed.
+
+### Changed
+
+- The field **External variation ID** in the details tab on the single item view has been changed to **Variation ID**.
+
+## v1.7.0 (2017-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.3...1.7.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Customer classes are now taken into consideration when displaying item data in the online store.
+
+### Fixed
+
+- The variation setting for unite prices **Show unit price** is now taken into account. When deactivating this setting, the unit price is not displayed in the online store.
+
+### Known issues
+
+- No discounts for customer classes are taken into consideration when calulating graduated prices.
+- The minimum order quantity set for a customer class is not yet displayed in the single item view.
+- Items that are only available for a certain customer class will also be displayed to all customer classes in the variation selection. These items still can only be purchased by the respective customer class.
+
+## v1.6.3 (2017-11-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.2...1.6.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Order properties will not be displayed twice on the single item view.
+
+## v1.6.2 (2017-10-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.1...1.6.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the return history, only four images per order are loaded initially.
+- In the return history, a "Show more" button was added.
+- If items with order properties are in the basket, each surcharge is followed by "per item".
+- After the customer has filed a return request, they are forwarded to a confirmation page.
+
+### Fixed
+
+- The returns tab in the My account area is deactivated if the customer does not have any returns.
+
+## v1.6.1 (2017-10-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.6.0...1.6.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Add
+
+- Meta descriptions and robots settings for static pages of the online store can now be entered in the **SEO** tab. For further information about this, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#201" target="_blank"><b>Carrying out settings for search engine optimisation</b></a>.
+
+### Changed
+
+- **Name of your store** and **URL to your company logo** have been moved to the **Global** tab of the configuration.
+- The **Allow returns** setting has been added in the **Checkout and My account** tab of the configuration and replaced the old setting for activating returns in the plentymarkets back end.
+
+## 1.6.0 (2017-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.1...1.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Graduated prices are now integrated in Ceres and will be displayed below the order properties in the single item view. For further information about graduated prices, refer to <a href="https://knowledge.plentymarkets.com/en/item/managing-items#870" target="_blank"><b>Managing sales prices</b></a>.
+
+### Changed
+
+- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- Order properties will now be displayed above the price in the single item view.
+- In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
+- The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
+- In the order history, the clock icon has been replaced with a text.
+- In the return history, the clock icon has been replaced with a text.
+
 ## v1.5.1 (2017-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.5.0...1.5.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

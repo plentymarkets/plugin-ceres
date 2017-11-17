@@ -94,14 +94,14 @@
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
                         <a href="{{ itemUrl }}" class="price-view-port">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.rrp.price | formatMonetary(item.data.calculatedPrices.rrp.currency) }}
+                                {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
                             </del>
                         </a>
                     {% endif %}
 
                     <a href="{{ itemUrl }}">
                         <div class="price">
-                            {{ item.data.calculatedPrices.default.price | formatMonetary(item.data.calculatedPrices.default.currency) }} *
+                            {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
                         </div>
                     </a>
                 </div>
@@ -109,10 +109,13 @@
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
 
                 {% if not (item.data.unit.unitOfMeasurement == 'C62' and item.data.unit.content == 1) %}
-                    <div class="category-unit-price">
+                    <div class="category-unit-price">   
                         <span>{{ item.data.unit.content }}</span>
-                        <span>{{ item.data.unit.names.name }}</span> |
-                        {{ item.data.calculatedPrices.formatted.basePrice }}
+                        <span>{{ item.data.unit.names.name }}</span>
+
+                        {% if item.data.variation.mayShowUnitPrice %}
+                            | {{ item.data.calculatedPrices.formatted.basePrice }}
+                        {% endif %}
                     </div>
                 {% endif %}
 

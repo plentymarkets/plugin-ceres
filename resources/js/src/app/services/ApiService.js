@@ -3,8 +3,34 @@ var WaitScreenService   = require("services/WaitScreenService");
 
 module.exports = (function($)
 {
-
     var _eventListeners = {};
+
+    $(document).ajaxComplete((ajaxEvent, xhr, options) =>
+    {
+        var response;
+
+        try
+        {
+            response = JSON.parse(xhr.responseText);
+        }
+        catch (exception)
+        {
+
+        }
+
+        if (response)
+        {
+            for (var event in response.events)
+            {
+                _triggerEvent(event, response.events[event]);
+            }
+
+            if (!options.supressNotifications)
+            {
+                _printMessages(response);
+            }
+        }
+    });
 
     return {
         get     : _get,
@@ -86,24 +112,12 @@ module.exports = (function($)
         $.ajax(url, config)
             .done(function(response)
             {
-                if (!config.supressNotifications)
-                {
-                    printMessages(response);
-                }
-                for (var event in response.events)
-                {
-                    _triggerEvent(event, response.events[event]);
-                }
                 deferred.resolve(response.data || response);
             })
             .fail(function(jqXHR)
             {
                 var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
-                if (!config.supressNotifications)
-                {
-                    printMessages(response);
-                }
                 deferred.reject(response);
             })
             .always(function()
@@ -117,7 +131,7 @@ module.exports = (function($)
         return deferred;
     }
 
-    function printMessages(response)
+    function _printMessages(response)
     {
         var notification;
 

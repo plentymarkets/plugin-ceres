@@ -16,12 +16,13 @@
         <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
                         :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
 
-        <div class="item-unit-price">
+        <div class="item-unit-price" v-if="basketItem.variation.data.variation.mayShowUnitPrice">
             ${ basketItem.variation.data.calculatedPrices.formatted.basePrice }
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.price | currency(basketItem.variation.data.calculatedPrices.default.currency) }
+            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.unitPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }
+            {# ${ basketItem.variation.data.calculatedPrices.formatted.defaultUnitPrice } #}
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
@@ -64,8 +65,9 @@
         </div>
         
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
-            <strong class="col-xs-6 col-sm-5">${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+            <strong class="col-xs-6 col-sm-5">${property.name}</strong>
             <span class="col-xs-6 col-sm-7">${property.value}</span>
+            <strong class="col-xs-6 col-sm-5">${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency} {{ trans('Ceres::Template.basketPerItem') }}</strong>
         </div>
 
         <div class="item-description">
