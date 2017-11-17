@@ -2,6 +2,7 @@
 {% set variationShowType    = config("Ceres.item.variation_show_type") %}
 {% set configItemName = config("Ceres.item.name") %}
 {% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+{% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 
 {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 {{ component( "Ceres::ItemList.Components.CategoryItem" ) }}
@@ -19,13 +20,9 @@
         {% endif %}
 
         <ul class="product-list row grid">
-            <category-item
-                v-for="item in items"
-                :item-data="item.data"
-                :key="item.data.variation.id"
-                decimal-count="{{ decimalCount }}"
-                image-url-accessor="urlMiddle">
-            </category-item>
+            <li v-for="item in items" :key="item.data.variation.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-{% if (showHeaderNavBar == "side" or showHeaderNavBar == "both") and not services.template.isSearch() %}4{% else %}3{% endif %}">
+                <category-item :item-data="item.data" decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
+            </li>
         </ul>
     </div>
 </script>
