@@ -2,10 +2,19 @@ Vue.component("container-item-list", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "items"
-    ],
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-container-item-list"
+        },
+        items:
+        {
+            type: Array,
+            default: []
+        }
+    },
 
     created()
     {

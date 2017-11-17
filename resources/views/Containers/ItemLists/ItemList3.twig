@@ -15,9 +15,9 @@
 {% if itemList is not empty %}
     <hr>
 
-    {{ include('Ceres::Containers.Partials.ItemLists.ItemListHeader.twig') }}
+    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 3, listType: listType } %}
 
     <div class="row">
-        <container-item-list template="#vue-container-item-list" :items="{{ itemList | json_encode }}"></container-item-list>
+        <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
     </div>
 {% endif %}
