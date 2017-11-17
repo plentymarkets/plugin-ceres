@@ -1,96 +1,23 @@
-{{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
-{{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
+{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 
 {% set listType = config("Ceres.item.lists.3.list_type") %}
 {% set tagIds = config("Ceres.item.lists.3.tag_ids") | split(",") %}
+{% set itemListId = 3 %}
 
 {% if listType == "last_seen" %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList3', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage}).documents %}
 {% elseif listType == "cross_selling" %}
     {% set itemList = item.CrossSellingItems.documents %}
 {% elseif listType == "tag_list" %}
-	{% set itemList = services.itemLoader.loadForTemplate('Ceres::Containers.ItemLists.ItemList3', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
+	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds}).documents %}
 {% endif %}
-
-{% set randomIdentifier = random() %}
-
-{% set isNameEmpty = config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") == 'DE name' or 
-                     config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") == 'EN name' or 
-                     config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") is empty %}
 
 {% if itemList is not empty %}
     <hr>
 
-    <p class="h3">
-        {% if listType == "last_seen" %}
-            {% if isNameEmpty %}
-                {{ trans("Ceres::Template.itemListLastSeen") }}
-            {% else %}
-                {{ config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-            {% endif %}
-        {% elseif listType == "cross_selling" %}
-            {% if isNameEmpty %}
-                {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
-            {% else %}
-                {{ config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-            {% endif %}
-		{% elseif listType == "tag_list" %}
-            {% if isNameEmpty %}
-                Tags
-            {% else %}
-                {{ config("Ceres.item.lists.3." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-            {% endif %}
-        {% endif %}
-    </p>
+    {% include 'Ceres::Containers.Partials.ItemLists.ItemListHeader.twig' with { itemListId: 3, listType: listType } %}
 
     <div class="row">
-        <div class="col-xs-12 col-lg-12">
-            {% if itemList | length > 4 %}
-                <div id="list-carousel-{{ randomIdentifier }}" class="list-item-carousel owl-carousel owl-theme owl-single-item">      
-                    {% for item in itemList %}    
-                            {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <ul id="list-carousel-{{ randomIdentifier }}" class="product-list row grid">
-                    {% for item in itemList %}
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item, enableCarousel: false, 'tags': item.data.tags, 'showOrderProperties': false } %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
+        <container-item-list :items="{{ itemList | json_encode }}"></container-item-list>
     </div>
-
-    {% if itemList | length > 4 %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function()
-            {
-                $("#list-carousel-{{ randomIdentifier }}").owlCarousel({
-                    autoHeight       : true,
-                    dots             : true,
-                    items            : 4,
-                    lazyLoad         : false,
-                    loop             : false,
-                    margin           : 10,
-                    mouseDrag        : true,
-                    nav              : true,
-                    navClass         : [
-                        "owl-single-item-nav left carousel-control list-control-special",
-                        "owl-single-item-nav right carousel-control list-control-special"
-                    ],
-                    navContainerClass: "",
-                    navText          : [
-                        "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
-                        "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
-                    ],
-                    smartSpeed       : 350,
-                });
-            });
-        </script>
-    {% endif %}
-
 {% endif %}
-
