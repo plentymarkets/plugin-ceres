@@ -19,9 +19,13 @@
         {% endif %}
 
         <ul class="product-list row grid">
-            <category-item v-for="item in items" :item-data="item.data" :key="item.data.variation.id"
-                           decimal-count="{{ decimalCount }}" image-url-accessor="urlMiddle"></category-item>
-
+            <category-item
+                v-for="item in items"
+                :item-data="item.data"
+                :key="item.data.variation.id"
+                decimal-count="{{ decimalCount }}"
+                image-url-accessor="urlMiddle">
+            </category-item>
         </ul>
     </div>
 </script>
