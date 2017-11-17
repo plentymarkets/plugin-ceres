@@ -21,7 +21,8 @@
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.variation.data.calculatedPrices.formatted.defaultUnitPrice }
+            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.unitPrice | currency basketItem.variation.data.calculatedPrices.default.currency }
+            {# ${ basketItem.variation.data.calculatedPrices.formatted.defaultUnitPrice } #}
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-link btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
