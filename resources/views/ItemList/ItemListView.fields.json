@@ -30,6 +30,7 @@
   "variation.minimumOrderQuantity",
   "variation.maximumOrderQuantity",
   "variation.releasedAt",
+  "variation.mayShowUnitPrice",
   "filter.hasChildren",
   "filter.isSalable"
 ]

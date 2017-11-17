@@ -2,7 +2,7 @@
     <div>
         <div class="m-y-1" v-if="graduatedPrices[0]">
             <b>{{ trans("Ceres::Template.graduatedPrices") }}:</b>
-
+            
             <table class="graduated-prices-table text-muted">
                 <tr v-for="price in graduatedPrices | orderBy 'minimumOrderQuantity'">
                     <td>{{ trans("Ceres::Template.generalFrom") }} ${ price.minimumOrderQuantity }</td>
