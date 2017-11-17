@@ -5,7 +5,11 @@
 ### Behoben
 
 - Es wurde ein Fehler behoben, der dazu führte, dass die Option zum anzeigen eines Grundpreises ignoriert wurde.
-- Es wurde ein Fehler behoben, wodurch das Herstellungsland nicht in den Details am Artikel angezeigt wurde (obwohl die Einstellung an war).
+- Es wurde ein Fehler behoben, durch den die Stückzahl eines Artikels in der Kategorie Ansicht nicht angezeigt wurde, obwohl die Stückzahl größer 1 war.
+- Es wurde ein Fehler behoben, wodurch das Herstellungsland nicht in den Details am Artikel angezeigt wurde (obwohl die Konfig. Einstellung an war).
+- Es wurde ein Fehler behoben, der das Passwort ändern im MyAccount verhindert hatte.
+- Es wurde ein Fehler behoben, der dazu führte, dass Kundenklassen-Preise als Staffelpreise angezeigt wurden ohne für die Kundenklasse verfügbar zu sein.
+- Es wurde ein Fehler behoben, der Staffelpreise ab Menge 1 angezeigt hatte.
 
 ### Geändert
 
