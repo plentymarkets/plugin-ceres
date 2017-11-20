@@ -13797,11 +13797,11 @@ Vue.component("category-item", {
             variationRetailPrice: 0
         };
     },
-
     created: function created() {
         this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
         this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
     },
+
 
     computed: {
         /**
@@ -13810,6 +13810,7 @@ Vue.component("category-item", {
         storeSpecial: function storeSpecial() {
             return this.itemData.item.storeSpecial;
         },
+
 
         /**
          * returns itemData.texts[0]

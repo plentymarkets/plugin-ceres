@@ -10,7 +10,7 @@ Vue.component("category-item", {
         "imageUrlAccessor"
     ],
 
-    data: function()
+    data()
     {
         return {
             recommendedRetailPrice: 0,
@@ -18,7 +18,7 @@ Vue.component("category-item", {
         };
     },
 
-    created: function()
+    created()
     {
         this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
         this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
@@ -29,7 +29,7 @@ Vue.component("category-item", {
         /**
          * returns itemData.item.storeSpecial
          */
-        storeSpecial: function()
+        storeSpecial()
         {
             return this.itemData.item.storeSpecial;
         },
@@ -37,7 +37,7 @@ Vue.component("category-item", {
         /**
          * returns itemData.texts[0]
          */
-        texts: function()
+        texts()
         {
             return this.itemData.texts;
         }
