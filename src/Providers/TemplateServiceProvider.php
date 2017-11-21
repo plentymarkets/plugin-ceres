@@ -29,9 +29,9 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.category.item'             => 'Category.Item.CategoryItem',          // provide template to use for item categories
         'tpl.category.blog'             => 'PageDesign.PageDesign',               // provide template to use for blog categories
         'tpl.category.container'        => 'PageDesign.PageDesign',               // provide template to use for container categories
-        'tpl.item'                      => 'Item.SingleItemView',                     // provide template to use for single items
+        'tpl.item'                      => 'Item.SingleItemView',                 // provide template to use for single items
         'tpl.basket'                    => 'Basket.Basket',                       // provide template to use for basket
-        'tpl.checkout'                  => 'Checkout.Checkout',                   // provide template to use for checkout
+        'tpl.checkout'                  => 'Checkout.CheckoutView',               // provide template to use for checkout
         'tpl.my-account'                => 'MyAccount.MyAccount',                 // provide template to use for my-account
         'tpl.confirmation'              => 'Checkout.OrderConfirmation',          // provide template to use for confirmation
         'tpl.login'                     => 'Customer.Login',                      // provide template to use for login
