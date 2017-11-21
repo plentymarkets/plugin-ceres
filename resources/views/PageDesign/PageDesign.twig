@@ -35,6 +35,11 @@
 
         {% block PartialHead %}
         {% endblock %}
+
+        {% set additionalStyleTemplates = get_additional_styles() %}
+        {% for styleTemplate in additionalStyleTemplates %}
+            {% include styleTemplate ignore missing %}
+        {% endfor %}
     </head>
 
     <body>
@@ -186,5 +191,10 @@
             }
 
         </script>
+
+        {% set additionalScriptTemplates = get_additional_scripts() %}
+        {% for scriptTemplate in additionalScriptTemplates %}
+            {% include scriptTemplate ignore missing %}
+        {% endfor %}
     </body>
 </html>
