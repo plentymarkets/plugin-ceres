@@ -454,6 +454,11 @@
             "key"           : "LoginOverlay.ExtendOverlayButtons",
             "name"          : "Login overlay: Container in a row with the buttons",
             "description"   : "Add content in the login overlay."
+        },
+        {
+            "key"           : "RegistrationOverlay.ExtendOverlayButtons",
+            "name"          : "Registration overlay: Container in a row with the buttons",
+            "description"   : "Add content in the registration overlay."
         }
     ]
 }
