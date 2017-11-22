@@ -1,5 +1,10 @@
 # Release Notes für Ceres
 
+## Unreleased
+
+### Hinzugefügt
+- Skripte und Styles aus externen Plugins werden an geeigneter Stelle eingefügt und müssen nicht mehr über Container verknüpft werden.
+
 ## v1.7.2 (unknown)
 
 ### Hinzugefügt
