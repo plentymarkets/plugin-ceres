@@ -11,6 +11,7 @@
   "item.customsTariffNumber",
   "item.producingCountry.names.*",
   "item.storeSpecial",
+  "item.condition.names.*",
 
   "variation.id",
   "variation.name",
