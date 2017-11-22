@@ -1,10 +1,13 @@
 # Release Notes für Ceres
 
+<<<<<<< HEAD
 ## v1.7.2 (unknown)
 
 - Events die in IO gefeuert werden, werden jetzt direkt in Ceres ausgelöst.
 - Notifications die vom Server kommen, werden jetzt direkt in Ceres ausgegeben, wodurch plugin entwickler einfacher auf die Notifications von Ceres zugreifen können.
 
+=======
+>>>>>>> stable
 ## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

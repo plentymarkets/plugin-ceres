@@ -128,9 +128,9 @@ Vue.component("add-to-basket", {
             {
                 const currency = this.item.calculatedPrices.default.currency;
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.item, this.quantity);
-                const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
+                // const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
 
-                return this.$options.filters.currency(graduatedPrice + propertySurcharge, currency);
+                return this.$options.filters.currency(graduatedPrice, currency);
             }
 
             return null;
