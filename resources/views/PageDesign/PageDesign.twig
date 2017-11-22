@@ -163,6 +163,11 @@
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
+        {% set additionalScriptTemplates = get_additional_scripts() %}
+        {% for scriptTemplate in additionalScriptTemplates %}
+            {% include scriptTemplate ignore missing %}
+        {% endfor %}
+
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
         <script>
@@ -192,9 +197,5 @@
 
         </script>
 
-        {% set additionalScriptTemplates = get_additional_scripts() %}
-        {% for scriptTemplate in additionalScriptTemplates %}
-            {% include scriptTemplate ignore missing %}
-        {% endfor %}
     </body>
 </html>
