@@ -53,8 +53,12 @@
 
                     <slot name="BeforePrice"></slot>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <order-properties template="#vue-order-properties" v-if="currentVariation.filter.isSalable"></order-properties>
+                    </div> -->
+
+                    <div class="row">
+                        <order-property-list></order-property-list>
                     </div>
 
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
