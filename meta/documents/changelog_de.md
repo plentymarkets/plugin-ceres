@@ -1,13 +1,18 @@
 # Release Notes für Ceres
 
-<<<<<<< HEAD
-## v1.7.2 (unknown)
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
-- Events die in IO gefeuert werden, werden jetzt direkt in Ceres ausgelöst.
-- Notifications die vom Server kommen, werden jetzt direkt in Ceres ausgegeben, wodurch plugin entwickler einfacher auf die Notifications von Ceres zugreifen können.
+### Hinzugefügt
 
-=======
->>>>>>> stable
+- Events aus plentymarkets oder aus anderen Plugins können jetzt direkt in Ceres verarbeitet werden.
+- Server-Benachrichtigungen werden jetzt direkt in Ceres ausgegeben, wodurch Plugin-Entwickler einfacher auf Benachrichtigungen von Ceres zugreifen können.
+
+### Behoben
+
+- Durch einen Fehler wurden in der Detailansicht eines Auftrags oder auf der Auftragsbestätigungsseite die Versandkosten nicht korrekt angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden zusätzliche Artikeldaten im Warenkorb nicht geladen, wenn sich mehr als 10 verschiedene Artikel im Warenkorb befanden. Dies wurde behoben.
+
+
 ## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

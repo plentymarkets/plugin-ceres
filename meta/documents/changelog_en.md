@@ -1,5 +1,17 @@
 # Release Notes for Ceres
 
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>ÜOverview of all changes</b></a>
+
+### Added
+
+- Events from plentymarkets or from other plugins can now be processed directly in Ceres.
+- Server notifications will now be output directly in Ceres. This way, plugin developers can access the notifications in Ceres in a more convenient way.
+
+### Fixed
+
+- Due to an error, shipping costs weren't displayed correctly on the order detail page and on the order confirmation page. This has been fixed.
+- Due to an error, additional item data wasn't displayed in the shopping cart when having more than 10 items in the shopping cart. This has been fixed.
+
 ## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed
