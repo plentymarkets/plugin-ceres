@@ -39,6 +39,7 @@
             printInfos:         {% if "print_infos" in logData or "all" in logData %}true{% else %}false{% endif %},
             printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
             logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
+            decimalSeperator: "{{ config("IO.format.separator_decimal") }}",
             defaultItemsPerPage: "{{ itemsPerPage }}",
             defaultSorting: "{{ defaultSorting }}",
             defaultSortingSearch: "{{ defaultSortingSearch }}",
