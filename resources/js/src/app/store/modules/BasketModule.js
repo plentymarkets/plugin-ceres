@@ -168,7 +168,7 @@ const actions =
                 commit("setIsBasketLoading", true);
 
                 ApiService.delete("/rest/io/coupon/" + couponCode)
-                    .done(response =>
+                    .done(data =>
                     {
                         commit("setIsBasketLoading", false);
                         resolve(data);

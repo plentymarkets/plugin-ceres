@@ -1,36 +1,52 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 
-const ResourceService     = require("services/ResourceService");
 const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-basket", {
 
-    props: [
-        "item",
-        "itemUrl",
-        "showQuantity",
-        "template",
-        "useLargeScale"
-    ],
+    delimiters: ["${", "}"],
+
+    props:
+    {
+        template:
+        {
+            type: String,
+            default: "#vue-add-to-basket"
+        },
+        item: Object,
+        itemUrl: String,
+        showQuantity:
+        {
+            type: Boolean,
+            default: false
+        },
+        useLargeScale:
+        {
+            type: Boolean,
+            default: false
+        }
+    },
 
     data()
     {
         return {
             quantity: 1,
-            buttonLockState: false
+            buttonLockState: false,
+            waiting: false
         };
     },
 
     created()
     {
         this.$options.template = this.template;
-
-        this.useLargeScale = this.useLargeScale || false;
     },
 
-    ready()
+    mounted()
     {
-        this.checkMinMaxOrderQuantity();
+        this.$nextTick(() =>
+        {
+            this.checkMinMaxOrderQuantity();
+        });
     },
 
     methods:
@@ -42,6 +58,8 @@ Vue.component("add-to-basket", {
         {
             if (this.item.filter.isSalable)
             {
+                this.waiting = true;
+
                 const basketObject =
                     {
                         variationId             :   this.variationId,
@@ -49,15 +67,16 @@ Vue.component("add-to-basket", {
                         basketItemOrderParams   :   this.item.properties
                     };
 
-                ResourceService.getResource("basketItems").push(basketObject)
-                    .done(function()
+                this.$store.dispatch("addBasketItem", basketObject).then(
+                    response =>
                     {
+                        this.waiting = false;
                         this.openAddToBasketOverlay();
-                    }
-                    .bind(this))
-                    .fail(function(response)
+                    },
+                    error =>
                     {
-                        NotificationService.error(Translations.Template[ExceptionMap.get(response.data.exceptionCode.toString())]).closeAfter(5000);
+                        this.waiting = false;
+                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     });
             }
         },
@@ -77,15 +96,13 @@ Vue.component("add-to-basket", {
          */
         openAddToBasketOverlay()
         {
-            const currentBasketObject =
+            const latestBasketEntry =
                 {
-                    currentBasketItem: this.item,
-                    quantity         : this.quantity
+                    item: this.item,
+                    quantity: this.quantity
                 };
 
-            ResourceService
-                .getResource("basketItem")
-                .set(currentBasketObject);
+            this.$store.commit("setLatestBasketEntry", latestBasketEntry);
         },
 
         /**
@@ -105,13 +122,11 @@ Vue.component("add-to-basket", {
             this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
             this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
+
     },
 
     computed:
     {
-        /**
-         * returns item.variation.id
-         */
         variationId()
         {
             return this.item.variation.id;
@@ -120,34 +135,14 @@ Vue.component("add-to-basket", {
         hasChildren()
         {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
-        },
-
-        totalPrice()
-        {
-            if (this.item)
-            {
-                const currency = this.item.calculatedPrices.default.currency;
-                const graduatedPrice = this.$options.filters.graduatedPrice(this.item, this.quantity);
-                // const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
-
-                return this.$options.filters.currency(graduatedPrice, currency);
-            }
-
-            return null;
         }
     },
 
     watch:
     {
-        totalPrice(newValue, oldValue)
+        quantity(newValue, oldValue)
         {
-            if (newValue && newValue !== oldValue)
-            {
-                document.dispatchEvent(new CustomEvent("itemTotalPriceChanged", {detail: newValue}));
-
-                // TODO - remove this in the vuex branch and just broadcast this event to the graduated component
-                document.dispatchEvent(new CustomEvent("itemGraduatedPriceChanged", {detail: this.quantity}));
-            }
+            this.$store.commit("setVariationOrderQuantity", newValue);
         }
     }
 });

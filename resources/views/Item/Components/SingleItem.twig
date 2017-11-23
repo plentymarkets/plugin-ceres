@@ -211,7 +211,7 @@
                                     {% if 'item.variationBase_content' in itemData or 'all' in itemData %}
                                         <tr>
                                             <td>{{ trans("Ceres::Template.itemContent") }}</td>
-                                            <td>${ currentVariation.unit.content|formatDecimal(0) } ${ currentVariation.unit.names.name }</td>
+                                            <td>${ currentVariation.unit.content } ${ currentVariation.unit.names.name }</td>
                                         </tr>
                                     {% endif %}
 
