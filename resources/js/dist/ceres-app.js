@@ -10468,9 +10468,9 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.latestBasketEntry.item.calculatedPrices) {
                 this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
                 var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
-                var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
+                // const propertySurcharge = this.$options.filters.propertySurchargeSum(this.basketItem.currentBasketItem);
 
-                this.price = graduatedPrice + propertySurcharge;
+                this.price = graduatedPrice;
             }
         },
         startCounter: function startCounter() {
@@ -10616,6 +10616,17 @@ Vue.component("add-to-basket", {
         },
         hasChildren: function hasChildren() {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+        totalPrice: function totalPrice() {
+            if (this.item) {
+                var currency = this.item.calculatedPrices.default.currency;
+                var graduatedPrice = this.$options.filters.graduatedPrice(this.item, this.quantity);
+                // const propertySurcharge = this.$options.filters.propertySurchargeSum(this.item);
+
+                return this.$options.filters.currency(graduatedPrice, currency);
+            }
+
+            return null;
         }
     },
 
@@ -13132,6 +13143,39 @@ Vue.component("graduated-prices", {
             var prices = this.graduatedPrices.filter(function (price) {
                 return _this.variationOrderQuantity >= price.minimumOrderQuantity;
             });
+        },
+        initQuantityPriceWatcher: function initQuantityPriceWatcher() {
+            var _this2 = this;
+
+            // TODO replace this after vuex change and single item component change
+
+            document.addEventListener("itemGraduatedPriceChanged", function (event) {
+                var graduatedPrices = _this2.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
+
+                graduatedPrices = graduatedPrices.sort(function (firstValue, secondValue) {
+                    return firstValue.minimumOrderQuantity - secondValue.minimumOrderQuantity;
+                });
+
+                var priceToMark = 0;
+
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = graduatedPrices[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var price = _step.value;
+
+                        if (price.minimumOrderQuantity > 1) {
+                            // unmark other selections
+                            document.getElementById(price.minimumOrderQuantity + "_qty").style.opacity = 0;
+
+                            // get correct price to mark
+                            if (event.detail >= price.minimumOrderQuantity) {
+                                priceToMark = price.minimumOrderQuantity;
+                            }
+                        }
+                    }
 
             if (!prices.length) {
                 return -1;
@@ -13140,6 +13184,18 @@ Vue.component("graduated-prices", {
             var price = prices.reduce(function (prev, current) {
                 return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
             });
+        }
+    },
+
+    computed: {
+        graduatedPrices: function graduatedPrices() {
+            if (this.currentVariation) {
+                var prices = this.currentVariation.documents[0].data.calculatedPrices.graduatedPrices;
+
+                return prices.filter(function (price) {
+                    return price.minimumOrderQuantity > 1;
+                });
+            }
 
             return this.graduatedPrices.indexOf(price);
         }
