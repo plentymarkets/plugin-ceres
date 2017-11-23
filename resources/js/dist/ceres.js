@@ -18076,7 +18076,7 @@ var actions = {
             commit("setCouponCode", null);
             commit("setIsBasketLoading", true);
 
-            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (response) {
+            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
