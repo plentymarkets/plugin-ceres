@@ -86,6 +86,13 @@
         "default"                     : "false"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "global.standard_contact_class_b2b",
+        "label"                       : "Standardkundenklasse B2B",
+        "type"                        : "text",
+        "default"                     : ""
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
