@@ -2,17 +2,21 @@
 
 <script type="x/template" id="vue-order-property-list-group">
     <div>
-        <div v-if="propertyGroup.properties[0].group">
-            <div class="h4">
-                ${ propertyGroup.properties[0].group.names.name }:
+        <div v-if="isShownOnItemPageCount">
+        
+            <div v-if="propertyGroup.properties[0].group">
+                <div class="h4">
+                    ${ propertyGroup.properties[0].group.names.name }:
+                </div>
+                <p class="text-muted">
+                    ${ propertyGroup.properties[0].group.names.description }
+                </p>
             </div>
-            <p class="text-muted">
-                ${ propertyGroup.properties[0].group.names.description }
-            </p>
-        </div>
 
-        <div v-for="property in propertyGroup.properties" :key="property.property.id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <order-property-list-item :property="property" v-on:radio-change="test($event)"></order-property-list-item>
+            <div v-for="property in propertyGroup.properties" :key="property.property.id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <order-property-list-item :property="property" v-on:radio-change="test($event)"></order-property-list-item>
+            </div>
+
         </div>
     </div>
 </script>

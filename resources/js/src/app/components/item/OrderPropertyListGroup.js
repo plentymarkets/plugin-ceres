@@ -10,6 +10,16 @@ Vue.component("order-property-list-group", {
         propertyGroup: Object
     },
 
+    computed:
+    {
+        isShownOnItemPageCount()
+        {
+            const properties = this.propertyGroup.properties.filter(property => property.property.isShownOnItemPage);
+
+            return properties.length;
+        }
+    },
+
     created()
     {
         this.$options.template = this.template;
