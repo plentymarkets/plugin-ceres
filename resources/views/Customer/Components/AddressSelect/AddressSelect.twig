@@ -108,7 +108,8 @@
                                         :address-data="addressToEdit"
                                         :address-modal="addressModal"
                                         :modal-type="modalType"
-                                        :address-type="addressType">
+                                        :address-type="addressType"
+                                        @input="setAddressToEditField($event)">
                                 </create-update-address>
                             </fieldset>
                         </div>

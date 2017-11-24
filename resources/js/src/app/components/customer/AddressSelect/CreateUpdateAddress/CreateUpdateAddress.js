@@ -187,6 +187,11 @@ Vue.component("create-update-address", {
                     }
                 }
             }
+        },
+
+        emitInputEvent(event)
+        {
+            this.$emit("input", event);
         }
     }
 });
