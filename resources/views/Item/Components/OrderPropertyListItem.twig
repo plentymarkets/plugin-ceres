@@ -12,7 +12,7 @@
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
             <label class="form-check-label" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
                 <input v-if="inputType === 'checkbox'" class="form-check-input" type="checkbox" @change="onInputValueChanged($event.target.checked)">
-                <input v-else class="form-check-input" type="radio" :name="property.group ? property.group.id : 'check' + _uid" @change="onInputValueChanged($event.target.value)" :value="property.property.id" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
+                <input v-else class="form-check-input" type="radio" :name="property.group ? property.group.id : 'check' + _uid" @change="onInputValueChanged($event.target.value)" :value="property.property.id">
                 ${property.property.names.name}
 
                 <strong v-if="property.property.surcharge >= 0 && property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
