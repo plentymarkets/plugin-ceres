@@ -1,25 +1,17 @@
-import store from "store/index.js";
-
-const currencySymbolMap = require("currency-symbol-map");
 const accounting = require("accounting");
 
-Vue.filter("currency", function(price, customCurrency)
+Vue.filter("currency", function(price)
 {
-    const currency = customCurrency || store.state.basket.data.currency;
+    const currencyPattern = App.config.currencyPattern;
 
     // (%v = value, %s = symbol)
     const options = {
-        symbol   : "",
-        decimal  : ",",
-        thousand : ".",
+        symbol   : App.config.activeCurrency,
+        decimal  : currencyPattern.separator_decimal,
+        thousand : currencyPattern.separator_thousands,
         precision: 2,
-        format   : "%v %s"
+        format   : currencyPattern.pattern.indexOf("¤") < currencyPattern.pattern.indexOf("#,##00.00") ? "%s %v" : "%v %s"
     };
-
-    if (currency)
-    {
-        options.symbol = currencySymbolMap.getSymbolFromCurrency(currency) || currency;
-    }
 
     return accounting.formatMoney(price, options);
 });

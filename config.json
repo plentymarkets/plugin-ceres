@@ -1224,6 +1224,73 @@
       "default"                   : ""
     },
     {
+        "tab"   : "Currencies",
+        "key"   : "currency.format",
+        "label" : "Format of currencies",
+        "type"  : "dropdown",
+        "possibleValues" :
+        {
+            "name"  :   "ISO-Code",
+            "symbol":   "Symbol"
+        },
+        "default"   : "name"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.enable_selection",
+        "label" : "Allow changing the displayed currency in webshop",
+        "type"  : "checkbox",
+        "default": "true"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.available_currencies",
+        "label" : "Available currencies",
+        "type"  : "multi_select",
+        "possibleValues":
+        {
+            "AED" : "AED (AED)",
+            "ARS" : "ARS (ARS)",
+            "AUD" : "AUD (AU$)",
+            "BGN" : "BGN (BGN)",
+            "BHD" : "BHD (BHD)",
+            "BRL" : "BRL (R$)",
+            "CAD" : "CAD (CA$)",
+            "CHF" : "CHF (CHF)",
+            "CNY" : "CNY (CN¥)",
+            "CZK" : "CZK (CZK)",
+            "DKK" : "DKK (DKK)",
+            "EUR" : "EUR (€)",
+            "GBP" : "GBP (£)",
+            "HKD" : "HKD (HK$)",
+            "HRK" : "HRK (HRK)",
+            "HUF" : "HUF (HUF)",
+            "IDR" : "IDR (IDR)",
+            "INR" : "INR (₹)",
+            "JPY" : "JPY (¥)",
+            "MXN" : "MXN (MX$)",
+            "MYR" : "MYR (MYR)",
+            "NOK" : "NOK (NOK)",
+            "NZD" : "NZD (NZ$)",
+            "PHP" : "PHP (PHP)",
+            "PLN" : "PLN (PLN)",
+            "QAR" : "QAR (QAR)",
+            "RON" : "RON (RON)",
+            "RUB" : "RUB (RUB)",
+            "SEK" : "SEK (SEK)",
+            "SGD" : "SGD (SGD)",
+            "THB" : "THB (฿)",
+            "TRY" : "TRY (TRY)",
+            "TWD" : "TWD (NT$)",
+            "UAH" : "UAH (UAH)",
+            "USD" : "USD ($)",
+            "VND" : "VND (₫)",
+            "XCD" : "XCD (EC$)",
+            "ZAR" : "ZAR (ZAR)"
+        },
+        "default" : "all"
+    },
+    {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_home",
         "label"                       : "Robots for homepage",
