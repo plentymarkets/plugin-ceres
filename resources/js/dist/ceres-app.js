@@ -12726,9 +12726,11 @@ Vue.component("salutation-select", {
 
 
     methods: {
-        changeValue: function changeValue() {
-            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
-                this.addressData.name1 = "";
+        emitInputEvent: function emitInputEvent(value) {
+            this.$emit("input", { field: "addressSalutation", value: value });
+
+            if (this.addressData.addressSalutation != 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
+                this.$emit("input", { field: "name1", value: "" });
             }
         }
     }
