@@ -20,14 +20,14 @@
             </label>
         </div>
 
-        <div v-else-if="inputType === 'selection'">
+        <!-- <div v-else-if="inputType === 'selection'">
             <div class="input-unit">
                 <select class="custom-select">
                     <option :selected="true" :value="null">{{ trans("Ceres::Template.pleaseSelect") }}</option>
                 </select>
                 <label>${property.property.names.name}</label>
             </div>
-        </div>
+        </div> -->
 
         <div v-else-if="inputType === 'file'">
             <label>${property.property.names.name}</label>

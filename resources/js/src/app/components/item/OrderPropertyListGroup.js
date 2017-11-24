@@ -27,7 +27,7 @@ Vue.component("order-property-list-group", {
 
     methods:
     {
-        test(propertyId)
+        unsetDeselectedRadios(propertyId)
         {
             const propertiesToUnselect = this.propertyGroup.properties.filter(property => property.property.id !== propertyId && this.isPropertyCheckbox(property));
 

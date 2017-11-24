@@ -2,8 +2,6 @@
 
 <script type="x/template" id="vue-order-property-list">
     <div>
-        <div v-for="propertyGroup in propertyGroups" :key="propertyGroup.id" style="display: grid; border: 1px solid red; margin-top: 5px; margin-bottom: 5px;">
-            <order-property-list-group :property-group="propertyGroup"></order-property-list-group>
-        </div>
+        <order-property-list-group v-for="propertyGroup in propertyGroups" :key="propertyGroup.id" :property-group="propertyGroup"></order-property-list-group>
     </div>
 </script>

@@ -2,9 +2,9 @@
 
 <script type="x/template" id="vue-order-property-list-group">
     <div>
-        <div v-if="isShownOnItemPageCount">
-        
-            <div v-if="propertyGroup.properties[0].group">
+        <div v-if="isShownOnItemPageCount" style="display: inline-block;">
+
+            <div v-if="propertyGroup.properties[0].group" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="h4">
                     ${ propertyGroup.properties[0].group.names.name }:
                 </div>
@@ -14,7 +14,11 @@
             </div>
 
             <div v-for="property in propertyGroup.properties" :key="property.property.id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <order-property-list-item :property="property" v-on:radio-change="test($event)"></order-property-list-item>
+                <order-property-list-item v-if="property.property.isShownOnItemPage" :property="property" v-on:radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <hr>
             </div>
 
         </div>
