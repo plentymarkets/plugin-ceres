@@ -48,9 +48,11 @@
         </div>
 
         <div v-for="property in basketItem.basketItemOrderParams">
-            <strong>${property.name} ${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
-            <br>
-            <span>{{ trans('Ceres::Template.basketPerItem') }}</span>
+            <div v-if="isPropertyVisible(property.propertyId)">
+                <strong>${property.name} ${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
+                <br>
+                <span>{{ trans('Ceres::Template.basketPerItem') }}</span>
+            </div>
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-sm" @click="deleteItem" :disabled="isInputLocked" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">

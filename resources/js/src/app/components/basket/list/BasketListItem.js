@@ -115,6 +115,18 @@ Vue.component("basket-list-item", {
             {
                 window.clearTimeout(this.deleteConfirmedTimeout);
             }
+        },
+
+        isPropertyVisible(propertyId)
+        {
+            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+
+            if (property)
+            {
+                return property.property.isShownAtCheckout;
+            }
+
+            return false;
         }
     }
 });
