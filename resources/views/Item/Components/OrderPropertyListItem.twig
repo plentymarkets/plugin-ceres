@@ -30,11 +30,14 @@
         </div> -->
 
         <div v-else-if="inputType === 'file'">
-            <label>${property.property.names.name}</label>
-            <br>
-            <div>
-                <input type="file" size="50" accept="image/*"> 
-            </div>
+            <label class="input-unit file-input order-property-input">
+                <span class="input-unit-preview"></span>
+                <span class="input-unit-label">${property.property.names.name}</span>
+                <span class="input-unit-btn">
+                    <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <input type="file" size="50" accept="image/*">
+            </label>
         </div>
 
     </div>

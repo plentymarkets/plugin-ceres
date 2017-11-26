@@ -46,7 +46,7 @@ $border-width: 1px;
     input[type], textarea,
 	input:not([type="checkbox"]),
 	input:not([type="radio"]),
-	.input-unit-preview{
+	.input-unit-preview {
 
 	    color: $color;
 	    background-color: $background;
@@ -62,7 +62,7 @@ $border-width: 1px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-
+        display: block;
 
 	    transition: all .2s;
 
@@ -181,6 +181,58 @@ $border-width: 1px;
             color: white;
         }
         
+    }
+}
+
+.file-input
+{
+    height: 38px;
+    cursor: pointer;
+    
+    > input[type="file"]
+    {
+        width: 0;
+        height: 0;
+        padding: 0;
+        visibility: hidden;
+    }
+    
+    > .input-unit-preview
+    {
+        height: 38px;
+    }
+    
+    > .input-unit-btn
+    {
+        content: "";
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        background-color: $border-color;
+        display: block;
+        right: 0;
+        top: 0;
+        
+        i {
+            margin: 10px;
+            width: 18px;
+            height: 18px;
+            font-weight: 300;
+            background-color: $border-color;
+            color: $text-color;
+        }
+    }
+    
+    &.success .input-unit-btn,
+    &.success .input-unit-btn i {
+        background-color: $brand-success;
+        color: #fff;
+    }
+    
+    &.error .input-unit-btn,
+    &.error .input-unit-btn i {
+        background-color: $brand-danger;
+        color: #fff;
     }
 }
 
