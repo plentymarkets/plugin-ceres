@@ -16007,7 +16007,7 @@ Vue.filter("currency", function (price) {
         decimal: currencyPattern.separator_decimal,
         thousand: currencyPattern.separator_thousands,
         precision: 2,
-        format: currencyPattern.pattern.indexOf("¤") < currencyPattern.pattern.indexOf("#,##00.00") ? "%s %v" : "%v %s"
+        format: currencyPattern.pattern.replace("¤", "%s").replace("#,##0.00", "%v")
     };
 
     return accounting.formatMoney(price, options);

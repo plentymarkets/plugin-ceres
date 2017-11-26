@@ -101,9 +101,9 @@
                     </div>
                     <ul>
                         <div>
-                            {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' %}
-                            <li>
-                                <a {% if currency.name == services.checkout.getCurrencyData().name %}class="active"{% endif %} href="?currency={{ currency.name }}">
+                            {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
+                            <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
+                                <a href="?currency={{ currency.name }}">
                                     {{ currency[currencyFormat] }}
                                 </a>
                             </li>
