@@ -13780,6 +13780,8 @@ Vue.component("quantity-input", {
         handleMissingItems: function handleMissingItems() {
             if (this.alreadyInBasketCount >= this.internalMin) {
                 this.internalMin = 1;
+            } else {
+                this.internalMin -= this.alreadyInBasketCount;
             }
 
             if (this.compMax !== null) {

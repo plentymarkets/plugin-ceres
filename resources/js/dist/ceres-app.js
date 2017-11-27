@@ -13400,6 +13400,8 @@ Vue.component("quantity-input", {
         if (!this.compVertical) {
             this.handleMissingItems();
         }
+
+        this.validateValue();
     },
 
 
