@@ -16,9 +16,31 @@ Vue.component("mobile-navigation", {
         };
     },
 
-    computed: Vuex.mapState({
-        navigationTree: state => state.navigation.tree
-    }),
+    computed:
+    {
+        parentCategories()
+        {
+            const dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+
+            if (dataContainer[0] && dataContainer[0].parent)
+            {
+                if (dataContainer[0].parent.parent)
+                {
+                    // returns upper level
+                    return dataContainer[0].parent.parent.children;
+                }
+
+                // return highest level of navigation
+                return this.navigationTree;
+            }
+
+            return false;
+        },
+
+        ...Vuex.mapState({
+            navigationTree: state => state.navigation.tree
+        })
+    },
 
     created()
     {
