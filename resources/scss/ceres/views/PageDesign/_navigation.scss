@@ -409,6 +409,11 @@ nav.navbar.megamenu {
 			display: block !important;
 		}
 
+		.btn-up {
+			flex: none !important;
+			transform: rotateY(180deg);
+		}
+
 		li 	{
 			width : 100%;
 			cursor: pointer;
