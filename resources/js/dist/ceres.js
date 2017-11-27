@@ -15524,6 +15524,8 @@ Vue.component("order-return-item", {
 },{}],62:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("mobile-navigation", {
 
     props: ["template", "currentCategoryId", "navigationTreeData"],
@@ -15538,11 +15540,27 @@ Vue.component("mobile-navigation", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        parentCategories: function parentCategories() {
+            var dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+
+            if (dataContainer[0] && dataContainer[0].parent) {
+                if (dataContainer[0].parent.parent) {
+                    // returns upper level
+                    return dataContainer[0].parent.parent.children;
+                }
+
+                // return highest level of navigation
+                return this.navigationTree;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
         navigationTree: function navigationTree(state) {
             return state.navigation.tree;
         }
-    }),
+    })),
 
     created: function created() {
         this.$options.template = this.template;
