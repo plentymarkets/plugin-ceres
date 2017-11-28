@@ -5,6 +5,7 @@ namespace Ceres\Providers;
 use Ceres\Caching\HomepageCacheSettings;
 use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
+use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
@@ -57,6 +58,7 @@ class TemplateServiceProvider extends ServiceProvider
     {
         // Register Twig String Loader to use function: template_from_string
         $twig->addExtension('Twig_Extension_StringLoader');
+        $twig->addExtension(TwigStyleScriptTagFilter::class);
 
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer) {
                 $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);

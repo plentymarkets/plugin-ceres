@@ -1,11 +1,11 @@
 {% macro show( containerName, object ) %}
     {% if object == null %}
         {% for content in container(containerName) %}
-            {{ content.result|raw }}
+            {{ content.result|raw|filter_tags(containerName) }}
         {% endfor %}
     {% else %}
         {% for content in container(containerName, object) %}
-            {{ content.result|raw }}
+            {{ content.result|raw|filter_tags(containerName) }}
         {% endfor %}
     {% endif %}
 {% endmacro %}
