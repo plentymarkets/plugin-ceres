@@ -23,7 +23,14 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {},
             addressToDelete: {},
-            deleteModal    : ""
+            deleteModal    : "",
+            addressOptionTypeFieldMap:
+            {
+                1: "vatNumber",
+                4: "telephone",
+                9: "birthday",
+                11: "title"
+            }
         };
     },
 
@@ -169,8 +176,7 @@ Vue.component("address-select", {
         showEditModal(address)
         {
             this.modalType = "update";
-            // Creates a tmp address to prevent unwanted two-way binding
-            this.addressToEdit = JSON.parse(JSON.stringify(address));
+            this.addressToEdit = this.getAddressToEdit(address);
 
             if (typeof this.addressToEdit.addressSalutation === "undefined")
             {
@@ -180,6 +186,24 @@ Vue.component("address-select", {
             this.updateHeadline();
             ValidationService.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
+        },
+
+        getAddressToEdit(address)
+        {
+            // Creates a tmp address to prevent unwanted two-way binding
+            const addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (addressToEdit.options)
+            {
+                for (const option of addressToEdit.options)
+                {
+                    const optionName = this.addressOptionTypeFieldMap[option.typeId];
+
+                    addressToEdit[optionName] = option.value || null;
+                }
+            }
+
+            return addressToEdit;
         },
 
         /**
@@ -280,6 +304,11 @@ Vue.component("address-select", {
             }
 
             return "";
+        },
+
+        setAddressToEditField({field, value})
+        {
+            this.addressToEdit[field] = value;
         }
     },
 
