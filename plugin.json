@@ -198,6 +198,11 @@
             "name"          : "Single item: Additional content after \"Add to shopping cart\" button",
             "description"   : "Add additional content after the 'Add to shopping cart' button in the single item view."
         },
+				{
+						"key"           : "SingleItem.AdditionalContentAfterVAT",
+						"name"          : "Single item: Additional content after \"VAT\" information",
+						"description"   : "Add additional content after the 'VAT' information in the single item view."
+				},
         {
             "key"           : "SingleItem.AddDetailTabs",
             "name"          : "Single item: Add detail tabs",

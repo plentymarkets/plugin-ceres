@@ -101,7 +101,7 @@
                         <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true"></add-to-basket>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
-                    
+
                     {% if "wish-list" in enabledRoutes or "all" in enabledRoutes %}
                         <div class="row">
                             <add-to-wish-list template="#vue-add-to-wish-list" :variation-id="currentVariation.variation.id" :is-active="isInWishList"></add-to-wish-list>
@@ -117,6 +117,8 @@
                         * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
                         <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
+
+                    <slot name="AdditionalContentAfterVAT"></slot>
 
                 </div>
 
