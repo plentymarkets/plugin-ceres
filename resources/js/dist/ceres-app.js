@@ -12352,8 +12352,17 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged: function countryChanged() {
-            this.selectedStateId = null;
+        countryChanged: function countryChanged(value) {
+            this.$emit("country-changed", parseInt(value));
+            this.$emit("state-changed", null);
+        },
+
+
+        /**
+         * @param {*} value
+         */
+        stateChanged: function stateChanged(value) {
+            this.$emit("state-changed", parseInt(value));
         },
 
 
@@ -12729,7 +12738,7 @@ Vue.component("salutation-select", {
         emitInputEvent: function emitInputEvent(value) {
             this.$emit("input", { field: "addressSalutation", value: value });
 
-            if (this.addressData.addressSalutation != 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
+            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
                 this.$emit("input", { field: "name1", value: "" });
             }
         }

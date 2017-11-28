@@ -40,9 +40,18 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged()
+        countryChanged(value)
         {
-            this.selectedStateId = null;
+            this.$emit("country-changed", parseInt(value));
+            this.$emit("state-changed", null);
+        },
+
+        /**
+         * @param {*} value
+         */
+        stateChanged(value)
+        {
+            this.$emit("state-changed", parseInt(value));
         },
 
         /**
