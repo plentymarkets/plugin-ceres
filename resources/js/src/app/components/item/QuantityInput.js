@@ -88,7 +88,7 @@ Vue.component("quantity-input", {
             if (!(this.compValue === this.internalMax) && !this.waiting)
             {
                 this.compValue++;
-                this.validateValue(this.compValue);
+                this.validateValue();
             }
         },
 
@@ -97,7 +97,7 @@ Vue.component("quantity-input", {
             if (!(this.compValue === this.internalMin) && !this.waiting)
             {
                 this.compValue--;
-                this.validateValue(this.compValue);
+                this.validateValue();
             }
         },
 
@@ -127,15 +127,22 @@ Vue.component("quantity-input", {
 
         onValueChanged()
         {
-            if (this.timeoutHandle)
-            {
-                window.clearTimeout(this.timeoutHandle);
-            }
-
-            this.timeoutHandle = window.setTimeout(() =>
+            if (this.compTimeout === 0)
             {
                 this.$emit("quantity-change", this.compValue);
-            }, this.compTimeout);
+            }
+            else
+            {
+                if (this.timeoutHandle)
+                {
+                    window.clearTimeout(this.timeoutHandle);
+                }
+
+                this.timeoutHandle = window.setTimeout(() =>
+                {
+                    this.$emit("quantity-change", this.compValue);
+                }, this.compTimeout);
+            }
         },
 
         checkDefaultVars()
@@ -146,7 +153,7 @@ Vue.component("quantity-input", {
 
         initDefaultVars()
         {
-            this.compTimeout = this.compTimeout || 500;
+            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 300;
             this.internalMin = this.compMin || 1;
             this.internalMax = this.compMax || 9999;
             this.compVertical = this.compVertical || false;
