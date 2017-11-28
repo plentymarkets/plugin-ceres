@@ -233,7 +233,7 @@
                             </dd>
                                 {% endif %}
 
-                                {% if "basket.vat" in totalsConfigData %}
+                                {% if "basket.vat" in totalsConfigData and not orderData.order.amounts[0].isNet %}
                                     <div class="vatTotals">
                                         {% for vat in orderData.order.amounts[0].vats %}
                                             <dt>

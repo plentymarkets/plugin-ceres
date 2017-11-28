@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-md-6 col-lg-4" v-for="(attribute, attributeId) in attributes">
             <div class="input-unit">
                 <select class="custom-select" v-model="selectedAttributes[attributeId]">
-                        <option disabled>{{ trans("Ceres::Template.pleaseSelect") }}</option>
+                        <option :value="null" disabled>{{ trans("Ceres::Template.pleaseSelect") }}</option>
                         <option
                             v-for="(attributeValue, attributeValueId) in attribute.values"
                             :value="attributeValueId"

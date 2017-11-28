@@ -12001,7 +12001,7 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref:invoice-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
 
     props: ["selectedAddressId", "addressList", "hasToValidate", "countryNameMap"],
 
@@ -12033,8 +12033,8 @@ Vue.component("invoice-address-select", {
         var _this = this;
 
         this.$nextTick(function () {
-            if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
-                _this.$refs.invoiceAddressSelect.showInitialAddModal();
+            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+                _this.$refs.invoice.showInitialAddModal();
             }
         });
     },
@@ -17788,7 +17788,7 @@ var actions = {
             commit("setCouponCode", null);
             commit("setIsBasketLoading", true);
 
-            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (response) {
+            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
