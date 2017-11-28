@@ -1,7 +1,33 @@
 {{ component( "Ceres::Item.Components.OrderPropertyListGroup" ) }}
 
 <script type="x/template" id="vue-order-property-list">
-    <div>
-        <order-property-list-group v-for="propertyGroup in propertyGroups" :key="propertyGroup.id" :property-group="propertyGroup"></order-property-list-group>
+    <div class="order-property-slider m-b-1">
+        <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
+            <div v-for="(propertyGroup, index) in propertyGroups" :class="{'active': index === activeSlide}">
+                <order-property-list-group :key="propertyGroup.id" :property-group="propertyGroup"></order-property-list-group>
+            </div>
+        </div>
+
+        <div class="order-property-slider-controls col-xs-12">
+            <div class="btn btn-secondary" @click="prevSlide()" :class="{'disabled': activeSlide === 0}" tabindex="0">
+                <span class="fa fa-chevron-left"></span>
+            </div>
+
+            <div class="slider-nav">
+                <span v-for="(propertyGroup, index) in propertyGroups"
+                      :class="{'active': index === activeSlide}"
+                      @click="slideTo(index)"
+                      :key="index"
+                      v-tooltip
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      :title="propertyGroup.properties[0].group ? propertyGroup.properties[0].group.names.name : 'Ohne Gruppe'">
+                </span>
+            </div>
+
+            <div class="btn btn-secondary pull-right" @click="nextSlide()" :class="{'disabled': activeSlide == propertyGroups.length - 1 }" tabindex="0">
+                <span class="fa fa-chevron-right"></span>
+            </div>
+        </div>
     </div>
 </script>

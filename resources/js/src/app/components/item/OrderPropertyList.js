@@ -9,6 +9,13 @@ Vue.component("order-property-list", {
         }
     },
 
+    data: function()
+{
+        return {
+            activeSlide: 0
+        };
+    },
+
     computed:
     {
         propertyGroups()
@@ -110,6 +117,30 @@ Vue.component("order-property-list", {
 
                 return 0;
             });
+        },
+
+        nextSlide()
+        {
+            if (this.activeSlide < this.propertyGroups.length - 1)
+            {
+                this.activeSlide++;
+            }
+        },
+
+        prevSlide()
+        {
+            if (this.activeSlide > 0)
+            {
+                this.activeSlide--;
+            }
+        },
+
+        slideTo(position)
+        {
+            if (position >= 0 && position < this.propertyGroups.length)
+            {
+                this.activeSlide = position;
+            }
         }
     }
 });

@@ -1,3 +1,14 @@
+const initTooltip = (el) => {
+    setTimeout(() =>
+    {
+        $(el).tooltip({
+            trigger: "hover",
+            // eslint-disable-next-line
+            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }, 1);
+};
+
 Vue.directive("tooltip", {
 
     unbind(el)
@@ -9,14 +20,7 @@ Vue.directive("tooltip", {
     {
         if (typeof binding.value === "undefined" || binding.value)
         {
-            setTimeout(() =>
-            {
-                $(el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-            }, 1);
+            initTooltip(el);
         }
         else
         {
@@ -25,5 +29,10 @@ Vue.directive("tooltip", {
                 $(el).tooltip("dispose");
             }, 1);
         }
+    },
+
+    bind( el )
+    {
+        initTooltip(el);
     }
 });

@@ -13352,6 +13352,12 @@ Vue.component("order-property-list", {
         }
     },
 
+    data: function data() {
+        return {
+            activeSlide: 0
+        };
+    },
+
     computed: _extends({
         propertyGroups: function propertyGroups() {
             if (this.orderPropertyList) {
@@ -13502,6 +13508,21 @@ Vue.component("order-property-list", {
 
                 return 0;
             });
+        },
+        nextSlide: function nextSlide() {
+            if (this.activeSlide < this.propertyGroups.length - 1) {
+                this.activeSlide++;
+            }
+        },
+        prevSlide: function prevSlide() {
+            if (this.activeSlide > 0) {
+                this.activeSlide--;
+            }
+        },
+        slideTo: function slideTo(position) {
+            if (position >= 0 && position < this.propertyGroups.length) {
+                this.activeSlide = position;
+            }
         }
     }
 });
@@ -16125,24 +16146,31 @@ Vue.directive("scroll-to-top", {
 },{}],84:[function(require,module,exports){
 "use strict";
 
+var initTooltip = function initTooltip(el) {
+    setTimeout(function () {
+        $(el).tooltip({
+            trigger: "hover",
+            // eslint-disable-next-line
+            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }, 1);
+};
+
 Vue.directive("tooltip", {
     unbind: function unbind(el) {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
-            setTimeout(function () {
-                $(el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-            }, 1);
+            initTooltip(el);
         } else {
             setTimeout(function () {
                 $(el).tooltip("dispose");
             }, 1);
         }
+    },
+    bind: function bind(el) {
+        initTooltip(el);
     }
 });
 
