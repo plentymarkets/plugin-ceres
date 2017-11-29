@@ -14053,11 +14053,16 @@ Vue.component("item-search", {
         search: function search() {
             if (this.currentSearchString.length) {
                 if (document.location.pathname === "/search") {
+                    this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 } else {
                     window.open("/search?query=" + this.currentSearchString, "_self", false);
                 }
             }
+        },
+        updateTitle: function updateTitle(searchString) {
+            document.querySelector("#searchPageTitle").innerHTML = Translations.Template.generalSearchResults + " " + searchString;
+            document.title = Translations.Template.generalSearchResults + " " + searchString + " | " + App.config.shopName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
