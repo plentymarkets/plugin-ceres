@@ -11135,6 +11135,14 @@ Vue.component("basket-list", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
 Vue.component("basket-list-item", {
 
     delimiters: ["${", "}"],
@@ -11211,10 +11219,14 @@ Vue.component("basket-list-item", {
             if (this.basketItem.quantity !== quantity) {
                 this.waiting = true;
 
+                var origQty = this.basketItem.quantity;
+
                 this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: _this2.basketItem }));
                     _this2.waiting = false;
                 }, function (error) {
+                    _this2.basketItem.quantity = origQty;
+                    NotificationService.error(Translations.Template[_ExceptionMap2.default.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     _this2.waiting = false;
                 });
             }
@@ -11233,7 +11245,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{}],12:[function(require,module,exports){
+},{"exceptions/ExceptionMap":82,"services/NotificationService":101}],12:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -14969,6 +14981,10 @@ Vue.component("bank-data-select", {
          * @param doUpdate
          */
         openModal: function openModal(doUpdate) {
+            if (!doUpdate) {
+                this.resetData();
+            }
+
             this.doUpdate = doUpdate;
             _ValidationService2.default.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
@@ -15013,7 +15029,7 @@ Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
 
             ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _this3.userBankData.splice(_self.updateBankIndex, 1, response);
+                _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
                 _this3.checkBankDataSelection();
                 _this3.closeModal();
 
@@ -15058,7 +15074,7 @@ Vue.component("bank-data-select", {
             ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
                 _this5.checkBankDataSelection(false);
                 _this5.closeDeleteModal();
-                _this5.userBankData.splice(_self.updateBankIndex, 1);
+                _this5.userBankData.splice(_this5.updateBankIndex, 1);
 
                 NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
             }).fail(function () {
@@ -15077,7 +15093,7 @@ Vue.component("bank-data-select", {
                 this.selectedBankData = this.userBankData[0];
             }
 
-            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id) {
+            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
                 if (!this.doUpdate) {
                     this.selectedBankData = null;
                 } else {
