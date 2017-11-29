@@ -41,13 +41,16 @@ Vue.component("item-search", {
     {
         search()
         {
-            if (document.location.pathname === "/search")
+            if (this.currentSearchString.length)
             {
-                this.$store.dispatch("searchItems", this.currentSearchString);
-            }
-            else
-            {
-                window.open("/search?query=" + this.currentSearchString, "_self", false);
+                if (document.location.pathname === "/search")
+                {
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+                }
+                else
+                {
+                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                }
             }
         },
 
