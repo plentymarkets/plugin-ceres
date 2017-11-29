@@ -14053,10 +14053,12 @@ Vue.component("item-search", {
 
     methods: {
         search: function search() {
-            if (document.location.pathname === "/search") {
-                this.$store.dispatch("searchItems", this.currentSearchString);
-            } else {
-                window.open("/search?query=" + this.currentSearchString, "_self", false);
+            if (this.currentSearchString.length) {
+                if (document.location.pathname === "/search") {
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+                } else {
+                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                }
             }
         },
         initAutocomplete: function initAutocomplete() {
