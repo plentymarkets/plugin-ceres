@@ -31,8 +31,11 @@ Vue.directive("tooltip", {
         }
     },
 
-    bind( el )
+    bind(el, binding)
     {
-        initTooltip(el);
+        if (typeof binding.value === "undefined" || binding.value)
+        {
+            initTooltip(el);
+        }
     }
 });
