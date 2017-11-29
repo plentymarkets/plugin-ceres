@@ -95,6 +95,11 @@ Vue.component("bank-data-select", {
          */
         openModal(doUpdate)
         {
+            if (!doUpdate)
+            {
+                this.resetData();
+            }
+
             this.doUpdate = doUpdate;
             ValidationService.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
