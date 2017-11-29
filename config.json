@@ -1244,6 +1244,19 @@
     },
     {
         "tab"   : "Currencies",
+        "key"   : "currency.format_selection",
+        "label" : "Format of currencies in selection popup",
+        "type"  : "dropdown",
+        "possibleValues" :
+                  {
+                      "name"  :   "ISO-Code",
+                      "symbol":   "Symbol",
+                      "all"   :   "ISO-Code & Symbol"
+                  },
+        "default"   : "all"
+    },
+    {
+        "tab"   : "Currencies",
         "key"   : "currency.available_currencies",
         "label" : "Available currencies",
         "type"  : "multi_select",
