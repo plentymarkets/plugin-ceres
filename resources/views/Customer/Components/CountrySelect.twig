@@ -6,7 +6,7 @@
 <script type="x/template" id="vue-country-select">
 <div>
     <div class="input-unit" data-validate="" data-model="countryId">
-        <select  v-model="selectedCountryId" v-on:change="countryChanged" class="custom-select">
+        <select  :value="selectedCountryId" class="custom-select" @input="countryChanged($event.target.value)">
             <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList">
                 ${ country.name }
             </option>
@@ -15,9 +15,9 @@
     </div>
 
     {% if "billing_address.stateId" in billingAddressFields %}
-    <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
-        <select v-model="selectedStateId" class="custom-select">
-            <option :value="state.id" :selected="state.selected" v-for="state in stateList">
+    <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
+        <select :value="selectedStateId" class="custom-select" @input="stateChanged($event.target.value)">
+            <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
                 ${ state.name }
             </option>
         </select>
@@ -27,9 +27,9 @@
 
 
     {% if "delivery_address.stateId" in deliveryAddressFields %}
-        <div class="input-unit" v-if="stateList != undefined && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
-            <select v-model="selectedStateId" class="custom-select">
-                <option :value="state.id" :selected="state.selected" v-for="state in stateList">
+        <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
+            <select :value="selectedStateId" class="custom-select" @input="stateChanged($event.target.value)">
+                <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
                     ${ state.name }
                 </option>
             </select>

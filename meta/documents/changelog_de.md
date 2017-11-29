@@ -1,12 +1,19 @@
 # Release Notes für Ceres
 
-## v1.7.2 (unknown)
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
-- Es wurde ein konfigurierbares Mega Menu hinzugefügt.
+- Events aus plentymarkets oder aus anderen Plugins können jetzt direkt in Ceres verarbeitet werden.
+- Server-Benachrichtigungen werden jetzt direkt in Ceres ausgegeben, wodurch Plugin-Entwickler einfacher auf Benachrichtigungen von Ceres zugreifen können.
 
-## v1.7.1 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+### Behoben
+
+- Durch einen Fehler wurden in der Detailansicht eines Auftrags oder auf der Auftragsbestätigungsseite die Versandkosten nicht korrekt angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurden zusätzliche Artikeldaten im Warenkorb nicht geladen, wenn sich mehr als 10 verschiedene Artikel im Warenkorb befanden. Dies wurde behoben.
+
+
+## v1.7.1 (2017-11-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.0...1.7.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
@@ -89,7 +96,7 @@
 
 - Der Container **Container for customer feedback** wurde hinzugefügt.
 
-### Behoben
+### Geändert
 
 - Der Template-Container **Single item: Add detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.
 - Der Template-Container **Single item: Add content to detail tabs** beinhaltet nun das aktuelle `Item`-Objekt.

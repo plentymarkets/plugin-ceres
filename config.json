@@ -21,6 +21,13 @@
     },
     {
         "tab"       : "Global",
+        "key"       : "global.default_contact_class_b2b",
+        "label"     : "Default customer class B2B",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Global",
         "key"       : "global.enableOldUrlPattern",
         "label"     : "Enable Callisto route pattern for items",
         "type"      : "checkbox",
@@ -814,7 +821,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "texts.name_asc"
     },
@@ -849,7 +858,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -884,7 +895,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -945,7 +958,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "item.score"
     },
@@ -981,7 +996,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -1017,7 +1034,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },

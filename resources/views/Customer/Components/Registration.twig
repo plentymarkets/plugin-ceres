@@ -31,10 +31,11 @@
                     </div>
                 </div>
 
-                <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
+                <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" address-type="1" :value="billingAddress" @input="setAddressDataField($event)"></address-input-group>
             </div>
         </div>
         <div class="modal-footer">
+            {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
             <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ trans("Ceres::Template.accRegister") }}

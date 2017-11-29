@@ -35,6 +35,11 @@
 
         {% block PartialHead %}
         {% endblock %}
+
+        {% set additionalStyleTemplates = get_additional_styles() %}
+        {% for styleTemplate in additionalStyleTemplates %}
+            {% include styleTemplate ignore missing %}
+        {% endfor %}
     </head>
 
     <body>
@@ -158,6 +163,11 @@
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
+        {% set additionalScriptTemplates = get_additional_scripts() %}
+        {% for scriptTemplate in additionalScriptTemplates %}
+            {% include scriptTemplate ignore missing %}
+        {% endfor %}
+
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
 
         <script>
@@ -186,5 +196,6 @@
             }
 
         </script>
+
     </body>
 </html>
