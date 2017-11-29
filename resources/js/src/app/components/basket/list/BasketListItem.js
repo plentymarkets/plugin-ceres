@@ -1,3 +1,7 @@
+import ExceptionMap from "exceptions/ExceptionMap";
+
+const NotificationService = require("services/NotificationService");
+
 Vue.component("basket-list-item", {
 
     delimiters: ["${", "}"],
@@ -92,6 +96,8 @@ Vue.component("basket-list-item", {
             {
                 this.waiting = true;
 
+                const origQty = this.basketItem.quantity;
+
                 this.$store.dispatch("updateBasketItemQuantity", {basketItem: this.basketItem, quantity: quantity}).then(
                     response =>
                     {
@@ -100,6 +106,8 @@ Vue.component("basket-list-item", {
                     },
                     error =>
                     {
+                        this.basketItem.quantity = origQty;
+                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                         this.waiting = false;
                     });
             }

@@ -24,8 +24,10 @@
         <div class="col-xs-12 col-sm-4">
             <country-select
                 template="#vue-country-select"
-                :selected-country-id.sync="addressData.countryId"
-                :selected-state-id.sync="addressData.stateId"
+                :selected-country-id.sync="value.countryId"
+                :selected-state-id.sync="value.stateId"
+                @country-changed="emitInputEvent('countryId', $event)"
+                @state-changed="emitInputEvent('stateId', $event)"
                 @selected-country-changed="onSelectedCountryChanged"
                 :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
                 :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang())| json_encode() }}"

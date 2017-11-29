@@ -10810,6 +10810,14 @@ Vue.component("basket-list", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _ExceptionMap = require("exceptions/ExceptionMap");
+
+var _ExceptionMap2 = _interopRequireDefault(_ExceptionMap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
+
 Vue.component("basket-list-item", {
 
     delimiters: ["${", "}"],
@@ -10886,10 +10894,14 @@ Vue.component("basket-list-item", {
             if (this.basketItem.quantity !== quantity) {
                 this.waiting = true;
 
+                var origQty = this.basketItem.quantity;
+
                 this.$store.dispatch("updateBasketItemQuantity", { basketItem: this.basketItem, quantity: quantity }).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: _this2.basketItem }));
                     _this2.waiting = false;
                 }, function (error) {
+                    _this2.basketItem.quantity = origQty;
+                    NotificationService.error(Translations.Template[_ExceptionMap2.default.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     _this2.waiting = false;
                 });
             }
@@ -10919,7 +10931,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{}],12:[function(require,module,exports){
+},{"exceptions/ExceptionMap":82,"services/NotificationService":101}],12:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -11418,7 +11430,13 @@ Vue.component("address-input-group", {
         },
         addressType: String,
         modalType: String,
-        template: String
+        template: String,
+        value: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
     },
 
     data: function data() {
@@ -11435,10 +11453,6 @@ Vue.component("address-input-group", {
      */
     created: function created() {
         this.$options.template = this.template;
-
-        if (!this.addressData) {
-            this.addressData = {};
-        }
     },
 
 
@@ -11454,41 +11468,8 @@ Vue.component("address-input-group", {
                 this.localeToShow = this.defaultCountry;
             }
         },
-        getOptionType: function getOptionType(data, optionType) {
-            for (var i = 0; i < data.length; i++) {
-                if (optionType === data[i].typeId) {
-                    return data[i].value;
-                }
-            }
-            return "";
-        },
-        equalOptionValues: function equalOptionValues(newValue, data, optionType) {
-            var oldValue = this.getOptionType(data, optionType);
-
-            if (typeof newValue === "undefined") {
-                return oldValue;
-            }
-
-            return oldValue === newValue;
-        }
-    },
-
-    filters: {
-        optionType: {
-            read: function read(value, optionType) {
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined") {
-                    return value;
-                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-            },
-            write: function write(value) {
-                return value;
-            }
+        emitInputEvent: function emitInputEvent(field, value) {
+            this.$emit("input", { field: field, value: value });
         }
     }
 });
@@ -11521,7 +11502,13 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            addressOptionTypeFieldMap: {
+                1: "vatNumber",
+                4: "telephone",
+                9: "birthday",
+                11: "title"
+            }
         };
     },
 
@@ -11652,8 +11639,7 @@ Vue.component("address-select", {
          */
         showEditModal: function showEditModal(address) {
             this.modalType = "update";
-            // Creates a tmp address to prevent unwanted two-way binding
-            this.addressToEdit = JSON.parse(JSON.stringify(address));
+            this.addressToEdit = this.getAddressToEdit(address);
 
             if (typeof this.addressToEdit.addressSalutation === "undefined") {
                 this.addressToEdit.addressSalutation = 0;
@@ -11662,6 +11648,41 @@ Vue.component("address-select", {
             this.updateHeadline();
             _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
+        },
+        getAddressToEdit: function getAddressToEdit(address) {
+            // Creates a tmp address to prevent unwanted two-way binding
+            var addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (addressToEdit.options) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = addressToEdit.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var option = _step.value;
+
+                        var optionName = this.addressOptionTypeFieldMap[option.typeId];
+
+                        addressToEdit[optionName] = option.value || null;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return addressToEdit;
         },
 
 
@@ -11743,35 +11764,41 @@ Vue.component("address-select", {
             }
 
             return "";
+        },
+        setAddressToEditField: function setAddressToEditField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.addressToEdit[field] = value;
         }
     },
 
     filters: {
         optionType: function optionType(selectedAddress, typeId) {
             if (selectedAddress && selectedAddress.name2) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
 
                 try {
-                    for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var optionType = _step.value;
+                    for (var _iterator2 = selectedAddress.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
 
                         if (optionType.typeId === typeId) {
                             return optionType.value;
                         }
                     }
                 } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
                         }
                     } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
                         }
                     }
                 }
@@ -11983,6 +12010,9 @@ Vue.component("create-update-address", {
                     }
                 }
             }
+        },
+        emitInputEvent: function emitInputEvent(event) {
+            this.$emit("input", event);
         }
     }
 });
@@ -11994,7 +12024,7 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref:invoice-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
 
     props: ["selectedAddressId", "addressList", "hasToValidate", "countryNameMap"],
 
@@ -12026,8 +12056,8 @@ Vue.component("invoice-address-select", {
         var _this = this;
 
         this.$nextTick(function () {
-            if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
-                _this.$refs.invoiceAddressSelect.showInitialAddModal();
+            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+                _this.$refs.invoice.showInitialAddModal();
             }
         });
     },
@@ -12345,8 +12375,17 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged: function countryChanged() {
-            this.selectedStateId = null;
+        countryChanged: function countryChanged(value) {
+            this.$emit("country-changed", parseInt(value));
+            this.$emit("state-changed", null);
+        },
+
+
+        /**
+         * @param {*} value
+         */
+        stateChanged: function stateChanged(value) {
+            this.$emit("state-changed", parseInt(value));
         },
 
 
@@ -12468,6 +12507,14 @@ Vue.component("registration", {
                 component.isDisabled = false;
             });
         },
+
+        setAddressDataField: function setAddressDataField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.billingAddress[field] = value;
+        },
+
 
         /**
          * Handle the user object which is send to the server
@@ -12711,9 +12758,11 @@ Vue.component("salutation-select", {
 
 
     methods: {
-        changeValue: function changeValue() {
+        emitInputEvent: function emitInputEvent(value) {
+            this.$emit("input", { field: "addressSalutation", value: value });
+
             if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
-                this.addressData.name1 = "";
+                this.$emit("input", { field: "name1", value: "" });
             }
         }
     }
@@ -13763,6 +13812,8 @@ Vue.component("quantity-input", {
         if (!this.compVertical) {
             this.handleMissingItems();
         }
+
+        this.validateValue();
     },
 
 
@@ -14377,10 +14428,12 @@ Vue.component("item-search", {
 
     methods: {
         search: function search() {
-            if (document.location.pathname === "/search") {
-                this.$store.dispatch("searchItems", this.currentSearchString);
-            } else {
-                window.open("/search?query=" + this.currentSearchString, "_self", false);
+            if (this.currentSearchString.length) {
+                if (document.location.pathname === "/search") {
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+                } else {
+                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                }
             }
         },
         initAutocomplete: function initAutocomplete() {
@@ -14966,6 +15019,10 @@ Vue.component("bank-data-select", {
          * @param doUpdate
          */
         openModal: function openModal(doUpdate) {
+            if (!doUpdate) {
+                this.resetData();
+            }
+
             this.doUpdate = doUpdate;
             _ValidationService2.default.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
@@ -15010,7 +15067,7 @@ Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
 
             ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _this3.userBankData.splice(_self.updateBankIndex, 1, response);
+                _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
                 _this3.checkBankDataSelection();
                 _this3.closeModal();
 
@@ -15055,7 +15112,7 @@ Vue.component("bank-data-select", {
             ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
                 _this5.checkBankDataSelection(false);
                 _this5.closeDeleteModal();
-                _this5.userBankData.splice(_self.updateBankIndex, 1);
+                _this5.userBankData.splice(_this5.updateBankIndex, 1);
 
                 NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
             }).fail(function () {
@@ -15074,7 +15131,7 @@ Vue.component("bank-data-select", {
                 this.selectedBankData = this.userBankData[0];
             }
 
-            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id) {
+            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
                 if (!this.doUpdate) {
                     this.selectedBankData = null;
                 } else {
@@ -15562,6 +15619,8 @@ Vue.component("order-return-item", {
 },{}],65:[function(require,module,exports){
 "use strict";
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 Vue.component("mobile-navigation", {
 
     props: ["template", "currentCategoryId", "navigationTreeData"],
@@ -15576,11 +15635,27 @@ Vue.component("mobile-navigation", {
     },
 
 
-    computed: Vuex.mapState({
+    computed: _extends({
+        parentCategories: function parentCategories() {
+            var dataContainer = this.useFirstContainer ? this.dataContainer2 : this.dataContainer1;
+
+            if (dataContainer[0] && dataContainer[0].parent) {
+                if (dataContainer[0].parent.parent) {
+                    // returns upper level
+                    return dataContainer[0].parent.parent.children;
+                }
+
+                // return highest level of navigation
+                return this.navigationTree;
+            }
+
+            return false;
+        }
+    }, Vuex.mapState({
         navigationTree: function navigationTree(state) {
             return state.navigation.tree;
         }
-    }),
+    })),
 
     created: function created() {
         this.$options.template = this.template;

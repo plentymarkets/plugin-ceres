@@ -40,10 +40,16 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        <button class="btn btn-primary btn-medium" @click.prevent="openUpdateBank(index, bankData)">
+                                            {{ trans("Ceres::Template.generalEdit") }}
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
                                     </span><!--
                                 --><span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        <button class="btn btn-medium btn-remove-address" @click.prevent="openDeleteBank(index, bankData)">
+                                            {{ trans("Ceres::Template.generalDelete") }}
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
                                     </span>
                                 </div>
                             </label>
@@ -52,63 +58,62 @@
                 </div>
             </div><!--
             --><div class="add-item">
-            <a href="#" class="" data-toggle="tooltip" data-placement="right" title="{{ trans("Ceres::Template.bankAddDataTitle") }}" @click="openAddBank">
-                <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
-            </a>
+                <button href="#" class="btn btn-primary" @click.prevent="openAddBank()">
+                    {{ trans("Ceres::Template.bankAddDataTitle") }}
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
 
         <div ref="bankInfoModal">
-            <div class="modal fade" tabindex="-1" role="dialog" data-keybord="false" data-backdrop="static">
+            <div class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" @click="resetData" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h4 class="modal-title">${headline}</h4>
                         </div>
+
                         <div class="modal-body">
                             <fieldset>
-                            <form id="my-bankForm">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="input-unit accountOwner" data-validate="text">
-                                            <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" :value="updateBankData.accountOwner">
-                                            <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.accHolder") }}*</label>
+                                <form id="my-bankForm">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="input-unit accountOwner" data-validate="text">
+                                                <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner">
+                                                <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.accHolder") }}*</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="input-unit">
+                                                <input type="text" name="kreditInstitut" v-model="updateBankData.bankName">
+                                                <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.bank") }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="input-unit iban" data-validate="regex">
+                                                <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban">
+                                                <label :for="'txt_firma' + _uid">IBAN*</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="input-unit no-bottom" data-validate="regex">
+                                                <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic">
+                                                <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.bankBicNotification") }}</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
-                                        <div class="input-unit">
-                                            <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" :value="updateBankData.bankName">
-                                            <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.bank") }}</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <div class="input-unit iban" data-validate="regex">
-                                            <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" :value="updateBankData.iban">
-                                            <label :for="'txt_firma' + _uid">IBAN*</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <div class="input-unit no-bottom" data-validate="regex">
-                                            <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" :value="updateBankData.bic">
-                                            <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.bankBicNotification") }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
                             </fieldset>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-medium btn-m-r" @click="closeModal">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                                {{ trans("Ceres::Template.generalCancel") }}
-                            </button>
-                            <button type="button" class="btn btn-primary btn-medium" @click="validateInput">
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                {{ trans("Ceres::Template.generalSave") }}
-                            </button>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="btn btn-primary btn-block" @click="validateInput()">{{ trans("Ceres::Template.generalSave") }}</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

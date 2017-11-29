@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-salutation-select" >
-    <select v-model="addressData.addressSalutation" class="custom-select" v-on:change="changeValue()">
-        <option v-bind:value="salutation.id" :selected="addressData.addressSalutation === index" v-for="(salutation, index) in currentSalutation">
+    <select :value="addressData.addressSalutation" class="custom-select" @input="emitInputEvent(parseInt($event.target.value))">
+        <option :value="salutation.id" :selected="addressData.addressSalutation === index" v-for="(salutation, index) in currentSalutation">
             ${ salutation.value }
         </option>
     </select>
