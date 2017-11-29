@@ -14642,6 +14642,10 @@ Vue.component("bank-data-select", {
          * @param doUpdate
          */
         openModal: function openModal(doUpdate) {
+            if (!doUpdate) {
+                this.resetData();
+            }
+
             this.doUpdate = doUpdate;
             _ValidationService2.default.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
@@ -14686,7 +14690,7 @@ Vue.component("bank-data-select", {
             this.updateBankData.lastUpdateBy = "customer";
 
             ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData).done(function (response) {
-                _this3.userBankData.splice(_self.updateBankIndex, 1, response);
+                _this3.userBankData.splice(_this3.updateBankIndex, 1, response);
                 _this3.checkBankDataSelection();
                 _this3.closeModal();
 
@@ -14731,7 +14735,7 @@ Vue.component("bank-data-select", {
             ApiService.delete("/rest/io/customer/bank_data/" + this.updateBankData.id).done(function (response) {
                 _this5.checkBankDataSelection(false);
                 _this5.closeDeleteModal();
-                _this5.userBankData.splice(_self.updateBankIndex, 1);
+                _this5.userBankData.splice(_this5.updateBankIndex, 1);
 
                 NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
             }).fail(function () {
@@ -14750,7 +14754,7 @@ Vue.component("bank-data-select", {
                 this.selectedBankData = this.userBankData[0];
             }
 
-            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id) {
+            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id) {
                 if (!this.doUpdate) {
                     this.selectedBankData = null;
                 } else {
