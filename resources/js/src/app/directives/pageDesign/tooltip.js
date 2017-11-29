@@ -1,4 +1,5 @@
-const initTooltip = (el) => {
+const initTooltip = el =>
+{
     setTimeout(() =>
     {
         $(el).tooltip({

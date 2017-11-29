@@ -10931,7 +10931,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":82,"services/NotificationService":101}],12:[function(require,module,exports){
+},{"exceptions/ExceptionMap":85,"services/NotificationService":104}],12:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -16244,8 +16244,10 @@ Vue.directive("tooltip", {
             }, 1);
         }
     },
-    bind: function bind(el) {
-        initTooltip(el);
+    bind: function bind(el, binding) {
+        if (typeof binding.value === "undefined" || binding.value) {
+            initTooltip(el);
+        }
     }
 });
 

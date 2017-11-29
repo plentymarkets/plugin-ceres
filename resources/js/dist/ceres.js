@@ -11256,7 +11256,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":82,"services/NotificationService":101}],12:[function(require,module,exports){
+},{"exceptions/ExceptionMap":85,"services/NotificationService":104}],12:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -16546,24 +16546,32 @@ Vue.directive("scroll-to-top", {
 },{}],84:[function(require,module,exports){
 "use strict";
 
+var initTooltip = function initTooltip(el) {
+    setTimeout(function () {
+        $(el).tooltip({
+            trigger: "hover",
+            // eslint-disable-next-line
+            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }, 1);
+};
+
 Vue.directive("tooltip", {
     unbind: function unbind(el) {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
-            setTimeout(function () {
-                $(el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-                console.log("init");
-            }, 1000);
+            initTooltip(el);
         } else {
             setTimeout(function () {
                 $(el).tooltip("dispose");
             }, 1);
+        }
+    },
+    bind: function bind(el, binding) {
+        if (typeof binding.value === "undefined" || binding.value) {
+            initTooltip(el);
         }
     }
 });
