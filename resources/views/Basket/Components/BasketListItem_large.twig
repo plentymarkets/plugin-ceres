@@ -26,15 +26,19 @@
         </div>
 
         <button type="button" class="item-remove btn btn-labeled btn-sm" @click="deleteItem" :disabled="waiting" :class="{ 'btn-link' : !deleteConfirmed, 'btn-danger' : deleteConfirmed }">
-              <span class="message" v-if="!deleteConfirmed">
+            <span class="message" v-if="!deleteConfirmed">
                    {{ trans("Ceres::Template.generalDelete") }}
-              </span>
+            </span>
             <span class="message" v-else>
                    {{ trans("Ceres::Template.generalDeleteNow") }}
-              </span>
-            <span class="btn-label btn-trans" @click.stop="resetDelete">
-                  <i v-waiting-animation="waitForDelete" class="fa fa-times"></i>
-              </span>
+            </span>
+            <span class="message" v-else>
+                {{ trans("Ceres::Template.generalDeleteNow") }}
+            </span>
+            <span class="btn-label" @click.stop="resetDelete">
+                <i v-if="!deleteConfirmed" class="fa fa-trash"></i>
+                <i v-else v-waiting-animation="waitForDelete" class="fa fa-times"></i>
+            </span>
         </button>
     </div>
     <!-- ./ITEM QUANTITY HANDLING -->
