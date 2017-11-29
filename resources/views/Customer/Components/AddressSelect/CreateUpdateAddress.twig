@@ -4,7 +4,7 @@
     <form id="billing_address_form" v-if="addressType === '1'">
         <div class="row">
 
-            <address-input-group template="#vue-address-input-group" :address-data="addressData" :address-type="addressType" :modal-type="modalType"></address-input-group>
+            <address-input-group template="#vue-address-input-group" :address-type="addressType" :modal-type="modalType" :value="addressData" @input="emitInputEvent($event)"></address-input-group>
 
             <div class="col-xs-12">
                 <button type="button" class="btn btn-primary btn-block" @click="validate" :disabled="waiting">{{ trans("Ceres::Template.generalSave") }}</button>
@@ -14,7 +14,7 @@
     <form id="delivery_address_form" v-else-if="addressType === '2'">
         <div class="row">
 
-            <address-input-group template="#vue-address-input-group" :address-data="addressData" :address-type="addressType" :modal-type="modalType"></address-input-group>
+            <address-input-group template="#vue-address-input-group" :address-type="addressType" :modal-type="modalType" :value="addressData" @input="emitInputEvent($event)"></address-input-group>
 
             <div class="col-xs-12">
                 <button type="button" class="btn btn-primary btn-block" @click="validate" :disabled="waiting">{{ trans("Ceres::Template.generalSave") }}</button>

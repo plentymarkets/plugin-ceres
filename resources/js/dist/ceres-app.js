@@ -11407,7 +11407,13 @@ Vue.component("address-input-group", {
         },
         addressType: String,
         modalType: String,
-        template: String
+        template: String,
+        value: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
     },
 
     data: function data() {
@@ -11424,10 +11430,6 @@ Vue.component("address-input-group", {
      */
     created: function created() {
         this.$options.template = this.template;
-
-        if (!this.addressData) {
-            this.addressData = {};
-        }
     },
 
 
@@ -11443,41 +11445,8 @@ Vue.component("address-input-group", {
                 this.localeToShow = this.defaultCountry;
             }
         },
-        getOptionType: function getOptionType(data, optionType) {
-            for (var i = 0; i < data.length; i++) {
-                if (optionType === data[i].typeId) {
-                    return data[i].value;
-                }
-            }
-            return "";
-        },
-        equalOptionValues: function equalOptionValues(newValue, data, optionType) {
-            var oldValue = this.getOptionType(data, optionType);
-
-            if (typeof newValue === "undefined") {
-                return oldValue;
-            }
-
-            return oldValue === newValue;
-        }
-    },
-
-    filters: {
-        optionType: {
-            read: function read(value, optionType) {
-                var data = this.addressData.options;
-
-                if (typeof data === "undefined") {
-                    return value;
-                } else if (this.modalType === "update" && !this.equalOptionValues(value, data, optionType)) {
-                    return value;
-                }
-
-                return this.getOptionType(data, optionType);
-            },
-            write: function write(value) {
-                return value;
-            }
+        emitInputEvent: function emitInputEvent(field, value) {
+            this.$emit("input", { field: field, value: value });
         }
     }
 });
@@ -11510,7 +11479,13 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {},
             addressToDelete: {},
-            deleteModal: ""
+            deleteModal: "",
+            addressOptionTypeFieldMap: {
+                1: "vatNumber",
+                4: "telephone",
+                9: "birthday",
+                11: "title"
+            }
         };
     },
 
@@ -11641,8 +11616,7 @@ Vue.component("address-select", {
          */
         showEditModal: function showEditModal(address) {
             this.modalType = "update";
-            // Creates a tmp address to prevent unwanted two-way binding
-            this.addressToEdit = JSON.parse(JSON.stringify(address));
+            this.addressToEdit = this.getAddressToEdit(address);
 
             if (typeof this.addressToEdit.addressSalutation === "undefined") {
                 this.addressToEdit.addressSalutation = 0;
@@ -11651,6 +11625,41 @@ Vue.component("address-select", {
             this.updateHeadline();
             _ValidationService2.default.unmarkAllFields($(this.$refs.addressModal));
             this.addressModal.show();
+        },
+        getAddressToEdit: function getAddressToEdit(address) {
+            // Creates a tmp address to prevent unwanted two-way binding
+            var addressToEdit = JSON.parse(JSON.stringify(address));
+
+            if (addressToEdit.options) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = addressToEdit.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var option = _step.value;
+
+                        var optionName = this.addressOptionTypeFieldMap[option.typeId];
+
+                        addressToEdit[optionName] = option.value || null;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return addressToEdit;
         },
 
 
@@ -11732,35 +11741,41 @@ Vue.component("address-select", {
             }
 
             return "";
+        },
+        setAddressToEditField: function setAddressToEditField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.addressToEdit[field] = value;
         }
     },
 
     filters: {
         optionType: function optionType(selectedAddress, typeId) {
             if (selectedAddress && selectedAddress.name2) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
 
                 try {
-                    for (var _iterator = selectedAddress.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var optionType = _step.value;
+                    for (var _iterator2 = selectedAddress.options[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var optionType = _step2.value;
 
                         if (optionType.typeId === typeId) {
                             return optionType.value;
                         }
                     }
                 } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
                 } finally {
                     try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
                         }
                     } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
                         }
                     }
                 }
@@ -11972,6 +11987,9 @@ Vue.component("create-update-address", {
                     }
                 }
             }
+        },
+        emitInputEvent: function emitInputEvent(event) {
+            this.$emit("input", event);
         }
     }
 });
@@ -11983,7 +12001,7 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref:invoice-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
 
     props: ["selectedAddressId", "addressList", "hasToValidate", "countryNameMap"],
 
@@ -12015,8 +12033,8 @@ Vue.component("invoice-address-select", {
         var _this = this;
 
         this.$nextTick(function () {
-            if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
-                _this.$refs.invoiceAddressSelect.showInitialAddModal();
+            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+                _this.$refs.invoice.showInitialAddModal();
             }
         });
     },
@@ -12334,8 +12352,17 @@ Vue.component("country-select", {
         /**
          * Method to fire when the country has changed
          */
-        countryChanged: function countryChanged() {
-            this.selectedStateId = null;
+        countryChanged: function countryChanged(value) {
+            this.$emit("country-changed", parseInt(value));
+            this.$emit("state-changed", null);
+        },
+
+
+        /**
+         * @param {*} value
+         */
+        stateChanged: function stateChanged(value) {
+            this.$emit("state-changed", parseInt(value));
         },
 
 
@@ -12457,6 +12484,14 @@ Vue.component("registration", {
                 component.isDisabled = false;
             });
         },
+
+        setAddressDataField: function setAddressDataField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+
+            this.billingAddress[field] = value;
+        },
+
 
         /**
          * Handle the user object which is send to the server
@@ -12700,9 +12735,11 @@ Vue.component("salutation-select", {
 
 
     methods: {
-        changeValue: function changeValue() {
+        emitInputEvent: function emitInputEvent(value) {
+            this.$emit("input", { field: "addressSalutation", value: value });
+
             if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
-                this.addressData.name1 = "";
+                this.$emit("input", { field: "name1", value: "" });
             }
         }
     }

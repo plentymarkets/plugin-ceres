@@ -97,6 +97,11 @@ Vue.component("registration", {
                 });
         },
 
+        setAddressDataField({field, value})
+        {
+            this.billingAddress[field] = value;
+        },
+
         /**
          * Handle the user object which is send to the server
          * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
