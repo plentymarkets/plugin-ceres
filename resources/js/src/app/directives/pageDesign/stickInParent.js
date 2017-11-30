@@ -33,11 +33,13 @@ Vue.directive("stick-in-parent",
         {
             const minSize = binding.value || 768;
 
-            window.addEventListener("resize", () => {
+            window.addEventListener("resize", () =>
+            {
                 checkElement(el, minSize);
             });
 
-            setTimeout(() => {
+            setTimeout(() =>
+            {
                 checkElement(el, minSize);
             }, 0);
         }
