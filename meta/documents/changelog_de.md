@@ -1,5 +1,29 @@
 # Release Notes für Ceres
 
+## v2.0.0 (2017-11-30)
+
+### Hinzugefügt
+
+- Es wurden diverse Ladeanimationen auf den Buttons hinzugefügt, um dem Benutzer ein besserers Feedback zu geben, wann etwas geladen wird.
+- Wenn sich innerhalb des Warenkorbs etwas aktualisiert, wird dies nun über eine Aktualisierungsanimation dargestellt.
+- Wenn sich im MyAccount-Bereich die Adressen ändern, dann werden die inputs disabled, bis die Informationen vom Server da sind, um Fehlverhalten auszuschließen.
+- Wenn sich im Checkout die Zahlungs- oder Versandarten ändern, werden die Elemente solange disabled bis die Informationen vom Server da sind, um Fehlverhalten auszuschließen.
+
+### Behoben
+
+- Fehlermeldungen die in der Warenkorbvorschau ausgelöst werden, haben nun eine besser Anzeige und sind nicht weiterhin hinter der Vorschau.
+- Es wurden diverse styling(css) Fehler behoben.
+
+### Geändert
+
+- Die Buttons zum ändern der Menge oder zum löschen im Warenkorb werden jetzt geblockt wenn ein Request noch nicht vom Server zurückgekommen ist, um Fehlverhalten auszuschließen.
+- Jedes Overlay besitzt jetzt einen Footer, in denen die Buttons dargestellt werden.
+- Das Menü im header nachdem man eingeloggt ist, hat ein neues Styling bekommen, um mit dem gesamten Style des headers zusammenzupassen.
+- Das Suche-Icon zeigt nun deutlicher, dass nach einem klick, die suche dort wieder geschlossen werden kann.
+- Alle Menüs im header können nun geschlossen werden, wenn man an eine andere stelle im Shop drückt.
+- Die Buttons zum hinzufügen von Adressen, dem bearbeiten oder dem löschen wurden angepasst, um für den Benutzer ersichtlicher zu sein.
+- Jeder Button in Ceres besitzt jetzt ein eindeutiges Icon, damit sie verständlicher wirken.
+
 ## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
