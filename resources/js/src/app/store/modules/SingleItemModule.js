@@ -46,12 +46,9 @@ const getters =
     {
         variationPropertySurcharge(state)
         {
-            if (!state && !state.variation.documents)
+            if (!state || !state.variation.documents)
             {
-                if (!state.variation.documents[0].data.properties)
-                {
-                    return 0;
-                }
+                return 0;
             }
 
             const addedProperties = state.variation.documents[0].data.properties.filter(property =>
