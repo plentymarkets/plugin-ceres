@@ -52,7 +52,10 @@ Vue.component("quantity-input", {
                     {
                         this.initDefaultVars();
 
-                        this.handleMissingItems();
+                        if (!this.compVertical)
+                        {
+                            this.handleMissingItems();
+                        }
                     }
                 }
             },
@@ -111,7 +114,7 @@ Vue.component("quantity-input", {
         {
             if (isNaN(this.compValue))
             {
-                this.compValue = this.internalMin || 1;
+                this.compValue = this.internalMin === 0 ? 0 : this.internalMin || 1;
             }
             else if (this.compValue < this.internalMin)
             {
@@ -181,6 +184,8 @@ Vue.component("quantity-input", {
                     this.$emit("out-of-stock", false);
                 }
             }
+
+            this.compValue = this.internalMin;
         }
     }
 });
