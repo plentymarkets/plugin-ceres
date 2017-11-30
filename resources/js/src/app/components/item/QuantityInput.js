@@ -156,7 +156,7 @@ Vue.component("quantity-input", {
 
         initDefaultVars()
         {
-            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 300;
+            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 500;
             this.internalMin = this.compMin || 1;
             this.internalMax = this.compMax || 9999;
             this.compVertical = this.compVertical || false;
