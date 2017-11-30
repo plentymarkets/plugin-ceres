@@ -17,6 +17,7 @@
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
+{% set currencyFormat = config("Ceres.currency.format") %}
 
 {# <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title> #}
 
@@ -50,7 +51,9 @@
             enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",
             enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}",
             enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
-            shopName: "{{ config("Ceres.header.company_name") }}"
+            shopName: "{{ config("Ceres.header.company_name") }}",
+            activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
+            currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }}
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},

@@ -90,6 +90,13 @@ var init = (function($, window, document)
             {
                 $("#searchBox").collapse("hide");
             }
+
+            if ((evt.target.id != "currencySelect") &&
+                ($(evt.target).parents("#currencySelect").length <= 0) &&
+                ($("#currencySelect").attr("aria-expanded") == "true"))
+            {
+                $("#currencySelect").collapse("hide");
+            }
         });
 
         $toggleListView.on("click", function(evt)
