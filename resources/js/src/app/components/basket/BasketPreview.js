@@ -12,7 +12,8 @@ Vue.component("basket-preview", {
 
     computed: Vuex.mapState({
         basket: state => state.basket.data,
-        basketItems: state => state.basket.items
+        basketItems: state => state.basket.items,
+        basketNotifications: state => state.basket.basketNotifications
     }),
 
     created()
