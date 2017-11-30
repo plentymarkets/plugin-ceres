@@ -8305,7 +8305,7 @@ var actions = {};
 
 var getters = {
     variationPropertySurcharge: function variationPropertySurcharge(state) {
-        if (!state || !state.variation.documents[0].data.properties) {
+        if (!state || !state.variation.documents && !state.variation.documents[0].data.properties) {
             return 0;
         }
 
