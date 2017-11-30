@@ -1242,7 +1242,7 @@
       },
       "default"                   : ""
     },
-{
+    {
         "tab"   : "Currencies",
         "key"   : "currency.format",
         "label" : "Format of currencies",
