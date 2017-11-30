@@ -32,8 +32,7 @@
         </div>
 
         <div class="item-total-price">
-            ${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }
-            {# ${ basketItem.variation.data.calculatedPrices.formatted.defaultUnitPrice } #}
+            ${ basketItem.quantity * basketItem.price | currency(basketItem.variation.data.calculatedPrices.default.currency) }
         </div>
 
         <div v-for="attribute in basketItem.variation.data.attributes">
@@ -59,9 +58,10 @@
             </span>
             <span class="message" v-else>
                 {{ trans("Ceres::Template.generalDeleteNow") }}
-              </span>
+            </span>
             <span class="btn-label" @click.stop="resetDelete">
-                <i v-waiting-animation="waitForDelete" class="fa fa-times"></i>
+                <i v-if="!deleteConfirmed" class="fa fa-trash"></i>
+                <i v-else v-waiting-animation="waitForDelete" class="fa fa-times"></i>
             </span>
         </button>
     </div>

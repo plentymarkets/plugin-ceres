@@ -41,14 +41,24 @@ Vue.component("item-search", {
     {
         search()
         {
-            if (document.location.pathname === "/search")
+            if (this.currentSearchString.length)
             {
-                this.$store.dispatch("searchItems", this.currentSearchString);
+                if (document.location.pathname === "/search")
+                {
+                    this.updateTitle(this.currentSearchString);
+                    this.$store.dispatch("searchItems", this.currentSearchString);
+                }
+                else
+                {
+                    window.open("/search?query=" + this.currentSearchString, "_self", false);
+                }
             }
-            else
-            {
-                window.open("/search?query=" + this.currentSearchString, "_self", false);
-            }
+        },
+
+        updateTitle(searchString)
+        {
+            document.querySelector("#searchPageTitle").innerHTML = Translations.Template.generalSearchResults + " " + searchString;
+            document.title = Translations.Template.generalSearchResults + " " + searchString + " | " + App.config.shopName;
         },
 
         initAutocomplete()

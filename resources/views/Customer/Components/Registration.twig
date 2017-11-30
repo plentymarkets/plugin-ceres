@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" :address-data.sync="billingAddress" address-type="1"></address-input-group>
+                <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" address-type="1" :value="billingAddress" @input="setAddressDataField($event)"></address-input-group>
             </div>
         </div>
         <div class="modal-footer">

@@ -70,18 +70,18 @@
                             </span>
                                 <!---->
                                 <div class="item-controls" v-if="address.id != -99">
-                                <span class="item-edit">
-                                    <button class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
-                                        {{ trans("Ceres::Template.generalEdit") }}
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                                <span class="item-remove">
-                                    <button class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
-                                        {{ trans("Ceres::Template.generalDelete") }}
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>
-                                </span>
+                                    <span class="item-edit">
+                                        <button class="btn btn-primary btn-medium" @click.prevent="showEditModal(address)">
+                                            {{ trans("Ceres::Template.generalEdit") }}
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                    <span class="item-remove">
+                                        <button class="btn btn-medium btn-remove-address" @click.prevent="showDeleteModal(address)">
+                                            {{ trans("Ceres::Template.generalDelete") }}
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </label>
                         </li>
@@ -108,7 +108,8 @@
                                         :address-data="addressToEdit"
                                         :address-modal="addressModal"
                                         :modal-type="modalType"
-                                        :address-type="addressType">
+                                        :address-type="addressType"
+                                        @input="setAddressToEditField($event)">
                                 </create-update-address>
                             </fieldset>
                         </div>

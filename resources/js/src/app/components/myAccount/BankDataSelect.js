@@ -95,6 +95,11 @@ Vue.component("bank-data-select", {
          */
         openModal(doUpdate)
         {
+            if (!doUpdate)
+            {
+                this.resetData();
+            }
+
             this.doUpdate = doUpdate;
             ValidationService.unmarkAllFields($(this.$refs.bankInfoModal));
             this.bankInfoModal.show();
@@ -144,7 +149,7 @@ Vue.component("bank-data-select", {
             ApiService.put("/rest/io/customer/bank_data/" + this.updateBankData.id, this.updateBankData)
                 .done(response =>
                 {
-                    this.userBankData.splice(_self.updateBankIndex, 1, response);
+                    this.userBankData.splice(this.updateBankIndex, 1, response);
                     this.checkBankDataSelection();
                     this.closeModal();
 
@@ -193,7 +198,7 @@ Vue.component("bank-data-select", {
                 {
                     this.checkBankDataSelection(false);
                     this.closeDeleteModal();
-                    this.userBankData.splice(_self.updateBankIndex, 1);
+                    this.userBankData.splice(this.updateBankIndex, 1);
 
                     NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
                 })
@@ -215,7 +220,7 @@ Vue.component("bank-data-select", {
                 this.selectedBankData = this.userBankData[0];
             }
 
-            if (!addData && this.selectedBankData && this.selectedBankData.id == this.updateBankData.id)
+            if (!addData && this.selectedBankData && this.selectedBankData.id === this.updateBankData.id)
             {
                 if (!this.doUpdate)
                 {
