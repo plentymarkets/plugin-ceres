@@ -46,21 +46,24 @@ const getters =
     {
         variationPropertySurcharge(state)
         {
-            if (!state || !state.variation.documents && !state.variation.documents[0].data.properties)
+            if (!state || !state.variation.documents)
             {
                 return 0;
             }
 
-            const addedProperties = state.variation.documents[0].data.properties.filter(property =>
-            {
-                return !!property.property.value;
-            });
-
             let sum = 0;
 
-            for (const property of addedProperties)
+            if (state.variation.documents[0].data.properties)
             {
-                sum += property.property.surcharge;
+                const addedProperties = state.variation.documents[0].data.properties.filter(property =>
+                    {
+                    return !!property.property.value;
+                });
+
+                for (const property of addedProperties)
+                    {
+                    sum += property.property.surcharge;
+                }
             }
 
             return sum;
