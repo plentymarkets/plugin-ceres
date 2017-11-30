@@ -21,6 +21,13 @@
     },
     {
         "tab"       : "Global",
+        "key"       : "global.default_contact_class_b2b",
+        "label"     : "Default customer class B2B",
+        "type"      : "text",
+        "default"   : ""
+    },
+    {
+        "tab"       : "Global",
         "key"       : "global.enableOldUrlPattern",
         "label"     : "Enable Callisto route pattern for items",
         "type"      : "checkbox",
@@ -814,7 +821,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "texts.name_asc"
     },
@@ -849,7 +858,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -884,7 +895,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -945,7 +958,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "item.score"
     },
@@ -981,7 +996,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -1017,7 +1034,9 @@
             "item.manufacturer.externalName_asc"        : "Manufacturer A-Z",
             "item.manufacturer.externalName_desc"       : "Manufacturer Z-A",
             "item.manufacturer.position_asc"            : "Manufacturer position ⬆",
-            "item.manufacturer.position_desc"           : "Manufacturer position ⬇"
+            "item.manufacturer.position_desc"           : "Manufacturer position ⬇",
+            "stock.net_asc"                             : "Stock ⬆",
+            "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
     },
@@ -1222,6 +1241,86 @@
 
       },
       "default"                   : ""
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.format",
+        "label" : "Format of currencies",
+        "type"  : "dropdown",
+        "possibleValues" :
+        {
+            "name"  :   "ISO code",
+            "symbol":   "Symbol"
+        },
+        "default"   : "name"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.enable_selection",
+        "label" : "Allow customer to change the currency",
+        "type"  : "checkbox",
+        "default": "true"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.format_selection",
+        "label" : "Format of currencies in header",
+        "type"  : "dropdown",
+        "possibleValues" :
+                  {
+                      "name"  :   "ISO code",
+                      "symbol":   "Symbol",
+                      "all"   :   "ISO code and symbol"
+                  },
+        "default"   : "all"
+    },
+    {
+        "tab"   : "Currencies",
+        "key"   : "currency.available_currencies",
+        "label" : "Available currencies",
+        "type"  : "multi_select",
+        "possibleValues":
+        {
+            "AED" : "AED (United Arab Emirates dirham)",
+            "ARS" : "ARS (Argentine peso)",
+            "AUD" : "AUD (Australian dollar)",
+            "BGN" : "BGN (Bulgarian lev)",
+            "BHD" : "BHD (Bahraini dinar)",
+            "BRL" : "BRL (Brazilian real)",
+            "CAD" : "CAD (Canadian dollar)",
+            "CHF" : "CHF (Swiss franc)",
+            "CNY" : "CNY (Chinese Renminbi)",
+            "CZK" : "CZK (Czech koruna)",
+            "DKK" : "DKK (Danish krone)",
+            "EUR" : "EUR (Euro)",
+            "GBP" : "GBP (Pound sterling)",
+            "HKD" : "HKD (Hong Kong dollar)",
+            "HRK" : "HRK (Croatian kuna)",
+            "HUF" : "HUF (Hungarian forint)",
+            "IDR" : "IDR (Indonesian rupiah)",
+            "INR" : "INR (Indian rupee)",
+            "JPY" : "JPY (Japanese yen)",
+            "MXN" : "MXN (Mexican peso)",
+            "MYR" : "MYR (Malaysian ringgit)",
+            "NOK" : "NOK (Norwegian krone)",
+            "NZD" : "NZD (New Zealand dollar)",
+            "PHP" : "PHP (Philippine peso)",
+            "PLN" : "PLN (Polish zloty)",
+            "QAR" : "QAR (Qatari riyal)",
+            "RON" : "RON (Romanian leu)",
+            "RUB" : "RUB (Russian ruble)",
+            "SEK" : "SEK (Swedish krona)",
+            "SGD" : "SGD (Singapore dollar)",
+            "THB" : "THB (Thai baht)",
+            "TRY" : "TRY (Turkish lira)",
+            "TWD" : "TWD (New Taiwan dollar)",
+            "UAH" : "UAH (Ukrainian hryvnia)",
+            "USD" : "USD (United States dollar)",
+            "VND" : "VND (Vietnamese dong)",
+            "XCD" : "XCD (Eastern Caribbean dollar)",
+            "ZAR" : "ZAR (South African rand)"
+        },
+        "default" : "all"
     },
     {
         "tab"                         : "SEO",

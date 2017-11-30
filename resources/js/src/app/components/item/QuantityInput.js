@@ -82,6 +82,8 @@ Vue.component("quantity-input", {
         {
             this.handleMissingItems();
         }
+
+        this.validateValue();
     },
 
     methods:

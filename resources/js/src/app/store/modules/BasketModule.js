@@ -8,7 +8,8 @@ const state =
             item: {},
             quantity: null
         },
-        isBasketLoading: false
+        isBasketLoading: false,
+        basketNotifications: []
     };
 
 const mutations =
@@ -43,6 +44,16 @@ const mutations =
             }
         },
 
+        addBasketNotification(state, {type, message})
+        {
+            state.basketNotifications.push({type: type, message: message});
+        },
+
+        clearOldestNotification(state)
+        {
+            state.basketNotifications.splice(0, 1);
+        },
+
         updateBasketItemQuantity(state, {basketItem, quantity})
         {
             const item = state.items.find(item => basketItem.id === item.id);
@@ -73,6 +84,16 @@ const mutations =
 
 const actions =
     {
+        addBasketNotification({commit}, {type, message})
+        {
+            commit("addBasketNotification", {type: type, message: message});
+
+            setTimeout(() =>
+            {
+                commit("clearOldestNotification");
+            }, 5000);
+        },
+
         addBasketItem({commit}, basketItem)
         {
             return new Promise((resolve, reject) =>
