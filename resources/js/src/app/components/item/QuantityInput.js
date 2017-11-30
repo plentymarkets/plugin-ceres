@@ -186,6 +186,8 @@ Vue.component("quantity-input", {
             }
 
             this.compValue = this.internalMin;
+
+            this.onValueChanged();
         }
     }
 });
