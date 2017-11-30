@@ -10564,7 +10564,7 @@ Vue.component("add-to-basket", {
 
                 this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
                     _this2.waiting = false;
-                    _this2.openAddToBasketOverlay();
+                    _this2.openAddToBasketOverlay(basketObject.quantity);
                 }, function (error) {
                     _this2.waiting = false;
                     NotificationService.error(Translations.Template[_ExceptionMap2.default.get(error.data.exceptionCode.toString())]).closeAfter(5000);
@@ -10582,10 +10582,10 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay: function openAddToBasketOverlay() {
+        openAddToBasketOverlay: function openAddToBasketOverlay(stashedQuantity) {
             var latestBasketEntry = {
                 item: this.item,
-                quantity: this.quantity
+                quantity: stashedQuantity
             };
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);
@@ -11983,7 +11983,7 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref:invoice-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
 
     props: ["selectedAddressId", "addressList", "hasToValidate", "countryNameMap"],
 
@@ -12015,8 +12015,8 @@ Vue.component("invoice-address-select", {
         var _this = this;
 
         this.$nextTick(function () {
-            if (App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
-                _this.$refs.invoiceAddressSelect.showInitialAddModal();
+            if (App.isCheckoutView && _this.addressList && _this.addressList.length <= 0) {
+                _this.$refs.invoice.showInitialAddModal();
             }
         });
     },
@@ -13376,7 +13376,9 @@ Vue.component("quantity-input", {
                     if (JSON.stringify(val) !== JSON.stringify(oldVal)) {
                         this.initDefaultVars();
 
-                        this.handleMissingItems();
+                        if (!this.compVertical) {
+                            this.handleMissingItems();
+                        }
                     }
                 }
             },
@@ -13407,13 +13409,13 @@ Vue.component("quantity-input", {
         countValueUp: function countValueUp() {
             if (!(this.compValue === this.internalMax) && !this.waiting) {
                 this.compValue++;
-                this.validateValue(this.compValue);
+                this.validateValue();
             }
         },
         countValueDown: function countValueDown() {
             if (!(this.compValue === this.internalMin) && !this.waiting) {
                 this.compValue--;
-                this.validateValue(this.compValue);
+                this.validateValue();
             }
         },
         setValue: function setValue(value) {
@@ -13422,7 +13424,7 @@ Vue.component("quantity-input", {
         },
         validateValue: function validateValue() {
             if (isNaN(this.compValue)) {
-                this.compValue = this.internalMin || 1;
+                this.compValue = this.internalMin === 0 ? 0 : this.internalMin || 1;
             } else if (this.compValue < this.internalMin) {
                 this.compValue = this.internalMin;
             } else if (this.compValue > this.internalMax) {
@@ -13434,20 +13436,24 @@ Vue.component("quantity-input", {
         onValueChanged: function onValueChanged() {
             var _this2 = this;
 
-            if (this.timeoutHandle) {
-                window.clearTimeout(this.timeoutHandle);
-            }
+            if (this.compTimeout === 0) {
+                this.$emit("quantity-change", this.compValue);
+            } else {
+                if (this.timeoutHandle) {
+                    window.clearTimeout(this.timeoutHandle);
+                }
 
-            this.timeoutHandle = window.setTimeout(function () {
-                _this2.$emit("quantity-change", _this2.compValue);
-            }, this.compTimeout);
+                this.timeoutHandle = window.setTimeout(function () {
+                    _this2.$emit("quantity-change", _this2.compValue);
+                }, this.compTimeout);
+            }
         },
         checkDefaultVars: function checkDefaultVars() {
             this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
             this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
         },
         initDefaultVars: function initDefaultVars() {
-            this.compTimeout = this.compTimeout || 500;
+            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 500;
             this.internalMin = this.compMin || 1;
             this.internalMax = this.compMax || 9999;
             this.compVertical = this.compVertical || false;
@@ -13468,6 +13474,10 @@ Vue.component("quantity-input", {
                     this.$emit("out-of-stock", false);
                 }
             }
+
+            this.compValue = this.internalMin;
+
+            this.onValueChanged();
         }
     }
 });
@@ -15783,23 +15793,32 @@ Vue.directive("scroll-to-top", {
 },{}],81:[function(require,module,exports){
 "use strict";
 
+var initTooltip = function initTooltip(el) {
+    setTimeout(function () {
+        $(el).tooltip({
+            trigger: "hover",
+            // eslint-disable-next-line
+            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }, 1);
+};
+
 Vue.directive("tooltip", {
     unbind: function unbind(el) {
         $(el).tooltip("dispose");
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
-            setTimeout(function () {
-                $(el).tooltip({
-                    trigger: "hover",
-                    // eslint-disable-next-line
-                    template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-                });
-            }, 1);
+            initTooltip(el);
         } else {
             setTimeout(function () {
                 $(el).tooltip("dispose");
             }, 1);
+        }
+    },
+    bind: function bind(el, binding) {
+        if (typeof binding.value === "undefined" || binding.value) {
+            initTooltip(el);
         }
     }
 });
