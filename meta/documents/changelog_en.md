@@ -1,6 +1,48 @@
 # Release Notes for Ceres
 
-## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>ÜOverview of all changes</b></a>
+## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The version of the JavaScript framework Vue has been updated from Vue1 to Vue2. For further information refer to the <a href="https://forum.plentymarkets.com/t/news-technologie-update-in-ceres-vue2-und-vuex/77116" target="_blank"><b>forum</b></a>.
+- The technology VueX has been integrated in the online store.
+- The template container `SingleItem.AdditionalContentAfterVAT` has been added for displaying additional content after the **VAT** information in the single item view (Thanks <a href="https://github.com/jalie" target="_blank"><b>@jalie</b></a>).
+- The template container `RegistrationOverlay.ExtendOverlayButtons` has been added for displaying additional content in the registration overlay (Thanks <a href="https://github.com/mkreusch" target="_blank"><b>@mkreusch</b></a>).
+- A mega menu has been added for the navigation. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#80" target="_blank"><b>Customising the header and footer</b></a>.
+- A default customer class for B2B customers can now be specified in Ceres. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#45" target="_blank"><b>Carrying out global settings</b></a>.
+- Items can now be sorted by stock in the category view using the **Recommended item sorting** option. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#200" target="_blank"><b>Customising the pagination and sorting</b></a>.
+- A customer that ordered as a guest may now change the payment method on the order confirmation page if enabled.
+- A customer that ordered as a guest can now pay an order subsequently, e.g. when the payment method changes.
+- An error message has been added that will be displayed when an error occurs during adding items to the shopping cart.
+- Currency settings can now be carried out in Ceres. For further information refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#203" target="_blank"><b>Carrying out settings for currencies</b></a>.
+- Various loading animations on buttons have been added to provide better feedback to customers when something is loaded.
+- If an element updates in the shopping cart, a loading animation is displayed.
+- When changing addresses in the **My account** area, the input fields will now be disabled until the address data is loaded from the server.
+- When changing the payment method or shipping method in the checkout, the related elements will now be disabled until the data is loaded from the server.
+
+### Fixed
+
+- Error messages triggered in the shopping cart preview will now be displayed correctly.
+- Various CSS styling issues have been fixed.
+- Due to an error, the item conditions hasn't been displayed in the single item view. This has been fixed.
+- Due to an error the **My Account** area could not be loaded when loading the orders of a customer.
+- Due to an error prices with different VAT rated haven't been displayed correctly. This has been fixed.
+- Sums and prices on the page for manually created orders will now be displayed correctly.
+- Due to an error the stock check in the shopping cart didn't work properly. This has been fixed.
+- It is not possible anymore to perform an empty search.
+
+### Changed
+
+- The buttons for changing the item quantity or for deleting an item in the shopping cart will now be deactivated until the server responded.
+- Every overlay has a footer to display the buttons.
+- The menu in the header that is displayed after logging in has been re-designed to match the global design of the header.
+- The search icon now displays where the search can be closed.
+- All menus in the header can now be closed by clicking anywhere in the online store.
+- The buttons for adding, editing and deleting addresses have been re-designed to be clearer to the customer.
+- A unique icon has been added to all buttons in Ceres in order to make the buttons more understandable.
+- A **Back** button has been added in the mobile navigation referring to the parent category.
+
+## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 

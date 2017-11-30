@@ -1,28 +1,46 @@
 # Release Notes für Ceres
 
-## v2.0.0 (2017-11-30)
+## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
-- Es wurden diverse Ladeanimationen auf den Buttons hinzugefügt, um dem Benutzer ein besserers Feedback zu geben, wann etwas geladen wird.
+- Die Version des JavaScript-Frameworks wurde von Vue1 auf Vue2 aktualisiert. Weitere Informationen dazu finden Sie im <a href="https://forum.plentymarkets.com/t/news-technologie-update-in-ceres-vue2-und-vuex/77116" target="_blank"><b>Forum</b></a>.
+- Die Technologie VueX wurde in den Webshop integriert.
+- Der Template-Container `SingleItem.AdditionalContentAfterVAT` wurde hinzugefügt, um zusätzlichen Inhalt hinter der Mehrwehrtsteuer in der Einzelansicht eines Artikels anzuzeigen (Vielen Dank <a href="https://github.com/jalie" target="_blank"><b>@jalie</b></a>).
+- Der Template-Container `RegistrationOverlay.ExtendOverlayButtons` wurde hinzugefügt, um zusätzlichen Inhalt im Registrierungs-Overlay anzuzeigen (Vielen Dank <a href="https://github.com/mkreusch" target="_blank"><b>@mkreusch</b></a>).
+- Der Navigation wurde ein Mega-Menü hinzugefügt. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#80" target="_blank"><b>Header und Footer anpassen</b></a>.
+- In Ceres kann nun eine Standardkundenklasse für B2B-Kunden eingestellt werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#45" target="_blank"><b>Globale Einstellungen vornehmen</b></a>.
+- Über die **Empfohlene Artikelsortierung** können Artikel in der Kategorieansicht nun auch nach Bestand sortiert werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#200" target="_blank"><b>Paginierung und Sortierung anpassen</b></a>.
+- Zahlungsarten können nun auch bei Gastbestellungen auf der Auftragsbestätigungsseite geändert werden.
+- Aufträge können nun auch bei Gastbestellungen nachträglich bezahlt werden, z.B. wenn die Zahlungsart geändert wird.
+- Eine Fehlermeldung wurde hinzugefügt, die angezeigt wird, wenn beim Hinzufügen von Artikeln zum Warenkorb Fehler auftreten.
+- In Ceres können nun Währungseinstellungen vorgenommen werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#203" target="_blank"><b>Währungseinstellungen vornehmen</b></a>.
+- Es wurden diverse Ladeanimationen auf den Buttons hinzugefügt, um dem Benutzer ein besseres Feedback zu geben, wann etwas geladen wird.
 - Wenn sich innerhalb des Warenkorbs etwas aktualisiert, wird dies nun über eine Aktualisierungsanimation dargestellt.
-- Wenn sich im MyAccount-Bereich die Adressen ändern, dann werden die inputs disabled, bis die Informationen vom Server da sind, um Fehlverhalten auszuschließen.
-- Wenn sich im Checkout die Zahlungs- oder Versandarten ändern, werden die Elemente solange disabled bis die Informationen vom Server da sind, um Fehlverhalten auszuschließen.
+- Wenn sich im **Mein Konto**-Bereich die Adressen ändern, dann werden die Eingabefelder deaktiviert, bis die Adressdaten vom Server geladen wurden, um Fehlverhalten auszuschließen.
+- Wenn sich im Checkout die Zahlungs- oder Versandarten ändern, werden die Elemente deaktiviert, bis die Daten vom Server geladen wurden, um Fehlverhalten auszuschließen.
 
 ### Behoben
 
-- Fehlermeldungen die in der Warenkorbvorschau ausgelöst werden, haben nun eine besser Anzeige und sind nicht weiterhin hinter der Vorschau.
-- Es wurden diverse styling(css) Fehler behoben.
+- Fehlermeldungen, die in der Warenkorbvorschau ausgelöst werden, werden nun besser dargestellt und nicht mehr hinter der Vorschau geladen.
+- Es wurden diverse Styling-Fehler im CSS behoben.
+- Ein Fehler führte dazu, dass der Artikelzustand auf der Einzelansicht eines Artikels nicht angezeigt wurde. Dies wurde behoben.
+- Durch einen Fehler konnte der **Mein Konto**-Bereich nicht geladen werden, wenn die Aufträge eines Kunden geladen wurden. Dies wurde behoben.
+- Durch einen Fehler wurden Preise mit verschiedenen Mehrwertsteuersätzen nicht korrekt angezeigt. Dies wurde behoben.
+- Summen auf der Auftragsseite für manuell erstellte Aufträge werden nun korrekt angezeigt.
+- Ein Fehler führte dazu, dass die Bestandsprüfung im Warenkorb nicht richtig funktionierte. Dies wurde behoben.
+- Eine leere Suche kann nun nicht mehr ausgeführt werden.
 
 ### Geändert
 
-- Die Buttons zum ändern der Menge oder zum löschen im Warenkorb werden jetzt geblockt wenn ein Request noch nicht vom Server zurückgekommen ist, um Fehlverhalten auszuschließen.
-- Jedes Overlay besitzt jetzt einen Footer, in denen die Buttons dargestellt werden.
-- Das Menü im header nachdem man eingeloggt ist, hat ein neues Styling bekommen, um mit dem gesamten Style des headers zusammenzupassen.
-- Das Suche-Icon zeigt nun deutlicher, dass nach einem klick, die suche dort wieder geschlossen werden kann.
-- Alle Menüs im header können nun geschlossen werden, wenn man an eine andere stelle im Shop drückt.
-- Die Buttons zum hinzufügen von Adressen, dem bearbeiten oder dem löschen wurden angepasst, um für den Benutzer ersichtlicher zu sein.
-- Jeder Button in Ceres besitzt jetzt ein eindeutiges Icon, damit sie verständlicher wirken.
+- Die Buttons zum Ändern der Artikelmenge oder zum Löschen von Artikeln im Warenkorb werden deaktiviert, wenn ein Request noch nicht vom Server zurückgekommen ist, um Fehlverhalten auszuschließen.
+- Jedes Overlay besitzt jetzt einen Footer, in dem die Buttons dargestellt werden.
+- Das Menü im Header, das angezeigt wird, nachdem man eingeloggt ist, hat ein neues Styling bekommen, um dem gesamten Style des Headers zu entsprechen.
+- Das Suche-Symbol zeigt nun deutlicher, dass die suche nach einem Klick wieder geschlossen werden kann.
+- Alle Menüs im Header können nun geschlossen werden, wenn man an eine andere Stelle im Webshop klickt.
+- Die Buttons zum Hinzufügen, Bearbeiten und Löschen von Adressen wurden angepasst, um für den Benutzer sichtbarer zu sein.
+- Allen Buttons in Ceres wurde ein eindeutiges Symbol hinzugefügt, um diese verständlicher zu machen.
+- In der mobilen Navigation wurde ein **Zurück**-Button auf die Oberkategorie hinzugefügt.
 
 ## v1.7.2 (2017-11-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.1...1.7.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
