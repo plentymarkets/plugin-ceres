@@ -5,7 +5,7 @@
             <button class="btn btn-secondary" :class="{'disabled': compMax && compValue === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @change="setValue($event.target.value)" :disabled="waiting">
+        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting">
 
         <span class="input-group-btn" v-tooltip="compMin && compValue === compMin && compMin === internalMin" data-toggle="tooltip"
                     data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
@@ -19,7 +19,7 @@
             <button class="btn btn-secondary" :class="{'disabled': compMin && compValue === compMin && compMin === internalMin || compValue <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
         </span>
 
-        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @change="setValue($event.target.value)" :disabled="waiting">
+        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting">
 
         <span class="input-group-btn" v-tooltip="compMax && compValue === internalMax && internalMax != 0" data-toggle="tooltip" 
                     data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
