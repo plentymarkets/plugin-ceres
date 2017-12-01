@@ -401,23 +401,25 @@ Custom classes
     height: 500px;
   }
 }
-@include media-breakpoint-up(md) {
-  .owl-thumbs {
+.owl-thumbs {
+  display: inline-block;
+  .owl-thumb {
+    object-fit: contain;
+    width: 8em;
+    height: 8em;
     display: inline-block;
-    .owl-thumb {
-      object-fit: contain;
-      width: 8em;
-      height: 8em;
-      display: inline-block;
-      vertical-align: middle;
-      background:$white;
-      border:1px solid transparent;
-      margin:.5rem .5rem 0 0;
-      &.active,
-      &:hover {
-        border:1px solid $brand-primary;
-        cursor: pointer;
-      }
+    vertical-align: middle;
+    background:$white;
+    border:1px solid transparent;
+    margin:.5rem .5rem 0 0;
+    &.active,
+    &:hover {
+      border:1px solid $brand-primary;
+      cursor: pointer;
+    }
+
+    @include media-breakpoint-down(md) {
+      height: 4em;
     }
   }
 }

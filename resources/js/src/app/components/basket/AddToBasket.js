@@ -71,7 +71,7 @@ Vue.component("add-to-basket", {
                     response =>
                     {
                         this.waiting = false;
-                        this.openAddToBasketOverlay();
+                        this.openAddToBasketOverlay(basketObject.quantity);
                     },
                     error =>
                     {
@@ -94,12 +94,12 @@ Vue.component("add-to-basket", {
         /**
          * open the AddItemToBasketOverlay
          */
-        openAddToBasketOverlay()
+        openAddToBasketOverlay(stashedQuantity)
         {
             const latestBasketEntry =
                 {
                     item: this.item,
-                    quantity: this.quantity
+                    quantity: stashedQuantity
                 };
 
             this.$store.commit("setLatestBasketEntry", latestBasketEntry);

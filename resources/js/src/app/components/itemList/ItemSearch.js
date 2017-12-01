@@ -45,6 +45,7 @@ Vue.component("item-search", {
             {
                 if (document.location.pathname === "/search")
                 {
+                    this.updateTitle(this.currentSearchString);
                     this.$store.dispatch("searchItems", this.currentSearchString);
                 }
                 else
@@ -52,6 +53,12 @@ Vue.component("item-search", {
                     window.open("/search?query=" + this.currentSearchString, "_self", false);
                 }
             }
+        },
+
+        updateTitle(searchString)
+        {
+            document.querySelector("#searchPageTitle").innerHTML = Translations.Template.generalSearchResults + " " + searchString;
+            document.title = Translations.Template.generalSearchResults + " " + searchString + " | " + App.config.shopName;
         },
 
         initAutocomplete()

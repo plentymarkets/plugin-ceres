@@ -49,24 +49,6 @@ var init = (function($, window, document)
             }, "xml");
         });
 
-        // Sticky sidebar single item
-        if (window.matchMedia("(min-width: 768px)").matches)
-        {
-            var $singleRightside = $(".single-rightside");
-            var $headHeight = $(".top-bar").height();
-
-            $singleRightside.stick_in_parent({offset_top: $headHeight + 10});
-
-            $singleRightside.on("sticky_kit:bottom", function()
-            {
-                $(this).parent().css("position", "static");
-            })
-                .on("sticky_kit:unbottom", function()
-                {
-                    $(this).parent().css("position", "relative");
-                });
-        }
-
         var $toggleListView = $(".toggle-list-view");
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
@@ -107,6 +89,13 @@ var init = (function($, window, document)
                 ($("#searchBox").attr("aria-expanded") == "true"))
             {
                 $("#searchBox").collapse("hide");
+            }
+
+            if ((evt.target.id != "currencySelect") &&
+                ($(evt.target).parents("#currencySelect").length <= 0) &&
+                ($("#currencySelect").attr("aria-expanded") == "true"))
+            {
+                $("#currencySelect").collapse("hide");
             }
         });
 
