@@ -69,7 +69,9 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 this.setPriceFromData();
 
-                if (this.timeToClose <= 0)
+                const timeToClose = 0;
+
+                if (timeToClose <= 0)
                 {
                     ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
                 }
@@ -97,6 +99,14 @@ Vue.component("add-item-to-basket-overlay", {
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
                 this.price = graduatedPrice + propertySurcharge;
+            }
+        },
+
+        closeOverlay()
+        {
+            if (this.timerVar)
+            {
+                clearInterval(this.timerVar);
             }
         },
 
