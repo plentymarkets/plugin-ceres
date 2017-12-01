@@ -82,7 +82,7 @@
                             <span>${ currentVariation.unit.content }</span>
                             <span>${ currentVariation.unit.names.name }</span>
                         </div>
-                        <div v-if="currentVariation.mayShowUnitPrice">
+                        <div v-if="currentVariation.variation.mayShowUnitPrice">
                             {{ trans("Ceres::Template.itemUnitPrice") }}
                             <span class="base-price-value">${ currentVariation.calculatedPrices.formatted.basePrice }</span>
                         </div>

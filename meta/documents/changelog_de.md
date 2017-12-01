@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v2.0.1 (unknown)
+
+### Behoben
+
+- Die Grundpreise werden im **SingleItem** werden nun korrekt ausgegeben, wenn am Artikel konfiguriert.
+
 ## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
