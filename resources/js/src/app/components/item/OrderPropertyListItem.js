@@ -13,7 +13,8 @@ Vue.component("order-property-list-item", {
     data()
     {
         return {
-            inputValue: ""
+            inputValue: "",
+            selectedFile: null
         };
     },
 
@@ -35,6 +36,17 @@ Vue.component("order-property-list-item", {
             }
 
             return valueType;
+        },
+        selectedFileName()
+        {
+            if ( this.selectedFile )
+            {
+                return this.selectedFile.name;
+            }
+            else
+            {
+                return "";
+            }
         }
     },
 
@@ -104,6 +116,15 @@ Vue.component("order-property-list-item", {
 
         ...Vuex.mapMutations([
             "setVariationOrderProperty"
-        ])
+        ]),
+
+        setPropertyFile( event )
+        {
+            if( event.srcElement && event.srcElement.files && event.srcElement.files.length > 0 )
+            {
+                this.selectedFile = event.srcElement.files[0];
+                this.setVariationOrderProperty({propertyId: this.property.property.id, value: this.selectedFile})
+            }
+        }
     }
 });
