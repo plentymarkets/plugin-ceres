@@ -126,61 +126,16 @@ Vue.component("order-property-list-item", {
                 this.selectedFile = event.srcElement.files[0];
                 this.setVariationOrderProperty({propertyId: this.property.property.id, value: this.selectedFile});
 
-                this.test(this.selectedFile);
+                var fileData = new FormData();
 
-                // var fileData = new FormData();
+                fileData.append("test", event.srcElement.files[0]);
 
-                // fileData.append("test", event.srcElement.files[0]);
-
-                // fileData.append("username", "Groucho");
-                // fileData.append("accountnum", 123456);
-
-                // ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false})
-                //     .always(response =>
-                //     {
-                //         console.log(response);
-                //     });
+                ApiService.post("/rest/io/order/property/file", event.srcElement.files[0], {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
+                    .always(response =>
+                    {
+                        console.log(response);
+                    });
             }
-        },
-
-        test(file)
-        {
-            
-            // var fd = new FormData();
-            // fd.append("afile", file);
-            // fd.append("username", "Groucho");
-            // fd.append("accountnum", 123456);
-
-            // fetch("http://master.plentymarkets.com/rest/io/order/property/file",
-            //     {
-            //         method: "POST",
-            //         body: fd
-            //     }).then(response =>
-            //     {
-            //         console.log("response:", response);
-            //     });
-
-            var fd = new FormData();
-            fd.append("fileData", file);
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://master.plentymarkets.com/rest/io/order/property/file', true);
-
-            xhr.upload.onprogress = function (e) {
-                if (e.lengthComputable) {
-                    var percentComplete = (e.loaded / e.total) * 100;
-                    console.log(percentComplete + '% uploaded');
-                }
-            };
-            xhr.onload = function () {
-                if (this.status == 200) {
-                    var resp = JSON.parse(this.response);
-                    console.log('Server got:', resp);
-                    var image = document.createElement('img');
-                    image.src = resp.dataUrl;
-                    document.body.appendChild(image);
-                };
-            };
-            xhr.send(fd);
         },
 
         clearSelectedFile()
