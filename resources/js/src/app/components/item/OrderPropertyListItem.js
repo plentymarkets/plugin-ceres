@@ -126,11 +126,11 @@ Vue.component("order-property-list-item", {
                 this.selectedFile = event.srcElement.files[0];
                 this.setVariationOrderProperty({propertyId: this.property.property.id, value: this.selectedFile});
 
-                var fileData = new FormData();
+                const fileData = new FormData();
 
-                fileData.append("test", event.srcElement.files[0]);
+                fileData.append("fileData", event.srcElement.files[0]);
 
-                ApiService.post("/rest/io/order/property/file", event.srcElement.files[0], {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
+                ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
                     .always(response =>
                     {
                         console.log(response);
