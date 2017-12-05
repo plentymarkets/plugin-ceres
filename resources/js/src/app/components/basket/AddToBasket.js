@@ -27,6 +27,23 @@ Vue.component("add-to-basket", {
         }
     },
 
+    computed:
+    {
+        variationId()
+        {
+            return this.item.variation.id;
+        },
+
+        hasChildren()
+        {
+            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
+    },
+
     data()
     {
         return {
@@ -123,19 +140,6 @@ Vue.component("add-to-basket", {
             this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
 
-    },
-
-    computed:
-    {
-        variationId()
-        {
-            return this.item.variation.id;
-        },
-
-        hasChildren()
-        {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
-        }
     },
 
     watch:

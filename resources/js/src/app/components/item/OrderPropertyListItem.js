@@ -48,7 +48,11 @@ Vue.component("order-property-list-item", {
             }
 
             return "";
-        }
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
     },
 
     created()
@@ -116,7 +120,8 @@ Vue.component("order-property-list-item", {
         },
 
         ...Vuex.mapMutations([
-            "setVariationOrderProperty"
+            "setVariationOrderProperty",
+            "setIsBasketLoading"
         ]),
 
         setPropertyFile(event)
@@ -126,16 +131,29 @@ Vue.component("order-property-list-item", {
                 this.selectedFile = event.srcElement.files[0];
                 this.setVariationOrderProperty({propertyId: this.property.property.id, value: this.selectedFile});
 
-                const fileData = new FormData();
-
-                fileData.append("fileData", event.srcElement.files[0]);
-
-                ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
-                    .always(response =>
-                    {
-                        console.log(response);
-                    });
+                this.uploadPropertyFile(this.selectedFile);
             }
+        },
+
+        uploadPropertyFile(file)
+        {
+            this.setIsBasketLoading(true);
+
+            const fileData = new FormData();
+
+            fileData.append("fileData", file);
+
+            ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
+                .done(response =>
+                {
+                })
+                .fail(error =>
+                {
+                })
+                .always(response =>
+                {
+                    this.setIsBasketLoading(false);
+                });
         },
 
         clearSelectedFile()
