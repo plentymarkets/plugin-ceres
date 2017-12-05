@@ -69,12 +69,7 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 this.setPriceFromData();
 
-                const timeToClose = 0;
-
-                if (timeToClose <= 0)
-                {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-                }
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
 
                 this.startCounter();
             }
