@@ -16,7 +16,8 @@ Vue.component("order-property-list-item", {
     {
         return {
             inputValue: "",
-            selectedFile: null
+            selectedFile: null,
+            waiting: false
         };
     },
 
@@ -129,8 +130,6 @@ Vue.component("order-property-list-item", {
             if (event.srcElement && event.srcElement.files && event.srcElement.files.length > 0)
             {
                 this.selectedFile = event.srcElement.files[0];
-                this.setVariationOrderProperty({propertyId: this.property.property.id, value: this.selectedFile});
-
                 this.uploadPropertyFile(this.selectedFile);
             }
         },
@@ -138,6 +137,7 @@ Vue.component("order-property-list-item", {
         uploadPropertyFile(file)
         {
             this.setIsBasketLoading(true);
+            this.waiting = true;
 
             const fileData = new FormData();
 
@@ -146,19 +146,23 @@ Vue.component("order-property-list-item", {
             ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
                 .done(response =>
                 {
+                    this.setVariationOrderProperty({propertyId: this.property.property.id, value: response.key});
                 })
                 .fail(error =>
                 {
+                    this.clearSelectedFile();
                 })
                 .always(response =>
                 {
                     this.setIsBasketLoading(false);
+                    this.waiting = false;
                 });
         },
 
         clearSelectedFile()
         {
             this.selectedFile = null;
+            this.setVariationOrderProperty({propertyId: this.property.property.id, value: null});
         }
     }
 });

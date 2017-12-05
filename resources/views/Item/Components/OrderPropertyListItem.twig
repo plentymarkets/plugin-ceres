@@ -30,13 +30,16 @@
         </div> -->
 
         <div v-else-if="inputType === 'file'">
-            <label class="input-unit file-input order-property-input">
-                <span class="input-unit-preview">${selectedFileName}</span>
+            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.property.value, 'isLoading': waiting }" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
+                <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
                 <span class="input-unit-label">${property.property.names.name}</span>
-                <span class="input-unit-btn">
+                <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
                 </span>
-                <input type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
+                <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
+                    <i class="fa fa-times"></i>
+                </span>
+                <input :disabled="waiting" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
             </label>
         </div>
 
