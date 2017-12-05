@@ -53,7 +53,7 @@
 					&[aria-expanded="true"],
 					&:hover{
 						background-color: $brand-primary;
-						color: #FFF;
+						color: $white;
 					}
 				}
 			}
@@ -87,7 +87,7 @@
 	
 					&.open {
 						& > .dropdown-toggle {
-							background-color: #282D2F;
+							background-color: $gray-darker;
 						}
 	
 						& .dropdown-menu {
@@ -125,7 +125,7 @@
 							border-top: 1px solid $gray-lighter;
 							display: block;
 							color: $white;
-							background-color: #282D2F;
+							background-color: $gray-darker;
 							&:hover {
 								background-color: $brand-primary;
 							}
