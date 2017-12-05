@@ -25,15 +25,36 @@
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			a{
-				padding: 0.5rem .8rem;
-				display: inline-block;
-				color: $gray-lighter;
+			@include media-breakpoint-between(xs, md) {
 
-				&[aria-expanded="true"],
-				&:hover{
-					background-color: $brand-primary;
-					color: #FFF;
+				a {
+					padding: 0.5rem .5rem;
+					display: inline-block;
+					color: $gray-lighter;
+	
+					&[aria-expanded="true"] {
+						background-color: $brand-primary;
+						color: $white;
+					}
+				}
+
+				.anicon {
+					padding: 0.5rem .8rem;
+				}
+
+			}
+
+			@include media-breakpoint-up(md) {
+				a {
+					padding: 0.5rem .8rem;
+					display: inline-block;
+					color: $gray-lighter;
+
+					&[aria-expanded="true"],
+					&:hover{
+						background-color: $brand-primary;
+						color: $white;
+					}
 				}
 			}
 
@@ -66,11 +87,19 @@
 	
 					&.open {
 						& > .dropdown-toggle {
-							background-color: #282D2F;
+							background-color: $gray-darker;
 						}
 	
 						& .dropdown-menu {
 							max-height: 200px;
+
+							@include media-breakpoint-between(xs, md) {
+								width: 105px;
+
+								&.dropdown-menu-right {
+									right: initial;
+								}
+							}
 						}
 					}
 	
@@ -82,13 +111,21 @@
 						overflow: hidden;
 						border: none !important;
 
+						@include media-breakpoint-between(xs, md) {
+							width: 105px;
+
+							&.dropdown-menu-right {
+								right: initial;
+							}
+						}
+
 						a {
 							padding:1rem .8rem;
 							border:0;
 							border-top: 1px solid $gray-lighter;
 							display: block;
-							color: #fff;
-							background-color: #282D2F;
+							color: $white;
+							background-color: $gray-darker;
 							&:hover {
 								background-color: $brand-primary;
 							}
