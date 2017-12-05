@@ -75,10 +75,12 @@
 	
     &.anicon-search-xcross {
         &[aria-expanded="false"] {
-            &:hover {
-                & > .anicon-search-item {
-                    &:after {
-                        background: $brand-primary;
+            @include media-breakpoint-up(md) {
+                &:hover {
+                    & > .anicon-search-item {
+                        &:after {
+                            background: $brand-primary;
+                        }
                     }
                 }
             }

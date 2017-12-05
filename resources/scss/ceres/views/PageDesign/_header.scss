@@ -25,15 +25,36 @@
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			a{
-				padding: 0.5rem .8rem;
-				display: inline-block;
-				color: $gray-lighter;
+			@include media-breakpoint-between(xs, md) {
 
-				&[aria-expanded="true"],
-				&:hover{
-					background-color: $brand-primary;
-					color: #FFF;
+				a {
+					padding: 0.5rem .5rem;
+					display: inline-block;
+					color: $gray-lighter;
+	
+					&[aria-expanded="true"] {
+						background-color: $brand-primary;
+						color: #FFF;
+					}
+				}
+
+				.anicon {
+					padding: 0.5rem .8rem;
+				}
+
+			}
+
+			@include media-breakpoint-up(md) {
+				a {
+					padding: 0.5rem .8rem;
+					display: inline-block;
+					color: $gray-lighter;
+
+					&[aria-expanded="true"],
+					&:hover{
+						background-color: $brand-primary;
+						color: #FFF;
+					}
 				}
 			}
 
@@ -71,6 +92,14 @@
 	
 						& .dropdown-menu {
 							max-height: 200px;
+
+							@include media-breakpoint-between(xs, md) {
+								width: 105px;
+
+								&.dropdown-menu-right {
+									right: initial;
+								}
+							}
 						}
 					}
 	
@@ -81,6 +110,14 @@
 						display: block;
 						overflow: hidden;
 						border: none !important;
+
+						@include media-breakpoint-between(xs, md) {
+							width: 105px;
+
+							&.dropdown-menu-right {
+								right: initial;
+							}
+						}
 
 						a {
 							padding:1rem .8rem;
