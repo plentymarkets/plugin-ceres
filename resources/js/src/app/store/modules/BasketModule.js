@@ -86,7 +86,7 @@ const actions =
     {
         addBasketNotification({commit}, {type, message})
         {
-            commit("addBasketNotification", {type: type, message: message});
+            commit("addBasketNotification", {type, message});
 
             setTimeout(() =>
             {
