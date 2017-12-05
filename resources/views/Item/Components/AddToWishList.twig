@@ -1,5 +1,5 @@
 <script type="x/template" id="vue-add-to-wish-list">
-    <div class="col-xs-6">
+    <div class="col-xs-12">
         <a class="text-muted small add-to-wish-list" :class="{active: $data._isActive}" @click.prevent="switchState()" data-toggle="tooltip" data-placement="top" title="">
             <i v-waiting-animation="isLoading" class="fa fa-heart"></i>
             {{ trans("Ceres::Template.itemWishList") }}

@@ -123,12 +123,20 @@
                                 <hr>
                                 <contact-wish-input template="#vue-contact-wish-input"></contact-wish-input>
                                 <hr>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <div class="col-md-5 checkout-rightside float-right" v-stick-in-parent>
+                        <aside class="sidebar">
+                            <div class="cmp cmp-checkout-sidebar">
                                 {{ LayoutContainer.show("Ceres::Checkout.BeforeBasketTotals") }}
                                 <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
                                 {{ LayoutContainer.show("Ceres::Checkout.AfterBasketTotals") }}
                             </div>
                         </aside>
                     </div>
+
                 </div>
             </checkout>
 

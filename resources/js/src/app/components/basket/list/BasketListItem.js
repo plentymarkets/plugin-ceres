@@ -107,7 +107,16 @@ Vue.component("basket-list-item", {
                     error =>
                     {
                         this.basketItem.quantity = origQty;
-                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+
+                        if (this.size === "small")
+                        {
+                            this.$store.dispatch("addBasketNotification", {type: "error", message: Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]});
+                        }
+                        else
+                        {
+                            NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                        }
+
                         this.waiting = false;
                     });
             }
