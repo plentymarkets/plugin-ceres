@@ -11261,7 +11261,6 @@ Vue.component("address-input-group", {
     delimiters: ["${", "}"],
 
     props: {
-        addressData: Object,
         defaultCountry: {
             type: String,
             default: "DE"
@@ -11281,7 +11280,7 @@ Vue.component("address-input-group", {
         return {
             stateList: [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: ""
+            localeToShow: this.defaultCountry
         };
     },
 
@@ -11305,7 +11304,15 @@ Vue.component("address-input-group", {
             } else {
                 this.localeToShow = this.defaultCountry;
             }
+
+            this.emitInputEvent("countryId", shippingCountry.id);
         },
+
+
+        /**
+         * @param {string} field
+         * @param {number} value
+         */
         emitInputEvent: function emitInputEvent(field, value) {
             this.$emit("input", { field: field, value: value });
         }
@@ -12289,35 +12296,40 @@ Vue.component("registration", {
             password: "",
             passwordRepeat: "",
             username: "",
-            billingAddress: {},
+            billingAddress: {
+                countryId: null,
+                stateId: null
+            },
             isDisabled: false
         };
     },
-
     created: function created() {
         this.$options.template = this.template;
     },
+
 
     methods: {
         /**
          * Validate the registration form
          */
         validateRegistration: function validateRegistration() {
-            var self = this;
+            var _this = this;
 
             _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
-                self.sendRegistration();
+                _this.sendRegistration();
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
 
+
         /**
          * Send the registration
          */
         sendRegistration: function sendRegistration() {
+            var _this2 = this;
+
             var userObject = this.getUserObject();
-            var component = this;
 
             this.isDisabled = true;
 
@@ -12327,25 +12339,24 @@ Vue.component("registration", {
                 if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
 
-                    if (document.getElementById(component.modalElement) !== null) {
-                        ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                    if (document.getElementById(_this2.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
                     }
                 } else {
                     NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
                 }
 
-                if (component.backlink !== null && component.backlink) {
-                    window.location.assign(component.backlink);
+                if (_this2.backlink !== null && _this2.backlink) {
+                    window.location.assign(_this2.backlink);
                 } else {
                     location.reload();
                 }
 
-                component.isDisabled = false;
+                _this2.isDisabled = false;
             }).fail(function () {
-                component.isDisabled = false;
+                _this2.isDisabled = false;
             });
         },
-
         setAddressDataField: function setAddressDataField(_ref) {
             var field = _ref.field,
                 value = _ref.value;
