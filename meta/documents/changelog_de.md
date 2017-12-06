@@ -14,6 +14,7 @@
 - Durch einen Fehler ist **SingleItem* gecrasht, wenn der Artikel nicht mit einem Hersteller verknüpft war.
 - Das Basket Overlay addiert die Timer nichtmehr und kann auch wieder nach dem ersten Klick geöffnet werden.
 - Der Header ist nun wieder voll responsive.
+- Durch einen Fehler wurden manche Bilder in den Artikellisten nicht ausgegeben, dies wurde behoben.
 
 ## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
