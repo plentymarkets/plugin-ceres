@@ -4,7 +4,6 @@ Vue.component("address-input-group", {
 
     props:
     {
-        addressData: Object,
         defaultCountry: {
             type: String,
             default: "DE"
@@ -26,7 +25,7 @@ Vue.component("address-input-group", {
         return {
             stateList  : [],
             countryLocaleList: ["DE", "GB"],
-            localeToShow: ""
+            localeToShow: this.defaultCountry
         };
     },
 
@@ -54,8 +53,14 @@ Vue.component("address-input-group", {
             {
                 this.localeToShow = this.defaultCountry;
             }
+
+            this.emitInputEvent("countryId", shippingCountry.id);
         },
 
+        /**
+         * @param {string} field
+         * @param {number} value
+         */
         emitInputEvent(field, value)
         {
             this.$emit("input", {field, value});
