@@ -12,6 +12,7 @@
   "item.producingCountry.names.*",
   "item.storeSpecial",
   "item.condition.names.*",
+  "item.add_cms_page",
 
   "variation.id",
   "variation.name",
