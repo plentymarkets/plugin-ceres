@@ -1,20 +1,19 @@
 # Release Notes für Ceres
 
-## v2.0.1 (unknown)
+## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
-- Neues Twig Template **SingleItemWrapper**
-- Artikelvorlagen können jetzt dargestellt werden
+- Das Twig-Template `SingleItemWrapper` wurde hinzugefügt. Dieses Template ermöglicht die Nutzung von <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#720" target="_blank"><b>Artikelvorlagen</b></a> in Ceres.
 
 ### Behoben
 
-- Die Grundpreise werden im **SingleItem** werden nun korrekt ausgegeben, wenn am Artikel konfiguriert.
-- Durch einen Fehler wurden im **Checkout** die Warenkorb-Summen auf der linken Seite angezeigt, wenn die Liste der Artikel länger war, als die der Zahlungsarten. Die Summen werden nun immer auf der rechten Seite dargestellt.
-- Durch einen Fehler ist **SingleItem* gecrasht, wenn der Artikel nicht mit einem Hersteller verknüpft war.
-- Das Basket Overlay addiert die Timer nichtmehr und kann auch wieder nach dem ersten Klick geöffnet werden.
+- Die Grundpreise werden in der Einzelansicht eines Artikels wieder korrekt ausgegeben, wenn diese am Artikel konfiguriert wurden.
+- Durch einen Fehler wurden im **Checkout** die Warenkorbsummen auf der linken Seite angezeigt, wenn die Liste der Artikel länger war, als die der Zahlungsarten. Die Summen werden nun immer auf der rechten Seite dargestellt.
+- Durch einen Fehler konnte die Artikelansicht nicht angezeigt werden, wenn der Artikel nicht mit einem Hersteller verknüpft war. Dies wurde behoben.
+- Das Warenkorb-Overlay addiert die Timer nicht mehr, sondern es kann nach dem ersten Klick wieder geöffnet werden.
 - Der Header ist nun wieder voll responsive.
-- Durch einen Fehler wurden manche Bilder in den Artikellisten nicht ausgegeben, dies wurde behoben.
+- Durch einen Fehler wurden manche Bilder in den Artikellisten nicht ausgegeben. Dies wurde behoben.
 
 ## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
