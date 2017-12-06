@@ -2,6 +2,11 @@
 
 ## v2.0.1 (unknown)
 
+### Hinzugefügt
+
+- Neues Twig Template **SingleItemWrapper**
+- Artikelvorlagen können jetzt dargestellt werden
+
 ### Behoben
 
 - Die Grundpreise werden im **SingleItem** werden nun korrekt ausgegeben, wenn am Artikel konfiguriert.
