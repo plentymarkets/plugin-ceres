@@ -116,9 +116,17 @@ function _firstRendering()
 {
     const twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
 
-    twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    if (twigBreadcrumbs)
+    {
+        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    }
 
-    document.querySelector("#vue-rendered-breadcrumbs").style.removeProperty("display");
+    const vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
+
+    if (vueBreadcrumbs)
+    {
+        vueBreadcrumbs.style.removeProperty("display");
+    }
 }
 
 export default {

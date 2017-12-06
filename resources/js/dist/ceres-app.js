@@ -10290,9 +10290,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.basketAddInformation === "overlay") {
                 this.setPriceFromData();
 
-                if (this.timeToClose <= 0) {
-                    ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
-                }
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
 
                 this.startCounter();
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
@@ -10311,6 +10309,11 @@ Vue.component("add-item-to-basket-overlay", {
                 var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
                 this.price = graduatedPrice + propertySurcharge;
+            }
+        },
+        closeOverlay: function closeOverlay() {
+            if (this.timerVar) {
+                clearInterval(this.timerVar);
             }
         },
         startCounter: function startCounter() {
@@ -16477,9 +16480,15 @@ function _loadOptionalData(currentCategory) {
 function _firstRendering() {
     var twigBreadcrumbs = document.querySelector("#twig-rendered-breadcrumbs");
 
-    twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    if (twigBreadcrumbs) {
+        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    }
 
-    document.querySelector("#vue-rendered-breadcrumbs").style.removeProperty("display");
+    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
+
+    if (vueBreadcrumbs) {
+        vueBreadcrumbs.style.removeProperty("display");
+    }
 }
 
 exports.default = {

@@ -1,5 +1,20 @@
 # Release Notes for Ceres
 
+## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The Twig template `SingleItemWrapper` has been added. This template allows you to use <a href="https://knowledge.plentymarkets.com/en/item/managing-items#720" target="_blank"><b>item templates</b></a> in Ceres.
+
+### Fixed
+
+- The base prices will now be displayed correctly in the single item view, if the base price is set for the item.
+- Due to an error, the item sums have been displayed on the left side in the **Checkout** if the list of items has been longer than the list of payment methods. The sums will now always be displayed on the right.
+- Due to an error, the single item view wasn't displayed correctly when no manufacturer was saved for an item. This has been fixed.
+- The shopping cart overlay will not add up the timers when adding items to the shopping cart. It can be opened directly after the first click.
+- The header is fully responsive again.
+- Due to an error, some items weren't displayed in item lists. This has been fixed.
+
 ## v2.0.0 (2017-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/1.7.2...2.0.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

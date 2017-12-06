@@ -12,6 +12,7 @@
   "item.producingCountry.names.*",
   "item.storeSpecial",
   "item.condition.names.*",
+  "item.add_cms_page",
 
   "variation.id",
   "variation.name",
@@ -46,6 +47,7 @@
   "images.all.path",
   "images.variation.url",
   "images.variation.urlPreview",
+  "images.variation.urlMiddle",
   "images.variation.position",
   "images.variation.path",
 
@@ -53,5 +55,6 @@
 
   "defaultCategories",
 
-  "filter.isSalable"
+  "filter.isSalable",
+  "filter.hasManufacturer"
 ]
