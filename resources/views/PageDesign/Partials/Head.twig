@@ -2,9 +2,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% set favicon = services.webstoreConfig.getWebstoreConfig().domainSsl ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
-
+{% set url = services.webstoreConfig.getWebstoreConfig().domainSsl %}
+{% set favicon = url ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
+<link rel="alternate" hreflang="de" href="{{url}}/de"/>
+<link rel="alternate" hreflang="en" href="{{url}}/en"/>
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
@@ -18,8 +20,6 @@
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
 {% set currencyFormat = config("Ceres.currency.format") %}
-
-{# <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title> #}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
     <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
