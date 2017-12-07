@@ -6,9 +6,12 @@
 {% set favicon = url ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
-{% set activeLanguages = services.localization.getLocalizationData().activeShopLanguageList %}
+{% set activeLanguages = services.webstoreConfig.getActiveLanguageList() %}
 {% for language in activeLanguages %}
-    <link rel="alternate" hreflang="{{language}}" href="{{url}}/{{language}}"/>
+    {% set canonicalUrl = services.template.getCanonicalUrl(language) %}
+    {% if canonicalUrl is not null %}
+        <link rel="alternate" hreflang="{{language}}" href="{{canonicalUrl}}"/>
+    {% endif %}
 {% endfor %}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
