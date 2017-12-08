@@ -1,18 +1,17 @@
 {{ component( "Ceres::ItemList.Components.ItemLazyImg" ) }}
 
 <script type="x/template" id="vue-category-image-carousel">
-    <div :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme">
-        <a v-for="(imageUrl, index) in imageUrls" :href="itemUrl">
-
+    <a :id="'owl-carousel-' + _uid" v-if="$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl">
+        <div v-for="(imageUrl, index) in imageUrls">
             <item-lazy-img template="#vue-item-lazy-img" v-if="index === 0 && !disableLazyLoad" :image-url="imageUrl.url"
                         :alt="altText"></item-lazy-img>
 
-            <img v-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="altText">
+            <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="altText">
 
             <img v-else class="img-fluid" :src="imageUrl.url" :alt="altText">
 
-        </a>
-    </div>
+        </div>
+    </a>
 
     <a v-else :href="itemUrl">
         <item-lazy-img v-if="!disableLazyLoad" template="#vue-item-lazy-img" :image-url="imageUrls | itemImage" :alt="altText"></item-lazy-img>
