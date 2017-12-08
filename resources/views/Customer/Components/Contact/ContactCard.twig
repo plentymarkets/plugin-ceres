@@ -10,7 +10,6 @@
 {% set vat =            config("system.company.vatNumber") %}
 {% set zip =            config("system.company.zip") %}
 {% set timezone =       config("system.company.timezone") %}
-{% set openingTimes =   config("Ceres.contact.opening_times") %}
 {% set showData =       config("Ceres.contact.show_data") %}
 
 {% if showData != "all" %}
@@ -83,7 +82,13 @@
     {% if "opening_times" in showData or showData == 'all' %}
 		<p class="m-y-0">
 			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
-			<span class="d-inline-block">{{ openingTimes }}</span>
+			<span class="d-inline-block">
+                {% if services.sessionStorage.getLang() == "de" %} 
+                    {{ config("Ceres.contact.opening_times") }}
+                {% else %}
+                    {{ config("Ceres.contact.en.opening_times") }}
+                {% endif %}
+            </span>
 		</p>
     {% endif %}
 
