@@ -2,9 +2,15 @@
 
 ## v2.0.2 (unknown)
 
+### Hinzugefügt
+
+- Die Öffnungszeiten können jetzt für DE und EN angegeben werden.
+
 ### Geändert
 
 - Die Adressen auswahl wurde leicht überarbeitet, um für den Benutzer noch deutlicher zu wirken.
+
+### Behoben
 
 ## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
