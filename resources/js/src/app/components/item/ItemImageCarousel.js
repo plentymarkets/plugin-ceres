@@ -185,6 +185,13 @@ Vue.component("item-image-carousel", {
 
                     return 0;
                 });
+        },
+
+        getAltText(image)
+        {
+            const altText = image.alternate || this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+
+            return altText;
         }
     }
 });
