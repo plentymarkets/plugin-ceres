@@ -16,7 +16,7 @@
 					.carousel-caption {
 						bottom:0;
 						padding-bottom: 10px;
-						h3, h1 {
+						h3, h2, h1 {
 							font-family: $font-family-heading;
 							text-shadow: none;
 							color: $white;
@@ -33,7 +33,7 @@
 						}
 					}
 					.hero-category:hover {
-						h3, h1 {
+						h3, h2, h1 {
 							background: rgba($brand-primary, 1);
 							transition: all .3s ease;
 						}
@@ -129,7 +129,7 @@
 	background: $brand-primary;
     position: relative;
     font-family: $font-family-heading;
-    h4 {
+    h1, h2, h3, h4, h5, h6 {
     	padding: .2rem 0 0;
 	    margin: 0;
 	    text-transform: uppercase;
@@ -208,7 +208,7 @@
 						.carousel-caption {
 							bottom:20px;
 							padding-bottom: 20px;
-							h3, h1 {
+							h3, h2, h1 {
 								font-size: 3rem;
 							}
 							h3 {
