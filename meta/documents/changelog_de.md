@@ -1,5 +1,19 @@
 # Release Notes für Ceres
 
+## v2.1.0?? (unknown)
+
+### Hinzugefügt
+
+- Es wurde ein Wert für die **Konfiguration** hinzugefügt, um auf der **Homepage** den Shop Namen anzuzeigen.
+
+### Behoben
+
+- Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
+
+### Geändert
+
+- **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
+
 ## v2.0.2 (unknown)
 
 ### Hinzugefügt
