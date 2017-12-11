@@ -1,3 +1,20 @@
+.homepage-title {
+	padding: 1rem 1.5rem;
+	border-bottom: 0;
+	background: $brand-primary;
+	position: relative;
+	display: flex;
+
+	& > h1 {
+		margin: .5rem auto;
+		color: $white;
+		border-bottom: 2px solid $white;
+		padding: 0 0 .5rem;
+		font-size: 2.5rem;
+		letter-spacing: 1.25px;
+	}
+}
+
 .home {
 
 	.product-list {
