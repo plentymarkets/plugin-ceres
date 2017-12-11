@@ -13543,9 +13543,7 @@ Vue.component("item-image-carousel", {
             });
         },
         getAltText: function getAltText(image) {
-            var altText = this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
-
-            console.log(image);
+            var altText = image.alternate || this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
 
             return altText;
         }
@@ -16375,8 +16373,9 @@ Vue.filter("itemImages", function (images, accessor) {
 
     for (var i in images[imagesAccessor]) {
         var imageUrl = images[imagesAccessor][i][accessor];
+        var alternate = images[imagesAccessor][i].names ? images[imagesAccessor][i].names.alternate : null;
 
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position, alternate: alternate });
     }
 
     return imageUrls;
