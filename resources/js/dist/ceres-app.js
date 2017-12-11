@@ -14217,10 +14217,10 @@ Vue.component("item-filter", {
     computed: _extends({
         facets: function facets() {
             return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -14278,10 +14278,10 @@ Vue.component("item-filter-list", {
     computed: Vuex.mapState({
         facets: function facets(state) {
             return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
