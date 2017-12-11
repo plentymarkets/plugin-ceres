@@ -101,6 +101,13 @@
     },
     {
         "tab"       : "Homepage",
+        "key"       : "homepage.companyName",
+        "label"     : "Show the name of your store (h1)",
+        "type"      : "checkbox",
+        "default"   : "true"
+    },
+    {
+        "tab"       : "Homepage",
         "key"       : "homepage.sliderItemId1",
         "label"     : "ID of the item variation to display in the first slide of the image slider",
         "type"      : "text"
