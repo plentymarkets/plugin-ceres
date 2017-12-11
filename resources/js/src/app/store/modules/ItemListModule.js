@@ -18,7 +18,7 @@ const mutations =
     {
         setFacets(state, facets)
         {
-            state.facets = facets;
+            state.facets = facets || [];
         },
 
         setSelectedFacetsByIds(state, selectedFacetIds)

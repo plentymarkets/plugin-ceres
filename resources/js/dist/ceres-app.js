@@ -13128,13 +13128,7 @@ Vue.component("item-image-carousel", {
 
     methods: {
         getImageCount: function getImageCount() {
-            var images = this.currentVariation.documents[0].data.images;
-
-            if (images.variation && images.variation.length) {
-                return images.variation.length;
-            }
-
-            return images.all.length;
+            return this.carouselImages.length;
         },
         reInitialize: function reInitialize() {
             var $owl = $(this.$refs.single);
@@ -13705,6 +13699,12 @@ Vue.component("category-image-carousel", {
                     owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
                 }
             });
+        },
+
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
         }
     }
 });
@@ -16037,6 +16037,10 @@ Vue.filter("itemImage", function (itemImages, highestPosition) {
 "use strict";
 
 Vue.filter("itemImages", function (images, accessor) {
+    if (!images) {
+        return [];
+    }
+
     var imageUrls = [];
     var imagesAccessor = "all";
 
@@ -16044,11 +16048,11 @@ Vue.filter("itemImages", function (images, accessor) {
         imagesAccessor = "variation";
     }
 
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
-        var alternate = images[imagesAccessor][i].names ? images[imagesAccessor][i].names.alternate : null;
+    for (var image in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][image][accessor];
+        var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
 
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position, alternate: alternate });
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate: alternate });
     }
 
     return imageUrls;
@@ -17978,7 +17982,7 @@ var state = {
 
 var mutations = {
     setFacets: function setFacets(state, facets) {
-        state.facets = facets;
+        state.facets = facets || [];
     },
     setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
         var selectedFacets = [];

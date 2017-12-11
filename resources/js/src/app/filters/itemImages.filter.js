@@ -1,5 +1,10 @@
 Vue.filter("itemImages", function(images, accessor)
 {
+    if (!images)
+    {
+        return [];
+    }
+
     const imageUrls = [];
     let imagesAccessor = "all";
 
@@ -8,12 +13,12 @@ Vue.filter("itemImages", function(images, accessor)
         imagesAccessor = "variation";
     }
 
-    for (const i in images[imagesAccessor])
+    for (const image in images[imagesAccessor])
     {
-        const imageUrl = images[imagesAccessor][i][accessor];
-        const alternate = images[imagesAccessor][i].names ? images[imagesAccessor][i].names.alternate : null;
+        const imageUrl = images[imagesAccessor][image][accessor];
+        const alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
 
-        imageUrls.push({url: imageUrl, position: images[imagesAccessor][i].position, alternate});
+        imageUrls.push({url: imageUrl, position: images[imagesAccessor][image].position, alternate});
     }
 
     return imageUrls;
