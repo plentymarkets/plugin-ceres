@@ -1,11 +1,31 @@
 {% extends getPartial('page-design') %}
 
+{% block PartialHead %}
+
+<title>{{ category.details.first.metaTitle | raw }}</title>
+
+<meta name="description" content="{{ category.details.first.metaDescription | raw }}"  />
+
+{% endblock %}
+
 {% block PageBody %}
 
     {% set lang = services.sessionStorage.getLang() %}
 
-    {% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
+    {# DEPRECATED # include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %#}
+
+    {% if category.details.first.description %}
+
+       <div class="page-content container-max">
+
+        {{ category.details.first.description | raw }}
+
+      </div>
+
+    {% else %}
+
+    	{% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
+
+    {% endif %}
 
 {% endblock %}
-
-{# DEPRECATED #}
