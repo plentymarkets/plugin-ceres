@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Es wurde ein Wert für die **Konfiguration** hinzugefügt, um auf der **Homepage** den Shop Namen anzuzeigen.
+- **SEO:** Auf der **Startseite** wird nun der Shop Name als h1-Überschrift ausgegeben.
 
 ### Behoben
 
