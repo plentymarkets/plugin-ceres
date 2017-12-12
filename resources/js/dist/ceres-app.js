@@ -10682,10 +10682,15 @@ Vue.component("basket-list-item", {
 
 
     computed: _extends({
-        imageUrl: function imageUrl() {
+        image: function image() {
             var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
-            return img.url;
+            return img;
+        },
+        altText: function altText() {
+            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+
+            return altText;
         },
         isInputLocked: function isInputLocked() {
             return this.waiting || this.isBasketLoading;
@@ -13210,7 +13215,7 @@ Vue.component("item-image-carousel", {
             });
         },
         getAltText: function getAltText(image) {
-            var altText = image.alternate || this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
 
             return altText;
         }
