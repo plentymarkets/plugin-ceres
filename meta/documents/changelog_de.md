@@ -4,7 +4,11 @@
 
 ### Geändert
 
-- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt. 
+- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt.
+
+### Behoben
+
+- Ein Fehler wurde behoben der das Rendern der Filter verhindert hat.
 
 ## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
