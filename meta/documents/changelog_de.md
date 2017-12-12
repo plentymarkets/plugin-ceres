@@ -1,5 +1,11 @@
 # Release Notes für Ceres
 
+## v2.0.2
+
+### Geändert
+
+- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt. 
+
 ## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
