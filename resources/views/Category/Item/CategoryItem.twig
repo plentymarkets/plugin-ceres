@@ -132,8 +132,6 @@
 {% block PartialHead %}
     <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
-    <link rel="canonical" href="{{ services.template.getCanonicalLink() }}">
-
     {% if page-1 > 0 %}
         <link rel=“prev“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page-1 }) | url_encode }}“ />
     {% endif %}

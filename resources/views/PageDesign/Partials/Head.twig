@@ -2,17 +2,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% set url = services.webstoreConfig.getWebstoreConfig().domainSsl %}
+{% set lang = services.sessionStorage.getLang() %}
 {% set favicon = url ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
-{% set activeLanguages = services.webstoreConfig.getActiveLanguageList() %}
-{% for language in activeLanguages %}
-    {% set canonicalUrl = services.template.getCanonicalUrl(language) %}
-    {% if canonicalUrl is not null %}
-        <link rel="alternate" hreflang="{{language}}" href="{{canonicalUrl}}"/>
-    {% endif %}
-{% endfor %}
+{% set requestUrl = services.webstoreConfig.getWebstoreConfig().domainSsl ~ request.getRequestUri() %}
+{% set canonicalUrl = services.url.getCanonicalURL() %}
+{% set languageUrls = services.url.getLanguageURLs() %}
+
+{% if canonicalUrl is not null %}
+    <link rel="canonical" href="{{ canonicalUrl }}">
+{% endif %}
+
+{% if canonicalUrl == requestUrl %}
+    {% for language, url in languageUrls %}
+        <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
+    {% endfor %}
+{% endif %}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
