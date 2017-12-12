@@ -72,13 +72,11 @@
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <div class="home container-max">
-        {% if config("Ceres.homepage.companyName") == "true" %}
-            <div class="row">
-                <div class="homepage-title m-b-1">
-                    <h1>{{ config("Ceres.header.company_name") }}</h1>
-                </div>
+        <div class="row">
+            <div class="homepage-title m-b-1">
+                <h1>{{ config("Ceres.header.company_name") }}</h1>
             </div>
-        {% endif %}
+        </div>
 
         <div class="row">
             <div class="cmp cmp-hero">
