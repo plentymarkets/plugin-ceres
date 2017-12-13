@@ -10612,7 +10612,7 @@ Vue.component("coupon", {
                 NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
             }, function (error) {
                 _this2.waiting = false;
-                NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
+                NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
             });
         },
         removeCode: function removeCode() {
@@ -10627,6 +10627,35 @@ Vue.component("coupon", {
                 _this3.waiting = false;
                 NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
             });
+        },
+        getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
+            var errorMessageKeys = {
+                18: "couponminOrderValueNotReached",
+                51: "couponnotUsableForSpecialOffer",
+                70: "couponalreadyUsedOrInvalidCouponCode",
+                78: "couponcampaignExpired",
+                126: "couponnoMatchingItemInBasket",
+                329: "couponOnlySubscription",
+                330: "couponOnlySingleUsage",
+                331: "couponNoOpenAmount",
+                332: "couponExpired",
+                334: "couponOnlyForNewCustomers",
+                335: "couponOnlyForExistingCustomers",
+                336: "couponWrongCustomerGroup",
+                337: "couponWrongCustomerType",
+                338: "couponNoCustomerTypeProvided",
+                339: "couponNoCustomerTypeActivated",
+                340: "couponNoCustomerGroupActivated",
+                341: "couponCampaignNoWebstoreActivated",
+                342: "couponCampaignWrongWebstoreId",
+                343: "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
+                return Translations.Template[errorMessageKeys[error.error.code]];
+            }
+
+            return Translations.Template.couponRedeemFailure;
         }
     }
 });
@@ -17750,10 +17779,10 @@ var actions = {
             commit = _ref9.commit;
 
         return new Promise(function (resolve, reject) {
-            commit("setCouponCode", couponCode);
             commit("setIsBasketLoading", true);
 
-            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }).done(function (data) {
+            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }, { supressNotifications: true }).done(function (data) {
+                commit("setCouponCode", couponCode);
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
@@ -17767,10 +17796,10 @@ var actions = {
             commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
-            commit("setCouponCode", null);
             commit("setIsBasketLoading", true);
 
             _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
+                commit("setCouponCode", null);
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
