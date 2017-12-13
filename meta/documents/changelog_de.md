@@ -9,6 +9,7 @@
 ### Geändert
 
 - Die Adressen auswahl wurde leicht überarbeitet, um für den Benutzer noch deutlicher zu wirken.
+- Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
 
 ### Behoben
 
