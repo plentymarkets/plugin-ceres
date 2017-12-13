@@ -52,7 +52,7 @@
             left: 0;
             bottom: 0;
             margin: auto;
-            background: #fff;
+            background: $white;
 		}
 		
         &:after {
@@ -67,8 +67,8 @@
             bottom: 0;
             right: 0;
             margin: auto;
-            background: #4D4F4D;
-            border: 1px solid #fff;
+            background: $gray-dark;
+            border: 1px solid $white;
             transform-origin: 50% 50%;
         }
 	}
@@ -93,12 +93,12 @@
 				
                 &:before {
                     border-radius: 2.85714px;
-                    background: #fff;
+                    background: $white;
 				}
 				
                 &:after {
                     border-radius: 2.85714px;
-                    background: #fff;
+                    background: $white;
                     height: 1px;
                     width: 100%;
                     top: 0;
