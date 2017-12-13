@@ -4,9 +4,12 @@
   "texts.urlPath",
   "item.id",
   "variation.id",
-  "images.variation.url",
-  "images.variation.position",
+  "filter.isSalable",
+
   "images.all.url",
   "images.all.position",
-  "filter.isSalable"
+  "images.all.path",
+  "images.variation.url",
+  "images.variation.position",
+  "images.variation.path"
 ]

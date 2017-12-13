@@ -3,7 +3,7 @@
 <script type="x/template" id="vue-basket-totals">
     <!-- BASKET TOTALS -->
     <div class="cmp cmp-totals">
-        <h3>{{ trans("Ceres::Template.basketSum") }}</h3>
+        <div class="h3">{{ trans("Ceres::Template.basketSum") }}</div>
         <div class="component-loading refreshing" :class="{ 'isLoading': isBasketLoading }">
             <dl>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
