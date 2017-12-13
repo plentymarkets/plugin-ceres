@@ -17,6 +17,7 @@
 - Es wurde ein Fehler behoben bei der **Anmelde-Maske**, wodurch die E-Mail bei einem Gast nicht validiert wurde.
 - Das Land wird nun korrekt in der Registrierung vorausgewählt.
 - Es wurde ein Fehler behoben in dem die Kategorieseite nicht mehr angezeigt wurde wenn ein Artikel keine Bild hatte.
+- Es wurde ein Fehler behoben im *scss*, bei dem das Icon für die Suchleiste keine SCSS-Variablen für Farbcodes genutzt hat.
 
 ## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
