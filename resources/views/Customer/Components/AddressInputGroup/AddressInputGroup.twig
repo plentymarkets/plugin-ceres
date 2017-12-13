@@ -26,9 +26,8 @@
                 template="#vue-country-select"
                 :selected-country-id="value.countryId"
                 :selected-state-id="value.stateId"
-                @country-changed="emitInputEvent('countryId', $event)"
+                @country-changed="onSelectedCountryChanged($event)"
                 @state-changed="emitInputEvent('stateId', $event)"
-                @selected-country-changed="onSelectedCountryChanged"
                 :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
                 :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) | json_encode() }}"
                 :address-type="addressType">

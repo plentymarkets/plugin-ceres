@@ -34,6 +34,7 @@ Vue.component("country-select", {
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
+        this.updateSelectedCountry();
     },
 
     methods: {
@@ -42,7 +43,7 @@ Vue.component("country-select", {
          */
         countryChanged(value)
         {
-            this.$emit("country-changed", parseInt(value));
+            this.$emit("country-changed", this.getCountryById(parseInt(value)));
             this.$emit("state-changed", null);
         },
 
@@ -70,11 +71,9 @@ Vue.component("country-select", {
 
                     return null;
                 });
-        }
-    },
+        },
 
-    watch: {
-        selectedCountryId()
+        updateSelectedCountry()
         {
             const countryId = this.selectedCountryId || this.shippingCountryId;
 
@@ -83,9 +82,19 @@ Vue.component("country-select", {
             if (this.selectedCountry)
             {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
-
-                this.$emit("selected-country-changed", this.selectedCountry);
             }
+
+            if (!this.selectedCountryId)
+            {
+                this.countryChanged(countryId);
+            }
+        }
+    },
+
+    watch: {
+        selectedCountryId()
+        {
+            this.updateSelectedCountry();
         }
     }
 });
