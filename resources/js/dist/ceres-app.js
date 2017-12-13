@@ -17978,6 +17978,10 @@ var mutations = {
         var selectedFacets = [];
 
         if (selectedFacetIds.length > 0) {
+            selectedFacetIds = selectedFacetIds.map(function (id) {
+                return parseInt(id);
+            });
+
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;

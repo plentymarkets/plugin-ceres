@@ -27,6 +27,8 @@ const mutations =
 
             if (selectedFacetIds.length > 0)
             {
+                selectedFacetIds = selectedFacetIds.map(id => parseInt(id));
+
                 for (const facet of state.facets)
                 {
                     selectedFacets = selectedFacets.concat(facet.values.filter(facetValue => selectedFacetIds.includes(facetValue.id)));
