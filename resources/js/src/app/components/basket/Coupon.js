@@ -53,19 +53,29 @@ Vue.component("coupon", {
     {
         redeemCode()
         {
-            this.waiting = true;
+            // remove whitespaces
+            this.couponCode = this.couponCode.replace(/\s/g, "");
 
-            this.$store.dispatch("redeemCouponCode", this.couponCode).then(
-                response =>
-                {
-                    this.waiting = false;
-                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-                },
-                error =>
-                {
-                    this.waiting = false;
-                    NotificationService.error(this.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
-                });
+            if (this.couponCode.length > 0)
+            {
+                this.waiting = true;
+
+                this.$store.dispatch("redeemCouponCode", this.couponCode).then(
+                    response =>
+                    {
+                        this.waiting = false;
+                        NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+                        NotificationService.error(this.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+                    });
+            }
+            else
+            {
+                NotificationService.error(Translations.Template.couponIsEmpty).closeAfter(10000);
+            }
         },
 
         removeCode()
