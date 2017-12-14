@@ -15,6 +15,11 @@
 		margin-left: -1px;
 		background-color: $card-bg;
 
+		& > input:disabled ~ label {
+			opacity: .5;
+			cursor: not-allowed;
+		}
+
 		input{
 			display: none;
 			transition: box-shadow 2s;

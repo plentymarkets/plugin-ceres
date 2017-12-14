@@ -164,12 +164,12 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                commit("setCouponCode", couponCode);
                 commit("setIsBasketLoading", true);
 
-                ApiService.post("/rest/io/coupon", {couponCode})
+                ApiService.post("/rest/io/coupon", {couponCode}, {supressNotifications: true})
                     .done(data =>
                     {
+                        commit("setCouponCode", couponCode);
                         commit("setIsBasketLoading", false);
                         resolve(data);
                     })
@@ -185,12 +185,12 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                commit("setCouponCode", null);
                 commit("setIsBasketLoading", true);
 
                 ApiService.delete("/rest/io/coupon/" + couponCode)
                     .done(data =>
                     {
+                        commit("setCouponCode", null);
                         commit("setIsBasketLoading", false);
                         resolve(data);
                     })

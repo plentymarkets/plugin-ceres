@@ -1,5 +1,24 @@
 # Release Notes for Ceres
 
+## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- The opening hours of your store can now be saved in German and English.
+
+### Changed
+
+- The address selection has been updated to be clearer for the customers of your store.
+
+### Fixed
+
+- The mega menu now displays all categories without cutting them off at the bottom.
+- Due to an error, the meta data was output in quotation marks. This has been fixed.
+- Due to an error, the email address of guest customers wasn't validated. This has been fixed.
+- Die to an error, the country wasn't pre-selected correctly on the registration page. This has been fixed.
+- Due to an error, the category view could not be displayed when items without an item image were loaded. This has been fixed.
+- Due to an error, the search icon didn't use the SCSS variables for colour codes. This has been fixed.
+
 ## v2.0.1 (2017-12-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.0...2.0.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
