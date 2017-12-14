@@ -9,6 +9,7 @@ Vue.component("order-property-list-item", {
             type: String,
             default: "#vue-order-property-list-item"
         },
+        group: Object,
         property: Object
     },
 
@@ -25,8 +26,8 @@ Vue.component("order-property-list-item", {
     {
         inputType()
         {
-            const orderPropertyGroupingType = this.property.group ? this.property.group.orderPropertyGroupingType : null;
-            const valueType = this.property.property.valueType;
+            const orderPropertyGroupingType = this.group ? this.group.orderPropertyGroupingType : null;
+            const valueType = this.property.valueType;
 
             if (valueType === "empty")
             {
@@ -82,10 +83,10 @@ Vue.component("order-property-list-item", {
             }
             else if (this.inputType === "radio")
             {
-                this.$emit("radio-change", this.property.property.id);
+                this.$emit("radio-change", this.property.id);
             }
 
-            this.setVariationOrderProperty({propertyId: this.property.property.id, value: value});
+            this.setVariationOrderProperty({propertyId: this.property.id, value: value});
         },
 
         validateInt(value)
@@ -146,7 +147,7 @@ Vue.component("order-property-list-item", {
             ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
                 .done(response =>
                 {
-                    this.setVariationOrderProperty({propertyId: this.property.property.id, value: response.key});
+                    this.setVariationOrderProperty({propertyId: this.property.id, value: response.key});
                 })
                 .fail(error =>
                 {
@@ -162,7 +163,7 @@ Vue.component("order-property-list-item", {
         clearSelectedFile()
         {
             this.selectedFile = null;
-            this.setVariationOrderProperty({propertyId: this.property.property.id, value: null});
+            this.setVariationOrderProperty({propertyId: this.property.id, value: null});
         }
     }
 });

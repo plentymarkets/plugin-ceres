@@ -1,22 +1,20 @@
 <script type="x/template" id="vue-order-property-list-item">
     <div>
 
-        <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.property.value }" data-validate="text">
-            <input type="text" @change="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
-            <label>${property.property.names.name}
-                <strong v-if="property.property.surcharge >= 0 && property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
-                <strong v-if="property.property.surcharge > 0 && property.surcharge === 0">(+ ${ property.property.surcharge | currency})</strong>
+        <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value }" data-validate="text">
+            <input type="text" @change="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <label>${property.names.name}
+                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
             *</label>
         </div>
 
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
-            <label class="form-check-label" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
+            <label class="form-check-label" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <input v-if="inputType === 'checkbox'" class="form-check-input" type="checkbox" @change="onInputValueChanged($event.target.checked)">
-                <input v-else class="form-check-input" type="radio" :name="property.group ? property.group.id : 'check' + _uid" @change="onInputValueChanged($event.target.value)" :value="property.property.id">
-                ${property.property.names.name}
+                <input v-else class="form-check-input" type="radio" :name="group ? group.id : 'check' + _uid" @change="onInputValueChanged($event.target.value)" :value="property.id">
+                ${property.names.name}
 
-                <strong v-if="property.property.surcharge >= 0 && property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
-                <strong v-if="property.property.surcharge > 0 && property.surcharge === 0">(+ ${ property.property.surcharge | currency})</strong>
+                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
             </label>
         </div>
 
@@ -25,14 +23,17 @@
                 <select class="custom-select">
                     <option :selected="true" :value="null">{{ trans("Ceres::Template.pleaseSelect") }}</option>
                 </select>
-                <label>${property.property.names.name}</label>
+                <label>${property.names.name}</label>
             </div>
         </div> -->
 
         <div v-else-if="inputType === 'file'">
-            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.property.value, 'isLoading': waiting }" v-tooltip data-toggle="tooltip" :title="property.property.names.description">
+            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
-                <span class="input-unit-label">${property.property.names.name}</span>
+                <span class="input-unit-label">
+                    ${property.names.name}
+                    <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
                 </span>

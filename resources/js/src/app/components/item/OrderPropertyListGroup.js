@@ -14,7 +14,7 @@ Vue.component("order-property-list-group", {
     {
         isShownOnItemPageCount()
         {
-            const properties = this.propertyGroup.properties.filter(property => property.property.isShownOnItemPage);
+            const properties = this.propertyGroup.properties.filter(property => property.isShownOnItemPage);
 
             return properties.length;
         }
@@ -29,18 +29,18 @@ Vue.component("order-property-list-group", {
     {
         unsetDeselectedRadios(propertyId)
         {
-            const propertiesToUnselect = this.propertyGroup.properties.filter(property => property.property.id !== propertyId && this.isPropertyCheckbox(property));
+            const propertiesToUnselect = this.propertyGroup.properties.filter(property => property.id !== propertyId && this.isPropertyTypeRadio(property));
 
             for (const property of propertiesToUnselect)
             {
-                this.setVariationOrderProperty({propertyId: property.property.id, value: null});
+                this.setVariationOrderProperty({propertyId: property.id, value: null});
             }
         },
 
-        isPropertyCheckbox(property)
+        isPropertyTypeRadio(property)
         {
-            const orderPropertyGroupingType = property.group ? property.group.orderPropertyGroupingType : null;
-            const valueType = property.property.valueType;
+            const orderPropertyGroupingType = this.propertyGroup.group ? this.propertyGroup.group.orderPropertyGroupingType : null;
+            const valueType = property.valueType;
 
             if (valueType === "empty" && orderPropertyGroupingType === "single")
             {

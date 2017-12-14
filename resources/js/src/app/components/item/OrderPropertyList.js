@@ -13,79 +13,64 @@ Vue.component("order-property-list", {
     {
         return {
             activeSlide: 0,
-            propertyGroups: []
+            touchedSlides: {0: true}
         };
     },
 
-    computed: Vuex.mapState({
-        orderPropertyList: state => state.item.variation.documents[0].data.properties
-    }),
-
-    created()
+    computed:
     {
-        this.$options.template = this.template;
-
-        this.initializePropertyGroups();
-    },
-
-    methods:
-    {
-        initializePropertyGroups()
+        sortedGroupedProperties()
         {
-            if (this.orderPropertyList)
-            {
-                const groups = this.getGroupedProperties(this.orderPropertyList);
+            const groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));
 
-                this.propertyGroups = this.getSortedGroups(groups);
-            }
-        },
-
-        getGroupedProperties(orderPropertyList)
-        {
-            const groups = [];
-
-            for (const property of orderPropertyList)
-            {
-                let groupId = null;
-
-                if (property.group)
-                {
-                    groupId = property.group.id;
-                }
-
-                const group = groups.find(group => group.id === groupId);
-
-                if (group)
-                {
-                    group.properties.push(property);
-                }
-                else
-                {
-                    groups.push({
-                        id: groupId,
-                        properties: [property],
-                        touched: false
-                    });
-                }
-            }
-
-            groups[0].touched = true;
-
-            for (const group of groups)
+            for (const group of groupedProperties)
             {
                 this.sortGroupProperties(group);
             }
 
-            return groups;
+            return this.getSortedGroups(groupedProperties);
+        },
+
+        ...Vuex.mapState({
+            orderPropertyList: state => state.item.variation.documents[0].data.properties
+        }),
+
+        ...Vuex.mapGetters([
+            "variationGroupedProperties"
+        ])
+    },
+
+    created()
+    {
+        this.$options.template = this.template;
+    },
+
+    methods:
+    {
+        sortGroupProperties(group)
+        {
+            return group.properties.sort((prev, current) =>
+            {
+                if (prev.position > current.position)
+                {
+                    return 1;
+                }
+                if (prev.position < current.position)
+                {
+                    return -1;
+                }
+
+                return 0;
+            });
         },
 
         getSortedGroups(groups)
         {
             for (const group of groups)
             {
-                const lowestPosition = group.properties.reduce((prev, current) => (prev.property.position < current.property.position) ? prev : current);
+                const lowestPosition = group.properties.reduce((prev, current) => (prev.position < current.position) ? prev : current);
 
-                group.lowestPosition = lowestPosition.property.position;
+                group.lowestPosition = lowestPosition.position;
             }
 
             return groups.sort((prev, current) =>
@@ -103,48 +88,12 @@ Vue.component("order-property-list", {
             });
         },
 
-        sortGroupProperties(group)
-        {
-            return group.properties.sort((prev, current) =>
-            {
-                if (prev.property.position > current.property.position)
-                {
-                    return 1;
-                }
-                if (prev.property.position < current.property.position)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
-        },
-
-        nextSlide()
-        {
-            if (this.activeSlide < this.propertyGroups.length - 1)
-            {
-                this.activeSlide++;
-                this.propertyGroups[this.activeSlide].touched = true;
-            }
-        },
-
-        prevSlide()
-        {
-            if (this.activeSlide > 0)
-            {
-                this.activeSlide--;
-                this.propertyGroups[this.activeSlide].touched = true;
-            }
-        },
-
         slideTo(position)
         {
-            if (position >= 0 && position < this.propertyGroups.length)
+            if (position >= 0 && position < this.sortedGroupedProperties.length)
             {
                 this.activeSlide = position;
-
-                this.propertyGroups[position].touched = true;
+                this.touchedSlides[this.activeSlide] = true;
             }
         }
     }
