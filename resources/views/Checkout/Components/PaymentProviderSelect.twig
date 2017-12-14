@@ -9,6 +9,7 @@
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
+                        :disabled="!paymentProvider.isSelectable"
                 >
                 <label :for="'paymentMethod' + _uid + paymentProvider.id">
                     <div class="icon">

@@ -9716,8 +9716,12 @@ jQuery.extend( {
 			}
 		}
 
+<<<<<<< HEAD
 		return ret;
 	},
+=======
+                ModalService.findModal(document.getElementById("add-item-to-basket-overlay")).show();
+>>>>>>> development
 
 	inArray: function( elem, arr, i ) {
 		return arr == null ? -1 : indexOf.call( arr, elem, i );
@@ -9728,9 +9732,22 @@ jQuery.extend( {
 			j = 0,
 			i = first.length;
 
+<<<<<<< HEAD
 		for ( ; j < len; j++ ) {
 			first[ i++ ] = second[ j ];
 		}
+=======
+                this.price = graduatedPrice + propertySurcharge;
+            }
+        },
+        closeOverlay: function closeOverlay() {
+            if (this.timerVar) {
+                clearInterval(this.timerVar);
+            }
+        },
+        startCounter: function startCounter() {
+            var _this = this;
+>>>>>>> development
 
 		first.length = i;
 
@@ -10115,19 +10132,74 @@ function Sizzle( selector, context, results, seed ) {
 						}
 					}
 
+<<<<<<< HEAD
 				// Type selector
 				} else if ( match[2] ) {
 					push.apply( results, context.getElementsByTagName( selector ) );
 					return results;
+=======
+            this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
+                _this2.waiting = false;
+                NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+            }, function (error) {
+                _this2.waiting = false;
+                NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+            });
+        },
+        removeCode: function removeCode() {
+            var _this3 = this;
+>>>>>>> development
 
 				// Class selector
 				} else if ( (m = match[3]) && support.getElementsByClassName &&
 					context.getElementsByClassName ) {
 
+<<<<<<< HEAD
 					push.apply( results, context.getElementsByClassName( m ) );
 					return results;
 				}
 			}
+=======
+            this.$store.dispatch("removeCouponCode", this.couponCode).then(function (response) {
+                _this3.waiting = false;
+                NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
+            }, function (error) {
+                _this3.waiting = false;
+                NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
+            });
+        },
+        getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
+            var errorMessageKeys = {
+                18: "couponminOrderValueNotReached",
+                51: "couponnotUsableForSpecialOffer",
+                70: "couponalreadyUsedOrInvalidCouponCode",
+                78: "couponcampaignExpired",
+                126: "couponnoMatchingItemInBasket",
+                329: "couponOnlySubscription",
+                330: "couponOnlySingleUsage",
+                331: "couponNoOpenAmount",
+                332: "couponExpired",
+                334: "couponOnlyForNewCustomers",
+                335: "couponOnlyForExistingCustomers",
+                336: "couponWrongCustomerGroup",
+                337: "couponWrongCustomerType",
+                338: "couponNoCustomerTypeProvided",
+                339: "couponNoCustomerTypeActivated",
+                340: "couponNoCustomerGroupActivated",
+                341: "couponCampaignNoWebstoreActivated",
+                342: "couponCampaignWrongWebstoreId",
+                343: "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
+                return Translations.Template[errorMessageKeys[error.error.code]];
+            }
+
+            return Translations.Template.couponRedeemFailure;
+        }
+    }
+});
+>>>>>>> development
 
 			// Take advantage of querySelectorAll
 			if ( support.qsa &&
@@ -10982,6 +11054,7 @@ Expr = Sizzle.selectors = {
 
 				result += "";
 
+<<<<<<< HEAD
 				return operator === "=" ? result === check :
 					operator === "!=" ? result !== check :
 					operator === "^=" ? check && result.indexOf( check ) === 0 :
@@ -10999,6 +11072,31 @@ Expr = Sizzle.selectors = {
 				ofType = what === "of-type";
 
 			return first === 1 && last === 0 ?
+=======
+    props: {
+        defaultCountry: {
+            type: String,
+            default: "DE"
+        },
+        addressType: String,
+        modalType: String,
+        template: String,
+        value: {
+            type: Object,
+            default: function _default() {
+                return {};
+            }
+        }
+    },
+
+    data: function data() {
+        return {
+            stateList: [],
+            countryLocaleList: ["DE", "GB"],
+            localeToShow: this.defaultCountry
+        };
+    },
+>>>>>>> development
 
 				// Shortcut for :nth-*(n)
 				function( elem ) {
@@ -11015,6 +11113,7 @@ Expr = Sizzle.selectors = {
 
 					if ( parent ) {
 
+<<<<<<< HEAD
 						// :(first|last|only)-(child|of-type)
 						if ( simple ) {
 							while ( dir ) {
@@ -11023,6 +11122,33 @@ Expr = Sizzle.selectors = {
 									if ( ofType ?
 										node.nodeName.toLowerCase() === name :
 										node.nodeType === 1 ) {
+=======
+    methods: {
+        /**
+         * Update the address input group to show.
+         * @param shippingCountry
+         */
+        onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {
+                this.localeToShow = shippingCountry.isoCode2;
+            } else {
+                this.localeToShow = this.defaultCountry;
+            }
+
+            this.emitInputEvent("countryId", shippingCountry.id);
+        },
+
+
+        /**
+         * @param {string} field
+         * @param {number} value
+         */
+        emitInputEvent: function emitInputEvent(field, value) {
+            this.$emit("input", { field: field, value: value });
+        }
+    }
+});
+>>>>>>> development
 
 										return false;
 									}
@@ -12138,14 +12264,22 @@ jQuery.fn.extend( {
 // Initialize a jQuery object
 
 
+<<<<<<< HEAD
 // A central reference to the root jQuery(document)
 var rootjQuery,
+=======
+        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
+        CountryService.sortCountries(this.countryList);
+        this.updateSelectedCountry();
+    },
+>>>>>>> development
 
 	// A simple way to check for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
+<<<<<<< HEAD
 	init = jQuery.fn.init = function( selector, context, root ) {
 		var match, elem;
 
@@ -12153,6 +12287,16 @@ var rootjQuery,
 		if ( !selector ) {
 			return this;
 		}
+=======
+    methods: {
+        /**
+         * Method to fire when the country has changed
+         */
+        countryChanged: function countryChanged(value) {
+            this.$emit("country-changed", this.getCountryById(parseInt(value)));
+            this.$emit("state-changed", null);
+        },
+>>>>>>> development
 
 		// Method init() accepts an alternate rootjQuery
 		// so migrate can support jQuery.sub (gh-2101)
@@ -12171,6 +12315,7 @@ var rootjQuery,
 				match = rquickExpr.exec( selector );
 			}
 
+<<<<<<< HEAD
 			// Match html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
 
@@ -12200,9 +12345,17 @@ var rootjQuery,
 							}
 						}
 					}
+=======
+                return null;
+            });
+        },
+        updateSelectedCountry: function updateSelectedCountry() {
+            var countryId = this.selectedCountryId || this.shippingCountryId;
+>>>>>>> development
 
 					return this;
 
+<<<<<<< HEAD
 				// HANDLE: $(#id)
 				} else {
 					elem = document.getElementById( match[ 2 ] );
@@ -12210,6 +12363,24 @@ var rootjQuery,
 					// Support: Blackberry 4.6
 					// gEBID returns nodes no longer in the document (#6963)
 					if ( elem && elem.parentNode ) {
+=======
+            if (this.selectedCountry) {
+                this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
+            }
+
+            if (!this.selectedCountryId) {
+                this.countryChanged(countryId);
+            }
+        }
+    },
+
+    watch: {
+        selectedCountryId: function selectedCountryId() {
+            this.updateSelectedCountry();
+        }
+    }
+});
+>>>>>>> development
 
 						// Inject the element directly into the jQuery object
 						this.length = 1;
@@ -12255,6 +12426,7 @@ var rootjQuery,
 		return jQuery.makeArray( selector, this );
 	};
 
+<<<<<<< HEAD
 // Give the init function the jQuery prototype for later instantiation
 init.prototype = jQuery.fn;
 
@@ -12271,6 +12443,47 @@ var rparentsprev = /^(?:parents|prev(?:Until|All))/,
 		next: true,
 		prev: true
 	};
+=======
+    data: function data() {
+        return {
+            password: "",
+            passwordRepeat: "",
+            username: "",
+            billingAddress: {
+                countryId: null,
+                stateId: null
+            },
+            isDisabled: false
+        };
+    },
+    created: function created() {
+        this.$options.template = this.template;
+    },
+
+
+    methods: {
+        /**
+         * Validate the registration form
+         */
+        validateRegistration: function validateRegistration() {
+            var _this = this;
+
+            _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
+                _this.sendRegistration();
+            }).fail(function (invalidFields) {
+                _ValidationService2.default.markInvalidFields(invalidFields, "error");
+            });
+        },
+
+
+        /**
+         * Send the registration
+         */
+        sendRegistration: function sendRegistration() {
+            var _this2 = this;
+
+            var userObject = this.getUserObject();
+>>>>>>> development
 
 jQuery.fn.extend( {
 	has: function( target ) {
@@ -12296,6 +12509,7 @@ jQuery.fn.extend( {
 				jQuery( selectors, context || this.context ) :
 				0;
 
+<<<<<<< HEAD
 		for ( ; i < l; i++ ) {
 			for ( cur = this[ i ]; cur && cur !== context; cur = cur.parentNode ) {
 
@@ -12312,6 +12526,29 @@ jQuery.fn.extend( {
 				}
 			}
 		}
+=======
+                    if (document.getElementById(_this2.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
+                    }
+                } else {
+                    NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
+                }
+
+                if (_this2.backlink !== null && _this2.backlink) {
+                    window.location.assign(_this2.backlink);
+                } else {
+                    location.reload();
+                }
+
+                _this2.isDisabled = false;
+            }).fail(function () {
+                _this2.isDisabled = false;
+            });
+        },
+        setAddressDataField: function setAddressDataField(_ref) {
+            var field = _ref.field,
+                value = _ref.value;
+>>>>>>> development
 
 		return this.pushStack( matched.length > 1 ? jQuery.uniqueSort( matched ) : matched );
 	},
@@ -16561,8 +16798,18 @@ jQuery.each( jQuery.expr.match.bool.source.match( /\w+/g ), function( i, name ) 
 
 
 
+<<<<<<< HEAD
 var rfocusable = /^(?:input|select|textarea|button)$/i,
 	rclickable = /^(?:a|area)$/i;
+=======
+Vue.filter("itemImages", function (images, accessor) {
+    if (!images) {
+        return [];
+    }
+
+    var imageUrls = [];
+    var imagesAccessor = "all";
+>>>>>>> development
 
 jQuery.fn.extend( {
 	prop: function( name, value ) {
@@ -17040,12 +17287,25 @@ jQuery.extend( jQuery.event, {
 			type = hasOwn.call( event, "type" ) ? event.type : event,
 			namespaces = hasOwn.call( event, "namespace" ) ? event.namespace.split( "." ) : [];
 
+<<<<<<< HEAD
 		cur = tmp = elem = elem || document;
 
 		// Don't do events on text and comment nodes
 		if ( elem.nodeType === 3 || elem.nodeType === 8 ) {
 			return;
 		}
+=======
+    if (twigBreadcrumbs) {
+        twigBreadcrumbs.parentElement.removeChild(twigBreadcrumbs);
+    }
+
+    var vueBreadcrumbs = document.querySelector("#vue-rendered-breadcrumbs");
+
+    if (vueBreadcrumbs) {
+        vueBreadcrumbs.style.removeProperty("display");
+    }
+}
+>>>>>>> development
 
 		// focus/blur morphs to focusin/out; ensure we're not firing them right now
 		if ( rfocusMorph.test( type + jQuery.event.triggered ) ) {
@@ -18328,6 +18588,7 @@ jQuery.fn.extend( {
 		.filter( function() {
 			var type = this.type;
 
+<<<<<<< HEAD
 			// Use .is( ":disabled" ) so that fieldset[disabled] works
 			return this.name && !jQuery( this ).is( ":disabled" ) &&
 				rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
@@ -18352,6 +18613,38 @@ jQuery.ajaxSettings.xhr = function() {
 	try {
 		return new window.XMLHttpRequest();
 	} catch ( e ) {}
+=======
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }, { supressNotifications: true }).done(function (data) {
+                commit("setCouponCode", couponCode);
+                commit("setIsBasketLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    },
+    removeCouponCode: function removeCouponCode(_ref10, couponCode) {
+        var state = _ref10.state,
+            commit = _ref10.commit;
+
+        return new Promise(function (resolve, reject) {
+            commit("setIsBasketLoading", true);
+
+            _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
+                commit("setCouponCode", null);
+                commit("setIsBasketLoading", false);
+                resolve(data);
+            }).fail(function (error) {
+                commit("setIsBasketLoading", false);
+                reject(error);
+            });
+        });
+    }
+>>>>>>> development
 };
 
 var xhrSuccessStatus = {

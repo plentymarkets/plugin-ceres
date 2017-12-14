@@ -1,6 +1,6 @@
-var ApiService          = require("services/ApiService");
-var NotificationService = require("services/NotificationService");
-var ModalService        = require("services/ModalService");
+const ApiService          = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
+const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 
@@ -16,18 +16,21 @@ Vue.component("registration", {
         backlink: String
     },
 
-    data: function()
+    data()
     {
         return {
             password      : "",
             passwordRepeat: "",
             username      : "",
-            billingAddress: {},
+            billingAddress: {
+                countryId: null,
+                stateId: null
+            },
             isDisabled: false
         };
     },
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
     },
@@ -36,16 +39,14 @@ Vue.component("registration", {
         /**
          * Validate the registration form
          */
-        validateRegistration: function()
+        validateRegistration()
         {
-            var self = this;
-
             ValidationService.validate($("#registration" + this._uid))
-                .done(function()
+                .done(() =>
                 {
-                    self.sendRegistration();
+                    this.sendRegistration();
                 })
-                .fail(function(invalidFields)
+                .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
@@ -54,15 +55,14 @@ Vue.component("registration", {
         /**
          * Send the registration
          */
-        sendRegistration: function()
+        sendRegistration()
         {
-            var userObject = this.getUserObject();
-            var component  = this;
+            const userObject = this.getUserObject();
 
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer", userObject)
-                .done(function(response)
+                .done(response =>
                 {
                     ApiService.setToken(response);
 
@@ -70,9 +70,9 @@ Vue.component("registration", {
                     {
                         NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
 
-                        if (document.getElementById(component.modalElement) !== null)
+                        if (document.getElementById(this.modalElement) !== null)
                         {
-                            ModalService.findModal(document.getElementById(component.modalElement)).hide();
+                            ModalService.findModal(document.getElementById(this.modalElement)).hide();
                         }
                     }
                     else
@@ -80,20 +80,20 @@ Vue.component("registration", {
                         NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
                     }
 
-                    if (component.backlink !== null && component.backlink)
+                    if (this.backlink !== null && this.backlink)
                     {
-                        window.location.assign(component.backlink);
+                        window.location.assign(this.backlink);
                     }
                     else
                     {
                         location.reload();
                     }
 
-                    component.isDisabled = false;
+                    this.isDisabled = false;
                 })
-                .fail(function()
+                .fail(() =>
                 {
-                    component.isDisabled = false;
+                    this.isDisabled = false;
                 });
         },
 
@@ -106,9 +106,9 @@ Vue.component("registration", {
          * Handle the user object which is send to the server
          * @returns {{contact: {referrerId: number, typeId: number, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}|{contact: {referrerId: number, typeId: number, password: *, options: {typeId: {typeId: number, subTypeId: number, value: *, priority: number}}}}}
          */
-        getUserObject: function()
+        getUserObject()
         {
-            var userObject =
+            const userObject =
                 {
                     contact: {
                         referrerId: 1,

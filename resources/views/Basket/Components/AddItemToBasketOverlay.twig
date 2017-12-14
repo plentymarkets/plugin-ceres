@@ -11,11 +11,11 @@
 
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" @click="closeOverlay()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer">${ timeToClose }</span>s</span>
-                        <h5 class="modal-title">{{ trans("Ceres::Template.basketItemAdded") }}</h5>
+                        <div class="modal-title h5">{{ trans("Ceres::Template.basketItemAdded") }}</div>
                     </div>
                     <!-- ./MODAL HEADER -->
 
