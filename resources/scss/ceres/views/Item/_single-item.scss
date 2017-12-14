@@ -219,7 +219,7 @@
                 background-color: #fff;
                 margin: 12px 5px 0;
                 cursor: pointer;
-                transition: background-color .3s ease, height .3s ease, width .3s ease;
+                transition: all .3s ease;
                 
                 &.active {
                     background-color: $gray-lighter;
@@ -227,8 +227,7 @@
 
                 &.untouched {
                     background-color: $brand-primary;
-                    width: 16px;
-                    height: 16px;
+                    border-color: lighten($brand-primary, 25%);
                 }
             }
         }
