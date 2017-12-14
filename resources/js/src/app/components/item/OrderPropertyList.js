@@ -10,38 +10,36 @@ Vue.component("order-property-list", {
     },
 
     data: function()
-{
+    {
         return {
-            activeSlide: 0
+            activeSlide: 0,
+            propertyGroups: []
         };
     },
 
-    computed:
+    computed: Vuex.mapState({
+        orderPropertyList: state => state.item.variation.documents[0].data.properties
+    }),
+
+    created()
     {
-        propertyGroups()
+        this.$options.template = this.template;
+
+        this.initializePropertyGroups();
+    },
+
+    methods:
+    {
+        initializePropertyGroups()
         {
             if (this.orderPropertyList)
             {
                 const groups = this.getGroupedProperties(this.orderPropertyList);
 
-                return this.getSortedGroups(groups);
+                this.propertyGroups = this.getSortedGroups(groups);
             }
-
-            return [];
         },
 
-        ...Vuex.mapState({
-            orderPropertyList: state => state.item.variation.documents[0].data.properties
-        })
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
-    },
-
-    methods:
-    {
         getGroupedProperties(orderPropertyList)
         {
             const groups = [];
@@ -65,10 +63,13 @@ Vue.component("order-property-list", {
                 {
                     groups.push({
                         id: groupId,
-                        properties: [property]
+                        properties: [property],
+                        touched: false
                     });
                 }
             }
+
+            groups[0].touched = true;
 
             for (const group of groups)
             {
@@ -124,6 +125,7 @@ Vue.component("order-property-list", {
             if (this.activeSlide < this.propertyGroups.length - 1)
             {
                 this.activeSlide++;
+                this.propertyGroups[this.activeSlide].touched = true;
             }
         },
 
@@ -132,6 +134,7 @@ Vue.component("order-property-list", {
             if (this.activeSlide > 0)
             {
                 this.activeSlide--;
+                this.propertyGroups[this.activeSlide].touched = true;
             }
         },
 
@@ -140,6 +143,8 @@ Vue.component("order-property-list", {
             if (position >= 0 && position < this.propertyGroups.length)
             {
                 this.activeSlide = position;
+
+                this.propertyGroups[position].touched = true;
             }
         }
     }
