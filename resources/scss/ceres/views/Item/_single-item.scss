@@ -225,9 +225,14 @@
                     background-color: $gray-lighter;
                 }
 
-                &.untouched {
+                &.highlight {
                     background-color: $brand-primary;
                     border-color: lighten($brand-primary, 25%);
+                }
+
+                &.error {
+                    background-color: $brand-danger;
+                    border-color: lighten($brand-danger, 25%);
                 }
             }
         }
