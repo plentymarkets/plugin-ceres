@@ -16,7 +16,9 @@ Vue.component("single-item", {
         }),
 
         ...Vuex.mapGetters([
-            "variationTotalPrice"
+            "variationTotalPrice",
+            "variationMissingProperties",
+            "variationGroupedProperties"
         ])
     },
 
