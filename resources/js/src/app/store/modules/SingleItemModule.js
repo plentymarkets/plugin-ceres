@@ -110,7 +110,7 @@ const getters =
                 return [];
             }
 
-            const orderPropertyList = state.variation.documents[0].data.properties;
+            const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage);
             const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
             const groups = [];
 

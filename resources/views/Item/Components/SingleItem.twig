@@ -55,7 +55,7 @@
                         <order-properties template="#vue-order-properties" v-if="currentVariation.filter.isSalable"></order-properties>
                     </div> -->
 
-                    <div class="row">
+                    <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
                         <order-property-list></order-property-list>
                     </div>
 
