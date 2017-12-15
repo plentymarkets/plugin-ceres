@@ -2,7 +2,8 @@ const state =
     {
         variation: {},
         variationList: [],
-        variationOrderQuantity: 1
+        variationOrderQuantity: 1,
+        variationMarkInvalidProperties: false
     };
 
 const mutations =
@@ -35,6 +36,11 @@ const mutations =
         setVariationOrderQuantity(state, quantity)
         {
             state.variationOrderQuantity = quantity;
+        },
+
+        setVariationMarkInvalidProperties(state, markFields)
+        {
+            state.variationMarkInvalidProperties = !!markFields;
         }
     };
 
