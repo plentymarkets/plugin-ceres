@@ -52,9 +52,24 @@ Vue.component("order-property-list-item", {
             return "";
         },
 
+        hasError()
+        {
+            if (this.variationMarkInvalidProperties && this.inputType === "radio")
+            {
+                return this.variationMissingProperties.find(property => property.property.id === this.property.id);
+            }
+
+            return this.variationMarkInvalidProperties && !this.property.value;
+        },
+
         ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
-        })
+            isBasketLoading: state => state.basket.isBasketLoading,
+            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
+        }),
+
+        ...Vuex.mapGetters([
+            "variationMissingProperties"
+        ])
     },
 
     created()
