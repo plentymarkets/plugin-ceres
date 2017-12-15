@@ -139,7 +139,7 @@ const getters =
 
         variationMissingProperties(state, getters)
         {
-            if (state && state.variation.documents && state.variation.documents[0].data.properties)
+            if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.requireOrderProperties)
             {
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
