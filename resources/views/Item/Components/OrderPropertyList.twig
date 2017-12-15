@@ -15,7 +15,7 @@
 
             <div class="slider-nav">
                 <span v-for="(propertyGroup, index) in sortedGroupedProperties"
-                      :class="{ 'active': index === activeSlide, 'highlight': !touchedSlides[index] }"
+                      :class="{ 'active': index === activeSlide, 'highlight': !touchedSlides[index], 'error': propertyGroup.hasError }"
                       @click="slideTo(index)"
                       :key="index"
                       v-tooltip

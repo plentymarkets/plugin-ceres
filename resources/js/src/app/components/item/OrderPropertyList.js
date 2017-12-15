@@ -31,12 +31,24 @@ Vue.component("order-property-list", {
             return this.getSortedGroups(groupedProperties);
         },
 
+        missingPropertyGroupIds()
+        {
+            if (this.variationMarkInvalidProperties)
+            {
+                return [... new Set(this.variationMissingProperties.map(property => property.group && property.group.id))];
+            }
+
+            return [];
+        },
+
         ...Vuex.mapState({
-            orderPropertyList: state => state.item.variation.documents[0].data.properties
+            orderPropertyList: state => state.item.variation.documents[0].data.properties,
+            variationMarkInvalidProperties: state => state.item.variationMarkInvalidProperties
         }),
 
         ...Vuex.mapGetters([
-            "variationGroupedProperties"
+            "variationGroupedProperties",
+            "variationMissingProperties"
         ])
     },
 
@@ -71,6 +83,13 @@ Vue.component("order-property-list", {
                 const lowestPosition = group.properties.reduce((prev, current) => (prev.position < current.position) ? prev : current);
 
                 group.lowestPosition = lowestPosition.position;
+
+                const groupId = group.group ? group.group.id : null;
+
+                if (this.variationMarkInvalidProperties && this.missingPropertyGroupIds.includes(groupId))
+                {
+                    group.hasError = true;
+                }
             }
 
             return groups.sort((prev, current) =>
