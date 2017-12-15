@@ -143,8 +143,7 @@ const actions =
                         page                : state.page,
                         facets              : getters.selectedFacetIds.toString(),
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                        template            : "Ceres::ItemList.ItemListView",
-                        variationShowType   : App.config.variationShowType
+                        template            : "Ceres::ItemList.ItemListView"
                     };
                 const url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
