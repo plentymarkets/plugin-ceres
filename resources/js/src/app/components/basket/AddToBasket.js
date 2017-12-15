@@ -24,6 +24,11 @@ Vue.component("add-to-basket", {
         {
             type: Boolean,
             default: false
+        },
+        missingOrderProperties:
+        {
+            type: Array,
+            default: () => []
         }
     },
 
@@ -73,7 +78,12 @@ Vue.component("add-to-basket", {
          */
         addToBasket()
         {
-            if (this.item.filter.isSalable)
+            if (this.missingOrderProperties.length)
+            {
+                this.showMissingPropertiesError();
+            }
+
+            else if (this.item.filter.isSalable)
             {
                 this.waiting = true;
 
@@ -96,6 +106,21 @@ Vue.component("add-to-basket", {
                         NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                     });
             }
+        },
+
+        showMissingPropertiesError()
+        {
+            this.$store.commit("setVariationMarkInvalidProps", true);
+
+            const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
+            let errorMsgContent = "";
+
+            for (const name of propertyNames)
+            {
+                errorMsgContent += name + "<br>";
+            }
+
+            NotificationService.error(Translations.Template.itemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
         },
 
         directToItem()

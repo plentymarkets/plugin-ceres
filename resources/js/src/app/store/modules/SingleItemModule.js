@@ -38,7 +38,7 @@ const mutations =
             state.variationOrderQuantity = quantity;
         },
 
-        setVariationMarkInvalidProperties(state, markFields)
+        setVariationMarkInvalidProps(state, markFields)
         {
             state.variationMarkInvalidProperties = !!markFields;
         }
