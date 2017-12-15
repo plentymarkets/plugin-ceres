@@ -54,7 +54,8 @@
             enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
             shopName: "{{ config("Ceres.header.company_name") }}",
             activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
-            currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }}
+            currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
+            requireOrderProperties: {% if config("Ceres.item.require_all_properties") == "true" %}true{% else %}false{% endif %}
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
