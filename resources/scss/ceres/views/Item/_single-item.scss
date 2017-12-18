@@ -223,6 +223,12 @@
                 
                 &.active {
                     background-color: $gray-lighter;
+
+                    &.error {
+                        // background-color: lighten($brand-danger, 25%);
+                        background-color: mix($brand-danger, $gray-lighter);
+                        border-color: mix(lighten($brand-danger, 25%), $gray-lighter);
+                    }
                 }
 
                 &.highlight {
