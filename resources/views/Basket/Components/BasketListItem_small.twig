@@ -53,7 +53,7 @@
                 <span>{{ trans('Ceres::Template.basketPerItem') }}</span>
                 <br>
                 <span v-if="property.type === 'file'">
-                    <a :href="property.value" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
+                    <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
                 </span>
             </div>
         </div>
