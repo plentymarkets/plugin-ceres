@@ -69,8 +69,11 @@
         
         <div class="row" v-for="property in basketItem.basketItemOrderParams">
             <div v-if="isPropertyVisible(property.propertyId)">
-                <strong class="col-xs-6 col-sm-5">${property.name}</strong>
-                <span class="col-xs-6 col-sm-7">${property.value}</span>
+                <strong class="col-xs-6 col-sm-5">${ property.name }</strong>
+                <span class="col-xs-6 col-sm-7" v-if="property.type === 'file'">
+                    <a :href="property.value" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
+                </span>
+                <span class="col-xs-6 col-sm-7" v-else>${ property.value }</span>
                 <strong class="col-xs-6 col-sm-5">${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency} {{ trans('Ceres::Template.basketPerItem') }}</strong>
             </div>
         </div>

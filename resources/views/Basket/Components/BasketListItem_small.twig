@@ -51,6 +51,10 @@
                 <strong>${property.name} ${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
                 <br>
                 <span>{{ trans('Ceres::Template.basketPerItem') }}</span>
+                <br>
+                <span v-if="property.type === 'file'">
+                    <a :href="property.value" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
+                </span>
             </div>
         </div>
 
