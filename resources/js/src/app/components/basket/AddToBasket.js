@@ -44,6 +44,18 @@ Vue.component("add-to-basket", {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
         },
 
+        requiresProperties()
+        {
+            if (App.config.requireOrderProperties && this.item.properties)
+            {
+                const availableProperties = this.item.properties.filter(property => property.property.isShownOnItemPage);
+
+                return !!availableProperties.length;
+            }
+
+            return false;
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading
         })
