@@ -1,6 +1,4 @@
 Vue.filter("fileUploadPath", path =>
 {
-    const splitPath = path.split("/");
-
-    return "/order-property-file?filePath=" + splitPath[splitPath.length - 2] + splitPath[splitPath.length - 1];
+    return "/order-property-file?filePath=" + path.replace("order_property_files/", "");
 });
