@@ -13992,7 +13992,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
+                params: { template: "Ceres::ItemList.Components.ItemSearch" },
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -14252,10 +14252,10 @@ Vue.component("item-filter", {
     computed: _extends({
         facets: function facets() {
             return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -14313,10 +14313,10 @@ Vue.component("item-filter-list", {
     computed: Vuex.mapState({
         facets: function facets(state) {
             return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -18026,7 +18026,9 @@ var mutations = {
                     var facet = _step.value;
 
                     selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
-                        return selectedFacetIds.includes(facetValue.id);
+                        return selectedFacetIds.some(function (facetId) {
+                            return facetId === facetValue.id + "";
+                        });
                     }));
                 }
             } catch (err) {
@@ -18142,8 +18144,7 @@ var actions = {
                 page: state.page,
                 facets: getters.selectedFacetIds.toString(),
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView",
-                variationShowType: App.config.variationShowType
+                template: "Ceres::ItemList.ItemListView"
             };
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 
