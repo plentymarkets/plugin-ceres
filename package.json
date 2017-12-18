@@ -7,7 +7,7 @@
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
-    "merge": "git checkout development && git pull origin development && git checkout beta && git pull origin beta && git merge development && git push -u origin beta && git checkout stable && git pull origin stable && git merge beta && git push -u origin stable"
+    "build": "gulp"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -44,17 +44,17 @@
     "accounting": "^0.4.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "v4.0.0-alpha.3",
-    "devbridge-autocomplete": "^1.4.5",
+    "devbridge-autocomplete": "^1.4.7",
     "flag-icon-css": "^2.4.0",
     "font-awesome": "^4.6.3",
     "jquery": "^2.2.4",
     "lightbox2": "^2.10.0",
-    "moment": "^2.19.3",
+    "moment": "^2.19.4",
     "owl.carousel": "^2.2.0",
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.4.3",
-    "vue": "^2.5.9",
+    "vue": "^2.5.10",
     "vuex": "^3.0.1"
   }
 }
