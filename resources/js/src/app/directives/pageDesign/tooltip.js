@@ -1,13 +1,16 @@
 const initTooltip = el =>
 {
-    setTimeout(() =>
+    if (window.matchMedia("(min-width: 768px)").matches)
     {
-        $(el).tooltip({
-            trigger: "hover",
-            // eslint-disable-next-line
-            template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-        });
-    }, 1);
+        setTimeout(() =>
+        {
+            $(el).tooltip({
+                trigger: "hover",
+                // eslint-disable-next-line
+                template: '<div class="tooltip" style="z-index:9999" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            });
+        }, 1);
+    }
 };
 
 Vue.directive("tooltip", {
