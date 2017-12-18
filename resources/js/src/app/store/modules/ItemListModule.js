@@ -31,7 +31,7 @@ const mutations =
                 {
                     selectedFacets = selectedFacets.concat(
                         facet.values.filter(facetValue =>
-{
+                        {
                             return selectedFacetIds.some(facetId => facetId === facetValue.id + "");
                         })
                     );
