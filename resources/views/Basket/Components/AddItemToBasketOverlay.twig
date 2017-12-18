@@ -43,8 +43,9 @@
                                 </p>
 
                                 <p class="small" v-for="property in latestBasketEntry.item.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (+ ${latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
-                                    <span v-if="property.property.value">${property.property.value}</span>
+                                    <strong v-if="property.property.value">${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
+                                    <span v-if="property.property.value && property.property.valueType === 'file'">${ property.property.value | fileName }</span>
+                                    <span v-else-if="property.property.value">${ property.property.value }</span>
                                 </p>
                             </div>
                         </div>
