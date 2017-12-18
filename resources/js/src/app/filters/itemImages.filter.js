@@ -1,5 +1,10 @@
 Vue.filter("itemImages", function(images, accessor)
 {
+    if (!images)
+    {
+        return [];
+    }
+
     var imageUrls = [];
     var imagesAccessor = "all";
 

@@ -44,7 +44,14 @@
     {
         "tab"                         : "Global",
         "key"                         : "contact.opening_times",
-        "label"                       : "Opening hours",
+        "label"                       : "Opening hours (DE)",
+        "type"                        : "text",
+        "default"                     : "Montag - Freitag, 00:00 - 24:00"
+    },
+    {
+        "tab"                         : "Global",
+        "key"                         : "contact.en.opening_times",
+        "label"                       : "Opening hours (EN)",
         "type"                        : "text",
         "default"                     : "Monday - Friday, 00:00 - 24:00"
     },
@@ -436,7 +443,8 @@
         {
             "all"                       : "All",
             "main"                      : "Only main variations",
-            "child"                     : "Only child variations"
+            "child"                     : "Only child variations",
+            "combined"                  : "Combine variations"
         },
         "default"                       : "all"
     },

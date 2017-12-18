@@ -13,11 +13,11 @@ Vue.component("item-filter", {
         {
             return this.facet.values.sort((facetA, facetB) =>
             {
-                if (facetA.id > facetB.id)
+                if (facetA.position > facetB.position)
                 {
                     return 1;
                 }
-                if (facetA.id < facetB.id)
+                if (facetA.position < facetB.position)
                 {
                     return -1;
                 }

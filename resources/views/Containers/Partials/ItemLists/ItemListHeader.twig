@@ -2,24 +2,32 @@
                      config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") == 'EN name' or 
                      config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") is empty %}
 
-<p class="h3">
-    {% if listType == "last_seen" %}
-        {% if isNameEmpty %}
-            {{ trans("Ceres::Template.itemListLastSeen") }}
-        {% else %}
-            {{ config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-        {% endif %}
-    {% elseif listType == "cross_selling" %}
-        {% if isNameEmpty %}
-            {{ trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) }}
-        {% else %}
-            {{ config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-        {% endif %}
-    {% elseif listType == "tag_list" %}
-        {% if isNameEmpty %}
-            Tags
-        {% else %}
-            {{ config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") }}
-        {% endif %}
+{% if listType == "last_seen" %}
+    {% if isNameEmpty %}
+        {% set header = trans("Ceres::Template.itemListLastSeen") %}
+    {% else %}
+        {% set header =  config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
     {% endif %}
-</p>
+{% elseif listType == "cross_selling" %}
+    {% if isNameEmpty %}
+        {% set header = trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) %}
+    {% else %}
+        {% set header = config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
+    {% endif %}
+{% elseif listType == "tag_list" %}
+    {% if isNameEmpty %}
+        {% set header = "Tags" %}
+    {% else %}
+        {% set header = config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
+    {% endif %}
+{% endif %}
+
+{% if isHome %}
+    <div class="section-header m-b-1">
+        <h2>{{ header }}</h2>
+    </div>
+{% else %}
+    <p class="h3">
+        {{ header }}
+    </p>
+{% endif %}
