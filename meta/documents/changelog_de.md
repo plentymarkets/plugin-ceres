@@ -15,6 +15,11 @@
 - **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
 - Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
 
+### Behoben
+
+- In der **Wunschliste** werden Bilder von Varianten nun korrekt ausgegeben.
+- Der Button um einen Artikel aus der **Wunschliste** zu entfernen wird nun mittig angezeigt.
+
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
