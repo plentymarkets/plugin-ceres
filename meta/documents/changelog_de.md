@@ -11,6 +11,7 @@
 
 - In der **Wunschliste** werden Bilder von Varianten nun korrekt ausgegeben.
 - Der Button um einen Artikel aus der **Wunschliste** zu entfernen wird nun mittig angezeigt.
+- Auf iOS geräten sollte nun der Cursor in Modalen nicht mehr verrutschen. iOS [Bug-Report](https://bugs.webkit.org/show_bug.cgi?id=176896).
 - Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** manchmal nicht geöffnet hat, bei Klick auf den entsprechenden Button.
 - Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde. (Insofern konfiguriert)
 - Auf der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert)
