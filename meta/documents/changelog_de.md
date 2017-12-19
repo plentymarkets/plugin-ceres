@@ -1,5 +1,15 @@
 # Release Notes für Ceres
 
+## v2.0.4 (unknown)
+
+### Behoben
+
+- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
+
+### Geändert
+
+- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
+
 ## v2.0.3 (unknown)
 
 ### Hinzugefügt
@@ -9,14 +19,12 @@
 ### Behoben
 
 - Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
-- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
 
 ### Geändert
 
 - **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
 - Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
 - Wenn man sich mit einer Email registriert die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
-- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
 
 ### Behoben
 
