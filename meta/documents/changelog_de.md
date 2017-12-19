@@ -25,6 +25,7 @@
 - Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde. (Insofern konfiguriert)
 - Auf der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert)
 - Es wurde ein Fehler behoben, der dazu führte das manche Seite nicht die maximale höhe genommen haben (weißer rand unten).
+- Die styles in Firefox sollten nun wieder korrekt aussehen.
 
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
