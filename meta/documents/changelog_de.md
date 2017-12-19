@@ -1,5 +1,15 @@
 # Release Notes für Ceres
 
+## v2.0.4 (unknown)
+
+### Behoben
+
+- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
+
+### Geändert
+
+- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
+
 ## v2.0.3 (unknown)
 
 ### Hinzugefügt
