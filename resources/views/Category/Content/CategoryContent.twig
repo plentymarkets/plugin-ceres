@@ -1,8 +1,6 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <link rel="canonical" href="{{ services.template.getCanonicalLink() }}">
-
     <title>{{ category.details[0].metaTitle }} | {{ config("Ceres.header.company_name") }}</title>
 
     <meta name="description" content="{{ category.details[0].metaDescription | json_encode }}">

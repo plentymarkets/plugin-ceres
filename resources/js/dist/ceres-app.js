@@ -10612,7 +10612,7 @@ Vue.component("coupon", {
                 NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
             }, function (error) {
                 _this2.waiting = false;
-                NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
+                NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
             });
         },
         removeCode: function removeCode() {
@@ -10627,6 +10627,35 @@ Vue.component("coupon", {
                 _this3.waiting = false;
                 NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
             });
+        },
+        getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
+            var errorMessageKeys = {
+                18: "couponminOrderValueNotReached",
+                51: "couponnotUsableForSpecialOffer",
+                70: "couponalreadyUsedOrInvalidCouponCode",
+                78: "couponcampaignExpired",
+                126: "couponnoMatchingItemInBasket",
+                329: "couponOnlySubscription",
+                330: "couponOnlySingleUsage",
+                331: "couponNoOpenAmount",
+                332: "couponExpired",
+                334: "couponOnlyForNewCustomers",
+                335: "couponOnlyForExistingCustomers",
+                336: "couponWrongCustomerGroup",
+                337: "couponWrongCustomerType",
+                338: "couponNoCustomerTypeProvided",
+                339: "couponNoCustomerTypeActivated",
+                340: "couponNoCustomerGroupActivated",
+                341: "couponCampaignNoWebstoreActivated",
+                342: "couponCampaignWrongWebstoreId",
+                343: "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code]) {
+                return Translations.Template[errorMessageKeys[error.error.code]];
+            }
+
+            return Translations.Template.couponRedeemFailure;
         }
     }
 });
@@ -12221,6 +12250,7 @@ Vue.component("country-select", {
 
         CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
+        this.updateSelectedCountry();
     },
 
 
@@ -12229,7 +12259,7 @@ Vue.component("country-select", {
          * Method to fire when the country has changed
          */
         countryChanged: function countryChanged(value) {
-            this.$emit("country-changed", parseInt(value));
+            this.$emit("country-changed", this.getCountryById(parseInt(value)));
             this.$emit("state-changed", null);
         },
 
@@ -12254,20 +12284,25 @@ Vue.component("country-select", {
 
                 return null;
             });
-        }
-    },
-
-    watch: {
-        selectedCountryId: function selectedCountryId() {
+        },
+        updateSelectedCountry: function updateSelectedCountry() {
             var countryId = this.selectedCountryId || this.shippingCountryId;
 
             this.selectedCountry = this.getCountryById(countryId);
 
             if (this.selectedCountry) {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
-
-                this.$emit("selected-country-changed", this.selectedCountry);
             }
+
+            if (!this.selectedCountryId) {
+                this.countryChanged(countryId);
+            }
+        }
+    },
+
+    watch: {
+        selectedCountryId: function selectedCountryId() {
+            this.updateSelectedCountry();
         }
     }
 });
@@ -13967,7 +14002,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
+                params: { template: "Ceres::ItemList.Components.ItemSearch" },
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -14227,10 +14262,10 @@ Vue.component("item-filter", {
     computed: _extends({
         facets: function facets() {
             return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -14288,10 +14323,10 @@ Vue.component("item-filter-list", {
     computed: Vuex.mapState({
         facets: function facets(state) {
             return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -16085,19 +16120,29 @@ Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
     var urlPath = item.texts.urlPath;
 
-    var link = "/";
+    var link = "";
+
+    if (urlPath.charAt(0) !== "/") {
+        link = "/";
+    }
 
     if (urlPath && urlPath.length) {
         link += urlPath;
-
-        link += enableOldUrlPattern ? "/" : "_";
     }
+
+    var suffix = "";
 
     if (enableOldUrlPattern) {
-        return link + "a-" + item.item.id;
+        suffix = "/a-" + item.item.id;
+    } else {
+        suffix = "_" + item.item.id + "_" + item.variation.id;
     }
 
-    return link + item.item.id + "_" + item.variation.id;
+    if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
+        return link;
+    }
+
+    return link + suffix;
 });
 
 },{}],91:[function(require,module,exports){
@@ -17765,10 +17810,10 @@ var actions = {
             commit = _ref9.commit;
 
         return new Promise(function (resolve, reject) {
-            commit("setCouponCode", couponCode);
             commit("setIsBasketLoading", true);
 
-            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }).done(function (data) {
+            _ApiService2.default.post("/rest/io/coupon", { couponCode: couponCode }, { supressNotifications: true }).done(function (data) {
+                commit("setCouponCode", couponCode);
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
@@ -17782,10 +17827,10 @@ var actions = {
             commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
-            commit("setCouponCode", null);
             commit("setIsBasketLoading", true);
 
             _ApiService2.default.delete("/rest/io/coupon/" + couponCode).done(function (data) {
+                commit("setCouponCode", null);
                 commit("setIsBasketLoading", false);
                 resolve(data);
             }).fail(function (error) {
@@ -18002,7 +18047,9 @@ var mutations = {
                     var facet = _step.value;
 
                     selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
-                        return selectedFacetIds.includes(facetValue.id);
+                        return selectedFacetIds.some(function (facetId) {
+                            return facetId === facetValue.id + "";
+                        });
                     }));
                 }
             } catch (err) {
@@ -18118,8 +18165,7 @@ var actions = {
                 page: state.page,
                 facets: getters.selectedFacetIds.toString(),
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView",
-                variationShowType: App.config.variationShowType
+                template: "Ceres::ItemList.ItemListView"
             };
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 

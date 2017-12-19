@@ -21,6 +21,7 @@
   "item.manufacturer.position",
   "item.manufacturer.externalName",
   "texts*",
+  "defaultCategories",
   "variation.id",
   "variation.availability.names.name",
   "variation.availability.id",
