@@ -28,13 +28,13 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 m-y-1">
                     <button v-if="!buttonLockState" :disabled="waiting" href="#" class="btn btn-block btn-primary" @click="addToBasket()">
-                        {{ trans("Ceres::Template.addToBasket") }}
                         <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.addToBasket") }}
                     </button>
                     <button v-else href="#" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" 
                             data-placement="top" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}:' + item.variation.maximumOrderQuantity">
-                        {{ trans("Ceres::Template.addToBasket") }}
                         <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.addToBasket") }}
                     </button>
                 </div>
             </span>
@@ -44,12 +44,12 @@
 
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="(!hasChildren && item.filter.isSalable) && (item.variation.minimumOrderQuantity == null && item.variation.maximumOrderQuantity == null)" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
-                    <span class="mobile-text-only">{{ trans("Ceres::Template.addToBasket") }}</span>
                     <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.addToBasket") }}</span>
                 </button>
                 <button type="button" v-if="hasChildren || item.variation.minimumOrderQuantity != null || item.variation.maximumOrderQuantity != null || !item.filter.isSalable" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
-                    <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
                     <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
                 </button>
                 {# maybe use the button for wishlist #}
                 {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
