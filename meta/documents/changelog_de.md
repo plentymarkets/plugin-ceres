@@ -9,6 +9,7 @@
 ### Behoben
 
 - Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
+- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
 
 ### Geändert
 
