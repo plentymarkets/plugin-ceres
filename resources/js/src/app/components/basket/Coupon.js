@@ -64,7 +64,7 @@ Vue.component("coupon", {
                 error =>
                 {
                     this.waiting = false;
-                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
+                    NotificationService.error(this.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
                 });
         },
 
@@ -83,6 +83,38 @@ Vue.component("coupon", {
                     this.waiting = false;
                     NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
+        },
+
+        getCouponRedemtionErrorMessage(error)
+        {
+            const errorMessageKeys = {
+                18:     "couponminOrderValueNotReached",
+                51:     "couponnotUsableForSpecialOffer",
+                70:     "couponalreadyUsedOrInvalidCouponCode",
+                78:     "couponcampaignExpired",
+                126:    "couponnoMatchingItemInBasket",
+                329:    "couponOnlySubscription",
+                330:    "couponOnlySingleUsage",
+                331:    "couponNoOpenAmount",
+                332:    "couponExpired",
+                334:    "couponOnlyForNewCustomers",
+                335:    "couponOnlyForExistingCustomers",
+                336:    "couponWrongCustomerGroup",
+                337:    "couponWrongCustomerType",
+                338:    "couponNoCustomerTypeProvided",
+                339:    "couponNoCustomerTypeActivated",
+                340:    "couponNoCustomerGroupActivated",
+                341:    "couponCampaignNoWebstoreActivated",
+                342:    "couponCampaignWrongWebstoreId",
+                343:    "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code])
+            {
+                return Translations.Template[errorMessageKeys[error.error.code]];
+            }
+
+            return Translations.Template.couponRedeemFailure;
         }
     }
 });

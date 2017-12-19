@@ -56,13 +56,13 @@
     services.itemLoader.loadForTemplate(
     'Ceres::ItemList.ItemListView',
     itemLoaderPresets.categoryList,
-    {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+    {'categoryId': category3.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
 
     {% set paginatedCategoryList2 =
     services.itemLoader.loadForTemplate(
     'Ceres::ItemList.ItemListView',
     itemLoaderPresets.categoryList,
-    {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort, 'variationShowType': config("Ceres.item.variation_show_type")}) %}
+    {'categoryId': category6.id, 'page':1, 'items':4, 'sorting': itemSort}) %}
 
     {% set categoryList1 = paginatedCategoryList1.documents %}
     {% set categoryList2 = paginatedCategoryList2.documents %}
@@ -72,6 +72,12 @@
     {{ component( "Ceres::Basket.Components.AddToBasket" ) }}
 
     <div class="home container-max">
+        <div class="row">
+            <div class="homepage-title m-b-1">
+                <h1>{{ config("Ceres.header.company_name") }}</h1>
+            </div>
+        </div>
+
         <div class="row">
             <div class="cmp cmp-hero">
                 {% set homepageContainer1 = LayoutContainer.show("Ceres::Homepage.Container1") %}
@@ -91,9 +97,9 @@
                                                      class="img-fluid">
                                                 {% if slider1.item.texts is not empty %}
                                                     <div class="carousel-caption">
-                                                        <h1><i class="fa fa-angle-double-right"
+                                                        <h2><i class="fa fa-angle-double-right"
                                                                aria-hidden="true"></i> {{ slider1.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                        </h2>
                                                     </div>
                                                 {% endif %}
                                             </a>
@@ -109,9 +115,9 @@
                                                      class="img-fluid">
                                                 {% if slider2.item.texts is not empty %}
                                                     <div class="carousel-caption">
-                                                        <h1><i class="fa fa-angle-double-right"
+                                                        <h2><i class="fa fa-angle-double-right"
                                                                aria-hidden="true"></i> {{ slider2.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                        </h2>
                                                     </div>
                                                 {% endif %}
                                             </a>
@@ -127,9 +133,9 @@
                                                      class="img-fluid">
                                                 {% if slider3.item.texts is not empty %}
                                                     <div class="carousel-caption">
-                                                        <h1><i class="fa fa-angle-double-right"
+                                                        <h2><i class="fa fa-angle-double-right"
                                                                aria-hidden="true"></i> {{ slider3.item.texts | itemName(configItemName) }}
-                                                        </h1>
+                                                        </h2>
                                                     </div>
                                                 {% endif %}
                                             </a>
@@ -230,10 +236,10 @@
                                                      alt="{{ category1.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
-                                                <h4 class="featured-category-headline">
+                                                <h2 class="featured-category-headline">
                                                     <i class="fa fa-angle-double-right"
                                                        aria-hidden="true"></i> {{ category1.details[0].name }}
-                                                </h4>
+                                                </h2>
                                             </div>
                                         </a>
                                     </div>
@@ -256,10 +262,10 @@
                                                      alt="{{ category2.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
-                                                <h4 class="featured-category-headline">
+                                                <h2 class="featured-category-headline">
                                                     <i class="fa fa-angle-double-right"
                                                        aria-hidden="true"></i> {{ category2.details[0].name }}
-                                                </h4>
+                                                </h2>
                                             </div>
                                         </a>
                                     </div>
@@ -277,7 +283,7 @@
                 <div class="m-b-2 clearfix">
                     {% if homepageContainer6 | trim is empty %}
                         <div class="section-header m-b-1">
-                            <h4>{{ category3.details[0].name }}</h4>
+                            <h2>{{ category3.details[0].name }}</h2>
                             <a href="{{ services.category.getURL(category3, lang) }}"
                                class="section-link-all"><i
                                         class="fa fa-angle-double-right"
@@ -313,10 +319,10 @@
                                                      alt="{{ category4.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
-                                                <h4 class="featured-category-headline">
+                                                <h2 class="featured-category-headline">
                                                     <i class="fa fa-angle-double-right"
                                                        aria-hidden="true"></i> {{ category4.details[0].name }}
-                                                </h4>
+                                                </h2>
 
                                             </div>
                                         </a>
@@ -340,10 +346,10 @@
                                                      alt="{{ category5.details[0].name }}">
                                             {% endif %}
                                             <div class="featured-category-inner">
-                                                <h4 class="featured-category-headline">
+                                                <h2 class="featured-category-headline">
                                                     <i class="fa fa-angle-double-right"
                                                        aria-hidden="true"></i> {{ category5.details[0].name }}
-                                                </h4>
+                                                </h2>
                                             </div>
                                         </a>
                                     </div>
@@ -363,7 +369,7 @@
                 <div class="m-b-2 clearfix">
                     {% if homepageContainer9 | trim is empty %}
                         <div class="section-header m-b-1">
-                            <h4>{{ category6.details[0].name }}</h4>
+                            <h2>{{ category6.details[0].name }}</h2>
                             <a href="{{ services.category.getURL(category6, lang) }}"
                                class="section-link-all"><i
                                         class="fa fa-angle-double-right"

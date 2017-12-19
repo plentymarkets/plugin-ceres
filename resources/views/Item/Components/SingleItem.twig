@@ -16,11 +16,9 @@
 
                 <!-- ITEM DETAIL -->
                 <div class="col-md-5 single-rightside m-t-1" v-stick-in-parent>
-                    <h6 class="producertag">
-                        <a href="#" class="producer text-muted" v-if="currentVariation.filter.hasManufacturer">
-                            ${ currentVariation.item.manufacturer.externalName }
-                        </a>
-                    </h6>
+                    <div class="producertag h6 producer text-muted" v-if="currentVariation.filter.hasManufacturer">
+                        ${ currentVariation.item.manufacturer.externalName }
+                    </div>
 
                     <h1 class="h2 title">
                         <span v-if="currentVariation.variation.name != ''">
