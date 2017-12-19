@@ -11271,10 +11271,26 @@ Vue.component("container-item-list", {
 
     methods: {
         initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight: true,
                 dots: true,
                 items: 4,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    544: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                },
                 lazyLoad: false,
                 loop: false,
                 margin: 30,
@@ -11283,7 +11299,19 @@ Vue.component("container-item-list", {
                 navClass: ["owl-single-item-nav left carousel-control list-control-special", "owl-single-item-nav right carousel-control list-control-special"],
                 navContainerClass: "",
                 navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
+                smartSpeed: 350,
+                onChanged: function onChanged(property) {
+                    var begin = property.item.index;
+                    var end = begin + property.page.size;
+
+                    for (var i = begin; i < end; i++) {
+                        var categoryItem = _this2.$refs["categoryItem_" + i];
+
+                        if (categoryItem) {
+                            categoryItem[0].loadFirstImage();
+                        }
+                    }
+                }
             });
         }
     }
@@ -13737,6 +13765,14 @@ Vue.component("category-image-carousel", {
                     owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
                 }
             });
+        },
+
+        loadFirstImage: function loadFirstImage() {
+            var itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage) {
+                itemLazyImage.loadImage();
+            }
         }
     }
 });
@@ -13758,10 +13794,6 @@ Vue.component("category-item", {
             variationRetailPrice: 0
         };
     },
-    created: function created() {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
-    },
 
 
     computed: {
@@ -13779,7 +13811,24 @@ Vue.component("category-item", {
         texts: function texts() {
             return this.itemData.texts;
         }
+    },
+
+    created: function created() {
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+    },
+
+
+    methods: {
+        loadFirstImage: function loadFirstImage() {
+            var categoryImageCarousel = this.$refs.categoryImageCarousel;
+
+            if (categoryImageCarousel) {
+                categoryImageCarousel.loadFirstImage();
+            }
+        }
     }
+
 });
 
 },{}],42:[function(require,module,exports){
@@ -13802,6 +13851,13 @@ Vue.component("item-lazy-img", {
                 $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
             }, 1);
         });
+    },
+
+
+    methods: {
+        loadImage: function loadImage() {
+            $(this.$refs.lazyImg).trigger("appear");
+        }
     }
 });
 
