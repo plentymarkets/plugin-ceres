@@ -49,7 +49,10 @@
         <div class="row m-b-3">
             <div class="col-xs-12 col-sm-5 offset-sm-7">
                 {{ LayoutContainer.show("Ceres::Basket.BeforeCheckoutButton") }}
-                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/checkout">{{ trans("Ceres::Template.orderCheckout") }} <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                <a v-waiting-animation-infinite class="btn btn-primary btn-block" href="/checkout">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    {{ trans("Ceres::Template.orderCheckout") }}
+                </a>
                 {{ LayoutContainer.show("Ceres::Basket.AfterCheckoutButton") }}
             </div>
         </div>
