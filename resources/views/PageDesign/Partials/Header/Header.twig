@@ -59,7 +59,7 @@
                     </li>
                 {% endif %}
                 <li class="list-inline-item control-basket">
-                    <a href="#" id="toggleBasketPreview" class="toggle-basket-preview">
+                    <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                         {% if config("Ceres.header.basket_values") != "sum" %}
                             <span class="badge-right" v-basket-item-quantity="this.$store.state.basket.data.itemQuantity">0</span>
                         {% endif %}
