@@ -1,3 +1,20 @@
+.homepage-title {
+	padding: 1rem 1.5rem;
+	border-bottom: 0;
+	background: $brand-primary;
+	position: relative;
+	display: flex;
+
+	& > h1 {
+		margin: .5rem auto;
+		color: $white;
+		border-bottom: 2px solid $white;
+		padding: 0 0 .5rem;
+		font-size: 2.5rem;
+		letter-spacing: 1.25px;
+	}
+}
+
 .home {
 
 	.product-list {
@@ -16,7 +33,7 @@
 					.carousel-caption {
 						bottom:0;
 						padding-bottom: 10px;
-						h3, h1 {
+						h3, h2, h1 {
 							font-family: $font-family-heading;
 							text-shadow: none;
 							color: $white;
@@ -33,7 +50,7 @@
 						}
 					}
 					.hero-category:hover {
-						h3, h1 {
+						h3, h2, h1 {
 							background: rgba($brand-primary, 1);
 							transition: all .3s ease;
 						}
@@ -129,7 +146,7 @@
 	background: $brand-primary;
     position: relative;
     font-family: $font-family-heading;
-    h4 {
+    h1, h2, h3, h4, h5, h6 {
     	padding: .2rem 0 0;
 	    margin: 0;
 	    text-transform: uppercase;
@@ -208,7 +225,7 @@
 						.carousel-caption {
 							bottom:20px;
 							padding-bottom: 20px;
-							h3, h1 {
+							h3, h2, h1 {
 								font-size: 3rem;
 							}
 							h3 {
@@ -263,4 +280,10 @@
 
 [v-cloak] {
 	display: none;
+}
+
+// FIX iOS 11.0.0 - 11.X bug https://bugs.webkit.org/show_bug.cgi?id=176896
+body.modal-open {
+	position: fixed;
+	width: 100%;
 }
