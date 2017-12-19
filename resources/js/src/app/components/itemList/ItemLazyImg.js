@@ -21,5 +21,13 @@ Vue.component("item-lazy-img", {
                 $(this.$refs.lazyImg).show().lazyload({threshold : 100});
             }, 1);
         });
+    },
+
+    methods:
+    {
+        loadImage()
+        {
+            $(this.$refs.lazyImg).trigger("appear");
+        }
     }
 });
