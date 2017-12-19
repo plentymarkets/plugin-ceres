@@ -10,7 +10,7 @@
 
 - In der **Wunschliste** werden Bilder von Varianten nun korrekt ausgegeben.
 - Der Button um einen Artikel aus der **Wunschliste** zu entfernen wird nun mittig angezeigt.
-- Auf iOS geräten sollte nun der Cursor in Modalen nicht mehr verrutschen.
+- Auf iOS geräten sollte nun der Cursor in Modalen nicht mehr verrutschen. iOS [Bug-Report](https://bugs.webkit.org/show_bug.cgi?id=176896).
 
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
