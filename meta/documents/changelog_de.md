@@ -21,6 +21,7 @@
 - Der Button um einen Artikel aus der **Wunschliste** zu entfernen wird nun mittig angezeigt.
 - Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** manchmal nicht geöffnet hat, bei Klick auf den entsprechenden Button.
 - Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde. (Insofern konfiguriert)
+- Auf der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert)
 
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
