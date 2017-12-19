@@ -5,6 +5,7 @@
 ### Geändert
 
 - Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
+- Wenn man sich mit einer Email registriert die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
 
 ### Behoben
 
