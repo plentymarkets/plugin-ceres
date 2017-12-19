@@ -443,7 +443,8 @@
         {
             "all"                       : "All",
             "main"                      : "Only main variations",
-            "child"                     : "Only child variations"
+            "child"                     : "Only child variations",
+            "combined"                  : "Combine variations"
         },
         "default"                       : "all"
     },
