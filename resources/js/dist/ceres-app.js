@@ -10609,15 +10609,22 @@ Vue.component("coupon", {
         redeemCode: function redeemCode() {
             var _this2 = this;
 
-            this.waiting = true;
+            // remove whitespaces
+            this.couponCode = this.couponCode.replace(/\s/g, "");
 
-            this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
-                _this2.waiting = false;
-                NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-            }, function (error) {
-                _this2.waiting = false;
-                NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
-            });
+            if (this.couponCode.length > 0) {
+                this.waiting = true;
+
+                this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
+                    _this2.waiting = false;
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                }, function (error) {
+                    _this2.waiting = false;
+                    NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+                });
+            } else {
+                NotificationService.error(Translations.Template.couponIsEmpty).closeAfter(10000);
+            }
         },
         removeCode: function removeCode() {
             var _this3 = this;
