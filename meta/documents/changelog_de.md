@@ -19,11 +19,13 @@
 ### Behoben
 
 - Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
+- Ein Fehler wurde behoben der das Rendern der Filter verhindert hat.
 
 ### Geändert
 
 - **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
 - Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
+- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt.
 - Wenn man sich mit einer Email registriert die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
 
 ### Behoben

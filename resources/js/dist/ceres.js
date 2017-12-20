@@ -11049,10 +11049,15 @@ Vue.component("basket-list-item", {
 
 
     computed: _extends({
-        imageUrl: function imageUrl() {
+        image: function image() {
             var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
-            return img.url;
+            return img;
+        },
+        altText: function altText() {
+            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+
+            return altText;
         },
         isInputLocked: function isInputLocked() {
             return this.waiting || this.isBasketLoading;
@@ -13527,13 +13532,7 @@ Vue.component("item-image-carousel", {
 
     methods: {
         getImageCount: function getImageCount() {
-            var images = this.currentVariation.documents[0].data.images;
-
-            if (images.variation && images.variation.length) {
-                return images.variation.length;
-            }
-
-            return images.all.length;
+            return this.carouselImages.length;
         },
         reInitialize: function reInitialize() {
             var $owl = $(this.$refs.single);
@@ -13613,6 +13612,11 @@ Vue.component("item-image-carousel", {
 
                 return 0;
             });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+
+            return altText;
         }
     }
 });
@@ -14101,6 +14105,11 @@ Vue.component("category-image-carousel", {
             });
         },
 
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
         loadFirstImage: function loadFirstImage() {
             var itemLazyImage = this.$refs.itemLazyImage;
 
@@ -16487,10 +16496,11 @@ Vue.filter("itemImages", function (images, accessor) {
         imagesAccessor = "variation";
     }
 
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
+    for (var image in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][image][accessor];
+        var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
 
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate: alternate });
     }
 
     return imageUrls;
@@ -18430,7 +18440,7 @@ var state = {
 
 var mutations = {
     setFacets: function setFacets(state, facets) {
-        state.facets = facets;
+        state.facets = facets || [];
     },
     setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
         var selectedFacets = [];
