@@ -16191,19 +16191,29 @@ Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
     var urlPath = item.texts.urlPath;
 
-    var link = "/";
+    var link = "";
+
+    if (urlPath.charAt(0) !== "/") {
+        link = "/";
+    }
 
     if (urlPath && urlPath.length) {
         link += urlPath;
-
-        link += enableOldUrlPattern ? "/" : "_";
     }
+
+    var suffix = "";
 
     if (enableOldUrlPattern) {
-        return link + "a-" + item.item.id;
+        suffix = "/a-" + item.item.id;
+    } else {
+        suffix = "_" + item.item.id + "_" + item.variation.id;
     }
 
-    return link + item.item.id + "_" + item.variation.id;
+    if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
+        return link;
+    }
+
+    return link + suffix;
 });
 
 },{}],92:[function(require,module,exports){
