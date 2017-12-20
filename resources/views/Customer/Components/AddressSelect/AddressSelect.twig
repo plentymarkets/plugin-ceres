@@ -131,20 +131,33 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>{{ trans("Ceres::Template.addressDeleteWarning") }}</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3 offset-sm-6">
-                                        <button type="button" class="btn btn-primary btn-block"
-                                                @click="closeDeleteModal">{{ trans("Ceres::Template.generalCancel") }}</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button type="button" class="btn btn-primary btn-block"
-                                                @click="deleteAddress">{{ trans("Ceres::Template.generalDelete") }}</button>
+                                        <div class="modal-address">
+                                            <strong v-if="addressToDelete.name1 && addressToDelete.name1.length > 0">${addressToDelete.name1}</strong>
+                                            <strong v-if="!addressToDelete.name1 || addressToDelete.name1.length == 0">${addressToDelete | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</strong>
+                                            <span v-else>${selectedAddress | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</span>
+                                            <span>${addressToDelete.name4}</span>
+                                            <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
+                                            <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>
+                                            <span>${getCountryName(addressToDelete.countryId)}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
+                                    <button type="button" class="btn btn-primary btn-medium btn-m-r btn-outline-primary" @click="closeDeleteModal">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        {{ trans("Ceres::Template.generalCancel") }}
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
+                                        <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
+                                        {{ trans("Ceres::Template.generalDelete") }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
