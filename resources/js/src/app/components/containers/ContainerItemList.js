@@ -40,6 +40,20 @@ Vue.component("container-item-list", {
                 autoHeight       : true,
                 dots             : true,
                 items            : 4,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    544: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                },
                 lazyLoad         : false,
                 loop             : false,
                 margin           : 30,
@@ -54,7 +68,22 @@ Vue.component("container-item-list", {
                     "<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>",
                     "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"
                 ],
-                smartSpeed       : 350
+                smartSpeed       : 350,
+                onChanged: property =>
+                {
+                    const begin = property.item.index;
+                    const end = begin + property.page.size;
+
+                    for (let i = begin; i < end; i++)
+                    {
+                        const categoryItem = this.$refs["categoryItem_" + i];
+
+                        if (categoryItem)
+                        {
+                            categoryItem[0].loadFirstImage();
+                        }
+                    }
+                }
             });
         }
     }

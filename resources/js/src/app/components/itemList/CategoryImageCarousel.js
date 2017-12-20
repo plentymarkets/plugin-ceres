@@ -94,6 +94,16 @@ Vue.component("category-image-carousel", {
             const altText = image && image.alternate ? image.alternate : this.altText;
 
             return altText;
+        },
+
+        loadFirstImage()
+        {
+            const itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage)
+            {
+                itemLazyImage.loadImage();
+            }
         }
     }
 });
