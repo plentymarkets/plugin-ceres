@@ -66,7 +66,7 @@ Vue.component("registration", {
                 {
                     ApiService.setToken(response);
 
-                    if (typeof response === "object")
+                    if (!response.code)
                     {
                         NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
 
@@ -74,19 +74,19 @@ Vue.component("registration", {
                         {
                             ModalService.findModal(document.getElementById(this.modalElement)).hide();
                         }
+
+                        if (this.backlink !== null && this.backlink)
+                        {
+                            window.location.assign(this.backlink);
+                        }
+                        else
+                        {
+                            location.reload();
+                        }
                     }
                     else
                     {
                         NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
-                    }
-
-                    if (this.backlink !== null && this.backlink)
-                    {
-                        window.location.assign(this.backlink);
-                    }
-                    else
-                    {
-                        location.reload();
                     }
 
                     this.isDisabled = false;

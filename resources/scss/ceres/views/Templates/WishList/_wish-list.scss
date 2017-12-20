@@ -78,6 +78,11 @@
                 color: $gray-light;
                 cursor: pointer;
                 transition: color .2s ease-in-out;
+                display: flex;
+
+                & > i {
+                    align-self: center;
+                }
 
                 &:hover {
                     color: $gray-dark;
