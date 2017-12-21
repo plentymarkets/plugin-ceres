@@ -10609,15 +10609,22 @@ Vue.component("coupon", {
         redeemCode: function redeemCode() {
             var _this2 = this;
 
-            this.waiting = true;
+            // remove whitespaces
+            this.couponCode = this.couponCode.replace(/\s/g, "");
 
-            this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
-                _this2.waiting = false;
-                NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-            }, function (error) {
-                _this2.waiting = false;
-                NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
-            });
+            if (this.couponCode.length > 0) {
+                this.waiting = true;
+
+                this.$store.dispatch("redeemCouponCode", this.couponCode).then(function (response) {
+                    _this2.waiting = false;
+                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                }, function (error) {
+                    _this2.waiting = false;
+                    NotificationService.error(_this2.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+                });
+            } else {
+                NotificationService.error(Translations.Template.couponIsEmpty).closeAfter(10000);
+            }
         },
         removeCode: function removeCode() {
             var _this3 = this;
@@ -12309,8 +12316,6 @@ Vue.component("country-select", {
 },{"services/CountryService":98}],26:[function(require,module,exports){
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -12378,20 +12383,20 @@ Vue.component("registration", {
             ApiService.post("/rest/io/customer", userObject).done(function (response) {
                 ApiService.setToken(response);
 
-                if ((typeof response === "undefined" ? "undefined" : _typeof(response)) === "object") {
+                if (!response.code) {
                     NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
 
                     if (document.getElementById(_this2.modalElement) !== null) {
                         ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
                     }
+
+                    if (_this2.backlink !== null && _this2.backlink) {
+                        window.location.assign(_this2.backlink);
+                    } else {
+                        location.reload();
+                    }
                 } else {
                     NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
-                }
-
-                if (_this2.backlink !== null && _this2.backlink) {
-                    window.location.assign(_this2.backlink);
-                } else {
-                    location.reload();
                 }
 
                 _this2.isDisabled = false;
