@@ -1,5 +1,23 @@
 # Release Notes for Ceres
 
+## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Added possibility in the **Checkout**  for payment plugins to deactivate themselves.
+- Upon registering with an already existing email, the overly stays upon to better perceive the error message.
+
+### Fixed
+
+- In the **Wishlist**, images of variations are displayed correctly.
+- The button to remove an item from the **Wishlist** is now centered.
+- On iOS devices, the cursor does not jump on modals anymore. iOS [Bug report](https://bugs.webkit.org/show_bug.cgi?id=176896).
+- Fixed error where the **Shopping cart preview** did not open occasionally after button click.
+- Fixed error where the **Shopping cart preview** did not open after putting an item into the shopping cart (if configurated).
+- Shipping costs are linked correctly in the single item view (if configurated).
+- Fixed error where some pages did not use full height (leading to a white margin at the bottom).
+- Styles in Firefox are displayed correctly.
+
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
