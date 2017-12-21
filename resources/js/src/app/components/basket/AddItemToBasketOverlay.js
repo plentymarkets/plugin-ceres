@@ -77,7 +77,12 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 setTimeout(function()
                 {
-                    $("body").toggleClass("open-right");
+                    const vueApp = document.querySelector("#vue-app");
+
+                    if (vueApp)
+                    {
+                        vueApp.classList.toggle("open-right");
+                    }
                 }, 1);
             }
         }

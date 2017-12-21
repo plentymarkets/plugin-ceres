@@ -53,19 +53,29 @@ Vue.component("coupon", {
     {
         redeemCode()
         {
-            this.waiting = true;
+            // remove whitespaces
+            this.couponCode = this.couponCode.replace(/\s/g, "");
 
-            this.$store.dispatch("redeemCouponCode", this.couponCode).then(
-                response =>
-                {
-                    this.waiting = false;
-                    NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
-                },
-                error =>
-                {
-                    this.waiting = false;
-                    NotificationService.error(Translations.Template.couponRedeemFailure).closeAfter(10000);
-                });
+            if (this.couponCode.length > 0)
+            {
+                this.waiting = true;
+
+                this.$store.dispatch("redeemCouponCode", this.couponCode).then(
+                    response =>
+                    {
+                        this.waiting = false;
+                        NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+                        NotificationService.error(this.getCouponRedemtionErrorMessage(error)).closeAfter(10000);
+                    });
+            }
+            else
+            {
+                NotificationService.error(Translations.Template.couponIsEmpty).closeAfter(10000);
+            }
         },
 
         removeCode()
@@ -83,6 +93,38 @@ Vue.component("coupon", {
                     this.waiting = false;
                     NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
                 });
+        },
+
+        getCouponRedemtionErrorMessage(error)
+        {
+            const errorMessageKeys = {
+                18:     "couponminOrderValueNotReached",
+                51:     "couponnotUsableForSpecialOffer",
+                70:     "couponalreadyUsedOrInvalidCouponCode",
+                78:     "couponcampaignExpired",
+                126:    "couponnoMatchingItemInBasket",
+                329:    "couponOnlySubscription",
+                330:    "couponOnlySingleUsage",
+                331:    "couponNoOpenAmount",
+                332:    "couponExpired",
+                334:    "couponOnlyForNewCustomers",
+                335:    "couponOnlyForExistingCustomers",
+                336:    "couponWrongCustomerGroup",
+                337:    "couponWrongCustomerType",
+                338:    "couponNoCustomerTypeProvided",
+                339:    "couponNoCustomerTypeActivated",
+                340:    "couponNoCustomerGroupActivated",
+                341:    "couponCampaignNoWebstoreActivated",
+                342:    "couponCampaignWrongWebstoreId",
+                343:    "couponCampaignNoWebstoreIdGiven"
+            };
+
+            if (error && error.error && error.error.code && errorMessageKeys[error.error.code])
+            {
+                return Translations.Template[errorMessageKeys[error.error.code]];
+            }
+
+            return Translations.Template.couponRedeemFailure;
         }
     }
 });

@@ -31,7 +31,8 @@
                 </div>
                 <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
-                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>{{ trans("Ceres::Template.accLogin") }}
+                        <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
+                        {{ trans("Ceres::Template.accLogin") }}
                     </button>
                 </div>
             </div>
@@ -58,12 +59,13 @@
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
 
                     <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary btn-medium btn-m-r">
-                        {{ trans("Ceres::Template.generalBackToLogin") }}
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.generalBackToLogin") }}
                     </button>
 
                     <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'pull-right': !modalElement }">
-                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>{{ trans("Ceres::Template.generalSend") }}
+                        <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        {{ trans("Ceres::Template.generalSend") }}
                     </button>
                 </div>
             </div>

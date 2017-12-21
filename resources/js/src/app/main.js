@@ -52,18 +52,6 @@ var init = (function($, window, document)
         var $toggleListView = $(".toggle-list-view");
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
-        setTimeout(function()
-        {
-            var $toggleBasketPreview = $("#toggleBasketPreview, #closeBasketPreview");
-
-            $toggleBasketPreview.on("click", function(evt)
-            {
-                evt.preventDefault();
-                evt.stopPropagation();
-                $("#vue-app").toggleClass("open-right");
-            });
-        }, 1);
-
         $(document).on("click", function(evt)
         {
             if ($("#vue-app").hasClass("open-right"))

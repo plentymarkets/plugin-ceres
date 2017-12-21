@@ -92,18 +92,16 @@
 
                 <div class="prices">
                     {% if item.data.calculatedPrices.rrp.price != '0' %}
-                        <a href="{{ itemUrl }}" class="price-view-port">
+                        <div class="price-view-port">
                             <del class="crossprice">
                                 {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
                             </del>
-                        </a>
+                        </div>
                     {% endif %}
 
-                    <a href="{{ itemUrl }}">
-                        <div class="price">
-                            {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
-                        </div>
-                    </a>
+                    <div class="price">
+                        {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
+                    </div>
                 </div>
 
                 {{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}
