@@ -26,11 +26,18 @@ Vue.component("basket-list-item", {
 
     computed:
     {
-        imageUrl()
+        image()
         {
             const img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
-            return img.url;
+            return img;
+        },
+
+        altText()
+        {
+            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+
+            return altText;
         },
 
         isInputLocked()

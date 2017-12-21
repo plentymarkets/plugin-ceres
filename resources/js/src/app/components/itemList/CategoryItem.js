@@ -18,12 +18,6 @@ Vue.component("category-item", {
         };
     },
 
-    created()
-    {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
-    },
-
     computed:
     {
         /**
@@ -41,5 +35,25 @@ Vue.component("category-item", {
         {
             return this.itemData.texts;
         }
+    },
+
+    created()
+    {
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+    },
+
+    methods:
+    {
+        loadFirstImage()
+        {
+            const categoryImageCarousel = this.$refs.categoryImageCarousel;
+
+            if (categoryImageCarousel)
+            {
+                categoryImageCarousel.loadFirstImage();
+            }
+        }
     }
+
 });
