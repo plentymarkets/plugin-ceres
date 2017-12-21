@@ -19234,60 +19234,64 @@ var getters = {
             return [];
         }
 
-        var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
-            return property.property.isShownOnItemPage;
-        });
-        var groupIds = [].concat(_toConsumableArray(new Set(orderPropertyList.map(function (property) {
-            return property.group && property.group.id;
-        }))));
-        var groups = [];
+        if (state.variation.documents[0].data.properties) {
+            var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
+                return property.property.isShownOnItemPage;
+            });
+            var groupIds = [].concat(_toConsumableArray(new Set(orderPropertyList.map(function (property) {
+                return property.group && property.group.id;
+            }))));
+            var groups = [];
 
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
 
-        try {
-            var _loop = function _loop() {
-                var id = _step2.value;
-
-                var groupProperties = orderPropertyList.filter(function (property) {
-                    return property.group === id || property.group && property.group.id === id;
-                });
-
-                groups.push({
-                    group: groupProperties[0].group,
-                    properties: groupProperties.map(function (property) {
-                        return property.property;
-                    }),
-                    touched: false
-                });
-            };
-
-            for (var _iterator2 = groupIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                _loop();
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
             try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
+                var _loop = function _loop() {
+                    var id = _step2.value;
+
+                    var groupProperties = orderPropertyList.filter(function (property) {
+                        return property.group === id || property.group && property.group.id === id;
+                    });
+
+                    groups.push({
+                        group: groupProperties[0].group,
+                        properties: groupProperties.map(function (property) {
+                            return property.property;
+                        }),
+                        touched: false
+                    });
+                };
+
+                for (var _iterator2 = groupIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    _loop();
                 }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
                 }
             }
+
+            return groups;
         }
 
-        return groups;
+        return [];
     },
     variationMissingProperties: function variationMissingProperties(state, getters) {
         if (state && state.variation.documents && state.variation.documents[0].data.properties && App.config.requireOrderProperties) {
             var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
                 // selection isn't supported yet
-                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value;
+                return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file";
             });
 
             if (missingProperties.length) {

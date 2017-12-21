@@ -116,25 +116,30 @@ const getters =
                 return [];
             }
 
-            const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage);
-            const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
-            const groups = [];
-
-            for (const id of groupIds)
+            if (state.variation.documents[0].data.properties)
             {
-                const groupProperties = orderPropertyList.filter(property =>
-                {
-                    return property.group === id || property.group && property.group.id === id;
-                });
+                const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage);
+                const groupIds = [... new Set(orderPropertyList.map(property => property.group && property.group.id))];
+                const groups = [];
 
-                groups.push({
-                    group: groupProperties[0].group,
-                    properties: groupProperties.map(property => property.property),
-                    touched: false
-                });
+                for (const id of groupIds)
+                {
+                    const groupProperties = orderPropertyList.filter(property =>
+                    {
+                        return property.group === id || property.group && property.group.id === id;
+                    });
+
+                    groups.push({
+                        group: groupProperties[0].group,
+                        properties: groupProperties.map(property => property.property),
+                        touched: false
+                    });
+                }
+
+                return groups;
             }
 
-            return groups;
+            return [];
         },
 
         variationMissingProperties(state, getters)
@@ -144,7 +149,7 @@ const getters =
                 let missingProperties = state.variation.documents[0].data.properties.filter(property =>
                 {
                     // selection isn't supported yet
-                    return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value;
+                    return property.property.isShownOnItemPage && property.property.valueType !== "selection" && !property.property.value && property.property.valueType !== "file";
                 });
 
                 if (missingProperties.length)
