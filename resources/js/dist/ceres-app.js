@@ -13724,8 +13724,8 @@ Vue.component("order-property-list-item", {
         }
     }, Vuex.mapMutations(["setVariationOrderProperty", "setIsBasketLoading"]), {
         setPropertyFile: function setPropertyFile(event) {
-            if (event.srcElement && event.srcElement.files && event.srcElement.files.length > 0) {
-                this.selectedFile = event.srcElement.files[0];
+            if (event.target && event.target.files && event.target.files.length > 0) {
+                this.selectedFile = event.target.files[0];
                 this.uploadPropertyFile(this.selectedFile);
             }
         },
@@ -13740,7 +13740,7 @@ Vue.component("order-property-list-item", {
             fileData.append("fileData", file);
 
             ApiService.post("/rest/io/order/property/file", fileData, { processData: false, contentType: false, cache: false, async: true, timeout: 60000 }).done(function (response) {
-                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response.key });
+                _this2.setVariationOrderProperty({ propertyId: _this2.property.id, value: response });
             }).fail(function (error) {
                 _this2.clearSelectedFile();
             }).always(function (response) {
