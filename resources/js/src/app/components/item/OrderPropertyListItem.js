@@ -143,9 +143,9 @@ Vue.component("order-property-list-item", {
 
         setPropertyFile(event)
         {
-            if (event.srcElement && event.srcElement.files && event.srcElement.files.length > 0)
+            if (event.target && event.target.files && event.target.files.length > 0)
             {
-                this.selectedFile = event.srcElement.files[0];
+                this.selectedFile = event.target.files[0];
                 this.uploadPropertyFile(this.selectedFile);
             }
         },
