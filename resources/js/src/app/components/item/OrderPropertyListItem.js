@@ -162,7 +162,7 @@ Vue.component("order-property-list-item", {
             ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
                 .done(response =>
                 {
-                    this.setVariationOrderProperty({propertyId: this.property.id, value: response.key});
+                    this.setVariationOrderProperty({propertyId: this.property.id, value: response});
                 })
                 .fail(error =>
                 {
