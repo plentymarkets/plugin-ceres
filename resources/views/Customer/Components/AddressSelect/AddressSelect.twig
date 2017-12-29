@@ -5,15 +5,14 @@
             <div class="dropdown items">
 
                 <div class="component-loading" :id="'addressMultiSelect' + _uid"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty, 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
+                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType == 2 && addressList.length == 1), 'items items-empty': isAddressListEmpty && (addressType == 2 && addressList.length == 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false">
 
                     <div class="item-inner" v-bind:class="{'error': showError}">
                         <span v-if="selectedAddress && selectedAddress.id == -99">
-                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
-                                -</p>
+                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }} -</p>
                         </span>
                         <span v-else class="item-content">
                             <div v-if="!isAddressListEmpty && selectedAddress">
@@ -42,7 +41,7 @@
                     </button>
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty">
+                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty && !(addressType == 2 && addressList.length == 1)">
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
