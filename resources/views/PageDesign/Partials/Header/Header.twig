@@ -6,6 +6,7 @@
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 {{ component( "Ceres::WishList.Components.WishListCount" ) }}
+{{ component( "Ceres::Basket.Components.BasketPreviewSlim" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
@@ -58,7 +59,7 @@
                         <wish-list-count :init-ids="{{ services.wishList.getItemWishList() | json_encode }}"></wish-list-count>
                     </li>
                 {% endif %}
-                <li class="list-inline-item control-basket">
+                <li class="list-inline-item control-basket" style="position: relative">
                     <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                         {% if config("Ceres.header.basket_values") != "sum" %}
                             <span class="badge-right" v-basket-item-quantity="this.$store.state.basket.data.itemQuantity">0</span>
@@ -69,6 +70,9 @@
                             <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
                         {% endif %}
                     </a>
+
+                    <basket-preview-slim></basket-preview-slim>
+
                 </li>
             </ul>
         </div>

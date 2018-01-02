@@ -1,0 +1,63 @@
+{{ component( "Ceres::Item.Components.QuantityInput" ) }}
+{% set configItemName = config("Ceres.item.name") %}
+
+<div class="basket-item-slim component-loading with-icon sending" :class="{ 'isLoading': waiting }">
+
+    <div class="image-container">
+        <img class="img-basket-small" :src="image.url" :alt="altText">
+        <!-- <div class="square-container">
+            <div class="square-inner center-xy main-image">
+                <img class="img-basket-small" :src="image.url" :alt="altText">
+            </div>
+        </div> -->
+    </div>
+
+    <div class="meta-container">
+
+        <div class="w-100">
+
+            <div class="item-meta">
+                <a :href="basketItem.variation.data | itemURL">
+                    <div class="item-name">
+                        ${ basketItem.variation.data.texts | itemName({{ configItemName }}) }
+                    </div>
+                </a>
+
+                <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+
+                <div class="item-remove-button">
+                    <button @click="deleteItem" :disabled="waiting">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="item-base-price">
+                ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency } x ${ basketItem.quantity }
+            </div>
+
+            <div class="item-small-prices">
+                <div class="text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
+                    <div>${ basketItem.variation.data.calculatedPrices.formatted.basePrice }</div>
+                    <div>
+                        <strong>{{ trans("Ceres::Template.itemContent") }}: </strong>
+                        ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }
+                    </div>
+
+                </div>
+
+                <div v-for="property in basketItem.basketItemOrderParams">
+                    <div v-if="isPropertyVisible(property.propertyId)">
+                        <strong>+ ${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }) x ${ basketItem.quantity }</strong>
+                        <span v-if="property.type === 'file'">
+                            <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

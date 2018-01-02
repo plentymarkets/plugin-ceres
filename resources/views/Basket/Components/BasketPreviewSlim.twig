@@ -1,0 +1,41 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{{ component( "Ceres::Basket.Components.BasketList" ) }}
+{{ component( "Ceres::Basket.Components.BasketTotals" ) }}
+
+<script type="x/template" id="vue-basket-preview-slim">
+    <div class="cart hidden-md-down">
+        <basket-list class="cart-items" v-if="basketItems.length" template="#vue-basket-list" size="slim"></basket-list>
+        <div class="no-items" v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</div>
+
+        <div class="cart-totals" v-if="basketItems.length">
+
+            <hr class="m-b-2">
+
+            <basket-totals class="basket-preview-totals" template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
+
+            <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                    <button v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="{{ trans("Ceres::Template.basket") }}">
+                        <i class="fa fa-shopping-cart"></i>
+                        {{ trans("Ceres::Template.basket") }} 
+                    </button>
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+
+                    <div>
+                        <button v-waiting-animation-infinite href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.orderCheckout") }}
+                        </button>
+                    </div>
+
+                    {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</script>
