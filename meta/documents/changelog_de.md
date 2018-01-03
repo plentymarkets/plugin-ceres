@@ -10,6 +10,17 @@
 
 - Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
 
+## v2.1.0 (2017-01-03)
+
+### Geändert
+
+- Die Adress Komponenten zeigen kein Dropdown mehr an mit nicht auswählbaren Adressen.
+- Das Löschen-Overlay in den Adressen wurde angepasst, um moderner zu wirken.
+
+### Behoben
+
+- Die Validierung im Checkout berücksichtigt die Adresseingaben wieder korrekt.
+
 ## v2.0.3 (unknown)
 
 ### Hinzugefügt
