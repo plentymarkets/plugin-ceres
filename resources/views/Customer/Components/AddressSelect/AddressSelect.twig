@@ -1,38 +1,36 @@
 {{ component( "Ceres::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select">
     <div>
-        <div class="cmp cmp-address-list m-b-3" v-bind:class="{'error': showError}">
+        <div class="cmp cmp-address-list m-b-3">
             <div class="dropdown items">
 
                 <div class="component-loading" :id="'addressMultiSelect' + _uid"
-                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty, 'items items-empty': isAddressListEmpty, 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
+                        v-bind:class="{'dropdown-toggle card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'disabled': isBasketLoading, 'isLoading': isBasketLoading}"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false">
 
-                    <div class="item-inner">
-                    <span v-if="selectedAddress && selectedAddress.id == -99">
-                        <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }}
-                            -</p>
-                    </span>
+                    <div class="item-inner" v-bind:class="{'error': showError}">
+                        <span v-if="selectedAddress && selectedAddress.id == -99">
+                            <p class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressSameAsInvoice") }} -</p>
+                        </span>
                         <span v-else class="item-content">
-                        <div v-if="!isAddressListEmpty && selectedAddress">
-                            <strong v-if="selectedAddress && selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
-                            <strong v-if="selectedAddress && !selectedAddress.name1 || selectedAddress.name1.length == 0">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
-                            <span v-else>${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
-                            <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
-                            <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
-                            <span>${getCountryName(selectedAddress.countryId)}</span>
-                        </div>
+                            <div v-if="!isAddressListEmpty && selectedAddress">
+                                <strong v-if="selectedAddress && selectedAddress.name1 && selectedAddress.name1.length > 0">${selectedAddress.name1}</strong>
+                                <strong v-if="selectedAddress && !selectedAddress.name1 || selectedAddress.name1.length == 0">${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</strong>
+                                <span v-else>${selectedAddress | optionType(11)} ${selectedAddress.name2} ${selectedAddress.name3}</span>
+                                <span>${selectedAddress.address1} ${selectedAddress.address2}</span>
+                                <span>${selectedAddress.postalCode} ${selectedAddress.town}</span>
+                                <span>${getCountryName(selectedAddress.countryId)}</span>
+                            </div>
 
-                        <p v-if="!isAddressListEmpty && !selectedAddress"
-                           class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
-                            -</p>
-                        <p v-if="isAddressListEmpty"
-                           class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
-                            -</p>
-                    </span>
-
+                            <p v-if="!isAddressListEmpty && !selectedAddress"
+                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.pleaseSelect") }}
+                                -</p>
+                            <p v-if="isAddressListEmpty"
+                            class="text-muted small font-italic p-t-1">- {{ trans("Ceres::Template.addressNoAddress") }}
+                                -</p>
+                        </span>
                     </div>
                 </div>
 
@@ -43,7 +41,7 @@
                     </button>
                 </div>
 
-                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty">
+                <div class="dropdown-menu" aria-labelledby="addressMultiSelect" v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
                     <ul>
                         <li class="item" v-for="(address, index) in addressList">
                             <input
@@ -131,20 +129,33 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>{{ trans("Ceres::Template.addressDeleteWarning") }}</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3 offset-sm-6">
-                                        <button type="button" class="btn btn-primary btn-block"
-                                                @click="closeDeleteModal">{{ trans("Ceres::Template.generalCancel") }}</button>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button type="button" class="btn btn-primary btn-block"
-                                                @click="deleteAddress">{{ trans("Ceres::Template.generalDelete") }}</button>
+                                        <div class="modal-address">
+                                            <strong v-if="addressToDelete.name1 && addressToDelete.name1.length > 0">${addressToDelete.name1}</strong>
+                                            <strong v-if="!addressToDelete.name1 || addressToDelete.name1.length == 0">${addressToDelete | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</strong>
+                                            <span v-else>${selectedAddress | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</span>
+                                            <span>${addressToDelete.name4}</span>
+                                            <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
+                                            <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>
+                                            <span>${getCountryName(addressToDelete.countryId)}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
+                                    <button type="button" class="btn btn-primary btn-medium btn-m-r btn-outline-primary" @click="closeDeleteModal">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        {{ trans("Ceres::Template.generalCancel") }}
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-medium" :disabled="deleteModalWaiting" @click="deleteAddress">
+                                        <i v-waiting-animation="deleteModalWaiting" class="fa fa-trash" aria-hidden="true"></i>
+                                        {{ trans("Ceres::Template.generalDelete") }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

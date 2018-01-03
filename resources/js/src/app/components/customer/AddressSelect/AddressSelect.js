@@ -24,6 +24,7 @@ Vue.component("address-select", {
             addressToEdit  : {},
             addressToDelete: {},
             deleteModal    : "",
+            deleteModalWaiting: false,
             addressOptionTypeFieldMap:
             {
                 1: "vatNumber",
@@ -223,14 +224,19 @@ Vue.component("address-select", {
          */
         deleteAddress()
         {
+            this.deleteModalWaiting = true;
+
             this.$store.dispatch("deleteAddress", {address: this.addressToDelete, addressType: this.addressType})
                 .then(
                     response =>
                     {
                         this.closeDeleteModal();
+                        this.deleteModalWaiting = false;
                     },
                     error =>
-                    {}
+                    {
+                        this.deleteModalWaiting = false;
+                    }
                 );
         },
 
