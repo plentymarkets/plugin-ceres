@@ -16,6 +16,7 @@
 
 - Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
 - **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
+- Die Schriftgröße der Zahlen in den **Filtern** wurde erhöht um besser lesbar zu sein.
 
 ## v2.1.0 (2017-01-03)
 
