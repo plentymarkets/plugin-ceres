@@ -1,5 +1,16 @@
 {% extends getPartial('page-design') %}
 
+{% block PartialHead %}
+    <title>{{ category.details[0].metaTitle }} | {{ config("Ceres.header.company_name") }}</title>
+
+    <meta name="description" content="{{ category.details[0].metaDescription | json_encode }}">
+    <meta name="keywords" content="{{ category.details[0].metaKeywords | json_encode }}">
+
+    {% set metaRobots = category.details[0].metaRobots | json_encode %}
+    {% set formattedMetaRobots = metaRobots|replace({'_': ', '}) %}
+    <meta name="robots" content="{{  formattedMetaRobots }}">
+{% endblock %}
+
 {% block PageBody %}
 
     {% set lang = services.sessionStorage.getLang() %}
@@ -7,5 +18,3 @@
     {% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
 
 {% endblock %}
-
-{# DEPRECATED #}

@@ -56,7 +56,6 @@ class HomepageCacheSettings implements CachingSettings
             'homepageCategory4' => $this->configRepository->get('Ceres.homepage.homepageCategory4'),
             'homepageCategory5' => $this->configRepository->get('Ceres.homepage.homepageCategory5'),
             'homepageCategory6' => $this->configRepository->get('Ceres.homepage.homepageCategory6'),
-            'variation_show_type' => $this->configRepository->get('Ceres.homepage.variation_show_type'),
         ];
 
     }

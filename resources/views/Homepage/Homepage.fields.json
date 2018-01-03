@@ -5,8 +5,14 @@
   "item.id",
   "variation.id",
   "images.variation.url",
+  "images.variation.path",
   "images.variation.position",
+  "images.variation.names.alternate",
+  "images.variation.names.lang",
+  "images.all.path",
   "images.all.url",
   "images.all.position",
+  "images.all.names.lang",
+  "images.all.names.alternate",
   "filter.isSalable"
 ]

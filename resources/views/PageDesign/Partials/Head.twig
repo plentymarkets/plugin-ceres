@@ -2,9 +2,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% set favicon = services.webstoreConfig.getWebstoreConfig().domainSsl ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
-
+{% set lang = services.sessionStorage.getLang() %}
+{% set favicon = url ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
+
+{% set requestUrl = services.webstoreConfig.getWebstoreConfig().domainSsl ~ request.getRequestUri() %}
+{% set canonicalUrl = services.url.getCanonicalURL() %}
+{% set languageUrls = services.url.getLanguageURLs() %}
+
+{% if canonicalUrl is not null %}
+    <link rel="canonical" href="{{ canonicalUrl }}">
+{% endif %}
+
+{% if canonicalUrl == requestUrl %}
+    {% for language, url in languageUrls %}
+        <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
+    {% endfor %}
+{% endif %}
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
@@ -18,8 +32,6 @@
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
 {% set currencyFormat = config("Ceres.currency.format") %}
-
-{# <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title> #}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
     <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
@@ -45,7 +57,6 @@
             defaultSortingSearch: "{{ defaultSortingSearch }}",
             performanceLevel: "{{ performanceLevel }}",
             itemName: {{ itemName }},
-            variationShowType: "{{ config("Ceres.item.variation_show_type") }}",
             enabledBillingAddressFields: "{{ config("Ceres.billing_address.show") }}",
             enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
             enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",

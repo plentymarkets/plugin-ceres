@@ -65,15 +65,7 @@ Vue.component("item-image-carousel", {
     {
         getImageCount()
         {
-            const images = this.currentVariation.documents[0].data.images;
-
-            if (images.variation && images.variation.length)
-            {
-                return images.variation.length;
-            }
-
-            return images.all.length;
-
+            return this.carouselImages.length;
         },
 
         reInitialize()
@@ -185,6 +177,13 @@ Vue.component("item-image-carousel", {
 
                     return 0;
                 });
+        },
+
+        getAltText(image)
+        {
+            const altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+
+            return altText;
         }
     }
 });

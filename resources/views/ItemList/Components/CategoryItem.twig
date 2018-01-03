@@ -31,7 +31,8 @@
                                                     :item-url="itemData | itemURL"
                                                     :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
-                                                    :enable-carousel="{{ enableCarousel }}">
+                                                    :enable-carousel="{{ enableCarousel }}"
+                                                    ref="categoryImageCarousel">
                         </category-image-carousel>
                     </div>
                 </div>

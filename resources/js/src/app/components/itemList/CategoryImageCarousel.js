@@ -87,6 +87,23 @@ Vue.component("category-image-carousel", {
                     owlItem.find(".img-fluid.lazy").show().lazyload({threshold : 100});
                 }
             });
+        },
+
+        getAltText(image)
+        {
+            const altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
+
+        loadFirstImage()
+        {
+            const itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage)
+            {
+                itemLazyImage.loadImage();
+            }
         }
     }
 });

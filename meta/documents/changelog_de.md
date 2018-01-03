@@ -1,34 +1,43 @@
 # Release Notes für Ceres
 
-
-## v2.1.0 (2017-01-03)
-
-### Geändert
-
-- Die Adress Komponenten zeigen kein Dropdown mehr an mit nicht auswählbaren Adressen.
-- Das Löschen-Overlay in den Adressen wurde angepasst, um moderner zu wirken.
+## v2.0.4 (unknown)
 
 ### Behoben
 
-- Die Validierung im Checkout berücksichtigt die Adresseingaben wieder korrekt.
-
-## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
+- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
 
 ### Geändert
 
-- Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahl-Plugin sich selbst deaktivieren kann.
-- Wenn man sich mit einer E-Mail registriert, die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
+- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
+
+## v2.0.3 (unknown)
+
+### Hinzugefügt
+
+- **SEO:** Auf der **Startseite** wird nun der Shop Name als h1-Überschrift ausgegeben.
+
+### Behoben
+
+- Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
+- Ein Fehler wurde behoben der das Rendern der Filter verhindert hat.
+
+### Geändert
+
+- **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
+- Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahlplugin sich selber deaktivieren kann.
+- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt.
+- Wenn man sich mit einer Email registriert die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
 
 ### Behoben
 
 - In der **Wunschliste** werden Bilder von Varianten nun korrekt ausgegeben.
-- Der Button, um einen Artikel aus der **Wunschliste** zu entfernen, wird nun mittig angezeigt.
-- Auf iOS-Geräten sollte nun der Cursor in Modalen nicht mehr verrutschen. iOS [Bug-Report](https://bugs.webkit.org/show_bug.cgi?id=176896).
-- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** manchmal nicht geöffnet hat bei Klick auf den entsprechenden Button.
-- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde (insofern konfiguriert).
-- In der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert).
-- Es wurde ein Fehler behoben, der dazu führte, dass manche Seite nicht die maximale Höhe genommen haben (weißer Rand unten).
-- Die Styles in Firefox werden nun wieder korrekt dargestellt.
+- Der Button um einen Artikel aus der **Wunschliste** zu entfernen wird nun mittig angezeigt.
+- Auf iOS geräten sollte nun der Cursor in Modalen nicht mehr verrutschen. iOS [Bug-Report](https://bugs.webkit.org/show_bug.cgi?id=176896).
+- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** manchmal nicht geöffnet hat, bei Klick auf den entsprechenden Button.
+- Es wurde ein Fehler behoben, wobei sich die **Warenkorbvorschau** nicht geöffnet hat, nachdem ein Artikel in den Warenkorb gelegt wurde. (Insofern konfiguriert)
+- Auf der Artikelansicht werden die Versandkosten nun wieder korrekt verlinkt (wenn konfiguriert)
+- Es wurde ein Fehler behoben, der dazu führte das manche Seite nicht die maximale höhe genommen haben (weißer rand unten).
+- Die styles in Firefox sollten nun wieder korrekt aussehen.
 
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
