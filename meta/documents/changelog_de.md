@@ -1,5 +1,17 @@
 # Release Notes für Ceres
 
+
+## v2.1.0 (2017-01-03)
+
+### Geändert
+
+- Die Adress Komponenten zeigen kein Dropdown mehr an mit nicht auswählbaren Adressen.
+- Das Löschen-Overlay in den Adressen wurde angepasst, um moderner zu wirken.
+
+### Behoben
+
+- Die Validierung im Checkout berücksichtigt die Adresseingaben wieder korrekt.
+
 ## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
