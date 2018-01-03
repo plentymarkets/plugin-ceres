@@ -14,7 +14,18 @@
 
     <div class="meta-container">
 
-        <div class="w-100">
+        <div>
+
+            <transition name="slide-fade">
+                <div v-if="deleteConfirmed && !waitForDelete" class="button-slider">
+                    <div @click="deleteItem" class="basket-button left">
+                        <div class="button-text">{{ trans("Ceres::Template.generalRemove") }}</div>
+                    </div>
+                    <div @click.stop="resetDelete" class="basket-button right">
+                        <div class="button-text">{{ trans("Ceres::Template.generalCancel") }}</div>
+                    </div>
+                </div>
+            </transition>
 
             <div class="item-meta">
                 <a :href="basketItem.variation.data | itemURL">
