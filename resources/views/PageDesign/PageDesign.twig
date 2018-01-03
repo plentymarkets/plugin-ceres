@@ -16,9 +16,7 @@
 {% endif %}
 
 {% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
-
 {% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
-
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
 {% if services.template.isCategory() or services.template.isItem() %}
@@ -46,17 +44,14 @@
         <div id="vue-app">
             <div class="wrapper wrapper-top">
                 <!-- messages -->
-                <notifications template="#vue-notifications"
-                    :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"
-                ></notifications>
+                <notifications template="#vue-notifications" :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"></notifications>
             </div>
 
             <div class="wrapper wrapper-left">
-            <!-- filters -->
+                <!-- filters -->
             </div>
 
             <div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
-
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
@@ -69,7 +64,6 @@
 
                 {% block PartialFooter %}
                 {% endblock %}
-
             </div>
 
             <div class="wrapper wrapper-right">
@@ -81,8 +75,6 @@
             </div>
 
             <div class="wrapper wrapper-bottom">
-                <!-- eventually messages -->
-
                 <!-- LOGIN MODAL -->
                 <div id="login-modal-wrapper">
                     <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
@@ -90,7 +82,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title">{{ trans("Ceres::Template.accLogin") }}</h3>
+                                    <div class="modal-title h3">{{ trans("Ceres::Template.accLogin") }}</div>
                                 </div>
                                 <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                             </div>
@@ -106,7 +98,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title">{{ trans("Ceres::Template.accCreateAccount") }}</h3>
+                                    <div class="modal-title h3">{{ trans("Ceres::Template.accCreateAccount") }}</div>
                                 </div>
                                 <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                             </div>
@@ -126,7 +118,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title">{{ trans('Ceres::Template.itemShippingCosts') }}</h3>
+                                    <div class="modal-title h3">{{ trans('Ceres::Template.itemShippingCosts') }}</div>
                                 </div>
                                 <div class="modal-body">
                                     {% include category_template(shippingCat, lang, services.webstoreConfig.getWebstoreConfig().webstoreId) ignore missing %}
@@ -146,8 +138,6 @@
         {{ Loader.include_components() }}
 
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
-
-        {% set lang = services.sessionStorage.getLang() %}
 
         {% if config("Ceres.log.performance.level") == 'development' %}
             <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
@@ -173,7 +163,6 @@
         {{ get_filtered_tags() }}
 
         <script>
-
             var rootElement = document.getElementById("vue-app");
             var errorElement = document.getElementById("vue-error");
 
@@ -196,7 +185,6 @@
                 document.body.replaceChild( vueApp.$el, rootElement );
                 errorElement.remove();
             }
-
         </script>
     </body>
 </html>

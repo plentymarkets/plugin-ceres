@@ -1,5 +1,22 @@
 # Release Notes für Ceres
 
+## v2.1.1 (unknown)
+
+### Hinzugefügt
+
+- **SEO:** Auf der **Startseite** wird nun der Shop Name als h1-Überschrift ausgegeben.
+
+### Behoben
+
+- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
+- Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
+- Ein Fehler wurde behoben der das Rendern der Filter verhindert hat.
+
+### Geändert
+
+- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
+- **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
+- Die Schriftgröße der Zahlen in den **Filtern** wurde erhöht um besser lesbar zu sein.
 
 ## v2.1.0 (2017-01-03)
 
@@ -7,6 +24,7 @@
 
 - Die Adress Komponenten zeigen kein Dropdown mehr an mit nicht auswählbaren Adressen.
 - Das Löschen-Overlay in den Adressen wurde angepasst, um moderner zu wirken.
+- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt.
 
 ### Behoben
 

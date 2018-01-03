@@ -10722,10 +10722,15 @@ Vue.component("basket-list-item", {
 
 
     computed: _extends({
-        imageUrl: function imageUrl() {
+        image: function image() {
             var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
 
-            return img.url;
+            return img;
+        },
+        altText: function altText() {
+            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+
+            return altText;
         },
         isInputLocked: function isInputLocked() {
             return this.waiting || this.isBasketLoading;
@@ -11278,10 +11283,26 @@ Vue.component("container-item-list", {
 
     methods: {
         initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
             $(this.$refs.carouselContainer).owlCarousel({
                 autoHeight: true,
                 dots: true,
                 items: 4,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    544: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                },
                 lazyLoad: false,
                 loop: false,
                 margin: 30,
@@ -11290,7 +11311,19 @@ Vue.component("container-item-list", {
                 navClass: ["owl-single-item-nav left carousel-control list-control-special", "owl-single-item-nav right carousel-control list-control-special"],
                 navContainerClass: "",
                 navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
-                smartSpeed: 350
+                smartSpeed: 350,
+                onChanged: function onChanged(property) {
+                    var begin = property.item.index;
+                    var end = begin + property.page.size;
+
+                    for (var i = begin; i < end; i++) {
+                        var categoryItem = _this2.$refs["categoryItem_" + i];
+
+                        if (categoryItem) {
+                            categoryItem[0].loadFirstImage();
+                        }
+                    }
+                }
             });
         }
     }
@@ -13178,13 +13211,7 @@ Vue.component("item-image-carousel", {
 
     methods: {
         getImageCount: function getImageCount() {
-            var images = this.currentVariation.documents[0].data.images;
-
-            if (images.variation && images.variation.length) {
-                return images.variation.length;
-            }
-
-            return images.all.length;
+            return this.carouselImages.length;
         },
         reInitialize: function reInitialize() {
             var $owl = $(this.$refs.single);
@@ -13264,6 +13291,11 @@ Vue.component("item-image-carousel", {
 
                 return 0;
             });
+        },
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+
+            return altText;
         }
     }
 });
@@ -13750,6 +13782,19 @@ Vue.component("category-image-carousel", {
                     owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
                 }
             });
+        },
+
+        getAltText: function getAltText(image) {
+            var altText = image && image.alternate ? image.alternate : this.altText;
+
+            return altText;
+        },
+        loadFirstImage: function loadFirstImage() {
+            var itemLazyImage = this.$refs.itemLazyImage;
+
+            if (itemLazyImage) {
+                itemLazyImage.loadImage();
+            }
         }
     }
 });
@@ -13771,10 +13816,6 @@ Vue.component("category-item", {
             variationRetailPrice: 0
         };
     },
-    created: function created() {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
-    },
 
 
     computed: {
@@ -13792,7 +13833,24 @@ Vue.component("category-item", {
         texts: function texts() {
             return this.itemData.texts;
         }
+    },
+
+    created: function created() {
+        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
+        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+    },
+
+
+    methods: {
+        loadFirstImage: function loadFirstImage() {
+            var categoryImageCarousel = this.$refs.categoryImageCarousel;
+
+            if (categoryImageCarousel) {
+                categoryImageCarousel.loadFirstImage();
+            }
+        }
     }
+
 });
 
 },{}],42:[function(require,module,exports){
@@ -13815,6 +13873,13 @@ Vue.component("item-lazy-img", {
                 $(_this.$refs.lazyImg).show().lazyload({ threshold: 100 });
             }, 1);
         });
+    },
+
+
+    methods: {
+        loadImage: function loadImage() {
+            $(this.$refs.lazyImg).trigger("appear");
+        }
     }
 });
 
@@ -14007,7 +14072,7 @@ Vue.component("item-search", {
             $(".search-input").autocomplete({
                 serviceUrl: "/rest/io/item/search/autocomplete",
                 paramName: "query",
-                params: { template: "Ceres::ItemList.Components.ItemSearch", variationShowType: App.config.variationShowType },
+                params: { template: "Ceres::ItemList.Components.ItemSearch" },
                 width: $(".search-box-shadow-frame").width(),
                 zIndex: 1070,
                 maxHeight: 310,
@@ -14267,10 +14332,10 @@ Vue.component("item-filter", {
     computed: _extends({
         facets: function facets() {
             return this.facet.values.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -14328,10 +14393,10 @@ Vue.component("item-filter-list", {
     computed: Vuex.mapState({
         facets: function facets(state) {
             return state.itemList.facets.sort(function (facetA, facetB) {
-                if (facetA.id > facetB.id) {
+                if (facetA.position > facetB.position) {
                     return 1;
                 }
-                if (facetA.id < facetB.id) {
+                if (facetA.position < facetB.position) {
                     return -1;
                 }
 
@@ -16110,10 +16175,11 @@ Vue.filter("itemImages", function (images, accessor) {
         imagesAccessor = "variation";
     }
 
-    for (var i in images[imagesAccessor]) {
-        var imageUrl = images[imagesAccessor][i][accessor];
+    for (var image in images[imagesAccessor]) {
+        var imageUrl = images[imagesAccessor][image][accessor];
+        var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
 
-        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][i].position });
+        imageUrls.push({ url: imageUrl, position: images[imagesAccessor][image].position, alternate: alternate });
     }
 
     return imageUrls;
@@ -16141,19 +16207,29 @@ Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
     var urlPath = item.texts.urlPath;
 
-    var link = "/";
+    var link = "";
+
+    if (urlPath.charAt(0) !== "/") {
+        link = "/";
+    }
 
     if (urlPath && urlPath.length) {
         link += urlPath;
-
-        link += enableOldUrlPattern ? "/" : "_";
     }
+
+    var suffix = "";
 
     if (enableOldUrlPattern) {
-        return link + "a-" + item.item.id;
+        suffix = "/a-" + item.item.id;
+    } else {
+        suffix = "_" + item.item.id + "_" + item.variation.id;
     }
 
-    return link + item.item.id + "_" + item.variation.id;
+    if (link.substr(link.length - suffix.length, suffix.length) === suffix) {
+        return link;
+    }
+
+    return link + suffix;
 });
 
 },{}],92:[function(require,module,exports){
@@ -18043,7 +18119,7 @@ var state = {
 
 var mutations = {
     setFacets: function setFacets(state, facets) {
-        state.facets = facets;
+        state.facets = facets || [];
     },
     setSelectedFacetsByIds: function setSelectedFacetsByIds(state, selectedFacetIds) {
         var selectedFacets = [];
@@ -18058,7 +18134,9 @@ var mutations = {
                     var facet = _step.value;
 
                     selectedFacets = selectedFacets.concat(facet.values.filter(function (facetValue) {
-                        return selectedFacetIds.includes(facetValue.id);
+                        return selectedFacetIds.some(function (facetId) {
+                            return facetId === facetValue.id + "";
+                        });
                     }));
                 }
             } catch (err) {
@@ -18174,8 +18252,7 @@ var actions = {
                 page: state.page,
                 facets: getters.selectedFacetIds.toString(),
                 categoryId: rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
-                template: "Ceres::ItemList.ItemListView",
-                variationShowType: App.config.variationShowType
+                template: "Ceres::ItemList.ItemListView"
             };
             var url = searchParams.categoryId ? "/rest/io/category" : "/rest/io/item/search";
 

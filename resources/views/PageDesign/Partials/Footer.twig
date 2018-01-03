@@ -64,7 +64,7 @@
             {% for i in 1..numberOfCols %}
                 <div class="col-xs-6 col-sm-3 col-lg-2">
                     <nav class="footer-column m-b-2">
-                        <h5>{{ config('Ceres.footer.col_' ~ i ~ '_title') }}</h5>
+                        <h2 class="h5">{{ config('Ceres.footer.col_' ~ i ~ '_title') }}</h2>
                         <ul class="list-unstyled">
 
                             {% set footerCategories = config('Ceres.footer.col_' ~ i ~ '_categories') | find("[0-9]+") %}
