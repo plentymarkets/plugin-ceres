@@ -1,26 +1,26 @@
 # Release Notes für Ceres
 
-## v2.1.0 (2017-01-04)
+## v2.1.0 (2017-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.3...2.1.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
-- **SEO:** Auf der **Startseite** wird nun der Shop Name als h1-Überschrift ausgegeben.
+- **SEO:** Auf der Startseite wird nun der Webshop-Name als H1-Überschrift ausgegeben.
 
 ### Geändert
 
-- Die Adress Komponenten zeigen kein Dropdown mehr an mit nicht auswählbaren Adressen.
-- Das Löschen-Overlay in den Adressen wurde angepasst, um moderner zu wirken.
-- Bei den Artikelbildern im Basket, der Kategorieseite und in der Artikeldetailansicht werden nun die im Backend eingestellten alternative Texte der Bilder gesetzt.
-- Die **Item-Listen** zeigen nun dynamisch viele Artikel, abhängig von der aktuellen Auflösung.
+- In den Dropdown-Menüs der Adresskomponenten werden keine Adressen mehr angezeigt, die nicht ausgewählt werden können.
+- Das Overlay zum Löschen von Adressen wurde angepasst, um moderner zu wirken.
+- Für Artikelbilder, die im Warenkorb, auf der Kategorieseite und in der Artikelansicht angezeigt werden, werden die im Backend eingestellten alternativen Texte der Bilder gesetzt.
+- Artikellisten zeigen nun je nach aktueller Auflösung dynamisch unterschiedlich viele Artikel an.
 - **SEO:** Die Überschriften diverser Seiten wurden in eine korrekte Hierarchie gebracht.
-- Die Schriftgröße der Zahlen in den **Filtern** wurde erhöht um besser lesbar zu sein.
+- Die Schriftgröße der Zahlen in den Filtern wurde erhöht um besser lesbar zu sein.
 
 ### Behoben
 
-- Die Validierung im Checkout berücksichtigt die Adresseingaben wieder korrekt.
-- Bilder in den **Item-Listen** werden nun korrekt geladen, sobald sie sichtbar werden.
-- Die Artikel im Slider auf der **Startseite** werden nun korrekt ausgegeben.
-- Ein Fehler wurde behoben der das Rendern der Filter verhindert hat.
+- Im Checkout werden die Adresseingaben wieder korrekt validiert.
+- Bilder in den Artikellisten werden nun korrekt geladen, sobald sie sichtbar werden.
+- Die Artikel im Slider auf der Startseite werden nun korrekt ausgegeben.
+- Ein Fehler führte dazu, dass Filter nicht gerendert wurden. Dies wurde behoben.
 
 ## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
