@@ -234,7 +234,9 @@ Vue.component("address-select", {
                         this.deleteModalWaiting = false;
                     },
                     error =>
-                    {}
+                    {
+                        this.deleteModalWaiting = false;
+                    }
                 );
         },
 
