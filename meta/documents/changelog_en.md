@@ -23,6 +23,11 @@
 - Due to an error, filters haven't been rendered correctly. This has been fixed.
 - Due to an error, the single item view wasn’t displayed for items for which no item template was set. This has been fixed.
 
+### TODO
+
+- Due to changes in the search logic, facet links must be saved for the client. In the centralised login, go to **System » Client » Select client » Services » Facet links**. Select a facet on the left and click on **Link facet**.
+
+
 ## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Overview of all changes</b></a>
 
 ### Changed
