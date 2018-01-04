@@ -13,14 +13,15 @@
 - The alternative texts set in the back end will be used for item images displayed in the shopping cart, on the category view and on the single item view.
 - Item lists will display a different number of items depending of the resoltion.
 - **SEO:** The headers of various pages have been updated and arranged into the correct order.
-- The font size ov numbers in the filters has been increased in order to be more readable.
+- The font size of numbers in the filters has been increased in order to be more readable.
 
 ### Fixed
 
 - Addresses entered in the checkout will now be validated correctly again.
 - Images in item lists will now be loaded correctly as soon as they are visible.
 - The items displayed in the slider of the home page will now be displayed correctly.
-- Due to an error filters haven't been rendered correctly. This has been fixed.
+- Due to an error, filters haven't been rendered correctly. This has been fixed.
+- Due to an error, the single item view wasn’t displayed for items for which no item template was set. This has been fixed.
 
 ## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Overview of all changes</b></a>
 
