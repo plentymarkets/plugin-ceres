@@ -21,10 +21,6 @@
 
 {% block PageBody %}
 
-    {% if item.documents[0].data.item.add_cms_page is defined and item.documents[0].data.item.add_cms_page != "0" %}
-        {% include category_template( item.documents[0].data.item.add_cms_page, lang, frontend.system.webstoreId ) ignore missing %}
-    {% else %}
-        {% include "Ceres::Item.SingleItemView" %}
-    {% endif %}
+    {% include [category_template( item.documents[0].data.item.add_cms_page, lang, frontend.system.webstoreId ), "Ceres::Item.SingleItemView"] %}
 
 {% endblock %}

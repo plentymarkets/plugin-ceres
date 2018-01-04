@@ -21,6 +21,7 @@
 - Bilder in den Artikellisten werden nun korrekt geladen, sobald sie sichtbar werden.
 - Die Artikel im Slider auf der Startseite werden nun korrekt ausgegeben.
 - Ein Fehler führte dazu, dass Filter nicht gerendert wurden. Dies wurde behoben.
+- Ein Fehler führte dazu, dass die Artikelansicht für Artikel ohne Artikelvorlagen nicht angezeigt werden konnte. Dies wurde behoben.
 
 ## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
