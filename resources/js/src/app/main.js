@@ -121,19 +121,22 @@ var init = (function($, window, document)
             var offset = 250;
             var duration = 300;
 
-            $(window).scroll(function()
+            if (window.matchMedia("(min-width: 768px)").matches)
             {
-                if ($(this).scrollTop() > offset)
+                $(window).scroll(function()
                 {
-                    $(".back-to-top").fadeIn(duration);
-                    $(".back-to-top-center").fadeIn(duration);
-                }
-                else
-                {
-                    $(".back-to-top").fadeOut(duration);
-                    $(".back-to-top-center").fadeOut(duration);
-                }
-            });
+                    if ($(this).scrollTop() > offset)
+                    {
+                        $(".back-to-top").fadeIn(duration);
+                        $(".back-to-top-center").fadeIn(duration);
+                    }
+                    else
+                    {
+                        $(".back-to-top").fadeOut(duration);
+                        $(".back-to-top-center").fadeOut(duration);
+                    }
+                });
+            }
 
             $(".back-to-top").click(function(event)
             {
