@@ -1,7 +1,13 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
+
 {% set configItemName = config("Ceres.item.name") %}
 
 <div class="basket-item-slim component-loading with-icon sending" :class="{ 'isLoading': waiting }">
+
+    <div class="quantity-input-container">
+        <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
+                            :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
+    </div>
 
     <div class="image-container">
         <img class="img-basket-small" :src="image.url" :alt="altText">
@@ -13,9 +19,8 @@
     </div>
 
     <div class="meta-container">
-
+        
         <div>
-
             <transition name="slide-fade">
                 <div v-if="deleteConfirmed && !waitForDelete" class="button-slider">
                     <div @click="deleteItem" class="basket-button left">
@@ -54,11 +59,11 @@
                         <strong>{{ trans("Ceres::Template.itemContent") }}: </strong>
                         ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }
                     </div>
-
                 </div>
 
                 <div v-for="property in basketItem.basketItemOrderParams">
                     <div v-if="isPropertyVisible(property.propertyId)">
+                    <!-- <div> -->
                         <strong>+ ${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }) x ${ basketItem.quantity }</strong>
                         <span v-if="property.type === 'file'">
                             <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
