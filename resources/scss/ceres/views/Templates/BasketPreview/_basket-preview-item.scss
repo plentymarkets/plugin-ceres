@@ -188,7 +188,7 @@
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid #dcdbd8;
+		border-bottom: 1px solid $gray-lighter;
 		padding-bottom: 10px;
 	}
 }
@@ -196,16 +196,23 @@
 .basket-item-slim {
 	display: flex;
 
+	.quantity-input-container {
+		width: 3em;
+
+		button {
+			padding: .25rem 1rem;
+		}
+	}
+
 	.image-container {
 		width: 75px;
 		flex-shrink: 0;
+		margin: 0 15px;
 	}
 
 	.meta-container {
 		display: flex;
-		// align-self: center;
 		width: 100%;
-		margin-left: 15px;
 
 		& > div {
 			width: 100%;
@@ -219,6 +226,7 @@
 		.item-name {
 			font-size: 80%;
 			font-weight: 700;
+			margin-right: 10px;
 		}
 
 		.item-base-price {
