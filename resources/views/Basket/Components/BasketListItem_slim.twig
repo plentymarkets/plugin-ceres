@@ -49,7 +49,7 @@
             </div>
 
             <div class="item-base-price">
-                ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency } x ${ basketItem.quantity }
+                ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency }
             </div>
 
             <div class="item-small-prices">
@@ -61,10 +61,14 @@
                     </div>
                 </div>
 
+                <div v-if="basketItem.basketItemOrderParams.length" style="font-size: 1.1em">
+                    Ihre Angaben (Preis pro Artikel):
+                </div>
+
                 <div v-for="property in basketItem.basketItemOrderParams">
                     <div v-if="isPropertyVisible(property.propertyId)">
                     <!-- <div> -->
-                        <strong>+ ${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }) x ${ basketItem.quantity }</strong>
+                        <strong>+ ${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                         <span v-if="property.type === 'file'">
                             <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
                         </span>
