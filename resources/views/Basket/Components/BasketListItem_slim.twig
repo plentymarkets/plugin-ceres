@@ -31,8 +31,8 @@
                 <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
 
                 <div class="item-remove-button">
-                    <button @click="deleteItem" :disabled="waiting || isBasketLoading">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <button @click="deleteItem" :disabled="waiting || isBasketLoading" :class="{ 'text-muted': isBasketLoading && !waiting }">
+                        <i v-waiting-animation="waiting" class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
