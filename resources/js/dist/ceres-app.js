@@ -10936,7 +10936,7 @@ Vue.component("checkout", {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
             }
         },
-        hasShippingProfileList: function hasShippingProfileList(oldList, newList) {
+        hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
             if (oldList.length !== newList.length) {
                 NotificationService.info(Translations.Template.orderShippingProfileListChanged);
                 return true;

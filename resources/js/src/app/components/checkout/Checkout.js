@@ -38,7 +38,7 @@ Vue.component("checkout", {
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.hasShippingProfileList(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList))
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList))
             {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
@@ -61,7 +61,7 @@ Vue.component("checkout", {
             }
         },
 
-        hasShippingProfileList(oldList, newList)
+        hasShippingProfileListChanged(oldList, newList)
         {
             if (oldList.length !== newList.length)
             {
