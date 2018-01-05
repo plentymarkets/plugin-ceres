@@ -21,17 +21,6 @@
     <div class="meta-container">
         
         <div>
-            <transition name="slide-fade">
-                <div v-if="deleteConfirmed && !waitForDelete" class="button-slider">
-                    <div @click="deleteItem" class="basket-button left">
-                        <div class="button-text">{{ trans("Ceres::Template.generalRemove") }}</div>
-                    </div>
-                    <div @click.stop="resetDelete" class="basket-button right">
-                        <div class="button-text">{{ trans("Ceres::Template.generalCancel") }}</div>
-                    </div>
-                </div>
-            </transition>
-
             <div class="item-meta">
                 <a :href="basketItem.variation.data | itemURL">
                     <div class="item-name">
@@ -42,7 +31,7 @@
                 <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
 
                 <div class="item-remove-button">
-                    <button @click="deleteItem" :disabled="waiting">
+                    <button @click="deleteItem" :disabled="waiting || isBasketLoading">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -66,8 +55,8 @@
                 </div>
 
                 <div v-for="property in basketItem.basketItemOrderParams">
-                    <div v-if="isPropertyVisible(property.propertyId)">
-                    <!-- <div> -->
+                    <!-- <div v-if="isPropertyVisible(property.propertyId)"> -->
+                    <div>
                         <strong>+ ${property.name} (${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                         <span v-if="property.type === 'file'">
                             <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>

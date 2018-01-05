@@ -257,56 +257,17 @@
 				border: none;
 				background: transparent;
 				padding: 0;
-				&:hover {
+				&:not(:disabled):hover {
 					color: darken($brand-danger, 20%);
+				}
+
+				&:disabled {
+					cursor: not-allowed;
 				}
 
 				> i {
 					font-size: 1.2rem !important;
 					line-height: 1.2rem !important;
-				}
-			}
-		}
-
-		.button-slider {
-			position: absolute;
-			height: 100%;
-			width: 100%;
-
-			&.slide-fade-enter-active, &.slide-fade-leave-active {
-				transition: all .3s ease;
-			}
-			
-			&.slide-fade-enter, &.slide-fade-leave-to {
-				transform: translateX(100%);
-			}
-			
-			.basket-button {
-				position: absolute;
-				width: 50%;
-				height: 100%;
-				cursor: pointer;
-	
-				&.left {
-					background: $brand-danger;
-					border-top-left-radius: $border-radius;
-					border-bottom-left-radius: $border-radius;
-					color: $white;
-				}
-	
-				&.right {
-					background: $gray-lighter;
-					right: 0;
-					border-top-right-radius: $border-radius;
-					border-bottom-right-radius: $border-radius;
-				}
-	
-				.button-text {
-					transform: translateY(-50%);
-					top: 50%;
-					position: absolute;
-					text-align: center;
-					width: 100%;
 				}
 			}
 		}

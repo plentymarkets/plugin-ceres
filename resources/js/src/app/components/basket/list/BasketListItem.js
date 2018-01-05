@@ -17,9 +17,6 @@ Vue.component("basket-list-item", {
     {
         return {
             waiting: false,
-            waitForDelete: false,
-            deleteConfirmed: false,
-            deleteConfirmedTimeout: null,
             itemCondition: ""
         };
     },
@@ -62,35 +59,18 @@ Vue.component("basket-list-item", {
          */
         deleteItem()
         {
-            if (!this.deleteConfirmed)
-            {
-                this.deleteConfirmed = true;
-                this.deleteConfirmedTimeout = window.setTimeout(
-                    () =>
-                    {
-                        this.resetDelete();
-                    },
-                    5000
-                );
-            }
-            else
-            {
-                this.waitForDelete = true;
-                this.waiting = true;
+            this.waiting = true;
 
-                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
-                    response =>
-                    {
-                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
-                        this.waiting = false;
-                    },
-                    error =>
-                    {
-                        this.resetDelete();
-                        this.waitForDelete = false;
-                        this.waiting = false;
-                    });
-            }
+            this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
+                response =>
+                {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                    this.waiting = false;
+                },
+                error =>
+                {
+                    this.waiting = false;
+                });
         },
 
         /**
@@ -126,18 +106,6 @@ Vue.component("basket-list-item", {
 
                         this.waiting = false;
                     });
-            }
-        },
-
-        /**
-         * Cancel delete
-         */
-        resetDelete()
-        {
-            this.deleteConfirmed = false;
-            if (this.deleteConfirmedTimeout)
-            {
-                window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
     }
