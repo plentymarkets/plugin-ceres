@@ -292,7 +292,7 @@
 				}
 			}
 	
-			.basket-expand{
+			.basket-expand {
 				display: block;
 				position: relative;
 				z-index: 999;
@@ -324,6 +324,24 @@
 				&.opened {
 					&:after {
 						content: attr(data-show-less);
+					}
+				}
+			}
+
+			.basket-item-property-grid {
+				th {
+					border: 1px solid $gray-lighter;
+					border-bottom-width: 2px;
+					text-align: left;
+					padding: .5rem;
+				}
+				td {
+					border: 1px solid $gray-lighter;
+					text-align: left;
+					padding: .5rem;
+
+					&:last-child {
+						text-align: center;
 					}
 				}
 			}

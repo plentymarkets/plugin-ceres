@@ -45,10 +45,10 @@
                     </div>
                 </div>
 
+                {#
                 <div v-if="basketItem.basketItemOrderParams.length" style="font-size: 1.1em">
                     Ihre Angaben (Preis pro Artikel):
                 </div>
-
                 <div v-for="property in basketItem.basketItemOrderParams">
                     <!-- <div v-if="isPropertyVisible(property.propertyId)"> -->
                     <div>
@@ -56,8 +56,25 @@
                         <span v-if="property.type === 'file'">
                             <a :href="property.value | fileUploadPath" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i> ${ property.value | fileName }</a>
                         </span>
+                        <span v-else>${ property.value }</span>
                     </div>
                 </div>
+                #}
+                <table class="basket-item-property-grid m-t-1" v-if="basketItem.basketItemOrderParams.length">
+                    <tr>
+                        <th>Bestellmerkmal</th>
+                        <th class="hidden-xs-down" v-if="size === 'large'">Wert</th>
+                        <th>Aufpreis (pro Artikel)</th>
+                    </tr>
+                    <tr v-for="property in basketItem.basketItemOrderParams">
+                        <td>${property.name}</td>
+                        <td class="hidden-xs-down" v-if="size === 'large'">${ property.value }</td>
+                        <td>
+                            <strong>${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
+                        </td>
+                    </tr>
+                </table>
+
             </div>
 
             <div v-if="size === 'large' && showMoreInformation" style="font-size: 80%;">
