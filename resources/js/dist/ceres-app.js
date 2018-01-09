@@ -16205,7 +16205,7 @@ Vue.filter("itemName", function (item, selectedName) {
 
 Vue.filter("itemURL", function (item) {
     var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
-    var urlPath = item.texts.urlPath;
+    var urlPath = item.texts.urlPath || "";
 
     var link = "";
 
