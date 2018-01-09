@@ -17,7 +17,8 @@ Vue.component("basket-list-item", {
     {
         return {
             waiting: false,
-            itemCondition: ""
+            itemCondition: "",
+            showMoreInformation: false
         };
     },
 

@@ -1,11 +1,12 @@
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
 {% set showItemVariation = config("Ceres.basket.variations") %}
 {% set configItemName = config("Ceres.item.name") %}
+{% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
 
 <script type="x/template" id="vue-basket-list-item">
-    <div :class="{'basket-item-slim-container': size == 'slim'}">
+    <div class="basket-item-slim-container" :class="{ 'basket-small': size === 'slim', 'basket-large': size === 'large' }">
         <div v-if="size == 'large'">
-            {% include "Ceres::Basket.Components.BasketListItem_large" %}
+            {% include "Ceres::Basket.Components.BasketListItem_slim" %}
         </div>
 
         <div v-if="size == 'small'">
