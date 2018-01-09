@@ -1,7 +1,7 @@
 Vue.filter("itemURL", function(item)
 {
     const enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
-    const urlPath = item.texts.urlPath;
+    const urlPath = item.texts.urlPath || "";
 
     let link = "";
 
