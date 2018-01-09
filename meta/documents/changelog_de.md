@@ -4,7 +4,7 @@
 
 ### Behoben
 
-- Es wurde ein Fehler behoben, bei dem Artikel ohne definierten URL-Pfad im **Warenkorb** nicht im Warenkorb angezeigt wurden.
+- Es wurde ein Fehler behoben, bei dem Artikel-URLs ohne definierten URL-Pfad nicht korrekt generiert werden konnten.
 
 ## v2.1.0 (2018-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.3...2.1.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
