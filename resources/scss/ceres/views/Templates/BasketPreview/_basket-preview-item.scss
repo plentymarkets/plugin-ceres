@@ -327,22 +327,30 @@
 					}
 				}
 			}
+		}
 
-			.basket-item-property-grid {
-				th {
-					border: 1px solid $gray-lighter;
-					border-bottom-width: 2px;
-					text-align: left;
-					padding: .5rem;
-				}
-				td {
-					border: 1px solid $gray-lighter;
-					text-align: left;
-					padding: .5rem;
+		.item-properties {
+			margin-top: .25em;
 
-					&:last-child {
-						text-align: center;
-					}
+			.item-properties-header {
+				margin-bottom: .25em;
+				font-weight: 700;
+			}
+
+			@at-root .basket-small ul {
+				list-style: none;
+			}
+
+			dd {
+				margin-bottom: .25rem;
+			}
+
+			ul {
+				padding: 0;
+				margin-bottom: 0;
+
+				div {
+					margin-bottom: .25em;
 				}
 			}
 		}

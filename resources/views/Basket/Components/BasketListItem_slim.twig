@@ -46,9 +46,6 @@
                 </div>
 
                 {#
-                <div v-if="basketItem.basketItemOrderParams.length" style="font-size: 1.1em">
-                    Ihre Angaben (Preis pro Artikel):
-                </div>
                 <div v-for="property in basketItem.basketItemOrderParams">
                     <!-- <div v-if="isPropertyVisible(property.propertyId)"> -->
                     <div>
@@ -60,21 +57,38 @@
                     </div>
                 </div>
                 #}
-                <table class="basket-item-property-grid m-t-1" v-if="basketItem.basketItemOrderParams.length">
-                    <tr>
-                        <th>Bestellmerkmal</th>
-                        <th class="hidden-xs-down" v-if="size === 'large'">Wert</th>
-                        <th>Aufpreis (pro Artikel)</th>
-                    </tr>
-                    <tr v-for="property in basketItem.basketItemOrderParams">
-                        <td>${property.name}</td>
-                        <td class="hidden-xs-down" v-if="size === 'large'">${ property.value }</td>
-                        <td>
-                            <strong>${basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }</strong>
-                        </td>
-                    </tr>
-                </table>
 
+                <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
+                    {#
+                    <div class="item-properties-header">Ihre Angaben (Preis pro Artikel):</div>
+
+                    <dl>
+                        <div v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
+                            <dt>
+                                <strong>${ property.name } (+ ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+                            </dt>
+                            <dd v-if="size === 'large'">${ property.value }</dd>
+                        </div>
+                    </dl>
+                    #}
+
+                    <div class="item-properties-header">Ihre Angaben (Preis pro Artikel):</div>
+
+                    <ul>
+                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
+                            <strong>${ property.name } (+ ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+                            <div v-if="size === 'large'">
+                                <span v-if="property.type === 'file'">
+                                    <a :href="property.value | fileUploadPath" target="_blank">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                        ${ property.value | fileName }
+                                    </a>
+                                </span>
+                                <span v-else>${ property.value }</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div v-if="size === 'large' && showMoreInformation" style="font-size: 80%;">
@@ -109,8 +123,10 @@
                 {% endif %}
 
             </div>
-
-            <label v-if="size === 'large'" @click="showMoreInformation = !showMoreInformation" class="basket-expand" :class="{ 'opened': showMoreInformation }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+            
+            {% if "basket.item.item_id" in basketDetailsData or "basket.item.availability" in basketDetailsData or "basket.item.customNumber" in basketDetailsData or "basket.item.description_long" in basketDetailsData or "basket.item.description_short" in basketDetailsData %}
+                <label v-if="size === 'large'" @click="showMoreInformation = !showMoreInformation" class="basket-expand" :class="{ 'opened': showMoreInformation }" data-show-more="{{ trans("Ceres::Template.itemShowMore") }}" data-show-less="{{ trans("Ceres::Template.itemShowLess") }}"></label>
+            {% endif %}
 
         </div>
 
