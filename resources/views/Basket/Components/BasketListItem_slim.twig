@@ -76,7 +76,20 @@
 
                     <ul>
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
-                            <strong>${ property.name } (+ ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+
+                            <span :class="{ 'item-property-value': size === 'slim' }">
+                                <strong>${ property.name } (+ ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }) </strong>
+                                <span v-if="size === 'slim'">
+                                    <span v-if="property.type === 'file'">
+                                         <a :href="property.value | fileUploadPath" target="_blank">
+                                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            ${ property.value | fileName }
+                                        </a>
+                                    </span>
+                                    <span v-else>${ property.value }</span>
+                                </span>
+                            </span>
+
                             <div v-if="size === 'large'">
                                 <span v-if="property.type === 'file'">
                                     <a :href="property.value | fileUploadPath" target="_blank">

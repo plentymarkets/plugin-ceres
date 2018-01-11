@@ -242,6 +242,7 @@
 		.meta-container {
 			display: flex;
 			width: 100%;
+			min-width: 0;
 	
 			& > div {
 				width: 100%;
@@ -335,6 +336,13 @@
 			.item-properties-header {
 				margin-bottom: .25em;
 				font-weight: 700;
+			}
+
+			.item-property-value {
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				display: block;
 			}
 
 			@at-root .basket-small ul {
