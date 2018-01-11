@@ -444,7 +444,7 @@
             "all"                       : "All",
             "main"                      : "Only main variations",
             "child"                     : "Only child variations",
-            "combined"                  : "Combine variations"
+            "combined"                  : "Dynamically"
         },
         "default"                       : "all"
     },
