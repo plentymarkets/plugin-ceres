@@ -10269,7 +10269,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.isLastBasketEntrySet) {
                 var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
-                return img.url;
+                return img ? img.url : "";
             }
 
             return "";
@@ -10918,7 +10918,7 @@ Vue.component("checkout", {
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.hasShippingProfileList(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
