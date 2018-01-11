@@ -45,7 +45,7 @@ Vue.component("add-to-basket", {
     {
         this.$nextTick(() =>
         {
-            this.checkMinMaxOrderQuantity();
+            // this.checkMinMaxOrderQuantity();
         });
     },
 

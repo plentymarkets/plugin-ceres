@@ -10,7 +10,10 @@ const mutations =
         setVariation(state, variation)
         {
             state.variation = variation;
-            state.variationOrderQuantity = 1;
+            if (variation.documents.length > 0 && variation.documents[0].data.variation)
+            {
+                state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
+            }
         },
 
         setVariationList(state, variationList)
