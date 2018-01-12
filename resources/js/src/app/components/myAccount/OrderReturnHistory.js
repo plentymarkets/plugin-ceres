@@ -51,31 +51,6 @@ Vue.component("order-return-history", {
                     NotificationService.error(Translations.Template.notFoundOops);
                 });
             }
-        },
-
-        toggleNaming(element)
-        {
-            if (document.getElementById(element).innerText === Translations.Template.myAccountReturnShowMore)
-            {
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
-            }
-            else
-            {
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
-            }
-        },
-
-        getOriginOrderId(order)
-        {
-            for (const orderRef of order.orderReferences)
-            {
-                if (orderRef.referenceType === "parent")
-                {
-                    return orderRef.referenceOrderId;
-                }
-            }
-
-            return "-";
         }
     }
 });
