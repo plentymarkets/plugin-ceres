@@ -19127,6 +19127,10 @@ var state = {
 
 var mutations = {
     setOrderReturnData: function setOrderReturnData(state, orderData) {
+        orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
+            return orderItem.quantity !== 0;
+        });
+
         state.orderData = orderData;
     },
     updateOrderReturnItems: function updateOrderReturnItems(state, _ref) {
