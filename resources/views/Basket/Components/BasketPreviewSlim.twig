@@ -4,7 +4,7 @@
 
 <script type="x/template" id="vue-basket-preview-slim">
     <div class="cart hidden-md-down">
-        <basket-list class="cart-items" v-if="basketItems.length" template="#vue-basket-list" size="slim"></basket-list>
+        <basket-list class="cart-items" v-if="basketItems.length" template="#vue-basket-list" size="small"></basket-list>
         <div class="no-items" v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</div>
 
         <div class="cart-totals" v-if="basketItems.length">

@@ -6,9 +6,9 @@
 {% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
 
 <script type="x/template" id="vue-basket-list-item">
-    <div class="basket-item-slim-container" :class="{ 'basket-small': size === 'slim', 'basket-large': size === 'large' }">
+    <div class="basket-item-container" :class="{ 'basket-small': size === 'small', 'basket-large': size === 'large' }">
         
-        <div class="basket-item-slim component-loading with-icon sending" :class="{ 'isLoading': waiting }">
+        <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
             <div class="quantity-input-container">
                 <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
@@ -55,9 +55,9 @@
                             <ul>
                                 <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
 
-                                    <span :class="{ 'item-property-value': size === 'slim' }">
+                                    <span :class="{ 'item-property-value': size === 'small' }">
                                         <strong>${ property.name } (+ ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }) </strong>
-                                        <span v-if="size === 'slim'">
+                                        <span v-if="size === 'small'">
                                             <span v-if="property.type === 'file'">
                                                 <a :href="property.value | fileUploadPath" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
