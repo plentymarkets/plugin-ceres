@@ -1,16 +1,11 @@
 # Release Notes für Ceres
 
-## v2.1.3 (unknown)
-
-### Behoben
-
-- Das vorraussichtliche Lieferdatum in der **Bestellübersicht** wird nun nicht mehr ausgegeben, wenn das Datum nicht in den Daten vorhanden ist.
-
-## v2.1.2 (2018-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+## v2.1.2 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
 - Die Versandkosten in der Versandkosten auswahl updaten sich nun.
+- Das vorraussichtliche Lieferdatum in der **Bestellübersicht** wird nun nicht mehr ausgegeben, wenn das Datum nicht in den Daten vorhanden ist.
 
 ## v2.1.1 (2018-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.0...2.1.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
