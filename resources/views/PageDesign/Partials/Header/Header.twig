@@ -6,7 +6,7 @@
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 {{ component( "Ceres::WishList.Components.WishListCount" ) }}
-{{ component( "Ceres::Basket.Components.BasketPreviewSlim" ) }}
+{{ component( "Ceres::Basket.Components.BasketPreviewSmart" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
@@ -71,8 +71,13 @@
                         {% endif %}
                     </a>
 
-                    <basket-preview-slim></basket-preview-slim>
-
+                    {% if config("Ceres.basket.preview_type") == "smart" %}
+                        <basket-preview
+                            template="#vue-basket-preview-smart"
+                            :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                            :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                        </basket-preview>
+                    {% endif %}
                 </li>
             </ul>
         </div>

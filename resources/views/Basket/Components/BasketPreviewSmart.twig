@@ -2,7 +2,7 @@
 {{ component( "Ceres::Basket.Components.BasketList" ) }}
 {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
 
-<script type="x/template" id="vue-basket-preview-slim">
+<script type="x/template" id="vue-basket-preview-smart">
     <div class="cart hidden-md-down">
         <basket-list class="cart-items" v-if="basketItems.length" template="#vue-basket-list" size="small"></basket-list>
         <div class="no-items" v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</div>
