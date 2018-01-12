@@ -32,17 +32,17 @@
 
             {# show initial #}
             <div class="row">
-                <div class="col-md-6 m-t-1" v-for="orderItem in itemsToRender" style="display:flex">
-                    <div class="col-md-3" style="display:flex">
-                        <div class="order-return-history-image-container" style="height: 80px">
+                <div class="col-md-6 m-t-1 order-return-history-item" v-for="orderItem in itemsToRender">
+                    <div class="col-md-3">
+                        <div class="order-return-history-image-container">
                             <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
                                 <img class="order-return-history-image" :src="returnOrder.itemImages[orderItem.itemVariationId]">
                             </a>
                         </div>
                     </div>
 
-                    <div class="col-md-8" style="display:flex;">
-                        <div class="order-return-history-text-container" style="align-self: center">
+                    <div class="col-md-8">
+                        <div class="order-return-history-text-container">
                             <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
                                 <h2 class="h5 order-return-history-name">${ orderItem.orderItemName }</h2>
                             </a>
