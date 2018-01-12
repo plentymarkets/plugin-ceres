@@ -347,10 +347,13 @@
 
 			@at-root .basket-small ul {
 				list-style: none;
-			}
 
-			dd {
-				margin-bottom: .25rem;
+				.item-property-value {
+					&:before {
+						content: '+';
+						margin-right: 5px;
+					}
+				}
 			}
 
 			ul {
