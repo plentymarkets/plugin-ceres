@@ -1,176 +1,178 @@
-// Frontend end scripts
+import TranslationService from "./services/TranslationService";
+
 // eslint-disable-next-line
-var init = (function($, window, document)
+(function($, window, document)
 {
+    TranslationService.registerGroup("Ceres", "Template");
 
-    function CeresMain()
+    window.Ceres = {
+        TranslationService: TranslationService
+    };
+
+    // Frontend end scripts
+    $(window).scroll(function()
     {
-        $(window).scroll(function()
+        if ($(".wrapper-main").hasClass("isSticky"))
         {
-            if ($(".wrapper-main").hasClass("isSticky"))
+            if ($(this).scrollTop() > 1)
             {
-                if ($(this).scrollTop() > 1)
-                {
-                    $(".wrapper-main").addClass("sticky");
-                }
-                else
-                {
-                    $(".wrapper-main").removeClass("sticky");
-                }
+                $(".wrapper-main").addClass("sticky");
             }
-        });
-
-        // init bootstrap tooltips
-        $("[data-toggle=\"tooltip\"]").tooltip();
-
-        // Replace all SVG images with inline SVG, class: svg
-        $("img[src$=\".svg\"]").each(function()
-        {
-            var $img = jQuery(this);
-            var imgURL = $img.attr("src");
-            var attributes = $img.prop("attributes");
-
-            $.get(imgURL, function(data)
+            else
             {
-                // Get the SVG tag, ignore the rest
-                var $svg = jQuery(data).find("svg");
-
-                // Remove any invalid XML tags
-                $svg = $svg.removeAttr("xmlns:a");
-
-                // Loop through IMG attributes and apply on SVG
-                $.each(attributes, function()
-                {
-                    $svg.attr(this.name, this.value);
-                });
-
-                // Replace IMG with SVG
-                $img.replaceWith($svg);
-            }, "xml");
-        });
-
-        var $toggleListView = $(".toggle-list-view");
-        var $mainNavbarCollapse = $("#mainNavbarCollapse");
-
-        $(document).on("click", function(evt)
-        {
-            if ($("#vue-app").hasClass("open-right"))
-            {
-                if ((evt.target != $(".basket-preview")) &&
-                    (evt.target.classList[0] != "message") &&
-                    ($(evt.target).parents(".basket-preview").length <= 0))
-                {
-                    evt.preventDefault();
-                    $("#vue-app").toggleClass("open-right");
-                }
+                $(".wrapper-main").removeClass("sticky");
             }
+        }
+    });
 
-            if ((evt.target.id != "countrySettings") &&
-                ($(evt.target).parents("#countrySettings").length <= 0) &&
-                ($("#countrySettings").attr("aria-expanded") == "true"))
+    // init bootstrap tooltips
+    $("[data-toggle=\"tooltip\"]").tooltip();
+
+    // Replace all SVG images with inline SVG, class: svg
+    $("img[src$=\".svg\"]").each(function()
+    {
+        var $img = jQuery(this);
+        var imgURL = $img.attr("src");
+        var attributes = $img.prop("attributes");
+
+        $.get(imgURL, function(data)
+        {
+            // Get the SVG tag, ignore the rest
+            var $svg = jQuery(data).find("svg");
+
+            // Remove any invalid XML tags
+            $svg = $svg.removeAttr("xmlns:a");
+
+            // Loop through IMG attributes and apply on SVG
+            $.each(attributes, function()
             {
-                $("#countrySettings").collapse("hide");
-            }
+                $svg.attr(this.name, this.value);
+            });
 
-            if ((evt.target.id != "searchBox") &&
-                ($(evt.target).parents("#searchBox").length <= 0) &&
-                ($("#searchBox").attr("aria-expanded") == "true"))
+            // Replace IMG with SVG
+            $img.replaceWith($svg);
+        }, "xml");
+    });
+
+    var $toggleListView = $(".toggle-list-view");
+    var $mainNavbarCollapse = $("#mainNavbarCollapse");
+
+    $(document).on("click", function(evt)
+    {
+        if ($("#vue-app").hasClass("open-right"))
+        {
+            if ((evt.target != $(".basket-preview")) &&
+                (evt.target.classList[0] != "message") &&
+                ($(evt.target).parents(".basket-preview").length <= 0))
             {
-                $("#searchBox").collapse("hide");
+                evt.preventDefault();
+                $("#vue-app").toggleClass("open-right");
             }
-
-            if ((evt.target.id != "currencySelect") &&
-                ($(evt.target).parents("#currencySelect").length <= 0) &&
-                ($("#currencySelect").attr("aria-expanded") == "true"))
-            {
-                $("#currencySelect").collapse("hide");
-            }
-        });
-
-        $toggleListView.on("click", function(evt)
-        {
-            evt.preventDefault();
-
-            // toggle it's own state
-            $toggleListView.toggleClass("grid");
-
-            // toggle internal style of thumbs
-            $(".product-list, .cmp-product-thumb").toggleClass("grid");
-        });
-
-        $mainNavbarCollapse.collapse("hide");
-
-        // Add click listener outside the navigation to close it
-        $mainNavbarCollapse.on("show.bs.collapse", function()
-        {
-            $(".main").one("click", closeNav);
-        });
-
-        $mainNavbarCollapse.on("hide.bs.collapse", function()
-        {
-            $(".main").off("click", closeNav);
-        });
-
-        function closeNav()
-        {
-            $("#mainNavbarCollapse").collapse("hide");
         }
 
-        $(document).ready(function()
+        if ((evt.target.id != "countrySettings") &&
+            ($(evt.target).parents("#countrySettings").length <= 0) &&
+            ($("#countrySettings").attr("aria-expanded") == "true"))
         {
-            var offset = 250;
-            var duration = 300;
+            $("#countrySettings").collapse("hide");
+        }
 
-            $(window).scroll(function()
-            {
-                if ($(this).scrollTop() > offset)
-                {
-                    $(".back-to-top").fadeIn(duration);
-                    $(".back-to-top-center").fadeIn(duration);
-                }
-                else
-                {
-                    $(".back-to-top").fadeOut(duration);
-                    $(".back-to-top-center").fadeOut(duration);
-                }
-            });
+        if ((evt.target.id != "searchBox") &&
+            ($(evt.target).parents("#searchBox").length <= 0) &&
+            ($("#searchBox").attr("aria-expanded") == "true"))
+        {
+            $("#searchBox").collapse("hide");
+        }
 
-            $(".back-to-top").click(function(event)
-            {
-                event.preventDefault();
+        if ((evt.target.id != "currencySelect") &&
+            ($(evt.target).parents("#currencySelect").length <= 0) &&
+            ($("#currencySelect").attr("aria-expanded") == "true"))
+        {
+            $("#currencySelect").collapse("hide");
+        }
+    });
 
-                $("html, body").animate({scrollTop: 0}, duration);
+    $toggleListView.on("click", function(evt)
+    {
+        evt.preventDefault();
 
-                return false;
-            });
+        // toggle it's own state
+        $toggleListView.toggleClass("grid");
 
-            $(".back-to-top-center").click(function(event)
-            {
-                event.preventDefault();
+        // toggle internal style of thumbs
+        $(".product-list, .cmp-product-thumb").toggleClass("grid");
+    });
 
-                $("html, body").animate({scrollTop: 0}, duration);
+    $mainNavbarCollapse.collapse("hide");
 
-                return false;
-            });
+    // Add click listener outside the navigation to close it
+    $mainNavbarCollapse.on("show.bs.collapse", function()
+    {
+        $(".main").one("click", closeNav);
+    });
 
-            $("#searchBox").on("show.bs.collapse", function()
-            {
-                $("#countrySettings").collapse("hide");
-            });
+    $mainNavbarCollapse.on("hide.bs.collapse", function()
+    {
+        $(".main").off("click", closeNav);
+    });
 
-            $("#countrySettings").on("show.bs.collapse", function()
-            {
-                $("#searchBox").collapse("hide");
-            });
-
-            $("#accountMenuList").click(function()
-            {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
-            });
-        });
+    function closeNav()
+    {
+        $("#mainNavbarCollapse").collapse("hide");
     }
 
-    window.CeresMain = new CeresMain();
+    $(document).ready(function()
+    {
+        var offset = 250;
+        var duration = 300;
+
+        $(window).scroll(function()
+        {
+            if ($(this).scrollTop() > offset)
+            {
+                $(".back-to-top").fadeIn(duration);
+                $(".back-to-top-center").fadeIn(duration);
+            }
+            else
+            {
+                $(".back-to-top").fadeOut(duration);
+                $(".back-to-top-center").fadeOut(duration);
+            }
+        });
+
+        $(".back-to-top").click(function(event)
+        {
+            event.preventDefault();
+
+            $("html, body").animate({scrollTop: 0}, duration);
+
+            return false;
+        });
+
+        $(".back-to-top-center").click(function(event)
+        {
+            event.preventDefault();
+
+            $("html, body").animate({scrollTop: 0}, duration);
+
+            return false;
+        });
+
+        $("#searchBox").on("show.bs.collapse", function()
+        {
+            $("#countrySettings").collapse("hide");
+        });
+
+        $("#countrySettings").on("show.bs.collapse", function()
+        {
+            $("#searchBox").collapse("hide");
+        });
+
+        $("#accountMenuList").click(function()
+        {
+            $("#countrySettings").collapse("hide");
+            $("#searchBox").collapse("hide");
+        });
+    });
 
 })(jQuery, window, document);

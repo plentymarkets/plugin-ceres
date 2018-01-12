@@ -163,6 +163,8 @@
         {{ get_filtered_tags() }}
 
         <script>
+            Ceres.TranslationService.setLocale("{{ lang }}");
+
             var rootElement = document.getElementById("vue-app");
             var errorElement = document.getElementById("vue-error");
 
