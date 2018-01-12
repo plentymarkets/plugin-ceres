@@ -22,7 +22,7 @@
 				</div>
 
 				<div v-if="!waiting" class="order-list">
-					<order-return-history-item v-for="returnOrder in returnsList.entries" :returnOrder="returnOrder"></order-return-history-item>
+					<order-return-history-item v-for="returnOrder in returnsList.entries" :returnOrder="returnOrder" :key="returnOrder.order.id"></order-return-history-item>
 				</div>
 			</div>
 		</div>
