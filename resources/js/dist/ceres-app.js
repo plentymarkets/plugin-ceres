@@ -10307,8 +10307,8 @@ Vue.component("add-item-to-basket-overlay", {
 
     methods: {
         setPriceFromData: function setPriceFromData() {
-            if (this.latestBasketEntry.item.calculatedPrices) {
-                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+            if (this.latestBasketEntry.item.prices) {
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
                 var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
@@ -10385,10 +10385,8 @@ Vue.component("add-to-basket", {
         this.$options.template = this.template;
     },
     mounted: function mounted() {
-        var _this = this;
-
         this.$nextTick(function () {
-            _this.checkMinMaxOrderQuantity();
+            // this.checkMinMaxOrderQuantity();
         });
     },
 
@@ -10398,7 +10396,7 @@ Vue.component("add-to-basket", {
          * add an item to basket-resource
          */
         addToBasket: function addToBasket() {
-            var _this2 = this;
+            var _this = this;
 
             if (this.item.filter.isSalable) {
                 this.waiting = true;
@@ -10410,10 +10408,10 @@ Vue.component("add-to-basket", {
                 };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
-                    _this2.waiting = false;
-                    _this2.openAddToBasketOverlay(basketObject.quantity);
+                    _this.waiting = false;
+                    _this.openAddToBasketOverlay(basketObject.quantity);
                 }, function (error) {
-                    _this2.waiting = false;
+                    _this.waiting = false;
                     NotificationService.error(Translations.Template[_ExceptionMap2.default.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                 });
             }
@@ -10918,7 +10916,7 @@ Vue.component("checkout", {
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.hasShippingProfileList(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
@@ -13137,21 +13135,15 @@ Vue.component("graduated-prices", {
 
     computed: _extends({
         graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices;
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
 
             prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > 1;
+                return price.minimumOrderQuantity > minQuantity;
             });
 
             return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity) {
-                    return 1;
-                }
-                if (priceA.minimumOrderQuantity < priceB.minimumOrderQuantity) {
-                    return -1;
-                }
-
-                return 0;
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
             });
         },
         activeGraduationIndex: function activeGraduationIndex() {
@@ -13869,8 +13861,10 @@ Vue.component("category-item", {
     },
 
     created: function created() {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+        if (this.itemData.prices.rrp) {
+            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
+        }
+        this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
 
 
@@ -14193,7 +14187,7 @@ Vue.component("item-store-special", {
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");
         }
@@ -16150,24 +16144,24 @@ Vue.filter("date", dateFilter);
 "use strict";
 
 Vue.filter("graduatedPrice", function (item, quantity) {
-    var graduatedPrices = item.calculatedPrices.graduatedPrices;
+    var graduatedPrices = item.prices.graduatedPrices;
 
     var returnPrice = void 0;
 
     if (graduatedPrices && graduatedPrices[0]) {
         var prices = graduatedPrices.filter(function (price) {
-            return parseInt(quantity) >= price.minimumOrderQuantity;
+            return parseFloat(quantity) >= price.minimumOrderQuantity;
         });
 
         if (prices[0]) {
             returnPrice = prices.reduce(function (prev, current) {
                 return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
             });
-            returnPrice = returnPrice.price;
+            returnPrice = returnPrice.unitPrice.value;
         }
     }
 
-    return returnPrice || item.calculatedPrices.default.unitPrice;
+    return returnPrice || item.prices.default.unitPrice.value;
 });
 
 },{}],88:[function(require,module,exports){
@@ -18709,7 +18703,9 @@ var state = {
 var mutations = {
     setVariation: function setVariation(state, variation) {
         state.variation = variation;
-        state.variationOrderQuantity = 1;
+        if (variation.documents.length > 0 && variation.documents[0].data.variation) {
+            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
+        }
     },
     setVariationList: function setVariationList(state, variationList) {
         state.variationList = variationList;
@@ -18781,25 +18777,25 @@ var getters = {
             return 0;
         }
 
-        var calculatedPrices = state.variation.documents[0].data.calculatedPrices;
+        var calculatedPrices = state.variation.documents[0].data.prices;
         var graduatedPrices = calculatedPrices.graduatedPrices;
 
         var returnPrice = void 0;
 
         if (graduatedPrices && graduatedPrices[0]) {
             var prices = graduatedPrices.filter(function (price) {
-                return parseInt(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+                return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
             });
 
             if (prices[0]) {
                 returnPrice = prices.reduce(function (prev, current) {
                     return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
                 });
-                returnPrice = returnPrice.price;
+                returnPrice = returnPrice.unitPrice.value;
             }
         }
 
-        return returnPrice || calculatedPrices.default.unitPrice;
+        return returnPrice || calculatedPrices.default.unitPrice.value;
     },
     variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
         return getters.variationPropertySurcharge + getters.variationGraduatedPrice;

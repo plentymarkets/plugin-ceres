@@ -79,7 +79,7 @@ const getters =
                 return 0;
             }
 
-            const calculatedPrices = state.variation.documents[0].data.calculatedPrices;
+            const calculatedPrices = state.variation.documents[0].data.prices;
             const graduatedPrices = calculatedPrices.graduatedPrices;
 
             let returnPrice;
@@ -88,17 +88,17 @@ const getters =
             {
                 const prices = graduatedPrices.filter(price =>
                 {
-                    return parseInt(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+                    return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
                 });
 
                 if (prices[0])
                 {
                     returnPrice = prices.reduce((prev, current) => (prev.minimumOrderQuantity > current.minimumOrderQuantity) ? prev : current);
-                    returnPrice = returnPrice.price;
+                    returnPrice = returnPrice.unitPrice.value;
                 }
             }
 
-            return returnPrice || calculatedPrices.default.unitPrice;
+            return returnPrice || calculatedPrices.default.unitPrice.value;
         },
 
         variationTotalPrice(state, getters, rootState, rootGetters)
