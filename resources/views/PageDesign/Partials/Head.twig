@@ -65,7 +65,7 @@
             shopName: "{{ config("Ceres.header.company_name") }}",
             activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
             currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-            basketPreviewType: "{{ config("Ceres.basket.preview_type") }}" || "right"
+            basketOpenClass: {% if config("Ceres.basket.preview_type") != "smart" %}"open-right"{% else %}"open-smart"{% endif %}
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},

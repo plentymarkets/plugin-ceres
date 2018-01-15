@@ -3,7 +3,15 @@
 {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
 
 <script type="x/template" id="vue-basket-preview-smart">
-    <div class="cart hidden-md-down">
+    <div class="cart" :class="{ 'empty': !basketItems.length }">
+
+        <header class="basket-header m-b-2 hidden-lg-up">
+            <div class="d-inline-block m-a-0 h3">{{ trans("Ceres::Template.basketPreview") }}</div>
+            <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+
         <basket-list class="cart-items" v-if="basketItems.length" template="#vue-basket-list" size="small"></basket-list>
         <div class="no-items" v-else>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</div>
 
@@ -14,14 +22,14 @@
             <basket-totals class="basket-preview-totals" template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
 
             <div class="row">
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-6">
                     <button v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="{{ trans("Ceres::Template.basket") }}">
                         <i class="fa fa-shopping-cart"></i>
                         {{ trans("Ceres::Template.basket") }} 
                     </button>
                 </div>
 
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                     <div>

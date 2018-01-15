@@ -93,6 +93,17 @@ body {
 			}
 		}
 
+		&.open-smart {
+			@include media-breakpoint-down(xs) {
+				position: fixed;
+			}
+
+			.cart {
+				display: flex;
+				transform: translateX(0%);
+			}
+		}
+
 		@include media-breakpoint-up(sm){
 			&.open-right{
 				.wrapper-right{

@@ -54,14 +54,15 @@ var init = (function($, window, document)
 
         $(document).on("click", function(evt)
         {
-            if ($("#vue-app").hasClass("open-right"))
+            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-right"))
             {
                 if ((evt.target != $(".basket-preview")) &&
+                    (evt.target != document.querySelector(".cart")) &&
                     (evt.target.classList[0] != "message") &&
-                    ($(evt.target).parents(".basket-preview").length <= 0))
+                    ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".cart").length <= 0))
                 {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass("open-right");
+                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-right");
                 }
             }
 
