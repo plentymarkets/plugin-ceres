@@ -204,12 +204,6 @@
 	& .basket-preview-totals {
 		font-size: 80%
 	}
-
-	@include media-breakpoint-up(lg) {
-		&:hover {
-			display: block;
-		}
-	}
 }
 
 .top-bar .controls-list > li .cart {
