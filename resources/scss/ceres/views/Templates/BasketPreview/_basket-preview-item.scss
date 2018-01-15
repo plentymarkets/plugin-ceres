@@ -124,7 +124,7 @@
 @include media-breakpoint-up(lg) {
 	.control-basket {
 		&:hover {
-			.cart {
+			.cart-wrapper {
 				display: block;
 				transform: translateX(0%);
 			}
@@ -132,28 +132,18 @@
 	}
 }
 
-.cart {
+.cart-wrapper {
 	position: absolute;
-	top: 100%;
 	width: 100vw;
-	background: white;
 	right: 0;
 	z-index: 99999;
-	box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	padding: 1.5rem;
-	color: #4D4F4D;
-	font-size: 1rem;
-    flex-flow: column;
-	max-height: 90vh;
-
-	& .basket-header {
-		border-bottom: 1px solid $gray-lighter;
-		padding-bottom: .5em;
-	}
+	height: calc(100vh - 100%);
+	max-height: calc(100vh - 100%);
 
 	@include media-breakpoint-up(sm) {
-		display: none;
 		max-width: 440px;
+		max-height: 90vh;
+		display: none;
 	}
 
 	@include media-breakpoint-down(xs) {
@@ -164,6 +154,29 @@
 			max-height: calc(100vh - 100%);
 			height: calc(100vh - 100%);
 		}
+	}
+
+	& .cart-wrapper-inner {
+		position: relative;
+		height: 100%;
+	}
+}
+
+.cart {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: $white;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	padding: 1.5rem;
+	color: #4D4F4D;
+	font-size: 1rem;
+    flex-flow: column;
+	display: flex;
+
+	& .basket-header {
+		border-bottom: 1px solid $gray-lighter;
+		padding-bottom: .5em;
 	}
 	
 	.cart-items {
@@ -195,12 +208,6 @@
 		&:hover {
 			color: #005571 !important;
 			background-color: transparent !important;
-		}
-	}
-
-	@include media-breakpoint-up(lg) {
-		&:hover {
-			display: block;
 		}
 	}
 }
