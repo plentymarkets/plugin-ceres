@@ -304,6 +304,11 @@
 			width: 75px;
 			flex-shrink: 0;
 			margin: 0 15px;
+
+			@include media-breakpoint-down(xs) {
+				width: 50px;
+				margin: 0 10px;
+			}	
 		}
 	
 		.meta-container {
