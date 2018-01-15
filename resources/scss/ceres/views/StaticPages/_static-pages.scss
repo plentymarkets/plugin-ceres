@@ -6,6 +6,21 @@
   .no-print {
     display: none;
   }
+
+  .print-header {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  @page {
+    size:  auto;
+    margin: 0mm;
+  }
+
+  html {
+    background-color: #FFFFFF; 
+    margin: 0px;
+  }
 }
 
 .no-padding {
