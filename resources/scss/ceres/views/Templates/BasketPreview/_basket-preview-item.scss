@@ -168,7 +168,7 @@
 	max-height: 100%;
 	background: $white;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	padding: 1.5rem;
+	padding: .75rem;
 	color: $gray-dark;
 	font-size: 1rem;
     flex-flow: column;
@@ -180,6 +180,7 @@
 
 	@include media-breakpoint-up(sm) {
 		max-height: 90vh;
+		padding: 1.5rem;
 	}
 
 	@include media-breakpoint-down(xs) {
