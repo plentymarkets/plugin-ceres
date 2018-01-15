@@ -52,7 +52,7 @@ var init = (function($, window, document)
         var $toggleListView = $(".toggle-list-view");
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
-        $(document).on("click", function(evt)
+        $(document).on("click touch", function(evt)
         {
             if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-right"))
             {
