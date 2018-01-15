@@ -23,20 +23,20 @@
 
             <div class="row">
                     <div class="col-xs-6">
-                    <button v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="{{ trans("Ceres::Template.basket") }}">
+                    <a v-waiting-animation-infinite href="/basket" class="btn btn-outline-primary btn-block basketBtn" title="{{ trans("Ceres::Template.basket") }}">
                         <i class="fa fa-shopping-cart"></i>
                         {{ trans("Ceres::Template.basket") }} 
-                    </button>
+                    </a>
                 </div>
 
                 <div class="col-xs-6">
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                     <div>
-                        <button v-waiting-animation-infinite href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
+                        <a v-waiting-animation-infinite href="/checkout" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.orderCheckout") }}
-                        </button>
+                        </a>
                     </div>
 
                     {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
