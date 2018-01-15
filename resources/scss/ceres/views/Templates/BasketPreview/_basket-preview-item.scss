@@ -182,14 +182,18 @@
 	.cart-items {
 		flex-flow: column nowrap;
 		flex: 0 1 auto;
-		overflow: auto;
+		overflow-x: hidden;
+		overflow-y: auto;
 		background-attachment: fixed;
-		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 	}
 
 	.cart-totals {
 		flex: 1 0 auto;
+		
+		.btn {
+			padding: .5rem .8rem
+		}
 	}
 
 	& > .no-items {
@@ -201,15 +205,31 @@
 		font-size: 80%
 	}
 
-	& a {
-		padding: 0 !important;
-		color: #008ebd !important;
-
+	@include media-breakpoint-up(lg) {
 		&:hover {
-			color: #005571 !important;
-			background-color: transparent !important;
+			display: block;
 		}
 	}
+}
+
+.top-bar .controls-list > li .cart {
+	
+	.basket-item {
+		a {
+			padding: 0;
+			color: #008EBD;
+			
+			&:hover {
+				color: #005571;
+				background-color: transparent;
+			}
+		}
+	}
+    
+    .fa {
+        line-height: 1;
+        font-size: 1.2rem;
+    }
 }
 
 .basket-item-container {
@@ -317,11 +337,6 @@
 	
 					&:disabled {
 						cursor: not-allowed;
-					}
-	
-					> i {
-						font-size: 1.2rem !important;
-						line-height: 1.2rem !important;
 					}
 				}
 			}

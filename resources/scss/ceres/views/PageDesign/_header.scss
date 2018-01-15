@@ -7,7 +7,7 @@
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 	box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
-	a{
+	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
 		outline: none;
@@ -45,7 +45,7 @@
 			}
 
 			@include media-breakpoint-up(md) {
-				a {
+				a:not(.btn) {
 					padding: 0.5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
