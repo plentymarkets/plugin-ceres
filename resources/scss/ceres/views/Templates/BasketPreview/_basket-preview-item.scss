@@ -174,6 +174,10 @@
     flex-flow: column;
 	display: flex;
 
+	@include media-breakpoint-down(xs) {
+		padding-bottom: 44px;
+	}
+
 	& .basket-header {
 		border-bottom: 1px solid $gray-lighter;
 		padding-bottom: .5em;
