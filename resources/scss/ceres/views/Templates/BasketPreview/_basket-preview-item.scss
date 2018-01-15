@@ -151,7 +151,8 @@
 	@include media-breakpoint-down(xs) {
 		transform: translateX(100%);
 		transition: all 300ms ease-in-out;
-		height: 100vh;
+		height: 100%;
+		position: fixed;
 		top: 0;
 	}
 
@@ -183,7 +184,6 @@
 
 	@include media-breakpoint-down(xs) {
 		&:not(.empty) {
-			padding-bottom: 44px;
 			height: 100%;
 		}
 	}
