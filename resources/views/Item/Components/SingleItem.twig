@@ -82,7 +82,9 @@
                         </div>
                         <div v-if="currentVariation.variation.mayShowUnitPrice">
                             {{ trans("Ceres::Template.itemUnitPrice") }}
-                            <span class="base-price-value">${ currentVariation.prices.default.basePrice }</span>
+                            <span class="base-price-value">
+                                ${ variationGraduatedPrice.basePrice }
+                            </span>
                         </div>
                     </div>
 
@@ -112,7 +114,7 @@
                     <hr>
 
                     <span class="vat small text-muted">
-                        * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
+                        * {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.itemExclVAT") }}{% else %}{{ trans("Ceres::Template.itemInclVAT") }}{% endif %} {{ trans("Ceres::Template.itemExclusive") }}
                         <a {% if shippingCat is not empty %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
                     </span>
 

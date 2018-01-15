@@ -13522,7 +13522,7 @@ Vue.component("single-item", {
         isInWishList: function isInWishList(state) {
             return state.item.variation.documents[0].isInWishListVariation;
         }
-    }), Vuex.mapGetters(["variationTotalPrice"])),
+    }), Vuex.mapGetters(["variationTotalPrice", "variationGraduatedPrice"])),
 
     created: function created() {
         var _this = this;
@@ -18791,14 +18791,14 @@ var getters = {
                 returnPrice = prices.reduce(function (prev, current) {
                     return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
                 });
-                returnPrice = returnPrice.unitPrice.value;
+                // returnPrice = returnPrice.unitPrice.value;
             }
         }
 
-        return returnPrice || calculatedPrices.default.unitPrice.value;
+        return returnPrice || calculatedPrices.default;
     },
     variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
-        return getters.variationPropertySurcharge + getters.variationGraduatedPrice;
+        return getters.variationPropertySurcharge + getters.variationGraduatedPrice.unitPrice.value;
     }
 };
 

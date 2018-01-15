@@ -94,16 +94,16 @@ const getters =
                 if (prices[0])
                 {
                     returnPrice = prices.reduce((prev, current) => (prev.minimumOrderQuantity > current.minimumOrderQuantity) ? prev : current);
-                    returnPrice = returnPrice.unitPrice.value;
+                    // returnPrice = returnPrice.unitPrice.value;
                 }
             }
 
-            return returnPrice || calculatedPrices.default.unitPrice.value;
+            return returnPrice || calculatedPrices.default;
         },
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            return getters.variationPropertySurcharge + getters.variationGraduatedPrice;
+            return getters.variationPropertySurcharge + getters.variationGraduatedPrice.unitPrice.value;
         }
     };
 
