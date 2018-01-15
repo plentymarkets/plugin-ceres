@@ -1,4 +1,5 @@
 const ApiService = require("services/ApiService");
+import TranslationService from "services/TranslationService"
 
 Vue.component("order-history", {
 
@@ -81,7 +82,7 @@ Vue.component("order-history", {
             {
                 if (paymentStates[paymentState].typeId == 4)
                 {
-                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                    return TranslationService.translate("Ceres::Template.paymentStatus_" + paymentStates[paymentState].value );
                 }
             }
 

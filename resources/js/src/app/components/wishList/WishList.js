@@ -1,5 +1,7 @@
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("wish-list", {
 
     delimiters: ["${", "}"],
@@ -42,7 +44,9 @@ Vue.component("wish-list", {
         removeItem(item)
         {
             this.removeWishListItem(item)
-                .then(() => NotificationService.success(Translations.Template.itemWishListRemoved));
+                .then(() => NotificationService.success(
+                    TranslationService.translate("Ceres::Template.itemWishListRemoved")
+                ));
         },
         ...Vuex.mapActions([
             "initWishListItems",

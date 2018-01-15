@@ -1,9 +1,10 @@
-import TranslationService from "./services/TranslationService";
+import TranslationService from "services/TranslationService";
 
 // eslint-disable-next-line
 (function($, window, document)
 {
     TranslationService.registerGroup("Ceres", "Template");
+    TranslationService.translate("Ceres::Template.test", { user: "Felix", name: "hallo"});
 
     window.Ceres = {
         TranslationService: TranslationService

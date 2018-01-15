@@ -93,7 +93,7 @@ gulp.task("build:app", function()
 gulp.task("build:productive-app", ["build:lint"], function()
 {
     var builder = browserify({
-        entries  : glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}),
+        entries  : ["app/main.js"].concat( glob.sync("app/!(services)/**/*.js", {cwd: JS_SRC}) ),
         debug    : true,
         basedir  : JS_SRC,
         paths    : ["app/"],
@@ -104,7 +104,7 @@ gulp.task("build:productive-app", ["build:lint"], function()
         .pipe(source(OUTPUT_PREFIX + "-app.js"))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(addSrc.append(JS_SRC + "app/main.js"))
+        //.pipe(addSrc.append(JS_SRC + "app/main.js"))
         .pipe(concat(OUTPUT_PREFIX + "-app.js"))
         .pipe(sourcemaps.write(".", {
             includeContent: false,

@@ -1,4 +1,5 @@
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
@@ -99,14 +100,18 @@ Vue.component("reset-password-form", {
 
                     window.location.assign(window.location.origin);
 
-                    NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.accChangePasswordSuccessful")
+                    ).closeAfter(3000);
 
                 })
                 .fail(() =>
                 {
                     this.isDisabled = false;
 
-                    NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.accChangePasswordFailed")
+                    ).closeAfter(5000);
                 });
         },
 

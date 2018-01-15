@@ -1,7 +1,8 @@
-import {isNullOrUndefined} from "../helper/utils";
-import { replaceAll, capitalize } from "../helper/strings";
+import {isNullOrUndefined}from "../helper/utils";
+import {replaceAll, capitalize}from "../helper/strings";
 
-const TranslationService = (function($) {
+const TranslationService = (function($)
+{
 
     const _translations = {};
 
@@ -11,87 +12,96 @@ const TranslationService = (function($) {
         translate: _translate
     };
 
-    function _registerGroup( namespace, group )
+    function _registerGroup(namespace, group)
     {
-        if ( _translations.hasOwnProperty( namespace ) )
+        if (_translations.hasOwnProperty(namespace))
         {
-            console.warn( 'Cannot override namespace "' + namespace + '"');
+            console.warn("Cannot override namespace \"" + namespace + "\"");
             return;
         }
 
         _translations[namespace] = {};
 
-        if ( _translations[namespace].hasOwnProperty( group ) )
+        if (_translations[namespace].hasOwnProperty(group))
         {
-            console.warn( 'Cannot override group "' + namespace + '::' + group );
+            console.warn("Cannot override group \"" + namespace + "::" + group);
             return;
         }
 
         _translations[namespace][group] = {};
     }
 
-    function _setLocale( locale )
+    function _setLocale(locale)
     {
         Object
-            .keys( _translations )
-            .forEach( namespace => {
+            .keys(_translations)
+            .forEach(namespace =>
+{
                 Object
-                    .keys( _translations[namespace] )
-                    .forEach( group => {
+                    .keys(_translations[namespace])
+                    .forEach(group =>
+{
                         $.ajax({
                             url: "/translations/" + namespace + "/" + group + "/" + locale,
                             method: "GET",
                             async: false,
-                            success: (translations) => {
+                            success: translations =>
+{
                                 _translations[namespace][group] = translations;
                             },
-                            error: (request, statusText, error) => {
-                                console.error( "Cannot load translation data " + namespace + "::" + group + " (" + locale + ")" );
-                                console.error( error );
+                            error: (request, statusText, error) =>
+{
+                                console.error("Cannot load translation data " + namespace + "::" + group + " (" + locale + ")");
+                                console.error(error);
                             }
                         });
                     });
             });
     }
 
-    function _translate( key, params )
+    function _translate(key, params)
     {
-        let identifier = _parseKey( key );
-        if ( identifier === null )
+        const identifier = _parseKey(key);
+
+        if (identifier === null)
         {
             return key;
         }
 
-        let namespace = _translations[identifier.namespace];
-        if ( isNullOrUndefined( namespace ) )
+        const namespace = _translations[identifier.namespace];
+
+        if (isNullOrUndefined(namespace))
         {
             return key;
         }
 
-        let group = namespace[identifier.group];
-        if ( isNullOrUndefined( group ) )
+        const group = namespace[identifier.group];
+
+        if (isNullOrUndefined(group))
         {
             return key;
         }
 
-        let value = group[identifier.key];
-        if ( !isNullOrUndefined( value ) )
+        const value = group[identifier.key];
+
+        if (!isNullOrUndefined(value))
         {
-            return _replacePlaceholders( value, params );
+            return _replacePlaceholders(value, params);
         }
 
         return key;
     }
 
-    function _replacePlaceholders( input, values )
+    function _replacePlaceholders(input, values)
     {
         values = values || {};
 
         Object
-            .keys( values )
-            .sort( (keyA, keyB) => keyB.length - keyA.length )
+            .keys(values)
+            .sort((keyA, keyB) => keyB.length - keyA.length)
             .forEach(
-                key => {
+                key =>
+{
                     input = replaceAll(
                         input,
                         ":" + key,
@@ -99,8 +109,8 @@ const TranslationService = (function($) {
                     );
                     input = replaceAll(
                         input,
-                        ":" + capitalize( key ),
-                        capitalize( values[key] )
+                        ":" + capitalize(key),
+                        capitalize(values[key])
                     );
                     input = replaceAll(
                         input,
@@ -113,23 +123,24 @@ const TranslationService = (function($) {
         return input;
     }
 
-    function _parseKey( key )
+    function _parseKey(key)
     {
         const keyPattern = /^(\w+)::(\w+)\.(\w+)$/;
-        if ( keyPattern.test( key ) )
+
+        if (keyPattern.test(key))
         {
-            const match = keyPattern.exec( key );
+            const match = keyPattern.exec(key);
+
             return {
                 namespace: match[1],
                 group: match[2],
                 key: match[3]
             };
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
+
     }
-})( jQuery );
+})(jQuery);
 
 export default TranslationService;

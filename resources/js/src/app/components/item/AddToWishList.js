@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 const NotificationService = require("services/NotificationService");
 
 Vue.component("add-to-wish-list", {
@@ -57,7 +59,9 @@ Vue.component("add-to-wish-list", {
                     {
                         this.isLoading = false;
 
-                        NotificationService.success(Translations.Template.itemWishListAdded);
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.itemWishListAdded")
+                        );
                     },
                     error =>
                     {
@@ -80,7 +84,9 @@ Vue.component("add-to-wish-list", {
                 {
                     this.isLoading = false;
 
-                    NotificationService.success(Translations.Template.itemWishListRemoved);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.itemWishListRemoved")
+                    );
                 },
                 error =>
                 {
@@ -93,9 +99,14 @@ Vue.component("add-to-wish-list", {
 
         changeTooltipText()
         {
-            const tooltipText = this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd";
+            const tooltipText = TranslationService.translate(
+                "Ceres::Template." + this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd"
+            );
 
-            $(".add-to-wish-list").attr("data-original-title", Translations.Template[tooltipText]).tooltip("hide").tooltip("setContent");
+            $(".add-to-wish-list")
+                .attr("data-original-title", tooltipText)
+                .tooltip("hide")
+                .tooltip("setContent");
         }
     }
 });
