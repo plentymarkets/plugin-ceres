@@ -125,7 +125,7 @@
 	.control-basket {
 		&:hover {
 			.cart {
-				display: flex;
+				display: block;
 				transform: translateX(0%);
 			}
 		}
@@ -200,7 +200,7 @@
 
 	@include media-breakpoint-up(lg) {
 		&:hover {
-			display: flex;
+			display: block;
 		}
 	}
 }
