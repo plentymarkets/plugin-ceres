@@ -15126,10 +15126,6 @@ Vue.component("history", {
 
                 vueEventHub.$emit("returns-first-opening");
             }
-        },
-        onOrderListChanged: function onOrderListChanged(newOrderList) {
-            console.log("onOrderListChanged", newOrderList);
-            this.orderList = newOrderList;
         }
     }
 });
@@ -15143,57 +15139,33 @@ Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
+    props: ["orderListData", "template"],
 
     data: function data() {
         return {
-            page: 1,
-            pageMax: 1,
-            countStart: 0,
-            countEnd: 0,
             currentOrder: null,
-            isLoading: true
+            orderList: this.orderListData
         };
     },
     created: function created() {
         this.$options.template = this.template;
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.itemsPerPage = _this.itemsPerPage || 10;
-            _this.pageMax = Math.ceil(_this.orderList.totalsCount / _this.itemsPerPage);
-            _this.setOrders(_this.orderList);
-        });
-    },
 
 
     methods: {
-        setOrders: function setOrders(orderList) {
-            this.$emit("orderListChanged", orderList);
-            this.page = this.orderList.page;
-            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
-            this.countEnd = this.orderList.page * this.itemsPerPage;
-
-            if (this.countEnd > this.orderList.totalsCount) {
-                this.countEnd = this.orderList.totalsCount;
-            }
-        },
         setCurrentOrder: function setCurrentOrder(order) {
-            var _this2 = this;
+            var _this = this;
 
             $("#dynamic-twig-content").html("");
             this.isLoading = true;
-
             this.currentOrder = order;
 
             Vue.nextTick(function () {
-                $(_this2.$refs.orderDetails).modal("show");
+                $(_this.$refs.orderDetails).modal("show");
             });
 
             ApiService.get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id).done(function (response) {
-                _this2.isLoading = false;
+                _this.isLoading = false;
                 $("#dynamic-twig-content").html(response);
             });
         },
@@ -15205,17 +15177,6 @@ Vue.component("order-history", {
             }
 
             return "";
-        },
-        showPage: function showPage(page) {
-            var _this3 = this;
-
-            if (page <= 0 || page > this.pageMax) {
-                return;
-            }
-
-            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
-                _this3.setOrders(response);
-            });
         }
     }
 });
