@@ -3,7 +3,7 @@
 {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
 
 <script type="x/template" id="vue-basket-preview-smart">
-    <div class="cart-wrapper">
+    <div class="cart-wrapper" :class="{ 'empty': !basketItems.length }">
         <div class="cart-wrapper-inner">
             <div class="cart" :class="{ 'empty': !basketItems.length }">
 
