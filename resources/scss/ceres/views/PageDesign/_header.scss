@@ -1,5 +1,10 @@
 //header scss
 .top-bar{
+
+	@media print {
+		display: none;
+	}
+
 	position: fixed;
 	width: 100%;
 	
