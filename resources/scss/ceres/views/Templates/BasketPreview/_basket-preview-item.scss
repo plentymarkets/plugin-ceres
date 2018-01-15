@@ -144,17 +144,11 @@
 	color: #4D4F4D;
 	font-size: 1rem;
     flex-flow: column;
-	max-height: calc(100vh - 100%);
+	max-height: 90vh;
 
 	& .basket-header {
 		border-bottom: 1px solid $gray-lighter;
 		padding-bottom: .5em;
-	}
-
-	@include media-breakpoint-down(md) {
-		&:not(.empty) {
-			height: calc(100vh - 100%);
-		}
 	}
 
 	@include media-breakpoint-up(sm) {
@@ -165,6 +159,11 @@
 	@include media-breakpoint-down(xs) {
 		transform: translateX(100%);
 		transition: all 300ms ease-in-out;
+
+		&:not(.empty) {
+			max-height: calc(100vh - 100%);
+			height: calc(100vh - 100%);
+		}
 	}
 	
 	.cart-items {
@@ -172,6 +171,8 @@
 		flex: 0 1 auto;
 		overflow: auto;
 		background-attachment: fixed;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	.cart-totals {
