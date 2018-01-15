@@ -17,7 +17,7 @@
 - Addresses that cannot be selected will not be displayed in the drop-down menus of the address components anymore.
 - The overlay for deleting addresses has been re-designed to be more up-to-date.
 - The alternative texts set in the back end will be used for item images displayed in the shopping cart, on the category view and on the single item view.
-- Item lists will display a different number of items depending of the resoltion.
+- Item lists will display a different number of items depending on the resolution.
 - **SEO:** The headers of various pages have been updated and arranged into the correct order.
 - The font size of numbers in the filters has been increased in order to be more readable.
 
@@ -40,6 +40,7 @@
 
 - Added possibility in the **Checkout**  for payment plugins to deactivate themselves.
 - Upon registering with an already existing email, the overly stays upon to better perceive the error message.
+- Items and variations can now be displayed dynamically. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">Customising the item view</a>.
 
 ### Fixed
 

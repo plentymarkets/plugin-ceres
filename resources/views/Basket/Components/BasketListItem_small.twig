@@ -13,7 +13,7 @@
     <div class="basket-item-image">
         <div class="square-container">
             <div class="square-inner center-xy main-image">
-                <img class="img-basket-small" :src="image.url" :alt="altText">
+                <img v-if="image" class="img-basket-small" :src="image.url" :alt="altText">
             </div>
         </div>
     </div>

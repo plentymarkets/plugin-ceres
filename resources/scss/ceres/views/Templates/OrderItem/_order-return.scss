@@ -29,18 +29,18 @@
 			display: flex;
 
 			& .input-group {
-				align-self: center; 
+				align-self: center;
 				max-width: 7rem
 			}
 
 			& .max-counter-slash {
-				align-self: center; 
-				font-size: 1.3rem; 
+				align-self: center;
+				font-size: 1.3rem;
 				margin: 0px 10px
 			}
 
 			& .max-counter-return {
-				align-self: center; 
+				align-self: center;
 				font-size: 1.3rem
 			}
 		}
@@ -93,4 +93,21 @@
 			font-size: 1.15rem;
 		}
 	}
+}
+
+.order-return-history-item
+{
+    display: flex;
+    flex-direction: row;
+    
+    .order-return-history-image-container
+    {
+        height: 80px;
+    }
+    
+    .col-md-8
+    {
+        display: flex;
+        align-items: center;
+    }
 }

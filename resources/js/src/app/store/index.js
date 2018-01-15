@@ -9,6 +9,8 @@ import item from "store/modules/SingleItemModule";
 import basket from "store/modules/BasketModule";
 import orderReturn from "store/modules/OrderReturnModule";
 
+Vue.use(require("vue-script2"));
+
 // eslint-disable-next-line
 const store = new Vuex.Store(
     {
