@@ -6,7 +6,7 @@
 
 - Die Versandkosten in der Versandkosten auswahl updaten sich nun.
 - Das vorraussichtliche Lieferdatum in der **Bestellübersicht** wird nun nicht mehr ausgegeben, wenn das Datum nicht in den Daten vorhanden ist.
-- Die Darstellung von Netto-Preise im Warenkorb wurde korrigiert
+- Die Darstellung von Netto-Preisen wurde korrigiert
 - Grundpreisangaben passen sich an jeweilige Staffelpreise an
 - Die Sichtbarkeit von Kundenklassen-Preisen wurde korrigiert
 
