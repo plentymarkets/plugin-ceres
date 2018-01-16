@@ -38,6 +38,10 @@
         {% for styleTemplate in additionalStyleTemplates %}
             {% include styleTemplate ignore missing %}
         {% endfor %}
+
+        {% if request.get('isContentBuilder') == 1 %}
+            <!-- CONTENT BUILDER -->
+        {% endif %}
     </head>
 
     <body>
