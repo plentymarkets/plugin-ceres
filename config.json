@@ -1433,6 +1433,35 @@
     },
     {
         "tab"                         : "SEO",
+        "key"                         : "meta.robots_cancel_form",
+        "label"                       : "Robots for cancellation form",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_cancel_form",
+        "label"     : "Meta description for cancellation form (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_cancel_form",
+        "label"     : "Meta description for cancellation form (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
         "key"                         : "meta.robots_legal_disclosure",
         "label"                       : "Robots for legal disclosure",
         "type"                        : "dropdown",
