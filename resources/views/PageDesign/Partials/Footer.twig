@@ -115,7 +115,7 @@
                 {% autoescape false %}
                     <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
                     {% if config("Ceres.footer.cancellation_use_pdf") %}
-                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}">Widerrufsformular</a>
+                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" download>Widerrufsformular</a>
                     {% else %}
                         <a href="/cancellation-form">Widerrufsformular</a>
                     {% endif %}
