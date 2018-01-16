@@ -42,7 +42,7 @@
                                     {% set overrideBillingAddress = LayoutContainer.show("Ceres::Checkout.BillingAddress") %}
                                     {% if overrideBillingAddress|trim is empty %}
                                         <header class="m-b-1">
-                                        <h3>{{ trans("Ceres::Template.orderInvoiceAddress") }}</h3>
+                                            <h3>{{ trans("Ceres::Template.orderInvoiceAddress") }}</h3>
                                         </header>
     
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
@@ -116,6 +116,10 @@
                     <!-- ./ADDRESS SELECT -->
 
                     <div class="col-md-5 checkout-rightside">
+                        <div class="col-xs-12 checkout-content p-t-2">
+                            <h3>{{ trans("Ceres::template.basket") }}</h3>
+                            <hr class="m-b-0">
+                        </div>
                         <div class="col-xs-12 p-t-2 checkout-content">
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar">
