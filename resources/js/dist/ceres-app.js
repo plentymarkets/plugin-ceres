@@ -15139,12 +15139,11 @@ Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: ["orderListData", "template"],
+    props: ["template"],
 
     data: function data() {
         return {
-            currentOrder: null,
-            orderList: this.orderListData
+            currentOrder: null
         };
     },
     created: function created() {

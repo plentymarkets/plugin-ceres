@@ -5,15 +5,13 @@ Vue.component("order-history", {
     delimiters: ["${", "}"],
 
     props: [
-        "orderListData",
         "template"
     ],
 
     data()
     {
         return {
-            currentOrder: null,
-            orderList: this.orderListData
+            currentOrder: null
         };
     },
 
