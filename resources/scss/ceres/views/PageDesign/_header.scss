@@ -27,7 +27,7 @@
 			// sets the height of the top-bar
 			@include media-breakpoint-between(xs, md) {
 
-				a {
+				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
 					color: $gray-lighter;
