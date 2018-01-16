@@ -15106,12 +15106,16 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderListData", "ordersPerPage", "isReturnActive", "contactHasReturns"],
+    props: {
+        template: String,
+        ordersPerPage: Number,
+        isReturnActive: Boolean,
+        contactHasReturns: Boolean
+    },
 
     data: function data() {
         return {
-            returnsFirstOpened: false,
-            orderList: this.orderListData
+            returnsFirstOpened: false
         };
     },
     created: function created() {
@@ -15139,11 +15143,14 @@ Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: ["template"],
+    props: {
+        template: String
+    },
 
     data: function data() {
         return {
-            currentOrder: null
+            currentOrder: null,
+            isLoading: false
         };
     },
     created: function created() {

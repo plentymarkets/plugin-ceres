@@ -19,6 +19,7 @@
 {{ component( "Ceres::MyAccount.Components.ChangePaymentMethod" ) }}
 
 <script type="x/template" id="vue-order-history">
+    {% if orderList.totalsCount > 0 %}
     <div class="form-group">
         <div class="row m-b-1">
             <div class="col-xs-12 col-md-12 col-lg-12">
@@ -129,4 +130,7 @@
             <!-- ./ORDER DETAILS MODAL -->
         </div>
     </div>
+    {% else %}
+    <p class="text-muted h4 wish-list-no-items-label">{{ trans("Ceres::Template.noOrders") }}</p>
+    {% endif %}
 </script>

@@ -4,14 +4,15 @@ Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template"
-    ],
+    props: {
+        template: String
+    },
 
     data()
     {
         return {
-            currentOrder: null
+            currentOrder: null,
+            isLoading: false
         };
     },
 

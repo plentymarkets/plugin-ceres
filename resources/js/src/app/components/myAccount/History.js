@@ -1,18 +1,16 @@
 Vue.component("history", {
 
-    props: [
-        "template",
-        "orderListData",
-        "ordersPerPage",
-        "isReturnActive",
-        "contactHasReturns"
-    ],
+    props: {
+        template: String,
+        ordersPerPage: Number,
+        isReturnActive: Boolean,
+        contactHasReturns: Boolean
+    },
 
     data()
     {
         return {
-            returnsFirstOpened: false,
-            orderList: this.orderListData
+            returnsFirstOpened: false
         };
     },
 
