@@ -1,5 +1,13 @@
 # Release Notes für Ceres
 
+## v2.1.3 (unknown)
+
+### Geändert
+
+- Die Elemente in der **Kasse** bestehen nun aus 2 optisch voneinander getrennten Spalten, um die rechtlichen Anforderungen abzudecken.
+- Das Eingabefeld für Kundenwünsche in der **Kasse** befindet sich nun unterhalb der Auswahl für die Zahlungsarten.
+- Die Checkbox für die rechtlichen Angaben, sowie der "Kaufen"-Button in der **Kasse** befinden sich nun unterhalb der Warenkorb Summe.
+
 ## v2.1.2 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
