@@ -186,7 +186,6 @@
 	@include media-breakpoint-down(xs) {
 		&:not(.empty) {
 			height: 100%;
-			font-size: 90%;
 		}
 	}
 
@@ -287,10 +286,6 @@
 
 	.basket-item {
 		display: flex;
-
-		@include media-breakpoint-down(xs) {
-			font-size: 90%;
-		}
 	
 		.quantity-input-container {
 			width: 3em;
