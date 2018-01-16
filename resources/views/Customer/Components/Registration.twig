@@ -42,10 +42,25 @@
         </div>
         <div class="modal-footer">
             {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+            <a style="margin-top:5px; float:left" data-toggle="collapse" href="#register-information" role="button" aria-expanded="false" aria-controls="collapse">Kundenkonto Informationen</a>
             <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ trans("Ceres::Template.accRegister") }}
             </button>
+            <div class="row float-left">
+                <div class="col-xs-12">
+                    <div class="collapse multi-collapse" id="register-information">
+                        <!-- <div class="card card-body" style="margin-top:20px;"> -->
+                            <div class="alert alert-success" style="margin-top:20px;text-align:left;">
+                                <ul class="p-l-1">
+                                    <li class="m-b-1">Wir bieten Ihnen die Speicherung Ihrer persönlichen Daten in einem passwortgeschützten Kundenkonto an, sodass Sie bei Ihrem nächsten Einkauf nicht erneut Ihren Namen und Ihre Anschrift eingeben müssen.</li>
+                                    <li class="m-b-1">Wir bieten Ihnen die Speicherung Ihrer persönlichen Daten in einem passwortgeschützten Kundenkonto an, sodass Sie bei Ihrem nächsten Einkauf nicht erneut Ihren Namen und Ihre Anschrift eingeben müssen.</li>
+                                </ul>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </script>
