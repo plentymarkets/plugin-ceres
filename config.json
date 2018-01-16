@@ -377,14 +377,14 @@
     {
         "tab"       : "Footer",
         "key"       : "footer.cancellation_use_pdf",
-        "label"     : "Use PDF instead of the legal informations in the cancellation form?",
+        "label"     : "Use PDF cancellation form",
         "type"      : "checkbox",
         "default"   : false
     },
     {
         "tab"       : "Footer",
         "key"       : "footer.cancellation_pdf_path",
-        "label"     : "Path to the PDF for the cancellation form",
+        "label"     : "Path to PDF file",
         "type"      : "text",
         "default"   : "Insert path"
     },
