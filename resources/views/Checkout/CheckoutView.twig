@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <checkout template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
+            <checkout v-cloak template="#vue-checkout" :initial-checkout="{{ services.checkout.getCheckout() | json_encode() }}">
                 <div class="row">
                     <!-- ADDRESS SELECT -->
                     <div class="col-md-7">
