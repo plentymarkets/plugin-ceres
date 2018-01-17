@@ -1,8 +1,9 @@
-.account-information {
-	margin-top: 5px; 
-	float: left;
+.popover {
+	z-index: 2060 !important;
+	max-width: 330px;
 }
 
-.information-content {
-	text-align: left;
+#detlef {
+	color: #008ebd;
+	cursor: pointer;
 }

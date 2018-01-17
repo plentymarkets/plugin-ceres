@@ -168,6 +168,8 @@ var init = (function($, window, document)
                 $("#countrySettings").collapse("hide");
                 $("#searchBox").collapse("hide");
             });
+
+            $("#detlef").popover();
         });
     }
 

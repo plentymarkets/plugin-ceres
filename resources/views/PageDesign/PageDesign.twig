@@ -91,6 +91,15 @@
                 </div>
                 <!-- ./LOGIN MODAL -->
 
+                {% set popoverText %}
+                    <ul class='p-l-1'>
+                        <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
+                        <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
+                        <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
+                        <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                    </ul>
+                {% endset %}
+
                 <!-- REGISTRATION MODAL -->
                 <div id="simple-registration-modal-wrapper">
                     <div class="modal fade" id="registration" tabindex="-1" role="dialog">
@@ -98,7 +107,12 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans("Ceres::Template.accCreateAccount") }}</div>
+                                    <div class="modal-title h3">
+                                        {{ trans("Ceres::Template.accCreateAccount") }}
+                                        <a id="detlef" data-toggle="popover" data-placement="bottom" data-container="#registration" title="{{ trans('Ceres::Template.generalContactInformations') }}" data-content="{{ popoverText }}" data-html="true">
+                                            <i class="fa fa-info-circle"></i>
+                                        </a>
+                                    </div>
                                 </div>
                                 <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                             </div>
