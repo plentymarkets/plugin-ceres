@@ -75,7 +75,7 @@
                         <span :content="currentVariation.calculatedPrices.default.currency"></span>
                     </span>
 
-                    <div class="base-price text-muted m-y-1" v-if="!(currentVariation.unit.unitOfMeasurement === 'C62' && currentVariation.unit.content === 1)">
+                    <div class="base-price text-muted m-y-1" v-if="currentVariation.unit && !(currentVariation.unit.unitOfMeasurement === 'C62' && currentVariation.unit.content === 1)">
                         <div>
                             {{ trans("Ceres::Template.itemContent") }}
                             <span>${ currentVariation.unit.content }</span>
@@ -168,7 +168,7 @@
                                     {% endif %}
 
                                     {% if 'item.condition' in itemData or 'all' in itemData %}
-                                        <tr>
+                                        <tr v-if="currentVariation.item.condition && currentVariation.item.condition.names.name !== ''">
                                             <td>{{ trans("Ceres::Template.itemCondition") }}</td>
                                             <td>${ currentVariation.item.condition.names.name }</td>
                                         </tr>
@@ -203,14 +203,14 @@
                                     {% endif %}
 
                                     {% if 'item.producerCountry' in itemData or 'all' in itemData %}
-                                        <tr v-if="currentVariation.item.producingCountry.names.name != ''">
+                                        <tr v-if="currentVariation.item.producingCountry && currentVariation.item.producingCountry.names.name != ''">
                                             <td>{{ trans("Ceres::Template.itemManufacturingCountry") }}</td>
                                             <td>${ currentVariation.item.producingCountry.names.name }</td>
                                         </tr>
                                     {% endif %}
 
                                     {% if 'item.variationBase_content' in itemData or 'all' in itemData %}
-                                        <tr>
+                                        <tr v-if="currentVariation.unit">
                                             <td>{{ trans("Ceres::Template.itemContent") }}</td>
                                             <td>${ currentVariation.unit.content } ${ currentVariation.unit.names.name }</td>
                                         </tr>
