@@ -14647,7 +14647,7 @@ Vue.component("item-store-special", {
 
     methods: {
         getLabel: function getLabel() {
-            if (this.storeSpecial.id === 1) {
+            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
                 var percent = this.getPercentageSale();
 
                 if (parseInt(percent) < 0) {
