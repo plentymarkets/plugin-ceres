@@ -384,7 +384,7 @@
     {
         "tab"       : "Footer",
         "key"       : "footer.cancellation_pdf_path",
-        "label"     : "Path to PDF file",
+        "label"     : "URL to PDF file",
         "type"      : "text",
         "default"   : "Insert path"
     },
