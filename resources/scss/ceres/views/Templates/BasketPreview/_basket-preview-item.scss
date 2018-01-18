@@ -215,10 +215,6 @@
 		text-align: center;
 		padding: 1rem;
 	}
-
-	& .basket-preview-totals {
-		font-size: 80%
-	}
 }
 
 .top-bar .controls-list > li .cart {
@@ -327,35 +323,6 @@
 				word-break: break-all;
 			}
 	
-			.item-total-price {
-				margin-left: auto;
-				font-size: 1.2em;
-				line-height: 1.2em;
-				font-weight: 700;
-				white-space: nowrap;
-			}
-			
-			.item-remove-button {
-				margin-left: 10px;
-				
-				font-size: 1.2em;
-				line-height: 1.2em;
-				
-				> button {
-					color: $brand-danger;
-					border: none;
-					background: transparent;
-					padding: 0;
-					&:not(:disabled):hover {
-						color: darken($brand-danger, 20%);
-					}
-	
-					&:disabled {
-						cursor: not-allowed;
-					}
-				}
-			}
-	
 			.basket-expand {
 				display: block;
 				position: relative;
@@ -388,6 +355,42 @@
 				&.opened {
 					&:after {
 						content: attr(data-show-less);
+					}
+				}
+			}
+		}
+
+		.basket-item-container-right {
+			margin-left: auto;
+
+			&.inline {
+				display: flex;
+
+				.item-remove-container {
+					margin-left: 10px;
+				}
+			}
+
+			.item-total-price {
+				font-weight: 700;
+				white-space: nowrap;
+				text-align: right;
+			}
+
+			.item-remove-container {
+				font-size: 1.2em;
+				line-height: 1.2em;
+				text-align: right;
+
+				> .item-remove-button {
+					cursor: pointer;
+					padding: 0;
+					background: none;
+					color: $brand-danger;
+					border: none;
+
+					&.disabled {
+						cursor: not-allowed;
 					}
 				}
 			}

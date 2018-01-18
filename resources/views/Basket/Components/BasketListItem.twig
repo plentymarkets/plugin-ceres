@@ -27,14 +27,6 @@
                                 ${ basketItem.variation.data.texts | itemName({{ configItemName }}) }
                             </div>
                         </a>
-
-                        <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
-
-                        <div class="item-remove-button">
-                            <button @click="deleteItem" :disabled="waiting || isBasketLoading" :class="{ 'text-muted': isBasketLoading && !waiting }">
-                                <i v-waiting-animation="waiting" class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="item-base-price">
@@ -120,6 +112,24 @@
                     {% endif %}
                 </div>
             </div>
+
+            <div class="basket-item-container-right">
+                QTY Placeholder
+            </div>
+
+            <div class="basket-item-container-right" :class="{ 'inline': size === 'large' }">
+                <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+
+                <div class="item-remove-container">
+                    <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading }" @click="deleteItem">
+                        <span>
+                            {{ trans("Ceres::Template.generalDelete") }}
+                            <i v-waiting-animation="waiting" class="fa fa-trash-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </script>
