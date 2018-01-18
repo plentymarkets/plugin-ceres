@@ -10752,14 +10752,16 @@ Vue.component("basket-list-item", {
         deleteItem: function deleteItem() {
             var _this = this;
 
-            this.waiting = true;
+            if (!this.waiting && !this.isBasketLoading) {
+                this.waiting = true;
 
-            this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
-                document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
-                _this.waiting = false;
-            }, function (error) {
-                _this.waiting = false;
-            });
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
+                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
+                    _this.waiting = false;
+                }, function (error) {
+                    _this.waiting = false;
+                });
+            }
         },
 
 

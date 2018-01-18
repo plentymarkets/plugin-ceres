@@ -63,7 +63,7 @@ Vue.component("basket-list-item", {
             if (!this.waiting && !this.isBasketLoading)
             {
                 this.waiting = true;
-    
+
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
