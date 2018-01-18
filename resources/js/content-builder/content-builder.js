@@ -1,7 +1,13 @@
 $(document).ready(function()
 {
+    initCeresForGridstack();
     initGridstack();
 });
+
+function initCeresForGridstack()
+{
+    
+}
 
 
 function initGridstack()
