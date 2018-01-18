@@ -16,7 +16,7 @@
             </div>
 
             <div class="image-container">
-                <img class="img-basket-small" :src="image.url" :alt="altText">
+                <img class="img-basket-small" v-if="image" :src="image.url" :alt="altText">
             </div>
 
             <div class="meta-container">
