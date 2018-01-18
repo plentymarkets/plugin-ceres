@@ -40,10 +40,8 @@
         {% endfor %}
 
         {% if request.get('isContentBuilder') == 1 %}
-        <link href="http://gridstackjs.com/dist/gridstack.css" rel="stylesheet">
-        <link href="http://gridstackjs.com/gridstack-demo.css" rel="stylesheet">
+            <link href="{{ plugin_path('Ceres') }}/content-builder/content-builder.css" rel="stylesheet" />
         {% endif %}
-
     </head>
 
     <body>
@@ -61,7 +59,7 @@
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
-                    
+
                     {% if request.get('isContentBuilder') == 1 %}
 
                     <div class="grid-stack grid-stack-instance-5053 grid-stack-animate" data-gs-width="12" data-gs-animate="yes" data-gs-current-height="6" style="height: 460px;">
@@ -219,18 +217,7 @@
 
             <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.3.0/gridstack.min.js'></script>
             <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.3.0/gridstack.jQueryUI.min.js'></script>
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/ContentBuilder.js'></script>
-
-            <script type="text/javascript">
-            $(function () {
-                var options = {
-                    cellHeight: 80,
-                    verticalMargin: 10
-                };
-                $('.grid-stack').gridstack(options);
-            });            
-            </script>
-
+            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/content-builder/content-builder.js'></script>
         {% endif %}
 
     </body>
