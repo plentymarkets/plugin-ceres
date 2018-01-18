@@ -60,18 +60,21 @@ Vue.component("basket-list-item", {
          */
         deleteItem()
         {
-            this.waiting = true;
-
-            this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
-                response =>
-                {
-                    document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
-                    this.waiting = false;
-                },
-                error =>
-                {
-                    this.waiting = false;
-                });
+            if (!this.waiting && !this.isBasketLoading)
+            {
+                this.waiting = true;
+    
+                this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
+                    response =>
+                    {
+                        document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
+                        this.waiting = false;
+                    },
+                    error =>
+                    {
+                        this.waiting = false;
+                    });
+            }
         },
 
         /**
