@@ -34,8 +34,8 @@
         {% block PartialHead %}
         {% endblock %}
 
-        {% for additionalStyleTemplates in get_additional_styles() %}
-            {% include additionalStyleTemplates.path ignore missing with additionalStyleTemplates.params %}
+        {% for styleTemplate in get_additional_styles() %}
+            {% include styleTemplate.path ignore missing with styleTemplate.params %}
         {% endfor %}
     </head>
 
