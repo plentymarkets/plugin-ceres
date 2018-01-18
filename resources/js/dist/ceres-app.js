@@ -18954,7 +18954,7 @@ var getters = {
     },
     variationGraduatedPrice: function variationGraduatedPrice(state) {
         if (!state || !state.variation.documents) {
-            return 0;
+            return null;
         }
 
         var calculatedPrices = state.variation.documents[0].data.prices;
@@ -18978,7 +18978,9 @@ var getters = {
         return returnPrice || calculatedPrices.default;
     },
     variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
-        return getters.variationPropertySurcharge + getters.variationGraduatedPrice.unitPrice.value;
+        var graduatedPrice = getters.variationGraduatedPrice;
+
+        return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
     }
 };
 
