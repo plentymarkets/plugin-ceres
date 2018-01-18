@@ -1,0 +1,45 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_cancel_form") }}">
+    <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_form") }}">
+    <title class="no-print">{{ trans("Ceres::Template.generalCancellationFormNoShy") }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+    {% set withdrawalForm = services.legalInformation.getWithdrawalForm() %}
+
+    <div class="container-max page-content">
+        <div class="row">
+            <div class="col-xs-12 m-b-3">
+                {% autoescape false %}
+                    <h1 class="print-header">{{ trans("Ceres::Template.generalCancellationForm") }}</h1>
+                {% endautoescape %}
+
+                <hr class="m-y-3">
+
+                {% if withdrawalForm.htmlText %}
+                    {{ withdrawalForm.htmlText | raw }}
+                {% else %}
+                    <p class="static-page-plain-text">{{ withdrawalForm.plainText }}</p>
+                {% endif %}
+
+                {{ LayoutContainer.show("Ceres::StaticPages.CancellationForm") }}
+
+				<hr class="m-y-3 no-print">
+
+				<div class="col-xs-12 col-md-12 no-padding no-print">
+					<button type="submit" class="btn btn-primary btn-medium float-right" onclick="window.print()">
+						<i class="fa fa-print" aria-hidden="true"></i> 
+						{{ trans("Ceres::Template.generalPrint") }}
+					</button>
+				</div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
