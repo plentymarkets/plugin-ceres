@@ -10856,11 +10856,6 @@ Vue.component("add-to-basket", {
     created: function created() {
         this.$options.template = this.template;
     },
-    mounted: function mounted() {
-        this.$nextTick(function () {
-            // this.checkMinMaxOrderQuantity();
-        });
-    },
 
 
     methods: {
@@ -10915,15 +10910,6 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
-        },
-
-
-        /**
-         * Check min - max order quantity
-         */
-        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
-            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
-            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
     },
 
@@ -10933,6 +10919,14 @@ Vue.component("add-to-basket", {
         },
         hasChildren: function hasChildren() {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+        canBeAddedToBasket: function canBeAddedToBasket() {
+            var isSalable = this.item.filter && this.item.filter.isSalable;
+            var hasChildren = this.item.filter && this.item.filter.hasChildren;
+            var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
+            var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
+
+            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
         }
     },
 
