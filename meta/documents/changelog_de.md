@@ -2,6 +2,10 @@
 
 ## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
+### Geändert
+
+- Die Einstellung **Combine variations** im Tab **Item view** der Konfiguration wurde umbenannt in **Dynamically**.
+
 ### Behoben
 
 - Die Versandkosten in der Versandartenauswahl der Kaufabwicklung werden nun aktualisiert.
