@@ -2,6 +2,10 @@
 
 ## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Overview of all changes</b></a>
 
+### Changed
+
+- The setting **Combine variations** in the **Item view** tab of the configuration has been renamed to **Dynamically**.
+
 ### Fixed
 
 - The shipping costs in the shipping method selection of the checkout will now be updated correctly.
