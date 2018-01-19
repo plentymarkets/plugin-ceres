@@ -17538,48 +17538,48 @@ var _utils = require("../helper/utils");
 var _strings = require("../helper/strings");
 
 var TranslationService = function ($) {
-
     var _translations = {};
 
+    // initialize translations
+    _readTranslations();
+
     return {
-        registerGroup: _registerGroup,
-        setLocale: _setLocale,
         translate: _translate
     };
 
-    function _registerGroup(namespace, group) {
-        if (_translations.hasOwnProperty(namespace)) {
-            console.warn("Cannot override namespace \"" + namespace + "\"");
-            return;
+    function _readTranslations() {
+        var identifierPattern = /^(\w+)::(\w+)$/;
+        var tags = document.querySelectorAll("script[data-translation]");
+
+        for (var i = 0; i < tags.length; i++) {
+            var identifier = tags[i].dataset.translation;
+
+            if (!identifier || !identifierPattern.test(identifier)) {
+                console.error("Cannot read translations from script tag. Identifier is not valid");
+            }
+
+            var match = identifierPattern.exec(identifier);
+            var namespace = match[1];
+            var group = match[2];
+
+            if (_translations.hasOwnProperty(namespace)) {
+                console.warn("Cannot override namespace \"" + namespace + "\"");
+                continue;
+            }
+
+            _translations[namespace] = {};
+
+            if (_translations[namespace].hasOwnProperty(group)) {
+                console.warn("Cannot override group \"" + namespace + "::" + group);
+                continue;
+            }
+
+            try {
+                _translations[namespace][group] = JSON.parse(tags[i].innerHTML);
+            } catch (err) {
+                console.error("Error while parsing translations (" + identifier + ")");
+            }
         }
-
-        _translations[namespace] = {};
-
-        if (_translations[namespace].hasOwnProperty(group)) {
-            console.warn("Cannot override group \"" + namespace + "::" + group);
-            return;
-        }
-
-        _translations[namespace][group] = {};
-    }
-
-    function _setLocale(locale) {
-        Object.keys(_translations).forEach(function (namespace) {
-            Object.keys(_translations[namespace]).forEach(function (group) {
-                $.ajax({
-                    url: "/translations/" + namespace + "/" + group + "/" + locale,
-                    method: "GET",
-                    async: false,
-                    success: function success(translations) {
-                        _translations[namespace][group] = translations;
-                    },
-                    error: function error(request, statusText, _error) {
-                        console.error("Cannot load translation data " + namespace + "::" + group + " (" + locale + ")");
-                        console.error(_error);
-                    }
-                });
-            });
-        });
     }
 
     function _translate(key, params) {
