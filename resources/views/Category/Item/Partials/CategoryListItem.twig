@@ -56,7 +56,10 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = (1 - item.data.calculatedPrices.default.price / item.data.calculatedPrices.rrp.price) * -100 %}
+                    {% set percent = 0 %}
+                    {% if item.data.prices.rrp is defined %}
+                        {% set percent = (1 - item.data.prices.default.unitPrice.value / item.data.prices.rrp.price.value ) * -100 %}
+                    {% endif %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('Ceres.item.storeSpecial') %}
@@ -91,16 +94,16 @@
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
-                    {% if item.data.calculatedPrices.rrp.price != '0' %}
+                    {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 %}
                         <div class="price-view-port">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
+                                {{ item.data.prices.rrp.price.formatted }}
                             </del>
                         </div>
                     {% endif %}
 
                     <div class="price">
-                        {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
+                        {{ item.data.prices.default.unitPrice.formatted }} *
                     </div>
                 </div>
 
@@ -112,7 +115,7 @@
                         <span>{{ item.data.unit.names.name }}</span>
 
                         {% if item.data.variation.mayShowUnitPrice %}
-                            | {{ item.data.calculatedPrices.formatted.basePrice }}
+                            | {{ item.data.prices.default.basePrice }}
                         {% endif %}
                     </div>
                 {% endif %}

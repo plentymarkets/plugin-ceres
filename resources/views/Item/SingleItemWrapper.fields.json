@@ -19,6 +19,7 @@
   "variation.number",
   "variation.externalId",
   "variation.minimumOrderQuantity",
+  "variation.intervalOrderQuantity",
   "variation.maximumOrderQuantity",
   "variation.model",
   "variation.weightG",
