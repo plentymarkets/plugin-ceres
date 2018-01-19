@@ -1,3 +1,12 @@
 @import url("http://gridstackjs.com/dist/gridstack.css");
 @import url("http://gridstackjs.com/gridstack-demo.css");
 
+
+.mkt-homepage
+{
+    outline: 1px solid #ff0000;
+}
+
+.grid-stack-item {
+    outline: 1px solid #00ff00;
+}
