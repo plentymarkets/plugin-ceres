@@ -6,7 +6,7 @@
         {% if buttonReplacement|trim is not empty %}
             {{ buttonReplacement }}
         {% else %}
-            <button class="btn btn-primary btn-block" @click="placeOrder()" :disabled="waiting || isBasketLoading">
+            <button class="btn btn-success btn-block" @click="placeOrder()" :disabled="waiting || isBasketLoading">
                 <i v-waiting-animation="waiting" class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.orderBuyNow") }}
             </button>
         {% endif %}

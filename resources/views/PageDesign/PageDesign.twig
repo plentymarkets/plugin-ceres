@@ -34,9 +34,8 @@
         {% block PartialHead %}
         {% endblock %}
 
-        {% set additionalStyleTemplates = get_additional_styles() %}
-        {% for styleTemplate in additionalStyleTemplates %}
-            {% include styleTemplate ignore missing %}
+        {% for styleTemplate in get_additional_styles() %}
+            {% include styleTemplate.path ignore missing with styleTemplate.params %}
         {% endfor %}
     </head>
 
@@ -153,9 +152,8 @@
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
-        {% set additionalScriptTemplates = get_additional_scripts() %}
-        {% for scriptTemplate in additionalScriptTemplates %}
-            {% include scriptTemplate ignore missing %}
+        {% for scriptTemplate in get_additional_scripts() %}
+            {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
         {% endfor %}
 
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}

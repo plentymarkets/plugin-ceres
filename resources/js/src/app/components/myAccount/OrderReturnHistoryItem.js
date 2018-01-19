@@ -35,7 +35,7 @@ Vue.component("order-return-history-item", {
     {
         toggleNaming(element)
         {
-            if (document.getElementById(element).innerText === TranslationService.translate("Ceres::Template.myAccountReturnShowMore") )
+            if (document.getElementById(element).innerText === TranslationService.translate("Ceres::Template.myAccountReturnShowMore"))
             {
                 this.itemsToRender = this.returnOrder.order.orderItems;
                 document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.myAccountReturnShowLess");

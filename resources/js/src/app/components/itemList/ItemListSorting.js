@@ -1,5 +1,5 @@
 import UrlService from "services/UrlService";
-import TranslationService from "services/TranslationService"
+import TranslationService from "services/TranslationService";
 
 Vue.component("item-list-sorting", {
 
