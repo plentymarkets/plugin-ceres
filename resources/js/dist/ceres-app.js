@@ -10269,7 +10269,7 @@ Vue.component("add-item-to-basket-overlay", {
             if (this.isLastBasketEntrySet) {
                 var img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
-                return img.url;
+                return img ? img.url : "";
             }
 
             return "";
@@ -10913,13 +10913,12 @@ Vue.component("checkout", {
             });
         },
         handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
-            if (this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
+            if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
                 NotificationService.info(Translations.Template.orderMethodOfPaymentListChanged);
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
-            if (this.isEquals(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList, "parcelServicePresetId")) {
-                NotificationService.info(Translations.Template.orderShippingProfileListChanged);
+            if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList)) {
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
@@ -10937,9 +10936,30 @@ Vue.component("checkout", {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
             }
         },
+        hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
+            if (oldList.length !== newList.length) {
+                NotificationService.info(Translations.Template.orderShippingProfileListChanged);
+                return true;
+            }
+
+            this.sortList(oldList, "parcelServicePresetId");
+            this.sortList(newList, "parcelServicePresetId");
+
+            for (var index in oldList) {
+                if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
+                    NotificationService.info(Translations.Template.orderShippingProfileListChanged);
+                    return true;
+                } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
+                    NotificationService.info(Translations.Template.orderShippingProfilePriceChanged);
+                    return true;
+                }
+            }
+
+            return false;
+        },
         isEquals: function isEquals(oldList, newList, fieldToCompare) {
             if (oldList.length !== newList.length) {
-                return true;
+                return false;
             }
 
             var _iteratorNormalCompletion = true;
@@ -10954,7 +10974,7 @@ Vue.component("checkout", {
                         return newListItem[fieldToCompare] === oldListItem[fieldToCompare];
                     }) === -1) {
                         return {
-                            v: true
+                            v: false
                         };
                     }
                 };
@@ -10979,7 +10999,20 @@ Vue.component("checkout", {
                 }
             }
 
-            return false;
+            return true;
+        },
+        sortList: function sortList(list, field) {
+            list.sort(function (valueA, valueB) {
+                if (valueA[field] > valueB[field]) {
+                    return 1;
+                }
+
+                if (valueA[field] < valueB[field]) {
+                    return -1;
+                }
+
+                return 0;
+            });
         }
     }
 });
