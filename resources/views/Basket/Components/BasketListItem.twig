@@ -10,7 +10,7 @@
         
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
-            <div class="quantity-input-container">
+            <div v-if="size === 'small'" class="quantity-input-container">
                 <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
                                     :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
             </div>
@@ -29,7 +29,7 @@
                         </a>
                     </div>
 
-                    <div class="item-base-price">
+                    <div>
                         ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency }
                     </div>
 
@@ -113,19 +113,40 @@
                 </div>
             </div>
 
+            <!-- <div class="basket-item-container-right">
+                <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="false" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
+            </div> -->
+
             <div class="basket-item-container-right">
-                QTY Placeholder
-            </div>
 
-            <div class="basket-item-container-right" :class="{ 'inline': size === 'large' }">
-                <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+                <div v-if="size === 'alarge'" class="quantity-input-container-horizontal">
+                    <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="false" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
+                </div>
 
-                <div class="item-remove-container">
-                    <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading }" @click="deleteItem">
-                        <span>
-                            {{ trans("Ceres::Template.generalDelete") }}
-                            <i v-waiting-animation="waiting" class="fa fa-trash-o" aria-hidden="true"></i>
-                        </span>
+                <div class="qty-box">
+                    <input class="qty-input" value="19" type="">
+                    <div class="qty-btn-container">
+                        <div class="qty-btn">
+                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                        </div>
+                        <div class="qty-btn">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-box">
+                    <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.calculatedPrices.default.basePrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+        
+                    <div class="item-remove-container">
+                        <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading }" @click="deleteItem">
+                            <span>
+                                {{ trans("Ceres::Template.generalDelete") }}
+                                <i v-waiting-animation="waiting" class="fa fa-trash-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
