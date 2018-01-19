@@ -39,7 +39,6 @@ function initCeresForGridstack()
         // add gridstack container class for current drag & drop area
         $(this).addClass('grid-stack-' + i);
 
-
         // initialize gridstack for current gridstack container
         initGridstack(i, $(this).height());
 
@@ -57,9 +56,12 @@ function initCeresForGridstack()
 function initGridstack(id, height)
 {
     var options = {
-        verticalMargin: 0 + 'px', // this kinda breaks everything... ?
+        // verticalMargin: 0 + 'px', // this kinda breaks everything... ?
         width:1,
-        cellHeight: height + 'px'
+        cellHeight: null,
+        float: false,
+        acceptWidgets: '.grid-stack-item',
+        // animate: true
     };
     console.log(height);
 
