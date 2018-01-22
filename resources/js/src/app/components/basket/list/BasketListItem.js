@@ -17,6 +17,7 @@ Vue.component("basket-list-item", {
     {
         return {
             waiting: false,
+            waitingForDelete: false,
             itemCondition: "",
             showMoreInformation: false
         };
@@ -60,19 +61,19 @@ Vue.component("basket-list-item", {
          */
         deleteItem()
         {
-            if (!this.waiting && !this.isBasketLoading)
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading)
             {
-                this.waiting = true;
+                this.waitingForDelete = true;
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {detail: this.basketItem}));
-                        this.waiting = false;
+                        this.waitingForDelete = false;
                     },
                     error =>
                     {
-                        this.waiting = false;
+                        this.waitingForDelete = false;
                     });
             }
         },
