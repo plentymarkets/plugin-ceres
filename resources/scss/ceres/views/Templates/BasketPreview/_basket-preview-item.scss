@@ -398,7 +398,7 @@
 								cursor: not-allowed;
 							}
 	
-							&:hover {
+							&:not(.disabled):hover {
 								background: darken($gray-lighter, 10%);
 								border-radius: $border-radius;
 							}
