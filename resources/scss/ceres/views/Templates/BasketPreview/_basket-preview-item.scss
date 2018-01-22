@@ -356,7 +356,7 @@
 
 			.qty-box {
 				display: flex;
-				height: 36px;
+				height: 41px;
 				border: 1px solid $gray-lighter;
 				border-radius: $border-radius;
 				margin: 0 10px;
@@ -365,7 +365,7 @@
 					outline: none;
 					border: none;
 					height: 100%;
-					width: 50px;
+					width: 35px;
 					padding: 0;
 					text-align: center;
 					transition: all .2s cubic-bezier(0,0,.26,1);
@@ -388,6 +388,7 @@
 						transition: all .2s cubic-bezier(0,0,.26,1);
 						cursor: pointer;
 						font-weight: 700;
+						position: relative;
 
 						&:hover {
 							background: darken($gray-lighter, 10%);
@@ -395,7 +396,13 @@
 						}
 
 						& > i {
-							font-size: 1.5em;
+							color: $gray;
+							font-size: .75em;
+							position: absolute;
+							left: 0;
+							width: 100%;
+							top: 50%;
+							transform: translateY(-50%);
 						}
 					}
 				}
