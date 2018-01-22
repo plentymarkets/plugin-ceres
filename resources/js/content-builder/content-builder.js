@@ -5,17 +5,34 @@ $(document).ready(function()
 
 function initCeresForGridstack()
 {
+    removeDefaultLinks();
+    injectGridstackMarkup();
+    addBackendEventListener();
+}
+
+function addBackendEventListener()
+{
+    $('.shopPreviewFrame').on('shopbuilder_drop',function(e, element)
+    {
+        console.log('drop:' + element);
+    });
+}
+
+function removeDefaultLinks()
+{
     // iterate over all body elements
     $('body').find('*').each(function()
     {
-       $(this).click(function (event)
-       {
-           //prevent all existing click actions
-           event.preventDefault();
-       })
+        $(this).click(function (event)
+        {
+            //prevent all existing click actions
+            event.preventDefault();
+        })
     });
+}
 
-
+function injectGridstackMarkup()
+{
     // select drag & drop areas
     $('.mkt-homepage').each(function(i)
     {
@@ -24,11 +41,11 @@ function initCeresForGridstack()
         {
             // create gridstack item markup
             var gridStackItem = $(  '<div class="grid-stack-item" ' +
-                                    '     data-gs-x="0"' +
-                                    '     data-gs-y="'+ j + '"' + // one element for each row
-                                    '     data-gs-width="1"' +
-                                    '     data-gs-height="1"><div class="grid-stack-item-content"></div>' +
-                                    '</div>');
+                '     data-gs-x="0"' +
+                '     data-gs-y="'+ j + '"' + // one element for each row
+                '     data-gs-width="1"' +
+                '     data-gs-height="1"><div class="grid-stack-item-content"></div>' +
+                '</div>');
 
             // wrap current element with gridstack item markup
             $(this).wrap(gridStackItem)
@@ -44,24 +61,20 @@ function initCeresForGridstack()
 
         ++i;
     });
-
-
 }
 
 /**
  *
  * @param id for current container
- * @param height of current container (acutally not really sure about this...)
  */
 function initGridstack(id, height)
 {
     var options = {
-        // verticalMargin: 0 + 'px', // this kinda breaks everything... ?
         width:1,
         cellHeight: null,
-        float: false,
+        float: true,
         acceptWidgets: '.grid-stack-item',
-        // animate: true
+        animate: true // not working...?
     };
     console.log(height);
 
