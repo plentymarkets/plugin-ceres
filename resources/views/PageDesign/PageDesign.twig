@@ -24,7 +24,8 @@
     {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
 {% endif %}
 
-{% set categories = services.category.getNavigationTree("item", lang, 6) %}
+{% set showCategoryTypes = config('Ceres.header.show_category_types') %}
+{% set categories = services.category.getNavigationTree(showCategoryTypes, lang, 6) %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
