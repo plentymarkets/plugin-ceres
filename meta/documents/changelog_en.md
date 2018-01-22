@@ -1,5 +1,18 @@
 # Release Notes for Ceres
 
+## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The setting **Combine variations** in the **Item view** tab of the configuration has been renamed to **Dynamically**.
+
+### Fixed
+
+- The shipping costs in the shipping method selection of the checkout will now be updated correctly.
+- The estimated shipping date in the **Order overview** will not be displayed when there is no estimated shipping date in the order data.
+- Due to an error the back-to-top button has been reloaded repeatedly. This has been fixed.
+- Due to an error the item view hasn't been displayed correctly when certain item information was missing. This has been fixed.
+
 ## v2.1.1 (2018-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.0...2.1.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed
