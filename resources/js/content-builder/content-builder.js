@@ -12,9 +12,16 @@ function initCeresForGridstack()
 
 function addBackendEventListener()
 {
-    $('.shopPreviewFrame').on('shopbuilder_drop',function(e, element)
+    $('body').on('shopbuilder_drop', function(element)
     {
-        console.log('drop:' + element);
+        alert('drop:' + element);
+    });
+
+    // test
+    $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
+    $('#testEventButton').on('click', function ()
+    {
+        $('body').trigger('shopbuilder_drop', this);
     });
 }
 
@@ -76,7 +83,6 @@ function initGridstack(id, height)
         acceptWidgets: '.grid-stack-item',
         animate: true // not working...?
     };
-    console.log(height);
 
     var selector = '.grid-stack-' + id;
     $(selector).gridstack(options);
