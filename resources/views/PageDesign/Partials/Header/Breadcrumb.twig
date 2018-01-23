@@ -19,11 +19,11 @@
                         <li class="breadcrumb-item active"><span>{{ category | itemName(configItemName) }}</span></li>
                     {% endif %}
                 {% else %}
-                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category }}">{{ category.details.first.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details.first.name }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
     </nav>
 
-    <category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs>
+    <!-- <category-breadcrumbs template="#vue-category-breadcrumbs"></category-breadcrumbs> -->
 {% endif %}
