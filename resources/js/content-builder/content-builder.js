@@ -43,7 +43,8 @@ function addBackendEventListeners()
 
     $('body').on('shopbuilder_reset', function()
     {
-        alert('reset');
+        $('body').html('');
+        window.location.reload(true);
     });
 
     $('body').on('shopbuilder_zoom_in', function()
@@ -60,7 +61,7 @@ function addBackendEventListeners()
     // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
     // $('#testEventButton').on('click', function ()
     // {
-    //     $('body').trigger('shopbuilder_drop', this);
+    //     $('body').trigger('shopbuilder_reset', this);
     // });
 }
 
