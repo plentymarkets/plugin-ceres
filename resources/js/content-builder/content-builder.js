@@ -25,6 +25,15 @@ function addBackendEventListener()
     });
 }
 
+function setDragCursorToChildElements(element)
+{
+    // iterate over all child elements
+    $(element).find('*').each(function()
+    {
+        $(this).css('cursor','move');
+    });
+}
+
 function removeDefaultLinks()
 {
     // iterate over all body elements
@@ -46,18 +55,18 @@ function injectGridstackMarkup()
         // iterate over all sub-elements
         $(this).find(' > div, > hr').each(function(j)
         {
-
             // create gridstack item markup
-            var gridStackItem = $(  '<div class="grid-stack-item" ' +
+            var gridStackItem = $(  '<div class="grid-stack-item"' +
                 // '     data-gs-x="0"' +
                 // '     data-gs-y="' + j + '"' + // one element for each row
                 // '     data-gs-width="1"' +
                 '     data-gs-height="' + Math.round($(this).height() / 30) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
+            setDragCursorToChildElements($(this));
+
             // wrap current element with gridstack item markup
             $(this).wrap(gridStackItem)
-
 
             ++j;
         });
