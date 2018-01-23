@@ -7,22 +7,14 @@ Vue.component("graduated-prices", {
     {
         graduatedPrices()
         {
-            let prices = this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices;
+            let prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            const minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
 
-            prices = prices.filter(price => price.minimumOrderQuantity > 1);
+            prices = prices.filter(price => price.minimumOrderQuantity > minQuantity);
 
             return [...prices].sort((priceA, priceB) =>
             {
-                if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity)
-                {
-                    return 1;
-                }
-                if (priceA.minimumOrderQuantity < priceB.minimumOrderQuantity)
-                {
-                    return -1;
-                }
-
-                return 0;
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
             });
         },
 
