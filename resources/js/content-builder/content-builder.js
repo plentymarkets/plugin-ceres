@@ -7,22 +7,61 @@ function initCeresForGridstack()
 {
     removeDefaultLinks();
     injectGridstackMarkup();
-    addBackendEventListener();
+    addBackendEventListeners();
+    addDeleteButtons();
 }
 
-function addBackendEventListener()
+function addDeleteButtons()
+{
+    $('.grid-stack-item').each(function ()
+    {
+            $(this).append('<div class="shopbuilder_deleteIcon fa fa-trash""></div>');
+
+            $(this).mouseenter(function ()
+            {
+                $(this).addClass('contextMenuVisible');
+            });
+
+            $(this).mouseleave(function ()
+            {
+                $(this).removeClass('contextMenuVisible');
+            });
+
+            $('.shopbuilder_deleteIcon').click(function ()
+            {
+                $(this).parent().remove();
+            });
+    });
+}
+
+function addBackendEventListeners()
 {
     $('body').on('shopbuilder_drop', function(element)
     {
         alert('drop:' + element);
     });
 
-    // test
-    $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
-    $('#testEventButton').on('click', function ()
+    $('body').on('shopbuilder_reset', function()
     {
-        $('body').trigger('shopbuilder_drop', this);
+        alert('reset');
     });
+
+    $('body').on('shopbuilder_zoom_in', function()
+    {
+        alert('zoom_in');
+    });
+
+    $('body').on('shopbuilder_zoom_out', function()
+    {
+        alert('zoom_out');
+    });
+
+    // test
+    // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
+    // $('#testEventButton').on('click', function ()
+    // {
+    //     $('body').trigger('shopbuilder_drop', this);
+    // });
 }
 
 function setDragCursorToChildElements(element)
@@ -60,7 +99,7 @@ function injectGridstackMarkup()
                 // '     data-gs-x="0"' +
                 // '     data-gs-y="' + j + '"' + // one element for each row
                 // '     data-gs-width="1"' +
-                '     data-gs-height="' + Math.round($(this).height() / 30) + '"><div class="grid-stack-item-content"></div>' +
+                '     data-gs-height="' + Math.round($(this).height() / 40) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
             setDragCursorToChildElements($(this));
@@ -89,7 +128,7 @@ function initGridstack(id)
 {
     var options = {
         width:1,
-        cellHeight: 30,
+        cellHeight: 40,
         verticalMargin: 0,
         acceptWidgets: '.grid-stack-item',
     };
