@@ -16635,7 +16635,7 @@ Vue.component("wish-list", {
 
     delimiters: ["${", "}"],
 
-    props: ["template"],
+    props: ["template", "initIds"],
 
     data: function data() {
         return {
@@ -16657,6 +16657,7 @@ Vue.component("wish-list", {
     created: function created() {
         var _this = this;
 
+        this.$store.commit("setWishListIds", this.initIds);
         this.$options.template = this.template;
 
         this.isLoading = true;
