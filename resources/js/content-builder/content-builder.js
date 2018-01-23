@@ -44,6 +44,8 @@ function addBackendEventListeners()
     $('body').on('shopbuilder_reset', function()
     {
         $('body').html('');
+        $('body').addClass('loading');
+
         window.location.reload(true);
     });
 

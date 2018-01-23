@@ -10,6 +10,13 @@ body
     user-select: none; /* Chrome, Opera */
 }
 
+body.loading
+{
+    background: url("https://data.whicdn.com/images/124546671/original.gif");
+    background-color: #f7f7f9;
+    background-position: center center;
+}
+
 .mkt-homepage
 {
     position: relative;
@@ -70,4 +77,11 @@ body
 .contextMenuVisible .shopbuilder_deleteIcon
 {
     display: block;
+}
+
+.loading
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
