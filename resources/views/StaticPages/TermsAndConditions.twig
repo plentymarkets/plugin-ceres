@@ -1,35 +1,21 @@
-{% extends getPartial('page-design') %}
+{% set termsAndConditions = services.legalInformation.getTermsAndConditions() %}
 
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+<div class="container-max page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            {% autoescape false %}
+                <h1>{{ trans("Ceres::Template.generalGtc") }}</h1>
+            {% endautoescape %}
 
-{% block PartialHead %}
-    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_terms_and_conditions") }}">
-    <meta name="robots" content="{{ config("Ceres.meta.robots_terms_and_conditions") }}">
-    <title>{{ trans("Ceres::Template.generalGtc") }} | {{ config("Ceres.header.company_name") }}</title>
-{% endblock %}
+            <hr class="m-y-3">
 
-{% block PageBody %}
+            {% if termsAndConditions.htmlText %}
+                {{ termsAndConditions.htmlText | raw }}
+            {% else %}
+                <p class="static-page-plain-text">{{ termsAndConditions.plainText }}</p>
+            {% endif %}
 
-    {% set termsAndConditions = services.legalInformation.getTermsAndConditions() %}
-
-    <div class="container-max page-content">
-        <div class="row">
-            <div class="col-xs-12">
-                {% autoescape false %}
-                    <h1>{{ trans("Ceres::Template.generalGtc") }}</h1>
-                {% endautoescape %}
-
-                <hr class="m-y-3">
-
-                {% if termsAndConditions.htmlText %}
-                    {{ termsAndConditions.htmlText | raw }}
-                {% else %}
-                    <p class="static-page-plain-text">{{ termsAndConditions.plainText }}</p>
-                {% endif %}
-
-                {{ LayoutContainer.show("Ceres::StaticPages.TermsAndConditions") }}
-            </div>
+            {{ LayoutContainer.show("Ceres::StaticPages.TermsAndConditions") }}
         </div>
     </div>
-
-{% endblock %}
+</div>

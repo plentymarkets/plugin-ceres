@@ -23,4 +23,6 @@
 
     {% include [category_template( item.documents[0].data.item.add_cms_page, lang, frontend.system.webstoreId ), "Ceres::Item.SingleItemView"] %}
 
+    {{ services.category.runMigration() }}
+
 {% endblock %}

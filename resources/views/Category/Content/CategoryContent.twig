@@ -1,5 +1,7 @@
 {% extends getPartial('page-design') %}
 
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% block PartialHead %}
     <title>{{ category.details[0].metaTitle }} | {{ config("Ceres.header.company_name") }}</title>
 
