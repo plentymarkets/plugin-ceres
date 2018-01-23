@@ -20,16 +20,17 @@
 
 .grid-stack-placeholder
 {
-    background: rgba(0, 255, 0, 0.2);;
+    outline: 2px dashed #636671;
+    background: #f3f3f3;
 }
 
 .ui-draggable-dragging
 {
     transform: rotate(1.5deg);
-    box-shadow: 4px 8px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 2px rgba(0, 0, 0, 0.4);
     background: #ffffff;
     z-index: 99999;
-    
+    opacity: 0.8;
     transition: all 0.1s ease;
     
 }
