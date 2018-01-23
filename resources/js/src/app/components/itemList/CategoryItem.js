@@ -39,8 +39,11 @@ Vue.component("category-item", {
 
     created()
     {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+        if (this.itemData.prices.rrp)
+        {
+            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
+        }
+        this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
 
     methods:

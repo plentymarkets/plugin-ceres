@@ -108,8 +108,7 @@
 
     <!-- HISTORY -->
     <history template="#vue-history" 
-            :orders-per-page="{{ ordersPerPage }}" 
-            :order-list-data="{{ services.customer.getOrders(1, ordersPerPage) | json_encode() }}"
+            :orders-per-page="{{ ordersPerPage }}"
             :is-return-active="{{ isReturnActive | json_encode }}"
             :contact-has-returns="{{ contactHasReturns | json_encode }}">
     </history>

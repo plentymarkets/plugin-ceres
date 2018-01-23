@@ -1,5 +1,10 @@
 //header scss
 .top-bar{
+
+	@media print {
+		display: none;
+	}
+
 	position: fixed;
 	width: 100%;
 	
@@ -219,6 +224,10 @@
 .wrapper-main {
 	#page-body {
 		margin-top: 118px;
+
+		@media print {
+			margin-top: 0;
+		}
 	}
 	.navbar{
 		font-family:$font-family-heading;
