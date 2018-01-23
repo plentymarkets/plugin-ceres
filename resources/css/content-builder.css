@@ -1,13 +1,35 @@
 @import url("http://gridstackjs.com/dist/gridstack.css");
-@import url("http://gridstackjs.com/dist/gridstack-extra.css");
-
 
 .mkt-homepage
 {
-    outline: 1px solid #ff0000;
-    padding: 10px;
+    position: relative;
 }
 
-.grid-stack-item:not(.grid-stack-placeholder) {
-    outline: 1px solid #00ff00;
+.grid-stack-item
+{
+    position: absolute !important;
+    width: calc(100% - 30px);
+    transition: all 0.1s ease;
+    
+}
+
+.grid-stack-item:hover
+{
+    outline: 3px solid #24B3E0;
+}
+
+.grid-stack-placeholder
+{
+    background: rgba(0, 255, 0, 0.2);;
+}
+
+.ui-draggable-dragging
+{
+    transform: rotate(1.5deg);
+    box-shadow: 4px 8px 3px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    z-index: 99999;
+    
+    transition: all 0.1s ease;
+    
 }

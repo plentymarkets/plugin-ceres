@@ -46,16 +46,18 @@ function injectGridstackMarkup()
         // iterate over all sub-elements
         $(this).find(' > div, > hr').each(function(j)
         {
+
             // create gridstack item markup
             var gridStackItem = $(  '<div class="grid-stack-item" ' +
-                '     data-gs-x="0"' +
-                '     data-gs-y="'+ j + '"' + // one element for each row
-                '     data-gs-width="1"' +
-                '     data-gs-height="1"><div class="grid-stack-item-content"></div>' +
+                // '     data-gs-x="0"' +
+                // '     data-gs-y="' + j + '"' + // one element for each row
+                // '     data-gs-width="1"' +
+                '     data-gs-height="' + Math.round($(this).height() / 30) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
             // wrap current element with gridstack item markup
             $(this).wrap(gridStackItem)
+
 
             ++j;
         });
@@ -64,7 +66,7 @@ function injectGridstackMarkup()
         $(this).addClass('grid-stack-' + i);
 
         // initialize gridstack for current gridstack container
-        initGridstack(i, $(this).height());
+        initGridstack(i);
 
         ++i;
     });
@@ -74,14 +76,13 @@ function injectGridstackMarkup()
  *
  * @param id for current container
  */
-function initGridstack(id, height)
+function initGridstack(id)
 {
     var options = {
         width:1,
-        cellHeight: null,
-        float: true,
+        cellHeight: 30,
+        verticalMargin: 0,
         acceptWidgets: '.grid-stack-item',
-        animate: true // not working...?
     };
 
     var selector = '.grid-stack-' + id;
