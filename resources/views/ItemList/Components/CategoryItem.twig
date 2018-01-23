@@ -40,8 +40,8 @@
 
             <!-- STORE SPECIALS -->
             <item-store-special v-if="storeSpecial" :store-special="storeSpecial"
-                                :recommended-retail-price="recommendedRetailPrice"
-                                :variation-retail-price="variationRetailPrice"
+                                :recommended-retail-price="itemData.prices.rrp"
+                                :variation-retail-price="itemData.prices.default"
                                 :decimal-count="decimalCount"></item-store-special>
             <!-- ./STORE SPECIALS -->
 
@@ -52,21 +52,21 @@
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="recommendedRetailPrice > 0" class="price-view-port">
+                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0" class="price-view-port">
                             <del class="crossprice">
-                                ${ itemData.calculatedPrices.formatted.rrpUnitPrice }
+                                ${ itemData.prices.rrp.price.formatted }
                             </del>
                         </div>
 
                         <div class="price">
-                            ${ itemData.calculatedPrices.formatted.defaultUnitPrice } *
+                            ${ itemData.prices.default.unitPrice.formatted } *
                         </div>
                     </div>
 
                     <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
                         <span>${ itemData.unit.content }</span>
                         <span>${ itemData.unit.names.name }</span>
-                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.calculatedPrices.formatted.basePrice }</span>
+                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
                 </div>
                 <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>

@@ -1,11 +1,22 @@
 # Release Notes für Ceres
 
+## v2.1.3 (unknown)
+
+### Geändert
+
+- Die Elemente in der **Kasse** bestehen nun aus 2 optisch voneinander getrennten Spalten, um die rechtlichen Anforderungen abzudecken.
+- Das Eingabefeld für Kundenwünsche in der **Kasse** befindet sich nun unterhalb der Auswahl für die Zahlungsarten.
+- Die Checkbox für die rechtlichen Angaben, sowie der "Kaufen"-Button in der **Kasse** befinden sich nun unterhalb der Warenkorb Summe.
+
 ## v2.1.2 (unknown) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
 - Die Versandkosten in der Versandkosten auswahl updaten sich nun.
 - Das vorraussichtliche Lieferdatum in der **Bestellübersicht** wird nun nicht mehr ausgegeben, wenn das Datum nicht in den Daten vorhanden ist.
+- Die Darstellung von Netto-Preisen wurde korrigiert
+- Grundpreisangaben passen sich an jeweilige Staffelpreise an
+- Die Sichtbarkeit von Kundenklassen-Preisen wurde korrigiert
 
 ## v2.1.1 (2018-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.0...2.1.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 

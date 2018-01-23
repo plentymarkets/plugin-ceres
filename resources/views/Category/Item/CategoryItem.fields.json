@@ -28,6 +28,7 @@
   "variation.availability.averageDays",
   "variation.minimumOrderQuantity",
   "variation.maximumOrderQuantity",
+  "variation.intervalOrderQuantity",
   "variation.itemId",
   "variation.mayShowUnitPrice",
   "variation.releasedAt",

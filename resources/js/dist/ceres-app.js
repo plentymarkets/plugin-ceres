@@ -10452,8 +10452,8 @@ Vue.component("add-item-to-basket-overlay", {
 
     methods: {
         setPriceFromData: function setPriceFromData() {
-            if (this.latestBasketEntry.item.calculatedPrices) {
-                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+            if (this.latestBasketEntry.item.prices) {
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
                 var graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 var propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 
@@ -10529,13 +10529,6 @@ Vue.component("add-to-basket", {
     created: function created() {
         this.$options.template = this.template;
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.checkMinMaxOrderQuantity();
-        });
-    },
 
 
     methods: {
@@ -10543,7 +10536,7 @@ Vue.component("add-to-basket", {
          * add an item to basket-resource
          */
         addToBasket: function addToBasket() {
-            var _this2 = this;
+            var _this = this;
 
             if (this.item.filter.isSalable) {
                 this.waiting = true;
@@ -10555,10 +10548,10 @@ Vue.component("add-to-basket", {
                 };
 
                 this.$store.dispatch("addBasketItem", basketObject).then(function (response) {
-                    _this2.waiting = false;
-                    _this2.openAddToBasketOverlay(basketObject.quantity);
+                    _this.waiting = false;
+                    _this.openAddToBasketOverlay(basketObject.quantity);
                 }, function (error) {
-                    _this2.waiting = false;
+                    _this.waiting = false;
                     NotificationService.error(Translations.Template[_ExceptionMap2.default.get(error.data.exceptionCode.toString())]).closeAfter(5000);
                 });
             }
@@ -10590,15 +10583,6 @@ Vue.component("add-to-basket", {
          */
         updateQuantity: function updateQuantity(value) {
             this.quantity = value;
-        },
-
-
-        /**
-         * Check min - max order quantity
-         */
-        checkMinMaxOrderQuantity: function checkMinMaxOrderQuantity() {
-            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
-            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
     },
 
@@ -10608,6 +10592,14 @@ Vue.component("add-to-basket", {
         },
         hasChildren: function hasChildren() {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+        canBeAddedToBasket: function canBeAddedToBasket() {
+            var isSalable = this.item.filter && this.item.filter.isSalable;
+            var hasChildren = this.item.filter && this.item.filter.hasChildren;
+            var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
+            var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
+
+            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
         }
     },
 
@@ -13282,21 +13274,15 @@ Vue.component("graduated-prices", {
 
     computed: _extends({
         graduatedPrices: function graduatedPrices() {
-            var prices = this.$store.state.item.variation.documents[0].data.calculatedPrices.graduatedPrices;
+            var prices = this.$store.state.item.variation.documents[0].data.prices.graduatedPrices;
+            var minQuantity = this.$store.state.item.variation.documents[0].data.variation.minimumOrderQuantity;
 
             prices = prices.filter(function (price) {
-                return price.minimumOrderQuantity > 1;
+                return price.minimumOrderQuantity > minQuantity;
             });
 
             return [].concat(_toConsumableArray(prices)).sort(function (priceA, priceB) {
-                if (priceA.minimumOrderQuantity > priceB.minimumOrderQuantity) {
-                    return 1;
-                }
-                if (priceA.minimumOrderQuantity < priceB.minimumOrderQuantity) {
-                    return -1;
-                }
-
-                return 0;
+                return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
             });
         },
         activeGraduationIndex: function activeGraduationIndex() {
@@ -13675,7 +13661,7 @@ Vue.component("single-item", {
         isInWishList: function isInWishList(state) {
             return state.item.variation.documents[0].isInWishListVariation;
         }
-    }), Vuex.mapGetters(["variationTotalPrice"])),
+    }), Vuex.mapGetters(["variationTotalPrice", "variationGraduatedPrice"])),
 
     created: function created() {
         var _this = this;
@@ -14014,8 +14000,10 @@ Vue.component("category-item", {
     },
 
     created: function created() {
-        this.recommendedRetailPrice = this.itemData.calculatedPrices.rrp.price;
-        this.variationRetailPrice = this.itemData.calculatedPrices.default.price;
+        if (this.itemData.prices.rrp) {
+            this.recommendedRetailPrice = this.itemData.prices.rrp.price.value;
+        }
+        this.variationRetailPrice = this.itemData.prices.default.price.value;
     },
 
 
@@ -14326,7 +14314,7 @@ Vue.component("item-store-special", {
 
     methods: {
         getLabel: function getLabel() {
-            if (this.storeSpecial.id === 1) {
+            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice) {
                 var percent = this.getPercentageSale();
 
                 if (parseInt(percent) < 0) {
@@ -14338,7 +14326,7 @@ Vue.component("item-store-special", {
         },
         getPercentageSale: function getPercentageSale() {
             // eslint-disable-next-line
-            var percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
+            var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");
         }
@@ -15106,12 +15094,16 @@ Vue.component("change-payment-method", {
 
 Vue.component("history", {
 
-    props: ["template", "orderListData", "ordersPerPage", "isReturnActive", "contactHasReturns"],
+    props: {
+        template: String,
+        ordersPerPage: Number,
+        isReturnActive: Boolean,
+        contactHasReturns: Boolean
+    },
 
     data: function data() {
         return {
-            returnsFirstOpened: false,
-            orderList: this.orderListData
+            returnsFirstOpened: false
         };
     },
     created: function created() {
@@ -15126,10 +15118,6 @@ Vue.component("history", {
 
                 vueEventHub.$emit("returns-first-opening");
             }
-        },
-        onOrderListChanged: function onOrderListChanged(newOrderList) {
-            console.log("onOrderListChanged", newOrderList);
-            this.orderList = newOrderList;
         }
     }
 });
@@ -15143,57 +15131,35 @@ Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: ["orderList", "itemsPerPage", "showFirstPage", "showLastPage", "template"],
+    props: {
+        template: String
+    },
 
     data: function data() {
         return {
-            page: 1,
-            pageMax: 1,
-            countStart: 0,
-            countEnd: 0,
             currentOrder: null,
-            isLoading: true
+            isLoading: false
         };
     },
     created: function created() {
         this.$options.template = this.template;
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.itemsPerPage = _this.itemsPerPage || 10;
-            _this.pageMax = Math.ceil(_this.orderList.totalsCount / _this.itemsPerPage);
-            _this.setOrders(_this.orderList);
-        });
-    },
 
 
     methods: {
-        setOrders: function setOrders(orderList) {
-            this.$emit("orderListChanged", orderList);
-            this.page = this.orderList.page;
-            this.countStart = (this.orderList.page - 1) * this.itemsPerPage + 1;
-            this.countEnd = this.orderList.page * this.itemsPerPage;
-
-            if (this.countEnd > this.orderList.totalsCount) {
-                this.countEnd = this.orderList.totalsCount;
-            }
-        },
         setCurrentOrder: function setCurrentOrder(order) {
-            var _this2 = this;
+            var _this = this;
 
             $("#dynamic-twig-content").html("");
             this.isLoading = true;
-
             this.currentOrder = order;
 
             Vue.nextTick(function () {
-                $(_this2.$refs.orderDetails).modal("show");
+                $(_this.$refs.orderDetails).modal("show");
             });
 
             ApiService.get("/rest/io/order/template?template=Ceres::Checkout.OrderDetails&orderId=" + order.order.id).done(function (response) {
-                _this2.isLoading = false;
+                _this.isLoading = false;
                 $("#dynamic-twig-content").html(response);
             });
         },
@@ -15205,17 +15171,6 @@ Vue.component("order-history", {
             }
 
             return "";
-        },
-        showPage: function showPage(page) {
-            var _this3 = this;
-
-            if (page <= 0 || page > this.pageMax) {
-                return;
-            }
-
-            ApiService.get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage).done(function (response) {
-                _this3.setOrders(response);
-            });
         }
     }
 });
@@ -16330,24 +16285,24 @@ Vue.filter("date", dateFilter);
 "use strict";
 
 Vue.filter("graduatedPrice", function (item, quantity) {
-    var graduatedPrices = item.calculatedPrices.graduatedPrices;
+    var graduatedPrices = item.prices.graduatedPrices;
 
     var returnPrice = void 0;
 
     if (graduatedPrices && graduatedPrices[0]) {
         var prices = graduatedPrices.filter(function (price) {
-            return parseInt(quantity) >= price.minimumOrderQuantity;
+            return parseFloat(quantity) >= price.minimumOrderQuantity;
         });
 
         if (prices[0]) {
             returnPrice = prices.reduce(function (prev, current) {
                 return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
             });
-            returnPrice = returnPrice.price;
+            returnPrice = returnPrice.unitPrice.value;
         }
     }
 
-    return returnPrice || item.calculatedPrices.default.unitPrice;
+    return returnPrice || item.prices.default.unitPrice.value;
 });
 
 },{}],90:[function(require,module,exports){
@@ -18895,7 +18850,9 @@ var state = {
 var mutations = {
     setVariation: function setVariation(state, variation) {
         state.variation = variation;
-        state.variationOrderQuantity = 1;
+        if (variation.documents.length > 0 && variation.documents[0].data.variation) {
+            state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
+        }
     },
     setVariationList: function setVariationList(state, variationList) {
         state.variationList = variationList;
@@ -18964,31 +18921,33 @@ var getters = {
     },
     variationGraduatedPrice: function variationGraduatedPrice(state) {
         if (!state || !state.variation.documents) {
-            return 0;
+            return null;
         }
 
-        var calculatedPrices = state.variation.documents[0].data.calculatedPrices;
+        var calculatedPrices = state.variation.documents[0].data.prices;
         var graduatedPrices = calculatedPrices.graduatedPrices;
 
         var returnPrice = void 0;
 
         if (graduatedPrices && graduatedPrices[0]) {
             var prices = graduatedPrices.filter(function (price) {
-                return parseInt(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+                return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
             });
 
             if (prices[0]) {
                 returnPrice = prices.reduce(function (prev, current) {
                     return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
                 });
-                returnPrice = returnPrice.price;
+                // returnPrice = returnPrice.unitPrice.value;
             }
         }
 
-        return returnPrice || calculatedPrices.default.unitPrice;
+        return returnPrice || calculatedPrices.default;
     },
     variationTotalPrice: function variationTotalPrice(state, getters, rootState, rootGetters) {
-        return getters.variationPropertySurcharge + getters.variationGraduatedPrice;
+        var graduatedPrice = getters.variationGraduatedPrice;
+
+        return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
     }
 };
 
@@ -19280,18 +19239,28 @@ var init = (function($, window, document)
             var offset = 250;
             var duration = 300;
 
+            var isDesktop = window.matchMedia("(min-width: 768px)").matches;
+
             $(window).scroll(function()
             {
-                if ($(this).scrollTop() > offset)
+                if (isDesktop)
                 {
-                    $(".back-to-top").fadeIn(duration);
-                    $(".back-to-top-center").fadeIn(duration);
+                    if ($(this).scrollTop() > offset)
+                    {
+                        $(".back-to-top").fadeIn(duration);
+                        $(".back-to-top-center").fadeIn(duration);
+                    }
+                    else
+                    {
+                        $(".back-to-top").fadeOut(duration);
+                        $(".back-to-top-center").fadeOut(duration);
+                    }
                 }
-                else
-                {
-                    $(".back-to-top").fadeOut(duration);
-                    $(".back-to-top-center").fadeOut(duration);
-                }
+            });
+
+            window.addEventListener("resize", function()
+            {
+                isDesktop = window.matchMedia("(min-width: 768px)").matches;
             });
 
             $(".back-to-top").click(function(event)
