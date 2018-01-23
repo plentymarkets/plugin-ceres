@@ -182,28 +182,28 @@
                                     {% endif %}
 
                                     {% if ('item.external_id' in itemData or 'all' in itemData) %}
-                                        <tr v-if="currentVariation.variation.externalId != ''">
+                                        <tr v-if="currentVariation.variation.externalId !== ''">
                                             <td>{{ trans("Ceres::Template.itemExternalVariationId") }}</td>
                                             <td>${ currentVariation.variation.externalId }</td>
                                         </tr>
                                     {% endif %}
 
                                     {% if ('item.variation_model' in itemData or 'all' in itemData) %}
-                                        <tr v-if="currentVariation.variation.model != ''">
+                                        <tr v-if="currentVariation.variation.model !== ''">
                                             <td>{{ trans("Ceres::Template.itemModel") }}</td>
                                             <td>${ currentVariation.variation.model }</td>
                                         </tr>
                                     {% endif %}
 
                                     {% if 'item.manufacturer' in itemData or 'all' in itemData %}
-                                        <tr v-if="currentVariation.filter.hasManufacturer && currentVariation.item.manufacturer.externalName != ''">
+                                        <tr v-if="currentVariation.filter.hasManufacturer && currentVariation.item.manufacturer.externalName !== ''">
                                             <td>{{ trans("Ceres::Template.itemManufacturer") }}</td>
                                             <td>${ currentVariation.item.manufacturer.externalName }</td>
                                         </tr>
                                     {% endif %}
 
                                     {% if 'item.producerCountry' in itemData or 'all' in itemData %}
-                                        <tr v-if="currentVariation.item.producingCountry && currentVariation.item.producingCountry.names.name != ''">
+                                        <tr v-if="currentVariation.item.producingCountry && currentVariation.item.producingCountry.names.name !== ''">
                                             <td>{{ trans("Ceres::Template.itemManufacturingCountry") }}</td>
                                             <td>${ currentVariation.item.producingCountry.names.name }</td>
                                         </tr>
@@ -217,14 +217,14 @@
                                     {% endif %}
 
                                     {% if 'item.weightG' in itemData or 'all' in itemData %}
-                                        <tr v-if="currentVariation.variation.weightG != ''">
+                                        <tr v-if="currentVariation.variation.weightG !== ''">
                                             <td>{{ trans("Ceres::Template.itemWeight") }}</td>
                                             <td>${ currentVariation.variation.weightG } g</td>
                                         </tr>
                                     {% endif %}
 
                                     {% if 'item.weightNetG' in itemData or 'all' in itemData %}
-                                        <tr v-if="currentVariation.variation.weightNetG != ''">
+                                        <tr v-if="currentVariation.variation.weightNetG !== ''">
                                             <td>{{ trans("Ceres::Template.itemNetWeight") }}</td>
                                             <td>${ currentVariation.variation.weightNetG } g</td>
                                         </tr>
@@ -242,7 +242,7 @@
                                     {% endif %}
 
                                     {% if ('item.customs_tariff_number' in itemData or 'all' in itemData) %}
-                                        <tr v-if="currentVariation.item.customsTariffNumber != ''">
+                                        <tr v-if="currentVariation.item.customsTariffNumber !== ''">
                                             <td>{{ trans("Ceres::Template.itemCustomsTariffNumber") }}</td>
                                             <td>${ currentVariation.item.customsTariffNumber }</td>
                                         </tr>
