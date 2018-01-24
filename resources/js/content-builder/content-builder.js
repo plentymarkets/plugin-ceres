@@ -11,29 +11,26 @@ function initCeresForGridstack()
     addContextMenu();
 }
 
-function addContextMenu()
+function addContextMenu(elemnt)
 {
-    $('.grid-stack-item').each(function ()
+    $(elemnt).append('<div class="context-menu"></div>');
+
+    $(elemnt).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
+    $(elemnt).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
+
+    $(elemnt).mouseenter(function ()
     {
-        $(this).append('<div class="context-menu"></div>');
+        $(this).find('.context-menu').css('display','block');
+    });
 
-        $(this).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
-        $(this).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
+    $(elemnt).mouseleave(function ()
+    {
+        $(this).find('.context-menu').css('display','none');
+    });
 
-        $(this).mouseenter(function ()
-        {
-            $(this).find('.context-menu').css('display','block');
-        });
-
-        $(this).mouseleave(function ()
-        {
-            $(this).find('.context-menu').css('display','none');
-        });
-
-        $('.delete-icon').click(function ()
-        {
-            $(this).parent().parent().remove();
-        });
+    $('.delete-icon').click(function ()
+    {
+        $(this).closest('.grid-stack-item').remove();
     });
 }
 
@@ -66,11 +63,7 @@ function addBackendEventListeners()
     {
         // alert('open properties');
     });
-
-
-
-
-
+    
     // test
     // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
     // $('#testEventButton').on('click', function ()
@@ -118,6 +111,8 @@ function injectGridstackMarkup()
                 '</div>');
 
             setDragCursorToChildElements($(this));
+
+            addContextMenu(gridStackItem);
 
             // wrap current element with gridstack item markup
             $(this).wrap(gridStackItem)
