@@ -37,6 +37,7 @@ body.loading
 .grid-stack-placeholder
 {
     background: rgba(106,210,106,0.3);
+    outline: 3px dashed #24B3E0;
 }
 
 .ui-draggable-dragging
@@ -49,14 +50,19 @@ body.loading
     transition: all 0.1s ease;
 }
 
-.shopbuilder_deleteIcon
+.context-menu
 {
-    position: absolute;
-    right: 2px;
-    top: 2px;
     display: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.shopbuilder-icon
+{
     height: 36px;
     width: 36px;
+    margin: 2px 2px;
     line-height: 36px;
     text-align: center;
     vertical-align: middle;
@@ -65,18 +71,23 @@ body.loading
     border-radius: 5px;
     font-size: 18px;
     color: #ffffff;
+    background-color: #636671;
+}
+
+.shopbuilder-icon:hover
+{
+    background-color: #494C56;
+}
+
+.shopbuilder-icon.delete-icon
+{
     background-color: #f11539;
     
 }
 
-.shopbuilder_deleteIcon:hover
+.shopbuilder-icon.delete-icon:hover
 {
     background-color: #c70c2b
-}
-
-.contextMenuVisible .shopbuilder_deleteIcon
-{
-    display: block;
 }
 
 .loading

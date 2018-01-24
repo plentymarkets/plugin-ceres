@@ -8,29 +8,32 @@ function initCeresForGridstack()
     removeDefaultLinks();
     injectGridstackMarkup();
     addBackendEventListeners();
-    addDeleteButtons();
+    addContextMenu();
 }
 
-function addDeleteButtons()
+function addContextMenu()
 {
     $('.grid-stack-item').each(function ()
     {
-            $(this).append('<div class="shopbuilder_deleteIcon fa fa-trash""></div>');
+        $(this).append('<div class="context-menu"></div>');
 
-            $(this).mouseenter(function ()
-            {
-                $(this).addClass('contextMenuVisible');
-            });
+        $(this).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
+        $(this).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
 
-            $(this).mouseleave(function ()
-            {
-                $(this).removeClass('contextMenuVisible');
-            });
+        $(this).mouseenter(function ()
+        {
+            $(this).find('.context-menu').css('display','block');
+        });
 
-            $('.shopbuilder_deleteIcon').click(function ()
-            {
-                $(this).parent().remove();
-            });
+        $(this).mouseleave(function ()
+        {
+            $(this).find('.context-menu').css('display','none');
+        });
+
+        $('.delete-icon').click(function ()
+        {
+            $(this).parent().parent().remove();
+        });
     });
 }
 
@@ -59,11 +62,20 @@ function addBackendEventListeners()
         alert('zoom_out');
     });
 
+    $('body').on('shopbuilder_open_properties', function(element)
+    {
+        // alert('open properties');
+    });
+
+
+
+
+
     // test
     // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
     // $('#testEventButton').on('click', function ()
     // {
-    //     $('body').trigger('shopbuilder_reset', this);
+    //     $('body').trigger('shopbuilder_open_properties', this);
     // });
 }
 
