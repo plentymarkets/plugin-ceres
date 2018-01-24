@@ -107,7 +107,7 @@ function injectGridstackMarkup()
     $('.mkt-homepage').each(function(i)
     {
         // iterate over all sub-elements
-        $(this).find(' > div, > hr').each(function(j)
+        $(this).find('> *').each(function(j)
         {
             // create gridstack item markup
             var gridStackItem = $(  '<div class="grid-stack-item"' +
