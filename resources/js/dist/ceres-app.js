@@ -12854,11 +12854,6 @@ Vue.component("salutation-select", {
             this.currentSalutation = this.salutations.withoutCompany.en;
         }
     },
-    mounted: function mounted() {
-        this.$nextTick(function () {
-            // this.addressData.addressSalutation = 0;
-        });
-    },
 
 
     methods: {
