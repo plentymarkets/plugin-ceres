@@ -123,7 +123,7 @@ Vue.component("salutation-select", {
     {
         this.$nextTick(() =>
         {
-            this.addressData.addressSalutation = 0;
+            // this.addressData.addressSalutation = 0;
         });
     },
 

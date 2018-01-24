@@ -12554,7 +12554,8 @@ Vue.component("registration", {
             username: "",
             billingAddress: {
                 countryId: null,
-                stateId: null
+                stateId: null,
+                addressSalutation: 0
             },
             isDisabled: false
         };
@@ -12854,10 +12855,8 @@ Vue.component("salutation-select", {
         }
     },
     mounted: function mounted() {
-        var _this = this;
-
         this.$nextTick(function () {
-            _this.addressData.addressSalutation = 0;
+            // this.addressData.addressSalutation = 0;
         });
     },
 
