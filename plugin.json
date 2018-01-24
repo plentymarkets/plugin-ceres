@@ -420,7 +420,7 @@
             "multiple"      : false
         },
         {
-            "key"           : "OrderConfirmation.AdditionalShippingInformations",
+            "key"           : "OrderConfirmation.AdditionalShippingInformation",
             "name"          : "Order confirmation: Additional shipping content in the order informations",
             "description"   : "Add additional shipping content to the order informations on the order confirmation page."
         },
