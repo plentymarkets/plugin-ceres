@@ -63,7 +63,7 @@ function addBackendEventListeners()
     {
         // alert('open properties');
     });
-    
+
     // test
     // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
     // $('#testEventButton').on('click', function ()
@@ -104,14 +104,13 @@ function injectGridstackMarkup()
         {
             // create gridstack item markup
             var gridStackItem = $(  '<div class="grid-stack-item"' +
-                // '     data-gs-x="0"' +
-                // '     data-gs-y="' + j + '"' + // one element for each row
-                // '     data-gs-width="1"' +
                 '     data-gs-height="' + Math.round($(this).height() / 40) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
+            // overwrite cursor for all contained elements
             setDragCursorToChildElements($(this));
 
+            // add hover menu to container
             addContextMenu(gridStackItem);
 
             // wrap current element with gridstack item markup
