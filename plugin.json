@@ -420,6 +420,11 @@
             "multiple"      : false
         },
         {
+            "key"           : "OrderConfirmation.AdditionalOrderInformations",
+            "name"          : "Order confirmation: Additional content in the order informations",
+            "description"   : "Add additional content to the order informations on the order confirmation page."
+        },
+        {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
             "name"          : "Order confirmation: Additional payment information",
             "description"   : "Add additional payment information on the order confirmation page."
