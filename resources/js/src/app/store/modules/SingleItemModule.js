@@ -10,7 +10,10 @@ const mutations =
         setVariation(state, variation)
         {
             state.variation = variation;
-            state.variationOrderQuantity = 1;
+            if (variation.documents.length > 0 && variation.documents[0].data.variation)
+            {
+                state.variationOrderQuantity = variation.documents[0].data.variation.minimumOrderQuantity || 1;
+            }
         },
 
         setVariationList(state, variationList)
@@ -73,10 +76,10 @@ const getters =
         {
             if (!state || !state.variation.documents)
             {
-                return 0;
+                return null;
             }
 
-            const calculatedPrices = state.variation.documents[0].data.calculatedPrices;
+            const calculatedPrices = state.variation.documents[0].data.prices;
             const graduatedPrices = calculatedPrices.graduatedPrices;
 
             let returnPrice;
@@ -85,22 +88,24 @@ const getters =
             {
                 const prices = graduatedPrices.filter(price =>
                 {
-                    return parseInt(state.variationOrderQuantity) >= price.minimumOrderQuantity;
+                    return parseFloat(state.variationOrderQuantity) >= price.minimumOrderQuantity;
                 });
 
                 if (prices[0])
                 {
                     returnPrice = prices.reduce((prev, current) => (prev.minimumOrderQuantity > current.minimumOrderQuantity) ? prev : current);
-                    returnPrice = returnPrice.price;
+                    // returnPrice = returnPrice.unitPrice.value;
                 }
             }
 
-            return returnPrice || calculatedPrices.default.unitPrice;
+            return returnPrice || calculatedPrices.default;
         },
 
         variationTotalPrice(state, getters, rootState, rootGetters)
         {
-            return getters.variationPropertySurcharge + getters.variationGraduatedPrice;
+            const graduatedPrice = getters.variationGraduatedPrice;
+
+            return getters.variationPropertySurcharge + (graduatedPrice ? getters.variationGraduatedPrice.unitPrice.value : 0);
         }
     };
 

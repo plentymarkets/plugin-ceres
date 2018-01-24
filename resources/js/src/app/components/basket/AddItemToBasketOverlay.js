@@ -92,9 +92,9 @@ Vue.component("add-item-to-basket-overlay", {
     {
         setPriceFromData()
         {
-            if (this.latestBasketEntry.item.calculatedPrices)
+            if (this.latestBasketEntry.item.prices)
             {
-                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 

@@ -1,5 +1,15 @@
 # Release Notes für Ceres
 
+## v2.1.3 (2018-01-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.2...2.1.3" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Der Sortierungswert **Item position** im Tab **Item view** wurde aus der empfohlenen Sortierung entfernt. Die Sortierung nach Position wird nun über die Positionsnummer der Variante gelöst.
+
+### Behoben
+
+- Durch einen Fehler wurde die Wunschliste nicht richtig initialisiert. Dies wurde behoben.
+
 ## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert

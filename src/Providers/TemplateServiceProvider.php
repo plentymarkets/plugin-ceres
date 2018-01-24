@@ -45,6 +45,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.order.return'              => 'OrderReturn.OrderReturnView',         // provide template to use for order return
         'tpl.order.return.confirmation' => 'OrderReturn.OrderReturnConfirmation', // provide template to use for order return confirmation
         'tpl.cancellation-rights'       => 'StaticPages.CancellationRights',      // provide template to use for cancellation rights
+        'tpl.cancellation-form'         => 'StaticPages.CancellationForm',        // provide template to use for cancellation form
         'tpl.legal-disclosure'          => 'StaticPages.LegalDisclosure',         // provide template to use for legal disclosure
         'tpl.privacy-policy'            => 'StaticPages.PrivacyPolicy',           // provide template to use for privacy policy
         'tpl.terms-conditions'          => 'StaticPages.TermsAndConditions',      // provide template to use for terms and conditions

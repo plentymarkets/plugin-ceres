@@ -5,7 +5,8 @@ Vue.component("wish-list", {
     delimiters: ["${", "}"],
 
     props: [
-        "template"
+        "template",
+        "initIds"
     ],
 
     data()
@@ -23,6 +24,7 @@ Vue.component("wish-list", {
 
     created()
     {
+        this.$store.commit("setWishListIds", this.initIds);
         this.$options.template = this.template;
 
         this.isLoading = true;
