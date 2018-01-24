@@ -383,7 +383,7 @@
 						width: 25px;
 						border-left: 1px solid $gray-lighter;
 						position: relative;
-						background: $gray-lighter;
+						background: $gray-lighter2;
 	
 						.qty-btn {
 							width: 100%;
@@ -419,6 +419,7 @@
 
 			.price-box {
 				margin-left: auto;
+				min-width: 100px;
 			}
 
 			.item-total-price {
