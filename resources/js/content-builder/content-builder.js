@@ -89,11 +89,11 @@ function addBackendEventListeners()
     });
 
     // test
-    $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
-    $('#testEventButton').on('click', function ()
-    {
-        $('body').trigger('shopbuilder_zoom', 0.5);
-    });
+    // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
+    // $('#testEventButton').on('click', function ()
+    // {
+    //     $('body').trigger('shopbuilder_zoom', 0.5);
+    // });
 }
 
 function addContentWidget(element)
