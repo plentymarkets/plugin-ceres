@@ -2,6 +2,7 @@
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
+{% set considerVariationName = config("Ceres.item.considerVariationName") %}
 {% set configItemName = config("Ceres.item.name") %}
 
 {% set lang = services.sessionStorage.getLang() %}
@@ -27,7 +28,7 @@
                     <div class="square-inner main-image">
                         <category-image-carousel template="#vue-category-image-carousel"
                                                     :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="texts | itemName({{ configItemName }})"
+                                                    :alt-text="itemData | newItemName({{ configItemName }}, '{{ considerVariationName }}')"
                                                     :item-url="itemData | itemURL"
                                                     :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
@@ -48,7 +49,7 @@
             <!-- ITEM DETAILS -->
             <div class="thumb-content">
                 <a :href="itemData | itemURL" class="thumb-title small">
-                    ${ texts | itemName({{ configItemName }}) }
+                    ${ itemData | newItemName({{ configItemName }}, "{{ considerVariationName }}") }
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">

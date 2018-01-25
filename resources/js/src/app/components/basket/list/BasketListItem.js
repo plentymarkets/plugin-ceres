@@ -35,7 +35,7 @@ Vue.component("basket-list-item", {
 
         altText()
         {
-            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.newItemName(this.basketItem.variation.data, App.config.itemName, App.config.considerVariationName);;
 
             return altText;
         },

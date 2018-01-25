@@ -1,5 +1,4 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
-{% set configItemName = config("Ceres.item.name") %}
 
 <article class="cmp cmp-basket-preview-item">
     <!-- ITEM QUANTITY -->
@@ -23,7 +22,7 @@
     <div class="basket-item-infos small">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <div class="item-name">
-                ${ basketItem.variation.data.texts | itemName({{ configItemName }}) } {# ${ basketItem.variation.variationBase.variationName } #}
+                ${ basketItem.variation.data | newItemName({{ configItemName }}, "{{ considerVariationName }}") }
             </div>
         </a>
 

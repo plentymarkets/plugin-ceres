@@ -47,7 +47,7 @@
         <input type="checkbox" class="toggle-description" :id="'itemid-' + basketItem.id" value="">
         <a class="clearfix" :href="basketItem.variation.data | itemURL">
             <p class="item-name">
-                ${ basketItem.variation.data.texts | itemName({{configItemName}}) }
+                ${ basketItem.variation.data | newItemName({{ configItemName }}, "{{ considerVariationName }}") }
             </p>
         </a>
 
