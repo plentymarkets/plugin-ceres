@@ -1,3 +1,5 @@
+var widgetTemplates;
+
 $(document).ready(function()
 {
     initCeresForGridstack();
@@ -5,9 +7,18 @@ $(document).ready(function()
 
 function initCeresForGridstack()
 {
+    initWidgetTemplates();
     removeDefaultLinks();
     injectGridstackMarkup();
     addBackendEventListeners();
+}
+
+function initWidgetTemplates()
+{
+    widgetTemplates = {
+        'Image Slider': [$('#carousel-example').clone(), $('#carousel-example').height()],
+        'Category Highlight': [$('#recommended-plugins').parent().parent().clone(), $('#recommended-plugins').parent().parent().height()]
+    };
 }
 
 function addContextMenu(element)
@@ -33,6 +44,7 @@ function addDeleteButton(element)
 
     $(element).find('.delete-icon').click(function ()
     {
+        // todo: @vwiebe fix dropzone scope
         $('.grid-stack-0').data('gridstack').removeWidget($(this).closest('.grid-stack-item'));
     });
 }
@@ -98,11 +110,11 @@ function addBackendEventListeners()
 
 function addContentWidget(element)
 {
-    var element = $(parent.document.getElementById(element));
-
+    var object = widgetTemplates[element][0];
+    var height = widgetTemplates[element][1];
 
     var gridStackItem = $(  '<div class="grid-stack-item"' +
-        '     data-gs-height="4"><div class="grid-stack-item-content"><div class="dummy">' + $(element).html() + '</div></div>' +
+        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + $(object).html() + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);

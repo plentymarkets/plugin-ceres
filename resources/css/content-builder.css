@@ -103,26 +103,3 @@ body.loading
     left: 50%;
     top: 50%;
 }
-
-
-
-/* dummy */
-
-.div-header
-{
-    padding: 10px;
-    cursor: move;
-    z-index: 10;
-    background-color: #008EBD;
-    color: #FFFFFF;
-    max-height: 40px;
-}
-
-.dummy
-{
-    width: 100%;
-    height: 150px;
-    z-index: 9;
-    background-color: #DDDDDD;
-    padding: 4px;
-}
