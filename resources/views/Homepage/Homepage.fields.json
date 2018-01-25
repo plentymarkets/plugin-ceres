@@ -4,6 +4,7 @@
   "texts.urlPath",
   "item.id",
   "variation.id",
+  "variation.name",
   "images.variation.url",
   "images.variation.path",
   "images.variation.position",
