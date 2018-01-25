@@ -33,7 +33,7 @@ function addDeleteButton(element)
 
     $(element).find('.delete-icon').click(function ()
     {
-        $(this).closest('.grid-stack-item').remove();
+        $('.grid-stack-0').data('gridstack').removeWidget($(this).closest('.grid-stack-item'));
     });
 }
 
@@ -178,7 +178,7 @@ function initGridstack(id)
         width:1,
         cellHeight: 40,
         verticalMargin: 0,
-        acceptWidgets: '.grid-stack-item',
+        acceptWidgets: '.grid-stack-item'
     };
 
     var selector = '.grid-stack-' + id;
