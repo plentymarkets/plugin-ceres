@@ -14,9 +14,13 @@ function addContextMenu(element)
 {
     $(element).append('<div class="context-menu"></div>');
 
-    $(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
-    $(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
+    addEditButton(element);
+    addDeleteButton(element);
+}
 
+function addDeleteButton(element)
+{
+    $(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
     $(element).mouseenter(function ()
     {
         $(this).find('.context-menu').css('display','block');
@@ -27,11 +31,15 @@ function addContextMenu(element)
         $(this).find('.context-menu').css('display','none');
     });
 
-    $('.delete-icon').click(function ()
+    $(element).find('.delete-icon').click(function ()
     {
         $(this).closest('.grid-stack-item').remove();
     });
+}
 
+function addEditButton(element)
+{
+    $(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
     $(element).find('.edit-icon').click(function ()
     {
         var propertiesObject = {
