@@ -390,6 +390,19 @@
     },
     {
         "tab"           : "Item view",
+        "key"           : "item.considerVariationName",
+        "label"         : "Consider variation name",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "itemName"             : "Show item name",
+            "variationName"        : "Try to show variation name",
+            "itemNameVariationName": "Show item name + try variation name"
+        },
+        "default"                  : "itemName"
+    },
+    {
+        "tab"           : "Item view",
         "key"           : "item.name",
         "label"         : "Item name",
         "type"          : "dropdown",
