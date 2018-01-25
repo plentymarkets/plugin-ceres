@@ -11040,6 +11040,7 @@ Vue.component("basket-list-item", {
     data: function data() {
         return {
             waiting: false,
+            waitingForDelete: false,
             itemCondition: "",
             showMoreInformation: false
         };
@@ -11079,14 +11080,14 @@ Vue.component("basket-list-item", {
         deleteItem: function deleteItem() {
             var _this = this;
 
-            if (!this.waiting && !this.isBasketLoading) {
-                this.waiting = true;
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
+                this.waitingForDelete = true;
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 }, function (error) {
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 });
             }
         },
