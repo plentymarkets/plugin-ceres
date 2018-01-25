@@ -78,14 +78,9 @@ function addBackendEventListeners()
         window.location.reload(true);
     });
 
-    $('body').on('shopbuilder_zoom_in', function()
+    $('body').on('shopbuilder_zoom', function(event, value)
     {
-        alert('zoom_in');
-    });
-
-    $('body').on('shopbuilder_zoom_out', function()
-    {
-        alert('zoom_out');
+        $('body').css('zoom', value * 100 + '%')
     });
 
     $('body').on('shopbuilder_open_properties', function(event, object)
@@ -94,11 +89,11 @@ function addBackendEventListeners()
     });
 
     // test
-    // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
-    // $('#testEventButton').on('click', function ()
-    // {
-    //     $('body').trigger('shopbuilder_open_properties', this);
-    // });
+    $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
+    $('#testEventButton').on('click', function ()
+    {
+        $('body').trigger('shopbuilder_zoom', 0.5);
+    });
 }
 
 function addContentWidget(element)
