@@ -1,4 +1,4 @@
-Vue.filter("newItemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName, considerVariationName) =>
+Vue.filter("newItemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.itemName, considerVariationName = App.config.considerVariationName) =>
 {
     // Item name (based on setting below) = itemName
     // Variation name = variationName
@@ -10,11 +10,11 @@ Vue.filter("newItemName", ({texts:{name1, name2, name3}, variation:{name}}, sele
 
     let itemName = "";
 
-    if (selectedName === 1 && item.name2 !== "")
+    if (selectedName === 1 && name2 !== "")
     {
         itemName = name2;
     }
-    else if (selectedName === 2 && item.name3 !== "")
+    else if (selectedName === 2 && name3 !== "")
     {
         itemName = name3;
     }
