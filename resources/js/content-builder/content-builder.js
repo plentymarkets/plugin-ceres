@@ -30,6 +30,7 @@ function initWidgetTemplates()
  */
 function addContextMenu(element)
 {
+    // inject menu markup into given element
     $(element).append('<div class="context-menu"></div>');
 
     // show context menu
@@ -55,7 +56,7 @@ function addContextMenu(element)
  */
 function addDeleteButton(element)
 {
-    // inject button markup into context menu
+    // inject button markup into given context element
     $(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
 
     // delete widget container
@@ -72,7 +73,7 @@ function addDeleteButton(element)
  */
 function addEditButton(element)
 {
-    // inject button markup into context menu
+    // inject button markup into given context element
     $(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
 
     // open properties
