@@ -71,6 +71,11 @@ function addEditButton(element)
             }
         };
 
+        var customEvent = new CustomEvent('CustomEvent');
+        customEvent.initCustomEvent('shopbuilder_open_properties', true, true, propertiesObject);
+
+        window.parent.window.dispatchEvent(customEvent);
+
         $('body').trigger('shopbuilder_open_properties', propertiesObject);
     });
 }
