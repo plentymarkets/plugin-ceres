@@ -1,0 +1,16 @@
+.popover {
+	z-index: $zIndex-10 !important;
+	max-width: 330px;
+	padding: 0;
+
+	& > .popover-arrow:after {
+		border-bottom-color: #F7F7F7 !important;
+	}
+}
+
+a {
+	&[data-toggle="popover"] {
+		color: #008ebd !important;
+		cursor: pointer;
+	}
+} 
