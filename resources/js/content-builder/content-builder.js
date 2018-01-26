@@ -1,7 +1,9 @@
+$.noConflict(); // enable save mode
+
 var widgetTemplates; // holds static markup for sidebar widgets
 
 // entry point
-$(document).ready(function()
+jQuery(document).ready(function()
 {
     initCeresForGridstack();
 });
@@ -19,8 +21,10 @@ function initCeresForGridstack()
 function initWidgetTemplates()
 {
     widgetTemplates = {
-        'Image Slider': [$('#carousel-example').clone(), $('#carousel-example').height()],
-        'Category Highlight': [$('#recommended-plugins').parent().parent().clone(), $('#recommended-plugins').parent().parent().height()]
+        'CategoryHighlight': [jQuery('#categoryHighlight').clone()[0].outerHTML, jQuery('#categoryHighlight').outerHeight(true)],
+        'CategoryFeature': [jQuery('#categoryFeature').clone()[0].outerHTML, jQuery('#categoryFeature').outerHeight(true)],
+        'ImageSlider': [jQuery('#imageSlider').clone()[0].outerHTML, jQuery('#imageSlider').outerHeight(true)],
+        'CategoryList': [jQuery('#categoryList').clone()[0].outerHTML, jQuery('#categoryList').outerHeight(true)],
     };
 }
 
@@ -31,18 +35,18 @@ function initWidgetTemplates()
 function addContextMenu(element)
 {
     // inject menu markup into given element
-    $(element).append('<div class="context-menu"></div>');
+    jQuery(element).append('<div class="context-menu"></div>');
 
     // show context menu
-    $(element).mouseenter(function ()
+    jQuery(element).mouseenter(function ()
     {
-        $(this).find('.context-menu').css('display','block');
+        jQuery(this).find('.context-menu').css('display','block');
     });
 
     // hide context menu
-    $(element).mouseleave(function ()
+    jQuery(element).mouseleave(function ()
     {
-        $(this).find('.context-menu').css('display','none');
+        jQuery(this).find('.context-menu').css('display','none');
     });
 
     // add buttons
@@ -57,13 +61,13 @@ function addContextMenu(element)
 function addDeleteButton(element)
 {
     // inject button markup into given context element
-    $(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
 
     // delete widget container
-    $(element).find('.delete-icon').click(function ()
+    jQuery(element).find('.delete-icon').click(function ()
     {
         // todo: @vwiebe fix dropzone scope
-        $('.grid-stack-0').data('gridstack').removeWidget($(this).closest('.grid-stack-item'));
+        jQuery('.grid-stack-0').data('gridstack').removeWidget(jQuery(this).closest('.grid-stack-item'));
     });
 }
 
@@ -74,10 +78,10 @@ function addDeleteButton(element)
 function addEditButton(element)
 {
     // inject button markup into given context element
-    $(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
 
     // open properties
-    $(element).find('.edit-icon').click(function ()
+    jQuery(element).find('.edit-icon').click(function ()
     {
         // dummy data
         var propertiesObject = {
@@ -101,45 +105,45 @@ function addEditButton(element)
         var customEvent = new CustomEvent('CustomEvent');
         customEvent.initCustomEvent('shopbuilder_open_properties', true, true, propertiesObject);
         window.parent.window.dispatchEvent(customEvent);
-        $('body').trigger('shopbuilder_open_properties', propertiesObject);
+        jQuery('body').trigger('shopbuilder_open_properties', propertiesObject);
     });
 }
 
 function addBackendEventListeners()
 {
     // drop element into iframe
-    $('body').on('shopbuilder_drop', function(element)
+    jQuery('body').on('shopbuilder_drop', function(element)
     {
         addContentWidget(element.originalEvent.detail.identifier);
     });
 
     // reset iframe
-    $('body').on('shopbuilder_reset', function()
+    jQuery('body').on('shopbuilder_reset', function()
     {
-        $('body').html('');
-        $('body').addClass('loading');
+        jQuery('body').html('');
+        jQuery('body').addClass('loading');
 
         window.location.reload(true);
     });
 
     // zoom iframe
-    $('body').on('shopbuilder_zoom', function(event)
+    jQuery('body').on('shopbuilder_zoom', function(event)
     {
         var value = event.originalEvent.detail.value;
-        $('body').css('zoom', value * 100 + '%')
+        jQuery('body').css('zoom', value * 100 + '%')
     })
 
     // open properties
-    $('body').on('shopbuilder_open_properties', function(event, object)
+    jQuery('body').on('shopbuilder_open_properties', function(event, object)
     {
         console.log(object);
     });
 
     // test
-    // $('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
-    // $('#testEventButton').on('click', function ()
+    // jQuery('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
+    // jQuery('#testEventButton').on('click', function ()
     // {
-    //     $('body').trigger('shopbuilder_zoom', 0.5);
+    //     jQuery('body').trigger('shopbuilder_zoom', 0.5);
     // });
 }
 
@@ -154,14 +158,14 @@ function addContentWidget(element)
     var height = widgetTemplates[element][1];
 
     // wrap element with gridstack containers
-    var gridStackItem = $(  '<div class="grid-stack-item"' +
-        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + $(object).html() + '</div>' +
+    var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
+        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + object + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);
     addContextMenu(gridStackItem);
 
-    $('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
+    jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
 }
 
 /**
@@ -171,18 +175,18 @@ function addContentWidget(element)
 function setDragCursorToChildElements(element)
 {
     // iterate over all child elements
-    $(element).find('*').each(function()
+    jQuery(element).find('*').each(function()
     {
-        $(this).css('cursor','move');
+        jQuery(this).css('cursor','move');
     });
 }
 
 function removeDefaultLinks()
 {
     // iterate over all body elements
-    $('body').find('*').each(function()
+    jQuery('body').find('*').each(function()
     {
-        $(this).click(function (event)
+        jQuery(this).click(function (event)
         {
             // prevent default click action
             event.preventDefault();
@@ -193,30 +197,33 @@ function removeDefaultLinks()
 function injectGridstackMarkup()
 {
     // select drag & drop areas
-    $('.mkt-homepage').each(function(i)
+    jQuery('#page-body > .container-max > .row > .col').each(function(i)
+        // jQuery('.mkt-homepage').each(function(i)
     {
+        jQuery(this).css('position', 'relative');
+
         // iterate over all sub-elements
-        $(this).find('> *').each(function(j)
+        jQuery(this).find('> *').each(function(j)
         {
             // create gridstack item markup
-            var gridStackItem = $(  '<div class="grid-stack-item"' +
-                '     data-gs-height="' + Math.round($(this).height() / 40) + '"><div class="grid-stack-item-content"></div>' +
+            var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
+                '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / 40) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
             // overwrite cursor for all contained elements
-            setDragCursorToChildElements($(this));
+            setDragCursorToChildElements(jQuery(this));
 
             // add hover menu to container
             addContextMenu(gridStackItem);
 
             // wrap current element with gridstack item markup
-            $(this).wrap(gridStackItem)
+            jQuery(this).wrap(gridStackItem)
 
             ++j;
         });
 
         // add gridstack container class for current drag & drop area
-        $(this).addClass('grid-stack-' + i);
+        jQuery(this).addClass('grid-stack-' + i);
 
         // initialize gridstack for current gridstack container
         initGridstack(i);
@@ -239,5 +246,5 @@ function initGridstack(identifier)
     };
 
     var selector = '.grid-stack-' + identifier;
-    $(selector).gridstack(options);
+    jQuery(selector).gridstack(options);
 }
