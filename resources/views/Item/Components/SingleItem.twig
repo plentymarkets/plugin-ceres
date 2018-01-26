@@ -1,6 +1,4 @@
 {% set itemData = config("Ceres.item.data") | split(', ') %}
-{% set considerVariationName = config("Ceres.item.considerVariationName") %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
@@ -24,7 +22,7 @@
 
                     <h1 class="h2 title">
                         <span>
-                            ${ currentVariation | newItemName({{ configItemName }}, "{{ considerVariationName }}") }
+                            ${ currentVariation | newItemName }
                         </span>
                     </h1>
 

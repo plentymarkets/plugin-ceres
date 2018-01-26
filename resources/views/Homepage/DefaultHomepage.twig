@@ -4,8 +4,6 @@
 {% if overrideHomepageContainer | trim is empty %}
 
     {% set lang = services.sessionStorage.getLang() %}
-    {% set configItemName = config("Ceres.item.name") %}
-    {% set considerVariationName = config("Ceres.item.considerVariationName") %}
 
     {% set slider1 = {
     item: services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [config("Ceres.homepage.sliderItemId1")]}).documents[0].data,
@@ -94,12 +92,12 @@
                                             <a class="hero-category"
                                                {% if slider1.item.texts is not empty %}href="{{ slider1.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider1.url }}"
-                                                     alt="{{ slider1.item | newItemName(configItemName, considerVariationName) }}"
+                                                     alt="{{ slider1.item | newItemName }}"
                                                      class="img-fluid">
                                                 {% if slider1.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider1.item | newItemName(configItemName, considerVariationName) }}
+                                                               aria-hidden="true"></i> {{ slider1.item | newItemName }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -112,12 +110,12 @@
                                             <a class="hero-category"
                                                {% if slider2.item.texts is not empty %}href="{{ slider2.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider2.url }}"
-                                                     alt="{{ slider2.item | newItemName(configItemName, considerVariationName) }}"
+                                                     alt="{{ slider2.item | newItemName }}"
                                                      class="img-fluid">
                                                 {% if slider2.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider2.item | newItemName(configItemName, considerVariationName) }}
+                                                               aria-hidden="true"></i> {{ slider2.item | newItemName }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -130,12 +128,12 @@
                                             <a class="hero-category"
                                                {% if slider3.item.texts is not empty %}href="{{ slider3.item | itemURL }}"{% endif %}>
                                                 <img src="{{ slider3.url }}"
-                                                     alt="{{ slider3.item | newItemName(configItemName, considerVariationName) }}"
+                                                     alt="{{ slider3.item | newItemName }}"
                                                      class="img-fluid">
                                                 {% if slider3.item.texts is not empty %}
                                                     <div class="carousel-caption">
                                                         <h2><i class="fa fa-angle-double-right"
-                                                               aria-hidden="true"></i> {{ slider3.item | newItemName(configItemName, considerVariationName) }}
+                                                               aria-hidden="true"></i> {{ slider3.item | newItemName }}
                                                         </h2>
                                                     </div>
                                                 {% endif %}
@@ -182,12 +180,12 @@
                                 <a class="hero-category"
                                    {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra1.url }}"
-                                         alt="{{ heroExtra1.item | newItemName(configItemName, considerVariationName) }}">
+                                         alt="{{ heroExtra1.item | newItemName }}">
                                     {% if heroExtra1.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
                                                 <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra1.item | newItemName(configItemName, considerVariationName) }}
+                                                   aria-hidden="true"></i> {{ heroExtra1.item | newItemName }}
                                             </h2>
                                         </div>
                                     {% endif %}
@@ -202,12 +200,12 @@
                                 <a class="hero-category"
                                    {% if heroExtra2.item.texts is not empty %}href="{{ heroExtra2.item | itemURL }}"{% endif %}>
                                     <img src="{{ heroExtra2.url }}"
-                                         alt="{{ heroExtra2.item | newItemName(configItemName, considerVariationName) }}">
+                                         alt="{{ heroExtra2.item | newItemName }}">
                                     {% if heroExtra2.item.texts is not empty %}
                                         <div class="hero-category-inner">
                                             <h2 class="hero-category-headline">
                                                 <i class="fa fa-angle-double-right"
-                                                   aria-hidden="true"></i> {{ heroExtra2.item | newItemName(configItemName, considerVariationName) }}
+                                                   aria-hidden="true"></i> {{ heroExtra2.item | newItemName }}
                                             </h2>
                                         </div>
                                     {% endif %}

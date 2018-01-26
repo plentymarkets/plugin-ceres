@@ -30,7 +30,7 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                return this.$options.filters.newItemName(this.latestBasketEntry.item, App.config.itemName, App.config.considerVariationName);
+                return this.$options.filters.newItemName(this.latestBasketEntry.item);
             }
 
             return "";

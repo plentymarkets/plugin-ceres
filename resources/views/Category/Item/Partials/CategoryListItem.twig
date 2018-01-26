@@ -3,8 +3,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set image = item.data.images.all | first %}
-{% set considerVariationName = config("Ceres.item.considerVariationName") %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set itemUrl =  item.data | itemURL %}
 
 {% if enableCarousel is not defined %}
@@ -31,7 +29,7 @@
                     <category-image-carousel
                         template="#vue-category-image-carousel"
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
-                        alt-text="{{ item.data | newItemName(configItemName, considerVariationName) }}"
+                        alt-text="{{ item.data | newItemName }}"
                         item-url="{{ itemUrl }}"
                         :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                         :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
@@ -89,7 +87,7 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a href="{{ itemUrl }}" class="thumb-title small">
-                {{ item.data | newItemName(configItemName, considerVariationName) }}
+                {{ item.data | newItemName }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}

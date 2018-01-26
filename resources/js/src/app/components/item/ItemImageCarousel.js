@@ -181,7 +181,7 @@ Vue.component("item-image-carousel", {
 
         getAltText(image)
         {
-            const altText = image && image.alternate ? image.alternate : this.$options.filters.newItemName(this.currentVariation.documents[0].data, App.config.itemName, App.config.considerVariationName);
+            const altText = image && image.alternate ? image.alternate : this.$options.filters.newItemName(this.currentVariation.documents[0].data);
 
             return altText;
         }
