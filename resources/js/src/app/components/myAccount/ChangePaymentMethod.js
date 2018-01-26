@@ -1,6 +1,8 @@
 const ModalService        = require("services/ModalService");
 const ApiService          = require("services/ApiService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("change-payment-method", {
 
     delimiters: ["${", "}"],
@@ -65,7 +67,9 @@ Vue.component("change-payment-method", {
 
         getPaymentStateText(paymentStates)
         {
-            return Translations.Template["paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId === 4).value];
+            return TranslationService.translate(
+                "Ceres::Template.paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId === 4).value
+            );
         },
 
         getPaymentId(paymentIds)

@@ -1,5 +1,7 @@
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("coupon", {
 
     delimiters: ["${", "}"],
@@ -64,7 +66,9 @@ Vue.component("coupon", {
                     response =>
                     {
                         this.waiting = false;
-                        NotificationService.success(Translations.Template.couponRedeemSuccess).closeAfter(10000);
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.couponRedeemSuccess")
+                        ).closeAfter(10000);
                     },
                     error =>
                     {
@@ -74,7 +78,9 @@ Vue.component("coupon", {
             }
             else
             {
-                NotificationService.error(Translations.Template.couponIsEmpty).closeAfter(10000);
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.couponIsEmpty")
+                ).closeAfter(10000);
             }
         },
 
@@ -86,12 +92,16 @@ Vue.component("coupon", {
                 response =>
                 {
                     this.waiting = false;
-                    NotificationService.success(Translations.Template.couponRemoveSuccess).closeAfter(10000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.couponRemoveSuccess")
+                    ).closeAfter(10000);
                 },
                 error =>
                 {
                     this.waiting = false;
-                    NotificationService.error(Translations.Template.couponRemoveFailure).closeAfter(10000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.couponRemoveFailure")
+                    ).closeAfter(10000);
                 });
         },
 
@@ -121,10 +131,10 @@ Vue.component("coupon", {
 
             if (error && error.error && error.error.code && errorMessageKeys[error.error.code])
             {
-                return Translations.Template[errorMessageKeys[error.error.code]];
+                return TranslationService.translate("Ceres::Template." + errorMessageKeys[error.error.code]);
             }
 
-            return Translations.Template.couponRedeemFailure;
+            return TranslationService.translate("Ceres::Template.couponRedeemFailure");
         }
     }
 });
