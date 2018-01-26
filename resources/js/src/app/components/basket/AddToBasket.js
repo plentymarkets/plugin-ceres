@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -68,7 +69,11 @@ Vue.component("add-to-basket", {
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                        NotificationService.error(
+                            TranslationService.translate(
+                                "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                            )
+                        ).closeAfter(5000);
                     });
             }
         },

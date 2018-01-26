@@ -20,7 +20,7 @@
                         </li>
                     {% endif %}
                 {% else %}
-                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category.id }}">{{ category.details.first.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details.first.name }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>

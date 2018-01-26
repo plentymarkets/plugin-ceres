@@ -64,7 +64,7 @@ const actions =
             }
         },
 
-        selectCategory({state, commit, dispatch}, {category, categoryId})
+        selectCategory({state, commit, dispatch}, {category, categoryId, withReload})
         {
             if (category)
             {
@@ -75,12 +75,15 @@ const actions =
                 dispatch("setCurrentCategoryById", {categoryId});
             }
 
-            updateCategoryHtml();
+            if (!withReload)
+            {
+                updateCategoryHtml();
 
-            commit("setItemListPage", 1);
-            commit("setSelectedFacetsByIds", []);
+                commit("setItemListPage", 1);
+                commit("setSelectedFacetsByIds", []);
 
-            dispatch("retrieveItemList");
+                dispatch("retrieveItemList");
+            }
         },
 
         setCurrentCategoryById({state, commit, dispatch}, {categoryId, categories})

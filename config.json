@@ -226,6 +226,19 @@
     },
     {
         "tab"       : "Header",
+        "key"       : "header.show_category_types",
+        "label"     : "Type of categories rendered in the navigation",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+          "all"     : "All",
+          "item"    : "Item",
+          "content" : "Content"
+        },
+        "default"   : "all"
+    },
+    {
+        "tab"       : "Header",
         "key"       : "header.basket_values",
         "label"     : "Show shopping cart information",
         "type"      : "dropdown",
