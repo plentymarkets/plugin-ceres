@@ -3,6 +3,7 @@ const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("bank-data-select", {
 
@@ -59,7 +60,7 @@ Vue.component("bank-data-select", {
          */
         openAddBank()
         {
-            this.headline = Translations.Template.bankAddDataTitle;
+            this.headline = TranslationService.translate("Ceres::Template.bankAddDataTitle");
             this.openModal(false);
         },
 
@@ -70,7 +71,7 @@ Vue.component("bank-data-select", {
          */
         openUpdateBank(index, bankData)
         {
-            this.headline = Translations.Template.bankUpdateDataTitle;
+            this.headline = TranslationService.translate("Ceres::Template.bankUpdateDataTitle");
 
             this.setUpdateData(index, bankData);
             this.openModal(true);
@@ -153,13 +154,17 @@ Vue.component("bank-data-select", {
                     this.checkBankDataSelection();
                     this.closeModal();
 
-                    NotificationService.success(Translations.Template.bankDataUpdated).closeAfter(3000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.bankDataUpdated")
+                    ).closeAfter(3000);
                 })
                 .fail(() =>
                 {
                     this.closeModal();
 
-                    NotificationService.error(Translations.Template.bankDataNotUpdated).closeAfter(5000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.bankDataNotUpdated")
+                    ).closeAfter(5000);
                 });
         },
 
@@ -178,13 +183,17 @@ Vue.component("bank-data-select", {
                     this.checkBankDataSelection(true);
                     this.closeModal();
 
-                    NotificationService.success(Translations.Template.bankDataAdded).closeAfter(3000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.bankDataAdded")
+                    ).closeAfter(3000);
                 })
                 .fail(() =>
                 {
                     this.closeModal();
 
-                    NotificationService.error(Translations.Template.bankDataNotAdded).closeAfter(5000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.bankDataNotAdded")
+                    ).closeAfter(5000);
                 });
         },
 
@@ -200,13 +209,17 @@ Vue.component("bank-data-select", {
                     this.closeDeleteModal();
                     this.userBankData.splice(this.updateBankIndex, 1);
 
-                    NotificationService.success(Translations.Template.bankDataDeleted).closeAfter(3000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.bankDataDeleted")
+                    ).closeAfter(3000);
                 })
                 .fail(() =>
                 {
                     this.closeDeleteModal();
 
-                    NotificationService.error(Translations.Template.bankDataNotDeleted).closeAfter(5000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.bankDataNotDeleted")
+                    ).closeAfter(5000);
                 });
         },
 
