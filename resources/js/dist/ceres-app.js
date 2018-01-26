@@ -11525,7 +11525,6 @@ Vue.component("basket-list-item", {
 "use strict";
 
 Vue.component("category-breadcrumbs", {
-
     delimiters: ["${", "}"],
 
     props: ["template"],
@@ -11534,18 +11533,6 @@ Vue.component("category-breadcrumbs", {
 
     created: function created() {
         this.$options.template = this.template;
-    },
-
-
-    methods: {
-        /**
-         * render items in relation to location
-         * @param category
-         */
-        selectBreadcrumb: function selectBreadcrumb(category) {
-            this.$store.dispatch("selectCategory", { category: category });
-            return false;
-        }
     }
 });
 
@@ -13145,7 +13132,8 @@ Vue.component("registration", {
             username: "",
             billingAddress: {
                 countryId: null,
-                stateId: null
+                stateId: null,
+                addressSalutation: 0
             },
             isDisabled: false
         };
@@ -13447,13 +13435,6 @@ Vue.component("salutation-select", {
         } else {
             this.currentSalutation = this.salutations.withoutCompany.en;
         }
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            _this.addressData.addressSalutation = 0;
-        });
     },
 
 
@@ -14843,7 +14824,7 @@ Vue.component("item-search", {
         },
         updateTitle: function updateTitle(searchString) {
             document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.tranylate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
+            document.title = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
@@ -16134,14 +16115,8 @@ Vue.component("mobile-navigation", {
         navigateTo: function navigateTo(category) {
             this.closeNavigation();
 
-            if (!App.isCategoryView) {
-                window.open(category.url, "_self");
-            } else {
-                this.$store.dispatch("selectCategory", { category: category });
-
-                if (category.children && category.showChildren) {
-                    this.slideTo(category.children);
-                }
+            if (App.isCategoryView && category.children && category.showChildren) {
+                this.slideTo(category.children);
             }
         },
         slideTo: function slideTo(children, back) {
@@ -16655,12 +16630,16 @@ Vue.directive("render-category", {
         el.onclick = function (event) {
             event.preventDefault();
 
-            _index2.default.dispatch("selectCategory", { categoryId: parseInt(binding.value) });
+            var currentCategoryType = _index2.default.state.navigation.currentCategory ? _index2.default.state.navigation.currentCategory.type : null;
 
-            if (!App.isCategoryView) {
+            if (!App.isCategoryView || currentCategoryType !== binding.value.type) {
+                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id, withReload: true });
+
                 var url = _index2.default.state.navigation.currentCategory.url;
 
                 window.open(url, "_self");
+            } else {
+                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id });
             }
         };
     }
@@ -19637,7 +19616,8 @@ var actions = {
             commit = _ref4.commit,
             dispatch = _ref4.dispatch;
         var category = _ref5.category,
-            categoryId = _ref5.categoryId;
+            categoryId = _ref5.categoryId,
+            withReload = _ref5.withReload;
 
         if (category) {
             commit("setCurrentCategory", category);
@@ -19645,12 +19625,14 @@ var actions = {
             dispatch("setCurrentCategoryById", { categoryId: categoryId });
         }
 
-        (0, _CategoryService.updateCategoryHtml)();
+        if (!withReload) {
+            (0, _CategoryService.updateCategoryHtml)();
 
-        commit("setItemListPage", 1);
-        commit("setSelectedFacetsByIds", []);
+            commit("setItemListPage", 1);
+            commit("setSelectedFacetsByIds", []);
 
-        dispatch("retrieveItemList");
+            dispatch("retrieveItemList");
+        }
     },
     setCurrentCategoryById: function setCurrentCategoryById(_ref6, _ref7) {
         var state = _ref6.state,
