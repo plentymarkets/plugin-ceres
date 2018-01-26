@@ -90,8 +90,9 @@ function addBackendEventListeners()
         window.location.reload(true);
     });
 
-    $('body').on('shopbuilder_zoom', function(event, value)
+    $('body').on('shopbuilder_zoom', function(event)
     {
+        var value = event.originalEvent.detail.value;
         $('body').css('zoom', value * 100 + '%')
     });
 
