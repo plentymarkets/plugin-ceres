@@ -421,8 +421,8 @@
         },
         {
             "key"           : "OrderConfirmation.AdditionalShippingInformation",
-            "name"          : "Order confirmation: Additional shipping content in the order informations",
-            "description"   : "Add additional shipping content to the order informations on the order confirmation page."
+            "name"          : "Order confirmation: Additional shipping information",
+            "description"   : "Add additional shipping information to the order details on the order confirmation page."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",
