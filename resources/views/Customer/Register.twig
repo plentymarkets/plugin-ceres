@@ -6,15 +6,34 @@
 {% endblock %}
 
 {% block PageBody %}
+
+    {% set popoverText %}
+        <ul class='p-l-1'>
+            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
+            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
+            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
+            <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+        </ul>
+    {% endset %}    
+
     {{ component( "Ceres::Customer.Components.Registration") }}
     <div class="registration container-max">
         <div class="row m-b-3">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-                <div class="row m-b-3">
-                    <h1 class="col-xs-12">{{ trans("Ceres::Template.accRegisterAccount") }}</h1>
-                    <a>
-                        <i class="fa fa-info-circle" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></i>
-                    </a>
+                <div class="row m-b-1">
+                    <h1 class="col-xs-12">
+                        {{ trans("Ceres::Template.accRegisterAccount") }}
+                        <a v-popover 
+                            data-toggle="popover" 
+                            data-trigger="hover" 
+                            data-placement="bottom" 
+                            data-container=".registration" 
+                            title="{{ trans('Ceres::Template.generalContactInformations') }}" 
+                            data-content="{{ popoverText }}" 
+                            data-html="true">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                    </h1>
                 </div>
                 
                 <registration template="#vue-registration" backlink="{{ request.get("backlink") }}"></registration>
