@@ -16448,9 +16448,9 @@ Vue.filter("itemName", function (_ref) {
         name3 = _ref$texts.name3,
         name = _ref.variation.name;
     var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.itemName;
-    var considerVariationName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.considerVariationName;
+    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.itemDisplayName;
 
-    if (considerVariationName === "variationName" && name && name.length) {
+    if (itemDisplayName === "variationName" && name && name.length) {
         return name;
     }
 
@@ -16464,7 +16464,7 @@ Vue.filter("itemName", function (_ref) {
         itemName = name1;
     }
 
-    if (considerVariationName === "itemNameVariationName" && name && name.length) {
+    if (itemDisplayName === "itemNameVariationName" && name && name.length) {
         itemName = itemName + " " + name;
     }
 
