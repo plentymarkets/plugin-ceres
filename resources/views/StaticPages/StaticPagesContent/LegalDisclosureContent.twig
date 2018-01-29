@@ -1,9 +1,4 @@
-{{ include(template_from_string( fallbackContent )) }}
-
 {% set legalDisclosure = services.legalInformation.getLegalDisclosure() %}
-
-{#{{ include(template_from_string( pageBodyStart )) }}#}
-{% block PageBody %}
 
 <div class="container-max page-content">
     <div class="row">
@@ -11,20 +6,13 @@
             {% autoescape false %}
                 <h1>{{ trans("Ceres::Template.generalLegalDisclosure") }}</h1>
             {% endautoescape %}
-
             <hr class="m-y-3">
-
             {% if legalDisclosure.htmlText %}
                 {{ legalDisclosure.htmlText | raw }}
             {% else %}
                 <p class="static-page-plain-text">{{ legalDisclosure.plainText }}</p>
             {% endif %}
-
             {{ LayoutContainer.show("Ceres::StaticPages.LegalDisclosure") }}
         </div>
     </div>
 </div>
-
-{% endblock %}
-
-{#{{ include(template_from_string( pageBodyEnd )) }}#}
