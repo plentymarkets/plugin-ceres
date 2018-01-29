@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item active"><span>{{ category.details.first.name }}</span></li>
                     {% else %}
                         <li v-cloak v-if="$store.state.item.variation.documents" class="breadcrumb-item active">
-                            <span>${ $store.state.item.variation.documents[0].data | newItemName }</span>
+                            <span>${ $store.state.item.variation.documents[0].data | itemName }</span>
                         </li>
                     {% endif %}
                 {% else %}

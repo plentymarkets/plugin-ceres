@@ -102,7 +102,7 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, dataItem =>
                     {
-                        const value = this.$options.filters.newItemName(dataItem.data);
+                        const value = this.$options.filters.itemName(dataItem.data);
 
                         return {
                             value: value,

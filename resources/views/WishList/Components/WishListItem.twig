@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-6">
                             <a :href="wishListItem.data | itemURL">
-                                <h2 class="h5 wish-list-name">${ wishListItem.data | newItemName }</h2>
+                                <h2 class="h5 wish-list-name">${ wishListItem.data | itemName }</h2>
                             </a>
                         </div>
                         <div :class="'col-xs-12 col-lg-6 wish-list-availability availability_' + wishListItem.data.variation.availability.id">
