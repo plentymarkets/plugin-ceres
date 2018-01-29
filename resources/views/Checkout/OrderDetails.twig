@@ -116,6 +116,8 @@
                                 <span class="col-xs-6 col-sm-7">{{ shippingDate | date(trans("Ceres::Template.dateFormat")) }}</span>
                             </div>
                         {% endif %}
+
+                        {{ LayoutContainer.show("Ceres::OrderConfirmation.AdditionalShippingInformation", orderData.order) }}
                     </div>
 
                 </div>
