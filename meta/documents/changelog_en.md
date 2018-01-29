@@ -1,5 +1,11 @@
 # Release Notes for Ceres
 
+## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the mega menu wasn't displayed correctly in Firefox. This has been fixed.
+
 ## v2.1.3 (2018-01-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.2...2.1.3" target="_blank"><b>Overview of all changes</b></a>
 
 ### Changed
