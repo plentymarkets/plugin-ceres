@@ -10,7 +10,7 @@
 
 a {
 	&[data-toggle="popover"] {
-		color: #008ebd !important;
+		color: $brand-primary !important;
 		cursor: pointer;
 	}
 } 
