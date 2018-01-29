@@ -1,6 +1,6 @@
-Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.itemName, considerVariationName = App.config.considerVariationName) =>
+Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.itemName, itemDisplayName = App.config.itemDisplayName) =>
 {
-    if (considerVariationName === "variationName" && name && name.length)
+    if (itemDisplayName === "variationName" && name && name.length)
     {
         return name;
     }
@@ -20,7 +20,7 @@ Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selecte
         itemName = name1;
     }
 
-    if (considerVariationName === "itemNameVariationName" && name && name.length)
+    if (itemDisplayName === "itemNameVariationName" && name && name.length)
     {
         itemName = `${itemName} ${name}`;
     }
