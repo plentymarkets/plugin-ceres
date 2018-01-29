@@ -35,7 +35,12 @@
 
             {% set currentScopeUrl = "/" ~ category.details[0].nameUrl %}
 
-            {% if category.children %}
+            {% set translatedChildren = 0 %}
+            {% for children in category.children if children.details[0] %}
+                {% set translatedChildren = translatedChildren + 1 %}
+            {% endfor %}
+            
+            {% if category.children and translatedChildren > 0 %}
 
                 <li class="ddown">
                     <a href="{{ currentScopeUrl }}" v-render-category="{{ category.id }}">{{ category.details[0].name }}</a>
