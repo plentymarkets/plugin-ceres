@@ -11,17 +11,24 @@
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </a>
             </li>
-            {% for category in categoryBreadcrumbs %}
-                {% if loop.last %}
-                    {% if category.details is defined %}
-                        <li class="breadcrumb-item active"><span>{{ category.details.first.name }}</span></li>
-                    {% else %}
-                        <li class="breadcrumb-item active"><span>{{ category | itemName(configItemName) }}</span></li>
-                    {% endif %}
+
+            {% set break = false %}
+            {% for category in categoryBreadcrumbs[:categoryBreadcrumbs | length - 1] if not break %}
+                {% if category.details[0] %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }"></a>
+                    </li>
                 {% else %}
-                    <li class="breadcrumb-item"><a href="{{ services.category.getURL( category ) }}" v-render-category="{{ category.id }}">{{ category.details.first.name }}</a></li>
+                    {% set break = true %}
                 {% endif %}
             {% endfor %}
+
+            {% set lastCategory = categoryBreadcrumbs | last %}
+            {% if lastCategory.details is defined %}
+                <li class="breadcrumb-item active"><span>{{ lastCategory.details.first.name }}</span></li>
+            {% else %}
+                <li class="breadcrumb-item active"><span>{{ lastCategory | itemName(configItemName) }}</span></li>
+            {% endif %}
         </ul>
     </nav>
 

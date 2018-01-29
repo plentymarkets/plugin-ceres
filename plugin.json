@@ -1,5 +1,5 @@
 {
-    "version"           : "2.1.3",
+    "version"           : "2.1.4",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -418,6 +418,11 @@
             "name"          : "Order confirmation: Before order details",
             "description"   : "Add content before the order details on the order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "OrderConfirmation.AdditionalShippingInformation",
+            "name"          : "Order confirmation: Additional shipping information",
+            "description"   : "Add additional shipping information to the order details on the order confirmation page."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",

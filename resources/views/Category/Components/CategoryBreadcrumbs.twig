@@ -11,7 +11,7 @@
             <li class="breadcrumb-item" :class="{'active': index == breadcrumbs.length - 1}" v-for="(breadcrumb, index) in breadcrumbs"><!--
                 --><span v-if="index == breadcrumbs.length - 1 && breadcrumb.details != undefined">${ breadcrumb.details[0].name }</span><!--
                 --><span v-if="index == breadcrumbs.length - 1 && breadcrumb.details == undefined">${ breadcrumb | itemName({{ configItemName }}) }</span><!--
-                --><a :href="breadcrumb.url" v-if="index != breadcrumbs.length - 1" @click.prevent="selectBreadcrumb(breadcrumb)">${ breadcrumb.details[0].name }</a><!--
+                --><a :href="breadcrumb.url" v-if="index != breadcrumbs.length - 1" v-render-category="{ id: breadcrumb.id, type: breadcrumb.type }">${ breadcrumb.details[0].name }</a><!--
             --></li>
         </ul>
     </nav>

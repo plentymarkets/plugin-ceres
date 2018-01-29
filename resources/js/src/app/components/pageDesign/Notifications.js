@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 var NotificationService = require("services/NotificationService");
 
@@ -61,7 +62,9 @@ Vue.component("notifications", {
 
                 if (messageCode > 0)
                 {
-                    message = Translations.Template[ExceptionMap.get(messageCode.toString())];
+                    message = TranslationService.translate(
+                        "Ceres::Template." + ExceptionMap.get(messageCode.toString())
+                    );
                 }
 
                 // type cannot be undefined

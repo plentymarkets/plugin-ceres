@@ -1,6 +1,8 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("order-return-history", {
 
     props: [
@@ -48,7 +50,9 @@ Vue.component("order-return-history", {
                 {
                     this.waiting = false;
                     this.returnsList.page = lastPage;
-                    NotificationService.error(Translations.Template.notFoundOops);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.notFoundOops")
+                    );
                 });
             }
         }
