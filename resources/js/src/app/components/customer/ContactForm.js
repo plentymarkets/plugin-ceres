@@ -19,7 +19,7 @@ Vue.component("contact-form", {
             message : "",
             orderId : "",
             cc      : false,
-            disabledSend: false
+            waiting: false
         };
     },
 
@@ -54,8 +54,7 @@ Vue.component("contact-form", {
 
         sendMail()
         {
-            this.disabledSend = true;
-            this.onSendIcon();
+            this.waiting = true;
 
             const mailObj =
                 {
@@ -70,8 +69,7 @@ Vue.component("contact-form", {
             ApiService.post("/rest/io/customer/contact/mail", {contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail"}, {supressNotifications: true})
                 .done(response =>
                 {
-                    this.disabledSend = false;
-                    this.onSendIcon();
+                    this.waiting = false;
                     this.clearFields();
                     NotificationService.success(
                         TranslationService.translate("Ceres::Template.contactSendSuccess")
@@ -79,8 +77,7 @@ Vue.component("contact-form", {
                 })
                 .fail(response =>
                 {
-                    this.disabledSend = false;
-                    this.onSendIcon();
+                    this.waiting = false;
 
                     if (response.validation_errors)
                     {
@@ -103,20 +100,6 @@ Vue.component("contact-form", {
             this.message = "";
             this.orderId = "";
             this.cc = false;
-        },
-
-        onSendIcon()
-        {
-            const sendIcon = $(".send-btn i");
-
-            if (this.disabledSend)
-            {
-                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
-            }
-            else
-            {
-                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
-            }
         },
 
         _handleValidationErrors(validationErrors)
