@@ -12270,7 +12270,7 @@ Vue.component("contact-form", {
             message: "",
             orderId: "",
             cc: false,
-            disabledSend: false
+            waiting: false
         };
     },
     created: function created() {
@@ -12297,8 +12297,7 @@ Vue.component("contact-form", {
         sendMail: function sendMail() {
             var _this2 = this;
 
-            this.disabledSend = true;
-            this.onSendIcon();
+            this.waiting = true;
 
             var mailObj = {
                 subject: this.subject,
@@ -12310,13 +12309,11 @@ Vue.component("contact-form", {
             };
 
             ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
+                _this2.waiting = false;
                 _this2.clearFields();
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
             }).fail(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
+                _this2.waiting = false;
 
                 if (response.validation_errors) {
                     _this2._handleValidationErrors(response.validation_errors);
@@ -12332,15 +12329,6 @@ Vue.component("contact-form", {
             this.message = "";
             this.orderId = "";
             this.cc = false;
-        },
-        onSendIcon: function onSendIcon() {
-            var sendIcon = $(".send-btn i");
-
-            if (this.disabledSend) {
-                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
-            } else {
-                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
-            }
         },
         _handleValidationErrors: function _handleValidationErrors(validationErrors) {
             _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
