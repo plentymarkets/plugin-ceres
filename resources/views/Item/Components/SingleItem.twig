@@ -1,5 +1,4 @@
 {% set itemData = config("Ceres.item.data") | split(', ') %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
@@ -22,12 +21,8 @@
                     </div>
 
                     <h1 class="h2 title">
-                        <span v-if="currentVariation.variation.name != ''">
-                            ${ currentVariation.variation.name }
-                        </span>
-
-                        <span v-else>
-                            ${ currentVariation.texts | itemName({{configItemName}}) }
+                        <span>
+                            ${ currentVariation | itemName }
                         </span>
                     </h1>
 
