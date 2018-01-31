@@ -1,0 +1,16 @@
+[
+    "type",
+    "id",
+    "parentCategoryId",
+    
+    "details.name",
+    "details.nameUrl",
+    "details.imagePath",
+    "details.canonicalLink",
+    "details.metaTitle",
+    "details.metaDescription",
+    "details.metaKeywords",
+    "details.metaRobots",
+
+    "itemCount.count"
+]
