@@ -163,4 +163,25 @@ button:focus {
 			padding: $btn-padding-y-sm 0;
 		}
 	}
+
+	.btn-icon
+	{
+		padding: .5rem;
+		
+		.fa
+		{
+			width: 14px;
+			text-align: center;
+		}
+		
+		&.btn-sm
+		{
+			padding: .2rem;
+			
+			.fa
+			{
+				width: 12px;
+			}
+		}
+	}
 }

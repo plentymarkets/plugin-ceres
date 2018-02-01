@@ -1,0 +1,21 @@
+<script type="x/template" id="vue-popper">
+	<div class="pull-right m-r-1">
+		<button ref="popperButton" class="btn btn-icon btn-secondary btn-sm" @click="togglePopper()">
+			<i class="fa fa-info"></i>
+		</button>
+
+		<div ref="popperNode" class="popper popper-node" :class="{'hide-popper': isHidden}">
+			<h3 class="popper-title">
+				<slot name="title">
+					<!-- Title to display in the popper -->
+				</slot>
+			</h3>
+			<div class="popper-content">
+				<slot name="content">
+					<!-- Content to display in the popper -->
+				</slot>
+			</div>
+			<div class="popper__arrow" ref="popperArrow"></div>
+		</div>
+	</div>
+</script>
