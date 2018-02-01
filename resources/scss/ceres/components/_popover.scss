@@ -98,23 +98,39 @@
 		margin-left: 11px;
 		.popper__arrow {
 		  border-width: 10px 10px 10px 0;
-		  border-color: transparent #f7f7f7 transparent transparent;
-		  left: -5px;
+		  border-color: transparent #ccc transparent transparent;
+		  left: -12px;
 		  top: calc(50% - 5px);
-		  margin-left: -4px;
-		  margin-right: 0;
+
+		  &:after {
+			border-width: 10px 10px 10px 0;
+			border-color: transparent #fff transparent transparent;
+			content: "";
+			position: absolute;
+			border-style: solid;
+			left: 1px;
+			bottom: -10px;
+		  }
 		}
 	}
 
 	&[x-placement^="left"] {
 		margin-right: 11px;
 		.popper__arrow {
-		  border-width: 10px 0 10px 10px;
-		  border-color: transparent transparent transparent #f7f7f7;
-		  right: -5px;
-		  top: calc(50% - 5px);
-		  margin-left: 0;
-		  margin-right: -4px;
+			border-width: 10px 0 10px 10px;
+			border-color: transparent transparent transparent #ccc;
+			right: -12px;
+			top: calc(50% - 5px);
+			
+			&:after {
+				border-width: 10px 0 10px 10px;
+				border-color: transparent transparent transparent #fff;
+				content: "";
+				position: absolute;
+				border-style: solid;
+				left: -11px;
+				bottom: -10px;
+			}
 		}
 	}
 }
