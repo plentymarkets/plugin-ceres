@@ -222,16 +222,16 @@
 	.basket-item {
 		a {
 			padding: 0;
-			color: #008EBD;
+			color: $brand-primary;
 			
 			&:hover {
-				color: #005571;
+				color: darken($top-bar-basket-btn, 10%);
 				background-color: transparent;
 			}
 		}
 	}
     
-    .fa {
+    .fa:not(.qty-sign) {
         line-height: 1;
         font-size: 1.2rem;
     }
@@ -403,14 +403,14 @@
 								border-radius: $border-radius;
 							}
 	
-							& > i {
+							& > .qty-sign {
 								color: $gray;
-								font-size: .75em;
-								position: absolute;
-								left: 0;
-								width: 100%;
-								top: 50%;
-								transform: translateY(-50%);
+								// font-size: .75em;
+								// position: absolute;
+								// left: 0;
+								// width: 100%;
+								// top: 50%;
+								// transform: translateY(-50%);
 							}
 						}
 					}

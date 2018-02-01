@@ -59,7 +59,7 @@
 			}
 
 			// icons should be slightly larger
-			.fa{
+			.fa:not(.qty-sign){
 				font-size: 1.2rem;
 			}
 
@@ -389,7 +389,7 @@
 				// default font size for all items
 				font-size: .8rem;
 
-				.fa{
+				.fa:not(.qty-sign){
 					// icons should be slightly larger
 					font-size: 1rem;
 					line-height: .8rem;
