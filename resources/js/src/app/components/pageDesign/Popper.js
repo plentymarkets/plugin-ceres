@@ -20,13 +20,13 @@ Vue.component("popper", {
         {
 			// eslint-disable-next-line
 			this.popper = new Popper(this.$refs.popperButton, this.$refs.popperNode, {
-    placement: this.placement,
-    modifiers: {
-        arrow: {
-            element: this.$refs.popperArrow
-        }
-    }
-});
+				placement: this.placement,
+				modifiers: {
+					arrow: {
+						element: this.$refs.popperArrow
+					}
+				}
+			});
         });
     },
 
