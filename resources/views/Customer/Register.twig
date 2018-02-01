@@ -5,16 +5,7 @@
     <title>{{ trans("Ceres::Template.accRegister") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
-{% block PageBody %}
-
-    {% set popoverText %}
-        <ul class='p-l-1'>
-            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
-            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
-            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
-            <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
-        </ul>
-    {% endset %}    
+{% block PageBody %}   
 
     {{ component( "Ceres::Customer.Components.Registration") }}
     <div class="registration container-max">
@@ -23,17 +14,19 @@
                 <h1>
                     {{ trans("Ceres::Template.accRegisterAccount") }}
 
-                    <button v-popover
-                       data-toggle="popover"
-                       data-trigger="hover"
-                       data-placement="bottom"
-                       data-container=".registration"
-                       title="{{ trans('Ceres::Template.generalContactInformations') }}"
-                       data-content="{{ popoverText }}"
-                       data-html="true"
-                       class="pull-right btn btn-icon btn-secondary btn-sm">
-                        <i class="fa fa-info"></i>
-                    </button>
+                    <popper template="#vue-popper" placement="bottom">
+                        <div slot="title">
+                            {{ trans("Ceres::Template.generalContactInformations") }}
+                        </div>
+                        <div slot="content">
+                            <ul class='p-l-1'>
+                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
+                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
+                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
+                                <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                            </ul>
+                        </div>
+                    </popper>
                 </h1>
 
                 <div class="row">
