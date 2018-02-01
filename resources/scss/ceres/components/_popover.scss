@@ -16,11 +16,11 @@
 	}
 
 	.popper__arrow {
-	  width: 0;
-	  height: 0;
-	  border-style: solid;
-	  position: absolute;
-	  margin: 3px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		position: absolute;
+		margin: 4px;
 	}
 
 	& .popper-title {
@@ -33,7 +33,22 @@
 	}
 
 	& .popper-content {
+		padding: 9px 14px;
 
+		font-family: "Open Sans",Helvetica,Arial,sans-serif;
+		font-style: normal;
+		letter-spacing: normal;
+		line-break: auto;
+		line-height: 1.5;
+		text-shadow: none;
+		text-transform: none;
+		word-break: normal;
+		word-spacing: normal;
+		font-size: .875rem;
+		font-weight: 400;
+		white-space: normal;
+		text-decoration: none;
+		word-wrap: break-word;
 	}
 
 	&.hide-popper {
@@ -42,50 +57,55 @@
 	}
 
 	&[x-placement^="top"] {
-		margin-bottom: 8px;
+		margin-bottom: 10px;
 		.popper__arrow {
-		  border-width: 5px 5px 0 5px;
+		  border-width: 10px 10px 0 10px;
 		  border-color: #f7f7f7 transparent transparent transparent;
 		  bottom: -5px;
 		  left: calc(50% - 5px);
 		  margin-top: 0;
-		  margin-bottom: 0;
+		  margin-bottom: -4px;
 		}
 	}
 
 	&[x-placement^="bottom"] {
-		margin-top: 8px;
+		margin-top: 10px;
 		.popper__arrow {
-		  border-width: 0 5px 5px 5px;
-		  border-color: transparent transparent #f7f7f7 transparent;
-		  top: -5px;
-		  left: calc(50% - 5px);
-		  margin-top: 0;
-		  margin-bottom: 0;
+			border-width: 0 10px 10px 10px;
+		  	border-color: transparent transparent #f7f7f7 transparent;
+		  	top: -5px;
+		  	left: calc(50% - 5px);
+		  	margin-top: -4px;
+			  margin-bottom: 0;
+			  
+			  &:after {
+				  background-color: red;
+
+			  }
 		}
 	}
 
 	&[x-placement^="right"] {
-		margin-left: 8px;
+		margin-left: 10px;
 		.popper__arrow {
-		  border-width: 5px 5px 5px 0;
+		  border-width: 10px 10px 10px 0;
 		  border-color: transparent #f7f7f7 transparent transparent;
 		  left: -5px;
 		  top: calc(50% - 5px);
-		  margin-left: 0;
+		  margin-left: -4px;
 		  margin-right: 0;
 		}
 	}
 
 	&[x-placement^="left"] {
-		margin-right: 8px;
+		margin-right: 10px;
 		.popper__arrow {
-		  border-width: 5px 0 5px 5px;
+		  border-width: 10px 0 10px 10px;
 		  border-color: transparent transparent transparent #f7f7f7;
 		  right: -5px;
 		  top: calc(50% - 5px);
 		  margin-left: 0;
-		  margin-right: 0;
+		  margin-right: -4px;
 		}
 	}
 }
