@@ -44,13 +44,14 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.wish-list'                 => 'WishList.WishListView',               // provide template to use for wishlist
         'tpl.order.return'              => 'OrderReturn.OrderReturnView',         // provide template to use for order return
         'tpl.order.return.confirmation' => 'OrderReturn.OrderReturnConfirmation', // provide template to use for order return confirmation
-        'tpl.cancellation-rights'       => 'StaticPages.StaticPageMain',          // provide template to use for cancellation rights
-        'tpl.cancellation-form'         => 'StaticPages.StaticPageMain',          // provide template to use for cancellation form
-        'tpl.legal-disclosure'          => 'StaticPages.StaticPageMain',          // provide template to use for legal disclosure
-        'tpl.privacy-policy'            => 'StaticPages.StaticPageMain',          // provide template to use for privacy policy
-        'tpl.terms-conditions'          => 'StaticPages.StaticPageMain',          // provide template to use for terms and conditions
-        'tpl.item-not-found'            => 'StaticPages.StaticPageMain',          // provide template to use for item not found
-        'tpl.page-not-found'            => 'StaticPages.StaticPageMain'           // provide template to use for page not found
+        'tpl.static-page-container'     => 'StaticPages.StaticPageMain',          // provide template to use for cancellation rights
+        'tpl.cancellation-rights'       => 'StaticPages.StaticPagesContent.CancellationRightsContent',          // provide template to use for cancellation rights
+        'tpl.cancellation-form'         => 'StaticPages.StaticPagesContent.CancellationFormContent',          // provide template to use for cancellation form
+        'tpl.legal-disclosure'          => 'StaticPages.StaticPagesContent.LegalDisclosureContent',          // provide template to use for legal disclosure
+        'tpl.privacy-policy'            => 'StaticPages.StaticPagesContent.PrivacyPolicyContent',          // provide template to use for privacy policy
+        'tpl.terms-conditions'          => 'StaticPages.StaticPagesContent.TermsAndConditionsContent',          // provide template to use for terms and conditions
+        'tpl.item-not-found'            => 'StaticPages.ItemNotFound',          // provide template to use for item not found
+        'tpl.page-not-found'            => 'StaticPages.PageNotFound'           // provide template to use for page not found
     ];
 
     public function register(){}
