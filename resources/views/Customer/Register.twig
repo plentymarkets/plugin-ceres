@@ -20,24 +20,25 @@
     <div class="registration container-max">
         <div class="row m-b-3">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-                <div class="row m-b-1">
-                    <h1 class="col-xs-12">
-                        {{ trans("Ceres::Template.accRegisterAccount") }}
-                        <a v-popover 
-                            data-toggle="popover" 
-                            data-trigger="hover" 
-                            data-placement="bottom" 
-                            data-container=".registration" 
-                            title="{{ trans('Ceres::Template.generalContactInformations') }}" 
-                            data-content="{{ popoverText }}" 
-                            data-html="true"
-                            class="text-primary cursor-pointer">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
-                    </h1>
+                <h1>
+                    {{ trans("Ceres::Template.accRegisterAccount") }}
+
+                    <button v-popover
+                       data-toggle="popover"
+                       data-trigger="hover"
+                       data-placement="bottom"
+                       data-container=".registration"
+                       title="{{ trans('Ceres::Template.generalContactInformations') }}"
+                       data-content="{{ popoverText }}"
+                       data-html="true"
+                       class="pull-right btn btn-icon btn-secondary btn-sm">
+                        <i class="fa fa-info"></i>
+                    </button>
+                </h1>
+
+                <div class="row">
+                    <registration template="#vue-registration" backlink="{{ request.get("backlink") }}"></registration>
                 </div>
-                
-                <registration template="#vue-registration" backlink="{{ request.get("backlink") }}"></registration>
             </div>
         </div>
     </div>
