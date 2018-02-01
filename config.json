@@ -1077,6 +1077,39 @@
         "default"       : "notSelected"
     },
     {
+        "tab"               : "Filter",
+        "key"               : "filter.availabilityFilterActive",
+        "label"             : "Show availability filter",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
+        "tab"               : "Filter",
+        "key"               : "filter.availabilityFilterPosition",
+        "label"             : "Position of the availability filter",
+        "type"              : "text",
+        "default"           : "0"
+    },
+    {
+        "tab"                       : "Filter",
+        "key"                       : "filter.availableRange",
+        "label"                     : "Range of variations which are available",
+        "type"                      : "multi_select",
+        "possibleValues"            :
+        {
+          "1"  : "Availability 1",
+          "2"  : "Availability 2",
+          "3"  : "Availability 3",
+          "4"  : "Availability 4",
+          "5"  : "Availability 5",
+          "6"  : "Availability 7",
+          "8"  : "Availability 8",
+          "9"  : "Availability 9",
+          "10" : "Availability 10"
+        },
+        "default" : "1, 2, 3, 4, 5"
+    },
+    {
         "tab"               : "Checkout and My account",
         "key"               : "my_account.orders_per_page",
         "label"             : "Number of orders to show per page in order history",
