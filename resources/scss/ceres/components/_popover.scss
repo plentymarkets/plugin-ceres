@@ -6,8 +6,7 @@
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.2);
 	border-radius: .2rem;
-	opacity: 1;
-	visibility: visible;
+	visibility: hidden;
 	margin: 5px;
 	z-index: $zIndex-10;
 
@@ -51,18 +50,27 @@
 		word-wrap: break-word;
 	}
 
-	&.hide-popper {
-		opacity: 0;
-		visibility: hidden;
+	&.popper-visible {
+		visibility: visible;
 	}
 
 	&[x-placement^="top"] {
 		margin-bottom: 11px;
 		.popper__arrow {
-		  border-width: 10px 10px 0 10px;
-		  border-color: #f7f7f7 transparent transparent transparent;
-		  bottom: -9px;
-		  left: calc(50% - 5px);
+			border-width: 10px 10px 0 10px;
+			border-color: #ccc transparent transparent transparent;
+			bottom: -10px;
+			left: calc(50% - 5px);
+
+			&:after {
+				border-width: 10px 10px 0 10px;
+				border-color: #fff transparent  transparent transparent;
+				content: "";
+				position: absolute;
+				border-style: solid;
+				left: -10px;
+				bottom: 1px;
+			}
 		}
 	}
 

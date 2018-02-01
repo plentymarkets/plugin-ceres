@@ -33,7 +33,7 @@ Vue.component("popper", {
     data: function()
     {
         return {
-            isHidden: true,
+            isVisible: false,
             popper: null
         };
     },
@@ -42,7 +42,7 @@ Vue.component("popper", {
     {
         togglePopper()
 		{
-            this.isHidden = !this.isHidden;
+            this.isVisible = !this.isVisible;
 
             this.popper.scheduleUpdate();
         }
