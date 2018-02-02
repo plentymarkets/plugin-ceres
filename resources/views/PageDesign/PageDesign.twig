@@ -183,7 +183,7 @@
             else
             {
                 document.body.replaceChild( vueApp.$el, rootElement );
-                errorElement.remove();
+                errorElement.parentNode.removeChild(errorElement);
             }
         </script>
     </body>
