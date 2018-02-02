@@ -108,22 +108,18 @@
                                         {{ trans("Ceres::Template.accCreateAccount") }}
 
                                        <popper template="#vue-popper" placement="bottom" v-cloak class="pull-right m-r-1">
-                                            <div slot="trigger">
-                                                <button class="btn btn-icon btn-secondary btn-sm">
-                                                    <i class="fa fa-info"></i>
-                                                </button>
-                                            </div>
+                                            <button slot="trigger" class="btn btn-icon btn-secondary btn-sm">
+                                                <i class="fa fa-info"></i>
+                                            </button>
                                             <div slot="title">
                                                 {{ trans("Ceres::Template.generalContactInformations") }}
                                             </div>
-                                            <div slot="content">
-                                                <ul class='p-l-1'>
-                                                    <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
-                                                    <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
-                                                    <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
-                                                    <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
-                                                </ul>
-                                            </div>
+                                            <ul slot="content" class='p-l-1'>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
+                                                <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                                            </ul>
                                         </popper>
                                     </div>
                                 </div>
