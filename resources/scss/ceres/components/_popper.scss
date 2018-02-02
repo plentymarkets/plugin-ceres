@@ -3,7 +3,7 @@
     padding: 1px;
     text-align: left;
     text-align: start;
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0,0,0,.2);
 	border-radius: .2rem;
 	visibility: hidden;
@@ -23,7 +23,7 @@
 		padding: 8px 14px;
 		margin: 0;
 		font-size: 1rem;
-		background-color: #f7f7f7;
+		background-color: $gray-lightest;
 		border-bottom: 1px solid #ebebeb;
 		border-radius: .12857rem .12857rem 0 0;
 		text-align: center;
@@ -50,7 +50,7 @@
 
 			&:after {
 				border-width: 10px 10px 0 10px;
-				border-color: #fff transparent  transparent transparent;
+				border-color: $white transparent  transparent transparent;
 				content: "";
 				position: absolute;
 				border-style: solid;
@@ -70,7 +70,7 @@
 
 			&:after {
 				border-width: 0 10px 10px 10px;
-				border-color: transparent transparent #f7f7f7 transparent;
+				border-color: transparent transparent $gray-lightest transparent;
 				content: "";
 				position: absolute;
 				border-style: solid;
@@ -83,20 +83,20 @@
 	&[x-placement^="right"] {
 		margin-left: 11px;
 		& .popper__arrow {
-		  border-width: 10px 10px 10px 0;
-		  border-color: transparent #ccc transparent transparent;
-		  left: -12px;
-		  top: calc(50% - 5px);
-
-		  &:after {
 			border-width: 10px 10px 10px 0;
-			border-color: transparent #fff transparent transparent;
-			content: "";
-			position: absolute;
-			border-style: solid;
-			left: 1px;
-			bottom: -10px;
-		  }
+			border-color: transparent #ccc transparent transparent;
+			left: -12px;
+			top: calc(50% - 5px);
+
+			&:after {
+				border-width: 10px 10px 10px 0;
+				border-color: transparent $white transparent transparent;
+				content: "";
+				position: absolute;
+				border-style: solid;
+				left: 1px;
+				bottom: -10px;
+			}
 		}
 	}
 
@@ -110,7 +110,7 @@
 			
 			&:after {
 				border-width: 10px 0 10px 10px;
-				border-color: transparent transparent transparent #fff;
+				border-color: transparent transparent transparent $white;
 				content: "";
 				position: absolute;
 				border-style: solid;
