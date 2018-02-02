@@ -4,10 +4,16 @@ Vue.component("popper", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "template",
-        "placement"
-    ],
+    props: {
+        template: {
+            type: String,
+            default: "#vue-popper"
+        },
+        placement: {
+            type: String,
+            default: "bottom"
+        }
+    },
 
     created()
     {
@@ -29,7 +35,7 @@ Vue.component("popper", {
         });
     },
 
-    data: function()
+    data()
     {
         return {
             isVisible: false,
