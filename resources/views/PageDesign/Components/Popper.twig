@@ -1,10 +1,12 @@
 <script type="x/template" id="vue-popper">
-	<div class="pull-right m-r-1">
-		<button ref="popperButton" class="btn btn-icon btn-secondary btn-sm" @click="togglePopper()">
-			<i class="fa fa-info"></i>
-		</button>
+	<div>
+		<div ref="trigger" @click="togglePopper()">
+			<slot name="trigger">
+				<!-- Element to trigger popper -->
+			</slot>
+		</div>
 
-		<div ref="popperNode" class="popper" :class="{'popper-visible': isVisible}">
+		<div ref="node" class="popper" :class="{'popper-visible': isVisible}">
 			<h3 class="popper-title">
 				<slot name="title">
 					<!-- Title to display in the popper -->
@@ -15,7 +17,7 @@
 					<!-- Content to display in the popper -->
 				</slot>
 			</div>
-			<div class="popper__arrow" ref="popperArrow"></div>
+			<div class="popper__arrow" ref="arrow"></div>
 		</div>
 	</div>
 </script>
