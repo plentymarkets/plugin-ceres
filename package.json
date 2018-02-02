@@ -37,8 +37,8 @@
     "gulp-util": "^3.0.7",
     "jquery-lazyload": "^1.9.7",
     "q": "^1.5.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^1.1.2"
   },
   "dependencies": {
     "accounting": "^0.4.1",
@@ -55,7 +55,8 @@
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.4.3",
-    "vue": "^2.5.12",
+    "vue": "^2.5.13",
+    "vue-script2": "^2.0.1",
     "vuex": "^3.0.1"
   }
 }

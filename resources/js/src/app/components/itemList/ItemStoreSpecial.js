@@ -36,7 +36,7 @@ Vue.component("item-store-special", {
     methods: {
         getLabel()
         {
-            if (this.storeSpecial.id === 1)
+            if (this.storeSpecial.id === 1 && this.recommendedRetailPrice)
             {
                 const percent = this.getPercentageSale();
 
@@ -52,7 +52,7 @@ Vue.component("item-store-special", {
         getPercentageSale()
         {
             // eslint-disable-next-line
-            const percent = (1 - this.variationRetailPrice / this.recommendedRetailPrice) * -100;
+            let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value ) * -100;
 
             return accounting.formatNumber(percent, this.decimalCount, "");
         }

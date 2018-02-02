@@ -64,6 +64,11 @@
             "description"   : "Add additional content on the cancellation rights page."
         },
         {
+            "key"           : "StaticPages.CancellationForm",
+            "name"          : "Static Pages: Cancellation form",
+            "description"   : "Add additional content on the cancellation form page."
+        },
+        {
             "key"           : "StaticPages.LegalDisclosure",
             "name"          : "Static Pages: Legal disclosure",
             "description"   : "Add additional content on the legal disclosure page."

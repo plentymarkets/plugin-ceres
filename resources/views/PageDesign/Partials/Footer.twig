@@ -114,6 +114,11 @@
             <div class="static-link-list">
                 {% autoescape false %}
                     <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
+                    {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
+                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                    {% else %}
+                        <a href="/cancellation-form">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                    {% endif %}
                     <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
                     <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
                     <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>

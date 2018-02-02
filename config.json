@@ -375,6 +375,20 @@
         "default"   : ""
     },
     {
+        "tab"       : "Footer",
+        "key"       : "footer.cancellation_use_pdf",
+        "label"     : "Use PDF cancellation form",
+        "type"      : "checkbox",
+        "default"   : false
+    },
+    {
+        "tab"       : "Footer",
+        "key"       : "footer.cancellation_pdf_path",
+        "label"     : "URL to PDF file",
+        "type"      : "text",
+        "default"   : "Insert path"
+    },
+    {
         "tab"           : "Item view",
         "key"           : "item.name",
         "label"         : "Item name",
@@ -1402,6 +1416,35 @@
         "tab"       : "SEO",
         "key"       : "meta.en.description_cancel_rights",
         "label"     : "Meta description for cancellation rights (EN)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"                         : "SEO",
+        "key"                         : "meta.robots_cancel_form",
+        "label"                       : "Robots for cancellation form",
+        "type"                        : "dropdown",
+        "possibleValues"              :
+        {
+          "all"                       : "all",
+          "index"                     : "index",
+          "nofollow"                  : "nofollow",
+          "noindex"                   : "noindex",
+          "noindex, nofollow"          : "noindex, nofollow"
+        },
+        "default"                     : "all"
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.de.description_cancel_form",
+        "label"     : "Meta description for cancellation form (DE)",
+        "type"      : "textarea",
+        "default"   : ""
+    },
+    {
+        "tab"       : "SEO",
+        "key"       : "meta.en.description_cancel_form",
+        "label"     : "Meta description for cancellation form (EN)",
         "type"      : "textarea",
         "default"   : ""
     },

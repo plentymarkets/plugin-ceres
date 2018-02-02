@@ -24,7 +24,8 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {
                 countryId: null,
-                stateId: null
+                stateId: null,
+                addressSalutation: 0
             },
             isDisabled: false
         };
