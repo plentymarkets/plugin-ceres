@@ -93,8 +93,8 @@
 				</div>
 
 				<div class="col-xs-12 col-md-3 send-mail">
-					<button type="submit" class="btn btn-primary btn-block send-btn" :disabled="disabledSend" @click="validate({{ gCapture | length > 0 }})">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+					<button type="submit" class="btn btn-primary btn-block send-btn" :disabled="waiting" @click="validate({{ gCapture | length > 0 }})">
+						<i v-waiting-animation="waiting" class="fa fa-paper-plane-o" aria-hidden="true"></i> 
 						{{ trans("Ceres::Template.contactSend") }}
 					</button>
 				</div>

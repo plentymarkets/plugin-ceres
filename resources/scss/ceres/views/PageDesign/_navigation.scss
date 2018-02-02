@@ -292,8 +292,9 @@ nav.navbar.megamenu {
 						column-gap 		: .5em;
 						column-rule 	: 1px solid #dcdbd7;
 						display 		: none;
-						overflow 		: hidden;
 						padding 		: 1em;
+						min-height		: 10em;
+						max-height		: 50em;  
 
 						>li {
 							display 	 : inline-block;

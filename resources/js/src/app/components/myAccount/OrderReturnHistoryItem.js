@@ -1,3 +1,5 @@
+import TranslationService from "services/TranslationService";
+
 Vue.component("order-return-history-item", {
 
     props: {
@@ -33,15 +35,15 @@ Vue.component("order-return-history-item", {
     {
         toggleNaming(element)
         {
-            if (document.getElementById(element).innerText === Translations.Template.myAccountReturnShowMore)
+            if (document.getElementById(element).innerText === TranslationService.translate("Ceres::Template.myAccountReturnShowMore"))
             {
                 this.itemsToRender = this.returnOrder.order.orderItems;
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
+                document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.myAccountReturnShowLess");
             }
             else
             {
                 this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
+                document.getElementById(element).innerText = TranslationService.translate("Ceres::Template.myAccountReturnShowMore");
             }
         },
 

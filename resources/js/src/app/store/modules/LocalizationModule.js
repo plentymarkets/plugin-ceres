@@ -1,4 +1,5 @@
 import ApiService from "services/ApiService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -83,7 +84,8 @@ const getters =
             for (const index in sate.shopLanguageList)
             {
                 const languageKey = sate.shopLanguageList[index];
-                const languageName = Translations.Template[languageKey];
+                const languageName = TranslationService.translate("Ceres::Template." + languageKey);
+
                 // TODO get css class from config
                 const language =
                     {
