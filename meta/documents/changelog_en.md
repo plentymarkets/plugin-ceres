@@ -1,5 +1,14 @@
 # Release Notes for Ceres
 
+## v2.1.5 (2018-02-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.4...2.1.5" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the pagination wasn't displayed correctly when using the setting **Show varations by type: Dynamically**. This has been fixed.
+- Due to an error the links in the footer of the online store weren't clickable. This has been fixed.
+- Due to missing JavaScript features using the Internet Explorer was limited. This has been fixed.
+- Due to a different behaviour of the browser Internet Explorer compared to other browsers it was not possible to save the shipping country for an address. Furthermore, there has been a problem when selecting Company from the Salutation drop-down. This has been fixed.
+
 ## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed

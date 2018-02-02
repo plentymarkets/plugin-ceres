@@ -176,13 +176,13 @@
 
             if ( vueApp.$el.id !== "vue-app")
             {
-                rootElement.remove();
+                rootElement.parentNode.removeChild(rootElement);
                 errorElement.style.display = "block";
             }
             else
             {
                 document.body.replaceChild( vueApp.$el, rootElement );
-                errorElement.remove();
+                errorElement.parentNode.removeChild(errorElement);
             }
         </script>
     </body>
