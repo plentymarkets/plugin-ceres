@@ -3,6 +3,12 @@
 		<div ref="trigger" @click="togglePopper()">
 			<slot name="trigger">
 				<!-- Element to trigger popper -->
+
+				<!-- Default element if no element is set -->
+					<button class="btn btn-icon btn-secondary btn-sm">
+						<i class="fa fa-info"></i>
+					</button>
+				<!-- / -->
 			</slot>
 		</div>
 
