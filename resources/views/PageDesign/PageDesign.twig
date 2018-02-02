@@ -177,7 +177,7 @@
 
             if ( vueApp.$el.id !== "vue-app")
             {
-                rootElement.remove();
+                rootElement.parentNode.removeChild(rootElement);
                 errorElement.style.display = "block";
             }
             else
