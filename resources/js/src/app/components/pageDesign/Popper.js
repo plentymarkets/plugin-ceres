@@ -18,15 +18,14 @@ Vue.component("popper", {
 	{
         this.$nextTick(() =>
         {
-			// eslint-disable-next-line
-			this.popper = new Popper(this.$refs.trigger, this.$refs.node, {
-				placement: this.placement,
-				modifiers: {
-					arrow: {
-						element: this.$refs.arrow
-					}
-				}
-			});
+            this.popper = new Popper(this.$refs.trigger, this.$refs.node, {
+                placement: this.placement,
+                modifiers: {
+                    arrow: {
+                        element: this.$refs.arrow
+                    }
+                }
+            });
         });
     },
 

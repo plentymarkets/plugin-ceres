@@ -14,7 +14,12 @@
                 <h1>
                     {{ trans("Ceres::Template.accRegisterAccount") }}
 
-                    <popper template="#vue-popper" placement="bottom" v-cloak>
+                    <popper template="#vue-popper" placement="bottom" v-cloak class="pull-right">
+                        <div slot="trigger">
+                            <button class="btn btn-icon btn-secondary btn-sm">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </div>
                         <div slot="title">
                             {{ trans("Ceres::Template.generalContactInformations") }}
                         </div>
