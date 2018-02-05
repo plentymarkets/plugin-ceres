@@ -403,6 +403,19 @@
     },
     {
         "tab"           : "Item view",
+        "key"           : "item.displayName",
+        "label"         : "Name of an item to display",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "itemName"             : "Item name",
+            "variationName"        : "Variation name",
+            "itemNameVariationName": "Item name and variation name"
+        },
+        "default"                  : "itemName"
+    },
+    {
+        "tab"           : "Item view",
         "key"           : "item.name",
         "label"         : "Item name",
         "type"          : "dropdown",

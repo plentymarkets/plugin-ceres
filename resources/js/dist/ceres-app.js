@@ -10935,7 +10935,7 @@ Vue.component("add-item-to-basket-overlay", {
 
     delimiters: ["${", "}"],
 
-    props: ["basketAddInformation", "configItemName", "template"],
+    props: ["basketAddInformation", "template"],
 
     data: function data() {
         return {
@@ -10953,9 +10953,7 @@ Vue.component("add-item-to-basket-overlay", {
         },
         itemName: function itemName() {
             if (this.isLastBasketEntrySet) {
-                var texts = this.latestBasketEntry.item.texts;
-
-                return this.$options.filters.itemName(texts, this.configItemName);
+                return this.$options.filters.itemName(this.latestBasketEntry.item);
             }
 
             return "";
@@ -11429,7 +11427,7 @@ Vue.component("basket-list-item", {
             return img;
         },
         altText: function altText() {
-            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+            var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
 
             return altText;
         },
@@ -12822,7 +12820,7 @@ Vue.component("contact-form", {
             message: "",
             orderId: "",
             cc: false,
-            disabledSend: false
+            waiting: false
         };
     },
     created: function created() {
@@ -12849,8 +12847,7 @@ Vue.component("contact-form", {
         sendMail: function sendMail() {
             var _this2 = this;
 
-            this.disabledSend = true;
-            this.onSendIcon();
+            this.waiting = true;
 
             var mailObj = {
                 subject: this.subject,
@@ -12862,13 +12859,11 @@ Vue.component("contact-form", {
             };
 
             ApiService.post("/rest/io/customer/contact/mail", { contactData: mailObj, template: "Ceres::Customer.Components.Contact.ContactMail" }, { supressNotifications: true }).done(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
+                _this2.waiting = false;
                 _this2.clearFields();
                 NotificationService.success(_TranslationService2.default.translate("Ceres::Template.contactSendSuccess"));
             }).fail(function (response) {
-                _this2.disabledSend = false;
-                _this2.onSendIcon();
+                _this2.waiting = false;
 
                 if (response.validation_errors) {
                     _this2._handleValidationErrors(response.validation_errors);
@@ -12884,15 +12879,6 @@ Vue.component("contact-form", {
             this.message = "";
             this.orderId = "";
             this.cc = false;
-        },
-        onSendIcon: function onSendIcon() {
-            var sendIcon = $(".send-btn i");
-
-            if (this.disabledSend) {
-                sendIcon.removeClass("fa-paper-plane-o").addClass("fa-spinner fa-spin");
-            } else {
-                sendIcon.removeClass("fa-spinner fa-spin").addClass("fa-paper-plane-o");
-            }
         },
         _handleValidationErrors: function _handleValidationErrors(validationErrors) {
             _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
@@ -14043,7 +14029,7 @@ Vue.component("item-image-carousel", {
             });
         },
         getAltText: function getAltText(image) {
-            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data.texts, App.config.itemName);
+            var altText = image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation.documents[0].data);
 
             return altText;
         }
@@ -14862,7 +14848,7 @@ Vue.component("item-search", {
             result = JSON.parse(result);
             var suggestions = {
                 suggestions: $.map(result.data.documents, function (dataItem) {
-                    var value = _this3.$options.filters.itemName(dataItem.data.texts, App.config.itemName);
+                    var value = _this3.$options.filters.itemName(dataItem.data);
 
                     return {
                         value: value,
@@ -16993,16 +16979,34 @@ Vue.filter("itemImages", function (images, accessor) {
 },{}],92:[function(require,module,exports){
 "use strict";
 
-Vue.filter("itemName", function (item, selectedName) {
-    if (selectedName == 0 && item.name1 !== "") {
-        return item.name1;
-    } else if (selectedName == 1 && item.name2 !== "") {
-        return item.name2;
-    } else if (selectedName == 2 && item.name3 !== "") {
-        return item.name3;
+Vue.filter("itemName", function (_ref) {
+    var _ref$texts = _ref.texts,
+        name1 = _ref$texts.name1,
+        name2 = _ref$texts.name2,
+        name3 = _ref$texts.name3,
+        name = _ref.variation.name;
+    var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.itemName;
+    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.itemDisplayName;
+
+    if (itemDisplayName === "variationName" && name && name.length) {
+        return name;
     }
 
-    return item.name1;
+    var itemName = "";
+
+    if (selectedName === 1 && name2 !== "") {
+        itemName = name2;
+    } else if (selectedName === 2 && name3 !== "") {
+        itemName = name3;
+    } else {
+        itemName = name1;
+    }
+
+    if (itemDisplayName === "itemNameVariationName" && name && name.length) {
+        itemName = itemName + " " + name;
+    }
+
+    return itemName;
 });
 
 },{}],93:[function(require,module,exports){

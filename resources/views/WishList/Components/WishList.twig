@@ -1,9 +1,6 @@
 <script type="x/template" id="vue-wish-list">
 
     <div>
-
-        {% set configItemName = config("Ceres.item.name") %}
-
         {% include "Ceres::WishList.Components.WishListItem" %}
 
         <transition name="wish-list-no-items-transition">
