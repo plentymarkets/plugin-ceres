@@ -2,8 +2,6 @@
 {{ component( "Ceres::ItemList.Components.CategoryImageCarousel") }}
 {{ component( "Ceres::ItemList.Components.ItemStoreSpecial" ) }}
 
-{% set configItemName = config("Ceres.item.name") %}
-
 {% set lang = services.sessionStorage.getLang() %}
 {% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
 
@@ -27,7 +25,7 @@
                     <div class="square-inner main-image">
                         <category-image-carousel template="#vue-category-image-carousel"
                                                     :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="texts | itemName({{ configItemName }})"
+                                                    :alt-text="itemData | itemName"
                                                     :item-url="itemData | itemURL"
                                                     :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                                                     :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
@@ -40,33 +38,33 @@
 
             <!-- STORE SPECIALS -->
             <item-store-special v-if="storeSpecial" :store-special="storeSpecial"
-                                :recommended-retail-price="recommendedRetailPrice"
-                                :variation-retail-price="variationRetailPrice"
+                                :recommended-retail-price="itemData.prices.rrp"
+                                :variation-retail-price="itemData.prices.default"
                                 :decimal-count="decimalCount"></item-store-special>
             <!-- ./STORE SPECIALS -->
 
             <!-- ITEM DETAILS -->
             <div class="thumb-content">
                 <a :href="itemData | itemURL" class="thumb-title small">
-                    ${ texts | itemName({{ configItemName }}) }
+                    ${ itemData | itemName }
                 </a>
                 <div class="thumb-meta">
                     <div class="prices">
-                        <div v-if="recommendedRetailPrice > 0" class="price-view-port">
+                        <div v-if="itemData.prices.rrp && itemData.prices.rrp.price.value > 0" class="price-view-port">
                             <del class="crossprice">
-                                ${ itemData.calculatedPrices.formatted.rrpUnitPrice }
+                                ${ itemData.prices.rrp.price.formatted }
                             </del>
                         </div>
 
                         <div class="price">
-                            ${ itemData.calculatedPrices.formatted.defaultUnitPrice } *
+                            ${ itemData.prices.default.unitPrice.formatted } *
                         </div>
                     </div>
 
                     <div class="category-unit-price" v-if="!(itemData.unit.unitOfMeasurement === 'C62' && itemData.unit.content === 1)">
                         <span>${ itemData.unit.content }</span>
                         <span>${ itemData.unit.names.name }</span>
-                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.calculatedPrices.formatted.basePrice }</span>
+                        <span v-if="itemData.variation.mayShowUnitPrice">| ${ itemData.prices.default.basePrice }</span>
                     </div>
                 </div>
                 <add-to-basket :item="itemData" :item-url="itemData | itemURL"></add-to-basket>

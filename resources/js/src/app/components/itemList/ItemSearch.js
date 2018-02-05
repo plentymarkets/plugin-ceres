@@ -1,4 +1,5 @@
 import UrlService from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("item-search", {
 
@@ -57,8 +58,8 @@ Vue.component("item-search", {
 
         updateTitle(searchString)
         {
-            document.querySelector("#searchPageTitle").innerHTML = Translations.Template.generalSearchResults + " " + searchString;
-            document.title = Translations.Template.generalSearchResults + " " + searchString + " | " + App.config.shopName;
+            document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString;
+            document.title = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
         },
 
         initAutocomplete()
@@ -101,7 +102,7 @@ Vue.component("item-search", {
                 {
                     suggestions: $.map(result.data.documents, dataItem =>
                     {
-                        const value = this.$options.filters.itemName(dataItem.data.texts, App.config.itemName);
+                        const value = this.$options.filters.itemName(dataItem.data);
 
                         return {
                             value: value,

@@ -1,5 +1,5 @@
 {
-    "version"           : "2.0.3",
+    "version"           : "2.2.0",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
     "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
@@ -62,6 +62,11 @@
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
             "description"   : "Add additional content on the cancellation rights page."
+        },
+        {
+            "key"           : "StaticPages.CancellationForm",
+            "name"          : "Static Pages: Cancellation form",
+            "description"   : "Add additional content on the cancellation form page."
         },
         {
             "key"           : "StaticPages.LegalDisclosure",
@@ -413,6 +418,11 @@
             "name"          : "Order confirmation: Before order details",
             "description"   : "Add content before the order details on the order confirmation page.",
             "multiple"      : false
+        },
+        {
+            "key"           : "OrderConfirmation.AdditionalShippingInformation",
+            "name"          : "Order confirmation: Additional shipping information",
+            "description"   : "Add additional shipping information to the order details on the order confirmation page."
         },
         {
             "key"           : "OrderConfirmation.AdditionalPaymentInformation",

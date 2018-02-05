@@ -1,5 +1,96 @@
 # Release Notes for Ceres
 
+## v2.1.5 (2018-02-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.4...2.1.5" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the pagination wasn't displayed correctly when using the setting **Show varations by type: Dynamically**. This has been fixed.
+- Due to an error the links in the footer of the online store weren't clickable. This has been fixed.
+- Due to missing JavaScript features using the Internet Explorer was limited. This has been fixed.
+- Due to a different behaviour of the browser Internet Explorer compared to other browsers it was not possible to save the shipping country for an address. Furthermore, there has been a problem when selecting Company from the Salutation drop-down. This has been fixed.
+
+## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the mega menu wasn't displayed correctly in Firefox. This has been fixed.
+
+## v2.1.3 (2018-01-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.2...2.1.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The sorting value **Item position** in the **Item view** tab has been removed from the recommended sorting. Sorting by position can now be configured using the position of the variation.
+
+### Fixed
+
+- Due to an error the wish list wasn't initialised correctly. This has been fixed.
+
+## v2.1.2 (2018-01-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.1...2.1.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The setting **Combine variations** in the **Item view** tab of the configuration has been renamed to **Dynamically**.
+
+### Fixed
+
+- The shipping costs in the shipping method selection of the checkout will now be updated correctly.
+- The estimated shipping date in the **Order overview** will not be displayed when there is no estimated shipping date in the order data.
+- Due to an error the back-to-top button has been reloaded repeatedly. This has been fixed.
+- Due to an error the item view hasn't been displayed correctly when certain item information was missing. This has been fixed.
+
+## v2.1.1 (2018-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.0...2.1.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, item URLs haven't been generated correctly without a defined URL path. This has been fixed.
+
+## v2.1.0 (2018-01-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.3...2.1.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- **SEO:** The name of the online store has been added to the homepage as an h1 header.
+
+### Changed
+
+- Addresses that cannot be selected will not be displayed in the drop-down menus of the address components anymore.
+- The overlay for deleting addresses has been re-designed to be more up-to-date.
+- The alternative texts set in the back end will be used for item images displayed in the shopping cart, on the category view and on the single item view.
+- Item lists will display a different number of items depending on the resolution.
+- **SEO:** The headers of various pages have been updated and arranged into the correct order.
+- The font size of numbers in the filters has been increased in order to be more readable.
+
+### Fixed
+
+- Addresses entered in the checkout will now be validated correctly again.
+- Images in item lists will now be loaded correctly as soon as they are visible.
+- The items displayed in the slider of the home page will now be displayed correctly.
+- Due to an error, filters haven't been rendered correctly. This has been fixed.
+- Due to an error, the single item view wasn’t displayed for items for which no item template was set. This has been fixed.
+
+### TODO
+
+- Due to changes in the search logic, facet links must be saved for the client. In the centralised login, go to **System » Client » Select client » Services » Facet links**. Select a facet on the left and click on **Link facet**.
+
+
+## v2.0.3 (2017-12-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.2...2.0.3" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Added possibility in the **Checkout**  for payment plugins to deactivate themselves.
+- Upon registering with an already existing email, the overly stays upon to better perceive the error message.
+- Items and variations can now be displayed dynamically. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">Customising the item view</a>.
+
+### Fixed
+
+- In the **Wishlist**, images of variations are displayed correctly.
+- The button to remove an item from the **Wishlist** is now centered.
+- On iOS devices, the cursor does not jump on modals anymore. iOS [Bug report](https://bugs.webkit.org/show_bug.cgi?id=176896).
+- Fixed error where the **Shopping cart preview** did not open occasionally after button click.
+- Fixed error where the **Shopping cart preview** did not open after putting an item into the shopping cart (if configurated).
+- Shipping costs are linked correctly in the single item view (if configurated).
+- Fixed error where some pages did not use full height (leading to a white margin at the bottom).
+- Styles in Firefox are displayed correctly.
+
 ## v2.0.2 (2017-12-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.0.1...2.0.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

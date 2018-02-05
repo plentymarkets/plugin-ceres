@@ -84,18 +84,9 @@ Vue.component("mobile-navigation", {
         {
             this.closeNavigation();
 
-            if (!App.isCategoryView)
+            if (App.isCategoryView && category.children && category.showChildren)
             {
-                window.open(category.url, "_self");
-            }
-            else
-            {
-                this.$store.dispatch("selectCategory", {category});
-
-                if (category.children && category.showChildren)
-                {
-                    this.slideTo(category.children);
-                }
+                this.slideTo(category.children);
             }
         },
 

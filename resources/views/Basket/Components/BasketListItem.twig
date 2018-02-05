@@ -2,7 +2,6 @@
 
 {% set itemsData = config("Ceres.basket.item_data")|split(', ') %}
 {% set showItemVariation = config("Ceres.basket.variations") %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set basketDetailsData = config("Ceres.basket.item_data")|split(', ') %}
 
 <script type="x/template" id="vue-basket-list-item">
@@ -20,7 +19,7 @@
                     <div class="meta-container">
                         <div>
                             <a :href="basketItem.variation.data | itemURL" class="item-name">
-                                ${ basketItem.variation.data.texts | itemName({{ configItemName }}) }
+                                ${ basketItem.variation.data.texts | itemName }
                             </a>
     
                             <div class="item-base-price">

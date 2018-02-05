@@ -1,5 +1,9 @@
 .checkout{
 
+	.checkout-content {
+		background: $white;
+	}
+
 	.basket-items-list .item{
 		padding-left: 0;
 		padding-right: 0;
@@ -17,10 +21,14 @@
 	}
 
 	.error {
-		background: $brand-danger;
-		color: $white;
+		background: $brand-danger !important;
+		color: $white !important;
 		border-radius: .1rem;
 		transition: all .3s ease;
+
+		& .text-muted {
+			color: $white !important;
+		}
 
 		&.form-check-label {
 			padding: .5em 1.75rem;

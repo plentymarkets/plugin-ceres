@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -41,14 +42,6 @@ Vue.component("add-to-basket", {
         this.$options.template = this.template;
     },
 
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.checkMinMaxOrderQuantity();
-        });
-    },
-
     methods:
     {
         /**
@@ -76,7 +69,11 @@ Vue.component("add-to-basket", {
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                        NotificationService.error(
+                            TranslationService.translate(
+                                "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                            )
+                        ).closeAfter(5000);
                     });
             }
         },
@@ -112,17 +109,7 @@ Vue.component("add-to-basket", {
         updateQuantity(value)
         {
             this.quantity = value;
-        },
-
-        /**
-         * Check min - max order quantity
-         */
-        checkMinMaxOrderQuantity()
-        {
-            this.item.variation.minimumOrderQuantity = this.item.variation.minimumOrderQuantity === 0 || this.item.variation.minimumOrderQuantity === 1 ? null : this.item.variation.minimumOrderQuantity;
-            this.item.variation.maximumOrderQuantity = this.item.variation.maximumOrderQuantity === 0 ? null : this.item.variation.maximumOrderQuantity;
         }
-
     },
 
     computed:
@@ -135,6 +122,16 @@ Vue.component("add-to-basket", {
         hasChildren()
         {
             return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+        },
+
+        canBeAddedToBasket()
+        {
+            const isSalable             = this.item.filter && this.item.filter.isSalable;
+            const hasChildren           = this.item.filter && this.item.filter.hasChildren;
+            const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
+            const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
+
+            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
         }
     },
 

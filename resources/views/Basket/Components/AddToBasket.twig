@@ -4,12 +4,12 @@
 
     <div>
 
-        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container hidden-md-down" v-if="(!showQuantity && useLargeScale) && (!hasChildren && item.filter.isSalable) && (item.variation.minimumOrderQuantity == null && item.variation.maximumOrderQuantity == null)"
+        <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}" @click="addToBasket()">
             <i v-waiting-animation="waiting" class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
         </div>
 
-        <div class="add-to-basket-lg-container hidden-md-down" v-if="(!showQuantity && useLargeScale) && (hasChildren || !item.filter.isSalable || item.variation.minimumOrderQuantity != null || item.variation.maximumOrderQuantity != null)"
+        <div class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.showItem") }}" @click="directToItem()">
             <i class="fa fa-arrow-right fa-lg mobile-icon-right"></i>
         </div>
@@ -43,11 +43,11 @@
         <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale">
 
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': waiting}" v-if="(!hasChildren && item.filter.isSalable) && (item.variation.minimumOrderQuantity == null && item.variation.maximumOrderQuantity == null)" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
+                <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
                     <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.addToBasket") }}</span>
                 </button>
-                <button type="button" v-if="hasChildren || item.variation.minimumOrderQuantity != null || item.variation.maximumOrderQuantity != null || !item.filter.isSalable" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="directToItem()">
                     <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
                 </button>

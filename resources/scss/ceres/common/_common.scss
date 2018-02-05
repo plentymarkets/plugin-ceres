@@ -8,7 +8,9 @@ body .wrapper-main{
     &.basket,
     &.checkout,
     &.myaccount {
-        background-color:$white;
+        &:not(.checkout) {
+            background-color:$white;
+        }
         color: $gray-darker;
         margin-top: 30px;
         padding-bottom: 30px;

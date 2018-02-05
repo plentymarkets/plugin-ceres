@@ -1,26 +1,20 @@
 const ApiService = require("services/ApiService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("order-history", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "orderList",
-        "itemsPerPage",
-        "showFirstPage",
-        "showLastPage",
-        "template"
-    ],
+    props: {
+        template: String
+    },
 
     data()
     {
         return {
-            page: 1,
-            pageMax: 1,
-            countStart: 0,
-            countEnd: 0,
             currentOrder: null,
-            isLoading: true
+            isLoading: false
         };
     },
 
@@ -29,36 +23,12 @@ Vue.component("order-history", {
         this.$options.template = this.template;
     },
 
-    mounted()
+    methods:
     {
-        this.$nextTick(() =>
-        {
-            this.itemsPerPage = this.itemsPerPage || 10;
-            this.pageMax = Math.ceil(this.orderList.totalsCount / this.itemsPerPage);
-            this.setOrders(this.orderList);
-        });
-    },
-
-    methods: {
-
-        setOrders(orderList)
-        {
-            this.$emit("orderListChanged", orderList);
-            this.page = this.orderList.page;
-            this.countStart = ((this.orderList.page - 1) * this.itemsPerPage) + 1;
-            this.countEnd = this.orderList.page * this.itemsPerPage;
-
-            if (this.countEnd > this.orderList.totalsCount)
-            {
-                this.countEnd = this.orderList.totalsCount;
-            }
-        },
-
         setCurrentOrder(order)
         {
             $("#dynamic-twig-content").html("");
             this.isLoading = true;
-
             this.currentOrder = order;
 
             Vue.nextTick(() =>
@@ -81,26 +51,11 @@ Vue.component("order-history", {
             {
                 if (paymentStates[paymentState].typeId == 4)
                 {
-                    return Translations.Template["paymentStatus_" + paymentStates[paymentState].value];
+                    return TranslationService.translate("Ceres::Template.paymentStatus_" + paymentStates[paymentState].value);
                 }
             }
 
             return "";
-        },
-
-        showPage(page)
-        {
-            if (page <= 0 || page > this.pageMax)
-            {
-                return;
-            }
-
-            ApiService
-                .get("rest/io/order?page=" + page + "&items=" + this.itemsPerPage)
-                .done(response =>
-                {
-                    this.setOrders(response);
-                });
         }
     }
 });

@@ -92,7 +92,7 @@
                     {{ LayoutContainer.show("Ceres::Footer.RowOne") }}
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-3">
+            <div class="col-xs-12 col-sm-3">
                 <div class="footer-column row">
                     {% set rowTwo = LayoutContainer.show("Ceres::Footer.RowTwo") %}
                     
@@ -114,6 +114,11 @@
             <div class="static-link-list">
                 {% autoescape false %}
                     <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
+                    {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
+                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                    {% else %}
+                        <a href="/cancellation-form">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                    {% endif %}
                     <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
                     <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
                     <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
@@ -126,7 +131,7 @@
                 <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg">
             </a>
             <br>
-            <small>&copy; Copyright 2017 | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
+            <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
         </div>
     </div>
 </div>
