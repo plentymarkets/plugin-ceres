@@ -197,8 +197,7 @@ function removeDefaultLinks()
 function injectGridstackMarkup()
 {
     // select drag & drop areas
-    jQuery('#page-body > .container-max > .row > .col').each(function(i)
-        // jQuery('.mkt-homepage').each(function(i)
+    jQuery('[data-builder-container]').each(function(i)
     {
         jQuery(this).css('position', 'relative');
 

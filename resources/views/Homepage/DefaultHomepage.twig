@@ -73,7 +73,7 @@
 
     <div class="home container-max">
         <div class="row">
-            <div class="col">
+            <div class="col" data-builder-container>
 
                 <div class="homepage-title m-b-1">
                     <h1>{{ config("Ceres.header.company_name") }}</h1>
@@ -218,6 +218,7 @@
                         </div>
                     {% endif %}
                 </div>
+                <hr>
 
                 {% set homepageContainer4 = LayoutContainer.show("Ceres::Homepage.Container4") %}
                 {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
@@ -276,7 +277,9 @@
                             </div>
                         {% endif %}
                     </div>
+                    <hr>
                 {% endif %}
+
 
                 {% set homepageContainer6 = LayoutContainer.show("Ceres::Homepage.Container6") %}
                 {% if categoryList1 is not empty or homepageContainer6 | trim is not empty %}
