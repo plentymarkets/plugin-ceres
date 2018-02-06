@@ -93,7 +93,7 @@ body {
 			}
 		}
 
-		&.open-smart {
+		&.open-hover {
 			@include media-breakpoint-down(xs) {
 				position: fixed;
 			}

@@ -741,8 +741,8 @@
         "type"              : "dropdown",
         "possibleValues"    :
         {
-            "right"         : "Right",
-            "smart"         : "Smart"
+            "hover"         : "Hover",
+            "right"         : "Right"
         },
         "default"           : "right"
     },
