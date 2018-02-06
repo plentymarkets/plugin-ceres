@@ -169,7 +169,8 @@ function addBackendEventListeners()
     jQuery('body').on('shopbuilder_zoom', function(event)
     {
         var value = event.originalEvent.detail.value;
-        jQuery('body').css('zoom', value * 100 + '%')
+        jQuery('body').css('zoom', value * 100 + '%');
+        updateContainerDimensions();
     })
 
 }
@@ -191,8 +192,8 @@ function addContentWidget(element)
 
     setDragCursorToChildElements(gridStackItem);
     addContextMenu(gridStackItem);
-
     jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
+    updateContainerDimensions();
 }
 
 /**
