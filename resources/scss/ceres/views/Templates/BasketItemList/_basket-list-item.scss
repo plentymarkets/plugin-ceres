@@ -63,27 +63,36 @@
 			}	
 		}
 	
-		.meta-container {
-			display: flex;
+		.meta-container-wrapper {
 			width: 100%;
 			min-width: 0;
-	
-			& > div {
-				width: 100%;
-				position: relative;
-			}
-	
-			.item-name {
-				font-weight: 700;
-				font-size: 80%;
-			}
 
-			.item-base-price {
-				font-size: 80%;
-			}
+			.meta-container-wrapper-inner {
+				display: flex;
 
-			.item-small-prices {
-				font-size: 75%;
+				.meta-container {
+					display: flex;
+					width: 100%;
+					min-width: 0;
+			
+					& > div {
+						width: 100%;
+						position: relative;
+					}
+			
+					.item-name {
+						font-weight: 700;
+						font-size: 80%;
+					}
+		
+					.item-base-price {
+						font-size: 80%;
+					}
+		
+					.item-small-prices {
+						font-size: 75%;
+					}
+				}
 			}
 		}
 

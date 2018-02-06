@@ -13,9 +13,8 @@
                 <img class="img-basket-small" v-if="image" :src="image.url" :alt="altText">
             </div>
 
-            <div style="width: 100%; min-width: 0">
-                <div style="display: flex">
-    
+            <div class="meta-container-wrapper">
+                <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div>
                             <a :href="basketItem.variation.data | itemURL" class="item-name">

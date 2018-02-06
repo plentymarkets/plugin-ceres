@@ -200,6 +200,8 @@
 		}
 
 		.control-basket{
+			position: relative;
+
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
 				color: $top-bar-basket-color;

@@ -59,7 +59,7 @@
                         <wish-list-count :init-ids="{{ services.wishList.getItemWishList() | json_encode }}"></wish-list-count>
                     </li>
                 {% endif %}
-                <li class="list-inline-item control-basket" style="position: relative">
+                <li class="list-inline-item control-basket">
                     <a v-toggle-basket-preview href="#" class="toggle-basket-preview">
                         {% if config("Ceres.header.basket_values") != "sum" %}
                             <span class="badge-right" v-basket-item-quantity="this.$store.state.basket.data.itemQuantity">0</span>
