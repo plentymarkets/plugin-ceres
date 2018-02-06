@@ -13,7 +13,7 @@ body
 body.loading
 {
     background: url("https://data.whicdn.com/images/124546671/original.gif");
-    background-color: #f7f7f9;
+    background-color: #f3f3f3;
     background-position: center center;
 }
 
@@ -25,7 +25,7 @@ body.loading
 .grid-stack-item
 {
     position: absolute !important;
-    width: calc(100% - 30px);
+    width: 100%;
     transition: all 0.1s ease;
 }
 

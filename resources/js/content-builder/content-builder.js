@@ -1,6 +1,7 @@
 $.noConflict(); // enable save mode
 
 var widgetTemplates; // holds static markup for sidebar widgets
+var resizeTimer // delay for recalculating gridstack dimensions on resize
 
 // entry point
 jQuery(document).ready(function()
@@ -15,6 +16,36 @@ function initCeresForGridstack()
     removeDefaultLinks();
     injectGridstackMarkup();
     addBackendEventListeners();
+    addWindowResizeListener();
+}
+
+function addWindowResizeListener()
+{
+    $(window).on('resize', function(e)
+    {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function()
+        {
+            updateContainerDimensions();
+        }, 100);
+
+    });
+}
+
+function updateContainerDimensions()
+{
+    jQuery('[data-builder-container]').each(function()
+    {
+        jQuery(this).find('> *').each(function()
+        {
+            // TODO: @vwiebe fix gridstack scope
+            jQuery('.grid-stack-0')
+                    .data('gridstack')
+                    .resize(jQuery(this),
+                            1,
+                            Math.round(jQuery(this).find('.grid-stack-item-content > *').outerHeight(true) / 40));
+        });
+    });
 }
 
 // get static markup for loaded sidebar widgets
