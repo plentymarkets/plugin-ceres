@@ -8,8 +8,8 @@ body .wrapper-main{
     &.basket,
     &.checkout,
     &.myaccount {
-        &:not(.checkout) {
-            background-color:$white;
+        &:not(.checkout):not(.basket) {
+            background-color: $white;
         }
         color: $gray-darker;
         margin-top: 30px;
