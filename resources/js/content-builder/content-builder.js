@@ -99,6 +99,8 @@ function addDeleteButton(element)
     {
         // todo: @vwiebe fix dropzone scope
         jQuery('.grid-stack-0').data('gridstack').removeWidget(jQuery(this).closest('.grid-stack-item'));
+
+        dispatchTerraEvent('shopbuilder_delete');
     });
 }
 
@@ -132,12 +134,18 @@ function addEditButton(element)
             }
         };
 
-        // trigger properties event
-        var customEvent = new CustomEvent('CustomEvent');
-        customEvent.initCustomEvent('shopbuilder_open_properties', true, true, propertiesObject);
-        window.parent.window.dispatchEvent(customEvent);
-        jQuery('body').trigger('shopbuilder_open_properties', propertiesObject);
+        dispatchTerraEvent('shopbuilder_open_properties');
     });
+}
+
+/**
+ *
+ * @param event
+ * @param param
+ */
+function dispatchTerraEvent(event, param)
+{
+    window.parent.window.dispatchEvent(new CustomEvent(event, { detail: param }));
 }
 
 function addBackendEventListeners()
@@ -164,18 +172,6 @@ function addBackendEventListeners()
         jQuery('body').css('zoom', value * 100 + '%')
     })
 
-    // open properties
-    jQuery('body').on('shopbuilder_open_properties', function(event, object)
-    {
-        console.log(object);
-    });
-
-    // test
-    // jQuery('.brand-wrapper').append('<button id="testEventButton">trigger event</button>');
-    // jQuery('#testEventButton').on('click', function ()
-    // {
-    //     jQuery('body').trigger('shopbuilder_zoom', 0.5);
-    // });
 }
 
 /**
