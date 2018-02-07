@@ -1,0 +1,62 @@
+[
+	{
+		"identifier": "Ceres::widget1",
+		"label": "Template.accAccountSettings",
+		"tooltip": "Template.accAccountSettings",
+		"previewImageURL": "aaa",
+		"resizable": false,
+		"widgetClass": "Ceres\\Widgets\\NumberInput",
+		"keepAspectRatio": "",
+		"defaultHeight": 200,
+		"settings": {
+			"categoryId": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Template.accAccountSettings",
+				"options": {
+					"tooltip": "Template.accAccountSettings",
+					"defaultValue": "16",
+					"selectBoxValues": [
+						{
+							"value": 100,
+							"label": "Template.accAccountSettings"
+						},
+						{
+							"value": 101,
+							"label": "Template.accAccountSettings"
+						}
+					]
+				}
+			},
+			"categoryId1": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Template.accAccountSettings",
+				"options": {
+					"tooltip": "Template.accAccountSettings",
+					"defaultValue": "16"
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::widget2",
+		"widgetClass": "Ceres\\Widgets\\TextInput",
+		"label": "test widget",
+		"resizable": true,
+		"keepAspectRatio": "",
+		"defaultWidth": 100,
+		"defaultHeight": 200
+	},
+	{
+		"identifier": "widget3",
+		"label": "test widget",
+		"tooltip": "",
+		"previewImageURL": "",
+		"keepAspectRatio": "",
+		"defaultWidth": 100,
+		"defaultHeight": 200,
+		"settings": {
+		}
+	}
+]
