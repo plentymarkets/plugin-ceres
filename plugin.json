@@ -18,6 +18,9 @@
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
+    "runOnBuild"        : [
+      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1"
+    ],
     "dataProviders"     :
     [
         {
