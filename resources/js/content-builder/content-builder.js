@@ -1,7 +1,7 @@
 $.noConflict(); // enable save mode
 
 var widgetTemplates; // holds static markup for sidebar widgets
-var resizeTimer // delay for recalculating gridstack dimensions on resize
+var resizeTimer; // delay for recalculating gridstack dimensions on resize
 
 // entry point
 jQuery(document).ready(function()
@@ -12,7 +12,6 @@ jQuery(document).ready(function()
 // inject all shop-builder functions
 function initCeresForGridstack()
 {
-    initWidgetTemplates();
     removeDefaultLinks();
     injectGridstackMarkup();
     addBackendEventListeners();
@@ -46,17 +45,6 @@ function updateContainerDimensions()
                             Math.round(jQuery(this).find('.grid-stack-item-content > *').outerHeight(true) / 40));
         });
     });
-}
-
-// get static markup for loaded sidebar widgets
-function initWidgetTemplates()
-{
-    widgetTemplates = {
-        'CategoryHighlight': [jQuery('#categoryHighlight').clone()[0].outerHTML, jQuery('#categoryHighlight').outerHeight(true)],
-        'CategoryFeature': [jQuery('#categoryFeature').clone()[0].outerHTML, jQuery('#categoryFeature').outerHeight(true)],
-        'ImageSlider': [jQuery('#imageSlider').clone()[0].outerHTML, jQuery('#imageSlider').outerHeight(true)],
-        'CategoryList': [jQuery('#categoryList').clone()[0].outerHTML, jQuery('#categoryList').outerHeight(true)],
-    };
 }
 
 /**
@@ -153,7 +141,7 @@ function addBackendEventListeners()
     // drop element into iframe
     jQuery('body').on('shopbuilder_drop', function(element)
     {
-        addContentWidget(element.originalEvent.detail.identifier);
+        addContentWidget(element.originalEvent.detail);
     });
 
     // reset iframe
@@ -179,15 +167,13 @@ function addBackendEventListeners()
  * add new content element to iframe
  * @param element
  */
-function addContentWidget(element)
+function addContentWidget(widgetData)
 {
-    // get element markup by element identifier
-    var object = widgetTemplates[element][0];
-    var height = widgetTemplates[element][1];
+    var height = widgetData.defaultHeight;
 
     // wrap element with gridstack containers
     var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + object + '</div>' +
+        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + widgetData.htmlMarkup + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);
@@ -244,7 +230,7 @@ function injectGridstackMarkup()
             addContextMenu(gridStackItem);
 
             // wrap current element with gridstack item markup
-            jQuery(this).wrap(gridStackItem)
+            jQuery(this).wrap(gridStackItem);
 
             ++j;
         });
