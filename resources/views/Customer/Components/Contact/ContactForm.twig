@@ -1,5 +1,5 @@
 {% set mailRegex		= "[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" %}
-{% set gCapture 		= services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set gCapture 		= config("Ceres.global.google_recaptcha_api_key") %}
 {% set contactConfigSet = not config("Ceres.contact.show_data") is empty or config("Ceres.contact.show_data") == "all" %}
 {% set googleApiKey 	= config("Ceres.contact.api_key") %}
 {% set zip				= config("system.company.zip") %}
