@@ -1,17 +1,29 @@
-Vue.filter("itemName", function(item, selectedName)
+Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.itemName, itemDisplayName = App.config.itemDisplayName) =>
 {
-    if (selectedName == 0 && item.name1 !== "")
+    if (itemDisplayName === "variationName" && name && name.length)
     {
-        return item.name1;
-    }
-    else if (selectedName == 1 && item.name2 !== "")
-    {
-        return item.name2;
-    }
-    else if (selectedName == 2 && item.name3 !== "")
-    {
-        return item.name3;
+        return name;
     }
 
-    return item.name1;
+    let itemName = "";
+
+    if (selectedName === 1 && name2 !== "")
+    {
+        itemName = name2;
+    }
+    else if (selectedName === 2 && name3 !== "")
+    {
+        itemName = name3;
+    }
+    else
+    {
+        itemName = name1;
+    }
+
+    if (itemDisplayName === "itemNameVariationName" && name && name.length)
+    {
+        itemName = `${itemName} ${name}`;
+    }
+
+    return itemName;
 });

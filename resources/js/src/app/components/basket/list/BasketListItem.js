@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -35,7 +36,7 @@ Vue.component("basket-list-item", {
 
         altText()
         {
-            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data.texts, App.config.itemName);
+            const altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
 
             return altText;
         },
@@ -117,11 +118,23 @@ Vue.component("basket-list-item", {
 
                         if (this.size === "small")
                         {
-                            this.$store.dispatch("addBasketNotification", {type: "error", message: Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]});
+                            this.$store.dispatch(
+                                "addBasketNotification",
+                                {
+                                    type: "error",
+                                    message: TranslationService.translate(
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                    )
+                                }
+                            );
                         }
                         else
                         {
-                            NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                            NotificationService.error(
+                                TranslationService.translate(
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                )
+                            ).closeAfter(5000);
                         }
 
                         this.waiting = false;

@@ -3,6 +3,7 @@ const ModalService = require("services/ModalService");
 const AddressFieldService = require("services/AddressFieldService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("address-select", {
 
@@ -265,34 +266,34 @@ Vue.component("address-select", {
 
             if (this.modalType === "initial")
             {
-                headline = Translations.Template.orderInvoiceAddressInitial;
+                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressInitial");
             }
             else if (this.addressType === "2")
             {
                 if (this.modalType === "update")
                 {
-                    headline = Translations.Template.orderShippingAddressEdit;
+                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressEdit");
                 }
                 else if (this.modalType === "create")
                 {
-                    headline = Translations.Template.orderShippingAddressCreate;
+                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressCreate");
                 }
                 else
                 {
-                    headline = Translations.Template.orderShippingAddressDelete;
+                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressDelete");
                 }
             }
             else if (this.modalType === "update")
             {
-                headline = Translations.Template.orderInvoiceAddressEdit;
+                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressEdit");
             }
             else if (this.modalType === "create")
             {
-                headline = Translations.Template.orderInvoiceAddressCreate;
+                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressCreate");
             }
             else
             {
-                headline = Translations.Template.orderInvoiceAddressDelete;
+                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressDelete");
             }
 
             this.headline = headline;

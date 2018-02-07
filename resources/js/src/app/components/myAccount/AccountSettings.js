@@ -2,6 +2,8 @@ var ModalService        = require("services/ModalService");
 var APIService          = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("account-settings", {
 
     delimiters: ["${", "}"],
@@ -75,11 +77,15 @@ Vue.component("account-settings", {
                     .done(function(response)
                     {
                         self.clearFieldsAndClose();
-                        NotificationService.success(Translations.Template.accChangePasswordSuccessful).closeAfter(3000);
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.accChangePasswordSuccessful")
+                        ).closeAfter(3000);
                     }).fail(function(response)
                     {
                         self.clearFieldsAndClose();
-                        NotificationService.error(Translations.Template.accChangePasswordFailed).closeAfter(5000);
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.accChangePasswordFailed")
+                        ).closeAfter(5000);
                     });
             }
         },

@@ -5,6 +5,7 @@
   "texts.shortDescription",
   "texts.urlPath",
   "texts.lang",
+  "variation.name",
   "variation.number",
   "variation.availability.names.*",
   "variation.availability.id",

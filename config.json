@@ -233,6 +233,19 @@
     },
     {
         "tab"       : "Header",
+        "key"       : "header.show_category_types",
+        "label"     : "Type of categories rendered in the navigation",
+        "type"      : "dropdown",
+        "possibleValues":
+        {
+          "all"     : "All",
+          "item"    : "Item",
+          "content" : "Content"
+        },
+        "default"   : "all"
+    },
+    {
+        "tab"       : "Header",
         "key"       : "header.basket_values",
         "label"     : "Show shopping cart information",
         "type"      : "dropdown",
@@ -394,6 +407,19 @@
         "label"     : "URL to PDF file",
         "type"      : "text",
         "default"   : "Insert path"
+    },
+    {
+        "tab"           : "Item view",
+        "key"           : "item.displayName",
+        "label"         : "Name of an item to display",
+        "type"          : "dropdown",
+        "possibleValues":
+        {
+            "itemName"             : "Item name",
+            "variationName"        : "Variation name",
+            "itemNameVariationName": "Item name and variation name"
+        },
+        "default"                  : "itemName"
     },
     {
         "tab"           : "Item view",

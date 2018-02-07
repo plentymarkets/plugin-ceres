@@ -27,6 +27,7 @@
   "item.manufacturer.externalName",
   "texts.*",
   "variation.id",
+  "variation.name",
   "variation.availability.names.*",
   "variation.availability.id",
   "variation.availability.averageDays",

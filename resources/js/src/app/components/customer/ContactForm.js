@@ -2,6 +2,7 @@ const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("contact-form", {
 
@@ -70,7 +71,9 @@ Vue.component("contact-form", {
                 {
                     this.waiting = false;
                     this.clearFields();
-                    NotificationService.success(Translations.Template.contactSendSuccess);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.contactSendSuccess")
+                    );
                 })
                 .fail(response =>
                 {
@@ -82,7 +85,9 @@ Vue.component("contact-form", {
                     }
                     else
                     {
-                        NotificationService.error(Translations.Template.contactSendFail);
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.contactSendFail")
+                        );
                     }
                 });
         },
