@@ -1,6 +1,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set gCapture   = services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey %}
+{% set gCapture = config("Ceres.global.google_recaptcha_api_key") %}
 
 <script type="x/template" id="vue-login">
     
