@@ -56,6 +56,11 @@ Vue.component("item-search", {
             }
         },
 
+        openItem(suggestion)
+        {
+            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+        },
+
         updateTitle(searchString)
         {
             document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString;
@@ -78,6 +83,7 @@ Vue.component("item-search", {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
                     this.search();
+                    this.openItem(suggestion);
                 },
                 beforeRender()
                 {
@@ -106,7 +112,7 @@ Vue.component("item-search", {
 
                         return {
                             value: value,
-                            data : value
+                            data : dataItem.data
                         };
                     })
                 };
