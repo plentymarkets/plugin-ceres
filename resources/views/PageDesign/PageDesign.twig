@@ -71,11 +71,14 @@
                 {% endblock %}
             </div>
 
+
+            {% if basket is not defined %}
+                {% set basket = services.basket.getBasketForTemplate() %}
+            {% endif %}
             <div class="wrapper wrapper-right">
                 <basket-preview
                     template="#vue-basket-preview"
-                    :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
-                    :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                    :basket-data="{{ basket | json_encode() }}">
                 </basket-preview>
             </div>
 
