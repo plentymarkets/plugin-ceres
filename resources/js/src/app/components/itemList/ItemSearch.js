@@ -82,8 +82,15 @@ Vue.component("item-search", {
                 {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
-                    this.search();
-                    this.openItem(suggestion);
+
+                    if (App.config.forwardToSingleItem)
+                    {
+                        this.openItem(suggestion);
+                    }
+                    else
+                    {
+                        this.search();
+                    }
                 },
                 beforeRender()
                 {
