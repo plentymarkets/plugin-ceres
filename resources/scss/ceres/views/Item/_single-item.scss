@@ -1,6 +1,5 @@
 
 .single {
-    
     .list-item-carousel {
         .list-control-special{
             width: 5%;
@@ -125,9 +124,6 @@
     }
 }
 
-
-
-
 .rezension {
     display: inline-block;
 }
@@ -181,5 +177,13 @@
                 }
             }
         }
+    }
+}
+
+.add-to-basket-container {
+    display: flex;
+
+    .quantity-input-container {
+        margin-right: 15px;
     }
 }
