@@ -1,5 +1,48 @@
 # Release Notes für Ceres
 
+## v2.2.1 (2018-02-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.0...2.2.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Sortierung der Suchergebnisse wurde verbessert.
+- Die Einstellungen für das Google reCAPTCHA aus dem Menü **System » Mandant »Mandant wählen » Webshop » Einstellungen** wurde in die Ceres-Konfiguration in das Tab **Global** verschoben.
+- Die Einstellungen für die aktiven Webshop-Sprachen aus dem Menü **System » Mandant » Mandant wählen » Webshop » Multilingual** wurden in die Ceres-Konfiguration in das Tab **Languages** verschoben.
+
+## v2.2.0 (2018-02-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.5...2.2.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurde eine Service-Klasse eingeführt, die Übersetzungen nun auch per JavaScript ermöglicht, analog zum Server-seitigen Umgang von Übersetzungen durch Laravel.
+- Texte in unterschiedlichen Sprachen werden nun direkt vom Server geladen. Es ist nicht länger notwendig sprachabhängige JavaScript-Dateien lokal zu kompilieren.
+- Ein Widerrufsformular wurde hinzugefügt. Sie können entweder ein Formular über die rechtlichen Angaben im Backend erstellen oder ein PDF-Dokument zum Download im Tab **Footer** der Ceres-Konfiguration angeben. Weitere Informationen dazu finden Sie unter [Rechtliche Angaben speichern](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#300).
+
+### Geändert
+
+- In der Addresseingabe wird nun bei Auswahl von **Firma** im Feld **Anrede** das Feld **Umsatzsteuer-ID** eingeblendet.
+- Der Button im Kontaktformular hat nun dieselbe Ladeanimation wie die restlichen Buttons im Webshop.
+- Die Performance des **Mein Konto**-Bereichs wurde verbessert.
+- Die Elemente in der **Kaufabwicklung** wurden nun in 2 optisch voneinander getrennten Spalten angeordnet, um rechtliche Anforderungen zu erfüllen.
+- Das Eingabefeld für Kundenwünsche in der **Kaufabwicklung** befindet sich nun unterhalb der Auswahl für die Zahlungsarten.
+- Die Checkbox für die rechtlichen Angaben, sowie der **Kaufen**-Button befinden sich in der **Kaufabwicklung** nun unterhalb der Warenkorbsumme.
+
+### Behoben
+
+- Durch einen Fehler wurde die Relevanz eines Artikels bei der Artikelsuche und -sortierung nicht richtig berücksichtigt. Dies wurde behoben.
+- Durch einen Fehler wurde das Feld **Firma** in der Registrierung nicht korrekt eingeblendet, wenn man unter **Anrede** den Wert **Firma** gewählt hat. Dies wurde behoben.
+- Durch einen Fehler wurden nicht übersetzte Kategorien ohne Inhalt in der Navigation oder den Breadcrumbs ausgegeben. Dies wurde behoben.
+- Durch einen Fehler konnten nicht übersetzte Kategorien im Megamenü per Hover geöffnet werden. Dies wurde behoben.
+- Durch einen Fehler funktionierte die Paginierung der Auftragshistorie nicht korrekt. Dies wurde behoben.
+
+
+## v2.1.5 (2018-02-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.4...2.1.5" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Ein Fehler führte dazu, dass die Paginierung bei verwendeter Einstellung **Show variations by type: Dynamically** nicht korrekt dargestellt wurde. Dies wurde behoben.
+- Durch einen Fehler waren die Links im Footer des Webshops in der mobilen Ansicht nicht klickbar. Dies wurde gefixt.
+- Durch fehlende Unterstützung benötigter JavaScript-Funktionen kam es zu Einschränkungen im Internet Explorer. Dies wurde behoben.
+- Durch ein von anderen Browsern abweichendes Verhalten des Internet Explorers war es nicht möglich bei einer Adresse das Land zu speichern. Zudem gab es ein Fehlverhalten, wenn man unter **Anrede** den Wert **Firma** ausgewählt hat. Dies wurde behoben.
+
 ## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
