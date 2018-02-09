@@ -16,7 +16,6 @@ class CategoryPagesMigration_0_0_1
                 'de'   => 'Widerrufsformular',
                 'en'   => 'Cancellation form'
             ],
-            'configKey'     => 'pages.cancellation_form',
             'metaConfigKey' => 'cancel_form'
         ],
         [
@@ -25,7 +24,6 @@ class CategoryPagesMigration_0_0_1
                 'de'   => 'Widerrufsrecht',
                 'en'   => 'Cancellation rights'
             ],
-            'configKey'     => 'pages.cancellation_rights',
             'metaConfigKey' => 'cancel_rights'
         ],
         [
@@ -34,7 +32,6 @@ class CategoryPagesMigration_0_0_1
                 'de'   => 'Impressum',
                 'en'   => 'Legal disclosure'
             ],
-            'configKey'     => 'pages.legal_disclosure',
             'metaConfigKey' => 'legal_disclosure'
         ],
         [
@@ -43,7 +40,6 @@ class CategoryPagesMigration_0_0_1
                 'de'   => 'Datenschutzerklärung',
                 'en'   => 'Privacy policy'
             ],
-            'configKey'     => 'pages.privacy_policy',
             'metaConfigKey' => 'privacy_policy'
         ],
         [
@@ -52,7 +48,6 @@ class CategoryPagesMigration_0_0_1
                 'de'   => 'AGB',
                 'en'   => 'Terms and conditions'
             ],
-            'configKey'     => 'pages.terms_and_conditions',
             'metaConfigKey' => 'terms_and_conditions'
         ]
     ];
@@ -70,12 +65,12 @@ class CategoryPagesMigration_0_0_1
                 [
                     'plentyId'  => $plentyId,
                     'lang'      => 'de',
-                    'name'      => 'Ceres 2.2.0'
+                    'name'      => 'Ceres 2.3.0'
                 ],
                 [
                     'plentyId'  => $plentyId,
                     'lang'      => 'en',
-                    'name'      => 'Ceres 2.2.0'
+                    'name'      => 'Ceres 2.3.0'
                 ]
             ],
             'clients'   => [
@@ -95,7 +90,6 @@ class CategoryPagesMigration_0_0_1
                 "Ceres::StaticPages.StaticPagesContent." . $page['template'] . "Content",
                 $page['names'],
                 $parentCategory->id,
-                $page['configKey'],
                 [
                     "de" => [
                         "metaDescription"   => $configRepository->get("Ceres.meta.de.description_" . $page['metaConfigKey'] ),

@@ -16,7 +16,6 @@
 {% block PageBody %}
 
     {% set lang = services.sessionStorage.getLang() %}
-<h1>CategoryContent</h1>
     {% include [category_template( category.id, lang, frontend.system.webstoreId ), fallbackTemplate] ignore missing %}
 
 {% endblock %}
