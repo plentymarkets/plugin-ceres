@@ -42,6 +42,7 @@
         </div>
         <div class="modal-footer">
             {{ LayoutContainer.show("Ceres::RegistrationOverlay.ExtendOverlayButtons") }}
+
             <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
                 {{ trans("Ceres::Template.accRegister") }}
