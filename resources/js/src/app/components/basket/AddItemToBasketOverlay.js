@@ -6,7 +6,6 @@ Vue.component("add-item-to-basket-overlay", {
 
     props: [
         "basketAddInformation",
-        "configItemName",
         "template"
     ],
 
@@ -31,9 +30,7 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const texts = this.latestBasketEntry.item.texts;
-
-                return this.$options.filters.itemName(texts, this.configItemName);
+                return this.$options.filters.itemName(this.latestBasketEntry.item);
             }
 
             return "";

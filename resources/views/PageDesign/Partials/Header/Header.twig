@@ -131,7 +131,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
                             <hr>
                         </div>
-                        <shop-language-select template="#vue-shop-language-select"/>
+                        <shop-language-select template="#vue-shop-language-select"></shop-language-select>
                     </div>
 
                     <div class="shipping-settings col-xs-12 col-sm-6">
@@ -139,7 +139,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
                             <hr>
                         </div>
-                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
+                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                     </div>
                 </div>
             </div>
