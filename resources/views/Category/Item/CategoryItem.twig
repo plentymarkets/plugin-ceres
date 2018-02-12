@@ -2,35 +2,6 @@
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set itemSort             = request.get("sorting") | default(config('Ceres.sort.defaultSorting')) %}
-{% set orderBy              = itemSort[0] %}
-
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-
-{% if request.get("items") %}
-    {% set itemsPerPage = request.get("items") %}
-{% endif %}
-
-{% set page = request.get("page") | default(1) %}
-
-{% set paginatedResult      = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId':category.id, 'page':page, 'items':itemsPerPage, 'facets': facetParams, 'sorting': itemSort}) %}
-
-{% set pageMax = (paginatedResult.total / itemsPerPage) | round %}
-{% set query  = { 'items' : itemsPerPage, 'sorting' : itemSort } %}
-
-{% set itemList             = paginatedResult.documents %}
-{% set paginationType       = config("Ceres.pagination.position") %}
-
-{% set lang         = services.sessionStorage.getLang() %}
-
-{% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
-
-{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
-{% set showCategoryImage = config('Ceres.item.show_category_image') == "true" %}
-{% set showCategoryDescription = config('Ceres.item.show_category_description') == "true" %}
-
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.Filter.ItemFilterList") }}
@@ -129,23 +100,20 @@
 {% endblock %}
 
 {% block PartialHead %}
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
     {% if page-1 > 0 %}
-        <link rel=“prev“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page-1 }) | url_encode }}“ />
+        <link rel=“prev“ href=“{{ domainSsl }}?{{ query | merge({'page' : page-1 }) | url_encode }}“ />
     {% endif %}
 
     {% if page+1 <= pageMax %}
-        <link rel=“next“ href=“{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}?{{ query | merge({'page' : page+1 }) | url_encode }}“ />
+        <link rel=“next“ href=“{{ domainSsl }}?{{ query | merge({'page' : page+1 }) | url_encode }}“ />
     {% endif %}
 
-    <title>{{ category.details.first.name }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ category.details.first.name }} | {{ headerCompanyName }}</title>
 
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
-
-    {% set metaRobots = category.details[0].metaRobots %}
-    {% set formattedMetaRobots = metaRobots|replace({'_': ', '}) %}
 
     <meta name="robots" content="{{ formattedMetaRobots }}">
 {% endblock %}

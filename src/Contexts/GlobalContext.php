@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use Plenty\Plugin\Http\Request;
 use Ceres\Config\CeresConfig;
 use IO\Services\CategoryService;
 use IO\Services\ItemCrossSellingService;
@@ -10,35 +11,45 @@ use IO\Services\TemplateService;
 
 class GlobalContext implements ContextInterface
 {
+    /** @var Request $request */
+    protected $request = null;
+    
+    /** @var SessionStorageService $sessionStorageService */
+    protected $sessionStorageService = null;
+    
+    /** @var CategoryService $categoryService */
+    protected $categoryService = null;
+    
+    /** @var TemplateService $templateService */
+    protected $templateService = null;
+    
+    /** @var ItemCrossSellingService $crossSellingService */
+    protected $crossSellingService = null;
+    
     /** @var CeresConfig $ceresConfig  */
     public $ceresConfig = null;
-    public $lang = '';
-    public $metaLang = '';
+    
+    public $lang;
+    public $metaLang;
     public $template = [];
-    public $categories = null;
+    public $categories;
     public $fixNavBarPos;
     public $basketAddInformation;
     public $shippingCat;
-    public $categoryBreadcrumbs = [];
+    public $categoryBreadcrumbs;
     public $showCategoryTypes;
     
     public function init($params)
     {
+        $this->request = pluginApp(Request::class);
+        $this->sessionStorageService = pluginApp(SessionStorageService::class);
+        $this->categoryService = pluginApp(CategoryService::class);
+        $this->templateService = pluginApp(TemplateService::class);
+        $this->crossSellingService = pluginApp(ItemCrossSellingService::class);
+    
         $this->ceresConfig = pluginApp(CeresConfig::class);
         
-        /** @var SessionStorageService $sessionStorageService */
-        $sessionStorageService = pluginApp(SessionStorageService::class);
-        
-        /** @var CategoryService $categoryService */
-        $categoryService = pluginApp(CategoryService::class);
-        
-        /** @var TemplateService $templateService */
-        $templateService = pluginApp(TemplateService::class);
-        
-        /** @var ItemCrossSellingService $crossSellingService */
-        $crossSellingService = pluginApp(ItemCrossSellingService::class);
-        
-        $this->lang = $sessionStorageService->getLang();
+        $this->lang = $this->sessionStorageService->getLang();
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
@@ -49,15 +60,15 @@ class GlobalContext implements ContextInterface
         $this->basketAddInformation = $this->ceresConfig->basket->getAddItemToBasketConfirm();
         $this->shippingCat = $this->ceresConfig->global->getShippingCostsCategoryId();
         
-        if($templateService->isCurrentTemplate('category') || $templateService->isCurrentTemplate('item'))
+        if($this->templateService->isCurrentTemplate('category') || $this->templateService->isCurrentTemplate('item'))
         {
-            $this->categoryBreadcrumbs = $categoryService->getHierarchy();
-            $crossSellingService->setType($this->ceresConfig->itemLists->getCrossSellingType());
+            $this->categoryBreadcrumbs = $this->categoryService->getHierarchy();
+            $this->crossSellingService->setType($this->ceresConfig->itemLists->getCrossSellingType());
         }
         
         $this->showCategoryTypes = $this->ceresConfig->header->getShowCategoryTypes();
         
-        $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->getShowCategoryTypes(), $this->lang, 6);
+        $this->categories = $this->categoryService->getNavigationTree($this->ceresConfig->header->getShowCategoryTypes(), $this->lang, 6);
         
     }
 }
