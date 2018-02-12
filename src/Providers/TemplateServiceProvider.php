@@ -5,6 +5,7 @@ namespace Ceres\Providers;
 use Ceres\Caching\HomepageCacheSettings;
 use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
+use Ceres\Config\CeresConfig;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
@@ -53,7 +54,9 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.page-not-found'            => 'StaticPages.PageNotFound'             // provide template to use for page not found
     ];
 
-    public function register(){}
+    public function register(){
+        $this->getApplication()->singleton( CeresConfig::class );
+    }
     
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {
