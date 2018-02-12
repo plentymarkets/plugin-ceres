@@ -1,6 +1,7 @@
 $.noConflict(); // enable save mode
 
-var widgetTemplates; // holds static markup for sidebar widgets
+const CELL_HEIGHT = 40; // gridstack cell height
+
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
 
 // entry point
@@ -16,6 +17,16 @@ function initCeresForGridstack()
     injectGridstackMarkup();
     addBackendEventListeners();
     addWindowResizeListener();
+}
+
+/**
+ *
+ * @param element
+ * @returns {number}
+ */
+function getRelativeElementHeight(element)
+{
+    return Math.round(jQuery(element).outerHeight(true) / CELL_HEIGHT);
 }
 
 function addWindowResizeListener()
@@ -42,7 +53,7 @@ function updateContainerDimensions()
                     .data('gridstack')
                     .resize(jQuery(this),
                             1,
-                            Math.round(jQuery(this).find('.grid-stack-item-content > *').outerHeight(true) / 40));
+                            getRelativeElementHeight(jQuery(this).find('.grid-stack-item-content > *')));
         });
     });
 }
@@ -173,11 +184,12 @@ function addContentWidget(widgetData)
 
     // wrap element with gridstack containers
     var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-        '     data-gs-height="' + Math.round(height / 40) + '"><div class="grid-stack-item-content">' + widgetData.htmlMarkup + '</div>' +
+        '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + widgetData.htmlMarkup + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);
     addContextMenu(gridStackItem);
+    // todo: @vwiebe fix dropzone scope
     jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
     updateContainerDimensions();
 }
@@ -220,7 +232,7 @@ function injectGridstackMarkup()
         {
             // create gridstack item markup
             var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-                '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / 40) + '"><div class="grid-stack-item-content"></div>' +
+                '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / CELL_HEIGHT) + '"><div class="grid-stack-item-content"></div>' +
                 '</div>');
 
             // overwrite cursor for all contained elements
@@ -252,7 +264,7 @@ function injectGridstackMarkup()
 function initGridstack(identifier)
 {
     var options = {
-        width:1,
+        width: 1,
         cellHeight: 40,
         verticalMargin: 0,
         acceptWidgets: '.grid-stack-item'
