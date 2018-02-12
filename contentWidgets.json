@@ -1,9 +1,131 @@
 [
 	{
+		"identifier": "Ceres::TextHeader",
+		"label": "TextHeader",
+		"tooltip": "TextHeader",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader",
+		"keepAspectRatio": "",
+		"defaultHeight": 200
+	},
+	{
+		"identifier": "Ceres::CategoryPreview",
+		"label": "CategoryPreview",
+		"tooltip": "CategoryPreview",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"resizable": "false",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
+		"keepAspectRatio": "",
+		"defaultHeight": 200,
+		"settings": {
+			"categoryId": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Category ID",
+				"options": {
+					"tooltip": "Category ID",
+					"defaultValue": "19"
+				}
+			},
+			"itemSort": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Sorting for Items",
+				"options": {
+					"tooltip": "Item Sorting",
+					"defaultValue": "",
+					"selectBoxValues": [
+						{
+							"value": "",
+							"label": "No sorting",
+							"position": 0
+						},
+						{
+							"value": "default.recommended_sorting",
+							"label": "Recommended",
+							"position": 1
+						},
+						{
+							"value": "texts.name1_asc",
+							"label": "Item name A-Z",
+							"position": 2
+						},
+						{
+							"value": "texts.name1_desc",
+							"label": "Item name Z-A",
+							"position": 3
+						},
+						{
+							"value": "sorting.price.min_asc",
+							"label": "Price ⬆",
+							"position": 4
+						},
+						{
+							"value": "sorting.price.max_desc",
+							"label": "Price ⬇",
+							"position": 5
+						},
+						{
+							"value": "variation.createdAt_desc",
+							"label": "Newest variation",
+							"position": 6
+						},
+						{
+							"value": "variation.createdAt_asc",
+							"label": "Oldest variation",
+							"position": 7
+						},
+						{
+							"value": "variation.availability.averageDays_asc",
+							"label": "Availability ⬆",
+							"position": 8
+						},
+						{
+							"value": "variation.availability.averageDays_desc",
+							"label": "Availability ⬇",
+							"position": 9
+						},
+						{
+							"value": "variation.number_asc",
+							"label": "Variation number ⬆",
+							"position": 10
+						},
+						{
+							"value": "variation.number_desc",
+							"label": "Variation number ⬇",
+							"position": 11
+						},
+						{
+							"value": "variation.updatedAt_asc",
+							"label": "Last update",
+							"position": 12
+						},
+						{
+							"value": "variation.updatedAt_desc",
+							"label": "First update",
+							"position": 13
+						},
+						{
+							"value": "item.manufacturer.externalName_asc",
+							"label": "Manufacturer A-Z",
+							"position": 14
+						},
+						{
+							"value": "item.manufacturer.externalName_desc",
+							"label": "Manufacturer Z-A",
+							"position": 15
+						}
+					]
+				}
+			}
+		}
+	},
+	{
 		"identifier": "Ceres::widget1",
 		"label": "Template.accAccountSettings",
 		"tooltip": "Template.accAccountSettings",
-		"previewImageURL": "aaa",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
 		"resizable": false,
 		"widgetClass": "Ceres\\Widgets\\NumberInput",
 		"keepAspectRatio": "",

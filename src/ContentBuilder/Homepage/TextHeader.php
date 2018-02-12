@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\Widgets;
+namespace Ceres\ContentBuilder\Homepage;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class NumberInput implements Widget
+class TextHeader implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class NumberInput implements Widget
 
         $twig = pluginApp(Twig::class);
 
-        return $twig->render('Ceres::ContentBuilder.Homepage.NumberInput');
+        return $twig->render('Ceres::ContentBuilder.Homepage.TextHeader');
     }
 
     /**

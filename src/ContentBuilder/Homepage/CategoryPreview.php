@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\Widgets;
+namespace Ceres\ContentBuilder\Homepage;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class NumberInput implements Widget
+class CategoryPreview implements Widget
 {
 
     /**
@@ -18,10 +18,19 @@ class NumberInput implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
+        $widgetSettings = [
+            "categoryId" => 19,
+            "itemSort" => "texts.name1_asc"
+        ];
 
         $twig = pluginApp(Twig::class);
 
-        return $twig->render('Ceres::ContentBuilder.Homepage.NumberInput');
+        return $twig->render(
+            "Ceres::ContentBuilder.Homepage.CategoryPreview",
+            [
+                "widgetSettings" => $widgetSettings
+            ]
+        );
     }
 
     /**

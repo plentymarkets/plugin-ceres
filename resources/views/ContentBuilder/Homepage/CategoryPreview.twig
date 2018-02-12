@@ -1,0 +1,25 @@
+
+{% set lang = services.sessionStorage.getLang() %}
+{% set category = services.category.get(widgetSettings.categoryId, lang) %}
+
+{% set categoryItems = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList,
+    {'categoryId': category.id, 'page':1, 'items':4, 'sorting': widgetSettings.itemSort}).documents %}
+
+{% if categoryItems is not empty %}
+    <div class="m-b-2 clearfix">
+        <div class="section-header m-b-1">
+            <h2>{{ category.details[0].name }}</h2>
+            <a href="{{ services.category.getURL(category, lang) }}" class="section-link-all">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}
+            </a>
+        </div>
+
+        <ul class="product-list row grid">
+            {% for item in categoryItems %}
+                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    {% include "Ceres::Category.Item.Partials.CategoryListItem" with { 'item': item } %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
