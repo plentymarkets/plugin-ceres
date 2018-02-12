@@ -14859,7 +14859,11 @@ Vue.component("category-image-carousel", {
             var itemLazyImage = this.$refs.itemLazyImage;
 
             if (itemLazyImage) {
-                itemLazyImage.loadImage();
+                if (itemLazyImage.loadImage) {
+                    itemLazyImage.loadImage();
+                } else if (itemLazyImage[0] && itemLazyImage[0].loadImage) {
+                    itemLazyImage[0].loadImage();
+                }
             }
         }
     }
