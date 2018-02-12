@@ -6,6 +6,9 @@ use Ceres\Caching\HomepageCacheSettings;
 use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
+use Ceres\Contexts\CategoryContext;
+use Ceres\Contexts\ContextInterface;
+use Ceres\Contexts\GlobalContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
@@ -25,33 +28,34 @@ class TemplateServiceProvider extends ServiceProvider
 {
     const EVENT_LISTENER_PRIORITY = 100;
 
-    private static $templateKeyToViewMap = [
-        'tpl.home'                      => 'Homepage.Homepage',                   // provide template to use for homepage
-        'tpl.category.content'          => 'Category.Content.CategoryContent',    // provide template to use for content categories
-        'tpl.category.item'             => 'Category.Item.CategoryItem',          // provide template to use for item categories
-        'tpl.category.blog'             => 'PageDesign.PageDesign',               // provide template to use for blog categories
-        'tpl.category.container'        => 'PageDesign.PageDesign',               // provide template to use for container categories
-        'tpl.item'                      => 'Item.SingleItemWrapper',                 // provide template to use for single items
-        'tpl.basket'                    => 'Basket.Basket',                       // provide template to use for basket
-        'tpl.checkout'                  => 'Checkout.CheckoutView',               // provide template to use for checkout
-        'tpl.my-account'                => 'MyAccount.MyAccount',                 // provide template to use for my-account
-        'tpl.confirmation'              => 'Checkout.OrderConfirmation',          // provide template to use for confirmation
-        'tpl.login'                     => 'Customer.Login',                      // provide template to use for login
-        'tpl.register'                  => 'Customer.Register',                   // provide template to use for register
-        'tpl.guest'                     => 'Customer.Guest',                      // provide template to use for guest
-        'tpl.password-reset'            => 'Customer.ResetPassword',              // provide template to use for password-reset
-        'tpl.contact'                   => 'Customer.Contact',                    // provide template to use for contact
-        'tpl.search'                    => 'ItemList.ItemListView',               // provide template to use for item search
-        'tpl.wish-list'                 => 'WishList.WishListView',               // provide template to use for wishlist
-        'tpl.order.return'              => 'OrderReturn.OrderReturnView',         // provide template to use for order return
-        'tpl.order.return.confirmation' => 'OrderReturn.OrderReturnConfirmation', // provide template to use for order return confirmation
-        'tpl.cancellation-rights'       => 'StaticPages.CancellationRights',      // provide template to use for cancellation rights
-        'tpl.cancellation-form'         => 'StaticPages.CancellationForm',        // provide template to use for cancellation form
-        'tpl.legal-disclosure'          => 'StaticPages.LegalDisclosure',         // provide template to use for legal disclosure
-        'tpl.privacy-policy'            => 'StaticPages.PrivacyPolicy',           // provide template to use for privacy policy
-        'tpl.terms-conditions'          => 'StaticPages.TermsAndConditions',      // provide template to use for terms and conditions
-        'tpl.item-not-found'            => 'StaticPages.ItemNotFound',            // provide template to use for item not found
-        'tpl.page-not-found'            => 'StaticPages.PageNotFound'             // provide template to use for page not found
+    private static $templateKeyToViewMap =
+    [
+        'tpl.home'                      => ['Homepage.Homepage',                    GlobalContext::class],     // provide template to use for homepage
+        'tpl.category.content'          => ['Category.Content.CategoryContent',     CategoryContext::class],   // provide template to use for content categories
+        'tpl.category.item'             => ['Category.Item.CategoryItem',           CategoryContext::class],          // provide template to use for item categories
+        'tpl.category.blog'             => ['PageDesign.PageDesign',                GlobalContext::class],               // provide template to use for blog categories
+        'tpl.category.container'        => ['PageDesign.PageDesign',                GlobalContext::class],               // provide template to use for container categories
+        'tpl.item'                      => ['Item.SingleItemWrapper',               GlobalContext::class],                 // provide template to use for single items
+        'tpl.basket'                    => ['Basket.Basket',                        GlobalContext::class],                       // provide template to use for basket
+        'tpl.checkout'                  => ['Checkout.CheckoutView',                GlobalContext::class],               // provide template to use for checkout
+        'tpl.my-account'                => ['MyAccount.MyAccount',                  GlobalContext::class],                 // provide template to use for my-account
+        'tpl.confirmation'              => ['Checkout.OrderConfirmation',           GlobalContext::class],          // provide template to use for confirmation
+        'tpl.login'                     => ['Customer.Login',                       GlobalContext::class],                      // provide template to use for login
+        'tpl.register'                  => ['Customer.Register',                    GlobalContext::class],                   // provide template to use for register
+        'tpl.guest'                     => ['Customer.Guest',                       GlobalContext::class],                      // provide template to use for guest
+        'tpl.password-reset'            => ['Customer.ResetPassword',               GlobalContext::class],              // provide template to use for password-reset
+        'tpl.contact'                   => ['Customer.Contact',                     GlobalContext::class],                    // provide template to use for contact
+        'tpl.search'                    => ['ItemList.ItemListView',                GlobalContext::class],               // provide template to use for item search
+        'tpl.wish-list'                 => ['WishList.WishListView',                GlobalContext::class],               // provide template to use for wishlist
+        'tpl.order.return'              => ['OrderReturn.OrderReturnView',          GlobalContext::class],         // provide template to use for order return
+        'tpl.order.return.confirmation' => ['OrderReturn.OrderReturnConfirmation',  GlobalContext::class], // provide template to use for order return confirmation
+        'tpl.cancellation-rights'       => ['StaticPages.CancellationRights',       GlobalContext::class],      // provide template to use for cancellation rights
+        'tpl.cancellation-form'         => ['StaticPages.CancellationForm',         GlobalContext::class],        // provide template to use for cancellation form
+        'tpl.legal-disclosure'          => ['StaticPages.LegalDisclosure',          GlobalContext::class],         // provide template to use for legal disclosure
+        'tpl.privacy-policy'            => ['StaticPages.PrivacyPolicy',            GlobalContext::class],           // provide template to use for privacy policy
+        'tpl.terms-conditions'          => ['StaticPages.TermsAndConditions',       GlobalContext::class],      // provide template to use for terms and conditions
+        'tpl.item-not-found'            => ['StaticPages.ItemNotFound',             GlobalContext::class],            // provide template to use for item not found
+        'tpl.page-not-found'            => ['StaticPages.PageNotFound',             GlobalContext::class]             // provide template to use for page not found
     ];
 
     public function register(){
@@ -64,9 +68,19 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension('Twig_Extension_StringLoader');
         $twig->addExtension(TwigStyleScriptTagFilter::class);
 
-        $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer) {
-                $templateContainer->setTemplate('Ceres::' . self::$templateKeyToViewMap[$templateContainer->getTemplateKey()]);
-
+        $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
+                $templateName = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][0];
+                $templateContainer->setTemplate('Ceres::' . $templateName);
+                
+                $templateContext = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+                $templateContext = pluginApp($templateContext);
+                if($templateContext instanceof ContextInterface)
+                {
+                    $templateContext->init($templateData);
+                    $templateContainer->setTemplateData($templateContext);
+                }
+                
+                //$templateContainer->setTemplateData(['config' => []]);
         }, self::EVENT_LISTENER_PRIORITY);
 
         // provide mapped category IDs - DEPRECATED?
