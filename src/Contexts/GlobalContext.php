@@ -60,7 +60,7 @@ class GlobalContext implements ContextInterface
         $this->basketAddInformation = $this->ceresConfig->basket->getAddItemToBasketConfirm();
         $this->shippingCat = $this->ceresConfig->global->getShippingCostsCategoryId();
         
-        if($this->templateService->isCurrentTemplate('category') || $this->templateService->isCurrentTemplate('item'))
+        if($this->templateService->isCategory() || $this->templateService->isItem())
         {
             $this->categoryBreadcrumbs = $this->categoryService->getHierarchy();
             $this->crossSellingService->setType($this->ceresConfig->itemLists->getCrossSellingType());
