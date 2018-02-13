@@ -1084,6 +1084,13 @@
         "default"       : "notSelected"
     },
     {
+        "tab"               : "Pagination and sorting",
+        "key"               : "search.forwardToSingleItem",
+        "label"             : "Search: Forward to single item view",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
         "tab"               : "Checkout and My account",
         "key"               : "my_account.orders_per_page",
         "label"             : "Number of orders to show per page in order history",

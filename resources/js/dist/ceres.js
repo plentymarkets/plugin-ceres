@@ -17672,6 +17672,8 @@ Vue.component("item-search", {
                 suggestions: $.map(result.data.documents, function (dataItem) {
                     var value = _this3.$options.filters.itemName(dataItem.data);
 
+                    console.log(dataItem);
+
                     return {
                         value: value,
                         data: value
