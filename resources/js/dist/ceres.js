@@ -17630,6 +17630,9 @@ Vue.component("item-search", {
                 }
             }
         },
+        openItem: function openItem(suggestion) {
+            window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
+        },
         updateTitle: function updateTitle(searchString) {
             document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString;
             document.title = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
@@ -17649,7 +17652,12 @@ Vue.component("item-search", {
                 onSelect: function onSelect(suggestion) {
                     _this2.$store.commit("setItemListSearchString", suggestion.value);
                     _this2.currentSearchString = suggestion.value;
-                    _this2.search();
+
+                    if (App.config.forwardToSingleItem) {
+                        _this2.openItem(suggestion);
+                    } else {
+                        _this2.search();
+                    }
                 },
                 beforeRender: function beforeRender() {
                     $(".autocomplete-suggestions").width($(".search-box-shadow-frame").width());
@@ -17672,11 +17680,9 @@ Vue.component("item-search", {
                 suggestions: $.map(result.data.documents, function (dataItem) {
                     var value = _this3.$options.filters.itemName(dataItem.data);
 
-                    console.log(dataItem);
-
                     return {
                         value: value,
-                        data: value
+                        data: dataItem.data
                     };
                 })
             };
