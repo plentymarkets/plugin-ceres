@@ -177,15 +177,12 @@
                         <div class="hero-xtras">
                             {% if homepageContainer2 | trim is empty %}
                                 {% if heroExtra1.url | trim is not empty %}
-                                    <a class="hero-category"
-                                       {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
-                                        <img src="{{ heroExtra1.url }}"
-                                             alt="{{ heroExtra1.item | itemName }}">
+                                    <a class="hero-category" {% if heroExtra1.item.texts is not empty %}href="{{ heroExtra1.item | itemURL }}"{% endif %}>
+                                        <img src="{{ heroExtra1.url }}" alt="{{ heroExtra1.item | itemName }}">
                                         {% if heroExtra1.item.texts is not empty %}
                                             <div class="hero-category-inner">
                                                 <h2 class="hero-category-headline">
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ heroExtra1.item | itemName }}
+                                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ heroExtra1.item | itemName }}
                                                 </h2>
                                             </div>
                                         {% endif %}
@@ -222,22 +219,19 @@
                 {% set homepageContainer5 = LayoutContainer.show("Ceres::Homepage.Container5") %}
 
                 {% if category1.details is not empty or homepageContainer4 | trim is not empty or category2.details is not empty or homepageContainer5 | trim is not empty %}
-                    <div id="categoryHighlight" class="row prop-row m-y-2 sale-new">
+                    <div id="categoryHighlight" class="prop-row m-y-2 sale-new">
                         {% if category1.details is not empty or homepageContainer4 | trim is not empty %}
                             <div class="col-xs-{% if category2 is empty and homepageContainer5 | trim is empty %}12{% else %}6{% endif %}">
                                 <div class="prop-xs-6-4 prop-md-3-1">
                                     {% if homepageContainer4 | trim is empty %}
                                         <div class="prop-inner">
-                                            <a class="featured-sale-new"
-                                               href="{{ services.category.getURL(category1, lang) }}">
+                                            <a class="featured-sale-new" href="{{ services.category.getURL(category1, lang) }}">
                                                 {% if category1.details[0].imagePath %}
-                                                    <img src="documents/{{ category1.details[0].imagePath }}"
-                                                         alt="{{ category1.details[0].name }}">
+                                                    <img src="documents/{{ category1.details[0].imagePath }}" alt="{{ category1.details[0].name }}">
                                                 {% endif %}
                                                 <div class="featured-category-inner">
                                                     <h2 class="featured-category-headline">
-                                                        <i class="fa fa-angle-double-right"
-                                                           aria-hidden="true"></i> {{ category1.details[0].name }}
+                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ category1.details[0].name }}
                                                     </h2>
                                                 </div>
                                             </a>

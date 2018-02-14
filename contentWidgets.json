@@ -47,15 +47,20 @@
 		"label": "Carousel",
 		"tooltip": "Carousel",
 		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": "false",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel"
+	},
+	{
+		"identifier": "Ceres::FeaturedCategory",
+		"label": "FeaturedCategory",
+		"tooltip": "FeaturedCategory",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory"
 	},
 	{
 		"identifier": "Ceres::CategoryPreview",
 		"label": "CategoryPreview",
 		"tooltip": "CategoryPreview",
 		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": "false",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
 		"settings": {
 			"categoryId": {
