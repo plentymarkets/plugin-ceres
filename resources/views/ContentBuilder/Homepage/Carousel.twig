@@ -1,0 +1,73 @@
+
+
+{% set variationIds = [] %}
+{% for slide in slides %}
+    {% set variationIds = variationIds | merge([slide.variationId]) %}
+{% endfor %}
+
+{% set itemData = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: variationIds}).documents %}
+
+{% set newSlides = [] %}
+{% for slide in slides %}
+    {% for item in itemData if item.id == slide.variationId %}
+
+        {% set slide = slide | merge({item: item}) %}
+
+        {% set slideImage = slide.customImagePath %}
+        {% if slideImage | trim is empty %}
+            {% set slideImage = (slide.item.data.images | itemImages | orderByKey('position') | first).url %}
+        {% endif %}
+
+        {% set slide = slide | merge({image: slideImage}) %}
+
+        {% set newSlides = newSlides | merge([slide]) %}
+    
+    {% endfor %}
+{% endfor %}
+
+{% set slides = newSlides %}
+
+{% set carouselId = random(999999) %}
+
+<div class="cmp cmp-hero">
+    <div class="hero-main">
+        <div id="carousel-example-generic_{{ carouselId }}" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% for slide in slides %}
+                    <div class="carousel-item{% if loop.first %} active{% endif %}">
+                        <a class="hero-category" {% if slide.item is defined %}href="{{ slide.item | itemURL }}"{% endif %}>
+                            <img src="{{ slide.image }}" alt="{{ slide.item.data | itemName }}" class="img-fluid">
+                            {% if slide.item is defined %}
+                                <div class="carousel-caption">
+                                    <h2>
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ slide.item.data | itemName }}
+                                    </h2>
+                                </div>
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if slides | length > 1 %}
+                <ol class="carousel-indicators">
+                    {% for i in 1..slides | length %}
+                        <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ i - 1 }}" {% if loop.first %}class="active"{% endif %}></li>
+                    {% endfor %}
+                </ol>
+
+                <a class="left carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
+                    data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
+                </a>
+
+                <a class="right carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
+                    data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
