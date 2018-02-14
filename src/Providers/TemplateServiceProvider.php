@@ -7,8 +7,11 @@ use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
+use Ceres\Contexts\CategoryItemContext;
 use Ceres\Contexts\ContextInterface;
 use Ceres\Contexts\GlobalContext;
+use Ceres\Contexts\ItemSearchContext;
+use Ceres\Contexts\SingleItemContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
@@ -32,10 +35,10 @@ class TemplateServiceProvider extends ServiceProvider
     [
         'tpl.home'                      => ['Homepage.Homepage',                    GlobalContext::class],     // provide template to use for homepage
         'tpl.category.content'          => ['Category.Content.CategoryContent',     CategoryContext::class],   // provide template to use for content categories
-        'tpl.category.item'             => ['Category.Item.CategoryItem',           CategoryContext::class],          // provide template to use for item categories
+        'tpl.category.item'             => ['Category.Item.CategoryItem',           CategoryItemContext::class],          // provide template to use for item categories
         'tpl.category.blog'             => ['PageDesign.PageDesign',                GlobalContext::class],               // provide template to use for blog categories
         'tpl.category.container'        => ['PageDesign.PageDesign',                GlobalContext::class],               // provide template to use for container categories
-        'tpl.item'                      => ['Item.SingleItemWrapper',               GlobalContext::class],                 // provide template to use for single items
+        'tpl.item'                      => ['Item.SingleItemWrapper',               SingleItemContext::class],                 // provide template to use for single items
         'tpl.basket'                    => ['Basket.Basket',                        GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                  => ['Checkout.CheckoutView',                GlobalContext::class],               // provide template to use for checkout
         'tpl.my-account'                => ['MyAccount.MyAccount',                  GlobalContext::class],                 // provide template to use for my-account
@@ -45,7 +48,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.guest'                     => ['Customer.Guest',                       GlobalContext::class],                      // provide template to use for guest
         'tpl.password-reset'            => ['Customer.ResetPassword',               GlobalContext::class],              // provide template to use for password-reset
         'tpl.contact'                   => ['Customer.Contact',                     GlobalContext::class],                    // provide template to use for contact
-        'tpl.search'                    => ['ItemList.ItemListView',                GlobalContext::class],               // provide template to use for item search
+        'tpl.search'                    => ['ItemList.ItemListView',                ItemSearchContext::class],               // provide template to use for item search
         'tpl.wish-list'                 => ['WishList.WishListView',                GlobalContext::class],               // provide template to use for wishlist
         'tpl.order.return'              => ['OrderReturn.OrderReturnView',          GlobalContext::class],         // provide template to use for order return
         'tpl.order.return.confirmation' => ['OrderReturn.OrderReturnConfirmation',  GlobalContext::class], // provide template to use for order return confirmation
@@ -72,13 +75,12 @@ class TemplateServiceProvider extends ServiceProvider
                 $templateName = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][0];
                 $templateContainer->setTemplate('Ceres::' . $templateName);
                 
-                $templateContext = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
-                $templateContext = pluginApp($templateContext);
-                if($templateContext instanceof ContextInterface)
-                {
-                    $templateContext->init($templateData);
-                    $templateContainer->setTemplateData($templateContext);
-                }
+                $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+                $templateContainer->setTemplateData(function() use ($templateContextClass, $templateData, $templateContainer) {
+                    $templateContext = pluginApp($templateContextClass);
+                    $templateContext->init($templateData, $templateContainer);
+                    return $templateContext;
+                });
                 
                 //$templateContainer->setTemplateData(['config' => []]);
         }, self::EVENT_LISTENER_PRIORITY);

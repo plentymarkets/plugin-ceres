@@ -27,7 +27,7 @@
         <div id="vue-app">
             <div class="wrapper wrapper-top">
                 <!-- messages -->
-                <notifications template="#vue-notifications" :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"></notifications>
+                <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
             </div>
 
             <div class="wrapper wrapper-left">
@@ -52,8 +52,8 @@
             <div class="wrapper wrapper-right">
                 <basket-preview
                     template="#vue-basket-preview"
-                    :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
-                    :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                    :basket-data="{{ basket | json_encode() }}"
+                    :basket-items-data="{{ basketItems | json_encode() }}">
                 </basket-preview>
             </div>
 
@@ -121,7 +121,7 @@
                                     <div class="modal-title h3">{{ trans('Ceres::Template.itemShippingCosts') }}</div>
                                 </div>
                                 <div class="modal-body">
-                                    {% include category_template(shippingCat, lang, services.webstoreConfig.getWebstoreConfig().webstoreId) ignore missing %}
+                                    {% include category_template(shippingCat, lang, webstoreId) ignore missing %}
                                 </div>
                             </div>
                         </div>

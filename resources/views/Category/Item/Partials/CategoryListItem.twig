@@ -5,14 +5,6 @@
 {% set image = item.data.images.all | first %}
 {% set itemUrl =  item.data | itemURL %}
 
-{% if enableCarousel is not defined %}
-    {% if config("Ceres.item.enable_image_carousel") == "true" %}
-        {% set enableCarousel = true %}
-    {% else %}
-        {% set enableCarousel = false %}
-    {% endif %}
-{% endif %}
-
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <add-to-basket

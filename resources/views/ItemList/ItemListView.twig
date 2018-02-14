@@ -1,29 +1,5 @@
 {% extends getPartial('page-design') %}
 
-{% set page = 1 %}
-{% if request.get("page") %}
-    {% set page = request.get("page") %}
-{% endif %}
-
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-{% if request.get("items") %}
-    {% set itemsPerPage = request.get("items") %}
-{% endif %}
-
-{% if services.template.isSearch() %}
-    {% set sorting = config("Ceres.sort.defaultSortingSearch") %}
-    {% set searchString = request.get("query") %}
-{% else %}
-    {% set sorting = config("Ceres.sort.defaultSorting") %}
-{% endif %}
-
-{% if request.get("sorting") %}
-    {% set sorting = request.get("sorting") %}
-{% endif %}
-
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting}) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
@@ -85,8 +61,8 @@
 {% endblock %}
 
 {% block PartialHead %}
-<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
-    {% if services.template.isSearch() %}
-        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ config("Ceres.header.company_name") }}</title>
+<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    {% if isSearch %}
+        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ headerCompanyName }}</title>
     {% endif %}
 {% endblock %}
