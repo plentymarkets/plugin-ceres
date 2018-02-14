@@ -22,11 +22,11 @@ class Column implements Widget
 
 		return $twig->render('Ceres::ContentBuilder.General.Column',
 		[
-			"widgetSettings" => $widgetSettings,
 			"width"	=> [
-				"mobile" => "12",
-				"tablet" => "6",
-				"desktop" => "4"
+				"mobile" => "2",
+                "tablet" => "4",
+                "smallDesktop" => "6",
+				"desktop" => "8"
 			]
 		]);
     }
