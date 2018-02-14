@@ -24,6 +24,25 @@
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader"
 	},
 	{
+		"identifier": "Ceres::ItemPreview",
+		"label": "ItemPreview",
+		"tooltip": "Item preview",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemPreview",
+		"settings": {
+			"variationId": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Variation ID",
+				"options": {
+					"tooltip": "Variation ID",
+					"defaultValue": "132"
+				}
+			}
+		}
+	},
+	{
 		"identifier": "Ceres::CategoryPreview",
 		"label": "CategoryPreview",
 		"tooltip": "CategoryPreview",
