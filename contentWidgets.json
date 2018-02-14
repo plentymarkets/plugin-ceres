@@ -1,13 +1,27 @@
 [
 	{
+		"identifier": "Ceres::Row",
+		"label": "Row",
+		"tooltip": "Row",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\General\\Row"
+	},
+	{
+		"identifier": "Ceres::Column",
+		"label": "Column",
+		"tooltip": "Column",
+		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"resizable": true,
+		"widgetClass": "Ceres\\ContentBuilder\\General\\Column"
+	},
+	{
 		"identifier": "Ceres::TextHeader",
 		"label": "TextHeader",
 		"tooltip": "TextHeader",
 		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
 		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader",
-		"keepAspectRatio": "",
-		"defaultHeight": 200
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader"
 	},
 	{
 		"identifier": "Ceres::CategoryPreview",
@@ -16,8 +30,6 @@
 		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
 		"resizable": "false",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
-		"keepAspectRatio": "",
-		"defaultHeight": 200,
 		"settings": {
 			"categoryId": {
 				"type": "inputNumber",
