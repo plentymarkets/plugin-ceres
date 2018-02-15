@@ -18,6 +18,11 @@ function initCeresForGridstack()
     injectGridstackMarkup();
     addBackendEventListener();
     addWindowResizeListener();
+
+    dispatchBuilderEvent({
+        name: 'shopbuilder_ready',
+        data: {}
+    });
 }
 
 /**
