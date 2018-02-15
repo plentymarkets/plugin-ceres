@@ -1,6 +1,6 @@
 $.noConflict(); // enable save mode
 
-const BACKEND_URL = 'http://master.login.plentymarkets.com';
+const BACKEND_URL = 'http://master.login.plentymarkets.com'; // TODO: get backend url dynamically
 const CELL_HEIGHT = 40; // gridstack cell height
 
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
