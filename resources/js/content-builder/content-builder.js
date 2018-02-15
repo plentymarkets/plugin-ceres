@@ -15,8 +15,69 @@ function initCeresForGridstack()
 {
     removeDefaultLinks();
     injectGridstackMarkup();
-    addBackendEventListeners();
+    addBackendEventListener();
     addWindowResizeListener();
+}
+
+/**
+ *
+ * @param event
+ */
+function dispatchBuilderEvent(event)
+{
+    parent.postMessage(event, 'http://master.login.plentymarkets.com');
+}
+
+/**
+ *
+ * @param response
+ */
+function handleBuilderEventResponse(response)
+{
+    if(response.origin == 'http://master.login.plentymarkets.com')
+    {
+        var eventName = response.data.name;
+        var eventData = response.data.data;
+
+        switch(eventName)
+        {
+            case 'shopbuilder_reset':
+
+                reloadView();
+                break;
+
+            case 'shopbuilder_drop':
+
+                addContentWidget(eventData);
+                break;
+
+            case 'shopbuilder_zoom':
+
+                zoomView(eventData.zoomFactor);
+                break;
+
+            default:
+
+                console.log("Unknown event: " + eventName);
+        }
+    }
+}
+
+/**
+ * Zoom view by a given factor
+ * @param factor
+ */
+function zoomView(factor)
+{
+    jQuery('body').css('zoom', factor * 100 + '%');
+    updateContainerDimensions();
+}
+
+function reloadView()
+{
+    jQuery('body').html('');
+    jQuery('body').addClass('loading');
+    window.location.reload(true);
 }
 
 /**
@@ -99,7 +160,11 @@ function addDeleteButton(element)
         // todo: @vwiebe fix dropzone scope
         jQuery('.grid-stack-0').data('gridstack').removeWidget(jQuery(this).closest('.grid-stack-item'));
 
-        dispatchTerraEvent('shopbuilder_delete');
+        dispatchBuilderEvent({
+            name: 'shopbuilder_delete',
+            data: {}
+        });
+
     });
 }
 
@@ -133,45 +198,34 @@ function addEditButton(element)
             }
         };
 
-        dispatchTerraEvent('shopbuilder_open_properties');
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_properties',
+            data: { propertiesObject }
+        });
+
     });
 }
 
-/**
- *
- * @param event
- * @param param
- */
-function dispatchTerraEvent(event, param)
+function addBackendEventListener()
 {
-    window.parent.window.dispatchEvent(new CustomEvent(event, { detail: param }));
-}
+    // window.addEventListener('dragenter', function(event)
+    // {
+    //     event.preventDefault();
+    //
+    //     console.log('dragenter');
+    //
+    // }, false);
+    //
+    // window.addEventListener('dragover', function(event)
+    // {
+    //
+    //     console.log('dragover');
+    //
+    //
+    //     event.preventDefault();
+    // }, false);
 
-function addBackendEventListeners()
-{
-    // drop element into iframe
-    jQuery('body').on('shopbuilder_drop', function(element)
-    {
-        addContentWidget(element.originalEvent.detail);
-    });
-
-    // reset iframe
-    jQuery('body').on('shopbuilder_reset', function()
-    {
-        jQuery('body').html('');
-        jQuery('body').addClass('loading');
-
-        window.location.reload(true);
-    });
-
-    // zoom iframe
-    jQuery('body').on('shopbuilder_zoom', function(event)
-    {
-        var value = event.originalEvent.detail.value;
-        jQuery('body').css('zoom', value * 100 + '%');
-        updateContainerDimensions();
-    })
-
+    window.addEventListener('message', handleBuilderEventResponse, false);
 }
 
 /**
