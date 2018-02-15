@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v2.2.2 (2018-02-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.1...2.2.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the item view occasionally displayed a 404 page if the URL was entered without Variation ID. This has been fixed by taking the configuration value **Show variations by type** into account in the item view as well.
+- Due to an error, item lists that contained items with multiple images weren't displayed correctly. This has been fixed.
+- Due to an error, plugins were unable to create tabs in the item view. This has been fixed.
+
 ## v2.2.1 (2018-02-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.0...2.2.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Changed
