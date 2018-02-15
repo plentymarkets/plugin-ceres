@@ -219,17 +219,23 @@ function addBackendEventListener()
 function addContentWidget(widgetData)
 {
     var height = widgetData.defaultHeight;
+    var markup = widgetData.htmlMarkup;
 
     // wrap element with gridstack containers
     var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-        '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + widgetData.htmlMarkup + '</div>' +
+        '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + markup + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);
     addContextMenu(gridStackItem);
-    // todo: @vwiebe fix dropzone scope
-    jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
-    updateContainerDimensions();
+
+    // scroll view to top
+    $('html').animate({ scrollTop: 0 }, 'fast', function ()
+    {
+        // todo: @vwiebe fix dropzone scope
+        jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
+        updateContainerDimensions();
+    });
 }
 
 /**
