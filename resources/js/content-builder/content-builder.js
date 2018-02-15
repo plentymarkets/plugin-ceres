@@ -165,7 +165,6 @@ function addDeleteButton(element)
             name: 'shopbuilder_delete',
             data: {}
         });
-
     });
 }
 
@@ -181,27 +180,9 @@ function addEditButton(element)
     // open properties
     jQuery(element).find('.edit-icon').click(function ()
     {
-        // dummy data
-        var propertiesObject = {
-            widgetWidth: {
-                controlType:"inputNumber",
-                options:{
-                    label:"Breite",
-                    required:false
-                }
-            },
-            widgetHeadline: {
-                controlType:"inputText",
-                options:{
-                    label:"Header",
-                    required:false
-                }
-            }
-        };
-
         dispatchBuilderEvent({
             name: 'shopbuilder_open_properties',
-            data: { propertiesObject }
+            data: {}
         });
 
     });
