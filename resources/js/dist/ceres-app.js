@@ -11599,6 +11599,7 @@ Vue.component("checkout", {
         this.addEventHandler();
     },
 
+
     methods: {
         addEventHandler: function addEventHandler() {
             var _this = this;
@@ -11824,6 +11825,9 @@ Vue.component("place-order", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        basketItemQuantity: function basketItemQuantity(state) {
+            return state.basket.data.itemQuantity;
         }
     }),
 
@@ -11851,7 +11855,7 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.validateCheckout()) {
+            if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
                     _this2.afterPreparePayment(response);
                 }).fail(function (error) {
