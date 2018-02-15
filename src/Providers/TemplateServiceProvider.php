@@ -78,7 +78,10 @@ class TemplateServiceProvider extends ServiceProvider
                 $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
                 $templateContainer->setTemplateData(function() use ($templateContextClass, $templateData, $templateContainer) {
                     $templateContext = pluginApp($templateContextClass);
-                    $templateContext->init($templateData, $templateContainer);
+                    if($templateContext instanceof ContextInterface)
+                    {
+                        $templateContext->init($templateData, $templateContainer);
+                    }
                     return $templateContext;
                 });
                 
