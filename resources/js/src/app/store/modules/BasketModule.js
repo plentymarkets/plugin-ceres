@@ -1,4 +1,6 @@
 import ApiService from "services/ApiService";
+import TranslationService from "services/TranslationService";
+const NotificationService = require("services/NotificationService");
 
 const state =
     {
@@ -9,6 +11,7 @@ const state =
             quantity: null
         },
         isBasketLoading: false,
+        isBasketInitiallyLoaded: false,
         basketNotifications: []
     };
 
@@ -79,11 +82,44 @@ const mutations =
         setIsBasketLoading(state, isBasketLoading)
         {
             state.isBasketLoading = !!isBasketLoading;
+        },
+
+        setIsBasketInitiallyLoaded(state)
+        {
+            state.isBasketInitiallyLoaded = true;
         }
     };
 
 const actions =
     {
+        loadBasketData({commit, state})
+        {
+            if (state.data.itemQuantity)
+            {
+                ApiService.get("/rest/io/basket/items", {template: "Ceres::Basket.Basket"})
+                    .done(basketItems =>
+                    {
+                        commit("setBasketItems", basketItems);
+                        commit("setIsBasketInitiallyLoaded");
+
+                        setTimeout(() =>
+                        {
+                            $(document.body).trigger("sticky_kit:recalc");
+                        }, 0);
+                    })
+                    .fail(error =>
+                    {
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.notFoundOops")
+                        ).closeAfter(10000);
+                    });
+            }
+            else
+            {
+                commit("setIsBasketInitiallyLoaded");
+            }
+        },
+
         addBasketNotification({commit}, {type, message})
         {
             commit("addBasketNotification", {type, message});

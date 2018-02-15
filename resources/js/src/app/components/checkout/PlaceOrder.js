@@ -22,7 +22,8 @@ Vue.component("place-order", {
     computed: Vuex.mapState({
         checkoutValidation: state => state.checkout.validation,
         contactWish: state => state.checkout.contactWish,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
     }),
 
     created()
