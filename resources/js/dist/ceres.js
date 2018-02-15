@@ -13993,7 +13993,7 @@ Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "basketData", "basketItemsData"],
+    props: ["template", "basketData"],
 
     computed: Vuex.mapState({
         basket: function basket(state) {
@@ -14010,7 +14010,7 @@ Vue.component("basket-preview", {
     created: function created() {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setBasketItems", this.basketItemsData);
+        this.$store.dispatch("loadBasketData");
     },
 
 
@@ -14196,6 +14196,9 @@ Vue.component("basket-list", {
     computed: Vuex.mapState({
         basketItems: function basketItems(state) {
             return state.basket.items;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
         }
     }),
 
@@ -14642,6 +14645,9 @@ Vue.component("place-order", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
         }
     }),
 
@@ -21771,7 +21777,13 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
 
 var state = {
     data: {},
@@ -21781,6 +21793,7 @@ var state = {
         quantity: null
     },
     isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
     basketNotifications: []
 };
 
@@ -21839,14 +21852,36 @@ var mutations = {
     },
     setIsBasketLoading: function setIsBasketLoading(state, isBasketLoading) {
         state.isBasketLoading = !!isBasketLoading;
+    },
+    setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
+        state.isBasketInitiallyLoaded = true;
     }
 };
 
 var actions = {
-    addBasketNotification: function addBasketNotification(_ref3, _ref4) {
-        var commit = _ref3.commit;
-        var type = _ref4.type,
-            message = _ref4.message;
+    loadBasketData: function loadBasketData(_ref3) {
+        var commit = _ref3.commit,
+            state = _ref3.state;
+
+        if (state.data.itemQuantity) {
+            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketInitiallyLoaded");
+
+                setTimeout(function () {
+                    $(document.body).trigger("sticky_kit:recalc");
+                }, 0);
+            }).fail(function (error) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops")).closeAfter(10000);
+            });
+        } else {
+            commit("setIsBasketInitiallyLoaded");
+        }
+    },
+    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
+        var commit = _ref4.commit;
+        var type = _ref5.type,
+            message = _ref5.message;
 
         commit("addBasketNotification", { type: type, message: message });
 
@@ -21854,8 +21889,8 @@ var actions = {
             commit("clearOldestNotification");
         }, 5000);
     },
-    addBasketItem: function addBasketItem(_ref5, basketItem) {
-        var commit = _ref5.commit;
+    addBasketItem: function addBasketItem(_ref6, basketItem) {
+        var commit = _ref6.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21871,10 +21906,10 @@ var actions = {
             });
         });
     },
-    updateBasketItemQuantity: function updateBasketItemQuantity(_ref6, _ref7) {
-        var commit = _ref6.commit;
-        var basketItem = _ref7.basketItem,
-            quantity = _ref7.quantity;
+    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
+        var commit = _ref7.commit;
+        var basketItem = _ref8.basketItem,
+            quantity = _ref8.quantity;
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
@@ -21891,8 +21926,8 @@ var actions = {
             });
         });
     },
-    removeBasketItem: function removeBasketItem(_ref8, basketItemId) {
-        var commit = _ref8.commit;
+    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
+        var commit = _ref9.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21907,9 +21942,9 @@ var actions = {
             });
         });
     },
-    redeemCouponCode: function redeemCouponCode(_ref9, couponCode) {
-        var state = _ref9.state,
-            commit = _ref9.commit;
+    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
+        var state = _ref10.state,
+            commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21924,9 +21959,9 @@ var actions = {
             });
         });
     },
-    removeCouponCode: function removeCouponCode(_ref10, couponCode) {
-        var state = _ref10.state,
-            commit = _ref10.commit;
+    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
+        var state = _ref11.state,
+            commit = _ref11.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21949,7 +21984,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":104}],117:[function(require,module,exports){
+},{"services/ApiService":104,"services/NotificationService":109,"services/TranslationService":110}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
