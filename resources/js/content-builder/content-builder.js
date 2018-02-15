@@ -1,5 +1,6 @@
 $.noConflict(); // enable save mode
 
+const BACKEND_URL = 'http://master.login.plentymarkets.com';
 const CELL_HEIGHT = 40; // gridstack cell height
 
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
@@ -25,7 +26,7 @@ function initCeresForGridstack()
  */
 function dispatchBuilderEvent(event)
 {
-    parent.postMessage(event, 'http://master.login.plentymarkets.com');
+    parent.postMessage(event, BACKEND_URL);
 }
 
 /**
@@ -34,7 +35,7 @@ function dispatchBuilderEvent(event)
  */
 function handleBuilderEventResponse(response)
 {
-    if(response.origin == 'http://master.login.plentymarkets.com')
+    if(response.origin == BACKEND_URL)
     {
         var eventName = response.data.name;
         var eventData = response.data.data;
@@ -208,23 +209,6 @@ function addEditButton(element)
 
 function addBackendEventListener()
 {
-    // window.addEventListener('dragenter', function(event)
-    // {
-    //     event.preventDefault();
-    //
-    //     console.log('dragenter');
-    //
-    // }, false);
-    //
-    // window.addEventListener('dragover', function(event)
-    // {
-    //
-    //     console.log('dragover');
-    //
-    //
-    //     event.preventDefault();
-    // }, false);
-
     window.addEventListener('message', handleBuilderEventResponse, false);
 }
 
