@@ -15,8 +15,8 @@
     <div slot="AfterAddToBasket">{{ LayoutContainer.show("Ceres::SingleItem.AfterAddToBasket", item.documents[0].data) }}</div>
     <div slot="AdditionalContentAfterAddToBasket">{{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterAddToBasket", item.documents[0].data) }}</div>
     <div slot="AdditionalContentAfterVAT">{{ LayoutContainer.show("Ceres::SingleItem.AdditionalContentAfterVAT", item.documents[0].data) }}</div>
-    <li slot="AddDetailTabs">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs") }}</li>
-    <div slot="AddDetailTabsContent">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent") }}</div>
+    <template slot="AddDetailTabs">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabs", item.documents[0].data) }}</template>
+    <template slot="AddDetailTabsContent">{{ LayoutContainer.show("Ceres::SingleItem.AddDetailTabsContent", item.documents[0].data) }}</template>
     <div slot="ItemListContainer">{{ LayoutContainer.show("Ceres::SingleItem.ItemListContainer", item) }}</div>
     <div slot="FeedbackContainer">{{ LayoutContainer.show("Ceres::SingleItem.FeedbackContainer", item) }}</div>
 </single-item>

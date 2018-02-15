@@ -6,8 +6,7 @@ Vue.component("basket-preview", {
 
     props: [
         "template",
-        "basketData",
-        "basketItemsData"
+        "basketData"
     ],
 
     computed: Vuex.mapState({
@@ -20,7 +19,7 @@ Vue.component("basket-preview", {
     {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setBasketItems", this.basketItemsData);
+        this.$store.dispatch("loadBasketData");
     },
 
     /**

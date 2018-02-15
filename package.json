@@ -1,7 +1,7 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
@@ -22,7 +22,7 @@
     "gulp": "^3.9.1",
     "gulp-add-src": "^0.2.0",
     "gulp-autoprefixer": "^3.1.0",
-    "gulp-babel": "^6.1.2",
+    "gulp-babel": "^6.1.3",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^3.0.1",
@@ -31,7 +31,7 @@
     "gulp-props": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^1.6.0",
+    "gulp-sourcemaps": "^1.12.1",
     "gulp-tap": "^0.1.3",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
@@ -52,6 +52,7 @@
     "lightbox2": "^2.10.0",
     "moment": "^2.20.1",
     "owl.carousel": "^2.2.0",
+    "popper.js": "^1.12.9",
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.4.3",
