@@ -1,9 +1,7 @@
 {{ component( "Ceres::Item.Components.QuantityInput" ) }}
 
 <script type="x/template" id="vue-add-to-basket">
-
     <div>
-
         <div :class="{'no-pointer-events': waiting}" class="add-to-basket-lg-container hidden-md-down" v-if="!showQuantity && useLargeScale && canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.addToBasket") }}" @click="addToBasket()">
             <i v-waiting-animation="waiting" class="fa fa-cart-plus fa-lg mobile-icon-right"></i>
@@ -41,7 +39,6 @@
         </div>
 
         <div class="category-list-view-port" v-if="!showQuantity && !useLargeScale">
-
             <div class="btn-group" role="group" aria-label="Thumb Control">
                 <button type="button" :class="{'no-pointer-events': waiting}" v-if="canBeAddedToBasket" class="btn btn-outline-primary mobile-width-button" @click="addToBasket()">
                     <i class="fa fa-cart-plus fa-lg mobile-icon-right" aria-hidden="true"></i>
@@ -51,10 +48,6 @@
                     <i class="fa fa-arrow-right fa-lg mobile-icon-right" aria-hidden="true"></i>
                     <span class="mobile-text-only">{{ trans("Ceres::Template.showItem") }}</span>
                 </button>
-                {# maybe use the button for wishlist #}
-                {#<button type="button" class="btn btn-primary" @click="directToItem()">#}
-                {#<i class="fa fa-heart-o" aria-hidden="true"></i>#}
-                {#</button>#}
             </div>
         </div>
     </div>
