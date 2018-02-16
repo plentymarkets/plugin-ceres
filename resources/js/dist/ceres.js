@@ -13809,7 +13809,7 @@ Vue.component("add-item-to-basket-overlay", {
                     var vueApp = document.querySelector("#vue-app");
 
                     if (vueApp) {
-                        vueApp.classList.toggle("open-right");
+                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
                     }
                 }, 1);
             }
@@ -13961,7 +13961,7 @@ Vue.component("add-to-basket", {
             return this.item.variation.id;
         },
         hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
             var isSalable = this.item.filter && this.item.filter.isSalable;
@@ -13969,7 +13969,7 @@ Vue.component("add-to-basket", {
             var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
             var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 
@@ -14233,10 +14233,9 @@ Vue.component("basket-list-item", {
     data: function data() {
         return {
             waiting: false,
-            waitForDelete: false,
-            deleteConfirmed: false,
-            deleteConfirmedTimeout: null,
-            itemCondition: ""
+            waitingForDelete: false,
+            itemCondition: "",
+            showMoreInformation: false
         };
     },
 
@@ -14274,22 +14273,14 @@ Vue.component("basket-list-item", {
         deleteItem: function deleteItem() {
             var _this = this;
 
-            if (!this.deleteConfirmed) {
-                this.deleteConfirmed = true;
-                this.deleteConfirmedTimeout = window.setTimeout(function () {
-                    _this.resetDelete();
-                }, 5000);
-            } else {
-                this.waitForDelete = true;
-                this.waiting = true;
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
+                this.waitingForDelete = true;
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 }, function (error) {
-                    _this.resetDelete();
-                    _this.waitForDelete = false;
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 });
             }
         },
@@ -14324,17 +14315,6 @@ Vue.component("basket-list-item", {
 
                     _this2.waiting = false;
                 });
-            }
-        },
-
-
-        /**
-         * Cancel delete
-         */
-        resetDelete: function resetDelete() {
-            this.deleteConfirmed = false;
-            if (this.deleteConfirmedTimeout) {
-                window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
     }
@@ -14419,6 +14399,7 @@ Vue.component("checkout", {
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.addEventHandler();
     },
+
 
     methods: {
         addEventHandler: function addEventHandler() {
@@ -14646,6 +14627,9 @@ Vue.component("place-order", {
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
         },
+        basketItemQuantity: function basketItemQuantity(state) {
+            return state.basket.data.itemQuantity;
+        },
         isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
             return state.basket.isBasketInitiallyLoaded;
         }
@@ -14675,7 +14659,7 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.validateCheckout()) {
+            if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
                     _this2.afterPreparePayment(response);
                 }).fail(function (error) {
@@ -19357,7 +19341,7 @@ Vue.directive("toggle-basket-preview", {
             var vueApp = document.querySelector("#vue-app");
 
             if (vueApp) {
-                vueApp.classList.toggle("open-right");
+                vueApp.classList.toggle(App.config.basketOpenClass || "open-hover");
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -20102,10 +20086,10 @@ var init = function ($, window, document) {
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function (evt) {
-            if ($("#vue-app").hasClass("open-right")) {
-                if (evt.target != $(".basket-preview") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0) {
+            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-hover")) {
+                if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass("open-right");
+                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-hover");
                 }
             }
 

@@ -12,7 +12,7 @@
 	color: $top-bar-color;
 	background-color: $top-bar-bg;
 	box-shadow: 0 0 7px 0 rgba(0,0,0,.5);
-	a{
+	a:not(.btn) {
 		text-decoration: none;
 		color: $top-bar-color;
 		outline: none;
@@ -32,7 +32,7 @@
 			// sets the height of the top-bar
 			@include media-breakpoint-between(xs, md) {
 
-				a {
+				a:not(.btn) {
 					padding: 0.5rem .5rem;
 					display: inline-block;
 					color: $gray-lighter;
@@ -50,7 +50,7 @@
 			}
 
 			@include media-breakpoint-up(md) {
-				a {
+				a:not(.btn) {
 					padding: 0.5rem .8rem;
 					display: inline-block;
 					color: $gray-lighter;
@@ -64,7 +64,7 @@
 			}
 
 			// icons should be slightly larger
-			.fa{
+			.fa:not(.qty-sign){
 				font-size: 1.2rem;
 			}
 
@@ -200,6 +200,8 @@
 		}
 
 		.control-basket{
+			position: relative;
+
 			.toggle-basket-preview{
 				background-color: $top-bar-basket-btn;
 				color: $top-bar-basket-color;
@@ -398,7 +400,7 @@
 				// default font size for all items
 				font-size: .8rem;
 
-				.fa{
+				.fa:not(.qty-sign){
 					// icons should be slightly larger
 					font-size: 1rem;
 					line-height: .8rem;

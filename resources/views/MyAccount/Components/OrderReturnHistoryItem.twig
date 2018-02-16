@@ -1,3 +1,5 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 <script type="x/template" id="vue-order-return-history-item">
     <article class="cmp cmp-order-item">
         <div class="item-details small">
@@ -29,6 +31,8 @@
                     <hr class="gradient-hr">
                 </div>
             </div>
+
+            {{ LayoutContainer.show("Ceres::MyAccount.OrderReturnHistoryItem") }}
 
             {# show initial #}
             <div class="row">
