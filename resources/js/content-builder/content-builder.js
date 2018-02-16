@@ -47,6 +47,11 @@ function handleBuilderEventResponse(response)
 
         switch(eventName)
         {
+            case 'shopbuilder_widget_order':
+
+                getWidgetOrder();
+                break;
+
             case 'shopbuilder_reset':
 
                 reloadView();
@@ -69,6 +74,22 @@ function handleBuilderEventResponse(response)
     }
 }
 
+function getWidgetOrder()
+{
+    var data = {};
+
+    jQuery('[data-builder-identifier]').each(function(i)
+    {
+        var key = jQuery(this).attr('data-gs-y');
+        data[key] = jQuery(this).attr('data-builder-identifier');
+    });
+
+    dispatchBuilderEvent({
+        name: 'shopbuilder_widget_order',
+        data: data
+    });
+}
+
 /**
  * Zoom view by a given factor
  * @param factor
@@ -81,8 +102,6 @@ function zoomView(factor)
 
 function reloadView()
 {
-    jQuery('body').html('');
-    jQuery('body').addClass('loading');
     window.location.reload(true);
 }
 
@@ -206,9 +225,10 @@ function addContentWidget(widgetData)
 {
     var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
+    var identifier = widgetData.identifier;
 
     // wrap element with gridstack containers
-    var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
+    var gridStackItem = jQuery(  '<div class="grid-stack-item" data-builder-identifier="' + identifier + '"' +
         '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + markup + '</div>' +
         '</div>');
 
