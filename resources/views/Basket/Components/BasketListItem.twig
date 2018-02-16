@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
-                    <div class="item-properties-header">Ihre Angaben (Preis pro Artikel):</div>
+                    <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul>
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
 
