@@ -449,6 +449,11 @@
             "description"   : "Add additional payment information after the order information on the My account page."
         },
         {
+            "key"           : "MyAccount.OrderReturnHistoryItem",
+            "name"          : "My account: Additional order return information",
+            "description"   : "Add additional information after the order return details."
+        },
+        {
             "key"           : "CategoryItem.BeforePrices",
             "name"          : "Category item list: Before prices container",
             "description"   : "Add content before the prices in the category item view."
