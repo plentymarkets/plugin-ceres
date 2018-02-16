@@ -22,7 +22,8 @@ Vue.component("place-order", {
     computed: Vuex.mapState({
         checkoutValidation: state => state.checkout.validation,
         contactWish: state => state.checkout.contactWish,
-        isBasketLoading: state => state.basket.isBasketLoading
+        isBasketLoading: state => state.basket.isBasketLoading,
+        basketItemQuantity: state => state.basket.data.itemQuantity
     }),
 
     created()
@@ -53,7 +54,7 @@ Vue.component("place-order", {
         {
             this.waiting = true;
 
-            if (this.validateCheckout())
+            if (this.validateCheckout() && this.basketItemQuantity > 0)
             {
                 ApiService.post("/rest/io/checkout/payment")
                     .done(response =>
