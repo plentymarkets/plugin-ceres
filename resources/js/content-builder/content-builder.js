@@ -229,10 +229,10 @@ function addContentWidget(widgetData)
 {
     var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
-    var identifier = widgetData.identifier;
+    var uniqueId = widgetData.uniqueId;
 
     // wrap element with gridstack containers
-    var gridStackItem = jQuery(  '<div class="grid-stack-item" data-builder-identifier="' + identifier + '"' +
+    var gridStackItem = jQuery(  '<div class="grid-stack-item" data-builder-identifier="' + uniqueId + '"' +
         '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + markup + '</div>' +
         '</div>');
 
