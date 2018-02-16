@@ -1,5 +1,19 @@
 # Release Notes for Ceres
 
+## v2.3.0 (2018-02-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Explanatory texts for registration and intended use have been added (EHI).
+- A container has been added to the OrderConfirmation page so that shipping-plugins are now able to display additional content.
+- The setting Name of an item to display has been added to the Item view tab. This value determines whether the item name, the variation name (if available) or a combination of the two names are displayed in the online store. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">Customising the item view</a>.
+- Categories of the Content type can now be displayed in the navigation bar. For this purpose the setting Type of categories rendered in the navigation has been added to the Header tab in the Ceres configuration. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#70" target="_blank">Customising the header and footer</a>.
+
+### Fixed
+
+- Due to an error, items that were not displayed on the category page could not be moved to the shopping cart. This has been fixed.
+- Due to an error, there were attempts to place an order even if the shopping cart was empty. This has been fixed.
+
 ## v2.2.2 (2018-02-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.1...2.2.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -290,7 +304,7 @@
 
 ### Changed
 
-- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- The text of order properties will not be displayed in the shopping cart preview anymore.
 - Order properties will now be displayed above the price in the single item view.
 - In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
 - The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
@@ -673,7 +687,7 @@
 
 ### Added
 
-- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end. 
+- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end.
 
 ### Fixed
 
@@ -763,7 +777,7 @@
 
 ### Fixed
 
-- The `AfterBasketChanged` event is no longer triggered when loading a page. 
+- The `AfterBasketChanged` event is no longer triggered when loading a page.
 - The `AfterBasketChanged` event will only be triggered once when the shopping cart is updated.
 
 ## v1.1.0 (2017-04-12)
@@ -779,7 +793,7 @@
 - The performance of the categories has been improved.
 - The styling of the categories has been updated.
 - The categories will now be reloaded in the category view without reloading the entire page.
-- The pagination has been updated. In the settings in the **Pagination and sorting** tab, you can now select the rows and columns of the category view. The pagination values will be calculated and displayed automatically. 
+- The pagination has been updated. In the settings in the **Pagination and sorting** tab, you can now select the rows and columns of the category view. The pagination values will be calculated and displayed automatically.
 
 ## v1.0.5 (2017-04-07)
 
