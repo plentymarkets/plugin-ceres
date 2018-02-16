@@ -14,7 +14,7 @@ Vue.component("checkout", {
         checkout: state => state.checkout
     }),
 
-    created: function()
+    created()
     {
         this.$options.template = this.template;
         this.$store.dispatch("setCheckout", this.initialCheckout);
