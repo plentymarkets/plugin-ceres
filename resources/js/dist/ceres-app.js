@@ -11143,7 +11143,7 @@ Vue.component("add-to-basket", {
             return this.item.variation.id;
         },
         hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
             var isSalable = this.item.filter && this.item.filter.isSalable;
@@ -11151,7 +11151,7 @@ Vue.component("add-to-basket", {
             var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
             var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 
