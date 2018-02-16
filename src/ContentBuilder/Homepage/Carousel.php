@@ -21,19 +21,15 @@ class Carousel implements Widget
         $slides = [
             [
                 "variationId" => 1063,
-                "customImagePath" => ""
+                "customImagePath" => "https://i.imgur.com/qvkyZk1.jpg"
             ],
             [
                 "variationId" => 1064,
-                "customImagePath" => ""
+                "customImagePath" => "https://i.imgur.com/m4ELeiO.jpg"
             ],
             [
                 "variationId" => 1065,
-                "customImagePath" => ""
-            ],
-            [
-                "variationId" => 1066,
-                "customImagePath" => ""
+                "customImagePath" => "https://i.imgur.com/gsRayfj.jpg"
             ]
         ];
 

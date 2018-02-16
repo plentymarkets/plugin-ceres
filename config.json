@@ -742,6 +742,18 @@
         "default"           : "overlay"
     },
     {
+        "tab"               : "Shopping cart",
+        "key"               : "basket.preview_type",
+        "label"             : "The type of the cart preview",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "hover"         : "Hover",
+            "right"         : "Right"
+        },
+        "default"           : "right"
+    },
+    {
         "tab"               : "Pagination and sorting",
         "key"               : "pagination.position",
         "label"             : "Pagination position",
