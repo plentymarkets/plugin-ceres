@@ -1,66 +1,31 @@
 [
 	{
-		"identifier": "Ceres::Row",
-		"label": "Row",
-		"tooltip": "Row",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\General\\Row"
-	},
-	{
-		"identifier": "Ceres::Column",
-		"label": "Column",
-		"tooltip": "Column",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": true,
-		"widgetClass": "Ceres\\ContentBuilder\\General\\Column"
-	},
-	{
 		"identifier": "Ceres::TextHeader",
 		"label": "TextHeader",
 		"tooltip": "TextHeader",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"previewImageURL": "https://lh5.googleusercontent.com/LIyvVO7yvuW9J9OSTnvkmqElE5-0NuUos8Nv4szADEeA-CYg4ZJrrMg39MS0Hj-p-ddzOeWtpdskB-nZ-LbI=w3360-h1908-rw",
 		"resizable": false,
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader"
-	},
-	{
-		"identifier": "Ceres::ItemPreview",
-		"label": "ItemPreview",
-		"tooltip": "Item preview",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemPreview",
-		"settings": {
-			"variationId": {
-				"type": "inputNumber",
-				"required": true,
-				"label": "Variation ID",
-				"options": {
-					"tooltip": "Variation ID",
-					"defaultValue": "132"
-				}
-			}
-		}
 	},
 	{
 		"identifier": "Ceres::Carousel",
 		"label": "Carousel",
 		"tooltip": "Carousel",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"previewImageURL": "https://lh3.googleusercontent.com/4xiQkIrR8ipClXdpaco8anHpQPWcPWPu-sCEN4drYwW_Fwh68gbV0GrTz4idjwZ3egFY6l0tQKGme13O5EeN=w3360-h1908-rw",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel"
 	},
 	{
 		"identifier": "Ceres::FeaturedCategory",
 		"label": "FeaturedCategory",
 		"tooltip": "FeaturedCategory",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"previewImageURL": "https://lh6.googleusercontent.com/Vto3abmDAsfpIK2PXd0L-eI6PjTbTc4VGwl6uTAvDHewC75-KqUq0pMxbTt2qp0W39fDL06z4LFU3mO2QRyC=w3360-h1908-rw",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory"
 	},
 	{
 		"identifier": "Ceres::CategoryPreview",
 		"label": "CategoryPreview",
 		"tooltip": "CategoryPreview",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
+		"previewImageURL": "https://lh4.googleusercontent.com/XznWiDlIt3k03gHgvT85HCUvDoF8tVu3dzIiNTrEfNwcEqgKaAYNTPnD0sK45ADBUsJTVwtVfs93cyfRN8wx=w3360-h1908-rw",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
 		"settings": {
 			"categoryId": {
@@ -163,66 +128,6 @@
 					]
 				}
 			}
-		}
-	},
-	{
-		"identifier": "Ceres::widget1",
-		"label": "Template.accAccountSettings",
-		"tooltip": "Template.accAccountSettings",
-		"previewImageURL": "http://www.plentymarkets.eu/layout/plenty_responsive/img/plenty_p_256.png",
-		"resizable": false,
-		"widgetClass": "Ceres\\Widgets\\NumberInput",
-		"keepAspectRatio": "",
-		"defaultHeight": 200,
-		"settings": {
-			"categoryId": {
-				"type": "inputNumber",
-				"required": true,
-				"label": "Template.accAccountSettings",
-				"options": {
-					"tooltip": "Template.accAccountSettings",
-					"defaultValue": "16",
-					"selectBoxValues": [
-						{
-							"value": 100,
-							"label": "Template.accAccountSettings"
-						},
-						{
-							"value": 101,
-							"label": "Template.accAccountSettings"
-						}
-					]
-				}
-			},
-			"categoryId1": {
-				"type": "inputNumber",
-				"required": true,
-				"label": "Template.accAccountSettings",
-				"options": {
-					"tooltip": "Template.accAccountSettings",
-					"defaultValue": "16"
-				}
-			}
-		}
-	},
-	{
-		"identifier": "Ceres::widget2",
-		"widgetClass": "Ceres\\Widgets\\TextInput",
-		"label": "test widget",
-		"resizable": true,
-		"keepAspectRatio": "",
-		"defaultWidth": 100,
-		"defaultHeight": 200
-	},
-	{
-		"identifier": "widget3",
-		"label": "test widget",
-		"tooltip": "",
-		"previewImageURL": "",
-		"keepAspectRatio": "",
-		"defaultWidth": 100,
-		"defaultHeight": 200,
-		"settings": {
 		}
 	}
 ]
