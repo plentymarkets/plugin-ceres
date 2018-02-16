@@ -1,0 +1,57 @@
+<script type="x/template" id="vue-quantity-input-slim">
+    <div class="qty-box">
+        <button class="qty-button" type="button" @click="countValueDown()" :disabled="waiting">
+            <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
+        </button>
+        
+        <input class="qty-input" type="text" pattern="[0-9]*" inputmode="numeric" value="1" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting">
+        
+        <button class="qty-button" type="button" @click="countValueUp()" :disabled="waiting">
+            <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+        </button>
+    </div>
+</script>
+
+<!-- .qty-box {
+	color: #8D8D8D;
+	height: 2rem;
+	font-size: 1rem;
+	width: 16rem;
+
+	& > .qty-button {
+		background: #eaeaea;
+		width: 2em;
+		color: #8D8D8D;
+		border: 2px solid transparent;
+		font-weight: bold;
+		text-align: center;
+		float: left;
+		outline: none;
+		height: 100%;
+		transition: all .2s cubic-bezier(0,0,.26,1);
+
+		&:not(:disabled):hover {
+			background: #dedede;
+		}
+	}
+
+	& > .qty-input {
+		background: #eaeaea;
+		padding: 0;
+		color: #8D8D8D;
+		border: 2px solid transparent;
+		text-align: center;
+		font-weight: bold;
+		float: left;
+		outline: none;
+		width: 3rem;
+		box-sizing: border-box;
+		height: 100%;
+		transition: all .2s cubic-bezier(0,0,.26,1);
+		font-size: .8rem;
+
+		&:focus {
+			background: #dedede;
+		}
+	}
+} -->

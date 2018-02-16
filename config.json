@@ -742,6 +742,18 @@
         "default"           : "overlay"
     },
     {
+        "tab"               : "Shopping cart",
+        "key"               : "basket.preview_type",
+        "label"             : "The type of the cart preview",
+        "type"              : "dropdown",
+        "possibleValues"    :
+        {
+            "hover"         : "Hover",
+            "right"         : "Right"
+        },
+        "default"           : "right"
+    },
+    {
         "tab"               : "Pagination and sorting",
         "key"               : "pagination.position",
         "label"             : "Pagination position",
@@ -1082,6 +1094,13 @@
             "stock.net_desc"                            : "Stock ⬇"
         },
         "default"       : "notSelected"
+    },
+    {
+        "tab"               : "Pagination and sorting",
+        "key"               : "search.forwardToSingleItem",
+        "label"             : "Search: Forward to single item view",
+        "type"              : "checkbox",
+        "default"           : "false"
     },
     {
         "tab"               : "Checkout and My account",
