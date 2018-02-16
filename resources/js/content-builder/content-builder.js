@@ -184,10 +184,12 @@ function addDeleteButton(element)
     {
         // todo: @vwiebe fix dropzone scope
         jQuery('.grid-stack-0').data('gridstack').removeWidget(jQuery(this).closest('.grid-stack-item'));
+        
+        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
 
         dispatchBuilderEvent({
             name: 'shopbuilder_delete',
-            data: {}
+            data: { uniqueId: uniqueId }
         });
     });
 }
@@ -204,9 +206,11 @@ function addEditButton(element)
     // open properties
     jQuery(element).find('.edit-icon').click(function ()
     {
+        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+
         dispatchBuilderEvent({
             name: 'shopbuilder_open_properties',
-            data: {}
+            data: { uniqueId: uniqueId }
         });
 
     });
