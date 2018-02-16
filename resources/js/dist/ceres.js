@@ -11511,7 +11511,7 @@ Vue.component("add-to-basket", {
             return this.item.variation.id;
         },
         hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
             var isSalable = this.item.filter && this.item.filter.isSalable;
@@ -11519,7 +11519,7 @@ Vue.component("add-to-basket", {
             var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
             var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 
@@ -11967,6 +11967,7 @@ Vue.component("checkout", {
         this.addEventHandler();
     },
 
+
     methods: {
         addEventHandler: function addEventHandler() {
             var _this = this;
@@ -12192,6 +12193,9 @@ Vue.component("place-order", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        basketItemQuantity: function basketItemQuantity(state) {
+            return state.basket.data.itemQuantity;
         }
     }),
 
@@ -12219,7 +12223,7 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.validateCheckout()) {
+            if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
                     _this2.afterPreparePayment(response);
                 }).fail(function (error) {
