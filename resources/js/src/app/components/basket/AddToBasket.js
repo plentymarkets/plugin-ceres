@@ -121,7 +121,7 @@ Vue.component("add-to-basket", {
 
         hasChildren()
         {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
 
         canBeAddedToBasket()
@@ -131,7 +131,7 @@ Vue.component("add-to-basket", {
             const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
             const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 
