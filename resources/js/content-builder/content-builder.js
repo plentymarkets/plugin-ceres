@@ -76,12 +76,12 @@ function handleBuilderEventResponse(response)
 
 function getWidgetOrder()
 {
-    var data = [];
+    var data = {};
 
     jQuery('[data-builder-identifier]').each(function(i)
     {
         var key = jQuery(this).attr('data-gs-y');
-        data.push(jQuery(this).attr('data-builder-identifier'));
+        data[key] = jQuery(this).attr('data-builder-identifier');
     });
 
     dispatchBuilderEvent({
