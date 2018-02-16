@@ -3,7 +3,7 @@
 		"identifier": "Ceres::TextHeader",
 		"label": "TextHeader",
 		"tooltip": "TextHeader",
-		"previewImageURL": "https://lh5.googleusercontent.com/LIyvVO7yvuW9J9OSTnvkmqElE5-0NuUos8Nv4szADEeA-CYg4ZJrrMg39MS0Hj-p-ddzOeWtpdskB-nZ-LbI=w3360-h1908-rw",
+		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
 		"resizable": false,
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader"
 	},
@@ -11,21 +11,21 @@
 		"identifier": "Ceres::Carousel",
 		"label": "Carousel",
 		"tooltip": "Carousel",
-		"previewImageURL": "https://lh3.googleusercontent.com/4xiQkIrR8ipClXdpaco8anHpQPWcPWPu-sCEN4drYwW_Fwh68gbV0GrTz4idjwZ3egFY6l0tQKGme13O5EeN=w3360-h1908-rw",
+		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel"
 	},
 	{
 		"identifier": "Ceres::FeaturedCategory",
 		"label": "FeaturedCategory",
 		"tooltip": "FeaturedCategory",
-		"previewImageURL": "https://lh6.googleusercontent.com/Vto3abmDAsfpIK2PXd0L-eI6PjTbTc4VGwl6uTAvDHewC75-KqUq0pMxbTt2qp0W39fDL06z4LFU3mO2QRyC=w3360-h1908-rw",
+		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory"
 	},
 	{
 		"identifier": "Ceres::CategoryPreview",
 		"label": "CategoryPreview",
 		"tooltip": "CategoryPreview",
-		"previewImageURL": "https://lh4.googleusercontent.com/XznWiDlIt3k03gHgvT85HCUvDoF8tVu3dzIiNTrEfNwcEqgKaAYNTPnD0sK45ADBUsJTVwtVfs93cyfRN8wx=w3360-h1908-rw",
+		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
 		"settings": {
 			"categoryId": {
@@ -129,5 +129,13 @@
 				}
 			}
 		}
+	},
+	{
+		"identifier": "Ceres::Text",
+		"label": "Text",
+		"tooltip": "Text",
+		"previewImageURL": "",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Text"
 	}
 ]
