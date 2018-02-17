@@ -249,10 +249,12 @@ function addContentWidget(widgetData, position)
     // scroll view to top
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
-        // todo: @vwiebe fix dropzone scope
+        // TODO: @vwiebe fix dropzone scope
         jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem, posX, posY);
 
-        setTimeout(function () {
+        // TODO: @vwiebe synchronize over gridstack "added"-event
+        setTimeout(function ()
+        {
             updateContainerDimensions();
         }, 100);
     });
@@ -266,7 +268,7 @@ function deleteContentWidget(widgetId)
 {
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
-    // todo: @vwiebe fix dropzone scope
+    // TODO: @vwiebe fix dropzone scope
     jQuery('.grid-stack-0').data('gridstack').removeWidget(gridStackItem);
 
     dispatchBuilderEvent({
