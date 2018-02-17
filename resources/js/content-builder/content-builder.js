@@ -47,6 +47,11 @@ function handleBuilderEventResponse(response)
 
         switch(eventName)
         {
+            case 'shopbuilder_widget_replace':
+
+                replaceContentWidget(eventData);
+                break;
+
             case 'shopbuilder_widget_order':
 
                 getWidgetOrder();
@@ -179,18 +184,11 @@ function addDeleteButton(element)
     // inject button markup into given context element
     jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
 
-    // delete widget container
+    // add delete event to button
     jQuery(element).find('.delete-icon').click(function ()
     {
-        // todo: @vwiebe fix dropzone scope
-        jQuery('.grid-stack-0').data('gridstack').removeWidget(jQuery(this).closest('.grid-stack-item'));
-        
-        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-
-        dispatchBuilderEvent({
-            name: 'shopbuilder_delete',
-            data: { uniqueId: uniqueId }
-        });
+        var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+        deleteContentWidget(widgetId);
     });
 }
 
@@ -223,13 +221,22 @@ function addBackendEventListener()
 
 /**
  * add new content element to iframe
- * @param element
+ * @param widgetData
+ * @param position
  */
-function addContentWidget(widgetData)
+function addContentWidget(widgetData, position)
 {
     var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
     var uniqueId = widgetData.uniqueId;
+    var posX = 0;
+    var posY = 0;
+
+    if (position)
+    {
+        if (position.x) posX = position.x;
+        if (position.y) posY = position.y;
+    }
 
     // wrap element with gridstack containers
     var gridStackItem = jQuery(  '<div class="grid-stack-item" data-builder-identifier="' + uniqueId + '"' +
@@ -240,12 +247,49 @@ function addContentWidget(widgetData)
     addContextMenu(gridStackItem);
 
     // scroll view to top
-    $('html').animate({ scrollTop: 0 }, 'fast', function ()
+    $('html').animate({ scrollTop: 0 }, 0, function ()
     {
         // todo: @vwiebe fix dropzone scope
-        jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem);
-        updateContainerDimensions();
+        jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem, posX, posY);
+
+        setTimeout(function () {
+            updateContainerDimensions();
+        }, 100);
     });
+}
+
+/**
+ * delete content widget by id
+ * @param widgetId
+ */
+function deleteContentWidget(widgetId)
+{
+    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
+
+    // todo: @vwiebe fix dropzone scope
+    jQuery('.grid-stack-0').data('gridstack').removeWidget(gridStackItem);
+
+    dispatchBuilderEvent({
+        name: 'shopbuilder_delete',
+        data: { uniqueId: widgetId }
+    });
+}
+
+/**
+ * replace content widget
+ * @param widgetData
+ */
+function replaceContentWidget(widgetData)
+{
+    var id = widgetData.uniqueId;
+    var element = jQuery('body').find('[data-builder-identifier="' + id + '"]');
+    var position = {
+        x: jQuery(element).attr('data-gs-x'),
+        y: jQuery(element).attr('data-gs-y')
+    };
+
+    deleteContentWidget(id);
+    addContentWidget(widgetData, position);
 }
 
 /**
