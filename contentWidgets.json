@@ -29,7 +29,7 @@
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
 		"settings": {
 			"categoryId": {
-				"type": "inputNumber",
+				"type": "categoryPicker",
 				"required": true,
 				"label": "Category ID",
 				"options": {
@@ -136,6 +136,17 @@
 		"tooltip": "Text",
 		"previewImageURL": "",
 		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Text"
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Text",
+		"settings": {
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			}
+		}
 	}
 ]
