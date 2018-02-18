@@ -18,10 +18,9 @@ class Text implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-
         $twig = pluginApp(Twig::class);
 
-        return '<h1>Text</h1>';
+        return '<h1>' . $widgetSettings[0]. '</h1>';
     }
 
     /**
