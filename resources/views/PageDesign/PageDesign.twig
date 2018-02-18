@@ -213,12 +213,12 @@
         </script>
 
         {% if request.get('isContentBuilder') == 1 %}
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/lodash.min.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery.min.js"></script>
+            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery-ui.min.js"></script>
 
-            <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.3.0/gridstack.min.js'></script>
-            <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.3.0/gridstack.jQueryUI.min.js'></script>
+            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/gridstack/gridstack.min.js'></script>
+            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/gridstack/gridstack.jQueryUI.min.js'></script>
             <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/content-builder.js'></script>
         {% endif %}
 
