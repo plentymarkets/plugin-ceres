@@ -2,8 +2,8 @@
 
 <div class="homepage-title m-b-1">
     {% if text | trim is not empty %}
-        <h1>{{ config("Ceres.header.company_name") }}</h1>
-    {% else %}
         <h1>{{ text }}</h1>
+    {% else %}
+        <h1>{{ config("Ceres.header.company_name") }}</h1>
     {% endif %}
 </div>
