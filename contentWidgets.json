@@ -34,7 +34,7 @@
 					"defaultValue": ""
 				}
 			},
-			"text": {
+			"text1": {
 				"type": "inputText",
 				"required": true,
 				"label": "Label",
@@ -43,7 +43,7 @@
 					"defaultValue": ""
 				}
 			},
-			"text": {
+			"text2": {
 				"type": "inputNumber",
 				"required": true,
 				"label": "Label",
@@ -52,7 +52,7 @@
 					"defaultValue": ""
 				}
 			},
-			"text": {
+			"text3": {
 				"type": "inputText",
 				"required": true,
 				"label": "Label",
@@ -61,7 +61,7 @@
 					"defaultValue": ""
 				}
 			},
-			"text": {
+			"text4": {
 				"type": "inputNumber",
 				"required": true,
 				"label": "Label",
@@ -70,7 +70,7 @@
 					"defaultValue": ""
 				}
 			},
-			"text": {
+			"text5": {
 				"type": "inputText",
 				"required": true,
 				"label": "Label",
