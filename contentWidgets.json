@@ -222,7 +222,7 @@
 				"label": "Label",
 				"options": {
 					"tooltip": "Displayed text",
-					"defaultValue": ""
+					"defaultValue": "Default Text"
 				}
 			}
 		}
