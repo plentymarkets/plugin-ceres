@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.3.0 (2018-02-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
+## v2.3.0 (2018-02-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 
