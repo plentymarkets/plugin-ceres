@@ -20,7 +20,7 @@ class Text implements Widget
     {
         $twig = pluginApp(Twig::class);
 
-        return '<h1>' . $widgetSettings[0]. '</h1>';
+        return '<h1>' . $widgetSettings['text']. '</h1>';
     }
 
     /**
