@@ -5,21 +5,99 @@
 		"tooltip": "TextHeader",
 		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
 		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader"
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader",
+		"settings": {
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			}
+		}
 	},
 	{
 		"identifier": "Ceres::Carousel",
 		"label": "Carousel",
 		"tooltip": "Carousel",
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel"
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel",
+		"settings": {
+			"text": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			}
+		}
 	},
 	{
 		"identifier": "Ceres::FeaturedCategory",
 		"label": "FeaturedCategory",
 		"tooltip": "FeaturedCategory",
 		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory"
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory",
+		"settings": {
+			"categoryId": {
+				"type": "categoryPicker",
+				"required": true,
+				"label": "Category ID",
+				"options": {
+					"tooltip": "Category ID",
+					"defaultValue": "19"
+				}
+			}
+		}
 	},
 	{
 		"identifier": "Ceres::CategoryPreview",
