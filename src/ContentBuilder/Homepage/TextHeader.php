@@ -18,10 +18,14 @@ class TextHeader implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-
         $twig = pluginApp(Twig::class);
 
-        return $twig->render('Ceres::ContentBuilder.Homepage.TextHeader');
+        return $twig->render(
+            "Ceres::ContentBuilder.Homepage.TextHeader",
+            [
+                "widgetSettings" => $widgetSettings
+            ]
+        );
     }
 
     /**
