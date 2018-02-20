@@ -2,8 +2,6 @@
 
 <script type="x/template" id="vue-add-item-to-basket-overlay">
 
-    {% set configItemName = config("Ceres.item.name") %}
-
     <div id="add-item-to-basket-overlay">
         <div class="modal fade">
             <div class="modal-dialog" role="document">
@@ -23,8 +21,7 @@
                     <div class="modal-body">
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
-                                <img style="max-height: 140px;" class="img-fluid m-x-auto"
-                                     :src="imageUrl" :alt="itemName"/>
+                                <img style="max-height: 140px;" class="img-fluid m-x-auto" :src="imageUrl" :alt="itemName"/>
                             </div>
                             <div class="col-md-8">
                                 <p>
@@ -43,9 +40,11 @@
                                 </p>
 
                                 <p class="small" v-for="property in latestBasketEntry.item.properties">
-                                    <strong v-if="property.property.value">${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
-                                    <span v-if="property.property.value && property.property.valueType === 'file'">${ property.property.value | fileName }</span>
-                                    <span v-else-if="property.property.value">${ property.property.value }</span>
+                                    <template v-if="property.property.value">
+                                        <strong>${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
+                                        <span v-if="property.property.valueType === 'file'">${ property.property.value | fileName }</span>
+                                        <span v-else>${ property.property.value }</span>
+                                    </template>
                                 </p>
                             </div>
                         </div>

@@ -39,7 +39,6 @@
         </div>
         #}
 
-        {#
         <div v-else-if="inputType === 'file'">
             <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
@@ -56,7 +55,6 @@
                 <input :disabled="waiting" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
             </label>
         </div>
-        #}
 
     </div>
 </script>

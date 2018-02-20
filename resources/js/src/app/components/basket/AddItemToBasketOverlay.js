@@ -6,7 +6,6 @@ Vue.component("add-item-to-basket-overlay", {
 
     props: [
         "basketAddInformation",
-        "configItemName",
         "template"
     ],
 
@@ -31,9 +30,7 @@ Vue.component("add-item-to-basket-overlay", {
         {
             if (this.isLastBasketEntrySet)
             {
-                const texts = this.latestBasketEntry.item.texts;
-
-                return this.$options.filters.itemName(texts, this.configItemName);
+                return this.$options.filters.itemName(this.latestBasketEntry.item);
             }
 
             return "";
@@ -45,7 +42,7 @@ Vue.component("add-item-to-basket-overlay", {
             {
                 const img = this.$options.filters.itemImages(this.latestBasketEntry.item.images, "urlPreview")[0];
 
-                return img.url;
+                return img ? img.url : "";
             }
 
             return "";
@@ -81,7 +78,7 @@ Vue.component("add-item-to-basket-overlay", {
 
                     if (vueApp)
                     {
-                        vueApp.classList.toggle("open-right");
+                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
                     }
                 }, 1);
             }
@@ -92,9 +89,9 @@ Vue.component("add-item-to-basket-overlay", {
     {
         setPriceFromData()
         {
-            if (this.latestBasketEntry.item.calculatedPrices)
+            if (this.latestBasketEntry.item.prices)
             {
-                this.currency = this.latestBasketEntry.item.calculatedPrices.default.currency;
+                this.currency = this.latestBasketEntry.item.prices.default.currency;
                 const graduatedPrice = this.$options.filters.graduatedPrice(this.latestBasketEntry.item, this.latestBasketEntry.quantity);
                 const propertySurcharge = this.$options.filters.propertySurchargeSum(this.latestBasketEntry.item);
 

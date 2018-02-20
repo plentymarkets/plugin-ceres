@@ -1,6 +1,8 @@
 const ApiService = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("order-return-history", {
 
     props: [
@@ -48,34 +50,11 @@ Vue.component("order-return-history", {
                 {
                     this.waiting = false;
                     this.returnsList.page = lastPage;
-                    NotificationService.error(Translations.Template.notFoundOops);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.notFoundOops")
+                    );
                 });
             }
-        },
-
-        toggleNaming(element)
-        {
-            if (document.getElementById(element).innerText === Translations.Template.myAccountReturnShowMore)
-            {
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowLess;
-            }
-            else
-            {
-                document.getElementById(element).innerText = Translations.Template.myAccountReturnShowMore;
-            }
-        },
-
-        getOriginOrderId(order)
-        {
-            for (const orderRef of order.orderReferences)
-            {
-                if (orderRef.referenceType === "parent")
-                {
-                    return orderRef.referenceOrderId;
-                }
-            }
-
-            return "-";
         }
     }
 });

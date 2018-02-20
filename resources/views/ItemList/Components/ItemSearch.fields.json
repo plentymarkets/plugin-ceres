@@ -1,4 +1,8 @@
 [
+  "item.id",
+  "variation.name",
+  "variation.id",
   "texts.name*",
+  "texts.urlPath",
   "texts.lang"
 ]

@@ -6,6 +6,7 @@
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 {{ component( "Ceres::WishList.Components.WishListCount" ) }}
+{{ component( "Ceres::Basket.Components.BasketPreviewHover" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
@@ -66,9 +67,21 @@
 
                         <i v-waiting-animation="this.$store.state.basket.isBasketLoading" waiting-class="fa fa-refresh fa-spin" class="fa fa-shopping-cart" aria-hidden="true"></i>
                         {% if config("Ceres.header.basket_values") != "quantity" %}
-                            <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                            {% if services.customer.showNetPrices() %}
+                                <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSumNet">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                            {% else %}
+                                <span class="badge" v-basket-item-sum="this.$store.state.basket.data.itemSum">0,00 {{ services.checkout.getCurrencyData()[currencyFormat] }}</span>
+                            {% endif %}
                         {% endif %}
                     </a>
+
+                    {% if config("Ceres.basket.preview_type") != "right" %}
+                        <basket-preview
+                            template="#vue-basket-preview-hover"
+                            :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                            :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                        </basket-preview>
+                    {% endif %}
                 </li>
             </ul>
         </div>
@@ -127,7 +140,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
                             <hr>
                         </div>
-                        <shop-language-select template="#vue-shop-language-select"/>
+                        <shop-language-select template="#vue-shop-language-select"></shop-language-select>
                     </div>
 
                     <div class="shipping-settings col-xs-12 col-sm-6">
@@ -135,7 +148,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
                             <hr>
                         </div>
-                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
+                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                     </div>
                 </div>
             </div>

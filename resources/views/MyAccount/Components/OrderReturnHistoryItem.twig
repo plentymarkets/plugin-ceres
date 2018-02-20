@@ -1,0 +1,65 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+<script type="x/template" id="vue-order-return-history-item">
+    <article class="cmp cmp-order-item">
+        <div class="item-details small">
+
+            <div class="item-name">
+                <h5 class="h4">{{ trans("Ceres::Template.orderStatus") }}: ${ returnOrder.order.statusName }</h5>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>{{ trans("Ceres::Template.myAccountReturnId") }}: </strong>
+                            <span>${ returnOrder.order.id }</span>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>{{ trans("Ceres::Template.orderId") }}: </strong>
+                            <span>${ getOriginOrderId(returnOrder.order) }</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>{{ trans("Ceres::Template.returnDate") }}: </strong>
+                            <span>${ returnOrder.order.createdAt | moment("{{ trans("Ceres::Template.dateTimeFormatMoment") }}") } {{ trans("Ceres::Template.time") }}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>{{ trans("Ceres::Template.orderPaymentMethod") }}: </strong>
+                            <span>${ returnOrder.paymentMethodName }</span>
+                        </div>
+                    </div>
+                    <hr class="gradient-hr">
+                </div>
+            </div>
+
+            {{ LayoutContainer.show("Ceres::MyAccount.OrderReturnHistoryItem") }}
+
+            {# show initial #}
+            <div class="row">
+                <div class="col-md-6 m-t-1 order-return-history-item" v-for="orderItem in itemsToRender">
+                    <div class="col-md-3">
+                        <div class="order-return-history-image-container">
+                            <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
+                                <img class="order-return-history-image" :src="returnOrder.itemImages[orderItem.itemVariationId]">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="order-return-history-text-container">
+                            <a :href="returnOrder.itemURLs[orderItem.itemVariationId]">
+                                <h2 class="h5 order-return-history-name">${ orderItem.orderItemName }</h2>
+                            </a>
+                            <h2 class="h5 order-return-history-count">{{ trans("Ceres::Template.myAccountReturnCount") }}: ${ orderItem.quantity}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# /show initial #}
+            <hr class="gradient-hr" v-if="returnOrder.order.orderItems.length > 4">
+            <a v-if="returnOrder.order.orderItems.length > 4" @click="toggleNaming('more-return-text-' + _uid)" :id="'more-return-text-' + _uid" class="show-more-returns" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+                {{ trans("Ceres::Template.myAccountReturnShowMore") }}
+            </a>
+        </div>
+    </article>
+</script>

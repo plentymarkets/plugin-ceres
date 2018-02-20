@@ -1,4 +1,5 @@
 import UrlService from "services/UrlService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("item-list-sorting", {
 
@@ -61,7 +62,7 @@ Vue.component("item-list-sorting", {
                 const sortItem =
                     {
                         value      : data,
-                        displayName: Translations.Template[this.dataTranslationMapping[data]]
+                        displayName: TranslationService.translate("Ceres::Template." + this.dataTranslationMapping[data])
                     };
 
                 this.sortingList[i] = sortItem;

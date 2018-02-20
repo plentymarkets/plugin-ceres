@@ -5,7 +5,7 @@
     <meta name="robots" content="{{ config("Ceres.meta.robots_contact") }}">
     <title>{{ trans("Ceres::Template.generalContact") }} | {{ config("Ceres.header.company_name") }}</title>
 
-    {% if services.webstoreConfig.getWebstoreConfig().googleRecaptchaApiWebsitekey | length > 0 %}
+    {% if config("Ceres.global.google_recaptcha_api_key") | length > 0 %}
         <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     {% endif %}
 

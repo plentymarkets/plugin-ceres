@@ -18,7 +18,8 @@ Vue.component("single-item", {
         ...Vuex.mapGetters([
             "variationTotalPrice",
             "variationMissingProperties",
-            "variationGroupedProperties"
+            "variationGroupedProperties",
+            "variationGraduatedPrice"
         ])
     },
 

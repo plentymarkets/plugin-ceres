@@ -119,14 +119,6 @@ Vue.component("salutation-select", {
         }
     },
 
-    mounted()
-    {
-        this.$nextTick(() =>
-        {
-            this.addressData.addressSalutation = 0;
-        });
-    },
-
     methods:
     {
         emitInputEvent(value)

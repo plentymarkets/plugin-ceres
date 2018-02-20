@@ -1,6 +1,5 @@
 Vue.component("category-breadcrumbs",
     {
-
         delimiters: ["${", "}"],
 
         props: [
@@ -14,17 +13,5 @@ Vue.component("category-breadcrumbs",
         created()
         {
             this.$options.template = this.template;
-        },
-
-        methods: {
-            /**
-             * render items in relation to location
-             * @param category
-             */
-            selectBreadcrumb(category)
-            {
-                this.$store.dispatch("selectCategory", {category});
-                return false;
-            }
         }
     });

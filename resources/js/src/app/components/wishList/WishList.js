@@ -1,11 +1,14 @@
 const NotificationService = require("services/NotificationService");
 
+import TranslationService from "services/TranslationService";
+
 Vue.component("wish-list", {
 
     delimiters: ["${", "}"],
 
     props: [
-        "template"
+        "template",
+        "initIds"
     ],
 
     data()
@@ -23,6 +26,7 @@ Vue.component("wish-list", {
 
     created()
     {
+        this.$store.commit("setWishListIds", this.initIds);
         this.$options.template = this.template;
 
         this.isLoading = true;
@@ -42,7 +46,9 @@ Vue.component("wish-list", {
         removeItem(item)
         {
             this.removeWishListItem(item)
-                .then(() => NotificationService.success(Translations.Template.itemWishListRemoved));
+                .then(() => NotificationService.success(
+                    TranslationService.translate("Ceres::Template.itemWishListRemoved")
+                ));
         },
         ...Vuex.mapActions([
             "initWishListItems",

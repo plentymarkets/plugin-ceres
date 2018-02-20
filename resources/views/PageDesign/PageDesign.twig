@@ -1,10 +1,12 @@
 {% import "Ceres::PageDesign.Macros.IncludeComponents" as Loader %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% import "Ceres::PageDesign.Macros.Translations" as Translations %}
 {{ component( "Ceres::PageDesign.Components.Notifications" ) }}
 {{ component( "Ceres::Basket.Components.BasketPreview" ) }}
 {{ component( "Ceres::Customer.Components.Login" ) }}
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
+{{ component( "Ceres::PageDesign.Components.Popper" ) }}
 
 <!DOCTYPE html>
 
@@ -24,7 +26,12 @@
     {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
 {% endif %}
 
-{% set categories = services.category.getNavigationTree("item", lang, 6) %}
+{% set showCategoryTypes = config('Ceres.header.show_category_types') %}
+{% if showCategoryTypes | trim is empty %}
+    {% set showCategoryTypes = "all" %}
+{% endif %}
+
+{% set categories = services.category.getNavigationTree(showCategoryTypes, lang, 6) %}
 
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
@@ -34,9 +41,8 @@
         {% block PartialHead %}
         {% endblock %}
 
-        {% set additionalStyleTemplates = get_additional_styles() %}
-        {% for styleTemplate in additionalStyleTemplates %}
-            {% include styleTemplate ignore missing %}
+        {% for styleTemplate in get_additional_styles() %}
+            {% include styleTemplate.path ignore missing with styleTemplate.params %}
         {% endfor %}
     </head>
 
@@ -66,13 +72,17 @@
                 {% endblock %}
             </div>
 
-            <div class="wrapper wrapper-right">
-                <basket-preview
-                    template="#vue-basket-preview"
-                    :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
-                    :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
-                </basket-preview>
-            </div>
+            {% if basket is not defined %}
+                {% set basket = services.basket.getBasketForTemplate() %}
+            {% endif %}
+            {% if config("Ceres.basket.preview_type") == "right" %}
+                <div class="wrapper wrapper-right">
+                    <basket-preview
+                        template="#vue-basket-preview"
+                        :basket-data="{{ basket | json_encode() }}">
+                    </basket-preview>
+                </div>
+            {% endif %}
 
             <div class="wrapper wrapper-bottom">
                 <!-- LOGIN MODAL -->
@@ -98,7 +108,24 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans("Ceres::Template.accCreateAccount") }}</div>
+                                    <div class="modal-title h3">
+                                        {{ trans("Ceres::Template.accCreateAccount") }}
+
+                                       <popper v-cloak class="pull-right m-r-1">
+                                            <button slot="trigger" class="btn btn-icon btn-secondary btn-sm">
+                                                <i class="fa fa-info"></i>
+                                            </button>
+                                            <div slot="title">
+                                                {{ trans("Ceres::Template.generalContactInformations") }}
+                                            </div>
+                                            <ul slot="content" class='p-l-1'>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
+                                                <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                                            </ul>
+                                        </popper>
+                                    </div>
                                 </div>
                                 <registration template="#vue-registration" :is-simple-registration="true" modal-element="simple-registration-modal-wrapper"></registration>
                             </div>
@@ -108,7 +135,7 @@
                 <!-- ./REGISTRATION MODAL -->
 
                 <!-- BASKET MODAL -->
-                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}" :config-item-name="parseInt({{ config("Ceres.item.name") | json_encode }})"></add-item-to-basket-overlay>
+                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
                 <!-- ./BASKET MODAL -->
 
                 <!-- SHIPPINGCOSTS MODAL -->
@@ -139,23 +166,17 @@
 
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
+        {{ Translations.add( "Ceres", "Template" ) }}
         {% if config("Ceres.log.performance.level") == 'development' %}
-            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
-            <script>var Translations = Languages['{{ lang }}'];</script>
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
         {% else %}
-            {# TODO remove douplicate import #}
-            <script src="{{ plugin_path('Ceres') }}/js/lang/{{ lang }}.js"></script>
-            <script>var Translations = Languages['{{ lang }}'];</script>
-
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>
         {% endif %}
 
-        {% set additionalScriptTemplates = get_additional_scripts() %}
-        {% for scriptTemplate in additionalScriptTemplates %}
-            {% include scriptTemplate ignore missing %}
+        {% for scriptTemplate in get_additional_scripts() %}
+            {% include scriptTemplate.path ignore missing with scriptTemplate.params %}
         {% endfor %}
 
         {{ LayoutContainer.show("Ceres::Script.AfterScriptsLoaded") }}
@@ -177,13 +198,13 @@
 
             if ( vueApp.$el.id !== "vue-app")
             {
-                rootElement.remove();
+                rootElement.parentNode.removeChild(rootElement);
                 errorElement.style.display = "block";
             }
             else
             {
                 document.body.replaceChild( vueApp.$el, rootElement );
-                errorElement.remove();
+                errorElement.parentNode.removeChild(errorElement);
             }
         </script>
     </body>

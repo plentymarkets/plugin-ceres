@@ -5,6 +5,7 @@ namespace Ceres\Providers;
 use Ceres\Caching\HomepageCacheSettings;
 use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
+use Ceres\Config\CeresConfig;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\CategoryKey;
@@ -45,6 +46,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.order.return'              => 'OrderReturn.OrderReturnView',         // provide template to use for order return
         'tpl.order.return.confirmation' => 'OrderReturn.OrderReturnConfirmation', // provide template to use for order return confirmation
         'tpl.cancellation-rights'       => 'StaticPages.CancellationRights',      // provide template to use for cancellation rights
+        'tpl.cancellation-form'         => 'StaticPages.CancellationForm',        // provide template to use for cancellation form
         'tpl.legal-disclosure'          => 'StaticPages.LegalDisclosure',         // provide template to use for legal disclosure
         'tpl.privacy-policy'            => 'StaticPages.PrivacyPolicy',           // provide template to use for privacy policy
         'tpl.terms-conditions'          => 'StaticPages.TermsAndConditions',      // provide template to use for terms and conditions
@@ -52,7 +54,9 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.page-not-found'            => 'StaticPages.PageNotFound'             // provide template to use for page not found
     ];
 
-    public function register(){}
+    public function register(){
+        $this->getApplication()->singleton( CeresConfig::class );
+    }
     
     public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
     {

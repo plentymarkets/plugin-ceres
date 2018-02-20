@@ -3,6 +3,7 @@ const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("login", {
 
@@ -105,7 +106,9 @@ Vue.component("login", {
                 {
                     ApiService.setToken(response);
 
-                    NotificationService.success(Translations.Template.accLoginSuccessful).closeAfter(10000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.accLoginSuccessful")
+                    ).closeAfter(10000);
 
                     if (this.backlink !== null && this.backlink)
                     {
@@ -128,7 +131,9 @@ Vue.component("login", {
                     {
                     case 401:
                         this.loginFields.addClass("has-login-error");
-                        NotificationService.error(Translations.Template.accLoginFailed).closeAfter(10000);
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.accLoginFailed")
+                        ).closeAfter(10000);
                         break;
                     default:
                         return;
@@ -159,14 +164,18 @@ Vue.component("login", {
                         window.location.assign(window.location.origin);
                     }
 
-                    NotificationService.success(Translations.Template.generalSendEmailOk).closeAfter(5000);
+                    NotificationService.success(
+                        TranslationService.translate("Ceres::Template.generalSendEmailOk")
+                    ).closeAfter(5000);
 
                 })
                 .fail(() =>
                 {
                     this.isDisabled = false;
 
-                    NotificationService.error(Translations.Template.accResetPwDErrorOnSendEmail).closeAfter(5000);
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.accResetPwDErrorOnSendEmail")
+                    ).closeAfter(5000);
                 });
         },
 
@@ -177,11 +186,15 @@ Vue.component("login", {
 
             if (document.getElementById(this.modalElement) !== null)
             {
-                $(".login-modal .modal-title").html(Translations.Template.accForgotPassword);
+                $(".login-modal .modal-title").html(
+                    TranslationService.translate("Ceres::Template.accForgotPassword")
+                );
             }
             else
             {
-                $(".login-view-title").html(Translations.Template.accForgotPassword);
+                $(".login-view-title").html(
+                    TranslationService.translate("Ceres::Template.accForgotPassword")
+                );
             }
 
             $(".login-container").slideUp("fast", function()
@@ -197,11 +210,15 @@ Vue.component("login", {
 
             if (document.getElementById(this.modalElement) !== null)
             {
-                $(".login-modal .modal-title").text(Translations.Template.accLogin);
+                $(".login-modal .modal-title").text(
+                    TranslationService.translate("Ceres::Template.accLogin")
+                );
             }
             else
             {
-                $(".login-view-title").text(Translations.Template.accLogin);
+                $(".login-view-title").text(
+                    TranslationService.translate("Ceres::Template.accLogin")
+                );
             }
 
             $(".reset-pwd-container").slideUp("fast", function()

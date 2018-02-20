@@ -3,6 +3,7 @@ const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
+import TranslationService from "services/TranslationService";
 
 Vue.component("registration", {
 
@@ -24,7 +25,8 @@ Vue.component("registration", {
             username      : "",
             billingAddress: {
                 countryId: null,
-                stateId: null
+                stateId: null,
+                addressSalutation: 0
             },
             isDisabled: false
         };
@@ -68,7 +70,9 @@ Vue.component("registration", {
 
                     if (!response.code)
                     {
-                        NotificationService.success(Translations.Template.accRegistrationSuccessful).closeAfter(3000);
+                        NotificationService.success(
+                            TranslationService.translate("Ceres::Template.accRegistrationSuccessful")
+                        ).closeAfter(3000);
 
                         if (document.getElementById(this.modalElement) !== null)
                         {
@@ -86,7 +90,9 @@ Vue.component("registration", {
                     }
                     else
                     {
-                        NotificationService.error(Translations.Template.accRegistrationError).closeAfter(3000);
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.accRegistrationError")
+                        ).closeAfter(3000);
                     }
 
                     this.isDisabled = false;

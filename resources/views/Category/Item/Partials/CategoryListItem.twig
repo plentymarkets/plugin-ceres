@@ -3,7 +3,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% set image = item.data.images.all | first %}
-{% set configItemName = config("Ceres.item.name") %}
 {% set itemUrl =  item.data | itemURL %}
 
 {% if enableCarousel is not defined %}
@@ -30,7 +29,7 @@
                     <category-image-carousel
                         template="#vue-category-image-carousel"
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
-                        alt-text="{{ item.data.texts | itemName(configItemName) }}"
+                        alt-text="{{ item.data | itemName }}"
                         item-url="{{ itemUrl }}"
                         :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
                         :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
@@ -56,7 +55,10 @@
                 {% if  item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
-                    {% set percent = (1 - item.data.calculatedPrices.default.price / item.data.calculatedPrices.rrp.price) * -100 %}
+                    {% set percent = 0 %}
+                    {% if item.data.prices.rrp is defined %}
+                        {% set percent = (1 - item.data.prices.default.unitPrice.value / item.data.prices.rrp.price.value ) * -100 %}
+                    {% endif %}
 
                     {% if percent <= 0 %}
                         {% set dezimalcount = config('Ceres.item.storeSpecial') %}
@@ -85,22 +87,22 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a href="{{ itemUrl }}" class="thumb-title small">
-                {{ item.data.texts | itemName(configItemName) }}
+                {{ item.data | itemName }}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
 
                 <div class="prices">
-                    {% if item.data.calculatedPrices.rrp.price != '0' %}
+                    {% if item.data.prices.rrp is defined and item.data.prices.rrp.price.value != 0 %}
                         <div class="price-view-port">
                             <del class="crossprice">
-                                {{ item.data.calculatedPrices.formatted.rrpUnitPrice }}
+                                {{ item.data.prices.rrp.price.formatted }}
                             </del>
                         </div>
                     {% endif %}
 
                     <div class="price">
-                        {{ item.data.calculatedPrices.formatted.defaultUnitPrice }} *
+                        {{ item.data.prices.default.unitPrice.formatted }} *
                     </div>
                 </div>
 
@@ -112,7 +114,7 @@
                         <span>{{ item.data.unit.names.name }}</span>
 
                         {% if item.data.variation.mayShowUnitPrice %}
-                            | {{ item.data.calculatedPrices.formatted.basePrice }}
+                            | {{ item.data.prices.default.basePrice }}
                         {% endif %}
                     </div>
                 {% endif %}

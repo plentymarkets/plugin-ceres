@@ -57,6 +57,7 @@
             defaultSorting: "{{ defaultSorting }}",
             defaultSortingSearch: "{{ defaultSortingSearch }}",
             performanceLevel: "{{ performanceLevel }}",
+            itemDisplayName: "{{ config("Ceres.item.displayName") }}",
             itemName: {{ itemName }},
             enabledBillingAddressFields: "{{ config("Ceres.billing_address.show") }}",
             enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
@@ -64,9 +65,11 @@
             enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}",
             enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
             shopName: "{{ config("Ceres.header.company_name") }}",
+            forwardToSingleItem: {{ config("Ceres.search.forwardToSingleItem") | default('false') }},
             activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
             currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-            requireOrderProperties: {% if config("Ceres.item.require_all_properties") == "true" %}true{% else %}false{% endif %}
+            requireOrderProperties: {% if config("Ceres.item.require_all_properties") == "true" %}true{% else %}false{% endif %},
+            basketOpenClass: {% if config("Ceres.basket.preview_type") != "right" %}"open-hover"{% else %}"open-right"{% endif %}
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
