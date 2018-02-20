@@ -78,7 +78,7 @@ Vue.component("add-item-to-basket-overlay", {
 
                     if (vueApp)
                     {
-                        vueApp.classList.toggle("open-right");
+                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
                     }
                 }, 1);
             }

@@ -13441,7 +13441,7 @@ Vue.component("add-item-to-basket-overlay", {
                     var vueApp = document.querySelector("#vue-app");
 
                     if (vueApp) {
-                        vueApp.classList.toggle("open-right");
+                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
                     }
                 }, 1);
             }
@@ -13593,7 +13593,7 @@ Vue.component("add-to-basket", {
             return this.item.variation.id;
         },
         hasChildren: function hasChildren() {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
         canBeAddedToBasket: function canBeAddedToBasket() {
             var isSalable = this.item.filter && this.item.filter.isSalable;
@@ -13601,7 +13601,7 @@ Vue.component("add-to-basket", {
             var intervalQuantity = this.item.variation.intervalOrderQuantity || 1;
             var minimumOrderQuantity = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 
@@ -13625,7 +13625,7 @@ Vue.component("basket-preview", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "basketData", "basketItemsData"],
+    props: ["template", "basketData"],
 
     computed: Vuex.mapState({
         basket: function basket(state) {
@@ -13642,7 +13642,7 @@ Vue.component("basket-preview", {
     created: function created() {
         this.$options.template = this.template;
         this.$store.commit("setBasket", this.basketData);
-        this.$store.commit("setBasketItems", this.basketItemsData);
+        this.$store.dispatch("loadBasketData");
     },
 
 
@@ -13828,6 +13828,9 @@ Vue.component("basket-list", {
     computed: Vuex.mapState({
         basketItems: function basketItems(state) {
             return state.basket.items;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
         }
     }),
 
@@ -13862,10 +13865,9 @@ Vue.component("basket-list-item", {
     data: function data() {
         return {
             waiting: false,
-            waitForDelete: false,
-            deleteConfirmed: false,
-            deleteConfirmedTimeout: null,
-            itemCondition: ""
+            waitingForDelete: false,
+            itemCondition: "",
+            showMoreInformation: false
         };
     },
 
@@ -13903,22 +13905,14 @@ Vue.component("basket-list-item", {
         deleteItem: function deleteItem() {
             var _this = this;
 
-            if (!this.deleteConfirmed) {
-                this.deleteConfirmed = true;
-                this.deleteConfirmedTimeout = window.setTimeout(function () {
-                    _this.resetDelete();
-                }, 5000);
-            } else {
-                this.waitForDelete = true;
-                this.waiting = true;
+            if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
+                this.waitingForDelete = true;
 
                 this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
                     document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: _this.basketItem }));
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 }, function (error) {
-                    _this.resetDelete();
-                    _this.waitForDelete = false;
-                    _this.waiting = false;
+                    _this.waitingForDelete = false;
                 });
             }
         },
@@ -13953,17 +13947,6 @@ Vue.component("basket-list-item", {
 
                     _this2.waiting = false;
                 });
-            }
-        },
-
-
-        /**
-         * Cancel delete
-         */
-        resetDelete: function resetDelete() {
-            this.deleteConfirmed = false;
-            if (this.deleteConfirmedTimeout) {
-                window.clearTimeout(this.deleteConfirmedTimeout);
             }
         }
     }
@@ -14048,6 +14031,7 @@ Vue.component("checkout", {
         this.$store.dispatch("setCheckout", this.initialCheckout);
         this.addEventHandler();
     },
+
 
     methods: {
         addEventHandler: function addEventHandler() {
@@ -14274,6 +14258,12 @@ Vue.component("place-order", {
         },
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        basketItemQuantity: function basketItemQuantity(state) {
+            return state.basket.data.itemQuantity;
+        },
+        isBasketInitiallyLoaded: function isBasketInitiallyLoaded(state) {
+            return state.basket.isBasketInitiallyLoaded;
         }
     }),
 
@@ -14301,7 +14291,7 @@ Vue.component("place-order", {
 
             this.waiting = true;
 
-            if (this.validateCheckout()) {
+            if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
                     _this2.afterPreparePayment(response);
                 }).fail(function (error) {
@@ -18983,7 +18973,7 @@ Vue.directive("toggle-basket-preview", {
             var vueApp = document.querySelector("#vue-app");
 
             if (vueApp) {
-                vueApp.classList.toggle("open-right");
+                vueApp.classList.toggle(App.config.basketOpenClass || "open-hover");
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -19728,10 +19718,10 @@ var init = function ($, window, document) {
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function (evt) {
-            if ($("#vue-app").hasClass("open-right")) {
-                if (evt.target != $(".basket-preview") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0) {
+            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-hover")) {
+                if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass("open-right");
+                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-hover");
                 }
             }
 
@@ -21403,7 +21393,13 @@ var _ApiService = require("services/ApiService");
 
 var _ApiService2 = _interopRequireDefault(_ApiService);
 
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotificationService = require("services/NotificationService");
 
 var state = {
     data: {},
@@ -21413,6 +21409,7 @@ var state = {
         quantity: null
     },
     isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
     basketNotifications: []
 };
 
@@ -21471,14 +21468,36 @@ var mutations = {
     },
     setIsBasketLoading: function setIsBasketLoading(state, isBasketLoading) {
         state.isBasketLoading = !!isBasketLoading;
+    },
+    setIsBasketInitiallyLoaded: function setIsBasketInitiallyLoaded(state) {
+        state.isBasketInitiallyLoaded = true;
     }
 };
 
 var actions = {
-    addBasketNotification: function addBasketNotification(_ref3, _ref4) {
-        var commit = _ref3.commit;
-        var type = _ref4.type,
-            message = _ref4.message;
+    loadBasketData: function loadBasketData(_ref3) {
+        var commit = _ref3.commit,
+            state = _ref3.state;
+
+        if (state.data.itemQuantity) {
+            _ApiService2.default.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }).done(function (basketItems) {
+                commit("setBasketItems", basketItems);
+                commit("setIsBasketInitiallyLoaded");
+
+                setTimeout(function () {
+                    $(document.body).trigger("sticky_kit:recalc");
+                }, 0);
+            }).fail(function (error) {
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops")).closeAfter(10000);
+            });
+        } else {
+            commit("setIsBasketInitiallyLoaded");
+        }
+    },
+    addBasketNotification: function addBasketNotification(_ref4, _ref5) {
+        var commit = _ref4.commit;
+        var type = _ref5.type,
+            message = _ref5.message;
 
         commit("addBasketNotification", { type: type, message: message });
 
@@ -21486,8 +21505,8 @@ var actions = {
             commit("clearOldestNotification");
         }, 5000);
     },
-    addBasketItem: function addBasketItem(_ref5, basketItem) {
-        var commit = _ref5.commit;
+    addBasketItem: function addBasketItem(_ref6, basketItem) {
+        var commit = _ref6.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21503,10 +21522,10 @@ var actions = {
             });
         });
     },
-    updateBasketItemQuantity: function updateBasketItemQuantity(_ref6, _ref7) {
-        var commit = _ref6.commit;
-        var basketItem = _ref7.basketItem,
-            quantity = _ref7.quantity;
+    updateBasketItemQuantity: function updateBasketItemQuantity(_ref7, _ref8) {
+        var commit = _ref7.commit;
+        var basketItem = _ref8.basketItem,
+            quantity = _ref8.quantity;
 
         return new Promise(function (resolve, reject) {
             commit("updateBasketItemQuantity", { basketItem: basketItem, quantity: quantity });
@@ -21523,8 +21542,8 @@ var actions = {
             });
         });
     },
-    removeBasketItem: function removeBasketItem(_ref8, basketItemId) {
-        var commit = _ref8.commit;
+    removeBasketItem: function removeBasketItem(_ref9, basketItemId) {
+        var commit = _ref9.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21539,9 +21558,9 @@ var actions = {
             });
         });
     },
-    redeemCouponCode: function redeemCouponCode(_ref9, couponCode) {
-        var state = _ref9.state,
-            commit = _ref9.commit;
+    redeemCouponCode: function redeemCouponCode(_ref10, couponCode) {
+        var state = _ref10.state,
+            commit = _ref10.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21556,9 +21575,9 @@ var actions = {
             });
         });
     },
-    removeCouponCode: function removeCouponCode(_ref10, couponCode) {
-        var state = _ref10.state,
-            commit = _ref10.commit;
+    removeCouponCode: function removeCouponCode(_ref11, couponCode) {
+        var state = _ref11.state,
+            commit = _ref11.commit;
 
         return new Promise(function (resolve, reject) {
             commit("setIsBasketLoading", true);
@@ -21581,7 +21600,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":104}],117:[function(require,module,exports){
+},{"services/ApiService":104,"services/NotificationService":109,"services/TranslationService":110}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

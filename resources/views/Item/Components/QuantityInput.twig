@@ -1,29 +1,19 @@
 <script type="x/template" id="vue-quantity-input">
-    <div class="input-group vert" v-if="compVertical">
-        <span class="input-group-btn" v-tooltip="compMax && compValue === internalMax && internalMax != 0" data-toggle="tooltip" 
-                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
-            <button class="btn btn-secondary" :class="{'disabled': compMax && compValue === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
-        </span>
+    <div class="qty-box">
+        <input class="qty-input" type="text" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting" maxlength="4">
 
-        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting">
+        <div class="qty-btn-container">
 
-        <span class="input-group-btn" v-tooltip="compMin && compValue === compMin && compMin === internalMin" data-toggle="tooltip"
-                    data-placement="left" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
-            <button class="btn btn-secondary" :class="{'disabled': compMin && compValue === compMin && compMin === internalMin || compValue <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
-        </span>
-    </div>
+            <div class="qty-btn" @click="countValueUp()" :class="{'disabled': compMax && compValue === internalMax || waiting}" v-tooltip="compMax && compValue === internalMax && internalMax != 0" data-toggle="tooltip" data-placement="right" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
+                <i class="fa fa-plus qty-sign" aria-hidden="true"></i>
+            </div>
 
-    <div class="input-group" v-else>
-        <span class="input-group-btn" v-tooltip="compMin && compValue === compMin && compMin === internalMin" data-toggle="tooltip"
-                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
-            <button class="btn btn-secondary" :class="{'disabled': compMin && compValue === compMin && compMin === internalMin || compValue <= 1 || waiting}" type="button" @click="countValueDown()">-</button>
-        </span>
+            <div class="qty-btn-seperator"></div>
 
-        <input type="text" class="form-control text-xs-center remove-disabled-coloring" size="4" maxlength="4" v-model="compValue" @input="setValue($event.target.value)" :disabled="waiting">
+            <div class="qty-btn" @click="countValueDown()" :class="{'disabled': compMin && compValue === compMin && compMin === internalMin || compValue <= 1 || waiting}" v-tooltip="compMin && compValue === compMin && compMin === internalMin" data-toggle="tooltip" data-placement="right" :title="'{{ trans("Ceres::Template.orderQuantityMin") }}: ' + compMin">
+                <i class="fa fa-minus qty-sign" aria-hidden="true"></i>
+            </div>
 
-        <span class="input-group-btn" v-tooltip="compMax && compValue === internalMax && internalMax != 0" data-toggle="tooltip" 
-                    data-placement="bottom" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}: ' + compMax">
-            <button class="btn btn-secondary" :class="{'disabled': compMax && compValue === internalMax || waiting}" type="button" @click="countValueUp()">+</button>
-        </span>
+        </div>
     </div>
 </script>

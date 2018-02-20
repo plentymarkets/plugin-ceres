@@ -93,6 +93,17 @@ body {
 			}
 		}
 
+		&.open-hover {
+			@include media-breakpoint-down(xs) {
+				position: fixed;
+			}
+
+			.basket-preview-hover-wrapper {
+				display: block;
+				transform: translateX(0%);
+			}
+		}
+
 		@include media-breakpoint-up(sm){
 			&.open-right{
 				.wrapper-right{
