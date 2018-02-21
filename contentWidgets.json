@@ -125,82 +125,82 @@
 					"selectBoxValues": [
 						{
 							"value": "",
-							"label": "No sorting",
+							"caption": "No sorting",
 							"position": 0
 						},
 						{
 							"value": "default.recommended_sorting",
-							"label": "Recommended",
+							"caption": "Recommended",
 							"position": 1
 						},
 						{
 							"value": "texts.name1_asc",
-							"label": "Item name A-Z",
+							"caption": "Item name A-Z",
 							"position": 2
 						},
 						{
 							"value": "texts.name1_desc",
-							"label": "Item name Z-A",
+							"caption": "Item name Z-A",
 							"position": 3
 						},
 						{
 							"value": "sorting.price.min_asc",
-							"label": "Price ⬆",
+							"caption": "Price ⬆",
 							"position": 4
 						},
 						{
 							"value": "sorting.price.max_desc",
-							"label": "Price ⬇",
+							"caption": "Price ⬇",
 							"position": 5
 						},
 						{
 							"value": "variation.createdAt_desc",
-							"label": "Newest variation",
+							"caption": "Newest variation",
 							"position": 6
 						},
 						{
 							"value": "variation.createdAt_asc",
-							"label": "Oldest variation",
+							"caption": "Oldest variation",
 							"position": 7
 						},
 						{
 							"value": "variation.availability.averageDays_asc",
-							"label": "Availability ⬆",
+							"caption": "Availability ⬆",
 							"position": 8
 						},
 						{
 							"value": "variation.availability.averageDays_desc",
-							"label": "Availability ⬇",
+							"caption": "Availability ⬇",
 							"position": 9
 						},
 						{
 							"value": "variation.number_asc",
-							"label": "Variation number ⬆",
+							"caption": "Variation number ⬆",
 							"position": 10
 						},
 						{
 							"value": "variation.number_desc",
-							"label": "Variation number ⬇",
+							"caption": "Variation number ⬇",
 							"position": 11
 						},
 						{
 							"value": "variation.updatedAt_asc",
-							"label": "Last update",
+							"caption": "Last update",
 							"position": 12
 						},
 						{
 							"value": "variation.updatedAt_desc",
-							"label": "First update",
+							"caption": "First update",
 							"position": 13
 						},
 						{
 							"value": "item.manufacturer.externalName_asc",
-							"label": "Manufacturer A-Z",
+							"caption": "Manufacturer A-Z",
 							"position": 14
 						},
 						{
 							"value": "item.manufacturer.externalName_desc",
-							"label": "Manufacturer Z-A",
+							"caption": "Manufacturer Z-A",
 							"position": 15
 						}
 					]
