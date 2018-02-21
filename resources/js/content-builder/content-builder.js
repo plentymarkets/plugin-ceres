@@ -263,18 +263,22 @@ function addContentWidget(widgetData, position)
 /**
  * delete content widget by id
  * @param widgetId
+ * @param keepProperties
  */
-function deleteContentWidget(widgetId)
+function deleteContentWidget(widgetId, keepProperties)
 {
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
     // TODO: @vwiebe fix dropzone scope
     jQuery('.grid-stack-0').data('gridstack').removeWidget(gridStackItem);
 
-    dispatchBuilderEvent({
-        name: 'shopbuilder_delete',
-        data: { uniqueId: widgetId }
-    });
+    if(!keepProperties)
+    {
+        dispatchBuilderEvent({
+            name: 'shopbuilder_delete',
+            data: { uniqueId: widgetId }
+        });
+    }
 }
 
 /**
@@ -290,7 +294,7 @@ function replaceContentWidget(widgetData)
         y: jQuery(element).attr('data-gs-y')
     };
 
-    deleteContentWidget(id);
+    deleteContentWidget(id, true);
     addContentWidget(widgetData, position);
 }
 
@@ -328,24 +332,24 @@ function injectGridstackMarkup()
         jQuery(this).css('position', 'relative');
 
         // iterate over all sub-elements
-        jQuery(this).find('> *').each(function(j)
-        {
-            // create gridstack item markup
-            var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-                '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / CELL_HEIGHT) + '"><div class="grid-stack-item-content"></div>' +
-                '</div>');
-
-            // overwrite cursor for all contained elements
-            setDragCursorToChildElements(jQuery(this));
-
-            // add hover menu to container
-            addContextMenu(gridStackItem);
-
-            // wrap current element with gridstack item markup
-            jQuery(this).wrap(gridStackItem);
-
-            ++j;
-        });
+        // jQuery(this).find('> *').each(function(j)
+        // {
+        //     // create gridstack item markup
+        //     var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
+        //         '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / CELL_HEIGHT) + '"><div class="grid-stack-item-content"></div>' +
+        //         '</div>');
+        //
+        //     // overwrite cursor for all contained elements
+        //     setDragCursorToChildElements(jQuery(this));
+        //
+        //     // add hover menu to container
+        //     addContextMenu(gridStackItem);
+        //
+        //     // wrap current element with gridstack item markup
+        //     jQuery(this).wrap(gridStackItem);
+        //
+        //     ++j;
+        // });
 
         // add gridstack container class for current drag & drop area
         jQuery(this).addClass('grid-stack-' + i);
