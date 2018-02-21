@@ -100,19 +100,54 @@
 		}
 	},
 	{
-		"identifier": "Ceres::CategoryPreview",
-		"label": "CategoryPreview",
-		"tooltip": "CategoryPreview",
+		"identifier": "Ceres::ItemListWidget",
+		"label": "ItemList",
+		"tooltip": "ItemList",
 		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\CategoryPreview",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemListWidget",
 		"settings": {
-			"categoryId": {
-				"type": "categoryPicker",
+			"listType": {
+				"type": "selectBox",
 				"required": true,
+				"label": "Type of item list",
+				"options": {
+					"tooltip": "Type of item list",
+					"defaultValue": "category",
+					"selectBoxValues": [
+						{
+							"value": "category",
+							"caption": "Category items",
+							"position": 0
+						},
+						{
+							"value": "last_seen",
+							"caption": "Last seen",
+							"position": 1
+						},
+						{
+							"value": "tag_list",
+							"caption": "Tag list",
+							"position": 2
+						}
+					]
+				}
+			},
+			"categoryId": {
+				"type": "inputText",
+				"required": false,
 				"label": "Category ID",
 				"options": {
 					"tooltip": "Category ID",
-					"defaultValue": "19"
+					"defaultValue": ""
+				}
+			},
+			"tagIds": {
+				"type": "inputText",
+				"required": false,
+				"label": "Tag IDs (seperate by ,)",
+				"options": {
+					"tooltip": "Tag IDs",
+					"defaultValue": ""
 				}
 			},
 			"itemSort": {
@@ -121,87 +156,117 @@
 				"label": "Sorting for Items",
 				"options": {
 					"tooltip": "Item Sorting",
-					"defaultValue": "",
+					"defaultValue": "texts.name1_asc",
 					"selectBoxValues": [
-						{
-							"value": "",
-							"caption": "No sorting",
-							"position": 0
-						},
 						{
 							"value": "default.recommended_sorting",
 							"caption": "Recommended",
-							"position": 1
+							"position": 0
 						},
 						{
 							"value": "texts.name1_asc",
 							"caption": "Item name A-Z",
-							"position": 2
+							"position": 1
 						},
 						{
 							"value": "texts.name1_desc",
 							"caption": "Item name Z-A",
-							"position": 3
+							"position": 2
 						},
 						{
 							"value": "sorting.price.min_asc",
 							"caption": "Price ⬆",
-							"position": 4
+							"position": 3
 						},
 						{
 							"value": "sorting.price.max_desc",
 							"caption": "Price ⬇",
-							"position": 5
+							"position": 4
 						},
 						{
 							"value": "variation.createdAt_desc",
 							"caption": "Newest variation",
-							"position": 6
+							"position": 5
 						},
 						{
 							"value": "variation.createdAt_asc",
 							"caption": "Oldest variation",
-							"position": 7
+							"position": 6
 						},
 						{
 							"value": "variation.availability.averageDays_asc",
 							"caption": "Availability ⬆",
-							"position": 8
+							"position": 7
 						},
 						{
 							"value": "variation.availability.averageDays_desc",
 							"caption": "Availability ⬇",
-							"position": 9
+							"position": 8
 						},
 						{
 							"value": "variation.number_asc",
 							"caption": "Variation number ⬆",
-							"position": 10
+							"position": 9
 						},
 						{
 							"value": "variation.number_desc",
 							"caption": "Variation number ⬇",
-							"position": 11
+							"position": 10
 						},
 						{
 							"value": "variation.updatedAt_asc",
 							"caption": "Last update",
-							"position": 12
+							"position": 11
 						},
 						{
 							"value": "variation.updatedAt_desc",
 							"caption": "First update",
-							"position": 13
+							"position": 12
 						},
 						{
 							"value": "item.manufacturer.externalName_asc",
 							"caption": "Manufacturer A-Z",
-							"position": 14
+							"position": 13
 						},
 						{
 							"value": "item.manufacturer.externalName_desc",
 							"caption": "Manufacturer Z-A",
-							"position": 15
+							"position": 14
+						}
+					]
+				}
+			},
+			"maxItems": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "The cap of items",
+				"options": {
+					"tooltip": "The cap of items",
+					"defaultValue": "4"
+				}
+			},
+			"itemsPerRowLG": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Items per row (LG)",
+				"options": {
+					"tooltip": "Items per row (LG)",
+					"defaultValue": "4",
+					"selectBoxValues": [
+						{
+							"value": "4",
+							"caption": "4",
+							"position": 0
+						},
+						{
+							"value": "3",
+							"caption": "3",
+							"position": 1
+						},
+						{
+							"value": "2",
+							"caption": "2",
+							"position": 2
 						}
 					]
 				}

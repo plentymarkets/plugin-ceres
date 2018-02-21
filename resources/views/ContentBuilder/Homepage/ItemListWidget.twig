@@ -1,0 +1,41 @@
+{% set lang = services.sessionStorage.getLang() %}
+{% set listType = widgetSettings.listType %}
+{% set categoryId = widgetSettings.categoryId %}
+{% set maxItems = widgetSettings.maxItems %}
+
+{% if listType == "category" %}
+    {% set category = services.category.get(widgetSettings.categoryId, lang) %}
+
+    {% if category %}
+        {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId': category.id, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
+    {% endif %}
+{% elseif listType == "last_seen" %}
+    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
+{% elseif listType == "tag_list" %}
+    {% set tagIds = widgetSettings.tagIds | split(",") %}
+
+	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
+{% endif %}
+
+<div>
+    {% if itemList is not empty %}
+        <div class="m-b-2 clearfix">
+            <div class="section-header m-b-1">
+                <h2>{{ category.details[0].name }}</h2>
+                <a href="{{ services.category.getURL(category, lang) }}" class="section-link-all">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}
+                </a>
+            </div>
+
+            <ul class="product-list row grid">
+                {% for item in itemList %}
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-{{ colLG }}">
+                        {% include "Ceres::ContentBuilder.Homepage.Partials.CategoryListItemPreview" with { 'item': item } %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <h1 class="text-danger">Please finish configuration!</h1>
+    {% endif %}
+</div>

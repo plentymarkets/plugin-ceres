@@ -5,7 +5,7 @@ namespace Ceres\ContentBuilder\Homepage;
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class CategoryPreview implements Widget
+class ItemListWidget implements Widget
 {
 
     /**
@@ -18,17 +18,15 @@ class CategoryPreview implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-        $widgetSettings = [
-            "categoryId" => 19,
-            "itemSort" => "texts.name1_asc"
-        ];
+        $colLG = 12 / $widgetSettings['itemsPerRowLG'];
 
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.CategoryPreview",
+            "Ceres::ContentBuilder.Homepage.ItemListWidget",
             [
-                "widgetSettings" => $widgetSettings
+                "widgetSettings" => $widgetSettings,
+                "colLG" => $colLG
             ]
         );
     }
