@@ -1,11 +1,19 @@
+{% set loadingAnimationType = config("Ceres.item.loading_animation_type") %}
+
 {{ component( "Ceres::Basket.Components.BasketListItem" ) }}
 
 <script type="x/template" id="vue-basket-list">
     <div>
-        <basket-list-item template="#vue-basket-list-item" v-for="basketItem in basketItems" :key="basketItem.id" :basket-item="basketItem" :size="size" language="{{ services.sessionStorage.getLang() }}"></basket-list-item>
+        <transition-group name="wish-list-item-transition" tag="div">
+            <basket-list-item template="#vue-basket-list-item" v-for="basketItem in basketItems" :key="basketItem.id" :basket-item="basketItem" :size="size" language="{{ services.sessionStorage.getLang() }}"></basket-list-item>
+        </transition-group>
 
-        <div v-if="!basketItems.length > 0">
-            <h5>{{ trans("Ceres::Template.orderNoItemsInBasket") }}</h5>
+        <div v-if="!isBasketInitiallyLoaded" class="basket-loading-frame loading">
+            {% include "Ceres::ItemList.Partials.LoadingAnimation" %}
+        </div>
+
+        <div v-else-if="!basketItems.length > 0">
+            <div class="h5">{{ trans("Ceres::Template.orderNoItemsInBasket") }}</div>
         </div>
     </div>
 </script>

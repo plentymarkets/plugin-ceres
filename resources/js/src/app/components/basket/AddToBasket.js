@@ -1,4 +1,5 @@
 import ExceptionMap from "exceptions/ExceptionMap";
+import TranslationService from "services/TranslationService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -68,7 +69,11 @@ Vue.component("add-to-basket", {
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(Translations.Template[ExceptionMap.get(error.data.exceptionCode.toString())]).closeAfter(5000);
+                        NotificationService.error(
+                            TranslationService.translate(
+                                "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                            )
+                        ).closeAfter(5000);
                     });
             }
         },
@@ -116,7 +121,7 @@ Vue.component("add-to-basket", {
 
         hasChildren()
         {
-            return this.item.filter && this.item.filter.hasChildren && App.isCategoryView;
+            return this.item.filter && this.item.filter.hasChildren;
         },
 
         canBeAddedToBasket()
@@ -126,7 +131,7 @@ Vue.component("add-to-basket", {
             const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
             const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
 
-            return isSalable && !hasChildren && App.isCategoryView && minimumOrderQuantity === intervalQuantity;
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
         }
     },
 

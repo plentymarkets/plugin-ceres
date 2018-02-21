@@ -1,0 +1,295 @@
+[
+	{
+		"identifier": "Ceres::TextHeader",
+		"label": "TextHeader",
+		"tooltip": "TextHeader",
+		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader",
+		"settings": {
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::Carousel",
+		"label": "Carousel",
+		"tooltip": "Carousel",
+		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel",
+		"settings": {
+			"text": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text1": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text2": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text3": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text4": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			},
+			"text5": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": ""
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::FeaturedCategory",
+		"label": "FeaturedCategory",
+		"tooltip": "FeaturedCategory",
+		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory",
+		"settings": {
+			"categoryId": {
+				"type": "categoryPicker",
+				"required": true,
+				"label": "Category ID",
+				"options": {
+					"tooltip": "Category ID",
+					"defaultValue": "19"
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::ItemListWidget",
+		"label": "ItemList",
+		"tooltip": "ItemList",
+		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemListWidget",
+		"settings": {
+			"listType": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Type of item list",
+				"options": {
+					"tooltip": "Type of item list",
+					"defaultValue": "category",
+					"selectBoxValues": [
+						{
+							"value": "category",
+							"caption": "Category items",
+							"position": 0
+						},
+						{
+							"value": "last_seen",
+							"caption": "Last seen",
+							"position": 1
+						},
+						{
+							"value": "tag_list",
+							"caption": "Tag list",
+							"position": 2
+						}
+					]
+				}
+			},
+			"categoryId": {
+				"type": "inputText",
+				"required": false,
+				"label": "Category ID",
+				"options": {
+					"tooltip": "Category ID",
+					"defaultValue": ""
+				}
+			},
+			"tagIds": {
+				"type": "inputText",
+				"required": false,
+				"label": "Tag IDs (seperate by ,)",
+				"options": {
+					"tooltip": "Tag IDs",
+					"defaultValue": ""
+				}
+			},
+			"itemSort": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Sorting for Items",
+				"options": {
+					"tooltip": "Item Sorting",
+					"defaultValue": "texts.name1_asc",
+					"selectBoxValues": [
+						{
+							"value": "default.recommended_sorting",
+							"caption": "Recommended",
+							"position": 0
+						},
+						{
+							"value": "texts.name1_asc",
+							"caption": "Item name A-Z",
+							"position": 1
+						},
+						{
+							"value": "texts.name1_desc",
+							"caption": "Item name Z-A",
+							"position": 2
+						},
+						{
+							"value": "sorting.price.min_asc",
+							"caption": "Price ⬆",
+							"position": 3
+						},
+						{
+							"value": "sorting.price.max_desc",
+							"caption": "Price ⬇",
+							"position": 4
+						},
+						{
+							"value": "variation.createdAt_desc",
+							"caption": "Newest variation",
+							"position": 5
+						},
+						{
+							"value": "variation.createdAt_asc",
+							"caption": "Oldest variation",
+							"position": 6
+						},
+						{
+							"value": "variation.availability.averageDays_asc",
+							"caption": "Availability ⬆",
+							"position": 7
+						},
+						{
+							"value": "variation.availability.averageDays_desc",
+							"caption": "Availability ⬇",
+							"position": 8
+						},
+						{
+							"value": "variation.number_asc",
+							"caption": "Variation number ⬆",
+							"position": 9
+						},
+						{
+							"value": "variation.number_desc",
+							"caption": "Variation number ⬇",
+							"position": 10
+						},
+						{
+							"value": "variation.updatedAt_asc",
+							"caption": "Last update",
+							"position": 11
+						},
+						{
+							"value": "variation.updatedAt_desc",
+							"caption": "First update",
+							"position": 12
+						},
+						{
+							"value": "item.manufacturer.externalName_asc",
+							"caption": "Manufacturer A-Z",
+							"position": 13
+						},
+						{
+							"value": "item.manufacturer.externalName_desc",
+							"caption": "Manufacturer Z-A",
+							"position": 14
+						}
+					]
+				}
+			},
+			"maxItems": {
+				"type": "inputNumber",
+				"required": true,
+				"label": "The cap of items",
+				"options": {
+					"tooltip": "The cap of items",
+					"defaultValue": "4"
+				}
+			},
+			"itemsPerRowLG": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Items per row (LG)",
+				"options": {
+					"tooltip": "Items per row (LG)",
+					"defaultValue": "4",
+					"selectBoxValues": [
+						{
+							"value": "4",
+							"caption": "4",
+							"position": 0
+						},
+						{
+							"value": "3",
+							"caption": "3",
+							"position": 1
+						},
+						{
+							"value": "2",
+							"caption": "2",
+							"position": 2
+						}
+					]
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::Text",
+		"label": "Text",
+		"tooltip": "Text",
+		"previewImageURL": "",
+		"resizable": false,
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Text",
+		"settings": {
+			"text": {
+				"type": "inputText",
+				"required": true,
+				"label": "Label",
+				"options": {
+					"tooltip": "Displayed text",
+					"defaultValue": "Default Text"
+				}
+			}
+		}
+	}
+]

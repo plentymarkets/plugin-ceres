@@ -1,5 +1,76 @@
 # Release Notes for Ceres
 
+## v2.3.0 (2018-02-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Explanatory texts for registration and intended use have been added (EHI).
+- A container has been added to the OrderConfirmation page so that shipping-plugins are now able to display additional content.
+- The setting Name of an item to display has been added to the Item view tab. This value determines whether the item name, the variation name (if available) or a combination of the two names are displayed in the online store. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#90" target="_blank">Customising the item view</a>.
+- Categories of the Content type can now be displayed in the navigation bar. For this purpose the setting Type of categories rendered in the navigation has been added to the Header tab in the Ceres configuration. For further information, refer to <a href="https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#70" target="_blank">Customising the header and footer</a>.
+
+### Fixed
+
+- Due to an error, items that were not displayed on the category page could not be moved to the shopping cart. This has been fixed.
+- Due to an error, there were attempts to place an order even if the shopping cart was empty. This has been fixed.
+
+## v2.2.2 (2018-02-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.1...2.2.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error, the item view occasionally displayed a 404 page if the URL was entered without Variation ID. This has been fixed by taking the configuration value **Show variations by type** into account in the item view as well.
+- Due to an error, item lists that contained items with multiple images weren't displayed correctly. This has been fixed.
+- Due to an error, plugins were unable to create tabs in the item view. This has been fixed.
+
+## v2.2.1 (2018-02-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.0...2.2.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The sorting order of search results has been improved.
+- The settings for the Google reCAPTCHA have been moved from the **System » Client » Select client » Online store » Settings** menu to the **Global** tab of the Ceres configuration.
+- The settings for the active languages of the online store have been moved from the **System » Client » Select client » Online store » Multilingual** menu to the **Languages** tab of the Ceres configuration.
+
+## v2.2.0 (2018-02-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.5...2.2.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- A service class has been implemented that enables translations via JavaScript, similar to the handling of translations with Laravel on the server side.
+- Texts in different languages will now be loaded directly from the server. It is no longer necessary to compile language-dependent JavaScript files on your local machine.
+- A cancellation form has been added. You can either create a cancellation form by saving the legal information in the back end or specify a PDF document for downloading in the Footer tab of the Ceres config. For further information, refer to [Saving legal information](https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres#300).
+
+### Changed
+
+- When selecting **Company** in the **Salutation** field in the address input form, the **VAT ID** field will be displayed.
+- The button in the contact form now has the same loading animation as all the other buttons in the online store.
+- The performance of the **My account** area has been improved.
+- The elements in the **Checkout** have been re-arranged into 2 separate columns in order to fulfill certain legal requirements.
+- In the checkout the input field for customer wishes and notes has been moved to the left side below the area for selecting a payment method.
+- In the checkout the checkbox for accepting the legal information and the Order now button have been moved below the shopping cart sums.
+
+### Fixed
+
+- Due to an error the relevance of an item wasn't correctly taken into account when searching for items and sorting items by relevance. This has been fixed.
+- Due to an error the **Company** field wasn't displayed correctly on the registration page when selecting **Company** in the **Salutation** drop-down menu. This has been fixed.
+- Due to an error categories that were missing a translation were displayed in the navigation bar and in the breadcrumbs but with no content. This has been fixed.
+- Due to an error categories that were missing a translation could be opened by hovering over in the mega menu. This has been fixed.
+- Due to an error the pagination in the order history didn't work properly. This has been fixed.
+
+
+## v2.1.5 (2018-02-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.4...2.1.5" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the pagination wasn't displayed correctly when using the setting **Show varations by type: Dynamically**. This has been fixed.
+- Due to an error the links in the footer of the online store weren't clickable. This has been fixed.
+- Due to missing JavaScript features using the Internet Explorer was limited. This has been fixed.
+- Due to a different behaviour of the browser Internet Explorer compared to other browsers it was not possible to save the shipping country for an address. Furthermore, there has been a problem when selecting Company from the Salutation drop-down. This has been fixed.
+
+## v2.1.4 (2018-01-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.3...2.1.4" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the mega menu wasn't displayed correctly in Firefox. This has been fixed.
+
 ## v2.1.3 (2018-01-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.1.2...2.1.3" target="_blank"><b>Overview of all changes</b></a>
 
 ### Changed
@@ -233,7 +304,7 @@
 
 ### Changed
 
-- The text of order properties will not be displayed in the shopping cart preview anymore. 
+- The text of order properties will not be displayed in the shopping cart preview anymore.
 - Order properties will now be displayed above the price in the single item view.
 - In the single item view, the item price is now calculated considering surcharges for order properties and graduated prices.
 - The item price is now calculated considering surcharges for order properties and graduated prices in the **Add to shopping cart** overlay.
@@ -616,7 +687,7 @@
 
 ### Added
 
-- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end. 
+- Item images are sorted by the position. The [position of the image](https://www.plentymarkets.co.uk/manual/item/managing-items/#14-8) can be set in the plentymarkets back end.
 
 ### Fixed
 
@@ -706,7 +777,7 @@
 
 ### Fixed
 
-- The `AfterBasketChanged` event is no longer triggered when loading a page. 
+- The `AfterBasketChanged` event is no longer triggered when loading a page.
 - The `AfterBasketChanged` event will only be triggered once when the shopping cart is updated.
 
 ## v1.1.0 (2017-04-12)
@@ -722,7 +793,7 @@
 - The performance of the categories has been improved.
 - The styling of the categories has been updated.
 - The categories will now be reloaded in the category view without reloading the entire page.
-- The pagination has been updated. In the settings in the **Pagination and sorting** tab, you can now select the rows and columns of the category view. The pagination values will be calculated and displayed automatically. 
+- The pagination has been updated. In the settings in the **Pagination and sorting** tab, you can now select the rows and columns of the category view. The pagination values will be calculated and displayed automatically.
 
 ## v1.0.5 (2017-04-07)
 

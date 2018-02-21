@@ -1,0 +1,91 @@
+@import url("http://gridstackjs.com/dist/gridstack.css");
+
+body
+{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Chrome, Opera */
+}
+
+.mkt-homepage
+{
+    position: relative;
+}
+
+.grid-stack-item
+{
+    position: absolute !important;
+    width: 100%;
+    transition: all 0.1s ease;
+}
+
+.grid-stack-item:hover
+{
+    outline: 3px solid #24B3E0;
+}
+
+.grid-stack-item-content
+{
+    height: 100%;
+    cursor: move;
+    overflow: hidden;
+}
+
+.grid-stack-placeholder
+{
+    background: rgba(106,210,106,0.3);
+    outline: 3px dashed #24B3E0;
+}
+
+.ui-draggable-dragging
+{
+    transform: rotate(1.5deg);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+    background: #ffffff;
+    z-index: 99999;
+    opacity: 0.9;
+    transition: all 0.1s ease;
+}
+
+.context-menu
+{
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.shopbuilder-icon
+{
+    height: 36px;
+    width: 36px;
+    margin: 2px 2px;
+    line-height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 0 8px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #636671;
+}
+
+.shopbuilder-icon:hover
+{
+    background-color: #494C56;
+}
+
+.shopbuilder-icon.delete-icon
+{
+    background-color: #f11539;
+    
+}
+
+.shopbuilder-icon.delete-icon:hover
+{
+    background-color: #c70c2b
+}

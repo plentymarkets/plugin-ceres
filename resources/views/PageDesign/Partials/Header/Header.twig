@@ -6,6 +6,7 @@
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 {{ component( "Ceres::WishList.Components.WishListCount" ) }}
+{{ component( "Ceres::Basket.Components.BasketPreviewHover" ) }}
 
 {% set lang = services.sessionStorage.getLang() %}
 {% set enabledRoutes = config("IO.routing.enabled_routes") | split(', ') %}
@@ -73,6 +74,14 @@
                             {% endif %}
                         {% endif %}
                     </a>
+
+                    {% if config("Ceres.basket.preview_type") != "right" %}
+                        <basket-preview
+                            template="#vue-basket-preview-hover"
+                            :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
+                            :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                        </basket-preview>
+                    {% endif %}
                 </li>
             </ul>
         </div>
@@ -131,7 +140,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
                             <hr>
                         </div>
-                        <shop-language-select template="#vue-shop-language-select"/>
+                        <shop-language-select template="#vue-shop-language-select"></shop-language-select>
                     </div>
 
                     <div class="shipping-settings col-xs-12 col-sm-6">
@@ -139,7 +148,7 @@
                             <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
                             <hr>
                         </div>
-                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"/>
+                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                     </div>
                 </div>
             </div>
