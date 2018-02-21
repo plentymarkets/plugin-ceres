@@ -251,14 +251,10 @@ function addContentWidget(widgetData, position)
     {
         // TODO: @vwiebe fix dropzone scope
         jQuery('.grid-stack-0').data('gridstack').addWidget(gridStackItem, posX, posY);
-
-        // TODO: @vwiebe synchronize over gridstack "added"-event
-        setTimeout(function ()
-        {
-            updateContainerDimensions();
-        }, 100);
     });
 }
+
+
 
 /**
  * delete content widget by id
@@ -375,5 +371,12 @@ function initGridstack(identifier)
     };
 
     var selector = '.grid-stack-' + identifier;
+
     jQuery(selector).gridstack(options);
+
+    // init gridstack event listeners
+    jQuery(selector).on('added', function(event, items)
+    {
+        updateContainerDimensions();
+    });
 }
