@@ -1,0 +1,62 @@
+{% set lang = services.sessionStorage.getLang() %}
+
+{% if widgetSettings.categoryId != null %}
+    {% set category = services.category.get(widgetSettings.categoryId, lang) %}
+    {% if category %}
+        {% set data = {
+            name: category.details[0].name,
+            url: services.category.getURL(category, lang),
+            imagePath: category.details[0].imagePath
+        } %}
+    {% endif %}
+{% elseif widgetSettings.itemId != null %}
+    {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [widgetSettings.itemId]}).documents[0].data %}
+    {% set data = {
+        name: item | itemName,
+        url: item | itemURL,
+        imagePath: (item.images | itemImages | orderByKey('position') | first).url
+    } %}
+{% endif %}
+
+<div>
+<div>ITEM {{ item | json_encode }}</div>
+<div>===================</div>
+<div>{{ data | json_encode }}</div>
+</div>
+
+{# 
+{% if category != null %}
+<div class="m-y-2 sale-new">
+    <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
+        <div class="prop-inner">
+            <a class="featured-sale-new" href="{{ services.category.getURL(category, lang) }}">
+                {% if category.details[0].imagePath %}
+                    <img src="documents/{{ category.details[0].imagePath }}" alt="{{ category.details[0].name }}">
+                {% endif %}
+                <div class="featured-category-inner">
+                    <h2 class="featured-category-headline">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ category.details[0].name }}
+                    </h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="m-y-2 sale-new">
+    <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
+        <div class="prop-inner">
+            <a class="featured-sale-new" href="">
+                {% if category.details[0].imagePath %}
+                <div>IMAGE</div>
+                {% endif %}
+                <div class="featured-category-inner">
+                    <h2 class="featured-category-headline">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> CategoryName
+                    </h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %} #}

@@ -82,19 +82,49 @@
 		}
 	},
 	{
-		"identifier": "Ceres::FeaturedCategory",
-		"label": "FeaturedCategory",
-		"tooltip": "FeaturedCategory",
+		"identifier": "Ceres::HighlightedCategory",
+		"label": "HighlightedCategory",
+		"tooltip": "HighlightedCategory",
 		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\FeaturedCategory",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\HighlightedCategory",
 		"settings": {
-			"categoryId": {
-				"type": "categoryPicker",
+			"style": {
+				"type": "selectBox",
 				"required": true,
+				"label": "Style",
+				"options": {
+					"tooltip": "The style of the widget.",
+					"defaultValue": "",
+					"selectBoxValues": [
+						{
+							"value": "large",
+							"caption": "Large text",
+							"position": 0
+						},
+						{
+							"value": "small",
+							"caption": "small text",
+							"position": 1
+						}
+					]
+				}
+			},
+			"categoryId": {
+				"type": "inputNumber",
+				"required": false,
 				"label": "Category ID",
 				"options": {
 					"tooltip": "Category ID",
-					"defaultValue": "19"
+					"defaultValue": ""
+				}
+			},
+			"itemId": {
+				"type": "inputNumber",
+				"required": false,
+				"label": "Item ID",
+				"options": {
+					"tooltip": "Item ID",
+					"defaultValue": ""
 				}
 			}
 		}
