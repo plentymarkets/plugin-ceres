@@ -377,6 +377,9 @@ function initGridstack(identifier)
     // init gridstack event listeners
     jQuery(selector).on('added', function(event, items)
     {
-        updateContainerDimensions();
+        setTimeout(function ()
+        {
+            updateContainerDimensions();
+        }, 100); // TODO: @vwiebe, synchronize
     });
 }
