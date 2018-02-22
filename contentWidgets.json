@@ -12,7 +12,7 @@
 				"required": true,
 				"label": "Label",
 				"options": {
-					"tooltip": "Displayed text",
+					"tooltip": "Text",
 					"defaultValue": ""
 				}
 			}
@@ -130,7 +130,7 @@
 				"label": "Style",
 				"options": {
 					"tooltip": "The style of the widget.",
-					"defaultValue": "",
+					"defaultValue": "large",
 					"selectBoxValues": [
 						{
 							"value": "large",
