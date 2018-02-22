@@ -105,6 +105,15 @@
 					"tooltip": "Custom image path for the third slide",
 					"defaultValue": "https://i.imgur.com/gsRayfj.jpg"
 				}
+			},
+			"hideText": {
+				"type": "checkBox",
+				"required": false,
+				"label": "Hide the category / item name",
+				"options": {
+					"tooltip": "Hide the category / item name",
+					"defaultValue": false
+				}
 			}
 		}
 	},
@@ -131,6 +140,11 @@
 						{
 							"value": "small",
 							"caption": "small text",
+							"position": 1
+						},
+						{
+							"value": "fullwidth",
+							"caption": "full width",
 							"position": 1
 						}
 					]
@@ -173,6 +187,24 @@
 				"options": {
 					"tooltip": "Variation ID",
 					"defaultValue": ""
+				}
+			},
+			"customImagePath": {
+				"type": "inputText",
+				"required": false,
+				"label": "Path to a custom image",
+				"options": {
+					"tooltip": "Custom image path",
+					"defaultValue": "https://i.imgur.com/qvkyZk1.jpg"
+				}
+			},
+			"hideText": {
+				"type": "checkBox",
+				"required": false,
+				"label": "Hide the category / item name",
+				"options": {
+					"tooltip": "Hide the category / item name",
+					"defaultValue": false
 				}
 			}
 		}
