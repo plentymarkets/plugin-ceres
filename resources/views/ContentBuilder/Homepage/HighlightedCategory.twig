@@ -1,6 +1,6 @@
 {% set lang = services.sessionStorage.getLang() %}
 
-{% if widgetSettings.categoryId != null %}
+{% if widgetSettings.categoryId | trim is not empty %}
     {% set category = services.category.get(widgetSettings.categoryId, lang) %}
     {% if category %}
         {% set data = {
@@ -9,7 +9,7 @@
             imagePath: "documents/" ~ category.details[0].imagePath
         } %}
     {% endif %}
-{% elseif widgetSettings.variationId != null %}
+{% elseif widgetSettings.variationId | trim is not empty %}
     {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [widgetSettings.variationId]}).documents[0].data %}
     {% set data = {
         name: item | itemName,
