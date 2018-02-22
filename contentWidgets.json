@@ -25,58 +25,85 @@
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel",
 		"settings": {
-			"text": {
+			"slide1CategoryId": {
 				"type": "inputNumber",
-				"required": true,
-				"label": "Label",
+				"required": false,
+				"label": "Slide 1: category ID",
 				"options": {
-					"tooltip": "Displayed text",
+					"tooltip": "Category ID for the first slide",
 					"defaultValue": ""
 				}
 			},
-			"text1": {
-				"type": "inputText",
-				"required": true,
-				"label": "Label",
-				"options": {
-					"tooltip": "Displayed text",
-					"defaultValue": ""
-				}
-			},
-			"text2": {
+			"slide1VariationId": {
 				"type": "inputNumber",
-				"required": true,
-				"label": "Label",
+				"required": false,
+				"label": "Slide 1: variation ID",
 				"options": {
-					"tooltip": "Displayed text",
+					"tooltip": "Variation ID for the first slide",
 					"defaultValue": ""
 				}
 			},
-			"text3": {
+			"slide1CustomImagePath": {
 				"type": "inputText",
-				"required": true,
-				"label": "Label",
+				"required": false,
+				"label": "Slide 1: custom image path",
 				"options": {
-					"tooltip": "Displayed text",
-					"defaultValue": ""
+					"tooltip": "Custom image path for the first slide",
+					"defaultValue": "https://i.imgur.com/qvkyZk1.jpg"
 				}
 			},
-			"text4": {
+			"slide2CategoryId": {
 				"type": "inputNumber",
-				"required": true,
-				"label": "Label",
+				"required": false,
+				"label": "Slide 2: category ID",
 				"options": {
-					"tooltip": "Displayed text",
+					"tooltip": "Category ID for the second slide",
 					"defaultValue": ""
 				}
 			},
-			"text5": {
-				"type": "inputText",
-				"required": true,
-				"label": "Label",
+			"slide2VariationId": {
+				"type": "inputNumber",
+				"required": false,
+				"label": "Slide 2: variation ID",
 				"options": {
-					"tooltip": "Displayed text",
+					"tooltip": "Variation ID for the second slide",
 					"defaultValue": ""
+				}
+			},
+			"slide2CustomImagePath": {
+				"type": "inputText",
+				"required": false,
+				"label": "Slide 2: custom image path",
+				"options": {
+					"tooltip": "Custom image path for the second slide",
+					"defaultValue": "https://i.imgur.com/m4ELeiO.jpg"
+				}
+			},
+			"slide3CategoryId": {
+				"type": "inputNumber",
+				"required": false,
+				"label": "Slide 3: category ID",
+				"options": {
+					"tooltip": "Category ID for the third slide",
+					"defaultValue": ""
+				}
+			},
+			"slide3VariationId": {
+				"type": "inputNumber",
+				"required": false,
+				"label": "Slide 3: variation ID",
+				"options": {
+					"tooltip": "Variation ID for the third slide",
+					"defaultValue": ""
+				}
+			},
+			"slide3CustomImagePath": {
+				"type": "inputText",
+				"required": false,
+				"label": "Slide 3: custom image path",
+				"options": {
+					"tooltip": "Custom image path for the third slide",
+					"defaultValue": "https://i.imgur.com/gsRayfj.jpg"
 				}
 			}
 		}
