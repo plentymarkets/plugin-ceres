@@ -67,7 +67,7 @@
                                 {% else %}
                                     <h2 class="text-danger">No image provided.</h2>
                                 {% endif %}
-                                {% if slide.name is defined %}
+                                {% if slide.name is defined and not widgetSettings.hideText %}
                                     <div class="carousel-caption">
                                         <h2>
                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ slide.name }}
