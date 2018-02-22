@@ -270,77 +270,77 @@
 					"selectBoxValues": [
 						{
 							"value": "default.recommended_sorting",
-							"caption": "Recommended",
+							"caption": "Template.itemRecommendedSorting",
 							"position": 0
 						},
 						{
 							"value": "texts.name1_asc",
-							"caption": "Item name A-Z",
+							"caption": "Template.itemName_asc",
 							"position": 1
 						},
 						{
 							"value": "texts.name1_desc",
-							"caption": "Item name Z-A",
+							"caption": "Template.itemName_desc",
 							"position": 2
 						},
 						{
 							"value": "sorting.price.min_asc",
-							"caption": "Price ⬆",
+							"caption": "Template.itemPrice_asc",
 							"position": 3
 						},
 						{
 							"value": "sorting.price.max_desc",
-							"caption": "Price ⬇",
+							"caption": "Template.itemPrice_desc",
 							"position": 4
 						},
 						{
 							"value": "variation.createdAt_desc",
-							"caption": "Newest variation",
+							"caption": "Template.variationCreateTimestamp_desc",
 							"position": 5
 						},
 						{
 							"value": "variation.createdAt_asc",
-							"caption": "Oldest variation",
+							"caption": "Template.variationCreateTimestamp_asc",
 							"position": 6
 						},
 						{
 							"value": "variation.availability.averageDays_asc",
-							"caption": "Availability ⬆",
+							"caption": "Template.availabilityAverageDays_asc",
 							"position": 7
 						},
 						{
 							"value": "variation.availability.averageDays_desc",
-							"caption": "Availability ⬇",
+							"caption": "Template.availabilityAverageDays_desc",
 							"position": 8
 						},
 						{
 							"value": "variation.number_asc",
-							"caption": "Variation number ⬆",
+							"caption": "Template.variationCustomNumber_asc",
 							"position": 9
 						},
 						{
 							"value": "variation.number_desc",
-							"caption": "Variation number ⬇",
+							"caption": "Template.variationCustomNumber_desc",
 							"position": 10
 						},
 						{
 							"value": "variation.updatedAt_asc",
-							"caption": "Last update",
+							"caption": "Template.variationLastUpdateTimestamp_asc",
 							"position": 11
 						},
 						{
 							"value": "variation.updatedAt_desc",
-							"caption": "First update",
+							"caption": "Template.variationLastUpdateTimestamp_desc",
 							"position": 12
 						},
 						{
 							"value": "item.manufacturer.externalName_asc",
-							"caption": "Manufacturer A-Z",
+							"caption": "Template.itemProducerName_asc",
 							"position": 13
 						},
 						{
 							"value": "item.manufacturer.externalName_desc",
-							"caption": "Manufacturer Z-A",
+							"caption": "Template.itemProducerName_desc",
 							"position": 14
 						}
 					]
