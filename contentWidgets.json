@@ -109,6 +109,27 @@
 					]
 				}
 			},
+			"imageSize": {
+				"type": "selectBox",
+				"required": true,
+				"label": "Image size",
+				"options": {
+					"tooltip": "The size of the image.",
+					"defaultValue": "cover",
+					"selectBoxValues": [
+						{
+							"value": "cover",
+							"caption": "Cover",
+							"position": 0
+						},
+						{
+							"value": "contain",
+							"caption": "Contain",
+							"position": 1
+						}
+					]
+				}
+			},
 			"categoryId": {
 				"type": "inputNumber",
 				"required": false,
@@ -118,12 +139,12 @@
 					"defaultValue": ""
 				}
 			},
-			"itemId": {
+			"variationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Item ID",
+				"label": "Variation ID",
 				"options": {
-					"tooltip": "Item ID",
+					"tooltip": "Variation ID",
 					"defaultValue": ""
 				}
 			}
