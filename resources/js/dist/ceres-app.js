@@ -12138,6 +12138,8 @@ Vue.component("address-input-group", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../../helper/utils");
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -12156,7 +12158,7 @@ Vue.component("address-select", {
 
     delimiters: ["${", "}"],
 
-    props: ["template", "addressType", "showError", "countryNameMap"],
+    props: ["template", "addressType", "showError"],
 
     data: function data() {
         return {
@@ -12200,6 +12202,9 @@ Vue.component("address-select", {
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
             return state.basket.isBasketLoading;
+        },
+        countryList: function countryList(state) {
+            return state.localization.shippingCountries;
         }
     })),
 
@@ -12425,11 +12430,17 @@ Vue.component("address-select", {
 
         /**
          * @param countryId
-         * @returns country name | empty string
+         * @returns string
          */
         getCountryName: function getCountryName(countryId) {
             if (countryId > 0) {
-                return this.countryNameMap[countryId];
+                var country = this.countryList.find(function (country) {
+                    return country.id === countryId;
+                });
+
+                if (!(0, _utils.isNullOrUndefined)(country)) {
+                    return country.currLangName;
+                }
             }
 
             return "";
@@ -12478,7 +12489,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"services/AddressFieldService":101,"services/ApiService":102,"services/ModalService":106,"services/TranslationService":108,"services/ValidationService":110}],21:[function(require,module,exports){
+},{"../../../helper/utils":99,"services/AddressFieldService":101,"services/ApiService":102,"services/ModalService":106,"services/TranslationService":108,"services/ValidationService":110}],21:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -12693,9 +12704,9 @@ Vue.component("invoice-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select \n            ref=\"invoice\"\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error='showError'>\n        </address-select>\n    ",
 
-    props: ["selectedAddressId", "addressList", "hasToValidate", "countryNameMap"],
+    props: ["selectedAddressId", "addressList", "hasToValidate"],
 
     computed: Vuex.mapState({
         billingAddressId: function billingAddressId(state) {
@@ -12761,9 +12772,9 @@ Vue.component("shipping-address-select", {
 
     delimiters: ["${", "}"],
 
-    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :country-name-map=\"countryNameMap\">\n        </address-select>\n    ",
+    template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            v-on:address-changed=\"addressChanged\"\n            address-type=\"2\">\n        </address-select>\n    ",
 
-    props: ["selectedAddressId", "addressList", "countryNameMap"],
+    props: ["selectedAddressId", "addressList"],
 
     computed: Vuex.mapState({
         deliveryAddressId: function deliveryAddressId(state) {
@@ -13005,7 +13016,7 @@ Vue.component("country-select", {
 
     delimiters: ["${", "}"],
 
-    props: ["countryList", "countryNameMap", "selectedCountryId", "selectedStateId", "template", "addressType"],
+    props: ["countryList", "selectedCountryId", "selectedStateId", "template", "addressType"],
 
     data: function data() {
         return {
@@ -13027,7 +13038,6 @@ Vue.component("country-select", {
     created: function created() {
         this.$options.template = this.template;
 
-        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
         this.updateSelectedCountry();
     },
@@ -16742,7 +16752,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"], ["401", "basketCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -17670,7 +17680,6 @@ module.exports = function ($) {
     return {
         parseShippingCountries: parseShippingCountries,
         parseShippingStates: parseShippingStates,
-        translateCountryNames: translateCountryNames,
         sortCountries: sortCountries
     };
 
@@ -17690,24 +17699,6 @@ module.exports = function ($) {
         }
 
         return deliveryCountries;
-    }
-
-    function translateCountryNames(countryNameMap, countryList) {
-        if (countryNameMap === null) {
-            return;
-        }
-        for (var countryId in countryNameMap) {
-            var countryName = countryNameMap[countryId];
-
-            for (var index in countryList) {
-                var country = countryList[index];
-
-                if (country.id === parseInt(countryId)) {
-                    country.name = countryName;
-                    break;
-                }
-            }
-        }
     }
 
     function sortCountries(countries) {
