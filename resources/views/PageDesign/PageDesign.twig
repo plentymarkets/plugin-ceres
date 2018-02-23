@@ -34,7 +34,7 @@
                 <!-- filters -->
             </div>
 
-            <div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
+            <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
@@ -112,7 +112,7 @@
                 <!-- ./REGISTRATION MODAL -->
 
                 <!-- BASKET MODAL -->
-                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
+                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
                 <!-- ./BASKET MODAL -->
 
                 <!-- SHIPPINGCOSTS MODAL -->
@@ -125,7 +125,7 @@
                                     <div class="modal-title h3">{{ trans('Ceres::Template.itemShippingCosts') }}</div>
                                 </div>
                                 <div class="modal-body">
-                                    {% include category_template(shippingCat, lang, webstoreId) ignore missing %}
+                                    {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
                                 </div>
                             </div>
                         </div>

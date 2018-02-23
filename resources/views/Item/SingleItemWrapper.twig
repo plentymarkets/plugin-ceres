@@ -18,6 +18,6 @@
 
 {% block PageBody %}
 
-    {% include [category_template( item.documents[0].data.item.add_cms_page, lang, frontend.system.webstoreId ), "Ceres::Item.SingleItemView"] %}
+    {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
 
 {% endblock %}

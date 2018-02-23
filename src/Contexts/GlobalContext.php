@@ -15,30 +15,6 @@ use IO\Services\BasketService;
 
 class GlobalContext implements ContextInterface
 {
-    /** @var Request $request */
-    protected $request = null;
-    
-    /** @var SessionStorageService $sessionStorageService */
-    protected $sessionStorageService = null;
-    
-    /** @var CategoryService $categoryService */
-    protected $categoryService = null;
-    
-    /** @var TemplateService $templateService */
-    protected $templateService = null;
-    
-    /** @var ItemCrossSellingService $crossSellingService */
-    protected $crossSellingService = null;
-    
-    /** @var WebstoreConfigurationService $webstoreConfigService */
-    protected $webstoreConfigService = null;
-    
-    /** @var ItemLastSeenService $itemLastSeenService */
-    protected $itemLastSeenService = null;
-    
-    /** @var BasketService $basketService */
-    protected $basketService = null;
-    
     protected $params = [];
     
     /** @var CeresConfig $ceresConfig  */
@@ -49,58 +25,57 @@ class GlobalContext implements ContextInterface
     public $template = [];
     public $templateName;
     public $categories;
-    public $fixNavBarPos;
-    public $basketAddInformation;
-    public $shippingCat;
     public $categoryBreadcrumbs;
-    public $showCategoryTypes;
     public $notifications;
-    public $webstoreId;
     public $basket;
     public $basketItems;
     public $webstoreConfig;
     
     public function init($params, $templateContainer)
     {
-        $this->params = $params;
-        
-        $this->request = pluginApp(Request::class);
-        $this->sessionStorageService = pluginApp(SessionStorageService::class);
-        $this->categoryService = pluginApp(CategoryService::class);
-        $this->templateService = pluginApp(TemplateService::class);
-        $this->crossSellingService = pluginApp(ItemCrossSellingService::class);
-        $this->webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-        $this->itemLastSeenService = pluginApp(ItemLastSeenService::class);
-        $this->basketService = pluginApp(BasketService::class);
+        /** @var SessionStorageService $sessionStorageService */
+        $sessionStorageService = pluginApp(SessionStorageService::class);
+
+        /** @var CategoryService $categoryService */
+        $categoryService = pluginApp(CategoryService::class);
+
+        /** @var TemplateService $templateService */
+        $templateService = pluginApp(TemplateService::class);
+
+        /** @var ItemCrossSellingService $crossSellingService */
+        $crossSellingService = pluginApp(ItemCrossSellingService::class);
+
+        /** @var WebstoreConfigurationService $webstoreConfigService */
+        $webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
+
+        /** @var ItemLastSeenService $itemLastSeenService */
+        $itemLastSeenService = pluginApp(ItemLastSeenService::class);
+
+        /** @var BasketService $basketService */
+        $basketService = pluginApp(BasketService::class);
     
         $this->ceresConfig = pluginApp(CeresConfig::class);
-        $this->webstoreConfig = $this->webstoreConfigService->getWebstoreConfig();
+        $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
         
-        $this->lang = $this->sessionStorageService->getLang();
+        $this->lang = $sessionStorageService->getLang();
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
             $this->metaLang = $this->lang;
         }
         
-        $this->fixNavBarPos = $this->ceresConfig->header->fixedNavbar;
-        $this->basketAddInformation = $this->ceresConfig->basket->addItemToBasketConfirm;
-        $this->shippingCat = $this->ceresConfig->global->shippingCostsCategoryId;
-        
-        if($this->templateService->isCategory() || $this->templateService->isItem())
+        if($templateService->isCategory() || $templateService->isItem())
         {
-            $this->categoryBreadcrumbs = $this->categoryService->getHierarchy();
-            $this->crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
-            $this->itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
+            $this->categoryBreadcrumbs = $categoryService->getHierarchy();
+            $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
+            $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
         
-        $this->showCategoryTypes = $this->ceresConfig->header->showCategoryTypes;
-        $this->categories = $this->categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6);
+        $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6);
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
-        $this->webstoreId = $this->webstoreConfigService->getWebstoreConfig()->webstoreId;
-        
-        $this->basket = $this->basketService->getBasketForTemplate();
-        $this->basketItems = $this->basketService->getBasketItemsForTemplate('Ceres::Basket.Basket');
+
+        $this->basket = $basketService->getBasketForTemplate();
+        $this->basketItems = $basketService->getBasketItemsForTemplate('Ceres::Basket.Basket');
     }
     
     protected function getParam($key, $defaultValue)

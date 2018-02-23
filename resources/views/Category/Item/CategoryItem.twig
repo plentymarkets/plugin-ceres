@@ -99,7 +99,7 @@
 {% endblock %}
 
 {% block PartialHead %}
-    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
     {% if page-1 > 0 %}
         <link rel=“prev“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : page-1 }) | url_encode }}“ />
@@ -114,5 +114,5 @@
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
 
-    <meta name="robots" content="{{ formattedMetaRobots }}">
+    <meta name="robots" content="{{ metaRobots }}">
 {% endblock %}

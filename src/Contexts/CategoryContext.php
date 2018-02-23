@@ -10,7 +10,6 @@ class CategoryContext extends GlobalContext implements ContextInterface
     public $category = null;
    
     public $metaRobots;
-    public $formattedMetaRobots;
     
     public function init($params, $templateContainer)
     {
@@ -18,7 +17,6 @@ class CategoryContext extends GlobalContext implements ContextInterface
         
         $this->category = $params['category'];
         
-        $this->metaRobots = $this->category->details[0]->metaRobots;
-        $this->formattedMetaRobots = str_replace('_', ', ', $this->metaRobots);
+        $this->metaRobots = str_replace('_', ', ', $this->category->details[0]->metaRobots);
     }
 }

@@ -47,7 +47,5 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
         $this->query = ['items' => $itemsPerPage, 'sorting' => $itemSort];
         $this->itemList = $this->paginatedResult['documents'];
         $this->paginationType = $this->ceresConfig->pagination->position;
-        $this->metaRobots = $this->category->details[0]->metaRobots;
-        $this->formattedMetaRobots = str_replace('_', ', ', $this->metaRobots);
     }
 }
