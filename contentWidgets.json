@@ -336,32 +336,6 @@
 					"tooltip": "The cap of items",
 					"defaultValue": "4"
 				}
-			},
-			"itemsPerRowLG": {
-				"type": "selectBox",
-				"required": true,
-				"label": "Items per row (LG)",
-				"options": {
-					"tooltip": "Items per row (LG)",
-					"defaultValue": "4",
-					"selectBoxValues": [
-						{
-							"value": "4",
-							"caption": "4",
-							"position": 0
-						},
-						{
-							"value": "3",
-							"caption": "3",
-							"position": 1
-						},
-						{
-							"value": "2",
-							"caption": "2",
-							"position": 2
-						}
-					]
-				}
 			}
 		}
 	},

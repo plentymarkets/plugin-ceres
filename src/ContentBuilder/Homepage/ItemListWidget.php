@@ -18,15 +18,12 @@ class ItemListWidget implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-        $colLG = 12 / $widgetSettings['itemsPerRowLG'];
-
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
             "Ceres::ContentBuilder.Homepage.ItemListWidget",
             [
-                "widgetSettings" => $widgetSettings,
-                "colLG" => $colLG
+                "widgetSettings" => $widgetSettings
             ]
         );
     }

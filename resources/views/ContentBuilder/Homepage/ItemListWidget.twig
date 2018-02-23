@@ -18,24 +18,32 @@
 {% endif %}
 
 <div>
-    {% if itemList is not empty %}
-        <div class="m-b-2 clearfix">
-            <div class="section-header m-b-1">
+    <div class="m-b-2 clearfix">
+        <div class="section-header m-b-1">
+            {% if itemList is not empty %}
                 <h2>{{ category.details[0].name }}</h2>
                 <a href="{{ services.category.getURL(category, lang) }}" class="section-link-all">
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}
                 </a>
-            </div>
+            {% else %}
+                <h2>{{ trans("Ceres::Widget.itenList_categoryName") }}</h2>
+            {% endif %}
+        </div>
 
-            <ul class="product-list row grid">
-                {% for item in itemList %}
-                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-{{ colLG }}">
+        <ul class="product-list row grid">
+            {% if itemList is not empty %}
+                {% for item in itemList[0:4] %}
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         {% include "Ceres::ContentBuilder.Homepage.Partials.CategoryListItemPreview" with { 'item': item } %}
                     </li>
                 {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-        <h1 class="text-danger">Please finish configuration!</h1>
-    {% endif %}
+            {% else %}
+                {% for i in 0..3 %}
+                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        {% include "Ceres::ContentBuilder.Homepage.Partials.CategoryListItemPreview" %}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
 </div>

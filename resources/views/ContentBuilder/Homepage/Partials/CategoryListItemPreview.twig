@@ -4,14 +4,6 @@
 
 {% set image = item.data.images | itemImages('urlMiddle') | orderByKey('position') | first %}
 
-{% if enableCarousel is not defined %}
-    {% if config("Ceres.item.enable_image_carousel") == "true" %}
-        {% set enableCarousel = true %}
-    {% else %}
-        {% set enableCarousel = false %}
-    {% endif %}
-{% endif %}
-
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <div class="thumb-background"></div>
@@ -19,9 +11,13 @@
         <div class="thumb-image">
             <div class="square-container">
                 <div class="square-inner main-image">
-                    <a>
-                        <img class="img-fluid" src="{{ image.url }}">
-                    </a>
+                    {% if item is defined %}
+                        <a>
+                            <img class="img-fluid" src="{{ image.url }}">
+                        </a>
+                    {% else %}
+                        <i class="fa fa-image fa-5x text-primary m-x-auto"></i>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -33,7 +29,7 @@
             {% set storeSpecial = item.data.item.storeSpecial.names.name %}
 
             <div class="special-tags">
-                {% if  item.data.item.storeSpecial.id == 1 %}
+                {% if item.data.item.storeSpecial.id == 1 %}
 
                     {% set storeSpecialColor = 'danger' %}
                     {% set percent = 0 %}
@@ -68,7 +64,11 @@
         <!-- ITEM DETAILS -->
         <div class="thumb-content">
             <a class="thumb-title small">
-                {{ item.data | itemName }}
+                {% if item is defined %}
+                    {{ item.data | itemName }}
+                {% else %}
+                    {{ trans("Ceres::Widget.itenList_itemName") }}
+                {% endif %}
             </a>
             <div class="thumb-meta">
                 {{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}
@@ -83,7 +83,11 @@
                     {% endif %}
 
                     <div class="price">
-                        {{ item.data.prices.default.unitPrice.formatted }} *
+                        {% if item is defined %}
+                            {{ item.data.prices.default.unitPrice.formatted }} *
+                        {% else %}
+                            {{ trans("Ceres::Widget.itemList_itemPrice") }} *
+                        {% endif %}
                     </div>
                 </div>
 
@@ -106,17 +110,6 @@
                 * {{ trans("Ceres::Template.itemInclVAT") }} {{ trans("Ceres::Template.itemExclusive") }}
                 <a title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </span>
-
-            
-            {# {% if tags > 0 %}
-                <div class="m-t-1 tag-list">
-                    {% for tag in tags %}
-                        <span class="tag bg-black">
-                            {{ tag.names.name }}
-                        </span>
-                    {% endfor %}
-                </div>
-            {% endif %} #}
         </div>
         <!-- ./ITEM DETAILS  -->
     </div>
