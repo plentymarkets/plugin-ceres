@@ -24,19 +24,19 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
         $itemLoaderService = pluginApp(ItemLoaderService::class);
         
         $this->page = $this->getParam('page', 1);
-        $rowsPerPage = $this->ceresConfig->pagination->getRowsPerPage();
-        $columnsPerPage = $this->ceresConfig->pagination->getColumnsPerPage();
+        $rowsPerPage = $this->ceresConfig->pagination->rowsPerPage;
+        $columnsPerPage = $this->ceresConfig->pagination->columnsPerPage;
         $itemsPerPage = $this->getParam('itemsPerPage', $rowsPerPage[0] * $columnsPerPage);
         $this->isSearch = $this->templateService->isSearch();
         
         if($this->isSearch)
         {
-            $sorting = $this->ceresConfig->sorting->getDefaultSortingSearch();
+            $sorting = $this->ceresConfig->sorting->defaultSortingSearch;
             $this->searchString = $this->getParam('query', '');
         }
         else
         {
-            $sorting = $this->ceresConfig->sorting->getDefaultSorting();
+            $sorting = $this->ceresConfig->sorting->defaultSorting;
         }
 
         $requestSorting = $this->getParam('sorting', '');

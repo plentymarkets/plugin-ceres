@@ -83,19 +83,19 @@ class GlobalContext implements ContextInterface
             $this->metaLang = $this->lang;
         }
         
-        $this->fixNavBarPos = $this->ceresConfig->header->getFixedNavbar();
-        $this->basketAddInformation = $this->ceresConfig->basket->getAddItemToBasketConfirm();
-        $this->shippingCat = $this->ceresConfig->global->getShippingCostsCategoryId();
+        $this->fixNavBarPos = $this->ceresConfig->header->fixedNavbar;
+        $this->basketAddInformation = $this->ceresConfig->basket->addItemToBasketConfirm;
+        $this->shippingCat = $this->ceresConfig->global->shippingCostsCategoryId;
         
         if($this->templateService->isCategory() || $this->templateService->isItem())
         {
             $this->categoryBreadcrumbs = $this->categoryService->getHierarchy();
-            $this->crossSellingService->setType($this->ceresConfig->itemLists->getCrossSellingType());
-            $this->itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->getLastSeenNumber());
+            $this->crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
+            $this->itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
         
-        $this->showCategoryTypes = $this->ceresConfig->header->getShowCategoryTypes();
-        $this->categories = $this->categoryService->getNavigationTree($this->ceresConfig->header->getShowCategoryTypes(), $this->lang, 6);
+        $this->showCategoryTypes = $this->ceresConfig->header->showCategoryTypes;
+        $this->categories = $this->categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6);
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
         $this->webstoreId = $this->webstoreConfigService->getWebstoreConfig()->webstoreId;
         

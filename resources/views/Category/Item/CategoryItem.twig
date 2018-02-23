@@ -35,8 +35,8 @@
                             <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ ceresConfig.sorting.data | json_encode() }}"></item-list-sorting>
                             <items-per-page
                                 template="#vue-items-per-page"
-                                :columns-per-page="{{ ceresConfig.pagination.columns_per_page | json_encode() }}"
-                                :rows-per-page="{{ ceresConfig.pagination.rows_per_page | json_encode() }}"></items-per-page>
+                                :columns-per-page="{{ ceresConfig.pagination.columns_per_page | json_encode }}"
+                                :rows-per-page="{{ ceresConfig.pagination.rows_per_page | json_encode }}"></items-per-page>
                             <item-filter-list :facet-data="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>

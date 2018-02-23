@@ -26,10 +26,10 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
         /** @var ItemLoaderService $itemLoaderService */
         $itemLoaderService = pluginApp(ItemLoaderService::class);
     
-        $rowsPerPage = $this->ceresConfig->pagination->getRowsPerPage();
-        $columnsPerPage = $this->ceresConfig->pagination->getColumnsPerPage();
+        $rowsPerPage = $this->ceresConfig->pagination->rowsPerPage;
+        $columnsPerPage = $this->ceresConfig->pagination->columnsPerPage;
         
-        $itemSort = $this->getParam('sorting', $this->ceresConfig->sorting->getDefaultSorting());
+        $itemSort = $this->getParam('sorting', $this->ceresConfig->sorting->defaultSorting);
         $itemsPerPage = $this->getParam('itemsPerPage', $rowsPerPage[0] * $columnsPerPage);
         $this->page = $this->getParam('page', 1);
         
@@ -46,7 +46,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
         $this->pageMax = ceil($this->paginatedResult['total'] / $itemsPerPage);
         $this->query = ['items' => $itemsPerPage, 'sorting' => $itemSort];
         $this->itemList = $this->paginatedResult['documents'];
-        $this->paginationType = $this->ceresConfig->pagination->getPosition();
+        $this->paginationType = $this->ceresConfig->pagination->position;
         $this->metaRobots = $this->category->details[0]->metaRobots;
         $this->formattedMetaRobots = str_replace('_', ', ', $this->metaRobots);
     }

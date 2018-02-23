@@ -27,8 +27,8 @@
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
                         alt-text="{{ item.data | itemName }}"
                         item-url="{{ itemUrl }}"
-                        :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode() }}"
-                        :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode() }}"
+                        :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
+                        :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
                         :enable-carousel="{{ enableCarousel | json_encode }}">
                     </category-image-carousel>
 
