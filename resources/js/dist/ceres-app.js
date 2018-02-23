@@ -22259,7 +22259,7 @@ var state = {
 
 var mutations = {
     setOrderReturnData: function setOrderReturnData(state, orderData) {
-        orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
+        orderData.order.orderItems = orderData.order.returnItems.filter(function (orderItem) {
             return orderItem.quantity !== 0;
         });
 
