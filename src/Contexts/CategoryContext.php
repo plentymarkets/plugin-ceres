@@ -11,7 +11,6 @@ class CategoryContext extends GlobalContext implements ContextInterface
    
     public $metaRobots;
     public $formattedMetaRobots;
-    public $categoryURL;
     
     public function init($params, $templateContainer)
     {
@@ -21,6 +20,5 @@ class CategoryContext extends GlobalContext implements ContextInterface
         
         $this->metaRobots = $this->category->details[0]->metaRobots;
         $this->formattedMetaRobots = str_replace('_', ', ', $this->metaRobots);
-        $this->categoryURL = $this->categoryService->getURL($this->category);
     }
 }

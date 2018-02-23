@@ -52,7 +52,7 @@
             {% if basket is not defined %}
                 {% set basket = services.basket.getBasketForTemplate() %}
             {% endif %}
-            {% if config("Ceres.basket.preview_type") == "right" %}
+            {% if ceresConfig.basket.previewType == "right" %}
                 <div class="wrapper wrapper-right">
                     <basket-preview
                         template="#vue-basket-preview"
@@ -144,7 +144,7 @@
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
         {{ Translations.add( "Ceres", "Template" ) }}
-        {% if config("Ceres.log.performance.level") == 'development' %}
+        {% if ceresConfig.log.performanceLevel  == 'development' %}
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
