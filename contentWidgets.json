@@ -49,7 +49,7 @@
 				"label": "Slide 1: custom image path",
 				"options": {
 					"tooltip": "Custom image path for the first slide",
-					"defaultValue": "https://i.imgur.com/qvkyZk1.jpg"
+					"defaultValue": ""
 				}
 			},
 			"slide2CategoryId": {
@@ -76,7 +76,7 @@
 				"label": "Slide 2: custom image path",
 				"options": {
 					"tooltip": "Custom image path for the second slide",
-					"defaultValue": "https://i.imgur.com/m4ELeiO.jpg"
+					"defaultValue": ""
 				}
 			},
 			"slide3CategoryId": {
@@ -103,7 +103,7 @@
 				"label": "Slide 3: custom image path",
 				"options": {
 					"tooltip": "Custom image path for the third slide",
-					"defaultValue": "https://i.imgur.com/gsRayfj.jpg"
+					"defaultValue": ""
 				}
 			}
 		}
