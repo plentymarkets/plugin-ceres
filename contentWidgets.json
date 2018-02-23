@@ -105,15 +105,6 @@
 					"tooltip": "Custom image path for the third slide",
 					"defaultValue": "https://i.imgur.com/gsRayfj.jpg"
 				}
-			},
-			"hideText": {
-				"type": "checkBox",
-				"required": false,
-				"label": "Hide the category / item name",
-				"options": {
-					"tooltip": "Hide the category / item name",
-					"defaultValue": false
-				}
 			}
 		}
 	},
@@ -196,15 +187,6 @@
 				"options": {
 					"tooltip": "Custom image path",
 					"defaultValue": "https://i.imgur.com/qvkyZk1.jpg"
-				}
-			},
-			"hideText": {
-				"type": "checkBox",
-				"required": false,
-				"label": "Hide the category / item name",
-				"options": {
-					"tooltip": "Hide the category / item name",
-					"defaultValue": false
 				}
 			}
 		}

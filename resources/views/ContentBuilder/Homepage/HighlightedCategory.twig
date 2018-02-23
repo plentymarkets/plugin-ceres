@@ -31,7 +31,7 @@
                     {% if data.imagePath %}
                         <div class="featured-image{% if widgetSettings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
                     {% endif %}
-                    {% if data.name | trim is not empty and not widgetSettings.hideText %}
+                    {% if data.name | trim is not empty %}
                         <div class="featured-category-inner">
                             <h2 class="featured-category-headline">
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
@@ -47,7 +47,7 @@
         <div class="hero-xtras">
             <a class="hero-category"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
                 <div class="hero-image{% if widgetSettings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
-                {% if data.name | trim is not empty and not widgetSettings.hideText %}
+                {% if data.name | trim is not empty %}
                     <div class="hero-category-inner">
                         <h2 class="hero-category-headline">
                             <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
