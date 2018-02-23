@@ -8,7 +8,6 @@ use IO\Services\ItemService;
 class SingleItemContext extends GlobalContext implements ContextInterface
 {
     public $item;
-    public $itemData;
     
     public $variations;
     public $attributeNameMap;
@@ -29,7 +28,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         
         $this->variations = $itemService->getVariationAttributeMap($itemData['item']['id']);
         $this->attributeNameMap = $itemService->getAttributeNameMap($itemData['item']['id']);
-        $this->itemData = $this->ceresConfig->item->getItemData();
         $this->customerShowNetPrices = $customerService->showNetPrices();
         
     }

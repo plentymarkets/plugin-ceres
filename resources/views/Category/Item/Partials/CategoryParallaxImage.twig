@@ -4,7 +4,7 @@
             <div class="parallax-text-container">
                 <h1 class="h2 p-t-2 category-title">{{ category.details[0].name | raw }}</h1>
 
-                {% if showCategoryDescription %}
+                {% if ceresConfig.item.showCategoryDescription %}
                     <div id="category-description-container" class="category-description m-b-1">{{ category.details[0].description | raw }}</div>
                 {% endif %}
             </div>

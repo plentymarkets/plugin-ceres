@@ -39,6 +39,8 @@ class GlobalContext implements ContextInterface
     /** @var BasketService $basketService */
     protected $basketService = null;
     
+    protected $params = [];
+    
     /** @var CeresConfig $ceresConfig  */
     public $ceresConfig = null;
     
@@ -52,15 +54,16 @@ class GlobalContext implements ContextInterface
     public $shippingCat;
     public $categoryBreadcrumbs;
     public $showCategoryTypes;
-    public $domainSsl;
-    public $headerCompanyName;
     public $notifications;
     public $webstoreId;
     public $basket;
     public $basketItems;
+    public $webstoreConfig;
     
     public function init($params, $templateContainer)
     {
+        $this->params = $params;
+        
         $this->request = pluginApp(Request::class);
         $this->sessionStorageService = pluginApp(SessionStorageService::class);
         $this->categoryService = pluginApp(CategoryService::class);
@@ -71,6 +74,7 @@ class GlobalContext implements ContextInterface
         $this->basketService = pluginApp(BasketService::class);
     
         $this->ceresConfig = pluginApp(CeresConfig::class);
+        $this->webstoreConfig = $this->webstoreConfigService->getWebstoreConfig();
         
         $this->lang = $this->sessionStorageService->getLang();
         $this->metaLang = 'de';
@@ -92,12 +96,20 @@ class GlobalContext implements ContextInterface
         
         $this->showCategoryTypes = $this->ceresConfig->header->getShowCategoryTypes();
         $this->categories = $this->categoryService->getNavigationTree($this->ceresConfig->header->getShowCategoryTypes(), $this->lang, 6);
-        $this->domainSsl = $this->webstoreConfigService->getWebstoreConfig()->domainSsl;
-        $this->headerCompanyName = $this->ceresConfig->header->getCompanyName();
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
         $this->webstoreId = $this->webstoreConfigService->getWebstoreConfig()->webstoreId;
         
         $this->basket = $this->basketService->getBasketForTemplate();
         $this->basketItems = $this->basketService->getBasketItemsForTemplate('Ceres::Basket.Basket');
+    }
+    
+    protected function getParam($key, $defaultValue)
+    {
+        if(is_null($this->params[$key]))
+        {
+            return $defaultValue;
+        }
+        
+        return $this->params[$key];
     }
 }
