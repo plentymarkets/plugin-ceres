@@ -7,14 +7,19 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresAddressConfig extends PluginConfig
 {
+    public $billingAddressShow;
+    public $billingAddressShow_en;
+    public $billingAddressRequire;
+    public $billingAddressRequire_en;
+    public $deliveryAddressShow;
+    public $deliveryAddressShow_en;
+    public $deliveryAddressRequire;
+    public $deliveryAddressRequire_en;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
-
-    public function getBillingAddressShow()
-    {
-        return $this->getMultiSelectValue(
+        $this->billingAddressShow = $this->getMultiSelectValue(
             "billing_address.show",
             [
                 "billing_address.name1",
@@ -33,12 +38,9 @@ class CeresAddressConfig extends PluginConfig
                 "billing_address.salutation"
             ]
         );
-    }
 
-    public function getBillingAddressShow_en()
-    {
-        return $this->getMultiSelectValue(
-            "billing_address.show",
+        $this->billingAddressShow_en = $this->getMultiSelectValue(
+            "billing_address.en.show",
             [
                 "billing_address.name1",
                 "billing_address.vatNumber",
@@ -57,11 +59,8 @@ class CeresAddressConfig extends PluginConfig
                 "billing_address.salutation"
             ]
         );
-    }
 
-    public function getBillingAddressRequire()
-    {
-        return $this->getMultiSelectValue(
+        $this->billingAddressRequire = $this->getMultiSelectValue(
             "billing_address.require",
             [
                 "billing_address.name1",
@@ -77,12 +76,9 @@ class CeresAddressConfig extends PluginConfig
             ],
             []
         );
-    }
 
-    public function getBillingAddressRequire_en()
-    {
-        return $this->getMultiSelectValue(
-            "billing_address.require",
+        $this->billingAddressRequire_en = $this->getMultiSelectValue(
+            "billing_address.en.require",
             [
                 "billing_address.name1",
                 "billing_address.vatNumber",
@@ -97,11 +93,8 @@ class CeresAddressConfig extends PluginConfig
             ],
             []
         );
-    }
 
-    public function getDeliveryAddressShow()
-    {
-        return $this->getMultiSelectValue(
+        $this->deliveryAddressShow = $this->getMultiSelectValue(
             "delivery_address.show",
             [
                 "delivery_address.name1",
@@ -118,12 +111,9 @@ class CeresAddressConfig extends PluginConfig
                 "delivery_address.salutation"
             ]
         );
-    }
 
-    public function getDeliveryAddressShow_en()
-    {
-        return $this->getMultiSelectValue(
-            "delivery_address.show",
+        $this->deliveryAddressShow_en = $this->getMultiSelectValue(
+            "delivery_address.en.show",
             [
                 "delivery_address.name1",
                 "delivery_address.salutation",
@@ -139,11 +129,8 @@ class CeresAddressConfig extends PluginConfig
                 "delivery_address.salutation"
             ]
         );
-    }
 
-    public function getDeliveryAddressRequire()
-    {
-        return $this->getMultiSelectValue(
+        $this->deliveryAddressRequire = $this->getMultiSelectValue(
             "delivery_address.require",
             [
                 "delivery_address.name1",
@@ -157,12 +144,9 @@ class CeresAddressConfig extends PluginConfig
             ],
             []
         );
-    }
 
-    public function getDeliveryAddressRequire_en()
-    {
-        return $this->getMultiSelectValue(
-            "delivery_address.require",
+        $this->deliveryAddressRequire_en = $this->getMultiSelectValue(
+            "delivery_address.en.require",
             [
                 "delivery_address.name1",
                 "delivery_address.salutation",
