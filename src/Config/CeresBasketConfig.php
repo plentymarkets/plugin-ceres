@@ -12,6 +12,7 @@ class CeresBasketConfig extends PluginConfig
     public $previewData;
     public $variations;
     public $addItemToBasketConfirm;
+    public $previewType;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -63,5 +64,7 @@ class CeresBasketConfig extends PluginConfig
         $this->variations = $this->getBooleanValue( "basket.variations", false );
 
         $this->addItemToBasketConfirm = $this->getTextValue( "basket.add_item_to_basket_confirm", "overlay" );
+
+        $this->previewType = $this->getTextValue( "basket.preview_type", "right" );
     }
 }
