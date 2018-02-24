@@ -4,48 +4,35 @@ namespace Ceres\Contexts;
 
 use IO\Services\ItemLoader\Extensions\TwigLoaderPresets;
 use IO\Services\ItemLoader\Services\ItemLoaderService;
+use IO\Services\ItemSearch\SearchPresets\CategoryItems;
+use IO\Services\ItemSearch\SearchPresets\CrossSellingItems;
+use IO\Services\ItemSearch\SearchPresets\Facets;
+use IO\Services\ItemSearch\Services\ItemSearchService;
 use Plenty\Repositories\Models\PaginatedResult;
 
 class CategoryItemContext extends CategoryContext implements ContextInterface
 {
-    public $page;
-    public $pageMax;
-    public $query;
-    public $paginationType;
-    public $paginatedResult;
-    public $itemList;
+    use ItemListContext;
     
     public function init($params, $templateContainer)
     {
         parent::init($params, $templateContainer);
-        
-        /** @var TwigLoaderPresets $twigLoaderPresets */
-        $twigLoaderPresets = pluginApp(TwigLoaderPresets::class);
-        $presets = $twigLoaderPresets->getGlobals();
-        
-        /** @var ItemLoaderService $itemLoaderService */
-        $itemLoaderService = pluginApp(ItemLoaderService::class);
-    
-        $rowsPerPage = $this->ceresConfig->pagination->rowsPerPage;
-        $columnsPerPage = $this->ceresConfig->pagination->columnsPerPage;
-        
-        $itemSort = $this->getParam('sorting', $this->ceresConfig->sorting->defaultSorting);
-        $itemsPerPage = $this->getParam('itemsPerPage', $rowsPerPage[0] * $columnsPerPage);
-        $this->page = $this->getParam('page', 1);
-        
-        $options = [
-            'categoryId'        => $this->category->id,
-            'page'              => $this->page,
-            'items'             => $itemsPerPage,
-            'sorting'           => $itemSort,
+
+        $itemListOptions = [
+            'page'          => $this->getParam( 'page', 1 ),
+            'itemsPerPage'  => $this->getParam( 'itemsPerPage', $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage ),
+            'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSorting ),
+            'facets'        => $this->getParam( 'facets', '' ),
+            'categoryId'    => $this->category->id
         ];
-        
-        /** @var PaginatedResult $categoryItems */
-        $this->paginatedResult = $itemLoaderService->loadForTemplate('Ceres::ItemList.ItemListView', $presets['itemLoaderPresets']['categoryList'], $options);
-        
-        $this->pageMax = ceil($this->paginatedResult['total'] / $itemsPerPage);
-        $this->query = ['items' => $itemsPerPage, 'sorting' => $itemSort];
-        $this->itemList = $this->paginatedResult['documents'];
-        $this->paginationType = $this->ceresConfig->pagination->position;
+
+        /** @var ItemSearchService $itemSearchService */
+        $itemSearchService = pluginApp( ItemSearchService::class );
+        $searchResults = $itemSearchService->getResults([
+            'itemList' => CategoryItems::getSearchFactory( $itemListOptions ),
+            'facets'   => Facets::getSearchFactory( $itemListOptions )
+        ]);
+
+        $this->initItemList( $searchResults, $itemListOptions );
     }
 }

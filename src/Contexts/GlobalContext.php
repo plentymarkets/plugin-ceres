@@ -28,11 +28,12 @@ class GlobalContext implements ContextInterface
     public $categoryBreadcrumbs;
     public $notifications;
     public $basket;
-    public $basketItems;
     public $webstoreConfig;
-    
+
     public function init($params, $templateContainer)
     {
+        $this->params = $params;
+
         /** @var SessionStorageService $sessionStorageService */
         $sessionStorageService = pluginApp(SessionStorageService::class);
 
@@ -53,29 +54,28 @@ class GlobalContext implements ContextInterface
 
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
-    
+
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
-        
+
         $this->lang = $sessionStorageService->getLang();
         $this->metaLang = 'de';
         if($this->lang == 'en')
         {
             $this->metaLang = $this->lang;
         }
-        
+
         if($templateService->isCategory() || $templateService->isItem())
         {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy();
             $crossSellingService->setType($this->ceresConfig->itemLists->crossSellingType);
             $itemLastSeenService->setLastSeenMaxCount($this->ceresConfig->itemLists->lastSeenNumber);
         }
-        
+
         $this->categories = $categoryService->getNavigationTree($this->ceresConfig->header->showCategoryTypes, $this->lang, 6);
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
-        $this->basketItems = $basketService->getBasketItemsForTemplate('Ceres::Basket.Basket');
     }
     
     protected function getParam($key, $defaultValue)
