@@ -11,7 +11,7 @@ const mutations =
     {
         setOrderReturnData(state, orderData)
 		{
-            orderData.order.orderItems = orderData.order.returnItems.filter(orderItem => orderItem.quantity !== 0);
+            orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
         },
