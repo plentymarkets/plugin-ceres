@@ -25,13 +25,14 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
             'query'         => $this->getParam( 'query', '' )
         ];
 
-        $this->initItemList(
-            [
-                'itemList' => SearchItems::getSearchFactory( $itemListOptions ),
-                'facets'   => Facets::getSearchFactory( $itemListOptions )
-            ],
-            $itemListOptions
-        );
+        /** @var ItemSearchService $itemSearchService */
+        $itemSearchService = pluginApp( ItemSearchService::class );
+        $searchResults = $itemSearchService->getResults([
+            'itemList' => SearchItems::getSearchFactory( $itemListOptions ),
+            'facets'   => Facets::getSearchFactory( $itemListOptions )
+        ]);
+
+        $this->initItemList( $searchResults, $itemListOptions );
 
         $this->isSearch = true;
         $this->searchString = $itemListOptions['query'];

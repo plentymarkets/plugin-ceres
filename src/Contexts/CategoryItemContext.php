@@ -26,12 +26,13 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             'categoryId'    => $this->category->id
         ];
 
-        $this->initItemList(
-            [
-                'itemList' => CategoryItems::getSearchFactory( $itemListOptions ),
-                'facets'   => Facets::getSearchFactory( $itemListOptions )
-            ],
-            $itemListOptions
-        );
+        /** @var ItemSearchService $itemSearchService */
+        $itemSearchService = pluginApp( ItemSearchService::class );
+        $searchResults = $itemSearchService->getResults([
+            'itemList' => CategoryItems::getSearchFactory( $itemListOptions ),
+            'facets'   => Facets::getSearchFactory( $itemListOptions )
+        ]);
+
+        $this->initItemList( $searchResults, $itemListOptions );
     }
 }
