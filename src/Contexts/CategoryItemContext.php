@@ -22,7 +22,7 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             'page'          => $this->getParam( 'page', 1 ),
             'itemsPerPage'  => $this->getParam( 'itemsPerPage', $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage ),
             'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSorting ),
-            'facets'        => $this->getParam( 'facets', '' ),
+            'facets'        => $this->getParam( 'facets' ),
             'categoryId'    => $this->category->id
         ];
 

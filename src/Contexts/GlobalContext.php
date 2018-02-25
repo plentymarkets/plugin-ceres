@@ -78,7 +78,7 @@ class GlobalContext implements ContextInterface
         $this->basket = $basketService->getBasketForTemplate();
     }
     
-    protected function getParam($key, $defaultValue)
+    protected function getParam($key, $defaultValue = null)
     {
         if(is_null($this->params[$key]))
         {
