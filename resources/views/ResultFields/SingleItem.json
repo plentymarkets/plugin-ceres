@@ -1,0 +1,65 @@
+[
+    "attributes.attribute.names.*",
+    "attributes.value.names.*",
+
+    "itemId",
+    "id",
+    "item.id",
+    "item.manufacturer.externalName",
+    "item.documents.data",
+    "item.ageRestriction",
+    "item.customsTariffNumber",
+    "item.producingCountry.names.*",
+    "item.storeSpecial",
+    "item.condition.names.*",
+    "item.add_cms_page",
+
+    "variation.id",
+    "variation.name",
+    "variation.number",
+    "variation.externalId",
+    "variation.minimumOrderQuantity",
+    "variation.intervalOrderQuantity",
+    "variation.maximumOrderQuantity",
+    "variation.model",
+    "variation.weightG",
+    "variation.weightNetG",
+    "variation.lengthMM",
+    "variation.widthMM",
+    "variation.heightMM",
+    "variation.availability.names.*",
+    "variation.availability.id",
+    "variation.releasedAt",
+    "variation.mayShowUnitPrice",
+
+    "texts.*",
+
+    "salesPrices.*",
+
+    "unit.content",
+    "unit.names.name",
+    "unit.names.lang",
+    "unit.unitOfMeasurement",
+
+    "images.all.url",
+    "images.all.urlMiddle",
+    "images.all.urlPreview",
+    "images.all.position",
+    "images.all.path",
+    "images.all.names.alternate",
+    "images.all.names.lang",
+    "images.variation.url",
+    "images.variation.urlPreview",
+    "images.variation.urlMiddle",
+    "images.variation.position",
+    "images.variation.path",
+    "images.variation.names.alternate",
+    "images.variation.names.lang",
+
+    "properties.*",
+
+    "defaultCategories",
+
+    "filter.isSalable",
+    "filter.hasManufacturer"
+]
