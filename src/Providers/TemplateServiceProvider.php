@@ -18,6 +18,7 @@ use IO\Helper\CategoryKey;
 use IO\Helper\CategoryMap;
 use IO\Helper\TemplateContainer;
 use IO\Services\ContentCaching\Services\Container;
+use IO\Services\ItemSearch\Helper\ExternalSearch;
 use IO\Services\ItemSearch\Helper\ResultFieldTemplate;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
