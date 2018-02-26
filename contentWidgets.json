@@ -1,11 +1,11 @@
 [
 	{
-		"identifier": "Ceres::TextHeader",
+		"identifier": "Ceres::HeaderWidget",
 		"label": "TextHeader",
 		"tooltip": "TextHeader",
 		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
 		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeader",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\HeaderWidget",
 		"settings": {
 			"text": {
 				"type": "inputText",
@@ -19,11 +19,11 @@
 		}
 	},
 	{
-		"identifier": "Ceres::Carousel",
+		"identifier": "Ceres::ImageCarouselWidget",
 		"label": "Carousel",
 		"tooltip": "Carousel",
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Carousel",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageCarouselWidget",
 		"settings": {
 			"slide1CategoryId": {
 				"type": "inputNumber",
@@ -109,11 +109,11 @@
 		}
 	},
 	{
-		"identifier": "Ceres::HighlightedCategory",
+		"identifier": "Ceres::ImageBoxWidget",
 		"label": "HighlightedCategory",
 		"tooltip": "HighlightedCategory",
 		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\HighlightedCategory",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageBoxWidget",
 		"settings": {
 			"style": {
 				"type": "selectBox",
@@ -121,7 +121,7 @@
 				"label": "Style",
 				"options": {
 					"tooltip": "The style of the widget.",
-					"defaultValue": "large",
+					"defaultValue": "largeText",
 					"selectBoxValues": [
 						{
 							"value": "largeText",
@@ -186,7 +186,7 @@
 				"label": "Path to a custom image",
 				"options": {
 					"tooltip": "Custom image path",
-					"defaultValue": "https://i.imgur.com/qvkyZk1.jpg"
+					"defaultValue": ""
 				}
 			}
 		}

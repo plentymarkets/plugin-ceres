@@ -5,7 +5,7 @@ namespace Ceres\ContentBuilder\Homepage;
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class TextHeader implements Widget
+class ImageCarouselWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class TextHeader implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.TextHeader",
+            "Ceres::ContentBuilder.Homepage.ImageCarouselWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]

@@ -5,7 +5,7 @@ namespace Ceres\ContentBuilder\Homepage;
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class HighlightedCategory implements Widget
+class ImageBoxWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class HighlightedCategory implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.HighlightedCategory",
+            "Ceres::ContentBuilder.Homepage.ImageBoxWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]
