@@ -7,29 +7,25 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresContactConfig extends PluginConfig
 {
+    public $shopMail;
+    public $openingTimes;
+    public $openingTimes_en;
+    public $showData;
+    public $apiKey;
+    public $mapZoom;
+    public $mapShowInMobile;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getShopMail()
-    {
-        return $this->getTextValue( "contact.shop_mail", "");
-    }
+        $this->shopMail = $this->getTextValue( "contact.shop_mail", "");
 
-    public function getOpeningTimes()
-    {
-        return $this->getTextValue("contact.opening_times", "Montag - Freitag, 00:00 - 24:00" );
-    }
+        $this->openingTimes = $this->getTextValue("contact.opening_times", "Montag - Freitag, 00:00 - 24:00" );
 
-    public function getOpeningTimes_en()
-    {
-        return $this->getTextValue("contact.en.opening_times", "Monday - Friday, 00:00 - 24:00" );
-    }
+        $this->openingTimes_en = $this->getTextValue("contact.en.opening_times", "Monday - Friday, 00:00 - 24:00" );
 
-    public function getShowData()
-    {
-        return $this->getMultiSelectValue(
+        $this->showData = $this->getMultiSelectValue(
             "contact.show_data",
             [
                 "name",
@@ -55,20 +51,11 @@ class CeresContactConfig extends PluginConfig
                 "opening_times"
             ]
         );
-    }
 
-    public function getApiKey()
-    {
-        return $this->getTextValue( "contact.api_key", "" );
-    }
+        $this->apiKey = $this->getTextValue( "contact.api_key", "" );
 
-    public function getMapZoom()
-    {
-        return $this->getIntegerValue( "contact.map_zoom", 16 );
-    }
+        $this->mapZoom = $this->getIntegerValue( "contact.map_zoom", 16 );
 
-    public function getMapShowInMobile()
-    {
-        return $this->getBooleanValue( "contact.map_show_in_mobile", false );
+        $this->mapShowInMobile = $this->getBooleanValue( "contact.map_show_in_mobile", false );
     }
 }

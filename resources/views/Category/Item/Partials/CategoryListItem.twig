@@ -6,11 +6,7 @@
 {% set itemUrl =  item.data | itemURL %}
 
 {% if enableCarousel is not defined %}
-    {% if config("Ceres.item.enable_image_carousel") == "true" %}
-        {% set enableCarousel = true %}
-    {% else %}
-        {% set enableCarousel = false %}
-    {% endif %}
+    {% set enableCarousel = ceresConfig.item.enableImageCarousel %}
 {% endif %}
 
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
@@ -31,8 +27,8 @@
                         :image-urls-data="{{ item.data.images | json_encode() }} | itemImages('urlMiddle')"
                         alt-text="{{ item.data | itemName }}"
                         item-url="{{ itemUrl }}"
-                        :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                        :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
+                        :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
+                        :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
                         :enable-carousel="{{ enableCarousel | json_encode }}">
                     </category-image-carousel>
 
@@ -61,7 +57,7 @@
                     {% endif %}
 
                     {% if percent <= 0 %}
-                        {% set dezimalcount = config('Ceres.item.storeSpecial') %}
+                        {% set dezimalcount = ceresConfig.item.storeSpecial %}
                         {% set percent = percent | number_format(dezimalcount, ',', '.') %}
                         {% set storeSpecial = percent ~"%" %}
                     {% endif %}

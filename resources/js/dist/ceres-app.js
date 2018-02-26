@@ -10783,7 +10783,7 @@ return jQuery;
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.13.0
+ * @version 1.12.9
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -16891,8 +16891,8 @@ Vue.component("category-image-carousel", {
         imageUrlsData: { type: Array },
         itemUrl: { type: String },
         altText: { type: String },
-        showDots: { type: String },
-        showNav: { type: String },
+        showDots: { type: Boolean },
+        showNav: { type: Boolean },
         disableLazyLoad: {
             type: Boolean,
             default: false
@@ -16942,13 +16942,13 @@ Vue.component("category-image-carousel", {
     methods: {
         initializeCarousel: function initializeCarousel() {
             $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: this.showDots === "true",
+                dots: this.showDots === true,
                 items: 1,
                 mouseDrag: false,
                 loop: this.imageUrls.length > 1,
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
-                nav: this.showNav === "true",
+                nav: this.showNav === true,
                 navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
                 onTranslated: function onTranslated(event) {
                     var target = $(event.currentTarget);
