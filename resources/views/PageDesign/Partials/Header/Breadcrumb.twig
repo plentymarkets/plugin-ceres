@@ -1,7 +1,5 @@
 {{ component("Ceres::Category.Components.CategoryBreadcrumbs") }}
 
-{% set lang         = services.sessionStorage.getLang() %}
-
 {% if categoryBreadcrumbs is not empty %}
     <nav id="twig-rendered-breadcrumbs" class="container-max small hidden-sm-down">
         <ul class="breadcrumb">
@@ -15,7 +13,7 @@
             {% for category in categoryBreadcrumbs[:categoryBreadcrumbs | length - 1] if not break %}
                 {% if category.details[0] %}
                     <li class="breadcrumb-item">
-                        <a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details.first.name }}</a>
+                        <a href="{{ services.category.getURL( category ) }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details[0].name }}</a>
                     </li>
                 {% else %}
                     {% set break = true %}
@@ -24,7 +22,7 @@
 
             {% set lastCategory = categoryBreadcrumbs | last %}
             {% if lastCategory.details is defined %}
-                <li class="breadcrumb-item active"><span>{{ lastCategory.details.first.name }}</span></li>
+                <li class="breadcrumb-item active"><span>{{ lastCategory.details[0].name }}</span></li>
             {% else %}
                 <li class="breadcrumb-item active" v-cloak v-if="$store.state.item.variation.documents">
                     <span>${ $store.state.item.variation.documents[0].data | itemName }</span>

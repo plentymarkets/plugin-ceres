@@ -5,15 +5,19 @@ namespace Ceres\Config;
 
 class CeresConfig
 {
+    /** @var CeresAddressConfig  */
     public $addresses;
 
+    /** @var CeresBasketConfig */
     public $basket;
 
     /** @var CeresContactConfig */
     public $contact;
 
+    /** @var CeresCurrencyConfig  */
     public $currency;
 
+    /** @var CeresFooterConfig  */
     public $footer;
 
     /** @var CeresGlobalConfig */
@@ -22,22 +26,31 @@ class CeresConfig
     /** @var CeresHeaderConfig */
     public $header;
 
+    /** @var CeresHomepageConfig  */
     public $homepage;
 
+    /** @var CeresItemConfig  */
     public $item;
 
+    /** @var CeresItemListsConfig  */
     public $itemLists;
 
+    /** @var CeresLanguageConfig  */
     public $language;
 
+    /** @var CeresLogConfig  */
     public $log;
 
+    /** @var CeresMetaConfig  */
     public $meta;
 
+    /** @var CeresMyAccountConfig  */
     public $myAccount;
 
+    /** @var CeresPaginationConfig  */
     public $pagination;
 
+    /** @var CeresSortingConfig  */
     public $sorting;
 
     public function __construct()
