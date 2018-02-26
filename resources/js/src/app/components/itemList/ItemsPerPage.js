@@ -5,15 +5,13 @@ Vue.component("items-per-page", {
     delimiters: ["${", "}"],
 
     props: [
-        "columnsPerPage",
-        "rowsPerPage",
+        "paginationValues",
         "template"
     ],
 
     data()
     {
         return {
-            paginationValues: [],
             selectedValue: null
         };
     },
@@ -22,7 +20,6 @@ Vue.component("items-per-page", {
     {
         this.$options.template = this.template;
 
-        this.initPaginationValues();
         this.setSelectedValueByUrl();
     },
 
@@ -54,14 +51,6 @@ Vue.component("items-per-page", {
             }
 
             this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
-        },
-
-        initPaginationValues()
-        {
-            for (const rowPerPage of this.rowsPerPage)
-            {
-                this.paginationValues.push(rowPerPage * this.columnsPerPage);
-            }
         }
     }
 });

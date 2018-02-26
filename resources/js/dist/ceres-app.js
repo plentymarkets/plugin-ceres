@@ -17104,95 +17104,44 @@ var _UrlService = require("services/UrlService");
 
 var _UrlService2 = _interopRequireDefault(_UrlService);
 
-var _TranslationService = require("services/TranslationService");
-
-var _TranslationService2 = _interopRequireDefault(_TranslationService);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 Vue.component("item-list-sorting", {
 
     delimiters: ["${", "}"],
 
-    props: ["sortData", "template"],
+    props: ["sortingList", "defaultSorting", "template"],
 
     data: function data() {
         return {
-            selectedSorting: {},
-            dataTranslationMapping: {
-                "default.recommended_sorting": "itemRecommendedSorting",
-                "texts.name1_asc": "itemName_asc",
-                "texts.name1_desc": "itemName_desc",
-                "sorting.price.min_asc": "itemPrice_asc",
-                "sorting.price.max_desc": "itemPrice_desc",
-                "variation.createdAt_desc": "variationCreateTimestamp_desc",
-                "variation.createdAt_asc": "variationCreateTimestamp_asc",
-                "variation.availability.averageDays_asc": "availabilityAverageDays_asc",
-                "variation.availability.averageDays_desc": "availabilityAverageDays_desc",
-                "variation.number_asc": "variationCustomNumber_asc",
-                "variation.number_desc": "variationCustomNumber_desc",
-                "variation.updatedAt_asc": "variationLastUpdateTimestamp_asc",
-                "variation.updatedAt_desc": "variationLastUpdateTimestamp_desc",
-                "item.manufacturer.externalName_asc": "itemProducerName_asc",
-                "item.manufacturer.externalName_desc": "itemProducerName_desc"
-            },
-            sortingList: this.sortData
+            selectedSorting: {}
         };
     },
     created: function created() {
         this.$options.template = this.template;
 
-        if (App.isSearch) {
-            this.sortingList.unshift("item.score");
-            this.dataTranslationMapping["item.score"] = "itemRelevance";
-        }
-
-        this.buildData();
-        this.setDefaultSorting();
-
-        this.setSelectedValueByUrl();
+        this.setSelectedValue();
     },
 
 
     methods: {
-        buildData: function buildData() {
-            for (var i in this.sortingList) {
-                var data = this.sortingList[i];
-                var sortItem = {
-                    value: data,
-                    displayName: _TranslationService2.default.translate("Ceres::Template." + this.dataTranslationMapping[data])
-                };
-
-                this.sortingList[i] = sortItem;
-            }
-        },
-        setDefaultSorting: function setDefaultSorting() {
-            var defaultSortKey = App.isSearch ? App.config.defaultSortingSearch : App.config.defaultSorting;
-
-            this.selectedSorting = this.sortingList.find(function (entry) {
-                return entry.value === defaultSortKey;
-            });
-            this.$store.commit("setItemListSorting", this.selectedSorting.value);
-        },
         updateSorting: function updateSorting() {
-            this.$store.dispatch("selectItemListSorting", this.selectedSorting.value);
+            this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
-        setSelectedValueByUrl: function setSelectedValueByUrl() {
+        setSelectedValue: function setSelectedValue() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             if (urlParams.sorting) {
-                for (var i in this.sortingList) {
-                    if (this.sortingList[i].value === urlParams.sorting) {
-                        this.selectedSorting = this.sortingList[i];
-                        this.$store.commit("setItemListSorting", this.selectedSorting.value);
-                    }
-                }
+                this.selectedSorting = urlParams.sorting;
+                this.updateSorting();
+            } else {
+                this.selectedSorting = this.defaultSorting;
             }
         }
     }
 });
 
-},{"services/TranslationService":110,"services/UrlService":111}],47:[function(require,module,exports){
+},{"services/UrlService":111}],47:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -17378,18 +17327,16 @@ Vue.component("items-per-page", {
 
     delimiters: ["${", "}"],
 
-    props: ["columnsPerPage", "rowsPerPage", "template"],
+    props: ["paginationValues", "template"],
 
     data: function data() {
         return {
-            paginationValues: [],
             selectedValue: null
         };
     },
     created: function created() {
         this.$options.template = this.template;
 
-        this.initPaginationValues();
         this.setSelectedValueByUrl();
     },
 
@@ -17412,32 +17359,6 @@ Vue.component("items-per-page", {
             }
 
             this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
-        },
-        initPaginationValues: function initPaginationValues() {
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = this.rowsPerPage[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var rowPerPage = _step.value;
-
-                    this.paginationValues.push(rowPerPage * this.columnsPerPage);
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
         }
     }
 });
@@ -22259,7 +22180,7 @@ var state = {
 
 var mutations = {
     setOrderReturnData: function setOrderReturnData(state, orderData) {
-        orderData.order.orderItems = orderData.order.returnItems.filter(function (orderItem) {
+        orderData.order.orderItems = orderData.order.orderItems.filter(function (orderItem) {
             return orderItem.quantity !== 0;
         });
 

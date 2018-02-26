@@ -2,7 +2,8 @@
 
 namespace Ceres\Contexts;
 
-use IO\Services\ItemSearch\Helper\ExternalSearch;
+use Ceres\Helper\ExternalSearch;
+use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\VariationList;
 use IO\Services\ItemSearch\Services\ItemSearchService;
 
@@ -19,12 +20,17 @@ trait ItemListContext
     public $itemList;
     public $facets;
 
+    /** @var SearchOptions */
+    public $searchOptions;
+
     protected function initItemList( $defaultSearchFactories, $options )
     {
         $this->currentPage      = $options['page'];
         $this->itemsPerPage     = $options['itemsPerPage'];
         $this->itemSorting      = $options['sorting'];
         $this->query            = ['items' => $this->itemsPerPage, 'sorting' => $this->itemSorting];
+
+        $this->searchOptions = SearchOptions::get();
 
         /** @var ItemSearchService $itemSearchService */
         $itemSearchService = pluginApp( ItemSearchService::class );
@@ -41,34 +47,38 @@ trait ItemListContext
 
             // emit event to perform external search
             ExternalSearch::getExternalResults( $externalSearch );
-            $resultVariationIds             = $externalSearch->results;
-            $externalSearchFactories        = [];
-            foreach( $resultVariationIds as $variationId )
-            {
-                $externalSearchFactories[$variationId] = VariationList::getSearchFactory([
-                    'variationIds' => [$variationId]
-                ]);
-            }
 
-            $searchResults = $itemSearchService->getResults( $externalSearchFactories );
-
-            foreach( $resultVariationIds as $variationId )
+            if ( $externalSearch->hasResults() )
             {
-                $this->itemList[] = $searchResults[$variationId]['documents'][0];
+                $resultVariationIds             = $externalSearch->getResults();
+                $externalSearchFactories        = [];
+                foreach( $resultVariationIds as $variationId )
+                {
+                    $externalSearchFactories[$variationId] = VariationList::getSearchFactory([
+                        'variationIds' => [$variationId]
+                    ]);
+                }
+
+                $searchResults = $itemSearchService->getResults( $externalSearchFactories );
+
+                foreach( $resultVariationIds as $variationId )
+                {
+                    $this->itemList[] = $searchResults[$variationId]['documents'][0];
+                }
+                $this->pageMax          = ceil( $externalSearch->getCountTotal() / $options['itemsPerPage'] );
+                $this->itemCountPage    = count( $resultVariationIds );
+                $this->itemCountTotal   = $externalSearch->getCountTotal();
+                $this->facets           = [];
+
+                return 0;
             }
-            $this->pageMax          = ceil( $externalSearch->countTotal / $options['itemsPerPage'] );
-            $this->itemCountPage    = count( $resultVariationIds );
-            $this->itemCountTotal   = $externalSearch->countTotal;
-            $this->facets           = [];
         }
-        else
-        {
-            $searchResults = $itemSearchService->getResults( $defaultSearchFactories );
-            $this->pageMax          = ceil( $searchResults['itemList']['total'] / $options['itemsPerPage'] );
-            $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
-            $this->itemCountTotal   = $searchResults['itemList']['total'];
-            $this->itemList         = $searchResults['itemList']['documents'];
-            $this->facets           = $searchResults['facets'];
-        }
+
+        $searchResults = $itemSearchService->getResults( $defaultSearchFactories );
+        $this->pageMax          = ceil( $searchResults['itemList']['total'] / $options['itemsPerPage'] );
+        $this->itemCountPage    = count( $searchResults['itemList']['documents'] );
+        $this->itemCountTotal   = $searchResults['itemList']['total'];
+        $this->itemList         = $searchResults['itemList']['documents'];
+        $this->facets           = $searchResults['facets'];
     }
 }
