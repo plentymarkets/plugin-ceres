@@ -1,24 +1,5 @@
-{% set params = [
-    {
-        categoryId: widgetSettings.slide1CategoryId,
-        variationId: widgetSettings.slide1VariationId,
-        customImagePath: widgetSettings.slide1CustomImagePath
-    },
-    {
-        categoryId: widgetSettings.slide2CategoryId,
-        variationId: widgetSettings.slide2VariationId,
-        customImagePath: widgetSettings.slide2CustomImagePath
-    },
-    {
-        categoryId: widgetSettings.slide3CategoryId,
-        variationId: widgetSettings.slide3VariationId,
-        customImagePath: widgetSettings.slide3CustomImagePath
-    }
-] %}
-
 {% set slides = [] %}
-
-{% for param in params %}
+{% for param in sliderParams %}
     {% set data = {} %}
     {% if param.categoryId | trim is not empty %}
         {% set category = services.category.get(param.categoryId, lang) %}

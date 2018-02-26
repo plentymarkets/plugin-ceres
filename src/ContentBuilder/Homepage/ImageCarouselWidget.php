@@ -18,12 +18,23 @@ class ImageCarouselWidget implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
+        $sliderParams = [];
+
+        foreach ($widgetSettings as $key => $value)
+        {
+            if (preg_match("/^slide\d+$/", $key) && (isset($value["categoryId"]) || isset($value["variationId"]) || isset($value["customImagePath"])))
+            {
+                $sliderParams[] = $value;
+            }
+        }
+
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
             "Ceres::ContentBuilder.Homepage.ImageCarouselWidget",
             [
-                "widgetSettings" => $widgetSettings
+                "widgetSettings" => $widgetSettings,
+                "sliderParams" => $sliderParams
             ]
         );
     }

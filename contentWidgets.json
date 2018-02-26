@@ -22,87 +22,114 @@
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageCarouselWidget",
 		"settings": {
-			"slide1CategoryId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_categoryId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
-					"defaultValue": ""
-				}
+			"slide1": {
+                "type": "verticalContainer",
+                "label": "Widget.imageCarousel_slide1",
+                "required": false,
+                "options": {
+                    "containerEntries": {
+                        "categoryId": {
+                            "type": "inputNumber",
+                            "required": false,
+                            "label": "Widget.imageCarousel_categoryId_label",
+                            "options": {
+                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
+                                "defaultValue": ""
+                            }
+						},
+						"variationId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_variationId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"defaultValue": ""
+							}
+						},
+						"customImagePath": {
+							"type": "inputText",
+							"required": false,
+							"label": "Widget.imageCarousel_customImagePath_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"defaultValue": ""
+							}
+						}
+                    }
+                }
 			},
-			"slide1VariationId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_variationId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_variationId_tooltip",
-					"defaultValue": ""
-				}
+			"slide2": {
+                "type": "verticalContainer",
+                "label": "Widget.imageCarousel_slide2",
+                "required": false,
+                "options": {
+                    "containerEntries": {
+                        "categoryId": {
+                            "type": "inputNumber",
+                            "required": false,
+                            "label": "Widget.imageCarousel_categoryId_label",
+                            "options": {
+                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
+                                "defaultValue": ""
+                            }
+						},
+						"variationId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_variationId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"defaultValue": ""
+							}
+						},
+						"customImagePath": {
+							"type": "inputText",
+							"required": false,
+							"label": "Widget.imageCarousel_customImagePath_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"defaultValue": ""
+							}
+						}
+                    }
+                }
 			},
-			"slide1CustomImagePath": {
-				"type": "inputText",
+			"slide3": {
+                "type": "verticalContainer",
+                "label": "Widget.imageCarousel_slide3",
 				"required": false,
-				"label": "Widget.imageCarousel_customImagePath_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide2CategoryId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_categoryId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide2VariationId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_variationId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_variationId_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide2CustomImagePath": {
-				"type": "inputText",
-				"required": false,
-				"label": "Widget.imageCarousel_customImagePath_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide3CategoryId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_categoryId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide3VariationId": {
-				"type": "inputNumber",
-				"required": false,
-				"label": "Widget.imageCarousel_variationId_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_variationId_tooltip",
-					"defaultValue": ""
-				}
-			},
-			"slide3CustomImagePath": {
-				"type": "inputText",
-				"required": false,
-				"label": "Widget.imageCarousel_customImagePath_label",
-				"options": {
-					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
-					"defaultValue": ""
-				}
-			}
+                "options": {
+                    "containerEntries": {
+                        "categoryId": {
+                            "type": "inputNumber",
+                            "required": false,
+                            "label": "Widget.imageCarousel_categoryId_label",
+                            "options": {
+                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
+                                "defaultValue": ""
+                            }
+						},
+						"variationId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_variationId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"defaultValue": ""
+							}
+						},
+						"customImagePath": {
+							"type": "inputText",
+							"required": false,
+							"label": "Widget.imageCarousel_customImagePath_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"defaultValue": ""
+							}
+						}
+                    }
+                }
+            }
 		}
 	},
 	{
