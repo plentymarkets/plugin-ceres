@@ -16714,7 +16714,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"], ["401", "basketCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -18186,6 +18186,15 @@ function setUrlParams(urlParams) {
     var titleElement = document.getElementsByTagName("title")[0];
 
     window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+
+    (0, _jquery2.default)("a[href][data-update-url]").each(function (i, element) {
+        var $element = (0, _jquery2.default)(element);
+        var href = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
+
+        if (href && href[1]) {
+            $element.attr("href", href[1] + params);
+        }
+    });
 }
 
 function setUrlParam(key, value) {
