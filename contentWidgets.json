@@ -124,17 +124,17 @@
 					"defaultValue": "large",
 					"selectBoxValues": [
 						{
-							"value": "large",
+							"value": "largeText",
 							"caption": "Large text",
 							"position": 0
 						},
 						{
-							"value": "small",
+							"value": "smallText",
 							"caption": "small text",
 							"position": 1
 						},
 						{
-							"value": "fullwidth",
+							"value": "fullwidthText",
 							"caption": "full width",
 							"position": 1
 						}
