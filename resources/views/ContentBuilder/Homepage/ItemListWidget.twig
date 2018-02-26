@@ -20,12 +20,14 @@
 <div>
     <div class="m-b-2 clearfix">
         <div class="section-header m-b-1">
-            {% if itemList is not empty %}
+            {% if listType == "category" and category %}
                 <h2>{{ category.details[0].name }}</h2>
                 <a href="{{ services.category.getURL(category, lang) }}" class="section-link-all">
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}
                 </a>
-            {% else %}
+            {% elseif listType == "last_seen" %}
+                <h2>{{ trans("Ceres::Template.itemListLastSeen") }}</h2>
+            {% elseif listType == "category" and not category %}
                 <h2>{{ trans("Ceres::Widget.itenList_placeholder_categoryName") }}</h2>
             {% endif %}
         </div>
