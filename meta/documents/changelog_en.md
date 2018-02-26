@@ -1,5 +1,17 @@
 # Release Notes for Ceres
 
+## v2.3.1 (2018-02-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.0...2.3.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Coupon discounts are now displayed on the order confirmation page and in the order details in the MyAccount section.
+- After the creation of a return, the return confirmation page will now be displayed again. (The route in IO config has to be active.)
+- The page for the creation of returns now only displays items that can be returned. (No shipping costs, coupon positions, etc.)
+- Due to an error country names were always displayed in English. This has been fixed.
+- Due to an error changing languages linked to wrong URLs. This has been fixed.
+- Due to an error no icons were available for the languages Danish and Norwegian. This has been fixed.
+- The Last seen list no longer displays random items if no item has been previously viewed in the store.
+
 ## v2.3.0 (2018-02-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
