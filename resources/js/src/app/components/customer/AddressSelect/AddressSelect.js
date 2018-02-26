@@ -309,7 +309,7 @@ Vue.component("address-select", {
         {
             if (countryId > 0)
             {
-                let country = this.countryList.find(country => country.id === countryId);
+                const country = this.countryList.find(country => country.id === countryId);
 
                 if (!isNullOrUndefined(country))
                 {
