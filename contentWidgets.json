@@ -1,18 +1,16 @@
 [
 	{
 		"identifier": "Ceres::HeaderWidget",
-		"label": "TextHeader",
-		"tooltip": "TextHeader",
+		"label": "Widget.header_label",
 		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
-		"resizable": false,
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\HeaderWidget",
 		"settings": {
 			"text": {
 				"type": "inputText",
 				"required": true,
-				"label": "Label",
+				"label": "Widget.header_text_label",
 				"options": {
-					"tooltip": "Text",
+					"tooltip": "Widget.header_text_tooltip",
 					"defaultValue": ""
 				}
 			}
@@ -20,89 +18,88 @@
 	},
 	{
 		"identifier": "Ceres::ImageCarouselWidget",
-		"label": "Carousel",
-		"tooltip": "Carousel",
+		"label": "Widget.imageCarousel_label",
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageCarouselWidget",
 		"settings": {
 			"slide1CategoryId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 1: category ID",
+				"label": "Widget.imageCarousel_categoryId_label",
 				"options": {
-					"tooltip": "Category ID for the first slide",
+					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide1VariationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 1: variation ID",
+				"label": "Widget.imageCarousel_variationId_label",
 				"options": {
-					"tooltip": "Variation ID for the first slide",
+					"tooltip": "Widget.imageCarousel_variationId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide1CustomImagePath": {
 				"type": "inputText",
 				"required": false,
-				"label": "Slide 1: custom image path",
+				"label": "Widget.imageCarousel_customImagePath_label",
 				"options": {
-					"tooltip": "Custom image path for the first slide",
+					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide2CategoryId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 2: category ID",
+				"label": "Widget.imageCarousel_categoryId_label",
 				"options": {
-					"tooltip": "Category ID for the second slide",
+					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide2VariationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 2: variation ID",
+				"label": "Widget.imageCarousel_variationId_label",
 				"options": {
-					"tooltip": "Variation ID for the second slide",
+					"tooltip": "Widget.imageCarousel_variationId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide2CustomImagePath": {
 				"type": "inputText",
 				"required": false,
-				"label": "Slide 2: custom image path",
+				"label": "Widget.imageCarousel_customImagePath_label",
 				"options": {
-					"tooltip": "Custom image path for the second slide",
+					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide3CategoryId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 3: category ID",
+				"label": "Widget.imageCarousel_categoryId_label",
 				"options": {
-					"tooltip": "Category ID for the third slide",
+					"tooltip": "Widget.imageCarousel_categoryId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide3VariationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Slide 3: variation ID",
+				"label": "Widget.imageCarousel_variationId_label",
 				"options": {
-					"tooltip": "Variation ID for the third slide",
+					"tooltip": "Widget.imageCarousel_variationId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"slide3CustomImagePath": {
 				"type": "inputText",
 				"required": false,
-				"label": "Slide 3: custom image path",
+				"label": "Widget.imageCarousel_customImagePath_label",
 				"options": {
-					"tooltip": "Custom image path for the third slide",
+					"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
 					"defaultValue": ""
 				}
 			}
@@ -110,33 +107,32 @@
 	},
 	{
 		"identifier": "Ceres::ImageBoxWidget",
-		"label": "HighlightedCategory",
-		"tooltip": "HighlightedCategory",
+		"label": "Widget.imageBox_label",
 		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageBoxWidget",
 		"settings": {
 			"style": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Style",
+				"label": "Widget.imageBox_style_label",
 				"options": {
-					"tooltip": "The style of the widget.",
+					"tooltip": "Widget.imageBox_style_tooltip",
 					"defaultValue": "largeText",
 					"selectBoxValues": [
 						{
 							"value": "largeText",
-							"caption": "Large text",
+							"caption": "Widget.imageBox_style_large",
 							"position": 0
 						},
 						{
 							"value": "smallText",
-							"caption": "small text",
+							"caption": "Widget.imageBox_style_small",
 							"position": 1
 						},
 						{
 							"value": "fullwidthText",
-							"caption": "full width",
-							"position": 1
+							"caption": "Widget.imageBox_style_fullwidth",
+							"position": 2
 						}
 					]
 				}
@@ -144,19 +140,19 @@
 			"imageSize": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Image size",
+				"label": "Widget.imageBox_imageSize_label",
 				"options": {
-					"tooltip": "The size of the image.",
+					"tooltip": "Widget.imageBox_imageSize_tooltip",
 					"defaultValue": "cover",
 					"selectBoxValues": [
 						{
 							"value": "cover",
-							"caption": "Cover",
+							"caption": "Widget.imageBox_imageSize_cover",
 							"position": 0
 						},
 						{
 							"value": "contain",
-							"caption": "Contain",
+							"caption": "Widget.imageBox_imageSize_contain",
 							"position": 1
 						}
 					]
@@ -165,27 +161,27 @@
 			"categoryId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Category ID",
+				"label": "Widget.imageBox_categoryId_label",
 				"options": {
-					"tooltip": "Category ID",
+					"tooltip": "Widget.imageBox_categoryId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"variationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Variation ID",
+				"label": "Widget.imageBox_variationId_label",
 				"options": {
-					"tooltip": "Variation ID",
+					"tooltip": "Widget.imageBox_variationId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"customImagePath": {
 				"type": "inputText",
 				"required": false,
-				"label": "Path to a custom image",
+				"label": "Widget.imageBox_customImagePath_label",
 				"options": {
-					"tooltip": "Custom image path",
+					"tooltip": "Widget.imageBox_customImagePath_tooltip",
 					"defaultValue": ""
 				}
 			}
@@ -193,32 +189,31 @@
 	},
 	{
 		"identifier": "Ceres::ItemListWidget",
-		"label": "ItemList",
-		"tooltip": "ItemList",
+		"label": "Widget.itemList_label",
 		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemListWidget",
 		"settings": {
 			"listType": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Type of item list",
+				"label": "Widget.itemList_listType_label",
 				"options": {
-					"tooltip": "Type of item list",
+					"tooltip": "Widget.itemList_listType_tooltip",
 					"defaultValue": "category",
 					"selectBoxValues": [
 						{
 							"value": "category",
-							"caption": "Category items",
+							"caption": "Widget.itemList_listType_category",
 							"position": 0
 						},
 						{
 							"value": "last_seen",
-							"caption": "Last seen",
+							"caption": "Widget.itemList_listType_lastseen",
 							"position": 1
 						},
 						{
 							"value": "tag_list",
-							"caption": "Tag list",
+							"caption": "Widget.itemList_listType_taglist",
 							"position": 2
 						}
 					]
@@ -227,27 +222,27 @@
 			"categoryId": {
 				"type": "inputText",
 				"required": false,
-				"label": "Category ID",
+				"label": "Widget.itemList_categoryId_label",
 				"options": {
-					"tooltip": "Category ID",
+					"tooltip": "Widget.itemList_categoryId_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"tagIds": {
 				"type": "inputText",
 				"required": false,
-				"label": "Tag IDs (seperate by ,)",
+				"label": "Widget.itemList_tagIds_label",
 				"options": {
-					"tooltip": "Tag IDs",
+					"tooltip": "Widget.itemList_tagIds_tooltip",
 					"defaultValue": ""
 				}
 			},
 			"itemSort": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Sorting for Items",
+				"label": "Widget.itemList_itemSort_label",
 				"options": {
-					"tooltip": "Item Sorting",
+					"tooltip": "Widget.itemList_itemSort_tooltip",
 					"defaultValue": "texts.name1_asc",
 					"selectBoxValues": [
 						{
@@ -331,9 +326,9 @@
 			"maxItems": {
 				"type": "inputNumber",
 				"required": true,
-				"label": "The cap of items",
+				"label": "Widget.itemList_maxItems_label",
 				"options": {
-					"tooltip": "The cap of items",
+					"tooltip": "Widget.itemList_maxItems_tooltip",
 					"defaultValue": "4"
 				}
 			}
