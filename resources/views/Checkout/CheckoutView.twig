@@ -6,8 +6,6 @@
     <title>{{ trans("Ceres::Template.orderCheckout") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
-{% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
-
 {% block PageBody %}
 
     {{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
@@ -50,8 +48,7 @@
                                             <invoice-address-select
                                                 :address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                                                 has-to-validate="true"
-                                                :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}"
-                                                :country-name-map="{{ countryNameMap | json_encode() }}">
+                                                :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}">
                                             </invoice-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterBillingAddress") }}
@@ -69,8 +66,7 @@
                                         <div class="shipping-addresses-select">
                                             <shipping-address-select
                                                 :address-list="{{ services.customer.getAddresses(2) | json_encode }}"
-                                                :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
-                                                :country-name-map="{{ countryNameMap | json_encode() }}">
+                                                :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}">
                                             </shipping-address-select>
                                         </div>
                                         {{ LayoutContainer.show("Ceres::Checkout.AfterShippingAddress") }}
