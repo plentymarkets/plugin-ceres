@@ -228,12 +228,12 @@
 					"defaultValue": ""
 				}
 			},
-			"tagIds": {
-				"type": "inputText",
+			"tagId": {
+				"type": "inputNumber",
 				"required": false,
-				"label": "Widget.itemList_tagIds_label",
+				"label": "Widget.itemList_tagId_label",
 				"options": {
-					"tooltip": "Widget.itemList_tagIds_tooltip",
+					"tooltip": "Widget.itemList_tagId_tooltip",
 					"defaultValue": ""
 				}
 			},

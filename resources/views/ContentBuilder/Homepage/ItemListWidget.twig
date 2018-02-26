@@ -12,9 +12,7 @@
 {% elseif listType == "last_seen" %}
     {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
 {% elseif listType == "tag_list" %}
-    {% set tagIds = widgetSettings.tagIds | split(",") %}
-
-	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': tagIds, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
+	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': [widgetSettings.tagId], 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
 {% endif %}
 
 <div>
