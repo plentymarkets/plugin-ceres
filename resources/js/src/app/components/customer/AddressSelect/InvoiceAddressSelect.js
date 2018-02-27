@@ -8,16 +8,14 @@ Vue.component("invoice-address-select", {
             template="#vue-address-select"
             v-on:address-changed="addressChanged"
             address-type="1"
-            :show-error='showError'
-            :country-name-map="countryNameMap">
+            :show-error='showError'>
         </address-select>
     `,
 
     props: [
         "selectedAddressId",
         "addressList",
-        "hasToValidate",
-        "countryNameMap"
+        "hasToValidate"
     ],
 
     computed: Vuex.mapState({
