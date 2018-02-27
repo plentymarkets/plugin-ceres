@@ -16057,7 +16057,7 @@ Vue.component("login", {
 
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail" }).done(function () {
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPasswordMailSubject" }).done(function () {
                 if (document.getElementById(_this5.modalElement) !== null) {
                     ModalService.findModal(document.getElementById(_this5.modalElement)).hide();
 
