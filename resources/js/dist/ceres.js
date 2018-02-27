@@ -16971,21 +16971,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 Vue.directive("render-category", {
     bind: function bind(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
         el.onclick = function (event) {
             event.preventDefault();
 
             var currentCategoryType = _index2.default.state.navigation.currentCategory ? _index2.default.state.navigation.currentCategory.type : null;
 
-            if (!App.isCategoryView || currentCategoryType !== binding.value.type) {
-                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id, withReload: true });
+            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType) {
+                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
 
                 var url = _index2.default.state.navigation.currentCategory.url;
 
                 window.open(url, "_self");
             } else {
-                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id });
+                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
             }
         };
+    },
+    update: function update(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
     }
 });
 
