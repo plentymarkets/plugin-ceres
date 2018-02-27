@@ -4,6 +4,9 @@ const BACKEND_URL = 'http://master.login.plentymarkets.com'; // TODO: get backen
 const CELL_HEIGHT = 40; // gridstack cell height
 
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
+// var isDragging = false;
+// var isAnimating = false;
+// var draggedElement;
 
 // entry point
 jQuery(document).ready(function()
@@ -18,6 +21,7 @@ function initCeresForGridstack()
     injectGridstackMarkup();
     addBackendEventListener();
     addWindowResizeListener();
+    // addScrollOnDragListener();
 
     dispatchBuilderEvent({
         name: 'shopbuilder_ready',
@@ -133,6 +137,31 @@ function addWindowResizeListener()
     });
 }
 
+/**
+ * very ugly prototype
+ */
+// function addScrollOnDragListener()
+// {
+//     // TODO: @vwiebe fix gridstack scope
+//     jQuery('.grid-stack-0').mousemove(function (event)
+//     {
+//         if (isDragging && draggedElement)
+//         {
+//             // isAnimating = true;
+//
+//             jQuery('body, html').stop().animate(
+//                 { scrollTop :   jQuery(draggedElement).position().top +
+//                                 jQuery(draggedElement).outerHeight() +
+//                                 jQuery(draggedElement).offset().top -
+//                                 jQuery(window).outerHeight() },
+//                 1000,
+//                 'linear', function()
+//                 {
+//                 });
+//         }
+//     });
+// }
+
 function updateContainerDimensions()
 {
     jQuery('[data-builder-container]').each(function()
@@ -206,12 +235,31 @@ function addEditButton(element)
     {
         var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
 
+        setElementActive(uniqueId);
+
         dispatchBuilderEvent({
             name: 'shopbuilder_open_properties',
             data: { uniqueId: uniqueId }
         });
 
     });
+}
+
+function setElementActive(id)
+{
+
+    jQuery('[data-builder-identifier]').each(function ()
+    {
+        if (jQuery(this).attr('data-builder-identifier') == id)
+        {
+            jQuery(this).addClass('active');
+        }
+        else
+        {
+            jQuery(this).removeClass('active');
+        }
+    });
+
 }
 
 function addBackendEventListener()
@@ -382,4 +430,16 @@ function initGridstack(identifier)
             updateContainerDimensions();
         }, 100); // TODO: @vwiebe, synchronize
     });
+
+    // jQuery(selector).on('dragstart', function(event, items)
+    // {
+    //     draggedElement = items.helper[0];
+    //     isDragging = true;
+    // });
+    //
+    // jQuery(selector).on('dragstop', function(event, items)
+    // {
+    //     draggedElement = null;
+    //     isDragging = false;
+    // });
 }

@@ -22,7 +22,8 @@ body
     transition: all 0.1s ease;
 }
 
-.grid-stack-item:hover
+.grid-stack-item:hover,
+.grid-stack-item.active
 {
     outline: 3px solid #24B3E0;
 }
