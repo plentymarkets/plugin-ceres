@@ -51,6 +51,12 @@ function handleBuilderEventResponse(response)
 
         switch(eventName)
         {
+
+            case 'shopbuilder_close_properties':
+
+                setElementActive(null);
+                break;
+
             case 'shopbuilder_widget_replace':
 
                 replaceContentWidget(eventData);
@@ -245,12 +251,15 @@ function addEditButton(element)
     });
 }
 
+/**
+ *
+ * @param id
+ */
 function setElementActive(id)
 {
-
     jQuery('[data-builder-identifier]').each(function ()
     {
-        if (jQuery(this).attr('data-builder-identifier') == id)
+        if (id && jQuery(this).attr('data-builder-identifier') == id)
         {
             jQuery(this).addClass('active');
         }
@@ -259,7 +268,6 @@ function setElementActive(id)
             jQuery(this).removeClass('active');
         }
     });
-
 }
 
 function addBackendEventListener()
