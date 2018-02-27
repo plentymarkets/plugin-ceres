@@ -15577,6 +15577,15 @@ Vue.component("registration", {
     created: function created() {
         this.$options.template = this.template;
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$nextTick(function () {
+            ModalService.findModal("#" + _this.modalElement).on("hide.bs.modal", function () {
+                _this.$refs.passwordHint.hidePopper();
+            });
+        });
+    },
 
 
     methods: {
@@ -15584,11 +15593,14 @@ Vue.component("registration", {
          * Validate the registration form
          */
         validateRegistration: function validateRegistration() {
-            var _this = this;
+            var _this2 = this;
 
             _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
-                _this.sendRegistration();
+                _this2.sendRegistration();
             }).fail(function (invalidFields) {
+                if (invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
+                    _this2.$refs.passwordHint.showPopper();
+                }
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
@@ -15598,7 +15610,7 @@ Vue.component("registration", {
          * Send the registration
          */
         sendRegistration: function sendRegistration() {
-            var _this2 = this;
+            var _this3 = this;
 
             var userObject = this.getUserObject();
 
@@ -15610,12 +15622,12 @@ Vue.component("registration", {
                 if (!response.code) {
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accRegistrationSuccessful")).closeAfter(3000);
 
-                    if (document.getElementById(_this2.modalElement) !== null) {
-                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
+                    if (document.getElementById(_this3.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(_this3.modalElement)).hide();
                     }
 
-                    if (_this2.backlink !== null && _this2.backlink) {
-                        window.location.assign(_this2.backlink);
+                    if (_this3.backlink !== null && _this3.backlink) {
+                        window.location.assign(_this3.backlink);
                     } else {
                         location.reload();
                     }
@@ -15623,9 +15635,9 @@ Vue.component("registration", {
                     NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accRegistrationError")).closeAfter(3000);
                 }
 
-                _this2.isDisabled = false;
+                _this3.isDisabled = false;
             }).fail(function () {
-                _this2.isDisabled = false;
+                _this3.isDisabled = false;
             });
         },
         setAddressDataField: function setAddressDataField(_ref) {
@@ -18719,7 +18731,11 @@ Vue.component("popper", {
         },
         placement: {
             type: String,
-            default: "bottom"
+            default: "auto"
+        },
+        trigger: {
+            type: String,
+            default: "click"
         }
     },
 
@@ -18730,7 +18746,12 @@ Vue.component("popper", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.popper = new Popper(_this.$refs.trigger, _this.$refs.node, {
+            var node = _this.$refs.node;
+
+            node.parentElement.removeChild(node);
+            document.body.appendChild(node);
+
+            _this.popper = new Popper(_this.$refs.handle, _this.$refs.node, {
                 placement: _this.placement,
                 modifiers: {
                     arrow: {
@@ -18739,6 +18760,21 @@ Vue.component("popper", {
                 }
             });
         });
+
+        var handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+        if (this.trigger === "focus") {
+            handle.addEventListener("focus", function () {
+                _this.showPopper();
+            });
+            handle.addEventListener("blur", function () {
+                _this.hidePopper();
+            });
+        } else {
+            handle.addEventListener(this.trigger, function () {
+                _this.togglePopper();
+            });
+        }
     },
     data: function data() {
         return {
@@ -18753,6 +18789,18 @@ Vue.component("popper", {
             this.isVisible = !this.isVisible;
 
             this.popper.scheduleUpdate();
+        },
+        showPopper: function showPopper() {
+            if (!this.isVisible) {
+                this.isVisible = true;
+                this.popper.scheduleUpdate();
+            }
+        },
+        hidePopper: function hidePopper() {
+            if (this.isVisible) {
+                this.isVisible = false;
+                this.popper.scheduleUpdate();
+            }
         }
     }
 });
@@ -20272,7 +20320,8 @@ module.exports = function ($) {
             pauseTimeout: pauseTimeout,
             continueTimeout: continueTimeout,
             stopTimeout: stopTimeout,
-            getModalContainer: getModalContainer
+            getModalContainer: getModalContainer,
+            on: on
         };
 
         function show() {
@@ -20346,6 +20395,10 @@ module.exports = function ($) {
         function stopTimeout() {
             window.clearTimeout(timeout);
             window.clearInterval(interval);
+        }
+
+        function on(event, callback) {
+            $bsModal.on(event, callback);
         }
     }
 }(jQuery);
@@ -20903,7 +20956,7 @@ function _isMail($formControl) {
  * @returns value is valid password
  */
 function _isPassword($formControl) {
-    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
+    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)\S{8,}$/);
 
     return passwordRegEx.test($formControl.val());
 }

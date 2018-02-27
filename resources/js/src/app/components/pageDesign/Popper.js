@@ -11,7 +11,11 @@ Vue.component("popper", {
         },
         placement: {
             type: String,
-            default: "bottom"
+            default: "auto"
+        },
+        trigger: {
+            type: String,
+            default: "click"
         }
     },
 
@@ -24,7 +28,12 @@ Vue.component("popper", {
 	{
         this.$nextTick(() =>
         {
-            this.popper = new Popper(this.$refs.trigger, this.$refs.node, {
+            const node = this.$refs.node;
+
+            node.parentElement.removeChild(node);
+            document.body.appendChild(node);
+
+            this.popper = new Popper(this.$refs.handle, this.$refs.node, {
                 placement: this.placement,
                 modifiers: {
                     arrow: {
@@ -33,6 +42,27 @@ Vue.component("popper", {
                 }
             });
         });
+
+        const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+        if (this.trigger === "focus")
+        {
+            handle.addEventListener("focus", () =>
+            {
+                this.showPopper();
+            });
+            handle.addEventListener("blur", () =>
+            {
+                this.hidePopper();
+            });
+        }
+        else
+        {
+            handle.addEventListener(this.trigger, () =>
+            {
+                this.togglePopper();
+            });
+        }
     },
 
     data()
@@ -50,6 +80,24 @@ Vue.component("popper", {
             this.isVisible = !this.isVisible;
 
             this.popper.scheduleUpdate();
+        },
+
+        showPopper()
+        {
+            if (!this.isVisible)
+            {
+                this.isVisible = true;
+                this.popper.scheduleUpdate();
+            }
+        },
+
+        hidePopper()
+        {
+            if (this.isVisible)
+            {
+                this.isVisible = false;
+                this.popper.scheduleUpdate();
+            }
         }
     }
 });

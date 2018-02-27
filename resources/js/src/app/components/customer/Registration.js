@@ -37,6 +37,18 @@ Vue.component("registration", {
         this.$options.template = this.template;
     },
 
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            ModalService.findModal("#" + this.modalElement)
+                .on("hide.bs.modal", () =>
+                {
+                    this.$refs.passwordHint.hidePopper();
+                });
+        });
+    },
+
     methods: {
         /**
          * Validate the registration form
@@ -50,6 +62,10 @@ Vue.component("registration", {
                 })
                 .fail(invalidFields =>
                 {
+                    if (invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                    {
+                        this.$refs.passwordHint.showPopper();
+                    }
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
         },
