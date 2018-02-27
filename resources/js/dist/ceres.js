@@ -22266,8 +22266,8 @@ var actions = {
             commit("setIsItemListLoading", true);
 
             _ApiService2.default.get(url, searchParams).done(function (data) {
-                commit("setItemListItems", data.documents);
-                commit("setItemListTotalItems", data.total);
+                commit("setItemListItems", data.itemList.documents);
+                commit("setItemListTotalItems", data.itemList.total);
                 commit("setFacets", data.facets);
                 commit("setIsItemListLoading", false);
                 resolve(data);
