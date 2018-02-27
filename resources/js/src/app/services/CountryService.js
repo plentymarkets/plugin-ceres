@@ -4,7 +4,6 @@ module.exports = (function($)
     return {
         parseShippingCountries: parseShippingCountries,
         parseShippingStates   : parseShippingStates,
-        translateCountryNames : translateCountryNames,
         sortCountries         : sortCountries
     };
 
@@ -27,29 +26,6 @@ module.exports = (function($)
         }
 
         return deliveryCountries;
-    }
-
-    function translateCountryNames(countryNameMap, countryList)
-    {
-        if (countryNameMap === null)
-        {
-            return;
-        }
-        for (var countryId in countryNameMap)
-        {
-            var countryName = countryNameMap[countryId];
-
-            for (var index in countryList)
-            {
-                var country = countryList[index];
-
-                if (country.id === parseInt(countryId))
-                {
-                    country.name = countryName;
-                    break;
-                }
-            }
-        }
     }
 
     function sortCountries(countries)

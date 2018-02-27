@@ -7,15 +7,13 @@ Vue.component("shipping-address-select", {
             ref:shipping-address-select
             template="#vue-address-select"
             v-on:address-changed="addressChanged"
-            address-type="2"
-            :country-name-map="countryNameMap">
+            address-type="2">
         </address-select>
     `,
 
     props: [
         "selectedAddressId",
-        "addressList",
-        "countryNameMap"
+        "addressList"
     ],
 
     computed: Vuex.mapState({
