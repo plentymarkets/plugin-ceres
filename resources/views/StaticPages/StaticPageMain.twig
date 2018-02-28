@@ -1,0 +1,11 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    <meta name="description" content="{{ config("Ceres.meta."~metaLang~"."~metaDescriptionKey) }}">
+    <meta name="robots" content="{{ config("Ceres.meta."~metaRobotsKey) }}">
+    <title>{{ trans("Ceres::Template."~pageTitle) }} | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+   {%  include contentTemplate %}
+{% endblock %}

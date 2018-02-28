@@ -483,5 +483,8 @@
             "name"          : "Registration overlay: Container in a row with the buttons",
             "description"   : "Add content in the registration overlay."
         }
+    ],
+    "runOnBuild" : [
+        "Ceres\\Migrations\\CategoryPagesMigration_0_0_1"
     ]
 }

@@ -107,6 +107,36 @@
         "default"                     : "false"
     },
     {
+        "tab"       : "Category Pages",
+        "key"       : "pages.cancellation_form",
+        "label"     : "Category where the cancellation form is displayed",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Category Pages",
+        "key"       : "pages.cancellation_rights",
+        "label"     : "Category where the cancellation rights are displayed",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Category Pages",
+        "key"       : "pages.legal_disclosure",
+        "label"     : "Category where the legal disclosure is displayed",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Category Pages",
+        "key"       : "pages.privacy_policy",
+        "label"     : "Category where the privacy policy is displayed",
+        "type"      : "category_select"
+    },
+    {
+        "tab"       : "Category Pages",
+        "key"       : "pages.terms_and_conditions",
+        "label"     : "Category where the terms and conditions are displayed",
+        "type"      : "category_select"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",

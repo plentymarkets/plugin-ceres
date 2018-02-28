@@ -1,5 +1,7 @@
 {% extends getPartial('page-design') %}
 
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% block PartialHead %}
     <title>{{ category.details[0].metaTitle }} | {{ config("Ceres.header.company_name") }}</title>
 
@@ -14,7 +16,6 @@
 {% block PageBody %}
 
     {% set lang = services.sessionStorage.getLang() %}
-
-    {% include category_template( category.id, lang, frontend.system.webstoreId ) ignore missing %}
+    {% include [category_template( category.id, lang, frontend.system.webstoreId ), fallbackTemplate] ignore missing %}
 
 {% endblock %}
