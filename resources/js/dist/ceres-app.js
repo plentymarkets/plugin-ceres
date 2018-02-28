@@ -16932,7 +16932,6 @@ Vue.component("category-image-carousel", {
 
         this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
-
     mounted: function mounted() {
         var _this = this;
 
@@ -16943,8 +16942,11 @@ Vue.component("category-image-carousel", {
         });
     },
 
+
     methods: {
         initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
             $("#owl-carousel-" + this._uid).owlCarousel({
                 dots: this.showDots === true,
                 items: 1,
@@ -16953,17 +16955,26 @@ Vue.component("category-image-carousel", {
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === true,
-                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
                 onTranslated: function onTranslated(event) {
                     var target = $(event.currentTarget);
-
                     var owlItem = $(target.find(".owl-item.active"));
 
                     owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                },
+
+                onInitialized: function onInitialized(event) {
+                    if (_this2.showNav === "true") {
+                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                    }
                 }
             });
         },
-
         getAltText: function getAltText(image) {
             var altText = image && image.alternate ? image.alternate : this.altText;
 
@@ -18491,7 +18502,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 Vue.component("mobile-navigation", {
 
-    props: ["template", "currentCategoryId", "navigationTreeData"],
+    props: ["template", "initialCategory", "navigationTreeData"],
 
     data: function data() {
         return {
@@ -18532,19 +18543,26 @@ Vue.component("mobile-navigation", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.$store.dispatch("initNavigationTree", _this.navigationTreeData);
-
-            if (_this.currentCategoryId) {
-                _this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(_this.currentCategoryId) });
-                _this.initialSlide(_this.$store.state.navigation.currentCategory);
-            }
-
-            _this.dataContainer1 = _this.navigationTree;
+            _this.initNavigation();
         });
     },
 
 
     methods: {
+        initNavigation: function initNavigation() {
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
+
+            if (this.initialCategory && this.initialCategory.id) {
+                if (this.initialCategory.linklist === "N") {
+                    this.$store.commit("setCurrentCategory", this.initialCategory);
+                } else {
+                    this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(this.initialCategory.id) });
+                    this.initialSlide(this.$store.state.navigation.currentCategory);
+                }
+            }
+
+            this.dataContainer1 = this.navigationTree;
+        },
         initialSlide: function initialSlide(currentCategory) {
             if (currentCategory) {
                 if (currentCategory.children && currentCategory.showChildren) {
