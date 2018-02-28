@@ -1,6 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set totals = services.totalsService.getAllTotals(orderData.order) %}
 {% set totalsConfigData = config("Ceres.basket.data")|split(', ') %}
 {% set basketTotalsCurrency = totals.currency %}
 
