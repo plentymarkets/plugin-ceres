@@ -23,6 +23,7 @@
                                         :timeout="0" 
                                         :min="item.variation.minimumOrderQuantity"
                                         :max="item.variation.maximumOrderQuantity"
+                                        :interval="item.variation.intervalOrderQuantity"
                                         :variation-id="item.variation.id"
                                         template="#vue-quantity-input"></quantity-input>
                         </div>
@@ -32,7 +33,7 @@
                             {{ trans("Ceres::Template.addToBasket") }}
                         </button>
                         <button v-else href="#" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" 
-                                data-placement="top" :title="'{{ trans("Ceres::Template.orderQuantityMax") }}:' + item.variation.maximumOrderQuantity">
+                                data-placement="top" :title="'Ceres::Template.orderQuantityMax' | translate({max: item.variation.maximumOrderQuantity})">
                             <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.addToBasket") }}
                         </button>

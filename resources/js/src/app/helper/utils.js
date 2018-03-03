@@ -13,3 +13,18 @@ export function isNullOrUndefined(object)
 {
     return isNull(object) || isUndefined(object);
 }
+
+export function isDefined(object)
+{
+    return !isNullOrUndefined(object);
+}
+
+export function defaultValue(input, defaultValue)
+{
+    if (isNullOrUndefined(input))
+    {
+        return defaultValue;
+    }
+
+    return input;
+}
