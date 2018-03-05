@@ -15536,6 +15536,8 @@ Vue.component("country-select", {
 },{"services/CountryService":105}],28:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -15581,11 +15583,13 @@ Vue.component("registration", {
     mounted: function mounted() {
         var _this = this;
 
-        this.$nextTick(function () {
-            ModalService.findModal("#" + _this.modalElement).on("hide.bs.modal", function () {
-                _this.$refs.passwordHint.hidePopper();
+        if (!(0, _utils.isNullOrUndefined)(this.$refs.passwortHint)) {
+            this.$nextTick(function () {
+                ModalService.findModal("#" + _this.modalElement).on("hide.bs.modal", function () {
+                    _this.$refs.passwordHint.hidePopper();
+                });
             });
-        });
+        }
     },
 
 
@@ -15599,7 +15603,7 @@ Vue.component("registration", {
             _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
                 _this2.sendRegistration();
             }).fail(function (invalidFields) {
-                if (invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
+                if (!(0, _utils.isNullOrUndefined)(_this2.$refs.passwordHint) && invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
                     _this2.$refs.passwordHint.showPopper();
                 }
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -15682,7 +15686,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":103,"services/ModalService":107,"services/NotificationService":108,"services/TranslationService":109,"services/ValidationService":111}],29:[function(require,module,exports){
+},{"../../helper/utils":100,"services/ApiService":103,"services/ModalService":107,"services/NotificationService":108,"services/TranslationService":109,"services/ValidationService":111}],29:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
