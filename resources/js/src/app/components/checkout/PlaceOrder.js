@@ -23,7 +23,8 @@ Vue.component("place-order", {
         checkoutValidation: state => state.checkout.validation,
         contactWish: state => state.checkout.contactWish,
         isBasketLoading: state => state.basket.isBasketLoading,
-        basketItemQuantity: state => state.basket.data.itemQuantity
+        basketItemQuantity: state => state.basket.data.itemQuantity,
+        isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded
     }),
 
     created()

@@ -1,0 +1,58 @@
+.qty-box {
+    display: flex;
+    height: 41px;
+    width: fit-content;
+
+    .qty-input {
+        outline: none;
+        border: none;
+        height: 100%;
+        width: 35px;
+        padding: 0;
+        text-align: center;
+        transition: all .2s cubic-bezier(0,0,.26,1);
+        border: 1px solid $gray-lighter;
+        border-radius: $border-radius 0 0 $border-radius;
+        
+        &:focus {
+            background: $gray-lightest;
+        }
+    }
+    
+    .qty-btn-container {
+        width: 25px;
+        position: relative;
+        background: $gray-lighter2;
+        border: 1px solid $gray-lighter;
+        border-left: none;
+        border-radius: 0 $border-radius $border-radius 0;
+        overflow: hidden;
+
+        .qty-btn {
+            width: 100%;
+            height: calc(50% - .5px);
+            text-align: center;
+            transition: all .2s cubic-bezier(0,0,.26,1);
+            border-radius: $border-radius;
+            cursor: pointer;
+
+            &.disabled {
+                cursor: not-allowed;
+                opacity: .5;
+            }
+
+            &:not(.disabled):hover {
+                background: darken($gray-lighter, 10%);
+            }
+
+            & > .qty-sign {
+                color: $gray;
+            }
+        }
+
+        .qty-btn-seperator {
+            height: 1px;
+            background: $gray-lighter;
+        }
+    }
+}

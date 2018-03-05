@@ -1,0 +1,123 @@
+.popper {
+	max-width: $popover-max-width;
+    padding: $popover-inner-padding;
+    text-align: left;
+    background-color: $white;
+	border: $border-width solid $popover-border-color;
+	border-radius: $border-radius-lg;
+	visibility: hidden;
+	margin: 5px;
+	z-index: $zIndex-10;
+	position: absolute;
+
+	& .popper__arrow {
+		width: 0;
+		height: 0;
+		margin: 0 2px;
+		position: absolute;
+		border: solid;
+	}
+
+	& .popper-title {
+		padding: $popover-title-padding-y $popover-title-padding-x;
+		margin: 0;
+		font-size: 1rem;
+		background-color: $popover-title-bg;
+		border-bottom: $border-width solid #ebebeb;
+		border-radius: .12857rem .12857rem 0 0;
+		text-align: center;
+	}
+
+	& .popper-content {
+		padding: $popover-content-padding-y $popover-content-padding-x;
+		line-height: 1.5;
+		font-size: .875rem;
+		word-wrap: break-word;
+	}
+
+	&.popper-visible {
+		visibility: visible;
+	}
+
+	&[x-placement] {
+		& .popper__arrow
+		{
+			border: $popover-arrow-width solid transparent;
+			&:after 
+			{
+				border: $popover-arrow-width solid transparent;
+				content: "";
+				position: absolute;
+				border-style: solid;
+			}
+		}
+	}
+
+	&[x-placement^="top"] {
+		margin-bottom: 11px;
+		& .popper__arrow {
+			border-bottom-width: 0;
+			border-top-color: $popover-border-color;
+			bottom: -10px;
+			left: calc(50% - 5px);
+
+			&:after {
+				border-bottom-width: 0;
+				border-top-color: $white;
+				left: -10px;
+				bottom: 1px;
+			}
+		}
+	}
+
+	&[x-placement^="bottom"] {
+		margin-top: 11px;
+		& .popper__arrow {
+			border-top-width: 0;
+		  	border-bottom-color: $popover-border-color;
+		  	top: -10px;
+		  	left: calc(50% - 5px);
+
+			&:after {
+				border-top-width: 0;
+				border-bottom-color: $popover-title-bg;
+				left: -10px;
+				bottom: -11px;
+			}
+		}
+	}
+
+	&[x-placement^="right"] {
+		margin-left: 11px;
+		& .popper__arrow {
+			border-left-width: 0;
+			border-right-color: $popover-border-color;
+			left: -12px;
+			top: calc(50% - 5px);
+
+			&:after {
+				border-left-width: 0;
+				border-right-color:  $white;
+				left: 1px;
+				bottom: -10px;
+			}
+		}
+	}
+
+	&[x-placement^="left"] {
+		margin-right: 11px;
+		& .popper__arrow {
+			border-right-width: 0;
+			border-left-color: $popover-border-color;
+			right: -12px;
+			top: calc(50% - 5px);
+			
+			&:after {
+				border-right-width: 0;
+				border-left-color:  $white;
+				left: -11px;
+				bottom: -10px;
+			}
+		}
+	}
+}

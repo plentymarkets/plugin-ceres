@@ -1,0 +1,29 @@
+<script type="x/template" id="vue-popper">
+	<div>
+		<div ref="handle">
+			<slot name="handle">
+				{# Element to trigger popper #}
+
+				{# Default element if no element is set #}
+					<button class="btn btn-icon btn-secondary btn-sm">
+						<i class="fa fa-info"></i>
+					</button>
+				{# / #}
+			</slot>
+		</div>
+
+		<div ref="node" class="popper" :class="{'popper-visible': isVisible}">
+			<h3 class="popper-title">
+				<slot name="title">
+					{# Title to display in the popper #}
+				</slot>
+			</h3>
+			<div class="popper-content">
+				<slot name="content">
+					{# Content to display in the popper #}
+				</slot>
+			</div>
+			<div class="popper__arrow" ref="arrow"></div>
+		</div>
+	</div>
+</script>

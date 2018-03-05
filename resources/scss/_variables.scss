@@ -137,7 +137,7 @@ $link-hover-color:      darken($link-color, 15%) !default;
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-$font-family-sans-serif:'Open Sans', Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:Helvetica, Arial, sans-serif !default;
 $font-family-helvetica: $font-family-sans-serif !default;
 $font-family-serif:     Georgia, "Times New Roman", Times, serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
@@ -226,7 +226,7 @@ $caret-width-lg:         $caret-width !default;
 
 
 //Ceres 4 variables
-$aside-columns-width: 25em !default;
+$aside-columns-width: 30em !default;
 
 
 // Tables
