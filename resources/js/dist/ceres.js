@@ -14969,7 +14969,10 @@ Vue.component("address-select", {
             addressModal: {},
             modalType: "",
             headline: "",
-            addressToEdit: {},
+            addressToEdit: {
+                addressSalutation: 0,
+                countryId: this.shippingCountryId
+            },
             addressToDelete: {},
             deleteModal: "",
             deleteModalWaiting: false,
@@ -15887,9 +15890,7 @@ Vue.component("country-select", {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
             }
 
-            if (!this.selectedCountryId) {
-                this.countryChanged(countryId);
-            }
+            this.countryChanged(countryId);
         }
     },
 
