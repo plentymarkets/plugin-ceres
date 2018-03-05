@@ -21,11 +21,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ ceresConfig.sorting.data | json_encode() }}"></item-list-sorting>
+                            <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
                             <items-per-page
                                 template="#vue-items-per-page"
-                                :columns-per-page="{{ ceresConfig.pagination.columnsPerPage | json_encode }}"
-                                :rows-per-page="{{ ceresConfig.pagination.rowsPerPage | json_encode }}"></items-per-page>
+                                :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
                             <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
@@ -63,6 +62,6 @@
 {% block PartialHead %}
 <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
     {% if isSearch %}
-        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ headerCompanyName }}</title>
+        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ ceresConfig.header.companyName }}</title>
     {% endif %}
 {% endblock %}
