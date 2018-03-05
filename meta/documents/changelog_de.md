@@ -1,5 +1,25 @@
 # Release Notes für Ceres
 
+## v2.4.0 (2018-03-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Plugin-Konfiguration wurde in entsprechende Hilfsklassen ausgelagert.
+- Es wurde eine Konfigurationsmöglichkeit hinzugefügt, um bei der Suggestion direkt zum Artikel weitergeleitet zu werden.
+- Für eine bessere Performance werden mehrfache Aufrufe einer Funktion gecached.
+- Das Design für den Warenkorb wurde von Grund auf neu gestaltet. Hierbei wurden Fehler der alten Version behoben, dass z.B. Text ineinander gerutscht ist und der Inhalt kaputt ging.
+
+### Geändert
+
+- Die im Warenkorb befindlichen Artikel werden nun nach dem Laden des Shops asynchron nachgeladen. Dies führt zu einem schnelleren Ausliefern der Seite.
+- Die Hinweisetexte für sichere Passwörter in der Registrierung wurden angepasst.
+- Die Einträge der Währungsauswahl wurden angepasst, um Suchmaschinen daran zu hindern, dieselbe Seite mehrfach zu crawlen.
+
+### Behoben
+
+- Durch einen Fehler wurde das Layout für Adresseingaben beim Bearbeiten von Adressen nicht an das ausgewählte Land angepasst. Dies wurde behoben.
+- Durch einen Fehler wurden durch den Wechsel der Währung bereits vorhandene URL-Parameter überschrieben. Dies wurde behoben.
+
 ## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
