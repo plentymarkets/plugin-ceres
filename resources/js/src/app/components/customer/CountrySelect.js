@@ -82,10 +82,7 @@ Vue.component("country-select", {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
             }
 
-            if (!this.selectedCountryId)
-            {
-                this.countryChanged(countryId);
-            }
+            this.countryChanged(countryId);
         }
     },
 
