@@ -1,5 +1,19 @@
 # Release Notes für Ceres
 
+## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- User Guide Kapitel zur EHI-Zertifizierung
+
+### Behoben
+
+- Der Betreff der "Passwort vergessen" Email wird nun aus den Sprachdateien von Ceres geladen.
+- Durch einen Fehler wurden über die mobile Navigation falsche Kategorien geöffnet. Dies wurde behoben.
+- Wenn eine Kategorie nicht in der Navigation angezeigt wurde, funktionierten Elemente wie Pagination, Items per Page und Sorting nicht. Dies wurde behoben.
+- Werte von Bestellmerkmalen werden nun zurückgesetzt wenn der Nutzer eine andere Variante des Artikels auswählt. Sollte diese Variante vorher bereits ausgewählt worden sein, wird der vorherige Wert des Bestellmerkmals geladen.
+- Durch einen Fehler wurde man in der Kategorieansicht bei Klick auf Bilderkaroussel Buttons direkt zum Artikel geleitet. Dieser Fehler wurde behoben.
+
 ## v2.3.1 (2018-02-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.0...2.3.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
