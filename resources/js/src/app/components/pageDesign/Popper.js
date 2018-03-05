@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const Popper = require("popper.js");
 
 Vue.component("popper", {
@@ -28,41 +30,44 @@ Vue.component("popper", {
 	{
         this.$nextTick(() =>
         {
-            const node = this.$refs.node;
+            if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
+            {
+                const node = this.$refs.node;
 
-            node.parentElement.removeChild(node);
-            document.body.appendChild(node);
+                node.parentElement.removeChild(node);
+                document.body.appendChild(node);
 
-            this.popper = new Popper(this.$refs.handle, this.$refs.node, {
-                placement: this.placement,
-                modifiers: {
-                    arrow: {
-                        element: this.$refs.arrow
+                this.popper = new Popper(this.$refs.handle, node, {
+                    placement: this.placement,
+                    modifiers: {
+                        arrow: {
+                            element: this.$refs.arrow
+                        }
                     }
+                });
+
+                const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+                if (this.trigger === "focus")
+                {
+                    handle.addEventListener("focus", () =>
+                    {
+                        this.showPopper();
+                    });
+                    handle.addEventListener("blur", () =>
+                    {
+                        this.hidePopper();
+                    });
                 }
-            });
+                else
+                {
+                    handle.addEventListener(this.trigger, () =>
+                    {
+                        this.togglePopper();
+                    });
+                }
+            }
         });
-
-        const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
-
-        if (this.trigger === "focus")
-        {
-            handle.addEventListener("focus", () =>
-            {
-                this.showPopper();
-            });
-            handle.addEventListener("blur", () =>
-            {
-                this.hidePopper();
-            });
-        }
-        else
-        {
-            handle.addEventListener(this.trigger, () =>
-            {
-                this.togglePopper();
-            });
-        }
     },
 
     data()
@@ -78,8 +83,7 @@ Vue.component("popper", {
         togglePopper()
 		{
             this.isVisible = !this.isVisible;
-
-            this.popper.scheduleUpdate();
+            this.update();
         },
 
         showPopper()
@@ -87,7 +91,7 @@ Vue.component("popper", {
             if (!this.isVisible)
             {
                 this.isVisible = true;
-                this.popper.scheduleUpdate();
+                this.update();
             }
         },
 
@@ -96,6 +100,14 @@ Vue.component("popper", {
             if (this.isVisible)
             {
                 this.isVisible = false;
+                this.update();
+            }
+        },
+
+        update()
+        {
+            if (!isNullOrUndefined(this.popper))
+            {
                 this.popper.scheduleUpdate();
             }
         }
