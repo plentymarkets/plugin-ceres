@@ -1,4 +1,4 @@
-import {isNullOrUndefined} from "../../helper/utils";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");

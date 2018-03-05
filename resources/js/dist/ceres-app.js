@@ -15536,6 +15536,8 @@ Vue.component("country-select", {
 },{"services/CountryService":105}],28:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var _ValidationService = require("services/ValidationService");
 
 var _ValidationService2 = _interopRequireDefault(_ValidationService);
@@ -15578,6 +15580,17 @@ Vue.component("registration", {
     created: function created() {
         this.$options.template = this.template;
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        if (!(0, _utils.isNullOrUndefined)(this.$refs.passwortHint)) {
+            this.$nextTick(function () {
+                ModalService.findModal("#" + _this.modalElement).on("hide.bs.modal", function () {
+                    _this.$refs.passwordHint.hidePopper();
+                });
+            });
+        }
+    },
 
 
     methods: {
@@ -15585,11 +15598,14 @@ Vue.component("registration", {
          * Validate the registration form
          */
         validateRegistration: function validateRegistration() {
-            var _this = this;
+            var _this2 = this;
 
             _ValidationService2.default.validate($("#registration" + this._uid)).done(function () {
-                _this.sendRegistration();
+                _this2.sendRegistration();
             }).fail(function (invalidFields) {
+                if (!(0, _utils.isNullOrUndefined)(_this2.$refs.passwordHint) && invalidFields.indexOf(_this2.$refs.passwordInput) >= 0) {
+                    _this2.$refs.passwordHint.showPopper();
+                }
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
             });
         },
@@ -15599,7 +15615,7 @@ Vue.component("registration", {
          * Send the registration
          */
         sendRegistration: function sendRegistration() {
-            var _this2 = this;
+            var _this3 = this;
 
             var userObject = this.getUserObject();
 
@@ -15611,12 +15627,12 @@ Vue.component("registration", {
                 if (!response.code) {
                     NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accRegistrationSuccessful")).closeAfter(3000);
 
-                    if (document.getElementById(_this2.modalElement) !== null) {
-                        ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
+                    if (document.getElementById(_this3.modalElement) !== null) {
+                        ModalService.findModal(document.getElementById(_this3.modalElement)).hide();
                     }
 
-                    if (_this2.backlink !== null && _this2.backlink) {
-                        window.location.assign(_this2.backlink);
+                    if (_this3.backlink !== null && _this3.backlink) {
+                        window.location.assign(_this3.backlink);
                     } else {
                         location.reload();
                     }
@@ -15624,9 +15640,9 @@ Vue.component("registration", {
                     NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accRegistrationError")).closeAfter(3000);
                 }
 
-                _this2.isDisabled = false;
+                _this3.isDisabled = false;
             }).fail(function () {
-                _this2.isDisabled = false;
+                _this3.isDisabled = false;
             });
         },
         setAddressDataField: function setAddressDataField(_ref) {
@@ -15670,7 +15686,7 @@ Vue.component("registration", {
     }
 });
 
-},{"services/ApiService":103,"services/ModalService":107,"services/NotificationService":108,"services/TranslationService":109,"services/ValidationService":111}],29:[function(require,module,exports){
+},{"../../helper/utils":100,"services/ApiService":103,"services/ModalService":107,"services/NotificationService":108,"services/TranslationService":109,"services/ValidationService":111}],29:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -18646,6 +18662,8 @@ Vue.component("notifications", {
 },{"exceptions/ExceptionMap":85,"services/NotificationService":108,"services/TranslationService":109}],65:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var Popper = require("popper.js");
 
 Vue.component("popper", {
@@ -18659,7 +18677,11 @@ Vue.component("popper", {
         },
         placement: {
             type: String,
-            default: "bottom"
+            default: "auto"
+        },
+        trigger: {
+            type: String,
+            default: "click"
         }
     },
 
@@ -18670,14 +18692,36 @@ Vue.component("popper", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.popper = new Popper(_this.$refs.trigger, _this.$refs.node, {
-                placement: _this.placement,
-                modifiers: {
-                    arrow: {
-                        element: _this.$refs.arrow
+            if (!(0, _utils.isNullOrUndefined)(_this.$refs.node) && !(0, _utils.isNullOrUndefined)(_this.$refs.handle)) {
+                var node = _this.$refs.node;
+
+                node.parentElement.removeChild(node);
+                document.body.appendChild(node);
+
+                _this.popper = new Popper(_this.$refs.handle, node, {
+                    placement: _this.placement,
+                    modifiers: {
+                        arrow: {
+                            element: _this.$refs.arrow
+                        }
                     }
+                });
+
+                var handle = _this.$refs.handle.firstElementChild || _this.$refs.handle;
+
+                if (_this.trigger === "focus") {
+                    handle.addEventListener("focus", function () {
+                        _this.showPopper();
+                    });
+                    handle.addEventListener("blur", function () {
+                        _this.hidePopper();
+                    });
+                } else {
+                    handle.addEventListener(_this.trigger, function () {
+                        _this.togglePopper();
+                    });
                 }
-            });
+            }
         });
     },
     data: function data() {
@@ -18691,13 +18735,29 @@ Vue.component("popper", {
     methods: {
         togglePopper: function togglePopper() {
             this.isVisible = !this.isVisible;
-
-            this.popper.scheduleUpdate();
+            this.update();
+        },
+        showPopper: function showPopper() {
+            if (!this.isVisible) {
+                this.isVisible = true;
+                this.update();
+            }
+        },
+        hidePopper: function hidePopper() {
+            if (this.isVisible) {
+                this.isVisible = false;
+                this.update();
+            }
+        },
+        update: function update() {
+            if (!(0, _utils.isNullOrUndefined)(this.popper)) {
+                this.popper.scheduleUpdate();
+            }
         }
     }
 });
 
-},{"popper.js":3}],66:[function(require,module,exports){
+},{"../../helper/utils":100,"popper.js":3}],66:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-country-select", {
@@ -20218,7 +20278,8 @@ module.exports = function ($) {
             pauseTimeout: pauseTimeout,
             continueTimeout: continueTimeout,
             stopTimeout: stopTimeout,
-            getModalContainer: getModalContainer
+            getModalContainer: getModalContainer,
+            on: on
         };
 
         function show() {
@@ -20292,6 +20353,10 @@ module.exports = function ($) {
         function stopTimeout() {
             window.clearTimeout(timeout);
             window.clearInterval(interval);
+        }
+
+        function on(event, callback) {
+            $bsModal.on(event, callback);
         }
     }
 }(jQuery);
@@ -20849,7 +20914,7 @@ function _isMail($formControl) {
  * @returns value is valid password
  */
 function _isPassword($formControl) {
-    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
+    var passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)\S{8,}$/);
 
     return passwordRegEx.test($formControl.val());
 }
