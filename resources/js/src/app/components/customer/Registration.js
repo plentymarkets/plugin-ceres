@@ -1,3 +1,5 @@
+import {isNullOrUndefined} from "../../helper/utils";
+
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
@@ -39,14 +41,18 @@ Vue.component("registration", {
 
     mounted()
     {
-        this.$nextTick(() =>
+        if (!isNullOrUndefined(this.$refs.passwortHint))
         {
-            ModalService.findModal("#" + this.modalElement)
-                .on("hide.bs.modal", () =>
-                {
-                    this.$refs.passwordHint.hidePopper();
-                });
-        });
+            this.$nextTick(() =>
+            {
+                ModalService.findModal("#" + this.modalElement)
+                    .on("hide.bs.modal", () =>
+                    {
+                        this.$refs.passwordHint.hidePopper();
+                    });
+            });
+        }
+
     },
 
     methods: {
@@ -62,7 +68,7 @@ Vue.component("registration", {
                 })
                 .fail(invalidFields =>
                 {
-                    if (invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                    if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
                     {
                         this.$refs.passwordHint.showPopper();
                     }
