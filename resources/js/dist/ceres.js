@@ -366,7 +366,7 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 //# sourceMappingURL=ceres-vendor.productive.js.map
 
 
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -11151,7 +11151,7 @@ return jQuery;
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.9
+ * @version 1.13.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -14969,7 +14969,10 @@ Vue.component("address-select", {
             addressModal: {},
             modalType: "",
             headline: "",
-            addressToEdit: {},
+            addressToEdit: {
+                addressSalutation: 0,
+                countryId: this.shippingCountryId
+            },
             addressToDelete: {},
             deleteModal: "",
             deleteModalWaiting: false,
@@ -15887,9 +15890,7 @@ Vue.component("country-select", {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
             }
 
-            if (!this.selectedCountryId) {
-                this.countryChanged(countryId);
-            }
+            this.countryChanged(countryId);
         }
     },
 
@@ -16425,7 +16426,7 @@ Vue.component("login", {
 
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail" }).done(function () {
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPasswordMailSubject" }).done(function () {
                 if (document.getElementById(_this5.modalElement) !== null) {
                     ModalService.findModal(document.getElementById(_this5.modalElement)).hide();
 
@@ -17300,7 +17301,6 @@ Vue.component("category-image-carousel", {
 
         this.$_enableCarousel = this.enableCarousel && this.imageUrls.length > 1;
     },
-
     mounted: function mounted() {
         var _this = this;
 
@@ -17311,8 +17311,11 @@ Vue.component("category-image-carousel", {
         });
     },
 
+
     methods: {
         initializeCarousel: function initializeCarousel() {
+            var _this2 = this;
+
             $("#owl-carousel-" + this._uid).owlCarousel({
                 dots: this.showDots === true,
                 items: 1,
@@ -17321,17 +17324,26 @@ Vue.component("category-image-carousel", {
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
                 nav: this.showNav === true,
-                navText: ["<i class='fa fa-chevron-left' aria-hidden='true'></i>", "<i class='fa fa-chevron-right' aria-hidden='true'></i>"],
+                navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
                 onTranslated: function onTranslated(event) {
                     var target = $(event.currentTarget);
-
                     var owlItem = $(target.find(".owl-item.active"));
 
                     owlItem.find(".img-fluid.lazy").show().lazyload({ threshold: 100 });
+                },
+
+                onInitialized: function onInitialized(event) {
+                    if (_this2.showNav === "true") {
+                        document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                        document.querySelector("#owl-nav-text-right-" + _this2._uid).parentElement.onclick = function (event) {
+                            return event.preventDefault();
+                        };
+                    }
                 }
             });
         },
-
         getAltText: function getAltText(image) {
             var altText = image && image.alternate ? image.alternate : this.altText;
 
@@ -18859,7 +18871,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 Vue.component("mobile-navigation", {
 
-    props: ["template", "currentCategoryId", "navigationTreeData"],
+    props: ["template", "initialCategory", "navigationTreeData"],
 
     data: function data() {
         return {
@@ -18900,19 +18912,26 @@ Vue.component("mobile-navigation", {
         var _this = this;
 
         this.$nextTick(function () {
-            _this.$store.dispatch("initNavigationTree", _this.navigationTreeData);
-
-            if (_this.currentCategoryId) {
-                _this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(_this.currentCategoryId) });
-                _this.initialSlide(_this.$store.state.navigation.currentCategory);
-            }
-
-            _this.dataContainer1 = _this.navigationTree;
+            _this.initNavigation();
         });
     },
 
 
     methods: {
+        initNavigation: function initNavigation() {
+            this.$store.dispatch("initNavigationTree", this.navigationTreeData);
+
+            if (this.initialCategory && this.initialCategory.id) {
+                if (this.initialCategory.linklist === "N") {
+                    this.$store.commit("setCurrentCategory", this.initialCategory);
+                } else {
+                    this.$store.dispatch("setCurrentCategoryById", { categoryId: parseInt(this.initialCategory.id) });
+                    this.initialSlide(this.$store.state.navigation.currentCategory);
+                }
+            }
+
+            this.dataContainer1 = this.navigationTree;
+        },
         initialSlide: function initialSlide(currentCategory) {
             if (currentCategory) {
                 if (currentCategory.children && currentCategory.showChildren) {
@@ -19469,21 +19488,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 Vue.directive("render-category", {
     bind: function bind(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
         el.onclick = function (event) {
             event.preventDefault();
 
             var currentCategoryType = _index2.default.state.navigation.currentCategory ? _index2.default.state.navigation.currentCategory.type : null;
 
-            if (!App.isCategoryView || currentCategoryType !== binding.value.type) {
-                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id, withReload: true });
+            if (!App.isCategoryView || currentCategoryType !== el.dataset.categoryType) {
+                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId), withReload: true });
 
                 var url = _index2.default.state.navigation.currentCategory.url;
 
                 window.open(url, "_self");
             } else {
-                _index2.default.dispatch("selectCategory", { categoryId: binding.value.id });
+                _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
             }
         };
+    },
+    update: function update(el, binding) {
+        el.dataset.categoryId = binding.value.id;
+        el.dataset.categoryType = binding.value.type;
     }
 });
 
@@ -22266,8 +22291,8 @@ var actions = {
             commit("setIsItemListLoading", true);
 
             _ApiService2.default.get(url, searchParams).done(function (data) {
-                commit("setItemListItems", data.documents);
-                commit("setItemListTotalItems", data.total);
+                commit("setItemListItems", data.itemList.documents);
+                commit("setItemListTotalItems", data.itemList.total);
                 commit("setFacets", data.facets);
                 commit("setIsItemListLoading", false);
                 resolve(data);

@@ -1,6 +1,6 @@
 <?php
-namespace Ceres\Providers;
 
+namespace Ceres\Providers;
 
 use Ceres\Caching\NavigationCacheSettings;
 use Ceres\Caching\SideNavigationCacheSettings;
@@ -10,6 +10,7 @@ use Ceres\Contexts\CategoryItemContext;
 use Ceres\Contexts\ContextInterface;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
+use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\SingleItemContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
@@ -42,7 +43,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.basket'                    => ['Basket.Basket',                        GlobalContext::class],                       // provide template to use for basket
         'tpl.checkout'                  => ['Checkout.CheckoutView',                GlobalContext::class],               // provide template to use for checkout
         'tpl.my-account'                => ['MyAccount.MyAccount',                  GlobalContext::class],                 // provide template to use for my-account
-        'tpl.confirmation'              => ['Checkout.OrderConfirmation',           GlobalContext::class],          // provide template to use for confirmation
+        'tpl.confirmation'              => ['Checkout.OrderConfirmation',           OrderConfirmationContext::class],          // provide template to use for confirmation
         'tpl.login'                     => ['Customer.Login',                       GlobalContext::class],                      // provide template to use for login
         'tpl.register'                  => ['Customer.Register',                    GlobalContext::class],                   // provide template to use for register
         'tpl.guest'                     => ['Customer.Guest',                       GlobalContext::class],                      // provide template to use for guest

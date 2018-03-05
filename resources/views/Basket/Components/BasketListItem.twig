@@ -32,6 +32,13 @@
                                     ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }
                                 </div>
                             </div>
+
+                            <div class="item-small-prices">
+                                <div v-for="attribute in basketItem.variation.data.attributes">
+                                    <strong>${ attribute.attribute.names.name }:</strong>
+                                    <span>${ attribute.value.names.name }</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
     
