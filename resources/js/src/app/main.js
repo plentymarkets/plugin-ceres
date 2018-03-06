@@ -1,10 +1,13 @@
+const browserDetect = require("detect-browser");
 // Frontend end scripts
 // eslint-disable-next-line
 var init = (function($, window, document)
 {
-
     function CeresMain()
     {
+        const browser = browserDetect.detect();
+
+        $("html").addClass(browser.name);
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
