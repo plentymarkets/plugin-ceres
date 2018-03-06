@@ -13999,6 +13999,14 @@ Vue.component("accept-gtc-check", {
         validate: function validate() {
             this.$store.commit("setGtcShowError", !this.isChecked);
         }
+    },
+
+    watch: {
+        isChecked: function isChecked() {
+            if (this.showError) {
+                this.validate();
+            }
+        }
     }
 });
 
@@ -15200,6 +15208,14 @@ Vue.component("invoice-address-select", {
         },
         validate: function validate() {
             this.$store.commit("setInvoiceAddressShowError", this.billingAddressId <= 0);
+        }
+    },
+
+    watch: {
+        billingAddressId: function billingAddressId() {
+            if (this.hasToValidate && this.showError) {
+                this.validate();
+            }
         }
     }
 });
