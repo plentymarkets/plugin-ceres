@@ -1,6 +1,8 @@
 import {isNullOrUndefined}from "../../helper/utils";
+import {findParent}from "../../helper/dom";
 
-const Popper = require("popper.js");
+const Popper              = require("popper.js");
+const ModalService        = require("services/ModalService");
 
 Vue.component("popper", {
 
@@ -67,6 +69,18 @@ Vue.component("popper", {
                     });
                 }
             }
+
+            const parentModal = findParent(this.$el, ".modal");
+
+            if (!isNullOrUndefined(parentModal))
+            {
+                ModalService.findModal(parentModal)
+                    .on("hide.bs.modal", () =>
+                    {
+                        this.hidePopper();
+                    });
+            }
+
         });
     },
 
@@ -88,20 +102,14 @@ Vue.component("popper", {
 
         showPopper()
         {
-            if (!this.isVisible)
-            {
-                this.isVisible = true;
-                this.update();
-            }
+            this.isVisible = true;
+            this.update();
         },
 
         hidePopper()
         {
-            if (this.isVisible)
-            {
-                this.isVisible = false;
-                this.update();
-            }
+            this.isVisible = false;
+            this.update();
         },
 
         update()
