@@ -29,5 +29,16 @@ Vue.component("accept-gtc-check", {
         {
             this.$store.commit("setGtcShowError", !this.isChecked);
         }
+    },
+
+    watch:
+    {
+        isChecked()
+        {
+            if (this.showError)
+            {
+                this.validate();
+            }
+        }
     }
 });

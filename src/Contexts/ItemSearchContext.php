@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\Facets;
 use IO\Services\ItemSearch\SearchPresets\SearchItems;
 use IO\Services\ItemSearch\Services\ItemSearchService;
@@ -25,14 +26,14 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
             'query'         => $this->getParam( 'query', '' )
         ];
 
-        /** @var ItemSearchService $itemSearchService */
-        $itemSearchService = pluginApp( ItemSearchService::class );
-        $searchResults = $itemSearchService->getResults([
-            'itemList' => SearchItems::getSearchFactory( $itemListOptions ),
-            'facets'   => Facets::getSearchFactory( $itemListOptions )
-        ]);
-
-        $this->initItemList( $searchResults, $itemListOptions );
+        $this->initItemList(
+            [
+                'itemList' => SearchItems::getSearchFactory( $itemListOptions ),
+                'facets'   => Facets::getSearchFactory( $itemListOptions )
+            ],
+            $itemListOptions,
+            SearchOptions::SCOPE_SEARCH
+        );
 
         $this->isSearch = true;
         $this->searchString = $itemListOptions['query'];
