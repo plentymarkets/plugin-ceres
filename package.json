@@ -45,6 +45,7 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "v4.0.0-alpha.3",
     "custom-event-polyfill": "^0.3.0",
+    "detect-browser": "^2.1.0",
     "devbridge-autocomplete": "^1.4.7",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
