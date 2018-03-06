@@ -2,13 +2,9 @@
 
 namespace Ceres\Contexts;
 
-use IO\Services\ItemLoader\Extensions\TwigLoaderPresets;
-use IO\Services\ItemLoader\Services\ItemLoaderService;
+use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\CategoryItems;
-use IO\Services\ItemSearch\SearchPresets\CrossSellingItems;
 use IO\Services\ItemSearch\SearchPresets\Facets;
-use IO\Services\ItemSearch\Services\ItemSearchService;
-use Plenty\Repositories\Models\PaginatedResult;
 
 class CategoryItemContext extends CategoryContext implements ContextInterface
 {
@@ -31,7 +27,8 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
                 'itemList' => CategoryItems::getSearchFactory( $itemListOptions ),
                 'facets'   => Facets::getSearchFactory( $itemListOptions )
             ],
-            $itemListOptions
+            $itemListOptions,
+            SearchOptions::SCOPE_CATEGORY
         );
     }
 }
