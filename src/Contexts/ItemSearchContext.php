@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearch\SearchPresets\Facets;
 use IO\Services\ItemSearch\SearchPresets\SearchItems;
 use IO\Services\ItemSearch\Services\ItemSearchService;
@@ -30,7 +31,8 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
                 'itemList' => SearchItems::getSearchFactory( $itemListOptions ),
                 'facets'   => Facets::getSearchFactory( $itemListOptions )
             ],
-            $itemListOptions
+            $itemListOptions,
+            SearchOptions::SCOPE_SEARCH
         );
 
         $this->isSearch = true;

@@ -23,14 +23,14 @@ trait ItemListContext
     /** @var SearchOptions */
     public $searchOptions;
 
-    protected function initItemList( $defaultSearchFactories, $options )
+    protected function initItemList( $defaultSearchFactories, $options, $scope = SearchOptions::SCOPE_CATEGORY )
     {
         $this->currentPage      = $options['page'];
         $this->itemsPerPage     = $options['itemsPerPage'];
         $this->itemSorting      = $options['sorting'];
         $this->query            = ['items' => $this->itemsPerPage, 'sorting' => $this->itemSorting];
 
-        $this->searchOptions = SearchOptions::get();
+        $this->searchOptions = SearchOptions::get( $scope );
 
         /** @var ItemSearchService $itemSearchService */
         $itemSearchService = pluginApp( ItemSearchService::class );
