@@ -21,6 +21,12 @@
 
                     <hr class="m-b-2">
 
+                    <div v-if="basketNotifications.length > 0">
+                        <div class="alert fade in alert-danger" v-for="notification in basketNotifications">
+                            <div>${ notification.message }</div>
+                        </div>
+                    </div>
+
                     <basket-totals template="#vue-basket-totals" :config="{{ config("Ceres.basket.preview_data")|split(', ')|json_encode() }}"></basket-totals>
 
                     <div class="row">
