@@ -128,6 +128,7 @@ Vue.component("registration", {
         setAddressDataField({field, value})
         {
             this.billingAddress[field] = value;
+            this.billingAddress = Object.assign({}, this.billingAddress);
         },
 
         /**
