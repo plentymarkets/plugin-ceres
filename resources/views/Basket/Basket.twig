@@ -29,7 +29,11 @@
                 </div>
             </div>
 
-            <div class="col-md-5" v-stick-in-parent>
+            <div class="col-md-5">
+                {# this container is required for the v-stick-in-parent directive below #}
+            </div>
+
+            <div class="col-md-5 float-right" v-stick-in-parent>
                 <div class="col-xs-12 p-y-2 bg-white">
                     <hr class="hidden-md-up">
                     <basket-totals class="m-b-2" template="#vue-basket-totals" :config="{{ ceresConfig.basket.data | json_encode() }}"></basket-totals>
