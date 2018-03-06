@@ -39,22 +39,6 @@ Vue.component("registration", {
         this.$options.template = this.template;
     },
 
-    mounted()
-    {
-        if (!isNullOrUndefined(this.$refs.passwortHint))
-        {
-            this.$nextTick(() =>
-            {
-                ModalService.findModal("#" + this.modalElement)
-                    .on("hide.bs.modal", () =>
-                    {
-                        this.$refs.passwordHint.hidePopper();
-                    });
-            });
-        }
-
-    },
-
     methods: {
         /**
          * Validate the registration form
