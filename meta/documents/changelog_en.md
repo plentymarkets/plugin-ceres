@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v2.4.0 (2018-03-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Overview of all changes</b></a>
+## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -20,7 +20,8 @@
 
 - Due to an error the layout for entering the address did not conform to the selected country when editing addresses. This has been fixed.
 - Due to an error changing the currency overwrote existent URL parameters. This has been fixed.
-
+- If the input fields of the checkout have been validated and a blank field has been marked in red, the red marking remained even after a successful input. This has been fixed.
+- The company field was not displayed properly if company was selected from the menu in the address information. This has been fixed.
 
 ## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Overview of all changes</b></a>
 
