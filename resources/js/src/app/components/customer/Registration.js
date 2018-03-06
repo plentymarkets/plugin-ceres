@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const ApiService          = require("services/ApiService");
 const NotificationService = require("services/NotificationService");
 const ModalService        = require("services/ModalService");
@@ -50,6 +52,10 @@ Vue.component("registration", {
                 })
                 .fail(invalidFields =>
                 {
+                    if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                    {
+                        this.$refs.passwordHint.showPopper();
+                    }
                     ValidationService.markInvalidFields(invalidFields, "error");
                 });
         },
@@ -106,6 +112,7 @@ Vue.component("registration", {
         setAddressDataField({field, value})
         {
             this.billingAddress[field] = value;
+            this.billingAddress = Object.assign({}, this.billingAddress);
         },
 
         /**

@@ -23,7 +23,10 @@ Vue.component("address-select", {
             addressModal   : {},
             modalType      : "",
             headline       : "",
-            addressToEdit  : {},
+            addressToEdit  : {
+                addressSalutation: 0,
+                countryId        : this.shippingCountryId
+            },
             addressToDelete: {},
             deleteModal    : "",
             deleteModalWaiting: false,
@@ -323,6 +326,7 @@ Vue.component("address-select", {
         setAddressToEditField({field, value})
         {
             this.addressToEdit[field] = value;
+            this.addressToEdit = Object.assign({}, this.addressToEdit);
         }
     },
 

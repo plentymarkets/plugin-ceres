@@ -219,7 +219,7 @@ function _isMail($formControl)
  */
 function _isPassword($formControl)
 {
-    const passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/);
+    const passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)\S{8,}$/);
 
     return passwordRegEx.test($formControl.val());
 }

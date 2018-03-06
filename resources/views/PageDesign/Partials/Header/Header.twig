@@ -94,7 +94,13 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" current-category-id="{{ category.id }}" template="#vue-mobile-navigation"></mobile-navigation>
+{% if category.linklist == "Y" %}
+    {% set initialCategory = { id: category.id } %}
+{% else %}
+    {% set initialCategory = category %}
+{% endif %}
+
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :initial-category="{{ initialCategory | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">
@@ -114,7 +120,7 @@
                     <ul>
                         {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
                         <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
-                            <a href="?currency={{ currency.name }}">
+                            <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
                                 {% if currencyFormatSelect == 'all' %}
                                     {{ currency.name }} ({{ currency.symbol }})
                                 {% else %}

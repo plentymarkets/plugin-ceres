@@ -1,5 +1,41 @@
 # Release Notes für Ceres
 
+## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Plugin-Konfiguration wurde in entsprechende Hilfsklassen ausgelagert.
+- Es wurde eine Konfigurationsmöglichkeit hinzugefügt, um bei der Suggestion direkt zum Artikel weitergeleitet zu werden.
+- Für eine bessere Performance werden mehrfache Aufrufe einer Funktion gecached.
+- Das Design für den Warenkorb wurde von Grund auf neu gestaltet. Hierbei wurden Fehler der alten Version behoben, dass z.B. Text ineinander gerutscht ist und der Inhalt kaputt ging.
+
+### Geändert
+
+- Die im Warenkorb befindlichen Artikel werden nun nach dem Laden des Shops asynchron nachgeladen. Dies führt zu einem schnelleren Ausliefern der Seite.
+- Die Hinweisetexte für sichere Passwörter in der Registrierung wurden angepasst.
+- Die Einträge der Währungsauswahl wurden angepasst, um Suchmaschinen daran zu hindern, dieselbe Seite mehrfach zu crawlen.
+
+### Behoben
+
+- Durch einen Fehler wurde das Layout für Adresseingaben beim Bearbeiten von Adressen nicht an das ausgewählte Land angepasst. Dies wurde behoben.
+- Durch einen Fehler wurden durch den Wechsel der Währung bereits vorhandene URL-Parameter überschrieben. Dies wurde behoben.
+- Wenn im **Checkout** die Validierung der Eingabefelder durchgeführt wurde und ein unausgefülltes Feld rot markiert wurde, wurde die Einfärbung nach erfolgreicher Nutzereingabe nicht entfernt. Dieser Fehler wurde behoben.
+- Wenn man in Adresseingaben Firma ausgewählt hat, wurde das Feld nicht angezeigt. Dies wurde behoben.
+
+## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- User Guide Kapitel zur EHI-Zertifizierung
+
+### Behoben
+
+- Der Betreff der "Passwort vergessen" Email wird nun aus den Sprachdateien von Ceres geladen.
+- Durch einen Fehler wurden über die mobile Navigation falsche Kategorien geöffnet. Dies wurde behoben.
+- Wenn eine Kategorie nicht in der Navigation angezeigt wurde, funktionierten Elemente wie Pagination, Items per Page und Sorting nicht. Dies wurde behoben.
+- Werte von Bestellmerkmalen werden nun zurückgesetzt wenn der Nutzer eine andere Variante des Artikels auswählt. Sollte diese Variante vorher bereits ausgewählt worden sein, wird der vorherige Wert des Bestellmerkmals geladen.
+- Durch einen Fehler wurde man in der Kategorieansicht bei Klick auf Bilderkaroussel Buttons direkt zum Artikel geleitet. Dieser Fehler wurde behoben.
+
 ## v2.3.1 (2018-02-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.0...2.3.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

@@ -2,7 +2,7 @@
     <div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" v-for="(property, index) in properties">
             <div v-if="property.property.isOderProperty" class="input-unit order-property-input" :class="{ 'active': property.property.value }" data-validate="text">
-                <input type="text" name="title" :id="'orderPropertyInput' + index" @change="setVariationOrderProperty({propertyId: property.property.id, value: $event.target.value})">
+                <input type="text" name="title" :id="'orderPropertyInput' + index" :value="property.property.value" @change="setVariationOrderProperty({propertyId: property.property.id, value: $event.target.value})">
                 <label :for="'orderPropertyInput' + index">${property.property.names.name}
 
                     <strong v-if="property.property.surcharge >= 0 && property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>

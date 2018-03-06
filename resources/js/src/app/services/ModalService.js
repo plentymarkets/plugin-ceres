@@ -38,7 +38,8 @@ module.exports = (function($)
             pauseTimeout     : pauseTimeout,
             continueTimeout  : continueTimeout,
             stopTimeout      : stopTimeout,
-            getModalContainer: getModalContainer
+            getModalContainer: getModalContainer,
+            on               : on
         };
 
         function show()
@@ -127,6 +128,11 @@ module.exports = (function($)
         {
             window.clearTimeout(timeout);
             window.clearInterval(interval);
+        }
+
+        function on(event, callback)
+        {
+            $bsModal.on(event, callback);
         }
     }
 })(jQuery);

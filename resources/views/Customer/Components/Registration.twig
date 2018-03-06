@@ -3,13 +3,6 @@
     <div>
         <div class="modal-body">
             <div class="row" :id="'registration' + _uid">
-
-                <div class="col-sm-12">
-                    <div class="alert alert-info password-info">
-                        <span class="info-badge">{{ trans("Ceres::Template.accPasswordReq") }}</span>
-                    </div>
-                </div>
-
                 <div class="col-sm-12">
                     <div class="input-unit" data-validate="mail">
                         <input type="text" name="email" id="txt_email" v-model="username">
@@ -18,13 +11,24 @@
                 </div>
 
                 <div class="col-sm-6" v-if="!guestMode">
-                    <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" id="passwordBox" data-validate="password">
-                        <input type="password" name="password" id="registration_password_input" v-model="password">
+                    <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" id="passwordBox" data-validate="password" ref="passwordInput">
+                        <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
+                            <input slot="handle" type="password" name="password" id="registration_password_input" v-model="password">
+                            <div slot="title">
+                                {{ trans("Ceres::Template.accPasswordHintTitle") }}
+                            </div>
+                            <ul slot="content" class="p-l-1">
+                                <li>{{ trans("Ceres::Template.accPasswordHintLength") }}</li>
+                                <li>{{ trans("Ceres::Template.accPasswordHintDigit") }}</li>
+                                <li>{{ trans("Ceres::Template.accPasswordHintChar") }}</li>
+                            </ul>
+                        </popper>
+
                         <label for="txt_pw">{{ trans("Ceres::Template.accPassword") }}*</label>
                     </div>
                 </div>
 
-                <div class="col-sm-6" v-if="!guestMode">
+                <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom': modalElement}" id="passwordRepeatBox" data-validate="ref">
                         <input type="password" name="password-repeat" id="txt_pwrepeat" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
                         <label for="txt_pwrepeat">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
