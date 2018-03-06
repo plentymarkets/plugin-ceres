@@ -23,19 +23,19 @@
 		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageCarouselWidget",
 		"settings": {
 			"slide1": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarousel_slide1",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarousel_categoryId_label",
-                            "options": {
-                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
-                                "defaultValue": ""
-                            }
+				"type": "verticalContainer",
+				"label": "Widget.imageCarousel_slide1",
+				"required": false,
+				"options": {
+					"containerEntries": {
+						"categoryId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_categoryId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"defaultValue": ""
+							}
 						},
 						"variationId": {
 							"type": "inputNumber",
@@ -55,23 +55,23 @@
 								"defaultValue": ""
 							}
 						}
-                    }
-                }
+					}
+				}
 			},
 			"slide2": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarousel_slide2",
-                "required": false,
-                "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarousel_categoryId_label",
-                            "options": {
-                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
-                                "defaultValue": ""
-                            }
+				"type": "verticalContainer",
+				"label": "Widget.imageCarousel_slide2",
+				"required": false,
+				"options": {
+					"containerEntries": {
+						"categoryId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_categoryId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"defaultValue": ""
+							}
 						},
 						"variationId": {
 							"type": "inputNumber",
@@ -91,23 +91,23 @@
 								"defaultValue": ""
 							}
 						}
-                    }
-                }
+					}
+				}
 			},
 			"slide3": {
-                "type": "verticalContainer",
-                "label": "Widget.imageCarousel_slide3",
+				"type": "verticalContainer",
+				"label": "Widget.imageCarousel_slide3",
 				"required": false,
-                "options": {
-                    "containerEntries": {
-                        "categoryId": {
-                            "type": "inputNumber",
-                            "required": false,
-                            "label": "Widget.imageCarousel_categoryId_label",
-                            "options": {
-                                "tooltip": "Widget.imageCarousel_categoryId_tooltip",
-                                "defaultValue": ""
-                            }
+				"options": {
+					"containerEntries": {
+						"categoryId": {
+							"type": "inputNumber",
+							"required": false,
+							"label": "Widget.imageCarousel_categoryId_label",
+							"options": {
+								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"defaultValue": ""
+							}
 						},
 						"variationId": {
 							"type": "inputNumber",
@@ -127,9 +127,9 @@
 								"defaultValue": ""
 							}
 						}
-                    }
-                }
-            }
+					}
+				}
+			}
 		}
 	},
 	{
