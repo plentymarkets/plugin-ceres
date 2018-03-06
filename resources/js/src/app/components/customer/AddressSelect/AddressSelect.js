@@ -326,6 +326,7 @@ Vue.component("address-select", {
         setAddressToEditField({field, value})
         {
             this.addressToEdit[field] = value;
+            this.addressToEdit = Object.assign({}, this.addressToEdit);
         }
     },
 
