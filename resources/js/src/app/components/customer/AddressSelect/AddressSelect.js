@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../../helper/utils";
+
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
 const AddressFieldService = require("services/AddressFieldService");
@@ -12,8 +14,7 @@ Vue.component("address-select", {
     props: [
         "template",
         "addressType",
-        "showError",
-        "countryNameMap"
+        "showError"
     ],
 
     data()
@@ -22,7 +23,10 @@ Vue.component("address-select", {
             addressModal   : {},
             modalType      : "",
             headline       : "",
-            addressToEdit  : {},
+            addressToEdit  : {
+                addressSalutation: 0,
+                countryId        : this.shippingCountryId
+            },
             addressToDelete: {},
             deleteModal    : "",
             deleteModalWaiting: false,
@@ -69,7 +73,8 @@ Vue.component("address-select", {
         },
 
         ...Vuex.mapState({
-            isBasketLoading: state => state.basket.isBasketLoading
+            isBasketLoading: state => state.basket.isBasketLoading,
+            countryList: state => state.localization.shippingCountries
         })
     },
 
@@ -301,13 +306,18 @@ Vue.component("address-select", {
 
         /**
          * @param countryId
-         * @returns country name | empty string
+         * @returns string
          */
         getCountryName(countryId)
         {
             if (countryId > 0)
             {
-                return this.countryNameMap[countryId];
+                const country = this.countryList.find(country => country.id === countryId);
+
+                if (!isNullOrUndefined(country))
+                {
+                    return country.currLangName;
+                }
             }
 
             return "";
@@ -316,6 +326,7 @@ Vue.component("address-select", {
         setAddressToEditField({field, value})
         {
             this.addressToEdit[field] = value;
+            this.addressToEdit = Object.assign({}, this.addressToEdit);
         }
     },
 

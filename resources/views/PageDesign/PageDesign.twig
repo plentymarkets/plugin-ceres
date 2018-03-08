@@ -10,29 +10,6 @@
 
 <!DOCTYPE html>
 
-{% set lang = services.sessionStorage.getLang() %}
-
-{% set metaLang = "de" %}
-{% if lang == "de" or lang == "en" %}
-    {% set metaLang = lang %}
-{% endif %}
-
-{% set fixNavBarPos = config("Ceres.header.fixed_navbar") %}
-{% set basketAddInformation = config("Ceres.basket.add_item_to_basket_confirm") %}
-{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
-
-{% if services.template.isCategory() or services.template.isItem() %}
-    {% set categoryBreadcrumbs = services.category.getHierarchy() %}
-    {{ services.crossSelling.setType(config("Ceres.item.lists.cross_selling_type")) }}
-{% endif %}
-
-{% set showCategoryTypes = config('Ceres.header.show_category_types') %}
-{% if showCategoryTypes | trim is empty %}
-    {% set showCategoryTypes = "all" %}
-{% endif %}
-
-{% set categories = services.category.getNavigationTree(showCategoryTypes, lang, 6) %}
-
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#">
 
     <head>
@@ -50,14 +27,14 @@
         <div id="vue-app">
             <div class="wrapper wrapper-top">
                 <!-- messages -->
-                <notifications template="#vue-notifications" :initial-notifications="{{ services.notifications.getNotifications() | json_encode() }}"></notifications>
+                <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
             </div>
 
             <div class="wrapper wrapper-left">
                 <!-- filters -->
             </div>
 
-            <div class="wrapper wrapper-main {% if fixNavBarPos == 'true' %}isSticky{% endif %}">
+            <div class="wrapper wrapper-main {% if ceresConfig.header.fixNavBarPos %}isSticky{% endif %}">
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
@@ -75,7 +52,7 @@
             {% if basket is not defined %}
                 {% set basket = services.basket.getBasketForTemplate() %}
             {% endif %}
-            {% if config("Ceres.basket.preview_type") == "right" %}
+            {% if ceresConfig.basket.previewType == "right" %}
                 <div class="wrapper wrapper-right">
                     <basket-preview
                         template="#vue-basket-preview"
@@ -112,7 +89,7 @@
                                         {{ trans("Ceres::Template.accCreateAccount") }}
 
                                        <popper v-cloak class="pull-right m-r-1">
-                                            <button slot="trigger" class="btn btn-icon btn-secondary btn-sm">
+                                            <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
                                                 <i class="fa fa-info"></i>
                                             </button>
                                             <div slot="title">
@@ -135,7 +112,7 @@
                 <!-- ./REGISTRATION MODAL -->
 
                 <!-- BASKET MODAL -->
-                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ basketAddInformation | json_encode() }}"></add-item-to-basket-overlay>
+                <add-item-to-basket-overlay template="#vue-add-item-to-basket-overlay" :basket-add-information="{{ ceresConfig.basket.addItemToBasketConfirm | json_encode() }}"></add-item-to-basket-overlay>
                 <!-- ./BASKET MODAL -->
 
                 <!-- SHIPPINGCOSTS MODAL -->
@@ -148,7 +125,7 @@
                                     <div class="modal-title h3">{{ trans('Ceres::Template.itemShippingCosts') }}</div>
                                 </div>
                                 <div class="modal-body">
-                                    {% include category_template(shippingCat, lang, services.webstoreConfig.getWebstoreConfig().webstoreId) ignore missing %}
+                                    {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
                                 </div>
                             </div>
                         </div>
@@ -167,9 +144,8 @@
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
 
         {{ Translations.add( "Ceres", "Template" ) }}
-        {% if config("Ceres.log.performance.level") == 'development' %}
+        {% if ceresConfig.log.performanceLevel  == 'development' %}
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-vendor.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/src/app.config.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres-app.js"></script>
         {% else %}
             <script src="{{ plugin_path('Ceres') }}/js/dist/ceres.min.js"></script>

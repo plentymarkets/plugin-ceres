@@ -3,10 +3,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% set lang = services.sessionStorage.getLang() %}
-{% set favicon = url ~ '/tpl/favicon_' ~ services.webstoreConfig.getWebstoreConfig().webstoreId ~ '.ico' %}
+{% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
-{% set requestUrl = services.webstoreConfig.getWebstoreConfig().domainSsl ~ request.getRequestUri() %}
+{% set requestUrl = webstoreConfig.domainSsl ~ request.getRequestUri() %}
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
 
@@ -73,6 +73,7 @@
         },
         isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
         isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
-        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %}
+        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+        language: "{{ lang }}"
     };
 </script>

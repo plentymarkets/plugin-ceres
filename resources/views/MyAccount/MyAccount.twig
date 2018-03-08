@@ -14,7 +14,6 @@
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
-    {% set countryNameMap = services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) %}
     {% set isReturnActive = services.order.isReturnActive() %}
     {% set contactHasReturns = services.customer.hasReturns() %}
 
@@ -52,8 +51,7 @@
                 <p class="text-muted small font-italic">{{ trans("Ceres::Template.generalAll") }} {{ trans("Ceres::Template.accInvoiceAddresses") }}</p>
                 <div class="shipping-addresses-select">
                     <invoice-address-select :address-list="{{ services.customer.getAddresses(1) | json_encode() }}"
-                                            :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}"
-                                            :country-name-map="{{ countryNameMap | json_encode()}}"></invoice-address-select>
+                                            :selected-address-id="{{ services.checkout.getBillingAddressId() | json_encode }}"></invoice-address-select>
                 </div>
             </div>
             <div class="col-md-6">
@@ -63,8 +61,7 @@
                 <p class="text-muted small font-italic">{{ trans("Ceres::Template.generalAll") }} {{ trans("Ceres::Template.accShippingAddresses") }}</p>
                 <div class="shipping-addresses-select">
                     <shipping-address-select :address-list="{{ services.customer.getAddresses(2) | json_encode() }}"
-                                             :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
-                                             :country-name-map="{{ countryNameMap | json_encode()}}"></shipping-address-select>
+                                             :selected-address-id="{{ services.checkout.getDeliveryAddressId() | json_encode }}"></shipping-address-select>
                 </div>
             </div>
         </div>

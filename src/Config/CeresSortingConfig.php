@@ -7,14 +7,22 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresSortingConfig extends PluginConfig
 {
+    public $data;
+    public $defaultSorting;
+    public $priorityCategory1;
+    public $priorityCategory2;
+    public $priorityCategory3;
+
+    public $defaultSortingSearch;
+    public $prioritySearch1;
+    public $prioritySearch2;
+    public $prioritySearch3;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getData()
-    {
-        return $this->getMultiSelectValue(
+        $this->data                 = $this->getMultiSelectValue(
             "sort.data",
             [
                 "default.recommended_sorting",
@@ -40,47 +48,14 @@ class CeresSortingConfig extends PluginConfig
                 "sorting.price.max_desc"
             ]
         );
+        $this->defaultSorting       = $this->getTextValue( "sort.defaultSorting", "texts.name1_asc" );
+        $this->priorityCategory1    = $this->getTextValue( "sorting.priorityCategory1", "texts.name_asc" );
+        $this->priorityCategory2    = $this->getTextValue( "sorting.priorityCategory2", "notSelected" );
+        $this->priorityCategory3    = $this->getTextValue( "sorting.priorityCategory3", "notSelected" );
+        $this->defaultSortingSearch = $this->getTextValue( "sort.defaultSortingSearch", "item.score" );
+        $this->prioritySearch1      = $this->getTextValue( "sorting.prioritySearch1", "item.score" );
+        $this->prioritySearch2      = $this->getTextValue( "sorting.prioritySearch2", "notSelected" );
+        $this->prioritySearch3      = $this->getTextValue( "sorting.prioritySearch3", "notSelected" );
+
     }
-
-    public function getDefaultSorting()
-    {
-        return $this->getTextValue( "sort.defaultSorting", "texts.name1_asc" );
-    }
-
-    public function getPriorityCategory1()
-    {
-        return $this->getTextValue( "sorting.priorityCategory1", "texts.name_asc" );
-    }
-
-    public function getPriorityCategory2()
-    {
-        return $this->getTextValue( "sorting.priorityCategory2", "notSelected" );
-    }
-
-    public function getPriorityCategory3()
-    {
-        return $this->getTextValue( "sorting.priorityCategory3", "notSelected" );
-    }
-
-    public function getDefaultSortingSearch()
-    {
-        return $this->getTextValue( "sort.defaultSortingSearch", "item.score" );
-    }
-
-    public function getPrioritySearch1()
-    {
-        return $this->getTextValue( "sorting.prioritySearch1", "item.score" );
-    }
-
-    public function getPrioritySearch2()
-    {
-        return $this->getTextValue( "sorting.prioritySearch2", "notSelected" );
-    }
-
-    public function getPrioritySearch3()
-    {
-        return $this->getTextValue( "sorting.prioritySearch3", "notSelected" );
-    }
-
-
 }

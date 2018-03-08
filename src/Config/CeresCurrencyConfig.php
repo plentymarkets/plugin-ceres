@@ -7,29 +7,22 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresCurrencyConfig extends PluginConfig
 {
+    public $format;
+    public $enableSelection;
+    public $formatSelection;
+    public $availableCurrencies;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getFormat()
-    {
-        return $this->getTextValue( "currency.format", "name" );
-    }
+        $this->format = $this->getTextValue( "currency.format", "name" );
 
-    public function getEnableSelection()
-    {
-        return $this->getBooleanValue( "currency.enable_selection", true );
-    }
+        $this->enableSelection = $this->getBooleanValue( "currency.enable_selection", true );
 
-    public function getFormatSelection()
-    {
-        return $this->getTextValue( "currency.format_selection", "all" );
-    }
+        $this->formatSelection = $this->getTextValue( "currency.format_selection", "all" );
 
-    public function getAvailableCurrencies()
-    {
-        return $this->getMultiSelectValue(
+        $this->availableCurrencies = $this->getMultiSelectValue(
             "currency.available_currencies",
             [
                 "AED",

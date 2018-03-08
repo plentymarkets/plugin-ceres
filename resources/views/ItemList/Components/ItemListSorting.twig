@@ -1,13 +1,9 @@
 <script type="x/template" id="vue-item-list-sorting">
     <div class="list-sort">
         <select class="custom-select" v-model="selectedSorting" @change="updateSorting()">
-            <option :value="element" v-for="element in sortingList" :selected="selectedSorting.value == element.value">
-                ${ element.displayName }
+            <option :value="key" v-for="(value, key) in sortingList" :selected="selectedSorting == key">
+                ${ value }
             </option>
-
-            {% for sortingValueKey, sortingTranslationKey in services.item.AdditionalItemSorting %}
-                <option :value="{value: '{{ sortingValueKey }}'}" :selected="selectedSorting.value == '{{ sortingValueKey }}'">{{ trans(sortingTranslationKey) }}</option>
-            {% endfor %}
         </select>
     </div>
 </script>

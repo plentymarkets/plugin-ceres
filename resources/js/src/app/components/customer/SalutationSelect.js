@@ -87,10 +87,6 @@ Vue.component("salutation-select", {
         };
     },
 
-    computed: Vuex.mapState({
-        shopLanguage: state => state.localization.shopLanguage
-    }),
-
     /**
      * Get the shipping countries
      */
@@ -98,7 +94,7 @@ Vue.component("salutation-select", {
     {
         this.$options.template = this.template;
 
-        if (this.shopLanguage === "de")
+        if (App.language === "de")
         {
             if (AddressFieldService.isAddressFieldEnabled(this.addressData.countryId, this.addressType, "name1"))
             {

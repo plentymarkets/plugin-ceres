@@ -7,14 +7,14 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresLogConfig extends PluginConfig
 {
+    public $data;
+    public $performanceLevel;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getData()
-    {
-        return $this->getMultiSelectValue(
+        $this->data = $this->getMultiSelectValue(
             "log.data",
             [
                 "print_errors",
@@ -29,10 +29,7 @@ class CeresLogConfig extends PluginConfig
                 "print_success"
             ]
         );
-    }
 
-    public function getPerformanceLevel()
-    {
-        return $this->getTextValue( "log.performance.level", "live" );
+        $this->performanceLevel = $this->getTextValue( "log.performance.level", "live" );
     }
 }

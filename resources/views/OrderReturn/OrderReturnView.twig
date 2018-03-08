@@ -19,7 +19,7 @@
 
         <hr>
 
-		<order-return template="#vue-order-return" :init-order-data="{{ orderData }}"></order-return>
+		<order-return template="#vue-order-return" :init-order-data="{{ orderData | json_encode }}"></order-return>
 
 	</div>
 {% endblock %}

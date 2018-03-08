@@ -1,4 +1,8 @@
-const Popper = require("popper.js");
+import {isNullOrUndefined}from "../../helper/utils";
+import {findParent}from "../../helper/dom";
+
+const Popper              = require("popper.js");
+const ModalService        = require("services/ModalService");
 
 Vue.component("popper", {
 
@@ -11,7 +15,11 @@ Vue.component("popper", {
         },
         placement: {
             type: String,
-            default: "bottom"
+            default: "auto"
+        },
+        trigger: {
+            type: String,
+            default: "click"
         }
     },
 
@@ -24,14 +32,55 @@ Vue.component("popper", {
 	{
         this.$nextTick(() =>
         {
-            this.popper = new Popper(this.$refs.trigger, this.$refs.node, {
-                placement: this.placement,
-                modifiers: {
-                    arrow: {
-                        element: this.$refs.arrow
+            if (!isNullOrUndefined(this.$refs.node) && !isNullOrUndefined(this.$refs.handle))
+            {
+                const node = this.$refs.node;
+
+                node.parentElement.removeChild(node);
+                document.body.appendChild(node);
+
+                this.popper = new Popper(this.$refs.handle, node, {
+                    placement: this.placement,
+                    modifiers: {
+                        arrow: {
+                            element: this.$refs.arrow
+                        }
                     }
+                });
+
+                const handle = this.$refs.handle.firstElementChild || this.$refs.handle;
+
+                if (this.trigger === "focus")
+                {
+                    handle.addEventListener("focus", () =>
+                    {
+                        this.showPopper();
+                    });
+                    handle.addEventListener("blur", () =>
+                    {
+                        this.hidePopper();
+                    });
                 }
-            });
+                else
+                {
+                    handle.addEventListener(this.trigger, () =>
+                    {
+                        this.togglePopper();
+                    });
+                }
+            }
+
+            const parentModal = findParent(this.$el, ".modal");
+
+            if (!isNullOrUndefined(parentModal))
+            {
+                ModalService.findModal(parentModal)
+                    .on("hide.bs.modal", () =>
+                    {
+                        this.hidePopper();
+                    });
+            }
+
         });
     },
 
@@ -48,8 +97,27 @@ Vue.component("popper", {
         togglePopper()
 		{
             this.isVisible = !this.isVisible;
+            this.update();
+        },
 
-            this.popper.scheduleUpdate();
+        showPopper()
+        {
+            this.isVisible = true;
+            this.update();
+        },
+
+        hidePopper()
+        {
+            this.isVisible = false;
+            this.update();
+        },
+
+        update()
+        {
+            if (!isNullOrUndefined(this.popper))
+            {
+                this.popper.scheduleUpdate();
+            }
         }
     }
 });

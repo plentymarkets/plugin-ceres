@@ -2,7 +2,6 @@
 
 {{ component( "Ceres::Customer.Components.UserLoginHandler" ) }}
 {{ component( "Ceres::PageDesign.Components.ShippingCountrySelect" ) }}
-{{ component( "Ceres::PageDesign.Components.ShopLanguageSelect" ) }}
 {{ component( "Ceres::PageDesign.Components.MobileNavigation" ) }}
 {{ component( "Ceres::ItemList.Components.ItemSearch" ) }}
 {{ component( "Ceres::WishList.Components.WishListCount" ) }}
@@ -78,8 +77,7 @@
                     {% if config("Ceres.basket.preview_type") != "right" %}
                         <basket-preview
                             template="#vue-basket-preview-hover"
-                            :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}"
-                            :basket-items-data="{{ services.basket.getBasketItemsForTemplate('Ceres::Basket.Basket') | json_encode() }}">
+                            :basket-data="{{ services.basket.getBasketForTemplate() | json_encode() }}">
                         </basket-preview>
                     {% endif %}
                 </li>
@@ -96,7 +94,13 @@
     {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
 {% endif %}
 
-<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" current-category-id="{{ category.id }}" template="#vue-mobile-navigation"></mobile-navigation>
+{% if category.linklist == "Y" %}
+    {% set initialCategory = { id: category.id } %}
+{% else %}
+    {% set initialCategory = category %}
+{% endif %}
+
+<mobile-navigation :navigation-tree-data="{{ categories | json_encode }}" :initial-category="{{ initialCategory | json_encode }}" template="#vue-mobile-navigation"></mobile-navigation>
 
 <div class="container-max page-header">
     <div class="row">
@@ -116,7 +120,7 @@
                     <ul>
                         {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
                         <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
-                            <a href="?currency={{ currency.name }}">
+                            <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
                                 {% if currencyFormatSelect == 'all' %}
                                     {{ currency.name }} ({{ currency.symbol }})
                                 {% else %}
@@ -140,7 +144,19 @@
                             <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
                             <hr>
                         </div>
-                        <shop-language-select template="#vue-shop-language-select"></shop-language-select>
+
+                        {% set languageList = services.webstoreConfig.getActiveLanguageList() %}
+                        {% set languageUrls = services.url.getLanguageURLs() %}
+                        <ul>
+                            {% for language in languageList %}
+                                <li{% if lang == language %} class="active"{% endif %}>
+                                    <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
+                                        <i class="flag-icon flag-icon-{{ language }}"></i>
+                                        {{ trans("Ceres::Template." ~ language) }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
 
                     <div class="shipping-settings col-xs-12 col-sm-6">

@@ -1,6 +1,6 @@
 # Ceres – Der neue Webshop für plentymarkets 7
 
-**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **IO** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden. 
+**Ceres** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets 7. Im neuen Webshop für plentymarkets 7 sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in Ihrem plentymarkets System eingebunden. Das Plugin **Ceres** beinhaltet das Standard-Design des Webshops und kann nach Ihren Wünschen angepasst werden. Das Plugin **IO** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden.
 
 ## Ceres einrichten
 
@@ -11,6 +11,14 @@ Wie Sie Ceres einrichten und individualisieren, erfahren Sie auf [plentyKnowledg
 ![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/eTrusted-Partner_Certified_Software.png?raw=true)
 
 Sie möchten Ihren Webshop bei Trusted Shops zertifizieren? Ceres ist bereits durch Trusted Shops vorzertifiziert. Dadurch geht die vollständige Zertifizierung durch Trusted Shops schnellstmöglich vonstatten. Alle dafür nötigen Informationen finden Sie [hier](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
+
+## Webshop bei EHI zertifizieren
+
+![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/EHI-gepruefter-online-shop.png?raw=true)
+
+Sie möchten Ihren Webshop durch EHI zertifizieren lassen?
+Da Ceres bereits durch EHI vorzertifiziert ist, lässt sich die vollständige EHI-Zertifizierung schnell und einfach abwickeln.
+Alle hierfür nötigen Informationen finden Sie [hier](https://ehi-siegel.de/shopbetreiber/ehi-siegel/antrag-auf-shopzertifizierung/).
 
 ## Lizenz
 

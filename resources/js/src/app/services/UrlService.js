@@ -29,6 +29,17 @@ export function setUrlParams(urlParams)
     var titleElement = document.getElementsByTagName("title")[0];
 
     window.history.replaceState({}, titleElement ? titleElement.innerHTML : "", pathName + params);
+
+    $("a[href][data-update-url]").each((i, element) =>
+    {
+        const $element  = $(element);
+        const href      = /^([^?]*)(\?.*)?$/.exec($element.attr("href"));
+
+        if (href && href[1])
+        {
+            $element.attr("href", href[1] + params);
+        }
+    });
 }
 
 export function setUrlParam(key, value)

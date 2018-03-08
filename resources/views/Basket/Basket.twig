@@ -3,7 +3,7 @@
 
 {% block PartialHead %}
     <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.basket") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.basket") }} | {{ ceresConfig.header.companyName }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -29,10 +29,14 @@
                 </div>
             </div>
 
-            <div class="col-md-5" v-stick-in-parent>
+            <div class="col-md-5">
+                {# this container is required for the v-stick-in-parent directive below #}
+            </div>
+
+            <div class="col-md-5 float-right" v-stick-in-parent>
                 <div class="col-xs-12 p-y-2 bg-white">
                     <hr class="hidden-md-up">
-                    <basket-totals class="m-b-2" template="#vue-basket-totals" :config="{{ config("Ceres.basket.data")|split(', ')|json_encode() }}"></basket-totals>
+                    <basket-totals class="m-b-2" template="#vue-basket-totals" :config="{{ ceresConfig.basket.data | json_encode() }}"></basket-totals>
 
                     <hr>
                     <coupon template="#vue-coupon"></coupon>

@@ -12,6 +12,14 @@ Learn how to set up and customise Ceres on [plentyKnowledge](https://knowledge.p
 
 You want to certify your online store with Trusted Shops? Ceres has been pre-certified by Trusted Shops, so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
 
+## Certifying the online store with EHI 
+
+![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/EHI-gepruefter-online-shop.png?raw=true)
+
+You want to certify your online store with EHI?
+Since Ceres has been pre-certified by EHI, your certification will be handled as fast and easy as possible. You can find all necessary information
+[here](https://ehi-siegel.de/shopbetreiber/ehi-siegel/antrag-auf-shopzertifizierung/).
+
 ## License
 
 This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE. – find further information in the [LICENSE.md](https://github.com/plentymarkets/plugin-ceres/blob/stable/LICENSE.md).

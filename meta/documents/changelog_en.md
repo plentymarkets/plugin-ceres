@@ -1,5 +1,54 @@
 # Release Notes for Ceres
 
+## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- Plugin configurations have been outsourced to corresponding auxiliary classes.
+- A configuration option has been added through which suggestion can redirect directly to the item.
+- In order to improve performance, multiple calls of a function are cached.
+- The shopping cart has been completely redesigned. Bugs from the older version, such as overlapping text that damaged the layout of the content, have been fixed.
+
+### Changed
+
+- The items in the shopping cart are now refreshed asynchronously after the shop has been loaded. This leads to quicker loading times of the website.
+- The information texts for safe passwords in the registration have been updated.
+- The currency selection has been updated in order to prevent search engines from crawling the same page multiple times.
+
+
+### Fixed
+
+- Due to an error the layout for entering the address did not conform to the selected country when editing addresses. This has been fixed.
+- Due to an error changing the currency overwrote existent URL parameters. This has been fixed.
+- If the input fields of the checkout have been validated and a blank field has been marked in red, the red marking remained even after a successful input. This has been fixed.
+- The company field was not displayed properly if company was selected from the menu in the address information. This has been fixed.
+
+## v2.3.2 (2018-02-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.1...2.3.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- User guide chapter on EHI certification.
+
+### Fixed
+
+- The subject of the "Forgot password" email is now loaded from the Ceres language files.
+- Due to an error, wrong categories were opened via the mobile navigation bar. This has been fixed.
+- If a category wasn't displayed in the navigation bar, elements such as pagination, items per page and sorting didn't work properly. This has been fixed.
+- Order property values are now reset if the user selects a different variation of the item. If this variation had been selected previously, the previous value of the order property is loaded.
+- Due to an error, clicking on buttons of the image carousel in the category view linked directly to the item. This has been fixed.
+
+## v2.3.1 (2018-02-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.0...2.3.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Coupon discounts are now displayed on the order confirmation page and in the order details in the MyAccount section.
+- After the creation of a return, the return confirmation page will now be displayed again. (The route in IO config has to be active.)
+- The page for the creation of returns now only displays items that can be returned. (No shipping costs, coupon positions, etc.)
+- Due to an error country names were always displayed in English. This has been fixed.
+- Due to an error changing languages linked to wrong URLs. This has been fixed.
+- Due to an error no icons were available for the languages Danish and Norwegian. This has been fixed.
+- The Last seen list no longer displays random items if no item has been previously viewed in the store.
+
 ## v2.3.0 (2018-02-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.2.2...2.3.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added

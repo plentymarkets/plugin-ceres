@@ -6,7 +6,6 @@ Vue.component("country-select", {
 
     props: [
         "countryList",
-        "countryNameMap",
         "selectedCountryId",
         "selectedStateId",
         "template",
@@ -32,7 +31,6 @@ Vue.component("country-select", {
     {
         this.$options.template = this.template;
 
-        CountryService.translateCountryNames(this.countryNameMap, this.countryList);
         CountryService.sortCountries(this.countryList);
         this.updateSelectedCountry();
     },
@@ -84,10 +82,7 @@ Vue.component("country-select", {
                 this.stateList = CountryService.parseShippingStates(this.countryList, countryId);
             }
 
-            if (!this.selectedCountryId)
-            {
-                this.countryChanged(countryId);
-            }
+            this.countryChanged(countryId);
         }
     },
 

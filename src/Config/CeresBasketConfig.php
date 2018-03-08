@@ -7,14 +7,18 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresBasketConfig extends PluginConfig
 {
+    public $itemData;
+    public $data;
+    public $previewData;
+    public $variations;
+    public $addItemToBasketConfirm;
+    public $previewType;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getItemData()
-    {
-        return $this->getMultiSelectValue(
+        $this->itemData = $this->getMultiSelectValue(
             "basket.item_data",
             [
                 "basket.item.item_id",
@@ -30,11 +34,8 @@ class CeresBasketConfig extends PluginConfig
                 "basket.item.customNumber"
             ]
         );
-    }
 
-    public function getData()
-    {
-        return $this->getMultiSelectValue(
+        $this->data = $this->getMultiSelectValue(
             "basket.data",
             [
                 "basket.value_of_items_gross",
@@ -46,11 +47,8 @@ class CeresBasketConfig extends PluginConfig
                 "basket.order_total_net"
             ]
         );
-    }
 
-    public function getPreviewData()
-    {
-        return $this->getMultiSelectValue(
+        $this->previewData = $this->getMultiSelectValue(
             "basket.data",
             [
                 "basket.value_of_items_gross",
@@ -62,15 +60,11 @@ class CeresBasketConfig extends PluginConfig
                 "basket.order_total_net"
             ]
         );
-    }
 
-    public function getVariations()
-    {
-        return $this->getBooleanValue( "basket.variations", false );
-    }
+        $this->variations = $this->getBooleanValue( "basket.variations", false );
 
-    public function getAddItemToBasketConfirm()
-    {
-        return $this->getTextValue( "basket.add_item_to_basket_confirm", "overlay" );
+        $this->addItemToBasketConfirm = $this->getTextValue( "basket.add_item_to_basket_confirm", "overlay" );
+
+        $this->previewType = $this->getTextValue( "basket.preview_type", "right" );
     }
 }

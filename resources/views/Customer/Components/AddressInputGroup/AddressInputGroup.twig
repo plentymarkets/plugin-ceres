@@ -29,7 +29,6 @@
                 @country-changed="onSelectedCountryChanged($event)"
                 @state-changed="emitInputEvent('stateId', $event)"
                 :country-list="{{ services.country.getActiveCountriesList() | json_encode() }}"
-                :country-name-map="{{ services.country.getActiveCountryNameMap(services.sessionStorage.getLang()) | json_encode() }}"
                 :address-type="addressType">
             </country-select>
         </div>
