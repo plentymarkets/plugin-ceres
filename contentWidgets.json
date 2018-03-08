@@ -29,7 +29,7 @@
 				"options": {
 					"containerEntries": {
 						"categoryId": {
-							"type": "inputNumber",
+							"type": "categoryPicker",
 							"required": false,
 							"label": "Widget.imageCarousel_categoryId_label",
 							"options": {
@@ -65,7 +65,7 @@
 				"options": {
 					"containerEntries": {
 						"categoryId": {
-							"type": "inputNumber",
+							"type": "categoryPicker",
 							"required": false,
 							"label": "Widget.imageCarousel_categoryId_label",
 							"options": {
@@ -101,7 +101,7 @@
 				"options": {
 					"containerEntries": {
 						"categoryId": {
-							"type": "inputNumber",
+							"type": "categoryPicker",
 							"required": false,
 							"label": "Widget.imageCarousel_categoryId_label",
 							"options": {
