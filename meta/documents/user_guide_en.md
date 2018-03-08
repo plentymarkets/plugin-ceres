@@ -6,13 +6,18 @@
 
 Learn how to set up and customise Ceres on [plentyKnowledge](https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres).
 
+<div class="alert alert-warning" role="alert">
+When setting up **Ceres**, it is essential that the assigned **plugin position** of Ceres is lower than the plugin position of **IO**. Plugin positions are assigned via the **Set position** action in the plugin overview.
+</div>
+
+
 ## Certifying the online store with Trusted Shops
 
 ![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/eTrusted-Partner_Certified_Software.png?raw=true)
 
 You want to certify your online store with Trusted Shops? Ceres has been pre-certified by Trusted Shops, so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS).
 
-## Certifying the online store with EHI 
+## Certifying the online store with EHI
 
 ![](https://github.com/plentymarkets/plugin-ceres/tree/stable/meta/images/EHI-gepruefter-online-shop.png?raw=true)
 
