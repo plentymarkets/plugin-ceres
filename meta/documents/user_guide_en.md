@@ -7,7 +7,7 @@
 Learn how to set up and customise Ceres on [plentyKnowledge](https://knowledge.plentymarkets.com/en/omni-channel/online-store/setting-up-ceres).
 
 <div class="alert alert-warning" role="alert">
-When setting up **Ceres**, it is essential that the assigned **plugin position** of Ceres is lower than the plugin position of **IO**. Plugin positions are assigned via the **Set position** action in the plugin overview.
+When setting up <b>Ceres</b>, it is essential that the assigned <b>plugin position</b> of Ceres is lower than the plugin position of <b>IO</b>. Plugin positions are assigned via the <b>Set position</b> action in the plugin overview.
 </div>
 
 
