@@ -47,7 +47,7 @@
 							}
 						},
 						"customImagePath": {
-							"type": "inputText",
+							"type": "inputFile",
 							"required": false,
 							"label": "Widget.imageCarousel_customImagePath_label",
 							"options": {
@@ -83,7 +83,7 @@
 							}
 						},
 						"customImagePath": {
-							"type": "inputText",
+							"type": "inputFile",
 							"required": false,
 							"label": "Widget.imageCarousel_customImagePath_label",
 							"options": {
@@ -119,7 +119,7 @@
 							}
 						},
 						"customImagePath": {
-							"type": "inputText",
+							"type": "inputFile",
 							"required": false,
 							"label": "Widget.imageCarousel_customImagePath_label",
 							"options": {
