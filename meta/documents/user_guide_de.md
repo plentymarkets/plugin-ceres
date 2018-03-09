@@ -7,7 +7,7 @@
 Wie Sie Ceres einrichten und individualisieren, erfahren Sie auf [plentyKnowledge](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten).
 
 <div class="alert alert-warning" role="alert">
-Bei der Einrichtung von Ceres ist es notwendig, dass die zugewiesene Positionsnummer von **Ceres** kleiner ist als die Positionsnummer von **IO**. Positionsnummern werden in der Plugin-Übersicht mit der Aktion **Position festlegen** zugewiesen.
+Bei der Einrichtung von Ceres ist es notwendig, dass die zugewiesene Positionsnummer von <b>Ceres</b> kleiner ist als die Positionsnummer von <b>IO</b>. Positionsnummern werden in der Plugin-Übersicht mit der Aktion <b>Position festlegen</b> zugewiesen.
 </div>
 
 ## Webshop bei Trusted Shops zertifizieren
