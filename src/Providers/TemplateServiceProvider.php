@@ -10,7 +10,9 @@ use Ceres\Contexts\CategoryItemContext;
 use Ceres\Contexts\ContextInterface;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
+use Ceres\Contexts\ItemWishListContext;
 use Ceres\Contexts\OrderConfirmationContext;
+use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\SingleItemContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
@@ -50,8 +52,8 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.password-reset'            => ['Customer.ResetPassword',               GlobalContext::class],              // provide template to use for password-reset
         'tpl.contact'                   => ['Customer.Contact',                     GlobalContext::class],                    // provide template to use for contact
         'tpl.search'                    => ['ItemList.ItemListView',                ItemSearchContext::class],               // provide template to use for item search
-        'tpl.wish-list'                 => ['WishList.WishListView',                GlobalContext::class],               // provide template to use for wishlist
-        'tpl.order.return'              => ['OrderReturn.OrderReturnView',          GlobalContext::class],         // provide template to use for order return
+        'tpl.wish-list'                 => ['WishList.WishListView',                ItemWishListContext::class],               // provide template to use for wishlist
+        'tpl.order.return'              => ['OrderReturn.OrderReturnView',          OrderReturnContext::class],         // provide template to use for order return
         'tpl.order.return.confirmation' => ['OrderReturn.OrderReturnConfirmation',  GlobalContext::class], // provide template to use for order return confirmation
         'tpl.cancellation-rights'       => ['StaticPages.CancellationRights',       GlobalContext::class],      // provide template to use for cancellation rights
         'tpl.cancellation-form'         => ['StaticPages.CancellationForm',         GlobalContext::class],        // provide template to use for cancellation form
