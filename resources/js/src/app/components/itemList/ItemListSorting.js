@@ -26,11 +26,17 @@ Vue.component("item-list-sorting", {
 
     methods:
     {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
         updateSorting()
         {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
 
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
         setSelectedValue()
         {
             const urlParams = UrlService.getUrlParams(document.location.search);
@@ -38,13 +44,13 @@ Vue.component("item-list-sorting", {
             if (urlParams.sorting)
             {
                 this.selectedSorting = urlParams.sorting;
-                this.updateSorting();
             }
             else
             {
                 this.selectedSorting = this.defaultSorting;
-                this.$store.commit("setItemListSorting", this.selectedSorting);
             }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
         }
     }
 });
