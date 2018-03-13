@@ -26,7 +26,8 @@ class SearchOptions
         "variation.updatedAt_asc"                   => "variationLastUpdateTimestamp_asc",
         "variation.updatedAt_desc"                  => "variationLastUpdateTimestamp_desc",
         "item.manufacturer.externalName_asc"        => "itemProducerName_asc",
-        "item.manufacturer.externalName_desc"       => "itemProducerName_desc"
+        "item.manufacturer.externalName_desc"       => "itemProducerName_desc",
+        "item.score"                                => "itemRelevance"
     ];
 
     public $itemsPerPage        = [];
