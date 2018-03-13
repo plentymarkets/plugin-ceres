@@ -10,15 +10,17 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="input-unit" data-validate="mail">
-                            <input type="email" name="email" id="txt_email" v-model="username">
-                            <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            {% set uid_mail = uid() %}
+                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            <input type="password" name="password" id="txt_password" v-model="password">
-                            <label for="txt_password">{{ trans("Ceres::Template.accPassword") }}*</label>
+                            {% set uid_pwd = uid() %}
+                            <input type="password" name="password" id="{{ uid_pwd }}" v-model="password">
+                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.accPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
                     </div>
@@ -47,8 +49,9 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="mail">
-                            <input type="email" name="email" id="txt_email" v-model="username">
-                            <label for="txt_email">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            {% set uid_mail = uid() %}
+                            <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
                     </div>
