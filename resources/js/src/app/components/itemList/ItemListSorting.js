@@ -43,6 +43,7 @@ Vue.component("item-list-sorting", {
             else
             {
                 this.selectedSorting = this.defaultSorting;
+                this.$store.commit("setItemListSorting", this.selectedSorting);
             }
         }
     }
