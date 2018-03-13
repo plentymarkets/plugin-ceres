@@ -100,7 +100,7 @@ Vue.component("add-to-wish-list", {
         changeTooltipText()
         {
             const tooltipText = TranslationService.translate(
-                "Ceres::Template." + this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd"
+                "Ceres::Template." + (this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd")
             );
 
             $(".add-to-wish-list")
