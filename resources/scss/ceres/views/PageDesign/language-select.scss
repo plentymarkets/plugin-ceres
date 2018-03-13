@@ -10,7 +10,16 @@
     right: 0;
     width: 100%;
     left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
+	
+	&.no-margin {
+		margin: 0;
+	}
+
+	@include media-breakpoint-down(sm) {
+		overflow: scroll;
+		max-height: calc(100% - 1.2rem);
+	}
 
 	.country-settings-inner,
 	.currency-select-inner {
@@ -19,15 +28,36 @@
     	flex-flow: row nowrap;
 
     	max-width: 1200px;
-    	margin: 0 auto;
+		margin: 0 auto;
+		
+		&.languages {
+			@include media-breakpoint-up(lg) {
+				justify-content: flex-end;
+			}
+		}
 	}
 
 	.language-settings{
+		width: 100%;
 
+		@include media-breakpoint-up(lg) {
+			max-width: 600px;
+		}
 	}
 
-	.shipping-settings{
+	.shipping-settings, 
+	.language-settings{
+		width: 100%;
 
+		@include media-breakpoint-up(lg) {
+			max-width: 600px;
+		}
+
+		& ul {
+			@include media-breakpoint-down(md) {
+				column-count: 2;
+			}
+		}
 	}
 
 	.list-title{
