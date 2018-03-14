@@ -24,6 +24,16 @@
     </head>
 
     <body>
+        <script>
+            if('ontouchstart' in document.documentElement)
+            {
+                document.body.classList.add("touch");
+            }
+            else
+            {
+                document.body.classList.add("no-touch");
+            }
+        </script>
         <div id="vue-app">
             <div class="wrapper wrapper-top">
                 <!-- messages -->
