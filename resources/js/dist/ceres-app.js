@@ -17578,9 +17578,17 @@ Vue.component("item-list-sorting", {
 
 
     methods: {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
         updateSorting: function updateSorting() {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
+
+
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
         setSelectedValue: function setSelectedValue() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
