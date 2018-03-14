@@ -6,7 +6,7 @@ const state =
         facets: [],
         selectedFacets: [],
         page: null,
-        sorting: null,
+        sorting: "texts.name1_asc",
         isLoading: false,
         itemsPerPage: null,
         searchString: null,

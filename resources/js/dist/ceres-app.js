@@ -17586,10 +17586,11 @@ Vue.component("item-list-sorting", {
 
             if (urlParams.sorting) {
                 this.selectedSorting = urlParams.sorting;
-                this.updateSorting();
             } else {
                 this.selectedSorting = this.defaultSorting;
             }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
         }
     }
 });
@@ -22220,7 +22221,7 @@ var state = {
     facets: [],
     selectedFacets: [],
     page: null,
-    sorting: null,
+    sorting: "texts.name1_asc",
     isLoading: false,
     itemsPerPage: null,
     searchString: null,
