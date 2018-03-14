@@ -30,7 +30,7 @@
 
                 {% if googleApiKey and contactConfigSet %}
 					<div class="col-xs-12 col-md-6 p-b-3 p-t-2{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 
@@ -102,7 +102,7 @@
 
                 {% if googleApiKey and not contactConfigSet %}
 					<div class="col-xs-12 m-t-3{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 
