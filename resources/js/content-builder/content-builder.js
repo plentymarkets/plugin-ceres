@@ -64,7 +64,7 @@ function handleBuilderEventResponse(response)
 
             case 'shopbuilder_widget_order':
 
-                getWidgetOrder();
+                getWidgetOrder(eventData.dropzone);
                 break;
 
             case 'shopbuilder_reset':
@@ -89,11 +89,11 @@ function handleBuilderEventResponse(response)
     }
 }
 
-function getWidgetOrder()
+function getWidgetOrder(container)
 {
     var data = {};
 
-    jQuery('[data-builder-identifier]').each(function(i)
+    jQuery('[data-builder-container="' + container + '"]').find('[data-builder-identifier]').each(function()
     {
         var key = jQuery(this).attr('data-gs-y');
         data[key] = jQuery(this).attr('data-builder-identifier');
@@ -224,8 +224,10 @@ function addDeleteButton(element)
     // add delete event to button
     jQuery(element).find('.delete-icon').click(function ()
     {
+        var container = jQuery(this).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
         var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-        deleteContentWidget(widgetId);
+
+        deleteContentWidget(container, widgetId);
     });
 }
 
@@ -284,6 +286,7 @@ function addBackendEventListener()
  */
 function addContentWidget(widgetData, position)
 {
+    var container = widgetData.dropzone;
     var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
     var uniqueId = widgetData.uniqueId;
@@ -308,18 +311,16 @@ function addContentWidget(widgetData, position)
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
         // TODO: @vwiebe fix dropzone scope
-        jQuery('.grid-stack-container-1').data('gridstack').addWidget(gridStackItem, posX, posY);
+        jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
     });
 }
-
-
 
 /**
  * delete content widget by id
  * @param widgetId
  * @param keepProperties
  */
-function deleteContentWidget(widgetId, keepProperties)
+function deleteContentWidget(container, widgetId, keepProperties)
 {
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
@@ -343,12 +344,15 @@ function replaceContentWidget(widgetData)
 {
     var id = widgetData.uniqueId;
     var element = jQuery('body').find('[data-builder-identifier="' + id + '"]');
+
     var position = {
         x: jQuery(element).attr('data-gs-x'),
         y: jQuery(element).attr('data-gs-y')
     };
 
-    deleteContentWidget(id, true);
+    var container = jQuery(element).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
+
+    deleteContentWidget(container, id, true);
     addContentWidget(widgetData, position);
 }
 

@@ -72,7 +72,7 @@
 
     <div class="home container-max">
         <div class="row">
-            <div class="col" data-builder-container>
+            <div class="col" {% if request.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-startpage" {% endif %}>
 
                 {% if request.get('isContentBuilder') != 1 %}
 
