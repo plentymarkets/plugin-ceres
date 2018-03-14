@@ -81,6 +81,14 @@
 	@include media-breakpoint-up(lg){
 
 	}
+
+	.item-word-break {
+		word-wrap: break-word;
+
+		@include media-breakpoint-down(xs){
+			word-break: break-all;
+		}
+	}
 }
 
 .payment-link-style {
