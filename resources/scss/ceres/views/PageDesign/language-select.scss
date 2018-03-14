@@ -37,14 +37,6 @@
 		}
 	}
 
-	.language-settings{
-		width: 100%;
-
-		@include media-breakpoint-up(lg) {
-			max-width: 600px;
-		}
-	}
-
 	.shipping-settings, 
 	.language-settings{
 		width: 100%;
