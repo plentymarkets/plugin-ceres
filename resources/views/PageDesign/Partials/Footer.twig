@@ -31,7 +31,6 @@
             </div>
         {% endif %}
 
-
         <div class="container-max footer-content">
             <div class="row">
                 <div class="col-xs-12">
@@ -130,38 +129,13 @@
                         {% endautoescape %}
                     </div>
                     <a rel="nofollow" href="https://www.plentymarkets.eu">
-                        <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg">
+                        <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow">
                     </a>
                     <br>
                     <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
                 </div>
             </div>
         </div>            
-
-        {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
-        <div class="copyright text-xs-center m-y-1">
-            <div class="static-link-list">
-                {% autoescape false %}
-                    <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
-                    {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
-                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
-                    {% else %}
-                        <a href="/cancellation-form">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
-                    {% endif %}
-                    <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
-                    <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
-                    <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
-                    {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
-                        <a href="/contact">{{ trans("Ceres::Template.generalContact") }}</a>
-                    {% endif %}
-                {% endautoescape %}
-            </div>
-            <a rel="nofollow" href="https://www.plentymarkets.eu">
-                <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow">
-            </a>
-            <br>
-            <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
-        </div>
 
     </div>
 </div>
