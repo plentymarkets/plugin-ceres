@@ -1,0 +1,40 @@
+[
+	{
+		"caption": "Page.StartPageCaption",
+		"imageUrl": "https://i.imgur.com/akAEDAk.png",
+		"dropzones": [
+			{
+				"identifier": "shop-builder-header",
+				"dataProvider": "Ceres.0.header"
+			},
+			{
+				"identifier": "shop-builder-startpage",
+				"dataProvider": "Ceres.0.startpage"
+			},
+			{
+				"identifier": "shop-builder-footer",
+				"dataProvider": "Ceres.0.footer"
+			}
+		]
+	},
+	{
+		"caption": "Page.CategoryCaption",
+		"imageUrl": "",
+		"dropzones": []
+	},
+	{
+		"caption": "Page.ItemCaption",
+		"imageUrl": "",
+		"dropzones": []
+	},
+	{
+		"caption": "Page.Impressum",
+		"imageUrl": "",
+		"dropzones": []
+	},
+	{
+		"caption": "Page.Contact",
+		"imageUrl": "",
+		"dropzones": []
+	}
+]
