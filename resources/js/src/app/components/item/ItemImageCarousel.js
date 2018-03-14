@@ -135,12 +135,23 @@ Vue.component("item-image-carousel", {
                         return "";
                     }
                     // owl prepends 2 clones to allow endless scrolling
-                    current -= 2;
-                    while (current > imageCount)
-                    {
-                        current -= imageCount;
-                    }
+                    current = (current % imageCount) + 1;
                     return TranslationService.translate("Ceres::Template.itemImagePreviewCaption", {current: current, total: imageCount});
+                };
+
+                const originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = (imageNumber) =>
+                {
+                    if ( window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1 )
+                    {
+                        imageNumber--;
+                    }
+                    else if ( window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0 )
+                    {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
                 };
             }
 
