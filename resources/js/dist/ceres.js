@@ -22374,6 +22374,10 @@ var actions = {
                 commit("setBasketItems", basketItems);
                 commit("setIsBasketLoading", false);
                 resolve(basketItems);
+
+                if (window.location.pathname === "/checkout" && !basketItems.length) {
+                    window.location.pathname = "/basket";
+                }
             }).fail(function (error) {
                 commit("setIsBasketLoading", false);
                 reject(error);
