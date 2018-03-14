@@ -2,15 +2,39 @@
 	{
 		"identifier": "Ceres::HeaderWidget",
 		"label": "Widget.header_label",
-		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\HeaderWidget",
+		"previewImageURL": "",
+		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Header",
 		"settings": {
-			"text": {
+			"logo": {
 				"type": "inputText",
 				"required": true,
 				"label": "Widget.header_text_label",
 				"options": {
 					"tooltip": "Widget.header_text_tooltip",
+					"defaultValue": ""
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::FooterWidget",
+		"label": "Widget.header_label",
+		"previewImageURL": "",
+		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Footer",
+		"settings": {}
+	},
+	{
+		"identifier": "Ceres::TextHeaderWidget",
+		"label": "Widget.header_label",
+		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
+		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeaderWidget",
+		"settings": {
+			"text": {
+				"type": "inputFile",
+				"required": true,
+				"label": "Widget.header_logo_label",
+				"options": {
+					"tooltip": "Widget.header_logo_label_tooltip",
 					"defaultValue": ""
 				}
 			}
