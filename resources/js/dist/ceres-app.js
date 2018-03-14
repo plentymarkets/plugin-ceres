@@ -17578,18 +17578,27 @@ Vue.component("item-list-sorting", {
 
 
     methods: {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
         updateSorting: function updateSorting() {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
+
+
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
         setSelectedValue: function setSelectedValue() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             if (urlParams.sorting) {
                 this.selectedSorting = urlParams.sorting;
-                this.updateSorting();
             } else {
                 this.selectedSorting = this.defaultSorting;
             }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
         }
     }
 });
@@ -22220,7 +22229,7 @@ var state = {
     facets: [],
     selectedFacets: [],
     page: null,
-    sorting: null,
+    sorting: "texts.name1_asc",
     isLoading: false,
     itemsPerPage: null,
     searchString: null,
