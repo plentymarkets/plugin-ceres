@@ -7,16 +7,43 @@ Vue.component("quantity-input", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "value",
-        "timeout",
-        "min",
-        "max",
-        "interval",
-        "template",
-        "waiting",
-        "variationId"
-    ],
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+        },
+        variationId: {
+            type: Number,
+            required: false
+        }
+    },
 
     data()
     {
@@ -48,8 +75,6 @@ Vue.component("quantity-input", {
         {
             this.fetchQuantityFromBasket();
         }
-
-        // this.setValue(this.value);
     },
 
     computed: {
