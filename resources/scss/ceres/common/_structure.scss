@@ -2,6 +2,12 @@ body {
 
 	background-color: $gray-lightest;
 
+	@include media-breakpoint-down(sm) {
+		&.position-fixed {
+			position: fixed;
+		}
+	}
+
 	> #vue-app,
 	> #vue-error {
 
