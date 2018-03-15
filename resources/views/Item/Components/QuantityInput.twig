@@ -23,7 +23,7 @@
             <div class="qty-btn"
                  @click="decreaseValue()"
                  :class="{'disabled': isMinimum || waiting}"
-                 v-tooltip="isMinimum && compMin !== compInterval"
+                 v-tooltip="isMinimum"
                  data-toggle="tooltip"
                  data-placement="bottom"
                  :title="minimumHint">
