@@ -3,18 +3,19 @@ import UrlService from "services/UrlService";
 export function updateItemListUrlParams(searchParams)
 {
     const urlParams = {};
+    const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage;
 
     urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
-    urlParams.items = (searchParams.items !== parseInt(App.config.defaultItemsPerPage)) ? searchParams.items : null;
+    urlParams.items = (searchParams.items !== defaultItemsPerPage) ? searchParams.items : null;
     urlParams.page = (searchParams.page > 1) ? searchParams.page : null;
     urlParams.facets = (searchParams.facets.length > 0) ? searchParams.facets : null;
     if (App.isSearch)
     {
-        urlParams.sorting = (searchParams.sorting !== App.config.defaultSortingSearch) ? searchParams.sorting : null;
+        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSortingSearch) ? searchParams.sorting : null;
     }
     else
     {
-        urlParams.sorting = (searchParams.sorting !== App.config.defaultSorting) ? searchParams.sorting : null;
+        urlParams.sorting = (searchParams.sorting !== App.config.sorting.defaultSorting) ? searchParams.sorting : null;
     }
 
     for (const urlParamKey in urlParams)

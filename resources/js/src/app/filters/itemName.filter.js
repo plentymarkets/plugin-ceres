@@ -1,4 +1,4 @@
-Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.itemName, itemDisplayName = App.config.itemDisplayName) =>
+Vue.filter("itemName", ({texts:{name1, name2, name3}, variation:{name}}, selectedName = App.config.item.itemName, itemDisplayName = App.config.itemDisplayName) =>
 {
     if (itemDisplayName === "variationName" && name && name.length)
     {
