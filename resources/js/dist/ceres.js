@@ -17140,6 +17140,14 @@ Vue.component("graduated-prices", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _utils = require("../../helper/utils");
+
+var _TranslationService = require("services/TranslationService");
+
+var _TranslationService2 = _interopRequireDefault(_TranslationService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 Vue.component("item-image-carousel", {
 
     delimiters: ["${", "}"],
@@ -17240,6 +17248,31 @@ Vue.component("item-image-carousel", {
                 }
             });
 
+            if (!(0, _utils.isNullOrUndefined)(window.lightbox)) {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = function (current, total) {
+                    if (imageCount <= 1) {
+                        return "";
+                    }
+                    // owl prepends 2 clones to allow endless scrolling
+                    current = current % imageCount + 1;
+                    return _TranslationService2.default.translate("Ceres::Template.itemImagePreviewCaption", { current: current, total: imageCount });
+                };
+
+                var originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = function (imageNumber) {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1) {
+                        imageNumber--;
+                    } else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0) {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
+            }
+
             $(this.$refs.single).on("changed.owl.carousel", function (event) {
                 _this3.currentItem = event.page.index;
             });
@@ -17286,7 +17319,7 @@ Vue.component("item-image-carousel", {
     }
 });
 
-},{}],41:[function(require,module,exports){
+},{"../../helper/utils":104,"services/TranslationService":113}],41:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -17946,18 +17979,27 @@ Vue.component("item-list-sorting", {
 
 
     methods: {
+        /**
+         * Set the selected sorting in the vuex storage and trigger the item search.
+         */
         updateSorting: function updateSorting() {
             this.$store.dispatch("selectItemListSorting", this.selectedSorting);
         },
+
+
+        /**
+         * Determine the initial value and set it in the vuex storage.
+         */
         setSelectedValue: function setSelectedValue() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
 
             if (urlParams.sorting) {
                 this.selectedSorting = urlParams.sorting;
-                this.updateSorting();
             } else {
                 this.selectedSorting = this.defaultSorting;
             }
+
+            this.$store.commit("setItemListSorting", this.selectedSorting);
         }
     }
 });
@@ -20453,11 +20495,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.replaceAll = replaceAll;
 exports.capitalize = capitalize;
 function replaceAll(input, search, replacement) {
-    return input.split(search).join(replacement);
+    return (input + "").split(search).join(replacement);
 }
 
 function capitalize(input) {
-    return input.charAt(0).toUpperCase() + input.substr(1);
+    return (input + "").charAt(0).toUpperCase() + (input + "").substr(1);
 }
 
 },{}],104:[function(require,module,exports){
@@ -21450,7 +21492,7 @@ var TranslationService = function ($) {
         }).forEach(function (key) {
             input = (0, _strings.replaceAll)(input, ":" + key, values[key]);
             input = (0, _strings.replaceAll)(input, ":" + (0, _strings.capitalize)(key), (0, _strings.capitalize)(values[key]));
-            input = (0, _strings.replaceAll)(input, ":" + key.toUpperCase(), values[key].toUpperCase());
+            input = (0, _strings.replaceAll)(input, ":" + key.toUpperCase(), (values[key] + "").toUpperCase());
         });
 
         return input;
@@ -22365,6 +22407,10 @@ var actions = {
                 commit("setBasketItems", basketItems);
                 commit("setIsBasketLoading", false);
                 resolve(basketItems);
+
+                if (window.location.pathname === "/checkout" && !basketItems.length) {
+                    window.location.pathname = "/basket";
+                }
             }).fail(function (error) {
                 commit("setIsBasketLoading", false);
                 reject(error);
@@ -22588,7 +22634,7 @@ var state = {
     facets: [],
     selectedFacets: [],
     page: null,
-    sorting: null,
+    sorting: "texts.name1_asc",
     isLoading: false,
     itemsPerPage: null,
     searchString: null,
