@@ -157,14 +157,14 @@
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-3">{{ property.name }}</strong>
-                                            <span v-cloak class="col-xs-6 col-sm-9" v-if="'{{ property.value }}'.match(/(\w*\/)?\w*\/\w*\.\w*/)">
+                                            <strong class="col-xs-6 col-sm-3 item-word-break">{{ property.name }}</strong>
+                                            <span v-cloak class="col-xs-6 col-sm-9 item-word-break" v-if="'{{ property.value }}'.match(/(\w*\/)?\w*\/\w*\.\w*/)">
                                                 <a :href="'{{ property.value }}' | fileUploadPath" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                     ${ "{{ property.value }}" | fileName }
                                                 </a>
                                             </span>
-                                            <span class="col-xs-6 col-sm-9" v-else>{{ property.value }}</span>
+                                            <span class="col-xs-6 col-sm-9 item-word-break" v-else>{{ property.value }}</span>
                                         </div>
                                     {% endfor %}
                                 {% endif %}

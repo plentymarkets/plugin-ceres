@@ -6,7 +6,7 @@ export function replaceAll(input, search, replacement)
     {
         return input;
     }
-    return ("" + input).split(search).join(replacement);
+    return (input + "").split(search).join(replacement);
 }
 
 export function capitalize(input)
