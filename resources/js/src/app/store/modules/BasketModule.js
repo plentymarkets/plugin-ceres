@@ -187,6 +187,11 @@ const actions =
                         commit("setBasketItems", basketItems);
                         commit("setIsBasketLoading", false);
                         resolve(basketItems);
+
+                        if (window.location.pathname === "/checkout" && !basketItems.length)
+                        {
+                            window.location.pathname = "/basket";
+                        }
                     })
                     .fail(error =>
                     {

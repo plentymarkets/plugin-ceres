@@ -30,7 +30,7 @@
 
                 {% if googleApiKey and contactConfigSet %}
 					<div class="col-xs-12 col-md-6 p-b-3 p-t-2{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 
@@ -46,8 +46,9 @@
 						</div>
 						<div class="col-xs-12 col-md-6 m-b-1">
 							<div class="input-unit input-mail-field" data-validate="regex" data-model="userMail">
-								<input type="email" name="email" v-model="userMail" id="txt_email" data-validate-ref="{{ mailRegex }}">
-								<label for="txt_email">{{ trans("Ceres::Template.contactMail") }}*</label>
+								{% set uid_mail = uid() %}
+								<input type="email" name="email" v-model="userMail" id="{{ uid_mail }}" data-validate-ref="{{ mailRegex }}">
+								<label for="{{ uid_mail }}">{{ trans("Ceres::Template.contactMail") }}*</label>
 							</div>
 							<div class="error-feedback">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</div>
 						</div>
@@ -101,7 +102,7 @@
 
                 {% if googleApiKey and not contactConfigSet %}
 					<div class="col-xs-12 m-t-3{% if showMapInMobile == "false" %} hidden-sm-down{% endif %}">
-						<contact-map template="#vue-contact-map" :zip="{{ zip }}" street="{{ street }}" :map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
+						<contact-map template="#vue-contact-map" zip="{{ zip }}" street="{{ street }}" map-zoom="{{ mapZoom }}" google-api-key="{{ googleApiKey }}"></contact-map>
 					</div>
                 {% endif %}
 
