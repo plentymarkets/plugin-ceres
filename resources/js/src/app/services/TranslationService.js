@@ -96,26 +96,24 @@ const TranslationService = (function($)
         Object
             .keys(values)
             .sort((keyA, keyB) => keyB.length - keyA.length)
-            .forEach(
-                key =>
-{
-                    input = replaceAll(
-                        input,
-                        ":" + key,
-                        values[key]
-                    );
-                    input = replaceAll(
-                        input,
-                        ":" + capitalize(key),
-                        capitalize(values[key])
-                    );
-                    input = replaceAll(
-                        input,
-                        ":" + key.toUpperCase(),
-                        values[key].toUpperCase()
-                    );
-                }
-            );
+            .forEach(key =>
+            {
+                input = replaceAll(
+                    input,
+                    ":" + key,
+                    values[key]
+                );
+                input = replaceAll(
+                    input,
+                    ":" + capitalize(key),
+                    capitalize(values[key])
+                );
+                input = replaceAll(
+                    input,
+                    ":" + key.toUpperCase(),
+                    (values[key] + "").toUpperCase()
+                );
+            });
 
         return input;
     }
