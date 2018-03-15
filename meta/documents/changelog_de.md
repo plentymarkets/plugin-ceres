@@ -1,17 +1,5 @@
 # Release Notes für Ceres
 
-## v2.4.1 (2018-03-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.4.0...2.4.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
-
-### Hinzugefügt
-
-
-### Geändert
-
-
-### Behoben
-
-- Der Wert eines Bestellmerkmals verlief ab einer bestimmten Größe über den Rand hinaus. Dies wurde behoben.
-
 ## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
