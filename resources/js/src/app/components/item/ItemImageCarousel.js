@@ -1,3 +1,6 @@
+import {isNullOrUndefined}from "../../helper/utils";
+import TranslationService from "services/TranslationService";
+
 Vue.component("item-image-carousel", {
 
     delimiters: ["${", "}"],
@@ -119,6 +122,38 @@ Vue.component("item-image-carousel", {
                     ]);
                 }
             });
+
+            if (!isNullOrUndefined(window.lightbox))
+            {
+                window.lightbox.option({
+                    wrapAround: true
+                });
+                window.lightbox.imageCountLabel = (current, total) =>
+                {
+                    if (imageCount <= 1)
+                    {
+                        return "";
+                    }
+                    // owl prepends 2 clones to allow endless scrolling
+                    current = (current % imageCount) + 1;
+                    return TranslationService.translate("Ceres::Template.itemImagePreviewCaption", {current: current, total: imageCount});
+                };
+
+                const originalFn = window.lightbox.changeImage;
+
+                window.lightbox.changeImage = imageNumber =>
+                {
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1)
+                    {
+                        imageNumber--;
+                    }
+                    else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0)
+                    {
+                        imageNumber++;
+                    }
+                    return originalFn.call(window.lightbox, imageNumber);
+                };
+            }
 
             $(this.$refs.single).on("changed.owl.carousel", event =>
             {
