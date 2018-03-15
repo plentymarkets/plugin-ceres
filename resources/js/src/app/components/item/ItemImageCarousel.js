@@ -141,13 +141,13 @@ Vue.component("item-image-carousel", {
 
                 const originalFn = window.lightbox.changeImage;
 
-                window.lightbox.changeImage = (imageNumber) =>
+                window.lightbox.changeImage = imageNumber =>
                 {
-                    if ( window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1 )
+                    if (window.lightbox.currentImageIndex === 0 && imageNumber === window.lightbox.album.length - 1)
                     {
                         imageNumber--;
                     }
-                    else if ( window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0 )
+                    else if (window.lightbox.currentImageIndex === window.lightbox.album.length - 1 && imageNumber === 0)
                     {
                         imageNumber++;
                     }
