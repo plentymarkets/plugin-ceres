@@ -1,10 +1,26 @@
+/**
+ * Get first parent element which matches a given selector
+ *
+ * @param {HTMLElement}     element           The element to get the parent for
+ * @param {string}          parentSelector    Selector to match parent element
+ *
+ * @returns {HTMLElement}
+ */
 export function findParent(element, parentSelector)
 {
     // eslint-disable-next-line brace-style
-    while ((element = element.parentElement) && !element.matches(parentSelector)) {}
+    while ((element = element.parentElement) && !is(element, parentSelector)) {}
     return element;
 }
 
+/**
+ * Check if element matches a given selector
+ *
+ * @param {HTMLElement} element   The element to check
+ * @param {string}      selector  The selector to match on given element
+ *
+ * @returns {boolean}
+ */
 // eslint-disable-next-line complexity
 export function is(element, selector)
 {
