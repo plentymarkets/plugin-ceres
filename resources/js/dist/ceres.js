@@ -366,7 +366,7 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 //# sourceMappingURL=ceres-vendor.productive.js.map
 
 
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -11371,11 +11371,15 @@ exports.tmpdir = exports.tmpDir = function () {
 
 exports.EOL = '\n';
 
+exports.homedir = function () {
+	return '/'
+};
+
 },{}],5:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.9
+ * @version 1.13.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -20083,6 +20087,8 @@ Vue.directive("stick-in-parent", {
 },{}],87:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var initTooltip = function initTooltip(el) {
     setTimeout(function () {
         $(el).tooltip({
@@ -20099,21 +20105,33 @@ Vue.directive("tooltip", {
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
+            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title"))) {
+                el.setAttribute("title", el.getAttribute("data-title"));
+                el.removeAttribute("data-title");
+            }
             initTooltip(el);
         } else {
             setTimeout(function () {
                 $(el).tooltip("dispose");
+
+                if ((0, _utils.isDefined)(el.getAttribute("title"))) {
+                    el.setAttribute("data-title", el.getAttribute("title"));
+                    el.removeAttribute("title");
+                }
             }, 1);
         }
     },
     bind: function bind(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
             initTooltip(el);
+        } else {
+            el.setAttribute("data-title", el.getAttribute("title"));
+            el.removeAttribute("title");
         }
     }
 });
 
-},{}],88:[function(require,module,exports){
+},{"../../helper/utils":107}],88:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
