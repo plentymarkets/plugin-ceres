@@ -19662,6 +19662,8 @@ Vue.directive("stick-in-parent", {
 },{}],87:[function(require,module,exports){
 "use strict";
 
+var _utils = require("../../helper/utils");
+
 var initTooltip = function initTooltip(el) {
     setTimeout(function () {
         $(el).tooltip({
@@ -19678,21 +19680,33 @@ Vue.directive("tooltip", {
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
+            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title"))) {
+                el.setAttribute("title", el.getAttribute("data-title"));
+                el.removeAttribute("data-title");
+            }
             initTooltip(el);
         } else {
             setTimeout(function () {
                 $(el).tooltip("dispose");
+
+                if ((0, _utils.isDefined)(el.getAttribute("title"))) {
+                    el.setAttribute("data-title", el.getAttribute("title"));
+                    el.removeAttribute("title");
+                }
             }, 1);
         }
     },
     bind: function bind(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
             initTooltip(el);
+        } else {
+            el.setAttribute("data-title", el.getAttribute("title"));
+            el.removeAttribute("title");
         }
     }
 });
 
-},{}],88:[function(require,module,exports){
+},{"../../helper/utils":104}],88:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
