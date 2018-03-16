@@ -16,6 +16,11 @@
 		margin: 0;
 	}
 
+	@include media-breakpoint-up(lg) {
+		overflow: scroll;
+		max-height: 90vh;
+	}
+
 	@include media-breakpoint-down(sm) {
 		overflow: scroll;
 		max-height: calc(100% - 1.2rem);
@@ -40,7 +45,7 @@
 		width: 100%;
 
 		& ul {
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(sm) {
 				column-count: 2;
 			}
 		}
@@ -52,6 +57,11 @@
 
 	ul{
 		@include reset-list();
+
+		@include media-breakpoint-up(md) {
+			overflow: scroll;
+			max-height: 40vh;
+		}
 
 		li{
 			width: 100%;
