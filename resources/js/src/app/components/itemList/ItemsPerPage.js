@@ -33,7 +33,7 @@ Vue.component("items-per-page", {
         setSelectedValueByUrl()
         {
             const urlParams = UrlService.getUrlParams(document.location.search);
-            const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage;
+            const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
 
             if (urlParams.items)
             {

@@ -85,7 +85,7 @@
 
                     <slot name="AfterPrice"></slot>
 
-                    <span :class="'availability tag availability_' + currentVariation.variation.availability.id">
+                    <span v-if="currentVariation.variation.availability" :class="'availability tag availability_' + currentVariation.variation.availability.id">
                         <span>
                             ${ currentVariation.variation.availability.names.name }
                         </span>
@@ -121,38 +121,40 @@
                 <div class="col-md-7 m-y-3">
                     <ul class="nav nav-tabs" role="tablist">
                         {% if 'item.description' in itemData or 'all' in itemData %}
-                            <li class="nav-item" v-if="currentVariation.texts.description !== ''">
-                                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id"
-                                role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
+                            <li class="nav-item" v-if="isDescriptionTabActive">
+                                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
                             </li>
                         {% endif %}
 
                         {% if 'item.technical_data' in itemData or 'all' in itemData %}
-                            <li class="nav-item" v-if="currentVariation.texts.technicalData !== ''">
-                                <a class="nav-link" data-toggle="tab" :href="'#data-' + currentVariation.variation.id"
-                                role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
+                            <li class="nav-item" v-if="isTechnicalDataTabActive">
+                                <a :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" :href="'#data-' + currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
                             </li>
                         {% endif %}
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#assessments-details"
-                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
+                            <a :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                         </li>
 
                         <slot name="AddDetailTabs"></slot>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2" v-html="currentVariation.texts.description">
+                        {% if 'item.description' in itemData or 'all' in itemData %}
+                            <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
+                                <div class="m-y-2" v-html="currentVariation.texts.description">
+                                </div>
                             </div>
-                        </div>
-                        <div class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2" v-html="currentVariation.texts.technicalData">
-                            </div>
-                        </div>
+                        {% endif %}
 
-                        <div class="tab-pane" id="assessments-details" role="tabpanel">
+                        {% if 'item.technical_data' in itemData or 'all' in itemData %}
+                            <div :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel" v-if="isTechnicalDataTabActive">
+                                <div class="m-y-2" v-html="currentVariation.texts.technicalData">
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="tab-pane" id="assessments-details" role="tabpanel">
                             <div class="m-y-2">
                                 <table class="table table-striped table-hover table-sm">
                                     <tbody>

@@ -3,7 +3,7 @@ import UrlService from "services/UrlService";
 export function updateItemListUrlParams(searchParams)
 {
     const urlParams = {};
-    const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage;
+    const defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
 
     urlParams.query = (searchParams.query && searchParams.query.length > 0) ? searchParams.query : null;
     urlParams.items = (searchParams.items !== defaultItemsPerPage) ? searchParams.items : null;
