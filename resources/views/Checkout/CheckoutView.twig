@@ -158,7 +158,7 @@
 
                         <div class="col-xs-12 p-b-1 bg-white">
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
-                            <place-order template="#vue-place-order" target-continue="/place-order" @payment-response="checkoutComp.showModal(content)"></place-order>
+                            <place-order template="#vue-place-order" target-continue="/place-order" @payment-response="checkoutComp.showModal($event)"></place-order>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
                         </div>
                     </div>
