@@ -22,7 +22,7 @@ Vue.directive("render-category",
 
                     const url = store.state.navigation.currentCategory.url;
 
-                    // check if touch device and change the ui handling 
+                    // check if touch device and change the ui handling
                     if (document.body.classList.contains("touch"))
                     {
                         if (openCategory && openCategory.contains(event.target))
