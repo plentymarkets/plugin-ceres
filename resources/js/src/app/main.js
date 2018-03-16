@@ -166,38 +166,6 @@ var init = (function($, window, document)
 
                 return false;
             });
-
-            $("#countrySettings").on("show.bs.collapse", function()
-            {
-                if (!document.body.classList.contains("position-fixed"))
-                {
-                    document.body.classList.add("position-fixed");
-                }
-            });
-
-            $("#countrySettings").on("hide.bs.collapse", function()
-            {
-                if (document.body.classList.contains("position-fixed"))
-                {
-                    document.body.classList.remove("position-fixed");
-                }
-            });
-
-            $("#currencySelect").on("show.bs.collapse", function()
-            {
-                if (!document.body.classList.contains("position-fixed"))
-                {
-                    document.body.classList.add("position-fixed");
-                }
-            });
-
-            $("#currencySelect").on("hide.bs.collapse", function()
-            {
-                if (document.body.classList.contains("position-fixed"))
-                {
-                    document.body.classList.remove("position-fixed");
-                }
-            });
         });
     }
 
