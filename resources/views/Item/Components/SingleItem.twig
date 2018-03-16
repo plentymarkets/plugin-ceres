@@ -122,7 +122,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         {% if 'item.description' in itemData or 'all' in itemData %}
                             <li class="nav-item" v-if="isDescriptionTabActive">
-                                <a :class="{ 'active': isDescriptionTabActive }" class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
+                                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
                             </li>
                         {% endif %}
 
@@ -141,7 +141,7 @@
 
                     <div class="tab-content">
                         {% if 'item.description' in itemData or 'all' in itemData %}
-                            <div  :class="{ 'active': isDescriptionTabActive }" class="tab-pane" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
+                            <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
                                 <div class="m-y-2" v-html="currentVariation.texts.description">
                                 </div>
                             </div>
