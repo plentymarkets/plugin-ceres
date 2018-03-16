@@ -1,4 +1,4 @@
-export const exceptionMap = new Map(
+export const errorMap = new Map(
     [
         ["1", "basketItemNotAdded"],
         ["2", "basketNotEnoughStockItem"],
@@ -8,5 +8,5 @@ export const exceptionMap = new Map(
     ]
 );
 
-export default exceptionMap;
+export default errorMap;
 

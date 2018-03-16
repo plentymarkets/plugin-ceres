@@ -1,4 +1,7 @@
-import ExceptionMap from "exceptions/ExceptionMap";
+import ErrorMap from "notifications/ErrorMap";
+import WarningMap from "notifications/WarningMap";
+import SuccessMap from "notifications/SuccessMap";
+import InfoMap from "notifications/InfoMap";
 import TranslationService from "services/TranslationService";
 
 var NotificationService = require("services/NotificationService");
@@ -62,9 +65,32 @@ Vue.component("notifications", {
 
                 if (messageCode > 0)
                 {
-                    message = TranslationService.translate(
-                        "Ceres::Template." + ExceptionMap.get(messageCode.toString())
-                    );
+                    switch (type)
+                    {
+                    case "error":
+                        message = TranslationService.translate(
+                            "Ceres::Template." + ErrorMap.get(messageCode.toString())
+                        );
+                        break;
+                    case "warn":
+                        message = TranslationService.translate(
+                            "Ceres::Template." + WarningMap.get(messageCode.toString())
+                        );
+                        break;
+                    case "success":
+                        message = TranslationService.translate(
+                            "Ceres::Template." + SuccessMap.get(messageCode.toString())
+                        );
+                        break;
+                    case "info":
+                        message = TranslationService.translate(
+                            "Ceres::Template." + InfoMap.get(messageCode.toString())
+                        );
+                        break;
+                    default:
+                        message = messageCode.toString();
+                        break;
+                    }
                 }
 
                 // type cannot be undefined
