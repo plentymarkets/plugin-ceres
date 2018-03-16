@@ -17559,7 +17559,14 @@ Vue.component("single-item", {
 
     props: ["template", "itemData", "variationListData", "attributeNameMap"],
 
-    computed: _extends({}, Vuex.mapState({
+    computed: _extends({
+        isDescriptionTabActive: function isDescriptionTabActive() {
+            return (App.config.singleItemData.includes("item.description") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.description.length;
+        },
+        isTechnicalDataTabActive: function isTechnicalDataTabActive() {
+            return (App.config.singleItemData.includes("item.technical_data") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.technicalData.length;
+        }
+    }, Vuex.mapState({
         currentVariation: function currentVariation(state) {
             return state.item.variation.documents[0].data;
         },
