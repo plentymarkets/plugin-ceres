@@ -166,22 +166,6 @@ var init = (function($, window, document)
 
                 return false;
             });
-
-            $("#searchBox").on("show.bs.collapse", function()
-            {
-                $("#countrySettings").collapse("hide");
-            });
-
-            $("#countrySettings").on("show.bs.collapse", function()
-            {
-                $("#searchBox").collapse("hide");
-            });
-
-            $("#accountMenuList").click(function()
-            {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
-            });
         });
     }
 
