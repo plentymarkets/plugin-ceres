@@ -9,6 +9,16 @@ Vue.component("single-item", {
 
     computed:
     {
+        isDescriptionTabActive()
+        {
+            return (App.config.singleItemData.includes("item.description") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.description.length;
+        },
+
+        isTechnicalDataTabActive()
+        {
+            return (App.config.singleItemData.includes("item.technical_data") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.technicalData.length;
+        },
+
         ...Vuex.mapState({
             currentVariation: state => state.item.variation.documents[0].data,
             variations: state => state.item.variationList,
