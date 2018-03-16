@@ -35,6 +35,8 @@ Vue.component("place-order", {
     methods: {
         placeOrder()
         {
+            this.showModal("<h1>Test</h1><p>Hallo</p><p>Welt</p>");
+            /*
             this.waiting = true;
 
             if (this.contactWish && this.contactWish.length > 0)
@@ -49,6 +51,7 @@ Vue.component("place-order", {
             {
                 this.preparePayment();
             }
+            */
         },
 
         preparePayment()
@@ -136,19 +139,14 @@ Vue.component("place-order", {
 
         showModal(content, isExternalContent)
         {
-            var $modal = $(this.$refs.modal);
-            var $modalBody = $(this.$refs.modalContent);
-
             if (isExternalContent)
             {
-                $modalBody.html("<iframe src=\"" + content + "\">");
+                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
             }
             else
             {
-                $modalBody.html(content);
+                this.$emit("payment-response", content);
             }
-
-            $modal.modal("show");
         }
     }
 });

@@ -14928,6 +14928,10 @@ Vue.component("checkout", {
 
                 return 0;
             });
+        },
+        showModal: function showModal(content) {
+            $(this.$refs.checkoutModalContent).html(content);
+            $(this.$refs.checkoutModal).modal("show");
         }
     }
 });
@@ -15060,28 +15064,33 @@ Vue.component("place-order", {
 
     methods: {
         placeOrder: function placeOrder() {
-            var _this = this;
-
+            this.showModal("<h1>Test</h1><p>Hallo</p><p>Welt</p>");
+            /*
             this.waiting = true;
-
-            if (this.contactWish && this.contactWish.length > 0) {
-                ApiService.post("/rest/io/order/contactWish", { orderContactWish: this.contactWish }, { supressNotifications: true }).always(function () {
-                    _this.preparePayment();
-                });
-            } else {
+             if (this.contactWish && this.contactWish.length > 0)
+            {
+                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
+                    .always(() =>
+                    {
+                        this.preparePayment();
+                    });
+            }
+            else
+            {
                 this.preparePayment();
             }
+            */
         },
         preparePayment: function preparePayment() {
-            var _this2 = this;
+            var _this = this;
 
             this.waiting = true;
 
             if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
-                    _this2.afterPreparePayment(response);
+                    _this.afterPreparePayment(response);
                 }).fail(function (error) {
-                    _this2.waiting = false;
+                    _this.waiting = false;
                 });
             } else {
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.generalCheckEntries"));
@@ -15138,16 +15147,11 @@ Vue.component("place-order", {
             }
         },
         showModal: function showModal(content, isExternalContent) {
-            var $modal = $(this.$refs.modal);
-            var $modalBody = $(this.$refs.modalContent);
-
             if (isExternalContent) {
-                $modalBody.html("<iframe src=\"" + content + "\">");
+                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
             } else {
-                $modalBody.html(content);
+                this.$emit("payment-response", content);
             }
-
-            $modal.modal("show");
         }
     }
 });
