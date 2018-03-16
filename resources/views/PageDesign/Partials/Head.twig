@@ -41,39 +41,3 @@
 
 <!-- Extend the existing style with a template -->
 {{ LayoutContainer.show("Ceres::Template.Style") }}
-
-<script>
-    App = {
-        config:
-        {
-            printErrors:        {% if "print_errors" in logData or "all" in logData %}true{% else %}false{% endif %},
-            printSuccess:       {% if "print_success" in logData or "all" in logData %}true{% else %}false{% endif %},
-            printWarnings:      {% if "print_warnings" in logData or "all" in logData %}true{% else %}false{% endif %},
-            printInfos:         {% if "print_infos" in logData or "all" in logData %}true{% else %}false{% endif %},
-            printStackTrace:    {% if "print_stack_trace" in logData or "all" in logData %}true{% else %}false{% endif %},
-            logMessages:        {% if "log_messages" in logData or "all" in logData %}true{% else %}false{% endif %},
-            defaultItemsPerPage: "{{ itemsPerPage }}",
-            defaultSorting: "{{ defaultSorting }}",
-            defaultSortingSearch: "{{ defaultSortingSearch }}",
-            performanceLevel: "{{ performanceLevel }}",
-            itemDisplayName: "{{ config("Ceres.item.displayName") }}",
-            itemName: {{ itemName }},
-            enabledBillingAddressFields: "{{ config("Ceres.billing_address.show") }}",
-            enabledBillingAddressFieldsUK: "{{ config("Ceres.billing_address.en.show") }}",
-            enabledDeliveryAddressFields: "{{ config("Ceres.delivery_address.show") }}",
-            enabledDeliveryAddressFieldsUK: "{{ config("Ceres.delivery_address.en.show") }}",
-            enableOldUrlPattern: "{{ config("Ceres.global.enableOldUrlPattern") }}",
-            shopName: "{{ config("Ceres.header.company_name") }}",
-            forwardToSingleItem: {{ config("Ceres.search.forwardToSingleItem") | default('false') }},
-            activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
-            currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
-            basketOpenClass: {% if config("Ceres.basket.preview_type") != "right" %}"open-hover"{% else %}"open-right"{% endif %},
-            singleItemData: [{% for data in config("Ceres.item.data") | split(', ') %}"{{ data }}",{% endfor %}]
-        },
-        isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
-        isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
-        isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
-        language: "{{ lang }}",
-        decimalSeparator: "{{ config("IO.format.separator_decimal") }}"
-    };
-</script>

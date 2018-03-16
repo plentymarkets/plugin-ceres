@@ -1,4 +1,4 @@
-(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*!
  * accounting.js v0.4.1
  * Copyright 2014 Open Exchange Rates
@@ -11003,15 +11003,11 @@ exports.tmpdir = exports.tmpDir = function () {
 
 exports.EOL = '\n';
 
-exports.homedir = function () {
-	return '/'
-};
-
 },{}],5:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.13.0
+ * @version 1.12.9
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -13853,9 +13849,10 @@ Vue.component("add-item-to-basket-overlay", {
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
+                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
 
                     if (vueApp) {
-                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
+                        vueApp.classList.add(basketOpenClass);
                     }
                 }, 1);
             }
@@ -17193,10 +17190,10 @@ Vue.component("single-item", {
 
     computed: _extends({
         isDescriptionTabActive: function isDescriptionTabActive() {
-            return (App.config.singleItemData.includes("item.description") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.description.length;
+            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
         },
         isTechnicalDataTabActive: function isTechnicalDataTabActive() {
-            return (App.config.singleItemData.includes("item.technical_data") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.technicalData.length;
+            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
         }
     }, Vuex.mapState({
         currentVariation: function currentVariation(state) {
@@ -17761,7 +17758,7 @@ Vue.component("item-search", {
         },
         updateTitle: function updateTitle(searchString) {
             document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
+            document.title = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.header.companyName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
@@ -17779,7 +17776,7 @@ Vue.component("item-search", {
                     _this2.$store.commit("setItemListSearchString", suggestion.value);
                     _this2.currentSearchString = suggestion.value;
 
-                    if (App.config.forwardToSingleItem) {
+                    if (App.config.search.forwardToSingleItem) {
                         _this2.openItem(suggestion);
                     } else {
                         _this2.search();
@@ -17902,15 +17899,16 @@ Vue.component("items-per-page", {
         },
         setSelectedValueByUrl: function setSelectedValueByUrl() {
             var urlParams = _UrlService2.default.getUrlParams(document.location.search);
+            var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
 
             if (urlParams.items) {
                 if (this.paginationValues.includes(parseInt(urlParams.items))) {
                     this.selectedValue = urlParams.items;
                 } else {
-                    this.selectedValue = App.config.defaultItemsPerPage;
+                    this.selectedValue = defaultItemsPerPage;
                 }
             } else {
-                this.selectedValue = App.config.defaultItemsPerPage;
+                this.selectedValue = defaultItemsPerPage;
             }
 
             this.$store.commit("setItemsPerPage", parseInt(this.selectedValue));
@@ -19489,7 +19487,9 @@ Vue.directive("toggle-basket-preview", {
             var vueApp = document.querySelector("#vue-app");
 
             if (vueApp) {
-                vueApp.classList.toggle(App.config.basketOpenClass || "open-hover");
+                var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+
+                vueApp.classList.toggle(basketOpenClass || "open-hover");
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -19847,11 +19847,11 @@ Vue.filter("attachText", function (item, text) {
 var accounting = require("accounting");
 
 Vue.filter("currency", function (price) {
-    var currencyPattern = App.config.currencyPattern;
+    var currencyPattern = App.currencyPattern;
 
     // (%v = value, %s = symbol)
     var options = {
-        symbol: App.config.activeCurrency,
+        symbol: App.activeCurrency,
         decimal: currencyPattern.separator_decimal,
         thousand: currencyPattern.separator_thousands,
         precision: 2,
@@ -20074,8 +20074,8 @@ Vue.filter("itemName", function (_ref) {
         name2 = _ref$texts.name2,
         name3 = _ref$texts.name3,
         name = _ref.variation.name;
-    var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.itemName;
-    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.itemDisplayName;
+    var selectedName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : App.config.item.itemName;
+    var itemDisplayName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : App.config.item.displayName;
 
     if (itemDisplayName === "variationName" && name && name.length) {
         return name;
@@ -20102,7 +20102,7 @@ Vue.filter("itemName", function (_ref) {
 "use strict";
 
 Vue.filter("itemURL", function (item) {
-    var enableOldUrlPattern = App.config.enableOldUrlPattern === "true";
+    var enableOldUrlPattern = App.config.global.enableOldUrlPattern;
     var urlPath = item.texts.urlPath || "";
 
     var link = "";
@@ -20561,10 +20561,12 @@ var init = function ($, window, document) {
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function (evt) {
-            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-hover")) {
+            var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+
+            if ($("#vue-app").hasClass(basketOpenClass)) {
                 if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-hover");
+                    $("#vue-app").toggleClass(basketOpenClass || "open-hover");
                 }
             }
 
@@ -20668,21 +20670,19 @@ function isAddressFieldEnabled(countryId, addressType, field) {
         address = "billing_address";
 
         if (countryId === 1) {
-            enabledFields = App.config.enabledBillingAddressFields;
+            enabledFields = App.config.addresses.billingAddressShow;
         } else {
-            enabledFields = App.config.enabledBillingAddressFieldsUK;
+            enabledFields = App.config.addresses.billingAddressShow_en;
         }
     } else {
         address = "delivery_address";
 
         if (countryId === "1") {
-            enabledFields = App.config.enabledDeliveryAddressFields;
+            enabledFields = App.config.addresses.deliveryAddressShow;
         } else {
-            enabledFields = App.config.enabledDeliveryAddressFieldsUK;
+            enabledFields = App.config.addresses.deliveryAddressShow_en;
         }
     }
-
-    enabledFields = enabledFields.split(", ");
 
     var fullField = address + "." + field;
 
@@ -20944,7 +20944,7 @@ function _removeTempDesc() {
 
 function _updateCategoryTexts(currentCategory) {
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }
@@ -21063,15 +21063,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function updateItemListUrlParams(searchParams) {
     var urlParams = {};
+    var defaultItemsPerPage = App.config.pagination.columnsPerPage * App.config.pagination.rowsPerPage[0];
 
     urlParams.query = searchParams.query && searchParams.query.length > 0 ? searchParams.query : null;
-    urlParams.items = searchParams.items !== parseInt(App.config.defaultItemsPerPage) ? searchParams.items : null;
+    urlParams.items = searchParams.items !== defaultItemsPerPage ? searchParams.items : null;
     urlParams.page = searchParams.page > 1 ? searchParams.page : null;
     urlParams.facets = searchParams.facets.length > 0 ? searchParams.facets : null;
     if (App.isSearch) {
-        urlParams.sorting = searchParams.sorting !== App.config.defaultSortingSearch ? searchParams.sorting : null;
+        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSortingSearch ? searchParams.sorting : null;
     } else {
-        urlParams.sorting = searchParams.sorting !== App.config.defaultSorting ? searchParams.sorting : null;
+        urlParams.sorting = searchParams.sorting !== App.config.sorting.defaultSorting ? searchParams.sorting : null;
     }
 
     for (var urlParamKey in urlParams) {
@@ -21238,7 +21239,7 @@ module.exports = function ($) {
     function _log(message, prefix) {
         var notification = new Notification(message);
 
-        if (App.config.logMessages) {
+        if (App.config.log.data.indexOf("log_messages") >= 0) {
             console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
 
             for (var i = 0; i < notification.stackTrace.length; i++) {
@@ -21252,7 +21253,7 @@ module.exports = function ($) {
     function _info(message) {
         var notification = new Notification(message, "info");
 
-        if (App.config.printInfos) {
+        if (App.config.log.data.indexOf("print_infos") >= 0) {
             _printNotification(notification);
         }
 
@@ -21262,7 +21263,7 @@ module.exports = function ($) {
     function _warn(message) {
         var notification = new Notification(message, "warning");
 
-        if (App.config.printWarnings) {
+        if (App.config.log.data.indexOf("log_warnings") >= 0) {
             _printNotification(notification);
         }
 
@@ -21272,7 +21273,7 @@ module.exports = function ($) {
     function _error(message) {
         var notification = new Notification(message, "danger");
 
-        if (App.config.printErrors) {
+        if (App.config.log.data.indexOf("print_errors") >= 0) {
             _printNotification(notification);
         }
 
@@ -21282,7 +21283,7 @@ module.exports = function ($) {
     function _success(message) {
         var notification = new Notification(message, "success");
 
-        if (App.config.printSuccess) {
+        if (App.config.log.data.indexOf("print_success") >= 0) {
             _printNotification(notification);
         }
 
@@ -21303,7 +21304,7 @@ module.exports = function ($) {
     }
 
     function Notification(data, context) {
-        if (!App.config.printStackTrace && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
+        if (App.config.log.data.indexOf("print_stack_trace") < 0 && (typeof data === "undefined" ? "undefined" : _typeof(data)) === "object") {
             data.stackTrace = [];
         }
         var id = notificationCount++;
@@ -21333,7 +21334,7 @@ module.exports = function ($) {
         }
 
         function trace(message, code) {
-            if (App.config.printStackTrace) {
+            if (App.config.log.data.indexOf("print_stack_trace") >= 0) {
                 self.stackTrace.push({
                     code: code || 0,
                     message: message
