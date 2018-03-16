@@ -83,7 +83,6 @@ Vue.component("item-search", {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
 
-                    // TODO: MOVE TO CONFIG CLASS
                     if (App.config.search.forwardToSingleItem)
                     {
                         this.openItem(suggestion);

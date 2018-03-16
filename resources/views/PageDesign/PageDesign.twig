@@ -139,6 +139,19 @@
             {% include "Ceres::PageDesign.Partials.VueError" %}
         </div>
 
+        <script>
+            App = {
+                config: {{ ceresConfig | json_encode | raw }},
+                activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
+                currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
+                isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
+                isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
+                isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
+                language: "{{ lang }}",
+                decimalSeparator: "{{ config("IO.format.separator_decimal") }}"
+            };
+        </script>
+
         {{ Loader.include_components() }}
 
         {{ LayoutContainer.show("Ceres::Script.Loader") }}
