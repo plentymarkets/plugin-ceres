@@ -224,7 +224,8 @@ body.menu-is-visible {
 						min-width	: 150px;
 						text-align  : initial;
 
-						&:hover {
+						.no-touch &:hover,
+						.touch &.hover {
 							background  	: $menu-big-menu-li-bg-hover;
 							color 			: $menu-big-menu-li-color;
 							text-decoration : none;
@@ -236,7 +237,8 @@ body.menu-is-visible {
 					}
 				}
 
-				&:hover {
+				.no-touch &:hover,
+				.touch &.hover {
 					background-color : $menu-li-bg-hover;
 					color 			 : $menu-li-color-hover;
 					transition 		 : all .1s ease;
@@ -279,7 +281,8 @@ nav.navbar.megamenu {
 				>li {
 					position : static;
 
-					&:hover {
+					.no-touch &:hover,
+					.touch &.hover {
 						background : $megamenu-bg; 
 						color 	   : $megamenu-btn-hover !important;  
 
@@ -308,7 +311,10 @@ nav.navbar.megamenu {
 									font-weight : bold; 
 								}
 							}
-							&:hover { background : $megamenu-bg; }
+							.no-touch &:hover,
+							.touch &.hover { 
+								background : $megamenu-bg; 
+							}
 							 .level2 { 
 							 	padding : .25em 0!important; 
 							 }
@@ -325,7 +331,8 @@ nav.navbar.megamenu {
 								padding 	: 0;
 								text-align 	: left;
 
-								&:hover{ 
+								.no-touch &:hover,
+								.touch &.hover { 
 									background 	: $megamenu-bg; 
 									color 		: $megamenu-btn-hover !important;  
 								}
