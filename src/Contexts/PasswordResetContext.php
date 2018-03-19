@@ -13,8 +13,8 @@ class PasswordResetContext extends GlobalContext implements ContextInterface
     {
         parent::init($params);
 
-        $this->hash = $this->getParam( 'hash', '' );
-        $this->contactId = $this->getParam( 'contactId', '' );
+        $this->hash = $this->getParam( 'hash');
+        $this->contactId = $this->getParam( 'contactId');
 
     }
 }
