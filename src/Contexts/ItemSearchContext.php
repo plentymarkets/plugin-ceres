@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use Ceres\Helper\SearchOptions;
+use IO\Helper\ContextInterface;
 use IO\Services\ItemSearch\SearchPresets\Facets;
 use IO\Services\ItemSearch\SearchPresets\SearchItems;
 use IO\Services\ItemSearch\Services\ItemSearchService;
@@ -14,9 +15,9 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
     public $isSearch;
     public $searchString;
 
-    public function init($params, $templateContainer)
+    public function init($params)
     {
-        parent::init($params, $templateContainer);
+        parent::init($params);
 
         $itemListOptions = [
             'page'          => $this->getParam( 'page', 1 ),

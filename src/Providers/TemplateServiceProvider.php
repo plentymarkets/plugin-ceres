@@ -7,7 +7,6 @@ use Ceres\Caching\SideNavigationCacheSettings;
 use Ceres\Config\CeresConfig;
 use Ceres\Contexts\CategoryContext;
 use Ceres\Contexts\CategoryItemContext;
-use Ceres\Contexts\ContextInterface;
 use Ceres\Contexts\GlobalContext;
 use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
@@ -77,18 +76,11 @@ class TemplateServiceProvider extends ServiceProvider
         $eventDispatcher->listen('IO.tpl.*', function (TemplateContainer $templateContainer, $templateData = []) {
                 $templateName = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][0];
                 $templateContainer->setTemplate('Ceres::' . $templateName);
-                
-                $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
-                $templateContainer->setTemplateData(function() use ($templateContextClass, $templateData, $templateContainer) {
-                    $templateContext = pluginApp($templateContextClass);
-                    if($templateContext instanceof ContextInterface)
-                    {
-                        $templateContext->init($templateData, $templateContainer);
-                    }
-                    return $templateContext;
-                });
-                
-                //$templateContainer->setTemplateData(['config' => []]);
+        }, self::EVENT_LISTENER_PRIORITY);
+
+        $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
+            $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+            $templateContainer->setContext( $templateContextClass );
         }, self::EVENT_LISTENER_PRIORITY);
 
         $eventDispatcher->listen( 'IO.ResultFields.*', function(ResultFieldTemplate $templateContainer) {
