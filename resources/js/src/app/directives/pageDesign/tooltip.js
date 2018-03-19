@@ -1,4 +1,4 @@
-import {isDefined, isNullOrUndefined}from "../../helper/utils";
+import {isNullOrUndefined}from "../../helper/utils";
 
 const initTooltip = el =>
 {
@@ -23,7 +23,8 @@ Vue.directive("tooltip", {
     {
         if (typeof binding.value === "undefined" || binding.value)
         {
-            if (isNullOrUndefined(el.getAttribute("data-original-title")))
+            if (isNullOrUndefined(el.getAttribute("data-original-title")) &&
+                !isNullOrUndefined(el.getAttribute("data-title")))
             {
                 el.setAttribute("title", el.getAttribute("data-title"));
                 el.removeAttribute("data-title");
@@ -36,7 +37,7 @@ Vue.directive("tooltip", {
             {
                 $(el).tooltip("dispose");
 
-                if (isDefined(el.getAttribute("title")))
+                if (!isNullOrUndefined(el.getAttribute("title")))
                 {
                     el.setAttribute("data-title", el.getAttribute("title"));
                     el.removeAttribute("title");
