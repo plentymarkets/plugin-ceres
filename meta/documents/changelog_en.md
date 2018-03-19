@@ -2,19 +2,19 @@
 
 ## v2.5.0 (2018-03-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.4.0...2.5.0" target="_blank"><b>Overview of all changes</b></a>
 
-### Hinzugefügt
+### Added
 
 - Context classes, which provide data to related Twig templates, have been added.
 - Ceres is now able to react to all types of notification codes that are sent by the server. It could previously only intercept error message codes.
 
-### Geändert
+### Changed
 
 - Redundant styl instructions have been removed from the wish list.
 - If a user removes all items from the shopping cart during checkout, they are now redirected to the shopping cart view.
 - The font colour of the variation selection has been darkened. This will ensure a better readability for deactivated values in drop-down lists in the Firefox browser.
 - The non-mobile store navigation has been optimised for touch devices.
 
-### Behoben
+### Fixed
 
 - Due to an error the tooltip for the wish list was not translated correctly. This has been fixed.
 - Due to an error multiple HTML elements were assigned the same ID. This has been fixed.
@@ -27,7 +27,6 @@
 - Values of order properties that exceeded a certain size were incorrectly displayed beyond the borders. This has been fixed.
 - Deactivated tooltips no longer lead to the displaying of HTML titles.
 - The languages view and countries of delivery view have been slightly adjusted in order to ensure complete functionality, even when a large number of languages or countries of delivery are active.
-
 
 ## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Overview of all changes</b></a>
 

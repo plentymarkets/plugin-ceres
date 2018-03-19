@@ -28,8 +28,6 @@
 - Deaktivierte Tooltips führen nun nicht mehr dazu, dass HTML-Titles angezeigt werden.
 - Die Ansicht der Sprachen und Lieferländer wurde leicht angepasst, um die volle Funktionalität auch bei vielen aktiven Sprachen und Lieferländern zu gewährleisten.
 
-
-
 ## v2.4.0 (2018-03-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.3.2...2.4.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
