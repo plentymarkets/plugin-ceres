@@ -16195,7 +16195,7 @@ Vue.component("contact-map", {
 
             var gMap = new google.maps.Map(document.getElementById("contact-map"), {
                 center: coordinates,
-                zoom: this.mapZoom
+                zoom: parseInt(this.mapZoom)
             });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
