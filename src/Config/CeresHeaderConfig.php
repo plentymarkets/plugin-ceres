@@ -9,8 +9,8 @@ class CeresHeaderConfig extends PluginConfig
 {
     public $companyName;
     public $companyLogo;
-    public $showNavbars;
-    public $fixedNavbar;
+    public $showNavBars;
+    public $fixedNavBar;
     public $showCategoryTypes;
     public $basketValues;
     public $megamenuLevels;
@@ -23,8 +23,8 @@ class CeresHeaderConfig extends PluginConfig
         parent::__construct($configRepository, "Ceres");
         $this->companyName          = $this->getTextValue("header.company_name", "Ceres Webshop" );
         $this->companyLogo          = $this->getTextValue( "header.company_logo", "images/ceres-logo.svg" );
-        $this->showNavbars          = $this->getTextValue( "header.show_navbars", "top" );
-        $this->fixedNavbar          = $this->getBooleanValue( "header.fixed_navbar", true );
+        $this->showNavBars          = $this->getTextValue( "header.show_navbars", "top" );
+        $this->fixedNavBar          = $this->getBooleanValue( "header.fixed_navbar", true );
         $this->showCategoryTypes    = $this->getTextValue( "header.show_category_types", "all" );
         $this->basketValues         = $this->getTextValue( "header.basket_values", "sum" );
         $this->megamenuLevels       = $this->getIntegerValue( "header.megamenu_levels", 1 );
