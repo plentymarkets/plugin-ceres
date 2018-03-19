@@ -12,6 +12,7 @@ use Ceres\Contexts\ItemSearchContext;
 use Ceres\Contexts\ItemWishListContext;
 use Ceres\Contexts\OrderConfirmationContext;
 use Ceres\Contexts\OrderReturnContext;
+use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use IO\Extensions\Functions\Partial;
@@ -48,7 +49,7 @@ class TemplateServiceProvider extends ServiceProvider
         'tpl.login'                     => ['Customer.Login',                       GlobalContext::class],                      // provide template to use for login
         'tpl.register'                  => ['Customer.Register',                    GlobalContext::class],                   // provide template to use for register
         'tpl.guest'                     => ['Customer.Guest',                       GlobalContext::class],                      // provide template to use for guest
-        'tpl.password-reset'            => ['Customer.ResetPassword',               GlobalContext::class],              // provide template to use for password-reset
+        'tpl.password-reset'            => ['Customer.ResetPassword',               PasswordResetContext::class],              // provide template to use for password-reset
         'tpl.contact'                   => ['Customer.Contact',                     GlobalContext::class],                    // provide template to use for contact
         'tpl.search'                    => ['ItemList.ItemListView',                ItemSearchContext::class],               // provide template to use for item search
         'tpl.wish-list'                 => ['WishList.WishListView',                ItemWishListContext::class],               // provide template to use for wishlist
