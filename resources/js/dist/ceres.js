@@ -20163,7 +20163,7 @@ Vue.directive("tooltip", {
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
-            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title"))) {
+            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
                 el.setAttribute("title", el.getAttribute("data-title"));
                 el.removeAttribute("data-title");
             }
@@ -20172,7 +20172,7 @@ Vue.directive("tooltip", {
             setTimeout(function () {
                 $(el).tooltip("dispose");
 
-                if ((0, _utils.isDefined)(el.getAttribute("title"))) {
+                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
                     el.setAttribute("data-title", el.getAttribute("title"));
                     el.removeAttribute("title");
                 }
