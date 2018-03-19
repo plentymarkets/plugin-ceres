@@ -75,7 +75,7 @@ function _removeTempDesc()
 function _updateCategoryTexts(currentCategory)
 {
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.shopName;
+    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }

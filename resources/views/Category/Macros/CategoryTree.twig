@@ -42,7 +42,7 @@
             
             {% if category.children and translatedChildren > 0 %}
 
-                <li class="ddown">
+                <li class="ddown" v-hover-mega-menu>
                     <a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details[0].name }}</a>
 
                     <span class="hidden-lg-up nav-direction" data-toggle="collapse" href="#navDropdown{{ counter }}" aria-expanded="false">

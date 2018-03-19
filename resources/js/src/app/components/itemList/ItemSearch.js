@@ -64,7 +64,7 @@ Vue.component("item-search", {
         updateTitle(searchString)
         {
             document.querySelector("#searchPageTitle").innerHTML = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString;
-            document.title = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.shopName;
+            document.title = TranslationService.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.header.companyName;
         },
 
         initAutocomplete()
@@ -83,7 +83,7 @@ Vue.component("item-search", {
                     this.$store.commit("setItemListSearchString", suggestion.value);
                     this.currentSearchString = suggestion.value;
 
-                    if (App.config.forwardToSingleItem)
+                    if (App.config.search.forwardToSingleItem)
                     {
                         this.openItem(suggestion);
                     }

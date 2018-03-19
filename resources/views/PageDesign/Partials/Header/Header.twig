@@ -112,61 +112,66 @@
 
         {% if enableCurrencySelect == "true" %}
         <div id="currencySelect" class="cmp cmp-currency-select collapse">
-            <div class="currency-select-inner row">
+            <div class="container-max">
+                <div class="currency-select-inner row">
 
-                <div class="currency-list col-xs-12">
-                    <div class="list-title">
-                        <strong>{{ trans("Ceres::Template.currency") }}</strong>
-                        <hr>
+                    <div class="currency-list col-xs-12">
+                        <div class="list-title">
+                            <strong>{{ trans("Ceres::Template.currency") }}</strong>
+                            <hr>
+                        </div>
+                        <ul>
+                            {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
+                            <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
+                                <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
+                                    {% if currencyFormatSelect == 'all' %}
+                                        {{ currency.name }} ({{ currency.symbol }})
+                                    {% else %}
+                                        {{ currency[currencyFormatSelect] }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <ul>
-                        {% for currency in services.checkout.getCurrencyList() if currency.name in activeCurrencies or activeCurrencies[0] == 'all' or currency.name == services.checkout.getCurrencyData().name %}
-                        <li{% if currency.name == services.checkout.getCurrencyData().name %} class="active"{% endif %}>
-                            <a href="{{ queryString({"currency": currency.name}) }}" rel="nofollow">
-                                {% if currencyFormatSelect == 'all' %}
-                                    {{ currency.name }} ({{ currency.symbol }})
-                                {% else %}
-                                    {{ currency[currencyFormatSelect] }}
-                                {% endif %}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
                 </div>
             </div>
         </div>
         {% endif %}
 
         <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
-            <div id="countrySettings" class="cmp cmp-country-settings collapse">
-                <div class="country-settings-inner row">
+            <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
+                <div class="container-max">
+                    <div class="country-settings-inner languages row col-lg-6">
 
-                    <div class="language-settings col-xs-12 col-sm-6">
-                        <div class="list-title">
-                            <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
-                            <hr>
+                        <div class="language-settings">
+                            <div class="list-title">
+                                <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                                <hr>
+                            </div>
+
+                            {% set languageList = services.webstoreConfig.getActiveLanguageList() %}
+                            {% set languageUrls = services.url.getLanguageURLs() %}
+                            <ul>
+                                {% for language in languageList %}
+                                    <li{% if lang == language %} class="active"{% endif %}>
+                                        <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
+                                            <i class="flag-icon flag-icon-{{ language }}"></i>
+                                            {{ trans("Ceres::Template." ~ language) }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
-
-                        {% set languageList = services.webstoreConfig.getActiveLanguageList() %}
-                        {% set languageUrls = services.url.getLanguageURLs() %}
-                        <ul>
-                            {% for language in languageList %}
-                                <li{% if lang == language %} class="active"{% endif %}>
-                                    <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
-                                        <i class="flag-icon flag-icon-{{ language }}"></i>
-                                        {{ trans("Ceres::Template." ~ language) }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
                     </div>
-
-                    <div class="shipping-settings col-xs-12 col-sm-6">
-                        <div class="list-title">
-                            <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
-                            <hr>
+                    <div class="country-settings-inner countries row col-lg-6">
+                        <div class="shipping-settings">
+                            <div class="list-title">
+                                <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
+                                <hr>
+                            </div>
+                            <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                         </div>
-                        <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                     </div>
                 </div>
             </div>
