@@ -14221,7 +14221,7 @@ Vue.component("add-item-to-basket-overlay", {
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
-                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
                     if (vueApp) {
                         vueApp.classList.add(basketOpenClass);
@@ -19859,7 +19859,7 @@ Vue.directive("toggle-basket-preview", {
             var vueApp = document.querySelector("#vue-app");
 
             if (vueApp) {
-                var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+                var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
                 vueApp.classList.toggle(basketOpenClass || "open-hover");
                 event.preventDefault();
@@ -20933,7 +20933,7 @@ var init = function ($, window, document) {
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function (evt) {
-            var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+            var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
             if ($("#vue-app").hasClass(basketOpenClass)) {
                 if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
