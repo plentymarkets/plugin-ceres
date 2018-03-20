@@ -1617,6 +1617,48 @@
         "default"   : ""
     },
     {
+        "tab"               : "Design",
+        "key"               : "design.brand_primary",
+        "label"             : "Primary Colour",
+        "type"              : "text",
+        "default"           : "#008ebd"
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.brand_secondary",
+        "label"             : "Secondary Colour",
+        "type"              : "text",
+        "default"           : "#d4021d"
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.brand_success",
+        "label"             : "Success Colour",
+        "type"              : "text",
+        "default"           : "#7ED321"
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.brand_info",
+        "label"             : "Info Colour",
+        "type"              : "text",
+        "default"           : "#5bc0de"
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.brand_warning",
+        "label"             : "Warning Colour",
+        "type"              : "text",
+        "default"           : "#f0ad4e"
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.brand_danger",
+        "label"             : "Danger Colour",
+        "type"              : "text",
+        "default"           : "#d9534f"
+    },
+    {
         "tab"               : "Logging and performance",
         "key"               : "log.data",
         "label"             : "Enable logging options",
