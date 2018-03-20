@@ -1,0 +1,14 @@
+<script type="x/template" id="vue-accept-privacy-policy-check">
+    <label class="form-check-label" for="privacy-policy-accept" :class="{ 'error': showError }">
+        <input class="form-check-input" type="checkbox" id="privacy-policy-accept" :value="value" @change="$emit('value-changed', $event.target.checked)">
+        {% autoescape false %}
+            {% set policyContent %}<!--
+                --><a href="/privacy-policy" target="_blank">
+                    <span>{{ trans("Ceres::Template.generalPrivacyPolicy") }}</span>
+                </a><!--
+            -->{% endset %}
+
+            {{ trans("Ceres::Template.contactAcceptPrivacyPolicy", {"policy": policyContent}) }}
+        {% endautoescape %}
+    </label>
+</script>
