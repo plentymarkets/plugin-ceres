@@ -13,14 +13,14 @@ Vue.component("contact-form", {
     data()
     {
         return {
-            name    : "",
-            userMail: "",
-            subject : "",
-            message : "",
-            orderId : "",
-            cc      : false,
-            waiting : false,
-            privacyPolicyAccepted: false,
+            name                  : "",
+            userMail              : "",
+            subject               : "",
+            message               : "",
+            orderId               : "",
+            cc                    : false,
+            waiting               : false,
+            privacyPolicyAccepted : false,
             privacyPolicyShowError: false
         };
     },
