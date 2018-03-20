@@ -17,12 +17,12 @@
 	}
 
 	@include media-breakpoint-up(lg) {
-		overflow: scroll;
+		overflow: auto;
 		max-height: 90vh;
 	}
 
 	@include media-breakpoint-down(sm) {
-		overflow: scroll;
+		overflow: auto;
 		max-height: calc(100% - 1.2rem);
 	}
 
@@ -59,7 +59,7 @@
 		@include reset-list();
 
 		@include media-breakpoint-up(md) {
-			overflow: scroll;
+			overflow: auto;
 			max-height: 40vh;
 		}
 
