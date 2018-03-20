@@ -57,7 +57,7 @@ var init = (function($, window, document)
 
         $(document).on("click", function(evt)
         {
-            const basketOpenClass = (App.config.basket.previewType === "right") ? "open-hover" : "open-right";
+            const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
 
             if ($("#vue-app").hasClass(basketOpenClass))
             {
