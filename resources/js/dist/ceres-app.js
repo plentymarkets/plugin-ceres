@@ -20524,7 +20524,12 @@ var init = function ($, window, document) {
     function CeresMain() {
         var browser = browserDetect.detect();
 
-        $("html").addClass(browser.name);
+        if (browser && browser.name) {
+            $("html").addClass(browser.name);
+        } else {
+            $("html").addClass("unkown-os");
+        }
+
         $(window).scroll(function () {
             if ($(".wrapper-main").hasClass("isSticky")) {
                 if ($(this).scrollTop() > 1) {
