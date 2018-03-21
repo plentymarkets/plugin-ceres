@@ -20039,6 +20039,7 @@ Vue.directive("render-category", {
     bind: function bind(el, binding) {
         el.dataset.categoryId = binding.value.id;
         el.dataset.categoryType = binding.value.type;
+
         el.onclick = function (event) {
             event.preventDefault();
 
@@ -20057,7 +20058,7 @@ Vue.directive("render-category", {
 
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
-                    if (openCategory && openCategory.contains(event.target)) {
+                    if (openCategory && openCategory.contains(event.target) || binding.value.isMobileNavigation) {
                         window.open(url, "_self");
                     }
                 } else {
@@ -20067,7 +20068,7 @@ Vue.directive("render-category", {
             // check if user click the opened category and change the ui handling
             else if (openCategory && openCategory.contains(event.target)) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch")) {
+                } else if (document.body.classList.contains("no-touch") || binding.value.isMobileNavigation) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
                 }
         };
