@@ -7,7 +7,15 @@ var init = (function($, window, document)
     {
         const browser = browserDetect.detect();
 
-        $("html").addClass(browser.name);
+        if (browser && browser.name)
+        {
+            $("html").addClass(browser.name);
+        }
+        else
+        {
+            $("html").addClass("unkown-os");
+        }
+
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
