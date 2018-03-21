@@ -11,6 +11,10 @@ var init = (function($, window, document)
         {
             $("html").addClass(browser.name);
         }
+        else
+        {
+            $("html").addClass("unkown-os");
+        }
 
         $(window).scroll(function()
         {
