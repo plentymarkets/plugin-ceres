@@ -2,7 +2,7 @@
 
 ## v2.5.1 (2018-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.0...2.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
-### Geändert
+### Behoben
 
 - Durch einen Fehler wurden bei einer Anfrage an ElasticSearch alle Artikeldaten zurückgeliefert.
 - Die mobile Navigation funktioniert nun wieder auf allen Touch-Endgeräten.
