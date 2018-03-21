@@ -14221,7 +14221,7 @@ Vue.component("add-item-to-basket-overlay", {
             } else if (this.basketAddInformation === "preview" && Object.keys(this.latestBasketEntry.item).length !== 0) {
                 setTimeout(function () {
                     var vueApp = document.querySelector("#vue-app");
-                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+                    var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
                     if (vueApp) {
                         vueApp.classList.add(basketOpenClass);
@@ -16196,7 +16196,7 @@ Vue.component("contact-map", {
 
             var gMap = new google.maps.Map(document.getElementById("contact-map"), {
                 center: coordinates,
-                zoom: this.mapZoom
+                zoom: parseInt(this.mapZoom)
             });
 
             this.getLatLngByAddress(new google.maps.Geocoder(), gMap);
@@ -19859,7 +19859,7 @@ Vue.directive("toggle-basket-preview", {
             var vueApp = document.querySelector("#vue-app");
 
             if (vueApp) {
-                var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+                var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
                 vueApp.classList.toggle(basketOpenClass || "open-hover");
                 event.preventDefault();
@@ -20039,6 +20039,7 @@ Vue.directive("render-category", {
     bind: function bind(el, binding) {
         el.dataset.categoryId = binding.value.id;
         el.dataset.categoryType = binding.value.type;
+
         el.onclick = function (event) {
             event.preventDefault();
 
@@ -20057,7 +20058,7 @@ Vue.directive("render-category", {
 
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
-                    if (openCategory && openCategory.contains(event.target)) {
+                    if (openCategory && openCategory.contains(event.target) || binding.value.isMobileNavigation) {
                         window.open(url, "_self");
                     }
                 } else {
@@ -20067,7 +20068,7 @@ Vue.directive("render-category", {
             // check if user click the opened category and change the ui handling
             else if (openCategory && openCategory.contains(event.target)) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch")) {
+                } else if (document.body.classList.contains("no-touch") || binding.value.isMobileNavigation) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
                 }
         };
@@ -20163,7 +20164,7 @@ Vue.directive("tooltip", {
     },
     update: function update(el, binding) {
         if (typeof binding.value === "undefined" || binding.value) {
-            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title"))) {
+            if ((0, _utils.isNullOrUndefined)(el.getAttribute("data-original-title")) && !(0, _utils.isNullOrUndefined)(el.getAttribute("data-title"))) {
                 el.setAttribute("title", el.getAttribute("data-title"));
                 el.removeAttribute("data-title");
             }
@@ -20172,7 +20173,7 @@ Vue.directive("tooltip", {
             setTimeout(function () {
                 $(el).tooltip("dispose");
 
-                if ((0, _utils.isDefined)(el.getAttribute("title"))) {
+                if (!(0, _utils.isNullOrUndefined)(el.getAttribute("title"))) {
                     el.setAttribute("data-title", el.getAttribute("title"));
                     el.removeAttribute("title");
                 }
@@ -20892,7 +20893,12 @@ var init = function ($, window, document) {
     function CeresMain() {
         var browser = browserDetect.detect();
 
-        $("html").addClass(browser.name);
+        if (browser && browser.name) {
+            $("html").addClass(browser.name);
+        } else {
+            $("html").addClass("unkown-os");
+        }
+
         $(window).scroll(function () {
             if ($(".wrapper-main").hasClass("isSticky")) {
                 if ($(this).scrollTop() > 1) {
@@ -20933,7 +20939,7 @@ var init = function ($, window, document) {
         var $mainNavbarCollapse = $("#mainNavbarCollapse");
 
         $(document).on("click", function (evt) {
-            var basketOpenClass = App.config.basket.previewType === "right" ? "open-hover" : "open-right";
+            var basketOpenClass = App.config.basket.previewType === "right" ? "open-right" : "open-hover";
 
             if ($("#vue-app").hasClass(basketOpenClass)) {
                 if (evt.target != $(".basket-preview") && evt.target != document.querySelector(".basket-preview-hover") && evt.target.classList[0] != "message" && $(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0) {
@@ -22693,6 +22699,11 @@ var actions = {
         } else {
             commit("setIsBasketInitiallyLoaded");
         }
+
+        _ApiService2.default.listen("AfterBasketChanged", function (data) {
+            commit("setBasket", data.basket);
+            commit("setBasketItems", data.basketItems);
+        });
     },
     addBasketNotification: function addBasketNotification(_ref4, _ref5) {
         var commit = _ref4.commit;

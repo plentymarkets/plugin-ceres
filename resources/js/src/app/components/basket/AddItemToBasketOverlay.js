@@ -75,7 +75,7 @@ Vue.component("add-item-to-basket-overlay", {
                 setTimeout(function()
                 {
                     const vueApp = document.querySelector("#vue-app");
-                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-hover" : "open-right";
+                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
 
                     if (vueApp)
                     {

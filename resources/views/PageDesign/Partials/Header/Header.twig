@@ -142,35 +142,37 @@
         <shop-country-settings country-flag-prefix="flag-icon-" :localization-data="{{ services.localization.getLocalizationData() | json_encode }}">
             <div id="countrySettings" class="row cmp cmp-country-settings no-margin collapse">
                 <div class="container-max">
-                    <div class="country-settings-inner languages row col-lg-6">
+                    <div class="row no-padding">
+                        <div class="country-settings-inner languages col-lg-6">
 
-                        <div class="language-settings">
-                            <div class="list-title">
-                                <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
-                                <hr>
+                            <div class="language-settings">
+                                <div class="list-title">
+                                    <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                                    <hr>
+                                </div>
+
+                                {% set languageList = services.webstoreConfig.getActiveLanguageList() %}
+                                {% set languageUrls = services.url.getLanguageURLs() %}
+                                <ul>
+                                    {% for language in languageList %}
+                                        <li{% if lang == language %} class="active"{% endif %}>
+                                            <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
+                                                <i class="flag-icon flag-icon-{{ language }}"></i>
+                                                {{ trans("Ceres::Template." ~ language) }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-
-                            {% set languageList = services.webstoreConfig.getActiveLanguageList() %}
-                            {% set languageUrls = services.url.getLanguageURLs() %}
-                            <ul>
-                                {% for language in languageList %}
-                                    <li{% if lang == language %} class="active"{% endif %}>
-                                        <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
-                                            <i class="flag-icon flag-icon-{{ language }}"></i>
-                                            {{ trans("Ceres::Template." ~ language) }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
                         </div>
-                    </div>
-                    <div class="country-settings-inner countries row col-lg-6">
-                        <div class="shipping-settings">
-                            <div class="list-title">
-                                <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
-                                <hr>
+                        <div class="country-settings-inner countries col-lg-6">
+                            <div class="shipping-settings">
+                                <div class="list-title">
+                                    <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
+                                    <hr>
+                                </div>
+                                <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                             </div>
-                            <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
                         </div>
                     </div>
                 </div>

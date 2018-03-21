@@ -9,6 +9,7 @@ class OrderConfirmationContext extends GlobalContext implements ContextInterface
     
     public $data;
     public $totals;
+    public $showAdditionalPaymentInformation;
     
     public function init($params)
     {
@@ -16,5 +17,6 @@ class OrderConfirmationContext extends GlobalContext implements ContextInterface
         
         $this->data = $params['data'];
         $this->totals = $params['totals'];
+        $this->showAdditionalPaymentInformation = $params['showAdditionalPaymentInformation'];
     }
 }
