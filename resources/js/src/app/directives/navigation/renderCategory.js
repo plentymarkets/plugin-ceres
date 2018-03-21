@@ -6,6 +6,7 @@ Vue.directive("render-category",
         {
             el.dataset.categoryId = binding.value.id;
             el.dataset.categoryType = binding.value.type;
+
             el.onclick = event =>
             {
                 event.preventDefault();
@@ -25,7 +26,7 @@ Vue.directive("render-category",
                     // check if touch device and change the ui handling
                     if (document.body.classList.contains("touch"))
                     {
-                        if (openCategory && openCategory.contains(event.target))
+                        if (openCategory && openCategory.contains(event.target) || binding.value.isMobileNavigation)
                         {
                             window.open(url, "_self");
                         }
@@ -40,7 +41,7 @@ Vue.directive("render-category",
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
                 }
-                else if (document.body.classList.contains("no-touch"))
+                else if (document.body.classList.contains("no-touch") || binding.value.isMobileNavigation)
                 {
                     store.dispatch("selectCategory", {categoryId: parseInt(el.dataset.categoryId)});
                 }
