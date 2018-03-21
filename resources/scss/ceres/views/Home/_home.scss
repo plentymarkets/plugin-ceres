@@ -283,6 +283,7 @@
 }
 
 // FIX iOS 11.0.0 - 11.X bug https://bugs.webkit.org/show_bug.cgi?id=176896
+.unkown-os body.modal-open,
 .ios body.modal-open {
 	position: fixed;
 	width: 100%;
