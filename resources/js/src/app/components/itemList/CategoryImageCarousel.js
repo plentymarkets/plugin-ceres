@@ -86,7 +86,7 @@ Vue.component("category-image-carousel", {
                 },
                 onInitialized: event =>
                 {
-                    if (this.showNav === "true")
+                    if (this.showNav === true)
                     {
                         document.querySelector(`#owl-nav-text-left-${this._uid}`).parentElement.onclick = event => event.preventDefault();
                         document.querySelector(`#owl-nav-text-right-${this._uid}`).parentElement.onclick = event => event.preventDefault();
