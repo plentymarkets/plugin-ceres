@@ -1,39 +1,127 @@
+import {floatLength, formatFloat, limit}from "../../helper/number";
+import {defaultValue, isDefined, isNullOrUndefined}from "../../helper/utils";
+import TranslationService from "../../services/TranslationService";
+import {debounce}from "../../helper/debounce";
+
 Vue.component("quantity-input", {
 
     delimiters: ["${", "}"],
 
-    props: [
-        "value",
-        "timeout",
-        "min",
-        "max",
-        "vertical",
-        "template",
-        "waiting",
-        "variationId"
-    ],
+    props: {
+        value: {
+            type: Number,
+            required: true
+        },
+        timeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+        min: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        max: {
+            type: Number,
+            required: false
+        },
+        interval: {
+            type: Number,
+            required: false,
+            default: 1
+        },
+        template: {
+            type: String,
+            required: true
+        },
+        waiting: {
+            type: Boolean,
+            required: false
+        },
+        variationId: {
+            type: Number,
+            required: false
+        }
+    },
 
     data()
     {
         return {
-            compValue: this.value,
-            compTimeout: this.timeout,
-            compMin: this.min,
-            compMax: this.max,
-            compVertical: this.vertical,
-            timeoutHandle: null,
-            internalMin: null,
-            internalMax: null,
-            currentCount: 0
+            compValue:      this.value,
+            compMin:        this.min,
+            compMax:        this.max,
+            compInterval:   this.interval,
+            compDecimals:   0,
+            onValueChanged: null
         };
     },
 
-    computed: {
-        alreadyInBasketCount()
+    created()
+    {
+        this.$options.template = this.template;
+
+        this.compDecimals = floatLength(defaultValue(this.compInterval, 0));
+        this.compInterval = defaultValue(this.compInterval, 1);
+        this.onValueChanged = debounce(
+            () =>
+            {
+                this.$emit("quantity-change", this.compValue);
+            },
+            defaultValue(this.timeout, 500)
+        );
+
+        if (!isNullOrUndefined(this.variationId))
         {
+            this.fetchQuantityFromBasket();
+        }
+    },
+
+    computed: {
+        variationBasketQuantity()
+        {
+            if (isNullOrUndefined(this.variationId))
+            {
+                return 0;
+            }
             const basketObject = this.$store.state.basket.items.find(variations => variations.variationId === this.variationId);
 
             return basketObject ? basketObject.quantity : 0;
+        },
+
+        isMinimum()
+        {
+            return isDefined(this.compMin) && (this.compValue - this.compInterval) < this.compMin;
+        },
+
+        isMaximum()
+        {
+            return isDefined(this.compMax) && (this.compValue + this.compInterval) > this.compMax;
+        },
+
+        minimumHint()
+        {
+            return TranslationService.translate(
+                "Ceres::Template.orderQuantityMin",
+                {
+                    min: this.min
+                }
+            );
+        },
+
+        maximumHint()
+        {
+            return TranslationService.translate(
+                "Ceres::Template.orderQuantityMax",
+                {
+                    max: this.max
+                }
+            );
+        },
+
+        displayValue()
+        {
+            return this.$options.filters.numberFormat(this.compValue);
         },
 
         ...Vuex.mapState({
@@ -44,141 +132,103 @@ Vue.component("quantity-input", {
     watch: {
         basketItems:
         {
-            handler(val, oldVal)
+            handler(newValue, oldValue)
             {
-                if (oldVal)
+                if (isDefined(this.variationId) &&
+                    isDefined(oldValue) &&
+                    JSON.stringify(newValue) !== JSON.stringify(oldValue))
                 {
-                    if (JSON.stringify(val) !== JSON.stringify(oldVal))
-                    {
-                        this.initDefaultVars();
-
-                        if (!this.compVertical)
-                        {
-                            this.handleMissingItems();
-                        }
-                    }
+                    this.fetchQuantityFromBasket();
                 }
             },
             deep: true
         },
 
-        value(val, oldVal)
+        value(newValue, oldValue)
         {
-            if (val !== oldVal)
+            if (newValue !== oldValue)
             {
-                this.compValue = val;
+                this.setValue(newValue);
             }
         }
-    },
-
-    created()
-    {
-        this.$options.template = this.template;
-
-        this.checkDefaultVars();
-        this.initDefaultVars();
-
-        if (!this.compVertical)
-        {
-            this.handleMissingItems();
-        }
-
-        this.validateValue();
     },
 
     methods:
     {
-        countValueUp()
+        increaseValue()
         {
-            if (!(this.compValue === this.internalMax) && !this.waiting)
+            const newValue = formatFloat(this.compValue + this.compInterval, this.compDecimals);
+
+            if ((isNullOrUndefined(this.compMax) || newValue <= this.compMax) && !this.waiting)
             {
-                this.compValue++;
-                this.validateValue();
+                this.setValue(newValue);
             }
         },
 
-        countValueDown()
+        decreaseValue()
         {
-            if (!(this.compValue === this.internalMin) && !this.waiting)
+            const newValue = formatFloat(this.compValue - this.compInterval, this.compDecimals);
+
+            if ((isNullOrUndefined(this.compMin) || newValue >= this.compMin) && !this.waiting)
             {
-                this.compValue--;
-                this.validateValue();
+                this.setValue(newValue);
             }
         },
 
         setValue(value)
         {
-            this.compValue = parseInt(value);
-            this.validateValue();
-        },
-
-        validateValue()
-        {
-            if (isNaN(this.compValue))
+            value = parseFloat(value);
+            if (isNaN(value))
             {
-                this.compValue = this.internalMin === 0 ? 0 : this.internalMin || 1;
-            }
-            else if (this.compValue < this.internalMin)
-            {
-                this.compValue = this.internalMin;
-            }
-            else if (this.compValue > this.internalMax)
-            {
-                this.compValue = this.internalMax;
+                value = defaultValue(this.compMin, 1);
             }
 
-            this.onValueChanged();
-        },
+            // limit new value to min/ max value
+            value = limit(value, this.compMin, this.compMax);
 
-        onValueChanged()
-        {
-            if (this.compTimeout === 0)
+            // make sure, new value is an even multiple of interval
+            const diff = formatFloat(value % this.compInterval, this.compDecimals, true);
+
+            if (diff > 0 && diff !== this.compInterval)
             {
-                this.$emit("quantity-change", this.compValue);
-            }
-            else
-            {
-                if (this.timeoutHandle)
+                if (diff < this.compInterval / 2)
                 {
-                    window.clearTimeout(this.timeoutHandle);
+                    value -= diff;
                 }
-
-                this.timeoutHandle = window.setTimeout(() =>
+                else
                 {
-                    this.$emit("quantity-change", this.compValue);
-                }, this.compTimeout);
+                    value += this.compInterval - diff;
+                }
+                value = limit(value, this.compMin, this.compMax);
+            }
+
+            // cut fraction
+            value = formatFloat(value, this.compDecimals);
+
+            if (value !== this.compValue)
+            {
+                this.compValue = value;
+                this.onValueChanged();
             }
         },
 
-        checkDefaultVars()
+        fetchQuantityFromBasket()
         {
-            this.compMin = this.compMin === 0 || typeof this.compMin === "undefined" ? null : this.compMin;
-            this.compMax = this.compMax === 0 || typeof this.compMax === "undefined" ? null : this.compMax;
-        },
-
-        initDefaultVars()
-        {
-            this.compTimeout = this.compTimeout === 0 ? 0 : this.compTimeout || 500;
-            this.internalMin = this.compMin || 1;
-            this.internalMax = this.compMax || 9999;
-            this.compVertical = this.compVertical || false;
-        },
-
-        handleMissingItems()
-        {
-            if (this.alreadyInBasketCount >= this.internalMin)
+            if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min)
             {
-                this.internalMin = 1;
+                // minimum quantity already in basket
+                this.compMin = this.compInterval;
             }
 
-            if (this.compMax !== null)
+            if (!isNullOrUndefined(this.max))
             {
-                this.internalMax = this.compMax - this.alreadyInBasketCount;
+                // decrease maximum quantity by quantity of variations already in basket
+                this.compMax = this.max - this.variationBasketQuantity;
 
-                if (this.alreadyInBasketCount === this.compMax)
+                if (this.variationBasketQuantity + this.compInterval > this.max)
                 {
-                    this.internalMin = 0;
-                    this.internalMax = 0;
+                    this.compMin = 0;
+                    this.compMax = 0;
                     this.$emit("out-of-stock", true);
                 }
                 else
@@ -187,9 +237,7 @@ Vue.component("quantity-input", {
                 }
             }
 
-            this.compValue = this.internalMin;
-
-            this.onValueChanged();
+            this.setValue(this.compMin);
         }
     }
 });

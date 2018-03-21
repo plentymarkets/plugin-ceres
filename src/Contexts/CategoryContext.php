@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use IO\Helper\ContextInterface;
 use Plenty\Modules\Category\Models\Category;
 
 class CategoryContext extends GlobalContext implements ContextInterface
@@ -11,9 +12,9 @@ class CategoryContext extends GlobalContext implements ContextInterface
    
     public $metaRobots;
     
-    public function init($params, $templateContainer)
+    public function init($params)
     {
-        parent::init($params, $templateContainer);
+        parent::init($params);
         
         $this->category = $params['category'];
         

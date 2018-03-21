@@ -22,7 +22,7 @@
             </li>
 
             <li class="ddown" v-for="category in dataContainer1" v-show="!category.hideCategory">
-                <a :href="category.url" v-render-category="{ id: category.id, type: category.type }" @click.prevent="navigateTo(category)" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
+                <a :href="category.url" v-render-category="{ id: category.id, type: category.type, isMobileNavigation: true }" @click.prevent="navigateTo(category)" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
 
                 <span class="nav-direction" v-if="category.children && category.showChildren" @click="slideTo(category.children)">
                     <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
@@ -38,7 +38,7 @@
             </li>
 
             <li class="ddown" v-for="category in dataContainer2" v-show="!category.hideCategory">
-                <a :href="category.url" v-render-category="{ id: category.id, type: category.type }" @click.prevent="navigateTo(category)" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
+                <a :href="category.url" v-render-category="{ id: category.id, type: category.type, isMobileNavigation: true }" @click.prevent="navigateTo(category)" v-if="category.showChildren || category.details[0]">${ category.details[0].name }</a>
                 
                 <span class="nav-direction" v-if="category.children && category.showChildren" @click="slideTo(category.children)">
                     <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>

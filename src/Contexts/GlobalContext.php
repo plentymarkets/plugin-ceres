@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use IO\Helper\ContextInterface;
 use IO\Services\ItemLastSeenService;
 use IO\Services\NotificationService;
 use IO\Services\WebstoreConfigurationService;
@@ -30,7 +31,7 @@ class GlobalContext implements ContextInterface
     public $basket;
     public $webstoreConfig;
 
-    public function init($params, $templateContainer)
+    public function init($params)
     {
         $this->params = $params;
 
