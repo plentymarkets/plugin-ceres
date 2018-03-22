@@ -14,11 +14,11 @@ export function isAddressFieldEnabled(countryId, addressType, field)
 
         if (countryId === 1)
         {
-            enabledFields = App.config.enabledBillingAddressFields;
+            enabledFields = App.config.addresses.billingAddressShow;
         }
         else
         {
-            enabledFields = App.config.enabledBillingAddressFieldsUK;
+            enabledFields = App.config.addresses.billingAddressShow_en;
         }
     }
     else
@@ -27,15 +27,13 @@ export function isAddressFieldEnabled(countryId, addressType, field)
 
         if (countryId === "1")
         {
-            enabledFields = App.config.enabledDeliveryAddressFields;
+            enabledFields = App.config.addresses.deliveryAddressShow;
         }
         else
         {
-            enabledFields = App.config.enabledDeliveryAddressFieldsUK;
+            enabledFields = App.config.addresses.deliveryAddressShow_en;
         }
     }
-
-    enabledFields = enabledFields.split(", ");
 
     const fullField = address + "." + field;
 

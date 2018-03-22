@@ -10,24 +10,45 @@
     right: 0;
     width: 100%;
     left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
+	
+	&.no-margin {
+		margin: 0;
+	}
+
+	@include media-breakpoint-up(lg) {
+		overflow: auto;
+		max-height: 90vh;
+	}
+
+	@include media-breakpoint-down(sm) {
+		overflow: auto;
+		max-height: calc(100% - 1.2rem);
+	}
 
 	.country-settings-inner,
 	.currency-select-inner {
 		padding: 1rem;
 		display: flex;
     	flex-flow: row nowrap;
-
-    	max-width: 1200px;
-    	margin: 0 auto;
+		margin: 0 auto;
+		
+		&.languages {
+			@include media-breakpoint-up(lg) {
+				justify-content: flex-end;
+			}
+		}
 	}
 
+	.shipping-settings, 
 	.language-settings{
+		width: 100%;
 
-	}
-
-	.shipping-settings{
-
+		& ul {
+			@include media-breakpoint-down(sm) {
+				column-count: 2;
+			}
+		}
 	}
 
 	.list-title{
@@ -36,6 +57,11 @@
 
 	ul{
 		@include reset-list();
+
+		@include media-breakpoint-up(md) {
+			overflow: auto;
+			max-height: 40vh;
+		}
 
 		li{
 			width: 100%;

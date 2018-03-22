@@ -75,10 +75,11 @@ Vue.component("add-item-to-basket-overlay", {
                 setTimeout(function()
                 {
                     const vueApp = document.querySelector("#vue-app");
+                    const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
 
                     if (vueApp)
                     {
-                        vueApp.classList.add(App.config.basketOpenClass || "open-hover");
+                        vueApp.classList.add(basketOpenClass);
                     }
                 }, 1);
             }
