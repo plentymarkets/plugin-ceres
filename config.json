@@ -1632,6 +1632,13 @@
     },
     {
         "tab"               : "Design",
+        "key"               : "design.link_hover_colour",
+        "label"             : "Link Hover Colour",
+        "type"              : "text",
+        "default"           : "#005571"
+    },
+    {
+        "tab"               : "Design",
         "key"               : "design.brand_success",
         "label"             : "Success Colour",
         "type"              : "text",
