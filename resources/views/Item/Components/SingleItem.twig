@@ -41,7 +41,7 @@
 
                     <!-- Variation -->
                     <div class="row m-b-1" v-if="variations.length > 0">
-                        <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variations="variations" :preselect="currentVariation.variation.id"></variation-select>
+                        <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variations="variations" :preselect="currentVariation.variation.id" @is-valid-change="isVariationSelected = $event"></variation-select>
                     </div>
                     <!-- /Variation -->
 
@@ -93,7 +93,7 @@
 
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
-                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true"></add-to-basket>
+                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true" :is-variation-selected="isVariationSelected"></add-to-basket>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
 
