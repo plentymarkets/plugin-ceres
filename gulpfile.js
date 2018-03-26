@@ -22,6 +22,7 @@ var minifyCSS = require("gulp-minify-css");
 var eslint = require("gulp-eslint");
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
+var copy = require("gulp-copy");
 
 gulp.task("default", ["build"]);
 
@@ -155,9 +156,21 @@ gulp.task("build:sass-min", ["build:sass"], function()
     return buildSass(OUTPUT_PREFIX + ".min.css", "compressed");
 });
 
-gulp.task("build:sass", function()
+gulp.task("build:sass", ["copy:sass-vendor"], function()
 {
     return buildSass(OUTPUT_PREFIX + ".css", "expanded");
+});
+
+gulp.task("copy:sass-vendor", function()
+{
+    return gulp
+        .src([
+            'node_modules/bootstrap/scss/**/*.scss',
+            'node_modules/font-awesome/scss/**/*.scss',
+            'node_modules/flag-icon-css/sass/**/*.scss',
+            'node_modules/shariff/build/shariff.complete.css'
+        ])
+        .pipe(copy(SCSS_SRC, {prefix: 1}))
 });
 
 function buildSass(outputFile, outputStyle)
@@ -182,7 +195,6 @@ function buildSass(outputFile, outputStyle)
         .pipe(sass(config.scssOptions).on("error", sass.logError))
         .pipe(rename(outputFile))
         .pipe(autoprefixer(config.prefixOptions))
-        .pipe(minifyCSS())
         .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(SCSS_DIST));
 }

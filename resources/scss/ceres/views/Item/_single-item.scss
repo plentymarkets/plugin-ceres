@@ -147,6 +147,7 @@
         }
     }
 }
+
 @include media-breakpoint-only(md) {
     .single {
         .price {
@@ -154,6 +155,7 @@
         }
     }
 }
+
 
 @include media-breakpoint-up(md) {
     .single {
