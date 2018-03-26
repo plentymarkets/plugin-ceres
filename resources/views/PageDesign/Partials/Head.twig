@@ -34,7 +34,7 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link id="css" rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+    <link id="ceres-css" rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}
