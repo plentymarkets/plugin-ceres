@@ -18,12 +18,12 @@ Vue.component("single-item", {
     {
         isDescriptionTabActive()
         {
-            return (App.config.singleItemData.includes("item.description") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.description.length;
+            return App.config.item.itemData.includes("item.description") && !!this.currentVariation.texts.description.length;
         },
 
         isTechnicalDataTabActive()
         {
-            return (App.config.singleItemData.includes("item.technical_data") || App.config.singleItemData.includes("all")) && !!this.currentVariation.texts.technicalData.length;
+            return App.config.item.itemData.includes("item.technical_data") && !!this.currentVariation.texts.technicalData.length;
         },
 
         ...Vuex.mapState({

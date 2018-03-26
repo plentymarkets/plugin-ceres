@@ -65,7 +65,9 @@ var init = (function($, window, document)
 
         $(document).on("click", function(evt)
         {
-            if ($("#vue-app").hasClass(App.config.basketOpenClass || "open-hover"))
+            const basketOpenClass = (App.config.basket.previewType === "right") ? "open-right" : "open-hover";
+
+            if ($("#vue-app").hasClass(basketOpenClass))
             {
                 if ((evt.target != $(".basket-preview")) &&
                     (evt.target != document.querySelector(".basket-preview-hover")) &&
@@ -73,7 +75,7 @@ var init = (function($, window, document)
                     ($(evt.target).parents(".basket-preview").length <= 0 && $(evt.target).parents(".basket-preview-hover").length <= 0))
                 {
                     evt.preventDefault();
-                    $("#vue-app").toggleClass(App.config.basketOpenClass || "open-hover");
+                    $("#vue-app").toggleClass(basketOpenClass || "open-hover");
                 }
             }
 

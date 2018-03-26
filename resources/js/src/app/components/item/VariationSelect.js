@@ -101,7 +101,7 @@ Vue.component("variation-select", {
         isEnabled(attributeId, attributeValueId)
         {
             // clone selectedAttributes to avoid touching objects bound to UI
-            var attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
+            const attributes = JSON.parse(JSON.stringify(this.selectedAttributes));
 
             attributes[attributeId] = attributeValueId;
             return this.filterVariations(attributes).length > 0;
@@ -114,12 +114,12 @@ Vue.component("variation-select", {
          */
         setAttributes(variation)
         {
-            var hasChanges = false;
+            let hasChanges = false;
 
-            for (var i = 0; i < variation.attributes.length; i++)
+            for (let i = 0; i < variation.attributes.length; i++)
             {
-                var id = variation.attributes[i].attributeId;
-                var val = variation.attributes[i].attributeValueId;
+                const id = variation.attributes[i].attributeId;
+                const val = variation.attributes[i].attributeValueId;
 
                 if (this.selectedAttributes[id] !== val)
                 {

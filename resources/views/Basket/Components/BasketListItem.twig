@@ -10,7 +10,7 @@
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
             <div class="image-container">
-                <img class="img-basket-small" v-if="image" :src="image.url" :alt="altText">
+                <img class="img-basket-small" v-if="image" :src="image" :alt="altText">
             </div>
 
             <div class="meta-container-wrapper">
@@ -44,8 +44,14 @@
     
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
-                            <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
-                                                :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
+                            <quantity-input
+                                    template="#vue-quantity-input"
+                                    @quantity-change="updateQuantity"
+                                    :value="basketItem.quantity"
+                                    :waiting="isInputLocked"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity"
+                                    :max="basketItem.variation.data.variation.maximumOrderQuantity"
+                                    :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
                         </div>
     
                         <div class="price-box">
