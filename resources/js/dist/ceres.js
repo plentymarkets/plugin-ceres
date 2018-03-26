@@ -22992,7 +22992,7 @@ var mutations = {
             state.deliveryAddressList.splice(index, 1);
 
             if (state.deliveryAddress === deliveryAddress) {
-                state.deliveryAddress = state.deliveryAddress.find(function (address) {
+                state.deliveryAddress = state.deliveryAddressList.find(function (address) {
                     return address.id === -99;
                 });
                 state.deliveryAddressId = -99;
