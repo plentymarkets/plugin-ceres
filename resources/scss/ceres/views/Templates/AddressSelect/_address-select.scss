@@ -88,7 +88,7 @@
 		margin-bottom: 0;
 
 		& .item-controls {
-			@include media-breakpoint-between(xs, md) {
+			@include media-breakpoint-down(md) {
 				width: 83px;
 			}
 

@@ -28,12 +28,20 @@
                                         template="#vue-quantity-input"></quantity-input>
                         </div>
 
-                        <button v-if="!buttonLockState" :disabled="waiting" href="#" class="btn btn-block btn-primary" @click="addToBasket()">
+                        <button v-if="!isVariationSelected" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.itemPleaseSelectValidVariation") }}">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            {{ trans("Ceres::Template.addToBasket") }}
+                        </button>
+                        <button v-else-if="!buttonLockState" :disabled="waiting" class="btn btn-block btn-primary" @click="addToBasket()">
                             <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.addToBasket") }}
                         </button>
-                        <button v-else href="#" class="btn btn-block btn-primary disabled" v-tooltip data-toggle="tooltip" 
-                                data-placement="top" :title="'Ceres::Template.orderQuantityMax' | translate({max: item.variation.maximumOrderQuantity})">
+                        <button v-else
+                                class="btn btn-block btn-primary disabled"
+                                v-tooltip
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                :title="'Ceres::Template.orderQuantityMax' | translate({max: item.variation.maximumOrderQuantity})">
                             <i v-waiting-animation="waiting" class="fa fa-shopping-cart" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.addToBasket") }}
                         </button>

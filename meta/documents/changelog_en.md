@@ -1,5 +1,13 @@
 # Release Notes for Ceres
 
+## v2.5.1 (2018-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.0...2.5.1" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error an ElasticSearch request returned all item data. This has been fixed.
+- The mobile navigation is now working properly on all touch devices.
+- Due to an error the online store was not loaded properly when it was accessed via an app like Facebook or Instagram. This has been fixed.
+
 ## v2.5.0 (2018-03-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.4.0...2.5.0" target="_blank"><b>Overview of all changes</b></a>
 
 ### Added
