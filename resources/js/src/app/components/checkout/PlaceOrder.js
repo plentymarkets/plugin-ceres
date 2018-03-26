@@ -35,8 +35,6 @@ Vue.component("place-order", {
     methods: {
         placeOrder()
         {
-            this.showModal("<h1>Test</h1><p>Hallo</p><p>Welt</p>");
-            /*
             this.waiting = true;
 
             if (this.contactWish && this.contactWish.length > 0)
@@ -51,7 +49,6 @@ Vue.component("place-order", {
             {
                 this.preparePayment();
             }
-            */
         },
 
         preparePayment()
