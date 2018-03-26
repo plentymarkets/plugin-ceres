@@ -53,6 +53,7 @@
     "moment": "^2.20.1",
     "owl.carousel": "^2.2.0",
     "popper.js": "^1.13.0",
+    "sass.js": "^0.10.9",
     "shariff": "^1.24.0",
     "sticky-kit": "^1.1.3",
     "tether": "^1.4.3",
