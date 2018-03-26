@@ -16,32 +16,36 @@ window.addEventListener("compile-sassy", function(event) {
     {
         return event.detail.toString().replace(",", " ") + content;
     }
+
+    function replaceCss(compiled)
+    {
+        var cssNode = document.getElementById("ceres-css");
+        document.getElementById("ceres-css").parentNode.removeChild(cssNode);
+
+        var head = document.head || document.getElementsByTagName("head")[0];
+        var style = document.createElement("style");
+
+        style.type = "text/css";
+        style.id = "ceres-css";
+
+        if (style.styleSheet)
+        {
+            style.styleSheet.cssText = compiled.text;
+        }
+        else
+        {
+            style.appendChild(document.createTextNode(compiled.text));
+        }
+
+        head.appendChild(style);
+    }
     
     // download the files immediately
     sass.preloadFiles(base, directory, files, function() {
         sass.readFile("ceres.scss", function(read) {
             sass.writeFile("ceres.scss", manipulateVars(read), function(write) {
                 sass.compileFile("ceres.scss", function(compiled) {
-                    // set css to head
-                    var cssNode = document.getElementById("ceres-css");
-                    document.getElementById("ceres-css").parentNode.removeChild(cssNode);
-
-                    var head = document.head || document.getElementsByTagName("head")[0];
-                    var style = document.createElement("style");
-    
-                    style.type = "text/css";
-                    style.id = "ceres-css";
-    
-                    if (style.styleSheet)
-                    {
-                        style.styleSheet.cssText = compiled.text;
-                    }
-                    else
-                    {
-                        style.appendChild(document.createTextNode(compiled.text));
-                    }
-    
-                    head.appendChild(style);
+                    replaceCss(compiled);
                 });
             });
         });
