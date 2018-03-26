@@ -7,30 +7,18 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresGlobalConfig extends PluginConfig
 {
+    public $shippingCostsCategoryId;
+    public $defaultContactClassB2B;
+    public $enableOldUrlPattern;
+    public $googleRecaptchaApiKey;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
+
+        $this->shippingCostsCategoryId  = $this->getIntegerValue( "global.shippingCostsCategoryId", 0 );
+        $this->defaultContactClassB2B   = $this->getIntegerValue( "global.default_contact_class_b2b", null );
+        $this->enableOldUrlPattern      = $this->getBooleanValue( "global.enableOldUrlPattern", false );
+        $this->googleRecaptchaApiKey    = $this->getTextValue( "global.google_recaptcha_api_key", "" );
     }
-
-    public function getShippingCostsCategoryId()
-    {
-        return $this->getIntegerValue( "global.shippingCostsCategoryId", 0 );
-    }
-
-    public function getDefaultContactClassB2B()
-    {
-        return $this->getIntegerValue( "global.default_contact_class_b2b", null );
-    }
-
-    public function getEnableOldUrlPattern()
-    {
-        return $this->getBooleanValue( "global.enableOldUrlPattern", false );
-    }
-
-    public function getGoogleRecaptchaApiKey()
-    {
-        return $this->getTextValue( "global.google_recaptcha_api_key", "" );
-    }
-
-
 }

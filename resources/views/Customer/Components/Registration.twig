@@ -32,9 +32,9 @@
 
                 <div class="col-sm-6 input-unit-group" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
-                        {% set uid_pwd = uid() %}
-                        <input type="password" name="password-repeat" id="{{ uid_pwd }}" v-model="passwordRepeat" data-validate-ref="#registration_password_input">
-                        <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
+                        {% set uid_pwd_repeat = uid() %}
+                        <input type="password" name="password-repeat" id="{{ uid_pwd_repeat }}" v-model="passwordRepeat" data-validate-ref="#{{ uid_pwd }}">
+                        <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
                     </div>
                 </div>
 

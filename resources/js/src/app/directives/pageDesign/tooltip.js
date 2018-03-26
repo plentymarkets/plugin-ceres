@@ -1,3 +1,5 @@
+import {isNullOrUndefined}from "../../helper/utils";
+
 const initTooltip = el =>
 {
     setTimeout(() =>
@@ -21,6 +23,12 @@ Vue.directive("tooltip", {
     {
         if (typeof binding.value === "undefined" || binding.value)
         {
+            if (isNullOrUndefined(el.getAttribute("data-original-title")) &&
+                !isNullOrUndefined(el.getAttribute("data-title")))
+            {
+                el.setAttribute("title", el.getAttribute("data-title"));
+                el.removeAttribute("data-title");
+            }
             initTooltip(el);
         }
         else
@@ -28,6 +36,12 @@ Vue.directive("tooltip", {
             setTimeout(() =>
             {
                 $(el).tooltip("dispose");
+
+                if (!isNullOrUndefined(el.getAttribute("title")))
+                {
+                    el.setAttribute("data-title", el.getAttribute("title"));
+                    el.removeAttribute("title");
+                }
             }, 1);
         }
     },
@@ -37,6 +51,11 @@ Vue.directive("tooltip", {
         if (typeof binding.value === "undefined" || binding.value)
         {
             initTooltip(el);
+        }
+        else
+        {
+            el.setAttribute("data-title", el.getAttribute("title"));
+            el.removeAttribute("title");
         }
     }
 });

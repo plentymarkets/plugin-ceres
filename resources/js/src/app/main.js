@@ -7,7 +7,15 @@ var init = (function($, window, document)
     {
         const browser = browserDetect.detect();
 
-        $("html").addClass(browser.name);
+        if (browser && browser.name)
+        {
+            $("html").addClass(browser.name);
+        }
+        else
+        {
+            $("html").addClass("unkown-os");
+        }
+
         $(window).scroll(function()
         {
             if ($(".wrapper-main").hasClass("isSticky"))
@@ -165,22 +173,6 @@ var init = (function($, window, document)
                 $("html, body").animate({scrollTop: 0}, duration);
 
                 return false;
-            });
-
-            $("#searchBox").on("show.bs.collapse", function()
-            {
-                $("#countrySettings").collapse("hide");
-            });
-
-            $("#countrySettings").on("show.bs.collapse", function()
-            {
-                $("#searchBox").collapse("hide");
-            });
-
-            $("#accountMenuList").click(function()
-            {
-                $("#countrySettings").collapse("hide");
-                $("#searchBox").collapse("hide");
             });
         });
     }

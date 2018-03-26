@@ -6,7 +6,7 @@ const state =
         facets: [],
         selectedFacets: [],
         page: null,
-        sorting: null,
+        sorting: "texts.name1_asc",
         isLoading: false,
         itemsPerPage: null,
         searchString: null,
@@ -153,8 +153,8 @@ const actions =
                 ApiService.get(url, searchParams)
                     .done(data =>
                     {
-                        commit("setItemListItems", data.documents);
-                        commit("setItemListTotalItems", data.total);
+                        commit("setItemListItems", data.itemList.documents);
+                        commit("setItemListTotalItems", data.itemList.total);
                         commit("setFacets", data.facets);
                         commit("setIsItemListLoading", false);
                         resolve(data);

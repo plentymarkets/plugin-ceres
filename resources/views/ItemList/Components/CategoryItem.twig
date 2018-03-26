@@ -24,13 +24,13 @@
                 <div class="square-container">
                     <div class="square-inner main-image">
                         <category-image-carousel template="#vue-category-image-carousel"
-                                                    :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
-                                                    :alt-text="itemData | itemName"
-                                                    :item-url="itemData | itemURL"
-                                                    :show-dots="{{ config("Ceres.item.category_show_dots") | json_encode() }}"
-                                                    :show-nav="{{ config("Ceres.item.category_show_nav") | json_encode() }}"
-                                                    :enable-carousel="{{ enableCarousel }}"
-                                                    ref="categoryImageCarousel">
+                                                 :image-urls-data="itemData.images | itemImages(imageUrlAccessor)"
+                                                 :alt-text="itemData | itemName"
+                                                 :item-url="itemData | itemURL"
+                                                 :show-dots="{{ ceresConfig.item.categoryShowDots | json_encode }}"
+                                                 :show-nav="{{ ceresConfig.item.categoryShowNav | json_encode }}"
+                                                 :enable-carousel="{{ enableCarousel }}"
+                                                 ref="categoryImageCarousel">
                         </category-image-carousel>
                     </div>
                 </div>

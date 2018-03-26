@@ -1,29 +1,5 @@
 {% extends getPartial('page-design') %}
 
-{% set page = 1 %}
-{% if request.get("page") %}
-    {% set page = request.get("page") %}
-{% endif %}
-
-{% set rowsPerPage = config('Ceres.pagination.rowsPerPage') | split(', ') %}
-{% set columnsPerPage = config('Ceres.pagination.columnsPerPage') %}
-{% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
-{% if request.get("items") %}
-    {% set itemsPerPage = request.get("items") %}
-{% endif %}
-
-{% if services.template.isSearch() %}
-    {% set sorting = config("Ceres.sort.defaultSortingSearch") %}
-    {% set searchString = request.get("query") %}
-{% else %}
-    {% set sorting = config("Ceres.sort.defaultSorting") %}
-{% endif %}
-
-{% if request.get("sorting") %}
-    {% set sorting = request.get("sorting") %}
-{% endif %}
-
-{% set paginatedResult = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.search, {'query': request.get("query"), 'page': page, 'items': itemsPerPage, 'sorting':  sorting}) %}
 {% block PageBody %}
 
     {{ component( "Ceres::ItemList.Components.ItemList" ) }}
@@ -45,12 +21,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="list-wrapper">
-                            <item-list-sorting template="#vue-item-list-sorting" :sort-data="{{ config("Ceres.sort.data") | split(', ') | json_encode() }}"></item-list-sorting>
+                            <item-list-sorting template="#vue-item-list-sorting" :sorting-list="{{ searchOptions.sorting | json_encode }}" :default-sorting="{{ searchOptions.defaultSorting | json_encode }}"></item-list-sorting>
                             <items-per-page
                                 template="#vue-items-per-page"
-                                :columns-per-page="{{ config("Ceres.pagination.columnsPerPage") | json_encode() }}"
-                                :rows-per-page="{{ config("Ceres.pagination.rowsPerPage") | split(', ') | json_encode() }}"></items-per-page>
-                            <item-filter-list :facet-data="{{ paginatedResult.facets | json_encode }}"></item-filter-list>
+                                :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
+                            <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
                         </div>
                     </div>
                 </div>
@@ -64,8 +39,8 @@
 
                 <div id="vue-rendered-item-list" class="item-list-frame">
                     <item-list
-                        :item-data="{{ paginatedResult.documents | json_encode }}"
-                        :total-items-data="{{ paginatedResult.total }}"
+                        :item-data="{{ itemList | json_encode }}"
+                        :total-items-data="{{ itemCountTotal }}"
                         template="#vue-item-list">
                     </item-list>
                 </div>
@@ -85,8 +60,8 @@
 {% endblock %}
 
 {% block PartialHead %}
-<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
-    {% if services.template.isSearch() %}
-        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ config("Ceres.header.company_name") }}</title>
+<script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
+    {% if isSearch %}
+        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ ceresConfig.header.companyName }}</title>
     {% endif %}
 {% endblock %}

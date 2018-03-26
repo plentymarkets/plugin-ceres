@@ -7,14 +7,13 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresLanguageConfig extends PluginConfig
 {
+    public $activeLanguages;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getActiveLanguages()
-    {
-        return $this->getMultiSelectValue(
+        $this->activeLanguages = $this->getMultiSelectValue(
             "language.active_languages",
             [
                 "de",

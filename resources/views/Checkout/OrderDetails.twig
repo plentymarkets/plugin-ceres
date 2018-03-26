@@ -1,6 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set totals = services.totalsService.getAllTotals(orderData.order) %}
 {% set totalsConfigData = config("Ceres.basket.data")|split(', ') %}
 {% set basketTotalsCurrency = totals.currency %}
 
@@ -31,31 +30,31 @@
                         <div class="row">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderInvoiceAddress") }}</strong>
                             <span class="col-xs-6 col-sm-7">
-                                                        <div>{{ orderData.order.billingAddress.name1 }}</div>
-                                                        <div>{{ orderData.order.billingAddress.name2 }} {{ orderData.order.billingAddress.name3 }}</div>
-                                                        <div>{{ orderData.order.billingAddress.name4 }}</div>
-                                                        <div>{{ orderData.order.billingAddress.address1 }} {{ orderData.order.billingAddress.address2 }}</div>
-                                                        <div>{{ orderData.order.billingAddress.postalCode }} {{ orderData.order.billingAddress.town }}</div>
-                                                    </span>
+                                <div>{{ orderData.order.billingAddress.name1 }}</div>
+                                <div>{{ orderData.order.billingAddress.name2 }} {{ orderData.order.billingAddress.name3 }}</div>
+                                <div>{{ orderData.order.billingAddress.name4 }}</div>
+                                <div>{{ orderData.order.billingAddress.address1 }} {{ orderData.order.billingAddress.address2 }}</div>
+                                <div>{{ orderData.order.billingAddress.postalCode }} {{ orderData.order.billingAddress.town }}</div>
+                            </span>
                         </div>
 
                         <div class="row m-t-1">
                             <strong class="col-xs-6 col-sm-5">{{ trans("Ceres::Template.orderShippingAddress") }}</strong>
                             <span class="col-xs-6 col-sm-7">
-                                                        {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
-                                                            <span>
-                                                                {{ trans("Ceres::Template.addressSameAsInvoice") }}
-                                                            </span>
-                                                        {% else %}
-                                                            <span>
-                                                                <div>{{ orderData.order.deliveryAddress.name1 }}</div>
-                                                                <div>{{ orderData.order.deliveryAddress.name2 }} {{ orderData.order.deliveryAddress.name3 }}</div>
-                                                                <div>{{ orderData.order.deliveryAddress.name4 }}</div>
-                                                                <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
-                                                                <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
-                                                            </span>
-                                                        {% endif %}
-                                                    </span>
+                                {% if orderData.order.billingAddress.id == orderData.order.deliveryAddress.id %}
+                                    <span>
+                                        {{ trans("Ceres::Template.addressSameAsInvoice") }}
+                                    </span>
+                                {% else %}
+                                    <span>
+                                        <div>{{ orderData.order.deliveryAddress.name1 }}</div>
+                                        <div>{{ orderData.order.deliveryAddress.name2 }} {{ orderData.order.deliveryAddress.name3 }}</div>
+                                        <div>{{ orderData.order.deliveryAddress.name4 }}</div>
+                                        <div>{{ orderData.order.deliveryAddress.address1 }} {{ orderData.order.deliveryAddress.address2 }}</div>
+                                        <div>{{ orderData.order.deliveryAddress.postalCode }} {{ orderData.order.deliveryAddress.town }}</div>
+                                    </span>
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
 
@@ -158,14 +157,14 @@
                                 {% if item.orderProperties %}
                                     {% for property in item.orderProperties %}
                                         <div class="row">
-                                            <strong class="col-xs-6 col-sm-3">{{ property.name }}</strong>
-                                            <span v-cloak class="col-xs-6 col-sm-9" v-if="'{{ property.value }}'.match(/(\w*\/)?\w*\/\w*\.\w*/)">
+                                            <strong class="col-xs-6 col-sm-3 item-word-break">{{ property.name }}</strong>
+                                            <span v-cloak class="col-xs-6 col-sm-9 item-word-break" v-if="'{{ property.value }}'.match(/(\w*\/)?\w*\/\w*\.\w*/)">
                                                 <a :href="'{{ property.value }}' | fileUploadPath" target="_blank">
                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                     ${ "{{ property.value }}" | fileName }
                                                 </a>
                                             </span>
-                                            <span class="col-xs-6 col-sm-9" v-else>{{ property.value }}</span>
+                                            <span class="col-xs-6 col-sm-9 item-word-break" v-else>{{ property.value }}</span>
                                         </div>
                                     {% endfor %}
                                 {% endif %}

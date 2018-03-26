@@ -6,8 +6,8 @@ Vue.component("category-image-carousel", {
         imageUrlsData  : {type: Array},
         itemUrl        : {type: String},
         altText        : {type: String},
-        showDots       : {type: String},
-        showNav        : {type: String},
+        showDots       : {type: Boolean},
+        showNav        : {type: Boolean},
         disableLazyLoad: {
             type   : Boolean,
             default: false
@@ -66,13 +66,13 @@ Vue.component("category-image-carousel", {
         initializeCarousel()
         {
             $("#owl-carousel-" + this._uid).owlCarousel({
-                dots     : (this.showDots === "true"),
+                dots     : (this.showDots === true),
                 items    : 1,
                 mouseDrag: false,
                 loop     : this.imageUrls.length > 1,
                 lazyLoad : !this.disableLazyLoad,
                 margin   : 10,
-                nav      : (this.showNav === "true"),
+                nav      : (this.showNav === true),
                 navText  : [
                     `<i id="owl-nav-text-left-${this._uid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
                     `<i id="owl-nav-text-right-${this._uid}" class='fa fa-chevron-right' aria-hidden='true'></i>`

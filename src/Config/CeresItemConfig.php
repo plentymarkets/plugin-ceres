@@ -7,24 +7,26 @@ use Plenty\Plugin\ConfigRepository;
 
 class CeresItemConfig extends PluginConfig
 {
+    public $displayName;
+    public $itemName;
+    public $itemData;
+    public $storeSpecial;
+    public $showVariationOverDropdown;
+    public $variationShowType;
+    public $enableImageCarousel;
+    public $categoryShowDots;
+    public $categoryShowNav;
+    public $showCategoryImage;
+    public $showCategoryDescription;
+    public $loadingAnimationType;
+
     public function __construct(ConfigRepository $configRepository)
     {
         parent::__construct($configRepository, "Ceres");
-    }
 
-    public function getDisplayName()
-    {
-        return $this->getTextValue( "item.displayName", "itemName" );
-    }
-
-    public function getItemName()
-    {
-        return $this->getIntegerValue( "item.item", 0 );
-    }
-
-    public function getItemData()
-    {
-        return $this->getMultiSelectValue(
+        $this->displayName      = $this->getTextValue( "item.displayName", "itemName" );
+        $this->itemName         = $this->getIntegerValue( "item.item", 0 );
+        $this->itemData         = $this->getMultiSelectValue(
             "item.data",
             [
                 "item.condition",
@@ -46,50 +48,14 @@ class CeresItemConfig extends PluginConfig
                 "item.variationBase_content"
             ]
         );
-    }
-
-    public function getStoreSpecial()
-    {
-        return $this->getIntegerValue( "item.storeSpecial", 0 );
-    }
-
-    public function getShowVariationOverDropdown()
-    {
-        return $this->getBooleanValue( "item.show_variation_over_dropdown", false );
-    }
-
-    public function getVariationShowType()
-    {
-        return $this->getTextValue( "item.variation_show_type", "all" );
-    }
-
-    public function getEnableImageCarousel()
-    {
-        return $this->getBooleanValue( "item.enable_image_carousel", true );
-    }
-
-    public function getCategoryShowDots()
-    {
-        return $this->getBooleanValue( "item.category_show_dots", true );
-    }
-
-    public function getCategoryShowNav()
-    {
-        return $this->getBooleanValue( "item.category_show_nav", true );
-    }
-
-    public function getLoadingAnimationType()
-    {
-        return $this->getTextValue( "item.loading_animation_type", "blur" );
-    }
-
-    public function getShowCategoryImage()
-    {
-        return $this->getBooleanValue( "item.show_category_image", true );
-    }
-
-    public function getShowCategoryDescription()
-    {
-        return $this->getBooleanValue( "item.show_category_description", true );
+        $this->storeSpecial                 = $this->getIntegerValue( "item.storeSpecial", 0 );
+        $this->showVariationOverDropdown    = $this->getBooleanValue( "item.show_variation_over_dropdown", false );
+        $this->variationShowType            = $this->getTextValue( "item.variation_show_type", "all" );
+        $this->enableImageCarousel          = $this->getBooleanValue( "item.enable_image_carousel", true );
+        $this->categoryShowDots             = $this->getBooleanValue( "item.category_show_dots", true );
+        $this->categoryShowNav              = $this->getBooleanValue( "item.category_show_nav", true );
+        $this->showCategoryImage            = $this->getBooleanValue( "item.show_category_image", true );
+        $this->showCategoryDescription      = $this->getBooleanValue( "item.show_category_description", true );
+        $this->loadingAnimationType         = $this->getTextValue( "item.loading_animation_type", "blur" );
     }
 }
