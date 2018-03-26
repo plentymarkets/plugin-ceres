@@ -14,7 +14,7 @@ window.addEventListener("compile-sassy", function(event) {
     
     function manipulateVars(content)
     {
-        return event.detail + content;
+        return event.detail.toString() + content;
     }
     
     // download the files immediately
