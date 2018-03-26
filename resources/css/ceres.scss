@@ -10537,6 +10537,7 @@ body .wrapper-main{
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
+    &.contact,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -10642,6 +10643,7 @@ a:active {
         padding-right: 0;
         &.basket,
         &.checkout,
+        &.contact,
         &.myaccount {
             padding-left: 15px;
             padding-right: 15px;
@@ -15796,6 +15798,24 @@ nav.navbar.megamenu {
 		border-color: rgba(0,0,0,.15);
 	}
 
+	.form-check-label {
+		&.error {
+			background: $brand-danger !important;
+			color: $white !important;
+			border-radius: .1rem;
+			-webkit-transition: all .3s ease;
+			transition: all .3s ease;
+			padding: .5em 1.75rem;
+
+			a {
+				color: $white;
+				&:hover {
+					color: $gray-lighter2;
+				}
+			}
+		}
+	}
+
 	.contact-card{
 		p{
 			&.contact-address,&.contact-vat-number{
@@ -15869,30 +15889,6 @@ nav.navbar.megamenu {
 					}
 				}
 			}
-		}
-	}
-
-	.copy-mail-check{
-		margin-bottom: 10px;
-		text-align: initial;
-
-		input{
-			vertical-align: text-bottom;
-			margin-right: 4px;
-		}
-
-		@include media-breakpoint-up(sm){
-
-		}
-
-		@include media-breakpoint-up(md){
-			margin-bottom: 0;
-			text-align: right;
-			line-height: 2.3;
-		}
-
-		@include media-breakpoint-up(lg){
-
 		}
 	}
 
