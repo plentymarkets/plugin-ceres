@@ -2,6 +2,10 @@ body .wrapper-main{
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;

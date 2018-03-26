@@ -52,6 +52,13 @@
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
+                    {% if request.get('isContentBuilder') == 1 %}
+                        <div class="css-loading hidden">
+                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                            Loading styles <!-- I18N -->
+                        </div>
+                    {% endif %}
+                    
                     {% block PageBody %}
                         <!-- inject content of inherited templates here -->
                     {% endblock %}
