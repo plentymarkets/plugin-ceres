@@ -14657,9 +14657,9 @@ Vue.component("basket-list-item", {
 
     computed: _extends({
         image: function image() {
-            var img = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview")[0];
+            var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
-            return img;
+            return this.$options.filters.itemImage(itemImages);
         },
         altText: function altText() {
             var altText = this.image && this.image.alternate ? this.image.alternate : this.$options.filters.itemName(this.basketItem.variation.data);
