@@ -31,7 +31,6 @@
 {% set itemsPerPage = rowsPerPage[0] * columnsPerPage %}
 {% set performanceLevel = config('Ceres.log.performance.level') %}
 {% set itemName = config('Ceres.item.name') %}
-{% set currencyFormat = config("Ceres.currency.format") %}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
     <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
