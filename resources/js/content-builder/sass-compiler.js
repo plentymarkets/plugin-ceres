@@ -1,4 +1,4 @@
-window.addEventListener("compile-sassy", function() {
+window.addEventListener("compile-sassy", function(event) {
     var sass = new Sass();
 
     // HTTP requests are made relative to worker
@@ -12,13 +12,9 @@ window.addEventListener("compile-sassy", function() {
         'ceres.scss'
     ];
     
-    var vars = [
-        '$brand-primary: #808080;'
-    ]
-    
     function manipulateVars(content)
     {
-        return vars[0] + content;
+        return event.detail + content;
     }
     
     // download the files immediately
