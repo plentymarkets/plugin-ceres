@@ -15,6 +15,7 @@
     "item.storeSpecial",
     "properties.group.backendName",
     "properties.property.names.name",
+    "properties.property.names.lang",
     "salesPrices.price",
     "salesPrices.type",
     "item.id",
@@ -23,7 +24,9 @@
     "texts*",
     "defaultCategories",
     "variation.id",
+    "variation.name",
     "variation.availability.names.name",
+    "variation.availability.names.lang",
     "variation.availability.id",
     "variation.availability.averageDays",
     "variation.minimumOrderQuantity",
@@ -33,5 +36,9 @@
     "variation.mayShowUnitPrice",
     "variation.releasedAt",
     "filter.hasChildren",
-    "filter.isSalable"
+    "filter.isSalable",
+    "unit.content",
+    "unit.names.name",
+    "unit.names.lang",
+    "unit.unitOfMeasurement"
 ]
