@@ -7,9 +7,11 @@
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "bundleSass": "gulp copy:sass-vendor && node bundleSass.js"
   },
   "devDependencies": {
+    "autoprefixer": "^8.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.0",
     "babelify": "^7.3.0",
@@ -24,6 +26,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.3",
     "gulp-concat": "^2.6.0",
+    "gulp-copy": "^1.1.0",
     "gulp-eslint": "^3.0.1",
     "gulp-ignore": "^2.0.1",
     "gulp-minify-css": "^1.2.4",
@@ -35,6 +38,8 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
     "jquery-lazyload": "^1.9.7",
+    "postcss": "^6.0.21",
+    "postcss-scss": "^1.0.4",
     "q": "^1.5.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.2"
