@@ -9,14 +9,12 @@ Vue.component("accept-privacy-policy-check", {
 
         value:
         {
-            type: Boolean,
-            default: false
+            type: Boolean
         },
 
         showError:
         {
-            type: Boolean,
-            default: false
+            type: Boolean
         }
     },
 
