@@ -17425,13 +17425,13 @@ Vue.component("category-image-carousel", {
             var _this2 = this;
 
             $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: this.showDots === true,
+                dots: !!this.showDots,
                 items: 1,
                 mouseDrag: false,
                 loop: this.imageUrls.length > 1,
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
-                nav: this.showNav === true,
+                nav: !!this.showNav,
                 navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
                 onTranslated: function onTranslated(event) {
                     var target = $(event.currentTarget);
@@ -17441,7 +17441,7 @@ Vue.component("category-image-carousel", {
                 },
 
                 onInitialized: function onInitialized(event) {
-                    if (_this2.showNav === "true") {
+                    if (_this2.showNav) {
                         document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
                             return event.preventDefault();
                         };
