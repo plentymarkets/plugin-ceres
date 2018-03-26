@@ -15068,33 +15068,28 @@ Vue.component("place-order", {
 
     methods: {
         placeOrder: function placeOrder() {
-            this.showModal("<h1>Test</h1><p>Hallo</p><p>Welt</p>");
-            /*
+            var _this = this;
+
             this.waiting = true;
-             if (this.contactWish && this.contactWish.length > 0)
-            {
-                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
-                    .always(() =>
-                    {
-                        this.preparePayment();
-                    });
-            }
-            else
-            {
+
+            if (this.contactWish && this.contactWish.length > 0) {
+                ApiService.post("/rest/io/order/contactWish", { orderContactWish: this.contactWish }, { supressNotifications: true }).always(function () {
+                    _this.preparePayment();
+                });
+            } else {
                 this.preparePayment();
             }
-            */
         },
         preparePayment: function preparePayment() {
-            var _this = this;
+            var _this2 = this;
 
             this.waiting = true;
 
             if (this.validateCheckout() && this.basketItemQuantity > 0) {
                 ApiService.post("/rest/io/checkout/payment").done(function (response) {
-                    _this.afterPreparePayment(response);
+                    _this2.afterPreparePayment(response);
                 }).fail(function (error) {
-                    _this.waiting = false;
+                    _this2.waiting = false;
                 });
             } else {
                 NotificationService.error(_TranslationService2.default.translate("Ceres::Template.generalCheckEntries"));
