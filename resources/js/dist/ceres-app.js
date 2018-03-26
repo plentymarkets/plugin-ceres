@@ -15192,6 +15192,10 @@ Vue.component("checkout", {
 
                 return 0;
             });
+        },
+        showModal: function showModal(content) {
+            $(this.$refs.checkoutModalContent).html(content);
+            $(this.$refs.checkoutModal).modal("show");
         }
     }
 });
@@ -15402,16 +15406,11 @@ Vue.component("place-order", {
             }
         },
         showModal: function showModal(content, isExternalContent) {
-            var $modal = $(this.$refs.modal);
-            var $modalBody = $(this.$refs.modalContent);
-
             if (isExternalContent) {
-                $modalBody.html("<iframe src=\"" + content + "\">");
+                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
             } else {
-                $modalBody.html(content);
+                this.$emit("payment-response", content);
             }
-
-            $modal.modal("show");
         }
     }
 });
