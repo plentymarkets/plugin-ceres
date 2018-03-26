@@ -2,8 +2,8 @@
     <div>
         <div class="col-xs-12 col-md-6 col-lg-4" v-for="(attribute, attributeId) in attributes">
             <div class="input-unit">
-                <select class="custom-select text-gray-dark" v-model="selectedAttributes[attributeId]">
-                        <option :value="null" disabled>{{ trans("Ceres::Template.pleaseSelect") }}</option>
+                <select class="custom-select text-gray-dark" v-model="selectedAttributes[attributeId]" @change="onSelectionChange(selectedAttributes[attributeId])">
+                        <option :value="null">{{ trans("Ceres::Template.pleaseSelect") }}</option>
                         <option
                             v-for="(attributeValue, attributeValueId) in attribute.values"
                             :value="attributeValueId"
