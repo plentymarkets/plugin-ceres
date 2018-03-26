@@ -2,10 +2,9 @@ var sass = new Sass();
 
 // HTTP requests are made relative to worker
 var base = '../../../css/';
-// equals 'http://medialize.github.io/sass.js/scss/'
 
 // the directory files should be made available in
-var directory = '/';
+var directory = '';
 
 // the files to load (relative to both base and directory)
 var files = [
@@ -13,7 +12,7 @@ var files = [
 ];
 
 var vars = [
-    '$brand-primary: #008ebd;'
+    '$brand-primary: #808080;'
 ]
 
 function manipulateVars(content)
@@ -23,15 +22,11 @@ function manipulateVars(content)
 
 // download the files immediately
 sass.preloadFiles(base, directory, files, function() { 
-    console.log('files loaded');
-    sass.readFile("ceres.scss", read => {
-        sass.writeFile("ceres.scss", manipulateVars(read), write => {
-            console.log("write: ", write);
-            sass.readFile("ceres.scss", readAE => {
-                console.log("read after edit: ", readAE);
-            });
-            sass.compileFile("ceres.scss", compiled => {
+    sass.readFile("ceres.scss", function(read) {
+        sass.writeFile("ceres.scss", manipulateVars(read), function(write) {
+            sass.compileFile("ceres.scss", function(compiled) {
                 console.log("comp: ", compiled);
+                // set css to head
             });
         });
     });
