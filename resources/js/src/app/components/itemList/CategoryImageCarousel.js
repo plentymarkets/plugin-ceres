@@ -68,7 +68,7 @@ Vue.component("category-image-carousel", {
             $("#owl-carousel-" + this._uid).owlCarousel({
                 dots     : !!this.showDots,
                 items    : 1,
-                mouseDrag: false, 
+                mouseDrag: false,
                 loop     : this.imageUrls.length > 1,
                 lazyLoad : !this.disableLazyLoad,
                 margin   : 10,
