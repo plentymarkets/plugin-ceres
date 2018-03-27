@@ -1,4 +1,5 @@
 const ApiService = require("services/ApiService");
+const NotificationService = require("services/NotificationService");
 
 Vue.component("order-property-list-item", {
 
@@ -159,7 +160,7 @@ Vue.component("order-property-list-item", {
 
             fileData.append("fileData", file);
 
-            ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000})
+            ApiService.post("/rest/io/order/property/file", fileData, {processData: false, contentType: false, cache: false, async: true, timeout: 60000, supressNotifications: true})
                 .done(response =>
                 {
                     this.setVariationOrderProperty({propertyId: this.property.id, value: response});
@@ -167,6 +168,7 @@ Vue.component("order-property-list-item", {
                 .fail(error =>
                 {
                     this.clearSelectedFile();
+                    this._handleValidationErrors(error);
                 })
                 .always(response =>
                 {
@@ -179,6 +181,22 @@ Vue.component("order-property-list-item", {
         {
             this.selectedFile = null;
             this.setVariationOrderProperty({propertyId: this.property.id, value: null});
+        },
+
+        _handleValidationErrors(error)
+        {
+            if (error.hasOwnProperty("validation_errors"))
+            {
+                var validationErrors = Object.values(error.validation_errors);
+                var errors = "<ul>";
+
+                validationErrors.forEach(function(err, index)
+                {
+                    errors = errors + "<li>" + err + "</li>";
+                });
+                errors += "</ul>";
+                NotificationService.error(errors);
+            }
         }
     }
 });
