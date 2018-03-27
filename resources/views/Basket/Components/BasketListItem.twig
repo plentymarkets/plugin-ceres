@@ -75,7 +75,7 @@
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
-                                <strong>${ property.name } (${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+                                <strong>${ property.name } ({{ trans("Ceres::Template.generalIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                                 <span v-if="size === 'small'">
                                     <span v-if="property.type === 'file'">
                                         <a :href="property.value | fileUploadPath" target="_blank">
