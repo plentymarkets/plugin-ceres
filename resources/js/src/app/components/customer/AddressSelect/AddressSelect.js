@@ -25,6 +25,7 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {
                 addressSalutation: 0,
+                gender: "male",
                 countryId        : this.shippingCountryId
             },
             addressToDelete: {},
@@ -140,6 +141,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -163,6 +165,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -188,6 +191,16 @@ Vue.component("address-select", {
             if (typeof this.addressToEdit.addressSalutation === "undefined")
             {
                 this.addressToEdit.addressSalutation = 0;
+            }
+
+            if (typeof this.addressToEdit.gender === "undefined")
+            {
+                this.addressToEdit.gender = "male";
+            }
+            else if (this.addressToEdit.gender === "" && this.addressToEdit.name1 !== "")
+            {
+                this.addressToEdit.gender = null;
+                this.addressToEdit.addressSalutation = 2;
             }
 
             this.updateHeadline();

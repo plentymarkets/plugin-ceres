@@ -27,10 +27,6 @@ Vue.component("salutation-select", {
                         {
                             value: "Firma",
                             id   : 2
-                        },
-                        {
-                            value: "Familie",
-                            id   : 3
                         }
                     ],
                     en: [
@@ -45,10 +41,6 @@ Vue.component("salutation-select", {
                         {
                             value: "Company",
                             id   : 2
-                        },
-                        {
-                            value: "Family",
-                            id   : 3
                         }
                     ]
                 },
@@ -61,10 +53,6 @@ Vue.component("salutation-select", {
                         {
                             value: "Frau",
                             id   : 1
-                        },
-                        {
-                            value: "Familie",
-                            id   : 3
                         }
                     ],
                     en: [
@@ -75,10 +63,6 @@ Vue.component("salutation-select", {
                         {
                             value: "Ms.",
                             id   : 1
-                        },
-                        {
-                            value: "Family",
-                            id   : 3
                         }
                     ]
                 }
@@ -119,12 +103,41 @@ Vue.component("salutation-select", {
     {
         emitInputEvent(value)
         {
-            this.$emit("input", {field: "addressSalutation", value});
 
-            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "")
+            const gender = this.mapSalutationIdToGender(value);
+
+            this.$emit("input", {field: "gender", value: gender});
+            this.$emit("input", {field: "addressSalutation", value: value});
+
+            if ((this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") || this.addressData.gender !== null)
             {
                 this.$emit("input", {field: "name1", value: ""});
             }
+        },
+
+        mapSalutationIdToGender(id)
+        {
+            if (id === 0)
+            {
+                return "male";
+            }
+            else if (id === 1)
+            {
+                return "female";
+            }
+            return null;
+
+        },
+
+        checkGenderCompany(id)
+        {
+            if (id === 2)
+            {
+                const gender = this.mapSalutationIdToGender(id);
+
+                return (gender === null && this.addressData.name1 !== null) || (gender === null && this.addressData.name1 !== "");
+            }
+            return true;
         }
     }
 });
