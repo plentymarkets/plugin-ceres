@@ -10537,6 +10537,10 @@ body .wrapper-main{
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
+<<<<<<< HEAD
+=======
+    &.contact,
+>>>>>>> development
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -10642,6 +10646,10 @@ a:active {
         padding-right: 0;
         &.basket,
         &.checkout,
+<<<<<<< HEAD
+=======
+        &.contact,
+>>>>>>> development
         &.myaccount {
             padding-left: 15px;
             padding-right: 15px;
@@ -15796,6 +15804,27 @@ nav.navbar.megamenu {
 		border-color: rgba(0,0,0,.15);
 	}
 
+<<<<<<< HEAD
+=======
+	.form-check-label {
+		&.error {
+			background: $brand-danger !important;
+			color: $white !important;
+			border-radius: .1rem;
+			-webkit-transition: all .3s ease;
+			transition: all .3s ease;
+			padding: .5em 1.75rem;
+
+			a {
+				color: $white;
+				&:hover {
+					color: $gray-lighter2;
+				}
+			}
+		}
+	}
+
+>>>>>>> development
 	.contact-card{
 		p{
 			&.contact-address,&.contact-vat-number{
@@ -15872,6 +15901,7 @@ nav.navbar.megamenu {
 		}
 	}
 
+<<<<<<< HEAD
 	.copy-mail-check{
 		margin-bottom: 10px;
 		text-align: initial;
@@ -15896,6 +15926,8 @@ nav.navbar.megamenu {
 		}
 	}
 
+=======
+>>>>>>> development
 	.send-mail{
 		i{
 			margin-right: 5px;

@@ -25,6 +25,11 @@ Vue.component("add-to-basket", {
         {
             type: Boolean,
             default: false
+        },
+        isVariationSelected:
+        {
+            type: Boolean,
+            default: true
         }
     },
 
