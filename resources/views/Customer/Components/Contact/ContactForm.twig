@@ -9,6 +9,7 @@
 
 <script type="x/template" id="vue-contact-form">
 
+	{{ component("Ceres::Customer.Components.Contact.AcceptPrivacyPolicyCheck") }}
 	{{ component("Ceres::Customer.Components.Contact.ContactMap") }}
 
 	<div class="row cmp-contact">
@@ -16,11 +17,13 @@
 		<div class="col-xs-12">
 			<h1>{{ trans("Ceres::Template.generalContact") }}</h1>
 
+			<hr>
+
 			<p class="m-b-3">
                 {{ trans("Ceres::Template.contactShopMessage") }}
 			</p>
 
-			<div class="row m-b-3">
+			<div class="row">
 
                 {% if contactConfigSet %}
 					<div class="col-xs-12 {% if googleApiKey %}col-md-6 p-t-2 {% else %}col-sm-12 col-md-4 col-lg-3 {% endif %}p-b-3">
@@ -74,6 +77,7 @@
 							<div class="error-feedback">{{ trans("Ceres::Template.contactEditMessage") }}</div>
 						</div>
 
+						<div class="col-xs-12 text-sm-right">* {{ trans("Ceres::Template.generalRequiredField") }}</div>
 					</form>
 				</div>
 
@@ -88,13 +92,21 @@
                     {% endif %}
 				</div>
 
-				<div class="col-xs-12 col-md-9 copy-mail-check">
+				<div class="col-xs-12 col-md-9">
 					<input class="mailToMe" id="cc" type="checkbox" v-model="cc" value="cc" name="mailToMe">
 					<label for="cc">{{ trans("Ceres::Template.contactSendMeACopy") }}</label>
 				</div>
 
-				<div class="col-xs-12 col-md-3 send-mail">
-					<button type="submit" class="btn btn-primary btn-block send-btn" :disabled="waiting" @click="validate({{ gCapture | length > 0 }})">
+				<div class="col-xs-12">
+					<hr>
+				</div>
+
+				<div class="col-xs-12">
+					<accept-privacy-policy-check class="m-b-1" :value="privacyPolicyAccepted" @value-changed="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
+				</div>
+
+				<div class="col-xs-12 col-md-3 offset-md-9 send-mail">
+					<button type="submit" class="btn btn-primary btn-block" :disabled="waiting" @click="validate({{ gCapture | length > 0 }})">
 						<i v-waiting-animation="waiting" class="fa fa-paper-plane-o" aria-hidden="true"></i> 
 						{{ trans("Ceres::Template.contactSend") }}
 					</button>

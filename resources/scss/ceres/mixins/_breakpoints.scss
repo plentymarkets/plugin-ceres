@@ -1,0 +1,49 @@
+// Override bootstrap nested mixins
+
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @if $min {
+      @media (min-width: $min) {
+        @content;
+      }
+    } @else {
+      @if $max {
+        @media (max-width: $max) {
+          @content;
+        }
+      } @else {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @if $min {
+      @media (min-width: $min) {
+        @content;
+      }
+    } @else {
+      @if $max {
+        @media (max-width: $max) {
+          @content;
+        }
+      } @else {
+        @content;
+      }
+    }
+  }
+}

@@ -7,6 +7,13 @@ Vue.component("single-item", {
         "attributeNameMap"
     ],
 
+    data()
+    {
+        return {
+            isVariationSelected: true
+        };
+    },
+
     computed:
     {
         isDescriptionTabActive()
