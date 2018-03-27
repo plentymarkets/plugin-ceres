@@ -137,6 +137,12 @@ Vue.component("checkout", {
 
                 return 0;
             });
+        },
+
+        showModal(content)
+        {
+            $(this.$refs.checkoutModalContent).html(content);
+            $(this.$refs.checkoutModal).modal("show");
         }
     }
 });
