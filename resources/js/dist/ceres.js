@@ -15295,6 +15295,39 @@ Vue.component("basket-list-item", {
         },
         isInputLocked: function isInputLocked() {
             return this.waiting || this.isBasketLoading;
+        },
+        propertySurchargeSum: function propertySurchargeSum() {
+            var sum = 0;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.basketItem.basketItemOrderParams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return sum;
+        },
+        itemTotalPrice: function itemTotalPrice() {
+            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
         }
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
@@ -24220,7 +24253,11 @@ var getters = {
                 for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var property = _step.value;
 
-                    sum += property.property.surcharge;
+                    if (property.surcharge > 0) {
+                        sum += property.surcharge;
+                    } else if (property.property.surcharge > 0) {
+                        sum += property.property.surcharge;
+                    }
                 }
             } catch (err) {
                 _didIteratorError = true;
