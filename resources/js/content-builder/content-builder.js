@@ -416,7 +416,10 @@ function injectGridstackMarkup()
     // select drag & drop areas
     jQuery('[data-builder-container]').each(function(i)
     {
-        jQuery(this).css('position', 'relative');
+        if (jQuery(this).attr('data-builder-container') != 'shop-builder-header')
+        {
+            jQuery(this).css('position', 'relative');
+        }
 
         // iterate over all sub-elements
         // jQuery(this).find('> *').each(function(j)
