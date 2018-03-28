@@ -79,9 +79,9 @@ Vue.component("contact-form", {
                 {
                     this.waiting = false;
 
-                    if (response.validation_errors)
+                    if (response.data.validation_errors)
                     {
-                        this._handleValidationErrors(response.validation_errors);
+                        this._handleValidationErrors(response.data.validation_errors);
                     }
                     else
                     {
