@@ -4,9 +4,11 @@ const BACKEND_URL = 'http://master.login.plentymarkets.com'; // TODO: get backen
 const CELL_HEIGHT = 40; // gridstack cell height
 
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
-// var isDragging = false;
-// var isAnimating = false;
-// var draggedElement;
+
+
+var isDragging = false;
+var draggedElement;
+var isAnimating = false;
 
 // entry point
 jQuery(document).ready(function()
@@ -21,7 +23,7 @@ function initCeresForGridstack()
     injectGridstackMarkup();
     addBackendEventListener();
     addWindowResizeListener();
-    // addScrollOnDragListener();
+    addScrollOnDragListener();
 
     dispatchBuilderEvent({
         name: 'shopbuilder_ready',
@@ -157,27 +159,45 @@ function addWindowResizeListener()
 /**
  * very ugly prototype
  */
-// function addScrollOnDragListener()
-// {
-//     // TODO: @vwiebe fix gridstack scope
-//     jQuery('.grid-stack-0').mousemove(function (event)
-//     {
-//         if (isDragging && draggedElement)
-//         {
-//             // isAnimating = true;
-//
-//             jQuery('body, html').stop().animate(
-//                 { scrollTop :   jQuery(draggedElement).position().top +
-//                                 jQuery(draggedElement).outerHeight() +
-//                                 jQuery(draggedElement).offset().top -
-//                                 jQuery(window).outerHeight() },
-//                 1000,
-//                 'linear', function()
-//                 {
-//                 });
-//         }
-//     });
-// }
+function addScrollOnDragListener()
+{
+    // TODO: @vwiebe fix gridstack scope
+    jQuery('.grid-stack-container-1').mousemove(function (event)
+    {
+        updateScrollbarPosition();
+    });
+}
+
+function updateScrollbarPosition()
+{
+    if (isDragging && draggedElement)
+    {
+        var scrollValue = 0;
+
+        if (jQuery(window).height() + jQuery('body, html').scrollTop() < jQuery(draggedElement).offset().top + jQuery(draggedElement).outerHeight() && !isAnimating)
+        {
+            scrollValue = 100
+        }
+
+        if (jQuery('body, html').scrollTop() > jQuery(draggedElement).offset().top && !isAnimating)
+        {
+            scrollValue = -100;
+        }
+
+        if (scrollValue != 0)
+        {
+            isAnimating = true;
+            jQuery('body, html').stop().animate(
+                { scrollTop : jQuery('body, html').scrollTop() + scrollValue },
+                500,
+                'linear', function()
+                {
+                    isAnimating = false;
+                    updateScrollbarPosition();
+                });
+        }
+    }
+}
 
 function updateContainerDimensions()
 {
@@ -455,15 +475,15 @@ function initGridstack(identifier)
         }, 100);
     });
 
-    // jQuery(selector).on('dragstart', function(event, items)
-    // {
-    //     draggedElement = items.helper[0];
-    //     isDragging = true;
-    // });
-    //
-    // jQuery(selector).on('dragstop', function(event, items)
-    // {
-    //     draggedElement = null;
-    //     isDragging = false;
-    // });
+    jQuery(selector).on('dragstart', function(event, items)
+    {
+        draggedElement = items.helper[0];
+        isDragging = true;
+    });
+
+    jQuery(selector).on('dragstop', function(event, items)
+    {
+        draggedElement = null;
+        isDragging = false;
+    });
 }
