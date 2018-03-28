@@ -121,7 +121,7 @@ Vue.component("order-property-list-item", {
 
         validateFloat(value)
         {
-            value = parseFloat(value.replace(App.config.decimalSeperator, "."));
+            value = parseFloat(value.replace(App.decimalSeparator, "."));
 
             if (isNaN(value))
             {
@@ -129,7 +129,7 @@ Vue.component("order-property-list-item", {
             }
             else
             {
-                value = value.toString().replace(".", App.config.decimalSeperator);
+                value = value.toString().replace(".", App.decimalSeparator);
             }
 
             this.inputValue = value;

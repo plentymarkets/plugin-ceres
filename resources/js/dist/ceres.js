@@ -18407,12 +18407,12 @@ Vue.component("order-property-list-item", {
             return value;
         },
         validateFloat: function validateFloat(value) {
-            value = parseFloat(value.replace(App.config.decimalSeperator, "."));
+            value = parseFloat(value.replace(App.decimalSeparator, "."));
 
             if (isNaN(value)) {
                 value = null;
             } else {
-                value = value.toString().replace(".", App.config.decimalSeperator);
+                value = value.toString().replace(".", App.decimalSeparator);
             }
 
             this.inputValue = value;
