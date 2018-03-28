@@ -46,11 +46,13 @@ window.addEventListener("message", function(event)
         // download the files immediately
         sass.preloadFiles(base, directory, files, function() {
             document.getElementsByClassName("css-loading")[0].classList.remove("hidden");
+            showTerraLoadingOverlay(true);
             sass.readFile("ceres.scss", function(read) {
                 sass.writeFile("ceres.scss", manipulateVars(read), function(write) {
                     sass.compileFile("ceres.scss", function(compiled) {
                         document.getElementsByClassName("css-loading")[0].classList.add("hidden");
                         replaceCss(compiled);
+                        showTerraLoadingOverlay(false);
                     });
                 });
             });

@@ -33,6 +33,18 @@ function initCeresForGridstack()
 
 /**
  *
+ * @param isLoading
+ */
+function showTerraLoadingOverlay(isLoading)
+{
+    dispatchBuilderEvent({
+        name: isLoading ? 'shopbuilder_loading' : 'shopbuilder_loaded',
+        data: {}
+    });
+}
+
+/**
+ *
  * @param event
  */
 function dispatchBuilderEvent(event)
@@ -119,7 +131,7 @@ function getWidgetOrder()
 }
 
 /**
- * Zoom view by a given factor
+ * zoom view by a given factor
  * @param factor
  */
 function zoomView(factor)
