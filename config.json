@@ -1619,44 +1619,58 @@
     {
         "tab"               : "Design",
         "key"               : "brand-primary",
-        "label"             : "Primary Colour",
+        "label"             : "Primary Color",
         "type"              : "text",
-        "default"           : "#008ebd"
+        "default"           : "#df42f4",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-secondary",
-        "label"             : "Secondary Colour",
+        "label"             : "Secondary Color",
         "type"              : "text",
-        "default"           : "#d4021d"
+        "default"           : "#d4021d",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-success",
-        "label"             : "Success Colour",
+        "label"             : "Success Color",
         "type"              : "text",
-        "default"           : "#7ED321"
+        "default"           : "#7ED321",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "design.colors.brand_info",
+        "label"             : "Info Color",
+        "type"              : "text",
+        "default"           : "#5bc0de",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-info",
-        "label"             : "Information Colour",
+        "label"             : "Information Color",
         "type"              : "text",
-        "default"           : "#5bc0de"
+        "default"           : "#f0ad4e",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-warning",
         "label"             : "Warning Colour",
         "type"              : "text",
-        "default"           : "#f0ad4e"
+        "default"           : "#f0ad4e",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-danger",
-        "label"             : "Danger Colour",
+        "label"             : "Danger Color",
         "type"              : "text",
-        "default"           : "#d9534f"
+        "default"           : "#d9534f",
+        "scss"              : true
     },
     {
         "tab"               : "Logging and performance",
