@@ -4,8 +4,16 @@
 		"imageUrl": "https://i.imgur.com/akAEDAk.png",
 		"dropzones": [
 			{
+				"identifier": "shop-builder-header",
+				"dataProvider": "Ceres.0.header"
+			},
+			{
 				"identifier": "shop-builder-startpage",
 				"dataProvider": "Ceres.0.startpage"
+			},
+			{
+				"identifier": "shop-builder-footer",
+				"dataProvider": "Ceres.0.footer"
 			}
 		]
 	},
