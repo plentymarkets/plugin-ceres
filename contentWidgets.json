@@ -3,6 +3,7 @@
 		"identifier": "Ceres::HeaderWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "",
+		"isHidden": true,
 		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Header",
 		"settings": {
 			"logo": {
@@ -20,6 +21,7 @@
 		"identifier": "Ceres::FooterWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "",
+		"isHidden": true,
 		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Footer",
 		"settings": {}
 	},
