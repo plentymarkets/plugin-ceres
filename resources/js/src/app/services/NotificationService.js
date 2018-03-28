@@ -33,7 +33,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message);
 
-        if (App.config.logMessages)
+        if (App.config.log.data.indexOf("log_messages") >= 0)
         {
             console.log((prefix || "") + "[" + notification.code + "] " + notification.message);
 
@@ -50,7 +50,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "info");
 
-        if (App.config.printInfos)
+        if (App.config.log.data.indexOf("print_infos") >= 0)
         {
             _printNotification(notification);
         }
@@ -62,7 +62,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "warning");
 
-        if (App.config.printWarnings)
+        if (App.config.log.data.indexOf("log_warnings") >= 0)
         {
             _printNotification(notification);
         }
@@ -74,7 +74,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "danger");
 
-        if (App.config.printErrors)
+        if (App.config.log.data.indexOf("print_errors") >= 0)
         {
             _printNotification(notification);
         }
@@ -86,7 +86,7 @@ module.exports = (function($)
     {
         var notification = new Notification(message, "success");
 
-        if (App.config.printSuccess)
+        if (App.config.log.data.indexOf("print_success") >= 0)
         {
             _printNotification(notification);
         }
@@ -111,7 +111,7 @@ module.exports = (function($)
 
     function Notification(data, context)
     {
-        if (!App.config.printStackTrace && typeof (data) === "object")
+        if (App.config.log.data.indexOf("print_stack_trace") < 0 && typeof (data) === "object")
         {
             data.stackTrace = [];
         }
@@ -146,7 +146,7 @@ module.exports = (function($)
 
         function trace(message, code)
         {
-            if (App.config.printStackTrace)
+            if (App.config.log.data.indexOf("print_stack_trace") >= 0)
             {
                 self.stackTrace.push({
                     code   : code || 0,

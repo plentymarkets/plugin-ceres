@@ -27,7 +27,7 @@
                     </h1>
 
                     {% if ('item.shortDescription' in itemData or 'all' in itemData)%}
-                        <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''">${ currentVariation.texts.shortDescription }</p>
+                        <p class="single-description" v-if="currentVariation.texts.shortDescription !== ''" v-html="currentVariation.texts.shortDescription"></p>
                     {% endif %}
 
                     <hr>
@@ -41,7 +41,7 @@
 
                     <!-- Variation -->
                     <div class="row m-b-1" v-if="variations.length > 0">
-                        <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variations="variations" :preselect="currentVariation.variation.id"></variation-select>
+                        <variation-select template="#vue-variation-select" :attributes="attributeNameMap" :variations="variations" :preselect="currentVariation.variation.id" @is-valid-change="isVariationSelected = $event"></variation-select>
                     </div>
                     <!-- /Variation -->
 
@@ -76,7 +76,7 @@
                     <div class="base-price text-muted m-y-1" v-if="currentVariation.unit && !(currentVariation.unit.unitOfMeasurement === 'C62' && currentVariation.unit.content === 1)">
                         <div>
                             {{ trans("Ceres::Template.itemContent") }}
-                            <span>${ currentVariation.unit.content }</span>
+                            <span>${ currentVariation.unit.content | numberFormat }</span>
                             <span>${ currentVariation.unit.names.name }</span>
                         </div>
                         <div v-if="currentVariation.variation.mayShowUnitPrice">
@@ -95,7 +95,7 @@
 
                     <slot name="AfterPrice"></slot>
 
-                    <span :class="'availability tag availability_' + currentVariation.variation.availability.id">
+                    <span v-if="currentVariation.variation.availability" :class="'availability tag availability_' + currentVariation.variation.availability.id">
                         <span>
                             ${ currentVariation.variation.availability.names.name }
                         </span>
@@ -103,7 +103,13 @@
 
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
-                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true" :missing-order-properties="variationMissingProperties"></add-to-basket>
+                        <add-to-basket
+                                template="#vue-add-to-basket"
+                                v-if="currentVariation.filter.isSalable"
+                                :item="$store.state.item.variation.documents[0].data"
+                                :show-quantity="true"
+                                :missing-order-properties="variationMissingProperties"
+                                :is-variation-selected="isVariationSelected"></add-to-basket>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
 
@@ -131,38 +137,40 @@
                 <div class="col-md-7 m-y-3">
                     <ul class="nav nav-tabs" role="tablist">
                         {% if 'item.description' in itemData or 'all' in itemData %}
-                            <li class="nav-item" v-if="currentVariation.texts.description !== ''">
-                                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id"
-                                role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
+                            <li class="nav-item" v-if="isDescriptionTabActive">
+                                <a class="nav-link active" data-toggle="tab" :href="'#details-' +  currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemDescription") }}</a>
                             </li>
                         {% endif %}
 
                         {% if 'item.technical_data' in itemData or 'all' in itemData %}
-                            <li class="nav-item" v-if="currentVariation.texts.technicalData !== ''">
-                                <a class="nav-link" data-toggle="tab" :href="'#data-' + currentVariation.variation.id"
-                                role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
+                            <li class="nav-item" v-if="isTechnicalDataTabActive">
+                                <a :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" :href="'#data-' + currentVariation.variation.id" role="tab">{{ trans("Ceres::Template.itemTechnicalData") }}</a>
                             </li>
                         {% endif %}
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#assessments-details"
-                            role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
+                            <a :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ trans("Ceres::Template.itemMoreDetails") }}</a>
                         </li>
 
                         <slot name="AddDetailTabs"></slot>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2" v-html="currentVariation.texts.description">
+                        {% if 'item.description' in itemData or 'all' in itemData %}
+                            <div class="tab-pane active" :id="'details-' + currentVariation.variation.id" role="tabpanel" v-if="isDescriptionTabActive">
+                                <div class="m-y-2" v-html="currentVariation.texts.description">
+                                </div>
                             </div>
-                        </div>
-                        <div class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel">
-                            <div class="m-y-2" v-html="currentVariation.texts.technicalData">
-                            </div>
-                        </div>
+                        {% endif %}
 
-                        <div class="tab-pane" id="assessments-details" role="tabpanel">
+                        {% if 'item.technical_data' in itemData or 'all' in itemData %}
+                            <div :class="{ 'active': !isDescriptionTabActive && isTechnicalDataTabActive }" class="tab-pane" :id="'data-' + currentVariation.variation.id" role="tabpanel" v-if="isTechnicalDataTabActive">
+                                <div class="m-y-2" v-html="currentVariation.texts.technicalData">
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="tab-pane" id="assessments-details" role="tabpanel">
                             <div class="m-y-2">
                                 <table class="table table-striped table-hover table-sm">
                                     <tbody>

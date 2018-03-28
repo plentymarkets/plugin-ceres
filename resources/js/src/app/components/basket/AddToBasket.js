@@ -30,6 +30,11 @@ Vue.component("add-to-basket", {
         {
             type: Array,
             default: () => []
+        },
+        isVariationSelected:
+        {
+            type: Boolean,
+            default: true
         }
     },
     computed:
@@ -45,7 +50,7 @@ Vue.component("add-to-basket", {
             const hasChildren           = this.item.filter && this.item.filter.hasChildren;
             const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
             const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
-            const requiresProperties    = !this.requiresProperties();
+            const requiresProperties    = !this.requiresProperties;
 
             return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
         },
@@ -57,7 +62,7 @@ Vue.component("add-to-basket", {
 
         requiresProperties()
         {
-            if (App.config.requireOrderProperties && this.item.properties)
+            if (App.config.item.requireOrderProperties && this.item.properties)
             {
                 const availableProperties = this.item.properties.filter(property => property.property.isShownOnItemPage);
 

@@ -3,3 +3,5 @@
 node_modules
 home.html
 sftp-config.json
+resources/css/*
+!resources/css/*.scss

@@ -10,7 +10,7 @@
         <div class="basket-item component-loading with-icon sending" :class="{ 'isLoading': waiting }">
 
             <div class="image-container">
-                <img class="img-basket-small" v-if="image" :src="image.url" :alt="altText">
+                <img class="img-basket-small" v-if="image" :src="image" :alt="altText">
             </div>
 
             <div class="meta-container-wrapper">
@@ -22,11 +22,11 @@
                             </a>
     
                             <div class="item-base-price">
-                                ${ basketItem.variation.data.calculatedPrices.default.basePrice | currency }
+                                ${ basketItem.variation.data.prices.default.unitPrice.value | currency }
                             </div>
     
                             <div class="item-small-prices text-muted" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
-                                <div>${ basketItem.variation.data.calculatedPrices.formatted.basePrice }</div>
+                                <div>${ basketItem.variation.data.prices.default.basePrice }</div>
                                 <div>
                                     <strong>{{ trans("Ceres::Template.itemContent") }}: </strong>
                                     ${ basketItem.variation.data.unit.content } ${ basketItem.variation.data.unit.names.name }
@@ -44,8 +44,14 @@
     
                     <div class="basket-item-container-right">
                         <div class="qty-box-container">
-                            <quantity-input template="#vue-quantity-input" @quantity-change="updateQuantity" :value="basketItem.quantity" :vertical="true" :waiting="isInputLocked" :variation-id="basketItem.variation.data.variation.id"
-                                                :min="basketItem.variation.data.variation.minimumOrderQuantity" :max="basketItem.variation.data.variation.maximumOrderQuantity"></quantity-input>
+                            <quantity-input
+                                    template="#vue-quantity-input"
+                                    @quantity-change="updateQuantity"
+                                    :value="basketItem.quantity"
+                                    :waiting="isInputLocked"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity"
+                                    :max="basketItem.variation.data.variation.maximumOrderQuantity"
+                                    :interval="basketItem.variation.data.variation.intervalOrderQuantity"></quantity-input>
                         </div>
     
                         <div class="price-box">

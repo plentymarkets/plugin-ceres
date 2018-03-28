@@ -109,7 +109,13 @@
                                 <header>
                                     <h3>{{ trans("Ceres::Template.orderContactWish") }}</h3>
                                 </header>
+
                                 <contact-wish-input class="p-b-1" template="#vue-contact-wish-input"></contact-wish-input>
+
+                                <div class="form-check">
+                                    <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
+                                </div>
+                                {{ LayoutContainer.show("Ceres::Checkout.OptIns") }}
                             </div>
                         </div>
                     </div>
@@ -143,17 +149,6 @@
                                     {{ LayoutContainer.show("Ceres::Checkout.AfterBasketTotals") }}
                                 </div>
                             </aside>
-                        </div>
-
-                        <div class="col-xs-12 bg-white">
-                            <hr class="m-t-0">
-                        </div>
-
-                        <div class="col-xs-12 bg-white">
-                            <div class="form-check">
-                                <accept-gtc-check template="#vue-accept-gtc-check"></accept-gtc-check>
-                            </div>
-                            {{ LayoutContainer.show("Ceres::Checkout.OptIns") }}
                         </div>
 
                         <div class="col-xs-12 p-b-1 bg-white">

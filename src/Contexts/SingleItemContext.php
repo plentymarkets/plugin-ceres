@@ -2,6 +2,7 @@
 
 namespace Ceres\Contexts;
 
+use IO\Helper\ContextInterface;
 use IO\Services\CustomerService;
 use IO\Services\ItemService;
 
@@ -13,9 +14,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $attributeNameMap;
     public $customerShowNetPrices;
     
-    public function init($params, $templateContainer)
+    public function init($params)
     {
-        parent::init($params, $templateContainer);
+        parent::init($params);
         
         /** @var CustomerService $customerService */
         $customerService = pluginApp(CustomerService::class);

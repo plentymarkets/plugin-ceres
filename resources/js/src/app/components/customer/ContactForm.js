@@ -13,13 +13,15 @@ Vue.component("contact-form", {
     data()
     {
         return {
-            name    : "",
-            userMail: "",
-            subject : "",
-            message : "",
-            orderId : "",
-            cc      : false,
-            waiting: false
+            name                  : "",
+            userMail              : "",
+            subject               : "",
+            message               : "",
+            orderId               : "",
+            cc                    : false,
+            waiting               : false,
+            privacyPolicyAccepted : false,
+            privacyPolicyShowError: false
         };
     },
 
@@ -37,18 +39,38 @@ Vue.component("contact-form", {
             ValidationService.validate($("#contact-form"))
                 .done(() =>
                 {
-                    if (useCapture)
+                    if (this.privacyPolicyAccepted)
                     {
-                        grecaptcha.execute();
+                        if (useCapture)
+                        {
+                            grecaptcha.execute();
+                        }
+                        else
+                        {
+                            this.sendMail();
+                        }
                     }
                     else
                     {
-                        this.sendMail();
+                        this.privacyPolicyShowError = true;
+
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.generalCheckEntries")
+                        );
                     }
                 })
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
+
+                    if (!this.privacyPolicyAccepted)
+                    {
+                        this.privacyPolicyShowError = true;
+                    }
+
+                    NotificationService.error(
+                        TranslationService.translate("Ceres::Template.generalCheckEntries")
+                    );
                 });
         },
 
@@ -114,6 +136,16 @@ Vue.component("contact-form", {
             }
 
             NotificationService.error(errorMessage);
+        },
+
+        privacyPolicyValueChanged(value)
+        {
+            this.privacyPolicyAccepted = value;
+
+            if (value)
+            {
+                this.privacyPolicyShowError = false;
+            }
         }
     }
 });

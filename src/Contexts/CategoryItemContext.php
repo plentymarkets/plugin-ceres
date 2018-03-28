@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use Ceres\Helper\SearchOptions;
+use IO\Helper\ContextInterface;
 use IO\Services\ItemSearch\SearchPresets\CategoryItems;
 use IO\Services\ItemSearch\SearchPresets\Facets;
 
@@ -10,9 +11,9 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
 {
     use ItemListContext;
     
-    public function init($params, $templateContainer)
+    public function init($params)
     {
-        parent::init($params, $templateContainer);
+        parent::init($params);
 
         $itemListOptions = [
             'page'          => $this->getParam( 'page', 1 ),
