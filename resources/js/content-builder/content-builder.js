@@ -187,7 +187,6 @@ function updateContainerDimensions()
 
         jQuery(this).find('> *').each(function()
         {
-            // TODO: @vwiebe fix gridstack scope
             jQuery(container)
                     .data('gridstack')
                     .resize(jQuery(this),
@@ -321,7 +320,6 @@ function addContentWidget(widgetData, position)
     // scroll view to top
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
-        // TODO: @vwiebe fix dropzone scope
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
     });
 }
