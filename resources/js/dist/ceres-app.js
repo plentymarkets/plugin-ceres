@@ -14984,6 +14984,39 @@ Vue.component("basket-list-item", {
         },
         isInputLocked: function isInputLocked() {
             return this.waiting || this.isBasketLoading;
+        },
+        propertySurchargeSum: function propertySurchargeSum() {
+            var sum = 0;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.basketItem.basketItemOrderParams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var property = _step.value;
+
+                    sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return sum;
+        },
+        itemTotalPrice: function itemTotalPrice() {
+            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
         }
     }, Vuex.mapState({
         isBasketLoading: function isBasketLoading(state) {
@@ -15260,6 +15293,10 @@ Vue.component("checkout", {
 
                 return 0;
             });
+        },
+        showModal: function showModal(content) {
+            $(this.$refs.checkoutModalContent).html(content);
+            $(this.$refs.checkoutModal).modal("show");
         }
     }
 });
@@ -15470,16 +15507,11 @@ Vue.component("place-order", {
             }
         },
         showModal: function showModal(content, isExternalContent) {
-            var $modal = $(this.$refs.modal);
-            var $modalBody = $(this.$refs.modalContent);
-
             if (isExternalContent) {
-                $modalBody.html("<iframe src=\"" + content + "\">");
+                this.$emit("payment-response", "<iframe src=\"" + content + "\">");
             } else {
-                $modalBody.html(content);
+                this.$emit("payment-response", content);
             }
-
-            $modal.modal("show");
         }
     }
 });
@@ -18623,13 +18655,13 @@ Vue.component("category-image-carousel", {
             var _this2 = this;
 
             $("#owl-carousel-" + this._uid).owlCarousel({
-                dots: this.showDots === true,
+                dots: !!this.showDots,
                 items: 1,
                 mouseDrag: false,
                 loop: this.imageUrls.length > 1,
                 lazyLoad: !this.disableLazyLoad,
                 margin: 10,
-                nav: this.showNav === true,
+                nav: !!this.showNav,
                 navText: ["<i id=\"owl-nav-text-left-" + this._uid + "\" class='fa fa-chevron-left' aria-hidden='true'></i>", "<i id=\"owl-nav-text-right-" + this._uid + "\" class='fa fa-chevron-right' aria-hidden='true'></i>"],
                 onTranslated: function onTranslated(event) {
                     var target = $(event.currentTarget);
@@ -18639,7 +18671,7 @@ Vue.component("category-image-carousel", {
                 },
 
                 onInitialized: function onInitialized(event) {
-                    if (_this2.showNav === "true") {
+                    if (_this2.showNav) {
                         document.querySelector("#owl-nav-text-left-" + _this2._uid).parentElement.onclick = function (event) {
                             return event.preventDefault();
                         };
@@ -23140,7 +23172,7 @@ var mutations = {
             state.deliveryAddressList.splice(index, 1);
 
             if (state.deliveryAddress === deliveryAddress) {
-                state.deliveryAddress = state.deliveryAddress.find(function (address) {
+                state.deliveryAddress = state.deliveryAddressList.find(function (address) {
                     return address.id === -99;
                 });
                 state.deliveryAddressId = -99;
@@ -24374,7 +24406,11 @@ var getters = {
                 for (var _iterator = addedProperties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var property = _step.value;
 
-                    sum += property.property.surcharge;
+                    if (property.surcharge > 0) {
+                        sum += property.surcharge;
+                    } else if (property.property.surcharge > 0) {
+                        sum += property.property.surcharge;
+                    }
                 }
             } catch (err) {
                 _didIteratorError = true;
