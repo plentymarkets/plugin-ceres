@@ -1620,42 +1620,42 @@
         "tab"               : "Design",
         "key"               : "brand-primary",
         "label"             : "Primary Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#008ebd"
     },
     {
         "tab"               : "Design",
         "key"               : "brand-secondary",
         "label"             : "Secondary Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#d4021d"
     },
     {
         "tab"               : "Design",
         "key"               : "brand-success",
         "label"             : "Success Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#7ED321"
     },
     {
         "tab"               : "Design",
         "key"               : "brand-info",
         "label"             : "Information Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#5bc0de"
     },
     {
         "tab"               : "Design",
         "key"               : "brand-warning",
         "label"             : "Warning Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#f0ad4e"
     },
     {
         "tab"               : "Design",
         "key"               : "brand-danger",
         "label"             : "Danger Colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#d9534f"
     },
     {
