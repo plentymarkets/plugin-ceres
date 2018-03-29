@@ -1,3 +1,4 @@
+import {isNullOrUndefined}from "../../helper/utils";
 import AddressFieldService from "services/AddressFieldService";
 
 Vue.component("salutation-select", {
@@ -109,7 +110,7 @@ Vue.component("salutation-select", {
             this.$emit("input", {field: "gender", value: gender});
             this.$emit("input", {field: "addressSalutation", value: value});
 
-            if ((this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") || this.addressData.gender !== null)
+            if ((this.addressData.addressSalutation !== 2 && !isNullOrUndefined(this.addressData.name1) && this.addressData.name1 !== "") || this.addressData.gender !== null)
             {
                 this.$emit("input", {field: "name1", value: ""});
             }

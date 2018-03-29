@@ -188,12 +188,12 @@ Vue.component("address-select", {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
 
-            if (typeof this.addressToEdit.addressSalutation === "undefined")
+            if (isNullOrUndefined(this.addressToEdit.addressSalutation))
             {
                 this.addressToEdit.addressSalutation = 0;
             }
 
-            if (typeof this.addressToEdit.gender === "undefined")
+            if (isNullOrUndefined(this.addressToEdit.gender))
             {
                 this.addressToEdit.gender = "male";
             }
