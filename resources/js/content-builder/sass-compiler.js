@@ -15,9 +15,26 @@ window.addEventListener("message", function(event)
             "ceres.scss"
         ];
 
+        var rootPath = "..";
+
+        if(document.getElementById("ceres-css").href)
+        {
+            rootPath = document.getElementById("ceres-css").href.split("/");
+
+            while( rootPath.pop() !== 'resources' )
+            {
+                if ( rootPath.length <= 0 )
+                {
+                    break;
+                }
+            }
+
+            rootPath = rootPath.join("/") + '/resources';
+        }
+
         function manipulateVars(content)
         {
-            return event.data.data.toString().replace(",", " ") + content;
+            return event.data.data.join(" ") + '$root-directory: "' + rootPath + '";' + content;
         }
 
         function replaceCss(compiled)
@@ -30,6 +47,7 @@ window.addEventListener("message", function(event)
 
             style.type = "text/css";
             style.id = "ceres-css";
+            style.href = rootPath;
 
             if (style.styleSheet)
             {
