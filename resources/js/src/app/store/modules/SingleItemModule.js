@@ -65,13 +65,20 @@ const getters =
             if (state.variation.documents[0].data.properties)
             {
                 const addedProperties = state.variation.documents[0].data.properties.filter(property =>
-                    {
+                {
                     return !!property.property.value;
                 });
 
                 for (const property of addedProperties)
+                {
+                    if (property.surcharge > 0)
                     {
-                    sum += property.property.surcharge;
+                        sum += property.surcharge;
+                    }
+                    else if (property.property.surcharge > 0)
+                    {
+                        sum += property.property.surcharge;
+                    }
                 }
             }
 

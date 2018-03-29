@@ -1,5 +1,13 @@
 # Release Notes für Ceres
 
+## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden gelöschte Lieferadressen weiterhin in der Oberfläche angezeigt. Dies wurde behoben.
+- Durch einen Fehler wurde man beim Klick auf die Navigationspfeile im Bilderkarrussel der Kategorieübersicht zu dem Artikel weitergeleitet. Dies wurde behoben.
+- Durch einen Fehler konnten zusätzliche Inhalte von Zahlungs-Plugins im Checkout nicht korrekt angezeigt werden. Dies wurde behoben.
+
 ## v2.5.1 (2018-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.0...2.5.1" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben

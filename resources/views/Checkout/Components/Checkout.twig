@@ -1,6 +1,14 @@
 <script type="x/template" id="vue-checkout">
     <div>
-        <slot>
+        <slot :showModal="showModal">
         </slot>
+
+        <div class="modal fade" ref="checkoutModal" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" ref="checkoutModalContent"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </script>
