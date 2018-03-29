@@ -72,7 +72,7 @@
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul>
-                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
+                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
                                 <strong>${ property.name } (${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>

@@ -125,6 +125,18 @@ Vue.component("basket-list-item", {
                         this.waiting = false;
                     });
             }
+        },
+
+        isPropertyVisible(propertyId)
+        {
+            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+
+            if (property)
+            {
+                return property.property.isShownAtCheckout;
+            }
+
+            return false;
         }
     }
 });

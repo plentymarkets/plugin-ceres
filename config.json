@@ -544,6 +544,13 @@
         "default"           : "true"
     },
     {
+        "tab"               : "Item view",
+        "key"               : "item.require_all_properties",
+        "label"             : "Require all order properties before add to basket",
+        "type"              : "checkbox",
+        "default"           : "false"
+    },
+    {
         "tab"               : "Item lists",
         "key"               : "item.lists.last_seen_number",
         "label"             : "Last seen: Number of last seen items",

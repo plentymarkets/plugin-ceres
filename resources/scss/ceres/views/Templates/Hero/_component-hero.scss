@@ -204,9 +204,9 @@
 		visibility: hidden;
 	}
 
-	&.refreshing {
+	&.with-icon {
 		&:after {
-			content: "\f021";
+			content: "";
 			font-family: FontAwesome;
 			position: absolute;
 			width: 100%;
@@ -222,9 +222,23 @@
 			opacity: 0;
 			transition: opacity .1s ease-out;
 			visibility: hidden;
+
+			
+		}
+
+		&.refreshing {
+			&:after {
+				content: "\f021";
+			}
+		}
+
+		&.sending {
+			&:after {
+				content: "\f1ce";
+				animation: fa-spin 1s infinite linear;
+			}
 		}
 	}
-
 
 	&.isLoading {
 		&:before {
