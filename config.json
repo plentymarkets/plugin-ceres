@@ -1628,7 +1628,7 @@
         "key"               : "brand-primary",
         "label"             : "Primary Color",
         "type"              : "text",
-        "default"           : "#df42f4",
+        "default"           : "#008ebd",
         "scss"              : true
     },
     {
