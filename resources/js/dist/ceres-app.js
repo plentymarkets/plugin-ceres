@@ -21333,6 +21333,12 @@ var init = function ($, window, document) {
 
                 return false;
             });
+
+            $("#accountMenuList").click(function () {
+                $("#countrySettings").collapse("hide");
+                $("#searchBox").collapse("hide");
+                $("#currencySelect").collapse("hide");
+            });
         });
     }
 
