@@ -85,12 +85,6 @@
                                 ${ variationGraduatedPrice.basePrice }
                             </span>
                         </div>
-
-                        <div>
-                            Entspricht:
-                            <span>${ (currentVariation.unit.content * $store.state.item.variationOrderQuantity).toFixed(2) }</span>
-                            <span>${ currentVariation.unit.names.name }</span>
-                        </div>
                     </div>
 
                     <slot name="AfterPrice"></slot>
