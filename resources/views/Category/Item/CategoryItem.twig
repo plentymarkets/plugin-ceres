@@ -101,11 +101,11 @@
     <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
 
     {% if currentPage-1 > 0 %}
-        <link rel=“prev“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}“ />
+        <link rel="prev" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage-1 }) | url_encode }}" />
     {% endif %}
 
     {% if currentPage+1 <= pageMax %}
-        <link rel=“next“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}“ />
+        <link rel="next" href="{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}" />
     {% endif %}
 
     <title>{{ category.details[0].name }} | {{ ceresConfig.header.companyName }}</title>

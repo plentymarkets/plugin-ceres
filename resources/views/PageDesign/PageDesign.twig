@@ -160,7 +160,8 @@
                 isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
                 isSearch: {% if services.template.isSearch() == "1" %}true{% else %}false{% endif %},
                 language: "{{ lang }}",
-                decimalSeparator: "{{ config("IO.format.separator_decimal") }}"
+                decimalSeparator: "{{ config("IO.format.separator_decimal") }}",
+                urlTrailingSlash: {{ (config("urlTrailingSlash") == 1) | json_encode }}
             };
         </script>
 

@@ -1,4 +1,5 @@
 import store from "store/index.js";
+import {switchUrl}from "services/UrlService";
 
 const ApiService = require("services/ApiService");
 let _categoryTree = {};
@@ -55,10 +56,7 @@ function _handleCurrentCategory()
  */
 function _updateHistory(currentCategory)
 {
-    var title = document.getElementsByTagName("title")[0].innerHTML;
-
-    window.history.replaceState({}, title, currentCategory.url + window.location.search);
-
+    switchUrl(currentCategory.url + window.location.search);
     _updateCategoryTexts(currentCategory);
 }
 

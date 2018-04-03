@@ -3,7 +3,7 @@
         <input class="form-check-input" type="checkbox" id="privacy-policy-accept" :value="value" @change="$emit('value-changed', $event.target.checked)">
         {% autoescape false %}
             {% set policyContent %}<!--
-                --><a href="/privacy-policy" target="_blank">
+                --><a href="{{ urls.privacyPolicy }}" target="_blank">
                     <span>{{ trans("Ceres::Template.generalPrivacyPolicy") }}</span>
                 </a><!--
             -->{% endset %}

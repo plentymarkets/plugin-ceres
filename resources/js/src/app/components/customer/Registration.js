@@ -6,6 +6,7 @@ const ModalService        = require("services/ModalService");
 
 import ValidationService from "services/ValidationService";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 Vue.component("registration", {
 
@@ -87,7 +88,7 @@ Vue.component("registration", {
 
                         if (this.backlink !== null && this.backlink)
                         {
-                            window.location.assign(this.backlink);
+                            navigateTo(this.backlink);
                         }
                         else
                         {

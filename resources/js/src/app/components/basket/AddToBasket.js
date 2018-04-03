@@ -1,5 +1,6 @@
 import ExceptionMap from "exceptions/ExceptionMap";
 import TranslationService from "services/TranslationService";
+import {navigateTo}from "services/UrlService";
 
 const NotificationService = require("services/NotificationService");
 
@@ -145,7 +146,7 @@ Vue.component("add-to-basket", {
 
         directToItem()
         {
-            window.location.assign(this.itemUrl);
+            navigateTo(this.itemUrl);
         },
 
         handleButtonState(value)
