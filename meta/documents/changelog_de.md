@@ -1,5 +1,29 @@
 # Release Notes für Ceres
 
+## v2.6.0 (2018-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.2...2.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- IO kann jetzt auf die Generierung der Sitemap reagieren und seine eigenen Muster zur Erzeugung der URLs vorgeben.
+
+### Geändert
+
+- Im Warenkorb wird nun der Aufpreis von Bestellmerkmalen mit dem Vorwort "inkl." angezeigt.
+- Die Intervall-Bestellmenge eines Artikels wird jetzt bei der Mengeneingabe berücksichtigt.
+- Die Plugin-Konfiguration wird jetzt generisch an JavaScript übergeben und ist als globales Objekt verfügbar.
+- Ab sofort können auch dezimale Mengen von Artikeln gekauft werden.
+- Im Checkout wurde die Checkbox für die AGB, Widerrufsrecht und Datenschutzerklärung auf die linke Seite verschoben. Dadurch befindet sich der Kaufen-Button direkt unterhalb der Gesamtsumme.
+- Der Vorschautext eines Artikels in der Artikeleinzelansicht unterstützt nun HTML-Elemente.
+- In der Artikelansicht ist der Wert "Bitte wählen" in der Attributauswahl der Variante nun immer wählbar. Hierdurch wird verhindert, dass die Auswahl eines Attributs jegliche andere Auswahl in der Dropdown-Liste verhindert. Außerdem kann der Nutzer hierdurch die Hauptvariante auswählen, insofern sie aktiv und mit keinem Attribut verknüpft ist.
+- Im Warenkorb wird nun der Aufpreis eines Bestellmerkmals in den Gesamtpreis des Artikelpostens einkalkuliert.
+
+### Behoben
+
+- Unter gewissen Umständen wurde der Button zum Ändern der Zahlungsart auf der Auftragsbestätigungsseite nicht angezeigt.
+- Ein Fehler führte dazu, dass man nach einem Kauf mit Paypal auf eine 404 Seite anstatt auf die Auftragsbestätigungsseite geleitet wurde. Dies wurde behoben.
+- Im Warenkorb wird nun die Position der Artikelbilder berücksichtigt und das Bild mit der niedrigsten Position wird ausgegeben.
+- Bei Artikeln mit ausgefülltem Bestellmerkmal wurde bisher immer der Aufpreis des Merkmals angezeigt. Jetzt wird überprüft, ob es für den Artikel einen gesonderten Aufpreis gibt. Wenn ja, wird dieser angezeigt.
+
 ## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
