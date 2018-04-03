@@ -209,6 +209,7 @@ function addContextMenu(element)
 
     // add buttons
     addEditButton(element);
+    addDesignButton(element);
     addDeleteButton(element);
 }
 
@@ -252,6 +253,31 @@ function addEditButton(element)
 
     });
 }
+
+/**
+ * add design button element for context menu
+ * @param element
+ */
+function addDesignButton(element)
+{
+    // inject button markup into given context element
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon design-icon fa fa-paint-brush"></div>');
+
+    // open properties
+    jQuery(element).find('.design-icon').click(function ()
+    {
+        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+
+        setElementActive(uniqueId);
+
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_design',
+            data: { uniqueId: uniqueId }
+        });
+
+    });
+}
+
 
 /**
  *
