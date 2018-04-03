@@ -6,7 +6,6 @@
 {% set favicon = url ~ '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ favicon }}">
 
-{% set requestUrl = webstoreConfig.domainSsl ~ request.getRequestUri() %}
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
 
@@ -14,7 +13,7 @@
     <link rel="canonical" href="{{ canonicalUrl }}">
 {% endif %}
 
-{% if canonicalUrl == requestUrl %}
+{% if services.url.isCanonical() %}
     {% for language, url in languageUrls %}
         <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
     {% endfor %}
