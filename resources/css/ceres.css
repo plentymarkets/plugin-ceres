@@ -17397,7 +17397,7 @@ body.menu-is-visible {
 @media (min-width: 544px) {
   .reset-pwd .save-new-pwd-btn {
     display: inline-block;
-    width: auto;
+    width: 10rem;
   }
 }
 
