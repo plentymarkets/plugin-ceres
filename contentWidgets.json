@@ -28,7 +28,7 @@
 	{
 		"identifier": "Ceres::RowWidget",
 		"label": "Widget.row_label",
-		"previewImageURL": "",
+		"previewImageURL": "https://i.imgur.com/GZvjBio.png",
 		"widgetClass": "Ceres\\ContentBuilder\\Grid\\RowWidget",
 		"settings": {}
 	},
