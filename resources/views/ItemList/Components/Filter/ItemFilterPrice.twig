@@ -1,24 +1,21 @@
 <script type="x/template" id="vue-item-filter-price">
 	<div>
 		<div class="row">
-			<div style="display: table;" class="col-lg-5">
+			<div class="col-lg-5 p-r-0 d-table">
 				<div class="input-group-addon">EUR</div>
-				<input type="text" class="form-control" placeholder="Min">
+				<input type="number" class="form-control" placeholder="Min" v-model="minPrice">
 			</div>
 
-			<div style="display: table;" class="col-lg-5">
+			<div class="col-lg-5 p-r-0 d-table">
 				<div class="input-group-addon">EUR</div>
-				<input type="text" class="form-control" placeholder="Max">
+				<input type="number" class="form-control" placeholder="Max" v-model="maxPrice">
 			</div>
-		</div>	
 
-		<div class="row">
-			<div class="col-lg-10">
-				<button type="button" class="btn btn-primary btn-block m-t-1">
-				 	<i class="fa fa-refresh" aria-hidden="true"></i>
-					Übernehmen
+			<div class="col-lg-2">
+				<button type="button" class="btn btn-primary" :disabled="isDisabled">
+				 	<i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 			</div>
-		</div>
+		</div>	
 	</div>
 </script>
