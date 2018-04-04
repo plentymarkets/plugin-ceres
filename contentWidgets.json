@@ -26,6 +26,13 @@
 		"settings": {}
 	},
 	{
+		"identifier": "Ceres::RowWidget",
+		"label": "Widget.row_label",
+		"previewImageURL": "",
+		"widgetClass": "Ceres\\ContentBuilder\\Grid\\RowWidget",
+		"settings": {}
+	},
+	{
 		"identifier": "Ceres::TextHeaderWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
