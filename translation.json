@@ -1,0 +1,69 @@
+{
+  "sections":
+  [
+    {
+      "name": { "de": "Addressen", "en": "Address" },
+      "prefix": "address"
+    },
+    {
+      "name": { "de": "Warenkorb", "en": "Basket" },
+      "prefix": "basket"
+    },
+    {
+      "name": { "de": "TODO Item List", "en": "TODO Item LIST" },
+      "prefix": "itemList"
+    },
+    {
+      "name": { "de": "Kasse", "en": "Checkout" },
+      "prefix": "checkout"
+    },
+    {
+      "name": { "de": "Kontaktformular", "en": "Contact" },
+      "prefix": "contact"
+    },
+    {
+      "name": { "de": "Entwickler Einstellungen", "en": "Developers settings" },
+      "prefix": "dev"
+    },
+    {
+      "name": { "de": "Allgemein", "en": "Global" },
+      "prefix": "global"
+    },
+    {
+      "name": { "de": "TODO HOMEPAGE", "en": "TODO HOMEPAGE" },
+      "prefix": "homepage"
+    },
+    {
+      "name": { "de": "Login", "en": "Login" },
+      "prefix": "login"
+    },
+    {
+      "name": { "de": "Mein Konto", "en": "My account" },
+      "prefix": "myAccount"
+    },
+    {
+      "name": { "de": "Auftragsbestätigung", "en": "Order confirmation" },
+      "prefix": "orderConfirmation"
+    },
+    {
+      "name": { "de": "Auftragshistorie", "en": "Order history" },
+      "prefix": "orderHistory"
+    },
+    {
+      "name": { "de": "Registrierung", "en": "Registration" },
+      "prefix": "registration"
+    },
+    {
+      "name": { "de": "Retourenhistorie", "en": "Return history" },
+      "prefix": "returnHistory"
+    },
+    {
+      "name": { "de": "Artikelansicht", "en": "Item view" },
+      "prefix": "item"
+    },
+    {
+      "name": { "de": "Wunschliste", "en": "Wish list" },
+      "prefix": "wishList"
+    }
+  ]
+}
