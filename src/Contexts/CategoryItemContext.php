@@ -20,7 +20,9 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             'itemsPerPage'  => $this->getParam( 'itemsPerPage', $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage ),
             'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSorting ),
             'facets'        => $this->getParam( 'facets' ),
-            'categoryId'    => $this->category->id
+            'categoryId'    => $this->category->id,
+            'priceMin'      => $this->request->get('price_min', 0),
+            'priceMax'      => $this->request->get('price_max', 0)
         ];
 
         $this->initItemList(
