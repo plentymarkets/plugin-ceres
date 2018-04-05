@@ -36,5 +36,9 @@ Vue.component("item-filter-price", {
 
     methods:
     {
+        selectAll(event)
+        {
+            event.target.select();
+        }
     }
 });

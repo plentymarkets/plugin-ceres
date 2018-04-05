@@ -3,12 +3,12 @@
 		<div class="row">
 			<div class="col-lg-5 p-r-0 d-table">
 				<div class="input-group-addon">${ currency }</div>
-				<input type="number" class="form-control" placeholder="Min" v-model="minPrice">
+				<input type="number" class="form-control" @click="selectAll($event)" placeholder="Min" v-model="minPrice">
 			</div>
 
 			<div class="col-lg-5 p-r-0 d-table">
 				<div class="input-group-addon">${ currency }</div>
-				<input type="number" class="form-control" placeholder="Max" v-model="maxPrice">
+				<input type="number" class="form-control" @click="selectAll($event)" placeholder="Max" v-model="maxPrice">
 			</div>
 
 			<div class="col-lg-2">
