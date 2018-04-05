@@ -1,3 +1,5 @@
+import {getUrlParam}from "../../../helper/utils";
+
 Vue.component("item-filter-price", {
 
     delimiters: ["${", "}"],
@@ -14,8 +16,8 @@ Vue.component("item-filter-price", {
     data()
 	{
         return {
-            minPrice: "",
-            maxPrice: "",
+            minPrice: getUrlParam("price_min"),
+            maxPrice: getUrlParam("price_max"),
             currency: App.activeCurrency
         };
     },
@@ -39,6 +41,14 @@ Vue.component("item-filter-price", {
         selectAll(event)
         {
             event.target.select();
+        },
+
+        triggerFilter()
+        {
+            if (!this.isDisabled)
+            {
+
+            }
         }
     }
 });

@@ -63,3 +63,15 @@ export function defaultValue(input, defaultValue)
 
     return input;
 }
+
+/**
+ * Get a specified URL param or an empty string if the given param is not found
+ *
+ * @param {string} value
+ *
+ * @returns {string}
+ */
+export function getUrlParam(value)
+{
+    return location.search.substr(1).split("&").find(param => param.split("=")[0] == value).split("=")[1] || "";
+}
