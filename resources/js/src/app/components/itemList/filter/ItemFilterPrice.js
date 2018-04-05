@@ -15,7 +15,8 @@ Vue.component("item-filter-price", {
 	{
         return {
             minPrice: "",
-            maxPrice: ""
+            maxPrice: "",
+            currency: App.activeCurrency
         };
     },
 

@@ -154,7 +154,7 @@
         <script>
             App = {
                 config: {{ ceresConfig | json_encode | raw }},
-                activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
+                activeCurrency: "{{ currencyData[currencyFormat] }}",
                 currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
                 isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
                 isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},
