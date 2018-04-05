@@ -30,6 +30,9 @@ class GlobalContext implements ContextInterface
     public $notifications;
     public $basket;
     public $webstoreConfig;
+    
+    /** @var Request $request */
+    public $request;
 
     public function init($params)
     {
@@ -58,6 +61,8 @@ class GlobalContext implements ContextInterface
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
+        
+        $this->request = pluginApp(Request::class);
 
         $this->lang = $sessionStorageService->getLang();
         $this->metaLang = 'de';
