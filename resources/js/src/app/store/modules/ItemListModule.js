@@ -47,6 +47,27 @@ const mutations =
             state.facets.find(facet => facet.type == "price").values[0] = priceFacet;
         },
 
+        setPriceFacetTag(state)
+        {
+            const priceFacet = state.facets.find(facet => facet.type == "price").values[0];
+
+            if (state.selectedFacets.find(facet => facet.id == "price"))
+            {
+                state.selectedFacets.find(facet => facet.id == "price").priceMin = priceFacet.priceMin;
+                state.selectedFacets.find(facet => facet.id == "price").priceMax = priceFacet.priceMax;
+                state.selectedFacets.find(facet => facet.id == "price").name = priceFacet.name;
+            }
+            else
+            {
+                state.selectedFacets.push(priceFacet);
+            }
+        },
+
+        removePriceFacet(state)
+        {
+            state.selectedFacets = state.selectedFacets.filter(facet => facet.id != "price");
+        },
+
         setSelectedFacetsByIds(state, selectedFacetIds)
         {
             let selectedFacets = [];
@@ -119,7 +140,15 @@ const actions =
     {
         selectFacet({dispatch, commit}, facetValue)
         {
-            commit("toggleSelectedFacet", facetValue);
+            if (facetValue.id != "price")
+            {
+                commit("toggleSelectedFacet", facetValue);
+            }
+            else
+            {
+                commit("removePriceFacet");
+            }
+
             commit("setItemListPage", 1);
 
             dispatch("retrieveItemList");
@@ -128,6 +157,8 @@ const actions =
         selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
         {
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setPriceFacetTag");
+
             commit("setItemListPage", 1);
 
             dispatch("retrieveItemList");
@@ -176,8 +207,8 @@ const actions =
                         sorting             : state.sorting,
                         page                : state.page,
                         facets              : getters.selectedFacetIdsForUrl.toString(),
-                        priceMin            : state.facets.find(facet => facet.type == "price").values[0].priceMin,
-                        priceMax            : state.facets.find(facet => facet.type == "price").values[0].priceMax,
+                        priceMin            : state.facets.find(facet => facet.type == "price").values[0].priceMin || "",
+                        priceMax            : state.facets.find(facet => facet.type == "price").values[0].priceMax || "",
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                         template            : "Ceres::ItemList.ItemListView"
                     };
