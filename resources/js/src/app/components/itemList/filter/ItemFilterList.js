@@ -43,9 +43,26 @@ Vue.component("item-filter-list", {
 
         const urlParams = UrlService.getUrlParams(document.location.search);
 
+        let selectedFacets = [];
+
         if (urlParams.facets)
         {
-            this.$store.commit("setSelectedFacetsByIds", urlParams.facets.split(","));
+            selectedFacets = urlParams.facets.split(",");
+        }
+
+        if (urlParams.price_min || urlParams.price_max)
+        {
+            const priceMin = urlParams.price_min || "";
+            const priceMax = urlParams.price_max || "";
+
+            this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+
+            selectedFacets.push("price_" + this.facetData.find(facet => facet.type == "price").id.toString());
+        }
+
+        if (selectedFacets.length > 0)
+        {
+            this.$store.commit("setSelectedFacetsByIds", selectedFacets);
         }
     },
 

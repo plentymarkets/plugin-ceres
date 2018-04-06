@@ -21,6 +21,28 @@ const mutations =
             state.facets = facets || [];
         },
 
+        setPriceFacet(state, {priceMin, priceMax})
+        {
+            const currency = App.activeCurrency;
+
+            const priceFacet = {id: "price_" + state.facets.find(facet => facet.type == "price").id};
+
+            if (!priceMax.length)
+            {
+                priceFacet.name = "ab " + priceMin + currency;
+            }
+            else if (!priceMin.length)
+            {
+                priceFacet.name = "bis " + priceMax + currency;
+            }
+            else
+            {
+                priceFacet.name = priceMin + currency + " - " + priceMax + currency;
+            }
+
+            state.facets.find(facet => facet.type == "price").values.push(priceFacet);
+        },
+
         setSelectedFacetsByIds(state, selectedFacetIds)
         {
             let selectedFacets = [];
