@@ -24,9 +24,13 @@ const mutations =
         setPriceFacet(state, {priceMin, priceMax})
         {
             const currency = App.activeCurrency;
+            const priceFacet = {
+                id: "price",
+                priceMin: priceMin,
+                priceMax: priceMax
+            };
 
-            const priceFacet = {id: "price_" + state.facets.find(facet => facet.type == "price").id};
-
+            // TODO FORMAT PRICE
             if (!priceMax.length)
             {
                 priceFacet.name = "ab " + priceMin + currency;
@@ -40,7 +44,7 @@ const mutations =
                 priceFacet.name = priceMin + currency + " - " + priceMax + currency;
             }
 
-            state.facets.find(facet => facet.type == "price").values.push(priceFacet);
+            state.facets.find(facet => facet.type == "price").values[0] = priceFacet;
         },
 
         setSelectedFacetsByIds(state, selectedFacetIds)
@@ -121,6 +125,14 @@ const actions =
             dispatch("retrieveItemList");
         },
 
+        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
+        {
+            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setItemListPage", 1);
+
+            dispatch("retrieveItemList");
+        },
+
         selectItemListPage({dispatch, commit}, page)
         {
             commit("setItemListPage", page);
@@ -163,7 +175,9 @@ const actions =
                         items               : state.itemsPerPage,
                         sorting             : state.sorting,
                         page                : state.page,
-                        facets              : getters.selectedFacetIds.toString(),
+                        facets              : getters.selectedFacetIdsForUrl.toString(),
+                        priceMin            : state.facets.find(facet => facet.type == "price").values[0].priceMin,
+                        priceMax            : state.facets.find(facet => facet.type == "price").values[0].priceMax,
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                         template            : "Ceres::ItemList.ItemListView"
                     };
@@ -199,6 +213,15 @@ const getters =
             state.selectedFacets.every(facet => selectedFacetIds.push(facet.id));
 
             return selectedFacetIds;
+        },
+
+        selectedFacetIdsForUrl(state)
+        {
+            const selectedFacetIds = [];
+
+            state.selectedFacets.every(facet => selectedFacetIds.push(facet.id));
+
+            return selectedFacetIds.filter(facet => facet != "price");
         }
     };
 

@@ -52,7 +52,7 @@ Vue.component("item-filter-price", {
         {
             if (!this.isDisabled)
             {
-                this.$store.commit("setPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
+                this.$store.dispatch("selectPriceFacet", {priceMin: this.priceMin, priceMax: this.priceMax});
             }
         }
     }

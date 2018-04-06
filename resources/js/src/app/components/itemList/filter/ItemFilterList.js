@@ -57,7 +57,7 @@ Vue.component("item-filter-list", {
 
             this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
 
-            selectedFacets.push("price_" + this.facetData.find(facet => facet.type == "price").id.toString());
+            selectedFacets.push("price");
         }
 
         if (selectedFacets.length > 0)
