@@ -207,8 +207,8 @@ const actions =
                         sorting             : state.sorting,
                         page                : state.page,
                         facets              : getters.selectedFacetIdsForUrl.toString(),
-                        priceMin            : state.facets.find(facet => facet.type == "price").values[0].priceMin || "",
-                        priceMax            : state.facets.find(facet => facet.type == "price").values[0].priceMax || "",
+                        priceMin            : state.selectedFacets.find(facet => facet.id == "price") ? state.selectedFacets.find(facet => facet.id == "price").priceMin : "",
+                        priceMax            : state.selectedFacets.find(facet => facet.id == "price") ? state.selectedFacets.find(facet => facet.id == "price").priceMax : "",
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                         template            : "Ceres::ItemList.ItemListView"
                     };
