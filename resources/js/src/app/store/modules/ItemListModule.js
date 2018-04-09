@@ -23,25 +23,26 @@ const mutations =
 
         setPriceFacet(state, {priceMin, priceMax})
         {
-            const currency = App.activeCurrency;
+            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
+
             const priceFacet = {
                 id: "price",
                 priceMin: priceMin,
                 priceMax: priceMax
             };
 
-            // TODO FORMAT PRICE
             if (!priceMax.length)
             {
-                priceFacet.name = "ab " + priceMin + currency;
+                priceFacet.name = "ab " + priceMinFormatted;
             }
             else if (!priceMin.length)
             {
-                priceFacet.name = "bis " + priceMax + currency;
+                priceFacet.name = "bis " + priceMaxFormatted;
             }
             else
             {
-                priceFacet.name = priceMin + currency + " - " + priceMax + currency;
+                priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
             }
 
             state.facets.find(facet => facet.type == "price").values[0] = priceFacet;
