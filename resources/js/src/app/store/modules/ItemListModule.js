@@ -141,13 +141,13 @@ const actions =
     {
         selectFacet({dispatch, commit}, facetValue)
         {
-            if (facetValue.id !== "price")
+            if (facetValue.id === "price")
             {
-                commit("toggleSelectedFacet", facetValue);
+                commit("removePriceFacet");
             }
             else
             {
-                commit("removePriceFacet");
+                commit("toggleSelectedFacet", facetValue);
             }
 
             commit("setItemListPage", 1);
@@ -159,7 +159,6 @@ const actions =
         {
             commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
             commit("setPriceFacetTag");
-
             commit("setItemListPage", 1);
 
             dispatch("retrieveItemList");
