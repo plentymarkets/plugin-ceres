@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Grid;
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class RowWidget implements Widget
+class ThreeColumnWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class RowWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::Widgets.Grid.RowWidget",
+            "Ceres::Widgets.Grid.ThreeColumnWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]

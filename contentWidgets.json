@@ -26,10 +26,93 @@
 		"settings": {}
 	},
 	{
-		"identifier": "Ceres::RowWidget",
-		"label": "Widget.row_label",
-		"previewImageURL": "https://i.imgur.com/GZvjBio.png",
-		"widgetClass": "Ceres\\Widgets\\Grid\\RowWidget",
+		"identifier": "Ceres::TwoColumnWidget",
+		"label": "Widget.two_column_label",
+		"previewImageURL": "https://i.imgur.com/4hYBGvf.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
+		"settings": {
+			"layout": {
+				"type": "selectBox",
+				"required": true,
+				"label": "layout",
+				"options": {
+					"tooltip": "layout",
+					"defaultValue": "default",
+					"selectBoxValues": [
+						{
+							"value": "default",
+							"caption": "6 | 6",
+							"position": 0
+						},
+						{
+							"value": "a",
+							"caption": "8 | 4",
+							"position": 1
+						},
+						{
+							"value": "b",
+							"caption": "4 | 8",
+							"position": 2
+						}
+					]
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::ThreeColumnWidget",
+		"label": "Widget.three_column_label",
+		"previewImageURL": "https://i.imgur.com/je1t8za.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
+		"settings": {
+			"layout": {
+				"type": "selectBox",
+				"required": true,
+				"label": "layout",
+				"options": {
+					"tooltip": "layout",
+					"defaultValue": "default",
+					"selectBoxValues": [
+						{
+							"value": "default",
+							"caption": "4 | 4 | 4",
+							"position": 0
+						},
+						{
+							"value": "a",
+							"caption": "6 | 3 | 3",
+							"position": 0
+						},
+						{
+							"value": "b",
+							"caption": "3 | 6 | 3",
+							"position": 0
+						},
+						{
+							"value": "c",
+							"caption": "3 | 3 | 6",
+							"position": 0
+						},
+						{
+							"value": "d",
+							"caption": "8 | 4(split)",
+							"position": 0
+						},
+						{
+							"value": "e",
+							"caption": "4(split) | 8",
+							"position": 0
+						}
+					]
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::FourColumnWidget",
+		"label": "Widget.four_column_label",
+		"previewImageURL": "https://i.imgur.com/kMVO5dO.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
 		"settings": {}
 	},
 	{
