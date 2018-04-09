@@ -29,6 +29,23 @@
 		border-color: rgba(0,0,0,.15);
 	}
 
+	.form-check-label {
+		&.error {
+			background: $brand-danger !important;
+			color: $white !important;
+			border-radius: .1rem;
+			transition: all .3s ease;
+			padding: .5em 1.75rem;
+
+			a {
+				color: $white;
+				&:hover {
+					color: $gray-lighter2;
+				}
+			}
+		}
+	}
+
 	.contact-card{
 		p{
 			&.contact-address,&.contact-vat-number{
@@ -102,30 +119,6 @@
 					}
 				}
 			}
-		}
-	}
-
-	.copy-mail-check{
-		margin-bottom: 10px;
-		text-align: initial;
-
-		input{
-			vertical-align: text-bottom;
-			margin-right: 4px;
-		}
-
-		@include media-breakpoint-up(sm){
-
-		}
-
-		@include media-breakpoint-up(md){
-			margin-bottom: 0;
-			text-align: right;
-			line-height: 2.3;
-		}
-
-		@include media-breakpoint-up(lg){
-
 		}
 	}
 

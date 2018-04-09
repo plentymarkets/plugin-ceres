@@ -55,7 +55,7 @@
                         </div>
     
                         <div class="price-box">
-                            <div class="item-total-price">${ basketItem.quantity * basketItem.variation.data.prices.default.unitPrice.value | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
+                            <div class="item-total-price">${ itemTotalPrice | currency(basketItem.variation.data.calculatedPrices.default.currency) }</div>
                 
                             <div class="item-remove-container">
                                 <div class="btn btn-sm item-remove-button" :class="{ 'disabled': waiting || isBasketLoading || waitingForDelete }" @click="deleteItem">
@@ -72,10 +72,10 @@
                 <div class="item-properties" v-if="basketItem.basketItemOrderParams.length">
                     <div class="item-properties-header">{{ trans("Ceres::Template.basketAdditionalOptions") }}:</div>
                     <ul>
-                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId">
+                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
 
                             <span :class="{ 'item-property-value': size === 'small' }">
-                                <strong>${ property.name } (${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
+                                <strong>${ property.name } ({{ trans("Ceres::Template.generalIncludeAbbr") }} ${ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency })</strong>
                                 <span v-if="size === 'small'">
                                     <span v-if="property.type === 'file'">
                                         <a :href="property.value | fileUploadPath" target="_blank">

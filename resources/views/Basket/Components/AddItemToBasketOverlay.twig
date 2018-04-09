@@ -40,8 +40,16 @@
                                 </p>
 
                                 <p class="small" v-for="property in latestBasketEntry.item.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (${latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
-                                    <span v-if="property.property.value">${property.property.value}</span>
+                                    <template v-if="property.property.value">
+                                        <strong>${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
+                                        <span v-if="property.property.valueType === 'file'">
+                                            <a :href="property.property.value | fileUploadPath" target="_blank">
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                ${ property.property.value | fileName }
+                                            </a>
+                                        </span>
+                                        <span v-else>${ property.property.value }</span>
+                                    </template>
                                 </p>
                             </div>
                         </div>

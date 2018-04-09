@@ -47,8 +47,12 @@
 
                     <slot name="BeforePrice"></slot>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <order-properties template="#vue-order-properties" v-if="currentVariation.filter.isSalable"></order-properties>
+                    </div> -->
+
+                    <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
+                        <order-property-list></order-property-list>
                     </div>
 
                     <graduated-prices template="#vue-graduated-prices"></graduated-prices>
@@ -93,7 +97,13 @@
 
                     <div class="row m-y-1">
                         <slot name="BeforeAddToBasket"></slot>
-                        <add-to-basket template="#vue-add-to-basket" v-if="currentVariation.filter.isSalable" :item="$store.state.item.variation.documents[0].data" :show-quantity="true" :is-variation-selected="isVariationSelected"></add-to-basket>
+                        <add-to-basket
+                                template="#vue-add-to-basket"
+                                v-if="currentVariation.filter.isSalable"
+                                :item="$store.state.item.variation.documents[0].data"
+                                :show-quantity="true"
+                                :missing-order-properties="variationMissingProperties"
+                                :is-variation-selected="isVariationSelected"></add-to-basket>
                         <slot name="AfterAddToBasket"></slot>
                     </div>
 

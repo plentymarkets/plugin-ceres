@@ -1,0 +1,60 @@
+<script type="x/template" id="vue-order-property-list-item">
+    <div>
+
+        <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
+            <input type="text" @change="onInputValueChanged($event.target.value)" v-model="inputValue" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <label>${property.names.name}
+                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency})</strong>
+            *</label>
+        </div>
+
+        <!-- <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" :class="{ 'has-success': property.value, 'has-danger': hasError }" class="form-group">
+            <label :class="{ 'custom-checkbox': inputType === 'checkbox', 'custom-radio': inputType === 'radio' }" class="custom-control" v-tooltip data-toggle="tooltip" :title="property.names.description">
+                <input v-if="inputType === 'checkbox'" @change="onInputValueChanged($event.target.checked)" type="checkbox" class="custom-control-input">
+                <input v-else :name="group ? group.id : 'check' + _uid" :value="property.id" @change="onInputValueChanged($event.target.value)" type="radio" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">
+                    ${ property.names.name }
+                    <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                </span>
+            </label>
+        </div> -->
+
+        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
+            <label class="form-check-label" :class="{ 'text-success': property.value, 'text-danger': hasError }">
+                <input :name="group ? group.id : 'check' + _uid" :value="property.id" @change="onInputValueChanged(inputType === 'checkbox' ? $event.target.checked : $event.target.value)" class="form-check-input" :type="inputType">
+                ${ property.names.name }
+                <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+            </label>
+        </div>
+
+        {#
+        <div v-else-if="inputType === 'selection'">
+            <div class="input-unit">
+                <select class="custom-select">
+                    <option :selected="true" :value="null">{{ trans("Ceres::Template.pleaseSelect") }}</option>
+                </select>
+                <label>${property.names.name}</label>
+            </div>
+        </div>
+        #}
+
+        <div v-else-if="inputType === 'file'">
+            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'isLoading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
+                <span class="input-unit-preview" :class="{ 'disabled': waiting }">${selectedFileName}</span>
+                <span class="input-unit-label">
+                    ${property.names.name}
+                    <strong v-if="property.surcharge > 0">(+ ${ property.surcharge | currency}) *</strong>
+                </span>
+                <span class="input-unit-btn" v-if="!selectedFile">
+                    <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
+                    <i class="fa fa-times"></i>
+                </span>
+                <input :disabled="waiting" type="file" size="50" accept="image/*" @change="setPropertyFile($event)">
+            </label>
+        </div>
+
+    </div>
+</script>

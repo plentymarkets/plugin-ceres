@@ -30,7 +30,7 @@
 			margin-right: 0;
 
 			// sets the height of the top-bar
-			@include media-breakpoint-between(xs, md) {
+			@include media-breakpoint-down(md) {
 
 				a:not(.btn) {
 					padding: 0.5rem .5rem;
@@ -98,7 +98,7 @@
 						& .dropdown-menu {
 							max-height: 200px;
 
-							@include media-breakpoint-between(xs, md) {
+							@include media-breakpoint-down(md) {
 								width: 105px;
 
 								&.dropdown-menu-right {
@@ -116,7 +116,7 @@
 						overflow: hidden;
 						border: none !important;
 
-						@include media-breakpoint-between(xs, md) {
+						@include media-breakpoint-down(md) {
 							width: 105px;
 
 							&.dropdown-menu-right {
@@ -373,7 +373,7 @@
 }
 
 // Mobile only
-@include media-breakpoint-between(xs, md) {
+@include media-breakpoint-down(md) {
 	.navbar {
 		.navbar-nav{
 

@@ -2,7 +2,7 @@
 	line-height: 1;
 }
 
-@include media-breakpoint-only(xs) { 
+@include media-breakpoint-down(xs) {
 .history {
 	.xs-center{
 		float:none!important;

@@ -7,6 +7,7 @@ body .wrapper-main{
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
+    &.contact,
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -106,6 +107,7 @@ a:active {
         padding-right: 0;
         &.basket,
         &.checkout,
+        &.contact,
         &.myaccount {
             padding-left: 15px;
             padding-right: 15px;

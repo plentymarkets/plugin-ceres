@@ -2,16 +2,17 @@
 // ==========================================================================
 // External Libs
 // ==========================================================================
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/font-awesome/scss/font-awesome";
-@import "../../node_modules/shariff/build/shariff.complete.css";
-@import "../../node_modules/flag-icon-css/sass/flag-icon";
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome/scss/font-awesome";
+@import "shariff/build/shariff.complete.css";
+@import "flag-icon-css/sass/flag-icon";
 
 // ==========================================================================
 // Custom styles
 // ==========================================================================
 
 // global
+@import "ceres/mixins/breakpoints";
 @import "ceres/mixins/general-mixins";
 @import "ceres/mixins/proportional-boxes";
 @import "ceres/common/typography";

@@ -76,6 +76,12 @@
         }
     }
 
+    .tab-content {
+        img {
+            max-width: 100%;
+        }
+    }
+
     .graduated-prices-table {
         td:first-child {
             padding-right: 1rem;
@@ -147,6 +153,7 @@
         }
     }
 }
+
 @include media-breakpoint-only(md) {
     .single {
         .price {
@@ -154,6 +161,7 @@
         }
     }
 }
+
 
 @include media-breakpoint-up(md) {
     .single {
@@ -174,6 +182,67 @@
                 }
                 &+.nav-item {
                     margin-left: -1px;
+                }
+            }
+        }
+    }
+}
+
+.order-property-slider {
+    overflow: hidden;
+    
+    .order-property-slider-inner {
+        white-space: nowrap;
+        transition: transform 300ms ease;
+        
+        > div {
+            display: inline-block;
+            width: 100%;
+            visibility: hidden;
+            
+            &.active {
+                visibility: visible;
+            }
+        }
+    }
+    
+    .order-property-slider-controls {
+        display: flex;
+        flex-direction: row;
+        
+        .slider-nav {
+            flex: 1;
+            text-align: center;
+            
+            span {
+                width: 12px;
+                height: 12px;
+                display: inline-block;
+                border-radius: 50%;
+                border: 1px solid $gray-lighter;
+                background-color: #fff;
+                margin: 12px 5px 0;
+                cursor: pointer;
+                transition: all .3s ease;
+                
+                &.active {
+                    background-color: $gray-lighter;
+
+                    &.error {
+                        // background-color: lighten($brand-danger, 25%);
+                        background-color: mix($brand-danger, $gray-lighter);
+                        border-color: mix(lighten($brand-danger, 25%), $gray-lighter);
+                    }
+                }
+
+                &.highlight {
+                    background-color: $brand-primary;
+                    border-color: lighten($brand-primary, 25%);
+                }
+
+                &.error {
+                    background-color: $brand-danger;
+                    border-color: lighten($brand-danger, 25%);
                 }
             }
         }
