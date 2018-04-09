@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
 import {updateItemListUrlParams}from "services/ItemListUrlService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -34,11 +35,11 @@ const mutations =
 
             if (!priceMax.length)
             {
-                priceFacet.name = "ab " + priceMinFormatted;
+                priceFacet.name = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
             }
             else if (!priceMin.length)
             {
-                priceFacet.name = "bis " + priceMaxFormatted;
+                priceFacet.name = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
             }
             else
             {
