@@ -9,8 +9,8 @@ export function updateItemListUrlParams(searchParams)
     urlParams.items = (searchParams.items !== defaultItemsPerPage) ? searchParams.items : null;
     urlParams.page = (searchParams.page > 1) ? searchParams.page : null;
     urlParams.facets = (searchParams.facets.length > 0) ? searchParams.facets : null;
-    urlParams.price_min = (searchParams.priceMin.length > 0) ? searchParams.priceMin : null;
-    urlParams.price_max = (searchParams.priceMax.length > 0) ? searchParams.priceMax : null;
+    urlParams.priceMin = (searchParams.priceMin.length > 0) ? searchParams.priceMin : null;
+    urlParams.priceMax = (searchParams.priceMax.length > 0) ? searchParams.priceMax : null;
 
     if (App.isSearch)
     {

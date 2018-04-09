@@ -50,10 +50,10 @@ Vue.component("item-filter-list", {
             selectedFacets = urlParams.facets.split(",");
         }
 
-        if (urlParams.price_min || urlParams.price_max)
+        if (urlParams.priceMin || urlParams.priceMax)
         {
-            const priceMin = urlParams.price_min || "";
-            const priceMax = urlParams.price_max || "";
+            const priceMin = urlParams.priceMin || "";
+            const priceMax = urlParams.priceMax || "";
 
             this.$store.commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
 

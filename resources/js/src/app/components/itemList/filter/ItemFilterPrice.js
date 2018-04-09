@@ -28,8 +28,8 @@ Vue.component("item-filter-price", {
 
         const urlParams = UrlService.getUrlParams(document.location.search);
 
-        this.priceMin = urlParams.price_min || "";
-        this.priceMax = urlParams.price_max || "";
+        this.priceMin = urlParams.priceMin || "";
+        this.priceMax = urlParams.priceMax || "";
     },
 
     computed:
