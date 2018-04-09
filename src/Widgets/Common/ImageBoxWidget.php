@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class ItemPreview implements Widget
+class ImageBoxWidget implements Widget
 {
 
     /**
@@ -18,15 +18,10 @@ class ItemPreview implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-        $widgetSettings = [
-			"variationId" => 132,
-			"imageUrl" => "http://master.plentymarkets.com/documents/image/i13/132-Zweisitzer-Paradise-Now-rot.jpg"
-        ];
-
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ItemPreview",
+            "Ceres::Widgets.Common.ImageBoxWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]
@@ -50,6 +45,8 @@ class ItemPreview implements Widget
         array $widgetSettings = []
     ): string
     {
-        return 'todo';
+        return 'number input twig';
     }
 }
+
+?>

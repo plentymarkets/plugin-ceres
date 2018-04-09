@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class ImageCarouselWidget implements Widget
+class TextHeaderWidget implements Widget
 {
 
     /**
@@ -18,23 +18,12 @@ class ImageCarouselWidget implements Widget
      */
     public function getPreview(int $widgetGridHeight = 0, int $widgetGridWidth = 0, array $widgetSettings = []): string
     {
-        $sliderParams = [];
-
-        foreach ($widgetSettings as $key => $value)
-        {
-            if (preg_match("/^slide\d+$/", $key) && (isset($value["categoryId"]) || isset($value["variationId"]) || isset($value["customImagePath"])))
-            {
-                $sliderParams[] = $value;
-            }
-        }
-
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ImageCarouselWidget",
+            "Ceres::Widgets.Common.HeaderWidget",
             [
-                "widgetSettings" => $widgetSettings,
-                "sliderParams" => $sliderParams
+                "widgetSettings" => $widgetSettings
             ]
         );
     }

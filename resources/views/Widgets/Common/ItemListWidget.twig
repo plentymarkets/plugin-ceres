@@ -36,13 +36,13 @@
             {% if itemList is not empty %}
                 {% for item in itemList[0:4] %}
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        {% include "Ceres::ContentBuilder.Homepage.Partials.CategoryListItemPreview" with { 'item': item } %}
+                        {% include "Ceres::Widgets.Common.Partials.CategoryListItemPreview" with { 'item': item } %}
                     </li>
                 {% endfor %}
             {% else %}
                 {% for i in 0..3 %}
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        {% include "Ceres::ContentBuilder.Homepage.Partials.CategoryListItemPreview" %}
+                        {% include "Ceres::Widgets.Common.Partials.CategoryListItemPreview" %}
                     </li>
                 {% endfor %}
             {% endif %}

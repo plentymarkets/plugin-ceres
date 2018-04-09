@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
@@ -21,7 +21,7 @@ class ItemListWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ItemListWidget",
+            "Ceres::Widgets.Common.ItemListWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]
