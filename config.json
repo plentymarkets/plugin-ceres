@@ -1649,18 +1649,10 @@
     },
     {
         "tab"               : "Design",
-        "key"               : "design.colors.brand_info",
-        "label"             : "Info colour",
-        "type"              : "text",
-        "default"           : "#5bc0de",
-        "scss"              : true
-    },
-    {
-        "tab"               : "Design",
         "key"               : "brand-info",
         "label"             : "Information colour",
         "type"              : "text",
-        "default"           : "#f0ad4e",
+        "default"           : "#5bc0de",
         "scss"              : true
     },
     {
