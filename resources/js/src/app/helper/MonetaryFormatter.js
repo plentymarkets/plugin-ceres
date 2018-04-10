@@ -1,3 +1,5 @@
+import {toLength}from "./number";
+
 const MonetaryFormatter = (function()
 {
     const T_DIGIT       = 0;
@@ -130,7 +132,7 @@ const MonetaryFormatter = (function()
                 return digits;
             }
             case T_DECIMAL: {
-                return this.separatorDecimals + (value * 100).toFixed(0).substr(-2, 2);
+                return this.separatorDecimals + toLength((value * 100).toFixed(0).substr(-2, 2), 2);
             }
             case T_CURRENCY: {
                 return currency;
