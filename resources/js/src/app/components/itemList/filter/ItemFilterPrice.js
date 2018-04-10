@@ -37,8 +37,13 @@ Vue.component("item-filter-price", {
         isDisabled()
 		{
             return (this.priceMin === "" && this.priceMax === "") ||
-					(parseInt(this.priceMin) >= parseInt(this.priceMax));
-        }
+                    (parseInt(this.priceMin) >= parseInt(this.priceMax)) ||
+                    this.isLoading;
+        },
+
+        ...Vuex.mapState({
+            isLoading: state => state.itemList.isLoading
+        })
     },
 
     methods:
