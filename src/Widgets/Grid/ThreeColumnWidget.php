@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Grid;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class ItemListWidget implements Widget
+class ThreeColumnWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class ItemListWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ItemListWidget",
+            "Ceres::Widgets.Grid.ThreeColumnWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]

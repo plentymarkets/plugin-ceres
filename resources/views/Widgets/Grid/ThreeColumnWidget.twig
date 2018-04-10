@@ -1,0 +1,53 @@
+{% if widgetSettings.layout == "default" %}
+    <!-- 3 Spalten identisch: -->
+    <div class="row">
+        <div class="col-xs-4 nested-widget"></div>
+        <div class="col-xs-4 nested-widget"></div>
+        <div class="col-xs-4 nested-widget"></div>
+    </div>
+{% elseif widgetSettings.layout == "a" %}
+    <!-- 3 Spalten links groß: -->
+    <div class="row">
+        <div class="col-xs-6 nested-widget"></div>
+        <div class="col-xs-3 nested-widget"></div>
+        <div class="col-xs-3 nested-widget"></div>
+    </div>
+{% elseif widgetSettings.layout == "b" %}
+    <!-- 3 Spalten mitte groß: -->
+    <div class="row">
+        <div class="col-xs-3 nested-widget"></div>
+        <div class="col-xs-6 nested-widget"></div>
+        <div class="col-xs-3 nested-widget"></div>
+    </div>
+{% elseif widgetSettings.layout == "c" %}
+    <!-- 3 Spalten rechts groß: -->
+    <div class="row">
+        <div class="col-xs-3 nested-widget"></div>
+        <div class="col-xs-3 nested-widget"></div>
+        <div class="col-xs-6 nested-widget"></div>
+    </div>
+{% elseif widgetSettings.layout == "d" %}
+    <!-- 3 Spalten, links eine, rechts 2: -->
+    <div class="row">
+        <div class="col-xs-8 nested-widget"></div>
+
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="col-xs-12 nested-widget"></div>
+                <div class="col-xs-12 nested-widget"></div>
+            </div>
+        </div>
+    </div>
+{% elseif widgetSettings.layout == "e" %}
+    <!-- 3 Spalten, links 2, rechts eine: -->
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="col-xs-12 nested-widget"></div>
+                <div class="col-xs-12 nested-widget"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-8 nested-widget"></div>
+    </div>
+{% endif %}

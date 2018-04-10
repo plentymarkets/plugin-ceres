@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\PageDesign;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class Footer implements Widget
+class TextHeaderWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class Footer implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::PageDesign.Partials.Footer",
+            "Ceres::Widgets.Common.HeaderWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]

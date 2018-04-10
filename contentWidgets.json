@@ -3,7 +3,8 @@
 		"identifier": "Ceres::HeaderWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "",
-		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Header",
+		"isHidden": true,
+		"widgetClass": "Ceres\\Widgets\\Header\\Header",
 		"settings": {
 			"logo": {
 				"type": "inputText",
@@ -20,14 +21,105 @@
 		"identifier": "Ceres::FooterWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "",
-		"widgetClass": "Ceres\\ContentBuilder\\PageDesign\\Footer",
+		"isHidden": true,
+		"widgetClass": "Ceres\\Widgets\\Footer\\Footer",
+		"settings": {}
+	},
+	{
+		"identifier": "Ceres::TwoColumnWidget",
+		"label": "Widget.two_column_label",
+		"previewImageURL": "https://i.imgur.com/4hYBGvf.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
+		"settings": {
+			"layout": {
+				"type": "selectBox",
+				"required": true,
+				"label": "layout",
+				"options": {
+					"tooltip": "layout",
+					"defaultValue": "default",
+					"selectBoxValues": [
+						{
+							"value": "default",
+							"caption": "6 | 6",
+							"position": 0
+						},
+						{
+							"value": "a",
+							"caption": "8 | 4",
+							"position": 1
+						},
+						{
+							"value": "b",
+							"caption": "4 | 8",
+							"position": 2
+						}
+					]
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::ThreeColumnWidget",
+		"label": "Widget.three_column_label",
+		"previewImageURL": "https://i.imgur.com/je1t8za.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
+		"settings": {
+			"layout": {
+				"type": "selectBox",
+				"required": true,
+				"label": "layout",
+				"options": {
+					"tooltip": "layout",
+					"defaultValue": "default",
+					"selectBoxValues": [
+						{
+							"value": "default",
+							"caption": "4 | 4 | 4",
+							"position": 0
+						},
+						{
+							"value": "a",
+							"caption": "6 | 3 | 3",
+							"position": 0
+						},
+						{
+							"value": "b",
+							"caption": "3 | 6 | 3",
+							"position": 0
+						},
+						{
+							"value": "c",
+							"caption": "3 | 3 | 6",
+							"position": 0
+						},
+						{
+							"value": "d",
+							"caption": "8 | 4(split)",
+							"position": 0
+						},
+						{
+							"value": "e",
+							"caption": "4(split) | 8",
+							"position": 0
+						}
+					]
+				}
+			}
+		}
+	},
+	{
+		"identifier": "Ceres::FourColumnWidget",
+		"label": "Widget.four_column_label",
+		"previewImageURL": "https://i.imgur.com/kMVO5dO.png",
+		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
 		"settings": {}
 	},
 	{
 		"identifier": "Ceres::TextHeaderWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\TextHeaderWidget",
+		"widgetClass": "Ceres\\Widgets\\Common\\TextHeaderWidget",
 		"settings": {
 			"text": {
 				"type": "inputFile",
@@ -44,7 +136,7 @@
 		"identifier": "Ceres::ImageCarouselWidget",
 		"label": "Widget.imageCarousel_label",
 		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageCarouselWidget",
+		"widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
 		"settings": {
 			"slide1": {
 				"type": "verticalContainer",
@@ -160,7 +252,7 @@
 		"identifier": "Ceres::ImageBoxWidget",
 		"label": "Widget.imageBox_label",
 		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ImageBoxWidget",
+		"widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
 		"settings": {
 			"style": {
 				"type": "selectBox",
@@ -242,7 +334,7 @@
 		"identifier": "Ceres::ItemListWidget",
 		"label": "Widget.itemList_label",
 		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\ItemListWidget",
+		"widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
 		"settings": {
 			"listType": {
 				"type": "selectBox",
@@ -381,25 +473,6 @@
 				"options": {
 					"tooltip": "Widget.itemList_maxItems_tooltip",
 					"defaultValue": "4"
-				}
-			}
-		}
-	},
-	{
-		"identifier": "Ceres::Text",
-		"label": "Text",
-		"tooltip": "Text",
-		"previewImageURL": "",
-		"resizable": false,
-		"widgetClass": "Ceres\\ContentBuilder\\Homepage\\Text",
-		"settings": {
-			"text": {
-				"type": "inputText",
-				"required": true,
-				"label": "Label",
-				"options": {
-					"tooltip": "Displayed text",
-					"defaultValue": "Default Text"
 				}
 			}
 		}

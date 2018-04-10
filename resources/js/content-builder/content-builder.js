@@ -4,9 +4,11 @@ const BACKEND_URL = 'http://master.login.plentymarkets.com'; // TODO: get backen
 const CELL_HEIGHT = 40; // gridstack cell height
 
 var resizeTimer; // delay for recalculating gridstack dimensions on resize
-// var isDragging = false;
-// var isAnimating = false;
-// var draggedElement;
+
+
+var isDragging = false;
+var draggedElement;
+var isAnimating = false;
 
 // entry point
 jQuery(document).ready(function()
@@ -21,10 +23,22 @@ function initCeresForGridstack()
     injectGridstackMarkup();
     addBackendEventListener();
     addWindowResizeListener();
-    // addScrollOnDragListener();
+    addScrollOnDragListener();
 
     dispatchBuilderEvent({
         name: 'shopbuilder_ready',
+        data: {}
+    });
+}
+
+/**
+ *
+ * @param isLoading
+ */
+function showTerraLoadingOverlay(isLoading)
+{
+    dispatchBuilderEvent({
+        name: isLoading ? 'shopbuilder_loading' : 'shopbuilder_loaded',
         data: {}
     });
 }
@@ -91,12 +105,23 @@ function handleBuilderEventResponse(response)
 
 function getWidgetOrder()
 {
-    var data = {};
+    var data = [];
 
-    jQuery('[data-builder-identifier]').each(function(i)
+    jQuery('[data-builder-container]').each(function()
     {
-        var key = jQuery(this).attr('data-gs-y');
-        data[key] = jQuery(this).attr('data-builder-identifier');
+        var widgets = [];
+
+        var container = {
+            identifier: jQuery(this).attr('data-builder-container'),
+            widgets: widgets
+        };
+
+        jQuery(this).find('[data-builder-identifier]').each(function()
+        {
+            widgets[jQuery(this).attr('data-gs-y')] = jQuery(this).attr('data-builder-identifier')
+        });
+
+        data.push(container);
     });
 
     dispatchBuilderEvent({
@@ -106,7 +131,7 @@ function getWidgetOrder()
 }
 
 /**
- * Zoom view by a given factor
+ * zoom view by a given factor
  * @param factor
  */
 function zoomView(factor)
@@ -146,27 +171,45 @@ function addWindowResizeListener()
 /**
  * very ugly prototype
  */
-// function addScrollOnDragListener()
-// {
-//     // TODO: @vwiebe fix gridstack scope
-//     jQuery('.grid-stack-0').mousemove(function (event)
-//     {
-//         if (isDragging && draggedElement)
-//         {
-//             // isAnimating = true;
-//
-//             jQuery('body, html').stop().animate(
-//                 { scrollTop :   jQuery(draggedElement).position().top +
-//                                 jQuery(draggedElement).outerHeight() +
-//                                 jQuery(draggedElement).offset().top -
-//                                 jQuery(window).outerHeight() },
-//                 1000,
-//                 'linear', function()
-//                 {
-//                 });
-//         }
-//     });
-// }
+function addScrollOnDragListener()
+{
+    // TODO: @vwiebe fix gridstack scope
+    jQuery('.grid-stack-container-1').mousemove(function (event)
+    {
+        updateScrollbarPosition();
+    });
+}
+
+function updateScrollbarPosition()
+{
+    if (isDragging && draggedElement)
+    {
+        var scrollValue = 0;
+
+        if (jQuery(window).height() + jQuery('body, html').scrollTop() < jQuery(draggedElement).offset().top + jQuery(draggedElement).outerHeight() && !isAnimating)
+        {
+            scrollValue = 100
+        }
+
+        if (jQuery('body, html').scrollTop() > jQuery(draggedElement).offset().top && !isAnimating)
+        {
+            scrollValue = -100;
+        }
+
+        if (scrollValue != 0)
+        {
+            isAnimating = true;
+            jQuery('body, html').stop().animate(
+                { scrollTop : jQuery('body, html').scrollTop() + scrollValue },
+                500,
+                'linear', function()
+                {
+                    isAnimating = false;
+                    updateScrollbarPosition();
+                });
+        }
+    }
+}
 
 function updateContainerDimensions()
 {
@@ -176,7 +219,6 @@ function updateContainerDimensions()
 
         jQuery(this).find('> *').each(function()
         {
-            // TODO: @vwiebe fix gridstack scope
             jQuery(container)
                     .data('gridstack')
                     .resize(jQuery(this),
@@ -225,8 +267,10 @@ function addDeleteButton(element)
     // add delete event to button
     jQuery(element).find('.delete-icon').click(function ()
     {
+        var container = jQuery(this).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
         var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-        deleteContentWidget(widgetId);
+
+        deleteContentWidget(container, widgetId);
     });
 }
 
@@ -310,6 +354,7 @@ function addBackendEventListener()
  */
 function addContentWidget(widgetData, position)
 {
+    var container = widgetData.dropzone;
     var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
     var uniqueId = widgetData.uniqueId;
@@ -333,19 +378,16 @@ function addContentWidget(widgetData, position)
     // scroll view to top
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
-        // TODO: @vwiebe fix dropzone scope
-        jQuery('.grid-stack-container-1').data('gridstack').addWidget(gridStackItem, posX, posY);
+        jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
     });
 }
-
-
 
 /**
  * delete content widget by id
  * @param widgetId
  * @param keepProperties
  */
-function deleteContentWidget(widgetId, keepProperties)
+function deleteContentWidget(container, widgetId, keepProperties)
 {
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
@@ -369,12 +411,15 @@ function replaceContentWidget(widgetData)
 {
     var id = widgetData.uniqueId;
     var element = jQuery('body').find('[data-builder-identifier="' + id + '"]');
+
     var position = {
         x: jQuery(element).attr('data-gs-x'),
         y: jQuery(element).attr('data-gs-y')
     };
 
-    deleteContentWidget(id, true);
+    var container = jQuery(element).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
+
+    deleteContentWidget(container, id, true);
     addContentWidget(widgetData, position);
 }
 
@@ -409,27 +454,30 @@ function injectGridstackMarkup()
     // select drag & drop areas
     jQuery('[data-builder-container]').each(function(i)
     {
-        jQuery(this).css('position', 'relative');
+        if (jQuery(this).attr('data-builder-container') != 'shop-builder-header')
+        {
+            jQuery(this).css('position', 'relative');
+        }
 
         // iterate over all sub-elements
-        jQuery(this).find('> *').each(function(j)
-        {
-            // create gridstack item markup
-            var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
-                '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / CELL_HEIGHT) + '"><div class="grid-stack-item-content"></div>' +
-                '</div>');
-
-            // overwrite cursor for all contained elements
-            setDragCursorToChildElements(jQuery(this));
-
-            // add hover menu to container
-            addContextMenu(gridStackItem);
-
-            // wrap current element with gridstack item markup
-            jQuery(this).wrap(gridStackItem);
-
-            ++j;
-        });
+        // jQuery(this).find('> *').each(function(j)
+        // {
+        //     // create gridstack item markup
+        //     var gridStackItem = jQuery(  '<div class="grid-stack-item"' +
+        //         '     data-gs-height="' + Math.round(jQuery(this).outerHeight(true) / CELL_HEIGHT) + '"><div class="grid-stack-item-content"></div>' +
+        //         '</div>');
+        //
+        //     // overwrite cursor for all contained elements
+        //     setDragCursorToChildElements(jQuery(this));
+        //
+        //     // add hover menu to container
+        //     addContextMenu(gridStackItem);
+        //
+        //     // wrap current element with gridstack item markup
+        //     jQuery(this).wrap(gridStackItem);
+        //
+        //     ++j;
+        // });
 
         // add gridstack container class for current drag & drop area
         jQuery(this).addClass('grid-stack-container-' + i);
@@ -461,21 +509,22 @@ function initGridstack(identifier)
     // init gridstack event listeners
     jQuery(selector).on('added', function(event, items)
     {
-        setTimeout(function ()
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function()
         {
             updateContainerDimensions();
-        }, 100); // TODO: @vwiebe, synchronize
+        }, 100);
     });
 
-    // jQuery(selector).on('dragstart', function(event, items)
-    // {
-    //     draggedElement = items.helper[0];
-    //     isDragging = true;
-    // });
-    //
-    // jQuery(selector).on('dragstop', function(event, items)
-    // {
-    //     draggedElement = null;
-    //     isDragging = false;
-    // });
+    jQuery(selector).on('dragstart', function(event, items)
+    {
+        draggedElement = items.helper[0];
+        isDragging = true;
+    });
+
+    jQuery(selector).on('dragstop', function(event, items)
+    {
+        draggedElement = null;
+        isDragging = false;
+    });
 }

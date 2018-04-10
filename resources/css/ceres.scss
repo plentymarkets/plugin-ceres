@@ -6,13 +6,17 @@
 // Variables
 // --------------------------------------------------
 
+// Root directory
+
+$root-directory: '..' !default;
+
 // Flags settings
-$flag-icon-css-path: '../images/flags' !default;
+$flag-icon-css-path: '#{$root-directory}/images/flags' !default;
 $flag-icon-rect-path: '/4x3' !default;
 $flag-icon-square-path: '/1x1' !default;
 
 //font awesome
-$fa-font-path: "../documents/fonts" !default;
+$fa-font-path: "#{$root-directory}/documents/fonts" !default;
 
 // Spacing
 //
@@ -10532,15 +10536,16 @@ body .wrapper-main{
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .page-content{
     @extend .p-t-1;
     background-color: $gray-lightest;
     &.basket,
     &.checkout,
-<<<<<<< HEAD
-=======
     &.contact,
->>>>>>> development
     &.myaccount {
         &:not(.checkout):not(.basket) {
             background-color: $white;
@@ -10646,10 +10651,7 @@ a:active {
         padding-right: 0;
         &.basket,
         &.checkout,
-<<<<<<< HEAD
-=======
         &.contact,
->>>>>>> development
         &.myaccount {
             padding-left: 15px;
             padding-right: 15px;
@@ -13213,6 +13215,12 @@ $border-width: 1px;
 
 .autocomplete-selected {
     background: $gray-lighter;
+}
+.css-loading {
+    right: 10px;
+    position: fixed;
+    z-index: 99;
+    font-size: 27px;
 }
 .cmp-country-settings,
 .cmp-currency-select {
@@ -15804,8 +15812,6 @@ nav.navbar.megamenu {
 		border-color: rgba(0,0,0,.15);
 	}
 
-<<<<<<< HEAD
-=======
 	.form-check-label {
 		&.error {
 			background: $brand-danger !important;
@@ -15824,7 +15830,6 @@ nav.navbar.megamenu {
 		}
 	}
 
->>>>>>> development
 	.contact-card{
 		p{
 			&.contact-address,&.contact-vat-number{
@@ -15901,33 +15906,6 @@ nav.navbar.megamenu {
 		}
 	}
 
-<<<<<<< HEAD
-	.copy-mail-check{
-		margin-bottom: 10px;
-		text-align: initial;
-
-		input{
-			vertical-align: text-bottom;
-			margin-right: 4px;
-		}
-
-		@include media-breakpoint-up(sm){
-
-		}
-
-		@include media-breakpoint-up(md){
-			margin-bottom: 0;
-			text-align: right;
-			line-height: 2.3;
-		}
-
-		@include media-breakpoint-up(lg){
-
-		}
-	}
-
-=======
->>>>>>> development
 	.send-mail{
 		i{
 			margin-right: 5px;
@@ -16096,6 +16074,19 @@ nav.navbar.megamenu {
 		position: relative;
 		display: block;
 		color: $gray-dark;
+
+		.hero-image {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+
+			&.contain {
+				background-size: contain;
+			}
+		}
 
 		.hero-category-inner{
 			position: absolute;
@@ -16296,7 +16287,6 @@ nav.navbar.megamenu {
 			-webkit-box-flex: 1;	
 			    -ms-flex: 1 0 24%;	
 			        flex: 1 0 24%;
-			padding-left: 1rem;
 		}
 
 		.hero-category{
@@ -17464,6 +17454,18 @@ nav.navbar.megamenu {
 	.col-md-4 .prop-inner {
 		padding:15px 0;
 		width: calc(100% - 15px);
+	}
+
+	.featured-image {
+		height: 100%;
+		height: 100%;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+
+		&.contain {
+			background-size: contain;
+		}
 	}
 }
 .sale-new {

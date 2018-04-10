@@ -1,6 +1,6 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
@@ -31,7 +31,7 @@ class ImageCarouselWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ImageCarouselWidget",
+            "Ceres::Widgets.Common.ImageCarouselWidget",
             [
                 "widgetSettings" => $widgetSettings,
                 "sliderParams" => $sliderParams

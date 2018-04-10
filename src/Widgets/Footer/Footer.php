@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\General;
+namespace Ceres\Widgets\Footer;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class Column implements Widget
+class Footer implements Widget
 {
 
     /**
@@ -20,15 +20,12 @@ class Column implements Widget
     {
         $twig = pluginApp(Twig::class);
 
-		return $twig->render('Ceres::ContentBuilder.General.Column',
-		[
-			"width"	=> [
-				"mobile" => "2",
-                "tablet" => "4",
-                "smallDesktop" => "6",
-				"desktop" => "8"
-			]
-		]);
+        return $twig->render(
+            "Ceres::PageDesign.Partials.Footer",
+            [
+                "widgetSettings" => $widgetSettings
+            ]
+        );
     }
 
     /**
@@ -48,6 +45,8 @@ class Column implements Widget
         array $widgetSettings = []
     ): string
     {
-        return 'todo';
+        return 'number input twig';
     }
 }
+
+?>

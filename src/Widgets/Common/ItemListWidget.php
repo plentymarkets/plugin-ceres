@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\Homepage;
+namespace Ceres\Widgets\Common;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class ImageBoxWidget implements Widget
+class ItemListWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class ImageBoxWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::ContentBuilder.Homepage.ImageBoxWidget",
+            "Ceres::Widgets.Common.ItemListWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]

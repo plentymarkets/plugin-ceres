@@ -1,11 +1,11 @@
 <?php
 
-namespace Ceres\ContentBuilder\General;
+namespace Ceres\Widgets\Grid;
 
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class Row implements Widget
+class TwoColumnWidget implements Widget
 {
 
     /**
@@ -20,7 +20,12 @@ class Row implements Widget
     {
         $twig = pluginApp(Twig::class);
 
-        return $twig->render('Ceres::ContentBuilder.General.Row');
+        return $twig->render(
+            "Ceres::Widgets.Grid.TwoColumnWidget",
+            [
+                "widgetSettings" => $widgetSettings
+            ]
+        );
     }
 
     /**
@@ -40,6 +45,8 @@ class Row implements Widget
         array $widgetSettings = []
     ): string
     {
-        return 'todo';
+        return 'number input twig';
     }
 }
+
+?>
