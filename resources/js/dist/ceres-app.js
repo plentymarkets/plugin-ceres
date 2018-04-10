@@ -21015,6 +21015,9 @@ Vue.filter("truncate", function (string, value) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _number = require("./number");
+
 var MonetaryFormatter = function () {
     var T_DIGIT = 0;
     var T_DECIMAL = 1;
@@ -21125,7 +21128,7 @@ var MonetaryFormatter = function () {
                     }
                 case T_DECIMAL:
                     {
-                        return _this2.separatorDecimals + (value * 100).toFixed(0).substr(-2, 2);
+                        return _this2.separatorDecimals + (0, _number.toLength)((value * 100).toFixed(0).substr(-2, 2), 2);
                     }
                 case T_CURRENCY:
                     {
@@ -21153,7 +21156,7 @@ var MonetaryFormatter = function () {
 
 exports.default = MonetaryFormatter;
 
-},{}],113:[function(require,module,exports){
+},{"./number":115}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21247,6 +21250,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.floatLength = floatLength;
 exports.limit = limit;
 exports.formatFloat = formatFloat;
+exports.toLength = toLength;
 
 var _utils = require("./utils");
 
@@ -21313,6 +21317,19 @@ function formatFloat(value, decimals, round) {
         return 1 / 0;
     }
     return parseFloat(value.toFixed(decimals));
+}
+
+function toLength(value, length, suffix) {
+    value += "";
+    if ((0, _utils.isNullOrUndefined)(suffix)) {
+        suffix = "0";
+    }
+
+    while (value.length < length) {
+        value += suffix;
+    }
+
+    return value;
 }
 
 },{"./utils":117}],116:[function(require,module,exports){
