@@ -334,10 +334,34 @@ function setElementActive(id)
         if (id && jQuery(this).attr('data-builder-identifier') == id)
         {
             jQuery(this).addClass('active');
+
+            // activate nested widget containers
+            jQuery(this).find('.nested-widget').each(function ()
+            {
+                jQuery(this).html('<div class="shopbuilder-nested-config shopbuilder-icon add-icon fa fa-plus"></div>');
+
+                jQuery(this).find('.add-icon').click(function ()
+                {
+                    jQuery('.nested-widget').each(function ()
+                    {
+                        jQuery(this).removeClass('active');
+                    });
+
+                    jQuery(this).closest('.nested-widget').addClass('active');
+                });
+
+            });
         }
         else
         {
             jQuery(this).removeClass('active');
+
+            // deactivate nested widget containers
+            jQuery(this).find('.nested-widget').each(function ()
+            {
+                jQuery(this).removeClass('active');
+                jQuery(this).html('');
+            });
         }
     });
 }

@@ -94,12 +94,21 @@ body
 .shopbuilder-icon.delete-icon
 {
     background-color: #f11539;
-    
 }
 
 .shopbuilder-icon.delete-icon:hover
 {
     background-color: #c70c2b
+}
+
+.shopbuilder-icon.add-icon
+{
+    background-color: #6ad26a;
+}
+
+.shopbuilder-icon.add-icon:hover
+{
+    background-color: #43c643
 }
 
 .nested-widget
@@ -120,3 +129,16 @@ body
     right: 2px;
     bottom: 2px;
 }
+
+.nested-widget.active::after
+{
+    background: #ff0000;
+}
+
+.shopbuilder-nested-config
+ {
+     position: absolute;
+     z-index: 2;
+     left: calc(50% - 18px);
+     top: calc(50% - 18px);
+ }
