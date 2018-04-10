@@ -281,7 +281,7 @@ function addDeleteButton(element)
 function addEditButton(element)
 {
     // inject button markup into given context element
-    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-cog"></div>');
 
     // open properties
     jQuery(element).find('.edit-icon').click(function ()
