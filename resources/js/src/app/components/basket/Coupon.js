@@ -108,11 +108,11 @@ Vue.component("coupon", {
         getCouponRedemtionErrorMessage(error)
         {
             const errorMessageKeys = {
-                18:     "couponminOrderValueNotReached",
+                18:     "couponMinOrderValueNotReached",
                 51:     "couponnotUsableForSpecialOffer",
-                70:     "couponalreadyUsedOrInvalidCouponCode",
-                78:     "couponcampaignExpired",
-                126:    "couponnoMatchingItemInBasket",
+                70:     "couponAlreadyUsedOrInvalidCouponCode",
+                78:     "couponCampaignExpired",
+                126:    "couponNoMatchingItemInBasket",
                 329:    "couponOnlySubscription",
                 330:    "couponOnlySingleUsage",
                 331:    "couponNoOpenAmount",
