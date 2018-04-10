@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../../helper/utils";
+import {isNullOrUndefined, isNull}from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -188,19 +188,18 @@ Vue.component("address-select", {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
 
-            if (isNullOrUndefined(this.addressToEdit.addressSalutation))
+            if (this.addressToEdit.gender === "female")
+            {
+                this.addressToEdit.addressSalutation = 1;
+            }
+            else if (isNull(this.addressToEdit.gender) && this.addressToEdit.name1)
+            {
+                this.addressToEdit.addressSalutation = 2;
+            }
+            else
             {
                 this.addressToEdit.addressSalutation = 0;
-            }
-
-            if (isNullOrUndefined(this.addressToEdit.gender))
-            {
                 this.addressToEdit.gender = "male";
-            }
-            else if (this.addressToEdit.gender === "" && this.addressToEdit.name1 !== "")
-            {
-                this.addressToEdit.gender = null;
-                this.addressToEdit.addressSalutation = 2;
             }
 
             this.updateHeadline();
