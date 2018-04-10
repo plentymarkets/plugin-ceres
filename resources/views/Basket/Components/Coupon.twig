@@ -2,15 +2,15 @@
     <div class="cmp cmp-coupon">
 
         <div class="input-group">
-            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("Ceres::Template.generalEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
+            <input type="text" class="form-control" v-model="couponCode" placeholder="{{ trans("Ceres::Template.couponEnterCoupon") }}" @keyup.enter="redeemCode()" :disabled="disabled">
             <span class="input-group-btn">
                 <button class="btn btn-primary btn-medium" type="button" @click="redeemCode()" :disabled="waiting" v-if="!disabled">
                     <i v-waiting-animation="waiting" class="fa fa-gift" aria-hidden="true"></i>
-                    {{ trans("Ceres::Template.generalRedeem") }}
+                    {{ trans("Ceres::Template.couponRedeem") }}
                 </button>
                 <button class="btn btn-danger btn-medium" type="button" @click="removeCode()" :disabled="waiting" v-else>
                     <i v-waiting-animation="waiting" class="fa fa-trash" aria-hidden="true"></i>
-                    {{ trans("Ceres::Template.generalRemove") }}
+                    {{ trans("Ceres::Template.couponRemove") }}
                 </button>
             </span>
         </div>

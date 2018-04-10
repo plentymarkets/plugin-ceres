@@ -1,10 +1,10 @@
 export const exceptionMap = new Map(
     [
-        ["1", "basketItemNotAdded"],
-        ["2", "basketNotEnoughStockItem"],
-        ["3", "accInvalidResetPasswordUrl"],
-        ["4", "accCheckPassword"],
-        ["401", "basketCalculateShippingFailed"]
+        ["1", "notificationsItemNotAdded"],
+        ["2", "notificationsNotEnoughStockItem"],
+        ["3", "notificationsInvalidResetPasswordUrl"],
+        ["4", "notificationsCheckPassword"],
+        ["401", "notificationsCalculateShippingFailed"]
     ]
 );
 

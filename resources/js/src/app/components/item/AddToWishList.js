@@ -60,7 +60,7 @@ Vue.component("add-to-wish-list", {
                         this.isLoading = false;
 
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.itemWishListAdded")
+                            TranslationService.translate("Ceres::Template.singleItemWishListAdded")
                         );
                     },
                     error =>
@@ -85,7 +85,7 @@ Vue.component("add-to-wish-list", {
                     this.isLoading = false;
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.itemWishListRemoved")
+                        TranslationService.translate("Ceres::Template.singleItemWishListRemoved")
                     );
                 },
                 error =>
@@ -100,7 +100,7 @@ Vue.component("add-to-wish-list", {
         changeTooltipText()
         {
             const tooltipText = TranslationService.translate(
-                "Ceres::Template." + (this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd")
+                "Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd")
             );
 
             $(".add-to-wish-list")

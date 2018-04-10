@@ -102,7 +102,7 @@ Vue.component("quantity-input", {
         minimumHint()
         {
             return TranslationService.translate(
-                "Ceres::Template.orderQuantityMin",
+                "Ceres::Template.singleItemQuantityMin",
                 {
                     min: this.min
                 }
@@ -112,7 +112,7 @@ Vue.component("quantity-input", {
         maximumHint()
         {
             return TranslationService.translate(
-                "Ceres::Template.orderQuantityMax",
+                "Ceres::Template.singleItemQuantityMax",
                 {
                     max: this.max
                 }

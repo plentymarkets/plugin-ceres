@@ -11,7 +11,7 @@
                 ${ country.currLangName }
             </option>
         </select>
-        <label>{{ trans("Ceres::Template.generalCountry") }}</label>
+        <label>{{ trans("Ceres::Template.headerCountry") }}</label>
     </div>
 
     {% if "billing_address.stateId" in billingAddressFields %}
@@ -21,7 +21,7 @@
                 ${ state.name }
             </option>
         </select>
-        <label>{{ trans("Ceres::Template.generalState") }}{% if "billing_address.stateId" in billingAddressFieldsRequired %}*{% endif %}</label>
+        <label>{{ trans("Ceres::Template.headerState") }}{% if "billing_address.stateId" in billingAddressFieldsRequired %}*{% endif %}</label>
     </div>
     {% endif %}
 
@@ -33,7 +33,7 @@
                     ${ state.name }
                 </option>
             </select>
-            <label>{{ trans("Ceres::Template.generalState") }}{% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}*{% endif %}</label>
+            <label>{{ trans("Ceres::Template.headerState") }}{% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}*{% endif %}</label>
         </div>
     {% endif %}
 

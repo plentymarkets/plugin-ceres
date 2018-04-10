@@ -37,21 +37,21 @@
                     {% set paymentMethodContent = LayoutContainer.show("Ceres::Homepage.PaymentMethods") %}
                     {% if paymentMethodContent|trim is not empty %}
                         <div class="services-payment m-b-1">
-                            <strong class="services-title">{{ trans("Ceres::Template.orderPaymentMethods") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.footerPaymentMethods") }}</strong>
                             {{ paymentMethodContent }}
                         </div>
                     {% endif %}
                     {% set shippingContent = LayoutContainer.show("Ceres::Homepage.Shipping") %}
                     {% if shippingContent|trim is not empty %}
                         <div class="services-shipping m-b-1">
-                            <strong class="services-title">{{ trans("Ceres::Template.generalOrderShippedBy") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.footerOrderShippedBy") }}</strong>
                             {{ shippingContent }}
                         </div>
                     {% endif %}
                     {% set certifiedContent = LayoutContainer.show("Ceres::Homepage.Certified") %}
                     {% if certifiedContent|trim is not empty %}
                         <div class="services-certificate m-b-1">
-                            <strong class="services-title">{{ trans("Ceres::Template.generalCertifiedBy") }}</strong>
+                            <strong class="services-title">{{ trans("Ceres::Template.footerCertifiedBy") }}</strong>
                             {{ certifiedContent }}
                         </div>
                     {% endif %}
@@ -113,17 +113,17 @@
         <div class="copyright text-xs-center m-y-1">
             <div class="static-link-list">
                 {% autoescape false %}
-                    <a href="/cancellation-rights">{{ trans("Ceres::Template.generalCancellationRight") }}</a>
+                    <a href="/cancellation-rights">{{ trans("Ceres::Template.footerCancellationRight") }}</a>
                     {% if config("Ceres.footer.cancellation_use_pdf") == "true" %}
-                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                        <a href="{{ config('Ceres.footer.cancellation_pdf_path') }}" target="_blank">{{ trans("Ceres::Template.footerCancellationForm") }}</a>
                     {% else %}
-                        <a href="/cancellation-form">{{ trans("Ceres::Template.generalCancellationForm") }}</a>
+                        <a href="/cancellation-form">{{ trans("Ceres::Template.footerCancellationForm") }}</a>
                     {% endif %}
-                    <a href="/legal-disclosure">{{ trans("Ceres::Template.generalLegalDisclosure") }}</a>
-                    <a href="/privacy-policy">{{ trans("Ceres::Template.generalPrivacyPolicy") }}</a>
-                    <a href="/gtc">{{ trans("Ceres::Template.generalGtc") }}</a>
+                    <a href="/legal-disclosure">{{ trans("Ceres::Template.footerLegalDisclosure") }}</a>
+                    <a href="/privacy-policy">{{ trans("Ceres::Template.footerPrivacyPolicy") }}</a>
+                    <a href="/gtc">{{ trans("Ceres::Template.footerGtc") }}</a>
                     {% if config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com" %}
-                        <a href="/contact">{{ trans("Ceres::Template.generalContact") }}</a>
+                        <a href="/contact">{{ trans("Ceres::Template.footerContact") }}</a>
                     {% endif %}
                 {% endautoescape %}
             </div>
@@ -131,7 +131,7 @@
                 <img alt="Plentymarkets GmbH Logo" class="svg plenty-brand" src="{{ plugin_path('Ceres') }}/images/plentymarkets-logo.svg" rel="nofollow">
             </a>
             <br>
-            <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.generalAllRightsReserved") }}</small>
+            <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
         </div>
     </div>
 </div>
