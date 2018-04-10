@@ -46,7 +46,6 @@
     "vinyl-source-stream": "^1.1.2"
   },
   "dependencies": {
-    "accounting": "^0.4.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "v4.0.0-alpha.3",
     "custom-event-polyfill": "^0.3.0",

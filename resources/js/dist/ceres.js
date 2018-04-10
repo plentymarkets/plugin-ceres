@@ -367,421 +367,6 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 
 
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
-/*!
- * accounting.js v0.4.1
- * Copyright 2014 Open Exchange Rates
- *
- * Freely distributable under the MIT license.
- * Portions of accounting.js are inspired or borrowed from underscore.js
- *
- * Full details and documentation:
- * http://openexchangerates.github.io/accounting.js/
- */
-
-(function(root, undefined) {
-
-	/* --- Setup --- */
-
-	// Create the local library object, to be exported or referenced globally later
-	var lib = {};
-
-	// Current version
-	lib.version = '0.4.1';
-
-
-	/* --- Exposed settings --- */
-
-	// The library's settings configuration object. Contains default parameters for
-	// currency and number formatting
-	lib.settings = {
-		currency: {
-			symbol : "$",		// default currency symbol is '$'
-			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
-			decimal : ".",		// decimal point separator
-			thousand : ",",		// thousands separator
-			precision : 2,		// decimal places
-			grouping : 3		// digit grouping (not implemented yet)
-		},
-		number: {
-			precision : 0,		// default precision on numbers is 0
-			grouping : 3,		// digit grouping (not implemented yet)
-			thousand : ",",
-			decimal : "."
-		}
-	};
-
-
-	/* --- Internal Helper Methods --- */
-
-	// Store reference to possibly-available ECMAScript 5 methods for later
-	var nativeMap = Array.prototype.map,
-		nativeIsArray = Array.isArray,
-		toString = Object.prototype.toString;
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js
-	 */
-	function isString(obj) {
-		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
-	}
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js, delegates to ECMA5's native Array.isArray
-	 */
-	function isArray(obj) {
-		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
-	}
-
-	/**
-	 * Tests whether supplied parameter is a true object
-	 */
-	function isObject(obj) {
-		return obj && toString.call(obj) === '[object Object]';
-	}
-
-	/**
-	 * Extends an object with a defaults object, similar to underscore's _.defaults
-	 *
-	 * Used for abstracting parameter handling from API methods
-	 */
-	function defaults(object, defs) {
-		var key;
-		object = object || {};
-		defs = defs || {};
-		// Iterate over object non-prototype properties:
-		for (key in defs) {
-			if (defs.hasOwnProperty(key)) {
-				// Replace values with defaults only if undefined (allow empty/zero values):
-				if (object[key] == null) object[key] = defs[key];
-			}
-		}
-		return object;
-	}
-
-	/**
-	 * Implementation of `Array.map()` for iteration loops
-	 *
-	 * Returns a new Array as a result of calling `iterator` on each array value.
-	 * Defers to native Array.map if available
-	 */
-	function map(obj, iterator, context) {
-		var results = [], i, j;
-
-		if (!obj) return results;
-
-		// Use native .map method if it exists:
-		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
-
-		// Fallback for native .map:
-		for (i = 0, j = obj.length; i < j; i++ ) {
-			results[i] = iterator.call(context, obj[i], i, obj);
-		}
-		return results;
-	}
-
-	/**
-	 * Check and normalise the value of precision (must be positive integer)
-	 */
-	function checkPrecision(val, base) {
-		val = Math.round(Math.abs(val));
-		return isNaN(val)? base : val;
-	}
-
-
-	/**
-	 * Parses a format string or object and returns format obj for use in rendering
-	 *
-	 * `format` is either a string with the default (positive) format, or object
-	 * containing `pos` (required), `neg` and `zero` values (or a function returning
-	 * either a string or object)
-	 *
-	 * Either string or format.pos must contain "%v" (value) to be valid
-	 */
-	function checkCurrencyFormat(format) {
-		var defaults = lib.settings.currency.format;
-
-		// Allow function as format parameter (should return string or object):
-		if ( typeof format === "function" ) format = format();
-
-		// Format can be a string, in which case `value` ("%v") must be present:
-		if ( isString( format ) && format.match("%v") ) {
-
-			// Create and return positive, negative and zero formats:
-			return {
-				pos : format,
-				neg : format.replace("-", "").replace("%v", "-%v"),
-				zero : format
-			};
-
-		// If no format, or object is missing valid positive value, use defaults:
-		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
-
-			// If defaults is a string, casts it to an object for faster checking next time:
-			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
-				pos : defaults,
-				neg : defaults.replace("%v", "-%v"),
-				zero : defaults
-			};
-
-		}
-		// Otherwise, assume format was fine:
-		return format;
-	}
-
-
-	/* --- API Methods --- */
-
-	/**
-	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
-	 * Alias: `accounting.parse(string)`
-	 *
-	 * Decimal must be included in the regular expression to match floats (defaults to
-	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
-	 * separator, provide it as the second argument.
-	 *
-	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
-	 *
-	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
-	 */
-	var unformat = lib.unformat = lib.parse = function(value, decimal) {
-		// Recursively unformat arrays:
-		if (isArray(value)) {
-			return map(value, function(val) {
-				return unformat(val, decimal);
-			});
-		}
-
-		// Fails silently (need decent errors):
-		value = value || 0;
-
-		// Return the value as-is if it's already a number:
-		if (typeof value === "number") return value;
-
-		// Default decimal point comes from settings, but could be set to eg. "," in opts:
-		decimal = decimal || lib.settings.number.decimal;
-
-		 // Build regex to strip out everything except digits, decimal point and minus sign:
-		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
-			unformatted = parseFloat(
-				("" + value)
-				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
-				.replace(regex, '')         // strip out any cruft
-				.replace(decimal, '.')      // make sure decimal point is standard
-			);
-
-		// This will fail silently which may cause trouble, let's wait and see:
-		return !isNaN(unformatted) ? unformatted : 0;
-	};
-
-
-	/**
-	 * Implementation of toFixed() that treats floats more like decimals
-	 *
-	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
-	 * problems for accounting- and finance-related software.
-	 */
-	var toFixed = lib.toFixed = function(value, precision) {
-		precision = checkPrecision(precision, lib.settings.number.precision);
-		var power = Math.pow(10, precision);
-
-		// Multiply up by precision, round accurately, then divide and use native toFixed():
-		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
-	};
-
-
-	/**
-	 * Format a number, with comma-separated thousands and custom precision/decimal places
-	 * Alias: `accounting.format()`
-	 *
-	 * Localise by overriding the precision and thousand / decimal separators
-	 * 2nd parameter `precision` can be an object matching `settings.number`
-	 */
-	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val) {
-				return formatNumber(val, precision, thousand, decimal);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(precision) ? precision : {
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal
-				}),
-				lib.settings.number
-			),
-
-			// Clean up precision
-			usePrecision = checkPrecision(opts.precision),
-
-			// Do some calc:
-			negative = number < 0 ? "-" : "",
-			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
-			mod = base.length > 3 ? base.length % 3 : 0;
-
-		// Format the number:
-		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
-	};
-
-
-	/**
-	 * Format a number into currency
-	 *
-	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
-	 * defaults: (0, "$", 2, ",", ".", "%s%v")
-	 *
-	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
-	 * Second param can be an object matching `settings.currency` which is the easiest way.
-	 *
-	 * To do: tidy up the parameters
-	 */
-	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val){
-				return formatMoney(val, symbol, precision, thousand, decimal, format);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero):
-			formats = checkCurrencyFormat(opts.format),
-
-			// Choose which format to use for this value:
-			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
-
-		// Return with currency symbol added:
-		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-	};
-
-
-	/**
-	 * Format a list of numbers into an accounting column, padding with whitespace
-	 * to line up currency symbols, thousand separators and decimals places
-	 *
-	 * List should be an array of numbers
-	 * Second parameter can be an object containing keys that match the params
-	 *
-	 * Returns array of accouting-formatted number strings of same length
-	 *
-	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
-	 * browsers from collapsing the whitespace in the output strings.
-	 */
-	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
-		if (!list) return [];
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero), only need pos for now:
-			formats = checkCurrencyFormat(opts.format),
-
-			// Whether to pad at start of string or after currency symbol:
-			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
-
-			// Store value for the length of the longest string in the column:
-			maxLength = 0,
-
-			// Format the list according to options, store the length of the longest string:
-			formatted = map(list, function(val, i) {
-				if (isArray(val)) {
-					// Recursively format columns if list is a multi-dimensional array:
-					return lib.formatColumn(val, opts);
-				} else {
-					// Clean up the value
-					val = unformat(val);
-
-					// Choose which format to use for this value (pos, neg or zero):
-					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
-
-						// Format this value, push into formatted list and save the length:
-						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-
-					if (fVal.length > maxLength) maxLength = fVal.length;
-					return fVal;
-				}
-			});
-
-		// Pad each number in the list and send back the column of numbers:
-		return map(formatted, function(val, i) {
-			// Only if this is a string (not a nested array, which would have already been padded):
-			if (isString(val) && val.length < maxLength) {
-				// Depending on symbol position, pad after symbol or at index 0:
-				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
-			}
-			return val;
-		});
-	};
-
-
-	/* --- Module Definition --- */
-
-	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
-	// Otherwise, just add `accounting` to the global object
-	if (typeof exports !== 'undefined') {
-		if (typeof module !== 'undefined' && module.exports) {
-			exports = module.exports = lib;
-		}
-		exports.accounting = lib;
-	} else if (typeof define === 'function' && define.amd) {
-		// Return the library as an AMD module:
-		define([], function() {
-			return lib;
-		});
-	} else {
-		// Use accounting.noConflict to restore `accounting` back to its original value.
-		// Returns a reference to the library's `accounting` object;
-		// e.g. `var numbers = accounting.noConflict();`
-		lib.noConflict = (function(oldAccounting) {
-			return function() {
-				// Reset the value of the root's `accounting` variable:
-				root.accounting = oldAccounting;
-				// Delete the noConflict method:
-				lib.noConflict = undefined;
-				// Return reference to the library to re-assign it:
-				return lib;
-			};
-		})(root.accounting);
-
-		// Declare `fx` on the root (global/window) object:
-		root['accounting'] = lib;
-	}
-
-	// Root will be `window` in browser or `global` on the server:
-}(this));
-
-},{}],2:[function(require,module,exports){
 (function (process){
 /**
   # detect-browser
@@ -958,7 +543,7 @@ module.exports = {
 
 }).call(this,require('_process'))
 
-},{"_process":6,"os":4}],3:[function(require,module,exports){
+},{"_process":5,"os":3}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11324,7 +10909,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -11375,7 +10960,7 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global){
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
@@ -13825,7 +13410,7 @@ return Popper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -14011,7 +13596,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -14036,14 +13621,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -14634,7 +14219,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":8,"_process":6,"inherits":7}],10:[function(require,module,exports){
+},{"./support/isBuffer":7,"_process":5,"inherits":6}],9:[function(require,module,exports){
 /*!
   * vue-script2 v2.0.1
   * (c) 2016-2017 Greg Slepak
@@ -14779,7 +14364,7 @@ function hasOwnProperty(obj, prop) {
   return Script2;
 
 }));
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14891,7 +14476,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":124}],12:[function(require,module,exports){
+},{"services/ModalService":124}],11:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15079,7 +14664,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":96,"services/NotificationService":125,"services/TranslationService":126}],13:[function(require,module,exports){
+},{"exceptions/ExceptionMap":95,"services/NotificationService":125,"services/TranslationService":126}],12:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -15127,7 +14712,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ApiService":120}],14:[function(require,module,exports){
+},{"services/ApiService":120}],13:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
@@ -15162,7 +14747,7 @@ Vue.component("basket-totals", {
     }
 });
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15283,7 +14868,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/NotificationService":125,"services/TranslationService":126}],16:[function(require,module,exports){
+},{"services/NotificationService":125,"services/TranslationService":126}],15:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
@@ -15306,7 +14891,7 @@ Vue.component("basket-list", {
     }
 });
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15463,7 +15048,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":96,"services/NotificationService":125,"services/TranslationService":126}],18:[function(require,module,exports){
+},{"exceptions/ExceptionMap":95,"services/NotificationService":125,"services/TranslationService":126}],17:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -15478,7 +15063,7 @@ Vue.component("category-breadcrumbs", {
     }
 });
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-gtc-check", {
@@ -15521,7 +15106,7 @@ Vue.component("accept-gtc-check", {
     }
 });
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -15669,7 +15254,7 @@ Vue.component("checkout", {
     }
 });
 
-},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],21:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],20:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -15693,7 +15278,7 @@ Vue.component("contact-wish-input", {
     }
 });
 
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 
 Vue.component("payment-provider-select", {
@@ -15747,7 +15332,7 @@ Vue.component("payment-provider-select", {
     }
 });
 
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -15884,7 +15469,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],24:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],23:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {
@@ -15941,7 +15526,7 @@ Vue.component("shipping-profile-select", {
     }
 });
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 Vue.component("container-item-list", {
@@ -16021,7 +15606,7 @@ Vue.component("container-item-list", {
     }
 });
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 "use strict";
 
 Vue.component("accept-privacy-policy-check", {
@@ -16046,7 +15631,7 @@ Vue.component("accept-privacy-policy-check", {
     }
 });
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
 
 Vue.component("address-input-group", {
@@ -16112,7 +15697,7 @@ Vue.component("address-input-group", {
     }
 });
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -16472,7 +16057,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"../../../helper/utils":117,"services/AddressFieldService":119,"services/ApiService":120,"services/ModalService":124,"services/TranslationService":126,"services/ValidationService":128}],29:[function(require,module,exports){
+},{"../../../helper/utils":117,"services/AddressFieldService":119,"services/ApiService":120,"services/ModalService":124,"services/TranslationService":126,"services/ValidationService":128}],28:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -16680,7 +16265,7 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":125,"services/ValidationService":128}],30:[function(require,module,exports){
+},{"services/NotificationService":125,"services/ValidationService":128}],29:[function(require,module,exports){
 "use strict";
 
 Vue.component("invoice-address-select", {
@@ -16756,7 +16341,7 @@ Vue.component("invoice-address-select", {
     }
 });
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-address-select", {
@@ -16798,7 +16383,7 @@ Vue.component("shipping-address-select", {
     }
 });
 
-},{}],32:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -16942,7 +16527,7 @@ Vue.component("contact-form", {
     }
 });
 
-},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],33:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],32:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -17019,7 +16604,7 @@ Vue.component("contact-map", {
     }
 });
 
-},{}],34:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 
 var CountryService = require("services/CountryService");
@@ -17106,7 +16691,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":122}],35:[function(require,module,exports){
+},{"services/CountryService":122}],34:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -17249,7 +16834,7 @@ Vue.component("registration", {
     }
 });
 
-},{"../../helper/utils":117,"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],36:[function(require,module,exports){
+},{"../../helper/utils":117,"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],35:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -17354,7 +16939,7 @@ Vue.component("reset-password-form", {
 
 });
 
-},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],37:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],36:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
@@ -17459,7 +17044,7 @@ Vue.component("salutation-select", {
     }
 });
 
-},{"services/AddressFieldService":119}],38:[function(require,module,exports){
+},{"services/AddressFieldService":119}],37:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -17510,7 +17095,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":120,"services/ValidationService":128}],39:[function(require,module,exports){
+},{"services/ApiService":120,"services/ValidationService":128}],38:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -17691,7 +17276,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],40:[function(require,module,exports){
+},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],39:[function(require,module,exports){
 "use strict";
 
 Vue.component("login-view", {
@@ -17711,7 +17296,7 @@ Vue.component("login-view", {
     }
 });
 
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -17770,7 +17355,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":120,"services/ValidationService":128}],42:[function(require,module,exports){
+},{"services/ApiService":120,"services/ValidationService":128}],41:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -17858,7 +17443,7 @@ Vue.component("add-to-wish-list", {
     }
 });
 
-},{"services/NotificationService":125,"services/TranslationService":126}],43:[function(require,module,exports){
+},{"services/NotificationService":125,"services/TranslationService":126}],42:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -17909,7 +17494,7 @@ Vue.component("graduated-prices", {
     }
 });
 
-},{}],44:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18093,7 +17678,7 @@ Vue.component("item-image-carousel", {
     }
 });
 
-},{"../../helper/utils":117,"services/TranslationService":126}],45:[function(require,module,exports){
+},{"../../helper/utils":117,"services/TranslationService":126}],44:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -18114,7 +17699,7 @@ Vue.component("order-properties", {
     methods: Vuex.mapMutations(["setVariationOrderProperty"])
 });
 
-},{}],46:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18260,7 +17845,7 @@ Vue.component("order-property-list", {
     }
 });
 
-},{}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18336,7 +17921,7 @@ Vue.component("order-property-list-group", {
     }, Vuex.mapMutations(["setVariationOrderProperty"]))
 });
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18497,7 +18082,7 @@ Vue.component("order-property-list-item", {
     })
 });
 
-},{"services/ApiService":120,"services/NotificationService":125}],49:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125}],48:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18707,7 +18292,7 @@ Vue.component("quantity-input", {
     }
 });
 
-},{"../../helper/debounce":113,"../../helper/number":115,"../../helper/utils":117,"../../services/TranslationService":126}],50:[function(require,module,exports){
+},{"../../helper/debounce":113,"../../helper/number":115,"../../helper/utils":117,"../../services/TranslationService":126}],49:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -18757,7 +18342,7 @@ Vue.component("single-item", {
     }
 });
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 
 var _util = require("util");
@@ -18959,7 +18544,7 @@ Vue.component("variation-select", {
     }
 });
 
-},{"services/ApiService":120,"util":9}],52:[function(require,module,exports){
+},{"services/ApiService":120,"util":8}],51:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -19069,7 +18654,7 @@ Vue.component("category-image-carousel", {
     }
 });
 
-},{}],53:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-item", {
@@ -19125,7 +18710,7 @@ Vue.component("category-item", {
 
 });
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-lazy-img", {
@@ -19155,7 +18740,7 @@ Vue.component("item-lazy-img", {
     }
 });
 
-},{}],55:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-list", {
@@ -19187,7 +18772,7 @@ Vue.component("item-list", {
     }
 });
 
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -19240,7 +18825,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":127}],57:[function(require,module,exports){
+},{"services/UrlService":127}],56:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -19362,10 +18947,8 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/TranslationService":126,"services/UrlService":127}],58:[function(require,module,exports){
+},{"services/TranslationService":126,"services/UrlService":127}],57:[function(require,module,exports){
 "use strict";
-
-var accounting = require("accounting");
 
 Vue.component("item-store-special", {
 
@@ -19408,12 +18991,12 @@ Vue.component("item-store-special", {
             // eslint-disable-next-line
             var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
-            return accounting.formatNumber(percent, this.decimalCount, "");
+            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
         }
     }
 });
 
-},{"accounting":1}],59:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -19463,7 +19046,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":127}],60:[function(require,module,exports){
+},{"services/UrlService":127}],59:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19537,7 +19120,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":127}],61:[function(require,module,exports){
+},{"services/UrlService":127}],60:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -19587,7 +19170,7 @@ Vue.component("item-filter", {
     }
 });
 
-},{}],62:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -19648,7 +19231,7 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":127}],63:[function(require,module,exports){
+},{"services/UrlService":127}],62:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -19675,7 +19258,7 @@ Vue.component("item-filter-tag-list", {
     }
 });
 
-},{}],64:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -19776,7 +19359,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126}],65:[function(require,module,exports){
+},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126}],64:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -20029,7 +19612,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],66:[function(require,module,exports){
+},{"services/ApiService":120,"services/ModalService":124,"services/NotificationService":125,"services/TranslationService":126,"services/ValidationService":128}],65:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -20158,7 +19741,7 @@ Vue.component("change-payment-method", {
 
 });
 
-},{"services/ApiService":120,"services/ModalService":124,"services/TranslationService":126}],67:[function(require,module,exports){
+},{"services/ApiService":120,"services/ModalService":124,"services/TranslationService":126}],66:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -20191,7 +19774,7 @@ Vue.component("history", {
     }
 });
 
-},{}],68:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -20250,7 +19833,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":120,"services/TranslationService":126}],69:[function(require,module,exports){
+},{"services/ApiService":120,"services/TranslationService":126}],68:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -20308,7 +19891,7 @@ Vue.component("order-return-history", {
     }
 });
 
-},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],70:[function(require,module,exports){
+},{"services/ApiService":120,"services/NotificationService":125,"services/TranslationService":126}],69:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -20386,7 +19969,7 @@ Vue.component("order-return-history-item", {
     }
 });
 
-},{"services/TranslationService":126}],71:[function(require,module,exports){
+},{"services/TranslationService":126}],70:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20442,7 +20025,7 @@ Vue.component("order-return", {
     }, Vuex.mapMutations(["updateOrderReturnNote"]), Vuex.mapActions(["sendOrderReturn"]))
 });
 
-},{}],72:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-return-item", {
@@ -20501,7 +20084,7 @@ Vue.component("order-return-item", {
     }
 });
 
-},{}],73:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20647,7 +20230,7 @@ Vue.component("mobile-navigation", {
     }
 });
 
-},{}],74:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 "use strict";
 
 var _ExceptionMap = require("exceptions/ExceptionMap");
@@ -20727,7 +20310,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"exceptions/ExceptionMap":96,"services/NotificationService":125,"services/TranslationService":126}],75:[function(require,module,exports){
+},{"exceptions/ExceptionMap":95,"services/NotificationService":125,"services/TranslationService":126}],74:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -20832,7 +20415,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":114,"../../helper/utils":117,"popper.js":5,"services/ModalService":124}],76:[function(require,module,exports){
+},{"../../helper/dom":114,"../../helper/utils":117,"popper.js":4,"services/ModalService":124}],75:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-country-select", {
@@ -20861,7 +20444,7 @@ Vue.component("shipping-country-select", {
     }
 });
 
-},{}],77:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -20883,7 +20466,7 @@ Vue.component("shop-country-settings", {
     }
 });
 
-},{"services/ApiService":120}],78:[function(require,module,exports){
+},{"services/ApiService":120}],77:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -20924,7 +20507,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":129}],79:[function(require,module,exports){
+},{"services/WaitScreenService":129}],78:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -20984,7 +20567,7 @@ Vue.component("wish-list", {
     }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-},{"services/NotificationService":125,"services/TranslationService":126}],80:[function(require,module,exports){
+},{"services/NotificationService":125,"services/TranslationService":126}],79:[function(require,module,exports){
 "use strict";
 
 Vue.component("wish-list-count", {
@@ -21003,7 +20586,7 @@ Vue.component("wish-list-count", {
     }
 });
 
-},{}],81:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 "use strict";
 
 var _number = require("../../helper/number");
@@ -21016,7 +20599,7 @@ Vue.directive("basket-item-quantity", {
     }
 });
 
-},{"../../helper/number":115}],82:[function(require,module,exports){
+},{"../../helper/number":115}],81:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -21025,7 +20608,7 @@ Vue.directive("basket-item-sum", {
     }
 });
 
-},{}],83:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 "use strict";
 
 Vue.directive("toggle-basket-preview", {
@@ -21044,7 +20627,7 @@ Vue.directive("toggle-basket-preview", {
     }
 });
 
-},{}],84:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 
 var ApiService = require("services/ApiService");
@@ -21068,7 +20651,7 @@ Vue.directive("logout", {
     }
 });
 
-},{"services/ApiService":120}],85:[function(require,module,exports){
+},{"services/ApiService":120}],84:[function(require,module,exports){
 "use strict";
 
 Vue.directive("waiting-animation", {
@@ -21090,7 +20673,7 @@ Vue.directive("waiting-animation", {
     }
 });
 
-},{}],86:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 "use strict";
 
 Vue.directive("waiting-animation-infinite", {
@@ -21104,7 +20687,7 @@ Vue.directive("waiting-animation-infinite", {
     }
 });
 
-},{}],87:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 "use strict";
 
 Vue.directive("is-loading-watcher", {
@@ -21119,7 +20702,7 @@ Vue.directive("is-loading-watcher", {
     }
 });
 
-},{}],88:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 "use strict";
 
 Vue.directive("update-sidenav-selection", {
@@ -21159,7 +20742,7 @@ Vue.directive("update-sidenav-selection", {
     }
 });
 
-},{}],89:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 "use strict";
 
 Vue.directive("hover-mega-menu", {
@@ -21189,7 +20772,7 @@ Vue.directive("hover-mega-menu", {
     }
 });
 
-},{}],90:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 "use strict";
 
 Vue.directive("open-mobile-navigation", {
@@ -21201,7 +20784,7 @@ Vue.directive("open-mobile-navigation", {
     }
 });
 
-},{}],91:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 "use strict";
 
 var _index = require("store/index.js");
@@ -21254,7 +20837,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"store/index.js":130}],92:[function(require,module,exports){
+},{"store/index.js":130}],91:[function(require,module,exports){
 "use strict";
 
 Vue.directive("change-lang", {
@@ -21268,7 +20851,7 @@ Vue.directive("change-lang", {
     }
 });
 
-},{}],93:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 "use strict";
 
 Vue.directive("scroll-to-top", {
@@ -21279,7 +20862,7 @@ Vue.directive("scroll-to-top", {
     }
 });
 
-},{}],94:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 "use strict";
 
 var checkElement = function checkElement(el, breakpoint) {
@@ -21318,7 +20901,7 @@ Vue.directive("stick-in-parent", {
     }
 });
 
-},{}],95:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -21367,7 +20950,7 @@ Vue.directive("tooltip", {
     }
 });
 
-},{"../../helper/utils":117}],96:[function(require,module,exports){
+},{"../../helper/utils":117}],95:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21377,41 +20960,36 @@ var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], 
 
 exports.default = exceptionMap;
 
-},{}],97:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 "use strict";
 
 Vue.filter("arrayFirst", function (array) {
     return array[0];
 });
 
-},{}],98:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 "use strict";
 
 Vue.filter("attachText", function (item, text) {
     return text + item;
 });
 
-},{}],99:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 "use strict";
 
-var accounting = require("accounting");
+var _MonetaryFormatter = require("../helper/MonetaryFormatter");
+
+var _MonetaryFormatter2 = _interopRequireDefault(_MonetaryFormatter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var formatter = new _MonetaryFormatter2.default();
 
 Vue.filter("currency", function (price) {
-    var currencyPattern = App.currencyPattern;
-
-    // (%v = value, %s = symbol)
-    var options = {
-        symbol: App.activeCurrency,
-        decimal: currencyPattern.separator_decimal,
-        thousand: currencyPattern.separator_thousands,
-        precision: 2,
-        format: currencyPattern.pattern.replace("¤", "%s").replace("#,##0.00", "%v")
-    };
-
-    return accounting.formatMoney(price, options);
+    return formatter.format(price, App.activeCurrency);
 });
 
-},{"accounting":1}],100:[function(require,module,exports){
+},{"../helper/MonetaryFormatter":112}],99:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -21543,7 +21121,7 @@ var dateFilter = function dateFilter() {
 Vue.filter("moment", dateFilter);
 Vue.filter("date", dateFilter);
 
-},{}],101:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileName", function (path) {
@@ -21552,14 +21130,14 @@ Vue.filter("fileName", function (path) {
     return splitPath[splitPath.length - 1];
 });
 
-},{}],102:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 "use strict";
 
 Vue.filter("fileUploadPath", function (path) {
     return "/order-property-file/" + path.replace("order_property_files/", "");
 });
 
-},{}],103:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 "use strict";
 
 Vue.filter("graduatedPrice", function (item, quantity) {
@@ -21583,7 +21161,7 @@ Vue.filter("graduatedPrice", function (item, quantity) {
     return returnPrice || item.prices.default.unitPrice.value;
 });
 
-},{}],104:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImage", function (itemImages, highestPosition) {
@@ -21606,7 +21184,7 @@ Vue.filter("itemImage", function (itemImages, highestPosition) {
     }).url;
 });
 
-},{}],105:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemImages", function (images, accessor) {
@@ -21631,7 +21209,7 @@ Vue.filter("itemImages", function (images, accessor) {
     return imageUrls;
 });
 
-},{}],106:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemName", function (_ref) {
@@ -21664,7 +21242,7 @@ Vue.filter("itemName", function (_ref) {
     return itemName;
 });
 
-},{}],107:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 "use strict";
 
 Vue.filter("itemURL", function (item) {
@@ -21696,7 +21274,7 @@ Vue.filter("itemURL", function (item) {
     return link + suffix;
 });
 
-},{}],108:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../helper/utils");
@@ -21717,7 +21295,7 @@ Vue.filter("numberFormat", function (number, decimals, separator) {
     return number.toFixed(decimals).replace(".", separator);
 });
 
-},{"../helper/number":115,"../helper/utils":117}],109:[function(require,module,exports){
+},{"../helper/number":115,"../helper/utils":117}],108:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -21736,7 +21314,7 @@ Vue.filter("propertySurcharge", function (properties, propertyId) {
     return 0;
 });
 
-},{}],110:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurchargeSum", function (item) {
@@ -21776,7 +21354,7 @@ Vue.filter("propertySurchargeSum", function (item) {
     return sum;
 });
 
-},{}],111:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -21789,7 +21367,7 @@ Vue.filter("translate", function (value, params) {
     return _TranslationService2.default.translate(value, params);
 });
 
-},{"services/TranslationService":126}],112:[function(require,module,exports){
+},{"services/TranslationService":126}],111:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -21798,6 +21376,150 @@ Vue.filter("truncate", function (string, value) {
     }
     return string;
 });
+
+},{}],112:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var MonetaryFormatter = function () {
+    var T_DIGIT = 0;
+    var T_DECIMAL = 1;
+    var T_CURRENCY = 2;
+    var T_SIGN = 3;
+    var T_CHAR = 4;
+
+    function MonetaryFormatter() {
+        this.setPattern(App.currencyPattern.pattern);
+        this.separatorThousands = App.currencyPattern.separator_thousands;
+        this.separatorDecimals = App.currencyPattern.separator_decimal;
+        this.sign = "-";
+    }
+
+    function _parse(pattern) {
+        var parsed = [];
+
+        while (pattern.length > 0) {
+            if (pattern.indexOf("\xA4") === 0) {
+                parsed.push({
+                    type: T_CURRENCY
+                });
+                pattern = pattern.substr(1);
+            } else if (pattern.indexOf("#,##0") === 0) {
+                parsed.push({
+                    type: T_DIGIT
+                });
+                pattern = pattern.substr(5);
+            } else if (pattern.indexOf(".00") === 0) {
+                parsed.push({
+                    type: T_DECIMAL
+                });
+                pattern = pattern.substr(3);
+            } else if (pattern.indexOf("-") === 0) {
+                parsed.push({
+                    type: T_SIGN
+                });
+                pattern = pattern.substr(1);
+            } else {
+                parsed.push({
+                    type: T_CHAR,
+                    value: pattern.charAt(0)
+                });
+                pattern = pattern.substr(1);
+            }
+        }
+
+        return parsed;
+    }
+
+    MonetaryFormatter.prototype.setPattern = function (pattern) {
+        var _this = this;
+
+        this.pattern = [];
+        pattern.split(";").forEach(function (subpattern) {
+            _this.pattern.push(_parse(subpattern));
+        });
+    };
+
+    MonetaryFormatter.prototype.setSeparators = function (separatorThousands, separatorDecimals) {
+        this.separatorThousands = separatorThousands;
+        this.separatorDecimals = separatorDecimals;
+    };
+
+    MonetaryFormatter.prototype.setSign = function (sign) {
+        this.sign = sign;
+    };
+
+    MonetaryFormatter.prototype.format = function (value, currency) {
+        var _this2 = this;
+
+        var patternIndex = 0;
+        var prefix = "";
+
+        if (value < 0) {
+            if (this.pattern.length > 1) {
+                patternIndex = 1;
+            } else {
+                prefix = this.sign;
+            }
+        }
+
+        return prefix + this.pattern[patternIndex].map(function (partial, index, pattern) {
+            switch (partial.type) {
+                case T_DIGIT:
+                    {
+                        if (value < 0) {
+                            value *= -1;
+                        }
+                        // check if pattern include decimals to decide if digits should be rounded or not
+                        var roundDigits = !pattern.some(function (subpattern) {
+                            return subpattern.type === T_DECIMAL;
+                        });
+
+                        // cut decimal places instead of rounding
+                        // revert the value to insert thousands separators next
+                        var digits = (roundDigits ? Math.round(value * 100) / 100 : parseInt(value)).toFixed(0).split("").reverse().join("");
+
+                        // insert thousands separator
+                        for (var i = 3; i < digits.length; i += 4) {
+                            digits = digits.substr(0, i) + _this2.separatorThousands + digits.substr(i);
+                        }
+
+                        // revert back again
+                        digits = digits.split("").reverse().join("");
+
+                        return digits;
+                    }
+                case T_DECIMAL:
+                    {
+                        return _this2.separatorDecimals + (value * 100).toFixed(0).substr(-2, 2);
+                    }
+                case T_CURRENCY:
+                    {
+                        return currency;
+                    }
+                case T_SIGN:
+                    {
+                        return _this2.sign;
+                    }
+                case T_CHAR:
+                    {
+                        return partial.value;
+                    }
+                default:
+                    {
+                        console.warn("Unkown pattern type: " + partial.type);
+                        return "";
+                    }
+            }
+        }).join("");
+    };
+
+    return MonetaryFormatter;
+}();
+
+exports.default = MonetaryFormatter;
 
 },{}],113:[function(require,module,exports){
 "use strict";
@@ -22228,7 +21950,7 @@ var init = function ($, window, document) {
     window.CeresMain = new CeresMain();
 }(jQuery, window, document);
 
-},{"detect-browser":2}],119:[function(require,module,exports){
+},{"detect-browser":1}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23133,7 +22855,7 @@ function setUrlParam(key, value) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
-},{"jquery":3}],128:[function(require,module,exports){
+},{"jquery":2}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23368,7 +23090,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":3}],129:[function(require,module,exports){
+},{"jquery":2}],129:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -23482,7 +23204,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":131,"store/modules/BasketModule":132,"store/modules/CheckoutModule":133,"store/modules/ItemListModule":134,"store/modules/LocalizationModule":135,"store/modules/NavigationModule":136,"store/modules/OrderReturnModule":137,"store/modules/SingleItemModule":138,"store/modules/UserModule":139,"store/modules/WishListModule":140,"vue-script2":10}],131:[function(require,module,exports){
+},{"store/modules/AddressModule":131,"store/modules/BasketModule":132,"store/modules/CheckoutModule":133,"store/modules/ItemListModule":134,"store/modules/LocalizationModule":135,"store/modules/NavigationModule":136,"store/modules/OrderReturnModule":137,"store/modules/SingleItemModule":138,"store/modules/UserModule":139,"store/modules/WishListModule":140,"vue-script2":9}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25135,7 +24857,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":120}]},{},[118,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,38,39,40,41,35,36,37,42,43,44,45,46,47,48,49,50,51,52,53,61,62,63,54,55,56,57,59,58,60,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,130,131,132,133,134,135,136,137,138,139,140])
+},{"services/ApiService":120}]},{},[118,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,37,38,39,40,34,35,36,41,42,43,44,45,46,47,48,49,50,51,52,60,61,62,53,54,55,56,58,57,59,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,113,114,112,115,116,117,130,131,132,133,134,135,136,137,138,139,140])
 
 
 
