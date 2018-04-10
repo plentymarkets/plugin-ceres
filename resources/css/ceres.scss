@@ -17955,6 +17955,12 @@ nav.navbar.megamenu {
         }
     }
 
+    .tab-content {
+        img {
+            max-width: 100%;
+        }
+    }
+
     .graduated-prices-table {
         td:first-child {
             padding-right: 1rem;

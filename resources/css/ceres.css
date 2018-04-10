@@ -19152,6 +19152,10 @@ body.menu-is-visible {
   margin-left: 0;
 }
 
+.single .tab-content img {
+  max-width: 100%;
+}
+
 .single .graduated-prices-table td:first-child {
   padding-right: 1rem;
   font-style: italic;

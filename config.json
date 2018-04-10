@@ -1626,7 +1626,7 @@
     {
         "tab"               : "Design",
         "key"               : "brand-primary",
-        "label"             : "Primary Color",
+        "label"             : "Primary colour",
         "type"              : "text",
         "default"           : "#008ebd",
         "scss"              : true
@@ -1634,7 +1634,7 @@
     {
         "tab"               : "Design",
         "key"               : "brand-secondary",
-        "label"             : "Secondary Color",
+        "label"             : "Secondary colour",
         "type"              : "text",
         "default"           : "#d4021d",
         "scss"              : true
@@ -1642,31 +1642,23 @@
     {
         "tab"               : "Design",
         "key"               : "brand-success",
-        "label"             : "Success Color",
+        "label"             : "Success colour",
         "type"              : "text",
         "default"           : "#7ED321",
         "scss"              : true
     },
     {
         "tab"               : "Design",
-        "key"               : "design.colors.brand_info",
-        "label"             : "Info Color",
+        "key"               : "brand-info",
+        "label"             : "Information colour",
         "type"              : "text",
         "default"           : "#5bc0de",
         "scss"              : true
     },
     {
         "tab"               : "Design",
-        "key"               : "brand-info",
-        "label"             : "Information Color",
-        "type"              : "text",
-        "default"           : "#f0ad4e",
-        "scss"              : true
-    },
-    {
-        "tab"               : "Design",
         "key"               : "brand-warning",
-        "label"             : "Warning Colour",
+        "label"             : "Warning colour",
         "type"              : "text",
         "default"           : "#f0ad4e",
         "scss"              : true
@@ -1674,7 +1666,7 @@
     {
         "tab"               : "Design",
         "key"               : "brand-danger",
-        "label"             : "Danger Color",
+        "label"             : "Danger colour",
         "type"              : "text",
         "default"           : "#d9534f",
         "scss"              : true
