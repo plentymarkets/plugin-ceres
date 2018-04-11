@@ -6,119 +6,119 @@
       "prefix": "address"
     },
     {
-      "name": { "de": "Warenkorb", "en": "Basket" },
+      "name": { "de": "Warenkorb", "en": "Shopping cart" },
       "prefix": "basket"
     },
     {
-      "name": { "de": "cancellationForm", "en": "cancellationForm" },
+      "name": { "de": "Widerrufsformular", "en": "Cancellation form" },
       "prefix": "cancellationForm"
     },
     {
-      "name": { "de": "cancellationRights", "en": "cancellationRights" },
+      "name": { "de": "Widerrufsbelehrung", "en": "Cancellation rights" },
       "prefix": "cancellationRights"
     },
     {
-      "name": { "de": "checkout", "en": "checkout" },
+      "name": { "de": "Kaufabwicklung", "en": "Checkout" },
       "prefix": "checkout"
     },
     {
-      "name": { "de": "contact", "en": "contact" },
+      "name": { "de": "Kontaktseite", "en": "Contact page" },
       "prefix": "contact"
     },
     {
-      "name": { "de": "coupon", "en": "coupon" },
+      "name": { "de": "Gutschein", "en": "Coupon" },
       "prefix": "coupon"
     },
     {
-      "name": { "de": "dev", "en": "dev" },
+      "name": { "de": "Entwickler", "en": "Developer" },
       "prefix": "dev"
     },
     {
-      "name": { "de": "footer", "en": "footer" },
+      "name": { "de": "Footer", "en": "Footer" },
       "prefix": "footer"
     },
     {
-      "name": { "de": "header", "en": "header" },
+      "name": { "de": "Header", "en": "Header" },
       "prefix": "header"
     },
     {
-      "name": { "de": "homepage", "en": "homepage" },
+      "name": { "de": "Startseite", "en": "Homepage" },
       "prefix": "homepage"
     },
     {
-      "name": { "de": "itemSearch", "en": "itemSearch" },
+      "name": { "de": "Artikelsuche", "en": "Item search" },
       "prefix": "itemSearch"
     },
     {
-      "name": { "de": "item", "en": "item" },
+      "name": { "de": "Artikel", "en": "Item" },
       "prefix": "item"
     },
     {
-      "name": { "de": "legalDisclosure", "en": "legalDisclosure" },
+      "name": { "de": "Impressum", "en": "Legal disclosure" },
       "prefix": "legalDisclosure"
     },
     {
-      "name": { "de": "login", "en": "login" },
+      "name": { "de": "Login", "en": "Login" },
       "prefix": "login"
     },
     {
-      "name": { "de": "myAccount", "en": "myAccount" },
+      "name": { "de": "My account", "en": "My account" },
       "prefix": "myAccount"
     },
     {
-      "name": { "de": "notFound", "en": "notFound" },
+      "name": { "de": "Nicht gefunden", "en": "Not found" },
       "prefix": "notFound"
     },
     {
-      "name": { "de": "notifications", "en": "notifications" },
+      "name": { "de": "Benachrichtigungen", "en": "Notifications" },
       "prefix": "notifications"
     },
     {
-      "name": { "de": "orderConfirmation", "en": "orderConfirmation" },
+      "name": { "de": "Auftragsbestätigung", "en": "Order confirmation" },
       "prefix": "orderConfirmation"
     },
     {
-      "name": { "de": "orderHistory", "en": "orderHistory" },
+      "name": { "de": "Auftragshistorie", "en": "Order history" },
       "prefix": "orderHistory"
     },
     {
-      "name": { "de": "privacyPolicy", "en": "privacyPolicy" },
+      "name": { "de": "Datenschutzerklärung", "en": "Privacy policy" },
       "prefix": "privacyPolicy"
     },
     {
-      "name": { "de": "Registration", "en": "Registration" },
+      "name": { "de": "Registrierung", "en": "Registration" },
       "prefix": "reg"
     },
     {
-      "name": { "de": "resetPw", "en": "resetPw" },
+      "name": { "de": "Passwort zurücksetzen", "en": "Reset password" },
       "prefix": "resetPw"
     },
     {
-      "name": { "de": "returnConfirmation", "en": "returnConfirmation" },
+      "name": { "de": "Returenbestätigung", "en": "Return confirmation" },
       "prefix": "returnConfirmation"
     },
     {
-      "name": { "de": "returnHistory", "en": "returnHistory" },
+      "name": { "de": "Retourenhistorie", "en": "Return history" },
       "prefix": "returnHistory"
     },
     {
-      "name": { "de": "return", "en": "return" },
+      "name": { "de": "Retouren", "en": "Return" },
       "prefix": "return"
     },
     {
-      "name": { "de": "shippingInfo", "en": "shippingInfo" },
+      "name": { "de": "Versandinformationen", "en": "Shipping information" },
       "prefix": "shippingInfo"
     },
     {
-      "name": { "de": "singleItem", "en": "singleItem" },
+      "name": { "de": "Artikeleinzelansicht", "en": "Single item view" },
       "prefix": "singleItem"
     },
     {
-      "name": { "de": "termsAndConditions", "en": "termsAndConditions" },
+      "name": { "de": "AGB", "en": "Terms and conditions" },
       "prefix": "termsAndConditions"
     },
     {
-      "name": { "de": "wishList", "en": "wishList" },
+      "name": { "de": "Wunschliste", "en": "Wish list" },
       "prefix": "wishList"
     }
   ]
