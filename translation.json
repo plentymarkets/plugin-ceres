@@ -62,7 +62,7 @@
       "prefix": "login"
     },
     {
-      "name": { "de": "My account", "en": "My account" },
+      "name": { "de": "Mein Konto", "en": "My account" },
       "prefix": "myAccount"
     },
     {
