@@ -28,7 +28,7 @@
 	{
 		"identifier": "Ceres::TwoColumnWidget",
 		"label": "Widget.two_column_label",
-		"previewImageURL": "https://i.imgur.com/4hYBGvf.png",
+		"previewImageURL": "https://i.imgur.com/69lqNTl.png",
 		"widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
 		"settings": {
 			"layout": {
@@ -62,7 +62,7 @@
 	{
 		"identifier": "Ceres::ThreeColumnWidget",
 		"label": "Widget.three_column_label",
-		"previewImageURL": "https://i.imgur.com/je1t8za.png",
+		"previewImageURL": "https://i.imgur.com/iWIXVVK.png",
 		"widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
 		"settings": {
 			"layout": {
@@ -111,14 +111,14 @@
 	{
 		"identifier": "Ceres::FourColumnWidget",
 		"label": "Widget.four_column_label",
-		"previewImageURL": "https://i.imgur.com/kMVO5dO.png",
+		"previewImageURL": "https://i.imgur.com/SUxxmG3.png",
 		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
 		"settings": {}
 	},
 	{
 		"identifier": "Ceres::TextHeaderWidget",
 		"label": "Widget.header_label",
-		"previewImageURL": "https://i.imgur.com/yzq5cT1.png",
+		"previewImageURL": "https://i.imgur.com/HiSNabW.png",
 		"widgetClass": "Ceres\\Widgets\\Common\\TextHeaderWidget",
 		"settings": {
 			"text": {
@@ -135,7 +135,7 @@
 	{
 		"identifier": "Ceres::ImageCarouselWidget",
 		"label": "Widget.imageCarousel_label",
-		"previewImageURL": "https://i.imgur.com/vPcgEVl.png",
+		"previewImageURL": "https://i.imgur.com/8RJj6cZ.png",
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
 		"settings": {
 			"slide1": {
@@ -251,7 +251,7 @@
 	{
 		"identifier": "Ceres::ImageBoxWidget",
 		"label": "Widget.imageBox_label",
-		"previewImageURL": "https://i.imgur.com/j0vg2qm.png",
+		"previewImageURL": "https://i.imgur.com/YlYwAmy.png",
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
 		"settings": {
 			"style": {
@@ -333,7 +333,7 @@
 	{
 		"identifier": "Ceres::ItemListWidget",
 		"label": "Widget.itemList_label",
-		"previewImageURL": "https://i.imgur.com/hbOrYn3.png",
+		"previewImageURL": "https://i.imgur.com/CRTjerv.png",
 		"widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
 		"settings": {
 			"listType": {
