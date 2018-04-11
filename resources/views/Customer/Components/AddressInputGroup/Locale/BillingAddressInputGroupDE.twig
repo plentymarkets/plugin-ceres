@@ -81,7 +81,7 @@
         {% if "billing_address.birthday" in addressFields %}
             <div class="col-xs-12 col-sm-4">
                 <div class="input-unit" {% if "billing_address.birthday" in addressFieldsRequired %}data-validate="text" {% endif %} data-model="birthday">
-                    <input type="date" name="birthday" :id="'txtBirthdate' + _uid" :value="value.birthday" @input="emitInputEvent('birthday', $event.target.value)">
+                    <input type="date" min="1901-12-14" :max="new Date().toISOString().split('T')[0]" name="birthday" :id="'txtBirthdate' + _uid" :value="value.birthday" @input="emitInputEvent('birthday', $event.target.value)">
                     <label :for="'txtBirthdate' + _uid">{{ trans("Ceres::Template.addressBirthdate") }}{% if "billing_address.birthday" in addressFieldsRequired %}*{% endif %}</label>
                 </div>
             </div>
