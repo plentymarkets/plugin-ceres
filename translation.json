@@ -10,59 +10,115 @@
       "prefix": "basket"
     },
     {
-      "name": { "de": "TODO Item List", "en": "TODO Item LIST" },
-      "prefix": "itemList"
+      "name": { "de": "cancellationForm", "en": "cancellationForm" },
+      "prefix": "cancellationForm"
     },
     {
-      "name": { "de": "Kasse", "en": "Checkout" },
+      "name": { "de": "cancellationRights", "en": "cancellationRights" },
+      "prefix": "cancellationRights"
+    },
+    {
+      "name": { "de": "checkout", "en": "checkout" },
       "prefix": "checkout"
     },
     {
-      "name": { "de": "Kontaktformular", "en": "Contact" },
+      "name": { "de": "contact", "en": "contact" },
       "prefix": "contact"
     },
     {
-      "name": { "de": "Entwickler Einstellungen", "en": "Developers settings" },
+      "name": { "de": "coupon", "en": "coupon" },
+      "prefix": "coupon"
+    },
+    {
+      "name": { "de": "dev", "en": "dev" },
       "prefix": "dev"
     },
     {
-      "name": { "de": "Allgemein", "en": "Global" },
-      "prefix": "global"
+      "name": { "de": "footer", "en": "footer" },
+      "prefix": "footer"
     },
     {
-      "name": { "de": "TODO HOMEPAGE", "en": "TODO HOMEPAGE" },
+      "name": { "de": "header", "en": "header" },
+      "prefix": "header"
+    },
+    {
+      "name": { "de": "homepage", "en": "homepage" },
       "prefix": "homepage"
     },
     {
-      "name": { "de": "Login", "en": "Login" },
-      "prefix": "login"
+      "name": { "de": "itemSearch", "en": "itemSearch" },
+      "prefix": "itemSearch"
     },
     {
-      "name": { "de": "Mein Konto", "en": "My account" },
-      "prefix": "myAccount"
-    },
-    {
-      "name": { "de": "Auftragsbestätigung", "en": "Order confirmation" },
-      "prefix": "orderConfirmation"
-    },
-    {
-      "name": { "de": "Auftragshistorie", "en": "Order history" },
-      "prefix": "orderHistory"
-    },
-    {
-      "name": { "de": "Registrierung", "en": "Registration" },
-      "prefix": "registration"
-    },
-    {
-      "name": { "de": "Retourenhistorie", "en": "Return history" },
-      "prefix": "returnHistory"
-    },
-    {
-      "name": { "de": "Artikelansicht", "en": "Item view" },
+      "name": { "de": "item", "en": "item" },
       "prefix": "item"
     },
     {
-      "name": { "de": "Wunschliste", "en": "Wish list" },
+      "name": { "de": "legalDisclosure", "en": "legalDisclosure" },
+      "prefix": "legalDisclosure"
+    },
+    {
+      "name": { "de": "login", "en": "login" },
+      "prefix": "login"
+    },
+    {
+      "name": { "de": "myAccount", "en": "myAccount" },
+      "prefix": "myAccount"
+    },
+    {
+      "name": { "de": "notFound", "en": "notFound" },
+      "prefix": "notFound"
+    },
+    {
+      "name": { "de": "notifications", "en": "notifications" },
+      "prefix": "notifications"
+    },
+    {
+      "name": { "de": "orderConfirmation", "en": "orderConfirmation" },
+      "prefix": "orderConfirmation"
+    },
+    {
+      "name": { "de": "orderHistory", "en": "orderHistory" },
+      "prefix": "orderHistory"
+    },
+    {
+      "name": { "de": "privacyPolicy", "en": "privacyPolicy" },
+      "prefix": "privacyPolicy"
+    },
+    {
+      "name": { "de": "Registration", "en": "Registration" },
+      "prefix": "reg"
+    },
+    {
+      "name": { "de": "resetPw", "en": "resetPw" },
+      "prefix": "resetPw"
+    },
+    {
+      "name": { "de": "returnConfirmation", "en": "returnConfirmation" },
+      "prefix": "returnConfirmation"
+    },
+    {
+      "name": { "de": "returnHistory", "en": "returnHistory" },
+      "prefix": "returnHistory"
+    },
+    {
+      "name": { "de": "return", "en": "return" },
+      "prefix": "return"
+    },
+    {
+      "name": { "de": "shippingInfo", "en": "shippingInfo" },
+      "prefix": "shippingInfo"
+    },
+    {
+      "name": { "de": "singleItem", "en": "singleItem" },
+      "prefix": "singleItem"
+    },
+    {
+      "name": { "de": "termsAndConditions", "en": "termsAndConditions" },
+      "prefix": "termsAndConditions"
+    },
+    {
+      "name": { "de": "wishList", "en": "wishList" },
       "prefix": "wishList"
     }
   ]
