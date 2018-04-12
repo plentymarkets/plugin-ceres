@@ -15041,7 +15041,7 @@ Vue.component("add-to-basket", {
                 }
             }
 
-            NotificationService.error(Translations.Template.itemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
+            NotificationService.error(Translations.Template.singleItemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
         },
         directToItem: function directToItem() {
             window.location.assign(this.itemUrl);
@@ -15253,11 +15253,11 @@ Vue.component("coupon", {
         },
         getCouponRedemtionErrorMessage: function getCouponRedemtionErrorMessage(error) {
             var errorMessageKeys = {
-                18: "couponminOrderValueNotReached",
+                18: "couponMinOrderValueNotReached",
                 51: "couponnotUsableForSpecialOffer",
-                70: "couponalreadyUsedOrInvalidCouponCode",
-                78: "couponcampaignExpired",
-                126: "couponnoMatchingItemInBasket",
+                70: "couponAlreadyUsedOrInvalidCouponCode",
+                78: "couponCampaignExpired",
+                126: "couponNoMatchingItemInBasket",
                 329: "couponOnlySubscription",
                 330: "couponOnlySingleUsage",
                 331: "couponNoOpenAmount",
@@ -15562,7 +15562,7 @@ Vue.component("checkout", {
         },
         handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
             if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
-                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.orderMethodOfPaymentListChanged"));
+                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
                 this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
             }
 
@@ -15571,12 +15571,12 @@ Vue.component("checkout", {
             }
 
             if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.orderMethodOfPaymentChanged"));
+                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
                 this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
             }
 
             if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.orderShippingProfileChanged"));
+                NotificationService.warn(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileChanged"));
                 this.$store.commit("setShippingProfile", checkout.shippingProfileId);
             }
 
@@ -15586,7 +15586,7 @@ Vue.component("checkout", {
         },
         hasShippingProfileListChanged: function hasShippingProfileListChanged(oldList, newList) {
             if (oldList.length !== newList.length) {
-                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.orderShippingProfileListChanged"));
+                NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
                 return true;
             }
 
@@ -15595,10 +15595,10 @@ Vue.component("checkout", {
 
             for (var index in oldList) {
                 if (oldList[index].parcelServicePresetId !== newList[index].parcelServicePresetId) {
-                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.orderShippingProfileListChanged"));
+                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfileListChanged"));
                     return true;
                 } else if (oldList[index].shippingAmount !== newList[index].shippingAmount) {
-                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.orderShippingProfilePriceChanged"));
+                    NotificationService.info(_TranslationService2.default.translate("Ceres::Template.checkoutShippingProfilePriceChanged"));
                     return true;
                 }
             }
@@ -15802,7 +15802,7 @@ Vue.component("place-order", {
             this.waiting = true;
 
             if (this.contactWish && this.contactWish.length > 0) {
-                ApiService.post("/rest/io/order/contactWish", { orderContactWish: this.contactWish }, { supressNotifications: true }).always(function () {
+                ApiService.post("/rest/io/order/contactWish", { checkoutContactWish: this.contactWish }, { supressNotifications: true }).always(function () {
                     _this.preparePayment();
                 });
             } else {
@@ -15821,7 +15821,7 @@ Vue.component("place-order", {
                     _this2.waiting = false;
                 });
             } else {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.generalCheckEntries"));
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.checkoutCheckEntries"));
                 this.waiting = false;
             }
         },
@@ -16389,21 +16389,21 @@ Vue.component("address-select", {
             var headline = void 0;
 
             if (this.modalType === "initial") {
-                headline = _TranslationService2.default.translate("Ceres::Template.orderInvoiceAddressInitial");
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressInitial");
             } else if (this.addressType === "2") {
                 if (this.modalType === "update") {
-                    headline = _TranslationService2.default.translate("Ceres::Template.orderShippingAddressEdit");
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressEdit");
                 } else if (this.modalType === "create") {
-                    headline = _TranslationService2.default.translate("Ceres::Template.orderShippingAddressCreate");
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressCreate");
                 } else {
-                    headline = _TranslationService2.default.translate("Ceres::Template.orderShippingAddressDelete");
+                    headline = _TranslationService2.default.translate("Ceres::Template.addressShippingAddressDelete");
                 }
             } else if (this.modalType === "update") {
-                headline = _TranslationService2.default.translate("Ceres::Template.orderInvoiceAddressEdit");
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressEdit");
             } else if (this.modalType === "create") {
-                headline = _TranslationService2.default.translate("Ceres::Template.orderInvoiceAddressCreate");
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressCreate");
             } else {
-                headline = _TranslationService2.default.translate("Ceres::Template.orderInvoiceAddressDelete");
+                headline = _TranslationService2.default.translate("Ceres::Template.addressInvoiceAddressDelete");
             }
 
             this.headline = headline;
@@ -16852,7 +16852,7 @@ Vue.component("contact-form", {
                 } else {
                     _this.privacyPolicyShowError = true;
 
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.generalCheckEntries"));
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
                 }
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
@@ -16861,7 +16861,7 @@ Vue.component("contact-form", {
                     _this.privacyPolicyShowError = true;
                 }
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.generalCheckEntries"));
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.contactCheckEntries"));
             });
         },
         sendMail: function sendMail() {
@@ -17187,7 +17187,7 @@ Vue.component("registration", {
                 ApiService.setToken(response);
 
                 if (!response.code) {
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accRegistrationSuccessful")).closeAfter(3000);
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.regSuccessful")).closeAfter(3000);
 
                     if (document.getElementById(_this2.modalElement) !== null) {
                         ModalService.findModal(document.getElementById(_this2.modalElement)).hide();
@@ -17199,7 +17199,7 @@ Vue.component("registration", {
                         location.reload();
                     }
                 } else {
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accRegistrationError")).closeAfter(3000);
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.regError")).closeAfter(3000);
                 }
 
                 _this2.isDisabled = false;
@@ -17337,11 +17337,11 @@ Vue.component("reset-password-form", {
 
                 window.location.assign(window.location.origin);
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accChangePasswordSuccessful")).closeAfter(3000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordSuccessful")).closeAfter(3000);
             }).fail(function () {
                 _this3.isDisabled = false;
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accChangePasswordFailed")).closeAfter(5000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.resetPwChangePasswordFailed")).closeAfter(5000);
             });
         },
         resetFields: function resetFields() {
@@ -17605,7 +17605,7 @@ Vue.component("login", {
             ApiService.post("/rest/io/customer/login", { email: this.username, password: this.password }, { supressNotifications: true }).done(function (response) {
                 ApiService.setToken(response);
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accLoginSuccessful")).closeAfter(10000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSuccessful")).closeAfter(10000);
 
                 if (_this4.backlink !== null && _this4.backlink) {
                     location.assign(_this4.backlink);
@@ -17620,7 +17620,7 @@ Vue.component("login", {
                 switch (response.error.code) {
                     case 401:
                         _this4.loginFields.addClass("has-login-error");
-                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accLoginFailed")).closeAfter(10000);
+                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template.loginFailed")).closeAfter(10000);
                         break;
                     default:
                         return;
@@ -17637,7 +17637,7 @@ Vue.component("login", {
 
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPasswordMailSubject" }).done(function () {
+            ApiService.post("/rest/io/customer/password_reset", { email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject" }).done(function () {
                 if (document.getElementById(_this5.modalElement) !== null) {
                     ModalService.findModal(document.getElementById(_this5.modalElement)).hide();
 
@@ -17648,11 +17648,11 @@ Vue.component("login", {
                     window.location.assign(window.location.origin);
                 }
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.generalSendEmailOk")).closeAfter(5000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.loginSendEmailOk")).closeAfter(5000);
             }).fail(function () {
                 _this5.isDisabled = false;
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accResetPwDErrorOnSendEmail")).closeAfter(5000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")).closeAfter(5000);
             });
         },
         showResetPwdView: function showResetPwdView() {
@@ -17660,9 +17660,9 @@ Vue.component("login", {
             this.isPwdReset = true;
 
             if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").html(_TranslationService2.default.translate("Ceres::Template.accForgotPassword"));
+                $(".login-modal .modal-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
             } else {
-                $(".login-view-title").html(_TranslationService2.default.translate("Ceres::Template.accForgotPassword"));
+                $(".login-view-title").html(_TranslationService2.default.translate("Ceres::Template.loginForgotPassword"));
             }
 
             $(".login-container").slideUp("fast", function () {
@@ -17674,9 +17674,9 @@ Vue.component("login", {
             this.isPwdReset = false;
 
             if (document.getElementById(this.modalElement) !== null) {
-                $(".login-modal .modal-title").text(_TranslationService2.default.translate("Ceres::Template.accLogin"));
+                $(".login-modal .modal-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
             } else {
-                $(".login-view-title").text(_TranslationService2.default.translate("Ceres::Template.accLogin"));
+                $(".login-view-title").text(_TranslationService2.default.translate("Ceres::Template.login"));
             }
 
             $(".reset-pwd-container").slideUp("fast", function () {
@@ -17823,7 +17823,7 @@ Vue.component("add-to-wish-list", {
                 this.$store.dispatch("addToWishList", parseInt(this.variationId)).then(function (response) {
                     _this2.isLoading = false;
 
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.itemWishListAdded"));
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListAdded"));
                 }, function (error) {
                     _this2.isLoading = false;
                     _this2.$data._isActive = false;
@@ -17842,7 +17842,7 @@ Vue.component("add-to-wish-list", {
                 this.$store.dispatch("removeWishListItem", { id: parseInt(this.variationId) }).then(function (response) {
                     _this3.isLoading = false;
 
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.itemWishListRemoved"));
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.singleItemWishListRemoved"));
                 }, function (error) {
                     _this3.isLoading = false;
                     _this3.$data._isActive = true;
@@ -17851,7 +17851,7 @@ Vue.component("add-to-wish-list", {
             }
         },
         changeTooltipText: function changeTooltipText() {
-            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "itemWishListRemove" : "itemWishListAdd"));
+            var tooltipText = _TranslationService2.default.translate("Ceres::Template." + (this.$data._isActive ? "singleItemWishListRemove" : "singleItemWishListAdd"));
 
             $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
         }
@@ -18032,7 +18032,7 @@ Vue.component("item-image-carousel", {
                     }
                     // owl prepends 2 clones to allow endless scrolling
                     current = current % imageCount + 1;
-                    return _TranslationService2.default.translate("Ceres::Template.itemImagePreviewCaption", { current: current, total: imageCount });
+                    return _TranslationService2.default.translate("Ceres::Template.singleItemImagePreviewCaption", { current: current, total: imageCount });
                 };
 
                 var originalFn = window.lightbox.changeImage;
@@ -18603,12 +18603,12 @@ Vue.component("quantity-input", {
             return (0, _utils.isDefined)(this.compMax) && this.compValue + this.compInterval > this.compMax;
         },
         minimumHint: function minimumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.orderQuantityMin", {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMin", {
                 min: this.min
             });
         },
         maximumHint: function maximumHint() {
-            return _TranslationService2.default.translate("Ceres::Template.orderQuantityMax", {
+            return _TranslationService2.default.translate("Ceres::Template.singleItemQuantityMax", {
                 max: this.max
             });
         },
@@ -19304,8 +19304,8 @@ Vue.component("item-search", {
             window.open(this.$options.filters.itemURL(suggestion.data), "_self", false);
         },
         updateTitle: function updateTitle(searchString) {
-            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString;
-            document.title = _TranslationService2.default.translate("Ceres::Template.generalSearchResults") + " " + searchString + " | " + App.config.header.companyName;
+            document.querySelector("#searchPageTitle").innerHTML = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString;
+            document.title = _TranslationService2.default.translate("Ceres::Template.itemSearchResults") + " " + searchString + " | " + App.config.header.companyName;
         },
         initAutocomplete: function initAutocomplete() {
             var _this2 = this;
@@ -19749,10 +19749,10 @@ Vue.component("account-settings", {
             if (this.newPassword !== "" && this.newPassword === this.confirmPassword) {
                 APIService.post("/rest/io/customer/password", { password: this.newPassword, password2: this.confirmPassword }).done(function (response) {
                     self.clearFieldsAndClose();
-                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.accChangePasswordSuccessful")).closeAfter(3000);
+                    NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordSuccessful")).closeAfter(3000);
                 }).fail(function (response) {
                     self.clearFieldsAndClose();
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.accChangePasswordFailed")).closeAfter(5000);
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountChangePasswordFailed")).closeAfter(5000);
                 });
             }
         },
@@ -19842,7 +19842,7 @@ Vue.component("bank-data-select", {
          * Open the modal to add new bank-data
          */
         openAddBank: function openAddBank() {
-            this.headline = _TranslationService2.default.translate("Ceres::Template.bankAddDataTitle");
+            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankAddDataTitle");
             this.openModal(false);
         },
 
@@ -19853,7 +19853,7 @@ Vue.component("bank-data-select", {
          * @param bankdata
          */
         openUpdateBank: function openUpdateBank(index, bankData) {
-            this.headline = _TranslationService2.default.translate("Ceres::Template.bankUpdateDataTitle");
+            this.headline = _TranslationService2.default.translate("Ceres::Template.myAccountBankUpdateDataTitle");
 
             this.setUpdateData(index, bankData);
             this.openModal(true);
@@ -19930,11 +19930,11 @@ Vue.component("bank-data-select", {
                 _this3.checkBankDataSelection();
                 _this3.closeModal();
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.bankDataUpdated")).closeAfter(3000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataUpdated")).closeAfter(3000);
             }).fail(function () {
                 _this3.closeModal();
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.bankDataNotUpdated")).closeAfter(5000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotUpdated")).closeAfter(5000);
             });
         },
 
@@ -19953,11 +19953,11 @@ Vue.component("bank-data-select", {
                 _this4.checkBankDataSelection(true);
                 _this4.closeModal();
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.bankDataAdded")).closeAfter(3000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataAdded")).closeAfter(3000);
             }).fail(function () {
                 _this4.closeModal();
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.bankDataNotAdded")).closeAfter(5000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotAdded")).closeAfter(5000);
             });
         },
 
@@ -19973,11 +19973,11 @@ Vue.component("bank-data-select", {
                 _this5.closeDeleteModal();
                 _this5.userBankData.splice(_this5.updateBankIndex, 1);
 
-                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.bankDataDeleted")).closeAfter(3000);
+                NotificationService.success(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataDeleted")).closeAfter(3000);
             }).fail(function () {
                 _this5.closeDeleteModal();
 
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.bankDataNotDeleted")).closeAfter(5000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.myAccountBankDataNotDeleted")).closeAfter(5000);
             });
         },
 
@@ -20301,7 +20301,7 @@ Vue.component("order-return-history", {
                 }).fail(function (response) {
                     _this2.waiting = false;
                     _this2.returnsList.page = lastPage;
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops"));
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.returnHistoryOops"));
                 });
             }
         }
@@ -20345,12 +20345,12 @@ Vue.component("order-return-history-item", {
 
     methods: {
         toggleNaming: function toggleNaming(element) {
-            if (document.getElementById(element).innerText === _TranslationService2.default.translate("Ceres::Template.myAccountReturnShowMore")) {
+            if (document.getElementById(element).innerText === _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore")) {
                 this.itemsToRender = this.returnOrder.order.orderItems;
-                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.myAccountReturnShowLess");
+                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowLess");
             } else {
                 this.itemsToRender = this.returnOrder.order.orderItems.slice(0, 4);
-                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.myAccountReturnShowMore");
+                document.getElementById(element).innerText = _TranslationService2.default.translate("Ceres::Template.returnHistoryReturnShowMore");
             }
         },
         getOriginOrderId: function getOriginOrderId(order) {
@@ -20978,7 +20978,7 @@ Vue.component("wish-list", {
     methods: _extends({
         removeItem: function removeItem(item) {
             this.removeWishListItem(item).then(function () {
-                return NotificationService.success(_TranslationService2.default.translate("Ceres::Template.itemWishListRemoved"));
+                return NotificationService.success(_TranslationService2.default.translate("Ceres::Template.wishListRemoved"));
             });
         }
     }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
@@ -21373,7 +21373,7 @@ Vue.directive("tooltip", {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var exceptionMap = exports.exceptionMap = new Map([["1", "basketItemNotAdded"], ["2", "basketNotEnoughStockItem"], ["3", "accInvalidResetPasswordUrl"], ["4", "accCheckPassword"], ["401", "basketCalculateShippingFailed"]]);
+var exceptionMap = exports.exceptionMap = new Map([["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["401", "notificationsCalculateShippingFailed"]]);
 
 exports.default = exceptionMap;
 
@@ -23893,7 +23893,7 @@ var actions = {
                     $(document.body).trigger("sticky_kit:recalc");
                 }, 0);
             }).fail(function (error) {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops")).closeAfter(10000);
+                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.basketOops")).closeAfter(10000);
             });
         } else {
             commit("setIsBasketInitiallyLoaded");
