@@ -72,7 +72,7 @@ const mutations =
 
                 if (state.deliveryAddress === deliveryAddress)
                 {
-                    state.deliveryAddress = state.deliveryAddress.find(address => address.id === -99);
+                    state.deliveryAddress = state.deliveryAddressList.find(address => address.id === -99);
                     state.deliveryAddressId = -99;
                 }
             }

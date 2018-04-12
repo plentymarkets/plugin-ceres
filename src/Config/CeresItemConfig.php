@@ -18,6 +18,7 @@ class CeresItemConfig extends PluginConfig
     public $categoryShowNav;
     public $showCategoryImage;
     public $showCategoryDescription;
+    public $requireOrderProperties;
     public $loadingAnimationType;
 
     public function __construct(ConfigRepository $configRepository)
@@ -56,6 +57,7 @@ class CeresItemConfig extends PluginConfig
         $this->categoryShowNav              = $this->getBooleanValue( "item.category_show_nav", true );
         $this->showCategoryImage            = $this->getBooleanValue( "item.show_category_image", true );
         $this->showCategoryDescription      = $this->getBooleanValue( "item.show_category_description", true );
+        $this->requireOrderProperties       = $this->getBooleanValue( "item.require_all_properties", false );
         $this->loadingAnimationType         = $this->getTextValue( "item.loading_animation_type", "blur" );
     }
 }

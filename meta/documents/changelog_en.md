@@ -1,5 +1,37 @@
 # Release Notes for Ceres
 
+## v2.6.0 (2018-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.2...2.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- IO is now able to react to the generation of the sitemap and can provide its own patterns for the creation of URLs.
+
+### Changed
+
+- The shopping cart now displays the surcharge of order properties via the preposition "incl.".
+- The quantity input now considers the interval order quantity of an item.
+- The plugin configuration is now delivered generically to JavaScript and is available as a global object.
+- Decimal quantities of items can now be purchased.
+- The check box for the terms and conditions, cancellation rights and privacy policy have been moved to the left side of the checkout. Thereby, the purchase button is now located directly under the total price.
+- The preview text of an item in the single item view can now support HTML elements.
+- The value "Please select" can now always be selected in the attribute selection of the variation in the single item view. This prevents that the selection of one attribute blocks other selections from the dropdown list. This also enables users to select main variation, as long as the main variation is active and not linked to an attribute.
+- The surcharge of order properties is now included in the item's total price in the shopping cart.
+
+### Fixed
+
+- Under certain circumstances the button for changing payment methods was not displayed on the order confirmation page. This has been fixed.
+- Due to an error a purchase via Paypal redirected to a 404 page instead of the order confirmation page. This has been fixed.
+- The shopping cart now considers the position of item images and displays the image with the lowest position number.
+- The item view of items with a specified order property used to display the surcharge of the property. Now, the item is checked for separate surcharges that can be configured for the item. If such a surcharge is configured, this surcharge is displayed instead.
+
+## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Due to an error the interface continued to display deleted delivery addresses. This has been fixed.
+- Due to an error clicking the navigation arrows of an image slider in the category view redirected to the item. This has been fixed.
+- Due to an error additional content of payment plugins was not displayed correctly in the checkout. This has been fixed.
+
 ## v2.5.1 (2018-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.0...2.5.1" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed

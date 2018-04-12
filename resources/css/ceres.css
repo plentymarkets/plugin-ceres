@@ -14124,6 +14124,7 @@ Custom classes
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  display: block;
   transition: all .2s;
 }
 
@@ -14263,6 +14264,54 @@ Custom classes
 .input-unit.success i {
   background-color: #7ED321;
   color: white;
+}
+
+.file-input {
+  height: 38px;
+  cursor: pointer;
+}
+
+.file-input > input[type="file"] {
+  width: 0;
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.file-input > .input-unit-preview {
+  height: 38px;
+}
+
+.file-input > .input-unit-btn {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  background-color: #dcdbd8;
+  display: block;
+  right: 0;
+  top: 0;
+}
+
+.file-input > .input-unit-btn i {
+  margin: 10px;
+  width: 18px;
+  height: 18px;
+  font-weight: 300;
+  background-color: #dcdbd8;
+  color: #4D4F4D;
+}
+
+.file-input.success .input-unit-btn,
+.file-input.success .input-unit-btn i {
+  background-color: #7ED321;
+  color: #fff;
+}
+
+.file-input.error .input-unit-btn,
+.file-input.error .input-unit-btn i {
+  background-color: #d9534f;
+  color: #fff;
 }
 
 .input-unit.multiple {
@@ -17359,7 +17408,7 @@ body.menu-is-visible {
 @media (min-width: 544px) {
   .reset-pwd .save-new-pwd-btn {
     display: inline-block;
-    width: auto;
+    width: 10rem;
   }
 }
 
@@ -17623,8 +17672,8 @@ body.menu-is-visible {
   visibility: hidden;
 }
 
-.component-loading.refreshing:after {
-  content: "\f021";
+.component-loading.with-icon:after {
+  content: "";
   font-family: FontAwesome;
   position: absolute;
   width: 100%;
@@ -17643,6 +17692,15 @@ body.menu-is-visible {
   opacity: 0;
   transition: opacity .1s ease-out;
   visibility: hidden;
+}
+
+.component-loading.with-icon.refreshing:after {
+  content: "\f021";
+}
+
+.component-loading.with-icon.sending:after {
+  content: "\f1ce";
+  animation: fa-spin 1s infinite linear;
 }
 
 .component-loading.isLoading:before {
@@ -19129,6 +19187,10 @@ body.menu-is-visible {
   margin-left: 0;
 }
 
+.single .tab-content img {
+  max-width: 100%;
+}
+
 .single .graduated-prices-table td:first-child {
   padding-right: 1rem;
   font-style: italic;
@@ -19220,6 +19282,69 @@ body.menu-is-visible {
   .single .nav-tabs .nav-item + .nav-item {
     margin-left: -1px;
   }
+}
+
+.order-property-slider {
+  overflow: hidden;
+}
+
+.order-property-slider .order-property-slider-inner {
+  white-space: nowrap;
+  transition: transform 300ms ease;
+}
+
+.order-property-slider .order-property-slider-inner > div {
+  display: inline-block;
+  width: 100%;
+  visibility: hidden;
+}
+
+.order-property-slider .order-property-slider-inner > div.active {
+  visibility: visible;
+}
+
+.order-property-slider .order-property-slider-controls {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav {
+  -ms-flex: 1;
+      flex: 1;
+  text-align: center;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav span {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #dcdbd8;
+  background-color: #fff;
+  margin: 12px 5px 0;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav span.active {
+  background-color: #dcdbd8;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav span.active.error {
+  background-color: #db9794;
+  border-color: #e6cac8;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav span.highlight {
+  background-color: #008ebd;
+  border-color: #3ecfff;
+}
+
+.order-property-slider .order-property-slider-controls .slider-nav span.error {
+  background-color: #d9534f;
+  border-color: #f0b9b8;
 }
 
 .add-to-basket-container {

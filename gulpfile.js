@@ -23,6 +23,9 @@ var eslint = require("gulp-eslint");
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
 var copy = require("gulp-copy");
+var insert = require("gulp-insert");
+var fs = require("fs");
+var path = require("path");
 
 gulp.task("default", ["build"]);
 
@@ -178,7 +181,8 @@ function buildSass(outputFile, outputStyle)
     var config = {
         scssOptions  : {
             errLogToConsole: true,
-            outputStyle    : outputStyle
+            outputStyle    : outputStyle,
+            data: ''
         },
         prefixOptions: {
             browsers: [
@@ -189,8 +193,19 @@ function buildSass(outputFile, outputStyle)
         }
     };
 
+    var pluginConfig = require('./config');
+    var scssConfig = pluginConfig
+        .filter(function(configEntry) {
+            return configEntry.scss === true;
+        })
+        .map(function(configEntry) {
+            return "$" + configEntry.key.split(".").join("") + ": " + configEntry.default + ";";
+        })
+        .join('');
+
     return gulp
         .src(SCSS_SRC + "Ceres.scss")
+        .pipe(insert.prepend(scssConfig))
         .pipe(sourcemaps.init())
         .pipe(sass(config.scssOptions).on("error", sass.logError))
         .pipe(rename(outputFile))

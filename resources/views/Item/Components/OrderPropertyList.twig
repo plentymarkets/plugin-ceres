@@ -1,0 +1,33 @@
+{{ component( "Ceres::Item.Components.OrderPropertyListGroup" ) }}
+
+<script type="x/template" id="vue-order-property-list">
+    <div class="order-property-slider m-b-1">
+        <div class="order-property-slider-inner" :style="{transform: 'translateX(-' + (activeSlide * 100) + '%)'}">
+            <div v-for="(propertyGroup, index) in sortedGroupedProperties" :class="{'active': index === activeSlide}">
+                <order-property-list-group :key="propertyGroup.id" :property-group="propertyGroup"></order-property-list-group>
+            </div>
+        </div>
+
+        <div class="order-property-slider-controls col-xs-12" v-if="sortedGroupedProperties.length > 1">
+            <div class="btn" @click="slideTo(activeSlide - 1)" :class="{'btn-primary': activeSlide > 0, 'btn-secondary disabled': activeSlide === 0}" tabindex="0">
+                <span class="fa fa-chevron-left"></span>
+            </div>
+
+            <div class="slider-nav">
+                <span v-for="(propertyGroup, index) in sortedGroupedProperties"
+                      :class="{ 'active': index === activeSlide, 'highlight': !touchedSlides[index], 'error': propertyGroup.hasError }"
+                      @click="slideTo(index)"
+                      :key="index"
+                      v-tooltip
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      :title="propertyGroup.group ? propertyGroup.group.names.name : '{{ trans("Ceres::Template.itemPropertiesWithoutGroup") }}'">
+                </span>
+            </div>
+
+            <div class="btn pull-right" @click="slideTo(activeSlide + 1)" :class="{'btn-primary': activeSlide < sortedGroupedProperties.length - 1, 'btn-secondary disabled': activeSlide >= sortedGroupedProperties.length - 1 }" tabindex="0">
+                <span class="fa fa-chevron-right"></span>
+            </div>
+        </div>
+    </div>
+</script>

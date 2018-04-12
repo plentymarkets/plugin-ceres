@@ -4,7 +4,7 @@
     <!-- BASKET TOTALS -->
     <div class="cmp cmp-totals">
         <div class="h3">{{ trans("Ceres::Template.basketSum") }}</div>
-        <div class="component-loading refreshing" :class="{ 'isLoading': isBasketLoading }">
+        <div class="component-loading with-icon refreshing" :class="{ 'isLoading': isBasketLoading }">
             <dl>
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
                 <dt v-if="showProperty( 'basket.value_of_items_net' )">

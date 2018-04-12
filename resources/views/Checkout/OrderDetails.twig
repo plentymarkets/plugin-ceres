@@ -86,6 +86,7 @@
                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
                                                     :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
                                                     :payment-status="{{ paymentStatus | json_encode() }}"
+                                                    :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
                                                     :current-template="{{ currentTemplate | json_encode() }}">
                             </change-payment-method>
                         {% endif %}
@@ -158,13 +159,17 @@
                                     {% for property in item.orderProperties %}
                                         <div class="row">
                                             <strong class="col-xs-6 col-sm-3 item-word-break">{{ property.name }}</strong>
-                                            <span v-cloak class="col-xs-6 col-sm-9 item-word-break" v-if="'{{ property.value }}'.match(/(\w*\/)?\w*\/\w*\.\w*/)">
-                                                <a :href="'{{ property.value }}' | fileUploadPath" target="_blank">
-                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                    ${ "{{ property.value }}" | fileName }
-                                                </a>
-                                            </span>
-                                            <span class="col-xs-6 col-sm-9 item-word-break" v-else>{{ property.value }}</span>
+                                            {% if property.value matches '{^[0-9a-f]{8}\/[0-9a-f]{8}\/}' %}
+                                                <span class="col-xs-6 col-sm-9 item-word-break">
+                                                    <a href="order-property-file/{{ property.value }}?orderId={{ orderData.order.id }}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                        {% set splitPath = property.value |split('/') %}
+                                                        {{ splitPath | last }}
+                                                    </a>
+                                                </span>
+                                            {% else %}
+                                                <span class="col-xs-6 col-sm-9 item-word-break">{{ property.value }}</span>
+                                            {% endif %}
                                         </div>
                                     {% endfor %}
                                 {% endif %}
