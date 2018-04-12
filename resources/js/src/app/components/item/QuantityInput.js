@@ -61,15 +61,15 @@ Vue.component("quantity-input", {
     {
         this.$options.template = this.template;
 
-        this.compDecimals = floatLength(defaultValue(this.compInterval, 0));
         this.compInterval = defaultValue(this.compInterval, 1);
-        this.onValueChanged = debounce(
-            () =>
-            {
-                this.$emit("quantity-change", this.compValue);
-            },
-            defaultValue(this.timeout, 500)
-        );
+        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
+
+        this.compDecimals = floatLength(this.compInterval);
+
+        this.onValueChanged = debounce(() =>
+        {
+            this.$emit("quantity-change", this.compValue);
+        }, defaultValue(this.timeout, 500));
 
         if (!isNullOrUndefined(this.variationId))
         {
