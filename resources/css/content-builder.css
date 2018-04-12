@@ -25,7 +25,7 @@ body
 .grid-stack-item:hover,
 .grid-stack-item.active
 {
-    outline: 3px solid #24B3E0;
+    border: 4px solid #24B3E0;
 }
 
 .grid-stack-item.active .grid-stack-item-content::before
@@ -48,7 +48,7 @@ body
 .grid-stack-placeholder
 {
     background: rgba(106,210,106,0.3);
-    outline: 3px dashed #24B3E0;
+    border: 4px dashed #24B3E0;
 }
 
 .ui-draggable-dragging
@@ -70,7 +70,7 @@ body
     z-index: 2;
 }
 
-.shopbuilder-icon
+.shopbuilder-icon.fa
 {
     height: 36px;
     width: 36px;
@@ -94,10 +94,51 @@ body
 .shopbuilder-icon.delete-icon
 {
     background-color: #f11539;
-    
 }
 
 .shopbuilder-icon.delete-icon:hover
 {
     background-color: #c70c2b
 }
+
+.shopbuilder-icon.add-icon
+{
+    background-color: #6ad26a;
+}
+
+.shopbuilder-icon.add-icon:hover
+{
+    background-color: #43c643
+}
+
+.nested-widget
+{
+    height: 200px;
+}
+
+.nested-widget::after
+{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #777777;
+    top: 2px;
+    left: 2px;
+    outline: 2px solid #fff;
+    right: 2px;
+    bottom: 2px;
+}
+
+.nested-widget.active::after
+{
+    background: #ff0000;
+}
+
+.shopbuilder-nested-config
+ {
+     position: absolute;
+     z-index: 2;
+     left: calc(50% - 18px);
+     top: calc(50% - 18px);
+ }

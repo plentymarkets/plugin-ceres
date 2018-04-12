@@ -251,6 +251,7 @@ function addContextMenu(element)
 
     // add buttons
     addEditButton(element);
+    addDesignButton(element);
     addDeleteButton(element);
 }
 
@@ -280,7 +281,7 @@ function addDeleteButton(element)
 function addEditButton(element)
 {
     // inject button markup into given context element
-    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-cog"></div>');
 
     // open properties
     jQuery(element).find('.edit-icon').click(function ()
@@ -298,6 +299,31 @@ function addEditButton(element)
 }
 
 /**
+ * add design button element for context menu
+ * @param element
+ */
+function addDesignButton(element)
+{
+    // inject button markup into given context element
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon design-icon fa fa-paint-brush"></div>');
+
+    // open properties
+    jQuery(element).find('.design-icon').click(function ()
+    {
+        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+
+        setElementActive(uniqueId);
+
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_design',
+            data: { uniqueId: uniqueId }
+        });
+
+    });
+}
+
+
+/**
  *
  * @param id
  */
@@ -308,10 +334,34 @@ function setElementActive(id)
         if (id && jQuery(this).attr('data-builder-identifier') == id)
         {
             jQuery(this).addClass('active');
+
+            // activate nested widget containers
+            jQuery(this).find('.nested-widget').each(function ()
+            {
+                jQuery(this).html('<div class="shopbuilder-nested-config shopbuilder-icon add-icon fa fa-plus"></div>');
+
+                jQuery(this).find('.add-icon').click(function ()
+                {
+                    jQuery('.nested-widget').each(function ()
+                    {
+                        jQuery(this).removeClass('active');
+                    });
+
+                    jQuery(this).closest('.nested-widget').addClass('active');
+                });
+
+            });
         }
         else
         {
             jQuery(this).removeClass('active');
+
+            // deactivate nested widget containers
+            jQuery(this).find('.nested-widget').each(function ()
+            {
+                jQuery(this).removeClass('active');
+                jQuery(this).html('');
+            });
         }
     });
 }

@@ -1,19 +1,19 @@
 {% if widgetSettings.layout == "default" %}
     <!-- 2 Spalten identisch: -->
     <div class="row">
-        <div class="col-xs-6" data-builder-container>DROPZONE</div>
-        <div class="col-xs-6" data-builder-container>DROPZONE</div>
+        <div class="col-xs-6 nested-widget"></div>
+        <div class="col-xs-6 nested-widget"></div>
     </div>
 {% elseif widgetSettings.layout == "a" %}
     <!-- 2 Spalten links groß: -->
     <div class="row">
-        <div class="col-xs-8" data-builder-container>DROPZONE</div>
-        <div class="col-xs-4" data-builder-container>DROPZONE</div>
+        <div class="col-xs-8 nested-widget"></div>
+        <div class="col-xs-4 nested-widget"></div>
     </div>
 {% elseif widgetSettings.layout == "b" %}
     <!-- 2 Spalten rechts groß: -->
     <div class="row">
-        <div class="col-xs-4" data-builder-container>DROPZONE</div>
-        <div class="col-xs-8" data-builder-container>DROPZONE</div>
+        <div class="col-xs-4 nested-widget"></div>
+        <div class="col-xs-8 nested-widget"></div>
     </div>
 {% endif %}
