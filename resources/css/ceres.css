@@ -12393,6 +12393,14 @@ a:active {
   cursor: pointer;
 }
 
+.d-table {
+  display: table;
+}
+
+.border-radius-0 {
+  border-radius: 0;
+}
+
 body {
   background-color: #f7f7f9;
 }
@@ -14065,6 +14073,16 @@ Custom classes
 .input-group-v > *:last-child {
   border-bottom-right-radius: 0.1rem;
   border-bottom-left-radius: 0.1rem;
+}
+
+.inline-form .input-group-addon,
+.inline-form .form-control {
+  border: 1px solid #D9D9D9;
+}
+
+.inline-form .btn {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .input-unit.textarea {

@@ -24,7 +24,9 @@ class ItemSearchContext extends GlobalContext implements ContextInterface
             'itemsPerPage'  => $this->getParam( 'itemsPerPage', $this->ceresConfig->pagination->rowsPerPage[0] * $this->ceresConfig->pagination->columnsPerPage ),
             'sorting'       => $this->getParam( 'sorting', $this->ceresConfig->sorting->defaultSortingSearch ),
             'facets'        => $this->getParam( 'facets', '' ),
-            'query'         => $this->getParam( 'query', '' )
+            'query'         => $this->getParam( 'query', '' ),
+            'priceMin'      => $this->request->get('priceMin', 0),
+            'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
         $this->initItemList(
