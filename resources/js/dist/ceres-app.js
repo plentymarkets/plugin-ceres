@@ -110,7 +110,7 @@ Vue.component("add-item-to-basket-overlay", {
     }
 });
 
-},{"services/ModalService":115}],2:[function(require,module,exports){
+},{"services/ModalService":116}],2:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -298,7 +298,7 @@ Vue.component("add-to-basket", {
     }
 });
 
-},{"exceptions/ExceptionMap":87,"services/NotificationService":116,"services/TranslationService":117}],3:[function(require,module,exports){
+},{"exceptions/ExceptionMap":87,"services/NotificationService":117,"services/TranslationService":118}],3:[function(require,module,exports){
 "use strict";
 
 var _ApiService = require("services/ApiService");
@@ -346,7 +346,7 @@ Vue.component("basket-preview", {
     }
 });
 
-},{"services/ApiService":111}],4:[function(require,module,exports){
+},{"services/ApiService":112}],4:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-totals", {
@@ -502,7 +502,7 @@ Vue.component("coupon", {
     }
 });
 
-},{"services/NotificationService":116,"services/TranslationService":117}],6:[function(require,module,exports){
+},{"services/NotificationService":117,"services/TranslationService":118}],6:[function(require,module,exports){
 "use strict";
 
 Vue.component("basket-list", {
@@ -682,7 +682,7 @@ Vue.component("basket-list-item", {
     }
 });
 
-},{"exceptions/ExceptionMap":87,"services/NotificationService":116,"services/TranslationService":117}],8:[function(require,module,exports){
+},{"exceptions/ExceptionMap":87,"services/NotificationService":117,"services/TranslationService":118}],8:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-breadcrumbs", {
@@ -888,7 +888,7 @@ Vue.component("checkout", {
     }
 });
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117}],11:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118}],11:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-wish-input", {
@@ -1103,7 +1103,7 @@ Vue.component("place-order", {
     }
 });
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117}],14:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118}],14:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-profile-select", {
@@ -1691,7 +1691,7 @@ Vue.component("address-select", {
     }
 });
 
-},{"../../../helper/utils":108,"services/AddressFieldService":110,"services/ApiService":111,"services/ModalService":115,"services/TranslationService":117,"services/ValidationService":119}],19:[function(require,module,exports){
+},{"../../../helper/utils":109,"services/AddressFieldService":111,"services/ApiService":112,"services/ModalService":116,"services/TranslationService":118,"services/ValidationService":120}],19:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -1899,7 +1899,7 @@ Vue.component("create-update-address", {
     }
 });
 
-},{"services/NotificationService":116,"services/ValidationService":119}],20:[function(require,module,exports){
+},{"services/NotificationService":117,"services/ValidationService":120}],20:[function(require,module,exports){
 "use strict";
 
 Vue.component("invoice-address-select", {
@@ -2161,7 +2161,7 @@ Vue.component("contact-form", {
     }
 });
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117,"services/ValidationService":119}],23:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118,"services/ValidationService":120}],23:[function(require,module,exports){
 "use strict";
 
 Vue.component("contact-map", {
@@ -2325,7 +2325,7 @@ Vue.component("country-select", {
     }
 });
 
-},{"services/CountryService":113}],25:[function(require,module,exports){
+},{"services/CountryService":114}],25:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -2468,7 +2468,7 @@ Vue.component("registration", {
     }
 });
 
-},{"../../helper/utils":108,"services/ApiService":111,"services/ModalService":115,"services/NotificationService":116,"services/TranslationService":117,"services/ValidationService":119}],26:[function(require,module,exports){
+},{"../../helper/utils":109,"services/ApiService":112,"services/ModalService":116,"services/NotificationService":117,"services/TranslationService":118,"services/ValidationService":120}],26:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -2573,7 +2573,7 @@ Vue.component("reset-password-form", {
 
 });
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117,"services/ValidationService":119}],27:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118,"services/ValidationService":120}],27:[function(require,module,exports){
 "use strict";
 
 var _AddressFieldService = require("services/AddressFieldService");
@@ -2678,7 +2678,7 @@ Vue.component("salutation-select", {
     }
 });
 
-},{"services/AddressFieldService":110}],28:[function(require,module,exports){
+},{"services/AddressFieldService":111}],28:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -2729,7 +2729,7 @@ Vue.component("guest-login", {
     }
 });
 
-},{"services/ApiService":111,"services/ValidationService":119}],29:[function(require,module,exports){
+},{"services/ApiService":112,"services/ValidationService":120}],29:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -2910,7 +2910,7 @@ Vue.component("login", {
     }
 });
 
-},{"services/ApiService":111,"services/ModalService":115,"services/NotificationService":116,"services/TranslationService":117,"services/ValidationService":119}],30:[function(require,module,exports){
+},{"services/ApiService":112,"services/ModalService":116,"services/NotificationService":117,"services/TranslationService":118,"services/ValidationService":120}],30:[function(require,module,exports){
 "use strict";
 
 Vue.component("login-view", {
@@ -2989,7 +2989,7 @@ Vue.component("user-login-handler", {
     }
 });
 
-},{"services/ApiService":111,"services/ValidationService":119}],32:[function(require,module,exports){
+},{"services/ApiService":112,"services/ValidationService":120}],32:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -3077,7 +3077,7 @@ Vue.component("add-to-wish-list", {
     }
 });
 
-},{"services/NotificationService":116,"services/TranslationService":117}],33:[function(require,module,exports){
+},{"services/NotificationService":117,"services/TranslationService":118}],33:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3312,7 +3312,7 @@ Vue.component("item-image-carousel", {
     }
 });
 
-},{"../../helper/utils":108,"services/TranslationService":117}],35:[function(require,module,exports){
+},{"../../helper/utils":109,"services/TranslationService":118}],35:[function(require,module,exports){
 "use strict";
 
 Vue.component("order-properties", {
@@ -3716,7 +3716,7 @@ Vue.component("order-property-list-item", {
     })
 });
 
-},{"services/ApiService":111,"services/NotificationService":116}],39:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117}],39:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3926,7 +3926,7 @@ Vue.component("quantity-input", {
     }
 });
 
-},{"../../helper/debounce":104,"../../helper/number":106,"../../helper/utils":108,"../../services/TranslationService":117}],40:[function(require,module,exports){
+},{"../../helper/debounce":105,"../../helper/number":107,"../../helper/utils":109,"../../services/TranslationService":118}],40:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4178,7 +4178,7 @@ Vue.component("variation-select", {
     }
 });
 
-},{"services/ApiService":111,"util":140}],42:[function(require,module,exports){
+},{"services/ApiService":112,"util":140}],42:[function(require,module,exports){
 "use strict";
 
 Vue.component("category-image-carousel", {
@@ -4459,7 +4459,7 @@ Vue.component("item-list-sorting", {
     }
 });
 
-},{"services/UrlService":118}],47:[function(require,module,exports){
+},{"services/UrlService":119}],47:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -4581,10 +4581,8 @@ Vue.component("item-search", {
     }
 });
 
-},{"services/TranslationService":117,"services/UrlService":118}],48:[function(require,module,exports){
+},{"services/TranslationService":118,"services/UrlService":119}],48:[function(require,module,exports){
 "use strict";
-
-var accounting = require("accounting");
 
 Vue.component("item-store-special", {
 
@@ -4627,12 +4625,12 @@ Vue.component("item-store-special", {
             // eslint-disable-next-line
             var percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value) * -100;
 
-            return accounting.formatNumber(percent, this.decimalCount, "");
+            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
         }
     }
 });
 
-},{"accounting":132}],49:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 "use strict";
 
 var _UrlService = require("services/UrlService");
@@ -4682,7 +4680,7 @@ Vue.component("items-per-page", {
     }
 });
 
-},{"services/UrlService":118}],50:[function(require,module,exports){
+},{"services/UrlService":119}],50:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4756,7 +4754,7 @@ Vue.component("pagination", {
     }
 });
 
-},{"services/UrlService":118}],51:[function(require,module,exports){
+},{"services/UrlService":119}],51:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4882,8 +4880,10 @@ Vue.component("item-filter-list", {
     }
 });
 
-},{"services/UrlService":118}],53:[function(require,module,exports){
+},{"services/UrlService":119}],53:[function(require,module,exports){
 "use strict";
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _UrlService = require("services/UrlService");
 
@@ -4919,11 +4919,15 @@ Vue.component("item-filter-price", {
     },
 
 
-    computed: {
+    computed: _extends({
         isDisabled: function isDisabled() {
-            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax);
+            return this.priceMin === "" && this.priceMax === "" || parseInt(this.priceMin) >= parseInt(this.priceMax) || this.isLoading;
         }
-    },
+    }, Vuex.mapState({
+        isLoading: function isLoading(state) {
+            return state.itemList.isLoading;
+        }
+    })),
 
     methods: {
         selectAll: function selectAll(event) {
@@ -4937,7 +4941,7 @@ Vue.component("item-filter-price", {
     }
 });
 
-},{"services/UrlService":118}],54:[function(require,module,exports){
+},{"services/UrlService":119}],54:[function(require,module,exports){
 "use strict";
 
 Vue.component("item-filter-tag-list", {
@@ -5065,7 +5069,7 @@ Vue.component("account-settings", {
 
 });
 
-},{"services/ApiService":111,"services/ModalService":115,"services/NotificationService":116,"services/TranslationService":117}],56:[function(require,module,exports){
+},{"services/ApiService":112,"services/ModalService":116,"services/NotificationService":117,"services/TranslationService":118}],56:[function(require,module,exports){
 "use strict";
 
 var _ValidationService = require("services/ValidationService");
@@ -5318,7 +5322,7 @@ Vue.component("bank-data-select", {
     }
 });
 
-},{"services/ApiService":111,"services/ModalService":115,"services/NotificationService":116,"services/TranslationService":117,"services/ValidationService":119}],57:[function(require,module,exports){
+},{"services/ApiService":112,"services/ModalService":116,"services/NotificationService":117,"services/TranslationService":118,"services/ValidationService":120}],57:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -5447,7 +5451,7 @@ Vue.component("change-payment-method", {
 
 });
 
-},{"services/ApiService":111,"services/ModalService":115,"services/TranslationService":117}],58:[function(require,module,exports){
+},{"services/ApiService":112,"services/ModalService":116,"services/TranslationService":118}],58:[function(require,module,exports){
 "use strict";
 
 Vue.component("history", {
@@ -5539,7 +5543,7 @@ Vue.component("order-history", {
     }
 });
 
-},{"services/ApiService":111,"services/TranslationService":117}],60:[function(require,module,exports){
+},{"services/ApiService":112,"services/TranslationService":118}],60:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -5597,7 +5601,7 @@ Vue.component("order-return-history", {
     }
 });
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117}],61:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118}],61:[function(require,module,exports){
 "use strict";
 
 var _TranslationService = require("services/TranslationService");
@@ -5675,7 +5679,7 @@ Vue.component("order-return-history-item", {
     }
 });
 
-},{"services/TranslationService":117}],62:[function(require,module,exports){
+},{"services/TranslationService":118}],62:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6016,7 +6020,7 @@ Vue.component("notifications", {
     }
 });
 
-},{"exceptions/ExceptionMap":87,"services/NotificationService":116,"services/TranslationService":117}],66:[function(require,module,exports){
+},{"exceptions/ExceptionMap":87,"services/NotificationService":117,"services/TranslationService":118}],66:[function(require,module,exports){
 "use strict";
 
 var _utils = require("../../helper/utils");
@@ -6121,7 +6125,7 @@ Vue.component("popper", {
     }
 });
 
-},{"../../helper/dom":105,"../../helper/utils":108,"popper.js":136,"services/ModalService":115}],67:[function(require,module,exports){
+},{"../../helper/dom":106,"../../helper/utils":109,"popper.js":136,"services/ModalService":116}],67:[function(require,module,exports){
 "use strict";
 
 Vue.component("shipping-country-select", {
@@ -6172,7 +6176,7 @@ Vue.component("shop-country-settings", {
     }
 });
 
-},{"services/ApiService":111}],69:[function(require,module,exports){
+},{"services/ApiService":112}],69:[function(require,module,exports){
 "use strict";
 
 var WaitScreenService = require("services/WaitScreenService");
@@ -6213,7 +6217,7 @@ Vue.component("wait-screen", {
     }
 });
 
-},{"services/WaitScreenService":120}],70:[function(require,module,exports){
+},{"services/WaitScreenService":121}],70:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6273,7 +6277,7 @@ Vue.component("wish-list", {
     }, Vuex.mapActions(["initWishListItems", "removeWishListItem"]))
 });
 
-},{"services/NotificationService":116,"services/TranslationService":117}],71:[function(require,module,exports){
+},{"services/NotificationService":117,"services/TranslationService":118}],71:[function(require,module,exports){
 "use strict";
 
 Vue.component("wish-list-count", {
@@ -6305,7 +6309,7 @@ Vue.directive("basket-item-quantity", {
     }
 });
 
-},{"../../helper/number":106}],73:[function(require,module,exports){
+},{"../../helper/number":107}],73:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
@@ -6357,7 +6361,7 @@ Vue.directive("logout", {
     }
 });
 
-},{"services/ApiService":111}],76:[function(require,module,exports){
+},{"services/ApiService":112}],76:[function(require,module,exports){
 "use strict";
 
 Vue.directive("waiting-animation", {
@@ -6543,7 +6547,7 @@ Vue.directive("render-category", {
     }
 });
 
-},{"store/index.js":121}],83:[function(require,module,exports){
+},{"store/index.js":122}],83:[function(require,module,exports){
 "use strict";
 
 Vue.directive("change-lang", {
@@ -6656,7 +6660,7 @@ Vue.directive("tooltip", {
     }
 });
 
-},{"../../helper/utils":108}],87:[function(require,module,exports){
+},{"../../helper/utils":109}],87:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6683,24 +6687,19 @@ Vue.filter("attachText", function (item, text) {
 },{}],90:[function(require,module,exports){
 "use strict";
 
-var accounting = require("accounting");
+var _MonetaryFormatter = require("../helper/MonetaryFormatter");
+
+var _MonetaryFormatter2 = _interopRequireDefault(_MonetaryFormatter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var formatter = new _MonetaryFormatter2.default();
 
 Vue.filter("currency", function (price) {
-    var currencyPattern = App.currencyPattern;
-
-    // (%v = value, %s = symbol)
-    var options = {
-        symbol: App.activeCurrency,
-        decimal: currencyPattern.separator_decimal,
-        thousand: currencyPattern.separator_thousands,
-        precision: 2,
-        format: currencyPattern.pattern.replace("¤", "%s").replace("#,##0.00", "%v")
-    };
-
-    return accounting.formatMoney(price, options);
+    return formatter.format(price, App.activeCurrency);
 });
 
-},{"accounting":132}],91:[function(require,module,exports){
+},{"../helper/MonetaryFormatter":104}],91:[function(require,module,exports){
 "use strict";
 
 // for docs see https://github.com/brockpetrie/vue-moment
@@ -7006,7 +7005,7 @@ Vue.filter("numberFormat", function (number, decimals, separator) {
     return number.toFixed(decimals).replace(".", separator);
 });
 
-},{"../helper/number":106,"../helper/utils":108}],100:[function(require,module,exports){
+},{"../helper/number":107,"../helper/utils":109}],100:[function(require,module,exports){
 "use strict";
 
 Vue.filter("propertySurcharge", function (properties, propertyId) {
@@ -7078,7 +7077,7 @@ Vue.filter("translate", function (value, params) {
     return _TranslationService2.default.translate(value, params);
 });
 
-},{"services/TranslationService":117}],103:[function(require,module,exports){
+},{"services/TranslationService":118}],103:[function(require,module,exports){
 "use strict";
 
 Vue.filter("truncate", function (string, value) {
@@ -7089,6 +7088,153 @@ Vue.filter("truncate", function (string, value) {
 });
 
 },{}],104:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _number = require("./number");
+
+var MonetaryFormatter = function () {
+    var T_DIGIT = 0;
+    var T_DECIMAL = 1;
+    var T_CURRENCY = 2;
+    var T_SIGN = 3;
+    var T_CHAR = 4;
+
+    function MonetaryFormatter() {
+        this.setPattern(App.currencyPattern.pattern);
+        this.separatorThousands = App.currencyPattern.separator_thousands;
+        this.separatorDecimals = App.currencyPattern.separator_decimal;
+        this.sign = "-";
+    }
+
+    function _parse(pattern) {
+        var parsed = [];
+
+        while (pattern.length > 0) {
+            if (pattern.indexOf("\xA4") === 0) {
+                parsed.push({
+                    type: T_CURRENCY
+                });
+                pattern = pattern.substr(1);
+            } else if (pattern.indexOf("#,##0") === 0) {
+                parsed.push({
+                    type: T_DIGIT
+                });
+                pattern = pattern.substr(5);
+            } else if (pattern.indexOf(".00") === 0) {
+                parsed.push({
+                    type: T_DECIMAL
+                });
+                pattern = pattern.substr(3);
+            } else if (pattern.indexOf("-") === 0) {
+                parsed.push({
+                    type: T_SIGN
+                });
+                pattern = pattern.substr(1);
+            } else {
+                parsed.push({
+                    type: T_CHAR,
+                    value: pattern.charAt(0)
+                });
+                pattern = pattern.substr(1);
+            }
+        }
+
+        return parsed;
+    }
+
+    MonetaryFormatter.prototype.setPattern = function (pattern) {
+        var _this = this;
+
+        this.pattern = [];
+        pattern.split(";").forEach(function (subpattern) {
+            _this.pattern.push(_parse(subpattern));
+        });
+    };
+
+    MonetaryFormatter.prototype.setSeparators = function (separatorThousands, separatorDecimals) {
+        this.separatorThousands = separatorThousands;
+        this.separatorDecimals = separatorDecimals;
+    };
+
+    MonetaryFormatter.prototype.setSign = function (sign) {
+        this.sign = sign;
+    };
+
+    MonetaryFormatter.prototype.format = function (value, currency) {
+        var _this2 = this;
+
+        var patternIndex = 0;
+        var prefix = "";
+
+        if (value < 0) {
+            if (this.pattern.length > 1) {
+                patternIndex = 1;
+            } else {
+                prefix = this.sign;
+            }
+        }
+
+        return prefix + this.pattern[patternIndex].map(function (partial, index, pattern) {
+            switch (partial.type) {
+                case T_DIGIT:
+                    {
+                        if (value < 0) {
+                            value *= -1;
+                        }
+                        // check if pattern include decimals to decide if digits should be rounded or not
+                        var roundDigits = !pattern.some(function (subpattern) {
+                            return subpattern.type === T_DECIMAL;
+                        });
+
+                        // cut decimal places instead of rounding
+                        // revert the value to insert thousands separators next
+                        var digits = (roundDigits ? Math.round(value * 100) / 100 : parseInt(value)).toFixed(0).split("").reverse().join("");
+
+                        // insert thousands separator
+                        for (var i = 3; i < digits.length; i += 4) {
+                            digits = digits.substr(0, i) + _this2.separatorThousands + digits.substr(i);
+                        }
+
+                        // revert back again
+                        digits = digits.split("").reverse().join("");
+
+                        return digits;
+                    }
+                case T_DECIMAL:
+                    {
+                        return _this2.separatorDecimals + (0, _number.toLength)((value * 100).toFixed(0).substr(-2, 2), 2);
+                    }
+                case T_CURRENCY:
+                    {
+                        return currency;
+                    }
+                case T_SIGN:
+                    {
+                        return _this2.sign;
+                    }
+                case T_CHAR:
+                    {
+                        return partial.value;
+                    }
+                default:
+                    {
+                        console.warn("Unkown pattern type: " + partial.type);
+                        return "";
+                    }
+            }
+        }).join("");
+    };
+
+    return MonetaryFormatter;
+}();
+
+exports.default = MonetaryFormatter;
+
+},{"./number":107}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7126,7 +7272,7 @@ function debounce(callback, timeout) {
     return callback;
 }
 
-},{"./utils":108}],105:[function(require,module,exports){
+},{"./utils":109}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7173,7 +7319,7 @@ function is(element, selector) {
     return element.matches(selector);
 }
 
-},{}],106:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7182,6 +7328,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.floatLength = floatLength;
 exports.limit = limit;
 exports.formatFloat = formatFloat;
+exports.toLength = toLength;
 
 var _utils = require("./utils");
 
@@ -7250,7 +7397,20 @@ function formatFloat(value, decimals, round) {
     return parseFloat(value.toFixed(decimals));
 }
 
-},{"./utils":108}],107:[function(require,module,exports){
+function toLength(value, length, suffix) {
+    value += "";
+    if ((0, _utils.isNullOrUndefined)(suffix)) {
+        suffix = "0";
+    }
+
+    while (value.length < length) {
+        value += suffix;
+    }
+
+    return value;
+}
+
+},{"./utils":109}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7291,7 +7451,7 @@ function capitalize(input) {
     return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
 }
 
-},{"./utils":108}],108:[function(require,module,exports){
+},{"./utils":109}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7365,7 +7525,7 @@ function defaultValue(input, defaultValue) {
     return input;
 }
 
-},{}],109:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 "use strict";
 
 var browserDetect = require("detect-browser");
@@ -7517,7 +7677,7 @@ var init = function ($, window, document) {
     window.CeresMain = new CeresMain();
 }(jQuery, window, document);
 
-},{"detect-browser":133}],110:[function(require,module,exports){
+},{"detect-browser":133}],111:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7584,7 +7744,7 @@ function isAddressFieldEnabled(countryId, addressType, field) {
 
 exports.default = { isAddressFieldEnabled: isAddressFieldEnabled };
 
-},{}],111:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 "use strict";
 
 var NotificationService = require("services/NotificationService");
@@ -7728,7 +7888,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{"services/NotificationService":116,"services/WaitScreenService":120}],112:[function(require,module,exports){
+},{"services/NotificationService":117,"services/WaitScreenService":121}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7856,7 +8016,7 @@ exports.default = {
     updateCategoryHtml: updateCategoryHtml
 };
 
-},{"services/ApiService":111,"store/index.js":121}],113:[function(require,module,exports){
+},{"services/ApiService":112,"store/index.js":122}],114:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -7913,7 +8073,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],114:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7953,7 +8113,7 @@ exports.default = {
     updateItemListUrlParams: updateItemListUrlParams
 };
 
-},{"services/UrlService":118}],115:[function(require,module,exports){
+},{"services/UrlService":119}],116:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -8073,7 +8233,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],116:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 "use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -8240,7 +8400,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],117:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8359,7 +8519,7 @@ var TranslationService = function ($) {
 
 exports.default = TranslationService;
 
-},{"../helper/strings":107,"../helper/utils":108}],118:[function(require,module,exports){
+},{"../helper/strings":108,"../helper/utils":109}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8425,7 +8585,7 @@ function setUrlParam(key, value) {
 
 exports.default = { setUrlParam: setUrlParam, setUrlParams: setUrlParams, getUrlParams: getUrlParams };
 
-},{"jquery":134}],119:[function(require,module,exports){
+},{"jquery":134}],120:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8660,7 +8820,7 @@ function _eval(input) {
 
 exports.default = { validate: validate, getInvalidFields: getInvalidFields, markInvalidFields: markInvalidFields, markFailedValidationFields: markFailedValidationFields, unmarkAllFields: unmarkAllFields };
 
-},{"jquery":134}],120:[function(require,module,exports){
+},{"jquery":134}],121:[function(require,module,exports){
 "use strict";
 
 module.exports = function ($) {
@@ -8703,7 +8863,7 @@ module.exports = function ($) {
     }
 }(jQuery);
 
-},{}],121:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8774,7 +8934,7 @@ window.ceresStore = store;
 
 exports.default = store;
 
-},{"store/modules/AddressModule":122,"store/modules/BasketModule":123,"store/modules/CheckoutModule":124,"store/modules/ItemListModule":125,"store/modules/LocalizationModule":126,"store/modules/NavigationModule":127,"store/modules/OrderReturnModule":128,"store/modules/SingleItemModule":129,"store/modules/UserModule":130,"store/modules/WishListModule":131,"vue-script2":141}],122:[function(require,module,exports){
+},{"store/modules/AddressModule":123,"store/modules/BasketModule":124,"store/modules/CheckoutModule":125,"store/modules/ItemListModule":126,"store/modules/LocalizationModule":127,"store/modules/NavigationModule":128,"store/modules/OrderReturnModule":129,"store/modules/SingleItemModule":130,"store/modules/UserModule":131,"store/modules/WishListModule":132,"vue-script2":141}],123:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9079,7 +9239,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":111}],123:[function(require,module,exports){
+},{"services/ApiService":112}],124:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9306,7 +9466,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":111,"services/NotificationService":116,"services/TranslationService":117}],124:[function(require,module,exports){
+},{"services/ApiService":112,"services/NotificationService":117,"services/TranslationService":118}],125:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9462,7 +9622,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":111}],125:[function(require,module,exports){
+},{"services/ApiService":112}],126:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9746,7 +9906,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":111,"services/ItemListUrlService":114,"services/TranslationService":117}],126:[function(require,module,exports){
+},{"services/ApiService":112,"services/ItemListUrlService":115,"services/TranslationService":118}],127:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9809,7 +9969,7 @@ exports.default = {
     actions: actions
 };
 
-},{"services/ApiService":111}],127:[function(require,module,exports){
+},{"services/ApiService":112}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9983,7 +10143,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/CategoryService":112}],128:[function(require,module,exports){
+},{"services/CategoryService":113}],129:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10081,7 +10241,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":111}],129:[function(require,module,exports){
+},{"services/ApiService":112}],130:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10354,7 +10514,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],130:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10397,7 +10557,7 @@ exports.default = {
     getters: getters
 };
 
-},{}],131:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10509,422 +10669,7 @@ exports.default = {
     getters: getters
 };
 
-},{"services/ApiService":111}],132:[function(require,module,exports){
-/*!
- * accounting.js v0.4.1
- * Copyright 2014 Open Exchange Rates
- *
- * Freely distributable under the MIT license.
- * Portions of accounting.js are inspired or borrowed from underscore.js
- *
- * Full details and documentation:
- * http://openexchangerates.github.io/accounting.js/
- */
-
-(function(root, undefined) {
-
-	/* --- Setup --- */
-
-	// Create the local library object, to be exported or referenced globally later
-	var lib = {};
-
-	// Current version
-	lib.version = '0.4.1';
-
-
-	/* --- Exposed settings --- */
-
-	// The library's settings configuration object. Contains default parameters for
-	// currency and number formatting
-	lib.settings = {
-		currency: {
-			symbol : "$",		// default currency symbol is '$'
-			format : "%s%v",	// controls output: %s = symbol, %v = value (can be object, see docs)
-			decimal : ".",		// decimal point separator
-			thousand : ",",		// thousands separator
-			precision : 2,		// decimal places
-			grouping : 3		// digit grouping (not implemented yet)
-		},
-		number: {
-			precision : 0,		// default precision on numbers is 0
-			grouping : 3,		// digit grouping (not implemented yet)
-			thousand : ",",
-			decimal : "."
-		}
-	};
-
-
-	/* --- Internal Helper Methods --- */
-
-	// Store reference to possibly-available ECMAScript 5 methods for later
-	var nativeMap = Array.prototype.map,
-		nativeIsArray = Array.isArray,
-		toString = Object.prototype.toString;
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js
-	 */
-	function isString(obj) {
-		return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
-	}
-
-	/**
-	 * Tests whether supplied parameter is a string
-	 * from underscore.js, delegates to ECMA5's native Array.isArray
-	 */
-	function isArray(obj) {
-		return nativeIsArray ? nativeIsArray(obj) : toString.call(obj) === '[object Array]';
-	}
-
-	/**
-	 * Tests whether supplied parameter is a true object
-	 */
-	function isObject(obj) {
-		return obj && toString.call(obj) === '[object Object]';
-	}
-
-	/**
-	 * Extends an object with a defaults object, similar to underscore's _.defaults
-	 *
-	 * Used for abstracting parameter handling from API methods
-	 */
-	function defaults(object, defs) {
-		var key;
-		object = object || {};
-		defs = defs || {};
-		// Iterate over object non-prototype properties:
-		for (key in defs) {
-			if (defs.hasOwnProperty(key)) {
-				// Replace values with defaults only if undefined (allow empty/zero values):
-				if (object[key] == null) object[key] = defs[key];
-			}
-		}
-		return object;
-	}
-
-	/**
-	 * Implementation of `Array.map()` for iteration loops
-	 *
-	 * Returns a new Array as a result of calling `iterator` on each array value.
-	 * Defers to native Array.map if available
-	 */
-	function map(obj, iterator, context) {
-		var results = [], i, j;
-
-		if (!obj) return results;
-
-		// Use native .map method if it exists:
-		if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
-
-		// Fallback for native .map:
-		for (i = 0, j = obj.length; i < j; i++ ) {
-			results[i] = iterator.call(context, obj[i], i, obj);
-		}
-		return results;
-	}
-
-	/**
-	 * Check and normalise the value of precision (must be positive integer)
-	 */
-	function checkPrecision(val, base) {
-		val = Math.round(Math.abs(val));
-		return isNaN(val)? base : val;
-	}
-
-
-	/**
-	 * Parses a format string or object and returns format obj for use in rendering
-	 *
-	 * `format` is either a string with the default (positive) format, or object
-	 * containing `pos` (required), `neg` and `zero` values (or a function returning
-	 * either a string or object)
-	 *
-	 * Either string or format.pos must contain "%v" (value) to be valid
-	 */
-	function checkCurrencyFormat(format) {
-		var defaults = lib.settings.currency.format;
-
-		// Allow function as format parameter (should return string or object):
-		if ( typeof format === "function" ) format = format();
-
-		// Format can be a string, in which case `value` ("%v") must be present:
-		if ( isString( format ) && format.match("%v") ) {
-
-			// Create and return positive, negative and zero formats:
-			return {
-				pos : format,
-				neg : format.replace("-", "").replace("%v", "-%v"),
-				zero : format
-			};
-
-		// If no format, or object is missing valid positive value, use defaults:
-		} else if ( !format || !format.pos || !format.pos.match("%v") ) {
-
-			// If defaults is a string, casts it to an object for faster checking next time:
-			return ( !isString( defaults ) ) ? defaults : lib.settings.currency.format = {
-				pos : defaults,
-				neg : defaults.replace("%v", "-%v"),
-				zero : defaults
-			};
-
-		}
-		// Otherwise, assume format was fine:
-		return format;
-	}
-
-
-	/* --- API Methods --- */
-
-	/**
-	 * Takes a string/array of strings, removes all formatting/cruft and returns the raw float value
-	 * Alias: `accounting.parse(string)`
-	 *
-	 * Decimal must be included in the regular expression to match floats (defaults to
-	 * accounting.settings.number.decimal), so if the number uses a non-standard decimal 
-	 * separator, provide it as the second argument.
-	 *
-	 * Also matches bracketed negatives (eg. "$ (1.99)" => -1.99)
-	 *
-	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
-	 */
-	var unformat = lib.unformat = lib.parse = function(value, decimal) {
-		// Recursively unformat arrays:
-		if (isArray(value)) {
-			return map(value, function(val) {
-				return unformat(val, decimal);
-			});
-		}
-
-		// Fails silently (need decent errors):
-		value = value || 0;
-
-		// Return the value as-is if it's already a number:
-		if (typeof value === "number") return value;
-
-		// Default decimal point comes from settings, but could be set to eg. "," in opts:
-		decimal = decimal || lib.settings.number.decimal;
-
-		 // Build regex to strip out everything except digits, decimal point and minus sign:
-		var regex = new RegExp("[^0-9-" + decimal + "]", ["g"]),
-			unformatted = parseFloat(
-				("" + value)
-				.replace(/\((.*)\)/, "-$1") // replace bracketed values with negatives
-				.replace(regex, '')         // strip out any cruft
-				.replace(decimal, '.')      // make sure decimal point is standard
-			);
-
-		// This will fail silently which may cause trouble, let's wait and see:
-		return !isNaN(unformatted) ? unformatted : 0;
-	};
-
-
-	/**
-	 * Implementation of toFixed() that treats floats more like decimals
-	 *
-	 * Fixes binary rounding issues (eg. (0.615).toFixed(2) === "0.61") that present
-	 * problems for accounting- and finance-related software.
-	 */
-	var toFixed = lib.toFixed = function(value, precision) {
-		precision = checkPrecision(precision, lib.settings.number.precision);
-		var power = Math.pow(10, precision);
-
-		// Multiply up by precision, round accurately, then divide and use native toFixed():
-		return (Math.round(lib.unformat(value) * power) / power).toFixed(precision);
-	};
-
-
-	/**
-	 * Format a number, with comma-separated thousands and custom precision/decimal places
-	 * Alias: `accounting.format()`
-	 *
-	 * Localise by overriding the precision and thousand / decimal separators
-	 * 2nd parameter `precision` can be an object matching `settings.number`
-	 */
-	var formatNumber = lib.formatNumber = lib.format = function(number, precision, thousand, decimal) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val) {
-				return formatNumber(val, precision, thousand, decimal);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(precision) ? precision : {
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal
-				}),
-				lib.settings.number
-			),
-
-			// Clean up precision
-			usePrecision = checkPrecision(opts.precision),
-
-			// Do some calc:
-			negative = number < 0 ? "-" : "",
-			base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + "",
-			mod = base.length > 3 ? base.length % 3 : 0;
-
-		// Format the number:
-		return negative + (mod ? base.substr(0, mod) + opts.thousand : "") + base.substr(mod).replace(/(\d{3})(?=\d)/g, "$1" + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : "");
-	};
-
-
-	/**
-	 * Format a number into currency
-	 *
-	 * Usage: accounting.formatMoney(number, symbol, precision, thousandsSep, decimalSep, format)
-	 * defaults: (0, "$", 2, ",", ".", "%s%v")
-	 *
-	 * Localise by overriding the symbol, precision, thousand / decimal separators and format
-	 * Second param can be an object matching `settings.currency` which is the easiest way.
-	 *
-	 * To do: tidy up the parameters
-	 */
-	var formatMoney = lib.formatMoney = function(number, symbol, precision, thousand, decimal, format) {
-		// Resursively format arrays:
-		if (isArray(number)) {
-			return map(number, function(val){
-				return formatMoney(val, symbol, precision, thousand, decimal, format);
-			});
-		}
-
-		// Clean up number:
-		number = unformat(number);
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero):
-			formats = checkCurrencyFormat(opts.format),
-
-			// Choose which format to use for this value:
-			useFormat = number > 0 ? formats.pos : number < 0 ? formats.neg : formats.zero;
-
-		// Return with currency symbol added:
-		return useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(number), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-	};
-
-
-	/**
-	 * Format a list of numbers into an accounting column, padding with whitespace
-	 * to line up currency symbols, thousand separators and decimals places
-	 *
-	 * List should be an array of numbers
-	 * Second parameter can be an object containing keys that match the params
-	 *
-	 * Returns array of accouting-formatted number strings of same length
-	 *
-	 * NB: `white-space:pre` CSS rule is required on the list container to prevent
-	 * browsers from collapsing the whitespace in the output strings.
-	 */
-	lib.formatColumn = function(list, symbol, precision, thousand, decimal, format) {
-		if (!list) return [];
-
-		// Build options object from second param (if object) or all params, extending defaults:
-		var opts = defaults(
-				(isObject(symbol) ? symbol : {
-					symbol : symbol,
-					precision : precision,
-					thousand : thousand,
-					decimal : decimal,
-					format : format
-				}),
-				lib.settings.currency
-			),
-
-			// Check format (returns object with pos, neg and zero), only need pos for now:
-			formats = checkCurrencyFormat(opts.format),
-
-			// Whether to pad at start of string or after currency symbol:
-			padAfterSymbol = formats.pos.indexOf("%s") < formats.pos.indexOf("%v") ? true : false,
-
-			// Store value for the length of the longest string in the column:
-			maxLength = 0,
-
-			// Format the list according to options, store the length of the longest string:
-			formatted = map(list, function(val, i) {
-				if (isArray(val)) {
-					// Recursively format columns if list is a multi-dimensional array:
-					return lib.formatColumn(val, opts);
-				} else {
-					// Clean up the value
-					val = unformat(val);
-
-					// Choose which format to use for this value (pos, neg or zero):
-					var useFormat = val > 0 ? formats.pos : val < 0 ? formats.neg : formats.zero,
-
-						// Format this value, push into formatted list and save the length:
-						fVal = useFormat.replace('%s', opts.symbol).replace('%v', formatNumber(Math.abs(val), checkPrecision(opts.precision), opts.thousand, opts.decimal));
-
-					if (fVal.length > maxLength) maxLength = fVal.length;
-					return fVal;
-				}
-			});
-
-		// Pad each number in the list and send back the column of numbers:
-		return map(formatted, function(val, i) {
-			// Only if this is a string (not a nested array, which would have already been padded):
-			if (isString(val) && val.length < maxLength) {
-				// Depending on symbol position, pad after symbol or at index 0:
-				return padAfterSymbol ? val.replace(opts.symbol, opts.symbol+(new Array(maxLength - val.length + 1).join(" "))) : (new Array(maxLength - val.length + 1).join(" ")) + val;
-			}
-			return val;
-		});
-	};
-
-
-	/* --- Module Definition --- */
-
-	// Export accounting for CommonJS. If being loaded as an AMD module, define it as such.
-	// Otherwise, just add `accounting` to the global object
-	if (typeof exports !== 'undefined') {
-		if (typeof module !== 'undefined' && module.exports) {
-			exports = module.exports = lib;
-		}
-		exports.accounting = lib;
-	} else if (typeof define === 'function' && define.amd) {
-		// Return the library as an AMD module:
-		define([], function() {
-			return lib;
-		});
-	} else {
-		// Use accounting.noConflict to restore `accounting` back to its original value.
-		// Returns a reference to the library's `accounting` object;
-		// e.g. `var numbers = accounting.noConflict();`
-		lib.noConflict = (function(oldAccounting) {
-			return function() {
-				// Reset the value of the root's `accounting` variable:
-				root.accounting = oldAccounting;
-				// Delete the noConflict method:
-				lib.noConflict = undefined;
-				// Return reference to the library to re-assign it:
-				return lib;
-			};
-		})(root.accounting);
-
-		// Declare `fx` on the root (global/window) object:
-		root['accounting'] = lib;
-	}
-
-	// Root will be `window` in browser or `global` on the server:
-}(this));
-
-},{}],133:[function(require,module,exports){
+},{"services/ApiService":112}],133:[function(require,module,exports){
 (function (process){
 /**
   # detect-browser
@@ -24996,7 +24741,7 @@ function hasOwnProperty(obj, prop) {
   return Script2;
 
 }));
-},{}]},{},[109,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,28,29,30,31,25,26,27,32,33,34,35,36,37,38,39,40,41,42,43,51,52,53,54,44,45,46,47,49,48,50,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,121,122,123,124,125,126,127,128,129,130,131])
+},{}]},{},[110,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,28,29,30,31,25,26,27,32,33,34,35,36,37,38,39,40,41,42,43,51,52,53,54,44,45,46,47,49,48,50,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,105,106,104,107,108,109,122,123,124,125,126,127,128,129,130,131,132])
 
 
 //# sourceMappingURL=ceres-app.js.map
