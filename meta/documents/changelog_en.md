@@ -23,6 +23,7 @@
 - Due to an error a purchase via Paypal redirected to a 404 page instead of the order confirmation page. This has been fixed.
 - The shopping cart now considers the position of item images and displays the image with the lowest position number.
 - The item view of items with a specified order property used to display the surcharge of the property. Now, the item is checked for separate surcharges that can be configured for the item. If such a surcharge is configured, this surcharge is displayed instead.
+- Under certain circumstances some script and style tags could be inserted more then once 
 
 ## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Overview of all changes</b></a>
 
