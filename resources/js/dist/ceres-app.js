@@ -17706,8 +17706,11 @@ Vue.component("quantity-input", {
 
         this.$options.template = this.template;
 
-        this.compDecimals = (0, _number.floatLength)((0, _utils.defaultValue)(this.compInterval, 0));
         this.compInterval = (0, _utils.defaultValue)(this.compInterval, 1);
+        this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
+
+        this.compDecimals = (0, _number.floatLength)(this.compInterval);
+
         this.onValueChanged = (0, _debounce.debounce)(function () {
             _this.$emit("quantity-change", _this.compValue);
         }, (0, _utils.defaultValue)(this.timeout, 500));
