@@ -1,5 +1,40 @@
 # Release Notes für Ceres
 
+## v2.7.0 (2018-04-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.6.0...2.7.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Bei Artikeln ohne Bilder wird jetzt das konfigurierte Platzhalter-Bild im Webshop dargestellt.
+- Der Tab "Design" und dessen zugehörige Einstellungen wurden zur Ceres Konfiguration hinzugefügt.
+- Bestellmerkmale vom Typ Datei können jetzt verarbeitet werden.
+- Eine Checkbox wurde zur Kontaktseite hinzugefügt, durch die der Nutzer das Lesen der Datenschutzerklärung bestätigen muss.
+- Es wurde ein neuer Wert in der Konfiguration hinzugefügt, mit der die Checkbox für das Zustimmen der Datenschutzerklärung aktiviert oder deaktiviert wird.
+- Auf der Kontaktseite wird dem Nutzer nun eine Fehlermeldung angezeigt, wenn dieser versucht das Formular abzuschicken, ohne dass alle Pflichtfelder ausgefüllt sind.
+
+### Geändert
+
+- Bilder in der Artikelbeschreibung verhalten sich jetzt responsive und brechen nicht mehr aus dem Layout der Seite aus.
+- Die Meldung "Vue.js konnte nicht initialisiert werden" wird nun als span-Element und nicht mehr als h1-Überschrift angezeigt.
+- In der Auswahl für Staaten und Bundesländer steht nun standardmäßig "Bitte wählen".
+- Die Kontaktdaten vom Kunden im System sind nun mit der ersten angelegten Rechnungsadresse synchronisiert.
+- Auf der Kontaktseite wurde ein Hinweis hinzufügt, dass Pflichtfelder durch "*" markiert sind.
+- Die Kontaktseite wurde überarbeitet und hat nun das selbe optische Erscheinungsbild wie die restlichen Seiten.
+
+### Behoben
+
+- Durch einen Fehler haben die Buttons der Mengeneingabe in der Artikeleinzelansicht die Anzahl nicht mehr hoch- und runtergerechnet wenn das Bestellintervall des Artikels 0 war. Dies wurde behoben.
+- Durch einen Fehler hat die Konfiguration für die Positionierung der Pagination nicht funktioniert. Dies wurde behoben.
+- In der Bestellbestätigung wurde die aktuelle Zahlungsart nicht initial im Overlay angezeigt. Dies wurde behoben.
+- Durch einen Fehler funktionierte die Touch-Navigation nicht richtig, wenn keine Unterkategorien vorhanden waren. Dies wurde behoben.
+- Durch einen Fehler wurde die Anrede nicht korrekt gespeichert. Dies wurde behoben.
+- Unter Umständen wurden bestimmte Script- und Style-Tags mehr als einmal gerendert. Dies wurde behoben.
+- Durch einen Fehler wurden Meta-Informationen für Shop-Aktionen in der Artikeleinzelansicht nicht korrekt ausgegeben. Dies wurde behoben.
+- Durch einen Fehler wurden Preisangaben in einigen Sprachen nicht korrekt formatiert. Dies wurde behoben.
+- Ein überflüssiges Umwandeln in das json-Format sorgte dafür, dass in Kategorien vom Typ **Content** die *Umlaute* in Meta-Informationen falsch dargestellt wurden. Dies wurde behoben.
+- Wenn ein Nutzer eine Adresse löscht oder editiert, wird die vom Server selektierte Adresse nun in der Benutzeroberfläche als ausgewählte Adresse angezeigt.
+- Die im System hinterlegten Kontaktdaten beinhalten nun das in der ersten Rechnungsadresse angegebene Geburtsdatum.
+
+
 ## v2.6.0 (2018-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.2...2.6.0" target="_blank"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
