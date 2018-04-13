@@ -22202,12 +22202,17 @@ module.exports = function ($) {
         config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
+        config.keepOriginalResponse = !!config.keepOriginalResponse;
 
         if (!config.doInBackground) {
             WaitScreenService.showWaitScreen();
         }
         $.ajax(url, config).done(function (response) {
-            deferred.resolve(response.data || response);
+            if (config.keepOriginalResponse) {
+                deferred.resolve(response);
+            } else {
+                deferred.resolve(response.data || response);
+            }
         }).fail(function (jqXHR) {
             var response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
@@ -23337,6 +23342,18 @@ var mutations = {
             state.billingAddress = billingAddress;
         }
     },
+    selectBillingAddressById: function selectBillingAddressById(state, billingAddressId) {
+        if (billingAddressId) {
+            var billingAddress = state.billingAddressList.find(function (address) {
+                return address.id === billingAddressId;
+            });
+
+            if (billingAddress) {
+                state.billingAddressId = billingAddress.id;
+                state.billingAddress = billingAddress;
+            }
+        }
+    },
     setDeliveryAddressList: function setDeliveryAddressList(state, deliveryAddressList) {
         if (Array.isArray(deliveryAddressList)) {
             state.deliveryAddressList = deliveryAddressList;
@@ -23519,7 +23536,13 @@ var actions = {
                 commit("removeDeliveryAddress", address);
             }
 
-            _ApiService2.default.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType).done(function (response) {
+            _ApiService2.default.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, { keepOriginalResponse: true }).done(function (response) {
+                if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+                    var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                    commit("selectBillingAddressById", billingAddressId);
+                }
+
                 resolve(response);
             }).fail(function (error) {
                 if (addressType === "1") {
@@ -23556,9 +23579,15 @@ var actions = {
             addressType = _ref14.addressType;
 
         return new Promise(function (resolve, reject) {
-            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true }).done(function (response) {
+            _ApiService2.default.post("/rest/io/customer/address?typeId=" + addressType, address, { supressNotifications: true, keepOriginalResponse: true }).done(function (response) {
                 if (addressType === "1") {
                     commit("updateBillingAddress", address);
+
+                    if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+                        var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                        commit("selectBillingAddressById", billingAddressId);
+                    }
                 } else if (addressType === "2") {
                     commit("updateDeliveryAddress", address);
                 }
