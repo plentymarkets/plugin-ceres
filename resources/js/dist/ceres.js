@@ -15731,6 +15731,7 @@ Vue.component("address-select", {
             headline: "",
             addressToEdit: {
                 addressSalutation: 0,
+                gender: "male",
                 countryId: this.shippingCountryId
             },
             addressToDelete: {},
@@ -15837,6 +15838,7 @@ Vue.component("address-select", {
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId: this.shippingCountryId
                 };
             } else {
@@ -15857,6 +15859,7 @@ Vue.component("address-select", {
             if (AddressFieldService.isAddressFieldEnabled(this.addressToEdit.countryId, this.addressType, "salutation")) {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId: this.shippingCountryId
                 };
             } else {
@@ -15877,8 +15880,13 @@ Vue.component("address-select", {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
 
-            if (typeof this.addressToEdit.addressSalutation === "undefined") {
+            if (this.addressToEdit.gender === "female") {
+                this.addressToEdit.addressSalutation = 1;
+            } else if ((0, _utils.isNull)(this.addressToEdit.gender) && this.addressToEdit.name1) {
+                this.addressToEdit.addressSalutation = 2;
+            } else {
                 this.addressToEdit.addressSalutation = 0;
+                this.addressToEdit.gender = "male";
             }
 
             this.updateHeadline();
@@ -16413,7 +16421,8 @@ Vue.component("contact-form", {
             cc: false,
             waiting: false,
             privacyPolicyAccepted: false,
-            privacyPolicyShowError: false
+            privacyPolicyShowError: false,
+            enableConfirmingPrivacyPolicy: App.config.contact.enableConfirmingPrivacyPolicy
         };
     },
     created: function created() {
@@ -16428,7 +16437,7 @@ Vue.component("contact-form", {
             var _this = this;
 
             _ValidationService2.default.validate($("#contact-form")).done(function () {
-                if (_this.privacyPolicyAccepted) {
+                if (!_this.enableConfirmingPrivacyPolicy || _this.privacyPolicyAccepted) {
                     if (useCapture) {
                         grecaptcha.execute();
                     } else {
@@ -16442,7 +16451,7 @@ Vue.component("contact-form", {
             }).fail(function (invalidFields) {
                 _ValidationService2.default.markInvalidFields(invalidFields, "error");
 
-                if (!_this.privacyPolicyAccepted) {
+                if (_this.enableConfirmingPrivacyPolicy && !_this.privacyPolicyAccepted) {
                     _this.privacyPolicyShowError = true;
                 }
 
@@ -16967,9 +16976,6 @@ Vue.component("salutation-select", {
                     }, {
                         value: "Firma",
                         id: 2
-                    }, {
-                        value: "Familie",
-                        id: 3
                     }],
                     en: [{
                         value: "Mr.",
@@ -16980,9 +16986,6 @@ Vue.component("salutation-select", {
                     }, {
                         value: "Company",
                         id: 2
-                    }, {
-                        value: "Family",
-                        id: 3
                     }]
                 },
                 withoutCompany: {
@@ -16992,9 +16995,6 @@ Vue.component("salutation-select", {
                     }, {
                         value: "Frau",
                         id: 1
-                    }, {
-                        value: "Familie",
-                        id: 3
                     }],
                     en: [{
                         value: "Mr.",
@@ -17002,9 +17002,6 @@ Vue.component("salutation-select", {
                     }, {
                         value: "Ms.",
                         id: 1
-                    }, {
-                        value: "Family",
-                        id: 3
                     }]
                 }
             },
@@ -17035,11 +17032,27 @@ Vue.component("salutation-select", {
 
     methods: {
         emitInputEvent: function emitInputEvent(value) {
-            this.$emit("input", { field: "addressSalutation", value: value });
+            var gender = this.mapSalutationIdToGender(value);
 
-            if (this.addressData.addressSalutation !== 2 && typeof this.addressData.name1 !== "undefined" && this.addressData.name1 !== "") {
-                this.$emit("input", { field: "name1", value: "" });
+            this.$emit("input", { field: "gender", value: gender });
+            this.$emit("input", { field: "addressSalutation", value: value });
+            this.$emit("input", { field: "name1", value: "" });
+        },
+        mapSalutationIdToGender: function mapSalutationIdToGender(id) {
+            if (id === 0) {
+                return "male";
+            } else if (id === 1) {
+                return "female";
             }
+            return null;
+        },
+        checkGenderCompany: function checkGenderCompany(id) {
+            if (id === 2) {
+                var gender = this.mapSalutationIdToGender(id);
+
+                return gender === null && this.addressData.name1 !== null || gender === null && this.addressData.name1 !== "";
+            }
+            return true;
         }
     }
 });
