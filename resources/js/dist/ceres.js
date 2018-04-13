@@ -20895,7 +20895,7 @@ Vue.directive("render-category", {
 
                 // check if touch device and change the ui handling
                 if (document.body.classList.contains("touch")) {
-                    if (openCategory && openCategory.contains(event.target) || binding.value.isMobileNavigation) {
+                    if (openCategory && openCategory.contains(event.target) || binding.value.isMobileNavigation || binding.value.hasNoChilds) {
                         window.open(url, "_self");
                     }
                 } else {
@@ -20905,7 +20905,7 @@ Vue.directive("render-category", {
             // check if user click the opened category and change the ui handling
             else if (openCategory && openCategory.contains(event.target)) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
-                } else if (document.body.classList.contains("no-touch") || binding.value.isMobileNavigation) {
+                } else if (document.body.classList.contains("no-touch") || binding.value.isMobileNavigation || binding.value.hasNoChilds) {
                     _index2.default.dispatch("selectCategory", { categoryId: parseInt(el.dataset.categoryId) });
                 }
         };
