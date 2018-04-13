@@ -1,79 +1,115 @@
-window.addEventListener("message", function(event)
+(function($)
 {
-    if(event.data.name == "sassy-compile")
+    var sass            = new Sass();
+    var sassContents    = null;
+    var loadingProgress = null;
+
+    function loadSassContent()
     {
-        var sass = new Sass();
-
-        // HTTP requests are made relative to worker
-        var base = "../../../css/";
-
-        // the directory files should be made available in
-        var directory = '';
-
-        // the files to load (relative to both base and directory)
-        var files = [
-            "ceres.scss"
-        ];
-
-        var rootPath = "..";
-
-        if(document.getElementById("ceres-css").href)
+        if (loadingProgress === null)
         {
-            rootPath = document.getElementById("ceres-css").href.split("/");
+            var promises = [];
+            var paths = [];
 
-            while( rootPath.pop() !== 'resources' )
+            $("link[data-sass-original]").each(function(i, element)
             {
-                if ( rootPath.length <= 0 )
+                paths.push($(element).attr("data-sass-original"));
+            });
+
+            paths.forEach(function(path)
+            {
+                var promise = $.get(path).done(function(sassContent)
+                {
+                    sassContents = sassContents || {};
+                    sassContents[path] = sassContent;
+                });
+
+                promises.push(promise);
+            });
+
+            loadingProgress = $.when.apply($, promises);
+        }
+        return loadingProgress;
+    }
+
+    function compileSass(prefix)
+    {
+        var promises = [];
+
+        Object.keys(sassContents).forEach(function(path)
+        {
+            var sassContent = sassContents[path];
+            var promise = $.Deferred();
+
+            var rootPath = path.split("/");
+
+            while (rootPath.pop() !== "resources")
+            {
+                if (rootPath.length <= 0)
                 {
                     break;
                 }
             }
 
-            rootPath = rootPath.join("/") + '/resources';
-        }
+            rootPath = rootPath.join("/") + "/resources";
 
-        function manipulateVars(content)
+            prefix += "$root-directory: \"" + rootPath + "\";";
+
+            sass.compile(prefix + sassContent, function(result)
+            {
+                replaceCSS(path, result);
+                promise.resolve();
+            });
+
+            promises.push(promise);
+        });
+
+        return $.when.apply($, promises);
+    }
+
+    function replaceCSS(sassPath, compiledCss)
+    {
+        var head = document.head || document.getElementsByTagName("head")[0];
+
+        $("[data-sass-original=\"" + sassPath + "\"]").each(function(i, element)
         {
-            return event.data.data.join(" ") + '$root-directory: "' + rootPath + '";' + content;
-        }
+            $(element).remove();
 
-        function replaceCss(compiled)
-        {
-            var cssNode = document.getElementById("ceres-css");
-            document.getElementById("ceres-css").parentNode.removeChild(cssNode);
-
-            var head = document.head || document.getElementsByTagName("head")[0];
             var style = document.createElement("style");
 
             style.type = "text/css";
-            style.id = "ceres-css";
-            style.href = rootPath;
+            style.dataset.sassOriginal = sassPath;
 
             if (style.styleSheet)
             {
-                style.styleSheet.cssText = compiled.text;
+                style.styleSheet.cssText = compiledCss.text;
             }
             else
             {
-                style.appendChild(document.createTextNode(compiled.text));
+                style.appendChild(document.createTextNode(compiledCss.text));
             }
 
             head.appendChild(style);
-        }
-
-        // download the files immediately
-        sass.preloadFiles(base, directory, files, function() {
-            document.getElementsByClassName("css-loading")[0].classList.remove("hidden");
-            showTerraLoadingOverlay(true);
-            sass.readFile("ceres.scss", function(read) {
-                sass.writeFile("ceres.scss", manipulateVars(read), function(write) {
-                    sass.compileFile("ceres.scss", function(compiled) {
-                        document.getElementsByClassName("css-loading")[0].classList.add("hidden");
-                        replaceCss(compiled);
-                        showTerraLoadingOverlay(false);
-                    });
-                });
-            });
         });
     }
-}, false);
+
+    showTerraLoadingOverlay(true);
+    loadSassContent();
+    window.addEventListener("message", function(event)
+    {
+        if (event.data.name === "sassy-compile")
+        {
+            loadSassContent()
+                .done(function()
+                {
+                    return compileSass(
+                        event.data.data.join(" ")
+                    );
+                })
+                .done(function()
+                {
+                    showTerraLoadingOverlay(false);
+                });
+        }
+    }, false);
+})(jQuery);
