@@ -21,7 +21,8 @@ Vue.component("contact-form", {
             cc                    : false,
             waiting               : false,
             privacyPolicyAccepted : false,
-            privacyPolicyShowError: false
+            privacyPolicyShowError: false,
+            enableConfirmingPrivacyPolicy: App.config.contact.enableConfirmingPrivacyPolicy
         };
     },
 
@@ -39,7 +40,7 @@ Vue.component("contact-form", {
             ValidationService.validate($("#contact-form"))
                 .done(() =>
                 {
-                    if (this.privacyPolicyAccepted)
+                    if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
                     {
                         if (useCapture)
                         {
@@ -63,7 +64,7 @@ Vue.component("contact-form", {
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
 
-                    if (!this.privacyPolicyAccepted)
+                    if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
                     {
                         this.privacyPolicyShowError = true;
                     }

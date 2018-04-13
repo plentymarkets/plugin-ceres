@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../../helper/utils";
+import {isNullOrUndefined, isNull}from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -25,6 +25,7 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {
                 addressSalutation: 0,
+                gender: "male",
                 countryId        : this.shippingCountryId
             },
             addressToDelete: {},
@@ -140,6 +141,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -163,6 +165,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -185,9 +188,18 @@ Vue.component("address-select", {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
 
-            if (typeof this.addressToEdit.addressSalutation === "undefined")
+            if (this.addressToEdit.gender === "female")
+            {
+                this.addressToEdit.addressSalutation = 1;
+            }
+            else if (isNull(this.addressToEdit.gender) && this.addressToEdit.name1)
+            {
+                this.addressToEdit.addressSalutation = 2;
+            }
+            else
             {
                 this.addressToEdit.addressSalutation = 0;
+                this.addressToEdit.gender = "male";
             }
 
             this.updateHeadline();
