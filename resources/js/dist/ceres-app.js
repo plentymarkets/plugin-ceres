@@ -15260,6 +15260,13 @@ Vue.component("accept-privacy-policy-check", {
 
     created: function created() {
         this.$options.template = this.template;
+    },
+
+
+    methods: {
+        onValueChanged: function onValueChanged(value) {
+            this.$emit("input", value);
+        }
     }
 });
 
@@ -16125,6 +16132,7 @@ Vue.component("contact-form", {
             this.message = "";
             this.orderId = "";
             this.cc = false;
+            this.privacyPolicyAccepted = false;
         },
         _handleValidationErrors: function _handleValidationErrors(validationErrors) {
             _ValidationService2.default.markFailedValidationFields($("#contact-form"), validationErrors);
