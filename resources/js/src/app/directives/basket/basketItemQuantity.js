@@ -6,6 +6,6 @@ Vue.directive("basket-item-quantity",
         {
             const decimals = floatLength(binding.value);
 
-            el.innerHTML = binding.value.toFixed(decimals).replace(".", App.decimalSeparator);
+            el.innerHTML = (binding.value || 0).toFixed(decimals).replace(".", App.decimalSeparator);
         }
     });

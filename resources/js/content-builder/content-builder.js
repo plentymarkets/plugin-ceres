@@ -112,7 +112,7 @@ function getWidgetOrder()
         var widgets = [];
 
         var container = {
-            identifier: jQuery(this).attr('data-builder-container'),
+            container: jQuery(this).attr('data-builder-container'),
             widgets: widgets
         };
 
