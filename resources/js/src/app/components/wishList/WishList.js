@@ -47,7 +47,7 @@ Vue.component("wish-list", {
         {
             this.removeWishListItem(item)
                 .then(() => NotificationService.success(
-                    TranslationService.translate("Ceres::Template.itemWishListRemoved")
+                    TranslationService.translate("Ceres::Template.wishListRemoved")
                 ));
         },
         ...Vuex.mapActions([

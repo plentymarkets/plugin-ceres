@@ -2,7 +2,7 @@
 
 {% block PartialHead %}
     <meta name="robots" content="NOINDEX, NOFOLLOW">
-    <title>{{ trans("Ceres::Template.accRegister") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.regRegister") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}   
@@ -12,20 +12,20 @@
         <div class="row m-b-3">
             <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                 <h1>
-                    {{ trans("Ceres::Template.accRegisterAccount") }}
+                    {{ trans("Ceres::Template.regRegisterAccount") }}
 
                      <popper v-cloak class="pull-right">
                         <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
                             <i class="fa fa-info"></i>
                         </button>
                         <div slot="title">
-                            {{ trans("Ceres::Template.generalContactInformations") }}
+                            {{ trans("Ceres::Template.regContactInformations") }}
                         </div>
                         <ul slot="content" class='p-l-1'>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
-                            <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
-                            <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                            <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                            <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
                         </ul>
                     </popper>
                 </h1>

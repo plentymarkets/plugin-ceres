@@ -136,7 +136,7 @@ Vue.component("item-image-carousel", {
                     }
                     // owl prepends 2 clones to allow endless scrolling
                     current = (current % imageCount) + 1;
-                    return TranslationService.translate("Ceres::Template.itemImagePreviewCaption", {current: current, total: imageCount});
+                    return TranslationService.translate("Ceres::Template.singleItemImagePreviewCaption", {current: current, total: imageCount});
                 };
 
                 const originalFn = window.lightbox.changeImage;

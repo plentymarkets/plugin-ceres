@@ -115,7 +115,7 @@
 
                     <div class="currency-list col-xs-12">
                         <div class="list-title">
-                            <strong>{{ trans("Ceres::Template.currency") }}</strong>
+                            <strong>{{ trans("Ceres::Template.headerCurrency") }}</strong>
                             <hr>
                         </div>
                         <ul>
@@ -145,7 +145,7 @@
 
                             <div class="language-settings">
                                 <div class="list-title">
-                                    <strong>{{ trans("Ceres::Template.generalSelectLanguage") }}</strong>
+                                    <strong>{{ trans("Ceres::Template.headerSelectLanguage") }}</strong>
                                     <hr>
                                 </div>
 
@@ -166,7 +166,7 @@
                         <div class="country-settings-inner countries col-lg-6">
                             <div class="shipping-settings">
                                 <div class="list-title">
-                                    <strong>{{ trans("Ceres::Template.generalSelectShippingCountry") }}</strong>
+                                    <strong>{{ trans("Ceres::Template.headerSelectShippingCountry") }}</strong>
                                     <hr>
                                 </div>
                                 <shipping-country-select template="#vue-shipping-country-select" :selectable="{{ services.template.isCheckout() | json_encode() }}"></shipping-country-select>
