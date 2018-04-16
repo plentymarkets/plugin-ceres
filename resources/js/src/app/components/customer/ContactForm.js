@@ -123,6 +123,7 @@ Vue.component("contact-form", {
             this.message = "";
             this.orderId = "";
             this.cc = false;
+            this.privacyPolicyAccepted = false;
         },
 
         _handleValidationErrors(validationErrors)
