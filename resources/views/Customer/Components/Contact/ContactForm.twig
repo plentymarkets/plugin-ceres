@@ -102,7 +102,7 @@
 				</div>
 
 				<div class="col-xs-12">
-					<accept-privacy-policy-check class="m-b-1" v-if="enableConfirmingPrivacyPolicy" :value="privacyPolicyAccepted" @value-changed="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
+					<accept-privacy-policy-check class="m-b-1" v-if="enableConfirmingPrivacyPolicy" v-model="privacyPolicyAccepted" @input="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
 				</div>
 
 				<div class="col-xs-12 col-md-3 offset-md-9 send-mail">
