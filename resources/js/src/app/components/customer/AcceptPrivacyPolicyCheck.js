@@ -30,6 +30,14 @@ Vue.component("accept-privacy-policy-check", {
         this.$options.template = this.template;
     },
 
+    methods:
+    {
+        onValueChanged(value)
+        {
+            this.$emit("value-changed", value);
+        }
+    },
+
     watch:
     {
         value(value)
