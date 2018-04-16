@@ -1634,7 +1634,7 @@
         "tab"               : "Design",
         "key"               : "brand-primary",
         "label"             : "Primary colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#008ebd",
         "scss"              : true
     },
@@ -1642,7 +1642,7 @@
         "tab"               : "Design",
         "key"               : "brand-secondary",
         "label"             : "Secondary colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#d4021d",
         "scss"              : true
     },
@@ -1650,7 +1650,7 @@
         "tab"               : "Design",
         "key"               : "brand-success",
         "label"             : "Success colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#7ED321",
         "scss"              : true
     },
@@ -1658,7 +1658,7 @@
         "tab"               : "Design",
         "key"               : "brand-info",
         "label"             : "Information colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#5bc0de",
         "scss"              : true
     },
@@ -1666,7 +1666,7 @@
         "tab"               : "Design",
         "key"               : "brand-warning",
         "label"             : "Warning colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#f0ad4e",
         "scss"              : true
     },
@@ -1674,7 +1674,7 @@
         "tab"               : "Design",
         "key"               : "brand-danger",
         "label"             : "Danger colour",
-        "type"              : "text",
+        "type"              : "color",
         "default"           : "#d9534f",
         "scss"              : true
     },
