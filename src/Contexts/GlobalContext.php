@@ -13,6 +13,7 @@ use IO\Services\ItemCrossSellingService;
 use IO\Services\SessionStorageService;
 use IO\Services\TemplateService;
 use IO\Services\BasketService;
+use IO\Services\CheckoutService;
 
 class GlobalContext implements ContextInterface
 {
@@ -20,6 +21,9 @@ class GlobalContext implements ContextInterface
     
     /** @var CeresConfig $ceresConfig  */
     public $ceresConfig = null;
+    
+    /** @var Request $request */
+    public $request;
     
     public $lang;
     public $metaLang;
@@ -30,6 +34,7 @@ class GlobalContext implements ContextInterface
     public $notifications;
     public $basket;
     public $webstoreConfig;
+    public $currencyData;
 
     public function init($params)
     {
@@ -56,8 +61,13 @@ class GlobalContext implements ContextInterface
         /** @var BasketService $basketService */
         $basketService = pluginApp(BasketService::class);
 
+        /** @var CheckoutService $checkoutService */
+        $checkoutService = pluginApp(CheckoutService::class);
+
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigService->getWebstoreConfig();
+        
+        $this->request = pluginApp(Request::class);
 
         $this->lang = $sessionStorageService->getLang();
         $this->metaLang = 'de';
@@ -77,6 +87,8 @@ class GlobalContext implements ContextInterface
         $this->notifications = pluginApp(NotificationService::class)->getNotifications();
 
         $this->basket = $basketService->getBasketForTemplate();
+        
+        $this->currencyData = $checkoutService->getCurrencyData();
     }
     
     protected function getParam($key, $defaultValue = null)

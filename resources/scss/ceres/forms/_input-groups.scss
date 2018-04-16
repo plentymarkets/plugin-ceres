@@ -20,7 +20,16 @@
 
 }
 
-.input-group-h{
+.inline-form {
 
-	
+	& .input-group-addon,
+	& .form-control {
+		border: 1px solid #D9D9D9;
+	}
+
+	& .btn {
+		padding-top: 8px;
+    	padding-bottom: 8px;
+	}
 }
+

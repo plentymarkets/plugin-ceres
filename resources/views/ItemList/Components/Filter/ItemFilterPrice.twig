@@ -1,0 +1,20 @@
+<script type="x/template" id="vue-item-filter-price">
+	<div class="row inline-form">
+		<div class="col-lg-5 p-r-0 d-table p-b-1">
+			<div class="input-group-addon border-radius-0">${ currency }</div>
+			<input type="number" class="form-control border-radius-0" @focus="selectAll($event)" placeholder="Min" v-model="priceMin">
+		</div>
+
+		<div class="col-lg-5 p-r-0 d-table p-b-1">
+			<div class="input-group-addon border-radius-0">${ currency }</div>
+			<input type="number" class="form-control border-radius-0" @focus="selectAll($event)" placeholder="Max" v-model="priceMax">
+		</div>
+
+		<div class="col-lg-2">
+			<button type="button" class="btn btn-primary" :class="{'disabled': isDisabled}" v-tooltip 
+					data-toggle="tooltip" data-placement="top" @click="triggerFilter()" title="{{ trans("Ceres::Template.itemApply") }}">
+				<i v-waiting-animation="isLoading" class="fa fa-check" aria-hidden="true"></i>
+			</button>
+		</div>
+	</div>	
+</script>

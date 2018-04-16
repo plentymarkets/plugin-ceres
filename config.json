@@ -107,6 +107,13 @@
         "default"                     : "false"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "contact.enable_confirming_privacy_policy",
+        "label"                       : "Enable to display checkbox for confirming privacy policy",
+        "type"                        : "checkbox",
+        "default"                     : "true"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
