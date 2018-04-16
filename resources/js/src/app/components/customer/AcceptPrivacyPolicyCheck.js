@@ -18,8 +18,23 @@ Vue.component("accept-privacy-policy-check", {
         }
     },
 
+    data()
+    {
+        return {
+            compValue: this.value
+        };
+    },
+
     created()
     {
         this.$options.template = this.template;
+    },
+
+    watch:
+    {
+        value(value)
+        {
+            this.compValue = value;
+        }
     }
 });
