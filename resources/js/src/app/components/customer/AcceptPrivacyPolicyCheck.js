@@ -18,13 +18,6 @@ Vue.component("accept-privacy-policy-check", {
         }
     },
 
-    data()
-    {
-        return {
-            compValue: this.value
-        };
-    },
-
     created()
     {
         this.$options.template = this.template;
@@ -34,15 +27,7 @@ Vue.component("accept-privacy-policy-check", {
     {
         onValueChanged(value)
         {
-            this.$emit("value-changed", value);
-        }
-    },
-
-    watch:
-    {
-        value(value)
-        {
-            this.compValue = value;
+            this.$emit("input", value);
         }
     }
 });
