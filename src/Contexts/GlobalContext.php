@@ -23,7 +23,7 @@ class GlobalContext implements ContextInterface
     public $ceresConfig = null;
     
     /** @var Request $request */
-    public $request;
+    protected $request;
     
     public $lang;
     public $metaLang;
