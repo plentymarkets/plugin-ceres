@@ -68,8 +68,8 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      * @return string
      */
     public function getFilteredTags(){
-        $tags = implode("\n", self::$scriptTags);
-        $tags .= implode("\n", self::$styleTags);
+        $tags = implode("\n", array_unique(self::$scriptTags));
+        $tags .= implode("\n", array_unique(self::$styleTags));
         return $tags;
     }
 

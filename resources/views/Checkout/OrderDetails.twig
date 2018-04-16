@@ -86,6 +86,7 @@
                                                     :change-possible="{{ services.order.allowPaymentMethodSwitchFrom(paymentMethodId, orderData.order.id) | json_encode() }}"
                                                     :allowed-payment-methods="{{ services.order.getPaymentMethodListForSwitch(paymentMethodId, orderData.order.id) | json_encode() }}"
                                                     :payment-status="{{ paymentStatus | json_encode() }}"
+                                                    :current-payment-method-name="{{ orderData.paymentMethodName | json_encode() }}"
                                                     :current-template="{{ currentTemplate | json_encode() }}">
                             </change-payment-method>
                         {% endif %}

@@ -1,17 +1,8 @@
-const accounting = require("accounting");
+import MonetaryFormatter from "../helper/MonetaryFormatter";
+
+const formatter = new MonetaryFormatter();
 
 Vue.filter("currency", function(price)
 {
-    const currencyPattern = App.currencyPattern;
-
-    // (%v = value, %s = symbol)
-    const options = {
-        symbol   : App.activeCurrency,
-        decimal  : currencyPattern.separator_decimal,
-        thousand : currencyPattern.separator_thousands,
-        precision: 2,
-        format   : currencyPattern.pattern.replace("¤", "%s").replace("#,##0.00", "%v")
-    };
-
-    return accounting.formatMoney(price, options);
+    return formatter.format(price, App.activeCurrency);
 });

@@ -68,7 +68,7 @@
             {% else %}
 
                 <li>
-                    <a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}' }">{{ category.details[0].name }}</a>
+                    <a href="{{ currentScopeUrl }}" v-render-category="{ id: {{ category.id }}, type: '{{ category.type }}', hasNoChilds: true }">{{ category.details[0].name }}</a>
                 </li>
 
             {% endif %}

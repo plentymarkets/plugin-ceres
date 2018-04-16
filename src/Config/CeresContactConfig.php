@@ -14,6 +14,7 @@ class CeresContactConfig extends PluginConfig
     public $apiKey;
     public $mapZoom;
     public $mapShowInMobile;
+    public $enableConfirmingPrivacyPolicy;
 
     public function __construct(ConfigRepository $configRepository)
     {
@@ -57,5 +58,7 @@ class CeresContactConfig extends PluginConfig
         $this->mapZoom = $this->getIntegerValue( "contact.map_zoom", 16 );
 
         $this->mapShowInMobile = $this->getBooleanValue( "contact.map_show_in_mobile", false );
+
+        $this->enableConfirmingPrivacyPolicy = $this->getBooleanValue( "contact.enable_confirming_privacy_policy", true );
     }
 }

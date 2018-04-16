@@ -17,6 +17,7 @@
     {% if "billing_address.stateId" in billingAddressFields %}
     <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '1'" {% if "billing_address.stateId" in billingAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
         <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
+            <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
             <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
                 ${ state.name }
             </option>
@@ -29,6 +30,7 @@
     {% if "delivery_address.stateId" in deliveryAddressFields %}
         <div class="input-unit" v-if="stateList && stateList.length > 0 && addressType === '2'" {% if "delivery_address.stateId" in deliveryAddressFieldsRequired %}data-validate {% endif %} data-model="stateId">
             <select :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
+                <option :selected="selectedStateId === null">{{ trans("Ceres::Template.addressPleaseSelect") }}</option>
                 <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList">
                     ${ state.name }
                 </option>
