@@ -74,8 +74,12 @@ function _removeTempDesc()
 
 function _updateCategoryTexts(currentCategory)
 {
+    const categoryTitle = currentCategory.details[0].metaTitle.length > 0 ?
+                            currentCategory.details[0].metaTitle :
+                            currentCategory.details[0].name;
+
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }
