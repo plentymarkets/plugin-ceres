@@ -201,7 +201,7 @@ function updateScrollbarPosition()
             isAnimating = true;
             jQuery('body, html').stop().animate(
                 { scrollTop : jQuery('body, html').scrollTop() + scrollValue },
-                500,
+                300,
                 'linear', function()
                 {
                     isAnimating = false;
