@@ -24,7 +24,7 @@
             {% include styleTemplate.path ignore missing with styleTemplate.params %}
         {% endfor %}
 
-        {% if request.get('isContentBuilder') == 1 %}
+        {% if ronnyRequest.get('isContentBuilder') == 1 %}
             <link href="{{ plugin_path('Ceres') }}/css/content-builder.css" rel="stylesheet" />
         {% endif %}
     </head>
@@ -54,7 +54,7 @@
                 {% include getPartial('header') %}
 
                 <div id="page-body" class="main">
-                    {% if request.get('isContentBuilder') == 1 %}
+                    {% if ronnyRequest.get('isContentBuilder') == 1 %}
                         <div class="css-loading hidden">
                             <i class="fa fa-circle-o-notch fa-spin"></i>
                             Loading styles <!-- I18N -->
@@ -220,7 +220,7 @@
             }
         </script>
 
-        {% if request.get('isContentBuilder') == 1 %}
+        {% if ronnyRequest.get('isContentBuilder') == 1 %}
             <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/lodash.min.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery.min.js"></script>
             <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery-ui.min.js"></script>

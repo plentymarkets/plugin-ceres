@@ -6,9 +6,9 @@
 {% set numberOfFeatures = config('Ceres.footer.number_of_features') %}
 {% set topButtonPosition = config('Ceres.footer.to_top_button') %}
 
-<div class="footer" {% if request.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-footer" {% endif %}>
+<div class="footer" {% if ronnyRequest.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-footer" {% endif %}>
 
-    {% if request.get('isContentBuilder') != 1 %}
+    {% if ronnyRequest.get('isContentBuilder') != 1 %}
         <div>
 
             <div class="{% if topButtonPosition == "right" %}back-to-top{% else %}back-to-top-center{% endif %} hidden-sm-down">

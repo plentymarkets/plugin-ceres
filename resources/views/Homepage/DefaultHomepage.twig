@@ -72,9 +72,9 @@
 
     <div class="home container-max">
         <div class="row">
-            <div class="col" {% if request.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-startpage" {% endif %}>
+            <div class="col" {% if ronnyRequest.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-startpage" {% endif %}>
 
-                {% if request.get('isContentBuilder') != 1 %}
+                {% if ronnyRequest.get('isContentBuilder') != 1 %}
 
                     <div class="homepage-title m-b-1">
                         <h1>{{ config("Ceres.header.company_name") }}</h1>
