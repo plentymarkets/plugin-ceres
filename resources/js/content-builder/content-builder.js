@@ -68,7 +68,7 @@ function handleBuilderEventResponse(response)
 
             case 'shopbuilder_close_properties':
 
-                setElementActive(null);
+                focusElement(null);
                 break;
 
             case 'shopbuilder_widget_replace':
@@ -251,7 +251,7 @@ function addContextMenu(element)
 
     // add buttons
     addEditButton(element);
-    addDesignButton(element);
+    // addDesignButton(element);
     addDeleteButton(element);
 }
 
@@ -281,14 +281,14 @@ function addDeleteButton(element)
 function addEditButton(element)
 {
     // inject button markup into given context element
-    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-cog"></div>');
+    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
 
     // open properties
     jQuery(element).find('.edit-icon').click(function ()
     {
         var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
 
-        setElementActive(uniqueId);
+        focusElement(uniqueId);
 
         dispatchBuilderEvent({
             name: 'shopbuilder_open_properties',
@@ -312,7 +312,7 @@ function addDesignButton(element)
     {
         var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
 
-        setElementActive(uniqueId);
+        focusElement(uniqueId);
 
         dispatchBuilderEvent({
             name: 'shopbuilder_open_design',
@@ -322,46 +322,57 @@ function addDesignButton(element)
     });
 }
 
-
 /**
  *
  * @param id
  */
-function setElementActive(id)
+function focusElement(id)
 {
     jQuery('[data-builder-identifier]').each(function ()
     {
-        if (id && jQuery(this).attr('data-builder-identifier') == id)
+        if (!id)
         {
-            jQuery(this).addClass('active');
-
-            // activate nested widget containers
-            jQuery(this).find('.nested-widget').each(function ()
-            {
-                jQuery(this).html('<div class="shopbuilder-nested-config shopbuilder-icon add-icon fa fa-plus"></div>');
-
-                jQuery(this).find('.add-icon').click(function ()
-                {
-                    jQuery('.nested-widget').each(function ()
-                    {
-                        jQuery(this).removeClass('active');
-                    });
-
-                    jQuery(this).closest('.nested-widget').addClass('active');
-                });
-
-            });
+            jQuery(this).removeClass('active');
         }
         else
         {
-            jQuery(this).removeClass('active');
+            if (id && jQuery(this).attr('data-builder-identifier') == id)
+            {
+                jQuery(this).addClass('active');
 
-            // deactivate nested widget containers
-            jQuery(this).find('.nested-widget').each(function ()
+                // activate nested widget containers
+                jQuery(this).find('.nested-widget-container').each(function ()
+                {
+                    if (!jQuery(this).hasClass('set'))
+                    {
+                        jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+                        jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+
+                        jQuery(this).find('.add-icon').click(function ()
+                        {
+                            jQuery('.nested-widget-container').each(function ()
+                            {
+                                jQuery(this).removeClass('active');
+                            });
+
+                            jQuery(this).closest('.nested-widget-container').addClass('active');
+                        });
+                    }
+
+
+                });
+            }
+            else
             {
                 jQuery(this).removeClass('active');
-                jQuery(this).html('');
-            });
+
+                // deactivate nested widget containers
+                jQuery(this).find('.nested-widget-container').each(function ()
+                {
+                    jQuery(this).removeClass('active');
+                    jQuery(this).find('.add-icon').remove();
+                });
+            }
         }
     });
 }
@@ -377,6 +388,43 @@ function addBackendEventListener()
  * @param position
  */
 function addContentWidget(widgetData, position)
+{
+    var isNestedContainerActive = jQuery('.nested-widget-container.active').length;
+
+    if (isNestedContainerActive)
+    {
+        addNestedWidget(widgetData);
+    }
+    else
+    {
+        addGridstackWidget(widgetData, position);
+    }
+}
+
+/**
+ * add widged into structure element
+ * @param widgetData
+ */
+function addNestedWidget(widgetData)
+{
+    var uniqueId = widgetData.uniqueId;
+    var markup = widgetData.htmlMarkup;
+
+    var widget = jQuery('<div class="nested-widget" data-builder-identifier="' + uniqueId + '">' + markup + '</div>');
+
+    jQuery('.nested-widget-container.active').html(widget);
+    jQuery('.nested-widget-container.active').addClass('set');
+
+    addContextMenu(widget);
+    focusElement(null);
+}
+
+/**
+ * add widget as gridstack item
+ * @param widgetData
+ * @param position
+ */
+function addGridstackWidget(widgetData, position)
 {
     var container = widgetData.dropzone;
     var height = widgetData.defaultHeight;
@@ -521,7 +569,7 @@ function initGridstack(identifier)
 {
     var options = {
         width: 1,
-        cellHeight: 40,
+        cellHeight: CELL_HEIGHT,
         verticalMargin: 0
         // acceptWidgets: '.grid-stack-item'
     };

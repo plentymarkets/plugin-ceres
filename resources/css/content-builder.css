@@ -15,27 +15,23 @@ body
     position: relative;
 }
 
+.top-bar .context-menu
+{
+    z-index: 1061;
+}
+
 .grid-stack-item
 {
-    position: absolute !important;
+    position: absolute;
     width: 100%;
     transition: all 0.1s ease;
+    overflow: hidden;
 }
 
 .grid-stack-item:hover,
 .grid-stack-item.active
 {
     border: 4px solid #24B3E0;
-}
-
-.grid-stack-item.active .grid-stack-item-content::before
-{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(37, 179, 225, 0.3);
 }
 
 .grid-stack-item-content
@@ -48,7 +44,7 @@ body
 .grid-stack-placeholder
 {
     background: rgba(106,210,106,0.3);
-    border: 4px dashed #24B3E0;
+    border: 3px dashed #24B3E0;
 }
 
 .ui-draggable-dragging
@@ -67,7 +63,15 @@ body
     position: absolute;
     right: 0px;
     top: 0px;
-    z-index: 2;
+    z-index: 4;
+}
+
+.nested-widget-container .context-menu
+{
+    left: calc(50% - 40px);
+    top: calc(50% - 18px);
+    right: auto;
+    z-index: 3;
 }
 
 .shopbuilder-icon.fa
@@ -111,34 +115,74 @@ body
     background-color: #43c643
 }
 
-.nested-widget
+.nested-widget-container
 {
     height: 200px;
 }
 
-.nested-widget::after
+
+.nested-widget-container.active:not(.set)::after,
+.nested-widget-container:not(.set)::after
 {
     content: "";
-    width: 100%;
-    height: 100%;
     position: absolute;
     background-color: #777777;
-    top: 2px;
-    left: 2px;
-    outline: 2px solid #fff;
-    right: 2px;
-    bottom: 2px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    position: absolute;
 }
 
-.nested-widget.active::after
+.nested-widget-container.active:not(.set)::after
 {
-    background: #ff0000;
+    background: rgba(106,210,106,0.3);
 }
 
-.shopbuilder-nested-config
+
+
+.ui-resizable-autohide .active .nested-widget-container:not(.set),
+.ui-resizable-autohide .nested-widget-container:not(.set)
+{
+    border: 2px solid #ffffff;
+}
+
+.active .nested-widget-container:not(.set),
+.nested-widget-container:not(.set)
+{
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+}
+
+.nested-widget-container .add-icon
  {
      position: absolute;
      z-index: 2;
      left: calc(50% - 18px);
      top: calc(50% - 18px);
  }
+
+.nested-widget-container.active:not(.set)::before
+{
+    content: "Ziehen Sie ein Element in diesen Bereich";
+    font-size: 80%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    left: 0px;
+    right: 0px;
+}
+
+.nested-widget-container.active .add-icon
+{
+    display: none;
+}
+
+.nested-widget
+{
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    right: 0px;
+}
