@@ -7,7 +7,7 @@
 				<!-- RETURN PAGINATION -->
                 <div class="clearfix history-pagination" v-if="returnsList.totalsCount > itemsPerPage">
                     <div class="pull-xs-left counter">
-                        {{ trans("Ceres::Template.orderShow", {"countStart": "${ returnsList.firstOnPage }", "countEnd": "${ returnsList.lastOnPage }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
+                        {{ trans("Ceres::Template.returnHistoryShow", {"countStart": "${ returnsList.firstOnPage }", "countEnd": "${ returnsList.lastOnPage }", "orderMaxCount": "${ returnsList.totalsCount }" }) }}
                     </div>
 
 					{% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'returnsList.page', 'pageMax': 'returnsList.lastPageNumber', 'setPage': 'setPage' } %}

@@ -111,7 +111,7 @@ const actions =
                     .fail(error =>
                     {
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.notFoundOops")
+                            TranslationService.translate("Ceres::Template.basketOops")
                         ).closeAfter(10000);
                     });
             }

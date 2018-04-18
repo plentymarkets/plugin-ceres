@@ -1,5 +1,6 @@
 import ApiService from "services/ApiService";
 import {updateItemListUrlParams}from "services/ItemListUrlService";
+import TranslationService from "services/TranslationService";
 
 const state =
     {
@@ -19,6 +20,53 @@ const mutations =
         setFacets(state, facets)
         {
             state.facets = facets || [];
+        },
+
+        setPriceFacet(state, {priceMin, priceMax})
+        {
+            const priceMinFormatted = Vue.filter("currency").apply(Object, [priceMin]);
+            const priceMaxFormatted = Vue.filter("currency").apply(Object, [priceMax]);
+
+            const priceFacet = {
+                id: "price",
+                priceMin: priceMin,
+                priceMax: priceMax
+            };
+
+            if (!priceMax.length)
+            {
+                priceFacet.name = TranslationService.translate("Ceres::Template.itemFrom") + priceMinFormatted;
+            }
+            else if (!priceMin.length)
+            {
+                priceFacet.name = TranslationService.translate("Ceres::Template.itemTo") + priceMaxFormatted;
+            }
+            else
+            {
+                priceFacet.name = priceMinFormatted + " - " + priceMaxFormatted;
+            }
+
+            state.facets.find(facet => facet.type === "price").values[0] = priceFacet;
+        },
+
+        setPriceFacetTag(state)
+        {
+            const priceFacet = state.facets.find(facet => facet.type === "price").values[0];
+            const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+
+            if (selectedPriceFacet)
+            {
+                Object.assign(selectedPriceFacet, priceFacet);
+            }
+            else
+            {
+                state.selectedFacets.push(priceFacet);
+            }
+        },
+
+        removePriceFacet(state)
+        {
+            state.selectedFacets = state.selectedFacets.filter(facet => facet.id !== "price");
         },
 
         setSelectedFacetsByIds(state, selectedFacetIds)
@@ -93,7 +141,24 @@ const actions =
     {
         selectFacet({dispatch, commit}, facetValue)
         {
-            commit("toggleSelectedFacet", facetValue);
+            if (facetValue.id === "price")
+            {
+                commit("removePriceFacet");
+            }
+            else
+            {
+                commit("toggleSelectedFacet", facetValue);
+            }
+
+            commit("setItemListPage", 1);
+
+            dispatch("retrieveItemList");
+        },
+
+        selectPriceFacet({dispatch, commit}, {priceMin, priceMax})
+        {
+            commit("setPriceFacet", {priceMin: priceMin, priceMax: priceMax});
+            commit("setPriceFacetTag");
             commit("setItemListPage", 1);
 
             dispatch("retrieveItemList");
@@ -135,13 +200,17 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                const selectedPriceFacet = state.selectedFacets.find(facet => facet.id === "price");
+
                 const searchParams =
                     {
                         query               : state.searchString,
                         items               : state.itemsPerPage,
                         sorting             : state.sorting,
                         page                : state.page,
-                        facets              : getters.selectedFacetIds.toString(),
+                        facets              : getters.selectedFacetIdsForUrl.toString(),
+                        priceMin            : selectedPriceFacet ? selectedPriceFacet.priceMin : "",
+                        priceMax            : selectedPriceFacet ? selectedPriceFacet.priceMax : "",
                         categoryId          : rootState.navigation.currentCategory ? rootState.navigation.currentCategory.id : null,
                         template            : "Ceres::ItemList.ItemListView"
                     };
@@ -177,6 +246,15 @@ const getters =
             state.selectedFacets.every(facet => selectedFacetIds.push(facet.id));
 
             return selectedFacetIds;
+        },
+
+        selectedFacetIdsForUrl(state)
+        {
+            const selectedFacetIds = [];
+
+            state.selectedFacets.every(facet => selectedFacetIds.push(facet.id));
+
+            return selectedFacetIds.filter(facet => facet !== "price");
         }
     };
 

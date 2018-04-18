@@ -40,7 +40,7 @@ Vue.component("place-order", {
 
             if (this.contactWish && this.contactWish.length > 0)
             {
-                ApiService.post("/rest/io/order/contactWish", {orderContactWish: this.contactWish}, {supressNotifications: true})
+                ApiService.post("/rest/io/order/contactWish", {checkoutContactWish: this.contactWish}, {supressNotifications: true})
                     .always(() =>
                     {
                         this.preparePayment();
@@ -71,7 +71,7 @@ Vue.component("place-order", {
             else
             {
                 NotificationService.error(
-                    TranslationService.translate("Ceres::Template.generalCheckEntries")
+                    TranslationService.translate("Ceres::Template.checkoutCheckEntries")
                 );
                 this.waiting = false;
             }

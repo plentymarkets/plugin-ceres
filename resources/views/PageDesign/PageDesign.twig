@@ -81,7 +81,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans("Ceres::Template.accLogin") }}</div>
+                                    <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
                                 </div>
                                 <login template="#vue-login" modal-element="login-modal-wrapper"></login>
                             </div>
@@ -98,20 +98,20 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <div class="modal-title h3">
-                                        {{ trans("Ceres::Template.accCreateAccount") }}
+                                        {{ trans("Ceres::Template.regCreateAccount") }}
 
                                        <popper v-cloak class="pull-right m-r-1">
                                             <button slot="handle" class="btn btn-icon btn-secondary btn-sm">
                                                 <i class="fa fa-info"></i>
                                             </button>
                                             <div slot="title">
-                                                {{ trans("Ceres::Template.generalContactInformations") }}
+                                                {{ trans("Ceres::Template.regContactInformations") }}
                                             </div>
                                             <ul slot="content" class='p-l-1'>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText1') }}</li>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText2') }}</li>
-                                                <li class='m-b-1'>{{ trans('Ceres::Template.generalContactInfoText3') }}</li>
-                                                <li>{{ trans('Ceres::Template.generalContactInfoText4') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText1') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText2') }}</li>
+                                                <li class='m-b-1'>{{ trans('Ceres::Template.regContactInfoText3') }}</li>
+                                                <li>{{ trans('Ceres::Template.regContactInfoText4') }}</li>
                                             </ul>
                                         </popper>
                                     </div>
@@ -134,7 +134,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="modal-title h3">{{ trans('Ceres::Template.itemShippingCosts') }}</div>
+                                    <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
                                 </div>
                                 <div class="modal-body">
                                     {% include category_template(ceresConfig.global.shippingCostsCategoryId, lang, webstoreConfig.webstoreId) ignore missing %}
@@ -154,7 +154,7 @@
         <script>
             App = {
                 config: {{ ceresConfig | json_encode | raw }},
-                activeCurrency: "{{ services.checkout.getCurrencyData()[currencyFormat] }}",
+                activeCurrency: "{{ currencyData[currencyFormat] }}",
                 currencyPattern: {{  services.checkout.getCurrencyPattern() | json_encode | raw }},
                 isCategoryView: {% if services.template.isCategory() == "1" %}true{% else %}false{% endif %},
                 isCheckoutView : {% if services.template.isCheckout() == "1" %}true{% else %}false{% endif %},

@@ -1,5 +1,63 @@
 # Release Notes for Ceres
 
+## v2.7.0 (2018-04-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.6.0...2.7.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- For items without image, the preconfigured placeholder image is now displayed in the online store.
+- The tab "design" and its corresponding settings have been added to the Ceres configuration.
+- Order properties of the type file can now be processed.
+- The contact page can now display a checkbox with which users confirm that they have read the privacy policy.
+- A new value has been added to the configuration, through which the checkbox for confirming the privacy policy can be activated or deactivated.
+- The contact page now displays an error notification if a user attempts to submit the form without filling in all mandatory fields.
+
+### Changed
+
+- Images in the item description now act responsively and conform to the layout of the page.
+- The notification "Vue.js could not be initialised" is now displayed as a span element instead of an h1 heading.
+- The selection for states and federal states now displays "Please select" as the default value.
+- The customer's contact data in the system is now synchronised with the first invoice address.
+- A text has been added to the contact page that informs the user that fields flagged with "*" are mandatory fields.
+- The visual layout of the contact page has been redesigned in order to conform to that of all other pages.
+
+### Fixed
+
+- Due to an error the buttons of the quantity input of the single item view did not adjust the item number if the order interval of the item was 0. This has been fixed.
+- Due to an error the configuration for the positioning of the pagination was not working properly. This has been fixed.
+- The current payment method was not initially displayed in the overlay of the order confirmation. This has been fixed.
+- Due to an error the navigation on touch devices wasn't working properly if it included no subcategories. This has been fixed.
+- Due to an error the salutation was not saved correctly. This has been fixed.
+- Under particular circumstances certain script and style tags were rendered more than once. This has been fixed.
+- Due to an error meta-information pertaining to store specials was displayed incorrectly in the single item view. This has been fixed.
+- Due to an error the price information was not formatted correctly in several languages. This has been fixed.
+- A redundant conversion into the .json format led to a faulty display of German *umlauts* in the meta information of content categories. This has been fixed.
+- If a user deletes or edits an address, the address selected by the server is now displayed as the selected address in the user interface.
+- The contact data stored in the system now includes the date of birth provided in the first invoice address.
+
+## v2.6.0 (2018-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.2...2.6.0" target="_blank"><b>Overview of all changes</b></a>
+
+### Added
+
+- IO is now able to react to the generation of the sitemap and can provide its own patterns for the creation of URLs.
+
+### Changed
+
+- The shopping cart now displays the surcharge of order properties via the preposition "incl.".
+- The quantity input now considers the interval order quantity of an item.
+- The plugin configuration is now delivered generically to JavaScript and is available as a global object.
+- Decimal quantities of items can now be purchased.
+- The check box for the terms and conditions, cancellation rights and privacy policy have been moved to the left side of the checkout. Thereby, the purchase button is now located directly under the total price.
+- The preview text of an item in the single item view can now support HTML elements.
+- The value "Please select" can now always be selected in the attribute selection of the variation in the single item view. This prevents that the selection of one attribute blocks other selections from the dropdown list. This also enables users to select main variation, as long as the main variation is active and not linked to an attribute.
+- The surcharge of order properties is now included in the item's total price in the shopping cart.
+
+### Fixed
+
+- Under certain circumstances the button for changing payment methods was not displayed on the order confirmation page. This has been fixed.
+- Due to an error a purchase via Paypal redirected to a 404 page instead of the order confirmation page. This has been fixed.
+- The shopping cart now considers the position of item images and displays the image with the lowest position number.
+- The item view of items with a specified order property used to display the surcharge of the property. Now, the item is checked for separate surcharges that can be configured for the item. If such a surcharge is configured, this surcharge is displayed instead.
+
 ## v2.5.2 (2018-03-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/2.5.1...2.5.2" target="_blank"><b>Overview of all changes</b></a>
 
 ### Fixed

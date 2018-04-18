@@ -7,26 +7,26 @@
                     <div class="input-unit" data-validate="mail">
                         {% set uid_mail = uid() %}
                         <input type="text" name="email" id="{{ uid_mail }}" v-model="username">
-                        <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
+                        <label for="{{ uid_mail }}">{{ trans("Ceres::Template.regEmail") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-sm-6" v-if="!guestMode">
                     <div class="input-unit" :class="{'no-bottom media-xs-d': modalElement}" data-validate="password" ref="passwordInput">
-                        <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
+                        <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
                             {% set uid_pwd = uid() %}
                             <input slot="handle" type="password" name="password" id="{{ uid_pwd }}" v-model="password">
                             <div slot="title">
-                                {{ trans("Ceres::Template.accPasswordHintTitle") }}
+                                {{ trans("Ceres::Template.regPasswordHintTitle") }}
                             </div>
                             <ul slot="content" class="p-l-1">
-                                <li>{{ trans("Ceres::Template.accPasswordHintLength") }}</li>
-                                <li>{{ trans("Ceres::Template.accPasswordHintDigit") }}</li>
-                                <li>{{ trans("Ceres::Template.accPasswordHintChar") }}</li>
+                                <li>{{ trans("Ceres::Template.regPasswordHintLength") }}</li>
+                                <li>{{ trans("Ceres::Template.regPasswordHintDigit") }}</li>
+                                <li>{{ trans("Ceres::Template.regPasswordHintChar") }}</li>
                             </ul>
                         </popper>
 
-                        <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.accPassword") }}*</label>
+                        <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.regPassword") }}*</label>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                     <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="ref">
                         {% set uid_pwd_repeat = uid() %}
                         <input type="password" name="password-repeat" id="{{ uid_pwd_repeat }}" v-model="passwordRepeat" data-validate-ref="#{{ uid_pwd }}">
-                        <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.accRepeatPassword") }}*</label>
+                        <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.regRepeatPassword") }}*</label>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
 
             <button @click="validateRegistration" :disabled="isDisabled" class="btn btn-primary btn-medium btn-right">
                 <i class="fa fa-user-plus" v-waiting-animation="isDisabled" aria-hidden="true"></i> 
-                {{ trans("Ceres::Template.accRegister") }}
+                {{ trans("Ceres::Template.regRegister") }}
             </button>
         </div>
     </div>

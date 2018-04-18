@@ -141,7 +141,7 @@ Vue.component("add-to-basket", {
                 errorMsgContent += name + "<br>";
             }
 
-            NotificationService.error(Translations.Template.itemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
+            NotificationService.error(Translations.Template.singleItemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
         },
 
         directToItem()

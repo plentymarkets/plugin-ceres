@@ -46,12 +46,23 @@
             <item-filter-tag-list></item-filter-tag-list>
         </div>
 
+        {% if ceresConfig.pagination.position in ['top', 'top_bottom'] %}
+            <div class="list-controls m-b-3 row">
+                <div class="col-xs-12">
+                    <pagination template="#vue-pagination"></pagination>
+                    <noscript>
+                        {% include "Ceres::Category.Item.Partials.Pagination" %}
+                    </noscript>
+                </div>
+            </div>
+        {% endif %}
+
         <div class="row">
 
             {% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
-                        <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
+                        <div class="category-title">{{ trans("Ceres::Template.itemCategories") }}</div>
                         {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
 
@@ -83,16 +94,16 @@
 
             </div>
         </div>
-        <div class="list-controls m-b-3 row">
-            <div class="col-xs-12">
-                <pagination template="#vue-pagination"></pagination>
-
-                <noscript>
-                    {% include "Ceres::Category.Item.Partials.Pagination" %}
-                </noscript>
-
+        {% if ceresConfig.pagination.position in ['bottom', 'top_bottom'] %}
+            <div class="list-controls m-b-3 row">
+                <div class="col-xs-12">
+                    <pagination template="#vue-pagination"></pagination>
+                    <noscript>
+                        {% include "Ceres::Category.Item.Partials.Pagination" %}
+                    </noscript>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 
 {% endblock %}

@@ -10667,6 +10667,14 @@ a:active {
     cursor: pointer;
 }
 
+.d-table {
+    display: table;
+}
+
+.border-radius-0 {
+    border-radius: 0;
+}
+
 body {
 
 	background-color: $gray-lightest;
@@ -12368,10 +12376,20 @@ Custom classes
 
 }
 
-.input-group-h{
+.inline-form {
 
-	
+	& .input-group-addon,
+	& .form-control {
+		border: 1px solid #D9D9D9;
+	}
+
+	& .btn {
+		padding-top: 8px;
+    	padding-bottom: 8px;
+	}
 }
+
+
 
 $color: $gray-dark;
 $background: white;
@@ -16056,7 +16074,7 @@ nav.navbar.megamenu {
 
     .save-new-pwd-btn {
       display: inline-block;
-      width: auto;
+      width: 10rem;
     }
   }
 
@@ -17952,6 +17970,12 @@ nav.navbar.megamenu {
             &+.nav-item {
                 margin-left: 0;
             }
+        }
+    }
+
+    .tab-content {
+        img {
+            max-width: 100%;
         }
     }
 

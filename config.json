@@ -107,6 +107,13 @@
         "default"                     : "false"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "contact.enable_confirming_privacy_policy",
+        "label"                       : "Enable to display checkbox for confirming privacy policy",
+        "type"                        : "checkbox",
+        "default"                     : "true"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
@@ -1622,6 +1629,54 @@
         "label"     : "Meta description for terms and conditions (EN)",
         "type"      : "textarea",
         "default"   : ""
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-primary",
+        "label"             : "Primary colour",
+        "type"              : "text",
+        "default"           : "#008ebd",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-secondary",
+        "label"             : "Secondary colour",
+        "type"              : "text",
+        "default"           : "#d4021d",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-success",
+        "label"             : "Success colour",
+        "type"              : "text",
+        "default"           : "#7ED321",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-info",
+        "label"             : "Information colour",
+        "type"              : "text",
+        "default"           : "#5bc0de",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-warning",
+        "label"             : "Warning colour",
+        "type"              : "text",
+        "default"           : "#f0ad4e",
+        "scss"              : true
+    },
+    {
+        "tab"               : "Design",
+        "key"               : "brand-danger",
+        "label"             : "Danger colour",
+        "type"              : "text",
+        "default"           : "#d9534f",
+        "scss"              : true
     },
     {
         "tab"               : "Logging and performance",

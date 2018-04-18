@@ -1,4 +1,4 @@
-import {isNullOrUndefined}from "../../../helper/utils";
+import {isNullOrUndefined, isNull}from "../../../helper/utils";
 
 const ApiService = require("services/ApiService");
 const ModalService = require("services/ModalService");
@@ -25,6 +25,7 @@ Vue.component("address-select", {
             headline       : "",
             addressToEdit  : {
                 addressSalutation: 0,
+                gender: "male",
                 countryId        : this.shippingCountryId
             },
             addressToDelete: {},
@@ -140,6 +141,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -163,6 +165,7 @@ Vue.component("address-select", {
             {
                 this.addressToEdit = {
                     addressSalutation: 0,
+                    gender: "male",
                     countryId        : this.shippingCountryId
                 };
             }
@@ -185,9 +188,18 @@ Vue.component("address-select", {
             this.modalType = "update";
             this.addressToEdit = this.getAddressToEdit(address);
 
-            if (typeof this.addressToEdit.addressSalutation === "undefined")
+            if (this.addressToEdit.gender === "female")
+            {
+                this.addressToEdit.addressSalutation = 1;
+            }
+            else if (isNull(this.addressToEdit.gender) && this.addressToEdit.name1)
+            {
+                this.addressToEdit.addressSalutation = 2;
+            }
+            else
             {
                 this.addressToEdit.addressSalutation = 0;
+                this.addressToEdit.gender = "male";
             }
 
             this.updateHeadline();
@@ -271,34 +283,34 @@ Vue.component("address-select", {
 
             if (this.modalType === "initial")
             {
-                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressInitial");
+                headline = TranslationService.translate("Ceres::Template.addressInvoiceAddressInitial");
             }
             else if (this.addressType === "2")
             {
                 if (this.modalType === "update")
                 {
-                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressEdit");
+                    headline = TranslationService.translate("Ceres::Template.addressShippingAddressEdit");
                 }
                 else if (this.modalType === "create")
                 {
-                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressCreate");
+                    headline = TranslationService.translate("Ceres::Template.addressShippingAddressCreate");
                 }
                 else
                 {
-                    headline = TranslationService.translate("Ceres::Template.orderShippingAddressDelete");
+                    headline = TranslationService.translate("Ceres::Template.addressShippingAddressDelete");
                 }
             }
             else if (this.modalType === "update")
             {
-                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressEdit");
+                headline = TranslationService.translate("Ceres::Template.addressInvoiceAddressEdit");
             }
             else if (this.modalType === "create")
             {
-                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressCreate");
+                headline = TranslationService.translate("Ceres::Template.addressInvoiceAddressCreate");
             }
             else
             {
-                headline = TranslationService.translate("Ceres::Template.orderInvoiceAddressDelete");
+                headline = TranslationService.translate("Ceres::Template.addressInvoiceAddressDelete");
             }
 
             this.headline = headline;

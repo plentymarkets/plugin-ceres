@@ -2,7 +2,7 @@
     <div class="card-block">
         <div class="row  m-b-1">
             <div class="col-sm-4">
-                <strong>{{ trans("Ceres::Template.accEmail") }}</strong>
+                <strong>{{ trans("Ceres::Template.myAccountEmail") }}</strong>
             </div>
             <div class="col-sm-8">
                 <span>${ userData.email }</span>
@@ -11,13 +11,13 @@
 
         <div class="row">
             <div class="col-sm-4">
-                <strong>{{ trans("Ceres::Template.accPassword") }}</strong>
+                <strong>{{ trans("Ceres::Template.myAccountPassword") }}</strong>
             </div>
             <div class="col-sm-8">
                 <span>***********</span>
             </div>
         </div>
-        <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("Ceres::Template.accChangeSettings") }}">
+        <span class="item-edit" @click="showChangeAccountSettings" data-toggle="tooltip" data-placement="right" title="{{ trans("Ceres::Template.myAccountChangeSettings") }}">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </span>
         <!-- EDIT_MODAL -->
@@ -29,33 +29,33 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="clearFields">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title">{{ trans("Ceres::Template.accChangePassword") }}</h4>
+                            <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangePassword") }}</h4>
                         </div>
                         <div class="modal-body form-horizontal">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="input-unit">
                                         <input type="password" name="new_password" v-model="newPassword">
-                                        <label for="new_password">{{ trans("Ceres::Template.accNewPassword") }}</label>
+                                        <label for="new_password">{{ trans("Ceres::Template.myAccountNewPassword") }}</label>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="input-unit no-bottom">
                                         <input type="password" name="confirm_password" v-model="confirmPassword">
-                                        <label for="confirm_password">{{ trans("Ceres::Template.accRepeatPassword") }}</label>
+                                        <label for="confirm_password">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
                                     </div>
                                 </div>
-                                <div v-show="!matchPassword" style="color: red;">{{ trans("Ceres::Template.accCorrectPassword") }}</div>
+                                <div v-show="!matchPassword" style="color: red;">{{ trans("Ceres::Template.myAccountCorrectPassword") }}</div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-medium btn-m-r" data-dismiss="modal" @click="clearFields">
                                 <i class="fa fa-times" aria-hidden="true"></i> 
-                                {{ trans("Ceres::Template.generalCancel") }}
+                                {{ trans("Ceres::Template.myAccountCancel") }}
                             </button>
                             <button type="button" class="btn btn-primary btn-medium" @click="saveAccountSettings">
                                 <i class="fa fa-check" aria-hidden="true"></i> 
-                                {{ trans("Ceres::Template.generalSave") }}
+                                {{ trans("Ceres::Template.myAccountSave") }}
                             </button>
                         </div>
                     </div>

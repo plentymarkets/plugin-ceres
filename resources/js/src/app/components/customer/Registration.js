@@ -78,7 +78,7 @@ Vue.component("registration", {
                     if (!response.code)
                     {
                         NotificationService.success(
-                            TranslationService.translate("Ceres::Template.accRegistrationSuccessful")
+                            TranslationService.translate("Ceres::Template.regSuccessful")
                         ).closeAfter(3000);
 
                         if (document.getElementById(this.modalElement) !== null)
@@ -98,7 +98,7 @@ Vue.component("registration", {
                     else
                     {
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.accRegistrationError")
+                            TranslationService.translate("Ceres::Template.regError")
                         ).closeAfter(3000);
                     }
 

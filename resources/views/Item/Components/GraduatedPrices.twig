@@ -1,11 +1,11 @@
 <script type="x/template" id="vue-graduated-prices">
     <div>
         <div class="m-y-1" v-if="graduatedPrices[0]">
-            <b>{{ trans("Ceres::Template.graduatedPrices") }}:</b>
+            <b>{{ trans("Ceres::Template.singleItemGraduatedPrices") }}:</b>
             
             <table class="graduated-prices-table text-muted">
                 <tr v-for="(price, index) in graduatedPrices">
-                    <td>{{ trans("Ceres::Template.generalFrom") }} ${ price.minimumOrderQuantity }</td>
+                    <td>{{ trans("Ceres::Template.singleItemMinimumQuantity") }} ${ price.minimumOrderQuantity }</td>
                     <td>
                         ${ price.unitPrice.formatted }
                         <transition name="fade">
