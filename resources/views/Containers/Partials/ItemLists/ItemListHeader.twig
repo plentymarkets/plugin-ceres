@@ -1,24 +1,23 @@
-{% set isNameEmpty = config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") == 'DE name' or 
-                     config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") == 'EN name' or 
-                     config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") is empty %}
+{% set isNameEmpty = trans("Ceres::Template.ItemList" ~ itemListId ~ "ListName") == 'Name' or 
+                     trans("Ceres::Template.ItemList" ~ itemListId ~ "ListName") is empty %}
 
 {% if listType == "last_seen" %}
     {% if isNameEmpty %}
         {% set header = trans("Ceres::Template.itemListLastSeen") %}
     {% else %}
-        {% set header =  config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
+        {% set header = trans("Ceres::Template.ItemList" ~ itemListId ~ "ListName") %}
     {% endif %}
 {% elseif listType == "cross_selling" %}
     {% if isNameEmpty %}
         {% set header = trans("Ceres::Template.itemListX" ~ config("Ceres.item.lists.cross_selling_type")) %}
     {% else %}
-        {% set header = config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
+        {% set header = trans("Ceres::Template.ItemList" ~ itemListId ~ "ListName") %}
     {% endif %}
 {% elseif listType == "tag_list" %}
     {% if isNameEmpty %}
         {% set header = "Tags" %}
     {% else %}
-        {% set header = config("Ceres.item.lists." ~ itemListId ~ "." ~ services.sessionStorage.getLang() ~ ".list_name") %}
+        {% set header = trans("Ceres::Template.ItemList" ~ itemListId ~ "ListName") %}
     {% endif %}
 {% endif %}
 
