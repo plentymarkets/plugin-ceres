@@ -36,7 +36,6 @@ class TemplateServiceProvider extends ServiceProvider
 
     private static $templateKeyToViewMap =
     [
-        'default'                       => ['',                                     GlobalContext::class],      // This will be used for custom routes
         'tpl.home'                      => ['Homepage.Homepage',                    GlobalContext::class],     // provide template to use for homepage
         'tpl.category.content'          => ['Category.Content.CategoryContent',     CategoryContext::class],   // provide template to use for content categories
         'tpl.category.item'             => ['Category.Item.CategoryItem',           CategoryItemContext::class],          // provide template to use for item categories
@@ -85,6 +84,10 @@ class TemplateServiceProvider extends ServiceProvider
         
         $eventDispatcher->listen('IO.ctx.*', function (TemplateContainer $templateContainer, $templateData = []) {
             $templateContextClass = self::$templateKeyToViewMap[$templateContainer->getTemplateKey()][1];
+            if(!strlen($templateContextClass))
+            {
+                $templateContextClass = GlobalContext::class;
+            }
             $templateContainer->setContext( $templateContextClass );
         }, self::EVENT_LISTENER_PRIORITY);
 
