@@ -43,20 +43,6 @@
     },
     {
         "tab"                         : "Global",
-        "key"                         : "contact.opening_times",
-        "label"                       : "Opening hours (DE)",
-        "type"                        : "text",
-        "default"                     : "Montag - Freitag, 00:00 - 24:00"
-    },
-    {
-        "tab"                         : "Global",
-        "key"                         : "contact.en.opening_times",
-        "label"                       : "Opening hours (EN)",
-        "type"                        : "text",
-        "default"                     : "Monday - Friday, 00:00 - 24:00"
-    },
-    {
-        "tab"                         : "Global",
         "key"                         : "contact.show_data",
         "label"                       : "Show contact data",
         "type"                        : "multi_select",
@@ -326,27 +312,6 @@
         "default"       : "3"
     },
     {
-        "tab"       : "Footer",
-        "key"       : "footer.store_feature_1",
-        "label"     : "Text of first store feature",
-        "type"      : "text",
-        "default"   : "Delivery period approx. 1 to 3 business days "
-    },
-    {
-        "tab"       : "Footer",
-        "key"       : "footer.store_feature_2",
-        "label"     : "Text of second store feature",
-        "type"      : "text",
-        "default"   : "Free shipping & return "
-    },
-    {
-        "tab"       : "Footer",
-        "key"       : "footer.store_feature_3",
-        "label"     : "Text of third store feature",
-        "type"      : "text",
-        "default"   : "100-day return policy"
-    },
-    {
         "tab"           : "Footer",
         "key"           : "footer.number_of_cols",
         "label"         : "Number of columns",
@@ -361,13 +326,6 @@
     },
     {
         "tab"       : "Footer",
-        "key"       : "footer.col_1_title",
-        "label"     : "Title of first column",
-        "type"      : "text",
-        "default"   : "Shop"
-    },
-    {
-        "tab"       : "Footer",
         "key"       : "footer.col_1_categories",
         "label"     : "List of IDs of categories to display in first column",
         "type"      : "text",
@@ -375,24 +333,10 @@
     },
     {
         "tab"       : "Footer",
-        "key"       : "footer.col_2_title",
-        "label"     : "Title of second column",
-        "type"      : "text",
-        "default"   : "My account"
-    },
-    {
-        "tab"       : "Footer",
         "key"       : "footer.col_2_categories",
         "label"     : "List of IDs of categories to display in second column",
         "type"      : "text",
         "default"   : ""
-    },
-    {
-        "tab"       : "Footer",
-        "key"       : "footer.col_3_title",
-        "label"     : "Title of third column",
-        "type"      : "text",
-        "default"   : "Service"
     },
     {
         "tab"       : "Footer",
@@ -599,20 +543,6 @@
     },
     {
         "tab"               : "Item lists",
-        "key"               : "item.lists.1.de.list_name",
-        "label"             : "Name of the first item list (DE)",
-        "type"              : "text",
-        "default"           : "DE name"
-    },
-    {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.1.en.list_name",
-        "label"             : "Name of the first item list (EN)",
-        "type"              : "text",
-        "default"           : "EN name"
-    },
-    {
-        "tab"               : "Item lists",
         "key"               : "item.lists.1.tag_ids",
         "label"             : "List of IDs of tags to display in the first item list",
         "type"              : "text",
@@ -633,20 +563,6 @@
     },
     {
         "tab"               : "Item lists",
-        "key"               : "item.lists.2.de.list_name",
-        "label"             : "Name of the second item list (DE)",
-        "type"              : "text",
-        "default"           : "DE name"
-    },
-    {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.2.en.list_name",
-        "label"             : "Name of the second item list (EN)",
-        "type"              : "text",
-        "default"           : "EN name"
-    },
-    {
-        "tab"               : "Item lists",
         "key"               : "item.lists.2.tag_ids",
         "label"             : "List of IDs of tags to display in the second item list",
         "type"              : "text",
@@ -664,20 +580,6 @@
             "tag_list"      : "Tags"
         },
         "default"           : "tag_list"
-    },
-    {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.3.de.list_name",
-        "label"             : "Name of the third item list (DE)",
-        "type"              : "text",
-        "default"           : "DE name"
-    },
-    {
-        "tab"               : "Item lists",
-        "key"               : "item.lists.3.en.list_name",
-        "label"             : "Name of the third item list (EN)",
-        "type"              : "text",
-        "default"           : "EN name"
     },
     {
         "tab"               : "Item lists",
@@ -1443,20 +1345,6 @@
         "default"                     : "all"
     },
     {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_home",
-        "label"     : "Meta description for homepage (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_home",
-        "label"     : "Meta description for homepage (EN)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_contact",
         "label"                       : "Robots for contact page",
@@ -1470,20 +1358,6 @@
           "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_contact",
-        "label"     : "Meta description for contact page (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_contact",
-        "label"     : "Meta description for contact page (EN)",
-        "type"      : "textarea",
-        "default"   : ""
     },
     {
         "tab"                         : "SEO",
@@ -1501,20 +1375,6 @@
         "default"                     : "all"
     },
     {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_cancel_rights",
-        "label"     : "Meta description for cancellation rights (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_cancel_rights",
-        "label"     : "Meta description for cancellation rights (EN)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_cancel_form",
         "label"                       : "Robots for cancellation form",
@@ -1528,20 +1388,6 @@
           "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_cancel_form",
-        "label"     : "Meta description for cancellation form (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_cancel_form",
-        "label"     : "Meta description for cancellation form (EN)",
-        "type"      : "textarea",
-        "default"   : ""
     },
     {
         "tab"                         : "SEO",
@@ -1559,20 +1405,6 @@
         "default"                     : "all"
     },
     {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_legal_disclosure",
-        "label"     : "Meta description for legal disclosure (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_legal_disclosure",
-        "label"     : "Meta description for legal disclosure (EN)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_privacy_policy",
         "label"                       : "Robots for privacy policy",
@@ -1588,20 +1420,6 @@
         "default"                     : "all"
     },
     {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_privacy_policy",
-        "label"     : "Meta description for privacy policy (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_privacy_policy",
-        "label"     : "Meta description for privacy policy (EN)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
         "tab"                         : "SEO",
         "key"                         : "meta.robots_terms_and_conditions",
         "label"                       : "Robots for terms and conditions",
@@ -1615,20 +1433,6 @@
           "noindex, nofollow"          : "noindex, nofollow"
         },
         "default"                     : "all"
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.de.description_terms_and_conditions",
-        "label"     : "Meta description for terms and conditions (DE)",
-        "type"      : "textarea",
-        "default"   : ""
-    },
-    {
-        "tab"       : "SEO",
-        "key"       : "meta.en.description_terms_and_conditions",
-        "label"     : "Meta description for terms and conditions (EN)",
-        "type"      : "textarea",
-        "default"   : ""
     },
     {
         "tab"               : "Design",
