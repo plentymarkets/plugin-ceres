@@ -83,11 +83,7 @@
 		<p class="m-y-0">
 			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
 			<span class="d-inline-block">
-                {% if services.sessionStorage.getLang() == "de" %} 
-                    {{ config("Ceres.contact.opening_times") }}
-                {% else %}
-                    {{ config("Ceres.contact.en.opening_times") }}
-                {% endif %}
+                {{ trans("Ceres::Template.contactOpeningTimes") }}
             </span>
 		</p>
     {% endif %}
