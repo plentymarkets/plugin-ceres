@@ -1,7 +1,7 @@
 {% extends getPartial('page-design') %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_contact") }}">
+    <meta name="description" content="{{ trans('Ceres::Template.contactMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_contact") }}">
     <title>{{ trans("Ceres::Template.contact") }} | {{ config("Ceres.header.company_name") }}</title>
 

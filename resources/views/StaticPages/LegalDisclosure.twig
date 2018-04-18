@@ -3,7 +3,7 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_legal_disclosure") }}">
+    <meta name="description" content="{{ trans('Ceres::Template.legalDisclosureMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_legal_disclosure") }}">
     <title>{{ trans("Ceres::Template.legalDisclosure") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}

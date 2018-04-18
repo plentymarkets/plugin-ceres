@@ -5,7 +5,7 @@
 {% set companyName  = config("Ceres.header.company_name") %}
 
 {% block PartialHead %}
-    <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_home") }}">
+    <meta name="description" content="{{ trans('Ceres::Template.homepageMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_home") }}">
 
     <meta property="og:title" content="{{ companyName }}"/>
