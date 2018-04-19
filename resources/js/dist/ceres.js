@@ -14589,7 +14589,10 @@ Vue.component("add-to-basket", {
                     _this.openAddToBasketOverlay(basketObject.quantity);
                 }, function (error) {
                     _this.waiting = false;
-                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+
+                    if (error.data) {
+                        NotificationService.error(_TranslationService2.default.translate("Ceres::Template." + _ExceptionMap2.default.get(error.data.exceptionCode.toString()))).closeAfter(5000);
+                    }
                 });
             }
         },
@@ -23685,7 +23688,9 @@ var actions = {
                     $(document.body).trigger("sticky_kit:recalc");
                 }, 0);
             }).fail(function (error) {
-                NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops")).closeAfter(10000);
+                if (error.data) {
+                    NotificationService.error(_TranslationService2.default.translate("Ceres::Template.notFoundOops")).closeAfter(10000);
+                }
             });
         } else {
             commit("setIsBasketInitiallyLoaded");

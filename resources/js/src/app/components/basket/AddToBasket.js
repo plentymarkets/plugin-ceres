@@ -121,7 +121,7 @@ Vue.component("add-to-basket", {
                     {
                         this.waiting = false;
 
-                        if(error.data)
+                        if (error.data)
                         {
                             NotificationService.error(
                                 TranslationService.translate(

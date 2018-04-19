@@ -109,13 +109,13 @@ const actions =
                     })
                     .fail(error =>
                     {
-                        if(error.data)
+                        if (error.data)
                         {
                             NotificationService.error(
                                 TranslationService.translate("Ceres::Template.notFoundOops")
                             ).closeAfter(10000);
                         }
-                    })
+                    });
             }
             else
             {
