@@ -74,7 +74,7 @@ function _removeTempDesc()
 
 function _updateCategoryTexts(currentCategory)
 {
-    const categoryTitle = currentCategory.details[0].metaTitle.length > 0 ?
+    const categoryTitle = currentCategory.details[0].metaTitle ?
                             currentCategory.details[0].metaTitle :
                             currentCategory.details[0].name;
 
