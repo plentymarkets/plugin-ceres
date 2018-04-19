@@ -12,7 +12,7 @@
     <div class="categoriegrid page-content container-max">
         <div class="row m-t-1">
             <div class="col-xs-12">
-                <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }}</h1>
+                <h1 class="h2" id="searchPageTitle">{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}</h1>
             </div>
         </div>
 
@@ -71,6 +71,6 @@
 {% block PartialHead %}
 <script type="application/ld+json">{"@context": "http://schema.org","@type": "WebSite","url": "{{ webstoreConfig.domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ webstoreConfig.domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}</script>
     {% if isSearch %}
-        <title>{{ trans("Ceres::Template.generalSearchResults") }} {{ searchString }} | {{ ceresConfig.header.companyName }}</title>
+        <title>{{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }} | {{ ceresConfig.header.companyName }}</title>
     {% endif %}
 {% endblock %}

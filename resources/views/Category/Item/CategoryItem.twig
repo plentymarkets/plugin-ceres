@@ -63,7 +63,7 @@
             {% if ceresConfig.header.showNavBars == "side" or ceresConfig.header.showNavBars == "both" %}
                 <div class="col-xs-3 hidden-md-down">
                     <div class="sidebar-categories">
-                        <div class="category-title">{{ trans("Ceres::Template.generalCategories") }}</div>
+                        <div class="category-title">{{ trans("Ceres::Template.itemCategories") }}</div>
                         {{ include('Ceres::PageDesign.Partials.Header.SideNavigation.twig') }}
                     </div>
 
@@ -120,7 +120,7 @@
         <link rel=“next“ href=“{{ webstoreConfig.domainSsl }}?{{ query | merge({'page' : currentPage+1 }) | url_encode }}“ />
     {% endif %}
 
-    <title>{{ category.details[0].name }} | {{ ceresConfig.header.companyName }}</title>
+    <title>{% if category.details[0].metaTitle %}{{ category.details[0].metaTitle }}{% else %}{{ category.details[0].name }}{% endif %} | {{ ceresConfig.header.companyName }}</title>
 
     <meta name="description" content="{{ category.details[0].metaDescription }}">
     <meta name="keywords" content="{{ category.details[0].metaKeywords }}">

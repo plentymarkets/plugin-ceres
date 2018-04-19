@@ -12,29 +12,29 @@
                         <div class="input-unit" data-validate="mail">
                             {% set uid_mail = uid() %}
                             <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
+                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
                             {% set uid_pwd = uid() %}
                             <input type="password" name="password" id="{{ uid_pwd }}" v-model="password">
-                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.accPassword") }}*</label>
+                            <label for="{{ uid_pwd }}">{{ trans("Ceres::Template.loginPassword") }}*</label>
                         </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.accEmptyPassword") }}</span>
+                        <span class="error-msg">{{ trans("Ceres::Template.loginEmptyPassword") }}</span>
                     </div>
                 </div>
             </div>
             <div :class="{'modal-footer': modalElement, 'row': !modalElement}">
                 <div class="reset-pwd-direction" :class="{'col-xs-7 col-sm-4': !modalElement}">
-                    <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.accForgotPassword") }}?</a>
+                    <a href="javascript:void(0)" @click="showResetPwdView" class="small">{{ trans("Ceres::Template.loginForgotPassword") }}?</a>
                     {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
                 </div>
                 <div :class="{'col-xs-5 col-sm-8 text-sm-right': !modalElement}">
                     <button @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-medium">
                         <i class="fa fa-user" v-waiting-animation="isDisabled"></i>
-                        {{ trans("Ceres::Template.accLogin") }}
+                        {{ trans("Ceres::Template.login") }}
                     </button>
                 </div>
             </div>
@@ -44,16 +44,16 @@
         <form :id="'reset-pwd-form-' + _uid" class="reset-pwd-container">
             <div :class="{'modal-body': modalElement}">
                 <div class="alert alert-info alert-dismissible pwd-forgot-info">
-                    <span class="info-badge">{{ trans("Ceres::Template.accForgotPasswordInfo") }}</span>
+                    <span class="info-badge">{{ trans("Ceres::Template.loginForgotPasswordInfo") }}</span>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="mail">
                             {% set uid_mail = uid() %}
                             <input type="email" name="email" id="{{ uid_mail }}" v-model="username">
-                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
+                            <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                         </div>
-                        <span class="error-msg">{{ trans("Ceres::Template.contactEnterConfirmEmail") }}</span>
+                        <span class="error-msg">{{ trans("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                 </div>
             </div>
@@ -63,12 +63,12 @@
 
                     <button type="button" @click.prevent="cancelResetPwd" class="btn btn-secondary btn-medium btn-m-r">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.generalBackToLogin") }}
+                        {{ trans("Ceres::Template.loginBackToLogin") }}
                     </button>
 
                     <button @click.prevent="validateResetPwd" :disabled="isDisabled" class="btn btn-primary btn-medium" :class="{'pull-right': !modalElement }">
                         <i v-waiting-animation="isDisabled" class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.generalSend") }}
+                        {{ trans("Ceres::Template.loginSend") }}
                     </button>
                 </div>
             </div>

@@ -42,9 +42,9 @@
                     {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
 
                     <div>
-                        <a v-waiting-animation-infinite href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.orderCheckout") }}">
+                        <a v-waiting-animation-infinite href="/checkout" :class="{ 'disabled': basketItems.length <= 0 }" class="btn btn-primary btn-block checkOutBtn" title="{{ trans("Ceres::Template.basketCheckout") }}">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            {{ trans("Ceres::Template.orderCheckout") }}
+                            {{ trans("Ceres::Template.basketCheckout") }}
                         </a>
                     </div>
 

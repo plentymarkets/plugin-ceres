@@ -31,14 +31,14 @@
 
                 {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
                 <dt v-if="showProperty( 'basket.shipping_costs_net' )">
-                    {{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketNet") }})
+                    {{ trans("Ceres::Template.basketShippingCosts") }} ({{ trans("Ceres::Template.basketNet") }})
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_net' )">
                     ${ basket.shippingAmountNet | currency }
                 </dd>
 
                 <dt v-if="showProperty( 'basket.shipping_costs_gross' )">
-                    <strong>{{ trans("Ceres::Template.itemShippingCosts") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
+                    <strong>{{ trans("Ceres::Template.basketShippingCosts") }} ({{ trans("Ceres::Template.basketGross") }})</strong>
                 </dt><!--
                 --><dd v-if="showProperty( 'basket.shipping_costs_gross' )">
                     <strong>${ basket.shippingAmount | currency }</strong>

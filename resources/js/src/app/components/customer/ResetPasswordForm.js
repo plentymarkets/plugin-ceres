@@ -101,7 +101,7 @@ Vue.component("reset-password-form", {
                     window.location.assign(window.location.origin);
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.accChangePasswordSuccessful")
+                        TranslationService.translate("Ceres::Template.resetPwChangePasswordSuccessful")
                     ).closeAfter(3000);
 
                 })
@@ -110,7 +110,7 @@ Vue.component("reset-password-form", {
                     this.isDisabled = false;
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.accChangePasswordFailed")
+                        TranslationService.translate("Ceres::Template.resetPwChangePasswordFailed")
                     ).closeAfter(5000);
                 });
         },
