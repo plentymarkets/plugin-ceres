@@ -12264,6 +12264,10 @@ body .wrapper-main {
   overflow-x: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .page-content {
   background-color: #f7f7f9;
 }
@@ -14880,6 +14884,13 @@ Custom classes
   background: #dcdbd8;
 }
 
+.css-loading {
+  right: 10px;
+  position: fixed;
+  z-index: 99;
+  font-size: 27px;
+}
+
 .cmp-country-settings,
 .cmp-currency-select {
   background-color: #282d2f;
@@ -17466,6 +17477,19 @@ body.menu-is-visible {
   color: #4D4F4D;
 }
 
+.cmp-hero .hero-category .hero-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cmp-hero .hero-category .hero-image.contain {
+  background-size: contain;
+}
+
 .cmp-hero .hero-category .hero-category-inner {
   position: absolute;
   width: 100%;
@@ -17638,7 +17662,6 @@ body.menu-is-visible {
         flex-flow: column nowrap;
     -ms-flex: 1 0 24%;
         flex: 1 0 24%;
-    padding-left: 1rem;
   }
   .cmp-hero .hero-category {
     min-height: 0;
@@ -18775,6 +18798,18 @@ body.menu-is-visible {
 .featured-categories .col-md-4 .prop-inner {
   padding: 15px 0;
   width: calc(100% - 15px);
+}
+
+.featured-categories .featured-image {
+  height: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.featured-categories .featured-image.contain {
+  background-size: contain;
 }
 
 .sale-new .col-xs-6 .prop-inner {
