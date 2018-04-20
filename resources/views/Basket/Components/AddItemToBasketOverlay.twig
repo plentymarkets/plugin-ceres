@@ -13,7 +13,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <span style="float: right; margin-right: 5px; color: lightgray;"><span class="timer">${ timeToClose }</span>s</span>
-                        <div class="modal-title h5">{{ trans("Ceres::Template.basketItemAdded") }}</div>
+                        <div class="modal-title h5">{{ trans("Ceres::Template.singleItemAdded") }}</div>
                     </div>
                     <!-- ./MODAL HEADER -->
 
@@ -40,8 +40,16 @@
                                 </p>
 
                                 <p class="small" v-for="property in latestBasketEntry.item.properties">
-                                    <strong v-if="property.property.value">${property.property.names.name} (${latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
-                                    <span v-if="property.property.value">${property.property.value}</span>
+                                    <template v-if="property.property.value">
+                                        <strong>${ property.property.names.name } (+ ${ latestBasketEntry.item.properties | propertySurcharge(property.property.id) | currency }):</strong>
+                                        <span v-if="property.property.valueType === 'file'">
+                                            <a :href="property.property.value | fileUploadPath" target="_blank">
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                ${ property.property.value | fileName }
+                                            </a>
+                                        </span>
+                                        <span v-else>${ property.property.value }</span>
+                                    </template>
                                 </p>
                             </div>
                         </div>
@@ -54,11 +62,11 @@
                             <div class="col-sm-8 offset-sm-2 item-confirm-special-case-close">
                                 <a v-waiting-animation-infinite href="/basket" class="btn btn-primary btn-medium btn-m-r btn-outline-primary">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    {{ trans("Ceres::Template.basket") }}
+                                    {{ trans("Ceres::Template.singleItemBasket") }}
                                 </a>
                                 <a v-waiting-animation-infinite href="/checkout" class="btn btn-primary btn-medium">
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                    {{ trans("Ceres::Template.orderCheckout") }}
+                                    {{ trans("Ceres::Template.singleItemCheckout") }}
                                 </a>
                                 {{ LayoutContainer.show("Ceres::Basket.ExtendOverlayButtons") }}
                             </div>

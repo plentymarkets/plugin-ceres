@@ -49,16 +49,16 @@
         <div class="container-max m-b-3">
             <div class="row">
                 <div class="jumbotron col-md-8 offset-md-2 m-y-3">
-                    <h1 class="m-b-2">
+                    <span class="h1 m-b-2">
                         <span class="fa fa-warning text-danger"></span>
-                        {{ trans("Ceres::Template.vueErrorTitle") }}
-                    </h1>
+                        {{ trans("Ceres::Template.devVueErrorTitle") }}
+                    </span>
                     <p class="lead">
                         {% autoescape false %}
-                        {{ trans("Ceres::Template.vueErrorMessage") }}
+                        {{ trans("Ceres::Template.devVueErrorMessage") }}
                         {% endautoescape %}
                     </p>
-                    <a href="{{ trans("Ceres::Template.vueErrorLinkURL") }}" target="_blank" class="btn btn-primary btn-lg">{{ trans("Ceres::Template.vueErrorLink") }}</a>
+                    <a href="{{ trans("Ceres::Template.devVueErrorLinkURL") }}" target="_blank" class="btn btn-primary btn-lg">{{ trans("Ceres::Template.devVueErrorLink") }}</a>
                     <hr>
                 </div>
             </div>

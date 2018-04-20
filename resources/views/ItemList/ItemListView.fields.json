@@ -16,6 +16,7 @@
   "properties.group.backendName",
   "properties.property.names.name",
   "properties.property.names.lang",
+  "properties.property.isShownOnItemPage",
   "salesPrices.price",
   "salesPrices.type",
   "unit.content",

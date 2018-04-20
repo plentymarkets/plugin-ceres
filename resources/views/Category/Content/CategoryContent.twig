@@ -3,8 +3,8 @@
 {% block PartialHead %}
     <title>{{ category.details[0].metaTitle }} | {{ ceresConfig.header.companyName }}</title>
 
-    <meta name="description" content="{{ category.details[0].metaDescription | json_encode }}">
-    <meta name="keywords" content="{{ category.details[0].metaKeywords | json_encode }}">
+    <meta name="description" content="{{ category.details[0].metaDescription }}">
+    <meta name="keywords" content="{{ category.details[0].metaKeywords }}">
 
     <meta name="robots" content="{{ metaRobots }}">
 {% endblock %}

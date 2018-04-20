@@ -26,13 +26,56 @@ Vue.component("add-to-basket", {
             type: Boolean,
             default: false
         },
+        missingOrderProperties:
+        {
+            type: Array,
+            default: () => []
+        },
         isVariationSelected:
         {
             type: Boolean,
             default: true
         }
     },
+    computed:
+    {
+        hasChildren()
+        {
+            return this.item.filter && this.item.filter.hasChildren;
+        },
 
+        canBeAddedToBasket()
+        {
+            const isSalable             = this.item.filter && this.item.filter.isSalable;
+            const hasChildren           = this.item.filter && this.item.filter.hasChildren;
+            const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
+            const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
+            const requiresProperties    = !this.requiresProperties;
+
+            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity && requiresProperties;
+        },
+
+        variationId()
+        {
+            return this.item.variation.id;
+        },
+
+        requiresProperties()
+        {
+            if (App.config.item.requireOrderProperties && this.item.properties)
+            {
+                const availableProperties = this.item.properties.filter(property => property.property.isShownOnItemPage);
+
+                return !!availableProperties.length;
+            }
+
+            return false;
+        },
+
+        ...Vuex.mapState({
+            isBasketLoading: state => state.basket.isBasketLoading
+        })
+    },
     data()
     {
         return {
@@ -41,12 +84,10 @@ Vue.component("add-to-basket", {
             waiting: false
         };
     },
-
     created()
     {
         this.$options.template = this.template;
     },
-
     methods:
     {
         /**
@@ -54,7 +95,12 @@ Vue.component("add-to-basket", {
          */
         addToBasket()
         {
-            if (this.item.filter.isSalable)
+            if (this.missingOrderProperties.length)
+            {
+                this.showMissingPropertiesError();
+            }
+
+            else if (this.item.filter.isSalable)
             {
                 this.waiting = true;
 
@@ -81,6 +127,20 @@ Vue.component("add-to-basket", {
                         ).closeAfter(5000);
                     });
             }
+        },
+        showMissingPropertiesError()
+        {
+            this.$store.commit("setVariationMarkInvalidProps", true);
+
+            const propertyNames = this.missingOrderProperties.map(property => property.property.names.name);
+            let errorMsgContent = "";
+
+            for (const name of propertyNames)
+            {
+                errorMsgContent += name + "<br>";
+            }
+
+            NotificationService.error(Translations.Template.singleItemMissingOrderPropertiesError.replace("<properties>", errorMsgContent));
         },
 
         directToItem()
@@ -116,30 +176,6 @@ Vue.component("add-to-basket", {
             this.quantity = value;
         }
     },
-
-    computed:
-    {
-        variationId()
-        {
-            return this.item.variation.id;
-        },
-
-        hasChildren()
-        {
-            return this.item.filter && this.item.filter.hasChildren;
-        },
-
-        canBeAddedToBasket()
-        {
-            const isSalable             = this.item.filter && this.item.filter.isSalable;
-            const hasChildren           = this.item.filter && this.item.filter.hasChildren;
-            const intervalQuantity      = this.item.variation.intervalOrderQuantity || 1;
-            const minimumOrderQuantity  = this.item.variation.minimumOrderQuantity || intervalQuantity;
-
-            return isSalable && !hasChildren && minimumOrderQuantity === intervalQuantity;
-        }
-    },
-
     watch:
     {
         quantity(newValue, oldValue)

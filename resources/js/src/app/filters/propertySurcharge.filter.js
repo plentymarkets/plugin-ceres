@@ -7,7 +7,6 @@ Vue.filter("propertySurcharge", function(properties, propertyId)
         if (property.surcharge > 0)
         {
             return property.surcharge;
-
         }
         else if (property.property.surcharge > 0)
         {

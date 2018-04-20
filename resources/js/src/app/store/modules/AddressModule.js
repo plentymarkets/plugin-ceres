@@ -29,6 +29,20 @@ const mutations =
             }
         },
 
+        selectBillingAddressById(state, billingAddressId)
+        {
+            if (billingAddressId)
+            {
+                const billingAddress = state.billingAddressList.find(address => address.id === billingAddressId);
+
+                if (billingAddress)
+                {
+                    state.billingAddressId = billingAddress.id;
+                    state.billingAddress = billingAddress;
+                }
+            }
+        },
+
         setDeliveryAddressList(state, deliveryAddressList)
         {
             if (Array.isArray(deliveryAddressList))
@@ -72,7 +86,7 @@ const mutations =
 
                 if (state.deliveryAddress === deliveryAddress)
                 {
-                    state.deliveryAddress = state.deliveryAddress.find(address => address.id === -99);
+                    state.deliveryAddress = state.deliveryAddressList.find(address => address.id === -99);
                     state.deliveryAddressId = -99;
                 }
             }
@@ -238,9 +252,16 @@ const actions =
                     commit("removeDeliveryAddress", address);
                 }
 
-                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType)
+                ApiService.delete("/rest/io/customer/address/" + address.id + "?typeId=" + addressType, null, {keepOriginalResponse: true})
                     .done(response =>
                     {
+                        if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout)
+                        {
+                            const billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                            commit("selectBillingAddressById", billingAddressId);
+                        }
+
                         resolve(response);
                     })
                     .fail(error =>
@@ -287,12 +308,19 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
-                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true})
+                ApiService.post("/rest/io/customer/address?typeId=" + addressType, address, {supressNotifications: true, keepOriginalResponse: true})
                     .done(response =>
                     {
                         if (addressType === "1")
                         {
                             commit("updateBillingAddress", address);
+
+                            if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout)
+                            {
+                                const billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
+
+                                commit("selectBillingAddressById", billingAddressId);
+                            }
                         }
                         else if (addressType === "2")
                         {

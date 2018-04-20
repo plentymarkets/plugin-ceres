@@ -7,17 +7,8 @@
             {{ buttonReplacement }}
         {% else %}
             <button class="btn btn-success btn-block" @click="placeOrder()" :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded">
-                <i v-waiting-animation="waiting" class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.orderBuyNow") }}
+                <i v-waiting-animation="waiting" class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.checkoutBuyNow") }}
             </button>
         {% endif %}
-
-        <div class="modal fade" ref="modal" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" ref="modalContent">
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
     </div>
 </script>

@@ -4,23 +4,23 @@
         {% autoescape false %}
             {% set gtcContent %}<!--
                 --><a href="/gtc" target="_blank">
-                    <span>{{ trans("Ceres::Template.generalGtc") }}</span>
+                    <span>{{ trans("Ceres::Template.checkoutGtc") }}</span>
                 </a><!--
             -->{% endset %}
 
             {% set cancellationContent %}<!--
                 --><a href="/cancellation-rights" target="_blank">
-                    <strong>{{ trans("Ceres::Template.generalCancellationRight") }}</strong>
+                    <strong>{{ trans("Ceres::Template.checkoutCancellationRight") }}</strong>
                 </a><!--
             -->{% endset %}
 
             {% set policyContent %}<!--
                 --><a href="/privacy-policy" target="_blank">
-                    <span>{{ trans("Ceres::Template.generalPrivacyPolicy") }}</span>
+                    <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy") }}</span>
                 </a><!--
             -->{% endset %}
 
-            {{ trans("Ceres::Template.generalChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
+            {{ trans("Ceres::Template.checkoutChooseOur", {"gtc": gtcContent, "cancellation": cancellationContent, "policy": policyContent}) }}
         {% endautoescape %}
     </label>
 </script>

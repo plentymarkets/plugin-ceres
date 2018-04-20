@@ -45,6 +45,23 @@ Vue.component("basket-list-item", {
             return this.waiting || this.isBasketLoading;
         },
 
+        propertySurchargeSum()
+        {
+            let sum = 0;
+
+            for (const property of this.basketItem.basketItemOrderParams)
+            {
+                sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
+            }
+
+            return sum;
+        },
+
+        itemTotalPrice()
+        {
+            return this.basketItem.quantity * (this.basketItem.variation.data.prices.default.unitPrice.value + this.propertySurchargeSum);
+        },
+
         ...Vuex.mapState({
             isBasketLoading: state => state.basket.isBasketLoading
         })
@@ -125,6 +142,18 @@ Vue.component("basket-list-item", {
                         this.waiting = false;
                     });
             }
+        },
+
+        isPropertyVisible(propertyId)
+        {
+            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+
+            if (property)
+            {
+                return property.property.isShownAtCheckout;
+            }
+
+            return false;
         }
     }
 });

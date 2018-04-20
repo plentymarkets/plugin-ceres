@@ -107,6 +107,13 @@
         "default"                     : "false"
     },
     {
+        "tab"                         : "Global",
+        "key"                         : "contact.enable_confirming_privacy_policy",
+        "label"                       : "Enable to display checkbox for confirming privacy policy",
+        "type"                        : "checkbox",
+        "default"                     : "true"
+    },
+    {
         "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
@@ -542,6 +549,13 @@
         "label"             : "Show category description in category view",
         "type"              : "checkbox",
         "default"           : "true"
+    },
+    {
+        "tab"               : "Item view",
+        "key"               : "item.require_all_properties",
+        "label"             : "Require all order properties before add to basket",
+        "type"              : "checkbox",
+        "default"           : "false"
     },
     {
         "tab"               : "Item lists",
@@ -1619,44 +1633,50 @@
     {
         "tab"               : "Design",
         "key"               : "brand-primary",
-        "label"             : "Primary Colour",
+        "label"             : "Primary colour",
         "type"              : "color",
-        "default"           : "#008ebd"
+        "default"           : "#008ebd",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-secondary",
-        "label"             : "Secondary Colour",
+        "label"             : "Secondary colour",
         "type"              : "color",
-        "default"           : "#d4021d"
+        "default"           : "#d4021d",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-success",
-        "label"             : "Success Colour",
+        "label"             : "Success colour",
         "type"              : "color",
-        "default"           : "#7ED321"
+        "default"           : "#7ED321",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-info",
-        "label"             : "Information Colour",
+        "label"             : "Information colour",
         "type"              : "color",
-        "default"           : "#5bc0de"
+        "default"           : "#5bc0de",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-warning",
-        "label"             : "Warning Colour",
+        "label"             : "Warning colour",
         "type"              : "color",
-        "default"           : "#f0ad4e"
+        "default"           : "#f0ad4e",
+        "scss"              : true
     },
     {
         "tab"               : "Design",
         "key"               : "brand-danger",
-        "label"             : "Danger Colour",
+        "label"             : "Danger Cclour",
         "type"              : "color",
-        "default"           : "#d9534f"
+        "default"           : "#d9534f",
+        "scss"              : true
     },
     {
         "tab"               : "Logging and performance",

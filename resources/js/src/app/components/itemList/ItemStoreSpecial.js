@@ -1,5 +1,3 @@
-var accounting = require("accounting");
-
 Vue.component("item-store-special", {
 
     delimiters: ["${", "}"],
@@ -54,7 +52,7 @@ Vue.component("item-store-special", {
             // eslint-disable-next-line
             let percent = (1 - this.variationRetailPrice.unitPrice.value / this.recommendedRetailPrice.price.value ) * -100;
 
-            return accounting.formatNumber(percent, this.decimalCount, "");
+            return percent.toFixed(this.decimalCount).replace(".", App.decimalSeparator);
         }
     }
 });

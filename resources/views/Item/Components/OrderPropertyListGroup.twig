@@ -1,0 +1,22 @@
+{{ component( "Ceres::Item.Components.OrderPropertyListItem" ) }}
+
+<script type="x/template" id="vue-order-property-list-group">
+    <div>
+        <div v-if="isShownOnItemPageCount">
+
+            <div v-if="propertyGroup.group" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="h4">
+                    ${ propertyGroup.group.names.name }:
+                </div>
+                <p class="text-muted">
+                    ${ propertyGroup.group.names.description }
+                </p>
+            </div>
+
+            <div v-for="property in propertyGroup.properties" :key="property.id" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <order-property-list-item v-if="property.isShownOnItemPage" :group="propertyGroup.group" :property="property" v-on:radio-change="unsetDeselectedRadios($event)"></order-property-list-item>
+            </div>
+
+        </div>
+    </div>
+</script>

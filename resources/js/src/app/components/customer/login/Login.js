@@ -107,7 +107,7 @@ Vue.component("login", {
                     ApiService.setToken(response);
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.accLoginSuccessful")
+                        TranslationService.translate("Ceres::Template.loginSuccessful")
                     ).closeAfter(10000);
 
                     if (this.backlink !== null && this.backlink)
@@ -132,7 +132,7 @@ Vue.component("login", {
                     case 401:
                         this.loginFields.addClass("has-login-error");
                         NotificationService.error(
-                            TranslationService.translate("Ceres::Template.accLoginFailed")
+                            TranslationService.translate("Ceres::Template.loginFailed")
                         ).closeAfter(10000);
                         break;
                     default:
@@ -148,7 +148,7 @@ Vue.component("login", {
         {
             this.isDisabled = true;
 
-            ApiService.post("/rest/io/customer/password_reset", {email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPasswordMailSubject"})
+            ApiService.post("/rest/io/customer/password_reset", {email: this.username, template: "Ceres::Customer.ResetPasswordMail", subject: "Ceres::Template.resetPwMailSubject"})
                 .done(() =>
                 {
                     if (document.getElementById(this.modalElement) !== null)
@@ -165,7 +165,7 @@ Vue.component("login", {
                     }
 
                     NotificationService.success(
-                        TranslationService.translate("Ceres::Template.generalSendEmailOk")
+                        TranslationService.translate("Ceres::Template.loginSendEmailOk")
                     ).closeAfter(5000);
 
                 })
@@ -174,7 +174,7 @@ Vue.component("login", {
                     this.isDisabled = false;
 
                     NotificationService.error(
-                        TranslationService.translate("Ceres::Template.accResetPwDErrorOnSendEmail")
+                        TranslationService.translate("Ceres::Template.loginResetPwDErrorOnSendEmail")
                     ).closeAfter(5000);
                 });
         },
@@ -187,13 +187,13 @@ Vue.component("login", {
             if (document.getElementById(this.modalElement) !== null)
             {
                 $(".login-modal .modal-title").html(
-                    TranslationService.translate("Ceres::Template.accForgotPassword")
+                    TranslationService.translate("Ceres::Template.loginForgotPassword")
                 );
             }
             else
             {
                 $(".login-view-title").html(
-                    TranslationService.translate("Ceres::Template.accForgotPassword")
+                    TranslationService.translate("Ceres::Template.loginForgotPassword")
                 );
             }
 
@@ -211,13 +211,13 @@ Vue.component("login", {
             if (document.getElementById(this.modalElement) !== null)
             {
                 $(".login-modal .modal-title").text(
-                    TranslationService.translate("Ceres::Template.accLogin")
+                    TranslationService.translate("Ceres::Template.login")
                 );
             }
             else
             {
                 $(".login-view-title").text(
-                    TranslationService.translate("Ceres::Template.accLogin")
+                    TranslationService.translate("Ceres::Template.login")
                 );
             }
 

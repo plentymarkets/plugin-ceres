@@ -101,9 +101,10 @@ module.exports = (function($)
         config = config || {};
         config.data = data || null;
         config.dataType = config.dataType || "json";
-        config.contentType = config.contentType || "application/x-www-form-urlencoded; charset=UTF-8";
+        config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
         config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
+        config.keepOriginalResponse = !!config.keepOriginalResponse;
 
         if (!config.doInBackground)
         {
@@ -112,7 +113,14 @@ module.exports = (function($)
         $.ajax(url, config)
             .done(function(response)
             {
-                deferred.resolve(response.data || response);
+                if (config.keepOriginalResponse)
+                {
+                    deferred.resolve(response);
+                }
+                else
+                {
+                    deferred.resolve(response.data || response);
+                }
             })
             .fail(function(jqXHR)
             {

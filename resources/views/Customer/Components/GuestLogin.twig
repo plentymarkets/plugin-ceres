@@ -6,14 +6,14 @@
                     <div class="input-unit" data-validate="mail">
                         {% set uid_mail = uid() %}
                         <input type="email" name="email" id="{{ uid_mail }}" v-model="email">
-                        <label for="{{ uid_mail }}">{{ trans("Ceres::Template.accEmail") }}*</label>
+                        <label for="{{ uid_mail }}">{{ trans("Ceres::Template.loginEmail") }}*</label>
                     </div>
                 </div>
 
                 <div class="col-xs-4 offset-xs-8">
                     <button @click.prevent="validate" :disabled="isDisabled" class="btn btn-primary btn-medium pull-xs-right">
                         <i v-waiting-animation="isDisabled" class="fa fa-arrow-right" aria-hidden="true"></i>
-                        {{ trans("Ceres::Template.generalNext") }}
+                        {{ trans("Ceres::Template.loginNext") }}
                     </button>
                 </div>
             </div>

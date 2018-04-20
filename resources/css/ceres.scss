@@ -10675,6 +10675,14 @@ a:active {
     cursor: pointer;
 }
 
+.d-table {
+    display: table;
+}
+
+.border-radius-0 {
+    border-radius: 0;
+}
+
 body {
 
 	background-color: $gray-lightest;
@@ -12376,10 +12384,20 @@ Custom classes
 
 }
 
-.input-group-h{
+.inline-form {
 
-	
+	& .input-group-addon,
+	& .form-control {
+		border: 1px solid #D9D9D9;
+	}
+
+	& .btn {
+		padding-top: 8px;
+    	padding-bottom: 8px;
+	}
 }
+
+
 
 $color: $gray-dark;
 $background: white;
@@ -12428,7 +12446,7 @@ $border-width: 1px;
     input[type], textarea,
 	input:not([type="checkbox"]),
 	input:not([type="radio"]),
-	.input-unit-preview{
+	.input-unit-preview {
 
 	    color: $color;
 	    background-color: $background;
@@ -12445,10 +12463,9 @@ $border-width: 1px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-
+        display: block;
 
 	    -webkit-transition: all .2s;
-
 
 	    transition: all .2s;
 
@@ -12570,6 +12587,58 @@ $border-width: 1px;
             color: white;
         }
         
+    }
+}
+
+.file-input
+{
+    height: 38px;
+    cursor: pointer;
+    
+    > input[type="file"]
+    {
+        width: 0;
+        height: 0;
+        padding: 0;
+        visibility: hidden;
+    }
+    
+    > .input-unit-preview
+    {
+        height: 38px;
+    }
+    
+    > .input-unit-btn
+    {
+        content: "";
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        background-color: $border-color;
+        display: block;
+        right: 0;
+        top: 0;
+        
+        i {
+            margin: 10px;
+            width: 18px;
+            height: 18px;
+            font-weight: 300;
+            background-color: $border-color;
+            color: $text-color;
+        }
+    }
+    
+    &.success .input-unit-btn,
+    &.success .input-unit-btn i {
+        background-color: $brand-success;
+        color: #fff;
+    }
+    
+    &.error .input-unit-btn,
+    &.error .input-unit-btn i {
+        background-color: $brand-danger;
+        color: #fff;
     }
 }
 
@@ -16019,7 +16088,7 @@ nav.navbar.megamenu {
 
     .save-new-pwd-btn {
       display: inline-block;
-      width: auto;
+      width: 10rem;
     }
   }
 
@@ -16321,9 +16390,9 @@ nav.navbar.megamenu {
 		visibility: hidden;
 	}
 
-	&.refreshing {
+	&.with-icon {
 		&:after {
-			content: "\f021";
+			content: "";
 			font-family: FontAwesome;
 			position: absolute;
 			width: 100%;
@@ -16347,9 +16416,24 @@ nav.navbar.megamenu {
 			-webkit-transition: opacity .1s ease-out;
 			transition: opacity .1s ease-out;
 			visibility: hidden;
+
+			
+		}
+
+		&.refreshing {
+			&:after {
+				content: "\f021";
+			}
+		}
+
+		&.sending {
+			&:after {
+				content: "\f1ce";
+				-webkit-animation: fa-spin 1s infinite linear;
+				        animation: fa-spin 1s infinite linear;
+			}
 		}
 	}
-
 
 	&.isLoading {
 		&:before {
@@ -17927,6 +18011,12 @@ nav.navbar.megamenu {
         }
     }
 
+    .tab-content {
+        img {
+            max-width: 100%;
+        }
+    }
+
     .graduated-prices-table {
         td:first-child {
             padding-right: 1rem;
@@ -18035,6 +18125,78 @@ nav.navbar.megamenu {
     }
 }
 
+.order-property-slider {
+    overflow: hidden;
+    
+    .order-property-slider-inner {
+        white-space: nowrap;
+        -webkit-transition: -webkit-transform 300ms ease;
+        transition: -webkit-transform 300ms ease;
+        transition: transform 300ms ease;
+        transition: transform 300ms ease, -webkit-transform 300ms ease;
+        
+        > div {
+            display: inline-block;
+            width: 100%;
+            visibility: hidden;
+            
+            &.active {
+                visibility: visible;
+            }
+        }
+    }
+    
+    .order-property-slider-controls {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        
+        .slider-nav {
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
+            text-align: center;
+            
+            span {
+                width: 12px;
+                height: 12px;
+                display: inline-block;
+                border-radius: 50%;
+                border: 1px solid $gray-lighter;
+                background-color: #fff;
+                margin: 12px 5px 0;
+                cursor: pointer;
+                -webkit-transition: all .3s ease;
+                transition: all .3s ease;
+                
+                &.active {
+                    background-color: $gray-lighter;
+
+                    &.error {
+                        // background-color: lighten($brand-danger, 25%);
+                        background-color: mix($brand-danger, $gray-lighter);
+                        border-color: mix(lighten($brand-danger, 25%), $gray-lighter);
+                    }
+                }
+
+                &.highlight {
+                    background-color: $brand-primary;
+                    border-color: lighten($brand-primary, 25%);
+                }
+
+                &.error {
+                    background-color: $brand-danger;
+                    border-color: lighten($brand-danger, 25%);
+                }
+            }
+        }
+    }
+}
+
 .add-to-basket-container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -18044,6 +18206,7 @@ nav.navbar.megamenu {
         margin-right: 15px;
     }
 }
+
 .blur-effect.loading {
   -webkit-animation-name: blur-loading;
           animation-name: blur-loading;
