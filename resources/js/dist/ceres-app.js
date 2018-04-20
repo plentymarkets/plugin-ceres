@@ -20370,7 +20370,7 @@ Vue.directive("basket-item-quantity", {
     update: function update(el, binding) {
         var decimals = (0, _number.floatLength)(binding.value);
 
-        el.innerHTML = binding.value.toFixed(decimals).replace(".", App.decimalSeparator);
+        el.innerHTML = (binding.value || 0).toFixed(decimals).replace(".", App.decimalSeparator);
     }
 });
 
@@ -22039,8 +22039,10 @@ function _removeTempDesc() {
 }
 
 function _updateCategoryTexts(currentCategory) {
+    var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
+
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }

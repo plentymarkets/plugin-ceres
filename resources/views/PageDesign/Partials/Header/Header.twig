@@ -14,8 +14,9 @@
 {% set currencyFormat = config("Ceres.currency.format") %}
 {% set currencyFormatSelect = config("Ceres.currency.format_selection") %}
 
-<header class="top-bar" {% if ronnyRequest.get('isContentBuilder') == 1 %} data-builder-container="shop-builder-header" {% endif %}>
-    {% if ronnyRequest.get('isContentBuilder') != 1 %}
+<header class="top-bar">
+    {#{{ LayoutContainer.show("Ceres::Header") }}#}
+    {% if request.get('isContentBuilder') != 1 %}
         <div>
             <div class="container-max">
                 <div class="row">
