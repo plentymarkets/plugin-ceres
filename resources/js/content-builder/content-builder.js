@@ -266,10 +266,9 @@ function addDeleteButton(element)
     // add delete event to button
     jQuery(element).find('.delete-icon').click(function ()
     {
-        var container = jQuery(this).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
         var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
 
-        deleteContentWidget(container, widgetId);
+        deleteContentWidget(widgetId);
     });
 }
 
@@ -454,16 +453,20 @@ function addGridstackWidget(widgetData, position)
 }
 
 /**
- * delete content widget by id
+ *
  * @param widgetId
  * @param keepProperties
  */
-function deleteContentWidget(container, widgetId, keepProperties)
+function deleteContentWidget(widgetId, keepProperties)
 {
-    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').find('.grid-stack-item');
+    // TODO: reduce search scope for better performance
+    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]');
+
+    var container = gridStackItem.closest('[data-builder-container]');
 
     jQuery(container).data('gridstack').removeWidget(gridStackItem);
 
+    // don't dispatch delete event when replacing widgets
     if(!keepProperties)
     {
         dispatchBuilderEvent({
@@ -480,6 +483,8 @@ function deleteContentWidget(container, widgetId, keepProperties)
 function replaceContentWidget(widgetData)
 {
     var id = widgetData.uniqueId;
+
+    // TODO: reduce search scope for better performance
     var element = jQuery('body').find('[data-builder-identifier="' + id + '"]');
 
     var position = {
@@ -487,9 +492,7 @@ function replaceContentWidget(widgetData)
         y: jQuery(element).attr('data-gs-y')
     };
 
-    var container = jQuery(element).closest(jQuery('[data-builder-container]')).attr('data-builder-container');
-
-    deleteContentWidget(container, id, true);
+    deleteContentWidget(id, true);
     addContentWidget(widgetData, position);
 }
 
