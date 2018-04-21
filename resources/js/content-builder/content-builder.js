@@ -412,6 +412,7 @@ function addNestedWidget(widgetData)
 
     jQuery('.nested-widget-container.active').html(widget);
     jQuery('.nested-widget-container.active').addClass('set');
+    jQuery('.nested-widget-container.active').removeClass('active');
 
     addContextMenu(widget);
     focusElement(null);
@@ -460,11 +461,20 @@ function addGridstackWidget(widgetData, position)
 function deleteContentWidget(widgetId, keepProperties)
 {
     // TODO: reduce search scope for better performance
-    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]');
+    var widget = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]');
 
-    var container = gridStackItem.closest('[data-builder-container]');
 
-    jQuery(container).data('gridstack').removeWidget(gridStackItem);
+    if (widget.hasClass('nested-widget'))
+    {
+        widget.closest('.nested-widget-container').removeClass('set');
+        widget.remove();
+    }
+    else
+    {
+        var container = widget.closest('[data-builder-container]');
+        jQuery(container).data('gridstack').removeWidget(widget);
+    }
+
 
     // don't dispatch delete event when replacing widgets
     if(!keepProperties)
