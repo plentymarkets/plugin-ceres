@@ -460,7 +460,7 @@ function addGridstackWidget(widgetData, position)
  */
 function deleteContentWidget(container, widgetId, keepProperties)
 {
-    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
+    var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').find('.grid-stack-item');
 
     jQuery(container).data('gridstack').removeWidget(gridStackItem);
 
