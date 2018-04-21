@@ -7,11 +7,11 @@
 		"widgetClass": "Ceres\\Widgets\\Header\\Header",
 		"settings": {
 			"logo": {
-				"type": "inputText",
+				"type": "inputFile",
 				"required": true,
-				"label": "Widget.header_text_label",
+				"label": "Widget.header_logo_label",
 				"options": {
-					"tooltip": "Widget.header_text_tooltip",
+					"tooltip": "Widget.header_logo_label_tooltip",
 					"defaultValue": ""
 				}
 			}
@@ -122,11 +122,11 @@
 		"widgetClass": "Ceres\\Widgets\\Common\\TextHeaderWidget",
 		"settings": {
 			"text": {
-				"type": "inputFile",
+				"type": "inputText",
 				"required": true,
-				"label": "Widget.header_logo_label",
+				"label": "Widget.header_text_label",
 				"options": {
-					"tooltip": "Widget.header_logo_label_tooltip",
+					"tooltip": "Widget.header_text_tooltip",
 					"defaultValue": ""
 				}
 			}
