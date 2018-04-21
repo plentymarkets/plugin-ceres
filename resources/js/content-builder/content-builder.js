@@ -174,7 +174,7 @@ function addWindowResizeListener()
 function addScrollOnDragListener()
 {
     // TODO: @vwiebe fix gridstack scope
-    jQuery('.grid-stack-container-1').mousemove(function (event)
+    jQuery('.grid-stack-container-0').mousemove(function (event)
     {
         updateScrollbarPosition();
     });
@@ -464,7 +464,7 @@ function deleteContentWidget(container, widgetId, keepProperties)
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
     // TODO: @vwiebe fix dropzone scope
-    jQuery('.grid-stack-container-1').data('gridstack').removeWidget(gridStackItem);
+    jQuery('.grid-stack-container-0').data('gridstack').removeWidget(gridStackItem);
 
     if(!keepProperties)
     {
