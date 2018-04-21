@@ -387,8 +387,6 @@ function addBackendEventListener()
  */
 function addContentWidget(widgetData, position, keepProperties)
 {
-    keepProperties = keepProperties || false;
-
     var isNestedContainerActive = jQuery('.nested-widget-container.active').length;
 
     if (isNestedContainerActive)
@@ -452,12 +450,12 @@ function addGridstackWidget(widgetData, position, keepProperties)
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
-    });
 
-    if(gridStackItem && keepProperties)
-    {
-        jQuery(gridStackItem).addClass('active');
-    }
+        if(gridStackItem && keepProperties)
+        {
+            focusElement(uniqueId);
+        }
+    });
 }
 
 /**
