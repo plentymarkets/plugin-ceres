@@ -385,8 +385,10 @@ function addBackendEventListener()
  * @param widgetData
  * @param position
  */
-function addContentWidget(widgetData, position)
+function addContentWidget(widgetData, position, keepProperties)
 {
+    keepProperties = keepProperties || false;
+
     var isNestedContainerActive = jQuery('.nested-widget-container.active').length;
 
     if (isNestedContainerActive)
@@ -395,7 +397,7 @@ function addContentWidget(widgetData, position)
     }
     else
     {
-        addGridstackWidget(widgetData, position);
+        addGridstackWidget(widgetData, position, keepProperties);
     }
 }
 
@@ -423,7 +425,7 @@ function addNestedWidget(widgetData)
  * @param widgetData
  * @param position
  */
-function addGridstackWidget(widgetData, position)
+function addGridstackWidget(widgetData, position, keepProperties)
 {
     var container = widgetData.dropzone;
     var height = widgetData.defaultHeight;
@@ -451,6 +453,11 @@ function addGridstackWidget(widgetData, position)
     {
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
     });
+
+    if(gridStackItem && keepProperties)
+    {
+        jQuery(gridStackItem).addClass('active');
+    }
 }
 
 /**
@@ -503,7 +510,7 @@ function replaceContentWidget(widgetData)
     };
 
     deleteContentWidget(id, true);
-    addContentWidget(widgetData, position);
+    addContentWidget(widgetData, position, true);
 }
 
 /**
