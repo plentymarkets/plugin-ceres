@@ -173,8 +173,7 @@ function addWindowResizeListener()
  */
 function addScrollOnDragListener()
 {
-    // TODO: @vwiebe fix gridstack scope
-    jQuery('.grid-stack-container-0').mousemove(function (event)
+    jQuery('body').mousemove(function (event)
     {
         updateScrollbarPosition();
     });
@@ -463,8 +462,7 @@ function deleteContentWidget(container, widgetId, keepProperties)
 {
     var gridStackItem = jQuery('body').find('[data-builder-identifier="' + widgetId + '"]').closest('.grid-stack-item');
 
-    // TODO: @vwiebe fix dropzone scope
-    jQuery('.grid-stack-container-0').data('gridstack').removeWidget(gridStackItem);
+    jQuery(container).data('gridstack').removeWidget(gridStackItem);
 
     if(!keepProperties)
     {
@@ -552,10 +550,10 @@ function injectGridstackMarkup()
         // });
 
         // add gridstack container class for current drag & drop area
-        jQuery(this).addClass('grid-stack-container-' + i);
+        // jQuery(this).addClass('grid-stack-container-' + i);
 
         // initialize gridstack for current gridstack container
-        initGridstack(i);
+        initGridstack(jQuery(this));
 
         ++i;
     });
@@ -574,12 +572,10 @@ function initGridstack(identifier)
         // acceptWidgets: '.grid-stack-item'
     };
 
-    var selector = '.grid-stack-container-' + identifier;
-
-    jQuery(selector).gridstack(options);
+    jQuery(identifier).gridstack(options);
 
     // init gridstack event listeners
-    jQuery(selector).on('added', function(event, items)
+    jQuery(identifier).on('added', function(event, items)
     {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function()
@@ -588,13 +584,13 @@ function initGridstack(identifier)
         }, 100);
     });
 
-    jQuery(selector).on('dragstart', function(event, items)
+    jQuery(identifier).on('dragstart', function(event, items)
     {
         draggedElement = items.helper[0];
         isDragging = true;
     });
 
-    jQuery(selector).on('dragstop', function(event, items)
+    jQuery(identifier).on('dragstop', function(event, items)
     {
         draggedElement = null;
         isDragging = false;
