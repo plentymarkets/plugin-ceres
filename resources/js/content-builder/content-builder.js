@@ -250,7 +250,6 @@ function addContextMenu(element)
 
     // add buttons
     addEditButton(element);
-    // addDesignButton(element);
     addDeleteButton(element);
 }
 
@@ -297,30 +296,6 @@ function addEditButton(element)
 }
 
 /**
- * add design button element for context menu
- * @param element
- */
-function addDesignButton(element)
-{
-    // inject button markup into given context element
-    jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon design-icon fa fa-paint-brush"></div>');
-
-    // open properties
-    jQuery(element).find('.design-icon').click(function ()
-    {
-        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-
-        focusElement(uniqueId);
-
-        dispatchBuilderEvent({
-            name: 'shopbuilder_open_design',
-            data: { uniqueId: uniqueId }
-        });
-
-    });
-}
-
-/**
  *
  * @param id
  */
@@ -338,39 +313,10 @@ function focusElement(id)
             if (id && jQuery(this).attr('data-builder-identifier') == id)
             {
                 jQuery(this).addClass('active');
-
-                // // activate nested widget containers
-                // jQuery(this).find('.nested-widget-container').each(function ()
-                // {
-                //     if (!jQuery(this).hasClass('set'))
-                //     {
-                //         jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
-                //         jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
-                //
-                //         jQuery(this).find('.add-icon').click(function ()
-                //         {
-                //             jQuery('.nested-widget-container').each(function ()
-                //             {
-                //                 jQuery(this).removeClass('active');
-                //             });
-                //
-                //             jQuery(this).closest('.nested-widget-container').addClass('active');
-                //         });
-                //     }
-                //
-                //
-                // });
             }
             else
             {
                 jQuery(this).removeClass('active');
-
-                // deactivate nested widget containers
-                // jQuery(this).find('.nested-widget-container').each(function ()
-                // {
-                //     jQuery(this).removeClass('active');
-                //     jQuery(this).find('.add-icon').remove();
-                // });
             }
         }
     });
@@ -381,12 +327,12 @@ function addBackendEventListener()
     window.addEventListener('message', handleBuilderEventResponse, false);
 }
 
-/**
- * add new content element to iframe
+/*** add new content element to iframe
  * @param widgetData
  * @param position
+ * @param keepProperties
  */
-function addContentWidget(widgetData, position)
+function addContentWidget(widgetData, position, keepProperties)
 {
     var isNestedContainerActive = jQuery('.nested-widget-container.active').length;
 
@@ -396,7 +342,7 @@ function addContentWidget(widgetData, position)
     }
     else
     {
-        addGridstackWidget(widgetData, position);
+        addGridstackWidget(widgetData, position, keepProperties);
     }
 }
 
@@ -423,8 +369,9 @@ function addNestedWidget(widgetData)
  * add widget as gridstack item
  * @param widgetData
  * @param position
+ * @param keepProperties
  */
-function addGridstackWidget(widgetData, position)
+function addGridstackWidget(widgetData, position, keepProperties)
 {
     var container = widgetData.dropzone;
     var height = widgetData.defaultHeight;
@@ -460,6 +407,11 @@ function addGridstackWidget(widgetData, position)
                 initNestedWidgetContainer(jQuery(this));
             });
         }
+
+        // if(gridStackItem && keepProperties)
+        // {
+        //     focusElement(uniqueId);
+        // }
     });
 }
 
@@ -541,7 +493,7 @@ function replaceContentWidget(widgetData)
     };
 
     deleteContentWidget(id, true);
-    addContentWidget(widgetData, position);
+    addContentWidget(widgetData, position, true);
 }
 
 /**
