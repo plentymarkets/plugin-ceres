@@ -330,6 +330,7 @@ function focusElement(id)
     {
         if (!id)
         {
+            // just remove focus on all elements
             jQuery(this).removeClass('active');
         }
         else
@@ -338,38 +339,38 @@ function focusElement(id)
             {
                 jQuery(this).addClass('active');
 
-                // activate nested widget containers
-                jQuery(this).find('.nested-widget-container').each(function ()
-                {
-                    if (!jQuery(this).hasClass('set'))
-                    {
-                        jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
-                        jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
-
-                        jQuery(this).find('.add-icon').click(function ()
-                        {
-                            jQuery('.nested-widget-container').each(function ()
-                            {
-                                jQuery(this).removeClass('active');
-                            });
-
-                            jQuery(this).closest('.nested-widget-container').addClass('active');
-                        });
-                    }
-
-
-                });
+                // // activate nested widget containers
+                // jQuery(this).find('.nested-widget-container').each(function ()
+                // {
+                //     if (!jQuery(this).hasClass('set'))
+                //     {
+                //         jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+                //         jQuery(this).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+                //
+                //         jQuery(this).find('.add-icon').click(function ()
+                //         {
+                //             jQuery('.nested-widget-container').each(function ()
+                //             {
+                //                 jQuery(this).removeClass('active');
+                //             });
+                //
+                //             jQuery(this).closest('.nested-widget-container').addClass('active');
+                //         });
+                //     }
+                //
+                //
+                // });
             }
             else
             {
                 jQuery(this).removeClass('active');
 
                 // deactivate nested widget containers
-                jQuery(this).find('.nested-widget-container').each(function ()
-                {
-                    jQuery(this).removeClass('active');
-                    jQuery(this).find('.add-icon').remove();
-                });
+                // jQuery(this).find('.nested-widget-container').each(function ()
+                // {
+                //     jQuery(this).removeClass('active');
+                //     jQuery(this).find('.add-icon').remove();
+                // });
             }
         }
     });
@@ -450,6 +451,40 @@ function addGridstackWidget(widgetData, position)
     $('html').animate({ scrollTop: 0 }, 0, function ()
     {
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
+
+        if (markup.indexOf('nested-widget-container') != -1)
+        {
+            // enrich structure elements with custom markup
+            jQuery('body').find(jQuery(gridStackItem)).find('.nested-widget-container').each(function()
+            {
+                initNestedWidgetContainer(jQuery(this));
+            });
+        }
+    });
+}
+
+function initNestedWidgetContainer(container)
+{
+    jQuery(container).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+    jQuery(container).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
+
+    jQuery(container).find('.add-icon').click(function ()
+    {
+        var uniqueId = jQuery(this).closest('[data-builder-identifier]').attr('data-builder-identifier');
+
+        jQuery('.nested-widget-container').each(function ()
+        {
+            jQuery(this).removeClass('active');
+        });
+
+        jQuery(this).closest('.nested-widget-container').addClass('active');
+
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_properties',
+            data: { uniqueId: uniqueId }
+        });
+
+        focusElement(uniqueId)
     });
 }
 
@@ -466,8 +501,11 @@ function deleteContentWidget(widgetId, keepProperties)
 
     if (widget.hasClass('nested-widget'))
     {
-        widget.closest('.nested-widget-container').removeClass('set');
+        var container = widget.closest('.nested-widget-container');
         widget.remove();
+        container.removeClass('set');
+        initNestedWidgetContainer(container);
+        // TODO: focus parent
     }
     else
     {
