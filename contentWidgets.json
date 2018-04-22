@@ -4,6 +4,8 @@
 		"label": "Widget.header_label",
 		"previewImageURL": "",
 		"isHidden": true,
+		"type": "header",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Header\\Header",
 		"settings": {
 			"logo": {
@@ -22,6 +24,8 @@
 		"label": "Widget.header_label",
 		"previewImageURL": "",
 		"isHidden": true,
+		"type": "footer",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Footer\\Footer",
 		"settings": {}
 	},
@@ -29,6 +33,10 @@
 		"identifier": "Ceres::TwoColumnWidget",
 		"label": "Widget.two_column_label",
 		"previewImageURL": "https://i.imgur.com/69lqNTl.png",
+		"type": "structure",
+		"allowedNestingTypes": [
+			"default"
+		],
 		"widgetClass": "Ceres\\Widgets\\Grid\\TwoColumnWidget",
 		"settings": {
 			"layout": {
@@ -63,6 +71,10 @@
 		"identifier": "Ceres::ThreeColumnWidget",
 		"label": "Widget.three_column_label",
 		"previewImageURL": "https://i.imgur.com/iWIXVVK.png",
+		"type": "structure",
+		"allowedNestingTypes": [
+			"default"
+		],
 		"widgetClass": "Ceres\\Widgets\\Grid\\ThreeColumnWidget",
 		"settings": {
 			"layout": {
@@ -112,6 +124,10 @@
 		"identifier": "Ceres::FourColumnWidget",
 		"label": "Widget.four_column_label",
 		"previewImageURL": "https://i.imgur.com/SUxxmG3.png",
+		"type": "structure",
+		"allowedNestingTypes": [
+			"default"
+		],
 		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
 		"settings": {}
 	},
@@ -119,6 +135,8 @@
 		"identifier": "Ceres::TextHeaderWidget",
 		"label": "Widget.header_label",
 		"previewImageURL": "https://i.imgur.com/HiSNabW.png",
+		"type": "default",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\TextHeaderWidget",
 		"settings": {
 			"text": {
@@ -136,6 +154,8 @@
 		"identifier": "Ceres::ImageCarouselWidget",
 		"label": "Widget.imageCarousel_label",
 		"previewImageURL": "https://i.imgur.com/8RJj6cZ.png",
+		"type": "default",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
 		"settings": {
 			"slide1": {
@@ -252,6 +272,8 @@
 		"identifier": "Ceres::ImageBoxWidget",
 		"label": "Widget.imageBox_label",
 		"previewImageURL": "https://i.imgur.com/YlYwAmy.png",
+		"type": "default",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
 		"settings": {
 			"style": {
@@ -334,6 +356,8 @@
 		"identifier": "Ceres::ItemListWidget",
 		"label": "Widget.itemList_label",
 		"previewImageURL": "https://i.imgur.com/CRTjerv.png",
+		"type": "default",
+		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
 		"settings": {
 			"listType": {
