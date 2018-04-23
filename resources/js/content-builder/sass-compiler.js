@@ -1,8 +1,9 @@
 (function($)
 {
-    var sass            = new Sass();
-    var sassContents    = null;
-    var loadingProgress = null;
+    var sassContents     = null;
+    var loadingProgress  = null;
+    var sass             = new Sass();
+    var retryCompilation = true;
 
     function loadSassContent()
     {
@@ -23,7 +24,6 @@
                     sassContents = sassContents || {};
                     sassContents[path] = sassContent;
                 });
-
                 promises.push(promise);
             });
 
@@ -53,12 +53,27 @@
 
             rootPath = rootPath.join("/") + "/resources";
 
-            prefix += "$root-directory: \"" + rootPath + "\";";
-
-            sass.compile(prefix + sassContent, function(result)
+            sass.compile(prefix + "$root-directory: '" + rootPath + "';" + sassContent, function(result)
             {
-                replaceCSS(path, result);
-                promise.resolve();
+                if (result.status === 0)
+                {
+                    retryCompilation = true;
+                    replaceCSS(path, result);
+                    promise.resolve();
+                }
+                else if (retryCompilation)
+                {
+                    sass.destroy();
+                    sass = new Sass();
+                    retryCompilation = false;
+                    compileSass(prefix)
+                        .done(resolve)
+                        .fail(reject);
+                }
+                else
+                {
+                    promise.reject();
+                }
             });
 
             promises.push(promise);
@@ -93,23 +108,24 @@
         });
     }
 
-    showTerraLoadingOverlay(true);
     loadSassContent();
     window.addEventListener("message", function(event)
     {
         if (event.data.name === "sassy-compile")
         {
+            showTerraLoadingOverlay(true);
             loadSassContent()
                 .done(function()
                 {
-                    return compileSass(
+                    compileSass(
                         event.data.data.join(" ")
-                    );
-                })
-                .done(function()
-                {
-                    showTerraLoadingOverlay(false);
+                    )
+                    .done(function()
+                    {
+                        showTerraLoadingOverlay(false);
+                    });
                 });
+
         }
     }, false);
 })(jQuery);
