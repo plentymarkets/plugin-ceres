@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v4.0.0 | MIT License | github.com/necolas/normalize.css */
-@import url(shariff/build/shariff.complete.css);
+@import url(shariff/build/shariff.min.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -4209,8 +4209,8 @@ input[type="button"].btn-block {
   }
   .card-group .card:not(:first-child):not(:last-child) .card-img-top, .card-group .cmp-address-list .items > div:not(:first-child):not(:last-child):first-child .card-img-top, .cmp-address-list .card-group .items > div:not(:first-child):not(:last-child):first-child .card-img-top,
   .card-group .card:not(:first-child):not(:last-child) .card-img-bottom,
-  .card-group .cmp-address-list .items > div:not(:first-child):not(:last-child):first-child .card-img-bottom,
-  .cmp-address-list .card-group .items > div:not(:first-child):not(:last-child):first-child .card-img-bottom {
+  .card-group .cmp-address-list .items > div:not(:first-child):not(:last-child):first-child .card-img-bottom, .cmp-address-list
+  .card-group .items > div:not(:first-child):not(:last-child):first-child .card-img-bottom {
     border-radius: 0;
   }
 }
@@ -4836,18 +4836,18 @@ base::-moz-progress-bar,
 .list-group-item.active .list-group-item-heading > small,
 .list-group-item.active .list-group-item-heading > .small,
 .list-group-item.active .list-group-item-heading > .btn-labeled,
-.list-group-item.active .basket-preview .list-group-item-heading > .totals,
-.basket-preview .list-group-item.active .list-group-item-heading > .totals, .list-group-item.active:focus .list-group-item-heading,
+.list-group-item.active .basket-preview .list-group-item-heading > .totals, .basket-preview
+.list-group-item.active .list-group-item-heading > .totals, .list-group-item.active:focus .list-group-item-heading,
 .list-group-item.active:focus .list-group-item-heading > small,
 .list-group-item.active:focus .list-group-item-heading > .small,
 .list-group-item.active:focus .list-group-item-heading > .btn-labeled,
-.list-group-item.active:focus .basket-preview .list-group-item-heading > .totals,
-.basket-preview .list-group-item.active:focus .list-group-item-heading > .totals, .list-group-item.active:hover .list-group-item-heading,
+.list-group-item.active:focus .basket-preview .list-group-item-heading > .totals, .basket-preview
+.list-group-item.active:focus .list-group-item-heading > .totals, .list-group-item.active:hover .list-group-item-heading,
 .list-group-item.active:hover .list-group-item-heading > small,
 .list-group-item.active:hover .list-group-item-heading > .small,
 .list-group-item.active:hover .list-group-item-heading > .btn-labeled,
-.list-group-item.active:hover .basket-preview .list-group-item-heading > .totals,
-.basket-preview .list-group-item.active:hover .list-group-item-heading > .totals {
+.list-group-item.active:hover .basket-preview .list-group-item-heading > .totals, .basket-preview
+.list-group-item.active:hover .list-group-item-heading > .totals {
   color: inherit;
 }
 
@@ -14884,13 +14884,6 @@ Custom classes
   background: #dcdbd8;
 }
 
-.css-loading {
-  right: 10px;
-  position: fixed;
-  z-index: 99;
-  font-size: 27px;
-}
-
 .cmp-country-settings,
 .cmp-currency-select {
   background-color: #282d2f;
@@ -16090,8 +16083,7 @@ body.menu-is-visible {
 }
 
 .cmp-basket-item .toggle-description, .cmp-order-item .toggle-description,
-.cmp-basket-item .item-toggle,
-.cmp-order-item .item-toggle {
+.cmp-basket-item .item-toggle, .cmp-order-item .item-toggle {
   display: none;
 }
 
@@ -16235,8 +16227,7 @@ body.menu-is-visible {
 }
 
 .cmp-basket-item .varianten-content, .cmp-order-item .varianten-content,
-.cmp-basket-item .item-description,
-.cmp-order-item .item-description {
+.cmp-basket-item .item-description, .cmp-order-item .item-description {
   max-height: 0;
   height: auto;
   overflow: hidden;
@@ -17088,15 +17079,15 @@ body.menu-is-visible {
   .cmp-product-thumb .thumb-image {
     width: 100%;
   }
-  .cmp-product-thumb .img-fluid, .cmp-product-thumb .carousel-inner > .carousel-item > img,
-  .cmp-product-thumb .carousel-inner > .carousel-item > a > img {
+  .cmp-product-thumb .img-fluid, .cmp-product-thumb .carousel-inner > .carousel-item > img, .cmp-product-thumb
+  .carousel-inner > .carousel-item > a > img {
     transition: transform 0.4s cubic-bezier(0, 0, 0.26, 1), opacity 0.3s cubic-bezier(0, 0, 0.26, 1);
   }
   .cmp-product-thumb:hover {
     z-index: 1000;
   }
-  .cmp-product-thumb:hover .img-fluid, .cmp-product-thumb:hover .carousel-inner > .carousel-item > img,
-  .cmp-product-thumb:hover .carousel-inner > .carousel-item > a > img {
+  .cmp-product-thumb:hover .img-fluid, .cmp-product-thumb:hover .carousel-inner > .carousel-item > img, .cmp-product-thumb:hover
+  .carousel-inner > .carousel-item > a > img {
     transform: scale(1.05);
   }
   .cmp-product-thumb:hover .owl-nav [class*='owl-'] {
@@ -17530,8 +17521,8 @@ body.menu-is-visible {
   text-align: right;
 }
 
-.cmp-hero .hero-main .hero-category .img-fluid, .cmp-hero .hero-main .hero-category .carousel-inner > .carousel-item > img,
-.cmp-hero .hero-main .hero-category .carousel-inner > .carousel-item > a > img {
+.cmp-hero .hero-main .hero-category .img-fluid, .cmp-hero .hero-main .hero-category .carousel-inner > .carousel-item > img, .cmp-hero .hero-main .hero-category
+.carousel-inner > .carousel-item > a > img {
   width: 100%;
 }
 
