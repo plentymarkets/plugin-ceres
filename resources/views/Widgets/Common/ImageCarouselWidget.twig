@@ -34,9 +34,9 @@
 
 {% if slides is empty %}
     {% set slides = [
-        { imagePath: trans("Ceres::Widget.imageCarousel_placeholder_firstSlide") },
-        { imagePath: trans("Ceres::Widget.imageCarousel_placeholder_secondSlide") },
-        { imagePath: trans("Ceres::Widget.imageCarousel_placeholder_thirdSlide") }
+        { imagePath: "http://placehold.it/800x400?text=First%20slide" },
+        { imagePath: "http://placehold.it/800x400?text=Second%20slide" },
+        { imagePath: "http://placehold.it/800x400?text=Third%20slide" }
     ] %}
 {% endif %}
 
