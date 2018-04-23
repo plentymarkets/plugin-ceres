@@ -1,7 +1,7 @@
 [
 	{
 		"identifier": "Ceres::HeaderWidget",
-		"label": "Widget.header_label",
+		"label": "Widget.headerLabel",
 		"previewImageURL": "",
 		"isHidden": true,
 		"type": "header",
@@ -21,7 +21,7 @@
 	},
 	{
 		"identifier": "Ceres::FooterWidget",
-		"label": "Widget.header_label",
+		"label": "Widget.headerLabel",
 		"previewImageURL": "",
 		"isHidden": true,
 		"type": "footer",
@@ -133,7 +133,7 @@
 	},
 	{
 		"identifier": "Ceres::TextHeaderWidget",
-		"label": "Widget.header_label",
+		"label": "Widget.headerLabel",
 		"previewImageURL": "https://i.imgur.com/HiSNabW.png",
 		"type": "default",
 		"allowedNestingTypes": [],
@@ -142,9 +142,9 @@
 			"text": {
 				"type": "inputText",
 				"required": true,
-				"label": "Widget.header_text_label",
+				"label": "Widget.headerTextLabel",
 				"options": {
-					"tooltip": "Widget.header_text_tooltip",
+					"tooltip": "Widget.headerTextTooltip",
 					"defaultValue": ""
 				}
 			}
@@ -152,7 +152,7 @@
 	},
 	{
 		"identifier": "Ceres::ImageCarouselWidget",
-		"label": "Widget.imageCarousel_label",
+		"label": "Widget.imageCarouselLabel",
 		"previewImageURL": "https://i.imgur.com/8RJj6cZ.png",
 		"type": "default",
 		"allowedNestingTypes": [],
@@ -160,34 +160,34 @@
 		"settings": {
 			"slide1": {
 				"type": "verticalContainer",
-				"label": "Widget.imageCarousel_slide1",
+				"label": "Widget.imageCarouselSlide1",
 				"required": false,
 				"options": {
 					"containerEntries": {
 						"categoryId": {
 							"type": "categoryPicker",
 							"required": false,
-							"label": "Widget.imageCarousel_categoryId_label",
+							"label": "Widget.imageCarouselCategoryIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"tooltip": "Widget.imageCarouselCategoryIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"variationId": {
 							"type": "inputNumber",
 							"required": false,
-							"label": "Widget.imageCarousel_variationId_label",
+							"label": "Widget.imageCarouselVariationIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"tooltip": "Widget.imageCarouselVariationIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"customImagePath": {
 							"type": "inputFile",
 							"required": false,
-							"label": "Widget.imageCarousel_customImagePath_label",
+							"label": "Widget.imageCarouselCustomImagePathLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"tooltip": "Widget.imageCarouselCustomImagePathTooltip",
 								"defaultValue": ""
 							}
 						}
@@ -196,34 +196,34 @@
 			},
 			"slide2": {
 				"type": "verticalContainer",
-				"label": "Widget.imageCarousel_slide2",
+				"label": "Widget.imageCarouselSlide2",
 				"required": false,
 				"options": {
 					"containerEntries": {
 						"categoryId": {
 							"type": "categoryPicker",
 							"required": false,
-							"label": "Widget.imageCarousel_categoryId_label",
+							"label": "Widget.imageCarouselCategoryIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"tooltip": "Widget.imageCarouselCategoryIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"variationId": {
 							"type": "inputNumber",
 							"required": false,
-							"label": "Widget.imageCarousel_variationId_label",
+							"label": "Widget.imageCarouselVariationIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"tooltip": "Widget.imageCarouselVariationIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"customImagePath": {
 							"type": "inputFile",
 							"required": false,
-							"label": "Widget.imageCarousel_customImagePath_label",
+							"label": "Widget.imageCarouselCustomImagePathLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"tooltip": "Widget.imageCarouselCustomImagePathTooltip",
 								"defaultValue": ""
 							}
 						}
@@ -232,34 +232,34 @@
 			},
 			"slide3": {
 				"type": "verticalContainer",
-				"label": "Widget.imageCarousel_slide3",
+				"label": "Widget.imageCarouselSlide3",
 				"required": false,
 				"options": {
 					"containerEntries": {
 						"categoryId": {
 							"type": "categoryPicker",
 							"required": false,
-							"label": "Widget.imageCarousel_categoryId_label",
+							"label": "Widget.imageCarouselCategoryIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_categoryId_tooltip",
+								"tooltip": "Widget.imageCarouselCategoryIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"variationId": {
 							"type": "inputNumber",
 							"required": false,
-							"label": "Widget.imageCarousel_variationId_label",
+							"label": "Widget.imageCarouselVariationIdLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_variationId_tooltip",
+								"tooltip": "Widget.imageCarouselVariationIdTooltip",
 								"defaultValue": ""
 							}
 						},
 						"customImagePath": {
 							"type": "inputFile",
 							"required": false,
-							"label": "Widget.imageCarousel_customImagePath_label",
+							"label": "Widget.imageCarouselCustomImagePathLabel",
 							"options": {
-								"tooltip": "Widget.imageCarousel_customImagePath_tooltip",
+								"tooltip": "Widget.imageCarouselCustomImagePathTooltip",
 								"defaultValue": ""
 							}
 						}
@@ -270,7 +270,7 @@
 	},
 	{
 		"identifier": "Ceres::ImageBoxWidget",
-		"label": "Widget.imageBox_label",
+		"label": "Widget.imageBoxLabel",
 		"previewImageURL": "https://i.imgur.com/YlYwAmy.png",
 		"type": "default",
 		"allowedNestingTypes": [],
@@ -279,24 +279,24 @@
 			"style": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Widget.imageBox_style_label",
+				"label": "Widget.imageBoxStyleLabel",
 				"options": {
-					"tooltip": "Widget.imageBox_style_tooltip",
+					"tooltip": "Widget.imageBoxStyleTooltip",
 					"defaultValue": "largeText",
 					"selectBoxValues": [
 						{
 							"value": "largeText",
-							"caption": "Widget.imageBox_style_large",
+							"caption": "Widget.imageBoxStyleLarge",
 							"position": 0
 						},
 						{
 							"value": "smallText",
-							"caption": "Widget.imageBox_style_small",
+							"caption": "Widget.imageBoxStyleSmall",
 							"position": 1
 						},
 						{
 							"value": "fullwidthText",
-							"caption": "Widget.imageBox_style_fullwidth",
+							"caption": "Widget.imageBoxStyleFullwidth",
 							"position": 2
 						}
 					]
@@ -305,19 +305,19 @@
 			"imageSize": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Widget.imageBox_imageSize_label",
+				"label": "Widget.imageBoxImageSizeLabel",
 				"options": {
-					"tooltip": "Widget.imageBox_imageSize_tooltip",
+					"tooltip": "Widget.imageBoxImageSizeTooltip",
 					"defaultValue": "cover",
 					"selectBoxValues": [
 						{
 							"value": "cover",
-							"caption": "Widget.imageBox_imageSize_cover",
+							"caption": "Widget.imageBoxImageSizeCover",
 							"position": 0
 						},
 						{
 							"value": "contain",
-							"caption": "Widget.imageBox_imageSize_contain",
+							"caption": "Widget.imageBoxImageSizeContain",
 							"position": 1
 						}
 					]
