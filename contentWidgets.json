@@ -326,27 +326,27 @@
 			"categoryId": {
 				"type": "categoryPicker",
 				"required": false,
-				"label": "Widget.imageBox_categoryId_label",
+				"label": "Widget.imageBoxCategoryIdLabel",
 				"options": {
-					"tooltip": "Widget.imageBox_categoryId_tooltip",
+					"tooltip": "Widget.imageBoxCategoryIdTooltip",
 					"defaultValue": ""
 				}
 			},
 			"variationId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Widget.imageBox_variationId_label",
+				"label": "Widget.imageBoxVariationIdLabel",
 				"options": {
-					"tooltip": "Widget.imageBox_variationId_tooltip",
+					"tooltip": "Widget.imageBoxVariationIdTooltip",
 					"defaultValue": ""
 				}
 			},
 			"customImagePath": {
 				"type": "inputFile",
 				"required": false,
-				"label": "Widget.imageBox_customImagePath_label",
+				"label": "Widget.imageBoxCustomImagePathLabel",
 				"options": {
-					"tooltip": "Widget.imageBox_customImagePath_tooltip",
+					"tooltip": "Widget.imageBoxCustomImagePathTooltip",
 					"defaultValue": ""
 				}
 			}
@@ -354,7 +354,7 @@
 	},
 	{
 		"identifier": "Ceres::ItemListWidget",
-		"label": "Widget.itemList_label",
+		"label": "Widget.itemListLabel",
 		"previewImageURL": "https://i.imgur.com/CRTjerv.png",
 		"type": "default",
 		"allowedNestingTypes": [],
@@ -363,24 +363,24 @@
 			"listType": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Widget.itemList_listType_label",
+				"label": "Widget.itemListListTypeLabel",
 				"options": {
-					"tooltip": "Widget.itemList_listType_tooltip",
+					"tooltip": "Widget.itemListListTypeTooltip",
 					"defaultValue": "category",
 					"selectBoxValues": [
 						{
 							"value": "category",
-							"caption": "Widget.itemList_listType_category",
+							"caption": "Widget.itemListListTypeCategory",
 							"position": 0
 						},
 						{
 							"value": "last_seen",
-							"caption": "Widget.itemList_listType_lastseen",
+							"caption": "Widget.itemListListTypeLastseen",
 							"position": 1
 						},
 						{
 							"value": "tag_list",
-							"caption": "Widget.itemList_listType_taglist",
+							"caption": "Widget.itemListListTypeTaglist",
 							"position": 2
 						}
 					]
@@ -389,27 +389,27 @@
 			"categoryId": {
 				"type": "categoryPicker",
 				"required": false,
-				"label": "Widget.itemList_categoryId_label",
+				"label": "Widget.itemListCategoryIdLabel",
 				"options": {
-					"tooltip": "Widget.itemList_categoryId_tooltip",
+					"tooltip": "Widget.itemListCategoryIdTooltip",
 					"defaultValue": ""
 				}
 			},
 			"tagId": {
 				"type": "inputNumber",
 				"required": false,
-				"label": "Widget.itemList_tagId_label",
+				"label": "Widget.itemListTagIdLabel",
 				"options": {
-					"tooltip": "Widget.itemList_tagId_tooltip",
+					"tooltip": "Widget.itemListTagIdTooltip",
 					"defaultValue": ""
 				}
 			},
 			"itemSort": {
 				"type": "selectBox",
 				"required": true,
-				"label": "Widget.itemList_itemSort_label",
+				"label": "Widget.itemListItemSortLabel",
 				"options": {
-					"tooltip": "Widget.itemList_itemSort_tooltip",
+					"tooltip": "Widget.itemListItemSortTooltip",
 					"defaultValue": "texts.name1_asc",
 					"selectBoxValues": [
 						{
@@ -493,9 +493,9 @@
 			"maxItems": {
 				"type": "inputNumber",
 				"required": true,
-				"label": "Widget.itemList_maxItems_label",
+				"label": "Widget.itemListMaxItemsLabel",
 				"options": {
-					"tooltip": "Widget.itemList_maxItems_tooltip",
+					"tooltip": "Widget.itemListMaxItemsTooltip",
 					"defaultValue": "4"
 				}
 			}

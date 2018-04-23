@@ -67,7 +67,7 @@
                 {% if item is defined %}
                     {{ item.data | itemName }}
                 {% else %}
-                    {{ trans("Ceres::Widget.itemList_placeholder_itemName") }}
+                    {{ trans("Ceres::Widget.itemListPlaceholderItemName") }}
                 {% endif %}
             </a>
             <div class="thumb-meta">
@@ -86,7 +86,7 @@
                         {% if item is defined %}
                             {{ item.data.prices.default.unitPrice.formatted }} *
                         {% else %}
-                            {{ trans("Ceres::Widget.itemList_placeholder_itemPrice") }} *
+                            {{ trans("Ceres::Widget.itemListPlaceholderItemPrice") }} *
                         {% endif %}
                     </div>
                 </div>
