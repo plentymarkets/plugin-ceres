@@ -2,123 +2,123 @@
   "sections":
   [
     {
-      "name": { "de": "Addressen", "en": "Address" },
+      "name": "Config.address",
       "prefix": "address"
     },
     {
-      "name": { "de": "Warenkorb", "en": "Shopping cart" },
+      "name": "Config.basket",
       "prefix": "basket"
     },
     {
-      "name": { "de": "Widerrufsformular", "en": "Cancellation form" },
+      "name": "Config.cancellationForm",
       "prefix": "cancellationForm"
     },
     {
-      "name": { "de": "Widerrufsbelehrung", "en": "Cancellation rights" },
+      "name": "Config.cancellationRights",
       "prefix": "cancellationRights"
     },
     {
-      "name": { "de": "Kaufabwicklung", "en": "Checkout" },
+      "name": "Config.checkout",
       "prefix": "checkout"
     },
     {
-      "name": { "de": "Kontaktseite", "en": "Contact page" },
+      "name": "Config.contact",
       "prefix": "contact"
     },
     {
-      "name": { "de": "Gutschein", "en": "Coupon" },
+      "name": "Config.coupon",
       "prefix": "coupon"
     },
     {
-      "name": { "de": "Entwickler", "en": "Developer" },
+      "name": "Config.dev",
       "prefix": "dev"
     },
     {
-      "name": { "de": "Footer", "en": "Footer" },
+      "name": "Config.footer",
       "prefix": "footer"
     },
     {
-      "name": { "de": "Header", "en": "Header" },
+      "name": "Config.header",
       "prefix": "header"
     },
     {
-      "name": { "de": "Startseite", "en": "Homepage" },
+      "name": "Config.homepage",
       "prefix": "homepage"
     },
     {
-      "name": { "de": "Artikelsuche", "en": "Item search" },
+      "name": "Config.itemSearch",
       "prefix": "itemSearch"
     },
     {
-      "name": { "de": "Artikel", "en": "Item" },
+      "name": "Config.item",
       "prefix": "item"
     },
     {
-      "name": { "de": "Impressum", "en": "Legal disclosure" },
+      "name": "Config.legalDisclosure",
       "prefix": "legalDisclosure"
     },
     {
-      "name": { "de": "Login", "en": "Login" },
+      "name": "Config.login",
       "prefix": "login"
     },
     {
-      "name": { "de": "Mein Konto", "en": "My account" },
+      "name": "Config.myAccount",
       "prefix": "myAccount"
     },
     {
-      "name": { "de": "Nicht gefunden", "en": "Not found" },
+      "name": "Config.notFound",
       "prefix": "notFound"
     },
     {
-      "name": { "de": "Benachrichtigungen", "en": "Notifications" },
+      "name": "Config.notifications",
       "prefix": "notifications"
     },
     {
-      "name": { "de": "Auftragsbestätigung", "en": "Order confirmation" },
+      "name": "Config.orderConfirmation",
       "prefix": "orderConfirmation"
     },
     {
-      "name": { "de": "Auftragshistorie", "en": "Order history" },
+      "name": "Config.orderHistory",
       "prefix": "orderHistory"
     },
     {
-      "name": { "de": "Datenschutzerklärung", "en": "Privacy policy" },
+      "name": "Config.privacyPolicy",
       "prefix": "privacyPolicy"
     },
     {
-      "name": { "de": "Registrierung", "en": "Registration" },
+      "name": "Config.reg",
       "prefix": "reg"
     },
     {
-      "name": { "de": "Passwort zurücksetzen", "en": "Reset password" },
+      "name": "Config.resetPw",
       "prefix": "resetPw"
     },
     {
-      "name": { "de": "Returenbestätigung", "en": "Return confirmation" },
+      "name": "Config.returnConfirmation",
       "prefix": "returnConfirmation"
     },
     {
-      "name": { "de": "Retourenhistorie", "en": "Return history" },
+      "name": "Config.returnHistory",
       "prefix": "returnHistory"
     },
     {
-      "name": { "de": "Retouren", "en": "Return" },
+      "name": "Config.return",
       "prefix": "return"
     },
     {
-      "name": { "de": "Versandinformationen", "en": "Shipping information" },
+      "name": "Config.shippingInfo",
       "prefix": "shippingInfo"
     },
     {
-      "name": { "de": "Artikeleinzelansicht", "en": "Single item view" },
+      "name": "Config.singleItem",
       "prefix": "singleItem"
     },
     {
-      "name": { "de": "AGB", "en": "Terms and conditions" },
+      "name": "Config.termsAndConditions",
       "prefix": "termsAndConditions"
     },
     {
-      "name": { "de": "Wunschliste", "en": "Wish list" },
+      "name": "Config.wishList",
       "prefix": "wishList"
     }
   ]
