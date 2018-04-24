@@ -125,7 +125,7 @@ function getWidgetOrder()
                 children : children
             }
 
-            widgets.push(widget);
+            widgets[jQuery(this).attr('data-gs-y')] = widget;
 
             jQuery(this).find('[data-builder-child-container]').each(function()
             {
@@ -152,8 +152,6 @@ function getWidgetOrder()
         data.push(container);
 
     });
-
-    console.log(data);
 
     dispatchBuilderEvent({
         name: 'shopbuilder_widget_order',
