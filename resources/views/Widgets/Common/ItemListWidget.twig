@@ -1,17 +1,21 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set itemListId = widget.settings.tagId %}
-{% if widget.settings.listType == "category" %}
-    {% set itemListId = widget.settings.categoryId %}
-    {{ Twig.set("category", Twig.call("services.category.get", [widget.settings.categoryId])) }}
+{% set listType = widget.settings.listType.mobile %}
+{% set itemSort = widget.settings.itemSort.mobile %}
+{% set maxItems = widget.settings.maxItems.mobile %}
+{% set categoryId = widget.settings.categoryId.mobile %}
+{% set itemListId = widget.settings.tagId.mobile %}
+{% if listType == "category" %}
+    {% set itemListId = categoryId %}
+    {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
 {% endif %}
 
-{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [widget.settings.listType, itemListId, widget.settings.itemSort, widget.settings.maxItems]) ) }}
+{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [listType, itemListId, itemSort, maxItems]) ) }}
 <div class="row">
     <div class="col-xs-12">
         <div class="m-b-2 clearfix">
             <div class="section-header m-b-1">
-                {% if widget.settings.listType == "category" %}
+                {% if listType == "category" %}
                     {{ Twig.if("category") }}
                         <h2>{{ Twig.print("category.details[0].name") }}</h2>
                         <a href="{{ Twig.print(Twig.call("services.category.getURL", [category])) }}" class="section-link-all">
@@ -20,9 +24,9 @@
                     {{ Twig.else() }}
                         <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
                     {{ Twig.endif() }}
-                {% elseif widget.settings.listType == "last_seen" %}
+                {% elseif listType == "last_seen" %}
                     <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
-                {% elseif widget.settings.listType == "tag_list" %}
+                {% elseif listType == "tag_list" %}
                     <h2>Tag List Name (placeholder)</h2>
                 {% endif %}
             </div>
