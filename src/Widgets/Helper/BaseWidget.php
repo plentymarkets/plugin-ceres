@@ -63,7 +63,7 @@ class BaseWidget implements Widget
     )
     {
         $twig = pluginApp(Twig::class);
-        $templateData = $this->getTemplateData();
+        $templateData = $this->getTemplateData($widgetSettings, $isPreview);
         $templateData["widget"] = [
             "settings" => $widgetSettings
         ];
@@ -76,9 +76,11 @@ class BaseWidget implements Widget
     /**
      * Get additional data to be passed to the template while rendering
      *
+     * @param $widgetSettings
+     * @param $isPreview
      * @return array
      */
-    protected function getTemplateData()
+    protected function getTemplateData($widgetSettings, $isPreview)
     {
         return [];
     }
