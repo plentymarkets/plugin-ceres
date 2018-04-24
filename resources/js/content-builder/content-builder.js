@@ -358,8 +358,8 @@ function addNestedWidget(widgetData)
     var widget = jQuery('<div class="nested-widget" data-builder-identifier="' + uniqueId + '">' + markup + '</div>');
 
     jQuery('[data-builder-child-container].active').html(widget);
-    jQuery('[data-builder-child-container]').addClass('set');
-    jQuery('[data-builder-child-container]').removeClass('active');
+    jQuery('[data-builder-child-container].active').addClass('set');
+    jQuery('[data-builder-child-container].active').removeClass('active');
 
     addContextMenu(widget);
     focusElement(null);
@@ -374,7 +374,6 @@ function addNestedWidget(widgetData)
 function addGridstackWidget(widgetData, position, keepProperties)
 {
     var container = widgetData.dropzone;
-    var height = widgetData.defaultHeight;
     var markup = widgetData.htmlMarkup;
     var uniqueId = widgetData.uniqueId;
     var posX = 0;
@@ -388,7 +387,7 @@ function addGridstackWidget(widgetData, position, keepProperties)
 
     // wrap element with gridstack containers
     var gridStackItem = jQuery(  '<div class="grid-stack-item" data-builder-identifier="' + uniqueId + '"' +
-        '     data-gs-height="' + Math.round(height / CELL_HEIGHT) + '"><div class="grid-stack-item-content">' + markup + '</div>' +
+        '     data-gs-height="0"><div class="grid-stack-item-content">' + markup + '</div>' +
         '</div>');
 
     setDragCursorToChildElements(gridStackItem);
