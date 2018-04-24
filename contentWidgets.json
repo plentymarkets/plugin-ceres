@@ -50,7 +50,7 @@
 			"layout": {
 				"type": "selectBox",
 				"required": true,
-				"label": "gridThreeColumnLayoutLabel",
+				"label": "Widget.gridThreeColumnLayoutLabel",
 				"options": {
 					"tooltip": "Widget.gridThreeColumnLayoutTooltip",
 					"defaultValue": "default",
