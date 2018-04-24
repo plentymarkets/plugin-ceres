@@ -132,19 +132,19 @@
 		"settings": {}
 	},
 	{
-		"identifier": "Ceres::TextHeaderWidget",
-		"label": "Widget.headerLabel",
+		"identifier": "Ceres::TitleBarWidget",
+		"label": "Widget.titleBarLabel",
 		"previewImageURL": "https://i.imgur.com/HiSNabW.png",
 		"type": "default",
 		"allowedNestingTypes": [],
-		"widgetClass": "Ceres\\Widgets\\Common\\TextHeaderWidget",
+		"widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
 		"settings": {
 			"text": {
 				"type": "inputText",
 				"required": true,
-				"label": "Widget.headerTextLabel",
+				"label": "Widget.titleBarTextLabel",
 				"options": {
-					"tooltip": "Widget.headerTextTooltip",
+					"tooltip": "Widget.titleBarTextTooltip",
 					"defaultValue": ""
 				}
 			}

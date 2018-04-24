@@ -5,7 +5,7 @@ namespace Ceres\Widgets\Common;
 use Plenty\Modules\ContentBuilder\Contracts\Widget;
 use Plenty\Plugin\Templates\Twig;
 
-class TextHeaderWidget implements Widget
+class TitleBarWidget implements Widget
 {
 
     /**
@@ -21,7 +21,7 @@ class TextHeaderWidget implements Widget
         $twig = pluginApp(Twig::class);
 
         return $twig->render(
-            "Ceres::Widgets.Common.HeaderWidget",
+            "Ceres::Widgets.Common.TitleBarWidget",
             [
                 "widgetSettings" => $widgetSettings
             ]
