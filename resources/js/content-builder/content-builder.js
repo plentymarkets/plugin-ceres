@@ -107,22 +107,53 @@ function getWidgetOrder()
 {
     var data = [];
 
+    // TODO: implement recursively
+
     jQuery('[data-builder-container]').each(function()
     {
         var widgets = [];
-
         var container = {
             container: jQuery(this).attr('data-builder-container'),
             widgets: widgets
         };
 
-        jQuery(this).find('[data-builder-identifier]').each(function()
+        jQuery(this).children('[data-builder-identifier]').each(function()
         {
-            widgets[jQuery(this).attr('data-gs-y')] = jQuery(this).attr('data-builder-identifier')
+            var children = [];
+            var widget = {
+                uuid : jQuery(this).attr('data-builder-identifier'),
+                children : children
+            }
+
+            widgets.push(widget);
+
+            jQuery(this).find('[data-builder-child-container]').each(function()
+            {
+                var childContainerKey = jQuery(this).attr('data-builder-child-container');
+                var childContainerValue = [];
+                var childContainer = {
+                    [childContainerKey] : childContainerValue
+                };
+
+                children.push(childContainer);
+
+                jQuery(this).find('[data-builder-identifier]').each(function ()
+                {
+                    var value = {
+                        uuid : jQuery(this).attr('data-builder-identifier')
+                    };
+
+                    childContainerValue.push(value);
+
+                });
+            });
         });
 
         data.push(container);
+
     });
+
+    console.log(data);
 
     dispatchBuilderEvent({
         name: 'shopbuilder_widget_order',
@@ -416,7 +447,6 @@ function addGridstackWidget(widgetData, position, keepProperties)
 
 function initNestedWidgetContainer(container)
 {
-    jQuery(container).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
     jQuery(container).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
 
     jQuery(container).find('.add-icon').click(function ()

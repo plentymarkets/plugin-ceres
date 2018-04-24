@@ -68,10 +68,11 @@ body
 
 [data-builder-child-container] .context-menu
 {
-    left: calc(50% - 40px);
-    top: calc(50% - 18px);
-    right: auto;
-    z-index: 3;
+    top: calc(50%);
+    transform: translateY(-50%);
+    left: 0px;
+    right: 0px;
+    text-align: center;
 }
 
 .shopbuilder-icon.fa
