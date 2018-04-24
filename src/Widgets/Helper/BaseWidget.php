@@ -17,23 +17,19 @@ class BaseWidget implements Widget
     /**
      * Get the html representation of the widget.
      *
-     * @param int $widgetGridHeight
-     * @param int $widgetGridWidth
      * @param array $widgetSettings
      *
      * @return string
      */
     public function getPreview(
-        int $widgetGridHeight = 0,
-        int $widgetGridWidth = 0,
-        array $widgetSettings = []
+        $widgetSettings = [],
+        $children = []
     ): string
     {
         $twig = pluginApp(Twig::class);
         $template = $this->renderTemplate(
-            ['mobile' => $widgetGridHeight],
-            ['mobile' => $widgetGridWidth],
             $widgetSettings,
+            $children,
             true
         );
 
@@ -45,39 +41,33 @@ class BaseWidget implements Widget
      * Returns a twig-template which will be included in the frontend
      * or rendered again for generating the preview
      *
-     * @param array $widgetGridHeight
-     * @param array $widgetGridWidth
      * @param array $widgetSettings
      *
      * @return string
      */
     public function render(
-        array $widgetGridHeight = [],
-        array $widgetGridWidth = [],
-        array $widgetSettings = []
+        $widgetSettings = [],
+        $children = []
     ): string
     {
         return $this->renderTemplate(
-            $widgetGridHeight,
-            $widgetGridWidth,
-            $widgetSettings
+            $widgetSettings,
+            $children
         );
     }
 
     private function renderTemplate(
-        $widgetGridHeight = [],
-        $widgetGridWidth = [],
         $widgetSettings = [],
+        $children = [],
         $isPreview = false
     )
     {
         $twig = pluginApp(Twig::class);
         $templateData = $this->getTemplateData();
         $templateData["widget"] = [
-            "settings" => $widgetSettings,
-            "width"    => $widgetGridWidth,
-            "height"   => $widgetGridHeight
+            "settings" => $widgetSettings
         ];
+        $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;
 
         return $twig->render($this->template, $templateData);
