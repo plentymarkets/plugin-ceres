@@ -378,7 +378,7 @@ function addGridstackWidget(widgetData, position, keepProperties)
     var markup = widgetData.htmlMarkup;
     var uniqueId = widgetData.uniqueId;
     var posX = 0;
-    var posY = 0;
+    var posY = 99000; //its magic!!
 
     if (position)
     {
