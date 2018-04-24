@@ -1,15 +1,15 @@
 <div class="row">
     {% if widget.settings.layout == "oneToOne" %}
         {# 2 Spalten identisch: #}
-        <div class="col-xs-12 col-md-6 nested-widget-container"></div>
-        <div class="col-xs-12 col-md-6 nested-widget-container"></div>
+        <div class="col-xs-12 col-md-6" data-builder-child-container=""></div>
+        <div class="col-xs-12 col-md-6" data-builder-child-container=""></div>
     {% elseif widget.settings.layout == "twoToOne" %}
         {# 2 Spalten links groß: #}
-        <div class="col-xs-12 col-md-8 nested-widget-container"></div>
-        <div class="col-xs-12 col-md-4 nested-widget-container"></div>
+        <div class="col-xs-12 col-md-8" data-builder-child-container=""></div>
+        <div class="col-xs-12 col-md-4" data-builder-child-container=""></div>
     {% elseif widget.settings.layout == "oneToTwo" %}
         {# 2 Spalten rechts groß: #}
-        <div class="col-xs-12 col-md-4 nested-widget-container"></div>
-        <div class="col-xs-12 col-md-8 nested-widget-container"></div>
+        <div class="col-xs-12 col-md-4" data-builder-child-container=""></div>
+        <div class="col-xs-12 col-md-8" data-builder-child-container=""></div>
     {% endif %}
 </div>

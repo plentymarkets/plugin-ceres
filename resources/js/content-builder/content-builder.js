@@ -334,7 +334,7 @@ function addBackendEventListener()
  */
 function addContentWidget(widgetData, position, keepProperties)
 {
-    var isNestedContainerActive = jQuery('.nested-widget-container.active').length;
+    var isNestedContainerActive = jQuery('[data-builder-child-container].active').length;
 
     if (isNestedContainerActive)
     {
@@ -357,9 +357,9 @@ function addNestedWidget(widgetData)
 
     var widget = jQuery('<div class="nested-widget" data-builder-identifier="' + uniqueId + '">' + markup + '</div>');
 
-    jQuery('.nested-widget-container.active').html(widget);
-    jQuery('.nested-widget-container.active').addClass('set');
-    jQuery('.nested-widget-container.active').removeClass('active');
+    jQuery('[data-builder-child-container].active').html(widget);
+    jQuery('[data-builder-child-container]').addClass('set');
+    jQuery('[data-builder-child-container]').removeClass('active');
 
     addContextMenu(widget);
     focusElement(null);
@@ -399,10 +399,10 @@ function addGridstackWidget(widgetData, position, keepProperties)
     {
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
 
-        if (markup.indexOf('nested-widget-container') != -1)
+        if (markup.indexOf('data-builder-child-container') != -1)
         {
             // enrich structure elements with custom markup
-            jQuery('body').find(jQuery(gridStackItem)).find('.nested-widget-container').each(function()
+            jQuery('body').find(jQuery(gridStackItem)).find('[data-builder-child-container]').each(function()
             {
                 initNestedWidgetContainer(jQuery(this));
             });
@@ -424,12 +424,12 @@ function initNestedWidgetContainer(container)
     {
         var uniqueId = jQuery(this).closest('[data-builder-identifier]').attr('data-builder-identifier');
 
-        jQuery('.nested-widget-container').each(function ()
+        jQuery('[data-builder-child-container]').each(function ()
         {
             jQuery(this).removeClass('active');
         });
 
-        jQuery(this).closest('.nested-widget-container').addClass('active');
+        jQuery(this).closest('[data-builder-child-container]').addClass('active');
 
         dispatchBuilderEvent({
             name: 'shopbuilder_open_properties',
@@ -453,7 +453,7 @@ function deleteContentWidget(widgetId, keepProperties)
 
     if (widget.hasClass('nested-widget'))
     {
-        var container = widget.closest('.nested-widget-container');
+        var container = widget.closest('[data-builder-child-container]');
         widget.remove();
         container.removeClass('set');
         initNestedWidgetContainer(container);
