@@ -67,8 +67,8 @@
                     sass = new Sass();
                     retryCompilation = false;
                     compileSass(prefix)
-                        .done(resolve)
-                        .fail(reject);
+                        .done(promise.resolve)
+                        .fail(promise.reject);
                 }
                 else
                 {
