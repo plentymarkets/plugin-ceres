@@ -18,12 +18,15 @@ class BaseWidget implements Widget
      * Get the html representation of the widget.
      *
      * @param array $widgetSettings
+     * @param array $children
      *
      * @return string
+     *
+     * @throws \ErrorException
      */
     public function getPreview(
-        $widgetSettings = [],
-        $children = []
+        array $widgetSettings = [],
+        array $children = []
     ): string
     {
         $twig = pluginApp(Twig::class);
@@ -42,12 +45,13 @@ class BaseWidget implements Widget
      * or rendered again for generating the preview
      *
      * @param array $widgetSettings
+     * @param array $children
      *
      * @return string
      */
     public function render(
-        $widgetSettings = [],
-        $children = []
+        array $widgetSettings = [],
+        array $children = []
     ): string
     {
         return $this->renderTemplate(
