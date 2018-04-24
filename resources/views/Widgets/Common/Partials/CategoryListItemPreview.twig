@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <!-- STORE SPECIALS -->
+        {# STORE SPECIALS #}
 
         {% if item.data.item.storeSpecial.id > 0 %}
 
@@ -59,9 +59,9 @@
 
             </div>
         {% endif %}
-        <!-- ./STORE SPECIALS -->
+        {# ./STORE SPECIALS #}
 
-        <!-- ITEM DETAILS -->
+        {# ITEM DETAILS #}
         <div class="thumb-content">
             <a class="thumb-title small">
                 {% if item is defined %}
@@ -111,6 +111,6 @@
                 <a title="{{ trans("Ceres::Template.itemShippingCosts") }}">{{ trans("Ceres::Template.itemShippingCosts") }}</a>
             </span>
         </div>
-        <!-- ./ITEM DETAILS  -->
+        {# ./ITEM DETAILS #}
     </div>
 </article>
