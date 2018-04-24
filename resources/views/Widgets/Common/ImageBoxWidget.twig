@@ -30,40 +30,44 @@
     } %}
 {% endif %}
 
-{% if widget.settings.style == "largeText" or widget.settings.style == "smallText" %}
-    <div class="featured-categories m-y-2{% if widget.settings.style == "largeText" %} sale-new{% endif %}">
-        <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
-            <div class="prop-inner">
-                <a class="featured-{% if widget.settings.style == "largeText" %}sale-new{%else%}category{% endif %}"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
-                    {% if data.imagePath | trim is not empty %}
-                        <div class="featured-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
-                    {% endif %}
-                    {% if data.name | trim is not empty %}
-                        <div class="featured-category-inner">
-                            <h2 class="featured-category-headline">
-                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
-                            </h2>
-                        </div>
-                    {% endif %}
-                </a>
-            </div>
-        </div>
-    </div>
-{% else %}
-    <div class="cmp cmp-hero">
-        <div class="hero-xtras">
-            <a class="hero-category"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
-                {% if data.imagePath | trim is not empty %}
-                    <div class="hero-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
-                {% endif %}
-                {% if data.name | trim is not empty %}
-                    <div class="hero-category-inner">
-                        <h2 class="hero-category-headline">
-                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
-                        </h2>
+<div class="row">
+    <div class="col-xs-12">
+        {% if widget.settings.style == "largeText" or widget.settings.style == "smallText" %}
+            <div class="featured-categories m-y-2{% if widget.settings.style == "largeText" %} sale-new{% endif %}">
+                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
+                    <div class="prop-inner">
+                        <a class="featured-{% if widget.settings.style == "largeText" %}sale-new{%else%}category{% endif %}"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
+                            {% if data.imagePath | trim is not empty %}
+                                <div class="featured-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
+                            {% endif %}
+                            {% if data.name | trim is not empty %}
+                                <div class="featured-category-inner">
+                                    <h2 class="featured-category-headline">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
+                                    </h2>
+                                </div>
+                            {% endif %}
+                        </a>
                     </div>
-                {% endif %}
-            </a>
-        </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="cmp cmp-hero">
+                <div class="hero-xtras">
+                    <a class="hero-category"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
+                        {% if data.imagePath | trim is not empty %}
+                            <div class="hero-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
+                        {% endif %}
+                        {% if data.name | trim is not empty %}
+                            <div class="hero-category-inner">
+                                <h2 class="hero-category-headline">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
+                                </h2>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
-{% endif %}
+</div>

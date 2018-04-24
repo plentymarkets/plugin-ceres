@@ -1,9 +1,13 @@
 {% set text = widget.settings.text %}
 
-<div class="homepage-title m-b-1">
-    {% if text | trim is not empty %}
-        <h1>{{ text }}</h1>
-    {% else %}
-        <h1>{{ config("Ceres.header.company_name") }}</h1>
-    {% endif %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="homepage-title m-b-1">
+            {% if text | trim is not empty %}
+                <h1>{{ text }}</h1>
+            {% else %}
+                <h1>{{ config("Ceres.header.company_name") }}</h1>
+            {% endif %}
+        </div>
+    </div>
 </div>
