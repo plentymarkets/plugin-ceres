@@ -358,8 +358,8 @@ function addNestedWidget(widgetData)
     var widget = jQuery('<div class="nested-widget" data-builder-identifier="' + uniqueId + '">' + markup + '</div>');
 
     jQuery('[data-builder-child-container].active').html(widget);
-    jQuery('[data-builder-child-container]').addClass('set');
-    jQuery('[data-builder-child-container]').removeClass('active');
+    jQuery('[data-builder-child-container].active').addClass('set');
+    jQuery('[data-builder-child-container].active').removeClass('active');
 
     addContextMenu(widget);
     focusElement(null);
