@@ -31,7 +31,7 @@
 	},
 	{
 		"identifier": "Ceres::TwoColumnWidget",
-		"label": "Widget.two_column_label",
+		"label": "Widget.gridTwoColumnLabel",
 		"previewImageURL": "https://i.imgur.com/69lqNTl.png",
 		"type": "structure",
 		"allowedNestingTypes": [
@@ -42,24 +42,24 @@
 			"layout": {
 				"type": "selectBox",
 				"required": true,
-				"label": "layout",
+				"label": "Widget.gridTwoColumnLayoutLabel",
 				"options": {
-					"tooltip": "layout",
+					"tooltip": "Widget.gridTwoColumnLayoutTooltip",
 					"defaultValue": "default",
 					"selectBoxValues": [
 						{
 							"value": "default",
-							"caption": "6 | 6",
+							"caption": "Widget.gridTwoColumnLayoutOneToOne",
 							"position": 0
 						},
 						{
 							"value": "a",
-							"caption": "8 | 4",
+							"caption": "Widget.gridTwoColumnLayoutTwoToOne",
 							"position": 1
 						},
 						{
 							"value": "b",
-							"caption": "4 | 8",
+							"caption": "Widget.gridTwoColumnLayoutOneToTwo",
 							"position": 2
 						}
 					]
@@ -69,7 +69,7 @@
 	},
 	{
 		"identifier": "Ceres::ThreeColumnWidget",
-		"label": "Widget.three_column_label",
+		"label": "Widget.gridThreeColumnLabel",
 		"previewImageURL": "https://i.imgur.com/iWIXVVK.png",
 		"type": "structure",
 		"allowedNestingTypes": [
@@ -80,39 +80,39 @@
 			"layout": {
 				"type": "selectBox",
 				"required": true,
-				"label": "layout",
+				"label": "gridThreeColumnLayoutLabel",
 				"options": {
-					"tooltip": "layout",
+					"tooltip": "Widget.gridThreeColumnLayoutTooltip",
 					"defaultValue": "default",
 					"selectBoxValues": [
 						{
 							"value": "default",
-							"caption": "4 | 4 | 4",
+							"caption": "Widget.gridThreeColumnLayoutOneToOneToOne",
 							"position": 0
 						},
 						{
 							"value": "a",
-							"caption": "6 | 3 | 3",
+							"caption": "Widget.gridThreeColumnLayoutTwoToOneToOne",
 							"position": 0
 						},
 						{
 							"value": "b",
-							"caption": "3 | 6 | 3",
+							"caption": "Widget.gridThreeColumnLayoutOneToTwoToOne",
 							"position": 0
 						},
 						{
 							"value": "c",
-							"caption": "3 | 3 | 6",
+							"caption": "Widget.gridThreeColumnLayoutOneToOneToTwo",
 							"position": 0
 						},
 						{
 							"value": "d",
-							"caption": "8 | 4(split)",
+							"caption": "Widget.gridThreeColumnLayoutTwoToOneStacked",
 							"position": 0
 						},
 						{
 							"value": "e",
-							"caption": "4(split) | 8",
+							"caption": "Widget.gridThreeColumnLayoutOneStackedToTwo",
 							"position": 0
 						}
 					]
@@ -122,14 +122,13 @@
 	},
 	{
 		"identifier": "Ceres::FourColumnWidget",
-		"label": "Widget.four_column_label",
+		"label": "Widget.gridFourColumnLabel",
 		"previewImageURL": "https://i.imgur.com/SUxxmG3.png",
 		"type": "structure",
 		"allowedNestingTypes": [
 			"default"
 		],
-		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget",
-		"settings": {}
+		"widgetClass": "Ceres\\Widgets\\Grid\\FourColumnWidget"
 	},
 	{
 		"identifier": "Ceres::TitleBarWidget",
