@@ -1,51 +1,46 @@
-{% set lang = services.sessionStorage.getLang() %}
-{% set listType = widgetSettings.listType %}
-{% set categoryId = widgetSettings.categoryId %}
-{% set maxItems = widgetSettings.maxItems %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% if listType == "category" %}
-    {% set category = services.category.get(widgetSettings.categoryId, lang) %}
-
-    {% if category %}
-        {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.categoryList, {'categoryId': category.id, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
-    {% endif %}
-{% elseif listType == "last_seen" %}
-    {% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.lastSeenItemsList, {'items': itemsPerPage, 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
-{% elseif listType == "tag_list" %}
-	{% set itemList = services.itemLoader.loadForTemplate('Ceres::ItemList.ItemListView', itemLoaderPresets.tagList, {'tagIds': [widgetSettings.tagId], 'items':maxItems, 'sorting': widgetSettings.itemSort}).documents %}
+{% set itemListId = widget.settings.tagId %}
+{% if widget.settings.listType == "category" %}
+    {% set itemListId = widget.settings.categoryId %}
+    {{ Twig.set("category", Twig.call("services.category.get", [widget.settings.categoryId])) }}
 {% endif %}
 
+{{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [widget.settings.listType, itemListId, widget.settings.itemSort, widget.settings.maxItems]) ) }}
 <div>
     <div class="m-b-2 clearfix">
         <div class="section-header m-b-1">
-            {% if listType == "category" and category %}
-                <h2>{{ category.details[0].name }}</h2>
-                <a href="{{ services.category.getURL(category, lang) }}" class="section-link-all">
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ trans("Ceres::Template.homepageShowAll") }}
-                </a>
-            {% elseif listType == "last_seen" %}
-                <h2>{{ trans("Ceres::Template.itemListLastSeen") }}</h2>
-            {% elseif listType == "tag_list" %}
+            {% if widget.settings.listType == "category" %}
+                {{ Twig.if("category") }}
+                    <h2>{{ Twig.print("category.details[0].name") }}</h2>
+                    <a href="{{ Twig.print(Twig.call("services.category.getURL", [category])) }}" class="section-link-all">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
+                    </a>
+                {{ Twig.else() }}
+                    <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
+                {{ Twig.endif() }}
+            {% elseif widget.settings.listType == "last_seen" %}
+                <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
+            {% elseif widget.settings.listType == "tag_list" %}
                 <h2>Tag List Name (placeholder)</h2>
-            {% else %}
-                <h2>{{ trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
             {% endif %}
         </div>
 
         <ul class="product-list row grid">
-            {% if itemList is not empty %}
-                {% for item in itemList[0:4] %}
+            {{ Twig.if("itemList is not empty") }}
+                {{ Twig.for("item", "itemList[0:4]") }}
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        {% include "Ceres::Widgets.Common.Partials.CategoryListItemPreview" with { 'item': item } %}
+                        {{ Twig.include( "Ceres::Widgets.Common.Partials.CategoryListItemPreview", { "item": "item" } ) }}
                     </li>
-                {% endfor %}
-            {% else %}
-                {% for i in 0..3 %}
+                {{ Twig.endfor() }}
+            {{ Twig.else() }}
+                {{ Twig.for("i", "0..3") }}
+
                     <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        {% include "Ceres::Widgets.Common.Partials.CategoryListItemPreview" %}
+                        {{ Twig.include("Ceres::Widgets.Common.Partials.CategoryListItemPreview") }}
                     </li>
-                {% endfor %}
-            {% endif %}
+                {{ Twig.endfor() }}
+            {{ Twig.endif() }}
         </ul>
     </div>
 </div>

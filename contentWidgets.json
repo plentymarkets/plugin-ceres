@@ -1,35 +1,5 @@
 [
 	{
-		"identifier": "Ceres::HeaderWidget",
-		"label": "Widget.headerLabel",
-		"previewImageURL": "",
-		"isHidden": true,
-		"type": "header",
-		"allowedNestingTypes": [],
-		"widgetClass": "Ceres\\Widgets\\Header\\Header",
-		"settings": {
-			"logo": {
-				"type": "inputFile",
-				"required": true,
-				"label": "Widget.header_logo_label",
-				"options": {
-					"tooltip": "Widget.header_logo_label_tooltip",
-					"defaultValue": ""
-				}
-			}
-		}
-	},
-	{
-		"identifier": "Ceres::FooterWidget",
-		"label": "Widget.headerLabel",
-		"previewImageURL": "",
-		"isHidden": true,
-		"type": "footer",
-		"allowedNestingTypes": [],
-		"widgetClass": "Ceres\\Widgets\\Footer\\Footer",
-		"settings": {}
-	},
-	{
 		"identifier": "Ceres::TwoColumnWidget",
 		"label": "Widget.two_column_label",
 		"previewImageURL": "https://i.imgur.com/69lqNTl.png",

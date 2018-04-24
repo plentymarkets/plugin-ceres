@@ -4,16 +4,8 @@
 		"caption": "Page.StartPageCaption",
 		"dropzones": [
 			{
-				"container": "Ceres::Header",
-				"type": "header"
-			},
-			{
 				"container": "Ceres::Homepage",
 				"type": "content"
-			},
-			{
-				"container": "Ceres::Footer",
-				"type": "footer"
 			}
 		]
 	}
