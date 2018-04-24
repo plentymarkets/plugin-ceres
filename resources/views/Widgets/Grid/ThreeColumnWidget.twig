@@ -1,32 +1,32 @@
-{% if widget.settings.layout == "default" %}
+{% if widget.settings.layout == "oneToOneToOne" %}
     {# 3 Spalten identisch: #}
     <div class="row">
         <div class="col-xs-12 col-md-4 nested-widget-container"></div>
         <div class="col-xs-12 col-md-4 nested-widget-container"></div>
         <div class="col-xs-12 col-md-4 nested-widget-container"></div>
     </div>
-{% elseif widget.settings.layout == "a" %}
+{% elseif widget.settings.layout == "twoToOneToOne" %}
     {# 3 Spalten links groß: #}
     <div class="row">
         <div class="col-xs-12 col-md-6 nested-widget-container"></div>
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
     </div>
-{% elseif widget.settings.layout == "b" %}
+{% elseif widget.settings.layout == "oneToTwoToOne" %}
     {# 3 Spalten mitte groß: #}
     <div class="row">
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
         <div class="col-xs-12 col-md-6 nested-widget-container"></div>
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
     </div>
-{% elseif widget.settings.layout == "c" %}
+{% elseif widget.settings.layout == "oneToOneToTwo" %}
     {# 3 Spalten rechts groß: #}
     <div class="row">
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
         <div class="col-xs-12 col-md-3 nested-widget-container"></div>
         <div class="col-xs-12 col-md-6 nested-widget-container"></div>
     </div>
-{% elseif widget.settings.layout == "d" %}
+{% elseif widget.settings.layout == "twoToOneStacked" %}
     {# 3 Spalten, links eine, rechts 2: #}
     <div class="row">
         <div class="col-xs-12 col-md-8 nested-widget-container"></div>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-{% elseif widget.settings.layout == "e" %}
+{% elseif widget.settings.layout == "oneStackedToTwo" %}
     {# 3 Spalten, links 2, rechts eine: #}
     <div class="row">
         <div class="col-xs-12 col-md-4">

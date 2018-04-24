@@ -15,20 +15,20 @@
 				"label": "Widget.gridTwoColumnLayoutLabel",
 				"options": {
 					"tooltip": "Widget.gridTwoColumnLayoutTooltip",
-					"defaultValue": "default",
+					"defaultValue": "oneToOne",
 					"selectBoxValues": [
 						{
-							"value": "default",
+							"value": "oneToOne",
 							"caption": "Widget.gridTwoColumnLayoutOneToOne",
 							"position": 0
 						},
 						{
-							"value": "a",
+							"value": "twoToOne",
 							"caption": "Widget.gridTwoColumnLayoutTwoToOne",
 							"position": 1
 						},
 						{
-							"value": "b",
+							"value": "oneToTwo",
 							"caption": "Widget.gridTwoColumnLayoutOneToTwo",
 							"position": 2
 						}
@@ -53,35 +53,35 @@
 				"label": "Widget.gridThreeColumnLayoutLabel",
 				"options": {
 					"tooltip": "Widget.gridThreeColumnLayoutTooltip",
-					"defaultValue": "default",
+					"defaultValue": "oneToOneToOne",
 					"selectBoxValues": [
 						{
-							"value": "default",
+							"value": "oneToOneToOne",
 							"caption": "Widget.gridThreeColumnLayoutOneToOneToOne",
 							"position": 0
 						},
 						{
-							"value": "a",
+							"value": "twoToOneToOne",
 							"caption": "Widget.gridThreeColumnLayoutTwoToOneToOne",
 							"position": 0
 						},
 						{
-							"value": "b",
+							"value": "oneToTwoToOne",
 							"caption": "Widget.gridThreeColumnLayoutOneToTwoToOne",
 							"position": 0
 						},
 						{
-							"value": "c",
+							"value": "oneToOneToTwo",
 							"caption": "Widget.gridThreeColumnLayoutOneToOneToTwo",
 							"position": 0
 						},
 						{
-							"value": "d",
+							"value": "twoToOneStacked",
 							"caption": "Widget.gridThreeColumnLayoutTwoToOneStacked",
 							"position": 0
 						},
 						{
-							"value": "e",
+							"value": "oneStackedToTwo",
 							"caption": "Widget.gridThreeColumnLayoutOneStackedToTwo",
 							"position": 0
 						}
