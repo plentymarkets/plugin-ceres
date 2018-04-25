@@ -1,10 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set listType = widget.settings.listType.mobileValue %}
-{% set itemSort = widget.settings.itemSort.mobileValue %}
-{% set maxItems = widget.settings.maxItems.mobileValue %}
-{% set categoryId = widget.settings.categoryId.mobileValue %}
-{% set itemListId = widget.settings.tagId.mobileValue %}
+{% set listType = widget.settings.listType.mobile %}
+{% set itemSort = widget.settings.itemSort.mobile %}
+{% set maxItems = widget.settings.maxItems.mobile %}
+{% set categoryId = widget.settings.categoryId.mobile %}
+{% set itemListId = widget.settings.tagId.mobile %}
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
     {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
