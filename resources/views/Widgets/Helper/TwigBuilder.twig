@@ -63,7 +63,7 @@
     {% endspaceless -%}
 {% endmacro %}
 
-{% macro else( condition ) %}
+{% macro else() %}
     {%- spaceless %}
         {% import _self as Twig %}
         {{ Twig.do("else") }}

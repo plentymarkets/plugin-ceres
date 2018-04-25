@@ -1,13 +1,13 @@
-{% set text = widget.settings.text %}
+{% set text = widget.settings.text.mobileValue %}
 
 <div class="row">
     <div class="col-xs-12">
         <div class="homepage-title m-b-1">
-            {% if text | trim is not empty %}
-                <h1>{{ text }}</h1>
-            {% else %}
+            {{ Twig.if("text | trim is not empty") }}
+                <h1>{{ Twig.print("text") }}</h1>
+            {{ Twig.else() }}
                 <h1>{{ config("Ceres.header.company_name") }}</h1>
-            {% endif %}
+            {{ Twig.endif() }}
         </div>
     </div>
 </div>
