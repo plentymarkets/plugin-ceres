@@ -1,13 +1,6 @@
 [
     {
         "tab"       : "Global",
-        "key"       : "header.company_name",
-        "label"     : "Name of your store",
-        "type"      : "text",
-        "default"   : "Ceres Webshop"
-    },
-    {
-        "tab"       : "Global",
         "key"       : "header.company_logo",
         "label"     : "URL to your company logo",
         "type"      : "text",

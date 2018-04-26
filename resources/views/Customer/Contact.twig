@@ -3,7 +3,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.contactMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_contact") }}">
-    <title>{{ trans("Ceres::Template.contact") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.contact") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
 
     {% if config("Ceres.global.google_recaptcha_api_key") | length > 0 %}
         <script src='https://www.google.com/recaptcha/api.js' async defer></script>

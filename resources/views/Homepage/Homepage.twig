@@ -18,7 +18,7 @@
         {"@context": "http://schema.org","@type": "WebSite","url": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}","potentialAction":{"@type": "SearchAction","target": "{{ services.webstoreConfig.getWebstoreConfig().domainSsl }}/search?query={search_term}","query-input": "required name=search_term"}}
     </script>
 
-    <title>{{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.headerCompanyName") }}</title>
 {% endblock %}
 
 {% block PageBody %}
