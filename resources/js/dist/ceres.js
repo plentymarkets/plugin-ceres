@@ -19816,7 +19816,7 @@ Vue.component("change-payment-method", {
             this.changePaymentModal.show();
         },
         getPaymentStateText: function getPaymentStateText(paymentStates) {
-            return _TranslationService2.default.translate("Ceres::Template.paymentStatus_" + paymentStates.find(function (paymentState) {
+            return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
                 return paymentState.typeId === 4;
             }).value);
         },
@@ -19967,7 +19967,7 @@ Vue.component("order-history", {
         getPaymentStateText: function getPaymentStateText(paymentStates) {
             for (var paymentState in paymentStates) {
                 if (paymentStates[paymentState].typeId == 4) {
-                    return _TranslationService2.default.translate("Ceres::Template.paymentStatus_" + paymentStates[paymentState].value);
+                    return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
                 }
             }
 
