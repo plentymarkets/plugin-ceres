@@ -55,9 +55,9 @@ function _handleCurrentCategory()
  */
 function _updateHistory(currentCategory)
 {
-    var title = document.getElementsByTagName("title")[0].innerHTML;
+    const title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, currentCategory.url + window.location.search);
+    window.history.pushState({}, title, currentCategory.url + window.location.search);
 
     _updateCategoryTexts(currentCategory);
 }
