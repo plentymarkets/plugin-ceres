@@ -423,7 +423,7 @@ function addGridstackWidget(widgetData, position, keepProperties)
     addContextMenu(gridStackItem);
 
     // scroll view to top
-    $('html').animate({ scrollTop: 0 }, 0, function ()
+    $('html').animate({ scrollTop: jQuery(document).height() }, 0, function ()
     {
         jQuery('[data-builder-container="' + container + '"]').data('gridstack').addWidget(gridStackItem, posX, posY);
 
@@ -435,11 +435,6 @@ function addGridstackWidget(widgetData, position, keepProperties)
                 initNestedWidgetContainer(jQuery(this));
             });
         }
-
-        // if(gridStackItem && keepProperties)
-        // {
-        //     focusElement(uniqueId);
-        // }
     });
 }
 
