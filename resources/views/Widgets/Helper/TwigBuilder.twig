@@ -17,7 +17,11 @@
             {% set arguments = arguments | default([]) %}
             {% set argumentList = "" %}
             {% for argument in arguments %}
-                {% set arg = argument | json_encode %}
+                {% if argument | first == "$" %}
+                    {% set arg = argument[1:] %}
+                {% else %}
+                    {% set arg = argument | json_encode %}
+                {% endif %}
                 {% set argumentList = argumentList ~ arg %}
                 {% if not loop.last %}
                     {% set argumentList = argumentList ~ ", " %}
