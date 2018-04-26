@@ -1,8 +1,8 @@
 {% set lang = services.sessionStorage.getLang() %}
 
 {% set data = {} %}
-{% if widget.settings.categoryId | trim is not empty %}
-    {% set category = services.category.get(widget.settings.categoryId, lang) %}
+{% if widget.settings.categoryId.mobile | trim is not empty %}
+    {% set category = services.category.get(widget.settings.categoryId.mobile, lang) %}
     {% if category %}
         {% set data = {
             name: category.details[0].name,
@@ -10,8 +10,8 @@
             imagePath: "documents/" ~ category.details[0].imagePath
         } %}
     {% endif %}
-{% elseif widget.settings.variationId | trim is not empty %}
-    {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [widget.settings.variationId]}).documents[0].data %}
+{% elseif widget.settings.variationId.mobile | trim is not empty %}
+    {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [widget.settings.variationId.mobile]}).documents[0].data %}
     {% set data = {
         name: item | itemName,
         url: item | itemURL,
@@ -19,8 +19,8 @@
     } %}
 {% endif %}
 
-{% if widget.settings.customImagePath | trim is not empty %}
-    {% set data = data | merge({ imagePath: widget.settings.customImagePath }) %}
+{% if widget.settings.customImagePath.mobile | trim is not empty %}
+    {% set data = data | merge({ imagePath: widget.settings.customImagePath.mobile }) %}
 {% endif %}
 
 {% if data is empty %}
@@ -32,13 +32,13 @@
 
 <div class="row">
     <div class="col-xs-12">
-        {% if widget.settings.style == "largeText" or widget.settings.style == "smallText" %}
-            <div class="featured-categories m-y-2{% if widget.settings.style == "largeText" %} sale-new{% endif %}">
+        {% if widget.settings.style.mobile == "largeText" or widget.settings.style.mobile == "smallText" %}
+            <div class="featured-categories m-y-2{% if widget.settings.style.mobile == "largeText" %} sale-new{% endif %}">
                 <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
                     <div class="prop-inner">
-                        <a class="featured-{% if widget.settings.style == "largeText" %}sale-new{%else%}category{% endif %}"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
+                        <a class="featured-{% if widget.settings.style.mobile == "largeText" %}sale-new{%else%}category{% endif %}"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
                             {% if data.imagePath | trim is not empty %}
-                                <div class="featured-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
+                                <div class="featured-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
                             {% endif %}
                             {% if data.name | trim is not empty %}
                                 <div class="featured-category-inner">
@@ -56,7 +56,7 @@
                 <div class="hero-xtras">
                     <a class="hero-category"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
                         {% if data.imagePath | trim is not empty %}
-                            <div class="hero-image{% if widget.settings.imageSize == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
+                            <div class="hero-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
                         {% endif %}
                         {% if data.name | trim is not empty %}
                             <div class="hero-category-inner">
