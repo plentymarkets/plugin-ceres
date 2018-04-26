@@ -121,5 +121,9 @@
       "name": "Config.wishList",
       "prefix": "wishList"
     }
+  ],
+  "ignoredTranslationFiles":
+  [
+    "Config.properties"
   ]
 }
