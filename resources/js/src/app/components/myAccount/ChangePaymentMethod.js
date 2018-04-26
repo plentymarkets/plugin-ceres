@@ -68,7 +68,7 @@ Vue.component("change-payment-method", {
         getPaymentStateText(paymentStates)
         {
             return TranslationService.translate(
-                "Ceres::Template.paymentStatus_" + paymentStates.find(paymentState => paymentState.typeId === 4).value
+                "Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(paymentState => paymentState.typeId === 4).value
             );
         },
 

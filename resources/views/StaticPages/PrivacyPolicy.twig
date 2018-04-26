@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_privacy_policy") }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_privacy_policy") }}">
-    <title>{{ trans("Ceres::Template.privacyPolicyNoShy") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title>{{ trans("Ceres::Template.privacyPolicy") }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {% autoescape false %}
-                    <h1>{{ trans("Ceres::Template.privacyPolicy") }}</h1>
+                    <h1>{{ trans("Ceres::Template.privacyPolicy", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="m-y-3">

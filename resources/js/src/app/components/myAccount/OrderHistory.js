@@ -51,7 +51,7 @@ Vue.component("order-history", {
             {
                 if (paymentStates[paymentState].typeId == 4)
                 {
-                    return TranslationService.translate("Ceres::Template.paymentStatus_" + paymentStates[paymentState].value);
+                    return TranslationService.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
                 }
             }
 
