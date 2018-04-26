@@ -10,13 +10,13 @@
 
             {% set cancellationContent %}<!--
                 --><a href="/cancellation-rights" target="_blank">
-                    <strong>{{ trans("Ceres::Template.checkoutCancellationRight") }}</strong>
+                    <strong>{{ trans("Ceres::Template.checkoutCancellationRight", {"hyphen": "&shy;"}) }}</strong>
                 </a><!--
             -->{% endset %}
 
             {% set policyContent %}<!--
                 --><a href="/privacy-policy" target="_blank">
-                    <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy") }}</span>
+                    <span>{{ trans("Ceres::Template.checkoutPrivacyPolicy", , {"hyphen": "&shy;"}) }}</span>
                 </a><!--
             -->{% endset %}
 
