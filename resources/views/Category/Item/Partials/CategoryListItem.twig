@@ -9,6 +9,8 @@
     {% set enableCarousel = ceresConfig.item.enableImageCarousel %}
 {% endif %}
 
+{% set shippingCat = config("Ceres.global.shippingCostsCategoryId") %}
+
 <article class="cmp cmp-product-thumb cmp-product-thumb--grid">
     <div class="thumb-inner">
         <add-to-basket
