@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ config("Ceres.meta."~metaLang~".description_cancel_form") }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_form") }}">
-    <title class="no-print">{{ trans("Ceres::Template.cancellationForm") }} | {{ config("Ceres.header.company_name") }}</title>
+    <title class="no-print">{{ trans("Ceres::Template.cancellationForm", {"hyphen": ""}) }} | {{ config("Ceres.header.company_name") }}</title>
 {% endblock %}
 
 {% block PageBody %}
