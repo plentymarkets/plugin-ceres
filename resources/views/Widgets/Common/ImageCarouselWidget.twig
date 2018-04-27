@@ -1,46 +1,59 @@
-{% set slides = [] %}
-{% for param in sliderParams %}
-    {% set data = {} %}
-    {% if param.categoryId | trim is not empty %}
-        {% set category = services.category.get(param.categoryId, lang) %}
-        {% if category %}
-            {% set data = {
-                name: category.details[0].name,
-                url: services.category.getURL(category, lang)
-            } %}
+{#
+    {% if slides is empty %}
+        {% set slides = [
+            { imagePath: "http://placehold.it/800x400?text=First%20slide" },
+            { imagePath: "http://placehold.it/800x400?text=Second%20slide" },
+            { imagePath: "http://placehold.it/800x400?text=Third%20slide" }
+        ] %}
+    {% endif %}
+#}
 
-            {% if category.details[0].imagePath | trim is not empty %}
-                {% set data = data | merge({ imagePath: "documents/" ~ category.details[0].imagePath }) %}
-            {% endif %}
-        {% endif %}
+{# TODO: add placeholder images for slides #}
+
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set carouselId = uid() %}
+
+{{ Twig.set("slides", "[]") }}
+
+{% for param in sliderParams %}
+
+    {{ Twig.set("slide", "{ }") }}
+
+    {% if param.categoryId | trim is not empty %}
+
+        {{ Twig.set("category", Twig.call("services.category.get", [param.categoryId])) }}
+        {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
+
+        {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
+        {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+
     {% elseif param.variationId | trim is not empty %}
-        {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [param.variationId]}).documents[0].data %}
-        {% set data = {
-            name: item | itemName,
-            url: item | itemURL,
-            imagePath: (item.images | itemImages | orderByKey('position') | first).url
-        } %}
+
+        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [param.variationId] }])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+
+        {{ Twig.set("name", "itemData | itemName") }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+        {{ Twig.set("imageUrl", "itemImage.url") }}
+
+        {{ Twig.set("slide", "slide | merge({ name: itemData | itemName })") }}
+        {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+
     {% endif %}
 
     {% if param.customImagePath | trim is not empty %}
-        {% set data = data | merge({ imagePath: param.customImagePath }) %}
+
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ param.customImagePath | json_encode } })") }}
+
     {% endif %}
 
-    {% if data.name is defined or data.url is defined or data.imagePath is defined %}
-        {% set slides = slides | merge([data]) %}
-    {% endif %}
+    {{ Twig.set("slides", "slides | merge([slide])") }}
 
 {% endfor %}
-
-{% if slides is empty %}
-    {% set slides = [
-        { imagePath: "http://placehold.it/800x400?text=First%20slide" },
-        { imagePath: "http://placehold.it/800x400?text=Second%20slide" },
-        { imagePath: "http://placehold.it/800x400?text=Third%20slide" }
-    ] %}
-{% endif %}
-
-{% set carouselId = random(999999) %}
 
 <div class="row">
     <div class="col-xs-12">
@@ -48,31 +61,29 @@
             <div class="hero-main">
                 <div id="carousel-example-generic_{{ carouselId }}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        {% for slide in slides %}
-                            <div class="carousel-item{% if loop.first %} active{% endif %}">
-                                <a class="hero-category" {% if slide.url is defined %}href="{{ slide.url }}"{% endif %}>
-                                    {% if slide.imagePath is defined %}
-                                        <img src="{{ slide.imagePath }}" alt="{{ slide.name }}" class="img-fluid">
-                                    {% else %}
-                                        <h2 class="text-danger">No image provided.</h2>
-                                    {% endif %}
-                                    {% if slide.name is defined %}
+                        {{ Twig.for("slide", "slides") }}
+                            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+                                <a class="hero-category" {{ Twig.if("slide.url is defined") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
+                                    {{ Twig.if("slide.imageUrl is defined") }}
+                                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-fluid">
+                                    {{ Twig.endif() }}
+                                    {{ Twig.if("slide.name is defined") }}
                                         <div class="carousel-caption">
                                             <h2>
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ slide.name }}
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
                                             </h2>
                                         </div>
-                                    {% endif %}
+                                    {{ Twig.endif() }}
                                 </a>
                             </div>
-                        {% endfor %}
+                        {{ Twig.endfor() }}
                     </div>
-
-                    {% if slides | length > 1 %}
+                    
+                    {{ Twig.if("slides | length > 1") }}
                         <ol class="carousel-indicators">
-                            {% for i in 1..slides | length %}
-                                <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ i - 1 }}" {% if loop.first %}class="active"{% endif %}></li>
-                            {% endfor %}
+                            {{ Twig.for("i", "1..slides | length") }}
+                                <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
+                            {{ Twig.endfor() }}
                         </ol>
 
                         <a class="left carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
@@ -86,7 +97,7 @@
                             <span class="icon-next" aria-hidden="true"></span>
                             <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
                         </a>
-                    {% endif %}
+                    {{ Twig.endif() }}
                 </div>
             </div>
         </div>
