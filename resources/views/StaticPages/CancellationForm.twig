@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.cancellationFormMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_form") }}">
-    <title class="no-print">{{ trans("Ceres::Template.cancellationFormNoShy") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    <title class="no-print">{{ trans("Ceres::Template.cancellationForm") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xs-12 m-b-3">
                 {% autoescape false %}
-                    <h1 class="print-header">{{ trans("Ceres::Template.cancellationForm") }}</h1>
+                    <h1 class="print-header">{{ trans("Ceres::Template.cancellationForm", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="m-y-3">

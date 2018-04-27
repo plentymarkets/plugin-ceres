@@ -55,9 +55,9 @@ function _handleCurrentCategory()
  */
 function _updateHistory(currentCategory)
 {
-    var title = document.getElementsByTagName("title")[0].innerHTML;
+    const title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, currentCategory.url + window.location.search);
+    window.history.pushState({}, title, currentCategory.url + window.location.search);
 
     _updateCategoryTexts(currentCategory);
 }
@@ -74,8 +74,12 @@ function _removeTempDesc()
 
 function _updateCategoryTexts(currentCategory)
 {
+    const categoryTitle = currentCategory.details[0].metaTitle ?
+                            currentCategory.details[0].metaTitle :
+                            currentCategory.details[0].name;
+
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }

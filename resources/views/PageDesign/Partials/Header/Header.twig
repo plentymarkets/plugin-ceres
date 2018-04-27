@@ -156,7 +156,7 @@
                                         <li{% if lang == language %} class="active"{% endif %}>
                                             <a href="{% if languageUrls[language] is defined %}{{ languageUrls[language] ~ queryString() }}{% else %}/{{ language }}{% endif %}" data-update-url>
                                                 <i class="flag-icon flag-icon-{{ language }}"></i>
-                                                {{ trans("Ceres::Template." ~ language) }}
+                                                {{ trans("Ceres::Template.header" ~ language | capitalize) }}
                                             </a>
                                         </li>
                                     {% endfor %}

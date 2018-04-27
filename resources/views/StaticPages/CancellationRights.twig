@@ -5,7 +5,7 @@
 {% block PartialHead %}
     <meta name="description" content="{{ trans('Ceres::Template.cancellationRightsMetaDescription') }}">
     <meta name="robots" content="{{ config("Ceres.meta.robots_cancel_rights") }}">
-    <title>{{ trans("Ceres::Template.cancellationRightsNoShy") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
+    <title>{{ trans("Ceres::Template.cancellationRights") }} | {{ trans("Ceres::Template.headerCompanyName") }}</title>
 {% endblock %}
 
 {% block PageBody %}
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {% autoescape false %}
-                    <h1>{{ trans("Ceres::Template.cancellationRights") }}</h1>
+                    <h1>{{ trans("Ceres::Template.cancellationRights", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="m-y-3">

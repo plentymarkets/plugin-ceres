@@ -19448,7 +19448,7 @@ Vue.component("change-payment-method", {
             this.changePaymentModal.show();
         },
         getPaymentStateText: function getPaymentStateText(paymentStates) {
-            return _TranslationService2.default.translate("Ceres::Template.paymentStatus_" + paymentStates.find(function (paymentState) {
+            return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates.find(function (paymentState) {
                 return paymentState.typeId === 4;
             }).value);
         },
@@ -19599,7 +19599,7 @@ Vue.component("order-history", {
         getPaymentStateText: function getPaymentStateText(paymentStates) {
             for (var paymentState in paymentStates) {
                 if (paymentStates[paymentState].typeId == 4) {
-                    return _TranslationService2.default.translate("Ceres::Template.paymentStatus_" + paymentStates[paymentState].value);
+                    return _TranslationService2.default.translate("Ceres::Template.orderHistoryPaymentStatus_" + paymentStates[paymentState].value);
                 }
             }
 
@@ -21616,6 +21616,10 @@ var init = function ($, window, document) {
             }
         });
 
+        window.onpopstate = function () {
+            window.location.reload();
+        };
+
         // init bootstrap tooltips
         $("[data-toggle=\"tooltip\"]").tooltip();
 
@@ -22025,7 +22029,7 @@ function _handleCurrentCategory() {
 function _updateHistory(currentCategory) {
     var title = document.getElementsByTagName("title")[0].innerHTML;
 
-    window.history.replaceState({}, title, currentCategory.url + window.location.search);
+    window.history.pushState({}, title, currentCategory.url + window.location.search);
 
     _updateCategoryTexts(currentCategory);
 }
@@ -22039,8 +22043,10 @@ function _removeTempDesc() {
 }
 
 function _updateCategoryTexts(currentCategory) {
+    var categoryTitle = currentCategory.details[0].metaTitle ? currentCategory.details[0].metaTitle : currentCategory.details[0].name;
+
     document.querySelector(".category-title").innerHTML = currentCategory.details[0].name;
-    document.title = currentCategory.details[0].name + " | " + App.config.header.companyName;
+    document.title = categoryTitle + " | " + App.config.header.companyName;
 
     _loadOptionalData(currentCategory);
 }
