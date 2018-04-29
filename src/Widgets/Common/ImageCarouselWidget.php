@@ -14,9 +14,9 @@ class ImageCarouselWidget extends BaseWidget
 
         foreach ($widgetSettings as $key => $value)
         {
-            if (preg_match("/^slide\d+$/", $key) && (isset($value["mobile"]["categoryId"]) || isset($value["mobile"]["variationId"]) || isset($value["mobile"]["customImagePath"])))
+            if (preg_match("/^slide\d+$/", $key) && (isset($value["categoryId"]) || isset($value["variationId"]) || isset($value["customImagePath"])))
             {
-                $sliderParams[] = $value["mobile"];
+                $sliderParams[] = $value;
             }
         }
 
