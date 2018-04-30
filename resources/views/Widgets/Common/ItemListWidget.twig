@@ -8,6 +8,7 @@
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
     {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
+    {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"])) }}
 {% endif %}
 
 {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [listType, itemListId, itemSort, maxItems]) ) }}
@@ -18,7 +19,7 @@
                 {% if listType == "category" %}
                     {{ Twig.if("category") }}
                         <h2>{{ Twig.print("category.details[0].name") }}</h2>
-                        <a href="{{ Twig.print(Twig.call("services.category.getURL", [category])) }}" class="section-link-all">
+                        <a href="{{ Twig.print("categoryUrl") }}" class="section-link-all">
                             <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
                         </a>
                     {{ Twig.else() }}
