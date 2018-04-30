@@ -1,5 +1,7 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
+{{ Twig.print("component( \"Ceres::Containers.Components.ContainerItemList\" )") }}
+
 {% set listType = widget.settings.listType.mobile %}
 {% set itemSort = widget.settings.itemSort.mobile %}
 {% set maxItems = widget.settings.maxItems.mobile %}
@@ -31,22 +33,26 @@
                     <h2>Tag List Name (placeholder)</h2>
                 {% endif %}
             </div>
-            
-            <ul class="product-list row grid">
-                {{ Twig.if("itemList is not empty") }}
-                    {{ Twig.for("item", "itemList[0].documents[0:4]") }}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            {{ Twig.include( "Ceres::Widgets.Common.Partials.CategoryListItemPreview", { "item": "item" } ) }}
-                        </li>
-                    {{ Twig.endfor() }}
-                {{ Twig.else() }}
-                    {{ Twig.for("i", "0..3") }}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            {{ Twig.include("Ceres::Widgets.Common.Partials.CategoryListItemPreview") }}
-                        </li>
-                    {{ Twig.endfor() }}
-                {{ Twig.endif() }}
-            </ul>
+
+            {% if isPreview == false %}
+                <container-item-list class="row" :items="{{ Twig.print("itemList[0].documents | json_encode") }}"></container-item-list>
+            {% else %}
+                <ul class="product-list row grid">
+                    {{ Twig.if("itemList[0].documents is not empty") }}
+                        {{ Twig.for("item", "itemList[0].documents[0:4]") }}
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                {{ Twig.include( "Ceres::Widgets.Common.Partials.CategoryListItemPreview", { "item": "item" } ) }}
+                            </li>
+                        {{ Twig.endfor() }}
+                    {{ Twig.else() }}
+                        {{ Twig.for("i", "0..3") }}
+                            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                {{ Twig.include("Ceres::Widgets.Common.Partials.CategoryListItemPreview") }}
+                            </li>
+                        {{ Twig.endfor() }}
+                    {{ Twig.endif() }}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </div>
