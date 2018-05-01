@@ -9,6 +9,7 @@
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
     {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
+    {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"])) }}
 {% endif %}
 
 {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [listType, itemListId, itemSort, maxItems]) ) }}

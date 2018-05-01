@@ -1,52 +1,63 @@
-{% set lang = services.sessionStorage.getLang() %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set data = {} %}
-{% if widget.settings.categoryId.mobile | trim is not empty %}
-    {% set category = services.category.get(widget.settings.categoryId.mobile, lang) %}
-    {% if category %}
-        {% set data = {
-            name: category.details[0].name,
-            url: services.category.getURL(category, lang),
-            imagePath: "documents/" ~ category.details[0].imagePath
-        } %}
-    {% endif %}
-{% elseif widget.settings.variationId.mobile | trim is not empty %}
-    {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [widget.settings.variationId.mobile]}).documents[0].data %}
-    {% set data = {
-        name: item | itemName,
-        url: item | itemURL,
-        imagePath: (item.images | itemImages | orderByKey('position') | first).url
-    } %}
+{% set style = widget.settings.style.mobile %}
+{% set imageSize = widget.settings.imageSize.mobile %}
+{% set categoryId = widget.settings.categoryId.mobile %}
+{% set variationId = widget.settings.variationId.mobile %}
+{% set customImagePath = widget.settings.customImagePath.mobile %}
+
+{{ Twig.set("name", "" | json_encode) }}
+{{ Twig.set("url", "" | json_encode) }}
+{{ Twig.set("imageUrl", "" | json_encode) }}
+
+{% if categoryId | trim is not empty %}
+
+    {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
+
+    {{ Twig.set("name", "category.details[0].name") }}
+    {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
+    {{ Twig.set("imageUrl", "\"documents/\" ~ category.details[0].imagePath") }}
+
+{% elseif variationId | trim is not empty %}
+    
+    {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [variationId] }])) }}
+    {{ Twig.set("itemData", "itemData.documents[0].data") }}
+    {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+
+    {{ Twig.set("name", "itemData | itemName") }}
+    {{ Twig.set("url", "itemData | itemURL") }}
+    {{ Twig.set("imageUrl", "itemImage.url") }}
+
 {% endif %}
 
-{% if widget.settings.customImagePath.mobile | trim is not empty %}
-    {% set data = data | merge({ imagePath: widget.settings.customImagePath.mobile }) %}
+{% if customImagePath | trim is not empty %}
+
+    {{ Twig.set("imageUrl", customImagePath | json_encode) }}
+
 {% endif %}
 
-{% if data is empty %}
-    {% set data = {
-        name: trans("Ceres::Widget.imageBoxPlaceholderName"),
-        imagePath: trans("Ceres::Widget.imageBoxPlaceholderImage")
-    } %}
-{% endif %}
+{{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
+    {{ Twig.set("name", trans("Ceres::Widget.imageBoxPlaceholderName") | json_encode) }}
+    {{ Twig.set("imageUrl", trans("Ceres::Widget.imageBoxPlaceholderImage") | json_encode) }}
+{{ Twig.endif() }}
 
 <div class="row">
     <div class="col-xs-12">
-        {% if widget.settings.style.mobile == "largeText" or widget.settings.style.mobile == "smallText" %}
-            <div class="featured-categories m-y-2{% if widget.settings.style.mobile == "largeText" %} sale-new{% endif %}">
+        {% if style == "largeText" or style == "smallText" %}
+            <div class="featured-categories m-y-2{% if style == "largeText" %} sale-new{% endif %}">
                 <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
                     <div class="prop-inner">
-                        <a class="featured-{% if widget.settings.style.mobile == "largeText" %}sale-new{%else%}category{% endif %}"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
-                            {% if data.imagePath | trim is not empty %}
-                                <div class="featured-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
-                            {% endif %}
-                            {% if data.name | trim is not empty %}
+                        <a class="featured-{% if style == "largeText" %}sale-new{%else%}category{% endif %}"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
+                            {{ Twig.if("imageUrl | trim is not empty") }}
+                                <div class="featured-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
+                            {{ Twig.endif() }}
+                            {{ Twig.if("name | trim is not empty") }}
                                 <div class="featured-category-inner">
                                     <h2 class="featured-category-headline">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
                                     </h2>
                                 </div>
-                            {% endif %}
+                            {{ Twig.endif() }}
                         </a>
                     </div>
                 </div>
@@ -54,17 +65,17 @@
         {% else %}
             <div class="cmp cmp-hero">
                 <div class="hero-xtras">
-                    <a class="hero-category"{% if data.url | trim is not empty %} href="{{ data.url }}"{% endif %}>
-                        {% if data.imagePath | trim is not empty %}
-                            <div class="hero-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ data.imagePath }})"></div>
-                        {% endif %}
-                        {% if data.name | trim is not empty %}
+                    <a class="hero-category"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
+                        {{ Twig.if("imageUrl | trim is not empty") }}
+                            <div class="hero-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
+                        {{ Twig.endif() }}
+                        {{ Twig.if("name | trim is not empty") }}
                             <div class="hero-category-inner">
                                 <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ data.name }}
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
                                 </h2>
                             </div>
-                        {% endif %}
+                        {{ Twig.endif() }}
                     </a>
                 </div>
             </div>

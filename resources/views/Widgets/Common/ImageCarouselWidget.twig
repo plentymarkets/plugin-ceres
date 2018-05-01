@@ -1,46 +1,69 @@
-{% set slides = [] %}
-{% for param in sliderParams %}
-    {% set data = {} %}
-    {% if param.categoryId | trim is not empty %}
-        {% set category = services.category.get(param.categoryId, lang) %}
-        {% if category %}
-            {% set data = {
-                name: category.details[0].name,
-                url: services.category.getURL(category, lang)
-            } %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-            {% if category.details[0].imagePath | trim is not empty %}
-                {% set data = data | merge({ imagePath: "documents/" ~ category.details[0].imagePath }) %}
-            {% endif %}
-        {% endif %}
+{% set carouselId = uid() %}
+
+{{ Twig.set("slides", "[]") }}
+
+{% for param in sliderParams %}
+
+    {{ Twig.set("slide", "{ }") }}
+
+    {% set pushCurrentSlide = false %}
+
+    {% if param.categoryId | trim is not empty %}
+
+        {{ Twig.set("category", Twig.call("services.category.get", [param.categoryId])) }}
+        {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
+
+        {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
+        {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+
+        {% set pushCurrentSlide = true %}
+
     {% elseif param.variationId | trim is not empty %}
-        {% set item = services.itemLoader.loadForTemplate('Ceres::Homepage.Homepage', itemLoaderPresets.items, {variationIds: [param.variationId]}).documents[0].data %}
-        {% set data = {
-            name: item | itemName,
-            url: item | itemURL,
-            imagePath: (item.images | itemImages | orderByKey('position') | first).url
-        } %}
+
+        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [param.variationId] }])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+
+        {{ Twig.set("name", "itemData | itemName") }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+        {{ Twig.set("imageUrl", "itemImage.url") }}
+
+        {{ Twig.set("slide", "slide | merge({ name: itemData | itemName })") }}
+        {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+
+        {% set pushCurrentSlide = true %}
+
     {% endif %}
 
     {% if param.customImagePath | trim is not empty %}
-        {% set data = data | merge({ imagePath: param.customImagePath }) %}
+
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ param.customImagePath | json_encode } })") }}
+
+        {% set pushCurrentSlide = true %}
+
     {% endif %}
 
-    {% if data.name is defined or data.url is defined or data.imagePath is defined %}
-        {% set slides = slides | merge([data]) %}
+    {% if pushCurrentSlide %}
+    
+        {{ Twig.set("slides", "slides | merge([slide])") }}
+
     {% endif %}
 
 {% endfor %}
 
-{% if slides is empty %}
-    {% set slides = [
-        { imagePath: "http://placehold.it/800x400?text=First%20slide" },
-        { imagePath: "http://placehold.it/800x400?text=Second%20slide" },
-        { imagePath: "http://placehold.it/800x400?text=Third%20slide" }
-    ] %}
-{% endif %}
+{{ Twig.if("slides | length <= 0") }}
 
-{% set carouselId = random(999999) %}
+    {% set placeholder1 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc73f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc73f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+    {% set placeholder2 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc742%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc742%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22218.45%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+    {% set placeholder3 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc744%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc744%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22218.45%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+
+    {{ Twig.set("slides", "[{ imageUrl: #{ placeholder1 | json_encode } }, { imageUrl: #{ placeholder2 | json_encode } }, { imageUrl: #{ placeholder3 | json_encode } }]") }}
+
+{{ Twig.endif() }}
 
 <div class="row">
     <div class="col-xs-12">
@@ -48,31 +71,29 @@
             <div class="hero-main">
                 <div id="carousel-example-generic_{{ carouselId }}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        {% for slide in slides %}
-                            <div class="carousel-item{% if loop.first %} active{% endif %}">
-                                <a class="hero-category" {% if slide.url is defined %}href="{{ slide.url }}"{% endif %}>
-                                    {% if slide.imagePath is defined %}
-                                        <img src="{{ slide.imagePath }}" alt="{{ slide.name }}" class="img-fluid">
-                                    {% else %}
-                                        <h2 class="text-danger">No image provided.</h2>
-                                    {% endif %}
-                                    {% if slide.name is defined %}
+                        {{ Twig.for("slide", "slides") }}
+                            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+                                <a class="hero-category" {{ Twig.if("slide.url is defined") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
+                                    {{ Twig.if("slide.imageUrl is defined") }}
+                                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-fluid">
+                                    {{ Twig.endif() }}
+                                    {{ Twig.if("slide.name is defined") }}
                                         <div class="carousel-caption">
                                             <h2>
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ slide.name }}
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
                                             </h2>
                                         </div>
-                                    {% endif %}
+                                    {{ Twig.endif() }}
                                 </a>
                             </div>
-                        {% endfor %}
+                        {{ Twig.endfor() }}
                     </div>
-
-                    {% if slides | length > 1 %}
+                    
+                    {{ Twig.if("slides | length > 1") }}
                         <ol class="carousel-indicators">
-                            {% for i in 1..slides | length %}
-                                <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ i - 1 }}" {% if loop.first %}class="active"{% endif %}></li>
-                            {% endfor %}
+                            {{ Twig.for("i", "1..slides | length") }}
+                                <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
+                            {{ Twig.endfor() }}
                         </ol>
 
                         <a class="left carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
@@ -86,7 +107,7 @@
                             <span class="icon-next" aria-hidden="true"></span>
                             <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
                         </a>
-                    {% endif %}
+                    {{ Twig.endif() }}
                 </div>
             </div>
         </div>
