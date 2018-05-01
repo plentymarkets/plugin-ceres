@@ -10,6 +10,26 @@
     {% endspaceless -%}
 {% endmacro %}
 
+{% macro encode( input ) %}
+    {%- spaceless %}
+        {% if input | first == "$" %}
+            {{ input[1:] }}
+        {% else %}
+            {{ input | json_encode | raw }}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
+{% macro var( varname ) %}
+    {%- spaceless %}
+        {% if varname | first != "$" %}
+            {{ "$" ~ varname }}
+        {% else %}
+            {{ varname }}
+        {% endif %}
+    {% endspaceless -%}
+{% endmacro %}
+
 {% macro call( method, arguments ) %}
     {%- spaceless %}
         {% autoescape false %}
@@ -17,17 +37,13 @@
             {% set arguments = arguments | default([]) %}
             {% set argumentList = "" %}
             {% for argument in arguments %}
-                {% if argument | first == "$" %}
-                    {% set arg = argument[1:] %}
-                {% else %}
-                    {% set arg = argument | json_encode %}
-                {% endif %}
-                {% set argumentList = argumentList ~ arg %}
+                {% set argument = Twig.encode(argument) %}
+                {% set argumentList = argumentList ~ argument %}
                 {% if not loop.last %}
                     {% set argumentList = argumentList ~ ", " %}
                 {% endif %}
             {% endfor %}
-            {{ method ~ "(" ~ argumentList ~ ")" }}
+            {{ method ~ "(" ~ argumentList ~ ")" | raw }}
         {% endautoescape %}
     {% endspaceless -%}
 {% endmacro %}

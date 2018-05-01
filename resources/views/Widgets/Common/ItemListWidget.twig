@@ -5,6 +5,7 @@
 {% set maxItems = widget.settings.maxItems.mobile %}
 {% set categoryId = widget.settings.categoryId.mobile %}
 {% set itemListId = widget.settings.tagId.mobile %}
+
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
     {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
@@ -13,39 +14,24 @@
 {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [listType, itemListId, itemSort, maxItems]) ) }}
 <div class="row">
     <div class="col-xs-12">
-        <div class="m-b-2 clearfix">
-            <div class="section-header m-b-1">
-                {% if listType == "category" %}
-                    {{ Twig.if("category") }}
-                        <h2>{{ Twig.print("category.details[0].name") }}</h2>
-                        <a href="{{ Twig.print(Twig.call("services.category.getURL", [category])) }}" class="section-link-all">
-                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
-                        </a>
-                    {{ Twig.else() }}
-                        <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
-                    {{ Twig.endif() }}
-                {% elseif listType == "last_seen" %}
-                    <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
-                {% elseif listType == "tag_list" %}
-                    <h2>Tag List Name (placeholder)</h2>
-                {% endif %}
-            </div>
-            
-            <ul class="product-list row grid">
-                {{ Twig.if("itemList is not empty") }}
-                    {{ Twig.for("item", "itemList[0].documents[0:4]") }}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            {{ Twig.include( "Ceres::Widgets.Common.Partials.CategoryListItemPreview", { "item": "item" } ) }}
-                        </li>
-                    {{ Twig.endfor() }}
+        <div class="section-header m-b-1">
+            {% if listType == "category" %}
+                {{ Twig.if("category") }}
+                    <h2>{{ Twig.print("category.details[0].name") }}</h2>
+                    <a href="{{ Twig.print(Twig.call("services.category.getURL", [Twig.var("category")])) }}" class="section-link-all">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
+                    </a>
                 {{ Twig.else() }}
-                    {{ Twig.for("i", "0..3") }}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            {{ Twig.include("Ceres::Widgets.Common.Partials.CategoryListItemPreview") }}
-                        </li>
-                    {{ Twig.endfor() }}
+                    <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
                 {{ Twig.endif() }}
-            </ul>
+            {% elseif listType == "last_seen" %}
+                <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
+            {% elseif listType == "tag_list" %}
+                <h2>Tag List Name (placeholder)</h2>
+            {% endif %}
         </div>
     </div>
+    {{ Twig.if("itemList is not empty") }}
+        <container-item-list :items="{{ Twig.print("itemList[0].documents | json_encode") }}"></container-item-list>
+    {{ Twig.endif() }}
 </div>

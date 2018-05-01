@@ -62,44 +62,50 @@ function handleBuilderEventResponse(response)
     {
         var eventName = response.data.name;
         var eventData = response.data.data;
+        var publicEventName = eventName.substr("shopbuilder_".length);
+
+        $(document).trigger("shopbuilder.before." + publicEventName, [eventData]);
+
+        var eventResult = null;
 
         switch(eventName)
         {
-
             case 'shopbuilder_close_properties':
 
-                focusElement(null);
+                eventResult = focusElement(null);
                 break;
 
             case 'shopbuilder_widget_replace':
 
-                replaceContentWidget(eventData);
+                eventResult = replaceContentWidget(eventData);
                 break;
 
             case 'shopbuilder_widget_order':
 
-                getWidgetOrder();
+                eventResult = getWidgetOrder();
                 break;
 
             case 'shopbuilder_reset':
 
-                reloadView();
+                eventResult = reloadView();
                 break;
 
             case 'shopbuilder_drop':
 
-                addContentWidget(eventData);
+                eventResult = addContentWidget(eventData);
                 break;
 
             case 'shopbuilder_zoom':
 
-                zoomView(eventData.zoomFactor);
+                eventResult = zoomView(eventData.zoomFactor);
                 break;
 
             default:
 
                 console.log("Unknown event: " + eventName);
         }
+
+        $(document).trigger("shopbuilder.after." + publicEventName, [eventData, eventResult]);
     }
 }
 
@@ -157,6 +163,8 @@ function getWidgetOrder()
         name: 'shopbuilder_widget_order',
         data: data
     });
+
+    return data;
 }
 
 /**
@@ -364,15 +372,18 @@ function addBackendEventListener()
 function addContentWidget(widgetData, position, keepProperties)
 {
     var isNestedContainerActive = jQuery('[data-builder-child-container].active').length;
+    var widget = null;
 
     if (isNestedContainerActive)
     {
-        addNestedWidget(widgetData);
+        widget = addNestedWidget(widgetData);
     }
     else
     {
-        addGridstackWidget(widgetData, position, keepProperties);
+        widget = addGridstackWidget(widgetData, position, keepProperties);
     }
+
+    return widget;
 }
 
 /**
@@ -392,6 +403,8 @@ function addNestedWidget(widgetData)
 
     addContextMenu(widget);
     focusElement(null);
+
+    return widget;
 }
 
 /**
@@ -436,6 +449,8 @@ function addGridstackWidget(widgetData, position, keepProperties)
             });
         }
     });
+
+    return gridStackItem.find('.grid-stack-item-content > *');
 }
 
 function initNestedWidgetContainer(container)
@@ -515,7 +530,7 @@ function replaceContentWidget(widgetData)
     };
 
     deleteContentWidget(id, true);
-    addContentWidget(widgetData, position, true);
+    return addContentWidget(widgetData, position, true);
 }
 
 /**
@@ -531,16 +546,18 @@ function setDragCursorToChildElements(element)
     });
 }
 
-function removeDefaultLinks()
+function removeDefaultLinks(element)
 {
+    element = element || jQuery('body');
     // iterate over all body elements
-    jQuery('body').find('*').each(function()
+    element.find('*').each(function()
     {
         jQuery(this).click(function (event)
         {
             // prevent default click action
             event.preventDefault();
-        })
+            event.stopPropagation();
+        });
     });
 }
 

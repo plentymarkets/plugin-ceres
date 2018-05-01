@@ -7,6 +7,7 @@
 {{ component( "Ceres::Customer.Components.Registration" ) }}
 {{ component( "Ceres::Basket.Components.AddItemToBasketOverlay" ) }}
 {{ component( "Ceres::PageDesign.Components.Popper" ) }}
+{{ component( "Ceres::Containers.Components.ContainerItemList" ) }}
 
 {% set currencyFormat = config("Ceres.currency.format") %}
 
@@ -211,6 +212,19 @@
                 document.body.replaceChild( vueApp.$el, rootElement );
                 errorElement.parentNode.removeChild(errorElement);
             }
+
+            (function($) {
+                $(document).on('shopbuilder.after.drop shopbuilder.after.widget_replace', function(event, eventData, widgetElement)
+                {
+                    var compiled = Vue.compile(eventData.htmlMarkup);
+                    var component = new Vue({
+                        store: window.ceresStore,
+                        render: compiled.render,
+                        staticRenderFns: compiled.staticRenderFns
+                    });
+                    component.$mount( widgetElement[0] );
+                });
+            })(jQuery);
         </script>
 
         {% if request.get('isContentBuilder') == 1 %}

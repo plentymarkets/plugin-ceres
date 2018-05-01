@@ -39,6 +39,7 @@ body
     height: 100%;
     cursor: move;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .grid-stack-placeholder
