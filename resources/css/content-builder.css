@@ -39,6 +39,10 @@ body
     height: 100%;
     cursor: move;
     overflow: hidden;
+}
+
+.grid-stack-item-content > *
+{
     pointer-events: none;
 }
 
@@ -74,6 +78,7 @@ body
     left: 0px;
     right: 0px;
     text-align: center;
+    pointer-events: all;
 }
 
 .shopbuilder-icon.fa
@@ -159,12 +164,13 @@ body
 }
 
 [data-builder-child-container] .add-icon
- {
-     position: absolute;
-     z-index: 2;
-     left: calc(50% - 18px);
-     top: calc(50% - 18px);
- }
+{
+    position: absolute;
+    z-index: 2;
+    left: calc(50% - 18px);
+    top: calc(50% - 18px);
+    pointer-events: all;
+}
 
 [data-builder-child-container].active:not(.set)::before
 {

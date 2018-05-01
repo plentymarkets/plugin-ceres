@@ -24,6 +24,7 @@ function initCeresForGridstack()
     addBackendEventListener();
     addWindowResizeListener();
     addScrollOnDragListener();
+    addControlEventListeners();
 
     dispatchBuilderEvent({
         name: 'shopbuilder_ready',
@@ -216,6 +217,48 @@ function addScrollOnDragListener()
     });
 }
 
+function addControlEventListeners()
+{
+    jQuery(document).on('click', '.edit-icon', function ()
+    {
+        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+
+        focusElement(uniqueId);
+
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_properties',
+            data: { uniqueId: uniqueId }
+        });
+
+    });
+
+    jQuery(document).on('click', '.delete-icon', function ()
+    {
+        var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
+
+        deleteContentWidget(widgetId);
+    });
+
+    jQuery(document).on('click', '.add-icon', function ()
+    {
+        var uniqueId = jQuery(this).closest('[data-builder-identifier]').attr('data-builder-identifier');
+
+        jQuery('[data-builder-child-container]').each(function ()
+        {
+            jQuery(this).removeClass('active');
+        });
+
+        jQuery(this).closest('[data-builder-child-container]').addClass('active');
+
+        dispatchBuilderEvent({
+            name: 'shopbuilder_open_properties',
+            data: { uniqueId: uniqueId }
+        });
+
+        focusElement(uniqueId);
+    });
+}
+
 function updateScrollbarPosition()
 {
     if (isDragging && draggedElement)
@@ -298,14 +341,6 @@ function addDeleteButton(element)
 {
     // inject button markup into given context element
     jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon delete-icon fa fa-trash"></div>');
-
-    // add delete event to button
-    jQuery(element).find('.delete-icon').click(function ()
-    {
-        var widgetId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-
-        deleteContentWidget(widgetId);
-    });
 }
 
 /**
@@ -316,20 +351,6 @@ function addEditButton(element)
 {
     // inject button markup into given context element
     jQuery(element).find('.context-menu').append('<div class="shopbuilder-icon edit-icon fa fa-pencil"></div>');
-
-    // open properties
-    jQuery(element).find('.edit-icon').click(function ()
-    {
-        var uniqueId = jQuery(this).closest(jQuery('[data-builder-identifier]')).attr('data-builder-identifier');
-
-        focusElement(uniqueId);
-
-        dispatchBuilderEvent({
-            name: 'shopbuilder_open_properties',
-            data: { uniqueId: uniqueId }
-        });
-
-    });
 }
 
 /**
@@ -445,7 +466,7 @@ function addGridstackWidget(widgetData, position, keepProperties)
             // enrich structure elements with custom markup
             jQuery('body').find(jQuery(gridStackItem)).find('[data-builder-child-container]').each(function()
             {
-                initNestedWidgetContainer(jQuery(this));
+                initNestedWidgetContainer(this);
             });
         }
     });
@@ -456,25 +477,6 @@ function addGridstackWidget(widgetData, position, keepProperties)
 function initNestedWidgetContainer(container)
 {
     jQuery(container).html('<div class="shopbuilder-icon add-icon fa fa-plus"></div>');
-
-    jQuery(container).find('.add-icon').click(function ()
-    {
-        var uniqueId = jQuery(this).closest('[data-builder-identifier]').attr('data-builder-identifier');
-
-        jQuery('[data-builder-child-container]').each(function ()
-        {
-            jQuery(this).removeClass('active');
-        });
-
-        jQuery(this).closest('[data-builder-child-container]').addClass('active');
-
-        dispatchBuilderEvent({
-            name: 'shopbuilder_open_properties',
-            data: { uniqueId: uniqueId }
-        });
-
-        focusElement(uniqueId)
-    });
 }
 
 /**
@@ -523,6 +525,11 @@ function replaceContentWidget(widgetData)
 
     // TODO: reduce search scope for better performance
     var element = jQuery('body').find('[data-builder-identifier="' + id + '"]');
+    var parentContainer = element.parents('[data-builder-child-container]');
+    if ( parentContainer && parentContainer.length > 0 )
+    {
+        parentContainer.addClass('active');
+    }
 
     var position = {
         x: jQuery(element).attr('data-gs-x'),
@@ -556,7 +563,6 @@ function removeDefaultLinks(element)
         {
             // prevent default click action
             event.preventDefault();
-            event.stopPropagation();
         });
     });
 }
