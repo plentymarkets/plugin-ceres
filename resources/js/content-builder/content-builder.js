@@ -395,7 +395,7 @@ function addContentWidget(widgetData, position, keepProperties)
     var isNestedContainerActive = jQuery('[data-builder-child-container].active').length;
     var widget = null;
 
-    if (isNestedContainerActive)
+    if (isNestedContainerActive || widgetData.parentUuid)
     {
         widget = addNestedWidget(widgetData);
     }
@@ -415,12 +415,21 @@ function addNestedWidget(widgetData)
 {
     var uniqueId = widgetData.uniqueId;
     var markup = widgetData.htmlMarkup;
-
     var widget = jQuery('<div class="nested-widget" data-builder-identifier="' + uniqueId + '">' + markup + '</div>');
 
-    jQuery('[data-builder-child-container].active').html(widget);
-    jQuery('[data-builder-child-container].active').addClass('set');
-    jQuery('[data-builder-child-container].active').removeClass('active');
+    if (widgetData.parentUuid)
+    {
+        var uniqueParentId = widgetData.parentUuid;
+        var containerKey = widgetData.key;
+        var parent = jQuery('[data-builder-identifier="' + uniqueParentId + '"]').find('[data-builder-child-container="' + containerKey + '"]');
+        parent.html(widget);
+        parent.addClass('set');
+    }
+    else {
+        jQuery('[data-builder-child-container].active').html(widget);
+        jQuery('[data-builder-child-container].active').addClass('set');
+        jQuery('[data-builder-child-container].active').removeClass('active');
+    }
 
     addContextMenu(widget);
     focusElement(null);
