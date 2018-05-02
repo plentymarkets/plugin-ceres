@@ -115,6 +115,13 @@
     },
     {
         "tab"       : "Homepage",
+        "key"       : "homepage.showShopBuilderContent",
+        "label"     : "Show shop builder's homepage",
+        "type"      : "checkbox",
+        "default"   : "false"
+    },
+    {
+        "tab"       : "Homepage",
         "key"       : "default.homepage",
         "label"     : "Show default homepage",
         "type"      : "checkbox",
