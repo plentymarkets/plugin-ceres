@@ -24,10 +24,6 @@
         {% for styleTemplate in get_additional_styles() %}
             {% include styleTemplate.path ignore missing with styleTemplate.params %}
         {% endfor %}
-
-        {% if request.get('isContentBuilder') == 1 %}
-            <link href="{{ plugin_path('Ceres') }}/css/content-builder.css" rel="stylesheet" />
-        {% endif %}
     </head>
 
     <body>
@@ -232,16 +228,6 @@
             })(jQuery);
         </script>
 
-        {% if request.get('isContentBuilder') == 1 %}
-            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/lodash.min.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery.min.js"></script>
-            <script src="{{ plugin_path('Ceres') }}/js/content-builder/gridstack/jquery-ui.min.js"></script>
-
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/gridstack/gridstack.min.js'></script>
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/gridstack/gridstack.jQueryUI.min.js'></script>
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/content-builder.js'></script>
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/compiler/sass.js'></script>
-            <script type="text/javascript" src='{{ plugin_path('Ceres') }}/js/content-builder/sass-compiler.js'></script>
-        {% endif %}
+        {{ get_shop_builder_scripts() }}
     </body>
 </html>
