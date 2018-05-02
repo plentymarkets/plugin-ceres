@@ -28,7 +28,7 @@
             {% elseif listType == "last_seen" %}
                 <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
             {% elseif listType == "tag_list" %}
-                <h2>Tag List Name (placeholder)</h2>
+                <h2>{{ Twig.print(Twig.call("services.tag.getTagName", [itemListId])) }}</h2>
             {% endif %}
         </div>
     </div>
