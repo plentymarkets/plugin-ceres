@@ -13,7 +13,7 @@ use Plenty\Plugin\ConfigRepository;
  */
 class ConfigPropertiesMigration_0_0_1
 {
-    private static $translationMap =
+    private $translationMap =
     [
         'cancellationFormMetaDescription'   => ['meta'      => ['descriptionCancellationForm_de', 'descriptionCancellationForm_en']],
         'cancellationRightsMetaDescription' => ['meta'      => ['descriptionCancellationRights_de', 'descriptionCancellationRights_en']],
@@ -53,29 +53,32 @@ class ConfigPropertiesMigration_0_0_1
 		$pluginName = 'Ceres';
 		$pluginTranslationFile = 'Template.properties';
 
-        foreach (SELF::$translationMap as $key => $translation)
+        foreach ($this->translationMap as $key => $translation)
         {
-            for($i = 0; $i <= 1; $i++)
+            foreach($translation as $key2 => $Value)
             {
-                if(strlen($configRepo->get('Ceres.' . key($translation) . '.' .  $translation[key($translation)][$i])))
+                for($i = 0; $i <= 1; $i++)
                 {
-                    $lang = 'de';
-
-                    if($i == 1)
+                    if(strlen($configRepo->get('Ceres.' . $key2 . '.' .  $translation[$key2][$i])))
                     {
-                        $lang = 'en';
+                        $lang = 'de';
+            
+                        if($i == 1)
+                        {
+                            $lang = 'en';
+                        }
+            
+                        $translationData = [
+                            'languageCode' => $lang,
+                            'key' => $key,
+                            'value' => $configRepo->get('Ceres.' . $key2 . '.' .  $translation[$key2][$i]),
+                            'pluginName' => $pluginName,
+                            'pluginSetId' => $pluginSetId,
+                            'fileName' => $pluginTranslationFile
+                        ];
+            
+                        $translationRepo->updateOrCreateTranslation($translationData);
                     }
-
-                    $translationData = [
-                        'languageCode' => $lang,
-                        'key' => $key,
-                        'value' => $configRepo->get('Ceres.' . key($translation) . '.' . $translation[key($translation)][$i]),
-                        'pluginName' => $pluginName,
-                        'pluginSetId' => $pluginSetId,
-                        'fileName' => $pluginTranslationFile
-                    ];
-
-                    $translationRepo->updateOrCreateTranslation($translationData);
                 }
             }
 		}
