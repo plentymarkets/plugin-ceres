@@ -408,42 +408,42 @@
 						},
 						{
 							"value": "variation.createdAt_desc",
-							"caption": "Template.variationCreateTimestamp_desc",
+							"caption": "Template.itemVariationCreateTimestamp_desc",
 							"position": 5
 						},
 						{
 							"value": "variation.createdAt_asc",
-							"caption": "Template.variationCreateTimestamp_asc",
+							"caption": "Template.itemVariationCreateTimestamp_asc",
 							"position": 6
 						},
 						{
 							"value": "variation.availability.averageDays_asc",
-							"caption": "Template.availabilityAverageDays_asc",
+							"caption": "Template.itemAvailabilityAverageDays_asc",
 							"position": 7
 						},
 						{
 							"value": "variation.availability.averageDays_desc",
-							"caption": "Template.availabilityAverageDays_desc",
+							"caption": "Template.itemAvailabilityAverageDays_desc",
 							"position": 8
 						},
 						{
 							"value": "variation.number_asc",
-							"caption": "Template.variationCustomNumber_asc",
+							"caption": "Template.itemVariationCustomNumber_asc",
 							"position": 9
 						},
 						{
 							"value": "variation.number_desc",
-							"caption": "Template.variationCustomNumber_desc",
+							"caption": "Template.itemVariationCustomNumber_desc",
 							"position": 10
 						},
 						{
 							"value": "variation.updatedAt_asc",
-							"caption": "Template.variationLastUpdateTimestamp_asc",
+							"caption": "Template.itemVariationLastUpdateTimestamp_asc",
 							"position": 11
 						},
 						{
 							"value": "variation.updatedAt_desc",
-							"caption": "Template.variationLastUpdateTimestamp_desc",
+							"caption": "Template.itemVariationLastUpdateTimestamp_desc",
 							"position": 12
 						},
 						{
