@@ -69,7 +69,7 @@
     <div class="col-xs-12">
         <div class="cmp cmp-hero">
             <div class="hero-main">
-                <div id="carousel-example-generic_{{ carouselId }}" class="carousel slide" data-ride="carousel">
+                <div id="image-carousel_{{ carouselId }}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         {{ Twig.for("slide", "slides") }}
                             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
@@ -92,17 +92,17 @@
                     {{ Twig.if("slides | length > 1") }}
                         <ol class="carousel-indicators">
                             {{ Twig.for("i", "1..slides | length") }}
-                                <li data-target="#carousel-example-generic_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
+                                <li data-target="#image-carousel_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
                             {{ Twig.endfor() }}
                         </ol>
 
-                        <a class="left carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
+                        <a class="left carousel-control" href="#image-carousel_{{ carouselId }}" role="button"
                             data-slide="prev">
                             <span class="icon-prev" aria-hidden="true"></span>
                             <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
                         </a>
 
-                        <a class="right carousel-control" href="#carousel-example-generic_{{ carouselId }}" role="button"
+                        <a class="right carousel-control" href="#image-carousel_{{ carouselId }}" role="button"
                             data-slide="next">
                             <span class="icon-next" aria-hidden="true"></span>
                             <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
