@@ -66,8 +66,8 @@
       "prefix": "myAccount"
     },
     {
-      "name": "Config.notFound",
-      "prefix": "notFound"
+      "name": "Config.pageNotFound",
+      "prefix": "pageNotFound"
     },
     {
       "name": "Config.notifications",
