@@ -116,7 +116,7 @@
     {
         "tab"       : "Homepage",
         "key"       : "homepage.showShopBuilderContent",
-        "label"     : "Show shop builder's homepage",
+        "label"     : "Show Shop Builder homepage",
         "type"      : "checkbox",
         "default"   : "false"
     },
