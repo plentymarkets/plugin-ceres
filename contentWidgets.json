@@ -383,77 +383,77 @@
 					"selectBoxValues": [
 						{
 							"value": "default.recommended_sorting",
-							"caption": "Template.itemRecommendedSorting",
+							"caption": "Widget.itemRecommendedSorting",
 							"position": 0
 						},
 						{
 							"value": "texts.name1_asc",
-							"caption": "Template.itemName_asc",
+							"caption": "Widget.itemName_asc",
 							"position": 1
 						},
 						{
 							"value": "texts.name1_desc",
-							"caption": "Template.itemName_desc",
+							"caption": "Widget.itemName_desc",
 							"position": 2
 						},
 						{
 							"value": "sorting.price.min_asc",
-							"caption": "Template.itemPrice_asc",
+							"caption": "Widget.itemPrice_asc",
 							"position": 3
 						},
 						{
 							"value": "sorting.price.max_desc",
-							"caption": "Template.itemPrice_desc",
+							"caption": "Widget.itemPrice_desc",
 							"position": 4
 						},
 						{
 							"value": "variation.createdAt_desc",
-							"caption": "Template.itemVariationCreateTimestamp_desc",
+							"caption": "Widget.itemVariationCreateTimestamp_desc",
 							"position": 5
 						},
 						{
 							"value": "variation.createdAt_asc",
-							"caption": "Template.itemVariationCreateTimestamp_asc",
+							"caption": "Widget.itemVariationCreateTimestamp_asc",
 							"position": 6
 						},
 						{
 							"value": "variation.availability.averageDays_asc",
-							"caption": "Template.itemAvailabilityAverageDays_asc",
+							"caption": "Widget.itemAvailabilityAverageDays_asc",
 							"position": 7
 						},
 						{
 							"value": "variation.availability.averageDays_desc",
-							"caption": "Template.itemAvailabilityAverageDays_desc",
+							"caption": "Widget.itemAvailabilityAverageDays_desc",
 							"position": 8
 						},
 						{
 							"value": "variation.number_asc",
-							"caption": "Template.itemVariationCustomNumber_asc",
+							"caption": "Widget.itemVariationCustomNumber_asc",
 							"position": 9
 						},
 						{
 							"value": "variation.number_desc",
-							"caption": "Template.itemVariationCustomNumber_desc",
+							"caption": "Widget.itemVariationCustomNumber_desc",
 							"position": 10
 						},
 						{
 							"value": "variation.updatedAt_asc",
-							"caption": "Template.itemVariationLastUpdateTimestamp_asc",
+							"caption": "Widget.itemVariationLastUpdateTimestamp_asc",
 							"position": 11
 						},
 						{
 							"value": "variation.updatedAt_desc",
-							"caption": "Template.itemVariationLastUpdateTimestamp_desc",
+							"caption": "Widget.itemVariationLastUpdateTimestamp_desc",
 							"position": 12
 						},
 						{
 							"value": "item.manufacturer.externalName_asc",
-							"caption": "Template.itemProducerName_asc",
+							"caption": "Widget.itemProducerName_asc",
 							"position": 13
 						},
 						{
 							"value": "item.manufacturer.externalName_desc",
-							"caption": "Template.itemProducerName_desc",
+							"caption": "Widget.itemProducerName_desc",
 							"position": 14
 						}
 					]
