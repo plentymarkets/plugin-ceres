@@ -397,12 +397,12 @@
 							"position": 2
 						},
 						{
-							"value": "sorting.price.min_asc",
+							"value": "sorting.price.avg_asc",
 							"caption": "Widget.itemPrice_asc",
 							"position": 3
 						},
 						{
-							"value": "sorting.price.max_desc",
+							"value": "sorting.price.avg_desc",
 							"caption": "Widget.itemPrice_desc",
 							"position": 4
 						},
