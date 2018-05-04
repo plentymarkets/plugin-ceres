@@ -148,6 +148,7 @@
 
 @include widget-carousel-variant('.widget-primary', $brand-primary);
 @include widget-carousel-variant('.widget-secondary', $brand-secondary);
+@include widget-carousel-variant('.widget-success', $brand-success);
 @include widget-carousel-variant('.widget-info', $brand-info);
 @include widget-carousel-variant('.widget-warning', $brand-warning);
 @include widget-carousel-variant('.widget-danger', $brand-danger);

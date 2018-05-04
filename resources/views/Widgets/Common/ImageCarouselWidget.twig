@@ -65,7 +65,7 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-primary widget-proportional">
+<div class="widget widget-image-carousel widget-{{ widget.settings.appearance.mobile | default('primary') }} widget-proportional">
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
 
         <div class="carousel-inner" role="listbox">

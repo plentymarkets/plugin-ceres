@@ -18878,6 +18878,19 @@ nav.navbar.megamenu {
         }
     }
 
+    &.widget-success
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-success, .8) );
+        }
+
+        a[href].widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-success, .9) );
+        }
+    }
+
     &.widget-info
     {
         .widget-caption
@@ -19087,6 +19100,7 @@ nav.navbar.megamenu {
 
 @include widget-carousel-variant('.widget-primary', $brand-primary);
 @include widget-carousel-variant('.widget-secondary', $brand-secondary);
+@include widget-carousel-variant('.widget-success', $brand-success);
 @include widget-carousel-variant('.widget-info', $brand-info);
 @include widget-carousel-variant('.widget-warning', $brand-warning);
 @include widget-carousel-variant('.widget-danger', $brand-danger);
@@ -19135,6 +19149,11 @@ nav.navbar.megamenu {
         @include widget-bg-variant($brand-secondary);
     }
 
+    &.widget-success .widget-caption
+    {
+        @include widget-bg-variant($brand-success);
+    }
+
     &.widget-info .widget-caption
     {
         @include widget-bg-variant($brand-info);
@@ -19179,6 +19198,11 @@ nav.navbar.megamenu {
     &.widget-secondary
     {
         @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-success
+    {
+        @include widget-bg-variant($brand-success);
     }
 
     &.widget-info

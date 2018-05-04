@@ -36,6 +36,11 @@
         @include widget-bg-variant($brand-secondary);
     }
 
+    &.widget-success .widget-caption
+    {
+        @include widget-bg-variant($brand-success);
+    }
+
     &.widget-info .widget-caption
     {
         @include widget-bg-variant($brand-info);
