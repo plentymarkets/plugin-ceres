@@ -33,7 +33,11 @@
 {% set itemName = config('Ceres.item.name') %}
 
 {% if LayoutContainer.show("Ceres::Template.StyleOverwrite") | trim is empty %}
-    <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+    {% if config('plugin.setId', null) is not empty %}
+        <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.{{ config('plugin.setId') }}.css">
+    {% else %}
+        <link rel="stylesheet" href="{{ plugin_path('Ceres') }}/css/ceres.css">
+    {% endif %}
 {% endif %}
 
 {{ LayoutContainer.show("Ceres::Template.StyleOverwrite") }}

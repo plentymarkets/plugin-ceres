@@ -47,7 +47,7 @@
             <ul class="flex-container" id="recommended-plugins">
                 {% for plugin in homepageData.recommended | shuffle %}
                     <li class="flex-item">
-                        <a target="_blank" href="{{ plugin.pluginLink }}">
+                        <a rel="noopener noreferrer" target="_blank" href="{{ plugin.pluginLink }}">
                             <img class="flex-image" src="{{ plugin.pluginIcon }}" />
                             <div class="flex-align-bottom">
                                 <h1 class="flex-title">{% autoescape false %}{{ plugin.pluginTitle }}{% endautoescape %}</h1>
