@@ -19,7 +19,8 @@
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
     "runOnBuild"        : [
-      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1"
+      "Ceres\\Migrations\\WebshopSettingsMigration_0_0_1",
+      "Ceres\\Migrations\\HomepageShopBuilderMigration_0_0_1"
     ],
     "dataProviders"     :
     [
