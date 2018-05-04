@@ -1,0 +1,63 @@
+.widget-item-list
+{
+    .widget-caption
+    {
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+
+        h2, .h2
+        {
+            flex: 1;
+            padding-top: .2rem;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 1.75rem;
+        }
+
+        a
+        {
+            color: #fff;
+        }
+    }
+
+    &.widget-inner > .row
+    {
+        width: 100%;
+    }
+
+    &.widget-primary .widget-caption
+    {
+        @include widget-bg-variant($brand-primary);
+    }
+
+    &.widget-secondary .widget-caption
+    {
+        @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-success .widget-caption
+    {
+        @include widget-bg-variant($brand-success);
+    }
+
+    &.widget-info .widget-caption
+    {
+        @include widget-bg-variant($brand-info);
+    }
+
+    &.widget-warning .widget-caption
+    {
+        @include widget-bg-variant($brand-warning);
+    }
+
+    &.widget-danger .widget-caption
+    {
+        @include widget-bg-variant($brand-danger);
+    }
+
+    &.widget-inverse .widget-caption
+    {
+        @include widget-bg-variant($brand-inverse);
+    }
+}

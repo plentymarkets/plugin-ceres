@@ -25,7 +25,7 @@
 
 {% block PageBody %}
 
-    {% if ceresConfig.homepage.showShopBuilderContent %}
+    {% if ceresConfig.homepage.showShopBuilderContent or request.get('isContentBuilder') == 1 %}
 
         <div class="home container-max">
             <div class="row">

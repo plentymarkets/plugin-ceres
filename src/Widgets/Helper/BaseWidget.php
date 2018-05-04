@@ -69,7 +69,7 @@ class BaseWidget implements Widget
         $twig = pluginApp(Twig::class);
         $templateData = $this->getTemplateData($widgetSettings, $isPreview);
         $templateData["widget"] = [
-            "settings" => $widgetSettings
+            "settings"      => $widgetSettings
         ];
         $templateData["children"]  = $children;
         $templateData["isPreview"] = $isPreview;

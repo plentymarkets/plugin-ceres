@@ -1,10 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set style = widget.settings.style.mobile %}
-{% set imageSize = widget.settings.imageSize.mobile %}
-{% set categoryId = widget.settings.categoryId.mobile %}
-{% set variationId = widget.settings.variationId.mobile %}
-{% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set style            = widget.settings.style.mobile %}
+{% set imageSize        = widget.settings.imageSize.mobile %}
+{% set categoryId       = widget.settings.categoryId.mobile %}
+{% set variationId      = widget.settings.variationId.mobile %}
+{% set customImagePath  = widget.settings.customImagePath.mobile %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
@@ -31,9 +31,7 @@
 {% endif %}
 
 {% if customImagePath | trim is not empty %}
-
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
-
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
@@ -41,44 +39,19 @@
     {{ Twig.set("imageUrl", "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_161c3653395%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_161c3653395%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" | json_encode) }}
 {{ Twig.endif() }}
 
-<div class="row">
-    <div class="col-xs-12">
-        {% if style == "largeText" or style == "smallText" %}
-            <div class="featured-categories m-y-2{% if style == "largeText" %} sale-new{% endif %}">
-                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
-                    <div class="prop-inner">
-                        <a class="featured-{% if style == "largeText" %}sale-new{%else%}category{% endif %}"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
-                            {{ Twig.if("imageUrl | trim is not empty") }}
-                                <div class="featured-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
-                            {{ Twig.endif() }}
-                            {{ Twig.if("name | trim is not empty") }}
-                                <div class="featured-category-inner">
-                                    <h2 class="featured-category-headline">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
-                                    </h2>
-                                </div>
-                            {{ Twig.endif() }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="cmp cmp-hero">
-                <div class="hero-xtras">
-                    <a class="hero-category"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
-                        {{ Twig.if("imageUrl | trim is not empty") }}
-                            <div class="hero-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
-                        {{ Twig.endif() }}
-                        {{ Twig.if("name | trim is not empty") }}
-                            <div class="hero-category-inner">
-                                <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
-                                </h2>
-                            </div>
-                        {{ Twig.endif() }}
-                    </a>
-                </div>
-            </div>
-        {% endif %}
-    </div>
+<div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ widget.settings.appearance.mobile | default('primary')  }} widget-proportional">
+    {{ Twig.if("imageUrl | trim is not empty") }}
+        <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" />
+    {{ Twig.endif() }}
+
+    <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }} class="widget-inner">
+        <div class="widget-caption">
+            {{ Twig.if("name | trim is not empty") }}
+            <h2>
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                {{ Twig.print("name") }}
+            </h2>
+            {{ Twig.endif() }}
+        </div>
+    </a>
 </div>
