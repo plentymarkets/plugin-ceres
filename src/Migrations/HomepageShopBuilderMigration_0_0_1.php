@@ -57,7 +57,12 @@ class HomepageShopBuilderMigration_0_0_1
     
         $slidesExist = $this->checkSlides($slides);
     
-        if($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraItemId2]))
+        if($slidesExist && $this->checkValues(
+            [
+                [$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1],
+                [$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2]
+            ])
+        )
         {
             $firstRow = $this->createThreeColumnWidget(
                 'twoToOneStacked',
@@ -68,7 +73,7 @@ class HomepageShopBuilderMigration_0_0_1
                 ]
             );
         }
-        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1]))
+        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1], false))
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
@@ -78,7 +83,7 @@ class HomepageShopBuilderMigration_0_0_1
                 ]
             );
         }
-        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2]))
+        elseif($slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2], false))
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
@@ -88,7 +93,12 @@ class HomepageShopBuilderMigration_0_0_1
                 ]
             );
         }
-        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraItemId2]))
+        elseif(!$slidesExist && $this->checkValues(
+                [
+                    [$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1],
+                    [$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2]
+                ])
+        )
         {
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
@@ -102,11 +112,11 @@ class HomepageShopBuilderMigration_0_0_1
         {
             $firstRow = $this->createSliderWidget($slides);
         }
-        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1]))
+        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1, $this->hpConfig->heroExtraImageUrl1], false))
         {
             $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption');
         }
-        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2]))
+        elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2, $this->hpConfig->heroExtraImageUrl2], false))
         {
             $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption');
         }
@@ -320,17 +330,30 @@ class HomepageShopBuilderMigration_0_0_1
         return false;
     }
     
-    private function checkValues($values)
+    private function checkValues($values, $conjunctive = true)
     {
         foreach($values as $value)
         {
-            if(is_null($value) || !strlen($value) || (int)$value <= 0)
+            if(is_array($value))
+            {
+                return $this->checkValue($value, !$conjunctive);
+            }
+            if($conjunctive && !$this->checkValue($value))
             {
                 return false;
             }
+            if(!$conjunctive && $this->checkValue($value))
+            {
+                return true;
+            }
         }
         
-        return true;
+        return $conjunctive;
+    }
+    
+    private function checkValue($value)
+    {
+        return !is_null($value) && strlen($value) && (int)$value > 0;
     }
     
     private function saveWidgets()
