@@ -63,8 +63,8 @@ class HomepageShopBuilderMigration_0_0_1
                 'twoToOneStacked',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'fullwidthText')],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'fullwidthText')]
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')],
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
                 ]
             );
         }
@@ -74,7 +74,7 @@ class HomepageShopBuilderMigration_0_0_1
                 'oneToOne',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'fullwidthText')]
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')]
                 ]
             );
         }
@@ -84,7 +84,7 @@ class HomepageShopBuilderMigration_0_0_1
                 'oneToOne',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'fullwidthText')]
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
                 ]
             );
         }
@@ -93,8 +93,8 @@ class HomepageShopBuilderMigration_0_0_1
             $firstRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'fullwidthText')],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'fullwidthText')]
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')],
+                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
                 ]
             );
         }
@@ -104,11 +104,11 @@ class HomepageShopBuilderMigration_0_0_1
         }
         elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId1]))
         {
-            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'fullwidthText');
+            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption');
         }
         elseif(!$slidesExist && $this->checkValues([$this->hpConfig->heroExtraItemId2]))
         {
-            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'fullwidthText');
+            $firstRow = $this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption');
         }
         
         $this->addWidget($firstRow);
@@ -123,18 +123,18 @@ class HomepageShopBuilderMigration_0_0_1
             $secondRow = $this->createTwoColumnWidget(
                 'oneToOne',
                 [
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'largeText')],
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'largeText')]
+                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'fullwidth', 'secondary')],
+                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'fullwidth', 'secondary')]
                 ]
             );
         }
         elseif($this->checkValues([$this->hpConfig->homepageCategory1]))
         {
-            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'largeText');
+            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory1, '', 'fullwidth', 'secondary');
         }
         elseif($this->checkValues([$this->hpConfig->homepageCategory2]))
         {
-            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'largeText');
+            $secondRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory2, '', 'fullwidth', 'secondary');
         }
         
         $this->addWidget($secondRow);
@@ -156,18 +156,18 @@ class HomepageShopBuilderMigration_0_0_1
             $fourthRow = $this->createTwoColumnWidget(
                 'twoToOne',
                 [
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'smallText')],
-                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'smallText')]
+                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'inline-caption')],
+                    [$this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'inline-caption')]
                 ]
             );
         }
         elseif($this->checkValues([$this->hpConfig->homepageCategory4]))
         {
-            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'smallText');
+            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory4, '', 'inline-caption');
         }
         elseif($this->checkValues([$this->hpConfig->homepageCategory5]))
         {
-            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'smallText');
+            $fourthRow = $this->createImageBoxWidget('', $this->hpConfig->homepageCategory5, '', 'inline-caption');
         }
     
         $this->addWidget($fourthRow);
@@ -251,12 +251,13 @@ class HomepageShopBuilderMigration_0_0_1
         return $sliderWidget;
     }
     
-    private function createImageBoxWidget($variationId, $categoryId, $customImagePath, $style)
+    private function createImageBoxWidget($variationId, $categoryId, $customImagePath, $style, $appearance = "primary")
     {
         return [
             'identifier' => 'Ceres::ImageBoxWidget',
             'children' => [],
             'widgetSettings' => [
+                'appearance' => $this->createWidgetSettingsEntry($appearance),
                 'style' => $this->createWidgetSettingsEntry($style),
                 'imageSize' => $this->createWidgetSettingsEntry('cover'),
                 'categoryId' => $this->createWidgetSettingsEntry($categoryId),
@@ -279,8 +280,8 @@ class HomepageShopBuilderMigration_0_0_1
                     'listType'   => $this->createWidgetSettingsEntry('category'),
                     'categoryId' => $this->createWidgetSettingsEntry((int)$categoryId),
                     'tagId'      => $this->createWidgetSettingsEntry(''),
-                    'itemSort'   => $this->createWidgetSettingsEntry('texts.name1_asc'), //TODO ?
-                    'maxItems'   => $this->createWidgetSettingsEntry('6') //TODO ?
+                    'itemSort'   => $this->createWidgetSettingsEntry('texts.name1_asc'),
+                    'maxItems'   => $this->createWidgetSettingsEntry('8')
                 ]
             ];
         }
