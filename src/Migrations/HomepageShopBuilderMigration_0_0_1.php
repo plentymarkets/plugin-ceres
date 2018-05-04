@@ -361,10 +361,10 @@ class HomepageShopBuilderMigration_0_0_1
         
         return $conjunctive;
     }
-    
+
     private function checkValue($value)
     {
-        return !is_null($value) && strlen($value) && (int)$value > 0;
+        return !is_null($value) && strlen((string)$value) && (int)$value > 0;
     }
     
     private function saveWidgets()
