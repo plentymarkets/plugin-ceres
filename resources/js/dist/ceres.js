@@ -20618,15 +20618,18 @@ Vue.component("wish-list-count", {
 
 var _number = require("../../helper/number");
 
+var _utils = require("../../helper/utils");
+
 Vue.directive("basket-item-quantity", {
     update: function update(el, binding) {
-        var decimals = (0, _number.floatLength)(binding.value);
+        var value = (0, _utils.defaultValue)(binding.value, 0);
+        var decimals = (0, _number.floatLength)(value);
 
-        el.innerHTML = binding.value.toFixed(decimals).replace(".", App.decimalSeparator);
+        el.innerHTML = value.toFixed(decimals).replace(".", App.decimalSeparator);
     }
 });
 
-},{"../../helper/number":115}],81:[function(require,module,exports){
+},{"../../helper/number":115,"../../helper/utils":117}],81:[function(require,module,exports){
 "use strict";
 
 Vue.directive("basket-item-sum", {
