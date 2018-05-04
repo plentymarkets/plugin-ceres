@@ -45,7 +45,7 @@ class ConfigPropertiesMigration_0_0_1
 		/** @var ConfigRepository $configRepo */
 		$configRepo = pluginApp(ConfigRepository::class);
 
-		$pluginSetId = $configRepo->get('plugin.setId');
+		$pluginSetId = pluginSetId();
 		$pluginName = 'Ceres';
 		$pluginTranslationFile = 'Template.properties';
 
