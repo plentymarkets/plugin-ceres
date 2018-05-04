@@ -1,16 +1,6 @@
 {% set layout = widget.settings.layout.mobile %}
-<div class="row">
-    {% if layout == "oneToOne" %}
-        {# 2 Spalten identisch: #}
-        <div class="col-xs-12 col-md-6" data-builder-child-container="first">{{ children.first | raw }}</div>
-        <div class="col-xs-12 col-md-6" data-builder-child-container="second">{{ children.second | raw }}</div>
-    {% elseif layout == "twoToOne" %}
-        {# 2 Spalten links groß: #}
-        <div class="col-xs-12 col-md-8" data-builder-child-container="first">{{ children.first | raw }}</div>
-        <div class="col-xs-12 col-md-4" data-builder-child-container="second">{{ children.second | raw }}</div>
-    {% elseif layout == "oneToTwo" %}
-        {# 2 Spalten rechts groß: #}
-        <div class="col-xs-12 col-md-4" data-builder-child-container="first">{{ children.first | raw }}</div>
-        <div class="col-xs-12 col-md-8" data-builder-child-container="second">{{ children.second | raw }}</div>
-    {% endif %}
+
+<div class="widget widget-grid widget-grid-{% if layout == "oneToOne" %}1-1{% elseif layout == "twoToOne" %}2-1{% else %}1-2{% endif %}">
+    <div class="widget-inner" data-builder-child-container="first">{{ children.first | raw }}</div>
+    <div class="widget-inner" data-builder-child-container="second">{{ children.second | raw }}</div>
 </div>
