@@ -31,6 +31,11 @@ var init = (function($, window, document)
             }
         });
 
+        window.onpopstate = function()
+        {
+            window.location.reload();
+        };
+
         // init bootstrap tooltips
         $("[data-toggle=\"tooltip\"]").tooltip();
 

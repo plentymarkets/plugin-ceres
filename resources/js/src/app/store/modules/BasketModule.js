@@ -109,9 +109,12 @@ const actions =
                     })
                     .fail(error =>
                     {
-                        NotificationService.error(
-                            TranslationService.translate("Ceres::Template.basketOops")
-                        ).closeAfter(10000);
+                        if (error.data)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate("Ceres::Template.basketOops")
+                            ).closeAfter(10000);
+                        }
                     });
             }
             else
@@ -120,7 +123,7 @@ const actions =
             }
 
             ApiService.listen("AfterBasketChanged", data =>
-{
+            {
                 commit("setBasket", data.basket);
                 commit("setBasketItems", data.basketItems);
             });
