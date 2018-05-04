@@ -68,8 +68,18 @@ class HomepageShopBuilderMigration_0_0_1
                 'twoToOneStacked',
                 [
                     [$this->createSliderWidget($slides)],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId1, '', $this->hpConfig->heroExtraImageUrl1, 'block-caption')],
-                    [$this->createImageBoxWidget($this->hpConfig->heroExtraItemId2, '', $this->hpConfig->heroExtraImageUrl2, 'block-caption')]
+                    [$this->createImageBoxWidget(
+                        $this->hpConfig->heroExtraItemId1,
+                        '',
+                        $this->hpConfig->heroExtraImageUrl1,
+                        $this->checkValue($this->hpConfig->heroExtraItemId1) ? 'block-caption' : 'no-caption'
+                    )],
+                    [$this->createImageBoxWidget
+                    ($this->hpConfig->heroExtraItemId2,
+                        '',
+                        $this->hpConfig->heroExtraImageUrl2,
+                        $this->checkValue($this->hpConfig->heroExtraItemId2) ? 'block-caption' : 'no-caption'
+                    )]
                 ]
             );
         }
@@ -336,7 +346,8 @@ class HomepageShopBuilderMigration_0_0_1
         {
             if(is_array($value))
             {
-                return $this->checkValue($value, !$conjunctive);
+                return $this->checkValues($value, !$conjunctive);
+
             }
             if($conjunctive && !$this->checkValue($value))
             {
