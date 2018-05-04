@@ -53,6 +53,7 @@
                 font-size: 1.75rem;
                 margin: 0;
                 display: inline-block;
+                transition: 300ms all ease;
 
                 @include media-breakpoint-up(md)
                 {
@@ -105,6 +106,7 @@
         .carousel-control
         {
             background-image: none;
+            transition: 300ms all ease;
 
             .fa
             {

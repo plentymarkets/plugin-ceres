@@ -19000,6 +19000,8 @@ nav.navbar.megamenu {
                 font-size: 1.75rem;
                 margin: 0;
                 display: inline-block;
+                -webkit-transition: 300ms all ease;
+                transition: 300ms all ease;
 
                 @include media-breakpoint-up(md)
                 {
@@ -19056,6 +19058,8 @@ nav.navbar.megamenu {
         .carousel-control
         {
             background-image: none;
+            -webkit-transition: 300ms all ease;
+            transition: 300ms all ease;
 
             .fa
             {

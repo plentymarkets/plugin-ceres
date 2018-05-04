@@ -19998,6 +19998,7 @@ body.menu-is-visible {
   font-size: 1.75rem;
   margin: 0;
   display: inline-block;
+  transition: 300ms all ease;
 }
 
 @media (min-width: 768px) {
@@ -20045,6 +20046,7 @@ body.menu-is-visible {
 
 .widget-image-carousel .widget-inner .carousel-control {
   background-image: none;
+  transition: 300ms all ease;
 }
 
 .widget-image-carousel .widget-inner .carousel-control .fa {
