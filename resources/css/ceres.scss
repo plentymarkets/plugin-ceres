@@ -18582,3 +18582,427 @@ nav.navbar.megamenu {
 {
     width: 100%!important;
 }
+
+// Widgets
+@mixin widget-bg-variant($color, $text-color: #fff)
+{
+    color: $text-color;
+    background-color: $color;
+}
+
+
+.widget
+{
+    margin-bottom: 2rem;
+
+    .widget-inner
+    {
+        position: relative;
+
+        .widget
+        {
+            margin-bottom: 0;
+        }
+    }
+}
+.widget-grid
+{
+    margin-left: -15px;
+    margin-right: -15px;
+
+    @include media-breakpoint-up(sm)
+    {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .widget-inner
+    {
+        padding-left: 15px;
+        padding-right: 15px;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+
+    .widget-inner-stacked
+    {
+        margin-left: -15px;
+        margin-right: -15px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+
+        > .widget-inner:first-child
+        {
+            padding-bottom: 2rem;
+        }
+    }
+
+    &.widget-grid-1-2 .widget-inner:last-child,
+    &.widget-grid-2-1 .widget-inner:first-child,
+    &.widget-grid-1-1-2 .widget-inner:last-child,
+    &.widget-grid-1-2-1 .widget-inner:nth-child(2),
+    &.widget-grid-2-1-1 .widget-inner:first-child,
+    &.widget-grid-stacked .widget-inner:not(.widget-inner-stacked)
+    {
+        -webkit-box-flex: 2;
+            -ms-flex: 2;
+                flex: 2;
+    }
+}
+.widget-image-box
+{
+    position: relative;
+    padding-bottom: 33%;
+    overflow: hidden;
+
+    > img
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+
+        &.img-cover
+        {
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        &.img-contain
+        {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    > .widget-inner
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1.5rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        .widget-caption
+        {
+            -webkit-transition: 300ms all ease;
+            transition: 300ms all ease;
+
+            h2, .h2
+            {
+                margin: 0;
+            }
+        }
+    }
+
+    &.widget-image-box-fullwidth
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                width: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+
+                h2, .h2
+                {
+                    text-align: center;
+                    width: 100%;
+                    font-size: 4rem;
+                }
+            }
+        }
+    }
+
+    &.widget-image-box-inline-caption
+    {
+        > .widget-inner
+        {
+            -webkit-box-align: end;
+                -ms-flex-align: end;
+                    align-items: flex-end;
+
+            .widget-caption
+            {
+                padding: 1.5rem;
+                font-size: 1.75rem;
+            }
+        }
+    }
+
+    &.widget-image-box-block-caption
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 1rem;
+
+                h2, .h2
+                {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+    &.widget-image-box-no-caption
+    {
+        > .widget-inner
+        {
+            .widget-caption
+            {
+                display: none;
+            }
+        }
+    }
+
+
+    &.widget-primary
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-primary, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-primary, .9) );
+        }
+    }
+
+    &.widget-secondary
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-secondary, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-secondary, .9) );
+        }
+    }
+
+    &.widget-info
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-info, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-info, .9) );
+        }
+    }
+
+    &.widget-warning
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-warning, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-warning, .9) );
+        }
+    }
+
+    &.widget-danger
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-danger, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-danger, .9) );
+        }
+    }
+
+    &.widget-inverse
+    {
+        .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-inverse, .8) );
+        }
+
+        a.widget-inner:hover .widget-caption
+        {
+            @include widget-bg-variant( rgba($brand-inverse, .9) );
+        }
+    }
+
+}
+
+.widget-grid-1-2 > .widget-inner:first-child .widget-image-box,
+.widget-grid-2-1 > .widget-inner:last-child .widget-image-box,
+.widget-grid-2-1-1 > .widget-inner .widget-image-box,
+.widget-grid-1-2-1 > .widget-inner .widget-image-box,
+.widget-grid-1-1-2 > .widget-inner .widget-image-box
+{
+    padding-bottom: 100%;
+}
+
+.widget-grid-1-1-1 > .widget-inner .widget-image-box
+{
+    padding-bottom: 66.6666%;
+}
+
+.widget-grid-1-2 > .widget-inner:last-child .widget-image-box,
+.widget-grid-2-1 > .widget-inner:first-child .widget-image-box,
+.widget-grid-2-1-1 > .widget-inner:first-child .widget-image-box,
+.widget-grid-1-2-1 > .widget-inner:nth-child(2) .widget-image-box,
+.widget-grid-1-1-2 > .widget-inner:last-child .widget-image-box
+{
+    padding-bottom: 50%;
+}
+
+.widget-grid-stacked
+{
+    .widget-inner .widget-image-box
+    {
+        padding-bottom: 66%;
+    }
+
+    .widget-inner-stacked .widget-image-box
+    {
+        padding-bottom: 0;
+        height: 100%;
+    }
+}
+.widget-item-list
+{
+    .widget-caption
+    {
+        padding: 1rem 1.5rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+
+        h2, .h2
+        {
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
+            padding-top: .2rem;
+            margin: 0;
+            text-transform: uppercase;
+            font-size: 1.75rem;
+        }
+
+        a
+        {
+            color: #fff;
+        }
+    }
+
+    &.widget-inner > .row
+    {
+        width: 100%;
+    }
+
+    &.widget-primary .widget-caption
+    {
+        @include widget-bg-variant($brand-primary);
+    }
+
+    &.widget-secondary .widget-caption
+    {
+        @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-info .widget-caption
+    {
+        @include widget-bg-variant($brand-info);
+    }
+
+    &.widget-warning .widget-caption
+    {
+        @include widget-bg-variant($brand-warning);
+    }
+
+    &.widget-danger .widget-caption
+    {
+        @include widget-bg-variant($brand-danger);
+    }
+
+    &.widget-inverse .widget-caption
+    {
+        @include widget-bg-variant($brand-inverse);
+    }
+}
+.widget-title-bar
+{
+    .widget-inner
+    {
+        padding: 1rem 1.5rem;
+        text-align: center;
+    }
+
+    .h1, h1
+    {
+        margin: 0.5rem auto;
+        font-size: 2.5rem;
+        letter-spacing: 1.25px;
+        display: block;
+    }
+
+    &.widget-primary
+    {
+        @include widget-bg-variant($brand-primary);
+    }
+
+    &.widget-secondary
+    {
+        @include widget-bg-variant($brand-secondary);
+    }
+
+    &.widget-info
+    {
+        @include widget-bg-variant($brand-info);
+    }
+
+    &.widget-warning
+    {
+        @include widget-bg-variant($brand-warning);
+    }
+
+    &.widget-danger
+    {
+        @include widget-bg-variant($brand-danger);
+    }
+
+    &.widget-inverse
+    {
+        @include widget-bg-variant($brand-inverse);
+    }
+}
+

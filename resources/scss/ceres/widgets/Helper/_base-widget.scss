@@ -1,0 +1,30 @@
+.widget
+{
+    margin-bottom: 2rem;
+
+    .widget-inner
+    {
+        position: relative;
+
+        .widget
+        {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm)
+{
+    .widget
+    {
+        margin-bottom: 1rem;
+
+        .widget-inner
+        {
+            .widget
+            {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

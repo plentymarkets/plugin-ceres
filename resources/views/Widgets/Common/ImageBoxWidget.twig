@@ -1,10 +1,10 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 
-{% set style = widget.settings.style.mobile %}
-{% set imageSize = widget.settings.imageSize.mobile %}
-{% set categoryId = widget.settings.categoryId.mobile %}
-{% set variationId = widget.settings.variationId.mobile %}
-{% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set style            = widget.settings.style.mobile %}
+{% set imageSize        = widget.settings.imageSize.mobile %}
+{% set categoryId       = widget.settings.categoryId.mobile %}
+{% set variationId      = widget.settings.variationId.mobile %}
+{% set customImagePath  = widget.settings.customImagePath.mobile %}
 
 {{ Twig.set("name", "" | json_encode) }}
 {{ Twig.set("url", "" | json_encode) }}
@@ -31,9 +31,7 @@
 {% endif %}
 
 {% if customImagePath | trim is not empty %}
-
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
-
 {% endif %}
 
 {{ Twig.if("name | trim is empty and imageUrl | trim is empty") }}
@@ -41,44 +39,29 @@
     {{ Twig.set("imageUrl", trans("Ceres::Widget.imageBoxPlaceholderImage") | json_encode) }}
 {{ Twig.endif() }}
 
-<div class="row">
-    <div class="col-xs-12">
-        {% if style == "largeText" or style == "smallText" %}
-            <div class="featured-categories m-y-2{% if style == "largeText" %} sale-new{% endif %}">
-                <div class="prop-xs-6-4 prop-md-3-1 prop-lg-3-1 prop-xl-3-1">
-                    <div class="prop-inner">
-                        <a class="featured-{% if style == "largeText" %}sale-new{%else%}category{% endif %}"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
-                            {{ Twig.if("imageUrl | trim is not empty") }}
-                                <div class="featured-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
-                            {{ Twig.endif() }}
-                            {{ Twig.if("name | trim is not empty") }}
-                                <div class="featured-category-inner">
-                                    <h2 class="featured-category-headline">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
-                                    </h2>
-                                </div>
-                            {{ Twig.endif() }}
-                        </a>
-                    </div>
-                </div>
+<div class="widget widget-image-box widget-image-box-{{ style }} widget-primary">
+    {{ Twig.if("imageUrl | trim is not empty") }}
+        <img class="img-{{ imageSize }}" src="{{ Twig.print("imageUrl") }}" />
+    {{ Twig.endif() }}
+    <div class="widget-inner">
+        {{ Twig.if("url | trim is not empty") }}
+            <a href="{{ Twig.print("url") }}" class="widget-caption">
+                {{ Twig.if("name | trim is not empty") }}
+                <h2>
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    {{ Twig.print("name") }}
+                </h2>
+                {{ Twig.endif() }}
+            </a>
+        {{ Twig.else() }}
+            <div class="widget-caption">
+                {{ Twig.if("name | trim is not empty") }}
+                <h2>
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    {{ Twig.print("name") }}
+                </h2>
+                {{ Twig.endif() }}
             </div>
-        {% else %}
-            <div class="cmp cmp-hero">
-                <div class="hero-xtras">
-                    <a class="hero-category"{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
-                        {{ Twig.if("imageUrl | trim is not empty") }}
-                            <div class="hero-image{% if widget.settings.imageSize.mobile == "contain" %} contain{% endif %}" style="background-image: url({{ Twig.print("imageUrl") }})"></div>
-                        {{ Twig.endif() }}
-                        {{ Twig.if("name | trim is not empty") }}
-                            <div class="hero-category-inner">
-                                <h2 class="hero-category-headline">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("name") }}
-                                </h2>
-                            </div>
-                        {{ Twig.endif() }}
-                    </a>
-                </div>
-            </div>
-        {% endif %}
+        {{ Twig.endif() }}
     </div>
 </div>

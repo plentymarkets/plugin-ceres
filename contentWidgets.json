@@ -251,22 +251,27 @@
 				"label": "Widget.imageBoxStyleLabel",
 				"options": {
 					"tooltip": "Widget.imageBoxStyleTooltip",
-					"defaultValue": "largeText",
+					"defaultValue": "block-caption",
 					"selectBoxValues": [
 						{
-							"value": "largeText",
-							"caption": "Widget.imageBoxStyleLarge",
+							"value": "block-caption",
+							"caption": "Widget.imageBoxStyleBlockCaption",
 							"position": 0
 						},
 						{
-							"value": "smallText",
-							"caption": "Widget.imageBoxStyleSmall",
+							"value": "inline-caption",
+							"caption": "Widget.imageBoxStyleInlineCaption",
 							"position": 1
 						},
 						{
-							"value": "fullwidthText",
+							"value": "fullwidth",
 							"caption": "Widget.imageBoxStyleFullwidth",
 							"position": 2
+						},
+						{
+							"value": "no-caption",
+							"caption": "Widget.imageBoxStyleNoCaption",
+							"position": 3
 						}
 					]
 				}
