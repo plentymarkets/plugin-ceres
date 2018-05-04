@@ -28,12 +28,8 @@
                 {{ Twig.endif() }}
             {% elseif listType == "last_seen" %}
                 <h2>{{ Twig.trans("Ceres::Template.itemListLastSeen") }}</h2>
-            {% elseif listType == "tag_list" %}
-                {{ Twig.if("itemListId is not empty") }}
+            {% elseif listType == "tag_list" and itemListId is not empty %}
                 <h2>{{ Twig.print(Twig.call("services.tag.getTagName", [itemListId])) }}</h2>
-                {{ Twig.else() }}
-                <h2>{{ Twig.trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
-                {{ Twig.endif() }}
             {% else %}
                 <h2>{{ trans("Ceres::Widget.itemListPlaceholderListHeader") }}</h2>
             {% endif %}
