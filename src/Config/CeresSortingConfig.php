@@ -28,8 +28,8 @@ class CeresSortingConfig extends PluginConfig
                 "default.recommended_sorting",
                 "texts.name1_asc",
                 "texts.name1_desc",
-                "sorting.price.min_asc",
-                "sorting.price.max_desc",
+                "sorting.price.avg_asc",
+                "sorting.price.avg_desc",
                 "variation.createdAt_desc",
                 "variation.createdAt_asc",
                 "variation.availability.averageDays_asc",
@@ -44,8 +44,8 @@ class CeresSortingConfig extends PluginConfig
             [
                 "texts.name1_asc",
                 "texts.name1_desc",
-                "sorting.price.min_asc",
-                "sorting.price.max_desc"
+                "sorting.price.avg_asc",
+                "sorting.price.avg_desc"
             ]
         );
         $this->defaultSorting       = $this->getTextValue( "sort.defaultSorting", "texts.name1_asc" );
