@@ -65,51 +65,47 @@
 
 {{ Twig.endif() }}
 
-<div class="row">
-    <div class="col-xs-12">
-        <div class="cmp cmp-hero">
-            <div class="hero-main">
-                <div id="image-carousel_{{ carouselId }}" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        {{ Twig.for("slide", "slides") }}
-                            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
-                                <a class="hero-category" {{ Twig.if("slide.url is defined") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
-                                    {{ Twig.if("slide.imageUrl is defined") }}
-                                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-fluid">
-                                    {{ Twig.endif() }}
-                                    {{ Twig.if("slide.name is defined") }}
-                                        <div class="carousel-caption">
-                                            <h2>
-                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
-                                            </h2>
-                                        </div>
-                                    {{ Twig.endif() }}
-                                </a>
-                            </div>
-                        {{ Twig.endfor() }}
-                    </div>
-                    
-                    {{ Twig.if("slides | length > 1") }}
-                        <ol class="carousel-indicators">
-                            {{ Twig.for("i", "1..slides | length") }}
-                                <li data-target="#image-carousel_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
-                            {{ Twig.endfor() }}
-                        </ol>
+<div class="widget widget-image-carousel widget-primary widget-proportional">
+    <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
 
-                        <a class="left carousel-control" href="#image-carousel_{{ carouselId }}" role="button"
-                            data-slide="prev">
-                            <span class="icon-prev" aria-hidden="true"></span>
-                            <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
-                        </a>
+        <div class="carousel-inner" role="listbox">
+            {{ Twig.for("slide", "slides") }}
+            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+                <a {{ Twig.if("slide.url is defined") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
 
-                        <a class="right carousel-control" href="#image-carousel_{{ carouselId }}" role="button"
-                            data-slide="next">
-                            <span class="icon-next" aria-hidden="true"></span>
-                            <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
-                        </a>
+                    {{ Twig.if("slide.imageUrl is defined") }}
+                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-cover">
                     {{ Twig.endif() }}
-                </div>
+
+                    {{ Twig.if("slide.name is defined") }}
+                    <div class="widget-caption">
+                        <h2>
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
+                        </h2>
+                    </div>
+                    {{ Twig.endif() }}
+
+                </a>
             </div>
+            {{ Twig.endfor() }}
         </div>
+
+        {{ Twig.if("slides | length > 1") }}
+            <ol class="carousel-indicators">
+                {{ Twig.for("i", "1..slides | length") }}
+                    <li data-target="#image-carousel_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
+                {{ Twig.endfor() }}
+            </ol>
+
+            <a class="left carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
+            </a>
+
+            <a class="right carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="next">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+            </a>
+        {{ Twig.endif() }}
     </div>
 </div>

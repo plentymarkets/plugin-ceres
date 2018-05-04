@@ -17,11 +17,6 @@
 <div class="widget widget-item-list widget-primary">
     <div class="widget-inner">
         <div class="widget-caption m-b-1">
-            <h2>Wohnzimmer</h2>
-            <a href="#">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                Alle ansehen
-            </a>
             {% if listType == "category" %}
                 {{ Twig.if("category") }}
                 <h2>{{ Twig.print("category.details[0].name") }}</h2>
