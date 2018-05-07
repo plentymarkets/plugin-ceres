@@ -30,6 +30,30 @@ Vue.component("checkout", {
                 {
                     this.handleCheckoutChangedEvent(checkout.checkout);
                 });
+
+            document.addEventListener("afterPaymentMethodChanged", event =>
+            {
+                const newMethodOfPaymentId = event.detail;
+
+                if (newMethodOfPaymentId !== this.checkout.payment.methodOfPaymentId)
+                {
+                    this.updateCheckoutAndBasket();
+                }
+            });
+        },
+
+        updateCheckoutAndBasket()
+        {
+            this.$store.commit("setIsBasketLoading", true);
+
+            const reloadBasketPromise = this.$store.dispatch("updateBasket");
+            const reloadCheckoutPromise = this.$store.dispatch("updateCheckout");
+
+            Promise.all([reloadBasketPromise, reloadCheckoutPromise])
+                .then(data =>
+                {
+                    this.$store.commit("setIsBasketLoading", false);
+                });
         },
 
         handleCheckoutChangedEvent(checkout)
