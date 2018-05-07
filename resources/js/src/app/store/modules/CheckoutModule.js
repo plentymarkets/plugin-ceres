@@ -168,6 +168,23 @@ const actions =
                         reject(error);
                     });
             });
+        },
+
+        updateCheckout({commit, dispatch})
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.get("/rest/io/checkout/")
+                        .done(checkout =>
+                        {
+                            dispatch("setCheckout", checkout);
+                            resolve(checkout);
+                        })
+                        .fail(error =>
+                        {
+                            reject(error);
+                        });
+            });
         }
     };
 
