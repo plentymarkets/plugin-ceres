@@ -252,7 +252,7 @@ const actions =
             });
         },
 
-        updateBasket({commit})
+        refreshBasket({commit})
         {
             return new Promise((resolve, reject) =>
             {

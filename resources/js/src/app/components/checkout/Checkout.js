@@ -46,8 +46,8 @@ Vue.component("checkout", {
         {
             this.$store.commit("setIsBasketLoading", true);
 
-            const reloadBasketPromise = this.$store.dispatch("updateBasket");
-            const reloadCheckoutPromise = this.$store.dispatch("updateCheckout");
+            const reloadBasketPromise = this.$store.dispatch("refreshBasket");
+            const reloadCheckoutPromise = this.$store.dispatch("refreshCheckout");
 
             Promise.all([reloadBasketPromise, reloadCheckoutPromise])
                 .then(data =>

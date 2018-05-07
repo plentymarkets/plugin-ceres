@@ -170,7 +170,7 @@ const actions =
             });
         },
 
-        updateCheckout({commit, dispatch})
+        refreshCheckout({commit, dispatch})
         {
             return new Promise((resolve, reject) =>
             {
