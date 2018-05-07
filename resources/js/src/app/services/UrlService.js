@@ -73,7 +73,7 @@ export function switchUrl(url, title)
         title = document.getElementsByTagName("title")[0].innerHTML;
     }
     url = _normalizeUrl(url);
-    window.history.replaceState({}, title, url);
+    window.history.pushState({}, title, url);
 }
 
 export default {setUrlParam, setUrlParams, getUrlParams, navigateTo, switchUrl};

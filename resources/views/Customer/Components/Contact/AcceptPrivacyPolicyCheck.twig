@@ -4,7 +4,7 @@
         {% autoescape false %}
             {% set policyContent %}<!--
                 --><a href="{{ urls.privacyPolicy }}" target="_blank">
-                    <span>{{ trans("Ceres::Template.contactPrivacyPolicy") }}</span>
+                    <span>{{ trans("Ceres::Template.contactPrivacyPolicy", {"hyphen": "&shy;"}) }}</span>
                 </a><!--
             -->{% endset %}
 

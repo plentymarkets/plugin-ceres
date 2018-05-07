@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const postcss = require('postcss');
-const postcssSCSS = require('postcss-scss');
+var fs = require('fs');
+var path = require('path');
+var autoprefixer = require('autoprefixer');
+var postcss = require('postcss');
+var postcssSCSS = require('postcss-scss');
 
 /*
  CLASS ImportTree
  */
-const ImportTree = function( filename )
+var ImportTree = function( filename )
 {
     this.imports = [];
     this.filename = filename;
@@ -16,7 +16,7 @@ const ImportTree = function( filename )
 
 ImportTree.prototype.parseImports = function()
 {
-    let fileContent = "";
+    var fileContent = "";
     try {
         fileContent = fs.readFileSync( this.filename, {encoding: 'utf-8'});
     } catch( e )
@@ -26,16 +26,16 @@ ImportTree.prototype.parseImports = function()
 
     if ( fileContent && fileContent.length > 0 )
     {
-        let _this = this;
+        var _this = this;
         this.fileContent = fileContent.split("\n");
         this.fileContent
             .forEach(function(line, index)
             {
-                const match = /^[^@]?(@import\s?(?:"([^"]+)"|'([^']+)');).*$/.exec(line);
+                var match = /^[^@]?(@import\s?(?:"([^"]+)"|'([^']+)');).*$/.exec(line);
                 if ( match )
                 {
-                    const importStmt = match[1];
-                    const importFile = _this._resolveImportPath( match[2] );
+                    var importStmt = match[1];
+                    var importFile = _this._resolveImportPath( match[2] );
                     _this.imports.push({
                         line: index,
                         start: line.indexOf(importStmt),
@@ -54,7 +54,7 @@ ImportTree.prototype.parseImports = function()
 
 ImportTree.prototype._resolveImportPath = function( importPath )
 {
-    let resolvedPath = path.resolve(
+    var resolvedPath = path.resolve(
         path.dirname(this.filename),
         importPath
     );
@@ -83,12 +83,12 @@ ImportTree.prototype.toString = function()
 {
     if ( this.imports.length > 0 )
     {
-        const self = this;
+        var self = this;
         this.imports.forEach(function(importEntry)
         {
-            let originalLine    = self.fileContent[importEntry.line];
-            let prefix          = originalLine.substr(0, importEntry.start);
-            let affix           = originalLine.substr( importEntry.end );
+            var originalLine    = self.fileContent[importEntry.line];
+            var prefix          = originalLine.substr(0, importEntry.start);
+            var affix           = originalLine.substr( importEntry.end );
 
             self.fileContent[importEntry.line] = prefix + importEntry.tree.toString() + affix;
         });
@@ -100,7 +100,7 @@ ImportTree.prototype.toString = function()
  CLASS: SassResolver
  */
 
-const SassResolver = function ( rootSassFile )
+var SassResolver = function ( rootSassFile )
 {
     this.rootSassFile = path.resolve(
         __dirname,
@@ -114,11 +114,11 @@ SassResolver.prototype.bundle = function( targetFile )
         __dirname,
         targetFile
     );
-    const importTree = new ImportTree( this.rootSassFile );
+    var importTree = new ImportTree( this.rootSassFile );
     importTree.parseImports();
 
-    const bundleContent = importTree.toString();
-    const prefixOptions = {
+    var bundleContent = importTree.toString();
+    var prefixOptions = {
         browsers: [
             "last 2 versions",
             "> 5%",
@@ -134,6 +134,6 @@ SassResolver.prototype.bundle = function( targetFile )
 };
 
 console.log("Start bundling scss");
-const resolverBootstrap = new SassResolver('resources/scss/Ceres.scss');
+var resolverBootstrap = new SassResolver('resources/scss/Ceres.scss');
 resolverBootstrap.bundle('resources/css/ceres.scss');
 console.log("=> done!");

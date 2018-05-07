@@ -121,11 +121,15 @@ Vue.component("add-to-basket", {
                     error =>
                     {
                         this.waiting = false;
-                        NotificationService.error(
-                            TranslationService.translate(
-                                "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
-                            )
-                        ).closeAfter(5000);
+
+                        if (error.data)
+                        {
+                            NotificationService.error(
+                                TranslationService.translate(
+                                    "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString())
+                                )
+                            ).closeAfter(5000);
+                        }
                     });
             }
         },

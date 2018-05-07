@@ -65,7 +65,7 @@
                                                 {% for propertyKey in entry.order.properties %}
                                                     {% if entry.order.properties[loop.index0].typeId == 4 %}
                                                         {% set paymentStatus = entry.order.properties[loop.index0].value %}
-                                                        {{ trans("Ceres::Template.paymentStatus_" ~ entry.order.properties[loop.index0].value) }}
+                                                        {{ trans("Ceres::Template.orderHistoryPaymentStatus_" ~ entry.order.properties[loop.index0].value) }}
                                                     {% endif %}
                                                     {% if entry.order.properties[loop.index0].typeId == 3 %}
                                                         {% set paymentMethodId = entry.order.properties[loop.index0].value %}
