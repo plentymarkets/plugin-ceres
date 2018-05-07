@@ -98,11 +98,7 @@
                     
                     {{ rowTwo }}
 
-                    {% if rowTwo|trim is not empty %}
-                    <div class="col-xs-12 col-sm-6 col-lg-12">
-                    {% else %}
-                    <div class="col-xs-12">
-                    {% endif %}
+                    <div class="col-xs-12{% if rowTwo|trim is not empty %} col-sm-6 col-lg-12{% endif %}">
                         {{ LayoutContainer.show("Ceres::Footer.RowThree") }}
                     </div>
                 </div>
@@ -110,7 +106,7 @@
         </div>            
 
         {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
-            <div class="copyright text-xs-center m-y-1">
+        <div class="copyright text-xs-center m-y-1">
             <div class="static-link-list">
                 {% autoescape false %}
                     <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
@@ -132,7 +128,6 @@
             </a>
             <br>
             <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
-        </div>
         </div>
     </div>
 </div>
