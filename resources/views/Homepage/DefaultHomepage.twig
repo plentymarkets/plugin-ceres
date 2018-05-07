@@ -1,6 +1,9 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-{% set overrideHomepageContainer = LayoutContainer.show("Ceres::Homepage") %}
+{% set overrideHomepageContainer = "" %}
+{% for content in container("Ceres::Homepage") if content.plugin != "Plenty" %}
+    {% set overrideHomepageContainer = overrideHomepageContainer ~ content.result %}
+{% endfor %}
 {% if overrideHomepageContainer | trim is empty %}
 
     {% set lang = services.sessionStorage.getLang() %}
@@ -393,5 +396,5 @@
         </div>
     </div>
 {% else %}
-    {{ overrideHomepageContainer }}
+    {{ overrideHomepageContainer | raw }}
 {% endif %}
