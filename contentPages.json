@@ -1,0 +1,12 @@
+[
+	{
+        "identifier": "ceres-content",
+		"caption": "Page.StartPageCaption",
+		"dropzones": [
+			{
+				"container": "Ceres::Homepage",
+				"type": "content"
+			}
+		]
+	}
+]

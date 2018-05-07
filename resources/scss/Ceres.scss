@@ -4,7 +4,7 @@
 // ==========================================================================
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome/scss/font-awesome";
-@import "shariff/build/shariff.complete.css";
+@import "shariff/build/shariff.min.css";
 @import "flag-icon-css/sass/flag-icon";
 
 // ==========================================================================
@@ -86,3 +86,6 @@
 @import "ceres/views/ItemList/loading-animation";
 @import "ceres/views/StaticPages/static-pages";
 @import "ceres/views/MyAccount/my-account";
+
+// Widgets
+@import "ceres/widgets/widgets";

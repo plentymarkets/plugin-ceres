@@ -1,0 +1,111 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set carouselId = uid() %}
+
+{{ Twig.set("slides", "[]") }}
+
+{% for param in sliderParams %}
+
+    {{ Twig.set("slide", "{ }") }}
+
+    {% set pushCurrentSlide = false %}
+
+    {% if param.categoryId | trim is not empty %}
+
+        {{ Twig.set("category", Twig.call("services.category.get", [param.categoryId])) }}
+        {{ Twig.set("categoryUrl", Twig.call("services.category.getURL", ["$category"]) ) }}
+
+        {{ Twig.set("slide", "slide | merge({ name: category.details[0].name })") }}
+        {{ Twig.set("slide", "slide | merge({ url: categoryUrl })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: \"documents/\" ~ category.details[0].imagePath })") }}
+
+        {% set pushCurrentSlide = true %}
+
+    {% elseif param.variationId | trim is not empty %}
+
+        {{ Twig.set("itemData", Twig.call("services.itemLoader.loadForTemplate", ["Ceres::Homepage.Homepage", itemLoaderPresets.items, { variationIds: [param.variationId] }])) }}
+        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
+
+        {{ Twig.set("name", "itemData | itemName") }}
+        {{ Twig.set("url", "itemData | itemURL") }}
+        {{ Twig.set("imageUrl", "itemImage.url") }}
+
+        {{ Twig.set("slide", "slide | merge({ name: itemData | itemName })") }}
+        {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
+        {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
+
+        {% set pushCurrentSlide = true %}
+
+    {% endif %}
+
+    {% if param.customImagePath | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ imageUrl: #{ param.customImagePath | json_encode } })") }}
+
+        {% set pushCurrentSlide = true %}
+
+    {% endif %}
+
+    {% if pushCurrentSlide %}
+    
+        {{ Twig.set("slides", "slides | merge([slide])") }}
+
+    {% endif %}
+
+{% endfor %}
+
+{{ Twig.if("slides | length <= 0") }}
+
+    {% set placeholder1 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc73f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc73f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+    {% set placeholder2 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc742%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc742%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22218.45%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+    {% set placeholder3 = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc744%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc744%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22218.45%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
+
+    {{ Twig.set("slides", "[{ imageUrl: #{ placeholder1 | json_encode } }, { imageUrl: #{ placeholder2 | json_encode } }, { imageUrl: #{ placeholder3 | json_encode } }]") }}
+
+{{ Twig.endif() }}
+
+<div class="widget widget-image-carousel widget-{{ widget.settings.appearance.mobile | default('primary') }} widget-proportional">
+    <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide" data-ride="carousel">
+
+        <div class="carousel-inner" role="listbox">
+            {{ Twig.for("slide", "slides") }}
+            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+                <a {{ Twig.if("slide.url is defined") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}>
+
+                    {{ Twig.if("slide.imageUrl is defined") }}
+                        <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("slide.name") }}" class="img-cover">
+                    {{ Twig.endif() }}
+
+                    {{ Twig.if("slide.name is defined") }}
+                    <div class="widget-caption">
+                        <h2>
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.print("slide.name") }}
+                        </h2>
+                    </div>
+                    {{ Twig.endif() }}
+
+                </a>
+            </div>
+            {{ Twig.endfor() }}
+        </div>
+
+        {{ Twig.if("slides | length > 1") }}
+            <ol class="carousel-indicators">
+                {{ Twig.for("i", "1..slides | length") }}
+                    <li data-target="#image-carousel_{{ carouselId }}" data-slide-to="{{ Twig.print("i - 1") }}" {{ Twig.if("loop.first") }}class="active"{{ Twig.endif }}></li>
+                {{ Twig.endfor() }}
+            </ol>
+
+            <a class="left carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="prev">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">{{ trans("Ceres::Template.homepageBack") }}</span>
+            </a>
+
+            <a class="right carousel-control" href="#image-carousel_{{ carouselId }}" role="button" data-slide="next">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">{{ trans("Ceres::Template.homepageNext") }}</span>
+            </a>
+        {{ Twig.endif() }}
+    </div>
+</div>

@@ -110,7 +110,7 @@
         </div>            
 
         {% set cat = services.category.get(config('Ceres.global.category.legal_disclosure')) %}
-        <div class="copyright text-xs-center m-y-1">
+            <div class="copyright text-xs-center m-y-1">
             <div class="static-link-list">
                 {% autoescape false %}
                     <a href="{{ urls.cancellationRights }}">{{ trans("Ceres::Template.footerCancellationRight", {"hyphen": "&shy;"}) }}</a>
@@ -132,6 +132,7 @@
             </a>
             <br>
             <small>&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>
+        </div>
         </div>
     </div>
 </div>
