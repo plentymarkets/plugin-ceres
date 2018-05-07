@@ -124,6 +124,7 @@
   ],
   "ignoredTranslationFiles":
   [
-    "Config.properties"
+    "Config.properties",
+    "Widget.properties"
   ]
 }
