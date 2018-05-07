@@ -16,7 +16,7 @@
         {% include "Ceres::Category.Item.Partials.CategoryParallaxImage" with { 'category': category } %}
     {% endif %}
 
-    <div class="categoriegrid page-content container-max">
+    <div class="categoriegrid page-content container-max">Ö
         {% if not ceresConfig.item.showCategoryImage %}
             <div class="row m-t-1">
                 <div class="col-xs-12">
@@ -36,7 +36,12 @@
                             <items-per-page
                                 template="#vue-items-per-page"
                                 :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
-                            <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
+                            {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets ) %}
+                            {% if overrideSearchFilters | trim is empty %}
+                                <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
+                            {% else %}
+                                {{ overrideSearchFilters }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
