@@ -25,7 +25,7 @@
                             <items-per-page
                                 template="#vue-items-per-page"
                                 :pagination-values="{{ searchOptions.itemsPerPage | json_encode }}"></items-per-page>
-                            {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter") %}
+                            {% set overrideSearchFilters = LayoutContainer.show("Ceres::Search.Filter", facets) %}
                             {% if overrideSearchFilters | trim is empty %}
                                 <item-filter-list :facet-data="{{ facets | json_encode }}"></item-filter-list>
                             {% else %}
