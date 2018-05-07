@@ -1,4 +1,5 @@
 import {toLength}from "./number";
+import {isNullOrUndefined}from "./utils";
 
 const MonetaryFormatter = (function()
 {
@@ -89,6 +90,11 @@ const MonetaryFormatter = (function()
     {
         let patternIndex = 0;
         let prefix = "";
+
+        if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
+        {
+            value = 0;
+        }
 
         if (value < 0)
         {
