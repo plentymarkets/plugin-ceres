@@ -2,7 +2,7 @@
 	{
 		"identifier": "Ceres::TwoColumnWidget",
 		"label": "Widget.gridTwoColumnLabel",
-		"previewImageURL": "https://i.imgur.com/69lqNTl.png",
+		"previewImageURL": "/images/widgets/grid-2-col.png",
 		"type": "structure",
 		"allowedNestingTypes": [
 			"default"
@@ -40,7 +40,7 @@
 	{
 		"identifier": "Ceres::ThreeColumnWidget",
 		"label": "Widget.gridThreeColumnLabel",
-		"previewImageURL": "https://i.imgur.com/iWIXVVK.png",
+		"previewImageURL": "/images/widgets/grid-3-col.png",
 		"type": "structure",
 		"allowedNestingTypes": [
 			"default"
@@ -93,7 +93,7 @@
 	{
 		"identifier": "Ceres::FourColumnWidget",
 		"label": "Widget.gridFourColumnLabel",
-		"previewImageURL": "https://i.imgur.com/SUxxmG3.png",
+		"previewImageURL": "/images/widgets/grid-4-col.png",
 		"type": "structure",
 		"allowedNestingTypes": [
 			"default"
@@ -103,7 +103,7 @@
 	{
 		"identifier": "Ceres::TitleBarWidget",
 		"label": "Widget.titleBarLabel",
-		"previewImageURL": "https://i.imgur.com/HiSNabW.png",
+		"previewImageURL": "/images/widgets/title-bar.png",
 		"type": "default",
 		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\TitleBarWidget",
@@ -163,7 +163,7 @@
 	{
 		"identifier": "Ceres::ImageCarouselWidget",
 		"label": "Widget.imageCarouselLabel",
-		"previewImageURL": "https://i.imgur.com/8RJj6cZ.png",
+		"previewImageURL": "/images/widgets/image-carousel.png",
 		"type": "default",
 		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageCarouselWidget",
@@ -322,7 +322,7 @@
 	{
 		"identifier": "Ceres::ImageBoxWidget",
 		"label": "Widget.imageBoxLabel",
-		"previewImageURL": "https://i.imgur.com/YlYwAmy.png",
+		"previewImageURL": "/images/widgets/image-box.png",
 		"type": "default",
 		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ImageBoxWidget",
@@ -452,7 +452,7 @@
 	{
 		"identifier": "Ceres::ItemListWidget",
 		"label": "Widget.itemListLabel",
-		"previewImageURL": "https://i.imgur.com/CRTjerv.png",
+		"previewImageURL": "/images/widgets/item-list.png",
 		"type": "default",
 		"allowedNestingTypes": [],
 		"widgetClass": "Ceres\\Widgets\\Common\\ItemListWidget",
