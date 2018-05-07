@@ -493,6 +493,11 @@
             "key"           : "RegistrationOverlay.ExtendOverlayButtons",
             "name"          : "Registration overlay: Container in a row with the buttons",
             "description"   : "Add content in the registration overlay."
+        },
+        {
+            "key"           : "Search.Filter",
+            "name"          : "Search: Override search filters",
+            "description"   : "Override search filters in item lists and search results."
         }
     ]
 }
